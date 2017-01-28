@@ -55,8 +55,11 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.ProjectDetailsUserControl1 = new DotNetScaffolder.Presentation.Forms.Controls.ProjectDetailsUserControl();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.ProjectDomainUserControl1 = new DotNetScaffolder.Presentation.Forms.Controls.ProjectDomainUserControl();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.projectDomainDetailsUserControl1 = new DotNetScaffolder.Presentation.Forms.Controls.ProjectDomainDetailsUserControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.button9 = new System.Windows.Forms.Button();
@@ -92,9 +95,6 @@
             this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.button6 = new System.Windows.Forms.Button();
-            this.ProjectDetailsUserControl1 = new DotNetScaffolder.Presentation.Forms.Controls.ProjectDetailsUserControl();
-            this.projectDomainUserControl1 = new DotNetScaffolder.Presentation.Forms.Controls.ProjectDomainUserControl();
-            this.projectDomainDetailsUserControl1 = new DotNetScaffolder.Presentation.Forms.Controls.ProjectDomainDetailsUserControl();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -162,12 +162,21 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Project Details";
             // 
+            // ProjectDetailsUserControl1
+            // 
+            this.ProjectDetailsUserControl1.Changed = false;
+            this.ProjectDetailsUserControl1.Location = new System.Drawing.Point(6, 20);
+            this.ProjectDetailsUserControl1.Name = "ProjectDetailsUserControl1";
+            this.ProjectDetailsUserControl1.Project = null;
+            this.ProjectDetailsUserControl1.Size = new System.Drawing.Size(382, 123);
+            this.ProjectDetailsUserControl1.TabIndex = 0;
+            // 
             // groupBox2
             // 
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox2.Controls.Add(this.projectDomainUserControl1);
+            this.groupBox2.Controls.Add(this.ProjectDomainUserControl1);
             this.groupBox2.Controls.Add(this.groupBox3);
             this.groupBox2.Location = new System.Drawing.Point(400, 7);
             this.groupBox2.Name = "groupBox2";
@@ -175,7 +184,15 @@
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Project Domains";
-            this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
+            
+            // 
+            // ProjectDomainUserControl1
+            // 
+            this.ProjectDomainUserControl1.Changed = false;
+            this.ProjectDomainUserControl1.Location = new System.Drawing.Point(16, 20);
+            this.ProjectDomainUserControl1.Name = "ProjectDomainUserControl1";
+            this.ProjectDomainUserControl1.Size = new System.Drawing.Size(324, 106);
+            this.ProjectDomainUserControl1.TabIndex = 19;
             // 
             // groupBox3
             // 
@@ -186,6 +203,13 @@
             this.groupBox3.TabIndex = 18;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Domain Details";
+            // 
+            // projectDomainDetailsUserControl1
+            // 
+            this.projectDomainDetailsUserControl1.Location = new System.Drawing.Point(7, 20);
+            this.projectDomainDetailsUserControl1.Name = "projectDomainDetailsUserControl1";
+            this.projectDomainDetailsUserControl1.Size = new System.Drawing.Size(443, 211);
+            this.projectDomainDetailsUserControl1.TabIndex = 0;
             // 
             // tabPage2
             // 
@@ -259,7 +283,7 @@
             treeNode17});
             this.treeView2.Size = new System.Drawing.Size(329, 313);
             this.treeView2.TabIndex = 0;
-            this.treeView2.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView2_AfterSelect);
+            
             // 
             // tabPage3
             // 
@@ -300,7 +324,7 @@
             this.groupBox5.TabIndex = 1;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Details";
-            this.groupBox5.Enter += new System.EventHandler(this.groupBox5_Enter);
+            
             // 
             // comboBox12
             // 
@@ -416,7 +440,7 @@
             this.button8.TabIndex = 6;
             this.button8.Text = "Edit";
             this.button8.UseVisualStyleBackColor = true;
-            this.button8.Click += new System.EventHandler(this.button8_Click);
+            
             // 
             // checkBox1
             // 
@@ -572,31 +596,6 @@
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
-            // ProjectDetailsUserControl1
-            // 
-            this.ProjectDetailsUserControl1.Changed = false;
-            this.ProjectDetailsUserControl1.Location = new System.Drawing.Point(6, 20);
-            this.ProjectDetailsUserControl1.Name = "ProjectDetailsUserControl1";
-            this.ProjectDetailsUserControl1.Project = null;
-            this.ProjectDetailsUserControl1.Size = new System.Drawing.Size(382, 123);
-            this.ProjectDetailsUserControl1.TabIndex = 0;
-            // 
-            // projectDomainUserControl1
-            // 
-            this.projectDomainUserControl1.Changed = false;
-            this.projectDomainUserControl1.Location = new System.Drawing.Point(16, 20);
-            this.projectDomainUserControl1.Name = "projectDomainUserControl1";
-            this.projectDomainUserControl1.Project = null;
-            this.projectDomainUserControl1.Size = new System.Drawing.Size(324, 106);
-            this.projectDomainUserControl1.TabIndex = 19;
-            // 
-            // projectDomainDetailsUserControl1
-            // 
-            this.projectDomainDetailsUserControl1.Location = new System.Drawing.Point(7, 20);
-            this.projectDomainDetailsUserControl1.Name = "projectDomainDetailsUserControl1";
-            this.projectDomainDetailsUserControl1.Size = new System.Drawing.Size(443, 211);
-            this.projectDomainDetailsUserControl1.TabIndex = 0;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -674,7 +673,7 @@
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.GroupBox groupBox1;
         private ProjectDetailsUserControl ProjectDetailsUserControl1;
-        private ProjectDomainUserControl projectDomainUserControl1;
+        private ProjectDomainUserControl ProjectDomainUserControl1;
         private ProjectDomainDetailsUserControl projectDomainDetailsUserControl1;
     }
 }

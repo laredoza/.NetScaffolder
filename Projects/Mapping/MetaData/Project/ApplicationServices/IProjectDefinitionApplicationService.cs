@@ -9,6 +9,8 @@
 
 namespace DotNetScaffolder.Mapping.MetaData.Project.ApplicationServices
 {
+    using DotNetScaffolder.Mapping.MetaData.Domain;
+
     using global::MetaData;
     using global::MetaData.Project;
 
@@ -34,6 +36,14 @@ namespace DotNetScaffolder.Mapping.MetaData.Project.ApplicationServices
         /// Save ProjectDefinition.
         /// </summary>
         void Save();
+
+        /// <summary>
+        /// The add domain.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="DomainDefinition"/>.
+        /// </returns>
+        DomainDefinition AddDomain();
 
         #endregion
     }

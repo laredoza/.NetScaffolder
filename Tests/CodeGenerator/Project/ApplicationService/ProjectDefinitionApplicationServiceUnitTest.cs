@@ -98,6 +98,29 @@ namespace DotNetScaffolder.Test.Project.ApplicationService
             Assert.AreEqual(0, applicationService.ValidationResult.Count, "There should be 0 validation errors");
         }
 
+        /// <summary>
+        /// Test AddDomain.
+        /// </summary>
+        /// <param name="applicationService">
+        /// The application service.
+        /// </param>
+        protected void TestAddDomain(IProjectDefinitionApplicationService applicationService)
+        {
+            DomainDefinition domain = applicationService.AddDomain();
+            Assert.AreEqual(1, applicationService.ProjectDefinition.Domains.Count, "There should be 1 domain");
+            Assert.AreEqual("Domain1", domain.Name, "The domain name should be Domain1");
+            domain = applicationService.AddDomain();
+            Assert.AreEqual(2, applicationService.ProjectDefinition.Domains.Count, "There should be 2 domains");
+            Assert.AreEqual("Domain2", domain.Name, "The domain name should be Domain2");
+            domain = applicationService.AddDomain();
+            Assert.AreEqual(3, applicationService.ProjectDefinition.Domains.Count, "There should be 3 domains");
+            Assert.AreEqual("Domain3", domain.Name, "The domain name should be Domain3");
+            applicationService.ProjectDefinition.Domains[0].Name = "A";
+            domain = applicationService.AddDomain();
+            Assert.AreEqual(4, applicationService.ProjectDefinition.Domains.Count, "There should be 4 domains");
+            Assert.AreEqual("Domain1", domain.Name, "The domain name should be Domain1");
+        }
+
         #endregion
     }
 }

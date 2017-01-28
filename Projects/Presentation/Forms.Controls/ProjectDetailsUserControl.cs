@@ -268,7 +268,10 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         /// </param>
         private void ComboBoxGroupBy_SelectedIndexChanged(object sender, EventArgs e)
         {
-            this.Project.GroupBy = (GenerationType)this.ComboBoxGroupBy.SelectedIndex;
+            if (this.Project != null)
+            {
+                this.Project.GroupBy = (GenerationType)this.ComboBoxGroupBy.SelectedIndex;
+            }
         }
 
         /// <summary>
@@ -282,7 +285,10 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         /// </param>
         private void TextBoxBaseNamespace_TextChanged(object sender, EventArgs e)
         {
-            this.Project.BaseNameSpace = this.TextBoxBaseNamespace.Text;
+            if (this.Project != null)
+            {
+                this.Project.BaseNameSpace = this.TextBoxBaseNamespace.Text;
+            }
         }
 
         /// <summary>
@@ -296,7 +302,10 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         /// </param>
         private void TextBoxOutputFolderName_TextChanged(object sender, EventArgs e)
         {
-            this.Project.OutputFolder = this.TextBoxOutputFolderName.Text;
+            if (this.Project != null)
+            {
+                this.Project.OutputFolder = this.TextBoxOutputFolderName.Text;
+            }
         }
 
         #endregion

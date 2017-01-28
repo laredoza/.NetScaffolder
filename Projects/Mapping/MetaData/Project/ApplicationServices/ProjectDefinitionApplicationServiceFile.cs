@@ -17,6 +17,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Project.ApplicationServices
     using Common.Logging;
 
     using DotNetScaffolder.Core.Common.Serializer;
+    using DotNetScaffolder.Mapping.MetaData.Domain;
     using DotNetScaffolder.Mapping.MetaData.Enum;
 
     using global::MetaData.Project;
@@ -106,6 +107,32 @@ namespace DotNetScaffolder.Mapping.MetaData.Project.ApplicationServices
             }
 
             Logger.Trace($"Completed Save() - Path: {this.FilePersistenceOptions.Path}");
+        }
+
+        /// <summary>
+        /// The add domain.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="DomainDefinition"/>.
+        /// </returns>
+        public DomainDefinition AddDomain()
+        {
+            Logger.Trace($"Started AddDomain()");
+            DomainDefinition result = new DomainDefinition();
+
+            int index = 1;
+
+            while (this.ProjectDefinition.Domains.Exists(d => d.Name == $"Domain{index}"))
+            {
+                index++;
+            }
+
+            result.Name = $"Domain{index}";
+            Logger.Trace($"Domain name: {result.Name}");
+            this.ProjectDefinition.Domains.Add(result);
+            Logger.Trace($"Completed AddDomain()");
+
+            return result;
         }
 
         #endregion

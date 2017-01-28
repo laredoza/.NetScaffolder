@@ -36,6 +36,7 @@
             // 
             // button7
             // 
+            this.button7.Enabled = false;
             this.button7.Location = new System.Drawing.Point(242, 63);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(75, 23);
@@ -64,8 +65,6 @@
             // DomainsListBox
             // 
             this.DomainsListBox.FormattingEnabled = true;
-            this.DomainsListBox.Items.AddRange(new object[] {
-            "Security"});
             this.DomainsListBox.Location = new System.Drawing.Point(3, 3);
             this.DomainsListBox.Name = "DomainsListBox";
             this.DomainsListBox.Size = new System.Drawing.Size(233, 95);

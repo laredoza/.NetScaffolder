@@ -63,6 +63,18 @@ namespace DotNetScaffolder.Test.Project.ApplicationService
             this.TestValidation(applicationService);
         }
 
+        [TestMethod]
+        public void ProjectDefinitionApplicationServiceFileUnitTest_AddDomain()
+        {
+            FilePersistenceOptions options = new FilePersistenceOptions { Path = "Test.mdl" };
+            IProjectDefinitionApplicationService applicationService = new ProjectDefinitionApplicationServiceFile
+            {
+                FilePersistenceOptions = options
+            };
+
+            this.TestAddDomain(applicationService);
+        }
+
         #endregion
     }
 }

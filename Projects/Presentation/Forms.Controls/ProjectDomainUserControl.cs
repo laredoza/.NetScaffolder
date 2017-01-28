@@ -3,6 +3,7 @@
     using System.Windows.Forms;
 
     using DotNetScaffolder.Mapping.MetaData.Project;
+    using DotNetScaffolder.Mapping.MetaData.Project.ApplicationServices;
 
     public partial class ProjectDomainUserControl : UserControl
     {
@@ -12,27 +13,23 @@
         public bool Changed { get; set; }
 
         /// <summary>
-        /// The project.
+        /// The application service.
         /// </summary>
-        private ProjectDefinition project;
+        private IProjectDefinitionApplicationService applicationService;
 
         /// <summary>
-        /// Gets or sets the project.
+        /// Gets or sets the application service.
         /// </summary>
-        public ProjectDefinition Project
+        public IProjectDefinitionApplicationService ApplicationService
         {
             get
             {
-                return this.project;
+                return this.applicationService;
             }
             set
             {
-                this.project = value;
-
-                if (!this.Changed)
-                {
-                    this.UpdateDataSource();
-                }
+                this.applicationService = value;
+                this.UpdateDataSource();   
             }
         }
 
@@ -41,12 +38,16 @@
         /// </summary>
         private void UpdateDataSource()
         {
-            if (this.Project != null && this.Project.Domains != null)
+            this.DomainsListBox.DataSource = null;
+
+            if (!this.Changed)
             {
-                this.DomainsListBox.DataSource = null;
-                this.DomainsListBox.DataSource = this.project.Domains;
-                this.DomainsListBox.DisplayMember = "Name";
-                this.DomainsListBox.ValueMember = "Id";
+                if (this.ApplicationService != null && this.ApplicationService.ProjectDefinition != null && this.ApplicationService.ProjectDefinition.Domains != null)
+                {
+                    this.DomainsListBox.DataSource = this.ApplicationService.ProjectDefinition.Domains;
+                    this.DomainsListBox.DisplayMember = "Name";
+                    this.DomainsListBox.ValueMember = "Id";
+                }
             }
         }
 
