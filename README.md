@@ -23,6 +23,7 @@ This imported data will then be saved in a xml file (.mdl). All generation will 
 - MVC (Domain Driven)
 - WPF (Domain Driven)
 - The above using MongoDb
+- Extentable Custom Project Types
 
 
 
