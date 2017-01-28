@@ -26,7 +26,7 @@ T4 templates will be used to generate the different layers. Packages consist of 
 - MVC (Domain Driven)
 - WPF (Domain Driven)
 - The above using MongoDb
-- Extentable Custom Project Types
+- Extendable Custom Project Types
 
 
 
