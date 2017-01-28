@@ -1,0 +1,9 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<UserSqlServerv2k5 class="oracle.dbtools.crest.model.design.storage.sqlserver.v2k5.UserSqlServerv2k5" directorySegmentName="seg_0" id="A27AF537-15A9-60B4-B3D9-59C09FC698A4_dbo" name="dbo">
+<createdBy>laredo</createdBy>
+<createdTime>2014-06-27 15:21:06 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+<nullInstance>true</nullInstance>
+<storableNullInstance>true</storableNullInstance>
+<database>A27AF537-15A9-60B4-B3D9-59C09FC698A4</database>
+</UserSqlServerv2k5>

@@ -1,0 +1,9 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<SchemaSqlServerv2k5 class="oracle.dbtools.crest.model.design.storage.sqlserver.v2k5.SchemaSqlServerv2k5" name="dbo" directorySegmentName="seg_0" id="431FDB03-B1D2-C2D6-9C79-D42B50B82BE1">
+<createdBy>laredo</createdBy>
+<createdTime>2014-06-28 07:40:27 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+<schemaObject>8AFDA53F-FC59-BF57-A1F0-73785A38CDD9</schemaObject>
+<owner>A27AF537-15A9-60B4-B3D9-59C09FC698A4_dbo</owner>
+<database>A27AF537-15A9-60B4-B3D9-59C09FC698A4</database>
+</SchemaSqlServerv2k5>

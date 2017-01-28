@@ -1,0 +1,57 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="9E2D0CC7-2B2E-3BA8-1C15-3C264F40009E" name="WidgetTypeVerC">
+<createdBy>laredo</createdBy>
+<createdTime>2014-08-23 13:08:39 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+<schemaObject>66F912D1-3DB8-9DDB-014F-B3515E3937D9</schemaObject>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="Id" id="F4419148-64E0-04D1-88E7-69331DE14D31">
+<createdBy>laredo</createdBy>
+<createdTime>2014-08-23 13:09:26 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT057</logicalDatatype>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="VersionId" id="68D4A08B-B773-96DF-BFD1-1CFC10C16BE8">
+<createdBy>laredo</createdBy>
+<createdTime>2014-08-23 13:10:17 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT057</logicalDatatype>
+<delegate>6FC65FC0-9A75-2464-E289-78313D39AB18</delegate>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="1B1501E2-B0E6-54E0-E8BA-7C118AAECD91" referredColumn="6FC65FC0-9A75-2464-E289-78313D39AB18"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="676BC6F7-C4C7-B48D-2580-D6B40C172AA7" name="WidgetTypeVerC_PK">
+<createdBy>laredo</createdBy>
+<createdTime>2014-08-23 13:09:26 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="F4419148-64E0-04D1-88E7-69331DE14D31"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="B564DD42-236B-595B-5449-2A611A0A432E" name="WidgetTypeVerC_WidgetTypeVer_FK">
+<createdBy>laredo</createdBy>
+<createdTime>2014-08-23 13:10:17 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="68D4A08B-B773-96DF-BFD1-1CFC10C16BE8"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

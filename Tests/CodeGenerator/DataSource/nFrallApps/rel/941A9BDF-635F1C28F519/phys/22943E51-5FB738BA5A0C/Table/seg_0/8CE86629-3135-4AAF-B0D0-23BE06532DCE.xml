@@ -1,0 +1,47 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TableProxySqlServerv2k5 class="oracle.dbtools.crest.model.design.storage.sqlserver.v2k5.TableProxySqlServerv2k5" name="TenantModelDef" directorySegmentName="seg_0" id="8CE86629-3135-4AAF-B0D0-23BE06532DCE">
+<createdBy>laredo</createdBy>
+<createdTime>2014-06-27 15:21:05 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+<schemaObject>B012660D-BCD6-4709-D908-EF5AD6E8CE78</schemaObject>
+<database>A27AF537-15A9-60B4-B3D9-59C09FC698A4</database>
+<filegroup>BC218FD3-9934-B879-9A10-48F552BEE590</filegroup>
+<schema>A4EBA9D2-F260-C6C6-EAF6-2764E65514FC</schema>
+<columnProxies>
+<ColumnProxy class="oracle.dbtools.crest.model.design.storage.sqlserver.v2k5.ColumnProxySqlServerv2k5" name="ModelDefId" id="2942AD08-B00A-9639-04BA-AC7A66AA27A5">
+<createdBy>laredo</createdBy>
+<createdTime>2014-06-29 19:01:50 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy class="oracle.dbtools.crest.model.design.storage.sqlserver.v2k5.ColumnProxySqlServerv2k5" name="TenantId" id="882842F7-B9B4-CB6B-8973-5B4C4C4EB1C1">
+<createdBy>laredo</createdBy>
+<createdTime>2014-06-29 19:02:19 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy class="oracle.dbtools.crest.model.design.storage.sqlserver.v2k5.ColumnProxySqlServerv2k5" name="Active" id="8AAB2581-2F36-FD3B-5126-56B65D2BC123">
+<createdBy>laredo</createdBy>
+<createdTime>2014-08-02 19:01:10 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+</ColumnProxy>
+</columnProxies>
+<foreignKeys>
+<ForeignKey class="oracle.dbtools.crest.model.design.storage.sqlserver.v2k5.FKProxySqlServerv2k5" name="TenantModelDef_Tenant_FK" id="20F684F7-80F7-20AD-6A91-DE86C93E0594">
+<createdBy>laredo</createdBy>
+<createdTime>2014-06-29 19:02:19 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+</ForeignKey>
+<ForeignKey class="oracle.dbtools.crest.model.design.storage.sqlserver.v2k5.FKProxySqlServerv2k5" name="TenantModelDef_ModelDef_FK" id="C804439B-7007-A146-878B-59F88CEC5302">
+<createdBy>laredo</createdBy>
+<createdTime>2014-06-29 19:01:50 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+</ForeignKey>
+</foreignKeys>
+<primaryKeys>
+<PrimaryKey class="oracle.dbtools.crest.model.design.storage.sqlserver.v2k5.PKProxySqlServerv2k5" name="TenantModelDef_PK" id="618111A5-D67A-7D81-ACB5-5BE8CBF538A2">
+<createdBy>laredo</createdBy>
+<createdTime>2014-06-29 19:03:26 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+<clustered>true</clustered>
+</PrimaryKey>
+</primaryKeys>
+</TableProxySqlServerv2k5>

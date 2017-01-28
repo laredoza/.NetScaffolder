@@ -1,0 +1,50 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TableProxySqlServerv2k5 class="oracle.dbtools.crest.model.design.storage.sqlserver.v2k5.TableProxySqlServerv2k5" name="SecRolePermission" directorySegmentName="seg_0" id="5EDF85E5-CD42-AE28-4A80-BBD67AD710DB">
+<createdBy>laredo</createdBy>
+<createdTime>2014-08-02 19:01:10 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+<schemaObject>66F912D1-3DB8-9DDB-014F-B3515E3937D9</schemaObject>
+<database>DB_NULLELEMENT</database>
+<columnProxies>
+<ColumnProxy class="oracle.dbtools.crest.model.design.storage.sqlserver.v2k5.ColumnProxySqlServerv2k5" name="EndDate" id="6BA7F289-536D-2F0D-3E98-A4F006CA04BC">
+<createdBy>laredo</createdBy>
+<createdTime>2014-08-02 19:01:10 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy class="oracle.dbtools.crest.model.design.storage.sqlserver.v2k5.ColumnProxySqlServerv2k5" name="RoleId" id="8C77B28B-E1C9-31F0-1BBD-95B0AE3CC386">
+<createdBy>laredo</createdBy>
+<createdTime>2014-08-02 19:01:10 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy class="oracle.dbtools.crest.model.design.storage.sqlserver.v2k5.ColumnProxySqlServerv2k5" name="StartDate" id="957A11A8-14D1-C634-63E5-CAC026310156">
+<createdBy>laredo</createdBy>
+<createdTime>2014-08-02 19:01:10 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy class="oracle.dbtools.crest.model.design.storage.sqlserver.v2k5.ColumnProxySqlServerv2k5" name="PermissionId" id="FD4E7F01-463C-13AA-8E35-8243384660B4">
+<createdBy>laredo</createdBy>
+<createdTime>2014-08-02 19:01:10 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+</ColumnProxy>
+</columnProxies>
+<foreignKeys>
+<ForeignKey class="oracle.dbtools.crest.model.design.storage.sqlserver.v2k5.FKProxySqlServerv2k5" name="SecRolePermission_SecRole_FK" id="1E9B3091-4438-3E07-ACEF-8F2C2EABD5FF">
+<createdBy>laredo</createdBy>
+<createdTime>2014-08-02 19:01:10 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+</ForeignKey>
+<ForeignKey class="oracle.dbtools.crest.model.design.storage.sqlserver.v2k5.FKProxySqlServerv2k5" name="SecRolePermission_AspNetPermission_FK" id="3E37199B-46FF-5F65-81BD-F4BCF6DC895F">
+<createdBy>laredo</createdBy>
+<createdTime>2014-08-02 19:01:10 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+</ForeignKey>
+</foreignKeys>
+<primaryKeys>
+<PrimaryKey class="oracle.dbtools.crest.model.design.storage.sqlserver.v2k5.PKProxySqlServerv2k5" name="SecRolePermission_PK" id="2502A47D-610F-D57C-42C4-C3EAD2202FB2">
+<createdBy>laredo</createdBy>
+<createdTime>2014-08-02 19:01:10 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+<clustered>true</clustered>
+</PrimaryKey>
+</primaryKeys>
+</TableProxySqlServerv2k5>

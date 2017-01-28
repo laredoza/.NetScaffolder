@@ -1,0 +1,191 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="DE52630E-9B67-38C9-4C34-9820B62F56E5" name="SecCachePermission">
+<createdBy>laredo</createdBy>
+<createdTime>2014-07-06 16:28:46 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+<schemaObject>66F912D1-3DB8-9DDB-014F-B3515E3937D9</schemaObject>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="UserId" id="B56153DB-3665-E667-9C17-F8303250476E">
+<sourceDDLFile>script.sql</sourceDDLFile>
+<createdBy>laredo</createdBy>
+<createdTime>2014-07-06 16:30:19 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<delegate>53FFF296-60B7-FEA9-CF9E-A9E57EEBAEBB</delegate>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="457F7AD7-5E2D-CF27-C1F8-C8FCE170302B" referredColumn="53FFF296-60B7-FEA9-CF9E-A9E57EEBAEBB"/>
+</associations>
+</Column>
+<Column name="PermissionId" id="058EECC9-D0A1-0AD8-169A-25871E2FD189">
+<createdBy>laredo</createdBy>
+<createdTime>2014-07-06 16:34:06 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<delegate>342FD0C6-3331-9828-B32B-DEFF7BAC352C</delegate>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="334028E9-D17E-4131-9769-48B8F6802DB9" referredColumn="342FD0C6-3331-9828-B32B-DEFF7BAC352C"/>
+</associations>
+</Column>
+<Column name="ModelId" id="6C42D290-317A-1F37-782E-F942FA8CC2E4">
+<sourceDDLFile>script.sql</sourceDDLFile>
+<createdBy>laredo</createdBy>
+<createdTime>2014-07-06 16:28:46 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT057</logicalDatatype>
+<domain>87AE4DA1-D751-B679-B38E-698D7BE75D71</domain>
+<delegate>353808F1-8D0C-8764-6BF9-04D8978C63A5</delegate>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="61E1B13C-6588-9A67-9603-38B566297FB9" referredColumn="353808F1-8D0C-8764-6BF9-04D8978C63A5"/>
+</associations>
+</Column>
+<Column name="ExternalId" id="B16446EE-1A27-221C-6EF0-E0B1D76E01A4">
+<createdBy>laredo</createdBy>
+<createdTime>2014-07-06 16:28:46 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT037</logicalDatatype>
+<dataTypeSize>100</dataTypeSize>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Name" id="5DAB17C4-DC8C-F3D9-2786-A6BCCC5E4CDC">
+<createdBy>laredo</createdBy>
+<createdTime>2014-07-06 16:28:46 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT037</logicalDatatype>
+<dataTypeSize>40</dataTypeSize>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="CanSelect" id="30E8182D-9FE4-2D57-8AFD-FFEFC7FD5257">
+<createdBy>laredo</createdBy>
+<createdTime>2014-07-06 16:28:46 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT006</logicalDatatype>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="CanInsert" id="9660DF9D-771B-DF51-9A6A-BE24A00A31DD">
+<createdBy>laredo</createdBy>
+<createdTime>2014-07-06 16:28:46 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT006</logicalDatatype>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="CanUpdate" id="16B7181C-A605-19E7-4C37-47A63E39864F">
+<createdBy>laredo</createdBy>
+<createdTime>2014-07-06 16:28:46 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT006</logicalDatatype>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="CanDelete" id="296DD2F5-45F1-46B2-1024-2AEED7E7058B">
+<createdBy>laredo</createdBy>
+<createdTime>2014-07-06 16:28:46 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT006</logicalDatatype>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="CanExecute" id="29F00EE3-823A-CE87-36E6-AA1BB1C13727">
+<createdBy>laredo</createdBy>
+<createdTime>2014-07-06 16:28:46 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT006</logicalDatatype>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="FromDate" id="1AE1BEDD-F844-79E9-554D-EA49EA82B70A">
+<createdBy>laredo</createdBy>
+<createdTime>2014-07-06 16:28:46 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT008</logicalDatatype>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="EndDate" id="B3F2E58C-4056-4E1A-2A6C-5FA7169127FA">
+<createdBy>laredo</createdBy>
+<createdTime>2014-07-06 16:28:46 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT008</logicalDatatype>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="74007C60-9D08-2246-4DF1-C3D906158E24" name="SecCachePermission_PK">
+<createdBy>laredo</createdBy>
+<createdTime>2014-07-06 16:34:44 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="B56153DB-3665-E667-9C17-F8303250476E"/>
+<colUsage columnID="058EECC9-D0A1-0AD8-169A-25871E2FD189"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="1B6109D7-3BA6-93D5-CF15-FCC7B8A93849" name="SecPermissionv1_ModelVer_FK">
+<createdBy>laredo</createdBy>
+<createdTime>2014-07-06 16:28:46 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="6C42D290-317A-1F37-782E-F942FA8CC2E4"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="3C7A9EEE-2587-B76D-954D-F99026A22D3C" name="SecCachePermission_SecPermission_FK">
+<createdBy>laredo</createdBy>
+<createdTime>2014-07-06 16:34:06 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="058EECC9-D0A1-0AD8-169A-25871E2FD189"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="05BC2860-EEFF-352B-E87E-F392CEBF93E9" name="SecCachePermission_SecUser_FK">
+<createdBy>laredo</createdBy>
+<createdTime>2014-07-06 16:30:19 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="B56153DB-3665-E667-9C17-F8303250476E"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

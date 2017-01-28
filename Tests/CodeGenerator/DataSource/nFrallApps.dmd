@@ -1,0 +1,13 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<OSDM_Design class="oracle.dbtools.crest.model.design.Design" name="nFrallApps" id="E8B2E8AE-AC5B-E777-ACDC-EC30300BA9C1" version="3.5">
+<createdBy>laredo</createdBy>
+<createdTime>2014-06-27 15:18:55 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+<capitalNames>false</capitalNames>
+<designId>E8B2E8AE-AC5B-E777-ACDC-EC30300BA9C1</designId>
+<usedDesignStorageDescriptors>
+<designDescr class="oracle.dbtools.crest.model.design.Design$DesignStorageDesc" id="73286B85-EE40-BDF7-8479-3B110D873879">
+<designStoragePath>C:\script</designStoragePath>
+</designDescr>
+</usedDesignStorageDescriptors>
+</OSDM_Design>

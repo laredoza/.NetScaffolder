@@ -1,0 +1,60 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="ADC6383F-3808-7ACE-7FCF-C7445EF8AB84" name="PreservedRouteParameters">
+<createdBy>laredo</createdBy>
+<createdTime>2015-10-07 09:46:05 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+<schemaObject>66F912D1-3DB8-9DDB-014F-B3515E3937D9</schemaObject>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="PageVerId" id="855D4BE9-8AD1-CEEF-993F-849A347A3EC0">
+<sourceDDLFile>script.sql</sourceDDLFile>
+<createdBy>laredo</createdBy>
+<createdTime>2015-10-07 09:55:19 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+<use>0</use>
+<logicalDatatype>LOGDT057</logicalDatatype>
+<domain>87AE4DA1-D751-B679-B38E-698D7BE75D71</domain>
+<delegate>81269086-514F-2F44-FEBB-76FACBD2987A</delegate>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="9B8B9674-B774-DAC4-86D0-361918A2D7DE" referredColumn="81269086-514F-2F44-FEBB-76FACBD2987A"/>
+</associations>
+</Column>
+<Column name="Name" id="EEC63225-3CAC-C512-90B3-5B0EE4C8277C">
+<createdBy>laredo</createdBy>
+<createdTime>2015-10-07 09:57:49 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT037</logicalDatatype>
+<dataTypeSize>15</dataTypeSize>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="5768C84A-A825-36F3-ABA4-1AB872A2B477" name="PreservedRouteParameters_PK">
+<createdBy>laredo</createdBy>
+<createdTime>2015-10-07 09:58:13 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="855D4BE9-8AD1-CEEF-993F-849A347A3EC0"/>
+<colUsage columnID="EEC63225-3CAC-C512-90B3-5B0EE4C8277C"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="5FF19E5E-8D4C-CA9E-0691-CCBE0CDA3021" name="PreservedRouteParameters_PageVer_FK">
+<createdBy>laredo</createdBy>
+<createdTime>2015-10-07 09:55:19 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="855D4BE9-8AD1-CEEF-993F-849A347A3EC0"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

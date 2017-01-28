@@ -1,0 +1,35 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TableProxySqlServerv2k5 class="oracle.dbtools.crest.model.design.storage.sqlserver.v2k5.TableProxySqlServerv2k5" name="PageTypeVerC" directorySegmentName="seg_0" id="6ED7A081-257E-02B4-85A5-6D65AA3A53D9">
+<createdBy>laredo</createdBy>
+<createdTime>2014-08-30 18:10:33 UTC</createdTime>
+<ownerDesignName>Untitled_1</ownerDesignName>
+<schemaObject>66F912D1-3DB8-9DDB-014F-B3515E3937D9</schemaObject>
+<database>DB_NULLELEMENT</database>
+<columnProxies>
+<ColumnProxy class="oracle.dbtools.crest.model.design.storage.sqlserver.v2k5.ColumnProxySqlServerv2k5" name="Id" id="70C2B9C2-29F0-2312-3284-14181777F4EC">
+<createdBy>laredo</createdBy>
+<createdTime>2014-08-30 18:11:22 UTC</createdTime>
+<ownerDesignName>Untitled_1</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy class="oracle.dbtools.crest.model.design.storage.sqlserver.v2k5.ColumnProxySqlServerv2k5" name="VersionId" id="B85477AC-E426-5348-86F0-68B45DB74380">
+<createdBy>laredo</createdBy>
+<createdTime>2014-08-30 18:11:41 UTC</createdTime>
+<ownerDesignName>Untitled_1</ownerDesignName>
+</ColumnProxy>
+</columnProxies>
+<foreignKeys>
+<ForeignKey class="oracle.dbtools.crest.model.design.storage.sqlserver.v2k5.FKProxySqlServerv2k5" name="PageTypeVerId_PageTypeVer_FK" id="A9986A75-AB36-3FD5-D37F-EAA95542B311">
+<createdBy>laredo</createdBy>
+<createdTime>2014-08-30 18:11:41 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+</ForeignKey>
+</foreignKeys>
+<primaryKeys>
+<PrimaryKey class="oracle.dbtools.crest.model.design.storage.sqlserver.v2k5.PKProxySqlServerv2k5" name="PageTypeVerId_PK" id="7903518A-9D23-EF6F-F1F1-4A2BA3D3C57F">
+<createdBy>laredo</createdBy>
+<createdTime>2014-08-30 18:11:27 UTC</createdTime>
+<ownerDesignName>Untitled_1</ownerDesignName>
+<clustered>true</clustered>
+</PrimaryKey>
+</primaryKeys>
+</TableProxySqlServerv2k5>

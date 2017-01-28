@@ -1,0 +1,48 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TableProxySqlServerv2k5 class="oracle.dbtools.crest.model.design.storage.sqlserver.v2k5.TableProxySqlServerv2k5" name="TemplateZoneVerC" directorySegmentName="seg_0" id="5C10BDE5-E1A3-E3E0-4094-4A6D560AA879">
+<createdBy>laredo</createdBy>
+<createdTime>2014-06-27 15:21:05 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+<schemaObject>66F912D1-3DB8-9DDB-014F-B3515E3937D9</schemaObject>
+<database>A27AF537-15A9-60B4-B3D9-59C09FC698A4</database>
+<filegroup>BC218FD3-9934-B879-9A10-48F552BEE590</filegroup>
+<schema>A4EBA9D2-F260-C6C6-EAF6-2764E65514FC</schema>
+<textImageFG>BC218FD3-9934-B879-9A10-48F552BEE590</textImageFG>
+<columnProxies>
+<ColumnProxy class="oracle.dbtools.crest.model.design.storage.sqlserver.v2k5.ColumnProxySqlServerv2k5" name="CultureId" id="393E9E19-DCD8-AD3A-84BA-21A1C0F40217">
+<createdBy>laredo</createdBy>
+<createdTime>2014-08-02 19:01:10 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy class="oracle.dbtools.crest.model.design.storage.sqlserver.v2k5.ColumnProxySqlServerv2k5" name="VersionId" id="5DD419F3-6255-E2EC-006E-D2E4BFDFAFFF">
+<createdBy>laredo</createdBy>
+<createdTime>2014-08-02 19:01:10 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy class="oracle.dbtools.crest.model.design.storage.sqlserver.v2k5.ColumnProxySqlServerv2k5" name="Id" id="D8010485-6EC0-7824-FC38-B5A0BFA787D3">
+<createdBy>laredo</createdBy>
+<createdTime>2014-06-27 15:21:05 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+</ColumnProxy>
+</columnProxies>
+<foreignKeys>
+<ForeignKey class="oracle.dbtools.crest.model.design.storage.sqlserver.v2k5.FKProxySqlServerv2k5" name="PageZoneVerC_Culture_FK" id="2EAE065D-CCB3-4085-560F-70BEF1935E9E">
+<createdBy>laredo</createdBy>
+<createdTime>2014-08-02 19:01:10 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+</ForeignKey>
+<ForeignKey class="oracle.dbtools.crest.model.design.storage.sqlserver.v2k5.FKProxySqlServerv2k5" name="PageZoneVerC_PageZoneVer_FK" id="9117CAA4-B0F9-06F0-0705-BF64DB9CBD8B">
+<createdBy>laredo</createdBy>
+<createdTime>2014-08-02 19:01:10 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+</ForeignKey>
+</foreignKeys>
+<primaryKeys>
+<PrimaryKey class="oracle.dbtools.crest.model.design.storage.sqlserver.v2k5.PKProxySqlServerv2k5" name="PageZoneVerC_PK" id="0B6B557D-3C35-5138-9EA5-0D9F8AABB443">
+<createdBy>laredo</createdBy>
+<createdTime>2014-08-02 19:01:10 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+<clustered>true</clustered>
+</PrimaryKey>
+</primaryKeys>
+</TableProxySqlServerv2k5>

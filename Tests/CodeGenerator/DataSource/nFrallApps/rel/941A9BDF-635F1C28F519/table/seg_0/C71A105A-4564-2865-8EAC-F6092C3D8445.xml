@@ -1,0 +1,77 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="C71A105A-4564-2865-8EAC-F6092C3D8445" name="Culture">
+<sourceDDLFile>script.sql</sourceDDLFile>
+<createdBy>laredo</createdBy>
+<createdTime>2014-06-27 15:21:05 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+<importedID>BBD13973-3A1A-BB7B-E446-ED29A61B75C1</importedID>
+<schemaObject>B012660D-BCD6-4709-D908-EF5AD6E8CE78</schemaObject>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="Id" directorySegmentName="seg_1" id="A4B190FA-5F2A-ACA8-2F44-5F3AF0203628">
+<sourceDDLFile>script.sql</sourceDDLFile>
+<createdBy>laredo</createdBy>
+<createdTime>2014-06-28 07:23:56 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+<use>0</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<domain>DF37F2B1-7872-C610-8F7D-790ABD557ABD</domain>
+<identityColumn>true</identityColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Code" directorySegmentName="seg_1" id="BD37C3FB-7685-E3B7-1577-0D8A18C8396B">
+<sourceDDLFile>script.sql</sourceDDLFile>
+<createdBy>laredo</createdBy>
+<createdTime>2014-06-28 07:23:56 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+<use>0</use>
+<logicalDatatype>LOGDT037</logicalDatatype>
+<domain>9EEECC06-DA10-9672-A7C7-62F3DF07FF8C</domain>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Name" directorySegmentName="seg_1" id="EFEE015B-E40B-2F88-A5AA-29CEE0618B32">
+<sourceDDLFile>script.sql</sourceDDLFile>
+<createdBy>laredo</createdBy>
+<createdTime>2014-06-28 07:23:56 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+<use>0</use>
+<logicalDatatype>LOGDT037</logicalDatatype>
+<domain>9EEECC06-DA10-9672-A7C7-62F3DF07FF8C</domain>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="IsDefault" directorySegmentName="seg_1" id="81AD5A94-35FA-89AE-C766-4919D99EB2FF">
+<sourceDDLFile>script.sql</sourceDDLFile>
+<createdBy>laredo</createdBy>
+<createdTime>2014-06-28 07:23:56 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+<use>0</use>
+<logicalDatatype>LOGDT034</logicalDatatype>
+<domain>818997C6-7D69-9C29-2870-7B12953A57B1</domain>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Active" id="3458E46C-32B0-E236-7E89-D608AC903991">
+<createdBy>laredo</createdBy>
+<createdTime>2014-07-03 13:22:27 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT006</logicalDatatype>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="05183E3D-CB26-D42F-C391-6166BFD64268" name="Culture_PK">
+<createdBy>laredo</createdBy>
+<createdTime>2014-06-29 09:30:54 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="A4B190FA-5F2A-ACA8-2F44-5F3AF0203628"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

@@ -1,0 +1,82 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="358CB0A3-93AA-418B-8D0C-FFB1D60591C0" name="PageTypeVer">
+<createdBy>laredo</createdBy>
+<createdTime>2014-08-30 18:03:27 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+<schemaObject>66F912D1-3DB8-9DDB-014F-B3515E3937D9</schemaObject>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="Id" id="47AB72C1-B1DF-6538-4F5E-11196CE17379">
+<createdBy>laredo</createdBy>
+<createdTime>2014-08-30 18:04:27 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="PageTypeId" id="6C6AF140-CB59-AD38-B769-D33B24C5D5E6">
+<createdBy>laredo</createdBy>
+<createdTime>2014-08-30 18:09:27 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<delegate>5DED43C6-DA96-C32F-4421-DAF2521FDD28</delegate>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="8D62E8EE-9F5A-C552-113C-0F3B6BA8ADA2" referredColumn="5DED43C6-DA96-C32F-4421-DAF2521FDD28"/>
+</associations>
+</Column>
+<Column name="ModelVerId" id="43B9E651-6797-6571-503A-DC5ABC94BBC2">
+<sourceDDLFile>script.sql</sourceDDLFile>
+<createdBy>laredo</createdBy>
+<createdTime>2014-08-30 19:19:31 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+<use>0</use>
+<logicalDatatype>LOGDT057</logicalDatatype>
+<domain>87AE4DA1-D751-B679-B38E-698D7BE75D71</domain>
+<delegate>353808F1-8D0C-8764-6BF9-04D8978C63A5</delegate>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="A1C1BE57-37AC-BB03-AA63-7465226F5500" referredColumn="353808F1-8D0C-8764-6BF9-04D8978C63A5"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="69D7D42E-764A-A2E7-59D0-033B80609603" name="PageTypeVer_PK">
+<createdBy>laredo</createdBy>
+<createdTime>2014-08-30 18:05:19 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="47AB72C1-B1DF-6538-4F5E-11196CE17379"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="070E6F89-3A1B-3AE1-BB3F-926925152758" name="PageTypeVer_PageType_FK">
+<createdBy>laredo</createdBy>
+<createdTime>2014-08-30 18:09:27 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="6C6AF140-CB59-AD38-B769-D33B24C5D5E6"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="23E7D4B5-F55F-36DC-826C-E00A100F6AC2" name="PageTypeVer_ModelVer_FK">
+<createdBy>laredo</createdBy>
+<createdTime>2014-08-30 19:19:31 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="43B9E651-6797-6571-503A-DC5ABC94BBC2"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

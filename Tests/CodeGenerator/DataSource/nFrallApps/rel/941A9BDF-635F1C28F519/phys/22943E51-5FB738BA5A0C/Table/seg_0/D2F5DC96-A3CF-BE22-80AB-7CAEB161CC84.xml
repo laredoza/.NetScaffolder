@@ -1,0 +1,43 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TableProxySqlServerv2k5 class="oracle.dbtools.crest.model.design.storage.sqlserver.v2k5.TableProxySqlServerv2k5" name="Application" directorySegmentName="seg_0" id="D2F5DC96-A3CF-BE22-80AB-7CAEB161CC84">
+<createdBy>laredo</createdBy>
+<createdTime>2014-06-27 15:21:05 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+<schemaObject>B012660D-BCD6-4709-D908-EF5AD6E8CE78</schemaObject>
+<database>A27AF537-15A9-60B4-B3D9-59C09FC698A4</database>
+<filegroup>BC218FD3-9934-B879-9A10-48F552BEE590</filegroup>
+<schema>A4EBA9D2-F260-C6C6-EAF6-2764E65514FC</schema>
+<textImageFG>BC218FD3-9934-B879-9A10-48F552BEE590</textImageFG>
+<columnProxies>
+<ColumnProxy class="oracle.dbtools.crest.model.design.storage.sqlserver.v2k5.ColumnProxySqlServerv2k5" name="DefaultApplication" id="1ABABA2B-99C9-4FF7-4BDB-FBEDF735F04C">
+<createdBy>laredo</createdBy>
+<createdTime>2014-06-27 15:21:05 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy class="oracle.dbtools.crest.model.design.storage.sqlserver.v2k5.ColumnProxySqlServerv2k5" name="Description" id="90B957CC-C1CB-FABB-709B-8080BCE84E12">
+<createdBy>laredo</createdBy>
+<createdTime>2014-06-27 15:21:05 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy class="oracle.dbtools.crest.model.design.storage.sqlserver.v2k5.ColumnProxySqlServerv2k5" name="ApplicationId" id="D317976B-876B-DAD8-CC1F-BDE14B4431B8">
+<createdBy>laredo</createdBy>
+<createdTime>2014-06-27 15:21:05 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy class="oracle.dbtools.crest.model.design.storage.sqlserver.v2k5.ColumnProxySqlServerv2k5" name="Name" id="DCBD24F0-21FA-DB3F-479B-287108D3F0C9">
+<createdBy>laredo</createdBy>
+<createdTime>2014-06-27 15:21:05 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+</ColumnProxy>
+</columnProxies>
+<primaryKeys>
+<PrimaryKey class="oracle.dbtools.crest.model.design.storage.sqlserver.v2k5.PKProxySqlServerv2k5" name="PK_Core.Application" id="1124ACB4-B2A1-F941-F2CF-796DAD764ADA">
+<createdBy>laredo</createdBy>
+<createdTime>2014-06-27 15:21:05 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+<clustered>true</clustered>
+<fileGroup>BC218FD3-9934-B879-9A10-48F552BEE590</fileGroup>
+<partitioningColumn>D317976B-876B-DAD8-CC1F-BDE14B4431B8</partitioningColumn>
+</PrimaryKey>
+</primaryKeys>
+</TableProxySqlServerv2k5>

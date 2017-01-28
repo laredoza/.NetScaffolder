@@ -1,0 +1,7 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Note class="oracle.dbtools.crest.model.design.Note" name="Note_2" directorySegmentName="seg_0" id="876EF6CF-1C0C-2813-F0F7-28B3C072A006">
+<createdBy>laredo</createdBy>
+<createdTime>2014-07-06 17:10:58 UTC</createdTime>
+<comment>Model Definition - All objects are defined in this table</comment>
+<ownerDesignName>nFrallApps</ownerDesignName>
+</Note>

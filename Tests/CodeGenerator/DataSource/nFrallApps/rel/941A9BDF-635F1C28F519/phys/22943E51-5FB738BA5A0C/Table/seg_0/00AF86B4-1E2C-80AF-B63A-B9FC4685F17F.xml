@@ -1,0 +1,65 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TableProxySqlServerv2k5 class="oracle.dbtools.crest.model.design.storage.sqlserver.v2k5.TableProxySqlServerv2k5" name="WidgetVer" directorySegmentName="seg_0" id="00AF86B4-1E2C-80AF-B63A-B9FC4685F17F">
+<createdBy>laredo</createdBy>
+<createdTime>2014-08-23 14:08:43 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+<schemaObject>66F912D1-3DB8-9DDB-014F-B3515E3937D9</schemaObject>
+<database>DB_NULLELEMENT</database>
+<columnProxies>
+<ColumnProxy class="oracle.dbtools.crest.model.design.storage.sqlserver.v2k5.ColumnProxySqlServerv2k5" name="ModelVerId" id="2E9E8A9D-3D71-67FE-96B9-8D0508555EF0">
+<createdBy>laredo</createdBy>
+<createdTime>2014-08-23 14:11:33 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy class="oracle.dbtools.crest.model.design.storage.sqlserver.v2k5.ColumnProxySqlServerv2k5" name="Action" id="36DA7D0E-F0A5-D14F-2353-3E927861E367">
+<createdBy>laredo</createdBy>
+<createdTime>2014-08-23 14:10:17 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy class="oracle.dbtools.crest.model.design.storage.sqlserver.v2k5.ColumnProxySqlServerv2k5" name="Id" id="459C6CAE-BF43-3461-4049-7D543282C2F6">
+<createdBy>laredo</createdBy>
+<createdTime>2014-08-23 14:09:36 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy class="oracle.dbtools.crest.model.design.storage.sqlserver.v2k5.ColumnProxySqlServerv2k5" name="TypeId" id="58D26E02-CE29-2F39-5E47-ABC7DC25C343">
+<createdBy>laredo</createdBy>
+<createdTime>2015-10-07 09:35:10 UTC</createdTime>
+<ownerDesignName>Untitled_1</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy class="oracle.dbtools.crest.model.design.storage.sqlserver.v2k5.ColumnProxySqlServerv2k5" name="WidgetId" id="B5DC4DED-E969-43F6-6BAA-788F824030B2">
+<createdBy>laredo</createdBy>
+<createdTime>2015-10-07 09:35:10 UTC</createdTime>
+<ownerDesignName>Untitled_1</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy class="oracle.dbtools.crest.model.design.storage.sqlserver.v2k5.ColumnProxySqlServerv2k5" name="Controller" id="D4F66904-A005-4BA1-D381-F51130211592">
+<createdBy>laredo</createdBy>
+<createdTime>2014-08-23 14:10:00 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+</ColumnProxy>
+</columnProxies>
+<foreignKeys>
+<ForeignKey class="oracle.dbtools.crest.model.design.storage.sqlserver.v2k5.FKProxySqlServerv2k5" name="WidgetVer_ModelVer_FK" id="69427014-4432-B72B-4BAC-1A3D6E934D90">
+<createdBy>laredo</createdBy>
+<createdTime>2014-08-23 14:11:33 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+</ForeignKey>
+<ForeignKey class="oracle.dbtools.crest.model.design.storage.sqlserver.v2k5.FKProxySqlServerv2k5" name="WidgetVer_Widget_FK" id="9EFE7042-0A4C-A8F8-0A9E-31DFF747A43A">
+<createdBy>laredo</createdBy>
+<createdTime>2015-10-07 09:35:10 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+</ForeignKey>
+<ForeignKey class="oracle.dbtools.crest.model.design.storage.sqlserver.v2k5.FKProxySqlServerv2k5" name="WidgetVer_WidgetTypeVer_FK" id="EB018169-2355-9CD6-90D8-C4FB84B88314">
+<createdBy>laredo</createdBy>
+<createdTime>2015-10-07 09:35:10 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+</ForeignKey>
+</foreignKeys>
+<primaryKeys>
+<PrimaryKey class="oracle.dbtools.crest.model.design.storage.sqlserver.v2k5.PKProxySqlServerv2k5" name="WidgetVer_PK" id="0D027A81-0200-0A68-6EA7-31C5E87B7333">
+<createdBy>laredo</createdBy>
+<createdTime>2014-08-23 14:13:15 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+<clustered>true</clustered>
+</PrimaryKey>
+</primaryKeys>
+</TableProxySqlServerv2k5>

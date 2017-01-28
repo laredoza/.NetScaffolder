@@ -1,0 +1,7 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<SchemaObject class="oracle.dbtools.crest.model.design.relational.SchemaObject" name="dbo" directorySegmentName="seg_0" id="8AFDA53F-FC59-BF57-A1F0-73785A38CDD9">
+<createdBy>laredo</createdBy>
+<createdTime>2014-06-27 15:21:05 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+<importedID>6F03CF04-58F9-DCA0-098B-09FB4067F147</importedID>
+</SchemaObject>

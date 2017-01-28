@@ -1,0 +1,7 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<BusinessInfoDesign class="oracle.dbtools.crest.model.businessinfo.BusinessInfoDesign" name="Business Information" id="ADD91F07-8CB1-F9A6-99C9-D8569010175E">
+<createdBy>laredo</createdBy>
+<createdTime>2014-06-27 15:18:55 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+<shouldBeOpen>false</shouldBeOpen>
+</BusinessInfoDesign>

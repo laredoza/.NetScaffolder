@@ -1,0 +1,107 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="771A8591-C4A8-2624-2A3E-2F14B76E133F" name="TemplateVer">
+<sourceDDLFile>script.sql</sourceDDLFile>
+<createdBy>laredo</createdBy>
+<createdTime>2014-06-27 15:21:05 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+<importedID>723F20C1-FF96-E29A-4065-1C4EED315939</importedID>
+<schemaObject>66F912D1-3DB8-9DDB-014F-B3515E3937D9</schemaObject>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="Id" id="D8B8C915-12FB-2F9A-9973-FF002F266969">
+<sourceDDLFile>script.sql</sourceDDLFile>
+<createdBy>laredo</createdBy>
+<createdTime>2014-06-27 15:21:05 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+<importedID>C96E5920-FBAF-2FFA-AA3E-9B61896C0BD8</importedID>
+<use>0</use>
+<logicalDatatype>LOGDT057</logicalDatatype>
+<domain>87AE4DA1-D751-B679-B38E-698D7BE75D71</domain>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="TemplateId" id="26DCA637-BCCE-38D9-082B-E6FB7CBED405">
+<sourceDDLFile>script.sql</sourceDDLFile>
+<createdBy>laredo</createdBy>
+<createdTime>2014-07-03 18:09:21 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+<use>0</use>
+<logicalDatatype>LOGDT057</logicalDatatype>
+<domain>87AE4DA1-D751-B679-B38E-698D7BE75D71</domain>
+<delegate>F4B9B65A-E98E-2DCC-D681-C79A5CFEC2B9</delegate>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="70D35C0D-C636-A5CB-50D2-12C06E3F8984" referredColumn="F4B9B65A-E98E-2DCC-D681-C79A5CFEC2B9"/>
+</associations>
+</Column>
+<Column name="ModelVerId" id="1EBE5B6D-7E34-10D2-F5A4-3D565E4DDF6B">
+<sourceDDLFile>script.sql</sourceDDLFile>
+<createdBy>laredo</createdBy>
+<createdTime>2014-07-03 18:10:27 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+<use>0</use>
+<logicalDatatype>LOGDT057</logicalDatatype>
+<domain>87AE4DA1-D751-B679-B38E-698D7BE75D71</domain>
+<delegate>353808F1-8D0C-8764-6BF9-04D8978C63A5</delegate>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="76F9F6F1-14D1-8AA1-BF4B-1D727341B87A" referredColumn="353808F1-8D0C-8764-6BF9-04D8978C63A5"/>
+</associations>
+</Column>
+<Column name="PreviewHtml" id="A87B6AD5-BE32-9F8B-AC43-9EB527F16B98">
+<createdBy>laredo</createdBy>
+<createdTime>2014-08-10 19:30:15 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT040</logicalDatatype>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="LayoutPath" id="C95CFFE1-03CD-CB66-4ACE-27101345FE23">
+<createdBy>laredo</createdBy>
+<createdTime>2014-08-19 16:16:33 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT037</logicalDatatype>
+<dataTypeSize>500</dataTypeSize>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="4365741B-03EB-8508-E080-B9ACDEFA8141" name="PageTemplateVer_PK">
+<createdBy>laredo</createdBy>
+<createdTime>2014-07-03 18:07:30 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="D8B8C915-12FB-2F9A-9973-FF002F266969"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="5EEBB6CD-7BD3-9D01-CB8A-04F2FDD8F618" name="PageTemplateVer_PageTemplate_FK">
+<createdBy>laredo</createdBy>
+<createdTime>2014-07-03 18:09:21 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="26DCA637-BCCE-38D9-082B-E6FB7CBED405"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="EBF34ECD-123C-1AC0-9E3D-7B58BB4BE848" name="PageTemplateId_ModelVer_FK">
+<createdBy>laredo</createdBy>
+<createdTime>2014-07-03 18:10:27 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="1EBE5B6D-7E34-10D2-F5A4-3D565E4DDF6B"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

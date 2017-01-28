@@ -1,0 +1,13 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="8D62E8EE-9F5A-C552-113C-0F3B6BA8ADA2" name="PageTypeVer_PageType_FK">
+<createdBy>laredo</createdBy>
+<createdTime>2014-08-30 18:09:27 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+<containerWithKeyObject>358CB0A3-93AA-418B-8D0C-FFB1D60591C0</containerWithKeyObject>
+<deleteRule>NO ACTION</deleteRule>
+<localFKIndex>070E6F89-3A1B-3AE1-BB3F-926925152758</localFKIndex>
+<keyObject>BAE69E67-B32B-DACE-E9B1-8D2292A8DD14</keyObject>
+<mandatory>true</mandatory>
+<transferable>true</transferable>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

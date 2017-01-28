@@ -1,0 +1,13 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="D682238D-141E-C1EE-F8B4-30B1BCFF7C8B" name="TenantSchemaMap_SchemaMap_FK">
+<createdBy>laredo</createdBy>
+<createdTime>2014-08-02 19:12:52 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+<containerWithKeyObject>CDE70DC1-1CF3-C752-35FF-4AF046577BC0</containerWithKeyObject>
+<deleteRule>NO ACTION</deleteRule>
+<localFKIndex>B46E21C2-627C-BE66-93FF-53FA9FA353CA</localFKIndex>
+<keyObject>7BDE5C36-D895-C691-D12A-D8C1EB754E13</keyObject>
+<mandatory>true</mandatory>
+<transferable>true</transferable>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

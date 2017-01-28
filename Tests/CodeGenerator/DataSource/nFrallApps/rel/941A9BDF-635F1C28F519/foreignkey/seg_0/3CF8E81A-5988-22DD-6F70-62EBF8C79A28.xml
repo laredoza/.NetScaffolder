@@ -1,0 +1,15 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="3CF8E81A-5988-22DD-6F70-62EBF8C79A28" name="FK_AspNetUserRoles_UserId">
+<sourceDDLFile>script.sql</sourceDDLFile>
+<createdBy>laredo</createdBy>
+<createdTime>2014-06-27 15:21:06 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+<importedID>57A3C245-EF32-57CA-C2DD-3586076A61D1</importedID>
+<containerWithKeyObject>08125570-B1C5-F649-A1A3-CAA967E98A0C</containerWithKeyObject>
+<deleteRule>CASCADE</deleteRule>
+<localFKIndex>BD9AFE6F-0E2A-12FC-B4EB-71214C3735F8</localFKIndex>
+<keyObject>73AD1CFF-AF15-A63E-21F7-687937BB27C9</keyObject>
+<mandatory>true</mandatory>
+<transferable>true</transferable>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

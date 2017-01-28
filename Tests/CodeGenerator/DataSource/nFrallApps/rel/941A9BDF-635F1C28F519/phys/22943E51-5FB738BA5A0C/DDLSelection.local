@@ -1,0 +1,34 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<oracle.dbtools.crest.model.design.storage.sqlserver.v2k8.StorageDesignSqlServerv2k8>
+   <object objectID="DB_NULLELEMENT" markedGenerate="false"/>
+   <object objectID="DB_NULLELEMENT_dbo" markedGenerate="false"/>
+   <object objectID="A27AF537-15A9-60B4-B3D9-59C09FC698A4_dbo" markedGenerate="false"/>
+   <object objectID="GUEST" markedGenerate="false"/>
+   <object objectID="F012CC0D-A0A3-CD2C-391C-C77186F5E447" markedGenerate="false"/>
+   <object objectID="DB_NULLELEMENT_PUBLIC" markedGenerate="false"/>
+   <object objectID="A27AF537-15A9-60B4-B3D9-59C09FC698A4_PUBLIC" markedGenerate="false"/>
+   <object objectID="D2F5DC96-A3CF-BE22-80AB-7CAEB161CC84" markedGenerate="false"/>
+   <object objectID="C71A105A-4564-2865-8EAC-F6092C3D8445" markedGenerate="false"/>
+   <object objectID="F9926271-CEEF-8848-3B2F-272744958D17" markedGenerate="false"/>
+   <object objectID="CB0F06AC-501B-7FE4-18F0-0D10625EE546" markedGenerate="false"/>
+   <object objectID="945FF018-765E-7FCC-1677-77F5B0221AD3" markedGenerate="false"/>
+   <object objectID="1FB0273D-9120-D62E-3C97-BCE97DF615AB" markedGenerate="false"/>
+   <object objectID="58ECAA3D-2470-E28F-31AA-C38DF30EE6F8" markedGenerate="false"/>
+   <object objectID="A65295D3-9A66-ECBF-2D69-88A5D95596F3" markedGenerate="false"/>
+   <object objectID="67010B4A-0E1A-4ED8-3846-209DCD031E66" markedGenerate="false"/>
+   <object objectID="F413C26B-26B6-12EC-7FA2-F44238B721BA" markedGenerate="false"/>
+   <object objectID="7F8A4CC6-E396-2D52-E25F-B7F138F8623D" markedGenerate="false"/>
+   <object objectID="D22519C9-E26B-0A8B-C05B-F701777DF6F9" markedGenerate="false"/>
+   <object objectID="3F4C4347-5BF0-F1B4-E938-8C6634A48C32" markedGenerate="false"/>
+   <object objectID="08125570-B1C5-F649-A1A3-CAA967E98A0C" markedGenerate="false"/>
+   <object objectID="CD9DC404-B3EE-BAD6-5F57-43CD8F5D0278" markedGenerate="false"/>
+   <object objectID="3FAC7658-8C6D-7FFE-9AC8-E2AE699C993B" markedGenerate="false"/>
+   <object objectID="771A8591-C4A8-2624-2A3E-2F14B76E133F" markedGenerate="false"/>
+   <object objectID="3302B462-CBA9-A3B8-1241-E584E55276F6" markedGenerate="false"/>
+   <object objectID="58433B91-8F47-79EA-4381-08AE2FE89390" markedGenerate="false"/>
+   <object objectID="09C0B4E1-970D-A45E-76BD-69338CD665D2" markedGenerate="false"/>
+   <object objectID="5C10BDE5-E1A3-E3E0-4094-4A6D560AA879" markedGenerate="false"/>
+   <object objectID="C34D2E0F-62F8-2BD7-E49C-44BFE922B32B" markedGenerate="false"/>
+   <object objectID="79B85792-E0E7-D212-4369-07D4C54F2961" markedGenerate="false"/>
+   <object objectID="8CE86629-3135-4AAF-B0D0-23BE06532DCE" markedGenerate="false"/>
+</oracle.dbtools.crest.model.design.storage.sqlserver.v2k8.StorageDesignSqlServerv2k8>

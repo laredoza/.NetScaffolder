@@ -1,0 +1,72 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="B5DEA743-F88D-5A46-7FC3-9C4B53B607F0" name="ModelDefVer">
+<sourceDDLFile>script.sql</sourceDDLFile>
+<createdBy>laredo</createdBy>
+<createdTime>2014-06-27 15:21:05 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+<importedID>454907E7-CF53-1FD3-AB40-3153A7372031</importedID>
+<schemaObject>B012660D-BCD6-4709-D908-EF5AD6E8CE78</schemaObject>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="Id" id="036E7531-5C86-7ABA-2141-51D164CF4E27">
+<sourceDDLFile>script.sql</sourceDDLFile>
+<createdBy>laredo</createdBy>
+<createdTime>2014-06-27 15:21:05 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+<importedID>D34E5952-8134-614B-D07C-287BBC16BB3E</importedID>
+<use>0</use>
+<logicalDatatype>LOGDT057</logicalDatatype>
+<domain>87AE4DA1-D751-B679-B38E-698D7BE75D71</domain>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="ModelDefId" id="909EA8C3-9C30-75F6-DF00-3309E5739B46">
+<sourceDDLFile>script.sql</sourceDDLFile>
+<createdBy>laredo</createdBy>
+<createdTime>2014-06-29 21:10:17 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT057</logicalDatatype>
+<delegate>2E6651D6-F678-5B8D-669F-C27B190431F9</delegate>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="2B69FC4E-8807-047D-7ECA-5FFCB2E1A686" referredColumn="2E6651D6-F678-5B8D-669F-C27B190431F9"/>
+</associations>
+</Column>
+<Column name="Active" id="ADB7C9CE-04DB-6D98-761E-5FFE53016DDE">
+<createdBy>laredo</createdBy>
+<createdTime>2014-07-03 13:23:37 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT006</logicalDatatype>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="E5163FFC-9781-FFCB-2CC5-9C9CC40CFBED" name="ModelDefVer_PK">
+<createdBy>laredo</createdBy>
+<createdTime>2014-06-29 12:15:22 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="036E7531-5C86-7ABA-2141-51D164CF4E27"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="36BA4C44-F91E-2DD0-18D8-0A1506878FD6" name="ModelDefVer_ModelDef_FK">
+<createdBy>laredo</createdBy>
+<createdTime>2014-06-29 21:10:17 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="909EA8C3-9C30-75F6-DF00-3309E5739B46"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

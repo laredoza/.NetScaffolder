@@ -1,0 +1,13 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="3F09EAB4-EE8A-893B-9363-6E5314CDB287" name="TenantCulture_Culture_FK">
+<createdBy>laredo</createdBy>
+<createdTime>2014-06-29 12:29:22 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+<containerWithKeyObject>79B85792-E0E7-D212-4369-07D4C54F2961</containerWithKeyObject>
+<deleteRule>NO ACTION</deleteRule>
+<localFKIndex>3DF0EDAA-B506-F9CC-A386-4C5681F0A228</localFKIndex>
+<keyObject>05183E3D-CB26-D42F-C391-6166BFD64268</keyObject>
+<mandatory>true</mandatory>
+<transferable>true</transferable>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

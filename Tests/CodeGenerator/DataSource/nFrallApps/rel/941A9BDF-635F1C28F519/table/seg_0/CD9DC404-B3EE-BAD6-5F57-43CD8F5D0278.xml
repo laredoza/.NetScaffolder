@@ -1,0 +1,135 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="CD9DC404-B3EE-BAD6-5F57-43CD8F5D0278" name="SiteMap">
+<sourceDDLFile>script.sql</sourceDDLFile>
+<createdBy>laredo</createdBy>
+<createdTime>2014-06-27 15:21:05 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+<importedID>705EF5A5-2150-3F21-4C29-1049033FA115</importedID>
+<schemaObject>8AFDA53F-FC59-BF57-A1F0-73785A38CDD9</schemaObject>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="ID" id="C3D4ECF2-F353-6AD5-0513-DA96579B1791">
+<sourceDDLFile>script.sql</sourceDDLFile>
+<createdBy>laredo</createdBy>
+<createdTime>2014-06-27 15:21:05 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+<importedID>5DBBC849-1069-FFC3-EBBC-BD6D17C9BF8F</importedID>
+<use>0</use>
+<logicalDatatype>LOGDT057</logicalDatatype>
+<domain>87AE4DA1-D751-B679-B38E-698D7BE75D71</domain>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Title" id="4F99DD14-A345-CC32-FDCB-F0877EBBC572">
+<sourceDDLFile>script.sql</sourceDDLFile>
+<createdBy>laredo</createdBy>
+<createdTime>2014-06-27 15:21:05 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+<importedID>D45F7F17-DDAB-4788-4759-D27601D87E6C</importedID>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>CC41FC51-B04C-F531-C1B9-605BF58FB521</domain>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Description" id="2ADEE2FD-103B-2D64-7782-6540065B602B">
+<sourceDDLFile>script.sql</sourceDDLFile>
+<createdBy>laredo</createdBy>
+<createdTime>2014-06-27 15:21:05 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+<importedID>4B354475-E9F5-C8A2-C837-E072DD5FCCAD</importedID>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>7E14795C-66BF-0C6C-C22A-6D8BED0DBC2B</domain>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Url" id="383FFF63-E725-EE1C-9291-A7A243BF5ECF">
+<sourceDDLFile>script.sql</sourceDDLFile>
+<createdBy>laredo</createdBy>
+<createdTime>2014-06-27 15:21:05 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+<importedID>6303054B-F850-070C-17BC-812994351787</importedID>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>7E14795C-66BF-0C6C-C22A-6D8BED0DBC2B</domain>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Roles" id="0C1CE17E-7939-B436-BDBD-C3D678F96137">
+<sourceDDLFile>script.sql</sourceDDLFile>
+<createdBy>laredo</createdBy>
+<createdTime>2014-06-27 15:21:05 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+<importedID>EBE0AB93-0412-2C31-6AE1-BA616189EEB2</importedID>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>7E14795C-66BF-0C6C-C22A-6D8BED0DBC2B</domain>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Parent" id="6C9EEB09-6132-E67B-5D35-465897B5EDE0">
+<sourceDDLFile>script.sql</sourceDDLFile>
+<createdBy>laredo</createdBy>
+<createdTime>2014-06-27 15:21:05 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+<importedID>4C18FCC8-3F3B-C004-A972-C10C83E1CC10</importedID>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT057</logicalDatatype>
+<domain>87AE4DA1-D751-B679-B38E-698D7BE75D71</domain>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="OpenPage" id="D2D76901-4026-9988-FFF1-543CAE9261C3">
+<sourceDDLFile>script.sql</sourceDDLFile>
+<createdBy>laredo</createdBy>
+<createdTime>2014-06-27 15:21:05 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+<importedID>3A1AC8A9-E647-BA14-7590-A78D7390EE57</importedID>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT057</logicalDatatype>
+<domain>87AE4DA1-D751-B679-B38E-698D7BE75D71</domain>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Status" id="EF5ADA07-563F-0DC0-6ABB-EBC71D292A53">
+<sourceDDLFile>script.sql</sourceDDLFile>
+<createdBy>laredo</createdBy>
+<createdTime>2014-06-27 15:21:05 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+<importedID>C048ED44-A0A2-9729-4F22-0C9C0A933876</importedID>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<domain>DF37F2B1-7872-C610-8F7D-790ABD557ABD</domain>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="SortOrder" id="56089C23-4022-125C-0DE8-96CD2EE21F2B">
+<sourceDDLFile>script.sql</sourceDDLFile>
+<createdBy>laredo</createdBy>
+<createdTime>2014-06-27 15:21:05 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+<importedID>948D401B-4B58-52E0-5E55-34C20C692403</importedID>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<domain>DF37F2B1-7872-C610-8F7D-790ABD557ABD</domain>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="CD3DE79C-95A7-3452-91E8-8A44558529FD" name="PK_SiteMap">
+<sourceDDLFile>script.sql</sourceDDLFile>
+<createdBy>laredo</createdBy>
+<createdTime>2014-06-27 15:21:05 UTC</createdTime>
+<ownerDesignName>nFrallApps</ownerDesignName>
+<importedID>CBBA025A-E2A1-1F39-35CF-BB6757574D76</importedID>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="C3D4ECF2-F353-6AD5-0513-DA96579B1791"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>
