@@ -184,10 +184,10 @@
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Project Domains";
-            
             // 
             // ProjectDomainUserControl1
             // 
+            this.ProjectDomainUserControl1.ApplicationService = null;
             this.ProjectDomainUserControl1.Changed = false;
             this.ProjectDomainUserControl1.Location = new System.Drawing.Point(16, 20);
             this.ProjectDomainUserControl1.Name = "ProjectDomainUserControl1";
@@ -237,6 +237,7 @@
             // 
             // button9
             // 
+            this.button9.Enabled = false;
             this.button9.Location = new System.Drawing.Point(422, 125);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(75, 23);
@@ -246,6 +247,7 @@
             // 
             // button10
             // 
+            this.button10.Enabled = false;
             this.button10.Location = new System.Drawing.Point(422, 94);
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(75, 23);
@@ -283,7 +285,6 @@
             treeNode17});
             this.treeView2.Size = new System.Drawing.Size(329, 313);
             this.treeView2.TabIndex = 0;
-            
             // 
             // tabPage3
             // 
@@ -324,7 +325,6 @@
             this.groupBox5.TabIndex = 1;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Details";
-            
             // 
             // comboBox12
             // 
@@ -387,6 +387,7 @@
             // 
             // button11
             // 
+            this.button11.Enabled = false;
             this.button11.Location = new System.Drawing.Point(285, 268);
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(75, 23);
@@ -434,13 +435,13 @@
             // button8
             // 
             this.button8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button8.Enabled = false;
             this.button8.Location = new System.Drawing.Point(366, 82);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(75, 23);
             this.button8.TabIndex = 6;
             this.button8.Text = "Edit";
             this.button8.UseVisualStyleBackColor = true;
-            
             // 
             // checkBox1
             // 
@@ -522,6 +523,7 @@
             // 
             // button12
             // 
+            this.button12.Enabled = false;
             this.button12.Location = new System.Drawing.Point(293, 81);
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(75, 23);
@@ -531,6 +533,7 @@
             // 
             // button13
             // 
+            this.button13.Enabled = false;
             this.button13.Location = new System.Drawing.Point(293, 50);
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(75, 23);
