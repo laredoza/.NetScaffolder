@@ -15,12 +15,14 @@ This imported data will then be saved in a xml file (.mdl). All generation will 
 
 #Generated Project Types:#
 
--MVC (context, ef models & presentation)
--WPF (context, ef models & presentation)
--MVC (context, ef models, repository & presentation)
--WPF (context, ef models, repository & presentation)
--MVC (Domain Driven)
--WPF (Domain Driven)
+- MVC (context, ef models & presentation)
+- WPF (context, ef models & presentation)
+- MVC (context, ef models, repository & presentation)
+- WPF (context, ef models, repository & presentation)
+- MVC (Domain Driven)
+- WPF (Domain Driven)
+
+
 
 
 
