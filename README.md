@@ -13,6 +13,9 @@ The aim of this project will be to quickly generate a base project from a data m
 - Extendable Custom sources
 
 This imported data will then be saved in a xml file (.mdl). All generation will then be based on this file.
+This project file will contain a domain / domains. A domain will contain several tables ( These are imported from the data sources). These tables are used to generate the different layers. i.e) Security Domain with a user table and a role table, etc.
+
+T4 templates will be used to generate the different layers. Packages consist of several templates. A domain will be set to use a package to generate all it's layers.  
 
 #Generated Project Types:#
 
