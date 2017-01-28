@@ -7,8 +7,8 @@
     <ProjectGuid>{CDACE52C-F991-40B5-80ED-4947A100EC52}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Core.Common</RootNamespace>
-    <AssemblyName>Core.Common</AssemblyName>
+    <RootNamespace>DotNetScaffolder.Core.Common</RootNamespace>
+    <AssemblyName>DotNetScaffolder.Core.Common</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>

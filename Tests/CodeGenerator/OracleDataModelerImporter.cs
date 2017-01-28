@@ -4,11 +4,8 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace CodeGenerator.Test
+namespace DotNetScaffolder.Test
 {
-    using System.IO;
-    using System.Linq;
-
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     /// <summary>

@@ -1,8 +1,7 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-namespace CodeGenerator.Test.Project
+﻿namespace DotNetScaffolder.Test.Project
 {
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
     [TestClass]
     public class ProjectDefinitionUnitTest
     {

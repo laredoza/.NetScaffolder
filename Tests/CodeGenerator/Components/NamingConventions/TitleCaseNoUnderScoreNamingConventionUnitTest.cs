@@ -7,11 +7,11 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace CodeGenerator.Test.Components.NamingConventions
+namespace DotNetScaffolder.Test.Components.NamingConventions
 {
     #region Using
 
-    using Contractors.NamingConventions.DefaultNamingConventions;
+    using DotNetScaffolder.Components.NamingConventions.DefaultNamingConventions;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 

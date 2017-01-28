@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MetaData.Project
+﻿namespace DotNetScaffolder.Mapping.MetaData.Project
 {
+    using System;
+    using System.Collections.Generic;
+
+    using global::MetaData;
+
     public class Driver
     {
         public Guid Id { get; set; }

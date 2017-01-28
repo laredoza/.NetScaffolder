@@ -1,15 +1,10 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-namespace CodeGenerator.Test.Extensions
+﻿namespace DotNetScaffolder.Test.Extensions
 {
     using System.Windows.Forms;
 
-    using Common.Logging;
+    using DotNetScaffolder.Core.Extensions;
 
-    using Extensions;
-
-    using global::Extensions;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
     public class NodeExtensionsUnitTest

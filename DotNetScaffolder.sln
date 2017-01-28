@@ -30,23 +30,23 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Drivers", "Drivers", "{25CD
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Common", "Projects\Core\Common\Core.Common.csproj", "{CDACE52C-F991-40B5-80ED-4947A100EC52}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Extensions", "Projects\Core\Extensions\Core.Extensions.csproj", "{F8A24FDB-4BDB-4E74-83F1-D646883BA511}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetScaffolder.Core.Extensions", "Projects\Core\Extensions\DotNetScaffolder.Core.Extensions.csproj", "{F8A24FDB-4BDB-4E74-83F1-D646883BA511}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Components.Common", "Projects\Components\Common\Components.Common.csproj", "{B39709B5-D887-46E1-ACC6-CBD7880E90C5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetScaffolder.Components.Common", "Projects\Components\Common\DotNetScaffolder.Components.Common.csproj", "{B39709B5-D887-46E1-ACC6-CBD7880E90C5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Components.Drivers.DefaultDrivers", "Projects\Components\Drivers\DefaultDrivers\Components.Drivers.DefaultDrivers.csproj", "{58940E23-A83F-40DA-B9D8-84E9AB420BEC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetScaffolder.Components.Drivers.DefaultDrivers", "Projects\Components\Drivers\DefaultDrivers\DotNetScaffolder.Components.Drivers.DefaultDrivers.csproj", "{58940E23-A83F-40DA-B9D8-84E9AB420BEC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Components.NamingConventions.DefaultNamingConventions", "Projects\Components\NamingConventions\DefaultNamingConventions\Components.NamingConventions.DefaultNamingConventions.csproj", "{5F5A03D7-A884-4495-96F4-D6859ECB1489}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetScaffolder.Components.NamingConventions.DefaultNamingConventions", "Projects\Components\NamingConventions\DefaultNamingConventions\DotNetScaffolder.Components.NamingConventions.DefaultNamingConventions.csproj", "{5F5A03D7-A884-4495-96F4-D6859ECB1489}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Components.SourceTypes.DefaultSourceTypes", "Projects\Components\SourceTypes\DefaultSourceTypes\Components.SourceTypes.DefaultSourceTypes.csproj", "{26CC21A6-D23D-4AF5-901F-3DF6E5DDBC3B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes", "Projects\Components\SourceTypes\DefaultSourceTypes\DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.csproj", "{26CC21A6-D23D-4AF5-901F-3DF6E5DDBC3B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapping.MetaData", "Projects\Mapping\MetaData\Mapping.MetaData.csproj", "{3F206474-14C2-4586-B57A-4EDC76795161}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetScaffolder.Mapping.MetaData", "Projects\Mapping\MetaData\DotNetScaffolder.Mapping.MetaData.csproj", "{3F206474-14C2-4586-B57A-4EDC76795161}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotnetCodeGenerator.Presentation.Forms", "Projects\Presentation\Forms\DotnetCodeGenerator.Presentation.Forms.csproj", "{B2949BBE-0C8C-42CC-AEF0-4D9E5082D7EA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetScaffolder.Presentation.Forms", "Projects\Presentation\Forms\DotNetScaffolder.Presentation.Forms.csproj", "{B2949BBE-0C8C-42CC-AEF0-4D9E5082D7EA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotnetCodeGenerator.Presentation.Forms.Controls", "Projects\Presentation\Forms.Controls\DotnetCodeGenerator.Presentation.Forms.Controls.csproj", "{5A674854-AFD7-40C8-8445-4BFC7F49AAD3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetScaffolder.Presentation.Forms.Controls", "Projects\Presentation\Forms.Controls\DotNetScaffolder.Presentation.Forms.Controls.csproj", "{5A674854-AFD7-40C8-8445-4BFC7F49AAD3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RapidMVC.CodeGenerator.Test", "Tests\CodeGenerator\RapidMVC.CodeGenerator.Test.csproj", "{96B8860E-531C-405F-9ABF-2FAE4E8F2759}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetScaffolder.Test", "Tests\CodeGenerator\DotNetScaffolder.Test.csproj", "{96B8860E-531C-405F-9ABF-2FAE4E8F2759}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

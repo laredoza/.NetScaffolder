@@ -7,14 +7,16 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace CodeGenerator.Test.Project.ApplicationService
+namespace DotNetScaffolder.Test.Project.ApplicationService
 {
     #region Using
 
-    using MetaData.Domain;
-    using MetaData.Enum;
+    using DotNetScaffolder.Mapping.MetaData.Domain;
+    using DotNetScaffolder.Mapping.MetaData.Enum;
+    using DotNetScaffolder.Mapping.MetaData.Project;
+    using DotNetScaffolder.Mapping.MetaData.Project.ApplicationServices;
+
     using MetaData.Project;
-    using MetaData.Project.ApplicationServices;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 

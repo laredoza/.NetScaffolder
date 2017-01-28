@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{58940E23-A83F-40DA-B9D8-84E9AB420BEC}</ProjectGuid>
+    <ProjectGuid>{F8A24FDB-4BDB-4E74-83F1-D646883BA511}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Contractors.Drivers.DefaultDrivers</RootNamespace>
-    <AssemblyName>Contractors.Drivers.DefaultDrivers</AssemblyName>
+    <RootNamespace>DotNetScaffolder.Core.Extensions</RootNamespace>
+    <AssemblyName>DotNetScaffolder.Core.Extensions</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
@@ -35,16 +35,16 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Common.Logging, Version=3.3.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\.nuget\NuGetPackages\Common.Logging.3.3.1\lib\net40\Common.Logging.dll</HintPath>
+      <HintPath>..\..\..\.nuget\NuGetPackages\Common.Logging.3.3.1\lib\net40\Common.Logging.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Common.Logging.Core, Version=3.3.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\.nuget\NuGetPackages\Common.Logging.Core.3.3.1\lib\net40\Common.Logging.Core.dll</HintPath>
+      <HintPath>..\..\..\.nuget\NuGetPackages\Common.Logging.Core.3.3.1\lib\net40\Common.Logging.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -53,14 +53,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EFSqlServerDriver.cs" />
+    <Compile Include="NodeExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Common\Components.Common.csproj">
-      <Project>{b39709b5-d887-46e1-acc6-cbd7880e90c5}</Project>
-      <Name>Components.Common</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

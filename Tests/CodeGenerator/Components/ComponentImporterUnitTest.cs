@@ -7,11 +7,11 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace CodeGenerator.Test.Components
+namespace DotNetScaffolder.Test.Components
 {
     #region Using
 
-    using global::Components.Common;
+    using DotNetScaffolder.Components.Common;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 

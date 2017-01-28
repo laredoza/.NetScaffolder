@@ -1,8 +1,7 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-namespace CodeGenerator.Test.Components.Drivers
+﻿namespace DotNetScaffolder.Test.Components.Drivers
 {
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
     [TestClass]
     public class EFSqlServerDriverUnitTest
     {

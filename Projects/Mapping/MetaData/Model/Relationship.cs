@@ -1,13 +1,9 @@
-﻿using MetaData.Enum;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Serialization;
-
-namespace MetaData.Model
+﻿namespace DotNetScaffolder.Mapping.MetaData.Model
 {
+    using System.Xml.Serialization;
+
+    using DotNetScaffolder.Mapping.MetaData.Enum;
+
     public class Relationship
     {
         #region Privates
@@ -31,8 +27,8 @@ namespace MetaData.Model
         [XmlAttribute("Render")]
         public bool Render
         {
-            get { return _render; }
-            set { _render = value; }
+            get { return this._render; }
+            set { this._render = value; }
         }
         [XmlAttribute("UserRelationship")]
         public bool UserRelationship { get; set; }
@@ -104,9 +100,9 @@ namespace MetaData.Model
 
         #region Relational in class structure
 
-        public string RelationshipTypeString { get { return RelationShip.ToString(); } }
+        public string RelationshipTypeString { get { return this.RelationShip.ToString(); } }
 
-        public string RelatedTableQualifiedName { get { return RelatedTable != null ? RelatedTable.QualifiedTableName : null; } }
+        public string RelatedTableQualifiedName { get { return this.RelatedTable != null ? this.RelatedTable.QualifiedTableName : null; } }
 
         [XmlIgnore]
         public Table RelatedTable { get; set; }

@@ -1,12 +1,11 @@
-﻿using MetaData.Enum;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MetaData.Project
+﻿namespace DotNetScaffolder.Mapping.MetaData.Project
 {
+    using System.Collections.Generic;
+
+    using DotNetScaffolder.Mapping.MetaData.Enum;
+
+    using global::MetaData.Project;
+
     public class Domain
     {
         public string Name { get; set; }

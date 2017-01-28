@@ -7,11 +7,12 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Extensions
+namespace DotNetScaffolder.Core.Extensions
 {
     #region Using
 
     using System.Windows.Forms;
+
     using Common.Logging;
 
     #endregion

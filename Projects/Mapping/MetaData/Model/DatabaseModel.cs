@@ -1,14 +1,9 @@
-﻿using MetaData.Project;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Serialization;
-
-namespace MetaData.Model
+﻿namespace DotNetScaffolder.Mapping.MetaData.Model
 {
-    using Domain = MetaData.Project.Domain;
+    using System.Collections.Generic;
+    using System.Xml.Serialization;
+
+    using Domain = global::DotNetScaffolder.Mapping.MetaData.Project.Domain;
 
     public class DatabaseModel
     {

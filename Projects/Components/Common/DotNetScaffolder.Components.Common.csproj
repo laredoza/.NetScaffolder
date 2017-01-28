@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{26CC21A6-D23D-4AF5-901F-3DF6E5DDBC3B}</ProjectGuid>
+    <ProjectGuid>{B39709B5-D887-46E1-ACC6-CBD7880E90C5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Contractors.SourceTypes.DefaultSourceTypes</RootNamespace>
-    <AssemblyName>Contractors.SourceTypes.DefaultSourceTypes</AssemblyName>
+    <RootNamespace>DotNetScaffolder.Components.Common</RootNamespace>
+    <AssemblyName>DotNetScaffolder.Components.Common</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
@@ -35,11 +35,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Common.Logging, Version=3.3.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\.nuget\NuGetPackages\Common.Logging.3.3.1\lib\net40\Common.Logging.dll</HintPath>
+      <HintPath>..\..\..\.nuget\NuGetPackages\Common.Logging.3.3.1\lib\net40\Common.Logging.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Common.Logging.Core, Version=3.3.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\.nuget\NuGetPackages\Common.Logging.Core.3.3.1\lib\net40\Common.Logging.Core.dll</HintPath>
+      <HintPath>..\..\..\.nuget\NuGetPackages\Common.Logging.Core.3.3.1\lib\net40\Common.Logging.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -53,17 +53,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EdmxSourceType.cs" />
+    <Compile Include="ComponentImporter.cs" />
+    <Compile Include="Contract\IDriver.cs" />
+    <Compile Include="Contract\INamingConvention.cs" />
+    <Compile Include="Contract\ISourceType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Mapping\MetaData\Mapping.MetaData.csproj">
+    <ProjectReference Include="..\..\Mapping\MetaData\DotNetScaffolder.Mapping.MetaData.csproj">
       <Project>{3f206474-14c2-4586-b57a-4edc76795161}</Project>
-      <Name>Mapping.MetaData</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Common\Components.Common.csproj">
-      <Project>{b39709b5-d887-46e1-acc6-cbd7880e90c5}</Project>
-      <Name>Components.Common</Name>
+      <Name>DotNetScaffolder.Mapping.MetaData</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

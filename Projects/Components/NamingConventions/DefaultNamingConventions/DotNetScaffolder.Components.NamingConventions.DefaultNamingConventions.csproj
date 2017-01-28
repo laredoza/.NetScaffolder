@@ -7,8 +7,8 @@
     <ProjectGuid>{5F5A03D7-A884-4495-96F4-D6859ECB1489}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Contractors.NamingConventions.DefaultNamingConventions</RootNamespace>
-    <AssemblyName>Contractors.NamingConventions.DefaultNamingConventions</AssemblyName>
+    <RootNamespace>DotNetScaffolder.Components.NamingConventions.DefaultNamingConventions</RootNamespace>
+    <AssemblyName>DotNetScaffolder.Components.NamingConventions.DefaultNamingConventions</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
@@ -62,9 +62,9 @@
       <Project>{cdace52c-f991-40b5-80ed-4947a100ec52}</Project>
       <Name>Core.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Common\Components.Common.csproj">
+    <ProjectReference Include="..\..\Common\DotNetScaffolder.Components.Common.csproj">
       <Project>{b39709b5-d887-46e1-acc6-cbd7880e90c5}</Project>
-      <Name>Components.Common</Name>
+      <Name>DotNetScaffolder.Components.Common</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

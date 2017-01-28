@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace MetaData
 {
+    /// <summary>
+    /// The driver type.
+    /// </summary>
     public class DriverType
     {
         public Guid Id { get; set; }

@@ -4,19 +4,21 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{5A674854-AFD7-40C8-8445-4BFC7F49AAD3}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{B2949BBE-0C8C-42CC-AEF0-4D9E5082D7EA}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DotnetCodeGenerator.Presentation.Forms.Controls</RootNamespace>
-    <AssemblyName>DotnetCodeGenerator.Presentation.Forms.Controls</AssemblyName>
+    <RootNamespace>DotNetScaffolder.Presentation.Forms</RootNamespace>
+    <AssemblyName>DotNetScaffolder.Presentation.Forms</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -26,6 +28,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -42,70 +45,78 @@
       <HintPath>..\..\..\.nuget\NuGetPackages\Common.Logging.Core.3.3.1\lib\net40\Common.Logging.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\Solution\.nuget\NuGetPackages\NLog.4.4.1\lib\net45\NLog.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ManageCollectionsTreeViewUserControl.cs">
-      <SubType>UserControl</SubType>
+    <Compile Include="DomainTable.cs">
+      <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ManageCollectionsTreeViewUserControl.Designer.cs">
-      <DependentUpon>ManageCollectionsTreeViewUserControl.cs</DependentUpon>
+    <Compile Include="DomainTable.Designer.cs">
+      <DependentUpon>DomainTable.cs</DependentUpon>
     </Compile>
-    <Compile Include="ManageCollectionUserControl.cs">
-      <SubType>UserControl</SubType>
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ManageCollectionUserControl.Designer.cs">
-      <DependentUpon>ManageCollectionUserControl.cs</DependentUpon>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="ProjectDetailsUserControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="ProjectDetailsUserControl.Designer.cs">
-      <DependentUpon>ProjectDetailsUserControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ProjectDomainDetailsUserControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="ProjectDomainDetailsUserControl.Designer.cs">
-      <DependentUpon>ProjectDomainDetailsUserControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ProjectDomainUserControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="ProjectDomainUserControl.Designer.cs">
-      <DependentUpon>ProjectDomainUserControl.cs</DependentUpon>
-    </Compile>
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="ManageCollectionsTreeViewUserControl.resx">
-      <DependentUpon>ManageCollectionsTreeViewUserControl.cs</DependentUpon>
+    <EmbeddedResource Include="DomainTable.resx">
+      <DependentUpon>DomainTable.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ManageCollectionUserControl.resx">
-      <DependentUpon>ManageCollectionUserControl.cs</DependentUpon>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ProjectDetailsUserControl.resx">
-      <DependentUpon>ProjectDetailsUserControl.cs</DependentUpon>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="ProjectDomainDetailsUserControl.resx">
-      <DependentUpon>ProjectDomainDetailsUserControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ProjectDomainUserControl.resx">
-      <DependentUpon>ProjectDomainUserControl.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Content Include="NLog.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="NLog.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Forms.Controls\DotNetScaffolder.Presentation.Forms.Controls.csproj">
+      <Project>{5a674854-afd7-40c8-8445-4bfc7f49aad3}</Project>
+      <Name>DotNetScaffolder.Presentation.Forms.Controls</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

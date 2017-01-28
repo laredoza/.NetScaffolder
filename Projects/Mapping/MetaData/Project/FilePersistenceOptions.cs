@@ -7,7 +7,7 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace MetaData.Project
+namespace DotNetScaffolder.Mapping.MetaData.Project
 {
     /// <summary>
     /// The file persistance options.

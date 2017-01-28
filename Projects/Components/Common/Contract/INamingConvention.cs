@@ -7,7 +7,7 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Components.Common.Contract
+namespace DotNetScaffolder.Components.Common.Contract
 {
     /// <summary>
     /// The NamingConvention interface. This is used to apply a namimg convention 

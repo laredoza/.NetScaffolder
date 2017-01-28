@@ -7,12 +7,14 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace CodeGenerator.Test.Project.ApplicationService
+namespace DotNetScaffolder.Test.Project.ApplicationService
 {
     #region Using
 
+    using DotNetScaffolder.Mapping.MetaData.Project;
+    using DotNetScaffolder.Mapping.MetaData.Project.ApplicationServices;
+
     using MetaData.Project;
-    using MetaData.Project.ApplicationServices;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 

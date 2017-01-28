@@ -6,8 +6,8 @@
     <ProjectGuid>{96B8860E-531C-405F-9ABF-2FAE4E8F2759}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>RapidMVC.CodeGenerator.Test</RootNamespace>
-    <AssemblyName>RapidMVC.CodeGenerator.Test</AssemblyName>
+    <RootNamespace>DotNetScaffolder.Test</RootNamespace>
+    <AssemblyName>DotNetScaffolder.Test</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -324,33 +324,33 @@
     <Content Include="DataSource\nFrallApps\rel\941A9BDF-635F1C28F519\table\seg_0\F9926271-CEEF-8848-3B2F-272744958D17.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Projects\Components\Common\Components.Common.csproj">
+    <ProjectReference Include="..\..\Projects\Components\Common\DotNetScaffolder.Components.Common.csproj">
       <Project>{b39709b5-d887-46e1-acc6-cbd7880e90c5}</Project>
-      <Name>Components.Common</Name>
+      <Name>DotNetScaffolder.Components.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Projects\Components\Drivers\DefaultDrivers\Components.Drivers.DefaultDrivers.csproj">
+    <ProjectReference Include="..\..\Projects\Components\Drivers\DefaultDrivers\DotNetScaffolder.Components.Drivers.DefaultDrivers.csproj">
       <Project>{58940e23-a83f-40da-b9d8-84e9ab420bec}</Project>
-      <Name>Components.Drivers.DefaultDrivers</Name>
+      <Name>DotNetScaffolder.Components.Drivers.DefaultDrivers</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Projects\Components\NamingConventions\DefaultNamingConventions\Components.NamingConventions.DefaultNamingConventions.csproj">
+    <ProjectReference Include="..\..\Projects\Components\NamingConventions\DefaultNamingConventions\DotNetScaffolder.Components.NamingConventions.DefaultNamingConventions.csproj">
       <Project>{5f5a03d7-a884-4495-96f4-d6859ecb1489}</Project>
-      <Name>Components.NamingConventions.DefaultNamingConventions</Name>
+      <Name>DotNetScaffolder.Components.NamingConventions.DefaultNamingConventions</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Projects\Components\SourceTypes\DefaultSourceTypes\Components.SourceTypes.DefaultSourceTypes.csproj">
+    <ProjectReference Include="..\..\Projects\Components\SourceTypes\DefaultSourceTypes\DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.csproj">
       <Project>{26cc21a6-d23d-4af5-901f-3df6e5ddbc3b}</Project>
-      <Name>Components.SourceTypes.DefaultSourceTypes</Name>
+      <Name>DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Projects\Core\Common\Core.Common.csproj">
       <Project>{cdace52c-f991-40b5-80ed-4947a100ec52}</Project>
       <Name>Core.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Projects\Core\Extensions\Core.Extensions.csproj">
+    <ProjectReference Include="..\..\Projects\Core\Extensions\DotNetScaffolder.Core.Extensions.csproj">
       <Project>{f8a24fdb-4bdb-4e74-83f1-d646883ba511}</Project>
-      <Name>Core.Extensions</Name>
+      <Name>DotNetScaffolder.Core.Extensions</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Projects\Mapping\MetaData\Mapping.MetaData.csproj">
+    <ProjectReference Include="..\..\Projects\Mapping\MetaData\DotNetScaffolder.Mapping.MetaData.csproj">
       <Project>{3f206474-14c2-4586-b57a-4edc76795161}</Project>
-      <Name>Mapping.MetaData</Name>
+      <Name>DotNetScaffolder.Mapping.MetaData</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

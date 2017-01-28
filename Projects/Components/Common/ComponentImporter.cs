@@ -1,4 +1,4 @@
-﻿namespace Components.Common
+﻿namespace DotNetScaffolder.Components.Common
 {
     using System;
     using System.Collections.Generic;
@@ -7,7 +7,7 @@
     using System.IO;
     using System.Reflection;
 
-    using Components.Common.Contract;
+    using DotNetScaffolder.Components.Common.Contract;
 
     using global::Common.Logging;
 

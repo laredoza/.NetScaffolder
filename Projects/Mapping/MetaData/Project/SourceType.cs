@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace MetaData.Project
 {
+    /// <summary>
+    /// The source type.
+    /// </summary>
     public class SourceType
     {
         public string Name { get; set; }

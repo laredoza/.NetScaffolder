@@ -7,7 +7,7 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Contractors.SourceTypes.DefaultSourceTypes
+namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes
 {
     #region Using
 
@@ -15,9 +15,8 @@ namespace Contractors.SourceTypes.DefaultSourceTypes
     using System.Collections.Generic;
     using System.ComponentModel.Composition;
 
-    using Components.Common.Contract;
-
-    using MetaData.Model;
+    using DotNetScaffolder.Components.Common.Contract;
+    using DotNetScaffolder.Mapping.MetaData.Model;
 
     #endregion
 

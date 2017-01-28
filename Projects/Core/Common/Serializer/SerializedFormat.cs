@@ -7,7 +7,7 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Common.Serializer
+namespace DotNetScaffolder.Core.Common.Serializer
 {
     /// <summary>
     ///     Serialization format types.

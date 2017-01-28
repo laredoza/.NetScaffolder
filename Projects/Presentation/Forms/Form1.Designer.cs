@@ -1,5 +1,7 @@
-﻿namespace Presentation.UI
+﻿namespace DotNetScaffolder.Presentation.Forms
 {
+    using DotNetScaffolder.Presentation.Forms.Controls;
+
     partial class Form1
     {
         /// <summary>
@@ -13,9 +15,9 @@
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
-            if (disposing && (components != null))
+            if (disposing && (this.components != null))
             {
-                components.Dispose();
+                this.components.Dispose();
             }
             base.Dispose(disposing);
         }
@@ -90,9 +92,9 @@
             this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.button6 = new System.Windows.Forms.Button();
-            this.projectDetailsUserControl1 = new DotnetCodeGenerator.Presentation.Forms.Controls.ProjectDetailsUserControl();
-            this.projectDomainUserControl1 = new DotnetCodeGenerator.Presentation.Forms.Controls.ProjectDomainUserControl();
-            this.projectDomainDetailsUserControl1 = new DotnetCodeGenerator.Presentation.Forms.Controls.ProjectDomainDetailsUserControl();
+            this.projectDetailsUserControl1 = new ProjectDetailsUserControl();
+            this.projectDomainUserControl1 = new ProjectDomainUserControl();
+            this.projectDomainDetailsUserControl1 = new ProjectDomainDetailsUserControl();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -666,9 +668,9 @@
         private System.Windows.Forms.ComboBox comboBox12;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.GroupBox groupBox1;
-        private DotnetCodeGenerator.Presentation.Forms.Controls.ProjectDetailsUserControl projectDetailsUserControl1;
-        private DotnetCodeGenerator.Presentation.Forms.Controls.ProjectDomainUserControl projectDomainUserControl1;
-        private DotnetCodeGenerator.Presentation.Forms.Controls.ProjectDomainDetailsUserControl projectDomainDetailsUserControl1;
+        private ProjectDetailsUserControl projectDetailsUserControl1;
+        private ProjectDomainUserControl projectDomainUserControl1;
+        private ProjectDomainDetailsUserControl projectDomainDetailsUserControl1;
     }
 }
 

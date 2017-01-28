@@ -7,7 +7,7 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace MetaData.Enum
+namespace DotNetScaffolder.Mapping.MetaData.Enum
 {
     /// <summary>
     ///     This enum specifies in what directory structure generation occurs

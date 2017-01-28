@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MetaData.Enum
+﻿namespace DotNetScaffolder.Mapping.MetaData.Enum
 {
+    /// <summary>
+    /// The relationship type.
+    /// </summary>
     public enum RelationshipType
     {
         Parent,

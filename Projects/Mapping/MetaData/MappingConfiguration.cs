@@ -1,15 +1,13 @@
-﻿using MetaData.Enum;
-using MetaData.Model;
-using MetaData.Project;
-using MetaData.Project.Packages;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MetaData
+﻿namespace DotNetScaffolder.Mapping.MetaData
 {
+    using System;
+    using System.Collections.Generic;
+
+    using DotNetScaffolder.Mapping.MetaData.Enum;
+    using DotNetScaffolder.Mapping.MetaData.Model;
+    using DotNetScaffolder.Mapping.MetaData.Project;
+    using DotNetScaffolder.Mapping.MetaData.Project.Packages;
+
     public class MappingConfiguration
     {
         public Guid Id { get; set; }
@@ -27,7 +25,7 @@ namespace MetaData
         public MappingConfiguration()
         {
             this.Domains = new List<Project.Domain>();
-            this.Drivers = Driver.Load(Id);
+            this.Drivers = Driver.Load(this.Id);
             this.Packages = new Packages();
             this.Packages.Load();
             this.DataTypes = DataType.Load();

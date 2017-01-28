@@ -6,6 +6,8 @@ using System.Windows.Forms;
 
 namespace Presentation.UI
 {
+    using DotNetScaffolder.Presentation.Forms;
+
     static class Program
     {
         /// <summary>

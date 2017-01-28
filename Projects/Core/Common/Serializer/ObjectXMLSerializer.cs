@@ -7,7 +7,7 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Common.Serializer
+namespace DotNetScaffolder.Core.Common.Serializer
 {
     #region Using
 
@@ -17,7 +17,7 @@ namespace Common.Serializer
     using System.Runtime.Serialization.Formatters.Binary;
     using System.Xml.Serialization;
 
-    using Common.Logging;
+    using global::Common.Logging;
 
     #endregion
 

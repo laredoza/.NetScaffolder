@@ -1,12 +1,8 @@
-﻿using MetaData.Project.Packages;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MetaData
+﻿namespace DotNetScaffolder.Mapping.MetaData
 {
+    using System;
+    using System.Collections.Generic;
+
     public class Hierarchy<T>
     {
         public Guid Id { get; set; }

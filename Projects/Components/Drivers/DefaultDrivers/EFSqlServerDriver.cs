@@ -7,13 +7,13 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Contractors.Drivers.DefaultDrivers
+namespace DotNetScaffolder.Components.Drivers.DefaultDrivers
 {
     #region Using
 
     using System.ComponentModel.Composition;
 
-    using Components.Common.Contract;
+    using DotNetScaffolder.Components.Common.Contract;
 
     #endregion
 

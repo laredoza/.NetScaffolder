@@ -7,8 +7,11 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace MetaData.Project.ApplicationServices
+namespace DotNetScaffolder.Mapping.MetaData.Project.ApplicationServices
 {
+    using global::MetaData;
+    using global::MetaData.Project;
+
     /// <summary>
     /// The ProjectDefinitionApplicationService interface.
     /// This interface is used to load and save project data.

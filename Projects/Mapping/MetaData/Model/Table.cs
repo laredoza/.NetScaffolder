@@ -1,14 +1,11 @@
-﻿using MetaData.Enum;
-using MetaData.Project;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Serialization;
-
-namespace MetaData.Model
+﻿namespace DotNetScaffolder.Mapping.MetaData.Model
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Xml.Serialization;
+
+    using DotNetScaffolder.Mapping.MetaData.Enum;
+
     public class Table
     {
         public DatabaseGeneratedKeyType DatabaseGeneratedKeyType { get; set; }
@@ -34,8 +31,8 @@ namespace MetaData.Model
         [XmlAttribute("Description")]
         public string Description
         {
-            get { return _description; }
-            set { _description = value; }
+            get { return this._description; }
+            set { this._description = value; }
         }
 
         #endregion // Serializable Properties
@@ -45,19 +42,19 @@ namespace MetaData.Model
         [XmlIgnore]
         public List<Column> ColumnsToRender
         {
-            get { return Columns.Where(u => u.RenderToEntity).ToList(); }
+            get { return this.Columns.Where(u => u.RenderToEntity).ToList(); }
         }
 
         [XmlIgnore]
         public List<Column> ColumnsToRenderToView
         {
-            get { return Columns.Where(u => u.RenderToView).OrderBy(u => u.RenderToViewOrder).ToList(); }
+            get { return this.Columns.Where(u => u.RenderToView).OrderBy(u => u.RenderToViewOrder).ToList(); }
         }
 
         [XmlIgnore]
         public string QualifiedTableName
         {
-            get { return string.IsNullOrEmpty(SchemaName) ? TableName : string.Format("{0}.{1}", SchemaName, TableName); }
+            get { return string.IsNullOrEmpty(this.SchemaName) ? this.TableName : string.Format("{0}.{1}", this.SchemaName, this.TableName); }
         }
 
         #region Relational in class structure
@@ -71,7 +68,7 @@ namespace MetaData.Model
         [XmlIgnore]
         public List<Relationship> ChildRelationships
         {
-            get { return RelationShips.Where(u => u.RelationShip == RelationshipType.Child && u.Render).ToList(); }
+            get { return this.RelationShips.Where(u => u.RelationShip == RelationshipType.Child && u.Render).ToList(); }
         }
 
         [XmlIgnore]
@@ -80,7 +77,7 @@ namespace MetaData.Model
             get
             {
                 var retval = new List<Relationship>();
-                foreach (var rel in RelationShips.Where(u => u.RelationShip == RelationshipType.Child && u.Render))
+                foreach (var rel in this.RelationShips.Where(u => u.RelationShip == RelationshipType.Child && u.Render))
                 {
                     var exists = retval.FirstOrDefault(u => u.RelatedTable == rel.RelatedTable);
                     if (exists == null)
@@ -93,7 +90,7 @@ namespace MetaData.Model
         [XmlIgnore]
         public List<Relationship> ParentRelationships
         {
-            get { return RelationShips.Where(u => u.RelationShip == RelationshipType.Parent && u.Render).ToList(); }
+            get { return this.RelationShips.Where(u => u.RelationShip == RelationshipType.Parent && u.Render).ToList(); }
         }
 
         //[XmlIgnore]

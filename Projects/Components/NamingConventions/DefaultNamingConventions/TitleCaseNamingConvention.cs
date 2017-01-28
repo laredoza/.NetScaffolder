@@ -7,14 +7,14 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Contractors.NamingConventions.DefaultNamingConventions
+namespace DotNetScaffolder.Components.NamingConventions.DefaultNamingConventions
 {
     #region Using
 
     using System;
     using System.ComponentModel.Composition;
 
-    using Components.Common.Contract;
+    using DotNetScaffolder.Components.Common.Contract;
 
     #endregion
 

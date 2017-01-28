@@ -7,13 +7,14 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace CodeGenerator.Test.Core.Common
+namespace DotNetScaffolder.Test.Core.Common
 {
     #region Using
 
     using System.Collections.Generic;
 
-    using global::Common.Serializer;
+    using DotNetScaffolder.Core.Common.Serializer;
+    using DotNetScaffolder.Mapping.MetaData.Project;
 
     using MetaData.Project;
 

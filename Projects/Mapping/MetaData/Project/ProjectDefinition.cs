@@ -8,7 +8,7 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace MetaData.Project
+namespace DotNetScaffolder.Mapping.MetaData.Project
 {
     #region Using
 
@@ -17,8 +17,10 @@ namespace MetaData.Project
 
     using Common.Logging;
 
-    using MetaData.Domain;
-    using MetaData.Enum;
+    using DotNetScaffolder.Mapping.MetaData.Domain;
+    using DotNetScaffolder.Mapping.MetaData.Enum;
+
+    using global::MetaData;
 
     #endregion
 

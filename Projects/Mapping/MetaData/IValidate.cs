@@ -7,7 +7,7 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace MetaData
+namespace DotNetScaffolder.Mapping.MetaData
 {
     #region Using
 

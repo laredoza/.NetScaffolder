@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Serialization;
-
-namespace MetaData.Model
+﻿namespace DotNetScaffolder.Mapping.MetaData.Model
 {
+    using System.ComponentModel;
+    using System.Xml.Serialization;
+
     public class Column : INotifyPropertyChanged
     {
 
@@ -54,15 +49,15 @@ namespace MetaData.Model
         [XmlAttribute("Description")]
         public string Description
         {
-            get { return _description; }
-            set { _description = value; }
+            get { return this._description; }
+            set { this._description = value; }
         }
 
         [XmlAttribute("GridColumnWidth")]
         public int GridColumnWidth
         {
-            get { return _gridColumnWidth; }
-            set { _gridColumnWidth = value; }
+            get { return this._gridColumnWidth; }
+            set { this._gridColumnWidth = value; }
         }
 
         [XmlAttribute("DefaultFieldValue")]
@@ -71,22 +66,22 @@ namespace MetaData.Model
         [XmlAttribute("RenderToEntity")]
         public bool RenderToEntity
         {
-            get { return _renderToEntity; }
+            get { return this._renderToEntity; }
             set
             {
-                _renderToEntity = value;
-                if (!_renderToEntity)
-                    _renderToView = false;
+                this._renderToEntity = value;
+                if (!this._renderToEntity)
+                    this._renderToView = false;
             }
         }
 
         [XmlAttribute("RenderToView")]
         public bool RenderToView
         {
-            get { return _renderToView; }
+            get { return this._renderToView; }
             set
             {
-                _renderToView = value;
+                this._renderToView = value;
                 // RaisePropertyChanged();
             }
         }
@@ -94,8 +89,8 @@ namespace MetaData.Model
         [XmlAttribute("RenderToViewOrder")]
         public int RenderToViewOrder
         {
-            get { return _renderToViewOrder; }
-            set { _renderToViewOrder = value; }
+            get { return this._renderToViewOrder; }
+            set { this._renderToViewOrder = value; }
         }
 
         
@@ -106,7 +101,7 @@ namespace MetaData.Model
 
         #region Non-serializable Properties
 
-        public string ColumnNameWithKeyIndicator { get { return string.Format("{0} {1}", IsPrimaryKey ? "* " : "   ", ColumnName); } }
+        public string ColumnNameWithKeyIndicator { get { return string.Format("{0} {1}", this.IsPrimaryKey ? "* " : "   ", this.ColumnName); } }
 
         #region Relational in class structure
 
@@ -138,7 +133,7 @@ namespace MetaData.Model
 
         private bool Nullable
         {
-            get { return (!IsRequired) && (!IsPrimaryKey); }
+            get { return (!this.IsRequired) && (!this.IsPrimaryKey); }
         }
         //private string NullableDataTypeString
         //{

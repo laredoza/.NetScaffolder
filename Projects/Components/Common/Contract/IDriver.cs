@@ -1,7 +1,5 @@
-﻿namespace Components.Common.Contract
+﻿namespace DotNetScaffolder.Components.Common.Contract
 {
-    using System;
-
     public interface IDriver
     {
     }

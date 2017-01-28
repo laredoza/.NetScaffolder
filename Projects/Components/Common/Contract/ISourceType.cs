@@ -8,13 +8,13 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Components.Common.Contract
+namespace DotNetScaffolder.Components.Common.Contract
 {
     #region Using
 
     using System.Collections.Generic;
 
-    using MetaData.Model;
+    using DotNetScaffolder.Mapping.MetaData.Model;
 
     #endregion
 

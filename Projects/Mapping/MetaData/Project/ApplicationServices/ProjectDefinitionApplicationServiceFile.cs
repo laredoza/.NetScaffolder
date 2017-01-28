@@ -7,7 +7,7 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace MetaData.Project.ApplicationServices
+namespace DotNetScaffolder.Mapping.MetaData.Project.ApplicationServices
 {
     #region Using
 
@@ -15,7 +15,10 @@ namespace MetaData.Project.ApplicationServices
     using System.Collections.Generic;
 
     using Common.Logging;
-    using Common.Serializer;
+
+    using DotNetScaffolder.Core.Common.Serializer;
+
+    using global::MetaData.Project;
 
     #endregion
 
