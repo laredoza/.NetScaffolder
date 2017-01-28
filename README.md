@@ -10,6 +10,7 @@ The aim of this project will be to quickly generate a base project from a data m
 - MSSql Metadata
 - Oracle Metadata
 - Oracle Data Modeller
+- Extendable Custom sources
 
 This imported data will then be saved in a xml file (.mdl). All generation will then be based on this file.
 
