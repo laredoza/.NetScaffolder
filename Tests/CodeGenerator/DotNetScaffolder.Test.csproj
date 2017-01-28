@@ -90,6 +90,7 @@
     </Compile>
     <Compile Include="EDMXImporterUnitTest.cs" />
     <Compile Include="Extensions\NodeExtensionsUnitTest.cs" />
+    <Compile Include="Presentation\Controls\ProjectDetailsUserControlUnitTest.cs" />
     <Compile Include="Project\ApplicationService\ProjectDefinitionApplicationServiceFileUnitTest.cs" />
     <Compile Include="Project\ApplicationService\ProjectDefinitionApplicationServiceUnitTest.cs" />
     <Compile Include="Project\ProjectDefinitionUnitTest.cs" />
@@ -351,6 +352,10 @@
     <ProjectReference Include="..\..\Projects\Mapping\MetaData\DotNetScaffolder.Mapping.MetaData.csproj">
       <Project>{3f206474-14c2-4586-b57a-4edc76795161}</Project>
       <Name>DotNetScaffolder.Mapping.MetaData</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Projects\Presentation\Forms.Controls\DotNetScaffolder.Presentation.Forms.Controls.csproj">
+      <Project>{5A674854-AFD7-40C8-8445-4BFC7F49AAD3}</Project>
+      <Name>DotNetScaffolder.Presentation.Forms.Controls</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

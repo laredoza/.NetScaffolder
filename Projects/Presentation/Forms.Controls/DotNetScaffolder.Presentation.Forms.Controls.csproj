@@ -60,12 +60,6 @@
     <Compile Include="ManageCollectionsTreeViewUserControl.Designer.cs">
       <DependentUpon>ManageCollectionsTreeViewUserControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="ManageCollectionUserControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="ManageCollectionUserControl.Designer.cs">
-      <DependentUpon>ManageCollectionUserControl.cs</DependentUpon>
-    </Compile>
     <Compile Include="ProjectDetailsUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -91,9 +85,6 @@
     <EmbeddedResource Include="ManageCollectionsTreeViewUserControl.resx">
       <DependentUpon>ManageCollectionsTreeViewUserControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ManageCollectionUserControl.resx">
-      <DependentUpon>ManageCollectionUserControl.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ProjectDetailsUserControl.resx">
       <DependentUpon>ProjectDetailsUserControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -106,6 +97,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Mapping\MetaData\DotNetScaffolder.Mapping.MetaData.csproj">
+      <Project>{3F206474-14C2-4586-B57A-4EDC76795161}</Project>
+      <Name>DotNetScaffolder.Mapping.MetaData</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

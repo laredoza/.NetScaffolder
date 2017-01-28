@@ -31,7 +31,7 @@
             this.button7 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.DomainsListBox = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // button7
@@ -61,15 +61,15 @@
             this.button2.Text = "Add";
             this.button2.UseVisualStyleBackColor = true;
             // 
-            // listBox1
+            // DomainsListBox
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Items.AddRange(new object[] {
+            this.DomainsListBox.FormattingEnabled = true;
+            this.DomainsListBox.Items.AddRange(new object[] {
             "Security"});
-            this.listBox1.Location = new System.Drawing.Point(3, 3);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(233, 95);
-            this.listBox1.TabIndex = 20;
+            this.DomainsListBox.Location = new System.Drawing.Point(3, 3);
+            this.DomainsListBox.Name = "DomainsListBox";
+            this.DomainsListBox.Size = new System.Drawing.Size(233, 95);
+            this.DomainsListBox.TabIndex = 20;
             // 
             // ProjectDomainUserControl
             // 
@@ -78,7 +78,7 @@
             this.Controls.Add(this.button7);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
-            this.Controls.Add(this.listBox1);
+            this.Controls.Add(this.DomainsListBox);
             this.Name = "ProjectDomainUserControl";
             this.Size = new System.Drawing.Size(324, 106);
             this.ResumeLayout(false);
@@ -90,6 +90,6 @@
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.ListBox DomainsListBox;
     }
 }

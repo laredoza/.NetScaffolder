@@ -28,24 +28,28 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.components = new System.ComponentModel.Container();
+            this.ComboBoxGroupBy = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.TextBoxBaseNamespace = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.TextBoxOutputFolderName = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
-            // comboBox1
+            // ComboBoxGroupBy
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
+            this.ComboBoxGroupBy.FormattingEnabled = true;
+            this.ComboBoxGroupBy.Items.AddRange(new object[] {
             "Domain",
             "Layer"});
-            this.comboBox1.Location = new System.Drawing.Point(115, 76);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(238, 21);
-            this.comboBox1.TabIndex = 11;
+            this.ComboBoxGroupBy.Location = new System.Drawing.Point(115, 76);
+            this.ComboBoxGroupBy.Name = "ComboBoxGroupBy";
+            this.ComboBoxGroupBy.Size = new System.Drawing.Size(238, 21);
+            this.ComboBoxGroupBy.TabIndex = 11;
+            this.ComboBoxGroupBy.SelectedIndexChanged += new System.EventHandler(this.ComboBoxGroupBy_SelectedIndexChanged);
             // 
             // label4
             // 
@@ -56,13 +60,13 @@
             this.label4.TabIndex = 10;
             this.label4.Text = "Group By:";
             // 
-            // textBox2
+            // TextBoxBaseNamespace
             // 
-            this.textBox2.Location = new System.Drawing.Point(115, 44);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(238, 20);
-            this.textBox2.TabIndex = 9;
-            this.textBox2.Text = "RapidMVC.Models.Test";
+            this.TextBoxBaseNamespace.Location = new System.Drawing.Point(115, 44);
+            this.TextBoxBaseNamespace.Name = "TextBoxBaseNamespace";
+            this.TextBoxBaseNamespace.Size = new System.Drawing.Size(238, 20);
+            this.TextBoxBaseNamespace.TabIndex = 9;
+            this.TextBoxBaseNamespace.TextChanged += new System.EventHandler(this.TextBoxBaseNamespace_TextChanged);
             // 
             // label3
             // 
@@ -73,13 +77,13 @@
             this.label3.TabIndex = 8;
             this.label3.Text = "Base  Namespace:";
             // 
-            // textBox1
+            // TextBoxOutputFolderName
             // 
-            this.textBox1.Location = new System.Drawing.Point(115, 11);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(238, 20);
-            this.textBox1.TabIndex = 7;
-            this.textBox1.Text = "Models";
+            this.TextBoxOutputFolderName.Location = new System.Drawing.Point(115, 11);
+            this.TextBoxOutputFolderName.Name = "TextBoxOutputFolderName";
+            this.TextBoxOutputFolderName.Size = new System.Drawing.Size(238, 20);
+            this.TextBoxOutputFolderName.TabIndex = 7;
+            this.TextBoxOutputFolderName.TextChanged += new System.EventHandler(this.TextBoxOutputFolderName_TextChanged);
             // 
             // label2
             // 
@@ -90,18 +94,23 @@
             this.label2.TabIndex = 6;
             this.label2.Text = "Output Folder Name:";
             // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
             // ProjectDetailsUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.ComboBoxGroupBy);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.TextBoxBaseNamespace);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.TextBoxOutputFolderName);
             this.Controls.Add(this.label2);
             this.Name = "ProjectDetailsUserControl";
-            this.Size = new System.Drawing.Size(361, 123);
+            this.Size = new System.Drawing.Size(380, 123);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -109,11 +118,12 @@
 
         #endregion
 
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox ComboBoxGroupBy;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox TextBoxBaseNamespace;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox TextBoxOutputFolderName;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }

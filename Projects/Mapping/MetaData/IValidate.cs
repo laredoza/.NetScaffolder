@@ -13,6 +13,8 @@ namespace DotNetScaffolder.Mapping.MetaData
 
     using System.Collections.Generic;
 
+    using DotNetScaffolder.Mapping.MetaData.Enum;
+
     #endregion
 
     /// <summary>
@@ -23,9 +25,9 @@ namespace DotNetScaffolder.Mapping.MetaData
         #region Properties
 
         /// <summary>
-        ///     Gets or sets the validation result.
+        /// Gets or sets the validation result.
         /// </summary>
-        List<string> ValidationResult { get; set; }
+        Dictionary<ValidationType, string> ValidationResult { get; set; }
 
         #endregion
 
@@ -38,7 +40,7 @@ namespace DotNetScaffolder.Mapping.MetaData
         ///     The <see cref="List" />
         ///     Errors returned
         /// </returns>
-        List<string> Validate();
+        Dictionary<ValidationType, string> Validate();
 
         #endregion
     }

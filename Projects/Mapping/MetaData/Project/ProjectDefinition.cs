@@ -83,7 +83,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Project
         ///     Gets or sets the validation result.
         /// </summary>
         [XmlIgnore]
-        public List<string> ValidationResult { get; set; }
+        public Dictionary<ValidationType, string> ValidationResult { get; set; }
 
         /// <summary>
         ///     Gets or sets the version of the project definition.
@@ -101,30 +101,30 @@ namespace DotNetScaffolder.Mapping.MetaData.Project
         ///     The <see cref="List{T}" />
         ///     Errors returned
         /// </returns>
-        public List<string> Validate()
+        public Dictionary<ValidationType, string> Validate()
         {
             Logger.Trace($"Started Validate()");
 
-            this.ValidationResult = new List<string>();
+            this.ValidationResult = new Dictionary<ValidationType, string>();
 
             if (string.IsNullOrEmpty(this.BaseNameSpace))
             {
-                this.ValidationResult.Add("BaseNameSpace may not be empty");
+                this.ValidationResult.Add(ValidationType.ProjectBaseNameSpace, "BaseNameSpace may not be empty");
             }
 
             if (string.IsNullOrEmpty(this.OutputFolder))
             {
-                this.ValidationResult.Add("OutputFolder may not be empty");
+                this.ValidationResult.Add(ValidationType.ProjectOutputFolder, "OutputFolder may not be empty");
             }
 
             if (this.Version == 0)
             {
-                this.ValidationResult.Add("Version may not be 0");
+                this.ValidationResult.Add(ValidationType.ProjectVersion, "Version may not be 0");
             }
 
             if (string.IsNullOrEmpty(this.ModelPath))
             {
-                this.ValidationResult.Add("ModelPath may not be empty");
+                this.ValidationResult.Add(ValidationType.ProjectModelPath, "ModelPath may not be empty");
             }
 
             Logger.Debug($"Number of validation errors: {this.ValidationResult.Count}");
@@ -135,7 +135,10 @@ namespace DotNetScaffolder.Mapping.MetaData.Project
             {
                 if (domainDefinition.Validate().Count > 0)
                 {
-                    this.ValidationResult.AddRange(domainDefinition.ValidationResult);
+                    foreach (var key in domainDefinition.ValidationResult.Keys)
+                    {
+                        this.ValidationResult.Add(key, domainDefinition.ValidationResult[key]);
+                    }
                 }
             }
 

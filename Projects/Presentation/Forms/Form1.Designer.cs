@@ -30,26 +30,26 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Entity Framework 6 (Repository)");
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Entity Framework 6 (Application Service)");
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Entity Framework (EF)", new System.Windows.Forms.TreeNode[] {
-            treeNode1,
-            treeNode2});
-            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Mongo");
-            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Data", new System.Windows.Forms.TreeNode[] {
-            treeNode3,
-            treeNode4});
-            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Packages", new System.Windows.Forms.TreeNode[] {
-            treeNode5});
-            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Context");
-            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Entity Framework (EF)");
-            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Entity", new System.Windows.Forms.TreeNode[] {
-            treeNode8});
-            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Repository");
-            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("Templates", new System.Windows.Forms.TreeNode[] {
-            treeNode7,
-            treeNode9,
-            treeNode10});
+            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("Entity Framework 6 (Repository)");
+            System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("Entity Framework 6 (Application Service)");
+            System.Windows.Forms.TreeNode treeNode14 = new System.Windows.Forms.TreeNode("Entity Framework (EF)", new System.Windows.Forms.TreeNode[] {
+            treeNode12,
+            treeNode13});
+            System.Windows.Forms.TreeNode treeNode15 = new System.Windows.Forms.TreeNode("Mongo");
+            System.Windows.Forms.TreeNode treeNode16 = new System.Windows.Forms.TreeNode("Data", new System.Windows.Forms.TreeNode[] {
+            treeNode14,
+            treeNode15});
+            System.Windows.Forms.TreeNode treeNode17 = new System.Windows.Forms.TreeNode("Packages", new System.Windows.Forms.TreeNode[] {
+            treeNode16});
+            System.Windows.Forms.TreeNode treeNode18 = new System.Windows.Forms.TreeNode("Context");
+            System.Windows.Forms.TreeNode treeNode19 = new System.Windows.Forms.TreeNode("Entity Framework (EF)");
+            System.Windows.Forms.TreeNode treeNode20 = new System.Windows.Forms.TreeNode("Entity", new System.Windows.Forms.TreeNode[] {
+            treeNode19});
+            System.Windows.Forms.TreeNode treeNode21 = new System.Windows.Forms.TreeNode("Repository");
+            System.Windows.Forms.TreeNode treeNode22 = new System.Windows.Forms.TreeNode("Templates", new System.Windows.Forms.TreeNode[] {
+            treeNode18,
+            treeNode20,
+            treeNode21});
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1 = new System.Windows.Forms.TabControl();
@@ -92,9 +92,9 @@
             this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.button6 = new System.Windows.Forms.Button();
-            this.projectDetailsUserControl1 = new ProjectDetailsUserControl();
-            this.projectDomainUserControl1 = new ProjectDomainUserControl();
-            this.projectDomainDetailsUserControl1 = new ProjectDomainDetailsUserControl();
+            this.ProjectDetailsUserControl1 = new DotNetScaffolder.Presentation.Forms.Controls.ProjectDetailsUserControl();
+            this.projectDomainUserControl1 = new DotNetScaffolder.Presentation.Forms.Controls.ProjectDomainUserControl();
+            this.projectDomainDetailsUserControl1 = new DotNetScaffolder.Presentation.Forms.Controls.ProjectDomainDetailsUserControl();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -114,7 +114,7 @@
             this.fileToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(941, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1022, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -135,7 +135,7 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 27);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(941, 422);
+            this.tabControl1.Size = new System.Drawing.Size(1022, 422);
             this.tabControl1.TabIndex = 1;
             // 
             // tabPage1
@@ -145,7 +145,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(933, 396);
+            this.tabPage1.Size = new System.Drawing.Size(1014, 396);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Project";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -154,10 +154,10 @@
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.groupBox1.Controls.Add(this.projectDetailsUserControl1);
+            this.groupBox1.Controls.Add(this.ProjectDetailsUserControl1);
             this.groupBox1.Location = new System.Drawing.Point(6, 7);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(363, 375);
+            this.groupBox1.Size = new System.Drawing.Size(388, 375);
             this.groupBox1.TabIndex = 13;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Project Details";
@@ -169,9 +169,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox2.Controls.Add(this.projectDomainUserControl1);
             this.groupBox2.Controls.Add(this.groupBox3);
-            this.groupBox2.Location = new System.Drawing.Point(378, 7);
+            this.groupBox2.Location = new System.Drawing.Point(400, 7);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(538, 375);
+            this.groupBox2.Size = new System.Drawing.Size(597, 375);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Project Domains";
@@ -196,7 +196,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(933, 396);
+            this.tabPage2.Size = new System.Drawing.Size(1014, 396);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Packages";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -243,20 +243,20 @@
             // 
             this.treeView2.Location = new System.Drawing.Point(18, 29);
             this.treeView2.Name = "treeView2";
-            treeNode1.Name = "Node2";
-            treeNode1.Text = "Entity Framework 6 (Repository)";
-            treeNode2.Name = "Node0";
-            treeNode2.Text = "Entity Framework 6 (Application Service)";
-            treeNode3.Name = "Node3";
-            treeNode3.Text = "Entity Framework (EF)";
-            treeNode4.Name = "Node1";
-            treeNode4.Text = "Mongo";
-            treeNode5.Name = "Node5";
-            treeNode5.Text = "Data";
-            treeNode6.Name = "Node1";
-            treeNode6.Text = "Packages";
+            treeNode12.Name = "Node2";
+            treeNode12.Text = "Entity Framework 6 (Repository)";
+            treeNode13.Name = "Node0";
+            treeNode13.Text = "Entity Framework 6 (Application Service)";
+            treeNode14.Name = "Node3";
+            treeNode14.Text = "Entity Framework (EF)";
+            treeNode15.Name = "Node1";
+            treeNode15.Text = "Mongo";
+            treeNode16.Name = "Node5";
+            treeNode16.Text = "Data";
+            treeNode17.Name = "Node1";
+            treeNode17.Text = "Packages";
             this.treeView2.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode6});
+            treeNode17});
             this.treeView2.Size = new System.Drawing.Size(329, 313);
             this.treeView2.TabIndex = 0;
             this.treeView2.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView2_AfterSelect);
@@ -268,7 +268,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(933, 396);
+            this.tabPage3.Size = new System.Drawing.Size(1014, 396);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Templates";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -518,18 +518,18 @@
             // 
             this.treeView1.Location = new System.Drawing.Point(18, 29);
             this.treeView1.Name = "treeView1";
-            treeNode7.Name = "Node6";
-            treeNode7.Text = "Context";
-            treeNode8.Name = "Node3";
-            treeNode8.Text = "Entity Framework (EF)";
-            treeNode9.Name = "Node2";
-            treeNode9.Text = "Entity";
-            treeNode10.Name = "Node5";
-            treeNode10.Text = "Repository";
-            treeNode11.Name = "Node1";
-            treeNode11.Text = "Templates";
+            treeNode18.Name = "Node6";
+            treeNode18.Text = "Context";
+            treeNode19.Name = "Node3";
+            treeNode19.Text = "Entity Framework (EF)";
+            treeNode20.Name = "Node2";
+            treeNode20.Text = "Entity";
+            treeNode21.Name = "Node5";
+            treeNode21.Text = "Repository";
+            treeNode22.Name = "Node1";
+            treeNode22.Text = "Templates";
             this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode11});
+            treeNode22});
             this.treeView1.Size = new System.Drawing.Size(269, 313);
             this.treeView1.TabIndex = 0;
             // 
@@ -537,14 +537,14 @@
             // 
             this.statusStrip1.Location = new System.Drawing.Point(0, 491);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(941, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(1022, 22);
             this.statusStrip1.TabIndex = 2;
             this.statusStrip1.Text = "statusStrip1";
             // 
             // button1
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(845, 455);
+            this.button1.Location = new System.Drawing.Point(926, 455);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 3;
@@ -564,24 +564,29 @@
             // button6
             // 
             this.button6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button6.Location = new System.Drawing.Point(752, 455);
+            this.button6.Location = new System.Drawing.Point(833, 455);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(75, 23);
             this.button6.TabIndex = 5;
             this.button6.Text = "Save";
             this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
-            // projectDetailsUserControl1
+            // ProjectDetailsUserControl1
             // 
-            this.projectDetailsUserControl1.Location = new System.Drawing.Point(0, 20);
-            this.projectDetailsUserControl1.Name = "projectDetailsUserControl1";
-            this.projectDetailsUserControl1.Size = new System.Drawing.Size(361, 123);
-            this.projectDetailsUserControl1.TabIndex = 0;
+            this.ProjectDetailsUserControl1.Changed = false;
+            this.ProjectDetailsUserControl1.Location = new System.Drawing.Point(6, 20);
+            this.ProjectDetailsUserControl1.Name = "ProjectDetailsUserControl1";
+            this.ProjectDetailsUserControl1.Project = null;
+            this.ProjectDetailsUserControl1.Size = new System.Drawing.Size(382, 123);
+            this.ProjectDetailsUserControl1.TabIndex = 0;
             // 
             // projectDomainUserControl1
             // 
+            this.projectDomainUserControl1.Changed = false;
             this.projectDomainUserControl1.Location = new System.Drawing.Point(16, 20);
             this.projectDomainUserControl1.Name = "projectDomainUserControl1";
+            this.projectDomainUserControl1.Project = null;
             this.projectDomainUserControl1.Size = new System.Drawing.Size(324, 106);
             this.projectDomainUserControl1.TabIndex = 19;
             // 
@@ -596,7 +601,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(941, 513);
+            this.ClientSize = new System.Drawing.Size(1022, 513);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button1);
@@ -668,7 +673,7 @@
         private System.Windows.Forms.ComboBox comboBox12;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.GroupBox groupBox1;
-        private ProjectDetailsUserControl projectDetailsUserControl1;
+        private ProjectDetailsUserControl ProjectDetailsUserControl1;
         private ProjectDomainUserControl projectDomainUserControl1;
         private ProjectDomainDetailsUserControl projectDomainDetailsUserControl1;
     }

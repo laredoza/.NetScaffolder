@@ -11,6 +11,8 @@ namespace DotNetScaffolder.Test.Project.ApplicationService
 {
     #region Using
 
+    using System;
+
     using DotNetScaffolder.Mapping.MetaData.Domain;
     using DotNetScaffolder.Mapping.MetaData.Enum;
     using DotNetScaffolder.Mapping.MetaData.Project;
@@ -79,16 +81,18 @@ namespace DotNetScaffolder.Test.Project.ApplicationService
         protected void TestValidation(IProjectDefinitionApplicationService applicationService)
         {
             DomainDefinition domain = new DomainDefinition();
+            domain.Id = Guid.Empty;
 
             applicationService.ProjectDefinition.Domains.Add(domain);
             applicationService.Validate();
-            Assert.AreEqual(5, applicationService.ValidationResult.Count, "There should be 5 validation errors");
+            Assert.AreEqual(6, applicationService.ValidationResult.Count, "There should be 6 validation errors");
 
             applicationService.ProjectDefinition.BaseNameSpace = "a";
             applicationService.ProjectDefinition.OutputFolder = "b";
             applicationService.ProjectDefinition.Version = 0.1;
             applicationService.ProjectDefinition.ModelPath = "c";
             domain.Name = "Test Domain";
+            domain.Id = Guid.NewGuid();
             applicationService.Validate();
 
             Assert.AreEqual(0, applicationService.ValidationResult.Count, "There should be 0 validation errors");

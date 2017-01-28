@@ -12,6 +12,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Domain
 {
     #region Using
 
+    using System;
     using System.Collections.Generic;
     using System.Xml.Serialization;
 
@@ -51,6 +52,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Domain
         {
             this.Tables = new List<Table>();
             this.Package = new Package();
+            this.Id = Guid.NewGuid();
         }
 
         #endregion
@@ -72,6 +74,11 @@ namespace DotNetScaffolder.Mapping.MetaData.Domain
         ///     Gets or sets the name of the domain.
         /// </summary>
         public string Name { get; set; }
+
+        /// <summary>
+        /// Gets or sets the id.
+        /// </summary>
+        public Guid Id { get; set; }
 
         /// <summary>
         ///     Gets or sets the naming convention. Should be loaded from MEF
@@ -98,7 +105,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Domain
         ///     Gets or sets the validation result.
         /// </summary>
         [XmlIgnore]
-        public List<string> ValidationResult { get; set; }
+        public Dictionary<ValidationType, string> ValidationResult { get; set; }
 
         #endregion
 
@@ -111,15 +118,20 @@ namespace DotNetScaffolder.Mapping.MetaData.Domain
         ///     The <see cref="List{T}" />
         ///     Errors returned
         /// </returns>
-        public List<string> Validate()
+        public Dictionary<ValidationType, string> Validate()
         {
             Logger.Trace("Started Validate()");
 
-            this.ValidationResult = new List<string>();
+            this.ValidationResult = new Dictionary<ValidationType, string>();
 
             if (string.IsNullOrEmpty(this.Name))
             {
-                this.ValidationResult.Add("Name cannot be empty");
+                this.ValidationResult.Add(ValidationType.DomainName, "Name cannot be empty");
+            }
+
+            if (this.Id == Guid.Empty)
+            {
+                this.ValidationResult.Add(ValidationType.DomainId, "Id cannot be empty");
             }
 
             Logger.Debug($"Number of Validation errors: {this.ValidationResult.Count}");

@@ -95,6 +95,9 @@
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="Config\Banking.mdl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -113,6 +116,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Mapping\MetaData\DotNetScaffolder.Mapping.MetaData.csproj">
+      <Project>{3f206474-14c2-4586-b57a-4edc76795161}</Project>
+      <Name>DotNetScaffolder.Mapping.MetaData</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Forms.Controls\DotNetScaffolder.Presentation.Forms.Controls.csproj">
       <Project>{5a674854-afd7-40c8-8445-4bfc7f49aad3}</Project>
       <Name>DotNetScaffolder.Presentation.Forms.Controls</Name>

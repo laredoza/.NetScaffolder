@@ -17,6 +17,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Project.ApplicationServices
     using Common.Logging;
 
     using DotNetScaffolder.Core.Common.Serializer;
+    using DotNetScaffolder.Mapping.MetaData.Enum;
 
     using global::MetaData.Project;
 
@@ -66,8 +67,8 @@ namespace DotNetScaffolder.Mapping.MetaData.Project.ApplicationServices
         /// <summary>
         /// Gets or sets the validation result.
         /// </summary>
-        public List<string> ValidationResult { get; set; }
-
+        public Dictionary<ValidationType, string> ValidationResult { get; set; }
+        
         #endregion
 
         #region Public methods and operators
@@ -118,7 +119,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Project.ApplicationServices
         /// The <see cref="List{T}"/>
         /// Errors returned
         /// </returns>
-        public List<string> Validate()
+        public Dictionary<ValidationType, string> Validate()
         {
             Logger.Trace($"Started Validate()");
             this.ValidationResult = this.ProjectDefinition.Validate();
