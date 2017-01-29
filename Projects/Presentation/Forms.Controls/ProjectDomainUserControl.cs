@@ -13,14 +13,16 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
 
     using System;
     using System.Windows.Forms;
+
     using Common.Logging;
+
     using DotNetScaffolder.Mapping.MetaData.Domain;
     using DotNetScaffolder.Mapping.MetaData.Project.ApplicationServices;
 
     #endregion
 
     /// <summary>
-    /// The project domain user control.
+    ///     The project domain user control.
     /// </summary>
     public partial class ProjectDomainUserControl : UserControl
     {
@@ -54,6 +56,15 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
 
         #endregion
 
+        #region Public Events
+
+        /// <summary>
+        /// The selected index changed.
+        /// </summary>
+        public event EventHandler<SelectedEventArgs> SelectedIndexChanged;
+
+        #endregion
+
         #region Properties
 
         /// <summary>
@@ -79,7 +90,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         public bool Changed { get; set; }
 
         /// <summary>
-        /// Gets a value indicating whether enable delete button.
+        ///     Gets a value indicating whether enable delete button.
         /// </summary>
         public bool EnableDeleteButton
         {
@@ -101,10 +112,10 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         #region Public methods and operators
 
         /// <summary>
-        /// The add domain.
+        ///     The add domain.
         /// </summary>
         /// <returns>
-        /// The <see cref="DomainDefinition"/>.
+        ///     The <see cref="DomainDefinition" />.
         /// </returns>
         public DomainDefinition AddDomain()
         {
@@ -147,6 +158,26 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         #region Other Methods
 
         /// <summary>
+        /// The on selected index changed.
+        /// </summary>
+        /// <param name="e">
+        /// The e.
+        /// </param>
+        protected virtual void OnSelectedIndexChanged(SelectedEventArgs e)
+        {
+            Logger.Trace($"Started OnSelectedIndexChanged() - Id:{e.Id}");
+
+            EventHandler<SelectedEventArgs> handler = this.SelectedIndexChanged;
+
+            if (handler != null)
+            {
+                handler(this, e);
+            }
+
+            Logger.Trace($"Completed OnSelectedIndexChanged() - Id:{e.Id}");
+        }
+
+        /// <summary>
         /// The button add_ click.
         /// </summary>
         /// <param name="sender">
@@ -186,6 +217,33 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         }
 
         /// <summary>
+        /// The domains list box_ selected index changed.
+        /// </summary>
+        /// <param name="sender">
+        /// The sender.
+        /// </param>
+        /// <param name="e">
+        /// The e.
+        /// </param>
+        private void DomainsListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Logger.Trace("Started DomainsListBox_SelectedIndexChanged event.");
+            if (this.ApplicationService != null && this.ApplicationService.ProjectDefinition != null
+                && this.DomainsListBox.SelectedItem != null)
+            {
+                SelectedEventArgs eventArgs = new SelectedEventArgs
+                                                  {
+                                                      Id =
+                                                          (this.DomainsListBox.SelectedItem as
+                                                           DomainDefinition).Id
+                                                  };
+                this.OnSelectedIndexChanged(eventArgs);
+            }
+
+            Logger.Trace("Completed DomainsListBox_SelectedIndexChanged event.");
+        }
+
+        /// <summary>
         ///     The update data source.
         /// </summary>
         private void UpdateDataSource()
@@ -210,10 +268,5 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         }
 
         #endregion
-
-        private void DomainsListBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
     }
 }
