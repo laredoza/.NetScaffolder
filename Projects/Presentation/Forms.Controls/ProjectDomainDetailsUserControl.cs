@@ -137,6 +137,138 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
             }
         }
 
+        /// <summary>
+        /// Gets or sets the selected naming convention.
+        /// </summary>
+        public Guid SelectedNamingConvention
+        {
+            get
+            {
+                Guid result = Guid.Empty;
+
+                if (this.SelectedDomain != null)
+                {
+                    result = this.SelectedDomain.NamingConventionId;
+                    Logger.Trace($"NamingConventionId set to {this.SelectedDomain.NamingConventionId}.");
+                }
+                else
+                {
+                    Logger.Trace("Empty NamingConventionId is returned as SelectedDomain is null.");
+                }
+
+                return result;
+            }
+
+            set
+            {
+                if (this.SelectedDomain != null)
+                {
+                    this.SelectedDomain.NamingConventionId = value;
+                }
+                else
+                {
+                    Logger.Trace("Empty NamingConventionId is returned as SelectedDomain is null.");
+                }
+            }
+        }
+
+        public Guid SelectedSourceType
+        {
+            get
+            {
+                Guid result = Guid.Empty;
+
+                if (this.SelectedDomain != null)
+                {
+                    result = this.SelectedDomain.SourceTypeId;
+                    Logger.Trace($"SourceTypeId set to {this.SelectedDomain.SourceTypeId}.");
+                }
+                else
+                {
+                    Logger.Trace("Empty SourceTypeId is returned as SelectedDomain is null.");
+                }
+
+                return result;
+            }
+
+            set
+            {
+                if (this.SelectedDomain != null)
+                {
+                    this.SelectedDomain.SourceTypeId = value;
+                }
+                else
+                {
+                    Logger.Trace("Empty SourceTypeId is returned as SelectedDomain is null.");
+                }
+            }
+        }
+
+        public Guid SelectedDriver
+        {
+            get
+            {
+                Guid result = Guid.Empty;
+
+                if (this.SelectedDomain != null)
+                {
+                    result = this.SelectedDomain.DriverId;
+                    Logger.Trace($"DriverId set to {this.SelectedDomain.DriverId}.");
+                }
+                else
+                {
+                    Logger.Trace("Empty DriverId is returned as SelectedDomain is null.");
+                }
+
+                return result;
+            }
+
+            set
+            {
+                if (this.SelectedDomain != null)
+                {
+                    this.SelectedDomain.DriverId = value;
+                }
+                else
+                {
+                    Logger.Trace("Empty DriverId is returned as SelectedDomain is null.");
+                }
+            }
+        }
+
+        public Guid SelectedDriverType
+        {
+            get
+            {
+                Guid result = Guid.Empty;
+
+                if (this.SelectedDomain != null)
+                {
+                    result = this.SelectedDomain.DriverTypeId;
+                    Logger.Trace($"DriverTypeId set to {this.SelectedDomain.DriverTypeId}.");
+                }
+                else
+                {
+                    Logger.Trace("Empty DriverTypeId is returned as SelectedDomain is null.");
+                }
+
+                return result;
+            }
+
+            set
+            {
+                if (this.SelectedDomain != null)
+                {
+                    this.SelectedDomain.DriverTypeId = value;
+                }
+                else
+                {
+                    Logger.Trace("Empty DriverTypeId is returned as SelectedDomain is null.");
+                }
+            }
+        }
+       
+
         #endregion
 
         #region Other Methods
@@ -152,9 +284,12 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         /// </param>
         private void ComboBoxDriver_SelectedIndexChanged(object sender, EventArgs e)
         {
-            this.ComboBoxDriverType.Items.Clear();
+            this.SelectedDriver = (Guid)((this.ComboBoxDriver.SelectedItem as ComboboxItem).Value);
+            
             ComboboxItem item = this.ComboBoxDriver.SelectedItem as ComboboxItem;
-            this.ComboBoxDriverType.Items.AddRange(this.ReturnDriverTypes(item));
+            this.ComboBoxDriverType.DataSource = this.ReturnDriverTypes(item);
+            this.ComboBoxDriverType.DisplayMember = "Text";
+            this.ComboBoxDriverType.ValueMember = "Value";
         }
 
         /// <summary>
@@ -163,7 +298,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         /// <returns>
         /// The <see cref="object[]"/>.
         /// </returns>
-        private object[] ReturnDriverTypes()
+        public object[] ReturnDriverTypes()
         {
             List<ComboboxItem> items = new List<ComboboxItem>();
 
@@ -173,7 +308,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
                     new ComboboxItem
                         {
                             Text = (string)driverType.Metadata["TypeMetaData"],
-                            Value = new Guid(driverType.Metadata["ValueMetaData"].ToString())
+                            Value = new Guid(driverType.Metadata["TypeIdMetaData"].ToString())
                         });
             }
 
@@ -189,13 +324,13 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         /// <returns>
         /// The <see cref="object[]"/>.
         /// </returns>
-        private object[] ReturnDriverTypes(ComboboxItem driver)
+        public object[] ReturnDriverTypes(ComboboxItem driver)
         {
             List<ComboboxItem> items = new List<ComboboxItem>();
 
             foreach (var driverType in ScaffoldConfig.DriverTypes)
             {
-                if (driverType.Metadata["ValueMetaData"].ToString() == driver.Value.ToString().ToUpper())
+                if (driverType.Metadata["TypeIdMetaData"].ToString() == driver.Value.ToString().ToUpper())
                 {
                     items.Add(
                         new ComboboxItem
@@ -215,7 +350,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         /// <returns>
         ///     The <see cref="List" />.
         /// </returns>
-        private object[] ReturnNamingConventions()
+        public object[] ReturnNamingConventions()
         {
             List<ComboboxItem> items = new List<ComboboxItem>();
 
@@ -238,7 +373,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         /// <returns>
         /// The <see cref="object[]"/>.
         /// </returns>
-        private object[] ReturnSourceTypes()
+        public object[] ReturnSourceTypes()
         {
             List<ComboboxItem> items = new List<ComboboxItem>();
 
@@ -261,24 +396,47 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         private void UpdateDataSource()
         {
             Logger.Trace("Started UpdateDataSource()");
+            
+            this.ComboBoxNamingConvention.DataSource = this.ReturnNamingConventions();
+            this.ComboBoxNamingConvention.DisplayMember = "Text";
+            this.ComboBoxNamingConvention.ValueMember = "Value";
 
+            this.ComboBoxSourceType.DataSource = this.ReturnSourceTypes();
+            this.ComboBoxSourceType.DisplayMember = "Text";
+            this.ComboBoxSourceType.ValueMember = "Value";
+
+            this.ComboBoxDriver.DataSource = this.ReturnDriverTypes();
+            this.ComboBoxDriver.DisplayMember = "Text";
+            this.ComboBoxDriver.ValueMember = "Value";
+            
             if (this.SelectedDomain != null)
             {
                 this.TextBoxName.Text = this.SelectedDomain.Name;
+                this.ComboBoxNamingConvention.SelectedValue = this.SelectedNamingConvention;
+                this.ComboBoxSourceType.SelectedValue = this.SelectedSourceType;
+                this.ComboBoxDriver.SelectedValue = this.SelectedDriver;
+                this.ComboBoxDriverType.SelectedValue = this.SelectedDriverType;
             }
 
-            this.ComboBoxNamingConvention.Items.Clear();
-            this.ComboBoxNamingConvention.Items.AddRange(this.ReturnNamingConventions());
-
-            this.ComboBoxSourceType.Items.Clear();
-            this.ComboBoxSourceType.Items.AddRange(this.ReturnSourceTypes());
-
-            this.ComboBoxDriver.Items.Clear();
-            this.ComboBoxDriver.Items.AddRange(this.ReturnDriverTypes());
-            
             Logger.Trace("Completed UpdateDataSource()");
         }
 
         #endregion
+
+        private void ComboBoxNamingConvention_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.SelectedNamingConvention = (Guid)((this.ComboBoxNamingConvention.SelectedItem as ComboboxItem).Value);
+        }
+
+        private void ComboBoxSourceType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            SelectedSourceType = (Guid)((this.ComboBoxSourceType.SelectedItem as ComboboxItem).Value);
+        }
+
+        private void ComboBoxDriverType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.SelectedDriverType = (Guid)((this.ComboBoxDriverType.SelectedItem as ComboboxItem).Value);
+
+        }
     }
 }

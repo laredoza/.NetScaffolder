@@ -81,6 +81,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
             {
                 this.applicationService = value;
                 this.UpdateDataSource();
+                this.DomainsListBox_SelectedIndexChanged(this, new EventArgs());
             }
         }
 

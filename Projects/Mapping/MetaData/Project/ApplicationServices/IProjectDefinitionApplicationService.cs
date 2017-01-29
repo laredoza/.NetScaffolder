@@ -12,10 +12,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Project.ApplicationServices
     using System;
 
     using DotNetScaffolder.Mapping.MetaData.Domain;
-
-    using global::MetaData;
-    using global::MetaData.Project;
-
+    
     /// <summary>
     /// The ProjectDefinitionApplicationService interface.
     /// This interface is used to load and save project data.

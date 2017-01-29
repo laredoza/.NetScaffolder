@@ -22,8 +22,6 @@ namespace DotNetScaffolder.Mapping.MetaData.Project.ApplicationServices
     using DotNetScaffolder.Mapping.MetaData.Domain;
     using DotNetScaffolder.Mapping.MetaData.Enum;
 
-    using global::MetaData.Project;
-
     #endregion
 
     /// <summary>

@@ -17,9 +17,6 @@ namespace DotNetScaffolder.Test.Project.ApplicationService
     using DotNetScaffolder.Mapping.MetaData.Enum;
     using DotNetScaffolder.Mapping.MetaData.Project;
     using DotNetScaffolder.Mapping.MetaData.Project.ApplicationServices;
-
-    using MetaData.Project;
-
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     #endregion

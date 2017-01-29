@@ -54,11 +54,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Domain\DomainDefinition.cs" />
-    <Compile Include="DriverType.cs" />
     <Compile Include="Enum\ConfigLocation.cs" />
     <Compile Include="Enum\DatabaseGeneratedKeyType.cs" />
     <Compile Include="Enum\GenerationType.cs" />
-    <Compile Include="Enum\NamingConvention.cs" />
     <Compile Include="Enum\RelationshipType.cs" />
     <Compile Include="Enum\ValidationType.cs" />
     <Compile Include="Hierarchy.cs" />
@@ -69,9 +67,6 @@
     <Compile Include="Model\Relationship.cs" />
     <Compile Include="Model\Table.cs" />
     <Compile Include="Project\CollectionOption.cs" />
-    <Compile Include="Project\Domain.cs" />
-    <Compile Include="Project\Driver.cs" />
-    <Compile Include="Project\DriverTypeSettings.cs" />
     <Compile Include="Project\FilePersistenceOptions.cs" />
     <Compile Include="Project\ApplicationServices\ProjectDefinitionApplicationServiceFile.cs" />
     <Compile Include="Project\ApplicationServices\IProjectDefinitionApplicationService.cs" />
@@ -83,7 +78,6 @@
     <Compile Include="Project\Packages\TemplateGeneratorType.cs" />
     <Compile Include="Project\Packages\Templates.cs" />
     <Compile Include="Project\ProjectDefinition.cs" />
-    <Compile Include="Project\SourceType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

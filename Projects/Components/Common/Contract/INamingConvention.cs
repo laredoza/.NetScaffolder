@@ -3,14 +3,14 @@
 //   
 // </copyright>
 // <summary>
-//   The NamingConvention interface.
+//   The NamingConventionId interface.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace DotNetScaffolder.Components.Common.Contract
 {
     /// <summary>
-    /// The NamingConvention interface. This is used to apply a namimg convention 
+    /// The NamingConventionId interface. This is used to apply a namimg convention 
     /// to a property, class, etc. 
     /// <example>securityview will be SecurityView</example>
     /// </summary>

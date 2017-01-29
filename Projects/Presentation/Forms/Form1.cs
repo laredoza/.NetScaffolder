@@ -30,8 +30,8 @@
             applicationService.Load();
 
             this.ProjectDetailsUserControl1.Project = applicationService.ProjectDefinition;
-            this.ProjectDomainUserControl1.ApplicationService = this.applicationService;
             this.ProjectDomainUserControl1.SelectedIndexChanged += ProjectDomainUserControl1_SelectedIndexChanged;
+            this.ProjectDomainUserControl1.ApplicationService = this.applicationService;
             this.projectDomainDetailsUserControl1.ApplicationService = this.applicationService;
         }
 

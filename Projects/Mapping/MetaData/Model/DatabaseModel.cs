@@ -3,7 +3,7 @@
     using System.Collections.Generic;
     using System.Xml.Serialization;
 
-    using Domain = global::DotNetScaffolder.Mapping.MetaData.Project.Domain;
+    using DotNetScaffolder.Mapping.MetaData.Domain;
 
     public class DatabaseModel
     {
@@ -12,7 +12,7 @@
         public List<Table> Tables { get; set; }
 
         [XmlIgnore]
-        public Domain Domain { get; set; }
+        public DomainDefinition Domain { get; set; }
 
         //public void RepairObjectParents()
         //{

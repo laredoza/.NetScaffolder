@@ -97,6 +97,7 @@
             this.ComboBoxDriverType.Name = "ComboBoxDriverType";
             this.ComboBoxDriverType.Size = new System.Drawing.Size(238, 21);
             this.ComboBoxDriverType.TabIndex = 45;
+            this.ComboBoxDriverType.SelectedIndexChanged += new System.EventHandler(this.ComboBoxDriverType_SelectedIndexChanged);
             // 
             // label10
             // 
@@ -132,6 +133,7 @@
             this.ComboBoxSourceType.Name = "ComboBoxSourceType";
             this.ComboBoxSourceType.Size = new System.Drawing.Size(238, 21);
             this.ComboBoxSourceType.TabIndex = 41;
+            this.ComboBoxSourceType.SelectedIndexChanged += new System.EventHandler(this.ComboBoxSourceType_SelectedIndexChanged);
             // 
             // label8
             // 
@@ -170,6 +172,7 @@
             this.ComboBoxNamingConvention.Name = "ComboBoxNamingConvention";
             this.ComboBoxNamingConvention.Size = new System.Drawing.Size(238, 21);
             this.ComboBoxNamingConvention.TabIndex = 36;
+            this.ComboBoxNamingConvention.SelectedIndexChanged += new System.EventHandler(this.ComboBoxNamingConvention_SelectedIndexChanged);
             // 
             // label6
             // 

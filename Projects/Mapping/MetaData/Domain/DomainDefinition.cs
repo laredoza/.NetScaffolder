@@ -23,9 +23,6 @@ namespace DotNetScaffolder.Mapping.MetaData.Domain
     using DotNetScaffolder.Mapping.MetaData.Project;
     using DotNetScaffolder.Mapping.MetaData.Project.Packages;
 
-    using global::MetaData;
-    using global::MetaData.Project;
-
     #endregion
 
     /// <summary>
@@ -66,9 +63,20 @@ namespace DotNetScaffolder.Mapping.MetaData.Domain
         public CollectionOption CollectionOption { get; set; }
 
         /// <summary>
-        ///     Gets or sets the driver type (Oracle Default). Should be loaded from MEF
+        /// Gets or sets the driver id.
         /// </summary>
-        public DriverType DriverType { get; set; }
+        /// <example>
+        /// Entity Framework
+        /// </example>
+        public Guid DriverId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the driver id.
+        /// </summary>
+        /// <example>
+        /// Oracle Drivers
+        /// </example>
+        public Guid DriverTypeId { get; set; }
 
         /// <summary>
         ///     Gets or sets the name of the domain.
@@ -81,9 +89,9 @@ namespace DotNetScaffolder.Mapping.MetaData.Domain
         public Guid Id { get; set; }
 
         /// <summary>
-        ///     Gets or sets the naming convention. Should be loaded from MEF
+        ///     Gets or sets the naming convention Id.
         /// </summary>
-        public NamingConvention NamingConvention { get; set; }
+        public Guid NamingConventionId { get; set; }
 
         /// <summary>
         ///     Gets or sets the package.
@@ -92,9 +100,9 @@ namespace DotNetScaffolder.Mapping.MetaData.Domain
 
         /// <summary>
         ///     Gets or sets the source type. This specifies if it should be loaded from an edmx file,
-        ///     sql metadata, etc. Should be loaded from MEF
+        ///     sql metadata, etc.
         /// </summary>
-        public SourceType SourceType { get; set; }
+        public Guid SourceTypeId { get; set; }
 
         /// <summary>
         ///     Gets or sets the tables belonging to the domain
@@ -132,6 +140,26 @@ namespace DotNetScaffolder.Mapping.MetaData.Domain
             if (this.Id == Guid.Empty)
             {
                 this.ValidationResult.Add(ValidationType.DomainId, "Id cannot be empty");
+            }
+
+            if (this.NamingConventionId == Guid.Empty)
+            {
+                this.ValidationResult.Add(ValidationType.NamingConventionId, "NamingConventionId cannot be empty");
+            }
+
+            if (this.SourceTypeId == Guid.Empty)
+            {
+                this.ValidationResult.Add(ValidationType.SourceTypeId, "SourceTypeId cannot be empty");
+            }
+
+            if (this.DriverId == Guid.Empty)
+            {
+                this.ValidationResult.Add(ValidationType.DriverId, "DriverId cannot be empty");
+            }
+
+            if (this.DriverTypeId == Guid.Empty)
+            {
+                this.ValidationResult.Add(ValidationType.DriverTypeId, "DriverTypeId cannot be empty");
             }
 
             Logger.Debug($"Number of Validation errors: {this.ValidationResult.Count}");

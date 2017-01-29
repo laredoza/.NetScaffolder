@@ -20,8 +20,6 @@ namespace DotNetScaffolder.Mapping.MetaData.Project
     using DotNetScaffolder.Mapping.MetaData.Domain;
     using DotNetScaffolder.Mapping.MetaData.Enum;
 
-    using global::MetaData;
-
     #endregion
 
     /// <summary>

@@ -91,6 +91,7 @@
     <Compile Include="EDMXImporterUnitTest.cs" />
     <Compile Include="Extensions\NodeExtensionsUnitTest.cs" />
     <Compile Include="Presentation\Controls\ProjectDetailsUserControlUnitTest.cs" />
+    <Compile Include="Presentation\Controls\ProjectDomainDetailsUserControlUnitTest.cs" />
     <Compile Include="Presentation\Controls\ProjectDomainUserControlUnitTest.cs" />
     <Compile Include="Project\ApplicationService\ProjectDefinitionApplicationServiceFileUnitTest.cs" />
     <Compile Include="Project\ApplicationService\ProjectDefinitionApplicationServiceUnitTest.cs" />
@@ -345,6 +346,10 @@
     <ProjectReference Include="..\..\Projects\Core\Common\Core.Common.csproj">
       <Project>{cdace52c-f991-40b5-80ed-4947a100ec52}</Project>
       <Name>Core.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Projects\Core\Configuration\DotNetScaffolder.Core.Configuration.csproj">
+      <Project>{ECF3D386-0124-450F-A763-92175FF00547}</Project>
+      <Name>DotNetScaffolder.Core.Configuration</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Projects\Core\Extensions\DotNetScaffolder.Core.Extensions.csproj">
       <Project>{f8a24fdb-4bdb-4e74-83f1-d646883ba511}</Project>

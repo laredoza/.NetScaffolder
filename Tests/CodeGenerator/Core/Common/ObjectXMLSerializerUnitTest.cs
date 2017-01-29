@@ -15,9 +15,6 @@ namespace DotNetScaffolder.Test.Core.Common
 
     using DotNetScaffolder.Core.Common.Serializer;
     using DotNetScaffolder.Mapping.MetaData.Project;
-
-    using MetaData.Project;
-
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     #endregion

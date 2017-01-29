@@ -42,6 +42,14 @@ namespace DotNetScaffolder.Mapping.MetaData.Enum
         /// <summary>
         /// The project model path.
         /// </summary>
-        ProjectModelPath
+        ProjectModelPath,
+
+        SourceTypeId,
+
+        NamingConventionId,
+
+        DriverId,
+
+        DriverTypeId
     }
 }

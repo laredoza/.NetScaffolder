@@ -1,7 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ProjectDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <BaseNameSpace>Banking.Models</BaseNameSpace>
-  <Domains />
+  <Domains>
+    <DomainDefinition>
+      <DriverId>2bc1b0c4-1e41-9146-82cf-599181ce4400</DriverId>
+      <DriverTypeId>2bc1b0c4-1e41-9146-82cf-599181ce4410</DriverTypeId>
+      <Name>Domain1</Name>
+      <Id>88e23444-4d85-4fd7-a1a7-e6d68e896281</Id>
+      <NamingConventionId>1bc1b0c4-1e41-9146-82cf-599181ce4412</NamingConventionId>
+      <Package>
+        <Enabled>false</Enabled>
+        <Id>00000000-0000-0000-0000-000000000000</Id>
+        <Templates />
+      </Package>
+      <SourceTypeId>3bc1b0c4-1e41-9146-82cf-599181ce4410</SourceTypeId>
+      <Tables />
+    </DomainDefinition>
+  </Domains>
   <GroupBy>Domain</GroupBy>
   <ModelPath>Banking.mdl</ModelPath>
   <OutputFolder>Models</OutputFolder>
