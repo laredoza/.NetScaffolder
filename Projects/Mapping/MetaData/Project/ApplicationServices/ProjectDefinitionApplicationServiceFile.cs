@@ -13,6 +13,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Project.ApplicationServices
 
     using System;
     using System.Collections.Generic;
+    using System.Linq;
 
     using Common.Logging;
 
@@ -133,6 +134,25 @@ namespace DotNetScaffolder.Mapping.MetaData.Project.ApplicationServices
             Logger.Trace($"Completed AddDomain()");
 
             return result;
+        }
+
+        /// <summary>
+        /// Delete.
+        /// </summary>
+        /// <param name="id">
+        /// The id.
+        /// </param>
+        public void Delete(Guid id)
+        {
+            Logger.Trace($"Started Delete() - id: {id}");
+
+            if (this.ProjectDefinition.Domains.Exists(d => d.Id == id))
+            {
+                this.ProjectDefinition.Domains.Remove(
+                    this.ProjectDefinition.Domains.Where(d => d.Id == id).FirstOrDefault());
+            }
+
+            Logger.Trace($"Completed Delete() - id: {id}");
         }
 
         #endregion

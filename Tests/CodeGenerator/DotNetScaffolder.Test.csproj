@@ -91,6 +91,7 @@
     <Compile Include="EDMXImporterUnitTest.cs" />
     <Compile Include="Extensions\NodeExtensionsUnitTest.cs" />
     <Compile Include="Presentation\Controls\ProjectDetailsUserControlUnitTest.cs" />
+    <Compile Include="Presentation\Controls\ProjectDomainUserControlUnitTest.cs" />
     <Compile Include="Project\ApplicationService\ProjectDefinitionApplicationServiceFileUnitTest.cs" />
     <Compile Include="Project\ApplicationService\ProjectDefinitionApplicationServiceUnitTest.cs" />
     <Compile Include="Project\ProjectDefinitionUnitTest.cs" />

@@ -121,6 +121,29 @@ namespace DotNetScaffolder.Test.Project.ApplicationService
             Assert.AreEqual("Domain1", domain.Name, "The domain name should be Domain1");
         }
 
+        /// <summary>
+        /// Test TestDeleteDomain.
+        /// </summary>
+        /// <param name="applicationService">
+        /// The application service.
+        /// </param>
+        protected void TestDeleteDomain(IProjectDefinitionApplicationService applicationService)
+        {
+            DomainDefinition domain = applicationService.AddDomain();
+            Assert.AreEqual(1, applicationService.ProjectDefinition.Domains.Count, "There should be 1 domain");
+            domain = applicationService.AddDomain();
+            Assert.AreEqual(2, applicationService.ProjectDefinition.Domains.Count, "There should be 2 domains");
+
+            Guid id = applicationService.ProjectDefinition.Domains[0].Id;
+            applicationService.Delete(id);
+            Assert.AreEqual(1, applicationService.ProjectDefinition.Domains.Count, "There should be 1 domain");
+
+            id = applicationService.ProjectDefinition.Domains[0].Id;
+            applicationService.Delete(id);
+            Assert.AreEqual(0, applicationService.ProjectDefinition.Domains.Count, "There should be 0 domains");
+
+        }
+
         #endregion
     }
 }

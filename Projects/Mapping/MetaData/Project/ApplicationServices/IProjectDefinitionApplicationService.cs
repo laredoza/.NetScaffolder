@@ -9,6 +9,8 @@
 
 namespace DotNetScaffolder.Mapping.MetaData.Project.ApplicationServices
 {
+    using System;
+
     using DotNetScaffolder.Mapping.MetaData.Domain;
 
     using global::MetaData;
@@ -44,6 +46,14 @@ namespace DotNetScaffolder.Mapping.MetaData.Project.ApplicationServices
         /// The <see cref="DomainDefinition"/>.
         /// </returns>
         DomainDefinition AddDomain();
+
+        /// <summary>
+        /// Delete.
+        /// </summary>
+        /// <param name="id">
+        /// The id.
+        /// </param>
+        void Delete(Guid id);
 
         #endregion
     }

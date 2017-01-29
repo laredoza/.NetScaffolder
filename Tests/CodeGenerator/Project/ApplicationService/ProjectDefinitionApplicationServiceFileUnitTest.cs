@@ -75,6 +75,18 @@ namespace DotNetScaffolder.Test.Project.ApplicationService
             this.TestAddDomain(applicationService);
         }
 
+        [TestMethod]
+        public void ProjectDefinitionApplicationServiceFileUnitTest_DeleteDomain()
+        {
+            FilePersistenceOptions options = new FilePersistenceOptions { Path = "Test.mdl" };
+            IProjectDefinitionApplicationService applicationService = new ProjectDefinitionApplicationServiceFile
+            {
+                FilePersistenceOptions = options
+            };
+
+            this.TestDeleteDomain(applicationService);
+        }
+
         #endregion
     }
 }
