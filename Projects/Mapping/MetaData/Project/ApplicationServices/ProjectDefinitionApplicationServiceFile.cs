@@ -13,6 +13,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Project.ApplicationServices
 
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.Composition;
     using System.Linq;
 
     using Common.Logging;
@@ -70,7 +71,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Project.ApplicationServices
         /// Gets or sets the validation result.
         /// </summary>
         public Dictionary<ValidationType, string> ValidationResult { get; set; }
-        
+
         #endregion
 
         #region Public methods and operators
@@ -83,6 +84,11 @@ namespace DotNetScaffolder.Mapping.MetaData.Project.ApplicationServices
             Logger.Trace($"Started Load() - Path: {this.FilePersistenceOptions.Path}");
             this.ProjectDefinition = ObjectXMLSerializer<ProjectDefinition>.Load(this.FilePersistenceOptions.Path);
             Logger.Trace($"Completed Load() - Path: {this.FilePersistenceOptions.Path}");
+        }
+
+        public void UpdateLookups()
+        {
+            
         }
 
         /// <summary>

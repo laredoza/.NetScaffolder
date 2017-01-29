@@ -25,6 +25,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes
     /// </summary>
     [Export(typeof(ISourceType))]
     [ExportMetadata("NameMetaData", "Edmx")]
+    [ExportMetadata("ValueMetaData", "3BC1B0C4-1E41-9146-82CF-599181CE4410")]
     public class EdmxSourceType : ISourceType
     {
         #region Public methods and operators

@@ -61,7 +61,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         {
             get
             {
-                if (this.Project != null)
+                if (this.Project == null)
                 {
                     Logger.Trace("Empty BaseNameSpace is returned as Project is null.");
                     return string.Empty;
@@ -100,7 +100,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         {
             get
             {
-                if (this.Project != null)
+                if (this.Project == null)
                 {
                     Logger.Trace("Default GroupBy is returned as Project is null.");
                     return GenerationType.Domain;
@@ -134,7 +134,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         {
             get
             {
-                if (this.Project != null)
+                if (this.Project == null)
                 {
                     Logger.Trace("OutputFolder is returned empty as Project is null.");
                     return string.Empty;

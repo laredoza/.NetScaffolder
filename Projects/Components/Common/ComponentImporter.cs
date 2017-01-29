@@ -1,5 +1,16 @@
-﻿namespace DotNetScaffolder.Components.Common
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="ComponentImporter.cs" company="">
+//   
+// </copyright>
+// <summary>
+//   The component importer.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
+
+namespace DotNetScaffolder.Components.Common
 {
+    #region Using
+
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.Composition;
@@ -11,6 +22,11 @@
 
     using global::Common.Logging;
 
+    #endregion
+
+    /// <summary>
+    /// The component importer.
+    /// </summary>
     public class ComponentImporter
     {
         #region Static Fields
@@ -22,28 +38,57 @@
 
         #endregion
 
-        /// <summary>
-        /// Gets or sets the naming conventions.
-        /// </summary>
-        [ImportMany]
-        public System.Lazy<INamingConvention, IDictionary<string, object>>[] NamingConventions { get; set; }
+        #region Properties
 
         /// <summary>
-        /// Gets or sets the source types.
+        ///     Gets or sets the driver types.
         /// </summary>
         [ImportMany]
-        public System.Lazy<ISourceType, IDictionary<string, object>>[] SourceTypes { get; set; }
+        public Lazy<IDriver, IDictionary<string, object>>[] DriverTypes { get; set; }
 
         /// <summary>
-        /// Gets or sets the driver types.
+        ///     Gets or sets the naming conventions.
         /// </summary>
         [ImportMany]
-        public System.Lazy<IDriver, IDictionary<string, object>>[] DriverTypes { get; set; }
+        public Lazy<INamingConvention, IDictionary<string, object>>[] NamingConventions { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the source types.
+        /// </summary>
+        [ImportMany]
+        public Lazy<ISourceType, IDictionary<string, object>>[] SourceTypes { get; set; }
+
+        #endregion
 
         #region Public methods and operators
 
         /// <summary>
-        /// Import components.
+        /// The apply naming convention.
+        /// </summary>
+        /// <param name="value">
+        /// The value.
+        /// </param>
+        /// <param name="conventionName">
+        /// The convention name.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        public string ApplyNamingConvention(string value, string conventionName)
+        {
+            foreach (var convention in this.NamingConventions)
+            {
+                if ((string)convention.Metadata["NameMetaData"] == conventionName)
+                {
+                    return convention.Value.ApplyNamingConvention(value);
+                }
+            }
+
+            return string.Empty;
+        }
+
+        /// <summary>
+        ///     Import components.
         /// </summary>
         public void Import()
         {
@@ -80,32 +125,7 @@
 
             // Fill the imports of this object
             container.ComposeParts(this);
-            Logger.Info($"Started DoImport() - {importfolder}");
-        }
-
-        /// <summary>
-        /// The apply naming convention.
-        /// </summary>
-        /// <param name="value">
-        /// The value.
-        /// </param>
-        /// <param name="conventionName">
-        /// The convention name.
-        /// </param>
-        /// <returns>
-        /// The <see cref="string"/>.
-        /// </returns>
-        public string ApplyNamingConvention(string value, string conventionName)
-        {
-            foreach (var convention in this.NamingConventions)
-            {
-                if ((string)convention.Metadata["NameMetaData"] == conventionName)
-                {
-                    return convention.Value.ApplyNamingConvention(value);
-                }
-            }
-
-            return string.Empty;
+            Logger.Info($"Completed DoImport() - {importfolder}");
         }
 
         #endregion

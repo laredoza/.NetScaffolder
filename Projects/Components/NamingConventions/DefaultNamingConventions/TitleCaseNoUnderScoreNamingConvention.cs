@@ -24,6 +24,7 @@ namespace DotNetScaffolder.Components.NamingConventions.DefaultNamingConventions
     /// </summary>
     [Export(typeof(INamingConvention))]
     [ExportMetadata("NameMetaData", "TitleCaseNoUnderScore")]
+    [ExportMetadata("ValueMetaData", "1BC1B0C4-1E41-9146-82CF-599181CE4411")]
     public class TitleCaseNoUnderScoreNamingConvention : INamingConvention
     {
         #region Public methods and operators

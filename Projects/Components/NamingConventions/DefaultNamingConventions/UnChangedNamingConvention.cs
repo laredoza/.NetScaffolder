@@ -23,14 +23,14 @@ namespace DotNetScaffolder.Components.NamingConventions.DefaultNamingConventions
     /// </summary>
     /// <example>securityview will be SecurityView</example>
     [Export(typeof(INamingConvention))]
-    [ExportMetadata("NameMetaData", "TitleCase")]
-    [ExportMetadata("ValueMetaData", "1BC1B0C4-1E41-9146-82CF-599181CE4410")]
-    public class TitleCaseNamingConvention : INamingConvention
+    [ExportMetadata("NameMetaData", "UnChanged")]
+    [ExportMetadata("ValueMetaData", "1BC1B0C4-1E41-9146-82CF-599181CE4412")]
+    public class UnChangedNamingConvention : INamingConvention
     {
         #region Public methods and operators
 
         /// <summary>
-        /// The apply naming convention.
+        /// Apply naming convention.
         /// </summary>
         /// <param name="value">
         /// The value.
@@ -42,9 +42,7 @@ namespace DotNetScaffolder.Components.NamingConventions.DefaultNamingConventions
         /// </exception>
         public string ApplyNamingConvention(string value)
         {
-            return System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(value.ToLower());
-                //case NamingConventionType.TitleCaseNoUnderScore:
-                //    return System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(input.ToLower()).Replace("_", "");
+            return value;
         }
 
         #endregion

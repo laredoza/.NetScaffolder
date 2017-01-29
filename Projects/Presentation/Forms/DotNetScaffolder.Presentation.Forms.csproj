@@ -116,6 +116,26 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Components\Common\DotNetScaffolder.Components.Common.csproj">
+      <Project>{b39709b5-d887-46e1-acc6-cbd7880e90c5}</Project>
+      <Name>DotNetScaffolder.Components.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Components\Drivers\DefaultDrivers\DotNetScaffolder.Components.Drivers.DefaultDrivers.csproj">
+      <Project>{58940e23-a83f-40da-b9d8-84e9ab420bec}</Project>
+      <Name>DotNetScaffolder.Components.Drivers.DefaultDrivers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Components\NamingConventions\DefaultNamingConventions\DotNetScaffolder.Components.NamingConventions.DefaultNamingConventions.csproj">
+      <Project>{5f5a03d7-a884-4495-96f4-d6859ecb1489}</Project>
+      <Name>DotNetScaffolder.Components.NamingConventions.DefaultNamingConventions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Components\SourceTypes\DefaultSourceTypes\DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.csproj">
+      <Project>{26cc21a6-d23d-4af5-901f-3df6e5ddbc3b}</Project>
+      <Name>DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\Configuration\DotNetScaffolder.Core.Configuration.csproj">
+      <Project>{ECF3D386-0124-450F-A763-92175FF00547}</Project>
+      <Name>DotNetScaffolder.Core.Configuration</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Mapping\MetaData\DotNetScaffolder.Mapping.MetaData.csproj">
       <Project>{3f206474-14c2-4586-b57a-4edc76795161}</Project>
       <Name>DotNetScaffolder.Mapping.MetaData</Name>

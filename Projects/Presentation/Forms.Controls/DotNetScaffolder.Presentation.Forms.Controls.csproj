@@ -43,6 +43,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -100,6 +101,18 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Components\Common\DotNetScaffolder.Components.Common.csproj">
+      <Project>{b39709b5-d887-46e1-acc6-cbd7880e90c5}</Project>
+      <Name>DotNetScaffolder.Components.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\Common\Core.Common.csproj">
+      <Project>{CDACE52C-F991-40B5-80ED-4947A100EC52}</Project>
+      <Name>Core.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\Configuration\DotNetScaffolder.Core.Configuration.csproj">
+      <Project>{ECF3D386-0124-450F-A763-92175FF00547}</Project>
+      <Name>DotNetScaffolder.Core.Configuration</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Mapping\MetaData\DotNetScaffolder.Mapping.MetaData.csproj">
       <Project>{3F206474-14C2-4586-B57A-4EDC76795161}</Project>
       <Name>DotNetScaffolder.Mapping.MetaData</Name>
