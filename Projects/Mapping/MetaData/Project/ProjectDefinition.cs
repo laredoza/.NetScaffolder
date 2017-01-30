@@ -45,6 +45,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Project
         public ProjectDefinition()
         {
             this.Domains = new List<DomainDefinition>();
+            this.CollectionOptions = new List<CollectionOption>();
         }
 
         #endregion
@@ -87,6 +88,11 @@ namespace DotNetScaffolder.Mapping.MetaData.Project
         ///     Gets or sets the version of the project definition.
         /// </summary>
         public double Version { get; set; }
+
+        /// <summary>
+        /// Gets or sets the collection options.
+        /// </summary>
+        public List<CollectionOption> CollectionOptions { get; set; }
 
         #endregion
 

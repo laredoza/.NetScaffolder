@@ -38,7 +38,7 @@
             this.label9 = new System.Windows.Forms.Label();
             this.ComboBoxSourceType = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.ComboBoxCollectionOption = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
             this.ComboBoxNamingConvention = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -144,17 +144,13 @@
             this.label8.TabIndex = 40;
             this.label8.Text = "Source Type:";
             // 
-            // comboBox3
+            // ComboBoxCollectionOption
             // 
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Items.AddRange(new object[] {
-            "ICollectionAndHashSet",
-            "IListAndList",
-            "ObservableCollection"});
-            this.comboBox3.Location = new System.Drawing.Point(112, 60);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(238, 21);
-            this.comboBox3.TabIndex = 39;
+            this.ComboBoxCollectionOption.FormattingEnabled = true;
+            this.ComboBoxCollectionOption.Location = new System.Drawing.Point(112, 60);
+            this.ComboBoxCollectionOption.Name = "ComboBoxCollectionOption";
+            this.ComboBoxCollectionOption.Size = new System.Drawing.Size(238, 21);
+            this.ComboBoxCollectionOption.TabIndex = 39;
             // 
             // label7
             // 
@@ -213,7 +209,7 @@
             this.Controls.Add(this.label9);
             this.Controls.Add(this.ComboBoxSourceType);
             this.Controls.Add(this.label8);
-            this.Controls.Add(this.comboBox3);
+            this.Controls.Add(this.ComboBoxCollectionOption);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.ComboBoxNamingConvention);
             this.Controls.Add(this.label6);
@@ -238,7 +234,7 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.ComboBox ComboBoxSourceType;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.ComboBox comboBox3;
+        private System.Windows.Forms.ComboBox ComboBoxCollectionOption;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ComboBox ComboBoxNamingConvention;
         private System.Windows.Forms.Label label6;

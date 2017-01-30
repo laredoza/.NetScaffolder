@@ -21,4 +21,18 @@
   <ModelPath>Banking.mdl</ModelPath>
   <OutputFolder>Models</OutputFolder>
   <Version>0.1</Version>
+  <CollectionOptions>
+    <CollectionOption>
+      <Name>ICollectionAndHashSet</Name>
+      <NameSpace />
+    </CollectionOption>
+    <CollectionOption>
+      <Name>IListAndList</Name>
+      <NameSpace />
+    </CollectionOption>
+    <CollectionOption>
+      <Name>ObservableCollection</Name>
+      <NameSpace />
+    </CollectionOption>
+  </CollectionOptions>
 </ProjectDefinition>

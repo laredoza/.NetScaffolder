@@ -408,7 +408,14 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
             this.ComboBoxDriver.DataSource = this.ReturnDriverTypes();
             this.ComboBoxDriver.DisplayMember = "Text";
             this.ComboBoxDriver.ValueMember = "Value";
-            
+
+            if (this.ApplicationService != null && this.ApplicationService.ProjectDefinition != null)
+            {
+                this.ComboBoxCollectionOption.DataSource = this.ApplicationService.ProjectDefinition.CollectionOptions;
+                this.ComboBoxCollectionOption.DisplayMember = "Name";
+                this.ComboBoxCollectionOption.ValueMember = "Name";
+            }
+
             if (this.SelectedDomain != null)
             {
                 this.TextBoxName.Text = this.SelectedDomain.Name;
