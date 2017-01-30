@@ -1,24 +1,40 @@
-﻿namespace DotNetScaffolder.Mapping.MetaData.Project
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="CollectionOption.cs" company="">
+//   
+// </copyright>
+// <summary>
+//   The collection option.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
+
+namespace DotNetScaffolder.Mapping.MetaData.Project
 {
+    #region Using
+
     using System;
     using System.Collections.Generic;
 
+    #endregion
+
+    /// <summary>
+    /// Collection options.
+    /// The selected collection will be used as the parent for any collections
+    /// </summary>
     [Serializable]
     public class CollectionOption
     {
+        #region Properties
+
+        /// <summary>
+        /// Gets or sets the name.
+        /// </summary>
         public string Name { get; set; }
+
+        /// <summary>
+        /// Gets or sets the name space.
+        /// </summary>
         public string NameSpace { get; set; }
 
-
-        public static List<CollectionOption> Load()
-        {
-            List<CollectionOption> collections = new List<CollectionOption>();
-
-            collections.Add(new CollectionOption { Name = "ICollectionAndHashSet", NameSpace = "" });
-            collections.Add(new CollectionOption { Name = "IListAndList", NameSpace = "" });
-            collections.Add(new CollectionOption { Name = "ObservableCollection", NameSpace = "" });
-
-            return collections;
-        }
+        #endregion
     }
 }
