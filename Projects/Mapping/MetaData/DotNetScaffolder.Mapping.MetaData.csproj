@@ -53,6 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Application\ApplicationSettings.cs" />
     <Compile Include="Domain\DomainDefinition.cs" />
     <Compile Include="Enum\ConfigLocation.cs" />
     <Compile Include="Enum\DatabaseGeneratedKeyType.cs" />
@@ -66,6 +67,8 @@
     <Compile Include="Model\DatabaseModel.cs" />
     <Compile Include="Model\Relationship.cs" />
     <Compile Include="Model\Table.cs" />
+    <Compile Include="Application\ApplicationServices\ConfigurationAplicationServiceFile.cs" />
+    <Compile Include="Application\ApplicationServices\IConfigurationAplicationService.cs" />
     <Compile Include="Project\CollectionOption.cs" />
     <Compile Include="Project\FilePersistenceOptions.cs" />
     <Compile Include="Project\ApplicationServices\ProjectDefinitionApplicationServiceFile.cs" />
