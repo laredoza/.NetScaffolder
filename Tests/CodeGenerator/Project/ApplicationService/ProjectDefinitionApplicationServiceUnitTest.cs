@@ -44,11 +44,14 @@ namespace DotNetScaffolder.Test.Project.ApplicationService
             projectDefinition.GroupBy = GenerationType.Domain;
             projectDefinition.ModelPath = "test.mdl";
             projectDefinition.Version = 0.1;
-
             projectDefinition.Domains.Add(new DomainDefinition
                                               {
                                                   Name = "Security"
                                               });
+            projectDefinition.Domains[0].NamingConventionId = Guid.NewGuid();
+            projectDefinition.Domains[0].SourceTypeId = Guid.NewGuid();
+            projectDefinition.Domains[0].DriverId = Guid.NewGuid();
+            projectDefinition.Domains[0].DriverTypeId = Guid.NewGuid();
         }
 
         /// <summary>

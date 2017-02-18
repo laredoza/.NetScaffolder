@@ -17,10 +17,7 @@
         public Form1()
         {
             this.InitializeComponent();
-
-            ScaffoldConfig.Load();
-
-            FilePersistenceOptions options = new FilePersistenceOptions { Path = @"Config\Banking.mdl" };
+            FilePersistenceOptions options = new FilePersistenceOptions { Path = @"Models\Banking.mdl" };
 
             applicationService = new ProjectDefinitionApplicationServiceFile
             {

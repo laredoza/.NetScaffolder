@@ -6,6 +6,7 @@ using System.Windows.Forms;
 
 namespace Presentation.UI
 {
+    using Configuration;
     using DotNetScaffolder.Presentation.Forms;
 
     static class Program
@@ -18,6 +19,7 @@ namespace Presentation.UI
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            ScaffoldConfig.Load();
             Application.Run(new Form1());
         }
     }

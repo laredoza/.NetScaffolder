@@ -13,7 +13,7 @@
         /// Tests moving a child item up or down. It also tests moving the top child up, or moving the bottom item down
         /// </summary>
         [TestMethod]
-        public void NodeExtensionsUnitTest_Test()
+        public void NodeExtensionsUnitTest_MoveParentsUpAndDown()
         {
             TreeView treeView = new TreeView();
             TreeNode parent1 = new TreeNode { Text = "Parent 1", Tag = "Parent1" };

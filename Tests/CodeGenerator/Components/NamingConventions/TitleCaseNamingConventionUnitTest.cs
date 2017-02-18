@@ -38,9 +38,9 @@ namespace DotNetScaffolder.Test.Components.NamingConventions
                 "The result should be TitleCase");
 
             Assert.AreEqual(
-                "TitleCase",
+                "Titlecase",
                 namingConvention.ApplyNamingConvention("titlecase"),
-                "The result should be TitleCase");
+                "The result should be Titlecase");
         }
 
         #endregion

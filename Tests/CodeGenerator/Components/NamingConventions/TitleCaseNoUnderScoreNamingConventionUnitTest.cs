@@ -34,7 +34,7 @@ namespace DotNetScaffolder.Test.Components.NamingConventions
             TitleCaseNoUnderScoreNamingConvention namingConvention = new TitleCaseNoUnderScoreNamingConvention();
             Assert.AreEqual("TestMe", namingConvention.ApplyNamingConvention("Test_Me"), "The result should be TestMe");
             Assert.AreEqual(
-                "TestMeNow",
+                "TestMenow",
                 namingConvention.ApplyNamingConvention("Test_Menow"),
                 "The result should be TestMeNow");
         }
