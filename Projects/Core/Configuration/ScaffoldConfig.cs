@@ -31,6 +31,12 @@ namespace Configuration
         [ImportMany]
         public static Lazy<ISourceType, IDictionary<string, object>>[] SourceTypes { get; set; }
 
+        [ImportMany]
+        public static Lazy<ILanguageOutput, IDictionary<string, object>>[] LanguageOutputs { get; set; }
+
+        [ImportMany]
+        public static Lazy<IOutputGenerator, IDictionary<string, object>>[] OutputGenerators { get; set; }
+
         public static void Load()
         {
             ComponentImporter importer = new ComponentImporter();
@@ -39,6 +45,7 @@ namespace Configuration
             DriverTypes = importer.DriverTypes;
             NamingConventions = importer.NamingConventions;
             SourceTypes = importer.SourceTypes;
+            LanguageOutputs = importer.LanguageOutputs;
         }
     }
 }

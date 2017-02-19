@@ -40,6 +40,8 @@ namespace DotNetScaffolder.Test.Components
             Assert.AreEqual(1, importer.SourceTypes.Length, "There should be 1 SourceType");
             Assert.IsNotNull(importer.DriverTypes, "DriverTypes should not be null");
             Assert.AreEqual(1, importer.DriverTypes.Length, "There should be 1 DriverType");
+            Assert.AreEqual(1, importer.LanguageOutputs.Length, "There should be 1 LanguageOutput");
+            Assert.AreEqual(1, importer.OutputGenerators.Length, "There should be 1 OutputGenerator");
         }
 
         #endregion

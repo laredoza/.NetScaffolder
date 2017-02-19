@@ -58,6 +58,15 @@ namespace DotNetScaffolder.Components.Common
         [ImportMany]
         public Lazy<ISourceType, IDictionary<string, object>>[] SourceTypes { get; set; }
 
+        /// <summary>
+        /// Gets or sets LanguageOutputs
+        /// </summary>
+        [ImportMany]
+        public Lazy<ILanguageOutput, IDictionary<string, object>>[] LanguageOutputs { get; set; }
+
+        [ImportMany]
+        public Lazy<IOutputGenerator, IDictionary<string, object>>[] OutputGenerators { get; set; }
+
         #endregion
 
         #region Public methods and operators

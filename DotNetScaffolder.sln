@@ -56,6 +56,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetScaffolder.Core.Configuration", "Projects\Core\Configuration\DotNetScaffolder.Core.Configuration.csproj", "{ECF3D386-0124-450F-A763-92175FF00547}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "LanguageOutputs", "LanguageOutputs", "{B03A99BD-20E3-4906-BD07-A1A487123E37}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetScaffolder.Components.LanguageOutputs.DefaultLanguageOutput", "Projects\Components\LanguageOutput\DefaultLanguageOutput\DotNetScaffolder.Components.LanguageOutputs.DefaultLanguageOutput.csproj", "{E21010EA-7789-4CCE-A09E-52B55E04A083}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "OutputGenerators", "OutputGenerators", "{71CF3112-1D32-4C53-A277-C9B7AD35F071}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetScaffolder.Components.OutputGenerators.DefaultOutputGenerators", "Projects\Components\OutputGenerators\DefaultOutputGenerators\DotNetScaffolder.Components.OutputGenerators.DefaultOutputGenerators.csproj", "{38ED89E2-6385-42FE-B3B3-8979F2046EFE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -106,6 +114,14 @@ Global
 		{ECF3D386-0124-450F-A763-92175FF00547}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ECF3D386-0124-450F-A763-92175FF00547}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ECF3D386-0124-450F-A763-92175FF00547}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E21010EA-7789-4CCE-A09E-52B55E04A083}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E21010EA-7789-4CCE-A09E-52B55E04A083}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E21010EA-7789-4CCE-A09E-52B55E04A083}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E21010EA-7789-4CCE-A09E-52B55E04A083}.Release|Any CPU.Build.0 = Release|Any CPU
+		{38ED89E2-6385-42FE-B3B3-8979F2046EFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38ED89E2-6385-42FE-B3B3-8979F2046EFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38ED89E2-6385-42FE-B3B3-8979F2046EFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38ED89E2-6385-42FE-B3B3-8979F2046EFE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -125,5 +141,9 @@ Global
 		{5A674854-AFD7-40C8-8445-4BFC7F49AAD3} = {BA3E5FE9-C1D0-4C4F-B16D-85AECFE1A2AE}
 		{96B8860E-531C-405F-9ABF-2FAE4E8F2759} = {0F106C86-D7A7-44FF-9E93-094AC6EFA50D}
 		{ECF3D386-0124-450F-A763-92175FF00547} = {259CE623-31A2-4558-A515-99852845AEC9}
+		{B03A99BD-20E3-4906-BD07-A1A487123E37} = {97FA326E-B630-4FFC-A5E3-5F79B0773BF6}
+		{E21010EA-7789-4CCE-A09E-52B55E04A083} = {B03A99BD-20E3-4906-BD07-A1A487123E37}
+		{71CF3112-1D32-4C53-A277-C9B7AD35F071} = {97FA326E-B630-4FFC-A5E3-5F79B0773BF6}
+		{38ED89E2-6385-42FE-B3B3-8979F2046EFE} = {71CF3112-1D32-4C53-A277-C9B7AD35F071}
 	EndGlobalSection
 EndGlobal

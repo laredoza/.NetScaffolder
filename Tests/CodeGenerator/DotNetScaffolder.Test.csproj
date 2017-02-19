@@ -342,9 +342,17 @@
       <Project>{58940e23-a83f-40da-b9d8-84e9ab420bec}</Project>
       <Name>DotNetScaffolder.Components.Drivers.DefaultDrivers</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Projects\Components\LanguageOutput\DefaultLanguageOutput\DotNetScaffolder.Components.LanguageOutputs.DefaultLanguageOutput.csproj">
+      <Project>{e21010ea-7789-4cce-a09e-52b55e04a083}</Project>
+      <Name>DotNetScaffolder.Components.LanguageOutputs.DefaultLanguageOutput</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Projects\Components\NamingConventions\DefaultNamingConventions\DotNetScaffolder.Components.NamingConventions.DefaultNamingConventions.csproj">
       <Project>{5f5a03d7-a884-4495-96f4-d6859ecb1489}</Project>
       <Name>DotNetScaffolder.Components.NamingConventions.DefaultNamingConventions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Projects\Components\OutputGenerators\DefaultOutputGenerators\DotNetScaffolder.Components.OutputGenerators.DefaultOutputGenerators.csproj">
+      <Project>{38ed89e2-6385-42fe-b3b3-8979f2046efe}</Project>
+      <Name>DotNetScaffolder.Components.OutputGenerators.DefaultOutputGenerators</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Projects\Components\SourceTypes\DefaultSourceTypes\DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.csproj">
       <Project>{26cc21a6-d23d-4af5-901f-3df6e5ddbc3b}</Project>
