@@ -80,6 +80,9 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Application\ApplicationService\ConfigurationAplicationServiceFileUnitTest.cs" />
+    <Compile Include="Application\ApplicationService\ConfigurationAplicationServiceUnitTest.cs" />
+    <Compile Include="Application\ApplicationSettingsUnitTest.cs" />
     <Compile Include="Components\ComponentImporterUnitTest.cs" />
     <Compile Include="Components\Drivers\EFSqlServerDriverUnitTest.cs" />
     <Compile Include="Components\NamingConventions\TitleCaseNamingConventionUnitTest.cs" />
@@ -97,6 +100,8 @@
     <Compile Include="Presentation\Controls\ProjectDomainUserControlUnitTest.cs" />
     <Compile Include="Project\ApplicationService\ProjectDefinitionApplicationServiceFileUnitTest.cs" />
     <Compile Include="Project\ApplicationService\ProjectDefinitionApplicationServiceUnitTest.cs" />
+    <Compile Include="Project\DataTypeUnitTest.cs" />
+    <Compile Include="Project\Packages\TemplateUnitTest.cs" />
     <Compile Include="Project\ProjectDefinitionUnitTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="OracleDataModelerImporter.cs" />

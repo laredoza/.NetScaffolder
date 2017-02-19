@@ -50,6 +50,14 @@ namespace DotNetScaffolder.Mapping.MetaData.Enum
 
         DriverId,
 
-        DriverTypeId
+        DriverTypeId,
+
+        TemplateId,
+
+        TemplateName,
+
+        TemplatePath,
+
+        TemplateVersion
     }
 }

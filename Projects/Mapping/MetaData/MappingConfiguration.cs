@@ -29,7 +29,7 @@
             //this.Drivers = Driver.Load(this.Id);
             this.Packages = new Packages();
             this.Packages.Load();
-            this.DataTypes = DataType.Load();
+            // this.DataTypes = DataType.Load();
             this.LanguageOutputs = LanguageOutput.Load();
         }
 

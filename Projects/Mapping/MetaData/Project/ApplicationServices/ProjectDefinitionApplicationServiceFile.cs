@@ -21,7 +21,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Project.ApplicationServices
     using DotNetScaffolder.Core.Common.Serializer;
     using DotNetScaffolder.Mapping.MetaData.Domain;
     using DotNetScaffolder.Mapping.MetaData.Enum;
-
+    using System.Xml.Serialization;
     #endregion
 
     /// <summary>
@@ -68,6 +68,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Project.ApplicationServices
         /// <summary>
         /// Gets or sets the validation result.
         /// </summary>
+        [XmlIgnore]
         public Dictionary<ValidationType, string> ValidationResult { get; set; }
 
         #endregion

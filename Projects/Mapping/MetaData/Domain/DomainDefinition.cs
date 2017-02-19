@@ -130,7 +130,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Domain
         {
             Logger.Trace("Started Validate()");
 
-            this.ValidationResult = new Dictionary<ValidationType, string>();
+            this.ValidationResult.Clear();
 
             if (string.IsNullOrEmpty(this.Name))
             {

@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace DotNetScaffolder.Mapping.MetaData.Application.ApplicationServices
 {
@@ -34,6 +35,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Application.ApplicationServices
         /// <summary>
         /// Gets or sets the validation result.
         /// </summary>
+        [XmlIgnore]
         public Dictionary<ValidationType, string> ValidationResult { get; set; }
 
         /// <summary>
@@ -54,7 +56,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Application.ApplicationServices
 
             this.ValidationResult = this.ApplicationSettings.Validate();
 
-            if (this.Validate().Count == 0)
+            if (this.ValidationResult.Count == 0)
             {
                 ObjectXMLSerializer<ApplicationSettings>.Save(
                     this.ApplicationSettings,
@@ -72,7 +74,18 @@ namespace DotNetScaffolder.Mapping.MetaData.Application.ApplicationServices
 
         public Dictionary<ValidationType, string> Validate()
         {
-            throw new NotImplementedException();
+            Logger.Trace($"Started Validate()");
+            this.ValidationResult.Clear();
+
+            this.ApplicationSettings.Validate();
+
+            foreach (var validation in this.ApplicationSettings.ValidationResult)
+            {
+                this.ValidationResult.Add(validation.Key, validation.Value);
+            }
+
+            Logger.Trace($"Completed Validate()");
+            return this.ValidationResult;
         }
     }
 }
