@@ -58,6 +58,10 @@ namespace DotNetScaffolder.Mapping.MetaData.Enum
 
         TemplatePath,
 
-        TemplateVersion
+        TemplateVersion,
+
+        TemplateLanguageOutputId,
+
+        TemplateGeneratorTypeId
     }
 }

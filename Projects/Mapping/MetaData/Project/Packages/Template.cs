@@ -24,11 +24,10 @@
         public ConfigLocation ConfigLocation { get; set; }
         public double Version { get; set; }
 
-        //Todo: LanguageOutput should be a plugin not an enum
-        public LanguageOutput LanguageOutput { get; set; }
-        //Todo: LanguageOutput should be a plugin not an TemplateGeneratorType
-        public TemplateGeneratorType GeneratorType { get; set; }
+        public Guid LanguageOutputId { get; set; }
+        public Guid GeneratorTypeId { get; set; }
         public List<string> DefaultSettings { get; set; }
+
         [XmlIgnore]
         public Dictionary<ValidationType, string> ValidationResult{ get; set; }
 
@@ -60,6 +59,16 @@
             if (string.IsNullOrEmpty(this.TemplatePath))
             {
                 this.ValidationResult.Add(ValidationType.TemplatePath, "TemplatePath may not be empty");
+            }
+
+            if (this.LanguageOutputId == Guid.Empty)
+            {
+                this.ValidationResult.Add(ValidationType.TemplateLanguageOutputId, "TemplateLanguageOutputId may not be empty");
+            }
+
+            if (this.GeneratorTypeId == Guid.Empty)
+            {
+                this.ValidationResult.Add(ValidationType.TemplateGeneratorTypeId, "TemplateLanguageOutputId may not be empty");
             }
 
             //Todo: Add back

@@ -62,7 +62,6 @@
     <Compile Include="Enum\ValidationType.cs" />
     <Compile Include="Hierarchy.cs" />
     <Compile Include="IValidate.cs" />
-    <Compile Include="MappingConfiguration.cs" />
     <Compile Include="Model\Column.cs" />
     <Compile Include="Model\DatabaseModel.cs" />
     <Compile Include="Model\Relationship.cs" />
@@ -74,19 +73,17 @@
     <Compile Include="Project\ApplicationServices\ProjectDefinitionApplicationServiceFile.cs" />
     <Compile Include="Project\ApplicationServices\IProjectDefinitionApplicationService.cs" />
     <Compile Include="Project\Packages\DataType.cs" />
-    <Compile Include="Project\Packages\LanguageOutput.cs" />
     <Compile Include="Project\Packages\Package.cs" />
     <Compile Include="Project\Packages\Packages.cs" />
     <Compile Include="Project\Packages\Template.cs" />
-    <Compile Include="Project\Packages\TemplateGeneratorType.cs" />
     <Compile Include="Project\Packages\Templates.cs" />
     <Compile Include="Project\ProjectDefinition.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Core\Common\Core.Common.csproj">
+    <ProjectReference Include="..\..\Core\Common\DotNetScaffolder.Core.Common.csproj">
       <Project>{CDACE52C-F991-40B5-80ED-4947A100EC52}</Project>
-      <Name>Core.Common</Name>
+      <Name>DotNetScaffolder.Core.Common</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

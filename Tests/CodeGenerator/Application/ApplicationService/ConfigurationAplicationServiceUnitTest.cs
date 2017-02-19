@@ -5,6 +5,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using DotNetScaffolder.Mapping.MetaData.Application.ApplicationServices;
 using DotNetScaffolder.Mapping.MetaData.Project.Packages;
 using DotNetScaffolder.Mapping.MetaData.Enum;
+using Configuration;
 
 namespace DotNetScaffolder.Test.Application.ApplicationService
 {
@@ -30,7 +31,19 @@ namespace DotNetScaffolder.Test.Application.ApplicationService
             dataTypes.Add(new DataType { Id = Guid.NewGuid(), Name = "ViewModel" });
             applicationService.ApplicationSettings.DataTypes = dataTypes;
 
-            Template template = new Template { ConfigLocation = ConfigLocation.Data, DataType = dataTypes[0], Id = Guid.NewGuid(), Name = "Template", Version =1, TemplatePath = "Test.t4" };
+            ScaffoldConfig.Load();
+
+            Template template = new Template {
+                ConfigLocation = ConfigLocation.Data,
+                DataType = dataTypes[0],
+                Id = Guid.NewGuid(),
+                Name = "Template",
+                Version =1,
+                TemplatePath = "Test.t4",
+                LanguageOutputId = new Guid(ScaffoldConfig.LanguageOutputs[0].Metadata["ValueMetaData"].ToString()),
+                GeneratorTypeId = new Guid(ScaffoldConfig.OutputGenerators[0].Metadata["ValueMetaData"].ToString()),
+            };
+
             applicationService.ApplicationSettings.Templates.Add(template);
         }
 

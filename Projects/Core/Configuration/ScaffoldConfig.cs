@@ -46,6 +46,7 @@ namespace Configuration
             NamingConventions = importer.NamingConventions;
             SourceTypes = importer.SourceTypes;
             LanguageOutputs = importer.LanguageOutputs;
+            OutputGenerators = importer.OutputGenerators;
         }
     }
 }

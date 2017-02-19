@@ -358,9 +358,9 @@
       <Project>{26cc21a6-d23d-4af5-901f-3df6e5ddbc3b}</Project>
       <Name>DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Projects\Core\Common\Core.Common.csproj">
+    <ProjectReference Include="..\..\Projects\Core\Common\DotNetScaffolder.Core.Common.csproj">
       <Project>{cdace52c-f991-40b5-80ed-4947a100ec52}</Project>
-      <Name>Core.Common</Name>
+      <Name>DotNetScaffolder.Core.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Projects\Core\Configuration\DotNetScaffolder.Core.Configuration.csproj">
       <Project>{ECF3D386-0124-450F-A763-92175FF00547}</Project>

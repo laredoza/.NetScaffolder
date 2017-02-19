@@ -105,9 +105,9 @@
       <Project>{b39709b5-d887-46e1-acc6-cbd7880e90c5}</Project>
       <Name>DotNetScaffolder.Components.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Core\Common\Core.Common.csproj">
+    <ProjectReference Include="..\..\Core\Common\DotNetScaffolder.Core.Common.csproj">
       <Project>{CDACE52C-F991-40B5-80ED-4947A100EC52}</Project>
-      <Name>Core.Common</Name>
+      <Name>DotNetScaffolder.Core.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Core\Configuration\DotNetScaffolder.Core.Configuration.csproj">
       <Project>{ECF3D386-0124-450F-A763-92175FF00547}</Project>
