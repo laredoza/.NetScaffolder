@@ -14,10 +14,10 @@ namespace Configuration
     public class ScaffoldConfig
     {
         /// <summary>
-        ///     Gets or sets the driver types.
+        ///     Gets or sets the drivers.
         /// </summary>
         [ImportMany]
-        public static Lazy<IDriver, IDictionary<string, object>>[] DriverTypes { get; set; }
+        public static Lazy<IDriver, IDictionary<string, object>>[] Drivers { get; set; }
 
         /// <summary>
         ///     Gets or sets the naming conventions.
@@ -42,7 +42,7 @@ namespace Configuration
             ComponentImporter importer = new ComponentImporter();
             importer.Import();
 
-            DriverTypes = importer.DriverTypes;
+            Drivers = importer.Drivers;
             NamingConventions = importer.NamingConventions;
             SourceTypes = importer.SourceTypes;
             LanguageOutputs = importer.LanguageOutputs;

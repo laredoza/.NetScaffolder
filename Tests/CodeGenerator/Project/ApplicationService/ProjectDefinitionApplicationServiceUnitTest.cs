@@ -85,12 +85,17 @@ namespace DotNetScaffolder.Test.Project.ApplicationService
 
             applicationService.ProjectDefinition.Domains.Add(domain);
             applicationService.Validate();
-            Assert.AreEqual(6, applicationService.ValidationResult.Count, "There should be 6 validation errors");
+            Assert.AreEqual(10, applicationService.ValidationResult.Count, "There should be 10 validation errors");
 
             applicationService.ProjectDefinition.BaseNameSpace = "a";
             applicationService.ProjectDefinition.OutputFolder = "b";
             applicationService.ProjectDefinition.Version = 0.1;
             applicationService.ProjectDefinition.ModelPath = "c";
+            applicationService.ProjectDefinition.Domains[0].NamingConventionId = Guid.NewGuid();
+            applicationService.ProjectDefinition.Domains[0].SourceTypeId = Guid.NewGuid();
+            applicationService.ProjectDefinition.Domains[0].DriverId = Guid.NewGuid();
+            applicationService.ProjectDefinition.Domains[0].DriverTypeId = Guid.NewGuid();
+
             domain.Name = "Test Domain";
             domain.Id = Guid.NewGuid();
             applicationService.Validate();

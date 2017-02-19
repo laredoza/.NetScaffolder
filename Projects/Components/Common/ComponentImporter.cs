@@ -44,7 +44,7 @@ namespace DotNetScaffolder.Components.Common
         ///     Gets or sets the driver types.
         /// </summary>
         [ImportMany]
-        public Lazy<IDriver, IDictionary<string, object>>[] DriverTypes { get; set; }
+        public Lazy<IDriver, IDictionary<string, object>>[] Drivers { get; set; }
 
         /// <summary>
         ///     Gets or sets the naming conventions.

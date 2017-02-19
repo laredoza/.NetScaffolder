@@ -7,7 +7,7 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace DotNetScaffolder.Mapping.MetaData.Enum
+namespace DotNetScaffolder.Core.Common.Validation
 {
     /// <summary>
     /// The validation type.

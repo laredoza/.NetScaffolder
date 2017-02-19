@@ -7,13 +7,11 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace DotNetScaffolder.Mapping.MetaData
+namespace DotNetScaffolder.Core.Common.Validation
 {
     #region Using
 
     using System.Collections.Generic;
-
-    using DotNetScaffolder.Mapping.MetaData.Enum;
 
     #endregion
 

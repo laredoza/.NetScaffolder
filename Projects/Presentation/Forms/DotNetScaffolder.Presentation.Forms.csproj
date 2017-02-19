@@ -140,6 +140,10 @@
       <Project>{26cc21a6-d23d-4af5-901f-3df6e5ddbc3b}</Project>
       <Name>DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Core\Common\DotNetScaffolder.Core.Common.csproj">
+      <Project>{CDACE52C-F991-40B5-80ED-4947A100EC52}</Project>
+      <Name>DotNetScaffolder.Core.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Core\Configuration\DotNetScaffolder.Core.Configuration.csproj">
       <Project>{ECF3D386-0124-450F-A763-92175FF00547}</Project>
       <Name>DotNetScaffolder.Core.Configuration</Name>

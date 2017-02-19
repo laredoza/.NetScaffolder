@@ -59,9 +59,7 @@
     <Compile Include="Enum\DatabaseGeneratedKeyType.cs" />
     <Compile Include="Enum\GenerationType.cs" />
     <Compile Include="Enum\RelationshipType.cs" />
-    <Compile Include="Enum\ValidationType.cs" />
     <Compile Include="Hierarchy.cs" />
-    <Compile Include="IValidate.cs" />
     <Compile Include="Model\Column.cs" />
     <Compile Include="Model\DatabaseModel.cs" />
     <Compile Include="Model\Relationship.cs" />

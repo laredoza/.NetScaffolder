@@ -4,13 +4,14 @@
     using System.Collections.Generic;
     using Enum;
     using Common.Logging;
-    using System.Xml.Serialization;    /// <summary>
-                                       /// This class is used to represent the base data types used by 
-                                       /// the generator.
-                                       /// </summary>
-                                       /// <example>
-                                       /// Context, Entity, Repository 
-                                       /// </example>
+    using System.Xml.Serialization;
+    using Core.Common.Validation;/// <summary>
+                                 /// This class is used to represent the base data types used by 
+                                 /// the generator.
+                                 /// </summary>
+                                 /// <example>
+                                 /// Context, Entity, Repository 
+                                 /// </example>
     public class DataType : IValidate
     {
         /// <summary>

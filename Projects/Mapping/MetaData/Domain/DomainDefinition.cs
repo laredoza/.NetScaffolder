@@ -22,7 +22,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Domain
     using DotNetScaffolder.Mapping.MetaData.Model;
     using DotNetScaffolder.Mapping.MetaData.Project;
     using DotNetScaffolder.Mapping.MetaData.Project.Packages;
-
+    using Core.Common.Validation;
     #endregion
 
     /// <summary>
@@ -50,6 +50,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Domain
             this.Tables = new List<Table>();
             this.Package = new Package();
             this.Id = Guid.NewGuid();
+            this.ValidationResult = new Dictionary<ValidationType, string>();
         }
 
         #endregion

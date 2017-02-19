@@ -129,7 +129,6 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
             {
                 return this.selectedDomain;
             }
-
             set
             {
                 this.selectedDomain = value;
@@ -302,7 +301,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         {
             List<ComboboxItem> items = new List<ComboboxItem>();
 
-            foreach (var driverType in ScaffoldConfig.DriverTypes)
+            foreach (var driverType in ScaffoldConfig.Drivers)
             {
                 items.Add(
                     new ComboboxItem
@@ -328,7 +327,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         {
             List<ComboboxItem> items = new List<ComboboxItem>();
 
-            foreach (var driverType in ScaffoldConfig.DriverTypes)
+            foreach (var driverType in ScaffoldConfig.Drivers)
             {
                 if (driverType.Metadata["TypeIdMetaData"].ToString() == driver.Value.ToString().ToUpper())
                 {
@@ -419,10 +418,25 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
             if (this.SelectedDomain != null)
             {
                 this.TextBoxName.Text = this.SelectedDomain.Name;
-                this.ComboBoxNamingConvention.SelectedValue = this.SelectedNamingConvention;
-                this.ComboBoxSourceType.SelectedValue = this.SelectedSourceType;
-                this.ComboBoxDriver.SelectedValue = this.SelectedDriver;
-                this.ComboBoxDriverType.SelectedValue = this.SelectedDriverType;
+                if (this.SelectedNamingConvention != Guid.Empty)
+                {
+                    this.ComboBoxNamingConvention.SelectedValue = this.SelectedNamingConvention;
+                }
+
+                if (this.SelectedSourceType != Guid.Empty)
+                {
+                    this.ComboBoxSourceType.SelectedValue = this.SelectedSourceType;
+                }
+
+                if (this.SelectedDriver != Guid.Empty)
+                {
+                    this.ComboBoxDriver.SelectedValue = this.SelectedDriver;
+                }
+
+                if (this.SelectedDriverType != Guid.Empty)
+                {
+                    this.ComboBoxDriverType.SelectedValue = this.SelectedDriverType;
+                }
             }
 
             Logger.Trace("Completed UpdateDataSource()");

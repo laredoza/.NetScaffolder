@@ -19,7 +19,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Project
 
     using DotNetScaffolder.Mapping.MetaData.Domain;
     using DotNetScaffolder.Mapping.MetaData.Enum;
-
+    using Core.Common.Validation;
     #endregion
 
     /// <summary>
@@ -137,7 +137,8 @@ namespace DotNetScaffolder.Mapping.MetaData.Project
 
             foreach (DomainDefinition domainDefinition in this.Domains)
             {
-                if (domainDefinition.Validate().Count > 0)
+                domainDefinition.Validate();
+                if (domainDefinition.ValidationResult.Count > 0)
                 {
                     foreach (var key in domainDefinition.ValidationResult.Keys)
                     {

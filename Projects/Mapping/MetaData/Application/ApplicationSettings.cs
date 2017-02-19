@@ -7,6 +7,7 @@ using DotNetScaffolder.Mapping.MetaData.Enum;
 using DotNetScaffolder.Mapping.MetaData.Project.Packages;
 using Common.Logging;
 using System.Xml.Serialization;
+using DotNetScaffolder.Core.Common.Validation;
 
 namespace DotNetScaffolder.Mapping.MetaData.Application
 {

@@ -18,7 +18,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
 
     using DotNetScaffolder.Mapping.MetaData.Enum;
     using DotNetScaffolder.Mapping.MetaData.Project;
-
+    using Core.Common.Validation;
     #endregion
 
     /// <summary>

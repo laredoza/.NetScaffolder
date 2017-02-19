@@ -5,6 +5,7 @@
     using DotNetScaffolder.Mapping.MetaData.Enum;
     using Common.Logging;
     using System.Xml.Serialization;
+    using Core.Common.Validation;
     public class Template : IValidate
     {
         #region Static Fields

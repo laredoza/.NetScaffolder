@@ -1,5 +1,6 @@
 ﻿using Common.Logging;
 using DotNetScaffolder.Core.Common.Serializer;
+using DotNetScaffolder.Core.Common.Validation;
 using DotNetScaffolder.Mapping.MetaData.Enum;
 using DotNetScaffolder.Mapping.MetaData.Project;
 using System;
