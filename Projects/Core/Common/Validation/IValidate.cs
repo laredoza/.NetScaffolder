@@ -21,12 +21,8 @@ namespace DotNetScaffolder.Core.Common.Validation
     public interface IValidate
     {
         #region Properties
-
-        /// <summary>
-        /// Gets or sets the validation result.
-        /// </summary>
-        Dictionary<ValidationType, string> ValidationResult { get; set; }
-
+        
+        List<Validation> ValidationResult { get; set; }
         #endregion
 
         #region Public methods and operators
@@ -38,7 +34,7 @@ namespace DotNetScaffolder.Core.Common.Validation
         ///     The <see cref="List" />
         ///     Errors returned
         /// </returns>
-        Dictionary<ValidationType, string> Validate();
+        List<Validation> Validate();
 
         #endregion
     }

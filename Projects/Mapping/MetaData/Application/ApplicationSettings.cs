@@ -30,9 +30,9 @@ namespace DotNetScaffolder.Mapping.MetaData.Application
         /// Gets or sets the validation result.
         /// </summary>
         [XmlIgnore]
-        public Dictionary<ValidationType, string> ValidationResult { get; set; }
+        public List<Validation> ValidationResult { get; set; }
 
-        public Dictionary<ValidationType, string> Validate()
+        public List<Validation> Validate()
         {
             Logger.Trace("Started Validate()");
             this.ValidationResult.Clear();
@@ -43,7 +43,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Application
 
                 foreach (var tempResult in dataType.ValidationResult)
                 {
-                    this.ValidationResult.Add(tempResult.Key, tempResult.Value);
+                    this.ValidationResult.Add(tempResult);
                 }
             }
 
@@ -53,7 +53,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Application
 
                 foreach (var validationResult in template.ValidationResult)
                 {
-                    this.ValidationResult.Add(validationResult.Key, validationResult.Value);
+                    this.ValidationResult.Add(validationResult);
                 }
             }
 
@@ -65,7 +65,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Application
         {
             Logger.Trace("Started ApplicationSettings()");
             this.Templates = new List<Template>();
-            this.ValidationResult = new Dictionary<ValidationType, string>();
+            this.ValidationResult = new List<Validation>();
             this.DataTypes = new List<DataType>();
             Logger.Trace("Completed ApplicationSettings()");
         }

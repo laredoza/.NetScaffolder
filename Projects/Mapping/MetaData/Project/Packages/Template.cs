@@ -30,59 +30,59 @@
         public List<string> DefaultSettings { get; set; }
 
         [XmlIgnore]
-        public Dictionary<ValidationType, string> ValidationResult{ get; set; }
+        public List<Validation> ValidationResult { get; set; }
 
         public Template()
         {
             Logger.Trace("Started Template()");
-            this.ValidationResult = new Dictionary<ValidationType, string>();
+            this.ValidationResult = new List<Validation>();
             this.Enabled = false;
             this.DataType = new DataType();
             this.DefaultSettings = new List<string>();
             Logger.Trace("Completed Template()");
         }
 
-        public Dictionary<ValidationType, string> Validate()
+        public List<Validation> Validate()
         {
             Logger.Trace("Started Validate()");
             this.ValidationResult.Clear();
 
             if (this.Id == Guid.Empty)
             {
-                this.ValidationResult.Add(ValidationType.TemplateId, "TemplateId may not be empty");
+                this.ValidationResult.Add(new Validation(ValidationType.TemplateId, "TemplateId may not be empty"));
             }
 
             if (string.IsNullOrEmpty(this.Name))
             {
-                this.ValidationResult.Add(ValidationType.TemplateName, "TemplateName may not be empty");
+                this.ValidationResult.Add(new Validation(ValidationType.TemplateName, "TemplateName may not be empty"));
             }
 
             if (string.IsNullOrEmpty(this.TemplatePath))
             {
-                this.ValidationResult.Add(ValidationType.TemplatePath, "TemplatePath may not be empty");
+                this.ValidationResult.Add(new Validation(ValidationType.TemplatePath, "TemplatePath may not be empty"));
             }
 
             if (this.LanguageOutputId == Guid.Empty)
             {
-                this.ValidationResult.Add(ValidationType.TemplateLanguageOutputId, "TemplateLanguageOutputId may not be empty");
+                this.ValidationResult.Add(new Validation(ValidationType.TemplateLanguageOutputId, "TemplateLanguageOutputId may not be empty"));
             }
 
             if (this.GeneratorTypeId == Guid.Empty)
             {
-                this.ValidationResult.Add(ValidationType.TemplateGeneratorTypeId, "TemplateLanguageOutputId may not be empty");
+                this.ValidationResult.Add(new Validation(ValidationType.TemplateGeneratorTypeId, "TemplateLanguageOutputId may not be empty"));
             }
 
             //Todo: Add back
-            //this.DataType.Validate();
+            this.DataType.Validate();
 
-            //foreach (var validationResult in this.DataType.ValidationResult)
-            //{
-            //    this.ValidationResult.Add(validationResult.Key, validationResult.Value);
-            //}
+            foreach (var validationResult in this.DataType.ValidationResult)
+            {
+                this.ValidationResult.Add(validationResult);
+            }
 
             if (this.Version == 0)
             {
-                this.ValidationResult.Add(ValidationType.TemplateVersion, "TemplateVersion may not be 0");
+                this.ValidationResult.Add(new Validation(ValidationType.TemplateVersion, "TemplateVersion may not be 0"));
             }
 
             //Todo: Handle LanguageOutput & TemplateGeneratorType

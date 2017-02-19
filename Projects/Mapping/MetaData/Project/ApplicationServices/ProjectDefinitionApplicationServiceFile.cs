@@ -70,7 +70,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Project.ApplicationServices
         /// Gets or sets the validation result.
         /// </summary>
         [XmlIgnore]
-        public Dictionary<ValidationType, string> ValidationResult { get; set; }
+        public List<Validation> ValidationResult { get; set; }
 
         #endregion
 
@@ -172,7 +172,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Project.ApplicationServices
         /// The <see cref="List{T}"/>
         /// Errors returned
         /// </returns>
-        public Dictionary<ValidationType, string> Validate()
+        public List<Validation> Validate()
         {
             Logger.Trace($"Started Validate()");
             this.ValidationResult = this.ProjectDefinition.Validate();

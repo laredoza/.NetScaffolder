@@ -37,7 +37,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Application.ApplicationServices
         /// Gets or sets the validation result.
         /// </summary>
         [XmlIgnore]
-        public Dictionary<ValidationType, string> ValidationResult { get; set; }
+        public List<Validation> ValidationResult { get; set; }
 
         /// <summary>
         ///     Gets or sets the file persistence options.
@@ -73,7 +73,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Application.ApplicationServices
             Logger.Trace($"Completed Save() - Path: {this.FilePersistenceOptions.Path}");
         }
 
-        public Dictionary<ValidationType, string> Validate()
+        public List<Validation> Validate()
         {
             Logger.Trace($"Started Validate()");
             this.ValidationResult.Clear();
@@ -82,7 +82,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Application.ApplicationServices
 
             foreach (var validation in this.ApplicationSettings.ValidationResult)
             {
-                this.ValidationResult.Add(validation.Key, validation.Value);
+                this.ValidationResult.Add(validation);
             }
 
             Logger.Trace($"Completed Validate()");

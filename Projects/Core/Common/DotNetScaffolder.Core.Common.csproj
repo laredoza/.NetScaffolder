@@ -57,6 +57,7 @@
     <Compile Include="Serializer\ObjectXMLSerializer.cs" />
     <Compile Include="Serializer\SerializedFormat.cs" />
     <Compile Include="Validation\IValidate.cs" />
+    <Compile Include="Validation\Validation.cs" />
     <Compile Include="Validation\ValidationType.cs" />
   </ItemGroup>
   <ItemGroup>

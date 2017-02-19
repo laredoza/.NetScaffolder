@@ -23,21 +23,21 @@
         public string Name { get; set; }
 
         [XmlIgnore]
-        public Dictionary<ValidationType, string> ValidationResult { get; set; }
+        public List<Validation> ValidationResult { get; set; }
 
-        public Dictionary<ValidationType, string> Validate()
+        public List<Validation> Validate()
         {
             Logger.Trace("Started Validate()");
             this.ValidationResult.Clear();
 
             if (this.Id == Guid.Empty)
             {
-                this.ValidationResult.Add(ValidationType.DomainId, "DomainId should not be empty");
+                this.ValidationResult.Add(new Validation(ValidationType.DomainId, "DomainId should not be empty"));
             }
 
             if (string.IsNullOrEmpty(this.Name))
             {
-                this.ValidationResult.Add(ValidationType.DomainName, "DomainName should not be empty");
+                this.ValidationResult.Add(new Validation(ValidationType.DomainName, "DomainName should not be empty"));
             }
             
             Logger.Trace("Completed Validate()");
@@ -47,7 +47,7 @@
         public DataType()
         {
             Logger.Trace("Started DataType()");
-            this.ValidationResult = new Dictionary<ValidationType, string>();
+            this.ValidationResult = new List<Validation>();
             Logger.Trace("Completed DataType()");
         }
     }

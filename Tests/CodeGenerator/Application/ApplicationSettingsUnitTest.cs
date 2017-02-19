@@ -17,7 +17,7 @@ namespace DotNetScaffolder.Test.Application
 
             applicationSettings.Validate();
             Assert.IsNotNull(applicationSettings.ValidationResult);
-            Assert.AreEqual(8, applicationSettings.ValidationResult.Count);
+            Assert.AreEqual(10, applicationSettings.ValidationResult.Count);
         }
     }
 }
