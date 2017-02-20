@@ -7,7 +7,7 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace DotNetScaffolder.Mapping.MetaData.Enum
+namespace DotNetScaffolder.Core.Common.Validation
 {
     /// <summary>
     /// The validation type.
@@ -50,6 +50,18 @@ namespace DotNetScaffolder.Mapping.MetaData.Enum
 
         DriverId,
 
-        DriverTypeId
+        DriverTypeId,
+
+        TemplateId,
+
+        TemplateName,
+
+        TemplatePath,
+
+        TemplateVersion,
+
+        TemplateLanguageOutputId,
+
+        TemplateGeneratorTypeId
     }
 }

@@ -3,24 +3,21 @@
     using System;
     using System.Linq;
     using System.Windows.Forms;
-
     using Configuration;
-
     using DotNetScaffolder.Mapping.MetaData.Project;
     using DotNetScaffolder.Mapping.MetaData.Project.ApplicationServices;
     using DotNetScaffolder.Presentation.Forms.Controls;
+    using DotNetScaffolder.Mapping.MetaData.Application.ApplicationServices;
 
     public partial class Form1 : Form
     {
         private IProjectDefinitionApplicationService applicationService;
+        private IConfigurationAplicationService configurationService;
 
         public Form1()
         {
             this.InitializeComponent();
-
-            ScaffoldConfig.Load();
-
-            FilePersistenceOptions options = new FilePersistenceOptions { Path = @"Config\Banking.mdl" };
+            FilePersistenceOptions options = new FilePersistenceOptions { Path = @"Models\Banking.mdl" };
 
             applicationService = new ProjectDefinitionApplicationServiceFile
             {
@@ -28,7 +25,16 @@
             };
             
             applicationService.Load();
-            
+
+            FilePersistenceOptions configOptions = new FilePersistenceOptions { Path = @"Config\Settings.xml" };
+
+            IConfigurationAplicationService applicationConfiguration = new ConfigurationAplicationServiceFile
+            {
+                FilePersistenceOptions = options
+            };
+
+            // applicationConfiguration.Load();
+
             this.ProjectDetailsUserControl1.Project = applicationService.ProjectDefinition;
             this.ProjectDomainUserControl1.SelectedIndexChanged += ProjectDomainUserControl1_SelectedIndexChanged;
             this.ProjectDomainUserControl1.ApplicationService = this.applicationService;

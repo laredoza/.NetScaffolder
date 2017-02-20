@@ -21,7 +21,8 @@ namespace DotNetScaffolder.Mapping.MetaData.Project.ApplicationServices
     using DotNetScaffolder.Core.Common.Serializer;
     using DotNetScaffolder.Mapping.MetaData.Domain;
     using DotNetScaffolder.Mapping.MetaData.Enum;
-
+    using System.Xml.Serialization;
+    using Core.Common.Validation;
     #endregion
 
     /// <summary>
@@ -68,7 +69,8 @@ namespace DotNetScaffolder.Mapping.MetaData.Project.ApplicationServices
         /// <summary>
         /// Gets or sets the validation result.
         /// </summary>
-        public Dictionary<ValidationType, string> ValidationResult { get; set; }
+        [XmlIgnore]
+        public List<Validation> ValidationResult { get; set; }
 
         #endregion
 
@@ -170,7 +172,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Project.ApplicationServices
         /// The <see cref="List{T}"/>
         /// Errors returned
         /// </returns>
-        public Dictionary<ValidationType, string> Validate()
+        public List<Validation> Validate()
         {
             Logger.Trace($"Started Validate()");
             this.ValidationResult = this.ProjectDefinition.Validate();

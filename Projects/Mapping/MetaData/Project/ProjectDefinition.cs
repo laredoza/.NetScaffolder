@@ -19,7 +19,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Project
 
     using DotNetScaffolder.Mapping.MetaData.Domain;
     using DotNetScaffolder.Mapping.MetaData.Enum;
-
+    using Core.Common.Validation;
     #endregion
 
     /// <summary>
@@ -82,7 +82,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Project
         ///     Gets or sets the validation result.
         /// </summary>
         [XmlIgnore]
-        public Dictionary<ValidationType, string> ValidationResult { get; set; }
+        public List<Validation> ValidationResult { get; set; }
 
         /// <summary>
         ///     Gets or sets the version of the project definition.
@@ -105,30 +105,30 @@ namespace DotNetScaffolder.Mapping.MetaData.Project
         ///     The <see cref="List{T}" />
         ///     Errors returned
         /// </returns>
-        public Dictionary<ValidationType, string> Validate()
+        public List<Validation> Validate()
         {
             Logger.Trace($"Started Validate()");
 
-            this.ValidationResult = new Dictionary<ValidationType, string>();
+            this.ValidationResult = new List<Validation>();
 
             if (string.IsNullOrEmpty(this.BaseNameSpace))
             {
-                this.ValidationResult.Add(ValidationType.ProjectBaseNameSpace, "BaseNameSpace may not be empty");
+                this.ValidationResult.Add(new Validation(ValidationType.ProjectBaseNameSpace, "BaseNameSpace may not be empty"));
             }
 
             if (string.IsNullOrEmpty(this.OutputFolder))
             {
-                this.ValidationResult.Add(ValidationType.ProjectOutputFolder, "OutputFolder may not be empty");
+                this.ValidationResult.Add(new Validation(ValidationType.ProjectOutputFolder, "OutputFolder may not be empty"));
             }
 
             if (this.Version == 0)
             {
-                this.ValidationResult.Add(ValidationType.ProjectVersion, "Version may not be 0");
+                this.ValidationResult.Add(new Validation(ValidationType.ProjectVersion, "Version may not be 0"));
             }
 
             if (string.IsNullOrEmpty(this.ModelPath))
             {
-                this.ValidationResult.Add(ValidationType.ProjectModelPath, "ModelPath may not be empty");
+                this.ValidationResult.Add(new Validation(ValidationType.ProjectModelPath, "ModelPath may not be empty"));
             }
 
             Logger.Debug($"Number of validation errors: {this.ValidationResult.Count}");
@@ -137,11 +137,12 @@ namespace DotNetScaffolder.Mapping.MetaData.Project
 
             foreach (DomainDefinition domainDefinition in this.Domains)
             {
-                if (domainDefinition.Validate().Count > 0)
+                domainDefinition.Validate();
+                if (domainDefinition.ValidationResult.Count > 0)
                 {
-                    foreach (var key in domainDefinition.ValidationResult.Keys)
+                    foreach (var domainResult in domainDefinition.ValidationResult)
                     {
-                        this.ValidationResult.Add(key, domainDefinition.ValidationResult[key]);
+                        this.ValidationResult.Add(domainResult);
                     }
                 }
             }

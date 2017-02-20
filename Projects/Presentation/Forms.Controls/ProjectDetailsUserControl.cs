@@ -18,6 +18,8 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
 
     using DotNetScaffolder.Mapping.MetaData.Enum;
     using DotNetScaffolder.Mapping.MetaData.Project;
+    using Core.Common.Validation;
+    using System.Linq;
 
     #endregion
 
@@ -224,27 +226,28 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
                 this.errorProvider1.Clear();
                 this.Project.Validate();
 
-                if (this.Project.Validate().Count > 0)
+                if (this.Project.ValidationResult.Count > 0)
                 {
-                    foreach (var key in this.Project.ValidationResult.Keys)
+                    Validation validation = null;
+
+                    if (this.Project.ValidationResult.Any(v => v.ValidationType == ValidationType.ProjectBaseNameSpace))
                     {
-                        switch (key)
-                        {
-                            case ValidationType.ProjectBaseNameSpace:
-                                this.TextBoxBaseNamespace.Focus();
-                                this.errorProvider1.SetError(
-                                    this.TextBoxBaseNamespace,
-                                    this.Project.ValidationResult[key]);
-                                result++;
-                                break;
-                            case ValidationType.ProjectOutputFolder:
-                                this.TextBoxOutputFolderName.Focus();
-                                this.errorProvider1.SetError(
-                                    this.TextBoxOutputFolderName,
-                                    this.Project.ValidationResult[key]);
-                                result++;
-                                break;
-                        }
+                        validation = this.Project.ValidationResult.FirstOrDefault(v => v.ValidationType == ValidationType.ProjectBaseNameSpace);
+                        this.TextBoxBaseNamespace.Focus();
+                        this.errorProvider1.SetError(
+                            this.TextBoxBaseNamespace,
+                            validation.Description);
+                        result++;
+                    }
+
+                    if (this.Project.ValidationResult.Any(v => v.ValidationType == ValidationType.ProjectOutputFolder))
+                    {
+                        validation = this.Project.ValidationResult.FirstOrDefault(v => v.ValidationType == ValidationType.ProjectOutputFolder);
+                        this.TextBoxOutputFolderName.Focus();
+                        this.errorProvider1.SetError(
+                            this.TextBoxOutputFolderName,
+                            validation.Description);
+                        result++;
                     }
                 }
             }

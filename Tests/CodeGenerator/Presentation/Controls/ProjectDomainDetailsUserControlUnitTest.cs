@@ -24,6 +24,10 @@ namespace DotNetScaffolder.Test.Presentation.Controls
                                                           };
 
             control.ApplicationService.AddDomain();
+            //Todo:Add Back
+            control.ApplicationService.ProjectDefinition.Domains[0].DriverId = new Guid(ScaffoldConfig.Drivers[0].Metadata["ValueMetaData"].ToString());
+            //control.ApplicationService.ProjectDefinition.Domains[0].DriverTypeId;
+            //new Guid(ScaffoldConfig.LanguageOutputs[0].Metadata["ValueMetaData"].ToString())
             control.SelectedDomain = control.ApplicationService.ProjectDefinition.Domains[0];
 
             Assert.AreEqual(1, control.ReturnDriverTypes().Length, "There should 1 DriverType");

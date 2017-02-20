@@ -22,7 +22,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Domain
     using DotNetScaffolder.Mapping.MetaData.Model;
     using DotNetScaffolder.Mapping.MetaData.Project;
     using DotNetScaffolder.Mapping.MetaData.Project.Packages;
-
+    using Core.Common.Validation;
     #endregion
 
     /// <summary>
@@ -50,6 +50,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Domain
             this.Tables = new List<Table>();
             this.Package = new Package();
             this.Id = Guid.NewGuid();
+            this.ValidationResult = new List<Validation>();
         }
 
         #endregion
@@ -113,7 +114,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Domain
         ///     Gets or sets the validation result.
         /// </summary>
         [XmlIgnore]
-        public Dictionary<ValidationType, string> ValidationResult { get; set; }
+        public List<Validation> ValidationResult { get; set; }
 
         #endregion
 
@@ -126,40 +127,40 @@ namespace DotNetScaffolder.Mapping.MetaData.Domain
         ///     The <see cref="List{T}" />
         ///     Errors returned
         /// </returns>
-        public Dictionary<ValidationType, string> Validate()
+        public List<Validation> Validate()
         {
             Logger.Trace("Started Validate()");
 
-            this.ValidationResult = new Dictionary<ValidationType, string>();
+            this.ValidationResult.Clear();
 
             if (string.IsNullOrEmpty(this.Name))
             {
-                this.ValidationResult.Add(ValidationType.DomainName, "Name cannot be empty");
+                this.ValidationResult.Add(new Validation(ValidationType.DomainName, "Name cannot be empty"));
             }
 
             if (this.Id == Guid.Empty)
             {
-                this.ValidationResult.Add(ValidationType.DomainId, "Id cannot be empty");
+                this.ValidationResult.Add(new Validation(ValidationType.DomainId, "Id cannot be empty"));
             }
 
             if (this.NamingConventionId == Guid.Empty)
             {
-                this.ValidationResult.Add(ValidationType.NamingConventionId, "NamingConventionId cannot be empty");
+                this.ValidationResult.Add(new Validation(ValidationType.NamingConventionId, "NamingConventionId cannot be empty"));
             }
 
             if (this.SourceTypeId == Guid.Empty)
             {
-                this.ValidationResult.Add(ValidationType.SourceTypeId, "SourceTypeId cannot be empty");
+                this.ValidationResult.Add(new Validation(ValidationType.SourceTypeId, "SourceTypeId cannot be empty"));
             }
 
             if (this.DriverId == Guid.Empty)
             {
-                this.ValidationResult.Add(ValidationType.DriverId, "DriverId cannot be empty");
+                this.ValidationResult.Add(new Validation(ValidationType.DriverId, "DriverId cannot be empty"));
             }
 
             if (this.DriverTypeId == Guid.Empty)
             {
-                this.ValidationResult.Add(ValidationType.DriverTypeId, "DriverTypeId cannot be empty");
+                this.ValidationResult.Add(new Validation(ValidationType.DriverTypeId, "DriverTypeId cannot be empty"));
             }
 
             Logger.Debug($"Number of Validation errors: {this.ValidationResult.Count}");

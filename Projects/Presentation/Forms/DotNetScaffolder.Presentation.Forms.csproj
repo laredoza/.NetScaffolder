@@ -45,8 +45,8 @@
       <HintPath>..\..\..\.nuget\NuGetPackages\Common.Logging.Core.3.3.1\lib\net40\Common.Logging.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\Solution\.nuget\NuGetPackages\NLog.4.4.1\lib\net45\NLog.dll</HintPath>
+    <Reference Include="NLog">
+      <HintPath>..\..\..\.nuget\NuGetPackages\NLog.4.4.3\lib\net45\NLog.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -92,12 +92,12 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="Models\Banking.mdl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <None Include="Config\Banking.mdl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -124,13 +124,25 @@
       <Project>{58940e23-a83f-40da-b9d8-84e9ab420bec}</Project>
       <Name>DotNetScaffolder.Components.Drivers.DefaultDrivers</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Components\LanguageOutput\DefaultLanguageOutput\DotNetScaffolder.Components.LanguageOutputs.DefaultLanguageOutput.csproj">
+      <Project>{e21010ea-7789-4cce-a09e-52b55e04a083}</Project>
+      <Name>DotNetScaffolder.Components.LanguageOutputs.DefaultLanguageOutput</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Components\NamingConventions\DefaultNamingConventions\DotNetScaffolder.Components.NamingConventions.DefaultNamingConventions.csproj">
       <Project>{5f5a03d7-a884-4495-96f4-d6859ecb1489}</Project>
       <Name>DotNetScaffolder.Components.NamingConventions.DefaultNamingConventions</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Components\OutputGenerators\DefaultOutputGenerators\DotNetScaffolder.Components.OutputGenerators.DefaultOutputGenerators.csproj">
+      <Project>{38ed89e2-6385-42fe-b3b3-8979f2046efe}</Project>
+      <Name>DotNetScaffolder.Components.OutputGenerators.DefaultOutputGenerators</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Components\SourceTypes\DefaultSourceTypes\DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.csproj">
       <Project>{26cc21a6-d23d-4af5-901f-3df6e5ddbc3b}</Project>
       <Name>DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\Common\DotNetScaffolder.Core.Common.csproj">
+      <Project>{CDACE52C-F991-40B5-80ED-4947A100EC52}</Project>
+      <Name>DotNetScaffolder.Core.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Core\Configuration\DotNetScaffolder.Core.Configuration.csproj">
       <Project>{ECF3D386-0124-450F-A763-92175FF00547}</Project>
@@ -144,6 +156,9 @@
       <Project>{5a674854-afd7-40c8-8445-4bfc7f49aad3}</Project>
       <Name>DotNetScaffolder.Presentation.Forms.Controls</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Config\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

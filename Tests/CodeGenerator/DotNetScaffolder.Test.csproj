@@ -40,19 +40,21 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Common.Logging, Version=3.3.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\.nuget\NuGetPackages\Common.Logging.3.3.1\lib\net40\Common.Logging.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Common.Logging.Core, Version=3.3.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\.nuget\NuGetPackages\Common.Logging.Core.3.3.1\lib\net40\Common.Logging.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Common.Logging.NLog41, Version=3.3.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
-      <HintPath>..\..\Solution\.nuget\NuGetPackages\Common.Logging.NLog41.3.3.1\lib\net40\Common.Logging.NLog41.dll</HintPath>
+    <Reference Include="Common.Logging.NLog41">
+      <HintPath>..\..\.nuget\NuGetPackages\Common.Logging.NLog41.3.3.1\lib\net40\Common.Logging.NLog41.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
-      <HintPath>..\..\Solution\.nuget\NuGetPackages\NLog.4.4.1\lib\net45\NLog.dll</HintPath>
+    <Reference Include="NLog">
+      <HintPath>..\..\.nuget\NuGetPackages\NLog.4.4.3\lib\net45\NLog.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -78,6 +80,9 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Application\ApplicationService\ConfigurationAplicationServiceFileUnitTest.cs" />
+    <Compile Include="Application\ApplicationService\ConfigurationAplicationServiceUnitTest.cs" />
+    <Compile Include="Application\ApplicationSettingsUnitTest.cs" />
     <Compile Include="Components\ComponentImporterUnitTest.cs" />
     <Compile Include="Components\Drivers\EFSqlServerDriverUnitTest.cs" />
     <Compile Include="Components\NamingConventions\TitleCaseNamingConventionUnitTest.cs" />
@@ -95,6 +100,8 @@
     <Compile Include="Presentation\Controls\ProjectDomainUserControlUnitTest.cs" />
     <Compile Include="Project\ApplicationService\ProjectDefinitionApplicationServiceFileUnitTest.cs" />
     <Compile Include="Project\ApplicationService\ProjectDefinitionApplicationServiceUnitTest.cs" />
+    <Compile Include="Project\DataTypeUnitTest.cs" />
+    <Compile Include="Project\Packages\TemplateUnitTest.cs" />
     <Compile Include="Project\ProjectDefinitionUnitTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="OracleDataModelerImporter.cs" />
@@ -335,17 +342,25 @@
       <Project>{58940e23-a83f-40da-b9d8-84e9ab420bec}</Project>
       <Name>DotNetScaffolder.Components.Drivers.DefaultDrivers</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Projects\Components\LanguageOutput\DefaultLanguageOutput\DotNetScaffolder.Components.LanguageOutputs.DefaultLanguageOutput.csproj">
+      <Project>{e21010ea-7789-4cce-a09e-52b55e04a083}</Project>
+      <Name>DotNetScaffolder.Components.LanguageOutputs.DefaultLanguageOutput</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Projects\Components\NamingConventions\DefaultNamingConventions\DotNetScaffolder.Components.NamingConventions.DefaultNamingConventions.csproj">
       <Project>{5f5a03d7-a884-4495-96f4-d6859ecb1489}</Project>
       <Name>DotNetScaffolder.Components.NamingConventions.DefaultNamingConventions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Projects\Components\OutputGenerators\DefaultOutputGenerators\DotNetScaffolder.Components.OutputGenerators.DefaultOutputGenerators.csproj">
+      <Project>{38ed89e2-6385-42fe-b3b3-8979f2046efe}</Project>
+      <Name>DotNetScaffolder.Components.OutputGenerators.DefaultOutputGenerators</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Projects\Components\SourceTypes\DefaultSourceTypes\DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.csproj">
       <Project>{26cc21a6-d23d-4af5-901f-3df6e5ddbc3b}</Project>
       <Name>DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Projects\Core\Common\Core.Common.csproj">
+    <ProjectReference Include="..\..\Projects\Core\Common\DotNetScaffolder.Core.Common.csproj">
       <Project>{cdace52c-f991-40b5-80ed-4947a100ec52}</Project>
-      <Name>Core.Common</Name>
+      <Name>DotNetScaffolder.Core.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Projects\Core\Configuration\DotNetScaffolder.Core.Configuration.csproj">
       <Project>{ECF3D386-0124-450F-A763-92175FF00547}</Project>

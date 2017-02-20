@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{3F206474-14C2-4586-B57A-4EDC76795161}</ProjectGuid>
+    <ProjectGuid>{CDACE52C-F991-40B5-80ED-4947A100EC52}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DotNetScaffolder.Mapping.MetaData</RootNamespace>
-    <AssemblyName>DotNetScaffolder.Mapping.MetaData</AssemblyName>
+    <RootNamespace>DotNetScaffolder.Core.Common</RootNamespace>
+    <AssemblyName>DotNetScaffolder.Core.Common</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
@@ -43,7 +43,6 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -53,36 +52,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Application\ApplicationSettings.cs" />
-    <Compile Include="Domain\DomainDefinition.cs" />
-    <Compile Include="Enum\ConfigLocation.cs" />
-    <Compile Include="Enum\DatabaseGeneratedKeyType.cs" />
-    <Compile Include="Enum\GenerationType.cs" />
-    <Compile Include="Enum\RelationshipType.cs" />
-    <Compile Include="Hierarchy.cs" />
-    <Compile Include="Model\Column.cs" />
-    <Compile Include="Model\DatabaseModel.cs" />
-    <Compile Include="Model\Relationship.cs" />
-    <Compile Include="Model\Table.cs" />
-    <Compile Include="Application\ApplicationServices\ConfigurationAplicationServiceFile.cs" />
-    <Compile Include="Application\ApplicationServices\IConfigurationAplicationService.cs" />
-    <Compile Include="Project\CollectionOption.cs" />
-    <Compile Include="Project\FilePersistenceOptions.cs" />
-    <Compile Include="Project\ApplicationServices\ProjectDefinitionApplicationServiceFile.cs" />
-    <Compile Include="Project\ApplicationServices\IProjectDefinitionApplicationService.cs" />
-    <Compile Include="Project\Packages\DataType.cs" />
-    <Compile Include="Project\Packages\Package.cs" />
-    <Compile Include="Project\Packages\Packages.cs" />
-    <Compile Include="Project\Packages\Template.cs" />
-    <Compile Include="Project\Packages\Templates.cs" />
-    <Compile Include="Project\ProjectDefinition.cs" />
+    <Compile Include="ComboBoxItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Core\Common\DotNetScaffolder.Core.Common.csproj">
-      <Project>{CDACE52C-F991-40B5-80ED-4947A100EC52}</Project>
-      <Name>DotNetScaffolder.Core.Common</Name>
-    </ProjectReference>
+    <Compile Include="Serializer\ObjectXMLSerializer.cs" />
+    <Compile Include="Serializer\SerializedFormat.cs" />
+    <Compile Include="Validation\IValidate.cs" />
+    <Compile Include="Validation\Validation.cs" />
+    <Compile Include="Validation\ValidationType.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
