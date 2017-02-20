@@ -101,7 +101,7 @@
     <Compile Include="Project\ApplicationService\ProjectDefinitionApplicationServiceFileUnitTest.cs" />
     <Compile Include="Project\ApplicationService\ProjectDefinitionApplicationServiceUnitTest.cs" />
     <Compile Include="Project\DataTypeUnitTest.cs" />
-    <Compile Include="Project\TemplateUnitTest.cs" />
+    <Compile Include="Project\Packages\TemplateUnitTest.cs" />
     <Compile Include="Project\ProjectDefinitionUnitTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="OracleDataModelerImporter.cs" />
@@ -379,9 +379,7 @@
       <Name>DotNetScaffolder.Presentation.Forms.Controls</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Project\Packages\" />
-  </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
