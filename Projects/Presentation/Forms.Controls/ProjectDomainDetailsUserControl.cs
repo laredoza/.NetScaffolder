@@ -21,6 +21,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
 
     using DotNetScaffolder.Core.Common;
     using DotNetScaffolder.Mapping.MetaData.Domain;
+    using DotNetScaffolder.Mapping.MetaData.Project;
     using DotNetScaffolder.Mapping.MetaData.Project.ApplicationServices;
 
     #endregion
@@ -267,7 +268,43 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
                 }
             }
         }
-       
+
+        /// <summary>
+        /// Gets or sets the collection option.
+        /// This determines which class will be used as the parent for each collection
+        /// in a domain
+        /// </summary>
+        public CollectionOption CollectionOption
+        {
+            get
+            {
+                CollectionOption result = null;
+
+                if (this.SelectedDomain != null && this.SelectedDomain.CollectionOption != null)
+                {
+                    result = this.SelectedDomain.CollectionOption;
+                    Logger.Trace($"CollectionOption set to {this.SelectedDomain.CollectionOption.Name}.");
+                }
+                else
+                {
+                    Logger.Trace("Empty DriverTypeId is returned as SelectedDomain is null.");
+                }
+
+                return result;
+            }
+
+            set
+            {
+                if (this.SelectedDomain != null)
+                {
+                    this.SelectedDomain.CollectionOption = value;
+                }
+                else
+                {
+                    Logger.Trace("Empty CollectionOption is returned as SelectedDomain or CollectionOption is null.");
+                }
+            }
+        }
 
         #endregion
 
@@ -423,6 +460,10 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
                 this.ComboBoxSourceType.SelectedValue = this.SelectedSourceType;
                 this.ComboBoxDriver.SelectedValue = this.SelectedDriver;
                 this.ComboBoxDriverType.SelectedValue = this.SelectedDriverType;
+                if (this.CollectionOption != null)
+                {
+                    this.ComboBoxCollectionOption.SelectedItem = this.CollectionOption;
+                }
             }
 
             Logger.Trace("Completed UpdateDataSource()");
@@ -444,6 +485,11 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         {
             this.SelectedDriverType = (Guid)((this.ComboBoxDriverType.SelectedItem as ComboboxItem).Value);
 
+        }
+
+        private void ComboBoxCollectionOption_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.CollectionOption = this.ComboBoxCollectionOption.SelectedItem as CollectionOption;
         }
     }
 }

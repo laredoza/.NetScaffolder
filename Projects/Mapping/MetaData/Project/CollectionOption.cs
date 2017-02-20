@@ -18,7 +18,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Project
 
     /// <summary>
     /// Collection options.
-    /// The selected collection will be used as the parent for any collections
+    /// The selected collection will be used as the parent for any generated collections
     /// </summary>
     [Serializable]
     public class CollectionOption
