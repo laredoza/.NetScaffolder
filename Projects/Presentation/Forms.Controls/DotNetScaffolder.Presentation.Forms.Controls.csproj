@@ -113,6 +113,10 @@
       <Project>{ECF3D386-0124-450F-A763-92175FF00547}</Project>
       <Name>DotNetScaffolder.Core.Configuration</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Core\Forms\FormControls\FormControls.csproj">
+      <Project>{6A2E8779-4539-46D1-B3A0-1C3B205A95AB}</Project>
+      <Name>FormControls</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Mapping\MetaData\DotNetScaffolder.Mapping.MetaData.csproj">
       <Project>{3F206474-14C2-4586-B57A-4EDC76795161}</Project>
       <Name>DotNetScaffolder.Mapping.MetaData</Name>

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace DotNetScaffolder.Components.LanguageOutputs.DefaultLanguageOutput
 {
     /// <summary>
-    /// The title case naming convention.
+    /// CSharp LanguageOutput.
     /// </summary>
     /// <example>securityview will be SecurityView</example>
     [Export(typeof(ILanguageOutput))]

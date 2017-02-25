@@ -87,6 +87,7 @@
     <Compile Include="Components\Drivers\EFSqlServerDriverUnitTest.cs" />
     <Compile Include="Components\NamingConventions\TitleCaseNamingConventionUnitTest.cs" />
     <Compile Include="Components\NamingConventions\TitleCaseNoUnderScoreNamingConventionUnitTest.cs" />
+    <Compile Include="Core\Common\Forms\HierarchyTreeViewUnitTest.cs" />
     <Compile Include="Core\Common\ObjectXMLSerializerUnitTest.cs" />
     <Compile Include="DataSource\Model.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -101,7 +102,6 @@
     <Compile Include="Project\ApplicationService\ProjectDefinitionApplicationServiceFileUnitTest.cs" />
     <Compile Include="Project\ApplicationService\ProjectDefinitionApplicationServiceUnitTest.cs" />
     <Compile Include="Project\DataTypeUnitTest.cs" />
-    <Compile Include="Project\Packages\TemplateUnitTest.cs" />
     <Compile Include="Project\ProjectDefinitionUnitTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="OracleDataModelerImporter.cs" />
@@ -370,6 +370,10 @@
       <Project>{f8a24fdb-4bdb-4e74-83f1-d646883ba511}</Project>
       <Name>DotNetScaffolder.Core.Extensions</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Projects\Core\Forms\FormControls\FormControls.csproj">
+      <Project>{6A2E8779-4539-46D1-B3A0-1C3B205A95AB}</Project>
+      <Name>FormControls</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Projects\Mapping\MetaData\DotNetScaffolder.Mapping.MetaData.csproj">
       <Project>{3f206474-14c2-4586-b57a-4edc76795161}</Project>
       <Name>DotNetScaffolder.Mapping.MetaData</Name>
@@ -379,7 +383,9 @@
       <Name>DotNetScaffolder.Presentation.Forms.Controls</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Project\Packages\" />
+  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
