@@ -75,7 +75,7 @@
             this.BtnAddItem.Name = "BtnAddItem";
             this.BtnAddItem.Size = new System.Drawing.Size(84, 23);
             this.BtnAddItem.TabIndex = 11;
-            this.BtnAddItem.Text = "Add Template";
+            this.BtnAddItem.Text = "Add Item";
             this.BtnAddItem.UseVisualStyleBackColor = true;
             // 
             // BtnDelete
