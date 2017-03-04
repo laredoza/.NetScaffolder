@@ -14,19 +14,21 @@ namespace FormControls.TreeView
     using System;
     using System.Collections.Generic;
 
+    using FormControls.Enum;
+
     #endregion
 
     /// <summary>
     /// The Hierarchy interface.
     /// </summary>
-    public interface IHierarchy<T>
+    public interface IHierarchy
     {
         #region Properties
 
         /// <summary>
         /// Gets or sets the children.
         /// </summary>
-        List<Hierarchy<T>> Children { get; set; }
+        List<Hierarchy> Children { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether enabled.
@@ -41,7 +43,7 @@ namespace FormControls.TreeView
         /// <summary>
         /// Gets or sets the item.
         /// </summary>
-        T Item { get; set; }
+        object Item { get; set; }
 
         /// <summary>
         /// Gets or sets the name.
@@ -52,6 +54,11 @@ namespace FormControls.TreeView
         /// Gets or sets the parent id.
         /// </summary>
         Guid ParentId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the hierarchy type.
+        /// </summary>
+        HierarchyType HierarchyType { get; set; }
 
         #endregion
     }

@@ -21,8 +21,7 @@ namespace DotNetScaffolder.Test.Presentation.Controls
         {
             ManageCollectionsTreeViewUserControl treeView = new ManageCollectionsTreeViewUserControl();
 
-            Hierarchy<Template> hierarchy = new Hierarchy<Template>();
-            hierarchy.Name = "Template";
+            Hierarchy hierarchy = new Hierarchy { Name = "Template" };
             treeView.DataSource = hierarchy;
         }
     }

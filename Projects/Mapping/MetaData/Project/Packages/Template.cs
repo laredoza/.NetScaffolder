@@ -27,7 +27,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Project.Packages
     /// <summary>
     /// The template.
     /// </summary>
-    public class Template : Hierarchy<Template>, IValidate
+    public class Template : Hierarchy, IValidate
     {
         #region Static Fields
 
@@ -50,7 +50,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Project.Packages
             this.Enabled = false;
             this.DataType = new DataType();
             this.DefaultSettings = new List<string>();
-            this.Children = new List<Hierarchy<Template>>();
+            this.Children = new List<Hierarchy>();
             Logger.Trace("Completed Template()");
         }
 

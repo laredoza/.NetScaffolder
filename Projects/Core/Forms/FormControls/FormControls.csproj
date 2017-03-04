@@ -41,6 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enum\HierarchyType.cs" />
+    <Compile Include="Enum\TreeViewType.cs" />
     <Compile Include="TreeView\Hierarchy.cs" />
     <Compile Include="TreeView\HierarchyTreeView.cs">
       <SubType>Component</SubType>
