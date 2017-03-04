@@ -27,7 +27,6 @@ namespace DotNetScaffolder.Test.Application.ApplicationService
             applicationService.Save();
             applicationService.Load();
             this.TestProjectDefinition(applicationService);
-
         }
     }
 }

@@ -1,6 +1,12 @@
 ﻿namespace DotNetScaffolder.Presentation.Forms.Controls
 {
-    partial class ManageCollectionsTreeViewUserControl
+    using System.Windows.Forms;
+
+    using DotNetScaffolder.Mapping.MetaData.Project.Packages;
+
+    using FormControls.TreeView;
+
+    partial class ManageCollectionsTreeViewUserControl : UserControl
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,18 +34,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.TreeNode treeNode21 = new System.Windows.Forms.TreeNode("Context");
-            System.Windows.Forms.TreeNode treeNode22 = new System.Windows.Forms.TreeNode("Entity Framework (EF)");
-            System.Windows.Forms.TreeNode treeNode23 = new System.Windows.Forms.TreeNode("Entity", new System.Windows.Forms.TreeNode[] {
-            treeNode22});
-            System.Windows.Forms.TreeNode treeNode24 = new System.Windows.Forms.TreeNode("Repository");
-            System.Windows.Forms.TreeNode treeNode25 = new System.Windows.Forms.TreeNode("Templates", new System.Windows.Forms.TreeNode[] {
-            treeNode21,
-            treeNode23,
-            treeNode24});
             this.button12 = new System.Windows.Forms.Button();
             this.button13 = new System.Windows.Forms.Button();
-            this.treeView1 = new System.Windows.Forms.TreeView();
+            this.treeView1 = new HierarchyTreeView<Template>();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
@@ -65,20 +62,9 @@
             // 
             // treeView1
             // 
+            this.treeView1.Data = null;
             this.treeView1.Location = new System.Drawing.Point(3, 3);
             this.treeView1.Name = "treeView1";
-            treeNode21.Name = "Node6";
-            treeNode21.Text = "Context";
-            treeNode22.Name = "Node3";
-            treeNode22.Text = "Entity Framework (EF)";
-            treeNode23.Name = "Node2";
-            treeNode23.Text = "Entity";
-            treeNode24.Name = "Node5";
-            treeNode24.Text = "Repository";
-            treeNode25.Name = "Node1";
-            treeNode25.Text = "Templates";
-            this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode25});
             this.treeView1.Size = new System.Drawing.Size(269, 313);
             this.treeView1.TabIndex = 7;
             // 
@@ -129,9 +115,9 @@
 
         private System.Windows.Forms.Button button12;
         private System.Windows.Forms.Button button13;
-        private System.Windows.Forms.TreeView treeView1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
+        private HierarchyTreeView<Template> treeView1;
     }
 }

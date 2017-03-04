@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ApplicationSettings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Templates>
+    <Template>
+      <Children>
+        <HierarchyOfTemplate xsi:type="Template">
+          <Children>
+            <HierarchyOfTemplate xsi:type="Template">
+              <Children />
+              <Enabled>false</Enabled>
+              <Id>8fbd5c21-c53d-470d-a0b8-082d618ffa5f</Id>
+              <Name>Entity Framework Context (v6)</Name>
+              <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
+              <ConfigLocation>Data</ConfigLocation>
+              <DataType>
+                <Id>a85571f8-827b-4cc2-bb42-6050e3f484f8</Id>
+                <Name>Test</Name>
+              </DataType>
+              <DefaultSettings />
+              <GeneratorTypeId>a9e02f0a-d195-456e-a843-cf424ada6768</GeneratorTypeId>
+              <LanguageOutputId>778917d3-e0ab-438c-b57d-1b9c57502d0e</LanguageOutputId>
+              <TemplatePath>Bogus.T4</TemplatePath>
+              <Version>1</Version>
+            </HierarchyOfTemplate>
+          </Children>
+          <Enabled>false</Enabled>
+          <Id>426d11ce-8300-49ab-bba9-80d39a28d466</Id>
+          <Name>Context</Name>
+          <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
+          <ConfigLocation>Data</ConfigLocation>
+          <DataType>
+            <Id>cbd5fc2a-740f-47f6-99e8-c0486d58f71d</Id>
+            <Name>Test</Name>
+          </DataType>
+          <DefaultSettings />
+          <GeneratorTypeId>5df6e76c-1e28-4a60-b6a9-7f91389f5a75</GeneratorTypeId>
+          <LanguageOutputId>625b841b-aba6-40b2-9389-fa8be427080e</LanguageOutputId>
+          <TemplatePath>Bogus.T4</TemplatePath>
+          <Version>1</Version>
+        </HierarchyOfTemplate>
+        <HierarchyOfTemplate xsi:type="Template">
+          <Children>
+            <HierarchyOfTemplate xsi:type="Template">
+              <Children />
+              <Enabled>false</Enabled>
+              <Id>56e0a7b8-6670-479b-bf9b-a8dc4f4e83b2</Id>
+              <Name>Entity Framework Entity (v6)</Name>
+              <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
+              <ConfigLocation>Data</ConfigLocation>
+              <DataType>
+                <Id>d3643342-0a53-482c-a1a3-14fa5879071b</Id>
+                <Name>Test</Name>
+              </DataType>
+              <DefaultSettings />
+              <GeneratorTypeId>e121f91b-a106-4e9c-bee4-112f65decd72</GeneratorTypeId>
+              <LanguageOutputId>263a4619-07ca-4ebf-884e-1d9c5374ff2c</LanguageOutputId>
+              <TemplatePath>Bogus.T4</TemplatePath>
+              <Version>1</Version>
+            </HierarchyOfTemplate>
+          </Children>
+          <Enabled>false</Enabled>
+          <Id>977f789d-f168-4dd8-8275-cc6cb0e50643</Id>
+          <Name>Entity</Name>
+          <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
+          <ConfigLocation>Data</ConfigLocation>
+          <DataType>
+            <Id>531ec408-240f-4300-9aff-ed48975e67bd</Id>
+            <Name>Test</Name>
+          </DataType>
+          <DefaultSettings />
+          <GeneratorTypeId>968efb8e-ce8a-402b-9def-42542a070b34</GeneratorTypeId>
+          <LanguageOutputId>ffb024fc-f508-47e2-b40e-2c95d182375c</LanguageOutputId>
+          <TemplatePath>Bogus.T4</TemplatePath>
+          <Version>1</Version>
+        </HierarchyOfTemplate>
+      </Children>
+      <Enabled>false</Enabled>
+      <Id>fe858a05-d3c8-4878-a55d-5e272fc5c0e8</Id>
+      <Name>Templates</Name>
+      <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
+      <ConfigLocation>Data</ConfigLocation>
+      <DataType>
+        <Id>e4a9a93d-e455-4f23-bf06-93d3ce48ae08</Id>
+        <Name>Test</Name>
+      </DataType>
+      <DefaultSettings />
+      <GeneratorTypeId>c197a4e2-80fa-44b0-888f-a48616026032</GeneratorTypeId>
+      <LanguageOutputId>53cc8b5f-6978-4eee-8851-1b9530dc7d3f</LanguageOutputId>
+      <TemplatePath>Bogus.T4</TemplatePath>
+      <Version>1</Version>
+    </Template>
+  </Templates>
+  <DataTypes />
+</ApplicationSettings>

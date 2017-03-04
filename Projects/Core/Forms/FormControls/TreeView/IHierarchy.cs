@@ -19,15 +19,14 @@ namespace FormControls.TreeView
     /// <summary>
     /// The Hierarchy interface.
     /// </summary>
-
-    public interface IHierarchy
+    public interface IHierarchy<T>
     {
         #region Properties
 
         /// <summary>
         /// Gets or sets the children.
         /// </summary>
-        List<Hierarchy> Children { get; set; }
+        List<Hierarchy<T>> Children { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether enabled.
@@ -42,7 +41,7 @@ namespace FormControls.TreeView
         /// <summary>
         /// Gets or sets the item.
         /// </summary>
-        IHierarchy Item { get; set; }
+        T Item { get; set; }
 
         /// <summary>
         /// Gets or sets the name.

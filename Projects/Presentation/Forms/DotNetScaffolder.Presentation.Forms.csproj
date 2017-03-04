@@ -93,8 +93,11 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Models\Banking.mdl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <Content Include="Config\Settings.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -148,6 +151,10 @@
       <Project>{ECF3D386-0124-450F-A763-92175FF00547}</Project>
       <Name>DotNetScaffolder.Core.Configuration</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Core\Forms\FormControls\FormControls.csproj">
+      <Project>{6A2E8779-4539-46D1-B3A0-1C3B205A95AB}</Project>
+      <Name>FormControls</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Mapping\MetaData\DotNetScaffolder.Mapping.MetaData.csproj">
       <Project>{3f206474-14c2-4586-b57a-4edc76795161}</Project>
       <Name>DotNetScaffolder.Mapping.MetaData</Name>
@@ -157,9 +164,7 @@
       <Name>DotNetScaffolder.Presentation.Forms.Controls</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Config\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

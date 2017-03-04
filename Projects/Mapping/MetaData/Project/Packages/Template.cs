@@ -1,12 +1,33 @@
-﻿namespace DotNetScaffolder.Mapping.MetaData.Project.Packages
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="Template.cs" company="">
+//   
+// </copyright>
+// <summary>
+//   The template.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
+
+namespace DotNetScaffolder.Mapping.MetaData.Project.Packages
 {
+    #region Using
+
     using System;
     using System.Collections.Generic;
-    using DotNetScaffolder.Mapping.MetaData.Enum;
-    using Common.Logging;
     using System.Xml.Serialization;
-    using Core.Common.Validation;
-    public class Template : IValidate
+
+    using Common.Logging;
+
+    using DotNetScaffolder.Core.Common.Validation;
+    using DotNetScaffolder.Mapping.MetaData.Enum;
+
+    using FormControls.TreeView;
+
+    #endregion
+
+    /// <summary>
+    /// The template.
+    /// </summary>
+    public class Template : Hierarchy<Template>, IValidate
     {
         #region Static Fields
 
@@ -17,31 +38,77 @@
 
         #endregion
 
-        public Guid Id { get; set; }
-        public string Name { get; set; }
-        public bool Enabled { get; set; }
-        public string TemplatePath { get; set; }
-        public DataType DataType { get; set; }
-        public ConfigLocation ConfigLocation { get; set; }
-        public double Version { get; set; }
+        #region Constructors and Destructors
 
-        public Guid LanguageOutputId { get; set; }
-        public Guid GeneratorTypeId { get; set; }
-        public List<string> DefaultSettings { get; set; }
-
-        [XmlIgnore]
-        public List<Validation> ValidationResult { get; set; }
-
-        public Template()
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Template"/> class.
+        /// </summary>
+        public Template() : base()
         {
             Logger.Trace("Started Template()");
             this.ValidationResult = new List<Validation>();
             this.Enabled = false;
             this.DataType = new DataType();
             this.DefaultSettings = new List<string>();
+            this.Children = new List<Hierarchy<Template>>();
             Logger.Trace("Completed Template()");
         }
 
+        #endregion
+
+        #region Properties
+
+        /// <summary>
+        /// Gets or sets the config location.
+        /// </summary>
+        public ConfigLocation ConfigLocation { get; set; }
+
+        /// <summary>
+        /// Gets or sets the data type.
+        /// </summary>
+        public DataType DataType { get; set; }
+
+        /// <summary>
+        /// Gets or sets the default settings.
+        /// </summary>
+        public List<string> DefaultSettings { get; set; }
+        
+        /// <summary>
+        /// Gets or sets the generator type id.
+        /// </summary>
+        public Guid GeneratorTypeId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the language output id.
+        /// </summary>
+        public Guid LanguageOutputId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the template path.
+        /// </summary>
+        public string TemplatePath { get; set; }
+
+        /// <summary>
+        /// Gets or sets the validation result.
+        /// </summary>
+        [XmlIgnore]
+        public List<Validation> ValidationResult { get; set; }
+
+        /// <summary>
+        /// Gets or sets the version.
+        /// </summary>
+        public double Version { get; set; }
+
+        #endregion
+
+        #region Public methods and operators
+
+        /// <summary>
+        /// The validate.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="List"/>.
+        /// </returns>
         public List<Validation> Validate()
         {
             Logger.Trace("Started Validate()");
@@ -64,15 +131,17 @@
 
             if (this.LanguageOutputId == Guid.Empty)
             {
-                this.ValidationResult.Add(new Validation(ValidationType.TemplateLanguageOutputId, "TemplateLanguageOutputId may not be empty"));
+                this.ValidationResult.Add(
+                    new Validation(ValidationType.TemplateLanguageOutputId, "TemplateLanguageOutputId may not be empty"));
             }
 
             if (this.GeneratorTypeId == Guid.Empty)
             {
-                this.ValidationResult.Add(new Validation(ValidationType.TemplateGeneratorTypeId, "TemplateLanguageOutputId may not be empty"));
+                this.ValidationResult.Add(
+                    new Validation(ValidationType.TemplateGeneratorTypeId, "TemplateLanguageOutputId may not be empty"));
             }
 
-            //Todo: Add back
+            // Todo: Add back
             this.DataType.Validate();
 
             foreach (var validationResult in this.DataType.ValidationResult)
@@ -82,12 +151,28 @@
 
             if (this.Version == 0)
             {
-                this.ValidationResult.Add(new Validation(ValidationType.TemplateVersion, "TemplateVersion may not be 0"));
+                this.ValidationResult.Add(
+                    new Validation(ValidationType.TemplateVersion, "TemplateVersion may not be 0"));
             }
 
-            //Todo: Handle LanguageOutput & TemplateGeneratorType
+            //Template child;
+            Template child;
+            foreach (var hierarchy in this.Children)
+            {
+                child = hierarchy as Template;
+                child.Validate();
+
+                foreach (var validation in child.ValidationResult)
+                {
+                    this.ValidationResult.Add(validation);
+                }
+            }
+
+            // Todo: Handle LanguageOutput & TemplateGeneratorType
             Logger.Trace("Completed Validate()");
             return this.ValidationResult;
         }
+
+        #endregion
     }
 }

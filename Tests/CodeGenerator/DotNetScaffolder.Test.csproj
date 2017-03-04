@@ -96,6 +96,7 @@
     </Compile>
     <Compile Include="EDMXImporterUnitTest.cs" />
     <Compile Include="Extensions\NodeExtensionsUnitTest.cs" />
+    <Compile Include="Presentation\Controls\ManageCollectionsTreeViewUserControlUnitTest.cs" />
     <Compile Include="Presentation\Controls\ProjectDetailsUserControlUnitTest.cs" />
     <Compile Include="Presentation\Controls\ProjectDomainDetailsUserControlUnitTest.cs" />
     <Compile Include="Presentation\Controls\ProjectDomainUserControlUnitTest.cs" />

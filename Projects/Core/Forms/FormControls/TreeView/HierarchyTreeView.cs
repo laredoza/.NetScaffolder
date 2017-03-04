@@ -5,17 +5,21 @@
     /// <summary>
     /// The hierarchy tree view.
     /// </summary>
-    public class HierarchyTreeView : TreeView
+    public class HierarchyTreeView<T> : TreeView
     {
+        public HierarchyTreeView()
+        {
+        }
+
         /// <summary>
         /// The data.
         /// </summary>
-        private IHierarchy data;
+        private IHierarchy<T> data;
 
         /// <summary>
         /// Gets or sets the data.
         /// </summary>
-        public IHierarchy Data
+        public IHierarchy<T> Data
         {
             get
             {
@@ -49,7 +53,7 @@
         /// <returns>
         /// The <see cref="TreeNode"/>.
         /// </returns>
-        private TreeNode AddNode(IHierarchy hierarchyItem)
+        private TreeNode AddNode(IHierarchy<T> hierarchyItem)
         {
             TreeNode node = new TreeNode(hierarchyItem.Name)
                                 {

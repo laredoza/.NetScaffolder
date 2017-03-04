@@ -19,17 +19,17 @@ namespace FormControls.TreeView
     /// <summary>
     /// The hierarchy.
     /// </summary>
-    public class Hierarchy : IHierarchy
+    public class Hierarchy<T> : IHierarchy<T>
     {
         #region Constructors and Destructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Hierarchy"/> class.
+        /// Initializes a new instance of the <see cref="Hierarchy{T}"/> class.
         /// </summary>
         public Hierarchy()
         {
             this.Enabled = true;
-            this.Children = new List<Hierarchy>();
+            this.Children = new List<Hierarchy<T>>();
         }
 
         #endregion
@@ -39,7 +39,7 @@ namespace FormControls.TreeView
         /// <summary>
         /// Gets or sets the children.
         /// </summary>
-        public List<Hierarchy> Children { get; set; }
+        public List<Hierarchy<T>> Children { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether enabled.
@@ -54,7 +54,7 @@ namespace FormControls.TreeView
         /// <summary>
         /// Gets or sets the item.
         /// </summary>
-        public IHierarchy Item { get; set; }
+        public T Item { get; set; }
 
         /// <summary>
         /// Gets or sets the name.
