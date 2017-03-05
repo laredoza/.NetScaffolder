@@ -146,6 +146,7 @@
             this.TextBoxVersion.Size = new System.Drawing.Size(238, 20);
             this.TextBoxVersion.TabIndex = 81;
             this.TextBoxVersion.Text = "0";
+            this.TextBoxVersion.TextChanged += new System.EventHandler(this.TextBoxVersion_TextChanged);
             // 
             // button8
             // 
@@ -165,6 +166,7 @@
             this.TextBoxTemplate.Size = new System.Drawing.Size(238, 20);
             this.TextBoxTemplate.TabIndex = 80;
             this.TextBoxTemplate.Text = "Entity\\EntityFramework.tmp";
+            this.TextBoxTemplate.TextChanged += new System.EventHandler(this.TextBoxTemplate_TextChanged);
             // 
             // label14
             // 
@@ -183,6 +185,7 @@
             this.ComboBoxGeneratorOutput.Size = new System.Drawing.Size(238, 21);
             this.ComboBoxGeneratorOutput.TabIndex = 77;
             this.ComboBoxGeneratorOutput.Text = "T4";
+            this.ComboBoxGeneratorOutput.SelectedIndexChanged += new System.EventHandler(this.ComboBoxGeneratorOutput_SelectedIndexChanged);
             // 
             // label19
             // 
@@ -200,6 +203,7 @@
             this.ComboBoxLanguageOutput.Name = "ComboBoxLanguageOutput";
             this.ComboBoxLanguageOutput.Size = new System.Drawing.Size(238, 21);
             this.ComboBoxLanguageOutput.TabIndex = 75;
+            this.ComboBoxLanguageOutput.SelectedIndexChanged += new System.EventHandler(this.ComboBoxLanguageOutput_SelectedIndexChanged);
             // 
             // label18
             // 
@@ -220,6 +224,7 @@
             this.ComboBoxSetupLocation.Name = "ComboBoxSetupLocation";
             this.ComboBoxSetupLocation.Size = new System.Drawing.Size(238, 21);
             this.ComboBoxSetupLocation.TabIndex = 73;
+            this.ComboBoxSetupLocation.SelectedIndexChanged += new System.EventHandler(this.ComboBoxSetupLocation_SelectedIndexChanged);
             // 
             // label16
             // 

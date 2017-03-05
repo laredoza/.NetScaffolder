@@ -107,7 +107,8 @@ namespace DotNetScaffolder.Presentation.Forms
                                            LanguageOutputId = parentTemplate.LanguageOutputId,
                                            GeneratorTypeId = parentTemplate.GeneratorTypeId,
                                            HierarchyType = HierarchyType.Item,
-                                           Name = "Template1" 
+                                           Name = "Template1",
+                                           Version = 1
                                        };
 
             parentTemplate.Children.Add(newTemplate);
