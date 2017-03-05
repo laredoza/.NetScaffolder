@@ -111,6 +111,18 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         #region Other Methods
 
         /// <summary>
+        /// The select first node.
+        /// </summary>
+        public void SelectFirstNode()
+        {
+            if (this.treeView1.Nodes.Count > 0)
+            {
+                this.treeView1.SelectNode(this.treeView1.Nodes[0]);
+                this.OnAfterSelectChanged(new TreeViewEventArgs(this.treeView1.Nodes[0]), this.AfterSelect);
+            }
+        }
+
+        /// <summary>
         /// The on after select changed.
         /// </summary>
         /// <param name="e">

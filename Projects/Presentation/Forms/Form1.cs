@@ -38,6 +38,8 @@ namespace DotNetScaffolder.Presentation.Forms
         /// </summary>
         private readonly IProjectDefinitionApplicationService applicationService;
 
+        private IConfigurationAplicationService applicationConfiguration;
+
         /// <summary>
         /// The configuration service.
         /// </summary>
@@ -61,92 +63,13 @@ namespace DotNetScaffolder.Presentation.Forms
 
             FilePersistenceOptions configOptions = new FilePersistenceOptions { Path = @"Config\Settings.xml" };
 
-            IConfigurationAplicationService applicationConfiguration = new ConfigurationAplicationServiceFile
+            applicationConfiguration = new ConfigurationAplicationServiceFile
                                                                            {
                                                                                FilePersistenceOptions
                                                                                    =
                                                                                    configOptions
                                                                            };
 
-            Template baseTemplate = new Template
-                                        {
-                                            Name = "Templates",
-                                            GeneratorTypeId = Guid.NewGuid(),
-                                            LanguageOutputId = Guid.NewGuid(),
-                                            Id = Guid.NewGuid(),
-                                            TemplatePath = "Bogus.T4",
-                                            Version = 1,
-                                            DataType = {
-                                                          Id = Guid.NewGuid(), Name = "Test" 
-                                                       },
-                                            HierarchyType = HierarchyType.Group
-                                        };
-
-            applicationConfiguration.ApplicationSettings.Templates.Add(baseTemplate);
-
-            applicationConfiguration.ApplicationSettings.Templates[0].Children.Add(
-                new Template
-                    {
-                        Name = "Context",
-                        GeneratorTypeId = Guid.NewGuid(),
-                        LanguageOutputId = Guid.NewGuid(),
-                        Id = Guid.NewGuid(),
-                        TemplatePath = "Bogus.T4",
-                        Version = 1,
-                        DataType = {
-                                      Id = Guid.NewGuid(), Name = "Test" 
-                                   },
-                        HierarchyType = HierarchyType.Group
-                    });
-
-            applicationConfiguration.ApplicationSettings.Templates[0].Children[0].Children.Add(
-                new Template
-                    {
-                        Name = "Entity Framework Context (v6)",
-                        GeneratorTypeId = Guid.NewGuid(),
-                        LanguageOutputId = Guid.NewGuid(),
-                        Id = Guid.NewGuid(),
-                        TemplatePath = "Bogus.T4",
-                        Version = 1,
-                        DataType = {
-                                      Id = Guid.NewGuid(), Name = "Test" 
-                                   },
-                        HierarchyType = HierarchyType.Item
-                    });
-
-            applicationConfiguration.ApplicationSettings.Templates[0].Children.Add(
-                new Template
-                    {
-                        Name = "Entity",
-                        GeneratorTypeId = Guid.NewGuid(),
-                        LanguageOutputId = Guid.NewGuid(),
-                        Id = Guid.NewGuid(),
-                        TemplatePath = "Bogus.T4",
-                        Version = 1,
-                        DataType = {
-                                      Id = Guid.NewGuid(), Name = "Test" 
-                                   },
-                        HierarchyType = HierarchyType.Group
-                    });
-
-            applicationConfiguration.ApplicationSettings.Templates[0].Children[1].Children.Add(
-                new Template
-                    {
-                        Name = "Entity Framework Entity (v6)",
-                        GeneratorTypeId = Guid.NewGuid(),
-                        LanguageOutputId = Guid.NewGuid(),
-                        Id = Guid.NewGuid(),
-                        TemplatePath = "Bogus.T4",
-                        Version = 1,
-                        DataType = {
-                                      Id = Guid.NewGuid(), Name = "Test" 
-                                   },
-                        HierarchyType = HierarchyType.Item
-                    });
-
-            // manageCollectionsTreeViewUserControl1.DataSource = baseTemplate;
-
-            // applicationConfiguration.Save();
             applicationConfiguration.Load();
 
             this.ManageTemplateTreeViewUserControl1.DataSource =
@@ -157,10 +80,55 @@ namespace DotNetScaffolder.Presentation.Forms
             this.ProjectDomainUserControl1.ApplicationService = this.applicationService;
             this.projectDomainDetailsUserControl1.ApplicationService = this.applicationService;
             this.ManageTemplateTreeViewUserControl1.AfterSelect += this.AfterSelect;
+            this.ManageTemplateTreeViewUserControl1.BtnAddItemClick += this.BtnAddItemClick;
+            this.ManageTemplateTreeViewUserControl1.SelectFirstNode();
+        }
+
+        private void BtnAddItemClick(object sender, EventArgs eventArgs)
+        {
+            Template currentTemplate = this.TemplateDetailsUserControl1.TreeNode.Tag as Template;
+            Template parentTemplate;
+
+            if (currentTemplate.HierarchyType == HierarchyType.Item)
+            {
+                parentTemplate = this.TemplateDetailsUserControl1.TreeNode.Parent.Tag as Template;
+            }
+            else
+            {
+                parentTemplate = currentTemplate;
+            }
+
+            Template newTemplate = new Template
+                                       {
+                                           Id = Guid.NewGuid(),
+                                           ConfigLocation = parentTemplate.ConfigLocation,
+                                           DataType = parentTemplate.DataType,
+                                           Enabled = true,
+                                           LanguageOutputId = parentTemplate.LanguageOutputId,
+                                           GeneratorTypeId = parentTemplate.GeneratorTypeId,
+                                           HierarchyType = HierarchyType.Item,
+                                           Name = "Template1" 
+                                       };
+
+            parentTemplate.Children.Add(newTemplate);
+            TreeNode newTreeNode = new TreeNode { Text = newTemplate.Name, Tag = newTemplate};
+
+            if (currentTemplate.HierarchyType == HierarchyType.Item)
+            {
+                this.TemplateDetailsUserControl1.TreeNode.Parent.Nodes.Add(newTreeNode);
+            }
+            else
+            {
+                this.TemplateDetailsUserControl1.TreeNode.Nodes.Add(newTreeNode);
+            }
+
+            this.TemplateDetailsUserControl1.TreeNode = newTreeNode;
+            this.TemplateDetailsUserControl1.Data = newTemplate;
         }
 
         private void AfterSelect(object sender, TreeViewEventArgs e)
         {
+            this.TemplateDetailsUserControl1.TreeNode = e.Node;
             this.TemplateDetailsUserControl1.Data = e.Node.Tag as Template;
         }
 
@@ -184,6 +152,8 @@ namespace DotNetScaffolder.Presentation.Forms
                 // Save
                 this.applicationService.Save();
             }
+
+            applicationConfiguration.Save();
         }
 
         /// <summary>

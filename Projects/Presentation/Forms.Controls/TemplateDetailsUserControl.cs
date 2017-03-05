@@ -15,10 +15,14 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
     using System.Collections.Generic;
     using System.Windows.Forms;
 
+    using Common.Logging;
+
     using Configuration;
 
     using DotNetScaffolder.Core.Common;
     using DotNetScaffolder.Mapping.MetaData.Project.Packages;
+
+    using FormControls.Enum;
 
     #endregion
 
@@ -33,6 +37,11 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         /// The data.
         /// </summary>
         private Template data;
+
+        /// <summary>
+        ///     The logger.
+        /// </summary>
+        private static readonly ILog Logger = LogManager.GetLogger(string.Empty);
 
         #endregion
 
@@ -57,7 +66,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         #endregion
 
         /// <summary>
-        ///     The return driver types.
+        ///     Return driver types.
         /// </summary>
         /// <returns>
         ///     The <see cref="object[]" />.
@@ -79,6 +88,12 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
             return items.ToArray();
         }
 
+        /// <summary>
+        /// Return output generators.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="object[]"/>.
+        /// </returns>
         public object[] ReturnOutputGenerators()
         {
             List<ComboboxItem> items = new List<ComboboxItem>();
@@ -117,6 +132,11 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
             }
         }
 
+        /// <summary>
+        /// Gets or sets the tree node.
+        /// </summary>
+        public TreeNode TreeNode { get; set; }
+
         #endregion
 
         #region Other Methods
@@ -131,10 +151,60 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
             this.TextBoxVersion.Text = this.Data.Version.ToString();
             this.ComboBoxSetupLocation.SelectedIndex = this.Data.ConfigLocation.GetHashCode();
 
-            this.ComboBoxLanguageOutput.SelectedValue = this.Data.LanguageOutputId;
-            this.ComboBoxGeneratorOutput.SelectedValue = this.Data.GeneratorTypeId;
+            if (this.data.HierarchyType == HierarchyType.Item)
+            {
+                this.ComboBoxLanguageOutput.SelectedValue = this.Data.LanguageOutputId;
+                this.ComboBoxGeneratorOutput.SelectedValue = this.Data.GeneratorTypeId;
+                this.PanelTemplate.Visible = true;
+            }
+            else
+            {
+                this.PanelTemplate.Visible = false;
+            }
         }
 
         #endregion
+
+        /// <summary>
+        /// Gets or sets the template name.
+        /// </summary>
+        public string TemplateName
+        {
+            get
+            {
+                string result = string.Empty;
+
+                if (this.data != null)
+                {
+                    result = this.Data.Name;
+                    Logger.Trace($"TemplateName set to {this.Data.Name}.");
+                }
+                else
+                {
+                    result = string.Empty;
+                    Logger.Trace("Empty TemplateName is not returned as data is null.");
+                }
+
+                return result;
+            }
+
+            set
+            {
+                if (this.Data != null)
+                {
+                    this.Data.Name = value;
+                    this.TreeNode.Text = this.TextBoxName.Text;
+                }
+                else
+                {
+                    Logger.Trace("TemplateName is not set as SelectedDomain is null.");
+                }
+            }
+        }
+
+        private void TextBoxName_TextChanged(object sender, EventArgs e)
+        {
+            this.TemplateName = this.TextBoxName.Text;
+        }
     }
 }

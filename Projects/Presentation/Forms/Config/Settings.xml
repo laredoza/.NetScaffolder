@@ -18,8 +18,8 @@
                 <Name>Test</Name>
               </DataType>
               <DefaultSettings />
-              <GeneratorTypeId>03a23cb2-c4a4-40f0-b328-20402540a016</GeneratorTypeId>
-              <LanguageOutputId>28f970f7-ee21-423f-a425-642e721a09f8</LanguageOutputId>
+              <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
+              <LanguageOutputId>1bc1b0c4-1e41-9146-82cf-599181ce4410</LanguageOutputId>
               <TemplatePath>Bogus.T4</TemplatePath>
               <Version>1</Version>
             </Hierarchy>
@@ -55,8 +55,8 @@
                 <Name>Test</Name>
               </DataType>
               <DefaultSettings />
-              <GeneratorTypeId>1f4b5eb3-9592-4683-a43a-f78c5fbde046</GeneratorTypeId>
-              <LanguageOutputId>33168a1c-239e-454d-9742-a02c6acfa08f</LanguageOutputId>
+              <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
+              <LanguageOutputId>1bc1b0c4-1e41-9146-82cf-599181ce4410</LanguageOutputId>
               <TemplatePath>Bogus.T4</TemplatePath>
               <Version>1</Version>
             </Hierarchy>
