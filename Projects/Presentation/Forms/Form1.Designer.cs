@@ -31,17 +31,17 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Entity Framework 6 (Repository)");
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Entity Framework 6 (Application Service)");
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Entity Framework (EF)", new System.Windows.Forms.TreeNode[] {
-            treeNode1,
-            treeNode2});
-            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Mongo");
-            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Data", new System.Windows.Forms.TreeNode[] {
-            treeNode3,
-            treeNode4});
-            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Packages", new System.Windows.Forms.TreeNode[] {
-            treeNode5});
+            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Entity Framework 6 (Repository)");
+            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Entity Framework 6 (Application Service)");
+            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Entity Framework (EF)", new System.Windows.Forms.TreeNode[] {
+            treeNode7,
+            treeNode8});
+            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Mongo");
+            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("Data", new System.Windows.Forms.TreeNode[] {
+            treeNode9,
+            treeNode10});
+            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("Packages", new System.Windows.Forms.TreeNode[] {
+            treeNode11});
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1 = new System.Windows.Forms.TabControl();
@@ -60,31 +60,13 @@
             this.treeView2 = new System.Windows.Forms.TreeView();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.comboBox12 = new System.Windows.Forms.ComboBox();
-            this.label19 = new System.Windows.Forms.Label();
-            this.comboBox11 = new System.Windows.Forms.ComboBox();
-            this.label18 = new System.Windows.Forms.Label();
-            this.comboBox10 = new System.Windows.Forms.ComboBox();
-            this.label17 = new System.Windows.Forms.Label();
-            this.button11 = new System.Windows.Forms.Button();
-            this.comboBox9 = new System.Windows.Forms.ComboBox();
-            this.label16 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.button8 = new System.Windows.Forms.Button();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.label14 = new System.Windows.Forms.Label();
-            this.comboBox8 = new System.Windows.Forms.ComboBox();
-            this.label12 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.label13 = new System.Windows.Forms.Label();
+            this.TemplateDetailsUserControl1 = new DotNetScaffolder.Presentation.Forms.Controls.TemplateDetailsUserControl();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.ManageTemplateTreeViewUserControl1 = new DotNetScaffolder.Presentation.Forms.Controls.ManageCollectionsTreeViewUserControl();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.button6 = new System.Windows.Forms.Button();
-            this.manageCollectionsTreeViewUserControl1 = new DotNetScaffolder.Presentation.Forms.Controls.ManageCollectionsTreeViewUserControl();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -135,7 +117,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1014, 396);
+            this.tabPage1.Size = new System.Drawing.Size(1014, 467);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Project";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -223,7 +205,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1014, 396);
+            this.tabPage2.Size = new System.Drawing.Size(1014, 467);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Packages";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -272,20 +254,20 @@
             // 
             this.treeView2.Location = new System.Drawing.Point(18, 29);
             this.treeView2.Name = "treeView2";
-            treeNode1.Name = "Node2";
-            treeNode1.Text = "Entity Framework 6 (Repository)";
-            treeNode2.Name = "Node0";
-            treeNode2.Text = "Entity Framework 6 (Application Service)";
-            treeNode3.Name = "Node3";
-            treeNode3.Text = "Entity Framework (EF)";
-            treeNode4.Name = "Node1";
-            treeNode4.Text = "Mongo";
-            treeNode5.Name = "Node5";
-            treeNode5.Text = "Data";
-            treeNode6.Name = "Node1";
-            treeNode6.Text = "Packages";
+            treeNode7.Name = "Node2";
+            treeNode7.Text = "Entity Framework 6 (Repository)";
+            treeNode8.Name = "Node0";
+            treeNode8.Text = "Entity Framework 6 (Application Service)";
+            treeNode9.Name = "Node3";
+            treeNode9.Text = "Entity Framework (EF)";
+            treeNode10.Name = "Node1";
+            treeNode10.Text = "Mongo";
+            treeNode11.Name = "Node5";
+            treeNode11.Text = "Data";
+            treeNode12.Name = "Node1";
+            treeNode12.Text = "Packages";
             this.treeView2.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode6});
+            treeNode12});
             this.treeView2.Size = new System.Drawing.Size(329, 313);
             this.treeView2.TabIndex = 0;
             // 
@@ -303,25 +285,7 @@
             // 
             // groupBox5
             // 
-            this.groupBox5.Controls.Add(this.comboBox12);
-            this.groupBox5.Controls.Add(this.label19);
-            this.groupBox5.Controls.Add(this.comboBox11);
-            this.groupBox5.Controls.Add(this.label18);
-            this.groupBox5.Controls.Add(this.comboBox10);
-            this.groupBox5.Controls.Add(this.label17);
-            this.groupBox5.Controls.Add(this.button11);
-            this.groupBox5.Controls.Add(this.comboBox9);
-            this.groupBox5.Controls.Add(this.label16);
-            this.groupBox5.Controls.Add(this.label15);
-            this.groupBox5.Controls.Add(this.textBox6);
-            this.groupBox5.Controls.Add(this.button8);
-            this.groupBox5.Controls.Add(this.checkBox1);
-            this.groupBox5.Controls.Add(this.textBox5);
-            this.groupBox5.Controls.Add(this.label14);
-            this.groupBox5.Controls.Add(this.comboBox8);
-            this.groupBox5.Controls.Add(this.label12);
-            this.groupBox5.Controls.Add(this.textBox4);
-            this.groupBox5.Controls.Add(this.label13);
+            this.groupBox5.Controls.Add(this.TemplateDetailsUserControl1);
             this.groupBox5.Location = new System.Drawing.Point(411, 16);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(505, 370);
@@ -329,198 +293,39 @@
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Details";
             // 
-            // comboBox12
+            // TemplateDetailsUserControl1
             // 
-            this.comboBox12.FormattingEnabled = true;
-            this.comboBox12.Items.AddRange(new object[] {
-            "T4"});
-            this.comboBox12.Location = new System.Drawing.Point(122, 222);
-            this.comboBox12.Name = "comboBox12";
-            this.comboBox12.Size = new System.Drawing.Size(238, 21);
-            this.comboBox12.TabIndex = 39;
-            this.comboBox12.Text = "T4";
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(25, 224);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(84, 13);
-            this.label19.TabIndex = 38;
-            this.label19.Text = "Generator Type:";
-            // 
-            // comboBox11
-            // 
-            this.comboBox11.FormattingEnabled = true;
-            this.comboBox11.Items.AddRange(new object[] {
-            "C#"});
-            this.comboBox11.Location = new System.Drawing.Point(122, 195);
-            this.comboBox11.Name = "comboBox11";
-            this.comboBox11.Size = new System.Drawing.Size(238, 21);
-            this.comboBox11.TabIndex = 37;
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(18, 198);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(93, 13);
-            this.label18.TabIndex = 36;
-            this.label18.Text = "Language Output:";
-            // 
-            // comboBox10
-            // 
-            this.comboBox10.FormattingEnabled = true;
-            this.comboBox10.Items.AddRange(new object[] {
-            "Group",
-            "Template"});
-            this.comboBox10.Location = new System.Drawing.Point(122, 57);
-            this.comboBox10.Name = "comboBox10";
-            this.comboBox10.Size = new System.Drawing.Size(238, 21);
-            this.comboBox10.TabIndex = 35;
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(77, 60);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(34, 13);
-            this.label17.TabIndex = 34;
-            this.label17.Text = "Type:";
-            // 
-            // button11
-            // 
-            this.button11.Enabled = false;
-            this.button11.Location = new System.Drawing.Point(285, 268);
-            this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(75, 23);
-            this.button11.TabIndex = 33;
-            this.button11.Text = "Default";
-            this.button11.UseVisualStyleBackColor = true;
-            // 
-            // comboBox9
-            // 
-            this.comboBox9.FormattingEnabled = true;
-            this.comboBox9.Items.AddRange(new object[] {
-            "Data",
-            "Driver"});
-            this.comboBox9.Location = new System.Drawing.Point(122, 142);
-            this.comboBox9.Name = "comboBox9";
-            this.comboBox9.Size = new System.Drawing.Size(238, 21);
-            this.comboBox9.TabIndex = 32;
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(29, 145);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(82, 13);
-            this.label16.TabIndex = 31;
-            this.label16.Text = "Setup Location:";
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(66, 169);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(45, 13);
-            this.label15.TabIndex = 30;
-            this.label15.Text = "Version:";
-            // 
-            // textBox6
-            // 
-            this.textBox6.Location = new System.Drawing.Point(122, 169);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(238, 20);
-            this.textBox6.TabIndex = 29;
-            this.textBox6.Text = "0";
-            // 
-            // button8
-            // 
-            this.button8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button8.Enabled = false;
-            this.button8.Location = new System.Drawing.Point(366, 94);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(75, 23);
-            this.button8.TabIndex = 6;
-            this.button8.Text = "Edit";
-            this.button8.UseVisualStyleBackColor = true;
-            // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(122, 252);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(65, 17);
-            this.checkBox1.TabIndex = 28;
-            this.checkBox1.Text = "Enabled";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            // 
-            // textBox5
-            // 
-            this.textBox5.Location = new System.Drawing.Point(122, 84);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(238, 20);
-            this.textBox5.TabIndex = 27;
-            this.textBox5.Text = "Entity\\EntityFramework.tmp";
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(57, 87);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(54, 13);
-            this.label14.TabIndex = 26;
-            this.label14.Text = "Template:";
-            // 
-            // comboBox8
-            // 
-            this.comboBox8.FormattingEnabled = true;
-            this.comboBox8.Items.AddRange(new object[] {
-            "Context",
-            "Entity",
-            "Repository",
-            "Application Service"});
-            this.comboBox8.Location = new System.Drawing.Point(122, 115);
-            this.comboBox8.Name = "comboBox8";
-            this.comboBox8.Size = new System.Drawing.Size(238, 21);
-            this.comboBox8.TabIndex = 24;
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(25, 115);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(88, 13);
-            this.label12.TabIndex = 22;
-            this.label12.Text = "Data Type Used:";
-            // 
-            // textBox4
-            // 
-            this.textBox4.Location = new System.Drawing.Point(122, 26);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(238, 20);
-            this.textBox4.TabIndex = 25;
-            this.textBox4.Text = "Entity Framework";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(73, 29);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(38, 13);
-            this.label13.TabIndex = 23;
-            this.label13.Text = "Name:";
+            this.TemplateDetailsUserControl1.Data = null;
+            this.TemplateDetailsUserControl1.Location = new System.Drawing.Point(15, 19);
+            this.TemplateDetailsUserControl1.Name = "TemplateDetailsUserControl1";
+            this.TemplateDetailsUserControl1.Size = new System.Drawing.Size(451, 301);
+            this.TemplateDetailsUserControl1.TabIndex = 0;
             // 
             // groupBox4
             // 
-            this.groupBox4.Controls.Add(this.manageCollectionsTreeViewUserControl1);
+            this.groupBox4.Controls.Add(this.ManageTemplateTreeViewUserControl1);
             this.groupBox4.Location = new System.Drawing.Point(11, 16);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(383, 370);
             this.groupBox4.TabIndex = 0;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Templates";
+            // 
+            // ManageTemplateTreeViewUserControl1
+            // 
+            this.ManageTemplateTreeViewUserControl1.AfterSelect = null;
+            this.ManageTemplateTreeViewUserControl1.BeforeSelect = null;
+            this.ManageTemplateTreeViewUserControl1.BtnAddGroupClick = null;
+            this.ManageTemplateTreeViewUserControl1.BtnAddItemClick = null;
+            this.ManageTemplateTreeViewUserControl1.BtnDeleteClick = null;
+            this.ManageTemplateTreeViewUserControl1.BtnDownClick = null;
+            this.ManageTemplateTreeViewUserControl1.BtnUpClick = null;
+            this.ManageTemplateTreeViewUserControl1.CollectionType = DotNetScaffolder.Presentation.Forms.Controls.Enum.TreeViewType.Package;
+            this.ManageTemplateTreeViewUserControl1.DataSource = null;
+            this.ManageTemplateTreeViewUserControl1.Location = new System.Drawing.Point(13, 16);
+            this.ManageTemplateTreeViewUserControl1.Name = "ManageTemplateTreeViewUserControl1";
+            this.ManageTemplateTreeViewUserControl1.Size = new System.Drawing.Size(364, 368);
+            this.ManageTemplateTreeViewUserControl1.TabIndex = 0;
             // 
             // statusStrip1
             // 
@@ -561,14 +366,6 @@
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
-            // manageCollectionsTreeViewUserControl1
-            // 
-            this.manageCollectionsTreeViewUserControl1.DataSource = null;
-            this.manageCollectionsTreeViewUserControl1.Location = new System.Drawing.Point(13, 16);
-            this.manageCollectionsTreeViewUserControl1.Name = "manageCollectionsTreeViewUserControl1";
-            this.manageCollectionsTreeViewUserControl1.Size = new System.Drawing.Size(364, 368);
-            this.manageCollectionsTreeViewUserControl1.TabIndex = 0;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -594,7 +391,6 @@
             this.groupBox6.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
-            this.groupBox5.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -617,35 +413,17 @@
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.ComboBox comboBox8;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.Button button8;
-        private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.ComboBox comboBox9;
-        private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.Button button10;
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.TreeView treeView2;
-        private System.Windows.Forms.Button button11;
         private System.Windows.Forms.CheckBox checkBox2;
-        private System.Windows.Forms.ComboBox comboBox10;
-        private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.ComboBox comboBox11;
-        private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.ComboBox comboBox12;
-        private System.Windows.Forms.Label label19;
         private System.Windows.Forms.GroupBox groupBox1;
         private ProjectDetailsUserControl ProjectDetailsUserControl1;
         private ProjectDomainUserControl ProjectDomainUserControl1;
         private ProjectDomainDetailsUserControl projectDomainDetailsUserControl1;
-        private ManageCollectionsTreeViewUserControl manageCollectionsTreeViewUserControl1;
+        private ManageCollectionsTreeViewUserControl ManageTemplateTreeViewUserControl1;
+        private TemplateDetailsUserControl TemplateDetailsUserControl1;
         //public ManageCollectionsTreeViewUserControl manageCollectionsTreeViewUserControl1;
     }
 }

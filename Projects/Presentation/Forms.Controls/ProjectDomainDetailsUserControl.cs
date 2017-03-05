@@ -26,7 +26,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
     #endregion
 
     /// <summary>
-    /// The project domain details user control.
+    ///     The project domain details user control.
     /// </summary>
     public partial class ProjectDomainDetailsUserControl : UserControl
     {
@@ -47,7 +47,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         private IProjectDefinitionApplicationService applicationService;
 
         /// <summary>
-        /// The selected domain.
+        ///     The selected domain.
         /// </summary>
         private DomainDefinition selectedDomain;
 
@@ -56,7 +56,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         #region Constructors and Destructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ProjectDomainDetailsUserControl"/> class.
+        ///     Initializes a new instance of the <see cref="ProjectDomainDetailsUserControl" /> class.
         /// </summary>
         public ProjectDomainDetailsUserControl()
         {
@@ -85,7 +85,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         }
 
         /// <summary>
-        /// Gets or sets the domain name.
+        ///     Gets or sets the domain name.
         /// </summary>
         public string DomainName
         {
@@ -129,6 +129,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
             {
                 return this.selectedDomain;
             }
+
             set
             {
                 this.selectedDomain = value;
@@ -137,7 +138,77 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         }
 
         /// <summary>
-        /// Gets or sets the selected naming convention.
+        /// Gets or sets the selected driver.
+        /// </summary>
+        public Guid SelectedDriver
+        {
+            get
+            {
+                Guid result = Guid.Empty;
+
+                if (this.SelectedDomain != null)
+                {
+                    result = this.SelectedDomain.DriverId;
+                    Logger.Trace($"DriverId set to {this.SelectedDomain.DriverId}.");
+                }
+                else
+                {
+                    Logger.Trace("Empty DriverId is returned as SelectedDomain is null.");
+                }
+
+                return result;
+            }
+
+            set
+            {
+                if (this.SelectedDomain != null)
+                {
+                    this.SelectedDomain.DriverId = value;
+                }
+                else
+                {
+                    Logger.Trace("Empty DriverId is returned as SelectedDomain is null.");
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the selected driver type.
+        /// </summary>
+        public Guid SelectedDriverType
+        {
+            get
+            {
+                Guid result = Guid.Empty;
+
+                if (this.SelectedDomain != null)
+                {
+                    result = this.SelectedDomain.DriverTypeId;
+                    Logger.Trace($"DriverTypeId set to {this.SelectedDomain.DriverTypeId}.");
+                }
+                else
+                {
+                    Logger.Trace("Empty DriverTypeId is returned as SelectedDomain is null.");
+                }
+
+                return result;
+            }
+
+            set
+            {
+                if (this.SelectedDomain != null)
+                {
+                    this.SelectedDomain.DriverTypeId = value;
+                }
+                else
+                {
+                    Logger.Trace("Empty DriverTypeId is returned as SelectedDomain is null.");
+                }
+            }
+        }
+
+        /// <summary>
+        ///     Gets or sets the selected naming convention.
         /// </summary>
         public Guid SelectedNamingConvention
         {
@@ -171,6 +242,9 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
             }
         }
 
+        /// <summary>
+        /// Gets or sets the selected source type.
+        /// </summary>
         public Guid SelectedSourceType
         {
             get
@@ -203,99 +277,15 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
             }
         }
 
-        public Guid SelectedDriver
-        {
-            get
-            {
-                Guid result = Guid.Empty;
-
-                if (this.SelectedDomain != null)
-                {
-                    result = this.SelectedDomain.DriverId;
-                    Logger.Trace($"DriverId set to {this.SelectedDomain.DriverId}.");
-                }
-                else
-                {
-                    Logger.Trace("Empty DriverId is returned as SelectedDomain is null.");
-                }
-
-                return result;
-            }
-
-            set
-            {
-                if (this.SelectedDomain != null)
-                {
-                    this.SelectedDomain.DriverId = value;
-                }
-                else
-                {
-                    Logger.Trace("Empty DriverId is returned as SelectedDomain is null.");
-                }
-            }
-        }
-
-        public Guid SelectedDriverType
-        {
-            get
-            {
-                Guid result = Guid.Empty;
-
-                if (this.SelectedDomain != null)
-                {
-                    result = this.SelectedDomain.DriverTypeId;
-                    Logger.Trace($"DriverTypeId set to {this.SelectedDomain.DriverTypeId}.");
-                }
-                else
-                {
-                    Logger.Trace("Empty DriverTypeId is returned as SelectedDomain is null.");
-                }
-
-                return result;
-            }
-
-            set
-            {
-                if (this.SelectedDomain != null)
-                {
-                    this.SelectedDomain.DriverTypeId = value;
-                }
-                else
-                {
-                    Logger.Trace("Empty DriverTypeId is returned as SelectedDomain is null.");
-                }
-            }
-        }
-       
-
         #endregion
 
-        #region Other Methods
+        #region Public methods and operators
 
         /// <summary>
-        /// The combo box driver_ selected index changed.
-        /// </summary>
-        /// <param name="sender">
-        /// The sender.
-        /// </param>
-        /// <param name="e">
-        /// The e.
-        /// </param>
-        private void ComboBoxDriver_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            this.SelectedDriver = (Guid)((this.ComboBoxDriver.SelectedItem as ComboboxItem).Value);
-            
-            ComboboxItem item = this.ComboBoxDriver.SelectedItem as ComboboxItem;
-            this.ComboBoxDriverType.DataSource = this.ReturnDriverTypes(item);
-            this.ComboBoxDriverType.DisplayMember = "Text";
-            this.ComboBoxDriverType.ValueMember = "Value";
-        }
-
-        /// <summary>
-        /// The return driver types.
+        ///     The return driver types.
         /// </summary>
         /// <returns>
-        /// The <see cref="object[]"/>.
+        ///     The <see cref="object[]" />.
         /// </returns>
         public object[] ReturnDriverTypes()
         {
@@ -367,10 +357,10 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         }
 
         /// <summary>
-        /// The return source types.
+        ///     The return source types.
         /// </summary>
         /// <returns>
-        /// The <see cref="object[]"/>.
+        ///     The <see cref="object[]" />.
         /// </returns>
         public object[] ReturnSourceTypes()
         {
@@ -389,13 +379,78 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
             return items.ToArray();
         }
 
+        #endregion
+
+        #region Other Methods
+
+        /// <summary>
+        /// The combo box driver_ selected index changed.
+        /// </summary>
+        /// <param name="sender">
+        /// The sender.
+        /// </param>
+        /// <param name="e">
+        /// The e.
+        /// </param>
+        private void ComboBoxDriver_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.SelectedDriver = (Guid)(this.ComboBoxDriver.SelectedItem as ComboboxItem).Value;
+
+            ComboboxItem item = this.ComboBoxDriver.SelectedItem as ComboboxItem;
+            this.ComboBoxDriverType.DataSource = this.ReturnDriverTypes(item);
+            this.ComboBoxDriverType.DisplayMember = "Text";
+            this.ComboBoxDriverType.ValueMember = "Value";
+        }
+
+        /// <summary>
+        /// The combo box driver type_ selected index changed.
+        /// </summary>
+        /// <param name="sender">
+        /// The sender.
+        /// </param>
+        /// <param name="e">
+        /// The e.
+        /// </param>
+        private void ComboBoxDriverType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.SelectedDriverType = (Guid)(this.ComboBoxDriverType.SelectedItem as ComboboxItem).Value;
+        }
+
+        /// <summary>
+        /// The combo box naming convention_ selected index changed.
+        /// </summary>
+        /// <param name="sender">
+        /// The sender.
+        /// </param>
+        /// <param name="e">
+        /// The e.
+        /// </param>
+        private void ComboBoxNamingConvention_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.SelectedNamingConvention = (Guid)(this.ComboBoxNamingConvention.SelectedItem as ComboboxItem).Value;
+        }
+
+        /// <summary>
+        /// The combo box source type_ selected index changed.
+        /// </summary>
+        /// <param name="sender">
+        /// The sender.
+        /// </param>
+        /// <param name="e">
+        /// The e.
+        /// </param>
+        private void ComboBoxSourceType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.SelectedSourceType = (Guid)(this.ComboBoxSourceType.SelectedItem as ComboboxItem).Value;
+        }
+
         /// <summary>
         ///     The update data source.
         /// </summary>
         private void UpdateDataSource()
         {
             Logger.Trace("Started UpdateDataSource()");
-            
+
             this.ComboBoxNamingConvention.DataSource = this.ReturnNamingConventions();
             this.ComboBoxNamingConvention.DisplayMember = "Text";
             this.ComboBoxNamingConvention.ValueMember = "Value";
@@ -443,21 +498,5 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         }
 
         #endregion
-
-        private void ComboBoxNamingConvention_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            this.SelectedNamingConvention = (Guid)((this.ComboBoxNamingConvention.SelectedItem as ComboboxItem).Value);
-        }
-
-        private void ComboBoxSourceType_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            SelectedSourceType = (Guid)((this.ComboBoxSourceType.SelectedItem as ComboboxItem).Value);
-        }
-
-        private void ComboBoxDriverType_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            this.SelectedDriverType = (Guid)((this.ComboBoxDriverType.SelectedItem as ComboboxItem).Value);
-
-        }
     }
 }

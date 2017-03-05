@@ -81,6 +81,12 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SelectedEventArgs.cs" />
+    <Compile Include="TemplateDetailsUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TemplateDetailsUserControl.Designer.cs">
+      <DependentUpon>TemplateDetailsUserControl.cs</DependentUpon>
+    </Compile>
     <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
   </ItemGroup>
   <ItemGroup>
@@ -95,6 +101,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ProjectDomainUserControl.resx">
       <DependentUpon>ProjectDomainUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TemplateDetailsUserControl.resx">
+      <DependentUpon>TemplateDetailsUserControl.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

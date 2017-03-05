@@ -22,6 +22,7 @@ namespace DotNetScaffolder.Presentation.Forms
     using DotNetScaffolder.Presentation.Forms.Controls;
 
     using FormControls.Enum;
+    using FormControls.TreeView;
 
     #endregion
 
@@ -148,13 +149,19 @@ namespace DotNetScaffolder.Presentation.Forms
             // applicationConfiguration.Save();
             applicationConfiguration.Load();
 
-            this.manageCollectionsTreeViewUserControl1.DataSource =
+            this.ManageTemplateTreeViewUserControl1.DataSource =
                 applicationConfiguration.ApplicationSettings.Templates[0];
 
             this.ProjectDetailsUserControl1.Project = this.applicationService.ProjectDefinition;
             this.ProjectDomainUserControl1.SelectedIndexChanged += this.ProjectDomainUserControl1_SelectedIndexChanged;
             this.ProjectDomainUserControl1.ApplicationService = this.applicationService;
             this.projectDomainDetailsUserControl1.ApplicationService = this.applicationService;
+            this.ManageTemplateTreeViewUserControl1.AfterSelect += this.AfterSelect;
+        }
+
+        private void AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            this.TemplateDetailsUserControl1.Data = e.Node.Tag as Template;
         }
 
         #endregion
