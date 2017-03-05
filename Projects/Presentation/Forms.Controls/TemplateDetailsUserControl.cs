@@ -320,6 +320,39 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
             }
         }
 
+        public bool TemplateEnabled
+        {
+            get
+            {
+                bool result = false;
+
+                if (this.data != null)
+                {
+                    result = this.Data.Enabled;
+                    Logger.Trace($"Enabled set to {this.Data.Enabled}.");
+                }
+                else
+                {
+                    result = false;
+                    Logger.Trace("Enabled is false as data is null.");
+                }
+
+                return result;
+            }
+
+            set
+            {
+                if (this.Data != null)
+                {
+                    this.Data.Enabled = value;
+                }
+                else
+                {
+                    Logger.Trace("Enabled is false as data is null.");
+                }
+            }
+        }
+
         #endregion
 
         #region Public methods and operators
@@ -485,6 +518,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
             this.TextBoxTemplate.Text = this.Data.TemplatePath;
             this.TextBoxVersion.Text = this.Data.Version.ToString();
             this.ComboBoxSetupLocation.SelectedIndex = this.Data.ConfigLocation.GetHashCode();
+            this.CheckBoxEnabled.Checked = this.Data.Enabled;
 
             if (this.data.HierarchyType == HierarchyType.Item)
             {
@@ -499,5 +533,10 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         }
 
         #endregion
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            this.TemplateEnabled = (sender as CheckBox).Checked;
+        }
     }
 }

@@ -28,7 +28,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         #region Constructors and Destructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ManageCollectionsTreeViewUserControl"/> class.
+        ///     Initializes a new instance of the <see cref="ManageCollectionsTreeViewUserControl" /> class.
         /// </summary>
         public ManageCollectionsTreeViewUserControl()
         {
@@ -47,37 +47,37 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         #region Properties
 
         /// <summary>
-        /// Gets or sets the after select.
+        ///     Gets or sets the after select.
         /// </summary>
         public TreeViewEventHandler AfterSelect { get; set; }
 
         /// <summary>
-        /// Gets or sets the before select.
+        ///     Gets or sets the before select.
         /// </summary>
         public TreeViewCancelEventHandler BeforeSelect { get; set; }
 
         /// <summary>
-        /// Gets or sets the btn add group click.
+        ///     Gets or sets the btn add group click.
         /// </summary>
         public EventHandler BtnAddGroupClick { get; set; }
 
         /// <summary>
-        /// Gets or sets the btn add item click.
+        ///     Gets or sets the btn add item click.
         /// </summary>
         public EventHandler BtnAddItemClick { get; set; }
 
         /// <summary>
-        /// Gets or sets the btn delete click.
+        ///     Gets or sets the btn delete click.
         /// </summary>
         public EventHandler BtnDeleteClick { get; set; }
 
         /// <summary>
-        /// Gets or sets the btn down click.
+        ///     Gets or sets the btn down click.
         /// </summary>
         public EventHandler BtnDownClick { get; set; }
 
         /// <summary>
-        /// Gets or sets the btn up click.
+        ///     Gets or sets the btn up click.
         /// </summary>
         public EventHandler BtnUpClick { get; set; }
 
@@ -108,10 +108,32 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
 
         #endregion
 
-        #region Other Methods
+        #region Public methods and operators
 
         /// <summary>
-        /// The select first node.
+        /// The move down.
+        /// </summary>
+        /// <param name="selectedNode">
+        /// The selected node.
+        /// </param>
+        public void MoveDown(TreeNode selectedNode)
+        {
+            this.treeView1.MoveDown(selectedNode);
+        }
+
+        /// <summary>
+        /// The move up.
+        /// </summary>
+        /// <param name="selectedNode">
+        /// The selected node.
+        /// </param>
+        public void MoveUp(TreeNode selectedNode)
+        {
+            this.treeView1.MoveUp(selectedNode);
+        }
+
+        /// <summary>
+        ///     The select first node.
         /// </summary>
         public void SelectFirstNode()
         {
@@ -121,6 +143,10 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
                 this.OnAfterSelectChanged(new TreeViewEventArgs(this.treeView1.Nodes[0]), this.AfterSelect);
             }
         }
+
+        #endregion
+
+        #region Other Methods
 
         /// <summary>
         /// The on after select changed.

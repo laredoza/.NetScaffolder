@@ -50,6 +50,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TreeView\IHierarchy.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Extensions\DotNetScaffolder.Core.Extensions.csproj">
+      <Project>{f8a24fdb-4bdb-4e74-83f1-d646883ba511}</Project>
+      <Name>DotNetScaffolder.Core.Extensions</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -31,7 +31,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.PanelTemplate = new System.Windows.Forms.Panel();
             this.button11 = new System.Windows.Forms.Button();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.CheckBoxEnabled = new System.Windows.Forms.CheckBox();
             this.TextBoxName = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -53,7 +53,7 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.checkBox1);
+            this.panel1.Controls.Add(this.CheckBoxEnabled);
             this.panel1.Controls.Add(this.TextBoxName);
             this.panel1.Controls.Add(this.label13);
             this.panel1.Controls.Add(this.button11);
@@ -82,15 +82,16 @@
             this.button11.Text = "Default";
             this.button11.UseVisualStyleBackColor = true;
             // 
-            // checkBox1
+            // CheckBoxEnabled
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(115, 26);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(65, 17);
-            this.checkBox1.TabIndex = 61;
-            this.checkBox1.Text = "Enabled";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.CheckBoxEnabled.AutoSize = true;
+            this.CheckBoxEnabled.Location = new System.Drawing.Point(115, 26);
+            this.CheckBoxEnabled.Name = "CheckBoxEnabled";
+            this.CheckBoxEnabled.Size = new System.Drawing.Size(65, 17);
+            this.CheckBoxEnabled.TabIndex = 61;
+            this.CheckBoxEnabled.Text = "Enabled";
+            this.CheckBoxEnabled.UseVisualStyleBackColor = true;
+            this.CheckBoxEnabled.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // TextBoxName
             // 
@@ -259,7 +260,7 @@
         private System.Windows.Forms.Button button11;
         private System.Windows.Forms.TextBox TextBoxName;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox CheckBoxEnabled;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.TextBox TextBoxVersion;

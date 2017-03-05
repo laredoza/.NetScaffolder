@@ -81,7 +81,29 @@ namespace DotNetScaffolder.Presentation.Forms
             this.projectDomainDetailsUserControl1.ApplicationService = this.applicationService;
             this.ManageTemplateTreeViewUserControl1.AfterSelect += this.AfterSelect;
             this.ManageTemplateTreeViewUserControl1.BtnAddItemClick += this.BtnAddItemClick;
+            this.ManageTemplateTreeViewUserControl1.BtnDeleteClick += this.BtnDeleteClick;
+            this.ManageTemplateTreeViewUserControl1.BtnUpClick += this.BtnUpClick;
+            this.ManageTemplateTreeViewUserControl1.BtnDownClick += BtnDownClick;
             this.ManageTemplateTreeViewUserControl1.SelectFirstNode();
+        }
+
+        private void BtnDownClick(object sender, EventArgs eventArgs)
+        {
+            this.ManageTemplateTreeViewUserControl1.MoveDown(this.TemplateDetailsUserControl1.TreeNode);
+        }
+
+        private void BtnUpClick(object sender, EventArgs e)
+        {
+            this.ManageTemplateTreeViewUserControl1.MoveUp(this.TemplateDetailsUserControl1.TreeNode);
+        }
+
+        private void BtnDeleteClick(object sender, EventArgs eventArgs)
+        {
+            Template currentTemplate = this.TemplateDetailsUserControl1.TreeNode.Tag as Template;
+            Template parentTemplate = this.TemplateDetailsUserControl1.TreeNode.Parent.Tag as Template;
+
+            parentTemplate.Children.Remove(currentTemplate);
+            this.TemplateDetailsUserControl1.TreeNode.Remove();
         }
 
         private void BtnAddItemClick(object sender, EventArgs eventArgs)

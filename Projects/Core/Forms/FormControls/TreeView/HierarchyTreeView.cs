@@ -13,7 +13,7 @@ namespace FormControls.TreeView
 
     using System.Windows.Forms;
 
-    using DotNetScaffolder.Presentation.Forms.Controls.Enum;
+    using DotNetScaffolder.Core.Extensions;
 
     using FormControls.Enum;
 
@@ -36,7 +36,7 @@ namespace FormControls.TreeView
         #region Constructors and Destructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="HierarchyTreeView"/> class.
+        ///     Initializes a new instance of the <see cref="HierarchyTreeView" /> class.
         /// </summary>
         public HierarchyTreeView()
         {
@@ -47,12 +47,12 @@ namespace FormControls.TreeView
         #region Properties
 
         /// <summary>
-        /// Gets or sets a value indicating whether add group enabled.
+        ///     Gets or sets a value indicating whether add group enabled.
         /// </summary>
         public bool AddGroupEnabled { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether add item enabled.
+        ///     Gets or sets a value indicating whether add item enabled.
         /// </summary>
         public bool AddItemEnabled { get; set; }
 
@@ -77,28 +77,63 @@ namespace FormControls.TreeView
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether delete enabled.
+        ///     Gets or sets a value indicating whether delete enabled.
         /// </summary>
         public bool DeleteEnabled { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether down enabled.
+        ///     Gets or sets a value indicating whether down enabled.
         /// </summary>
         public bool DownEnabled { get; set; }
 
         /// <summary>
         ///     Gets or sets the type.
         /// </summary>
-        //public TreeViewType Type { get; set; }
-
         /// <summary>
-        /// Gets or sets a value indicating whether up enabled.
+        ///     Gets or sets a value indicating whether up enabled.
         /// </summary>
         public bool UpEnabled { get; set; }
 
         #endregion
 
         #region Public methods and operators
+
+        /// <summary>
+        /// Move down.
+        /// </summary>
+        /// <param name="selectedNode">
+        /// The selected node.
+        /// </param>
+        public void MoveDown(TreeNode selectedNode)
+        {
+            if (selectedNode.Parent != null && selectedNode.Index < selectedNode.Parent.Nodes.Count - 1)
+            {
+                Hierarchy currentNode = selectedNode.Tag as Hierarchy;
+                Hierarchy parentNode = selectedNode.Parent.Tag as Hierarchy;
+                selectedNode.MoveDown();
+                int index = parentNode.Children.IndexOf(currentNode);
+                parentNode.Children.MoveItem(index, index + 1);
+            }
+        }
+
+        /// <summary>
+        /// Move up.
+        /// </summary>
+        /// <param name="selectedNode">
+        /// The selected node.
+        /// </param>
+        public void MoveUp(TreeNode selectedNode)
+        {
+            if (selectedNode.Index > 0)
+            {
+                Hierarchy currentNode = selectedNode.Tag as Hierarchy;
+                Hierarchy parentNode = selectedNode.Parent.Tag as Hierarchy;
+                selectedNode.MoveUp();
+
+                int index = parentNode.Children.IndexOf(currentNode);
+                parentNode.Children.MoveItem(index, index - 1);
+            }
+        }
 
         /// <summary>
         /// The select node.

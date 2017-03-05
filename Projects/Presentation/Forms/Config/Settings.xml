@@ -7,7 +7,7 @@
           <Children>
             <Hierarchy xsi:type="Template">
               <Children />
-              <Enabled>false</Enabled>
+              <Enabled>true</Enabled>
               <Id>99d48be6-6570-465d-bc29-0793ea47233f</Id>
               <Name>Entity Framework Context (v6)</Name>
               <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
@@ -24,7 +24,7 @@
               <Version>1</Version>
             </Hierarchy>
           </Children>
-          <Enabled>false</Enabled>
+          <Enabled>true</Enabled>
           <Id>9e2d62f2-b861-4b13-b27d-54d74ecaad48</Id>
           <Name>Context</Name>
           <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
@@ -44,7 +44,7 @@
           <Children>
             <Hierarchy xsi:type="Template">
               <Children />
-              <Enabled>false</Enabled>
+              <Enabled>true</Enabled>
               <Id>63cde985-20c1-4c6f-8f05-ac941de202f5</Id>
               <Name>Entity Framework Entity (v6)</Name>
               <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
@@ -61,7 +61,7 @@
               <Version>1</Version>
             </Hierarchy>
           </Children>
-          <Enabled>false</Enabled>
+          <Enabled>true</Enabled>
           <Id>c294b09a-d0de-47c9-b511-a80fe418aa37</Id>
           <Name>Entity</Name>
           <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
@@ -78,7 +78,7 @@
           <Version>1</Version>
         </Hierarchy>
       </Children>
-      <Enabled>false</Enabled>
+      <Enabled>true</Enabled>
       <Id>c0c18812-5969-49ef-b37b-1b596eb7da95</Id>
       <Name>Templates</Name>
       <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
