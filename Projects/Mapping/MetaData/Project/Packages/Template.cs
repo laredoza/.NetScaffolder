@@ -20,6 +20,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Project.Packages
     using DotNetScaffolder.Core.Common.Validation;
     using DotNetScaffolder.Mapping.MetaData.Enum;
 
+    using FormControls.Enum;
     using FormControls.TreeView;
 
     #endregion
@@ -124,29 +125,38 @@ namespace DotNetScaffolder.Mapping.MetaData.Project.Packages
                 this.ValidationResult.Add(new Validation(ValidationType.TemplateName, "TemplateName may not be empty"));
             }
 
-            if (string.IsNullOrEmpty(this.TemplatePath))
+            if (this.HierarchyType == HierarchyType.Item)
             {
-                this.ValidationResult.Add(new Validation(ValidationType.TemplatePath, "TemplatePath may not be empty"));
-            }
+                if (string.IsNullOrEmpty(this.TemplatePath))
+                {
+                    this.ValidationResult.Add(
+                        new Validation(ValidationType.TemplatePath, "TemplatePath may not be empty"));
+                }
 
-            if (this.LanguageOutputId == Guid.Empty)
-            {
-                this.ValidationResult.Add(
-                    new Validation(ValidationType.TemplateLanguageOutputId, "TemplateLanguageOutputId may not be empty"));
-            }
+                if (this.LanguageOutputId == Guid.Empty)
+                {
+                    this.ValidationResult.Add(
+                        new Validation(
+                            ValidationType.TemplateLanguageOutputId,
+                            "TemplateLanguageOutputId may not be empty"));
+                }
 
-            if (this.GeneratorTypeId == Guid.Empty)
-            {
-                this.ValidationResult.Add(
-                    new Validation(ValidationType.TemplateGeneratorTypeId, "TemplateLanguageOutputId may not be empty"));
-            }
+                if (this.GeneratorTypeId == Guid.Empty)
+                {
+                    this.ValidationResult.Add(
+                        new Validation(
+                            ValidationType.TemplateGeneratorTypeId,
+                            "TemplateLanguageOutputId may not be empty"));
+                }
 
-            // Todo: Add back
-            this.DataType.Validate();
+                // Todo: Add back
+                this.DataType.Validate();
 
-            foreach (var validationResult in this.DataType.ValidationResult)
-            {
-                this.ValidationResult.Add(validationResult);
+                foreach (var validationResult in this.DataType.ValidationResult)
+                {
+                    this.ValidationResult.Add(validationResult);
+                }
+
             }
 
             if (this.Version == 0)

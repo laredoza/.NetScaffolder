@@ -83,8 +83,43 @@ namespace DotNetScaffolder.Presentation.Forms
             this.ManageTemplateTreeViewUserControl1.BtnAddItemClick += this.BtnAddItemClick;
             this.ManageTemplateTreeViewUserControl1.BtnDeleteClick += this.BtnDeleteClick;
             this.ManageTemplateTreeViewUserControl1.BtnUpClick += this.BtnUpClick;
-            this.ManageTemplateTreeViewUserControl1.BtnDownClick += BtnDownClick;
+            this.ManageTemplateTreeViewUserControl1.BtnDownClick += this.BtnDownClick;
+            this.ManageTemplateTreeViewUserControl1.BtnAddGroupClick += BtnAddGroupClick;
             this.ManageTemplateTreeViewUserControl1.SelectFirstNode();
+        }
+
+        private void BtnAddGroupClick(object sender, EventArgs eventArgs)
+        {
+            Template currentTemplate = this.TemplateDetailsUserControl1.TreeNode.Tag as Template;
+            Template parentTemplate;
+
+            if (currentTemplate.HierarchyType == HierarchyType.Item)
+            {
+                parentTemplate = this.TemplateDetailsUserControl1.TreeNode.Parent.Tag as Template;
+            }
+            else
+            {
+                parentTemplate = currentTemplate;
+            }
+
+            Template newTemplate = new Template
+            {
+                Id = Guid.NewGuid(),
+                ConfigLocation = parentTemplate.ConfigLocation,
+                DataType = parentTemplate.DataType,
+                Enabled = true,
+                LanguageOutputId = parentTemplate.LanguageOutputId,
+                GeneratorTypeId = parentTemplate.GeneratorTypeId,
+                HierarchyType = HierarchyType.Group,
+                Name = "Group 1",
+                Version = 1
+            };
+
+            parentTemplate.Children.Add(newTemplate);
+            TreeNode newTreeNode = new TreeNode { Text = newTemplate.Name, Tag = newTemplate };
+            this.TemplateDetailsUserControl1.TreeNode.Nodes.Add(newTreeNode);
+            this.TemplateDetailsUserControl1.TreeNode = newTreeNode;
+            this.TemplateDetailsUserControl1.Data = newTemplate;
         }
 
         private void BtnDownClick(object sender, EventArgs eventArgs)
