@@ -59,14 +59,11 @@
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.treeView2 = new System.Windows.Forms.TreeView();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.TemplateDetailsUserControl1 = new DotNetScaffolder.Presentation.Forms.Controls.TemplateDetailsUserControl();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.ManageTemplateTreeViewUserControl1 = new DotNetScaffolder.Presentation.Forms.Controls.ManageCollectionsTreeViewUserControl();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.button6 = new System.Windows.Forms.Button();
+            this.TemplateManagementUserControl1 = new DotNetScaffolder.Presentation.Forms.Controls.TemplateManagementUserControl();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -76,8 +73,6 @@
             this.tabPage2.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.tabPage3.SuspendLayout();
-            this.groupBox5.SuspendLayout();
-            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -273,8 +268,7 @@
             // 
             // tabPage3
             // 
-            this.tabPage3.Controls.Add(this.groupBox5);
-            this.tabPage3.Controls.Add(this.groupBox4);
+            this.tabPage3.Controls.Add(this.TemplateManagementUserControl1);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
@@ -282,50 +276,6 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Templates";
             this.tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // groupBox5
-            // 
-            this.groupBox5.Controls.Add(this.TemplateDetailsUserControl1);
-            this.groupBox5.Location = new System.Drawing.Point(411, 16);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(505, 370);
-            this.groupBox5.TabIndex = 1;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "Details";
-            // 
-            // TemplateDetailsUserControl1
-            // 
-            this.TemplateDetailsUserControl1.Data = null;
-            this.TemplateDetailsUserControl1.Location = new System.Drawing.Point(15, 19);
-            this.TemplateDetailsUserControl1.Name = "TemplateDetailsUserControl1";
-            this.TemplateDetailsUserControl1.Size = new System.Drawing.Size(451, 301);
-            this.TemplateDetailsUserControl1.TabIndex = 0;
-            // 
-            // groupBox4
-            // 
-            this.groupBox4.Controls.Add(this.ManageTemplateTreeViewUserControl1);
-            this.groupBox4.Location = new System.Drawing.Point(11, 16);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(383, 370);
-            this.groupBox4.TabIndex = 0;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Templates";
-            // 
-            // ManageTemplateTreeViewUserControl1
-            // 
-            this.ManageTemplateTreeViewUserControl1.AfterSelect = null;
-            this.ManageTemplateTreeViewUserControl1.BeforeSelect = null;
-            this.ManageTemplateTreeViewUserControl1.BtnAddGroupClick = null;
-            this.ManageTemplateTreeViewUserControl1.BtnAddItemClick = null;
-            this.ManageTemplateTreeViewUserControl1.BtnDeleteClick = null;
-            this.ManageTemplateTreeViewUserControl1.BtnDownClick = null;
-            this.ManageTemplateTreeViewUserControl1.BtnUpClick = null;
-            this.ManageTemplateTreeViewUserControl1.CollectionType = DotNetScaffolder.Presentation.Forms.Controls.Enum.TreeViewType.Package;
-            this.ManageTemplateTreeViewUserControl1.DataSource = null;
-            this.ManageTemplateTreeViewUserControl1.Location = new System.Drawing.Point(13, 16);
-            this.ManageTemplateTreeViewUserControl1.Name = "ManageTemplateTreeViewUserControl1";
-            this.ManageTemplateTreeViewUserControl1.Size = new System.Drawing.Size(364, 368);
-            this.ManageTemplateTreeViewUserControl1.TabIndex = 0;
             // 
             // statusStrip1
             // 
@@ -366,6 +316,13 @@
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
+            // TemplateManagementUserControl1
+            // 
+            this.TemplateManagementUserControl1.Location = new System.Drawing.Point(11, 7);
+            this.TemplateManagementUserControl1.Name = "TemplateManagementUserControl1";
+            this.TemplateManagementUserControl1.Size = new System.Drawing.Size(938, 414);
+            this.TemplateManagementUserControl1.TabIndex = 0;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -390,8 +347,6 @@
             this.tabPage2.PerformLayout();
             this.groupBox6.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
-            this.groupBox5.ResumeLayout(false);
-            this.groupBox4.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -411,8 +366,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.Button button10;
         private System.Windows.Forms.GroupBox groupBox6;
@@ -422,8 +375,8 @@
         private ProjectDetailsUserControl ProjectDetailsUserControl1;
         private ProjectDomainUserControl ProjectDomainUserControl1;
         private ProjectDomainDetailsUserControl projectDomainDetailsUserControl1;
-        private ManageCollectionsTreeViewUserControl ManageTemplateTreeViewUserControl1;
         private TemplateDetailsUserControl TemplateDetailsUserControl1;
+        private TemplateManagementUserControl TemplateManagementUserControl1;
         //public ManageCollectionsTreeViewUserControl manageCollectionsTreeViewUserControl1;
     }
 }
