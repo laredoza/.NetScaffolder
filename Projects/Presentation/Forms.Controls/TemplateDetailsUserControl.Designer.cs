@@ -28,12 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.PanelTemplate = new System.Windows.Forms.Panel();
-            this.button11 = new System.Windows.Forms.Button();
             this.CheckBoxEnabled = new System.Windows.Forms.CheckBox();
             this.TextBoxName = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
+            this.button11 = new System.Windows.Forms.Button();
+            this.PanelTemplate = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label15 = new System.Windows.Forms.Label();
             this.TextBoxVersion = new System.Windows.Forms.TextBox();
@@ -46,9 +47,11 @@
             this.label18 = new System.Windows.Forms.Label();
             this.ComboBoxSetupLocation = new System.Windows.Forms.ComboBox();
             this.label16 = new System.Windows.Forms.Label();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.panel1.SuspendLayout();
             this.PanelTemplate.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -62,25 +65,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(451, 43);
             this.panel1.TabIndex = 59;
-            // 
-            // PanelTemplate
-            // 
-            this.PanelTemplate.Controls.Add(this.groupBox1);
-            this.PanelTemplate.Dock = System.Windows.Forms.DockStyle.Top;
-            this.PanelTemplate.Location = new System.Drawing.Point(0, 43);
-            this.PanelTemplate.Name = "PanelTemplate";
-            this.PanelTemplate.Size = new System.Drawing.Size(451, 169);
-            this.PanelTemplate.TabIndex = 60;
-            // 
-            // button11
-            // 
-            this.button11.Enabled = false;
-            this.button11.Location = new System.Drawing.Point(359, -2);
-            this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(75, 23);
-            this.button11.TabIndex = 62;
-            this.button11.Text = "Default";
-            this.button11.UseVisualStyleBackColor = true;
             // 
             // CheckBoxEnabled
             // 
@@ -110,6 +94,25 @@
             this.label13.Size = new System.Drawing.Size(38, 13);
             this.label13.TabIndex = 53;
             this.label13.Text = "Name:";
+            // 
+            // button11
+            // 
+            this.button11.Enabled = false;
+            this.button11.Location = new System.Drawing.Point(373, -2);
+            this.button11.Name = "button11";
+            this.button11.Size = new System.Drawing.Size(75, 23);
+            this.button11.TabIndex = 62;
+            this.button11.Text = "Default";
+            this.button11.UseVisualStyleBackColor = true;
+            // 
+            // PanelTemplate
+            // 
+            this.PanelTemplate.Controls.Add(this.groupBox1);
+            this.PanelTemplate.Dock = System.Windows.Forms.DockStyle.Top;
+            this.PanelTemplate.Location = new System.Drawing.Point(0, 43);
+            this.PanelTemplate.Name = "PanelTemplate";
+            this.PanelTemplate.Size = new System.Drawing.Size(451, 169);
+            this.PanelTemplate.TabIndex = 60;
             // 
             // groupBox1
             // 
@@ -153,7 +156,7 @@
             // 
             this.button8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.button8.Enabled = false;
-            this.button8.Location = new System.Drawing.Point(356, 98);
+            this.button8.Location = new System.Drawing.Point(364, 98);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(75, 23);
             this.button8.TabIndex = 78;
@@ -180,12 +183,12 @@
             // 
             // ComboBoxGeneratorOutput
             // 
+            this.ComboBoxGeneratorOutput.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ComboBoxGeneratorOutput.FormattingEnabled = true;
             this.ComboBoxGeneratorOutput.Location = new System.Drawing.Point(112, 73);
             this.ComboBoxGeneratorOutput.Name = "ComboBoxGeneratorOutput";
             this.ComboBoxGeneratorOutput.Size = new System.Drawing.Size(238, 21);
             this.ComboBoxGeneratorOutput.TabIndex = 77;
-            this.ComboBoxGeneratorOutput.Text = "T4";
             this.ComboBoxGeneratorOutput.SelectedIndexChanged += new System.EventHandler(this.ComboBoxGeneratorOutput_SelectedIndexChanged);
             // 
             // label19
@@ -199,6 +202,7 @@
             // 
             // ComboBoxLanguageOutput
             // 
+            this.ComboBoxLanguageOutput.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ComboBoxLanguageOutput.FormattingEnabled = true;
             this.ComboBoxLanguageOutput.Location = new System.Drawing.Point(112, 19);
             this.ComboBoxLanguageOutput.Name = "ComboBoxLanguageOutput";
@@ -217,6 +221,7 @@
             // 
             // ComboBoxSetupLocation
             // 
+            this.ComboBoxSetupLocation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ComboBoxSetupLocation.FormattingEnabled = true;
             this.ComboBoxSetupLocation.Items.AddRange(new object[] {
             "Data",
@@ -236,6 +241,10 @@
             this.label16.TabIndex = 72;
             this.label16.Text = "Setup Location:";
             // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
             // TemplateDetailsUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -249,6 +258,7 @@
             this.PanelTemplate.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -273,5 +283,6 @@
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.ComboBox ComboBoxSetupLocation;
         private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }

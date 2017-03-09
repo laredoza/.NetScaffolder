@@ -226,6 +226,11 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
             this.ManageTemplateTreeViewUserControl1.MoveUp(this.TemplateDetailsUserControl1.TreeNode);
         }
 
+        public int Validation()
+        {
+            return this.TemplateDetailsUserControl1.Validation();
+        }
+
         #endregion
     }
 }

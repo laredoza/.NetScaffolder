@@ -13,6 +13,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
 
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Windows.Forms;
 
     using Common.Logging;
@@ -20,6 +21,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
     using Configuration;
 
     using DotNetScaffolder.Core.Common;
+    using DotNetScaffolder.Core.Common.Validation;
     using DotNetScaffolder.Mapping.MetaData.Enum;
     using DotNetScaffolder.Mapping.MetaData.Project.Packages;
 
@@ -507,6 +509,11 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
             {
                 this.Version = Convert.ToDouble(this.TextBoxVersion.Text);
             }
+            else
+            {
+                this.Version = 0;
+                this.TextBoxVersion.Text = 0.ToString();
+            }
         }
 
         /// <summary>
@@ -537,6 +544,83 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
             this.TemplateEnabled = (sender as CheckBox).Checked;
+        }
+
+        /// <summary>
+        /// The validation.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="int"/>.
+        /// </returns>
+        public int Validation()
+        {
+            Logger.Trace("Started Validation()");
+
+            int result = 0;
+        
+            if (this.Data != null)
+            {
+                this.errorProvider1.Clear();
+                this.Data.Validate();
+
+                if (this.Data.ValidationResult.Count > 0)
+                {
+                    Validation validation = null;
+
+                    if (this.data.ValidationResult.Any(v => v.ValidationType == ValidationType.TemplateName))
+                    {
+                        validation = this.data.ValidationResult.FirstOrDefault(v => v.ValidationType == ValidationType.TemplateName);
+                        this.TextBoxName.Focus();
+                        this.errorProvider1.SetError(
+                            this.TextBoxName,
+                            validation.Description);
+                        result++;
+                    }
+
+                    if (this.data.ValidationResult.Any(v => v.ValidationType == ValidationType.TemplateLanguageOutputId))
+                    {
+                        validation = this.data.ValidationResult.FirstOrDefault(v => v.ValidationType == ValidationType.TemplateLanguageOutputId);
+                        this.ComboBoxLanguageOutput.Focus();
+                        this.errorProvider1.SetError(
+                            this.ComboBoxLanguageOutput,
+                            validation.Description);
+                        result++;
+                    }
+
+                    if (this.data.ValidationResult.Any(v => v.ValidationType == ValidationType.TemplateGeneratorTypeId))
+                    {
+                        validation = this.data.ValidationResult.FirstOrDefault(v => v.ValidationType == ValidationType.TemplateGeneratorTypeId);
+                        this.ComboBoxGeneratorOutput.Focus();
+                        this.errorProvider1.SetError(
+                            this.ComboBoxGeneratorOutput,
+                            validation.Description);
+                        result++;
+                    }
+
+                    if (this.data.ValidationResult.Any(v => v.ValidationType == ValidationType.TemplatePath))
+                    {
+                        validation = this.data.ValidationResult.FirstOrDefault(v => v.ValidationType == ValidationType.TemplatePath);
+                        this.TextBoxTemplate.Focus();
+                        this.errorProvider1.SetError(
+                            this.TextBoxTemplate,
+                            validation.Description);
+                        result++;
+                    }
+
+                    if (this.data.ValidationResult.Any(v => v.ValidationType == ValidationType.TemplateVersion))
+                    {
+                        validation = this.data.ValidationResult.FirstOrDefault(v => v.ValidationType == ValidationType.TemplateVersion);
+                        this.TextBoxVersion.Focus();
+                        this.errorProvider1.SetError(
+                            this.TextBoxVersion,
+                            validation.Description);
+                        result++;
+                    }
+                }
+            }
+
+            Logger.Trace("Completed Validation()");
+            return result;
         }
     }
 }

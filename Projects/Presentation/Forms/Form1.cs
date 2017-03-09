@@ -102,7 +102,10 @@ namespace DotNetScaffolder.Presentation.Forms
                 this.applicationService.Save();
             }
 
-            applicationConfiguration.Save();
+            if (this.TemplateManagementUserControl1.Validation() == 0)
+            {
+                applicationConfiguration.Save();
+            }
         }
 
         /// <summary>

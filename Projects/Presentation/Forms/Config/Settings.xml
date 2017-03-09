@@ -23,6 +23,24 @@
               <TemplatePath>Bogus.T4</TemplatePath>
               <Version>1</Version>
             </Hierarchy>
+            <Hierarchy xsi:type="Template">
+              <Children />
+              <Enabled>true</Enabled>
+              <Id>94485490-4b52-4721-a91f-2ac8990d2c65</Id>
+              <Name>Template1</Name>
+              <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
+              <HierarchyType>Item</HierarchyType>
+              <ConfigLocation>Data</ConfigLocation>
+              <DataType>
+                <Id>69c09953-f913-4f04-aa70-bcc600bbe861</Id>
+                <Name>Test</Name>
+              </DataType>
+              <DefaultSettings />
+              <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
+              <LanguageOutputId>1bc1b0c4-1e41-9146-82cf-599181ce4410</LanguageOutputId>
+              <TemplatePath>123.t4</TemplatePath>
+              <Version>1</Version>
+            </Hierarchy>
           </Children>
           <Enabled>true</Enabled>
           <Id>9e2d62f2-b861-4b13-b27d-54d74ecaad48</Id>
@@ -35,8 +53,8 @@
             <Name>Test</Name>
           </DataType>
           <DefaultSettings />
-          <GeneratorTypeId>5dc06c70-393d-445a-a276-742c702f38de</GeneratorTypeId>
-          <LanguageOutputId>40a9c08d-fe7a-4635-ada3-daa003230f85</LanguageOutputId>
+          <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
+          <LanguageOutputId>1bc1b0c4-1e41-9146-82cf-599181ce4410</LanguageOutputId>
           <TemplatePath>Bogus.T4</TemplatePath>
           <Version>1</Version>
         </Hierarchy>
