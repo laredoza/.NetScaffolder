@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.ManageCollectionsTreeViewUserControl1 = new DotNetScaffolder.Presentation.Forms.Controls.ManageCollectionsTreeViewUserControl();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.PackageDetailsUserControl1 = new DotNetScaffolder.Presentation.Forms.Controls.PackageDetailsUserControl();
+            this.ManageCollectionsTreeViewUserControl1 = new DotNetScaffolder.Presentation.Forms.Controls.ManageCollectionsTreeViewUserControl();
             this.groupBox4.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -45,22 +45,6 @@
             this.groupBox4.TabIndex = 3;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Packages";
-            // 
-            // ManageCollectionsTreeViewUserControl1
-            // 
-            this.ManageCollectionsTreeViewUserControl1.AfterSelect = null;
-            this.ManageCollectionsTreeViewUserControl1.BeforeSelect = null;
-            this.ManageCollectionsTreeViewUserControl1.BtnAddGroupClick = null;
-            this.ManageCollectionsTreeViewUserControl1.BtnAddItemClick = null;
-            this.ManageCollectionsTreeViewUserControl1.BtnDeleteClick = null;
-            this.ManageCollectionsTreeViewUserControl1.BtnDownClick = null;
-            this.ManageCollectionsTreeViewUserControl1.BtnUpClick = null;
-            this.ManageCollectionsTreeViewUserControl1.CollectionType = DotNetScaffolder.Presentation.Forms.Controls.Enum.TreeViewType.Package;
-            this.ManageCollectionsTreeViewUserControl1.DataSource = null;
-            this.ManageCollectionsTreeViewUserControl1.Location = new System.Drawing.Point(15, 19);
-            this.ManageCollectionsTreeViewUserControl1.Name = "ManageCollectionsTreeViewUserControl1";
-            this.ManageCollectionsTreeViewUserControl1.Size = new System.Drawing.Size(364, 368);
-            this.ManageCollectionsTreeViewUserControl1.TabIndex = 1;
             // 
             // groupBox1
             // 
@@ -78,11 +62,27 @@
             this.PackageDetailsUserControl1.Location = new System.Drawing.Point(15, 19);
             this.PackageDetailsUserControl1.Name = "PackageDetailsUserControl1";
             this.PackageDetailsUserControl1.PackageName = "";
-            this.PackageDetailsUserControl1.Size = new System.Drawing.Size(451, 368);
+            this.PackageDetailsUserControl1.Size = new System.Drawing.Size(447, 368);
             this.PackageDetailsUserControl1.TabIndex = 5;
             this.PackageDetailsUserControl1.TemplateEnabled = false;
             this.PackageDetailsUserControl1.TreeNode = null;
             this.PackageDetailsUserControl1.Version = 1D;
+            // 
+            // ManageCollectionsTreeViewUserControl1
+            // 
+            this.ManageCollectionsTreeViewUserControl1.AfterSelect = null;
+            this.ManageCollectionsTreeViewUserControl1.BeforeSelect = null;
+            this.ManageCollectionsTreeViewUserControl1.BtnAddGroupClick = null;
+            this.ManageCollectionsTreeViewUserControl1.BtnAddItemClick = null;
+            this.ManageCollectionsTreeViewUserControl1.BtnDeleteClick = null;
+            this.ManageCollectionsTreeViewUserControl1.BtnDownClick = null;
+            this.ManageCollectionsTreeViewUserControl1.BtnUpClick = null;
+            this.ManageCollectionsTreeViewUserControl1.CollectionType = DotNetScaffolder.Presentation.Forms.Controls.Enum.TreeViewType.Package;
+            this.ManageCollectionsTreeViewUserControl1.DataSource = null;
+            this.ManageCollectionsTreeViewUserControl1.Location = new System.Drawing.Point(15, 19);
+            this.ManageCollectionsTreeViewUserControl1.Name = "ManageCollectionsTreeViewUserControl1";
+            this.ManageCollectionsTreeViewUserControl1.Size = new System.Drawing.Size(364, 368);
+            this.ManageCollectionsTreeViewUserControl1.TabIndex = 1;
             // 
             // ManagePackageUserControl
             // 
