@@ -1,5 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ApplicationSettings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <DataTypes />
+  <Packages>
+    <Package>
+      <Children>
+        <Hierarchy xsi:type="Package">
+          <Children>
+            <Hierarchy xsi:type="Package">
+              <Children>
+                <Hierarchy xsi:type="Package">
+                  <Children />
+                  <Enabled>true</Enabled>
+                  <Id>3738f28b-18b7-42b4-a1e5-b1829b5fb396</Id>
+                  <Name>Entity Framework 6 (Standard)</Name>
+                  <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
+                  <HierarchyType>Item</HierarchyType>
+                  <Templates />
+                </Hierarchy>
+                <Hierarchy xsi:type="Package">
+                  <Children />
+                  <Enabled>true</Enabled>
+                  <Id>be0b9c03-3970-4792-b440-f7512150e295</Id>
+                  <Name>Entity Framework 6 (Repository)</Name>
+                  <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
+                  <HierarchyType>Item</HierarchyType>
+                  <Templates />
+                </Hierarchy>
+              </Children>
+              <Enabled>true</Enabled>
+              <Id>9777af5c-429a-4297-b6da-853b6b4a4b90</Id>
+              <Name>Entity Framework Microsoft</Name>
+              <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
+              <HierarchyType>Group</HierarchyType>
+              <Templates />
+            </Hierarchy>
+            <Hierarchy xsi:type="Package">
+              <Children>
+                <Hierarchy xsi:type="Package">
+                  <Children />
+                  <Enabled>true</Enabled>
+                  <Id>9393df85-34f8-447a-ab99-cf58f21b0cb8</Id>
+                  <Name>Mongo Official (Standard)</Name>
+                  <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
+                  <HierarchyType>Item</HierarchyType>
+                  <Templates />
+                </Hierarchy>
+              </Children>
+              <Enabled>true</Enabled>
+              <Id>c5734e26-5226-4823-9324-b596d20fc976</Id>
+              <Name>Mongo Official</Name>
+              <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
+              <HierarchyType>Group</HierarchyType>
+              <Templates />
+            </Hierarchy>
+          </Children>
+          <Enabled>true</Enabled>
+          <Id>8c9f472c-19a0-498c-a169-8b8cab34c908</Id>
+          <Name>Data</Name>
+          <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
+          <HierarchyType>Group</HierarchyType>
+          <Templates />
+        </Hierarchy>
+      </Children>
+      <Enabled>true</Enabled>
+      <Id>68ad1db2-843c-4a64-90b6-df467dca4399</Id>
+      <Name>Packages</Name>
+      <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
+      <HierarchyType>Group</HierarchyType>
+      <Templates />
+    </Package>
+  </Packages>
   <Templates>
     <Template>
       <Children>
@@ -113,5 +183,4 @@
       <Version>1</Version>
     </Template>
   </Templates>
-  <DataTypes />
 </ApplicationSettings>

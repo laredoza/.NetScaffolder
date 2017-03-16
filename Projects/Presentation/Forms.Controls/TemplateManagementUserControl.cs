@@ -22,14 +22,14 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
     #endregion
 
     /// <summary>
-    /// The template management user control.
+    ///     The template management user control.
     /// </summary>
     public partial class TemplateManagementUserControl : UserControl
     {
         #region Constructors and Destructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="TemplateManagementUserControl"/> class.
+        ///     Initializes a new instance of the <see cref="TemplateManagementUserControl" /> class.
         /// </summary>
         public TemplateManagementUserControl()
         {
@@ -64,6 +64,21 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
                     this.ManageTemplateTreeViewUserControl1.SelectFirstNode();
                 }
             }
+        }
+
+        #endregion
+
+        #region Public methods and operators
+
+        /// <summary>
+        /// The validation.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="int"/>.
+        /// </returns>
+        public int Validation()
+        {
+            return this.TemplateDetailsUserControl1.Validation();
         }
 
         #endregion
@@ -224,11 +239,6 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         private void BtnUpClick(object sender, EventArgs e)
         {
             this.ManageTemplateTreeViewUserControl1.MoveUp(this.TemplateDetailsUserControl1.TreeNode);
-        }
-
-        public int Validation()
-        {
-            return this.TemplateDetailsUserControl1.Validation();
         }
 
         #endregion

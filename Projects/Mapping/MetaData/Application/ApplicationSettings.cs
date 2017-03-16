@@ -1,16 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DotNetScaffolder.Mapping.MetaData.Enum;
-using DotNetScaffolder.Mapping.MetaData.Project.Packages;
-using Common.Logging;
-using System.Xml.Serialization;
-using DotNetScaffolder.Core.Common.Validation;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="ApplicationSettings.cs" company="">
+//   
+// </copyright>
+// <summary>
+//   The application settings.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace DotNetScaffolder.Mapping.MetaData.Application
 {
+    #region Using
+
+    using System.Collections.Generic;
+    using System.Xml.Serialization;
+
+    using Common.Logging;
+
+    using DotNetScaffolder.Core.Common.Validation;
+    using DotNetScaffolder.Mapping.MetaData.Project.Packages;
+
+    #endregion
+
+    /// <summary>
+    /// The application settings.
+    /// </summary>
     public class ApplicationSettings : IValidate
     {
         #region Static Fields
@@ -22,16 +35,56 @@ namespace DotNetScaffolder.Mapping.MetaData.Application
 
         #endregion
 
-        public List<Template> Templates { get; set; }
+        #region Constructors and Destructors
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ApplicationSettings"/> class.
+        /// </summary>
+        public ApplicationSettings()
+        {
+            Logger.Trace("Started ApplicationSettings()");
+            this.Templates = new List<Template>();
+            this.Packages = new List<Package>();
+            this.ValidationResult = new List<Validation>();
+            this.DataTypes = new List<DataType>();
+            Logger.Trace("Completed ApplicationSettings()");
+        }
+
+        #endregion
+
+        #region Properties
+
+        /// <summary>
+        /// Gets or sets the data types.
+        /// </summary>
         public List<DataType> DataTypes { get; set; }
 
         /// <summary>
-        /// Gets or sets the validation result.
+        /// Gets or sets the packages.
+        /// </summary>
+        public List<Package> Packages { get; set; }
+
+        /// <summary>
+        /// Gets or sets the templates.
+        /// </summary>
+        public List<Template> Templates { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the validation result.
         /// </summary>
         [XmlIgnore]
         public List<Validation> ValidationResult { get; set; }
 
+        #endregion
+
+        #region Public methods and operators
+
+        /// <summary>
+        /// The validate.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="List"/>.
+        /// </returns>
         public List<Validation> Validate()
         {
             Logger.Trace("Started Validate()");
@@ -61,13 +114,6 @@ namespace DotNetScaffolder.Mapping.MetaData.Application
             return this.ValidationResult;
         }
 
-        public ApplicationSettings()
-        {
-            Logger.Trace("Started ApplicationSettings()");
-            this.Templates = new List<Template>();
-            this.ValidationResult = new List<Validation>();
-            this.DataTypes = new List<DataType>();
-            Logger.Trace("Completed ApplicationSettings()");
-        }
+        #endregion
     }
 }

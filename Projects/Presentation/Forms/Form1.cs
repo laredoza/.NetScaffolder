@@ -55,25 +55,33 @@ namespace DotNetScaffolder.Presentation.Forms
         public Form1()
         {
             this.InitializeComponent();
+
             FilePersistenceOptions options = new FilePersistenceOptions { Path = @"Models\Banking.mdl" };
-
             this.applicationService = new ProjectDefinitionApplicationServiceFile { FilePersistenceOptions = options };
-
             this.applicationService.Load();
 
             FilePersistenceOptions configOptions = new FilePersistenceOptions { Path = @"Config\Settings.xml" };
-
             applicationConfiguration = new ConfigurationAplicationServiceFile
                                                                            {
-                                                                               FilePersistenceOptions
-                                                                                   =
-                                                                                   configOptions
+                                                                               FilePersistenceOptions = configOptions
                                                                            };
 
             applicationConfiguration.Load();
 
+            //Package package = new Package { Id = Guid.NewGuid(), Name = "Packages", HierarchyType = HierarchyType.Group};
+            //package.Children.Add(new Package { Id = Guid.NewGuid(), Name = "Data", HierarchyType = HierarchyType.Group });
+            //package.Children[0].Children.Add(new Package { Id = Guid.NewGuid(), Name = "Entity Framework Microsoft", HierarchyType = HierarchyType.Group });
+            //package.Children[0].Children[0].Children.Add(new Package { Id = Guid.NewGuid(), Name = "Entity Framework 6 (Standard)", HierarchyType = HierarchyType.Item });
+            //package.Children[0].Children[0].Children.Add(new Package { Id = Guid.NewGuid(), Name = "Entity Framework 6 (Repository)", HierarchyType = HierarchyType.Item });
+            //package.Children[0].Children.Add(new Package { Id = Guid.NewGuid(), Name = "Mongo Official", HierarchyType = HierarchyType.Group });
+            //package.Children[0].Children[1].Children.Add(new Package { Id = Guid.NewGuid(), Name = "Mongo Official (Standard)", HierarchyType = HierarchyType.Item });
+            //this.applicationConfiguration.ApplicationSettings.Packages.Add(package);
+            //applicationConfiguration.Save();
+
             this.TemplateManagementUserControl1.DataSource =
                 applicationConfiguration.ApplicationSettings.Templates[0];
+
+            this.ManagePackageUserControl1.DataSource = applicationConfiguration.ApplicationSettings.Packages[0];
 
             this.ProjectDetailsUserControl1.Project = this.applicationService.ProjectDefinition;
             this.ProjectDomainUserControl1.SelectedIndexChanged += this.ProjectDomainUserControl1_SelectedIndexChanged;

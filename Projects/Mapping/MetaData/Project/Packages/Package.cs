@@ -14,6 +14,11 @@ namespace DotNetScaffolder.Mapping.MetaData.Project.Packages
 
     using System;
     using System.Collections.Generic;
+    using System.Xml.Serialization;
+
+    using DotNetScaffolder.Core.Common.Validation;
+
+    using FormControls.TreeView;
 
     #endregion
 
@@ -21,7 +26,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Project.Packages
     ///     The package defines which templates will be created.
     ///     i.e) DbContext, EF, ViewModel, etc
     /// </summary>
-    public class Package
+    public class Package : Hierarchy, IValidate
     {
         #region Constructors and Destructors
 
@@ -32,6 +37,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Project.Packages
         {
             this.Enabled = false;
             this.Templates = new List<Template>();
+            this.ValidationResult = new List<Validation>();
         }
 
         #endregion
@@ -39,24 +45,36 @@ namespace DotNetScaffolder.Mapping.MetaData.Project.Packages
         #region Properties
 
         /// <summary>
-        ///     Gets or sets a value indicating whether enabled.
+        /// Gets or sets the version.
         /// </summary>
-        public bool Enabled { get; set; }
-
-        /// <summary>
-        ///     Gets or sets the id.
-        /// </summary>
-        public Guid Id { get; set; }
-
-        /// <summary>
-        ///     Gets or sets the name.
-        /// </summary>
-        public string Name { get; set; }
+        public double Version { get; set; }
 
         /// <summary>
         ///     Gets or sets the templates.
         /// </summary>
         public List<Template> Templates { get; set; }
+
+        #endregion
+
+        #region Implementation of IValidate
+
+        /// <summary>
+        /// Gets or sets the validation result.
+        /// </summary>
+        [XmlIgnore]
+        public List<Validation> ValidationResult { get; set; }
+
+        /// <summary>
+        ///     Validate class.
+        /// </summary>
+        /// <returns>
+        ///     The <see cref="List{T}" />
+        ///     Errors returned
+        /// </returns>
+        public List<Validation> Validate()
+        {
+            throw new NotImplementedException();
+        }
 
         #endregion
     }
