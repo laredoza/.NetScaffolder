@@ -84,8 +84,7 @@ namespace DotNetScaffolder.Presentation.Forms
 
             if (applicationConfiguration.ApplicationSettings.Templates.Count > 0)
             {
-                this.ManagePackageUserControl1.Templates =
-                    applicationConfiguration.ApplicationSettings.Templates[0].ReturnTemplateItems();
+                this.ManagePackageUserControl1.Templates = applicationConfiguration.ApplicationSettings.Templates;
             }
 
             this.ProjectDetailsUserControl1.Project = this.applicationService.ProjectDefinition;

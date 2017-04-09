@@ -28,24 +28,23 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
             this.CheckBoxEnabled = new System.Windows.Forms.CheckBox();
             this.TextBoxName = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.button11 = new System.Windows.Forms.Button();
             this.PanelTemplate = new System.Windows.Forms.Panel();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.button2 = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.Templates = new System.Windows.Forms.GroupBox();
+            this.BtnAdd = new System.Windows.Forms.Button();
+            this.ComboBoxSearch = new System.Windows.Forms.ComboBox();
+            this.BtnRemove = new System.Windows.Forms.Button();
             this.TemplateListBox = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip();
             this.panel1.SuspendLayout();
             this.PanelTemplate.SuspendLayout();
-            this.groupBox1.SuspendLayout();
+            this.Templates.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -101,52 +100,54 @@
             // 
             // PanelTemplate
             // 
-            this.PanelTemplate.Controls.Add(this.groupBox1);
+            this.PanelTemplate.Controls.Add(this.Templates);
             this.PanelTemplate.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PanelTemplate.Location = new System.Drawing.Point(0, 43);
             this.PanelTemplate.Name = "PanelTemplate";
             this.PanelTemplate.Size = new System.Drawing.Size(451, 326);
             this.PanelTemplate.TabIndex = 60;
             // 
-            // groupBox1
+            // Templates
             // 
-            this.groupBox1.Controls.Add(this.button2);
-            this.groupBox1.Controls.Add(this.comboBox1);
-            this.groupBox1.Controls.Add(this.button1);
-            this.groupBox1.Controls.Add(this.TemplateListBox);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(0, 3);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(445, 320);
-            this.groupBox1.TabIndex = 1;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Template";
+            this.Templates.Controls.Add(this.BtnAdd);
+            this.Templates.Controls.Add(this.ComboBoxSearch);
+            this.Templates.Controls.Add(this.BtnRemove);
+            this.Templates.Controls.Add(this.TemplateListBox);
+            this.Templates.Controls.Add(this.label1);
+            this.Templates.Location = new System.Drawing.Point(0, 3);
+            this.Templates.Name = "Templates";
+            this.Templates.Size = new System.Drawing.Size(445, 320);
+            this.Templates.TabIndex = 1;
+            this.Templates.TabStop = false;
+            this.Templates.Text = "Template";
             // 
-            // button2
+            // BtnAdd
             // 
-            this.button2.Location = new System.Drawing.Point(346, 29);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 5;
-            this.button2.Text = "Add";
-            this.button2.UseVisualStyleBackColor = true;
+            this.BtnAdd.Location = new System.Drawing.Point(346, 29);
+            this.BtnAdd.Name = "BtnAdd";
+            this.BtnAdd.Size = new System.Drawing.Size(75, 23);
+            this.BtnAdd.TabIndex = 5;
+            this.BtnAdd.Text = "Add";
+            this.BtnAdd.UseVisualStyleBackColor = true;
+            this.BtnAdd.Click += new System.EventHandler(this.BtnAdd_Click);
             // 
-            // comboBox1
+            // ComboBoxSearch
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(56, 29);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(277, 21);
-            this.comboBox1.TabIndex = 4;
+            this.ComboBoxSearch.FormattingEnabled = true;
+            this.ComboBoxSearch.Location = new System.Drawing.Point(56, 29);
+            this.ComboBoxSearch.Name = "ComboBoxSearch";
+            this.ComboBoxSearch.Size = new System.Drawing.Size(277, 21);
+            this.ComboBoxSearch.TabIndex = 4;
             // 
-            // button1
+            // BtnRemove
             // 
-            this.button1.Location = new System.Drawing.Point(346, 282);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "Remove";
-            this.button1.UseVisualStyleBackColor = true;
+            this.BtnRemove.Location = new System.Drawing.Point(346, 282);
+            this.BtnRemove.Name = "BtnRemove";
+            this.BtnRemove.Size = new System.Drawing.Size(75, 23);
+            this.BtnRemove.TabIndex = 3;
+            this.BtnRemove.Text = "Remove";
+            this.BtnRemove.UseVisualStyleBackColor = true;
+            this.BtnRemove.Click += new System.EventHandler(this.BtnRemove_Click);
             // 
             // TemplateListBox
             // 
@@ -185,8 +186,8 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.PanelTemplate.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.Templates.ResumeLayout(false);
+            this.Templates.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
 
@@ -201,12 +202,12 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.CheckBox CheckBoxEnabled;
         private System.Windows.Forms.ErrorProvider errorProvider1;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.GroupBox Templates;
+        private System.Windows.Forms.Button BtnRemove;
         private System.Windows.Forms.ListBox TemplateListBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Button BtnAdd;
+        private System.Windows.Forms.ComboBox ComboBoxSearch;
     }
 }

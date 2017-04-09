@@ -53,7 +53,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         /// <summary>
         /// Gets or sets the all templates.
         /// </summary>
-        private List<Template> allTemplates { get; set; }
+        private List<Template> availableTemplates { get; set; }
 
         #endregion
 
@@ -64,15 +64,15 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         /// </summary>
         public PackageDetailsUserControl()
         {
-            this.allTemplates = allTemplates;
+            this.availableTemplates = this.availableTemplates;
             this.InitializeComponent();
 
-            this.comboBox1.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            this.comboBox1.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            this.ComboBoxSearch.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            this.ComboBoxSearch.AutoCompleteSource = AutoCompleteSource.CustomSource;
 
-            this.TemplateListBox.DisplayMember = "Name";
-            this.TemplateListBox.ValueMember = "Id";
-            this.AllTemplates = new List<Template>();
+            //this.TemplateListBox.DisplayMember = "Name";
+            //this.TemplateListBox.ValueMember = "Id";
+            this.AvailableTemplates = new List<Template>();
         }
 
         #endregion
@@ -82,44 +82,33 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         /// <summary>
         /// Gets or sets the templates.
         /// </summary>
-        public List<Template> AllTemplates
+        public List<Template> AvailableTemplates
         {
             get
             {
-                return allTemplates;
+                return this.availableTemplates;
             }
             set
             {
-                if (this.allTemplates != value)
+                if (this.availableTemplates != value)
                 {
-                    allTemplates = value;
+                    this.TemplateListBox.DisplayMember = "Name";
+                    this.TemplateListBox.ValueMember = "Id";
+
+                    this.availableTemplates = value;
 
                     if (this.DataSource != null && this.DataSource.Templates.Count > 0)
                     {
                         List<Template> currentTemplates =
-                            this.DataSource.Templates[0].ReturnTemplateItems(this.DataSource.Templates[0]);
+                            this.DataSource.Templates[0].ReturnTemplateItems(this.DataSource.Templates);
 
                         foreach (Template currentTemplate in currentTemplates)
                         {
-                            this.allTemplates.Remove(currentTemplate);
+                            this.availableTemplates.Remove(currentTemplate);
                         }
                     }
 
-                    List<string> availableTemplates = new List<string>();
-
-                    foreach (var template in this.allTemplates)
-                    {
-                        availableTemplates.Add(template.Name);
-                    }
-
-                    this.comboBox1.AutoCompleteCustomSource.AddRange(availableTemplates.ToArray());
-
-                    //               this.comboBox1.AutoCompleteCustomSource.AddRange
-                    //(new string[] {"Raj Beniwal", "Rohit Malhotra", "Ronit Singh", "Ravi Kumar",
-                    //                           "Rohit Behl", "Sanjay Singh", "Shalini Singh", "Seema Malhotra", "Savi Verma",
-                    //                           "Karan Kappor", "Kapil Malhotra", "Vikash Nanda", "Vikram Jain", "Amit Garg",
-                    //                           "Atul Wadhwani", "Ashwani Pandey"
-                    //});
+                    this.UpdateDataSource();
                 }
             }
         }
@@ -309,21 +298,54 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         /// </summary>
         private void UpdateDataSource()
         {
-            this.TextBoxName.Text = this.DataSource.Name;
-            //this.TextBoxVersion.Text = this.DataSource.Version.ToString();
-            this.CheckBoxEnabled.Checked = this.DataSource.Enabled;
+            if (this.DataSource != null)
+            {
+                this.TextBoxName.Text = this.DataSource.Name;
 
-            if (this.dataSource.HierarchyType == HierarchyType.Item)
-            {
-                this.PanelTemplate.Visible = true;
-                if (this.DataSource.Templates.Count > 0)
+                //this.TextBoxVersion.Text = this.DataSource.Version.ToString();
+                this.CheckBoxEnabled.Checked = this.DataSource.Enabled;
+
+                if (this.dataSource.HierarchyType == HierarchyType.Item)
                 {
-                    this.TemplateListBox.DataSource = this.DataSource.Templates[0].ReturnTemplateItems();
+                    this.PanelTemplate.Visible = true;
+                    if (this.DataSource.Templates.Count > 0)
+                    {
+                        this.TemplateListBox.DataSource = this.DataSource.Templates[0].ReturnTemplateItems(this.DataSource.Templates);
+                        this.BtnRemove.Enabled = true;
+                    }
+                    else
+                    {
+                        this.TemplateListBox.DataSource = null;
+                        this.BtnRemove.Enabled = false;
+                    }
+
+                    if (this.availableTemplates.Count == 0)
+                    {
+                        this.BtnAdd.Enabled = false;
+                        this.ComboBoxSearch.Enabled = false;
+                        this.ComboBoxSearch.AutoCompleteCustomSource.Clear();
+                    }
+                    else
+                    {
+                        this.BtnAdd.Enabled = true;
+                        this.ComboBoxSearch.Enabled = true;
+
+                        List<string> availableTemplates = new List<string>();
+
+                        foreach (var template in this.availableTemplates)
+                        {
+                            availableTemplates.Add(template.Name);
+                        }
+
+                        this.ComboBoxSearch.AutoCompleteCustomSource.Clear();
+                        this.ComboBoxSearch.AutoCompleteCustomSource.AddRange(availableTemplates.ToArray());
+                    }
+
                 }
-            }
-            else
-            {
-                this.PanelTemplate.Visible = false;
+                else
+                {
+                    this.PanelTemplate.Visible = false;
+                }
             }
         }
 
@@ -409,6 +431,25 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
 
             Logger.Trace("Completed Validation()");
             return result;
+        }
+
+        private void BtnAdd_Click(object sender, EventArgs e)
+        {
+            Template selectedTemplate = this.AvailableTemplates.First(t => t.Name == this.ComboBoxSearch.Text);
+            this.DataSource.Templates.Add(selectedTemplate);
+            this.AvailableTemplates.Remove(selectedTemplate);
+            this.UpdateDataSource();
+            this.ComboBoxSearch.Text = string.Empty;
+            //this.TemplateListBox.DataSource = this.DataSource.Templates[0].ReturnTemplateItems();
+        }
+
+        private void BtnRemove_Click(object sender, EventArgs e)
+        {
+            Template selectedTemplate = this.TemplateListBox.SelectedItem as Template;
+            this.DataSource.Templates.Remove(selectedTemplate);
+            this.AvailableTemplates.Add(selectedTemplate);
+            this.UpdateDataSource();
+            this.ComboBoxSearch.Text = string.Empty;
         }
     }
 }

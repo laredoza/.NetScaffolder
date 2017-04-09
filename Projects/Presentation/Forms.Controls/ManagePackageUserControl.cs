@@ -85,7 +85,11 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         {
             this.PackageDetailsUserControl1.TreeNode = e.Node;
             this.PackageDetailsUserControl1.DataSource = e.Node.Tag as Package;
-            this.PackageDetailsUserControl1.AllTemplates = this.Templates;
+
+            if (this.Templates.Count > 0)
+            {
+                this.PackageDetailsUserControl1.AvailableTemplates = this.Templates[0].ReturnTemplateItems();
+            }
         }
 
         /// <summary>
