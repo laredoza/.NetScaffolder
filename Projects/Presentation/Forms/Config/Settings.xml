@@ -15,7 +15,27 @@
                   <Name>Entity Framework 6 (Standard)</Name>
                   <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
                   <HierarchyType>Item</HierarchyType>
-                  <Templates />
+                  <Version>0</Version>
+                  <Templates>
+                    <Template>
+                      <Children />
+                      <Enabled>true</Enabled>
+                      <Id>99d48be6-6570-465d-bc29-0793ea47233f</Id>
+                      <Name>Entity Framework Context (v6)</Name>
+                      <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
+                      <HierarchyType>Item</HierarchyType>
+                      <ConfigLocation>Data</ConfigLocation>
+                      <DataType>
+                        <Id>2a7353aa-a54a-442e-a710-f30836a0d4b2</Id>
+                        <Name>Test</Name>
+                      </DataType>
+                      <DefaultSettings />
+                      <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
+                      <LanguageOutputId>1bc1b0c4-1e41-9146-82cf-599181ce4410</LanguageOutputId>
+                      <TemplatePath>Bogus.T4</TemplatePath>
+                      <Version>1</Version>
+                    </Template>
+                  </Templates>
                 </Hierarchy>
                 <Hierarchy xsi:type="Package">
                   <Children />
@@ -24,7 +44,45 @@
                   <Name>Entity Framework 6 (Repository)</Name>
                   <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
                   <HierarchyType>Item</HierarchyType>
-                  <Templates />
+                  <Version>0</Version>
+                  <Templates>
+                    <Template>
+                      <Children />
+                      <Enabled>true</Enabled>
+                      <Id>99d48be6-6570-465d-bc29-0793ea47233f</Id>
+                      <Name>Entity Framework Context (v6)</Name>
+                      <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
+                      <HierarchyType>Item</HierarchyType>
+                      <ConfigLocation>Data</ConfigLocation>
+                      <DataType>
+                        <Id>2a7353aa-a54a-442e-a710-f30836a0d4b2</Id>
+                        <Name>Test</Name>
+                      </DataType>
+                      <DefaultSettings />
+                      <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
+                      <LanguageOutputId>1bc1b0c4-1e41-9146-82cf-599181ce4410</LanguageOutputId>
+                      <TemplatePath>Bogus.T4</TemplatePath>
+                      <Version>1</Version>
+                    </Template>
+                    <Template>
+                      <Children />
+                      <Enabled>true</Enabled>
+                      <Id>63cde985-20c1-4c6f-8f05-ac941de202f5</Id>
+                      <Name>Entity Framework Entity (v6)</Name>
+                      <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
+                      <HierarchyType>Item</HierarchyType>
+                      <ConfigLocation>Data</ConfigLocation>
+                      <DataType>
+                        <Id>17f8813a-ef3c-48c3-82bf-5e8937044550</Id>
+                        <Name>Test</Name>
+                      </DataType>
+                      <DefaultSettings />
+                      <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
+                      <LanguageOutputId>1bc1b0c4-1e41-9146-82cf-599181ce4410</LanguageOutputId>
+                      <TemplatePath>Bogus.T4</TemplatePath>
+                      <Version>1</Version>
+                    </Template>
+                  </Templates>
                 </Hierarchy>
               </Children>
               <Enabled>true</Enabled>
@@ -32,6 +90,7 @@
               <Name>Entity Framework Microsoft</Name>
               <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
               <HierarchyType>Group</HierarchyType>
+              <Version>0</Version>
               <Templates />
             </Hierarchy>
             <Hierarchy xsi:type="Package">
@@ -43,6 +102,7 @@
                   <Name>Mongo Official (Standard)</Name>
                   <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
                   <HierarchyType>Item</HierarchyType>
+                  <Version>0</Version>
                   <Templates />
                 </Hierarchy>
               </Children>
@@ -51,6 +111,7 @@
               <Name>Mongo Official</Name>
               <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
               <HierarchyType>Group</HierarchyType>
+              <Version>0</Version>
               <Templates />
             </Hierarchy>
           </Children>
@@ -59,6 +120,7 @@
           <Name>Data</Name>
           <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
           <HierarchyType>Group</HierarchyType>
+          <Version>0</Version>
           <Templates />
         </Hierarchy>
       </Children>
@@ -67,6 +129,7 @@
       <Name>Packages</Name>
       <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
       <HierarchyType>Group</HierarchyType>
+      <Version>0</Version>
       <Templates />
     </Package>
   </Packages>
@@ -91,24 +154,6 @@
               <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
               <LanguageOutputId>1bc1b0c4-1e41-9146-82cf-599181ce4410</LanguageOutputId>
               <TemplatePath>Bogus.T4</TemplatePath>
-              <Version>1</Version>
-            </Hierarchy>
-            <Hierarchy xsi:type="Template">
-              <Children />
-              <Enabled>true</Enabled>
-              <Id>94485490-4b52-4721-a91f-2ac8990d2c65</Id>
-              <Name>Template1</Name>
-              <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
-              <HierarchyType>Item</HierarchyType>
-              <ConfigLocation>Data</ConfigLocation>
-              <DataType>
-                <Id>69c09953-f913-4f04-aa70-bcc600bbe861</Id>
-                <Name>Test</Name>
-              </DataType>
-              <DefaultSettings />
-              <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
-              <LanguageOutputId>1bc1b0c4-1e41-9146-82cf-599181ce4410</LanguageOutputId>
-              <TemplatePath>123.t4</TemplatePath>
               <Version>1</Version>
             </Hierarchy>
           </Children>
