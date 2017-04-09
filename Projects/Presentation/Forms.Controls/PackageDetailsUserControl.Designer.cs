@@ -36,9 +36,16 @@
             this.button11 = new System.Windows.Forms.Button();
             this.PanelTemplate = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button2 = new System.Windows.Forms.Button();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.TemplateListBox = new System.Windows.Forms.ListBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.panel1.SuspendLayout();
             this.PanelTemplate.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -95,24 +102,77 @@
             // PanelTemplate
             // 
             this.PanelTemplate.Controls.Add(this.groupBox1);
-            this.PanelTemplate.Dock = System.Windows.Forms.DockStyle.Top;
+            this.PanelTemplate.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PanelTemplate.Location = new System.Drawing.Point(0, 43);
             this.PanelTemplate.Name = "PanelTemplate";
-            this.PanelTemplate.Size = new System.Drawing.Size(451, 169);
+            this.PanelTemplate.Size = new System.Drawing.Size(451, 326);
             this.PanelTemplate.TabIndex = 60;
             // 
             // groupBox1
             // 
-            this.groupBox1.Location = new System.Drawing.Point(3, 6);
+            this.groupBox1.Controls.Add(this.button2);
+            this.groupBox1.Controls.Add(this.comboBox1);
+            this.groupBox1.Controls.Add(this.button1);
+            this.groupBox1.Controls.Add(this.TemplateListBox);
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Location = new System.Drawing.Point(0, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(445, 161);
-            this.groupBox1.TabIndex = 0;
+            this.groupBox1.Size = new System.Drawing.Size(445, 320);
+            this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Template";
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(346, 29);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 5;
+            this.button2.Text = "Add";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(56, 29);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(277, 21);
+            this.comboBox1.TabIndex = 4;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(346, 282);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 3;
+            this.button1.Text = "Remove";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // TemplateListBox
+            // 
+            this.TemplateListBox.FormattingEnabled = true;
+            this.TemplateListBox.Location = new System.Drawing.Point(9, 64);
+            this.TemplateListBox.Name = "TemplateListBox";
+            this.TemplateListBox.Size = new System.Drawing.Size(430, 212);
+            this.TemplateListBox.TabIndex = 2;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 29);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(44, 13);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Search:";
             // 
             // errorProvider1
             // 
             this.errorProvider1.ContainerControl = this;
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
             // PackageDetailsUserControl
             // 
@@ -121,10 +181,12 @@
             this.Controls.Add(this.PanelTemplate);
             this.Controls.Add(this.panel1);
             this.Name = "PackageDetailsUserControl";
-            this.Size = new System.Drawing.Size(451, 223);
+            this.Size = new System.Drawing.Size(451, 369);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.PanelTemplate.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
 
@@ -138,7 +200,13 @@
         private System.Windows.Forms.TextBox TextBoxName;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.CheckBox CheckBoxEnabled;
-        private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ListBox TemplateListBox;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }

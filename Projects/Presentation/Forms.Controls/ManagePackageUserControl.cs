@@ -12,6 +12,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
 {
     using DotNetScaffolder.Mapping.MetaData.Project.Packages;
 
+    using FormControls.Enum;
     using FormControls.TreeView;
 
     public partial class ManagePackageUserControl : UserControl
@@ -26,7 +27,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
             this.ManageCollectionsTreeViewUserControl1.BtnUpClick += this.BtnUpClick;
             this.ManageCollectionsTreeViewUserControl1.BtnDownClick += this.BtnDownClick;
             this.ManageCollectionsTreeViewUserControl1.BtnAddGroupClick += this.BtnAddGroupClick;
-
+            this.Templates = new List<Template>();
         }
 
         /// <summary>
@@ -48,6 +49,11 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
                 }
             }
         }
+
+        /// <summary>
+        /// Gets or sets the templates.
+        /// </summary>
+        public List<Template> Templates { get; set; }
 
         #region Public methods and operators
 
@@ -79,6 +85,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         {
             this.PackageDetailsUserControl1.TreeNode = e.Node;
             this.PackageDetailsUserControl1.DataSource = e.Node.Tag as Package;
+            this.PackageDetailsUserControl1.AllTemplates = this.Templates;
         }
 
         /// <summary>
@@ -92,36 +99,36 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         /// </param>
         private void BtnAddGroupClick(object sender, EventArgs eventArgs)
         {
-            //Template currentTemplate = this.TemplateDetailsUserControl1.TreeNode.Tag as Template;
-            //Template parentTemplate;
+            Package currentPackage = this.PackageDetailsUserControl1.TreeNode.Tag as Package;
+            Package parentPackage;
 
-            //if (currentTemplate.HierarchyType == HierarchyType.Item)
-            //{
-            //    parentTemplate = this.TemplateDetailsUserControl1.TreeNode.Parent.Tag as Template;
-            //}
-            //else
-            //{
-            //    parentTemplate = currentTemplate;
-            //}
+            if (currentPackage.HierarchyType == HierarchyType.Item)
+            {
+                parentPackage = this.PackageDetailsUserControl1.TreeNode.Parent.Tag as Package;
+            }
+            else
+            {
+                parentPackage = currentPackage;
+            }
 
-            //Template newTemplate = new Template
-            //{
-            //    Id = Guid.NewGuid(),
-            //    ConfigLocation = parentTemplate.ConfigLocation,
-            //    DataType = parentTemplate.DataType,
-            //    Enabled = true,
-            //    LanguageOutputId = parentTemplate.LanguageOutputId,
-            //    GeneratorTypeId = parentTemplate.GeneratorTypeId,
-            //    HierarchyType = HierarchyType.Group,
-            //    Name = "Group 1",
-            //    Version = 1
-            //};
+            Package newPackage = new Package
+            {
+                Id = Guid.NewGuid(),
+                //ConfigLocation = parentPackage.ConfigLocation,
+                //DataType = parentPackage.DataType,
+                Enabled = true,
+                //LanguageOutputId = parentPackage.LanguageOutputId,
+                //GeneratorTypeId = parentPackage.GeneratorTypeId,
+                HierarchyType = HierarchyType.Group,
+                Name = "Group 1",
+                Version = 1
+            };
 
-            //parentTemplate.Children.Add(newTemplate);
-            //TreeNode newTreeNode = new TreeNode { Text = newTemplate.Name, Tag = newTemplate };
-            //this.TemplateDetailsUserControl1.TreeNode.Nodes.Add(newTreeNode);
-            //this.TemplateDetailsUserControl1.TreeNode = newTreeNode;
-            //this.TemplateDetailsUserControl1.Data = newTemplate;
+            parentPackage.Children.Add(newPackage);
+            TreeNode newTreeNode = new TreeNode { Text = newPackage.Name, Tag = newPackage };
+            this.PackageDetailsUserControl1.TreeNode.Nodes.Add(newTreeNode);
+            this.PackageDetailsUserControl1.TreeNode = newTreeNode;
+            this.PackageDetailsUserControl1.DataSource = newPackage;
         }
 
         /// <summary>
@@ -135,45 +142,45 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         /// </param>
         private void BtnAddItemClick(object sender, EventArgs eventArgs)
         {
-            //Template currentTemplate = this.TemplateDetailsUserControl1.TreeNode.Tag as Template;
-            //Template parentTemplate;
+            Package currentPackage = this.PackageDetailsUserControl1.TreeNode.Tag as Package;
+            Package parentPackage;
 
-            //if (currentTemplate.HierarchyType == HierarchyType.Item)
-            //{
-            //    parentTemplate = this.TemplateDetailsUserControl1.TreeNode.Parent.Tag as Template;
-            //}
-            //else
-            //{
-            //    parentTemplate = currentTemplate;
-            //}
+            if (currentPackage.HierarchyType == HierarchyType.Item)
+            {
+                parentPackage = this.PackageDetailsUserControl1.TreeNode.Parent.Tag as Package;
+            }
+            else
+            {
+                parentPackage = currentPackage;
+            }
 
-            //Template newTemplate = new Template
-            //{
-            //    Id = Guid.NewGuid(),
-            //    ConfigLocation = parentTemplate.ConfigLocation,
-            //    DataType = parentTemplate.DataType,
-            //    Enabled = true,
-            //    LanguageOutputId = parentTemplate.LanguageOutputId,
-            //    GeneratorTypeId = parentTemplate.GeneratorTypeId,
-            //    HierarchyType = HierarchyType.Item,
-            //    Name = "Template1",
-            //    Version = 1
-            //};
+            Package newPackage = new Package
+            {
+                Id = Guid.NewGuid(),
+                //ConfigLocation = parentPackage.ConfigLocation,
+                //DataType = parentPackage.DataType,
+                Enabled = true,
+                //LanguageOutputId = parentPackage.LanguageOutputId,
+                //GeneratorTypeId = parentPackage.GeneratorTypeId,
+                HierarchyType = HierarchyType.Item,
+                Name = "Package1",
+                Version = 1
+            };
 
-            //parentTemplate.Children.Add(newTemplate);
-            //TreeNode newTreeNode = new TreeNode { Text = newTemplate.Name, Tag = newTemplate };
+            parentPackage.Children.Add(newPackage);
+            TreeNode newTreeNode = new TreeNode { Text = newPackage.Name, Tag = newPackage };
 
-            //if (currentTemplate.HierarchyType == HierarchyType.Item)
-            //{
-            //    this.TemplateDetailsUserControl1.TreeNode.Parent.Nodes.Add(newTreeNode);
-            //}
-            //else
-            //{
-            //    this.TemplateDetailsUserControl1.TreeNode.Nodes.Add(newTreeNode);
-            //}
+            if (currentPackage.HierarchyType == HierarchyType.Item)
+            {
+                this.PackageDetailsUserControl1.TreeNode.Parent.Nodes.Add(newTreeNode);
+            }
+            else
+            {
+                this.PackageDetailsUserControl1.TreeNode.Nodes.Add(newTreeNode);
+            }
 
-            //this.TemplateDetailsUserControl1.TreeNode = newTreeNode;
-            //this.TemplateDetailsUserControl1.Data = newTemplate;
+            this.PackageDetailsUserControl1.TreeNode = newTreeNode;
+            this.PackageDetailsUserControl1.DataSource = newPackage;
         }
 
         /// <summary>

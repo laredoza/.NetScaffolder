@@ -183,6 +183,73 @@ namespace DotNetScaffolder.Mapping.MetaData.Project.Packages
             return this.ValidationResult;
         }
 
+        /// <summary>
+        /// The return template items.
+        /// </summary>
+        /// <param name="templates">
+        /// The templates.
+        /// </param>
+        /// <returns>
+        /// The <see cref="List"/>.
+        /// </returns>
+        public List<Template> ReturnTemplateItems(List<Template> templates)
+        {
+            List<Template> results = new List<Template>();
+
+            foreach (Template template in templates)
+            {
+                results.AddRange(this.ReturnTemplateItems(template));
+            }
+
+            return results;
+        }
+
+        /// <summary>
+        /// Return template items.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="List"/>.
+        /// </returns>
+        public List<Template> ReturnTemplateItems()
+        {
+            return this.ReturnTemplateItems(this);
+        }
+
+        /// <summary>
+        /// Return template items.
+        /// </summary>
+        /// <param name="template">
+        /// The template.
+        /// </param>
+        /// <returns>
+        /// The <see cref="List"/>.
+        /// </returns>
+        public List<Template> ReturnTemplateItems(Template template)
+        {
+            List<Template> result = new List<Template>();
+
+            if (template.HierarchyType == HierarchyType.Item)
+            {
+                result.Add(template);
+            }
+            else
+            {
+                foreach (Hierarchy child in template.Children)
+                {
+                    if (template.HierarchyType == HierarchyType.Item)
+                    {
+                        result.Add(child as Template);
+                    }
+                    else
+                    {
+                        result.AddRange(this.ReturnTemplateItems(child as Template));
+                    }
+                }
+            }
+
+            return result;
+        }
+
         #endregion
     }
 }

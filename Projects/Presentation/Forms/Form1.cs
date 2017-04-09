@@ -12,6 +12,7 @@ namespace DotNetScaffolder.Presentation.Forms
     #region Using
 
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Windows.Forms;
 
@@ -78,10 +79,14 @@ namespace DotNetScaffolder.Presentation.Forms
             //this.applicationConfiguration.ApplicationSettings.Packages.Add(package);
             //applicationConfiguration.Save();
 
-            this.TemplateManagementUserControl1.DataSource =
-                applicationConfiguration.ApplicationSettings.Templates[0];
+            this.TemplateManagementUserControl1.DataSource = this.applicationConfiguration.ApplicationSettings.Templates[0];
+            this.ManagePackageUserControl1.DataSource = this.applicationConfiguration.ApplicationSettings.Packages[0];
 
-            this.ManagePackageUserControl1.DataSource = applicationConfiguration.ApplicationSettings.Packages[0];
+            if (applicationConfiguration.ApplicationSettings.Templates.Count > 0)
+            {
+                this.ManagePackageUserControl1.Templates =
+                    applicationConfiguration.ApplicationSettings.Templates[0].ReturnTemplateItems();
+            }
 
             this.ProjectDetailsUserControl1.Project = this.applicationService.ProjectDefinition;
             this.ProjectDomainUserControl1.SelectedIndexChanged += this.ProjectDomainUserControl1_SelectedIndexChanged;

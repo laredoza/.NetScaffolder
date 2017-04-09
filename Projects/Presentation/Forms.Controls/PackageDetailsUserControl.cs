@@ -50,6 +50,11 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         /// </summary>
         private Package dataSource;
 
+        /// <summary>
+        /// Gets or sets the all templates.
+        /// </summary>
+        private List<Template> allTemplates { get; set; }
+
         #endregion
 
         #region Constructors and Destructors
@@ -59,12 +64,70 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         /// </summary>
         public PackageDetailsUserControl()
         {
+            this.allTemplates = allTemplates;
             this.InitializeComponent();
+
+            this.comboBox1.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            this.comboBox1.AutoCompleteSource = AutoCompleteSource.CustomSource;
+
+            this.TemplateListBox.DisplayMember = "Name";
+            this.TemplateListBox.ValueMember = "Id";
+            this.AllTemplates = new List<Template>();
         }
 
         #endregion
 
         #region Properties
+
+        /// <summary>
+        /// Gets or sets the templates.
+        /// </summary>
+        public List<Template> AllTemplates
+        {
+            get
+            {
+                return allTemplates;
+            }
+            set
+            {
+                if (this.allTemplates != value)
+                {
+                    allTemplates = value;
+
+                    if (this.DataSource != null && this.DataSource.Templates.Count > 0)
+                    {
+                        List<Template> currentTemplates =
+                            this.DataSource.Templates[0].ReturnTemplateItems(this.DataSource.Templates[0]);
+
+                        foreach (Template currentTemplate in currentTemplates)
+                        {
+                            this.allTemplates.Remove(currentTemplate);
+                        }
+                    }
+
+                    List<string> availableTemplates = new List<string>();
+
+                    foreach (var template in this.allTemplates)
+                    {
+                        availableTemplates.Add(template.Name);
+                    }
+
+                    this.comboBox1.AutoCompleteCustomSource.AddRange(availableTemplates.ToArray());
+
+                    //               this.comboBox1.AutoCompleteCustomSource.AddRange
+                    //(new string[] {"Raj Beniwal", "Rohit Malhotra", "Ronit Singh", "Ravi Kumar",
+                    //                           "Rohit Behl", "Sanjay Singh", "Shalini Singh", "Seema Malhotra", "Savi Verma",
+                    //                           "Karan Kappor", "Kapil Malhotra", "Vikash Nanda", "Vikram Jain", "Amit Garg",
+                    //                           "Atul Wadhwani", "Ashwani Pandey"
+                    //});
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the available templates.
+        /// </summary>
+        //public List<Template> AvailableTemplates { get; set; }
 
         /// <summary>
         ///     Gets or sets the data.
@@ -253,6 +316,10 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
             if (this.dataSource.HierarchyType == HierarchyType.Item)
             {
                 this.PanelTemplate.Visible = true;
+                if (this.DataSource.Templates.Count > 0)
+                {
+                    this.TemplateListBox.DataSource = this.DataSource.Templates[0].ReturnTemplateItems();
+                }
             }
             else
             {
@@ -278,7 +345,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
             Logger.Trace("Started Validation()");
 
             int result = 0;
-        
+
             if (this.DataSource != null)
             {
                 //this.errorProvider1.Clear();

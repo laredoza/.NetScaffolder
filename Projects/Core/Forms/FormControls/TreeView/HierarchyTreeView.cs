@@ -186,6 +186,25 @@ namespace FormControls.TreeView
             }
         }
 
+        public TreeNode Search(string itemId, TreeNode rootNode)
+        {
+            foreach (TreeNode node in rootNode.Nodes)
+            {
+                if (node.Tag.Equals(itemId))
+                {
+                    return node;
+                }
+
+                TreeNode next = this.Search(itemId, node);
+
+                if (next != null)
+                {
+                    return next;
+                }
+            }
+            return null;
+        }
+
         #endregion
 
         #region Other Methods
