@@ -152,6 +152,7 @@
             this.ComboBoxCollectionOption.Name = "ComboBoxCollectionOption";
             this.ComboBoxCollectionOption.Size = new System.Drawing.Size(238, 21);
             this.ComboBoxCollectionOption.TabIndex = 39;
+            this.ComboBoxCollectionOption.SelectedIndexChanged += new System.EventHandler(this.ComboBoxCollectionOption_SelectedIndexChanged);
             // 
             // label7
             // 

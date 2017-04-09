@@ -3,21 +3,67 @@
   <BaseNameSpace>Banking.Models</BaseNameSpace>
   <Domains>
     <DomainDefinition>
+      <CollectionOption>
+        <Name>IListAndList</Name>
+        <NameSpace />
+      </CollectionOption>
       <DriverId>2bc1b0c4-1e41-9146-82cf-599181ce4400</DriverId>
       <DriverTypeId>2bc1b0c4-1e41-9146-82cf-599181ce4410</DriverTypeId>
       <Name>Domain1</Name>
       <Id>88e23444-4d85-4fd7-a1a7-e6d68e896281</Id>
-      <NamingConventionId>1bc1b0c4-1e41-9146-82cf-599181ce4412</NamingConventionId>
+      <NamingConventionId>1bc1b0c4-1e41-9146-82cf-599181ce4410</NamingConventionId>
       <Package>
-        <Enabled>false</Enabled>
-        <Id>00000000-0000-0000-0000-000000000000</Id>
-        <Templates />
+        <Children />
+        <Enabled>true</Enabled>
+        <Id>be0b9c03-3970-4792-b440-f7512150e295</Id>
+        <Name>Entity Framework 6 (Repository)</Name>
+        <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
+        <HierarchyType>Item</HierarchyType>
+        <Version>0</Version>
+        <Templates>
+          <Template>
+            <Children />
+            <Enabled>true</Enabled>
+            <Id>99d48be6-6570-465d-bc29-0793ea47233f</Id>
+            <Name>Entity Framework Context (v6)</Name>
+            <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
+            <HierarchyType>Item</HierarchyType>
+            <ConfigLocation>Data</ConfigLocation>
+            <DataType>
+              <Id>2a7353aa-a54a-442e-a710-f30836a0d4b2</Id>
+              <Name>Test</Name>
+            </DataType>
+            <DefaultSettings />
+            <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
+            <LanguageOutputId>1bc1b0c4-1e41-9146-82cf-599181ce4410</LanguageOutputId>
+            <TemplatePath>Bogus.T4</TemplatePath>
+            <Version>1</Version>
+          </Template>
+          <Template>
+            <Children />
+            <Enabled>true</Enabled>
+            <Id>63cde985-20c1-4c6f-8f05-ac941de202f5</Id>
+            <Name>Entity Framework Entity (v6)</Name>
+            <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
+            <HierarchyType>Item</HierarchyType>
+            <ConfigLocation>Data</ConfigLocation>
+            <DataType>
+              <Id>17f8813a-ef3c-48c3-82bf-5e8937044550</Id>
+              <Name>Test</Name>
+            </DataType>
+            <DefaultSettings />
+            <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
+            <LanguageOutputId>1bc1b0c4-1e41-9146-82cf-599181ce4410</LanguageOutputId>
+            <TemplatePath>Bogus.T4</TemplatePath>
+            <Version>1</Version>
+          </Template>
+        </Templates>
       </Package>
       <SourceTypeId>3bc1b0c4-1e41-9146-82cf-599181ce4410</SourceTypeId>
       <Tables />
     </DomainDefinition>
   </Domains>
-  <GroupBy>Domain</GroupBy>
+  <GroupBy>Layer</GroupBy>
   <ModelPath>Banking.mdl</ModelPath>
   <OutputFolder>Models</OutputFolder>
   <Version>0.1</Version>

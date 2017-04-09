@@ -21,6 +21,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
 
     using DotNetScaffolder.Core.Common;
     using DotNetScaffolder.Mapping.MetaData.Domain;
+    using DotNetScaffolder.Mapping.MetaData.Project;
     using DotNetScaffolder.Mapping.MetaData.Project.ApplicationServices;
     using DotNetScaffolder.Mapping.MetaData.Project.Packages;
 
@@ -62,16 +63,23 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         public ProjectDomainDetailsUserControl()
         {
             this.InitializeComponent();
+
+            this.ComboBoxNamingConvention.DisplayMember = "Text";
+            this.ComboBoxNamingConvention.ValueMember = "Value";
+            this.ComboBoxNamingConvention.DataSource = this.ReturnNamingConventions();
+
+            this.ComboBoxSourceType.DisplayMember = "Text";
+            this.ComboBoxSourceType.ValueMember = "Value";
+            this.ComboBoxSourceType.DataSource = this.ReturnSourceTypes();
+
+            this.ComboBoxDriver.DisplayMember = "Text";
+            this.ComboBoxDriver.ValueMember = "Value";
+            this.ComboBoxDriver.DataSource = this.ReturnDriverTypes();
         }
 
         #endregion
 
         #region Properties
-
-        /// <summary>
-        /// Gets or sets the packages.
-        /// </summary>
-        public List<Package> Packages { get; set; }
 
         /// <summary>
         ///     Gets or sets the application service.
@@ -86,7 +94,29 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
             set
             {
                 this.applicationService = value;
-                this.UpdateDataSource();
+                this.ComboBoxCollectionOption.DisplayMember = "Name";
+                this.ComboBoxCollectionOption.ValueMember = "Name";
+
+                if (this.Packages != null && this.Packages.Count > 0)
+                {
+                    Package selectedPackage = this.SelectedPackage;
+
+                    this.ComboBoxPackages.DisplayMember = "Name";
+                    this.ComboBoxPackages.ValueMember = "Id";
+                    this.ComboBoxPackages.DataSource = this.Packages[0].ReturnPackageItems(this.Packages);
+                    this.SelectedPackage = selectedPackage;
+                }
+
+                if (this.ApplicationService != null && this.ApplicationService.ProjectDefinition != null)
+                {
+                    CollectionOption selectedCollectionOption = this.SelectedCollectionOption;
+
+                    this.ComboBoxCollectionOption.DataSource =
+                        this.ApplicationService.ProjectDefinition.CollectionOptions;
+
+                    this.SelectedCollectionOption = selectedCollectionOption;
+                    this.UpdateDataSource();
+                }
             }
         }
 
@@ -127,6 +157,46 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         }
 
         /// <summary>
+        ///     Gets or sets the packages.
+        /// </summary>
+        public List<Package> Packages { get; set; }
+
+        /// <summary>
+        /// Gets or sets the selected collection option.
+        /// </summary>
+        public CollectionOption SelectedCollectionOption
+        {
+            get
+            {
+                CollectionOption result = null;
+
+                if (this.SelectedDomain != null)
+                {
+                    result = this.SelectedDomain.CollectionOption;
+                    Logger.Trace($"CollectionOption set to {this.SelectedDomain.Name}.");
+                }
+                else
+                {
+                    Logger.Trace("Empty CollectionOption is returned as SelectedDomain is null.");
+                }
+
+                return result;
+            }
+
+            set
+            {
+                if (this.SelectedDomain != null)
+                {
+                    this.SelectedDomain.CollectionOption = value;
+                }
+                else
+                {
+                    Logger.Trace("Empty CollectionOption is returned as SelectedDomain is null.");
+                }
+            }
+        }
+
+        /// <summary>
         ///     Gets or sets the selected domain.
         /// </summary>
         public DomainDefinition SelectedDomain
@@ -144,7 +214,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         }
 
         /// <summary>
-        /// Gets or sets the selected driver.
+        ///     Gets or sets the selected driver.
         /// </summary>
         public Guid SelectedDriver
         {
@@ -178,39 +248,8 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
             }
         }
 
-        public Package SelectedPackage
-        {
-            get
-            {
-                Package result = null;
-
-                if (this.SelectedDomain != null)
-                {
-                    result = this.SelectedDomain.Package;
-                    Logger.Trace($"PackageId set to {this.SelectedDomain.Package.Id}.");
-                }
-                else
-                {
-                    Logger.Trace("Empty PackageId is returned as SelectedDomain is null.");
-                }
-
-                return result;
-            }
-            set
-            {
-                if (this.SelectedDomain != null)
-                {
-                    this.SelectedDomain.Package = value;
-                }
-                else
-                {
-                    Logger.Trace("Empty PackageId is returned as SelectedDomain is null.");
-                }
-            }
-        }
-
         /// <summary>
-        /// Gets or sets the selected driver type.
+        ///     Gets or sets the selected driver type.
         /// </summary>
         public Guid SelectedDriverType
         {
@@ -268,7 +307,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
 
             set
             {
-                if (this.SelectedDomain != null)
+                if (this.SelectedDomain != null && this.SelectedDomain.NamingConventionId != value)
                 {
                     this.SelectedDomain.NamingConventionId = value;
                 }
@@ -280,7 +319,42 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         }
 
         /// <summary>
-        /// Gets or sets the selected source type.
+        /// Gets or sets the selected package.
+        /// </summary>
+        public Package SelectedPackage
+        {
+            get
+            {
+                Package result = null;
+
+                if (this.SelectedDomain != null)
+                {
+                    result = this.SelectedDomain.Package;
+                    Logger.Trace($"PackageId set to {this.SelectedDomain.Package.Id}.");
+                }
+                else
+                {
+                    Logger.Trace("Empty PackageId is returned as SelectedDomain is null.");
+                }
+
+                return result;
+            }
+
+            set
+            {
+                if (this.SelectedDomain != null)
+                {
+                    this.SelectedDomain.Package = value;
+                }
+                else
+                {
+                    Logger.Trace("Empty PackageId is returned as SelectedDomain is null.");
+                }
+            }
+        }
+
+        /// <summary>
+        ///     Gets or sets the selected source type.
         /// </summary>
         public Guid SelectedSourceType
         {
@@ -421,6 +495,20 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         #region Other Methods
 
         /// <summary>
+        /// The combo box collection option_ selected index changed.
+        /// </summary>
+        /// <param name="sender">
+        /// The sender.
+        /// </param>
+        /// <param name="e">
+        /// The e.
+        /// </param>
+        private void ComboBoxCollectionOption_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.SelectedCollectionOption = this.ComboBoxCollectionOption.SelectedItem as CollectionOption;
+        }
+
+        /// <summary>
         /// The combo box driver_ selected index changed.
         /// </summary>
         /// <param name="sender">
@@ -468,6 +556,20 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         }
 
         /// <summary>
+        /// The combo box packages_ selected index changed.
+        /// </summary>
+        /// <param name="sender">
+        /// The sender.
+        /// </param>
+        /// <param name="e">
+        /// The e.
+        /// </param>
+        private void ComboBoxPackages_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.SelectedPackage = this.ComboBoxPackages.SelectedItem as Package;
+        }
+
+        /// <summary>
         /// The combo box source type_ selected index changed.
         /// </summary>
         /// <param name="sender">
@@ -487,32 +589,6 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         private void UpdateDataSource()
         {
             Logger.Trace("Started UpdateDataSource()");
-
-            this.ComboBoxNamingConvention.DisplayMember = "Text";
-            this.ComboBoxNamingConvention.ValueMember = "Value";
-            this.ComboBoxNamingConvention.DataSource = this.ReturnNamingConventions();
-            
-            this.ComboBoxSourceType.DisplayMember = "Text";
-            this.ComboBoxSourceType.ValueMember = "Value";
-            this.ComboBoxSourceType.DataSource = this.ReturnSourceTypes();
-
-            this.ComboBoxDriver.DisplayMember = "Text";
-            this.ComboBoxDriver.ValueMember = "Value";
-            this.ComboBoxDriver.DataSource = this.ReturnDriverTypes();
-
-            if (this.Packages != null && this.Packages.Count > 0)
-            {
-                this.ComboBoxPackages.DisplayMember = "Name";
-                this.ComboBoxPackages.ValueMember = "Id";
-                this.ComboBoxPackages.DataSource = this.Packages[0].ReturnPackageItems(this.Packages);
-            }
-
-            if (this.ApplicationService != null && this.ApplicationService.ProjectDefinition != null)
-            {
-                this.ComboBoxCollectionOption.DisplayMember = "Name";
-                this.ComboBoxCollectionOption.ValueMember = "Name";
-                this.ComboBoxCollectionOption.DataSource = this.ApplicationService.ProjectDefinition.CollectionOptions;
-            }
 
             if (this.SelectedDomain != null)
             {
@@ -537,6 +613,11 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
                     this.ComboBoxDriverType.SelectedValue = this.SelectedDriverType;
                 }
 
+                if (this.ApplicationService != null && this.ApplicationService.ProjectDefinition != null)
+                {
+                    this.ComboBoxCollectionOption.SelectedValue = this.SelectedCollectionOption.Name;
+                }
+
                 this.ComboBoxPackages.SelectedValue = this.SelectedDomain.Package.Id;
             }
 
@@ -544,10 +625,5 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         }
 
         #endregion
-
-        private void ComboBoxPackages_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            this.SelectedPackage = this.ComboBoxPackages.SelectedItem as Package;
-        }
     }
 }

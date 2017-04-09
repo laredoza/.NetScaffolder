@@ -51,6 +51,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Domain
             this.Package = new Package();
             this.Id = Guid.NewGuid();
             this.ValidationResult = new List<Validation>();
+            this.CollectionOption = new CollectionOption();
         }
 
         #endregion
