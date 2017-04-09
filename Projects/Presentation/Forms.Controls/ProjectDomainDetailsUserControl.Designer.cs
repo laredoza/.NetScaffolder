@@ -30,7 +30,7 @@
         {
             this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
-            this.comboBox7 = new System.Windows.Forms.ComboBox();
+            this.ComboBoxPackages = new System.Windows.Forms.ComboBox();
             this.label11 = new System.Windows.Forms.Label();
             this.ComboBoxDriverType = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
@@ -66,16 +66,17 @@
             this.button4.Text = "Source";
             this.button4.UseVisualStyleBackColor = true;
             // 
-            // comboBox7
+            // ComboBoxPackages
             // 
-            this.comboBox7.FormattingEnabled = true;
-            this.comboBox7.Items.AddRange(new object[] {
+            this.ComboBoxPackages.FormattingEnabled = true;
+            this.ComboBoxPackages.Items.AddRange(new object[] {
             "Domain",
             "Layer"});
-            this.comboBox7.Location = new System.Drawing.Point(112, 176);
-            this.comboBox7.Name = "comboBox7";
-            this.comboBox7.Size = new System.Drawing.Size(238, 21);
-            this.comboBox7.TabIndex = 47;
+            this.ComboBoxPackages.Location = new System.Drawing.Point(112, 176);
+            this.ComboBoxPackages.Name = "ComboBoxPackages";
+            this.ComboBoxPackages.Size = new System.Drawing.Size(238, 21);
+            this.ComboBoxPackages.TabIndex = 47;
+            this.ComboBoxPackages.SelectedIndexChanged += new System.EventHandler(this.ComboBoxPackages_SelectedIndexChanged);
             // 
             // label11
             // 
@@ -151,7 +152,6 @@
             this.ComboBoxCollectionOption.Name = "ComboBoxCollectionOption";
             this.ComboBoxCollectionOption.Size = new System.Drawing.Size(238, 21);
             this.ComboBoxCollectionOption.TabIndex = 39;
-            //this.ComboBoxCollectionOption.SelectedIndexChanged += new System.EventHandler(this.ComboBoxCollectionOption_SelectedIndexChanged);
             // 
             // label7
             // 
@@ -202,7 +202,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
-            this.Controls.Add(this.comboBox7);
+            this.Controls.Add(this.ComboBoxPackages);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.ComboBoxDriverType);
             this.Controls.Add(this.label10);
@@ -227,7 +227,7 @@
 
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.ComboBox comboBox7;
+        private System.Windows.Forms.ComboBox ComboBoxPackages;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.ComboBox ComboBoxDriverType;
         private System.Windows.Forms.Label label10;

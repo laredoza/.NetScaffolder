@@ -22,6 +22,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
     using DotNetScaffolder.Core.Common;
     using DotNetScaffolder.Mapping.MetaData.Domain;
     using DotNetScaffolder.Mapping.MetaData.Project.ApplicationServices;
+    using DotNetScaffolder.Mapping.MetaData.Project.Packages;
 
     #endregion
 
@@ -66,6 +67,11 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         #endregion
 
         #region Properties
+
+        /// <summary>
+        /// Gets or sets the packages.
+        /// </summary>
+        public List<Package> Packages { get; set; }
 
         /// <summary>
         ///     Gets or sets the application service.
@@ -168,6 +174,37 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
                 else
                 {
                     Logger.Trace("Empty DriverId is returned as SelectedDomain is null.");
+                }
+            }
+        }
+
+        public Package SelectedPackage
+        {
+            get
+            {
+                Package result = null;
+
+                if (this.SelectedDomain != null)
+                {
+                    result = this.SelectedDomain.Package;
+                    Logger.Trace($"PackageId set to {this.SelectedDomain.Package.Id}.");
+                }
+                else
+                {
+                    Logger.Trace("Empty PackageId is returned as SelectedDomain is null.");
+                }
+
+                return result;
+            }
+            set
+            {
+                if (this.SelectedDomain != null)
+                {
+                    this.SelectedDomain.Package = value;
+                }
+                else
+                {
+                    Logger.Trace("Empty PackageId is returned as SelectedDomain is null.");
                 }
             }
         }
@@ -451,23 +488,30 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         {
             Logger.Trace("Started UpdateDataSource()");
 
-            this.ComboBoxNamingConvention.DataSource = this.ReturnNamingConventions();
             this.ComboBoxNamingConvention.DisplayMember = "Text";
             this.ComboBoxNamingConvention.ValueMember = "Value";
-
-            this.ComboBoxSourceType.DataSource = this.ReturnSourceTypes();
+            this.ComboBoxNamingConvention.DataSource = this.ReturnNamingConventions();
+            
             this.ComboBoxSourceType.DisplayMember = "Text";
             this.ComboBoxSourceType.ValueMember = "Value";
+            this.ComboBoxSourceType.DataSource = this.ReturnSourceTypes();
 
-            this.ComboBoxDriver.DataSource = this.ReturnDriverTypes();
             this.ComboBoxDriver.DisplayMember = "Text";
             this.ComboBoxDriver.ValueMember = "Value";
+            this.ComboBoxDriver.DataSource = this.ReturnDriverTypes();
+
+            if (this.Packages != null && this.Packages.Count > 0)
+            {
+                this.ComboBoxPackages.DisplayMember = "Name";
+                this.ComboBoxPackages.ValueMember = "Id";
+                this.ComboBoxPackages.DataSource = this.Packages[0].ReturnPackageItems(this.Packages);
+            }
 
             if (this.ApplicationService != null && this.ApplicationService.ProjectDefinition != null)
             {
-                this.ComboBoxCollectionOption.DataSource = this.ApplicationService.ProjectDefinition.CollectionOptions;
                 this.ComboBoxCollectionOption.DisplayMember = "Name";
                 this.ComboBoxCollectionOption.ValueMember = "Name";
+                this.ComboBoxCollectionOption.DataSource = this.ApplicationService.ProjectDefinition.CollectionOptions;
             }
 
             if (this.SelectedDomain != null)
@@ -492,11 +536,18 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
                 {
                     this.ComboBoxDriverType.SelectedValue = this.SelectedDriverType;
                 }
+
+                this.ComboBoxPackages.SelectedValue = this.SelectedDomain.Package.Id;
             }
 
             Logger.Trace("Completed UpdateDataSource()");
         }
 
         #endregion
+
+        private void ComboBoxPackages_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.SelectedPackage = this.ComboBoxPackages.SelectedItem as Package;
+        }
     }
 }

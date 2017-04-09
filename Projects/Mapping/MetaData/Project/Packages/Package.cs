@@ -77,5 +77,50 @@ namespace DotNetScaffolder.Mapping.MetaData.Project.Packages
         }
 
         #endregion
+
+
+        public List<Package> ReturnPackageItems(List<Package> packages)
+        {
+            List<Package> results = new List<Package>();
+
+            foreach (Package package in packages)
+            {
+                results.AddRange(this.ReturnPackageItems(package));
+            }
+
+            return results;
+        }
+
+        public List<Package> ReturnPackageItems()
+        {
+            return this.ReturnPackageItems(this);
+        }
+
+        public List<Package> ReturnPackageItems(Package package)
+        {
+            List<Package> result = new List<Package>();
+            
+            if (package.HierarchyType == FormControls.Enum.HierarchyType.Item)
+            {
+                result.Add(package);
+            }
+            else
+            {
+                foreach (Hierarchy child in package.Children)
+                {
+                    if (package.HierarchyType == FormControls.Enum.HierarchyType.Item)
+                    {
+                        result.Add(child as Package);
+                    }
+                    else
+                    {
+                        result.AddRange(this.ReturnPackageItems(child as Package));
+                    }
+                }
+            }
+
+            return result;
+        }
+
     }
 }

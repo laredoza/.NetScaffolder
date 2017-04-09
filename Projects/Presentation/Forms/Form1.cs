@@ -90,6 +90,7 @@ namespace DotNetScaffolder.Presentation.Forms
             this.ProjectDetailsUserControl1.Project = this.applicationService.ProjectDefinition;
             this.ProjectDomainUserControl1.SelectedIndexChanged += this.ProjectDomainUserControl1_SelectedIndexChanged;
             this.ProjectDomainUserControl1.ApplicationService = this.applicationService;
+            this.projectDomainDetailsUserControl1.Packages = this.applicationConfiguration.ApplicationSettings.Packages;
             this.projectDomainDetailsUserControl1.ApplicationService = this.applicationService;
         }
 

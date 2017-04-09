@@ -114,6 +114,37 @@
               <Version>0</Version>
               <Templates />
             </Hierarchy>
+            <Hierarchy xsi:type="Package">
+              <Children>
+                <Hierarchy xsi:type="Package">
+                  <Children />
+                  <Enabled>true</Enabled>
+                  <Id>086fbc22-f6d5-412c-b95c-ee79204c5c6b</Id>
+                  <Name>MySQL Official 6 (Standard)</Name>
+                  <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
+                  <HierarchyType>Item</HierarchyType>
+                  <Version>1</Version>
+                  <Templates />
+                </Hierarchy>
+                <Hierarchy xsi:type="Package">
+                  <Children />
+                  <Enabled>true</Enabled>
+                  <Id>c6e59623-77f0-4325-b688-b38c160bbe51</Id>
+                  <Name>MySQL Official 6 (Repository)</Name>
+                  <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
+                  <HierarchyType>Item</HierarchyType>
+                  <Version>1</Version>
+                  <Templates />
+                </Hierarchy>
+              </Children>
+              <Enabled>true</Enabled>
+              <Id>edf7c5ca-8d30-4559-a4ab-c21536952579</Id>
+              <Name>MySQL</Name>
+              <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
+              <HierarchyType>Group</HierarchyType>
+              <Version>1</Version>
+              <Templates />
+            </Hierarchy>
           </Children>
           <Enabled>true</Enabled>
           <Id>8c9f472c-19a0-498c-a169-8b8cab34c908</Id>
