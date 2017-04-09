@@ -44,6 +44,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.TextBoxName = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.BtnManageSource = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button5
@@ -197,10 +198,20 @@
             this.label5.TabIndex = 35;
             this.label5.Text = "Name:";
             // 
+            // BtnManageSource
+            // 
+            this.BtnManageSource.Location = new System.Drawing.Point(356, 87);
+            this.BtnManageSource.Name = "BtnManageSource";
+            this.BtnManageSource.Size = new System.Drawing.Size(75, 23);
+            this.BtnManageSource.TabIndex = 49;
+            this.BtnManageSource.Text = "Manage";
+            this.BtnManageSource.UseVisualStyleBackColor = true;
+            // 
             // ProjectDomainDetailsUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.BtnManageSource);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.ComboBoxPackages);
@@ -242,5 +253,6 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox TextBoxName;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button BtnManageSource;
     }
 }
