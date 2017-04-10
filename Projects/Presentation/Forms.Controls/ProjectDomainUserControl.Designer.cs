@@ -28,20 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button7 = new System.Windows.Forms.Button();
+            this.BtnTables = new System.Windows.Forms.Button();
             this.ButtonDelete = new System.Windows.Forms.Button();
             this.ButtonAdd = new System.Windows.Forms.Button();
             this.DomainsListBox = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
-            // button7
+            // BtnTables
             // 
-            this.button7.Location = new System.Drawing.Point(242, 63);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(75, 23);
-            this.button7.TabIndex = 23;
-            this.button7.Text = "Tables";
-            this.button7.UseVisualStyleBackColor = true;
+            this.BtnTables.Location = new System.Drawing.Point(242, 63);
+            this.BtnTables.Name = "BtnTables";
+            this.BtnTables.Size = new System.Drawing.Size(75, 23);
+            this.BtnTables.TabIndex = 23;
+            this.BtnTables.Text = "Tables";
+            this.BtnTables.UseVisualStyleBackColor = true;
+            this.BtnTables.Click += new System.EventHandler(this.BtnTables_Click);
             // 
             // ButtonDelete
             // 
@@ -76,7 +77,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.button7);
+            this.Controls.Add(this.BtnTables);
             this.Controls.Add(this.ButtonDelete);
             this.Controls.Add(this.ButtonAdd);
             this.Controls.Add(this.DomainsListBox);
@@ -88,7 +89,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Button BtnTables;
         private System.Windows.Forms.Button ButtonDelete;
         private System.Windows.Forms.Button ButtonAdd;
         private System.Windows.Forms.ListBox DomainsListBox;

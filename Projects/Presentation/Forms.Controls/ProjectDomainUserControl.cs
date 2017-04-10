@@ -269,5 +269,12 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         }
 
         #endregion
+
+        private void BtnTables_Click(object sender, EventArgs e)
+        {
+            //Todo: Remove, just for planning overview
+            UpdateTablesFromSourceForm tables = new UpdateTablesFromSourceForm();
+            tables.ShowDialog();
+        }
     }
 }
