@@ -273,8 +273,8 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         private void BtnTables_Click(object sender, EventArgs e)
         {
             //Todo: Remove, just for planning overview
-            UpdateTablesFromSourceForm tables = new UpdateTablesFromSourceForm();
-            tables.ShowDialog();
+            DomainTableForm domainTableform = new DomainTableForm();
+            domainTableform.ShowDialog();
         }
     }
 }

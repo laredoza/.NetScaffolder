@@ -55,6 +55,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DomainTableForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DomainTableForm.Designer.cs">
+      <DependentUpon>DomainTableForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ManageCollectionsTreeViewUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -114,6 +120,9 @@
     <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="DomainTableForm.resx">
+      <DependentUpon>DomainTableForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ManageCollectionsTreeViewUserControl.resx">
       <DependentUpon>ManageCollectionsTreeViewUserControl.cs</DependentUpon>
     </EmbeddedResource>
