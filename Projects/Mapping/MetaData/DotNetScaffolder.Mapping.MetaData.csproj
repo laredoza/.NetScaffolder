@@ -61,6 +61,7 @@
     <Compile Include="Enum\RelationshipType.cs" />
     <Compile Include="Model\Column.cs" />
     <Compile Include="Model\DatabaseModel.cs" />
+    <Compile Include="Model\DomainDataType.cs" />
     <Compile Include="Model\Relationship.cs" />
     <Compile Include="Model\Table.cs" />
     <Compile Include="Application\ApplicationServices\ConfigurationAplicationServiceFile.cs" />

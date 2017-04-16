@@ -1,8 +1,0 @@
-<?xml version = '1.0' encoding = 'UTF-8'?>
-<UserSqlServerv2k5 class="oracle.dbtools.crest.model.design.storage.sqlserver.v2k5.UserSqlServerv2k5" directorySegmentName="seg_0" id="D7A786A5-E03A-3049-5C8C-72F50B9673B8" name="T1">
-<createdBy>laredo</createdBy>
-<createdTime>2015-10-07 10:02:23 UTC</createdTime>
-<ownerDesignName>nFrallApps</ownerDesignName>
-<login>ED371BB5-40FB-C67C-8E0E-DB43FAD110FB</login>
-<database>A27AF537-15A9-60B4-B3D9-59C09FC698A4</database>
-</UserSqlServerv2k5>

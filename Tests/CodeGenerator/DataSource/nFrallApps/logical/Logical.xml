@@ -1,7 +1,0 @@
-<?xml version = '1.0' encoding = 'UTF-8'?>
-<LogicalDesign class="oracle.dbtools.crest.model.design.logical.LogicalDesign" name="Logical" id="A6321719-D285-DA8C-4C6F-19B20C7C8CFC" mainViewID="F58A443F-77A7-6211-E12C-DECEF6E38F79">
-<createdBy>laredo</createdBy>
-<createdTime>2014-06-27 15:18:55 UTC</createdTime>
-<ownerDesignName>nFrallApps</ownerDesignName>
-<shouldBeOpen>false</shouldBeOpen>
-</LogicalDesign>

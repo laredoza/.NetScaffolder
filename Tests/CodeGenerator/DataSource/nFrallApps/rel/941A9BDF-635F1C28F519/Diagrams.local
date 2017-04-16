@@ -1,4 +1,0 @@
-<?xml version = '1.0' encoding = 'UTF-8'?>
-<oracle.dbtools.crest.model.design.relational.RelationalDesign>
-   <object objectType="main_view" objectID="A56AD5B8-0433-2C37-A20B-C80D3A1D32C7" name="nFallApps" visible="true"/>
-</oracle.dbtools.crest.model.design.relational.RelationalDesign>

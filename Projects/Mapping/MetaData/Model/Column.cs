@@ -1,218 +1,263 @@
-﻿namespace DotNetScaffolder.Mapping.MetaData.Model
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="Column.cs" company="">
+//   
+// </copyright>
+// <summary>
+//   The column.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
+
+namespace DotNetScaffolder.Mapping.MetaData.Model
 {
+    #region Using
+
     using System.ComponentModel;
     using System.Xml.Serialization;
 
+    #endregion
+
+    /// <summary>
+    /// The column.
+    /// </summary>
     public class Column : INotifyPropertyChanged
     {
+        #region Fields
 
-        #region Privates
+        /// <summary>
+        /// The render to entity.
+        /// </summary>
+        private bool renderToEntity = true;
 
-        private bool _renderToEntity = true;
-        private bool _renderToView = true;
-        private string _description;
-        private int _gridColumnWidth = 80;
-        private int _renderToViewOrder;
-        // private GridViewControl _gridViewControlType = GridViewControl.Unknown;
+        #endregion
 
-        #endregion // Privates
+        #region Public Events
 
-        #region Serializable Properties
+        /// <summary>
+        /// The property changed.
+        /// </summary>
+        public event PropertyChangedEventHandler PropertyChanged;
 
+        #endregion
+
+        #region Properties
+
+        /// <summary>
+        /// Gets or sets the column name.
+        /// </summary>
         [XmlAttribute("ColumnName")]
         public string ColumnName { get; set; }
 
+        /// <summary>
+        /// Gets the column name with key indicator.
+        /// </summary>
+        public string ColumnNameWithKeyIndicator
+        {
+            get
+            {
+                return string.Format("{0} {1}", this.IsPrimaryKey ? "* " : "   ", this.ColumnName);
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the column order.
+        /// </summary>
         [XmlAttribute("ColumnOrder")]
         public int ColumnOrder { get; set; }
 
-        [XmlAttribute("CSharpDataType")]
-        public string CSharpDataType { get; set; }
+        /// <summary>
+        /// Gets or sets the c sharp data type.
+        /// </summary>
+        [XmlAttribute("DataType")]
+        public DomainDataType CSharpDataType { get; set; }
 
+        /// <summary>
+        /// Gets or sets the db type.
+        /// </summary>
         [XmlAttribute("DbType")]
         public string DbType { get; set; }
 
-        [XmlAttribute("IsRequired")]
-        public bool IsRequired { get; set; }
-
-        [XmlAttribute("Length")]
-        public int Length { get; set; }
-
-        [XmlAttribute("IsPrimaryKey")]
-        public bool IsPrimaryKey { get; set; }
-
-        [XmlAttribute("Precision")]
-        public int Precision { get; set; }
-
-        [XmlAttribute("Scale")]
-        public int Scale { get; set; }
-
-        [XmlAttribute("Description")]
-        public string Description
-        {
-            get { return this._description; }
-            set { this._description = value; }
-        }
-
-        [XmlAttribute("GridColumnWidth")]
-        public int GridColumnWidth
-        {
-            get { return this._gridColumnWidth; }
-            set { this._gridColumnWidth = value; }
-        }
-
+        /// <summary>
+        /// Gets or sets the default field value.
+        /// </summary>
         [XmlAttribute("DefaultFieldValue")]
         public string DefaultFieldValue { get; set; }
 
-        [XmlAttribute("RenderToEntity")]
-        public bool RenderToEntity
-        {
-            get { return this._renderToEntity; }
-            set
-            {
-                this._renderToEntity = value;
-                if (!this._renderToEntity)
-                    this._renderToView = false;
-            }
-        }
+        /// <summary>
+        /// Gets or sets the description.
+        /// </summary>
+        [XmlAttribute("Description")]
+        public string Description { get; set; }
 
-        [XmlAttribute("RenderToView")]
-        public bool RenderToView
-        {
-            get { return this._renderToView; }
-            set
-            {
-                this._renderToView = value;
-                // RaisePropertyChanged();
-            }
-        }
+        /// <summary>
+        /// Gets or sets the grid column width.
+        /// </summary>
+        [XmlAttribute("GridColumnWidth")]
+        public int GridColumnWidth { get; set; } = 80;
 
-        [XmlAttribute("RenderToViewOrder")]
-        public int RenderToViewOrder
-        {
-            get { return this._renderToViewOrder; }
-            set { this._renderToViewOrder = value; }
-        }
+        /// <summary>
+        /// Gets or sets a value indicating whether is primary key.
+        /// </summary>
+        [XmlAttribute("IsPrimaryKey")]
+        public bool IsPrimaryKey { get; set; }
 
-        
+        /// <summary>
+        /// Gets or sets a value indicating whether is required.
+        /// </summary>
+        [XmlAttribute("IsRequired")]
+        public bool IsRequired { get; set; }
+
+        /// <summary>
+        /// Gets or sets the length.
+        /// </summary>
+        [XmlAttribute("Length")]
+        public int Length { get; set; }
+
+        /// <summary>
+        /// Gets or sets the lookup class name.
+        /// </summary>
         [XmlAttribute("LookupClassName")]
         public string LookupClassName { get; set; }
 
-        #endregion // Serializable Properties
+        /// <summary>
+        /// Gets or sets the precision.
+        /// </summary>
+        [XmlAttribute("Precision")]
+        public int Precision { get; set; }
 
-        #region Non-serializable Properties
+        /// <summary>
+        /// Gets or sets a value indicating whether render to entity.
+        /// </summary>
+        [XmlAttribute("RenderToEntity")]
+        public bool RenderToEntity
+        {
+            get
+            {
+                return this.renderToEntity;
+            }
 
-        public string ColumnNameWithKeyIndicator { get { return string.Format("{0} {1}", this.IsPrimaryKey ? "* " : "   ", this.ColumnName); } }
+            set
+            {
+                this.renderToEntity = value;
+                if (!this.renderToEntity) this.RenderToView = false;
+            }
+        }
 
-        #region Relational in class structure
+        /// <summary>
+        /// Gets or sets a value indicating whether render to view.
+        /// </summary>
+        [XmlAttribute("RenderToView")]
+        public bool RenderToView { get; set; } = true;
 
+        /// <summary>
+        /// Gets or sets the render to view order.
+        /// </summary>
+        [XmlAttribute("RenderToViewOrder")]
+        public int RenderToViewOrder { get; set; }
+
+        /// <summary>
+        /// Gets or sets the scale.
+        /// </summary>
+        [XmlAttribute("Scale")]
+        public int Scale { get; set; }
+
+        /// <summary>
+        /// Gets or sets the table.
+        /// </summary>
         [XmlIgnore]
         public Table Table { get; set; }
 
-        //[XmlIgnore]
-        //public AutomationDomain Domain
-        //{
-        //    get { return Table == null ? null : Table.TableCollection.Domain; }
-        //}
+        #endregion
 
-        #endregion // Relational in class structure
+        #region Other Properties
 
-        #region Text Transformation
+        // [XmlIgnore]
+        // private string DataTypeString
+        // {
+        // get
+        // {
+        // if ((!IsRequired) && (!IsPrimaryKey))
+        // {
+        // return NullableDataTypeString;
+        // }
+        // return RemappedCSharpDataType;
+        // }
+        // }
 
-        //[XmlIgnore]
-        //private string DataTypeString
-        //{
-        //    get
-        //    {
-        //        if ((!IsRequired) && (!IsPrimaryKey))
-        //        {
-        //            return NullableDataTypeString;
-        //        }
-        //        return RemappedCSharpDataType;
-        //    }
-        //}
-
+        /// <summary>
+        /// Gets a value indicating whether nullable.
+        /// </summary>
         private bool Nullable
         {
-            get { return (!this.IsRequired) && (!this.IsPrimaryKey); }
+            get
+            {
+                return !this.IsRequired && !this.IsPrimaryKey;
+            }
         }
-        //private string NullableDataTypeString
-        //{
-        //    get
-        //    {
-        //        switch (RemappedCSharpDataType.ToUpper())
-        //        {
-        //            case "INT":
-        //            case "LONG":
-        //            case "DECIMAL":
-        //            case "DOUBLE":
-        //            case "DATETIME":
-        //            case "GUID":
-        //                return string.Format("{0}?", RemappedCSharpDataType);
-        //                break;
-        //            default:
-        //                return RemappedCSharpDataType;
-        //        }
-        //    }
-        //}
 
-        #region Views
+        #endregion
 
-        #endregion // Views
+        // }
+        // }
+        // return RemappedCSharpDataType;
+        // default:
+        // private GridViewControl _gridViewControlType = GridViewControl.Unknown;
+        // break;
+        // return string.Format("{0}?", RemappedCSharpDataType);
+        // case "GUID":
+        // case "DATETIME":
+        // case "DOUBLE":
+        // case "DECIMAL":
+        // case "LONG":
+        // case "INT":
+        // {
+        // switch (RemappedCSharpDataType.ToUpper())
+        // {
+        // get
+        // {
+        // }
+        // get { return Table == null ? null : Table.TableCollection.Domain; }
+        // {
+        // public AutomationDomain Domain
 
-        #endregion // Text Transformation
+        // [XmlIgnore]
+        // private string NullableDataTypeString
 
-        #region Binding
+        // public void RaisePropertyChanged([CallerMemberName]string prop = "")
+        // }
+        // {
+        // if (PropertyChanged != null)
+        // PropertyChanged(this, new PropertyChangedEventArgs(prop));
+        // }
 
-        #endregion // Binding
+        // public void RaisePropertyChanged<T>(Expression<Func<T>> prop)
+        // {
+        // if (PropertyChanged != null)
+        // {
+        // var member = prop.Body as MemberExpression;
+        // if (member == null) return;
 
-        #endregion // Non-serializable Properties
+        // var propInfo = member.Member as PropertyInfo;
+        // if (propInfo == null) return;
 
-        #region INotifyPropertyChanged Members
+        // PropertyChanged(this, new PropertyChangedEventArgs(propInfo.Name));
+        // }
+        // }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        //public void RaisePropertyChanged([CallerMemberName]string prop = "")
-        //{
-        //    if (PropertyChanged != null)
-        //        PropertyChanged(this, new PropertyChangedEventArgs(prop));
-        //}
-
-        //public void RaisePropertyChanged<T>(Expression<Func<T>> prop)
-        //{
-        //    if (PropertyChanged != null)
-        //    {
-        //        var member = prop.Body as MemberExpression;
-        //        if (member == null) return;
-
-        //        var propInfo = member.Member as PropertyInfo;
-        //        if (propInfo == null) return;
-
-        //        PropertyChanged(this, new PropertyChangedEventArgs(propInfo.Name));
-        //    }
-        //}
-
-        #endregion // INotifyPropertyChanged Members
-
-        #region Helpers
-
-        //private GridViewControl SetControlType(string dataType)
-        //{
-        //    switch (dataType.ToUpper())
-        //    {
-        //        case "DATETIME":
-        //            return GridViewControl.DateTime;
-        //            break;
-        //        case "INT":
-        //        case "DECIMAL":
-        //            return GridViewControl.Number;
-        //            break;
-        //        default:
-        //            return GridViewControl.TextBox;
-        //            break;
-        //    }
-        //}
-
-        #endregion // Helpers
-
+        // private GridViewControl SetControlType(string dataType)
+        // {
+        // switch (dataType.ToUpper())
+        // {
+        // case "DATETIME":
+        // return GridViewControl.DateTime;
+        // break;
+        // case "INT":
+        // case "DECIMAL":
+        // return GridViewControl.Number;
+        // break;
+        // default:
+        // return GridViewControl.TextBox;
+        // break;
+        // }
+        // }
     }
 }

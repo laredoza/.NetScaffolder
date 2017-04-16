@@ -1,8 +1,0 @@
-<?xml version = '1.0' encoding = 'UTF-8'?>
-<LoginSqlServerv2k5 class="oracle.dbtools.crest.model.design.storage.sqlserver.v2k5.LoginSqlServerv2k5" name="Core" directorySegmentName="seg_0" id="F012CC0D-A0A3-CD2C-391C-C77186F5E447">
-<createdBy>laredo</createdBy>
-<createdTime>2014-06-28 08:12:48 UTC</createdTime>
-<ownerDesignName>nFrallApps</ownerDesignName>
-<defaultDatabase>A27AF537-15A9-60B4-B3D9-59C09FC698A4</defaultDatabase>
-<users>Core</users>
-</LoginSqlServerv2k5>

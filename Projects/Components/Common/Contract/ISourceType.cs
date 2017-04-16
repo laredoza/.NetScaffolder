@@ -28,12 +28,26 @@ namespace DotNetScaffolder.Components.Common.Contract
         #region Public methods and operators
 
         /// <summary>
-        ///     Import data structure.
+        /// The import.
         /// </summary>
+        /// <param name="options">
+        /// The options.
+        /// </param>
         /// <returns>
-        ///     The <see cref="List" />.
+        /// The <see cref="List"/>.
         /// </returns>
-        List<Table> Import();
+        DatabaseModel Import(object options);
+
+        /// <summary>
+        /// Map database type to c# type.
+        /// </summary>
+        /// <param name="databaseType">
+        /// The database type.
+        /// </param>
+        /// <returns>
+        /// The <see cref="DomainDataType"/>.
+        /// </returns>
+        DomainDataType MapDatabaseTypeToCSharp(string databaseType);
 
         #endregion
     }

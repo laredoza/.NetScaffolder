@@ -1,7 +1,0 @@
-<?xml version = '1.0' encoding = 'UTF-8'?>
-<Note class="oracle.dbtools.crest.model.design.Note" name="Note_8" directorySegmentName="seg_0" id="BD37F1C9-29FF-840D-1422-7764AF4A6666">
-<createdBy>laredo</createdBy>
-<createdTime>2014-08-23 14:36:25 UTC</createdTime>
-<comment>Widget</comment>
-<ownerDesignName>nFrallApps</ownerDesignName>
-</Note>

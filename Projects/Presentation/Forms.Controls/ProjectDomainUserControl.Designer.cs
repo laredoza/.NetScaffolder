@@ -40,7 +40,7 @@
             this.BtnTables.Name = "BtnTables";
             this.BtnTables.Size = new System.Drawing.Size(75, 23);
             this.BtnTables.TabIndex = 23;
-            this.BtnTables.Text = "Tables";
+            this.BtnTables.Text = "Manage";
             this.BtnTables.UseVisualStyleBackColor = true;
             this.BtnTables.Click += new System.EventHandler(this.BtnTables_Click);
             // 
