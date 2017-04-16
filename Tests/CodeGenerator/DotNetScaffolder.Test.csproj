@@ -88,6 +88,7 @@
     <Compile Include="Components\NamingConventions\TitleCaseNamingConventionUnitTest.cs" />
     <Compile Include="Components\NamingConventions\TitleCaseNoUnderScoreNamingConventionUnitTest.cs" />
     <Compile Include="Components\SourceTypes\BaseSourceTypeUnitTest.cs" />
+    <Compile Include="Components\SourceTypes\GenericAdoSourceTypeUnitTest.cs" />
     <Compile Include="Components\SourceTypes\EdmxSourceTypeUnitTest.cs" />
     <Compile Include="Core\Common\Forms\HierarchyTreeViewUnitTest.cs" />
     <Compile Include="Core\Common\ObjectXMLSerializerUnitTest.cs" />

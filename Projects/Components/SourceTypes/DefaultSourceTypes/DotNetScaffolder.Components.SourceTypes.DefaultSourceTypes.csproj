@@ -42,6 +42,10 @@
       <HintPath>..\..\..\..\.nuget\NuGetPackages\Common.Logging.Core.3.3.1\lib\net40\Common.Logging.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="DatabaseSchemaReader, Version=1.2.4.17096, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\.nuget\NuGetPackages\Database.Schema.Reader.Core.1.2.4.17096\lib\net35\DatabaseSchemaReader.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
@@ -58,6 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EdmxSourceType.cs" />
+    <Compile Include="GenericAdoSourceType.cs" />
     <Compile Include="Models\TiraggoEdmx_v2.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -69,6 +74,7 @@
       <DependentUpon>TiraggoEdmx_v3.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SourceOptions\AdoSourceOptions.cs" />
     <Compile Include="SourceOptions\FileSourceOptions.cs" />
   </ItemGroup>
   <ItemGroup>

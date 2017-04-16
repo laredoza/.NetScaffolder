@@ -114,8 +114,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes
                     // Todo: Do something valid with this
                     return DomainDataType.Single;
                 default:
-                    throw new NotImplementedException();
-                    return DomainDataType.String;
+                    throw new NotImplementedException($"Invalid data type {databaseType}");
             }
         }
 

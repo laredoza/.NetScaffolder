@@ -185,6 +185,7 @@
         public Table()
         {
             this.DatabaseGeneratedKeyType = DatabaseGeneratedKeyType.None;
+            this.Columns = new List<Column>();
         }
     }
 }
