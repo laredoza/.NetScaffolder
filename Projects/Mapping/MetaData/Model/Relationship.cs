@@ -23,7 +23,7 @@
         [XmlAttribute("ColumnName")]
         public string ColumnName { get; set; }
         [XmlAttribute("RelationShip")]
-        public RelationshipType RelationShip { get; set; }
+        public RelationshipType DependencyRelationShip { get; set; }
         [XmlAttribute("Render")]
         public bool Render
         {
@@ -100,7 +100,7 @@
 
         #region Relational in class structure
 
-        public string RelationshipTypeString { get { return this.RelationShip.ToString(); } }
+        public string RelationshipTypeString { get { return this.DependencyRelationShip.ToString(); } }
 
         public string RelatedTableQualifiedName { get { return this.RelatedTable != null ? this.RelatedTable.QualifiedTableName : null; } }
 

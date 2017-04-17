@@ -68,7 +68,7 @@
         [XmlIgnore]
         public List<Relationship> ChildRelationships
         {
-            get { return this.RelationShips.Where(u => u.RelationShip == RelationshipType.ForeignKeyChild && u.Render).ToList(); }
+            get { return this.RelationShips.Where(u => u.DependencyRelationShip == RelationshipType.ForeignKeyChild && u.Render).ToList(); }
         }
 
         [XmlIgnore]
@@ -77,7 +77,7 @@
             get
             {
                 var retval = new List<Relationship>();
-                foreach (var rel in this.RelationShips.Where(u => u.RelationShip == RelationshipType.ForeignKeyChild && u.Render))
+                foreach (var rel in this.RelationShips.Where(u => u.DependencyRelationShip == RelationshipType.ForeignKeyChild && u.Render))
                 {
                     var exists = retval.FirstOrDefault(u => u.RelatedTable == rel.RelatedTable);
                     if (exists == null)
@@ -90,7 +90,7 @@
         [XmlIgnore]
         public List<Relationship> ParentRelationships
         {
-            get { return this.RelationShips.Where(u => u.RelationShip == RelationshipType.ForeignKey && u.Render).ToList(); }
+            get { return this.RelationShips.Where(u => u.DependencyRelationShip == RelationshipType.ForeignKey && u.Render).ToList(); }
         }
 
         //[XmlIgnore]

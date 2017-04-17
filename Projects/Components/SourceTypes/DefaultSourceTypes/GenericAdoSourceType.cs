@@ -72,7 +72,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes
                         TableName = foreignKey.RefersToTable,
                         ColumnName = foreignKey.Columns[0],
                         ForeignColumnName = foreignKey.ReferencedColumns(schema).ToList()[0],
-                        RelationShip = RelationshipType.ForeignKey
+                        DependencyRelationShip = RelationshipType.ForeignKey
                     });
                 }
 
@@ -88,7 +88,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes
                                     TableName = foreignKey.TableName,
                                     ColumnName = foreignKey.Columns[0],
                                     ForeignColumnName = foreignKey.ReferencedColumns(schema).ToList()[0],
-                                    RelationShip = RelationshipType.ForeignKeyChild
+                                    DependencyRelationShip = RelationshipType.ForeignKeyChild
                                 });
                         }
                     }
@@ -115,14 +115,8 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes
                     return DomainDataType.Int16;
                 case "INT":
                     return DomainDataType.Int32;
-                case "INT32":
-                    return DomainDataType.Int32;
-                case "INT64":
-                    return DomainDataType.Int64;
                 case "BIT":
                     return DomainDataType.Boolean;
-                case "BYTE":
-                    return DomainDataType.Short;
                 case "NVARCHAR":
                     return DomainDataType.String;
                 case "MONEY":
