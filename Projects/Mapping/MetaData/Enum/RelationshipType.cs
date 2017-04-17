@@ -5,7 +5,14 @@
     /// </summary>
     public enum RelationshipType
     {
-        Parent,
-        Child
+        /// <summary>
+        ///     This describes an actual foreign key relationship from this table to another
+        /// </summary>
+        ForeignKey,
+
+        /// <summary>
+        ///     This describes another table's foreign key relationship to the current table.
+        /// </summary>
+        ForeignKeyChild
     }
 }

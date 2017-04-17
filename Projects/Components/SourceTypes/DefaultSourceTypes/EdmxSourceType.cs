@@ -71,7 +71,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes
                         TableName = (rel.ReferentialConstraint.Dependent.Role == tbl.Name) ? rel.ReferentialConstraint.Principal.Role : rel.ReferentialConstraint.Dependent.Role,
                         ColumnName = (rel.ReferentialConstraint.Dependent.Role == tbl.Name) ? rel.ReferentialConstraint.Dependent.PropertyRef.Name : rel.ReferentialConstraint.Principal.PropertyRef.Name,
                         ForeignColumnName = (rel.ReferentialConstraint.Principal.Role == tbl.Name) ? rel.ReferentialConstraint.Dependent.PropertyRef.Name : rel.ReferentialConstraint.Principal.PropertyRef.Name,
-                        RelationShip = (rel.ReferentialConstraint.Dependent.Role == tbl.Name) ? RelationshipType.Parent : RelationshipType.Child,
+                        RelationShip = (rel.ReferentialConstraint.Dependent.Role == tbl.Name) ? RelationshipType.ForeignKey : RelationshipType.ForeignKeyChild,
                     }).ToList(),
                     }).ToList();
 
@@ -104,7 +104,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes
                 case "STRING":
                     return DomainDataType.String;
                 case "DECIMAL":
-                    return DomainDataType.String;
+                    return DomainDataType.Decimal;
                 case "DATETIME":
                     return DomainDataType.String;
                 case "INT[]":
