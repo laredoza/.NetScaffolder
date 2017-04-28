@@ -124,7 +124,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes
                 case "NUMERIC":
                     return DomainDataType.Decimal;
                 case "DATETIME":
-                    return DomainDataType.String;
+                    return DomainDataType.DateTime;
                 case "IMAGE":
                     // Todo: Do something valid with this
                     return DomainDataType.String;

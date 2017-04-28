@@ -106,7 +106,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes
                 case "DECIMAL":
                     return DomainDataType.Decimal;
                 case "DATETIME":
-                    return DomainDataType.String;
+                    return DomainDataType.DateTime;
                 case "INT[]":
                     // Todo: Do something valid with this
                     return DomainDataType.String;

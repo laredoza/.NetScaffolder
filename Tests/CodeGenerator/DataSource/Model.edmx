@@ -659,7 +659,7 @@
     <Diagrams>
       <Diagram DiagramId="ff226d719f104ed5b971c2aee14f08c3" Name="Diagram1">
         <EntityTypeShape EntityType="NModel.BankAccount" Width="1.5" PointX="3.75" PointY="16.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="NModel.BankTransfers" Width="1.5" PointX="6" PointY="16.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="NModel.BankTransfers" Width="3.75" PointX="8.125" PointY="16.375" IsExpanded="true" />
         <EntityTypeShape EntityType="NModel.Book" Width="1.5" PointX="3" PointY="2.875" IsExpanded="true" />
         <EntityTypeShape EntityType="NModel.Country" Width="1.5" PointX="1.5" PointY="17" IsExpanded="true" />
         <EntityTypeShape EntityType="NModel.Customer" Width="1.5" PointX="1.5" PointY="11.75" IsExpanded="true" />
