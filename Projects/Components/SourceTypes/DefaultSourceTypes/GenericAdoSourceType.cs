@@ -40,7 +40,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes
             Column newColumn = new Column();
 
             foreach (var table in schema.Tables.Where(t => t.Name != "sysdiagrams"))
-            //foreach (var table in schema.Tables.Where(t => t.Name == "Product"))
+            //foreach (var table in schema.Tables.Where(t => t.Name == "BankAccount"))
             {
                 //Debug.WriteLine("Table " + table.Name);
 
@@ -86,8 +86,8 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes
                                 new Relationship
                                 {
                                     TableName = foreignKey.TableName,
-                                    ColumnName = foreignKey.Columns[0],
-                                    ForeignColumnName = foreignKey.ReferencedColumns(schema).ToList()[0],
+                                    ColumnName = foreignKey.ReferencedColumns(schema).ToList()[0],
+                                    ForeignColumnName = foreignKey.Columns[0],
                                     DependencyRelationShip = RelationshipType.ForeignKeyChild
                                 });
                         }
