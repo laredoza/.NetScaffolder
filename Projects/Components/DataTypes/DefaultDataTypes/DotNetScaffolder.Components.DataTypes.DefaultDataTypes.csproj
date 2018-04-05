@@ -1,20 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{B39709B5-D887-46E1-ACC6-CBD7880E90C5}</ProjectGuid>
+    <ProjectGuid>{B50F4BEA-CDA2-42E1-818B-6E700FDE771B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DotNetScaffolder.Components.Common</RootNamespace>
-    <AssemblyName>DotNetScaffolder.Components.Common</AssemblyName>
-    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <RootNamespace>DotNetScaffolder.Components.DataTypes.DefaultDataTypes</RootNamespace>
+    <AssemblyName>DotNetScaffolder.Components.DataTypes.DefaultDataTypes</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <SccProjectName>SAK</SccProjectName>
-    <SccLocalPath>SAK</SccLocalPath>
-    <SccAuxPath>SAK</SccAuxPath>
-    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -34,14 +31,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Common.Logging, Version=3.3.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
-      <HintPath>..\..\..\.nuget\NuGetPackages\Common.Logging.3.3.1\lib\net40\Common.Logging.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Common.Logging.Core, Version=3.3.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
-      <HintPath>..\..\..\.nuget\NuGetPackages\Common.Logging.Core.3.3.1\lib\net40\Common.Logging.Core.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
@@ -53,30 +42,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ComponentImporter.cs" />
-    <Compile Include="Contract\IDataType.cs" />
-    <Compile Include="Contract\IDriver.cs" />
-    <Compile Include="Contract\ILanguageOutput.cs" />
-    <Compile Include="Contract\INamingConvention.cs" />
-    <Compile Include="Contract\IOutputGenerator.cs" />
-    <Compile Include="Contract\ISourceType.cs" />
+    <Compile Include="ApplicationServiceDataType.cs" />
+    <Compile Include="RepositoryDataType.cs" />
+    <Compile Include="EntityDataType.cs" />
+    <Compile Include="ContextDataType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Mapping\MetaData\DotNetScaffolder.Mapping.MetaData.csproj">
+    <ProjectReference Include="..\..\..\Core\Common\DotNetScaffolder.Core.Common.csproj">
+      <Project>{cdace52c-f991-40b5-80ed-4947a100ec52}</Project>
+      <Name>DotNetScaffolder.Core.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Mapping\MetaData\DotNetScaffolder.Mapping.MetaData.csproj">
       <Project>{3f206474-14c2-4586-b57a-4edc76795161}</Project>
       <Name>DotNetScaffolder.Mapping.MetaData</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
+    <ProjectReference Include="..\..\Common\DotNetScaffolder.Components.Common.csproj">
+      <Project>{b39709b5-d887-46e1-acc6-cbd7880e90c5}</Project>
+      <Name>DotNetScaffolder.Components.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>

@@ -131,6 +131,10 @@
       <Project>{b39709b5-d887-46e1-acc6-cbd7880e90c5}</Project>
       <Name>DotNetScaffolder.Components.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Projects\Components\DataTypes\DefaultDataTypes\DotNetScaffolder.Components.DataTypes.DefaultDataTypes.csproj">
+      <Project>{b50f4bea-cda2-42e1-818b-6e700fde771b}</Project>
+      <Name>DotNetScaffolder.Components.DataTypes.DefaultDataTypes</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Projects\Components\Drivers\DefaultDrivers\DotNetScaffolder.Components.Drivers.DefaultDrivers.csproj">
       <Project>{58940e23-a83f-40da-b9d8-84e9ab420bec}</Project>
       <Name>DotNetScaffolder.Components.Drivers.DefaultDrivers</Name>

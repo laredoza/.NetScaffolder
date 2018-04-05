@@ -42,6 +42,7 @@ namespace DotNetScaffolder.Test.Components
             Assert.AreEqual(1, importer.Drivers.Length, "There should be 1 DriverType");
             Assert.AreEqual(1, importer.LanguageOutputs.Length, "There should be 1 LanguageOutput");
             Assert.AreEqual(1, importer.OutputGenerators.Length, "There should be 1 OutputGenerator");
+            Assert.AreEqual(4, importer.DataTypes.Length, "There should be 4 DataTypes");
         }
 
         #endregion
