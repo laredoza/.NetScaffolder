@@ -24,6 +24,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
     using DotNetScaffolder.Mapping.MetaData.Project;
     using DotNetScaffolder.Mapping.MetaData.Project.ApplicationServices;
     using DotNetScaffolder.Mapping.MetaData.Project.Packages;
+    using System.Linq;
 
     #endregion
 
@@ -487,7 +488,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
                         });
             }
 
-            return items.ToArray();
+            return items.OrderBy(i => i.Text).ToArray();
         }
 
         #endregion

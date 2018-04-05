@@ -27,7 +27,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes
     /// This datasource uses the default Microsoft edmx file to return the data structure.
     /// </summary>
     [Export(typeof(ISourceType))]
-    [ExportMetadata("NameMetaData", "Edmx")]
+    [ExportMetadata("NameMetaData", "EDMX")]
     [ExportMetadata("ValueMetaData", "3BC1B0C4-1E41-9146-82CF-599181CE4410")]
     public class EdmxSourceType : ISourceType
     {
