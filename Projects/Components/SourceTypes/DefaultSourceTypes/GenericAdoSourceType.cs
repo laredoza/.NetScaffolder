@@ -12,7 +12,11 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes
     using DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.SourceOptions;
     using DotNetScaffolder.Mapping.MetaData.Enum;
     using DotNetScaffolder.Mapping.MetaData.Model;
+    using System.ComponentModel.Composition;
 
+    [Export(typeof(ISourceType))]
+    [ExportMetadata("NameMetaData", "ADO.NET")]
+    [ExportMetadata("ValueMetaData", "4BC1B0C4-1E41-9146-82CF-599181CE4410")]
     public class GenericAdoSourceType : ISourceType
     {
         #region Public methods and operators
