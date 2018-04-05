@@ -73,6 +73,12 @@ namespace Configuration
         [ImportMany]
         public static Lazy<ISourceType, IDictionary<string, object>>[] SourceTypes { get; set; }
 
+        /// <summary>
+        ///      Gets or sets the DataTypes
+        /// </summary>
+        [ImportMany]
+        public static Lazy<IDataType, IDictionary<string, object>>[] DataTypes { get; set; }
+
         #endregion
 
         #region Public methods and operators
@@ -90,6 +96,7 @@ namespace Configuration
             SourceTypes = importer.SourceTypes;
             LanguageOutputs = importer.LanguageOutputs;
             OutputGenerators = importer.OutputGenerators;
+            DataTypes = importer.DataTypes;
         }
 
         #endregion

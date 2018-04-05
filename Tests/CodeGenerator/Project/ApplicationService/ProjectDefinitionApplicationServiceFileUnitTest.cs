@@ -9,10 +9,10 @@
 
 namespace DotNetScaffolder.Test.Project.ApplicationService
 {
+    using DotNetScaffolder.Mapping.ApplicationServices;
     #region Using
 
     using DotNetScaffolder.Mapping.MetaData.Project;
-    using DotNetScaffolder.Mapping.MetaData.Project.ApplicationServices;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     #endregion

@@ -95,7 +95,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
             {
                 return this.treeView1.Data;
             }
-
+            
             set
             {
                 if (this.treeView1.Data != value)

@@ -4,8 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace DotNetScaffolder.Test.Presentation.Controls
 {
     using Configuration;
-
-    using DotNetScaffolder.Mapping.MetaData.Project.ApplicationServices;
+    using DotNetScaffolder.Mapping.ApplicationServices;
     using DotNetScaffolder.Presentation.Forms.Controls;
 
     [TestClass]

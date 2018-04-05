@@ -16,14 +16,14 @@ namespace DotNetScaffolder.Presentation.Forms
     using System.Linq;
     using System.Windows.Forms;
 
-    using DotNetScaffolder.Mapping.MetaData.Application.ApplicationServices;
+    using DotNetScaffolder.Mapping.ApplicationServices;
     using DotNetScaffolder.Mapping.MetaData.Project;
-    using DotNetScaffolder.Mapping.MetaData.Project.ApplicationServices;
     using DotNetScaffolder.Mapping.MetaData.Project.Packages;
     using DotNetScaffolder.Presentation.Forms.Controls;
 
     using FormControls.Enum;
     using FormControls.TreeView;
+    using DotNetScaffolder.Mapping.ApplicationServices;
 
     #endregion
 
@@ -58,6 +58,7 @@ namespace DotNetScaffolder.Presentation.Forms
             this.InitializeComponent();
 
             FilePersistenceOptions options = new FilePersistenceOptions { Path = @"Models\Banking.mdl" };
+
             this.applicationService = new ProjectDefinitionApplicationServiceFile { FilePersistenceOptions = options };
             this.applicationService.Load();
 

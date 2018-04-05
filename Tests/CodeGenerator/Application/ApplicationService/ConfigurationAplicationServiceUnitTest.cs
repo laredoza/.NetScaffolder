@@ -2,7 +2,7 @@
 using System.Text;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using DotNetScaffolder.Mapping.MetaData.Application.ApplicationServices;
+using DotNetScaffolder.Mapping.ApplicationServices;
 using DotNetScaffolder.Mapping.MetaData.Project.Packages;
 using DotNetScaffolder.Mapping.MetaData.Enum;
 using Configuration;

@@ -22,9 +22,9 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
     using DotNetScaffolder.Core.Common;
     using DotNetScaffolder.Mapping.MetaData.Domain;
     using DotNetScaffolder.Mapping.MetaData.Project;
-    using DotNetScaffolder.Mapping.MetaData.Project.ApplicationServices;
     using DotNetScaffolder.Mapping.MetaData.Project.Packages;
     using System.Linq;
+    using DotNetScaffolder.Mapping.ApplicationServices;
 
     #endregion
 
