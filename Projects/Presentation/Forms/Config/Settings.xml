@@ -26,8 +26,7 @@
                       <HierarchyType>Item</HierarchyType>
                       <ConfigLocation>Data</ConfigLocation>
                       <DataType>
-                        <Id>2a7353aa-a54a-442e-a710-f30836a0d4b2</Id>
-                        <Name>Test</Name>
+                        1BC1B0C4-1E41-9146-82CF-599181CE4430
                       </DataType>
                       <DefaultSettings />
                       <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
@@ -55,8 +54,7 @@
                       <HierarchyType>Item</HierarchyType>
                       <ConfigLocation>Data</ConfigLocation>
                       <DataType>
-                        <Id>2a7353aa-a54a-442e-a710-f30836a0d4b2</Id>
-                        <Name>Test</Name>
+                        1BC1B0C4-1E41-9146-82CF-599181CE4430
                       </DataType>
                       <DefaultSettings />
                       <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
@@ -73,8 +71,7 @@
                       <HierarchyType>Item</HierarchyType>
                       <ConfigLocation>Data</ConfigLocation>
                       <DataType>
-                        <Id>17f8813a-ef3c-48c3-82bf-5e8937044550</Id>
-                        <Name>Test</Name>
+                        1BC1B0C4-1E41-9146-82CF-599181CE4440
                       </DataType>
                       <DefaultSettings />
                       <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
@@ -178,8 +175,7 @@
               <HierarchyType>Item</HierarchyType>
               <ConfigLocation>Data</ConfigLocation>
               <DataType>
-                <Id>2a7353aa-a54a-442e-a710-f30836a0d4b2</Id>
-                <Name>Test</Name>
+                1BC1B0C4-1E41-9146-82CF-599181CE4430
               </DataType>
               <DefaultSettings />
               <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
@@ -195,8 +191,7 @@
           <HierarchyType>Group</HierarchyType>
           <ConfigLocation>Data</ConfigLocation>
           <DataType>
-            <Id>69c09953-f913-4f04-aa70-bcc600bbe861</Id>
-            <Name>Test</Name>
+            1BC1B0C4-1E41-9146-82CF-599181CE4430
           </DataType>
           <DefaultSettings />
           <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
@@ -215,8 +210,7 @@
               <HierarchyType>Item</HierarchyType>
               <ConfigLocation>Data</ConfigLocation>
               <DataType>
-                <Id>17f8813a-ef3c-48c3-82bf-5e8937044550</Id>
-                <Name>Test</Name>
+                1BC1B0C4-1E41-9146-82CF-599181CE4440
               </DataType>
               <DefaultSettings />
               <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
@@ -232,8 +226,7 @@
           <HierarchyType>Group</HierarchyType>
           <ConfigLocation>Data</ConfigLocation>
           <DataType>
-            <Id>d3509f07-8742-4d06-a973-f1e4871c5ff0</Id>
-            <Name>Test</Name>
+            1BC1B0C4-1E41-9146-82CF-599181CE4440
           </DataType>
           <DefaultSettings />
           <GeneratorTypeId>838ec2ba-82cd-4a8b-af5f-7f4ea9c6ae8b</GeneratorTypeId>
@@ -249,8 +242,7 @@
       <HierarchyType>Group</HierarchyType>
       <ConfigLocation>Data</ConfigLocation>
       <DataType>
-        <Id>fe84837e-e373-4ddd-8e43-d014695ef074</Id>
-        <Name>Test</Name>
+        00000000-0000-0000-0000-000000000000
       </DataType>
       <DefaultSettings />
       <GeneratorTypeId>c0863551-adcb-4df0-8052-7518d2dd9841</GeneratorTypeId>

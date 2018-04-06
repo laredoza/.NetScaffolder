@@ -44,7 +44,7 @@ namespace DotNetScaffolder.Test.Core.Common.Forms
             HierarchyTreeView treeView = new HierarchyTreeView();
             Hierarchy data = new Hierarchy { Name = "Templates" };
             data.Children.Add(new Hierarchy { Name = "Context" });
-            var template = new Template { DataType = new DataType { } };
+            var template = new Template { DataType = Guid.Empty };
             //template.
 
             data.Children.Add(new Hierarchy { Name = "Entity", Item = template});

@@ -35,7 +35,7 @@ namespace DotNetScaffolder.Test.Application.ApplicationService
 
             Template template = new Template {
                 ConfigLocation = ConfigLocation.Data,
-                DataType = dataTypes[0],
+                DataType = Guid.Empty, 
                 Id = Guid.NewGuid(),
                 Name = "Template",
                 Version =1,

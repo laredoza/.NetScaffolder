@@ -49,7 +49,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Project.Packages
             Logger.Trace("Started Template()");
             this.ValidationResult = new List<Validation>();
             this.Enabled = false;
-            this.DataType = new DataType();
+            this.DataType = Guid.Empty; 
             this.DefaultSettings = new List<string>();
             this.Children = new List<Hierarchy>();
             Logger.Trace("Completed Template()");
@@ -67,7 +67,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Project.Packages
         /// <summary>
         /// Gets or sets the data type.
         /// </summary>
-        public DataType DataType { get; set; }
+        public Guid DataType { get; set; }
 
         /// <summary>
         /// Gets or sets the default settings.
@@ -100,8 +100,6 @@ namespace DotNetScaffolder.Mapping.MetaData.Project.Packages
         /// </summary>
         public double Version { get; set; }
 
-        [XmlIgnore]
-        public IDataType Interface { get; set; }
         #endregion
 
         #region Public methods and operators
@@ -152,12 +150,12 @@ namespace DotNetScaffolder.Mapping.MetaData.Project.Packages
                 }
 
                 // Todo: Add back
-                this.DataType.Validate();
+                //this.DataType.Validate();
 
-                foreach (var validationResult in this.DataType.ValidationResult)
-                {
-                    this.ValidationResult.Add(validationResult);
-                }
+                //foreach (var validationResult in this.DataType.ValidationResult)
+                //{
+                //    this.ValidationResult.Add(validationResult);
+                //}
 
             }
 

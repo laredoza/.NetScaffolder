@@ -14,9 +14,9 @@ namespace Configuration
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.Composition;
-
     using DotNetScaffolder.Components.Common;
     using DotNetScaffolder.Components.Common.Contract;
+    using System.Linq;
 
     #endregion
 
@@ -97,6 +97,11 @@ namespace Configuration
             LanguageOutputs = importer.LanguageOutputs;
             OutputGenerators = importer.OutputGenerators;
             DataTypes = importer.DataTypes;
+        }
+
+        public static IDataType ReturnDataType(Guid dataTypeId)
+        {
+            return DataTypes.FirstOrDefault(d => d.Metadata["ValueMetaData"] == dataTypeId.ToString()).Value;
         }
 
         #endregion

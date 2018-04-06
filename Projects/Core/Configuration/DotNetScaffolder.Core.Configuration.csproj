@@ -49,6 +49,10 @@
       <Project>{b39709b5-d887-46e1-acc6-cbd7880e90c5}</Project>
       <Name>DotNetScaffolder.Components.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Components\DataTypes\DefaultDataTypes\DotNetScaffolder.Components.DataTypes.DefaultDataTypes.csproj">
+      <Project>{b50f4bea-cda2-42e1-818b-6e700fde771b}</Project>
+      <Name>DotNetScaffolder.Components.DataTypes.DefaultDataTypes</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
