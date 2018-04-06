@@ -4,9 +4,12 @@
 
     public partial class DomainTableForm : Form
     {
+        //public Package MyProperty { get; set; }
         public DomainTableForm()
         {
             this.InitializeComponent();
+
+            //DomainTreeView
         }
 
         private void textBox3_TextChanged(object sender, System.EventArgs e)
