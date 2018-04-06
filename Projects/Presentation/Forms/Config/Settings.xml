@@ -20,7 +20,7 @@
                     <Template>
                       <Children />
                       <Enabled>true</Enabled>
-                      <Id>99d48be6-6570-465d-bc29-0793ea47233f</Id>
+                      <Id>1BC1B0C4-1E41-9146-82CF-599181CE4430</Id>
                       <Name>Entity Framework Context (v6)</Name>
                       <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
                       <HierarchyType>Item</HierarchyType>
@@ -49,7 +49,7 @@
                     <Template>
                       <Children />
                       <Enabled>true</Enabled>
-                      <Id>99d48be6-6570-465d-bc29-0793ea47233f</Id>
+                      <Id>1BC1B0C4-1E41-9146-82CF-599181CE4430</Id>
                       <Name>Entity Framework Context (v6)</Name>
                       <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
                       <HierarchyType>Item</HierarchyType>
@@ -67,7 +67,7 @@
                     <Template>
                       <Children />
                       <Enabled>true</Enabled>
-                      <Id>63cde985-20c1-4c6f-8f05-ac941de202f5</Id>
+                      <Id>1BC1B0C4-1E41-9146-82CF-599181CE4440</Id>
                       <Name>Entity Framework Entity (v6)</Name>
                       <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
                       <HierarchyType>Item</HierarchyType>
@@ -189,7 +189,7 @@
             </Hierarchy>
           </Children>
           <Enabled>true</Enabled>
-          <Id>9e2d62f2-b861-4b13-b27d-54d74ecaad48</Id>
+          <Id>1BC1B0C4-1E41-9146-82CF-599181CE4430</Id>
           <Name>Context</Name>
           <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
           <HierarchyType>Group</HierarchyType>
@@ -209,7 +209,7 @@
             <Hierarchy xsi:type="Template">
               <Children />
               <Enabled>true</Enabled>
-              <Id>63cde985-20c1-4c6f-8f05-ac941de202f5</Id>
+              <Id>1BC1B0C4-1E41-9146-82CF-599181CE4440</Id>
               <Name>Entity Framework Entity (v6)</Name>
               <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
               <HierarchyType>Item</HierarchyType>

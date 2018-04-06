@@ -24,7 +24,7 @@
           <Template>
             <Children />
             <Enabled>true</Enabled>
-            <Id>99d48be6-6570-465d-bc29-0793ea47233f</Id>
+            <Id>1BC1B0C4-1E41-9146-82CF-599181CE4440</Id>
             <Name>Entity Framework Context (v6)</Name>
             <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
             <HierarchyType>Item</HierarchyType>

@@ -5,6 +5,8 @@ using DotNetScaffolder.Core.Common.Validation;
 using DotNetScaffolder.Mapping.MetaData.Application;
 using DotNetScaffolder.Mapping.MetaData.Enum;
 using DotNetScaffolder.Mapping.MetaData.Project;
+using DotNetScaffolder.Mapping.MetaData.Project.Packages;
+using FormControls.Enum;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -51,15 +53,29 @@ namespace DotNetScaffolder.Mapping.ApplicationServices
             Logger.Trace($"Started Load() - Path: {this.FilePersistenceOptions.Path}");
             this.ApplicationSettings = ObjectXMLSerializer<ApplicationSettings>.Load(this.FilePersistenceOptions.Path);
 
+            string dataTypeName = string.Empty;
+            Guid dataTypeId = Guid.Empty;
+            bool sort = false;
+
             foreach (var dataType in ScaffoldConfig.DataTypes)
             {
-                var a = this.ApplicationSettings.DataTypes;
-                //items.Add(
-                //    new ComboboxItem
-                //    {
-                //        Text = (string)dataType.Metadata["TypeMetaData"],
-                //        Value = new Guid(dataType.Metadata["TypeIdMetaData"].ToString())
-                //    });
+                dataTypeName = (string)dataType.Metadata["NameMetaData"];
+                dataTypeId = new Guid(dataType.Metadata["ValueMetaData"].ToString()); 
+                if (!this.ApplicationSettings.Templates[0].Children.Any(t => t.Id == dataTypeId))
+                {
+                    this.ApplicationSettings.Templates[0].Children.Add(new Template {
+                        Id = dataTypeId,
+                        Name = dataTypeName,
+                        HierarchyType = HierarchyType.Group,
+                        Version = 1,
+                        Enabled = true
+                    });
+                    sort = true;
+                }
+                if (sort)
+                {
+                    this.ApplicationSettings.Templates[0].Children = this.ApplicationSettings.Templates[0].Children.OrderBy(t => t.Name).ToList();
+                }
             }
 
             Logger.Trace($"Completed Load() - Path: {this.FilePersistenceOptions.Path}");
