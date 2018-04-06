@@ -4,6 +4,7 @@ using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using DotNetScaffolder.Components.Common.Contract;
 
 namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
@@ -17,6 +18,12 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
         public RepositoryDataType()
         {
 
+        }
+
+        public TreeNode ReturnNavigation()
+        {
+            TreeNode result = new TreeNode { Text = "Repository" };
+            return result;
         }
     }
 }

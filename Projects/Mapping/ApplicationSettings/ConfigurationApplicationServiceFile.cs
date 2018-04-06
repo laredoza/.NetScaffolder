@@ -1,5 +1,6 @@
 ﻿using Common.Logging;
 using Configuration;
+using DotNetScaffolder.Components.Common.Contract;
 using DotNetScaffolder.Core.Common.Serializer;
 using DotNetScaffolder.Core.Common.Validation;
 using DotNetScaffolder.Mapping.MetaData.Application;
@@ -16,9 +17,9 @@ using System.Xml.Serialization;
 
 namespace DotNetScaffolder.Mapping.ApplicationServices
 {
-    public class ConfigurationAplicationServiceFile : IConfigurationAplicationService
+    public class ConfigurationApplicationServiceFile : IConfigurationApplicationService
     {
-        public ConfigurationAplicationServiceFile()
+        public ConfigurationApplicationServiceFile()
         {
             Logger.Trace($"Started ConfigurationAplicationServiceFile()");
             this.ApplicationSettings = new ApplicationSettings();
@@ -56,11 +57,14 @@ namespace DotNetScaffolder.Mapping.ApplicationServices
             string dataTypeName = string.Empty;
             Guid dataTypeId = Guid.Empty;
             bool sort = false;
-
+            IDataType dataTypeInterface;
+            
             foreach (var dataType in ScaffoldConfig.DataTypes)
             {
                 dataTypeName = (string)dataType.Metadata["NameMetaData"];
-                dataTypeId = new Guid(dataType.Metadata["ValueMetaData"].ToString()); 
+                dataTypeId = new Guid(dataType.Metadata["ValueMetaData"].ToString());
+                dataTypeInterface = dataType.Value;
+
                 if (!this.ApplicationSettings.Templates[0].Children.Any(t => t.Id == dataTypeId))
                 {
                     this.ApplicationSettings.Templates[0].Children.Add(new Template {
@@ -72,6 +76,11 @@ namespace DotNetScaffolder.Mapping.ApplicationServices
                     });
                     sort = true;
                 }
+                else
+                {
+                    var a = dataType; 
+                }
+
                 if (sort)
                 {
                     this.ApplicationSettings.Templates[0].Children = this.ApplicationSettings.Templates[0].Children.OrderBy(t => t.Name).ToList();

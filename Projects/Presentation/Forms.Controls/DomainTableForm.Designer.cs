@@ -63,18 +63,6 @@
             treeNode16});
             System.Windows.Forms.TreeNode treeNode18 = new System.Windows.Forms.TreeNode("Tables", new System.Windows.Forms.TreeNode[] {
             treeNode17});
-            System.Windows.Forms.TreeNode treeNode19 = new System.Windows.Forms.TreeNode("Users");
-            System.Windows.Forms.TreeNode treeNode20 = new System.Windows.Forms.TreeNode("Roles");
-            System.Windows.Forms.TreeNode treeNode21 = new System.Windows.Forms.TreeNode("UserRoles");
-            System.Windows.Forms.TreeNode treeNode22 = new System.Windows.Forms.TreeNode("SecurityModel", new System.Windows.Forms.TreeNode[] {
-            treeNode19,
-            treeNode20,
-            treeNode21});
-            System.Windows.Forms.TreeNode treeNode23 = new System.Windows.Forms.TreeNode("Context Definition", new System.Windows.Forms.TreeNode[] {
-            treeNode22});
-            System.Windows.Forms.TreeNode treeNode24 = new System.Windows.Forms.TreeNode("Entity Definition");
-            System.Windows.Forms.TreeNode treeNode25 = new System.Windows.Forms.TreeNode("Unit of Work Definition");
-            System.Windows.Forms.TreeNode treeNode26 = new System.Windows.Forms.TreeNode("Repository Definition");
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.tabControl1 = new System.Windows.Forms.TabControl();
@@ -233,28 +221,8 @@
             treeNode17.Text = "Security";
             treeNode18.Name = "Node0";
             treeNode18.Text = "Tables";
-            treeNode19.Name = "Node13";
-            treeNode19.Text = "Users";
-            treeNode20.Name = "Node14";
-            treeNode20.Text = "Roles";
-            treeNode21.Name = "Node15";
-            treeNode21.Text = "UserRoles";
-            treeNode22.Name = "Node12";
-            treeNode22.Text = "SecurityModel";
-            treeNode23.Name = "Node11";
-            treeNode23.Text = "Context Definition";
-            treeNode24.Name = "Node0";
-            treeNode24.Text = "Entity Definition";
-            treeNode25.Name = "Node1";
-            treeNode25.Text = "Unit of Work Definition";
-            treeNode26.Name = "Node2";
-            treeNode26.Text = "Repository Definition";
             this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode18,
-            treeNode23,
-            treeNode24,
-            treeNode25,
-            treeNode26});
+            treeNode18});
             this.treeView1.Size = new System.Drawing.Size(272, 452);
             this.treeView1.TabIndex = 2;
             // 

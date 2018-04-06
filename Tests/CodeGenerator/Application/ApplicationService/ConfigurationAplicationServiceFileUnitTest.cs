@@ -18,7 +18,7 @@ namespace DotNetScaffolder.Test.Application.ApplicationService
         {
             FilePersistenceOptions options = new FilePersistenceOptions { Path = "Config.xml" };
 
-            IConfigurationAplicationService applicationService = new ConfigurationAplicationServiceFile
+            IConfigurationApplicationService applicationService = new ConfigurationApplicationServiceFile
             {
                 FilePersistenceOptions = options
             };

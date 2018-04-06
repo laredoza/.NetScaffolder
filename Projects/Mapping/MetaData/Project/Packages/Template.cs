@@ -100,6 +100,8 @@ namespace DotNetScaffolder.Mapping.MetaData.Project.Packages
         /// </summary>
         public double Version { get; set; }
 
+        [XmlIgnore]
+        public IDataType Interface { get; set; }
         #endregion
 
         #region Public methods and operators

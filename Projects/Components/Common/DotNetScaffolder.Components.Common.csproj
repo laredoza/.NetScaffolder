@@ -43,6 +43,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -59,12 +60,6 @@
     <Compile Include="Contract\IOutputGenerator.cs" />
     <Compile Include="Contract\ISourceType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Mapping\MetaData\DotNetScaffolder.Mapping.MetaData.csproj">
-      <Project>{3f206474-14c2-4586-b57a-4edc76795161}</Project>
-      <Name>DotNetScaffolder.Mapping.MetaData</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

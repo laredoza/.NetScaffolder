@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DotNetScaffolder.Mapping.ApplicationServices
 {
-    public interface IConfigurationAplicationService : IValidate
+    public interface IConfigurationApplicationService : IValidate
     {
         ApplicationSettings ApplicationSettings { get; set; }
 

@@ -137,6 +137,12 @@ namespace DotNetScaffolder.Components.Common
 
             // Fill the imports of this object
             container.ComposeParts(this);
+            //foreach (var item in this.DataTypes)
+            //{
+            //    IDataType test = item.Value;
+            //    var a = test.ReturnNavigation();
+            //}
+
             Logger.Info($"Completed DoImport() - {importfolder}");
         }
 

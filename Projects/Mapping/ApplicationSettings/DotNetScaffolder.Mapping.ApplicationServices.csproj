@@ -48,8 +48,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConfigurationAplicationServiceFile.cs" />
-    <Compile Include="IConfigurationAplicationService.cs" />
+    <Compile Include="ConfigurationApplicationServiceFile.cs" />
+    <Compile Include="IConfigurationApplicationService.cs" />
     <Compile Include="IProjectDefinitionApplicationService.cs" />
     <Compile Include="ProjectDefinitionApplicationServiceFile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

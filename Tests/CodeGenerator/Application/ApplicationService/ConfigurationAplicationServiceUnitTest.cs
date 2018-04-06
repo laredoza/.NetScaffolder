@@ -21,7 +21,7 @@ namespace DotNetScaffolder.Test.Application.ApplicationService
         /// <param name="projectDefinition">
         /// The project definition.
         /// </param>
-        protected void CreateTestValues(IConfigurationAplicationService applicationService)
+        protected void CreateTestValues(IConfigurationApplicationService applicationService)
         {
             List<DataType> dataTypes = new List<DataType>();
             dataTypes.Add(new DataType { Id = Guid.NewGuid(), Name = "Context" });
@@ -47,7 +47,7 @@ namespace DotNetScaffolder.Test.Application.ApplicationService
             applicationService.ApplicationSettings.Templates.Add(template);
         }
 
-        protected void TestProjectDefinition(IConfigurationAplicationService applicationService)
+        protected void TestProjectDefinition(IConfigurationApplicationService applicationService)
         {
             Assert.IsNotNull(applicationService.ApplicationSettings.DataTypes, "DataTypes should not be empty");
             Assert.AreEqual(5, applicationService.ApplicationSettings.DataTypes.Count, "There should be 5 DataTypes");

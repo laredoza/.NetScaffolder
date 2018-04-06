@@ -39,12 +39,12 @@ namespace DotNetScaffolder.Presentation.Forms
         /// </summary>
         private readonly IProjectDefinitionApplicationService applicationService;
 
-        private IConfigurationAplicationService applicationConfiguration;
+        private IConfigurationApplicationService applicationConfiguration;
 
         /// <summary>
         /// The configuration service.
         /// </summary>
-        private IConfigurationAplicationService configurationService;
+        private IConfigurationApplicationService configurationService;
 
         #endregion
 
@@ -63,7 +63,7 @@ namespace DotNetScaffolder.Presentation.Forms
             this.applicationService.Load();
 
             FilePersistenceOptions configOptions = new FilePersistenceOptions { Path = @"Config\Settings.xml" };
-            applicationConfiguration = new ConfigurationAplicationServiceFile
+            applicationConfiguration = new ConfigurationApplicationServiceFile
                                                                            {
                                                                                FilePersistenceOptions = configOptions
                                                                            };
