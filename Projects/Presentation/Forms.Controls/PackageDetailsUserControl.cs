@@ -104,7 +104,10 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
 
                         foreach (Template currentTemplate in currentTemplates)
                         {
-                            this.availableTemplates.Remove(this.availableTemplates.First(t => t.Id == currentTemplate.Id));
+                            if (this.availableTemplates.Any(t => t.Id == currentTemplate.Id))
+                            {
+                                this.availableTemplates.Remove(this.availableTemplates.First(t => t.Id == currentTemplate.Id));
+                            }
                         }
                     }
 
