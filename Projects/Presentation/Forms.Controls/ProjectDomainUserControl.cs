@@ -233,11 +233,11 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
                 && this.DomainsListBox.SelectedItem != null)
             {
                 SelectedEventArgs eventArgs = new SelectedEventArgs
-                                                  {
-                                                      Id =
+                {
+                    Id =
                                                           (this.DomainsListBox.SelectedItem as
                                                            DomainDefinition).Id
-                                                  };
+                };
                 this.OnSelectedIndexChanged(eventArgs);
             }
 
@@ -272,9 +272,13 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
 
         private void BtnTables_Click(object sender, EventArgs e)
         {
-            //Todo: Remove, just for planning overview
             DomainTableForm domainTableform = new DomainTableForm();
-            domainTableform.ShowDialog();
+
+            if (this.DomainsListBox.SelectedItem != null)
+            {
+                domainTableform.DataSource = this.DomainsListBox.SelectedItem as DomainDefinition;
+                domainTableform.ShowDialog();
+            }
         }
     }
 }

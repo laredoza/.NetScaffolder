@@ -346,7 +346,6 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Field";
             this.tabPage1.UseVisualStyleBackColor = true;
-            this.tabPage1.Click += new System.EventHandler(this.tabPage1_Click);
             // 
             // textBox8
             // 
@@ -403,7 +402,6 @@
             this.textBox3.Size = new System.Drawing.Size(180, 26);
             this.textBox3.TabIndex = 30;
             this.textBox3.Text = "0";
-            this.textBox3.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
             // 
             // label12
             // 
@@ -414,7 +412,6 @@
             this.label12.Size = new System.Drawing.Size(53, 20);
             this.label12.TabIndex = 29;
             this.label12.Text = "Scale:";
-            this.label12.Click += new System.EventHandler(this.label12_Click);
             // 
             // textBox2
             // 
@@ -586,7 +583,6 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Context";
             this.tabPage2.UseVisualStyleBackColor = true;
-            this.tabPage2.Click += new System.EventHandler(this.tabPage2_Click);
             // 
             // checkBox9
             // 
@@ -752,7 +748,6 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Entity";
             this.tabPage3.UseVisualStyleBackColor = true;
-            this.tabPage3.Click += new System.EventHandler(this.tabPage3_Click);
             // 
             // checkBox14
             // 
@@ -989,7 +984,6 @@
             this.tabPage6.TabIndex = 5;
             this.tabPage6.Text = "Relationships";
             this.tabPage6.UseVisualStyleBackColor = true;
-            this.tabPage6.Click += new System.EventHandler(this.tabPage6_Click);
             // 
             // comboBox6
             // 

@@ -41,11 +41,6 @@ namespace DotNetScaffolder.Presentation.Forms
 
         private IConfigurationApplicationService applicationConfiguration;
 
-        /// <summary>
-        /// The configuration service.
-        /// </summary>
-        private IConfigurationApplicationService configurationService;
-
         #endregion
 
         #region Constructors and Destructors
