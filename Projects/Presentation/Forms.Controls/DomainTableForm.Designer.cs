@@ -28,45 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Id");
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Name");
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Surname");
-            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("User");
-            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Password");
-            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Columns", new System.Windows.Forms.TreeNode[] {
-            treeNode1,
-            treeNode2,
-            treeNode3,
-            treeNode4,
-            treeNode5});
-            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Relationships");
-            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Users", new System.Windows.Forms.TreeNode[] {
-            treeNode6,
-            treeNode7});
-            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("RoleName");
-            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Columns", new System.Windows.Forms.TreeNode[] {
-            treeNode9});
-            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("Relationships");
-            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("Roles", new System.Windows.Forms.TreeNode[] {
-            treeNode10,
-            treeNode11});
-            System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("UserId");
-            System.Windows.Forms.TreeNode treeNode14 = new System.Windows.Forms.TreeNode("RoleName");
-            System.Windows.Forms.TreeNode treeNode15 = new System.Windows.Forms.TreeNode("Columns", new System.Windows.Forms.TreeNode[] {
-            treeNode13,
-            treeNode14});
-            System.Windows.Forms.TreeNode treeNode16 = new System.Windows.Forms.TreeNode("UserRole", new System.Windows.Forms.TreeNode[] {
-            treeNode15});
-            System.Windows.Forms.TreeNode treeNode17 = new System.Windows.Forms.TreeNode("Security", new System.Windows.Forms.TreeNode[] {
-            treeNode8,
-            treeNode12,
-            treeNode16});
-            System.Windows.Forms.TreeNode treeNode18 = new System.Windows.Forms.TreeNode("Tables", new System.Windows.Forms.TreeNode[] {
-            treeNode17});
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.DomainTreeView = new System.Windows.Forms.TreeView();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.manageCollectionsTreeViewUserControl1 = new DotNetScaffolder.Presentation.Forms.Controls.ManageCollectionsTreeViewUserControl();
             this.textBox6 = new System.Windows.Forms.TextBox();
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.textBox4 = new System.Windows.Forms.TextBox();
@@ -153,6 +118,7 @@
             this.label33 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.domainMenuUserControl1 = new DotNetScaffolder.Presentation.Forms.Controls.DomainMenuUserControl();
             this.tableLayoutPanel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage5.SuspendLayout();
@@ -170,8 +136,8 @@
             this.tableLayoutPanel1.ColumnCount = 2;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 1172F));
-            this.tableLayoutPanel1.Controls.Add(this.DomainTreeView, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.tabControl1, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.domainMenuUserControl1, 0, 0);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -180,53 +146,6 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 705F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1588, 705);
             this.tableLayoutPanel1.TabIndex = 1;
-            // 
-            // DomainTreeView
-            // 
-            this.DomainTreeView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.DomainTreeView.Location = new System.Drawing.Point(4, 5);
-            this.DomainTreeView.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.DomainTreeView.Name = "DomainTreeView";
-            treeNode1.Name = "Node0";
-            treeNode1.Text = "Id";
-            treeNode2.Name = "Node1";
-            treeNode2.Text = "Name";
-            treeNode3.Name = "Node2";
-            treeNode3.Text = "Surname";
-            treeNode4.Name = "Node4";
-            treeNode4.Text = "User";
-            treeNode5.Name = "Node5";
-            treeNode5.Text = "Password";
-            treeNode6.Name = "Node0";
-            treeNode6.Text = "Columns";
-            treeNode7.Name = "Node1";
-            treeNode7.Text = "Relationships";
-            treeNode8.Name = "Node2";
-            treeNode8.Text = "Users";
-            treeNode9.Name = "Node5";
-            treeNode9.Text = "RoleName";
-            treeNode10.Name = "Node3";
-            treeNode10.Text = "Columns";
-            treeNode11.Name = "Node4";
-            treeNode11.Text = "Relationships";
-            treeNode12.Name = "Node3";
-            treeNode12.Text = "Roles";
-            treeNode13.Name = "Node8";
-            treeNode13.Text = "UserId";
-            treeNode14.Name = "Node9";
-            treeNode14.Text = "RoleName";
-            treeNode15.Name = "Node7";
-            treeNode15.Text = "Columns";
-            treeNode16.Name = "Node6";
-            treeNode16.Text = "UserRole";
-            treeNode17.Name = "Node1";
-            treeNode17.Text = "Security";
-            treeNode18.Name = "Node0";
-            treeNode18.Text = "Tables";
-            this.DomainTreeView.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode18});
-            this.DomainTreeView.Size = new System.Drawing.Size(408, 695);
-            this.DomainTreeView.TabIndex = 2;
             // 
             // tabControl1
             // 
@@ -246,6 +165,7 @@
             // 
             // tabPage5
             // 
+            this.tabPage5.Controls.Add(this.manageCollectionsTreeViewUserControl1);
             this.tabPage5.Controls.Add(this.textBox6);
             this.tabPage5.Controls.Add(this.textBox5);
             this.tabPage5.Controls.Add(this.textBox4);
@@ -260,6 +180,23 @@
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "Table Collection";
             this.tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // manageCollectionsTreeViewUserControl1
+            // 
+            this.manageCollectionsTreeViewUserControl1.AfterSelect = null;
+            this.manageCollectionsTreeViewUserControl1.BeforeSelect = null;
+            this.manageCollectionsTreeViewUserControl1.BtnAddGroupClick = null;
+            this.manageCollectionsTreeViewUserControl1.BtnAddItemClick = null;
+            this.manageCollectionsTreeViewUserControl1.BtnDeleteClick = null;
+            this.manageCollectionsTreeViewUserControl1.BtnDownClick = null;
+            this.manageCollectionsTreeViewUserControl1.BtnUpClick = null;
+            this.manageCollectionsTreeViewUserControl1.CollectionType = DotNetScaffolder.Presentation.Forms.Controls.Enum.TreeViewType.Package;
+            this.manageCollectionsTreeViewUserControl1.DataSource = null;
+            this.manageCollectionsTreeViewUserControl1.Location = new System.Drawing.Point(624, 221);
+            this.manageCollectionsTreeViewUserControl1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.manageCollectionsTreeViewUserControl1.Name = "manageCollectionsTreeViewUserControl1";
+            this.manageCollectionsTreeViewUserControl1.Size = new System.Drawing.Size(546, 566);
+            this.manageCollectionsTreeViewUserControl1.TabIndex = 6;
             // 
             // textBox6
             // 
@@ -1213,6 +1150,14 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // domainMenuUserControl1
+            // 
+            this.domainMenuUserControl1.DataSource = null;
+            this.domainMenuUserControl1.Location = new System.Drawing.Point(3, 3);
+            this.domainMenuUserControl1.Name = "domainMenuUserControl1";
+            this.domainMenuUserControl1.Size = new System.Drawing.Size(410, 699);
+            this.domainMenuUserControl1.TabIndex = 6;
+            // 
             // DomainTableForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -1249,7 +1194,6 @@
         #endregion
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.TreeView DomainTreeView;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
@@ -1338,5 +1282,7 @@
         private System.Windows.Forms.Label label32;
         private System.Windows.Forms.TextBox textBox17;
         private System.Windows.Forms.Label label33;
+        private ManageCollectionsTreeViewUserControl manageCollectionsTreeViewUserControl1;
+        private DomainMenuUserControl domainMenuUserControl1;
     }
 }

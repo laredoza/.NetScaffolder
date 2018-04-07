@@ -1,0 +1,75 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using DotNetScaffolder.Mapping.MetaData.Domain;
+using Common.Logging;
+
+namespace DotNetScaffolder.Presentation.Forms.Controls
+{
+    public partial class DomainMenuUserControl : UserControl
+    {
+        /// <summary>
+        ///     The logger.
+        /// </summary>
+        private static readonly ILog Logger = LogManager.GetLogger(string.Empty);
+
+        private DomainDefinition dataSource;
+
+        /// <summary>
+        ///     Gets or sets the data source.
+        /// </summary>
+        public DomainDefinition DataSource
+        {
+            get
+            {
+                return dataSource;
+            }
+            set
+            {
+                if (dataSource != value)
+                {
+                    dataSource = value;
+                }
+            }
+        }
+
+        public DomainMenuUserControl()
+        {
+            InitializeComponent();
+        }
+
+        /// <summary>
+        /// The update data source.
+        /// </summary>
+        public void UpdateDataSource()
+        {
+            Logger.Trace("Started UpdateDataSource()");
+
+            if (this.DataSource != null)
+            {
+                //this.TextBoxOutputFolderName.Text = this.Project.OutputFolder;
+                //this.TextBoxBaseNamespace.Text = this.Project.BaseNameSpace;
+                //this.ComboBoxGroupBy.SelectedIndex = this.Project.GroupBy.GetHashCode();
+
+                foreach (var template in this.DataSource.Package.Children)
+                {
+
+                }
+            }
+            else
+            {
+                Logger.Trace("Data Source not updated as project is null ");
+            }
+
+            Logger.Trace("Completed UpdateDataSource()");
+        }
+    }
+
+    
+}

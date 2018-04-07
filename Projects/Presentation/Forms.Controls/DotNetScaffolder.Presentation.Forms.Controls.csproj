@@ -53,6 +53,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DomainMenuUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DomainMenuUserControl.Designer.cs">
+      <DependentUpon>DomainMenuUserControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="DomainTableForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -118,6 +124,9 @@
     <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="DomainMenuUserControl.resx">
+      <DependentUpon>DomainMenuUserControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DomainTableForm.resx">
       <DependentUpon>DomainTableForm.cs</DependentUpon>
     </EmbeddedResource>
