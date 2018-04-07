@@ -43,7 +43,6 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -65,6 +64,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Core\Forms\FormControls\FormControls.csproj">
+      <Project>{6a2e8779-4539-46d1-b3a0-1c3b205a95ab}</Project>
+      <Name>FormControls</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Mapping\MetaData\DotNetScaffolder.Mapping.MetaData.csproj">
       <Project>{3f206474-14c2-4586-b57a-4edc76795161}</Project>
       <Name>DotNetScaffolder.Mapping.MetaData</Name>

@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DotNetScaffolder.Components.Common.Contract;
+using FormControls.TreeView;
 
 namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
 {
@@ -20,10 +21,9 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
 
         }
 
-        public TreeNode ReturnNavigation()
+        public IHierarchy ReturnNavigation()
         {
-            TreeNode result = new TreeNode { Text = "Repository" };
-            return result;
+            return new Hierarchy { Id = new Guid("1BC1B0C4-1E41-9146-82CF-599181CE4450"), Name = "Repository" };
         }
     }
 }
