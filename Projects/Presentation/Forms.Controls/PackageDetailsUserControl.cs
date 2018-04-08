@@ -454,5 +454,10 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
             this.UpdateDataSource();
             this.ComboBoxSearch.Text = string.Empty;
         }
+
+        private void ComboBoxSearch_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
