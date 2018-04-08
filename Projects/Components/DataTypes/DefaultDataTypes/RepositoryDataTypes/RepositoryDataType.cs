@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DotNetScaffolder.Components.Common.Contract;
 using FormControls.TreeView;
+using DotNetScaffolder.Components.DataTypes.DefaultDataTypes.RepositoryDataTypes;
 
 namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
 {
     [Export(typeof(IDataType))]
     [ExportMetadata("NameMetaData", "Repository")]
     [ExportMetadata("ValueMetaData", "1BC1B0C4-1E41-9146-82CF-599181CE4450")]
-
     public class RepositoryDataType : IDataType
     {
         public RepositoryDataType()
@@ -23,8 +23,13 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
 
         public object AddConfigUI(object parameters)
         {
-            ////throw new NotImplementedException();
-            return string.Empty;
+            Control parent = parameters as Control;
+            RepositoryUserControl newControl = new RepositoryUserControl();
+            newControl.Visible = true;
+            newControl.Dock = DockStyle.Fill;
+            newControl.BringToFront();
+            parent.Controls.Add(newControl);
+            return newControl;
         }
 
         public IHierarchy ReturnNavigation()

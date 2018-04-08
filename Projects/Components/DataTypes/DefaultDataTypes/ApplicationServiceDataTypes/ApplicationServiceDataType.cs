@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DotNetScaffolder.Components.Common.Contract;
 using FormControls.TreeView;
+using DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ApplicationServiceDataTypes;
 
 namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
 {
@@ -23,8 +24,13 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
 
         public object AddConfigUI(object parameters)
         {
-            ////throw new NotImplementedException();
-            return string.Empty;
+            Control parent = parameters as Control;
+            ApplicationServiceUserControl newControl = new ApplicationServiceUserControl();
+            newControl.Visible = true;
+            newControl.Dock = DockStyle.Fill;
+            newControl.BringToFront();
+            parent.Controls.Add(newControl);
+            return newControl;
         }
 
         public IHierarchy ReturnNavigation()
