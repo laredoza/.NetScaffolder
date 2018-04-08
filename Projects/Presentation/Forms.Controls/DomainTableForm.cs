@@ -27,6 +27,7 @@
                 if (dataSource != value)
                 {
                     dataSource = value;
+                    this.domainMenuUserControl1.ParentConfigControl = this.PanelConfig;
                     this.domainMenuUserControl1.DataSource = dataSource;
                 }
             }
@@ -36,12 +37,23 @@
         public DomainTableForm()
         {
             this.InitializeComponent();
+            
         }
 
         private void button2_Click(object sender, System.EventArgs e)
         {
             UpdateTablesFromSourceForm tables = new UpdateTablesFromSourceForm();
             tables.ShowDialog();
+        }
+
+        private void PanelConfig_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, System.EventArgs e)
+        {
+
         }
     }
 }

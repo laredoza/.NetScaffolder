@@ -112,6 +112,8 @@
             treeNode18});
             this.DomainTreeView.Size = new System.Drawing.Size(575, 781);
             this.DomainTreeView.TabIndex = 3;
+            this.DomainTreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.DomainTreeView_AfterSelect);
+            this.DomainTreeView.Click += new System.EventHandler(this.DomainTreeView_Click);
             // 
             // DomainMenuUserControl
             // 

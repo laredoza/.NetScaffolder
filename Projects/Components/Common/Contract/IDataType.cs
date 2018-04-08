@@ -10,5 +10,6 @@ namespace DotNetScaffolder.Components.Common.Contract
     public interface IDataType
     {
         IHierarchy ReturnNavigation();
+        object AddConfigUI(object parameters);
     }
 }
