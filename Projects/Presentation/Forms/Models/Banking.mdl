@@ -19,7 +19,7 @@
         <Name>Entity Framework 6 (Repository)</Name>
         <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
         <HierarchyType>Item</HierarchyType>
-        <Version>0</Version>
+        <Version>1</Version>
         <Templates>
           <Template>
             <Children />
@@ -66,7 +66,7 @@
   <GroupBy>Layer</GroupBy>
   <ModelPath>Banking.mdl</ModelPath>
   <OutputFolder>Models</OutputFolder>
-  <Version>0.1</Version>
+  <Version>1</Version>
   <CollectionOptions>
     <CollectionOption>
       <Name>ICollectionAndHashSet</Name>

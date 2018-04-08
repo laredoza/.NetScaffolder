@@ -105,11 +105,11 @@ namespace DotNetScaffolder.Presentation.Forms
         /// </param>
         private void button6_Click(object sender, EventArgs e)
         {
-            if (this.ProjectDetailsUserControl1.Validation() == 0)
-            {
-                // Save
-                this.applicationService.Save();
-            }
+            //if (this.ProjectDetailsUserControl1.Validation() == 0)
+            //{
+            //    // Save
+            //    this.applicationService.Save();
+            //}
 
             if (this.TemplateManagementUserControl1.Validation() == 0)
             {

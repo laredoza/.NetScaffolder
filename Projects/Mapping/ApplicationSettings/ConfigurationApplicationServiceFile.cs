@@ -65,7 +65,7 @@ namespace DotNetScaffolder.Mapping.ApplicationServices
                 dataTypeId = new Guid(dataType.Metadata["ValueMetaData"].ToString());
                 dataTypeInterface = dataType.Value;
 
-                if (!this.ApplicationSettings.Templates[0].Children.Any(t => t.Id == dataTypeId))
+                if (!this.ApplicationSettings.Templates[0].Children.Any(t => t.Id.ToString().ToLower() == dataTypeId.ToString().ToLower()))
                 {
                     this.ApplicationSettings.Templates[0].Children.Add(new Template {
                         Id = dataTypeId,
@@ -80,11 +80,11 @@ namespace DotNetScaffolder.Mapping.ApplicationServices
                 {
                     var a = dataType; 
                 }
+            }
 
-                if (sort)
-                {
-                    this.ApplicationSettings.Templates[0].Children = this.ApplicationSettings.Templates[0].Children.OrderBy(t => t.Name).ToList();
-                }
+            if (sort)
+            {
+                this.ApplicationSettings.Templates[0].Children = this.ApplicationSettings.Templates[0].Children.OrderBy(t => t.Name).ToList();
             }
 
             Logger.Trace($"Completed Load() - Path: {this.FilePersistenceOptions.Path}");
