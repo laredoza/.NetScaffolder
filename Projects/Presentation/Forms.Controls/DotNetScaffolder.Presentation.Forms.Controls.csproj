@@ -103,12 +103,6 @@
     <Compile Include="PackageDetailsUserControl.Designer.cs">
       <DependentUpon>PackageDetailsUserControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Temp.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Temp.Designer.cs">
-      <DependentUpon>Temp.cs</DependentUpon>
-    </Compile>
     <Compile Include="TemplateDetailsUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -153,9 +147,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PackageDetailsUserControl.resx">
       <DependentUpon>PackageDetailsUserControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Temp.resx">
-      <DependentUpon>Temp.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TemplateDetailsUserControl.resx">
       <DependentUpon>TemplateDetailsUserControl.cs</DependentUpon>

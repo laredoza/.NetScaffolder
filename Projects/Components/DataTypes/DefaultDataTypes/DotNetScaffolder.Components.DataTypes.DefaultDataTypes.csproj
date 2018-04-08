@@ -76,6 +76,25 @@
     <Compile Include="RepositoryDataTypes\RepositoryUserControl.Designer.cs">
       <DependentUpon>RepositoryUserControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="TableDataTypes\FieldUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TableDataTypes\FieldUserControl.Designer.cs">
+      <DependentUpon>FieldUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TableDataTypes\RelationshipUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TableDataTypes\RelationshipUserControl.Designer.cs">
+      <DependentUpon>RelationshipUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TableDataTypes\TableDataType.cs" />
+    <Compile Include="TableDataTypes\TableUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TableDataTypes\TableUserControl.Designer.cs">
+      <DependentUpon>TableUserControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="UnitOfWorkDataTypes\UnitOfWorkDataType.cs" />
     <Compile Include="UnitOfWorkDataTypes\UnitOfWorkUserControl.cs">
       <SubType>UserControl</SubType>
@@ -118,6 +137,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="RepositoryDataTypes\RepositoryUserControl.resx">
       <DependentUpon>RepositoryUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TableDataTypes\FieldUserControl.resx">
+      <DependentUpon>FieldUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TableDataTypes\RelationshipUserControl.resx">
+      <DependentUpon>RelationshipUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TableDataTypes\TableUserControl.resx">
+      <DependentUpon>TableUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UnitOfWorkDataTypes\UnitOfWorkUserControl.resx">
       <DependentUpon>UnitOfWorkUserControl.cs</DependentUpon>
