@@ -96,11 +96,26 @@
                       <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
                       <HierarchyType>Item</HierarchyType>
                       <ConfigLocation>Data</ConfigLocation>
-                      <DataType>1BC1B0C4-1E41-9146-82CF-599181CE4450</DataType>
+                      <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4450</DataType>
                       <DefaultSettings />
                       <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
                       <LanguageOutputId>1bc1b0c4-1e41-9146-82cf-599181ce4410</LanguageOutputId>
                       <TemplatePath>Repository.T4</TemplatePath>
+                      <Version>1</Version>
+                    </Template>
+                    <Template>
+                      <Children />
+                      <Enabled>true</Enabled>
+                      <Id>a832889d-7f9a-42fa-ad6b-38d184828dba</Id>
+                      <Name>Default Table</Name>
+                      <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
+                      <HierarchyType>Item</HierarchyType>
+                      <ConfigLocation>Data</ConfigLocation>
+                      <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4490</DataType>
+                      <DefaultSettings />
+                      <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
+                      <LanguageOutputId>1bc1b0c4-1e41-9146-82cf-599181ce4410</LanguageOutputId>
+                      <TemplatePath>Table.T4</TemplatePath>
                       <Version>1</Version>
                     </Template>
                   </Templates>
@@ -291,7 +306,7 @@
               <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
               <HierarchyType>Item</HierarchyType>
               <ConfigLocation>Data</ConfigLocation>
-              <DataType>1BC1B0C4-1E41-9146-82CF-599181CE4450</DataType>
+              <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4450</DataType>
               <DefaultSettings />
               <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
               <LanguageOutputId>1bc1b0c4-1e41-9146-82cf-599181ce4410</LanguageOutputId>
@@ -305,7 +320,7 @@
           <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
           <HierarchyType>Group</HierarchyType>
           <ConfigLocation>Data</ConfigLocation>
-          <DataType>1BC1B0C4-1E41-9146-82CF-599181CE4450</DataType>
+          <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4450</DataType>
           <DefaultSettings />
           <GeneratorTypeId>00000000-0000-0000-0000-000000000000</GeneratorTypeId>
           <LanguageOutputId>00000000-0000-0000-0000-000000000000</LanguageOutputId>
@@ -322,7 +337,7 @@
               <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
               <HierarchyType>Item</HierarchyType>
               <ConfigLocation>Data</ConfigLocation>
-              <DataType>1BC1B0C4-1E41-9146-82CF-599181CE4490</DataType>
+              <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4490</DataType>
               <DefaultSettings />
               <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
               <LanguageOutputId>1bc1b0c4-1e41-9146-82cf-599181ce4410</LanguageOutputId>
@@ -336,7 +351,7 @@
           <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
           <HierarchyType>Group</HierarchyType>
           <ConfigLocation>Data</ConfigLocation>
-          <DataType>1BC1B0C4-1E41-9146-82CF-599181CE4490</DataType>
+          <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4490</DataType>
           <DefaultSettings />
           <GeneratorTypeId>00000000-0000-0000-0000-000000000000</GeneratorTypeId>
           <LanguageOutputId>00000000-0000-0000-0000-000000000000</LanguageOutputId>
@@ -353,7 +368,7 @@
               <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
               <HierarchyType>Item</HierarchyType>
               <ConfigLocation>Data</ConfigLocation>
-              <DataType>1BC1B0C4-1E41-9146-82CF-599181CE4480</DataType>
+              <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4480</DataType>
               <DefaultSettings />
               <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
               <LanguageOutputId>1bc1b0c4-1e41-9146-82cf-599181ce4410</LanguageOutputId>
@@ -367,7 +382,7 @@
           <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
           <HierarchyType>Group</HierarchyType>
           <ConfigLocation>Data</ConfigLocation>
-          <DataType>1BC1B0C4-1E41-9146-82CF-599181CE4480</DataType>
+          <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4480</DataType>
           <DefaultSettings />
           <GeneratorTypeId>00000000-0000-0000-0000-000000000000</GeneratorTypeId>
           <LanguageOutputId>00000000-0000-0000-0000-000000000000</LanguageOutputId>
