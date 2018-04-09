@@ -10,6 +10,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
 
     using DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes;
     using DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources;
+    using DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.Edmxs;
     using DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.SourceOptions;
     using DotNetScaffolder.Mapping.MetaData.Model;
 

@@ -13,6 +13,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
     using DotNetScaffolder.Mapping.MetaData.Enum;
     using DotNetScaffolder.Mapping.MetaData.Model;
     using System.ComponentModel.Composition;
+    using System.Windows.Forms;
 
     [Export(typeof(ISourceType))]
     [ExportMetadata("NameMetaData", "ADO.NET")]
@@ -138,6 +139,17 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
                 default:
                     throw new NotImplementedException($"Invalid data type {databaseType}");
             }
+        }
+
+        public object AddConfigUI(object parameters)
+        {
+            Control parent = parameters as Control;
+            AdoUserControl newControl = new AdoUserControl();
+            newControl.Visible = true;
+            newControl.Dock = DockStyle.Fill;
+            newControl.BringToFront();
+            parent.Controls.Add(newControl);
+            return newControl;
         }
 
         #endregion

@@ -7,7 +7,7 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
+namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.Edmxs
 {
     #region Using
 
@@ -15,7 +15,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
     using System.Collections.Generic;
     using System.ComponentModel.Composition;
     using System.Linq;
-
+    using System.Windows.Forms;
     using DotNetScaffolder.Components.Common.Contract;
     using DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.SourceOptions;
     using DotNetScaffolder.Mapping.MetaData.Enum;
@@ -118,6 +118,16 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
             }
         }
 
+        public object AddConfigUI(object parameters)
+        {
+            Control parent = parameters as Control;
+            EdmxUserControl newControl = new EdmxUserControl();
+            newControl.Visible = true;
+            newControl.Dock = DockStyle.Fill;
+            newControl.BringToFront();
+            parent.Controls.Add(newControl);
+            return newControl;
+        }
         #endregion
     }
 }

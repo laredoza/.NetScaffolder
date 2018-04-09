@@ -78,6 +78,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{38775862-E4B
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MVC", "MVC", "{8887BBF6-92E2-416A-BC3C-E9B7344863A0}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CollectionOptions", "CollectionOptions", "{7AE2C134-C4B2-447E-8524-CA02744A2A34}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetScaffolder.Components.CollectionOption", "Projects\Components\CollectionOptions\CollectionOption\DotNetScaffolder.Components.CollectionOption.csproj", "{B50A7E34-08C6-4D3D-A2B3-E3CE2086384A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -148,6 +152,10 @@ Global
 		{0AFFF1D6-5FE5-4FF8-84E8-59352E42E658}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0AFFF1D6-5FE5-4FF8-84E8-59352E42E658}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0AFFF1D6-5FE5-4FF8-84E8-59352E42E658}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B50A7E34-08C6-4D3D-A2B3-E3CE2086384A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B50A7E34-08C6-4D3D-A2B3-E3CE2086384A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B50A7E34-08C6-4D3D-A2B3-E3CE2086384A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B50A7E34-08C6-4D3D-A2B3-E3CE2086384A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -178,6 +186,8 @@ Global
 		{0AFFF1D6-5FE5-4FF8-84E8-59352E42E658} = {27FE13BD-77E2-4E09-8722-79A72EE332A3}
 		{38775862-E4B3-48E5-92B7-60BED9F99780} = {03AD56A8-7ED3-4D0D-809B-2D4EC7FA8577}
 		{8887BBF6-92E2-416A-BC3C-E9B7344863A0} = {38775862-E4B3-48E5-92B7-60BED9F99780}
+		{7AE2C134-C4B2-447E-8524-CA02744A2A34} = {97FA326E-B630-4FFC-A5E3-5F79B0773BF6}
+		{B50A7E34-08C6-4D3D-A2B3-E3CE2086384A} = {7AE2C134-C4B2-447E-8524-CA02744A2A34}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8C063C9C-8EFE-42DA-AE58-93472DC6F4C8}

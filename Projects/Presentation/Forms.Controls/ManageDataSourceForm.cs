@@ -55,6 +55,8 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
             if (this.DataSource != null)
             {
                 this.sourceType = ScaffoldConfig.ReturnSourceType(this.DataSource.SourceTypeId);
+                this.panel1.Controls.Clear();
+                this.sourceType.AddConfigUI(this.panel1);
             }
             else
             {

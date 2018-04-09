@@ -49,6 +49,7 @@ namespace DotNetScaffolder.Components.Common.Contract
         /// </returns>
         DomainDataType MapDatabaseTypeToCSharp(string databaseType);
 
+        object AddConfigUI(object parameters);
         #endregion
     }
 }
