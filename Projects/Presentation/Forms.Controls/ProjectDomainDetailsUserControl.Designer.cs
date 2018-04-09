@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.button5 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
             this.ComboBoxPackages = new System.Windows.Forms.ComboBox();
             this.label11 = new System.Windows.Forms.Label();
             this.ComboBoxDriverType = new System.Windows.Forms.ComboBox();
@@ -56,16 +55,6 @@
             this.button5.TabIndex = 48;
             this.button5.Text = "Driver";
             this.button5.UseVisualStyleBackColor = true;
-            // 
-            // button4
-            // 
-            this.button4.Enabled = false;
-            this.button4.Location = new System.Drawing.Point(356, 174);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
-            this.button4.TabIndex = 34;
-            this.button4.Text = "Source";
-            this.button4.UseVisualStyleBackColor = true;
             // 
             // ComboBoxPackages
             // 
@@ -206,6 +195,7 @@
             this.BtnManageSource.TabIndex = 49;
             this.BtnManageSource.Text = "Manage";
             this.BtnManageSource.UseVisualStyleBackColor = true;
+            this.BtnManageSource.Click += new System.EventHandler(this.BtnManageSource_Click);
             // 
             // ProjectDomainDetailsUserControl
             // 
@@ -213,7 +203,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.BtnManageSource);
             this.Controls.Add(this.button5);
-            this.Controls.Add(this.button4);
             this.Controls.Add(this.ComboBoxPackages);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.ComboBoxDriverType);
@@ -238,7 +227,6 @@
         #endregion
 
         private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button4;
         private System.Windows.Forms.ComboBox ComboBoxPackages;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.ComboBox ComboBoxDriverType;

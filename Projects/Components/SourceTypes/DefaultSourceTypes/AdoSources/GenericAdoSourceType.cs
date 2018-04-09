@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes
+namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
 {
     using DatabaseSchemaReader;
 

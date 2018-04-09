@@ -47,6 +47,8 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -59,8 +61,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EdmxSourceType.cs" />
-    <Compile Include="GenericAdoSourceType.cs" />
+    <Compile Include="AdoSources\AdoUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="AdoSources\AdoUserControl.Designer.cs">
+      <DependentUpon>AdoUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Edmxs\EdmxSourceType.cs" />
+    <Compile Include="AdoSources\GenericAdoSourceType.cs" />
+    <Compile Include="Edmxs\EdmxUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Edmxs\EdmxUserControl.Designer.cs">
+      <DependentUpon>EdmxUserControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\TiraggoEdmx_v2.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -101,6 +115,14 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="AdoSources\AdoUserControl.resx">
+      <DependentUpon>AdoUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Edmxs\EdmxUserControl.resx">
+      <DependentUpon>EdmxUserControl.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

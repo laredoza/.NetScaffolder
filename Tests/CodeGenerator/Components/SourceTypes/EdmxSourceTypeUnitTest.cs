@@ -9,6 +9,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
     using System.IO;
 
     using DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes;
+    using DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources;
     using DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.SourceOptions;
     using DotNetScaffolder.Mapping.MetaData.Model;
 

@@ -1,4 +1,4 @@
-﻿namespace DotNetScaffolder.Presentation.Forms
+﻿namespace DotNetScaffolder.Presentation.Forms.Controls
 {
     partial class ManageDataSourceForm
     {
@@ -112,7 +112,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(472, 130);
+            this.ClientSize = new System.Drawing.Size(498, 160);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);

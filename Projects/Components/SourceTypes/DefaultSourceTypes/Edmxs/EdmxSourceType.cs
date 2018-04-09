@@ -7,7 +7,7 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes
+namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
 {
     #region Using
 

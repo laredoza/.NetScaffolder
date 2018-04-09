@@ -102,18 +102,11 @@ namespace Configuration
         public static IDataType ReturnDataType(Guid dataTypeId)
         {
             return DataTypes.FirstOrDefault(d => d.Metadata["ValueMetaData"].ToString().ToLower() == dataTypeId.ToString().ToLower()).Value;
+        }
 
-            //IDataType result = null;
-            //foreach (var item in DataTypes)
-            //{
-            //    if (item.Metadata["ValueMetaData"].ToString().ToLower() == dataTypeId.ToString().ToLower())
-            //    {
-            //        result = item.Value;
-            //        break;
-            //    }
-            //}
-
-            //return result;
+        public static ISourceType ReturnSourceType(Guid sourceTypeId)
+        {
+            return SourceTypes.FirstOrDefault(d => d.Metadata["ValueMetaData"].ToString().ToLower() == sourceTypeId.ToString().ToLower()).Value;
         }
 
         #endregion

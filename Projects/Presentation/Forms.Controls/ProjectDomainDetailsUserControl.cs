@@ -625,6 +625,15 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
             Logger.Trace("Completed UpdateDataSource()");
         }
 
+        private void BtnManageSource_Click(object sender, EventArgs e)
+        {
+            Logger.Trace("Started Manage Source Clicked");
+            ManageDataSourceForm manageDataSourceForm = new ManageDataSourceForm();
+            manageDataSourceForm.DataSource = this.SelectedDomain;
+            manageDataSourceForm.ShowDialog();
+            Logger.Trace("Completed Manage Source Clicked");
+        }
+
         #endregion
     }
 }
