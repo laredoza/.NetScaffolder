@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.12
+VisualStudioVersion = 15.0.27130.2027
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GeneratedModels", "GeneratedModels", "{03AD56A8-7ED3-4D0D-809B-2D4EC7FA8577}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Generated", "Generated", "{03AD56A8-7ED3-4D0D-809B-2D4EC7FA8577}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{BA3E5FE9-C1D0-4C4F-B16D-85AECFE1A2AE}"
 EndProject
@@ -73,6 +73,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetScaffolder.Components.DataTypes.DefaultDataTypes", "Projects\Components\DataTypes\DefaultDataTypes\DotNetScaffolder.Components.DataTypes.DefaultDataTypes.csproj", "{B50F4BEA-CDA2-42E1-818B-6E700FDE771B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetScaffolder.Mapping.ApplicationServices", "Projects\Mapping\ApplicationSettings\DotNetScaffolder.Mapping.ApplicationServices.csproj", "{0AFFF1D6-5FE5-4FF8-84E8-59352E42E658}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{38775862-E4B3-48E5-92B7-60BED9F99780}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MVC", "MVC", "{8887BBF6-92E2-416A-BC3C-E9B7344863A0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -172,6 +176,8 @@ Global
 		{B5808469-2046-4498-A605-80815955F007} = {97FA326E-B630-4FFC-A5E3-5F79B0773BF6}
 		{B50F4BEA-CDA2-42E1-818B-6E700FDE771B} = {B5808469-2046-4498-A605-80815955F007}
 		{0AFFF1D6-5FE5-4FF8-84E8-59352E42E658} = {27FE13BD-77E2-4E09-8722-79A72EE332A3}
+		{38775862-E4B3-48E5-92B7-60BED9F99780} = {03AD56A8-7ED3-4D0D-809B-2D4EC7FA8577}
+		{8887BBF6-92E2-416A-BC3C-E9B7344863A0} = {38775862-E4B3-48E5-92B7-60BED9F99780}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8C063C9C-8EFE-42DA-AE58-93472DC6F4C8}
