@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ProjectDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <BaseNameSpace>Banking.Models</BaseNameSpace>
-  <Domains> 
+  <Domains>
     <DomainDefinition>
       <CollectionOption>
         <Name>IListAndList</Name>
@@ -19,20 +19,17 @@
         <Name>Entity Framework 6 (Repository)</Name>
         <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
         <HierarchyType>Item</HierarchyType>
-        <Version>1</Version>
+        <Version>0</Version>
         <Templates>
           <Template>
             <Children />
             <Enabled>true</Enabled>
-            <Id>1BC1B0C4-1E41-9146-82CF-599181CE4440</Id>
+            <Id>1bc1b0c4-1e41-9146-82cf-599181ce4430</Id>
             <Name>Entity Framework Context (v6)</Name>
             <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
             <HierarchyType>Item</HierarchyType>
             <ConfigLocation>Data</ConfigLocation>
-            <DataType>
-              <Id>2a7353aa-a54a-442e-a710-f30836a0d4b2</Id>
-              <Name>Test</Name>
-            </DataType>
+            <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4430</DataType>
             <DefaultSettings />
             <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
             <LanguageOutputId>1bc1b0c4-1e41-9146-82cf-599181ce4410</LanguageOutputId>
@@ -42,19 +39,46 @@
           <Template>
             <Children />
             <Enabled>true</Enabled>
-            <Id>63cde985-20c1-4c6f-8f05-ac941de202f5</Id>
+            <Id>1bc1b0c4-1e41-9146-82cf-599181ce4440</Id>
             <Name>Entity Framework Entity (v6)</Name>
             <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
             <HierarchyType>Item</HierarchyType>
             <ConfigLocation>Data</ConfigLocation>
-            <DataType>
-              <Id>17f8813a-ef3c-48c3-82bf-5e8937044550</Id>
-              <Name>Test</Name>
-            </DataType>
+            <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4440</DataType>
             <DefaultSettings />
             <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
             <LanguageOutputId>1bc1b0c4-1e41-9146-82cf-599181ce4410</LanguageOutputId>
             <TemplatePath>Bogus.T4</TemplatePath>
+            <Version>1</Version>
+          </Template>
+          <Template>
+            <Children />
+            <Enabled>true</Enabled>
+            <Id>3ab0816d-5ad5-4990-a655-a14a743e416c</Id>
+            <Name>Entity Framework Repository</Name>
+            <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
+            <HierarchyType>Item</HierarchyType>
+            <ConfigLocation>Data</ConfigLocation>
+            <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4450</DataType>
+            <DefaultSettings />
+            <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
+            <LanguageOutputId>1bc1b0c4-1e41-9146-82cf-599181ce4410</LanguageOutputId>
+            <TemplatePath>Repository.T4</TemplatePath>
+            <Version>1</Version>
+          </Template>
+          <Template>
+            <Children />
+            <Enabled>true</Enabled>
+            <Id>a832889d-7f9a-42fa-ad6b-38d184828dba</Id>
+            <Name>Default Table</Name>
+            <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
+            <HierarchyType>Item</HierarchyType>
+            <ConfigLocation>Data</ConfigLocation>
+            <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4490</DataType>
+            <DefaultSettings />
+            <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
+            <LanguageOutputId>1bc1b0c4-1e41-9146-82cf-599181ce4410</LanguageOutputId>
+            <TemplatePath>Table.T4</TemplatePath>
             <Version>1</Version>
           </Template>
         </Templates>
@@ -63,22 +87,9 @@
       <Tables />
     </DomainDefinition>
   </Domains>
-  <GroupBy>Layer</GroupBy>
-  <ModelPath>Banking.mdl</ModelPath>
-  <OutputFolder>Models</OutputFolder>
+  <GroupBy>Domain</GroupBy>
+  <ModelPath>Models\Banking.mdl</ModelPath>
+  <OutputFolder>a</OutputFolder>
   <Version>1</Version>
-  <CollectionOptions>
-    <CollectionOption>
-      <Name>ICollectionAndHashSet</Name>
-      <NameSpace />
-    </CollectionOption>
-    <CollectionOption>
-      <Name>IListAndList</Name>
-      <NameSpace />
-    </CollectionOption>
-    <CollectionOption>
-      <Name>ObservableCollection</Name>
-      <NameSpace />
-    </CollectionOption>
-  </CollectionOptions>
+  <CollectionOptions />
 </ProjectDefinition>

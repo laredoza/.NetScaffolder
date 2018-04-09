@@ -56,6 +56,8 @@ namespace DotNetScaffolder.Presentation.Forms
 
             this.applicationService = new ProjectDefinitionApplicationServiceFile { FilePersistenceOptions = options };
             this.applicationService.Load();
+            this.applicationService.ProjectDefinition.ModelPath = options.Path;
+            this.applicationService.ProjectDefinition.Version = 1;
 
             FilePersistenceOptions configOptions = new FilePersistenceOptions { Path = @"Config\Settings.xml" };
             applicationConfiguration = new ConfigurationApplicationServiceFile
@@ -105,11 +107,11 @@ namespace DotNetScaffolder.Presentation.Forms
         /// </param>
         private void button6_Click(object sender, EventArgs e)
         {
-            //if (this.ProjectDetailsUserControl1.Validation() == 0)
-            //{
-            //    // Save
-            //    this.applicationService.Save();
-            //}
+            if (this.ProjectDetailsUserControl1.Validation() == 0)
+            {
+                // Save
+                this.applicationService.Save();
+            }
 
             if (this.TemplateManagementUserControl1.Validation() == 0)
             {
