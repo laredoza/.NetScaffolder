@@ -89,7 +89,7 @@
   </Domains>
   <GroupBy>Domain</GroupBy>
   <ModelPath>Models\Banking.mdl</ModelPath>
-  <OutputFolder>a</OutputFolder>
+  <OutputFolder>Models</OutputFolder>
   <Version>1</Version>
   <CollectionOptions />
 </ProjectDefinition>
