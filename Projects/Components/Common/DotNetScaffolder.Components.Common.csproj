@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ComponentImporter.cs" />
+    <Compile Include="Contract\ICollectionOption.cs" />
     <Compile Include="Contract\IDataType.cs" />
     <Compile Include="Contract\IDriver.cs" />
     <Compile Include="Contract\ILanguageOutput.cs" />
