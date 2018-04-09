@@ -33,6 +33,11 @@
             }
         }
 
+        public string OutputFolder
+        {
+            set => domainMenuUserControl1.OutputPath = value;
+        }
+
         //public Package MyProperty { get; set; }
         public DomainTableForm()
         {

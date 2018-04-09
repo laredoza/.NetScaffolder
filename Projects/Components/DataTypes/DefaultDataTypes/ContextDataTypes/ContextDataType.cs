@@ -17,6 +17,8 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
 
     public class ContextDataType : IDataType
     {
+        private IDataType dataTypeImplementation;
+
         public ContextDataType()
         {
 
@@ -31,6 +33,15 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
             newControl.BringToFront();
             parent.Controls.Add(newControl);
             return newControl;
+        }
+
+        public bool SaveConfig()
+        {
+            return false;
+        }
+
+        public void LoadConfig(string basePath)
+        {
         }
 
         public IHierarchy ReturnNavigation()

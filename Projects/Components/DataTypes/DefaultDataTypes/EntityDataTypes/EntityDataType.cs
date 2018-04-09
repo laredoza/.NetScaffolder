@@ -32,6 +32,15 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
             return newControl;
         }
 
+        public bool SaveConfig()
+        {
+            return false;
+        }
+
+        public void LoadConfig(string basePath)
+        {
+        }
+
         public IHierarchy ReturnNavigation()
         {
             return new Hierarchy { Id = new Guid("1BC1B0C4-1E41-9146-82CF-599181CE4440"), Name = "Entity" };

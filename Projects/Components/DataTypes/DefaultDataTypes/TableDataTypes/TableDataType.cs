@@ -35,6 +35,15 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
             return tableControl;
         }
 
+        public bool SaveConfig()
+        {
+            return false;
+        }
+
+        public void LoadConfig(string basePath)
+        {
+        }
+
         private void ConfigureControl(Control control, Control parent)
         {
             control.Visible = true;

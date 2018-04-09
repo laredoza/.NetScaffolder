@@ -1,21 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using DotNetScaffolder.Mapping.MetaData.Domain;
-using Common.Logging;
-using Configuration;
-using DotNetScaffolder.Mapping.MetaData.Project.Packages;
-using DotNetScaffolder.Components.Common.Contract;
-using FormControls.TreeView;
-
-namespace DotNetScaffolder.Presentation.Forms.Controls
+﻿namespace DotNetScaffolder.Presentation.Forms.Controls
 {
+    using System;
+    using System.Windows.Forms;
+
+    using Common.Logging;
+
+    using Configuration;
+
+    using DotNetScaffolder.Components.Common.Contract;
+    using DotNetScaffolder.Mapping.MetaData.Domain;
+    using DotNetScaffolder.Mapping.MetaData.Project.Packages;
+
+    using FormControls.TreeView;
+
     public partial class DomainMenuUserControl : UserControl
     {
         /// <summary>
@@ -39,10 +36,12 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
                 if (dataSource != value)
                 {
                     dataSource = value;
-                    this.UpdateDataSource();
+                    UpdateDataSource();
                 }
             }
         }
+
+        public string OutputPath { get; set; }
 
         public Control ParentConfigControl { get; set; }
 
@@ -58,24 +57,20 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         {
             Logger.Trace("Started UpdateDataSource()");
 
-            if (this.DataSource != null)
+            if (DataSource != null)
             {
-                Template template = null;
-                IDataType dataTypeControl;
-                IHierarchy hierarchyToAdd = null;
-                Control configControl = null;
-
-                foreach (var hierarchy in this.DataSource.Package.Templates)
+                foreach (var hierarchy in DataSource.Package.Templates)
                 {
-                    template = hierarchy as Template;
-                    dataTypeControl = ScaffoldConfig.ReturnDataType(template.DataType);
-                    hierarchyToAdd = dataTypeControl.ReturnNavigation();
+                    var template = hierarchy;
+                    var dataTypeControl = ScaffoldConfig.ReturnDataType(template.DataType);
+                    dataTypeControl.LoadConfig(OutputPath);
+                    var hierarchyToAdd = dataTypeControl.ReturnNavigation();
 
-                    configControl = dataTypeControl.AddConfigUI(this.ParentConfigControl) as Control;
+                    var configControl = dataTypeControl.AddConfigUI(ParentConfigControl) as Control;
 
                     TreeNode node = new TreeNode { Tag = configControl, Text = hierarchyToAdd.Name };
                     // Todo: Add children as well
-                    this.DomainTreeView.Nodes.Add(node);
+                    DomainTreeView.Nodes.Add(node);
                  }
             }
             else
