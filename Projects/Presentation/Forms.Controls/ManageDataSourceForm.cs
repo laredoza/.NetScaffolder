@@ -58,7 +58,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
             }
             else
             {
-                Logger.Trace("Data Source not updated as project is null ");
+                Logger.Trace("Data Source not updated as domain is null ");
             }
 
             Logger.Trace("Completed UpdateDataSource()");
