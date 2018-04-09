@@ -79,6 +79,9 @@ namespace Configuration
         [ImportMany]
         public static Lazy<IDataType, IDictionary<string, object>>[] DataTypes { get; set; }
 
+        [ImportMany]
+        public static Lazy<ICollectionOption, IDictionary<string, object>>[] CollectionOptions { get; set; }
+        
         #endregion
 
         #region Public methods and operators
@@ -97,6 +100,7 @@ namespace Configuration
             LanguageOutputs = importer.LanguageOutputs;
             OutputGenerators = importer.OutputGenerators;
             DataTypes = importer.DataTypes;
+            CollectionOptions = importer.CollectionOptions;
         }
 
         public static IDataType ReturnDataType(Guid dataTypeId)

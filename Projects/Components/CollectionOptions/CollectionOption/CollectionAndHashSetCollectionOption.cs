@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DotNetScaffolder.Components.CollectionOption
 {
-    [Export(typeof(INamingConvention))]
+    [Export(typeof(ICollectionOption))]
     [ExportMetadata("NameMetaData", "Collection And Hash Set")]
     [ExportMetadata("ValueMetaData", "0BC1B0C4-1E41-9146-82CF-599181CE4410")]
     public class CollectionAndHashSetCollectionOption : ICollectionOption

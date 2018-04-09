@@ -76,6 +76,10 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
             this.ComboBoxDriver.DisplayMember = "Text";
             this.ComboBoxDriver.ValueMember = "Value";
             this.ComboBoxDriver.DataSource = this.ReturnDriverTypes();
+
+            this.ComboBoxCollectionOption.DisplayMember = "Text";
+            this.ComboBoxCollectionOption.ValueMember = "Value";
+            this.ComboBoxCollectionOption.DataSource = this.ReturnCollectionOptions();
         }
 
         #endregion
@@ -95,8 +99,6 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
             set
             {
                 this.applicationService = value;
-                this.ComboBoxCollectionOption.DisplayMember = "Name";
-                this.ComboBoxCollectionOption.ValueMember = "Name";
 
                 if (this.Packages != null && this.Packages.Count > 0)
                 {
@@ -111,9 +113,6 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
                 if (this.ApplicationService != null && this.ApplicationService.ProjectDefinition != null)
                 {
                     CollectionOption selectedCollectionOption = this.SelectedCollectionOption;
-
-                    this.ComboBoxCollectionOption.DataSource =
-                        this.ApplicationService.ProjectDefinition.CollectionOptions;
 
                     this.SelectedCollectionOption = selectedCollectionOption;
                     this.UpdateDataSource();
@@ -491,6 +490,28 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
             return items.OrderBy(i => i.Text).ToArray();
         }
 
+        /// <summary>
+        ///     The return collection options.
+        /// </summary>
+        /// <returns>
+        ///     The <see cref="object[]" />.
+        /// </returns>
+        public object[] ReturnCollectionOptions()
+        {
+            List<ComboboxItem> items = new List<ComboboxItem>();
+
+            foreach (var collectionOption in ScaffoldConfig.CollectionOptions)
+            {
+                items.Add(
+                    new ComboboxItem
+                        {
+                            Text = (string)collectionOption.Metadata["NameMetaData"],
+                            Value = new Guid(collectionOption.Metadata["ValueMetaData"].ToString())
+                        });
+            }
+
+            return items.OrderBy(i => i.Text).ToArray();
+        }
         #endregion
 
         #region Other Methods
