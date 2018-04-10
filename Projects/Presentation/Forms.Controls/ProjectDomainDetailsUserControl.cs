@@ -112,9 +112,6 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
 
                 if (this.ApplicationService != null && this.ApplicationService.ProjectDefinition != null)
                 {
-                    CollectionOption selectedCollectionOption = this.SelectedCollectionOption;
-
-                    this.SelectedCollectionOption = selectedCollectionOption;
                     this.UpdateDataSource();
                 }
             }
@@ -164,20 +161,20 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         /// <summary>
         /// Gets or sets the selected collection option.
         /// </summary>
-        public CollectionOption SelectedCollectionOption
+        public Guid SelectedCollectionOptionId
         {
             get
             {
-                CollectionOption result = null;
+                Guid result = Guid.Empty;
 
                 if (this.SelectedDomain != null)
                 {
-                    result = this.SelectedDomain.CollectionOption;
-                    Logger.Trace($"CollectionOption set to {this.SelectedDomain.Name}.");
+                    result = this.SelectedDomain.DriverId;
+                    Logger.Trace($"CollectionOptionId set to {this.SelectedDomain.CollectionOptionId}.");
                 }
                 else
                 {
-                    Logger.Trace("Empty CollectionOption is returned as SelectedDomain is null.");
+                    Logger.Trace("Empty CollectionOptionId is returned as SelectedDomain is null.");
                 }
 
                 return result;
@@ -187,11 +184,11 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
             {
                 if (this.SelectedDomain != null)
                 {
-                    this.SelectedDomain.CollectionOption = value;
+                    this.SelectedDomain.CollectionOptionId = value;
                 }
                 else
                 {
-                    Logger.Trace("Empty CollectionOption is returned as SelectedDomain is null.");
+                    Logger.Trace("Empty CollectionOptionId is returned as SelectedDomain is null.");
                 }
             }
         }
@@ -527,7 +524,10 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         /// </param>
         private void ComboBoxCollectionOption_SelectedIndexChanged(object sender, EventArgs e)
         {
-            this.SelectedCollectionOption = this.ComboBoxCollectionOption.SelectedItem as CollectionOption;
+            if (this.ComboBoxCollectionOption.SelectedItem != null)
+            {
+                this.SelectedCollectionOptionId = (Guid)(this.ComboBoxCollectionOption.SelectedItem as ComboboxItem).Value;
+            }
         }
 
         /// <summary>
@@ -637,7 +637,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
 
                 if (this.ApplicationService != null && this.ApplicationService.ProjectDefinition != null)
                 {
-                    this.ComboBoxCollectionOption.SelectedValue = this.SelectedCollectionOption.Name;
+                    this.ComboBoxCollectionOption.SelectedValue = this.SelectedCollectionOptionId;
                 }
 
                 this.ComboBoxPackages.SelectedValue = this.SelectedDomain.Package.Id;

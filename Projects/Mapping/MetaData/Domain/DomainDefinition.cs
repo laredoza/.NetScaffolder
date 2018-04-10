@@ -51,7 +51,6 @@ namespace DotNetScaffolder.Mapping.MetaData.Domain
             this.Package = new Package();
             this.Id = Guid.NewGuid();
             this.ValidationResult = new List<Validation>();
-            this.CollectionOption = new CollectionOption();
         }
 
         #endregion
@@ -62,7 +61,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Domain
         ///     Gets or sets the collection option. At the moment this specifies the collection parent but could be extended at a
         ///     later stage.
         /// </summary>
-        public CollectionOption CollectionOption { get; set; }
+        public Guid CollectionOptionId { get; set; }
 
         /// <summary>
         /// Gets or sets the driver id.
@@ -162,6 +161,11 @@ namespace DotNetScaffolder.Mapping.MetaData.Domain
             if (this.DriverTypeId == Guid.Empty)
             {
                 this.ValidationResult.Add(new Validation(ValidationType.DriverTypeId, "DriverTypeId cannot be empty"));
+            }
+
+            if (this.CollectionOptionId == Guid.Empty)
+            {
+                this.ValidationResult.Add(new Validation(ValidationType.CollectionOptionId, "CollectionOptionId cannot be empty"));
             }
 
             Logger.Debug($"Number of Validation errors: {this.ValidationResult.Count}");

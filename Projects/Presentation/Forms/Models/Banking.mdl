@@ -3,10 +3,6 @@
   <BaseNameSpace>Banking.Models</BaseNameSpace>
   <Domains>
     <DomainDefinition>
-      <CollectionOption>
-        <Name>IListAndList</Name>
-        <NameSpace />
-      </CollectionOption>
       <DriverId>2bc1b0c4-1e41-9146-82cf-599181ce4400</DriverId>
       <DriverTypeId>2bc1b0c4-1e41-9146-82cf-599181ce4410</DriverTypeId>
       <Name>Domain1</Name>
