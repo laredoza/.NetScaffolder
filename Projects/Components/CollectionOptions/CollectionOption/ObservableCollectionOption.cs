@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace DotNetScaffolder.Components.CollectionOption
 {
     [Export(typeof(ICollectionOption))]
-    [ExportMetadata("NameMetaData", "List And List")]
+    [ExportMetadata("NameMetaData", "ObservableCollection")]
     [ExportMetadata("ValueMetaData", "0BC1B0C4-1E41-9146-82CF-599181CE4412")]
     public class ObservableCollectionOption : ICollectionOption
     {
