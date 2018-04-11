@@ -75,6 +75,7 @@
     <Compile Include="Edmxs\EdmxUserControl.Designer.cs">
       <DependentUpon>EdmxUserControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="IDefaultDataSourceUI.cs" />
     <Compile Include="Models\TiraggoEdmx_v2.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

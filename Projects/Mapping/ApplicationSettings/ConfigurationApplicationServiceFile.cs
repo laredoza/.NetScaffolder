@@ -57,15 +57,17 @@ namespace DotNetScaffolder.Mapping.ApplicationServices
             string dataTypeName = string.Empty;
             Guid dataTypeId;
             bool sort = false;
-            
+
             foreach (var dataType in ScaffoldConfig.DataTypes)
             {
-                dataTypeName = (string)dataType.Metadata["NameMetaData"];
+                dataTypeName = (string) dataType.Metadata["NameMetaData"];
                 dataTypeId = new Guid(dataType.Metadata["ValueMetaData"].ToString());
 
-                if (this.ApplicationSettings.Templates[0].Children.All(t => t.Id.ToString().ToLower() != dataTypeId.ToString().ToLower()))
+                if (this.ApplicationSettings.Templates[0].Children
+                    .All(t => t.Id.ToString().ToLower() != dataTypeId.ToString().ToLower()))
                 {
-                    this.ApplicationSettings.Templates[0].Children.Add(new Template {
+                    this.ApplicationSettings.Templates[0].Children.Add(new Template
+                    {
                         Id = dataTypeId,
                         Name = dataTypeName,
                         HierarchyType = HierarchyType.Group,
@@ -79,7 +81,8 @@ namespace DotNetScaffolder.Mapping.ApplicationServices
 
             if (sort)
             {
-                this.ApplicationSettings.Templates[0].Children = this.ApplicationSettings.Templates[0].Children.OrderBy(t => t.Name).ToList();
+                this.ApplicationSettings.Templates[0].Children =
+                    this.ApplicationSettings.Templates[0].Children.OrderBy(t => t.Name).ToList();
             }
 
             Logger.Trace($"Completed Load() - Path: {this.FilePersistenceOptions.Path}");

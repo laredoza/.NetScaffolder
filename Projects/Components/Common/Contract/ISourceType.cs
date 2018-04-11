@@ -50,6 +50,22 @@ namespace DotNetScaffolder.Components.Common.Contract
         DomainDataType MapDatabaseTypeToCSharp(string databaseType);
 
         object AddConfigUI(object parameters);
+       
+        /// <summary>
+        /// Test DataSource
+        /// </summary>
+        /// <param name="paramters"></param>
+        /// <returns></returns>
+        bool Test(object paramters);
+
+        /// <summary>
+        /// Save parameters
+        /// </summary>
+        /// <param name="parameters"></param>
+        void Save(object parameters);
+
+        void Load(object parameters);
+
         #endregion
     }
 }

@@ -2,15 +2,6 @@
 using Configuration;
 using DotNetScaffolder.Components.Common.Contract;
 using DotNetScaffolder.Mapping.MetaData.Domain;
-using DotNetScaffolder.Mapping.MetaData.Project;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace DotNetScaffolder.Presentation.Forms.Controls
@@ -48,7 +39,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         /// <summary>
         /// The update data source.
         /// </summary>
-        public void UpdateDataSource()
+        private void UpdateDataSource()
         {
             Logger.Trace("Started UpdateDataSource()");
 
@@ -64,19 +55,6 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
             }
 
             Logger.Trace("Completed UpdateDataSource()");
-        }
-
-        private void DomainTreeView_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void DomainTreeView_AfterSelect(object sender, TreeViewEventArgs e)
-        {
-            Control configControl = e.Node.Tag as Control;
-            if (configControl != null)
-            {
-                configControl.BringToFront();
-            }
         }
 
         public ManageDataSourceForm()

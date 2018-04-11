@@ -43,8 +43,6 @@ namespace DotNetScaffolder.Components.NamingConventions.DefaultNamingConventions
         public string ApplyNamingConvention(string value)
         {
             return System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(value.ToLower());
-                //case NamingConventionType.TitleCaseNoUnderScore:
-                //    return System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(input.ToLower()).Replace("_", "");
         }
 
         #endregion

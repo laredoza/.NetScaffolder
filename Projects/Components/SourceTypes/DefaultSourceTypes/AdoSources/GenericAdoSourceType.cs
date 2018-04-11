@@ -152,6 +152,21 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
             return newControl;
         }
 
+        public bool Test(object paramters)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Save(object parameters)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Load(object parameters)
+        {
+            throw new NotImplementedException();
+        }
+
         #endregion
     }
 }

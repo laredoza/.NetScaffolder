@@ -128,6 +128,35 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.Edmxs
             parent.Controls.Add(newControl);
             return newControl;
         }
+
+        /// <summary>
+        /// Tests Data Source
+        /// </summary>
+        /// <param name="paramters"></param>
+        /// <returns></returns>
+        public bool Test(object paramters)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Saves data
+        /// </summary>
+        /// <param name="parameters"></param>
+        public void Save(object parameters)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Load Data
+        /// </summary>
+        /// <param name="parameters"></param>
+        public void Load(object parameters)
+        {
+            throw new NotImplementedException();
+        }
+
         #endregion
     }
 }
