@@ -342,6 +342,8 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
 
                         this.ComboBoxSearch.AutoCompleteCustomSource.Clear();
                         this.ComboBoxSearch.AutoCompleteCustomSource.AddRange(availableTemplates.ToArray());
+                        this.ComboBoxSearch.Items.Clear();
+                        this.ComboBoxSearch.Items.AddRange(availableTemplates.ToArray());
                     }
 
                 }
@@ -455,9 +457,5 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
             this.ComboBoxSearch.Text = string.Empty;
         }
 
-        private void ComboBoxSearch_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
     }
 }
