@@ -11,36 +11,30 @@ using DotNetScaffolder.Components.DataTypes.DefaultDataTypes.TableDataTypes;
 
 namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
 {
+    using System.IO;
+
+    using DotNetScaffolder.Core.Common.Serializer;
+    using DotNetScaffolder.Mapping.MetaData.Model;
+
     [Export(typeof(IDataType))]
     [ExportMetadata("NameMetaData", "Table")]
     [ExportMetadata("ValueMetaData", "1BC1B0C4-1E41-9146-82CF-599181CE4490")]
 
     public class TableDataType : IDataType
     {
+        public string Namespace { get; set; } = "Repository";
+
+        public string OutputFolder { get; set; } = "Repository";
+
+        public bool Enabled { get; set; } = false;
+
+        private const string FILE_NAME = "Repository.mdl";
+
         private Control tableControl;
         private Control fieldsControl;
         private Control relationshipControls;
 
         public  TableDataType()
-        {
-        }
-
-        public object AddConfigUI(object parameters)
-        {
-            Control parent = parameters as Control;
-            TableUserControl tableControl = new TableUserControl();
-            this.ConfigureControl(tableControl, parent);
-            FieldUserControl fieldUsercontrol = new FieldUserControl();
-            this.ConfigureControl(fieldUsercontrol, parent);
-            return tableControl;
-        }
-
-        public bool SaveConfig()
-        {
-            return false;
-        }
-
-        public void LoadConfig(string basePath)
         {
         }
 
@@ -56,5 +50,37 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
         {
             return new Hierarchy { Id = new Guid("1BC1B0C4-1E41-9146-82CF-599181CE4490"), Name = "Table" };
         }
+
+        public IDataTypeUI<IDictionary<string, string>, DT> AddConfigUI<DT>(object parameters)
+        {
+            Control parent = parameters as Control;
+            TableUserControl tableControl = new TableUserControl();
+            this.ConfigureControl(tableControl, parent);
+            FieldUserControl fieldUsercontrol = new FieldUserControl();
+            this.ConfigureControl(fieldUsercontrol, parent);
+            return (IDataTypeUI<IDictionary<string, string>, DT>)tableControl;
+        }
+
+        public bool SaveConfig(IDictionary<string, string> parameters)
+        {
+            var filePath = Path.Combine(parameters["basePath"], FILE_NAME);
+            ObjectXMLSerializer<TableDataType>.Save(this, filePath);
+            return true;
+        }
+
+        public void LoadConfig(IDictionary<string, string> parameters)
+        {
+            var filePath = Path.Combine(parameters["basePath"], FILE_NAME);
+
+            if (File.Exists(filePath))
+            {
+                var appService = ObjectXMLSerializer<TableDataType>.Load(filePath);
+                if (appService != null)
+                {
+                }
+            }
+        }
+
+        public Table MetaData { get; set; }
     }
 }

@@ -1,5 +1,7 @@
 ﻿namespace DotNetScaffolder.Presentation.Forms.Controls
 {
+    using System.Linq;
+
     using Common.Logging;
     using DotNetScaffolder.Mapping.MetaData.Domain;
     using System.Windows.Forms;
@@ -59,6 +61,16 @@
         private void label1_Click(object sender, System.EventArgs e)
         {
 
+        }
+
+        private void button1_Click(object sender, System.EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnSave_Click(object sender, System.EventArgs e)
+        {
+            domainMenuUserControl1.Save();
         }
     }
 }

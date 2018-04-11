@@ -28,39 +28,39 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.TreeNode treeNode92 = new System.Windows.Forms.TreeNode("BankAccount");
-            System.Windows.Forms.TreeNode treeNode93 = new System.Windows.Forms.TreeNode("Bank Transfers");
-            System.Windows.Forms.TreeNode treeNode94 = new System.Windows.Forms.TreeNode("Book");
-            System.Windows.Forms.TreeNode treeNode95 = new System.Windows.Forms.TreeNode("Country");
-            System.Windows.Forms.TreeNode treeNode96 = new System.Windows.Forms.TreeNode("dbo", new System.Windows.Forms.TreeNode[] {
-            treeNode92,
-            treeNode93,
-            treeNode94,
-            treeNode95});
-            System.Windows.Forms.TreeNode treeNode97 = new System.Windows.Forms.TreeNode("Tables", new System.Windows.Forms.TreeNode[] {
-            treeNode96});
-            System.Windows.Forms.TreeNode treeNode98 = new System.Windows.Forms.TreeNode("Country");
-            System.Windows.Forms.TreeNode treeNode99 = new System.Windows.Forms.TreeNode("Customer");
-            System.Windows.Forms.TreeNode treeNode100 = new System.Windows.Forms.TreeNode("Order");
-            System.Windows.Forms.TreeNode treeNode101 = new System.Windows.Forms.TreeNode("OrderDetails");
-            System.Windows.Forms.TreeNode treeNode102 = new System.Windows.Forms.TreeNode("dbo", new System.Windows.Forms.TreeNode[] {
-            treeNode98,
-            treeNode99,
-            treeNode100,
-            treeNode101});
-            System.Windows.Forms.TreeNode treeNode103 = new System.Windows.Forms.TreeNode("Tables", new System.Windows.Forms.TreeNode[] {
-            treeNode102});
-            System.Windows.Forms.TreeNode treeNode104 = new System.Windows.Forms.TreeNode("Tables");
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("BankAccount");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Bank Transfers");
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Book");
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Country");
+            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("dbo", new System.Windows.Forms.TreeNode[] {
+            treeNode1,
+            treeNode2,
+            treeNode3,
+            treeNode4});
+            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Tables", new System.Windows.Forms.TreeNode[] {
+            treeNode5});
+            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Country");
+            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Customer");
+            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Order");
+            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("OrderDetails");
+            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("dbo", new System.Windows.Forms.TreeNode[] {
+            treeNode7,
+            treeNode8,
+            treeNode9,
+            treeNode10});
+            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("Tables", new System.Windows.Forms.TreeNode[] {
+            treeNode11});
+            System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("Tables");
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.treeView1 = new FormControls.TreeView.MultiSelectTreeView.TreeView();
-            this.treeView2 = new FormControls.TreeView.MultiSelectTreeView.TreeView();
-            this.treeView3 = new FormControls.TreeView.MultiSelectTreeView.TreeView();
             this.label1 = new System.Windows.Forms.Label();
+            this.treeView1 = new FormControls.TreeView.MultiSelectTreeView.TreeView();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.label2 = new System.Windows.Forms.Label();
+            this.treeView2 = new FormControls.TreeView.MultiSelectTreeView.TreeView();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
             this.label3 = new System.Windows.Forms.Label();
+            this.treeView3 = new FormControls.TreeView.MultiSelectTreeView.TreeView();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
@@ -92,6 +92,39 @@
             this.tabPage1.Text = "Add";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 313);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(158, 13);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Select items to add to the model";
+            // 
+            // treeView1
+            // 
+            this.treeView1.CheckBoxes = true;
+            this.treeView1.Location = new System.Drawing.Point(7, 7);
+            this.treeView1.Name = "treeView1";
+            treeNode1.Name = "Node2";
+            treeNode1.Text = "BankAccount";
+            treeNode2.Name = "Node4";
+            treeNode2.Text = "Bank Transfers";
+            treeNode3.Name = "Node5";
+            treeNode3.Text = "Book";
+            treeNode4.Name = "Node6";
+            treeNode4.Text = "Country";
+            treeNode5.Name = "Node1";
+            treeNode5.Text = "dbo";
+            treeNode6.Name = "Node0";
+            treeNode6.Text = "Tables";
+            this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
+            treeNode6});
+            this.treeView1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            this.treeView1.SelectionMode = FormControls.TreeView.MultiSelectTreeView.TreeViewSelectionMode.SingleSelect;
+            this.treeView1.Size = new System.Drawing.Size(559, 290);
+            this.treeView1.TabIndex = 0;
+            // 
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.label2);
@@ -104,6 +137,39 @@
             this.tabPage2.Text = "Refresh";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(14, 315);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(356, 13);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "These items were found in the database and will be refreshed in the model";
+            // 
+            // treeView2
+            // 
+            this.treeView2.CheckBoxes = true;
+            this.treeView2.Location = new System.Drawing.Point(17, 12);
+            this.treeView2.Name = "treeView2";
+            treeNode7.Name = "Node2";
+            treeNode7.Text = "Country";
+            treeNode8.Name = "Node4";
+            treeNode8.Text = "Customer";
+            treeNode9.Name = "Node5";
+            treeNode9.Text = "Order";
+            treeNode10.Name = "Node6";
+            treeNode10.Text = "OrderDetails";
+            treeNode11.Name = "Node1";
+            treeNode11.Text = "dbo";
+            treeNode12.Name = "Node0";
+            treeNode12.Text = "Tables";
+            this.treeView2.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
+            treeNode12});
+            this.treeView2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            this.treeView2.SelectionMode = FormControls.TreeView.MultiSelectTreeView.TreeViewSelectionMode.SingleSelect;
+            this.treeView2.Size = new System.Drawing.Size(559, 290);
+            this.treeView2.TabIndex = 1;
+            // 
             // tabPage3
             // 
             this.tabPage3.Controls.Add(this.label3);
@@ -115,86 +181,6 @@
             this.tabPage3.Text = "Delete";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
-            // treeView1
-            // 
-            this.treeView1.CheckBoxes = true;
-            this.treeView1.Location = new System.Drawing.Point(7, 7);
-            this.treeView1.Name = "treeView1";
-            treeNode92.Name = "Node2";
-            treeNode92.Text = "BankAccount";
-            treeNode93.Name = "Node4";
-            treeNode93.Text = "Bank Transfers";
-            treeNode94.Name = "Node5";
-            treeNode94.Text = "Book";
-            treeNode95.Name = "Node6";
-            treeNode95.Text = "Country";
-            treeNode96.Name = "Node1";
-            treeNode96.Text = "dbo";
-            treeNode97.Name = "Node0";
-            treeNode97.Text = "Tables";
-            this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode97});
-            this.treeView1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            this.treeView1.SelectionMode = FormControls.TreeView.MultiSelectTreeView.TreeViewSelectionMode.SingleSelect;
-            this.treeView1.Size = new System.Drawing.Size(559, 290);
-            this.treeView1.TabIndex = 0;
-            // 
-            // treeView2
-            // 
-            this.treeView2.CheckBoxes = true;
-            this.treeView2.Location = new System.Drawing.Point(17, 12);
-            this.treeView2.Name = "treeView2";
-            treeNode98.Name = "Node2";
-            treeNode98.Text = "Country";
-            treeNode99.Name = "Node4";
-            treeNode99.Text = "Customer";
-            treeNode100.Name = "Node5";
-            treeNode100.Text = "Order";
-            treeNode101.Name = "Node6";
-            treeNode101.Text = "OrderDetails";
-            treeNode102.Name = "Node1";
-            treeNode102.Text = "dbo";
-            treeNode103.Name = "Node0";
-            treeNode103.Text = "Tables";
-            this.treeView2.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode103});
-            this.treeView2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            this.treeView2.SelectionMode = FormControls.TreeView.MultiSelectTreeView.TreeViewSelectionMode.SingleSelect;
-            this.treeView2.Size = new System.Drawing.Size(559, 290);
-            this.treeView2.TabIndex = 1;
-            // 
-            // treeView3
-            // 
-            this.treeView3.CheckBoxes = true;
-            this.treeView3.Location = new System.Drawing.Point(17, 12);
-            this.treeView3.Name = "treeView3";
-            treeNode104.Name = "Node0";
-            treeNode104.Text = "Tables";
-            this.treeView3.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode104});
-            this.treeView3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            this.treeView3.SelectionMode = FormControls.TreeView.MultiSelectTreeView.TreeViewSelectionMode.SingleSelect;
-            this.treeView3.Size = new System.Drawing.Size(559, 290);
-            this.treeView3.TabIndex = 2;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 313);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(158, 13);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Select items to add to the model";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(14, 315);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(356, 13);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "These items were found in the database and will be refreshed in the model";
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -204,6 +190,20 @@
             this.label3.TabIndex = 4;
             this.label3.Text = "These items could not be found in the database and will be removed from the model" +
     ".";
+            // 
+            // treeView3
+            // 
+            this.treeView3.CheckBoxes = true;
+            this.treeView3.Location = new System.Drawing.Point(17, 12);
+            this.treeView3.Name = "treeView3";
+            treeNode13.Name = "Node0";
+            treeNode13.Text = "Tables";
+            this.treeView3.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
+            treeNode13});
+            this.treeView3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            this.treeView3.SelectionMode = FormControls.TreeView.MultiSelectTreeView.TreeViewSelectionMode.SingleSelect;
+            this.treeView3.Size = new System.Drawing.Size(559, 290);
+            this.treeView3.TabIndex = 2;
             // 
             // button2
             // 
@@ -222,6 +222,7 @@
             this.button3.TabIndex = 2;
             this.button3.Text = "Cancel";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // UpdateTablesFromSourceForm
             // 

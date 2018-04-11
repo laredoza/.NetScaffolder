@@ -57,7 +57,7 @@ namespace DotNetScaffolder.Mapping.ApplicationServices
             string dataTypeName = string.Empty;
             Guid dataTypeId = Guid.Empty;
             bool sort = false;
-            IDataType dataTypeInterface;
+            IDataType<Dictionary<string,string>> dataTypeInterface;
             
             foreach (var dataType in ScaffoldConfig.DataTypes)
             {

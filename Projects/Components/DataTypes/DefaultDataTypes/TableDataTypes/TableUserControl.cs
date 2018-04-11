@@ -10,11 +10,23 @@ using System.Windows.Forms;
 
 namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.TableDataTypes
 {
-    public partial class TableUserControl : UserControl
+    using DotNetScaffolder.Components.Common.Contract;
+
+    public partial class TableUserControl : UserControl, IDataTypeUI<IDictionary<string, string>, TableDataType>
     {
         public TableUserControl()
         {
             InitializeComponent();
+        }
+
+        public TableDataType DataType { get; set; }
+
+        public void SaveConfig(IDictionary<string, string> parameters)
+        {
+        }
+
+        public void LoadConfig(IDictionary<string, string> parameters)
+        {
         }
     }
 }

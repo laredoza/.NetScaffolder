@@ -10,11 +10,22 @@ using System.Windows.Forms;
 
 namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.UnitOfWorkDataTypes
 {
-    public partial class UnitOfWorkUserControl : UserControl
+    using DotNetScaffolder.Components.Common.Contract;
+    public partial class UnitOfWorkUserControl : UserControl, IDataTypeUI<IDictionary<string, string>, UnitOfWorkDataType>
     {
         public UnitOfWorkUserControl()
         {
             InitializeComponent();
+        }
+
+        public UnitOfWorkDataType DataType { get; set; }
+
+        public void SaveConfig(IDictionary<string, string> parameters)
+        {
+        }
+
+        public void LoadConfig(IDictionary<string, string> parameters)
+        {
         }
     }
 }

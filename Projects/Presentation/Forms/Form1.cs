@@ -139,5 +139,15 @@ namespace DotNetScaffolder.Presentation.Forms
         }
 
         #endregion
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            var result = MessageBox.Show(this, $"Are you sure you want to close the application?{Environment.NewLine}Any unsaved changes will be lost...", "Are you sure?", MessageBoxButtons.YesNo);
+
+            if (result == DialogResult.Yes)
+            {
+                this.Close();
+            }
+        }
     }
 }

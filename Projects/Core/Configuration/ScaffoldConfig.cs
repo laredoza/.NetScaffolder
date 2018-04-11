@@ -77,7 +77,7 @@ namespace Configuration
         ///      Gets or sets the DataTypes
         /// </summary>
         [ImportMany]
-        public static Lazy<IDataType, IDictionary<string, object>>[] DataTypes { get; set; }
+        public static Lazy<IDataType<Dictionary<string,string>>, IDictionary<string, object>>[] DataTypes { get; set; }
 
         #endregion
 
@@ -99,7 +99,7 @@ namespace Configuration
             DataTypes = importer.DataTypes;
         }
 
-        public static IDataType ReturnDataType(Guid dataTypeId)
+        public static IDataType<Dictionary<string, string>> ReturnDataType(Guid dataTypeId)
         {
             return DataTypes.FirstOrDefault(d => d.Metadata["ValueMetaData"].ToString().ToLower() == dataTypeId.ToString().ToLower()).Value;
         }

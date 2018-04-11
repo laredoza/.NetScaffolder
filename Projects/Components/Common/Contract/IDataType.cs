@@ -9,14 +9,22 @@ namespace DotNetScaffolder.Components.Common.Contract
 {
     using System.Net.Configuration;
 
-    public interface IDataType
+    using DotNetScaffolder.Mapping.MetaData.Model;
+
+    public interface IDataType<in T>
     {
         IHierarchy ReturnNavigation();
 
-        object AddConfigUI(object parameters);
+        IDataTypeUI<T, DT> AddConfigUI<DT>(object parameters);
 
-        bool SaveConfig();
+        bool SaveConfig(T parameters);
 
-        void LoadConfig(string basePath);
+        void LoadConfig(T parameters);
+
+        Table MetaData { get; set; }
+    }
+
+    public interface IDataType : IDataType<IDictionary<string,string>>
+    {
     }
 }

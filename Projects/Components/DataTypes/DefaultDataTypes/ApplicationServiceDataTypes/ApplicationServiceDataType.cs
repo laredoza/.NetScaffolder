@@ -12,8 +12,10 @@ using DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ApplicationServiceD
 namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
 {
     using System.IO;
+    using System.Xml;
 
     using DotNetScaffolder.Core.Common.Serializer;
+    using DotNetScaffolder.Mapping.MetaData.Model;
     using DotNetScaffolder.Mapping.MetaData.Project;
 
     [Export(typeof(IDataType))]
@@ -28,38 +30,34 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
 
         public bool Enabled { get; set; } = false;
 
-        private string filePath = string.Empty;
+        private const string FILE_NAME = "ApplicationService.mdl";
 
         public ApplicationServiceDataType()
         {
-
+            
         }
 
-        public object AddConfigUI(object parameters)
+        public IHierarchy ReturnNavigation()
         {
-            Control parent = parameters as Control;
-            ApplicationServiceUserControl newControl = new ApplicationServiceUserControl
-                                                           {
-                                                               AppServiceEnabled = { Checked = this.Enabled },
-                                                               AppServiceNamespace = { Text = this.Namespace },
-                                                               AppServiceOutputFolder = { Text = this.OutputFolder },
-                                                               Visible = true,
-                                                               Dock = DockStyle.Fill
-                                                           };
-            newControl.BringToFront();
-            parent.Controls.Add(newControl);
-            return newControl;
+            return new Hierarchy { Id = new Guid("1BC1B0C4-1E41-9146-82CF-599181CE4420"), Name = "Application Service" };
         }
 
-        public bool SaveConfig()
+        public IDataTypeUI<IDictionary<string, string>, DT> AddConfigUI<DT>(object parameters)
         {
+            return null;
+        }
+
+        public bool SaveConfig(IDictionary<string, string> parameters)
+        {
+            var filePath = Path.Combine(parameters["basePath"], FILE_NAME);
             ObjectXMLSerializer<ApplicationServiceDataType>.Save(this, filePath);
             return true;
         }
 
-        public void LoadConfig(string basePath)
+        public void LoadConfig(IDictionary<string, string> parameters)
         {
-            filePath = Path.Combine(basePath, "ApplicationServiceDataType.mdl");
+            var filePath = Path.Combine(parameters["basePath"], FILE_NAME);
+
             if (File.Exists(filePath))
             {
                 var appService = ObjectXMLSerializer<ApplicationServiceDataType>.Load(filePath);
@@ -69,9 +67,6 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
             }
         }
 
-        public IHierarchy ReturnNavigation()
-        {
-            return new Hierarchy { Id = new Guid("1BC1B0C4-1E41-9146-82CF-599181CE4420"), Name = "Application Service" };
-        }
+        public Table MetaData { get; set; }
     }
 }

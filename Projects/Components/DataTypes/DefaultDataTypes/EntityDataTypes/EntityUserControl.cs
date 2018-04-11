@@ -10,7 +10,9 @@ using System.Windows.Forms;
 
 namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.EntityDataTypes
 {
-    public partial class EntityUserControl : UserControl
+    using DotNetScaffolder.Components.Common.Contract;
+
+    public partial class EntityUserControl : UserControl, IDataTypeUI<IDictionary<string, string>, EntityDataType>
     {
         public EntityUserControl()
         {
@@ -20,6 +22,18 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.EntityDataTypes
         private void EntityUserControl1_Load(object sender, EventArgs e)
         {
 
+        }
+
+        public EntityDataType DataType { get; set; }
+
+        public void SaveConfig(IDictionary<string, string> parameters)
+        {
+            DataType.SaveConfig(parameters);
+        }
+
+        public void LoadConfig(IDictionary<string, string> parameters)
+        {
+            DataType.LoadConfig(parameters);
         }
     }
 }

@@ -31,24 +31,25 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.ProjectDetailsUserControl1 = new DotNetScaffolder.Presentation.Forms.Controls.ProjectDetailsUserControl();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.ProjectDomainUserControl1 = new DotNetScaffolder.Presentation.Forms.Controls.ProjectDomainUserControl();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.projectDomainDetailsUserControl1 = new DotNetScaffolder.Presentation.Forms.Controls.ProjectDomainDetailsUserControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.ManagePackageUserControl1 = new DotNetScaffolder.Presentation.Forms.Controls.ManagePackageUserControl();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.TemplateManagementUserControl1 = new DotNetScaffolder.Presentation.Forms.Controls.TemplateManagementUserControl();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.button6 = new System.Windows.Forms.Button();
-            this.ProjectDetailsUserControl1 = new DotNetScaffolder.Presentation.Forms.Controls.ProjectDetailsUserControl();
-            this.ProjectDomainUserControl1 = new DotNetScaffolder.Presentation.Forms.Controls.ProjectDomainUserControl();
-            this.projectDomainDetailsUserControl1 = new DotNetScaffolder.Presentation.Forms.Controls.ProjectDomainDetailsUserControl();
-            this.ManagePackageUserControl1 = new DotNetScaffolder.Presentation.Forms.Controls.ManagePackageUserControl();
-            this.TemplateManagementUserControl1 = new DotNetScaffolder.Presentation.Forms.Controls.TemplateManagementUserControl();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -113,6 +114,19 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Project Details";
             // 
+            // ProjectDetailsUserControl1
+            // 
+            this.ProjectDetailsUserControl1.BaseNameSpace = "";
+            this.ProjectDetailsUserControl1.Changed = false;
+            this.ProjectDetailsUserControl1.GroupBy = DotNetScaffolder.Mapping.MetaData.Enum.GenerationType.Domain;
+            this.ProjectDetailsUserControl1.Location = new System.Drawing.Point(6, 20);
+            this.ProjectDetailsUserControl1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.ProjectDetailsUserControl1.Name = "ProjectDetailsUserControl1";
+            this.ProjectDetailsUserControl1.OutputFolder = "";
+            this.ProjectDetailsUserControl1.Project = null;
+            this.ProjectDetailsUserControl1.Size = new System.Drawing.Size(382, 123);
+            this.ProjectDetailsUserControl1.TabIndex = 0;
+            // 
             // groupBox2
             // 
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -127,6 +141,16 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Project Domains";
             // 
+            // ProjectDomainUserControl1
+            // 
+            this.ProjectDomainUserControl1.ApplicationService = null;
+            this.ProjectDomainUserControl1.Changed = false;
+            this.ProjectDomainUserControl1.Location = new System.Drawing.Point(16, 20);
+            this.ProjectDomainUserControl1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.ProjectDomainUserControl1.Name = "ProjectDomainUserControl1";
+            this.ProjectDomainUserControl1.Size = new System.Drawing.Size(324, 106);
+            this.ProjectDomainUserControl1.TabIndex = 19;
+            // 
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.projectDomainDetailsUserControl1);
@@ -136,6 +160,24 @@
             this.groupBox3.TabIndex = 18;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Domain Details";
+            // 
+            // projectDomainDetailsUserControl1
+            // 
+            this.projectDomainDetailsUserControl1.ApplicationService = null;
+            this.projectDomainDetailsUserControl1.DomainName = "";
+            this.projectDomainDetailsUserControl1.Location = new System.Drawing.Point(7, 20);
+            this.projectDomainDetailsUserControl1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.projectDomainDetailsUserControl1.Name = "projectDomainDetailsUserControl1";
+            this.projectDomainDetailsUserControl1.Packages = null;
+            this.projectDomainDetailsUserControl1.SelectedCollectionOption = null;
+            this.projectDomainDetailsUserControl1.SelectedDomain = null;
+            this.projectDomainDetailsUserControl1.SelectedDriver = new System.Guid("00000000-0000-0000-0000-000000000000");
+            this.projectDomainDetailsUserControl1.SelectedDriverType = new System.Guid("00000000-0000-0000-0000-000000000000");
+            this.projectDomainDetailsUserControl1.SelectedNamingConvention = new System.Guid("00000000-0000-0000-0000-000000000000");
+            this.projectDomainDetailsUserControl1.SelectedPackage = null;
+            this.projectDomainDetailsUserControl1.SelectedSourceType = new System.Guid("00000000-0000-0000-0000-000000000000");
+            this.projectDomainDetailsUserControl1.Size = new System.Drawing.Size(443, 211);
+            this.projectDomainDetailsUserControl1.TabIndex = 0;
             // 
             // tabPage2
             // 
@@ -148,6 +190,14 @@
             this.tabPage2.Text = "Packages";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // ManagePackageUserControl1
+            // 
+            this.ManagePackageUserControl1.DataSource = null;
+            this.ManagePackageUserControl1.Location = new System.Drawing.Point(6, 6);
+            this.ManagePackageUserControl1.Name = "ManagePackageUserControl1";
+            this.ManagePackageUserControl1.Size = new System.Drawing.Size(975, 429);
+            this.ManagePackageUserControl1.TabIndex = 0;
+            // 
             // tabPage3
             // 
             this.tabPage3.Controls.Add(this.TemplateManagementUserControl1);
@@ -158,6 +208,14 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Templates";
             this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // TemplateManagementUserControl1
+            // 
+            this.TemplateManagementUserControl1.DataSource = null;
+            this.TemplateManagementUserControl1.Location = new System.Drawing.Point(11, 7);
+            this.TemplateManagementUserControl1.Name = "TemplateManagementUserControl1";
+            this.TemplateManagementUserControl1.Size = new System.Drawing.Size(938, 414);
+            this.TemplateManagementUserControl1.TabIndex = 0;
             // 
             // statusStrip1
             // 
@@ -176,6 +234,7 @@
             this.button1.TabIndex = 3;
             this.button1.Text = "Close";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // label1
             // 
@@ -198,60 +257,6 @@
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
-            // ProjectDetailsUserControl1
-            // 
-            this.ProjectDetailsUserControl1.BaseNameSpace = "";
-            this.ProjectDetailsUserControl1.Changed = false;
-            this.ProjectDetailsUserControl1.GroupBy = DotNetScaffolder.Mapping.MetaData.Enum.GenerationType.Domain;
-            this.ProjectDetailsUserControl1.Location = new System.Drawing.Point(6, 20);
-            this.ProjectDetailsUserControl1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.ProjectDetailsUserControl1.Name = "ProjectDetailsUserControl1";
-            this.ProjectDetailsUserControl1.OutputFolder = "";
-            this.ProjectDetailsUserControl1.Project = null;
-            this.ProjectDetailsUserControl1.Size = new System.Drawing.Size(382, 123);
-            this.ProjectDetailsUserControl1.TabIndex = 0;
-            // 
-            // ProjectDomainUserControl1
-            // 
-            this.ProjectDomainUserControl1.ApplicationService = null;
-            this.ProjectDomainUserControl1.Changed = false;
-            this.ProjectDomainUserControl1.Location = new System.Drawing.Point(16, 20);
-            this.ProjectDomainUserControl1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.ProjectDomainUserControl1.Name = "ProjectDomainUserControl1";
-            this.ProjectDomainUserControl1.Size = new System.Drawing.Size(324, 106);
-            this.ProjectDomainUserControl1.TabIndex = 19;
-            // 
-            // projectDomainDetailsUserControl1
-            // 
-            this.projectDomainDetailsUserControl1.ApplicationService = null;
-            this.projectDomainDetailsUserControl1.DomainName = "";
-            this.projectDomainDetailsUserControl1.Location = new System.Drawing.Point(7, 20);
-            this.projectDomainDetailsUserControl1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.projectDomainDetailsUserControl1.Name = "projectDomainDetailsUserControl1";
-            this.projectDomainDetailsUserControl1.SelectedDomain = null;
-            this.projectDomainDetailsUserControl1.SelectedDriver = new System.Guid("00000000-0000-0000-0000-000000000000");
-            this.projectDomainDetailsUserControl1.SelectedDriverType = new System.Guid("00000000-0000-0000-0000-000000000000");
-            this.projectDomainDetailsUserControl1.SelectedNamingConvention = new System.Guid("00000000-0000-0000-0000-000000000000");
-            this.projectDomainDetailsUserControl1.SelectedSourceType = new System.Guid("00000000-0000-0000-0000-000000000000");
-            this.projectDomainDetailsUserControl1.Size = new System.Drawing.Size(443, 211);
-            this.projectDomainDetailsUserControl1.TabIndex = 0;
-            // 
-            // ManagePackageUserControl1
-            // 
-            this.ManagePackageUserControl1.DataSource = null;
-            this.ManagePackageUserControl1.Location = new System.Drawing.Point(6, 6);
-            this.ManagePackageUserControl1.Name = "ManagePackageUserControl1";
-            this.ManagePackageUserControl1.Size = new System.Drawing.Size(975, 429);
-            this.ManagePackageUserControl1.TabIndex = 0;
-            // 
-            // TemplateManagementUserControl1
-            // 
-            this.TemplateManagementUserControl1.DataSource = null;
-            this.TemplateManagementUserControl1.Location = new System.Drawing.Point(11, 7);
-            this.TemplateManagementUserControl1.Name = "TemplateManagementUserControl1";
-            this.TemplateManagementUserControl1.Size = new System.Drawing.Size(938, 414);
-            this.TemplateManagementUserControl1.TabIndex = 0;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -264,6 +269,7 @@
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.menuStrip1);
             this.Name = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Code Generator";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();

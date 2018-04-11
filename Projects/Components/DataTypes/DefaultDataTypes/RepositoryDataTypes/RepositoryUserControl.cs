@@ -10,11 +10,25 @@ using System.Windows.Forms;
 
 namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.RepositoryDataTypes
 {
-    public partial class RepositoryUserControl : UserControl
+    using DotNetScaffolder.Components.Common.Contract;
+
+    public partial class RepositoryUserControl : UserControl, IDataTypeUI<IDictionary<string, string>, RepositoryDataType>
     {
         public RepositoryUserControl()
         {
             InitializeComponent();
+        }
+
+        public RepositoryDataType DataType { get; set; }
+
+        public void SaveConfig(IDictionary<string, string> parameters)
+        {
+            DataType?.SaveConfig(parameters);
+        }
+
+        public void LoadConfig(IDictionary<string, string> parameters)
+        {
+            DataType?.LoadConfig(parameters);
         }
     }
 }

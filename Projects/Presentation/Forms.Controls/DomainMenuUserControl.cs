@@ -1,6 +1,7 @@
 ﻿namespace DotNetScaffolder.Presentation.Forms.Controls
 {
     using System;
+    using System.Collections.Generic;
     using System.Windows.Forms;
 
     using Common.Logging;
@@ -61,16 +62,17 @@
             {
                 foreach (var hierarchy in DataSource.Package.Templates)
                 {
-                    var template = hierarchy;
-                    var dataTypeControl = ScaffoldConfig.ReturnDataType(template.DataType);
-                    dataTypeControl.LoadConfig(OutputPath);
-                    var hierarchyToAdd = dataTypeControl.ReturnNavigation();
+                    //var template = hierarchy;
+                    //var dataTypeControl = ScaffoldConfig.ReturnDataType(template.DataType);
+                    //var hierarchyToAdd = dataTypeControl.ReturnNavigation();
 
-                    var configControl = dataTypeControl.AddConfigUI(ParentConfigControl) as Control;
+                    //var configControl = dataTypeControl.AddConfigUI(ParentConfigControl);
+                    //var parameters = new Dictionary<string, string> { { "basePath", OutputPath } };
+                    //configControl.LoadConfig(parameters);
 
-                    TreeNode node = new TreeNode { Tag = configControl, Text = hierarchyToAdd.Name };
-                    // Todo: Add children as well
-                    DomainTreeView.Nodes.Add(node);
+                    //TreeNode node = new TreeNode { Tag = configControl, Text = hierarchyToAdd.Name };
+                    //// Todo: Add children as well
+                    //DomainTreeView.Nodes.Add(node);
                  }
             }
             else
@@ -81,14 +83,33 @@
             Logger.Trace("Completed UpdateDataSource()");
         }
 
+        public void Save()
+        {
+            Logger.Trace("Started Save()");
+
+            if (DataSource != null)
+            {
+                var parameters = new Dictionary<string, string> { { "basePath", OutputPath } };
+                foreach (var node in DomainTreeView.Nodes)
+                {
+                    //(node as IDataTypeUI<Dictionary<string, string>>)?.SaveConfig(parameters);
+                }
+            }
+            else
+            {
+                Logger.Trace("Data Source is null ");
+            }
+
+            Logger.Trace("Completed Save()");
+        }
+
         private void DomainTreeView_Click(object sender, EventArgs e)
         {
         }
 
         private void DomainTreeView_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            Control configControl = e.Node.Tag as Control;
-            if (configControl != null)
+            if (e.Node.Tag is Control configControl)
             {
                 configControl.BringToFront();
             }
