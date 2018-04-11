@@ -42,7 +42,19 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ApplicationServ
 
         public IDataTypeUI<IDictionary<string, string>> AddConfigUI(object parameters)
         {
-            return null;
+            Control parent = parameters as Control;
+            ApplicationServiceUserControl newControl = new ApplicationServiceUserControl
+                                                           {
+                                                               AppServiceEnabled = { Checked = this.Enabled },
+                                                               AppServiceNamespace = { Text = this.Namespace },
+                                                               AppServiceOutputFolder = { Text = this.OutputFolder },
+                                                               Visible = true,
+                                                               Dock = DockStyle.Fill,
+                                                               DataType = this
+                                                           };
+            newControl.BringToFront();
+            parent.Controls.Add(newControl);
+            return newControl;
         }
 
         public bool SaveConfig(IDictionary<string, string> parameters)

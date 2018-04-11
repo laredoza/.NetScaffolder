@@ -68,7 +68,7 @@ namespace DotNetScaffolder.Components.Common
         public Lazy<IOutputGenerator, IDictionary<string, object>>[] OutputGenerators { get; set; }
 
         [ImportMany]
-        public Lazy<IDataType<Dictionary<string,string>>, IDictionary<string, object>>[] DataTypes { get; set; }
+        public Lazy<IDataType, IDictionary<string, object>>[] DataTypes { get; set; }
 
         [ImportMany]
         public Lazy<ICollectionOption, IDictionary<string, object>>[] CollectionOptions { get; set; }

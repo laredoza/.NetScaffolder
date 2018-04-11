@@ -92,7 +92,7 @@
                 var parameters = new Dictionary<string, string> { { "basePath", OutputPath } };
                 foreach (var node in DomainTreeView.Nodes)
                 {
-                    //(node as IDataTypeUI<Dictionary<string, string>>)?.SaveConfig(parameters);
+                    (node as IDataTypeUI<Dictionary<string, string>>)?.SaveConfig(parameters);
                 }
             }
             else

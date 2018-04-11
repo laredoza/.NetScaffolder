@@ -58,7 +58,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
             this.ConfigureControl(tableControl, parent);
             FieldUserControl fieldUsercontrol = new FieldUserControl();
             this.ConfigureControl(fieldUsercontrol, parent);
-            return (IDataTypeUI<IDictionary<string, string>>)tableControl;
+            return tableControl;
         }
 
         public bool SaveConfig(IDictionary<string, string> parameters)

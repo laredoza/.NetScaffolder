@@ -49,7 +49,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
                                  };
             newControl.BringToFront();
             parent.Controls.Add(newControl);
-            return (IDataTypeUI<IDictionary<string, string>>)newControl;
+            return newControl;
         }
 
         public bool SaveConfig(IDictionary<string, string> parameters)

@@ -47,11 +47,12 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
             EntityUserControl newControl = new EntityUserControl
                                                {
                                                    Visible = true,
-                                                   Dock = DockStyle.Fill
+                                                   Dock = DockStyle.Fill,
+                                                   DataType = this
                                                };
             newControl.BringToFront();
             parent.Controls.Add(newControl);
-            return (IDataTypeUI<IDictionary<string, string>>)newControl;
+            return newControl;
         }
 
         public bool SaveConfig(IDictionary<string, string> parameters)
