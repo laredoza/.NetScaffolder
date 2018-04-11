@@ -1,15 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.Composition;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 using System.Windows.Forms;
 using DotNetScaffolder.Components.Common.Contract;
+using DotNetScaffolder.Core.Common.Serializer;
 using FormControls.TreeView;
-using DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ApplicationServiceDataTypes;
 
-namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
+namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ApplicationServiceDataTypes
 {
     using System.IO;
     using System.Xml;

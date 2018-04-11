@@ -109,6 +109,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Components\CollectionOptions\CollectionOption\DotNetScaffolder.Components.CollectionOption.csproj">
+      <Project>{b50a7e34-08c6-4d3d-a2b3-e3ce2086384a}</Project>
+      <Name>DotNetScaffolder.Components.CollectionOption</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Components\Common\DotNetScaffolder.Components.Common.csproj">
       <Project>{b39709b5-d887-46e1-acc6-cbd7880e90c5}</Project>
       <Name>DotNetScaffolder.Components.Common</Name>

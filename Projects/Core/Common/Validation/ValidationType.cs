@@ -62,6 +62,8 @@ namespace DotNetScaffolder.Core.Common.Validation
 
         TemplateLanguageOutputId,
 
-        TemplateGeneratorTypeId
+        TemplateGeneratorTypeId,
+
+        CollectionOptionId
     }
 }

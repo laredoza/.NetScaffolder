@@ -149,7 +149,6 @@
             this.ComboBoxSearch.Name = "ComboBoxSearch";
             this.ComboBoxSearch.Size = new System.Drawing.Size(414, 28);
             this.ComboBoxSearch.TabIndex = 4;
-            this.ComboBoxSearch.SelectedIndexChanged += new System.EventHandler(this.ComboBoxSearch_SelectedIndexChanged);
             // 
             // BtnRemove
             // 

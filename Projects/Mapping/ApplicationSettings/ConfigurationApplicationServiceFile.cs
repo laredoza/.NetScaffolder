@@ -55,36 +55,35 @@ namespace DotNetScaffolder.Mapping.ApplicationServices
             this.ApplicationSettings = ObjectXMLSerializer<ApplicationSettings>.Load(this.FilePersistenceOptions.Path);
 
             string dataTypeName = string.Empty;
-            Guid dataTypeId = Guid.Empty;
+            Guid dataTypeId;
             bool sort = false;
             IDataType<Dictionary<string,string>> dataTypeInterface;
             
             foreach (var dataType in ScaffoldConfig.DataTypes)
             {
-                dataTypeName = (string)dataType.Metadata["NameMetaData"];
+                dataTypeName = (string) dataType.Metadata["NameMetaData"];
                 dataTypeId = new Guid(dataType.Metadata["ValueMetaData"].ToString());
-                dataTypeInterface = dataType.Value;
 
-                if (!this.ApplicationSettings.Templates[0].Children.Any(t => t.Id.ToString().ToLower() == dataTypeId.ToString().ToLower()))
+                if (this.ApplicationSettings.Templates[0].Children
+                    .All(t => t.Id.ToString().ToLower() != dataTypeId.ToString().ToLower()))
                 {
-                    this.ApplicationSettings.Templates[0].Children.Add(new Template {
+                    this.ApplicationSettings.Templates[0].Children.Add(new Template
+                    {
                         Id = dataTypeId,
                         Name = dataTypeName,
                         HierarchyType = HierarchyType.Group,
                         Version = 1,
-                        Enabled = true
+                        Enabled = true,
+                        DataType = dataTypeId
                     });
                     sort = true;
-                }
-                else
-                {
-                    var a = dataType; 
                 }
             }
 
             if (sort)
             {
-                this.ApplicationSettings.Templates[0].Children = this.ApplicationSettings.Templates[0].Children.OrderBy(t => t.Name).ToList();
+                this.ApplicationSettings.Templates[0].Children =
+                    this.ApplicationSettings.Templates[0].Children.OrderBy(t => t.Name).ToList();
             }
 
             Logger.Trace($"Completed Load() - Path: {this.FilePersistenceOptions.Path}");
