@@ -15,7 +15,7 @@ namespace DotNetScaffolder.Components.Common.Contract
     {
         IHierarchy ReturnNavigation();
 
-        IDataTypeUI<T, DT> AddConfigUI<DT>(object parameters);
+        IDataTypeUI<T> AddConfigUI(object parameters);
 
         bool SaveConfig(T parameters);
 

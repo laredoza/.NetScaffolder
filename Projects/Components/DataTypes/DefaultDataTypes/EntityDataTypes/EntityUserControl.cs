@@ -12,7 +12,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.EntityDataTypes
 {
     using DotNetScaffolder.Components.Common.Contract;
 
-    public partial class EntityUserControl : UserControl, IDataTypeUI<IDictionary<string, string>, EntityDataType>
+    public partial class EntityUserControl : UserControl, IDataTypeUI<IDictionary<string, string>>
     {
         public EntityUserControl()
         {

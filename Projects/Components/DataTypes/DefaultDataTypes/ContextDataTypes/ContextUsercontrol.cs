@@ -11,7 +11,7 @@ using System.Windows.Forms;
 namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataTypes
 {
     using DotNetScaffolder.Components.Common.Contract;
-    public partial class ContextUserControl : UserControl, IDataTypeUI<IDictionary<string, string>, ContextDataType>
+    public partial class ContextUserControl : UserControl, IDataTypeUI<IDictionary<string, string>>
     {
         public ContextDataType DataType { get; set; }
 

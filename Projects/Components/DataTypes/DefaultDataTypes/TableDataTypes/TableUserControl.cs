@@ -12,7 +12,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.TableDataTypes
 {
     using DotNetScaffolder.Components.Common.Contract;
 
-    public partial class TableUserControl : UserControl, IDataTypeUI<IDictionary<string, string>, TableDataType>
+    public partial class TableUserControl : UserControl, IDataTypeUI<IDictionary<string, string>>
     {
         public TableUserControl()
         {

@@ -11,7 +11,7 @@ using System.Windows.Forms;
 namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.UnitOfWorkDataTypes
 {
     using DotNetScaffolder.Components.Common.Contract;
-    public partial class UnitOfWorkUserControl : UserControl, IDataTypeUI<IDictionary<string, string>, UnitOfWorkDataType>
+    public partial class UnitOfWorkUserControl : UserControl, IDataTypeUI<IDictionary<string, string>>
     {
         public UnitOfWorkUserControl()
         {

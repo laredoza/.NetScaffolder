@@ -11,7 +11,7 @@ using System.Windows.Forms;
 namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ApplicationServiceDataTypes
 {
     using DotNetScaffolder.Components.Common.Contract;
-    public partial class ApplicationServiceUserControl : UserControl, IDataTypeUI<IDictionary<string, string>, ApplicationServiceDataType>
+    public partial class ApplicationServiceUserControl : UserControl, IDataTypeUI<IDictionary<string, string>>
     {
         public ApplicationServiceUserControl()
         {

@@ -8,6 +8,7 @@ using FormControls.TreeView;
 
 namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ApplicationServiceDataTypes
 {
+    using System.Collections.Generic;
     using System.IO;
     using System.Xml;
 
@@ -39,7 +40,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ApplicationServ
             return new Hierarchy { Id = new Guid("1BC1B0C4-1E41-9146-82CF-599181CE4420"), Name = "Application Service" };
         }
 
-        public IDataTypeUI<IDictionary<string, string>, DT> AddConfigUI<DT>(object parameters)
+        public IDataTypeUI<IDictionary<string, string>> AddConfigUI(object parameters)
         {
             return null;
         }

@@ -48,7 +48,7 @@
             return new Hierarchy { Id = new Guid("1BC1B0C4-1E41-9146-82CF-599181CE4480"), Name = "Unit of Work" };
         }
 
-        public IDataTypeUI<IDictionary<string, string>, DT> AddConfigUI<DT>(object parameters)
+        public IDataTypeUI<IDictionary<string, string>> AddConfigUI(object parameters)
         {
             var parent = parameters as Control;
             var newControl = new UnitOfWorkUserControl
@@ -58,7 +58,7 @@
                                  };
             newControl.BringToFront();
             parent.Controls.Add(newControl);
-            return (IDataTypeUI<IDictionary<string, string>, DT>)newControl;
+            return (IDataTypeUI<IDictionary<string, string>>)newControl;
         }
 
         public bool SaveConfig(IDictionary<string, string> parameters)

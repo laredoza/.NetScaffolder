@@ -51,14 +51,14 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
             return new Hierarchy { Id = new Guid("1BC1B0C4-1E41-9146-82CF-599181CE4490"), Name = "Table" };
         }
 
-        public IDataTypeUI<IDictionary<string, string>, DT> AddConfigUI<DT>(object parameters)
+        public IDataTypeUI<IDictionary<string, string>> AddConfigUI(object parameters)
         {
             Control parent = parameters as Control;
             TableUserControl tableControl = new TableUserControl();
             this.ConfigureControl(tableControl, parent);
             FieldUserControl fieldUsercontrol = new FieldUserControl();
             this.ConfigureControl(fieldUsercontrol, parent);
-            return (IDataTypeUI<IDictionary<string, string>, DT>)tableControl;
+            return (IDataTypeUI<IDictionary<string, string>>)tableControl;
         }
 
         public bool SaveConfig(IDictionary<string, string> parameters)

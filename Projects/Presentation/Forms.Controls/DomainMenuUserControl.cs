@@ -62,18 +62,18 @@
             {
                 foreach (var hierarchy in DataSource.Package.Templates)
                 {
-                    //var template = hierarchy;
-                    //var dataTypeControl = ScaffoldConfig.ReturnDataType(template.DataType);
-                    //var hierarchyToAdd = dataTypeControl.ReturnNavigation();
+                    var template = hierarchy;
+                    var dataTypeControl = ScaffoldConfig.ReturnDataType(template.DataType);
+                    var hierarchyToAdd = dataTypeControl.ReturnNavigation();
 
-                    //var configControl = dataTypeControl.AddConfigUI(ParentConfigControl);
-                    //var parameters = new Dictionary<string, string> { { "basePath", OutputPath } };
-                    //configControl.LoadConfig(parameters);
+                    var configControl = dataTypeControl.AddConfigUI(ParentConfigControl);
+                    var parameters = new Dictionary<string, string> { { "basePath", OutputPath } };
+                    configControl.LoadConfig(parameters);
 
-                    //TreeNode node = new TreeNode { Tag = configControl, Text = hierarchyToAdd.Name };
-                    //// Todo: Add children as well
-                    //DomainTreeView.Nodes.Add(node);
-                 }
+                    TreeNode node = new TreeNode { Tag = configControl, Text = hierarchyToAdd.Name };
+                    // Todo: Add children as well
+                    DomainTreeView.Nodes.Add(node);
+                }
             }
             else
             {

@@ -39,7 +39,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
             return new Hierarchy { Id = new Guid("1BC1B0C4-1E41-9146-82CF-599181CE4450"), Name = "Repository" };
         }
 
-        public IDataTypeUI<IDictionary<string, string>, DT> AddConfigUI<DT>(object parameters)
+        public IDataTypeUI<IDictionary<string, string>> AddConfigUI(object parameters)
         {
             Control parent = parameters as Control;
             RepositoryUserControl newControl = new RepositoryUserControl
@@ -49,7 +49,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
                                                    };
             newControl.BringToFront();
             parent.Controls.Add(newControl);
-            return (IDataTypeUI<IDictionary<string, string>, DT>)newControl;
+            return (IDataTypeUI<IDictionary<string, string>>)newControl;
         }
 
         public bool SaveConfig(IDictionary<string, string> parameters)

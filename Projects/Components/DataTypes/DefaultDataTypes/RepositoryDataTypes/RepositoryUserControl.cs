@@ -12,7 +12,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.RepositoryDataT
 {
     using DotNetScaffolder.Components.Common.Contract;
 
-    public partial class RepositoryUserControl : UserControl, IDataTypeUI<IDictionary<string, string>, RepositoryDataType>
+    public partial class RepositoryUserControl : UserControl, IDataTypeUI<IDictionary<string, string>>
     {
         public RepositoryUserControl()
         {

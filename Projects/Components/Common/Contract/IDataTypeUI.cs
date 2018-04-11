@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace DotNetScaffolder.Components.Common.Contract
 {
-    public interface IDataTypeUI<in T, DT>
+    public interface IDataTypeUI<in T>
     {
-        DT DataType { get; set; }
-
         void SaveConfig(T parameters);
 
         void LoadConfig(T parameters);
