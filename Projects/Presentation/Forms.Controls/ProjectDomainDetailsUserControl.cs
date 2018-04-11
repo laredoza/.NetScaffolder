@@ -14,14 +14,10 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
     using System;
     using System.Collections.Generic;
     using System.Windows.Forms;
-
     using Common.Logging;
-
     using Configuration;
-
     using DotNetScaffolder.Core.Common;
     using DotNetScaffolder.Mapping.MetaData.Domain;
-    using DotNetScaffolder.Mapping.MetaData.Project;
     using DotNetScaffolder.Mapping.MetaData.Project.Packages;
     using System.Linq;
     using DotNetScaffolder.Mapping.ApplicationServices;
@@ -91,10 +87,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         /// </summary>
         public IProjectDefinitionApplicationService ApplicationService
         {
-            get
-            {
-                return this.applicationService;
-            }
+            get { return this.applicationService; }
 
             set
             {
@@ -169,7 +162,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
 
                 if (this.SelectedDomain != null)
                 {
-                    result = this.SelectedDomain.DriverId;
+                    result = this.SelectedDomain.CollectionOptionId;
                     Logger.Trace($"CollectionOptionId set to {this.SelectedDomain.CollectionOptionId}.");
                 }
                 else
@@ -198,10 +191,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         /// </summary>
         public DomainDefinition SelectedDomain
         {
-            get
-            {
-                return this.selectedDomain;
-            }
+            get { return this.selectedDomain; }
 
             set
             {
@@ -403,10 +393,10 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
             {
                 items.Add(
                     new ComboboxItem
-                        {
-                            Text = (string)driverType.Metadata["TypeMetaData"],
-                            Value = new Guid(driverType.Metadata["TypeIdMetaData"].ToString())
-                        });
+                    {
+                        Text = (string) driverType.Metadata["TypeMetaData"],
+                        Value = new Guid(driverType.Metadata["TypeIdMetaData"].ToString())
+                    });
             }
 
             return items.ToArray();
@@ -431,10 +421,10 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
                 {
                     items.Add(
                         new ComboboxItem
-                            {
-                                Text = (string)driverType.Metadata["NameMetaData"],
-                                Value = new Guid(driverType.Metadata["ValueMetaData"].ToString())
-                            });
+                        {
+                            Text = (string) driverType.Metadata["NameMetaData"],
+                            Value = new Guid(driverType.Metadata["ValueMetaData"].ToString())
+                        });
                 }
             }
 
@@ -455,10 +445,10 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
             {
                 items.Add(
                     new ComboboxItem
-                        {
-                            Text = (string)namingConvention.Metadata["NameMetaData"],
-                            Value = new Guid(namingConvention.Metadata["ValueMetaData"].ToString())
-                        });
+                    {
+                        Text = (string) namingConvention.Metadata["NameMetaData"],
+                        Value = new Guid(namingConvention.Metadata["ValueMetaData"].ToString())
+                    });
             }
 
             return items.ToArray();
@@ -478,10 +468,10 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
             {
                 items.Add(
                     new ComboboxItem
-                        {
-                            Text = (string)sourceType.Metadata["NameMetaData"],
-                            Value = new Guid(sourceType.Metadata["ValueMetaData"].ToString())
-                        });
+                    {
+                        Text = (string) sourceType.Metadata["NameMetaData"],
+                        Value = new Guid(sourceType.Metadata["ValueMetaData"].ToString())
+                    });
             }
 
             return items.OrderBy(i => i.Text).ToArray();
@@ -501,14 +491,15 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
             {
                 items.Add(
                     new ComboboxItem
-                        {
-                            Text = (string)collectionOption.Metadata["NameMetaData"],
-                            Value = new Guid(collectionOption.Metadata["ValueMetaData"].ToString())
-                        });
+                    {
+                        Text = (string) collectionOption.Metadata["NameMetaData"],
+                        Value = new Guid(collectionOption.Metadata["ValueMetaData"].ToString())
+                    });
             }
 
             return items.OrderBy(i => i.Text).ToArray();
         }
+
         #endregion
 
         #region Other Methods
@@ -526,7 +517,8 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         {
             if (this.ComboBoxCollectionOption.SelectedItem != null)
             {
-                this.SelectedCollectionOptionId = (Guid)(this.ComboBoxCollectionOption.SelectedItem as ComboboxItem).Value;
+                this.SelectedCollectionOptionId =
+                    (Guid) (this.ComboBoxCollectionOption.SelectedItem as ComboboxItem).Value;
             }
         }
 
@@ -541,7 +533,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         /// </param>
         private void ComboBoxDriver_SelectedIndexChanged(object sender, EventArgs e)
         {
-            this.SelectedDriver = (Guid)(this.ComboBoxDriver.SelectedItem as ComboboxItem).Value;
+            this.SelectedDriver = (Guid) (this.ComboBoxDriver.SelectedItem as ComboboxItem).Value;
 
             ComboboxItem item = this.ComboBoxDriver.SelectedItem as ComboboxItem;
             this.ComboBoxDriverType.DataSource = this.ReturnDriverTypes(item);
@@ -560,7 +552,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         /// </param>
         private void ComboBoxDriverType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            this.SelectedDriverType = (Guid)(this.ComboBoxDriverType.SelectedItem as ComboboxItem).Value;
+            this.SelectedDriverType = (Guid) (this.ComboBoxDriverType.SelectedItem as ComboboxItem).Value;
         }
 
         /// <summary>
@@ -574,7 +566,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         /// </param>
         private void ComboBoxNamingConvention_SelectedIndexChanged(object sender, EventArgs e)
         {
-            this.SelectedNamingConvention = (Guid)(this.ComboBoxNamingConvention.SelectedItem as ComboboxItem).Value;
+            this.SelectedNamingConvention = (Guid) (this.ComboBoxNamingConvention.SelectedItem as ComboboxItem).Value;
         }
 
         /// <summary>
@@ -602,7 +594,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         /// </param>
         private void ComboBoxSourceType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            this.SelectedSourceType = (Guid)(this.ComboBoxSourceType.SelectedItem as ComboboxItem).Value;
+            this.SelectedSourceType = (Guid) (this.ComboBoxSourceType.SelectedItem as ComboboxItem).Value;
         }
 
         /// <summary>
