@@ -275,28 +275,6 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         }
 
         /// <summary>
-        /// The text box version_ text changed.
-        /// </summary>
-        /// <param name="sender">
-        /// The sender.
-        /// </param>
-        /// <param name="e">
-        /// The e.
-        /// </param>
-        //private void TextBoxVersion_TextChanged(object sender, EventArgs e)
-        //{
-        //    if (!string.IsNullOrEmpty(this.TextBoxVersion.Text))
-        //    {
-        //        this.Version = Convert.ToDouble(this.TextBoxVersion.Text);
-        //    }
-        //    else
-        //    {
-        //        this.Version = 0;
-        //        this.TextBoxVersion.Text = 0.ToString();
-        //    }
-        //}
-
-        /// <summary>
         ///     The update data source.
         /// </summary>
         private void UpdateDataSource()
@@ -304,8 +282,6 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
             if (this.DataSource != null)
             {
                 this.TextBoxName.Text = this.DataSource.Name;
-
-                //this.TextBoxVersion.Text = this.DataSource.Version.ToString();
                 this.CheckBoxEnabled.Checked = this.DataSource.Enabled;
 
                 if (this.dataSource.HierarchyType == HierarchyType.Item)

@@ -72,7 +72,8 @@ namespace DotNetScaffolder.Mapping.ApplicationServices
                         Name = dataTypeName,
                         HierarchyType = HierarchyType.Group,
                         Version = 1,
-                        Enabled = true
+                        Enabled = true,
+                        DataType = dataTypeId
                     });
                     sort = true;
                 }
