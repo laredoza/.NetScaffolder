@@ -169,7 +169,6 @@
             this.projectDomainDetailsUserControl1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.projectDomainDetailsUserControl1.Name = "projectDomainDetailsUserControl1";
             this.projectDomainDetailsUserControl1.Packages = null;
-            this.projectDomainDetailsUserControl1.SelectedCollectionOption = null;
             this.projectDomainDetailsUserControl1.SelectedDomain = null;
             this.projectDomainDetailsUserControl1.SelectedDriver = new System.Guid("00000000-0000-0000-0000-000000000000");
             this.projectDomainDetailsUserControl1.SelectedDriverType = new System.Guid("00000000-0000-0000-0000-000000000000");

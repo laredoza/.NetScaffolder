@@ -6,6 +6,8 @@ using System.Windows.Forms;
 
 namespace DotNetScaffolder.Presentation.Forms.Controls
 {
+    using System;
+
     public partial class ManageDataSourceForm : Form
     {
         /// <summary>
