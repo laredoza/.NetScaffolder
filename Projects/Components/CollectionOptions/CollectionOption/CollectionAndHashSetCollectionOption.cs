@@ -15,7 +15,7 @@ namespace DotNetScaffolder.Components.CollectionOption
     #endregion
 
     /// <summary>
-    /// The collection and hash set collection option.
+    ///     The collection and hash set collection option.
     /// </summary>
     [Export(typeof(ICollectionOption))]
     [ExportMetadata("NameMetaData", "Collection")]
@@ -23,7 +23,7 @@ namespace DotNetScaffolder.Components.CollectionOption
     public class CollectionAndHashSetCollectionOption : ICollectionOption
     {
         /// <summary>
-        /// The class name.
+        ///     The class name.
         /// </summary>
         public string ClassName => "Hashtable";
     }
