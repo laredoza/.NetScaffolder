@@ -18,9 +18,6 @@ T4 templates will be used to generate the different layers. Packages consist of 
 
 ### Generated Project Types:
 
-- MVC (context, ef entity & presentation)
-- MVC (context, ef entity, repository & presentation)
-- MVC (Domain Driven - ef)
-- MVC (context, NHibernate entity & presentation)
-- MVC (context, NHibernate entity, repository & presentation)
-- MVC (Domain Driven - NHibernate)
+- MVC (Context, Entities (Entity Framework / NHibernate entity) & Presentation)
+- MVC (Context, Entities (Entity Framework / NHibernate entity), Repository & Presentation)
+- MVC (Domain Driven - Entity Framework / NHibernate)
