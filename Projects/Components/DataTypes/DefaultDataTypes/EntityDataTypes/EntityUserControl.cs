@@ -28,12 +28,14 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.EntityDataTypes
 
         public void SaveConfig(IDictionary<string, string> parameters)
         {
-            DataType.SaveConfig(parameters);
+            DataType.Save(parameters);
         }
 
         public void LoadConfig(IDictionary<string, string> parameters)
         {
-            DataType.LoadConfig(parameters);
+            DataType.Load(parameters);
         }
+
+        public event EventHandler<IDataType<IDictionary<string, string>>> OnNavigationChanged;
     }
 }

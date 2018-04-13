@@ -22,13 +22,13 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
 
     public class DtoDataType : IDataType
     {
-        public string Namespace { get; set; } = "Repository";
+        public string Namespace { get; set; } = "Dto";
 
-        public string OutputFolder { get; set; } = "Repository";
+        public string OutputFolder { get; set; } = "Dto";
 
         public bool Enabled { get; set; } = false;
 
-        private const string FILE_NAME = "Repository.mdl";
+        private const string FILE_NAME = "Dto.mdl";
 
         private Control tableControl;
         private Control fieldsControl;
@@ -48,27 +48,32 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
 
         public IHierarchy ReturnNavigation()
         {
-            return new Hierarchy { Id = new Guid("1BC1B0C4-1E41-9146-82CF-599181CE4490"), Name = "Table" };
+            return new Hierarchy { Id = new Guid("1BC1B0C4-1E41-9146-82CF-599181CE4490"), Name = "Dto" };
         }
 
-        public IDataTypeUI<IDictionary<string, string>> AddConfigUI(object parameters)
+        public IDataTypeUI<IDictionary<string, string>> CreateUI(IDictionary<string,string> parameters)
         {
-            Control parent = parameters as Control;
-            TableUserControl tableControl = new TableUserControl();
-            this.ConfigureControl(tableControl, parent);
-            FieldUserControl fieldUsercontrol = new FieldUserControl();
-            this.ConfigureControl(fieldUsercontrol, parent);
+            var parentControl = new Control();
+            var tableControl = new TableUserControl();
+            this.ConfigureControl(tableControl, parentControl);
+            var fieldUsercontrol = new FieldUserControl();
+            this.ConfigureControl(fieldUsercontrol, parentControl);
             return tableControl;
         }
 
-        public bool SaveConfig(IDictionary<string, string> parameters)
+        public IDataTypeUI<IDictionary<string, string>> CreateUI()
+        {
+            return this.CreateUI(null);
+        }
+
+        public bool Save(IDictionary<string, string> parameters)
         {
             var filePath = Path.Combine(parameters["basePath"], FILE_NAME);
             ObjectXMLSerializer<DtoDataType>.Save(this, filePath);
             return true;
         }
 
-        public void LoadConfig(IDictionary<string, string> parameters)
+        public void Load(IDictionary<string, string> parameters)
         {
             var filePath = Path.Combine(parameters["basePath"], FILE_NAME);
 

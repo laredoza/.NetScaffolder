@@ -42,12 +42,15 @@
             this.label25 = new System.Windows.Forms.Label();
             this.label24 = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnNew = new System.Windows.Forms.Button();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // ContextEnabled
             // 
             this.ContextEnabled.AutoSize = true;
-            this.ContextEnabled.Location = new System.Drawing.Point(271, 84);
+            this.ContextEnabled.Location = new System.Drawing.Point(272, 90);
             this.ContextEnabled.Name = "ContextEnabled";
             this.ContextEnabled.Size = new System.Drawing.Size(65, 17);
             this.ContextEnabled.TabIndex = 56;
@@ -57,7 +60,7 @@
             // LoggingEnabled
             // 
             this.LoggingEnabled.AutoSize = true;
-            this.LoggingEnabled.Location = new System.Drawing.Point(271, 61);
+            this.LoggingEnabled.Location = new System.Drawing.Point(272, 67);
             this.LoggingEnabled.Name = "LoggingEnabled";
             this.LoggingEnabled.Size = new System.Drawing.Size(106, 17);
             this.LoggingEnabled.TabIndex = 55;
@@ -66,7 +69,7 @@
             // 
             // InheritFromInterface
             // 
-            this.InheritFromInterface.Location = new System.Drawing.Point(120, 123);
+            this.InheritFromInterface.Location = new System.Drawing.Point(121, 129);
             this.InheritFromInterface.Name = "InheritFromInterface";
             this.InheritFromInterface.Size = new System.Drawing.Size(121, 20);
             this.InheritFromInterface.TabIndex = 54;
@@ -78,14 +81,14 @@
             "None",
             "Single",
             "Extral"});
-            this.ConstructionOptions.Location = new System.Drawing.Point(120, 96);
+            this.ConstructionOptions.Location = new System.Drawing.Point(121, 102);
             this.ConstructionOptions.Name = "ConstructionOptions";
             this.ConstructionOptions.Size = new System.Drawing.Size(121, 21);
             this.ConstructionOptions.TabIndex = 53;
             // 
             // OutputFolder
             // 
-            this.OutputFolder.Location = new System.Drawing.Point(120, 68);
+            this.OutputFolder.Location = new System.Drawing.Point(121, 74);
             this.OutputFolder.Name = "OutputFolder";
             this.OutputFolder.Size = new System.Drawing.Size(121, 20);
             this.OutputFolder.TabIndex = 52;
@@ -93,7 +96,7 @@
             // 
             // Namespace
             // 
-            this.Namespace.Location = new System.Drawing.Point(120, 39);
+            this.Namespace.Location = new System.Drawing.Point(121, 45);
             this.Namespace.Name = "Namespace";
             this.Namespace.Size = new System.Drawing.Size(121, 20);
             this.Namespace.TabIndex = 51;
@@ -101,7 +104,7 @@
             // 
             // ContextName
             // 
-            this.ContextName.Location = new System.Drawing.Point(120, 13);
+            this.ContextName.Location = new System.Drawing.Point(121, 19);
             this.ContextName.Name = "ContextName";
             this.ContextName.Size = new System.Drawing.Size(121, 20);
             this.ContextName.TabIndex = 50;
@@ -110,7 +113,7 @@
             // label27
             // 
             this.label27.AutoSize = true;
-            this.label27.Location = new System.Drawing.Point(6, 121);
+            this.label27.Location = new System.Drawing.Point(7, 127);
             this.label27.Name = "label27";
             this.label27.Size = new System.Drawing.Size(110, 13);
             this.label27.TabIndex = 49;
@@ -119,7 +122,7 @@
             // GenerateInterface
             // 
             this.GenerateInterface.AutoSize = true;
-            this.GenerateInterface.Location = new System.Drawing.Point(271, 38);
+            this.GenerateInterface.Location = new System.Drawing.Point(272, 44);
             this.GenerateInterface.Name = "GenerateInterface";
             this.GenerateInterface.Size = new System.Drawing.Size(115, 17);
             this.GenerateInterface.TabIndex = 48;
@@ -129,7 +132,7 @@
             // CreateDb
             // 
             this.CreateDb.AutoSize = true;
-            this.CreateDb.Location = new System.Drawing.Point(271, 15);
+            this.CreateDb.Location = new System.Drawing.Point(272, 21);
             this.CreateDb.Name = "CreateDb";
             this.CreateDb.Size = new System.Drawing.Size(184, 17);
             this.CreateDb.TabIndex = 47;
@@ -139,7 +142,7 @@
             // label26
             // 
             this.label26.AutoSize = true;
-            this.label26.Location = new System.Drawing.Point(11, 96);
+            this.label26.Location = new System.Drawing.Point(12, 102);
             this.label26.Name = "label26";
             this.label26.Size = new System.Drawing.Size(108, 13);
             this.label26.TabIndex = 46;
@@ -148,7 +151,7 @@
             // label25
             // 
             this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(45, 68);
+            this.label25.Location = new System.Drawing.Point(46, 74);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(74, 13);
             this.label25.TabIndex = 45;
@@ -157,7 +160,7 @@
             // label24
             // 
             this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(45, 41);
+            this.label24.Location = new System.Drawing.Point(46, 47);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(69, 13);
             this.label24.TabIndex = 44;
@@ -166,35 +169,57 @@
             // label23
             // 
             this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(37, 16);
+            this.label23.Location = new System.Drawing.Point(38, 22);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(77, 13);
             this.label23.TabIndex = 43;
             this.label23.Text = "Context Name:";
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.OutputFolder);
+            this.groupBox1.Controls.Add(this.ContextEnabled);
+            this.groupBox1.Controls.Add(this.label23);
+            this.groupBox1.Controls.Add(this.LoggingEnabled);
+            this.groupBox1.Controls.Add(this.label24);
+            this.groupBox1.Controls.Add(this.InheritFromInterface);
+            this.groupBox1.Controls.Add(this.label25);
+            this.groupBox1.Controls.Add(this.ConstructionOptions);
+            this.groupBox1.Controls.Add(this.label26);
+            this.groupBox1.Controls.Add(this.CreateDb);
+            this.groupBox1.Controls.Add(this.Namespace);
+            this.groupBox1.Controls.Add(this.GenerateInterface);
+            this.groupBox1.Controls.Add(this.ContextName);
+            this.groupBox1.Controls.Add(this.label27);
+            this.groupBox1.Location = new System.Drawing.Point(3, 3);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(509, 165);
+            this.groupBox1.TabIndex = 57;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Context settings";
+            // 
+            // btnNew
+            // 
+            this.btnNew.Location = new System.Drawing.Point(437, 174);
+            this.btnNew.Name = "btnNew";
+            this.btnNew.Size = new System.Drawing.Size(75, 23);
+            this.btnNew.TabIndex = 58;
+            this.btnNew.Text = "Add";
+            this.btnNew.UseVisualStyleBackColor = true;
+            this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
+            // 
             // ContextUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.ContextEnabled);
-            this.Controls.Add(this.LoggingEnabled);
-            this.Controls.Add(this.InheritFromInterface);
-            this.Controls.Add(this.ConstructionOptions);
-            this.Controls.Add(this.OutputFolder);
-            this.Controls.Add(this.Namespace);
-            this.Controls.Add(this.ContextName);
-            this.Controls.Add(this.label27);
-            this.Controls.Add(this.GenerateInterface);
-            this.Controls.Add(this.CreateDb);
-            this.Controls.Add(this.label26);
-            this.Controls.Add(this.label25);
-            this.Controls.Add(this.label24);
-            this.Controls.Add(this.label23);
+            this.Controls.Add(this.btnNew);
+            this.Controls.Add(this.groupBox1);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "ContextUserControl";
-            this.Size = new System.Drawing.Size(467, 158);
+            this.Size = new System.Drawing.Size(515, 201);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -214,5 +239,7 @@
         private System.Windows.Forms.Label label25;
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button btnNew;
     }
 }

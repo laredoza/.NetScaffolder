@@ -27,5 +27,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.UnitOfWorkDataT
         public void LoadConfig(IDictionary<string, string> parameters)
         {
         }
+
+        public event EventHandler<IDataType<IDictionary<string, string>>> OnNavigationChanged;
     }
 }

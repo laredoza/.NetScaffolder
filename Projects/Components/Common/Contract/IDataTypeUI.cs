@@ -6,10 +6,14 @@ using System.Threading.Tasks;
 
 namespace DotNetScaffolder.Components.Common.Contract
 {
-    public interface IDataTypeUI<in T>
+    using FormControls.TreeView;
+
+    public interface IDataTypeUI<T>
     {
         void SaveConfig(T parameters);
 
         void LoadConfig(T parameters);
+
+        event EventHandler<IDataType<T>> OnNavigationChanged;
     }
 }

@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Windows.Forms;
 
     using Common.Logging;
@@ -23,15 +24,14 @@
 
         private DomainDefinition dataSource;
 
+        private Control activeControl;
+
         /// <summary>
         ///     Gets or sets the data source.
         /// </summary>
         public DomainDefinition DataSource
         {
-            get
-            {
-                return dataSource;
-            }
+            get => dataSource;
             set
             {
                 if (dataSource != value)
@@ -62,16 +62,42 @@
             {
                 foreach (var hierarchy in DataSource.Package.Templates)
                 {
-                    var template = hierarchy;
-                    var dataTypeControl = ScaffoldConfig.ReturnDataType(template.DataType);
-                    var hierarchyToAdd = dataTypeControl.ReturnNavigation();
-
-                    var configControl = dataTypeControl.AddConfigUI(ParentConfigControl);
                     var parameters = new Dictionary<string, string> { { "basePath", OutputPath } };
-                    configControl.LoadConfig(parameters);
 
-                    TreeNode node = new TreeNode { Tag = configControl, Text = hierarchyToAdd.Name };
-                    // Todo: Add children as well
+                    var template = hierarchy;
+                    var dataType = ScaffoldConfig.ReturnDataType(template.DataType);
+                    dataType.Load(parameters);
+                    var navigation = dataType.ReturnNavigation();
+
+                    var configControl = dataType.CreateUI();
+                    var control = configControl as Control;
+
+                    if (control == null) continue;
+
+                    configControl.OnNavigationChanged += ConfigControlOnOnNavigationChanged;
+
+                    control.Visible = false;
+                    ParentConfigControl.Controls.Add(control);
+
+                    var node = new TreeNode { Tag = configControl, Text = navigation.Name, Name = navigation.Id.ToString()};
+
+                    if (navigation.Children.Any())
+                    {
+                        foreach (var child in navigation.Children)
+                        {
+                            node.Nodes.Add(new TreeNode
+                                               {
+                                                   Tag = configControl,
+                                                   Text = child.Name,
+                                                   Name = child.Id.ToString()
+                                               });
+                        }
+                    }
+                    else
+                    {
+                        node.Tag = configControl;
+                    }
+
                     DomainTreeView.Nodes.Add(node);
                 }
             }
@@ -83,6 +109,36 @@
             Logger.Trace("Completed UpdateDataSource()");
         }
 
+        private void ConfigControlOnOnNavigationChanged(object sender, IDataType<IDictionary<string, string>> type)
+        {
+            var navigation = type.ReturnNavigation();
+            var node = DomainTreeView.Nodes.Find(navigation.Id.ToString(), false).FirstOrDefault();
+
+            if (node != null)
+            {               
+                foreach (var nav in navigation.Children)
+                {
+                    var childNode = DomainTreeView.Nodes.Find(nav.Id.ToString(), false).FirstOrDefault();
+
+                    if (childNode != null)
+                    {
+                        childNode.Text = nav.Name;
+                    }
+                    else
+                    {
+                        childNode = new TreeNode
+                                        {
+                                            Tag = node.Tag,
+                                            Text = nav.Name,
+                                            Name = nav.Id.ToString()
+                                        };
+                        node.Nodes.Add(childNode);
+                        node.Expand();
+                    }
+                }
+            }
+        }
+
         public void Save()
         {
             Logger.Trace("Started Save()");
@@ -92,8 +148,10 @@
                 var parameters = new Dictionary<string, string> { { "basePath", OutputPath } };
                 foreach (TreeNode node in DomainTreeView.Nodes)
                 {
-                    (node.Tag as IDataTypeUI<Dictionary<string, string>>)?.SaveConfig(parameters);
+                    (node.Tag as IDataTypeUI<IDictionary<string, string>>)?.SaveConfig(parameters);
                 }
+                //TODO: Replace with something less annoying
+                MessageBox.Show("Save complete", "Success");
             }
             else
             {
@@ -109,9 +167,23 @@
 
         private void DomainTreeView_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            if (e.Node.Tag is Control configControl)
+            if (activeControl != null)
             {
-                configControl.BringToFront();
+                activeControl.Visible = false;
+            }
+
+            if (e.Node.Tag is IDataTypeUI<IDictionary<string, string>> configControl)
+            {
+                var parameters = new Dictionary<string, string> { { "basePath", OutputPath }, { "name", e.Node.Name } };
+
+                configControl.LoadConfig(parameters);
+
+                if (e.Node.Tag is Control control)
+                {
+                    activeControl = control;
+                    activeControl.Visible = true;
+                    activeControl.BringToFront();
+                }
             }
         }
     }

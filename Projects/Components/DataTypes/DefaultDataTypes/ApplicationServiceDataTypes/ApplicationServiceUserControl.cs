@@ -11,6 +11,9 @@ using System.Windows.Forms;
 namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ApplicationServiceDataTypes
 {
     using DotNetScaffolder.Components.Common.Contract;
+
+    using FormControls.TreeView;
+
     public partial class ApplicationServiceUserControl : UserControl, IDataTypeUI<IDictionary<string, string>>
     {
         public ApplicationServiceUserControl()
@@ -27,18 +30,20 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ApplicationServ
             DataType.Enabled = this.AppServiceEnabled.Checked;
             DataType.Namespace = this.AppServiceNamespace.Text;
             DataType.OutputFolder = this.AppServiceOutputFolder.Text;
-            DataType.SaveConfig(parameters);
+            DataType.Save(parameters);
         }
 
         public void LoadConfig(IDictionary<string, string> parameters)
         {
             if (DataType == null) return;
 
-            DataType.LoadConfig(parameters);
+            DataType.Load(parameters);
 
             AppServiceEnabled.Checked = this.DataType.Enabled;
             AppServiceNamespace.Text = this.DataType.Namespace;
             AppServiceOutputFolder.Text = this.DataType.OutputFolder;
         }
+
+        public event EventHandler<IDataType<IDictionary<string, string>>> OnNavigationChanged;
     }
 }

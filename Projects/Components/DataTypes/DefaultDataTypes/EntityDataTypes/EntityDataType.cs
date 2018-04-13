@@ -41,28 +41,30 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
             return new Hierarchy { Id = new Guid("1BC1B0C4-1E41-9146-82CF-599181CE4440"), Name = "Entity" };
         }
 
-        public IDataTypeUI<IDictionary<string, string>> AddConfigUI(object parameters)
+        public IDataTypeUI<IDictionary<string, string>> CreateUI(IDictionary<string,string> parameters)
         {
-            Control parent = parameters as Control;
-            EntityUserControl newControl = new EntityUserControl
-                                               {
-                                                   Visible = true,
-                                                   Dock = DockStyle.Fill,
-                                                   DataType = this
-                                               };
-            newControl.BringToFront();
-            parent.Controls.Add(newControl);
+            var newControl = new EntityUserControl
+                                 {
+                                     Visible = true,
+                                     Dock = DockStyle.Fill,
+                                     DataType = this
+                                 };
             return newControl;
         }
 
-        public bool SaveConfig(IDictionary<string, string> parameters)
+        public IDataTypeUI<IDictionary<string, string>> CreateUI()
+        {
+            return this.CreateUI(null);
+        }
+
+        public bool Save(IDictionary<string, string> parameters)
         {
             var filePath = Path.Combine(parameters["basePath"], FILE_NAME);
             ObjectXMLSerializer<EntityDataType>.Save(this, filePath);
             return true;
         }
 
-        public void LoadConfig(IDictionary<string, string> parameters)
+        public void Load(IDictionary<string, string> parameters)
         {
             var filePath = Path.Combine(parameters["basePath"], FILE_NAME);
 

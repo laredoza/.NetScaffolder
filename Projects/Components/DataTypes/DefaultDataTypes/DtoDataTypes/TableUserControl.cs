@@ -28,5 +28,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.TableDataTypes
         public void LoadConfig(IDictionary<string, string> parameters)
         {
         }
+
+        public event EventHandler<IDataType<IDictionary<string, string>>> OnNavigationChanged;
     }
 }

@@ -21,6 +21,89 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
     [ExportMetadata("ValueMetaData", "1BC1B0C4-1E41-9146-82CF-599181CE4430")]
     public class ContextDataType : IDataType
     {
+        public List<ContextData> Contexts { get; private set; }
+
+        private const string FILE_NAME = "Context.mdl";
+
+        public ContextDataType()
+        {
+            Contexts = new List<ContextData>();
+        }
+
+        public IHierarchy ReturnNavigation()
+        {
+            var parent = new Hierarchy { Id = new Guid("1BC1B0C4-1E41-9146-82CF-599181CE4430"), Name = "Context" };
+
+            if (Contexts.Any())
+            {
+                foreach (var context in this.Contexts)
+                {
+                    parent.Children.Add(new Hierarchy
+                                            {
+                                                ParentId = parent.Id,
+                                                Id = context.Id,
+                                                Name = context.ContextName
+                                            });
+                }
+            }
+
+            return parent;
+        }
+
+        public IDataTypeUI<IDictionary<string, string>> CreateUI(IDictionary<string,string> parameters)
+        {
+            var newControl = new ContextUserControl
+                                 {
+                                     Visible = true,
+                                     Dock = DockStyle.Fill,
+                                     DataType = this
+                                 };
+            return newControl;
+        }
+
+        public IDataTypeUI<IDictionary<string, string>> CreateUI()
+        {
+            return CreateUI(null);
+        }
+
+        public bool Save(IDictionary<string, string> parameters)
+        {
+            if (parameters == null) return false;
+
+            if (!parameters.ContainsKey("basePath"))
+            {
+                return false;
+            }
+
+            var filePath = Path.Combine(parameters["basePath"], FILE_NAME);
+            ObjectXMLSerializer<List<ContextData>>.Save(this.Contexts, filePath);
+            return true;
+        }
+
+        public void Load(IDictionary<string, string> parameters)
+        {
+            if (parameters == null) return;
+
+            if (!parameters.ContainsKey("basePath"))
+            {
+                return;
+            }
+
+            var filePath = Path.Combine(parameters["basePath"], FILE_NAME);
+
+            if (File.Exists(filePath))
+            {
+                Contexts = ObjectXMLSerializer<List<ContextData>>.Load(filePath);
+            }
+        }
+
+        public Table MetaData { get; set; }
+    }
+
+    public class ContextData
+    {
+        public Guid Id { get; set; }
+
         public string Namespace { get; set; } = "Context";
 
         public string OutputFolder { get; set; } = "Context";
@@ -38,66 +121,5 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
         public bool LoggingEnabled { get; set; }
 
         public string ConstructionOptions { get; set; }
-
-        private const string FILE_NAME = "Context.mdl";
-
-        public ContextDataType()
-        {
-        }
-
-        public IHierarchy ReturnNavigation()
-        {
-            return new Hierarchy { Id = new Guid("1BC1B0C4-1E41-9146-82CF-599181CE4430"), Name = "Context" };
-        }
-
-        public IDataTypeUI<IDictionary<string, string>> AddConfigUI(object parameters)
-        {
-            Control parent = parameters as Control;
-            var newControl = new ContextUserControl
-                                 {
-                                     Visible = true,
-                                     Dock = DockStyle.Fill,
-                                     DataType = this
-                                 };
-            newControl.BringToFront();
-            parent.Controls.Add(newControl);
-            return newControl;
-        }
-
-        public bool SaveConfig(IDictionary<string, string> parameters)
-        {
-            if (parameters == null) return false;
-
-            if (!parameters.ContainsKey("basePath"))
-            {
-                return false;
-            }
-
-            var filePath = Path.Combine(parameters["basePath"], FILE_NAME);
-            ObjectXMLSerializer<ContextDataType>.Save(this, filePath);
-            return true;
-        }
-
-        public void LoadConfig(IDictionary<string, string> parameters)
-        {
-            if (parameters == null) return;
-
-            if (!parameters.ContainsKey("basePath"))
-            {
-                return;
-            }
-
-            var filePath = Path.Combine(parameters["basePath"], FILE_NAME);
-
-            if (File.Exists(filePath))
-            {
-                var appService = ObjectXMLSerializer<ContextDataType>.Load(filePath);
-                if (appService != null)
-                {
-                }
-            }
-        }
-
-        public Table MetaData { get; set; }
     }
 }
