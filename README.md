@@ -20,4 +20,7 @@ T4 templates will be used to generate the different layers. Packages consist of 
 
 - MVC (context, ef entity & presentation)
 - MVC (context, ef entity, repository & presentation)
-- MVC (Domain Driven)
+- MVC (Domain Driven - ef)
+- MVC (context, NHibernate entity & presentation)
+- MVC (context, NHibernate entity, repository & presentation)
+- MVC (Domain Driven - NHibernate)
