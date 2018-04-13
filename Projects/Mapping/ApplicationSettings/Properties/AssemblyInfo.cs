@@ -1,6 +1,15 @@
-﻿using System.Reflection;
-using System.Runtime.CompilerServices;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="AssemblyInfo.cs" company="DotnetScaffolder">
+//   MIT
+// </copyright>
+// --------------------------------------------------------------------------------------------------------------------
+
+#region Usings
+
+using System.Reflection;
 using System.Runtime.InteropServices;
+
+#endregion
 
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
@@ -23,12 +32,10 @@ using System.Runtime.InteropServices;
 [assembly: Guid("0afff1d6-5fe5-4ff8-84e8-59352e42e658")]
 
 // Version information for an assembly consists of the following four values:
-//
 //      Major Version
 //      Minor Version
 //      Build Number
 //      Revision
-//
 // You can specify all the values or you can default the Build and Revision Numbers
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]

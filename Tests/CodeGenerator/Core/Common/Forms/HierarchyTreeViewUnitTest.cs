@@ -1,43 +1,35 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="HierarchyTreeViewUnitTest.cs" company="DotnetScaffolder">
+//   MIT
+// </copyright>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace DotNetScaffolder.Test.Core.Common.Forms
 {
+    #region Usings
+
+    using System;
+
     using DotNetScaffolder.Mapping.MetaData.Project.Packages;
 
     using FormControls.Enum;
     using FormControls.TreeView;
 
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+    #endregion
+
     /// <summary>
-    /// Summary description for HierarchyTreeViewUnitTest
+    ///     Summary description for HierarchyTreeViewUnitTest
     /// </summary>
     [TestClass]
     public class HierarchyTreeViewUnitTest
     {
-        [TestMethod]
-        public void HierarchyTreeViewUnitTest_TestMethod1()
-        {
-            HierarchyTreeView treeView = new HierarchyTreeView();
-            Hierarchy data = new Hierarchy { Name = "Parent" };
-            data.Children.Add(new Hierarchy { Name = "Child 1" });
-            data.Children.Add(new Hierarchy { Name = "Child 2" });
-            data.Children[0].Children.Add(new Hierarchy { Name = "Child Child 1" });
-            treeView.Data = data;
-            Assert.IsNotNull(treeView.Nodes);
-            Assert.AreEqual(1, treeView.Nodes.Count);
-            Assert.AreEqual("Parent", treeView.Nodes[0].Text);
-            Assert.AreEqual(data.Id.ToString(), treeView.Nodes[0].Name);
-            Assert.IsNotNull(treeView.Nodes[0].Tag);
-            Assert.AreEqual(data, treeView.Nodes[0].Tag as Hierarchy);
-            Assert.IsNotNull(treeView.Nodes[0].Nodes);
-            Assert.AreEqual(2, treeView.Nodes[0].Nodes.Count);
-            Assert.AreEqual("Child 1", treeView.Nodes[0].Nodes[0].Text);
-            Assert.AreEqual(1, treeView.Nodes[0].Nodes[0].Nodes.Count);
-            Assert.AreEqual("Child Child 1", treeView.Nodes[0].Nodes[0].Nodes[0].Text);
-        }
+        #region Public methods and operators
 
+        /// <summary>
+        /// The hierarchy tree view unit test_ test enabled buttons when template node is selected.
+        /// </summary>
         [TestMethod]
         public void HierarchyTreeViewUnitTest_TestEnabledButtonsWhenTemplateNodeIsSelected()
         {
@@ -45,10 +37,10 @@ namespace DotNetScaffolder.Test.Core.Common.Forms
             Hierarchy data = new Hierarchy { Name = "Templates" };
             data.Children.Add(new Hierarchy { Name = "Context" });
             var template = new Template { DataType = Guid.Empty };
-            //template.
 
-            data.Children.Add(new Hierarchy { Name = "Entity", Item = template});
-            data.Children[0].Children.Add(new Hierarchy { Name = "Entity FrameWork Context", HierarchyType = HierarchyType.Item});
+            // template.
+            data.Children.Add(new Hierarchy { Name = "Entity", Item = template });
+            data.Children[0].Children.Add(new Hierarchy { Name = "Entity FrameWork Context", HierarchyType = HierarchyType.Item });
             data.Children[1].Children.Add(new Hierarchy { Name = "Test 1", HierarchyType = HierarchyType.Item });
             data.Children[1].Children.Add(new Hierarchy { Name = "Test 1", HierarchyType = HierarchyType.Item });
 
@@ -94,5 +86,32 @@ namespace DotNetScaffolder.Test.Core.Common.Forms
             Assert.AreEqual(false, treeView.AddGroupEnabled);
             Assert.AreEqual(true, treeView.AddItemEnabled);
         }
+
+        /// <summary>
+        /// The hierarchy tree view unit test_ test method 1.
+        /// </summary>
+        [TestMethod]
+        public void HierarchyTreeViewUnitTest_TestMethod1()
+        {
+            HierarchyTreeView treeView = new HierarchyTreeView();
+            Hierarchy data = new Hierarchy { Name = "Parent" };
+            data.Children.Add(new Hierarchy { Name = "Child 1" });
+            data.Children.Add(new Hierarchy { Name = "Child 2" });
+            data.Children[0].Children.Add(new Hierarchy { Name = "Child Child 1" });
+            treeView.Data = data;
+            Assert.IsNotNull(treeView.Nodes);
+            Assert.AreEqual(1, treeView.Nodes.Count);
+            Assert.AreEqual("Parent", treeView.Nodes[0].Text);
+            Assert.AreEqual(data.Id.ToString(), treeView.Nodes[0].Name);
+            Assert.IsNotNull(treeView.Nodes[0].Tag);
+            Assert.AreEqual(data, treeView.Nodes[0].Tag as Hierarchy);
+            Assert.IsNotNull(treeView.Nodes[0].Nodes);
+            Assert.AreEqual(2, treeView.Nodes[0].Nodes.Count);
+            Assert.AreEqual("Child 1", treeView.Nodes[0].Nodes[0].Text);
+            Assert.AreEqual(1, treeView.Nodes[0].Nodes[0].Nodes.Count);
+            Assert.AreEqual("Child Child 1", treeView.Nodes[0].Nodes[0].Nodes[0].Text);
+        }
+
+        #endregion
     }
 }

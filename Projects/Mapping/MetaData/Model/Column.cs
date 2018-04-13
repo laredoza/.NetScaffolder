@@ -1,15 +1,12 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Column.cs" company="">
-//   
+// <copyright file="Column.cs" company="DotnetScaffolder">
+//   MIT
 // </copyright>
-// <summary>
-//   The column.
-// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace DotNetScaffolder.Mapping.MetaData.Model
 {
-    #region Using
+    #region Usings
 
     using System.ComponentModel;
     using System.Xml.Serialization;
@@ -17,14 +14,14 @@ namespace DotNetScaffolder.Mapping.MetaData.Model
     #endregion
 
     /// <summary>
-    /// The column.
+    ///     The column.
     /// </summary>
     public class Column : INotifyPropertyChanged
     {
         #region Fields
 
         /// <summary>
-        /// The render to entity.
+        ///     The render to entity.
         /// </summary>
         private bool renderToEntity = true;
 
@@ -33,7 +30,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Model
         #region Public Events
 
         /// <summary>
-        /// The property changed.
+        ///     The property changed.
         /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -42,126 +39,126 @@ namespace DotNetScaffolder.Mapping.MetaData.Model
         #region Properties
 
         /// <summary>
-        /// Gets or sets the column name.
+        ///     Gets or sets the column name.
         /// </summary>
         [XmlAttribute("ColumnName")]
         public string ColumnName { get; set; }
 
         /// <summary>
-        /// Gets the column name with key indicator.
+        ///     Gets the column name with key indicator.
         /// </summary>
         public string ColumnNameWithKeyIndicator
         {
             get
             {
-                return string.Format("{0} {1}", this.IsPrimaryKey ? "* " : "   ", this.ColumnName);
+                return string.Format("{0} {1}", IsPrimaryKey ? "* " : "   ", ColumnName);
             }
         }
 
         /// <summary>
-        /// Gets or sets the column order.
+        ///     Gets or sets the column order.
         /// </summary>
         [XmlAttribute("ColumnOrder")]
         public int ColumnOrder { get; set; }
 
         /// <summary>
-        /// Gets or sets the c sharp data type.
+        ///     Gets or sets the c sharp data type.
         /// </summary>
         [XmlAttribute("DataType")]
         public DomainDataType CSharpDataType { get; set; }
 
         /// <summary>
-        /// Gets or sets the db type.
+        ///     Gets or sets the db type.
         /// </summary>
         [XmlAttribute("DbType")]
         public string DbType { get; set; }
 
         /// <summary>
-        /// Gets or sets the default field value.
+        ///     Gets or sets the default field value.
         /// </summary>
         [XmlAttribute("DefaultFieldValue")]
         public string DefaultFieldValue { get; set; }
 
         /// <summary>
-        /// Gets or sets the description.
+        ///     Gets or sets the description.
         /// </summary>
         [XmlAttribute("Description")]
         public string Description { get; set; }
 
         /// <summary>
-        /// Gets or sets the grid column width.
+        ///     Gets or sets the grid column width.
         /// </summary>
         [XmlAttribute("GridColumnWidth")]
         public int GridColumnWidth { get; set; } = 80;
 
         /// <summary>
-        /// Gets or sets a value indicating whether is primary key.
+        ///     Gets or sets a value indicating whether is primary key.
         /// </summary>
         [XmlAttribute("IsPrimaryKey")]
         public bool IsPrimaryKey { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether is required.
+        ///     Gets or sets a value indicating whether is required.
         /// </summary>
         [XmlAttribute("IsRequired")]
         public bool IsRequired { get; set; }
 
         /// <summary>
-        /// Gets or sets the length.
+        ///     Gets or sets the length.
         /// </summary>
         [XmlAttribute("Length")]
         public int Length { get; set; }
 
         /// <summary>
-        /// Gets or sets the lookup class name.
+        ///     Gets or sets the lookup class name.
         /// </summary>
         [XmlAttribute("LookupClassName")]
         public string LookupClassName { get; set; }
 
         /// <summary>
-        /// Gets or sets the precision.
+        ///     Gets or sets the precision.
         /// </summary>
         [XmlAttribute("Precision")]
         public int Precision { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether render to entity.
+        ///     Gets or sets a value indicating whether render to entity.
         /// </summary>
         [XmlAttribute("RenderToEntity")]
         public bool RenderToEntity
         {
             get
             {
-                return this.renderToEntity;
+                return renderToEntity;
             }
 
             set
             {
-                this.renderToEntity = value;
-                if (!this.renderToEntity) this.RenderToView = false;
+                renderToEntity = value;
+                if (!renderToEntity) RenderToView = false;
             }
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether render to view.
+        ///     Gets or sets a value indicating whether render to view.
         /// </summary>
         [XmlAttribute("RenderToView")]
         public bool RenderToView { get; set; } = true;
 
         /// <summary>
-        /// Gets or sets the render to view order.
+        ///     Gets or sets the render to view order.
         /// </summary>
         [XmlAttribute("RenderToViewOrder")]
         public int RenderToViewOrder { get; set; }
 
         /// <summary>
-        /// Gets or sets the scale.
+        ///     Gets or sets the scale.
         /// </summary>
         [XmlAttribute("Scale")]
         public int Scale { get; set; }
 
         /// <summary>
-        /// Gets or sets the table.
+        ///     Gets or sets the table.
         /// </summary>
         [XmlIgnore]
         public Table Table { get; set; }
@@ -184,13 +181,13 @@ namespace DotNetScaffolder.Mapping.MetaData.Model
         // }
 
         /// <summary>
-        /// Gets a value indicating whether nullable.
+        ///     Gets a value indicating whether nullable.
         /// </summary>
         private bool Nullable
         {
             get
             {
-                return !this.IsRequired && !this.IsPrimaryKey;
+                return !IsRequired && !IsPrimaryKey;
             }
         }
 

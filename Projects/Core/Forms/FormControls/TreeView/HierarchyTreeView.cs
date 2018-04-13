@@ -1,15 +1,12 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="HierarchyTreeView.cs" company="">
-//   
+// <copyright file="HierarchyTreeView.cs" company="DotnetScaffolder">
+//   MIT
 // </copyright>
-// <summary>
-//   The hierarchy tree view.
-// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace FormControls.TreeView
 {
-    #region Using
+    #region Usings
 
     using System.Windows.Forms;
 
@@ -33,17 +30,6 @@ namespace FormControls.TreeView
 
         #endregion
 
-        #region Constructors and Destructors
-
-        /// <summary>
-        ///     Initializes a new instance of the <see cref="HierarchyTreeView" /> class.
-        /// </summary>
-        public HierarchyTreeView()
-        {
-        }
-
-        #endregion
-
         #region Properties
 
         /// <summary>
@@ -63,15 +49,15 @@ namespace FormControls.TreeView
         {
             get
             {
-                return this.data;
+                return data;
             }
 
             set
             {
-                if (this.data != value)
+                if (data != value)
                 {
-                    this.data = value;
-                    this.UpdateNodes();
+                    data = value;
+                    UpdateNodes();
                 }
             }
         }
@@ -136,56 +122,17 @@ namespace FormControls.TreeView
         }
 
         /// <summary>
-        /// The select node.
+        /// The search.
         /// </summary>
-        /// <param name="selectedNode">
-        /// The selected node.
+        /// <param name="itemId">
+        /// The item id.
         /// </param>
-        public void SelectNode(TreeNode selectedNode)
-        {
-            if (selectedNode.Level == 0)
-            {
-                this.UpEnabled = false;
-                this.DownEnabled = false;
-                this.DeleteEnabled = false;
-                this.AddGroupEnabled = false;
-                this.AddItemEnabled = false;
-            }
-            else if (selectedNode.Level == 1)
-            {
-                this.UpEnabled = false;
-                this.DownEnabled = false;
-                this.DeleteEnabled = false;
-                this.AddGroupEnabled = true;
-                this.AddItemEnabled = true;
-            }
-            else
-            {
-                if ((selectedNode.Tag as Hierarchy).HierarchyType == HierarchyType.Item)
-                {
-                    if (selectedNode.Parent.Nodes.Count == 1)
-                    {
-                        this.UpEnabled = false;
-                        this.DownEnabled = false;
-                    }
-                    else if (selectedNode.Index == 0)
-                    {
-                        this.UpEnabled = false;
-                        this.DownEnabled = true;
-                    }
-                    else if (selectedNode.Index == selectedNode.Parent.Nodes.Count - 1)
-                    {
-                        this.UpEnabled = true;
-                        this.DownEnabled = false;
-                    }
-
-                    this.DeleteEnabled = true;
-                    this.AddGroupEnabled = false;
-                    this.AddItemEnabled = true;
-                }
-            }
-        }
-
+        /// <param name="rootNode">
+        /// The root node.
+        /// </param>
+        /// <returns>
+        /// The <see cref="TreeNode"/>.
+        /// </returns>
         public TreeNode Search(string itemId, TreeNode rootNode)
         {
             foreach (TreeNode node in rootNode.Nodes)
@@ -195,14 +142,66 @@ namespace FormControls.TreeView
                     return node;
                 }
 
-                TreeNode next = this.Search(itemId, node);
+                TreeNode next = Search(itemId, node);
 
                 if (next != null)
                 {
                     return next;
                 }
             }
+
             return null;
+        }
+
+        /// <summary>
+        /// The select node.
+        /// </summary>
+        /// <param name="selectedNode">
+        /// The selected node.
+        /// </param>
+        public void SelectNode(TreeNode selectedNode)
+        {
+            if (selectedNode.Level == 0)
+            {
+                UpEnabled = false;
+                DownEnabled = false;
+                DeleteEnabled = false;
+                AddGroupEnabled = false;
+                AddItemEnabled = false;
+            }
+            else if (selectedNode.Level == 1)
+            {
+                UpEnabled = false;
+                DownEnabled = false;
+                DeleteEnabled = false;
+                AddGroupEnabled = true;
+                AddItemEnabled = true;
+            }
+            else
+            {
+                if ((selectedNode.Tag as Hierarchy).HierarchyType == HierarchyType.Item)
+                {
+                    if (selectedNode.Parent.Nodes.Count == 1)
+                    {
+                        UpEnabled = false;
+                        DownEnabled = false;
+                    }
+                    else if (selectedNode.Index == 0)
+                    {
+                        UpEnabled = false;
+                        DownEnabled = true;
+                    }
+                    else if (selectedNode.Index == selectedNode.Parent.Nodes.Count - 1)
+                    {
+                        UpEnabled = true;
+                        DownEnabled = false;
+                    }
+
+                    DeleteEnabled = true;
+                    AddGroupEnabled = false;
+                    AddItemEnabled = true;
+                }
+            }
         }
 
         #endregion
@@ -220,11 +219,11 @@ namespace FormControls.TreeView
         /// </returns>
         private TreeNode AddNode(IHierarchy hierarchyItem)
         {
-            TreeNode node = new TreeNode(hierarchyItem.Name) { Tag = hierarchyItem, Name = this.Data.Id.ToString() };
+            TreeNode node = new TreeNode(hierarchyItem.Name) { Tag = hierarchyItem, Name = Data.Id.ToString() };
 
             foreach (var child in hierarchyItem.Children)
             {
-                node.Nodes.Add(this.AddNode(child));
+                node.Nodes.Add(AddNode(child));
             }
 
             return node;
@@ -235,8 +234,8 @@ namespace FormControls.TreeView
         /// </summary>
         private void UpdateNodes()
         {
-            this.Nodes.Clear();
-            this.Nodes.Add(this.AddNode(this.Data));
+            Nodes.Clear();
+            Nodes.Add(AddNode(Data));
         }
 
         #endregion

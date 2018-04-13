@@ -1,15 +1,12 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Template.cs" company="">
-//   
+// <copyright file="Template.cs" company="DotnetScaffolder">
+//   MIT
 // </copyright>
-// <summary>
-//   The template.
-// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace DotNetScaffolder.Mapping.MetaData.Project.Packages
 {
-    #region Using
+    #region Usings
 
     using System;
     using System.Collections.Generic;
@@ -26,7 +23,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Project.Packages
     #endregion
 
     /// <summary>
-    /// The template.
+    ///     The template.
     /// </summary>
     public class Template : Hierarchy, IValidate
     {
@@ -42,16 +39,16 @@ namespace DotNetScaffolder.Mapping.MetaData.Project.Packages
         #region Constructors and Destructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Template"/> class.
+        ///     Initializes a new instance of the <see cref="Template" /> class.
         /// </summary>
-        public Template() : base()
+        public Template()
         {
             Logger.Trace("Started Template()");
-            this.ValidationResult = new List<Validation>();
-            this.Enabled = false;
-            this.DataType = Guid.Empty; 
-            this.DefaultSettings = new List<string>();
-            this.Children = new List<Hierarchy>();
+            ValidationResult = new List<Validation>();
+            Enabled = false;
+            DataType = Guid.Empty;
+            DefaultSettings = new List<string>();
+            Children = new List<Hierarchy>();
             Logger.Trace("Completed Template()");
         }
 
@@ -60,128 +57,49 @@ namespace DotNetScaffolder.Mapping.MetaData.Project.Packages
         #region Properties
 
         /// <summary>
-        /// Gets or sets the config location.
+        ///     Gets or sets the config location.
         /// </summary>
         public ConfigLocation ConfigLocation { get; set; }
 
         /// <summary>
-        /// Gets or sets the data type.
+        ///     Gets or sets the data type.
         /// </summary>
         public Guid DataType { get; set; }
 
         /// <summary>
-        /// Gets or sets the default settings.
+        ///     Gets or sets the default settings.
         /// </summary>
         public List<string> DefaultSettings { get; set; }
-        
+
         /// <summary>
-        /// Gets or sets the generator type id.
+        ///     Gets or sets the generator type id.
         /// </summary>
         public Guid GeneratorTypeId { get; set; }
 
         /// <summary>
-        /// Gets or sets the language output id.
+        ///     Gets or sets the language output id.
         /// </summary>
         public Guid LanguageOutputId { get; set; }
 
         /// <summary>
-        /// Gets or sets the template path.
+        ///     Gets or sets the template path.
         /// </summary>
         public string TemplatePath { get; set; }
 
         /// <summary>
-        /// Gets or sets the validation result.
+        ///     Gets or sets the validation result.
         /// </summary>
         [XmlIgnore]
         public List<Validation> ValidationResult { get; set; }
 
         /// <summary>
-        /// Gets or sets the version.
+        ///     Gets or sets the version.
         /// </summary>
         public double Version { get; set; }
 
         #endregion
 
         #region Public methods and operators
-
-        /// <summary>
-        /// The validate.
-        /// </summary>
-        /// <returns>
-        /// The <see cref="List"/>.
-        /// </returns>
-        public List<Validation> Validate()
-        {
-            Logger.Trace("Started Validate()");
-            this.ValidationResult.Clear();
-
-            if (this.Id == Guid.Empty)
-            {
-                this.ValidationResult.Add(new Validation(ValidationType.TemplateId, "TemplateId may not be empty"));
-            }
-
-            if (string.IsNullOrEmpty(this.Name))
-            {
-                this.ValidationResult.Add(new Validation(ValidationType.TemplateName, "TemplateName may not be empty"));
-            }
-
-            if (this.HierarchyType == HierarchyType.Item)
-            {
-                if (string.IsNullOrEmpty(this.TemplatePath))
-                {
-                    this.ValidationResult.Add(
-                        new Validation(ValidationType.TemplatePath, "TemplatePath may not be empty"));
-                }
-
-                if (this.LanguageOutputId == Guid.Empty)
-                {
-                    this.ValidationResult.Add(
-                        new Validation(
-                            ValidationType.TemplateLanguageOutputId,
-                            "TemplateLanguageOutputId may not be empty"));
-                }
-
-                if (this.GeneratorTypeId == Guid.Empty)
-                {
-                    this.ValidationResult.Add(
-                        new Validation(
-                            ValidationType.TemplateGeneratorTypeId,
-                            "TemplateLanguageOutputId may not be empty"));
-                }
-
-                // Todo: Add back
-                //this.DataType.Validate();
-
-                //foreach (var validationResult in this.DataType.ValidationResult)
-                //{
-                //    this.ValidationResult.Add(validationResult);
-                //}
-
-            }
-
-            if (this.Version == 0)
-            {
-                this.ValidationResult.Add(
-                    new Validation(ValidationType.TemplateVersion, "TemplateVersion may not be 0"));
-            }
-
-            //Template child;
-            Template child;
-            foreach (var hierarchy in this.Children)
-            {
-                child = hierarchy as Template;
-                child.Validate();
-
-                foreach (var validation in child.ValidationResult)
-                {
-                    this.ValidationResult.Add(validation);
-                }
-            }
-
-            // Todo: Handle LanguageOutput & TemplateGeneratorType
-            Logger.Trace("Completed Validate()");
-            return this.ValidationResult;
-        }
 
         /// <summary>
         /// The return template items.
@@ -198,21 +116,21 @@ namespace DotNetScaffolder.Mapping.MetaData.Project.Packages
 
             foreach (Template template in templates)
             {
-                results.AddRange(this.ReturnTemplateItems(template));
+                results.AddRange(ReturnTemplateItems(template));
             }
 
             return results;
         }
 
         /// <summary>
-        /// Return template items.
+        ///     Return template items.
         /// </summary>
         /// <returns>
-        /// The <see cref="List"/>.
+        ///     The <see cref="List" />.
         /// </returns>
         public List<Template> ReturnTemplateItems()
         {
-            return this.ReturnTemplateItems(this);
+            return ReturnTemplateItems(this);
         }
 
         /// <summary>
@@ -242,12 +160,90 @@ namespace DotNetScaffolder.Mapping.MetaData.Project.Packages
                     }
                     else
                     {
-                        result.AddRange(this.ReturnTemplateItems(child as Template));
+                        result.AddRange(ReturnTemplateItems(child as Template));
                     }
                 }
             }
 
             return result;
+        }
+
+        /// <summary>
+        ///     The validate.
+        /// </summary>
+        /// <returns>
+        ///     The <see cref="List" />.
+        /// </returns>
+        public List<Validation> Validate()
+        {
+            Logger.Trace("Started Validate()");
+            ValidationResult.Clear();
+
+            if (Id == Guid.Empty)
+            {
+                ValidationResult.Add(new Validation(ValidationType.TemplateId, "TemplateId may not be empty"));
+            }
+
+            if (string.IsNullOrEmpty(Name))
+            {
+                ValidationResult.Add(new Validation(ValidationType.TemplateName, "TemplateName may not be empty"));
+            }
+
+            if (HierarchyType == HierarchyType.Item)
+            {
+                if (string.IsNullOrEmpty(TemplatePath))
+                {
+                    ValidationResult.Add(
+                        new Validation(ValidationType.TemplatePath, "TemplatePath may not be empty"));
+                }
+
+                if (LanguageOutputId == Guid.Empty)
+                {
+                    ValidationResult.Add(
+                        new Validation(
+                            ValidationType.TemplateLanguageOutputId,
+                            "TemplateLanguageOutputId may not be empty"));
+                }
+
+                if (GeneratorTypeId == Guid.Empty)
+                {
+                    ValidationResult.Add(
+                        new Validation(
+                            ValidationType.TemplateGeneratorTypeId,
+                            "TemplateLanguageOutputId may not be empty"));
+                }
+
+                // Todo: Add back
+                // this.DataType.Validate();
+
+                // foreach (var validationResult in this.DataType.ValidationResult)
+                // {
+                // this.ValidationResult.Add(validationResult);
+                // }
+            }
+
+            if (Version == 0)
+            {
+                ValidationResult.Add(
+                    new Validation(ValidationType.TemplateVersion, "TemplateVersion may not be 0"));
+            }
+
+            // Template child;
+            Template child;
+            foreach (var hierarchy in Children)
+            {
+                child = hierarchy as Template;
+                child.Validate();
+
+                foreach (var validation in child.ValidationResult)
+                {
+                    ValidationResult.Add(validation);
+                }
+            }
+
+            // Todo: Handle LanguageOutput & TemplateGeneratorType
+            Logger.Trace("Completed Validate()");
+            return ValidationResult;
         }
 
         #endregion

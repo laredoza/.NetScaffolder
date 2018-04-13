@@ -1,13 +1,31 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using DotNetScaffolder.Mapping.MetaData.Application;
-using DotNetScaffolder.Mapping.MetaData.Project.Packages;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="ApplicationSettingsUnitTest.cs" company="DotnetScaffolder">
+//   MIT
+// </copyright>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace DotNetScaffolder.Test.Application
 {
+    #region Usings
+
+    using DotNetScaffolder.Mapping.MetaData.Application;
+    using DotNetScaffolder.Mapping.MetaData.Project.Packages;
+
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+    #endregion
+
+    /// <summary>
+    /// The application settings unit test.
+    /// </summary>
     [TestClass]
     public class ApplicationSettingsUnitTest
     {
+        #region Public methods and operators
+
+        /// <summary>
+        /// The application settings unit test_ test.
+        /// </summary>
         [TestMethod]
         public void ApplicationSettingsUnitTest_Test()
         {
@@ -19,5 +37,7 @@ namespace DotNetScaffolder.Test.Application
             Assert.IsNotNull(applicationSettings.ValidationResult);
             Assert.AreEqual(10, applicationSettings.ValidationResult.Count);
         }
+
+        #endregion
     }
 }

@@ -1,13 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
+
 <edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
   <!-- EF Runtime content -->
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="EntitiesModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="EntitiesModel.Store" Alias="Self" Provider="System.Data.SqlClient"
+              ProviderManifestToken="2008"
+              xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator"
+              xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityContainer Name="EntitiesModelStoreContainer">
           <EntitySet Name="BankAccount" EntityType="EntitiesModel.Store.BankAccount" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="BankTransfers" EntityType="EntitiesModel.Store.BankTransfers" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="BankTransfers" EntityType="EntitiesModel.Store.BankTransfers" store:Type="Tables"
+                     Schema="dbo" />
           <EntitySet Name="Book" EntityType="EntitiesModel.Store.Book" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Country" EntityType="EntitiesModel.Store.Country" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Customer" EntityType="EntitiesModel.Store.Customer" store:Type="Tables" Schema="dbo" />
@@ -19,11 +24,13 @@
             <End Role="Customer" EntitySet="Customer" />
             <End Role="BankAccount" EntitySet="BankAccount" />
           </AssociationSet>
-          <AssociationSet Name="FK_BankTransfers_BankAccount" Association="EntitiesModel.Store.FK_BankTransfers_BankAccount">
+          <AssociationSet Name="FK_BankTransfers_BankAccount"
+                          Association="EntitiesModel.Store.FK_BankTransfers_BankAccount">
             <End Role="BankAccount" EntitySet="BankAccount" />
             <End Role="BankTransfers" EntitySet="BankTransfers" />
           </AssociationSet>
-          <AssociationSet Name="FK_BankTransfers_BankAccount1" Association="EntitiesModel.Store.FK_BankTransfers_BankAccount1">
+          <AssociationSet Name="FK_BankTransfers_BankAccount1"
+                          Association="EntitiesModel.Store.FK_BankTransfers_BankAccount1">
             <End Role="BankAccount" EntitySet="BankAccount" />
             <End Role="BankTransfers" EntitySet="BankTransfers" />
           </AssociationSet>
@@ -254,22 +261,29 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="NModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="NModel" Alias="Self" annotation:UseStrongSpatialTypes="false"
+              xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation"
+              xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="BankAccount">
           <Key>
             <PropertyRef Name="BankAccountId" />
           </Key>
           <Property Name="BankAccountId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="BankAccountNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="BankAccountNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="true"
+                    Nullable="false" />
           <Property Name="Balance" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
           <Property Name="CustomerId" Type="Int32" />
           <Property Name="Locked" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Customer" Relationship="Self.FK_BankAccount_Customer" FromRole="BankAccount" ToRole="Customer" />
-          <NavigationProperty Name="BankTransfers" Relationship="Self.FK_BankTransfers_BankAccount" FromRole="BankAccount" ToRole="BankTransfers" />
-          <NavigationProperty Name="BankTransfers1" Relationship="Self.FK_BankTransfers_BankAccount1" FromRole="BankAccount" ToRole="BankTransfers" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_BankAccount_Customer" FromRole="BankAccount"
+                              ToRole="Customer" />
+          <NavigationProperty Name="BankTransfers" Relationship="Self.FK_BankTransfers_BankAccount"
+                              FromRole="BankAccount" ToRole="BankTransfers" />
+          <NavigationProperty Name="BankTransfers1" Relationship="Self.FK_BankTransfers_BankAccount1"
+                              FromRole="BankAccount" ToRole="BankTransfers" />
         </EntityType>
         <EntityType Name="BankTransfers">
           <Key>
@@ -280,8 +294,10 @@
           <Property Name="ToBankAccountId" Type="Int32" Nullable="false" />
           <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="TransferDate" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="BankAccount" Relationship="Self.FK_BankTransfers_BankAccount" FromRole="BankTransfers" ToRole="BankAccount" />
-          <NavigationProperty Name="BankAccount1" Relationship="Self.FK_BankTransfers_BankAccount1" FromRole="BankTransfers" ToRole="BankAccount" />
+          <NavigationProperty Name="BankAccount" Relationship="Self.FK_BankTransfers_BankAccount"
+                              FromRole="BankTransfers" ToRole="BankAccount" />
+          <NavigationProperty Name="BankAccount1" Relationship="Self.FK_BankTransfers_BankAccount1"
+                              FromRole="BankTransfers" ToRole="BankAccount" />
         </EntityType>
         <EntityType Name="Book">
           <Key>
@@ -297,7 +313,8 @@
           </Key>
           <Property Name="CountryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CountryName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Customer" Relationship="Self.FK_Customer_Country" FromRole="Country" ToRole="Customer" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_Customer_Country" FromRole="Country"
+                              ToRole="Customer" />
         </EntityType>
         <EntityType Name="Customer">
           <Key>
@@ -316,8 +333,10 @@
           <Property Name="CountryId" Type="Int32" />
           <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="IsEnabled" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="BankAccount" Relationship="Self.FK_BankAccount_Customer" FromRole="Customer" ToRole="BankAccount" />
-          <NavigationProperty Name="Country" Relationship="Self.FK_Customer_Country" FromRole="Customer" ToRole="Country" />
+          <NavigationProperty Name="BankAccount" Relationship="Self.FK_BankAccount_Customer" FromRole="Customer"
+                              ToRole="BankAccount" />
+          <NavigationProperty Name="Country" Relationship="Self.FK_Customer_Country" FromRole="Customer"
+                              ToRole="Country" />
           <NavigationProperty Name="Order" Relationship="Self.FK_Order_Customer" FromRole="Customer" ToRole="Order" />
         </EntityType>
         <EntityType Name="Order">
@@ -333,7 +352,8 @@
           <Property Name="ShippingCity" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ShippingZip" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Customer" Relationship="Self.FK_Order_Customer" FromRole="Order" ToRole="Customer" />
-          <NavigationProperty Name="OrderDetails" Relationship="Self.FK_OrdeDetails_Order" FromRole="Order" ToRole="OrderDetails" />
+          <NavigationProperty Name="OrderDetails" Relationship="Self.FK_OrdeDetails_Order" FromRole="Order"
+                              ToRole="OrderDetails" />
         </EntityType>
         <EntityType Name="OrderDetails">
           <Key>
@@ -345,8 +365,10 @@
           <Property Name="UnitPrice" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="Amount" Type="Int16" />
           <Property Name="Discount" Type="Single" />
-          <NavigationProperty Name="Order" Relationship="Self.FK_OrdeDetails_Order" FromRole="OrderDetails" ToRole="Order" />
-          <NavigationProperty Name="Product" Relationship="Self.FK_OrderDetails_Product" FromRole="OrderDetails" ToRole="Product" />
+          <NavigationProperty Name="Order" Relationship="Self.FK_OrdeDetails_Order" FromRole="OrderDetails"
+                              ToRole="Order" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_OrderDetails_Product" FromRole="OrderDetails"
+                              ToRole="Product" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -359,16 +381,20 @@
           <Property Name="Publisher" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="AmountInStock" Type="Int16" />
           <NavigationProperty Name="Book" Relationship="Self.FK_Book_Product" FromRole="Product" ToRole="Book" />
-          <NavigationProperty Name="OrderDetails" Relationship="Self.FK_OrderDetails_Product" FromRole="Product" ToRole="OrderDetails" />
-          <NavigationProperty Name="Software" Relationship="Self.FK_Software_Product" FromRole="Product" ToRole="Software" />
+          <NavigationProperty Name="OrderDetails" Relationship="Self.FK_OrderDetails_Product" FromRole="Product"
+                              ToRole="OrderDetails" />
+          <NavigationProperty Name="Software" Relationship="Self.FK_Software_Product" FromRole="Product"
+                              ToRole="Software" />
         </EntityType>
         <EntityType Name="Software">
           <Key>
             <PropertyRef Name="ProductId" />
           </Key>
           <Property Name="ProductId" Type="Int32" Nullable="false" />
-          <Property Name="LicenseCode" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Product" Relationship="Self.FK_Software_Product" FromRole="Software" ToRole="Product" />
+          <Property Name="LicenseCode" Type="String" MaxLength="200" FixedLength="false" Unicode="true"
+                    Nullable="false" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_Software_Product" FromRole="Software"
+                              ToRole="Product" />
         </EntityType>
         <Association Name="FK_BankAccount_Customer">
           <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
@@ -659,7 +685,8 @@
     <Diagrams>
       <Diagram DiagramId="ff226d719f104ed5b971c2aee14f08c3" Name="Diagram1">
         <EntityTypeShape EntityType="NModel.BankAccount" Width="1.5" PointX="3.75" PointY="16.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="NModel.BankTransfers" Width="3.75" PointX="8.125" PointY="16.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="NModel.BankTransfers" Width="3.75" PointX="8.125" PointY="16.375"
+                         IsExpanded="true" />
         <EntityTypeShape EntityType="NModel.Book" Width="1.5" PointX="3" PointY="2.875" IsExpanded="true" />
         <EntityTypeShape EntityType="NModel.Country" Width="1.5" PointX="1.5" PointY="17" IsExpanded="true" />
         <EntityTypeShape EntityType="NModel.Customer" Width="1.5" PointX="1.5" PointY="11.75" IsExpanded="true" />

@@ -1,16 +1,12 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Package.cs" company="">
-//   
+// <copyright file="Package.cs" company="DotnetScaffolder">
+//   MIT
 // </copyright>
-// <summary>
-//   The package defines which templates will be created.
-//   i.e) DbContext, EF, ViewModel, etc
-// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace DotNetScaffolder.Mapping.MetaData.Project.Packages
 {
-    #region Using
+    #region Usings
 
     using System;
     using System.Collections.Generic;
@@ -35,9 +31,9 @@ namespace DotNetScaffolder.Mapping.MetaData.Project.Packages
         /// </summary>
         public Package()
         {
-            this.Enabled = false;
-            this.Templates = new List<Template>();
-            this.ValidationResult = new List<Validation>();
+            Enabled = false;
+            Templates = new List<Template>();
+            ValidationResult = new List<Validation>();
         }
 
         #endregion
@@ -45,61 +41,70 @@ namespace DotNetScaffolder.Mapping.MetaData.Project.Packages
         #region Properties
 
         /// <summary>
-        /// Gets or sets the version.
-        /// </summary>
-        public double Version { get; set; }
-
-        /// <summary>
         ///     Gets or sets the templates.
         /// </summary>
         public List<Template> Templates { get; set; }
 
-        #endregion
-
-        #region Implementation of IValidate
-
         /// <summary>
-        /// Gets or sets the validation result.
+        ///     Gets or sets the validation result.
         /// </summary>
         [XmlIgnore]
         public List<Validation> ValidationResult { get; set; }
 
         /// <summary>
-        ///     Validate class.
+        ///     Gets or sets the version.
         /// </summary>
-        /// <returns>
-        ///     The <see cref="List{T}" />
-        ///     Errors returned
-        /// </returns>
-        public List<Validation> Validate()
-        {
-            throw new NotImplementedException();
-        }
+        public double Version { get; set; }
 
         #endregion
 
+        #region Public methods and operators
 
+        /// <summary>
+        /// The return package items.
+        /// </summary>
+        /// <param name="packages">
+        /// The packages.
+        /// </param>
+        /// <returns>
+        /// The <see cref="List"/>.
+        /// </returns>
         public List<Package> ReturnPackageItems(List<Package> packages)
         {
             List<Package> results = new List<Package>();
 
             foreach (Package package in packages)
             {
-                results.AddRange(this.ReturnPackageItems(package));
+                results.AddRange(ReturnPackageItems(package));
             }
 
             return results;
         }
 
+        /// <summary>
+        /// The return package items.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="List"/>.
+        /// </returns>
         public List<Package> ReturnPackageItems()
         {
-            return this.ReturnPackageItems(this);
+            return ReturnPackageItems(this);
         }
 
+        /// <summary>
+        /// The return package items.
+        /// </summary>
+        /// <param name="package">
+        /// The package.
+        /// </param>
+        /// <returns>
+        /// The <see cref="List"/>.
+        /// </returns>
         public List<Package> ReturnPackageItems(Package package)
         {
             List<Package> result = new List<Package>();
-            
+
             if (package.HierarchyType == FormControls.Enum.HierarchyType.Item)
             {
                 result.Add(package);
@@ -114,7 +119,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Project.Packages
                     }
                     else
                     {
-                        result.AddRange(this.ReturnPackageItems(child as Package));
+                        result.AddRange(ReturnPackageItems(child as Package));
                     }
                 }
             }
@@ -122,5 +127,18 @@ namespace DotNetScaffolder.Mapping.MetaData.Project.Packages
             return result;
         }
 
+        /// <summary>
+        ///     Validate class.
+        /// </summary>
+        /// <returns>
+        ///     The <see cref="List{T}" />
+        ///     Errors returned
+        /// </returns>
+        public List<Validation> Validate()
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
     }
 }

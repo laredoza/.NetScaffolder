@@ -1,12 +1,32 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using DotNetScaffolder.Mapping.MetaData.Project.Packages;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="DataTypeUnitTest.cs" company="DotnetScaffolder">
+//   MIT
+// </copyright>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace DotNetScaffolder.Test.Project
 {
+    #region Usings
+
+    using System;
+
+    using DotNetScaffolder.Mapping.MetaData.Project.Packages;
+
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+    #endregion
+
+    /// <summary>
+    /// The data type unit test.
+    /// </summary>
     [TestClass]
     public class DataTypeUnitTest
     {
+        #region Public methods and operators
+
+        /// <summary>
+        /// The data type unit test_ test.
+        /// </summary>
         [TestMethod]
         public void DataTypeUnitTest_Test()
         {
@@ -25,5 +45,7 @@ namespace DotNetScaffolder.Test.Project
             dataType.Validate();
             Assert.AreEqual(0, dataType.ValidationResult.Count, "There should be 0 errors");
         }
+
+        #endregion
     }
 }

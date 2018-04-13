@@ -1,21 +1,32 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="ManageCollectionsTreeViewUserControlUnitTest.cs" company="DotnetScaffolder">
+//   MIT
+// </copyright>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace DotNetScaffolder.Test.Presentation.Controls
 {
-    using DotNetScaffolder.Mapping.MetaData.Project.Packages;
+    #region Usings
+
     using DotNetScaffolder.Presentation.Forms.Controls;
 
     using FormControls.TreeView;
 
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+    #endregion
+
     /// <summary>
-    /// Summary description for ManageCollectionsTreeViewUserControlUnitTest
+    ///     Summary description for ManageCollectionsTreeViewUserControlUnitTest
     /// </summary>
     [TestClass]
     public class ManageCollectionsTreeViewUserControlUnitTest
     {
+        #region Public methods and operators
+
+        /// <summary>
+        /// The manage collections tree view user control unit test_ test method.
+        /// </summary>
         [TestMethod]
         public void ManageCollectionsTreeViewUserControlUnitTest_TestMethod()
         {
@@ -24,5 +35,7 @@ namespace DotNetScaffolder.Test.Presentation.Controls
             Hierarchy hierarchy = new Hierarchy { Name = "Template" };
             treeView.DataSource = hierarchy;
         }
+
+        #endregion
     }
 }

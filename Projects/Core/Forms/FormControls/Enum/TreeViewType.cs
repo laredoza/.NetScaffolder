@@ -1,14 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="TreeViewType.cs" company="DotnetScaffolder">
+//   MIT
+// </copyright>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace DotNetScaffolder.Presentation.Forms.Controls.Enum
 {
+    /// <summary>
+    /// The tree view type.
+    /// </summary>
     public enum TreeViewType
     {
+        /// <summary>
+        /// The package.
+        /// </summary>
         Package,
+
+        /// <summary>
+        /// The template.
+        /// </summary>
         Template
     }
 }

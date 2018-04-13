@@ -1,34 +1,33 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ScaffoldConfig.cs" company="">
-//   
+// <copyright file="ScaffoldConfig.cs" company="DotnetScaffolder">
+//   MIT
 // </copyright>
-// <summary>
-//   The scaffold config.
-// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace Configuration
 {
-    #region Using
+    #region Usings
 
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.Composition;
+    using System.Linq;
+
     using DotNetScaffolder.Components.Common;
     using DotNetScaffolder.Components.Common.Contract;
-    using System.Linq;
 
     #endregion
 
     /// <summary>
-    /// The scaffold config.
+    ///     The scaffold config.
     /// </summary>
     public class ScaffoldConfig
     {
         #region Constructors and Destructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ScaffoldConfig"/> class.
+        /// Initializes static members of the <see cref="ScaffoldConfig"/> class. 
+        ///     Initializes a new instance of the <see cref="ScaffoldConfig"/> class.
         /// </summary>
         static ScaffoldConfig()
         {
@@ -44,13 +43,25 @@ namespace Configuration
         #region Properties
 
         /// <summary>
+        /// Gets or sets the collection options.
+        /// </summary>
+        [ImportMany]
+        public static Lazy<ICollectionOption, IDictionary<string, object>>[] CollectionOptions { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the DataTypes
+        /// </summary>
+        [ImportMany]
+        public static Lazy<IDataType, IDictionary<string, object>>[] DataTypes { get; set; }
+
+        /// <summary>
         ///     Gets or sets the drivers.
         /// </summary>
         [ImportMany]
         public static Lazy<IDriver, IDictionary<string, object>>[] Drivers { get; set; }
 
         /// <summary>
-        /// Gets or sets the language outputs.
+        ///     Gets or sets the language outputs.
         /// </summary>
         [ImportMany]
         public static Lazy<ILanguageOutput, IDictionary<string, object>>[] LanguageOutputs { get; set; }
@@ -62,7 +73,7 @@ namespace Configuration
         public static Lazy<INamingConvention, IDictionary<string, object>>[] NamingConventions { get; set; }
 
         /// <summary>
-        /// Gets or sets the output generators.
+        ///     Gets or sets the output generators.
         /// </summary>
         [ImportMany]
         public static Lazy<IOutputGenerator, IDictionary<string, object>>[] OutputGenerators { get; set; }
@@ -73,21 +84,12 @@ namespace Configuration
         [ImportMany]
         public static Lazy<ISourceType, IDictionary<string, object>>[] SourceTypes { get; set; }
 
-        /// <summary>
-        ///      Gets or sets the DataTypes
-        /// </summary>
-        [ImportMany]
-        public static Lazy<IDataType, IDictionary<string, object>>[] DataTypes { get; set; }
-
-        [ImportMany]
-        public static Lazy<ICollectionOption, IDictionary<string, object>>[] CollectionOptions { get; set; }
-        
         #endregion
 
         #region Public methods and operators
 
         /// <summary>
-        /// The load.
+        ///     The load.
         /// </summary>
         public static void Load()
         {
@@ -103,11 +105,29 @@ namespace Configuration
             CollectionOptions = importer.CollectionOptions;
         }
 
+        /// <summary>
+        /// The return data type.
+        /// </summary>
+        /// <param name="dataTypeId">
+        /// The data type id.
+        /// </param>
+        /// <returns>
+        /// The <see cref="IDataType"/>.
+        /// </returns>
         public static IDataType ReturnDataType(Guid dataTypeId)
         {
             return DataTypes.FirstOrDefault(d => d.Metadata["ValueMetaData"].ToString().ToLower() == dataTypeId.ToString().ToLower()).Value;
         }
 
+        /// <summary>
+        /// The return source type.
+        /// </summary>
+        /// <param name="sourceTypeId">
+        /// The source type id.
+        /// </param>
+        /// <returns>
+        /// The <see cref="ISourceType"/>.
+        /// </returns>
         public static ISourceType ReturnSourceType(Guid sourceTypeId)
         {
             return SourceTypes.FirstOrDefault(d => d.Metadata["ValueMetaData"].ToString().ToLower() == sourceTypeId.ToString().ToLower()).Value;

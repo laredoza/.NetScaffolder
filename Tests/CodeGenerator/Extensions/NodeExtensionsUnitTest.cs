@@ -1,16 +1,31 @@
-﻿namespace DotNetScaffolder.Test.Extensions
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="NodeExtensionsUnitTest.cs" company="DotnetScaffolder">
+//   MIT
+// </copyright>
+// --------------------------------------------------------------------------------------------------------------------
+
+namespace DotNetScaffolder.Test.Extensions
 {
+    #region Usings
+
     using System.Windows.Forms;
 
     using DotNetScaffolder.Core.Extensions;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
+    #endregion
+
+    /// <summary>
+    /// The node extensions unit test.
+    /// </summary>
     [TestClass]
     public class NodeExtensionsUnitTest
     {
+        #region Public methods and operators
+
         /// <summary>
-        /// Tests moving a child item up or down. It also tests moving the top child up, or moving the bottom item down
+        ///     Tests moving a child item up or down. It also tests moving the top child up, or moving the bottom item down
         /// </summary>
         [TestMethod]
         public void NodeExtensionsUnitTest_MoveParentsUpAndDown()
@@ -50,5 +65,7 @@
             Assert.AreEqual("2b", parent2.Nodes[1].Tag, "Invalid node after MoveDown()");
             Assert.AreEqual("2b", treeView.SelectedNode.Tag, "Invalid node after MoveDown()");
         }
+
+        #endregion
     }
 }

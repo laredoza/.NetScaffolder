@@ -1,10 +1,7 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="DomainDataType.cs" company="">
-//   
+// <copyright file="DomainDataType.cs" company="DotnetScaffolder">
+//   MIT
 // </copyright>
-// <summary>
-//   The domain data type.
-// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace DotNetScaffolder.Mapping.MetaData.Model
@@ -15,47 +12,47 @@ namespace DotNetScaffolder.Mapping.MetaData.Model
     public enum DomainDataType
     {
         /// <summary>
-        /// The int 16.
+        ///     The int 16.
         /// </summary>
         Int16,
 
         /// <summary>
-        /// The int 32.
+        ///     The int 32.
         /// </summary>
         Int32,
 
         /// <summary>
-        /// The int 64.
+        ///     The int 64.
         /// </summary>
         Int64,
 
         /// <summary>
-        /// The boolean.
+        ///     The boolean.
         /// </summary>
         Boolean,
 
         /// <summary>
-        /// The string.
+        ///     The string.
         /// </summary>
         String,
 
         /// <summary>
-        /// The short.
+        ///     The short.
         /// </summary>
         Short,
 
         /// <summary>
-        /// The decimal.
+        ///     The decimal.
         /// </summary>
         Decimal,
 
         /// <summary>
-        /// The date time.
+        ///     The date time.
         /// </summary>
         DateTime,
 
         /// <summary>
-        /// The single.
+        ///     The single.
         /// </summary>
         Single
     }

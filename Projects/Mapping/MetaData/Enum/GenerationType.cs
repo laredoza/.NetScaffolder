@@ -1,10 +1,7 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="GenerationType.cs" company="">
-//   
+// <copyright file="GenerationType.cs" company="DotnetScaffolder">
+//   MIT
 // </copyright>
-// <summary>
-//   This enum specifies in what directory structure generation occurs
-// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace DotNetScaffolder.Mapping.MetaData.Enum

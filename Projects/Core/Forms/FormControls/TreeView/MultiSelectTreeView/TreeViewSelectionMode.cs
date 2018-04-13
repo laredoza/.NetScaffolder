@@ -1,19 +1,7 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="TreeViewSelectionMode.cs" company="">
-//  Copyright 2004, Coder's Lab
-//  All rights reserved. The software and associated documentation 
-//  supplied hereunder are the proprietary information of Coder's Lab
-//  and are supplied subject to licence terms.
-//  
-//
-//  You can use this control freely in your projects, but let me know if you
-//  are using it so I can add you to a list of references. 
-//
-//  Email: ludwig.stuyck@coders-lab.be
-//  Home page: http://www.coders-lab.be// </copyright>
-// <summary>
-//   Selection mode for the treeview.
-// </summary>
+// <copyright file="TreeViewSelectionMode.cs" company="DotnetScaffolder">
+//   MIT
+// </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace FormControls.TreeView.MultiSelectTreeView

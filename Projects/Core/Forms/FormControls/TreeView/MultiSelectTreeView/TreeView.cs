@@ -1,25 +1,12 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="TreeView.cs" company="">
-//  Copyright 2004, Coder's Lab
-//  All rights reserved. The software and associated documentation 
-//  supplied hereunder are the proprietary information of Coder's Lab
-//  and are supplied subject to licence terms.
-//  
-//
-//  You can use this control freely in your projects, but let me know if you
-//  are using it so I can add you to a list of references. 
-//
-//  Email: ludwig.stuyck@coders-lab.be
-//  Home page: http://www.coders-lab.be
+// <copyright file="TreeView.cs" company="DotnetScaffolder">
+//   MIT
 // </copyright>
-// <summary>
-//   Selection mode for the treeview.
-// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace FormControls.TreeView.MultiSelectTreeView
 {
-    #region Using
+    #region Usings
 
     using System;
     using System.Collections;
@@ -28,10 +15,6 @@ namespace FormControls.TreeView.MultiSelectTreeView
     using System.Drawing;
     using System.Threading;
     using System.Windows.Forms;
-
-    #endregion
-
-    #region TreeViewSelectionMode enumeration
 
     #endregion
 
@@ -53,35 +36,6 @@ namespace FormControls.TreeView.MultiSelectTreeView
         #region Fields
 
         /// <summary>
-        ///     Used to make sure that SelectedNode can only be used from within this class.
-        /// </summary>
-        private bool blnInternalCall = false;
-
-        /// <summary>
-        ///     Keeps track whether a node click has been handled by the mouse down event. This is almost always the
-        ///     case, except when a selected node has been clicked again. Then, it will not be handled in the mouse
-        ///     down event because we might want to drag the node and if that's the case, node should not go in edit
-        ///     mode.
-        /// </summary>
-        private bool blnNodeProcessedOnMouseDown = false;
-
-        /// <summary>
-        ///     Track whether the total SelectedNodes changed across multiple operations
-        ///     for SelectionsChanged event
-        /// </summary>
-        private bool blnSelectionChanged = false;
-
-        /// <summary>
-        ///     Remembers whether mouse click on a node was single or double click.
-        /// </summary>
-        private bool blnWasDoubleClick = false;
-
-        /// <summary>
-        ///     Required designer variable.
-        /// </summary>
-        private Container components = null;
-
-        /// <summary>
         ///     Hashtable that contains all selected nodes.
         /// </summary>
         private readonly Hashtable htblSelectedNodes = new Hashtable();
@@ -93,9 +47,38 @@ namespace FormControls.TreeView.MultiSelectTreeView
         private readonly Hashtable htblSelectedNodesOrigColors = new Hashtable();
 
         /// <summary>
+        ///     Used to make sure that SelectedNode can only be used from within this class.
+        /// </summary>
+        private bool blnInternalCall;
+
+        /// <summary>
+        ///     Keeps track whether a node click has been handled by the mouse down event. This is almost always the
+        ///     case, except when a selected node has been clicked again. Then, it will not be handled in the mouse
+        ///     down event because we might want to drag the node and if that's the case, node should not go in edit
+        ///     mode.
+        /// </summary>
+        private bool blnNodeProcessedOnMouseDown;
+
+        /// <summary>
+        ///     Track whether the total SelectedNodes changed across multiple operations
+        ///     for SelectionsChanged event
+        /// </summary>
+        private bool blnSelectionChanged;
+
+        /// <summary>
+        ///     Remembers whether mouse click on a node was single or double click.
+        /// </summary>
+        private bool blnWasDoubleClick;
+
+        /// <summary>
+        ///     Required designer variable.
+        /// </summary>
+        private Container components;
+
+        /// <summary>
         ///     Keeps track of the number of mouse clicks.
         /// </summary>
-        private int intMouseClicks = 0;
+        private int intMouseClicks;
 
         /// <summary>
         ///     Backcolor for selected nodes.
@@ -110,45 +93,45 @@ namespace FormControls.TreeView.MultiSelectTreeView
         /// <summary>
         ///     Keeps track of the first selected node when selection has begun with the keyboard.
         /// </summary>
-        private TreeNode tnKeysStartNode = null;
+        private TreeNode tnKeysStartNode;
 
         /// <summary>
         ///     Keeps track of most recent selected node.
         /// </summary>
-        private TreeNode tnMostRecentSelectedNode = null;
+        private TreeNode tnMostRecentSelectedNode;
 
         /// <summary>
         ///     Keeps track of node that has to be pu in edit mode.
         /// </summary>
-        private TreeNode tnNodeToStartEditOn = null;
+        private TreeNode tnNodeToStartEditOn;
 
         /// <summary>
         ///     Keeps track of the selection mirror point; this is the last selected node without SHIFT key pressed.
         ///     It is used as the mirror node during SHIFT selection.
         /// </summary>
-        private TreeNode tnSelectionMirrorPoint = null;
+        private TreeNode tnSelectionMirrorPoint;
 
         /// <summary>
         ///     Holds node that needs to be flashed.
         /// </summary>
-        private TreeNode tnToFlash = null;
+        private TreeNode tnToFlash;
 
         #endregion
 
         #region Public Events
 
         /// <summary>
-        /// The after deselect.
+        ///     The after deselect.
         /// </summary>
         public event TreeViewEventHandler AfterDeselect;
 
         /// <summary>
-        /// The before deselect.
+        ///     The before deselect.
         /// </summary>
         public event TreeViewEventHandler BeforeDeselect;
 
         /// <summary>
-        /// The selections changed.
+        ///     The selections changed.
         /// </summary>
         public event EventHandler SelectionsChanged;
 
@@ -163,26 +146,22 @@ namespace FormControls.TreeView.MultiSelectTreeView
         {
             get
             {
-                if (!this.blnInternalCall)
+                if (!blnInternalCall)
                 {
                     throw new NotSupportedException("Use SelectedNodes instead of SelectedNode.");
                 }
-                else
-                {
-                    return base.SelectedNode;
-                }
+
+                return base.SelectedNode;
             }
 
             set
             {
-                if (!this.blnInternalCall)
+                if (!blnInternalCall)
                 {
                     throw new NotSupportedException("Use SelectedNodes instead of SelectedNode.");
                 }
-                else
-                {
-                    base.SelectedNode = value;
-                }
+
+                base.SelectedNode = value;
             }
         }
 
@@ -195,17 +174,15 @@ namespace FormControls.TreeView.MultiSelectTreeView
             {
                 // Create a SelectedNodesCollection to return, and add event handlers to catch actions on it
                 NodesCollection selectedNodesCollection = new NodesCollection();
-                foreach (TreeNode tn in this.htblSelectedNodes.Values)
+                foreach (TreeNode tn in htblSelectedNodes.Values)
                 {
                     selectedNodesCollection.Add(tn);
                 }
 
-                selectedNodesCollection.TreeNodeAdded += new TreeNodeEventHandler(this.SelectedNodes_TreeNodeAdded);
-                selectedNodesCollection.TreeNodeInserted += new TreeNodeEventHandler(
-                    this.SelectedNodes_TreeNodeInserted);
-                selectedNodesCollection.TreeNodeRemoved += new TreeNodeEventHandler(this.SelectedNodes_TreeNodeRemoved);
-                selectedNodesCollection.SelectedNodesCleared += new EventHandler(
-                    this.SelectedNodes_SelectedNodesCleared);
+                selectedNodesCollection.TreeNodeAdded += SelectedNodes_TreeNodeAdded;
+                selectedNodesCollection.TreeNodeInserted += SelectedNodes_TreeNodeInserted;
+                selectedNodesCollection.TreeNodeRemoved += SelectedNodes_TreeNodeRemoved;
+                selectedNodesCollection.SelectedNodesCleared += SelectedNodes_SelectedNodesCleared;
 
                 return selectedNodesCollection;
             }
@@ -218,12 +195,12 @@ namespace FormControls.TreeView.MultiSelectTreeView
         {
             get
             {
-                return this.selectionBackColor;
+                return selectionBackColor;
             }
 
             set
             {
-                this.selectionBackColor = value;
+                selectionBackColor = value;
             }
         }
 
@@ -234,12 +211,12 @@ namespace FormControls.TreeView.MultiSelectTreeView
         {
             get
             {
-                return this.selectionMode;
+                return selectionMode;
             }
 
             set
             {
-                this.selectionMode = value;
+                selectionMode = value;
             }
         }
 
@@ -298,9 +275,9 @@ namespace FormControls.TreeView.MultiSelectTreeView
         {
             if (disposing)
             {
-                if (this.components != null)
+                if (components != null)
                 {
-                    this.components.Dispose();
+                    components.Dispose();
                 }
             }
 
@@ -314,26 +291,26 @@ namespace FormControls.TreeView.MultiSelectTreeView
         /// </param>
         protected override void OnAfterCollapse(TreeViewEventArgs e)
         {
-            this.blnSelectionChanged = false;
+            blnSelectionChanged = false;
 
             // All child nodes should be deselected
             bool blnChildSelected = false;
             foreach (TreeNode tn in e.Node.Nodes)
             {
-                if (this.IsNodeSelected(tn))
+                if (IsNodeSelected(tn))
                 {
                     blnChildSelected = true;
                 }
 
-                this.UnselectNodesRecursively(tn, TreeViewAction.Collapse);
+                UnselectNodesRecursively(tn, TreeViewAction.Collapse);
             }
 
             if (blnChildSelected)
             {
-                this.SelectNode(e.Node, true, TreeViewAction.Collapse);
+                SelectNode(e.Node, true, TreeViewAction.Collapse);
             }
 
-            this.OnSelectionsChanged();
+            OnSelectionsChanged();
 
             base.OnAfterCollapse(e);
         }
@@ -346,9 +323,9 @@ namespace FormControls.TreeView.MultiSelectTreeView
         /// </param>
         protected void OnAfterDeselect(TreeNode tn)
         {
-            if (this.AfterDeselect != null)
+            if (AfterDeselect != null)
             {
-                this.AfterDeselect(this, new TreeViewEventArgs(tn));
+                AfterDeselect(this, new TreeViewEventArgs(tn));
             }
         }
 
@@ -360,9 +337,9 @@ namespace FormControls.TreeView.MultiSelectTreeView
         /// </param>
         protected void OnBeforeDeselect(TreeNode tn)
         {
-            if (this.BeforeDeselect != null)
+            if (BeforeDeselect != null)
             {
-                this.BeforeDeselect(this, new TreeViewEventArgs(tn));
+                BeforeDeselect(this, new TreeViewEventArgs(tn));
             }
         }
 
@@ -373,13 +350,13 @@ namespace FormControls.TreeView.MultiSelectTreeView
         /// </param>
         protected override void OnBeforeLabelEdit(NodeLabelEditEventArgs e)
         {
-            this.blnSelectionChanged = false; // prepare for OnSelectionsChanged
+            blnSelectionChanged = false; // prepare for OnSelectionsChanged
 
             // Make sure that it's the only selected node
-            this.SelectNode(e.Node, true, TreeViewAction.ByMouse);
-            this.UnselectAllNodesExceptNode(e.Node, TreeViewAction.ByMouse);
+            SelectNode(e.Node, true, TreeViewAction.ByMouse);
+            UnselectAllNodesExceptNode(e.Node, TreeViewAction.ByMouse);
 
-            this.OnSelectionsChanged();
+            OnSelectionsChanged();
 
             base.OnBeforeLabelEdit(e);
         }
@@ -405,7 +382,7 @@ namespace FormControls.TreeView.MultiSelectTreeView
         /// </param>
         protected override void OnItemDrag(ItemDragEventArgs e)
         {
-            e = new ItemDragEventArgs(MouseButtons.Left, this.SelectedNodes);
+            e = new ItemDragEventArgs(MouseButtons.Left, SelectedNodes);
             base.OnItemDrag(e);
         }
 
@@ -423,10 +400,10 @@ namespace FormControls.TreeView.MultiSelectTreeView
                 case Keys.Control:
                 case Keys.Control | Keys.Shift:
                     kMod = Keys.Shift;
-                    if (this.tnKeysStartNode == null) this.tnKeysStartNode = this.tnMostRecentSelectedNode;
+                    if (tnKeysStartNode == null) tnKeysStartNode = tnMostRecentSelectedNode;
                     break;
                 default:
-                    this.tnKeysStartNode = null;
+                    tnKeysStartNode = null;
                     break;
             }
 
@@ -436,41 +413,41 @@ namespace FormControls.TreeView.MultiSelectTreeView
             switch (e.KeyCode)
             {
                 case Keys.Down:
-                    tnNewlySelectedNodeWithKeys = this.tnMostRecentSelectedNode.NextVisibleNode;
+                    tnNewlySelectedNodeWithKeys = tnMostRecentSelectedNode.NextVisibleNode;
                     break;
 
                 case Keys.Up:
-                    tnNewlySelectedNodeWithKeys = this.tnMostRecentSelectedNode.PrevVisibleNode;
+                    tnNewlySelectedNodeWithKeys = tnMostRecentSelectedNode.PrevVisibleNode;
                     break;
 
                 case Keys.Left:
-                    if (this.tnMostRecentSelectedNode.IsExpanded) this.tnMostRecentSelectedNode.Collapse();
-                    else tnNewlySelectedNodeWithKeys = this.tnMostRecentSelectedNode.Parent;
+                    if (tnMostRecentSelectedNode.IsExpanded) tnMostRecentSelectedNode.Collapse();
+                    else tnNewlySelectedNodeWithKeys = tnMostRecentSelectedNode.Parent;
                     break;
 
                 case Keys.Right:
-                    if (!this.tnMostRecentSelectedNode.IsExpanded) this.tnMostRecentSelectedNode.Expand();
-                    else if (this.tnMostRecentSelectedNode.Nodes != null) tnNewlySelectedNodeWithKeys = this.tnMostRecentSelectedNode.Nodes[0];
+                    if (!tnMostRecentSelectedNode.IsExpanded) tnMostRecentSelectedNode.Expand();
+                    else if (tnMostRecentSelectedNode.Nodes != null) tnNewlySelectedNodeWithKeys = tnMostRecentSelectedNode.Nodes[0];
                     break;
 
                 case Keys.Home:
-                    tnNewlySelectedNodeWithKeys = this.Nodes[0];
+                    tnNewlySelectedNodeWithKeys = Nodes[0];
                     break;
 
                 case Keys.End:
-                    tnNewlySelectedNodeWithKeys = this.GetLastVisibleNode();
+                    tnNewlySelectedNodeWithKeys = GetLastVisibleNode();
                     break;
 
                 case Keys.PageDown:
 
-                    intNumber = this.GetNumberOfVisibleNodes();
-                    tnNewlySelectedNodeWithKeys = this.GetNextTreeNode(this.tnMostRecentSelectedNode, true, intNumber);
+                    intNumber = GetNumberOfVisibleNodes();
+                    tnNewlySelectedNodeWithKeys = GetNextTreeNode(tnMostRecentSelectedNode, true, intNumber);
                     break;
 
                 case Keys.PageUp:
 
-                    intNumber = this.GetNumberOfVisibleNodes();
-                    tnNewlySelectedNodeWithKeys = this.GetNextTreeNode(this.tnMostRecentSelectedNode, false, intNumber);
+                    intNumber = GetNumberOfVisibleNodes();
+                    tnNewlySelectedNodeWithKeys = GetNextTreeNode(tnMostRecentSelectedNode, false, intNumber);
                     break;
 
                 default:
@@ -480,45 +457,45 @@ namespace FormControls.TreeView.MultiSelectTreeView
 
             if (tnNewlySelectedNodeWithKeys != null)
             {
-                this.SetFocusToNode(this.tnMostRecentSelectedNode, false);
-                this.ProcessNodeRange(
-                    this.tnKeysStartNode,
+                SetFocusToNode(tnMostRecentSelectedNode, false);
+                ProcessNodeRange(
+                    tnKeysStartNode,
                     tnNewlySelectedNodeWithKeys,
                     new MouseEventArgs(MouseButtons.Left, 1, Cursor.Position.X, Cursor.Position.Y, 0),
                     kMod,
                     TreeViewAction.ByKeyboard,
                     false);
-                this.tnMostRecentSelectedNode = tnNewlySelectedNodeWithKeys;
-                this.SetFocusToNode(this.tnMostRecentSelectedNode, true);
+                tnMostRecentSelectedNode = tnNewlySelectedNodeWithKeys;
+                SetFocusToNode(tnMostRecentSelectedNode, true);
             }
 
             // Ensure visibility
-            if (this.tnMostRecentSelectedNode != null)
+            if (tnMostRecentSelectedNode != null)
             {
                 TreeNode tnToMakeVisible = null;
                 switch (e.KeyCode)
                 {
                     case Keys.Down:
                     case Keys.Right:
-                        tnToMakeVisible = this.GetNextTreeNode(this.tnMostRecentSelectedNode, true, 5);
+                        tnToMakeVisible = GetNextTreeNode(tnMostRecentSelectedNode, true, 5);
                         break;
 
                     case Keys.Up:
                     case Keys.Left:
-                        tnToMakeVisible = this.GetNextTreeNode(this.tnMostRecentSelectedNode, false, 5);
+                        tnToMakeVisible = GetNextTreeNode(tnMostRecentSelectedNode, false, 5);
                         break;
 
                     case Keys.Home:
                     case Keys.End:
-                        tnToMakeVisible = this.tnMostRecentSelectedNode;
+                        tnToMakeVisible = tnMostRecentSelectedNode;
                         break;
 
                     case Keys.PageDown:
-                        tnToMakeVisible = this.GetNextTreeNode(this.tnMostRecentSelectedNode, true, intNumber - 2);
+                        tnToMakeVisible = GetNextTreeNode(tnMostRecentSelectedNode, true, intNumber - 2);
                         break;
 
                     case Keys.PageUp:
-                        tnToMakeVisible = this.GetNextTreeNode(this.tnMostRecentSelectedNode, false, intNumber - 2);
+                        tnToMakeVisible = GetNextTreeNode(tnMostRecentSelectedNode, false, intNumber - 2);
                         break;
                 }
 
@@ -535,39 +512,39 @@ namespace FormControls.TreeView.MultiSelectTreeView
         /// </param>
         protected override void OnMouseDown(MouseEventArgs e)
         {
-            this.tnKeysStartNode = null;
+            tnKeysStartNode = null;
 
             // Store number of mouse clicks in OnMouseDown event, because here we also get e.Clicks = 2 when an item was doubleclicked
             // in OnMouseUp we seem to get always e.Clicks = 1, also when item is doubleclicked
-            this.intMouseClicks = e.Clicks;
+            intMouseClicks = e.Clicks;
 
-            TreeNode tn = this.GetNodeAt(e.X, e.Y);
+            TreeNode tn = GetNodeAt(e.X, e.Y);
 
             if (tn == null) return;
 
             // Preserve colors here, because if you do it later then it will already have selected colors 
             // Don't know why...!
-            this.PreserveNodeColors(tn);
+            PreserveNodeColors(tn);
 
             // If +/- was clicked, we should not process the node.
-            if (!this.IsPlusMinusClicked(tn, e))
+            if (!IsPlusMinusClicked(tn, e))
             {
                 // If mouse down on a node that is already selected, then we should process this node in the mouse up event, because we
                 // might want to drag it and it should not be put in edit mode.
                 // Also, only process node if click was in node's bounds.
-                if ((tn != null) && this.IsClickOnNode(tn, e) && !this.IsNodeSelected(tn))
+                if ((tn != null) && IsClickOnNode(tn, e) && !IsNodeSelected(tn))
                 {
                     // Flash node. In case the node selection is cancelled by the user, this gives the effect that it
                     // was selected and unselected again.
-                    this.tnToFlash = tn;
-                    Thread t = new Thread(new ThreadStart(this.FlashNode));
+                    tnToFlash = tn;
+                    Thread t = new Thread(FlashNode);
                     t.Start();
 
-                    this.blnNodeProcessedOnMouseDown = true;
+                    blnNodeProcessedOnMouseDown = true;
 
                     Debug.WriteLine("*** " + tn.BackColor);
-                    this.ProcessNodeRange(
-                        this.tnMostRecentSelectedNode,
+                    ProcessNodeRange(
+                        tnMostRecentSelectedNode,
                         tn,
                         e,
                         ModifierKeys,
@@ -590,17 +567,17 @@ namespace FormControls.TreeView.MultiSelectTreeView
             try
             {
 #endif
-                if (!this.blnNodeProcessedOnMouseDown)
+                if (!blnNodeProcessedOnMouseDown)
                 {
-                    TreeNode tn = this.GetNodeAt(e.X, e.Y);
+                    TreeNode tn = GetNodeAt(e.X, e.Y);
 
                     // Mouse click has not been handled by the mouse down event, so do it here. This is the case when
                     // a selected node was clicked again; in that case we handle that click here because in case the
                     // user is dragging the node, we should not put it in edit mode.					
-                    if (this.IsClickOnNode(tn, e))
+                    if (IsClickOnNode(tn, e))
                     {
-                        this.ProcessNodeRange(
-                            this.tnMostRecentSelectedNode,
+                        ProcessNodeRange(
+                            tnMostRecentSelectedNode,
                             tn,
                             e,
                             ModifierKeys,
@@ -609,7 +586,7 @@ namespace FormControls.TreeView.MultiSelectTreeView
                     }
                 }
 
-                this.blnNodeProcessedOnMouseDown = false;
+                blnNodeProcessedOnMouseDown = false;
 
                 base.OnMouseUp(e);
 #if DEBUG
@@ -625,14 +602,14 @@ namespace FormControls.TreeView.MultiSelectTreeView
         }
 
         /// <summary>
-        /// The on selections changed.
+        ///     The on selections changed.
         /// </summary>
         protected void OnSelectionsChanged()
         {
-            if (this.blnSelectionChanged)
-                if (this.SelectionsChanged != null)
+            if (blnSelectionChanged)
+                if (SelectionsChanged != null)
                 {
-                    this.SelectionsChanged(this, new EventArgs());
+                    SelectionsChanged(this, new EventArgs());
                 }
         }
 
@@ -641,30 +618,30 @@ namespace FormControls.TreeView.MultiSelectTreeView
         /// </summary>
         private void FlashNode()
         {
-            if (this.InvokeRequired)
+            if (InvokeRequired)
             {
-                this.Invoke(new MethodInvoker(delegate { this.FlashNode(); }));
+                Invoke(new MethodInvoker(delegate { FlashNode(); }));
                 return;
             }
 
-            TreeNode tn = this.tnToFlash;
+            TreeNode tn = tnToFlash;
 
             // Only flash node is it's not yet selected
-            if (!this.IsNodeSelected(tn))
+            if (!IsNodeSelected(tn))
             {
-                tn.BackColor = this.SelectionBackColor;
-                tn.ForeColor = this.BackColor;
-                this.Invalidate();
-                this.Refresh();
+                tn.BackColor = SelectionBackColor;
+                tn.ForeColor = BackColor;
+                Invalidate();
+                Refresh();
                 Application.DoEvents();
                 Thread.Sleep(200);
             }
 
             // If node is not selected yet, restore default colors to end flashing
-            if (!this.IsNodeSelected(tn))
+            if (!IsNodeSelected(tn))
             {
-                tn.BackColor = this.BackColor;
-                tn.ForeColor = this.ForeColor;
+                tn.BackColor = BackColor;
+                tn.ForeColor = ForeColor;
             }
         }
 
@@ -674,7 +651,7 @@ namespace FormControls.TreeView.MultiSelectTreeView
         /// <returns>Last visible node.</returns>
         private TreeNode GetLastVisibleNode()
         {
-            TreeNode tnTemp = this.Nodes[0];
+            TreeNode tnTemp = Nodes[0];
 
             while (tnTemp.NextVisibleNode != null)
             {
@@ -730,7 +707,7 @@ namespace FormControls.TreeView.MultiSelectTreeView
         {
             int intCounter = 0;
 
-            TreeNode tnTemp = this.Nodes[0];
+            TreeNode tnTemp = Nodes[0];
 
             while (tnTemp != null)
             {
@@ -751,7 +728,7 @@ namespace FormControls.TreeView.MultiSelectTreeView
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new Container();
+            components = new Container();
         }
 
         /// <summary>
@@ -778,10 +755,8 @@ namespace FormControls.TreeView.MultiSelectTreeView
                     blnChild = true;
                     break;
                 }
-                else
-                {
-                    tnTemp = tnTemp.Parent;
-                }
+
+                tnTemp = tnTemp.Parent;
             }
 
             return blnChild;
@@ -821,7 +796,7 @@ namespace FormControls.TreeView.MultiSelectTreeView
         /// </returns>
         private bool IsNodeSelected(TreeNode tn)
         {
-            if (tn != null) return this.htblSelectedNodes.ContainsKey(tn.GetHashCode());
+            if (tn != null) return htblSelectedNodes.ContainsKey(tn.GetHashCode());
             return false;
         }
 
@@ -839,7 +814,7 @@ namespace FormControls.TreeView.MultiSelectTreeView
         /// </returns>
         private bool IsPlusMinusClicked(TreeNode tn, MouseEventArgs e)
         {
-            int intNodeLevel = this.GetNodeLevel(tn);
+            int intNodeLevel = GetNodeLevel(tn);
             bool blnPlusMinusClicked = false;
             if (e.X < 20 + intNodeLevel * 20) blnPlusMinusClicked = true;
 
@@ -858,7 +833,7 @@ namespace FormControls.TreeView.MultiSelectTreeView
 
             Debug.WriteLine(tn.BackColor.ToString());
 
-            if (this.htblSelectedNodesOrigColors.ContainsKey(tn.GetHashCode()))
+            if (htblSelectedNodesOrigColors.ContainsKey(tn.GetHashCode()))
             {
                 // 				Color[] color = (Color[])htblSelectedNodesOrigColors[tn.GetHashCode()];
                 // 				color[0]=tn.BackColor;
@@ -866,7 +841,7 @@ namespace FormControls.TreeView.MultiSelectTreeView
             }
             else
             {
-                this.htblSelectedNodesOrigColors.Add(tn.GetHashCode(), new[] { tn.BackColor, tn.ForeColor });
+                htblSelectedNodesOrigColors.Add(tn.GetHashCode(), new[] { tn.BackColor, tn.ForeColor });
             }
         }
 
@@ -899,11 +874,11 @@ namespace FormControls.TreeView.MultiSelectTreeView
             TreeViewAction tva,
             bool allowStartEdit)
         {
-            this.blnSelectionChanged = false; // prepare for OnSelectionsChanged
+            blnSelectionChanged = false; // prepare for OnSelectionsChanged
 
             if (e.Button == MouseButtons.Left)
             {
-                this.blnWasDoubleClick = this.intMouseClicks == 2;
+                blnWasDoubleClick = intMouseClicks == 2;
 
                 TreeNode tnTemp = null;
                 int intNodeLevelStart;
@@ -911,30 +886,30 @@ namespace FormControls.TreeView.MultiSelectTreeView
                 if (((keys & Keys.Control) == 0) && ((keys & Keys.Shift) == 0))
                 {
                     // CTRL and SHIFT not held down							
-                    this.tnSelectionMirrorPoint = endNode;
-                    int intNumberOfSelectedNodes = this.SelectedNodes.Count;
+                    tnSelectionMirrorPoint = endNode;
+                    int intNumberOfSelectedNodes = SelectedNodes.Count;
 
                     // If it was a double click, select node and suspend further processing					
-                    if (this.blnWasDoubleClick)
+                    if (blnWasDoubleClick)
                     {
                         base.OnMouseDown(e);
                         return;
                     }
 
-                    if (!this.IsPlusMinusClicked(endNode, e))
+                    if (!IsPlusMinusClicked(endNode, e))
                     {
                         bool blnNodeWasSelected = false;
-                        if (this.IsNodeSelected(endNode)) blnNodeWasSelected = true;
+                        if (IsNodeSelected(endNode)) blnNodeWasSelected = true;
 
-                        this.UnselectAllNodesExceptNode(endNode, tva);
-                        this.SelectNode(endNode, true, tva);
+                        UnselectAllNodesExceptNode(endNode, tva);
+                        SelectNode(endNode, true, tva);
 
-                        if (blnNodeWasSelected && this.LabelEdit && allowStartEdit && !this.blnWasDoubleClick
+                        if (blnNodeWasSelected && LabelEdit && allowStartEdit && !blnWasDoubleClick
                             && (intNumberOfSelectedNodes <= 1))
                         {
                             // Node should be put in edit mode					
-                            this.tnNodeToStartEditOn = endNode;
-                            Thread t = new Thread(new ThreadStart(this.StartEdit));
+                            tnNodeToStartEditOn = endNode;
+                            Thread t = new Thread(StartEdit);
                             t.Start();
                         }
                     }
@@ -942,42 +917,42 @@ namespace FormControls.TreeView.MultiSelectTreeView
                 else if (((keys & Keys.Control) != 0) && ((keys & Keys.Shift) == 0))
                 {
                     // CTRL held down
-                    this.tnSelectionMirrorPoint = null;
+                    tnSelectionMirrorPoint = null;
 
-                    if (!this.IsNodeSelected(endNode))
+                    if (!IsNodeSelected(endNode))
                     {
-                        switch (this.selectionMode)
+                        switch (selectionMode)
                         {
                             case TreeViewSelectionMode.SingleSelect:
-                                this.UnselectAllNodesExceptNode(endNode, tva);
+                                UnselectAllNodesExceptNode(endNode, tva);
                                 break;
 
                             case TreeViewSelectionMode.MultiSelectSameRootBranch:
-                                TreeNode tnAbsoluteParent2 = this.GetRootParent(endNode);
-                                this.UnselectAllNodesNotBelongingToParent(tnAbsoluteParent2, tva);
+                                TreeNode tnAbsoluteParent2 = GetRootParent(endNode);
+                                UnselectAllNodesNotBelongingToParent(tnAbsoluteParent2, tva);
                                 break;
 
                             case TreeViewSelectionMode.MultiSelectSameLevel:
-                                this.UnselectAllNodesNotBelongingToLevel(this.GetNodeLevel(endNode), tva);
+                                UnselectAllNodesNotBelongingToLevel(GetNodeLevel(endNode), tva);
                                 break;
 
                             case TreeViewSelectionMode.MultiSelectSameLevelAndRootBranch:
-                                TreeNode tnAbsoluteParent = this.GetRootParent(endNode);
-                                this.UnselectAllNodesNotBelongingToParent(tnAbsoluteParent, tva);
-                                this.UnselectAllNodesNotBelongingToLevel(this.GetNodeLevel(endNode), tva);
+                                TreeNode tnAbsoluteParent = GetRootParent(endNode);
+                                UnselectAllNodesNotBelongingToParent(tnAbsoluteParent, tva);
+                                UnselectAllNodesNotBelongingToLevel(GetNodeLevel(endNode), tva);
                                 break;
 
                             case TreeViewSelectionMode.MultiSelectSameParent:
                                 TreeNode tnParent = endNode.Parent;
-                                this.UnselectAllNodesNotBelongingDirectlyToParent(tnParent, tva);
+                                UnselectAllNodesNotBelongingDirectlyToParent(tnParent, tva);
                                 break;
                         }
 
-                        this.SelectNode(endNode, true, tva);
+                        SelectNode(endNode, true, tva);
                     }
                     else
                     {
-                        this.SelectNode(endNode, false, tva);
+                        SelectNode(endNode, false, tva);
                     }
                 }
                 else if (((keys & Keys.Control) == 0) && ((keys & Keys.Shift) != 0))
@@ -987,25 +962,25 @@ namespace FormControls.TreeView.MultiSelectTreeView
                     // if startNode is null, we can't select a range, must act as if selection mode is singleSelect
                     if (startNode == null)
                     {
-                        this.UnselectAllNodesExceptNode(endNode, tva);
-                        this.SelectNode(endNode, true, tva);
+                        UnselectAllNodesExceptNode(endNode, tva);
+                        SelectNode(endNode, true, tva);
                     }
                     else
                     {
-                        if (this.tnSelectionMirrorPoint == null)
+                        if (tnSelectionMirrorPoint == null)
                         {
-                            this.tnSelectionMirrorPoint = startNode;
+                            tnSelectionMirrorPoint = startNode;
                         }
 
-                        switch (this.selectionMode)
+                        switch (selectionMode)
                         {
                             case TreeViewSelectionMode.SingleSelect:
-                                this.UnselectAllNodesExceptNode(endNode, tva);
-                                this.SelectNode(endNode, true, tva);
+                                UnselectAllNodesExceptNode(endNode, tva);
+                                SelectNode(endNode, true, tva);
                                 break;
 
                             case TreeViewSelectionMode.MultiSelectSameRootBranch:
-                                TreeNode tnAbsoluteParentStartNode = this.GetRootParent(startNode);
+                                TreeNode tnAbsoluteParentStartNode = GetRootParent(startNode);
                                 tnTemp = startNode;
 
                                 // Check each visible node from startNode to endNode and select it if needed
@@ -1015,20 +990,20 @@ namespace FormControls.TreeView.MultiSelectTreeView
                                     else tnTemp = tnTemp.NextVisibleNode;
                                     if (tnTemp != null)
                                     {
-                                        TreeNode tnAbsoluteParent = this.GetRootParent(tnTemp);
+                                        TreeNode tnAbsoluteParent = GetRootParent(tnTemp);
                                         if (tnAbsoluteParent == tnAbsoluteParentStartNode)
                                         {
-                                            this.SelectNode(tnTemp, true, tva);
+                                            SelectNode(tnTemp, true, tva);
                                         }
                                     }
                                 }
 
-                                this.UnselectAllNodesNotBelongingToParent(tnAbsoluteParentStartNode, tva);
-                                this.UnselectNodesOutsideRange(this.tnSelectionMirrorPoint, endNode, tva);
+                                UnselectAllNodesNotBelongingToParent(tnAbsoluteParentStartNode, tva);
+                                UnselectNodesOutsideRange(tnSelectionMirrorPoint, endNode, tva);
                                 break;
 
                             case TreeViewSelectionMode.MultiSelectSameLevel:
-                                intNodeLevelStart = this.GetNodeLevel(startNode);
+                                intNodeLevelStart = GetNodeLevel(startNode);
                                 tnTemp = startNode;
 
                                 // Check each visible node from startNode to endNode and select it if needed
@@ -1038,21 +1013,21 @@ namespace FormControls.TreeView.MultiSelectTreeView
                                     else tnTemp = tnTemp.NextVisibleNode;
                                     if (tnTemp != null)
                                     {
-                                        int intNodeLevel = this.GetNodeLevel(tnTemp);
+                                        int intNodeLevel = GetNodeLevel(tnTemp);
                                         if (intNodeLevel == intNodeLevelStart)
                                         {
-                                            this.SelectNode(tnTemp, true, tva);
+                                            SelectNode(tnTemp, true, tva);
                                         }
                                     }
                                 }
 
-                                this.UnselectAllNodesNotBelongingToLevel(intNodeLevelStart, tva);
-                                this.UnselectNodesOutsideRange(this.tnSelectionMirrorPoint, endNode, tva);
+                                UnselectAllNodesNotBelongingToLevel(intNodeLevelStart, tva);
+                                UnselectNodesOutsideRange(tnSelectionMirrorPoint, endNode, tva);
                                 break;
 
                             case TreeViewSelectionMode.MultiSelectSameLevelAndRootBranch:
-                                TreeNode tnAbsoluteParentStart = this.GetRootParent(startNode);
-                                intNodeLevelStart = this.GetNodeLevel(startNode);
+                                TreeNode tnAbsoluteParentStart = GetRootParent(startNode);
+                                intNodeLevelStart = GetNodeLevel(startNode);
                                 tnTemp = startNode;
 
                                 // Check each visible node from startNode to endNode and select it if needed
@@ -1062,24 +1037,24 @@ namespace FormControls.TreeView.MultiSelectTreeView
                                     else tnTemp = tnTemp.NextVisibleNode;
                                     if (tnTemp != null)
                                     {
-                                        int intNodeLevel = this.GetNodeLevel(tnTemp);
-                                        TreeNode tnAbsoluteParent = this.GetRootParent(tnTemp);
+                                        int intNodeLevel = GetNodeLevel(tnTemp);
+                                        TreeNode tnAbsoluteParent = GetRootParent(tnTemp);
                                         if ((intNodeLevel == intNodeLevelStart)
                                             && (tnAbsoluteParent == tnAbsoluteParentStart))
                                         {
-                                            this.SelectNode(tnTemp, true, tva);
+                                            SelectNode(tnTemp, true, tva);
                                         }
                                     }
                                 }
 
-                                this.UnselectAllNodesNotBelongingToParent(tnAbsoluteParentStart, tva);
-                                this.UnselectAllNodesNotBelongingToLevel(intNodeLevelStart, tva);
-                                this.UnselectNodesOutsideRange(this.tnSelectionMirrorPoint, endNode, tva);
+                                UnselectAllNodesNotBelongingToParent(tnAbsoluteParentStart, tva);
+                                UnselectAllNodesNotBelongingToLevel(intNodeLevelStart, tva);
+                                UnselectNodesOutsideRange(tnSelectionMirrorPoint, endNode, tva);
                                 break;
 
                             case TreeViewSelectionMode.MultiSelect:
-                                this.SelectNodesInsideRange(this.tnSelectionMirrorPoint, endNode, tva);
-                                this.UnselectNodesOutsideRange(this.tnSelectionMirrorPoint, endNode, tva);
+                                SelectNodesInsideRange(tnSelectionMirrorPoint, endNode, tva);
+                                UnselectNodesOutsideRange(tnSelectionMirrorPoint, endNode, tva);
                                 break;
 
                             case TreeViewSelectionMode.MultiSelectSameParent:
@@ -1096,13 +1071,13 @@ namespace FormControls.TreeView.MultiSelectTreeView
                                         TreeNode tnParent = tnTemp.Parent;
                                         if (tnParent == tnParentStartNode)
                                         {
-                                            this.SelectNode(tnTemp, true, tva);
+                                            SelectNode(tnTemp, true, tva);
                                         }
                                     }
                                 }
 
-                                this.UnselectAllNodesNotBelongingDirectlyToParent(tnParentStartNode, tva);
-                                this.UnselectNodesOutsideRange(this.tnSelectionMirrorPoint, endNode, tva);
+                                UnselectAllNodesNotBelongingDirectlyToParent(tnParentStartNode, tva);
+                                UnselectNodesOutsideRange(tnSelectionMirrorPoint, endNode, tva);
 
                                 break;
                         }
@@ -1111,15 +1086,15 @@ namespace FormControls.TreeView.MultiSelectTreeView
                 else if (((keys & Keys.Control) != 0) && ((keys & Keys.Shift) != 0))
                 {
                     // SHIFT AND CTRL pressed
-                    switch (this.selectionMode)
+                    switch (selectionMode)
                     {
                         case TreeViewSelectionMode.SingleSelect:
-                            this.UnselectAllNodesExceptNode(endNode, tva);
-                            this.SelectNode(endNode, true, tva);
+                            UnselectAllNodesExceptNode(endNode, tva);
+                            SelectNode(endNode, true, tva);
                             break;
 
                         case TreeViewSelectionMode.MultiSelectSameRootBranch:
-                            TreeNode tnAbsoluteParentStartNode = this.GetRootParent(startNode);
+                            TreeNode tnAbsoluteParentStartNode = GetRootParent(startNode);
                             tnTemp = startNode;
 
                             // Check each visible node from startNode to endNode and select it if needed
@@ -1129,19 +1104,19 @@ namespace FormControls.TreeView.MultiSelectTreeView
                                 else tnTemp = tnTemp.NextVisibleNode;
                                 if (tnTemp != null)
                                 {
-                                    TreeNode tnAbsoluteParent = this.GetRootParent(tnTemp);
+                                    TreeNode tnAbsoluteParent = GetRootParent(tnTemp);
                                     if (tnAbsoluteParent == tnAbsoluteParentStartNode)
                                     {
-                                        this.SelectNode(tnTemp, true, tva);
+                                        SelectNode(tnTemp, true, tva);
                                     }
                                 }
                             }
 
-                            this.UnselectAllNodesNotBelongingToParent(tnAbsoluteParentStartNode, tva);
+                            UnselectAllNodesNotBelongingToParent(tnAbsoluteParentStartNode, tva);
                             break;
 
                         case TreeViewSelectionMode.MultiSelectSameLevel:
-                            intNodeLevelStart = this.GetNodeLevel(startNode);
+                            intNodeLevelStart = GetNodeLevel(startNode);
                             tnTemp = startNode;
 
                             // Check each visible node from startNode to endNode and select it if needed
@@ -1151,20 +1126,20 @@ namespace FormControls.TreeView.MultiSelectTreeView
                                 else tnTemp = tnTemp.NextVisibleNode;
                                 if (tnTemp != null)
                                 {
-                                    int intNodeLevel = this.GetNodeLevel(tnTemp);
+                                    int intNodeLevel = GetNodeLevel(tnTemp);
                                     if (intNodeLevel == intNodeLevelStart)
                                     {
-                                        this.SelectNode(tnTemp, true, tva);
+                                        SelectNode(tnTemp, true, tva);
                                     }
                                 }
                             }
 
-                            this.UnselectAllNodesNotBelongingToLevel(intNodeLevelStart, tva);
+                            UnselectAllNodesNotBelongingToLevel(intNodeLevelStart, tva);
                             break;
 
                         case TreeViewSelectionMode.MultiSelectSameLevelAndRootBranch:
-                            TreeNode tnAbsoluteParentStart = this.GetRootParent(startNode);
-                            intNodeLevelStart = this.GetNodeLevel(startNode);
+                            TreeNode tnAbsoluteParentStart = GetRootParent(startNode);
+                            intNodeLevelStart = GetNodeLevel(startNode);
                             tnTemp = startNode;
 
                             // Check each visible node from startNode to endNode and select it if needed
@@ -1174,18 +1149,18 @@ namespace FormControls.TreeView.MultiSelectTreeView
                                 else tnTemp = tnTemp.NextVisibleNode;
                                 if (tnTemp != null)
                                 {
-                                    int intNodeLevel = this.GetNodeLevel(tnTemp);
-                                    TreeNode tnAbsoluteParent = this.GetRootParent(tnTemp);
+                                    int intNodeLevel = GetNodeLevel(tnTemp);
+                                    TreeNode tnAbsoluteParent = GetRootParent(tnTemp);
                                     if ((intNodeLevel == intNodeLevelStart)
                                         && (tnAbsoluteParent == tnAbsoluteParentStart))
                                     {
-                                        this.SelectNode(tnTemp, true, tva);
+                                        SelectNode(tnTemp, true, tva);
                                     }
                                 }
                             }
 
-                            this.UnselectAllNodesNotBelongingToParent(tnAbsoluteParentStart, tva);
-                            this.UnselectAllNodesNotBelongingToLevel(intNodeLevelStart, tva);
+                            UnselectAllNodesNotBelongingToParent(tnAbsoluteParentStart, tva);
+                            UnselectAllNodesNotBelongingToLevel(intNodeLevelStart, tva);
                             break;
 
                         case TreeViewSelectionMode.MultiSelect:
@@ -1198,7 +1173,7 @@ namespace FormControls.TreeView.MultiSelectTreeView
                                 else tnTemp = tnTemp.NextVisibleNode;
                                 if (tnTemp != null)
                                 {
-                                    this.SelectNode(tnTemp, true, tva);
+                                    SelectNode(tnTemp, true, tva);
                                 }
                             }
 
@@ -1218,12 +1193,12 @@ namespace FormControls.TreeView.MultiSelectTreeView
                                     TreeNode tnParent = tnTemp.Parent;
                                     if (tnParent == tnParentStartNode)
                                     {
-                                        this.SelectNode(tnTemp, true, tva);
+                                        SelectNode(tnTemp, true, tva);
                                     }
                                 }
                             }
 
-                            this.UnselectAllNodesNotBelongingDirectlyToParent(tnParentStartNode, tva);
+                            UnselectAllNodesNotBelongingDirectlyToParent(tnParentStartNode, tva);
                             break;
                     }
                 }
@@ -1231,14 +1206,14 @@ namespace FormControls.TreeView.MultiSelectTreeView
             else if (e.Button == MouseButtons.Right)
             {
                 // if right mouse button clicked, clear selection and select right-clicked node
-                if (!this.IsNodeSelected(endNode))
+                if (!IsNodeSelected(endNode))
                 {
-                    this.UnselectAllNodes(tva);
-                    this.SelectNode(endNode, true, tva);
+                    UnselectAllNodes(tva);
+                    SelectNode(endNode, true, tva);
                 }
             }
 
-            this.OnSelectionsChanged();
+            OnSelectionsChanged();
         }
 
         /// <summary>
@@ -1250,11 +1225,11 @@ namespace FormControls.TreeView.MultiSelectTreeView
         /// </param>
         private void SelectedNodes_SelectedNodesCleared(object sender, EventArgs e)
         {
-            this.blnSelectionChanged = false;
+            blnSelectionChanged = false;
 
-            this.UnselectAllNodes(TreeViewAction.Unknown);
+            UnselectAllNodes(TreeViewAction.Unknown);
 
-            this.OnSelectionsChanged();
+            OnSelectionsChanged();
         }
 
         /// <summary>
@@ -1265,12 +1240,12 @@ namespace FormControls.TreeView.MultiSelectTreeView
         /// </param>
         private void SelectedNodes_TreeNodeAdded(TreeNode tn)
         {
-            this.blnSelectionChanged = false;
+            blnSelectionChanged = false;
 
-            this.SelectNode(tn, true, TreeViewAction.Unknown);
+            SelectNode(tn, true, TreeViewAction.Unknown);
 
             // ProcessNodeRange(null, tn, new MouseEventArgs(MouseButtons.Left, 1, Cursor.Position.X,  Cursor.Position.Y, 0), Keys.None, TreeViewAction.ByKeyboard, false); 
-            this.OnSelectionsChanged();
+            OnSelectionsChanged();
         }
 
         /// <summary>
@@ -1281,11 +1256,11 @@ namespace FormControls.TreeView.MultiSelectTreeView
         /// </param>
         private void SelectedNodes_TreeNodeInserted(TreeNode tn)
         {
-            this.blnSelectionChanged = false;
+            blnSelectionChanged = false;
 
-            this.SelectNode(tn, true, TreeViewAction.Unknown);
+            SelectNode(tn, true, TreeViewAction.Unknown);
 
-            this.OnSelectionsChanged();
+            OnSelectionsChanged();
         }
 
         /// <summary>
@@ -1296,13 +1271,13 @@ namespace FormControls.TreeView.MultiSelectTreeView
         /// </param>
         private void SelectedNodes_TreeNodeRemoved(TreeNode tn)
         {
-            this.blnSelectionChanged = false;
+            blnSelectionChanged = false;
 
-            this.SelectNode(tn, false, TreeViewAction.Unknown);
+            SelectNode(tn, false, TreeViewAction.Unknown);
 
-            this.OnSelectionsChanged();
+            OnSelectionsChanged();
 
-            if (this.tnSelectionMirrorPoint == tn) this.tnSelectionMirrorPoint = null;
+            if (tnSelectionMirrorPoint == tn) tnSelectionMirrorPoint = null;
         }
 
         /// <summary>
@@ -1329,7 +1304,7 @@ namespace FormControls.TreeView.MultiSelectTreeView
             if (select)
             {
                 // Only try to select node if it was not already selected																		
-                if (!this.IsNodeSelected(tn))
+                if (!IsNodeSelected(tn))
                 {
                     // Check if node selection is cancelled
                     TreeViewCancelEventArgs tvcea = new TreeViewCancelEventArgs(tn, false, tva);
@@ -1340,40 +1315,40 @@ namespace FormControls.TreeView.MultiSelectTreeView
                         return false;
                     }
 
-                    this.PreserveNodeColors(tn);
+                    PreserveNodeColors(tn);
 
-                    tn.BackColor = this.SelectionBackColor; // GKM moved from above
-                    tn.ForeColor = this.BackColor; // GKM moved from above									
+                    tn.BackColor = SelectionBackColor; // GKM moved from above
+                    tn.ForeColor = BackColor; // GKM moved from above									
 
-                    this.htblSelectedNodes.Add(tn.GetHashCode(), tn);
+                    htblSelectedNodes.Add(tn.GetHashCode(), tn);
                     blnSelected = true;
-                    this.blnSelectionChanged = true;
+                    blnSelectionChanged = true;
 
-                    this.OnAfterSelect(new TreeViewEventArgs(tn, tva));
+                    OnAfterSelect(new TreeViewEventArgs(tn, tva));
                 }
 
-                this.tnMostRecentSelectedNode = tn;
+                tnMostRecentSelectedNode = tn;
             }
             else
             {
                 // Only unselect node if it was selected
-                if (this.IsNodeSelected(tn))
+                if (IsNodeSelected(tn))
                 {
-                    this.OnBeforeDeselect(tn);
+                    OnBeforeDeselect(tn);
 
-                    Color[] originalColors = (Color[])this.htblSelectedNodesOrigColors[tn.GetHashCode()];
+                    Color[] originalColors = (Color[])htblSelectedNodesOrigColors[tn.GetHashCode()];
                     if (originalColors != null)
                     {
-                        this.htblSelectedNodes.Remove(tn.GetHashCode());
-                        this.blnSelectionChanged = true;
-                        this.htblSelectedNodesOrigColors.Remove(tn.GetHashCode());
+                        htblSelectedNodes.Remove(tn.GetHashCode());
+                        blnSelectionChanged = true;
+                        htblSelectedNodesOrigColors.Remove(tn.GetHashCode());
 
                         // GKM - Restore original node colors
                         tn.BackColor = originalColors[0]; // GKM - was BackColor;
                         tn.ForeColor = originalColors[1]; // GKM - was ForeColor;
                     }
 
-                    this.OnAfterDeselect(tn);
+                    OnAfterDeselect(tn);
                 }
             }
 
@@ -1409,18 +1384,18 @@ namespace FormControls.TreeView.MultiSelectTreeView
             }
 
             // Select each node in range
-            this.SelectNode(firstNode, true, tva);
+            SelectNode(firstNode, true, tva);
             TreeNode tnTemp = firstNode;
             while (tnTemp != lastNode)
             {
                 tnTemp = tnTemp.NextVisibleNode;
                 if (tnTemp != null)
                 {
-                    this.SelectNode(tnTemp, true, tva);
+                    SelectNode(tnTemp, true, tva);
                 }
             }
 
-            this.SelectNode(lastNode, true, tva);
+            SelectNode(lastNode, true, tva);
         }
 
         /// <summary>
@@ -1434,31 +1409,31 @@ namespace FormControls.TreeView.MultiSelectTreeView
         /// </param>
         private void SetFocusToNode(TreeNode tn, bool visible)
         {
-            Graphics g = this.CreateGraphics();
+            Graphics g = CreateGraphics();
             Rectangle rect = new Rectangle(tn.Bounds.X, tn.Bounds.Y, tn.Bounds.Width, tn.Bounds.Height);
             if (visible)
             {
-                this.Invalidate(rect, false);
-                this.Update();
-                if (tn.BackColor != this.SelectionBackColor)
+                Invalidate(rect, false);
+                Update();
+                if (tn.BackColor != SelectionBackColor)
                 {
-                    g.DrawRectangle(new Pen(new SolidBrush(this.SelectionBackColor), 1), rect);
+                    g.DrawRectangle(new Pen(new SolidBrush(SelectionBackColor), 1), rect);
                 }
             }
             else
             {
-                if (tn.BackColor != this.SelectionBackColor)
+                if (tn.BackColor != SelectionBackColor)
                 {
                     g.DrawRectangle(
-                        new Pen(new SolidBrush(this.BackColor), 1),
-                        this.tnMostRecentSelectedNode.Bounds.X,
-                        this.tnMostRecentSelectedNode.Bounds.Y,
-                        this.tnMostRecentSelectedNode.Bounds.Width,
-                        this.tnMostRecentSelectedNode.Bounds.Height);
+                        new Pen(new SolidBrush(BackColor), 1),
+                        tnMostRecentSelectedNode.Bounds.X,
+                        tnMostRecentSelectedNode.Bounds.Y,
+                        tnMostRecentSelectedNode.Bounds.Width,
+                        tnMostRecentSelectedNode.Bounds.Height);
                 }
 
-                this.Invalidate(rect, false);
-                this.Update();
+                Invalidate(rect, false);
+                Update();
             }
         }
 
@@ -1468,16 +1443,16 @@ namespace FormControls.TreeView.MultiSelectTreeView
         private void StartEdit()
         {
             Thread.Sleep(200);
-            if (!this.blnWasDoubleClick)
+            if (!blnWasDoubleClick)
             {
-                this.blnInternalCall = true;
-                this.SelectedNode = this.tnNodeToStartEditOn;
-                this.blnInternalCall = false;
-                this.tnNodeToStartEditOn.BeginEdit();
+                blnInternalCall = true;
+                SelectedNode = tnNodeToStartEditOn;
+                blnInternalCall = false;
+                tnNodeToStartEditOn.BeginEdit();
             }
             else
             {
-                this.blnWasDoubleClick = false;
+                blnWasDoubleClick = false;
             }
         }
 
@@ -1489,7 +1464,7 @@ namespace FormControls.TreeView.MultiSelectTreeView
         /// </param>
         private void UnselectAllNodes(TreeViewAction tva)
         {
-            this.UnselectAllNodesExceptNode(null, tva);
+            UnselectAllNodesExceptNode(null, tva);
         }
 
         /// <summary>
@@ -1505,7 +1480,7 @@ namespace FormControls.TreeView.MultiSelectTreeView
         {
             // First, build list of nodes that need to be unselected
             ArrayList arrNodesToDeselect = new ArrayList();
-            foreach (TreeNode selectedTreeNode in this.htblSelectedNodes.Values)
+            foreach (TreeNode selectedTreeNode in htblSelectedNodes.Values)
             {
                 if (nodeKeepSelected == null)
                 {
@@ -1520,7 +1495,7 @@ namespace FormControls.TreeView.MultiSelectTreeView
             // Do the actual unselect
             foreach (TreeNode tnToDeselect in arrNodesToDeselect)
             {
-                this.SelectNode(tnToDeselect, false, tva);
+                SelectNode(tnToDeselect, false, tva);
             }
         }
 
@@ -1537,7 +1512,7 @@ namespace FormControls.TreeView.MultiSelectTreeView
         {
             // First, build list of nodes that need to be unselected
             ArrayList arrNodesToDeselect = new ArrayList();
-            foreach (TreeNode selectedTreeNode in this.htblSelectedNodes.Values)
+            foreach (TreeNode selectedTreeNode in htblSelectedNodes.Values)
             {
                 if (selectedTreeNode.Parent != parent)
                 {
@@ -1548,7 +1523,7 @@ namespace FormControls.TreeView.MultiSelectTreeView
             // Do the actual unselect
             foreach (TreeNode tnToDeselect in arrNodesToDeselect)
             {
-                this.SelectNode(tnToDeselect, false, tva);
+                SelectNode(tnToDeselect, false, tva);
             }
         }
 
@@ -1565,9 +1540,9 @@ namespace FormControls.TreeView.MultiSelectTreeView
         {
             // First, build list of nodes that need to be unselected
             ArrayList arrNodesToDeselect = new ArrayList();
-            foreach (TreeNode selectedTreeNode in this.htblSelectedNodes.Values)
+            foreach (TreeNode selectedTreeNode in htblSelectedNodes.Values)
             {
-                if (this.GetNodeLevel(selectedTreeNode) != level)
+                if (GetNodeLevel(selectedTreeNode) != level)
                 {
                     arrNodesToDeselect.Add(selectedTreeNode);
                 }
@@ -1576,7 +1551,7 @@ namespace FormControls.TreeView.MultiSelectTreeView
             // Do the actual unselect
             foreach (TreeNode tnToDeselect in arrNodesToDeselect)
             {
-                this.SelectNode(tnToDeselect, false, tva);
+                SelectNode(tnToDeselect, false, tva);
             }
         }
 
@@ -1593,9 +1568,9 @@ namespace FormControls.TreeView.MultiSelectTreeView
         {
             // First, build list of nodes that need to be unselected
             ArrayList arrNodesToDeselect = new ArrayList();
-            foreach (TreeNode selectedTreeNode in this.htblSelectedNodes.Values)
+            foreach (TreeNode selectedTreeNode in htblSelectedNodes.Values)
             {
-                if (!this.IsChildOf(selectedTreeNode, parent))
+                if (!IsChildOf(selectedTreeNode, parent))
                 {
                     arrNodesToDeselect.Add(selectedTreeNode);
                 }
@@ -1604,7 +1579,7 @@ namespace FormControls.TreeView.MultiSelectTreeView
             // Do the actual unselect
             foreach (TreeNode tnToDeselect in arrNodesToDeselect)
             {
-                this.SelectNode(tnToDeselect, false, tva);
+                SelectNode(tnToDeselect, false, tva);
             }
         }
 
@@ -1643,7 +1618,7 @@ namespace FormControls.TreeView.MultiSelectTreeView
                 tnTemp = tnTemp.PrevVisibleNode;
                 if (tnTemp != null)
                 {
-                    this.SelectNode(tnTemp, false, tva);
+                    SelectNode(tnTemp, false, tva);
                 }
             }
 
@@ -1653,7 +1628,7 @@ namespace FormControls.TreeView.MultiSelectTreeView
                 tnTemp = tnTemp.NextVisibleNode;
                 if (tnTemp != null)
                 {
-                    this.SelectNode(tnTemp, false, tva);
+                    SelectNode(tnTemp, false, tva);
                 }
             }
         }
@@ -1669,10 +1644,10 @@ namespace FormControls.TreeView.MultiSelectTreeView
         /// </param>
         private void UnselectNodesRecursively(TreeNode tn, TreeViewAction tva)
         {
-            this.SelectNode(tn, false, tva);
+            SelectNode(tn, false, tva);
             foreach (TreeNode child in tn.Nodes)
             {
-                this.UnselectNodesRecursively(child, tva);
+                UnselectNodesRecursively(child, tva);
             }
         }
 

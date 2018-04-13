@@ -1,26 +1,23 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ConfigLocation.cs" company="">
-//   
+// <copyright file="ConfigLocation.cs" company="DotnetScaffolder">
+//   MIT
 // </copyright>
-// <summary>
-//   The config location.
-// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace DotNetScaffolder.Mapping.MetaData.Enum
 {
     /// <summary>
-    /// The config location.
+    ///     The config location.
     /// </summary>
     public enum ConfigLocation
     {
         /// <summary>
-        /// The data.
+        ///     The data.
         /// </summary>
         Data,
 
         /// <summary>
-        /// The driver.
+        ///     The driver.
         /// </summary>
         Driver
     }

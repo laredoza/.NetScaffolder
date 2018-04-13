@@ -1,20 +1,37 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="ProjectDomainUserControlUnitTest.cs" company="DotnetScaffolder">
+//   MIT
+// </copyright>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace DotNetScaffolder.Test.Presentation.Controls
 {
+    #region Usings
+
     using DotNetScaffolder.Mapping.ApplicationServices;
     using DotNetScaffolder.Presentation.Forms.Controls;
 
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+    #endregion
+
+    /// <summary>
+    /// The project domain user control unit test.
+    /// </summary>
     [TestClass]
     public class ProjectDomainUserControlUnitTest
     {
+        #region Public methods and operators
+
+        /// <summary>
+        /// The project domain user control unit test_ test.
+        /// </summary>
         [TestMethod]
         public void ProjectDomainUserControlUnitTest_Test()
         {
             ProjectDomainUserControl domainControl = new ProjectDomainUserControl();
             domainControl.ApplicationService = new ProjectDefinitionApplicationServiceFile();
-            
+
             Assert.AreEqual(0, domainControl.ApplicationService.ProjectDefinition.Domains.Count, "There should be 0 domains");
             Assert.AreEqual(false, domainControl.EnableDeleteButton, "EnableDeleteButton should be false");
 
@@ -42,5 +59,7 @@ namespace DotNetScaffolder.Test.Presentation.Controls
             Assert.AreEqual(0, domainControl.ApplicationService.ProjectDefinition.Domains.Count, "There should be 0 domains");
             Assert.AreEqual(false, domainControl.EnableDeleteButton, "EnableDeleteButton should be false");
         }
+
+        #endregion
     }
 }

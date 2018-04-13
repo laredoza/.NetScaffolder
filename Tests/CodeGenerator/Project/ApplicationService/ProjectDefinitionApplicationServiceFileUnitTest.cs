@@ -1,25 +1,28 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ProjectDefinitionApplicationServiceFileUnitTest.cs" company="">
-//   
+// <copyright file="ProjectDefinitionApplicationServiceFileUnitTest.cs" company="DotnetScaffolder">
+//   MIT
 // </copyright>
-// <summary>
-//   The project definition application service file unit test.
-// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace DotNetScaffolder.Test.Project.ApplicationService
 {
+    #region Usings
+
     using DotNetScaffolder.Mapping.ApplicationServices;
+
     #region Using
 
     using DotNetScaffolder.Mapping.MetaData.Project;
+
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     #endregion
 
+    #endregion
+
     /// <summary>
-    /// The project definition application service file unit test.
-    /// Tests Loading and saving project details in xml
+    ///     The project definition application service file unit test.
+    ///     Tests Loading and saving project details in xml
     /// </summary>
     [TestClass]
     public class ProjectDefinitionApplicationServiceFileUnitTest : ProjectDefinitionApplicationServiceUnitTest
@@ -27,7 +30,37 @@ namespace DotNetScaffolder.Test.Project.ApplicationService
         #region Public methods and operators
 
         /// <summary>
-        /// Tests Loading and saving project details in xml
+        /// The project definition application service file unit test_ add domain.
+        /// </summary>
+        [TestMethod]
+        public void ProjectDefinitionApplicationServiceFileUnitTest_AddDomain()
+        {
+            FilePersistenceOptions options = new FilePersistenceOptions { Path = "Test.mdl" };
+            IProjectDefinitionApplicationService applicationService = new ProjectDefinitionApplicationServiceFile
+                                                                          {
+                                                                              FilePersistenceOptions = options
+                                                                          };
+
+            TestAddDomain(applicationService);
+        }
+
+        /// <summary>
+        /// The project definition application service file unit test_ delete domain.
+        /// </summary>
+        [TestMethod]
+        public void ProjectDefinitionApplicationServiceFileUnitTest_DeleteDomain()
+        {
+            FilePersistenceOptions options = new FilePersistenceOptions { Path = "Test.mdl" };
+            IProjectDefinitionApplicationService applicationService = new ProjectDefinitionApplicationServiceFile
+                                                                          {
+                                                                              FilePersistenceOptions = options
+                                                                          };
+
+            TestDeleteDomain(applicationService);
+        }
+
+        /// <summary>
+        ///     Tests Loading and saving project details in xml
         /// </summary>
         [TestMethod]
         public void ProjectDefinitionApplicationServiceFileUnitTest_Test()
@@ -39,49 +72,25 @@ namespace DotNetScaffolder.Test.Project.ApplicationService
                                                                                   =
                                                                                   options
                                                                           };
-            this.CreateTestValues(applicationService.ProjectDefinition);
+            CreateTestValues(applicationService.ProjectDefinition);
             applicationService.Save();
             applicationService.Load();
-            this.TestProjectDefinition(applicationService.ProjectDefinition);
+            TestProjectDefinition(applicationService.ProjectDefinition);
         }
 
         /// <summary>
-        /// Tests validation
+        ///     Tests validation
         /// </summary>
         [TestMethod]
         public void ProjectDefinitionApplicationServiceFileUnitTest_Validation()
         {
             FilePersistenceOptions options = new FilePersistenceOptions { Path = "Test.mdl" };
             IProjectDefinitionApplicationService applicationService = new ProjectDefinitionApplicationServiceFile
-            {
-                FilePersistenceOptions = options
-            };
+                                                                          {
+                                                                              FilePersistenceOptions = options
+                                                                          };
 
-            this.TestValidation(applicationService);
-        }
-
-        [TestMethod]
-        public void ProjectDefinitionApplicationServiceFileUnitTest_AddDomain()
-        {
-            FilePersistenceOptions options = new FilePersistenceOptions { Path = "Test.mdl" };
-            IProjectDefinitionApplicationService applicationService = new ProjectDefinitionApplicationServiceFile
-            {
-                FilePersistenceOptions = options
-            };
-
-            this.TestAddDomain(applicationService);
-        }
-
-        [TestMethod]
-        public void ProjectDefinitionApplicationServiceFileUnitTest_DeleteDomain()
-        {
-            FilePersistenceOptions options = new FilePersistenceOptions { Path = "Test.mdl" };
-            IProjectDefinitionApplicationService applicationService = new ProjectDefinitionApplicationServiceFile
-            {
-                FilePersistenceOptions = options
-            };
-
-            this.TestDeleteDomain(applicationService);
+            TestValidation(applicationService);
         }
 
         #endregion

@@ -1,24 +1,67 @@
-﻿using Common.Logging;
-using Configuration;
-using DotNetScaffolder.Components.Common.Contract;
-using DotNetScaffolder.Mapping.MetaData.Domain;
-using System.Windows.Forms;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="ManageDataSourceForm.cs" company="DotnetScaffolder">
+//   MIT
+// </copyright>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace DotNetScaffolder.Presentation.Forms.Controls
 {
-    using System;
+    #region Usings
 
+    using System;
+    using System.Windows.Forms;
+
+    using Common.Logging;
+
+    using Configuration;
+
+    using DotNetScaffolder.Components.Common.Contract;
+    using DotNetScaffolder.Mapping.MetaData.Domain;
+
+    #endregion
+
+    /// <summary>
+    /// The manage data source form.
+    /// </summary>
     public partial class ManageDataSourceForm : Form
     {
+        #region Static Fields
+
         /// <summary>
         ///     The logger.
         /// </summary>
         private static readonly ILog Logger = LogManager.GetLogger(string.Empty);
 
+        #endregion
+
+        #region Fields
+
+        /// <summary>
+        /// The data source.
+        /// </summary>
         private DomainDefinition dataSource;
 
+        /// <summary>
+        /// The source type.
+        /// </summary>
         private ISourceType sourceType;
-        
+
+        #endregion
+
+        #region Constructors and Destructors
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ManageDataSourceForm"/> class.
+        /// </summary>
+        public ManageDataSourceForm()
+        {
+            InitializeComponent();
+        }
+
+        #endregion
+
+        #region Properties
+
         /// <summary>
         ///     Gets or sets the data source.
         /// </summary>
@@ -28,28 +71,47 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
             {
                 return dataSource;
             }
+
             set
             {
                 if (dataSource != value)
                 {
                     dataSource = value;
-                    this.UpdateDataSource();
+                    UpdateDataSource();
                 }
             }
         }
 
+        #endregion
+
+        #region Other Methods
+
         /// <summary>
-        /// The update data source.
+        /// The button 3_ click.
+        /// </summary>
+        /// <param name="sender">
+        /// The sender.
+        /// </param>
+        /// <param name="e">
+        /// The e.
+        /// </param>
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        /// <summary>
+        ///     The update data source.
         /// </summary>
         private void UpdateDataSource()
         {
             Logger.Trace("Started UpdateDataSource()");
 
-            if (this.DataSource != null)
+            if (DataSource != null)
             {
-                this.sourceType = ScaffoldConfig.ReturnSourceType(this.DataSource.SourceTypeId);
-                this.panel1.Controls.Clear();
-                this.sourceType.AddConfigUI(this.panel1);
+                sourceType = ScaffoldConfig.ReturnSourceType(DataSource.SourceTypeId);
+                panel1.Controls.Clear();
+                sourceType.AddConfigUI(panel1);
             }
             else
             {
@@ -59,14 +121,6 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
             Logger.Trace("Completed UpdateDataSource()");
         }
 
-        public ManageDataSourceForm()
-        {
-            InitializeComponent();
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
+        #endregion
     }
 }

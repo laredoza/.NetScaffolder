@@ -1,24 +1,20 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="CollectionOption.cs" company="">
-//   
+// <copyright file="CollectionOption.cs" company="DotnetScaffolder">
+//   MIT
 // </copyright>
-// <summary>
-//   The collection option.
-// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace DotNetScaffolder.Mapping.MetaData.Project
 {
-    #region Using
+    #region Usings
 
     using System;
-    using System.Collections.Generic;
 
     #endregion
 
     /// <summary>
-    /// Collection options.
-    /// The selected collection will be used as the parent for any generated collections
+    ///     Collection options.
+    ///     The selected collection will be used as the parent for any generated collections
     /// </summary>
     [Serializable]
     public class CollectionOption
@@ -26,12 +22,12 @@ namespace DotNetScaffolder.Mapping.MetaData.Project
         #region Properties
 
         /// <summary>
-        /// Gets or sets the name.
+        ///     Gets or sets the name.
         /// </summary>
         public string Name { get; set; }
 
         /// <summary>
-        /// Gets or sets the name space.
+        ///     Gets or sets the name space.
         /// </summary>
         public string NameSpace { get; set; }
 

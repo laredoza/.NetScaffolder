@@ -1,7 +1,13 @@
-﻿namespace DotNetScaffolder.Mapping.MetaData.Enum
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="RelationshipType.cs" company="DotnetScaffolder">
+//   MIT
+// </copyright>
+// --------------------------------------------------------------------------------------------------------------------
+
+namespace DotNetScaffolder.Mapping.MetaData.Enum
 {
     /// <summary>
-    /// The relationship type.
+    ///     The relationship type.
     /// </summary>
     public enum RelationshipType
     {

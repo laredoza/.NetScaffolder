@@ -1,15 +1,12 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ManageCollectionsTreeViewUserControl.cs" company="">
-//   
+// <copyright file="ManageCollectionsTreeViewUserControl.cs" company="DotnetScaffolder">
+//   MIT
 // </copyright>
-// <summary>
-//   The manage collections tree view user control.
-// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace DotNetScaffolder.Presentation.Forms.Controls
 {
-    #region Using
+    #region Usings
 
     using System;
     using System.Windows.Forms;
@@ -32,14 +29,14 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         /// </summary>
         public ManageCollectionsTreeViewUserControl()
         {
-            this.InitializeComponent();
-            this.treeView1.AfterSelect += this.TreeView1_AfterSelect;
-            this.treeView1.BeforeSelect += this.TreeView1_BeforeSelect;
-            this.BtnUp.Click += this.BtnUp_Click;
-            this.BtnDown.Click += this.BtnDown_Click;
-            this.BtnDelete.Click += this.BtnDelete_Click;
-            this.BtnAddGroup.Click += this.BtnAddGroup_Click;
-            this.BtnAddItem.Click += this.BtnAddItem_Click;
+            InitializeComponent();
+            treeView1.AfterSelect += TreeView1_AfterSelect;
+            treeView1.BeforeSelect += TreeView1_BeforeSelect;
+            BtnUp.Click += BtnUp_Click;
+            BtnDown.Click += BtnDown_Click;
+            BtnDelete.Click += BtnDelete_Click;
+            BtnAddGroup.Click += BtnAddGroup_Click;
+            BtnAddItem.Click += BtnAddItem_Click;
         }
 
         #endregion
@@ -93,15 +90,15 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         {
             get
             {
-                return this.treeView1.Data;
+                return treeView1.Data;
             }
-            
+
             set
             {
-                if (this.treeView1.Data != value)
+                if (treeView1.Data != value)
                 {
-                    this.treeView1.Data = value;
-                    this.treeView1.ExpandAll();
+                    treeView1.Data = value;
+                    treeView1.ExpandAll();
                 }
             }
         }
@@ -118,7 +115,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         /// </param>
         public void MoveDown(TreeNode selectedNode)
         {
-            this.treeView1.MoveDown(selectedNode);
+            treeView1.MoveDown(selectedNode);
         }
 
         /// <summary>
@@ -129,7 +126,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         /// </param>
         public void MoveUp(TreeNode selectedNode)
         {
-            this.treeView1.MoveUp(selectedNode);
+            treeView1.MoveUp(selectedNode);
         }
 
         /// <summary>
@@ -137,10 +134,10 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         /// </summary>
         public void SelectFirstNode()
         {
-            if (this.treeView1.Nodes.Count > 0)
+            if (treeView1.Nodes.Count > 0)
             {
-                this.treeView1.SelectNode(this.treeView1.Nodes[0]);
-                this.OnAfterSelectChanged(new TreeViewEventArgs(this.treeView1.Nodes[0]), this.AfterSelect);
+                treeView1.SelectNode(treeView1.Nodes[0]);
+                OnAfterSelectChanged(new TreeViewEventArgs(treeView1.Nodes[0]), AfterSelect);
             }
         }
 
@@ -210,7 +207,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         /// </param>
         private void BtnAddGroup_Click(object sender, EventArgs e)
         {
-            this.OnButtonClicked(e, this.BtnAddGroupClick);
+            OnButtonClicked(e, BtnAddGroupClick);
         }
 
         /// <summary>
@@ -224,7 +221,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         /// </param>
         private void BtnAddItem_Click(object sender, EventArgs e)
         {
-            this.OnButtonClicked(e, this.BtnAddItemClick);
+            OnButtonClicked(e, BtnAddItemClick);
         }
 
         /// <summary>
@@ -238,7 +235,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         /// </param>
         private void BtnDelete_Click(object sender, EventArgs e)
         {
-            this.OnButtonClicked(e, this.BtnDeleteClick);
+            OnButtonClicked(e, BtnDeleteClick);
         }
 
         /// <summary>
@@ -252,7 +249,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         /// </param>
         private void BtnDown_Click(object sender, EventArgs e)
         {
-            this.OnButtonClicked(e, this.BtnDownClick);
+            OnButtonClicked(e, BtnDownClick);
         }
 
         /// <summary>
@@ -266,7 +263,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         /// </param>
         private void BtnUp_Click(object sender, EventArgs e)
         {
-            this.OnButtonClicked(e, this.BtnUpClick);
+            OnButtonClicked(e, BtnUpClick);
         }
 
         /// <summary>
@@ -281,14 +278,14 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         private void TreeView1_AfterSelect(object sender, TreeViewEventArgs e)
         {
             // throw new System.NotImplementedException();
-            this.treeView1.SelectNode(e.Node);
-            this.BtnUp.Enabled = this.treeView1.UpEnabled;
-            this.BtnDown.Enabled = this.treeView1.DownEnabled;
-            this.BtnDelete.Enabled = this.treeView1.DeleteEnabled;
-            this.BtnAddGroup.Enabled = this.treeView1.AddGroupEnabled;
-            this.BtnAddItem.Enabled = this.treeView1.AddItemEnabled;
+            treeView1.SelectNode(e.Node);
+            BtnUp.Enabled = treeView1.UpEnabled;
+            BtnDown.Enabled = treeView1.DownEnabled;
+            BtnDelete.Enabled = treeView1.DeleteEnabled;
+            BtnAddGroup.Enabled = treeView1.AddGroupEnabled;
+            BtnAddItem.Enabled = treeView1.AddItemEnabled;
 
-            this.OnAfterSelectChanged(e, this.AfterSelect);
+            OnAfterSelectChanged(e, AfterSelect);
         }
 
         /// <summary>
@@ -302,7 +299,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         /// </param>
         private void TreeView1_BeforeSelect(object sender, TreeViewCancelEventArgs e)
         {
-            this.OnBeforeSelectChanged(e, this.BeforeSelect);
+            OnBeforeSelectChanged(e, BeforeSelect);
         }
 
         #endregion

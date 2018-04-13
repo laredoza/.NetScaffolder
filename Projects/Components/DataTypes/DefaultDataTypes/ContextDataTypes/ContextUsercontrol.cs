@@ -1,36 +1,70 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="ContextUserControl.cs" company="DotnetScaffolder">
+//   MIT
+// </copyright>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataTypes
 {
+    #region Usings
+
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Windows.Forms;
+
     using DotNetScaffolder.Components.Common.Contract;
 
-    using FormControls.TreeView;
+    #endregion
 
+    /// <summary>
+    ///     The context user control.
+    /// </summary>
     public partial class ContextUserControl : UserControl, IDataTypeUI<IDictionary<string, string>>
     {
-        public ContextDataType DataType { get; set; }
+        #region Constructors and Destructors
 
-        public ContextData SelectedContext { get; set; }
-
-        public void SaveConfig(IDictionary<string, string> parameters)
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="ContextUserControl" /> class.
+        /// </summary>
+        public ContextUserControl()
         {
-            if (DataType == null || SelectedContext == null) return;
-
-            SelectedContext = DataType.Contexts.First(o => o.Id == SelectedContext.Id);
-
-            UpdateContext();
-
-            DataType.Save(parameters);
+            InitializeComponent();
         }
 
+        #endregion
+
+        #region Public Events
+
+        /// <summary>
+        ///     The on navigation changed.
+        /// </summary>
+        public event EventHandler<IDataType<IDictionary<string, string>>> OnNavigationChanged;
+
+        #endregion
+
+        #region Properties
+
+        /// <summary>
+        ///     Gets or sets the data type.
+        /// </summary>
+        public ContextDataType DataType { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the selected context.
+        /// </summary>
+        public ContextData SelectedContext { get; set; }
+
+        #endregion
+
+        #region Public methods and operators
+
+        /// <summary>
+        /// The load config.
+        /// </summary>
+        /// <param name="parameters">
+        /// The parameters.
+        /// </param>
         public void LoadConfig(IDictionary<string, string> parameters)
         {
             if (DataType == null) return;
@@ -52,21 +86,36 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
             UpdateUI();
         }
 
-        private void SetupDefault()
+        /// <summary>
+        /// The save config.
+        /// </summary>
+        /// <param name="parameters">
+        /// The parameters.
+        /// </param>
+        public void SaveConfig(IDictionary<string, string> parameters)
         {
-            SelectedContext = new ContextData
-                                  {
-                                      Id = Guid.NewGuid()
-                                  };
+            if (DataType == null || SelectedContext == null) return;
+
+            SelectedContext = DataType.Contexts.FirstOrDefault(o => o.Id == SelectedContext.Id);
+
+            UpdateContext();
+
+            DataType.Save(parameters);
         }
 
-        public event EventHandler<IDataType<IDictionary<string, string>>> OnNavigationChanged;
+        #endregion
 
-        public ContextUserControl()
-        {
-            InitializeComponent();
-        }
+        #region Other Methods
 
+        /// <summary>
+        /// The btn new_ click.
+        /// </summary>
+        /// <param name="sender">
+        /// The sender.
+        /// </param>
+        /// <param name="e">
+        /// The e.
+        /// </param>
         private void btnNew_Click(object sender, EventArgs e)
         {
             UpdateContext();
@@ -77,8 +126,24 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
             UpdateUI();
         }
 
+        /// <summary>
+        ///     The setup default.
+        /// </summary>
+        private void SetupDefault()
+        {
+            SelectedContext = new ContextData
+                                  {
+                                      Id = Guid.NewGuid()
+                                  };
+        }
+
+        /// <summary>
+        ///     The update context.
+        /// </summary>
         private void UpdateContext()
         {
+            if (SelectedContext == null) return;
+
             SelectedContext.OutputFolder = OutputFolder.Text;
             SelectedContext.Enabled = ContextEnabled.Checked;
             SelectedContext.Namespace = Namespace.Text;
@@ -90,8 +155,13 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
             SelectedContext.ConstructionOptions = ConstructionOptions.SelectedText;
         }
 
+        /// <summary>
+        ///     The update ui.
+        /// </summary>
         private void UpdateUI()
         {
+            if (SelectedContext == null) return;
+
             OutputFolder.Text = SelectedContext.OutputFolder;
             ContextEnabled.Checked = SelectedContext.Enabled;
             Namespace.Text = SelectedContext.Namespace;
@@ -102,5 +172,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
             LoggingEnabled.Checked = SelectedContext.LoggingEnabled;
             ConstructionOptions.SelectedText = SelectedContext.ConstructionOptions;
         }
+
+        #endregion
     }
 }

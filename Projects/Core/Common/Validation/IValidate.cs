@@ -1,15 +1,12 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="IValidate.cs" company="">
-//   
+// <copyright file="IValidate.cs" company="DotnetScaffolder">
+//   MIT
 // </copyright>
-// <summary>
-//   The Validate interface.
-// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace DotNetScaffolder.Core.Common.Validation
 {
-    #region Using
+    #region Usings
 
     using System.Collections.Generic;
 
@@ -21,8 +18,12 @@ namespace DotNetScaffolder.Core.Common.Validation
     public interface IValidate
     {
         #region Properties
-        
+
+        /// <summary>
+        /// Gets or sets the validation result.
+        /// </summary>
         List<Validation> ValidationResult { get; set; }
+
         #endregion
 
         #region Public methods and operators

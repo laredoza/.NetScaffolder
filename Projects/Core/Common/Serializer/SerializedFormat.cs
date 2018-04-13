@@ -1,10 +1,7 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="SerializedFormat.cs" company="">
-//   
+// <copyright file="SerializedFormat.cs" company="DotnetScaffolder">
+//   MIT
 // </copyright>
-// <summary>
-//   Serialization format types.
-// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace DotNetScaffolder.Core.Common.Serializer

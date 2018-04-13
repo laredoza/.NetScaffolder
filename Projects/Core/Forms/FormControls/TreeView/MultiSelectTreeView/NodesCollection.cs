@@ -1,25 +1,12 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="NodesCollection.cs" company="">
-//  Copyright 2004, Coder's Lab
-//  All rights reserved. The software and associated documentation 
-//  supplied hereunder are the proprietary information of Coder's Lab
-//  and are supplied subject to licence terms.
-//  
-//
-//  You can use this control freely in your projects, but let me know if you
-//  are using it so I can add you to a list of references. 
-//
-//  Email: ludwig.stuyck@coders-lab.be
-//  Home page: http://www.coders-lab.be
+// <copyright file="NodesCollection.cs" company="DotnetScaffolder">
+//   MIT
 // </copyright>
-// <summary>
-//   Collection of selected nodes.
-// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace FormControls.TreeView.MultiSelectTreeView
 {
-    #region Using
+    #region Usings
 
     using System;
     using System.Collections;
@@ -71,7 +58,7 @@ namespace FormControls.TreeView.MultiSelectTreeView
         {
             get
             {
-                return (TreeNode)this.List[index];
+                return (TreeNode)List[index];
             }
         }
 
@@ -90,9 +77,9 @@ namespace FormControls.TreeView.MultiSelectTreeView
         /// </returns>
         public int Add(TreeNode treeNode)
         {
-            if (this.TreeNodeAdded != null) this.TreeNodeAdded(treeNode);
+            if (TreeNodeAdded != null) TreeNodeAdded(treeNode);
 
-            return this.List.Add(treeNode);
+            return List.Add(treeNode);
         }
 
         /// <summary>
@@ -106,7 +93,7 @@ namespace FormControls.TreeView.MultiSelectTreeView
         /// </returns>
         public bool Contains(TreeNode treeNode)
         {
-            return this.List.Contains(treeNode);
+            return List.Contains(treeNode);
         }
 
         /// <summary>
@@ -120,7 +107,7 @@ namespace FormControls.TreeView.MultiSelectTreeView
         /// </returns>
         public int IndexOf(TreeNode treeNode)
         {
-            return this.List.IndexOf(treeNode);
+            return List.IndexOf(treeNode);
         }
 
         /// <summary>
@@ -134,9 +121,9 @@ namespace FormControls.TreeView.MultiSelectTreeView
         /// </param>
         public void Insert(int index, TreeNode treeNode)
         {
-            if (this.TreeNodeInserted != null) this.TreeNodeInserted(treeNode);
+            if (TreeNodeInserted != null) TreeNodeInserted(treeNode);
 
-            this.List.Add(treeNode);
+            List.Add(treeNode);
         }
 
         /// <summary>
@@ -147,9 +134,9 @@ namespace FormControls.TreeView.MultiSelectTreeView
         /// </param>
         public void Remove(TreeNode treeNode)
         {
-            if (this.TreeNodeRemoved != null) this.TreeNodeRemoved(treeNode);
+            if (TreeNodeRemoved != null) TreeNodeRemoved(treeNode);
 
-            this.List.Remove(treeNode);
+            List.Remove(treeNode);
         }
 
         #endregion
@@ -161,7 +148,7 @@ namespace FormControls.TreeView.MultiSelectTreeView
         /// </summary>
         protected override void OnClear()
         {
-            if (this.SelectedNodesCleared != null) this.SelectedNodesCleared(this, EventArgs.Empty);
+            if (SelectedNodesCleared != null) SelectedNodesCleared(this, EventArgs.Empty);
 
             base.OnClear();
         }

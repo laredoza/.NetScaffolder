@@ -1,24 +1,22 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ProjectDetailsUserControlUnitTest.cs" company="">
-//   
+// <copyright file="ProjectDetailsUserControlUnitTest.cs" company="DotnetScaffolder">
+//   MIT
 // </copyright>
-// <summary>
-//   The project details user control unit test.
-// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace DotNetScaffolder.Test.Presentation.Controls
 {
-    #region Using
+    #region Usings
 
     using DotNetScaffolder.Mapping.MetaData.Project;
     using DotNetScaffolder.Presentation.Forms.Controls;
+
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     #endregion
 
     /// <summary>
-    /// The project details user control unit test.
+    ///     The project details user control unit test.
     /// </summary>
     [TestClass]
     public class ProjectDetailsUserControlUnitTest
@@ -26,7 +24,7 @@ namespace DotNetScaffolder.Test.Presentation.Controls
         #region Public methods and operators
 
         /// <summary>
-        /// The project details user control unit test_ test method.
+        ///     The project details user control unit test_ test method.
         /// </summary>
         [TestMethod]
         public void ProjectDetailsUserControlUnitTest_TestMethod()

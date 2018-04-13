@@ -1,15 +1,12 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ComponentImporterUnitTest.cs" company="">
-//   
+// <copyright file="ComponentImporterUnitTest.cs" company="DotnetScaffolder">
+//   MIT
 // </copyright>
-// <summary>
-//   The component importer unit test.
-// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace DotNetScaffolder.Test.Components
 {
-    #region Using
+    #region Usings
 
     using DotNetScaffolder.Components.Common;
 
@@ -18,7 +15,7 @@ namespace DotNetScaffolder.Test.Components
     #endregion
 
     /// <summary>
-    /// The component importer unit test.
+    ///     The component importer unit test.
     /// </summary>
     [TestClass]
     public class ComponentImporterUnitTest
@@ -26,7 +23,7 @@ namespace DotNetScaffolder.Test.Components
         #region Public methods and operators
 
         /// <summary>
-        /// Tests the Component Importer
+        ///     Tests the Component Importer
         /// </summary>
         [TestMethod]
         public void ComponentImporterUnitTest_Import()

@@ -1,25 +1,22 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ProjectDefinition.cs" company="">
-//   
+// <copyright file="ProjectDefinition.cs" company="DotnetScaffolder">
+//   MIT
 // </copyright>
-// <summary>
-//   The project definition. This is used to define the metadata required to
-//   generate layers.
-// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace DotNetScaffolder.Mapping.MetaData.Project
 {
-    #region Using
+    #region Usings
 
     using System.Collections.Generic;
     using System.Xml.Serialization;
 
     using Common.Logging;
 
+    using DotNetScaffolder.Core.Common.Validation;
     using DotNetScaffolder.Mapping.MetaData.Domain;
     using DotNetScaffolder.Mapping.MetaData.Enum;
-    using Core.Common.Validation;
+
     #endregion
 
     /// <summary>
@@ -40,12 +37,12 @@ namespace DotNetScaffolder.Mapping.MetaData.Project
         #region Constructors and Destructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ProjectDefinition"/> class.
+        ///     Initializes a new instance of the <see cref="ProjectDefinition" /> class.
         /// </summary>
         public ProjectDefinition()
         {
-            this.Domains = new List<DomainDefinition>();
-            this.CollectionOptions = new List<CollectionOption>();
+            Domains = new List<DomainDefinition>();
+            CollectionOptions = new List<CollectionOption>();
         }
 
         #endregion
@@ -57,6 +54,11 @@ namespace DotNetScaffolder.Mapping.MetaData.Project
         ///     i.e) Cars.Models
         /// </summary>
         public string BaseNameSpace { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the collection options.
+        /// </summary>
+        public List<CollectionOption> CollectionOptions { get; set; }
 
         /// <summary>
         ///     Gets or sets the domains.
@@ -89,11 +91,6 @@ namespace DotNetScaffolder.Mapping.MetaData.Project
         /// </summary>
         public double Version { get; set; }
 
-        /// <summary>
-        /// Gets or sets the collection options.
-        /// </summary>
-        public List<CollectionOption> CollectionOptions { get; set; }
-
         #endregion
 
         #region Public methods and operators
@@ -109,45 +106,45 @@ namespace DotNetScaffolder.Mapping.MetaData.Project
         {
             Logger.Trace($"Started Validate()");
 
-            this.ValidationResult = new List<Validation>();
+            ValidationResult = new List<Validation>();
 
-            if (string.IsNullOrEmpty(this.BaseNameSpace))
+            if (string.IsNullOrEmpty(BaseNameSpace))
             {
-                this.ValidationResult.Add(new Validation(ValidationType.ProjectBaseNameSpace, "BaseNameSpace may not be empty"));
+                ValidationResult.Add(new Validation(ValidationType.ProjectBaseNameSpace, "BaseNameSpace may not be empty"));
             }
 
-            if (string.IsNullOrEmpty(this.OutputFolder))
+            if (string.IsNullOrEmpty(OutputFolder))
             {
-                this.ValidationResult.Add(new Validation(ValidationType.ProjectOutputFolder, "OutputFolder may not be empty"));
+                ValidationResult.Add(new Validation(ValidationType.ProjectOutputFolder, "OutputFolder may not be empty"));
             }
 
-            if (this.Version == 0)
+            if (Version == 0)
             {
-                this.ValidationResult.Add(new Validation(ValidationType.ProjectVersion, "Version may not be 0"));
+                ValidationResult.Add(new Validation(ValidationType.ProjectVersion, "Version may not be 0"));
             }
 
-            if (string.IsNullOrEmpty(this.ModelPath))
+            if (string.IsNullOrEmpty(ModelPath))
             {
-                this.ValidationResult.Add(new Validation(ValidationType.ProjectModelPath, "ModelPath may not be empty"));
+                ValidationResult.Add(new Validation(ValidationType.ProjectModelPath, "ModelPath may not be empty"));
             }
 
-            Logger.Debug($"Number of validation errors: {this.ValidationResult.Count}");
-            Logger.Trace($"Validation errors: {this.ValidationResult.ToString()}");
+            Logger.Debug($"Number of validation errors: {ValidationResult.Count}");
+            Logger.Trace($"Validation errors: {ValidationResult}");
             Logger.Trace($"Completed Validate()");
 
-            foreach (DomainDefinition domainDefinition in this.Domains)
+            foreach (DomainDefinition domainDefinition in Domains)
             {
                 domainDefinition.Validate();
                 if (domainDefinition.ValidationResult.Count > 0)
                 {
                     foreach (var domainResult in domainDefinition.ValidationResult)
                     {
-                        this.ValidationResult.Add(domainResult);
+                        ValidationResult.Add(domainResult);
                     }
                 }
             }
 
-            return this.ValidationResult;
+            return ValidationResult;
         }
 
         #endregion

@@ -1,15 +1,12 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="NodeExtensions.cs" company="">
-//   
+// <copyright file="NodeExtensions.cs" company="DotnetScaffolder">
+//   MIT
 // </copyright>
-// <summary>
-//   The node extensions.
-// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace DotNetScaffolder.Core.Extensions
 {
-    #region Using
+    #region Usings
 
     using System.Windows.Forms;
 
@@ -18,14 +15,18 @@ namespace DotNetScaffolder.Core.Extensions
     #endregion
 
     /// <summary>
-    /// The node extensions.
+    ///     The node extensions.
     /// </summary>
     public static class NodeExtensions
     {
+        #region Static Fields
+
         /// <summary>
-        /// The logger.
+        ///     The logger.
         /// </summary>
         private static readonly ILog Logger = LogManager.GetLogger(string.Empty);
+
+        #endregion
 
         #region Public methods and operators
 

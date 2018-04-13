@@ -1,5 +1,13 @@
-﻿namespace DotNetScaffolder.Presentation.Forms.Controls
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="DomainMenuUserControl.cs" company="DotnetScaffolder">
+//   MIT
+// </copyright>
+// --------------------------------------------------------------------------------------------------------------------
+
+namespace DotNetScaffolder.Presentation.Forms.Controls
 {
+    #region Usings
+
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -11,20 +19,50 @@
 
     using DotNetScaffolder.Components.Common.Contract;
     using DotNetScaffolder.Mapping.MetaData.Domain;
-    using DotNetScaffolder.Mapping.MetaData.Project.Packages;
 
-    using FormControls.TreeView;
+    #endregion
 
+    /// <summary>
+    /// The domain menu user control.
+    /// </summary>
     public partial class DomainMenuUserControl : UserControl
     {
+        #region Static Fields
+
         /// <summary>
         ///     The logger.
         /// </summary>
         private static readonly ILog Logger = LogManager.GetLogger(string.Empty);
 
+        #endregion
+
+        #region Fields
+
+        /// <summary>
+        /// The active control.
+        /// </summary>
+        private Control activeControl;
+
+        /// <summary>
+        /// The data source.
+        /// </summary>
         private DomainDefinition dataSource;
 
-        private Control activeControl;
+        #endregion
+
+        #region Constructors and Destructors
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DomainMenuUserControl"/> class.
+        /// </summary>
+        public DomainMenuUserControl()
+        {
+            InitializeComponent();
+        }
+
+        #endregion
+
+        #region Properties
 
         /// <summary>
         ///     Gets or sets the data source.
@@ -42,17 +80,48 @@
             }
         }
 
+        /// <summary>
+        /// Gets or sets the output path.
+        /// </summary>
         public string OutputPath { get; set; }
 
+        /// <summary>
+        /// Gets or sets the parent config control.
+        /// </summary>
         public Control ParentConfigControl { get; set; }
 
-        public DomainMenuUserControl()
+        #endregion
+
+        #region Public methods and operators
+
+        /// <summary>
+        /// The save.
+        /// </summary>
+        public void Save()
         {
-            InitializeComponent();
+            Logger.Trace("Started Save()");
+
+            if (DataSource != null)
+            {
+                var parameters = new Dictionary<string, string> { { "basePath", OutputPath } };
+                foreach (TreeNode node in DomainTreeView.Nodes)
+                {
+                    (node.Tag as IDataTypeUI<IDictionary<string, string>>)?.SaveConfig(parameters);
+                }
+
+                // TODO: Replace with something less annoying
+                MessageBox.Show("Save complete", "Success");
+            }
+            else
+            {
+                Logger.Trace("Data Source is null ");
+            }
+
+            Logger.Trace("Completed Save()");
         }
 
         /// <summary>
-        /// The update data source.
+        ///     The update data source.
         /// </summary>
         public void UpdateDataSource()
         {
@@ -79,7 +148,7 @@
                     control.Visible = false;
                     ParentConfigControl.Controls.Add(control);
 
-                    var node = new TreeNode { Tag = configControl, Text = navigation.Name, Name = navigation.Id.ToString()};
+                    var node = new TreeNode { Tag = configControl, Text = navigation.Name, Name = navigation.Id.ToString() };
 
                     if (navigation.Children.Any())
                     {
@@ -109,13 +178,26 @@
             Logger.Trace("Completed UpdateDataSource()");
         }
 
+        #endregion
+
+        #region Other Methods
+
+        /// <summary>
+        /// The config control on on navigation changed.
+        /// </summary>
+        /// <param name="sender">
+        /// The sender.
+        /// </param>
+        /// <param name="type">
+        /// The type.
+        /// </param>
         private void ConfigControlOnOnNavigationChanged(object sender, IDataType<IDictionary<string, string>> type)
         {
             var navigation = type.ReturnNavigation();
             var node = DomainTreeView.Nodes.Find(navigation.Id.ToString(), false).FirstOrDefault();
 
             if (node != null)
-            {               
+            {
                 foreach (var nav in navigation.Children)
                 {
                     var childNode = DomainTreeView.Nodes.Find(nav.Id.ToString(), false).FirstOrDefault();
@@ -139,32 +221,15 @@
             }
         }
 
-        public void Save()
-        {
-            Logger.Trace("Started Save()");
-
-            if (DataSource != null)
-            {
-                var parameters = new Dictionary<string, string> { { "basePath", OutputPath } };
-                foreach (TreeNode node in DomainTreeView.Nodes)
-                {
-                    (node.Tag as IDataTypeUI<IDictionary<string, string>>)?.SaveConfig(parameters);
-                }
-                //TODO: Replace with something less annoying
-                MessageBox.Show("Save complete", "Success");
-            }
-            else
-            {
-                Logger.Trace("Data Source is null ");
-            }
-
-            Logger.Trace("Completed Save()");
-        }
-
-        private void DomainTreeView_Click(object sender, EventArgs e)
-        {
-        }
-
+        /// <summary>
+        /// The domain tree view_ after select.
+        /// </summary>
+        /// <param name="sender">
+        /// The sender.
+        /// </param>
+        /// <param name="e">
+        /// The e.
+        /// </param>
         private void DomainTreeView_AfterSelect(object sender, TreeViewEventArgs e)
         {
             if (activeControl != null)
@@ -186,7 +251,20 @@
                 }
             }
         }
-    }
 
-    
+        /// <summary>
+        /// The domain tree view_ click.
+        /// </summary>
+        /// <param name="sender">
+        /// The sender.
+        /// </param>
+        /// <param name="e">
+        /// The e.
+        /// </param>
+        private void DomainTreeView_Click(object sender, EventArgs e)
+        {
+        }
+
+        #endregion
+    }
 }

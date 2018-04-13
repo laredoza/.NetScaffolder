@@ -1,15 +1,12 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="TitleCaseNoUnderScoreNamingConventionUnitTest.cs" company="">
-//   
+// <copyright file="TitleCaseNoUnderScoreNamingConventionUnitTest.cs" company="DotnetScaffolder">
+//   MIT
 // </copyright>
-// <summary>
-//   The title case no under score naming convention unit test.
-// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace DotNetScaffolder.Test.Components.NamingConventions
 {
-    #region Using
+    #region Usings
 
     using DotNetScaffolder.Components.NamingConventions.DefaultNamingConventions;
 
@@ -18,7 +15,7 @@ namespace DotNetScaffolder.Test.Components.NamingConventions
     #endregion
 
     /// <summary>
-    /// Tests TitleCaseNoUnderScoreNamingConvention
+    ///     Tests TitleCaseNoUnderScoreNamingConvention
     /// </summary>
     [TestClass]
     public class TitleCaseNoUnderScoreNamingConventionUnitTest
@@ -26,7 +23,7 @@ namespace DotNetScaffolder.Test.Components.NamingConventions
         #region Public methods and operators
 
         /// <summary>
-        /// Test ApplyNamingConvention
+        ///     Test ApplyNamingConvention
         /// </summary>
         [TestMethod]
         public void TitleCaseNoUnderScoreNamingConventionUnitTest_()

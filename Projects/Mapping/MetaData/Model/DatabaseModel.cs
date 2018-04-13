@@ -1,15 +1,12 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="DatabaseModel.cs" company="">
-//   
+// <copyright file="DatabaseModel.cs" company="DotnetScaffolder">
+//   MIT
 // </copyright>
-// <summary>
-//   The database model.
-// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace DotNetScaffolder.Mapping.MetaData.Model
 {
-    #region Using
+    #region Usings
 
     using System.Collections.Generic;
     using System.Xml.Serialization;
@@ -19,18 +16,18 @@ namespace DotNetScaffolder.Mapping.MetaData.Model
     #endregion
 
     /// <summary>
-    /// The database model.
+    ///     The database model.
     /// </summary>
     public class DatabaseModel
     {
         #region Constructors and Destructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="DatabaseModel"/> class.
+        ///     Initializes a new instance of the <see cref="DatabaseModel" /> class.
         /// </summary>
         public DatabaseModel()
         {
-            this.Tables = new List<Table>();
+            Tables = new List<Table>();
         }
 
         #endregion
@@ -38,13 +35,13 @@ namespace DotNetScaffolder.Mapping.MetaData.Model
         #region Properties
 
         /// <summary>
-        /// Gets or sets the domain.
+        ///     Gets or sets the domain.
         /// </summary>
         [XmlIgnore]
         public DomainDefinition Domain { get; set; }
 
         /// <summary>
-        /// Gets or sets the tables.
+        ///     Gets or sets the tables.
         /// </summary>
         [XmlArray("Tables")]
         [XmlArrayItem("Table")]

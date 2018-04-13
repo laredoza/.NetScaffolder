@@ -1,28 +1,25 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ComboBoxItem.cs" company="">
-//   
+// <copyright file="ComboBoxItem.cs" company="DotnetScaffolder">
+//   MIT
 // </copyright>
-// <summary>
-//   The combobox item.
-// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace DotNetScaffolder.Core.Common
 {
     /// <summary>
-    /// The combobox item.
+    ///     The combobox item.
     /// </summary>
     public class ComboboxItem
     {
         #region Properties
 
         /// <summary>
-        /// Gets or sets the text.
+        ///     Gets or sets the text.
         /// </summary>
         public string Text { get; set; }
 
         /// <summary>
-        /// Gets or sets the value.
+        ///     Gets or sets the value.
         /// </summary>
         public object Value { get; set; }
 
@@ -31,14 +28,14 @@ namespace DotNetScaffolder.Core.Common
         #region Public methods and operators
 
         /// <summary>
-        /// The to string.
+        ///     The to string.
         /// </summary>
         /// <returns>
-        /// The <see cref="string"/>.
+        ///     The <see cref="string" />.
         /// </returns>
         public override string ToString()
         {
-            return this.Text;
+            return Text;
         }
 
         #endregion

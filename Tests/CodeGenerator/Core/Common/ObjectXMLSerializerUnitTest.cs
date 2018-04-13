@@ -1,27 +1,25 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ObjectXMLSerializerUnitTest.cs" company="">
-//   
+// <copyright file="ObjectXMLSerializerUnitTest.cs" company="DotnetScaffolder">
+//   MIT
 // </copyright>
-// <summary>
-//   The object xml serializer unit test.
-// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace DotNetScaffolder.Test.Core.Common
 {
-    #region Using
+    #region Usings
 
     using System.Collections.Generic;
 
     using DotNetScaffolder.Core.Common.Serializer;
     using DotNetScaffolder.Mapping.MetaData.Project;
+
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     #endregion
 
     /// <summary>
-    /// The object xml serializer unit test.
-    /// Tests both document and binary serialization
+    ///     The object xml serializer unit test.
+    ///     Tests both document and binary serialization
     /// </summary>
     [TestClass]
     public class ObjectXMLSerializerUnitTest
@@ -29,7 +27,7 @@ namespace DotNetScaffolder.Test.Core.Common
         #region Public methods and operators
 
         /// <summary>
-        /// Tests the Binary serialized format
+        ///     Tests the Binary serialized format
         /// </summary>
         [TestMethod]
         public void ObjectXMLSerializerUnitTest_TestBinarySerializedFormat()
@@ -39,7 +37,7 @@ namespace DotNetScaffolder.Test.Core.Common
         }
 
         /// <summary>
-        /// Tests the document serialized format
+        ///     Tests the document serialized format
         /// </summary>
         [TestMethod]
         public void ObjectXMLSerializerUnitTest_TestDocumentSerializedFormat()

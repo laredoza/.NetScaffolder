@@ -1,30 +1,28 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ProjectDefinitionApplicationServiceUnitTest.cs" company="">
-//   
+// <copyright file="ProjectDefinitionApplicationServiceUnitTest.cs" company="DotnetScaffolder">
+//   MIT
 // </copyright>
-// <summary>
-//   The project definition application service unit test.
-// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace DotNetScaffolder.Test.Project.ApplicationService
 {
-    #region Using
+    #region Usings
 
     using System;
 
+    using DotNetScaffolder.Mapping.ApplicationServices;
     using DotNetScaffolder.Mapping.MetaData.Domain;
     using DotNetScaffolder.Mapping.MetaData.Enum;
     using DotNetScaffolder.Mapping.MetaData.Project;
+
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using DotNetScaffolder.Mapping.ApplicationServices;
 
     #endregion
 
     /// <summary>
-    /// The base project definition application service unit test.
-    /// It is used to create test values, as well as test those values once it's been loaded
-    /// by the ApplicationService implementation
+    ///     The base project definition application service unit test.
+    ///     It is used to create test values, as well as test those values once it's been loaded
+    ///     by the ApplicationService implementation
     /// </summary>
     [TestClass]
     public class ProjectDefinitionApplicationServiceUnitTest
@@ -52,6 +50,51 @@ namespace DotNetScaffolder.Test.Project.ApplicationService
             projectDefinition.Domains[0].SourceTypeId = Guid.NewGuid();
             projectDefinition.Domains[0].DriverId = Guid.NewGuid();
             projectDefinition.Domains[0].DriverTypeId = Guid.NewGuid();
+        }
+
+        /// <summary>
+        /// Test AddDomain.
+        /// </summary>
+        /// <param name="applicationService">
+        /// The application service.
+        /// </param>
+        protected void TestAddDomain(IProjectDefinitionApplicationService applicationService)
+        {
+            DomainDefinition domain = applicationService.AddDomain();
+            Assert.AreEqual(1, applicationService.ProjectDefinition.Domains.Count, "There should be 1 domain");
+            Assert.AreEqual("Domain1", domain.Name, "The domain name should be Domain1");
+            domain = applicationService.AddDomain();
+            Assert.AreEqual(2, applicationService.ProjectDefinition.Domains.Count, "There should be 2 domains");
+            Assert.AreEqual("Domain2", domain.Name, "The domain name should be Domain2");
+            domain = applicationService.AddDomain();
+            Assert.AreEqual(3, applicationService.ProjectDefinition.Domains.Count, "There should be 3 domains");
+            Assert.AreEqual("Domain3", domain.Name, "The domain name should be Domain3");
+            applicationService.ProjectDefinition.Domains[0].Name = "A";
+            domain = applicationService.AddDomain();
+            Assert.AreEqual(4, applicationService.ProjectDefinition.Domains.Count, "There should be 4 domains");
+            Assert.AreEqual("Domain1", domain.Name, "The domain name should be Domain1");
+        }
+
+        /// <summary>
+        /// Test TestDeleteDomain.
+        /// </summary>
+        /// <param name="applicationService">
+        /// The application service.
+        /// </param>
+        protected void TestDeleteDomain(IProjectDefinitionApplicationService applicationService)
+        {
+            DomainDefinition domain = applicationService.AddDomain();
+            Assert.AreEqual(1, applicationService.ProjectDefinition.Domains.Count, "There should be 1 domain");
+            domain = applicationService.AddDomain();
+            Assert.AreEqual(2, applicationService.ProjectDefinition.Domains.Count, "There should be 2 domains");
+
+            Guid id = applicationService.ProjectDefinition.Domains[0].Id;
+            applicationService.Delete(id);
+            Assert.AreEqual(1, applicationService.ProjectDefinition.Domains.Count, "There should be 1 domain");
+
+            id = applicationService.ProjectDefinition.Domains[0].Id;
+            applicationService.Delete(id);
+            Assert.AreEqual(0, applicationService.ProjectDefinition.Domains.Count, "There should be 0 domains");
         }
 
         /// <summary>
@@ -101,52 +144,6 @@ namespace DotNetScaffolder.Test.Project.ApplicationService
             applicationService.Validate();
 
             Assert.AreEqual(0, applicationService.ValidationResult.Count, "There should be 0 validation errors");
-        }
-
-        /// <summary>
-        /// Test AddDomain.
-        /// </summary>
-        /// <param name="applicationService">
-        /// The application service.
-        /// </param>
-        protected void TestAddDomain(IProjectDefinitionApplicationService applicationService)
-        {
-            DomainDefinition domain = applicationService.AddDomain();
-            Assert.AreEqual(1, applicationService.ProjectDefinition.Domains.Count, "There should be 1 domain");
-            Assert.AreEqual("Domain1", domain.Name, "The domain name should be Domain1");
-            domain = applicationService.AddDomain();
-            Assert.AreEqual(2, applicationService.ProjectDefinition.Domains.Count, "There should be 2 domains");
-            Assert.AreEqual("Domain2", domain.Name, "The domain name should be Domain2");
-            domain = applicationService.AddDomain();
-            Assert.AreEqual(3, applicationService.ProjectDefinition.Domains.Count, "There should be 3 domains");
-            Assert.AreEqual("Domain3", domain.Name, "The domain name should be Domain3");
-            applicationService.ProjectDefinition.Domains[0].Name = "A";
-            domain = applicationService.AddDomain();
-            Assert.AreEqual(4, applicationService.ProjectDefinition.Domains.Count, "There should be 4 domains");
-            Assert.AreEqual("Domain1", domain.Name, "The domain name should be Domain1");
-        }
-
-        /// <summary>
-        /// Test TestDeleteDomain.
-        /// </summary>
-        /// <param name="applicationService">
-        /// The application service.
-        /// </param>
-        protected void TestDeleteDomain(IProjectDefinitionApplicationService applicationService)
-        {
-            DomainDefinition domain = applicationService.AddDomain();
-            Assert.AreEqual(1, applicationService.ProjectDefinition.Domains.Count, "There should be 1 domain");
-            domain = applicationService.AddDomain();
-            Assert.AreEqual(2, applicationService.ProjectDefinition.Domains.Count, "There should be 2 domains");
-
-            Guid id = applicationService.ProjectDefinition.Domains[0].Id;
-            applicationService.Delete(id);
-            Assert.AreEqual(1, applicationService.ProjectDefinition.Domains.Count, "There should be 1 domain");
-
-            id = applicationService.ProjectDefinition.Domains[0].Id;
-            applicationService.Delete(id);
-            Assert.AreEqual(0, applicationService.ProjectDefinition.Domains.Count, "There should be 0 domains");
-
         }
 
         #endregion

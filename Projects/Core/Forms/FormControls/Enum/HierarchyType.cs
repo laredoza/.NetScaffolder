@@ -1,26 +1,23 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="HierarchyType.cs" company="">
-//   
+// <copyright file="HierarchyType.cs" company="DotnetScaffolder">
+//   MIT
 // </copyright>
-// <summary>
-//   The hierarchy type.
-// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace FormControls.Enum
 {
     /// <summary>
-    /// The hierarchy type.
+    ///     The hierarchy type.
     /// </summary>
     public enum HierarchyType
     {
         /// <summary>
-        /// The group.
+        ///     The group.
         /// </summary>
         Group,
 
         /// <summary>
-        /// The item.
+        ///     The item.
         /// </summary>
         Item
     }

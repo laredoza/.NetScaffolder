@@ -1,15 +1,12 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="TitleCaseNamingConventionUnitTest.cs" company="">
-//   
+// <copyright file="TitleCaseNamingConventionUnitTest.cs" company="DotnetScaffolder">
+//   MIT
 // </copyright>
-// <summary>
-//   The title case naming convention unit test.
-// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace DotNetScaffolder.Test.Components.NamingConventions
 {
-    #region Using
+    #region Usings
 
     using DotNetScaffolder.Components.NamingConventions.DefaultNamingConventions;
 
@@ -18,7 +15,7 @@ namespace DotNetScaffolder.Test.Components.NamingConventions
     #endregion
 
     /// <summary>
-    /// Tests TitleCaseNamingConvention
+    ///     Tests TitleCaseNamingConvention
     /// </summary>
     [TestClass]
     public class TitleCaseNamingConventionUnitTest
@@ -26,7 +23,7 @@ namespace DotNetScaffolder.Test.Components.NamingConventions
         #region Public methods and operators
 
         /// <summary>
-        /// Tests ApplyNamingConvention
+        ///     Tests ApplyNamingConvention
         /// </summary>
         [TestMethod]
         public void TitleCaseNamingConventionUnitTest_ApplyNamingConvention()

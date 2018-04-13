@@ -1,15 +1,21 @@
-﻿using DotNetScaffolder.Components.Common.Contract;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.Composition;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="CSharpLanguageOutput.cs" company="DotnetScaffolder">
+//   MIT
+// </copyright>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace DotNetScaffolder.Components.LanguageOutputs.DefaultLanguageOutput
 {
+    #region Usings
+
+    using System.ComponentModel.Composition;
+
+    using DotNetScaffolder.Components.Common.Contract;
+
+    #endregion
+
     /// <summary>
-    /// CSharp LanguageOutput.
+    ///     CSharp LanguageOutput.
     /// </summary>
     /// <example>securityview will be SecurityView</example>
     [Export(typeof(ILanguageOutput))]

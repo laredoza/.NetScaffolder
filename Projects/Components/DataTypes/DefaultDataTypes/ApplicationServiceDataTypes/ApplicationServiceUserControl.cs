@@ -1,49 +1,91 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="ApplicationServiceUserControl.cs" company="DotnetScaffolder">
+//   MIT
+// </copyright>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ApplicationServiceDataTypes
 {
+    #region Usings
+
+    using System;
+    using System.Collections.Generic;
+    using System.Windows.Forms;
+
     using DotNetScaffolder.Components.Common.Contract;
 
-    using FormControls.TreeView;
+    #endregion
 
+    /// <summary>
+    ///     The application service user control.
+    /// </summary>
     public partial class ApplicationServiceUserControl : UserControl, IDataTypeUI<IDictionary<string, string>>
     {
+        #region Constructors and Destructors
+
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="ApplicationServiceUserControl" /> class.
+        /// </summary>
         public ApplicationServiceUserControl()
         {
             InitializeComponent();
         }
 
+        #endregion
+
+        #region Public Events
+
+        /// <summary>
+        ///     The on navigation changed.
+        /// </summary>
+        public event EventHandler<IDataType<IDictionary<string, string>>> OnNavigationChanged;
+
+        #endregion
+
+        #region Properties
+
+        /// <summary>
+        ///     Gets or sets the data type.
+        /// </summary>
         public ApplicationServiceDataType DataType { get; set; }
 
-        public void SaveConfig(IDictionary<string, string> parameters)
-        {
-            if (DataType == null) return;
+        #endregion
 
-            DataType.Enabled = this.AppServiceEnabled.Checked;
-            DataType.Namespace = this.AppServiceNamespace.Text;
-            DataType.OutputFolder = this.AppServiceOutputFolder.Text;
-            DataType.Save(parameters);
-        }
+        #region Public methods and operators
 
+        /// <summary>
+        /// The load config.
+        /// </summary>
+        /// <param name="parameters">
+        /// The parameters.
+        /// </param>
         public void LoadConfig(IDictionary<string, string> parameters)
         {
             if (DataType == null) return;
 
             DataType.Load(parameters);
 
-            AppServiceEnabled.Checked = this.DataType.Enabled;
-            AppServiceNamespace.Text = this.DataType.Namespace;
-            AppServiceOutputFolder.Text = this.DataType.OutputFolder;
+            AppServiceEnabled.Checked = DataType.Enabled;
+            AppServiceNamespace.Text = DataType.Namespace;
+            AppServiceOutputFolder.Text = DataType.OutputFolder;
         }
 
-        public event EventHandler<IDataType<IDictionary<string, string>>> OnNavigationChanged;
+        /// <summary>
+        /// The save config.
+        /// </summary>
+        /// <param name="parameters">
+        /// The parameters.
+        /// </param>
+        public void SaveConfig(IDictionary<string, string> parameters)
+        {
+            if (DataType == null) return;
+
+            DataType.Enabled = AppServiceEnabled.Checked;
+            DataType.Namespace = AppServiceNamespace.Text;
+            DataType.OutputFolder = AppServiceOutputFolder.Text;
+            DataType.Save(parameters);
+        }
+
+        #endregion
     }
 }

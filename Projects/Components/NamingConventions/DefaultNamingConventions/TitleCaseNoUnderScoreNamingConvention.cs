@@ -1,15 +1,12 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="TitleCaseNoUnderScoreNamingConvention.cs" company="">
-//   
+// <copyright file="TitleCaseNoUnderScoreNamingConvention.cs" company="DotnetScaffolder">
+//   MIT
 // </copyright>
-// <summary>
-//   The title case no under score naming convention.
-// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace DotNetScaffolder.Components.NamingConventions.DefaultNamingConventions
 {
-    #region Using
+    #region Usings
 
     using System;
     using System.ComponentModel.Composition;
@@ -20,7 +17,7 @@ namespace DotNetScaffolder.Components.NamingConventions.DefaultNamingConventions
     #endregion
 
     /// <summary>
-    /// The title case no under score naming convention.
+    ///     The title case no under score naming convention.
     /// </summary>
     [Export(typeof(INamingConvention))]
     [ExportMetadata("NameMetaData", "TitleCaseNoUnderScore")]

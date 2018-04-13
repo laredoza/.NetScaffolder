@@ -1,26 +1,23 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ListExtensions.cs" company="">
-//   
+// <copyright file="ListExtensions.cs" company="DotnetScaffolder">
+//   MIT
 // </copyright>
-// <summary>
-//   The list extensions.
-// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace DotNetScaffolder.Core.Extensions
 {
-    #region Using
+    #region Usings
 
     using System.Collections.Generic;
 
     #endregion
 
     /// <summary>
-    /// The list extensions.
+    ///     The list extensions.
     /// </summary>
     public static class ListExtensions
     {
-        #region Other Methods
+        #region Public methods and operators
 
         /// <summary>
         /// Move item.

@@ -1,15 +1,12 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ObjectXMLSerializer.cs" company="">
-//   
+// <copyright file="ObjectXMLSerializer.cs" company="DotnetScaffolder">
+//   MIT
 // </copyright>
-// <summary>
-//   The object xml serializer.
-// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace DotNetScaffolder.Core.Common.Serializer
 {
-    #region Using
+    #region Usings
 
     using System;
     using System.IO;
@@ -168,7 +165,7 @@ namespace DotNetScaffolder.Core.Common.Serializer
         public static T Load(string fileName, IsolatedStorageFile isolatedStorageDirectory)
         {
             Logger.Trace(
-                $"Started Load() - fileName: {fileName}, isolatedStorageDirectory: {isolatedStorageDirectory.ToString()}");
+                $"Started Load() - fileName: {fileName}, isolatedStorageDirectory: {isolatedStorageDirectory}");
 
             if (string.IsNullOrEmpty(fileName))
             {
@@ -185,7 +182,7 @@ namespace DotNetScaffolder.Core.Common.Serializer
             T serializableObject = LoadFromDocumentFormat(null, fileName, isolatedStorageDirectory);
 
             Logger.Trace(
-                $"Completed Load() - fileName: {fileName}, isolatedStorageDirectory: {isolatedStorageDirectory.ToString()}");
+                $"Completed Load() - fileName: {fileName}, isolatedStorageDirectory: {isolatedStorageDirectory}");
             return serializableObject;
         }
 
@@ -216,7 +213,7 @@ namespace DotNetScaffolder.Core.Common.Serializer
             SerializedFormat serializedFormat)
         {
             Logger.Trace(
-                $"Started Load() - fileName: {fileName}, isolatedStorageDirectory: {isolatedStorageDirectory.ToString()}, serializedFormat: {serializedFormat.ToString()}");
+                $"Started Load() - fileName: {fileName}, isolatedStorageDirectory: {isolatedStorageDirectory}, serializedFormat: {serializedFormat.ToString()}");
 
             if (string.IsNullOrEmpty(fileName))
             {
@@ -245,7 +242,7 @@ namespace DotNetScaffolder.Core.Common.Serializer
             }
 
             Logger.Trace(
-                $"Completed Load() - fileName: {fileName}, isolatedStorageDirectory: {isolatedStorageDirectory.ToString()}, serializedFormat: {serializedFormat.ToString()}");
+                $"Completed Load() - fileName: {fileName}, isolatedStorageDirectory: {isolatedStorageDirectory}, serializedFormat: {serializedFormat.ToString()}");
             return serializableObject;
         }
 
@@ -274,7 +271,7 @@ namespace DotNetScaffolder.Core.Common.Serializer
         public static T Load(string fileName, IsolatedStorageFile isolatedStorageDirectory, Type[] extraTypes)
         {
             Logger.Trace(
-                $"Started Load() - fileName: {fileName}, isolatedStorageDirectory: {isolatedStorageDirectory.ToString()}, serializedFormat: {extraTypes}");
+                $"Started Load() - fileName: {fileName}, isolatedStorageDirectory: {isolatedStorageDirectory}, serializedFormat: {extraTypes}");
 
             if (string.IsNullOrEmpty(fileName))
             {
@@ -291,7 +288,7 @@ namespace DotNetScaffolder.Core.Common.Serializer
             T serializableObject = LoadFromDocumentFormat(null, fileName, isolatedStorageDirectory);
 
             Logger.Trace(
-                $"Completed Load() - fileName: {fileName}, isolatedStorageDirectory: {isolatedStorageDirectory.ToString()}, serializedFormat: {extraTypes}");
+                $"Completed Load() - fileName: {fileName}, isolatedStorageDirectory: {isolatedStorageDirectory}, serializedFormat: {extraTypes}");
             return serializableObject;
         }
 
@@ -432,7 +429,7 @@ namespace DotNetScaffolder.Core.Common.Serializer
         public static void Save(T serializableObject, string fileName, IsolatedStorageFile isolatedStorageDirectory)
         {
             Logger.Trace(
-                $"Started Save() - fileName: {fileName},  serializableObject: {serializableObject.ToString()}, isolatedStorageDirectory {isolatedStorageDirectory.ToString()}");
+                $"Started Save() - fileName: {fileName},  serializableObject: {serializableObject.ToString()}, isolatedStorageDirectory {isolatedStorageDirectory}");
 
             if (string.IsNullOrEmpty(fileName))
             {
@@ -443,7 +440,7 @@ namespace DotNetScaffolder.Core.Common.Serializer
             SaveToDocumentFormat(serializableObject, null, fileName, isolatedStorageDirectory);
 
             Logger.Trace(
-                $"Started Save() - fileName: {fileName},  serializableObject: {serializableObject.ToString()}, isolatedStorageDirectory {isolatedStorageDirectory.ToString()}");
+                $"Started Save() - fileName: {fileName},  serializableObject: {serializableObject.ToString()}, isolatedStorageDirectory {isolatedStorageDirectory}");
         }
 
         /// <summary>
@@ -476,7 +473,7 @@ namespace DotNetScaffolder.Core.Common.Serializer
             SerializedFormat serializedFormat)
         {
             Logger.Trace(
-                $"Started Save() - fileName: {fileName},  serializableObject: {serializableObject.ToString()}, isolatedStorageDirectory {isolatedStorageDirectory.ToString()}, serializedFormat : {serializedFormat}");
+                $"Started Save() - fileName: {fileName},  serializableObject: {serializableObject.ToString()}, isolatedStorageDirectory {isolatedStorageDirectory}, serializedFormat : {serializedFormat}");
 
             if (string.IsNullOrEmpty(fileName))
             {
@@ -497,7 +494,7 @@ namespace DotNetScaffolder.Core.Common.Serializer
             }
 
             Logger.Trace(
-                $"Completed Save() - fileName: {fileName},  serializableObject: {serializableObject.ToString()}, isolatedStorageDirectory {isolatedStorageDirectory.ToString()}, serializedFormat : {serializedFormat}");
+                $"Completed Save() - fileName: {fileName},  serializableObject: {serializableObject.ToString()}, isolatedStorageDirectory {isolatedStorageDirectory}, serializedFormat : {serializedFormat}");
         }
 
         /// <summary>
@@ -530,7 +527,7 @@ namespace DotNetScaffolder.Core.Common.Serializer
             Type[] extraTypes)
         {
             Logger.Trace(
-                $"Started Save() - fileName: {fileName},  serializableObject: {serializableObject.ToString()}, isolatedStorageDirectory {isolatedStorageDirectory.ToString()}, extraTypes : {extraTypes}");
+                $"Started Save() - fileName: {fileName},  serializableObject: {serializableObject.ToString()}, isolatedStorageDirectory {isolatedStorageDirectory}, extraTypes : {extraTypes}");
 
             if (string.IsNullOrEmpty(fileName))
             {
@@ -541,7 +538,7 @@ namespace DotNetScaffolder.Core.Common.Serializer
             SaveToDocumentFormat(serializableObject, null, fileName, isolatedStorageDirectory);
 
             Logger.Trace(
-                $"Completed Save() - fileName: {fileName},  serializableObject: {serializableObject.ToString()}, isolatedStorageDirectory {isolatedStorageDirectory.ToString()}, extraTypes : {extraTypes}");
+                $"Completed Save() - fileName: {fileName},  serializableObject: {serializableObject.ToString()}, isolatedStorageDirectory {isolatedStorageDirectory}, extraTypes : {extraTypes}");
         }
 
         #endregion

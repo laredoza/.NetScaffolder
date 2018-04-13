@@ -1,15 +1,12 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Hierarchy.cs" company="">
-//   
+// <copyright file="Hierarchy.cs" company="DotnetScaffolder">
+//   MIT
 // </copyright>
-// <summary>
-//   The hierarchy.
-// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace FormControls.TreeView
 {
-    #region Using
+    #region Usings
 
     using System;
     using System.Collections.Generic;
@@ -19,20 +16,20 @@ namespace FormControls.TreeView
     #endregion
 
     /// <summary>
-    /// The hierarchy.
+    ///     The hierarchy.
     /// </summary>
     public class Hierarchy : IHierarchy
     {
         #region Constructors and Destructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Hierarchy"/> class.
+        ///     Initializes a new instance of the <see cref="Hierarchy" /> class.
         /// </summary>
         public Hierarchy()
         {
-            this.Enabled = true;
-            this.Children = new List<Hierarchy>();
-            this.HierarchyType = HierarchyType.Group;
+            Enabled = true;
+            Children = new List<Hierarchy>();
+            HierarchyType = HierarchyType.Group;
         }
 
         #endregion
@@ -40,39 +37,39 @@ namespace FormControls.TreeView
         #region Properties
 
         /// <summary>
-        /// Gets or sets the children.
+        ///     Gets or sets the children.
         /// </summary>
         public List<Hierarchy> Children { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether enabled.
+        ///     Gets or sets a value indicating whether enabled.
         /// </summary>
         public bool Enabled { get; set; }
 
         /// <summary>
-        /// Gets or sets the id.
+        ///     Gets or sets the hierarchy type.
+        /// </summary>
+        public HierarchyType HierarchyType { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the id.
         /// </summary>
         public Guid Id { get; set; }
 
         /// <summary>
-        /// Gets or sets the item.
+        ///     Gets or sets the item.
         /// </summary>
         public object Item { get; set; }
 
         /// <summary>
-        /// Gets or sets the name.
+        ///     Gets or sets the name.
         /// </summary>
         public string Name { get; set; }
 
         /// <summary>
-        /// Gets or sets the parent id.
+        ///     Gets or sets the parent id.
         /// </summary>
         public Guid ParentId { get; set; }
-
-        /// <summary>
-        /// Gets or sets the hierarchy type.
-        /// </summary>
-        public HierarchyType HierarchyType { get; set; }
 
         #endregion
     }

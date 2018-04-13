@@ -1,15 +1,12 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="TemplateDetailsUserControl.cs" company="">
-//   
+// <copyright file="PackageDetailsUserControl.cs" company="DotnetScaffolder">
+//   MIT
 // </copyright>
-// <summary>
-//   The template details user control.
-// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace DotNetScaffolder.Presentation.Forms.Controls
 {
-    #region Using
+    #region Usings
 
     using System;
     using System.Collections.Generic;
@@ -18,11 +15,6 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
 
     using Common.Logging;
 
-    using Configuration;
-
-    using DotNetScaffolder.Core.Common;
-    using DotNetScaffolder.Core.Common.Validation;
-    using DotNetScaffolder.Mapping.MetaData.Enum;
     using DotNetScaffolder.Mapping.MetaData.Project.Packages;
 
     using FormControls.Enum;
@@ -50,29 +42,24 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         /// </summary>
         private Package dataSource;
 
-        /// <summary>
-        /// Gets or sets the all templates.
-        /// </summary>
-        private List<Template> availableTemplates { get; set; }
-
         #endregion
 
         #region Constructors and Destructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PackageDetailsUserControl"/> class.
+        ///     Initializes a new instance of the <see cref="PackageDetailsUserControl" /> class.
         /// </summary>
         public PackageDetailsUserControl()
         {
-            this.availableTemplates = this.availableTemplates;
-            this.InitializeComponent();
+            availableTemplates = availableTemplates;
+            InitializeComponent();
 
-            this.ComboBoxSearch.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            this.ComboBoxSearch.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            ComboBoxSearch.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            ComboBoxSearch.AutoCompleteSource = AutoCompleteSource.CustomSource;
 
-            //this.TemplateListBox.DisplayMember = "Name";
-            //this.TemplateListBox.ValueMember = "Id";
-            this.AvailableTemplates = new List<Template>();
+            // this.TemplateListBox.DisplayMember = "Name";
+            // this.TemplateListBox.ValueMember = "Id";
+            AvailableTemplates = new List<Template>();
         }
 
         #endregion
@@ -80,47 +67,46 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         #region Properties
 
         /// <summary>
-        /// Gets or sets the templates.
+        ///     Gets or sets the templates.
         /// </summary>
         public List<Template> AvailableTemplates
         {
             get
             {
-                return this.availableTemplates;
+                return availableTemplates;
             }
+
             set
             {
-                if (this.availableTemplates != value)
+                if (availableTemplates != value)
                 {
-                    this.TemplateListBox.DisplayMember = "Name";
-                    this.TemplateListBox.ValueMember = "Id";
+                    TemplateListBox.DisplayMember = "Name";
+                    TemplateListBox.ValueMember = "Id";
 
-                    this.availableTemplates = value;
+                    availableTemplates = value;
 
-                    if (this.DataSource != null && this.DataSource.Templates.Count > 0)
+                    if (DataSource != null && DataSource.Templates.Count > 0)
                     {
                         List<Template> currentTemplates =
-                            this.DataSource.Templates[0].ReturnTemplateItems(this.DataSource.Templates);
+                            DataSource.Templates[0].ReturnTemplateItems(DataSource.Templates);
 
                         foreach (Template currentTemplate in currentTemplates)
                         {
-                            if (this.availableTemplates.Any(t => t.Id == currentTemplate.Id))
+                            if (availableTemplates.Any(t => t.Id == currentTemplate.Id))
                             {
-                                this.availableTemplates.Remove(this.availableTemplates.First(t => t.Id == currentTemplate.Id));
+                                availableTemplates.Remove(availableTemplates.First(t => t.Id == currentTemplate.Id));
                             }
                         }
                     }
 
-                    this.UpdateDataSource();
+                    UpdateDataSource();
                 }
             }
         }
 
         /// <summary>
-        /// Gets or sets the available templates.
+        ///     Gets or sets the available templates.
         /// </summary>
-        //public List<Template> AvailableTemplates { get; set; }
-
         /// <summary>
         ///     Gets or sets the data.
         /// </summary>
@@ -128,15 +114,15 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         {
             get
             {
-                return this.dataSource;
+                return dataSource;
             }
 
             set
             {
-                if (this.dataSource != value)
+                if (dataSource != value)
                 {
-                    this.dataSource = value;
-                    this.UpdateDataSource();
+                    dataSource = value;
+                    UpdateDataSource();
                 }
             }
         }
@@ -150,10 +136,10 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
             {
                 string result = string.Empty;
 
-                if (this.dataSource != null)
+                if (dataSource != null)
                 {
-                    result = this.DataSource.Name;
-                    Logger.Trace($"PackageName set to {this.DataSource.Name}.");
+                    result = DataSource.Name;
+                    Logger.Trace($"PackageName set to {DataSource.Name}.");
                 }
                 else
                 {
@@ -166,10 +152,10 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
 
             set
             {
-                if (this.DataSource != null)
+                if (DataSource != null)
                 {
-                    this.DataSource.Name = value;
-                    this.TreeNode.Text = this.TextBoxName.Text;
+                    DataSource.Name = value;
+                    TreeNode.Text = TextBoxName.Text;
                 }
                 else
                 {
@@ -179,48 +165,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         }
 
         /// <summary>
-        ///     Gets or sets the tree node.
-        /// </summary>
-        public TreeNode TreeNode { get; set; }
-
-        /// <summary>
-        /// Gets or sets the version.
-        /// </summary>
-        public double Version
-        {
-            get
-            {
-                double result = 1;
-
-                if (this.dataSource != null)
-                {
-                    result = this.DataSource.Version;
-                    Logger.Trace($"Version set to {this.DataSource.Version}.");
-                }
-                else
-                {
-                    result = 1;
-                    Logger.Trace("Empty Version is not returned as data is null.");
-                }
-
-                return result;
-            }
-
-            set
-            {
-                if (this.DataSource != null)
-                {
-                    this.DataSource.Version = value;
-                }
-                else
-                {
-                    Logger.Trace("Version is not set as Data is null.");
-                }
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets a value indicating whether template enabled.
+        ///     Gets or sets a value indicating whether template enabled.
         /// </summary>
         public bool TemplateEnabled
         {
@@ -228,10 +173,10 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
             {
                 bool result = false;
 
-                if (this.dataSource != null)
+                if (dataSource != null)
                 {
-                    result = this.DataSource.Enabled;
-                    Logger.Trace($"Enabled set to {this.DataSource.Enabled}.");
+                    result = DataSource.Enabled;
+                    Logger.Trace($"Enabled set to {DataSource.Enabled}.");
                 }
                 else
                 {
@@ -244,9 +189,9 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
 
             set
             {
-                if (this.DataSource != null)
+                if (DataSource != null)
                 {
-                    this.DataSource.Enabled = value;
+                    DataSource.Enabled = value;
                 }
                 else
                 {
@@ -255,10 +200,192 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the tree node.
+        /// </summary>
+        public TreeNode TreeNode { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the version.
+        /// </summary>
+        public double Version
+        {
+            get
+            {
+                double result = 1;
+
+                if (dataSource != null)
+                {
+                    result = DataSource.Version;
+                    Logger.Trace($"Version set to {DataSource.Version}.");
+                }
+                else
+                {
+                    result = 1;
+                    Logger.Trace("Empty Version is not returned as data is null.");
+                }
+
+                return result;
+            }
+
+            set
+            {
+                if (DataSource != null)
+                {
+                    DataSource.Version = value;
+                }
+                else
+                {
+                    Logger.Trace("Version is not set as Data is null.");
+                }
+            }
+        }
+
         #endregion
 
+        #region Other Properties
+
+        /// <summary>
+        ///     Gets or sets the all templates.
+        /// </summary>
+        private List<Template> availableTemplates { get; set; }
+
+        #endregion
+
+        #region Public methods and operators
+
+        /// <summary>
+        ///     The validation.
+        /// </summary>
+        /// <returns>
+        ///     The <see cref="int" />.
+        /// </returns>
+        public int Validation()
+        {
+            Logger.Trace("Started Validation()");
+
+            int result = 0;
+
+            if (DataSource != null)
+            {
+                // this.errorProvider1.Clear();
+                // this.DataSource.Validate();
+
+                // if (this.DataSource.ValidationResult.Count > 0)
+                // {
+                // Validation validation = null;
+
+                // if (this.dataSource.ValidationResult.Any(v => v.ValidationType == ValidationType.TemplateName))
+                // {
+                // validation = this.dataSource.ValidationResult.FirstOrDefault(v => v.ValidationType == ValidationType.TemplateName);
+                // this.TextBoxName.Focus();
+                // this.errorProvider1.SetError(
+                // this.TextBoxName,
+                // validation.Description);
+                // result++;
+                // }
+
+                // if (this.dataSource.ValidationResult.Any(v => v.ValidationType == ValidationType.TemplateLanguageOutputId))
+                // {
+                // validation = this.dataSource.ValidationResult.FirstOrDefault(v => v.ValidationType == ValidationType.TemplateLanguageOutputId);
+                // this.ComboBoxLanguageOutput.Focus();
+                // this.errorProvider1.SetError(
+                // this.ComboBoxLanguageOutput,
+                // validation.Description);
+                // result++;
+                // }
+
+                // if (this.dataSource.ValidationResult.Any(v => v.ValidationType == ValidationType.TemplateGeneratorTypeId))
+                // {
+                // validation = this.dataSource.ValidationResult.FirstOrDefault(v => v.ValidationType == ValidationType.TemplateGeneratorTypeId);
+                // this.ComboBoxGeneratorOutput.Focus();
+                // this.errorProvider1.SetError(
+                // this.ComboBoxGeneratorOutput,
+                // validation.Description);
+                // result++;
+                // }
+
+                // if (this.dataSource.ValidationResult.Any(v => v.ValidationType == ValidationType.TemplatePath))
+                // {
+                // validation = this.dataSource.ValidationResult.FirstOrDefault(v => v.ValidationType == ValidationType.TemplatePath);
+                // this.TextBoxTemplate.Focus();
+                // this.errorProvider1.SetError(
+                // this.TextBoxTemplate,
+                // validation.Description);
+                // result++;
+                // }
+
+                // if (this.dataSource.ValidationResult.Any(v => v.ValidationType == ValidationType.TemplateVersion))
+                // {
+                // validation = this.dataSource.ValidationResult.FirstOrDefault(v => v.ValidationType == ValidationType.TemplateVersion);
+                // this.TextBoxVersion.Focus();
+                // this.errorProvider1.SetError(
+                // this.TextBoxVersion,
+                // validation.Description);
+                // result++;
+                // }
+                // }
+            }
+
+            Logger.Trace("Completed Validation()");
+            return result;
+        }
+
+        #endregion
 
         #region Other Methods
+
+        /// <summary>
+        /// The btn add_ click.
+        /// </summary>
+        /// <param name="sender">
+        /// The sender.
+        /// </param>
+        /// <param name="e">
+        /// The e.
+        /// </param>
+        private void BtnAdd_Click(object sender, EventArgs e)
+        {
+            Template selectedTemplate = AvailableTemplates.First(t => t.Name == ComboBoxSearch.Text);
+            DataSource.Templates.Add(selectedTemplate);
+            AvailableTemplates.Remove(selectedTemplate);
+            UpdateDataSource();
+            ComboBoxSearch.Text = string.Empty;
+
+            // this.TemplateListBox.DataSource = this.DataSource.Templates[0].ReturnTemplateItems();
+        }
+
+        /// <summary>
+        /// The btn remove_ click.
+        /// </summary>
+        /// <param name="sender">
+        /// The sender.
+        /// </param>
+        /// <param name="e">
+        /// The e.
+        /// </param>
+        private void BtnRemove_Click(object sender, EventArgs e)
+        {
+            Template selectedTemplate = TemplateListBox.SelectedItem as Template;
+            DataSource.Templates.Remove(selectedTemplate);
+            AvailableTemplates.Add(selectedTemplate);
+            UpdateDataSource();
+            ComboBoxSearch.Text = string.Empty;
+        }
+
+        /// <summary>
+        /// The check box 1_ checked changed.
+        /// </summary>
+        /// <param name="sender">
+        /// The sender.
+        /// </param>
+        /// <param name="e">
+        /// The e.
+        /// </param>
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            TemplateEnabled = (sender as CheckBox).Checked;
+        }
 
         /// <summary>
         /// The text box name_ text changed.
@@ -271,7 +398,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         /// </param>
         private void TextBoxName_TextChanged(object sender, EventArgs e)
         {
-            this.PackageName = this.TextBoxName.Text;
+            PackageName = TextBoxName.Text;
         }
 
         /// <summary>
@@ -279,35 +406,35 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         /// </summary>
         private void UpdateDataSource()
         {
-            if (this.DataSource != null)
+            if (DataSource != null)
             {
-                this.TextBoxName.Text = this.DataSource.Name;
-                this.CheckBoxEnabled.Checked = this.DataSource.Enabled;
+                TextBoxName.Text = DataSource.Name;
+                CheckBoxEnabled.Checked = DataSource.Enabled;
 
-                if (this.dataSource.HierarchyType == HierarchyType.Item)
+                if (dataSource.HierarchyType == HierarchyType.Item)
                 {
-                    this.PanelTemplate.Visible = true;
-                    if (this.DataSource.Templates.Count > 0)
+                    PanelTemplate.Visible = true;
+                    if (DataSource.Templates.Count > 0)
                     {
-                        this.TemplateListBox.DataSource = this.DataSource.Templates[0].ReturnTemplateItems(this.DataSource.Templates);
-                        this.BtnRemove.Enabled = true;
+                        TemplateListBox.DataSource = DataSource.Templates[0].ReturnTemplateItems(DataSource.Templates);
+                        BtnRemove.Enabled = true;
                     }
                     else
                     {
-                        this.TemplateListBox.DataSource = null;
-                        this.BtnRemove.Enabled = false;
+                        TemplateListBox.DataSource = null;
+                        BtnRemove.Enabled = false;
                     }
 
                     if (this.availableTemplates.Count == 0)
                     {
-                        this.BtnAdd.Enabled = false;
-                        this.ComboBoxSearch.Enabled = false;
-                        this.ComboBoxSearch.AutoCompleteCustomSource.Clear();
+                        BtnAdd.Enabled = false;
+                        ComboBoxSearch.Enabled = false;
+                        ComboBoxSearch.AutoCompleteCustomSource.Clear();
                     }
                     else
                     {
-                        this.BtnAdd.Enabled = true;
-                        this.ComboBoxSearch.Enabled = true;
+                        BtnAdd.Enabled = true;
+                        ComboBoxSearch.Enabled = true;
 
                         List<string> availableTemplates = new List<string>();
 
@@ -316,122 +443,19 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
                             availableTemplates.Add(template.Name);
                         }
 
-                        this.ComboBoxSearch.AutoCompleteCustomSource.Clear();
-                        this.ComboBoxSearch.AutoCompleteCustomSource.AddRange(availableTemplates.ToArray());
-                        this.ComboBoxSearch.Items.Clear();
-                        this.ComboBoxSearch.Items.AddRange(availableTemplates.ToArray());
+                        ComboBoxSearch.AutoCompleteCustomSource.Clear();
+                        ComboBoxSearch.AutoCompleteCustomSource.AddRange(availableTemplates.ToArray());
+                        ComboBoxSearch.Items.Clear();
+                        ComboBoxSearch.Items.AddRange(availableTemplates.ToArray());
                     }
-
                 }
                 else
                 {
-                    this.PanelTemplate.Visible = false;
+                    PanelTemplate.Visible = false;
                 }
             }
         }
 
         #endregion
-
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-            this.TemplateEnabled = (sender as CheckBox).Checked;
-        }
-
-        /// <summary>
-        /// The validation.
-        /// </summary>
-        /// <returns>
-        /// The <see cref="int"/>.
-        /// </returns>
-        public int Validation()
-        {
-            Logger.Trace("Started Validation()");
-
-            int result = 0;
-
-            if (this.DataSource != null)
-            {
-                //this.errorProvider1.Clear();
-                //this.DataSource.Validate();
-
-                //if (this.DataSource.ValidationResult.Count > 0)
-                //{
-                //    Validation validation = null;
-
-                //    if (this.dataSource.ValidationResult.Any(v => v.ValidationType == ValidationType.TemplateName))
-                //    {
-                //        validation = this.dataSource.ValidationResult.FirstOrDefault(v => v.ValidationType == ValidationType.TemplateName);
-                //        this.TextBoxName.Focus();
-                //        this.errorProvider1.SetError(
-                //            this.TextBoxName,
-                //            validation.Description);
-                //        result++;
-                //    }
-
-                //    if (this.dataSource.ValidationResult.Any(v => v.ValidationType == ValidationType.TemplateLanguageOutputId))
-                //    {
-                //        validation = this.dataSource.ValidationResult.FirstOrDefault(v => v.ValidationType == ValidationType.TemplateLanguageOutputId);
-                //        this.ComboBoxLanguageOutput.Focus();
-                //        this.errorProvider1.SetError(
-                //            this.ComboBoxLanguageOutput,
-                //            validation.Description);
-                //        result++;
-                //    }
-
-                //    if (this.dataSource.ValidationResult.Any(v => v.ValidationType == ValidationType.TemplateGeneratorTypeId))
-                //    {
-                //        validation = this.dataSource.ValidationResult.FirstOrDefault(v => v.ValidationType == ValidationType.TemplateGeneratorTypeId);
-                //        this.ComboBoxGeneratorOutput.Focus();
-                //        this.errorProvider1.SetError(
-                //            this.ComboBoxGeneratorOutput,
-                //            validation.Description);
-                //        result++;
-                //    }
-
-                //    if (this.dataSource.ValidationResult.Any(v => v.ValidationType == ValidationType.TemplatePath))
-                //    {
-                //        validation = this.dataSource.ValidationResult.FirstOrDefault(v => v.ValidationType == ValidationType.TemplatePath);
-                //        this.TextBoxTemplate.Focus();
-                //        this.errorProvider1.SetError(
-                //            this.TextBoxTemplate,
-                //            validation.Description);
-                //        result++;
-                //    }
-
-                //    if (this.dataSource.ValidationResult.Any(v => v.ValidationType == ValidationType.TemplateVersion))
-                //    {
-                //        validation = this.dataSource.ValidationResult.FirstOrDefault(v => v.ValidationType == ValidationType.TemplateVersion);
-                //        this.TextBoxVersion.Focus();
-                //        this.errorProvider1.SetError(
-                //            this.TextBoxVersion,
-                //            validation.Description);
-                //        result++;
-                //    }
-                //}
-            }
-
-            Logger.Trace("Completed Validation()");
-            return result;
-        }
-
-        private void BtnAdd_Click(object sender, EventArgs e)
-        {
-            Template selectedTemplate = this.AvailableTemplates.First(t => t.Name == this.ComboBoxSearch.Text);
-            this.DataSource.Templates.Add(selectedTemplate);
-            this.AvailableTemplates.Remove(selectedTemplate);
-            this.UpdateDataSource();
-            this.ComboBoxSearch.Text = string.Empty;
-            //this.TemplateListBox.DataSource = this.DataSource.Templates[0].ReturnTemplateItems();
-        }
-
-        private void BtnRemove_Click(object sender, EventArgs e)
-        {
-            Template selectedTemplate = this.TemplateListBox.SelectedItem as Template;
-            this.DataSource.Templates.Remove(selectedTemplate);
-            this.AvailableTemplates.Add(selectedTemplate);
-            this.UpdateDataSource();
-            this.ComboBoxSearch.Text = string.Empty;
-        }
-
     }
 }

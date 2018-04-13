@@ -1,15 +1,12 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="TitleCaseNamingConvention.cs" company="">
-//   
+// <copyright file="UnChangedNamingConvention.cs" company="DotnetScaffolder">
+//   MIT
 // </copyright>
-// <summary>
-//   The title case naming convention.
-// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace DotNetScaffolder.Components.NamingConventions.DefaultNamingConventions
 {
-    #region Using
+    #region Usings
 
     using System;
     using System.ComponentModel.Composition;
@@ -19,7 +16,7 @@ namespace DotNetScaffolder.Components.NamingConventions.DefaultNamingConventions
     #endregion
 
     /// <summary>
-    /// The title case naming convention.
+    ///     The title case naming convention.
     /// </summary>
     /// <example>securityview will be SecurityView</example>
     [Export(typeof(INamingConvention))]

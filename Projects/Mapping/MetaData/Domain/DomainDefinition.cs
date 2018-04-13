@@ -1,16 +1,12 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="DomainDefinition.cs" company="">
-//   
+// <copyright file="DomainDefinition.cs" company="DotnetScaffolder">
+//   MIT
 // </copyright>
-// <summary>
-//   The domain definition. Domains are used to group
-//   tables together. i.e) Security
-// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace DotNetScaffolder.Mapping.MetaData.Domain
 {
-    #region Using
+    #region Usings
 
     using System;
     using System.Collections.Generic;
@@ -18,11 +14,10 @@ namespace DotNetScaffolder.Mapping.MetaData.Domain
 
     using Common.Logging;
 
-    using DotNetScaffolder.Mapping.MetaData.Enum;
+    using DotNetScaffolder.Core.Common.Validation;
     using DotNetScaffolder.Mapping.MetaData.Model;
-    using DotNetScaffolder.Mapping.MetaData.Project;
     using DotNetScaffolder.Mapping.MetaData.Project.Packages;
-    using Core.Common.Validation;
+
     #endregion
 
     /// <summary>
@@ -47,10 +42,10 @@ namespace DotNetScaffolder.Mapping.MetaData.Domain
         /// </summary>
         public DomainDefinition()
         {
-            this.Tables = new List<Table>();
-            this.Package = new Package();
-            this.Id = Guid.NewGuid();
-            this.ValidationResult = new List<Validation>();
+            Tables = new List<Table>();
+            Package = new Package();
+            Id = Guid.NewGuid();
+            ValidationResult = new List<Validation>();
         }
 
         #endregion
@@ -64,30 +59,30 @@ namespace DotNetScaffolder.Mapping.MetaData.Domain
         public Guid CollectionOptionId { get; set; }
 
         /// <summary>
-        /// Gets or sets the driver id.
+        ///     Gets or sets the driver id.
         /// </summary>
         /// <example>
-        /// Entity Framework
+        ///     Entity Framework
         /// </example>
         public Guid DriverId { get; set; }
 
         /// <summary>
-        /// Gets or sets the driver id.
+        ///     Gets or sets the driver id.
         /// </summary>
         /// <example>
-        /// Oracle Drivers
+        ///     Oracle Drivers
         /// </example>
         public Guid DriverTypeId { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the id.
+        /// </summary>
+        public Guid Id { get; set; }
 
         /// <summary>
         ///     Gets or sets the name of the domain.
         /// </summary>
         public string Name { get; set; }
-
-        /// <summary>
-        /// Gets or sets the id.
-        /// </summary>
-        public Guid Id { get; set; }
 
         /// <summary>
         ///     Gets or sets the naming convention Id.
@@ -131,47 +126,47 @@ namespace DotNetScaffolder.Mapping.MetaData.Domain
         {
             Logger.Trace("Started Validate()");
 
-            this.ValidationResult.Clear();
+            ValidationResult.Clear();
 
-            if (string.IsNullOrEmpty(this.Name))
+            if (string.IsNullOrEmpty(Name))
             {
-                this.ValidationResult.Add(new Validation(ValidationType.DomainName, "Name cannot be empty"));
+                ValidationResult.Add(new Validation(ValidationType.DomainName, "Name cannot be empty"));
             }
 
-            if (this.Id == Guid.Empty)
+            if (Id == Guid.Empty)
             {
-                this.ValidationResult.Add(new Validation(ValidationType.DomainId, "Id cannot be empty"));
+                ValidationResult.Add(new Validation(ValidationType.DomainId, "Id cannot be empty"));
             }
 
-            if (this.NamingConventionId == Guid.Empty)
+            if (NamingConventionId == Guid.Empty)
             {
-                this.ValidationResult.Add(new Validation(ValidationType.NamingConventionId, "NamingConventionId cannot be empty"));
+                ValidationResult.Add(new Validation(ValidationType.NamingConventionId, "NamingConventionId cannot be empty"));
             }
 
-            if (this.SourceTypeId == Guid.Empty)
+            if (SourceTypeId == Guid.Empty)
             {
-                this.ValidationResult.Add(new Validation(ValidationType.SourceTypeId, "SourceTypeId cannot be empty"));
+                ValidationResult.Add(new Validation(ValidationType.SourceTypeId, "SourceTypeId cannot be empty"));
             }
 
-            if (this.DriverId == Guid.Empty)
+            if (DriverId == Guid.Empty)
             {
-                this.ValidationResult.Add(new Validation(ValidationType.DriverId, "DriverId cannot be empty"));
+                ValidationResult.Add(new Validation(ValidationType.DriverId, "DriverId cannot be empty"));
             }
 
-            if (this.DriverTypeId == Guid.Empty)
+            if (DriverTypeId == Guid.Empty)
             {
-                this.ValidationResult.Add(new Validation(ValidationType.DriverTypeId, "DriverTypeId cannot be empty"));
+                ValidationResult.Add(new Validation(ValidationType.DriverTypeId, "DriverTypeId cannot be empty"));
             }
 
-            if (this.CollectionOptionId == Guid.Empty)
+            if (CollectionOptionId == Guid.Empty)
             {
-                this.ValidationResult.Add(new Validation(ValidationType.CollectionOptionId, "CollectionOptionId cannot be empty"));
+                ValidationResult.Add(new Validation(ValidationType.CollectionOptionId, "CollectionOptionId cannot be empty"));
             }
 
-            Logger.Debug($"Number of Validation errors: {this.ValidationResult.Count}");
-            Logger.Trace($"Validation errors: {this.ValidationResult.ToString()}");
+            Logger.Debug($"Number of Validation errors: {ValidationResult.Count}");
+            Logger.Trace($"Validation errors: {ValidationResult}");
             Logger.Trace("Completed Validate()");
-            return this.ValidationResult;
+            return ValidationResult;
         }
 
         #endregion

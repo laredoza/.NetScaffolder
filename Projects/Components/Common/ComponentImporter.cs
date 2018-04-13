@@ -1,15 +1,12 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ComponentImporter.cs" company="">
-//   
+// <copyright file="ComponentImporter.cs" company="DotnetScaffolder">
+//   MIT
 // </copyright>
-// <summary>
-//   The component importer.
-// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace DotNetScaffolder.Components.Common
 {
-    #region Using
+    #region Usings
 
     using System;
     using System.Collections.Generic;
@@ -25,7 +22,7 @@ namespace DotNetScaffolder.Components.Common
     #endregion
 
     /// <summary>
-    /// The component importer.
+    ///     The component importer.
     /// </summary>
     public class ComponentImporter
     {
@@ -41,10 +38,28 @@ namespace DotNetScaffolder.Components.Common
         #region Properties
 
         /// <summary>
+        /// Gets or sets the collection options.
+        /// </summary>
+        [ImportMany]
+        public Lazy<ICollectionOption, IDictionary<string, object>>[] CollectionOptions { get; set; }
+
+        /// <summary>
+        /// Gets or sets the data types.
+        /// </summary>
+        [ImportMany]
+        public Lazy<IDataType, IDictionary<string, object>>[] DataTypes { get; set; }
+
+        /// <summary>
         ///     Gets or sets the driver types.
         /// </summary>
         [ImportMany]
         public Lazy<IDriver, IDictionary<string, object>>[] Drivers { get; set; }
+
+        /// <summary>
+        ///     Gets or sets LanguageOutputs
+        /// </summary>
+        [ImportMany]
+        public Lazy<ILanguageOutput, IDictionary<string, object>>[] LanguageOutputs { get; set; }
 
         /// <summary>
         ///     Gets or sets the naming conventions.
@@ -53,25 +68,16 @@ namespace DotNetScaffolder.Components.Common
         public Lazy<INamingConvention, IDictionary<string, object>>[] NamingConventions { get; set; }
 
         /// <summary>
+        /// Gets or sets the output generators.
+        /// </summary>
+        [ImportMany]
+        public Lazy<IOutputGenerator, IDictionary<string, object>>[] OutputGenerators { get; set; }
+
+        /// <summary>
         ///     Gets or sets the source types.
         /// </summary>
         [ImportMany]
         public Lazy<ISourceType, IDictionary<string, object>>[] SourceTypes { get; set; }
-
-        /// <summary>
-        /// Gets or sets LanguageOutputs
-        /// </summary>
-        [ImportMany]
-        public Lazy<ILanguageOutput, IDictionary<string, object>>[] LanguageOutputs { get; set; }
-
-        [ImportMany]
-        public Lazy<IOutputGenerator, IDictionary<string, object>>[] OutputGenerators { get; set; }
-
-        [ImportMany]
-        public Lazy<IDataType, IDictionary<string, object>>[] DataTypes { get; set; }
-
-        [ImportMany]
-        public Lazy<ICollectionOption, IDictionary<string, object>>[] CollectionOptions { get; set; }
 
         #endregion
 
@@ -91,7 +97,7 @@ namespace DotNetScaffolder.Components.Common
         /// </returns>
         public string ApplyNamingConvention(string value, string conventionName)
         {
-            foreach (var convention in this.NamingConventions)
+            foreach (var convention in NamingConventions)
             {
                 if ((string)convention.Metadata["NameMetaData"] == conventionName)
                 {
@@ -108,7 +114,7 @@ namespace DotNetScaffolder.Components.Common
         public void Import()
         {
             Logger.Trace($"Started Import()");
-            this.Import(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location));
+            Import(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location));
             Logger.Trace($"Completed Import()");
         }
 
@@ -140,12 +146,12 @@ namespace DotNetScaffolder.Components.Common
 
             // Fill the imports of this object
             container.ComposeParts(this);
-            //foreach (var item in this.DataTypes)
-            //{
-            //    IDataType test = item.Value;
-            //    var a = test.ReturnNavigation();
-            //}
 
+            // foreach (var item in this.DataTypes)
+            // {
+            // IDataType test = item.Value;
+            // var a = test.ReturnNavigation();
+            // }
             Logger.Info($"Completed DoImport() - {importfolder}");
         }
 

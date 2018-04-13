@@ -1,18 +1,12 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ISourceType.cs" company="">
-//   
+// <copyright file="ISourceType.cs" company="DotnetScaffolder">
+//   MIT
 // </copyright>
-// <summary>
-//   The SourceType interface.
-//   This is the source from which the data structure is imported.
-// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace DotNetScaffolder.Components.Common.Contract
 {
-    #region Using
-
-    using System.Collections.Generic;
+    #region Usings
 
     using DotNetScaffolder.Mapping.MetaData.Model;
 
@@ -28,6 +22,17 @@ namespace DotNetScaffolder.Components.Common.Contract
         #region Public methods and operators
 
         /// <summary>
+        /// The add config ui.
+        /// </summary>
+        /// <param name="parameters">
+        /// The parameters.
+        /// </param>
+        /// <returns>
+        /// The <see cref="object"/>.
+        /// </returns>
+        object AddConfigUI(object parameters);
+
+        /// <summary>
         /// The import.
         /// </summary>
         /// <param name="options">
@@ -37,6 +42,14 @@ namespace DotNetScaffolder.Components.Common.Contract
         /// The <see cref="List"/>.
         /// </returns>
         DatabaseModel Import(object options);
+
+        /// <summary>
+        /// The load.
+        /// </summary>
+        /// <param name="parameters">
+        /// The parameters.
+        /// </param>
+        void Load(object parameters);
 
         /// <summary>
         /// Map database type to c# type.
@@ -49,22 +62,22 @@ namespace DotNetScaffolder.Components.Common.Contract
         /// </returns>
         DomainDataType MapDatabaseTypeToCSharp(string databaseType);
 
-        object AddConfigUI(object parameters);
-       
-        /// <summary>
-        /// Test DataSource
-        /// </summary>
-        /// <param name="paramters"></param>
-        /// <returns></returns>
-        bool Test(object paramters);
-
         /// <summary>
         /// Save parameters
         /// </summary>
-        /// <param name="parameters"></param>
+        /// <param name="parameters">
+        /// </param>
         void Save(object parameters);
 
-        void Load(object parameters);
+        /// <summary>
+        /// Test DataSource
+        /// </summary>
+        /// <param name="paramters">
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        bool Test(object paramters);
 
         #endregion
     }
