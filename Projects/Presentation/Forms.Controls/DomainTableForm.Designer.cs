@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.domainMenuUserControl1 = new DotNetScaffolder.Presentation.Forms.Controls.DomainMenuUserControl();
             this.PanelConfig = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.domainMenuUserControl1 = new DotNetScaffolder.Presentation.Forms.Controls.DomainMenuUserControl();
             this.btnSave = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -52,13 +52,24 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1059, 458);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
+            // domainMenuUserControl1
+            // 
+            this.domainMenuUserControl1.DataSource = null;
+            this.domainMenuUserControl1.Location = new System.Drawing.Point(1, 1);
+            this.domainMenuUserControl1.Margin = new System.Windows.Forms.Padding(1);
+            this.domainMenuUserControl1.Name = "domainMenuUserControl1";
+            this.domainMenuUserControl1.OutputPath = null;
+            this.domainMenuUserControl1.ParentConfigControl = null;
+            this.domainMenuUserControl1.Size = new System.Drawing.Size(273, 454);
+            this.domainMenuUserControl1.TabIndex = 6;
+            // 
             // PanelConfig
             // 
             this.PanelConfig.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.PanelConfig.Location = new System.Drawing.Point(280, 2);
-            this.PanelConfig.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.PanelConfig.Margin = new System.Windows.Forms.Padding(2);
             this.PanelConfig.Name = "PanelConfig";
             this.PanelConfig.Size = new System.Drawing.Size(777, 454);
             this.PanelConfig.TabIndex = 7;
@@ -84,24 +95,13 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // domainMenuUserControl1
-            // 
-            this.domainMenuUserControl1.DataSource = null;
-            this.domainMenuUserControl1.Location = new System.Drawing.Point(1, 1);
-            this.domainMenuUserControl1.Margin = new System.Windows.Forms.Padding(1);
-            this.domainMenuUserControl1.Name = "domainMenuUserControl1";
-            this.domainMenuUserControl1.OutputPath = null;
-            this.domainMenuUserControl1.ParentConfigControl = null;
-            this.domainMenuUserControl1.Size = new System.Drawing.Size(273, 454);
-            this.domainMenuUserControl1.TabIndex = 6;
-            // 
             // btnSave
             // 
             this.btnSave.Location = new System.Drawing.Point(901, 464);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 4;
-            this.btnSave.Text = "button3";
+            this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 

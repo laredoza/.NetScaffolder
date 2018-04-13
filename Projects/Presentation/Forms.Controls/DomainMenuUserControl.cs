@@ -90,9 +90,9 @@
             if (DataSource != null)
             {
                 var parameters = new Dictionary<string, string> { { "basePath", OutputPath } };
-                foreach (var node in DomainTreeView.Nodes)
+                foreach (TreeNode node in DomainTreeView.Nodes)
                 {
-                    (node as IDataTypeUI<Dictionary<string, string>>)?.SaveConfig(parameters);
+                    (node.Tag as IDataTypeUI<Dictionary<string, string>>)?.SaveConfig(parameters);
                 }
             }
             else

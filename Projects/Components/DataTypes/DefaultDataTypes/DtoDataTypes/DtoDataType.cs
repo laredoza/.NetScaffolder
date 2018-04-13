@@ -17,10 +17,10 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
     using DotNetScaffolder.Mapping.MetaData.Model;
 
     [Export(typeof(IDataType))]
-    [ExportMetadata("NameMetaData", "Table")]
+    [ExportMetadata("NameMetaData", "Dto")]
     [ExportMetadata("ValueMetaData", "1BC1B0C4-1E41-9146-82CF-599181CE4490")]
 
-    public class TableDataType : IDataType
+    public class DtoDataType : IDataType
     {
         public string Namespace { get; set; } = "Repository";
 
@@ -34,7 +34,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
         private Control fieldsControl;
         private Control relationshipControls;
 
-        public  TableDataType()
+        public DtoDataType()
         {
         }
 
@@ -64,7 +64,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
         public bool SaveConfig(IDictionary<string, string> parameters)
         {
             var filePath = Path.Combine(parameters["basePath"], FILE_NAME);
-            ObjectXMLSerializer<TableDataType>.Save(this, filePath);
+            ObjectXMLSerializer<DtoDataType>.Save(this, filePath);
             return true;
         }
 
@@ -74,7 +74,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
 
             if (File.Exists(filePath))
             {
-                var appService = ObjectXMLSerializer<TableDataType>.Load(filePath);
+                var appService = ObjectXMLSerializer<DtoDataType>.Load(filePath);
                 if (appService != null)
                 {
                 }

@@ -76,23 +76,23 @@
     <Compile Include="RepositoryDataTypes\RepositoryUserControl.Designer.cs">
       <DependentUpon>RepositoryUserControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="TableDataTypes\FieldUserControl.cs">
+    <Compile Include="DtoDataTypes\FieldUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="TableDataTypes\FieldUserControl.Designer.cs">
+    <Compile Include="DtoDataTypes\FieldUserControl.Designer.cs">
       <DependentUpon>FieldUserControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="TableDataTypes\RelationshipUserControl.cs">
+    <Compile Include="DtoDataTypes\RelationshipUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="TableDataTypes\RelationshipUserControl.Designer.cs">
+    <Compile Include="DtoDataTypes\RelationshipUserControl.Designer.cs">
       <DependentUpon>RelationshipUserControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="TableDataTypes\TableDataType.cs" />
-    <Compile Include="TableDataTypes\TableUserControl.cs">
+    <Compile Include="DtoDataTypes\DtoDataType.cs" />
+    <Compile Include="DtoDataTypes\TableUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="TableDataTypes\TableUserControl.Designer.cs">
+    <Compile Include="DtoDataTypes\TableUserControl.Designer.cs">
       <DependentUpon>TableUserControl.cs</DependentUpon>
     </Compile>
     <Compile Include="UnitOfWorkDataTypes\UnitOfWorkDataType.cs" />
@@ -138,13 +138,13 @@
     <EmbeddedResource Include="RepositoryDataTypes\RepositoryUserControl.resx">
       <DependentUpon>RepositoryUserControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="TableDataTypes\FieldUserControl.resx">
+    <EmbeddedResource Include="DtoDataTypes\FieldUserControl.resx">
       <DependentUpon>FieldUserControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="TableDataTypes\RelationshipUserControl.resx">
+    <EmbeddedResource Include="DtoDataTypes\RelationshipUserControl.resx">
       <DependentUpon>RelationshipUserControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="TableDataTypes\TableUserControl.resx">
+    <EmbeddedResource Include="DtoDataTypes\TableUserControl.resx">
       <DependentUpon>TableUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UnitOfWorkDataTypes\UnitOfWorkUserControl.resx">

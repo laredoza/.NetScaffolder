@@ -19,7 +19,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.TableDataTypes
             InitializeComponent();
         }
 
-        public TableDataType DataType { get; set; }
+        public DtoDataType DataType { get; set; }
 
         public void SaveConfig(IDictionary<string, string> parameters)
         {

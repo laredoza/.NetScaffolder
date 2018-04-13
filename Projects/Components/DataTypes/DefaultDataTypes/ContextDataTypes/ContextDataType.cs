@@ -27,6 +27,18 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
 
         public bool Enabled { get; set; } = false;
 
+        public string ContextName { get; set; } = "Context";
+
+        public string InheritFrom { get; set; }
+
+        public bool CreateDb { get; set; }
+
+        public bool GenerateInterface { get; set; }
+
+        public bool LoggingEnabled { get; set; }
+
+        public string ConstructionOptions { get; set; }
+
         private const string FILE_NAME = "Context.mdl";
 
         public ContextDataType()
