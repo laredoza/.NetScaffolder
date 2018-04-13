@@ -20,32 +20,33 @@ namespace DotNetScaffolder.Test.Presentation.Controls
     #endregion
 
     /// <summary>
-    /// The project domain details user control unit test.
+    ///     The project domain details user control unit test.
     /// </summary>
     [TestClass]
     public class ProjectDomainDetailsUserControlUnitTest
     {
-        #region Public methods and operators
+        #region Public Methods And Operators
 
         /// <summary>
-        /// The project domain details user control unit test_ test.
+        ///     The project domain details user control unit test_ test.
         /// </summary>
         [TestMethod]
         public void ProjectDomainDetailsUserControlUnitTest_Test()
         {
             ScaffoldConfig.Load();
 
-            ProjectDomainDetailsUserControl control = new ProjectDomainDetailsUserControl
-                                                          {
-                                                              ApplicationService =
-                                                                  new ProjectDefinitionApplicationServiceFile
-                                                                      ()
-                                                          };
+            ProjectDomainDetailsUserControl control =
+                new ProjectDomainDetailsUserControl
+                    {
+                        ApplicationService =
+                            new ProjectDefinitionApplicationServiceFile()
+                    };
 
             control.ApplicationService.AddDomain();
 
             // Todo:Add Back
-            control.ApplicationService.ProjectDefinition.Domains[0].DriverId = new Guid(ScaffoldConfig.Drivers[0].Metadata["ValueMetaData"].ToString());
+            control.ApplicationService.ProjectDefinition.Domains[0].DriverId =
+                new Guid(ScaffoldConfig.Drivers[0].Metadata["ValueMetaData"].ToString());
 
             // control.ApplicationService.ProjectDefinition.Domains[0].DriverTypeId;
             // new Guid(ScaffoldConfig.LanguageOutputs[0].Metadata["ValueMetaData"].ToString())

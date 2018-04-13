@@ -17,15 +17,15 @@ namespace DotNetScaffolder.Test.Project
     #endregion
 
     /// <summary>
-    /// The data type unit test.
+    ///     The data type unit test.
     /// </summary>
     [TestClass]
     public class DataTypeUnitTest
     {
-        #region Public methods and operators
+        #region Public Methods And Operators
 
         /// <summary>
-        /// The data type unit test_ test.
+        ///     The data type unit test_ test.
         /// </summary>
         [TestMethod]
         public void DataTypeUnitTest_Test()

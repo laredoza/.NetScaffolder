@@ -20,31 +20,31 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
     #endregion
 
     /// <summary>
-    /// The manage package user control.
+    ///     The manage package user control.
     /// </summary>
     public partial class ManagePackageUserControl : UserControl
     {
         #region Constructors and Destructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ManagePackageUserControl"/> class.
+        ///     Initializes a new instance of the <see cref="ManagePackageUserControl" /> class.
         /// </summary>
         public ManagePackageUserControl()
         {
-            InitializeComponent();
+            this.InitializeComponent();
 
-            ManageCollectionsTreeViewUserControl1.AfterSelect += AfterSelect;
-            ManageCollectionsTreeViewUserControl1.BtnAddItemClick += BtnAddItemClick;
-            ManageCollectionsTreeViewUserControl1.BtnDeleteClick += BtnDeleteClick;
-            ManageCollectionsTreeViewUserControl1.BtnUpClick += BtnUpClick;
-            ManageCollectionsTreeViewUserControl1.BtnDownClick += BtnDownClick;
-            ManageCollectionsTreeViewUserControl1.BtnAddGroupClick += BtnAddGroupClick;
-            Templates = new List<Template>();
+            this.ManageCollectionsTreeViewUserControl1.AfterSelect += this.AfterSelect;
+            this.ManageCollectionsTreeViewUserControl1.BtnAddItemClick += this.BtnAddItemClick;
+            this.ManageCollectionsTreeViewUserControl1.BtnDeleteClick += this.BtnDeleteClick;
+            this.ManageCollectionsTreeViewUserControl1.BtnUpClick += this.BtnUpClick;
+            this.ManageCollectionsTreeViewUserControl1.BtnDownClick += this.BtnDownClick;
+            this.ManageCollectionsTreeViewUserControl1.BtnAddGroupClick += this.BtnAddGroupClick;
+            this.Templates = new List<Template>();
         }
 
         #endregion
 
-        #region Properties
+        #region Public Properties
 
         /// <summary>
         ///     Gets or sets the data source.
@@ -53,15 +53,15 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         {
             get
             {
-                return ManageCollectionsTreeViewUserControl1.DataSource;
+                return this.ManageCollectionsTreeViewUserControl1.DataSource;
             }
 
             set
             {
-                if (ManageCollectionsTreeViewUserControl1.DataSource != value)
+                if (this.ManageCollectionsTreeViewUserControl1.DataSource != value)
                 {
-                    ManageCollectionsTreeViewUserControl1.DataSource = value;
-                    ManageCollectionsTreeViewUserControl1.SelectFirstNode();
+                    this.ManageCollectionsTreeViewUserControl1.DataSource = value;
+                    this.ManageCollectionsTreeViewUserControl1.SelectFirstNode();
                 }
             }
         }
@@ -73,7 +73,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
 
         #endregion
 
-        #region Public methods and operators
+        #region Public Methods And Operators
 
         /// <summary>
         ///     The validation.
@@ -83,7 +83,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         /// </returns>
         public int Validation()
         {
-            return PackageDetailsUserControl1.Validation();
+            return this.PackageDetailsUserControl1.Validation();
         }
 
         #endregion
@@ -101,12 +101,12 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         /// </param>
         private void AfterSelect(object sender, TreeViewEventArgs e)
         {
-            PackageDetailsUserControl1.TreeNode = e.Node;
-            PackageDetailsUserControl1.DataSource = e.Node.Tag as Package;
+            this.PackageDetailsUserControl1.TreeNode = e.Node;
+            this.PackageDetailsUserControl1.DataSource = e.Node.Tag as Package;
 
-            if (Templates.Count > 0)
+            if (this.Templates.Count > 0)
             {
-                PackageDetailsUserControl1.AvailableTemplates = Templates[0].ReturnTemplateItems();
+                this.PackageDetailsUserControl1.AvailableTemplates = this.Templates[0].ReturnTemplateItems();
             }
         }
 
@@ -121,12 +121,12 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         /// </param>
         private void BtnAddGroupClick(object sender, EventArgs eventArgs)
         {
-            Package currentPackage = PackageDetailsUserControl1.TreeNode.Tag as Package;
+            Package currentPackage = this.PackageDetailsUserControl1.TreeNode.Tag as Package;
             Package parentPackage;
 
             if (currentPackage.HierarchyType == HierarchyType.Item)
             {
-                parentPackage = PackageDetailsUserControl1.TreeNode.Parent.Tag as Package;
+                parentPackage = this.PackageDetailsUserControl1.TreeNode.Parent.Tag as Package;
             }
             else
             {
@@ -150,9 +150,9 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
 
             parentPackage.Children.Add(newPackage);
             TreeNode newTreeNode = new TreeNode { Text = newPackage.Name, Tag = newPackage };
-            PackageDetailsUserControl1.TreeNode.Nodes.Add(newTreeNode);
-            PackageDetailsUserControl1.TreeNode = newTreeNode;
-            PackageDetailsUserControl1.DataSource = newPackage;
+            this.PackageDetailsUserControl1.TreeNode.Nodes.Add(newTreeNode);
+            this.PackageDetailsUserControl1.TreeNode = newTreeNode;
+            this.PackageDetailsUserControl1.DataSource = newPackage;
         }
 
         /// <summary>
@@ -166,12 +166,12 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         /// </param>
         private void BtnAddItemClick(object sender, EventArgs eventArgs)
         {
-            Package currentPackage = PackageDetailsUserControl1.TreeNode.Tag as Package;
+            Package currentPackage = this.PackageDetailsUserControl1.TreeNode.Tag as Package;
             Package parentPackage;
 
             if (currentPackage.HierarchyType == HierarchyType.Item)
             {
-                parentPackage = PackageDetailsUserControl1.TreeNode.Parent.Tag as Package;
+                parentPackage = this.PackageDetailsUserControl1.TreeNode.Parent.Tag as Package;
             }
             else
             {
@@ -198,15 +198,15 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
 
             if (currentPackage.HierarchyType == HierarchyType.Item)
             {
-                PackageDetailsUserControl1.TreeNode.Parent.Nodes.Add(newTreeNode);
+                this.PackageDetailsUserControl1.TreeNode.Parent.Nodes.Add(newTreeNode);
             }
             else
             {
-                PackageDetailsUserControl1.TreeNode.Nodes.Add(newTreeNode);
+                this.PackageDetailsUserControl1.TreeNode.Nodes.Add(newTreeNode);
             }
 
-            PackageDetailsUserControl1.TreeNode = newTreeNode;
-            PackageDetailsUserControl1.DataSource = newPackage;
+            this.PackageDetailsUserControl1.TreeNode = newTreeNode;
+            this.PackageDetailsUserControl1.DataSource = newPackage;
         }
 
         /// <summary>
@@ -220,11 +220,11 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         /// </param>
         private void BtnDeleteClick(object sender, EventArgs eventArgs)
         {
-            Package currentTemplate = PackageDetailsUserControl1.TreeNode.Tag as Package;
-            Package parentTemplate = PackageDetailsUserControl1.TreeNode.Parent.Tag as Package;
+            Package currentTemplate = this.PackageDetailsUserControl1.TreeNode.Tag as Package;
+            Package parentTemplate = this.PackageDetailsUserControl1.TreeNode.Parent.Tag as Package;
 
             parentTemplate.Children.Remove(currentTemplate);
-            PackageDetailsUserControl1.TreeNode.Remove();
+            this.PackageDetailsUserControl1.TreeNode.Remove();
         }
 
         /// <summary>
@@ -238,7 +238,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         /// </param>
         private void BtnDownClick(object sender, EventArgs eventArgs)
         {
-            ManageCollectionsTreeViewUserControl1.MoveDown(PackageDetailsUserControl1.TreeNode);
+            this.ManageCollectionsTreeViewUserControl1.MoveDown(this.PackageDetailsUserControl1.TreeNode);
         }
 
         /// <summary>
@@ -252,7 +252,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         /// </param>
         private void BtnUpClick(object sender, EventArgs e)
         {
-            ManageCollectionsTreeViewUserControl1.MoveUp(PackageDetailsUserControl1.TreeNode);
+            this.ManageCollectionsTreeViewUserControl1.MoveUp(this.PackageDetailsUserControl1.TreeNode);
         }
 
         #endregion

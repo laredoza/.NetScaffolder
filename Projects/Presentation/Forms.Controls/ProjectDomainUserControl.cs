@@ -48,21 +48,17 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         /// </summary>
         public ProjectDomainUserControl()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
 
         #endregion
-
-        #region Public Events
 
         /// <summary>
         ///     The selected index changed.
         /// </summary>
         public event EventHandler<SelectedEventArgs> SelectedIndexChanged;
 
-        #endregion
-
-        #region Properties
+        #region Public Properties
 
         /// <summary>
         ///     Gets or sets the application service.
@@ -71,14 +67,14 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         {
             get
             {
-                return applicationService;
+                return this.applicationService;
             }
 
             set
             {
-                applicationService = value;
-                UpdateDataSource();
-                DomainsListBox_SelectedIndexChanged(this, new EventArgs());
+                this.applicationService = value;
+                this.UpdateDataSource();
+                this.DomainsListBox_SelectedIndexChanged(this, new EventArgs());
             }
         }
 
@@ -96,9 +92,9 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
             {
                 bool result = false;
 
-                if (ApplicationService != null && ApplicationService.ProjectDefinition != null)
+                if (this.ApplicationService != null && this.ApplicationService.ProjectDefinition != null)
                 {
-                    result = ApplicationService.ProjectDefinition.Domains.Count > 0;
+                    result = this.ApplicationService.ProjectDefinition.Domains.Count > 0;
                 }
 
                 return result;
@@ -107,7 +103,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
 
         #endregion
 
-        #region Public methods and operators
+        #region Public Methods And Operators
 
         /// <summary>
         ///     The add domain.
@@ -119,11 +115,11 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         {
             Logger.Trace("Started AddDomain()");
 
-            DomainDefinition result = ApplicationService.AddDomain();
-            UpdateDataSource();
-            Changed = true;
+            DomainDefinition result = this.ApplicationService.AddDomain();
+            this.UpdateDataSource();
+            this.Changed = true;
 
-            DomainsListBox.SelectedItem = result;
+            this.DomainsListBox.SelectedItem = result;
             Logger.Trace("Completed AddDomain()");
 
             return result;
@@ -139,15 +135,15 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         {
             Logger.Trace($"Started DeleteDomain() - id: {id}");
 
-            ApplicationService.Delete(id);
-            UpdateDataSource();
+            this.ApplicationService.Delete(id);
+            this.UpdateDataSource();
 
-            if (DomainsListBox.Items.Count > 0)
+            if (this.DomainsListBox.Items.Count > 0)
             {
-                DomainsListBox.SelectedItem = DomainsListBox.Items[DomainsListBox.Items.Count - 1];
+                this.DomainsListBox.SelectedItem = this.DomainsListBox.Items[this.DomainsListBox.Items.Count - 1];
             }
 
-            Changed = true;
+            this.Changed = true;
             Logger.Trace($"Completed DeleteDomain() - id: {id}");
         }
 
@@ -165,7 +161,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         {
             Logger.Trace($"Started OnSelectedIndexChanged() - Id:{e.Id}");
 
-            EventHandler<SelectedEventArgs> handler = SelectedIndexChanged;
+            EventHandler<SelectedEventArgs> handler = this.SelectedIndexChanged;
 
             if (handler != null)
             {
@@ -188,10 +184,10 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         {
             DomainTableForm domainTableform = new DomainTableForm();
 
-            if (DomainsListBox.SelectedItem != null)
+            if (this.DomainsListBox.SelectedItem != null)
             {
-                domainTableform.OutputFolder = ApplicationService.ProjectDefinition.OutputFolder;
-                domainTableform.DataSource = DomainsListBox.SelectedItem as DomainDefinition;
+                domainTableform.OutputFolder = this.ApplicationService.ProjectDefinition.OutputFolder;
+                domainTableform.DataSource = this.DomainsListBox.SelectedItem as DomainDefinition;
                 domainTableform.ShowDialog();
             }
         }
@@ -208,7 +204,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         private void ButtonAdd_Click(object sender, EventArgs e)
         {
             Logger.Trace($"Started ButtonAdd_Click()");
-            AddDomain();
+            this.AddDomain();
             Logger.Trace($"Completed ButtonAdd_Click()");
         }
 
@@ -225,11 +221,11 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         {
             Logger.Trace("Started ButtonDelete_Click()");
 
-            DomainDefinition definition = DomainsListBox.SelectedItem as DomainDefinition;
+            DomainDefinition definition = this.DomainsListBox.SelectedItem as DomainDefinition;
 
             if (definition != null)
             {
-                DeleteDomain(definition.Id);
+                this.DeleteDomain(definition.Id);
             }
 
             Logger.Trace($"Completed ButtonDelete_Click()");
@@ -247,16 +243,12 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         private void DomainsListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             Logger.Trace("Started DomainsListBox_SelectedIndexChanged event.");
-            if (ApplicationService != null && ApplicationService.ProjectDefinition != null
-                && DomainsListBox.SelectedItem != null)
+            if (this.ApplicationService != null && this.ApplicationService.ProjectDefinition != null
+                                                && this.DomainsListBox.SelectedItem != null)
             {
-                SelectedEventArgs eventArgs = new SelectedEventArgs
-                                                  {
-                                                      Id =
-                                                          (DomainsListBox.SelectedItem as
-                                                               DomainDefinition).Id
-                                                  };
-                OnSelectedIndexChanged(eventArgs);
+                SelectedEventArgs eventArgs =
+                    new SelectedEventArgs { Id = (this.DomainsListBox.SelectedItem as DomainDefinition).Id };
+                this.OnSelectedIndexChanged(eventArgs);
             }
 
             Logger.Trace("Completed DomainsListBox_SelectedIndexChanged event.");
@@ -269,19 +261,19 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         {
             Logger.Trace("Started UpdateDataSource()");
 
-            DomainsListBox.DataSource = null;
+            this.DomainsListBox.DataSource = null;
             {
                 // if (!this.Changed)
-                if (ApplicationService != null && ApplicationService.ProjectDefinition != null
-                    && ApplicationService.ProjectDefinition.Domains != null)
+                if (this.ApplicationService != null && this.ApplicationService.ProjectDefinition != null
+                                                    && this.ApplicationService.ProjectDefinition.Domains != null)
                 {
-                    DomainsListBox.DataSource = ApplicationService.ProjectDefinition.Domains;
-                    DomainsListBox.DisplayMember = "Name";
-                    DomainsListBox.ValueMember = "Id";
+                    this.DomainsListBox.DataSource = this.ApplicationService.ProjectDefinition.Domains;
+                    this.DomainsListBox.DisplayMember = "Name";
+                    this.DomainsListBox.ValueMember = "Id";
                 }
             }
 
-            ButtonDelete.Enabled = EnableDeleteButton;
+            this.ButtonDelete.Enabled = this.EnableDeleteButton;
 
             Logger.Trace("Completed UpdateDataSource()");
         }

@@ -18,7 +18,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
     #endregion
 
     /// <summary>
-    /// The domain table form.
+    ///     The domain table form.
     /// </summary>
     public partial class DomainTableForm : Form
     {
@@ -34,7 +34,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         #region Fields
 
         /// <summary>
-        /// The data source.
+        ///     The data source.
         /// </summary>
         private DomainDefinition dataSource;
 
@@ -44,16 +44,16 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
 
         // public Package MyProperty { get; set; }
         /// <summary>
-        /// Initializes a new instance of the <see cref="DomainTableForm"/> class.
+        ///     Initializes a new instance of the <see cref="DomainTableForm" /> class.
         /// </summary>
         public DomainTableForm()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
 
         #endregion
 
-        #region Properties
+        #region Public Properties
 
         /// <summary>
         ///     Gets or sets the data source.
@@ -62,26 +62,26 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         {
             get
             {
-                return dataSource;
+                return this.dataSource;
             }
 
             set
             {
-                if (dataSource != value)
+                if (this.dataSource != value)
                 {
-                    dataSource = value;
-                    domainMenuUserControl1.ParentConfigControl = PanelConfig;
-                    domainMenuUserControl1.DataSource = dataSource;
+                    this.dataSource = value;
+                    this.domainMenuUserControl1.ParentConfigControl = this.PanelConfig;
+                    this.domainMenuUserControl1.DataSource = this.dataSource;
                 }
             }
         }
 
         /// <summary>
-        /// Sets the output folder.
+        ///     Sets the output folder.
         /// </summary>
         public string OutputFolder
         {
-            set => domainMenuUserControl1.OutputPath = value;
+            set => this.domainMenuUserControl1.OutputPath = value;
         }
 
         #endregion
@@ -99,8 +99,8 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         /// </param>
         private void btnSave_Click(object sender, EventArgs e)
         {
-            domainMenuUserControl1.Save();
-            Close();
+            this.domainMenuUserControl1.Save();
+            this.Close();
         }
 
         /// <summary>
@@ -114,7 +114,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         /// </param>
         private void button1_Click(object sender, EventArgs e)
         {
-            Close();
+            this.Close();
         }
 
         /// <summary>

@@ -25,10 +25,10 @@ namespace DotNetScaffolder.Test.Core.Common.Forms
     [TestClass]
     public class HierarchyTreeViewUnitTest
     {
-        #region Public methods and operators
+        #region Public Methods And Operators
 
         /// <summary>
-        /// The hierarchy tree view unit test_ test enabled buttons when template node is selected.
+        ///     The hierarchy tree view unit test_ test enabled buttons when template node is selected.
         /// </summary>
         [TestMethod]
         public void HierarchyTreeViewUnitTest_TestEnabledButtonsWhenTemplateNodeIsSelected()
@@ -40,7 +40,8 @@ namespace DotNetScaffolder.Test.Core.Common.Forms
 
             // template.
             data.Children.Add(new Hierarchy { Name = "Entity", Item = template });
-            data.Children[0].Children.Add(new Hierarchy { Name = "Entity FrameWork Context", HierarchyType = HierarchyType.Item });
+            data.Children[0].Children.Add(
+                new Hierarchy { Name = "Entity FrameWork Context", HierarchyType = HierarchyType.Item });
             data.Children[1].Children.Add(new Hierarchy { Name = "Test 1", HierarchyType = HierarchyType.Item });
             data.Children[1].Children.Add(new Hierarchy { Name = "Test 1", HierarchyType = HierarchyType.Item });
 
@@ -88,7 +89,7 @@ namespace DotNetScaffolder.Test.Core.Common.Forms
         }
 
         /// <summary>
-        /// The hierarchy tree view unit test_ test method 1.
+        ///     The hierarchy tree view unit test_ test method 1.
         /// </summary>
         [TestMethod]
         public void HierarchyTreeViewUnitTest_TestMethod1()

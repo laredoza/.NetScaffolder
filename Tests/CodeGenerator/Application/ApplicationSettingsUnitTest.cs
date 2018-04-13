@@ -16,15 +16,15 @@ namespace DotNetScaffolder.Test.Application
     #endregion
 
     /// <summary>
-    /// The application settings unit test.
+    ///     The application settings unit test.
     /// </summary>
     [TestClass]
     public class ApplicationSettingsUnitTest
     {
-        #region Public methods and operators
+        #region Public Methods And Operators
 
         /// <summary>
-        /// The application settings unit test_ test.
+        ///     The application settings unit test_ test.
         /// </summary>
         [TestMethod]
         public void ApplicationSettingsUnitTest_Test()

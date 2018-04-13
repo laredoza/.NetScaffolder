@@ -26,14 +26,14 @@ namespace DotNetScaffolder.Presentation.Forms
         #region Fields
 
         /// <summary>
+        ///     The application configuration.
+        /// </summary>
+        private readonly IConfigurationApplicationService applicationConfiguration;
+
+        /// <summary>
         ///     The application service.
         /// </summary>
         private readonly IProjectDefinitionApplicationService applicationService;
-
-        /// <summary>
-        /// The application configuration.
-        /// </summary>
-        private readonly IConfigurationApplicationService applicationConfiguration;
 
         #endregion
 
@@ -44,22 +44,20 @@ namespace DotNetScaffolder.Presentation.Forms
         /// </summary>
         public Form1()
         {
-            InitializeComponent();
+            this.InitializeComponent();
 
             FilePersistenceOptions options = new FilePersistenceOptions { Path = @"Models\Banking.mdl" };
 
-            applicationService = new ProjectDefinitionApplicationServiceFile { FilePersistenceOptions = options };
-            applicationService.Load();
-            applicationService.ProjectDefinition.ModelPath = options.Path;
-            applicationService.ProjectDefinition.Version = 1;
+            this.applicationService = new ProjectDefinitionApplicationServiceFile { FilePersistenceOptions = options };
+            this.applicationService.Load();
+            this.applicationService.ProjectDefinition.ModelPath = options.Path;
+            this.applicationService.ProjectDefinition.Version = 1;
 
             FilePersistenceOptions configOptions = new FilePersistenceOptions { Path = @"Config\Settings.xml" };
-            applicationConfiguration = new ConfigurationApplicationServiceFile
-                                           {
-                                               FilePersistenceOptions = configOptions
-                                           };
+            this.applicationConfiguration =
+                new ConfigurationApplicationServiceFile { FilePersistenceOptions = configOptions };
 
-            applicationConfiguration.Load();
+            this.applicationConfiguration.Load();
 
             // Package package = new Package { Id = Guid.NewGuid(), Name = "Packages", HierarchyType = HierarchyType.Group};
             // package.Children.Add(new Package { Id = Guid.NewGuid(), Name = "Data", HierarchyType = HierarchyType.Group });
@@ -70,19 +68,20 @@ namespace DotNetScaffolder.Presentation.Forms
             // package.Children[0].Children[1].Children.Add(new Package { Id = Guid.NewGuid(), Name = "Mongo Official (Standard)", HierarchyType = HierarchyType.Item });
             // this.applicationConfiguration.ApplicationSettings.Packages.Add(package);
             // applicationConfiguration.Save();
-            TemplateManagementUserControl1.DataSource = applicationConfiguration.ApplicationSettings.Templates[0];
-            ManagePackageUserControl1.DataSource = applicationConfiguration.ApplicationSettings.Packages[0];
+            this.TemplateManagementUserControl1.DataSource =
+                this.applicationConfiguration.ApplicationSettings.Templates[0];
+            this.ManagePackageUserControl1.DataSource = this.applicationConfiguration.ApplicationSettings.Packages[0];
 
-            if (applicationConfiguration.ApplicationSettings.Templates.Count > 0)
+            if (this.applicationConfiguration.ApplicationSettings.Templates.Count > 0)
             {
-                ManagePackageUserControl1.Templates = applicationConfiguration.ApplicationSettings.Templates;
+                this.ManagePackageUserControl1.Templates = this.applicationConfiguration.ApplicationSettings.Templates;
             }
 
-            ProjectDetailsUserControl1.Project = applicationService.ProjectDefinition;
-            ProjectDomainUserControl1.SelectedIndexChanged += ProjectDomainUserControl1_SelectedIndexChanged;
-            ProjectDomainUserControl1.ApplicationService = applicationService;
-            projectDomainDetailsUserControl1.Packages = applicationConfiguration.ApplicationSettings.Packages;
-            projectDomainDetailsUserControl1.ApplicationService = applicationService;
+            this.ProjectDetailsUserControl1.Project = this.applicationService.ProjectDefinition;
+            this.ProjectDomainUserControl1.SelectedIndexChanged += this.ProjectDomainUserControl1_SelectedIndexChanged;
+            this.ProjectDomainUserControl1.ApplicationService = this.applicationService;
+            this.projectDomainDetailsUserControl1.Packages = this.applicationConfiguration.ApplicationSettings.Packages;
+            this.projectDomainDetailsUserControl1.ApplicationService = this.applicationService;
         }
 
         #endregion
@@ -100,11 +99,15 @@ namespace DotNetScaffolder.Presentation.Forms
         /// </param>
         private void button1_Click(object sender, EventArgs e)
         {
-            var result = MessageBox.Show(this, $"Are you sure you want to close the application?{Environment.NewLine}Any unsaved changes will be lost...", "Are you sure?", MessageBoxButtons.YesNo);
+            var result = MessageBox.Show(
+                this,
+                $"Are you sure you want to close the application?{Environment.NewLine}Any unsaved changes will be lost...",
+                "Are you sure?",
+                MessageBoxButtons.YesNo);
 
             if (result == DialogResult.Yes)
             {
-                Close();
+                this.Close();
             }
         }
 
@@ -119,15 +122,15 @@ namespace DotNetScaffolder.Presentation.Forms
         /// </param>
         private void button6_Click(object sender, EventArgs e)
         {
-            if (ProjectDetailsUserControl1.Validation() == 0)
+            if (this.ProjectDetailsUserControl1.Validation() == 0)
             {
                 // Save
-                applicationService.Save();
+                this.applicationService.Save();
             }
 
-            if (TemplateManagementUserControl1.Validation() == 0)
+            if (this.TemplateManagementUserControl1.Validation() == 0)
             {
-                applicationConfiguration.Save();
+                this.applicationConfiguration.Save();
             }
         }
 
@@ -143,10 +146,10 @@ namespace DotNetScaffolder.Presentation.Forms
         private void ProjectDomainUserControl1_SelectedIndexChanged(object sender, SelectedEventArgs e)
         {
             // Todo: Check Changed Status before changing 
-            if (applicationService.ProjectDefinition.Domains.Exists(d => d.Id == e.Id))
+            if (this.applicationService.ProjectDefinition.Domains.Exists(d => d.Id == e.Id))
             {
-                projectDomainDetailsUserControl1.SelectedDomain =
-                    applicationService.ProjectDefinition.Domains.FirstOrDefault(d => d.Id == e.Id);
+                this.projectDomainDetailsUserControl1.SelectedDomain =
+                    this.applicationService.ProjectDefinition.Domains.FirstOrDefault(d => d.Id == e.Id);
             }
         }
 

@@ -14,18 +14,18 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
     #endregion
 
     /// <summary>
-    /// The update tables from source form.
+    ///     The update tables from source form.
     /// </summary>
     public partial class UpdateTablesFromSourceForm : Form
     {
         #region Constructors and Destructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="UpdateTablesFromSourceForm"/> class.
+        ///     Initializes a new instance of the <see cref="UpdateTablesFromSourceForm" /> class.
         /// </summary>
         public UpdateTablesFromSourceForm()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
 
         #endregion
@@ -43,7 +43,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         /// </param>
         private void button3_Click(object sender, EventArgs e)
         {
-            Close();
+            this.Close();
         }
 
         #endregion

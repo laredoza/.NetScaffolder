@@ -59,28 +59,28 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         /// </summary>
         public ProjectDomainDetailsUserControl()
         {
-            InitializeComponent();
+            this.InitializeComponent();
 
-            ComboBoxNamingConvention.DisplayMember = "Text";
-            ComboBoxNamingConvention.ValueMember = "Value";
-            ComboBoxNamingConvention.DataSource = ReturnNamingConventions();
+            this.ComboBoxNamingConvention.DisplayMember = "Text";
+            this.ComboBoxNamingConvention.ValueMember = "Value";
+            this.ComboBoxNamingConvention.DataSource = this.ReturnNamingConventions();
 
-            ComboBoxSourceType.DisplayMember = "Text";
-            ComboBoxSourceType.ValueMember = "Value";
-            ComboBoxSourceType.DataSource = ReturnSourceTypes();
+            this.ComboBoxSourceType.DisplayMember = "Text";
+            this.ComboBoxSourceType.ValueMember = "Value";
+            this.ComboBoxSourceType.DataSource = this.ReturnSourceTypes();
 
-            ComboBoxDriver.DisplayMember = "Text";
-            ComboBoxDriver.ValueMember = "Value";
-            ComboBoxDriver.DataSource = ReturnDriverTypes();
+            this.ComboBoxDriver.DisplayMember = "Text";
+            this.ComboBoxDriver.ValueMember = "Value";
+            this.ComboBoxDriver.DataSource = this.ReturnDriverTypes();
 
-            ComboBoxCollectionOption.DisplayMember = "Text";
-            ComboBoxCollectionOption.ValueMember = "Value";
-            ComboBoxCollectionOption.DataSource = ReturnCollectionOptions();
+            this.ComboBoxCollectionOption.DisplayMember = "Text";
+            this.ComboBoxCollectionOption.ValueMember = "Value";
+            this.ComboBoxCollectionOption.DataSource = this.ReturnCollectionOptions();
         }
 
         #endregion
 
-        #region Properties
+        #region Public Properties
 
         /// <summary>
         ///     Gets or sets the application service.
@@ -89,26 +89,26 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         {
             get
             {
-                return applicationService;
+                return this.applicationService;
             }
 
             set
             {
-                applicationService = value;
+                this.applicationService = value;
 
-                if (Packages != null && Packages.Count > 0)
+                if (this.Packages != null && this.Packages.Count > 0)
                 {
-                    Package selectedPackage = SelectedPackage;
+                    Package selectedPackage = this.SelectedPackage;
 
-                    ComboBoxPackages.DisplayMember = "Name";
-                    ComboBoxPackages.ValueMember = "Id";
-                    ComboBoxPackages.DataSource = Packages[0].ReturnPackageItems(Packages);
-                    SelectedPackage = selectedPackage;
+                    this.ComboBoxPackages.DisplayMember = "Name";
+                    this.ComboBoxPackages.ValueMember = "Id";
+                    this.ComboBoxPackages.DataSource = this.Packages[0].ReturnPackageItems(this.Packages);
+                    this.SelectedPackage = selectedPackage;
                 }
 
-                if (ApplicationService != null && ApplicationService.ProjectDefinition != null)
+                if (this.ApplicationService != null && this.ApplicationService.ProjectDefinition != null)
                 {
-                    UpdateDataSource();
+                    this.UpdateDataSource();
                 }
             }
         }
@@ -122,10 +122,10 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
             {
                 string result = string.Empty;
 
-                if (SelectedDomain != null)
+                if (this.SelectedDomain != null)
                 {
-                    result = SelectedDomain.Name;
-                    Logger.Trace($"DomainName set to {SelectedDomain.Name}.");
+                    result = this.SelectedDomain.Name;
+                    Logger.Trace($"DomainName set to {this.SelectedDomain.Name}.");
                 }
                 else
                 {
@@ -138,9 +138,9 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
 
             set
             {
-                if (SelectedDomain != null)
+                if (this.SelectedDomain != null)
                 {
-                    SelectedDomain.Name = value;
+                    this.SelectedDomain.Name = value;
                 }
                 else
                 {
@@ -163,10 +163,10 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
             {
                 Guid result = Guid.Empty;
 
-                if (SelectedDomain != null)
+                if (this.SelectedDomain != null)
                 {
-                    result = SelectedDomain.CollectionOptionId;
-                    Logger.Trace($"CollectionOptionId set to {SelectedDomain.CollectionOptionId}.");
+                    result = this.SelectedDomain.CollectionOptionId;
+                    Logger.Trace($"CollectionOptionId set to {this.SelectedDomain.CollectionOptionId}.");
                 }
                 else
                 {
@@ -178,9 +178,9 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
 
             set
             {
-                if (SelectedDomain != null)
+                if (this.SelectedDomain != null)
                 {
-                    SelectedDomain.CollectionOptionId = value;
+                    this.SelectedDomain.CollectionOptionId = value;
                 }
                 else
                 {
@@ -196,13 +196,13 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         {
             get
             {
-                return selectedDomain;
+                return this.selectedDomain;
             }
 
             set
             {
-                selectedDomain = value;
-                UpdateDataSource();
+                this.selectedDomain = value;
+                this.UpdateDataSource();
             }
         }
 
@@ -215,10 +215,10 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
             {
                 Guid result = Guid.Empty;
 
-                if (SelectedDomain != null)
+                if (this.SelectedDomain != null)
                 {
-                    result = SelectedDomain.DriverId;
-                    Logger.Trace($"DriverId set to {SelectedDomain.DriverId}.");
+                    result = this.SelectedDomain.DriverId;
+                    Logger.Trace($"DriverId set to {this.SelectedDomain.DriverId}.");
                 }
                 else
                 {
@@ -230,9 +230,9 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
 
             set
             {
-                if (SelectedDomain != null)
+                if (this.SelectedDomain != null)
                 {
-                    SelectedDomain.DriverId = value;
+                    this.SelectedDomain.DriverId = value;
                 }
                 else
                 {
@@ -250,10 +250,10 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
             {
                 Guid result = Guid.Empty;
 
-                if (SelectedDomain != null)
+                if (this.SelectedDomain != null)
                 {
-                    result = SelectedDomain.DriverTypeId;
-                    Logger.Trace($"DriverTypeId set to {SelectedDomain.DriverTypeId}.");
+                    result = this.SelectedDomain.DriverTypeId;
+                    Logger.Trace($"DriverTypeId set to {this.SelectedDomain.DriverTypeId}.");
                 }
                 else
                 {
@@ -265,9 +265,9 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
 
             set
             {
-                if (SelectedDomain != null)
+                if (this.SelectedDomain != null)
                 {
-                    SelectedDomain.DriverTypeId = value;
+                    this.SelectedDomain.DriverTypeId = value;
                 }
                 else
                 {
@@ -285,10 +285,10 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
             {
                 Guid result = Guid.Empty;
 
-                if (SelectedDomain != null)
+                if (this.SelectedDomain != null)
                 {
-                    result = SelectedDomain.NamingConventionId;
-                    Logger.Trace($"NamingConventionId set to {SelectedDomain.NamingConventionId}.");
+                    result = this.SelectedDomain.NamingConventionId;
+                    Logger.Trace($"NamingConventionId set to {this.SelectedDomain.NamingConventionId}.");
                 }
                 else
                 {
@@ -300,9 +300,9 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
 
             set
             {
-                if (SelectedDomain != null && SelectedDomain.NamingConventionId != value)
+                if (this.SelectedDomain != null && this.SelectedDomain.NamingConventionId != value)
                 {
-                    SelectedDomain.NamingConventionId = value;
+                    this.SelectedDomain.NamingConventionId = value;
                 }
                 else
                 {
@@ -320,10 +320,10 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
             {
                 Package result = null;
 
-                if (SelectedDomain != null)
+                if (this.SelectedDomain != null)
                 {
-                    result = SelectedDomain.Package;
-                    Logger.Trace($"PackageId set to {SelectedDomain.Package.Id}.");
+                    result = this.SelectedDomain.Package;
+                    Logger.Trace($"PackageId set to {this.SelectedDomain.Package.Id}.");
                 }
                 else
                 {
@@ -335,9 +335,9 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
 
             set
             {
-                if (SelectedDomain != null)
+                if (this.SelectedDomain != null)
                 {
-                    SelectedDomain.Package = value;
+                    this.SelectedDomain.Package = value;
                 }
                 else
                 {
@@ -355,10 +355,10 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
             {
                 Guid result = Guid.Empty;
 
-                if (SelectedDomain != null)
+                if (this.SelectedDomain != null)
                 {
-                    result = SelectedDomain.SourceTypeId;
-                    Logger.Trace($"SourceTypeId set to {SelectedDomain.SourceTypeId}.");
+                    result = this.SelectedDomain.SourceTypeId;
+                    Logger.Trace($"SourceTypeId set to {this.SelectedDomain.SourceTypeId}.");
                 }
                 else
                 {
@@ -370,9 +370,9 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
 
             set
             {
-                if (SelectedDomain != null)
+                if (this.SelectedDomain != null)
                 {
-                    SelectedDomain.SourceTypeId = value;
+                    this.SelectedDomain.SourceTypeId = value;
                 }
                 else
                 {
@@ -383,7 +383,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
 
         #endregion
 
-        #region Public methods and operators
+        #region Public Methods And Operators
 
         /// <summary>
         ///     The return collection options.
@@ -523,7 +523,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         {
             Logger.Trace("Started Manage Source Clicked");
             ManageDataSourceForm manageDataSourceForm = new ManageDataSourceForm();
-            manageDataSourceForm.DataSource = SelectedDomain;
+            manageDataSourceForm.DataSource = this.SelectedDomain;
             manageDataSourceForm.ShowDialog();
             Logger.Trace("Completed Manage Source Clicked");
         }
@@ -539,10 +539,10 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         /// </param>
         private void ComboBoxCollectionOption_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (ComboBoxCollectionOption.SelectedItem != null)
+            if (this.ComboBoxCollectionOption.SelectedItem != null)
             {
-                SelectedCollectionOptionId =
-                    (Guid)(ComboBoxCollectionOption.SelectedItem as ComboboxItem).Value;
+                this.SelectedCollectionOptionId =
+                    (Guid)(this.ComboBoxCollectionOption.SelectedItem as ComboboxItem).Value;
             }
         }
 
@@ -557,12 +557,12 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         /// </param>
         private void ComboBoxDriver_SelectedIndexChanged(object sender, EventArgs e)
         {
-            SelectedDriver = (Guid)(ComboBoxDriver.SelectedItem as ComboboxItem).Value;
+            this.SelectedDriver = (Guid)(this.ComboBoxDriver.SelectedItem as ComboboxItem).Value;
 
-            ComboboxItem item = ComboBoxDriver.SelectedItem as ComboboxItem;
-            ComboBoxDriverType.DataSource = ReturnDriverTypes(item);
-            ComboBoxDriverType.DisplayMember = "Text";
-            ComboBoxDriverType.ValueMember = "Value";
+            ComboboxItem item = this.ComboBoxDriver.SelectedItem as ComboboxItem;
+            this.ComboBoxDriverType.DataSource = this.ReturnDriverTypes(item);
+            this.ComboBoxDriverType.DisplayMember = "Text";
+            this.ComboBoxDriverType.ValueMember = "Value";
         }
 
         /// <summary>
@@ -576,7 +576,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         /// </param>
         private void ComboBoxDriverType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            SelectedDriverType = (Guid)(ComboBoxDriverType.SelectedItem as ComboboxItem).Value;
+            this.SelectedDriverType = (Guid)(this.ComboBoxDriverType.SelectedItem as ComboboxItem).Value;
         }
 
         /// <summary>
@@ -590,7 +590,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         /// </param>
         private void ComboBoxNamingConvention_SelectedIndexChanged(object sender, EventArgs e)
         {
-            SelectedNamingConvention = (Guid)(ComboBoxNamingConvention.SelectedItem as ComboboxItem).Value;
+            this.SelectedNamingConvention = (Guid)(this.ComboBoxNamingConvention.SelectedItem as ComboboxItem).Value;
         }
 
         /// <summary>
@@ -604,7 +604,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         /// </param>
         private void ComboBoxPackages_SelectedIndexChanged(object sender, EventArgs e)
         {
-            SelectedPackage = ComboBoxPackages.SelectedItem as Package;
+            this.SelectedPackage = this.ComboBoxPackages.SelectedItem as Package;
         }
 
         /// <summary>
@@ -618,7 +618,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         /// </param>
         private void ComboBoxSourceType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            SelectedSourceType = (Guid)(ComboBoxSourceType.SelectedItem as ComboboxItem).Value;
+            this.SelectedSourceType = (Guid)(this.ComboBoxSourceType.SelectedItem as ComboboxItem).Value;
         }
 
         /// <summary>
@@ -628,35 +628,35 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         {
             Logger.Trace("Started UpdateDataSource()");
 
-            if (SelectedDomain != null)
+            if (this.SelectedDomain != null)
             {
-                TextBoxName.Text = SelectedDomain.Name;
-                if (SelectedNamingConvention != Guid.Empty)
+                this.TextBoxName.Text = this.SelectedDomain.Name;
+                if (this.SelectedNamingConvention != Guid.Empty)
                 {
-                    ComboBoxNamingConvention.SelectedValue = SelectedNamingConvention;
+                    this.ComboBoxNamingConvention.SelectedValue = this.SelectedNamingConvention;
                 }
 
-                if (SelectedSourceType != Guid.Empty)
+                if (this.SelectedSourceType != Guid.Empty)
                 {
-                    ComboBoxSourceType.SelectedValue = SelectedSourceType;
+                    this.ComboBoxSourceType.SelectedValue = this.SelectedSourceType;
                 }
 
-                if (SelectedDriver != Guid.Empty)
+                if (this.SelectedDriver != Guid.Empty)
                 {
-                    ComboBoxDriver.SelectedValue = SelectedDriver;
+                    this.ComboBoxDriver.SelectedValue = this.SelectedDriver;
                 }
 
-                if (SelectedDriverType != Guid.Empty)
+                if (this.SelectedDriverType != Guid.Empty)
                 {
-                    ComboBoxDriverType.SelectedValue = SelectedDriverType;
+                    this.ComboBoxDriverType.SelectedValue = this.SelectedDriverType;
                 }
 
-                if (ApplicationService != null && ApplicationService.ProjectDefinition != null)
+                if (this.ApplicationService != null && this.ApplicationService.ProjectDefinition != null)
                 {
-                    ComboBoxCollectionOption.SelectedValue = SelectedCollectionOptionId;
+                    this.ComboBoxCollectionOption.SelectedValue = this.SelectedCollectionOptionId;
                 }
 
-                ComboBoxPackages.SelectedValue = SelectedDomain.Package.Id;
+                this.ComboBoxPackages.SelectedValue = this.SelectedDomain.Package.Id;
             }
 
             Logger.Trace("Completed UpdateDataSource()");

@@ -20,7 +20,7 @@ namespace DotNetScaffolder.Test.Components.NamingConventions
     [TestClass]
     public class TitleCaseNoUnderScoreNamingConventionUnitTest
     {
-        #region Public methods and operators
+        #region Public Methods And Operators
 
         /// <summary>
         ///     Test ApplyNamingConvention

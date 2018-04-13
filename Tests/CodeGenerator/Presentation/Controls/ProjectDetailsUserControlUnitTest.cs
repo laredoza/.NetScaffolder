@@ -21,7 +21,7 @@ namespace DotNetScaffolder.Test.Presentation.Controls
     [TestClass]
     public class ProjectDetailsUserControlUnitTest
     {
-        #region Public methods and operators
+        #region Public Methods And Operators
 
         /// <summary>
         ///     The project details user control unit test_ test method.

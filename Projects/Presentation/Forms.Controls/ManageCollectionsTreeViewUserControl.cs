@@ -29,19 +29,19 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         /// </summary>
         public ManageCollectionsTreeViewUserControl()
         {
-            InitializeComponent();
-            treeView1.AfterSelect += TreeView1_AfterSelect;
-            treeView1.BeforeSelect += TreeView1_BeforeSelect;
-            BtnUp.Click += BtnUp_Click;
-            BtnDown.Click += BtnDown_Click;
-            BtnDelete.Click += BtnDelete_Click;
-            BtnAddGroup.Click += BtnAddGroup_Click;
-            BtnAddItem.Click += BtnAddItem_Click;
+            this.InitializeComponent();
+            this.treeView1.AfterSelect += this.TreeView1_AfterSelect;
+            this.treeView1.BeforeSelect += this.TreeView1_BeforeSelect;
+            this.BtnUp.Click += this.BtnUp_Click;
+            this.BtnDown.Click += this.BtnDown_Click;
+            this.BtnDelete.Click += this.BtnDelete_Click;
+            this.BtnAddGroup.Click += this.BtnAddGroup_Click;
+            this.BtnAddItem.Click += this.BtnAddItem_Click;
         }
 
         #endregion
 
-        #region Properties
+        #region Public Properties
 
         /// <summary>
         ///     Gets or sets the after select.
@@ -90,22 +90,22 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         {
             get
             {
-                return treeView1.Data;
+                return this.treeView1.Data;
             }
 
             set
             {
-                if (treeView1.Data != value)
+                if (this.treeView1.Data != value)
                 {
-                    treeView1.Data = value;
-                    treeView1.ExpandAll();
+                    this.treeView1.Data = value;
+                    this.treeView1.ExpandAll();
                 }
             }
         }
 
         #endregion
 
-        #region Public methods and operators
+        #region Public Methods And Operators
 
         /// <summary>
         /// The move down.
@@ -115,7 +115,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         /// </param>
         public void MoveDown(TreeNode selectedNode)
         {
-            treeView1.MoveDown(selectedNode);
+            this.treeView1.MoveDown(selectedNode);
         }
 
         /// <summary>
@@ -126,7 +126,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         /// </param>
         public void MoveUp(TreeNode selectedNode)
         {
-            treeView1.MoveUp(selectedNode);
+            this.treeView1.MoveUp(selectedNode);
         }
 
         /// <summary>
@@ -134,10 +134,10 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         /// </summary>
         public void SelectFirstNode()
         {
-            if (treeView1.Nodes.Count > 0)
+            if (this.treeView1.Nodes.Count > 0)
             {
-                treeView1.SelectNode(treeView1.Nodes[0]);
-                OnAfterSelectChanged(new TreeViewEventArgs(treeView1.Nodes[0]), AfterSelect);
+                this.treeView1.SelectNode(this.treeView1.Nodes[0]);
+                this.OnAfterSelectChanged(new TreeViewEventArgs(this.treeView1.Nodes[0]), this.AfterSelect);
             }
         }
 
@@ -207,7 +207,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         /// </param>
         private void BtnAddGroup_Click(object sender, EventArgs e)
         {
-            OnButtonClicked(e, BtnAddGroupClick);
+            this.OnButtonClicked(e, this.BtnAddGroupClick);
         }
 
         /// <summary>
@@ -221,7 +221,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         /// </param>
         private void BtnAddItem_Click(object sender, EventArgs e)
         {
-            OnButtonClicked(e, BtnAddItemClick);
+            this.OnButtonClicked(e, this.BtnAddItemClick);
         }
 
         /// <summary>
@@ -235,7 +235,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         /// </param>
         private void BtnDelete_Click(object sender, EventArgs e)
         {
-            OnButtonClicked(e, BtnDeleteClick);
+            this.OnButtonClicked(e, this.BtnDeleteClick);
         }
 
         /// <summary>
@@ -249,7 +249,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         /// </param>
         private void BtnDown_Click(object sender, EventArgs e)
         {
-            OnButtonClicked(e, BtnDownClick);
+            this.OnButtonClicked(e, this.BtnDownClick);
         }
 
         /// <summary>
@@ -263,7 +263,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         /// </param>
         private void BtnUp_Click(object sender, EventArgs e)
         {
-            OnButtonClicked(e, BtnUpClick);
+            this.OnButtonClicked(e, this.BtnUpClick);
         }
 
         /// <summary>
@@ -278,14 +278,14 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         private void TreeView1_AfterSelect(object sender, TreeViewEventArgs e)
         {
             // throw new System.NotImplementedException();
-            treeView1.SelectNode(e.Node);
-            BtnUp.Enabled = treeView1.UpEnabled;
-            BtnDown.Enabled = treeView1.DownEnabled;
-            BtnDelete.Enabled = treeView1.DeleteEnabled;
-            BtnAddGroup.Enabled = treeView1.AddGroupEnabled;
-            BtnAddItem.Enabled = treeView1.AddItemEnabled;
+            this.treeView1.SelectNode(e.Node);
+            this.BtnUp.Enabled = this.treeView1.UpEnabled;
+            this.BtnDown.Enabled = this.treeView1.DownEnabled;
+            this.BtnDelete.Enabled = this.treeView1.DeleteEnabled;
+            this.BtnAddGroup.Enabled = this.treeView1.AddGroupEnabled;
+            this.BtnAddItem.Enabled = this.treeView1.AddItemEnabled;
 
-            OnAfterSelectChanged(e, AfterSelect);
+            this.OnAfterSelectChanged(e, this.AfterSelect);
         }
 
         /// <summary>
@@ -299,7 +299,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         /// </param>
         private void TreeView1_BeforeSelect(object sender, TreeViewCancelEventArgs e)
         {
-            OnBeforeSelectChanged(e, BeforeSelect);
+            this.OnBeforeSelectChanged(e, this.BeforeSelect);
         }
 
         #endregion

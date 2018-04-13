@@ -56,20 +56,20 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         /// </summary>
         public TemplateDetailsUserControl()
         {
-            InitializeComponent();
+            this.InitializeComponent();
 
-            ComboBoxLanguageOutput.DataSource = ReturnLanguageOutputs();
-            ComboBoxLanguageOutput.DisplayMember = "Text";
-            ComboBoxLanguageOutput.ValueMember = "Value";
+            this.ComboBoxLanguageOutput.DataSource = this.ReturnLanguageOutputs();
+            this.ComboBoxLanguageOutput.DisplayMember = "Text";
+            this.ComboBoxLanguageOutput.ValueMember = "Value";
 
-            ComboBoxGeneratorOutput.DataSource = ReturnOutputGenerators();
-            ComboBoxGeneratorOutput.DisplayMember = "Text";
-            ComboBoxGeneratorOutput.ValueMember = "Value";
+            this.ComboBoxGeneratorOutput.DataSource = this.ReturnOutputGenerators();
+            this.ComboBoxGeneratorOutput.DisplayMember = "Text";
+            this.ComboBoxGeneratorOutput.ValueMember = "Value";
         }
 
         #endregion
 
-        #region Properties
+        #region Public Properties
 
         /// <summary>
         ///     Gets or sets the config location.
@@ -80,10 +80,10 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
             {
                 ConfigLocation result = ConfigLocation.Data;
 
-                if (data != null)
+                if (this.data != null)
                 {
-                    result = Data.ConfigLocation;
-                    Logger.Trace($"ConfigLocation set to {Data.ConfigLocation}.");
+                    result = this.Data.ConfigLocation;
+                    Logger.Trace($"ConfigLocation set to {this.Data.ConfigLocation}.");
                 }
                 else
                 {
@@ -96,9 +96,9 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
 
             set
             {
-                if (Data != null)
+                if (this.Data != null)
                 {
-                    Data.ConfigLocation = value;
+                    this.Data.ConfigLocation = value;
 
                     // this.TreeNode.Text = this.TextBoxName.Text;
                 }
@@ -116,15 +116,15 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         {
             get
             {
-                return data;
+                return this.data;
             }
 
             set
             {
-                if (data != value)
+                if (this.data != value)
                 {
-                    data = value;
-                    UpdateDataSource();
+                    this.data = value;
+                    this.UpdateDataSource();
                 }
             }
         }
@@ -138,10 +138,10 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
             {
                 Guid result = Guid.Empty;
 
-                if (data != null)
+                if (this.data != null)
                 {
-                    result = Data.GeneratorTypeId;
-                    Logger.Trace($"GeneratorTypeId set to {Data.GeneratorTypeId}.");
+                    result = this.Data.GeneratorTypeId;
+                    Logger.Trace($"GeneratorTypeId set to {this.Data.GeneratorTypeId}.");
                 }
                 else
                 {
@@ -154,9 +154,9 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
 
             set
             {
-                if (Data != null)
+                if (this.Data != null)
                 {
-                    Data.GeneratorTypeId = value;
+                    this.Data.GeneratorTypeId = value;
 
                     // this.TreeNode.Text = this.TextBoxName.Text;
                 }
@@ -176,10 +176,10 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
             {
                 Guid result = Guid.Empty;
 
-                if (data != null)
+                if (this.data != null)
                 {
-                    result = Data.LanguageOutputId;
-                    Logger.Trace($"LanguageOutputId set to {Data.LanguageOutputId}.");
+                    result = this.Data.LanguageOutputId;
+                    Logger.Trace($"LanguageOutputId set to {this.Data.LanguageOutputId}.");
                 }
                 else
                 {
@@ -192,9 +192,9 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
 
             set
             {
-                if (Data != null)
+                if (this.Data != null)
                 {
-                    Data.LanguageOutputId = value;
+                    this.Data.LanguageOutputId = value;
 
                     // this.TreeNode.Text = this.TextBoxName.Text;
                 }
@@ -206,7 +206,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether template enabled.
+        ///     Gets or sets a value indicating whether template enabled.
         /// </summary>
         public bool TemplateEnabled
         {
@@ -214,10 +214,10 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
             {
                 bool result = false;
 
-                if (data != null)
+                if (this.data != null)
                 {
-                    result = Data.Enabled;
-                    Logger.Trace($"Enabled set to {Data.Enabled}.");
+                    result = this.Data.Enabled;
+                    Logger.Trace($"Enabled set to {this.Data.Enabled}.");
                 }
                 else
                 {
@@ -230,9 +230,9 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
 
             set
             {
-                if (Data != null)
+                if (this.Data != null)
                 {
-                    Data.Enabled = value;
+                    this.Data.Enabled = value;
                 }
                 else
                 {
@@ -250,10 +250,10 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
             {
                 string result = string.Empty;
 
-                if (data != null)
+                if (this.data != null)
                 {
-                    result = Data.Name;
-                    Logger.Trace($"TemplateName set to {Data.Name}.");
+                    result = this.Data.Name;
+                    Logger.Trace($"TemplateName set to {this.Data.Name}.");
                 }
                 else
                 {
@@ -266,10 +266,10 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
 
             set
             {
-                if (Data != null)
+                if (this.Data != null)
                 {
-                    Data.Name = value;
-                    TreeNode.Text = TextBoxName.Text;
+                    this.Data.Name = value;
+                    this.TreeNode.Text = this.TextBoxName.Text;
                 }
                 else
                 {
@@ -287,10 +287,10 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
             {
                 string result = string.Empty;
 
-                if (data != null)
+                if (this.data != null)
                 {
-                    result = Data.TemplatePath;
-                    Logger.Trace($"TemplatePath set to {Data.TemplatePath}.");
+                    result = this.Data.TemplatePath;
+                    Logger.Trace($"TemplatePath set to {this.Data.TemplatePath}.");
                 }
                 else
                 {
@@ -303,9 +303,9 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
 
             set
             {
-                if (Data != null)
+                if (this.Data != null)
                 {
-                    Data.TemplatePath = value;
+                    this.Data.TemplatePath = value;
                 }
                 else
                 {
@@ -328,10 +328,10 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
             {
                 double result = 1;
 
-                if (data != null)
+                if (this.data != null)
                 {
-                    result = Data.Version;
-                    Logger.Trace($"Version set to {Data.Version}.");
+                    result = this.Data.Version;
+                    Logger.Trace($"Version set to {this.Data.Version}.");
                 }
                 else
                 {
@@ -344,9 +344,9 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
 
             set
             {
-                if (Data != null)
+                if (this.Data != null)
                 {
-                    Data.Version = value;
+                    this.Data.Version = value;
                 }
                 else
                 {
@@ -357,7 +357,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
 
         #endregion
 
-        #region Public methods and operators
+        #region Public Methods And Operators
 
         /// <summary>
         ///     Return driver types.
@@ -417,62 +417,60 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
 
             int result = 0;
 
-            if (Data != null)
+            if (this.Data != null)
             {
-                errorProvider1.Clear();
-                Data.Validate();
+                this.errorProvider1.Clear();
+                this.Data.Validate();
 
-                if (Data.ValidationResult.Count > 0)
+                if (this.Data.ValidationResult.Count > 0)
                 {
                     Validation validation = null;
 
-                    if (data.ValidationResult.Any(v => v.ValidationType == ValidationType.TemplateName))
+                    if (this.data.ValidationResult.Any(v => v.ValidationType == ValidationType.TemplateName))
                     {
-                        validation = data.ValidationResult.FirstOrDefault(v => v.ValidationType == ValidationType.TemplateName);
-                        TextBoxName.Focus();
-                        errorProvider1.SetError(
-                            TextBoxName,
-                            validation.Description);
+                        validation =
+                            this.data.ValidationResult.FirstOrDefault(
+                                v => v.ValidationType == ValidationType.TemplateName);
+                        this.TextBoxName.Focus();
+                        this.errorProvider1.SetError(this.TextBoxName, validation.Description);
                         result++;
                     }
 
-                    if (data.ValidationResult.Any(v => v.ValidationType == ValidationType.TemplateLanguageOutputId))
+                    if (this.data.ValidationResult.Any(
+                        v => v.ValidationType == ValidationType.TemplateLanguageOutputId))
                     {
-                        validation = data.ValidationResult.FirstOrDefault(v => v.ValidationType == ValidationType.TemplateLanguageOutputId);
-                        ComboBoxLanguageOutput.Focus();
-                        errorProvider1.SetError(
-                            ComboBoxLanguageOutput,
-                            validation.Description);
+                        validation = this.data.ValidationResult.FirstOrDefault(
+                            v => v.ValidationType == ValidationType.TemplateLanguageOutputId);
+                        this.ComboBoxLanguageOutput.Focus();
+                        this.errorProvider1.SetError(this.ComboBoxLanguageOutput, validation.Description);
                         result++;
                     }
 
-                    if (data.ValidationResult.Any(v => v.ValidationType == ValidationType.TemplateGeneratorTypeId))
+                    if (this.data.ValidationResult.Any(v => v.ValidationType == ValidationType.TemplateGeneratorTypeId))
                     {
-                        validation = data.ValidationResult.FirstOrDefault(v => v.ValidationType == ValidationType.TemplateGeneratorTypeId);
-                        ComboBoxGeneratorOutput.Focus();
-                        errorProvider1.SetError(
-                            ComboBoxGeneratorOutput,
-                            validation.Description);
+                        validation = this.data.ValidationResult.FirstOrDefault(
+                            v => v.ValidationType == ValidationType.TemplateGeneratorTypeId);
+                        this.ComboBoxGeneratorOutput.Focus();
+                        this.errorProvider1.SetError(this.ComboBoxGeneratorOutput, validation.Description);
                         result++;
                     }
 
-                    if (data.ValidationResult.Any(v => v.ValidationType == ValidationType.TemplatePath))
+                    if (this.data.ValidationResult.Any(v => v.ValidationType == ValidationType.TemplatePath))
                     {
-                        validation = data.ValidationResult.FirstOrDefault(v => v.ValidationType == ValidationType.TemplatePath);
-                        TextBoxTemplate.Focus();
-                        errorProvider1.SetError(
-                            TextBoxTemplate,
-                            validation.Description);
+                        validation =
+                            this.data.ValidationResult.FirstOrDefault(
+                                v => v.ValidationType == ValidationType.TemplatePath);
+                        this.TextBoxTemplate.Focus();
+                        this.errorProvider1.SetError(this.TextBoxTemplate, validation.Description);
                         result++;
                     }
 
-                    if (data.ValidationResult.Any(v => v.ValidationType == ValidationType.TemplateVersion))
+                    if (this.data.ValidationResult.Any(v => v.ValidationType == ValidationType.TemplateVersion))
                     {
-                        validation = data.ValidationResult.FirstOrDefault(v => v.ValidationType == ValidationType.TemplateVersion);
-                        TextBoxVersion.Focus();
-                        errorProvider1.SetError(
-                            TextBoxVersion,
-                            validation.Description);
+                        validation = this.data.ValidationResult.FirstOrDefault(
+                            v => v.ValidationType == ValidationType.TemplateVersion);
+                        this.TextBoxVersion.Focus();
+                        this.errorProvider1.SetError(this.TextBoxVersion, validation.Description);
                         result++;
                     }
                 }
@@ -497,7 +495,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         /// </param>
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-            TemplateEnabled = (sender as CheckBox).Checked;
+            this.TemplateEnabled = (sender as CheckBox).Checked;
         }
 
         /// <summary>
@@ -515,7 +513,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
 
             if (selectedItem != null)
             {
-                GeneratorTypeId = new Guid(selectedItem.Value.ToString());
+                this.GeneratorTypeId = new Guid(selectedItem.Value.ToString());
             }
         }
 
@@ -534,7 +532,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
 
             if (selectedItem != null)
             {
-                LanguageId = new Guid(selectedItem.Value.ToString());
+                this.LanguageId = new Guid(selectedItem.Value.ToString());
             }
         }
 
@@ -551,9 +549,9 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         {
             if ((sender as ComboBox).SelectedItem != null)
             {
-                ConfigLocation =
-                    (ConfigLocation)
-                    System.Enum.Parse(typeof(ConfigLocation), (sender as ComboBox).SelectedItem.ToString());
+                this.ConfigLocation = (ConfigLocation)System.Enum.Parse(
+                    typeof(ConfigLocation),
+                    (sender as ComboBox).SelectedItem.ToString());
             }
         }
 
@@ -568,7 +566,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         /// </param>
         private void TextBoxName_TextChanged(object sender, EventArgs e)
         {
-            TemplateName = TextBoxName.Text;
+            this.TemplateName = this.TextBoxName.Text;
         }
 
         /// <summary>
@@ -582,7 +580,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         /// </param>
         private void TextBoxTemplate_TextChanged(object sender, EventArgs e)
         {
-            TemplatePath = TextBoxTemplate.Text;
+            this.TemplatePath = this.TextBoxTemplate.Text;
         }
 
         /// <summary>
@@ -596,14 +594,14 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         /// </param>
         private void TextBoxVersion_TextChanged(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(TextBoxVersion.Text))
+            if (!string.IsNullOrEmpty(this.TextBoxVersion.Text))
             {
-                Version = Convert.ToDouble(TextBoxVersion.Text);
+                this.Version = Convert.ToDouble(this.TextBoxVersion.Text);
             }
             else
             {
-                Version = 0;
-                TextBoxVersion.Text = 0.ToString();
+                this.Version = 0;
+                this.TextBoxVersion.Text = 0.ToString();
             }
         }
 
@@ -612,21 +610,21 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         /// </summary>
         private void UpdateDataSource()
         {
-            TextBoxName.Text = Data.Name;
-            TextBoxTemplate.Text = Data.TemplatePath;
-            TextBoxVersion.Text = Data.Version.ToString();
-            ComboBoxSetupLocation.SelectedIndex = Data.ConfigLocation.GetHashCode();
-            CheckBoxEnabled.Checked = Data.Enabled;
+            this.TextBoxName.Text = this.Data.Name;
+            this.TextBoxTemplate.Text = this.Data.TemplatePath;
+            this.TextBoxVersion.Text = this.Data.Version.ToString();
+            this.ComboBoxSetupLocation.SelectedIndex = this.Data.ConfigLocation.GetHashCode();
+            this.CheckBoxEnabled.Checked = this.Data.Enabled;
 
-            if (data.HierarchyType == HierarchyType.Item)
+            if (this.data.HierarchyType == HierarchyType.Item)
             {
-                ComboBoxLanguageOutput.SelectedValue = Data.LanguageOutputId;
-                ComboBoxGeneratorOutput.SelectedValue = Data.GeneratorTypeId;
-                PanelTemplate.Visible = true;
+                this.ComboBoxLanguageOutput.SelectedValue = this.Data.LanguageOutputId;
+                this.ComboBoxGeneratorOutput.SelectedValue = this.Data.GeneratorTypeId;
+                this.PanelTemplate.Visible = true;
             }
             else
             {
-                PanelTemplate.Visible = false;
+                this.PanelTemplate.Visible = false;
             }
         }
 

@@ -55,8 +55,13 @@ namespace DotNetScaffolder.Test.Application.ApplicationService
                                         Name = "Template",
                                         Version = 1,
                                         TemplatePath = "Test.t4",
-                                        LanguageOutputId = new Guid(ScaffoldConfig.LanguageOutputs[0].Metadata["ValueMetaData"].ToString()),
-                                        GeneratorTypeId = new Guid(ScaffoldConfig.OutputGenerators[0].Metadata["ValueMetaData"].ToString())
+                                        LanguageOutputId =
+                                            new Guid(
+                                                ScaffoldConfig.LanguageOutputs[0].Metadata["ValueMetaData"]
+                                                    .ToString()),
+                                        GeneratorTypeId = new Guid(
+                                            ScaffoldConfig.OutputGenerators[0].Metadata["ValueMetaData"]
+                                                .ToString())
                                     };
 
             applicationService.ApplicationSettings.Templates.Add(template);

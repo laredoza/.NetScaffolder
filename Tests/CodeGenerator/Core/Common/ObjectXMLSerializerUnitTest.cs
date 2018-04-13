@@ -24,7 +24,7 @@ namespace DotNetScaffolder.Test.Core.Common
     [TestClass]
     public class ObjectXMLSerializerUnitTest
     {
-        #region Public methods and operators
+        #region Public Methods And Operators
 
         /// <summary>
         ///     Tests the Binary serialized format

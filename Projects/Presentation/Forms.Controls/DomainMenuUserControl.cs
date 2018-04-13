@@ -23,7 +23,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
     #endregion
 
     /// <summary>
-    /// The domain menu user control.
+    ///     The domain menu user control.
     /// </summary>
     public partial class DomainMenuUserControl : UserControl
     {
@@ -39,12 +39,12 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         #region Fields
 
         /// <summary>
-        /// The active control.
+        ///     The active control.
         /// </summary>
         private Control activeControl;
 
         /// <summary>
-        /// The data source.
+        ///     The data source.
         /// </summary>
         private DomainDefinition dataSource;
 
@@ -53,58 +53,58 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         #region Constructors and Destructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="DomainMenuUserControl"/> class.
+        ///     Initializes a new instance of the <see cref="DomainMenuUserControl" /> class.
         /// </summary>
         public DomainMenuUserControl()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
 
         #endregion
 
-        #region Properties
+        #region Public Properties
 
         /// <summary>
         ///     Gets or sets the data source.
         /// </summary>
         public DomainDefinition DataSource
         {
-            get => dataSource;
+            get => this.dataSource;
             set
             {
-                if (dataSource != value)
+                if (this.dataSource != value)
                 {
-                    dataSource = value;
-                    UpdateDataSource();
+                    this.dataSource = value;
+                    this.UpdateDataSource();
                 }
             }
         }
 
         /// <summary>
-        /// Gets or sets the output path.
+        ///     Gets or sets the output path.
         /// </summary>
         public string OutputPath { get; set; }
 
         /// <summary>
-        /// Gets or sets the parent config control.
+        ///     Gets or sets the parent config control.
         /// </summary>
         public Control ParentConfigControl { get; set; }
 
         #endregion
 
-        #region Public methods and operators
+        #region Public Methods And Operators
 
         /// <summary>
-        /// The save.
+        ///     The save.
         /// </summary>
         public void Save()
         {
             Logger.Trace("Started Save()");
 
-            if (DataSource != null)
+            if (this.DataSource != null)
             {
-                var parameters = new Dictionary<string, string> { { "basePath", OutputPath } };
-                foreach (TreeNode node in DomainTreeView.Nodes)
+                var parameters = new Dictionary<string, string> { { "basePath", this.OutputPath } };
+                foreach (TreeNode node in this.DomainTreeView.Nodes)
                 {
                     (node.Tag as IDataTypeUI<IDictionary<string, string>>)?.SaveConfig(parameters);
                 }
@@ -127,11 +127,11 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         {
             Logger.Trace("Started UpdateDataSource()");
 
-            if (DataSource != null)
+            if (this.DataSource != null)
             {
-                foreach (var hierarchy in DataSource.Package.Templates)
+                foreach (var hierarchy in this.DataSource.Package.Templates)
                 {
-                    var parameters = new Dictionary<string, string> { { "basePath", OutputPath } };
+                    var parameters = new Dictionary<string, string> { { "basePath", this.OutputPath } };
 
                     var template = hierarchy;
                     var dataType = ScaffoldConfig.ReturnDataType(template.DataType);
@@ -143,23 +143,24 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
 
                     if (control == null) continue;
 
-                    configControl.OnNavigationChanged += ConfigControlOnOnNavigationChanged;
+                    configControl.OnNavigationChanged += this.ConfigControlOnOnNavigationChanged;
 
                     control.Visible = false;
-                    ParentConfigControl.Controls.Add(control);
+                    this.ParentConfigControl.Controls.Add(control);
 
-                    var node = new TreeNode { Tag = configControl, Text = navigation.Name, Name = navigation.Id.ToString() };
+                    var node = new TreeNode
+                                   {
+                                       Tag = configControl,
+                                       Text = navigation.Name,
+                                       Name = navigation.Id.ToString()
+                                   };
 
                     if (navigation.Children.Any())
                     {
                         foreach (var child in navigation.Children)
                         {
-                            node.Nodes.Add(new TreeNode
-                                               {
-                                                   Tag = configControl,
-                                                   Text = child.Name,
-                                                   Name = child.Id.ToString()
-                                               });
+                            node.Nodes.Add(
+                                new TreeNode { Tag = configControl, Text = child.Name, Name = child.Id.ToString() });
                         }
                     }
                     else
@@ -167,7 +168,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
                         node.Tag = configControl;
                     }
 
-                    DomainTreeView.Nodes.Add(node);
+                    this.DomainTreeView.Nodes.Add(node);
                 }
             }
             else
@@ -194,13 +195,13 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         private void ConfigControlOnOnNavigationChanged(object sender, IDataType<IDictionary<string, string>> type)
         {
             var navigation = type.ReturnNavigation();
-            var node = DomainTreeView.Nodes.Find(navigation.Id.ToString(), false).FirstOrDefault();
+            var node = this.DomainTreeView.Nodes.Find(navigation.Id.ToString(), false).FirstOrDefault();
 
             if (node != null)
             {
                 foreach (var nav in navigation.Children)
                 {
-                    var childNode = DomainTreeView.Nodes.Find(nav.Id.ToString(), false).FirstOrDefault();
+                    var childNode = this.DomainTreeView.Nodes.Find(nav.Id.ToString(), false).FirstOrDefault();
 
                     if (childNode != null)
                     {
@@ -208,12 +209,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
                     }
                     else
                     {
-                        childNode = new TreeNode
-                                        {
-                                            Tag = node.Tag,
-                                            Text = nav.Name,
-                                            Name = nav.Id.ToString()
-                                        };
+                        childNode = new TreeNode { Tag = node.Tag, Text = nav.Name, Name = nav.Id.ToString() };
                         node.Nodes.Add(childNode);
                         node.Expand();
                     }
@@ -232,22 +228,23 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         /// </param>
         private void DomainTreeView_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            if (activeControl != null)
+            if (this.activeControl != null)
             {
-                activeControl.Visible = false;
+                this.activeControl.Visible = false;
             }
 
             if (e.Node.Tag is IDataTypeUI<IDictionary<string, string>> configControl)
             {
-                var parameters = new Dictionary<string, string> { { "basePath", OutputPath }, { "name", e.Node.Name } };
+                var parameters =
+                    new Dictionary<string, string> { { "basePath", this.OutputPath }, { "name", e.Node.Name } };
 
                 configControl.LoadConfig(parameters);
 
                 if (e.Node.Tag is Control control)
                 {
-                    activeControl = control;
-                    activeControl.Visible = true;
-                    activeControl.BringToFront();
+                    this.activeControl = control;
+                    this.activeControl.Visible = true;
+                    this.activeControl.BringToFront();
                 }
             }
         }

@@ -17,7 +17,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
     /// </summary>
     public class SelectedEventArgs
     {
-        #region Properties
+        #region Public Properties
 
         /// <summary>
         ///     Gets or sets the id.

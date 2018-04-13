@@ -13,15 +13,15 @@ namespace DotNetScaffolder.Test.Project
     #endregion
 
     /// <summary>
-    /// The project definition unit test.
+    ///     The project definition unit test.
     /// </summary>
     [TestClass]
     public class ProjectDefinitionUnitTest
     {
-        #region Public methods and operators
+        #region Public Methods And Operators
 
         /// <summary>
-        /// The test method 1.
+        ///     The test method 1.
         /// </summary>
         [TestMethod]
         public void TestMethod1()

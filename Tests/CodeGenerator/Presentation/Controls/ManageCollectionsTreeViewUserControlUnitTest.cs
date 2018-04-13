@@ -22,10 +22,10 @@ namespace DotNetScaffolder.Test.Presentation.Controls
     [TestClass]
     public class ManageCollectionsTreeViewUserControlUnitTest
     {
-        #region Public methods and operators
+        #region Public Methods And Operators
 
         /// <summary>
-        /// The manage collections tree view user control unit test_ test method.
+        ///     The manage collections tree view user control unit test_ test method.
         /// </summary>
         [TestMethod]
         public void ManageCollectionsTreeViewUserControlUnitTest_TestMethod()

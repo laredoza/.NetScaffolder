@@ -13,15 +13,15 @@ namespace DotNetScaffolder.Test.Components.Drivers
     #endregion
 
     /// <summary>
-    /// The ef sql server driver unit test.
+    ///     The ef sql server driver unit test.
     /// </summary>
     [TestClass]
     public class EFSqlServerDriverUnitTest
     {
-        #region Public methods and operators
+        #region Public Methods And Operators
 
         /// <summary>
-        /// The test method 1.
+        ///     The test method 1.
         /// </summary>
         [TestMethod]
         public void TestMethod1()

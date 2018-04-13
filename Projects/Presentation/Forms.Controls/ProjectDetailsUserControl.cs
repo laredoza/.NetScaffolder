@@ -50,12 +50,12 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         /// </summary>
         public ProjectDetailsUserControl()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
 
         #endregion
 
-        #region Properties
+        #region Public Properties
 
         /// <summary>
         ///     Gets or sets the base name space.
@@ -64,23 +64,23 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         {
             get
             {
-                if (Project == null)
+                if (this.Project == null)
                 {
                     Logger.Trace("Empty BaseNameSpace is returned as Project is null.");
                     return string.Empty;
                 }
 
-                Logger.Trace($"BaseNameSpace: {Project.BaseNameSpace}");
-                return Project.BaseNameSpace;
+                Logger.Trace($"BaseNameSpace: {this.Project.BaseNameSpace}");
+                return this.Project.BaseNameSpace;
             }
 
             set
             {
-                if (Project != null)
+                if (this.Project != null)
                 {
-                    Changed = true;
-                    Project.BaseNameSpace = value.Trim();
-                    Logger.Trace($"BaseNameSpace set to {Project.BaseNameSpace}");
+                    this.Changed = true;
+                    this.Project.BaseNameSpace = value.Trim();
+                    Logger.Trace($"BaseNameSpace set to {this.Project.BaseNameSpace}");
                 }
                 else
                 {
@@ -101,23 +101,23 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         {
             get
             {
-                if (Project == null)
+                if (this.Project == null)
                 {
                     Logger.Trace("Default GroupBy is returned as Project is null.");
                     return GenerationType.Domain;
                 }
 
-                Logger.Trace($"GroupBy: {Project.GroupBy}");
-                return Project.GroupBy;
+                Logger.Trace($"GroupBy: {this.Project.GroupBy}");
+                return this.Project.GroupBy;
             }
 
             set
             {
-                if (Project != null)
+                if (this.Project != null)
                 {
-                    Changed = true;
-                    Project.GroupBy = value;
-                    Logger.Trace($"GroupBy is set to {Project.GroupBy.ToString()}");
+                    this.Changed = true;
+                    this.Project.GroupBy = value;
+                    Logger.Trace($"GroupBy is set to {this.Project.GroupBy.ToString()}");
                 }
                 else
                 {
@@ -133,23 +133,23 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         {
             get
             {
-                if (Project == null)
+                if (this.Project == null)
                 {
                     Logger.Trace("OutputFolder is returned empty as Project is null.");
                     return string.Empty;
                 }
 
-                Logger.Trace($"OutputFolder: {Project.OutputFolder}");
-                return Project.OutputFolder;
+                Logger.Trace($"OutputFolder: {this.Project.OutputFolder}");
+                return this.Project.OutputFolder;
             }
 
             set
             {
-                if (Project != null)
+                if (this.Project != null)
                 {
-                    Changed = true;
-                    Project.OutputFolder = value.Trim();
-                    Logger.Trace($"OutputFolder is changed to {Project.OutputFolder}");
+                    this.Changed = true;
+                    this.Project.OutputFolder = value.Trim();
+                    Logger.Trace($"OutputFolder is changed to {this.Project.OutputFolder}");
                 }
                 else
                 {
@@ -165,23 +165,23 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         {
             get
             {
-                return project;
+                return this.project;
             }
 
             set
             {
-                project = value;
+                this.project = value;
 
-                if (!Changed)
+                if (!this.Changed)
                 {
-                    UpdateDataSource();
+                    this.UpdateDataSource();
                 }
             }
         }
 
         #endregion
 
-        #region Public methods and operators
+        #region Public Methods And Operators
 
         /// <summary>
         ///     The update data source.
@@ -190,11 +190,11 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         {
             Logger.Trace("Started UpdateDataSource()");
 
-            if (Project != null)
+            if (this.Project != null)
             {
-                TextBoxOutputFolderName.Text = Project.OutputFolder;
-                TextBoxBaseNamespace.Text = Project.BaseNameSpace;
-                ComboBoxGroupBy.SelectedIndex = Project.GroupBy.GetHashCode();
+                this.TextBoxOutputFolderName.Text = this.Project.OutputFolder;
+                this.TextBoxBaseNamespace.Text = this.Project.BaseNameSpace;
+                this.ComboBoxGroupBy.SelectedIndex = this.Project.GroupBy.GetHashCode();
             }
             else
             {
@@ -216,32 +216,30 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
 
             int result = 0;
 
-            if (Project != null)
+            if (this.Project != null)
             {
-                errorProvider1.Clear();
-                Project.Validate();
+                this.errorProvider1.Clear();
+                this.Project.Validate();
 
-                if (Project.ValidationResult.Count > 0)
+                if (this.Project.ValidationResult.Count > 0)
                 {
                     Validation validation = null;
 
-                    if (Project.ValidationResult.Any(v => v.ValidationType == ValidationType.ProjectBaseNameSpace))
+                    if (this.Project.ValidationResult.Any(v => v.ValidationType == ValidationType.ProjectBaseNameSpace))
                     {
-                        validation = Project.ValidationResult.FirstOrDefault(v => v.ValidationType == ValidationType.ProjectBaseNameSpace);
-                        TextBoxBaseNamespace.Focus();
-                        errorProvider1.SetError(
-                            TextBoxBaseNamespace,
-                            validation.Description);
+                        validation = this.Project.ValidationResult.FirstOrDefault(
+                            v => v.ValidationType == ValidationType.ProjectBaseNameSpace);
+                        this.TextBoxBaseNamespace.Focus();
+                        this.errorProvider1.SetError(this.TextBoxBaseNamespace, validation.Description);
                         result++;
                     }
 
-                    if (Project.ValidationResult.Any(v => v.ValidationType == ValidationType.ProjectOutputFolder))
+                    if (this.Project.ValidationResult.Any(v => v.ValidationType == ValidationType.ProjectOutputFolder))
                     {
-                        validation = Project.ValidationResult.FirstOrDefault(v => v.ValidationType == ValidationType.ProjectOutputFolder);
-                        TextBoxOutputFolderName.Focus();
-                        errorProvider1.SetError(
-                            TextBoxOutputFolderName,
-                            validation.Description);
+                        validation = this.Project.ValidationResult.FirstOrDefault(
+                            v => v.ValidationType == ValidationType.ProjectOutputFolder);
+                        this.TextBoxOutputFolderName.Focus();
+                        this.errorProvider1.SetError(this.TextBoxOutputFolderName, validation.Description);
                         result++;
                     }
                 }
@@ -266,9 +264,9 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         /// </param>
         private void ComboBoxGroupBy_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (Project != null)
+            if (this.Project != null)
             {
-                Project.GroupBy = (GenerationType)ComboBoxGroupBy.SelectedIndex;
+                this.Project.GroupBy = (GenerationType)this.ComboBoxGroupBy.SelectedIndex;
             }
         }
 
@@ -283,9 +281,9 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         /// </param>
         private void TextBoxBaseNamespace_TextChanged(object sender, EventArgs e)
         {
-            if (Project != null)
+            if (this.Project != null)
             {
-                Project.BaseNameSpace = TextBoxBaseNamespace.Text;
+                this.Project.BaseNameSpace = this.TextBoxBaseNamespace.Text;
             }
         }
 
@@ -300,9 +298,9 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         /// </param>
         private void TextBoxOutputFolderName_TextChanged(object sender, EventArgs e)
         {
-            if (Project != null)
+            if (this.Project != null)
             {
-                Project.OutputFolder = TextBoxOutputFolderName.Text;
+                this.Project.OutputFolder = this.TextBoxOutputFolderName.Text;
             }
         }
 

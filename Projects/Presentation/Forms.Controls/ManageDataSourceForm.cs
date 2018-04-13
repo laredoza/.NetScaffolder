@@ -21,7 +21,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
     #endregion
 
     /// <summary>
-    /// The manage data source form.
+    ///     The manage data source form.
     /// </summary>
     public partial class ManageDataSourceForm : Form
     {
@@ -37,12 +37,12 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         #region Fields
 
         /// <summary>
-        /// The data source.
+        ///     The data source.
         /// </summary>
         private DomainDefinition dataSource;
 
         /// <summary>
-        /// The source type.
+        ///     The source type.
         /// </summary>
         private ISourceType sourceType;
 
@@ -51,16 +51,16 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         #region Constructors and Destructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ManageDataSourceForm"/> class.
+        ///     Initializes a new instance of the <see cref="ManageDataSourceForm" /> class.
         /// </summary>
         public ManageDataSourceForm()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
 
         #endregion
 
-        #region Properties
+        #region Public Properties
 
         /// <summary>
         ///     Gets or sets the data source.
@@ -69,15 +69,15 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         {
             get
             {
-                return dataSource;
+                return this.dataSource;
             }
 
             set
             {
-                if (dataSource != value)
+                if (this.dataSource != value)
                 {
-                    dataSource = value;
-                    UpdateDataSource();
+                    this.dataSource = value;
+                    this.UpdateDataSource();
                 }
             }
         }
@@ -97,7 +97,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         /// </param>
         private void button3_Click(object sender, EventArgs e)
         {
-            Close();
+            this.Close();
         }
 
         /// <summary>
@@ -107,11 +107,11 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         {
             Logger.Trace("Started UpdateDataSource()");
 
-            if (DataSource != null)
+            if (this.DataSource != null)
             {
-                sourceType = ScaffoldConfig.ReturnSourceType(DataSource.SourceTypeId);
-                panel1.Controls.Clear();
-                sourceType.AddConfigUI(panel1);
+                this.sourceType = ScaffoldConfig.ReturnSourceType(this.DataSource.SourceTypeId);
+                this.panel1.Controls.Clear();
+                this.sourceType.AddConfigUI(this.panel1);
             }
             else
             {

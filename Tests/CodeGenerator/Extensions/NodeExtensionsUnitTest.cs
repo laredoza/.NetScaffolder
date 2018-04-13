@@ -17,12 +17,12 @@ namespace DotNetScaffolder.Test.Extensions
     #endregion
 
     /// <summary>
-    /// The node extensions unit test.
+    ///     The node extensions unit test.
     /// </summary>
     [TestClass]
     public class NodeExtensionsUnitTest
     {
-        #region Public methods and operators
+        #region Public Methods And Operators
 
         /// <summary>
         ///     Tests moving a child item up or down. It also tests moving the top child up, or moving the bottom item down

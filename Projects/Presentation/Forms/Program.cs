@@ -18,7 +18,7 @@ namespace Presentation.UI
     #endregion
 
     /// <summary>
-    /// The program.
+    ///     The program.
     /// </summary>
     static class Program
     {

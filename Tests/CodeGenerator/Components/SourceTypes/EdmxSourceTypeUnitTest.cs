@@ -19,15 +19,15 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
     #endregion
 
     /// <summary>
-    /// The edmx source type unit test.
+    ///     The edmx source type unit test.
     /// </summary>
     [TestClass]
     public class EdmxSourceTypeUnitTest : BaseSourceTypeUnitTest
     {
-        #region Public methods and operators
+        #region Public Methods And Operators
 
         /// <summary>
-        /// The edmx source type unit test_ import.
+        ///     The edmx source type unit test_ import.
         /// </summary>
         [TestMethod]
         public void EdmxSourceTypeUnitTest_Import()
@@ -35,7 +35,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
             EdmxSourceType import = new EdmxSourceType();
             string filePath = Path.Combine(Directory.GetCurrentDirectory(), @"..\..\DataSource\model.edmx");
             DatabaseModel databaseModel = import.Import(new FileSourceOptions { Path = filePath });
-            BaseSourceTypeUnitTest_TestValues(databaseModel);
+            this.BaseSourceTypeUnitTest_TestValues(databaseModel);
         }
 
         #endregion

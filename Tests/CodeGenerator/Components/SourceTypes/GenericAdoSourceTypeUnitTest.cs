@@ -17,22 +17,22 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
     #endregion
 
     /// <summary>
-    /// The generic ado source type unit test.
+    ///     The generic ado source type unit test.
     /// </summary>
     [TestClass]
     public class GenericAdoSourceTypeUnitTest : BaseSourceTypeUnitTest
     {
-        #region Public methods and operators
+        #region Public Methods And Operators
 
         /// <summary>
-        /// The generic ado source type unit test_ import.
+        ///     The generic ado source type unit test_ import.
         /// </summary>
         [TestMethod]
         public void GenericAdoSourceTypeUnitTest_Import()
         {
             GenericAdoSourceType import = new GenericAdoSourceType();
             DatabaseModel databaseModel = import.Import(new AdoSourceOptions());
-            BaseSourceTypeUnitTest_TestValues(databaseModel);
+            this.BaseSourceTypeUnitTest_TestValues(databaseModel);
         }
 
         #endregion

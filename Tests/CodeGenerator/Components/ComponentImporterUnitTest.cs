@@ -20,7 +20,7 @@ namespace DotNetScaffolder.Test.Components
     [TestClass]
     public class ComponentImporterUnitTest
     {
-        #region Public methods and operators
+        #region Public Methods And Operators
 
         /// <summary>
         ///     Tests the Component Importer

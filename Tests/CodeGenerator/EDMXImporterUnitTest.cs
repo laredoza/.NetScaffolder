@@ -18,7 +18,7 @@ namespace DotNetScaffolder.Test
     [TestClass]
     public class EdmxImporter
     {
-        #region Public methods and operators
+        #region Public Methods And Operators
 
         /// <summary>
         ///     The load edmx.

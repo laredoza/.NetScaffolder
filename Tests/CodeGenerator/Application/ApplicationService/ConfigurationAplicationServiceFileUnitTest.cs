@@ -21,25 +21,23 @@ namespace DotNetScaffolder.Test.Application.ApplicationService
     [TestClass]
     public class ConfigurationAplicationServiceFileUnitTest : ConfigurationAplicationServiceUnitTest
     {
-        #region Public methods and operators
+        #region Public Methods And Operators
 
         /// <summary>
-        /// The configuration aplication service file unit test_ test method 1.
+        ///     The configuration aplication service file unit test_ test method 1.
         /// </summary>
         [TestMethod]
         public void ConfigurationAplicationServiceFileUnitTest_TestMethod1()
         {
             FilePersistenceOptions options = new FilePersistenceOptions { Path = "Config.xml" };
 
-            IConfigurationApplicationService applicationService = new ConfigurationApplicationServiceFile
-                                                                      {
-                                                                          FilePersistenceOptions = options
-                                                                      };
+            IConfigurationApplicationService applicationService =
+                new ConfigurationApplicationServiceFile { FilePersistenceOptions = options };
 
-            CreateTestValues(applicationService);
+            this.CreateTestValues(applicationService);
             applicationService.Save();
             applicationService.Load();
-            TestProjectDefinition(applicationService);
+            this.TestProjectDefinition(applicationService);
         }
 
         #endregion
