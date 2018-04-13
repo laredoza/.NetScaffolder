@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DotNetScaffolder.Components.Common.Contract.UI;
 
 namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.Edmxs
 {
@@ -19,12 +20,12 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.Edmxs
 
         public object Parameters { get; set; }
 
-        public void Load()
+        public void LoadData()
         {
             throw new NotImplementedException();
         }
 
-        public void Save()
+        public void SaveData()
         {
             throw new NotImplementedException();
         }
