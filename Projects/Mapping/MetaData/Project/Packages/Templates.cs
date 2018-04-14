@@ -15,6 +15,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Project.Packages
     /// <summary>
     /// The templates.
     /// </summary>
+    [Serializable]
     public class Templates
     {
         #region Constructors and Destructors

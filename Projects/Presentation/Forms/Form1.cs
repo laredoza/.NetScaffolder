@@ -46,7 +46,8 @@ namespace DotNetScaffolder.Presentation.Forms
         {
             this.InitializeComponent();
 
-            FilePersistenceOptions options = new FilePersistenceOptions { Path = @"Models\Banking.mdl" };
+            // FilePersistenceOptions options = new FilePersistenceOptions { Path = @"C:\Dev\Github\.NetScaffolder\Generated\Dal\Repository\EF\Dotnet\RepositoryEFDotnet\Model\Banking.mdl" };
+            FilePersistenceOptions options = new FilePersistenceOptions { Path = @"..\..\..\..\..\Generated\Dal\Repository\EF\Dotnet\RepositoryEFDotnet\Model\Banking.mdl" };
 
             this.applicationService = new ProjectDefinitionApplicationServiceFile { FilePersistenceOptions = options };
             this.applicationService.Load();

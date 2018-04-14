@@ -395,14 +395,17 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         {
             List<ComboboxItem> items = new List<ComboboxItem>();
 
-            foreach (var collectionOption in ScaffoldConfig.CollectionOptions)
+            if (ScaffoldConfig.CollectionOptions != null)
             {
-                items.Add(
-                    new ComboboxItem
-                        {
-                            Text = (string)collectionOption.Metadata["NameMetaData"],
-                            Value = new Guid(collectionOption.Metadata["ValueMetaData"].ToString())
-                        });
+                foreach (var collectionOption in ScaffoldConfig.CollectionOptions)
+                {
+                    items.Add(
+                        new ComboboxItem
+                            {
+                                Text = (string)collectionOption.Metadata["NameMetaData"],
+                                Value = new Guid(collectionOption.Metadata["ValueMetaData"].ToString())
+                            });
+                }
             }
 
             return items.OrderBy(i => i.Text).ToArray();
