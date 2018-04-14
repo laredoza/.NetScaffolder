@@ -35,7 +35,7 @@ namespace DotNetScaffolder.Presentation.Forms
         /// <summary>
         ///     The application service.
         /// </summary>
-        private  IProjectDefinitionApplicationService applicationService;
+        private IProjectDefinitionApplicationService applicationService;
 
         #endregion
 
@@ -48,16 +48,57 @@ namespace DotNetScaffolder.Presentation.Forms
         {
             this.InitializeComponent();
 
-            //this.ModelPath = ScaffoldConfig.ModelPath;
-            //this.ConfigPath = ScaffoldConfig.ConfigPath;
+            this.ModelPath = ScaffoldConfig.ModelPath;
+            this.ConfigPath = ScaffoldConfig.ConfigPath;
             this.LoadData();
         }
 
         #endregion
 
+        #region Public Properties
+
+        /// <summary>
+        ///     Gets or sets the config path.
+        /// </summary>
+        public string ConfigPath { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the model path.
+        /// </summary>
+        public string ModelPath { get; set; }
+
+        #endregion
+
+        #region Other Methods
+
+        /// <summary>
+        /// The button 6_ click.
+        /// </summary>
+        /// <param name="sender">
+        /// The sender.
+        /// </param>
+        /// <param name="e">
+        /// The e.
+        /// </param>
+        private void button6_Click(object sender, EventArgs e)
+        {
+            if (this.ProjectDetailsUserControl1.Validation() == 0)
+            {
+                // Save
+                this.applicationService.Save();
+            }
+
+            if (this.TemplateManagementUserControl1.Validation() == 0)
+            {
+                this.applicationConfiguration.Save();
+            }
+        }
+
+        /// <summary>
+        ///     The load data.
+        /// </summary>
         private void LoadData()
         {
-
             if (!string.IsNullOrEmpty(this.ModelPath) && !string.IsNullOrEmpty(this.ConfigPath))
             {
                 FilePersistenceOptions options = new FilePersistenceOptions { Path = this.ModelPath };
@@ -92,32 +133,20 @@ namespace DotNetScaffolder.Presentation.Forms
                 this.projectDomainDetailsUserControl1.Packages =
                     this.applicationConfiguration.ApplicationSettings.Packages;
                 this.projectDomainDetailsUserControl1.ApplicationService = this.applicationService;
+                this.tabControl1.Enabled = true;
+                this.BtnSave.Enabled = true;
+                this.LblPath.Text = this.ModelPath;
             }
             else
             {
                 this.tabControl1.Enabled = false;
-                //this
+                this.BtnSave.Enabled = false;
+                this.LblPath.Text = "No Model File Loaded";
             }
         }
 
-        #region Public Properties
-
         /// <summary>
-        /// Gets or sets the config path.
-        /// </summary>
-        public string ConfigPath { get; set; }
-
-        /// <summary>
-        /// Gets or sets the model path.
-        /// </summary>
-        public string ModelPath { get; set; }
-
-        #endregion
-
-        #region Other Methods
-
-        /// <summary>
-        /// The button 1_ click.
+        /// The open tool strip menu item_ click.
         /// </summary>
         /// <param name="sender">
         /// The sender.
@@ -125,40 +154,23 @@ namespace DotNetScaffolder.Presentation.Forms
         /// <param name="e">
         /// The e.
         /// </param>
-        private void button1_Click(object sender, EventArgs e)
+        private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var result = MessageBox.Show(
-                this,
-                $"Are you sure you want to close the application?{Environment.NewLine}Any unsaved changes will be lost...",
-                "Are you sure?",
-                MessageBoxButtons.YesNo);
+            //var result = MessageBox.Show(
+            //    this,
+            //    $"Are you sure you want to close the application?{Environment.NewLine}Any unsaved changes will be lost...",
+            //    "Are you sure?",
+            //    MessageBoxButtons.YesNo);
 
-            if (result == DialogResult.Yes)
-            {
-                this.Close();
-            }
-        }
+            //if (result == DialogResult.Yes)
+            //{
+            //    this.Close();
+            //}
 
-        /// <summary>
-        /// The button 6_ click.
-        /// </summary>
-        /// <param name="sender">
-        /// The sender.
-        /// </param>
-        /// <param name="e">
-        /// The e.
-        /// </param>
-        private void button6_Click(object sender, EventArgs e)
-        {
-            if (this.ProjectDetailsUserControl1.Validation() == 0)
+            if (this.openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                // Save
-                this.applicationService.Save();
-            }
-
-            if (this.TemplateManagementUserControl1.Validation() == 0)
-            {
-                this.applicationConfiguration.Save();
+                this.ModelPath = this.openFileDialog1.FileName;
+                this.LoadData();
             }
         }
 
@@ -183,9 +195,18 @@ namespace DotNetScaffolder.Presentation.Forms
 
         #endregion
 
-        private void groupBox2_Enter(object sender, EventArgs e)
+        private void BtnClose_Click(object sender, EventArgs e)
         {
+            var result = MessageBox.Show(
+                this,
+                $"Are you sure you want to close the application?{Environment.NewLine}Any unsaved changes will be lost...",
+                "Are you sure?",
+                MessageBoxButtons.YesNo);
 
+            if (result == DialogResult.Yes)
+            {
+                this.Close();
+            }
         }
     }
 }
