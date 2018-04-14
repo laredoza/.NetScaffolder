@@ -37,6 +37,10 @@ namespace DotNetScaffolder.Presentation.Forms
 
         #endregion
 
+        public string ConfigPath { get; set; }
+
+        public string ModelPath { get; set; }
+
         #region Constructors and Destructors
 
         /// <summary>
@@ -45,16 +49,18 @@ namespace DotNetScaffolder.Presentation.Forms
         public Form1()
         {
             this.InitializeComponent();
+            this.ModelPath = @"..\..\..\..\..\Generated\Dal\Repository\EF\Dotnet\RepositoryEFDotnet\Model\Banking.mdl";
+            this.ConfigPath = @"Config\Settings.xml";
 
             // FilePersistenceOptions options = new FilePersistenceOptions { Path = @"C:\Dev\Github\.NetScaffolder\Generated\Dal\Repository\EF\Dotnet\RepositoryEFDotnet\Model\Banking.mdl" };
-            FilePersistenceOptions options = new FilePersistenceOptions { Path = @"..\..\..\..\..\Generated\Dal\Repository\EF\Dotnet\RepositoryEFDotnet\Model\Banking.mdl" };
+            FilePersistenceOptions options = new FilePersistenceOptions { Path = this.ModelPath }; 
 
             this.applicationService = new ProjectDefinitionApplicationServiceFile { FilePersistenceOptions = options };
             this.applicationService.Load();
             this.applicationService.ProjectDefinition.ModelPath = options.Path;
             this.applicationService.ProjectDefinition.Version = 1;
 
-            FilePersistenceOptions configOptions = new FilePersistenceOptions { Path = @"Config\Settings.xml" };
+            FilePersistenceOptions configOptions = new FilePersistenceOptions { Path = this.ConfigPath };
             this.applicationConfiguration =
                 new ConfigurationApplicationServiceFile { FilePersistenceOptions = configOptions };
 
