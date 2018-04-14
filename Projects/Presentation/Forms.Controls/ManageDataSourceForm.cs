@@ -95,7 +95,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         /// <param name="e">
         /// The e.
         /// </param>
-        private void button3_Click(object sender, EventArgs e)
+        private void Button3Click(object sender, EventArgs e)
         {
             this.Close();
         }
