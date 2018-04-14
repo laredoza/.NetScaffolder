@@ -8,6 +8,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Model
 {
     #region Usings
 
+    using System;
     using System.Collections.Generic;
     using System.Xml.Serialization;
 
@@ -18,6 +19,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Model
     /// <summary>
     ///     The database model.
     /// </summary>
+    [Serializable]
     public class DatabaseModel
     {
         #region Constructors and Destructors

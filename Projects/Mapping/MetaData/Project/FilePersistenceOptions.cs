@@ -6,9 +6,12 @@
 
 namespace DotNetScaffolder.Mapping.MetaData.Project
 {
+    using System;
+
     /// <summary>
     ///     The file persistance options.
     /// </summary>
+    [Serializable]
     public class FilePersistenceOptions
     {
         #region Properties

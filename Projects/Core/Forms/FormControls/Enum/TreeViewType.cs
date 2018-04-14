@@ -4,7 +4,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace DotNetScaffolder.Presentation.Forms.Controls.Enum
+namespace FormControls.Enum
 {
     /// <summary>
     /// The tree view type.

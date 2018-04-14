@@ -25,6 +25,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Project.Packages
     /// <example>
     ///     Context, Entity, Repository
     /// </example>
+    [Serializable]
     public class DataType : IValidate
     {
         #region Static Fields

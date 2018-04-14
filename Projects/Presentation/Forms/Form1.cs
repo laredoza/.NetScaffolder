@@ -30,18 +30,14 @@ namespace DotNetScaffolder.Presentation.Forms
         /// <summary>
         ///     The application configuration.
         /// </summary>
-        private readonly IConfigurationApplicationService applicationConfiguration;
+        private IConfigurationApplicationService applicationConfiguration;
 
         /// <summary>
         ///     The application service.
         /// </summary>
-        private readonly IProjectDefinitionApplicationService applicationService;
+        private  IProjectDefinitionApplicationService applicationService;
 
         #endregion
-
-        public string ConfigPath { get; set; }
-
-        public string ModelPath { get; set; }
 
         #region Constructors and Destructors
 
@@ -51,38 +47,70 @@ namespace DotNetScaffolder.Presentation.Forms
         public Form1()
         {
             this.InitializeComponent();
-            this.ModelPath = ScaffoldConfig.ModelPath;
-            this.ConfigPath = ScaffoldConfig.ConfigPath; 
 
-            // FilePersistenceOptions options = new FilePersistenceOptions { Path = @"C:\Dev\Github\.NetScaffolder\Generated\Dal\Repository\EF\Dotnet\RepositoryEFDotnet\Model\Banking.mdl" };
-            FilePersistenceOptions options = new FilePersistenceOptions { Path = this.ModelPath }; 
-
-            this.applicationService = new ProjectDefinitionApplicationServiceFile { FilePersistenceOptions = options };
-            this.applicationService.Load();
-            this.applicationService.ProjectDefinition.ModelPath = options.Path;
-            this.applicationService.ProjectDefinition.Version = 1;
-
-            FilePersistenceOptions configOptions = new FilePersistenceOptions { Path = this.ConfigPath };
-            this.applicationConfiguration =
-                new ConfigurationApplicationServiceFile { FilePersistenceOptions = configOptions };
-
-            this.applicationConfiguration.Load();
-
-            this.TemplateManagementUserControl1.DataSource =
-                this.applicationConfiguration.ApplicationSettings.Templates[0];
-            this.ManagePackageUserControl1.DataSource = this.applicationConfiguration.ApplicationSettings.Packages[0];
-
-            if (this.applicationConfiguration.ApplicationSettings.Templates.Count > 0)
-            {
-                this.ManagePackageUserControl1.Templates = this.applicationConfiguration.ApplicationSettings.Templates;
-            }
-
-            this.ProjectDetailsUserControl1.Project = this.applicationService.ProjectDefinition;
-            this.ProjectDomainUserControl1.SelectedIndexChanged += this.ProjectDomainUserControl1_SelectedIndexChanged;
-            this.ProjectDomainUserControl1.ApplicationService = this.applicationService;
-            this.projectDomainDetailsUserControl1.Packages = this.applicationConfiguration.ApplicationSettings.Packages;
-            this.projectDomainDetailsUserControl1.ApplicationService = this.applicationService;
+            //this.ModelPath = ScaffoldConfig.ModelPath;
+            //this.ConfigPath = ScaffoldConfig.ConfigPath;
+            this.LoadData();
         }
+
+        #endregion
+
+        private void LoadData()
+        {
+
+            if (!string.IsNullOrEmpty(this.ModelPath) && !string.IsNullOrEmpty(this.ConfigPath))
+            {
+                FilePersistenceOptions options = new FilePersistenceOptions { Path = this.ModelPath };
+
+                this.applicationService =
+                    new ProjectDefinitionApplicationServiceFile { FilePersistenceOptions = options };
+                this.applicationService.Load();
+                this.applicationService.ProjectDefinition.ModelPath = options.Path;
+                this.applicationService.ProjectDefinition.Version = 1;
+
+                FilePersistenceOptions configOptions = new FilePersistenceOptions { Path = this.ConfigPath };
+                this.applicationConfiguration =
+                    new ConfigurationApplicationServiceFile { FilePersistenceOptions = configOptions };
+
+                this.applicationConfiguration.Load();
+
+                this.TemplateManagementUserControl1.DataSource =
+                    this.applicationConfiguration.ApplicationSettings.Templates[0];
+                this.ManagePackageUserControl1.DataSource =
+                    this.applicationConfiguration.ApplicationSettings.Packages[0];
+
+                if (this.applicationConfiguration.ApplicationSettings.Templates.Count > 0)
+                {
+                    this.ManagePackageUserControl1.Templates =
+                        this.applicationConfiguration.ApplicationSettings.Templates;
+                }
+
+                this.ProjectDetailsUserControl1.Project = this.applicationService.ProjectDefinition;
+                this.ProjectDomainUserControl1.SelectedIndexChanged +=
+                    this.ProjectDomainUserControl1_SelectedIndexChanged;
+                this.ProjectDomainUserControl1.ApplicationService = this.applicationService;
+                this.projectDomainDetailsUserControl1.Packages =
+                    this.applicationConfiguration.ApplicationSettings.Packages;
+                this.projectDomainDetailsUserControl1.ApplicationService = this.applicationService;
+            }
+            else
+            {
+                this.tabControl1.Enabled = false;
+                //this
+            }
+        }
+
+        #region Public Properties
+
+        /// <summary>
+        /// Gets or sets the config path.
+        /// </summary>
+        public string ConfigPath { get; set; }
+
+        /// <summary>
+        /// Gets or sets the model path.
+        /// </summary>
+        public string ModelPath { get; set; }
 
         #endregion
 
@@ -154,5 +182,10 @@ namespace DotNetScaffolder.Presentation.Forms
         }
 
         #endregion
+
+        private void groupBox2_Enter(object sender, EventArgs e)
+        {
+
+        }
     }
 }

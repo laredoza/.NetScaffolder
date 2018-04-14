@@ -8,6 +8,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Model
 {
     #region Usings
 
+    using System;
     using System.ComponentModel;
     using System.Xml.Serialization;
 
@@ -16,6 +17,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Model
     /// <summary>
     ///     The column.
     /// </summary>
+    [Serializable]
     public class Column : INotifyPropertyChanged
     {
         #region Fields

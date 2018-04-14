@@ -1,5 +1,7 @@
 ﻿namespace DotNetScaffolder.Presentation.Forms.Controls
 {
+    using FormControls.Enum;
+
     partial class TemplateManagementUserControl
     {
         /// <summary> 
@@ -65,7 +67,7 @@
             this.ManageTemplateTreeViewUserControl1.BtnDeleteClick = null;
             this.ManageTemplateTreeViewUserControl1.BtnDownClick = null;
             this.ManageTemplateTreeViewUserControl1.BtnUpClick = null;
-            this.ManageTemplateTreeViewUserControl1.CollectionType = DotNetScaffolder.Presentation.Forms.Controls.Enum.TreeViewType.Package;
+            this.ManageTemplateTreeViewUserControl1.CollectionType = TreeViewType.Package;
             this.ManageTemplateTreeViewUserControl1.DataSource = null;
             this.ManageTemplateTreeViewUserControl1.Location = new System.Drawing.Point(13, 16);
             this.ManageTemplateTreeViewUserControl1.Name = "ManageTemplateTreeViewUserControl1";

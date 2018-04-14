@@ -8,6 +8,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Project
 {
     #region Usings
 
+    using System;
     using System.Collections.Generic;
     using System.Xml.Serialization;
 
@@ -23,6 +24,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Project
     ///     The project definition. This is used to define the metadata required to
     ///     generate layers.
     /// </summary>
+    [Serializable]
     public class ProjectDefinition : IValidate
     {
         #region Static Fields

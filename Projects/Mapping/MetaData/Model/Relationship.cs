@@ -8,6 +8,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Model
 {
     #region Usings
 
+    using System;
     using System.Xml.Serialization;
 
     using DotNetScaffolder.Mapping.MetaData.Enum;
@@ -17,6 +18,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Model
     /// <summary>
     /// The relationship.
     /// </summary>
+    [Serializable]
     public class Relationship
     {
         #region Properties

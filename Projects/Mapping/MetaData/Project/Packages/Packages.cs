@@ -15,6 +15,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Project.Packages
     /// <summary>
     /// The packages.
     /// </summary>
+    [Serializable]
     public class Packages
     {
         #region Constructors and Destructors

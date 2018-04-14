@@ -11,8 +11,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
     using System;
     using System.Windows.Forms;
 
-    using DotNetScaffolder.Presentation.Forms.Controls.Enum;
-
+    using FormControls.Enum;
     using FormControls.TreeView;
 
     #endregion

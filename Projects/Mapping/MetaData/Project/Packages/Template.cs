@@ -25,6 +25,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Project.Packages
     /// <summary>
     ///     The template.
     /// </summary>
+    [Serializable]
     public class Template : Hierarchy, IValidate
     {
         #region Static Fields

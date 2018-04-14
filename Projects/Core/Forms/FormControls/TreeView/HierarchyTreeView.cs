@@ -8,6 +8,7 @@ namespace FormControls.TreeView
 {
     #region Usings
 
+    using System;
     using System.Windows.Forms;
 
     using DotNetScaffolder.Core.Extensions;
@@ -19,6 +20,7 @@ namespace FormControls.TreeView
     /// <summary>
     ///     The hierarchy tree view.
     /// </summary>
+    [Serializable]
     public class HierarchyTreeView : TreeView
     {
         #region Fields

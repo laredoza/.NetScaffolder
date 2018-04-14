@@ -18,6 +18,7 @@ namespace FormControls.TreeView
     /// <summary>
     ///     The hierarchy.
     /// </summary>
+    [Serializable]
     public class Hierarchy : IHierarchy
     {
         #region Constructors and Destructors

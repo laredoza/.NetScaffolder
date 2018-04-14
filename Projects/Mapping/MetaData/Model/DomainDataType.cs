@@ -6,9 +6,12 @@
 
 namespace DotNetScaffolder.Mapping.MetaData.Model
 {
+    using System;
+
     /// <summary>
     ///     The domain data type.
     /// </summary>
+    [Serializable]
     public enum DomainDataType
     {
         /// <summary>

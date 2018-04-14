@@ -22,6 +22,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Project.Packages
     ///     The package defines which templates will be created.
     ///     i.e) DbContext, EF, ViewModel, etc
     /// </summary>
+    [Serializable]
     public class Package : Hierarchy, IValidate
     {
         #region Constructors and Destructors
