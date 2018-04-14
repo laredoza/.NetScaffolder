@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2037
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepositoryEFDotnetStandard.UnitTestProject", "UnitTestProject\RepositoryEFDotnetStandard.UnitTestProject.csproj", "{8867C58A-59EA-4994-9F84-EB82FCE8884A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepositoryEFDotnetStandard.Library", "Library\RepositoryEFDotnetStandard.Library.csproj", "{6ACDD543-12D0-4142-8009-8AB97D96578E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8867C58A-59EA-4994-9F84-EB82FCE8884A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8867C58A-59EA-4994-9F84-EB82FCE8884A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8867C58A-59EA-4994-9F84-EB82FCE8884A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8867C58A-59EA-4994-9F84-EB82FCE8884A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6ACDD543-12D0-4142-8009-8AB97D96578E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6ACDD543-12D0-4142-8009-8AB97D96578E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6ACDD543-12D0-4142-8009-8AB97D96578E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6ACDD543-12D0-4142-8009-8AB97D96578E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {35DF1D31-C5B2-49CC-8BF9-6AB0222A34C3}
+	EndGlobalSection
+EndGlobal
