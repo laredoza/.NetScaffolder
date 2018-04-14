@@ -12,6 +12,8 @@ namespace DotNetScaffolder.Presentation.Forms
     using System.Linq;
     using System.Windows.Forms;
 
+    using Configuration;
+
     using DotNetScaffolder.Mapping.ApplicationServices;
     using DotNetScaffolder.Mapping.MetaData.Project;
     using DotNetScaffolder.Presentation.Forms.Controls;
@@ -49,8 +51,8 @@ namespace DotNetScaffolder.Presentation.Forms
         public Form1()
         {
             this.InitializeComponent();
-            this.ModelPath = @"..\..\..\..\..\Generated\Dal\Repository\EF\Dotnet\RepositoryEFDotnet\Model\Banking.mdl";
-            this.ConfigPath = @"Config\Settings.xml";
+            this.ModelPath = ScaffoldConfig.ModelPath;
+            this.ConfigPath = ScaffoldConfig.ConfigPath; 
 
             // FilePersistenceOptions options = new FilePersistenceOptions { Path = @"C:\Dev\Github\.NetScaffolder\Generated\Dal\Repository\EF\Dotnet\RepositoryEFDotnet\Model\Banking.mdl" };
             FilePersistenceOptions options = new FilePersistenceOptions { Path = this.ModelPath }; 
@@ -66,15 +68,6 @@ namespace DotNetScaffolder.Presentation.Forms
 
             this.applicationConfiguration.Load();
 
-            // Package package = new Package { Id = Guid.NewGuid(), Name = "Packages", HierarchyType = HierarchyType.Group};
-            // package.Children.Add(new Package { Id = Guid.NewGuid(), Name = "Data", HierarchyType = HierarchyType.Group });
-            // package.Children[0].Children.Add(new Package { Id = Guid.NewGuid(), Name = "Entity Framework Microsoft", HierarchyType = HierarchyType.Group });
-            // package.Children[0].Children[0].Children.Add(new Package { Id = Guid.NewGuid(), Name = "Entity Framework 6 (Standard)", HierarchyType = HierarchyType.Item });
-            // package.Children[0].Children[0].Children.Add(new Package { Id = Guid.NewGuid(), Name = "Entity Framework 6 (Repository)", HierarchyType = HierarchyType.Item });
-            // package.Children[0].Children.Add(new Package { Id = Guid.NewGuid(), Name = "Mongo Official", HierarchyType = HierarchyType.Group });
-            // package.Children[0].Children[1].Children.Add(new Package { Id = Guid.NewGuid(), Name = "Mongo Official (Standard)", HierarchyType = HierarchyType.Item });
-            // this.applicationConfiguration.ApplicationSettings.Packages.Add(package);
-            // applicationConfiguration.Save();
             this.TemplateManagementUserControl1.DataSource =
                 this.applicationConfiguration.ApplicationSettings.Templates[0];
             this.ManagePackageUserControl1.DataSource = this.applicationConfiguration.ApplicationSettings.Packages[0];

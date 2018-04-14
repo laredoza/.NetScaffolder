@@ -26,8 +26,8 @@ namespace Configuration
         #region Constructors and Destructors
 
         /// <summary>
-        /// Initializes static members of the <see cref="ScaffoldConfig"/> class. 
-        ///     Initializes a new instance of the <see cref="ScaffoldConfig"/> class.
+        ///     Initializes static members of the <see cref="ScaffoldConfig" /> class.
+        ///     Initializes a new instance of the <see cref="ScaffoldConfig" /> class.
         /// </summary>
         static ScaffoldConfig()
         {
@@ -36,17 +36,24 @@ namespace Configuration
             SourceTypes = new Lazy<ISourceType, IDictionary<string, object>>[0];
             NamingConventions = new Lazy<INamingConvention, IDictionary<string, object>>[0];
             Drivers = new Lazy<IDriver, IDictionary<string, object>>[0];
+            ModelPath = @"..\..\..\..\..\Generated\Dal\Repository\EF\Dotnet\RepositoryEFDotnet\Model\Banking.mdl";
+            ConfigPath = @"Config\Settings.xml";
         }
 
         #endregion
 
-        #region Properties
+        #region Public Properties
 
         /// <summary>
-        /// Gets or sets the collection options.
+        ///     Gets or sets the collection options.
         /// </summary>
         [ImportMany]
         public static Lazy<ICollectionOption, IDictionary<string, object>>[] CollectionOptions { get; set; }
+
+        /// <summary>
+        /// Gets or sets the config path.
+        /// </summary>
+        public static string ConfigPath { get; set; }
 
         /// <summary>
         ///     Gets or sets the DataTypes
@@ -65,6 +72,11 @@ namespace Configuration
         /// </summary>
         [ImportMany]
         public static Lazy<ILanguageOutput, IDictionary<string, object>>[] LanguageOutputs { get; set; }
+
+        /// <summary>
+        /// Gets or sets the model path.
+        /// </summary>
+        public static string ModelPath { get; set; }
 
         /// <summary>
         ///     Gets or sets the naming conventions.
@@ -86,7 +98,7 @@ namespace Configuration
 
         #endregion
 
-        #region Public methods and operators
+        #region Public Methods And Operators
 
         /// <summary>
         ///     The load.
@@ -116,7 +128,8 @@ namespace Configuration
         /// </returns>
         public static IDataType ReturnDataType(Guid dataTypeId)
         {
-            return DataTypes.FirstOrDefault(d => d.Metadata["ValueMetaData"].ToString().ToLower() == dataTypeId.ToString().ToLower()).Value;
+            return DataTypes.FirstOrDefault(
+                d => d.Metadata["ValueMetaData"].ToString().ToLower() == dataTypeId.ToString().ToLower()).Value;
         }
 
         /// <summary>
@@ -130,7 +143,8 @@ namespace Configuration
         /// </returns>
         public static ISourceType ReturnSourceType(Guid sourceTypeId)
         {
-            return SourceTypes.FirstOrDefault(d => d.Metadata["ValueMetaData"].ToString().ToLower() == sourceTypeId.ToString().ToLower()).Value;
+            return SourceTypes.FirstOrDefault(
+                d => d.Metadata["ValueMetaData"].ToString().ToLower() == sourceTypeId.ToString().ToLower()).Value;
         }
 
         #endregion
