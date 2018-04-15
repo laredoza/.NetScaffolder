@@ -139,7 +139,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
         /// </param>
         /// <exception cref="NotImplementedException">
         /// </exception>
-        public void Load(object parameters)
+        public object Load(object parameters)
         {
             throw new NotImplementedException();
         }
@@ -198,15 +198,15 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
         /// <summary>
         /// The test.
         /// </summary>
-        /// <param name="paramters">
-        /// The paramters.
+        /// <param name="parameters">
+        /// The parameters.
         /// </param>
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
         /// <exception cref="NotImplementedException">
         /// </exception>
-        public bool Test(object paramters)
+        public bool Test(object parameters)
         {
             throw new NotImplementedException();
         }

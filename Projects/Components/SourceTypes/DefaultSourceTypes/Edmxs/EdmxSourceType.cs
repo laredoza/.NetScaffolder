@@ -11,11 +11,13 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.Edmxs
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.Composition;
+    using System.IO;
     using System.Linq;
     using System.Windows.Forms;
 
     using DotNetScaffolder.Components.Common.Contract;
     using DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.SourceOptions;
+    using DotNetScaffolder.Core.Common.Serializer;
     using DotNetScaffolder.Mapping.MetaData.Enum;
     using DotNetScaffolder.Mapping.MetaData.Model;
 
@@ -156,13 +158,28 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.Edmxs
         /// </summary>
         /// <param name="parameters">
         /// </param>
-        public void Load(object parameters)
+        public object Load(object parameters)
         {
             Logger.Trace("Started Import()"); 
             
             FileSourceOptions fileOption = parameters as FileSourceOptions;
+            string path = this.ReturnFilePath(parameters as string);
+            Logger.Debug($"Path: {path}");
+            FileSourceOptions result = null;
+            
+            if (File.Exists(path))
+            {
+                Logger.Trace("Path Exists");
+                result = ObjectXMLSerializer<FileSourceOptions>.Load(path);
+            }
+            else
+            {
+                Logger.Trace("Path Doesn't Exist");
+            }
 
-            Logger.Trace("Completed Import()"); 
+            Logger.Trace("Completed Import()");
+
+            return result;
         }
 
         /// <summary>
@@ -208,7 +225,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.Edmxs
         }
 
         /// <summary>
-        /// Saves data
+        /// Saves 
         /// </summary>
         /// <param name="parameters">
         /// </param>
@@ -216,25 +233,55 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.Edmxs
         {
             Logger.Trace("Started Save()");
 
+            List<object> saveParameters = parameters as List<object>;
+            string path = this.ReturnFilePath(saveParameters[0] as string);
+            Logger.Debug($"Path: {path}");
+            ObjectXMLSerializer<FileSourceOptions>.Save(saveParameters[1] as FileSourceOptions, path, SerializedFormat.Document);
+
             Logger.Trace("Completed Save()"); 
         }
 
         /// <summary>
         /// Tests Data Source
         /// </summary>
-        /// <param name="paramters">
+        /// <param name="parameters">
         /// </param>
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        public bool Test(object paramters)
+        public bool Test(object parameters)
         {
             Logger.Trace("Started Test()");
 
+            FileSourceOptions options = parameters as FileSourceOptions;
+            bool result = false;
+
+            if (File.Exists(options.Path))
+            {
+                result = true;
+            }
+
             Logger.Trace("Completed Test()"); 
-            return false;
+            
+            return result;
         }
 
         #endregion
+
+        /// <summary>
+        /// The return file path.
+        /// </summary>
+        /// <param name="basePath">
+        /// The base path.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        public string ReturnFilePath(string basePath)
+        {
+            Logger.Trace($"Started ReturnFilePath({basePath}");
+            Logger.Trace($"Completed ReturnFilePath({basePath}");
+            return basePath + @"\EdmxSourceType.xml";
+        }
     }
 }

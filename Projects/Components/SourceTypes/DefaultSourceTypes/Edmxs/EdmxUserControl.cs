@@ -9,9 +9,11 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.Edmxs
     #region Usings
 
     using System;
+    using System.Collections.Generic;
     using System.IO;
     using System.Windows.Forms;
 
+    using DotNetScaffolder.Components.Common.Contract;
     using DotNetScaffolder.Components.Common.Contract.UI;
     using DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.SourceOptions;
     using DotNetScaffolder.Core.Common.Serializer;
@@ -65,6 +67,8 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.Edmxs
         /// </summary>
         public object Parameters { get; set; }
 
+        public ISourceType SourceType { get; set; }
+
         #endregion
 
         #region Public Methods And Operators
@@ -78,38 +82,19 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.Edmxs
         public void LoadData(object parameters)
         {
             Logger.Trace("Started LoadData()");
-            string path = this.ReturnFilePath(parameters as string);
-            Logger.Debug($"Path: {path}");
 
-            if (File.Exists(path))
+            this.options = this.SourceType.Load(parameters) as FileSourceOptions;
+
+            if (this.options != null)
             {
-                Logger.Trace("Path Exists");
-                this.options = ObjectXMLSerializer<FileSourceOptions>.Load(path);
                 this.TxtFilePath.Text = this.options.Path;
             }
             else
             {
-                Logger.Trace("Path Doesn't Exist");
                 this.TxtFilePath.Text = string.Empty;
             }
 
             Logger.Trace("Completed LoadData()");
-        }
-
-        /// <summary>
-        /// The return file path.
-        /// </summary>
-        /// <param name="basePath">
-        /// The base path.
-        /// </param>
-        /// <returns>
-        /// The <see cref="string"/>.
-        /// </returns>
-        public string ReturnFilePath(string basePath)
-        {
-            Logger.Trace($"Started ReturnFilePath({basePath}");
-            Logger.Trace($"Completed ReturnFilePath({basePath}");
-            return basePath + @"\EdmxSourceType.xml";
         }
 
         /// <summary>
@@ -123,9 +108,12 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.Edmxs
         public void SaveData(object parameters)
         {
             Logger.Trace("Started SaveData()");
-            string path = this.ReturnFilePath(parameters as string);
-            Logger.Debug($"Path: {path}");
-            ObjectXMLSerializer<FileSourceOptions>.Save(this.options, path, SerializedFormat.Document);
+
+            List<Object> saveParameters = new List<object>();
+            saveParameters.Add((parameters));
+            saveParameters.Add(this.options);
+            this.SourceType.Save(saveParameters); 
+
             Logger.Trace("Completed SaveData()");
         }
 
@@ -138,16 +126,13 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.Edmxs
         public void TestData(object parameters)
         {
             Logger.Trace("Started TestData()");
-            string path = this.ReturnFilePath(parameters as string);
-            Logger.Debug($"Path: {path}");
-            if (File.Exists(this.options.Path))
+
+            if (this.SourceType.Test(this.options))
             {
-                Logger.Debug("Path Exist");
                 MessageBox.Show("Edmx Path Correct", "Test", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {
-                Logger.Debug("Path Doesn't Exist");
                 MessageBox.Show("Edmx Path Is Incorrect", "Test", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 

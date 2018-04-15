@@ -19,7 +19,7 @@ namespace DotNetScaffolder.Components.Common.Contract
     /// <example>Edmx, Sql Database, Data Modeller</example>
     public interface ISourceType
     {
-        #region Public methods and operators
+        #region Public Methods And Operators
 
         /// <summary>
         /// The add config ui.
@@ -49,7 +49,10 @@ namespace DotNetScaffolder.Components.Common.Contract
         /// <param name="parameters">
         /// The parameters.
         /// </param>
-        void Load(object parameters);
+        /// <returns>
+        /// The <see cref="object"/>.
+        /// </returns>
+        object Load(object parameters);
 
         /// <summary>
         /// Map database type to c# type.
@@ -72,12 +75,12 @@ namespace DotNetScaffolder.Components.Common.Contract
         /// <summary>
         /// Test DataSource
         /// </summary>
-        /// <param name="paramters">
+        /// <param name="parameters">
         /// </param>
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        bool Test(object paramters);
+        bool Test(object parameters);
 
         #endregion
     }

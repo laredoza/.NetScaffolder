@@ -11,6 +11,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
     using System;
     using System.Windows.Forms;
 
+    using DotNetScaffolder.Components.Common.Contract;
     using DotNetScaffolder.Components.Common.Contract.UI;
 
     #endregion
@@ -38,6 +39,8 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
         ///     Gets or sets the parameters.
         /// </summary>
         public object Parameters { get; set; }
+
+        public ISourceType SourceType { get; set; }
 
         #endregion
 

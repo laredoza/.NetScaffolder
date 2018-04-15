@@ -18,6 +18,11 @@ namespace DotNetScaffolder.Components.Common.Contract.UI
         /// </summary>
         object Parameters { get; set; }
 
+        /// <summary>
+        /// Gets or sets the source type.
+        /// </summary>
+        ISourceType SourceType { get; set; }
+
         #endregion
 
         #region Public Methods And Operators

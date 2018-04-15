@@ -134,6 +134,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
                 this.sourceType = ScaffoldConfig.ReturnSourceType(this.DataSource.SourceTypeId);
                 this.panel1.Controls.Clear();
                 this.sourceTypeControl = this.sourceType.AddConfigUI(this.panel1) as IDataSourceUI;
+                this.sourceTypeControl.SourceType = this.sourceType;
                 this.sourceTypeControl.LoadData(this.SavePath);
             }
             else
