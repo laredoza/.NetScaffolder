@@ -72,6 +72,29 @@ namespace DotNetScaffolder.Presentation.Forms
         #region Other Methods
 
         /// <summary>
+        /// The btn close_ click.
+        /// </summary>
+        /// <param name="sender">
+        /// The sender.
+        /// </param>
+        /// <param name="e">
+        /// The e.
+        /// </param>
+        private void BtnClose_Click(object sender, EventArgs e)
+        {
+            var result = MessageBox.Show(
+                this,
+                $"Are you sure you want to close the application?{Environment.NewLine}Any unsaved changes will be lost...",
+                "Are you sure?",
+                MessageBoxButtons.YesNo);
+
+            if (result == DialogResult.Yes)
+            {
+                this.Close();
+            }
+        }
+
+        /// <summary>
         /// The button 6_ click.
         /// </summary>
         /// <param name="sender">
@@ -156,18 +179,26 @@ namespace DotNetScaffolder.Presentation.Forms
         /// </param>
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //var result = MessageBox.Show(
-            //    this,
-            //    $"Are you sure you want to close the application?{Environment.NewLine}Any unsaved changes will be lost...",
-            //    "Are you sure?",
-            //    MessageBoxButtons.YesNo);
+            bool displayDialog = false;
 
-            //if (result == DialogResult.Yes)
-            //{
-            //    this.Close();
-            //}
+            if (!string.IsNullOrEmpty(this.ModelPath))
+            {
+                var result = MessageBox.Show(
+                    this,
+                    $"Are you sure you want to open a new model file?{Environment.NewLine}Any unsaved changes will be lost...",
+                    "Are you sure?",
+                    MessageBoxButtons.YesNo);
+                if (result == DialogResult.Yes)
+                {
+                    displayDialog = true;
+                }
+            }
+            else
+            {
+                displayDialog = true;
+            }
 
-            if (this.openFileDialog1.ShowDialog() == DialogResult.OK)
+            if (displayDialog && this.openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 this.ModelPath = this.openFileDialog1.FileName;
                 this.LoadData();
@@ -194,19 +225,5 @@ namespace DotNetScaffolder.Presentation.Forms
         }
 
         #endregion
-
-        private void BtnClose_Click(object sender, EventArgs e)
-        {
-            var result = MessageBox.Show(
-                this,
-                $"Are you sure you want to close the application?{Environment.NewLine}Any unsaved changes will be lost...",
-                "Are you sure?",
-                MessageBoxButtons.YesNo);
-
-            if (result == DialogResult.Yes)
-            {
-                this.Close();
-            }
-        }
     }
 }
