@@ -19,6 +19,8 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.Edmxs
     using DotNetScaffolder.Mapping.MetaData.Enum;
     using DotNetScaffolder.Mapping.MetaData.Model;
 
+    using global::Common.Logging;
+
     #endregion
 
     /// <summary>
@@ -29,6 +31,11 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.Edmxs
     [ExportMetadata("ValueMetaData", "3BC1B0C4-1E41-9146-82CF-599181CE4410")]
     public class EdmxSourceType : ISourceType
     {
+        /// <summary>
+        ///     The logger.
+        /// </summary>
+        private static readonly ILog Logger = LogManager.GetLogger(string.Empty);
+
         #region Public Methods And Operators
 
         /// <summary>
@@ -42,10 +49,14 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.Edmxs
         /// </returns>
         public object AddConfigUI(object parameters)
         {
+            Logger.Trace("Started AddConfigUI()");
+
             Control parent = parameters as Control;
             EdmxUserControl newControl = new EdmxUserControl { Visible = true, Dock = DockStyle.Fill };
             newControl.BringToFront();
             parent.Controls.Add(newControl);
+
+            Logger.Trace("Completed AddConfigUI()");
             return newControl;
         }
 
@@ -60,8 +71,9 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.Edmxs
         /// </returns>
         public DatabaseModel Import(object options)
         {
+            Logger.Trace("Started Import()"); 
+            
             DatabaseModel result = new DatabaseModel();
-
             FileSourceOptions fileOption = options as FileSourceOptions;
             var edmx = TiraggoEdmx_v3.Edmx.Load(fileOption.Path);
             var entityTableNames = new HashSet<string>(
@@ -135,6 +147,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.Edmxs
                                                   }).ToList()
                            }).ToList();
 
+            Logger.Trace("Completed Import()"); 
             return result;
         }
 
@@ -145,9 +158,11 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.Edmxs
         /// </param>
         public void Load(object parameters)
         {
+            Logger.Trace("Started Import()"); 
+            
             FileSourceOptions fileOption = parameters as FileSourceOptions;
 
-            throw new NotImplementedException();
+            Logger.Trace("Completed Import()"); 
         }
 
         /// <summary>
@@ -161,6 +176,8 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.Edmxs
         /// </returns>
         public DomainDataType MapDatabaseTypeToCSharp(string databaseType)
         {
+            Logger.Trace("Started MapDatabaseTypeToCSharp()"); 
+            
             switch (databaseType.ToUpper())
             {
                 case "INT16":
@@ -197,7 +214,9 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.Edmxs
         /// </param>
         public void Save(object parameters)
         {
-            throw new NotImplementedException();
+            Logger.Trace("Started Save()");
+
+            Logger.Trace("Completed Save()"); 
         }
 
         /// <summary>
@@ -210,7 +229,10 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.Edmxs
         /// </returns>
         public bool Test(object paramters)
         {
-            throw new NotImplementedException();
+            Logger.Trace("Started Test()");
+
+            Logger.Trace("Completed Test()"); 
+            return false;
         }
 
         #endregion
