@@ -9,11 +9,10 @@ namespace DotNetScaffolder.Presentation.Forms
     #region Usings
 
     using System;
+    using System.IO;
     using System.Linq;
     using System.Windows.Forms;
-
     using Configuration;
-
     using DotNetScaffolder.Mapping.ApplicationServices;
     using DotNetScaffolder.Mapping.MetaData.Project;
     using DotNetScaffolder.Presentation.Forms.Controls;
@@ -36,6 +35,8 @@ namespace DotNetScaffolder.Presentation.Forms
         ///     The application service.
         /// </summary>
         private IProjectDefinitionApplicationService applicationService;
+
+        private string modelPath;
 
         #endregion
 
@@ -65,7 +66,21 @@ namespace DotNetScaffolder.Presentation.Forms
         /// <summary>
         ///     Gets or sets the model path.
         /// </summary>
-        public string ModelPath { get; set; }
+        public string ModelPath
+        {
+            get
+            {
+                return this.modelPath;
+            }
+            set
+            {
+                if (this.modelPath != value)
+                {
+                    this.modelPath = value;
+                    projectDomainDetailsUserControl1.SavePath = Path.GetDirectoryName(this.ModelPath);
+                }
+            }
+        }
 
         #endregion
 

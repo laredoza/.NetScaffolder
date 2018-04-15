@@ -18,7 +18,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
     /// <summary>
     ///     The ado user control.
     /// </summary>
-    public partial class AdoUserControl : UserControl, IDefaultDataSourceUI
+    public partial class AdoUserControl : UserControl, IDataSourceUI
     {
         #region Constructors and Destructors
 
@@ -44,37 +44,40 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
         #region Public Methods And Operators
 
         /// <summary>
+        /// The load data.
+        /// </summary>
+        /// <param name="parameters">
+        /// The parameters.
+        /// </param>
+        /// <exception cref="NotImplementedException">
+        /// </exception>
+        public void LoadData(object parameters)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        /// <summary>
         ///     The save data.
         /// </summary>
-        /// <exception cref="NotImplementedException">
+        /// <param name="parameters">
+        ///     The parameters.
+        /// </param>
+        /// <exception cref="T:System.NotImplementedException">
         /// </exception>
-        public void SaveData()
+        public void SaveData(object parameters)
         {
             throw new NotImplementedException();
         }
 
-        #endregion
-
         /// <summary>
-        ///     The load data.
+        /// The test data.
         /// </summary>
-        /// <exception cref="NotImplementedException">
-        /// </exception>
-        void IDefaultDataSourceUI.LoadData()
+        /// <param name="parameters">
+        /// The parameters.
+        /// </param>
+        public void TestData(object parameters)
         {
-            throw new NotImplementedException();
-        }
-
-        #region Other Methods
-
-        /// <summary>
-        ///     The load data.
-        /// </summary>
-        /// <exception cref="NotImplementedException">
-        /// </exception>
-        void LoadData()
-        {
-            throw new NotImplementedException();
         }
 
         #endregion

@@ -1,23 +1,20 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="FileSourceOptions.cs" company="">
-//   
+// <copyright file="FileSourceOptions.cs" company="DotnetScaffolder">
+//   MIT
 // </copyright>
-// <summary>
-//   The file source options.
-// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.SourceOptions
 {
     /// <summary>
-    /// The file source options.
+    ///     The file source options.
     /// </summary>
     public class FileSourceOptions
     {
-        #region Properties
+        #region Public Properties
 
         /// <summary>
-        /// Gets or sets the path.
+        ///     Gets or sets the path.
         /// </summary>
         public string Path { get; set; }
 

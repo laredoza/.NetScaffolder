@@ -60,7 +60,7 @@
     <Compile Include="Contract\INamingConvention.cs" />
     <Compile Include="Contract\IOutputGenerator.cs" />
     <Compile Include="Contract\ISourceType.cs" />
-    <Compile Include="Contract\UI\IDefaultDataSourceUI.cs" />
+    <Compile Include="Contract\UI\IDataSourceUI.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

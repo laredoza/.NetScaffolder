@@ -1,21 +1,19 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="EdmxSourceType.cs" company="">
-//   
+// <copyright file="EdmxSourceType.cs" company="DotnetScaffolder">
+//   MIT
 // </copyright>
-// <summary>
-//   The edmx source type.
-// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.Edmxs
 {
-    #region Using
+    #region Usings
 
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.Composition;
     using System.Linq;
     using System.Windows.Forms;
+
     using DotNetScaffolder.Components.Common.Contract;
     using DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.SourceOptions;
     using DotNetScaffolder.Mapping.MetaData.Enum;
@@ -24,14 +22,33 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.Edmxs
     #endregion
 
     /// <summary>
-    /// This datasource uses the default Microsoft edmx file to return the data structure.
+    ///     This datasource uses the default Microsoft edmx file to return the data structure.
     /// </summary>
     [Export(typeof(ISourceType))]
     [ExportMetadata("NameMetaData", "EDMX")]
     [ExportMetadata("ValueMetaData", "3BC1B0C4-1E41-9146-82CF-599181CE4410")]
     public class EdmxSourceType : ISourceType
     {
-        #region Public methods and operators
+        #region Public Methods And Operators
+
+        /// <summary>
+        /// The add config ui.
+        /// </summary>
+        /// <param name="parameters">
+        /// The parameters.
+        /// </param>
+        /// <returns>
+        /// The <see cref="object"/>.
+        /// </returns>
+        public object AddConfigUI(object parameters)
+        {
+            Control parent = parameters as Control;
+            EdmxUserControl newControl = new EdmxUserControl
+                                             { Visible = true, Dock = DockStyle.Fill };
+            newControl.BringToFront();
+            parent.Controls.Add(newControl);
+            return newControl;
+        }
 
         /// <summary>
         /// Import data structure.
@@ -48,34 +65,90 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.Edmxs
 
             FileSourceOptions fileOption = options as FileSourceOptions;
             var edmx = TiraggoEdmx_v3.Edmx.Load(fileOption.Path);
-            var entityTableNames = new HashSet<string>(edmx.Runtime.ConceptualModels.Schema.EntityTypes.Select(tbl => tbl.Name.ToUpper()));
+            var entityTableNames = new HashSet<string>(
+                edmx.Runtime.ConceptualModels.Schema.EntityTypes.Select(tbl => tbl.Name.ToUpper()));
 
-            result.Tables = edmx.Runtime.ConceptualModels.Schema.EntityTypes.Select(tbl => new Table()
-            {
-                TableName = tbl.Name,
-                Columns = tbl.Properties.Select(col => new Column()
-                {
-                    ColumnName = col.Name,
-                    CSharpDataType = this.MapDatabaseTypeToCSharp(col.Type),
-                    IsRequired = col.Nullable,
-                    ColumnOrder = tbl.Properties.ToList().IndexOf(col) + 1,
-                    Precision = (col.Precision > 0 && col.Scale > 0) ? col.Precision : 0,
-                    Scale = (col.Precision > 0 && col.Scale > 0) ? col.Scale : 0,
-                    Length = (string.IsNullOrEmpty(col.MaxLength)) ? 0 : Convert.ToInt32(col.MaxLength),
-                    IsPrimaryKey = tbl.Key.Any(pk => pk.Name == col.Name),
-                }).ToList(),
-                RelationShips = edmx.Runtime.StorageModels.Schema.Associations.Where(ass => (ass.ReferentialConstraint.Dependent.Role == tbl.Name || ass.ReferentialConstraint.Principal.Role == tbl.Name) &&
-                    (entityTableNames.Contains(ass.ReferentialConstraint.Dependent.Role.ToUpper()) && entityTableNames.Contains(ass.ReferentialConstraint.Principal.Role.ToUpper()))).
-                    Select(rel => new Relationship()
-                    {
-                        TableName = (rel.ReferentialConstraint.Dependent.Role == tbl.Name) ? rel.ReferentialConstraint.Principal.Role : rel.ReferentialConstraint.Dependent.Role,
-                        ColumnName = (rel.ReferentialConstraint.Dependent.Role == tbl.Name) ? rel.ReferentialConstraint.Dependent.PropertyRef.Name : rel.ReferentialConstraint.Principal.PropertyRef.Name,
-                        ForeignColumnName = (rel.ReferentialConstraint.Principal.Role == tbl.Name) ? rel.ReferentialConstraint.Dependent.PropertyRef.Name : rel.ReferentialConstraint.Principal.PropertyRef.Name,
-                        DependencyRelationShip = (rel.ReferentialConstraint.Dependent.Role == tbl.Name) ? RelationshipType.ForeignKey : RelationshipType.ForeignKeyChild,
-                    }).ToList(),
-                    }).ToList();
+            result.Tables = edmx.Runtime.ConceptualModels.Schema.EntityTypes.Select(
+                tbl => new Table
+                           {
+                               TableName = tbl.Name,
+                               Columns =
+                                   tbl.Properties.Select(
+                                       col => new Column
+                                                  {
+                                                      ColumnName = col.Name,
+                                                      CSharpDataType =
+                                                          this.MapDatabaseTypeToCSharp(col.Type),
+                                                      IsRequired = col.Nullable,
+                                                      ColumnOrder =
+                                                          tbl.Properties.ToList().IndexOf(col) + 1,
+                                                      Precision =
+                                                          (col.Precision > 0 && col.Scale > 0)
+                                                              ? col.Precision
+                                                              : 0,
+                                                      Scale =
+                                                          (col.Precision > 0 && col.Scale > 0)
+                                                              ? col.Scale
+                                                              : 0,
+                                                      Length =
+                                                          string.IsNullOrEmpty(col.MaxLength)
+                                                              ? 0
+                                                              : Convert.ToInt32(col.MaxLength),
+                                                      IsPrimaryKey = tbl.Key.Any(pk => pk.Name == col.Name)
+                                                  }).ToList(),
+                               RelationShips = edmx.Runtime.StorageModels.Schema.Associations
+                                   .Where(
+                                       ass =>
+                                           (ass.ReferentialConstraint.Dependent.Role == tbl.Name
+                                            || ass.ReferentialConstraint.Principal.Role == tbl.Name)
+                                           && (entityTableNames.Contains(
+                                                   ass.ReferentialConstraint.Dependent.Role.ToUpper())
+                                               && entityTableNames.Contains(
+                                                   ass.ReferentialConstraint.Principal.Role.ToUpper()))).Select(
+                                       rel => new Relationship
+                                                  {
+                                                      TableName =
+                                                          (rel.ReferentialConstraint.Dependent.Role
+                                                           == tbl.Name)
+                                                              ? rel.ReferentialConstraint.Principal
+                                                                  .Role
+                                                              : rel.ReferentialConstraint.Dependent
+                                                                  .Role,
+                                                      ColumnName =
+                                                          (rel.ReferentialConstraint.Dependent.Role
+                                                           == tbl.Name)
+                                                              ? rel.ReferentialConstraint.Dependent
+                                                                  .PropertyRef.Name
+                                                              : rel.ReferentialConstraint.Principal
+                                                                  .PropertyRef.Name,
+                                                      ForeignColumnName =
+                                                          (rel.ReferentialConstraint.Principal.Role
+                                                           == tbl.Name)
+                                                              ? rel.ReferentialConstraint.Dependent
+                                                                  .PropertyRef.Name
+                                                              : rel.ReferentialConstraint.Principal
+                                                                  .PropertyRef.Name,
+                                                      DependencyRelationShip =
+                                                          (rel.ReferentialConstraint.Dependent.Role
+                                                           == tbl.Name)
+                                                              ? RelationshipType.ForeignKey
+                                                              : RelationshipType.ForeignKeyChild
+                                                  }).ToList()
+                           }).ToList();
 
             return result;
+        }
+
+        /// <summary>
+        /// Load Data
+        /// </summary>
+        /// <param name="parameters">
+        /// </param>
+        public void Load(object parameters)
+        {
+            FileSourceOptions fileOption = parameters as FileSourceOptions;
+
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -118,41 +191,25 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.Edmxs
             }
         }
 
-        public object AddConfigUI(object parameters)
-        {
-            Control parent = parameters as Control;
-            EdmxUserControl newControl = new EdmxUserControl();
-            newControl.Visible = true;
-            newControl.Dock = DockStyle.Fill;
-            newControl.BringToFront();
-            parent.Controls.Add(newControl);
-            return newControl;
-        }
-
-        /// <summary>
-        /// Tests Data Source
-        /// </summary>
-        /// <param name="paramters"></param>
-        /// <returns></returns>
-        public bool Test(object paramters)
-        {
-            throw new NotImplementedException();
-        }
-
         /// <summary>
         /// Saves data
         /// </summary>
-        /// <param name="parameters"></param>
+        /// <param name="parameters">
+        /// </param>
         public void Save(object parameters)
         {
             throw new NotImplementedException();
         }
 
         /// <summary>
-        /// Load Data
+        /// Tests Data Source
         /// </summary>
-        /// <param name="parameters"></param>
-        public void Load(object parameters)
+        /// <param name="paramters">
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        public bool Test(object paramters)
         {
             throw new NotImplementedException();
         }

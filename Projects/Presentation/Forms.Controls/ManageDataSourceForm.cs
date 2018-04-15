@@ -16,6 +16,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
     using Configuration;
 
     using DotNetScaffolder.Components.Common.Contract;
+    using DotNetScaffolder.Components.Common.Contract.UI;
     using DotNetScaffolder.Mapping.MetaData.Domain;
 
     #endregion
@@ -45,6 +46,11 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         ///     The source type.
         /// </summary>
         private ISourceType sourceType;
+
+        /// <summary>
+        /// The source type control.
+        /// </summary>
+        private IDataSourceUI sourceTypeControl;
 
         #endregion
 
@@ -82,12 +88,17 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the save path.
+        /// </summary>
+        public string SavePath { get; set; }
+
         #endregion
 
         #region Other Methods
 
         /// <summary>
-        /// The button 3_ click.
+        /// The btn save_ click.
         /// </summary>
         /// <param name="sender">
         /// The sender.
@@ -95,9 +106,24 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         /// <param name="e">
         /// The e.
         /// </param>
-        private void Button3Click(object sender, EventArgs e)
+        private void BtnSave_Click(object sender, EventArgs e)
         {
+            this.sourceTypeControl.SaveData(this.SavePath);
             this.Close();
+        }
+
+        /// <summary>
+        /// The btn test_ click.
+        /// </summary>
+        /// <param name="sender">
+        /// The sender.
+        /// </param>
+        /// <param name="e">
+        /// The e.
+        /// </param>
+        private void BtnTest_Click(object sender, EventArgs e)
+        {
+            this.sourceTypeControl.TestData(this.SavePath);
         }
 
         /// <summary>
@@ -111,7 +137,8 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
             {
                 this.sourceType = ScaffoldConfig.ReturnSourceType(this.DataSource.SourceTypeId);
                 this.panel1.Controls.Clear();
-                this.sourceType.AddConfigUI(this.panel1);
+                this.sourceTypeControl = this.sourceType.AddConfigUI(this.panel1) as IDataSourceUI;
+                this.sourceTypeControl.LoadData(this.SavePath);
             }
             else
             {

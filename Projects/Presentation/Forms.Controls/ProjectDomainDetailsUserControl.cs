@@ -10,6 +10,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
 
     using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
     using System.Windows.Forms;
 
@@ -50,6 +51,10 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         /// </summary>
         private DomainDefinition selectedDomain;
 
+        private string savePath;
+
+        private ManageDataSourceForm manageDataSourceForm;
+
         #endregion
 
         #region Constructors and Destructors
@@ -76,6 +81,8 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
             this.ComboBoxCollectionOption.DisplayMember = "Text";
             this.ComboBoxCollectionOption.ValueMember = "Value";
             this.ComboBoxCollectionOption.DataSource = this.ReturnCollectionOptions();
+
+            this.manageDataSourceForm = new ManageDataSourceForm();
         }
 
         #endregion
@@ -381,6 +388,22 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
             }
         }
 
+        public string SavePath
+        {
+            get
+            {
+                return this.savePath;
+            }
+            set
+            {
+                if (this.savePath != value)
+                {
+                    this.savePath = value;
+                    manageDataSourceForm.SavePath = this.savePath;
+                }
+            }
+        }
+
         #endregion
 
         #region Public Methods And Operators
@@ -525,7 +548,6 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         private void BtnManageSource_Click(object sender, EventArgs e)
         {
             Logger.Trace("Started Manage Source Clicked");
-            ManageDataSourceForm manageDataSourceForm = new ManageDataSourceForm();
             manageDataSourceForm.DataSource = this.SelectedDomain;
             manageDataSourceForm.ShowDialog();
             Logger.Trace("Completed Manage Source Clicked");
