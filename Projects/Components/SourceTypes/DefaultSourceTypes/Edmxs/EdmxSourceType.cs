@@ -269,13 +269,13 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.Edmxs
         #endregion
 
         /// <summary>
-        /// The return file path.
+        ///     The return file path.
         /// </summary>
         /// <param name="basePath">
-        /// The base path.
+        ///     The base path.
         /// </param>
         /// <returns>
-        /// The <see cref="string"/>.
+        ///     The <see cref="string" />.
         /// </returns>
         public string ReturnFilePath(string basePath)
         {

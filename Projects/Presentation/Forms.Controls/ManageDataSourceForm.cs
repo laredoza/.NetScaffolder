@@ -76,11 +76,8 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
             }
             set
             {
-                if (this.dataSource != value)
-                {
-                    this.dataSource = value;
-                    this.UpdateDataSource();
-                }
+                this.dataSource = value;
+                this.UpdateDataSource();
             }
         }
 

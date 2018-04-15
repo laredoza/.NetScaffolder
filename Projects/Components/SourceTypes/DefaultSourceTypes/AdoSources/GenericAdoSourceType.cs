@@ -9,7 +9,9 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
     #region Usings
 
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel.Composition;
+    using System.IO;
     using System.Linq;
     using System.Windows.Forms;
 
@@ -17,8 +19,11 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
 
     using DotNetScaffolder.Components.Common.Contract;
     using DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.SourceOptions;
+    using DotNetScaffolder.Core.Common.Serializer;
     using DotNetScaffolder.Mapping.MetaData.Enum;
     using DotNetScaffolder.Mapping.MetaData.Model;
+
+    using global::Common.Logging;
 
     #endregion
 
@@ -30,6 +35,11 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
     [ExportMetadata("ValueMetaData", "4BC1B0C4-1E41-9146-82CF-599181CE4410")]
     public class GenericAdoSourceType : ISourceType
     {
+        /// <summary>
+        ///     The logger.
+        /// </summary>
+        private static readonly ILog Logger = LogManager.GetLogger(string.Empty);
+
         #region Public Methods And Operators
 
         /// <summary>
@@ -43,12 +53,16 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
         /// </returns>
         public object AddConfigUI(object parameters)
         {
+            Logger.Trace("Started AddConfigUI()");
+
             Control parent = parameters as Control;
             AdoUserControl newControl = new AdoUserControl();
             newControl.Visible = true;
             newControl.Dock = DockStyle.Fill;
             newControl.BringToFront();
             parent.Controls.Add(newControl);
+
+            Logger.Trace("Completed AddConfigUI()");
             return newControl;
         }
 
@@ -141,7 +155,26 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
         /// </exception>
         public object Load(object parameters)
         {
-            throw new NotImplementedException();
+            Logger.Trace("Started Import()");
+
+            FileSourceOptions fileOption = parameters as FileSourceOptions;
+            string path = this.ReturnFilePath(parameters as string);
+            Logger.Debug($"Path: {path}");
+            FileSourceOptions result = null;
+
+            if (File.Exists(path))
+            {
+                Logger.Trace("Path Exists");
+                result = ObjectXMLSerializer<FileSourceOptions>.Load(path);
+            }
+            else
+            {
+                Logger.Trace("Path Doesn't Exist");
+            }
+
+            Logger.Trace("Completed Import()");
+
+            return result;
         }
 
         /// <summary>
@@ -192,7 +225,14 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
         /// </exception>
         public void Save(object parameters)
         {
-            throw new NotImplementedException();
+            Logger.Trace("Started Save()");
+
+            List<object> saveParameters = parameters as List<object>;
+            string path = this.ReturnFilePath(saveParameters[0] as string);
+            Logger.Debug($"Path: {path}");
+            ObjectXMLSerializer<FileSourceOptions>.Save(saveParameters[1] as FileSourceOptions, path, SerializedFormat.Document);
+
+            Logger.Trace("Completed Save()");
         }
 
         /// <summary>
@@ -212,5 +252,21 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
         }
 
         #endregion
+
+        /// <summary>
+        /// The return file path.
+        /// </summary>
+        /// <param name="basePath">
+        /// The base path.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        public string ReturnFilePath(string basePath)
+        {
+            Logger.Trace($"Started ReturnFilePath({basePath}");
+            Logger.Trace($"Completed ReturnFilePath({basePath}");
+            return basePath + @"\EdmxSourceType.xml";
+        }
     }
 }
