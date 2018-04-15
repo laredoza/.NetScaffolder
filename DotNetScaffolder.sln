@@ -81,6 +81,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataSource", "DataSource", "{BF6F7288-5B27-4512-BD95-69C01049AAD7}"
 	ProjectSection(SolutionItems) = preProject
 		DataSource\Model.Designer.cs = DataSource\Model.Designer.cs
+		Tests\CodeGenerator\DataSource\Model.Designer.cs = Tests\CodeGenerator\DataSource\Model.Designer.cs
 		DataSource\Model.edmx = DataSource\Model.edmx
 	EndProjectSection
 EndProject
