@@ -43,8 +43,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Project
         /// </summary>
         public ProjectDefinition()
         {
-            Domains = new List<DomainDefinition>();
-            CollectionOptions = new List<CollectionOption>();
+            this.Domains = new List<DomainDefinition>();
         }
 
         #endregion
@@ -56,11 +55,6 @@ namespace DotNetScaffolder.Mapping.MetaData.Project
         ///     i.e) Cars.Models
         /// </summary>
         public string BaseNameSpace { get; set; }
-
-        /// <summary>
-        ///     Gets or sets the collection options.
-        /// </summary>
-        public List<CollectionOption> CollectionOptions { get; set; }
 
         /// <summary>
         ///     Gets or sets the domains.

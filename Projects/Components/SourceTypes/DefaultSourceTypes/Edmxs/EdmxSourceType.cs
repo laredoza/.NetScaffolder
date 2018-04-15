@@ -43,8 +43,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.Edmxs
         public object AddConfigUI(object parameters)
         {
             Control parent = parameters as Control;
-            EdmxUserControl newControl = new EdmxUserControl
-                                             { Visible = true, Dock = DockStyle.Fill };
+            EdmxUserControl newControl = new EdmxUserControl { Visible = true, Dock = DockStyle.Fill };
             newControl.BringToFront();
             parent.Controls.Add(newControl);
             return newControl;

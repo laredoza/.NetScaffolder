@@ -62,7 +62,6 @@
     <Compile Include="Model\DomainDataType.cs" />
     <Compile Include="Model\Relationship.cs" />
     <Compile Include="Model\Table.cs" />
-    <Compile Include="Project\CollectionOption.cs" />
     <Compile Include="Project\FilePersistenceOptions.cs" />
     <Compile Include="Project\Packages\DataType.cs" />
     <Compile Include="Project\Packages\Package.cs" />
