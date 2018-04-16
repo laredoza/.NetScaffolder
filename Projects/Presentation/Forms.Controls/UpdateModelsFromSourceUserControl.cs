@@ -1,23 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="UpdateModelsFromSourceUserControl.cs" company="DotnetScaffolder">
+//   MIT
+// </copyright>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace DotNetScaffolder.Presentation.Forms.Controls
 {
+    #region Usings
+
+    using System.Windows.Forms;
+
     using Common.Logging;
 
     using Configuration;
 
     using DotNetScaffolder.Components.Common.Contract;
-    using DotNetScaffolder.Components.Common.Contract.UI;
     using DotNetScaffolder.Mapping.MetaData.Domain;
 
+    #endregion
+
+    /// <summary>
+    /// The update models from source user control.
+    /// </summary>
     public partial class UpdateModelsFromSourceUserControl : UserControl
     {
         #region Static Fields
@@ -42,6 +46,19 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         private ISourceType sourceType;
 
         #endregion
+
+        #region Constructors and Destructors
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UpdateModelsFromSourceUserControl"/> class.
+        /// </summary>
+        public UpdateModelsFromSourceUserControl()
+        {
+            this.InitializeComponent();
+        }
+
+        #endregion
+
         #region Public Properties
 
         /// <summary>
@@ -91,10 +108,5 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         }
 
         #endregion
-
-        public UpdateModelsFromSourceUserControl()
-        {
-            InitializeComponent();
-        }
     }
 }
