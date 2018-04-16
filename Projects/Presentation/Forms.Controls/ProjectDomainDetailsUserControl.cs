@@ -695,7 +695,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         private void BtnModel_Click(object sender, EventArgs e)
         {
             Logger.Trace("Started Model Clicked");
-//            manageDataSourceForm.DataSource = this.SelectedDomain;
+            this.modelForm.DataSource = this.SelectedDomain;
             this.modelForm.ShowDialog();
             Logger.Trace("Completed Model Clicked");
         }
