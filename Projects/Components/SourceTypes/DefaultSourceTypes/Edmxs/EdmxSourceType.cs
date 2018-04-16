@@ -236,7 +236,15 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.Edmxs
             List<object> saveParameters = parameters as List<object>;
             string path = this.ReturnFilePath(saveParameters[0] as string);
             Logger.Debug($"Path: {path}");
-            ObjectXMLSerializer<FileSourceOptions>.Save(saveParameters[1] as FileSourceOptions, path, SerializedFormat.Document);
+
+            FileSourceOptions options = saveParameters[1] as FileSourceOptions;
+
+            if (options == null)
+            {
+                options = new FileSourceOptions();
+            }
+
+            ObjectXMLSerializer<FileSourceOptions>.Save(options, path, SerializedFormat.Document);
 
             Logger.Trace("Completed Save()"); 
         }

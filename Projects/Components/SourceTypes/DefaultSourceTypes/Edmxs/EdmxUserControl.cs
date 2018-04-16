@@ -10,13 +10,11 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.Edmxs
 
     using System;
     using System.Collections.Generic;
-    using System.IO;
     using System.Windows.Forms;
 
     using DotNetScaffolder.Components.Common.Contract;
     using DotNetScaffolder.Components.Common.Contract.UI;
     using DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.SourceOptions;
-    using DotNetScaffolder.Core.Common.Serializer;
 
     using global::Common.Logging;
 
@@ -67,6 +65,9 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.Edmxs
         /// </summary>
         public object Parameters { get; set; }
 
+        /// <summary>
+        ///     Gets or sets the source type.
+        /// </summary>
         public ISourceType SourceType { get; set; }
 
         #endregion
@@ -109,10 +110,8 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.Edmxs
         {
             Logger.Trace("Started SaveData()");
 
-            List<Object> saveParameters = new List<object>();
-            saveParameters.Add((parameters));
-            saveParameters.Add(this.options);
-            this.SourceType.Save(saveParameters); 
+            List<object> saveParameters = new List<object> { parameters, this.options };
+            this.SourceType.Save(saveParameters);
 
             Logger.Trace("Completed SaveData()");
         }

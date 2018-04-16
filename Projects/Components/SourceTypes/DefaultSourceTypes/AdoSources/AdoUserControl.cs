@@ -9,10 +9,14 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
     #region Usings
 
     using System;
+    using System.Collections.Generic;
     using System.Windows.Forms;
 
     using DotNetScaffolder.Components.Common.Contract;
     using DotNetScaffolder.Components.Common.Contract.UI;
+    using DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.SourceOptions;
+
+    using global::Common.Logging;
 
     #endregion
 
@@ -21,6 +25,13 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
     /// </summary>
     public partial class AdoUserControl : UserControl, IDataSourceUI
     {
+        private AdoSourceOptions options;
+
+        /// <summary>
+        ///     The logger.
+        /// </summary>
+        private static readonly ILog Logger = LogManager.GetLogger(string.Empty);
+        
         #region Constructors and Destructors
 
         /// <summary>
@@ -28,7 +39,10 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
         /// </summary>
         public AdoUserControl()
         {
+            Logger.Trace("Started AdoUserControl()");
             this.InitializeComponent();
+            this.options = new AdoSourceOptions(); 
+            Logger.Trace("Completed AdoUserControl()");
         }
 
         #endregion
@@ -56,7 +70,20 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
         /// </exception>
         public void LoadData(object parameters)
         {
-            throw new NotImplementedException();
+            Logger.Trace("Started LoadData()");
+
+            this.options = this.SourceType.Load(parameters) as AdoSourceOptions;
+
+            if (this.options != null)
+            {
+                this.TxtConnection.Text = this.options.ConnectionString;
+            }
+            else
+            {
+                this.TxtConnection.Text = string.Empty;
+            }
+
+            Logger.Trace("Completed LoadData()");
         }
 
         /// <inheritdoc />
@@ -70,7 +97,12 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
         /// </exception>
         public void SaveData(object parameters)
         {
-            throw new NotImplementedException();
+            Logger.Trace("Started SaveData()");
+
+            List<object> saveParameters = new List<object> { parameters, this.options };
+            this.SourceType.Save(saveParameters);
+
+            Logger.Trace("Completed SaveData()");
         }
 
         /// <summary>

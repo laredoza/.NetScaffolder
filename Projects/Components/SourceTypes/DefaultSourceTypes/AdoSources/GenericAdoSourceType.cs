@@ -160,12 +160,12 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
             FileSourceOptions fileOption = parameters as FileSourceOptions;
             string path = this.ReturnFilePath(parameters as string);
             Logger.Debug($"Path: {path}");
-            FileSourceOptions result = null;
+            AdoSourceOptions result = null;
 
             if (File.Exists(path))
             {
                 Logger.Trace("Path Exists");
-                result = ObjectXMLSerializer<FileSourceOptions>.Load(path);
+                result = ObjectXMLSerializer<AdoSourceOptions>.Load(path);
             }
             else
             {
@@ -230,7 +230,15 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
             List<object> saveParameters = parameters as List<object>;
             string path = this.ReturnFilePath(saveParameters[0] as string);
             Logger.Debug($"Path: {path}");
-            ObjectXMLSerializer<FileSourceOptions>.Save(saveParameters[1] as FileSourceOptions, path, SerializedFormat.Document);
+
+            AdoSourceOptions options = saveParameters[1] as AdoSourceOptions;
+
+            if (options == null)
+            {
+                options = new AdoSourceOptions();
+            }
+
+            ObjectXMLSerializer<AdoSourceOptions>.Save(options, path, SerializedFormat.Document);
 
             Logger.Trace("Completed Save()");
         }
@@ -266,7 +274,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
         {
             Logger.Trace($"Started ReturnFilePath({basePath}");
             Logger.Trace($"Completed ReturnFilePath({basePath}");
-            return basePath + @"\EdmxSourceType.xml";
+            return basePath + @"\GenericAdoSourceType.xml";
         }
     }
 }
