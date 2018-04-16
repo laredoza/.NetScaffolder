@@ -233,7 +233,7 @@
             this.groupBox3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.groupBox3.Size = new System.Drawing.Size(729, 368);
+            this.groupBox3.Size = new System.Drawing.Size(849, 368);
             this.groupBox3.TabIndex = 18;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Domain Details";
@@ -246,6 +246,7 @@
             this.projectDomainDetailsUserControl1.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
             this.projectDomainDetailsUserControl1.Name = "projectDomainDetailsUserControl1";
             this.projectDomainDetailsUserControl1.Packages = null;
+            this.projectDomainDetailsUserControl1.SavePath = null;
             this.projectDomainDetailsUserControl1.SelectedCollectionOptionId = new System.Guid("00000000-0000-0000-0000-000000000000");
             this.projectDomainDetailsUserControl1.SelectedDomain = null;
             this.projectDomainDetailsUserControl1.SelectedDriver = new System.Guid("00000000-0000-0000-0000-000000000000");
@@ -253,7 +254,7 @@
             this.projectDomainDetailsUserControl1.SelectedNamingConvention = new System.Guid("00000000-0000-0000-0000-000000000000");
             this.projectDomainDetailsUserControl1.SelectedPackage = null;
             this.projectDomainDetailsUserControl1.SelectedSourceType = new System.Guid("00000000-0000-0000-0000-000000000000");
-            this.projectDomainDetailsUserControl1.Size = new System.Drawing.Size(664, 325);
+            this.projectDomainDetailsUserControl1.Size = new System.Drawing.Size(787, 325);
             this.projectDomainDetailsUserControl1.TabIndex = 0;
             // 
             // tabPage2

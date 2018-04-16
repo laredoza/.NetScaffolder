@@ -157,7 +157,6 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
         {
             Logger.Trace("Started Import()");
 
-            FileSourceOptions fileOption = parameters as FileSourceOptions;
             string path = this.ReturnFilePath(parameters as string);
             Logger.Debug($"Path: {path}");
             AdoSourceOptions result = null;

@@ -128,7 +128,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         /// </param>
         private void button2_Click(object sender, EventArgs e)
         {
-            UpdateTablesFromSourceForm tables = new UpdateTablesFromSourceForm();
+            UpdateModelsFromSourceForm tables = new UpdateModelsFromSourceForm();
             tables.ShowDialog();
         }
 

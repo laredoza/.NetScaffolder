@@ -45,6 +45,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.BtnManageSource = new System.Windows.Forms.Button();
             this.BtnModel = new System.Windows.Forms.Button();
+            this.BtnRefresh = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button5
@@ -224,10 +225,21 @@
             this.BtnModel.UseVisualStyleBackColor = true;
             this.BtnModel.Click += new System.EventHandler(this.BtnModel_Click);
             // 
+            // BtnRefresh
+            // 
+            this.BtnRefresh.Location = new System.Drawing.Point(652, 179);
+            this.BtnRefresh.Name = "BtnRefresh";
+            this.BtnRefresh.Size = new System.Drawing.Size(91, 38);
+            this.BtnRefresh.TabIndex = 51;
+            this.BtnRefresh.Text = "Refresh";
+            this.BtnRefresh.UseVisualStyleBackColor = true;
+            this.BtnRefresh.Click += new System.EventHandler(this.BtnRefresh_Click);
+            // 
             // ProjectDomainDetailsUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.BtnRefresh);
             this.Controls.Add(this.BtnModel);
             this.Controls.Add(this.BtnManageSource);
             this.Controls.Add(this.button5);
@@ -247,7 +259,7 @@
             this.Controls.Add(this.label5);
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "ProjectDomainDetailsUserControl";
-            this.Size = new System.Drawing.Size(664, 325);
+            this.Size = new System.Drawing.Size(852, 325);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -272,5 +284,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button BtnManageSource;
         private System.Windows.Forms.Button BtnModel;
+        private System.Windows.Forms.Button BtnRefresh;
     }
 }

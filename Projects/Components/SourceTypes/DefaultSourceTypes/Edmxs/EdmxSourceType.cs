@@ -162,7 +162,6 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.Edmxs
         {
             Logger.Trace("Started Import()"); 
             
-            FileSourceOptions fileOption = parameters as FileSourceOptions;
             string path = this.ReturnFilePath(parameters as string);
             Logger.Debug($"Path: {path}");
             FileSourceOptions result = null;
