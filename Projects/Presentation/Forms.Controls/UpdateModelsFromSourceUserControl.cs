@@ -26,7 +26,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
     #endregion
 
     /// <summary>
-    /// The update models from source user control.
+    ///     The update models from source user control.
     /// </summary>
     public partial class UpdateModelsFromSourceUserControl : UserControl
     {
@@ -56,7 +56,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         #region Constructors and Destructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="UpdateModelsFromSourceUserControl"/> class.
+        ///     Initializes a new instance of the <see cref="UpdateModelsFromSourceUserControl" /> class.
         /// </summary>
         public UpdateModelsFromSourceUserControl()
         {
@@ -91,6 +91,36 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
 
         #endregion
 
+        #region Public Methods And Operators
+
+        /// <summary>
+        /// The add nodes.
+        /// </summary>
+        /// <param name="parentName">
+        /// The parent name.
+        /// </param>
+        /// <param name="treeView">
+        /// The tree view.
+        /// </param>
+        /// <param name="hierarchy">
+        /// The hierarchy.
+        /// </param>
+        /// <param name="applicationService">
+        /// The application service.
+        /// </param>
+        public void AddNodes(
+            string parentName,
+            TreeView treeView,
+            List<Hierarchy> hierarchy,
+            ITableHierarchyService applicationService)
+        {
+            treeView.Nodes.Clear();
+            treeView.Nodes.Add(new TreeNode { Text = parentName });
+            treeView.Nodes[0].Nodes.AddRange(applicationService.ConvertHierarchyToNodes(hierarchy).ToArray());
+        }
+
+        #endregion
+
         #region Other Methods
 
         /// <summary>
@@ -105,10 +135,10 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
                 this.sourceType = ScaffoldConfig.ReturnSourceType(this.DataSource.SourceTypeId);
                 var sourceDomain = this.sourceType.Import(this.sourceType.Load(this.SavePath));
 
-                IApplicationTableCollectionDifference differenceService = new ApplicationTableCollectionDifference(new ApplicationTableDifference());
-                ApplicationTableCollectionDifference differences = differenceService.CompareTables(
-                    this.DataSource.Tables,
-                    sourceDomain.Tables);
+                IApplicationTableCollectionDifference differenceService =
+                    new ApplicationTableCollectionDifference(new ApplicationTableDifference());
+                ApplicationTableCollectionDifference differences =
+                    differenceService.CompareTables(this.DataSource.Tables, sourceDomain.Tables);
 
                 ITableHierarchyService applicationService = new TempateHierarchyService();
                 List<Hierarchy> hierarchy = applicationService.ReturnHierarchyFromList(
@@ -117,17 +147,11 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
                     false);
                 this.AddNodes("Models", this.TreeViewAdd, hierarchy, applicationService);
 
-                hierarchy = applicationService.ReturnHierarchyFromList(
-                    differences.RefreshTable,
-                    false,
-                    false);
+                hierarchy = applicationService.ReturnHierarchyFromList(differences.RefreshTable, false, false);
 
                 this.AddNodes("Models", this.TreeViewRefresh, hierarchy, applicationService);
 
-                hierarchy = applicationService.ReturnHierarchyFromList(
-                    differences.FirstMissingTables,
-                    false,
-                    false);
+                hierarchy = applicationService.ReturnHierarchyFromList(differences.FirstMissingTables, false, false);
 
                 this.AddNodes("Models", this.TreeViewDelete, hierarchy, applicationService);
             }
@@ -137,13 +161,6 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
             }
 
             Logger.Trace("Completed UpdateDataSource()");
-        }
-
-        public void AddNodes(string parentName, TreeView treeView, List<Hierarchy> hierarchy, ITableHierarchyService applicationService)
-        {
-            treeView.Nodes.Clear();
-            treeView.Nodes.Add(new TreeNode { Text = parentName });
-            treeView.Nodes[0].Nodes.AddRange(applicationService.ConvertHierarchyToNodes(hierarchy).ToArray());
         }
 
         #endregion

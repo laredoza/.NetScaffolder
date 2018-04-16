@@ -14,10 +14,9 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Templates
     using System.Windows.Forms;
 
     using DotNetScaffolder.Mapping.ApplicationServices.Tables;
+    using DotNetScaffolder.Mapping.MetaData.Model;
 
     using FormControls.TreeView;
-
-    using Table = DotNetScaffolder.Mapping.MetaData.Model.Table;
 
     #endregion
 
@@ -27,6 +26,30 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Templates
     public class TempateHierarchyService : ITableHierarchyService
     {
         #region Public Methods And Operators
+
+        /// <summary>
+        /// The convert hierarchy to nodes.
+        /// </summary>
+        /// <param name="items">
+        /// The items.
+        /// </param>
+        /// <returns>
+        /// The <see cref="List"/>.
+        /// </returns>
+        public List<TreeNode> ConvertHierarchyToNodes(List<Hierarchy> items)
+        {
+            List<TreeNode> nodes = new List<TreeNode>();
+
+            foreach (Hierarchy item in items)
+            {
+                var node = new TreeNode { Tag = item.Item, Text = item.Name, Name = item.Id.ToString() };
+                nodes.Add(node);
+
+                node.Nodes.AddRange(this.ConvertHierarchyToNodes(item.Children).ToArray());
+            }
+
+            return nodes;
+        }
 
         /// <summary>
         /// The new node.
@@ -96,35 +119,6 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Templates
             }
 
             return result;
-        }
-
-        /// <summary>
-        /// The convert hierarchy to nodes.
-        /// </summary>
-        /// <param name="items">
-        /// The items.
-        /// </param>
-        /// <returns>
-        /// The <see cref="List"/>.
-        /// </returns>
-        public List<TreeNode> ConvertHierarchyToNodes(List<Hierarchy> items)
-        {
-            List<TreeNode> nodes = new List<TreeNode>();
-
-            foreach (Hierarchy item in items)
-            {
-                var node = new TreeNode
-                               {
-                                   Tag = item.Item,
-                                   Text = item.Name,
-                                   Name = item.Id.ToString() 
-                               };
-                nodes.Add(node);
-
-                node.Nodes.AddRange(this.ConvertHierarchyToNodes(item.Children).ToArray());
-            }
-
-            return nodes;
         }
 
         #endregion
