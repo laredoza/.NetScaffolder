@@ -10,14 +10,10 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
 
     using System;
     using System.Collections.Generic;
-    using System.IO;
     using System.Linq;
     using System.Windows.Forms;
-
     using Common.Logging;
-
     using Configuration;
-
     using DotNetScaffolder.Core.Common;
     using DotNetScaffolder.Mapping.ApplicationServices;
     using DotNetScaffolder.Mapping.MetaData.Domain;
@@ -47,15 +43,24 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         private IProjectDefinitionApplicationService applicationService;
 
         /// <summary>
+        /// The manage data source form.
+        /// </summary>
+        private readonly ManageDataSourceForm manageDataSourceForm;
+
+        /// <summary>
+        /// The model form.
+        /// </summary>
+        private readonly ModelForm modelForm;
+
+        /// <summary>
+        /// The save path.
+        /// </summary>
+        private string savePath;
+
+        /// <summary>
         ///     The selected domain.
         /// </summary>
         private DomainDefinition selectedDomain;
-
-        private string savePath;
-
-        private ManageDataSourceForm manageDataSourceForm;
-
-        private ModelForm modelForm;
 
         #endregion
 
@@ -163,6 +168,26 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         ///     Gets or sets the packages.
         /// </summary>
         public List<Package> Packages { get; set; }
+
+        /// <summary>
+        /// Gets or sets the save path.
+        /// </summary>
+        public string SavePath
+        {
+            get
+            {
+                return this.savePath;
+            }
+
+            set
+            {
+                if (this.savePath != value)
+                {
+                    this.savePath = value;
+                    this.manageDataSourceForm.SavePath = this.savePath;
+                }
+            }
+        }
 
         /// <summary>
         ///     Gets or sets the selected collection option.
@@ -391,22 +416,6 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
             }
         }
 
-        public string SavePath
-        {
-            get
-            {
-                return this.savePath;
-            }
-            set
-            {
-                if (this.savePath != value)
-                {
-                    this.savePath = value;
-                    manageDataSourceForm.SavePath = this.savePath;
-                }
-            }
-        }
-
         #endregion
 
         #region Public Methods And Operators
@@ -551,9 +560,26 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         private void BtnManageSource_Click(object sender, EventArgs e)
         {
             Logger.Trace("Started Manage Source Clicked");
-            manageDataSourceForm.DataSource = this.SelectedDomain;
-            manageDataSourceForm.ShowDialog();
+            this.manageDataSourceForm.DataSource = this.SelectedDomain;
+            this.manageDataSourceForm.ShowDialog();
             Logger.Trace("Completed Manage Source Clicked");
+        }
+
+        /// <summary>
+        /// The btn model_ click.
+        /// </summary>
+        /// <param name="sender">
+        /// The sender.
+        /// </param>
+        /// <param name="e">
+        /// The e.
+        /// </param>
+        private void BtnModel_Click(object sender, EventArgs e)
+        {
+            Logger.Trace("Started Model Clicked");
+            this.modelForm.DataSource = this.SelectedDomain;
+            this.modelForm.ShowDialog();
+            Logger.Trace("Completed Model Clicked");
         }
 
         /// <summary>
@@ -691,13 +717,5 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         }
 
         #endregion
-
-        private void BtnModel_Click(object sender, EventArgs e)
-        {
-            Logger.Trace("Started Model Clicked");
-            this.modelForm.DataSource = this.SelectedDomain;
-            this.modelForm.ShowDialog();
-            Logger.Trace("Completed Model Clicked");
-        }
     }
 }
