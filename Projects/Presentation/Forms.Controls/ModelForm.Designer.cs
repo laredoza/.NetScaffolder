@@ -28,19 +28,33 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.modelFormUserControl1 = new DotNetScaffolder.Presentation.Forms.Controls.ModelFormUserControl();
             this.SuspendLayout();
+            // 
+            // modelFormUserControl1
+            // 
+            this.modelFormUserControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.modelFormUserControl1.Location = new System.Drawing.Point(0, 0);
+            this.modelFormUserControl1.Name = "modelFormUserControl1";
+            this.modelFormUserControl1.Size = new System.Drawing.Size(1615, 789);
+            this.modelFormUserControl1.TabIndex = 0;
+            this.modelFormUserControl1.Load += new System.EventHandler(this.modelFormUserControl1_Load);
             // 
             // ModelForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1615, 789);
+            this.Controls.Add(this.modelFormUserControl1);
             this.Name = "ModelForm";
             this.Text = "Manage Models";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.ResumeLayout(false);
 
         }
 
         #endregion
+
+        private ModelFormUserControl modelFormUserControl1;
     }
 }

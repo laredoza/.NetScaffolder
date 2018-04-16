@@ -89,6 +89,12 @@
     <Compile Include="ModelForm.Designer.cs">
       <DependentUpon>ModelForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ModelFormUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ModelFormUserControl.Designer.cs">
+      <DependentUpon>ModelFormUserControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="ProjectDetailsUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -153,6 +159,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ModelForm.resx">
       <DependentUpon>ModelForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModelFormUserControl.resx">
+      <DependentUpon>ModelFormUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ProjectDetailsUserControl.resx">
       <DependentUpon>ProjectDetailsUserControl.cs</DependentUpon>

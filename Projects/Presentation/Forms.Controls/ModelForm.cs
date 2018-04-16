@@ -115,5 +115,10 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         }
 
         #endregion
+
+        private void modelFormUserControl1_Load(object sender, System.EventArgs e)
+        {
+
+        }
     }
 }
