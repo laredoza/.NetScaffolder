@@ -54,13 +54,13 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.label1 = new System.Windows.Forms.Label();
-            this.treeView1 = new FormControls.TreeView.MultiSelectTreeView.TreeView();
+            this.TreeViewAdd = new FormControls.TreeView.MultiSelectTreeView.TreeView();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.label2 = new System.Windows.Forms.Label();
-            this.treeView2 = new FormControls.TreeView.MultiSelectTreeView.TreeView();
+            this.TreeViewRefresh = new FormControls.TreeView.MultiSelectTreeView.TreeView();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.label3 = new System.Windows.Forms.Label();
-            this.treeView3 = new FormControls.TreeView.MultiSelectTreeView.TreeView();
+            this.TreeViewDelete = new FormControls.TreeView.MultiSelectTreeView.TreeView();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -82,7 +82,7 @@
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.label1);
-            this.tabPage1.Controls.Add(this.treeView1);
+            this.tabPage1.Controls.Add(this.TreeViewAdd);
             this.tabPage1.Location = new System.Drawing.Point(4, 29);
             this.tabPage1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tabPage1.Name = "tabPage1";
@@ -102,12 +102,12 @@
             this.label1.TabIndex = 2;
             this.label1.Text = "Select items to add to the model";
             // 
-            // treeView1
+            // TreeViewAdd
             // 
-            this.treeView1.CheckBoxes = true;
-            this.treeView1.Location = new System.Drawing.Point(10, 11);
-            this.treeView1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.treeView1.Name = "treeView1";
+            this.TreeViewAdd.CheckBoxes = true;
+            this.TreeViewAdd.Location = new System.Drawing.Point(10, 11);
+            this.TreeViewAdd.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.TreeViewAdd.Name = "TreeViewAdd";
             treeNode1.Name = "Node2";
             treeNode1.Text = "BankAccount";
             treeNode2.Name = "Node4";
@@ -120,17 +120,17 @@
             treeNode5.Text = "dbo";
             treeNode6.Name = "Node0";
             treeNode6.Text = "Tables";
-            this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
+            this.TreeViewAdd.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
             treeNode6});
-            this.treeView1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            this.treeView1.SelectionMode = FormControls.TreeView.MultiSelectTreeView.TreeViewSelectionMode.SingleSelect;
-            this.treeView1.Size = new System.Drawing.Size(836, 444);
-            this.treeView1.TabIndex = 0;
+            this.TreeViewAdd.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            this.TreeViewAdd.SelectionMode = FormControls.TreeView.MultiSelectTreeView.TreeViewSelectionMode.SingleSelect;
+            this.TreeViewAdd.Size = new System.Drawing.Size(836, 444);
+            this.TreeViewAdd.TabIndex = 0;
             // 
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.label2);
-            this.tabPage2.Controls.Add(this.treeView2);
+            this.tabPage2.Controls.Add(this.TreeViewRefresh);
             this.tabPage2.Location = new System.Drawing.Point(4, 29);
             this.tabPage2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tabPage2.Name = "tabPage2";
@@ -150,12 +150,12 @@
             this.label2.TabIndex = 3;
             this.label2.Text = "These items were found in the database and will be refreshed in the model";
             // 
-            // treeView2
+            // TreeViewRefresh
             // 
-            this.treeView2.CheckBoxes = true;
-            this.treeView2.Location = new System.Drawing.Point(26, 18);
-            this.treeView2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.treeView2.Name = "treeView2";
+            this.TreeViewRefresh.CheckBoxes = true;
+            this.TreeViewRefresh.Location = new System.Drawing.Point(26, 18);
+            this.TreeViewRefresh.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.TreeViewRefresh.Name = "TreeViewRefresh";
             treeNode7.Name = "Node2";
             treeNode7.Text = "Country";
             treeNode8.Name = "Node4";
@@ -168,17 +168,17 @@
             treeNode11.Text = "dbo";
             treeNode12.Name = "Node0";
             treeNode12.Text = "Tables";
-            this.treeView2.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
+            this.TreeViewRefresh.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
             treeNode12});
-            this.treeView2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            this.treeView2.SelectionMode = FormControls.TreeView.MultiSelectTreeView.TreeViewSelectionMode.SingleSelect;
-            this.treeView2.Size = new System.Drawing.Size(836, 444);
-            this.treeView2.TabIndex = 1;
+            this.TreeViewRefresh.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            this.TreeViewRefresh.SelectionMode = FormControls.TreeView.MultiSelectTreeView.TreeViewSelectionMode.SingleSelect;
+            this.TreeViewRefresh.Size = new System.Drawing.Size(836, 444);
+            this.TreeViewRefresh.TabIndex = 1;
             // 
             // tabPage3
             // 
             this.tabPage3.Controls.Add(this.label3);
-            this.tabPage3.Controls.Add(this.treeView3);
+            this.tabPage3.Controls.Add(this.TreeViewDelete);
             this.tabPage3.Location = new System.Drawing.Point(4, 29);
             this.tabPage3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tabPage3.Name = "tabPage3";
@@ -198,20 +198,20 @@
             this.label3.Text = "These items could not be found in the database and will be removed from the model" +
     ".";
             // 
-            // treeView3
+            // TreeViewDelete
             // 
-            this.treeView3.CheckBoxes = true;
-            this.treeView3.Location = new System.Drawing.Point(26, 18);
-            this.treeView3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.treeView3.Name = "treeView3";
+            this.TreeViewDelete.CheckBoxes = true;
+            this.TreeViewDelete.Location = new System.Drawing.Point(26, 18);
+            this.TreeViewDelete.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.TreeViewDelete.Name = "TreeViewDelete";
             treeNode13.Name = "Node0";
             treeNode13.Text = "Tables";
-            this.treeView3.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
+            this.TreeViewDelete.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
             treeNode13});
-            this.treeView3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            this.treeView3.SelectionMode = FormControls.TreeView.MultiSelectTreeView.TreeViewSelectionMode.SingleSelect;
-            this.treeView3.Size = new System.Drawing.Size(836, 444);
-            this.treeView3.TabIndex = 2;
+            this.TreeViewDelete.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            this.TreeViewDelete.SelectionMode = FormControls.TreeView.MultiSelectTreeView.TreeViewSelectionMode.SingleSelect;
+            this.TreeViewDelete.Size = new System.Drawing.Size(836, 444);
+            this.TreeViewDelete.TabIndex = 2;
             // 
             // UpdateModelsFromSourceUserControl
             // 
@@ -236,12 +236,12 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.Label label1;
-        private FormControls.TreeView.MultiSelectTreeView.TreeView treeView1;
+        private FormControls.TreeView.MultiSelectTreeView.TreeView TreeViewAdd;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.Label label2;
-        private FormControls.TreeView.MultiSelectTreeView.TreeView treeView2;
+        private FormControls.TreeView.MultiSelectTreeView.TreeView TreeViewRefresh;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.Label label3;
-        private FormControls.TreeView.MultiSelectTreeView.TreeView treeView3;
+        private FormControls.TreeView.MultiSelectTreeView.TreeView TreeViewDelete;
     }
 }

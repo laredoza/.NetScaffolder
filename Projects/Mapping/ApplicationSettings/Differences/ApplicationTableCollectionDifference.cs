@@ -57,6 +57,24 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Differences
         /// </summary>
         public List<ApplicationTableDifference> ProblemTables { get; set; }
 
+        /// <summary>
+        /// Gets or sets the refresh table.
+        /// </summary>
+        public List<Table> RefreshTable
+        {
+            get
+            {
+                List<Table> result = new List<Table>();
+
+                foreach (ApplicationTableDifference applicationTableDifference in this.ProblemTables)
+                {
+                   result.Add(applicationTableDifference.ProblemTable); 
+                }
+
+                return result;
+            }
+        }
+
         #endregion
 
         #region Public Methods And Operators
@@ -73,7 +91,7 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Differences
         /// <returns>
         /// The <see cref="ApplicationTableCollectionDifference"/>.
         /// </returns>
-        public ApplicationTableCollectionDifference CompareTableCollections(List<Table> first, List<Table> second)
+        public ApplicationTableCollectionDifference CompareTables(List<Table> first, List<Table> second)
         {
             var retval = new ApplicationTableCollectionDifference(this.ApplicationTableDifference);
 

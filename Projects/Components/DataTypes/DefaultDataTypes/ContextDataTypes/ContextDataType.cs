@@ -137,7 +137,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
         /// <returns>
         ///     The <see cref="IHierarchy" />.
         /// </returns>
-        public IHierarchy ReturnNavigation()
+        public Hierarchy ReturnNavigation()
         {
             var parent = new Hierarchy { Id = new Guid("1BC1B0C4-1E41-9146-82CF-599181CE4430"), Name = "Context" };
 

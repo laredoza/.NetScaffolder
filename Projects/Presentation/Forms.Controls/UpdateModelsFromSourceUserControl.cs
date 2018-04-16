@@ -8,6 +8,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
 {
     #region Usings
 
+    using System.Collections.Generic;
     using System.Windows.Forms;
 
     using Common.Logging;
@@ -15,7 +16,12 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
     using Configuration;
 
     using DotNetScaffolder.Components.Common.Contract;
+    using DotNetScaffolder.Mapping.ApplicationServices.Differences;
+    using DotNetScaffolder.Mapping.ApplicationServices.Tables;
+    using DotNetScaffolder.Mapping.ApplicationServices.Templates;
     using DotNetScaffolder.Mapping.MetaData.Domain;
+
+    using FormControls.TreeView;
 
     #endregion
 
@@ -97,7 +103,33 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
             if (this.DataSource != null)
             {
                 this.sourceType = ScaffoldConfig.ReturnSourceType(this.DataSource.SourceTypeId);
-                var a = this.sourceType.Import(this.sourceType.Load(this.SavePath));
+                var sourceDomain = this.sourceType.Import(this.sourceType.Load(this.SavePath));
+
+                IApplicationTableCollectionDifference differenceService = new ApplicationTableCollectionDifference(new ApplicationTableDifference());
+                ApplicationTableCollectionDifference differences = differenceService.CompareTables(
+                    this.DataSource.Tables,
+                    sourceDomain.Tables);
+
+                ITableHierarchyService applicationService = new TempateHierarchyService();
+                List<Hierarchy> hierarchy = applicationService.ReturnHierarchyFromList(
+                    differences.FirstExtraTables,
+                    false,
+                    false);
+                this.AddNodes("Models", this.TreeViewAdd, hierarchy, applicationService);
+
+                hierarchy = applicationService.ReturnHierarchyFromList(
+                    differences.RefreshTable,
+                    false,
+                    false);
+
+                this.AddNodes("Models", this.TreeViewRefresh, hierarchy, applicationService);
+
+                hierarchy = applicationService.ReturnHierarchyFromList(
+                    differences.FirstMissingTables,
+                    false,
+                    false);
+
+                this.AddNodes("Models", this.TreeViewDelete, hierarchy, applicationService);
             }
             else
             {
@@ -105,6 +137,13 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
             }
 
             Logger.Trace("Completed UpdateDataSource()");
+        }
+
+        public void AddNodes(string parentName, TreeView treeView, List<Hierarchy> hierarchy, ITableHierarchyService applicationService)
+        {
+            treeView.Nodes.Clear();
+            treeView.Nodes.Add(new TreeNode { Text = parentName });
+            treeView.Nodes[0].Nodes.AddRange(applicationService.ConvertHierarchyToNodes(hierarchy).ToArray());
         }
 
         #endregion

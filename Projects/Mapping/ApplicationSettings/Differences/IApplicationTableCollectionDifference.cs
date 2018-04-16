@@ -41,7 +41,7 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Differences
         #region Public Methods And Operators
 
         /// <summary>
-        /// The compare table collections.
+        /// The compare table.
         /// </summary>
         /// <param name="first">
         /// The first.
@@ -52,7 +52,7 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Differences
         /// <returns>
         /// The <see cref="ApplicationTableCollectionDifference"/>.
         /// </returns>
-        ApplicationTableCollectionDifference CompareTableCollections(List<Table> first, List<Table> second);
+        ApplicationTableCollectionDifference CompareTables(List<Table> first, List<Table> second);
 
         #endregion
     }

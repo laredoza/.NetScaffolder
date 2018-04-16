@@ -67,7 +67,7 @@ namespace DotNetScaffolder.Components.Common.Contract
         /// <returns>
         /// The <see cref="IHierarchy"/>.
         /// </returns>
-        IHierarchy ReturnNavigation();
+        Hierarchy ReturnNavigation();
 
         /// <summary>
         /// The save.

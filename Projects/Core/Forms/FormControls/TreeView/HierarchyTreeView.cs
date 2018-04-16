@@ -28,7 +28,7 @@ namespace FormControls.TreeView
         /// <summary>
         ///     The data.
         /// </summary>
-        private IHierarchy data;
+        private Hierarchy data;
 
         #endregion
 
@@ -47,7 +47,7 @@ namespace FormControls.TreeView
         /// <summary>
         ///     Gets or sets the data.
         /// </summary>
-        public IHierarchy Data
+        public Hierarchy Data
         {
             get
             {
@@ -219,7 +219,7 @@ namespace FormControls.TreeView
         /// <returns>
         /// The <see cref="TreeNode"/>.
         /// </returns>
-        private TreeNode AddNode(IHierarchy hierarchyItem)
+        private TreeNode AddNode(Hierarchy hierarchyItem)
         {
             TreeNode node = new TreeNode(hierarchyItem.Name) { Tag = hierarchyItem, Name = Data.Id.ToString() };
 
