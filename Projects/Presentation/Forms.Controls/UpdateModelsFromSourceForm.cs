@@ -122,8 +122,8 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
             if (this.DataSource != null)
             {
                 this.updateModelsFromSourceUserControl1.SavePath = this.SavePath;
-                this.updateModelsFromSourceUserControl1.DataSource = this.DataSource;
                 this.sourceType = ScaffoldConfig.ReturnSourceType(this.DataSource.SourceTypeId);
+                this.updateModelsFromSourceUserControl1.DataSource = this.DataSource;
  
             }
             else
