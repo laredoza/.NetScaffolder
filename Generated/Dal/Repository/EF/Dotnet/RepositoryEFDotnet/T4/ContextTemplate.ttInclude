@@ -1,0 +1,253 @@
+﻿<#@ template language="C#" hostspecific="true" debug="true" #>
+<#@ assembly name="System" #>
+<#@ assembly name="System.Configuration" #>
+<#@ assembly name="System.Globalization" #>
+<#@ assembly name="System.Xml" #>
+<#@ assembly name="$(ProjectDir)\..\..\Core\Tools\Automation\T4 Scripts\ItisAutomationMetadata.dll" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.Configuration" #>
+<#@ import namespace="System.Globalization" #>
+<#@ import namespace="System.Xml" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Xml.Serialization" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="ITIS.Core.Tools.Automation.Metadata.Model" #>
+<#@ import namespace="ITIS.Core.Tools.Automation.Metadata.Project" #>
+<#@ import namespace="ITIS.Core.Tools.Automation.Metadata.Output" #>
+<#@ include file="T4Toolbox.tt" #>
+<#+
+public class ContextTemplate : Template 
+{
+
+	public AutomationDomain Domain {get;set;}
+	public string EntityNameSpace {get;set;}
+	public ContextAutomation ContextDefinition {get;set;}
+
+	public override string TransformText()
+	{
+
+#>
+
+// <copyright file="<#= ContextDefinition.TransformContextName #>.g.cs" company="SANRAL">
+//  Copyright (c) 2016 All Rights Reserved
+// </copyright>  
+
+<#+ if(ContextDefinition.LoggingEnabled){ #>
+<#+ } #>
+<#+ if(ContextDefinition.ContextConstructor == ContextConstructorType.ExtraConstructors){ #>
+using System.Data.Common;
+using System.Data.Entity.Infrastructure;
+<#+ } #>
+<#+ if(ContextDefinition.TransformGenerateUserContextCode){ #>
+using System;
+using Oracle.ManagedDataAccess.Client;
+<#+ } #>
+<#+ if(ContextDefinition.TransformBaseClass){ #>
+<#= ContextDefinition.TransformBaseClassUsing #>
+<#+ } #>
+using System.Data.Entity;
+using ITIS.Data.Entity;
+<#+ if(ContextDefinition.Domain.UseFluent){ #>
+using System.ComponentModel.DataAnnotations.Schema;
+<#+ } #>
+using <#= EntityNameSpace #>;
+<#+ if(ContextDefinition.DbConfigDefinition != null){ #>
+using <#= ContextDefinition.DbConfigDefinition.TransformNameSpaceString #>;
+<#+ } #>
+
+// *******************************************************************
+//	GENERATED CODE. DOT NOT MODIFY MANUALLY AS CHANGES CAN BE LOST!!!
+//	USE A PARTIAL CLASS INSTEAD
+// *******************************************************************
+
+namespace <#= ContextDefinition.TransformNameSpaceString #> 
+{
+<#+ if(ContextDefinition.DbConfigDefinition != null){ #>
+    [DbConfigurationType(typeof(<#= ContextDefinition.DbConfigDefinition.TransformDbConfigurationName #>))]
+<#+ } #>
+    public<#= ContextDefinition.TransformPartialDefinitionString #>class <#= ContextDefinition.TransformContextName #> : <#= ContextDefinition.TransformBaseClassName#><#= ContextDefinition.TransformInterfaceInheritance #> 
+	{
+		#region Construction	
+<#+ if(string.IsNullOrEmpty(ContextDefinition.CustomConnectionStringKey) && ContextDefinition.ContextConstructor == ContextConstructorType.SingleEmpty){ #>
+		public <#= ContextDefinition.TransformContextName #>() : base() 
+		{
+		}
+<#+ } #>
+
+<#+ if(!string.IsNullOrEmpty(ContextDefinition.CustomConnectionStringKey) && ContextDefinition.ContextConstructor == ContextConstructorType.SingleEmpty){ #>
+        public <#= ContextDefinition.TransformContextName #>(<#= ContextDefinition.TransformShortOracleUserContextArgument #>) : base("name=<#= !string.IsNullOrEmpty(ContextDefinition.CustomConnectionStringKey) ? ContextDefinition.CustomConnectionStringKey : ContextDefinition.TransformContextName #>") {
+<#+ if(ContextDefinition.CreateDbIfNotExists){ #>
+			Database.SetInitializer(new CreateDatabaseIfNotExists<<#= ContextDefinition.TransformContextName #>>());
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<<#= ContextDefinition.TransformContextName #>, Configuration>());
+<#+ } #>
+<#+ if(ContextDefinition.LoggingEnabled){ #>
+			this.Database.Log = LogSql;
+<#+ } #>
+<#+ if(!ContextDefinition.ProxyCreationEnabled){ #>
+            this.Configuration.ProxyCreationEnabled = false;
+<#+ } #>
+        }
+		
+<#+ } #>
+
+<#+ if(ContextDefinition.ContextConstructor == ContextConstructorType.ExtraConstructors){ #>
+
+        public <#= ContextDefinition.TransformContextName #>(<#= ContextDefinition.TransformShortOracleUserContextArgument #>) : base("name=<#= !string.IsNullOrEmpty(ContextDefinition.CustomConnectionStringKey) ? ContextDefinition.CustomConnectionStringKey : ContextDefinition.TransformContextName #>") {
+<#+ if(ContextDefinition.CreateDbIfNotExists){ #>
+			Database.SetInitializer(new CreateDatabaseIfNotExists<<#= ContextDefinition.TransformContextName #>>());
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<<#= ContextDefinition.TransformContextName #>, Configuration>());
+<#+ } #>
+<#+ if(ContextDefinition.TransformGenerateUserContextCode){ #>
+			SetUserDbContext(userId);
+<#+ } #>
+<#+ if(ContextDefinition.LoggingEnabled){ #>
+			this.Database.Log = LogSql;
+<#+ } #>
+<#+ if(!ContextDefinition.ProxyCreationEnabled){ #>
+            this.Configuration.ProxyCreationEnabled = false;
+<#+ } #>
+        }
+
+    	public <#= ContextDefinition.TransformContextName #>(string nameOrConnectionString<#= ContextDefinition.TransformFullOracleUserContextArgument #>) : base(nameOrConnectionString) {	
+<#+ if(ContextDefinition.CreateDbIfNotExists){ #>
+			Database.SetInitializer(new CreateDatabaseIfNotExists<<#= ContextDefinition.TransformContextName #>>());
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<<#= ContextDefinition.TransformContextName #>, Configuration>());
+<#+ } #>
+<#+ if(ContextDefinition.TransformGenerateUserContextCode){ #>
+			SetUserDbContext(userId);
+<#+ } #>
+<#+ if(ContextDefinition.LoggingEnabled){ #>
+			this.Database.Log = LogSql;
+<#+ } #>
+<#+ if(!ContextDefinition.ProxyCreationEnabled){ #>
+            this.Configuration.ProxyCreationEnabled = false;
+<#+ } #>
+    	}
+
+    	public <#= ContextDefinition.TransformContextName #>(DbConnection existingConnection, bool contextOwnsConnection = false<#= ContextDefinition.TransformFullOracleUserContextArgument #>) : base(existingConnection, contextOwnsConnection) {
+<#+ if(ContextDefinition.CreateDbIfNotExists){ #>
+			Database.SetInitializer(new CreateDatabaseIfNotExists<<#= ContextDefinition.TransformContextName #>>());
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<<#= ContextDefinition.TransformContextName #>, Configuration>());
+<#+ } #>
+<#+ if(ContextDefinition.TransformGenerateUserContextCode){ #>
+			SetUserDbContext(userId);
+<#+ } #>
+<#+ if(ContextDefinition.LoggingEnabled){ #>
+			this.Database.Log = LogSql;
+<#+ } #>
+<#+ if(!ContextDefinition.ProxyCreationEnabled){ #>
+            this.Configuration.ProxyCreationEnabled = false;
+<#+ } #>
+    	}
+    
+    	public <#= ContextDefinition.TransformContextName #>(DbConnection existingConnection, DbCompiledModel model, bool contextOwnsConnection = false<#= ContextDefinition.TransformFullOracleUserContextArgument #>) : base(existingConnection, model, contextOwnsConnection) {
+<#+ if(ContextDefinition.CreateDbIfNotExists){ #>
+			Database.SetInitializer(new CreateDatabaseIfNotExists<<#= ContextDefinition.TransformContextName #>>());
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<<#= ContextDefinition.TransformContextName #>, Configuration>());
+<#+ } #>
+<#+ if(ContextDefinition.TransformGenerateUserContextCode){ #>
+			SetUserDbContext(userId);
+<#+ } #>
+<#+ if(ContextDefinition.LoggingEnabled){ #>
+			this.Database.Log = LogSql;
+<#+ } #>
+<#+ if(!ContextDefinition.ProxyCreationEnabled){ #>
+            this.Configuration.ProxyCreationEnabled = false;
+<#+ } #>
+    	} 
+
+<#+ } #>
+		#endregion // Construction
+		
+<#+ if(!ContextDefinition.NoOnModelCreatingMethod) { #>
+		protected override void OnModelCreating(DbModelBuilder modelBuilder){
+			base.OnModelCreating(modelBuilder);
+<#+ if(!string.IsNullOrEmpty(ContextDefinition.DefaultSchemaName)){ #>
+			modelBuilder.HasDefaultSchema("<#= ContextDefinition.DefaultSchemaName #>");
+<#+ } #>
+			
+			#region Precision and Scale
+			
+			<#= ContextDefinition.TransformSetFieldPrecisionAndScale #>
+			
+			#endregion // Precision and Scale
+<#+ if(ContextDefinition.Domain.UseFluent) { #>			
+			#region Primary Key Fields
+
+<#+ if(ContextDefinition.FluentRelationships.Count < 0) { #>
+<#+ 	foreach(var table in Domain.TableCollection.Tables){ #>
+			<#= table.FluentPrimaryKey #>
+<#+ 		foreach(var dbgen in table.FluentDatabaseGeneratedOptions) { #>
+			<#= dbgen #>
+<#+ 		} #>
+<#+ 	} #>
+<#+ } else {#>
+<#+ 	foreach(var table in ContextDefinition.TableCollection){ #>
+			<#= table.FluentPrimaryKey #>
+<#+ 		foreach(var dbgen in table.FluentDatabaseGeneratedOptions) { #>
+			<#= dbgen #>
+<#+ 		} #>
+<#+ 	} #>
+<#+ } #>			
+			
+			#endregion // Primary Key Fields
+<#+ } #>			
+<#+ if(ContextDefinition.Domain.UseFluent) { #>			
+			#region Relationships
+			
+<#+ 	foreach(var rel in ContextDefinition.FluentRelationships){ #>
+			<#= rel #>
+<#+ 	} #>
+			
+			#endregion // Relationships
+<#+ } #>
+		}
+<#+ } #>
+		
+		#region EnitySets
+		
+<#+ foreach(var table in ContextDefinition.TableCollection){ #>
+		<#= table.TransformCollectionProperty #>
+<#+ } #>
+
+		#endregion // EntitySets
+<#+ if(ContextDefinition.TransformGenerateUserContextCode){ #>
+
+		public void SetUserDbContext(long userId) {
+
+			if(userId <= 0) return;
+
+		    var connection = this.Database.Connection as OracleConnection;
+
+		    if (connection == null)
+		        throw new Exception("No database connection present");
+
+		    if (connection.State != System.Data.ConnectionState.Open)
+		        connection.Open();
+
+		    if (connection.State == System.Data.ConnectionState.Open) {
+		        var cmd = new OracleCommand("BEGIN ITIS_PRCDRS.PA_GER_APP.set_user_id(:usrid); END;", connection);
+		        cmd.Parameters.Add(new OracleParameter("usrid", userId));
+		        cmd.ExecuteScalar();
+		    }
+		    else
+		        throw new Exception("Could not open database connection");
+		}
+<#+ } #>
+    
+<#+ if(ContextDefinition.LoggingEnabled){ #>
+        private void LogSql(string message) {
+            // Task.Run(() => EfSqlLogger.LogMessage("<#= ContextDefinition.TransformContextName #>", message));
+        }
+		
+<#+ } #>
+    }
+}
+
+<#+
+		return this.GenerationEnvironment.ToString();
+
+	}
+}
+#>

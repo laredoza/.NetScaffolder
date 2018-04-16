@@ -43,10 +43,11 @@
             this.label24 = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.btnNew = new System.Windows.Forms.Button();
-            this.OutputPath = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.btnBrowse = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.OutputPath = new System.Windows.Forms.TextBox();
+            this.btnNew = new System.Windows.Forms.Button();
+            this.chkListModels = new System.Windows.Forms.CheckedListBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -181,6 +182,7 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.btnBrowse);
+            this.groupBox1.Controls.Add(this.btnNew);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.OutputPath);
             this.groupBox1.Controls.Add(this.OutputFolder);
@@ -204,22 +206,15 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Context settings";
             // 
-            // btnNew
+            // btnBrowse
             // 
-            this.btnNew.Location = new System.Drawing.Point(437, 189);
-            this.btnNew.Name = "btnNew";
-            this.btnNew.Size = new System.Drawing.Size(75, 23);
-            this.btnNew.TabIndex = 58;
-            this.btnNew.Text = "Add";
-            this.btnNew.UseVisualStyleBackColor = true;
-            this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
-            // 
-            // OutputPath
-            // 
-            this.OutputPath.Location = new System.Drawing.Point(121, 154);
-            this.OutputPath.Name = "OutputPath";
-            this.OutputPath.Size = new System.Drawing.Size(304, 20);
-            this.OutputPath.TabIndex = 57;
+            this.btnBrowse.Location = new System.Drawing.Point(429, 152);
+            this.btnBrowse.Name = "btnBrowse";
+            this.btnBrowse.Size = new System.Drawing.Size(75, 23);
+            this.btnBrowse.TabIndex = 59;
+            this.btnBrowse.Text = "Browse";
+            this.btnBrowse.UseVisualStyleBackColor = true;
+            this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
             // 
             // label1
             // 
@@ -230,25 +225,44 @@
             this.label1.TabIndex = 58;
             this.label1.Text = "Output Path:";
             // 
-            // btnBrowse
+            // OutputPath
             // 
-            this.btnBrowse.Location = new System.Drawing.Point(434, 152);
-            this.btnBrowse.Name = "btnBrowse";
-            this.btnBrowse.Size = new System.Drawing.Size(75, 23);
-            this.btnBrowse.TabIndex = 59;
-            this.btnBrowse.Text = "Browse";
-            this.btnBrowse.UseVisualStyleBackColor = true;
-            this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
+            this.OutputPath.Location = new System.Drawing.Point(121, 154);
+            this.OutputPath.Name = "OutputPath";
+            this.OutputPath.Size = new System.Drawing.Size(304, 20);
+            this.OutputPath.TabIndex = 57;
+            // 
+            // btnNew
+            // 
+            this.btnNew.Location = new System.Drawing.Point(429, 126);
+            this.btnNew.Name = "btnNew";
+            this.btnNew.Size = new System.Drawing.Size(75, 23);
+            this.btnNew.TabIndex = 58;
+            this.btnNew.Text = "Add";
+            this.btnNew.UseVisualStyleBackColor = true;
+            this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
+            // 
+            // chkListModels
+            // 
+            this.chkListModels.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.chkListModels.CheckOnClick = true;
+            this.chkListModels.FormattingEnabled = true;
+            this.chkListModels.Location = new System.Drawing.Point(3, 188);
+            this.chkListModels.Name = "chkListModels";
+            this.chkListModels.Size = new System.Drawing.Size(504, 304);
+            this.chkListModels.TabIndex = 59;
+            this.chkListModels.TabStop = false;
             // 
             // ContextUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.btnNew);
+            this.Controls.Add(this.chkListModels);
             this.Controls.Add(this.groupBox1);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "ContextUserControl";
-            this.Size = new System.Drawing.Size(515, 215);
+            this.Size = new System.Drawing.Size(821, 504);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
@@ -276,5 +290,6 @@
         private System.Windows.Forms.TextBox OutputPath;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnBrowse;
+        private System.Windows.Forms.CheckedListBox chkListModels;
     }
 }

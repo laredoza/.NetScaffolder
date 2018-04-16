@@ -1,0 +1,45 @@
+﻿<#@ template language="C#" hostspecific="true" debug="true" #>
+<#@ assembly name="System" #>
+<#@ assembly name="System.Configuration" #>
+<#@ assembly name="System.Globalization" #>
+<#@ assembly name="System.Xml" #>
+<#@ assembly name="$(ProjectDir)\..\..\Core\Tools\Automation\T4 Scripts\ItisAutomationMetadata.dll" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.Configuration" #>
+<#@ import namespace="System.Globalization" #>
+<#@ import namespace="System.Xml" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Xml.Serialization" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="ITIS.Core.Tools.Automation.Metadata.Project" #>
+<#@ import namespace="ITIS.Core.Tools.Automation.Metadata.Model" #>
+<#@ import namespace="ITIS.Core.Tools.Automation.Metadata.Output" #>
+<#@ include file="T4Toolbox.tt" #>
+<#@ include file="ContextTemplate.ttInclude" #>
+<#@ include file="ContextInterfaceTemplate.ttInclude" #>
+<#+
+public class ContextGenerator : Generator
+{
+
+	public AutomationDomain CurrentDomain {get;set;}
+	public ContextAutomation CurrentContextDefinition {get;set;}
+
+	private ContextTemplate contextTemplate = new ContextTemplate();
+	private ContextInterfaceTemplate contextInterfaceTemplate = new ContextInterfaceTemplate();
+
+	protected override void RunCore()
+	{
+		contextTemplate.Domain = CurrentDomain;
+		contextTemplate.ContextDefinition = CurrentContextDefinition;
+		contextTemplate.EntityNameSpace = CurrentDomain.EntityDefinition.TransformNameSpaceString;
+		contextTemplate.RenderToFile(string.Format(@"{0}{1}.g.cs", CurrentContextDefinition.TransformOutputFolderString, CurrentContextDefinition.TransformContextName));
+
+		if(CurrentContextDefinition.GenerateInterface){
+			contextInterfaceTemplate.Domain = CurrentDomain;
+			contextInterfaceTemplate.ContextDefinition = CurrentContextDefinition;
+			contextInterfaceTemplate.EntityNameSpace = CurrentDomain.EntityDefinition.TransformNameSpaceString;
+			contextInterfaceTemplate.RenderToFile(string.Format(@"{0}I{1}.g.cs", CurrentContextDefinition.TransformOutputFolderString, CurrentContextDefinition.TransformContextName));
+		}
+	}
+}
+#>

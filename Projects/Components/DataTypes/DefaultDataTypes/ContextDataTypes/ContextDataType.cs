@@ -188,6 +188,11 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
     /// </summary>
     public class ContextData
     {
+        public ContextData()
+        {
+            Models = new List<string>();
+        }
+
         #region Properties
 
         /// <summary>
@@ -241,6 +246,8 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
         ///     Gets or sets the output folder.
         /// </summary>
         public string OutputFolder { get; set; } = "Context";
+
+        public List<string> Models { get; private set; }
 
         #endregion
     }

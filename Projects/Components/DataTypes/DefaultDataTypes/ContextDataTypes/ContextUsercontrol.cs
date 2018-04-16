@@ -32,6 +32,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
         public ContextUserControl()
         {
             InitializeComponent();
+            SetModelDataSource();
         }
 
         #endregion
@@ -79,6 +80,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
             }
 
             btnNew.Visible = SelectedContext == null;
+            chkListModels.Visible = SelectedContext != null;
 
             if (SelectedContext == null)
             {
@@ -86,6 +88,13 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
             }
 
             UpdateUI();
+        }
+
+        private void SetModelDataSource()
+        {
+            chkListModels.Items.Add("ITIS_MET.META_SEC_USERS");
+            chkListModels.Items.Add("ITIS_MET.SEC_PERMISSIONS");
+            chkListModels.Items.Add("ITIS_MET.SEC_ROLE");
         }
 
         /// <summary>
@@ -158,6 +167,13 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
             SelectedContext.LoggingEnabled = LoggingEnabled.Checked;
             SelectedContext.ConstructionOptions = ConstructionOptions.SelectedText;
             SelectedContext.OutputPath = OutputPath.Text;
+
+            SelectedContext.Models.Clear();
+
+            for (int i = 0; i < chkListModels.CheckedItems.Count; i++)
+            {
+                SelectedContext.Models.Add(chkListModels.CheckedItems[i].ToString());
+            }
         }
 
         /// <summary>
@@ -177,6 +193,24 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
             LoggingEnabled.Checked = SelectedContext.LoggingEnabled;
             ConstructionOptions.SelectedText = SelectedContext.ConstructionOptions;
             OutputPath.Text = SelectedContext.OutputPath;
+
+            SetCheckedModels();
+        }
+
+        private void SetCheckedModels()
+        {
+            if (SelectedContext == null) return;
+
+            var list = new object[chkListModels.Items.Count];
+            chkListModels.Items.CopyTo(list, 0);
+
+            for(int index = 0; index < list.Length; index++)
+            {
+                if (SelectedContext.Models.Contains(list[index].ToString()))
+                {
+                    chkListModels.SetItemChecked(index, true);
+                }
+            }
         }
 
         #endregion
