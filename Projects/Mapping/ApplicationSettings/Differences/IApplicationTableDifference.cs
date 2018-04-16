@@ -16,7 +16,7 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Differences
     #endregion
 
     /// <summary>
-    /// The ApplicationTableDifference interface.
+    ///     The ApplicationTableDifference interface.
     /// </summary>
     public interface IApplicationTableDifference
     {
@@ -86,6 +86,24 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Differences
         ///     Gets the problem table name.
         /// </summary>
         string ProblemTableName { get; }
+
+        #endregion
+
+        #region Public Methods And Operators
+
+        /// <summary>
+        /// Compare table columns.
+        /// </summary>
+        /// <param name="firstTable">
+        /// The first table.
+        /// </param>
+        /// <param name="secondTable">
+        /// The second table.
+        /// </param>
+        /// <returns>
+        /// The <see cref="ApplicationTableDifference"/>.
+        /// </returns>
+        ApplicationTableDifference CompareTableColumns(Table firstTable, Table secondTable);
 
         #endregion
     }

@@ -15,7 +15,7 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Differences
     #endregion
 
     /// <summary>
-    /// The ApplicationTableCollectionDifference interface.
+    ///     The ApplicationTableCollectionDifference interface.
     /// </summary>
     public interface IApplicationTableCollectionDifference
     {
@@ -35,6 +35,24 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Differences
         ///     Gets or sets the problem tables.
         /// </summary>
         List<ApplicationTableDifference> ProblemTables { get; set; }
+
+        #endregion
+
+        #region Public Methods And Operators
+
+        /// <summary>
+        /// The compare table collections.
+        /// </summary>
+        /// <param name="first">
+        /// The first.
+        /// </param>
+        /// <param name="second">
+        /// The second.
+        /// </param>
+        /// <returns>
+        /// The <see cref="ApplicationTableCollectionDifference"/>.
+        /// </returns>
+        ApplicationTableCollectionDifference CompareTableCollections(List<Table> first, List<Table> second);
 
         #endregion
     }

@@ -10,31 +10,50 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Differences
 
     using System.Collections.Generic;
     using System.Linq;
+
     using DotNetScaffolder.Mapping.MetaData.Model;
 
     #endregion
 
-    
-
     /// <summary>
-    /// The application table collection difference.
+    ///     The application table collection difference.
     /// </summary>
     public class ApplicationTableCollectionDifference : IApplicationTableCollectionDifference
     {
+        #region Constructors and Destructors
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ApplicationTableCollectionDifference"/> class.
+        /// </summary>
+        /// <param name="applicationTableDifference">
+        /// The application table difference.
+        /// </param>
+        public ApplicationTableCollectionDifference(IApplicationTableDifference applicationTableDifference)
+        {
+            this.ApplicationTableDifference = applicationTableDifference;
+        }
+
+        #endregion
+
         #region Public Properties
 
         /// <summary>
-        /// Gets or sets the first extra tables.
+        ///     Gets or sets the application table difference.
+        /// </summary>
+        public IApplicationTableDifference ApplicationTableDifference { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the first extra tables.
         /// </summary>
         public List<Table> FirstExtraTables { get; set; }
 
         /// <summary>
-        /// Gets or sets the first missing tables.
+        ///     Gets or sets the first missing tables.
         /// </summary>
         public List<Table> FirstMissingTables { get; set; }
 
         /// <summary>
-        /// Gets or sets the problem tables.
+        ///     Gets or sets the problem tables.
         /// </summary>
         public List<ApplicationTableDifference> ProblemTables { get; set; }
 
@@ -54,11 +73,9 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Differences
         /// <returns>
         /// The <see cref="ApplicationTableCollectionDifference"/>.
         /// </returns>
-        public static ApplicationTableCollectionDifference CompareTableCollections(
-            List<Table> first,
-            List<Table> second)
+        public ApplicationTableCollectionDifference CompareTableCollections(List<Table> first, List<Table> second)
         {
-            var retval = new ApplicationTableCollectionDifference();
+            var retval = new ApplicationTableCollectionDifference(this.ApplicationTableDifference);
 
             // Compare List of Tables
             var firstTableNameList = new HashSet<string>(first.Select(t => t.TableName.ToUpper()));
@@ -76,7 +93,7 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Differences
 
                 if (secondTable != null)
                 {
-                    var diff = ApplicationTableDifference.CompareTableColumns(firstTable, secondTable);
+                    var diff = this.ApplicationTableDifference.CompareTableColumns(firstTable, secondTable);
                     if (diff != null)
                         retval.ProblemTables.Add(diff);
                 }

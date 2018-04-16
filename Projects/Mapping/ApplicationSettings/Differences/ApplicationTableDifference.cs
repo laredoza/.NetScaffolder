@@ -153,7 +153,7 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Differences
         /// <returns>
         /// The <see cref="ApplicationTableDifference"/>.
         /// </returns>
-        public static ApplicationTableDifference CompareTableColumns(Table firstTable, Table secondTable)
+        public ApplicationTableDifference CompareTableColumns(Table firstTable, Table secondTable)
         {
             var retval = new ApplicationTableDifference();
 
