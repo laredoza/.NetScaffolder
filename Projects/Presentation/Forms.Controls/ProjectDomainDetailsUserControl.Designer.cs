@@ -44,6 +44,7 @@
             this.TextBoxName = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.BtnManageSource = new System.Windows.Forms.Button();
+            this.BtnModel = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button5
@@ -213,10 +214,21 @@
             this.BtnManageSource.UseVisualStyleBackColor = true;
             this.BtnManageSource.Click += new System.EventHandler(this.BtnManageSource_Click);
             // 
+            // BtnModel
+            // 
+            this.BtnModel.Location = new System.Drawing.Point(534, 177);
+            this.BtnModel.Name = "BtnModel";
+            this.BtnModel.Size = new System.Drawing.Size(112, 40);
+            this.BtnModel.TabIndex = 50;
+            this.BtnModel.Text = "Models";
+            this.BtnModel.UseVisualStyleBackColor = true;
+            this.BtnModel.Click += new System.EventHandler(this.BtnModel_Click);
+            // 
             // ProjectDomainDetailsUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.BtnModel);
             this.Controls.Add(this.BtnManageSource);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.ComboBoxPackages);
@@ -259,5 +271,6 @@
         private System.Windows.Forms.TextBox TextBoxName;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button BtnManageSource;
+        private System.Windows.Forms.Button BtnModel;
     }
 }

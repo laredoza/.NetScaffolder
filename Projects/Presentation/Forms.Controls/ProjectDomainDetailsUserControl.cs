@@ -55,6 +55,8 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
 
         private ManageDataSourceForm manageDataSourceForm;
 
+        private ModelForm modelForm;
+
         #endregion
 
         #region Constructors and Destructors
@@ -83,6 +85,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
             this.ComboBoxCollectionOption.DataSource = this.ReturnCollectionOptions();
 
             this.manageDataSourceForm = new ManageDataSourceForm();
+            this.modelForm = new ModelForm();
         }
 
         #endregion
@@ -688,5 +691,13 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         }
 
         #endregion
+
+        private void BtnModel_Click(object sender, EventArgs e)
+        {
+            Logger.Trace("Started Model Clicked");
+//            manageDataSourceForm.DataSource = this.SelectedDomain;
+            this.modelForm.ShowDialog();
+            Logger.Trace("Completed Model Clicked");
+        }
     }
 }
