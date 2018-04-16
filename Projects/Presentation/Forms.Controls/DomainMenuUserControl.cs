@@ -138,7 +138,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
                     dataType.Load(parameters);
                     var navigation = dataType.ReturnNavigation();
 
-                    var configControl = dataType.CreateUI();
+                    var configControl = dataType.CreateUI(parameters);
                     var control = configControl as Control;
 
                     if (control == null) continue;

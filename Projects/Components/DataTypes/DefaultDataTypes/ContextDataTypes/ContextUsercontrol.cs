@@ -22,6 +22,8 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
     /// </summary>
     public partial class ContextUserControl : UserControl, IDataTypeUI<IDictionary<string, string>>
     {
+        public string SavePath { get; set; }
+
         #region Constructors and Destructors
 
         /// <summary>
@@ -120,7 +122,9 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
         {
             UpdateContext();
             DataType.Contexts.Add(SelectedContext);
-
+            var parameters = new Dictionary<string, string>();
+            parameters.Add("basePath", SavePath);
+            DataType.Save(parameters);
             OnNavigationChanged?.Invoke(this, DataType);
             SetupDefault();
             UpdateUI();
@@ -153,6 +157,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
             SelectedContext.InheritFrom = InheritFromInterface.Text;
             SelectedContext.LoggingEnabled = LoggingEnabled.Checked;
             SelectedContext.ConstructionOptions = ConstructionOptions.SelectedText;
+            SelectedContext.OutputPath = OutputPath.Text;
         }
 
         /// <summary>
@@ -171,8 +176,21 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
             InheritFromInterface.Text = SelectedContext.InheritFrom;
             LoggingEnabled.Checked = SelectedContext.LoggingEnabled;
             ConstructionOptions.SelectedText = SelectedContext.ConstructionOptions;
+            OutputPath.Text = SelectedContext.OutputPath;
         }
 
         #endregion
+
+        private void btnBrowse_Click(object sender, EventArgs e)
+        {
+            using (var dialog = new FolderBrowserDialog())
+            {
+                var result = dialog.ShowDialog(this);
+                if (result == DialogResult.OK)
+                {
+                    OutputPath.Text = dialog.SelectedPath;
+                }
+            }
+        }
     }
 }

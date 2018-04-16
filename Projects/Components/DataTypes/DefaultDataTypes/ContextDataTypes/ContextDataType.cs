@@ -79,12 +79,20 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
         /// The <see cref="IDataTypeUI"/>.
         /// </returns>
         public IDataTypeUI<IDictionary<string, string>> CreateUI(IDictionary<string, string> parameters)
-        {
+        { 
+            string savePath = string.Empty;
+
+            if(parameters!= null && parameters.ContainsKey("basePath"))
+            {
+                savePath = parameters["basePath"];
+            }
+
             var newControl = new ContextUserControl
                                  {
                                      Visible = true,
                                      Dock = DockStyle.Fill,
-                                     DataType = this
+                                     DataType = this,
+                                     SavePath = savePath
                                  };
             return newControl;
         }
@@ -191,6 +199,8 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
         ///     Gets or sets the context name.
         /// </summary>
         public string ContextName { get; set; } = "Context";
+
+        public string OutputPath { get; set; }
 
         /// <summary>
         ///     Gets or sets a value indicating whether create db.

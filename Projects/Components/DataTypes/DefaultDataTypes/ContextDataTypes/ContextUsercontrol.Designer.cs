@@ -44,6 +44,9 @@
             this.label23 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnNew = new System.Windows.Forms.Button();
+            this.OutputPath = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.btnBrowse = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -177,6 +180,9 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnBrowse);
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.OutputPath);
             this.groupBox1.Controls.Add(this.OutputFolder);
             this.groupBox1.Controls.Add(this.ContextEnabled);
             this.groupBox1.Controls.Add(this.label23);
@@ -193,20 +199,46 @@
             this.groupBox1.Controls.Add(this.label27);
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(509, 165);
+            this.groupBox1.Size = new System.Drawing.Size(509, 180);
             this.groupBox1.TabIndex = 57;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Context settings";
             // 
             // btnNew
             // 
-            this.btnNew.Location = new System.Drawing.Point(437, 174);
+            this.btnNew.Location = new System.Drawing.Point(437, 189);
             this.btnNew.Name = "btnNew";
             this.btnNew.Size = new System.Drawing.Size(75, 23);
             this.btnNew.TabIndex = 58;
             this.btnNew.Text = "Add";
             this.btnNew.UseVisualStyleBackColor = true;
             this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
+            // 
+            // OutputPath
+            // 
+            this.OutputPath.Location = new System.Drawing.Point(121, 154);
+            this.OutputPath.Name = "OutputPath";
+            this.OutputPath.Size = new System.Drawing.Size(304, 20);
+            this.OutputPath.TabIndex = 57;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(50, 157);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(67, 13);
+            this.label1.TabIndex = 58;
+            this.label1.Text = "Output Path:";
+            // 
+            // btnBrowse
+            // 
+            this.btnBrowse.Location = new System.Drawing.Point(434, 152);
+            this.btnBrowse.Name = "btnBrowse";
+            this.btnBrowse.Size = new System.Drawing.Size(75, 23);
+            this.btnBrowse.TabIndex = 59;
+            this.btnBrowse.Text = "Browse";
+            this.btnBrowse.UseVisualStyleBackColor = true;
+            this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
             // 
             // ContextUserControl
             // 
@@ -216,7 +248,7 @@
             this.Controls.Add(this.groupBox1);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "ContextUserControl";
-            this.Size = new System.Drawing.Size(515, 201);
+            this.Size = new System.Drawing.Size(515, 215);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
@@ -241,5 +273,8 @@
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button btnNew;
+        private System.Windows.Forms.TextBox OutputPath;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btnBrowse;
     }
 }

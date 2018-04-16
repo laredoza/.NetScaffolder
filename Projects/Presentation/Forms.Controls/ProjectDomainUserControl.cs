@@ -186,7 +186,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
 
             if (this.DomainsListBox.SelectedItem != null)
             {
-                domainTableform.OutputFolder = this.ApplicationService.ProjectDefinition.OutputFolder;
+                domainTableform.OutputFolder = this.ApplicationService.ProjectDefinition.OutputPath;
                 domainTableform.DataSource = this.DomainsListBox.SelectedItem as DomainDefinition;
                 domainTableform.ShowDialog();
             }

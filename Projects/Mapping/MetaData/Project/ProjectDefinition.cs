@@ -10,6 +10,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Project
 
     using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Xml.Serialization;
 
     using Common.Logging;
@@ -75,6 +76,14 @@ namespace DotNetScaffolder.Mapping.MetaData.Project
         ///     Gets or sets the output folder.
         /// </summary>
         public string OutputFolder { get; set; }
+
+        public string OutputPath
+        {
+            get
+            {
+                return Path.GetDirectoryName(this.ModelPath);
+            }
+        }
 
         /// <summary>
         ///     Gets or sets the validation result.
