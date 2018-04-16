@@ -16,8 +16,6 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Differences
 
     #endregion
 
-    
-
     /// <summary>
     /// The table difference.
     /// </summary>
@@ -72,6 +70,7 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Differences
             }
         }
 
+        /// <inheritdoc />
         /// <summary>
         /// Gets a value indicating whether has extra relationships.
         /// </summary>
@@ -83,6 +82,7 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Differences
             }
         }
 
+        /// <inheritdoc />
         /// <summary>
         /// Gets a value indicating whether has missing columns.
         /// </summary>
@@ -94,6 +94,7 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Differences
             }
         }
 
+        /// <inheritdoc />
         /// <summary>
         /// Gets a value indicating whether has missing relationships.
         /// </summary>
@@ -105,6 +106,7 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Differences
             }
         }
 
+        /// <inheritdoc />
         /// <summary>
         /// Gets a value indicating whether is broken.
         /// </summary>
