@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2037
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EF", "EF", "{E1AA0BF3-F85A-484A-8D76-EB1DA8354194}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepositoryEFDotnet.Library", "..\Repository\EF\Dotnet\RepositoryEFDotnet\Library\RepositoryEFDotnet.Library.csproj", "{19D63602-BD17-49F2-8335-E75C6813260A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".Net", ".Net", "{D1EC347C-A380-42A1-94A1-1F4E26B1863D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Standard", "Standard", "{8D47E11A-0C84-4AF3-B095-51144A062E61}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "T4", "T4", "{77007912-3923-4287-A54B-114CBC2C42C0}"
+	ProjectSection(SolutionItems) = preProject
+		..\T4\ContextGenerator.ttInclude = ..\T4\ContextGenerator.ttInclude
+		..\T4\ContextTemplate.ttInclude = ..\T4\ContextTemplate.ttInclude
+		..\T4\ProjectGenerator.ttInclude = ..\T4\ProjectGenerator.ttInclude
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{19D63602-BD17-49F2-8335-E75C6813260A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19D63602-BD17-49F2-8335-E75C6813260A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19D63602-BD17-49F2-8335-E75C6813260A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19D63602-BD17-49F2-8335-E75C6813260A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{19D63602-BD17-49F2-8335-E75C6813260A} = {D1EC347C-A380-42A1-94A1-1F4E26B1863D}
+		{D1EC347C-A380-42A1-94A1-1F4E26B1863D} = {E1AA0BF3-F85A-484A-8D76-EB1DA8354194}
+		{8D47E11A-0C84-4AF3-B095-51144A062E61} = {E1AA0BF3-F85A-484A-8D76-EB1DA8354194}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4C11FC88-B19C-4945-9A3D-CEBB5B3D4F99}
+	EndGlobalSection
+EndGlobal

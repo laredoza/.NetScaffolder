@@ -38,13 +38,13 @@ namespace DotNetScaffolder.Components.Common
         #region Properties
 
         /// <summary>
-        /// Gets or sets the collection options.
+        ///     Gets or sets the collection options.
         /// </summary>
         [ImportMany]
         public Lazy<ICollectionOption, IDictionary<string, object>>[] CollectionOptions { get; set; }
 
         /// <summary>
-        /// Gets or sets the data types.
+        ///     Gets or sets the data types.
         /// </summary>
         [ImportMany]
         public Lazy<IDataType, IDictionary<string, object>>[] DataTypes { get; set; }
@@ -68,7 +68,7 @@ namespace DotNetScaffolder.Components.Common
         public Lazy<INamingConvention, IDictionary<string, object>>[] NamingConventions { get; set; }
 
         /// <summary>
-        /// Gets or sets the output generators.
+        ///     Gets or sets the output generators.
         /// </summary>
         [ImportMany]
         public Lazy<IOutputGenerator, IDictionary<string, object>>[] OutputGenerators { get; set; }
@@ -109,30 +109,19 @@ namespace DotNetScaffolder.Components.Common
         }
 
         /// <summary>
-        ///     Import components.
-        /// </summary>
-        public void Import()
-        {
-            Logger.Trace($"Started Import()");
-            Import(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location));
-            Logger.Trace($"Completed Import()");
-        }
-
-        /// <summary>
         /// Import components.
         /// </summary>
         /// <param name="importfolder">
         /// The importfolder.
         /// </param>
-        public void Import(string importfolder)
+        public void Import(string importfolder = "")
         {
-            Logger.Info($"Started DoImport() - {importfolder}");
-
             if (string.IsNullOrEmpty(importfolder))
             {
-                Logger.Error("importFolder should not be empty");
-                throw new ApplicationException("importFolder should not be empty");
+                importfolder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             }
+
+            Logger.Info($"Started DoImport() - {importfolder}");
 
             // An aggregate catalog that combines multiple catalogs
             var catalog = new AggregateCatalog();

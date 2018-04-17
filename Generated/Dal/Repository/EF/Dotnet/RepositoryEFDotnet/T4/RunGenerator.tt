@@ -1,8 +1,0 @@
-﻿<#@ template language="C#" hostspecific="true" debug="true" #>
-<#@ include file="T4Toolbox.tt" #>
-<#@ include file="$(SolutionDir)T4\ProjectGenerator.ttInclude" #>
-<#
-	var projectGen = new ProjectGenerator();
-	projectGen.ProjectFilePath = "C:\Development\git\Github\.NetScaffolder\Generated\Dal\Repository\EF\Dotnet\RepositoryEFDotnet\Model\Banking.mdl";
-	projectGen.Run();
-#>

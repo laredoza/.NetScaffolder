@@ -42,7 +42,7 @@ namespace Configuration
 
         #endregion
 
-        #region Public Properties
+        #region Properties
 
         /// <summary>
         ///     Gets or sets the collection options.
@@ -51,7 +51,7 @@ namespace Configuration
         public static Lazy<ICollectionOption, IDictionary<string, object>>[] CollectionOptions { get; set; }
 
         /// <summary>
-        /// Gets or sets the config path.
+        ///     Gets or sets the config path.
         /// </summary>
         public static string ConfigPath { get; set; }
 
@@ -74,7 +74,7 @@ namespace Configuration
         public static Lazy<ILanguageOutput, IDictionary<string, object>>[] LanguageOutputs { get; set; }
 
         /// <summary>
-        /// Gets or sets the model path.
+        ///     Gets or sets the model path.
         /// </summary>
         public static string ModelPath { get; set; }
 
@@ -98,15 +98,18 @@ namespace Configuration
 
         #endregion
 
-        #region Public Methods And Operators
+        #region Public methods and operators
 
         /// <summary>
-        ///     The load.
+        /// The load.
         /// </summary>
-        public static void Load()
+        /// <param name="configPath">
+        /// The config Path.
+        /// </param>
+        public static void Load(string configPath = "")
         {
             ComponentImporter importer = new ComponentImporter();
-            importer.Import();
+            importer.Import(configPath);
 
             Drivers = importer.Drivers;
             NamingConventions = importer.NamingConventions;
@@ -128,6 +131,8 @@ namespace Configuration
         /// </returns>
         public static IDataType ReturnDataType(Guid dataTypeId)
         {
+            if (DataTypes == null || !DataTypes.Any()) return null;
+
             return DataTypes.FirstOrDefault(
                 d => d.Metadata["ValueMetaData"].ToString().ToLower() == dataTypeId.ToString().ToLower()).Value;
         }
@@ -143,6 +148,8 @@ namespace Configuration
         /// </returns>
         public static ISourceType ReturnSourceType(Guid sourceTypeId)
         {
+            if (SourceTypes == null || !SourceTypes.Any()) return null;
+
             return SourceTypes.FirstOrDefault(
                 d => d.Metadata["ValueMetaData"].ToString().ToLower() == sourceTypeId.ToString().ToLower()).Value;
         }
