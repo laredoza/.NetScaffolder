@@ -18,7 +18,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Model
     ///     The column.
     /// </summary>
     [Serializable]
-    public class Column : INotifyPropertyChanged
+    public class Column : INotifyPropertyChanged, ICloneable
     {
         #region Fields
 
@@ -191,6 +191,29 @@ namespace DotNetScaffolder.Mapping.MetaData.Model
             {
                 return !IsRequired && !IsPrimaryKey;
             }
+        }
+
+        public object Clone()
+        {
+            Column result = new Column();
+            result.ColumnName = this.ColumnName;
+            result.ColumnOrder = this.ColumnOrder;
+            result.CSharpDataType = this.CSharpDataType;
+            result.DbType = this.DbType;
+            result.DefaultFieldValue = this.DefaultFieldValue;
+            result.Description = this.Description;
+            result.GridColumnWidth = this.GridColumnWidth;
+            result.IsPrimaryKey = this.IsPrimaryKey;
+            result.IsRequired = this.IsRequired;
+            result.Length = this.Length;
+            result.LookupClassName = this.LookupClassName;
+            result.Precision = this.Precision;
+            result.RenderToEntity = this.renderToEntity;
+            result.RenderToView = this.RenderToView;
+            result.RenderToViewOrder = this.RenderToViewOrder;
+            result.Scale = this.Scale;
+            result.Table = this.Table.Clone() as Table;
+            return result;
         }
 
         #endregion

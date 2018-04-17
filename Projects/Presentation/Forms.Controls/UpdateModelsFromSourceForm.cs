@@ -135,5 +135,10 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         }
 
         #endregion
+
+        private void BtnClose_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
