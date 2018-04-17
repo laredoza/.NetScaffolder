@@ -1,9 +1,15 @@
-﻿<#@ template language="C#" hostspecific="true" debug="true" #>
-<#@ assembly name="System" #>
+﻿<#@ assembly name="System" #>
 <#@ assembly name="System.Configuration" #>
 <#@ assembly name="System.Globalization" #>
 <#@ assembly name="System.Xml" #>
-<#@ assembly name="$(ProjectDir)\..\..\Core\Tools\Automation\T4 Scripts\ItisAutomationMetadata.dll" #>
+<#@ assembly name="$(SolutionDir)..\T4\Package\Common.Logging.Core.dll" #>
+<#@ assembly name="$(SolutionDir)..\T4\Package\Common.Logging.dll" #>
+<#@ assembly name="$(SolutionDir)..\T4\Package\DotNetScaffolder.Core.Common.dll" #>
+<#@ assembly name="$(SolutionDir)..\T4\Package\DotNetScaffolder.Mapping.MetaData.dll" #>
+<#@ assembly name="$(SolutionDir)..\T4\Package\DotNetScaffolder.Components.DataTypes.DefaultDataTypes.dll" #>
+<#@ assembly name="$(SolutionDir)..\T4\Package\FormControls.dll" #>
+<#@ assembly name="$(SolutionDir)..\T4\Package\DotNetScaffolder.Components.Common.dll" #>
+<#@ assembly name="$(SolutionDir)..\T4\Package\Configuration.dll" #>
 <#@ import namespace="System" #>
 <#@ import namespace="System.Configuration" #>
 <#@ import namespace="System.Globalization" #>
@@ -11,34 +17,38 @@
 <#@ import namespace="System.IO" #>
 <#@ import namespace="System.Xml.Serialization" #>
 <#@ import namespace="System.Collections.Generic" #>
-<#@ import namespace="ITIS.Core.Tools.Automation.Metadata.Project" #>
-<#@ import namespace="ITIS.Core.Tools.Automation.Metadata.Model" #>
-<#@ import namespace="ITIS.Core.Tools.Automation.Metadata.Output" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="DotNetScaffolder.Mapping.MetaData.Project" #>
+<#@ import namespace="DotNetScaffolder.Mapping.MetaData.Model" #>
+<#@ import namespace="DotNetScaffolder.Core.Common.Serializer" #>
+<#@ import namespace="DotNetScaffolder.Components.DataTypes.DefaultDataTypes" #>
+<#@ import namespace="Configuration" #>
 <#@ include file="T4Toolbox.tt" #>
-<#@ include file="ContextTemplate.ttInclude" #>
-<#@ include file="ContextInterfaceTemplate.ttInclude" #>
+<#@ include file="BaseGenerator.ttinclude" #>
+<#@ include file="ContextTemplate.ttinclude" #>
 <#+
-public class ContextGenerator : Generator
+public class ContextGenerator : BaseGenerator
 {
-
-	public AutomationDomain CurrentDomain {get;set;}
-	public ContextAutomation CurrentContextDefinition {get;set;}
-
-	private ContextTemplate contextTemplate = new ContextTemplate();
-	private ContextInterfaceTemplate contextInterfaceTemplate = new ContextInterfaceTemplate();
-
-	protected override void RunCore()
+	public IDataType DataType {get;set;}
+	public ContextDataType ContextDataType
 	{
-		contextTemplate.Domain = CurrentDomain;
-		contextTemplate.ContextDefinition = CurrentContextDefinition;
-		contextTemplate.EntityNameSpace = CurrentDomain.EntityDefinition.TransformNameSpaceString;
-		contextTemplate.RenderToFile(string.Format(@"{0}{1}.g.cs", CurrentContextDefinition.TransformOutputFolderString, CurrentContextDefinition.TransformContextName));
+		get
+		{
+			return (ContextDataType)this.DataType;
+		}
+	}
+	private ContextTemplate contextTemplate = new ContextTemplate();
 
-		if(CurrentContextDefinition.GenerateInterface){
-			contextInterfaceTemplate.Domain = CurrentDomain;
-			contextInterfaceTemplate.ContextDefinition = CurrentContextDefinition;
-			contextInterfaceTemplate.EntityNameSpace = CurrentDomain.EntityDefinition.TransformNameSpaceString;
-			contextInterfaceTemplate.RenderToFile(string.Format(@"{0}I{1}.g.cs", CurrentContextDefinition.TransformOutputFolderString, CurrentContextDefinition.TransformContextName));
+	protected new void RunCore()
+	{
+		contextTemplate.DataType = this.ContextDataType;
+		contextTemplate.NamingConvention = NamingConvention;
+		contextTemplate.CollectionOption = CollectionOption;
+
+		foreach(var dbContext in ContextDataType.Contexts)
+		{
+			contextTemplate.ContextData = dbContext;
+			contextTemplate.RenderToFile(string.Format(@"{0}{1}.g.cs", dbContext.OutputFolder, dbContext.ContextName));
 		}
 	}
 }

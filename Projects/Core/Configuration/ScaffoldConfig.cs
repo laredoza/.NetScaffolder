@@ -154,6 +154,22 @@ namespace Configuration
                 d => d.Metadata["ValueMetaData"].ToString().ToLower() == sourceTypeId.ToString().ToLower()).Value;
         }
 
+        public static INamingConvention ReturnNamingConvention(Guid conventionId)
+        {
+            if (NamingConventions == null || !NamingConventions.Any()) return null;
+
+            return NamingConventions.FirstOrDefault(
+                d => d.Metadata["ValueMetaData"].ToString().ToLower() == conventionId.ToString().ToLower()).Value;
+        }
+
+        public static ICollectionOption ReturnCollectionOption(Guid optionId)
+        {
+            if (CollectionOptions == null || !CollectionOptions.Any()) return null;
+
+            return CollectionOptions.FirstOrDefault(
+                d => d.Metadata["ValueMetaData"].ToString().ToLower() == optionId.ToString().ToLower()).Value;
+        }
+
         #endregion
     }
 }
