@@ -4,7 +4,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace DotNetScaffolder.Mapping.ApplicationServices.Templates
+namespace DotNetScaffolder.Mapping.ApplicationServices.Tables
 {
     #region Usings
 
@@ -13,7 +13,6 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Templates
     using System.Linq;
     using System.Windows.Forms;
 
-    using DotNetScaffolder.Mapping.ApplicationServices.Tables;
     using DotNetScaffolder.Mapping.MetaData.Model;
 
     using FormControls.TreeView;
@@ -122,5 +121,77 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Templates
         }
 
         #endregion
+
+
+//        MainViewModel.cs
+
+//private void DoTableCollectionDiff(List<MetadataTable> originalTableList, List<MetadataTable> sourceTableList, MetadataTableCollectionDiff comparison)
+//        {
+//            var popupWindowViewModel = this.container.Resolve<IComparisonViewModel>();
+//            popupWindowViewModel.CurrentTableList = originalTableList;
+//            popupWindowViewModel.SourceTableList = sourceTableList;
+//            popupWindowViewModel.TableCollectionDiff = comparison;
+
+//            var popupWindow = new PopupWindow();
+//            popupWindowViewModel.Popup = popupWindow;
+//            popupWindow.Title = "Table Collection Comparison Results";
+//            popupWindow.Content = popupWindowViewModel.View;
+//            popupWindow.Owner = Application.Current.MainWindow;
+//            popupWindow.ShowDialog();
+
+//            if (popupWindowViewModel.AcceptedNewTableCollection)
+//            {
+//                PreserveCustomMetadata(popupWindowViewModel.SourceTableList, this.Tables.ToList());
+
+//                this.Tables = new ObservableCollection<MetadataTable>(popupWindowViewModel.SourceTableList);
+//                this.currentDomain.TableCollection.Tables = popupWindowViewModel.SourceTableList;
+//            }
+//        }
+
+//        private static void PreserveCustomMetadata(List<MetadataTable> newTableList, List<MetadataTable> oldTableList)
+//        {
+//            // Do our best to preserve table, column and relationship metadata
+//            foreach (var newTable in newTableList)
+//            {
+//                var oldTable = oldTableList.FirstOrDefault(u => (u.SchemaName == newTable.SchemaName) && (u.TableName == newTable.TableName));
+//                if (oldTable != null)
+//                {
+//                    newTable.Description = oldTable.Description;
+
+//                    // Attempt to preserve column metadata
+//                    foreach (var newColumn in newTable.Columns)
+//                    {
+//                        var oldColumn = oldTable.Columns.FirstOrDefault(u => u.ColumnName == newColumn.ColumnName);
+//                        if (oldColumn != null)
+//                        {
+//                            newColumn.RenderToEntity = oldColumn.RenderToEntity;
+//                            newColumn.RenderToView = oldColumn.RenderToView;
+//                            newColumn.DefaultFieldValue = oldColumn.DefaultFieldValue;
+//                            newColumn.Description = oldColumn.Description;
+//                            newColumn.GridColumnWidth = oldColumn.GridColumnWidth;
+//                            newColumn.GridViewControlType = oldColumn.GridViewControlType;
+//                            newColumn.LookupClassName = oldColumn.LookupClassName;
+//                            newColumn.RenderToViewOrder = oldColumn.RenderToViewOrder;
+//                            if (oldColumn.CustomNumberTypeMapping != CustomTypeMapping.None)
+//                            {
+//                                newColumn.CustomNumberTypeMapping = oldColumn.CustomNumberTypeMapping;
+//                                if (oldColumn.CustomNumberTypeMapping == CustomTypeMapping.Decimal)
+//                                {
+//                                    newColumn.Precision = oldColumn.Precision;
+//                                    newColumn.Scale = oldColumn.Scale;
+//                                }
+//                            }
+//                        }
+//                    }
+
+//                    // Attempt to preserve relationship metadata
+//                    if (oldTable.RelationShips != null)
+//                    {
+//                        // Attempt to preserve User created relationships
+//                        newTable.RelationShips.AddRange(oldTable.RelationShips.Where(u => u.UserRelationship));
+//                    }
+//                }
+//            }
+//        }
     }
 }

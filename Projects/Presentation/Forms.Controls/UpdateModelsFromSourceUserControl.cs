@@ -18,7 +18,6 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
     using DotNetScaffolder.Components.Common.Contract;
     using DotNetScaffolder.Mapping.ApplicationServices.Differences;
     using DotNetScaffolder.Mapping.ApplicationServices.Tables;
-    using DotNetScaffolder.Mapping.ApplicationServices.Templates;
     using DotNetScaffolder.Mapping.MetaData.Domain;
 
     using FormControls.TreeView;
