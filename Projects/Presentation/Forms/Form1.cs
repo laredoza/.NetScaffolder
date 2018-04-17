@@ -115,29 +115,6 @@ namespace DotNetScaffolder.Presentation.Forms
         }
 
         /// <summary>
-        /// The button 6_ click.
-        /// </summary>
-        /// <param name="sender">
-        /// The sender.
-        /// </param>
-        /// <param name="e">
-        /// The e.
-        /// </param>
-        private void button6_Click(object sender, EventArgs e)
-        {
-            if (this.ProjectDetailsUserControl1.Validation() == 0)
-            {
-                // Save
-                this.applicationService.Save();
-            }
-
-            if (this.TemplateManagementUserControl1.Validation() == 0)
-            {
-                this.applicationConfiguration.Save();
-            }
-        }
-
-        /// <summary>
         ///     The load data.
         /// </summary>
         private void LoadData()
@@ -245,5 +222,19 @@ namespace DotNetScaffolder.Presentation.Forms
         }
 
         #endregion
+
+        private void BtnSave_Click(object sender, EventArgs e)
+        {
+            if (this.ProjectDetailsUserControl1.Validation() == 0)
+            {
+                // Save
+                this.applicationService.Save();
+            }
+
+            if (this.TemplateManagementUserControl1.Validation() == 0)
+            {
+                this.applicationConfiguration.Save();
+            }
+        }
     }
 }

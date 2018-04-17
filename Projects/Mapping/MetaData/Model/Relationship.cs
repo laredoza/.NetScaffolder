@@ -112,10 +112,19 @@ namespace DotNetScaffolder.Mapping.MetaData.Model
             result.ColumnName = this.ColumnName;
             result.DependencyRelationShip = this.DependencyRelationShip;
             result.ForeignColumnName = this.ForeignColumnName;
-            result.RelatedTable = this.RelatedTable.Clone() as Table;
+
+            if (this.RelatedTable != null)
+            {
+                result.RelatedTable = this.RelatedTable.Clone() as Table;
+            }
+
             result.Render = this.Render;
             result.SchemaName = this.SchemaName;
-            result.Table = this.Table.Clone() as Table;
+            if (this.Table != null)
+            {
+                result.Table = this.Table.Clone() as Table;
+            }
+
             result.TableName = this.TableName;
             result.UserRelationship = this.UserRelationship;
 

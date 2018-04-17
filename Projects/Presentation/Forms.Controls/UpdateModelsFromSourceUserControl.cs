@@ -19,7 +19,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
     using DotNetScaffolder.Mapping.ApplicationServices.Differences;
     using DotNetScaffolder.Mapping.ApplicationServices.Tables;
     using DotNetScaffolder.Mapping.MetaData.Domain;
-
+    using DotNetScaffolder.Mapping.MetaData.Model;
     using FormControls.TreeView;
 
     #endregion
@@ -44,6 +44,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         ///     The data source.
         /// </summary>
         private DomainDefinition dataSource;
+        private ApplicationTableCollectionDifference differences;
 
         /// <summary>
         ///     The source type.
@@ -136,7 +137,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
 
                 IApplicationTableCollectionDifference differenceService =
                     new ApplicationTableCollectionDifference(new ApplicationTableDifference());
-                ApplicationTableCollectionDifference differences =
+                this.differences =
                     differenceService.CompareTables(this.DataSource.Tables, sourceDomain.Tables);
 
                 ITableHierarchyService applicationService = new TempateHierarchyService();
@@ -163,5 +164,39 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         }
 
         #endregion
+
+
+
+        public void Save()
+        {
+            ITableHierarchyService applicationService = new TempateHierarchyService();
+
+            List<Table> addTables = this.ReturnTables(this.TreeViewAdd.Nodes[0]);
+            List<Table> removeTables = this.ReturnTables(this.TreeViewDelete.Nodes[0]);
+            this.DataSource.Tables = applicationService.DoTableCollectionDiff(this.DataSource.Tables, addTables, removeTables, this.differences);
+
+
+            var a = "";
+        }
+
+        public List<Table> ReturnTables(TreeNode parentNode)
+        {
+            List<Table> result = new List<Table>();
+
+            foreach (TreeNode node in parentNode.Nodes)
+            {
+                foreach (TreeNode child in node.Nodes)
+                {
+                    if (child.Checked)
+                    {
+                        result.Add(child.Tag as Table);
+                    }
+                }
+            }
+
+            return result;
+        }
     }
+
+
 }

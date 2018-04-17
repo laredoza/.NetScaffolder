@@ -212,7 +212,12 @@ namespace DotNetScaffolder.Mapping.MetaData.Model
             result.RenderToView = this.RenderToView;
             result.RenderToViewOrder = this.RenderToViewOrder;
             result.Scale = this.Scale;
-            result.Table = this.Table.Clone() as Table;
+
+            if (result.Table != null)
+            {
+                result.Table = this.Table.Clone() as Table;
+            }
+
             return result;
         }
 

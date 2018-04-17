@@ -165,9 +165,9 @@ namespace DotNetScaffolder.Mapping.MetaData.Model
             result.DatabaseGeneratedKeyType = this.DatabaseGeneratedKeyType;
             result.Description = this.Description;
 
-            foreach (var relationship in this.RelationShips)
+            foreach (Relationship rationship in this.RelationShips)
             {
-
+                result.RelationShips.Add(rationship.Clone() as Relationship);
             }
 
             result.SchemaName = this.SchemaName;

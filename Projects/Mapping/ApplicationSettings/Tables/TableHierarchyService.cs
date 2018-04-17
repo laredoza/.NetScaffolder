@@ -22,13 +22,31 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Tables
     public class TempateHierarchyService : ITableHierarchyService
     {
 
-        public void DoTableCollectionDiff(List<Table> originalTableList, List<Table> addedTables, List<Table> removedTables, ApplicationTableCollectionDifference comparison)
+        public List<Table> DoTableCollectionDiff(List<Table> originalTableList, List<Table> addedTables, List<Table> removedTables, ApplicationTableCollectionDifference comparison)
         {
             List<Table> newList = new List<Table>();
             foreach (Table table in originalTableList)
             {
                 newList.Add(table.Clone() as Table);
             }
+
+            foreach (Table table in addedTables)
+            {
+                newList.Add(table.Clone() as Table);
+            }
+
+            Table tableToRemove;
+            foreach (Table table in removedTables)
+            {
+                tableToRemove = newList.FirstOrDefault(t => t.SchemaName == table.SchemaName && t.TableName == table.TableName);
+                if (tableToRemove != null)
+                {
+                    newList.Remove(tableToRemove);
+                }
+            }
+
+
+            return newList;
         }
 
         /// <summary>

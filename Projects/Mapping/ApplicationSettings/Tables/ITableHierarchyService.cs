@@ -49,7 +49,7 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Tables
         /// </returns>
         List<Hierarchy> ReturnHierarchyFromList(List<Table> tables, bool includeFields, bool includeRelationships);
 
-        void DoTableCollectionDiff(List<Table> originalTableList, List<Table> addedTables, List<Table> removedTables,
+        List<Table> DoTableCollectionDiff(List<Table> originalTableList, List<Table> addedTables, List<Table> removedTables,
             ApplicationTableCollectionDifference comparison);
 
         #endregion
