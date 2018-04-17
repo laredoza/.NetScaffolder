@@ -23,31 +23,40 @@
 <#@ import namespace="DotNetScaffolder.Core.Common.Serializer" #>
 <#@ import namespace="Configuration" #>
 <#@ include file="T4Toolbox.tt" #>
-<#
-	Debugger.Break();
-	var path = Host.TemplateFile;
-#>
+<#@ include file="ContextGenerator.ttInclude" #>
 <#+
 public class ProjectGenerator : Generator
 {
 	public string ProjectFilePath {get;set;}
+	public string TemplPath {get;set;}
 
 	protected override void RunCore()
 	{
 		var projectDefinition = ObjectXMLSerializer<ProjectDefinition>.Load(ProjectFilePath);
+		ScaffoldConfig.Load(TemplPath);
 		
-		Debugger.Break();
-		ScaffoldConfig.Load(Environment.CurrentDirectory);
+		Dictionary<string, string> parameters = new Dictionary<string, string>();
+		parameters.Add("basePath", ProjectFilePath);
 		
 		foreach(var domain in projectDefinition.Domains)
 		{
 			if(domain.Package == null) continue;
+			
+			var nc = ScaffoldConfig.ReturnNamingConvention(domain.NamingConventionId);
+			var co = ScaffoldConfig.ReturnCollectionOption(domain.CollectionOptionId);
 			
 			foreach(var template in domain.Package.Templates)
 			{
 				if(template.Enabled)
 				{
 					var dt = ScaffoldConfig.ReturnDataType(template.DataType);
+					dt.Load(parameters);
+					
+					ContextGenerator contxtGen = new ContextGenerator();
+					contxtGen.DataType = dt;
+					contxtGen.NamingConvention = nc;
+					contxtGen.CollectionOption = co;
+					contxtGen.Run();
 				}
 			}
 		}
