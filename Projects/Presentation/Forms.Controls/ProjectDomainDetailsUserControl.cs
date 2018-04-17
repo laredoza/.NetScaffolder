@@ -38,22 +38,22 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         #region Fields
 
         /// <summary>
+        ///     The manage data source form.
+        /// </summary>
+        private readonly ManageDataSourceForm manageDataSourceForm;
+
+        /// <summary>
+        ///     The model form.
+        /// </summary>
+        private readonly ModelForm modelForm;
+
+        /// <summary>
         ///     The application service.
         /// </summary>
         private IProjectDefinitionApplicationService applicationService;
 
         /// <summary>
-        /// The manage data source form.
-        /// </summary>
-        private readonly ManageDataSourceForm manageDataSourceForm;
-
-        /// <summary>
-        /// The model form.
-        /// </summary>
-        private readonly ModelForm modelForm;
-
-        /// <summary>
-        /// The save path.
+        ///     The save path.
         /// </summary>
         private string savePath;
 
@@ -61,6 +61,11 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         ///     The selected domain.
         /// </summary>
         private DomainDefinition selectedDomain;
+
+        /// <summary>
+        ///     The table form.
+        /// </summary>
+        private readonly UpdateModelsFromSourceForm tableForm;
 
         #endregion
 
@@ -91,6 +96,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
 
             this.manageDataSourceForm = new ManageDataSourceForm();
             this.modelForm = new ModelForm();
+            this.tableForm = new UpdateModelsFromSourceForm();
         }
 
         #endregion
@@ -170,7 +176,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         public List<Package> Packages { get; set; }
 
         /// <summary>
-        /// Gets or sets the save path.
+        ///     Gets or sets the save path.
         /// </summary>
         public string SavePath
         {
@@ -578,8 +584,27 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         {
             Logger.Trace("Started Model Clicked");
             this.modelForm.DataSource = this.SelectedDomain;
+            this.modelForm.SavePath = this.SavePath;
             this.modelForm.ShowDialog();
             Logger.Trace("Completed Model Clicked");
+        }
+
+        /// <summary>
+        /// The btn refresh_ click.
+        /// </summary>
+        /// <param name="sender">
+        /// The sender.
+        /// </param>
+        /// <param name="e">
+        /// The e.
+        /// </param>
+        private void BtnRefresh_Click(object sender, EventArgs e)
+        {
+            Logger.Trace("Started Refresh Clicked");
+            this.tableForm.SavePath = this.SavePath;
+            this.tableForm.DataSource = this.SelectedDomain;
+            this.tableForm.ShowDialog();
+            Logger.Trace("Completed Refresh Clicked");
         }
 
         /// <summary>

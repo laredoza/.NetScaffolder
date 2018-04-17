@@ -28,25 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.domainMenuUserControl1 = new DotNetScaffolder.Presentation.Forms.Controls.DomainMenuUserControl();
             this.PanelConfig = new System.Windows.Forms.Panel();
             this.btnSave = new System.Windows.Forms.Button();
-            this.btnRefresh = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.domainMenuUserControl1 = new DotNetScaffolder.Presentation.Forms.Controls.DomainMenuUserControl();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // domainMenuUserControl1
-            // 
-            this.domainMenuUserControl1.DataSource = null;
-            this.domainMenuUserControl1.Location = new System.Drawing.Point(2, 2);
-            this.domainMenuUserControl1.Margin = new System.Windows.Forms.Padding(2);
-            this.domainMenuUserControl1.Name = "domainMenuUserControl1";
-            this.domainMenuUserControl1.OutputPath = null;
-            this.domainMenuUserControl1.ParentConfigControl = null;
-            this.domainMenuUserControl1.Size = new System.Drawing.Size(410, 698);
-            this.domainMenuUserControl1.TabIndex = 6;
             // 
             // PanelConfig
             // 
@@ -67,16 +55,6 @@
             this.btnSave.TabIndex = 8;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
-            // 
-            // btnRefresh
-            // 
-            this.btnRefresh.Location = new System.Drawing.Point(1234, 719);
-            this.btnRefresh.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(112, 35);
-            this.btnRefresh.TabIndex = 7;
-            this.btnRefresh.Text = "Refresh";
-            this.btnRefresh.UseVisualStyleBackColor = true;
             // 
             // btnClose
             // 
@@ -104,12 +82,22 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1588, 705);
             this.tableLayoutPanel1.TabIndex = 5;
             // 
+            // domainMenuUserControl1
+            // 
+            this.domainMenuUserControl1.DataSource = null;
+            this.domainMenuUserControl1.Location = new System.Drawing.Point(2, 2);
+            this.domainMenuUserControl1.Margin = new System.Windows.Forms.Padding(2);
+            this.domainMenuUserControl1.Name = "domainMenuUserControl1";
+            this.domainMenuUserControl1.OutputPath = null;
+            this.domainMenuUserControl1.ParentConfigControl = null;
+            this.domainMenuUserControl1.Size = new System.Drawing.Size(410, 698);
+            this.domainMenuUserControl1.TabIndex = 6;
+            // 
             // ModelFormUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.btnSave);
-            this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "ModelFormUserControl";
@@ -124,7 +112,6 @@
         private DomainMenuUserControl domainMenuUserControl1;
         private System.Windows.Forms.Panel PanelConfig;
         private System.Windows.Forms.Button btnSave;
-        private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
     }

@@ -36,8 +36,13 @@ namespace DotNetScaffolder.Presentation.Forms
         /// </summary>
         private IProjectDefinitionApplicationService applicationService;
 
+        /// <summary>
+        /// The model path.
+        /// </summary>
         private string modelPath;
 
+        
+        
         #endregion
 
         #region Constructors and Destructors

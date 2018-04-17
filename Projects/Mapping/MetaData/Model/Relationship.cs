@@ -19,7 +19,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Model
     /// The relationship.
     /// </summary>
     [Serializable]
-    public class Relationship
+    public class Relationship : ICloneable
     {
         #region Properties
 
@@ -105,63 +105,23 @@ namespace DotNetScaffolder.Mapping.MetaData.Model
         [XmlAttribute("UserRelationship")]
         public bool UserRelationship { get; set; }
 
+        public object Clone()
+        {
+            Relationship result = new Relationship();
+
+            result.ColumnName = this.ColumnName;
+            result.DependencyRelationShip = this.DependencyRelationShip;
+            result.ForeignColumnName = this.ForeignColumnName;
+            result.RelatedTable = this.RelatedTable.Clone() as Table;
+            result.Render = this.Render;
+            result.SchemaName = this.SchemaName;
+            result.Table = this.Table.Clone() as Table;
+            result.TableName = this.TableName;
+            result.UserRelationship = this.UserRelationship;
+
+            return result;
+        }
+
         #endregion
-
-        // private string InterfaceCollectionTypeInDeclaration
-        // {
-        // get
-        // {
-        // var collectionOption = Domain == null ? CollectionOptionType.IListAndList : Domain.CollectionOption;
-        // switch (collectionOption)
-        // {
-        // case CollectionOptionType.IListAndList:
-        // return "IList";
-        // break;
-        // default:
-        // return "ICollection";
-        // break;
-        // }
-        // }
-        // }
-
-        // private string CollectionTypeInDeclaration
-        // {
-        // get
-        // {
-        // var collectionOption = Domain == null ? CollectionOptionType.IListAndList : Domain.CollectionOption;
-        // switch (collectionOption)
-        // {
-        // case CollectionOptionType.ObservableCollection:
-        // return "ObservableCollection";
-        // break;
-        // case CollectionOptionType.IListAndList:
-        // return "IList";
-        // break;
-        // default:
-        // return "ICollection";
-        // break;
-        // }
-        // }
-        // }
-
-        // private string CollectionTypeInAssignment
-        // {
-        // get
-        // {
-        // var collectionOption = Domain == null ? CollectionOptionType.IListAndList : Domain.CollectionOption;
-        // switch (collectionOption)
-        // {
-        // case CollectionOptionType.ObservableCollection:
-        // return "ObservableCollection";
-        // break;
-        // case CollectionOptionType.IListAndList:
-        // return "List";
-        // break;
-        // default:
-        // return "HashSet";
-        // break;
-        // }
-        // }
-        // }
     }
 }

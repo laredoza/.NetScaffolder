@@ -46,7 +46,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         /// <summary>
         ///     Gets or sets the data source.
         /// </summary>
-        public IHierarchy DataSource
+        public Hierarchy DataSource
         {
             get
             {

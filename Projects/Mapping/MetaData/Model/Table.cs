@@ -21,7 +21,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Model
     /// The table.
     /// </summary>
     [Serializable]
-    public class Table
+    public class Table : ICloneable
     {
         #region Constructors and Destructors
 
@@ -38,12 +38,6 @@ namespace DotNetScaffolder.Mapping.MetaData.Model
         #endregion
 
         #region Properties
-
-        // [XmlIgnore]
-        // public MetadataTableCollection TableCollection { get; set; }
-
-        // [XmlIgnore]
-        // public AutomationDomain Domain { get { return TableCollection == null ? null : TableCollection.Domain; } }
 
         /// <summary>
         /// Gets the child relationships.
@@ -161,70 +155,27 @@ namespace DotNetScaffolder.Mapping.MetaData.Model
         [XmlAttribute("TableName")]
         public string TableName { get; set; }
 
+        public object Clone()
+        {
+            Table result = new Table();
+            foreach (var column in this.Columns)
+            {
+                result.Columns.Add(column.Clone() as Column);
+            }
+            result.DatabaseGeneratedKeyType = this.DatabaseGeneratedKeyType;
+            result.Description = this.Description;
+
+            foreach (var relationship in this.RelationShips)
+            {
+
+            }
+
+            result.SchemaName = this.SchemaName;
+            result.TableName = this.TableName;
+
+            return result;
+        }
+
         #endregion
-
-        // [XmlIgnore]
-        // public EntityAutomation EntityDefinition
-        // {
-        // get { return TableCollection.Domain.EntityDefinition; }
-        // }
-
-        // [XmlIgnore]
-        // public DtoAutomation DtoDefinition
-        // {
-        // get { return TableCollection.Domain.DtoDefinition; }
-        // }
-
-        // [XmlIgnore]
-        // public ViewModelAutomation CurrentViewModelDefinition { get; set; }
-
-        // [XmlIgnore]
-        // public ViewAutomation CurrentViewDefinition { get; set; }
-
-        // [XmlIgnore]
-        // public string FluentPrimaryKey
-        // {
-        // get
-        // {
-        // var pks = Columns.Where(u => u.IsPrimaryKey).ToList();
-        // if (pks.Count <= 0)
-        // throw new Exception(string.Format("Table {0} has no primary key field", QualifiedTableName));
-
-        // return string.Format("modelBuilder.Entity<{0}>().HasKey(t => {1});", TransformTableName,
-        // pks.Count == 1 ?
-        // string.Format("t.{0}", pks[0].TransformPublicPropertyName) :
-        // string.Format("new {{ {0} }}", string.Join(", ", pks.Select(u => string.Format("t.{0}", u.TransformPublicPropertyName)))));
-
-        // }
-        // }
-
-        // [XmlIgnore]
-        // public List<string> FluentDatabaseGeneratedOptions
-        // {
-        // get
-        // {
-        // var pks = Columns.Where(u => u.IsPrimaryKey).ToList();
-        // if (pks.Count <= 0)
-        // throw new Exception(string.Format("Table {0} has no primary key field", QualifiedTableName));
-
-        // return pks.Select(pk => string.Format("modelBuilder.Entity<{0}>().Property(t => t.{1}).HasDatabaseGeneratedOption({2});", TransformTableName, pk.TransformPublicPropertyName, TransformDatabaseGeneratedKeyType)).ToList();
-        // }
-        // }
-
-        // public void RepairObjectParents(MetadataTableCollection tableCollection)
-        // {
-
-        // TableCollection = tableCollection;
-
-        // foreach (var column in Columns)
-        // column.Table = this;
-        // foreach (var rel in RelationShips)
-        // {
-        // rel.Table = this;
-        // var rtbl = TableCollection.Tables.FirstOrDefault(t => (rel.SchemaName == null || (t.SchemaName.ToUpper() == rel.SchemaName.ToUpper())) && t.TableName.ToUpper() == rel.TableName.ToUpper());
-        // if (rtbl != null)
-        // rel.RelatedTable = rtbl;
-        // }
-        // }
     }
 }
