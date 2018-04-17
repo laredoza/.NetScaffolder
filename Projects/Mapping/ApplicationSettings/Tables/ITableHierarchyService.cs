@@ -52,6 +52,13 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Tables
         List<Table> DoTableCollectionDiff(List<Table> originalTableList, List<Table> addedTables, List<Table> removedTables,
             ApplicationTableCollectionDifference comparison);
 
+        /// <summary>
+        /// Return Tables
+        /// </summary>
+        /// <param name="parentNode"></param>
+        /// <returns></returns>
+        List<Table> ReturnTables(TreeNode parentNode);
+ 
         #endregion
     }
 }

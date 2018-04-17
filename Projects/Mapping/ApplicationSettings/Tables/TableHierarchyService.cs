@@ -143,7 +143,23 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Tables
             return new Hierarchy { Name = table.TableName, Item = table };
         }
 
-        
+        public List<Table> ReturnTables(TreeNode parentNode)
+        {
+            List<Table> result = new List<Table>();
+
+            foreach (TreeNode node in parentNode.Nodes)
+            {
+                foreach (TreeNode child in node.Nodes)
+                {
+                    if (child.Checked)
+                    {
+                        result.Add(child.Tag as Table);
+                    }
+                }
+            }
+
+            return result;
+        }
 
 
         //        MainViewModel.cs

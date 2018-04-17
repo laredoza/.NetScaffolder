@@ -171,31 +171,15 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         {
             ITableHierarchyService applicationService = new TempateHierarchyService();
 
-            List<Table> addTables = this.ReturnTables(this.TreeViewAdd.Nodes[0]);
-            List<Table> removeTables = this.ReturnTables(this.TreeViewDelete.Nodes[0]);
+            List<Table> addTables = applicationService.ReturnTables(this.TreeViewAdd.Nodes[0]);
+            List<Table> removeTables = applicationService.ReturnTables(this.TreeViewDelete.Nodes[0]);
             this.DataSource.Tables = applicationService.DoTableCollectionDiff(this.DataSource.Tables, addTables, removeTables, this.differences);
 
-
+            
             var a = "";
         }
 
-        public List<Table> ReturnTables(TreeNode parentNode)
-        {
-            List<Table> result = new List<Table>();
-
-            foreach (TreeNode node in parentNode.Nodes)
-            {
-                foreach (TreeNode child in node.Nodes)
-                {
-                    if (child.Checked)
-                    {
-                        result.Add(child.Tag as Table);
-                    }
-                }
-            }
-
-            return result;
-        }
+       
     }
 
 
