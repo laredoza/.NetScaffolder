@@ -28,22 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBox8 = new System.Windows.Forms.TextBox();
+            this.TxtDescription = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
             this.checkBox3 = new System.Windows.Forms.CheckBox();
-            this.textBox7 = new System.Windows.Forms.TextBox();
+            this.TxtBoxDefault = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.TxtBoxScale = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.TxtBoxPrecision = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.CheckBoxPrimaryKey = new System.Windows.Forms.CheckBox();
+            this.TxtBoxLength = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
+            this.CheckBoxRequired = new System.Windows.Forms.CheckBox();
+            this.ComboBoxDataType = new System.Windows.Forms.ComboBox();
+            this.LblOrder = new System.Windows.Forms.Label();
+            this.LblName = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
@@ -51,13 +51,13 @@
             this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // textBox8
+            // TxtDescription
             // 
-            this.textBox8.Location = new System.Drawing.Point(173, 46);
-            this.textBox8.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(180, 26);
-            this.textBox8.TabIndex = 56;
+            this.TxtDescription.Location = new System.Drawing.Point(173, 46);
+            this.TxtDescription.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.TxtDescription.Name = "TxtDescription";
+            this.TxtDescription.Size = new System.Drawing.Size(180, 26);
+            this.TxtDescription.TabIndex = 56;
             // 
             // label14
             // 
@@ -80,13 +80,13 @@
             this.checkBox3.Text = "Enabled";
             this.checkBox3.UseVisualStyleBackColor = true;
             // 
-            // textBox7
+            // TxtBoxDefault
             // 
-            this.textBox7.Location = new System.Drawing.Point(168, 321);
-            this.textBox7.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(180, 26);
-            this.textBox7.TabIndex = 53;
+            this.TxtBoxDefault.Location = new System.Drawing.Point(168, 321);
+            this.TxtBoxDefault.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.TxtBoxDefault.Name = "TxtBoxDefault";
+            this.TxtBoxDefault.Size = new System.Drawing.Size(180, 26);
+            this.TxtBoxDefault.TabIndex = 53;
             // 
             // label13
             // 
@@ -98,14 +98,14 @@
             this.label13.TabIndex = 52;
             this.label13.Text = "Default Value:";
             // 
-            // textBox3
+            // TxtBoxScale
             // 
-            this.textBox3.Location = new System.Drawing.Point(168, 277);
-            this.textBox3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(180, 26);
-            this.textBox3.TabIndex = 51;
-            this.textBox3.Text = "0";
+            this.TxtBoxScale.Location = new System.Drawing.Point(168, 277);
+            this.TxtBoxScale.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.TxtBoxScale.Name = "TxtBoxScale";
+            this.TxtBoxScale.Size = new System.Drawing.Size(180, 26);
+            this.TxtBoxScale.TabIndex = 51;
+            this.TxtBoxScale.Text = "0";
             // 
             // label12
             // 
@@ -117,14 +117,14 @@
             this.label12.TabIndex = 50;
             this.label12.Text = "Scale:";
             // 
-            // textBox2
+            // TxtBoxPrecision
             // 
-            this.textBox2.Location = new System.Drawing.Point(168, 237);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(180, 26);
-            this.textBox2.TabIndex = 49;
-            this.textBox2.Text = "0";
+            this.TxtBoxPrecision.Location = new System.Drawing.Point(168, 237);
+            this.TxtBoxPrecision.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.TxtBoxPrecision.Name = "TxtBoxPrecision";
+            this.TxtBoxPrecision.Size = new System.Drawing.Size(180, 26);
+            this.TxtBoxPrecision.TabIndex = 49;
+            this.TxtBoxPrecision.Text = "0";
             // 
             // label11
             // 
@@ -136,24 +136,24 @@
             this.label11.TabIndex = 48;
             this.label11.Text = "Precision:";
             // 
-            // checkBox2
+            // CheckBoxPrimaryKey
             // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(281, 380);
-            this.checkBox2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(117, 24);
-            this.checkBox2.TabIndex = 47;
-            this.checkBox2.Text = "Primary Key";
-            this.checkBox2.UseVisualStyleBackColor = true;
+            this.CheckBoxPrimaryKey.AutoSize = true;
+            this.CheckBoxPrimaryKey.Location = new System.Drawing.Point(281, 380);
+            this.CheckBoxPrimaryKey.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.CheckBoxPrimaryKey.Name = "CheckBoxPrimaryKey";
+            this.CheckBoxPrimaryKey.Size = new System.Drawing.Size(117, 24);
+            this.CheckBoxPrimaryKey.TabIndex = 47;
+            this.CheckBoxPrimaryKey.Text = "Primary Key";
+            this.CheckBoxPrimaryKey.UseVisualStyleBackColor = true;
             // 
-            // textBox1
+            // TxtBoxLength
             // 
-            this.textBox1.Location = new System.Drawing.Point(168, 163);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(180, 26);
-            this.textBox1.TabIndex = 46;
+            this.TxtBoxLength.Location = new System.Drawing.Point(168, 163);
+            this.TxtBoxLength.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.TxtBoxLength.Name = "TxtBoxLength";
+            this.TxtBoxLength.Size = new System.Drawing.Size(180, 26);
+            this.TxtBoxLength.TabIndex = 46;
             // 
             // label2
             // 
@@ -165,50 +165,50 @@
             this.label2.TabIndex = 45;
             this.label2.Text = "Length:";
             // 
-            // checkBox1
+            // CheckBoxRequired
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(168, 380);
-            this.checkBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(100, 24);
-            this.checkBox1.TabIndex = 44;
-            this.checkBox1.Text = "Required";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.CheckBoxRequired.AutoSize = true;
+            this.CheckBoxRequired.Location = new System.Drawing.Point(168, 380);
+            this.CheckBoxRequired.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.CheckBoxRequired.Name = "CheckBoxRequired";
+            this.CheckBoxRequired.Size = new System.Drawing.Size(100, 24);
+            this.CheckBoxRequired.TabIndex = 44;
+            this.CheckBoxRequired.Text = "Required";
+            this.CheckBoxRequired.UseVisualStyleBackColor = true;
             // 
-            // comboBox2
+            // ComboBoxDataType
             // 
-            this.comboBox2.Enabled = false;
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Items.AddRange(new object[] {
+            this.ComboBoxDataType.Enabled = false;
+            this.ComboBoxDataType.FormattingEnabled = true;
+            this.ComboBoxDataType.Items.AddRange(new object[] {
             "None",
             "Integer",
             "Decimal"});
-            this.comboBox2.Location = new System.Drawing.Point(168, 121);
-            this.comboBox2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(180, 28);
-            this.comboBox2.TabIndex = 43;
+            this.ComboBoxDataType.Location = new System.Drawing.Point(168, 121);
+            this.ComboBoxDataType.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.ComboBoxDataType.Name = "ComboBoxDataType";
+            this.ComboBoxDataType.Size = new System.Drawing.Size(180, 28);
+            this.ComboBoxDataType.TabIndex = 43;
             // 
-            // label5
+            // LblOrder
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(173, 92);
-            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(18, 20);
-            this.label5.TabIndex = 42;
-            this.label5.Text = "1";
+            this.LblOrder.AutoSize = true;
+            this.LblOrder.Location = new System.Drawing.Point(173, 92);
+            this.LblOrder.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.LblOrder.Name = "LblOrder";
+            this.LblOrder.Size = new System.Drawing.Size(18, 20);
+            this.LblOrder.TabIndex = 42;
+            this.LblOrder.Text = "1";
             // 
-            // label9
+            // LblName
             // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(168, 21);
-            this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(23, 20);
-            this.label9.TabIndex = 41;
-            this.label9.Text = "Id";
+            this.LblName.AutoSize = true;
+            this.LblName.Location = new System.Drawing.Point(168, 21);
+            this.LblName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.LblName.Name = "LblName";
+            this.LblName.Size = new System.Drawing.Size(23, 20);
+            this.LblName.TabIndex = 41;
+            this.LblName.Text = "Id";
             // 
             // comboBox1
             // 
@@ -263,32 +263,32 @@
             this.label4.TabIndex = 36;
             this.label4.Text = "Name:";
             // 
-            // FieldUserControl
+            // ModelFieldUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.textBox8);
+            this.Controls.Add(this.TxtDescription);
             this.Controls.Add(this.label14);
             this.Controls.Add(this.checkBox3);
-            this.Controls.Add(this.textBox7);
+            this.Controls.Add(this.TxtBoxDefault);
             this.Controls.Add(this.label13);
-            this.Controls.Add(this.textBox3);
+            this.Controls.Add(this.TxtBoxScale);
             this.Controls.Add(this.label12);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.TxtBoxPrecision);
             this.Controls.Add(this.label11);
-            this.Controls.Add(this.checkBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.CheckBoxPrimaryKey);
+            this.Controls.Add(this.TxtBoxLength);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.checkBox1);
-            this.Controls.Add(this.comboBox2);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.label9);
+            this.Controls.Add(this.CheckBoxRequired);
+            this.Controls.Add(this.ComboBoxDataType);
+            this.Controls.Add(this.LblOrder);
+            this.Controls.Add(this.LblName);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label4);
-            this.Name = "FieldUserControl";
+            this.Name = "ModelFieldUserControl";
             this.Size = new System.Drawing.Size(610, 644);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -297,22 +297,22 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox textBox8;
+        private System.Windows.Forms.TextBox TxtDescription;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.CheckBox checkBox3;
-        private System.Windows.Forms.TextBox textBox7;
+        private System.Windows.Forms.TextBox TxtBoxDefault;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox TxtBoxScale;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox TxtBoxPrecision;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.CheckBox checkBox2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.CheckBox CheckBoxPrimaryKey;
+        private System.Windows.Forms.TextBox TxtBoxLength;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.CheckBox CheckBoxRequired;
+        private System.Windows.Forms.ComboBox ComboBoxDataType;
+        private System.Windows.Forms.Label LblOrder;
+        private System.Windows.Forms.Label LblName;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label8;

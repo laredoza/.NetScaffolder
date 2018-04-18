@@ -180,6 +180,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
             else if (e.Node.Tag is Column)
             {
                 var column = e.Node.Tag as Column;
+                this.fieldControl.DataSource = column;
                 this.fieldControl.BringToFront();
             }
             else if (e.Node.Tag is Relationship)

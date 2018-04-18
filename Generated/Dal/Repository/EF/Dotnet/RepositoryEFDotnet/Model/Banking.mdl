@@ -97,7 +97,7 @@
       </Package>
       <SourceTypeId>3bc1b0c4-1e41-9146-82cf-599181ce4410</SourceTypeId>
       <Tables>
-        <Table Description="Test Description" SchemaName="dbo" TableName="BankAccount">
+        <Table Description="" SchemaName="dbo" TableName="BankAccount">
           <Columns>
             <Column ColumnName="BankAccountId" ColumnOrder="1" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="false" Length="0" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
             <Column ColumnName="BankAccountNumber" ColumnOrder="2" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="10" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
