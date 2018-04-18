@@ -9,6 +9,7 @@ namespace DotNetScaffolder.Test.Presentation.Controls
     #region Usings
 
     using DotNetScaffolder.Presentation.Forms.Controls;
+    using DotNetScaffolder.Presentation.Forms.Controls.Core;
 
     using FormControls.TreeView;
 
