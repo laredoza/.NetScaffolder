@@ -1,4 +1,4 @@
-﻿namespace DotNetScaffolder.Presentation.Forms.Controls
+﻿namespace DotNetScaffolder.Presentation.Forms.Controls.Model
 {
     partial class ModelForm
     {
@@ -13,9 +13,9 @@
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
-            if (disposing && (components != null))
+            if (disposing && (this.components != null))
             {
-                components.Dispose();
+                this.components.Dispose();
             }
             base.Dispose(disposing);
         }
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.ModelFormUserControl1 = new DotNetScaffolder.Presentation.Forms.Controls.ModelFormUserControl();
+            this.ModelFormUserControl1 = new ModelFormUserControl();
             this.SuspendLayout();
             // 
             // ModelFormUserControl1

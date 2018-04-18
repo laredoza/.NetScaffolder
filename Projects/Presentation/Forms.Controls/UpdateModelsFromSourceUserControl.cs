@@ -47,7 +47,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         private DomainDefinition dataSource;
 
         /// <summary>
-        /// The differences.
+        ///     The differences.
         /// </summary>
         private ApplicationTableCollectionDifference differences;
 
@@ -126,7 +126,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         }
 
         /// <summary>
-        /// The save.
+        ///     The save.
         /// </summary>
         public void Save()
         {

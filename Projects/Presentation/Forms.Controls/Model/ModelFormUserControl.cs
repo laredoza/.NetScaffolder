@@ -4,7 +4,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace DotNetScaffolder.Presentation.Forms.Controls
+namespace DotNetScaffolder.Presentation.Forms.Controls.Model
 {
     #region Usings
 
@@ -16,33 +16,29 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
     using Configuration;
 
     using DotNetScaffolder.Components.Common.Contract;
-    using DotNetScaffolder.Mapping.ApplicationServices.Differences;
     using DotNetScaffolder.Mapping.ApplicationServices.Tables;
     using DotNetScaffolder.Mapping.MetaData.Domain;
     using DotNetScaffolder.Mapping.MetaData.Model;
-    using DotNetScaffolder.Presentation.Forms.Controls.Model;
 
     using FormControls.TreeView;
 
     #endregion
 
     /// <summary>
-    /// The model form user control.
+    ///     The model form user control.
     /// </summary>
     public partial class ModelFormUserControl : UserControl
     {
-        private ModelUserControl modelControl;
-
-        private DefaultModelUserControl defaultModelControl;
-
-        private ModelFieldUserControl fieldControl;
-
-        private ModelRelationshipUserControl relationshipControl;
+        #region Static Fields
 
         /// <summary>
         ///     The logger.
         /// </summary>
         private static readonly ILog Logger = LogManager.GetLogger(string.Empty);
+
+        #endregion
+
+        #region Fields
 
         /// <summary>
         ///     The data source.
@@ -50,9 +46,62 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         private DomainDefinition dataSource;
 
         /// <summary>
+        /// The default model control.
+        /// </summary>
+        private readonly DefaultModelUserControl defaultModelControl;
+
+        /// <summary>
+        /// The field control.
+        /// </summary>
+        private readonly ModelFieldUserControl fieldControl;
+
+        /// <summary>
+        /// The model control.
+        /// </summary>
+        private readonly ModelUserControl modelControl;
+
+        /// <summary>
+        /// The relationship control.
+        /// </summary>
+        private readonly ModelRelationshipUserControl relationshipControl;
+
+        /// <summary>
         ///     The source type.
         /// </summary>
         private ISourceType sourceType;
+
+        #endregion
+
+        #region Constructors and Destructors
+
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="ModelFormUserControl" /> class.
+        /// </summary>
+        public ModelFormUserControl()
+        {
+            this.InitializeComponent();
+            this.modelControl = new ModelUserControl();
+            this.modelControl.Dock = DockStyle.Fill;
+            this.PanelConfig.Controls.Add(this.modelControl);
+
+            this.defaultModelControl = new DefaultModelUserControl();
+            this.defaultModelControl.Dock = DockStyle.Fill;
+            this.PanelConfig.Controls.Add(this.defaultModelControl);
+
+            this.fieldControl = new ModelFieldUserControl();
+            this.fieldControl.Dock = DockStyle.Fill;
+            this.PanelConfig.Controls.Add(this.fieldControl);
+
+            this.relationshipControl = new ModelRelationshipUserControl();
+            this.relationshipControl.Dock = DockStyle.Fill;
+            this.PanelConfig.Controls.Add(this.relationshipControl);
+
+            this.defaultModelControl.BringToFront();
+        }
+
+        #endregion
+
+        #region Public Properties
 
         /// <summary>
         ///     Gets or sets the data source.
@@ -75,6 +124,10 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         ///     Gets or sets the save path.
         /// </summary>
         public string SavePath { get; set; }
+
+        #endregion
+
+        #region Public Methods And Operators
 
         /// <summary>
         /// The add nodes.
@@ -102,62 +155,20 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
             treeView.Nodes[0].Nodes.AddRange(applicationService.ConvertHierarchyToNodes(hierarchy).ToArray());
             treeView.Nodes[0].Expand();
         }
-        /// <summary>
-        ///     The update data source.
-        /// </summary>
-        private void UpdateDataSource()
-        {
-            Logger.Trace("Started UpdateDataSource()");
-
-            if (this.DataSource != null)
-            {
-                this.sourceType = ScaffoldConfig.ReturnSourceType(this.DataSource.SourceTypeId);
-                var sourceDomain = this.sourceType.Import(this.sourceType.Load(this.SavePath));
-
-                ITableHierarchyService applicationService = new TempateHierarchyService();
-                List<Hierarchy> hierarchy = applicationService.ReturnHierarchyFromList(
-                    this.DataSource.Tables,
-                    true,
-                    true);
-
-                this.AddNodes("Models", this.DomainTreeView, hierarchy, applicationService);
-            }
-            else
-            {
-                Logger.Trace("Data Source not updated as domain is null ");
-            }
-
-            Logger.Trace("Completed UpdateDataSource()");
-        }
-        #region Constructors and Destructors
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ModelFormUserControl"/> class.
-        /// </summary>
-        public ModelFormUserControl()
-        {
-            this.InitializeComponent();
-            this.modelControl = new ModelUserControl();
-            this.modelControl.Dock = DockStyle.Fill;
-            this.PanelConfig.Controls.Add(this.modelControl);
-            
-            this.defaultModelControl = new DefaultModelUserControl();
-            this.defaultModelControl.Dock = DockStyle.Fill;
-            this.PanelConfig.Controls.Add(this.defaultModelControl);
-
-            this.fieldControl = new ModelFieldUserControl();
-            this.fieldControl.Dock = DockStyle.Fill;
-            this.PanelConfig.Controls.Add(this.fieldControl);
-
-            this.relationshipControl = new ModelRelationshipUserControl();
-            this.relationshipControl.Dock = DockStyle.Fill;
-            this.PanelConfig.Controls.Add(this.relationshipControl);
-
-            this.defaultModelControl.BringToFront();
-        }
 
         #endregion
 
+        #region Other Methods
+
+        /// <summary>
+        /// The domain tree view_ node mouse click.
+        /// </summary>
+        /// <param name="sender">
+        /// The sender.
+        /// </param>
+        /// <param name="e">
+        /// The e.
+        /// </param>
         private void DomainTreeView_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             if (e.Node.Tag is Table)
@@ -180,5 +191,33 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
                 this.defaultModelControl.BringToFront();
             }
         }
+
+        /// <summary>
+        ///     The update data source.
+        /// </summary>
+        private void UpdateDataSource()
+        {
+            Logger.Trace("Started UpdateDataSource()");
+
+            if (this.DataSource != null)
+            {
+                this.sourceType = ScaffoldConfig.ReturnSourceType(this.DataSource.SourceTypeId);
+                var sourceDomain = this.sourceType.Import(this.sourceType.Load(this.SavePath));
+
+                ITableHierarchyService applicationService = new TempateHierarchyService();
+                List<Hierarchy> hierarchy =
+                    applicationService.ReturnHierarchyFromList(this.DataSource.Tables, true, true);
+
+                this.AddNodes("Models", this.DomainTreeView, hierarchy, applicationService);
+            }
+            else
+            {
+                Logger.Trace("Data Source not updated as domain is null ");
+            }
+
+            Logger.Trace("Completed UpdateDataSource()");
+        }
+
+        #endregion
     }
 }

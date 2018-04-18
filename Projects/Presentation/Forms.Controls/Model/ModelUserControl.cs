@@ -15,7 +15,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
     /// <summary>
     ///     The table user control.
     /// </summary>
-    public partial class ModelUserControl : UserControl 
+    public partial class ModelUserControl : UserControl
     {
         #region Constructors and Destructors
 

@@ -83,16 +83,16 @@
     <Compile Include="ManagePackageUserControl.Designer.cs">
       <DependentUpon>ManagePackageUserControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="ModelForm.cs">
+    <Compile Include="Model\ModelForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ModelForm.Designer.cs">
+    <Compile Include="Model\ModelForm.Designer.cs">
       <DependentUpon>ModelForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ModelFormUserControl.cs">
+    <Compile Include="Model\ModelFormUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ModelFormUserControl.Designer.cs">
+    <Compile Include="Model\ModelFormUserControl.Designer.cs">
       <DependentUpon>ModelFormUserControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\DefaultModelUserControl.cs">
@@ -187,10 +187,10 @@
     <EmbeddedResource Include="ManagePackageUserControl.resx">
       <DependentUpon>ManagePackageUserControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ModelForm.resx">
+    <EmbeddedResource Include="Model\ModelForm.resx">
       <DependentUpon>ModelForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ModelFormUserControl.resx">
+    <EmbeddedResource Include="Model\ModelFormUserControl.resx">
       <DependentUpon>ModelFormUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Model\DefaultModelUserControl.resx">

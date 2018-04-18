@@ -4,11 +4,10 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace DotNetScaffolder.Presentation.Forms.Controls
+namespace DotNetScaffolder.Presentation.Forms.Controls.Model
 {
     #region Usings
 
-    using System;
     using System.Windows.Forms;
 
     using Common.Logging;
