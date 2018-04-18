@@ -14,15 +14,8 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
 
     using Common.Logging;
 
-    using DotNetScaffolder.Mapping.MetaData.Model;
-
-    using System.Linq;
-
     using DotNetScaffolder.Core.Common;
-
-    #region Usings
-
-    #endregion
+    using DotNetScaffolder.Mapping.MetaData.Model;
 
     #endregion
 
@@ -62,24 +55,10 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
 
         #endregion
 
-        public void InitComboBoxDataType()
-        {
-            List<ComboboxItem> items = new List<ComboboxItem>();
-
-            foreach (DomainDataType p in Enum.GetValues(typeof(DomainDataType)))
-            {
-                items.Add(new ComboboxItem { Text = p.ToString(), Value = p.GetHashCode() });
-            }
-
-            this.ComboBoxDataType.DisplayMember = "Text";
-            this.ComboBoxDataType.ValueMember = "Value";
-            this.ComboBoxDataType.DataSource = items;
-        }
-
         #region Public Properties
 
         /// <summary>
-        /// Gets or sets the column name.
+        ///     Gets or sets the column name.
         /// </summary>
         public string ColumnName
         {
@@ -120,113 +99,8 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         }
 
         /// <summary>
-        /// Gets or sets the description.
+        /// Gets or sets the data type.
         /// </summary>
-        public string Description
-        {
-            get
-            {
-                return this.TxtDescription.Text;
-            }
-
-            set
-            {
-                if (this.DataSource.Description != value)
-                {
-                    this.DataSource.Description = value;
-                }
-
-                if (this.TxtDescription.Text != value)
-                {
-                    this.TxtDescription.Text = value;
-                }
-            }
-        }
-
-        public int Order 
-        {
-            get
-            {
-                return Convert.ToInt32(this.LblOrder.Text);
-            }
-
-            set
-            {
-                if (this.DataSource.ColumnOrder != value)
-                {
-                    this.DataSource.ColumnOrder = value;
-                }
-
-                if (this.TxtDescription.Text != value.ToString())
-                {
-                    this.LblOrder.Text = value.ToString();
-                }
-            }
-        }
-
-        public int Length
-        {
-            get
-            {
-                return Convert.ToInt32(this.TxtBoxLength.Text);
-            }
-
-            set
-            {
-                if (this.DataSource.Length != value)
-                {
-                    this.DataSource.Length = value;
-                }
-
-                if (this.TxtBoxLength.Text != value.ToString())
-                {
-                    this.TxtBoxLength.Text = value.ToString();
-                }
-            }
-        }
-
-        public int Precision
-        {
-            get
-            {
-                return Convert.ToInt32(this.TxtBoxPrecision.Text);
-            }
-
-            set
-            {
-                if (this.DataSource.Precision != value)
-                {
-                    this.DataSource.Precision = value;
-                }
-
-                if (this.TxtBoxPrecision.Text != value.ToString())
-                {
-                    this.TxtBoxPrecision.Text = value.ToString();
-                }
-            }
-        }
-
-        public int Scale 
-        {
-            get
-            {
-                return Convert.ToInt32(this.TxtBoxScale.Text);
-            }
-
-            set
-            {
-                if (this.DataSource.Scale != value)
-                {
-                    this.DataSource.Scale = value;
-                }
-
-                if (this.TxtBoxScale.Text != value.ToString())
-                {
-                    this.TxtBoxScale.Text = value.ToString();
-                }
-            }
-        }
-
         public DomainDataType DataType
         {
             get
@@ -250,6 +124,9 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
             }
         }
 
+        /// <summary>
+        /// Gets or sets the default value.
+        /// </summary>
         public string DefaultValue
         {
             get
@@ -271,6 +148,57 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the description.
+        /// </summary>
+        public string Description
+        {
+            get
+            {
+                return this.TxtDescription.Text;
+            }
+
+            set
+            {
+                if (this.DataSource.Description != value)
+                {
+                    this.DataSource.Description = value;
+                }
+
+                if (this.TxtDescription.Text != value)
+                {
+                    this.TxtDescription.Text = value;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether is primary key.
+        /// </summary>
+        public bool IsPrimaryKey
+        {
+            get
+            {
+                return this.CheckBoxPrimaryKey.Checked;
+            }
+
+            set
+            {
+                if (this.DataSource.IsPrimaryKey != value)
+                {
+                    this.DataSource.IsPrimaryKey = value;
+                }
+
+                if (this.CheckBoxPrimaryKey.Checked != value)
+                {
+                    this.CheckBoxPrimaryKey.Checked = value;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether is required.
+        /// </summary>
         public bool IsRequired
         {
             get
@@ -292,25 +220,121 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
             }
         }
 
-        public bool IsPrimaryKey
+        /// <summary>
+        /// Gets or sets the length.
+        /// </summary>
+        public int Length
         {
             get
             {
-                return this.CheckBoxPrimaryKey.Checked;
+                return Convert.ToInt32(this.TxtBoxLength.Text);
             }
 
             set
             {
-                if (this.DataSource.IsPrimaryKey != value)
+                if (this.DataSource.Length != value)
                 {
-                    this.DataSource.IsPrimaryKey = value;
+                    this.DataSource.Length = value;
                 }
 
-                if (this.CheckBoxPrimaryKey.Checked != value)
+                if (this.TxtBoxLength.Text != value.ToString())
                 {
-                    this.CheckBoxPrimaryKey.Checked = value;
+                    this.TxtBoxLength.Text = value.ToString();
                 }
             }
+        }
+
+        /// <summary>
+        /// Gets or sets the order.
+        /// </summary>
+        public int Order
+        {
+            get
+            {
+                return Convert.ToInt32(this.LblOrder.Text);
+            }
+
+            set
+            {
+                if (this.DataSource.ColumnOrder != value)
+                {
+                    this.DataSource.ColumnOrder = value;
+                }
+
+                if (this.TxtDescription.Text != value.ToString())
+                {
+                    this.LblOrder.Text = value.ToString();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the precision.
+        /// </summary>
+        public int Precision
+        {
+            get
+            {
+                return Convert.ToInt32(this.TxtBoxPrecision.Text);
+            }
+
+            set
+            {
+                if (this.DataSource.Precision != value)
+                {
+                    this.DataSource.Precision = value;
+                }
+
+                if (this.TxtBoxPrecision.Text != value.ToString())
+                {
+                    this.TxtBoxPrecision.Text = value.ToString();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the scale.
+        /// </summary>
+        public int Scale
+        {
+            get
+            {
+                return Convert.ToInt32(this.TxtBoxScale.Text);
+            }
+
+            set
+            {
+                if (this.DataSource.Scale != value)
+                {
+                    this.DataSource.Scale = value;
+                }
+
+                if (this.TxtBoxScale.Text != value.ToString())
+                {
+                    this.TxtBoxScale.Text = value.ToString();
+                }
+            }
+        }
+
+        #endregion
+
+        #region Public Methods And Operators
+
+        /// <summary>
+        /// The init combo box data type.
+        /// </summary>
+        public void InitComboBoxDataType()
+        {
+            List<ComboboxItem> items = new List<ComboboxItem>();
+
+            foreach (DomainDataType p in Enum.GetValues(typeof(DomainDataType)))
+            {
+                items.Add(new ComboboxItem { Text = p.ToString(), Value = p.GetHashCode() });
+            }
+
+            this.ComboBoxDataType.DisplayMember = "Text";
+            this.ComboBoxDataType.ValueMember = "Value";
+            this.ComboBoxDataType.DataSource = items;
         }
 
         #endregion
@@ -336,9 +360,6 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
                 this.DefaultValue = this.DataSource.DefaultFieldValue;
                 this.IsRequired = this.DataSource.IsRequired;
                 this.IsPrimaryKey = this.DataSource.IsPrimaryKey;
-                // this.SchemaName = this.DataSource.SchemaName;
-                // this.ModelName = this.DataSource.TableName;
-                // this.Description = this.Description;
             }
             else
             {
