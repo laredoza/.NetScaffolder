@@ -139,6 +139,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         private void BtnClose_Click(object sender, EventArgs e)
         {
             this.updateModelsFromSourceUserControl1.Save();
+            this.Close();
         }
     }
 }

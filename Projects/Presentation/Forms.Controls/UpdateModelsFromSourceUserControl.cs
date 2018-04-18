@@ -165,18 +165,16 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
 
         #endregion
 
-
-
         public void Save()
         {
             ITableHierarchyService applicationService = new TempateHierarchyService();
 
             List<Table> addTables = applicationService.ReturnTables(this.TreeViewAdd.Nodes[0]);
             List<Table> removeTables = applicationService.ReturnTables(this.TreeViewDelete.Nodes[0]);
-            this.DataSource.Tables = applicationService.DoTableCollectionDiff(this.DataSource.Tables, addTables, removeTables, this.differences);
-
-            
-            var a = "";
+            List<Table> newTables = applicationService.DoTableCollectionDiff(this.DataSource.Tables, addTables, removeTables, this.differences);
+            // Todo: Test
+            applicationService.PreserveCustomMetadata(newTables, this.DataSource.Tables);
+            this.DataSource.Tables = newTables;
         }
 
        

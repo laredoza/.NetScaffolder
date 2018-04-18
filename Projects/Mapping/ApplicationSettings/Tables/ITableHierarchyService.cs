@@ -58,7 +58,9 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Tables
         /// <param name="parentNode"></param>
         /// <returns></returns>
         List<Table> ReturnTables(TreeNode parentNode);
- 
+
+        void PreserveCustomMetadata(List<Table> newTableList, List<Table> oldTableList);
+
         #endregion
     }
 }

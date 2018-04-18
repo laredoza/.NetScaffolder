@@ -169,12 +169,12 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Differences
             var secondTableRelationshipTableNames =
                 new HashSet<string>(secondTable.RelationShips.Select(u => u.TableName.ToUpper()));
             retval.FirstExtraRelationships = firstTable.RelationShips
-                .Where(u => !secondTableRelationshipTableNames.Contains(u.TableName)).ToList();
+                .Where(u => !secondTableRelationshipTableNames.Contains(u.TableName.ToUpper())).ToList();
 
             var firstTableRelationshipTableNames =
                 new HashSet<string>(firstTable.RelationShips.Select(u => u.TableName.ToUpper()));
             retval.FirstMissingRelationships = secondTable.RelationShips
-                .Where(u => !firstTableRelationshipTableNames.Contains(u.TableName)).ToList();
+                .Where(u => !firstTableRelationshipTableNames.Contains(u.TableName.ToUpper())).ToList();
 
             retval.ColumnDataTypeDiffs = new List<ColumnDataTypeDifference>();
             foreach (var column in firstTable.Columns)
