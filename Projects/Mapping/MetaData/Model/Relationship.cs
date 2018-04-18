@@ -105,6 +105,11 @@ namespace DotNetScaffolder.Mapping.MetaData.Model
         [XmlAttribute("UserRelationship")]
         public bool UserRelationship { get; set; }
 
+        /// <summary>
+        /// Gets or sets the relationship name.
+        /// </summary>
+        public string RelationshipName { get; set; }
+
         #endregion
 
         #region Public Methods And Operators
@@ -137,6 +142,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Model
 
             result.TableName = this.TableName;
             result.UserRelationship = this.UserRelationship;
+            result.RelationshipName = this.RelationshipName;
 
             return result;
         }

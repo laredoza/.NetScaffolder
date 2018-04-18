@@ -97,16 +97,6 @@
       </Package>
       <SourceTypeId>3bc1b0c4-1e41-9146-82cf-599181ce4410</SourceTypeId>
       <Tables>
-        <Table Description="" SchemaName="dbo" TableName="Software">
-          <Columns>
-            <Column ColumnName="ProductId" ColumnOrder="1" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="false" Length="0" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
-            <Column ColumnName="LicenseCode" ColumnOrder="2" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="200" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
-          </Columns>
-          <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
-          <RelationShips>
-            <RelationShip ColumnName="ProductId" RelationShip="ForeignKey" ForeignColumnName="ProductId" Render="true" TableName="Product" UserRelationship="false" />
-          </RelationShips>
-        </Table>
         <Table Description="" SchemaName="dbo" TableName="BankAccount">
           <Columns>
             <Column ColumnName="BankAccountId" ColumnOrder="1" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="false" Length="0" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
@@ -117,9 +107,15 @@
           </Columns>
           <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
           <RelationShips>
-            <RelationShip ColumnName="CustomerId" RelationShip="ForeignKey" ForeignColumnName="CustomerId" Render="true" TableName="Customer" UserRelationship="false" />
-            <RelationShip ColumnName="BankAccountId" RelationShip="ForeignKeyChild" ForeignColumnName="FromBankAccountId" Render="true" TableName="BankTransfers" UserRelationship="false" />
-            <RelationShip ColumnName="BankAccountId" RelationShip="ForeignKeyChild" ForeignColumnName="ToBankAccountId" Render="true" TableName="BankTransfers" UserRelationship="false" />
+            <RelationShip ColumnName="CustomerId" RelationShip="ForeignKey" ForeignColumnName="CustomerId" Render="true" TableName="Customer" UserRelationship="false">
+              <RelationshipName>FK_BankAccount_Customer</RelationshipName>
+            </RelationShip>
+            <RelationShip ColumnName="BankAccountId" RelationShip="ForeignKeyChild" ForeignColumnName="FromBankAccountId" Render="true" TableName="BankTransfers" UserRelationship="false">
+              <RelationshipName>FK_BankTransfers_BankAccount</RelationshipName>
+            </RelationShip>
+            <RelationShip ColumnName="BankAccountId" RelationShip="ForeignKeyChild" ForeignColumnName="ToBankAccountId" Render="true" TableName="BankTransfers" UserRelationship="false">
+              <RelationshipName>FK_BankTransfers_BankAccount1</RelationshipName>
+            </RelationShip>
           </RelationShips>
         </Table>
         <Table Description="" SchemaName="dbo" TableName="BankTransfers">
@@ -132,8 +128,12 @@
           </Columns>
           <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
           <RelationShips>
-            <RelationShip ColumnName="FromBankAccountId" RelationShip="ForeignKey" ForeignColumnName="BankAccountId" Render="true" TableName="BankAccount" UserRelationship="false" />
-            <RelationShip ColumnName="ToBankAccountId" RelationShip="ForeignKey" ForeignColumnName="BankAccountId" Render="true" TableName="BankAccount" UserRelationship="false" />
+            <RelationShip ColumnName="FromBankAccountId" RelationShip="ForeignKey" ForeignColumnName="BankAccountId" Render="true" TableName="BankAccount" UserRelationship="false">
+              <RelationshipName>FK_BankTransfers_BankAccount</RelationshipName>
+            </RelationShip>
+            <RelationShip ColumnName="ToBankAccountId" RelationShip="ForeignKey" ForeignColumnName="BankAccountId" Render="true" TableName="BankAccount" UserRelationship="false">
+              <RelationshipName>FK_BankTransfers_BankAccount1</RelationshipName>
+            </RelationShip>
           </RelationShips>
         </Table>
         <Table Description="" SchemaName="dbo" TableName="Book">
@@ -143,7 +143,9 @@
           </Columns>
           <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
           <RelationShips>
-            <RelationShip ColumnName="ProductId" RelationShip="ForeignKey" ForeignColumnName="ProductId" Render="true" TableName="Product" UserRelationship="false" />
+            <RelationShip ColumnName="ProductId" RelationShip="ForeignKey" ForeignColumnName="ProductId" Render="true" TableName="Product" UserRelationship="false">
+              <RelationshipName>FK_Book_Product</RelationshipName>
+            </RelationShip>
           </RelationShips>
         </Table>
         <Table Description="" SchemaName="dbo" TableName="Country">
@@ -153,7 +155,9 @@
           </Columns>
           <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
           <RelationShips>
-            <RelationShip ColumnName="CountryId" RelationShip="ForeignKeyChild" ForeignColumnName="CountryId" Render="true" TableName="Customer" UserRelationship="false" />
+            <RelationShip ColumnName="CountryId" RelationShip="ForeignKeyChild" ForeignColumnName="CountryId" Render="true" TableName="Customer" UserRelationship="false">
+              <RelationshipName>FK_Customer_Country</RelationshipName>
+            </RelationShip>
           </RelationShips>
         </Table>
         <Table Description="" SchemaName="dbo" TableName="Customer">
@@ -174,9 +178,15 @@
           </Columns>
           <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
           <RelationShips>
-            <RelationShip ColumnName="CustomerId" RelationShip="ForeignKeyChild" ForeignColumnName="CustomerId" Render="true" TableName="BankAccount" UserRelationship="false" />
-            <RelationShip ColumnName="CountryId" RelationShip="ForeignKey" ForeignColumnName="CountryId" Render="true" TableName="Country" UserRelationship="false" />
-            <RelationShip ColumnName="CustomerId" RelationShip="ForeignKeyChild" ForeignColumnName="CustomerId" Render="true" TableName="Order" UserRelationship="false" />
+            <RelationShip ColumnName="CustomerId" RelationShip="ForeignKeyChild" ForeignColumnName="CustomerId" Render="true" TableName="BankAccount" UserRelationship="false">
+              <RelationshipName>FK_BankAccount_Customer</RelationshipName>
+            </RelationShip>
+            <RelationShip ColumnName="CountryId" RelationShip="ForeignKey" ForeignColumnName="CountryId" Render="true" TableName="Country" UserRelationship="false">
+              <RelationshipName>FK_Customer_Country</RelationshipName>
+            </RelationShip>
+            <RelationShip ColumnName="CustomerId" RelationShip="ForeignKeyChild" ForeignColumnName="CustomerId" Render="true" TableName="Order" UserRelationship="false">
+              <RelationshipName>FK_Order_Customer</RelationshipName>
+            </RelationShip>
           </RelationShips>
         </Table>
         <Table Description="" SchemaName="dbo" TableName="Order">
@@ -192,8 +202,12 @@
           </Columns>
           <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
           <RelationShips>
-            <RelationShip ColumnName="OrderId" RelationShip="ForeignKeyChild" ForeignColumnName="OrderId" Render="true" TableName="OrderDetails" UserRelationship="false" />
-            <RelationShip ColumnName="CustomerId" RelationShip="ForeignKey" ForeignColumnName="CustomerId" Render="true" TableName="Customer" UserRelationship="false" />
+            <RelationShip ColumnName="OrderId" RelationShip="ForeignKeyChild" ForeignColumnName="OrderId" Render="true" TableName="OrderDetails" UserRelationship="false">
+              <RelationshipName>FK_OrdeDetails_Order</RelationshipName>
+            </RelationShip>
+            <RelationShip ColumnName="CustomerId" RelationShip="ForeignKey" ForeignColumnName="CustomerId" Render="true" TableName="Customer" UserRelationship="false">
+              <RelationshipName>FK_Order_Customer</RelationshipName>
+            </RelationShip>
           </RelationShips>
         </Table>
         <Table Description="" SchemaName="dbo" TableName="OrderDetails">
@@ -207,8 +221,12 @@
           </Columns>
           <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
           <RelationShips>
-            <RelationShip ColumnName="OrderId" RelationShip="ForeignKey" ForeignColumnName="OrderId" Render="true" TableName="Order" UserRelationship="false" />
-            <RelationShip ColumnName="ProductId" RelationShip="ForeignKey" ForeignColumnName="ProductId" Render="true" TableName="Product" UserRelationship="false" />
+            <RelationShip ColumnName="OrderId" RelationShip="ForeignKey" ForeignColumnName="OrderId" Render="true" TableName="Order" UserRelationship="false">
+              <RelationshipName>FK_OrdeDetails_Order</RelationshipName>
+            </RelationShip>
+            <RelationShip ColumnName="ProductId" RelationShip="ForeignKey" ForeignColumnName="ProductId" Render="true" TableName="Product" UserRelationship="false">
+              <RelationshipName>FK_OrderDetails_Product</RelationshipName>
+            </RelationShip>
           </RelationShips>
         </Table>
         <Table Description="" SchemaName="dbo" TableName="Product">
@@ -222,9 +240,27 @@
           </Columns>
           <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
           <RelationShips>
-            <RelationShip ColumnName="ProductId" RelationShip="ForeignKeyChild" ForeignColumnName="ProductId" Render="true" TableName="Book" UserRelationship="false" />
-            <RelationShip ColumnName="ProductId" RelationShip="ForeignKeyChild" ForeignColumnName="ProductId" Render="true" TableName="OrderDetails" UserRelationship="false" />
-            <RelationShip ColumnName="ProductId" RelationShip="ForeignKeyChild" ForeignColumnName="ProductId" Render="true" TableName="Software" UserRelationship="false" />
+            <RelationShip ColumnName="ProductId" RelationShip="ForeignKeyChild" ForeignColumnName="ProductId" Render="true" TableName="Book" UserRelationship="false">
+              <RelationshipName>FK_Book_Product</RelationshipName>
+            </RelationShip>
+            <RelationShip ColumnName="ProductId" RelationShip="ForeignKeyChild" ForeignColumnName="ProductId" Render="true" TableName="OrderDetails" UserRelationship="false">
+              <RelationshipName>FK_OrderDetails_Product</RelationshipName>
+            </RelationShip>
+            <RelationShip ColumnName="ProductId" RelationShip="ForeignKeyChild" ForeignColumnName="ProductId" Render="true" TableName="Software" UserRelationship="false">
+              <RelationshipName>FK_Software_Product</RelationshipName>
+            </RelationShip>
+          </RelationShips>
+        </Table>
+        <Table Description="" SchemaName="dbo" TableName="Software">
+          <Columns>
+            <Column ColumnName="ProductId" ColumnOrder="1" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="false" Length="0" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
+            <Column ColumnName="LicenseCode" ColumnOrder="2" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="200" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
+          </Columns>
+          <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
+          <RelationShips>
+            <RelationShip ColumnName="ProductId" RelationShip="ForeignKey" ForeignColumnName="ProductId" Render="true" TableName="Product" UserRelationship="false">
+              <RelationshipName>FK_Software_Product</RelationshipName>
+            </RelationShip>
           </RelationShips>
         </Table>
       </Tables>

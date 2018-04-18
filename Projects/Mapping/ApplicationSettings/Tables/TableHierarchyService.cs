@@ -204,18 +204,34 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Tables
             List<Hierarchy> result = new List<Hierarchy>();
             Hierarchy newTable = null;
             Hierarchy schema = null;
+            Hierarchy fieldNode = null;
+            Hierarchy relationshipNode = null;
+            
             foreach (Table table in tables)
             {
                 newTable = this.NewNode(table);
 
                 if (includeFields)
                 {
-                    newTable.Children.Add(new Hierarchy { Name = "Fields", Item = null });
+                    fieldNode = new Hierarchy { Name = "Fields", Item = null };
+                    newTable.Children.Add(fieldNode);
+
+                    foreach (Column column in table.Columns)
+                    {
+                        fieldNode.Children.Add(new Hierarchy { Name = column.ColumnName, Item = column});
+                    }
                 }
 
                 if (includeRelationships)
                 {
-                    newTable.Children.Add(new Hierarchy { Name = "Relationships", Item = null });
+                    relationshipNode = new Hierarchy { Name = "Relationships", Item = null };
+                    newTable.Children.Add(relationshipNode);
+
+                    foreach (Relationship relationShip in table.RelationShips)
+                    {
+                        relationshipNode.Children.Add(
+                            new Hierarchy { Name = relationShip.RelationshipName, Item = relationShip });
+                    }
                 }
 
                 if (result.Exists(h => h.Name == table.SchemaName))

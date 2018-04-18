@@ -108,7 +108,8 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
                 List<Hierarchy> hierarchy = applicationService.ReturnHierarchyFromList(
                     this.DataSource.Tables,
                     true,
-                    false);
+                    true);
+
                 this.AddNodes("Models", this.DomainTreeView, hierarchy, applicationService);
             }
             else

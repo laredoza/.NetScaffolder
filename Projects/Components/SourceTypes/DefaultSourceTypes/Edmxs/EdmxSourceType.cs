@@ -149,7 +149,9 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.Edmxs
                                                           (rel.ReferentialConstraint.Dependent.Role
                                                            == tbl.Name)
                                                               ? RelationshipType.ForeignKey
-                                                              : RelationshipType.ForeignKeyChild
+                                                              : RelationshipType.ForeignKeyChild,
+
+                                                      RelationshipName = rel.Name
                                                   }).ToList()
                            }).ToList();
 
