@@ -1,10 +1,10 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="RelationshipUserControl.cs" company="DotnetScaffolder">
+// <copyright file="ModelRelationshipUserControl.cs" company="DotnetScaffolder">
 //   MIT
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.TableDataTypes
+namespace DotNetScaffolder.Presentation.Forms.Controls.Model
 {
     #region Usings
 
@@ -15,16 +15,16 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.TableDataTypes
     /// <summary>
     ///     The relationship user control.
     /// </summary>
-    public partial class RelationshipUserControl : UserControl
+    public partial class ModelRelationshipUserControl : UserControl
     {
         #region Constructors and Destructors
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="RelationshipUserControl" /> class.
+        ///     Initializes a new instance of the <see cref="ModelRelationshipUserControl" /> class.
         /// </summary>
-        public RelationshipUserControl()
+        public ModelRelationshipUserControl()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
 
         #endregion

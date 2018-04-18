@@ -90,6 +90,7 @@
             this.DomainTreeView.Name = "DomainTreeView";
             this.DomainTreeView.Size = new System.Drawing.Size(408, 695);
             this.DomainTreeView.TabIndex = 8;
+            this.DomainTreeView.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.DomainTreeView_NodeMouseClick);
             // 
             // ModelFormUserControl
             // 

@@ -95,6 +95,24 @@
     <Compile Include="ModelFormUserControl.Designer.cs">
       <DependentUpon>ModelFormUserControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Model\DefaultModelUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Model\DefaultModelUserControl.Designer.cs">
+      <DependentUpon>DefaultModelUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ModelFieldUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Model\ModelFieldUserControl.Designer.cs">
+      <DependentUpon>ModelFieldUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ModelRelationshipUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Model\ModelRelationshipUserControl.Designer.cs">
+      <DependentUpon>ModelRelationshipUserControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="ProjectDetailsUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -120,6 +138,12 @@
     </Compile>
     <Compile Include="PackageDetailsUserControl.Designer.cs">
       <DependentUpon>PackageDetailsUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ModelUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Model\ModelUserControl.Designer.cs">
+      <DependentUpon>ModelUserControl.cs</DependentUpon>
     </Compile>
     <Compile Include="TemplateDetailsUserControl.cs">
       <SubType>UserControl</SubType>
@@ -169,6 +193,15 @@
     <EmbeddedResource Include="ModelFormUserControl.resx">
       <DependentUpon>ModelFormUserControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Model\DefaultModelUserControl.resx">
+      <DependentUpon>DefaultModelUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Model\ModelFieldUserControl.resx">
+      <DependentUpon>ModelFieldUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Model\ModelRelationshipUserControl.resx">
+      <DependentUpon>ModelRelationshipUserControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ProjectDetailsUserControl.resx">
       <DependentUpon>ProjectDetailsUserControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -180,6 +213,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PackageDetailsUserControl.resx">
       <DependentUpon>PackageDetailsUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Model\ModelUserControl.resx">
+      <DependentUpon>ModelUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TemplateDetailsUserControl.resx">
       <DependentUpon>TemplateDetailsUserControl.cs</DependentUpon>

@@ -1,6 +1,6 @@
-﻿namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.TableDataTypes
+﻿namespace DotNetScaffolder.Presentation.Forms.Controls.Model
 {
-    partial class RelationshipUserControl
+    partial class ModelRelationshipUserControl
     {
         /// <summary> 
         /// Required designer variable.
@@ -13,9 +13,9 @@
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
-            if (disposing && (components != null))
+            if (disposing && (this.components != null))
             {
-                components.Dispose();
+                this.components.Dispose();
             }
             base.Dispose(disposing);
         }
@@ -185,7 +185,7 @@
             this.label15.TabIndex = 29;
             this.label15.Text = "Relationship Type:";
             // 
-            // RelationshipUserControl
+            // ModelRelationshipUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -202,7 +202,7 @@
             this.Controls.Add(this.label17);
             this.Controls.Add(this.label16);
             this.Controls.Add(this.label15);
-            this.Name = "RelationshipUserControl";
+            this.Name = "ModelRelationshipUserControl";
             this.Size = new System.Drawing.Size(397, 307);
             this.ResumeLayout(false);
             this.PerformLayout();

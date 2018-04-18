@@ -19,6 +19,8 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
     using DotNetScaffolder.Mapping.ApplicationServices.Differences;
     using DotNetScaffolder.Mapping.ApplicationServices.Tables;
     using DotNetScaffolder.Mapping.MetaData.Domain;
+    using DotNetScaffolder.Mapping.MetaData.Model;
+    using DotNetScaffolder.Presentation.Forms.Controls.Model;
 
     using FormControls.TreeView;
 
@@ -29,6 +31,14 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
     /// </summary>
     public partial class ModelFormUserControl : UserControl
     {
+        private ModelUserControl modelControl;
+
+        private DefaultModelUserControl defaultModelControl;
+
+        private ModelFieldUserControl fieldControl;
+
+        private ModelRelationshipUserControl relationshipControl;
+
         /// <summary>
         ///     The logger.
         /// </summary>
@@ -127,8 +137,48 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         public ModelFormUserControl()
         {
             this.InitializeComponent();
+            this.modelControl = new ModelUserControl();
+            this.modelControl.Dock = DockStyle.Fill;
+            this.PanelConfig.Controls.Add(this.modelControl);
+            
+            this.defaultModelControl = new DefaultModelUserControl();
+            this.defaultModelControl.Dock = DockStyle.Fill;
+            this.PanelConfig.Controls.Add(this.defaultModelControl);
+
+            this.fieldControl = new ModelFieldUserControl();
+            this.fieldControl.Dock = DockStyle.Fill;
+            this.PanelConfig.Controls.Add(this.fieldControl);
+
+            this.relationshipControl = new ModelRelationshipUserControl();
+            this.relationshipControl.Dock = DockStyle.Fill;
+            this.PanelConfig.Controls.Add(this.relationshipControl);
+
+            this.defaultModelControl.BringToFront();
         }
 
         #endregion
+
+        private void DomainTreeView_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            if (e.Node.Tag is Table)
+            {
+                var table = e.Node.Tag as Table;
+                this.modelControl.BringToFront();
+            }
+            else if (e.Node.Tag is Column)
+            {
+                var column = e.Node.Tag as Column;
+                this.fieldControl.BringToFront();
+            }
+            else if (e.Node.Tag is Relationship)
+            {
+                var column = e.Node.Tag as Relationship;
+                this.relationshipControl.BringToFront();
+            }
+            else if (e.Node.Tag == null)
+            {
+                this.defaultModelControl.BringToFront();
+            }
+        }
     }
 }
