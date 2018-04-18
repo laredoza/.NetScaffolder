@@ -122,6 +122,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
             treeView.Nodes.Clear();
             treeView.Nodes.Add(new TreeNode { Text = parentName });
             treeView.Nodes[0].Nodes.AddRange(applicationService.ConvertHierarchyToNodes(hierarchy).ToArray());
+            treeView.Nodes[0].Expand();
         }
 
         /// <summary>
