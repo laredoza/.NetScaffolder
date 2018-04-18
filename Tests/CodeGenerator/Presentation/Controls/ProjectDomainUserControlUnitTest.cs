@@ -10,6 +10,7 @@ namespace DotNetScaffolder.Test.Presentation.Controls
 
     using DotNetScaffolder.Mapping.ApplicationServices;
     using DotNetScaffolder.Presentation.Forms.Controls;
+    using DotNetScaffolder.Presentation.Forms.Controls.Project;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 

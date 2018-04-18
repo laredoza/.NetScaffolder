@@ -161,12 +161,12 @@ namespace DotNetScaffolder.Presentation.Forms
 
                 this.TemplateManagementUserControl1.DataSource =
                     this.applicationConfiguration.ApplicationSettings.Templates[0];
-                this.ManagePackageUserControl1.DataSource =
+                this.packageUserControl1.DataSource =
                     this.applicationConfiguration.ApplicationSettings.Packages[0];
 
                 if (this.applicationConfiguration.ApplicationSettings.Templates.Count > 0)
                 {
-                    this.ManagePackageUserControl1.Templates =
+                    this.packageUserControl1.Templates =
                         this.applicationConfiguration.ApplicationSettings.Templates;
                 }
 

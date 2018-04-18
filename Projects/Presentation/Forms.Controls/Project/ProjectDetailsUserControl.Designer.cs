@@ -1,4 +1,4 @@
-﻿namespace DotNetScaffolder.Presentation.Forms.Controls
+﻿namespace DotNetScaffolder.Presentation.Forms.Controls.Project
 {
     partial class ProjectDetailsUserControl
     {

@@ -77,11 +77,11 @@
     <Compile Include="ManageDataSourceForm.Designer.cs">
       <DependentUpon>ManageDataSourceForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ManagePackageUserControl.cs">
+    <Compile Include="Packages\PackageUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ManagePackageUserControl.Designer.cs">
-      <DependentUpon>ManagePackageUserControl.cs</DependentUpon>
+    <Compile Include="Packages\PackageUserControl.Designer.cs">
+      <DependentUpon>PackageUserControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\ModelForm.cs">
       <SubType>Form</SubType>
@@ -113,30 +113,30 @@
     <Compile Include="Model\ModelRelationshipUserControl.Designer.cs">
       <DependentUpon>ModelRelationshipUserControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="ProjectDetailsUserControl.cs">
+    <Compile Include="Project\ProjectDetailsUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ProjectDetailsUserControl.Designer.cs">
+    <Compile Include="Project\ProjectDetailsUserControl.Designer.cs">
       <DependentUpon>ProjectDetailsUserControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="ProjectDomainDetailsUserControl.cs">
+    <Compile Include="Project\ProjectDomainDetailsUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ProjectDomainDetailsUserControl.Designer.cs">
+    <Compile Include="Project\ProjectDomainDetailsUserControl.Designer.cs">
       <DependentUpon>ProjectDomainDetailsUserControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="ProjectDomainUserControl.cs">
+    <Compile Include="Project\ProjectDomainUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ProjectDomainUserControl.Designer.cs">
+    <Compile Include="Project\ProjectDomainUserControl.Designer.cs">
       <DependentUpon>ProjectDomainUserControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SelectedEventArgs.cs" />
-    <Compile Include="PackageDetailsUserControl.cs">
+    <Compile Include="Packages\PackageDetailsUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="PackageDetailsUserControl.Designer.cs">
+    <Compile Include="Packages\PackageDetailsUserControl.Designer.cs">
       <DependentUpon>PackageDetailsUserControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\ModelUserControl.cs">
@@ -184,8 +184,8 @@
     <EmbeddedResource Include="ManageDataSourceForm.resx">
       <DependentUpon>ManageDataSourceForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ManagePackageUserControl.resx">
-      <DependentUpon>ManagePackageUserControl.cs</DependentUpon>
+    <EmbeddedResource Include="Packages\PackageUserControl.resx">
+      <DependentUpon>PackageUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Model\ModelForm.resx">
       <DependentUpon>ModelForm.cs</DependentUpon>
@@ -202,16 +202,16 @@
     <EmbeddedResource Include="Model\ModelRelationshipUserControl.resx">
       <DependentUpon>ModelRelationshipUserControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ProjectDetailsUserControl.resx">
+    <EmbeddedResource Include="Project\ProjectDetailsUserControl.resx">
       <DependentUpon>ProjectDetailsUserControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ProjectDomainDetailsUserControl.resx">
+    <EmbeddedResource Include="Project\ProjectDomainDetailsUserControl.resx">
       <DependentUpon>ProjectDomainDetailsUserControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ProjectDomainUserControl.resx">
+    <EmbeddedResource Include="Project\ProjectDomainUserControl.resx">
       <DependentUpon>ProjectDomainUserControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PackageDetailsUserControl.resx">
+    <EmbeddedResource Include="Packages\PackageDetailsUserControl.resx">
       <DependentUpon>PackageDetailsUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Model\ModelUserControl.resx">
@@ -259,6 +259,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
