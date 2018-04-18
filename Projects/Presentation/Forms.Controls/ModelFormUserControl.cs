@@ -103,27 +103,12 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
                 this.sourceType = ScaffoldConfig.ReturnSourceType(this.DataSource.SourceTypeId);
                 var sourceDomain = this.sourceType.Import(this.sourceType.Load(this.SavePath));
 
-                //IApplicationTableCollectionDifference differenceService =
-                //    new ApplicationTableCollectionDifference(new ApplicationTableDifference());
-                //this.differences = differenceService.CompareTables(this.DataSource.Tables, sourceDomain.Tables);
-
-                //ITableHierarchyService applicationService = new TempateHierarchyService();
-                //List<Hierarchy> hierarchy = applicationService.ReturnHierarchyFromList(
-                //    this.differences.FirstExtraTables,
-                //    false,
-                //    false);
-                //this.AddNodes("Models", this.TreeViewAdd, hierarchy, applicationService);
-
-                //hierarchy = applicationService.ReturnHierarchyFromList(this.differences.RefreshTable, false, false);
-
-                //this.AddNodes("Models", this.TreeViewRefresh, hierarchy, applicationService);
-
-                //hierarchy = applicationService.ReturnHierarchyFromList(
-                //    this.differences.FirstMissingTables,
-                //    false,
-                //    false);
-
-                //this.AddNodes("Models", this.TreeViewDelete, hierarchy, applicationService);
+                ITableHierarchyService applicationService = new TempateHierarchyService();
+                List<Hierarchy> hierarchy = applicationService.ReturnHierarchyFromList(
+                    this.DataSource.Tables,
+                    true,
+                    false);
+                this.AddNodes("Models", this.DomainTreeView, hierarchy, applicationService);
             }
             else
             {

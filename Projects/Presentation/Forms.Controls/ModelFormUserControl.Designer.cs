@@ -32,7 +32,7 @@
             this.btnSave = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.domainMenuUserControl1 = new DotNetScaffolder.Presentation.Forms.Controls.DomainMenuUserControl();
+            this.DomainTreeView = new System.Windows.Forms.TreeView();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -71,7 +71,7 @@
             this.tableLayoutPanel1.ColumnCount = 2;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 1172F));
-            this.tableLayoutPanel1.Controls.Add(this.domainMenuUserControl1, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.DomainTreeView, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.PanelConfig, 1, 0);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(4, 5);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -82,16 +82,14 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1588, 705);
             this.tableLayoutPanel1.TabIndex = 5;
             // 
-            // domainMenuUserControl1
+            // DomainTreeView
             // 
-            this.domainMenuUserControl1.DataSource = null;
-            this.domainMenuUserControl1.Location = new System.Drawing.Point(2, 2);
-            this.domainMenuUserControl1.Margin = new System.Windows.Forms.Padding(2);
-            this.domainMenuUserControl1.Name = "domainMenuUserControl1";
-            this.domainMenuUserControl1.OutputPath = null;
-            this.domainMenuUserControl1.ParentConfigControl = null;
-            this.domainMenuUserControl1.Size = new System.Drawing.Size(410, 698);
-            this.domainMenuUserControl1.TabIndex = 6;
+            this.DomainTreeView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.DomainTreeView.Location = new System.Drawing.Point(4, 5);
+            this.DomainTreeView.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.DomainTreeView.Name = "DomainTreeView";
+            this.DomainTreeView.Size = new System.Drawing.Size(408, 695);
+            this.DomainTreeView.TabIndex = 8;
             // 
             // ModelFormUserControl
             // 
@@ -108,11 +106,10 @@
         }
 
         #endregion
-
-        private DomainMenuUserControl domainMenuUserControl1;
         private System.Windows.Forms.Panel PanelConfig;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.TreeView DomainTreeView;
     }
 }
