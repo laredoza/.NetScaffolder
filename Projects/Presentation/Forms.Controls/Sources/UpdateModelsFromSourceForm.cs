@@ -4,7 +4,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace DotNetScaffolder.Presentation.Forms.Controls
+namespace DotNetScaffolder.Presentation.Forms.Controls.Sources
 {
     #region Usings
 
@@ -18,8 +18,6 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
     using DotNetScaffolder.Components.Common.Contract;
     using DotNetScaffolder.Components.Common.Contract.UI;
     using DotNetScaffolder.Mapping.MetaData.Domain;
-
-    using global::Common.Logging;
 
     #endregion
 

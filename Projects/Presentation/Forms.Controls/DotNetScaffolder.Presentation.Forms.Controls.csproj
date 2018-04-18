@@ -157,16 +157,16 @@
     <Compile Include="Templates\TemplateManagementUserControl.Designer.cs">
       <DependentUpon>TemplateManagementUserControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="UpdateModelsFromSourceForm.cs">
+    <Compile Include="Sources\UpdateModelsFromSourceForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UpdateModelsFromSourceForm.Designer.cs">
+    <Compile Include="Sources\UpdateModelsFromSourceForm.Designer.cs">
       <DependentUpon>UpdateModelsFromSourceForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="UpdateModelsFromSourceUserControl.cs">
+    <Compile Include="Sources\UpdateModelsFromSourceUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UpdateModelsFromSourceUserControl.Designer.cs">
+    <Compile Include="Sources\UpdateModelsFromSourceUserControl.Designer.cs">
       <DependentUpon>UpdateModelsFromSourceUserControl.cs</DependentUpon>
     </Compile>
     <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
@@ -223,10 +223,10 @@
     <EmbeddedResource Include="Templates\TemplateManagementUserControl.resx">
       <DependentUpon>TemplateManagementUserControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UpdateModelsFromSourceForm.resx">
+    <EmbeddedResource Include="Sources\UpdateModelsFromSourceForm.resx">
       <DependentUpon>UpdateModelsFromSourceForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UpdateModelsFromSourceUserControl.resx">
+    <EmbeddedResource Include="Sources\UpdateModelsFromSourceUserControl.resx">
       <DependentUpon>UpdateModelsFromSourceUserControl.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
