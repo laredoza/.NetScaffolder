@@ -13,12 +13,19 @@ namespace DotNetScaffolder.Mapping.MetaData.Project.Packages
     #endregion
 
     /// <summary>
-    /// The packages.
+    ///     The packages.
     /// </summary>
     [Serializable]
     public class Packages
     {
-        #region Constructors and Destructors
+        #region Public Properties
+
+        /// <summary>
+        ///     Gets or sets the id.
+        /// </summary>
+        public Guid Id { get; set; }
+
+        #endregion
 
         // public Hierarchy<Package> Hierarchy { get; set; }
 
@@ -36,15 +43,5 @@ namespace DotNetScaffolder.Mapping.MetaData.Project.Packages
         // child.Children.Add(new Hierarchy<Package> { Id = Guid.NewGuid(), Enabled = true, Name = "Entity FrameWork 6(Repository)" });
         // child.Children.Add(new Hierarchy<Package> { Id = Guid.NewGuid(), Enabled = true, Name = "Entity FrameWork 6(Domain Driven)" });
         // }
-        #endregion
-
-        #region Properties
-
-        /// <summary>
-        /// Gets or sets the id.
-        /// </summary>
-        public Guid Id { get; set; }
-
-        #endregion
     }
 }

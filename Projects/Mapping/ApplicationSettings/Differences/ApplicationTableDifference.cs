@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="TableDifference.cs" company="DotnetScaffolder">
+// <copyright file="ApplicationTableDifference.cs" company="DotnetScaffolder">
 //   MIT
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
@@ -17,39 +17,39 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Differences
     #endregion
 
     /// <summary>
-    /// The table difference.
+    ///     The table difference.
     /// </summary>
     public class ApplicationTableDifference : IApplicationTableDifference
     {
         #region Public Properties
 
         /// <summary>
-        /// Gets or sets the column data type diffs.
+        ///     Gets or sets the column data type diffs.
         /// </summary>
         public List<ColumnDataTypeDifference> ColumnDataTypeDiffs { get; set; }
 
         /// <summary>
-        /// Gets or sets the first extra columns.
+        ///     Gets or sets the first extra columns.
         /// </summary>
         public List<Column> FirstExtraColumns { get; set; }
 
         /// <summary>
-        /// Gets or sets the first extra relationships.
+        ///     Gets or sets the first extra relationships.
         /// </summary>
         public List<Relationship> FirstExtraRelationships { get; set; }
 
         /// <summary>
-        /// Gets or sets the first missing columns.
+        ///     Gets or sets the first missing columns.
         /// </summary>
         public List<Column> FirstMissingColumns { get; set; }
 
         /// <summary>
-        /// Gets or sets the first missing relationships.
+        ///     Gets or sets the first missing relationships.
         /// </summary>
         public List<Relationship> FirstMissingRelationships { get; set; }
 
         /// <summary>
-        /// Gets a value indicating whether has column data type diffs.
+        ///     Gets a value indicating whether has column data type diffs.
         /// </summary>
         public bool HasColumnDataTypeDiffs
         {
@@ -60,7 +60,7 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Differences
         }
 
         /// <summary>
-        /// Gets a value indicating whether has extra columns.
+        ///     Gets a value indicating whether has extra columns.
         /// </summary>
         public bool HasExtraColumns
         {
@@ -72,7 +72,7 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Differences
 
         /// <inheritdoc />
         /// <summary>
-        /// Gets a value indicating whether has extra relationships.
+        ///     Gets a value indicating whether has extra relationships.
         /// </summary>
         public bool HasExtraRelationships
         {
@@ -84,7 +84,7 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Differences
 
         /// <inheritdoc />
         /// <summary>
-        /// Gets a value indicating whether has missing columns.
+        ///     Gets a value indicating whether has missing columns.
         /// </summary>
         public bool HasMissingColumns
         {
@@ -96,7 +96,7 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Differences
 
         /// <inheritdoc />
         /// <summary>
-        /// Gets a value indicating whether has missing relationships.
+        ///     Gets a value indicating whether has missing relationships.
         /// </summary>
         public bool HasMissingRelationships
         {
@@ -108,7 +108,7 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Differences
 
         /// <inheritdoc />
         /// <summary>
-        /// Gets a value indicating whether is broken.
+        ///     Gets a value indicating whether is broken.
         /// </summary>
         public bool IsBroken
         {
@@ -122,12 +122,12 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Differences
         }
 
         /// <summary>
-        /// Gets or sets the problem table.
+        ///     Gets or sets the problem table.
         /// </summary>
         public Table ProblemTable { get; set; }
 
         /// <summary>
-        /// Gets the problem table name.
+        ///     Gets the problem table name.
         /// </summary>
         public string ProblemTableName
         {

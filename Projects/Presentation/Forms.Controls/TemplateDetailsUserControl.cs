@@ -549,7 +549,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         {
             if ((sender as ComboBox).SelectedItem != null)
             {
-                this.ConfigLocation = (ConfigLocation)System.Enum.Parse(
+                this.ConfigLocation = (ConfigLocation)Enum.Parse(
                     typeof(ConfigLocation),
                     (sender as ComboBox).SelectedItem.ToString());
             }

@@ -13,12 +13,19 @@ namespace DotNetScaffolder.Mapping.MetaData.Project.Packages
     #endregion
 
     /// <summary>
-    /// The templates.
+    ///     The templates.
     /// </summary>
     [Serializable]
     public class Templates
     {
-        #region Constructors and Destructors
+        #region Public Properties
+
+        /// <summary>
+        ///     Gets or sets the id.
+        /// </summary>
+        public Guid Id { get; set; }
+
+        #endregion
 
         // public Hierarchy<Template> Hierarchy { get; set; }
 
@@ -32,15 +39,5 @@ namespace DotNetScaffolder.Mapping.MetaData.Project.Packages
         // child.Children.Add(new Hierarchy<Template> { Id = Guid.NewGuid(), Enabled = true, Name = "Entity FrameWork (EF)", Item = template});
         // this.Hierarchy.Children.Add(new Hierarchy<Template> { Id = Guid.NewGuid(), Enabled = true, Name = "Repository" });
         // }
-        #endregion
-
-        #region Properties
-
-        /// <summary>
-        /// Gets or sets the id.
-        /// </summary>
-        public Guid Id { get; set; }
-
-        #endregion
     }
 }

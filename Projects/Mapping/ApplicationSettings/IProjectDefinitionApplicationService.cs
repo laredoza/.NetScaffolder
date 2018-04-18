@@ -22,7 +22,7 @@ namespace DotNetScaffolder.Mapping.ApplicationServices
     /// </summary>
     public interface IProjectDefinitionApplicationService : IValidate
     {
-        #region Properties
+        #region Public Properties
 
         /// <summary>
         ///     Gets or sets the project definition.
@@ -31,7 +31,7 @@ namespace DotNetScaffolder.Mapping.ApplicationServices
 
         #endregion
 
-        #region Public methods and operators
+        #region Public Methods And Operators
 
         /// <summary>
         ///     The add domain.
@@ -62,7 +62,7 @@ namespace DotNetScaffolder.Mapping.ApplicationServices
         #endregion
 
         // <summary>
-        /// Returns the data types as Templates
+        // Returns the data types as Templates
         /// </summary>
         /// <returns></returns>
         // List<Template> DataTypesAsTemplates();

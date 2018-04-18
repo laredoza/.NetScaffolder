@@ -6,41 +6,35 @@
 
 namespace DotNetScaffolder.Mapping.MetaData.Model.Difference
 {
-    #region Usings
-
-    using DotNetScaffolder.Mapping.MetaData.Model;
-
-    #endregion
-
     /// <summary>
-    /// The column data type difference.
+    ///     The column data type difference.
     /// </summary>
     public class ColumnDataTypeDifference
     {
         #region Public Properties
 
         /// <summary>
-        /// Gets or sets the first column.
+        ///     Gets or sets the first column.
         /// </summary>
         public Column FirstColumn { get; set; }
 
         /// <summary>
-        /// Gets or sets the first column data type.
+        ///     Gets or sets the first column data type.
         /// </summary>
         public DomainDataType FirstColumnDataType { get; set; }
 
         /// <summary>
-        /// Gets or sets the first column name.
+        ///     Gets or sets the first column name.
         /// </summary>
         public string FirstColumnName { get; set; }
 
         /// <summary>
-        /// Gets or sets the second column.
+        ///     Gets or sets the second column.
         /// </summary>
         public Column SecondColumn { get; set; }
 
         /// <summary>
-        /// Gets or sets the second column data type.
+        ///     Gets or sets the second column data type.
         /// </summary>
         public DomainDataType SecondColumnDataType { get; set; }
 

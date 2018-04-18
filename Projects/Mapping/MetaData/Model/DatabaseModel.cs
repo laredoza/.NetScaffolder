@@ -29,12 +29,12 @@ namespace DotNetScaffolder.Mapping.MetaData.Model
         /// </summary>
         public DatabaseModel()
         {
-            Tables = new List<Table>();
+            this.Tables = new List<Table>();
         }
 
         #endregion
 
-        #region Properties
+        #region Public Properties
 
         /// <summary>
         ///     Gets or sets the domain.

@@ -42,15 +42,15 @@ namespace DotNetScaffolder.Mapping.MetaData.Domain
         /// </summary>
         public DomainDefinition()
         {
-            Tables = new List<Table>();
-            Package = new Package();
-            Id = Guid.NewGuid();
-            ValidationResult = new List<Validation>();
+            this.Tables = new List<Table>();
+            this.Package = new Package();
+            this.Id = Guid.NewGuid();
+            this.ValidationResult = new List<Validation>();
         }
 
         #endregion
 
-        #region Properties
+        #region Public Properties
 
         /// <summary>
         ///     Gets or sets the collection option. At the moment this specifies the collection parent but could be extended at a
@@ -113,7 +113,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Domain
 
         #endregion
 
-        #region Public methods and operators
+        #region Public Methods And Operators
 
         /// <summary>
         ///     Validate class.
@@ -126,47 +126,49 @@ namespace DotNetScaffolder.Mapping.MetaData.Domain
         {
             Logger.Trace("Started Validate()");
 
-            ValidationResult.Clear();
+            this.ValidationResult.Clear();
 
-            if (string.IsNullOrEmpty(Name))
+            if (string.IsNullOrEmpty(this.Name))
             {
-                ValidationResult.Add(new Validation(ValidationType.DomainName, "Name cannot be empty"));
+                this.ValidationResult.Add(new Validation(ValidationType.DomainName, "Name cannot be empty"));
             }
 
-            if (Id == Guid.Empty)
+            if (this.Id == Guid.Empty)
             {
-                ValidationResult.Add(new Validation(ValidationType.DomainId, "Id cannot be empty"));
+                this.ValidationResult.Add(new Validation(ValidationType.DomainId, "Id cannot be empty"));
             }
 
-            if (NamingConventionId == Guid.Empty)
+            if (this.NamingConventionId == Guid.Empty)
             {
-                ValidationResult.Add(new Validation(ValidationType.NamingConventionId, "NamingConventionId cannot be empty"));
+                this.ValidationResult.Add(
+                    new Validation(ValidationType.NamingConventionId, "NamingConventionId cannot be empty"));
             }
 
-            if (SourceTypeId == Guid.Empty)
+            if (this.SourceTypeId == Guid.Empty)
             {
-                ValidationResult.Add(new Validation(ValidationType.SourceTypeId, "SourceTypeId cannot be empty"));
+                this.ValidationResult.Add(new Validation(ValidationType.SourceTypeId, "SourceTypeId cannot be empty"));
             }
 
-            if (DriverId == Guid.Empty)
+            if (this.DriverId == Guid.Empty)
             {
-                ValidationResult.Add(new Validation(ValidationType.DriverId, "DriverId cannot be empty"));
+                this.ValidationResult.Add(new Validation(ValidationType.DriverId, "DriverId cannot be empty"));
             }
 
-            if (DriverTypeId == Guid.Empty)
+            if (this.DriverTypeId == Guid.Empty)
             {
-                ValidationResult.Add(new Validation(ValidationType.DriverTypeId, "DriverTypeId cannot be empty"));
+                this.ValidationResult.Add(new Validation(ValidationType.DriverTypeId, "DriverTypeId cannot be empty"));
             }
 
-            if (CollectionOptionId == Guid.Empty)
+            if (this.CollectionOptionId == Guid.Empty)
             {
-                ValidationResult.Add(new Validation(ValidationType.CollectionOptionId, "CollectionOptionId cannot be empty"));
+                this.ValidationResult.Add(
+                    new Validation(ValidationType.CollectionOptionId, "CollectionOptionId cannot be empty"));
             }
 
-            Logger.Debug($"Number of Validation errors: {ValidationResult.Count}");
-            Logger.Trace($"Validation errors: {ValidationResult}");
+            Logger.Debug($"Number of Validation errors: {this.ValidationResult.Count}");
+            Logger.Trace($"Validation errors: {this.ValidationResult}");
             Logger.Trace("Completed Validate()");
-            return ValidationResult;
+            return this.ValidationResult;
         }
 
         #endregion

@@ -44,14 +44,14 @@ namespace DotNetScaffolder.Mapping.ApplicationServices
         public ProjectDefinitionApplicationServiceFile()
         {
             Logger.Trace($"Started ProjectDefinitionApplicationServiceFile()");
-            ProjectDefinition = new ProjectDefinition();
-            FilePersistenceOptions = new FilePersistenceOptions();
+            this.ProjectDefinition = new ProjectDefinition();
+            this.FilePersistenceOptions = new FilePersistenceOptions();
             Logger.Trace($"Completed ProjectDefinitionApplicationServiceFile()");
         }
 
         #endregion
 
-        #region Properties
+        #region Public Properties
 
         /// <summary>
         ///     Gets or sets the file persistence options.
@@ -71,49 +71,7 @@ namespace DotNetScaffolder.Mapping.ApplicationServices
 
         #endregion
 
-        #region Public methods and operators
-
-        /// <summary>
-        ///     Load ProjectDefinition.
-        /// </summary>
-        public void Load()
-        {
-            Logger.Trace($"Started Load() - Path: {FilePersistenceOptions.Path}");
-            ProjectDefinition = ObjectXMLSerializer<ProjectDefinition>.Load(FilePersistenceOptions.Path);
-            Logger.Trace($"Completed Load() - Path: {FilePersistenceOptions.Path}");
-        }
-
-        /// <summary>
-        /// The update lookups.
-        /// </summary>
-        public void UpdateLookups()
-        {
-        }
-
-        /// <summary>
-        ///     Save ProjectDefinition.
-        /// </summary>
-        public void Save()
-        {
-            Logger.Trace($"Started Save() - Path: {FilePersistenceOptions.Path}");
-
-            ValidationResult = ProjectDefinition.Validate();
-
-            if (Validate().Count == 0)
-            {
-                ObjectXMLSerializer<ProjectDefinition>.Save(
-                    ProjectDefinition,
-                    FilePersistenceOptions.Path,
-                    SerializedFormat.Document);
-            }
-            else
-            {
-                Logger.Error($"Validation error: {ValidationResult}");
-                throw new ApplicationException($"Validation error: {ValidationResult}");
-            }
-
-            Logger.Trace($"Completed Save() - Path: {FilePersistenceOptions.Path}");
-        }
+        #region Public Methods And Operators
 
         /// <summary>
         ///     The add domain.
@@ -128,14 +86,14 @@ namespace DotNetScaffolder.Mapping.ApplicationServices
 
             int index = 1;
 
-            while (ProjectDefinition.Domains.Exists(d => d.Name == $"Domain{index}"))
+            while (this.ProjectDefinition.Domains.Exists(d => d.Name == $"Domain{index}"))
             {
                 index++;
             }
 
             result.Name = $"Domain{index}";
             Logger.Trace($"Domain name: {result.Name}");
-            ProjectDefinition.Domains.Add(result);
+            this.ProjectDefinition.Domains.Add(result);
             Logger.Trace($"Completed AddDomain()");
 
             return result;
@@ -151,34 +109,76 @@ namespace DotNetScaffolder.Mapping.ApplicationServices
         {
             Logger.Trace($"Started Delete() - id: {id}");
 
-            if (ProjectDefinition.Domains.Exists(d => d.Id == id))
+            if (this.ProjectDefinition.Domains.Exists(d => d.Id == id))
             {
-                ProjectDefinition.Domains.Remove(
-                    ProjectDefinition.Domains.Where(d => d.Id == id).FirstOrDefault());
+                this.ProjectDefinition.Domains.Remove(
+                    this.ProjectDefinition.Domains.Where(d => d.Id == id).FirstOrDefault());
             }
 
             Logger.Trace($"Completed Delete() - id: {id}");
         }
 
         /// <summary>
-        /// Returns the data types as Templates
+        ///     Load ProjectDefinition.
+        /// </summary>
+        public void Load()
+        {
+            Logger.Trace($"Started Load() - Path: {this.FilePersistenceOptions.Path}");
+            this.ProjectDefinition = ObjectXMLSerializer<ProjectDefinition>.Load(this.FilePersistenceOptions.Path);
+            Logger.Trace($"Completed Load() - Path: {this.FilePersistenceOptions.Path}");
+        }
+
+        /// <summary>
+        ///     Save ProjectDefinition.
+        /// </summary>
+        public void Save()
+        {
+            Logger.Trace($"Started Save() - Path: {this.FilePersistenceOptions.Path}");
+
+            this.ValidationResult = this.ProjectDefinition.Validate();
+
+            if (this.Validate().Count == 0)
+            {
+                ObjectXMLSerializer<ProjectDefinition>.Save(
+                    this.ProjectDefinition,
+                    this.FilePersistenceOptions.Path,
+                    SerializedFormat.Document);
+            }
+            else
+            {
+                Logger.Error($"Validation error: {this.ValidationResult}");
+                throw new ApplicationException($"Validation error: {this.ValidationResult}");
+            }
+
+            Logger.Trace($"Completed Save() - Path: {this.FilePersistenceOptions.Path}");
+        }
+
+        /// <summary>
+        ///     The update lookups.
+        /// </summary>
+        public void UpdateLookups()
+        {
+        }
+
+        /// <summary>
+        ///     Returns the data types as Templates
         /// </summary>
         /// <returns>
-        /// The <see cref="List"/>.
+        ///     The <see cref="List" />.
         /// </returns>
         /// <summary>
-        /// Validate class.
+        ///     Validate class.
         /// </summary>
         /// <returns>
-        /// The <see cref="List{T}"/>
+        ///     The <see cref="List{T}" />
         ///     Errors returned
         /// </returns>
         public List<Validation> Validate()
         {
             Logger.Trace($"Started Validate()");
-            ValidationResult = ProjectDefinition.Validate();
+            this.ValidationResult = this.ProjectDefinition.Validate();
             Logger.Trace($"Completed Validate()");
-            return ValidationResult;
+            return this.ValidationResult;
         }
 
         #endregion

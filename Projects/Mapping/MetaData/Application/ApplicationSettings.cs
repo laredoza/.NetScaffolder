@@ -40,16 +40,16 @@ namespace DotNetScaffolder.Mapping.MetaData.Application
         public ApplicationSettings()
         {
             Logger.Trace("Started ApplicationSettings()");
-            Templates = new List<Template>();
-            Packages = new List<Package>();
-            ValidationResult = new List<Validation>();
-            DataTypes = new List<DataType>();
+            this.Templates = new List<Template>();
+            this.Packages = new List<Package>();
+            this.ValidationResult = new List<Validation>();
+            this.DataTypes = new List<DataType>();
             Logger.Trace("Completed ApplicationSettings()");
         }
 
         #endregion
 
-        #region Properties
+        #region Public Properties
 
         /// <summary>
         ///     Gets or sets the data types.
@@ -74,7 +74,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Application
 
         #endregion
 
-        #region Public methods and operators
+        #region Public Methods And Operators
 
         /// <summary>
         ///     The validate.
@@ -85,30 +85,30 @@ namespace DotNetScaffolder.Mapping.MetaData.Application
         public List<Validation> Validate()
         {
             Logger.Trace("Started Validate()");
-            ValidationResult.Clear();
+            this.ValidationResult.Clear();
 
-            foreach (var dataType in DataTypes)
+            foreach (var dataType in this.DataTypes)
             {
                 dataType.Validate();
 
                 foreach (var tempResult in dataType.ValidationResult)
                 {
-                    ValidationResult.Add(tempResult);
+                    this.ValidationResult.Add(tempResult);
                 }
             }
 
-            foreach (var template in Templates)
+            foreach (var template in this.Templates)
             {
                 template.Validate();
 
                 foreach (var validationResult in template.ValidationResult)
                 {
-                    ValidationResult.Add(validationResult);
+                    this.ValidationResult.Add(validationResult);
                 }
             }
 
             Logger.Trace("Completed Validate()");
-            return ValidationResult;
+            return this.ValidationResult;
         }
 
         #endregion

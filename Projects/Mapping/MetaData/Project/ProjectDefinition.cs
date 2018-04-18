@@ -49,7 +49,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Project
 
         #endregion
 
-        #region Properties
+        #region Public Properties
 
         /// <summary>
         ///     Gets or sets the base name space.
@@ -77,6 +77,9 @@ namespace DotNetScaffolder.Mapping.MetaData.Project
         /// </summary>
         public string OutputFolder { get; set; }
 
+        /// <summary>
+        /// Gets the output path.
+        /// </summary>
         public string OutputPath
         {
             get
@@ -98,7 +101,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Project
 
         #endregion
 
-        #region Public methods and operators
+        #region Public Methods And Operators
 
         /// <summary>
         ///     Validate class.
@@ -111,45 +114,48 @@ namespace DotNetScaffolder.Mapping.MetaData.Project
         {
             Logger.Trace($"Started Validate()");
 
-            ValidationResult = new List<Validation>();
+            this.ValidationResult = new List<Validation>();
 
-            if (string.IsNullOrEmpty(BaseNameSpace))
+            if (string.IsNullOrEmpty(this.BaseNameSpace))
             {
-                ValidationResult.Add(new Validation(ValidationType.ProjectBaseNameSpace, "BaseNameSpace may not be empty"));
+                this.ValidationResult.Add(
+                    new Validation(ValidationType.ProjectBaseNameSpace, "BaseNameSpace may not be empty"));
             }
 
-            if (string.IsNullOrEmpty(OutputFolder))
+            if (string.IsNullOrEmpty(this.OutputFolder))
             {
-                ValidationResult.Add(new Validation(ValidationType.ProjectOutputFolder, "OutputFolder may not be empty"));
+                this.ValidationResult.Add(
+                    new Validation(ValidationType.ProjectOutputFolder, "OutputFolder may not be empty"));
             }
 
-            if (Version == 0)
+            if (this.Version == 0)
             {
-                ValidationResult.Add(new Validation(ValidationType.ProjectVersion, "Version may not be 0"));
+                this.ValidationResult.Add(new Validation(ValidationType.ProjectVersion, "Version may not be 0"));
             }
 
-            if (string.IsNullOrEmpty(ModelPath))
+            if (string.IsNullOrEmpty(this.ModelPath))
             {
-                ValidationResult.Add(new Validation(ValidationType.ProjectModelPath, "ModelPath may not be empty"));
+                this.ValidationResult.Add(
+                    new Validation(ValidationType.ProjectModelPath, "ModelPath may not be empty"));
             }
 
-            Logger.Debug($"Number of validation errors: {ValidationResult.Count}");
-            Logger.Trace($"Validation errors: {ValidationResult}");
+            Logger.Debug($"Number of validation errors: {this.ValidationResult.Count}");
+            Logger.Trace($"Validation errors: {this.ValidationResult}");
             Logger.Trace($"Completed Validate()");
 
-            foreach (DomainDefinition domainDefinition in Domains)
+            foreach (DomainDefinition domainDefinition in this.Domains)
             {
                 domainDefinition.Validate();
                 if (domainDefinition.ValidationResult.Count > 0)
                 {
                     foreach (var domainResult in domainDefinition.ValidationResult)
                     {
-                        ValidationResult.Add(domainResult);
+                        this.ValidationResult.Add(domainResult);
                     }
                 }
             }
 
-            return ValidationResult;
+            return this.ValidationResult;
         }
 
         #endregion

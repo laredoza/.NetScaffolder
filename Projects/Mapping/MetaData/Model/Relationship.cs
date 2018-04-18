@@ -16,67 +16,67 @@ namespace DotNetScaffolder.Mapping.MetaData.Model
     #endregion
 
     /// <summary>
-    /// The relationship.
+    ///     The relationship.
     /// </summary>
     [Serializable]
     public class Relationship : ICloneable
     {
-        #region Properties
+        #region Public Properties
 
         /// <summary>
-        /// Gets or sets the column name.
+        ///     Gets or sets the column name.
         /// </summary>
         [XmlAttribute("ColumnName")]
         public string ColumnName { get; set; }
 
         /// <summary>
-        /// Gets or sets the dependency relation ship.
+        ///     Gets or sets the dependency relation ship.
         /// </summary>
         [XmlAttribute("RelationShip")]
         public RelationshipType DependencyRelationShip { get; set; }
 
         /// <summary>
-        /// Gets or sets the foreign column name.
+        ///     Gets or sets the foreign column name.
         /// </summary>
         [XmlAttribute("ForeignColumnName")]
         public string ForeignColumnName { get; set; }
 
         /// <summary>
-        /// Gets or sets the related table.
+        ///     Gets or sets the related table.
         /// </summary>
         [XmlIgnore]
         public Table RelatedTable { get; set; }
 
         /// <summary>
-        /// Gets the related table qualified name.
+        ///     Gets the related table qualified name.
         /// </summary>
         public string RelatedTableQualifiedName
         {
             get
             {
-                return RelatedTable != null ? RelatedTable.QualifiedTableName : null;
+                return this.RelatedTable != null ? this.RelatedTable.QualifiedTableName : null;
             }
         }
 
         /// <summary>
-        /// Gets the relationship type string.
+        ///     Gets the relationship type string.
         /// </summary>
         public string RelationshipTypeString
         {
             get
             {
-                return DependencyRelationShip.ToString();
+                return this.DependencyRelationShip.ToString();
             }
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether render.
+        ///     Gets or sets a value indicating whether render.
         /// </summary>
         [XmlAttribute("Render")]
         public bool Render { get; set; } = true;
 
         /// <summary>
-        /// Gets or sets the schema name.
+        ///     Gets or sets the schema name.
         /// </summary>
         [XmlAttribute("SchemaName")]
         public string SchemaName { get; set; }
@@ -88,23 +88,33 @@ namespace DotNetScaffolder.Mapping.MetaData.Model
         // }
 
         /// <summary>
-        /// Gets or sets the table.
+        ///     Gets or sets the table.
         /// </summary>
         [XmlIgnore]
         public Table Table { get; set; }
 
         /// <summary>
-        /// Gets or sets the table name.
+        ///     Gets or sets the table name.
         /// </summary>
         [XmlAttribute("TableName")]
         public string TableName { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether user relationship.
+        ///     Gets or sets a value indicating whether user relationship.
         /// </summary>
         [XmlAttribute("UserRelationship")]
         public bool UserRelationship { get; set; }
 
+        #endregion
+
+        #region Public Methods And Operators
+
+        /// <summary>
+        /// The clone.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="object"/>.
+        /// </returns>
         public object Clone()
         {
             Relationship result = new Relationship();

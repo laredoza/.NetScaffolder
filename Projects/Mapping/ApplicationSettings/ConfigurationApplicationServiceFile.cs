@@ -29,7 +29,7 @@ namespace DotNetScaffolder.Mapping.ApplicationServices
     #endregion
 
     /// <summary>
-    /// The configuration application service file.
+    ///     The configuration application service file.
     /// </summary>
     public class ConfigurationApplicationServiceFile : IConfigurationApplicationService
     {
@@ -45,22 +45,22 @@ namespace DotNetScaffolder.Mapping.ApplicationServices
         #region Constructors and Destructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ConfigurationApplicationServiceFile"/> class.
+        ///     Initializes a new instance of the <see cref="ConfigurationApplicationServiceFile" /> class.
         /// </summary>
         public ConfigurationApplicationServiceFile()
         {
             Logger.Trace($"Started ConfigurationAplicationServiceFile()");
-            ApplicationSettings = new ApplicationSettings();
-            FilePersistenceOptions = new FilePersistenceOptions();
+            this.ApplicationSettings = new ApplicationSettings();
+            this.FilePersistenceOptions = new FilePersistenceOptions();
             Logger.Trace($"Completed ConfigurationAplicationServiceFile()");
         }
 
         #endregion
 
-        #region Properties
+        #region Public Properties
 
         /// <summary>
-        /// Gets or sets the application settings.
+        ///     Gets or sets the application settings.
         /// </summary>
         public ApplicationSettings ApplicationSettings { get; set; }
 
@@ -77,15 +77,15 @@ namespace DotNetScaffolder.Mapping.ApplicationServices
 
         #endregion
 
-        #region Public methods and operators
+        #region Public Methods And Operators
 
         /// <summary>
-        /// The load.
+        ///     The load.
         /// </summary>
         public void Load()
         {
-            Logger.Trace($"Started Load() - Path: {FilePersistenceOptions.Path}");
-            ApplicationSettings = ObjectXMLSerializer<ApplicationSettings>.Load(FilePersistenceOptions.Path);
+            Logger.Trace($"Started Load() - Path: {this.FilePersistenceOptions.Path}");
+            this.ApplicationSettings = ObjectXMLSerializer<ApplicationSettings>.Load(this.FilePersistenceOptions.Path);
 
             string dataTypeName = string.Empty;
             Guid dataTypeId;
@@ -97,77 +97,79 @@ namespace DotNetScaffolder.Mapping.ApplicationServices
                 dataTypeName = (string)dataType.Metadata["NameMetaData"];
                 dataTypeId = new Guid(dataType.Metadata["ValueMetaData"].ToString());
 
-                if (ApplicationSettings.Templates[0].Children.All(t => t.Id.ToString().ToLower() != dataTypeId.ToString().ToLower()))
+                if (this.ApplicationSettings.Templates[0].Children
+                    .All(t => t.Id.ToString().ToLower() != dataTypeId.ToString().ToLower()))
                 {
-                    ApplicationSettings.Templates[0].Children.Add(new Template
-                                                                      {
-                                                                          Id = dataTypeId,
-                                                                          Name = dataTypeName,
-                                                                          HierarchyType = HierarchyType.Group,
-                                                                          Version = 1,
-                                                                          Enabled = true,
-                                                                          DataType = dataTypeId
-                                                                      });
+                    this.ApplicationSettings.Templates[0].Children.Add(
+                        new Template
+                            {
+                                Id = dataTypeId,
+                                Name = dataTypeName,
+                                HierarchyType = HierarchyType.Group,
+                                Version = 1,
+                                Enabled = true,
+                                DataType = dataTypeId
+                            });
                     sort = true;
                 }
             }
 
             if (sort)
             {
-                ApplicationSettings.Templates[0].Children =
-                    ApplicationSettings.Templates[0].Children.OrderBy(t => t.Name).ToList();
+                this.ApplicationSettings.Templates[0].Children =
+                    this.ApplicationSettings.Templates[0].Children.OrderBy(t => t.Name).ToList();
             }
 
-            Logger.Trace($"Completed Load() - Path: {FilePersistenceOptions.Path}");
+            Logger.Trace($"Completed Load() - Path: {this.FilePersistenceOptions.Path}");
         }
 
         /// <summary>
-        /// The save.
+        ///     The save.
         /// </summary>
         /// <exception cref="ApplicationException">
         /// </exception>
         public void Save()
         {
-            Logger.Trace($"Started Save() - Path: {FilePersistenceOptions.Path}");
+            Logger.Trace($"Started Save() - Path: {this.FilePersistenceOptions.Path}");
 
-            ValidationResult = ApplicationSettings.Validate();
+            this.ValidationResult = this.ApplicationSettings.Validate();
 
-            if (ValidationResult.Count == 0)
+            if (this.ValidationResult.Count == 0)
             {
                 ObjectXMLSerializer<ApplicationSettings>.Save(
-                    ApplicationSettings,
-                    FilePersistenceOptions.Path,
+                    this.ApplicationSettings,
+                    this.FilePersistenceOptions.Path,
                     SerializedFormat.Document);
             }
             else
             {
-                Logger.Error($"Validation error: {ValidationResult}");
-                throw new ApplicationException($"Validation error: {ValidationResult}");
+                Logger.Error($"Validation error: {this.ValidationResult}");
+                throw new ApplicationException($"Validation error: {this.ValidationResult}");
             }
 
-            Logger.Trace($"Completed Save() - Path: {FilePersistenceOptions.Path}");
+            Logger.Trace($"Completed Save() - Path: {this.FilePersistenceOptions.Path}");
         }
 
         /// <summary>
-        /// The validate.
+        ///     The validate.
         /// </summary>
         /// <returns>
-        /// The <see cref="List"/>.
+        ///     The <see cref="List" />.
         /// </returns>
         public List<Validation> Validate()
         {
             Logger.Trace($"Started Validate()");
-            ValidationResult.Clear();
+            this.ValidationResult.Clear();
 
-            ApplicationSettings.Validate();
+            this.ApplicationSettings.Validate();
 
-            foreach (var validation in ApplicationSettings.ValidationResult)
+            foreach (var validation in this.ApplicationSettings.ValidationResult)
             {
-                ValidationResult.Add(validation);
+                this.ValidationResult.Add(validation);
             }
 
             Logger.Trace($"Completed Validate()");
-            return ValidationResult;
+            return this.ValidationResult;
         }
 
         #endregion

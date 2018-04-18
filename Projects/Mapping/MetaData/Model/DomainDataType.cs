@@ -6,7 +6,11 @@
 
 namespace DotNetScaffolder.Mapping.MetaData.Model
 {
+    #region Usings
+
     using System;
+
+    #endregion
 
     /// <summary>
     ///     The domain data type.

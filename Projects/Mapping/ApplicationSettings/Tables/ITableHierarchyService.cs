@@ -1,15 +1,23 @@
-﻿#region Usings
-
-using System.Collections.Generic;
-using System.Windows.Forms;
-using DotNetScaffolder.Mapping.ApplicationServices.Differences;
-using DotNetScaffolder.Mapping.MetaData.Model;
-using FormControls.TreeView;
-
-#endregion
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="ITableHierarchyService.cs" company="DotnetScaffolder">
+//   MIT
+// </copyright>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace DotNetScaffolder.Mapping.ApplicationServices.Tables
 {
+    #region Usings
+
+    using System.Collections.Generic;
+    using System.Windows.Forms;
+
+    using DotNetScaffolder.Mapping.ApplicationServices.Differences;
+    using DotNetScaffolder.Mapping.MetaData.Model;
+
+    using FormControls.TreeView;
+
+    #endregion
+
     #region Usings
 
     #endregion
@@ -22,44 +30,77 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Tables
         #region Public Methods And Operators
 
         /// <summary>
-        ///     The convert hierarchy to nodes.
+        /// The convert hierarchy to nodes.
         /// </summary>
         /// <param name="items">
-        ///     The items.
+        /// The items.
         /// </param>
         /// <returns>
-        ///     The <see cref="List" />.
+        /// The <see cref="List"/>.
         /// </returns>
         List<TreeNode> ConvertHierarchyToNodes(List<Hierarchy> items);
 
         /// <summary>
-        ///     Return hierarchy from list.
+        /// The do table collection diff.
         /// </summary>
-        /// <param name="tables">
-        ///     The tables.
+        /// <param name="originalTableList">
+        /// The original table list.
         /// </param>
-        /// <param name="includeFields">
-        ///     The include fields.
+        /// <param name="addedTables">
+        /// The added tables.
         /// </param>
-        /// <param name="includeRelationships">
-        ///     The include relationships.
+        /// <param name="removedTables">
+        /// The removed tables.
+        /// </param>
+        /// <param name="comparison">
+        /// The comparison.
         /// </param>
         /// <returns>
-        ///     The <see cref="List" />.
+        /// The <see cref="List"/>.
+        /// </returns>
+        List<Table> DoTableCollectionDiff(
+            List<Table> originalTableList,
+            List<Table> addedTables,
+            List<Table> removedTables,
+            ApplicationTableCollectionDifference comparison);
+
+        /// <summary>
+        /// The preserve custom metadata.
+        /// </summary>
+        /// <param name="newTableList">
+        /// The new table list.
+        /// </param>
+        /// <param name="oldTableList">
+        /// The old table list.
+        /// </param>
+        void PreserveCustomMetadata(List<Table> newTableList, List<Table> oldTableList);
+
+        /// <summary>
+        /// Return hierarchy from list.
+        /// </summary>
+        /// <param name="tables">
+        /// The tables.
+        /// </param>
+        /// <param name="includeFields">
+        /// The include fields.
+        /// </param>
+        /// <param name="includeRelationships">
+        /// The include relationships.
+        /// </param>
+        /// <returns>
+        /// The <see cref="List"/>.
         /// </returns>
         List<Hierarchy> ReturnHierarchyFromList(List<Table> tables, bool includeFields, bool includeRelationships);
-
-        List<Table> DoTableCollectionDiff(List<Table> originalTableList, List<Table> addedTables, List<Table> removedTables,
-            ApplicationTableCollectionDifference comparison);
 
         /// <summary>
         /// Return Tables
         /// </summary>
-        /// <param name="parentNode"></param>
-        /// <returns></returns>
+        /// <param name="parentNode">
+        /// </param>
+        /// <returns>
+        /// The <see cref="List"/>.
+        /// </returns>
         List<Table> ReturnTables(TreeNode parentNode);
-
-        void PreserveCustomMetadata(List<Table> newTableList, List<Table> oldTableList);
 
         #endregion
     }

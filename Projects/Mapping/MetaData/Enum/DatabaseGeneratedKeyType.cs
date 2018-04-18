@@ -7,27 +7,27 @@
 namespace DotNetScaffolder.Mapping.MetaData.Enum
 {
     /// <summary>
-    /// The database generated key type.
+    ///     The database generated key type.
     /// </summary>
     public enum DatabaseGeneratedKeyType
     {
         /// <summary>
-        /// The ignore.
+        ///     The ignore.
         /// </summary>
         Ignore,
 
         /// <summary>
-        /// The none.
+        ///     The none.
         /// </summary>
         None,
 
         /// <summary>
-        /// The computed.
+        ///     The computed.
         /// </summary>
         Computed,
 
         /// <summary>
-        /// The identity.
+        ///     The identity.
         /// </summary>
         Identity
     }

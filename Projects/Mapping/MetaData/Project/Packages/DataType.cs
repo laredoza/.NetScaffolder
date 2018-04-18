@@ -45,13 +45,13 @@ namespace DotNetScaffolder.Mapping.MetaData.Project.Packages
         public DataType()
         {
             Logger.Trace("Started DataType()");
-            ValidationResult = new List<Validation>();
+            this.ValidationResult = new List<Validation>();
             Logger.Trace("Completed DataType()");
         }
 
         #endregion
 
-        #region Properties
+        #region Public Properties
 
         /// <summary>
         ///     Gets or sets the id.
@@ -71,7 +71,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Project.Packages
 
         #endregion
 
-        #region Public methods and operators
+        #region Public Methods And Operators
 
         /// <summary>
         ///     The validate.
@@ -82,20 +82,20 @@ namespace DotNetScaffolder.Mapping.MetaData.Project.Packages
         public List<Validation> Validate()
         {
             Logger.Trace("Started Validate()");
-            ValidationResult.Clear();
+            this.ValidationResult.Clear();
 
-            if (Id == Guid.Empty)
+            if (this.Id == Guid.Empty)
             {
-                ValidationResult.Add(new Validation(ValidationType.DomainId, "DomainId should not be empty"));
+                this.ValidationResult.Add(new Validation(ValidationType.DomainId, "DomainId should not be empty"));
             }
 
-            if (string.IsNullOrEmpty(Name))
+            if (string.IsNullOrEmpty(this.Name))
             {
-                ValidationResult.Add(new Validation(ValidationType.DomainName, "DomainName should not be empty"));
+                this.ValidationResult.Add(new Validation(ValidationType.DomainName, "DomainName should not be empty"));
             }
 
             Logger.Trace("Completed Validate()");
-            return ValidationResult;
+            return this.ValidationResult;
         }
 
         #endregion

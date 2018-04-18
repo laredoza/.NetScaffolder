@@ -14,20 +14,20 @@ namespace DotNetScaffolder.Mapping.ApplicationServices
     #endregion
 
     /// <summary>
-    /// The ConfigurationApplicationService interface.
+    ///     The ConfigurationApplicationService interface.
     /// </summary>
     public interface IConfigurationApplicationService : IValidate
     {
-        #region Properties
+        #region Public Properties
 
         /// <summary>
-        /// Gets or sets the application settings.
+        ///     Gets or sets the application settings.
         /// </summary>
         ApplicationSettings ApplicationSettings { get; set; }
 
         #endregion
 
-        #region Public methods and operators
+        #region Public Methods And Operators
 
         /// <summary>
         ///     Load ProjectDefinition.

@@ -29,16 +29,12 @@ namespace DotNetScaffolder.Mapping.MetaData.Model
 
         #endregion
 
-        #region Public Events
-
         /// <summary>
         ///     The property changed.
         /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
 
-        #endregion
-
-        #region Properties
+        #region Public Properties
 
         /// <summary>
         ///     Gets or sets the column name.
@@ -53,7 +49,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Model
         {
             get
             {
-                return string.Format("{0} {1}", IsPrimaryKey ? "* " : "   ", ColumnName);
+                return string.Format("{0} {1}", this.IsPrimaryKey ? "* " : "   ", this.ColumnName);
             }
         }
 
@@ -131,13 +127,13 @@ namespace DotNetScaffolder.Mapping.MetaData.Model
         {
             get
             {
-                return renderToEntity;
+                return this.renderToEntity;
             }
 
             set
             {
-                renderToEntity = value;
-                if (!renderToEntity) RenderToView = false;
+                this.renderToEntity = value;
+                if (!this.renderToEntity) this.RenderToView = false;
             }
         }
 
@@ -189,10 +185,20 @@ namespace DotNetScaffolder.Mapping.MetaData.Model
         {
             get
             {
-                return !IsRequired && !IsPrimaryKey;
+                return !this.IsRequired && !this.IsPrimaryKey;
             }
         }
 
+        #endregion
+
+        #region Public Methods And Operators
+
+        /// <summary>
+        /// The clone.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="object"/>.
+        /// </returns>
         public object Clone()
         {
             Column result = new Column();

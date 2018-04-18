@@ -32,14 +32,14 @@ namespace DotNetScaffolder.Mapping.MetaData.Project.Packages
         /// </summary>
         public Package()
         {
-            Enabled = false;
-            Templates = new List<Template>();
-            ValidationResult = new List<Validation>();
+            this.Enabled = false;
+            this.Templates = new List<Template>();
+            this.ValidationResult = new List<Validation>();
         }
 
         #endregion
 
-        #region Properties
+        #region Public Properties
 
         /// <summary>
         ///     Gets or sets the templates.
@@ -59,7 +59,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Project.Packages
 
         #endregion
 
-        #region Public methods and operators
+        #region Public Methods And Operators
 
         /// <summary>
         /// The return package items.
@@ -76,21 +76,21 @@ namespace DotNetScaffolder.Mapping.MetaData.Project.Packages
 
             foreach (Package package in packages)
             {
-                results.AddRange(ReturnPackageItems(package));
+                results.AddRange(this.ReturnPackageItems(package));
             }
 
             return results;
         }
 
         /// <summary>
-        /// The return package items.
+        ///     The return package items.
         /// </summary>
         /// <returns>
-        /// The <see cref="List"/>.
+        ///     The <see cref="List" />.
         /// </returns>
         public List<Package> ReturnPackageItems()
         {
-            return ReturnPackageItems(this);
+            return this.ReturnPackageItems(this);
         }
 
         /// <summary>
@@ -120,7 +120,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Project.Packages
                     }
                     else
                     {
-                        result.AddRange(ReturnPackageItems(child as Package));
+                        result.AddRange(this.ReturnPackageItems(child as Package));
                     }
                 }
             }
