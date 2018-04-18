@@ -28,37 +28,40 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.TxtDescription = new System.Windows.Forms.TextBox();
+            this.TxtName = new System.Windows.Forms.TextBox();
+            this.TxtSchema = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // textBox6
+            // TxtDescription
             // 
-            this.textBox6.Location = new System.Drawing.Point(127, 100);
-            this.textBox6.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(343, 26);
-            this.textBox6.TabIndex = 11;
+            this.TxtDescription.Location = new System.Drawing.Point(127, 100);
+            this.TxtDescription.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.TxtDescription.Name = "TxtDescription";
+            this.TxtDescription.Size = new System.Drawing.Size(343, 26);
+            this.TxtDescription.TabIndex = 11;
+            this.TxtDescription.TextChanged += new System.EventHandler(this.TxtDescription_TextChanged);
             // 
-            // textBox5
+            // TxtName
             // 
-            this.textBox5.Location = new System.Drawing.Point(127, 60);
-            this.textBox5.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(343, 26);
-            this.textBox5.TabIndex = 10;
+            this.TxtName.Location = new System.Drawing.Point(127, 60);
+            this.TxtName.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.TxtName.Name = "TxtName";
+            this.TxtName.Size = new System.Drawing.Size(343, 26);
+            this.TxtName.TabIndex = 10;
+            this.TxtName.TextChanged += new System.EventHandler(this.TxtName_TextChanged);
             // 
-            // textBox4
+            // TxtSchema
             // 
-            this.textBox4.Location = new System.Drawing.Point(127, 15);
-            this.textBox4.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(343, 26);
-            this.textBox4.TabIndex = 9;
+            this.TxtSchema.Enabled = false;
+            this.TxtSchema.Location = new System.Drawing.Point(127, 15);
+            this.TxtSchema.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.TxtSchema.Name = "TxtSchema";
+            this.TxtSchema.Size = new System.Drawing.Size(343, 26);
+            this.TxtSchema.TabIndex = 9;
             // 
             // label7
             // 
@@ -94,9 +97,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.textBox6);
-            this.Controls.Add(this.textBox5);
-            this.Controls.Add(this.textBox4);
+            this.Controls.Add(this.TxtDescription);
+            this.Controls.Add(this.TxtName);
+            this.Controls.Add(this.TxtSchema);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label1);
@@ -109,9 +112,9 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox TxtDescription;
+        private System.Windows.Forms.TextBox TxtName;
+        private System.Windows.Forms.TextBox TxtSchema;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label1;

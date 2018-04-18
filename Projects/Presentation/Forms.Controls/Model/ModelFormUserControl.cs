@@ -174,6 +174,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
             if (e.Node.Tag is Table)
             {
                 var table = e.Node.Tag as Table;
+                this.modelControl.DataSource = table;
                 this.modelControl.BringToFront();
             }
             else if (e.Node.Tag is Column)
@@ -219,5 +220,10 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         }
 
         #endregion
+
+        private void btnClose_Click(object sender, System.EventArgs e)
+        {
+
+        }
     }
 }
