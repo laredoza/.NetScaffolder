@@ -28,24 +28,23 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.modelFormUserControl1 = new DotNetScaffolder.Presentation.Forms.Controls.ModelFormUserControl();
+            this.ModelFormUserControl1 = new DotNetScaffolder.Presentation.Forms.Controls.ModelFormUserControl();
             this.SuspendLayout();
             // 
-            // modelFormUserControl1
+            // ModelFormUserControl1
             // 
-            this.modelFormUserControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.modelFormUserControl1.Location = new System.Drawing.Point(0, 0);
-            this.modelFormUserControl1.Name = "modelFormUserControl1";
-            this.modelFormUserControl1.Size = new System.Drawing.Size(1615, 789);
-            this.modelFormUserControl1.TabIndex = 0;
-            this.modelFormUserControl1.Load += new System.EventHandler(this.modelFormUserControl1_Load);
+            this.ModelFormUserControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ModelFormUserControl1.Location = new System.Drawing.Point(0, 0);
+            this.ModelFormUserControl1.Name = "ModelFormUserControl1";
+            this.ModelFormUserControl1.Size = new System.Drawing.Size(1615, 789);
+            this.ModelFormUserControl1.TabIndex = 0;
             // 
             // ModelForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1615, 789);
-            this.Controls.Add(this.modelFormUserControl1);
+            this.Controls.Add(this.ModelFormUserControl1);
             this.Name = "ModelForm";
             this.Text = "Manage Models";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
@@ -55,6 +54,6 @@
 
         #endregion
 
-        private ModelFormUserControl modelFormUserControl1;
+        private ModelFormUserControl ModelFormUserControl1;
     }
 }

@@ -45,17 +45,17 @@ namespace DotNetScaffolder.Mapping.MetaData.Project.Packages
         public Template()
         {
             Logger.Trace("Started Template()");
-            ValidationResult = new List<Validation>();
-            Enabled = false;
-            DataType = Guid.Empty;
-            DefaultSettings = new List<string>();
-            Children = new List<Hierarchy>();
+            this.ValidationResult = new List<Validation>();
+            this.Enabled = false;
+            this.DataType = Guid.Empty;
+            this.DefaultSettings = new List<string>();
+            this.Children = new List<Hierarchy>();
             Logger.Trace("Completed Template()");
         }
 
         #endregion
 
-        #region Properties
+        #region Public Properties
 
         /// <summary>
         ///     Gets or sets the config location.
@@ -100,7 +100,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Project.Packages
 
         #endregion
 
-        #region Public methods and operators
+        #region Public Methods And Operators
 
         /// <summary>
         /// The return template items.
@@ -117,7 +117,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Project.Packages
 
             foreach (Template template in templates)
             {
-                results.AddRange(ReturnTemplateItems(template));
+                results.AddRange(this.ReturnTemplateItems(template));
             }
 
             return results;
@@ -131,7 +131,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Project.Packages
         /// </returns>
         public List<Template> ReturnTemplateItems()
         {
-            return ReturnTemplateItems(this);
+            return this.ReturnTemplateItems(this);
         }
 
         /// <summary>
@@ -161,7 +161,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Project.Packages
                     }
                     else
                     {
-                        result.AddRange(ReturnTemplateItems(child as Template));
+                        result.AddRange(this.ReturnTemplateItems(child as Template));
                     }
                 }
             }
@@ -178,37 +178,37 @@ namespace DotNetScaffolder.Mapping.MetaData.Project.Packages
         public List<Validation> Validate()
         {
             Logger.Trace("Started Validate()");
-            ValidationResult.Clear();
+            this.ValidationResult.Clear();
 
-            if (Id == Guid.Empty)
+            if (this.Id == Guid.Empty)
             {
-                ValidationResult.Add(new Validation(ValidationType.TemplateId, "TemplateId may not be empty"));
+                this.ValidationResult.Add(new Validation(ValidationType.TemplateId, "TemplateId may not be empty"));
             }
 
-            if (string.IsNullOrEmpty(Name))
+            if (string.IsNullOrEmpty(this.Name))
             {
-                ValidationResult.Add(new Validation(ValidationType.TemplateName, "TemplateName may not be empty"));
+                this.ValidationResult.Add(new Validation(ValidationType.TemplateName, "TemplateName may not be empty"));
             }
 
-            if (HierarchyType == HierarchyType.Item)
+            if (this.HierarchyType == HierarchyType.Item)
             {
-                if (string.IsNullOrEmpty(TemplatePath))
+                if (string.IsNullOrEmpty(this.TemplatePath))
                 {
-                    ValidationResult.Add(
+                    this.ValidationResult.Add(
                         new Validation(ValidationType.TemplatePath, "TemplatePath may not be empty"));
                 }
 
-                if (LanguageOutputId == Guid.Empty)
+                if (this.LanguageOutputId == Guid.Empty)
                 {
-                    ValidationResult.Add(
+                    this.ValidationResult.Add(
                         new Validation(
                             ValidationType.TemplateLanguageOutputId,
                             "TemplateLanguageOutputId may not be empty"));
                 }
 
-                if (GeneratorTypeId == Guid.Empty)
+                if (this.GeneratorTypeId == Guid.Empty)
                 {
-                    ValidationResult.Add(
+                    this.ValidationResult.Add(
                         new Validation(
                             ValidationType.TemplateGeneratorTypeId,
                             "TemplateLanguageOutputId may not be empty"));
@@ -223,28 +223,28 @@ namespace DotNetScaffolder.Mapping.MetaData.Project.Packages
                 // }
             }
 
-            if (Version == 0)
+            if (this.Version == 0)
             {
-                ValidationResult.Add(
+                this.ValidationResult.Add(
                     new Validation(ValidationType.TemplateVersion, "TemplateVersion may not be 0"));
             }
 
             // Template child;
             Template child;
-            foreach (var hierarchy in Children)
+            foreach (var hierarchy in this.Children)
             {
                 child = hierarchy as Template;
                 child.Validate();
 
                 foreach (var validation in child.ValidationResult)
                 {
-                    ValidationResult.Add(validation);
+                    this.ValidationResult.Add(validation);
                 }
             }
 
             // Todo: Handle LanguageOutput & TemplateGeneratorType
             Logger.Trace("Completed Validate()");
-            return ValidationResult;
+            return this.ValidationResult;
         }
 
         #endregion

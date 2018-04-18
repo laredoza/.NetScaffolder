@@ -20,6 +20,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
     using DotNetScaffolder.Mapping.ApplicationServices.Tables;
     using DotNetScaffolder.Mapping.MetaData.Domain;
     using DotNetScaffolder.Mapping.MetaData.Model;
+
     using FormControls.TreeView;
 
     #endregion
@@ -44,6 +45,10 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         ///     The data source.
         /// </summary>
         private DomainDefinition dataSource;
+
+        /// <summary>
+        /// The differences.
+        /// </summary>
         private ApplicationTableCollectionDifference differences;
 
         /// <summary>
@@ -119,6 +124,26 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
             treeView.Nodes[0].Nodes.AddRange(applicationService.ConvertHierarchyToNodes(hierarchy).ToArray());
         }
 
+        /// <summary>
+        /// The save.
+        /// </summary>
+        public void Save()
+        {
+            ITableHierarchyService applicationService = new TempateHierarchyService();
+
+            List<Table> addTables = applicationService.ReturnTables(this.TreeViewAdd.Nodes[0]);
+            List<Table> removeTables = applicationService.ReturnTables(this.TreeViewDelete.Nodes[0]);
+            List<Table> newTables = applicationService.DoTableCollectionDiff(
+                this.DataSource.Tables,
+                addTables,
+                removeTables,
+                this.differences);
+
+            // Todo: Test
+            applicationService.PreserveCustomMetadata(newTables, this.DataSource.Tables);
+            this.DataSource.Tables = newTables;
+        }
+
         #endregion
 
         #region Other Methods
@@ -137,21 +162,23 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
 
                 IApplicationTableCollectionDifference differenceService =
                     new ApplicationTableCollectionDifference(new ApplicationTableDifference());
-                this.differences =
-                    differenceService.CompareTables(this.DataSource.Tables, sourceDomain.Tables);
+                this.differences = differenceService.CompareTables(this.DataSource.Tables, sourceDomain.Tables);
 
                 ITableHierarchyService applicationService = new TempateHierarchyService();
                 List<Hierarchy> hierarchy = applicationService.ReturnHierarchyFromList(
-                    differences.FirstExtraTables,
+                    this.differences.FirstExtraTables,
                     false,
                     false);
                 this.AddNodes("Models", this.TreeViewAdd, hierarchy, applicationService);
 
-                hierarchy = applicationService.ReturnHierarchyFromList(differences.RefreshTable, false, false);
+                hierarchy = applicationService.ReturnHierarchyFromList(this.differences.RefreshTable, false, false);
 
                 this.AddNodes("Models", this.TreeViewRefresh, hierarchy, applicationService);
 
-                hierarchy = applicationService.ReturnHierarchyFromList(differences.FirstMissingTables, false, false);
+                hierarchy = applicationService.ReturnHierarchyFromList(
+                    this.differences.FirstMissingTables,
+                    false,
+                    false);
 
                 this.AddNodes("Models", this.TreeViewDelete, hierarchy, applicationService);
             }
@@ -164,21 +191,5 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         }
 
         #endregion
-
-        public void Save()
-        {
-            ITableHierarchyService applicationService = new TempateHierarchyService();
-
-            List<Table> addTables = applicationService.ReturnTables(this.TreeViewAdd.Nodes[0]);
-            List<Table> removeTables = applicationService.ReturnTables(this.TreeViewDelete.Nodes[0]);
-            List<Table> newTables = applicationService.DoTableCollectionDiff(this.DataSource.Tables, addTables, removeTables, this.differences);
-            // Todo: Test
-            applicationService.PreserveCustomMetadata(newTables, this.DataSource.Tables);
-            this.DataSource.Tables = newTables;
-        }
-
-       
     }
-
-
 }

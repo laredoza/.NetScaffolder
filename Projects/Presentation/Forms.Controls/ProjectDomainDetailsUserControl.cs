@@ -12,8 +12,11 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
     using System.Collections.Generic;
     using System.Linq;
     using System.Windows.Forms;
+
     using Common.Logging;
+
     using Configuration;
+
     using DotNetScaffolder.Core.Common;
     using DotNetScaffolder.Mapping.ApplicationServices;
     using DotNetScaffolder.Mapping.MetaData.Domain;
@@ -48,6 +51,11 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         private readonly ModelForm modelForm;
 
         /// <summary>
+        ///     The table form.
+        /// </summary>
+        private readonly UpdateModelsFromSourceForm tableForm;
+
+        /// <summary>
         ///     The application service.
         /// </summary>
         private IProjectDefinitionApplicationService applicationService;
@@ -61,11 +69,6 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         ///     The selected domain.
         /// </summary>
         private DomainDefinition selectedDomain;
-
-        /// <summary>
-        ///     The table form.
-        /// </summary>
-        private readonly UpdateModelsFromSourceForm tableForm;
 
         #endregion
 
@@ -583,8 +586,8 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         private void BtnModel_Click(object sender, EventArgs e)
         {
             Logger.Trace("Started Model Clicked");
-            this.modelForm.DataSource = this.SelectedDomain;
             this.modelForm.SavePath = this.SavePath;
+            this.modelForm.DataSource = this.SelectedDomain;
             this.modelForm.ShowDialog();
             Logger.Trace("Completed Model Clicked");
         }

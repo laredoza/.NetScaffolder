@@ -84,14 +84,6 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.Edmxs
             var entityTableNames = new HashSet<string>(
                 edmx.Runtime.ConceptualModels.Schema.EntityTypes.Select(tbl => tbl.Name.ToUpper()));
 
-            //foreach (var tgConceptualEntityType in edmx.Runtime.ConceptualModels.Schema.EntityTypes)
-            //{
-            //    //TiraggoEntityInfo info = new TiraggoEntityInfo(edmx, "NModel" + tgConceptualEntityType.Name);
-            //    TiraggoEntityInfo info = new TiraggoEntityInfo(edmx, $"{edmx.Runtime.ConceptualModels.Schema.Namespace}.BankAccount");
-                
-            //    var a = info.StorageInfo.Schema;
-            //}
-
             result.Tables = edmx.Runtime.ConceptualModels.Schema.EntityTypes.Select(
                 tbl => new Table
                            {

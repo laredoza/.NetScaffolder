@@ -1,17 +1,25 @@
-﻿#region Usings
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Windows.Forms;
-using DotNetScaffolder.Mapping.ApplicationServices.Differences;
-using DotNetScaffolder.Mapping.MetaData.Model;
-using FormControls.TreeView;
-
-#endregion
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="TableHierarchyService.cs" company="DotnetScaffolder">
+//   MIT
+// </copyright>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace DotNetScaffolder.Mapping.ApplicationServices.Tables
 {
+    #region Usings
+
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Windows.Forms;
+
+    using DotNetScaffolder.Mapping.ApplicationServices.Differences;
+    using DotNetScaffolder.Mapping.MetaData.Model;
+
+    using FormControls.TreeView;
+
+    #endregion
+
     #region Usings
 
     #endregion
@@ -21,8 +29,55 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Tables
     /// </summary>
     public class TempateHierarchyService : ITableHierarchyService
     {
+        #region Public Methods And Operators
 
-        public List<Table> DoTableCollectionDiff(List<Table> originalTableList, List<Table> addedTables, List<Table> removedTables, ApplicationTableCollectionDifference comparison)
+        /// <summary>
+        /// The convert hierarchy to nodes.
+        /// </summary>
+        /// <param name="items">
+        /// The items.
+        /// </param>
+        /// <returns>
+        /// The <see cref="List"/>.
+        /// </returns>
+        public List<TreeNode> ConvertHierarchyToNodes(List<Hierarchy> items)
+        {
+            List<TreeNode> nodes = new List<TreeNode>();
+
+            foreach (Hierarchy item in items)
+            {
+                var node = new TreeNode { Tag = item.Item, Text = item.Name, Name = item.Id.ToString() };
+                nodes.Add(node);
+
+                node.Nodes.AddRange(this.ConvertHierarchyToNodes(item.Children).ToArray());
+            }
+
+            return nodes;
+        }
+
+        /// <summary>
+        /// The do table collection diff.
+        /// </summary>
+        /// <param name="originalTableList">
+        /// The original table list.
+        /// </param>
+        /// <param name="addedTables">
+        /// The added tables.
+        /// </param>
+        /// <param name="removedTables">
+        /// The removed tables.
+        /// </param>
+        /// <param name="comparison">
+        /// The comparison.
+        /// </param>
+        /// <returns>
+        /// The <see cref="List"/>.
+        /// </returns>
+        public List<Table> DoTableCollectionDiff(
+            List<Table> originalTableList,
+            List<Table> addedTables,
+            List<Table> removedTables,
+            ApplicationTableCollectionDifference comparison)
         {
             List<Table> newList = new List<Table>();
             foreach (Table table in originalTableList)
@@ -38,23 +93,48 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Tables
             Table tableToRemove;
             foreach (Table table in removedTables)
             {
-                tableToRemove = newList.FirstOrDefault(t => t.SchemaName == table.SchemaName && t.TableName == table.TableName);
+                tableToRemove = newList.FirstOrDefault(
+                    t => t.SchemaName == table.SchemaName && t.TableName == table.TableName);
                 if (tableToRemove != null)
                 {
                     newList.Remove(tableToRemove);
                 }
             }
 
-
             return newList;
         }
 
+        /// <summary>
+        /// The new node.
+        /// </summary>
+        /// <param name="table">
+        /// The table.
+        /// </param>
+        /// <returns>
+        /// The <see cref="Hierarchy"/>.
+        /// </returns>
+        public Hierarchy NewNode(Table table)
+        {
+            return new Hierarchy { Name = table.TableName, Item = table };
+        }
+
+        /// <summary>
+        /// The preserve custom metadata.
+        /// </summary>
+        /// <param name="newTableList">
+        /// The new table list.
+        /// </param>
+        /// <param name="oldTableList">
+        /// The old table list.
+        /// </param>
         public void PreserveCustomMetadata(List<Table> newTableList, List<Table> oldTableList)
         {
             // Do our best to preserve table, column and relationship metadata
             foreach (var newTable in newTableList)
             {
-                var oldTable = oldTableList.FirstOrDefault(u => (u.SchemaName.ToUpper() == newTable.SchemaName.ToUpper()) && (u.TableName.ToUpper() == newTable.TableName.ToUpper()));
+                var oldTable = oldTableList.FirstOrDefault(
+                    u => (u.SchemaName.ToUpper() == newTable.SchemaName.ToUpper())
+                         && (u.TableName.ToUpper() == newTable.TableName.ToUpper()));
                 if (oldTable != null)
                 {
                     newTable.Description = oldTable.Description;
@@ -62,7 +142,8 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Tables
                     // Attempt to preserve column metadata
                     foreach (var newColumn in newTable.Columns)
                     {
-                        var oldColumn = oldTable.Columns.FirstOrDefault(u => u.ColumnName.ToUpper() == newColumn.ColumnName.ToUpper());
+                        var oldColumn = oldTable.Columns.FirstOrDefault(
+                            u => u.ColumnName.ToUpper() == newColumn.ColumnName.ToUpper());
                         if (oldColumn != null)
                         {
                             // Todo: Review missing values
@@ -71,18 +152,20 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Tables
                             newColumn.DefaultFieldValue = oldColumn.DefaultFieldValue;
                             newColumn.Description = oldColumn.Description;
                             newColumn.GridColumnWidth = oldColumn.GridColumnWidth;
-                            //newColumn.GridViewControlType = oldColumn.GridViewControlType;
+
+                            // newColumn.GridViewControlType = oldColumn.GridViewControlType;
                             newColumn.LookupClassName = oldColumn.LookupClassName;
                             newColumn.RenderToViewOrder = oldColumn.RenderToViewOrder;
-                            //if (oldColumn.CustomNumberTypeMapping != CustomTypeMapping.None)
-                            //{
-                            //    newColumn.CustomNumberTypeMapping = oldColumn.CustomNumberTypeMapping;
-                            //    if (oldColumn.CustomNumberTypeMapping == CustomTypeMapping.Decimal)
-                            //    {
-                            //        newColumn.Precision = oldColumn.Precision;
-                            //        newColumn.Scale = oldColumn.Scale;
-                            //    }
-                            //}
+
+                            // if (oldColumn.CustomNumberTypeMapping != CustomTypeMapping.None)
+                            // {
+                            // newColumn.CustomNumberTypeMapping = oldColumn.CustomNumberTypeMapping;
+                            // if (oldColumn.CustomNumberTypeMapping == CustomTypeMapping.Decimal)
+                            // {
+                            // newColumn.Precision = oldColumn.Precision;
+                            // newColumn.Scale = oldColumn.Scale;
+                            // }
+                            // }
                         }
                     }
 
@@ -97,43 +180,19 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Tables
         }
 
         /// <summary>
-        ///     The convert hierarchy to nodes.
-        /// </summary>
-        /// <param name="items">
-        ///     The items.
-        /// </param>
-        /// <returns>
-        ///     The <see cref="List" />.
-        /// </returns>
-        public List<TreeNode> ConvertHierarchyToNodes(List<Hierarchy> items)
-        {
-            List<TreeNode> nodes = new List<TreeNode>();
-
-            foreach (Hierarchy item in items)
-            {
-                var node = new TreeNode { Tag = item.Item, Text = item.Name, Name = item.Id.ToString() };
-                nodes.Add(node);
-
-                node.Nodes.AddRange(ConvertHierarchyToNodes(item.Children).ToArray());
-            }
-
-            return nodes;
-        }
-
-        /// <summary>
-        ///     The return hierarchy from list.
+        /// The return hierarchy from list.
         /// </summary>
         /// <param name="tables">
-        ///     The tables.
+        /// The tables.
         /// </param>
         /// <param name="includeFields">
-        ///     The include fields.
+        /// The include fields.
         /// </param>
         /// <param name="includeRelationships">
-        ///     The include relationships.
+        /// The include relationships.
         /// </param>
         /// <returns>
-        ///     The <see cref="List" />.
+        /// The <see cref="List"/>.
         /// </returns>
         /// <exception cref="NotImplementedException">
         /// </exception>
@@ -147,7 +206,7 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Tables
             Hierarchy schema = null;
             foreach (Table table in tables)
             {
-                newTable = NewNode(table);
+                newTable = this.NewNode(table);
 
                 if (includeFields)
                 {
@@ -177,19 +236,14 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Tables
         }
 
         /// <summary>
-        ///     The new node.
+        /// The return tables.
         /// </summary>
-        /// <param name="table">
-        ///     The table.
+        /// <param name="parentNode">
+        /// The parent node.
         /// </param>
         /// <returns>
-        ///     The <see cref="Hierarchy" />.
+        /// The <see cref="List"/>.
         /// </returns>
-        public Hierarchy NewNode(Table table)
-        {
-            return new Hierarchy { Name = table.TableName, Item = table };
-        }
-
         public List<Table> ReturnTables(TreeNode parentNode)
         {
             List<Table> result = new List<Table>();
@@ -208,12 +262,12 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Tables
             return result;
         }
 
+        #endregion
 
-        //        MainViewModel.cs
+        // MainViewModel.cs
 
-
-        //        private static void PreserveCustomMetadata(List<MetadataTable> newTableList, List<MetadataTable> oldTableList)
-        //        {
-        //        }
+        // private static void PreserveCustomMetadata(List<MetadataTable> newTableList, List<MetadataTable> oldTableList)
+        // {
+        // }
     }
 }

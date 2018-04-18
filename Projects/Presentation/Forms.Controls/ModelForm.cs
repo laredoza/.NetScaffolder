@@ -8,9 +8,13 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
 {
     #region Usings
 
+    using System;
     using System.Windows.Forms;
+
     using Common.Logging;
+
     using Configuration;
+
     using DotNetScaffolder.Components.Common.Contract;
     using DotNetScaffolder.Components.Common.Contract.UI;
     using DotNetScaffolder.Mapping.MetaData.Domain;
@@ -18,7 +22,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
     #endregion
 
     /// <summary>
-    /// The model form.
+    ///     The model form.
     /// </summary>
     public partial class ModelForm : Form
     {
@@ -53,7 +57,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         #region Constructors and Destructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ModelForm"/> class.
+        ///     Initializes a new instance of the <see cref="ModelForm" /> class.
         /// </summary>
         public ModelForm()
         {
@@ -99,12 +103,9 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
 
             if (this.DataSource != null)
             {
+                this.ModelFormUserControl1.SavePath = this.SavePath;
                 this.sourceType = ScaffoldConfig.ReturnSourceType(this.DataSource.SourceTypeId);
-
-                // this.panel1.Controls.Clear();
-                // this.sourceTypeControl = this.sourceType.AddConfigUI(this.panel1) as IDataSourceUI;
-                // this.sourceTypeControl.SourceType = this.sourceType;
-                // this.sourceTypeControl.LoadData(this.SavePath);
+                this.ModelFormUserControl1.DataSource = this.DataSource;
             }
             else
             {
@@ -115,10 +116,5 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         }
 
         #endregion
-
-        private void modelFormUserControl1_Load(object sender, System.EventArgs e)
-        {
-
-        }
     }
 }

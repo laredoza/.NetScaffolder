@@ -58,7 +58,7 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Differences
         public List<ApplicationTableDifference> ProblemTables { get; set; }
 
         /// <summary>
-        /// Gets or sets the refresh table.
+        ///     Gets or sets the refresh table.
         /// </summary>
         public List<Table> RefreshTable
         {
@@ -68,7 +68,7 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Differences
 
                 foreach (ApplicationTableDifference applicationTableDifference in this.ProblemTables)
                 {
-                   result.Add(applicationTableDifference.ProblemTable); 
+                    result.Add(applicationTableDifference.ProblemTable);
                 }
 
                 return result;

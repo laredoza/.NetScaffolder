@@ -10,8 +10,11 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
 
     using System;
     using System.Windows.Forms;
+
     using Common.Logging;
+
     using Configuration;
+
     using DotNetScaffolder.Components.Common.Contract;
     using DotNetScaffolder.Components.Common.Contract.UI;
     using DotNetScaffolder.Mapping.MetaData.Domain;
@@ -45,7 +48,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         private ISourceType sourceType;
 
         /// <summary>
-        /// The source type control.
+        ///     The source type control.
         /// </summary>
         private IDataSourceUI sourceTypeControl;
 
@@ -74,6 +77,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
             {
                 return this.dataSource;
             }
+
             set
             {
                 this.dataSource = value;

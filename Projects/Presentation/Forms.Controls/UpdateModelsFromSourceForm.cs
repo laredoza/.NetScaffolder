@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="UpdateTablesFromSourceForm.cs" company="DotnetScaffolder">
+// <copyright file="UpdateModelsFromSourceForm.cs" company="DotnetScaffolder">
 //   MIT
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
@@ -66,24 +66,6 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
 
         #endregion
 
-        #region Other Methods
-
-        /// <summary>
-        /// The button 3_ click.
-        /// </summary>
-        /// <param name="sender">
-        /// The sender.
-        /// </param>
-        /// <param name="e">
-        /// The e.
-        /// </param>
-        private void button3_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-        #endregion
-
         #region Public Properties
 
         /// <summary>
@@ -113,6 +95,35 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         #region Other Methods
 
         /// <summary>
+        /// The btn close_ click.
+        /// </summary>
+        /// <param name="sender">
+        /// The sender.
+        /// </param>
+        /// <param name="e">
+        /// The e.
+        /// </param>
+        private void BtnClose_Click(object sender, EventArgs e)
+        {
+            this.updateModelsFromSourceUserControl1.Save();
+            this.Close();
+        }
+
+        /// <summary>
+        /// The button 3_ click.
+        /// </summary>
+        /// <param name="sender">
+        /// The sender.
+        /// </param>
+        /// <param name="e">
+        /// The e.
+        /// </param>
+        private void button3_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        /// <summary>
         ///     The update data source.
         /// </summary>
         private void UpdateDataSource()
@@ -124,7 +135,6 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
                 this.updateModelsFromSourceUserControl1.SavePath = this.SavePath;
                 this.sourceType = ScaffoldConfig.ReturnSourceType(this.DataSource.SourceTypeId);
                 this.updateModelsFromSourceUserControl1.DataSource = this.DataSource;
- 
             }
             else
             {
@@ -135,11 +145,5 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         }
 
         #endregion
-
-        private void BtnClose_Click(object sender, EventArgs e)
-        {
-            this.updateModelsFromSourceUserControl1.Save();
-            this.Close();
-        }
     }
 }

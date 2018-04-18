@@ -12,7 +12,9 @@ namespace DotNetScaffolder.Presentation.Forms
     using System.IO;
     using System.Linq;
     using System.Windows.Forms;
+
     using Configuration;
+
     using DotNetScaffolder.Mapping.ApplicationServices;
     using DotNetScaffolder.Mapping.MetaData.Project;
     using DotNetScaffolder.Presentation.Forms.Controls;
@@ -37,12 +39,10 @@ namespace DotNetScaffolder.Presentation.Forms
         private IProjectDefinitionApplicationService applicationService;
 
         /// <summary>
-        /// The model path.
+        ///     The model path.
         /// </summary>
         private string modelPath;
 
-        
-        
         #endregion
 
         #region Constructors and Destructors
@@ -77,12 +77,13 @@ namespace DotNetScaffolder.Presentation.Forms
             {
                 return this.modelPath;
             }
+
             set
             {
                 if (this.modelPath != value)
                 {
                     this.modelPath = value;
-                    projectDomainDetailsUserControl1.SavePath = Path.GetDirectoryName(this.ModelPath);
+                    this.projectDomainDetailsUserControl1.SavePath = Path.GetDirectoryName(this.ModelPath);
                 }
             }
         }
@@ -111,6 +112,29 @@ namespace DotNetScaffolder.Presentation.Forms
             if (result == DialogResult.Yes)
             {
                 this.Close();
+            }
+        }
+
+        /// <summary>
+        /// The btn save_ click.
+        /// </summary>
+        /// <param name="sender">
+        /// The sender.
+        /// </param>
+        /// <param name="e">
+        /// The e.
+        /// </param>
+        private void BtnSave_Click(object sender, EventArgs e)
+        {
+            if (this.ProjectDetailsUserControl1.Validation() == 0)
+            {
+                // Save
+                this.applicationService.Save();
+            }
+
+            if (this.TemplateManagementUserControl1.Validation() == 0)
+            {
+                this.applicationConfiguration.Save();
             }
         }
 
@@ -222,19 +246,5 @@ namespace DotNetScaffolder.Presentation.Forms
         }
 
         #endregion
-
-        private void BtnSave_Click(object sender, EventArgs e)
-        {
-            if (this.ProjectDetailsUserControl1.Validation() == 0)
-            {
-                // Save
-                this.applicationService.Save();
-            }
-
-            if (this.TemplateManagementUserControl1.Validation() == 0)
-            {
-                this.applicationConfiguration.Save();
-            }
-        }
     }
 }
