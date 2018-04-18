@@ -8,17 +8,14 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ApplicationServ
 {
     #region Usings
 
+    using DotNetScaffolder.Components.Common.Contract;
+    using DotNetScaffolder.Core.Common.Serializer;
+    using FormControls.TreeView;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.Composition;
     using System.IO;
     using System.Windows.Forms;
-
-    using DotNetScaffolder.Components.Common.Contract;
-    using DotNetScaffolder.Core.Common.Serializer;
-    using DotNetScaffolder.Mapping.MetaData.Model;
-
-    using FormControls.TreeView;
 
     #endregion
 
@@ -28,16 +25,9 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ApplicationServ
     [Export(typeof(IDataType))]
     [ExportMetadata("NameMetaData", "Application Service")]
     [ExportMetadata("ValueMetaData", "1BC1B0C4-1E41-9146-82CF-599181CE4420")]
-    public class ApplicationServiceDataType : IDataType
+    public class ApplicationServiceDataType : BaseDataType
     {
-        #region Constants
-
-        /// <summary>
-        ///     The fil e_ name.
-        /// </summary>
-        private const string FILE_NAME = "ApplicationService.mdl";
-
-        #endregion
+        public ApplicationServiceDataType() : base("Application.xml") { }
 
         #region Properties
 
@@ -45,11 +35,6 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ApplicationServ
         ///     Gets or sets a value indicating whether enabled.
         /// </summary>
         public bool Enabled { get; set; } = false;
-
-        /// <summary>
-        ///     Gets or sets the meta data.
-        /// </summary>
-        public Table MetaData { get; set; }
 
         /// <summary>
         ///     Gets or sets the namespace.
@@ -74,26 +59,26 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ApplicationServ
         /// <returns>
         /// The <see cref="IDataTypeUI"/>.
         /// </returns>
-        public IDataTypeUI<IDictionary<string, string>> CreateUI(IDictionary<string, string> parameters)
+        public override IDataTypeUI<IDictionary<string, string>> CreateUI(IDictionary<string, string> parameters)
         {
             var newControl = new ApplicationServiceUserControl
-                                 {
-                                     AppServiceEnabled =
+            {
+                AppServiceEnabled =
                                          {
                                              Checked = Enabled
                                          },
-                                     AppServiceNamespace =
+                AppServiceNamespace =
                                          {
                                              Text = Namespace
                                          },
-                                     AppServiceOutputFolder =
+                AppServiceOutputFolder =
                                          {
                                              Text = OutputFolder
                                          },
-                                     Visible = true,
-                                     Dock = DockStyle.Fill,
-                                     DataType = this
-                                 };
+                Visible = true,
+                Dock = DockStyle.Fill,
+                DataType = this
+            };
             return newControl;
         }
 
@@ -103,7 +88,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ApplicationServ
         /// <returns>
         ///     The <see cref="IDataTypeUI" />.
         /// </returns>
-        public IDataTypeUI<IDictionary<string, string>> CreateUI()
+        public override IDataTypeUI<IDictionary<string, string>> CreateUI()
         {
             return CreateUI(null);
         }
@@ -114,9 +99,9 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ApplicationServ
         /// <param name="parameters">
         /// The parameters.
         /// </param>
-        public void Load(IDictionary<string, string> parameters)
+        public override void Load(IDictionary<string, string> parameters)
         {
-            var filePath = Path.Combine(parameters["basePath"], FILE_NAME);
+            var filePath = Path.Combine(parameters["basePath"], FileName);
 
             if (File.Exists(filePath))
             {
@@ -133,7 +118,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ApplicationServ
         /// <returns>
         ///     The <see cref="IHierarchy" />.
         /// </returns>
-        public Hierarchy ReturnNavigation()
+        public override Hierarchy ReturnNavigation()
         {
             return new Hierarchy { Id = new Guid("1BC1B0C4-1E41-9146-82CF-599181CE4420"), Name = "Application Service" };
         }
@@ -147,9 +132,9 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ApplicationServ
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        public bool Save(IDictionary<string, string> parameters)
+        public override bool Save(IDictionary<string, string> parameters)
         {
-            var filePath = Path.Combine(parameters["basePath"], FILE_NAME);
+            var filePath = Path.Combine(parameters["basePath"], FileName);
             ObjectXMLSerializer<ApplicationServiceDataType>.Save(this, filePath);
             return true;
         }

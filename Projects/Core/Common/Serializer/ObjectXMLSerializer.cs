@@ -605,6 +605,12 @@ namespace DotNetScaffolder.Core.Common.Serializer
                 throw new ArgumentException("path may not be empty");
             }
 
+            if (!File.Exists(path))
+            {
+                Logger.Error("Path does not exist");
+                throw new ArgumentException("Path does not exist");
+            }
+
             TextReader textReader = null;
 
             if (isolatedStorageFolder == null)
@@ -713,6 +719,12 @@ namespace DotNetScaffolder.Core.Common.Serializer
                 throw new ArgumentException("Path may not be empty");
             }
 
+            if (!File.Exists(path))
+            {
+                Logger.Error("Path does not exist");
+                throw new ArgumentException("Path does not exist");
+            }
+
             T serializableObject = null;
 
             using (FileStream fileStream = CreateFileStream(isolatedStorageFolder, path))
@@ -755,6 +767,12 @@ namespace DotNetScaffolder.Core.Common.Serializer
                 throw new ArgumentException("Path may not be empty");
             }
 
+            if(!File.Exists(path))
+            {
+                Logger.Error("Path does not exist");
+                throw new ArgumentException("Path does not exist");
+            }
+
             T serializableObject = null;
 
             using (TextReader textReader = CreateTextReader(isolatedStorageFolder, path))
@@ -791,6 +809,12 @@ namespace DotNetScaffolder.Core.Common.Serializer
             {
                 Logger.Error("Path may not be empty");
                 throw new ArgumentException("Path may not be empty");
+            }
+
+            if (!File.Exists(path))
+            {
+                Logger.Error("Path does not exist");
+                throw new ArgumentException("Path does not exist");
             }
 
             using (FileStream fileStream = CreateFileStream(isolatedStorageFolder, path))

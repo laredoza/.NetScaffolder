@@ -36,8 +36,11 @@ namespace Configuration
             SourceTypes = new Lazy<ISourceType, IDictionary<string, object>>[0];
             NamingConventions = new Lazy<INamingConvention, IDictionary<string, object>>[0];
             Drivers = new Lazy<IDriver, IDictionary<string, object>>[0];
+
+#if DEBUG
             ModelPath = @"..\..\..\..\..\Generated\Dal\Repository\EF\Dotnet\RepositoryEFDotnet\Model\Banking.mdl";
             ConfigPath = @"Config\Settings.xml";
+#endif
         }
 
         #endregion

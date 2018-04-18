@@ -1,0 +1,16 @@
+<#@ template language="C#" hostspecific="true" debug="true" #>
+<#@ assembly name="$(ProjectDir)Model\Package\DotNetScaffolder.Components.Common.dll" #>
+<#@ assembly name="$(ProjectDir)Model\Package\DotNetScaffolder.Mapping.MetaData.dll" #>
+<#@ assembly name="$(ProjectDir)Model\Package\Common.Logging.Core.dll" #>
+<#@ assembly name="$(ProjectDir)Model\Package\Common.Logging.dll" #>
+<#@ import namespace="DotNetScaffolder.Components.Common.Contract" #>
+<#@ include file="T4Toolbox.tt" #>
+<#+
+public abstract class BaseTemplate : Template 
+{
+	public INamingConvention NamingConvention {get;set;}
+	public ICollectionOption CollectionOption {get;set;}
+	
+	public abstract override string TransformText();
+}
+#>

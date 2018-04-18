@@ -28,16 +28,9 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.UnitOfWorkDataT
     [Export(typeof(IDataType))]
     [ExportMetadata("NameMetaData", "Unit of Work")]
     [ExportMetadata("ValueMetaData", "1BC1B0C4-1E41-9146-82CF-599181CE4480")]
-    public class UnitOfWorkDataType : IDataType
+    public class UnitOfWorkDataType : BaseDataType
     {
-        #region Constants
-
-        /// <summary>
-        ///     The fil e_ name.
-        /// </summary>
-        private const string FILE_NAME = "Uow.mdl";
-
-        #endregion
+        public UnitOfWorkDataType() : base("uow.xml") { }
 
         #region Properties
 
@@ -45,11 +38,6 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.UnitOfWorkDataT
         ///     Gets or sets a value indicating whether enabled.
         /// </summary>
         public bool Enabled { get; set; } = false;
-
-        /// <summary>
-        ///     Gets or sets the meta data.
-        /// </summary>
-        public Table MetaData { get; set; }
 
         /// <summary>
         ///     Gets or sets the namespace.
@@ -74,14 +62,14 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.UnitOfWorkDataT
         /// <returns>
         /// The <see cref="IDataTypeUI"/>.
         /// </returns>
-        public IDataTypeUI<IDictionary<string, string>> CreateUI(IDictionary<string, string> parameters)
+        public override IDataTypeUI<IDictionary<string, string>> CreateUI(IDictionary<string, string> parameters)
         {
             var newControl = new UnitOfWorkUserControl
-                                 {
-                                     Visible = true,
-                                     Dock = DockStyle.Fill,
-                                     DataType = this
-                                 };
+            {
+                Visible = true,
+                Dock = DockStyle.Fill,
+                DataType = this
+            };
             return newControl;
         }
 
@@ -91,7 +79,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.UnitOfWorkDataT
         /// <returns>
         ///     The <see cref="IDataTypeUI" />.
         /// </returns>
-        public IDataTypeUI<IDictionary<string, string>> CreateUI()
+        public override IDataTypeUI<IDictionary<string, string>> CreateUI()
         {
             return CreateUI(null);
         }
@@ -102,9 +90,9 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.UnitOfWorkDataT
         /// <param name="parameters">
         /// The parameters.
         /// </param>
-        public void Load(IDictionary<string, string> parameters)
+        public override void Load(IDictionary<string, string> parameters)
         {
-            var filePath = Path.Combine(parameters["basePath"], FILE_NAME);
+            var filePath = Path.Combine(parameters["basePath"], FileName);
 
             if (File.Exists(filePath))
             {
@@ -121,7 +109,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.UnitOfWorkDataT
         /// <returns>
         ///     The <see cref="IHierarchy" />.
         /// </returns>
-        public Hierarchy ReturnNavigation()
+        public override Hierarchy ReturnNavigation()
         {
             return new Hierarchy { Id = new Guid("1BC1B0C4-1E41-9146-82CF-599181CE4480"), Name = "Unit of Work" };
         }
@@ -135,9 +123,9 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.UnitOfWorkDataT
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        public bool Save(IDictionary<string, string> parameters)
+        public override bool Save(IDictionary<string, string> parameters)
         {
-            var filePath = Path.Combine(parameters["basePath"], FILE_NAME);
+            var filePath = Path.Combine(parameters["basePath"], FileName);
             ObjectXMLSerializer<UnitOfWorkDataType>.Save(this, filePath);
             return true;
         }

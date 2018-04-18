@@ -201,7 +201,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
             {
                 foreach (var nav in navigation.Children)
                 {
-                    var childNode = this.DomainTreeView.Nodes.Find(nav.Id.ToString(), false).FirstOrDefault();
+                    var childNode = node.Nodes.Find(nav.Id.ToString(), true).FirstOrDefault();
 
                     if (childNode != null)
                     {
@@ -212,6 +212,18 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
                         childNode = new TreeNode { Tag = node.Tag, Text = nav.Name, Name = nav.Id.ToString() };
                         node.Nodes.Add(childNode);
                         node.Expand();
+                    }
+                }
+
+                foreach (TreeNode child in node.Nodes)
+                {
+                    if (child == null) continue;
+
+                    var nav = navigation.Children.FirstOrDefault(o => o.Id.ToString() == child.Name);
+
+                    if (nav == null)
+                    {
+                        node.Nodes.RemoveByKey(child.Name);
                     }
                 }
             }

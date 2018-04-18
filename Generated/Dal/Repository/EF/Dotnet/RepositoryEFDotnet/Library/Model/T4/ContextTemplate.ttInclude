@@ -1,0 +1,69 @@
+﻿<#@ template language="C#" hostspecific="true" debug="true" #>
+<#@ assembly name="System" #>
+<#@ assembly name="System.Configuration" #>
+<#@ assembly name="System.Globalization" #>
+<#@ assembly name="System.Xml" #>
+<#@ assembly name="$(ProjectDir)Model\Package\Common.Logging.Core.dll" #>
+<#@ assembly name="$(ProjectDir)Model\Package\Common.Logging.dll" #>
+<#@ assembly name="$(ProjectDir)Model\Package\DotNetScaffolder.Core.Common.dll" #>
+<#@ assembly name="$(ProjectDir)Model\Package\DotNetScaffolder.Mapping.MetaData.dll" #>
+<#@ assembly name="$(ProjectDir)Model\Package\DotNetScaffolder.Components.DataTypes.DefaultDataTypes.dll" #>
+<#@ assembly name="$(ProjectDir)Model\Package\FormControls.dll" #>
+<#@ assembly name="$(ProjectDir)Model\Package\DotNetScaffolder.Components.Common.dll" #>
+<#@ assembly name="$(ProjectDir)Model\Package\Configuration.dll" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.Configuration" #>
+<#@ import namespace="System.Globalization" #>
+<#@ import namespace="System.Xml" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Xml.Serialization" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="DotNetScaffolder.Mapping.MetaData.Project" #>
+<#@ import namespace="DotNetScaffolder.Mapping.MetaData.Model" #>
+<#@ import namespace="DotNetScaffolder.Core.Common.Serializer" #>
+<#@ import namespace="DotNetScaffolder.Components.DataTypes.DefaultDataTypes" #>
+<#@ import namespace="Configuration" #>
+<#@ include file="T4Toolbox.tt" #>
+<#@ include file="BaseTemplate.ttinclude" #>
+<#+
+public class ContextTemplate : BaseTemplate 
+{
+	public ContextDataType DataType {get;set;}
+	public ContextData ContextData{get;set;}
+	public string BaseNamespace{get;set;}
+	
+	public override string TransformText()
+	{
+		Debugger.Break();
+#>
+
+// <copyright file="<#= ContextData.ContextName #>.g.cs" company="MIT">
+//  Copyright (c) <#= DateTime.Now.Year #> All Rights Reserved
+// </copyright>  
+
+// *******************************************************************
+//	GENERATED CODE. DOT NOT MODIFY MANUALLY AS CHANGES CAN BE LOST!!!
+//	USE A PARTIAL CLASS INSTEAD
+// *******************************************************************
+
+using System.Data.Entity;
+
+namespace <#= BaseNamespace #>.<#= ContextData.OutputFolder #>.<#= ContextData.Namespace #>
+{
+	public partial class <#= NamingConvention.ApplyNamingConvention(ContextData.ContextName) #> <#= ContextData.TransformInheritFrom #>
+	{
+		#region Db Sets
+		
+		<#+ foreach(var table in ContextData.Models){ #>
+		//public virtual DbSet<<#= table #>>
+		<#+ } #>
+
+		#endregion // EntitySets
+	}
+}
+<#+
+		return this.GenerationEnvironment.ToString();
+	}
+}
+#>

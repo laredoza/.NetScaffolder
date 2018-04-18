@@ -29,17 +29,12 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
     [Export(typeof(IDataType))]
     [ExportMetadata("NameMetaData", "Entity")]
     [ExportMetadata("ValueMetaData", "1BC1B0C4-1E41-9146-82CF-599181CE4440")]
-    public class EntityDataType : IDataType
+    public class EntityDataType : BaseDataType
     {
-        #region Constants
+        public EntityDataType() :base("Entity.xml")
+        {
 
-        /// <summary>
-        ///     The fil e_ name.
-        /// </summary>
-        private const string FILE_NAME = "Entity.mdl";
-
-        #endregion
-
+        }
         #region Fields
 
         /// <summary>
@@ -55,11 +50,6 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
         ///     Gets or sets a value indicating whether enabled.
         /// </summary>
         public bool Enabled { get; set; } = false;
-
-        /// <summary>
-        ///     Gets or sets the meta data.
-        /// </summary>
-        public Table MetaData { get; set; }
 
         /// <summary>
         ///     Gets or sets the namespace.
@@ -84,7 +74,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
         /// <returns>
         /// The <see cref="IDataTypeUI"/>.
         /// </returns>
-        public IDataTypeUI<IDictionary<string, string>> CreateUI(IDictionary<string, string> parameters)
+        public override IDataTypeUI<IDictionary<string, string>> CreateUI(IDictionary<string, string> parameters)
         {
             var newControl = new EntityUserControl
                                  {
@@ -101,7 +91,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
         /// <returns>
         ///     The <see cref="IDataTypeUI" />.
         /// </returns>
-        public IDataTypeUI<IDictionary<string, string>> CreateUI()
+        public override IDataTypeUI<IDictionary<string, string>> CreateUI()
         {
             return CreateUI(null);
         }
@@ -112,9 +102,9 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
         /// <param name="parameters">
         /// The parameters.
         /// </param>
-        public void Load(IDictionary<string, string> parameters)
+        public override void Load(IDictionary<string, string> parameters)
         {
-            var filePath = Path.Combine(parameters["basePath"], FILE_NAME);
+            var filePath = Path.Combine(parameters["basePath"], FileName);
 
             if (File.Exists(filePath))
             {
@@ -131,7 +121,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
         /// <returns>
         ///     The <see cref="IHierarchy" />.
         /// </returns>
-        public Hierarchy ReturnNavigation()
+        public override Hierarchy ReturnNavigation()
         {
             return new Hierarchy { Id = new Guid("1BC1B0C4-1E41-9146-82CF-599181CE4440"), Name = "Entity" };
         }
@@ -145,9 +135,9 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        public bool Save(IDictionary<string, string> parameters)
+        public override bool Save(IDictionary<string, string> parameters)
         {
-            var filePath = Path.Combine(parameters["basePath"], FILE_NAME);
+            var filePath = Path.Combine(parameters["basePath"], FileName);
             ObjectXMLSerializer<EntityDataType>.Save(this, filePath);
             return true;
         }
