@@ -38,7 +38,7 @@ namespace Configuration
             Drivers = new Lazy<IDriver, IDictionary<string, object>>[0];
 
 #if DEBUG
-            ModelPath = @"..\..\..\..\..\Generated\Dal\Repository\EF\Dotnet\RepositoryEFDotnet\Model\Banking.mdl";
+            ModelPath = @"..\..\..\..\..\Generated\Dal\Repository\EF\Dotnet\ContextEFDotnet.Library\Model\Banking.mdl";
             ConfigPath = @"Config\Settings.xml";
 #endif
         }
