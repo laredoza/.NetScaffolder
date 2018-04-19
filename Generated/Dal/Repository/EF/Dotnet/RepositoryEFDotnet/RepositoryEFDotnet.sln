@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepositoryEFDotnet.Library"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepositoryEFDotnet.UnitTest", "UnitTest\RepositoryEFDotnet.UnitTest.csproj", "{14988671-1B3C-4977-BF65-8A0451FB2A8B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContextEFDotnet.Library", "..\ContextEFDotnet.Library\ContextEFDotnet.Library.csproj", "{F7E34A41-4A37-495E-8A23-F0177FE07CE6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{14988671-1B3C-4977-BF65-8A0451FB2A8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{14988671-1B3C-4977-BF65-8A0451FB2A8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{14988671-1B3C-4977-BF65-8A0451FB2A8B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7E34A41-4A37-495E-8A23-F0177FE07CE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7E34A41-4A37-495E-8A23-F0177FE07CE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7E34A41-4A37-495E-8A23-F0177FE07CE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7E34A41-4A37-495E-8A23-F0177FE07CE6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Context\LocalContext.g.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RunGenerator.cs">
       <AutoGen>True</AutoGen>
@@ -56,15 +57,35 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Model\T4\BaseGenerator.ttInclude" />
+    <None Include="Model\T4\BaseTemplate.ttinclude" />
+    <None Include="Model\T4\ContextGenerator.ttInclude" />
+    <None Include="Model\T4\ContextTemplate.ttInclude" />
+    <None Include="Model\T4\ProjectGenerator.ttInclude" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Model\Package\Common.Logging.Core.dll" />
+    <Content Include="Model\Package\Common.Logging.dll" />
+    <Content Include="Model\Package\Configuration.dll" />
+    <Content Include="Model\Package\DotNetScaffolder.Components.CollectionOption.dll" />
+    <Content Include="Model\Package\DotNetScaffolder.Components.Common.dll" />
+    <Content Include="Model\Package\DotNetScaffolder.Components.DataTypes.DefaultDataTypes.dll" />
+    <Content Include="Model\Package\DotNetScaffolder.Components.Drivers.DefaultDrivers.dll" />
+    <Content Include="Model\Package\DotNetScaffolder.Components.LanguageOutputs.DefaultLanguageOutput.dll" />
+    <Content Include="Model\Package\DotNetScaffolder.Components.NamingConventions.DefaultNamingConventions.dll" />
+    <Content Include="Model\Package\DotNetScaffolder.Components.OutputGenerators.DefaultOutputGenerators.dll" />
+    <Content Include="Model\Package\DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.dll" />
+    <Content Include="Model\Package\DotNetScaffolder.Core.Common.dll" />
+    <Content Include="Model\Package\DotNetScaffolder.Mapping.MetaData.dll" />
+    <Content Include="Model\Package\FormControls.dll" />
     <Content Include="RunGenerator.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>RunGenerator.cs</LastGenOutput>
+      <LastOutputs>.\Context\LocalContext.g.cs</LastOutputs>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

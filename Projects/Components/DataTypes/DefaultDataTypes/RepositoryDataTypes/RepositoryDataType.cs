@@ -29,16 +29,9 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
     [Export(typeof(IDataType))]
     [ExportMetadata("NameMetaData", "Repository")]
     [ExportMetadata("ValueMetaData", "1BC1B0C4-1E41-9146-82CF-599181CE4450")]
-    public class RepositoryDataType : IDataType
+    public class RepositoryDataType : BaseDataType
     {
-        #region Constants
-
-        /// <summary>
-        ///     The fil e_ name.
-        /// </summary>
-        private const string FILE_NAME = "Repository.mdl";
-
-        #endregion
+        public RepositoryDataType() : base("Repository.xml") { }
 
         #region Properties
 
@@ -46,11 +39,6 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
         ///     Gets or sets a value indicating whether enabled.
         /// </summary>
         public bool Enabled { get; set; } = false;
-
-        /// <summary>
-        ///     Gets or sets the meta data.
-        /// </summary>
-        public Table MetaData { get; set; }
 
         /// <summary>
         ///     Gets or sets the namespace.
@@ -75,14 +63,14 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
         /// <returns>
         /// The <see cref="IDataTypeUI"/>.
         /// </returns>
-        public IDataTypeUI<IDictionary<string, string>> CreateUI(IDictionary<string, string> parameters)
+        public override IDataTypeUI<IDictionary<string, string>> CreateUI(IDictionary<string, string> parameters)
         {
             RepositoryUserControl newControl = new RepositoryUserControl
-                                                   {
-                                                       Visible = true,
-                                                       Dock = DockStyle.Fill,
-                                                       DataType = this
-                                                   };
+            {
+                Visible = true,
+                Dock = DockStyle.Fill,
+                DataType = this
+            };
             return newControl;
         }
 
@@ -92,7 +80,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
         /// <returns>
         ///     The <see cref="IDataTypeUI" />.
         /// </returns>
-        public IDataTypeUI<IDictionary<string, string>> CreateUI()
+        public override IDataTypeUI<IDictionary<string, string>> CreateUI()
         {
             return CreateUI(null);
         }
@@ -103,9 +91,9 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
         /// <param name="parameters">
         /// The parameters.
         /// </param>
-        public void Load(IDictionary<string, string> parameters)
+        public override void Load(IDictionary<string, string> parameters)
         {
-            var filePath = Path.Combine(parameters["basePath"], FILE_NAME);
+            var filePath = Path.Combine(parameters["basePath"], FileName);
 
             if (File.Exists(filePath))
             {
@@ -122,7 +110,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
         /// <returns>
         ///     The <see cref="IHierarchy" />.
         /// </returns>
-        public Hierarchy ReturnNavigation()
+        public override Hierarchy ReturnNavigation()
         {
             return new Hierarchy { Id = new Guid("1BC1B0C4-1E41-9146-82CF-599181CE4450"), Name = "Repository" };
         }
@@ -136,9 +124,9 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        public bool Save(IDictionary<string, string> parameters)
+        public override bool Save(IDictionary<string, string> parameters)
         {
-            var filePath = Path.Combine(parameters["basePath"], FILE_NAME);
+            var filePath = Path.Combine(parameters["basePath"], FileName);
             ObjectXMLSerializer<RepositoryDataType>.Save(this, filePath);
             return true;
         }

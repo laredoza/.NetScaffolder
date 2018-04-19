@@ -1,0 +1,70 @@
+﻿<#@ template language="C#" hostspecific="true" debug="true" #>
+<#@ assembly name="System" #>
+<#@ assembly name="System.Configuration" #>
+<#@ assembly name="System.Globalization" #>
+<#@ assembly name="System.Xml" #>
+<#@ assembly name="$(ProjectDir)Model\Package\Common.Logging.Core.dll" #>
+<#@ assembly name="$(ProjectDir)Model\Package\Common.Logging.dll" #>
+<#@ assembly name="$(ProjectDir)Model\Package\DotNetScaffolder.Core.Common.dll" #>
+<#@ assembly name="$(ProjectDir)Model\Package\DotNetScaffolder.Mapping.MetaData.dll" #>
+<#@ assembly name="$(ProjectDir)Model\Package\FormControls.dll" #>
+<#@ assembly name="$(ProjectDir)Model\Package\DotNetScaffolder.Components.Common.dll" #>
+<#@ assembly name="$(ProjectDir)Model\Package\Configuration.dll" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.Configuration" #>
+<#@ import namespace="System.Globalization" #>
+<#@ import namespace="System.Xml" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Xml.Serialization" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="DotNetScaffolder.Mapping.MetaData.Project" #>
+<#@ import namespace="DotNetScaffolder.Mapping.MetaData.Model" #>
+<#@ import namespace="DotNetScaffolder.Core.Common.Serializer" #>
+<#@ import namespace="Configuration" #>
+<#@ include file="T4Toolbox.tt" #>
+<#@ include file="ContextGenerator.ttInclude" #>
+<#+
+public class ProjectGenerator : Generator
+{
+	public string ModelFilePath {get;set;}
+	public string PackagePath {get;set;}
+
+	protected override void RunCore()
+	{
+		var projectDefinition = ObjectXMLSerializer<ProjectDefinition>.Load(ModelFilePath);
+		Debugger.Break();
+		ScaffoldConfig.Load(PackagePath);
+		
+		Dictionary<string, string> parameters = new Dictionary<string, string>();
+		parameters.Add("basePath", Path.GetDirectoryName(ModelFilePath));
+		
+		foreach(var domain in projectDefinition.Domains)
+		{
+			if(domain.Package == null) continue;
+			
+			var nc = ScaffoldConfig.ReturnNamingConvention(domain.NamingConventionId);
+			var co = ScaffoldConfig.ReturnCollectionOption(domain.CollectionOptionId);
+			
+			foreach(var template in domain.Package.Templates)
+			{
+				if(template.Enabled)
+				{
+					var dt = ScaffoldConfig.ReturnDataType(template.DataType);
+					dt.Load(parameters);
+					
+					if(dt is ContextDataType)
+					{
+						ContextGenerator contxtGen = new ContextGenerator();
+						contxtGen.DataType = dt;
+						contxtGen.NamingConvention = nc;
+						contxtGen.CollectionOption = co;
+						contxtGen.BaseNamespace = projectDefinition.BaseNameSpace;
+						contxtGen.Run();
+					}
+				}
+			}
+		}
+	}
+}
+#>

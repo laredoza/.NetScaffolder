@@ -1,10 +1,10 @@
 ﻿<#@ template language="C#" hostspecific="true" debug="true" #>
 <#@ include file="T4Toolbox.tt" #>
 <#@ assembly name="System.IO" #>
-<#@ include file="$(SolutionDir)..\T4\ProjectGenerator.ttInclude" #>
+<#@ include file="$(ProjectDir)Model\T4\ProjectGenerator.ttInclude" #>
 <#
 	var projectGen = new ProjectGenerator();
-	projectGen.ProjectFilePath = "C:\\Development\\git\\Github\\.NetScaffolder\\Generated\\Dal\\Repository\\EF\\Dotnet\\RepositoryEFDotnet\\Model\\Banking.mdl";
-	projectGen.TemplPath = "C:\\Development\\git\\Github\\.NetScaffolder\\Generated\\Dal\\T4\\Package";
+	projectGen.ModelFilePath = "C:\\Development\\git\\Github\\.NetScaffolder\\Generated\\Dal\\Repository\\EF\\Dotnet\\RepositoryEFDotnet\\Library\\Model\\Banking.mdl";
+	projectGen.PackagePath = "C:\\Development\\git\\Github\\.NetScaffolder\\Generated\\Dal\\Repository\\EF\\Dotnet\\RepositoryEFDotnet\\Library\\Model\\Package";
 	projectGen.Run();
 #>

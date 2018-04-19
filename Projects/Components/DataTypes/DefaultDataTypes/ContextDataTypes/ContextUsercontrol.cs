@@ -79,7 +79,17 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
                 SelectedContext = DataType.Contexts.FirstOrDefault(o => o.Id.ToString() == parameters["name"]);
             }
 
-            btnNew.Visible = SelectedContext == null;
+            if (SelectedContext == null)
+            {
+                btnNew.Text = "Add";
+                btnNew.Tag = "Add";
+            }
+            else
+            {
+                btnNew.Text = "Delete";
+                btnNew.Tag = "Delete";
+            }
+
             chkListModels.Visible = SelectedContext != null;
 
             if (SelectedContext == null)
@@ -129,8 +139,25 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
         /// </param>
         private void btnNew_Click(object sender, EventArgs e)
         {
-            UpdateContext();
-            DataType.Contexts.Add(SelectedContext);
+            var btn = (Button)sender;
+
+            if (btn.Tag.ToString() == "Add")
+            {
+                UpdateContext();
+                DataType.Contexts.Add(SelectedContext);
+            }
+            else if(btn.Tag.ToString() == "Delete")
+            {
+                var context = DataType.Contexts.FirstOrDefault(o => o.Id == SelectedContext.Id);
+
+                if (context != null)
+                {
+                    DataType.Contexts.Remove(context);
+                }
+
+                SelectedContext = null;
+            }
+
             var parameters = new Dictionary<string, string>();
             parameters.Add("basePath", SavePath);
             DataType.Save(parameters);
@@ -172,7 +199,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
 
             for (int i = 0; i < chkListModels.CheckedItems.Count; i++)
             {
-                SelectedContext.Models.Add(chkListModels.CheckedItems[i].ToString());
+                //SelectedContext.Models.Add(chkListModels.CheckedItems[i].ToString());
             }
         }
 
@@ -206,10 +233,10 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
 
             for(int index = 0; index < list.Length; index++)
             {
-                if (SelectedContext.Models.Contains(list[index].ToString()))
-                {
-                    chkListModels.SetItemChecked(index, true);
-                }
+                //if (SelectedContext.Models.Contains(list[index].ToString()))
+                //{
+                //    chkListModels.SetItemChecked(index, true);
+                //}
             }
         }
 

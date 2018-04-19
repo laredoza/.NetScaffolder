@@ -101,6 +101,11 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Model\T4\BaseGenerator.ttInclude" />
+    <None Include="Model\T4\BaseTemplate.ttinclude" />
+    <None Include="Model\T4\ContextGenerator.ttInclude" />
+    <None Include="Model\T4\ContextTemplate.ttInclude" />
+    <None Include="Model\T4\ProjectGenerator.ttInclude" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -163,8 +168,14 @@
       <Name>DotNetScaffolder.Presentation.Forms.Controls</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Model\Package\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>echo f | xcopy /i /y "$(ProjectDir)bin\$(ConfigurationName)\Common.Logging.Core.dll" "$(SolutionDir)\Projects\Presentation\Forms\Model\Package\Common.Logging.Core.dll"
+echo f | xcopy /i /y "$(ProjectDir)bin\$(ConfigurationName)\Common.Logging.dll" "$(SolutionDir)\Projects\Presentation\Forms\Model\Package\Common.Logging.dll"</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

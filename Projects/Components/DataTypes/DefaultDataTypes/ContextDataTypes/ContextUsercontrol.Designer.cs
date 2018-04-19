@@ -44,9 +44,9 @@
             this.label23 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnBrowse = new System.Windows.Forms.Button();
+            this.btnNew = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.OutputPath = new System.Windows.Forms.TextBox();
-            this.btnNew = new System.Windows.Forms.Button();
             this.chkListModels = new System.Windows.Forms.CheckedListBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -117,11 +117,11 @@
             // label27
             // 
             this.label27.AutoSize = true;
-            this.label27.Location = new System.Drawing.Point(7, 127);
+            this.label27.Location = new System.Drawing.Point(50, 132);
             this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(110, 13);
+            this.label27.Size = new System.Drawing.Size(65, 13);
             this.label27.TabIndex = 49;
-            this.label27.Text = "Inherit From Interface:";
+            this.label27.Text = "Inherit From:";
             // 
             // GenerateInterface
             // 
@@ -146,7 +146,7 @@
             // label26
             // 
             this.label26.AutoSize = true;
-            this.label26.Location = new System.Drawing.Point(12, 102);
+            this.label26.Location = new System.Drawing.Point(7, 105);
             this.label26.Name = "label26";
             this.label26.Size = new System.Drawing.Size(108, 13);
             this.label26.TabIndex = 46;
@@ -155,7 +155,7 @@
             // label25
             // 
             this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(46, 74);
+            this.label25.Location = new System.Drawing.Point(41, 77);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(74, 13);
             this.label25.TabIndex = 45;
@@ -216,6 +216,17 @@
             this.btnBrowse.UseVisualStyleBackColor = true;
             this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
             // 
+            // btnNew
+            // 
+            this.btnNew.Location = new System.Drawing.Point(429, 126);
+            this.btnNew.Name = "btnNew";
+            this.btnNew.Size = new System.Drawing.Size(75, 23);
+            this.btnNew.TabIndex = 58;
+            this.btnNew.Tag = "Add";
+            this.btnNew.Text = "Add";
+            this.btnNew.UseVisualStyleBackColor = true;
+            this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -231,16 +242,6 @@
             this.OutputPath.Name = "OutputPath";
             this.OutputPath.Size = new System.Drawing.Size(304, 20);
             this.OutputPath.TabIndex = 57;
-            // 
-            // btnNew
-            // 
-            this.btnNew.Location = new System.Drawing.Point(429, 126);
-            this.btnNew.Name = "btnNew";
-            this.btnNew.Size = new System.Drawing.Size(75, 23);
-            this.btnNew.TabIndex = 58;
-            this.btnNew.Text = "Add";
-            this.btnNew.UseVisualStyleBackColor = true;
-            this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
             // 
             // chkListModels
             // 

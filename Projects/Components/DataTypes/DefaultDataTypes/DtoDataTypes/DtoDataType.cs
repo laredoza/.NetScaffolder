@@ -29,28 +29,9 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
     [Export(typeof(IDataType))]
     [ExportMetadata("NameMetaData", "Dto")]
     [ExportMetadata("ValueMetaData", "1BC1B0C4-1E41-9146-82CF-599181CE4490")]
-    public class DtoDataType : IDataType
+    public class DtoDataType : BaseDataType
     {
-        #region Constants
-
-        /// <summary>
-        ///     The fil e_ name.
-        /// </summary>
-        private const string FILE_NAME = "Dto.mdl";
-
-        #endregion
-
         #region Fields
-
-        /// <summary>
-        ///     The fields control.
-        /// </summary>
-        private Control fieldsControl;
-
-        /// <summary>
-        ///     The relationship controls.
-        /// </summary>
-        private Control relationshipControls;
 
         /// <summary>
         ///     The table control.
@@ -59,17 +40,14 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
 
         #endregion
 
+        public DtoDataType() : base("Dto.xml") { }
+
         #region Properties
 
         /// <summary>
         ///     Gets or sets a value indicating whether enabled.
         /// </summary>
         public bool Enabled { get; set; } = false;
-
-        /// <summary>
-        ///     Gets or sets the meta data.
-        /// </summary>
-        public Table MetaData { get; set; }
 
         /// <summary>
         ///     Gets or sets the namespace.
@@ -94,13 +72,9 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
         /// <returns>
         /// The <see cref="IDataTypeUI"/>.
         /// </returns>
-        public IDataTypeUI<IDictionary<string, string>> CreateUI(IDictionary<string, string> parameters)
+        public override IDataTypeUI<IDictionary<string, string>> CreateUI(IDictionary<string, string> parameters)
         {
-            var parentControl = new Control();
             var tableControl = new TableUserControl();
-            ConfigureControl(tableControl, parentControl);
-            var fieldUsercontrol = new FieldUserControl();
-            ConfigureControl(fieldUsercontrol, parentControl);
             return tableControl;
         }
 
@@ -110,7 +84,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
         /// <returns>
         ///     The <see cref="IDataTypeUI" />.
         /// </returns>
-        public IDataTypeUI<IDictionary<string, string>> CreateUI()
+        public override IDataTypeUI<IDictionary<string, string>> CreateUI()
         {
             return CreateUI(null);
         }
@@ -121,9 +95,9 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
         /// <param name="parameters">
         /// The parameters.
         /// </param>
-        public void Load(IDictionary<string, string> parameters)
+        public override void Load(IDictionary<string, string> parameters)
         {
-            var filePath = Path.Combine(parameters["basePath"], FILE_NAME);
+            var filePath = Path.Combine(parameters["basePath"], FileName);
 
             if (File.Exists(filePath))
             {
@@ -140,7 +114,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
         /// <returns>
         ///     The <see cref="IHierarchy" />.
         /// </returns>
-        public Hierarchy ReturnNavigation()
+        public override Hierarchy ReturnNavigation()
         {
             return new Hierarchy { Id = new Guid("1BC1B0C4-1E41-9146-82CF-599181CE4490"), Name = "Dto" };
         }
@@ -154,9 +128,9 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        public bool Save(IDictionary<string, string> parameters)
+        public override bool Save(IDictionary<string, string> parameters)
         {
-            var filePath = Path.Combine(parameters["basePath"], FILE_NAME);
+            var filePath = Path.Combine(parameters["basePath"], FileName);
             ObjectXMLSerializer<DtoDataType>.Save(this, filePath);
             return true;
         }

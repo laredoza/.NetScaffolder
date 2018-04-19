@@ -14,7 +14,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
     using System.IO;
     using System.Linq;
     using System.Windows.Forms;
-
+    using System.Xml.Serialization;
     using DotNetScaffolder.Components.Common.Contract;
     using DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataTypes;
     using DotNetScaffolder.Core.Common.Serializer;
@@ -30,14 +30,14 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
     [Export(typeof(IDataType))]
     [ExportMetadata("NameMetaData", "Context")]
     [ExportMetadata("ValueMetaData", "1BC1B0C4-1E41-9146-82CF-599181CE4430")]
-    public class ContextDataType : IDataType
+    public class ContextDataType : BaseDataType
     {
         #region Constants
 
         /// <summary>
         ///     The fil e_ name.
         /// </summary>
-        private const string FILE_NAME = "Context.mdl";
+        private const string FILE_NAME = "Context.xml";
 
         #endregion
 
@@ -46,7 +46,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
         /// <summary>
         ///     Initializes a new instance of the <see cref="ContextDataType" /> class.
         /// </summary>
-        public ContextDataType()
+        public ContextDataType() : base("Context.xml")
         {
             Contexts = new List<ContextData>();
         }
@@ -59,11 +59,6 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
         ///     Gets the contexts.
         /// </summary>
         public List<ContextData> Contexts { get; private set; }
-
-        /// <summary>
-        ///     Gets or sets the meta data.
-        /// </summary>
-        public Table MetaData { get; set; }
 
         #endregion
 
@@ -78,22 +73,22 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
         /// <returns>
         /// The <see cref="IDataTypeUI"/>.
         /// </returns>
-        public IDataTypeUI<IDictionary<string, string>> CreateUI(IDictionary<string, string> parameters)
-        { 
+        public override IDataTypeUI<IDictionary<string, string>> CreateUI(IDictionary<string, string> parameters)
+        {
             string savePath = string.Empty;
 
-            if(parameters!= null && parameters.ContainsKey("basePath"))
+            if (parameters != null && parameters.ContainsKey("basePath"))
             {
                 savePath = parameters["basePath"];
             }
 
             var newControl = new ContextUserControl
-                                 {
-                                     Visible = true,
-                                     Dock = DockStyle.Fill,
-                                     DataType = this,
-                                     SavePath = savePath
-                                 };
+            {
+                Visible = true,
+                Dock = DockStyle.Fill,
+                DataType = this,
+                SavePath = savePath
+            };
             return newControl;
         }
 
@@ -103,7 +98,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
         /// <returns>
         ///     The <see cref="IDataTypeUI" />.
         /// </returns>
-        public IDataTypeUI<IDictionary<string, string>> CreateUI()
+        public override IDataTypeUI<IDictionary<string, string>> CreateUI()
         {
             return CreateUI(null);
         }
@@ -114,7 +109,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
         /// <param name="parameters">
         /// The parameters.
         /// </param>
-        public void Load(IDictionary<string, string> parameters)
+        public override void Load(IDictionary<string, string> parameters)
         {
             if (parameters == null) return;
 
@@ -137,7 +132,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
         /// <returns>
         ///     The <see cref="IHierarchy" />.
         /// </returns>
-        public Hierarchy ReturnNavigation()
+        public override Hierarchy ReturnNavigation()
         {
             var parent = new Hierarchy { Id = new Guid("1BC1B0C4-1E41-9146-82CF-599181CE4430"), Name = "Context" };
 
@@ -146,11 +141,11 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
                 foreach (var context in Contexts)
                 {
                     parent.Children.Add(new Hierarchy
-                                            {
-                                                ParentId = parent.Id,
-                                                Id = context.Id,
-                                                Name = context.ContextName
-                                            });
+                    {
+                        ParentId = parent.Id,
+                        Id = context.Id,
+                        Name = context.ContextName
+                    });
                 }
             }
 
@@ -166,7 +161,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        public bool Save(IDictionary<string, string> parameters)
+        public override bool Save(IDictionary<string, string> parameters)
         {
             if (parameters == null) return false;
 
@@ -190,7 +185,18 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
     {
         public ContextData()
         {
-            Models = new List<string>();
+            Models = new List<Table>();
+            OutputFolder = "Context";
+            ContextName = "NewContext";
+            Enabled = true;
+            Namespace = "Context";
+            LoggingEnabled = false;
+            InheritFrom = string.Empty;
+            Id = Guid.NewGuid();
+            GenerateInterface = false;
+            CreateDb = false;
+            OutputPath = string.Empty;
+            ConstructionOptions = string.Empty;
         }
 
         #region Properties
@@ -203,7 +209,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
         /// <summary>
         ///     Gets or sets the context name.
         /// </summary>
-        public string ContextName { get; set; } = "Context";
+        public string ContextName { get; set; }
 
         public string OutputPath { get; set; }
 
@@ -215,7 +221,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
         /// <summary>
         ///     Gets or sets a value indicating whether enabled.
         /// </summary>
-        public bool Enabled { get; set; } = true;
+        public bool Enabled { get; set; }
 
         /// <summary>
         ///     Gets or sets a value indicating whether generate interface.
@@ -230,7 +236,21 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
         /// <summary>
         ///     Gets or sets the inherit from.
         /// </summary>
-        public string InheritFrom { get; set; }
+        public string InheritFrom { get; set; } = "BaseContext";
+
+        [XmlIgnore]
+        public string TransformInheritFrom
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(InheritFrom))
+                {
+                    return string.Empty;
+                }
+
+                return $": {InheritFrom}";
+            }
+        }
 
         /// <summary>
         ///     Gets or sets a value indicating whether logging enabled.
@@ -240,14 +260,14 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
         /// <summary>
         ///     Gets or sets the namespace.
         /// </summary>
-        public string Namespace { get; set; } = "Context";
+        public string Namespace { get; set; }
 
         /// <summary>
         ///     Gets or sets the output folder.
         /// </summary>
-        public string OutputFolder { get; set; } = "Context";
+        public string OutputFolder { get; set; }
 
-        public List<string> Models { get; private set; }
+        public List<Table> Models { get; private set; }
 
         #endregion
     }

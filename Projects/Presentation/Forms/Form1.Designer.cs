@@ -90,7 +90,7 @@
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.openToolStripMenuItem.Text = "&Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
@@ -134,9 +134,8 @@
             this.LblPath.AutoSize = true;
             this.LblPath.Location = new System.Drawing.Point(9, 16);
             this.LblPath.Name = "LblPath";
-            this.LblPath.Size = new System.Drawing.Size(102, 13);
+            this.LblPath.Size = new System.Drawing.Size(0, 13);
             this.LblPath.TabIndex = 5;
-            this.LblPath.Text = "c:\\Models\\Web.mdl";
             // 
             // panel2
             // 
@@ -294,6 +293,7 @@
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
+            this.openFileDialog1.Filter = "Model files|*.mdl";
             // 
             // Form1
             // 

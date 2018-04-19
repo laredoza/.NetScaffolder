@@ -54,6 +54,7 @@
     <Compile Include="ApplicationServiceDataTypes\ApplicationServiceUserControl.Designer.cs">
       <DependentUpon>ApplicationServiceUserControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Base\BaseDataType.cs" />
     <Compile Include="ContextDataTypes\ContextUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -75,12 +76,6 @@
     </Compile>
     <Compile Include="RepositoryDataTypes\RepositoryUserControl.Designer.cs">
       <DependentUpon>RepositoryUserControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="DtoDataTypes\FieldUserControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="DtoDataTypes\FieldUserControl.Designer.cs">
-      <DependentUpon>FieldUserControl.cs</DependentUpon>
     </Compile>
     <Compile Include="DtoDataTypes\DtoDataType.cs" />
     <Compile Include="DtoDataTypes\TableUserControl.cs">
@@ -132,9 +127,6 @@
     <EmbeddedResource Include="RepositoryDataTypes\RepositoryUserControl.resx">
       <DependentUpon>RepositoryUserControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DtoDataTypes\FieldUserControl.resx">
-      <DependentUpon>FieldUserControl.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="DtoDataTypes\TableUserControl.resx">
       <DependentUpon>TableUserControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -144,4 +136,7 @@
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>echo f | xcopy /i /y "$(ProjectDir)bin\$(ConfigurationName)\$(TargetFileName)" "$(SolutionDir)\Projects\Presentation\Forms\Model\Package\$(TargetFileName)"</PostBuildEvent>
+  </PropertyGroup>
 </Project>
