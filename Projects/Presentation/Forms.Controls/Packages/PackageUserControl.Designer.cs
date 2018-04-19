@@ -1,8 +1,10 @@
-﻿namespace DotNetScaffolder.Presentation.Forms.Controls
+﻿namespace DotNetScaffolder.Presentation.Forms.Controls.Packages
 {
+    using DotNetScaffolder.Presentation.Forms.Controls.Core;
+
     using FormControls.Enum;
 
-    partial class ManagePackageUserControl
+    partial class PackageUserControl
     {
         /// <summary> 
         /// Required designer variable.
@@ -15,9 +17,9 @@
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
-            if (disposing && (components != null))
+            if (disposing && (this.components != null))
             {
-                components.Dispose();
+                this.components.Dispose();
             }
             base.Dispose(disposing);
         }
@@ -32,8 +34,8 @@
         {
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.PackageDetailsUserControl1 = new DotNetScaffolder.Presentation.Forms.Controls.PackageDetailsUserControl();
-            this.ManageCollectionsTreeViewUserControl1 = new DotNetScaffolder.Presentation.Forms.Controls.ManageCollectionsTreeViewUserControl();
+            this.PackageDetailsUserControl1 = new PackageDetailsUserControl();
+            this.ManageCollectionsTreeViewUserControl1 = new ManageCollectionsTreeViewUserControl();
             this.groupBox4.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -86,13 +88,13 @@
             this.ManageCollectionsTreeViewUserControl1.Size = new System.Drawing.Size(364, 368);
             this.ManageCollectionsTreeViewUserControl1.TabIndex = 1;
             // 
-            // ManagePackageUserControl
+            // PackageUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox4);
-            this.Name = "ManagePackageUserControl";
+            this.Name = "PackageUserControl";
             this.Size = new System.Drawing.Size(926, 429);
             this.groupBox4.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);

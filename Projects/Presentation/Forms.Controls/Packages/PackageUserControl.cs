@@ -1,10 +1,10 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ManagePackageUserControl.cs" company="DotnetScaffolder">
+// <copyright file="PackageUserControl.cs" company="DotnetScaffolder">
 //   MIT
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace DotNetScaffolder.Presentation.Forms.Controls
+namespace DotNetScaffolder.Presentation.Forms.Controls.Packages
 {
     #region Usings
 
@@ -22,14 +22,14 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
     /// <summary>
     ///     The manage package user control.
     /// </summary>
-    public partial class ManagePackageUserControl : UserControl
+    public partial class PackageUserControl : UserControl
     {
         #region Constructors and Destructors
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ManagePackageUserControl" /> class.
+        ///     Initializes a new instance of the <see cref="PackageUserControl" /> class.
         /// </summary>
-        public ManagePackageUserControl()
+        public PackageUserControl()
         {
             this.InitializeComponent();
 
