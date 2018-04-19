@@ -1,8 +1,6 @@
-﻿namespace DotNetScaffolder.Presentation.Forms.Controls
+﻿namespace DotNetScaffolder.Presentation.Forms.Controls.Core
 {
     using System.Windows.Forms;
-
-    using DotNetScaffolder.Mapping.MetaData.Project.Packages;
 
     using FormControls.TreeView;
 

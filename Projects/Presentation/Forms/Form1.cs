@@ -143,56 +143,49 @@ namespace DotNetScaffolder.Presentation.Forms
         /// </summary>
         private void LoadData()
         {
-            try
+            if (!string.IsNullOrEmpty(this.ModelPath) && !string.IsNullOrEmpty(this.ConfigPath))
             {
-                if (!string.IsNullOrEmpty(this.ModelPath) && !string.IsNullOrEmpty(this.ConfigPath))
+                FilePersistenceOptions options = new FilePersistenceOptions { Path = this.ModelPath };
+
+                this.applicationService =
+                    new ProjectDefinitionApplicationServiceFile { FilePersistenceOptions = options };
+                this.applicationService.Load();
+                this.applicationService.ProjectDefinition.ModelPath = options.Path;
+                this.applicationService.ProjectDefinition.Version = 1;
+
+                FilePersistenceOptions configOptions = new FilePersistenceOptions { Path = this.ConfigPath };
+                this.applicationConfiguration =
+                    new ConfigurationApplicationServiceFile { FilePersistenceOptions = configOptions };
+
+                this.applicationConfiguration.Load();
+
+                this.TemplateManagementUserControl1.DataSource =
+                    this.applicationConfiguration.ApplicationSettings.Templates[0];
+                this.packageUserControl1.DataSource =
+                    this.applicationConfiguration.ApplicationSettings.Packages[0];
+
+                if (this.applicationConfiguration.ApplicationSettings.Templates.Count > 0)
                 {
-                    FilePersistenceOptions options = new FilePersistenceOptions { Path = this.ModelPath };
-
-                    this.applicationService =
-                        new ProjectDefinitionApplicationServiceFile { FilePersistenceOptions = options };
-                    this.applicationService.Load();
-                    this.applicationService.ProjectDefinition.ModelPath = options.Path;
-                    this.applicationService.ProjectDefinition.Version = 1;
-
-                    FilePersistenceOptions configOptions = new FilePersistenceOptions { Path = this.ConfigPath };
-                    this.applicationConfiguration =
-                        new ConfigurationApplicationServiceFile { FilePersistenceOptions = configOptions };
-
-                    this.applicationConfiguration.Load();
-
-                    this.TemplateManagementUserControl1.DataSource =
-                        this.applicationConfiguration.ApplicationSettings.Templates[0];
-                    this.ManagePackageUserControl1.DataSource =
-                        this.applicationConfiguration.ApplicationSettings.Packages[0];
-
-                    if (this.applicationConfiguration.ApplicationSettings.Templates.Count > 0)
-                    {
-                        this.ManagePackageUserControl1.Templates =
-                            this.applicationConfiguration.ApplicationSettings.Templates;
-                    }
-
-                    this.ProjectDetailsUserControl1.Project = this.applicationService.ProjectDefinition;
-                    this.ProjectDomainUserControl1.SelectedIndexChanged +=
-                        this.ProjectDomainUserControl1_SelectedIndexChanged;
-                    this.ProjectDomainUserControl1.ApplicationService = this.applicationService;
-                    this.projectDomainDetailsUserControl1.Packages =
-                        this.applicationConfiguration.ApplicationSettings.Packages;
-                    this.projectDomainDetailsUserControl1.ApplicationService = this.applicationService;
-                    this.tabControl1.Enabled = true;
-                    this.BtnSave.Enabled = true;
-                    this.LblPath.Text = this.ModelPath;
+                    this.packageUserControl1.Templates =
+                        this.applicationConfiguration.ApplicationSettings.Templates;
                 }
-                else
-                {
-                    this.tabControl1.Enabled = false;
-                    this.BtnSave.Enabled = false;
-                    this.LblPath.Text = "No Model File Loaded";
-                }
+
+                this.ProjectDetailsUserControl1.Project = this.applicationService.ProjectDefinition;
+                this.ProjectDomainUserControl1.SelectedIndexChanged +=
+                    this.ProjectDomainUserControl1_SelectedIndexChanged;
+                this.ProjectDomainUserControl1.ApplicationService = this.applicationService;
+                this.projectDomainDetailsUserControl1.Packages =
+                    this.applicationConfiguration.ApplicationSettings.Packages;
+                this.projectDomainDetailsUserControl1.ApplicationService = this.applicationService;
+                this.tabControl1.Enabled = true;
+                this.BtnSave.Enabled = true;
+                this.LblPath.Text = this.ModelPath;
             }
-            catch(Exception ex)
+            else
             {
-                MessageBox.Show(this.Parent, ex.Message, "Error");
+                this.tabControl1.Enabled = false;
+                this.BtnSave.Enabled = false;
+                this.LblPath.Text = "No Model File Loaded";
             }
         }
 

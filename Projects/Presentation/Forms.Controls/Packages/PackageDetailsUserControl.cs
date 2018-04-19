@@ -4,7 +4,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace DotNetScaffolder.Presentation.Forms.Controls
+namespace DotNetScaffolder.Presentation.Forms.Controls.Packages
 {
     #region Usings
 

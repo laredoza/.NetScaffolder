@@ -1,5 +1,7 @@
 ﻿namespace DotNetScaffolder.Presentation.Forms.Controls
 {
+    using DotNetScaffolder.Presentation.Forms.Controls.Core;
+
     using FormControls.Enum;
 
     partial class TemplateManagementUserControl
@@ -32,7 +34,7 @@
         {
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.ManageTemplateTreeViewUserControl1 = new DotNetScaffolder.Presentation.Forms.Controls.ManageCollectionsTreeViewUserControl();
+            this.ManageTemplateTreeViewUserControl1 = new ManageCollectionsTreeViewUserControl();
             this.TemplateDetailsUserControl1 = new DotNetScaffolder.Presentation.Forms.Controls.TemplateDetailsUserControl();
             this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();

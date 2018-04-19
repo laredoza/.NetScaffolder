@@ -2,6 +2,8 @@
 {
     using DotNetScaffolder.Mapping.MetaData.Project.Packages;
     using DotNetScaffolder.Presentation.Forms.Controls;
+    using DotNetScaffolder.Presentation.Forms.Controls.Packages;
+    using DotNetScaffolder.Presentation.Forms.Controls.Project;
 
     partial class Form1
     {
@@ -43,13 +45,13 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.ProjectDetailsUserControl1 = new DotNetScaffolder.Presentation.Forms.Controls.ProjectDetailsUserControl();
+            this.ProjectDetailsUserControl1 = new DotNetScaffolder.Presentation.Forms.Controls.Project.ProjectDetailsUserControl();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.ProjectDomainUserControl1 = new DotNetScaffolder.Presentation.Forms.Controls.ProjectDomainUserControl();
+            this.ProjectDomainUserControl1 = new DotNetScaffolder.Presentation.Forms.Controls.Project.ProjectDomainUserControl();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.projectDomainDetailsUserControl1 = new DotNetScaffolder.Presentation.Forms.Controls.ProjectDomainDetailsUserControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.ManagePackageUserControl1 = new DotNetScaffolder.Presentation.Forms.Controls.ManagePackageUserControl();
+            this.packageUserControl1 = new PackageUserControl();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.TemplateManagementUserControl1 = new DotNetScaffolder.Presentation.Forms.Controls.TemplateManagementUserControl();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
@@ -174,7 +176,7 @@
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.groupBox1.Controls.Add(this.ProjectDetailsUserControl1);
-            this.groupBox1.Location = new System.Drawing.Point(6, 7);
+            this.groupBox1.Location = new System.Drawing.Point(8, 7);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(388, 578);
             this.groupBox1.TabIndex = 13;
@@ -249,7 +251,7 @@
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.ManagePackageUserControl1);
+            this.tabPage2.Controls.Add(this.packageUserControl1);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -258,15 +260,15 @@
             this.tabPage2.Text = "Packages";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // ManagePackageUserControl1
+            // packageUserControl1
             // 
-            this.ManagePackageUserControl1.DataSource = null;
-            this.ManagePackageUserControl1.Location = new System.Drawing.Point(6, 6);
-            this.ManagePackageUserControl1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.ManagePackageUserControl1.Name = "ManagePackageUserControl1";
-            this.ManagePackageUserControl1.Size = new System.Drawing.Size(975, 429);
-            this.ManagePackageUserControl1.TabIndex = 0;
-            this.ManagePackageUserControl1.Templates = ((System.Collections.Generic.List<DotNetScaffolder.Mapping.MetaData.Project.Packages.Template>)(resources.GetObject("ManagePackageUserControl1.Templates")));
+            this.packageUserControl1.DataSource = null;
+            this.packageUserControl1.Location = new System.Drawing.Point(6, 6);
+            this.packageUserControl1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.packageUserControl1.Name = "packageUserControl1";
+            this.packageUserControl1.Size = new System.Drawing.Size(975, 429);
+            this.packageUserControl1.TabIndex = 0;
+            this.packageUserControl1.Templates = ((System.Collections.Generic.List<DotNetScaffolder.Mapping.MetaData.Project.Packages.Template>)(resources.GetObject("packageUserControl1.Templates")));
             // 
             // tabPage3
             // 
@@ -343,7 +345,7 @@
         private System.Windows.Forms.GroupBox groupBox3;
         private ProjectDomainDetailsUserControl projectDomainDetailsUserControl1;
         private System.Windows.Forms.TabPage tabPage2;
-        private ManagePackageUserControl ManagePackageUserControl1;
+        private PackageUserControl packageUserControl1;
         private System.Windows.Forms.TabPage tabPage3;
         private TemplateManagementUserControl TemplateManagementUserControl1;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;

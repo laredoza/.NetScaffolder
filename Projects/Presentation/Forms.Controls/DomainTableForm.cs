@@ -14,6 +14,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
     using Common.Logging;
 
     using DotNetScaffolder.Mapping.MetaData.Domain;
+    using DotNetScaffolder.Presentation.Forms.Controls.Sources;
 
     #endregion
 

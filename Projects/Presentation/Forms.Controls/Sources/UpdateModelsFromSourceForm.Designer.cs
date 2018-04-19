@@ -1,4 +1,4 @@
-﻿namespace DotNetScaffolder.Presentation.Forms.Controls
+﻿namespace DotNetScaffolder.Presentation.Forms.Controls.Sources
 {
     partial class UpdateModelsFromSourceForm
     {
@@ -30,7 +30,7 @@
         {
             this.BtnClose = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
-            this.updateModelsFromSourceUserControl1 = new DotNetScaffolder.Presentation.Forms.Controls.UpdateModelsFromSourceUserControl();
+            this.updateModelsFromSourceUserControl1 = new UpdateModelsFromSourceUserControl();
             this.SuspendLayout();
             // 
             // BtnClose

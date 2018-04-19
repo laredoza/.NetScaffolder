@@ -4,7 +4,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace DotNetScaffolder.Presentation.Forms.Controls
+namespace DotNetScaffolder.Presentation.Forms.Controls.Core
 {
     #region Usings
 
@@ -16,6 +16,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
 
     #endregion
 
+    /// <inheritdoc />
     /// <summary>
     ///     The manage collections tree view user control.
     /// </summary>
