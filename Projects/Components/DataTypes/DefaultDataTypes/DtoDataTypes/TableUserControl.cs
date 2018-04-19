@@ -13,6 +13,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.TableDataTypes
     using System.Windows.Forms;
 
     using DotNetScaffolder.Components.Common.Contract;
+    using DotNetScaffolder.Mapping.MetaData.Domain;
 
     #endregion
 
@@ -48,6 +49,8 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.TableDataTypes
         ///     Gets or sets the data type.
         /// </summary>
         public DtoDataType DataType { get; set; }
+
+        public DomainDefinition DataSource { get; set; }
 
         #endregion
 

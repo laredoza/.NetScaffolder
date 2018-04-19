@@ -13,6 +13,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.RepositoryDataT
     using System.Windows.Forms;
 
     using DotNetScaffolder.Components.Common.Contract;
+    using DotNetScaffolder.Mapping.MetaData.Domain;
 
     #endregion
 
@@ -48,6 +49,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.RepositoryDataT
         ///     Gets or sets the data type.
         /// </summary>
         public RepositoryDataType DataType { get; set; }
+        public DomainDefinition DataSource { get; set; }
 
         #endregion
 

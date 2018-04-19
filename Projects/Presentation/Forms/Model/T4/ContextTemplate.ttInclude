@@ -56,7 +56,7 @@ namespace <#= BaseNamespace #>.<#= ContextData.OutputFolder #>.<#= ContextData.N
 		#region Db Sets
 		
 		<#+ foreach(var table in ContextData.Models){ #>
-		//public virtual DbSet<<#= table #>>
+		public virtual DbSet<<#= NamingConvention.ApplyNamingConvention(table.TableName) #>> <#=NamingConvention.ApplyNamingConvention(table.TableName) #>;
 		<#+ } #>
 
 		#endregion // EntitySets

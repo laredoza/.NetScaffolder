@@ -10,15 +10,14 @@
 
 using System.Data.Entity;
 
-namespace Banking.Models.Context.Local
+namespace Banking.Models.Context.Context
 {
-	public partial class Localcontext : BaseContext
+	public partial class Localcontext 
 	{
 		#region Db Sets
 		
-				//public virtual DbSet<ITIS_MET.META_SEC_USERS>
-				//public virtual DbSet<ITIS_MET.SEC_PERMISSIONS>
-				//public virtual DbSet<ITIS_MET.SEC_ROLE>
+				public virtual DbSet<Bankaccount> Bankaccount;
+				public virtual DbSet<Banktransfers> Banktransfers;
 		
 		#endregion // EntitySets
 	}

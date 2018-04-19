@@ -46,7 +46,7 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Tables
 
             foreach (Hierarchy item in items)
             {
-                var node = new TreeNode { Tag = item.Item, Text = item.Name, Name = item.Id.ToString() };
+                var node = new TreeNode { Tag = item.Item, Text = item.Name, Name = item.Id.ToString(), Checked = item.Selected };
                 nodes.Add(node);
 
                 node.Nodes.AddRange(this.ConvertHierarchyToNodes(item.Children).ToArray());
@@ -251,6 +251,66 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Tables
             return result;
         }
 
+        public List<Hierarchy> ReturnSelectedHierarchyFromList(List<Table> sourceTables, List<Table> selectedTables, bool includeFields, bool includeRelationships)
+        {
+            List<Hierarchy> result = new List<Hierarchy>();
+            Hierarchy newTable = null;
+            Hierarchy schema = null;
+            Hierarchy fieldNode = null;
+            Hierarchy relationshipNode = null;
+
+            foreach (Table table in sourceTables)
+            {
+                bool isChecked = false;
+
+                if (selectedTables != null && selectedTables.Any(o=> o.SchemaName == table.SchemaName && o.TableName == table.TableName))
+                {
+                    isChecked = true;
+                }
+
+                newTable = this.NewNode(table);
+                newTable.Selected = isChecked;
+
+                if (includeFields)
+                {
+                    fieldNode = new Hierarchy { Name = "Fields", Item = null };
+                    newTable.Children.Add(fieldNode);
+
+                    foreach (Column column in table.Columns)
+                    {
+                        fieldNode.Children.Add(new Hierarchy { Name = column.ColumnName, Item = column });
+                    }
+                }
+
+                if (includeRelationships)
+                {
+                    relationshipNode = new Hierarchy { Name = "Relationships", Item = null };
+                    newTable.Children.Add(relationshipNode);
+
+                    foreach (Relationship relationShip in table.RelationShips)
+                    {
+                        relationshipNode.Children.Add(
+                            new Hierarchy { Name = relationShip.RelationshipName, Item = relationShip });
+                    }
+                }
+
+                if (result.Exists(h => h.Name == table.SchemaName))
+                {
+                    schema = result.First(h => h.Name == table.SchemaName);
+                    schema.Children.Add(newTable);
+                }
+                else
+                {
+                    // Add new Schema
+                    schema = new Hierarchy { Name = table.SchemaName, Id = Guid.NewGuid(), Enabled = true };
+                    result.Add(schema);
+                    schema.Children.Add(newTable);
+                }
+            }
+
+            return result;
+        }
+
         /// <summary>
         /// The return tables.
         /// </summary>
@@ -260,7 +320,7 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Tables
         /// <returns>
         /// The <see cref="List"/>.
         /// </returns>
-        public List<Table> ReturnTables(TreeNode parentNode)
+        public List<Table> ReturnTables(TreeNode parentNode, bool all = false)
         {
             List<Table> result = new List<Table>();
 
@@ -268,7 +328,11 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Tables
             {
                 foreach (TreeNode child in node.Nodes)
                 {
-                    if (child.Checked)
+                    if(all)
+                    {
+                        result.Add(child.Tag as Table);
+                    }
+                    else if (child.Checked)
                     {
                         result.Add(child.Tag as Table);
                     }

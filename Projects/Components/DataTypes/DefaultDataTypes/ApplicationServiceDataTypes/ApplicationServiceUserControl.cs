@@ -13,6 +13,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ApplicationServ
     using System.Windows.Forms;
 
     using DotNetScaffolder.Components.Common.Contract;
+    using DotNetScaffolder.Mapping.MetaData.Domain;
 
     #endregion
 
@@ -48,6 +49,8 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ApplicationServ
         ///     Gets or sets the data type.
         /// </summary>
         public ApplicationServiceDataType DataType { get; set; }
+
+        public DomainDefinition DataSource { get; set; }
 
         #endregion
 

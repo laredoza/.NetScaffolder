@@ -92,6 +92,8 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Tables
         /// </returns>
         List<Hierarchy> ReturnHierarchyFromList(List<Table> tables, bool includeFields, bool includeRelationships);
 
+        List<Hierarchy> ReturnSelectedHierarchyFromList(List<Table> sourceTables, List<Table> selectedTables, bool includeFields, bool includeRelationships);
+
         /// <summary>
         /// Return Tables
         /// </summary>
@@ -100,7 +102,7 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Tables
         /// <returns>
         /// The <see cref="List"/>.
         /// </returns>
-        List<Table> ReturnTables(TreeNode parentNode);
+        List<Table> ReturnTables(TreeNode parentNode, bool all = false);
 
         #endregion
     }

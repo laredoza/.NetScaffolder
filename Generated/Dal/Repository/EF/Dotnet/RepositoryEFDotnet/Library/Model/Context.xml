@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfContextData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ContextData>
+    <ConstructionOptions />
+    <ContextName>LocalContext</ContextName>
+    <OutputPath />
+    <CreateDb>false</CreateDb>
+    <Enabled>true</Enabled>
+    <GenerateInterface>false</GenerateInterface>
+    <Id>88dbf624-7f95-4d21-b207-2ec4c4aaf56f</Id>
+    <InheritFrom />
+    <LoggingEnabled>false</LoggingEnabled>
+    <Namespace>Context</Namespace>
+    <OutputFolder>Context</OutputFolder>
+    <Models>
+      <Table Description="" SchemaName="dbo" TableName="BankAccount">
+        <Columns />
+        <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
+        <RelationShips />
+      </Table>
+      <Table Description="" SchemaName="dbo" TableName="BankTransfers">
+        <Columns />
+        <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
+        <RelationShips />
+      </Table>
+    </Models>
+  </ContextData>
+</ArrayOfContextData>

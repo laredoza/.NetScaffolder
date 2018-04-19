@@ -8,7 +8,7 @@
       <DriverTypeId>2bc1b0c4-1e41-9146-82cf-599181ce4410</DriverTypeId>
       <Id>88e23444-4d85-4fd7-a1a7-e6d68e896281</Id>
       <Name>Domain1</Name>
-      <NamingConventionId>1bc1b0c4-1e41-9146-82cf-599181ce4410</NamingConventionId>
+      <NamingConventionId>1bc1b0c4-1e41-9146-82cf-599181ce4411</NamingConventionId>
       <Package>
         <Children />
         <Enabled>true</Enabled>
@@ -16,6 +16,7 @@
         <Id>be0b9c03-3970-4792-b440-f7512150e295</Id>
         <Name>Entity Framework 6 (Repository)</Name>
         <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
+        <Selected>false</Selected>
         <Templates>
           <Template>
             <Children />
@@ -24,6 +25,7 @@
             <Id>1bc1b0c4-1e41-9146-82cf-599181ce4430</Id>
             <Name>Entity Framework Context (v6)</Name>
             <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
+            <Selected>false</Selected>
             <ConfigLocation>Data</ConfigLocation>
             <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4430</DataType>
             <DefaultSettings />
@@ -39,6 +41,7 @@
             <Id>1bc1b0c4-1e41-9146-82cf-599181ce4440</Id>
             <Name>Entity Framework Entity (v6)</Name>
             <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
+            <Selected>false</Selected>
             <ConfigLocation>Data</ConfigLocation>
             <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4440</DataType>
             <DefaultSettings />
@@ -54,6 +57,7 @@
             <Id>3ab0816d-5ad5-4990-a655-a14a743e416c</Id>
             <Name>Entity Framework Repository</Name>
             <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
+            <Selected>false</Selected>
             <ConfigLocation>Data</ConfigLocation>
             <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4450</DataType>
             <DefaultSettings />
@@ -69,6 +73,7 @@
             <Id>a832889d-7f9a-42fa-ad6b-38d184828dba</Id>
             <Name>Default Table</Name>
             <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
+            <Selected>false</Selected>
             <ConfigLocation>Data</ConfigLocation>
             <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4490</DataType>
             <DefaultSettings />
@@ -84,6 +89,7 @@
             <Id>f41c4006-d9d1-499b-80be-bbbbc4cb0001</Id>
             <Name>Entity Framework Application Service (v6)</Name>
             <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
+            <Selected>false</Selected>
             <ConfigLocation>Data</ConfigLocation>
             <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4420</DataType>
             <DefaultSettings />

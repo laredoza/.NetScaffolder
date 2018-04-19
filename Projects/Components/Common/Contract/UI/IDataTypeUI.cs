@@ -6,6 +6,7 @@
 
 namespace DotNetScaffolder.Components.Common.Contract
 {
+    using DotNetScaffolder.Mapping.MetaData.Domain;
     #region Usings
 
     using System;
@@ -45,6 +46,8 @@ namespace DotNetScaffolder.Components.Common.Contract
         /// The parameters.
         /// </param>
         void SaveConfig(T parameters);
+
+        DomainDefinition DataSource { get; set; }
 
         #endregion
     }

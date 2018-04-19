@@ -72,6 +72,8 @@ namespace FormControls.TreeView
         /// </summary>
         public Guid ParentId { get; set; }
 
+        public bool Selected { get; set; }
+
         #endregion
     }
 }

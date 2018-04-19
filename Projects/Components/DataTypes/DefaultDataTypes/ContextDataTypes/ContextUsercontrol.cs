@@ -8,12 +8,14 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
 {
     #region Usings
 
+    using DotNetScaffolder.Components.Common.Contract;
+    using DotNetScaffolder.Mapping.ApplicationServices.Tables;
+    using DotNetScaffolder.Mapping.MetaData.Domain;
+    using FormControls.TreeView;
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Windows.Forms;
-
-    using DotNetScaffolder.Components.Common.Contract;
 
     #endregion
 
@@ -32,7 +34,6 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
         public ContextUserControl()
         {
             InitializeComponent();
-            SetModelDataSource();
         }
 
         #endregion
@@ -57,6 +58,47 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
         ///     Gets or sets the selected context.
         /// </summary>
         public ContextData SelectedContext { get; set; }
+
+        private DomainDefinition dataSource;
+        /// <summary>
+        ///     Gets or sets the data source.
+        /// </summary>
+        public DomainDefinition DataSource
+        {
+            get
+            {
+                return this.dataSource;
+            }
+
+            set
+            {
+                this.dataSource = value;
+                this.UpdateDataSource();
+            }
+        }
+
+        private void UpdateDataSource()
+        {
+            if (this.DataSource != null)
+            {
+                ITableHierarchyService applicationService = new TempateHierarchyService();
+                List<Hierarchy> hierarchy = applicationService.ReturnSelectedHierarchyFromList(
+                    this.DataSource.Tables,
+                    this.SelectedContext?.Models ?? null,
+                    false,
+                    false);
+
+                this.AddNodes("Models", this.TreeviewContextModels, hierarchy, applicationService);
+            }
+        }
+
+        public void AddNodes(string parentName, TreeView treeView, List<Hierarchy> hierarchy, ITableHierarchyService applicationService)
+        {
+            treeView.Nodes.Clear();
+            treeView.Nodes.Add(new TreeNode { Text = parentName });
+            treeView.Nodes[0].Nodes.AddRange(applicationService.ConvertHierarchyToNodes(hierarchy).ToArray());
+            treeView.Nodes[0].Expand();
+        }
 
         #endregion
 
@@ -90,7 +132,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
                 btnNew.Tag = "Delete";
             }
 
-            chkListModels.Visible = SelectedContext != null;
+            TreeviewContextModels.Visible = SelectedContext != null;
 
             if (SelectedContext == null)
             {
@@ -100,12 +142,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
             UpdateUI();
         }
 
-        private void SetModelDataSource()
-        {
-            chkListModels.Items.Add("ITIS_MET.META_SEC_USERS");
-            chkListModels.Items.Add("ITIS_MET.SEC_PERMISSIONS");
-            chkListModels.Items.Add("ITIS_MET.SEC_ROLE");
-        }
+        
 
         /// <summary>
         /// The save config.
@@ -146,7 +183,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
                 UpdateContext();
                 DataType.Contexts.Add(SelectedContext);
             }
-            else if(btn.Tag.ToString() == "Delete")
+            else if (btn.Tag.ToString() == "Delete")
             {
                 var context = DataType.Contexts.FirstOrDefault(o => o.Id == SelectedContext.Id);
 
@@ -172,9 +209,9 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
         private void SetupDefault()
         {
             SelectedContext = new ContextData
-                                  {
-                                      Id = Guid.NewGuid()
-                                  };
+            {
+                Id = Guid.NewGuid()
+            };
         }
 
         /// <summary>
@@ -197,9 +234,29 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
 
             SelectedContext.Models.Clear();
 
-            for (int i = 0; i < chkListModels.CheckedItems.Count; i++)
+            if (TreeviewContextModels.Nodes.Count > 0)
             {
-                //SelectedContext.Models.Add(chkListModels.CheckedItems[i].ToString());
+                ITableHierarchyService applicationService = new TempateHierarchyService();
+
+                var tables = applicationService.ReturnTables(this.TreeviewContextModels.Nodes[0]);
+                if (tables != null && tables.Any())
+                {
+                    // Only save table name and schema not details
+                    tables.ForEach(o =>
+                    {
+                        if(o.RelationShips != null)
+                        {
+                            o.RelationShips.Clear();
+                        }
+
+                        if (o.Columns != null)
+                        {
+                            o.Columns.Clear();
+                        }
+                    });
+
+                    SelectedContext.Models.AddRange(tables);
+                }
             }
         }
 
@@ -221,23 +278,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
             ConstructionOptions.SelectedText = SelectedContext.ConstructionOptions;
             OutputPath.Text = SelectedContext.OutputPath;
 
-            SetCheckedModels();
-        }
-
-        private void SetCheckedModels()
-        {
-            if (SelectedContext == null) return;
-
-            var list = new object[chkListModels.Items.Count];
-            chkListModels.Items.CopyTo(list, 0);
-
-            for(int index = 0; index < list.Length; index++)
-            {
-                //if (SelectedContext.Models.Contains(list[index].ToString()))
-                //{
-                //    chkListModels.SetItemChecked(index, true);
-                //}
-            }
+            UpdateDataSource();
         }
 
         #endregion

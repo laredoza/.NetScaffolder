@@ -47,7 +47,7 @@
             this.btnNew = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.OutputPath = new System.Windows.Forms.TextBox();
-            this.chkListModels = new System.Windows.Forms.CheckedListBox();
+            this.TreeviewContextModels = new FormControls.TreeView.MultiSelectTreeView.TreeView();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -243,23 +243,21 @@
             this.OutputPath.Size = new System.Drawing.Size(304, 20);
             this.OutputPath.TabIndex = 57;
             // 
-            // chkListModels
+            // TreeviewContextModels
             // 
-            this.chkListModels.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.chkListModels.CheckOnClick = true;
-            this.chkListModels.FormattingEnabled = true;
-            this.chkListModels.Location = new System.Drawing.Point(3, 188);
-            this.chkListModels.Name = "chkListModels";
-            this.chkListModels.Size = new System.Drawing.Size(504, 304);
-            this.chkListModels.TabIndex = 59;
-            this.chkListModels.TabStop = false;
+            this.TreeviewContextModels.CheckBoxes = true;
+            this.TreeviewContextModels.Location = new System.Drawing.Point(3, 189);
+            this.TreeviewContextModels.Name = "TreeviewContextModels";
+            this.TreeviewContextModels.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            this.TreeviewContextModels.SelectionMode = FormControls.TreeView.MultiSelectTreeView.TreeViewSelectionMode.SingleSelect;
+            this.TreeviewContextModels.Size = new System.Drawing.Size(504, 312);
+            this.TreeviewContextModels.TabIndex = 58;
             // 
             // ContextUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.chkListModels);
+            this.Controls.Add(this.TreeviewContextModels);
             this.Controls.Add(this.groupBox1);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "ContextUserControl";
@@ -291,6 +289,6 @@
         private System.Windows.Forms.TextBox OutputPath;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnBrowse;
-        private System.Windows.Forms.CheckedListBox chkListModels;
+        private FormControls.TreeView.MultiSelectTreeView.TreeView TreeviewContextModels;
     }
 }
