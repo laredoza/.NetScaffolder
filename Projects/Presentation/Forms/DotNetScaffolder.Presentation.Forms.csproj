@@ -160,7 +160,7 @@
       <Name>DotNetScaffolder.Mapping.ApplicationServices</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Mapping\MetaData\DotNetScaffolder.Mapping.MetaData.csproj">
-      <Project>{3f206474-14c2-4586-b57a-4edc76795161}</Project>
+      <Project>{3F206474-14C2-4586-B57A-4EDC76795161}</Project>
       <Name>DotNetScaffolder.Mapping.MetaData</Name>
     </ProjectReference>
     <ProjectReference Include="..\Forms.Controls\DotNetScaffolder.Presentation.Forms.Controls.csproj">
