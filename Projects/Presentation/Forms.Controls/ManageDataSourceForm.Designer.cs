@@ -74,7 +74,7 @@
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.MaximizeBox = false;
             this.Name = "ManageDataSourceForm";
-            this.Text = "Update Data Source";
+            this.Text = "Update Datasource";
             this.ResumeLayout(false);
 
         }
