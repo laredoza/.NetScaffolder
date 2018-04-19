@@ -42,7 +42,7 @@
             this.PanelConfig.Location = new System.Drawing.Point(302, 2);
             this.PanelConfig.Margin = new System.Windows.Forms.Padding(2);
             this.PanelConfig.Name = "PanelConfig";
-            this.PanelConfig.Size = new System.Drawing.Size(785, 513);
+            this.PanelConfig.Size = new System.Drawing.Size(767, 513);
             this.PanelConfig.TabIndex = 7;
             // 
             // tableLayoutPanel1
@@ -57,7 +57,7 @@
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 458F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1089, 517);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(735, 517);
             this.tableLayoutPanel1.TabIndex = 5;
             // 
             // DomainTreeView
@@ -76,7 +76,7 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "ModelFormUserControl";
-            this.Size = new System.Drawing.Size(1089, 517);
+            this.Size = new System.Drawing.Size(735, 517);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
