@@ -35,7 +35,7 @@
             // 
             // BtnSave
             // 
-            this.BtnSave.Location = new System.Drawing.Point(567, 192);
+            this.BtnSave.Location = new System.Drawing.Point(567, 169);
             this.BtnSave.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.BtnSave.Name = "BtnSave";
             this.BtnSave.Size = new System.Drawing.Size(112, 35);
@@ -45,7 +45,7 @@
             // 
             // panel1
             // 
-            this.panel1.Location = new System.Drawing.Point(24, 18);
+            this.panel1.Location = new System.Drawing.Point(1, 5);
             this.panel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(678, 154);
@@ -53,7 +53,7 @@
             // 
             // BtnTest
             // 
-            this.BtnTest.Location = new System.Drawing.Point(447, 192);
+            this.BtnTest.Location = new System.Drawing.Point(447, 169);
             this.BtnTest.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.BtnTest.Name = "BtnTest";
             this.BtnTest.Size = new System.Drawing.Size(112, 35);
@@ -66,7 +66,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(747, 246);
+            this.ClientSize = new System.Drawing.Size(747, 220);
             this.Controls.Add(this.BtnSave);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.BtnTest);

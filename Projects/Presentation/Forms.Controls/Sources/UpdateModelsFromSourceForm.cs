@@ -90,6 +90,13 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Sources
         /// </summary>
         public string SavePath { get; set; }
 
+        public bool Valid
+        {
+            get
+            {
+                return this.updateModelsFromSourceUserControl1.Valid;
+            }
+        }
         #endregion
 
         #region Other Methods
