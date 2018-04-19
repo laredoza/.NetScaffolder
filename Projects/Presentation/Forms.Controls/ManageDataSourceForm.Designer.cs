@@ -45,7 +45,7 @@
             // 
             // panel1
             // 
-            this.panel1.Location = new System.Drawing.Point(1, 5);
+            this.panel1.Location = new System.Drawing.Point(13, 5);
             this.panel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(678, 154);
@@ -66,11 +66,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(747, 220);
+            this.ClientSize = new System.Drawing.Size(706, 220);
             this.Controls.Add(this.BtnSave);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.BtnTest);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.MaximizeBox = false;
             this.Name = "ManageDataSourceForm";
             this.Text = "Update Data Source";
             this.ResumeLayout(false);
