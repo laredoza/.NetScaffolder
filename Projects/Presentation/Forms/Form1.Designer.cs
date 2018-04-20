@@ -57,6 +57,7 @@
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.TemplateManagementUserControl1 = new DotNetScaffolder.Presentation.Forms.Controls.TemplateManagementUserControl();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.label3 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -179,9 +180,10 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(11, 538);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(117, 13);
+            this.label1.Size = new System.Drawing.Size(419, 13);
             this.label1.TabIndex = 14;
-            this.label1.Text = "Manage Project Details";
+            this.label1.Text = "Manage project details.These details are used to render layers / files for the da" +
+    "ta model.";
             // 
             // groupBox1
             // 
@@ -276,11 +278,12 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(18, 525);
+            this.label2.Location = new System.Drawing.Point(11, 538);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(97, 13);
+            this.label2.Size = new System.Drawing.Size(486, 13);
             this.label2.TabIndex = 15;
-            this.label2.Text = "Manage Packages";
+            this.label2.Text = "Manage Packages. Packages consist of templates. Each template will be used to ren" +
+    "der files / layers.";
             // 
             // packageUserControl1
             // 
@@ -294,6 +297,7 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.label3);
             this.tabPage3.Controls.Add(this.TemplateManagementUserControl1);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
@@ -306,7 +310,7 @@
             // TemplateManagementUserControl1
             // 
             this.TemplateManagementUserControl1.DataSource = null;
-            this.TemplateManagementUserControl1.Location = new System.Drawing.Point(11, 7);
+            this.TemplateManagementUserControl1.Location = new System.Drawing.Point(9, 8);
             this.TemplateManagementUserControl1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.TemplateManagementUserControl1.Name = "TemplateManagementUserControl1";
             this.TemplateManagementUserControl1.Size = new System.Drawing.Size(938, 506);
@@ -316,6 +320,16 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             this.openFileDialog1.Filter = "Model files|*.mdl";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(11, 538);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(529, 13);
+            this.label3.TabIndex = 16;
+            this.label3.Text = "Manage templates. A template is used specify a T4 script. This script will then b" +
+    "e used to generate a file / layer.";
             // 
             // Form1
             // 
@@ -345,6 +359,7 @@
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -376,6 +391,7 @@
         private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
         //public ManageCollectionsTreeViewUserControl manageCollectionsTreeViewUserControl1;
     }
 }
