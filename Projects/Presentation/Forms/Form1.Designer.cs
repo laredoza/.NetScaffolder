@@ -44,14 +44,16 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.ProjectDetailsUserControl1 = new DotNetScaffolder.Presentation.Forms.Controls.Project.ProjectDetailsUserControl();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.ProjectDomainUserControl1 = new DotNetScaffolder.Presentation.Forms.Controls.Project.ProjectDomainUserControl();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.projectDomainDetailsUserControl1 = new ProjectDomainDetailsUserControl();
+            this.projectDomainDetailsUserControl1 = new DotNetScaffolder.Presentation.Forms.Controls.Project.ProjectDomainDetailsUserControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.packageUserControl1 = new PackageUserControl();
+            this.label2 = new System.Windows.Forms.Label();
+            this.packageUserControl1 = new DotNetScaffolder.Presentation.Forms.Controls.Packages.PackageUserControl();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.TemplateManagementUserControl1 = new DotNetScaffolder.Presentation.Forms.Controls.TemplateManagementUserControl();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
@@ -90,7 +92,7 @@
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.openToolStripMenuItem.Text = "&Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
@@ -161,6 +163,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.label1);
             this.tabPage1.Controls.Add(this.groupBox1);
             this.tabPage1.Controls.Add(this.groupBox2);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
@@ -171,6 +174,15 @@
             this.tabPage1.Text = "Project";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(11, 538);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(117, 13);
+            this.label1.TabIndex = 14;
+            this.label1.Text = "Manage Project Details";
+            // 
             // groupBox1
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -178,7 +190,7 @@
             this.groupBox1.Controls.Add(this.ProjectDetailsUserControl1);
             this.groupBox1.Location = new System.Drawing.Point(8, 7);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(388, 578);
+            this.groupBox1.Size = new System.Drawing.Size(388, 515);
             this.groupBox1.TabIndex = 13;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Project Details";
@@ -205,7 +217,7 @@
             this.groupBox2.Controls.Add(this.groupBox3);
             this.groupBox2.Location = new System.Drawing.Point(400, 7);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(597, 578);
+            this.groupBox2.Size = new System.Drawing.Size(597, 515);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Project Domains";
@@ -251,6 +263,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.label2);
             this.tabPage2.Controls.Add(this.packageUserControl1);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
@@ -260,13 +273,22 @@
             this.tabPage2.Text = "Packages";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(18, 525);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(97, 13);
+            this.label2.TabIndex = 15;
+            this.label2.Text = "Manage Packages";
+            // 
             // packageUserControl1
             // 
             this.packageUserControl1.DataSource = null;
             this.packageUserControl1.Location = new System.Drawing.Point(6, 6);
             this.packageUserControl1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.packageUserControl1.Name = "packageUserControl1";
-            this.packageUserControl1.Size = new System.Drawing.Size(975, 429);
+            this.packageUserControl1.Size = new System.Drawing.Size(975, 514);
             this.packageUserControl1.TabIndex = 0;
             this.packageUserControl1.Templates = ((System.Collections.Generic.List<DotNetScaffolder.Mapping.MetaData.Project.Packages.Template>)(resources.GetObject("packageUserControl1.Templates")));
             // 
@@ -287,7 +309,7 @@
             this.TemplateManagementUserControl1.Location = new System.Drawing.Point(11, 7);
             this.TemplateManagementUserControl1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.TemplateManagementUserControl1.Name = "TemplateManagementUserControl1";
-            this.TemplateManagementUserControl1.Size = new System.Drawing.Size(938, 414);
+            this.TemplateManagementUserControl1.Size = new System.Drawing.Size(938, 506);
             this.TemplateManagementUserControl1.TabIndex = 0;
             // 
             // openFileDialog1
@@ -304,11 +326,11 @@
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.menuStrip1);
+            this.MaximizeBox = false;
             this.MinimumSize = new System.Drawing.Size(20, 688);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Code Generator";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);
@@ -316,10 +338,12 @@
             this.panel2.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
             this.tabPage3.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -350,6 +374,8 @@
         private TemplateManagementUserControl TemplateManagementUserControl1;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
         //public ManageCollectionsTreeViewUserControl manageCollectionsTreeViewUserControl1;
     }
 }
