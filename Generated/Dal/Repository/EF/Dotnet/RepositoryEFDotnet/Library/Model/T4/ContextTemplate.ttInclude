@@ -1,5 +1,4 @@
-﻿<#@ template language="C#" hostspecific="true" debug="true" #>
-<#@ assembly name="System" #>
+﻿<#@ assembly name="System" #>
 <#@ assembly name="System.Configuration" #>
 <#@ assembly name="System.Globalization" #>
 <#@ assembly name="System.Xml" #>
@@ -24,8 +23,6 @@
 <#@ import namespace="DotNetScaffolder.Core.Common.Serializer" #>
 <#@ import namespace="DotNetScaffolder.Components.DataTypes.DefaultDataTypes" #>
 <#@ import namespace="Configuration" #>
-<#@ include file="T4Toolbox.tt" #>
-<#@ include file="BaseTemplate.ttinclude" #>
 <#+
 public class ContextTemplate : BaseTemplate 
 {
@@ -36,11 +33,11 @@ public class ContextTemplate : BaseTemplate
 	public override string TransformText()
 	{
 		Debugger.Break();
+		Header = new CopyrightHeader();
+		Header.Filename = ContextData.ContextName;
 #>
 
-// <copyright file="<#= ContextData.ContextName #>.g.cs" company="MIT">
-//  Copyright (c) <#= DateTime.Now.Year #> All Rights Reserved
-// </copyright>  
+<#= Header.TransformText() #>
 
 // *******************************************************************
 //	GENERATED CODE. DOT NOT MODIFY MANUALLY AS CHANGES CAN BE LOST!!!
@@ -59,7 +56,7 @@ namespace <#= BaseNamespace #>.<#= ContextData.OutputFolder #>.<#= ContextData.N
 		public virtual DbSet<<#= NamingConvention.ApplyNamingConvention(table.TableName) #>> <#=NamingConvention.ApplyNamingConvention(table.TableName) #>;
 		<#+ } #>
 
-		#endregion // EntitySets
+		#endregion
 	}
 }
 <#+

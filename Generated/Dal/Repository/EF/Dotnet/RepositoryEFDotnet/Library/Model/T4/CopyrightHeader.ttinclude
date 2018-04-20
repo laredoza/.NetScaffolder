@@ -1,6 +1,14 @@
-﻿
-// <copyright file="AccountContext.g.cs" company="MIT">
-//  Copyright (c) 2018 MIT
+﻿<#@ assembly name="System" #>
+<#@ import namespace="System" #>
+<#+
+public class CopyrightHeader : Template
+{
+	public string Filename { get; set; } = string.Empty;
+
+	public override string TransformText()
+	{
+#>// <copyright file="<#= Filename #>.g.cs" company="MIT">
+//  Copyright (c) <#= DateTime.Now.Year #> MIT
 // </copyright>  
 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
@@ -11,24 +19,8 @@
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER 
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS 
 // IN THE SOFTWARE.
-
-
-// *******************************************************************
-//	GENERATED CODE. DOT NOT MODIFY MANUALLY AS CHANGES CAN BE LOST!!!
-//	USE A PARTIAL CLASS INSTEAD
-// *******************************************************************
-
-using System.Data.Entity;
-
-namespace Banking.Models.Context.Accounts
-{
-	public partial class AccountContext : BaseContext
-	{
-		#region Db Sets
-		
-				public virtual DbSet<BankAccount> BankAccount;
-				public virtual DbSet<BankTransfers> BankTransfers;
-		
-		#endregion
+<#+
+        return this.GenerationEnvironment.ToString();
 	}
 }
+#>

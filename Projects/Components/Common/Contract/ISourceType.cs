@@ -63,7 +63,9 @@ namespace DotNetScaffolder.Components.Common.Contract
         /// <returns>
         /// The <see cref="DomainDataType"/>.
         /// </returns>
-        DomainDataType MapDatabaseTypeToCSharp(string databaseType);
+        DomainDataType MapDatabaseType(string databaseType);
+
+        string MapDomainDataTypeToOutputType(DomainDataType type);
 
         /// <summary>
         /// Save parameters

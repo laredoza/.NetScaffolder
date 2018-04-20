@@ -106,14 +106,14 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
             Assert.IsTrue(column.IsPrimaryKey, "The BankAccountId should be a primary key in the Order table.");
             Assert.AreEqual(
                 DomainDataType.Int32,
-                column.CSharpDataType,
+                column.DomainDataType,
                 "The BankAccountId should be a int32 in the BankAccount table.");
 
             column = bankAccountTable.Columns.FirstOrDefault(c => c.ColumnName == "BankAccountNumber");
             Assert.IsFalse(column.IsPrimaryKey, "The BankAccountNumber is not a primary key in the BankAccount table.");
             Assert.AreEqual(
                 DomainDataType.String,
-                column.CSharpDataType,
+                column.DomainDataType,
                 "The BankAccountNumber should be a string in the BankAccount table.");
             Assert.AreEqual(10, column.Length, "The ShippingName should have a length of 10 in the BankAccount table.");
 
@@ -121,7 +121,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
             Assert.IsFalse(column.IsPrimaryKey, "The Balance is not a primary key in the BankAccount table.");
             Assert.AreEqual(
                 DomainDataType.Decimal,
-                column.CSharpDataType,
+                column.DomainDataType,
                 "The Balance should be a decimal in the BankAccount table.");
             Assert.AreEqual(
                 19,
@@ -133,14 +133,14 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
             Assert.IsFalse(column.IsPrimaryKey, "The CustomerId should be a primary key in the Order table.");
             Assert.AreEqual(
                 DomainDataType.Int32,
-                column.CSharpDataType,
+                column.DomainDataType,
                 "The CustomerId should be a int32 in the BankAccount table.");
 
             column = bankAccountTable.Columns.FirstOrDefault(c => c.ColumnName == "Locked");
             Assert.IsFalse(column.IsPrimaryKey, "The Locked is not a primary key in the BankAccount table.");
             Assert.AreEqual(
                 DomainDataType.Boolean,
-                column.CSharpDataType,
+                column.DomainDataType,
                 "The Locked field should be a boolean in the BankAccount table.");
         }
 
@@ -220,7 +220,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                 "The BankTransferId should be a primary key in the BankTransfers table.");
             Assert.AreEqual(
                 DomainDataType.Int32,
-                column.CSharpDataType,
+                column.DomainDataType,
                 "The BankTransferId should be a int32 in the BankTransfers table.");
 
             column = bankTransfersTable.Columns.FirstOrDefault(c => c.ColumnName == "FromBankAccountId");
@@ -229,7 +229,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                 "The FromBankAccountId should not be a primary key in the BankTransfers table.");
             Assert.AreEqual(
                 DomainDataType.Int32,
-                column.CSharpDataType,
+                column.DomainDataType,
                 "The FromBankAccountId should be a int32 in the BankTransfers table.");
 
             column = bankTransfersTable.Columns.FirstOrDefault(c => c.ColumnName == "ToBankAccountId");
@@ -238,14 +238,14 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                 "The ToBankAccountId should not be a primary key in the BankTransfers table.");
             Assert.AreEqual(
                 DomainDataType.Int32,
-                column.CSharpDataType,
+                column.DomainDataType,
                 "The ToBankAccountId should be a int32 in the BankTransfers table.");
 
             column = bankTransfersTable.Columns.FirstOrDefault(c => c.ColumnName == "Amount");
             Assert.IsFalse(column.IsPrimaryKey, "The Amount is not a primary key in the BankTransfers table.");
             Assert.AreEqual(
                 DomainDataType.Decimal,
-                column.CSharpDataType,
+                column.DomainDataType,
                 "The Amount should be a decimal in the BankTransfers table.");
             Assert.AreEqual(
                 18,
@@ -257,7 +257,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
             Assert.IsFalse(column.IsPrimaryKey, "The TransferDate is not a primary key in the BankTransfers table.");
             Assert.AreEqual(
                 DomainDataType.DateTime,
-                column.CSharpDataType,
+                column.DomainDataType,
                 "The Locked field should be a DateTime in the BankTransfers table.");
         }
 
@@ -305,14 +305,14 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
             Assert.IsTrue(column.IsPrimaryKey, "The CountryId should be a primary key in the Country table.");
             Assert.AreEqual(
                 DomainDataType.Int32,
-                column.CSharpDataType,
+                column.DomainDataType,
                 "The CountryId should be a int32 in the Country table.");
 
             column = countryTable.Columns.FirstOrDefault(c => c.ColumnName == "CountryName");
             Assert.IsFalse(column.IsPrimaryKey, "The CountryName is not a primary key in the Country table.");
             Assert.AreEqual(
                 DomainDataType.String,
-                column.CSharpDataType,
+                column.DomainDataType,
                 "The CountryName should be a string in the Country table.");
             Assert.AreEqual(100, column.Length, "The CountryName should have a length of 100 in the Country table.");
         }
@@ -387,14 +387,14 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
             Assert.IsTrue(column.IsPrimaryKey, "The CustomerId should be a primary key in the CustomerTable table.");
             Assert.AreEqual(
                 DomainDataType.Int32,
-                column.CSharpDataType,
+                column.DomainDataType,
                 "The CustomerId should be a int32 in the Customer table.");
 
             column = customerTable.Columns.FirstOrDefault(c => c.ColumnName == "CustomerCode");
             Assert.IsFalse(column.IsPrimaryKey, "The CustomerCode is not a primary key in the Customer table.");
             Assert.AreEqual(
                 DomainDataType.String,
-                column.CSharpDataType,
+                column.DomainDataType,
                 "The LicenseCode should be a string in the Customer table.");
             Assert.AreEqual(5, column.Length, "The CustomerCode should have a length of 5 in the Customer table.");
 
@@ -402,7 +402,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
             Assert.IsFalse(column.IsPrimaryKey, "The CompanyName is not a primary key in the Customer table.");
             Assert.AreEqual(
                 DomainDataType.String,
-                column.CSharpDataType,
+                column.DomainDataType,
                 "The CompanyName should be a string in the Customer table.");
             Assert.AreEqual(50, column.Length, "The CompanyName should have a length of 50 in the Customer table.");
 
@@ -410,7 +410,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
             Assert.IsFalse(column.IsPrimaryKey, "The ContactName is not a primary key in the Customer table.");
             Assert.AreEqual(
                 DomainDataType.String,
-                column.CSharpDataType,
+                column.DomainDataType,
                 "The ContactName should be a string in the Customer table.");
             Assert.AreEqual(50, column.Length, "The ContactName should have a length of 50 in the Customer table.");
 
@@ -418,7 +418,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
             Assert.IsFalse(column.IsPrimaryKey, "The ContactTitle is not a primary key in the Customer table.");
             Assert.AreEqual(
                 DomainDataType.String,
-                column.CSharpDataType,
+                column.DomainDataType,
                 "The ContactTitle should be a string in the Customer table.");
             Assert.AreEqual(50, column.Length, "The ContactTitle should have a length of 50 in the Customer table.");
 
@@ -426,7 +426,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
             Assert.IsFalse(column.IsPrimaryKey, "The Address is not a primary key in the Customer table.");
             Assert.AreEqual(
                 DomainDataType.String,
-                column.CSharpDataType,
+                column.DomainDataType,
                 "The Address should be a string in the Customer table.");
             Assert.AreEqual(50, column.Length, "The Address should have a length of 50 in the Customer table.");
 
@@ -434,7 +434,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
             Assert.IsFalse(column.IsPrimaryKey, "The City is not a primary key in the Customer table.");
             Assert.AreEqual(
                 DomainDataType.String,
-                column.CSharpDataType,
+                column.DomainDataType,
                 "The City should be a string in the Customer table.");
             Assert.AreEqual(20, column.Length, "The City should have a length of 20 in the Customer table.");
 
@@ -442,7 +442,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
             Assert.IsFalse(column.IsPrimaryKey, "The PostalCode is not a primary key in the Customer table.");
             Assert.AreEqual(
                 DomainDataType.String,
-                column.CSharpDataType,
+                column.DomainDataType,
                 "The PostalCode should be a string in the Customer table.");
             Assert.AreEqual(10, column.Length, "The PostalCode should have a length of 10 in the Customer table.");
 
@@ -450,7 +450,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
             Assert.IsFalse(column.IsPrimaryKey, "The Telephone is not a primary key in the Customer table.");
             Assert.AreEqual(
                 DomainDataType.String,
-                column.CSharpDataType,
+                column.DomainDataType,
                 "The Telephone should be a string in the Customer table.");
             Assert.AreEqual(50, column.Length, "The Telephone should have a length of 50 in the Customer table.");
 
@@ -458,7 +458,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
             Assert.IsFalse(column.IsPrimaryKey, "The Fax is not a primary key in the Customer table.");
             Assert.AreEqual(
                 DomainDataType.String,
-                column.CSharpDataType,
+                column.DomainDataType,
                 "The Fax should be a string in the Customer table.");
             Assert.AreEqual(50, column.Length, "The Fax should have a length of 50 in the Customer table.");
 
@@ -466,7 +466,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
             Assert.IsFalse(column.IsPrimaryKey, "The CountryId should be a primary key in the CustomerTable table.");
             Assert.AreEqual(
                 DomainDataType.Int32,
-                column.CSharpDataType,
+                column.DomainDataType,
                 "The CountryId should be a int32 in the Customer table.");
 
             // Todo: Change to correct type
@@ -474,14 +474,14 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
             Assert.IsFalse(column.IsPrimaryKey, "The Photo should be a primary key in the Customer table.");
             Assert.AreEqual(
                 DomainDataType.String,
-                column.CSharpDataType,
+                column.DomainDataType,
                 "The Photo should be a int32 in the Customer table.");
 
             column = customerTable.Columns.FirstOrDefault(c => c.ColumnName == "IsEnabled");
             Assert.IsFalse(column.IsPrimaryKey, "The IsEnabled should be a primary key in the CustomerTable table.");
             Assert.AreEqual(
                 DomainDataType.Boolean,
-                column.CSharpDataType,
+                column.DomainDataType,
                 "The IsEnabled should be a boolean in the Customer table.");
         }
 
@@ -590,35 +590,35 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
             Assert.IsTrue(column.IsPrimaryKey, "The OrderId should be a primary key in the Order table.");
             Assert.AreEqual(
                 DomainDataType.Int32,
-                column.CSharpDataType,
+                column.DomainDataType,
                 "The OrderId should be a int32 in the Order table.");
 
             column = orderTable.Columns.FirstOrDefault(c => c.ColumnName == "CustomerId");
             Assert.IsFalse(column.IsPrimaryKey, "The CustomerId is not a primary key in the Order table.");
             Assert.AreEqual(
                 DomainDataType.Int32,
-                column.CSharpDataType,
+                column.DomainDataType,
                 "The CustomerId should be a int32 in the Order table.");
 
             column = orderTable.Columns.FirstOrDefault(c => c.ColumnName == "OrderDate");
             Assert.IsFalse(column.IsPrimaryKey, "The OrderDate is not a primary key in the Order table.");
             Assert.AreEqual(
                 DomainDataType.DateTime,
-                column.CSharpDataType,
+                column.DomainDataType,
                 "The OrderDate should be a Date in the Order table.");
 
             column = orderTable.Columns.FirstOrDefault(c => c.ColumnName == "DeliveryDate");
             Assert.IsFalse(column.IsPrimaryKey, "The DeliveryDate is not a primary key in the Order table.");
             Assert.AreEqual(
                 DomainDataType.DateTime,
-                column.CSharpDataType,
+                column.DomainDataType,
                 "The DeliveryDate should be a Date in the Order table.");
 
             column = orderTable.Columns.FirstOrDefault(c => c.ColumnName == "ShippingName");
             Assert.IsFalse(column.IsPrimaryKey, "The ShippingName is not a primary key in the Order table.");
             Assert.AreEqual(
                 DomainDataType.String,
-                column.CSharpDataType,
+                column.DomainDataType,
                 "The ShippingName should be a string in the Order table.");
             Assert.AreEqual(50, column.Length, "The ShippingName should have a length of 50 in the Order table.");
 
@@ -626,7 +626,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
             Assert.IsFalse(column.IsPrimaryKey, "The ShippingAddress is not a primary key in the Order table.");
             Assert.AreEqual(
                 DomainDataType.String,
-                column.CSharpDataType,
+                column.DomainDataType,
                 "The ShippingAddress should be a string in the Order table.");
             Assert.AreEqual(50, column.Length, "The ShippingAddress should have a length of 50 in the Order table.");
 
@@ -634,7 +634,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
             Assert.IsFalse(column.IsPrimaryKey, "The ShippingCity is not a primary key in the Order table.");
             Assert.AreEqual(
                 DomainDataType.String,
-                column.CSharpDataType,
+                column.DomainDataType,
                 "The ShippingCity should be a string in the Order table.");
             Assert.AreEqual(50, column.Length, "The ShippingCity should have a length of 50 in the Order table.");
 
@@ -642,7 +642,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
             Assert.IsFalse(column.IsPrimaryKey, "The ShippingZip is not a primary key in the Order table.");
             Assert.AreEqual(
                 DomainDataType.String,
-                column.CSharpDataType,
+                column.DomainDataType,
                 "The ShippingZip should be a string in the Order table.");
             Assert.AreEqual(50, column.Length, "The ShippingZip should have a length of 50 in the Order table.");
         }
@@ -697,14 +697,14 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
             Assert.IsTrue(column.IsPrimaryKey, "The ProductId should be a primary key in the Software table.");
             Assert.AreEqual(
                 DomainDataType.Int32,
-                column.CSharpDataType,
+                column.DomainDataType,
                 "The ProductId should be a int32 in the Software table.");
 
             column = softwareTable.Columns.FirstOrDefault(c => c.ColumnName == "LicenseCode");
             Assert.IsFalse(column.IsPrimaryKey, "The LicenseCode is not a primary key in the Software table.");
             Assert.AreEqual(
                 DomainDataType.String,
-                column.CSharpDataType,
+                column.DomainDataType,
                 "The LicenseCode should be a string in the Software table.");
             Assert.AreEqual(200, column.Length, "The LicenseCode should be a string in the Software table.");
         }
@@ -725,14 +725,14 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
             Assert.IsTrue(column.IsPrimaryKey, "The ProductId should be a primary key in the Product table.");
             Assert.AreEqual(
                 DomainDataType.Int32,
-                column.CSharpDataType,
+                column.DomainDataType,
                 "The ProductId should be a int32 in the Product table.");
 
             column = bookTable.Columns.FirstOrDefault(c => c.ColumnName == "Publisher");
             Assert.IsFalse(column.IsPrimaryKey, "The Publisher is not a primary key in the Product table.");
             Assert.AreEqual(
                 DomainDataType.String,
-                column.CSharpDataType,
+                column.DomainDataType,
                 "The Publisher should be a string in the Product table.");
             Assert.AreEqual(200, column.Length, "The Publisher should have a length of 100 in the Product table.");
         }
@@ -787,21 +787,21 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
             Assert.IsTrue(column.IsPrimaryKey, "The OrderDetailsId should be a primary key in the OrderDetails table.");
             Assert.AreEqual(
                 DomainDataType.Int32,
-                column.CSharpDataType,
+                column.DomainDataType,
                 "The OrderDetailsId should be a int32 in the Product table.");
 
             column = orderDetailsTable.Columns.FirstOrDefault(c => c.ColumnName == "ProductId");
             Assert.IsFalse(column.IsPrimaryKey, "The ProductId is not a primary key in the OrderDetails table.");
             Assert.AreEqual(
                 DomainDataType.Int32,
-                column.CSharpDataType,
+                column.DomainDataType,
                 "The ProductId should be a string in the OrderDetails table.");
 
             column = orderDetailsTable.Columns.FirstOrDefault(c => c.ColumnName == "UnitPrice");
             Assert.IsFalse(column.IsPrimaryKey, "The UnitPrice is not a primary key in the OrderDetails table.");
             Assert.AreEqual(
                 DomainDataType.Decimal,
-                column.CSharpDataType,
+                column.DomainDataType,
                 "The ProductId should be a decimal in the OrderDetails table.");
             Assert.AreEqual(
                 19,
@@ -813,14 +813,14 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
             Assert.IsFalse(column.IsPrimaryKey, "The Amount is not a primary key in the OrderDetails table.");
             Assert.AreEqual(
                 DomainDataType.Int16,
-                column.CSharpDataType,
+                column.DomainDataType,
                 "The Amount should be a int16 in the OrderDetails table.");
 
             column = orderDetailsTable.Columns.FirstOrDefault(c => c.ColumnName == "Discount");
             Assert.IsFalse(column.IsPrimaryKey, "The Discount is not a primary key in the OrderDetails table.");
             Assert.AreEqual(
                 DomainDataType.Single,
-                column.CSharpDataType,
+                column.DomainDataType,
                 "The Discount should be a single in the OrderDetails table.");
         }
 
@@ -907,14 +907,14 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
             Assert.IsTrue(column.IsPrimaryKey, "The ProductId should be a primary key in the Product table.");
             Assert.AreEqual(
                 DomainDataType.Int32,
-                column.CSharpDataType,
+                column.DomainDataType,
                 "The ProductId should be a int32 in the Product table.");
 
             column = productTable.Columns.FirstOrDefault(c => c.ColumnName == "ProductDescription");
             Assert.IsFalse(column.IsPrimaryKey, "The ProductDescription is not a primary key in the Product table.");
             Assert.AreEqual(
                 DomainDataType.String,
-                column.CSharpDataType,
+                column.DomainDataType,
                 "The ProductDescription should be a string in the Product table.");
             Assert.AreEqual(
                 100,
@@ -925,7 +925,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
             Assert.IsFalse(column.IsPrimaryKey, "The UnitPrice is not a primary key in the Product table.");
             Assert.AreEqual(
                 DomainDataType.Decimal,
-                column.CSharpDataType,
+                column.DomainDataType,
                 "The ProductId should be a decimal in the Product table.");
             Assert.AreEqual(
                 19,
@@ -937,7 +937,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
             Assert.IsFalse(column.IsPrimaryKey, "The Publisher is not a primary key in the Product table.");
             Assert.AreEqual(
                 DomainDataType.String,
-                column.CSharpDataType,
+                column.DomainDataType,
                 "The Publisher should be a string in the Product table.");
             Assert.AreEqual(200, column.Length, "The Publisher should have a length of 200 in the Product table.");
 
@@ -945,7 +945,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
             Assert.IsFalse(column.IsPrimaryKey, "The AmountInStock is not a primary key in the Product table.");
             Assert.AreEqual(
                 DomainDataType.Int16,
-                column.CSharpDataType,
+                column.DomainDataType,
                 "The AmountInStock should be a integer in the Product table.");
         }
 

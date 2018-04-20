@@ -13,7 +13,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
     using System.ComponentModel.Composition;
     using System.IO;
     using System.Windows.Forms;
-
+    using System.Xml.Serialization;
     using DotNetScaffolder.Components.Common.Contract;
     using DotNetScaffolder.Components.DataTypes.DefaultDataTypes.EntityDataTypes;
     using DotNetScaffolder.Core.Common.Serializer;
@@ -35,21 +35,8 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
         {
 
         }
-        #region Fields
-
-        /// <summary>
-        ///     The data type implementation.
-        /// </summary>
-        private IDataType dataTypeImplementation;
-
-        #endregion
 
         #region Properties
-
-        /// <summary>
-        ///     Gets or sets a value indicating whether enabled.
-        /// </summary>
-        public bool Enabled { get; set; } = false;
 
         /// <summary>
         ///     Gets or sets the namespace.
@@ -60,6 +47,34 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
         ///     Gets or sets the output folder.
         /// </summary>
         public string OutputFolder { get; set; } = "Entity";
+
+        public string OutputPath { get; set; }
+
+        public bool AddInjectConstructor { get; set; }
+
+        public string InheritFrom { get; set; }
+
+        public string TransformInheritFrom
+        {
+            get
+            {
+                if(string.IsNullOrEmpty(InheritFrom))
+                {
+                    return string.Empty;
+                }
+
+                return $": {InheritFrom}";
+            }
+        }
+
+        [XmlIgnore]
+        public string EntityName
+        {
+            get
+            {
+                return MetaData != null ? MetaData.TableName : string.Empty;
+            }
+        }
 
         #endregion
 
@@ -104,13 +119,26 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
         /// </param>
         public override void Load(IDictionary<string, string> parameters)
         {
+            if (parameters == null) return;
+
+            if (!parameters.ContainsKey("basePath"))
+            {
+                return;
+            }
+
             var filePath = Path.Combine(parameters["basePath"], FileName);
 
             if (File.Exists(filePath))
             {
-                var appService = ObjectXMLSerializer<EntityDataType>.Load(filePath);
-                if (appService != null)
+                EntityDataType entity = ObjectXMLSerializer<EntityDataType>.Load(filePath);
+
+                if (entity != null)
                 {
+                    this.Namespace = entity.Namespace;
+                    this.OutputFolder = entity.OutputFolder;
+                    this.OutputPath = entity.OutputPath;
+                    this.InheritFrom = entity.InheritFrom;
+                    this.AddInjectConstructor = entity.AddInjectConstructor;
                 }
             }
         }
@@ -137,6 +165,13 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
         /// </returns>
         public override bool Save(IDictionary<string, string> parameters)
         {
+            if (parameters == null) return false;
+
+            if (!parameters.ContainsKey("basePath"))
+            {
+                return false;
+            }
+
             var filePath = Path.Combine(parameters["basePath"], FileName);
             ObjectXMLSerializer<EntityDataType>.Save(this, filePath);
             return true;

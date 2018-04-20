@@ -28,210 +28,150 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.checkBox14 = new System.Windows.Forms.CheckBox();
-            this.textBox15 = new System.Windows.Forms.TextBox();
+            this.txtOutputFolder = new System.Windows.Forms.TextBox();
             this.label31 = new System.Windows.Forms.Label();
-            this.textBox14 = new System.Windows.Forms.TextBox();
+            this.txtNamespace = new System.Windows.Forms.TextBox();
             this.label30 = new System.Windows.Forms.Label();
-            this.checkBox11 = new System.Windows.Forms.CheckBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.checkBox13 = new System.Windows.Forms.CheckBox();
-            this.checkBox12 = new System.Windows.Forms.CheckBox();
-            this.checkBox10 = new System.Windows.Forms.CheckBox();
-            this.textBox13 = new System.Windows.Forms.TextBox();
+            this.chkAddInjectConstructor = new System.Windows.Forms.CheckBox();
+            this.txtInheritFrom = new System.Windows.Forms.TextBox();
             this.label29 = new System.Windows.Forms.Label();
-            this.comboBox8 = new System.Windows.Forms.ComboBox();
-            this.label28 = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnBrowse = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.tstOutputPath = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // checkBox14
+            // txtOutputFolder
             // 
-            this.checkBox14.AutoSize = true;
-            this.checkBox14.Location = new System.Drawing.Point(218, 246);
-            this.checkBox14.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.checkBox14.Name = "checkBox14";
-            this.checkBox14.Size = new System.Drawing.Size(94, 24);
-            this.checkBox14.TabIndex = 60;
-            this.checkBox14.Text = "Enabled";
-            this.checkBox14.UseVisualStyleBackColor = true;
-            // 
-            // textBox15
-            // 
-            this.textBox15.Location = new System.Drawing.Point(203, 178);
-            this.textBox15.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.textBox15.Name = "textBox15";
-            this.textBox15.Size = new System.Drawing.Size(180, 26);
-            this.textBox15.TabIndex = 59;
-            this.textBox15.Text = "Entity";
+            this.txtOutputFolder.Location = new System.Drawing.Point(131, 93);
+            this.txtOutputFolder.Name = "txtOutputFolder";
+            this.txtOutputFolder.Size = new System.Drawing.Size(121, 20);
+            this.txtOutputFolder.TabIndex = 59;
+            this.txtOutputFolder.Text = "Entity";
             // 
             // label31
             // 
             this.label31.AutoSize = true;
-            this.label31.Location = new System.Drawing.Point(66, 183);
-            this.label31.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label31.Location = new System.Drawing.Point(37, 96);
             this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(111, 20);
+            this.label31.Size = new System.Drawing.Size(74, 13);
             this.label31.TabIndex = 58;
             this.label31.Text = "Output Folder:";
             // 
-            // textBox14
+            // txtNamespace
             // 
-            this.textBox14.Location = new System.Drawing.Point(203, 118);
-            this.textBox14.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.textBox14.Name = "textBox14";
-            this.textBox14.Size = new System.Drawing.Size(180, 26);
-            this.textBox14.TabIndex = 57;
-            this.textBox14.Text = "Entity";
+            this.txtNamespace.Location = new System.Drawing.Point(131, 57);
+            this.txtNamespace.Name = "txtNamespace";
+            this.txtNamespace.Size = new System.Drawing.Size(121, 20);
+            this.txtNamespace.TabIndex = 57;
+            this.txtNamespace.Text = "Entity";
             // 
             // label30
             // 
             this.label30.AutoSize = true;
-            this.label30.Location = new System.Drawing.Point(72, 124);
-            this.label30.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label30.Location = new System.Drawing.Point(44, 60);
             this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(98, 20);
+            this.label30.Size = new System.Drawing.Size(67, 13);
             this.label30.TabIndex = 56;
             this.label30.Text = "Namespace:";
             // 
-            // checkBox11
+            // chkAddInjectConstructor
             // 
-            this.checkBox11.AutoSize = true;
-            this.checkBox11.Location = new System.Drawing.Point(23, 246);
-            this.checkBox11.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.checkBox11.Name = "checkBox11";
-            this.checkBox11.Size = new System.Drawing.Size(164, 24);
-            this.checkBox11.TabIndex = 55;
-            this.checkBox11.Text = "Add backing fields";
-            this.checkBox11.UseVisualStyleBackColor = true;
+            this.chkAddInjectConstructor.AutoSize = true;
+            this.chkAddInjectConstructor.Location = new System.Drawing.Point(131, 164);
+            this.chkAddInjectConstructor.Name = "chkAddInjectConstructor";
+            this.chkAddInjectConstructor.Size = new System.Drawing.Size(187, 17);
+            this.chkAddInjectConstructor.TabIndex = 55;
+            this.chkAddInjectConstructor.Text = "Add interface injection constructor";
+            this.chkAddInjectConstructor.UseVisualStyleBackColor = true;
             // 
-            // groupBox1
+            // txtInheritFrom
             // 
-            this.groupBox1.Controls.Add(this.checkBox13);
-            this.groupBox1.Controls.Add(this.checkBox12);
-            this.groupBox1.Controls.Add(this.checkBox10);
-            this.groupBox1.Location = new System.Drawing.Point(448, 23);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.groupBox1.Size = new System.Drawing.Size(496, 151);
-            this.groupBox1.TabIndex = 54;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "WPF";
-            // 
-            // checkBox13
-            // 
-            this.checkBox13.AutoSize = true;
-            this.checkBox13.Location = new System.Drawing.Point(9, 100);
-            this.checkBox13.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.checkBox13.Name = "checkBox13";
-            this.checkBox13.Size = new System.Drawing.Size(256, 24);
-            this.checkBox13.TabIndex = 26;
-            this.checkBox13.Text = "Add Class Description Attribute";
-            this.checkBox13.UseVisualStyleBackColor = true;
-            // 
-            // checkBox12
-            // 
-            this.checkBox12.AutoSize = true;
-            this.checkBox12.Location = new System.Drawing.Point(9, 65);
-            this.checkBox12.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.checkBox12.Name = "checkBox12";
-            this.checkBox12.Size = new System.Drawing.Size(225, 24);
-            this.checkBox12.TabIndex = 25;
-            this.checkBox12.Text = "Do RaisePropertyChanged";
-            this.checkBox12.UseVisualStyleBackColor = true;
-            // 
-            // checkBox10
-            // 
-            this.checkBox10.AutoSize = true;
-            this.checkBox10.Location = new System.Drawing.Point(9, 29);
-            this.checkBox10.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.checkBox10.Name = "checkBox10";
-            this.checkBox10.Size = new System.Drawing.Size(187, 24);
-            this.checkBox10.TabIndex = 24;
-            this.checkBox10.Text = "Make Fields IEditable";
-            this.checkBox10.UseVisualStyleBackColor = true;
-            // 
-            // textBox13
-            // 
-            this.textBox13.Location = new System.Drawing.Point(203, 66);
-            this.textBox13.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.textBox13.Name = "textBox13";
-            this.textBox13.Size = new System.Drawing.Size(180, 26);
-            this.textBox13.TabIndex = 53;
+            this.txtInheritFrom.Location = new System.Drawing.Point(131, 22);
+            this.txtInheritFrom.Name = "txtInheritFrom";
+            this.txtInheritFrom.Size = new System.Drawing.Size(121, 20);
+            this.txtInheritFrom.TabIndex = 53;
             // 
             // label29
             // 
             this.label29.AutoSize = true;
-            this.label29.Location = new System.Drawing.Point(18, 72);
-            this.label29.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label29.Location = new System.Drawing.Point(46, 25);
             this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(158, 20);
+            this.label29.Size = new System.Drawing.Size(65, 13);
             this.label29.TabIndex = 52;
-            this.label29.Text = "Custom Inherit From:";
+            this.label29.Text = "Inherit From:";
             // 
-            // comboBox8
+            // groupBox1
             // 
-            this.comboBox8.Enabled = false;
-            this.comboBox8.FormattingEnabled = true;
-            this.comboBox8.Items.AddRange(new object[] {
-            "Default Repository"});
-            this.comboBox8.Location = new System.Drawing.Point(203, 23);
-            this.comboBox8.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.comboBox8.Name = "comboBox8";
-            this.comboBox8.Size = new System.Drawing.Size(180, 28);
-            this.comboBox8.TabIndex = 51;
+            this.groupBox1.Controls.Add(this.btnBrowse);
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.tstOutputPath);
+            this.groupBox1.Controls.Add(this.txtNamespace);
+            this.groupBox1.Controls.Add(this.txtOutputFolder);
+            this.groupBox1.Controls.Add(this.label29);
+            this.groupBox1.Controls.Add(this.label31);
+            this.groupBox1.Controls.Add(this.txtInheritFrom);
+            this.groupBox1.Controls.Add(this.chkAddInjectConstructor);
+            this.groupBox1.Controls.Add(this.label30);
+            this.groupBox1.Location = new System.Drawing.Point(3, 3);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(543, 189);
+            this.groupBox1.TabIndex = 60;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Entity settings";
             // 
-            // label28
+            // btnBrowse
             // 
-            this.label28.AutoSize = true;
-            this.label28.Location = new System.Drawing.Point(76, 23);
-            this.label28.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(99, 20);
-            this.label28.TabIndex = 50;
-            this.label28.Text = "Inherit From:";
+            this.btnBrowse.Location = new System.Drawing.Point(439, 128);
+            this.btnBrowse.Name = "btnBrowse";
+            this.btnBrowse.Size = new System.Drawing.Size(75, 23);
+            this.btnBrowse.TabIndex = 62;
+            this.btnBrowse.Text = "Browse";
+            this.btnBrowse.UseVisualStyleBackColor = true;
             // 
-            // EntityUserControl1
+            // label1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(44, 133);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(67, 13);
+            this.label1.TabIndex = 61;
+            this.label1.Text = "Output Path:";
+            // 
+            // tstOutputPath
+            // 
+            this.tstOutputPath.Location = new System.Drawing.Point(131, 130);
+            this.tstOutputPath.Name = "tstOutputPath";
+            this.tstOutputPath.Size = new System.Drawing.Size(304, 20);
+            this.tstOutputPath.TabIndex = 60;
+            // 
+            // EntityUserControl
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.checkBox14);
-            this.Controls.Add(this.textBox15);
-            this.Controls.Add(this.label31);
-            this.Controls.Add(this.textBox14);
-            this.Controls.Add(this.label30);
-            this.Controls.Add(this.checkBox11);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.textBox13);
-            this.Controls.Add(this.label29);
-            this.Controls.Add(this.comboBox8);
-            this.Controls.Add(this.label28);
-            this.Name = "EntityUserControl1";
-            this.Size = new System.Drawing.Size(981, 290);
+            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Name = "EntityUserControl";
+            this.Size = new System.Drawing.Size(549, 195);
             this.Load += new System.EventHandler(this.EntityUserControl1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.CheckBox checkBox14;
-        private System.Windows.Forms.TextBox textBox15;
+        private System.Windows.Forms.TextBox txtOutputFolder;
         private System.Windows.Forms.Label label31;
-        private System.Windows.Forms.TextBox textBox14;
+        private System.Windows.Forms.TextBox txtNamespace;
         private System.Windows.Forms.Label label30;
-        private System.Windows.Forms.CheckBox checkBox11;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.CheckBox checkBox13;
-        private System.Windows.Forms.CheckBox checkBox12;
-        private System.Windows.Forms.CheckBox checkBox10;
-        private System.Windows.Forms.TextBox textBox13;
+        private System.Windows.Forms.CheckBox chkAddInjectConstructor;
+        private System.Windows.Forms.TextBox txtInheritFrom;
         private System.Windows.Forms.Label label29;
-        private System.Windows.Forms.ComboBox comboBox8;
-        private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button btnBrowse;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox tstOutputPath;
     }
 }

@@ -64,7 +64,33 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.EntityDataTypes
         /// </param>
         public void LoadConfig(IDictionary<string, string> parameters)
         {
+            if (DataType == null) return;
+
             DataType.Load(parameters);
+
+            UpdateUI();
+        }
+
+        private void UpdateUI()
+        {
+            if (DataType == null) return;
+
+            txtInheritFrom.Text = DataType.InheritFrom;
+            txtNamespace.Text = DataType.Namespace;
+            txtOutputFolder.Text = DataType.OutputFolder;
+            tstOutputPath.Text = DataType.OutputPath;
+            chkAddInjectConstructor.Checked = DataType.AddInjectConstructor;
+        }
+
+        private void UpdateDataType()
+        {
+            if (DataType == null) return;
+
+            DataType.InheritFrom = txtInheritFrom.Text;
+            DataType.Namespace = txtNamespace.Text;
+            DataType.OutputFolder = txtOutputFolder.Text;
+            DataType.OutputPath = tstOutputPath.Text;
+            DataType.AddInjectConstructor = chkAddInjectConstructor.Checked;
         }
 
         /// <summary>
@@ -75,6 +101,9 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.EntityDataTypes
         /// </param>
         public void SaveConfig(IDictionary<string, string> parameters)
         {
+            if (DataType == null) return;
+
+            UpdateDataType();
             DataType.Save(parameters);
         }
 

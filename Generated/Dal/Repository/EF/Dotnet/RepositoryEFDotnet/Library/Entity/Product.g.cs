@@ -1,5 +1,5 @@
 ﻿
-// <copyright file="AccountContext.g.cs" company="MIT">
+// <copyright file="Product.g.cs" company="MIT">
 //  Copyright (c) 2018 MIT
 // </copyright>  
 
@@ -18,17 +18,22 @@
 //	USE A PARTIAL CLASS INSTEAD
 // *******************************************************************
 
+using System;
 using System.Data.Entity;
 
-namespace Banking.Models.Context.Accounts
+namespace Banking.Models.Entity
 {
-	public partial class AccountContext : BaseContext
+	public partial class Product 
 	{
-		#region Db Sets
+		#region Fields
 		
-				public virtual DbSet<BankAccount> BankAccount;
-				public virtual DbSet<BankTransfers> BankTransfers;
-		
+		public int ProductId { get; set; }
+		public string ProductDescription { get; set; }
+		public decimal UnitPrice { get; set; }
+		public string UnitAmount { get; set; }
+		public string Publisher { get; set; }
+		public short AmountInStock { get; set; }
+
 		#endregion
 	}
 }

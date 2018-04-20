@@ -181,16 +181,16 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Differences
             {
                 var secondColumn =
                     secondTable.Columns.FirstOrDefault(u => u.ColumnName.ToUpper() == column.ColumnName.ToUpper());
-                if (secondColumn != null && column.CSharpDataType != secondColumn.CSharpDataType)
+                if (secondColumn != null && column.DomainDataType != secondColumn.DomainDataType)
                     retval.ColumnDataTypeDiffs.Add(
                         new ColumnDataTypeDifference
                             {
                                 FirstColumn = column,
                                 SecondColumn = secondColumn,
                                 FirstColumnName = column.ColumnName,
-                                FirstColumnDataType = column.CSharpDataType,
-                                SecondColumnDataType = secondColumn.CSharpDataType
-                            });
+                                FirstColumnDataType = column.DomainDataType,
+                                SecondColumnDataType = secondColumn.DomainDataType
+                        });
             }
 
             if (retval.IsBroken)

@@ -23,8 +23,6 @@
 <#@ import namespace="DotNetScaffolder.Core.Common.Serializer" #>
 <#@ import namespace="DotNetScaffolder.Components.DataTypes.DefaultDataTypes" #>
 <#@ import namespace="Configuration" #>
-<#@ include file="T4Toolbox.tt" #>
-<#@ include file="BaseGenerator.ttinclude" #>
 <#@ include file="ContextTemplate.ttinclude" #>
 <#+
 public class ContextGenerator : BaseGenerator

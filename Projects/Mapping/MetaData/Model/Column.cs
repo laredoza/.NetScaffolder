@@ -63,7 +63,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Model
         ///     Gets or sets the c sharp data type.
         /// </summary>
         [XmlAttribute("DataType")]
-        public DomainDataType CSharpDataType { get; set; }
+        public DomainDataType DomainDataType { get; set; }
 
         /// <summary>
         ///     Gets or sets the db type.
@@ -174,7 +174,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Model
         // {
         // return NullableDataTypeString;
         // }
-        // return RemappedCSharpDataType;
+        // return RemappedDomainDataType;
         // }
         // }
 
@@ -204,7 +204,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Model
             Column result = new Column();
             result.ColumnName = this.ColumnName;
             result.ColumnOrder = this.ColumnOrder;
-            result.CSharpDataType = this.CSharpDataType;
+            result.DomainDataType = this.DomainDataType;
             result.DbType = this.DbType;
             result.DefaultFieldValue = this.DefaultFieldValue;
             result.Description = this.Description;
@@ -231,11 +231,11 @@ namespace DotNetScaffolder.Mapping.MetaData.Model
 
         // }
         // }
-        // return RemappedCSharpDataType;
+        // return RemappedDomainDataType;
         // default:
         // private GridViewControl _gridViewControlType = GridViewControl.Unknown;
         // break;
-        // return string.Format("{0}?", RemappedCSharpDataType);
+        // return string.Format("{0}?", RemappedDomainDataType);
         // case "GUID":
         // case "DATETIME":
         // case "DOUBLE":
@@ -243,7 +243,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Model
         // case "LONG":
         // case "INT":
         // {
-        // switch (RemappedCSharpDataType.ToUpper())
+        // switch (RemappedDomainDataType.ToUpper())
         // {
         // get
         // {

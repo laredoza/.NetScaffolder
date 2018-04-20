@@ -99,7 +99,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
                     newColumn = new Column
                                     {
                                         ColumnName = column.Name,
-                                        CSharpDataType = this.MapDatabaseTypeToCSharp(column.DataType.TypeName),
+                                        DomainDataType = this.MapDatabaseType(column.DataType.TypeName),
                                         IsRequired = column.IsPrimaryKey,
                                         ColumnOrder = table.Columns.IndexOf(column) + 1,
                                         Precision = column.Precision.HasValue ? column.Precision.Value : 0,
@@ -185,7 +185,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
         /// <returns>
         /// The <see cref="DomainDataType"/>.
         /// </returns>
-        public DomainDataType MapDatabaseTypeToCSharp(string databaseType)
+        public DomainDataType MapDatabaseType(string databaseType)
         {
             switch (databaseType.ToUpper())
             {
@@ -211,6 +211,38 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
                     return DomainDataType.Single;
                 default:
                     throw new NotImplementedException($"Invalid data type {databaseType}");
+            }
+        }
+
+        public string MapDomainDataTypeToOutputType(DomainDataType type)
+        {
+            Logger.Trace("Started MapDomainDataTypeToOutputType()");
+
+            switch (type)
+            {
+                case DomainDataType.Int16:
+                    return "short";
+                case DomainDataType.Int32:
+                    return "int";
+                case DomainDataType.Int64:
+                    return "long";
+                case DomainDataType.Boolean:
+                    return "bool";
+                case DomainDataType.Short:
+                    return "byte";
+                case DomainDataType.String:
+                    return "string";
+                case DomainDataType.Decimal:
+                    return "decimal";
+                case DomainDataType.DateTime:
+                    return "DateTime";
+                case DomainDataType.Single:
+                    return "float";
+                //case case DomainDataType.Int16:
+                //    // Todo: Do something valid with this
+                //    return DomainDataType.String;
+                default:
+                    throw new NotImplementedException($"Invalid data type {type}");
             }
         }
 

@@ -23,42 +23,47 @@
 <#@ import namespace="DotNetScaffolder.Core.Common.Serializer" #>
 <#@ import namespace="DotNetScaffolder.Components.DataTypes.DefaultDataTypes" #>
 <#@ import namespace="Configuration" #>
-<#@ include file="ContextTemplate.ttinclude" #>
+<#@ include file="EntityTemplate.ttinclude" #>
 <#+
-public class ContextGenerator : BaseGenerator
+public class EntityGenerator : BaseGenerator
 {
 	public IDataType DataType {get;set;}
 	public string BaseNamespace{get;set;}
 	
-	public ContextDataType ContextDataType
+	public EntityDataType EntityDataType
 	{
 		get
 		{
-			return (ContextDataType)this.DataType;
+			return (EntityDataType)this.DataType;
 		}
 	}
-	private ContextTemplate template = new ContextTemplate();
+
+	public List<Table> Models { get; set; }
+
+	private EntityTemplate template = new EntityTemplate();
 
 	protected override void RunCore()
 	{
 		Debugger.Break();
-		template.DataType = this.ContextDataType;
+		
 		template.NamingConvention = NamingConvention;
 		template.CollectionOption = CollectionOption;
 		template.BaseNamespace = BaseNamespace;
 		template.Source = Source;
 
-		foreach(var dbContext in ContextDataType.Contexts)
+		foreach(var model in this.Models)
 		{
-			template.ContextData = dbContext;
+			EntityDataType.MetaData = model;
+			template.DataType = this.EntityDataType;
+
 			Debugger.Break();
-			if(!string.IsNullOrEmpty(dbContext.OutputPath))
+			if(!string.IsNullOrEmpty(EntityDataType.OutputPath))
 			{
-				template.RenderToFile(string.Format(@"{0}\{1}\{2}.g.cs", dbContext.OutputPath, dbContext.OutputFolder, dbContext.ContextName));
+				template.RenderToFile(string.Format(@"{0}\{1}\{2}.g.cs", EntityDataType.OutputPath, EntityDataType.OutputFolder, EntityDataType.EntityName));
 			}
 			else
 			{
-				template.RenderToFile(string.Format(@"{0}\{1}.g.cs", dbContext.OutputFolder, dbContext.ContextName));	
+				template.RenderToFile(string.Format(@"{0}\{1}.g.cs", EntityDataType.OutputFolder, EntityDataType.EntityName));	
 			}
 		}
 	}

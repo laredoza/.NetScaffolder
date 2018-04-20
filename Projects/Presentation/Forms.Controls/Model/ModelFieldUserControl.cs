@@ -112,9 +112,9 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
 
             set
             {
-                if (this.DataSource.CSharpDataType != value)
+                if (this.DataSource.DomainDataType != value)
                 {
-                    this.DataSource.CSharpDataType = value;
+                    this.DataSource.DomainDataType = value;
                 }
 
                 if (this.ComboBoxDataType.SelectedIndex != value.GetHashCode())
@@ -353,7 +353,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
                 this.ColumnName = this.DataSource.ColumnName;
                 this.Description = this.DataSource.Description;
                 this.Order = this.DataSource.ColumnOrder;
-                this.DataType = this.DataSource.CSharpDataType;
+                this.DataType = this.DataSource.DomainDataType;
                 this.Length = this.DataSource.Length;
                 this.Precision = this.DataSource.Precision;
                 this.Scale = this.DataSource.Scale;

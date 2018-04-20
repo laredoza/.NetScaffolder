@@ -1,5 +1,4 @@
-﻿<#@ template language="C#" hostspecific="true" debug="true" #>
-<#@ assembly name="System" #>
+﻿<#@ assembly name="System" #>
 <#@ assembly name="System.Configuration" #>
 <#@ assembly name="System.Globalization" #>
 <#@ assembly name="System.Xml" #>
@@ -23,12 +22,12 @@
 <#@ import namespace="DotNetScaffolder.Mapping.MetaData.Model" #>
 <#@ import namespace="DotNetScaffolder.Core.Common.Serializer" #>
 <#@ import namespace="Configuration" #>
-<#@ include file="T4Toolbox.tt" #>
 <#+
 public abstract class BaseGenerator : Generator
 {
-	public INamingConvention NamingConvention {get;set;}
-	public ICollectionOption CollectionOption {get;set;}
+	public INamingConvention NamingConvention { get; set; }
+	public ICollectionOption CollectionOption { get; set; }
+	public ISourceType Source { get; set; }
 	
 	protected abstract override void RunCore();
 }

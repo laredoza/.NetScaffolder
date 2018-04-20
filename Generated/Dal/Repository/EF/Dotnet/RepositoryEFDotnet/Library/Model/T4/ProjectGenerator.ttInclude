@@ -1,5 +1,4 @@
-﻿<#@ template language="C#" hostspecific="true" debug="true" #>
-<#@ assembly name="System" #>
+﻿<#@ assembly name="System" #>
 <#@ assembly name="System.Configuration" #>
 <#@ assembly name="System.Globalization" #>
 <#@ assembly name="System.Xml" #>
@@ -22,8 +21,11 @@
 <#@ import namespace="DotNetScaffolder.Mapping.MetaData.Model" #>
 <#@ import namespace="DotNetScaffolder.Core.Common.Serializer" #>
 <#@ import namespace="Configuration" #>
-<#@ include file="T4Toolbox.tt" #>
+<#@ include file="CopyrightHeader.ttinclude" #>
+<#@ include file="BaseGenerator.ttinclude" #>
+<#@ include file="BaseTemplate.ttinclude" #>
 <#@ include file="ContextGenerator.ttInclude" #>
+<#@ include file="EntityGenerator.ttInclude" #>
 <#+
 public class ProjectGenerator : Generator
 {
@@ -45,6 +47,7 @@ public class ProjectGenerator : Generator
 			
 			var nc = ScaffoldConfig.ReturnNamingConvention(domain.NamingConventionId);
 			var co = ScaffoldConfig.ReturnCollectionOption(domain.CollectionOptionId);
+			var srcType = ScaffoldConfig.ReturnSourceType(domain.SourceTypeId);
 			
 			foreach(var template in domain.Package.Templates)
 			{
@@ -53,10 +56,24 @@ public class ProjectGenerator : Generator
 					var dt = ScaffoldConfig.ReturnDataType(template.DataType);
 					dt.Load(parameters);
 					
+					if(dt is EntityDataType)
+					{
+						EntityGenerator entityGen = new EntityGenerator();
+						
+						entityGen.Models = domain.Tables;
+						entityGen.DataType = dt;
+						entityGen.Source = srcType;
+						entityGen.NamingConvention = nc;
+						entityGen.CollectionOption = co;
+						entityGen.BaseNamespace = projectDefinition.BaseNameSpace;
+						entityGen.Run();
+					}
+					
 					if(dt is ContextDataType)
 					{
 						ContextGenerator contxtGen = new ContextGenerator();
 						contxtGen.DataType = dt;
+						contxtGen.Source = srcType;
 						contxtGen.NamingConvention = nc;
 						contxtGen.CollectionOption = co;
 						contxtGen.BaseNamespace = projectDefinition.BaseNameSpace;

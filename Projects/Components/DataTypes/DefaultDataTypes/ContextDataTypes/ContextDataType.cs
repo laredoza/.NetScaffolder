@@ -32,15 +32,6 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
     [ExportMetadata("ValueMetaData", "1BC1B0C4-1E41-9146-82CF-599181CE4430")]
     public class ContextDataType : BaseDataType
     {
-        #region Constants
-
-        /// <summary>
-        ///     The fil e_ name.
-        /// </summary>
-        private const string FILE_NAME = "Context.xml";
-
-        #endregion
-
         #region Constructors and Destructors
 
         /// <summary>
@@ -118,7 +109,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
                 return;
             }
 
-            var filePath = Path.Combine(parameters["basePath"], FILE_NAME);
+            var filePath = Path.Combine(parameters["basePath"], FileName);
 
             if (File.Exists(filePath))
             {
@@ -170,7 +161,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
                 return false;
             }
 
-            var filePath = Path.Combine(parameters["basePath"], FILE_NAME);
+            var filePath = Path.Combine(parameters["basePath"], FileName);
             ObjectXMLSerializer<List<ContextData>>.Save(Contexts, filePath);
             return true;
         }

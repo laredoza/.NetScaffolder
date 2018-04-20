@@ -23,44 +23,42 @@
 <#@ import namespace="DotNetScaffolder.Core.Common.Serializer" #>
 <#@ import namespace="DotNetScaffolder.Components.DataTypes.DefaultDataTypes" #>
 <#@ import namespace="Configuration" #>
-<#@ include file="ContextTemplate.ttinclude" #>
 <#+
-public class ContextGenerator : BaseGenerator
+public class EntityTemplate : BaseTemplate 
 {
-	public IDataType DataType {get;set;}
-	public string BaseNamespace{get;set;}
+	public EntityDataType DataType { get; set; }
+	public string BaseNamespace{ get; set; }
 	
-	public ContextDataType ContextDataType
-	{
-		get
-		{
-			return (ContextDataType)this.DataType;
-		}
-	}
-	private ContextTemplate template = new ContextTemplate();
-
-	protected override void RunCore()
+	public override string TransformText()
 	{
 		Debugger.Break();
-		template.DataType = this.ContextDataType;
-		template.NamingConvention = NamingConvention;
-		template.CollectionOption = CollectionOption;
-		template.BaseNamespace = BaseNamespace;
-		template.Source = Source;
+		Header.Filename = DataType.EntityName;
+#>
 
-		foreach(var dbContext in ContextDataType.Contexts)
-		{
-			template.ContextData = dbContext;
-			Debugger.Break();
-			if(!string.IsNullOrEmpty(dbContext.OutputPath))
-			{
-				template.RenderToFile(string.Format(@"{0}\{1}\{2}.g.cs", dbContext.OutputPath, dbContext.OutputFolder, dbContext.ContextName));
-			}
-			else
-			{
-				template.RenderToFile(string.Format(@"{0}\{1}.g.cs", dbContext.OutputFolder, dbContext.ContextName));	
-			}
-		}
+<#= Header.TransformText() #>
+
+// *******************************************************************
+//	GENERATED CODE. DOT NOT MODIFY MANUALLY AS CHANGES CAN BE LOST!!!
+//	USE A PARTIAL CLASS INSTEAD
+// *******************************************************************
+
+using System.Data.Entity;
+
+namespace <#= BaseNamespace #>.<#= DataType.OutputFolder #>.<#= DataType.Namespace #>
+{
+	public partial class <#= NamingConvention.ApplyNamingConvention(DataType.EntityName) #> <#= DataType.TransformInheritFrom #>
+	{
+		#region Db Sets
+		
+		<#+ foreach(var col in DataType.MetaData.Columns){ #>
+		<#= NamingConvention.ApplyNamingConvention(col.ColumnName) #>
+		<#+ } #>
+
+		#endregion
+	}
+}
+<#+
+		return this.GenerationEnvironment.ToString();
 	}
 }
 #>
