@@ -49,7 +49,7 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.ProjectDomainUserControl1 = new DotNetScaffolder.Presentation.Forms.Controls.Project.ProjectDomainUserControl();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.projectDomainDetailsUserControl1 = new DotNetScaffolder.Presentation.Forms.Controls.ProjectDomainDetailsUserControl();
+            this.projectDomainDetailsUserControl1 = new ProjectDomainDetailsUserControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.packageUserControl1 = new PackageUserControl();
             this.tabPage3 = new System.Windows.Forms.TabPage();

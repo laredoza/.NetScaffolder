@@ -4,7 +4,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace DotNetScaffolder.Presentation.Forms.Controls
+namespace DotNetScaffolder.Presentation.Forms.Controls.Sources
 {
     #region Usings
 
@@ -133,8 +133,8 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
             if (this.DataSource != null)
             {
                 this.sourceType = ScaffoldConfig.ReturnSourceType(this.DataSource.SourceTypeId);
-                this.panel1.Controls.Clear();
-                this.sourceTypeControl = this.sourceType.AddConfigUI(this.panel1) as IDataSourceUI;
+                this.tabPage2.Controls.Clear();
+                this.sourceTypeControl = this.sourceType.AddConfigUI(this.tabPage2) as IDataSourceUI;
                 this.sourceTypeControl.SourceType = this.sourceType;
                 this.sourceTypeControl.LoadData(this.SavePath);
             }

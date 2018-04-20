@@ -71,10 +71,10 @@
     <Compile Include="Core\ManageCollectionsTreeViewUserControl.Designer.cs">
       <DependentUpon>ManageCollectionsTreeViewUserControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="ManageDataSourceForm.cs">
+    <Compile Include="Sources\ManageDataSourceForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ManageDataSourceForm.Designer.cs">
+    <Compile Include="Sources\ManageDataSourceForm.Designer.cs">
       <DependentUpon>ManageDataSourceForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Packages\PackageUserControl.cs">
@@ -181,7 +181,7 @@
     <EmbeddedResource Include="Core\ManageCollectionsTreeViewUserControl.resx">
       <DependentUpon>ManageCollectionsTreeViewUserControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ManageDataSourceForm.resx">
+    <EmbeddedResource Include="Sources\ManageDataSourceForm.resx">
       <DependentUpon>ManageDataSourceForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Packages\PackageUserControl.resx">

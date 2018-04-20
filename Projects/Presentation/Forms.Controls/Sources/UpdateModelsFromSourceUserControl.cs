@@ -94,6 +94,11 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Sources
         /// </summary>
         public string SavePath { get; set; }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether valid.
+        /// </summary>
+        public bool Valid { get; set; }
+
         #endregion
 
         #region Public Methods And Operators
@@ -159,32 +164,50 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Sources
             if (this.DataSource != null)
             {
                 this.sourceType = ScaffoldConfig.ReturnSourceType(this.DataSource.SourceTypeId);
-                var sourceDomain = this.sourceType.Import(this.sourceType.Load(this.SavePath));
 
-                IApplicationTableCollectionDifference differenceService =
-                    new ApplicationTableCollectionDifference(new ApplicationTableDifference());
-                this.differences = differenceService.CompareTables(this.DataSource.Tables, sourceDomain.Tables);
+                var sourceOptions = this.sourceType.Load(this.SavePath);
 
-                ITableHierarchyService applicationService = new TempateHierarchyService();
-                List<Hierarchy> hierarchy = applicationService.ReturnHierarchyFromList(
-                    this.differences.FirstExtraTables,
-                    false,
-                    false);
-                this.AddNodes("Models", this.TreeViewAdd, hierarchy, applicationService);
+                if (this.sourceType.Test(sourceOptions))
+                {
+                    var sourceDomain = this.sourceType.Import(sourceOptions);
 
-                hierarchy = applicationService.ReturnHierarchyFromList(this.differences.RefreshTable, false, false);
+                    IApplicationTableCollectionDifference differenceService =
+                        new ApplicationTableCollectionDifference(new ApplicationTableDifference());
+                    this.differences = differenceService.CompareTables(this.DataSource.Tables, sourceDomain.Tables);
 
-                this.AddNodes("Models", this.TreeViewRefresh, hierarchy, applicationService);
+                    ITableHierarchyService applicationService = new TempateHierarchyService();
+                    List<Hierarchy> hierarchy = applicationService.ReturnHierarchyFromList(
+                        this.differences.FirstExtraTables,
+                        false,
+                        false);
+                    this.AddNodes("Models", this.TreeViewAdd, hierarchy, applicationService);
 
-                hierarchy = applicationService.ReturnHierarchyFromList(
-                    this.differences.FirstMissingTables,
-                    false,
-                    false);
+                    hierarchy = applicationService.ReturnHierarchyFromList(this.differences.RefreshTable, false, false);
 
-                this.AddNodes("Models", this.TreeViewDelete, hierarchy, applicationService);
+                    this.AddNodes("Models", this.TreeViewRefresh, hierarchy, applicationService);
+
+                    hierarchy = applicationService.ReturnHierarchyFromList(
+                        this.differences.FirstMissingTables,
+                        false,
+                        false);
+
+                    this.AddNodes("Models", this.TreeViewDelete, hierarchy, applicationService);
+                    this.Valid = true;
+                }
+                else
+                {
+                    MessageBox.Show(
+                        "Invalid configuration. Please update source configuration.",
+                        "Configuration Error",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+
+                    this.Valid = false;
+                }
             }
             else
             {
+                this.Valid = false;
                 Logger.Trace("Data Source not updated as domain is null ");
             }
 

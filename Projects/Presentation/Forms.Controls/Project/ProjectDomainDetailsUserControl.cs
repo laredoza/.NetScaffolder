@@ -4,7 +4,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace DotNetScaffolder.Presentation.Forms.Controls
+namespace DotNetScaffolder.Presentation.Forms.Controls.Project
 {
     #region Usings
 
@@ -608,7 +608,11 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
             Logger.Trace("Started Refresh Clicked");
             this.tableForm.SavePath = this.SavePath;
             this.tableForm.DataSource = this.SelectedDomain;
-            this.tableForm.ShowDialog();
+            if (this.tableForm.Valid)
+            {
+                this.tableForm.ShowDialog();
+            }
+
             Logger.Trace("Completed Refresh Clicked");
         }
 
