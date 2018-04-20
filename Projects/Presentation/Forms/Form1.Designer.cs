@@ -55,9 +55,9 @@
             this.label2 = new System.Windows.Forms.Label();
             this.packageUserControl1 = new DotNetScaffolder.Presentation.Forms.Controls.Packages.PackageUserControl();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.label3 = new System.Windows.Forms.Label();
             this.TemplateManagementUserControl1 = new DotNetScaffolder.Presentation.Forms.Controls.TemplateManagementUserControl();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.label3 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -180,10 +180,10 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(11, 538);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(419, 13);
+            this.label1.Size = new System.Drawing.Size(658, 13);
             this.label1.TabIndex = 14;
-            this.label1.Text = "Manage project details.These details are used to render layers / files for the da" +
-    "ta model.";
+            this.label1.Text = "Manage project details.These details are used to render layers/files for the data" +
+    " model.The layers are determined by the selected package.";
             // 
             // groupBox1
             // 
@@ -192,7 +192,7 @@
             this.groupBox1.Controls.Add(this.ProjectDetailsUserControl1);
             this.groupBox1.Location = new System.Drawing.Point(8, 7);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(388, 515);
+            this.groupBox1.Size = new System.Drawing.Size(375, 515);
             this.groupBox1.TabIndex = 13;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Project Details";
@@ -280,10 +280,10 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(11, 538);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(486, 13);
+            this.label2.Size = new System.Drawing.Size(474, 13);
             this.label2.TabIndex = 15;
-            this.label2.Text = "Manage Packages. Packages consist of templates. Each template will be used to ren" +
-    "der files / layers.";
+            this.label2.Text = "Manage Packages.Packages consist of templates.Each template will be used to rende" +
+    "r files/layers.";
             // 
             // packageUserControl1
             // 
@@ -307,6 +307,16 @@
             this.tabPage3.Text = "Templates";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(11, 538);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(517, 13);
+            this.label3.TabIndex = 16;
+            this.label3.Text = "Manage templates.A template is used specify a T4 script.This script will then be " +
+    "used to generate a file/layer.";
+            // 
             // TemplateManagementUserControl1
             // 
             this.TemplateManagementUserControl1.DataSource = null;
@@ -320,16 +330,6 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             this.openFileDialog1.Filter = "Model files|*.mdl";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(11, 538);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(529, 13);
-            this.label3.TabIndex = 16;
-            this.label3.Text = "Manage templates. A template is used specify a T4 script. This script will then b" +
-    "e used to generate a file / layer.";
             // 
             // Form1
             // 
