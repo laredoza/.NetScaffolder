@@ -85,6 +85,20 @@
     <Content Include="Config\Settings.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Model\Package\Common.Logging.Core.dll" />
+    <Content Include="Model\Package\Common.Logging.dll" />
+    <Content Include="Model\Package\Configuration.dll" />
+    <Content Include="Model\Package\DotNetScaffolder.Components.CollectionOption.dll" />
+    <Content Include="Model\Package\DotNetScaffolder.Components.Common.dll" />
+    <Content Include="Model\Package\DotNetScaffolder.Components.DataTypes.DefaultDataTypes.dll" />
+    <Content Include="Model\Package\DotNetScaffolder.Components.Drivers.DefaultDrivers.dll" />
+    <Content Include="Model\Package\DotNetScaffolder.Components.LanguageOutputs.DefaultLanguageOutput.dll" />
+    <Content Include="Model\Package\DotNetScaffolder.Components.NamingConventions.DefaultNamingConventions.dll" />
+    <Content Include="Model\Package\DotNetScaffolder.Components.OutputGenerators.DefaultOutputGenerators.dll" />
+    <Content Include="Model\Package\DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.dll" />
+    <Content Include="Model\Package\DotNetScaffolder.Core.Common.dll" />
+    <Content Include="Model\Package\DotNetScaffolder.Mapping.MetaData.dll" />
+    <Content Include="Model\Package\FormControls.dll" />
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -168,9 +182,7 @@
       <Name>DotNetScaffolder.Presentation.Forms.Controls</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Model\Package\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>echo f | xcopy /i /y "$(ProjectDir)bin\$(ConfigurationName)\Common.Logging.Core.dll" "$(SolutionDir)\Projects\Presentation\Forms\Model\Package\Common.Logging.Core.dll"
