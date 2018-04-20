@@ -59,7 +59,7 @@ namespace <#= BaseNamespace #>.<#= ContextData.OutputFolder #>.<#= ContextData.N
 		public virtual DbSet<<#= NamingConvention.ApplyNamingConvention(table.TableName) #>> <#=NamingConvention.ApplyNamingConvention(table.TableName) #>;
 		<#+ } #>
 
-		#endregion // EntitySets
+		#endregion
 	}
 }
 <#+

@@ -39,7 +39,7 @@ namespace DotNetScaffolder.Components.NamingConventions.DefaultNamingConventions
         /// </exception>
         public string ApplyNamingConvention(string value)
         {
-            return Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(value.ToLower()).Replace("_", string.Empty);
+            return Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(value).Replace("_", string.Empty);
         }
 
         #endregion
