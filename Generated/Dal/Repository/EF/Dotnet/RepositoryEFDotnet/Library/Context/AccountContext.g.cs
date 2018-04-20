@@ -1,5 +1,5 @@
 ﻿
-// <copyright file="LocalContext.g.cs" company="MIT">
+// <copyright file="AccountContext.g.cs" company="MIT">
 //  Copyright (c) 2018 All Rights Reserved
 // </copyright>  
 
@@ -10,9 +10,9 @@
 
 using System.Data.Entity;
 
-namespace Banking.Models.Context.Context
+namespace Banking.Models.Context.Accounts
 {
-	public partial class Localcontext 
+	public partial class Accountcontext : BaseContext
 	{
 		#region Db Sets
 		

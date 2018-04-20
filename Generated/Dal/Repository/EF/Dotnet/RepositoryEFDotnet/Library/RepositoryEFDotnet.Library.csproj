@@ -47,7 +47,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Context\LocalContext.g.cs" />
+    <Compile Include="Context\AccountContext.g.cs" />
+    <Compile Include="Context\CustomerContext.g.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RunGenerator.cs">
       <AutoGen>True</AutoGen>
@@ -85,7 +86,10 @@
     <Content Include="RunGenerator.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>RunGenerator.cs</LastGenOutput>
-      <LastOutputs>.\Context\LocalContext.g.cs</LastOutputs>
+      <LastOutputs>
+.\Context\AccountContext.g.cs
+.\Context\CustomerContext.g.cs
+</LastOutputs>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
