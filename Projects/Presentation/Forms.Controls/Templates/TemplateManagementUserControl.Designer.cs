@@ -33,9 +33,9 @@
         private void InitializeComponent()
         {
             this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.ManageTemplateTreeViewUserControl1 = new ManageCollectionsTreeViewUserControl();
             this.TemplateDetailsUserControl1 = new DotNetScaffolder.Presentation.Forms.Controls.TemplateDetailsUserControl();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.ManageTemplateTreeViewUserControl1 = new DotNetScaffolder.Presentation.Forms.Controls.Core.ManageCollectionsTreeViewUserControl();
             this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.SuspendLayout();
@@ -45,36 +45,10 @@
             this.groupBox5.Controls.Add(this.TemplateDetailsUserControl1);
             this.groupBox5.Location = new System.Drawing.Point(411, 14);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(505, 376);
+            this.groupBox5.Size = new System.Drawing.Size(505, 486);
             this.groupBox5.TabIndex = 3;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Details";
-            // 
-            // groupBox4
-            // 
-            this.groupBox4.Controls.Add(this.ManageTemplateTreeViewUserControl1);
-            this.groupBox4.Location = new System.Drawing.Point(11, 14);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(383, 376);
-            this.groupBox4.TabIndex = 2;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Templates";
-            // 
-            // ManageTemplateTreeViewUserControl1
-            // 
-            this.ManageTemplateTreeViewUserControl1.AfterSelect = null;
-            this.ManageTemplateTreeViewUserControl1.BeforeSelect = null;
-            this.ManageTemplateTreeViewUserControl1.BtnAddGroupClick = null;
-            this.ManageTemplateTreeViewUserControl1.BtnAddItemClick = null;
-            this.ManageTemplateTreeViewUserControl1.BtnDeleteClick = null;
-            this.ManageTemplateTreeViewUserControl1.BtnDownClick = null;
-            this.ManageTemplateTreeViewUserControl1.BtnUpClick = null;
-            this.ManageTemplateTreeViewUserControl1.CollectionType = TreeViewType.Package;
-            this.ManageTemplateTreeViewUserControl1.DataSource = null;
-            this.ManageTemplateTreeViewUserControl1.Location = new System.Drawing.Point(13, 16);
-            this.ManageTemplateTreeViewUserControl1.Name = "ManageTemplateTreeViewUserControl1";
-            this.ManageTemplateTreeViewUserControl1.Size = new System.Drawing.Size(364, 348);
-            this.ManageTemplateTreeViewUserControl1.TabIndex = 0;
             // 
             // TemplateDetailsUserControl1
             // 
@@ -92,6 +66,32 @@
             this.TemplateDetailsUserControl1.TreeNode = null;
             this.TemplateDetailsUserControl1.Version = 1D;
             // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.ManageTemplateTreeViewUserControl1);
+            this.groupBox4.Location = new System.Drawing.Point(11, 14);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(383, 486);
+            this.groupBox4.TabIndex = 2;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Templates";
+            // 
+            // ManageTemplateTreeViewUserControl1
+            // 
+            this.ManageTemplateTreeViewUserControl1.AfterSelect = null;
+            this.ManageTemplateTreeViewUserControl1.BeforeSelect = null;
+            this.ManageTemplateTreeViewUserControl1.BtnAddGroupClick = null;
+            this.ManageTemplateTreeViewUserControl1.BtnAddItemClick = null;
+            this.ManageTemplateTreeViewUserControl1.BtnDeleteClick = null;
+            this.ManageTemplateTreeViewUserControl1.BtnDownClick = null;
+            this.ManageTemplateTreeViewUserControl1.BtnUpClick = null;
+            this.ManageTemplateTreeViewUserControl1.CollectionType = FormControls.Enum.TreeViewType.Package;
+            this.ManageTemplateTreeViewUserControl1.DataSource = null;
+            this.ManageTemplateTreeViewUserControl1.Location = new System.Drawing.Point(13, 16);
+            this.ManageTemplateTreeViewUserControl1.Name = "ManageTemplateTreeViewUserControl1";
+            this.ManageTemplateTreeViewUserControl1.Size = new System.Drawing.Size(364, 348);
+            this.ManageTemplateTreeViewUserControl1.TabIndex = 0;
+            // 
             // TemplateManagementUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -99,7 +99,7 @@
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox4);
             this.Name = "TemplateManagementUserControl";
-            this.Size = new System.Drawing.Size(938, 414);
+            this.Size = new System.Drawing.Size(938, 516);
             this.groupBox5.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
             this.ResumeLayout(false);
