@@ -10,6 +10,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
 
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Windows.Forms;
 
     using Common.Logging;
@@ -43,7 +44,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         private Relationship dataSource;
 
         /// <summary>
-        /// The data source loaded.
+        ///     The data source loaded.
         /// </summary>
         private bool dataSourceLoaded;
 
@@ -64,16 +65,14 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
 
         #region Public Properties
 
-        public DomainDefinition Domain { get; set; }
-
         /// <summary>
-        /// Gets or sets the column name.
+        ///     Gets or sets the column name.
         /// </summary>
         public string ColumnName
         {
             get
             {
-                return this.ComboBoxColumn.SelectedText;
+                return this.ComboBoxColumn.SelectedValue.ToString();
             }
 
             set
@@ -134,6 +133,59 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         }
 
         /// <summary>
+        ///     Gets or sets the domain.
+        /// </summary>
+        public DomainDefinition Domain { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the foreign column name.
+        /// </summary>
+        public string ForeignColumnName
+        {
+            get
+            {
+                return this.ComboBoxRelatedColumn.SelectedValue.ToString();
+            }
+
+            set
+            {
+                if (this.DataSource != null && this.DataSource.ForeignColumnName != value)
+                {
+                    this.DataSource.ForeignColumnName = value;
+                }
+
+                if (this.ComboBoxRelatedColumn.SelectedValue != value)
+                {
+                    this.ComboBoxRelatedColumn.SelectedValue = value;
+                }
+            }
+        }
+
+        /// <summary>
+        ///     Gets or sets the related table name.
+        /// </summary>
+        public string RelatedTableName
+        {
+            get
+            {
+                return this.ComboBoxRelatedTable.SelectedValue.ToString();
+            }
+
+            set
+            {
+                if (this.DataSource != null && this.DataSource.TableName != value)
+                {
+                    this.DataSource.TableName = value;
+                }
+
+                if (this.ComboBoxRelatedTable.SelectedValue != value)
+                {
+                    this.ComboBoxRelatedTable.SelectedValue = value;
+                }
+            }
+        }
+
+        /// <summary>
         ///     Gets or sets the relationship name.
         /// </summary>
         public string RelationshipName
@@ -181,68 +233,16 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
             }
         }
 
-        public string RelatedTableName
-        {
-            get
-            {
-                return this.ComboBoxRelatedTable.SelectedValue.ToString();
-            }
-
-            set
-            {
-                if (this.DataSource != null && this.DataSource.TableName != value)
-                {
-                    this.DataSource.TableName = value;
-                }
-
-                if (this.ComboBoxRelatedTable.SelectedValue != value)
-                {
-                    this.ComboBoxRelatedTable.SelectedValue = value;
-                }
-            }
-        }
-
         #endregion
 
         #region Public Methods And Operators
 
         /// <summary>
-        /// The init combo box column.
+        ///     The init combo box column.
         /// </summary>
         public void InitComboBoxColumn()
         {
-            if (this.DataSource != null)
-            {
-                List<ComboboxItem> items = new List<ComboboxItem>();
-
-                items.Add(new ComboboxItem { Text = "None" });
-                foreach (var column in this.DataSource.Table.Columns)
-                {
-                    items.Add(new ComboboxItem { Text = column.ColumnName, Value = column.ColumnName });
-                }
-
-                this.ComboBoxColumn.DisplayMember = "Text";
-                this.ComboBoxColumn.ValueMember = "Value";
-                this.ComboBoxColumn.DataSource = items;
-            }
-        }
-
-        public void InitComboBoxRelatedTable()
-        {
-            if (this.DataSource != null && this.Domain != null)
-            {
-                List<ComboboxItem> items = new List<ComboboxItem>();
-
-                items.Add(new ComboboxItem { Text = "None" });
-                foreach (var table in this.Domain.Tables)
-                {
-                    items.Add(new ComboboxItem { Text = table.TableName, Value = table.TableName});
-                }
-
-                this.ComboBoxRelatedTable.DisplayMember = "Text";
-                this.ComboBoxRelatedTable.ValueMember = "Value";
-                this.ComboBoxRelatedTable.DataSource = items;
-            }
+            this.InitFieldsComboBox(this.DataSource.Table.Columns, this.ComboBoxColumn);
         }
 
         /// <summary>
@@ -260,6 +260,62 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
             this.ComboBoxRelationshipType.DisplayMember = "Text";
             this.ComboBoxRelationshipType.ValueMember = "Value";
             this.ComboBoxRelationshipType.DataSource = items;
+        }
+
+        /// <summary>
+        ///     The init combo box foreign column.
+        /// </summary>
+        public void InitComboBoxForeignColumn()
+        {
+            this.InitFieldsComboBox(this.DataSource.RelatedTable.Columns, this.ComboBoxRelatedColumn);
+        }
+
+        /// <summary>
+        ///     The init combo box related table.
+        /// </summary>
+        public void InitComboBoxRelatedTable()
+        {
+            if (this.DataSource != null && this.Domain != null)
+            {
+                List<ComboboxItem> items = new List<ComboboxItem>();
+
+                items.Add(new ComboboxItem { Text = "None" });
+                foreach (var table in this.Domain.Tables)
+                {
+                    items.Add(new ComboboxItem { Text = table.TableName, Value = table.TableName });
+                }
+
+                this.ComboBoxRelatedTable.DisplayMember = "Text";
+                this.ComboBoxRelatedTable.ValueMember = "Value";
+                this.ComboBoxRelatedTable.DataSource = items;
+            }
+        }
+
+        /// <summary>
+        /// The init fields combo box.
+        /// </summary>
+        /// <param name="columns">
+        /// The columns.
+        /// </param>
+        /// <param name="comboBox">
+        /// The combo box.
+        /// </param>
+        public void InitFieldsComboBox(List<Column> columns, ComboBox comboBox)
+        {
+            if (this.DataSource != null)
+            {
+                List<ComboboxItem> items = new List<ComboboxItem>();
+
+                items.Add(new ComboboxItem { Text = "None" });
+                foreach (var column in columns)
+                {
+                    items.Add(new ComboboxItem { Text = column.ColumnName, Value = column.ColumnName });
+                }
+
+                comboBox.DisplayMember = "Text";
+                comboBox.ValueMember = "Value";
+                comboBox.DataSource = items;
+            }
         }
 
         #endregion
@@ -280,6 +336,45 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
             if (this.ComboBoxColumn.SelectedValue != null)
             {
                 this.DataSource.ColumnName = this.ComboBoxColumn.SelectedValue.ToString();
+            }
+        }
+
+        /// <summary>
+        /// The combo box related column_ selected index changed.
+        /// </summary>
+        /// <param name="sender">
+        /// The sender.
+        /// </param>
+        /// <param name="e">
+        /// The e.
+        /// </param>
+        private void ComboBoxRelatedColumn_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.ComboBoxRelatedColumn.SelectedValue != null)
+            {
+                this.DataSource.ForeignColumnName = this.ComboBoxRelatedColumn.SelectedValue.ToString();
+            }
+        }
+
+        /// <summary>
+        /// The combo box related table_ selected index changed.
+        /// </summary>
+        /// <param name="sender">
+        /// The sender.
+        /// </param>
+        /// <param name="e">
+        /// The e.
+        /// </param>
+        private void ComboBoxRelatedTable_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.ComboBoxRelatedTable.SelectedValue != null)
+            {
+                this.RelatedTableName = this.ComboBoxRelatedTable.SelectedValue.ToString();
+                this.DataSource.RelatedTable =
+                    this.Domain.Tables.FirstOrDefault(t => t.TableName == this.RelatedTableName);
+                this.SchemaName = this.DataSource.RelatedTable.SchemaName;
+                this.InitComboBoxForeignColumn();
+                //this.DataSource.ForeignColumnName = null;
             }
         }
 
@@ -313,10 +408,12 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
                 this.dataSourceLoaded = true;
                 this.InitComboBoxColumn();
                 this.InitComboBoxRelatedTable();
+                this.InitComboBoxForeignColumn();
                 this.RelationshipName = this.DataSource.RelationshipName;
                 this.DependencyRelationShip = this.DataSource.DependencyRelationShip;
                 this.SchemaName = this.DataSource.SchemaName;
                 this.RelatedTableName = this.DataSource.TableName;
+                this.ForeignColumnName = this.DataSource.ForeignColumnName;
                 this.ColumnName = this.DataSource.ColumnName;
             }
             else
@@ -328,13 +425,5 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         }
 
         #endregion
-
-        private void ComboBoxRelatedTable_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (this.ComboBoxRelatedTable.SelectedValue != null)
-            {
-                this.RelatedTableName = this.ComboBoxRelatedTable.SelectedValue.ToString();
-            }
-        }
     }
 }

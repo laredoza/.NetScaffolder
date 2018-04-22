@@ -31,7 +31,7 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.LblRelationship = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.comboBox6 = new System.Windows.Forms.ComboBox();
+            this.ComboBoxRelatedColumn = new System.Windows.Forms.ComboBox();
             this.ComboBoxRelatedTable = new System.Windows.Forms.ComboBox();
             this.ComboBoxColumn = new System.Windows.Forms.ComboBox();
             this.LblSecurity = new System.Windows.Forms.Label();
@@ -48,7 +48,7 @@
             // 
             this.groupBox1.Controls.Add(this.LblRelationship);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.comboBox6);
+            this.groupBox1.Controls.Add(this.ComboBoxRelatedColumn);
             this.groupBox1.Controls.Add(this.ComboBoxRelatedTable);
             this.groupBox1.Controls.Add(this.ComboBoxColumn);
             this.groupBox1.Controls.Add(this.LblSecurity);
@@ -86,17 +86,18 @@
             this.label1.TabIndex = 55;
             this.label1.Text = "Relationship Name:";
             // 
-            // comboBox6
+            // ComboBoxRelatedColumn
             // 
-            this.comboBox6.FormattingEnabled = true;
-            this.comboBox6.Items.AddRange(new object[] {
+            this.ComboBoxRelatedColumn.FormattingEnabled = true;
+            this.ComboBoxRelatedColumn.Items.AddRange(new object[] {
             "Parent"});
-            this.comboBox6.Location = new System.Drawing.Point(187, 217);
-            this.comboBox6.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.comboBox6.Name = "comboBox6";
-            this.comboBox6.Size = new System.Drawing.Size(180, 28);
-            this.comboBox6.TabIndex = 54;
-            this.comboBox6.Text = "Id";
+            this.ComboBoxRelatedColumn.Location = new System.Drawing.Point(187, 217);
+            this.ComboBoxRelatedColumn.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.ComboBoxRelatedColumn.Name = "ComboBoxRelatedColumn";
+            this.ComboBoxRelatedColumn.Size = new System.Drawing.Size(180, 28);
+            this.ComboBoxRelatedColumn.TabIndex = 54;
+            this.ComboBoxRelatedColumn.Text = "Id";
+            this.ComboBoxRelatedColumn.SelectedIndexChanged += new System.EventHandler(this.ComboBoxRelatedColumn_SelectedIndexChanged);
             // 
             // ComboBoxRelatedTable
             // 
@@ -212,7 +213,7 @@
         #endregion
 
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.ComboBox comboBox6;
+        private System.Windows.Forms.ComboBox ComboBoxRelatedColumn;
         private System.Windows.Forms.ComboBox ComboBoxRelatedTable;
         private System.Windows.Forms.ComboBox ComboBoxColumn;
         private System.Windows.Forms.Label LblSecurity;
