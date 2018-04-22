@@ -8,10 +8,14 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
 {
     #region Usings
 
+    using System;
+    using System.Collections.Generic;
     using System.Windows.Forms;
 
     using Common.Logging;
 
+    using DotNetScaffolder.Core.Common;
+    using DotNetScaffolder.Mapping.MetaData.Enum;
     using DotNetScaffolder.Mapping.MetaData.Model;
 
     #endregion
@@ -64,6 +68,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         public ModelRelationshipUserControl()
         {
             this.InitializeComponent();
+            this.InitComboBoxDataType();
         }
 
         #endregion
@@ -99,6 +104,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
             if (this.DataSource != null)
             {
                 this.RelationshipName = this.DataSource.RelationshipName;
+                this.DependencyRelationShip = this.DataSource.DependencyRelationShip;
                 //                this.ColumnName = this.DataSource.ColumnName;
                 //                this.Description = this.DataSource.Description;
                 //                this.Order = this.DataSource.ColumnOrder;
@@ -116,6 +122,54 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
             }
 
             Logger.Trace("Completed UpdateDataSource()");
+        }
+
+        public RelationshipType DependencyRelationShip
+        {
+            get
+            {
+                ComboboxItem item = this.ComboBoxRelationshipType.SelectedItem as ComboboxItem;
+                int index = Convert.ToInt32(item.Value);
+                return (RelationshipType)index;
+            }
+            set
+            {
+                if ((this.DataSource != null) && this.DataSource.DependencyRelationShip != value)
+                {
+                    this.DataSource.DependencyRelationShip = value;
+                }
+
+                if (this.ComboBoxRelationshipType.SelectedIndex != value.GetHashCode())
+                {
+                    this.ComboBoxRelationshipType.SelectedIndex = value.GetHashCode();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Init relationship type combo box
+        /// </summary>
+        public void InitComboBoxDataType()
+        {
+            List<ComboboxItem> items = new List<ComboboxItem>();
+
+            foreach (RelationshipType p in Enum.GetValues(typeof(RelationshipType)))
+            {
+                items.Add(new ComboboxItem { Text = p.ToString(), Value = p.GetHashCode() });
+            }
+
+            this.ComboBoxRelationshipType.DisplayMember = "Text";
+            this.ComboBoxRelationshipType.ValueMember = "Value";
+            this.ComboBoxRelationshipType.DataSource = items;
+        }
+
+        private void ComboBoxRelationshipType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.ComboBoxRelationshipType.SelectedItem != null)
+            {
+                this.DependencyRelationShip =
+                    (RelationshipType)(this.ComboBoxRelationshipType.SelectedItem as ComboboxItem).Value;
+            }
         }
     }
 }

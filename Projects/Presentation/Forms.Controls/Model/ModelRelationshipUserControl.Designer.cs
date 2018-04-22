@@ -29,12 +29,14 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.LblRelationship = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.comboBox6 = new System.Windows.Forms.ComboBox();
             this.comboBox5 = new System.Windows.Forms.ComboBox();
             this.comboBox4 = new System.Windows.Forms.ComboBox();
             this.label22 = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.ComboBoxRelationshipType = new System.Windows.Forms.ComboBox();
             this.checkBox4 = new System.Windows.Forms.CheckBox();
             this.label20 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
@@ -42,8 +44,6 @@
             this.label17 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.LblRelationship = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -56,7 +56,7 @@
             this.groupBox1.Controls.Add(this.comboBox4);
             this.groupBox1.Controls.Add(this.label22);
             this.groupBox1.Controls.Add(this.label21);
-            this.groupBox1.Controls.Add(this.comboBox3);
+            this.groupBox1.Controls.Add(this.ComboBoxRelationshipType);
             this.groupBox1.Controls.Add(this.checkBox4);
             this.groupBox1.Controls.Add(this.label20);
             this.groupBox1.Controls.Add(this.label19);
@@ -73,9 +73,27 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Relationship Details";
             // 
+            // LblRelationship
+            // 
+            this.LblRelationship.AutoSize = true;
+            this.LblRelationship.Location = new System.Drawing.Point(188, 35);
+            this.LblRelationship.Name = "LblRelationship";
+            this.LblRelationship.Size = new System.Drawing.Size(114, 20);
+            this.LblRelationship.TabIndex = 56;
+            this.LblRelationship.Text = "My relationship";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(30, 35);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(147, 20);
+            this.label1.TabIndex = 55;
+            this.label1.Text = "Relationship Name:";
+            // 
             // comboBox6
             // 
-            this.comboBox6.Enabled = false;
             this.comboBox6.FormattingEnabled = true;
             this.comboBox6.Items.AddRange(new object[] {
             "Parent"});
@@ -88,7 +106,6 @@
             // 
             // comboBox5
             // 
-            this.comboBox5.Enabled = false;
             this.comboBox5.FormattingEnabled = true;
             this.comboBox5.Items.AddRange(new object[] {
             "Parent"});
@@ -101,7 +118,6 @@
             // 
             // comboBox4
             // 
-            this.comboBox4.Enabled = false;
             this.comboBox4.FormattingEnabled = true;
             this.comboBox4.Items.AddRange(new object[] {
             "UserId",
@@ -132,17 +148,17 @@
             this.label21.TabIndex = 50;
             this.label21.Text = "Security";
             // 
-            // comboBox3
+            // ComboBoxRelationshipType
             // 
-            this.comboBox3.Enabled = false;
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Items.AddRange(new object[] {
+            this.ComboBoxRelationshipType.FormattingEnabled = true;
+            this.ComboBoxRelationshipType.Items.AddRange(new object[] {
             "Parent"});
-            this.comboBox3.Location = new System.Drawing.Point(188, 63);
-            this.comboBox3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(180, 28);
-            this.comboBox3.TabIndex = 49;
+            this.ComboBoxRelationshipType.Location = new System.Drawing.Point(188, 63);
+            this.ComboBoxRelationshipType.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.ComboBoxRelationshipType.Name = "ComboBoxRelationshipType";
+            this.ComboBoxRelationshipType.Size = new System.Drawing.Size(180, 28);
+            this.ComboBoxRelationshipType.TabIndex = 49;
+            this.ComboBoxRelationshipType.SelectedIndexChanged += new System.EventHandler(this.ComboBoxRelationshipType_SelectedIndexChanged);
             // 
             // checkBox4
             // 
@@ -215,25 +231,6 @@
             this.label15.TabIndex = 42;
             this.label15.Text = "Relationship Type:";
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(30, 35);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(147, 20);
-            this.label1.TabIndex = 55;
-            this.label1.Text = "Relationship Name:";
-            // 
-            // LblRelationship
-            // 
-            this.LblRelationship.AutoSize = true;
-            this.LblRelationship.Location = new System.Drawing.Point(188, 35);
-            this.LblRelationship.Name = "LblRelationship";
-            this.LblRelationship.Size = new System.Drawing.Size(114, 20);
-            this.LblRelationship.TabIndex = 56;
-            this.LblRelationship.Text = "My relationship";
-            // 
             // ModelRelationshipUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -255,7 +252,7 @@
         private System.Windows.Forms.ComboBox comboBox4;
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Label label21;
-        private System.Windows.Forms.ComboBox comboBox3;
+        private System.Windows.Forms.ComboBox ComboBoxRelationshipType;
         private System.Windows.Forms.CheckBox checkBox4;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Label label19;
