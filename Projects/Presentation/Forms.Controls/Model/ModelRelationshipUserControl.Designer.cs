@@ -32,16 +32,13 @@
             this.LblRelationship = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.comboBox6 = new System.Windows.Forms.ComboBox();
-            this.comboBox5 = new System.Windows.Forms.ComboBox();
-            this.comboBox4 = new System.Windows.Forms.ComboBox();
-            this.LblTableName = new System.Windows.Forms.Label();
+            this.ComboBoxRelatedTable = new System.Windows.Forms.ComboBox();
+            this.ComboBoxColumn = new System.Windows.Forms.ComboBox();
             this.LblSecurity = new System.Windows.Forms.Label();
             this.ComboBoxRelationshipType = new System.Windows.Forms.ComboBox();
-            this.checkBox4 = new System.Windows.Forms.CheckBox();
             this.label20 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
@@ -52,16 +49,13 @@
             this.groupBox1.Controls.Add(this.LblRelationship);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.comboBox6);
-            this.groupBox1.Controls.Add(this.comboBox5);
-            this.groupBox1.Controls.Add(this.comboBox4);
-            this.groupBox1.Controls.Add(this.LblTableName);
+            this.groupBox1.Controls.Add(this.ComboBoxRelatedTable);
+            this.groupBox1.Controls.Add(this.ComboBoxColumn);
             this.groupBox1.Controls.Add(this.LblSecurity);
             this.groupBox1.Controls.Add(this.ComboBoxRelationshipType);
-            this.groupBox1.Controls.Add(this.checkBox4);
             this.groupBox1.Controls.Add(this.label20);
             this.groupBox1.Controls.Add(this.label19);
             this.groupBox1.Controls.Add(this.label18);
-            this.groupBox1.Controls.Add(this.label17);
             this.groupBox1.Controls.Add(this.label16);
             this.groupBox1.Controls.Add(this.label15);
             this.groupBox1.Location = new System.Drawing.Point(4, 5);
@@ -97,46 +91,38 @@
             this.comboBox6.FormattingEnabled = true;
             this.comboBox6.Items.AddRange(new object[] {
             "Parent"});
-            this.comboBox6.Location = new System.Drawing.Point(188, 263);
+            this.comboBox6.Location = new System.Drawing.Point(187, 217);
             this.comboBox6.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox6.Name = "comboBox6";
             this.comboBox6.Size = new System.Drawing.Size(180, 28);
             this.comboBox6.TabIndex = 54;
             this.comboBox6.Text = "Id";
             // 
-            // comboBox5
+            // ComboBoxRelatedTable
             // 
-            this.comboBox5.FormattingEnabled = true;
-            this.comboBox5.Items.AddRange(new object[] {
+            this.ComboBoxRelatedTable.FormattingEnabled = true;
+            this.ComboBoxRelatedTable.Items.AddRange(new object[] {
             "Parent"});
-            this.comboBox5.Location = new System.Drawing.Point(188, 221);
-            this.comboBox5.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.comboBox5.Name = "comboBox5";
-            this.comboBox5.Size = new System.Drawing.Size(180, 28);
-            this.comboBox5.TabIndex = 53;
-            this.comboBox5.Text = "Users";
+            this.ComboBoxRelatedTable.Location = new System.Drawing.Point(187, 175);
+            this.ComboBoxRelatedTable.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.ComboBoxRelatedTable.Name = "ComboBoxRelatedTable";
+            this.ComboBoxRelatedTable.Size = new System.Drawing.Size(180, 28);
+            this.ComboBoxRelatedTable.TabIndex = 53;
+            this.ComboBoxRelatedTable.Text = "Users";
+            this.ComboBoxRelatedTable.SelectedIndexChanged += new System.EventHandler(this.ComboBoxRelatedTable_SelectedIndexChanged);
             // 
-            // comboBox4
+            // ComboBoxColumn
             // 
-            this.comboBox4.FormattingEnabled = true;
-            this.comboBox4.Items.AddRange(new object[] {
+            this.ComboBoxColumn.FormattingEnabled = true;
+            this.ComboBoxColumn.Items.AddRange(new object[] {
             "UserId",
             "RoleName"});
-            this.comboBox4.Location = new System.Drawing.Point(188, 179);
-            this.comboBox4.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.comboBox4.Name = "comboBox4";
-            this.comboBox4.Size = new System.Drawing.Size(180, 28);
-            this.comboBox4.TabIndex = 52;
-            // 
-            // LblTableName
-            // 
-            this.LblTableName.AutoSize = true;
-            this.LblTableName.Location = new System.Drawing.Point(185, 149);
-            this.LblTableName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.LblTableName.Name = "LblTableName";
-            this.LblTableName.Size = new System.Drawing.Size(76, 20);
-            this.LblTableName.TabIndex = 51;
-            this.LblTableName.Text = "UserRole";
+            this.ComboBoxColumn.Location = new System.Drawing.Point(187, 133);
+            this.ComboBoxColumn.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.ComboBoxColumn.Name = "ComboBoxColumn";
+            this.ComboBoxColumn.Size = new System.Drawing.Size(180, 28);
+            this.ComboBoxColumn.TabIndex = 52;
+            this.ComboBoxColumn.SelectedIndexChanged += new System.EventHandler(this.ComboBoxColumn_SelectedIndexChanged);
             // 
             // LblSecurity
             // 
@@ -160,21 +146,10 @@
             this.ComboBoxRelationshipType.TabIndex = 49;
             this.ComboBoxRelationshipType.SelectedIndexChanged += new System.EventHandler(this.ComboBoxRelationshipType_SelectedIndexChanged);
             // 
-            // checkBox4
-            // 
-            this.checkBox4.AutoSize = true;
-            this.checkBox4.Location = new System.Drawing.Point(188, 304);
-            this.checkBox4.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(88, 24);
-            this.checkBox4.TabIndex = 48;
-            this.checkBox4.Text = "Render";
-            this.checkBox4.UseVisualStyleBackColor = true;
-            // 
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(7, 261);
+            this.label20.Location = new System.Drawing.Point(6, 215);
             this.label20.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(173, 20);
@@ -184,7 +159,7 @@
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(19, 221);
+            this.label19.Location = new System.Drawing.Point(18, 175);
             this.label19.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(158, 20);
@@ -194,22 +169,12 @@
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(67, 184);
+            this.label18.Location = new System.Drawing.Point(66, 138);
             this.label18.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(113, 20);
             this.label18.TabIndex = 45;
             this.label18.Text = "Column Name:";
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(79, 149);
-            this.label17.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(98, 20);
-            this.label17.TabIndex = 44;
-            this.label17.Text = "Table Name:";
             // 
             // label16
             // 
@@ -248,16 +213,13 @@
 
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.ComboBox comboBox6;
-        private System.Windows.Forms.ComboBox comboBox5;
-        private System.Windows.Forms.ComboBox comboBox4;
-        private System.Windows.Forms.Label LblTableName;
+        private System.Windows.Forms.ComboBox ComboBoxRelatedTable;
+        private System.Windows.Forms.ComboBox ComboBoxColumn;
         private System.Windows.Forms.Label LblSecurity;
         private System.Windows.Forms.ComboBox ComboBoxRelationshipType;
-        private System.Windows.Forms.CheckBox checkBox4;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label LblRelationship;

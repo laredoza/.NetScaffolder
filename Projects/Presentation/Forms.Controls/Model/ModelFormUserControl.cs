@@ -187,6 +187,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
             else if (e.Node.Tag is Relationship)
             {
                 var relationship = e.Node.Tag as Relationship;
+                this.relationshipControl.Domain = this.DataSource;
                 this.relationshipControl.DataSource = relationship;
                 this.relationshipControl.BringToFront();
             }
