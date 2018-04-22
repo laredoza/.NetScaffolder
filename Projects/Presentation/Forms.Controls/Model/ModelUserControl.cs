@@ -9,10 +9,12 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
     #region Usings
 
     using System;
+    using System.Collections.Generic;
     using System.Windows.Forms;
 
     using Common.Logging;
 
+    using DotNetScaffolder.Core.Common.Validation;
     using DotNetScaffolder.Mapping.MetaData.Model;
 
     #endregion
@@ -20,7 +22,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
     /// <summary>
     ///     The table user control.
     /// </summary>
-    public partial class ModelUserControl : UserControl
+    public partial class ModelUserControl : UserControl, IValidate
     {
         #region Static Fields
 
@@ -197,5 +199,33 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         }
 
         #endregion
+
+        /// <summary>
+        /// Gets or sets the validation result.
+        /// </summary>>
+        public List<Validation> ValidationResult { get; set; }
+
+        /// <summary>
+        /// The validate.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="List"/>.
+        /// </returns>
+        public List<Validation> Validate()
+        {
+            Logger.Trace("Started Validation()");
+
+            List<Validation> result = new List<Validation>();
+
+            if (string.IsNullOrEmpty(this.TxtName.Text))
+            {
+                Validation validation = new Validation(ValidationType.ModelErrorName, "The model name may not be empty");
+                result.Add(validation);
+                this.ErrorProvider1.SetError(this.TxtName, validation.Description);
+            }
+
+            Logger.Trace("Completed Validation()");
+            return result;
+        }
     }
 }

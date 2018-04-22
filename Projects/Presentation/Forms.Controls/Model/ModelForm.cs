@@ -8,6 +8,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
 {
     #region Usings
 
+    using System;
     using System.Windows.Forms;
 
     using Common.Logging;
@@ -94,6 +95,25 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         #region Other Methods
 
         /// <summary>
+        /// The btn close_ click.
+        /// </summary>
+        /// <param name="sender">
+        /// The sender.
+        /// </param>
+        /// <param name="e">
+        /// The e.
+        /// </param>
+        private void BtnClose_Click(object sender, EventArgs e)
+        {
+            if (this.ModelFormUserControl1.currentlySelectedControl == null
+                || (this.ModelFormUserControl1.currentlySelectedControl != null
+                    && this.ModelFormUserControl1.currentlySelectedControl.Validate().Count > 0))
+            {
+                this.Close();
+            }
+        }
+
+        /// <summary>
         ///     The update data source.
         /// </summary>
         private void UpdateDataSource()
@@ -115,10 +135,5 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         }
 
         #endregion
-
-        private void BtnClose_Click(object sender, System.EventArgs e)
-        {
-            this.Close();
-        }
     }
 }

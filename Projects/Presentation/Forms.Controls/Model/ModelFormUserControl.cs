@@ -8,7 +8,6 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
 {
     #region Usings
 
-    using System;
     using System.Collections.Generic;
     using System.Windows.Forms;
 
@@ -17,6 +16,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
     using Configuration;
 
     using DotNetScaffolder.Components.Common.Contract;
+    using DotNetScaffolder.Core.Common.Validation;
     using DotNetScaffolder.Mapping.ApplicationServices.Tables;
     using DotNetScaffolder.Mapping.MetaData.Domain;
     using DotNetScaffolder.Mapping.MetaData.Model;
@@ -61,6 +61,8 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         /// </summary>
         private readonly ModelRelationshipUserControl relationshipControl;
 
+
+
         /// <summary>
         ///     The data source.
         /// </summary>
@@ -103,7 +105,9 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         #endregion
 
         #region Public Properties
-
+  
+        public IValidate currentlySelectedControl { get; set; }
+        
         /// <summary>
         ///     Gets or sets the data source.
         /// </summary>
@@ -162,6 +166,23 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         #region Other Methods
 
         /// <summary>
+        /// The domain tree view_ before select.
+        /// </summary>
+        /// <param name="sender">
+        /// The sender.
+        /// </param>
+        /// <param name="e">
+        /// The e.
+        /// </param>
+        private void DomainTreeView_BeforeSelect(object sender, TreeViewCancelEventArgs e)
+        {
+            if (this.currentlySelectedControl != null && this.currentlySelectedControl.Validate().Count > 0)
+            {
+                e.Cancel = true;
+            }
+        }
+
+        /// <summary>
         /// The domain tree view_ node mouse click.
         /// </summary>
         /// <param name="sender">
@@ -172,28 +193,33 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         /// </param>
         private void DomainTreeView_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-            if (e.Node.Tag is Table)
+            if (this.currentlySelectedControl == null
+                || (this.currentlySelectedControl != null && this.currentlySelectedControl.Validate().Count == 0))
             {
-                var table = e.Node.Tag as Table;
-                this.modelControl.DataSource = table;
-                this.modelControl.BringToFront();
-            }
-            else if (e.Node.Tag is Column)
-            {
-                var column = e.Node.Tag as Column;
-                this.fieldControl.DataSource = column;
-                this.fieldControl.BringToFront();
-            }
-            else if (e.Node.Tag is Relationship)
-            {
-                var relationship = e.Node.Tag as Relationship;
-                this.relationshipControl.Domain = this.DataSource;
-                this.relationshipControl.DataSource = relationship;
-                this.relationshipControl.BringToFront();
-            }
-            else if (e.Node.Tag == null)
-            {
-                this.defaultModelControl.BringToFront();
+                if (e.Node.Tag is Table)
+                {
+                    var table = e.Node.Tag as Table;
+                    this.modelControl.DataSource = table;
+                    this.currentlySelectedControl = this.modelControl;
+                    this.modelControl.BringToFront();
+                }
+                else if (e.Node.Tag is Column)
+                {
+                    var column = e.Node.Tag as Column;
+                    this.fieldControl.DataSource = column;
+                    this.fieldControl.BringToFront();
+                }
+                else if (e.Node.Tag is Relationship)
+                {
+                    var relationship = e.Node.Tag as Relationship;
+                    this.relationshipControl.Domain = this.DataSource;
+                    this.relationshipControl.DataSource = relationship;
+                    this.relationshipControl.BringToFront();
+                }
+                else if (e.Node.Tag == null)
+                {
+                    this.defaultModelControl.BringToFront();
+                }
             }
         }
 

@@ -94,6 +94,11 @@ namespace DotNetScaffolder.Core.Common.Validation
         /// <summary>
         /// The collection option id.
         /// </summary>
-        CollectionOptionId
+        CollectionOptionId,
+
+        /// <summary>
+        /// The model error name.
+        /// </summary>
+        ModelErrorName
     }
 }
