@@ -15,6 +15,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
     using Common.Logging;
 
     using DotNetScaffolder.Core.Common;
+    using DotNetScaffolder.Core.Common.Validation;
     using DotNetScaffolder.Mapping.MetaData.Model;
 
     #endregion
@@ -22,7 +23,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
     /// <summary>
     ///     The field user control.
     /// </summary>
-    public partial class ModelFieldUserControl : UserControl
+    public partial class ModelFieldUserControl : UserControl, IValidate
     {
         #region Static Fields
 
@@ -370,5 +371,24 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         }
 
         #endregion
+
+        public List<Validation> ValidationResult { get; set; }
+
+        public List<Validation> Validate()
+        {
+            Logger.Trace("Started Validation()");
+
+            List<Validation> result = new List<Validation>();
+
+            //if (string.IsNullOrEmpty(this.TxtName.Text))
+            //{
+            //    Validation validation = new Validation(ValidationType.ModelErrorName, "The model name may not be empty");
+            //    result.Add(validation);
+            //    this.ErrorProvider1.SetError(this.TxtName, validation.Description);
+            //}
+
+            Logger.Trace("Completed Validation()");
+            return result;
+        }
     }
 }

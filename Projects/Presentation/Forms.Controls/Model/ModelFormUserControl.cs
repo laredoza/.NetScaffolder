@@ -207,6 +207,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
                 {
                     var column = e.Node.Tag as Column;
                     this.fieldControl.DataSource = column;
+                    this.currentlySelectedControl = this.fieldControl;
                     this.fieldControl.BringToFront();
                 }
                 else if (e.Node.Tag is Relationship)
