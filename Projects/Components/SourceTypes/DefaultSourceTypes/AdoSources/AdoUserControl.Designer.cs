@@ -28,8 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.TxtConnection = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.ErrorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // TxtConnection
@@ -50,6 +53,10 @@
             this.label2.TabIndex = 7;
             this.label2.Text = "Connection:";
             // 
+            // ErrorProvider1
+            // 
+            this.ErrorProvider1.ContainerControl = this;
+            // 
             // AdoUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -58,7 +65,8 @@
             this.Controls.Add(this.label2);
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "AdoUserControl";
-            this.Size = new System.Drawing.Size(681, 92);
+            this.Size = new System.Drawing.Size(694, 92);
+            ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -68,5 +76,6 @@
 
         private System.Windows.Forms.TextBox TxtConnection;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ErrorProvider ErrorProvider1;
     }
 }

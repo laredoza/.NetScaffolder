@@ -122,7 +122,19 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
 
         public List<Validation> Validate()
         {
-            throw new NotImplementedException();
+            Logger.Trace("Started Validation()");
+
+            List<Validation> result = new List<Validation>();
+
+            if (string.IsNullOrEmpty(this.TxtConnection.Text))
+            {
+                Validation validation = new Validation(ValidationType.SourceTypeId, "The Edmx Path may not be empty");
+                result.Add(validation);
+                this.ErrorProvider1.SetError(this.TxtConnection, validation.Description);
+            }
+
+            Logger.Trace("Completed Validation()");
+            return result;
         }
     }
 }
