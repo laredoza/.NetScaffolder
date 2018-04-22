@@ -102,6 +102,7 @@
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="Model\T4\CopyrightHeader.ttinclude" />
     <None Include="Model\T4\EntityGenerator.ttInclude" />
     <None Include="Model\T4\EntityTemplate.ttInclude" />
     <None Include="NLog.xsd">

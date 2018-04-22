@@ -201,23 +201,25 @@ namespace DotNetScaffolder.Mapping.MetaData.Model
         /// </returns>
         public object Clone()
         {
-            Column result = new Column();
-            result.ColumnName = this.ColumnName;
-            result.ColumnOrder = this.ColumnOrder;
-            result.DomainDataType = this.DomainDataType;
-            result.DbType = this.DbType;
-            result.DefaultFieldValue = this.DefaultFieldValue;
-            result.Description = this.Description;
-            result.GridColumnWidth = this.GridColumnWidth;
-            result.IsPrimaryKey = this.IsPrimaryKey;
-            result.IsRequired = this.IsRequired;
-            result.Length = this.Length;
-            result.LookupClassName = this.LookupClassName;
-            result.Precision = this.Precision;
-            result.RenderToEntity = this.renderToEntity;
-            result.RenderToView = this.RenderToView;
-            result.RenderToViewOrder = this.RenderToViewOrder;
-            result.Scale = this.Scale;
+            Column result = new Column
+                                {
+                                    ColumnName = this.ColumnName,
+                                    ColumnOrder = this.ColumnOrder,
+                                    DomainDataType = this.DomainDataType,
+                                    DbType = this.DbType,
+                                    DefaultFieldValue = this.DefaultFieldValue,
+                                    Description = this.Description,
+                                    GridColumnWidth = this.GridColumnWidth,
+                                    IsPrimaryKey = this.IsPrimaryKey,
+                                    IsRequired = this.IsRequired,
+                                    Length = this.Length,
+                                    LookupClassName = this.LookupClassName,
+                                    Precision = this.Precision,
+                                    RenderToEntity = this.renderToEntity,
+                                    RenderToView = this.RenderToView,
+                                    RenderToViewOrder = this.RenderToViewOrder,
+                                    Scale = this.Scale
+                                };
 
             if (result.Table != null)
             {

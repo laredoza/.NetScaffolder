@@ -307,5 +307,17 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
             Logger.Trace($"Completed ReturnFilePath({basePath}");
             return basePath + @"\GenericAdoSourceType.xml";
         }
+
+
+        /// <summary>
+        /// The fix.
+        /// </summary>
+        /// <param name="model">
+        /// The model.
+        /// </param>
+        public void Fix(DatabaseModel model)
+        {
+
+        }
     }
 }

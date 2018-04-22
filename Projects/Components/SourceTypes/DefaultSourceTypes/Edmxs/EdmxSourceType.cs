@@ -88,7 +88,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.Edmxs
                 tbl => new Table
                            {
                                TableName = tbl.Name,
-                               SchemaName = new TiraggoEntityInfo(edmx, $"{edmx.Runtime.ConceptualModels.Schema.Namespace}.BankAccount").StorageInfo.Schema,
+                               SchemaName = new TiraggoEntityInfo(edmx, $"{edmx.Runtime.ConceptualModels.Schema.Namespace}.{tbl.Name}").StorageInfo.Schema,
                                Columns =
                                    tbl.Properties.Select(
                                        col => new Column
@@ -154,6 +154,8 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.Edmxs
                                                       RelationshipName = rel.Name
                                                   }).ToList()
                            }).ToList();
+
+            this.Fix(result);
 
             Logger.Trace("Completed Import()"); 
             return result;
@@ -267,12 +269,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.Edmxs
             Logger.Trace("Started Test()");
 
             FileSourceOptions options = parameters as FileSourceOptions;
-            bool result = false;
-
-            if (File.Exists(options.Path))
-            {
-                result = true;
-            }
+            bool result = File.Exists(options.Path);
 
             Logger.Trace("Completed Test()"); 
             
@@ -327,6 +324,30 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.Edmxs
                 default:
                     throw new NotImplementedException($"Invalid data type {type}");
             }
+        }
+
+
+        /// <summary>
+        /// The fix.
+        /// </summary>
+        /// <param name="model">
+        /// The model.
+        /// </param>
+        public void Fix(DatabaseModel model)
+        {
+            Logger.Trace("Started Import()");
+
+            foreach (Table modelTable in model.Tables)
+            {
+                foreach (var relationship in modelTable.RelationShips)
+                {
+                    // Todo: Don't think this is the best way to do this. Will probably cause issues with duplicate table names
+                    relationship.RelatedTable = model.Tables.FirstOrDefault(t => t.TableName == relationship.TableName);
+                    relationship.SchemaName = relationship.RelatedTable.SchemaName;
+                }
+            }
+
+            Logger.Trace("Completed Import()");
         }
     }
 }

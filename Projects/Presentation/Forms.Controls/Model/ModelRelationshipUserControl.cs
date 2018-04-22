@@ -76,7 +76,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         }
 
         /// <summary>
-        /// Gets or sets the dependency relation ship.
+        ///     Gets or sets the dependency relation ship.
         /// </summary>
         public RelationshipType DependencyRelationShip
         {
@@ -102,7 +102,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         }
 
         /// <summary>
-        /// Gets or sets the relationship name.
+        ///     Gets or sets the relationship name.
         /// </summary>
         public string RelationshipName
         {
@@ -125,6 +125,9 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
             }
         }
 
+        /// <summary>
+        /// Gets or sets the schema name.
+        /// </summary>
         public string SchemaName
         {
             get
@@ -139,12 +142,16 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
                     this.DataSource.SchemaName = value;
                 }
 
-                if (this.LblSecurity.Text != value) {
+                if (this.LblSecurity.Text != value)
+                {
                     this.LblSecurity.Text = value;
                 }
             }
         }
 
+        /// <summary>
+        /// Gets or sets the table name.
+        /// </summary>
         public string TableName
         {
             get
@@ -222,6 +229,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
                 this.DependencyRelationShip = this.DataSource.DependencyRelationShip;
                 this.SchemaName = this.DataSource.SchemaName;
                 this.TableName = this.DataSource.TableName;
+
                 // this.ColumnName = this.DataSource.ColumnName;
                 // this.Description = this.DataSource.Description;
                 // this.Order = this.DataSource.ColumnOrder;

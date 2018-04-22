@@ -130,7 +130,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Model
 
             if (this.RelatedTable != null)
             {
-                result.RelatedTable = this.RelatedTable.Clone() as Table;
+                // result.RelatedTable = this.RelatedTable.Clone() as Table;
             }
 
             result.Render = this.Render;

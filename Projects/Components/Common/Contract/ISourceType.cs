@@ -65,6 +65,15 @@ namespace DotNetScaffolder.Components.Common.Contract
         /// </returns>
         DomainDataType MapDatabaseType(string databaseType);
 
+        /// <summary>
+        /// The map domain data type to output type.
+        /// </summary>
+        /// <param name="type">
+        /// The type.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
         string MapDomainDataTypeToOutputType(DomainDataType type);
 
         /// <summary>
@@ -83,6 +92,14 @@ namespace DotNetScaffolder.Components.Common.Contract
         /// The <see cref="bool"/>.
         /// </returns>
         bool Test(object parameters);
+
+        /// <summary>
+        /// The fix.
+        /// </summary>
+        /// <param name="model">
+        /// The model.
+        /// </param>
+        void Fix(DatabaseModel model);
 
         #endregion
     }

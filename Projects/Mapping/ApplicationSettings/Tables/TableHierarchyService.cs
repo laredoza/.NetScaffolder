@@ -229,6 +229,9 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Tables
 
                     foreach (Relationship relationShip in table.RelationShips)
                     {
+                        relationShip.Table = table;
+                        relationShip.RelatedTable = tables.FirstOrDefault(t => t.TableName == relationShip.TableName);
+                        
                         relationshipNode.Children.Add(
                             new Hierarchy { Name = relationShip.RelationshipName, Item = relationShip });
                     }
