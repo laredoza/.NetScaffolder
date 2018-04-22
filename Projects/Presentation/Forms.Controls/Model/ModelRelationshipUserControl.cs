@@ -43,6 +43,21 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
 
         #endregion
 
+        #region Constructors and Destructors
+
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="ModelRelationshipUserControl" /> class.
+        /// </summary>
+        public ModelRelationshipUserControl()
+        {
+            this.InitializeComponent();
+            this.InitComboBoxDataType();
+        }
+
+        #endregion
+
+        #region Public Properties
+
         /// <summary>
         ///     Gets or sets the data source.
         /// </summary>
@@ -60,20 +75,36 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
             }
         }
 
-        #region Constructors and Destructors
-
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ModelRelationshipUserControl" /> class.
+        /// Gets or sets the dependency relation ship.
         /// </summary>
-        public ModelRelationshipUserControl()
+        public RelationshipType DependencyRelationShip
         {
-            this.InitializeComponent();
-            this.InitComboBoxDataType();
+            get
+            {
+                ComboboxItem item = this.ComboBoxRelationshipType.SelectedItem as ComboboxItem;
+                int index = Convert.ToInt32(item.Value);
+                return (RelationshipType)index;
+            }
+
+            set
+            {
+                if ((this.DataSource != null) && this.DataSource.DependencyRelationShip != value)
+                {
+                    this.DataSource.DependencyRelationShip = value;
+                }
+
+                if (this.ComboBoxRelationshipType.SelectedIndex != value.GetHashCode())
+                {
+                    this.ComboBoxRelationshipType.SelectedIndex = value.GetHashCode();
+                }
+            }
         }
 
-        #endregion
-
-        public string RelationshipName 
+        /// <summary>
+        /// Gets or sets the relationship name.
+        /// </summary>
+        public string RelationshipName
         {
             get
             {
@@ -94,60 +125,53 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
             }
         }
 
-        /// <summary>
-        ///     The update data source.
-        /// </summary>
-        private void UpdateDataSource()
-        {
-            Logger.Trace("Started UpdateDataSource()");
-
-            if (this.DataSource != null)
-            {
-                this.RelationshipName = this.DataSource.RelationshipName;
-                this.DependencyRelationShip = this.DataSource.DependencyRelationShip;
-                //                this.ColumnName = this.DataSource.ColumnName;
-                //                this.Description = this.DataSource.Description;
-                //                this.Order = this.DataSource.ColumnOrder;
-                //                this.DataType = this.DataSource.DomainDataType;
-                //                this.Length = this.DataSource.Length;
-                //                this.Precision = this.DataSource.Precision;
-                //                this.Scale = this.DataSource.Scale;
-                //                this.DefaultValue = this.DataSource.DefaultFieldValue;
-                //                this.IsRequired = this.DataSource.IsRequired;
-                //                this.IsPrimaryKey = this.DataSource.IsPrimaryKey;
-            }
-            else
-            {
-                Logger.Trace("Data Source not updated as domain is null ");
-            }
-
-            Logger.Trace("Completed UpdateDataSource()");
-        }
-
-        public RelationshipType DependencyRelationShip
+        public string SchemaName
         {
             get
             {
-                ComboboxItem item = this.ComboBoxRelationshipType.SelectedItem as ComboboxItem;
-                int index = Convert.ToInt32(item.Value);
-                return (RelationshipType)index;
+                return this.LblSecurity.Text;
             }
+
             set
             {
-                if ((this.DataSource != null) && this.DataSource.DependencyRelationShip != value)
+                if (this.DataSource.SchemaName != value)
                 {
-                    this.DataSource.DependencyRelationShip = value;
+                    this.DataSource.SchemaName = value;
                 }
 
-                if (this.ComboBoxRelationshipType.SelectedIndex != value.GetHashCode())
-                {
-                    this.ComboBoxRelationshipType.SelectedIndex = value.GetHashCode();
+                if (this.LblSecurity.Text != value) {
+                    this.LblSecurity.Text = value;
                 }
             }
         }
 
+        public string TableName
+        {
+            get
+            {
+                return this.LblTableName.Text;
+            }
+
+            set
+            {
+                if (this.DataSource.TableName != value)
+                {
+                    this.DataSource.TableName = value;
+                }
+
+                if (this.LblTableName.Text != value)
+                {
+                    this.LblTableName.Text = value;
+                }
+            }
+        }
+
+        #endregion
+
+        #region Public Methods And Operators
+
         /// <summary>
-        /// Init relationship type combo box
+        ///     Init relationship type combo box
         /// </summary>
         public void InitComboBoxDataType()
         {
@@ -163,6 +187,19 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
             this.ComboBoxRelationshipType.DataSource = items;
         }
 
+        #endregion
+
+        #region Other Methods
+
+        /// <summary>
+        /// The combo box relationship type_ selected index changed.
+        /// </summary>
+        /// <param name="sender">
+        /// The sender.
+        /// </param>
+        /// <param name="e">
+        /// The e.
+        /// </param>
         private void ComboBoxRelationshipType_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (this.ComboBoxRelationshipType.SelectedItem != null)
@@ -171,5 +208,39 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
                     (RelationshipType)(this.ComboBoxRelationshipType.SelectedItem as ComboboxItem).Value;
             }
         }
+
+        /// <summary>
+        ///     The update data source.
+        /// </summary>
+        private void UpdateDataSource()
+        {
+            Logger.Trace("Started UpdateDataSource()");
+
+            if (this.DataSource != null)
+            {
+                this.RelationshipName = this.DataSource.RelationshipName;
+                this.DependencyRelationShip = this.DataSource.DependencyRelationShip;
+                this.SchemaName = this.DataSource.SchemaName;
+                this.TableName = this.DataSource.TableName;
+                // this.ColumnName = this.DataSource.ColumnName;
+                // this.Description = this.DataSource.Description;
+                // this.Order = this.DataSource.ColumnOrder;
+                // this.DataType = this.DataSource.DomainDataType;
+                // this.Length = this.DataSource.Length;
+                // this.Precision = this.DataSource.Precision;
+                // this.Scale = this.DataSource.Scale;
+                // this.DefaultValue = this.DataSource.DefaultFieldValue;
+                // this.IsRequired = this.DataSource.IsRequired;
+                // this.IsPrimaryKey = this.DataSource.IsPrimaryKey;
+            }
+            else
+            {
+                Logger.Trace("Data Source not updated as domain is null ");
+            }
+
+            Logger.Trace("Completed UpdateDataSource()");
+        }
+
+        #endregion
     }
 }

@@ -8,6 +8,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
 {
     #region Usings
 
+    using System;
     using System.Collections.Generic;
     using System.Windows.Forms;
 
@@ -41,29 +42,29 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         #region Fields
 
         /// <summary>
-        ///     The data source.
-        /// </summary>
-        private DomainDefinition dataSource;
-
-        /// <summary>
-        /// The default model control.
+        ///     The default model control.
         /// </summary>
         private readonly DefaultModelUserControl defaultModelControl;
 
         /// <summary>
-        /// The field control.
+        ///     The field control.
         /// </summary>
         private readonly ModelFieldUserControl fieldControl;
 
         /// <summary>
-        /// The model control.
+        ///     The model control.
         /// </summary>
         private readonly ModelUserControl modelControl;
 
         /// <summary>
-        /// The relationship control.
+        ///     The relationship control.
         /// </summary>
         private readonly ModelRelationshipUserControl relationshipControl;
+
+        /// <summary>
+        ///     The data source.
+        /// </summary>
+        private DomainDefinition dataSource;
 
         /// <summary>
         ///     The source type.
@@ -186,7 +187,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
             else if (e.Node.Tag is Relationship)
             {
                 var relationship = e.Node.Tag as Relationship;
-                this.relationshipControl.DataSource = relationship; 
+                this.relationshipControl.DataSource = relationship;
                 this.relationshipControl.BringToFront();
             }
             else if (e.Node.Tag == null)
@@ -222,10 +223,5 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         }
 
         #endregion
-
-        private void btnClose_Click(object sender, System.EventArgs e)
-        {
-
-        }
     }
 }
