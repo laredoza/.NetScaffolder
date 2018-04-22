@@ -26,13 +26,24 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
     /// </summary>
     public partial class AdoUserControl : UserControl, IDataSourceUI
     {
-        private AdoSourceOptions options;
+        #region Static Fields
 
         /// <summary>
         ///     The logger.
         /// </summary>
         private static readonly ILog Logger = LogManager.GetLogger(string.Empty);
-        
+
+        #endregion
+
+        #region Fields
+
+        /// <summary>
+        /// The options.
+        /// </summary>
+        private AdoSourceOptions options;
+
+        #endregion
+
         #region Constructors and Destructors
 
         /// <summary>
@@ -42,7 +53,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
         {
             Logger.Trace("Started AdoUserControl()");
             this.InitializeComponent();
-            this.options = new AdoSourceOptions(); 
+            this.options = new AdoSourceOptions();
             Logger.Trace("Completed AdoUserControl()");
         }
 
@@ -55,7 +66,15 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
         /// </summary>
         public object Parameters { get; set; }
 
+        /// <summary>
+        /// Gets or sets the source type.
+        /// </summary>
         public ISourceType SourceType { get; set; }
+
+        /// <summary>
+        /// Gets or sets the validation result.
+        /// </summary>
+        public List<Validation> ValidationResult { get; set; }
 
         #endregion
 
@@ -116,10 +135,12 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
         {
         }
 
-        #endregion
-
-        public List<Validation> ValidationResult { get; set; }
-
+        /// <summary>
+        /// The validate.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="List"/>.
+        /// </returns>
         public List<Validation> Validate()
         {
             Logger.Trace("Started Validation()");
@@ -136,5 +157,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
             Logger.Trace("Completed Validation()");
             return result;
         }
+
+        #endregion
     }
 }
