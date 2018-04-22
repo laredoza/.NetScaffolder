@@ -374,7 +374,8 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
                     this.Domain.Tables.FirstOrDefault(t => t.TableName == this.RelatedTableName);
                 this.SchemaName = this.DataSource.RelatedTable.SchemaName;
                 this.InitComboBoxForeignColumn();
-                //this.DataSource.ForeignColumnName = null;
+
+                // this.DataSource.ForeignColumnName = null;
             }
         }
 

@@ -4,12 +4,14 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
+using DotNetScaffolder.Core.Common.Validation;
+
 namespace DotNetScaffolder.Components.Common.Contract.UI
 {
     /// <summary>
     ///     The DataSourceUI interface.
     /// </summary>
-    public interface IDataSourceUI
+    public interface IDataSourceUI: IValidate
     {
         #region Public Properties
 

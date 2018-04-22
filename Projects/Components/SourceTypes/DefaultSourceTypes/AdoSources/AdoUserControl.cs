@@ -15,6 +15,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
     using DotNetScaffolder.Components.Common.Contract;
     using DotNetScaffolder.Components.Common.Contract.UI;
     using DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.SourceOptions;
+    using DotNetScaffolder.Core.Common.Validation;
 
     using global::Common.Logging;
 
@@ -116,5 +117,12 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
         }
 
         #endregion
+
+        public List<Validation> ValidationResult { get; set; }
+
+        public List<Validation> Validate()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

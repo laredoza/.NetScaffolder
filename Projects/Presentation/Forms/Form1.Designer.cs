@@ -77,7 +77,8 @@
             this.fileToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1022, 24);
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(9, 3, 0, 3);
+            this.menuStrip1.Size = new System.Drawing.Size(1533, 35);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -87,13 +88,13 @@
             this.openToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(50, 29);
             this.fileToolStripMenuItem.Text = "&File";
             // 
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(140, 30);
             this.openToolStripMenuItem.Text = "&Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
@@ -103,18 +104,18 @@
             this.panel1.Controls.Add(this.BtnClose);
             this.panel1.Controls.Add(this.LblPath);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 638);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2);
+            this.panel1.Location = new System.Drawing.Point(0, 982);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1022, 44);
+            this.panel1.Size = new System.Drawing.Size(1533, 68);
             this.panel1.TabIndex = 7;
             // 
             // BtnSave
             // 
             this.BtnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtnSave.Location = new System.Drawing.Point(859, 11);
+            this.BtnSave.Location = new System.Drawing.Point(1288, 17);
+            this.BtnSave.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.BtnSave.Name = "BtnSave";
-            this.BtnSave.Size = new System.Drawing.Size(75, 23);
+            this.BtnSave.Size = new System.Drawing.Size(112, 35);
             this.BtnSave.TabIndex = 7;
             this.BtnSave.Text = "Save";
             this.BtnSave.UseVisualStyleBackColor = true;
@@ -123,9 +124,10 @@
             // BtnClose
             // 
             this.BtnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtnClose.Location = new System.Drawing.Point(939, 11);
+            this.BtnClose.Location = new System.Drawing.Point(1408, 17);
+            this.BtnClose.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.BtnClose.Name = "BtnClose";
-            this.BtnClose.Size = new System.Drawing.Size(75, 23);
+            this.BtnClose.Size = new System.Drawing.Size(112, 35);
             this.BtnClose.TabIndex = 6;
             this.BtnClose.Text = "Close";
             this.BtnClose.UseVisualStyleBackColor = true;
@@ -135,19 +137,19 @@
             // 
             this.LblPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.LblPath.AutoSize = true;
-            this.LblPath.Location = new System.Drawing.Point(9, 16);
+            this.LblPath.Location = new System.Drawing.Point(14, 25);
+            this.LblPath.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.LblPath.Name = "LblPath";
-            this.LblPath.Size = new System.Drawing.Size(0, 13);
+            this.LblPath.Size = new System.Drawing.Size(0, 20);
             this.LblPath.TabIndex = 5;
             // 
             // panel2
             // 
             this.panel2.Controls.Add(this.tabControl1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(0, 24);
-            this.panel2.Margin = new System.Windows.Forms.Padding(2);
+            this.panel2.Location = new System.Drawing.Point(0, 35);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1022, 614);
+            this.panel2.Size = new System.Drawing.Size(1533, 947);
             this.panel2.TabIndex = 8;
             // 
             // tabControl1
@@ -157,9 +159,10 @@
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
+            this.tabControl1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1022, 614);
+            this.tabControl1.Size = new System.Drawing.Size(1533, 947);
             this.tabControl1.TabIndex = 2;
             // 
             // tabPage1
@@ -167,10 +170,11 @@
             this.tabPage1.Controls.Add(this.label1);
             this.tabPage1.Controls.Add(this.groupBox1);
             this.tabPage1.Controls.Add(this.groupBox2);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Location = new System.Drawing.Point(4, 29);
+            this.tabPage1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1014, 588);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tabPage1.Size = new System.Drawing.Size(1525, 914);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Project";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -178,21 +182,24 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(11, 538);
+            this.label1.Location = new System.Drawing.Point(16, 828);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(658, 13);
+            this.label1.Size = new System.Drawing.Size(814, 20);
             this.label1.TabIndex = 14;
-            this.label1.Text = "Manage project details.These details are used to render layers/files for the data" +
-    " model.The layers are determined by the selected package.";
+            this.label1.Text = "These details are used to render layers/files for the data model.The layers are d" +
+    "etermined by the selected package.";
             // 
             // groupBox1
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.groupBox1.Controls.Add(this.ProjectDetailsUserControl1);
-            this.groupBox1.Location = new System.Drawing.Point(8, 7);
+            this.groupBox1.Location = new System.Drawing.Point(12, 11);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(375, 515);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.groupBox1.Size = new System.Drawing.Size(562, 794);
             this.groupBox1.TabIndex = 13;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Project Details";
@@ -202,12 +209,12 @@
             this.ProjectDetailsUserControl1.BaseNameSpace = "";
             this.ProjectDetailsUserControl1.Changed = false;
             this.ProjectDetailsUserControl1.GroupBy = DotNetScaffolder.Mapping.MetaData.Enum.GenerationType.Domain;
-            this.ProjectDetailsUserControl1.Location = new System.Drawing.Point(6, 20);
-            this.ProjectDetailsUserControl1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.ProjectDetailsUserControl1.Location = new System.Drawing.Point(9, 31);
+            this.ProjectDetailsUserControl1.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
             this.ProjectDetailsUserControl1.Name = "ProjectDetailsUserControl1";
             this.ProjectDetailsUserControl1.OutputFolder = "";
             this.ProjectDetailsUserControl1.Project = null;
-            this.ProjectDetailsUserControl1.Size = new System.Drawing.Size(382, 123);
+            this.ProjectDetailsUserControl1.Size = new System.Drawing.Size(573, 189);
             this.ProjectDetailsUserControl1.TabIndex = 0;
             // 
             // groupBox2
@@ -217,9 +224,11 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox2.Controls.Add(this.ProjectDomainUserControl1);
             this.groupBox2.Controls.Add(this.groupBox3);
-            this.groupBox2.Location = new System.Drawing.Point(400, 7);
+            this.groupBox2.Location = new System.Drawing.Point(600, 11);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(597, 515);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.groupBox2.Size = new System.Drawing.Size(896, 794);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Project Domains";
@@ -228,18 +237,20 @@
             // 
             this.ProjectDomainUserControl1.ApplicationService = null;
             this.ProjectDomainUserControl1.Changed = false;
-            this.ProjectDomainUserControl1.Location = new System.Drawing.Point(16, 20);
-            this.ProjectDomainUserControl1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.ProjectDomainUserControl1.Location = new System.Drawing.Point(24, 31);
+            this.ProjectDomainUserControl1.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
             this.ProjectDomainUserControl1.Name = "ProjectDomainUserControl1";
-            this.ProjectDomainUserControl1.Size = new System.Drawing.Size(324, 106);
+            this.ProjectDomainUserControl1.Size = new System.Drawing.Size(486, 163);
             this.ProjectDomainUserControl1.TabIndex = 19;
             // 
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.projectDomainDetailsUserControl1);
-            this.groupBox3.Location = new System.Drawing.Point(16, 130);
+            this.groupBox3.Location = new System.Drawing.Point(24, 200);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(566, 239);
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.groupBox3.Size = new System.Drawing.Size(849, 368);
             this.groupBox3.TabIndex = 18;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Domain Details";
@@ -248,8 +259,8 @@
             // 
             this.projectDomainDetailsUserControl1.ApplicationService = null;
             this.projectDomainDetailsUserControl1.DomainName = "";
-            this.projectDomainDetailsUserControl1.Location = new System.Drawing.Point(7, 20);
-            this.projectDomainDetailsUserControl1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.projectDomainDetailsUserControl1.Location = new System.Drawing.Point(10, 31);
+            this.projectDomainDetailsUserControl1.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
             this.projectDomainDetailsUserControl1.Name = "projectDomainDetailsUserControl1";
             this.projectDomainDetailsUserControl1.Packages = null;
             this.projectDomainDetailsUserControl1.SavePath = null;
@@ -260,17 +271,18 @@
             this.projectDomainDetailsUserControl1.SelectedNamingConvention = new System.Guid("00000000-0000-0000-0000-000000000000");
             this.projectDomainDetailsUserControl1.SelectedPackage = null;
             this.projectDomainDetailsUserControl1.SelectedSourceType = new System.Guid("00000000-0000-0000-0000-000000000000");
-            this.projectDomainDetailsUserControl1.Size = new System.Drawing.Size(525, 211);
+            this.projectDomainDetailsUserControl1.Size = new System.Drawing.Size(788, 325);
             this.projectDomainDetailsUserControl1.TabIndex = 0;
             // 
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.label2);
             this.tabPage2.Controls.Add(this.packageUserControl1);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Location = new System.Drawing.Point(4, 29);
+            this.tabPage2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1014, 588);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tabPage2.Size = new System.Drawing.Size(1525, 913);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Packages";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -278,20 +290,20 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(11, 538);
+            this.label2.Location = new System.Drawing.Point(16, 828);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(474, 13);
+            this.label2.Size = new System.Drawing.Size(566, 20);
             this.label2.TabIndex = 15;
-            this.label2.Text = "Manage Packages.Packages consist of templates.Each template will be used to rende" +
-    "r files/layers.";
+            this.label2.Text = "Packages consist of templates.Each template will be used to render files/layers.";
             // 
             // packageUserControl1
             // 
             this.packageUserControl1.DataSource = null;
-            this.packageUserControl1.Location = new System.Drawing.Point(6, 6);
-            this.packageUserControl1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.packageUserControl1.Location = new System.Drawing.Point(9, 9);
+            this.packageUserControl1.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
             this.packageUserControl1.Name = "packageUserControl1";
-            this.packageUserControl1.Size = new System.Drawing.Size(975, 514);
+            this.packageUserControl1.Size = new System.Drawing.Size(1462, 791);
             this.packageUserControl1.TabIndex = 0;
             this.packageUserControl1.Templates = ((System.Collections.Generic.List<DotNetScaffolder.Mapping.MetaData.Project.Packages.Template>)(resources.GetObject("packageUserControl1.Templates")));
             // 
@@ -299,10 +311,11 @@
             // 
             this.tabPage3.Controls.Add(this.label3);
             this.tabPage3.Controls.Add(this.TemplateManagementUserControl1);
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Location = new System.Drawing.Point(4, 29);
+            this.tabPage3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(1014, 588);
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tabPage3.Size = new System.Drawing.Size(1525, 913);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Templates";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -310,20 +323,21 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(11, 538);
+            this.label3.Location = new System.Drawing.Point(16, 828);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(517, 13);
+            this.label3.Size = new System.Drawing.Size(630, 20);
             this.label3.TabIndex = 16;
-            this.label3.Text = "Manage templates.A template is used specify a T4 script.This script will then be " +
-    "used to generate a file/layer.";
+            this.label3.Text = "A template is used specify a T4 script.This script will then be used to generate " +
+    "a file/layer.";
             // 
             // TemplateManagementUserControl1
             // 
             this.TemplateManagementUserControl1.DataSource = null;
-            this.TemplateManagementUserControl1.Location = new System.Drawing.Point(9, 8);
-            this.TemplateManagementUserControl1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.TemplateManagementUserControl1.Location = new System.Drawing.Point(14, 12);
+            this.TemplateManagementUserControl1.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
             this.TemplateManagementUserControl1.Name = "TemplateManagementUserControl1";
-            this.TemplateManagementUserControl1.Size = new System.Drawing.Size(938, 506);
+            this.TemplateManagementUserControl1.Size = new System.Drawing.Size(1407, 778);
             this.TemplateManagementUserControl1.TabIndex = 0;
             // 
             // openFileDialog1
@@ -333,15 +347,16 @@
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1022, 682);
+            this.ClientSize = new System.Drawing.Size(1533, 1050);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.menuStrip1);
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.MaximizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(20, 688);
+            this.MinimumSize = new System.Drawing.Size(22, 1028);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Code Generator";

@@ -15,6 +15,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.Edmxs
     using DotNetScaffolder.Components.Common.Contract;
     using DotNetScaffolder.Components.Common.Contract.UI;
     using DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.SourceOptions;
+    using DotNetScaffolder.Core.Common.Validation;
 
     using global::Common.Logging;
 
@@ -69,6 +70,11 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.Edmxs
         ///     Gets or sets the source type.
         /// </summary>
         public ISourceType SourceType { get; set; }
+
+        /// <summary>
+        /// Gets or sets the validation result.
+        /// </summary>
+        public List<Validation> ValidationResult { get; set; }
 
         #endregion
 
@@ -136,6 +142,29 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.Edmxs
             }
 
             Logger.Trace("Completed TestData()");
+        }
+
+        /// <summary>
+        /// The validate.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="List"/>.
+        /// </returns>
+        public List<Validation> Validate()
+        {
+            Logger.Trace("Started Validation()");
+
+            List<Validation> result = new List<Validation>();
+
+            if (string.IsNullOrEmpty(this.TxtFilePath.Text))
+            {
+                Validation validation = new Validation(ValidationType.SourceTypeId, "The Edmx Path may not be empty");
+                result.Add(validation);
+                this.ErrorProvider1.SetError(this.TxtFilePath, validation.Description);
+            }
+
+            Logger.Trace("Completed Validation()");
+            return result;
         }
 
         #endregion

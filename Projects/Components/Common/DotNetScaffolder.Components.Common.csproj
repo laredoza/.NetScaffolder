@@ -67,6 +67,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Core\Common\DotNetScaffolder.Core.Common.csproj">
+      <Project>{CDACE52C-F991-40B5-80ED-4947A100EC52}</Project>
+      <Name>DotNetScaffolder.Core.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Core\Forms\FormControls\FormControls.csproj">
       <Project>{6a2e8779-4539-46d1-b3a0-1c3b205a95ab}</Project>
       <Name>FormControls</Name>

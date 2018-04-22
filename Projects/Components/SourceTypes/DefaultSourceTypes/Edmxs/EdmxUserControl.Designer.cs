@@ -28,11 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.BtnBrowse = new System.Windows.Forms.Button();
             this.TxtFilePath = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.ErrorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // openFileDialog1
@@ -42,7 +45,7 @@
             // 
             // BtnBrowse
             // 
-            this.BtnBrowse.Location = new System.Drawing.Point(545, 36);
+            this.BtnBrowse.Location = new System.Drawing.Point(575, 36);
             this.BtnBrowse.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.BtnBrowse.Name = "BtnBrowse";
             this.BtnBrowse.Size = new System.Drawing.Size(112, 35);
@@ -79,6 +82,10 @@
             this.label1.TabIndex = 14;
             this.label1.Text = "Update datasource settings";
             // 
+            // ErrorProvider1
+            // 
+            this.ErrorProvider1.ContainerControl = this;
+            // 
             // EdmxUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -90,6 +97,7 @@
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "EdmxUserControl";
             this.Size = new System.Drawing.Size(702, 175);
+            ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -101,5 +109,6 @@
         private System.Windows.Forms.TextBox TxtFilePath;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ErrorProvider ErrorProvider1;
     }
 }

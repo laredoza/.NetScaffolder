@@ -105,8 +105,11 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Sources
         /// </param>
         private void BtnSave_Click(object sender, EventArgs e)
         {
-            this.sourceTypeControl.SaveData(this.SavePath);
-            this.Close();
+            if (this.sourceTypeControl.Validate().Count == 0)
+            {
+                this.sourceTypeControl.SaveData(this.SavePath);
+                this.Close();
+            }
         }
 
         /// <summary>
@@ -120,7 +123,14 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Sources
         /// </param>
         private void BtnTest_Click(object sender, EventArgs e)
         {
-            this.sourceTypeControl.TestData(this.SavePath);
+            Logger.Trace("Test Button Click Start");
+
+            if (this.DataSource != null && this.sourceTypeControl.Validate().Count == 0)
+            {
+                this.sourceTypeControl.TestData(this.SavePath);
+            }
+
+            Logger.Trace("Test Button Click Completed");
         }
 
         /// <summary>
