@@ -78,6 +78,19 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
         /// </param>
         public void Fix(DatabaseModel model)
         {
+            Logger.Trace("Started Import()");
+
+            foreach (Table modelTable in model.Tables)
+            {
+                foreach (var relationship in modelTable.RelationShips)
+                {
+                    // Todo: Don't think this is the best way to do this. Will probably cause issues with duplicate table names
+                    relationship.RelatedTable = model.Tables.FirstOrDefault(t => t.TableName == relationship.TableName);
+                    relationship.SchemaName = relationship.RelatedTable.SchemaName;
+                }
+            }
+
+            Logger.Trace("Completed Import()");
         }
 
         /// <summary>
@@ -91,6 +104,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
         /// </returns>
         public DatabaseModel Import(object options)
         {
+            Logger.Trace("Started Import()");
             DatabaseModel result = new DatabaseModel();
 
             AdoSourceOptions adoOptions = options as AdoSourceOptions;
@@ -105,7 +119,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
             {
                 // foreach (var table in schema.Tables.Where(t => t.Name == "BankAccount"))
                 // Debug.WriteLine("Table " + table.Name);
-                newTable = new Table { TableName = table.Name };
+                newTable = new Table { TableName = table.Name, SchemaName = table.SchemaOwner };
                 result.Tables.Add(newTable);
 
                 foreach (var column in table.Columns)
@@ -156,6 +170,8 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
                 }
             }
 
+            this.Fix(result);
+            Logger.Trace("Completed Import()");
             return result;
         }
 
