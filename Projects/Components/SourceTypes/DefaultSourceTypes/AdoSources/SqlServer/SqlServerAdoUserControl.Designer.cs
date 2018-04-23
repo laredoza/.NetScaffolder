@@ -42,6 +42,7 @@
             this.TxtConnection.Name = "TxtConnection";
             this.TxtConnection.Size = new System.Drawing.Size(526, 26);
             this.TxtConnection.TabIndex = 8;
+            this.TxtConnection.TextChanged += new System.EventHandler(this.TxtConnection_TextChanged);
             // 
             // label2
             // 

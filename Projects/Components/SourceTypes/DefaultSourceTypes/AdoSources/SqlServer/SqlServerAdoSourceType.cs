@@ -11,6 +11,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.Composition;
+    using System.Data.SqlClient;
     using System.IO;
     using System.Linq;
     using System.Windows.Forms;
@@ -93,12 +94,12 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
             DatabaseModel result = new DatabaseModel();
 
             AdoSourceOptions adoOptions = options as AdoSourceOptions;
-            var dbReader = new DatabaseReader(adoOptions.ConnectionString, adoOptions.ProviderName);
-            var schema = dbReader.ReadAll();
+            var databaseReader = new DatabaseReader(adoOptions.ConnectionString, adoOptions.ProviderName);
+            var schema = databaseReader.ReadAll();
 
             // schema.Tables[0].CheckConstraints[0].RefersToConstraint
-            Table newTable = new Table();
-            Column newColumn = new Column();
+            Table newTable;
+            Column newColumn;
 
             foreach (var table in schema.Tables.Where(t => t.Name != "sysdiagrams"))
             {
@@ -189,7 +190,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
                              {
                                  ProviderName = "System.Data.SqlClient",
                                  ConnectionString =
-                                     @"Data Source=.\SQLEXPRESS;Integrated Security=true;Initial Catalog=Test"
+                                     @"Data Source=.\SQLEXPRESS;Integrated Security=true;Initial Catalog=Banking"
                              };
             }
 
@@ -337,7 +338,31 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
         /// </exception>
         public bool Test(object parameters)
         {
-            throw new NotImplementedException();
+            Logger.Trace("Started Test()");
+            bool result = false;
+
+            AdoSourceOptions adoOptions = parameters as AdoSourceOptions;
+            using (SqlConnection connection =
+                new SqlConnection(adoOptions.ConnectionString))
+            {
+                // Open the connection in a try/catch block. 
+                // Create and execute the DataReader, writing the result
+                // set to the console window.
+                try
+                {
+                    connection.Open();
+
+                    result = true;
+                }
+                catch (Exception ex)
+                {
+                    Logger.Error($"Unable to connect to database:{ex.Message}");
+                }
+            }
+
+            Logger.Trace("Complete Test()");
+
+            return result;
         }
 
         #endregion
