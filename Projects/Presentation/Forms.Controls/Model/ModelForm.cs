@@ -107,7 +107,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         {
             if (this.ModelFormUserControl1.currentlySelectedControl == null
                 || (this.ModelFormUserControl1.currentlySelectedControl != null
-                    && this.ModelFormUserControl1.currentlySelectedControl.Validate().Count > 0))
+                    && this.ModelFormUserControl1.currentlySelectedControl.Validate().Count == 0))
             {
                 this.Close();
             }

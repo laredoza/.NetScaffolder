@@ -28,10 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.TxtDescription = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
-            this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.TxtBoxDefault = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.TxtBoxScale = new System.Windows.Forms.TextBox();
@@ -50,14 +50,15 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.ErrorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.TxtDescription);
             this.groupBox1.Controls.Add(this.label14);
-            this.groupBox1.Controls.Add(this.checkBox3);
             this.groupBox1.Controls.Add(this.TxtBoxDefault);
             this.groupBox1.Controls.Add(this.label13);
             this.groupBox1.Controls.Add(this.TxtBoxScale);
@@ -89,6 +90,7 @@
             this.TxtDescription.Name = "TxtDescription";
             this.TxtDescription.Size = new System.Drawing.Size(121, 20);
             this.TxtDescription.TabIndex = 77;
+            this.TxtDescription.TextChanged += new System.EventHandler(this.TxtDescription_TextChanged);
             // 
             // label14
             // 
@@ -99,22 +101,13 @@
             this.label14.TabIndex = 76;
             this.label14.Text = "Description:";
             // 
-            // checkBox3
-            // 
-            this.checkBox3.AutoSize = true;
-            this.checkBox3.Location = new System.Drawing.Point(276, 259);
-            this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(65, 17);
-            this.checkBox3.TabIndex = 75;
-            this.checkBox3.Text = "Enabled";
-            this.checkBox3.UseVisualStyleBackColor = true;
-            // 
             // TxtBoxDefault
             // 
             this.TxtBoxDefault.Location = new System.Drawing.Point(113, 221);
             this.TxtBoxDefault.Name = "TxtBoxDefault";
             this.TxtBoxDefault.Size = new System.Drawing.Size(121, 20);
             this.TxtBoxDefault.TabIndex = 74;
+            this.TxtBoxDefault.TextChanged += new System.EventHandler(this.TxtBoxDefault_TextChanged);
             // 
             // label13
             // 
@@ -132,6 +125,7 @@
             this.TxtBoxScale.Size = new System.Drawing.Size(121, 20);
             this.TxtBoxScale.TabIndex = 72;
             this.TxtBoxScale.Text = "0";
+            this.TxtBoxScale.TextChanged += new System.EventHandler(this.TxtBoxScale_TextChanged);
             // 
             // label12
             // 
@@ -149,6 +143,7 @@
             this.TxtBoxPrecision.Size = new System.Drawing.Size(121, 20);
             this.TxtBoxPrecision.TabIndex = 70;
             this.TxtBoxPrecision.Text = "0";
+            this.TxtBoxPrecision.TextChanged += new System.EventHandler(this.TxtBoxPrecision_TextChanged);
             // 
             // label11
             // 
@@ -168,6 +163,7 @@
             this.CheckBoxPrimaryKey.TabIndex = 68;
             this.CheckBoxPrimaryKey.Text = "Primary Key";
             this.CheckBoxPrimaryKey.UseVisualStyleBackColor = true;
+            this.CheckBoxPrimaryKey.CheckedChanged += new System.EventHandler(this.CheckBoxPrimaryKey_CheckedChanged);
             // 
             // TxtBoxLength
             // 
@@ -175,6 +171,7 @@
             this.TxtBoxLength.Name = "TxtBoxLength";
             this.TxtBoxLength.Size = new System.Drawing.Size(121, 20);
             this.TxtBoxLength.TabIndex = 67;
+            this.TxtBoxLength.TextChanged += new System.EventHandler(this.TxtBoxLength_TextChanged);
             // 
             // label2
             // 
@@ -194,6 +191,7 @@
             this.CheckBoxRequired.TabIndex = 65;
             this.CheckBoxRequired.Text = "Required";
             this.CheckBoxRequired.UseVisualStyleBackColor = true;
+            this.CheckBoxRequired.CheckedChanged += new System.EventHandler(this.CheckBoxRequired_CheckedChanged);
             // 
             // ComboBoxDataType
             // 
@@ -207,6 +205,7 @@
             this.ComboBoxDataType.Name = "ComboBoxDataType";
             this.ComboBoxDataType.Size = new System.Drawing.Size(121, 21);
             this.ComboBoxDataType.TabIndex = 64;
+            this.ComboBoxDataType.SelectedIndexChanged += new System.EventHandler(this.ComboBoxDataType_SelectedIndexChanged);
             // 
             // LblOrder
             // 
@@ -274,16 +273,21 @@
             this.label4.TabIndex = 57;
             this.label4.Text = "Name:";
             // 
+            // ErrorProvider1
+            // 
+            this.ErrorProvider1.ContainerControl = this;
+            // 
             // ModelFieldUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.groupBox1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "ModelFieldUserControl";
             this.Size = new System.Drawing.Size(724, 502);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -293,7 +297,6 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TextBox TxtDescription;
         private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.CheckBox checkBox3;
         private System.Windows.Forms.TextBox TxtBoxDefault;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.TextBox TxtBoxScale;
@@ -312,5 +315,6 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ErrorProvider ErrorProvider1;
     }
 }

@@ -63,10 +63,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         /// </summary>
         public string ColumnName
         {
-            get
-            {
-                return this.LblName.Text;
-            }
+            get => this.LblName.Text;
 
             set
             {
@@ -87,10 +84,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         /// </summary>
         public Column DataSource
         {
-            get
-            {
-                return this.dataSource;
-            }
+            get => this.dataSource;
 
             set
             {
@@ -100,20 +94,20 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         }
 
         /// <summary>
-        /// Gets or sets the data type.
+        ///     Gets or sets the data type.
         /// </summary>
         public DomainDataType DataType
         {
             get
             {
-                ComboboxItem item = this.ComboBoxDataType.SelectedItem as ComboboxItem;
-                int index = Convert.ToInt32(item.Value);
+                var item = this.ComboBoxDataType.SelectedItem as ComboboxItem;
+                var index = Convert.ToInt32(item.Value);
                 return (DomainDataType)index;
             }
 
             set
             {
-                if (this.DataSource.DomainDataType != value)
+                if (this.DataSource != null && this.DataSource.DomainDataType != value)
                 {
                     this.DataSource.DomainDataType = value;
                 }
@@ -126,14 +120,11 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         }
 
         /// <summary>
-        /// Gets or sets the default value.
+        ///     Gets or sets the default value.
         /// </summary>
         public string DefaultValue
         {
-            get
-            {
-                return this.TxtBoxDefault.Text;
-            }
+            get => this.TxtBoxDefault.Text;
 
             set
             {
@@ -154,10 +145,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         /// </summary>
         public string Description
         {
-            get
-            {
-                return this.TxtDescription.Text;
-            }
+            get => this.TxtDescription.Text;
 
             set
             {
@@ -174,14 +162,11 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether is primary key.
+        ///     Gets or sets a value indicating whether is primary key.
         /// </summary>
         public bool IsPrimaryKey
         {
-            get
-            {
-                return this.CheckBoxPrimaryKey.Checked;
-            }
+            get => this.CheckBoxPrimaryKey.Checked;
 
             set
             {
@@ -198,14 +183,11 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether is required.
+        ///     Gets or sets a value indicating whether is required.
         /// </summary>
         public bool IsRequired
         {
-            get
-            {
-                return this.CheckBoxRequired.Checked;
-            }
+            get => this.CheckBoxRequired.Checked;
 
             set
             {
@@ -222,14 +204,11 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         }
 
         /// <summary>
-        /// Gets or sets the length.
+        ///     Gets or sets the length.
         /// </summary>
         public int Length
         {
-            get
-            {
-                return Convert.ToInt32(this.TxtBoxLength.Text);
-            }
+            get => Convert.ToInt32(this.TxtBoxLength.Text);
 
             set
             {
@@ -246,14 +225,11 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         }
 
         /// <summary>
-        /// Gets or sets the order.
+        ///     Gets or sets the order.
         /// </summary>
         public int Order
         {
-            get
-            {
-                return Convert.ToInt32(this.LblOrder.Text);
-            }
+            get => Convert.ToInt32(this.LblOrder.Text);
 
             set
             {
@@ -270,14 +246,11 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         }
 
         /// <summary>
-        /// Gets or sets the precision.
+        ///     Gets or sets the precision.
         /// </summary>
         public int Precision
         {
-            get
-            {
-                return Convert.ToInt32(this.TxtBoxPrecision.Text);
-            }
+            get => Convert.ToInt32(this.TxtBoxPrecision.Text);
 
             set
             {
@@ -294,14 +267,11 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         }
 
         /// <summary>
-        /// Gets or sets the scale.
+        ///     Gets or sets the scale.
         /// </summary>
         public int Scale
         {
-            get
-            {
-                return Convert.ToInt32(this.TxtBoxScale.Text);
-            }
+            get => Convert.ToInt32(this.TxtBoxScale.Text);
 
             set
             {
@@ -317,16 +287,21 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the validation result.
+        /// </summary>
+        public List<Validation> ValidationResult { get; set; }
+
         #endregion
 
         #region Public Methods And Operators
 
         /// <summary>
-        /// The init combo box data type.
+        ///     The init combo box data type.
         /// </summary>
         public void InitComboBoxDataType()
         {
-            List<ComboboxItem> items = new List<ComboboxItem>();
+            var items = new List<ComboboxItem>();
 
             foreach (DomainDataType p in Enum.GetValues(typeof(DomainDataType)))
             {
@@ -338,9 +313,169 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
             this.ComboBoxDataType.DataSource = items;
         }
 
+        /// <summary>
+        ///     The validate.
+        /// </summary>
+        /// <returns>
+        ///     The <see cref="List" />.
+        /// </returns>
+        public List<Validation> Validate()
+        {
+            Logger.Trace("Started Validation()");
+
+            var result = new List<Validation>();
+
+            // if (!string.IsNullOrEmpty(this.TxtBoxLength.Text))
+            // {
+            // if (!int.TryParse(this.TxtBoxLength.Text, out test))
+            // {
+            // Validation validation = new Validation(
+            // ValidationType.ModelErrorName,
+            // "Length must be a valid number");
+            // result.Add(validation);
+            // this.ErrorProvider1.SetError(this.TxtBoxLength, validation.Description);
+            // }
+            // }
+            Logger.Trace("Completed Validation()");
+            return result;
+        }
+
         #endregion
 
         #region Other Methods
+
+        /// <summary>
+        /// The check box primary key_ checked changed.
+        /// </summary>
+        /// <param name="sender">
+        /// The sender.
+        /// </param>
+        /// <param name="e">
+        /// The e.
+        /// </param>
+        private void CheckBoxPrimaryKey_CheckedChanged(object sender, EventArgs e)
+        {
+            this.IsPrimaryKey = this.CheckBoxPrimaryKey.Checked;
+        }
+
+        /// <summary>
+        /// The check box required_ checked changed.
+        /// </summary>
+        /// <param name="sender">
+        /// The sender.
+        /// </param>
+        /// <param name="e">
+        /// The e.
+        /// </param>
+        private void CheckBoxRequired_CheckedChanged(object sender, EventArgs e)
+        {
+            this.IsRequired = this.CheckBoxRequired.Checked;
+        }
+
+        /// <summary>
+        /// The combo box data type_ selected index changed.
+        /// </summary>
+        /// <param name="sender">
+        /// The sender.
+        /// </param>
+        /// <param name="e">
+        /// The e.
+        /// </param>
+        private void ComboBoxDataType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.DataType = (DomainDataType)this.ComboBoxDataType.SelectedValue;
+        }
+
+        /// <summary>
+        /// The txt box default_ text changed.
+        /// </summary>
+        /// <param name="sender">
+        /// The sender.
+        /// </param>
+        /// <param name="e">
+        /// The e.
+        /// </param>
+        private void TxtBoxDefault_TextChanged(object sender, EventArgs e)
+        {
+            this.DefaultValue = this.TxtBoxDefault.Text;
+        }
+
+        /// <summary>
+        /// The txt box length_ text changed.
+        /// </summary>
+        /// <param name="sender">
+        /// The sender.
+        /// </param>
+        /// <param name="e">
+        /// The e.
+        /// </param>
+        private void TxtBoxLength_TextChanged(object sender, EventArgs e)
+        {
+            int length = 0;
+
+            if (!string.IsNullOrEmpty(this.TxtBoxLength.Text))
+            {
+                int.TryParse(this.TxtBoxLength.Text, out length);
+            }
+
+            this.Length = length;
+        }
+
+        /// <summary>
+        /// The txt box precision_ text changed.
+        /// </summary>
+        /// <param name="sender">
+        /// The sender.
+        /// </param>
+        /// <param name="e">
+        /// The e.
+        /// </param>
+        private void TxtBoxPrecision_TextChanged(object sender, EventArgs e)
+        {
+            int precision = 0;
+
+            if (!string.IsNullOrEmpty(this.TxtBoxPrecision.Text))
+            {
+                int.TryParse(this.TxtBoxPrecision.Text, out precision);
+            }
+
+            this.Precision = precision;
+        }
+
+        /// <summary>
+        /// The txt box scale_ text changed.
+        /// </summary>
+        /// <param name="sender">
+        /// The sender.
+        /// </param>
+        /// <param name="e">
+        /// The e.
+        /// </param>
+        private void TxtBoxScale_TextChanged(object sender, EventArgs e)
+        {
+            int scale = 0;
+
+            if (!string.IsNullOrEmpty(this.TxtBoxScale.Text))
+            {
+                int.TryParse(this.TxtBoxScale.Text, out scale);
+            }
+
+            this.Scale = scale;
+        }
+
+        /// <summary>
+        /// The txt description_ text changed.
+        /// </summary>
+        /// <param name="sender">
+        /// The sender.
+        /// </param>
+        /// <param name="e">
+        /// The e.
+        /// </param>
+        private void TxtDescription_TextChanged(object sender, EventArgs e)
+        {
+            this.Description = this.TxtDescription.Text;
+        }
 
         /// <summary>
         ///     The update data source.
@@ -371,24 +506,5 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         }
 
         #endregion
-
-        public List<Validation> ValidationResult { get; set; }
-
-        public List<Validation> Validate()
-        {
-            Logger.Trace("Started Validation()");
-
-            List<Validation> result = new List<Validation>();
-
-            //if (string.IsNullOrEmpty(this.TxtName.Text))
-            //{
-            //    Validation validation = new Validation(ValidationType.ModelErrorName, "The model name may not be empty");
-            //    result.Add(validation);
-            //    this.ErrorProvider1.SetError(this.TxtName, validation.Description);
-            //}
-
-            Logger.Trace("Completed Validation()");
-            return result;
-        }
     }
 }

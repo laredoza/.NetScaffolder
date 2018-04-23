@@ -49,69 +49,61 @@
             this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(4, 5);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.groupBox1.Size = new System.Drawing.Size(1070, 755);
+            this.groupBox1.Size = new System.Drawing.Size(713, 491);
             this.groupBox1.TabIndex = 12;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Model Details";
             // 
             // TxtDescription
             // 
-            this.TxtDescription.Location = new System.Drawing.Point(136, 125);
-            this.TxtDescription.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.TxtDescription.Location = new System.Drawing.Point(91, 81);
             this.TxtDescription.Name = "TxtDescription";
-            this.TxtDescription.Size = new System.Drawing.Size(343, 26);
+            this.TxtDescription.Size = new System.Drawing.Size(230, 20);
             this.TxtDescription.TabIndex = 17;
             this.TxtDescription.TextChanged += new System.EventHandler(this.TxtDescription_TextChanged);
             // 
             // TxtName
             // 
-            this.TxtName.Location = new System.Drawing.Point(136, 85);
-            this.TxtName.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.TxtName.Location = new System.Drawing.Point(91, 55);
             this.TxtName.Name = "TxtName";
-            this.TxtName.Size = new System.Drawing.Size(343, 26);
+            this.TxtName.Size = new System.Drawing.Size(230, 20);
             this.TxtName.TabIndex = 16;
             this.TxtName.TextChanged += new System.EventHandler(this.TxtName_TextChanged);
             // 
             // TxtSchema
             // 
             this.TxtSchema.Enabled = false;
-            this.TxtSchema.Location = new System.Drawing.Point(136, 40);
-            this.TxtSchema.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.TxtSchema.Location = new System.Drawing.Point(91, 26);
             this.TxtSchema.Name = "TxtSchema";
-            this.TxtSchema.Size = new System.Drawing.Size(343, 26);
+            this.TxtSchema.Size = new System.Drawing.Size(230, 20);
             this.TxtSchema.TabIndex = 15;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(16, 117);
-            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label7.Location = new System.Drawing.Point(11, 76);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(93, 20);
+            this.label7.Size = new System.Drawing.Size(63, 13);
             this.label7.TabIndex = 14;
             this.label7.Text = "Description:";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(54, 85);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Location = new System.Drawing.Point(36, 55);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(55, 20);
+            this.label3.Size = new System.Drawing.Size(38, 13);
             this.label3.TabIndex = 13;
             this.label3.Text = "Name:";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(38, 45);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(25, 29);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(72, 20);
+            this.label1.Size = new System.Drawing.Size(49, 13);
             this.label1.TabIndex = 12;
             this.label1.Text = "Schema:";
             // 
@@ -121,11 +113,12 @@
             // 
             // ModelUserControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.groupBox1);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "ModelUserControl";
-            this.Size = new System.Drawing.Size(1086, 775);
+            this.Size = new System.Drawing.Size(724, 504);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider1)).EndInit();

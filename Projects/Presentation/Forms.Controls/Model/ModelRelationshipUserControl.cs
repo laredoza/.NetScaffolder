@@ -16,6 +16,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
     using Common.Logging;
 
     using DotNetScaffolder.Core.Common;
+    using DotNetScaffolder.Core.Common.Validation;
     using DotNetScaffolder.Mapping.MetaData.Domain;
     using DotNetScaffolder.Mapping.MetaData.Enum;
     using DotNetScaffolder.Mapping.MetaData.Model;
@@ -25,7 +26,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
     /// <summary>
     ///     The relationship user control.
     /// </summary>
-    public partial class ModelRelationshipUserControl : UserControl
+    public partial class ModelRelationshipUserControl : UserControl, IValidate
     {
         #region Static Fields
 
@@ -426,5 +427,12 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         }
 
         #endregion
+
+        public List<Validation> ValidationResult { get; set; }
+
+        public List<Validation> Validate()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

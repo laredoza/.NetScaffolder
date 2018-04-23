@@ -99,6 +99,11 @@ namespace DotNetScaffolder.Core.Common.Validation
         /// <summary>
         /// The model error name.
         /// </summary>
-        ModelErrorName
+        ModelErrorName,
+
+        /// <summary>
+        /// The model field error.
+        /// </summary>
+        ModelFieldError
     }
 }

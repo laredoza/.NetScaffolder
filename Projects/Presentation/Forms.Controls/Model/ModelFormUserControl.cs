@@ -215,6 +215,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
                     var relationship = e.Node.Tag as Relationship;
                     this.relationshipControl.Domain = this.DataSource;
                     this.relationshipControl.DataSource = relationship;
+                    this.currentlySelectedControl = this.relationshipControl;
                     this.relationshipControl.BringToFront();
                 }
                 else if (e.Node.Tag == null)
