@@ -234,6 +234,11 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
             }
         }
 
+        /// <summary>
+        /// Gets or sets the validation result.
+        /// </summary>
+        public List<Validation> ValidationResult { get; set; }
+
         #endregion
 
         #region Public Methods And Operators
@@ -317,6 +322,26 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
                 comboBox.ValueMember = "Value";
                 comboBox.DataSource = items;
             }
+        }
+
+        /// <summary>
+        /// The validate.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="List"/>.
+        /// </returns>
+        public List<Validation> Validate()
+        {
+            Logger.Trace("Started Validation()");
+
+            var result = new List<Validation>();
+
+            this.ValidateDropDown(result, this.ComboBoxColumn, "A column must be selected");
+            this.ValidateDropDown(result, this.ComboBoxRelatedTable, "A related table must be selected");
+            this.ValidateDropDown(result, this.ComboBoxRelatedColumn, "A related table column must be selected");
+
+            Logger.Trace("Completed Validation()");
+            return result;
         }
 
         #endregion
@@ -426,36 +451,28 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
             Logger.Trace("Completed UpdateDataSource()");
         }
 
-        #endregion
-
-        public List<Validation> ValidationResult { get; set; }
-
-        public List<Validation> Validate()
-        {
-            Logger.Trace("Started Validation()");
-
-            var result = new List<Validation>();
-
-            this.ValidateDropDown(result, this.ComboBoxColumn, "A column must be selected");
-            this.ValidateDropDown(result, this.ComboBoxRelatedTable, "A related table must be selected");
-            this.ValidateDropDown(result, this.ComboBoxRelatedColumn, "A related table column must be selected");
-
-            Logger.Trace("Completed Validation()");
-            return result;
-        }
-
+        /// <summary>
+        /// The validate drop down.
+        /// </summary>
+        /// <param name="result">
+        /// The result.
+        /// </param>
+        /// <param name="comboBox">
+        /// The combo box.
+        /// </param>
+        /// <param name="errorMessage">
+        /// The error message.
+        /// </param>
         private void ValidateDropDown(List<Validation> result, ComboBox comboBox, string errorMessage)
         {
             if (comboBox.SelectedValue == null)
             {
-
-                Validation validation = new Validation(
-                    ValidationType.ModelFieldRepository,
-                    errorMessage);
+                Validation validation = new Validation(ValidationType.ModelFieldRepository, errorMessage);
                 result.Add(validation);
                 this.ErrorProvider1.SetError(comboBox, validation.Description);
             }
-
         }
+
+        #endregion
     }
 }
