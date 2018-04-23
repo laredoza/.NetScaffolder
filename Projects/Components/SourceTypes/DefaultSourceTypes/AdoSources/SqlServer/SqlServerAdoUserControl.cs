@@ -48,13 +48,14 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
         #region Constructors and Destructors
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="Oracle.SqlServerAdoUserControl" /> class.
+        ///     Initializes a new instance of the <see cref="SqlServerAdoUserControl" /> class.
         /// </summary>
         public SqlServerAdoUserControl()
         {
             Logger.Trace("Started SqlServerAdoUserControl()");
             this.InitializeComponent();
             this.options = new AdoSourceOptions();
+
             Logger.Trace("Completed SqlServerAdoUserControl()");
         }
 

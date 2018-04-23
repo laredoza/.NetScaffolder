@@ -53,8 +53,10 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
         public OracleAdoUserControl()
         {
             Logger.Trace("Started OracleAdoUserControl()");
+
             this.InitializeComponent();
             this.options = new AdoSourceOptions();
+
             Logger.Trace("Completed OracleAdoUserControl()");
         }
 

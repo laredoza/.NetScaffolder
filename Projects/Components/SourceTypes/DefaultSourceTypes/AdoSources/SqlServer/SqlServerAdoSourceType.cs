@@ -185,6 +185,12 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
             else
             {
                 Logger.Trace("Path Doesn't Exist");
+                result = new AdoSourceOptions
+                             {
+                                 ProviderName = "System.Data.SqlClient",
+                                 ConnectionString =
+                                     @"Data Source=.\SQLEXPRESS;Integrated Security=true;Initial Catalog=Test"
+                             };
             }
 
             Logger.Trace("Completed Import()");
@@ -287,7 +293,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
         {
             Logger.Trace($"Started ReturnFilePath({basePath}");
             Logger.Trace($"Completed ReturnFilePath({basePath}");
-            return basePath + @"\GenericAdoSourceType.xml";
+            return basePath + @"\SqlServerAdoSourceType.xml";
         }
 
         /// <summary>

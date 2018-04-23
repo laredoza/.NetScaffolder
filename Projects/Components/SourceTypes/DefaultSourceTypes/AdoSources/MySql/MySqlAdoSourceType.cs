@@ -184,6 +184,12 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
             else
             {
                 Logger.Trace("Path Doesn't Exist");
+                result = new AdoSourceOptions
+                               {
+                                   ProviderName = "MySql.Data.MySqlClient",
+                                   ConnectionString =
+                                       @"server=127.0.0.1;uid=root;pwd=12345;database=oracle"
+                               };
             }
 
             Logger.Trace("Completed Import()");
@@ -286,7 +292,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
         {
             Logger.Trace($"Started ReturnFilePath({basePath}");
             Logger.Trace($"Completed ReturnFilePath({basePath}");
-            return basePath + @"\GenericAdoSourceType.xml";
+            return basePath + @"\MySqlAdoSourceType.xml";
         }
 
         /// <summary>

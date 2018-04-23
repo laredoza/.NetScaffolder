@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AdoSourceOptions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ConnectionString>Data Source=.\SQLEXPRESS;Integrated Security=true;Initial Catalog=Test</ConnectionString>
+  <ProviderName>System.Data.SqlClient</ProviderName>
+</AdoSourceOptions>
