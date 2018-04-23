@@ -61,14 +61,28 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AdoSources\AdoUserControl.cs">
+    <Compile Include="AdoSources\MySql\MySqlAdoSourceType.cs" />
+    <Compile Include="AdoSources\MySql\MySqlAdoUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="AdoSources\AdoUserControl.Designer.cs">
-      <DependentUpon>AdoUserControl.cs</DependentUpon>
+    <Compile Include="AdoSources\MySql\MySqlAdoUserControl.Designer.cs">
+      <DependentUpon>MySqlAdoUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AdoSources\Oracle\OracleAdoSourceType.cs" />
+    <Compile Include="AdoSources\Oracle\OracleAdoUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="AdoSources\Oracle\OracleAdoUserControl.Designer.cs">
+      <DependentUpon>OracleAdoUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AdoSources\SqlServer\SqlServerAdoUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="AdoSources\SqlServer\SqlServerAdoUserControl.Designer.cs">
+      <DependentUpon>SqlServerAdoUserControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Edmxs\EdmxSourceType.cs" />
-    <Compile Include="AdoSources\GenericAdoSourceType.cs" />
+    <Compile Include="AdoSources\SqlServer\SqlServerAdoSourceType.cs" />
     <Compile Include="Edmxs\EdmxUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -121,13 +135,20 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="AdoSources\AdoUserControl.resx">
-      <DependentUpon>AdoUserControl.cs</DependentUpon>
+    <EmbeddedResource Include="AdoSources\MySql\MySqlAdoUserControl.resx">
+      <DependentUpon>MySqlAdoUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AdoSources\Oracle\OracleAdoUserControl.resx">
+      <DependentUpon>OracleAdoUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AdoSources\SqlServer\SqlServerAdoUserControl.resx">
+      <DependentUpon>SqlServerAdoUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Edmxs\EdmxUserControl.resx">
       <DependentUpon>EdmxUserControl.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>echo f | xcopy /i /y "$(ProjectDir)bin\$(ConfigurationName)\$(TargetFileName)" "$(SolutionDir)\Projects\Presentation\Forms\Model\Package\$(TargetFileName)"</PostBuildEvent>

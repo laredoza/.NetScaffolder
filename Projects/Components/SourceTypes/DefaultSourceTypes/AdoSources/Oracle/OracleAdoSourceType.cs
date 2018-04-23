@@ -4,7 +4,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
+namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.Oracle
 {
     #region Usings
 
@@ -28,17 +28,21 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
     #endregion
 
     /// <summary>
-    /// The generic ado source type.
+    ///     The generic ado source type.
     /// </summary>
     [Export(typeof(ISourceType))]
-    [ExportMetadata("NameMetaData", "ADO.NET")]
-    [ExportMetadata("ValueMetaData", "4BC1B0C4-1E41-9146-82CF-599181CE4410")]
-    public class GenericAdoSourceType : ISourceType
+    [ExportMetadata("NameMetaData", "Oracle ADO.NET")]
+    [ExportMetadata("ValueMetaData", "4BC1B0C4-1E41-9146-82CF-699181CE4410")]
+    public class OracleAdoSourceType : ISourceType
     {
+        #region Static Fields
+
         /// <summary>
         ///     The logger.
         /// </summary>
         private static readonly ILog Logger = LogManager.GetLogger(string.Empty);
+
+        #endregion
 
         #region Public Methods And Operators
 
@@ -56,14 +60,22 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
             Logger.Trace("Started AddConfigUI()");
 
             Control parent = parameters as Control;
-            AdoUserControl newControl = new AdoUserControl();
-            newControl.Visible = true;
-            newControl.Dock = DockStyle.Fill;
+            OracleAdoUserControl newControl = new OracleAdoUserControl { Visible = true, Dock = DockStyle.Fill };
             newControl.BringToFront();
             parent.Controls.Add(newControl);
 
             Logger.Trace("Completed AddConfigUI()");
             return newControl;
+        }
+
+        /// <summary>
+        /// The fix.
+        /// </summary>
+        /// <param name="model">
+        /// The model.
+        /// </param>
+        public void Fix(DatabaseModel model)
+        {
         }
 
         /// <summary>
@@ -153,6 +165,9 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
         /// </param>
         /// <exception cref="NotImplementedException">
         /// </exception>
+        /// <returns>
+        /// The <see cref="object"/>.
+        /// </returns>
         public object Load(object parameters)
         {
             Logger.Trace("Started Import()");
@@ -214,6 +229,17 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
             }
         }
 
+        /// <summary>
+        /// The map domain data type to output type.
+        /// </summary>
+        /// <param name="type">
+        /// The type.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        /// <exception cref="NotImplementedException">
+        /// </exception>
         public string MapDomainDataTypeToOutputType(DomainDataType type)
         {
             Logger.Trace("Started MapDomainDataTypeToOutputType()");
@@ -238,12 +264,29 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
                     return "DateTime";
                 case DomainDataType.Single:
                     return "float";
-                //case case DomainDataType.Int16:
-                //    // Todo: Do something valid with this
-                //    return DomainDataType.String;
+
+                // case case DomainDataType.Int16:
+                // // Todo: Do something valid with this
+                // return DomainDataType.String;
                 default:
                     throw new NotImplementedException($"Invalid data type {type}");
             }
+        }
+
+        /// <summary>
+        /// The return file path.
+        /// </summary>
+        /// <param name="basePath">
+        /// The base path.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        public string ReturnFilePath(string basePath)
+        {
+            Logger.Trace($"Started ReturnFilePath({basePath}");
+            Logger.Trace($"Completed ReturnFilePath({basePath}");
+            return basePath + @"\GenericAdoSourceType.xml";
         }
 
         /// <summary>
@@ -291,33 +334,5 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
         }
 
         #endregion
-
-        /// <summary>
-        /// The return file path.
-        /// </summary>
-        /// <param name="basePath">
-        /// The base path.
-        /// </param>
-        /// <returns>
-        /// The <see cref="string"/>.
-        /// </returns>
-        public string ReturnFilePath(string basePath)
-        {
-            Logger.Trace($"Started ReturnFilePath({basePath}");
-            Logger.Trace($"Completed ReturnFilePath({basePath}");
-            return basePath + @"\GenericAdoSourceType.xml";
-        }
-
-
-        /// <summary>
-        /// The fix.
-        /// </summary>
-        /// <param name="model">
-        /// The model.
-        /// </param>
-        public void Fix(DatabaseModel model)
-        {
-
-        }
     }
 }

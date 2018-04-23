@@ -1,10 +1,10 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="AdoUserControl.cs" company="DotnetScaffolder">
+// <copyright file="SqlServerAdoUserControl.cs" company="DotnetScaffolder">
 //   MIT
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
+namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.Oracle
 {
     #region Usings
 
@@ -14,6 +14,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
 
     using DotNetScaffolder.Components.Common.Contract;
     using DotNetScaffolder.Components.Common.Contract.UI;
+    using DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.MySql;
     using DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.SourceOptions;
     using DotNetScaffolder.Core.Common.Validation;
 
@@ -24,7 +25,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
     /// <summary>
     ///     The ado user control.
     /// </summary>
-    public partial class AdoUserControl : UserControl, IDataSourceUI
+    public partial class OracleAdoUserControl : UserControl, IDataSourceUI
     {
         #region Static Fields
 
@@ -47,14 +48,14 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
         #region Constructors and Destructors
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="AdoUserControl" /> class.
+        ///     Initializes a new instance of the <see cref="MySql.MySqlAdoUserControl" /> class.
         /// </summary>
-        public AdoUserControl()
+        public OracleAdoUserControl()
         {
-            Logger.Trace("Started AdoUserControl()");
+            Logger.Trace("Started OracleAdoUserControl()");
             this.InitializeComponent();
             this.options = new AdoSourceOptions();
-            Logger.Trace("Completed AdoUserControl()");
+            Logger.Trace("Completed OracleAdoUserControl()");
         }
 
         #endregion

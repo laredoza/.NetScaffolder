@@ -9,6 +9,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
     #region Usings
 
     using DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources;
+    using DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.SqlServer;
     using DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.SourceOptions;
     using DotNetScaffolder.Mapping.MetaData.Model;
 
@@ -30,7 +31,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
         [TestMethod]
         public void GenericAdoSourceTypeUnitTest_Import()
         {
-            GenericAdoSourceType import = new GenericAdoSourceType();
+            SqlServerAdoSourceType import = new SqlServerAdoSourceType();
             DatabaseModel databaseModel = import.Import(new AdoSourceOptions());
             this.BaseSourceTypeUnitTest_TestValues(databaseModel);
         }

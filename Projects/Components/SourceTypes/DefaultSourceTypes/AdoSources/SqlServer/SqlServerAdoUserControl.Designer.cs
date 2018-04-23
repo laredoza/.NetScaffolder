@@ -1,6 +1,6 @@
 ﻿namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
 {
-    partial class AdoUserControl
+    partial class SqlServerAdoUserControl
     {
         /// <summary> 
         /// Required designer variable.
@@ -57,14 +57,14 @@
             // 
             this.ErrorProvider1.ContainerControl = this;
             // 
-            // AdoUserControl
+            // SqlServerAdoUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.TxtConnection);
             this.Controls.Add(this.label2);
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.Name = "AdoUserControl";
+            this.Name = "SqlServerAdoUserControl";
             this.Size = new System.Drawing.Size(694, 92);
             ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider1)).EndInit();
             this.ResumeLayout(false);
