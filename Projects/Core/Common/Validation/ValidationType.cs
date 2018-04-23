@@ -104,6 +104,11 @@ namespace DotNetScaffolder.Core.Common.Validation
         /// <summary>
         /// The model field error.
         /// </summary>
-        ModelFieldError
+        ModelFieldError,
+
+        /// <summary>
+        /// The model field repository.
+        /// </summary>
+        ModelFieldRepository
     }
 }

@@ -432,7 +432,30 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
 
         public List<Validation> Validate()
         {
-            throw new NotImplementedException();
+            Logger.Trace("Started Validation()");
+
+            var result = new List<Validation>();
+
+            this.ValidateDropDown(result, this.ComboBoxColumn, "A column must be selected");
+            this.ValidateDropDown(result, this.ComboBoxRelatedTable, "A related table must be selected");
+            this.ValidateDropDown(result, this.ComboBoxRelatedColumn, "A related table column must be selected");
+
+            Logger.Trace("Completed Validation()");
+            return result;
+        }
+
+        private void ValidateDropDown(List<Validation> result, ComboBox comboBox, string errorMessage)
+        {
+            if (comboBox.SelectedValue == null)
+            {
+
+                Validation validation = new Validation(
+                    ValidationType.ModelFieldRepository,
+                    errorMessage);
+                result.Add(validation);
+                this.ErrorProvider1.SetError(comboBox, validation.Description);
+            }
+
         }
     }
 }
