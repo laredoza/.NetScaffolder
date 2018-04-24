@@ -105,9 +105,9 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         /// </param>
         private void BtnClose_Click(object sender, EventArgs e)
         {
-            if (this.ModelFormUserControl1.currentlySelectedControl == null
-                || (this.ModelFormUserControl1.currentlySelectedControl != null
-                    && this.ModelFormUserControl1.currentlySelectedControl.Validate().Count == 0))
+            if (this.ModelFormUserControl1.CurrentlySelectedControl == null
+                || (this.ModelFormUserControl1.CurrentlySelectedControl != null
+                    && this.ModelFormUserControl1.CurrentlySelectedControl.Validate().Count == 0))
             {
                 this.Close();
             }
