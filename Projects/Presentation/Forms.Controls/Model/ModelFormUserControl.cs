@@ -93,7 +93,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         /// <summary>
         /// Gets or sets the currently selected control.
         /// </summary>
-        public IValidate currentlySelectedControl { get; set; }
+        public IValidate CurrentlySelectedControl { get; set; }
 
         /// <summary>
         ///     Gets or sets the data source.
@@ -155,7 +155,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         /// </param>
         private void DomainTreeView_BeforeSelect(object sender, TreeViewCancelEventArgs e)
         {
-            if (this.currentlySelectedControl != null && this.currentlySelectedControl.Validate().Count > 0)
+            if (this.CurrentlySelectedControl != null && this.CurrentlySelectedControl.Validate().Count > 0)
             {
                 e.Cancel = true;
             }
@@ -172,21 +172,21 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         /// </param>
         private void DomainTreeView_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-            if (this.currentlySelectedControl == null
-                || (this.currentlySelectedControl != null && this.currentlySelectedControl.Validate().Count == 0))
+            if (this.CurrentlySelectedControl == null
+                || (this.CurrentlySelectedControl != null && this.CurrentlySelectedControl.Validate().Count == 0))
             {
                 if (e.Node.Tag is Table)
                 {
                     var table = e.Node.Tag as Table;
                     this.modelControl.DataSource = table;
-                    this.currentlySelectedControl = this.modelControl;
+                    this.CurrentlySelectedControl = this.modelControl;
                     this.modelControl.BringToFront();
                 }
                 else if (e.Node.Tag is Column)
                 {
                     var column = e.Node.Tag as Column;
                     this.fieldControl.DataSource = column;
-                    this.currentlySelectedControl = this.fieldControl;
+                    this.CurrentlySelectedControl = this.fieldControl;
                     this.fieldControl.BringToFront();
                 }
                 else if (e.Node.Tag is Relationship)
@@ -194,7 +194,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
                     var relationship = e.Node.Tag as Relationship;
                     this.relationshipControl.Domain = this.DataSource;
                     this.relationshipControl.DataSource = relationship;
-                    this.currentlySelectedControl = this.relationshipControl;
+                    this.CurrentlySelectedControl = this.relationshipControl;
                     this.relationshipControl.BringToFront();
                 }
                 else if (e.Node.Tag == null)
