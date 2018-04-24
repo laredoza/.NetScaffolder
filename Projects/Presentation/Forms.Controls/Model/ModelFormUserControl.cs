@@ -235,7 +235,6 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
             if (this.DataSource != null)
             {
                 this.sourceType = ScaffoldConfig.ReturnSourceType(this.DataSource.SourceTypeId);
-                var sourceDomain = this.sourceType.Import(this.sourceType.Load(this.SavePath));
 
                 ITableHierarchyService applicationService = new TempateHierarchyService();
                 List<Hierarchy> hierarchy =
