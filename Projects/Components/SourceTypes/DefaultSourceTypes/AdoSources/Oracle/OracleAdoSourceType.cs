@@ -188,8 +188,8 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
                     {
                         ProviderName = "Oracle.DataAccess.Client",
                         ConnectionString =
-                            @"User Id=scott;Password=tiger;Data Source=oracle"
-                    };
+                            @"DATA SOURCE=localhost:1521/Banking;PERSIST SECURITY INFO=True;USER ID=user;PASSWORD=password;"
+                };
             }
 
             Logger.Trace("Completed Import()");
