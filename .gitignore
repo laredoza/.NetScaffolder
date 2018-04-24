@@ -244,3 +244,8 @@ ModelManifest.xml
 # FAKE - F# Make
 .fake/
 /.nuget/NuGetPackages
+
+# .NetScaffolder
+OracleAdoSourceType.xml
+MySqlAdoSourceType.xml
+SqlServerAdoSourceType.xml
