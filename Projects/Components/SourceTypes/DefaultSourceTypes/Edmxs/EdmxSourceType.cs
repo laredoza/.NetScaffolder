@@ -181,6 +181,8 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.Edmxs
             }
             else
             {
+                result = new FileSourceOptions(); 
+
                 Logger.Trace("Path Doesn't Exist");
             }
 
