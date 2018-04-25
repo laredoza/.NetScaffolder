@@ -39,7 +39,7 @@ namespace Banking.Models.Interfaces
 
 		#region Search
 		
-		IList<IBankAccount> SearchByBankAccountNumber(string bankaccountnumber);
+		IList<IBankAccount> SearchByBankAccountNumber(string bankaccountnumber, bool caseSensitive = false);
 
 		#endregion
 		

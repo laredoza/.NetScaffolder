@@ -22,9 +22,13 @@ using System;
 using System.Collections.Generic;
 using RepositoryEFDotnet.Library;
 using Banking.Models.Interfaces;
+using Banking.Models.Entity;
 
 namespace Banking.Models.Repository
 {
+	/// <summary>
+	/// The SoftwareRepository class responsible for database functions in the Software table
+	/// </summary>
 	public partial class SoftwareRepository : ISoftwareRepository
 	{
 		#region Private
@@ -35,6 +39,10 @@ namespace Banking.Models.Repository
 		
 		#region CTOR
 		
+		/// <summary>
+        /// The constructor for SoftwareRepository
+        /// </summary>
+        /// <param name="uow">IUnitOfWork</param>
 		public SoftwareRepository(IUnitOfWork uow)
 		{
 			this.UnitOfWork = uow;
@@ -44,52 +52,124 @@ namespace Banking.Models.Repository
 		
 		#region Load
 		
+        /// <summary>
+        /// Load the Software entity from the database using the ProductId primary key
+        /// </summary>
+        /// <param name="productid">int</param>
+        /// <returns>ISoftware</returns>
 		public ISoftware LoadByProductId(int productid)
 		{
-			return this.UnitOfWork.FirstOrDefault(o => o.ProductId == productid);
+			return this.UnitOfWork.FirstOrDefault<Software>(o => o.ProductId == productid);
 		}
 		
+        /// <summary>
+        /// Load Software entities from the database using the LicenseCode field
+        /// </summary>
+        /// <param name="licensecode">string</param>
+        /// <returns>IList<ISoftware></returns>
 		public IList<ISoftware> LoadByLicenseCode(string licensecode)
 		{
-			return this.UnitOfWork.AllMatching(o => o.LicenseCode == licensecode);
+			return (IList<ISoftware>)this.UnitOfWork.AllMatching<Software>(o => o.LicenseCode == licensecode);
 		}
 		
+        /// <summary>
+        /// Load all Software entities from the database.
+        /// </summary>
+        /// <returns>IList<ISoftware></returns>
 		public IList<ISoftware> LoadAll()
 		{
-			return this.UnitOfWork.LoadAll();
+			return (IList<ISoftware>)this.UnitOfWork.LoadAll<Software>();
 		}
 		
 		#endregion
 
 		#region Search
 		
-		public IList<ISoftware> SearchByLicenseCode(string licensecode)
+        /// <summary>
+        /// Search for Software entities in the database by LicenseCode
+        /// </summary>
+        /// <param name="licensecode">string</param>
+        /// <returns>IList<ISoftware></returns>
+		public IList<ISoftware> SearchByLicenseCode(string licensecode, bool caseSensitive = false)
 		{
-			return this.UnitOfWork.AllMatching(o => o.LicenseCode.Contains(licensecode));
+			return caseSensitive ? (IList<ISoftware>)this.UnitOfWork.AllMatching<Software>(o => o.LicenseCode.ToLower().Contains(licensecode.ToLower())) 
+						  : (IList<ISoftware>)this.UnitOfWork.AllMatching<Software>(o => o.LicenseCode.Contains(licensecode));
 		}
 		
 		#endregion
 		
-		#region CRUD
+		#region Modifiers
 		
+        /// <summary>
+        /// Save the Software entity to the database.
+        /// </summary>
+        /// <param name="entity">ISoftware</param>
+        /// <returns>bool</returns>
 		public bool Save(ISoftware entity)
 		{
+			var entityToSave = new Software(entity, false);
+			return this.UnitOfWork.Add(entityToSave);
+		}
+		
+        /// <summary>
+        /// Update the Software entity in the database if any values have changed
+        /// </summary>
+        /// <param name="entity">ISoftware</param>
+        /// <returns>bool</returns>
+		public bool Update(ISoftware entity)
+		{
+			bool doUpdate = false;
+			var entityToUpdate = this.UnitOfWork.FirstOrDefault<Software>(o => o.ProductId == entity.ProductId);
+			
+			if (entityToUpdate == null)
+			{
+				throw new Exception("The Software entity does not exist");
+			}
+			
+			// Optimisation: Flag if any field has changed
+			if (entityToUpdate.LicenseCode != entity.LicenseCode) { entityToUpdate.LicenseCode = entity.LicenseCode;doUpdate = true; }
+
+			// Optimisation: Only execute update if a field has changed
+			if (doUpdate)
+			{
+				return this.UnitOfWork.Modify(entityToUpdate);
+			}
+			
 			return false;
 		}
 		
-		public bool Update(ISoftware entity)
-		{
-			return false;
-		}
-
+        /// <summary>
+        /// Delete the Software entity from the database
+        /// </summary>
+        /// <param name="entity">ISoftware</param>
+        /// <returns>bool</returns>
 		public bool Delete(ISoftware entity)
-		{
-			return false;
+		{		
+			var entityToDelete = this.UnitOfWork.FirstOrDefault<Software>(o => o.ProductId == entity.ProductId);
+			
+			if(entityToDelete == null)
+			{
+				throw new Exception("The Software entity does not exist");
+			}
+			
+			return this.UnitOfWork.Remove(entityToDelete);
 		}
-
+		
+        /// <summary>
+        /// Delete the Software entity from the database using the ProductId
+        /// </summary>
+        /// <param name="productid">int</param>
+        /// <returns>bool</returns>
 		public bool DeleteByProductId(int productid)
 		{
-			return false;
+			var entityToDelete = this.UnitOfWork.FirstOrDefault<Software>(o => o.ProductId == productid);
+			
+			if(entityToDelete == null)
+			{
+				throw new Exception("The Software entity does not exist");
+			}
+			
+			return this.UnitOfWork.Remove(entityToDelete);
 		}
 		
 		#endregion

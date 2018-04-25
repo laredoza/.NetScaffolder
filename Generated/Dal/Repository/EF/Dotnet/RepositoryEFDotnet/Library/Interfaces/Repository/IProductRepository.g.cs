@@ -40,9 +40,9 @@ namespace Banking.Models.Interfaces
 
 		#region Search
 		
-		IList<IProduct> SearchByProductDescription(string productdescription);
-		IList<IProduct> SearchByUnitAmount(string unitamount);
-		IList<IProduct> SearchByPublisher(string publisher);
+		IList<IProduct> SearchByProductDescription(string productdescription, bool caseSensitive = false);
+		IList<IProduct> SearchByUnitAmount(string unitamount, bool caseSensitive = false);
+		IList<IProduct> SearchByPublisher(string publisher, bool caseSensitive = false);
 
 		#endregion
 		

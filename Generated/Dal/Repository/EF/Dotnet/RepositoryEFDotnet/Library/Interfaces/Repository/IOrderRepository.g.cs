@@ -42,10 +42,10 @@ namespace Banking.Models.Interfaces
 
 		#region Search
 		
-		IList<IOrder> SearchByShippingName(string shippingname);
-		IList<IOrder> SearchByShippingAddress(string shippingaddress);
-		IList<IOrder> SearchByShippingCity(string shippingcity);
-		IList<IOrder> SearchByShippingZip(string shippingzip);
+		IList<IOrder> SearchByShippingName(string shippingname, bool caseSensitive = false);
+		IList<IOrder> SearchByShippingAddress(string shippingaddress, bool caseSensitive = false);
+		IList<IOrder> SearchByShippingCity(string shippingcity, bool caseSensitive = false);
+		IList<IOrder> SearchByShippingZip(string shippingzip, bool caseSensitive = false);
 
 		#endregion
 		

@@ -22,9 +22,13 @@ using System;
 using System.Collections.Generic;
 using RepositoryEFDotnet.Library;
 using Banking.Models.Interfaces;
+using Banking.Models.Entity;
 
 namespace Banking.Models.Repository
 {
+	/// <summary>
+	/// The BookRepository class responsible for database functions in the Book table
+	/// </summary>
 	public partial class BookRepository : IBookRepository
 	{
 		#region Private
@@ -35,6 +39,10 @@ namespace Banking.Models.Repository
 		
 		#region CTOR
 		
+		/// <summary>
+        /// The constructor for BookRepository
+        /// </summary>
+        /// <param name="uow">IUnitOfWork</param>
 		public BookRepository(IUnitOfWork uow)
 		{
 			this.UnitOfWork = uow;
@@ -44,52 +52,124 @@ namespace Banking.Models.Repository
 		
 		#region Load
 		
+        /// <summary>
+        /// Load the Book entity from the database using the ProductId primary key
+        /// </summary>
+        /// <param name="productid">int</param>
+        /// <returns>IBook</returns>
 		public IBook LoadByProductId(int productid)
 		{
-			return this.UnitOfWork.FirstOrDefault(o => o.ProductId == productid);
+			return this.UnitOfWork.FirstOrDefault<Book>(o => o.ProductId == productid);
 		}
 		
+        /// <summary>
+        /// Load Book entities from the database using the Publisher field
+        /// </summary>
+        /// <param name="publisher">string</param>
+        /// <returns>IList<IBook></returns>
 		public IList<IBook> LoadByPublisher(string publisher)
 		{
-			return this.UnitOfWork.AllMatching(o => o.Publisher == publisher);
+			return (IList<IBook>)this.UnitOfWork.AllMatching<Book>(o => o.Publisher == publisher);
 		}
 		
+        /// <summary>
+        /// Load all Book entities from the database.
+        /// </summary>
+        /// <returns>IList<IBook></returns>
 		public IList<IBook> LoadAll()
 		{
-			return this.UnitOfWork.LoadAll();
+			return (IList<IBook>)this.UnitOfWork.LoadAll<Book>();
 		}
 		
 		#endregion
 
 		#region Search
 		
-		public IList<IBook> SearchByPublisher(string publisher)
+        /// <summary>
+        /// Search for Book entities in the database by Publisher
+        /// </summary>
+        /// <param name="publisher">string</param>
+        /// <returns>IList<IBook></returns>
+		public IList<IBook> SearchByPublisher(string publisher, bool caseSensitive = false)
 		{
-			return this.UnitOfWork.AllMatching(o => o.Publisher.Contains(publisher));
+			return caseSensitive ? (IList<IBook>)this.UnitOfWork.AllMatching<Book>(o => o.Publisher.ToLower().Contains(publisher.ToLower())) 
+						  : (IList<IBook>)this.UnitOfWork.AllMatching<Book>(o => o.Publisher.Contains(publisher));
 		}
 		
 		#endregion
 		
-		#region CRUD
+		#region Modifiers
 		
+        /// <summary>
+        /// Save the Book entity to the database.
+        /// </summary>
+        /// <param name="entity">IBook</param>
+        /// <returns>bool</returns>
 		public bool Save(IBook entity)
 		{
+			var entityToSave = new Book(entity, false);
+			return this.UnitOfWork.Add(entityToSave);
+		}
+		
+        /// <summary>
+        /// Update the Book entity in the database if any values have changed
+        /// </summary>
+        /// <param name="entity">IBook</param>
+        /// <returns>bool</returns>
+		public bool Update(IBook entity)
+		{
+			bool doUpdate = false;
+			var entityToUpdate = this.UnitOfWork.FirstOrDefault<Book>(o => o.ProductId == entity.ProductId);
+			
+			if (entityToUpdate == null)
+			{
+				throw new Exception("The Book entity does not exist");
+			}
+			
+			// Optimisation: Flag if any field has changed
+			if (entityToUpdate.Publisher != entity.Publisher) { entityToUpdate.Publisher = entity.Publisher;doUpdate = true; }
+
+			// Optimisation: Only execute update if a field has changed
+			if (doUpdate)
+			{
+				return this.UnitOfWork.Modify(entityToUpdate);
+			}
+			
 			return false;
 		}
 		
-		public bool Update(IBook entity)
-		{
-			return false;
-		}
-
+        /// <summary>
+        /// Delete the Book entity from the database
+        /// </summary>
+        /// <param name="entity">IBook</param>
+        /// <returns>bool</returns>
 		public bool Delete(IBook entity)
-		{
-			return false;
+		{		
+			var entityToDelete = this.UnitOfWork.FirstOrDefault<Book>(o => o.ProductId == entity.ProductId);
+			
+			if(entityToDelete == null)
+			{
+				throw new Exception("The Book entity does not exist");
+			}
+			
+			return this.UnitOfWork.Remove(entityToDelete);
 		}
-
+		
+        /// <summary>
+        /// Delete the Book entity from the database using the ProductId
+        /// </summary>
+        /// <param name="productid">int</param>
+        /// <returns>bool</returns>
 		public bool DeleteByProductId(int productid)
 		{
-			return false;
+			var entityToDelete = this.UnitOfWork.FirstOrDefault<Book>(o => o.ProductId == productid);
+			
+			if(entityToDelete == null)
+			{
+				throw new Exception("The Book entity does not exist");
+			}
+			
+			return this.UnitOfWork.Remove(entityToDelete);
 		}
 		
 		#endregion

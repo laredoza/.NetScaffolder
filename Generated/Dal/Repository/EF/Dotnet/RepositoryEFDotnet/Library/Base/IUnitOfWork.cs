@@ -10,7 +10,10 @@ namespace RepositoryEFDotnet.Library
     public interface IUnitOfWork
     {
         IList<TEntity> LoadAll<TEntity>() where TEntity : class;
-        IList<TEntity> AllMatching<TEntity, TType>(Expression<Func<TEntity, bool>> exp) where TEntity : class;
-        TEntity FirstOrDefault<TEntity, TType>(Expression<Func<TEntity, bool>> exp) where TEntity : class;
+        IList<TEntity> AllMatching<TEntity>(Expression<Func<TEntity, bool>> exp) where TEntity : class;
+        TEntity FirstOrDefault<TEntity>(Expression<Func<TEntity, bool>> exp) where TEntity : class;
+        bool Add<TEntity>(TEntity newEntity);
+        bool Modify<TEntity>(TEntity newEntity);
+        bool Remove<TEntity>(TEntity newEntity);
     }
 }
