@@ -28,6 +28,11 @@ namespace Banking.Models.Interfaces
 	{
 		#region Load
 		
+		IBankTransfers LoadByBankTransferId(int banktransferid);
+		IList<IBankTransfers> LoadByFromBankAccountId(int frombankaccountid);
+		IList<IBankTransfers> LoadByToBankAccountId(int tobankaccountid);
+		IList<IBankTransfers> LoadByAmount(decimal amount);
+		IList<IBankTransfers> LoadByTransferDate(DateTime transferdate);
 		IList<IBankTransfers> LoadAll();
 		
 		#endregion
@@ -42,6 +47,7 @@ namespace Banking.Models.Interfaces
 		bool Save(IBankTransfers entity);
 		bool Update(IBankTransfers entity);
 		bool Delete(IBankTransfers entity);
+		bool DeleteByBankTransferId(int banktransferid);
 
 		#endregion
 	}

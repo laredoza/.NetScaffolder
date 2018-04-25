@@ -27,6 +27,11 @@ namespace Banking.Models.Interfaces
 	{
 		#region Fields
 		
+		int BankTransferId { get; set; }
+		int FromBankAccountId { get; set; }
+		int ToBankAccountId { get; set; }
+		decimal Amount { get; set; }
+		DateTime TransferDate { get; set; }
 
 		#endregion
 		
@@ -37,6 +42,7 @@ namespace Banking.Models.Interfaces
 		
 		#region Parent Relationships
 		
+		IBankAccount BankAccount { get; set; }
 		
 		#endregion
 	}

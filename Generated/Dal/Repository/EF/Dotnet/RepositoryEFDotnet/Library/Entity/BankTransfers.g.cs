@@ -37,9 +37,15 @@ namespace Banking.Models.Entity
 		{
 			if(item == null) return;
 			
+			this.BankTransferId = item.BankTransferId;
+			this.FromBankAccountId = item.FromBankAccountId;
+			this.ToBankAccountId = item.ToBankAccountId;
+			this.Amount = item.Amount;
+			this.TransferDate = item.TransferDate;
 
 			if(deep)
 			{
+				this.BankAccount = new BankAccount(item.BankAccount, deep);
 			}
 		}
 		
@@ -47,6 +53,11 @@ namespace Banking.Models.Entity
 		
 		#region Fields
 		
+		public int BankTransferId { get; set; }
+		public int FromBankAccountId { get; set; }
+		public int ToBankAccountId { get; set; }
+		public decimal Amount { get; set; }
+		public DateTime TransferDate { get; set; }
 
 		#endregion
 		
@@ -57,6 +68,7 @@ namespace Banking.Models.Entity
 		
 		#region Parent Relationships
 		
+		public IBankAccount BankAccount { get; set; }
 		
 		#endregion
 	}

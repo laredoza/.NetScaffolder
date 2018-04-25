@@ -45,7 +45,7 @@ namespace Banking.Models.Dto
 
 			if(deep)
 			{
-				this.Order = new Order(item.Order, deep);
+				this.Order = new OrderDto(item.Order, deep);
 			}
 		}
 		

@@ -27,16 +27,23 @@ namespace Banking.Models.Interfaces
 	{
 		#region Fields
 		
+		int BankAccountId { get; set; }
+		string BankAccountNumber { get; set; }
+		decimal Balance { get; set; }
+		int CustomerId { get; set; }
+		bool Locked { get; set; }
 
 		#endregion
 		
 		#region Child Relationships
 		
+		IList<IBankTransfers> BankTransfers { get; set; }
 		
 		#endregion
 		
 		#region Parent Relationships
 		
+		ICustomer Customer { get; set; }
 		
 		#endregion
 	}

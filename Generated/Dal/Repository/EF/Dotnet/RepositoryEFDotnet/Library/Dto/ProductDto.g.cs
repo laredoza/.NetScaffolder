@@ -51,7 +51,7 @@ namespace Banking.Models.Dto
 				{
 					foreach(var childItem in item.Books)
 					{
-						this.Books.Add(new Book(childItem, deep));
+						this.Books.Add(new BookDto(childItem, deep));
 					}
 				}
 			}

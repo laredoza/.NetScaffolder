@@ -36,9 +36,15 @@ namespace Banking.Models.Dto
 		{
 			if(item == null) return;
 			
+			this.BankTransferId = item.BankTransferId;
+			this.FromBankAccountId = item.FromBankAccountId;
+			this.ToBankAccountId = item.ToBankAccountId;
+			this.Amount = item.Amount;
+			this.TransferDate = item.TransferDate;
 
 			if(deep)
 			{
+				this.BankAccount = new BankAccountDto(item.BankAccount, deep);
 			}
 		}
 		
@@ -46,6 +52,11 @@ namespace Banking.Models.Dto
 		
 		#region Fields
 		
+		public int BankTransferId { get; set; }
+		public int FromBankAccountId { get; set; }
+		public int ToBankAccountId { get; set; }
+		public decimal Amount { get; set; }
+		public DateTime TransferDate { get; set; }
 
 		#endregion
 		
@@ -56,6 +67,7 @@ namespace Banking.Models.Dto
 		
 		#region Parent Relationships
 		
+		public IBankAccount BankAccount { get; set; }
 		
 		#endregion
 	}
