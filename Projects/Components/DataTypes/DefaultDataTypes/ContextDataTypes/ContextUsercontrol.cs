@@ -49,10 +49,22 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
 
         #region Properties
 
+        private ContextDataType dataType;
         /// <summary>
         ///     Gets or sets the data type.
         /// </summary>
-        public ContextDataType DataType { get; set; }
+        public ContextDataType DataType
+        {
+            get
+            {
+                return dataType;
+            }
+            set
+            {
+                dataType = value;
+                UpdateUI();
+            }
+        }
 
         /// <summary>
         ///     Gets or sets the selected context.

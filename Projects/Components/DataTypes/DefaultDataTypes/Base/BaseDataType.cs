@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
 {
@@ -29,5 +30,17 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
         public abstract Hierarchy ReturnNavigation();
 
         public abstract bool Save(IDictionary<string, string> parameters);
+
+        [XmlIgnore]
+        public string BaseNamespace { get; set; }
+
+        [XmlIgnore]
+        public INamingConvention NamingConvention { get; set; }
+
+        [XmlIgnore]
+        public ISourceType SourceType { get; set; }
+
+        [XmlIgnore]
+        public ICollectionOption CollectionOption { get; set; }
     }
 }

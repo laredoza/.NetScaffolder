@@ -59,6 +59,13 @@
       <DependentUpon>ContextUserControl.cs</DependentUpon>
     </Compile>
     <Compile Include="ContextDataTypes\ContextDataType.cs" />
+    <Compile Include="DtoInterfaceDataType\DtoInterfaceDataType.cs" />
+    <Compile Include="DtoInterfaceDataType\DtoInterfaceUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DtoInterfaceDataType\DtoInterfaceUserControl.Designer.cs">
+      <DependentUpon>DtoInterfaceUserControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="EntityDataTypes\EntityDataType.cs" />
     <Compile Include="EntityDataTypes\EntityUserControl.cs">
       <SubType>UserControl</SubType>
@@ -67,13 +74,20 @@
       <DependentUpon>EntityUserControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RepositoryDataTypes\RepositoryDataType.cs" />
+    <Compile Include="RepoInterfaceDataTypes\RepoInterfaceUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="RepoInterfaceDataTypes\RepoInterfaceUserControl.Designer.cs">
+      <DependentUpon>RepoInterfaceUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RepoInterfaceDataTypes\RepoInterfaceDataType.cs" />
     <Compile Include="RepositoryDataTypes\RepositoryUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="RepositoryDataTypes\RepositoryUserControl.Designer.cs">
       <DependentUpon>RepositoryUserControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="RepositoryDataTypes\RepositoryDataType.cs" />
     <Compile Include="DtoDataTypes\DtoDataType.cs" />
     <Compile Include="DtoDataTypes\TableUserControl.cs">
       <SubType>UserControl</SubType>
@@ -122,8 +136,14 @@
     <EmbeddedResource Include="ContextDataTypes\ContextUserControl.resx">
       <DependentUpon>ContextUserControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="DtoInterfaceDataType\DtoInterfaceUserControl.resx">
+      <DependentUpon>DtoInterfaceUserControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="EntityDataTypes\EntityUserControl.resx">
       <DependentUpon>EntityUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RepoInterfaceDataTypes\RepoInterfaceUserControl.resx">
+      <DependentUpon>RepoInterfaceUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="RepositoryDataTypes\RepositoryUserControl.resx">
       <DependentUpon>RepositoryUserControl.cs</DependentUpon>

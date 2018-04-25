@@ -19,15 +19,17 @@
 // *******************************************************************
 
 using System.Data.Entity;
+using RepositoryEFDotnet.Library;
+using Banking.Models.Entity;
 
-namespace Banking.Models.Context.Accounts
+namespace Banking.Models.Accounts
 {
 	public partial class AccountContext : BaseContext
 	{
 		#region Db Sets
 		
-				public virtual DbSet<BankAccount> BankAccount;
-				public virtual DbSet<BankTransfers> BankTransfers;
+		public virtual DbSet<BankAccount> BankAccount { get; set; }
+		public virtual DbSet<BankTransfers> BankTransfers { get; set; }
 		
 		#endregion
 	}

@@ -114,6 +114,23 @@ namespace DotNetScaffolder.Mapping.MetaData.Model
             }
         }
 
+        [XmlIgnore]
+        public List<Relationship> DistinctParentRelationships
+        {
+            get
+            {
+                var retval = new List<Relationship>();
+                foreach (var rel in this.RelationShips.Where(
+                    u => u.DependencyRelationShip == RelationshipType.ForeignKey && u.Render))
+                {
+                    var exists = retval.FirstOrDefault(u => u.RelatedTable == rel.RelatedTable);
+                    if (exists == null) retval.Add(rel);
+                }
+
+                return retval;
+            }
+        }
+
         /// <summary>
         ///     Gets the parent relationships.
         /// </summary>
@@ -159,6 +176,22 @@ namespace DotNetScaffolder.Mapping.MetaData.Model
         /// </summary>
         [XmlAttribute("TableName")]
         public string TableName { get; set; }
+
+        [XmlIgnore]
+        public int PrimaryKeyCount
+        {
+            get
+            {
+                int count = 0;
+
+                if(Columns != null)
+                {
+                    count = Columns.Count(o => o.IsPrimaryKey);
+                }
+
+                return count;
+            }
+        }
 
         #endregion
 

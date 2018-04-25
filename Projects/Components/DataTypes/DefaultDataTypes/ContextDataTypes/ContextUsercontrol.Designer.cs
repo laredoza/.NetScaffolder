@@ -238,6 +238,7 @@
             // 
             // OutputPath
             // 
+            this.OutputPath.Enabled = false;
             this.OutputPath.Location = new System.Drawing.Point(121, 154);
             this.OutputPath.Name = "OutputPath";
             this.OutputPath.Size = new System.Drawing.Size(304, 20);

@@ -20,11 +20,54 @@
 
 using System;
 using System.Data.Entity;
+using System.Collections.Generic;
+using Banking.Models.Interfaces;
 
 namespace Banking.Models.Entity
 {
-	public partial class Customer 
+	public partial class Customer : ICustomer 
 	{
+		#region CTOR
+		
+		public Customer()
+		{
+			this.BankAccounts = new List <IBankAccount>();
+		}
+		
+		public Customer(ICustomer item, bool deep = false)
+		{
+			if(item == null) return;
+			
+			this.CustomerId = item.CustomerId;
+			this.CustomerCode = item.CustomerCode;
+			this.CompanyName = item.CompanyName;
+			this.ContactName = item.ContactName;
+			this.ContactTitle = item.ContactTitle;
+			this.Address = item.Address;
+			this.City = item.City;
+			this.PostalCode = item.PostalCode;
+			this.Telephone = item.Telephone;
+			this.Fax = item.Fax;
+			this.CountryId = item.CountryId;
+			this.Photo = item.Photo;
+			this.IsEnabled = item.IsEnabled;
+			this.BankAccounts = new List <IBankAccount>();
+
+			if(deep)
+			{
+				if(item.BankAccounts != null)
+				{
+					foreach(var childItem in item.BankAccounts)
+					{
+						this.BankAccounts.Add(new BankAccount(childItem, deep));
+					}
+				}
+				this.Country = new Country(item.Country, deep);
+			}
+		}
+		
+		#endregion
+		
 		#region Fields
 		
 		public int CustomerId { get; set; }
@@ -41,6 +84,18 @@ namespace Banking.Models.Entity
 		public string Photo { get; set; }
 		public bool IsEnabled { get; set; }
 
+		#endregion
+		
+		#region Child Relationships
+		
+		public IList<IBankAccount> BankAccounts { get; set; }
+		
+		#endregion
+		
+		#region Parent Relationships
+		
+		public ICountry Country { get; set; }
+		
 		#endregion
 	}
 }

@@ -99,6 +99,18 @@ namespace DotNetScaffolder.Mapping.MetaData.Model
         [XmlAttribute("TableName")]
         public string TableName { get; set; }
 
+        public string TableNamePlural
+        {
+            get
+            {
+                if(TableName.EndsWith("s"))
+                {
+                    return TableName;
+                }
+                return TableName + "s";
+            }
+        }
+
         /// <summary>
         ///     Gets or sets a value indicating whether user relationship.
         /// </summary>

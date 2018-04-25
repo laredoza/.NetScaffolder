@@ -20,16 +20,58 @@
 
 using System;
 using System.Data.Entity;
+using System.Collections.Generic;
+using Banking.Models.Interfaces;
 
 namespace Banking.Models.Entity
 {
-	public partial class Country 
+	public partial class Country : ICountry 
 	{
+		#region CTOR
+		
+		public Country()
+		{
+			this.Customers = new List <ICustomer>();
+		}
+		
+		public Country(ICountry item, bool deep = false)
+		{
+			if(item == null) return;
+			
+			this.CountryId = item.CountryId;
+			this.CountryName = item.CountryName;
+			this.Customers = new List <ICustomer>();
+
+			if(deep)
+			{
+				if(item.Customers != null)
+				{
+					foreach(var childItem in item.Customers)
+					{
+						this.Customers.Add(new Customer(childItem, deep));
+					}
+				}
+			}
+		}
+		
+		#endregion
+		
 		#region Fields
 		
 		public int CountryId { get; set; }
 		public string CountryName { get; set; }
 
+		#endregion
+		
+		#region Child Relationships
+		
+		public IList<ICustomer> Customers { get; set; }
+		
+		#endregion
+		
+		#region Parent Relationships
+		
+		
 		#endregion
 	}
 }

@@ -3,4 +3,5 @@
   <Enabled>false</Enabled>
   <Namespace>Repository</Namespace>
   <OutputFolder>Repository</OutputFolder>
+  <OutputPath />
 </RepositoryDataType>

@@ -20,11 +20,49 @@
 
 using System;
 using System.Data.Entity;
+using System.Collections.Generic;
+using Banking.Models.Interfaces;
 
 namespace Banking.Models.Entity
 {
-	public partial class Order 
+	public partial class Order : IOrder 
 	{
+		#region CTOR
+		
+		public Order()
+		{
+			this.OrderDetails = new List <IOrderDetails>();
+		}
+		
+		public Order(IOrder item, bool deep = false)
+		{
+			if(item == null) return;
+			
+			this.OrderId = item.OrderId;
+			this.CustomerId = item.CustomerId;
+			this.OrderDate = item.OrderDate;
+			this.DeliveryDate = item.DeliveryDate;
+			this.ShippingName = item.ShippingName;
+			this.ShippingAddress = item.ShippingAddress;
+			this.ShippingCity = item.ShippingCity;
+			this.ShippingZip = item.ShippingZip;
+			this.OrderDetails = new List <IOrderDetails>();
+
+			if(deep)
+			{
+				if(item.OrderDetails != null)
+				{
+					foreach(var childItem in item.OrderDetails)
+					{
+						this.OrderDetails.Add(new OrderDetails(childItem, deep));
+					}
+				}
+				this.Customer = new Customer(item.Customer, deep);
+			}
+		}
+		
+		#endregion
+		
 		#region Fields
 		
 		public int OrderId { get; set; }
@@ -36,6 +74,18 @@ namespace Banking.Models.Entity
 		public string ShippingCity { get; set; }
 		public string ShippingZip { get; set; }
 
+		#endregion
+		
+		#region Child Relationships
+		
+		public IList<IOrderDetails> OrderDetails { get; set; }
+		
+		#endregion
+		
+		#region Parent Relationships
+		
+		public ICustomer Customer { get; set; }
+		
 		#endregion
 	}
 }

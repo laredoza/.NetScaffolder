@@ -27,17 +27,8 @@
 <#+
 public class EntityGenerator : BaseGenerator
 {
-	public IDataType DataType {get;set;}
-	public string BaseNamespace{get;set;}
-	
-	public EntityDataType EntityDataType
-	{
-		get
-		{
-			return (EntityDataType)this.DataType;
-		}
-	}
-
+	public EntityDataType EntityDataType { get; set; }
+	public DtoInterfaceDataType DtoInterfaceType { get; set; }
 	public List<Table> Models { get; set; }
 
 	private EntityTemplate template = new EntityTemplate();
@@ -45,16 +36,12 @@ public class EntityGenerator : BaseGenerator
 	protected override void RunCore()
 	{
 		Debugger.Break();
-		
-		template.NamingConvention = NamingConvention;
-		template.CollectionOption = CollectionOption;
-		template.BaseNamespace = BaseNamespace;
-		template.Source = Source;
 
 		foreach(var model in this.Models)
 		{
 			EntityDataType.MetaData = model;
 			template.DataType = this.EntityDataType;
+			template.DtoInterfaceNamespace = DtoInterfaceType.FullNamespace;
 
 			Debugger.Break();
 			if(!string.IsNullOrEmpty(EntityDataType.OutputPath))

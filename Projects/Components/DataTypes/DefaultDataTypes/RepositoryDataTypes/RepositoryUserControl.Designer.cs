@@ -1,4 +1,4 @@
-﻿namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.RepositoryDataTypes
+﻿namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
 {
     partial class RepositoryUserControl
     {
@@ -28,84 +28,117 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.checkBox16 = new System.Windows.Forms.CheckBox();
-            this.textBox18 = new System.Windows.Forms.TextBox();
-            this.label34 = new System.Windows.Forms.Label();
-            this.textBox19 = new System.Windows.Forms.TextBox();
-            this.label35 = new System.Windows.Forms.Label();
+            this.txtOutputFolder = new System.Windows.Forms.TextBox();
+            this.label31 = new System.Windows.Forms.Label();
+            this.txtNamespace = new System.Windows.Forms.TextBox();
+            this.label30 = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnBrowse = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtOutputPath = new System.Windows.Forms.TextBox();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // checkBox16
+            // txtOutputFolder
             // 
-            this.checkBox16.AutoSize = true;
-            this.checkBox16.Location = new System.Drawing.Point(155, 92);
-            this.checkBox16.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.checkBox16.Name = "checkBox16";
-            this.checkBox16.Size = new System.Drawing.Size(94, 24);
-            this.checkBox16.TabIndex = 63;
-            this.checkBox16.Text = "Enabled";
-            this.checkBox16.UseVisualStyleBackColor = true;
+            this.txtOutputFolder.Location = new System.Drawing.Point(124, 60);
+            this.txtOutputFolder.Name = "txtOutputFolder";
+            this.txtOutputFolder.Size = new System.Drawing.Size(121, 20);
+            this.txtOutputFolder.TabIndex = 59;
+            this.txtOutputFolder.Text = "Repository";
             // 
-            // textBox18
+            // label31
             // 
-            this.textBox18.Location = new System.Drawing.Point(155, 52);
-            this.textBox18.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.textBox18.Name = "textBox18";
-            this.textBox18.Size = new System.Drawing.Size(180, 26);
-            this.textBox18.TabIndex = 62;
-            this.textBox18.Text = "UnitOfWork";
+            this.label31.AutoSize = true;
+            this.label31.Location = new System.Drawing.Point(30, 63);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(74, 13);
+            this.label31.TabIndex = 58;
+            this.label31.Text = "Output Folder:";
             // 
-            // label34
+            // txtNamespace
             // 
-            this.label34.AutoSize = true;
-            this.label34.Location = new System.Drawing.Point(14, 57);
-            this.label34.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label34.Name = "label34";
-            this.label34.Size = new System.Drawing.Size(111, 20);
-            this.label34.TabIndex = 61;
-            this.label34.Text = "Output Folder:";
+            this.txtNamespace.Location = new System.Drawing.Point(124, 24);
+            this.txtNamespace.Name = "txtNamespace";
+            this.txtNamespace.Size = new System.Drawing.Size(121, 20);
+            this.txtNamespace.TabIndex = 57;
+            this.txtNamespace.Text = "Repository";
             // 
-            // textBox19
+            // label30
             // 
-            this.textBox19.Location = new System.Drawing.Point(155, 12);
-            this.textBox19.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.textBox19.Name = "textBox19";
-            this.textBox19.Size = new System.Drawing.Size(180, 26);
-            this.textBox19.TabIndex = 60;
-            this.textBox19.Text = "UnitOfWork";
+            this.label30.AutoSize = true;
+            this.label30.Location = new System.Drawing.Point(37, 27);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(67, 13);
+            this.label30.TabIndex = 56;
+            this.label30.Text = "Namespace:";
             // 
-            // label35
+            // groupBox1
             // 
-            this.label35.AutoSize = true;
-            this.label35.Location = new System.Drawing.Point(25, 18);
-            this.label35.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label35.Name = "label35";
-            this.label35.Size = new System.Drawing.Size(98, 20);
-            this.label35.TabIndex = 59;
-            this.label35.Text = "Namespace:";
+            this.groupBox1.Controls.Add(this.btnBrowse);
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.txtOutputPath);
+            this.groupBox1.Controls.Add(this.txtNamespace);
+            this.groupBox1.Controls.Add(this.txtOutputFolder);
+            this.groupBox1.Controls.Add(this.label31);
+            this.groupBox1.Controls.Add(this.label30);
+            this.groupBox1.Location = new System.Drawing.Point(3, 3);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(543, 138);
+            this.groupBox1.TabIndex = 60;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Repository settings";
+            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
+            // 
+            // btnBrowse
+            // 
+            this.btnBrowse.Location = new System.Drawing.Point(432, 95);
+            this.btnBrowse.Name = "btnBrowse";
+            this.btnBrowse.Size = new System.Drawing.Size(75, 23);
+            this.btnBrowse.TabIndex = 62;
+            this.btnBrowse.Text = "Browse";
+            this.btnBrowse.UseVisualStyleBackColor = true;
+            this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(37, 100);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(67, 13);
+            this.label1.TabIndex = 61;
+            this.label1.Text = "Output Path:";
+            // 
+            // txtOutputPath
+            // 
+            this.txtOutputPath.Enabled = false;
+            this.txtOutputPath.Location = new System.Drawing.Point(124, 97);
+            this.txtOutputPath.Name = "txtOutputPath";
+            this.txtOutputPath.Size = new System.Drawing.Size(304, 20);
+            this.txtOutputPath.TabIndex = 60;
             // 
             // RepositoryUserControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.checkBox16);
-            this.Controls.Add(this.textBox18);
-            this.Controls.Add(this.label34);
-            this.Controls.Add(this.textBox19);
-            this.Controls.Add(this.label35);
+            this.Controls.Add(this.groupBox1);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "RepositoryUserControl";
-            this.Size = new System.Drawing.Size(426, 165);
+            this.Size = new System.Drawing.Size(549, 144);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.CheckBox checkBox16;
-        private System.Windows.Forms.TextBox textBox18;
-        private System.Windows.Forms.Label label34;
-        private System.Windows.Forms.TextBox textBox19;
-        private System.Windows.Forms.Label label35;
+        private System.Windows.Forms.TextBox txtOutputFolder;
+        private System.Windows.Forms.Label label31;
+        private System.Windows.Forms.TextBox txtNamespace;
+        private System.Windows.Forms.Label label30;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button btnBrowse;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox txtOutputPath;
     }
 }

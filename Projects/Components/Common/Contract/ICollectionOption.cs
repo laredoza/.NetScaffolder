@@ -17,6 +17,7 @@ namespace DotNetScaffolder.Components.Common.Contract
         /// Gets the class name.
         /// </summary>
         string ClassName { get; }
+        string ClassNameInterface { get; }
 
         #endregion
     }

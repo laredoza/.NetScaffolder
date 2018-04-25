@@ -6,11 +6,7 @@
 <#+
 public abstract class BaseTemplate : Template 
 {
-	public INamingConvention NamingConvention {get;set;}
-	public ICollectionOption CollectionOption {get;set;}
-	public ISourceType Source { get; set; }
 	public CopyrightHeader Header = new CopyrightHeader();
-
 	public abstract override string TransformText();
 }
 #>

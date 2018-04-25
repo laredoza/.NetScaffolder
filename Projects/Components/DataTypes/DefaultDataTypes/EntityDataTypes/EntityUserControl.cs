@@ -45,10 +45,22 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.EntityDataTypes
 
         #region Properties
 
+        private EntityDataType dataType;
         /// <summary>
         ///     Gets or sets the data type.
         /// </summary>
-        public EntityDataType DataType { get; set; }
+        public EntityDataType DataType
+        {
+            get
+            {
+                return dataType;
+            }
+            set
+            {
+                dataType = value;
+                UpdateUI();
+            }
+        }
 
         public DomainDefinition DataSource { get; set; }
 
@@ -80,6 +92,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.EntityDataTypes
             txtOutputFolder.Text = DataType.OutputFolder;
             tstOutputPath.Text = DataType.OutputPath;
             chkAddInjectConstructor.Checked = DataType.AddInjectConstructor;
+            chkUseInterface.Checked = DataType.UseInterface;
         }
 
         private void UpdateDataType()
@@ -91,6 +104,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.EntityDataTypes
             DataType.OutputFolder = txtOutputFolder.Text;
             DataType.OutputPath = tstOutputPath.Text;
             DataType.AddInjectConstructor = chkAddInjectConstructor.Checked;
+            DataType.UseInterface = chkUseInterface.Checked;
         }
 
         /// <summary>
@@ -125,5 +139,19 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.EntityDataTypes
         }
 
         #endregion
+
+        private void chkUseInterface_CheckedChanged(object sender, EventArgs e)
+        {
+            chkAddInjectConstructor.Enabled = chkUseInterface.Checked;
+            if (!chkUseInterface.Checked)
+            {
+                chkAddInjectConstructor.Checked = false;
+            }
+        }
+
+        private void btnBrowse_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

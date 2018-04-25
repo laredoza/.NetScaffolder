@@ -1,0 +1,58 @@
+﻿<#@ assembly name="System" #>
+<#@ assembly name="System.Configuration" #>
+<#@ assembly name="System.Globalization" #>
+<#@ assembly name="System.Xml" #>
+<#@ assembly name="$(ProjectDir)Model\Package\Common.Logging.Core.dll" #>
+<#@ assembly name="$(ProjectDir)Model\Package\Common.Logging.dll" #>
+<#@ assembly name="$(ProjectDir)Model\Package\DotNetScaffolder.Core.Common.dll" #>
+<#@ assembly name="$(ProjectDir)Model\Package\DotNetScaffolder.Mapping.MetaData.dll" #>
+<#@ assembly name="$(ProjectDir)Model\Package\DotNetScaffolder.Components.DataTypes.DefaultDataTypes.dll" #>
+<#@ assembly name="$(ProjectDir)Model\Package\FormControls.dll" #>
+<#@ assembly name="$(ProjectDir)Model\Package\DotNetScaffolder.Components.Common.dll" #>
+<#@ assembly name="$(ProjectDir)Model\Package\Configuration.dll" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.Configuration" #>
+<#@ import namespace="System.Globalization" #>
+<#@ import namespace="System.Xml" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Xml.Serialization" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="DotNetScaffolder.Mapping.MetaData.Project" #>
+<#@ import namespace="DotNetScaffolder.Mapping.MetaData.Model" #>
+<#@ import namespace="DotNetScaffolder.Core.Common.Serializer" #>
+<#@ import namespace="DotNetScaffolder.Components.DataTypes.DefaultDataTypes" #>
+<#@ import namespace="Configuration" #>
+<#@ include file="RepoInterfaceTemplate.ttinclude" #>
+<#+
+public class RepoInterfaceGenerator : BaseGenerator
+{
+	public RepoInterfaceDataType DataType { get; set; }
+	public DtoInterfaceDataType DtoInterfaceType { get; set; }
+	public List<Table> Models { get; set; }
+
+	private RepoInterfaceTemplate template = new RepoInterfaceTemplate();
+
+	protected override void RunCore()
+	{
+		Debugger.Break();
+
+		foreach(var model in this.Models)
+		{
+			DataType.MetaData = model;
+			template.DataType = this.DataType;
+			template.DtoInterfaceNamespace = DtoInterfaceType.FullNamespace;
+
+			Debugger.Break();
+			if(!string.IsNullOrEmpty(DataType.OutputPath))
+			{
+				template.RenderToFile(string.Format(@"{0}\{1}\I{2}Repository.g.cs", DataType.OutputPath, DataType.OutputFolder, DataType.RepoName));
+			}
+			else
+			{
+				template.RenderToFile(string.Format(@"{0}\I{1}Repository.g.cs", DataType.OutputFolder, DataType.RepoName));	
+			}
+		}
+	}
+}
+#>

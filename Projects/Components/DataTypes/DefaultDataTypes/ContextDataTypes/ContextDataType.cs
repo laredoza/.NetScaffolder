@@ -94,6 +94,16 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
             return CreateUI(null);
         }
 
+        public string TransformModelName(string name)
+        {
+            if(NamingConvention == null)
+            {
+                return name;
+            }
+
+            return NamingConvention.ApplyNamingConvention(name);
+        }
+
         /// <summary>
         /// The load.
         /// </summary>
@@ -203,6 +213,11 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
         public string ContextName { get; set; }
 
         public string OutputPath { get; set; }
+
+        public string TransformFullnamespace(string baseNs)
+        {
+            return $"{baseNs}.{Namespace}";
+        }
 
         /// <summary>
         ///     Gets or sets a value indicating whether create db.

@@ -20,11 +20,37 @@
 
 using System;
 using System.Data.Entity;
+using System.Collections.Generic;
+using Banking.Models.Interfaces;
 
 namespace Banking.Models.Entity
 {
-	public partial class BankTransfers 
+	public partial class BankTransfers : IBankTransfers 
 	{
+		#region CTOR
+		
+		public BankTransfers()
+		{
+		}
+		
+		public BankTransfers(IBankTransfers item, bool deep = false)
+		{
+			if(item == null) return;
+			
+			this.BankTransferId = item.BankTransferId;
+			this.FromBankAccountId = item.FromBankAccountId;
+			this.ToBankAccountId = item.ToBankAccountId;
+			this.Amount = item.Amount;
+			this.TransferDate = item.TransferDate;
+
+			if(deep)
+			{
+				this.BankAccount = new BankAccount(item.BankAccount, deep);
+			}
+		}
+		
+		#endregion
+		
 		#region Fields
 		
 		public int BankTransferId { get; set; }
@@ -33,6 +59,17 @@ namespace Banking.Models.Entity
 		public decimal Amount { get; set; }
 		public DateTime TransferDate { get; set; }
 
+		#endregion
+		
+		#region Child Relationships
+		
+		
+		#endregion
+		
+		#region Parent Relationships
+		
+		public IBankAccount BankAccount { get; set; }
+		
 		#endregion
 	}
 }

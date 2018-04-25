@@ -19,19 +19,21 @@
 // *******************************************************************
 
 using System.Data.Entity;
+using RepositoryEFDotnet.Library;
+using Banking.Models.Entity;
 
-namespace Banking.Models.Context.Customers
+namespace Banking.Models.Customers
 {
-	public partial class CustomerContext 
+	public partial class CustomerContext : BaseContext
 	{
 		#region Db Sets
 		
-				public virtual DbSet<Country> Country;
-				public virtual DbSet<Customer> Customer;
-				public virtual DbSet<Order> Order;
-				public virtual DbSet<OrderDetails> OrderDetails;
-				public virtual DbSet<Product> Product;
-				public virtual DbSet<Software> Software;
+		public virtual DbSet<Country> Country { get; set; }
+		public virtual DbSet<Customer> Customer { get; set; }
+		public virtual DbSet<Order> Order { get; set; }
+		public virtual DbSet<OrderDetails> OrderDetails { get; set; }
+		public virtual DbSet<Product> Product { get; set; }
+		public virtual DbSet<Software> Software { get; set; }
 		
 		#endregion
 	}

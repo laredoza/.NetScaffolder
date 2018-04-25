@@ -1,0 +1,143 @@
+﻿<#@ assembly name="System" #>
+<#@ assembly name="System.Configuration" #>
+<#@ assembly name="System.Globalization" #>
+<#@ assembly name="System.Xml" #>
+<#@ assembly name="$(ProjectDir)Model\Package\Common.Logging.Core.dll" #>
+<#@ assembly name="$(ProjectDir)Model\Package\Common.Logging.dll" #>
+<#@ assembly name="$(ProjectDir)Model\Package\DotNetScaffolder.Core.Common.dll" #>
+<#@ assembly name="$(ProjectDir)Model\Package\DotNetScaffolder.Mapping.MetaData.dll" #>
+<#@ assembly name="$(ProjectDir)Model\Package\DotNetScaffolder.Components.DataTypes.DefaultDataTypes.dll" #>
+<#@ assembly name="$(ProjectDir)Model\Package\FormControls.dll" #>
+<#@ assembly name="$(ProjectDir)Model\Package\DotNetScaffolder.Components.Common.dll" #>
+<#@ assembly name="$(ProjectDir)Model\Package\Configuration.dll" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.Configuration" #>
+<#@ import namespace="System.Globalization" #>
+<#@ import namespace="System.Xml" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Xml.Serialization" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="DotNetScaffolder.Mapping.MetaData.Project" #>
+<#@ import namespace="DotNetScaffolder.Mapping.MetaData.Model" #>
+<#@ import namespace="DotNetScaffolder.Core.Common.Serializer" #>
+<#@ import namespace="DotNetScaffolder.Components.DataTypes.DefaultDataTypes" #>
+<#@ import namespace="Configuration" #>
+<#+
+public class RepositoryTemplate : BaseTemplate 
+{
+	public RepositoryDataType DataType { get; set; }
+	public string DtoInterfaceNamespace { get; set; }
+	
+	public override string TransformText()
+	{
+		Debugger.Break();
+		Header = new CopyrightHeader();
+		Header.Filename = DataType.RepoName;
+#>
+
+<#= Header.TransformText() #>
+
+// *******************************************************************
+//	GENERATED CODE. DOT NOT MODIFY MANUALLY AS CHANGES CAN BE LOST!!!
+//	USE A PARTIAL CLASS INSTEAD
+// *******************************************************************
+
+using System;
+using System.Collections.Generic;
+using RepositoryEFDotnet.Library;
+using <#= DtoInterfaceNamespace #>;
+
+namespace <#= DataType.FullNamespace #>
+{
+	public partial class <#= DataType.RepoName #>Repository : I<#= DataType.RepoName #>Repository
+	{
+		#region Private
+		
+		private IUnitOfWork UnitOfWork;
+		
+		#endregion
+		
+		#region CTOR
+		
+		public <#= DataType.RepoName #>Repository(IUnitOfWork uow)
+		{
+			this.UnitOfWork = uow;
+		}
+		
+		#endregion
+		
+		#region Load
+		
+<#+ if(DataType.MetaData.PrimaryKeyCount == 1){ foreach(var col in DataType.MetaData.Columns.Where(o => o.IsPrimaryKey)){ #>
+		public I<#= DataType.RepoName #> LoadBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= DataType.SourceType.MapDomainDataTypeToOutputType(col.DomainDataType) #> <#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName).ToLower() #>)
+		{
+			return this.UnitOfWork.FirstOrDefault(o => o.<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #> == <#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName).ToLower() #>);
+		}
+		
+<#+ } } #>
+<#+ else { foreach(var col in DataType.MetaData.Columns.Where(o => o.IsPrimaryKey)){ #>
+		public <#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.RepoName #>> LoadBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= DataType.SourceType.MapDomainDataTypeToOutputType(col.DomainDataType) #> <#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName).ToLower() #>)
+		{
+			return this.UnitOfWork.AllMatching(o => o.<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #> == <#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName).ToLower() #>);
+		}
+		
+<#+ } } #>
+
+<#+ foreach(var col in DataType.MetaData.Columns.Where(o => !o.IsPrimaryKey)){ #>
+		public <#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.RepoName #>> LoadBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= DataType.SourceType.MapDomainDataTypeToOutputType(col.DomainDataType) #> <#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName).ToLower() #>)
+		{
+			return this.UnitOfWork.AllMatching(o => o.<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #> == <#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName).ToLower() #>);
+		}
+		
+<#+ }  #>
+		public <#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.RepoName #>> LoadAll()
+		{
+			return this.UnitOfWork.LoadAll();
+		}
+		
+		#endregion
+
+		#region Search
+		
+<#+ foreach(var col in DataType.MetaData.Columns.Where(o => !o.IsPrimaryKey && o.DomainDataType == DomainDataType.String)){ #>
+		public <#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.RepoName #>> SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= DataType.SourceType.MapDomainDataTypeToOutputType(col.DomainDataType) #> <#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName).ToLower() #>)
+		{
+			return this.UnitOfWork.AllMatching(o => o.<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>.Contains(<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName).ToLower() #>));
+		}
+		
+<#+ }  #>
+		#endregion
+		
+		#region CRUD
+		
+		public bool Save(I<#= DataType.RepoName #> entity)
+		{
+			return false;
+		}
+		
+		public bool Update(I<#= DataType.RepoName #> entity)
+		{
+			return false;
+		}
+
+		public bool Delete(I<#= DataType.RepoName #> entity)
+		{
+			return false;
+		}
+
+<#+ if(DataType.MetaData.PrimaryKeyCount == 1){ var col = DataType.MetaData.Columns.First(o => o.IsPrimaryKey); #>
+		public bool DeleteBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= DataType.SourceType.MapDomainDataTypeToOutputType(col.DomainDataType) #> <#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName).ToLower() #>)
+		{
+			return false;
+		}
+<#+ }  #>
+		
+		#endregion
+	}
+}
+<#+
+		return this.GenerationEnvironment.ToString();
+	}
+}
+#>

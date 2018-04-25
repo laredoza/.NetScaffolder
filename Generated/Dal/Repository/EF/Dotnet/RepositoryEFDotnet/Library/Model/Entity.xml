@@ -3,6 +3,7 @@
   <Namespace>Entity</Namespace>
   <OutputFolder>Entity</OutputFolder>
   <OutputPath />
-  <AddInjectConstructor>false</AddInjectConstructor>
+  <AddInjectConstructor>true</AddInjectConstructor>
   <InheritFrom />
+  <UseInterface>false</UseInterface>
 </EntityDataType>

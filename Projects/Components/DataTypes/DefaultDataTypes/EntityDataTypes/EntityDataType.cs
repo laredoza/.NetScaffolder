@@ -54,16 +54,35 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
 
         public string InheritFrom { get; set; }
 
+        public bool UseInterface { get; set; }
+
+        [XmlIgnore]
+        public string FullNamespace
+        {
+            get
+            {
+                return $"{BaseNamespace}.{Namespace}";
+            }
+        }
+
         public string TransformInheritFrom
         {
             get
             {
-                if(string.IsNullOrEmpty(InheritFrom))
+                string inherit = string.Empty;
+
+                if(!string.IsNullOrEmpty(InheritFrom))
                 {
-                    return string.Empty;
+                    inherit = $": {InheritFrom}";
                 }
 
-                return $": {InheritFrom}";
+                if(AddInjectConstructor || UseInterface)
+                {
+                    inherit += !string.IsNullOrEmpty(InheritFrom) ? ", " : ": ";
+                    inherit += $"I{EntityName}";
+                }
+
+                return inherit;
             }
         }
 
@@ -72,7 +91,17 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
         {
             get
             {
-                return MetaData != null ? MetaData.TableName : string.Empty;
+                if(MetaData == null)
+                {
+                    return string.Empty;
+                }
+
+                if(NamingConvention == null)
+                {
+                    return MetaData.TableName;
+                }
+
+                return NamingConvention.ApplyNamingConvention(MetaData.TableName);
             }
         }
 

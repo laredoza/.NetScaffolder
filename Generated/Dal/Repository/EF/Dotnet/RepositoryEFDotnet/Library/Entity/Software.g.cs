@@ -20,16 +20,50 @@
 
 using System;
 using System.Data.Entity;
+using System.Collections.Generic;
+using Banking.Models.Interfaces;
 
 namespace Banking.Models.Entity
 {
-	public partial class Software 
+	public partial class Software : ISoftware 
 	{
+		#region CTOR
+		
+		public Software()
+		{
+		}
+		
+		public Software(ISoftware item, bool deep = false)
+		{
+			if(item == null) return;
+			
+			this.ProductId = item.ProductId;
+			this.LicenseCode = item.LicenseCode;
+
+			if(deep)
+			{
+				this.Product = new Product(item.Product, deep);
+			}
+		}
+		
+		#endregion
+		
 		#region Fields
 		
 		public int ProductId { get; set; }
 		public string LicenseCode { get; set; }
 
+		#endregion
+		
+		#region Child Relationships
+		
+		
+		#endregion
+		
+		#region Parent Relationships
+		
+		public IProduct Product { get; set; }
+		
 		#endregion
 	}
 }

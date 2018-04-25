@@ -30,6 +30,14 @@ namespace DotNetScaffolder.Components.Common.Contract
         /// </summary>
         Table MetaData { get; set; }
 
+        string BaseNamespace { get; set; }
+
+        INamingConvention NamingConvention { get; set; }
+
+        ICollectionOption CollectionOption { get; set; }
+
+        ISourceType SourceType { get; set; }
+
         #endregion
 
         #region Public methods and operators

@@ -33,7 +33,7 @@
     <Enabled>true</Enabled>
     <GenerateInterface>false</GenerateInterface>
     <Id>b138c947-9887-47e0-968c-be9dca3443aa</Id>
-    <InheritFrom />
+    <InheritFrom>BaseContext</InheritFrom>
     <LoggingEnabled>false</LoggingEnabled>
     <Namespace>Customers</Namespace>
     <OutputFolder>Context</OutputFolder>

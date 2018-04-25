@@ -20,11 +20,46 @@
 
 using System;
 using System.Data.Entity;
+using System.Collections.Generic;
+using Banking.Models.Interfaces;
 
 namespace Banking.Models.Entity
 {
-	public partial class Product 
+	public partial class Product : IProduct 
 	{
+		#region CTOR
+		
+		public Product()
+		{
+			this.Books = new List <IBook>();
+		}
+		
+		public Product(IProduct item, bool deep = false)
+		{
+			if(item == null) return;
+			
+			this.ProductId = item.ProductId;
+			this.ProductDescription = item.ProductDescription;
+			this.UnitPrice = item.UnitPrice;
+			this.UnitAmount = item.UnitAmount;
+			this.Publisher = item.Publisher;
+			this.AmountInStock = item.AmountInStock;
+			this.Books = new List <IBook>();
+
+			if(deep)
+			{
+				if(item.Books != null)
+				{
+					foreach(var childItem in item.Books)
+					{
+						this.Books.Add(new Book(childItem, deep));
+					}
+				}
+			}
+		}
+		
+		#endregion
+		
 		#region Fields
 		
 		public int ProductId { get; set; }
@@ -34,6 +69,17 @@ namespace Banking.Models.Entity
 		public string Publisher { get; set; }
 		public short AmountInStock { get; set; }
 
+		#endregion
+		
+		#region Child Relationships
+		
+		public IList<IBook> Books { get; set; }
+		
+		#endregion
+		
+		#region Parent Relationships
+		
+		
 		#endregion
 	}
 }

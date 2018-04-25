@@ -8,18 +8,15 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
 {
     #region Usings
 
+    using DotNetScaffolder.Components.Common.Contract;
+    using DotNetScaffolder.Core.Common.Serializer;
+    using FormControls.TreeView;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.Composition;
     using System.IO;
     using System.Windows.Forms;
-
-    using DotNetScaffolder.Components.Common.Contract;
-    using DotNetScaffolder.Components.DataTypes.DefaultDataTypes.RepositoryDataTypes;
-    using DotNetScaffolder.Core.Common.Serializer;
-    using DotNetScaffolder.Mapping.MetaData.Model;
-
-    using FormControls.TreeView;
+    using System.Xml.Serialization;
 
     #endregion
 
@@ -49,6 +46,26 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
         ///     Gets or sets the output folder.
         /// </summary>
         public string OutputFolder { get; set; } = "Repository";
+
+        public string OutputPath { get; set; }
+
+        [XmlIgnore]
+        public string RepoName
+        {
+            get
+            {
+                return MetaData != null ? NamingConvention.ApplyNamingConvention(MetaData.TableName) : string.Empty;
+            }
+        }
+
+        [XmlIgnore]
+        public string FullNamespace
+        {
+            get
+            {
+                return $"{BaseNamespace}.{Namespace}";
+            }
+        }
 
         #endregion
 
@@ -100,6 +117,9 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
                 var appService = ObjectXMLSerializer<RepositoryDataType>.Load(filePath);
                 if (appService != null)
                 {
+                    this.Namespace = appService.Namespace;
+                    this.OutputFolder = appService.OutputFolder;
+                    this.OutputPath = appService.OutputPath;
                 }
             }
         }

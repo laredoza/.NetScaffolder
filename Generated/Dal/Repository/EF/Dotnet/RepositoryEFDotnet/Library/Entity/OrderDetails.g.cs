@@ -20,11 +20,38 @@
 
 using System;
 using System.Data.Entity;
+using System.Collections.Generic;
+using Banking.Models.Interfaces;
 
 namespace Banking.Models.Entity
 {
-	public partial class OrderDetails 
+	public partial class OrderDetails : IOrderDetails 
 	{
+		#region CTOR
+		
+		public OrderDetails()
+		{
+		}
+		
+		public OrderDetails(IOrderDetails item, bool deep = false)
+		{
+			if(item == null) return;
+			
+			this.OrderDetailsId = item.OrderDetailsId;
+			this.OrderId = item.OrderId;
+			this.ProductId = item.ProductId;
+			this.UnitPrice = item.UnitPrice;
+			this.Amount = item.Amount;
+			this.Discount = item.Discount;
+
+			if(deep)
+			{
+				this.Order = new Order(item.Order, deep);
+			}
+		}
+		
+		#endregion
+		
 		#region Fields
 		
 		public int OrderDetailsId { get; set; }
@@ -34,6 +61,17 @@ namespace Banking.Models.Entity
 		public short Amount { get; set; }
 		public float Discount { get; set; }
 
+		#endregion
+		
+		#region Child Relationships
+		
+		
+		#endregion
+		
+		#region Parent Relationships
+		
+		public IOrder Order { get; set; }
+		
 		#endregion
 	}
 }

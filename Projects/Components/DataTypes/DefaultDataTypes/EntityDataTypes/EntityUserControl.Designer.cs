@@ -36,6 +36,7 @@
             this.txtInheritFrom = new System.Windows.Forms.TextBox();
             this.label29 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.chkUseInterface = new System.Windows.Forms.CheckBox();
             this.btnBrowse = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.tstOutputPath = new System.Windows.Forms.TextBox();
@@ -79,7 +80,8 @@
             // chkAddInjectConstructor
             // 
             this.chkAddInjectConstructor.AutoSize = true;
-            this.chkAddInjectConstructor.Location = new System.Drawing.Point(131, 164);
+            this.chkAddInjectConstructor.Enabled = false;
+            this.chkAddInjectConstructor.Location = new System.Drawing.Point(131, 188);
             this.chkAddInjectConstructor.Name = "chkAddInjectConstructor";
             this.chkAddInjectConstructor.Size = new System.Drawing.Size(187, 17);
             this.chkAddInjectConstructor.TabIndex = 55;
@@ -104,6 +106,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.chkUseInterface);
             this.groupBox1.Controls.Add(this.btnBrowse);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.tstOutputPath);
@@ -116,10 +119,21 @@
             this.groupBox1.Controls.Add(this.label30);
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(543, 189);
+            this.groupBox1.Size = new System.Drawing.Size(543, 213);
             this.groupBox1.TabIndex = 60;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Entity settings";
+            // 
+            // chkUseInterface
+            // 
+            this.chkUseInterface.AutoSize = true;
+            this.chkUseInterface.Location = new System.Drawing.Point(131, 161);
+            this.chkUseInterface.Name = "chkUseInterface";
+            this.chkUseInterface.Size = new System.Drawing.Size(89, 17);
+            this.chkUseInterface.TabIndex = 63;
+            this.chkUseInterface.Text = "Use interface";
+            this.chkUseInterface.UseVisualStyleBackColor = true;
+            this.chkUseInterface.CheckedChanged += new System.EventHandler(this.chkUseInterface_CheckedChanged);
             // 
             // btnBrowse
             // 
@@ -129,6 +143,7 @@
             this.btnBrowse.TabIndex = 62;
             this.btnBrowse.Text = "Browse";
             this.btnBrowse.UseVisualStyleBackColor = true;
+            this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
             // 
             // label1
             // 
@@ -141,6 +156,7 @@
             // 
             // tstOutputPath
             // 
+            this.tstOutputPath.Enabled = false;
             this.tstOutputPath.Location = new System.Drawing.Point(131, 130);
             this.tstOutputPath.Name = "tstOutputPath";
             this.tstOutputPath.Size = new System.Drawing.Size(304, 20);
@@ -153,7 +169,7 @@
             this.Controls.Add(this.groupBox1);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "EntityUserControl";
-            this.Size = new System.Drawing.Size(549, 195);
+            this.Size = new System.Drawing.Size(549, 219);
             this.Load += new System.EventHandler(this.EntityUserControl1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -173,5 +189,6 @@
         private System.Windows.Forms.Button btnBrowse;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox tstOutputPath;
+        private System.Windows.Forms.CheckBox chkUseInterface;
     }
 }

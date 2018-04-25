@@ -26,9 +26,9 @@
 <#+
 public class ContextTemplate : BaseTemplate 
 {
-	public ContextDataType DataType {get;set;}
-	public ContextData ContextData{get;set;}
-	public string BaseNamespace{get;set;}
+	public ContextDataType DataType { get; set; }
+	public ContextData ContextData { get; set; }
+	public string EntityNamespace { get; set; }
 	
 	public override string TransformText()
 	{
@@ -45,15 +45,17 @@ public class ContextTemplate : BaseTemplate
 // *******************************************************************
 
 using System.Data.Entity;
+using RepositoryEFDotnet.Library;
+using <#= EntityNamespace #>;
 
-namespace <#= BaseNamespace #>.<#= ContextData.OutputFolder #>.<#= ContextData.Namespace #>
+namespace <#= ContextData.TransformFullnamespace(DataType.BaseNamespace) #>
 {
-	public partial class <#= NamingConvention.ApplyNamingConvention(ContextData.ContextName) #> <#= ContextData.TransformInheritFrom #>
+	public partial class <#= ContextData.ContextName #> <#= ContextData.TransformInheritFrom #>
 	{
 		#region Db Sets
 		
 		<#+ foreach(var table in ContextData.Models){ #>
-		public virtual DbSet<<#= NamingConvention.ApplyNamingConvention(table.TableName) #>> <#=NamingConvention.ApplyNamingConvention(table.TableName) #>;
+public virtual DbSet<<#= DataType.TransformModelName(table.TableName) #>> <#=DataType.TransformModelName(table.TableName) #> { get; set; }
 		<#+ } #>
 
 		#endregion

@@ -25,6 +25,8 @@ namespace DotNetScaffolder.Components.CollectionOption
         /// <summary>
         ///     The class name.
         /// </summary>
-        public string ClassName => "Hashtable";
+        public string ClassName => "HashSet";
+
+        public string ClassNameInterface => "ICollection";
     }
 }

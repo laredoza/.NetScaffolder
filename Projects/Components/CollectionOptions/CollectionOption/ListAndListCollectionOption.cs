@@ -26,5 +26,7 @@ namespace DotNetScaffolder.Components.CollectionOption
         ///     The class name.
         /// </summary>
         public string ClassName => "List";
+
+        public string ClassNameInterface => "IList";
     }
 }
