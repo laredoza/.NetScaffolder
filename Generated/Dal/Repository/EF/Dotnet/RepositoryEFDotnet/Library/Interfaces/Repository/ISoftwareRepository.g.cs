@@ -36,7 +36,7 @@ namespace Banking.Models.Interfaces
 
 		#region Search
 		
-		IList<ISoftware> SearchByLicenseCode(string licensecode);
+		IList<ISoftware> SearchByLicenseCode(string licensecode, bool caseSensitive = false);
 
 		#endregion
 		

@@ -47,16 +47,16 @@ namespace Banking.Models.Interfaces
 
 		#region Search
 		
-		IList<ICustomer> SearchByCustomerCode(string customercode);
-		IList<ICustomer> SearchByCompanyName(string companyname);
-		IList<ICustomer> SearchByContactName(string contactname);
-		IList<ICustomer> SearchByContactTitle(string contacttitle);
-		IList<ICustomer> SearchByAddress(string address);
-		IList<ICustomer> SearchByCity(string city);
-		IList<ICustomer> SearchByPostalCode(string postalcode);
-		IList<ICustomer> SearchByTelephone(string telephone);
-		IList<ICustomer> SearchByFax(string fax);
-		IList<ICustomer> SearchByPhoto(string photo);
+		IList<ICustomer> SearchByCustomerCode(string customercode, bool caseSensitive = false);
+		IList<ICustomer> SearchByCompanyName(string companyname, bool caseSensitive = false);
+		IList<ICustomer> SearchByContactName(string contactname, bool caseSensitive = false);
+		IList<ICustomer> SearchByContactTitle(string contacttitle, bool caseSensitive = false);
+		IList<ICustomer> SearchByAddress(string address, bool caseSensitive = false);
+		IList<ICustomer> SearchByCity(string city, bool caseSensitive = false);
+		IList<ICustomer> SearchByPostalCode(string postalcode, bool caseSensitive = false);
+		IList<ICustomer> SearchByTelephone(string telephone, bool caseSensitive = false);
+		IList<ICustomer> SearchByFax(string fax, bool caseSensitive = false);
+		IList<ICustomer> SearchByPhoto(string photo, bool caseSensitive = false);
 
 		#endregion
 		

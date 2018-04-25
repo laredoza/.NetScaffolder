@@ -36,7 +36,7 @@ namespace Banking.Models.Interfaces
 
 		#region Search
 		
-		IList<ICountry> SearchByCountryName(string countryname);
+		IList<ICountry> SearchByCountryName(string countryname, bool caseSensitive = false);
 
 		#endregion
 		

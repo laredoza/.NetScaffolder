@@ -22,9 +22,13 @@ using System;
 using System.Collections.Generic;
 using RepositoryEFDotnet.Library;
 using Banking.Models.Interfaces;
+using Banking.Models.Entity;
 
 namespace Banking.Models.Repository
 {
+	/// <summary>
+	/// The CountryRepository class responsible for database functions in the Country table
+	/// </summary>
 	public partial class CountryRepository : ICountryRepository
 	{
 		#region Private
@@ -35,6 +39,10 @@ namespace Banking.Models.Repository
 		
 		#region CTOR
 		
+		/// <summary>
+        /// The constructor for CountryRepository
+        /// </summary>
+        /// <param name="uow">IUnitOfWork</param>
 		public CountryRepository(IUnitOfWork uow)
 		{
 			this.UnitOfWork = uow;
@@ -44,52 +52,124 @@ namespace Banking.Models.Repository
 		
 		#region Load
 		
+        /// <summary>
+        /// Load the Country entity from the database using the CountryId primary key
+        /// </summary>
+        /// <param name="countryid">int</param>
+        /// <returns>ICountry</returns>
 		public ICountry LoadByCountryId(int countryid)
 		{
-			return this.UnitOfWork.FirstOrDefault(o => o.CountryId == countryid);
+			return this.UnitOfWork.FirstOrDefault<Country>(o => o.CountryId == countryid);
 		}
 		
+        /// <summary>
+        /// Load Country entities from the database using the CountryName field
+        /// </summary>
+        /// <param name="countryname">string</param>
+        /// <returns>IList<ICountry></returns>
 		public IList<ICountry> LoadByCountryName(string countryname)
 		{
-			return this.UnitOfWork.AllMatching(o => o.CountryName == countryname);
+			return (IList<ICountry>)this.UnitOfWork.AllMatching<Country>(o => o.CountryName == countryname);
 		}
 		
+        /// <summary>
+        /// Load all Country entities from the database.
+        /// </summary>
+        /// <returns>IList<ICountry></returns>
 		public IList<ICountry> LoadAll()
 		{
-			return this.UnitOfWork.LoadAll();
+			return (IList<ICountry>)this.UnitOfWork.LoadAll<Country>();
 		}
 		
 		#endregion
 
 		#region Search
 		
-		public IList<ICountry> SearchByCountryName(string countryname)
+        /// <summary>
+        /// Search for Country entities in the database by CountryName
+        /// </summary>
+        /// <param name="countryname">string</param>
+        /// <returns>IList<ICountry></returns>
+		public IList<ICountry> SearchByCountryName(string countryname, bool caseSensitive = false)
 		{
-			return this.UnitOfWork.AllMatching(o => o.CountryName.Contains(countryname));
+			return caseSensitive ? (IList<ICountry>)this.UnitOfWork.AllMatching<Country>(o => o.CountryName.ToLower().Contains(countryname.ToLower())) 
+						  : (IList<ICountry>)this.UnitOfWork.AllMatching<Country>(o => o.CountryName.Contains(countryname));
 		}
 		
 		#endregion
 		
-		#region CRUD
+		#region Modifiers
 		
+        /// <summary>
+        /// Save the Country entity to the database.
+        /// </summary>
+        /// <param name="entity">ICountry</param>
+        /// <returns>bool</returns>
 		public bool Save(ICountry entity)
 		{
+			var entityToSave = new Country(entity, false);
+			return this.UnitOfWork.Add(entityToSave);
+		}
+		
+        /// <summary>
+        /// Update the Country entity in the database if any values have changed
+        /// </summary>
+        /// <param name="entity">ICountry</param>
+        /// <returns>bool</returns>
+		public bool Update(ICountry entity)
+		{
+			bool doUpdate = false;
+			var entityToUpdate = this.UnitOfWork.FirstOrDefault<Country>(o => o.CountryId == entity.CountryId);
+			
+			if (entityToUpdate == null)
+			{
+				throw new Exception("The Country entity does not exist");
+			}
+			
+			// Optimisation: Flag if any field has changed
+			if (entityToUpdate.CountryName != entity.CountryName) { entityToUpdate.CountryName = entity.CountryName;doUpdate = true; }
+
+			// Optimisation: Only execute update if a field has changed
+			if (doUpdate)
+			{
+				return this.UnitOfWork.Modify(entityToUpdate);
+			}
+			
 			return false;
 		}
 		
-		public bool Update(ICountry entity)
-		{
-			return false;
-		}
-
+        /// <summary>
+        /// Delete the Country entity from the database
+        /// </summary>
+        /// <param name="entity">ICountry</param>
+        /// <returns>bool</returns>
 		public bool Delete(ICountry entity)
-		{
-			return false;
+		{		
+			var entityToDelete = this.UnitOfWork.FirstOrDefault<Country>(o => o.CountryId == entity.CountryId);
+			
+			if(entityToDelete == null)
+			{
+				throw new Exception("The Country entity does not exist");
+			}
+			
+			return this.UnitOfWork.Remove(entityToDelete);
 		}
-
+		
+        /// <summary>
+        /// Delete the Country entity from the database using the CountryId
+        /// </summary>
+        /// <param name="countryid">int</param>
+        /// <returns>bool</returns>
 		public bool DeleteByCountryId(int countryid)
 		{
-			return false;
+			var entityToDelete = this.UnitOfWork.FirstOrDefault<Country>(o => o.CountryId == countryid);
+			
+			if(entityToDelete == null)
+			{
+				throw new Exception("The Country entity does not exist");
+			}
+			
+			return this.UnitOfWork.Remove(entityToDelete);
 		}
 		
 		#endregion

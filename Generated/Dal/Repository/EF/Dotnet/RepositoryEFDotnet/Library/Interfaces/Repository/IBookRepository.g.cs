@@ -36,7 +36,7 @@ namespace Banking.Models.Interfaces
 
 		#region Search
 		
-		IList<IBook> SearchByPublisher(string publisher);
+		IList<IBook> SearchByPublisher(string publisher, bool caseSensitive = false);
 
 		#endregion
 		

@@ -52,6 +52,7 @@ public class ProjectGenerator : BaseProjectGenerator
 				iRepoGen.Models = domain.Tables;
 				iRepoGen.DataType = dataType as RepositoryDataType;
 				iRepoGen.DtoInterfaceType = dataTypes.FirstOrDefault(o => o is DtoInterfaceDataType) as DtoInterfaceDataType;
+				iRepoGen.EntityDataType = dataTypes.FirstOrDefault(o => o is EntityDataType) as EntityDataType;
 				iRepoGen.Run();
 			}
 		}

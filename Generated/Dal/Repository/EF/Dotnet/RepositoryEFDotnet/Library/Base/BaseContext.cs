@@ -10,17 +10,17 @@ namespace RepositoryEFDotnet.Library
 {
     public abstract class BaseContext : DbContext, IUnitOfWork
     {
-        public virtual IList<TEntity> AllMatching<TEntity, TType>(Expression<Func<TEntity, TType>> exp) where TEntity : class
+        public IList<TEntity> AllMatching<TEntity>(Expression<Func<TEntity, bool>> exp) where TEntity : class
         {
             return null;
         }
 
-        public virtual TEntity FirstOrDefault<TEntity, TType>(Expression<Func<TEntity, TType>> exp) where TEntity : class
+        public TEntity FirstOrDefault<TEntity>(Expression<Func<TEntity, bool>> exp) where TEntity : class
         {
             return null;
         }
 
-        public virtual IList<TEntity> LoadAll<TEntity>() where TEntity : class
+        public IList<TEntity> LoadAll<TEntity>() where TEntity : class
         {
             return null;
         }
