@@ -53,6 +53,56 @@ namespace Banking.Models.Repository
 		#region Load
 		
         /// <summary>
+        /// Load the BankAccount entity from the database using the BankAccountId primary key
+        /// </summary>
+        /// <param name="bankaccountid">int</param>
+        /// <returns>IBankAccount</returns>
+		public IBankAccount LoadByBankAccountId(int bankaccountid)
+		{
+			return this.UnitOfWork.FirstOrDefault<BankAccount>(o => o.BankAccountId == bankaccountid);
+		}
+		
+        /// <summary>
+        /// Load BankAccount entities from the database using the BankAccountNumber field
+        /// </summary>
+        /// <param name="bankaccountnumber">string</param>
+        /// <returns>IList<IBankAccount></returns>
+		public IList<IBankAccount> LoadByBankAccountNumber(string bankaccountnumber)
+		{
+			return (IList<IBankAccount>)this.UnitOfWork.AllMatching<BankAccount>(o => o.BankAccountNumber == bankaccountnumber);
+		}
+		
+        /// <summary>
+        /// Load BankAccount entities from the database using the Balance field
+        /// </summary>
+        /// <param name="balance">decimal</param>
+        /// <returns>IList<IBankAccount></returns>
+		public IList<IBankAccount> LoadByBalance(decimal balance)
+		{
+			return (IList<IBankAccount>)this.UnitOfWork.AllMatching<BankAccount>(o => o.Balance == balance);
+		}
+		
+        /// <summary>
+        /// Load BankAccount entities from the database using the CustomerId field
+        /// </summary>
+        /// <param name="customerid">int</param>
+        /// <returns>IList<IBankAccount></returns>
+		public IList<IBankAccount> LoadByCustomerId(int customerid)
+		{
+			return (IList<IBankAccount>)this.UnitOfWork.AllMatching<BankAccount>(o => o.CustomerId == customerid);
+		}
+		
+        /// <summary>
+        /// Load BankAccount entities from the database using the Locked field
+        /// </summary>
+        /// <param name="locked">bool</param>
+        /// <returns>IList<IBankAccount></returns>
+		public IList<IBankAccount> LoadByLocked(bool locked)
+		{
+			return (IList<IBankAccount>)this.UnitOfWork.AllMatching<BankAccount>(o => o.Locked == locked);
+		}
+		
+        /// <summary>
         /// Load all BankAccount entities from the database.
         /// </summary>
         /// <returns>IList<IBankAccount></returns>
@@ -64,6 +114,17 @@ namespace Banking.Models.Repository
 		#endregion
 
 		#region Search
+		
+        /// <summary>
+        /// Search for BankAccount entities in the database by BankAccountNumber
+        /// </summary>
+        /// <param name="bankaccountnumber">string</param>
+        /// <returns>IList<IBankAccount></returns>
+		public IList<IBankAccount> SearchByBankAccountNumber(string bankaccountnumber, bool caseSensitive = false)
+		{
+			return caseSensitive ? (IList<IBankAccount>)this.UnitOfWork.AllMatching<BankAccount>(o => o.BankAccountNumber.ToLower().Contains(bankaccountnumber.ToLower())) 
+						  : (IList<IBankAccount>)this.UnitOfWork.AllMatching<BankAccount>(o => o.BankAccountNumber.Contains(bankaccountnumber));
+		}
 		
 		#endregion
 		
@@ -80,6 +141,69 @@ namespace Banking.Models.Repository
 			return this.UnitOfWork.Add(entityToSave);
 		}
 		
+        /// <summary>
+        /// Update the BankAccount entity in the database if any values have changed
+        /// </summary>
+        /// <param name="entity">IBankAccount</param>
+        /// <returns>bool</returns>
+		public bool Update(IBankAccount entity)
+		{
+			bool doUpdate = false;
+			var entityToUpdate = this.UnitOfWork.FirstOrDefault<BankAccount>(o => o.BankAccountId == entity.BankAccountId);
+			
+			if (entityToUpdate == null)
+			{
+				throw new Exception("The BankAccount entity does not exist");
+			}
+			
+			// Optimisation: Flag if any field has changed
+			if (entityToUpdate.BankAccountNumber != entity.BankAccountNumber) { entityToUpdate.BankAccountNumber = entity.BankAccountNumber;doUpdate = true; }
+			if (entityToUpdate.Balance != entity.Balance) { entityToUpdate.Balance = entity.Balance;doUpdate = true; }
+			if (entityToUpdate.CustomerId != entity.CustomerId) { entityToUpdate.CustomerId = entity.CustomerId;doUpdate = true; }
+			if (entityToUpdate.Locked != entity.Locked) { entityToUpdate.Locked = entity.Locked;doUpdate = true; }
+
+			// Optimisation: Only execute update if a field has changed
+			if (doUpdate)
+			{
+				return this.UnitOfWork.Modify(entityToUpdate);
+			}
+			
+			return false;
+		}
+		
+        /// <summary>
+        /// Delete the BankAccount entity from the database
+        /// </summary>
+        /// <param name="entity">IBankAccount</param>
+        /// <returns>bool</returns>
+		public bool Delete(IBankAccount entity)
+		{		
+			var entityToDelete = this.UnitOfWork.FirstOrDefault<BankAccount>(o => o.BankAccountId == entity.BankAccountId);
+			
+			if(entityToDelete == null)
+			{
+				throw new Exception("The BankAccount entity does not exist");
+			}
+			
+			return this.UnitOfWork.Remove(entityToDelete);
+		}
+		
+        /// <summary>
+        /// Delete the BankAccount entity from the database using the BankAccountId
+        /// </summary>
+        /// <param name="bankaccountid">int</param>
+        /// <returns>bool</returns>
+		public bool DeleteByBankAccountId(int bankaccountid)
+		{
+			var entityToDelete = this.UnitOfWork.FirstOrDefault<BankAccount>(o => o.BankAccountId == bankaccountid);
+			
+			if(entityToDelete == null)
+			{
+				throw new Exception("The BankAccount entity does not exist");
+			}
+			
+			return this.UnitOfWork.Remove(entityToDelete);
+		}
 		
 		#endregion
 	}

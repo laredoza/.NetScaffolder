@@ -38,6 +38,11 @@
     <Namespace>Customers</Namespace>
     <OutputFolder>Context</OutputFolder>
     <Models>
+      <Table Description="" SchemaName="dbo" TableName="Book">
+        <Columns />
+        <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
+        <RelationShips />
+      </Table>
       <Table Description="" SchemaName="dbo" TableName="Country">
         <Columns />
         <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>

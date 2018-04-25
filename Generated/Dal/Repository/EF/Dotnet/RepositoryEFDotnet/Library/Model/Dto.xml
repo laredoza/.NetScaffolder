@@ -5,6 +5,6 @@
   <OutputPath />
   <AddInjectConstructor>true</AddInjectConstructor>
   <InheritFrom />
-  <UseInterface>true</UseInterface>
+  <UseInterface>false</UseInterface>
   <PostFix>Dto</PostFix>
 </DtoDataType>

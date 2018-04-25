@@ -28,12 +28,18 @@ namespace Banking.Models.Interfaces
 	{
 		#region Load
 		
+		IBankAccount LoadByBankAccountId(int bankaccountid);
+		IList<IBankAccount> LoadByBankAccountNumber(string bankaccountnumber);
+		IList<IBankAccount> LoadByBalance(decimal balance);
+		IList<IBankAccount> LoadByCustomerId(int customerid);
+		IList<IBankAccount> LoadByLocked(bool locked);
 		IList<IBankAccount> LoadAll();
 		
 		#endregion
 
 		#region Search
 		
+		IList<IBankAccount> SearchByBankAccountNumber(string bankaccountnumber, bool caseSensitive = false);
 
 		#endregion
 		
@@ -42,6 +48,7 @@ namespace Banking.Models.Interfaces
 		bool Save(IBankAccount entity);
 		bool Update(IBankAccount entity);
 		bool Delete(IBankAccount entity);
+		bool DeleteByBankAccountId(int bankaccountid);
 
 		#endregion
 	}

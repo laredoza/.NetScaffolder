@@ -55,13 +55,13 @@ namespace <#= DataType.FullNamespace #>
 				{
 					foreach(var childItem in item.<#= DataType.NamingConvention.ApplyNamingConvention(child.TableNamePlural) #>)
 					{
-						this.<#= DataType.NamingConvention.ApplyNamingConvention(child.TableNamePlural) #>.Add(new <#= DataType.NamingConvention.ApplyNamingConvention(child.TableName) #>(childItem, deep));
+						this.<#= DataType.NamingConvention.ApplyNamingConvention(child.TableNamePlural) #>.Add(new <#= DataType.NamingConvention.ApplyNamingConvention(child.TableName) #><#= DataType.PostFix #>(childItem, deep));
 					}
 				}
 <#+ } #>
 
 <#+ foreach(var parent in DataType.MetaData.DistinctParentRelationships){ #>
-				this.<#= DataType.NamingConvention.ApplyNamingConvention(parent.TableName) #> = new <#= DataType.NamingConvention.ApplyNamingConvention(parent.TableName) #>(item.<#= DataType.NamingConvention.ApplyNamingConvention(parent.TableName) #>, deep);
+				this.<#= DataType.NamingConvention.ApplyNamingConvention(parent.TableName) #> = new <#= DataType.NamingConvention.ApplyNamingConvention(parent.TableName) #><#= DataType.PostFix #>(item.<#= DataType.NamingConvention.ApplyNamingConvention(parent.TableName) #>, deep);
 <#+ } #>
 			}
 		}

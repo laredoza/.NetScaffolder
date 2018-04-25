@@ -47,7 +47,7 @@ namespace Banking.Models.Dto
 				{
 					foreach(var childItem in item.Customers)
 					{
-						this.Customers.Add(new Customer(childItem, deep));
+						this.Customers.Add(new CustomerDto(childItem, deep));
 					}
 				}
 			}

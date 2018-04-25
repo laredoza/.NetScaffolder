@@ -28,6 +28,7 @@ namespace Banking.Models.Customers
 	{
 		#region Db Sets
 		
+		public virtual DbSet<Book> Book { get; set; }
 		public virtual DbSet<Country> Country { get; set; }
 		public virtual DbSet<Customer> Customer { get; set; }
 		public virtual DbSet<Order> Order { get; set; }

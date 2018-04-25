@@ -58,10 +58,10 @@ namespace Banking.Models.Dto
 				{
 					foreach(var childItem in item.BankAccounts)
 					{
-						this.BankAccounts.Add(new BankAccount(childItem, deep));
+						this.BankAccounts.Add(new BankAccountDto(childItem, deep));
 					}
 				}
-				this.Country = new Country(item.Country, deep);
+				this.Country = new CountryDto(item.Country, deep);
 			}
 		}
 		
