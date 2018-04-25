@@ -61,6 +61,26 @@ namespace DotNetScaffolder.Mapping.MetaData.Model
         /// <summary>
         ///     The single.
         /// </summary>
-        Single
+        Single,
+
+        /// <summary>
+        /// The guid.
+        /// </summary>
+        Guid,
+
+        /// <summary>
+        /// The var binary.
+        /// </summary>
+        VarBinary,
+
+        /// <summary>
+        /// The date.
+        /// </summary>
+        Date,
+
+        /// <summary>
+        /// The time.
+        /// </summary>
+        Time
     }
 }
