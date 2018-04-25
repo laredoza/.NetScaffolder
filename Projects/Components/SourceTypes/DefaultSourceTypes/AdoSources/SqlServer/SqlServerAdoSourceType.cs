@@ -194,7 +194,8 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
                                     TableName = foreignKey.TableName,
                                     ColumnName = foreignKey.ReferencedColumns(schema).ToList()[0],
                                     ForeignColumnName = foreignKey.Columns[0],
-                                    DependencyRelationShip = RelationshipType.ForeignKeyChild
+                                    DependencyRelationShip = RelationshipType.ForeignKeyChild,
+                                    RelationshipName = foreignKey.Name
                                 });
                         }
                     }
