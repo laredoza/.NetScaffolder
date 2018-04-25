@@ -15,6 +15,8 @@ namespace DotNetScaffolder.Mapping.ApplicationServices
 
     using Common.Logging;
 
+    using Configuration;
+
     using DotNetScaffolder.Core.Common.Serializer;
     using DotNetScaffolder.Core.Common.Validation;
     using DotNetScaffolder.Mapping.MetaData.Domain;
@@ -125,6 +127,13 @@ namespace DotNetScaffolder.Mapping.ApplicationServices
         {
             Logger.Trace($"Started Load() - Path: {this.FilePersistenceOptions.Path}");
             this.ProjectDefinition = ObjectXMLSerializer<ProjectDefinition>.Load(this.FilePersistenceOptions.Path);
+
+            foreach (var domain in this.ProjectDefinition.Domains)
+            {
+                var sourceType = ScaffoldConfig.ReturnSourceType(domain.SourceTypeId);
+                sourceType.Fix(domain.Tables);
+            }
+
             Logger.Trace($"Completed Load() - Path: {this.FilePersistenceOptions.Path}");
         }
 

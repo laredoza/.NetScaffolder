@@ -76,6 +76,33 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
         /// </param>
         public void Fix(DatabaseModel model)
         {
+            Logger.Trace("Started Fix()");
+
+            this.Fix(model.Tables);
+
+            Logger.Trace("Completed Fix()");
+        }
+
+        /// <summary>
+        /// The fix.
+        /// </summary>
+        /// <param name="tables">
+        /// The tables.
+        /// </param>
+        public void Fix(List<Table> tables)
+        {
+            Logger.Trace("Started Fix()");
+
+            foreach (Table modelTable in tables)
+            {
+                foreach (var relationship in modelTable.RelationShips)
+                {
+                    relationship.Table = modelTable;
+                    relationship.RelatedTable = tables.FirstOrDefault(t => t.TableName == relationship.TableName);
+                    relationship.SchemaName = relationship.RelatedTable.SchemaName;
+                }
+            }
+            Logger.Trace("Completed Fix()");
         }
 
         /// <summary>

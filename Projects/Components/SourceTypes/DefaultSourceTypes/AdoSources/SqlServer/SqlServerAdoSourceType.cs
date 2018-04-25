@@ -78,19 +78,49 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
         /// </param>
         public void Fix(DatabaseModel model)
         {
-            Logger.Trace("Started Import()");
+            Logger.Trace("Started Fix()");
 
-            foreach (Table modelTable in model.Tables)
+            this.Fix(model.Tables);
+
+            Logger.Trace("Completed Fix()");
+        }
+
+        /// <summary>
+        /// The fix.
+        /// </summary>
+        /// <param name="tables">
+        /// The tables.
+        /// </param>
+        public void Fix(List<Table> tables)
+        {
+            Logger.Trace("Started Fix()");
+
+            List<Relationship> relationshipsToDelete = new List<Relationship>();
+
+            foreach (Table modelTable in tables)
             {
+                relationshipsToDelete = new List<Relationship>();
+
                 foreach (var relationship in modelTable.RelationShips)
                 {
-                    // Todo: Don't think this is the best way to do this. Will probably cause issues with duplicate table names
-                    relationship.RelatedTable = model.Tables.FirstOrDefault(t => t.TableName == relationship.TableName);
-                    relationship.SchemaName = relationship.RelatedTable.SchemaName;
+                    relationship.Table = modelTable;
+                    relationship.RelatedTable = tables.FirstOrDefault(t => t.TableName == relationship.TableName);
+                    if (relationship.RelatedTable == null)
+                    {
+                        relationshipsToDelete.Add(relationship);
+                    }
+                    else
+                    {
+                        relationship.SchemaName = relationship.RelatedTable.SchemaName;
+                    }
+                }
+
+                foreach (var relationship in relationshipsToDelete)
+                {
+                    modelTable.RelationShips.Remove(relationship);
                 }
             }
-
-            Logger.Trace("Completed Import()");
+            Logger.Trace("Completed Fix()");
         }
 
         /// <summary>
@@ -125,16 +155,16 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
                 foreach (var column in table.Columns)
                 {
                     newColumn = new Column
-                                    {
-                                        ColumnName = column.Name,
-                                        DomainDataType = this.MapDatabaseType(column.DataType.TypeName),
-                                        IsRequired = column.IsPrimaryKey,
-                                        ColumnOrder = table.Columns.IndexOf(column) + 1,
-                                        Precision = column.Precision.HasValue ? column.Precision.Value : 0,
-                                        Scale = column.Scale.HasValue ? column.Scale.Value : 0,
-                                        Length = column.Length.HasValue ? column.Length.Value : 0,
-                                        IsPrimaryKey = column.IsPrimaryKey
-                                    };
+                    {
+                        ColumnName = column.Name,
+                        DomainDataType = this.MapDatabaseType(column.DataType.TypeName),
+                        IsRequired = column.IsPrimaryKey,
+                        ColumnOrder = table.Columns.IndexOf(column) + 1,
+                        Precision = column.Precision.HasValue ? column.Precision.Value : 0,
+                        Scale = column.Scale.HasValue ? column.Scale.Value : 0,
+                        Length = column.Length.HasValue ? column.Length.Value : 0,
+                        IsPrimaryKey = column.IsPrimaryKey
+                    };
 
                     newTable.Columns.Add(newColumn);
                 }
@@ -143,12 +173,13 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
                 {
                     newTable.RelationShips.Add(
                         new Relationship
-                            {
-                                TableName = foreignKey.RefersToTable,
-                                ColumnName = foreignKey.Columns[0],
-                                ForeignColumnName = foreignKey.ReferencedColumns(schema).ToList()[0],
-                                DependencyRelationShip = RelationshipType.ForeignKey
-                            });
+                        {
+                            TableName = foreignKey.RefersToTable,
+                            ColumnName = foreignKey.Columns[0],
+                            ForeignColumnName = foreignKey.ReferencedColumns(schema).ToList()[0],
+                            DependencyRelationShip = RelationshipType.ForeignKey,
+                            RelationshipName = foreignKey.Name
+                        });
                 }
 
                 foreach (var foreignKeyChildren in table.ForeignKeyChildren)
@@ -159,12 +190,13 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
                         {
                             newTable.RelationShips.Add(
                                 new Relationship
-                                    {
-                                        TableName = foreignKey.TableName,
-                                        ColumnName = foreignKey.ReferencedColumns(schema).ToList()[0],
-                                        ForeignColumnName = foreignKey.Columns[0],
-                                        DependencyRelationShip = RelationshipType.ForeignKeyChild
-                                    });
+                                {
+                                    TableName = foreignKey.TableName,
+                                    ColumnName = foreignKey.ReferencedColumns(schema).ToList()[0],
+                                    ForeignColumnName = foreignKey.Columns[0],
+                                    DependencyRelationShip = RelationshipType.ForeignKeyChild,
+                                    RelationshipName = foreignKey.Name
+                                });
                         }
                     }
                 }
@@ -203,11 +235,11 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
             {
                 Logger.Trace("Path Doesn't Exist");
                 result = new AdoSourceOptions
-                             {
-                                 ProviderName = "System.Data.SqlClient",
-                                 ConnectionString =
+                {
+                    ProviderName = "System.Data.SqlClient",
+                    ConnectionString =
                                      @"Data Source=.\SQLEXPRESS;Integrated Security=true;Initial Catalog=Banking"
-                             };
+                };
             }
 
             Logger.Trace("Completed Import()");
