@@ -334,10 +334,14 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
                     return "DateTime";
                 case DomainDataType.Single:
                     return "float";
-
-                // case case DomainDataType.Int16:
-                // // Todo: Do something valid with this
-                // return DomainDataType.String;
+                case DomainDataType.Guid:
+                    return "Guid";
+                case DomainDataType.VarBinary:
+                    return "byte[]";
+                case DomainDataType.Date:
+                    return "DateTime";
+                case DomainDataType.Time:
+                    return "DateTime";
                 default:
                     throw new NotImplementedException($"Invalid data type {type}");
             }
