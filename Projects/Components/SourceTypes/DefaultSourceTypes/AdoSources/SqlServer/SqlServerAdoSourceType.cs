@@ -236,6 +236,8 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
                     return DomainDataType.Boolean;
                 case "NVARCHAR":
                     return DomainDataType.String;
+                case "VARCHAR":
+                    return DomainDataType.String;
                 case "MONEY":
                     return DomainDataType.Decimal;
                 case "NUMERIC":
@@ -248,6 +250,18 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
                 case "REAL":
                     // Todo: Do something valid with this
                     return DomainDataType.Single;
+                case "UNIQUEIDENTIFIER":
+                    return DomainDataType.Guid;
+                case "BIGINT":
+                    return DomainDataType.Int64;
+                case "VARBINARY":
+                    return DomainDataType.VarBinary;
+                case "DECIMAL":
+                    return DomainDataType.Decimal;
+                case "DATE":
+                    return DomainDataType.Date;
+                case "TIME":
+                    return DomainDataType.Time;
                 default:
                     throw new NotImplementedException($"Invalid data type {databaseType}");
             }
