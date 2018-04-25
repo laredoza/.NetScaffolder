@@ -65,6 +65,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
             }
         }
 
+        [XmlIgnore]
         public string TransformInheritFrom
         {
             get
@@ -159,7 +160,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
 
             if (File.Exists(filePath))
             {
-                EntityDataType entity = ObjectXMLSerializer<EntityDataType>.Load(filePath);
+                var entity = ObjectXMLSerializer<EntityDataType>.Load(filePath);
 
                 if (entity != null)
                 {

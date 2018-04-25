@@ -59,6 +59,12 @@
       <DependentUpon>ContextUserControl.cs</DependentUpon>
     </Compile>
     <Compile Include="ContextDataTypes\ContextDataType.cs" />
+    <Compile Include="DtoDataTypes\DtoUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DtoDataTypes\DtoUserControl.Designer.cs">
+      <DependentUpon>DtoUserControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="DtoInterfaceDataType\DtoInterfaceDataType.cs" />
     <Compile Include="DtoInterfaceDataType\DtoInterfaceUserControl.cs">
       <SubType>UserControl</SubType>
@@ -89,19 +95,6 @@
     </Compile>
     <Compile Include="RepositoryDataTypes\RepositoryDataType.cs" />
     <Compile Include="DtoDataTypes\DtoDataType.cs" />
-    <Compile Include="DtoDataTypes\TableUserControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="DtoDataTypes\TableUserControl.Designer.cs">
-      <DependentUpon>TableUserControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UnitOfWorkDataTypes\UnitOfWorkDataType.cs" />
-    <Compile Include="UnitOfWorkDataTypes\UnitOfWorkUserControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UnitOfWorkDataTypes\UnitOfWorkUserControl.Designer.cs">
-      <DependentUpon>UnitOfWorkUserControl.cs</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Core\Common\DotNetScaffolder.Core.Common.csproj">
@@ -136,6 +129,9 @@
     <EmbeddedResource Include="ContextDataTypes\ContextUserControl.resx">
       <DependentUpon>ContextUserControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="DtoDataTypes\DtoUserControl.resx">
+      <DependentUpon>DtoUserControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DtoInterfaceDataType\DtoInterfaceUserControl.resx">
       <DependentUpon>DtoInterfaceUserControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -147,12 +143,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="RepositoryDataTypes\RepositoryUserControl.resx">
       <DependentUpon>RepositoryUserControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DtoDataTypes\TableUserControl.resx">
-      <DependentUpon>TableUserControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UnitOfWorkDataTypes\UnitOfWorkUserControl.resx">
-      <DependentUpon>UnitOfWorkUserControl.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />

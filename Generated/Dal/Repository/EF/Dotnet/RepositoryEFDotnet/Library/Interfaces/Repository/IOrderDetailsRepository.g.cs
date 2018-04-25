@@ -43,7 +43,7 @@ namespace Banking.Models.Interfaces
 
 		#endregion
 		
-		#region CRUD
+		#region Modifiers
 		
 		bool Save(IOrderDetails entity);
 		bool Update(IOrderDetails entity);

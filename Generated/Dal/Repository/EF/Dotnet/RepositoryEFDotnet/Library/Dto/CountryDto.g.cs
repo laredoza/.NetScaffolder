@@ -1,5 +1,5 @@
 ﻿
-// <copyright file="BankTransfers.g.cs" company="MIT">
+// <copyright file="CountryDto.g.cs" company="MIT">
 //  Copyright (c) 2018 MIT
 // </copyright>  
 
@@ -20,18 +20,51 @@
 
 using System;
 using System.Collections.Generic;
+using Banking.Models.Interfaces;
 
-namespace Banking.Models.Interfaces
+namespace Banking.Models.Dto
 {
-	public partial interface IBankTransfers  
+	public partial class CountryDto : ICountry 
 	{
+		#region CTOR
+		
+		public CountryDto()
+		{
+			this.Customers = new List <ICustomer>();
+		}
+		
+		public CountryDto(ICountry item, bool deep = false)
+		{
+			if(item == null) return;
+			
+			this.CountryId = item.CountryId;
+			this.CountryName = item.CountryName;
+			this.Customers = new List <ICustomer>();
+
+			if(deep)
+			{
+				if(item.Customers != null)
+				{
+					foreach(var childItem in item.Customers)
+					{
+						this.Customers.Add(new Customer(childItem, deep));
+					}
+				}
+			}
+		}
+		
+		#endregion
+		
 		#region Fields
 		
+		public int CountryId { get; set; }
+		public string CountryName { get; set; }
 
 		#endregion
 		
 		#region Child Relationships
 		
+		public IList<ICustomer> Customers { get; set; }
 		
 		#endregion
 		

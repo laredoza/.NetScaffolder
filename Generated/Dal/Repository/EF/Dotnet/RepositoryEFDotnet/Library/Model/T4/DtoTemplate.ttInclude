@@ -1,0 +1,101 @@
+﻿<#+
+public class DtoTemplate : BaseTemplate 
+{
+	public DtoDataType DataType { get; set; }
+	public string DtoInterfaceNamespace { get; set; }
+	
+	public override string TransformText()
+	{
+		Debugger.Break();
+		Header = new CopyrightHeader();
+		Header.Filename = DataType.DtoNameFull;
+#>
+
+<#= Header.TransformText() #>
+
+// *******************************************************************
+//	GENERATED CODE. DOT NOT MODIFY MANUALLY AS CHANGES CAN BE LOST!!!
+//	USE A PARTIAL CLASS INSTEAD
+// *******************************************************************
+
+using System;
+using System.Collections.Generic;
+using <#= DtoInterfaceNamespace #>;
+
+namespace <#= DataType.FullNamespace #>
+{
+	public partial class <#= DataType.DtoNameFull #> <#= DataType.TransformInheritFrom #> 
+	{
+<#+ if(DataType.AddInjectConstructor){ #>
+		#region CTOR
+		
+		public <#= DataType.DtoNameFull #>()
+		{
+<#+ foreach(var child in DataType.MetaData.DistinctChildRelationships){ #>
+			this.<#= DataType.NamingConvention.ApplyNamingConvention(child.TableNamePlural) #> = new <#= DataType.CollectionOption.ClassName #> <I<#= DataType.NamingConvention.ApplyNamingConvention(child.TableName) #>>();
+<#+ } #>
+		}
+		
+		public <#= DataType.DtoNameFull #>(I<#= DataType.DtoName #> item, bool deep = false)
+		{
+			if(item == null) return;
+			
+<#+ foreach(var col in DataType.MetaData.Columns){ #>
+			this.<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #> = item.<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>;
+<#+ } #>
+
+<#+ foreach(var child in DataType.MetaData.DistinctChildRelationships){ #>
+			this.<#= DataType.NamingConvention.ApplyNamingConvention(child.TableNamePlural) #> = new <#= DataType.CollectionOption.ClassName #> <I<#= DataType.NamingConvention.ApplyNamingConvention(child.TableName) #>>();
+<#+ } #>
+
+			if(deep)
+			{
+<#+ foreach(var child in DataType.MetaData.DistinctChildRelationships){ #>
+				if(item.<#= DataType.NamingConvention.ApplyNamingConvention(child.TableNamePlural) #> != null)
+				{
+					foreach(var childItem in item.<#= DataType.NamingConvention.ApplyNamingConvention(child.TableNamePlural) #>)
+					{
+						this.<#= DataType.NamingConvention.ApplyNamingConvention(child.TableNamePlural) #>.Add(new <#= DataType.NamingConvention.ApplyNamingConvention(child.TableName) #>(childItem, deep));
+					}
+				}
+<#+ } #>
+
+<#+ foreach(var parent in DataType.MetaData.DistinctParentRelationships){ #>
+				this.<#= DataType.NamingConvention.ApplyNamingConvention(parent.TableName) #> = new <#= DataType.NamingConvention.ApplyNamingConvention(parent.TableName) #>(item.<#= DataType.NamingConvention.ApplyNamingConvention(parent.TableName) #>, deep);
+<#+ } #>
+			}
+		}
+		
+		#endregion
+		
+<#+ } #>
+		#region Fields
+		
+<#+ foreach(var col in DataType.MetaData.Columns){ #>
+		public <#= DataType.SourceType.MapDomainDataTypeToOutputType(col.DomainDataType) #> <#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #> { get; set; }
+<#+ } #>
+
+		#endregion
+		
+		#region Child Relationships
+		
+<#+ foreach(var child in DataType.MetaData.DistinctChildRelationships){ #>
+		public <#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.NamingConvention.ApplyNamingConvention(child.TableName) #>> <#= DataType.NamingConvention.ApplyNamingConvention(child.TableNamePlural) #> { get; set; }
+<#+ } #>
+		
+		#endregion
+		
+		#region Parent Relationships
+		
+<#+ foreach(var parent in DataType.MetaData.DistinctParentRelationships){ #>
+		public I<#= DataType.NamingConvention.ApplyNamingConvention(parent.TableName) #> <#= DataType.NamingConvention.ApplyNamingConvention(parent.TableName) #> { get; set; }
+<#+ } #>
+		
+		#endregion
+	}
+}
+<#+
+		return this.GenerationEnvironment.ToString();
+	}
+}
+#>

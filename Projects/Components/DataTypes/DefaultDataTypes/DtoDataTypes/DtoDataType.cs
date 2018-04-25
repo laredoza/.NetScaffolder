@@ -8,18 +8,15 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
 {
     #region Usings
 
+    using DotNetScaffolder.Components.Common.Contract;
+    using DotNetScaffolder.Core.Common.Serializer;
+    using FormControls.TreeView;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.Composition;
     using System.IO;
     using System.Windows.Forms;
-
-    using DotNetScaffolder.Components.Common.Contract;
-    using DotNetScaffolder.Components.DataTypes.DefaultDataTypes.TableDataTypes;
-    using DotNetScaffolder.Core.Common.Serializer;
-    using DotNetScaffolder.Mapping.MetaData.Model;
-
-    using FormControls.TreeView;
+    using System.Xml.Serialization;
 
     #endregion
 
@@ -45,11 +42,6 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
         #region Properties
 
         /// <summary>
-        ///     Gets or sets a value indicating whether enabled.
-        /// </summary>
-        public bool Enabled { get; set; } = false;
-
-        /// <summary>
         ///     Gets or sets the namespace.
         /// </summary>
         public string Namespace { get; set; } = "Dto";
@@ -58,6 +50,75 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
         ///     Gets or sets the output folder.
         /// </summary>
         public string OutputFolder { get; set; } = "Dto";
+
+        public string OutputPath { get; set; }
+
+        public bool AddInjectConstructor { get; set; }
+
+        public string InheritFrom { get; set; }
+
+        public bool UseInterface { get; set; }
+
+        public string PostFix { get; set; } = "Dto";
+
+        [XmlIgnore]
+        public string FullNamespace
+        {
+            get
+            {
+                return $"{BaseNamespace}.{Namespace}";
+            }
+        }
+
+        [XmlIgnore]
+        public string TransformInheritFrom
+        {
+            get
+            {
+                string inherit = string.Empty;
+
+                if (!string.IsNullOrEmpty(InheritFrom))
+                {
+                    inherit = $": {InheritFrom}";
+                }
+
+                if (AddInjectConstructor || UseInterface)
+                {
+                    inherit += !string.IsNullOrEmpty(InheritFrom) ? ", " : ": ";
+                    inherit += $"I{DtoName}";
+                }
+
+                return inherit;
+            }
+        }
+
+        [XmlIgnore]
+        public string DtoName
+        {
+            get
+            {
+                if (MetaData == null)
+                {
+                    return string.Empty;
+                }
+
+                if (NamingConvention == null)
+                {
+                    return MetaData.TableName;
+                }
+
+                return NamingConvention.ApplyNamingConvention(MetaData.TableName);
+            }
+        }
+
+        [XmlIgnore]
+        public string DtoNameFull
+        {
+            get
+            {
+                return $"{DtoName}{PostFix}";
+            }
+        }
 
         #endregion
 
@@ -74,8 +135,13 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
         /// </returns>
         public override IDataTypeUI<IDictionary<string, string>> CreateUI(IDictionary<string, string> parameters)
         {
-            var tableControl = new TableUserControl();
-            return tableControl;
+            var newControl = new DtoUserControl
+            {
+                Visible = true,
+                Dock = DockStyle.Fill,
+                DataType = this
+            };
+            return newControl;
         }
 
         /// <summary>
@@ -101,9 +167,14 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
 
             if (File.Exists(filePath))
             {
-                var appService = ObjectXMLSerializer<DtoDataType>.Load(filePath);
-                if (appService != null)
+                var dto = ObjectXMLSerializer<DtoDataType>.Load(filePath);
+                if (dto != null)
                 {
+                    this.Namespace = dto.Namespace;
+                    this.OutputFolder = dto.OutputFolder;
+                    this.OutputPath = dto.OutputPath;
+                    this.InheritFrom = dto.InheritFrom;
+                    this.AddInjectConstructor = dto.AddInjectConstructor;
                 }
             }
         }

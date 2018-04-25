@@ -1,7 +1,8 @@
-﻿<#@ include file="BaseProjectGenerator.ttinclude" #>
+﻿<#@ include file="BaseProjectGenerator.ttInclude" #>
 <#@ include file="ContextGenerator.ttInclude" #>
 <#@ include file="EntityGenerator.ttInclude" #>
 <#@ include file="DtoInterfaceGenerator.ttInclude" #>
+<#@ include file="DtoGenerator.ttInclude" #>
 <#@ include file="RepoInterfaceGenerator.ttInclude" #>
 <#@ include file="RepositoryGenerator.ttInclude" #>
 <#+
@@ -24,7 +25,7 @@ public class ProjectGenerator : BaseProjectGenerator
 			{
 				var entityGen = new EntityGenerator();
 				entityGen.Models = domain.Tables;
-				entityGen.EntityDataType = dataType as EntityDataType;
+				entityGen.DataType = dataType as EntityDataType;
 				entityGen.DtoInterfaceType = dataTypes.FirstOrDefault(o => o is DtoInterfaceDataType) as DtoInterfaceDataType;
 				entityGen.Run();
 			}
@@ -32,7 +33,7 @@ public class ProjectGenerator : BaseProjectGenerator
 			if(dataType is ContextDataType)
 			{
 				var contxtGen = new ContextGenerator();
-				contxtGen.ContextDataType = dataType as ContextDataType;
+				contxtGen.DataType = dataType as ContextDataType;
 				contxtGen.EntityDataType = dataTypes.FirstOrDefault(o => o is EntityDataType) as EntityDataType;
 				contxtGen.Run();
 			}
@@ -54,6 +55,15 @@ public class ProjectGenerator : BaseProjectGenerator
 				iRepoGen.DtoInterfaceType = dataTypes.FirstOrDefault(o => o is DtoInterfaceDataType) as DtoInterfaceDataType;
 				iRepoGen.EntityDataType = dataTypes.FirstOrDefault(o => o is EntityDataType) as EntityDataType;
 				iRepoGen.Run();
+			}
+			
+			if(dataType is DtoDataType)
+			{
+				var iDtoGen = new DtoGenerator();
+				iDtoGen.Models = domain.Tables;
+				iDtoGen.DataType = dataType as DtoDataType;
+				iDtoGen.DtoInterfaceType = dataTypes.FirstOrDefault(o => o is DtoInterfaceDataType) as DtoInterfaceDataType;
+				iDtoGen.Run();
 			}
 		}
 	}

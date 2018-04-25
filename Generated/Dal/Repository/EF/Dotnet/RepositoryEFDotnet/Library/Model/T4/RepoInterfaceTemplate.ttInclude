@@ -50,7 +50,7 @@ namespace <#= DataType.FullNamespace #>
 
 		#endregion
 		
-		#region CRUD
+		#region Modifiers
 		
 		bool Save(I<#= DataType.RepoName #> entity);
 		bool Update(I<#= DataType.RepoName #> entity);

@@ -1,5 +1,5 @@
 ﻿
-// <copyright file="BankTransfers.g.cs" company="MIT">
+// <copyright file="BookDto.g.cs" company="MIT">
 //  Copyright (c) 2018 MIT
 // </copyright>  
 
@@ -20,13 +20,37 @@
 
 using System;
 using System.Collections.Generic;
+using Banking.Models.Interfaces;
 
-namespace Banking.Models.Interfaces
+namespace Banking.Models.Dto
 {
-	public partial interface IBankTransfers  
+	public partial class BookDto : IBook 
 	{
+		#region CTOR
+		
+		public BookDto()
+		{
+		}
+		
+		public BookDto(IBook item, bool deep = false)
+		{
+			if(item == null) return;
+			
+			this.ProductId = item.ProductId;
+			this.Publisher = item.Publisher;
+
+			if(deep)
+			{
+				this.Product = new Product(item.Product, deep);
+			}
+		}
+		
+		#endregion
+		
 		#region Fields
 		
+		public int ProductId { get; set; }
+		public string Publisher { get; set; }
 
 		#endregion
 		
@@ -37,6 +61,7 @@ namespace Banking.Models.Interfaces
 		
 		#region Parent Relationships
 		
+		public IProduct Product { get; set; }
 		
 		#endregion
 	}

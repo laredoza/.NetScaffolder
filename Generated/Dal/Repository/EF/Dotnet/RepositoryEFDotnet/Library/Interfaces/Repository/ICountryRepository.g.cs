@@ -40,7 +40,7 @@ namespace Banking.Models.Interfaces
 
 		#endregion
 		
-		#region CRUD
+		#region Modifiers
 		
 		bool Save(ICountry entity);
 		bool Update(ICountry entity);
