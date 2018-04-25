@@ -4,7 +4,7 @@
 <#@ include file="$(ProjectDir)Model\T4\ProjectGenerator.ttInclude" #>
 <#
 	var projectGen = new ProjectGenerator();
-	projectGen.ModelFilePath = "C:\\Dev\\DotNetScaffolder\\Generated\\Dal\\Repository\\EF\\Dotnet\\RepositoryEFDotnet\\Library\\Model\\Banking.mdl";
-	projectGen.PackagePath = "C:\\Dev\\DotNetScaffolder\\Generated\\Dal\\Repository\\EF\\Dotnet\\RepositoryEFDotnet\\Library\\Model\\Package";
+	projectGen.ModelFilePath = this.Host.ResolvePath("Model/Banking.mdl");
+	projectGen.PackagePath = this.Host.ResolvePath("Model/Package");
 	projectGen.Run();
-#>
+#>>
