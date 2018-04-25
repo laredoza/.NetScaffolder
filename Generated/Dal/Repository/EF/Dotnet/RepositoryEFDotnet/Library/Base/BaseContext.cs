@@ -10,6 +10,11 @@ namespace RepositoryEFDotnet.Library
 {
     public abstract class BaseContext : DbContext, IUnitOfWork
     {
+        public bool Add<TEntity>(TEntity newEntity)
+        {
+            throw new NotImplementedException();
+        }
+
         public IList<TEntity> AllMatching<TEntity>(Expression<Func<TEntity, bool>> exp) where TEntity : class
         {
             return null;
@@ -23,6 +28,16 @@ namespace RepositoryEFDotnet.Library
         public IList<TEntity> LoadAll<TEntity>() where TEntity : class
         {
             return null;
+        }
+
+        public bool Modify<TEntity>(TEntity newEntity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Remove<TEntity>(TEntity newEntity)
+        {
+            throw new NotImplementedException();
         }
     }
 }

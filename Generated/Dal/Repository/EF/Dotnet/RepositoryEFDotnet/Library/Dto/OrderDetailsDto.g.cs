@@ -1,5 +1,5 @@
 ﻿
-// <copyright file="BankTransfers.g.cs" company="MIT">
+// <copyright file="OrderDetailsDto.g.cs" company="MIT">
 //  Copyright (c) 2018 MIT
 // </copyright>  
 
@@ -20,13 +20,45 @@
 
 using System;
 using System.Collections.Generic;
+using Banking.Models.Interfaces;
 
-namespace Banking.Models.Interfaces
+namespace Banking.Models.Dto
 {
-	public partial interface IBankTransfers  
+	public partial class OrderDetailsDto : IOrderDetails 
 	{
+		#region CTOR
+		
+		public OrderDetailsDto()
+		{
+		}
+		
+		public OrderDetailsDto(IOrderDetails item, bool deep = false)
+		{
+			if(item == null) return;
+			
+			this.OrderDetailsId = item.OrderDetailsId;
+			this.OrderId = item.OrderId;
+			this.ProductId = item.ProductId;
+			this.UnitPrice = item.UnitPrice;
+			this.Amount = item.Amount;
+			this.Discount = item.Discount;
+
+			if(deep)
+			{
+				this.Order = new Order(item.Order, deep);
+			}
+		}
+		
+		#endregion
+		
 		#region Fields
 		
+		public int OrderDetailsId { get; set; }
+		public int OrderId { get; set; }
+		public int ProductId { get; set; }
+		public decimal UnitPrice { get; set; }
+		public short Amount { get; set; }
+		public float Discount { get; set; }
 
 		#endregion
 		
@@ -37,6 +69,7 @@ namespace Banking.Models.Interfaces
 		
 		#region Parent Relationships
 		
+		public IOrder Order { get; set; }
 		
 		#endregion
 	}

@@ -1,12 +1,12 @@
-﻿<#@ include file="EntityTemplate.ttinclude" #>
+﻿<#@ include file="DtoTemplate.ttinclude" #>
 <#+
-public class EntityGenerator : BaseGenerator
+public class DtoGenerator : BaseGenerator
 {
-	public EntityDataType DataType { get; set; }
+	public DtoDataType DataType { get; set; }
 	public DtoInterfaceDataType DtoInterfaceType { get; set; }
 	public List<Table> Models { get; set; }
 
-	private EntityTemplate template = new EntityTemplate();
+	private DtoTemplate template = new DtoTemplate();
 
 	protected override void RunCore()
 	{
@@ -21,11 +21,11 @@ public class EntityGenerator : BaseGenerator
 			Debugger.Break();
 			if(!string.IsNullOrEmpty(DataType.OutputPath))
 			{
-				template.RenderToFile(string.Format(@"{0}\{1}\{2}.g.cs", DataType.OutputPath, DataType.OutputFolder, DataType.EntityName));
+				template.RenderToFile(string.Format(@"{0}\{1}\{2}.g.cs", DataType.OutputPath, DataType.OutputFolder, DataType.DtoNameFull));
 			}
 			else
 			{
-				template.RenderToFile(string.Format(@"{0}\{1}.g.cs", DataType.OutputFolder, DataType.EntityName));	
+				template.RenderToFile(string.Format(@"{0}\{1}.g.cs", DataType.OutputFolder, DataType.DtoNameFull));	
 			}
 		}
 	}

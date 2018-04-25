@@ -1,5 +1,5 @@
 ﻿
-// <copyright file="BankTransfers.g.cs" company="MIT">
+// <copyright file="BankTransfersDto.g.cs" company="MIT">
 //  Copyright (c) 2018 MIT
 // </copyright>  
 
@@ -20,11 +20,30 @@
 
 using System;
 using System.Collections.Generic;
+using Banking.Models.Interfaces;
 
-namespace Banking.Models.Interfaces
+namespace Banking.Models.Dto
 {
-	public partial interface IBankTransfers  
+	public partial class BankTransfersDto : IBankTransfers 
 	{
+		#region CTOR
+		
+		public BankTransfersDto()
+		{
+		}
+		
+		public BankTransfersDto(IBankTransfers item, bool deep = false)
+		{
+			if(item == null) return;
+			
+
+			if(deep)
+			{
+			}
+		}
+		
+		#endregion
+		
 		#region Fields
 		
 

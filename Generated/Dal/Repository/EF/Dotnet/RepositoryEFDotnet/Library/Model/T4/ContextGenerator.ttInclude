@@ -2,7 +2,7 @@
 <#+
 public class ContextGenerator : BaseGenerator
 {
-	public ContextDataType ContextDataType {get;set;}
+	public ContextDataType DataType {get;set;}
 	public EntityDataType EntityDataType {get;set;}
 	
 	private ContextTemplate template = new ContextTemplate();
@@ -10,10 +10,10 @@ public class ContextGenerator : BaseGenerator
 	protected override void RunCore()
 	{
 		Debugger.Break();
-		template.DataType = this.ContextDataType;
+		template.DataType = this.DataType;
 		template.EntityNamespace = EntityDataType.FullNamespace;
 
-		foreach(var dbContext in ContextDataType.Contexts)
+		foreach(var dbContext in DataType.Contexts)
 		{
 			template.ContextData = dbContext;
 			Debugger.Break();

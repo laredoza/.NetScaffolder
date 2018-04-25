@@ -1,5 +1,5 @@
 ﻿
-// <copyright file="BankTransfers.g.cs" company="MIT">
+// <copyright file="OrderDto.g.cs" company="MIT">
 //  Copyright (c) 2018 MIT
 // </copyright>  
 
@@ -20,23 +20,70 @@
 
 using System;
 using System.Collections.Generic;
+using Banking.Models.Interfaces;
 
-namespace Banking.Models.Interfaces
+namespace Banking.Models.Dto
 {
-	public partial interface IBankTransfers  
+	public partial class OrderDto : IOrder 
 	{
+		#region CTOR
+		
+		public OrderDto()
+		{
+			this.OrderDetails = new List <IOrderDetails>();
+		}
+		
+		public OrderDto(IOrder item, bool deep = false)
+		{
+			if(item == null) return;
+			
+			this.OrderId = item.OrderId;
+			this.CustomerId = item.CustomerId;
+			this.OrderDate = item.OrderDate;
+			this.DeliveryDate = item.DeliveryDate;
+			this.ShippingName = item.ShippingName;
+			this.ShippingAddress = item.ShippingAddress;
+			this.ShippingCity = item.ShippingCity;
+			this.ShippingZip = item.ShippingZip;
+			this.OrderDetails = new List <IOrderDetails>();
+
+			if(deep)
+			{
+				if(item.OrderDetails != null)
+				{
+					foreach(var childItem in item.OrderDetails)
+					{
+						this.OrderDetails.Add(new OrderDetails(childItem, deep));
+					}
+				}
+				this.Customer = new Customer(item.Customer, deep);
+			}
+		}
+		
+		#endregion
+		
 		#region Fields
 		
+		public int OrderId { get; set; }
+		public int CustomerId { get; set; }
+		public DateTime OrderDate { get; set; }
+		public DateTime DeliveryDate { get; set; }
+		public string ShippingName { get; set; }
+		public string ShippingAddress { get; set; }
+		public string ShippingCity { get; set; }
+		public string ShippingZip { get; set; }
 
 		#endregion
 		
 		#region Child Relationships
 		
+		public IList<IOrderDetails> OrderDetails { get; set; }
 		
 		#endregion
 		
 		#region Parent Relationships
 		
+		public ICustomer Customer { get; set; }
 		
 		#endregion
 	}
