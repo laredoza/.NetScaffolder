@@ -13,6 +13,7 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Tables
     using System.Linq;
     using System.Windows.Forms;
 
+    using DotNetScaffolder.Components.Common.Contract;
     using DotNetScaffolder.Mapping.ApplicationServices.Differences;
     using DotNetScaffolder.Mapping.MetaData.Model;
 
@@ -127,7 +128,7 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Tables
         /// <param name="oldTableList">
         /// The old table list.
         /// </param>
-        public void PreserveCustomMetadata(List<Table> newTableList, List<Table> oldTableList)
+        public void PreserveCustomMetadata(List<Table> newTableList, List<Table> oldTableList, ISourceType sourceType)
         {
             // Do our best to preserve table, column and relationship metadata
             foreach (var newTable in newTableList)
@@ -177,6 +178,8 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Tables
                     }
                 }
             }
+
+            sourceType.Fix(newTableList);
         }
 
         /// <summary>

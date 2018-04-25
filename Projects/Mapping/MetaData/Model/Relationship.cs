@@ -143,16 +143,18 @@ namespace DotNetScaffolder.Mapping.MetaData.Model
             if (this.RelatedTable != null)
             {
                 // result.RelatedTable = this.RelatedTable.Clone() as Table;
+                result.RelatedTable = this.RelatedTable;
             }
+
 
             result.Render = this.Render;
             result.SchemaName = this.SchemaName;
             if (this.Table != null)
             {
-                result.Table = this.Table.Clone() as Table;
+                //result.Table = this.Table.Clone() as Table;
+                result.TableName = this.TableName;
             }
 
-            result.TableName = this.TableName;
             result.UserRelationship = this.UserRelationship;
             result.RelationshipName = this.RelationshipName;
 

@@ -8,6 +8,8 @@ namespace DotNetScaffolder.Components.Common.Contract
 {
     #region Usings
 
+    using System.Collections.Generic;
+
     using DotNetScaffolder.Mapping.MetaData.Model;
 
     #endregion
@@ -100,6 +102,14 @@ namespace DotNetScaffolder.Components.Common.Contract
         /// The model.
         /// </param>
         void Fix(DatabaseModel model);
+
+        /// <summary>
+        /// The fix.
+        /// </summary>
+        /// <param name="tables">
+        /// The tables.
+        /// </param>
+        void Fix(List<Table> tables);
 
         #endregion
     }

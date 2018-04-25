@@ -11,6 +11,7 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Tables
     using System.Collections.Generic;
     using System.Windows.Forms;
 
+    using DotNetScaffolder.Components.Common.Contract;
     using DotNetScaffolder.Mapping.ApplicationServices.Differences;
     using DotNetScaffolder.Mapping.MetaData.Model;
 
@@ -73,7 +74,10 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Tables
         /// <param name="oldTableList">
         /// The old table list.
         /// </param>
-        void PreserveCustomMetadata(List<Table> newTableList, List<Table> oldTableList);
+        /// <param name="sourceType">
+        /// The source Type.
+        /// </param>
+        void PreserveCustomMetadata(List<Table> newTableList, List<Table> oldTableList, ISourceType sourceType);
 
         /// <summary>
         /// Return hierarchy from list.

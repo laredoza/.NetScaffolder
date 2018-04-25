@@ -66,6 +66,27 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Sources
         public UpdateModelsFromSourceUserControl()
         {
             this.InitializeComponent();
+            this.TreeViewAdd.AfterCheck += TreeViewAdd_AfterCheck;
+            this.TreeViewDelete.AfterCheck += TreeViewAdd_AfterCheck;
+            this.TreeViewRefresh.AfterCheck += TreeViewAdd_AfterCheck;
+        }
+
+        private void TreeViewAdd_AfterCheck(object sender, TreeViewEventArgs e)
+        {
+            if (e.Action != TreeViewAction.Unknown)
+            {
+                this.clicked(e.Node, e.Node.Checked);
+            }
+        }
+
+        private void clicked(TreeNode node, bool newCheckedValue)
+        {
+            foreach (TreeNode child in node.Nodes)
+            {
+                child.Checked = newCheckedValue;
+                this.clicked(child, newCheckedValue);
+            }
+            
         }
 
         #endregion
@@ -146,7 +167,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Sources
                 this.differences);
 
             // Todo: Test
-            applicationService.PreserveCustomMetadata(newTables, this.DataSource.Tables);
+            applicationService.PreserveCustomMetadata(newTables, this.DataSource.Tables, this.sourceType);
             this.DataSource.Tables = newTables;
         }
 

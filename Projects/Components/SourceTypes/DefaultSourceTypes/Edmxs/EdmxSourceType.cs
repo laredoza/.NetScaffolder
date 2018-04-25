@@ -337,19 +337,33 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.Edmxs
         /// </param>
         public void Fix(DatabaseModel model)
         {
-            Logger.Trace("Started Import()");
+            Logger.Trace("Started Fix()");
 
-            foreach (Table modelTable in model.Tables)
+            this.Fix(model.Tables);
+
+            Logger.Trace("Completed Fix()");
+        }
+
+        /// <summary>
+        /// The fix.
+        /// </summary>
+        /// <param name="tables">
+        /// The tables.
+        /// </param>
+        public void Fix(List<Table> tables)
+        {
+            Logger.Trace("Started Fix()");
+
+            foreach (Table modelTable in tables)
             {
                 foreach (var relationship in modelTable.RelationShips)
                 {
-                    // Todo: Don't think this is the best way to do this. Will probably cause issues with duplicate table names
-                    relationship.RelatedTable = model.Tables.FirstOrDefault(t => t.TableName == relationship.TableName);
+                    relationship.Table = modelTable;
+                    relationship.RelatedTable = tables.FirstOrDefault(t => t.TableName == relationship.TableName);
                     relationship.SchemaName = relationship.RelatedTable.SchemaName;
                 }
             }
-
-            Logger.Trace("Completed Import()");
+            Logger.Trace("Completed Fix()");
         }
     }
 }
