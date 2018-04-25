@@ -54,6 +54,15 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
         }
 
         [XmlIgnore]
+        public string ModelName
+        {
+            get
+            {
+                return MetaData != null ? NamingConvention.ApplyNamingConvention(MetaData.TableName) : string.Empty;
+            }
+        }
+
+        [XmlIgnore]
         public string FullNamespace
         {
             get

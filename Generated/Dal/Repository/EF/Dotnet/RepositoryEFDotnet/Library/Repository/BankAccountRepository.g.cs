@@ -119,6 +119,7 @@ namespace Banking.Models.Repository
         /// Search for BankAccount entities in the database by BankAccountNumber
         /// </summary>
         /// <param name="bankaccountnumber">string</param>
+		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<IBankAccount></returns>
 		public IList<IBankAccount> SearchByBankAccountNumber(string bankaccountnumber, bool caseSensitive = false)
 		{

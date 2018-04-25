@@ -24,27 +24,75 @@ using Banking.Models.Interfaces;
 
 namespace Banking.Models.Interfaces
 {
+	/// <summary>
+	/// The CountryRepository interface that defines database functions for the Country table
+	/// </summary>
 	public partial interface ICountryRepository
 	{
 		#region Load
-		
+
+        /// <summary>
+        /// Load the Country entity from the database using the CountryId primary key
+        /// </summary>
+        /// <param name="countryid">int</param>
+        /// <returns>ICountry</returns>
 		ICountry LoadByCountryId(int countryid);
+
+        /// <summary>
+        /// Load Country entities from the database using the CountryName field
+        /// </summary>
+        /// <param name="countryname">string</param>
+        /// <returns>IList<ICountry></returns>
 		IList<ICountry> LoadByCountryName(string countryname);
+
+        /// <summary>
+        /// Load all Country entities from the database.
+        /// </summary>
+        /// <returns>IList<ICountry></returns>
 		IList<ICountry> LoadAll();
 		
 		#endregion
 
 		#region Search
-		
+
+        /// <summary>
+        /// Search for Country entities in the database by CountryName
+        /// </summary>
+        /// <param name="countryname">string</param>
+		/// <param name="caseSensitive">bool</param>
+        /// <returns>IList<ICountry></returns>
 		IList<ICountry> SearchByCountryName(string countryname, bool caseSensitive = false);
 
 		#endregion
 		
 		#region Modifiers
 		
+        /// <summary>
+        /// Save the Country entity to the database.
+        /// </summary>
+        /// <param name="entity">ICountry</param>
+        /// <returns>bool</returns>
 		bool Save(ICountry entity);
+		
+        /// <summary>
+        /// Update the Country entity in the database if any values have changed
+        /// </summary>
+        /// <param name="entity">ICountry</param>
+        /// <returns>bool</returns>
 		bool Update(ICountry entity);
+		
+        /// <summary>
+        /// Delete the Country entity from the database
+        /// </summary>
+        /// <param name="entity">ICountry</param>
+        /// <returns>bool</returns>
 		bool Delete(ICountry entity);
+		
+        /// <summary>
+        /// Delete the Country entity from the database using the CountryId
+        /// </summary>
+        /// <param name="countryid">int</param>
+        /// <returns>bool</returns>
 		bool DeleteByCountryId(int countryid);
 
 		#endregion

@@ -19,7 +19,6 @@ public class EntityTemplate : BaseTemplate
 // *******************************************************************
 
 using System;
-using System.Data.Entity;
 using System.Collections.Generic;
 using <#= DtoInterfaceNamespace #>;
 
