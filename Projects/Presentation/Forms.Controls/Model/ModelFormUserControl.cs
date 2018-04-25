@@ -30,16 +30,10 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
     /// </summary>
     public partial class ModelFormUserControl : UserControl
     {
-        #region Static Fields
-
         /// <summary>
         ///     The logger.
         /// </summary>
         private static readonly ILog Logger = LogManager.GetLogger(string.Empty);
-
-        #endregion
-
-        #region Fields
 
         /// <summary>
         ///     The default model control.
@@ -61,8 +55,6 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         /// </summary>
         private readonly ModelRelationshipUserControl relationshipControl;
 
-
-
         /// <summary>
         ///     The data source.
         /// </summary>
@@ -72,10 +64,6 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         ///     The source type.
         /// </summary>
         private ISourceType sourceType;
-
-        #endregion
-
-        #region Constructors and Destructors
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="ModelFormUserControl" /> class.
@@ -102,12 +90,11 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
             this.defaultModelControl.BringToFront();
         }
 
-        #endregion
+        /// <summary>
+        /// Gets or sets the currently selected control.
+        /// </summary>
+        public IValidate CurrentlySelectedControl { get; set; }
 
-        #region Public Properties
-  
-        public IValidate currentlySelectedControl { get; set; }
-        
         /// <summary>
         ///     Gets or sets the data source.
         /// </summary>
@@ -129,10 +116,6 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         ///     Gets or sets the save path.
         /// </summary>
         public string SavePath { get; set; }
-
-        #endregion
-
-        #region Public Methods And Operators
 
         /// <summary>
         /// The add nodes.
@@ -161,10 +144,6 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
             treeView.Nodes[0].Expand();
         }
 
-        #endregion
-
-        #region Other Methods
-
         /// <summary>
         /// The domain tree view_ before select.
         /// </summary>
@@ -176,7 +155,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         /// </param>
         private void DomainTreeView_BeforeSelect(object sender, TreeViewCancelEventArgs e)
         {
-            if (this.currentlySelectedControl != null && this.currentlySelectedControl.Validate().Count > 0)
+            if (this.CurrentlySelectedControl != null && this.CurrentlySelectedControl.Validate().Count > 0)
             {
                 e.Cancel = true;
             }
@@ -193,21 +172,21 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         /// </param>
         private void DomainTreeView_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-            if (this.currentlySelectedControl == null
-                || (this.currentlySelectedControl != null && this.currentlySelectedControl.Validate().Count == 0))
+            if (this.CurrentlySelectedControl == null
+                || (this.CurrentlySelectedControl != null && this.CurrentlySelectedControl.Validate().Count == 0))
             {
                 if (e.Node.Tag is Table)
                 {
                     var table = e.Node.Tag as Table;
                     this.modelControl.DataSource = table;
-                    this.currentlySelectedControl = this.modelControl;
+                    this.CurrentlySelectedControl = this.modelControl;
                     this.modelControl.BringToFront();
                 }
                 else if (e.Node.Tag is Column)
                 {
                     var column = e.Node.Tag as Column;
                     this.fieldControl.DataSource = column;
-                    this.currentlySelectedControl = this.fieldControl;
+                    this.CurrentlySelectedControl = this.fieldControl;
                     this.fieldControl.BringToFront();
                 }
                 else if (e.Node.Tag is Relationship)
@@ -215,7 +194,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
                     var relationship = e.Node.Tag as Relationship;
                     this.relationshipControl.Domain = this.DataSource;
                     this.relationshipControl.DataSource = relationship;
-                    this.currentlySelectedControl = this.relationshipControl;
+                    this.CurrentlySelectedControl = this.relationshipControl;
                     this.relationshipControl.BringToFront();
                 }
                 else if (e.Node.Tag == null)
@@ -249,7 +228,5 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
 
             Logger.Trace("Completed UpdateDataSource()");
         }
-
-        #endregion
     }
 }
