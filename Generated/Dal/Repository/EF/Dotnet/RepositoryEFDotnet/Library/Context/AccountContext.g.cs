@@ -20,17 +20,33 @@
 
 using System.Data.Entity;
 using RepositoryEFDotnet.Library;
+using System.ComponentModel.DataAnnotations.Schema;
 using Banking.Models.Entity;
 
 namespace Banking.Models.Accounts
 {
 	public partial class AccountContext : BaseContext
-	{
+	{	
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+			
+			#region Primary keys
+			
+
+			#endregion
+			
+			#region Relationships
+			
+			
+			#endregion
+        }
+		
 		#region Db Sets
 		
 		public virtual DbSet<BankAccount> BankAccount { get; set; }
 		public virtual DbSet<BankTransfers> BankTransfers { get; set; }
-		
+
 		#endregion
 	}
 }

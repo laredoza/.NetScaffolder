@@ -19,7 +19,6 @@
 // *******************************************************************
 
 using System;
-using System.Data.Entity;
 using System.Collections.Generic;
 using Banking.Models.Interfaces;
 

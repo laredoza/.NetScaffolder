@@ -20,12 +20,46 @@
 
 using System.Data.Entity;
 using RepositoryEFDotnet.Library;
+using System.ComponentModel.DataAnnotations.Schema;
 using Banking.Models.Entity;
 
 namespace Banking.Models.Customers
 {
 	public partial class CustomerContext : BaseContext
-	{
+	{	
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+			
+			#region Primary keys
+			
+			modelBuilder.Entity<Book>().HasKey(t => t.ProductId);
+			modelBuilder.Entity<Book>().Property(t => t.ProductId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+			modelBuilder.Entity<Country>().HasKey(t => t.CountryId);
+			modelBuilder.Entity<Country>().Property(t => t.CountryId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+			modelBuilder.Entity<Customer>().HasKey(t => t.CustomerId);
+			modelBuilder.Entity<Customer>().Property(t => t.CustomerId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+			modelBuilder.Entity<Order>().HasKey(t => t.OrderId);
+			modelBuilder.Entity<Order>().Property(t => t.OrderId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+			modelBuilder.Entity<OrderDetails>().HasKey(t => t.OrderDetailsId);
+			modelBuilder.Entity<OrderDetails>().Property(t => t.OrderDetailsId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+			modelBuilder.Entity<Product>().HasKey(t => t.ProductId);
+			modelBuilder.Entity<Product>().Property(t => t.ProductId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+			modelBuilder.Entity<Software>().HasKey(t => t.ProductId);
+			modelBuilder.Entity<Software>().Property(t => t.ProductId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+
+			#endregion
+			
+			#region Relationships
+			
+			modelBuilder.Entity<Country>().HasRequired(t => t.Customer).WithMany(t => t.Customer);
+			modelBuilder.Entity<Customer>().HasRequired(t => t.BankAccount).WithMany(t => t.BankAccount);
+			modelBuilder.Entity<Order>().HasRequired(t => t.OrderDetails).WithMany(t => t.OrderDetails);
+			modelBuilder.Entity<Product>().HasRequired(t => t.Book).WithMany(t => t.Book);
+			
+			#endregion
+        }
+		
 		#region Db Sets
 		
 		public virtual DbSet<Book> Book { get; set; }
@@ -35,7 +69,7 @@ namespace Banking.Models.Customers
 		public virtual DbSet<OrderDetails> OrderDetails { get; set; }
 		public virtual DbSet<Product> Product { get; set; }
 		public virtual DbSet<Software> Software { get; set; }
-		
+
 		#endregion
 	}
 }

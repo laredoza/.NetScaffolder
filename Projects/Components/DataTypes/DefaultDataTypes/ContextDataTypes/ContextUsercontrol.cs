@@ -253,20 +253,6 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
                 var tables = applicationService.ReturnTables(this.TreeviewContextModels.Nodes[0]);
                 if (tables != null && tables.Any())
                 {
-                    // Only save table name and schema not details
-                    tables.ForEach(o =>
-                    {
-                        if(o.RelationShips != null)
-                        {
-                            o.RelationShips.Clear();
-                        }
-
-                        if (o.Columns != null)
-                        {
-                            o.Columns.Clear();
-                        }
-                    });
-
                     SelectedContext.Models.AddRange(tables);
                 }
             }

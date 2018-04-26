@@ -51,6 +51,15 @@
     <Compile Include="Base\IUnitOfWork.cs" />
     <Compile Include="Context\AccountContext.g.cs" />
     <Compile Include="Context\CustomerContext.g.cs" />
+    <Compile Include="Dto\BankAccountDto.g.cs" />
+    <Compile Include="Dto\BankTransfersDto.g.cs" />
+    <Compile Include="Dto\BookDto.g.cs" />
+    <Compile Include="Dto\CountryDto.g.cs" />
+    <Compile Include="Dto\CustomerDto.g.cs" />
+    <Compile Include="Dto\OrderDetailsDto.g.cs" />
+    <Compile Include="Dto\OrderDto.g.cs" />
+    <Compile Include="Dto\ProductDto.g.cs" />
+    <Compile Include="Dto\SoftwareDto.g.cs" />
     <Compile Include="Entity\BankAccount.g.cs" />
     <Compile Include="Entity\BankTransfers.g.cs" />
     <Compile Include="Entity\Book.g.cs" />
@@ -137,6 +146,15 @@
       <LastOutputs>
 .\Context\AccountContext.g.cs
 .\Context\CustomerContext.g.cs
+.\Dto\BankAccountDto.g.cs
+.\Dto\BankTransfersDto.g.cs
+.\Dto\BookDto.g.cs
+.\Dto\CountryDto.g.cs
+.\Dto\CustomerDto.g.cs
+.\Dto\OrderDetailsDto.g.cs
+.\Dto\OrderDto.g.cs
+.\Dto\ProductDto.g.cs
+.\Dto\SoftwareDto.g.cs
 .\Entity\BankAccount.g.cs
 .\Entity\BankTransfers.g.cs
 .\Entity\Book.g.cs
