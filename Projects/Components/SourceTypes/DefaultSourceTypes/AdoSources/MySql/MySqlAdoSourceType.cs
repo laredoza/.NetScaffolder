@@ -364,7 +364,31 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
         /// </exception>
         public bool Test(object parameters)
         {
-            throw new NotImplementedException();
+            Logger.Trace("Started Test()");
+            bool result = false;
+
+            //AdoSourceOptions adoOptions = parameters as AdoSourceOptions;
+            //using (OracleConnection connection =
+            //    new OracleConnection(adoOptions.ConnectionString))
+            //{
+            //    // Open the connection in a try/catch block. 
+            //    // Create and execute the DataReader, writing the result
+            //    // set to the console window.
+            //    try
+            //    {
+            //        connection.Open();
+
+            //        result = true;
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        Logger.Error($"Unable to connect to database:{ex.Message}");
+            //    }
+            //}
+
+            Logger.Trace("Complete Test()");
+
+            return result;
         }
 
         #endregion
