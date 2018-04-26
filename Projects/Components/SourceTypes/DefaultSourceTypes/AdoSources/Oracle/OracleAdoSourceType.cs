@@ -261,8 +261,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
         public DomainDataType MapDatabaseType(string databaseType, object extraInfo)
         {
             DatabaseColumn  column = extraInfo as DatabaseColumn;
-            //var cSharpName = column.DataType.NetDataTypeCSharpName.ToUpper();
-
+            // Temp workaround for issues with getting dataTypes for Oracle
             Type cSharpName = NetDataType(column);
 
             switch (cSharpName.Name.ToUpper())
