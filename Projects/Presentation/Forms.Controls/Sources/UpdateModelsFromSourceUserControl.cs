@@ -66,27 +66,9 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Sources
         public UpdateModelsFromSourceUserControl()
         {
             this.InitializeComponent();
-            this.TreeViewAdd.AfterCheck += TreeViewAdd_AfterCheck;
-            this.TreeViewDelete.AfterCheck += TreeViewAdd_AfterCheck;
-            this.TreeViewRefresh.AfterCheck += TreeViewAdd_AfterCheck;
-        }
-
-        private void TreeViewAdd_AfterCheck(object sender, TreeViewEventArgs e)
-        {
-            if (e.Action != TreeViewAction.Unknown)
-            {
-                this.clicked(e.Node, e.Node.Checked);
-            }
-        }
-
-        private void clicked(TreeNode node, bool newCheckedValue)
-        {
-            foreach (TreeNode child in node.Nodes)
-            {
-                child.Checked = newCheckedValue;
-                this.clicked(child, newCheckedValue);
-            }
-            
+            this.TreeViewAdd.AfterCheck += this.TreeViewAdd_AfterCheck;
+            this.TreeViewDelete.AfterCheck += this.TreeViewAdd_AfterCheck;
+            this.TreeViewRefresh.AfterCheck += this.TreeViewAdd_AfterCheck;
         }
 
         #endregion
@@ -116,7 +98,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Sources
         public string SavePath { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether valid.
+        ///     Gets or sets a value indicating whether valid.
         /// </summary>
         public bool Valid { get; set; }
 
@@ -174,6 +156,41 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Sources
         #endregion
 
         #region Other Methods
+
+        /// <summary>
+        /// The clicked.
+        /// </summary>
+        /// <param name="node">
+        /// The node.
+        /// </param>
+        /// <param name="newCheckedValue">
+        /// The new checked value.
+        /// </param>
+        private void clicked(TreeNode node, bool newCheckedValue)
+        {
+            foreach (TreeNode child in node.Nodes)
+            {
+                child.Checked = newCheckedValue;
+                this.clicked(child, newCheckedValue);
+            }
+        }
+
+        /// <summary>
+        /// The tree view add_ after check.
+        /// </summary>
+        /// <param name="sender">
+        /// The sender.
+        /// </param>
+        /// <param name="e">
+        /// The e.
+        /// </param>
+        private void TreeViewAdd_AfterCheck(object sender, TreeViewEventArgs e)
+        {
+            if (e.Action != TreeViewAction.Unknown)
+            {
+                this.clicked(e.Node, e.Node.Checked);
+            }
+        }
 
         /// <summary>
         ///     The update data source.
