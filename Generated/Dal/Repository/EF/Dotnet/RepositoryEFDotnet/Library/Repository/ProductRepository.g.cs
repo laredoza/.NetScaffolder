@@ -129,6 +129,7 @@ namespace Banking.Models.Repository
         /// Search for Product entities in the database by ProductDescription
         /// </summary>
         /// <param name="productdescription">string</param>
+		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<IProduct></returns>
 		public IList<IProduct> SearchByProductDescription(string productdescription, bool caseSensitive = false)
 		{
@@ -140,6 +141,7 @@ namespace Banking.Models.Repository
         /// Search for Product entities in the database by UnitAmount
         /// </summary>
         /// <param name="unitamount">string</param>
+		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<IProduct></returns>
 		public IList<IProduct> SearchByUnitAmount(string unitamount, bool caseSensitive = false)
 		{
@@ -151,6 +153,7 @@ namespace Banking.Models.Repository
         /// Search for Product entities in the database by Publisher
         /// </summary>
         /// <param name="publisher">string</param>
+		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<IProduct></returns>
 		public IList<IProduct> SearchByPublisher(string publisher, bool caseSensitive = false)
 		{

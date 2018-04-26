@@ -108,6 +108,7 @@ namespace <#= DataType.FullNamespace #>
         /// Search for <#= DataType.ModelName #> entities in the database by <#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>
         /// </summary>
         /// <param name="<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName).ToLower() #>"><#= DataType.SourceType.MapDomainDataTypeToOutputType(col.DomainDataType) #></param>
+		/// <param name="caseSensitive">bool</param>
         /// <returns><#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>></returns>
 		public <#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>> SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= DataType.SourceType.MapDomainDataTypeToOutputType(col.DomainDataType) #> <#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName).ToLower() #>, bool caseSensitive = false)
 		{

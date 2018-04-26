@@ -24,27 +24,58 @@ using <#= DtoInterfaceNamespace #>;
 
 namespace <#= DataType.FullNamespace #>
 {
+	/// <summary>
+	/// The <#= DataType.RepoName #>Repository interface that defines database functions for the <#= DataType.ModelName #> table
+	/// </summary>
 	public partial interface I<#= DataType.RepoName #>Repository
 	{
 		#region Load
-		
 <#+ if(DataType.MetaData.PrimaryKeyCount == 1){ foreach(var col in DataType.MetaData.Columns.Where(o => o.IsPrimaryKey)){ #>
+
+        /// <summary>
+        /// Load the <#= DataType.ModelName #> entity from the database using the <#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #> primary key
+        /// </summary>
+        /// <param name="<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName).ToLower() #>"><#= DataType.SourceType.MapDomainDataTypeToOutputType(col.DomainDataType) #></param>
+        /// <returns>I<#= DataType.ModelName #></returns>
 		I<#= DataType.RepoName #> LoadBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= DataType.SourceType.MapDomainDataTypeToOutputType(col.DomainDataType) #> <#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName).ToLower() #>);
 <#+ } } #>
 <#+ else { foreach(var col in DataType.MetaData.Columns.Where(o => o.IsPrimaryKey)){ #>
+
+        /// <summary>
+        /// Load <#= DataType.ModelName #> entities from the database using the <#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #> primary key
+        /// </summary>
+        /// <param name="<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName).ToLower() #>"><#= DataType.SourceType.MapDomainDataTypeToOutputType(col.DomainDataType) #></param>
+        /// <returns><#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>></returns>
 		<#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.RepoName #>> LoadBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= DataType.SourceType.MapDomainDataTypeToOutputType(col.DomainDataType) #> <#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName).ToLower() #>);
 <#+ } } #>
 
 <#+ foreach(var col in DataType.MetaData.Columns.Where(o => !o.IsPrimaryKey)){ #>
+
+        /// <summary>
+        /// Load <#= DataType.ModelName #> entities from the database using the <#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #> field
+        /// </summary>
+        /// <param name="<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName).ToLower() #>"><#= DataType.SourceType.MapDomainDataTypeToOutputType(col.DomainDataType) #></param>
+        /// <returns><#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>></returns>
 		<#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.RepoName #>> LoadBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= DataType.SourceType.MapDomainDataTypeToOutputType(col.DomainDataType) #> <#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName).ToLower() #>);
 <#+ }  #>
+
+        /// <summary>
+        /// Load all <#= DataType.ModelName #> entities from the database.
+        /// </summary>
+        /// <returns><#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>></returns>
 		<#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.RepoName #>> LoadAll();
 		
 		#endregion
 
 		#region Search
-		
 <#+ foreach(var col in DataType.MetaData.Columns.Where(o => !o.IsPrimaryKey && o.DomainDataType == DomainDataType.String)){ #>
+
+        /// <summary>
+        /// Search for <#= DataType.ModelName #> entities in the database by <#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>
+        /// </summary>
+        /// <param name="<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName).ToLower() #>"><#= DataType.SourceType.MapDomainDataTypeToOutputType(col.DomainDataType) #></param>
+		/// <param name="caseSensitive">bool</param>
+        /// <returns><#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>></returns>
 		<#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.RepoName #>> SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= DataType.SourceType.MapDomainDataTypeToOutputType(col.DomainDataType) #> <#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName).ToLower() #>, bool caseSensitive = false);
 <#+ }  #>
 
@@ -52,10 +83,33 @@ namespace <#= DataType.FullNamespace #>
 		
 		#region Modifiers
 		
+        /// <summary>
+        /// Save the <#= DataType.ModelName #> entity to the database.
+        /// </summary>
+        /// <param name="entity">I<#= DataType.ModelName #></param>
+        /// <returns>bool</returns>
 		bool Save(I<#= DataType.RepoName #> entity);
+		
+        /// <summary>
+        /// Update the <#= DataType.ModelName #> entity in the database if any values have changed
+        /// </summary>
+        /// <param name="entity">I<#= DataType.ModelName #></param>
+        /// <returns>bool</returns>
 		bool Update(I<#= DataType.RepoName #> entity);
+		
+        /// <summary>
+        /// Delete the <#= DataType.ModelName #> entity from the database
+        /// </summary>
+        /// <param name="entity">I<#= DataType.ModelName #></param>
+        /// <returns>bool</returns>
 		bool Delete(I<#= DataType.RepoName #> entity);
+		
 <#+ if(DataType.MetaData.PrimaryKeyCount == 1){ var col = DataType.MetaData.Columns.First(o => o.IsPrimaryKey); #>
+        /// <summary>
+        /// Delete the <#= DataType.ModelName #> entity from the database using the <#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>
+        /// </summary>
+        /// <param name="<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName).ToLower() #>"><#= DataType.SourceType.MapDomainDataTypeToOutputType(col.DomainDataType) #></param>
+        /// <returns>bool</returns>
 		bool DeleteBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= DataType.SourceType.MapDomainDataTypeToOutputType(col.DomainDataType) #> <#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName).ToLower() #>);
 <#+ }  #>
 

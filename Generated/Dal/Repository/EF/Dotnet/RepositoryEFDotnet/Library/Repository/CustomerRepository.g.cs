@@ -199,6 +199,7 @@ namespace Banking.Models.Repository
         /// Search for Customer entities in the database by CustomerCode
         /// </summary>
         /// <param name="customercode">string</param>
+		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<ICustomer></returns>
 		public IList<ICustomer> SearchByCustomerCode(string customercode, bool caseSensitive = false)
 		{
@@ -210,6 +211,7 @@ namespace Banking.Models.Repository
         /// Search for Customer entities in the database by CompanyName
         /// </summary>
         /// <param name="companyname">string</param>
+		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<ICustomer></returns>
 		public IList<ICustomer> SearchByCompanyName(string companyname, bool caseSensitive = false)
 		{
@@ -221,6 +223,7 @@ namespace Banking.Models.Repository
         /// Search for Customer entities in the database by ContactName
         /// </summary>
         /// <param name="contactname">string</param>
+		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<ICustomer></returns>
 		public IList<ICustomer> SearchByContactName(string contactname, bool caseSensitive = false)
 		{
@@ -232,6 +235,7 @@ namespace Banking.Models.Repository
         /// Search for Customer entities in the database by ContactTitle
         /// </summary>
         /// <param name="contacttitle">string</param>
+		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<ICustomer></returns>
 		public IList<ICustomer> SearchByContactTitle(string contacttitle, bool caseSensitive = false)
 		{
@@ -243,6 +247,7 @@ namespace Banking.Models.Repository
         /// Search for Customer entities in the database by Address
         /// </summary>
         /// <param name="address">string</param>
+		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<ICustomer></returns>
 		public IList<ICustomer> SearchByAddress(string address, bool caseSensitive = false)
 		{
@@ -254,6 +259,7 @@ namespace Banking.Models.Repository
         /// Search for Customer entities in the database by City
         /// </summary>
         /// <param name="city">string</param>
+		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<ICustomer></returns>
 		public IList<ICustomer> SearchByCity(string city, bool caseSensitive = false)
 		{
@@ -265,6 +271,7 @@ namespace Banking.Models.Repository
         /// Search for Customer entities in the database by PostalCode
         /// </summary>
         /// <param name="postalcode">string</param>
+		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<ICustomer></returns>
 		public IList<ICustomer> SearchByPostalCode(string postalcode, bool caseSensitive = false)
 		{
@@ -276,6 +283,7 @@ namespace Banking.Models.Repository
         /// Search for Customer entities in the database by Telephone
         /// </summary>
         /// <param name="telephone">string</param>
+		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<ICustomer></returns>
 		public IList<ICustomer> SearchByTelephone(string telephone, bool caseSensitive = false)
 		{
@@ -287,6 +295,7 @@ namespace Banking.Models.Repository
         /// Search for Customer entities in the database by Fax
         /// </summary>
         /// <param name="fax">string</param>
+		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<ICustomer></returns>
 		public IList<ICustomer> SearchByFax(string fax, bool caseSensitive = false)
 		{
@@ -298,6 +307,7 @@ namespace Banking.Models.Repository
         /// Search for Customer entities in the database by Photo
         /// </summary>
         /// <param name="photo">string</param>
+		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<ICustomer></returns>
 		public IList<ICustomer> SearchByPhoto(string photo, bool caseSensitive = false)
 		{

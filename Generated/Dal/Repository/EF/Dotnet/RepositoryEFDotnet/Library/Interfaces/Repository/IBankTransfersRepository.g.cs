@@ -24,29 +24,88 @@ using Banking.Models.Interfaces;
 
 namespace Banking.Models.Interfaces
 {
+	/// <summary>
+	/// The BankTransfersRepository interface that defines database functions for the BankTransfers table
+	/// </summary>
 	public partial interface IBankTransfersRepository
 	{
 		#region Load
-		
+
+        /// <summary>
+        /// Load the BankTransfers entity from the database using the BankTransferId primary key
+        /// </summary>
+        /// <param name="banktransferid">int</param>
+        /// <returns>IBankTransfers</returns>
 		IBankTransfers LoadByBankTransferId(int banktransferid);
+
+        /// <summary>
+        /// Load BankTransfers entities from the database using the FromBankAccountId field
+        /// </summary>
+        /// <param name="frombankaccountid">int</param>
+        /// <returns>IList<IBankTransfers></returns>
 		IList<IBankTransfers> LoadByFromBankAccountId(int frombankaccountid);
+
+        /// <summary>
+        /// Load BankTransfers entities from the database using the ToBankAccountId field
+        /// </summary>
+        /// <param name="tobankaccountid">int</param>
+        /// <returns>IList<IBankTransfers></returns>
 		IList<IBankTransfers> LoadByToBankAccountId(int tobankaccountid);
+
+        /// <summary>
+        /// Load BankTransfers entities from the database using the Amount field
+        /// </summary>
+        /// <param name="amount">decimal</param>
+        /// <returns>IList<IBankTransfers></returns>
 		IList<IBankTransfers> LoadByAmount(decimal amount);
+
+        /// <summary>
+        /// Load BankTransfers entities from the database using the TransferDate field
+        /// </summary>
+        /// <param name="transferdate">DateTime</param>
+        /// <returns>IList<IBankTransfers></returns>
 		IList<IBankTransfers> LoadByTransferDate(DateTime transferdate);
+
+        /// <summary>
+        /// Load all BankTransfers entities from the database.
+        /// </summary>
+        /// <returns>IList<IBankTransfers></returns>
 		IList<IBankTransfers> LoadAll();
 		
 		#endregion
 
 		#region Search
-		
 
 		#endregion
 		
 		#region Modifiers
 		
+        /// <summary>
+        /// Save the BankTransfers entity to the database.
+        /// </summary>
+        /// <param name="entity">IBankTransfers</param>
+        /// <returns>bool</returns>
 		bool Save(IBankTransfers entity);
+		
+        /// <summary>
+        /// Update the BankTransfers entity in the database if any values have changed
+        /// </summary>
+        /// <param name="entity">IBankTransfers</param>
+        /// <returns>bool</returns>
 		bool Update(IBankTransfers entity);
+		
+        /// <summary>
+        /// Delete the BankTransfers entity from the database
+        /// </summary>
+        /// <param name="entity">IBankTransfers</param>
+        /// <returns>bool</returns>
 		bool Delete(IBankTransfers entity);
+		
+        /// <summary>
+        /// Delete the BankTransfers entity from the database using the BankTransferId
+        /// </summary>
+        /// <param name="banktransferid">int</param>
+        /// <returns>bool</returns>
 		bool DeleteByBankTransferId(int banktransferid);
 
 		#endregion

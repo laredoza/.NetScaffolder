@@ -149,6 +149,7 @@ namespace Banking.Models.Repository
         /// Search for Order entities in the database by ShippingName
         /// </summary>
         /// <param name="shippingname">string</param>
+		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<IOrder></returns>
 		public IList<IOrder> SearchByShippingName(string shippingname, bool caseSensitive = false)
 		{
@@ -160,6 +161,7 @@ namespace Banking.Models.Repository
         /// Search for Order entities in the database by ShippingAddress
         /// </summary>
         /// <param name="shippingaddress">string</param>
+		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<IOrder></returns>
 		public IList<IOrder> SearchByShippingAddress(string shippingaddress, bool caseSensitive = false)
 		{
@@ -171,6 +173,7 @@ namespace Banking.Models.Repository
         /// Search for Order entities in the database by ShippingCity
         /// </summary>
         /// <param name="shippingcity">string</param>
+		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<IOrder></returns>
 		public IList<IOrder> SearchByShippingCity(string shippingcity, bool caseSensitive = false)
 		{
@@ -182,6 +185,7 @@ namespace Banking.Models.Repository
         /// Search for Order entities in the database by ShippingZip
         /// </summary>
         /// <param name="shippingzip">string</param>
+		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<IOrder></returns>
 		public IList<IOrder> SearchByShippingZip(string shippingzip, bool caseSensitive = false)
 		{

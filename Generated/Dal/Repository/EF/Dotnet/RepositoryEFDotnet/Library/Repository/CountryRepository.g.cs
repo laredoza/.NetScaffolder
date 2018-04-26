@@ -89,6 +89,7 @@ namespace Banking.Models.Repository
         /// Search for Country entities in the database by CountryName
         /// </summary>
         /// <param name="countryname">string</param>
+		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<ICountry></returns>
 		public IList<ICountry> SearchByCountryName(string countryname, bool caseSensitive = false)
 		{

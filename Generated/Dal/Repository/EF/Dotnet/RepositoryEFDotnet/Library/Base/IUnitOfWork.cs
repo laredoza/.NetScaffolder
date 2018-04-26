@@ -15,5 +15,8 @@ namespace RepositoryEFDotnet.Library
         bool Add<TEntity>(TEntity newEntity);
         bool Modify<TEntity>(TEntity newEntity);
         bool Remove<TEntity>(TEntity newEntity);
+        void BeginTransaction();
+        void Commit();
+        void Rollback();
     }
 }

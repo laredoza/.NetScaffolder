@@ -24,27 +24,75 @@ using Banking.Models.Interfaces;
 
 namespace Banking.Models.Interfaces
 {
+	/// <summary>
+	/// The BookRepository interface that defines database functions for the Book table
+	/// </summary>
 	public partial interface IBookRepository
 	{
 		#region Load
-		
+
+        /// <summary>
+        /// Load the Book entity from the database using the ProductId primary key
+        /// </summary>
+        /// <param name="productid">int</param>
+        /// <returns>IBook</returns>
 		IBook LoadByProductId(int productid);
+
+        /// <summary>
+        /// Load Book entities from the database using the Publisher field
+        /// </summary>
+        /// <param name="publisher">string</param>
+        /// <returns>IList<IBook></returns>
 		IList<IBook> LoadByPublisher(string publisher);
+
+        /// <summary>
+        /// Load all Book entities from the database.
+        /// </summary>
+        /// <returns>IList<IBook></returns>
 		IList<IBook> LoadAll();
 		
 		#endregion
 
 		#region Search
-		
+
+        /// <summary>
+        /// Search for Book entities in the database by Publisher
+        /// </summary>
+        /// <param name="publisher">string</param>
+		/// <param name="caseSensitive">bool</param>
+        /// <returns>IList<IBook></returns>
 		IList<IBook> SearchByPublisher(string publisher, bool caseSensitive = false);
 
 		#endregion
 		
 		#region Modifiers
 		
+        /// <summary>
+        /// Save the Book entity to the database.
+        /// </summary>
+        /// <param name="entity">IBook</param>
+        /// <returns>bool</returns>
 		bool Save(IBook entity);
+		
+        /// <summary>
+        /// Update the Book entity in the database if any values have changed
+        /// </summary>
+        /// <param name="entity">IBook</param>
+        /// <returns>bool</returns>
 		bool Update(IBook entity);
+		
+        /// <summary>
+        /// Delete the Book entity from the database
+        /// </summary>
+        /// <param name="entity">IBook</param>
+        /// <returns>bool</returns>
 		bool Delete(IBook entity);
+		
+        /// <summary>
+        /// Delete the Book entity from the database using the ProductId
+        /// </summary>
+        /// <param name="productid">int</param>
+        /// <returns>bool</returns>
 		bool DeleteByProductId(int productid);
 
 		#endregion

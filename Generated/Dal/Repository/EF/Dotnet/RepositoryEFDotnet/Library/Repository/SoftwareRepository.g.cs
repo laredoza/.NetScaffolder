@@ -89,6 +89,7 @@ namespace Banking.Models.Repository
         /// Search for Software entities in the database by LicenseCode
         /// </summary>
         /// <param name="licensecode">string</param>
+		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<ISoftware></returns>
 		public IList<ISoftware> SearchByLicenseCode(string licensecode, bool caseSensitive = false)
 		{

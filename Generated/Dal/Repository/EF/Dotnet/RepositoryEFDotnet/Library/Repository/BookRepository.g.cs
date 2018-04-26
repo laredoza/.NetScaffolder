@@ -89,6 +89,7 @@ namespace Banking.Models.Repository
         /// Search for Book entities in the database by Publisher
         /// </summary>
         /// <param name="publisher">string</param>
+		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<IBook></returns>
 		public IList<IBook> SearchByPublisher(string publisher, bool caseSensitive = false)
 		{

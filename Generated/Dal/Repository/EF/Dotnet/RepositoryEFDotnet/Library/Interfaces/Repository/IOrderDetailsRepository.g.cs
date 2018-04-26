@@ -24,30 +24,95 @@ using Banking.Models.Interfaces;
 
 namespace Banking.Models.Interfaces
 {
+	/// <summary>
+	/// The OrderDetailsRepository interface that defines database functions for the OrderDetails table
+	/// </summary>
 	public partial interface IOrderDetailsRepository
 	{
 		#region Load
-		
+
+        /// <summary>
+        /// Load the OrderDetails entity from the database using the OrderDetailsId primary key
+        /// </summary>
+        /// <param name="orderdetailsid">int</param>
+        /// <returns>IOrderDetails</returns>
 		IOrderDetails LoadByOrderDetailsId(int orderdetailsid);
+
+        /// <summary>
+        /// Load OrderDetails entities from the database using the OrderId field
+        /// </summary>
+        /// <param name="orderid">int</param>
+        /// <returns>IList<IOrderDetails></returns>
 		IList<IOrderDetails> LoadByOrderId(int orderid);
+
+        /// <summary>
+        /// Load OrderDetails entities from the database using the ProductId field
+        /// </summary>
+        /// <param name="productid">int</param>
+        /// <returns>IList<IOrderDetails></returns>
 		IList<IOrderDetails> LoadByProductId(int productid);
+
+        /// <summary>
+        /// Load OrderDetails entities from the database using the UnitPrice field
+        /// </summary>
+        /// <param name="unitprice">decimal</param>
+        /// <returns>IList<IOrderDetails></returns>
 		IList<IOrderDetails> LoadByUnitPrice(decimal unitprice);
+
+        /// <summary>
+        /// Load OrderDetails entities from the database using the Amount field
+        /// </summary>
+        /// <param name="amount">short</param>
+        /// <returns>IList<IOrderDetails></returns>
 		IList<IOrderDetails> LoadByAmount(short amount);
+
+        /// <summary>
+        /// Load OrderDetails entities from the database using the Discount field
+        /// </summary>
+        /// <param name="discount">float</param>
+        /// <returns>IList<IOrderDetails></returns>
 		IList<IOrderDetails> LoadByDiscount(float discount);
+
+        /// <summary>
+        /// Load all OrderDetails entities from the database.
+        /// </summary>
+        /// <returns>IList<IOrderDetails></returns>
 		IList<IOrderDetails> LoadAll();
 		
 		#endregion
 
 		#region Search
-		
 
 		#endregion
 		
 		#region Modifiers
 		
+        /// <summary>
+        /// Save the OrderDetails entity to the database.
+        /// </summary>
+        /// <param name="entity">IOrderDetails</param>
+        /// <returns>bool</returns>
 		bool Save(IOrderDetails entity);
+		
+        /// <summary>
+        /// Update the OrderDetails entity in the database if any values have changed
+        /// </summary>
+        /// <param name="entity">IOrderDetails</param>
+        /// <returns>bool</returns>
 		bool Update(IOrderDetails entity);
+		
+        /// <summary>
+        /// Delete the OrderDetails entity from the database
+        /// </summary>
+        /// <param name="entity">IOrderDetails</param>
+        /// <returns>bool</returns>
 		bool Delete(IOrderDetails entity);
+		
+        /// <summary>
+        /// Delete the OrderDetails entity from the database using the OrderDetailsId
+        /// </summary>
+        /// <param name="orderdetailsid">int</param>
+        /// <returns>bool</returns>
 		bool DeleteByOrderDetailsId(int orderdetailsid);
 
 		#endregion

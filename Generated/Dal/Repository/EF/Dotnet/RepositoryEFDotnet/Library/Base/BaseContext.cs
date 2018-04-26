@@ -12,12 +12,22 @@ namespace RepositoryEFDotnet.Library
     {
         public bool Add<TEntity>(TEntity newEntity)
         {
-            throw new NotImplementedException();
+            return false;
         }
 
         public IList<TEntity> AllMatching<TEntity>(Expression<Func<TEntity, bool>> exp) where TEntity : class
         {
             return null;
+        }
+
+        public void BeginTransaction()
+        {
+            
+        }
+
+        public void Commit()
+        {
+            
         }
 
         public TEntity FirstOrDefault<TEntity>(Expression<Func<TEntity, bool>> exp) where TEntity : class
@@ -32,12 +42,17 @@ namespace RepositoryEFDotnet.Library
 
         public bool Modify<TEntity>(TEntity newEntity)
         {
-            throw new NotImplementedException();
+            return false;
         }
 
         public bool Remove<TEntity>(TEntity newEntity)
         {
-            throw new NotImplementedException();
+            return false;
+        }
+
+        public void Rollback()
+        {
+            
         }
     }
 }

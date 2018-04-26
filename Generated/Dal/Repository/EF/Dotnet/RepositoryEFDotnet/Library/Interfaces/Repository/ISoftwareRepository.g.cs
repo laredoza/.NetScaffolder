@@ -24,27 +24,75 @@ using Banking.Models.Interfaces;
 
 namespace Banking.Models.Interfaces
 {
+	/// <summary>
+	/// The SoftwareRepository interface that defines database functions for the Software table
+	/// </summary>
 	public partial interface ISoftwareRepository
 	{
 		#region Load
-		
+
+        /// <summary>
+        /// Load the Software entity from the database using the ProductId primary key
+        /// </summary>
+        /// <param name="productid">int</param>
+        /// <returns>ISoftware</returns>
 		ISoftware LoadByProductId(int productid);
+
+        /// <summary>
+        /// Load Software entities from the database using the LicenseCode field
+        /// </summary>
+        /// <param name="licensecode">string</param>
+        /// <returns>IList<ISoftware></returns>
 		IList<ISoftware> LoadByLicenseCode(string licensecode);
+
+        /// <summary>
+        /// Load all Software entities from the database.
+        /// </summary>
+        /// <returns>IList<ISoftware></returns>
 		IList<ISoftware> LoadAll();
 		
 		#endregion
 
 		#region Search
-		
+
+        /// <summary>
+        /// Search for Software entities in the database by LicenseCode
+        /// </summary>
+        /// <param name="licensecode">string</param>
+		/// <param name="caseSensitive">bool</param>
+        /// <returns>IList<ISoftware></returns>
 		IList<ISoftware> SearchByLicenseCode(string licensecode, bool caseSensitive = false);
 
 		#endregion
 		
 		#region Modifiers
 		
+        /// <summary>
+        /// Save the Software entity to the database.
+        /// </summary>
+        /// <param name="entity">ISoftware</param>
+        /// <returns>bool</returns>
 		bool Save(ISoftware entity);
+		
+        /// <summary>
+        /// Update the Software entity in the database if any values have changed
+        /// </summary>
+        /// <param name="entity">ISoftware</param>
+        /// <returns>bool</returns>
 		bool Update(ISoftware entity);
+		
+        /// <summary>
+        /// Delete the Software entity from the database
+        /// </summary>
+        /// <param name="entity">ISoftware</param>
+        /// <returns>bool</returns>
 		bool Delete(ISoftware entity);
+		
+        /// <summary>
+        /// Delete the Software entity from the database using the ProductId
+        /// </summary>
+        /// <param name="productid">int</param>
+        /// <returns>bool</returns>
 		bool DeleteByProductId(int productid);
 
 		#endregion
