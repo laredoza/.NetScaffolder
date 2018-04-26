@@ -136,6 +136,18 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
         /// </param>
         public void TestData(object parameters)
         {
+            Logger.Trace("Started TestData()");
+
+            if (this.SourceType.Test(this.options))
+            {
+                MessageBox.Show("Connected to Sql Server", "Test", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("Unable to Connected to Sql Server", "Test", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
+            Logger.Trace("Completed TestData()");
         }
 
         /// <summary>
@@ -162,5 +174,10 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
         }
 
         #endregion
+
+        private void TxtConnection_TextChanged(object sender, EventArgs e)
+        {
+            this.options.ConnectionString = this.TxtConnection.Text;
+        }
     }
 }
