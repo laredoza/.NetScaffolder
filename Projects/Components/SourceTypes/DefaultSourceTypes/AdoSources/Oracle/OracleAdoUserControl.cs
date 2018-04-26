@@ -140,11 +140,11 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
 
             if (this.SourceType.Test(this.options))
             {
-                MessageBox.Show("Connected to Sql Server", "Test", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Connected to Oracle Server", "Test", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {
-                MessageBox.Show("Unable to Connected to Sql Server", "Test", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Unable to Connected to  Oracle Server", "Test", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 
             Logger.Trace("Completed TestData()");
