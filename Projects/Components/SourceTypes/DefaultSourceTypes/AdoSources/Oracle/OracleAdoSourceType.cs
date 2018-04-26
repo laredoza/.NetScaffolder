@@ -11,11 +11,13 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.Composition;
+    //using System.Data.OracleClient
     using System.IO;
     using System.Linq;
     using System.Windows.Forms;
 
     using DatabaseSchemaReader;
+    using DatabaseSchemaReader.DataSchema;
 
     using DotNetScaffolder.Components.Common.Contract;
     using DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.SourceOptions;
@@ -24,6 +26,8 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
     using DotNetScaffolder.Mapping.MetaData.Model;
 
     using global::Common.Logging;
+
+    using global::Oracle.ManagedDataAccess.Client;
 
     #endregion
 
@@ -93,18 +97,33 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
         {
             Logger.Trace("Started Fix()");
 
+            List<Relationship> relationshipsToDelete = new List<Relationship>();
+
             foreach (Table modelTable in tables)
             {
+                relationshipsToDelete = new List<Relationship>();
+
                 foreach (var relationship in modelTable.RelationShips)
                 {
                     relationship.Table = modelTable;
                     relationship.RelatedTable = tables.FirstOrDefault(t => t.TableName == relationship.TableName);
-                    relationship.SchemaName = relationship.RelatedTable.SchemaName;
+                    if (relationship.RelatedTable == null)
+                    {
+                        relationshipsToDelete.Add(relationship);
+                    }
+                    else
+                    {
+                        relationship.SchemaName = relationship.RelatedTable.SchemaName;
+                    }
+                }
+
+                foreach (var relationship in relationshipsToDelete)
+                {
+                    modelTable.RelationShips.Remove(relationship);
                 }
             }
             Logger.Trace("Completed Fix()");
         }
-
 
         /// <summary>
         /// Import data structure.
@@ -117,36 +136,37 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
         /// </returns>
         public DatabaseModel Import(object options)
         {
+            Logger.Trace("Started Import()");
             DatabaseModel result = new DatabaseModel();
 
             AdoSourceOptions adoOptions = options as AdoSourceOptions;
-            var dbReader = new DatabaseReader(adoOptions.ConnectionString, adoOptions.ProviderName);
-            var schema = dbReader.ReadAll();
+            var databaseReader = new DatabaseReader(adoOptions.ConnectionString, adoOptions.ProviderName);
+            var schema = databaseReader.ReadAll();
 
             // schema.Tables[0].CheckConstraints[0].RefersToConstraint
-            Table newTable = new Table();
-            Column newColumn = new Column();
+            Table newTable;
+            Column newColumn;
 
             foreach (var table in schema.Tables.Where(t => t.Name != "sysdiagrams"))
             {
                 // foreach (var table in schema.Tables.Where(t => t.Name == "BankAccount"))
                 // Debug.WriteLine("Table " + table.Name);
-                newTable = new Table { TableName = table.Name };
+                newTable = new Table { TableName = table.Name, SchemaName = table.SchemaOwner };
                 result.Tables.Add(newTable);
 
                 foreach (var column in table.Columns)
                 {
                     newColumn = new Column
-                                    {
-                                        ColumnName = column.Name,
-                                        DomainDataType = this.MapDatabaseType(column.DataType.TypeName),
-                                        IsRequired = column.IsPrimaryKey,
-                                        ColumnOrder = table.Columns.IndexOf(column) + 1,
-                                        Precision = column.Precision.HasValue ? column.Precision.Value : 0,
-                                        Scale = column.Scale.HasValue ? column.Scale.Value : 0,
-                                        Length = column.Length.HasValue ? column.Length.Value : 0,
-                                        IsPrimaryKey = column.IsPrimaryKey
-                                    };
+                    {
+                        ColumnName = column.Name,
+                        DomainDataType = this.MapDatabaseType(column.DataType.TypeName, column),
+                        IsRequired = column.IsPrimaryKey,
+                        ColumnOrder = table.Columns.IndexOf(column) + 1,
+                        Precision = column.Precision.HasValue ? column.Precision.Value : 0,
+                        Scale = column.Scale.HasValue ? column.Scale.Value : 0,
+                        Length = column.Length.HasValue ? column.Length.Value : 0,
+                        IsPrimaryKey = column.IsPrimaryKey
+                    };
 
                     newTable.Columns.Add(newColumn);
                 }
@@ -155,12 +175,13 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
                 {
                     newTable.RelationShips.Add(
                         new Relationship
-                            {
-                                TableName = foreignKey.RefersToTable,
-                                ColumnName = foreignKey.Columns[0],
-                                ForeignColumnName = foreignKey.ReferencedColumns(schema).ToList()[0],
-                                DependencyRelationShip = RelationshipType.ForeignKey
-                            });
+                        {
+                            TableName = foreignKey.RefersToTable,
+                            ColumnName = foreignKey.Columns[0],
+                            ForeignColumnName = foreignKey.ReferencedColumns(schema).ToList()[0],
+                            DependencyRelationShip = RelationshipType.ForeignKey,
+                            RelationshipName = foreignKey.Name
+                        });
                 }
 
                 foreach (var foreignKeyChildren in table.ForeignKeyChildren)
@@ -171,17 +192,20 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
                         {
                             newTable.RelationShips.Add(
                                 new Relationship
-                                    {
-                                        TableName = foreignKey.TableName,
-                                        ColumnName = foreignKey.ReferencedColumns(schema).ToList()[0],
-                                        ForeignColumnName = foreignKey.Columns[0],
-                                        DependencyRelationShip = RelationshipType.ForeignKeyChild
-                                    });
+                                {
+                                    TableName = foreignKey.TableName,
+                                    ColumnName = foreignKey.ReferencedColumns(schema).ToList()[0],
+                                    ForeignColumnName = foreignKey.Columns[0],
+                                    DependencyRelationShip = RelationshipType.ForeignKeyChild,
+                                    RelationshipName = foreignKey.Name
+                                });
                         }
                     }
                 }
             }
 
+            this.Fix(result);
+            Logger.Trace("Completed Import()");
             return result;
         }
 
@@ -213,10 +237,9 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
             {
                 Logger.Trace("Path Doesn't Exist");
                 result = new AdoSourceOptions
-                    {
-                        ProviderName = "Oracle.DataAccess.Client",
-                        ConnectionString =
-                            @"DATA SOURCE=localhost:1521/Banking;PERSIST SECURITY INFO=True;USER ID=user;PASSWORD=password;"
+                {
+                    ProviderName = "Oracle.ManagedDataAccess.Client",
+                    ConnectionString = @"DATA SOURCE=localhost:1521/xe;PERSIST SECURITY INFO=True;USER ID=test;PASSWORD=Test"
                 };
             }
 
@@ -229,38 +252,80 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
         /// Map database type to c# type.
         /// </summary>
         /// <param name="databaseType">
-        /// The database type.
+        ///     The database type.
         /// </param>
+        /// <param name="extraInfo"></param>
         /// <returns>
         /// The <see cref="DomainDataType"/>.
         /// </returns>
-        public DomainDataType MapDatabaseType(string databaseType)
+        public DomainDataType MapDatabaseType(string databaseType, object extraInfo)
         {
-            switch (databaseType.ToUpper())
+            DatabaseColumn  column = extraInfo as DatabaseColumn;
+            // Temp workaround for issues with getting dataTypes for Oracle
+            Type cSharpName = NetDataType(column);
+
+            switch (cSharpName.Name.ToUpper())
             {
-                case "SMALLINT":
-                    return DomainDataType.Int16;
-                case "INT":
-                    return DomainDataType.Int32;
-                case "BIT":
-                    return DomainDataType.Boolean;
-                case "NVARCHAR":
+                case "DECIMAL":
+                    return DomainDataType.Decimal;
+                case "STRING":
                     return DomainDataType.String;
-                case "MONEY":
-                    return DomainDataType.Decimal;
-                case "NUMERIC":
-                    return DomainDataType.Decimal;
                 case "DATETIME":
                     return DomainDataType.DateTime;
-                case "IMAGE":
-                    // Todo: Do something valid with this
-                    return DomainDataType.String;
-                case "REAL":
-                    // Todo: Do something valid with this
-                    return DomainDataType.Single;
+                case "SYSTEM.BYTE[]":
+                    return DomainDataType.VarBinary;
+                case "INT16":
+                    return DomainDataType.Int32;
+                case "INT32":
+                    return DomainDataType.Int32;
+                case "BYTE[]":
+                    return DomainDataType.VarBinary;
+                case "INT64":
+                    return DomainDataType.Int64;
                 default:
                     throw new NotImplementedException($"Invalid data type {databaseType}");
             }
+        }
+
+        /// <summary>
+        /// Returns the .NET type of the column.
+        /// </summary>
+        /// <param name="column">The column.</param>
+        /// <returns>The .NET type of the column</returns>
+        /// <remarks>
+        /// For numeric Db data types uses column.Precision and column.Scale to determine the correct .NET data type.
+        /// </remarks>
+        public static Type NetDataType(DatabaseColumn column)
+        {
+            if (column == null) return null;
+            if (column.DataType == null) return null;
+
+            if (!column.DataType.IsNumeric || column.DataType.IsInt) return column.DataType.GetNetType();
+            var precision = column.Precision.GetValueOrDefault();
+            var scale = column.Scale.GetValueOrDefault();
+            return NetTypeForIntegers(column, scale, precision);
+        }
+
+        private static Type NetTypeForIntegers(DatabaseColumn column, int scale, int precision)
+        {
+            if (scale != 0 || precision >= 19) return column.DataType.GetNetType();
+
+            //could be a short, int or long...
+            //VARCHAR2(10) is common for Oracle integers, but it can overflow an int
+            //int.MaxValue is 2147483647 so +1 is allowable in the database
+            if (precision > 10) //up to long.MaxValue
+            {
+                return typeof(long);
+            }
+            if (precision > 4) //2147483647
+            {
+                return typeof(int);
+            }
+            if (precision > 1)
+            {
+                return typeof(short);
+            }
+            return column.DataType.GetNetType();
         }
 
         /// <summary>
@@ -298,10 +363,14 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
                     return "DateTime";
                 case DomainDataType.Single:
                     return "float";
-
-                // case case DomainDataType.Int16:
-                // // Todo: Do something valid with this
-                // return DomainDataType.String;
+                case DomainDataType.Guid:
+                    return "Guid";
+                case DomainDataType.VarBinary:
+                    return "byte[]";
+                case DomainDataType.Date:
+                    return "DateTime";
+                case DomainDataType.Time:
+                    return "DateTime";
                 default:
                     throw new NotImplementedException($"Invalid data type {type}");
             }
@@ -364,7 +433,31 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
         /// </exception>
         public bool Test(object parameters)
         {
-            throw new NotImplementedException();
+            Logger.Trace("Started Test()");
+            bool result = false;
+
+            AdoSourceOptions adoOptions = parameters as AdoSourceOptions;
+            using (OracleConnection connection =
+                new OracleConnection(adoOptions.ConnectionString))
+            {
+                // Open the connection in a try/catch block. 
+                // Create and execute the DataReader, writing the result
+                // set to the console window.
+                try
+                {
+                    connection.Open();
+
+                    result = true;
+                }
+                catch (Exception ex)
+                {
+                    Logger.Error($"Unable to connect to database:{ex.Message}");
+                }
+            }
+
+            Logger.Trace("Complete Test()");
+
+            return result;
         }
 
         #endregion

@@ -37,19 +37,18 @@
             // 
             // TxtConnection
             // 
-            this.TxtConnection.Location = new System.Drawing.Point(123, 26);
-            this.TxtConnection.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.TxtConnection.Location = new System.Drawing.Point(82, 17);
             this.TxtConnection.Name = "TxtConnection";
-            this.TxtConnection.Size = new System.Drawing.Size(526, 26);
+            this.TxtConnection.Size = new System.Drawing.Size(352, 20);
             this.TxtConnection.TabIndex = 8;
+            this.TxtConnection.TextChanged += new System.EventHandler(this.TxtConnection_TextChanged);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(18, 31);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Location = new System.Drawing.Point(12, 20);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(94, 20);
+            this.label2.Size = new System.Drawing.Size(64, 13);
             this.label2.TabIndex = 7;
             this.label2.Text = "Connection:";
             // 
@@ -57,15 +56,14 @@
             // 
             this.ErrorProvider1.ContainerControl = this;
             // 
-            // SqlServerAdoUserControl
+            // OracleAdoUserControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.TxtConnection);
             this.Controls.Add(this.label2);
-            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.Name = "SqlServerAdoUserControl";
-            this.Size = new System.Drawing.Size(694, 92);
+            this.Name = "OracleAdoUserControl";
+            this.Size = new System.Drawing.Size(463, 60);
             ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

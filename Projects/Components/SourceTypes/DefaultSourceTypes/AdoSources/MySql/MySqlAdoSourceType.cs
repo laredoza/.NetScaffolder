@@ -25,6 +25,8 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
 
     using global::Common.Logging;
 
+    using global::MySql.Data.MySqlClient;
+
     #endregion
 
     /// <summary>
@@ -138,7 +140,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
                     newColumn = new Column
                                     {
                                         ColumnName = column.Name,
-                                        DomainDataType = this.MapDatabaseType(column.DataType.TypeName),
+                                        DomainDataType = this.MapDatabaseType(column.DataType.TypeName, column.DataType),
                                         IsRequired = column.IsPrimaryKey,
                                         ColumnOrder = table.Columns.IndexOf(column) + 1,
                                         Precision = column.Precision.HasValue ? column.Precision.Value : 0,
@@ -215,8 +217,8 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
                                {
                                    ProviderName = "MySql.Data.MySqlClient",
                                    ConnectionString =
-                                       @"server=127.0.0.1;uid=root;pwd=12345;database=oracle"
-                               };
+                                       @"server=localhost;userid=test;password=password;database=test"
+                };
             }
 
             Logger.Trace("Completed Import()");
@@ -228,12 +230,13 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
         /// Map database type to c# type.
         /// </summary>
         /// <param name="databaseType">
-        /// The database type.
+        ///     The database type.
         /// </param>
+        /// <param name="extraInfo"></param>
         /// <returns>
         /// The <see cref="DomainDataType"/>.
         /// </returns>
-        public DomainDataType MapDatabaseType(string databaseType)
+        public DomainDataType MapDatabaseType(string databaseType, object extraInfo)
         {
             switch (databaseType.ToUpper())
             {
@@ -363,7 +366,31 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
         /// </exception>
         public bool Test(object parameters)
         {
-            throw new NotImplementedException();
+            Logger.Trace("Started Test()");
+            bool result = false;
+
+            AdoSourceOptions adoOptions = parameters as AdoSourceOptions;
+            using (MySqlConnection connection =
+                new MySqlConnection(adoOptions.ConnectionString))
+            {
+                // Open the connection in a try/catch block. 
+                // Create and execute the DataReader, writing the result
+                // set to the console window.
+                try
+                {
+                    connection.Open();
+
+                    result = true;
+                }
+                catch (Exception ex)
+                {
+                    Logger.Error($"Unable to connect to database:{ex.Message}");
+                }
+            }
+
+            Logger.Trace("Complete Test()");
+
+            return result;
         }
 
         #endregion

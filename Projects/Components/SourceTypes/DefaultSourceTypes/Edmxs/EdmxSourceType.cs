@@ -95,7 +95,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.Edmxs
                                                   {
                                                       ColumnName = col.Name,
                                                       DomainDataType =
-                                                          this.MapDatabaseType(col.Type),
+                                                          this.MapDatabaseType(col.Type, null),
                                                       IsRequired = col.Nullable,
                                                       ColumnOrder =
                                                           tbl.Properties.ToList().IndexOf(col) + 1,
@@ -195,12 +195,13 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.Edmxs
         /// Map database type to c# type.
         /// </summary>
         /// <param name="databaseType">
-        /// The database type.
+        ///     The database type.
         /// </param>
+        /// <param name="extraInfo"></param>
         /// <returns>
         /// The <see cref="DomainDataType"/>.
         /// </returns>
-        public DomainDataType MapDatabaseType(string databaseType)
+        public DomainDataType MapDatabaseType(string databaseType, object extraInfo)
         {
             Logger.Trace("Started MapDatabaseType()"); 
             
