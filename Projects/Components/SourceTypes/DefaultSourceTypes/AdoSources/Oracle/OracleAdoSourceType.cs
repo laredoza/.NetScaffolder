@@ -17,6 +17,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
     using System.Windows.Forms;
 
     using DatabaseSchemaReader;
+    using DatabaseSchemaReader.DataSchema;
 
     using DotNetScaffolder.Components.Common.Contract;
     using DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.SourceOptions;
@@ -158,7 +159,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
                     newColumn = new Column
                     {
                         ColumnName = column.Name,
-                        DomainDataType = this.MapDatabaseType(column.DataType.TypeName),
+                        DomainDataType = this.MapDatabaseType(column.DataType.TypeName, column),
                         IsRequired = column.IsPrimaryKey,
                         ColumnOrder = table.Columns.IndexOf(column) + 1,
                         Precision = column.Precision.HasValue ? column.Precision.Value : 0,
@@ -251,52 +252,81 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
         /// Map database type to c# type.
         /// </summary>
         /// <param name="databaseType">
-        /// The database type.
+        ///     The database type.
         /// </param>
+        /// <param name="extraInfo"></param>
         /// <returns>
         /// The <see cref="DomainDataType"/>.
         /// </returns>
-        public DomainDataType MapDatabaseType(string databaseType)
+        public DomainDataType MapDatabaseType(string databaseType, object extraInfo)
         {
-            switch (databaseType.ToUpper())
+            DatabaseColumn  column = extraInfo as DatabaseColumn;
+            //var cSharpName = column.DataType.NetDataTypeCSharpName.ToUpper();
+
+            Type cSharpName = NetDataType(column);
+
+            switch (cSharpName.Name.ToUpper())
             {
-                case "SMALLINT":
-                    return DomainDataType.Int16;
-                case "INT":
-                    return DomainDataType.Int32;
-                case "BIT":
-                    return DomainDataType.Boolean;
-                case "NVARCHAR":
-                    return DomainDataType.String;
-                case "VARCHAR":
-                    return DomainDataType.String;
-                case "MONEY":
-                    return DomainDataType.Decimal;
-                case "NUMERIC":
-                    return DomainDataType.Decimal;
-                case "DATETIME":
-                    return DomainDataType.DateTime;
-                case "IMAGE":
-                    // Todo: Do something valid with this
-                    return DomainDataType.String;
-                case "REAL":
-                    // Todo: Do something valid with this
-                    return DomainDataType.Single;
-                case "UNIQUEIDENTIFIER":
-                    return DomainDataType.Guid;
-                case "BIGINT":
-                    return DomainDataType.Int64;
-                case "VARBINARY":
-                    return DomainDataType.VarBinary;
                 case "DECIMAL":
                     return DomainDataType.Decimal;
-                case "DATE":
-                    return DomainDataType.Date;
-                case "TIME":
-                    return DomainDataType.Time;
+                case "STRING":
+                    return DomainDataType.String;
+                case "DATETIME":
+                    return DomainDataType.DateTime;
+                case "SYSTEM.BYTE[]":
+                    return DomainDataType.VarBinary;
+                case "INT16":
+                    return DomainDataType.Int32;
+                case "INT32":
+                    return DomainDataType.Int32;
+                case "BYTE[]":
+                    return DomainDataType.VarBinary;
+                case "INT64":
+                    return DomainDataType.Int64;
                 default:
                     throw new NotImplementedException($"Invalid data type {databaseType}");
             }
+        }
+
+        /// <summary>
+        /// Returns the .NET type of the column.
+        /// </summary>
+        /// <param name="column">The column.</param>
+        /// <returns>The .NET type of the column</returns>
+        /// <remarks>
+        /// For numeric Db data types uses column.Precision and column.Scale to determine the correct .NET data type.
+        /// </remarks>
+        public static Type NetDataType(DatabaseColumn column)
+        {
+            if (column == null) return null;
+            if (column.DataType == null) return null;
+
+            if (!column.DataType.IsNumeric || column.DataType.IsInt) return column.DataType.GetNetType();
+            var precision = column.Precision.GetValueOrDefault();
+            var scale = column.Scale.GetValueOrDefault();
+            return NetTypeForIntegers(column, scale, precision);
+        }
+
+        private static Type NetTypeForIntegers(DatabaseColumn column, int scale, int precision)
+        {
+            if (scale != 0 || precision >= 19) return column.DataType.GetNetType();
+
+            //could be a short, int or long...
+            //VARCHAR2(10) is common for Oracle integers, but it can overflow an int
+            //int.MaxValue is 2147483647 so +1 is allowable in the database
+            if (precision > 10) //up to long.MaxValue
+            {
+                return typeof(long);
+            }
+            if (precision > 4) //2147483647
+            {
+                return typeof(int);
+            }
+            if (precision > 1)
+            {
+                return typeof(short);
+            }
+            return column.DataType.GetNetType();
         }
 
         /// <summary>

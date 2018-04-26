@@ -157,7 +157,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
                     newColumn = new Column
                     {
                         ColumnName = column.Name,
-                        DomainDataType = this.MapDatabaseType(column.DataType.TypeName),
+                        DomainDataType = this.MapDatabaseType(column.DataType.TypeName, column.DataType),
                         IsRequired = column.IsPrimaryKey,
                         ColumnOrder = table.Columns.IndexOf(column) + 1,
                         Precision = column.Precision.HasValue ? column.Precision.Value : 0,
@@ -251,12 +251,13 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
         /// Map database type to c# type.
         /// </summary>
         /// <param name="databaseType">
-        /// The database type.
+        ///     The database type.
         /// </param>
+        /// <param name="extraInfo"></param>
         /// <returns>
         /// The <see cref="DomainDataType"/>.
         /// </returns>
-        public DomainDataType MapDatabaseType(string databaseType)
+        public DomainDataType MapDatabaseType(string databaseType, object extraInfo)
         {
             switch (databaseType.ToUpper())
             {

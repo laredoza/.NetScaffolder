@@ -60,12 +60,13 @@ namespace DotNetScaffolder.Components.Common.Contract
         /// Map database type to c# type.
         /// </summary>
         /// <param name="databaseType">
-        /// The database type.
+        ///     The database type.
         /// </param>
+        /// <param name="extraInfo"></param>
         /// <returns>
         /// The <see cref="DomainDataType"/>.
         /// </returns>
-        DomainDataType MapDatabaseType(string databaseType);
+        DomainDataType MapDatabaseType(string databaseType, object extraInfo);
 
         /// <summary>
         /// The map domain data type to output type.

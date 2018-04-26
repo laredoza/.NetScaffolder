@@ -101,7 +101,7 @@
         </Templates>
         <Version>0</Version>
       </Package>
-      <SourceTypeId>3bc1b0c4-1e41-9146-82cf-599181ce4410</SourceTypeId>
+      <SourceTypeId>4bc1b0c4-1e41-9146-82cf-699181ce4410</SourceTypeId>
       <Tables>
         <Table Description="" SchemaName="dbo" TableName="BankAccount">
           <Columns>
