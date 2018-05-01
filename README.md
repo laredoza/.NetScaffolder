@@ -33,3 +33,7 @@ T4 templates will be used to generate the different layers. Packages consist of 
 - [0.9 Stabilization](https://github.com/laredoza/.NetScaffolder/milestone/12)
 - [1.0 Create Angular Presentation Layer & ModelViews](https://github.com/laredoza/.NetScaffolder/milestone/10)
 - [1.1 Create Xamarin Presentation Layer & ModelView](https://github.com/laredoza/.NetScaffolder/milestone/11)
+
+### Software Requirements
+- [Visual Studio](https://www.visualstudio.com/downloads/)
+- [T4 Toolbox](https://marketplace.visualstudio.com/items?itemName=OlegVSych.T4ToolboxforVisualStudio2017)
