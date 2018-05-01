@@ -28,7 +28,7 @@ T4 templates will be used to generate the different layers. Packages consist of 
 - [0.5 Create base repository for nHibernate](https://github.com/laredoza/.NetScaffolder/milestone/5)
 - [0.6 Create Application Service](https://github.com/laredoza/.NetScaffolder/milestone/6)
 - [0.7 Create Dto's](https://github.com/laredoza/.NetScaffolder/milestone/7)
-- [Create base repository for MySql](https://github.com/laredoza/.NetScaffolder/milestone/9)
+- [0.71 Create base repository for MySql](https://github.com/laredoza/.NetScaffolder/milestone/9)
 - [0.8 Create MVC Presentation Layer & ModelViews](https://github.com/laredoza/.NetScaffolder/milestone/8)
 - [0.9 Stabilization](https://github.com/laredoza/.NetScaffolder/milestone/12)
 - [1.0 Create Angular Presentation Layer & ModelViews](https://github.com/laredoza/.NetScaffolder/milestone/10)
