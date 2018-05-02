@@ -75,8 +75,8 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.Edmxs
         /// </returns>
         public DatabaseModel Import(object options)
         {
-            Logger.Trace("Started Import()"); 
-            
+            Logger.Trace("Started Import()");
+
             DatabaseModel result = new DatabaseModel();
             FileSourceOptions fileOption = options as FileSourceOptions;
 
@@ -84,80 +84,86 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.Edmxs
             var entityTableNames = new HashSet<string>(
                 edmx.Runtime.ConceptualModels.Schema.EntityTypes.Select(tbl => tbl.Name.ToUpper()));
 
-            result.Tables = edmx.Runtime.ConceptualModels.Schema.EntityTypes.Select(
-                tbl => new Table
-                           {
-                               TableName = tbl.Name,
-                               SchemaName = new TiraggoEntityInfo(edmx, $"{edmx.Runtime.ConceptualModels.Schema.Namespace}.{tbl.Name}").StorageInfo.Schema,
-                               Columns =
-                                   tbl.Properties.Select(
-                                       col => new Column
-                                                  {
-                                                      ColumnName = col.Name,
-                                                      DomainDataType =
-                                                          this.MapDatabaseType(col.Type, null),
-                                                      IsRequired = col.Nullable,
-                                                      ColumnOrder =
-                                                          tbl.Properties.ToList().IndexOf(col) + 1,
-                                                      Precision =
-                                                          (col.Precision > 0 && col.Scale > 0)
-                                                              ? col.Precision
-                                                              : 0,
-                                                      Scale =
-                                                          (col.Precision > 0 && col.Scale > 0)
-                                                              ? col.Scale
-                                                              : 0,
-                                                      Length =
-                                                          string.IsNullOrEmpty(col.MaxLength)
-                                                              ? 0
-                                                              : Convert.ToInt32(col.MaxLength),
-                                                      IsPrimaryKey = tbl.Key.Any(pk => pk.Name == col.Name)
-                                                  }).ToList(),
-                               RelationShips = edmx.Runtime.StorageModels.Schema.Associations
-                                   .Where(
-                                       ass =>
-                                           (ass.ReferentialConstraint.Dependent.Role == tbl.Name
-                                            || ass.ReferentialConstraint.Principal.Role == tbl.Name)
-                                           && (entityTableNames.Contains(
-                                                   ass.ReferentialConstraint.Dependent.Role.ToUpper())
-                                               && entityTableNames.Contains(
-                                                   ass.ReferentialConstraint.Principal.Role.ToUpper()))).Select(
-                                       rel => new Relationship
-                                                  {
-                                                      TableName =
-                                                          (rel.ReferentialConstraint.Dependent.Role
-                                                           == tbl.Name)
-                                                              ? rel.ReferentialConstraint.Principal
-                                                                  .Role
-                                                              : rel.ReferentialConstraint.Dependent
-                                                                  .Role,
-                                                      ColumnName =
-                                                          (rel.ReferentialConstraint.Dependent.Role
-                                                           == tbl.Name)
-                                                              ? rel.ReferentialConstraint.Dependent
-                                                                  .PropertyRef.Name
-                                                              : rel.ReferentialConstraint.Principal
-                                                                  .PropertyRef.Name,
-                                                      ForeignColumnName =
-                                                          (rel.ReferentialConstraint.Principal.Role
-                                                           == tbl.Name)
-                                                              ? rel.ReferentialConstraint.Dependent
-                                                                  .PropertyRef.Name
-                                                              : rel.ReferentialConstraint.Principal
-                                                                  .PropertyRef.Name,
-                                                      DependencyRelationShip =
-                                                          (rel.ReferentialConstraint.Dependent.Role
-                                                           == tbl.Name)
-                                                              ? RelationshipType.ForeignKey
-                                                              : RelationshipType.ForeignKeyChild,
+            foreach (var table in edmx.Runtime.ConceptualModels.Schema.EntityTypes)
+            {
+                var tbl = new Table
+                {
+                    TableName = table.Name,
+                    SchemaName = new TiraggoEntityInfo(edmx, $"{edmx.Runtime.ConceptualModels.Schema.Namespace}.{table.Name}").StorageInfo.Schema,
+                };
 
-                                                      RelationshipName = rel.Name
-                                                  }).ToList()
-                           }).ToList();
+                result.Tables.Add(tbl);
+
+                foreach (var col in table.Properties)
+                {
+                    var column = new Column
+                    {
+                        ColumnName = col.Name,
+                        DomainDataType = this.MapDatabaseType(col.Type, null),
+                        IsPrimaryKey = table.Key.Any(pk => pk.Name == col.Name),
+                        IsRequired = !col.Nullable || table.Key.Any(pk => pk.Name == col.Name),
+                        ColumnOrder = table.Properties.ToList().IndexOf(col) + 1,
+                        Precision = (col.Precision > 0 && col.Scale > 0)
+                                          ? col.Precision
+                                          : 0,
+                        Scale = (col.Precision > 0 && col.Scale > 0)
+                                          ? col.Scale
+                                          : 0,
+                        Length = string.IsNullOrEmpty(col.MaxLength)
+                                          ? 0
+                                          : Convert.ToInt32(col.MaxLength)
+                    };
+
+                    if (column.IsPrimaryKey)
+                    {
+                        tbl.DatabaseGeneratedKeyType = MapDatabaseGeneratedKey(col.StoreGeneratedPattern);
+                    }
+
+                    tbl.Columns.Add(column);
+                }
+
+                foreach (var rel in edmx.Runtime.StorageModels.Schema.Associations.Where(ass => (ass.ReferentialConstraint.Dependent.Role == table.Name || ass.ReferentialConstraint.Principal.Role == table.Name) &&
+                (entityTableNames.Contains(ass.ReferentialConstraint.Dependent.Role.ToUpper()) &&
+                entityTableNames.Contains(ass.ReferentialConstraint.Principal.Role.ToUpper()))))
+                {
+                    var ass = new Relationship
+                    {
+                        TableName =
+          (rel.ReferentialConstraint.Dependent.Role
+           == table.Name)
+              ? rel.ReferentialConstraint.Principal
+                  .Role
+              : rel.ReferentialConstraint.Dependent
+                  .Role,
+                        ColumnName =
+          (rel.ReferentialConstraint.Dependent.Role
+           == table.Name)
+              ? rel.ReferentialConstraint.Dependent
+                  .PropertyRef.Name
+              : rel.ReferentialConstraint.Principal
+                  .PropertyRef.Name,
+                        ForeignColumnName =
+          (rel.ReferentialConstraint.Principal.Role
+           == table.Name)
+              ? rel.ReferentialConstraint.Dependent
+                  .PropertyRef.Name
+              : rel.ReferentialConstraint.Principal
+                  .PropertyRef.Name,
+                        DependencyRelationShip =
+          (rel.ReferentialConstraint.Dependent.Role
+           == table.Name)
+              ? RelationshipType.ForeignKey
+              : RelationshipType.ForeignKeyChild,
+                        RelationshipName = rel.Name
+                    };
+
+                    tbl.RelationShips.Add(ass);
+                }
+            }
 
             this.Fix(result);
 
-            Logger.Trace("Completed Import()"); 
+            Logger.Trace("Completed Import()");
             return result;
         }
 
@@ -168,12 +174,12 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.Edmxs
         /// </param>
         public object Load(object parameters)
         {
-            Logger.Trace("Started Import()"); 
-            
+            Logger.Trace("Started Import()");
+
             string path = this.ReturnFilePath(parameters as string);
             Logger.Debug($"Path: {path}");
             FileSourceOptions result = null;
-            
+
             if (File.Exists(path))
             {
                 Logger.Trace("Path Exists");
@@ -181,7 +187,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.Edmxs
             }
             else
             {
-                result = new FileSourceOptions(); 
+                result = new FileSourceOptions();
 
                 Logger.Trace("Path Doesn't Exist");
             }
@@ -203,8 +209,8 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.Edmxs
         /// </returns>
         public DomainDataType MapDatabaseType(string databaseType, object extraInfo)
         {
-            Logger.Trace("Started MapDatabaseType()"); 
-            
+            Logger.Trace("Started MapDatabaseType()");
+
             switch (databaseType.ToUpper())
             {
                 case "INT16":
@@ -256,7 +262,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.Edmxs
 
             ObjectXMLSerializer<FileSourceOptions>.Save(options, path, SerializedFormat.Document);
 
-            Logger.Trace("Completed Save()"); 
+            Logger.Trace("Completed Save()");
         }
 
         /// <summary>
@@ -274,8 +280,8 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.Edmxs
             FileSourceOptions options = parameters as FileSourceOptions;
             bool result = File.Exists(options.Path);
 
-            Logger.Trace("Completed Test()"); 
-            
+            Logger.Trace("Completed Test()");
+
             return result;
         }
 
@@ -365,6 +371,25 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.Edmxs
                 }
             }
             Logger.Trace("Completed Fix()");
+        }
+
+        public DatabaseGeneratedKeyType MapDatabaseGeneratedKey(string storeGeneratedPattern)
+        {
+            if(string.IsNullOrEmpty(storeGeneratedPattern))
+            {
+                return DatabaseGeneratedKeyType.None;
+            }
+
+            if (storeGeneratedPattern.Equals("Identity", StringComparison.InvariantCultureIgnoreCase))
+            {
+                return DatabaseGeneratedKeyType.Identity;
+            }
+            if (storeGeneratedPattern.Equals("Computed", StringComparison.InvariantCultureIgnoreCase))
+            {
+                return DatabaseGeneratedKeyType.Computed;
+            }
+
+            return DatabaseGeneratedKeyType.None;
         }
     }
 }

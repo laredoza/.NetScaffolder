@@ -10,6 +10,9 @@ namespace RepositoryEFDotnet.Library
 {
     public abstract class BaseContext : DbContext, IUnitOfWork
     {
+        protected BaseContext(string connectionName) : base(connectionName) { }
+        protected BaseContext() : base() { }
+
         public bool Add<TEntity>(TEntity newEntity)
         {
             return false;
@@ -54,5 +57,14 @@ namespace RepositoryEFDotnet.Library
         {
             
         }
+
+        #region Logging
+
+        protected virtual void Log(string log)
+        {
+
+        }
+
+        #endregion
     }
 }

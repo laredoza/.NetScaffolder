@@ -88,6 +88,25 @@ namespace DotNetScaffolder.Mapping.MetaData.Model
         /// </summary>
         public DatabaseGeneratedKeyType DatabaseGeneratedKeyType { get; set; }
 
+        public string TransformDatabaseGeneratedKeyType
+        {
+            get
+            {
+                switch(this.DatabaseGeneratedKeyType)
+                {
+                    case DatabaseGeneratedKeyType.Computed:
+                        {
+                            return "DatabaseGeneratedOption.Computed";
+                        }
+                    case DatabaseGeneratedKeyType.Identity:
+                        {
+                            return "DatabaseGeneratedOption.Identity";
+                        }
+                    default: return "DatabaseGeneratedOption.None";
+                }
+            }
+        }
+
         /// <summary>
         ///     Gets or sets the description.
         /// </summary>
@@ -221,6 +240,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Model
 
             result.SchemaName = this.SchemaName;
             result.TableName = this.TableName;
+            result.DatabaseGeneratedKeyType = this.DatabaseGeneratedKeyType;
 
             return result;
         }

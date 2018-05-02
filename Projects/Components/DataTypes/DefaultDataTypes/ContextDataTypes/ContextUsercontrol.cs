@@ -241,7 +241,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
             SelectedContext.GenerateInterface = GenerateInterface.Checked;
             SelectedContext.InheritFrom = InheritFromInterface.Text;
             SelectedContext.LoggingEnabled = LoggingEnabled.Checked;
-            SelectedContext.ConstructionOptions = ConstructionOptions.SelectedText;
+            SelectedContext.CustomConnectionName = txtCustomConnectionName.Text;
             SelectedContext.OutputPath = OutputPath.Text;
 
             SelectedContext.Models.Clear();
@@ -273,7 +273,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
             GenerateInterface.Checked = SelectedContext.GenerateInterface;
             InheritFromInterface.Text = SelectedContext.InheritFrom;
             LoggingEnabled.Checked = SelectedContext.LoggingEnabled;
-            ConstructionOptions.SelectedText = SelectedContext.ConstructionOptions;
+            txtCustomConnectionName.Text = SelectedContext.CustomConnectionName;
             OutputPath.Text = SelectedContext.OutputPath;
 
             UpdateDataSource();
@@ -291,6 +291,11 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
                     OutputPath.Text = dialog.SelectedPath;
                 }
             }
+        }
+
+        private void ContextUserControl_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
