@@ -54,6 +54,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                 relationship.ForeignColumnName,
                 "The ForeignColumnName should be CustomerId.");
             Assert.AreEqual("Customer", relationship.TableName, "The relationship table name should be Customer");
+            Assert.AreEqual("FK_BankAccount_Customer", relationship.RelationshipName, "The relationship table name should be FK_BankAccount_Customer.");
 
             relationship = bankAccountTable.RelationShips.FirstOrDefault(
                 r => r.TableName == "BankTransfers" && r.ForeignColumnName == "ToBankAccountId");
@@ -71,6 +72,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                 "BankTransfers",
                 relationship.TableName,
                 "The relationship table name should be BankTransfers.");
+            Assert.AreEqual("FK_BankTransfers_BankAccount1", relationship.RelationshipName, "The relationship table name should be FK_BankTransfers_BankAccount1.");
 
             relationship = bankAccountTable.RelationShips.FirstOrDefault(
                 r => r.TableName == "BankTransfers" && r.ForeignColumnName == "FromBankAccountId");
@@ -88,6 +90,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                 "BankTransfers",
                 relationship.TableName,
                 "The relationship table name should be BankTransfers.");
+            Assert.AreEqual("FK_BankTransfers_BankAccount", relationship.RelationshipName, "The relationship table name should be FK_BankTransfers_BankAccount.");
         }
 
         /// <summary>
@@ -103,45 +106,80 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
             Assert.AreEqual(5, bankAccountTable.Columns.Count, "There should be 5 Columns in the Order table.");
 
             Column column = bankAccountTable.Columns.FirstOrDefault(c => c.ColumnName == "BankAccountId");
-            Assert.IsTrue(column.IsPrimaryKey, "The BankAccountId should be a primary key in the Order table.");
-            Assert.AreEqual(
-                DomainDataType.Int32,
-                column.DomainDataType,
-                "The BankAccountId should be a int32 in the BankAccount table.");
+            this.BaseSourceTypeUnitTest_Columns(
+                column,
+                new Column
+                    {
+                        ColumnName = "BankAccountId",
+                        DomainDataType = DomainDataType.Int32,
+                        IsRequired = false,
+                        ColumnOrder = 1,
+                        Precision = 0,
+                        Scale = 0,
+                        Length = 0,
+                        IsPrimaryKey = true
+                    });
 
             column = bankAccountTable.Columns.FirstOrDefault(c => c.ColumnName == "BankAccountNumber");
-            Assert.IsFalse(column.IsPrimaryKey, "The BankAccountNumber is not a primary key in the BankAccount table.");
-            Assert.AreEqual(
-                DomainDataType.String,
-                column.DomainDataType,
-                "The BankAccountNumber should be a string in the BankAccount table.");
             Assert.AreEqual(10, column.Length, "The ShippingName should have a length of 10 in the BankAccount table.");
+            this.BaseSourceTypeUnitTest_Columns(
+                column,
+                new Column
+                    {
+                        ColumnName = "BankAccountNumber",
+                        DomainDataType = DomainDataType.String,
+                        IsRequired = false,
+                        ColumnOrder = 2,
+                        Precision = 0,
+                        Scale = 0,
+                        Length = 10,
+                        IsPrimaryKey = false
+                    });
 
             column = bankAccountTable.Columns.FirstOrDefault(c => c.ColumnName == "Balance");
-            Assert.IsFalse(column.IsPrimaryKey, "The Balance is not a primary key in the BankAccount table.");
-            Assert.AreEqual(
-                DomainDataType.Decimal,
-                column.DomainDataType,
-                "The Balance should be a decimal in the BankAccount table.");
-            Assert.AreEqual(
-                19,
-                column.Precision,
-                "The Balance should have a precision of 19 in the BankAccount table.");
-            Assert.AreEqual(4, column.Scale, "The Balance should have a scale of 4 in the BankAccount table.");
+            this.BaseSourceTypeUnitTest_Columns(
+                column,
+                new Column
+                    {
+                        ColumnName = "Balance",
+                        DomainDataType = DomainDataType.Decimal,
+                        IsRequired = false,
+                        ColumnOrder = 3,
+                        Precision = 19,
+                        Scale = 4,
+                        Length = 0,
+                        IsPrimaryKey = false
+                    });
 
             column = bankAccountTable.Columns.FirstOrDefault(c => c.ColumnName == "CustomerId");
-            Assert.IsFalse(column.IsPrimaryKey, "The CustomerId should be a primary key in the Order table.");
-            Assert.AreEqual(
-                DomainDataType.Int32,
-                column.DomainDataType,
-                "The CustomerId should be a int32 in the BankAccount table.");
+            this.BaseSourceTypeUnitTest_Columns(
+                column,
+                new Column
+                    {
+                        ColumnName = "CustomerId",
+                        DomainDataType = DomainDataType.Int32,
+                        IsRequired = false,
+                        ColumnOrder = 4,
+                        Precision = 0,
+                        Scale = 0,
+                        Length = 0,
+                        IsPrimaryKey = false
+                    });
 
             column = bankAccountTable.Columns.FirstOrDefault(c => c.ColumnName == "Locked");
-            Assert.IsFalse(column.IsPrimaryKey, "The Locked is not a primary key in the BankAccount table.");
-            Assert.AreEqual(
-                DomainDataType.Boolean,
-                column.DomainDataType,
-                "The Locked field should be a boolean in the BankAccount table.");
+            this.BaseSourceTypeUnitTest_Columns(
+                column,
+                new Column
+                    {
+                        ColumnName = "Locked",
+                        DomainDataType = DomainDataType.Boolean,
+                        IsRequired = false,
+                        ColumnOrder = 5,
+                        Precision = 0,
+                        Scale = 0,
+                        Length = 0,
+                        IsPrimaryKey = false
+                    });
         }
 
         /// <summary>
@@ -177,6 +215,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                 "BankAccount",
                 relationship.TableName,
                 "The relationship table name should be BankTransfers.");
+            Assert.AreEqual("FK_BankTransfers_BankAccount1", relationship.RelationshipName, "The relationship table name should be FK_BankTransfers_BankAccount1.");
 
             relationship = bankTransfersTable.RelationShips.FirstOrDefault(
                 r => r.TableName == "BankAccount" && r.ColumnName == "FromBankAccountId");
@@ -197,6 +236,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                 "BankAccount",
                 relationship.TableName,
                 "The relationship table name should be BankTransfers.");
+            Assert.AreEqual("FK_BankTransfers_BankAccount", relationship.RelationshipName, "The relationship table name should be FK_BankTransfers_BankAccount.");
         }
 
         /// <summary>
@@ -215,50 +255,79 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                 "There should be 5 Columns in the BankTransfers table.");
 
             Column column = bankTransfersTable.Columns.FirstOrDefault(c => c.ColumnName == "BankTransferId");
-            Assert.IsTrue(
-                column.IsPrimaryKey,
-                "The BankTransferId should be a primary key in the BankTransfers table.");
-            Assert.AreEqual(
-                DomainDataType.Int32,
-                column.DomainDataType,
-                "The BankTransferId should be a int32 in the BankTransfers table.");
+            this.BaseSourceTypeUnitTest_Columns(
+                column,
+                new Column
+                    {
+                        ColumnName = "BankTransferId",
+                        DomainDataType = DomainDataType.Int32,
+                        IsRequired = false,
+                        ColumnOrder = 1,
+                        Precision = 0,
+                        Scale = 0,
+                        Length = 0,
+                        IsPrimaryKey = true
+                    });
 
             column = bankTransfersTable.Columns.FirstOrDefault(c => c.ColumnName == "FromBankAccountId");
-            Assert.IsFalse(
-                column.IsPrimaryKey,
-                "The FromBankAccountId should not be a primary key in the BankTransfers table.");
-            Assert.AreEqual(
-                DomainDataType.Int32,
-                column.DomainDataType,
-                "The FromBankAccountId should be a int32 in the BankTransfers table.");
+            this.BaseSourceTypeUnitTest_Columns(
+                column,
+                new Column
+                    {
+                        ColumnName = "FromBankAccountId",
+                        DomainDataType = DomainDataType.Int32,
+                        IsRequired = false,
+                        ColumnOrder = 2,
+                        Precision = 0,
+                        Scale = 0,
+                        Length = 0,
+                        IsPrimaryKey = false
+                    });
 
             column = bankTransfersTable.Columns.FirstOrDefault(c => c.ColumnName == "ToBankAccountId");
-            Assert.IsFalse(
-                column.IsPrimaryKey,
-                "The ToBankAccountId should not be a primary key in the BankTransfers table.");
-            Assert.AreEqual(
-                DomainDataType.Int32,
-                column.DomainDataType,
-                "The ToBankAccountId should be a int32 in the BankTransfers table.");
+            this.BaseSourceTypeUnitTest_Columns(
+                column,
+                new Column
+                    {
+                        ColumnName = "ToBankAccountId",
+                        DomainDataType = DomainDataType.Int32,
+                        IsRequired = false,
+                        ColumnOrder = 3,
+                        Precision = 0,
+                        Scale = 0,
+                        Length = 0,
+                        IsPrimaryKey = false
+                    });
 
             column = bankTransfersTable.Columns.FirstOrDefault(c => c.ColumnName == "Amount");
-            Assert.IsFalse(column.IsPrimaryKey, "The Amount is not a primary key in the BankTransfers table.");
-            Assert.AreEqual(
-                DomainDataType.Decimal,
-                column.DomainDataType,
-                "The Amount should be a decimal in the BankTransfers table.");
-            Assert.AreEqual(
-                18,
-                column.Precision,
-                "The Balance should have a precision of 18 in the BankAccount table.");
-            Assert.AreEqual(2, column.Scale, "The Balance should have a scale of 2 in the BankAccount table.");
+            this.BaseSourceTypeUnitTest_Columns(
+                column,
+                new Column
+                    {
+                        ColumnName = "Amount",
+                        DomainDataType = DomainDataType.Decimal,
+                        IsRequired = false,
+                        ColumnOrder = 4,
+                        Precision = 18,
+                        Scale = 2,
+                        Length = 0,
+                        IsPrimaryKey = false
+                    });
 
             column = bankTransfersTable.Columns.FirstOrDefault(c => c.ColumnName == "TransferDate");
-            Assert.IsFalse(column.IsPrimaryKey, "The TransferDate is not a primary key in the BankTransfers table.");
-            Assert.AreEqual(
-                DomainDataType.DateTime,
-                column.DomainDataType,
-                "The Locked field should be a DateTime in the BankTransfers table.");
+            this.BaseSourceTypeUnitTest_Columns(
+                column,
+                new Column
+                    {
+                        ColumnName = "TransferDate",
+                        DomainDataType = DomainDataType.DateTime,
+                        IsRequired = false,
+                        ColumnOrder = 5,
+                        Precision = 0,
+                        Scale = 0,
+                        Length = 0,
+                        IsPrimaryKey = false
+                    });
         }
 
         /// <summary>
@@ -287,6 +356,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                 "The Country DependencyRelationShip should be ForeignKeyChild.");
             Assert.AreEqual("CountryId", relationship.ForeignColumnName, "The ForeignColumnName should be CountryId.");
             Assert.AreEqual("Customer", relationship.TableName, "The relationship table name should be Customer");
+            Assert.AreEqual("FK_Customer_Country", relationship.RelationshipName, "The relationship table name should be FK_Customer_Country.");
         }
 
         /// <summary>
@@ -302,19 +372,34 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
             Assert.AreEqual(2, countryTable.Columns.Count, "There should be 2 Columns in the Country table.");
 
             Column column = countryTable.Columns.FirstOrDefault(c => c.ColumnName == "CountryId");
-            Assert.IsTrue(column.IsPrimaryKey, "The CountryId should be a primary key in the Country table.");
-            Assert.AreEqual(
-                DomainDataType.Int32,
-                column.DomainDataType,
-                "The CountryId should be a int32 in the Country table.");
+            this.BaseSourceTypeUnitTest_Columns(
+                column,
+                new Column
+                    {
+                        ColumnName = "CountryId",
+                        DomainDataType = DomainDataType.Int32,
+                        IsRequired = false,
+                        ColumnOrder = 1,
+                        Precision = 0,
+                        Scale = 0,
+                        Length = 0,
+                        IsPrimaryKey = true
+                    });
 
             column = countryTable.Columns.FirstOrDefault(c => c.ColumnName == "CountryName");
-            Assert.IsFalse(column.IsPrimaryKey, "The CountryName is not a primary key in the Country table.");
-            Assert.AreEqual(
-                DomainDataType.String,
-                column.DomainDataType,
-                "The CountryName should be a string in the Country table.");
-            Assert.AreEqual(100, column.Length, "The CountryName should have a length of 100 in the Country table.");
+            this.BaseSourceTypeUnitTest_Columns(
+                column,
+                new Column
+                    {
+                        ColumnName = "CountryName",
+                        DomainDataType = DomainDataType.String,
+                        IsRequired = false,
+                        ColumnOrder = 2,
+                        Precision = 0,
+                        Scale = 0,
+                        Length = 100,
+                        IsPrimaryKey = false
+                    });
         }
 
         /// <summary>
@@ -346,6 +431,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                 relationship.ForeignColumnName,
                 "The ForeignColumnName should be CustomerId.");
             Assert.AreEqual("BankAccount", relationship.TableName, "The relationship table name should be BankAccount");
+            Assert.AreEqual("FK_BankAccount_Customer", relationship.RelationshipName, "The relationship table name should be FK_BankAccount_Customer.");
 
             relationship = softwareTable.RelationShips.FirstOrDefault(r => r.TableName == "Country");
             Assert.IsNotNull(relationship, "The Country Relationship should not be null.");
@@ -356,6 +442,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                 "The DependencyRelationShip should be ForeignKey.");
             Assert.AreEqual("CountryId", relationship.ForeignColumnName, "The ForeignColumnName should be CountryId.");
             Assert.AreEqual("Country", relationship.TableName, "The relationship table name should be Country.");
+            Assert.AreEqual("FK_Customer_Country", relationship.RelationshipName, "The relationship table name should be FK_Customer_Country.");
 
             relationship = softwareTable.RelationShips.FirstOrDefault(r => r.TableName == "Order");
             Assert.IsNotNull(relationship, "The Order Relationship should not be null.");
@@ -369,6 +456,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                 relationship.ForeignColumnName,
                 "The ForeignColumnName should be CustomerId.");
             Assert.AreEqual("Order", relationship.TableName, "The relationship table name should be Order");
+            Assert.AreEqual("FK_Order_Customer", relationship.RelationshipName, "The relationship table name should be FK_Order_Customer.");
         }
 
         /// <summary>
@@ -384,105 +472,203 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
             Assert.AreEqual(13, customerTable.Columns.Count, "There should be 13 Columns in the Software table.");
 
             Column column = customerTable.Columns.FirstOrDefault(c => c.ColumnName == "CustomerId");
-            Assert.IsTrue(column.IsPrimaryKey, "The CustomerId should be a primary key in the CustomerTable table.");
-            Assert.AreEqual(
-                DomainDataType.Int32,
-                column.DomainDataType,
-                "The CustomerId should be a int32 in the Customer table.");
+            this.BaseSourceTypeUnitTest_Columns(
+                column,
+                new Column
+                    {
+                        ColumnName = "CustomerId",
+                        DomainDataType = DomainDataType.Int32,
+                        IsRequired = false,
+                        ColumnOrder = 1,
+                        Precision = 0,
+                        Scale = 0,
+                        Length = 0,
+                        IsPrimaryKey = true
+                    });
+
 
             column = customerTable.Columns.FirstOrDefault(c => c.ColumnName == "CustomerCode");
-            Assert.IsFalse(column.IsPrimaryKey, "The CustomerCode is not a primary key in the Customer table.");
-            Assert.AreEqual(
-                DomainDataType.String,
-                column.DomainDataType,
-                "The LicenseCode should be a string in the Customer table.");
-            Assert.AreEqual(5, column.Length, "The CustomerCode should have a length of 5 in the Customer table.");
+            this.BaseSourceTypeUnitTest_Columns(
+                column,
+                new Column
+                    {
+                        ColumnName = "CustomerCode",
+                        DomainDataType = DomainDataType.String,
+                        IsRequired = false,
+                        ColumnOrder = 2,
+                        Precision = 0,
+                        Scale = 0,
+                        Length = 5,
+                        IsPrimaryKey = false
+                    });
 
             column = customerTable.Columns.FirstOrDefault(c => c.ColumnName == "CompanyName");
-            Assert.IsFalse(column.IsPrimaryKey, "The CompanyName is not a primary key in the Customer table.");
-            Assert.AreEqual(
-                DomainDataType.String,
-                column.DomainDataType,
-                "The CompanyName should be a string in the Customer table.");
-            Assert.AreEqual(50, column.Length, "The CompanyName should have a length of 50 in the Customer table.");
+            this.BaseSourceTypeUnitTest_Columns(
+                column,
+                new Column
+                    {
+                        ColumnName = "CompanyName",
+                        DomainDataType = DomainDataType.String,
+                        IsRequired = false,
+                        ColumnOrder = 3,
+                        Precision = 0,
+                        Scale = 0,
+                        Length = 50,
+                        IsPrimaryKey = false
+                    });
 
             column = customerTable.Columns.FirstOrDefault(c => c.ColumnName == "ContactName");
-            Assert.IsFalse(column.IsPrimaryKey, "The ContactName is not a primary key in the Customer table.");
-            Assert.AreEqual(
-                DomainDataType.String,
-                column.DomainDataType,
-                "The ContactName should be a string in the Customer table.");
-            Assert.AreEqual(50, column.Length, "The ContactName should have a length of 50 in the Customer table.");
+            this.BaseSourceTypeUnitTest_Columns(
+                column,
+                new Column
+                    {
+                        ColumnName = "ContactName",
+                        DomainDataType = DomainDataType.String,
+                        IsRequired = false,
+                        ColumnOrder = 4,
+                        Precision = 0,
+                        Scale = 0,
+                        Length = 50,
+                        IsPrimaryKey = false
+                    });
 
             column = customerTable.Columns.FirstOrDefault(c => c.ColumnName == "ContactTitle");
-            Assert.IsFalse(column.IsPrimaryKey, "The ContactTitle is not a primary key in the Customer table.");
-            Assert.AreEqual(
-                DomainDataType.String,
-                column.DomainDataType,
-                "The ContactTitle should be a string in the Customer table.");
-            Assert.AreEqual(50, column.Length, "The ContactTitle should have a length of 50 in the Customer table.");
+            this.BaseSourceTypeUnitTest_Columns(
+                column,
+                new Column
+                    {
+                        ColumnName = "ContactTitle",
+                        DomainDataType = DomainDataType.String,
+                        IsRequired = false,
+                        ColumnOrder = 5,
+                        Precision = 0,
+                        Scale = 0,
+                        Length = 50,
+                        IsPrimaryKey = false
+                    });
 
             column = customerTable.Columns.FirstOrDefault(c => c.ColumnName == "Address");
-            Assert.IsFalse(column.IsPrimaryKey, "The Address is not a primary key in the Customer table.");
-            Assert.AreEqual(
-                DomainDataType.String,
-                column.DomainDataType,
-                "The Address should be a string in the Customer table.");
-            Assert.AreEqual(50, column.Length, "The Address should have a length of 50 in the Customer table.");
+            
+            this.BaseSourceTypeUnitTest_Columns(
+                column,
+                new Column
+                    {
+                        ColumnName = "Address",
+                        DomainDataType = DomainDataType.String,
+                        IsRequired = false,
+                        ColumnOrder = 6,
+                        Precision = 0,
+                        Scale = 0,
+                        Length = 50,
+                        IsPrimaryKey = false
+                    });
 
             column = customerTable.Columns.FirstOrDefault(c => c.ColumnName == "City");
-            Assert.IsFalse(column.IsPrimaryKey, "The City is not a primary key in the Customer table.");
-            Assert.AreEqual(
-                DomainDataType.String,
-                column.DomainDataType,
-                "The City should be a string in the Customer table.");
-            Assert.AreEqual(20, column.Length, "The City should have a length of 20 in the Customer table.");
+            this.BaseSourceTypeUnitTest_Columns(
+                column,
+                new Column
+                    {
+                        ColumnName = "City",
+                        DomainDataType = DomainDataType.String,
+                        IsRequired = false,
+                        ColumnOrder = 7,
+                        Precision = 0,
+                        Scale = 0,
+                        Length = 20,
+                        IsPrimaryKey = false
+                    });
 
             column = customerTable.Columns.FirstOrDefault(c => c.ColumnName == "PostalCode");
-            Assert.IsFalse(column.IsPrimaryKey, "The PostalCode is not a primary key in the Customer table.");
-            Assert.AreEqual(
-                DomainDataType.String,
-                column.DomainDataType,
-                "The PostalCode should be a string in the Customer table.");
-            Assert.AreEqual(10, column.Length, "The PostalCode should have a length of 10 in the Customer table.");
+            this.BaseSourceTypeUnitTest_Columns(
+                column,
+                new Column
+                    {
+                        ColumnName = "PostalCode",
+                        DomainDataType = DomainDataType.String,
+                        IsRequired = false,
+                        ColumnOrder = 8,
+                        Precision = 0,
+                        Scale = 0,
+                        Length = 10,
+                        IsPrimaryKey = false
+                    });
 
             column = customerTable.Columns.FirstOrDefault(c => c.ColumnName == "Telephone");
-            Assert.IsFalse(column.IsPrimaryKey, "The Telephone is not a primary key in the Customer table.");
-            Assert.AreEqual(
-                DomainDataType.String,
-                column.DomainDataType,
-                "The Telephone should be a string in the Customer table.");
-            Assert.AreEqual(50, column.Length, "The Telephone should have a length of 50 in the Customer table.");
+            this.BaseSourceTypeUnitTest_Columns(
+                column,
+                new Column
+                    {
+                        ColumnName = "Telephone",
+                        DomainDataType = DomainDataType.String,
+                        IsRequired = false,
+                        ColumnOrder = 9,
+                        Precision = 0,
+                        Scale = 0,
+                        Length = 50,
+                        IsPrimaryKey = false
+                    });
 
             column = customerTable.Columns.FirstOrDefault(c => c.ColumnName == "Fax");
-            Assert.IsFalse(column.IsPrimaryKey, "The Fax is not a primary key in the Customer table.");
-            Assert.AreEqual(
-                DomainDataType.String,
-                column.DomainDataType,
-                "The Fax should be a string in the Customer table.");
-            Assert.AreEqual(50, column.Length, "The Fax should have a length of 50 in the Customer table.");
+            this.BaseSourceTypeUnitTest_Columns(
+                column,
+                new Column
+                    {
+                        ColumnName = "Fax",
+                        DomainDataType = DomainDataType.String,
+                        IsRequired = false,
+                        ColumnOrder = 10,
+                        Precision = 0,
+                        Scale = 0,
+                        Length = 50,
+                        IsPrimaryKey = false
+                    });
 
             column = customerTable.Columns.FirstOrDefault(c => c.ColumnName == "CountryId");
-            Assert.IsFalse(column.IsPrimaryKey, "The CountryId should be a primary key in the CustomerTable table.");
-            Assert.AreEqual(
-                DomainDataType.Int32,
-                column.DomainDataType,
-                "The CountryId should be a int32 in the Customer table.");
+            this.BaseSourceTypeUnitTest_Columns(
+                column,
+                new Column
+                    {
+                        ColumnName = "CountryId",
+                        DomainDataType = DomainDataType.Int32,
+                        IsRequired = false,
+                        ColumnOrder = 11,
+                        Precision = 0,
+                        Scale = 0,
+                        Length = 0,
+                        IsPrimaryKey = false
+                    });
 
             // Todo: Change to correct type
             column = customerTable.Columns.FirstOrDefault(c => c.ColumnName == "Photo");
-            Assert.IsFalse(column.IsPrimaryKey, "The Photo should be a primary key in the Customer table.");
-            Assert.AreEqual(
-                DomainDataType.String,
-                column.DomainDataType,
-                "The Photo should be a int32 in the Customer table.");
+            this.BaseSourceTypeUnitTest_Columns(
+                column,
+                new Column
+                    {
+                        ColumnName = "Photo",
+                        DomainDataType = DomainDataType.String,
+                        IsRequired = false,
+                        ColumnOrder = 12,
+                        Precision = 0,
+                        Scale = 0,
+                        Length = 2147483647,
+                        IsPrimaryKey = false
+                    });
 
             column = customerTable.Columns.FirstOrDefault(c => c.ColumnName == "IsEnabled");
-            Assert.IsFalse(column.IsPrimaryKey, "The IsEnabled should be a primary key in the CustomerTable table.");
-            Assert.AreEqual(
-                DomainDataType.Boolean,
-                column.DomainDataType,
-                "The IsEnabled should be a boolean in the Customer table.");
+            this.BaseSourceTypeUnitTest_Columns(
+                column,
+                new Column
+                    {
+                        ColumnName = "IsEnabled",
+                        DomainDataType = DomainDataType.Boolean,
+                        IsRequired = false,
+                        ColumnOrder = 13,
+                        Precision = 0,
+                        Scale = 0,
+                        Length = 0,
+                        IsPrimaryKey = false
+                    });
+
         }
 
         /// <summary>
@@ -508,10 +694,13 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                 "ProductId",
                 relationship.ColumnName,
                 "The ColumnName should be ProductId in the OrderDetails table.");
+            Assert.AreEqual("FK_OrderDetails_Product", relationship.RelationshipName, "The relationship table name should be FK_OrderDetails_Product.");
+
             Assert.AreEqual(
                 RelationshipType.ForeignKey,
                 relationship.DependencyRelationShip,
                 "The OrderDetails DependencyRelationShip should be Child in the Product table.");
+
             Assert.AreEqual(
                 "ProductId",
                 relationship.ForeignColumnName,
@@ -533,6 +722,8 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                 relationship.ForeignColumnName,
                 "The Order ForeignColumnName should be OrderId in the Order table.");
             Assert.AreEqual("Order", relationship.TableName, "The relationship table name should be Order");
+            Assert.AreEqual("FK_OrdeDetails_Order", relationship.RelationshipName, "The relationship table name should be FK_OrdeDetails_Order.");
+
         }
 
         /// <summary>
@@ -559,6 +750,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                 relationship.ForeignColumnName,
                 "The ForeignColumnName should be CustomerId.");
             Assert.AreEqual("Customer", relationship.TableName, "The relationship table name should be Customer");
+            Assert.AreEqual("FK_Order_Customer", relationship.RelationshipName, "The relationship table name should be FK_Order_Customer.");
 
             relationship = ordersTable.RelationShips.FirstOrDefault(r => r.TableName == "OrderDetails");
             Assert.IsNotNull(relationship, "The OrderDetails Relationship should not be null.");
@@ -572,6 +764,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                 "OrderDetails",
                 relationship.TableName,
                 "The relationship table name should be OrderDetails.");
+            Assert.AreEqual("FK_OrdeDetails_Order", relationship.RelationshipName, "The relationship table name should be FK_OrdeDetails_Order.");
         }
 
         /// <summary>
@@ -587,64 +780,124 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
             Assert.AreEqual(8, orderTable.Columns.Count, "There should be 8 Columns in the Order table.");
 
             Column column = orderTable.Columns.FirstOrDefault(c => c.ColumnName == "OrderId");
-            Assert.IsTrue(column.IsPrimaryKey, "The OrderId should be a primary key in the Order table.");
-            Assert.AreEqual(
-                DomainDataType.Int32,
-                column.DomainDataType,
-                "The OrderId should be a int32 in the Order table.");
+            this.BaseSourceTypeUnitTest_Columns(
+                column,
+                new Column
+                    {
+                        ColumnName = "OrderId",
+                        DomainDataType = DomainDataType.Int32,
+                        IsRequired = false,
+                        ColumnOrder = 1,
+                        Precision = 0,
+                        Scale = 0,
+                        Length = 0,
+                        IsPrimaryKey = true
+                    });
 
             column = orderTable.Columns.FirstOrDefault(c => c.ColumnName == "CustomerId");
-            Assert.IsFalse(column.IsPrimaryKey, "The CustomerId is not a primary key in the Order table.");
-            Assert.AreEqual(
-                DomainDataType.Int32,
-                column.DomainDataType,
-                "The CustomerId should be a int32 in the Order table.");
+            this.BaseSourceTypeUnitTest_Columns(
+                column,
+                new Column
+                    {
+                        ColumnName = "CustomerId",
+                        DomainDataType = DomainDataType.Int32,
+                        IsRequired = false,
+                        ColumnOrder = 2,
+                        Precision = 0,
+                        Scale = 0,
+                        Length = 0,
+                        IsPrimaryKey = false
+                    });
 
             column = orderTable.Columns.FirstOrDefault(c => c.ColumnName == "OrderDate");
-            Assert.IsFalse(column.IsPrimaryKey, "The OrderDate is not a primary key in the Order table.");
-            Assert.AreEqual(
-                DomainDataType.DateTime,
-                column.DomainDataType,
-                "The OrderDate should be a Date in the Order table.");
+            this.BaseSourceTypeUnitTest_Columns(
+                column,
+                new Column
+                    {
+                        ColumnName = "OrderDate",
+                        DomainDataType = DomainDataType.DateTime,
+                        IsRequired = false,
+                        ColumnOrder = 3,
+                        Precision = 0,
+                        Scale = 0,
+                        Length = 0,
+                        IsPrimaryKey = false
+                    });
 
             column = orderTable.Columns.FirstOrDefault(c => c.ColumnName == "DeliveryDate");
-            Assert.IsFalse(column.IsPrimaryKey, "The DeliveryDate is not a primary key in the Order table.");
-            Assert.AreEqual(
-                DomainDataType.DateTime,
-                column.DomainDataType,
-                "The DeliveryDate should be a Date in the Order table.");
+            this.BaseSourceTypeUnitTest_Columns(
+                column,
+                new Column
+                    {
+                        ColumnName = "DeliveryDate",
+                        DomainDataType = DomainDataType.DateTime,
+                        IsRequired = false,
+                        ColumnOrder = 4,
+                        Precision = 0,
+                        Scale = 0,
+                        Length = 0,
+                        IsPrimaryKey = false
+                    });
 
             column = orderTable.Columns.FirstOrDefault(c => c.ColumnName == "ShippingName");
-            Assert.IsFalse(column.IsPrimaryKey, "The ShippingName is not a primary key in the Order table.");
-            Assert.AreEqual(
-                DomainDataType.String,
-                column.DomainDataType,
-                "The ShippingName should be a string in the Order table.");
-            Assert.AreEqual(50, column.Length, "The ShippingName should have a length of 50 in the Order table.");
+            this.BaseSourceTypeUnitTest_Columns(
+                column,
+                new Column
+                    {
+                        ColumnName = "ShippingName",
+                        DomainDataType = DomainDataType.String,
+                        IsRequired = false,
+                        ColumnOrder = 5,
+                        Precision = 0,
+                        Scale = 0,
+                        Length = 50,
+                        IsPrimaryKey = false
+                    });
 
             column = orderTable.Columns.FirstOrDefault(c => c.ColumnName == "ShippingAddress");
-            Assert.IsFalse(column.IsPrimaryKey, "The ShippingAddress is not a primary key in the Order table.");
-            Assert.AreEqual(
-                DomainDataType.String,
-                column.DomainDataType,
-                "The ShippingAddress should be a string in the Order table.");
-            Assert.AreEqual(50, column.Length, "The ShippingAddress should have a length of 50 in the Order table.");
+            this.BaseSourceTypeUnitTest_Columns(
+                column,
+                new Column
+                    {
+                        ColumnName = "ShippingAddress",
+                        DomainDataType = DomainDataType.String,
+                        IsRequired = false,
+                        ColumnOrder = 6,
+                        Precision = 0,
+                        Scale = 0,
+                        Length = 50,
+                        IsPrimaryKey = false
+                    });
 
             column = orderTable.Columns.FirstOrDefault(c => c.ColumnName == "ShippingCity");
-            Assert.IsFalse(column.IsPrimaryKey, "The ShippingCity is not a primary key in the Order table.");
-            Assert.AreEqual(
-                DomainDataType.String,
-                column.DomainDataType,
-                "The ShippingCity should be a string in the Order table.");
-            Assert.AreEqual(50, column.Length, "The ShippingCity should have a length of 50 in the Order table.");
+            this.BaseSourceTypeUnitTest_Columns(
+                column,
+                new Column
+                    {
+                        ColumnName = "ShippingCity",
+                        DomainDataType = DomainDataType.String,
+                        IsRequired = false,
+                        ColumnOrder = 7,
+                        Precision = 0,
+                        Scale = 0,
+                        Length = 50,
+                        IsPrimaryKey = false
+                    });
 
             column = orderTable.Columns.FirstOrDefault(c => c.ColumnName == "ShippingZip");
-            Assert.IsFalse(column.IsPrimaryKey, "The ShippingZip is not a primary key in the Order table.");
-            Assert.AreEqual(
-                DomainDataType.String,
-                column.DomainDataType,
-                "The ShippingZip should be a string in the Order table.");
-            Assert.AreEqual(50, column.Length, "The ShippingZip should have a length of 50 in the Order table.");
+            this.BaseSourceTypeUnitTest_Columns(
+                column,
+                new Column
+                    {
+                        ColumnName = "ShippingZip",
+                        DomainDataType = DomainDataType.String,
+                        IsRequired = false,
+                        ColumnOrder = 8,
+                        Precision = 0,
+                        Scale = 0,
+                        Length = 50,
+                        IsPrimaryKey = false
+                    });
         }
 
         /// <summary>
@@ -679,6 +932,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                 relationship.ForeignColumnName,
                 "The OrderDetails ForeignColumnName should be ProductId in the Product table.");
             Assert.AreEqual("Product", relationship.TableName, "The relationship table name should be Product");
+            Assert.AreEqual("FK_Software_Product", relationship.RelationshipName, "The relationship table name should be FK_Software_Product.");
         }
 
         /// <summary>
@@ -692,21 +946,37 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
         {
             Assert.IsNotNull(softwareTable, "The table should not be null");
             Assert.AreEqual(2, softwareTable.Columns.Count, "There should be 2 Columns in the Software table.");
-
+            
             Column column = softwareTable.Columns.FirstOrDefault(c => c.ColumnName == "ProductId");
-            Assert.IsTrue(column.IsPrimaryKey, "The ProductId should be a primary key in the Software table.");
-            Assert.AreEqual(
-                DomainDataType.Int32,
-                column.DomainDataType,
-                "The ProductId should be a int32 in the Software table.");
+            this.BaseSourceTypeUnitTest_Columns(
+                column,
+                new Column
+                    {
+                        ColumnName = "ProductId",
+                        DomainDataType = DomainDataType.Int32,
+                        IsRequired = false,
+                        ColumnOrder = 1,
+                        Precision = 0,
+                        Scale = 0,
+                        Length = 0,
+                        IsPrimaryKey = true
+                    });
 
             column = softwareTable.Columns.FirstOrDefault(c => c.ColumnName == "LicenseCode");
-            Assert.IsFalse(column.IsPrimaryKey, "The LicenseCode is not a primary key in the Software table.");
-            Assert.AreEqual(
-                DomainDataType.String,
-                column.DomainDataType,
-                "The LicenseCode should be a string in the Software table.");
-            Assert.AreEqual(200, column.Length, "The LicenseCode should be a string in the Software table.");
+            this.BaseSourceTypeUnitTest_Columns(
+                column,
+                new Column
+                    {
+                        ColumnName = "LicenseCode",
+                        DomainDataType = DomainDataType.String,
+                        IsRequired = false,
+                        ColumnOrder = 2,
+                        Precision = 0,
+                        Scale = 0,
+                        Length = 200,
+                        IsPrimaryKey = false
+                    });
+
         }
 
         /// <summary>
@@ -722,19 +992,34 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
             Assert.AreEqual(2, bookTable.Columns.Count, "There should be 2 Columns in the Product table.");
 
             Column column = bookTable.Columns.FirstOrDefault(c => c.ColumnName == "ProductId");
-            Assert.IsTrue(column.IsPrimaryKey, "The ProductId should be a primary key in the Product table.");
-            Assert.AreEqual(
-                DomainDataType.Int32,
-                column.DomainDataType,
-                "The ProductId should be a int32 in the Product table.");
+            this.BaseSourceTypeUnitTest_Columns(
+                column,
+                new Column
+                    {
+                        ColumnName = "ProductId",
+                        DomainDataType = DomainDataType.Int32,
+                        IsRequired = false,
+                        ColumnOrder = 1,
+                        Precision = 0,
+                        Scale = 0,
+                        Length = 0,
+                        IsPrimaryKey = true
+                    });
 
             column = bookTable.Columns.FirstOrDefault(c => c.ColumnName == "Publisher");
-            Assert.IsFalse(column.IsPrimaryKey, "The Publisher is not a primary key in the Product table.");
-            Assert.AreEqual(
-                DomainDataType.String,
-                column.DomainDataType,
-                "The Publisher should be a string in the Product table.");
-            Assert.AreEqual(200, column.Length, "The Publisher should have a length of 100 in the Product table.");
+            this.BaseSourceTypeUnitTest_Columns(
+                column,
+                new Column
+                    {
+                        ColumnName = "Publisher",
+                        DomainDataType = DomainDataType.String,
+                        IsRequired = false,
+                        ColumnOrder = 2,
+                        Precision = 0,
+                        Scale = 0,
+                        Length = 200,
+                        IsPrimaryKey = false
+                    });
         }
 
         /// <summary>
@@ -769,6 +1054,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                 relationship.ForeignColumnName,
                 "The Book ForeignColumnName should be ProductId in the Product table.");
             Assert.AreEqual("Product", relationship.TableName, "The relationship table name should be Product");
+            Assert.AreEqual("FK_Book_Product", relationship.RelationshipName, "The relationship table name should be FK_Book_Product.");
         }
 
         /// <summary>
@@ -784,44 +1070,79 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
             Assert.AreEqual(6, orderDetailsTable.Columns.Count, "There should be 6 Columns in the Product table.");
 
             Column column = orderDetailsTable.Columns.FirstOrDefault(c => c.ColumnName == "OrderDetailsId");
-            Assert.IsTrue(column.IsPrimaryKey, "The OrderDetailsId should be a primary key in the OrderDetails table.");
-            Assert.AreEqual(
-                DomainDataType.Int32,
-                column.DomainDataType,
-                "The OrderDetailsId should be a int32 in the Product table.");
+            this.BaseSourceTypeUnitTest_Columns(
+                column,
+                new Column
+                    {
+                        ColumnName = "OrderDetailsId",
+                        DomainDataType = DomainDataType.Int32,
+                        IsRequired = false,
+                        ColumnOrder = 1,
+                        Precision = 0,
+                        Scale = 0,
+                        Length = 0,
+                        IsPrimaryKey = true
+                    });
 
             column = orderDetailsTable.Columns.FirstOrDefault(c => c.ColumnName == "ProductId");
-            Assert.IsFalse(column.IsPrimaryKey, "The ProductId is not a primary key in the OrderDetails table.");
-            Assert.AreEqual(
-                DomainDataType.Int32,
-                column.DomainDataType,
-                "The ProductId should be a string in the OrderDetails table.");
+            this.BaseSourceTypeUnitTest_Columns(
+                column,
+                new Column
+                    {
+                        ColumnName = "ProductId",
+                        DomainDataType = DomainDataType.Int32,
+                        IsRequired = false,
+                        ColumnOrder = 3,
+                        Precision = 0,
+                        Scale = 0,
+                        Length = 0,
+                        IsPrimaryKey = false
+                    });
 
             column = orderDetailsTable.Columns.FirstOrDefault(c => c.ColumnName == "UnitPrice");
-            Assert.IsFalse(column.IsPrimaryKey, "The UnitPrice is not a primary key in the OrderDetails table.");
-            Assert.AreEqual(
-                DomainDataType.Decimal,
-                column.DomainDataType,
-                "The ProductId should be a decimal in the OrderDetails table.");
-            Assert.AreEqual(
-                19,
-                column.Precision,
-                "The UnitPrice should have a precision of 19 in the OrderDetails table.");
-            Assert.AreEqual(4, column.Scale, "The UnitPrice should have a scale of 4 in the OrderDetails table.");
+            this.BaseSourceTypeUnitTest_Columns(
+                column,
+                new Column
+                    {
+                        ColumnName = "UnitPrice",
+                        DomainDataType = DomainDataType.Decimal,
+                        IsRequired = false,
+                        ColumnOrder = 4,
+                        Precision = 19,
+                        Scale = 4,
+                        Length = 0,
+                        IsPrimaryKey = false
+                    });
 
             column = orderDetailsTable.Columns.FirstOrDefault(c => c.ColumnName == "Amount");
-            Assert.IsFalse(column.IsPrimaryKey, "The Amount is not a primary key in the OrderDetails table.");
-            Assert.AreEqual(
-                DomainDataType.Int16,
-                column.DomainDataType,
-                "The Amount should be a int16 in the OrderDetails table.");
+            this.BaseSourceTypeUnitTest_Columns(
+                column,
+                new Column
+                    {
+                        ColumnName = "Amount",
+                        DomainDataType = DomainDataType.Int16,
+                        IsRequired = false,
+                        ColumnOrder = 5,
+                        Precision = 0,
+                        Scale = 0,
+                        Length = 0,
+                        IsPrimaryKey = false
+                    });
 
             column = orderDetailsTable.Columns.FirstOrDefault(c => c.ColumnName == "Discount");
-            Assert.IsFalse(column.IsPrimaryKey, "The Discount is not a primary key in the OrderDetails table.");
-            Assert.AreEqual(
-                DomainDataType.Single,
-                column.DomainDataType,
-                "The Discount should be a single in the OrderDetails table.");
+            this.BaseSourceTypeUnitTest_Columns(
+                column,
+                new Column
+                    {
+                        ColumnName = "Discount",
+                        DomainDataType = DomainDataType.Single,
+                        IsRequired = false,
+                        ColumnOrder = 6,
+                        Precision = 0,
+                        Scale = 0,
+                        Length = 0,
+                        IsPrimaryKey = false
+                    });
         }
 
         /// <summary>
@@ -854,6 +1175,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                 relationship.ForeignColumnName,
                 "The Book ForeignColumnName should be ProductId in the Product table.");
             Assert.AreEqual("Book", relationship.TableName, "The relationship table name should be Book.");
+            Assert.AreEqual("FK_Book_Product", relationship.RelationshipName, "The relationship table name should be FK_Book_Product.");
 
             relationship = productTable.RelationShips.FirstOrDefault(r => r.TableName == "OrderDetails");
             Assert.AreEqual(
@@ -873,6 +1195,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                 "OrderDetails",
                 relationship.TableName,
                 "The relationship table name should be OrderDetails.");
+            Assert.AreEqual("FK_OrderDetails_Product", relationship.RelationshipName, "The relationship table name should be FK_OrderDetails_Product.");
 
             relationship = productTable.RelationShips.FirstOrDefault(r => r.TableName == "Software");
             Assert.AreEqual(
@@ -889,6 +1212,29 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                 relationship.ForeignColumnName,
                 "The ProductId ForeignColumnName should be ProductId in the Product table.");
             Assert.AreEqual("Software", relationship.TableName, "The relationship table name should be Software.");
+            Assert.AreEqual("FK_Software_Product", relationship.RelationshipName, "The relationship table name should be FK_Software_Product.");
+        }
+
+        /// <summary>
+        /// The base source type unit test_ columns.
+        /// </summary>
+        /// <param name="column">
+        /// The column.
+        /// </param>
+        /// <param name="expectedColumn">
+        /// The expected column.
+        /// </param>
+        [TestMethod]
+        public void BaseSourceTypeUnitTest_Columns(Column column, Column expectedColumn)
+        {
+            Assert.AreEqual(expectedColumn.ColumnName, column.ColumnName, $"Invalid column name");
+            Assert.AreEqual(expectedColumn.DomainDataType, column.DomainDataType, $"Invalid column DomainDataType");
+            Assert.AreEqual(expectedColumn.IsRequired, column.IsRequired, $"Invalid column IsRequired Value");
+            Assert.AreEqual(expectedColumn.ColumnOrder, column.ColumnOrder, $"Invalid column ColumnOrder");
+            Assert.AreEqual(expectedColumn.Precision, column.Precision, $"Invalid column Precision");
+            Assert.AreEqual(expectedColumn.Scale, column.Scale, $"Invalid column Scale");
+            Assert.AreEqual(expectedColumn.Length, column.Length, $"Invalid column Length");
+            Assert.AreEqual(expectedColumn.IsPrimaryKey, column.IsPrimaryKey, $"Invalid column IsPrimaryKey");
         }
 
         /// <summary>
@@ -904,49 +1250,80 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
             Assert.AreEqual(6, productTable.Columns.Count, "There should be 6 Columns in the Product table.");
 
             Column column = productTable.Columns.FirstOrDefault(c => c.ColumnName == "ProductId");
-            Assert.IsTrue(column.IsPrimaryKey, "The ProductId should be a primary key in the Product table.");
-            Assert.AreEqual(
-                DomainDataType.Int32,
-                column.DomainDataType,
-                "The ProductId should be a int32 in the Product table.");
+            this.BaseSourceTypeUnitTest_Columns(
+                column,
+                new Column
+                {
+                    ColumnName = "ProductId",
+                    DomainDataType = DomainDataType.Int32,
+                    IsRequired = false,
+                    ColumnOrder = 1,
+                    Precision = 0,
+                    Scale = 0,
+                    Length = 0,
+                    IsPrimaryKey = true
+                });
 
             column = productTable.Columns.FirstOrDefault(c => c.ColumnName == "ProductDescription");
-            Assert.IsFalse(column.IsPrimaryKey, "The ProductDescription is not a primary key in the Product table.");
-            Assert.AreEqual(
-                DomainDataType.String,
-                column.DomainDataType,
-                "The ProductDescription should be a string in the Product table.");
-            Assert.AreEqual(
-                100,
-                column.Length,
-                "The ProductDescription should have a length of 100 in the Product table.");
+            this.BaseSourceTypeUnitTest_Columns(
+                  column,
+                  new Column
+                  {
+                      ColumnName = "ProductDescription",
+                      DomainDataType = DomainDataType.String,
+                      IsRequired = false,
+                      ColumnOrder = 2,
+                      Precision = 0,
+                      Scale = 0,
+                      Length = 100,
+                      IsPrimaryKey = false
+                  });
 
             column = productTable.Columns.FirstOrDefault(c => c.ColumnName == "UnitPrice");
-            Assert.IsFalse(column.IsPrimaryKey, "The UnitPrice is not a primary key in the Product table.");
-            Assert.AreEqual(
-                DomainDataType.Decimal,
-                column.DomainDataType,
-                "The ProductId should be a decimal in the Product table.");
-            Assert.AreEqual(
-                19,
-                column.Precision,
-                "The UnitPrecision should have a precision of 19 in the Product table.");
-            Assert.AreEqual(4, column.Scale, "The UnitPrecision should have a scale of 4 in the Product table.");
+            this.BaseSourceTypeUnitTest_Columns(
+                column,
+                new Column
+                    {
+                        ColumnName = "UnitPrice",
+                        DomainDataType = DomainDataType.Decimal,
+                        IsRequired = false,
+                        ColumnOrder = 3,
+                        Precision = 19,
+                        Scale = 4,
+                        Length = 0,
+                        IsPrimaryKey = false
+                    });
 
             column = productTable.Columns.FirstOrDefault(c => c.ColumnName == "Publisher");
-            Assert.IsFalse(column.IsPrimaryKey, "The Publisher is not a primary key in the Product table.");
-            Assert.AreEqual(
-                DomainDataType.String,
-                column.DomainDataType,
-                "The Publisher should be a string in the Product table.");
-            Assert.AreEqual(200, column.Length, "The Publisher should have a length of 200 in the Product table.");
+            this.BaseSourceTypeUnitTest_Columns(
+                column,
+                new Column
+                    {
+                        ColumnName = "Publisher",
+                        DomainDataType = DomainDataType.String,
+                        IsRequired = false,
+                        ColumnOrder = 5,
+                        Precision = 0,
+                        Scale = 0,
+                        Length = 200,
+                        IsPrimaryKey = false
+                    });
 
             column = productTable.Columns.FirstOrDefault(c => c.ColumnName == "AmountInStock");
-            Assert.IsFalse(column.IsPrimaryKey, "The AmountInStock is not a primary key in the Product table.");
-            Assert.AreEqual(
-                DomainDataType.Int16,
-                column.DomainDataType,
-                "The AmountInStock should be a integer in the Product table.");
+
+            this.BaseSourceTypeUnitTest_Columns(
+                column,
+                new Column
+                    {
+                        ColumnName = "AmountInStock",
+                        DomainDataType = DomainDataType.Int16,
+                        IsRequired = false,
+                        ColumnOrder = 6,
+                        Precision = 0,
+                        Scale = 0,
+                        Length = 0,
+                        IsPrimaryKey = false
+                    });
         }
 
         /// <summary>
