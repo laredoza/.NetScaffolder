@@ -101,7 +101,6 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         private void btnSave_Click(object sender, EventArgs e)
         {
             this.domainMenuUserControl1.Save();
-            this.Close();
         }
 
         /// <summary>

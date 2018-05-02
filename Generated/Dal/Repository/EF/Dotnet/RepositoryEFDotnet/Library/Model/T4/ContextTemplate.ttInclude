@@ -28,16 +28,51 @@ namespace <#= ContextData.TransformFullnamespace(DataType.BaseNamespace) #>
 {
 	public partial class <#= ContextData.ContextName #> <#= ContextData.TransformInheritFrom #>
 	{	
+		#region CTOR
+		
+		public <#= ContextData.ContextName #>(string connectionOrName) : base($"name={connectionOrName}") 
+		{
+<#+ if(ContextData.CreateDb){ #>
+			Database.SetInitializer(new CreateDatabaseIfNotExists<<#= ContextData.ContextName #>>());
+<#+ } #>
+<#+ if(ContextData.LoggingEnabled){ #>
+			Database.Log = this.Log;
+<#+ } #>
+		}
+		
+		public <#= ContextData.ContextName #>() 
+<#+ if(!string.IsNullOrEmpty(ContextData.CustomConnectionName)){ #>
+			: base("name=<#= ContextData.CustomConnectionName #>") 
+<#+ } #>
+		{
+<#+ if(ContextData.CreateDb){ #>
+			Database.SetInitializer(new CreateDatabaseIfNotExists<<#= ContextData.ContextName #>>());
+<#+ } #>
+<#+ if(ContextData.LoggingEnabled){ #>
+			Database.Log = this.Log;
+<#+ } #>
+		}
+		
+		#endregion
+		
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+			
+			#region Tables
+			
+<#+ foreach(var table in ContextData.Models){ #>
+			modelBuilder.Entity<<#=DataType.TransformModelName(table.TableName) #>>().ToTable("<#=table.TableName #>", "<#=table.SchemaName #>");
+<#+ } #>
+
+			#endregion
 			
 			#region Primary keys
 			
 <#+ foreach(var table in ContextData.Models){ #>
 <#+ if(table.PrimaryKeyCount == 1){ var pk = table.Columns.First(o => o.IsPrimaryKey);#>
 			modelBuilder.Entity<<#=DataType.TransformModelName(table.TableName) #>>().HasKey(t => t.<#= pk.ColumnName #>);
-			modelBuilder.Entity<<#=DataType.TransformModelName(table.TableName) #>>().Property(t => t.<#= pk.ColumnName #>).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+			modelBuilder.Entity<<#=DataType.TransformModelName(table.TableName) #>>().Property(t => t.<#= pk.ColumnName #>).HasDatabaseGeneratedOption(<#=table.TransformDatabaseGeneratedKeyType #>);
 <#+ } #>
 <#+ if(table.PrimaryKeyCount > 1){ #>
 <#+ 
@@ -61,8 +96,23 @@ pks.TrimEnd(',');
 			#region Relationships
 			
 <#+ foreach(var table in ContextData.Models){ #>
-<#+ foreach(var col in table.DistinctChildRelationships){ #>
-			modelBuilder.Entity<<#=DataType.TransformModelName(table.TableName) #>>().HasRequired(t => t.<#= col.TableName #>).WithMany(t => t.<#= col.TableName #>);
+<#+ foreach(var rel in table.DistinctChildRelationships){ #>
+			modelBuilder.Entity<<#=DataType.TransformModelName(table.TableName) #>>().HasMany(t => t.<#= rel.TableNamePlural #>).WithRequired(t => (<#=DataType.TransformModelName(table.TableName) #>)t.<#= table.TableName #>);
+<#+ } #>
+<#+ } #>
+			
+			#endregion
+			
+			#region Constraints
+			
+<#+ foreach(var table in ContextData.Models){ #>
+<#+ foreach(var col in table.Columns){ #>
+<#+ if(col.Length > 0){ #>
+			modelBuilder.Entity<<#=DataType.TransformModelName(table.TableName) #>>().Property(t => t.<#= col.ColumnName #>).HasMaxLength(<#= col.Length #>);
+<#+ } #>
+<#+ if(col.IsRequired){ #>
+			modelBuilder.Entity<<#=DataType.TransformModelName(table.TableName) #>>().Property(t => t.<#= col.ColumnName #>).IsRequired();
+<#+ } #>
 <#+ } #>
 <#+ } #>
 			

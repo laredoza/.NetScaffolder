@@ -189,6 +189,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
             Models = new List<Table>();
             OutputFolder = "Context";
             ContextName = "NewContext";
+            CustomConnectionName = string.Empty;
             Enabled = true;
             Namespace = "Context";
             LoggingEnabled = false;
@@ -197,20 +198,16 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
             GenerateInterface = false;
             CreateDb = false;
             OutputPath = string.Empty;
-            ConstructionOptions = string.Empty;
         }
 
         #region Properties
 
         /// <summary>
-        ///     Gets or sets the construction options.
-        /// </summary>
-        public string ConstructionOptions { get; set; }
-
-        /// <summary>
         ///     Gets or sets the context name.
         /// </summary>
         public string ContextName { get; set; }
+
+        public string CustomConnectionName { get; set; }
 
         public string OutputPath { get; set; }
 

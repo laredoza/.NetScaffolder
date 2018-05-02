@@ -17,7 +17,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
     using System.Windows.Forms;
 
     using DatabaseSchemaReader;
-
+    using DatabaseSchemaReader.DataSchema;
     using DotNetScaffolder.Components.Common.Contract;
     using DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.Oracle;
     using DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.SourceOptions;
@@ -166,6 +166,11 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
                         IsPrimaryKey = column.IsPrimaryKey
                     };
 
+                    if(column.IsPrimaryKey)
+                    {
+                        newTable.DatabaseGeneratedKeyType = MapDatabaseGeneratedKey(column);
+                    }
+
                     newTable.Columns.Add(newColumn);
                 }
 
@@ -205,6 +210,20 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
             this.Fix(result);
             Logger.Trace("Completed Import()");
             return result;
+        }
+
+        public DatabaseGeneratedKeyType MapDatabaseGeneratedKey(DatabaseColumn computedDefinition)
+        {
+            if (computedDefinition.IsAutoNumber)
+            {
+                return DatabaseGeneratedKeyType.Identity;
+            }
+            if (computedDefinition.IsComputed)
+            {
+                return DatabaseGeneratedKeyType.Computed;
+            }
+
+            return DatabaseGeneratedKeyType.None;
         }
 
         /// <summary>

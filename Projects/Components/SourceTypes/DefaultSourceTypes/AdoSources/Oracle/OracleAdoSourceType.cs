@@ -168,6 +168,11 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
                         IsPrimaryKey = column.IsPrimaryKey
                     };
 
+                    if(column.IsPrimaryKey)
+                    {
+                        newTable.DatabaseGeneratedKeyType = MapDatabaseGeneratedKey(column.ComputedDefinition);
+                    }
+
                     newTable.Columns.Add(newColumn);
                 }
 
@@ -207,6 +212,25 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
             this.Fix(result);
             Logger.Trace("Completed Import()");
             return result;
+        }
+
+        public DatabaseGeneratedKeyType MapDatabaseGeneratedKey(string computedDefinition)
+        {
+            if (string.IsNullOrEmpty(computedDefinition))
+            {
+                return DatabaseGeneratedKeyType.None;
+            }
+
+            if (computedDefinition.Equals("Identity", StringComparison.InvariantCultureIgnoreCase))
+            {
+                return DatabaseGeneratedKeyType.Identity;
+            }
+            if (computedDefinition.Equals("Computed", StringComparison.InvariantCultureIgnoreCase))
+            {
+                return DatabaseGeneratedKeyType.Computed;
+            }
+
+            return DatabaseGeneratedKeyType.None;
         }
 
         /// <summary>

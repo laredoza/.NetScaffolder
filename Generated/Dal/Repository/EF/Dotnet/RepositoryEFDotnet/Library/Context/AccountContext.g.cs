@@ -27,17 +27,59 @@ namespace Banking.Models.Accounts
 {
 	public partial class AccountContext : BaseContext
 	{	
+		#region CTOR
+		
+		public AccountContext(string connectionOrName) : base($"name={connectionOrName}") 
+		{
+			Database.SetInitializer(new CreateDatabaseIfNotExists<AccountContext>());
+		}
+		
+		public AccountContext() 
+		{
+			Database.SetInitializer(new CreateDatabaseIfNotExists<AccountContext>());
+		}
+		
+		#endregion
+		
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 			
+			#region Tables
+			
+			modelBuilder.Entity<BankAccount>().ToTable("BankAccount", "dbo");
+			modelBuilder.Entity<BankTransfers>().ToTable("BankTransfers", "dbo");
+
+			#endregion
+			
 			#region Primary keys
 			
+			modelBuilder.Entity<BankAccount>().HasKey(t => t.BankAccountId);
+			modelBuilder.Entity<BankAccount>().Property(t => t.BankAccountId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+			modelBuilder.Entity<BankTransfers>().HasKey(t => t.BankTransferId);
+			modelBuilder.Entity<BankTransfers>().Property(t => t.BankTransferId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
 			#endregion
 			
 			#region Relationships
 			
+			//modelBuilder.Entity<BankAccount>().HasMany(t => t.BankTransfers).WithRequired(t=> (BankAccount)t.BankAccount);
+			
+			#endregion
+			
+			#region Constraints
+			
+			modelBuilder.Entity<BankAccount>().Property(t => t.BankAccountId).IsRequired();
+			modelBuilder.Entity<BankAccount>().Property(t => t.BankAccountNumber).HasMaxLength(10);
+			modelBuilder.Entity<BankAccount>().Property(t => t.BankAccountNumber).IsRequired();
+			modelBuilder.Entity<BankAccount>().Property(t => t.Balance).IsRequired();
+			modelBuilder.Entity<BankAccount>().Property(t => t.CustomerId).IsRequired();
+			modelBuilder.Entity<BankAccount>().Property(t => t.Locked).IsRequired();
+			modelBuilder.Entity<BankTransfers>().Property(t => t.BankTransferId).IsRequired();
+			modelBuilder.Entity<BankTransfers>().Property(t => t.FromBankAccountId).IsRequired();
+			modelBuilder.Entity<BankTransfers>().Property(t => t.ToBankAccountId).IsRequired();
+			modelBuilder.Entity<BankTransfers>().Property(t => t.Amount).IsRequired();
+			modelBuilder.Entity<BankTransfers>().Property(t => t.TransferDate).IsRequired();
 			
 			#endregion
         }
