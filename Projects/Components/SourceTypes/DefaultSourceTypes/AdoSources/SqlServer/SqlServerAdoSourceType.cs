@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="GenericAdoSourceType.cs" company="DotnetScaffolder">
+// <copyright file="SqlServerAdoSourceType.cs" company="DotnetScaffolder">
 //   MIT
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
@@ -18,8 +18,8 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
 
     using DatabaseSchemaReader;
     using DatabaseSchemaReader.DataSchema;
+
     using DotNetScaffolder.Components.Common.Contract;
-    using DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.Oracle;
     using DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.SourceOptions;
     using DotNetScaffolder.Core.Common.Serializer;
     using DotNetScaffolder.Mapping.MetaData.Enum;
@@ -120,6 +120,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
                     modelTable.RelationShips.Remove(relationship);
                 }
             }
+
             Logger.Trace("Completed Fix()");
         }
 
@@ -155,20 +156,21 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
                 foreach (var column in table.Columns)
                 {
                     newColumn = new Column
-                    {
-                        ColumnName = column.Name,
-                        DomainDataType = this.MapDatabaseType(column.DataType.TypeName, column.DataType),
-                        IsRequired = column.IsPrimaryKey,
-                        ColumnOrder = table.Columns.IndexOf(column) + 1,
-                        Precision = column.Precision.HasValue ? column.Precision.Value : 0,
-                        Scale = column.Scale.HasValue ? column.Scale.Value : 0,
-                        Length = column.Length.HasValue ? column.Length.Value : 0,
-                        IsPrimaryKey = column.IsPrimaryKey
-                    };
+                                    {
+                                        ColumnName = column.Name,
+                                        DomainDataType =
+                                            this.MapDatabaseType(column.DataType.TypeName, column.DataType),
+                                        IsRequired = column.IsPrimaryKey,
+                                        ColumnOrder = table.Columns.IndexOf(column) + 1,
+                                        Precision = column.Precision.HasValue ? column.Precision.Value : 0,
+                                        Scale = column.Scale.HasValue ? column.Scale.Value : 0,
+                                        Length = column.Length.HasValue ? column.Length.Value : 0,
+                                        IsPrimaryKey = column.IsPrimaryKey
+                                    };
 
-                    if(column.IsPrimaryKey)
+                    if (column.IsPrimaryKey)
                     {
-                        newTable.DatabaseGeneratedKeyType = MapDatabaseGeneratedKey(column);
+                        newTable.DatabaseGeneratedKeyType = this.MapDatabaseGeneratedKey(column);
                     }
 
                     newTable.Columns.Add(newColumn);
@@ -178,13 +180,13 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
                 {
                     newTable.RelationShips.Add(
                         new Relationship
-                        {
-                            TableName = foreignKey.RefersToTable,
-                            ColumnName = foreignKey.Columns[0],
-                            ForeignColumnName = foreignKey.ReferencedColumns(schema).ToList()[0],
-                            DependencyRelationShip = RelationshipType.ForeignKey,
-                            RelationshipName = foreignKey.Name
-                        });
+                            {
+                                TableName = foreignKey.RefersToTable,
+                                ColumnName = foreignKey.Columns[0],
+                                ForeignColumnName = foreignKey.ReferencedColumns(schema).ToList()[0],
+                                DependencyRelationShip = RelationshipType.ForeignKey,
+                                RelationshipName = foreignKey.Name
+                            });
                 }
 
                 foreach (var foreignKeyChildren in table.ForeignKeyChildren)
@@ -195,13 +197,13 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
                         {
                             newTable.RelationShips.Add(
                                 new Relationship
-                                {
-                                    TableName = foreignKey.TableName,
-                                    ColumnName = foreignKey.ReferencedColumns(schema).ToList()[0],
-                                    ForeignColumnName = foreignKey.Columns[0],
-                                    DependencyRelationShip = RelationshipType.ForeignKeyChild,
-                                    RelationshipName = foreignKey.Name
-                                });
+                                    {
+                                        TableName = foreignKey.TableName,
+                                        ColumnName = foreignKey.ReferencedColumns(schema).ToList()[0],
+                                        ForeignColumnName = foreignKey.Columns[0],
+                                        DependencyRelationShip = RelationshipType.ForeignKeyChild,
+                                        RelationshipName = foreignKey.Name
+                                    });
                         }
                     }
                 }
@@ -210,20 +212,6 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
             this.Fix(result);
             Logger.Trace("Completed Import()");
             return result;
-        }
-
-        public DatabaseGeneratedKeyType MapDatabaseGeneratedKey(DatabaseColumn computedDefinition)
-        {
-            if (computedDefinition.IsAutoNumber)
-            {
-                return DatabaseGeneratedKeyType.Identity;
-            }
-            if (computedDefinition.IsComputed)
-            {
-                return DatabaseGeneratedKeyType.Computed;
-            }
-
-            return DatabaseGeneratedKeyType.None;
         }
 
         /// <summary>
@@ -254,11 +242,11 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
             {
                 Logger.Trace("Path Doesn't Exist");
                 result = new AdoSourceOptions
-                {
-                    ProviderName = "System.Data.SqlClient",
-                    ConnectionString =
+                             {
+                                 ProviderName = "System.Data.SqlClient",
+                                 ConnectionString =
                                      @"Data Source=.\SQLEXPRESS;Integrated Security=true;Initial Catalog=Banking"
-                };
+                             };
             }
 
             Logger.Trace("Completed Import()");
@@ -267,12 +255,37 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
         }
 
         /// <summary>
+        /// The map database generated key.
+        /// </summary>
+        /// <param name="computedDefinition">
+        /// The computed definition.
+        /// </param>
+        /// <returns>
+        /// The <see cref="DatabaseGeneratedKeyType"/>.
+        /// </returns>
+        public DatabaseGeneratedKeyType MapDatabaseGeneratedKey(DatabaseColumn computedDefinition)
+        {
+            if (computedDefinition.IsAutoNumber)
+            {
+                return DatabaseGeneratedKeyType.Identity;
+            }
+
+            if (computedDefinition.IsComputed)
+            {
+                return DatabaseGeneratedKeyType.Computed;
+            }
+
+            return DatabaseGeneratedKeyType.None;
+        }
+
+        /// <summary>
         /// Map database type to c# type.
         /// </summary>
         /// <param name="databaseType">
-        ///     The database type.
+        /// The database type.
         /// </param>
-        /// <param name="extraInfo"></param>
+        /// <param name="extraInfo">
+        /// </param>
         /// <returns>
         /// The <see cref="DomainDataType"/>.
         /// </returns>
@@ -428,8 +441,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
             bool result = false;
 
             AdoSourceOptions adoOptions = parameters as AdoSourceOptions;
-            using (SqlConnection connection =
-                new SqlConnection(adoOptions.ConnectionString))
+            using (SqlConnection connection = new SqlConnection(adoOptions.ConnectionString))
             {
                 // Open the connection in a try/catch block. 
                 // Create and execute the DataReader, writing the result
