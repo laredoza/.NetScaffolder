@@ -30,23 +30,16 @@ namespace <#= DataType.FullNamespace #>
 	/// <summary>
 	/// The <#= DataType.RepoName #>Repository class responsible for database functions in the <#= DataType.ModelName #> table
 	/// </summary>
-	public partial class <#= DataType.RepoName #>Repository : I<#= DataType.RepoName #>Repository
-	{
-		#region Private
-		
-		private IUnitOfWork UnitOfWork;
-		
-		#endregion
-		
+	public partial class <#= DataType.RepoName #>Repository : UowRepository<<#= DataType.RepoName #>> , I<#= DataType.RepoName #>Repository
+	{		
 		#region CTOR
 		
 		/// <summary>
         /// The constructor for <#= DataType.RepoName #>Repository
         /// </summary>
         /// <param name="uow">IUnitOfWork</param>
-		public <#= DataType.RepoName #>Repository(IUnitOfWork uow)
+		public <#= DataType.RepoName #>Repository(IUnitOfWork uow) : base(uow)
 		{
-			this.UnitOfWork = uow;
 		}
 		
 		#endregion
@@ -96,7 +89,7 @@ namespace <#= DataType.FullNamespace #>
         /// <returns><#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>></returns>
 		public <#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>> LoadAll()
 		{
-			return (<#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>>)this.UnitOfWork.LoadAll<<#= DataType.ModelName #>>();
+			return (<#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>>)this.UnitOfWork.GetAll<<#= DataType.ModelName #>>();
 		}
 		
 		#endregion

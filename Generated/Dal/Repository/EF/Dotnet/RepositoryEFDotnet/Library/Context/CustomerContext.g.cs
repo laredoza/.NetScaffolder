@@ -29,16 +29,14 @@ namespace Banking.Models.Customers
 	{	
 		#region CTOR
 		
-		public CustomerContext(string connectionOrName) : base($"name={connectionOrName}") 
+		public CustomerContext(string connectionOrName) 
+			: base($"name={connectionOrName}") 
 		{
-			Database.SetInitializer(new CreateDatabaseIfNotExists<CustomerContext>());
-			Database.Log = this.Log;
 		}
 		
-		public CustomerContext() 
+		public CustomerContext()
+			: base() 
 		{
-			Database.SetInitializer(new CreateDatabaseIfNotExists<CustomerContext>());
-			Database.Log = this.Log;
 		}
 		
 		#endregion
@@ -78,12 +76,18 @@ namespace Banking.Models.Customers
 
 			#endregion
 			
+			#region Ignore
+			
+			modelBuilder.Ignore<BankAccount>();
+
+			#endregion
+			
 			#region Relationships
 			
-			modelBuilder.Entity<Country>().HasMany(t => t.Customers).WithRequired(t => (Country)t.Country);
-			modelBuilder.Entity<Customer>().HasMany(t => t.BankAccounts).WithRequired(t => (Customer)t.Customer);
-			modelBuilder.Entity<Order>().HasMany(t => t.OrderDetails).WithRequired(t => (Order)t.Order);
-			modelBuilder.Entity<Product>().HasMany(t => t.Books).WithRequired(t => (Product)t.Product);
+			modelBuilder.Entity<Customer>().HasRequired<Country>(s => s.Country).WithMany(s => s.Customers).HasForeignKey(s => s.CountryId).WillCascadeOnDelete(false);
+			modelBuilder.Entity<BankAccount>().HasRequired<Customer>(s => s.Customer).WithMany(s => s.BankAccounts).HasForeignKey(s => s.CustomerId).WillCascadeOnDelete(false);
+			modelBuilder.Entity<OrderDetails>().HasRequired<Order>(s => s.Order).WithMany(s => s.OrderDetails).HasForeignKey(s => s.OrderId).WillCascadeOnDelete(false);
+			//modelBuilder.Entity<Book>().HasRequired<Product>(s => s.Product).WithMany(s => s.Books).HasForeignKey(s => s.ProductId).WillCascadeOnDelete(false);
 			
 			#endregion
 			
@@ -94,57 +98,34 @@ namespace Banking.Models.Customers
 			modelBuilder.Entity<Book>().Property(t => t.Publisher).IsRequired();
 			modelBuilder.Entity<Country>().Property(t => t.CountryId).IsRequired();
 			modelBuilder.Entity<Country>().Property(t => t.CountryName).HasMaxLength(100);
-			modelBuilder.Entity<Country>().Property(t => t.CountryName).IsRequired();
 			modelBuilder.Entity<Customer>().Property(t => t.CustomerId).IsRequired();
 			modelBuilder.Entity<Customer>().Property(t => t.CustomerCode).HasMaxLength(5);
 			modelBuilder.Entity<Customer>().Property(t => t.CustomerCode).IsRequired();
 			modelBuilder.Entity<Customer>().Property(t => t.CompanyName).HasMaxLength(50);
 			modelBuilder.Entity<Customer>().Property(t => t.CompanyName).IsRequired();
 			modelBuilder.Entity<Customer>().Property(t => t.ContactName).HasMaxLength(50);
-			modelBuilder.Entity<Customer>().Property(t => t.ContactName).IsRequired();
 			modelBuilder.Entity<Customer>().Property(t => t.ContactTitle).HasMaxLength(50);
-			modelBuilder.Entity<Customer>().Property(t => t.ContactTitle).IsRequired();
 			modelBuilder.Entity<Customer>().Property(t => t.Address).HasMaxLength(50);
-			modelBuilder.Entity<Customer>().Property(t => t.Address).IsRequired();
 			modelBuilder.Entity<Customer>().Property(t => t.City).HasMaxLength(20);
-			modelBuilder.Entity<Customer>().Property(t => t.City).IsRequired();
 			modelBuilder.Entity<Customer>().Property(t => t.PostalCode).HasMaxLength(10);
-			modelBuilder.Entity<Customer>().Property(t => t.PostalCode).IsRequired();
 			modelBuilder.Entity<Customer>().Property(t => t.Telephone).HasMaxLength(50);
-			modelBuilder.Entity<Customer>().Property(t => t.Telephone).IsRequired();
 			modelBuilder.Entity<Customer>().Property(t => t.Fax).HasMaxLength(50);
-			modelBuilder.Entity<Customer>().Property(t => t.Fax).IsRequired();
-			modelBuilder.Entity<Customer>().Property(t => t.CountryId).IsRequired();
 			modelBuilder.Entity<Customer>().Property(t => t.Photo).HasMaxLength(2147483647);
-			modelBuilder.Entity<Customer>().Property(t => t.Photo).IsRequired();
 			modelBuilder.Entity<Customer>().Property(t => t.IsEnabled).IsRequired();
 			modelBuilder.Entity<Order>().Property(t => t.OrderId).IsRequired();
-			modelBuilder.Entity<Order>().Property(t => t.CustomerId).IsRequired();
-			modelBuilder.Entity<Order>().Property(t => t.OrderDate).IsRequired();
-			modelBuilder.Entity<Order>().Property(t => t.DeliveryDate).IsRequired();
 			modelBuilder.Entity<Order>().Property(t => t.ShippingName).HasMaxLength(50);
-			modelBuilder.Entity<Order>().Property(t => t.ShippingName).IsRequired();
 			modelBuilder.Entity<Order>().Property(t => t.ShippingAddress).HasMaxLength(50);
-			modelBuilder.Entity<Order>().Property(t => t.ShippingAddress).IsRequired();
 			modelBuilder.Entity<Order>().Property(t => t.ShippingCity).HasMaxLength(50);
-			modelBuilder.Entity<Order>().Property(t => t.ShippingCity).IsRequired();
 			modelBuilder.Entity<Order>().Property(t => t.ShippingZip).HasMaxLength(50);
-			modelBuilder.Entity<Order>().Property(t => t.ShippingZip).IsRequired();
 			modelBuilder.Entity<OrderDetails>().Property(t => t.OrderDetailsId).IsRequired();
 			modelBuilder.Entity<OrderDetails>().Property(t => t.OrderId).IsRequired();
 			modelBuilder.Entity<OrderDetails>().Property(t => t.ProductId).IsRequired();
-			modelBuilder.Entity<OrderDetails>().Property(t => t.UnitPrice).IsRequired();
-			modelBuilder.Entity<OrderDetails>().Property(t => t.Amount).IsRequired();
-			modelBuilder.Entity<OrderDetails>().Property(t => t.Discount).IsRequired();
+			modelBuilder.Entity<OrderDetails>().Property(t => t.UnitPrice).HasPrecision(19, 4);
 			modelBuilder.Entity<Product>().Property(t => t.ProductId).IsRequired();
 			modelBuilder.Entity<Product>().Property(t => t.ProductDescription).HasMaxLength(100);
-			modelBuilder.Entity<Product>().Property(t => t.ProductDescription).IsRequired();
-			modelBuilder.Entity<Product>().Property(t => t.UnitPrice).IsRequired();
+			modelBuilder.Entity<Product>().Property(t => t.UnitPrice).HasPrecision(19, 4);
 			modelBuilder.Entity<Product>().Property(t => t.UnitAmount).HasMaxLength(50);
-			modelBuilder.Entity<Product>().Property(t => t.UnitAmount).IsRequired();
 			modelBuilder.Entity<Product>().Property(t => t.Publisher).HasMaxLength(200);
-			modelBuilder.Entity<Product>().Property(t => t.Publisher).IsRequired();
-			modelBuilder.Entity<Product>().Property(t => t.AmountInStock).IsRequired();
 			modelBuilder.Entity<Software>().Property(t => t.ProductId).IsRequired();
 			modelBuilder.Entity<Software>().Property(t => t.LicenseCode).HasMaxLength(200);
 			modelBuilder.Entity<Software>().Property(t => t.LicenseCode).IsRequired();
@@ -162,6 +143,19 @@ namespace Banking.Models.Customers
 		public virtual DbSet<Product> Product { get; set; }
 		public virtual DbSet<Software> Software { get; set; }
 
+		#endregion
+		
+		#region Setup
+        
+		protected override void SetupContext()
+        {
+            Configuration.LazyLoadingEnabled = false;
+            Configuration.ProxyCreationEnabled = false;
+            Configuration.AutoDetectChangesEnabled = false;
+			Database.SetInitializer(new CreateDatabaseIfNotExists<CustomerContext>());
+			Database.Log = this.Log;
+        }
+		
 		#endregion
 	}
 }

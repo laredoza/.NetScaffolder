@@ -29,23 +29,16 @@ namespace Banking.Models.Repository
 	/// <summary>
 	/// The ProductRepository class responsible for database functions in the Product table
 	/// </summary>
-	public partial class ProductRepository : IProductRepository
-	{
-		#region Private
-		
-		private IUnitOfWork UnitOfWork;
-		
-		#endregion
-		
+	public partial class ProductRepository : UowRepository<Product> , IProductRepository
+	{		
 		#region CTOR
 		
 		/// <summary>
         /// The constructor for ProductRepository
         /// </summary>
         /// <param name="uow">IUnitOfWork</param>
-		public ProductRepository(IUnitOfWork uow)
+		public ProductRepository(IUnitOfWork uow) : base(uow)
 		{
-			this.UnitOfWork = uow;
 		}
 		
 		#endregion
@@ -118,7 +111,7 @@ namespace Banking.Models.Repository
         /// <returns>IList<IProduct></returns>
 		public IList<IProduct> LoadAll()
 		{
-			return (IList<IProduct>)this.UnitOfWork.LoadAll<Product>();
+			return (IList<IProduct>)this.UnitOfWork.GetAll<Product>();
 		}
 		
 		#endregion

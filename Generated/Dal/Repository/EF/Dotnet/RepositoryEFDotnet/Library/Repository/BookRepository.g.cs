@@ -29,23 +29,16 @@ namespace Banking.Models.Repository
 	/// <summary>
 	/// The BookRepository class responsible for database functions in the Book table
 	/// </summary>
-	public partial class BookRepository : IBookRepository
-	{
-		#region Private
-		
-		private IUnitOfWork UnitOfWork;
-		
-		#endregion
-		
+	public partial class BookRepository : UowRepository<Book> , IBookRepository
+	{		
 		#region CTOR
 		
 		/// <summary>
         /// The constructor for BookRepository
         /// </summary>
         /// <param name="uow">IUnitOfWork</param>
-		public BookRepository(IUnitOfWork uow)
+		public BookRepository(IUnitOfWork uow) : base(uow)
 		{
-			this.UnitOfWork = uow;
 		}
 		
 		#endregion
@@ -78,7 +71,7 @@ namespace Banking.Models.Repository
         /// <returns>IList<IBook></returns>
 		public IList<IBook> LoadAll()
 		{
-			return (IList<IBook>)this.UnitOfWork.LoadAll<Book>();
+			return (IList<IBook>)this.UnitOfWork.GetAll<Book>();
 		}
 		
 		#endregion

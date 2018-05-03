@@ -30,7 +30,7 @@ namespace Banking.Models.Entity
 		
 		public BankAccount()
 		{
-			this.BankTransfers = new List <IBankTransfers>();
+			this.BankTransfers = new List <BankTransfers>();
 		}
 		
 		public BankAccount(IBankAccount item, bool deep = false)
@@ -42,7 +42,7 @@ namespace Banking.Models.Entity
 			this.Balance = item.Balance;
 			this.CustomerId = item.CustomerId;
 			this.Locked = item.Locked;
-			this.BankTransfers = new List <IBankTransfers>();
+			this.BankTransfers = new List <BankTransfers>();
 
 			if(deep)
 			{
@@ -71,13 +71,37 @@ namespace Banking.Models.Entity
 		
 		#region Child Relationships
 		
-		public IList<IBankTransfers> BankTransfers { get; set; }
+		IList<IBankTransfers> IBankAccount.BankTransfers 
+		{ 
+			get
+			{
+				return (IList<IBankTransfers>)this.BankTransfers;
+			}
+			set
+			{
+				this.BankTransfers = (IList<BankTransfers>)value;
+			}			
+		}
+		
+		public virtual IList<BankTransfers> BankTransfers { get; set; }
 		
 		#endregion
 		
 		#region Parent Relationships
 		
-		public ICustomer Customer { get; set; }
+		ICustomer IBankAccount.Customer 
+		{ 
+			get
+			{
+				return this.Customer;
+			}
+			set
+			{
+				this.Customer = (Customer)value;
+			}
+		}
+		
+		public virtual Customer Customer { get; set; }
 		
 		#endregion
 	}

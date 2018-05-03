@@ -29,23 +29,16 @@ namespace Banking.Models.Repository
 	/// <summary>
 	/// The SoftwareRepository class responsible for database functions in the Software table
 	/// </summary>
-	public partial class SoftwareRepository : ISoftwareRepository
-	{
-		#region Private
-		
-		private IUnitOfWork UnitOfWork;
-		
-		#endregion
-		
+	public partial class SoftwareRepository : UowRepository<Software> , ISoftwareRepository
+	{		
 		#region CTOR
 		
 		/// <summary>
         /// The constructor for SoftwareRepository
         /// </summary>
         /// <param name="uow">IUnitOfWork</param>
-		public SoftwareRepository(IUnitOfWork uow)
+		public SoftwareRepository(IUnitOfWork uow) : base(uow)
 		{
-			this.UnitOfWork = uow;
 		}
 		
 		#endregion
@@ -78,7 +71,7 @@ namespace Banking.Models.Repository
         /// <returns>IList<ISoftware></returns>
 		public IList<ISoftware> LoadAll()
 		{
-			return (IList<ISoftware>)this.UnitOfWork.LoadAll<Software>();
+			return (IList<ISoftware>)this.UnitOfWork.GetAll<Software>();
 		}
 		
 		#endregion

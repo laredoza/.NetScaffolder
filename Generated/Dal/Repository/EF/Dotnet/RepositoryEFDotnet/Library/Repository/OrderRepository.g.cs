@@ -29,23 +29,16 @@ namespace Banking.Models.Repository
 	/// <summary>
 	/// The OrderRepository class responsible for database functions in the Order table
 	/// </summary>
-	public partial class OrderRepository : IOrderRepository
-	{
-		#region Private
-		
-		private IUnitOfWork UnitOfWork;
-		
-		#endregion
-		
+	public partial class OrderRepository : UowRepository<Order> , IOrderRepository
+	{		
 		#region CTOR
 		
 		/// <summary>
         /// The constructor for OrderRepository
         /// </summary>
         /// <param name="uow">IUnitOfWork</param>
-		public OrderRepository(IUnitOfWork uow)
+		public OrderRepository(IUnitOfWork uow) : base(uow)
 		{
-			this.UnitOfWork = uow;
 		}
 		
 		#endregion
@@ -138,7 +131,7 @@ namespace Banking.Models.Repository
         /// <returns>IList<IOrder></returns>
 		public IList<IOrder> LoadAll()
 		{
-			return (IList<IOrder>)this.UnitOfWork.LoadAll<Order>();
+			return (IList<IOrder>)this.UnitOfWork.GetAll<Order>();
 		}
 		
 		#endregion

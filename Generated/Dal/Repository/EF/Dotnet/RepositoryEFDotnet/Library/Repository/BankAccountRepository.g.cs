@@ -29,23 +29,16 @@ namespace Banking.Models.Repository
 	/// <summary>
 	/// The BankAccountRepository class responsible for database functions in the BankAccount table
 	/// </summary>
-	public partial class BankAccountRepository : IBankAccountRepository
-	{
-		#region Private
-		
-		private IUnitOfWork UnitOfWork;
-		
-		#endregion
-		
+	public partial class BankAccountRepository : UowRepository<BankAccount> , IBankAccountRepository
+	{		
 		#region CTOR
 		
 		/// <summary>
         /// The constructor for BankAccountRepository
         /// </summary>
         /// <param name="uow">IUnitOfWork</param>
-		public BankAccountRepository(IUnitOfWork uow)
+		public BankAccountRepository(IUnitOfWork uow) : base(uow)
 		{
-			this.UnitOfWork = uow;
 		}
 		
 		#endregion
@@ -108,7 +101,7 @@ namespace Banking.Models.Repository
         /// <returns>IList<IBankAccount></returns>
 		public IList<IBankAccount> LoadAll()
 		{
-			return (IList<IBankAccount>)this.UnitOfWork.LoadAll<BankAccount>();
+			return (IList<IBankAccount>)this.UnitOfWork.GetAll<BankAccount>();
 		}
 		
 		#endregion

@@ -30,27 +30,19 @@ namespace <#= ContextData.TransformFullnamespace(DataType.BaseNamespace) #>
 	{	
 		#region CTOR
 		
-		public <#= ContextData.ContextName #>(string connectionOrName) : base($"name={connectionOrName}") 
+		public <#= ContextData.ContextName #>(string connectionOrName) 
+			: base($"name={connectionOrName}") 
 		{
-<#+ if(ContextData.CreateDb){ #>
-			Database.SetInitializer(new CreateDatabaseIfNotExists<<#= ContextData.ContextName #>>());
-<#+ } #>
-<#+ if(ContextData.LoggingEnabled){ #>
-			Database.Log = this.Log;
-<#+ } #>
 		}
 		
-		public <#= ContextData.ContextName #>() 
+		public <#= ContextData.ContextName #>()
 <#+ if(!string.IsNullOrEmpty(ContextData.CustomConnectionName)){ #>
 			: base("name=<#= ContextData.CustomConnectionName #>") 
+<#+ } else #>
+<#+ { #>
+			: base() 
 <#+ } #>
 		{
-<#+ if(ContextData.CreateDb){ #>
-			Database.SetInitializer(new CreateDatabaseIfNotExists<<#= ContextData.ContextName #>>());
-<#+ } #>
-<#+ if(ContextData.LoggingEnabled){ #>
-			Database.Log = this.Log;
-<#+ } #>
 		}
 		
 		#endregion
@@ -93,11 +85,25 @@ pks.TrimEnd(',');
 
 			#endregion
 			
+			#region Ignore
+			
+<#+ var ignoreList = new List<string>(); #>
+<#+ foreach(var table in ContextData.Models){ #>
+<#+ foreach(var rel in table.RelationShips){ #>
+<#+ if(!ContextData.Models.Any(o=> o.TableName == rel.TableName) && !ignoreList.Contains(rel.TableName)){ ignoreList.Add(rel.TableName); #>
+			modelBuilder.Ignore<<#= rel.TableName #>>();
+<#+ } #>
+<#+ } #>
+<#+ } #>
+<#+ #>
+
+			#endregion
+			
 			#region Relationships
 			
 <#+ foreach(var table in ContextData.Models){ #>
 <#+ foreach(var rel in table.DistinctChildRelationships){ #>
-			modelBuilder.Entity<<#=DataType.TransformModelName(table.TableName) #>>().HasMany(t => t.<#= rel.TableNamePlural #>).WithRequired(t => (<#=DataType.TransformModelName(table.TableName) #>)t.<#= table.TableName #>);
+			modelBuilder.Entity<<#=DataType.TransformModelName(rel.TableName) #>>().HasRequired<<#= table.TableName #>>(s => s.<#= table.TableName #>).WithMany(s => s.<#= rel.TableNamePlural #>).HasForeignKey(s => s.<#= rel.ForeignColumnName #>).WillCascadeOnDelete(false);
 <#+ } #>
 <#+ } #>
 			
@@ -113,6 +119,9 @@ pks.TrimEnd(',');
 <#+ if(col.IsRequired){ #>
 			modelBuilder.Entity<<#=DataType.TransformModelName(table.TableName) #>>().Property(t => t.<#= col.ColumnName #>).IsRequired();
 <#+ } #>
+<#+ if(col.Precision > 0 || col.Scale > 0){ #>
+			modelBuilder.Entity<<#=DataType.TransformModelName(table.TableName) #>>().Property(t => t.<#= col.ColumnName #>).HasPrecision(<#= col.Precision #>, <#= col.Scale #>);
+<#+ } #>
 <#+ } #>
 <#+ } #>
 			
@@ -125,6 +134,23 @@ pks.TrimEnd(',');
 		public virtual DbSet<<#= DataType.TransformModelName(table.TableName) #>> <#=DataType.TransformModelName(table.TableName) #> { get; set; }
 <#+ } #>
 
+		#endregion
+		
+		#region Setup
+        
+		protected override void SetupContext()
+        {
+            Configuration.LazyLoadingEnabled = false;
+            Configuration.ProxyCreationEnabled = false;
+            Configuration.AutoDetectChangesEnabled = false;
+<#+ if(ContextData.CreateDb){ #>
+			Database.SetInitializer(new CreateDatabaseIfNotExists<<#= ContextData.ContextName #>>());
+<#+ } #>
+<#+ if(ContextData.LoggingEnabled){ #>
+			Database.Log = this.Log;
+<#+ } #>
+        }
+		
 		#endregion
 	}
 }

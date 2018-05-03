@@ -29,23 +29,16 @@ namespace Banking.Models.Repository
 	/// <summary>
 	/// The CountryRepository class responsible for database functions in the Country table
 	/// </summary>
-	public partial class CountryRepository : ICountryRepository
-	{
-		#region Private
-		
-		private IUnitOfWork UnitOfWork;
-		
-		#endregion
-		
+	public partial class CountryRepository : UowRepository<Country> , ICountryRepository
+	{		
 		#region CTOR
 		
 		/// <summary>
         /// The constructor for CountryRepository
         /// </summary>
         /// <param name="uow">IUnitOfWork</param>
-		public CountryRepository(IUnitOfWork uow)
+		public CountryRepository(IUnitOfWork uow) : base(uow)
 		{
-			this.UnitOfWork = uow;
 		}
 		
 		#endregion
@@ -78,7 +71,7 @@ namespace Banking.Models.Repository
         /// <returns>IList<ICountry></returns>
 		public IList<ICountry> LoadAll()
 		{
-			return (IList<ICountry>)this.UnitOfWork.LoadAll<Country>();
+			return (IList<ICountry>)this.UnitOfWork.GetAll<Country>();
 		}
 		
 		#endregion

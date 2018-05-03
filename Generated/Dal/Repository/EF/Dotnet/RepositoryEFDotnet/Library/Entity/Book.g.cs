@@ -61,7 +61,19 @@ namespace Banking.Models.Entity
 		
 		#region Parent Relationships
 		
-		public IProduct Product { get; set; }
+		IProduct IBook.Product 
+		{ 
+			get
+			{
+				return this.Product;
+			}
+			set
+			{
+				this.Product = (Product)value;
+			}
+		}
+		
+		public virtual Product Product { get; set; }
 		
 		#endregion
 	}

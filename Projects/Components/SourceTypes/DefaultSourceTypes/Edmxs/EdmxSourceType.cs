@@ -101,7 +101,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.Edmxs
                         ColumnName = col.Name,
                         DomainDataType = this.MapDatabaseType(col.Type, null),
                         IsPrimaryKey = table.Key.Any(pk => pk.Name == col.Name),
-                        IsRequired = !col.Nullable || table.Key.Any(pk => pk.Name == col.Name),
+                        IsRequired = (col.NullableSpecified && !col.Nullable) || table.Key.Any(pk => pk.Name == col.Name),
                         ColumnOrder = table.Properties.ToList().IndexOf(col) + 1,
                         Precision = (col.Precision > 0 && col.Scale > 0)
                                           ? col.Precision

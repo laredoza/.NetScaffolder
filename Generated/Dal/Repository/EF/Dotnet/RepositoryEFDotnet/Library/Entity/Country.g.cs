@@ -30,7 +30,7 @@ namespace Banking.Models.Entity
 		
 		public Country()
 		{
-			this.Customers = new List <ICustomer>();
+			this.Customers = new List <Customer>();
 		}
 		
 		public Country(ICountry item, bool deep = false)
@@ -39,7 +39,7 @@ namespace Banking.Models.Entity
 			
 			this.CountryId = item.CountryId;
 			this.CountryName = item.CountryName;
-			this.Customers = new List <ICustomer>();
+			this.Customers = new List <Customer>();
 
 			if(deep)
 			{
@@ -64,7 +64,19 @@ namespace Banking.Models.Entity
 		
 		#region Child Relationships
 		
-		public IList<ICustomer> Customers { get; set; }
+		IList<ICustomer> ICountry.Customers 
+		{ 
+			get
+			{
+				return (IList<ICustomer>)this.Customers;
+			}
+			set
+			{
+				this.Customers = (IList<Customer>)value;
+			}			
+		}
+		
+		public virtual IList<Customer> Customers { get; set; }
 		
 		#endregion
 		

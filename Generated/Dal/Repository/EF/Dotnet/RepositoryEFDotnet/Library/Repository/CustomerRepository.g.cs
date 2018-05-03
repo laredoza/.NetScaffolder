@@ -29,23 +29,16 @@ namespace Banking.Models.Repository
 	/// <summary>
 	/// The CustomerRepository class responsible for database functions in the Customer table
 	/// </summary>
-	public partial class CustomerRepository : ICustomerRepository
-	{
-		#region Private
-		
-		private IUnitOfWork UnitOfWork;
-		
-		#endregion
-		
+	public partial class CustomerRepository : UowRepository<Customer> , ICustomerRepository
+	{		
 		#region CTOR
 		
 		/// <summary>
         /// The constructor for CustomerRepository
         /// </summary>
         /// <param name="uow">IUnitOfWork</param>
-		public CustomerRepository(IUnitOfWork uow)
+		public CustomerRepository(IUnitOfWork uow) : base(uow)
 		{
-			this.UnitOfWork = uow;
 		}
 		
 		#endregion
@@ -188,7 +181,7 @@ namespace Banking.Models.Repository
         /// <returns>IList<ICustomer></returns>
 		public IList<ICustomer> LoadAll()
 		{
-			return (IList<ICustomer>)this.UnitOfWork.LoadAll<Customer>();
+			return (IList<ICustomer>)this.UnitOfWork.GetAll<Customer>();
 		}
 		
 		#endregion

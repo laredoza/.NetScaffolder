@@ -67,7 +67,19 @@ namespace Banking.Models.Entity
 		
 		#region Parent Relationships
 		
-		public IBankAccount BankAccount { get; set; }
+		IBankAccount IBankTransfers.BankAccount 
+		{ 
+			get
+			{
+				return this.BankAccount;
+			}
+			set
+			{
+				this.BankAccount = (BankAccount)value;
+			}
+		}
+		
+		public virtual BankAccount BankAccount { get; set; }
 		
 		#endregion
 	}

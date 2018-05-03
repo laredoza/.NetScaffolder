@@ -30,7 +30,7 @@ namespace Banking.Models.Entity
 		
 		public Order()
 		{
-			this.OrderDetails = new List <IOrderDetails>();
+			this.OrderDetails = new List <OrderDetails>();
 		}
 		
 		public Order(IOrder item, bool deep = false)
@@ -45,7 +45,7 @@ namespace Banking.Models.Entity
 			this.ShippingAddress = item.ShippingAddress;
 			this.ShippingCity = item.ShippingCity;
 			this.ShippingZip = item.ShippingZip;
-			this.OrderDetails = new List <IOrderDetails>();
+			this.OrderDetails = new List <OrderDetails>();
 
 			if(deep)
 			{
@@ -77,13 +77,37 @@ namespace Banking.Models.Entity
 		
 		#region Child Relationships
 		
-		public IList<IOrderDetails> OrderDetails { get; set; }
+		IList<IOrderDetails> IOrder.OrderDetails 
+		{ 
+			get
+			{
+				return (IList<IOrderDetails>)this.OrderDetails;
+			}
+			set
+			{
+				this.OrderDetails = (IList<OrderDetails>)value;
+			}			
+		}
+		
+		public virtual IList<OrderDetails> OrderDetails { get; set; }
 		
 		#endregion
 		
 		#region Parent Relationships
 		
-		public ICustomer Customer { get; set; }
+		ICustomer IOrder.Customer 
+		{ 
+			get
+			{
+				return this.Customer;
+			}
+			set
+			{
+				this.Customer = (Customer)value;
+			}
+		}
+		
+		public virtual Customer Customer { get; set; }
 		
 		#endregion
 	}

@@ -48,7 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Base\BaseContext.cs" />
-    <Compile Include="Base\IUnitOfWork.cs" />
+    <Compile Include="Base\UowRepository.cs" />
     <Compile Include="Context\AccountContext.g.cs" />
     <Compile Include="Context\CustomerContext.g.cs" />
     <Compile Include="Dto\BankAccountDto.g.cs" />
@@ -69,6 +69,7 @@
     <Compile Include="Entity\OrderDetails.g.cs" />
     <Compile Include="Entity\Product.g.cs" />
     <Compile Include="Entity\Software.g.cs" />
+    <Compile Include="Interfaces\Base\IUnitOfWork.cs" />
     <Compile Include="Interfaces\Dto\IBankAccount.g.cs" />
     <Compile Include="Interfaces\Dto\IBankTransfers.g.cs" />
     <Compile Include="Interfaces\Dto\IBook.g.cs" />
@@ -102,6 +103,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>RunGenerator.tt</DependentUpon>
     </Compile>
+    <Compile Include="Utils\QueryableUtils.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

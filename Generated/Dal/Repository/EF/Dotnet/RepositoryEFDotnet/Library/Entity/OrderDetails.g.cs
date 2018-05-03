@@ -69,7 +69,19 @@ namespace Banking.Models.Entity
 		
 		#region Parent Relationships
 		
-		public IOrder Order { get; set; }
+		IOrder IOrderDetails.Order 
+		{ 
+			get
+			{
+				return this.Order;
+			}
+			set
+			{
+				this.Order = (Order)value;
+			}
+		}
+		
+		public virtual Order Order { get; set; }
 		
 		#endregion
 	}

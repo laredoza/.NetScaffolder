@@ -14,13 +14,15 @@ namespace RepositoryEFDotnet.UnitTest
         {
             using (var context = new AccountContext("RepoTest"))
             {
-                Database.SetInitializer(new DropCreateDatabaseAlways<AccountContext>());
+                var config = new DropCreateDatabaseAlways<AccountContext>();
+                
+                Database.SetInitializer(config);
                 context.Database.Initialize(true);
             }
 
             using (var context = new CustomerContext("RepoTest"))
             {
-                Database.SetInitializer(new DropCreateDatabaseAlways<AccountContext>());
+                Database.SetInitializer(new CreateDatabaseIfNotExists<CustomerContext>());
                 context.Database.Initialize(true);
             }
         }

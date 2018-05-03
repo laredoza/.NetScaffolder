@@ -30,7 +30,7 @@ namespace Banking.Models.Entity
 		
 		public Product()
 		{
-			this.Books = new List <IBook>();
+			this.Books = new List <Book>();
 		}
 		
 		public Product(IProduct item, bool deep = false)
@@ -43,7 +43,7 @@ namespace Banking.Models.Entity
 			this.UnitAmount = item.UnitAmount;
 			this.Publisher = item.Publisher;
 			this.AmountInStock = item.AmountInStock;
-			this.Books = new List <IBook>();
+			this.Books = new List <Book>();
 
 			if(deep)
 			{
@@ -72,7 +72,19 @@ namespace Banking.Models.Entity
 		
 		#region Child Relationships
 		
-		public IList<IBook> Books { get; set; }
+		IList<IBook> IProduct.Books 
+		{ 
+			get
+			{
+				return (IList<IBook>)this.Books;
+			}
+			set
+			{
+				this.Books = (IList<Book>)value;
+			}			
+		}
+		
+		public virtual IList<Book> Books { get; set; }
 		
 		#endregion
 		

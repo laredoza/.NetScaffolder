@@ -29,14 +29,14 @@ namespace Banking.Models.Accounts
 	{	
 		#region CTOR
 		
-		public AccountContext(string connectionOrName) : base($"name={connectionOrName}") 
+		public AccountContext(string connectionOrName) 
+			: base($"name={connectionOrName}") 
 		{
-			Database.SetInitializer(new CreateDatabaseIfNotExists<AccountContext>());
 		}
 		
-		public AccountContext() 
+		public AccountContext()
+			: base() 
 		{
-			Database.SetInitializer(new CreateDatabaseIfNotExists<AccountContext>());
 		}
 		
 		#endregion
@@ -61,9 +61,15 @@ namespace Banking.Models.Accounts
 
 			#endregion
 			
+			#region Ignore
+			
+			modelBuilder.Ignore<Customer>();
+
+			#endregion
+			
 			#region Relationships
 			
-			//modelBuilder.Entity<BankAccount>().HasMany(t => t.BankTransfers).WithRequired(t=> (BankAccount)t.BankAccount);
+			modelBuilder.Entity<BankTransfers>().HasRequired<BankAccount>(s => s.BankAccount).WithMany(s => s.BankTransfers).HasForeignKey(s => s.FromBankAccountId).WillCascadeOnDelete(false);
 			
 			#endregion
 			
@@ -73,12 +79,13 @@ namespace Banking.Models.Accounts
 			modelBuilder.Entity<BankAccount>().Property(t => t.BankAccountNumber).HasMaxLength(10);
 			modelBuilder.Entity<BankAccount>().Property(t => t.BankAccountNumber).IsRequired();
 			modelBuilder.Entity<BankAccount>().Property(t => t.Balance).IsRequired();
-			modelBuilder.Entity<BankAccount>().Property(t => t.CustomerId).IsRequired();
+			modelBuilder.Entity<BankAccount>().Property(t => t.Balance).HasPrecision(19, 4);
 			modelBuilder.Entity<BankAccount>().Property(t => t.Locked).IsRequired();
 			modelBuilder.Entity<BankTransfers>().Property(t => t.BankTransferId).IsRequired();
 			modelBuilder.Entity<BankTransfers>().Property(t => t.FromBankAccountId).IsRequired();
 			modelBuilder.Entity<BankTransfers>().Property(t => t.ToBankAccountId).IsRequired();
 			modelBuilder.Entity<BankTransfers>().Property(t => t.Amount).IsRequired();
+			modelBuilder.Entity<BankTransfers>().Property(t => t.Amount).HasPrecision(18, 2);
 			modelBuilder.Entity<BankTransfers>().Property(t => t.TransferDate).IsRequired();
 			
 			#endregion
@@ -89,6 +96,18 @@ namespace Banking.Models.Accounts
 		public virtual DbSet<BankAccount> BankAccount { get; set; }
 		public virtual DbSet<BankTransfers> BankTransfers { get; set; }
 
+		#endregion
+		
+		#region Setup
+        
+		protected override void SetupContext()
+        {
+            Configuration.LazyLoadingEnabled = false;
+            Configuration.ProxyCreationEnabled = false;
+            Configuration.AutoDetectChangesEnabled = false;
+			Database.SetInitializer(new CreateDatabaseIfNotExists<AccountContext>());
+        }
+		
 		#endregion
 	}
 }
