@@ -41,8 +41,8 @@ namespace DotNetScaffolder.Mapping.MetaData.Model
         /// <summary>
         ///     Gets or sets the foreign column name.
         /// </summary>
-        [XmlAttribute("ForeignColumnName")]
-        public string ForeignColumnName { get; set; }
+        [XmlAttribute("ReferencedColumnName")]
+        public string ReferencedColumnName { get; set; }
 
         /// <summary>
         ///     Gets or sets the related table.
@@ -105,8 +105,8 @@ namespace DotNetScaffolder.Mapping.MetaData.Model
         /// <summary>
         ///     Gets or sets the table name.
         /// </summary>
-        [XmlAttribute("RelatedTableName")]
-        public string RelatedTableName { get; set; }
+        [XmlAttribute("ReferencedTableName")]
+        public string ReferencedTableName { get; set; }
 
         public string TableNamePlural
         {
@@ -147,8 +147,8 @@ namespace DotNetScaffolder.Mapping.MetaData.Model
 
             result.ColumnName = this.ColumnName;
             result.DependencyRelationShip = this.DependencyRelationShip;
-            result.ForeignColumnName = this.ForeignColumnName;
-            result.RelatedTableName = this.RelatedTableName;
+            result.ReferencedColumnName = this.ReferencedColumnName;
+            result.ReferencedTableName = this.ReferencedTableName;
 
             if (this.RelatedTable != null)
             {

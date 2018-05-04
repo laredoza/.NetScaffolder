@@ -54,7 +54,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
                     {
                         ColumnName = column.Name,
                         DomainDataType =
-                                            this.MapDatabaseType(column.DataType.TypeName, column.DataType),
+                        this.MapDatabaseType(column.DataType.TypeName, column.DataType),
                         IsRequired = column.IsPrimaryKey,
                         ColumnOrder = table.Columns.IndexOf(column) + 1,
                         Precision = column.Precision.HasValue ? column.Precision.Value : 0,
@@ -76,9 +76,10 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
                     newTable.Relationships.Add(
                         new Relationship
                         {
-                            TableName = foreignKey.RefersToTable,
+                            TableName = table.Name,
+                            ReferencedTableName = foreignKey.RefersToTable,
                             ColumnName = foreignKey.Columns[0],
-                            ForeignColumnName = foreignKey.ReferencedColumns(schema).ToList()[0],
+                            ReferencedColumnName = foreignKey.ReferencedColumns(schema).ToList()[0],
                             DependencyRelationShip = RelationshipType.ForeignKey,
                             RelationshipName = foreignKey.Name
                         });
@@ -93,9 +94,10 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
                             newTable.Relationships.Add(
                                 new Relationship
                                 {
-                                    TableName = foreignKey.TableName,
-                                    ColumnName = foreignKey.ReferencedColumns(schema).ToList()[0],
-                                    ForeignColumnName = foreignKey.Columns[0],
+                                    TableName = foreignKey.RefersToTable,
+                                    ReferencedTableName = table.Name,
+                                    ColumnName = foreignKey.Columns[0],
+                                    ReferencedColumnName = foreignKey.ReferencedColumns(schema).ToList()[0],
                                     DependencyRelationShip = RelationshipType.ForeignKeyChild,
                                     RelationshipName = foreignKey.Name
                                 });
@@ -210,7 +212,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
                 foreach (var relationship in modelTable.Relationships)
                 {
                     relationship.Table = modelTable;
-                    relationship.RelatedTable = tables.FirstOrDefault(t => t.TableName == relationship.TableName);
+                    relationship.RelatedTable = tables.FirstOrDefault(t => t.TableName == relationship.ReferencedTableName);
                     if (relationship.RelatedTable == null)
                     {
                         RelationshipsToDelete.Add(relationship);
