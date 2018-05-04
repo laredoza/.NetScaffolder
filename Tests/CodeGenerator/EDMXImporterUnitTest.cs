@@ -39,8 +39,8 @@ namespace DotNetScaffolder.Test
             // "Bank Account should have 5 columns");
             // Assert.AreEqual(
             // 3, 
-            // data.Tables.First(t => t.TableName == "BankAccount").RelationShips.Count, 
-            // "Bank Account should have 3 relationships");
+            // data.Tables.First(t => t.TableName == "BankAccount").Relationships.Count, 
+            // "Bank Account should have 3 Relationships");
         }
 
         #endregion

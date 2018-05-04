@@ -157,7 +157,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.Edmxs
                         RelationshipName = rel.Name
                     };
 
-                    tbl.RelationShips.Add(ass);
+                    tbl.Relationships.Add(ass);
                 }
             }
 
@@ -363,7 +363,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.Edmxs
 
             foreach (Table modelTable in tables)
             {
-                foreach (var relationship in modelTable.RelationShips)
+                foreach (var relationship in modelTable.Relationships)
                 {
                     relationship.Table = modelTable;
                     relationship.RelatedTable = tables.FirstOrDefault(t => t.TableName == relationship.TableName);

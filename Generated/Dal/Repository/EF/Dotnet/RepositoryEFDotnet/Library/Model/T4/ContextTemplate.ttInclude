@@ -85,28 +85,22 @@ pks.TrimEnd(',');
 
 			#endregion
 			
-			#region Ignore
+			#region Included Relationships
 			
-<#+ var ignoreList = new List<string>(); #>
-<#+ foreach(var table in ContextData.Models){ #>
-<#+ foreach(var rel in table.RelationShips){ #>
-<#+ if(!ContextData.Models.Any(o=> o.TableName == rel.TableName) && !ignoreList.Contains(rel.TableName)){ ignoreList.Add(rel.TableName); #>
-			modelBuilder.Ignore<<#= rel.TableName #>>();
+<#+ foreach(var rel in ContextData.IncludedRelationships){ #>
+			modelBuilder.Entity<<#=DataType.TransformModelName(rel.TableName) #>>().HasRequired<<#= rel.TableName #>>(s => s.<#= rel.TableName #>).WithMany(s => s.<#= rel.TableNamePlural #>).HasForeignKey(s => s.<#= rel.ForeignColumnName #>).WillCascadeOnDelete(false);
 <#+ } #>
-<#+ } #>
-<#+ } #>
-<#+ #>
-
+			
 			#endregion
 			
-			#region Relationships
+			#region Excluded Relationships
 			
-<#+ foreach(var table in ContextData.Models){ #>
-<#+ foreach(var rel in table.DistinctChildRelationships){ #>
-			modelBuilder.Entity<<#=DataType.TransformModelName(rel.TableName) #>>().HasRequired<<#= table.TableName #>>(s => s.<#= table.TableName #>).WithMany(s => s.<#= rel.TableNamePlural #>).HasForeignKey(s => s.<#= rel.ForeignColumnName #>).WillCascadeOnDelete(false);
-<#+ } #>
-<#+ } #>
+			// Exclude entities not part of this context
 			
+<#+ foreach(var rel in ContextData.ExcludedRelationships){ #>
+			modelBuilder.Ignore<<#= rel.TableName #>>();
+<#+ } #>
+
 			#endregion
 			
 			#region Constraints
@@ -140,11 +134,13 @@ pks.TrimEnd(',');
         
 		protected override void SetupContext()
         {
-            Configuration.LazyLoadingEnabled = false;
-            Configuration.ProxyCreationEnabled = false;
+            Configuration.LazyLoadingEnabled = <#= ContextData.LazyLoadingEnabled.ToString().ToLower() #>;
+            Configuration.ProxyCreationEnabled = <#= ContextData.ProxyCreationEnabled.ToString().ToLower() #>;
             Configuration.AutoDetectChangesEnabled = false;
+			
 <#+ if(ContextData.CreateDb){ #>
 			Database.SetInitializer(new CreateDatabaseIfNotExists<<#= ContextData.ContextName #>>());
+			// Database.SetInitializer(new MigrateDatabaseToLatestVersion<<#= ContextData.ContextName #>, Configuration>());
 <#+ } #>
 <#+ if(ContextData.LoggingEnabled){ #>
 			Database.Log = this.Log;

@@ -18,6 +18,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
     using DotNetScaffolder.Components.Common.Contract;
     using DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataTypes;
     using DotNetScaffolder.Core.Common.Serializer;
+    using DotNetScaffolder.Mapping.MetaData.Enum;
     using DotNetScaffolder.Mapping.MetaData.Model;
 
     using FormControls.TreeView;
@@ -96,7 +97,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
 
         public string TransformModelName(string name)
         {
-            if(NamingConvention == null)
+            if (NamingConvention == null)
             {
                 return name;
             }
@@ -184,18 +185,23 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
     /// </summary>
     public class ContextData
     {
+        private List<Relationship> exludedRelationships = null;
+        private List<Relationship> includedRelationships = null;
+
         public ContextData()
         {
             Models = new List<Table>();
+            ExcludedRelationships = new List<Relationship>();
+            IncludedRelationships = new List<Relationship>();
             OutputFolder = "Context";
             ContextName = "NewContext";
             CustomConnectionName = string.Empty;
-            Enabled = true;
             Namespace = "Context";
             LoggingEnabled = false;
+            LazyLoadingEnabled = false;
+            ProxyCreationEnabled = false;
             InheritFrom = string.Empty;
             Id = Guid.NewGuid();
-            GenerateInterface = false;
             CreateDb = false;
             OutputPath = string.Empty;
         }
@@ -211,6 +217,10 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
 
         public string OutputPath { get; set; }
 
+        public bool LazyLoadingEnabled { get; set; }
+
+        public bool ProxyCreationEnabled { get; set; }
+
         public string TransformFullnamespace(string baseNs)
         {
             return $"{baseNs}.{Namespace}";
@@ -220,16 +230,6 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
         ///     Gets or sets a value indicating whether create db.
         /// </summary>
         public bool CreateDb { get; set; }
-
-        /// <summary>
-        ///     Gets or sets a value indicating whether enabled.
-        /// </summary>
-        public bool Enabled { get; set; }
-
-        /// <summary>
-        ///     Gets or sets a value indicating whether generate interface.
-        /// </summary>
-        public bool GenerateInterface { get; set; }
 
         /// <summary>
         ///     Gets or sets the id.
@@ -252,6 +252,64 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
                 }
 
                 return $": {InheritFrom}";
+            }
+        }
+
+        [XmlIgnore]
+        public List<Relationship> ExcludedRelationships
+        {
+            get
+            {
+                if (!exludedRelationships.Any())
+                {
+                    foreach (var model in Models)
+                    {
+                        foreach (var rel in model.Relationships.Where(o => o.Render))
+                        {
+                            if (!exludedRelationships.Any(o => o.SchemaName == rel.SchemaName && o.TableName == rel.TableName) &&
+                                !Models.Any(o => o.SchemaName == rel.SchemaName && o.TableName == rel.TableName))
+                            {
+                                exludedRelationships.Add(rel);
+                            }
+                        }
+                    }
+                }
+
+                return exludedRelationships;
+            }
+
+            private set
+            {
+                exludedRelationships = value;
+            }
+        }
+
+        [XmlIgnore]
+        public List<Relationship> IncludedRelationships
+        {
+            get
+            {
+                if (!includedRelationships.Any())
+                {
+                    foreach (var model in Models)
+                    {
+                        foreach (var rel in model.Relationships.Where(o => o.Render))
+                        {
+                            if (Models.Any(o => o.SchemaName == rel.SchemaName && o.TableName == rel.TableName) &&
+                                !includedRelationships.Any(o=> o.RelationshipName == rel.RelationshipName))
+                            {
+                                includedRelationships.Add(rel);
+                            }
+                        }
+                    }
+                }
+
+                return includedRelationships;
+            }
+
+            private set
+            {
+                includedRelationships = value;
             }
         }
 

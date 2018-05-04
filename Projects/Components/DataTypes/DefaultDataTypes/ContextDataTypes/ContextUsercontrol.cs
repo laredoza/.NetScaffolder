@@ -234,11 +234,11 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
             if (SelectedContext == null) return;
 
             SelectedContext.OutputFolder = OutputFolder.Text;
-            SelectedContext.Enabled = ContextEnabled.Checked;
+            SelectedContext.LazyLoadingEnabled = LazyLoading.Checked;
             SelectedContext.Namespace = Namespace.Text;
             SelectedContext.ContextName = ContextName.Text;
             SelectedContext.CreateDb = CreateDb.Checked;
-            SelectedContext.GenerateInterface = GenerateInterface.Checked;
+            SelectedContext.ProxyCreationEnabled = ProxyCreation.Checked;
             SelectedContext.InheritFrom = InheritFromInterface.Text;
             SelectedContext.LoggingEnabled = LoggingEnabled.Checked;
             SelectedContext.CustomConnectionName = txtCustomConnectionName.Text;
@@ -266,11 +266,11 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
             if (SelectedContext == null) return;
 
             OutputFolder.Text = SelectedContext.OutputFolder;
-            ContextEnabled.Checked = SelectedContext.Enabled;
+            LazyLoading.Checked = SelectedContext.LazyLoadingEnabled;
             Namespace.Text = SelectedContext.Namespace;
             ContextName.Text = SelectedContext.ContextName;
             CreateDb.Checked = SelectedContext.CreateDb;
-            GenerateInterface.Checked = SelectedContext.GenerateInterface;
+            ProxyCreation.Checked = SelectedContext.ProxyCreationEnabled;
             InheritFromInterface.Text = SelectedContext.InheritFrom;
             LoggingEnabled.Checked = SelectedContext.LoggingEnabled;
             txtCustomConnectionName.Text = SelectedContext.CustomConnectionName;

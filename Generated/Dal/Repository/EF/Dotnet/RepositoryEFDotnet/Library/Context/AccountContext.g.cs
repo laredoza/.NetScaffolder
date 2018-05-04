@@ -61,16 +61,19 @@ namespace Banking.Models.Accounts
 
 			#endregion
 			
-			#region Ignore
+			#region Included Relationships
+			
+			modelBuilder.Entity<BankTransfers>().HasRequired<BankTransfers>(s => s.BankTransfers).WithMany(s => s.BankTransfers).HasForeignKey(s => s.FromBankAccountId).WillCascadeOnDelete(false);
+			modelBuilder.Entity<BankTransfers>().HasRequired<BankTransfers>(s => s.BankTransfers).WithMany(s => s.BankTransfers).HasForeignKey(s => s.ToBankAccountId).WillCascadeOnDelete(false);
+			
+			#endregion
+			
+			#region Excluded Relationships
+			
+			// Exclude entities not part of this context
 			
 			modelBuilder.Ignore<Customer>();
 
-			#endregion
-			
-			#region Relationships
-			
-			modelBuilder.Entity<BankTransfers>().HasRequired<BankAccount>(s => s.BankAccount).WithMany(s => s.BankTransfers).HasForeignKey(s => s.FromBankAccountId).WillCascadeOnDelete(false);
-			
 			#endregion
 			
 			#region Constraints
@@ -105,7 +108,9 @@ namespace Banking.Models.Accounts
             Configuration.LazyLoadingEnabled = false;
             Configuration.ProxyCreationEnabled = false;
             Configuration.AutoDetectChangesEnabled = false;
+			
 			Database.SetInitializer(new CreateDatabaseIfNotExists<AccountContext>());
+			// Database.SetInitializer(new MigrateDatabaseToLatestVersion<AccountContext, Configuration>());
         }
 		
 		#endregion

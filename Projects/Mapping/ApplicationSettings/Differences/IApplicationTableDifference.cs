@@ -33,7 +33,7 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Differences
         List<Column> FirstExtraColumns { get; set; }
 
         /// <summary>
-        ///     Gets or sets the first extra relationships.
+        ///     Gets or sets the first extra Relationships.
         /// </summary>
         List<Relationship> FirstExtraRelationships { get; set; }
 
@@ -43,7 +43,7 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Differences
         List<Column> FirstMissingColumns { get; set; }
 
         /// <summary>
-        ///     Gets or sets the first missing relationships.
+        ///     Gets or sets the first missing Relationships.
         /// </summary>
         List<Relationship> FirstMissingRelationships { get; set; }
 
@@ -58,7 +58,7 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Differences
         bool HasExtraColumns { get; }
 
         /// <summary>
-        ///     Gets a value indicating whether has extra relationships.
+        ///     Gets a value indicating whether has extra Relationships.
         /// </summary>
         bool HasExtraRelationships { get; }
 
@@ -68,7 +68,7 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Differences
         bool HasMissingColumns { get; }
 
         /// <summary>
-        ///     Gets a value indicating whether has missing relationships.
+        ///     Gets a value indicating whether has missing Relationships.
         /// </summary>
         bool HasMissingRelationships { get; }
 

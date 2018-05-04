@@ -89,7 +89,7 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Tables
         /// The include fields.
         /// </param>
         /// <param name="includeRelationships">
-        /// The include relationships.
+        /// The include Relationships.
         /// </param>
         /// <returns>
         /// The <see cref="List"/>.

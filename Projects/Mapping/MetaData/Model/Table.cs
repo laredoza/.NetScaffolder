@@ -32,7 +32,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Model
         {
             this.DatabaseGeneratedKeyType = DatabaseGeneratedKeyType.None;
             this.Columns = new List<Column>();
-            this.RelationShips = new List<Relationship>();
+            this.Relationships = new List<Relationship>();
         }
 
         #endregion
@@ -47,7 +47,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Model
         {
             get
             {
-                return this.RelationShips
+                return this.Relationships
                     .Where(u => u.DependencyRelationShip == RelationshipType.ForeignKeyChild && u.Render).ToList();
             }
         }
@@ -122,7 +122,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Model
             get
             {
                 var retval = new List<Relationship>();
-                foreach (var rel in this.RelationShips.Where(
+                foreach (var rel in this.Relationships.Where(
                     u => u.DependencyRelationShip == RelationshipType.ForeignKeyChild && u.Render))
                 {
                     var exists = retval.FirstOrDefault(u => u.RelatedTable == rel.RelatedTable);
@@ -139,7 +139,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Model
             get
             {
                 var retval = new List<Relationship>();
-                foreach (var rel in this.RelationShips.Where(
+                foreach (var rel in this.Relationships.Where(
                     u => u.DependencyRelationShip == RelationshipType.ForeignKey && u.Render))
                 {
                     var exists = retval.FirstOrDefault(u => u.RelatedTable == rel.RelatedTable);
@@ -158,7 +158,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Model
         {
             get
             {
-                return this.RelationShips
+                return this.Relationships
                     .Where(u => u.DependencyRelationShip == RelationshipType.ForeignKey && u.Render).ToList();
             }
         }
@@ -182,7 +182,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Model
         /// </summary>
         [XmlArray("RelationShips")]
         [XmlArrayItem("RelationShip")]
-        public List<Relationship> RelationShips { get; set; }
+        public List<Relationship> Relationships { get; set; }
 
         /// <summary>
         ///     Gets or sets the schema name.
@@ -233,9 +233,9 @@ namespace DotNetScaffolder.Mapping.MetaData.Model
             result.DatabaseGeneratedKeyType = this.DatabaseGeneratedKeyType;
             result.Description = this.Description;
 
-            foreach (Relationship retionship in this.RelationShips)
+            foreach (Relationship retionship in this.Relationships)
             {
-                result.RelationShips.Add(retionship.Clone() as Relationship);
+                result.Relationships.Add(retionship.Clone() as Relationship);
             }
 
             result.SchemaName = this.SchemaName;

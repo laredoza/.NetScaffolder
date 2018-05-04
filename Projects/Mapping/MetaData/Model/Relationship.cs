@@ -29,6 +29,9 @@ namespace DotNetScaffolder.Mapping.MetaData.Model
         [XmlAttribute("ColumnName")]
         public string ColumnName { get; set; }
 
+        [XmlAttribute("ColumnRequired")]
+        public bool ColumnRequired { get; set; }
+
         /// <summary>
         ///     Gets or sets the dependency relation ship.
         /// </summary>
@@ -99,6 +102,12 @@ namespace DotNetScaffolder.Mapping.MetaData.Model
         [XmlAttribute("TableName")]
         public string TableName { get; set; }
 
+        /// <summary>
+        ///     Gets or sets the table name.
+        /// </summary>
+        [XmlAttribute("RelatedTableName")]
+        public string RelatedTableName { get; set; }
+
         public string TableNamePlural
         {
             get
@@ -139,20 +148,20 @@ namespace DotNetScaffolder.Mapping.MetaData.Model
             result.ColumnName = this.ColumnName;
             result.DependencyRelationShip = this.DependencyRelationShip;
             result.ForeignColumnName = this.ForeignColumnName;
+            result.RelatedTableName = this.RelatedTableName;
 
             if (this.RelatedTable != null)
             {
-                // result.RelatedTable = this.RelatedTable.Clone() as Table;
                 result.RelatedTable = this.RelatedTable;
             }
 
-
             result.Render = this.Render;
             result.SchemaName = this.SchemaName;
+            result.TableName = this.TableName;
+
             if (this.Table != null)
             {
-                //result.Table = this.Table.Clone() as Table;
-                result.TableName = this.TableName;
+                result.Table = this.Table;
             }
 
             result.UserRelationship = this.UserRelationship;

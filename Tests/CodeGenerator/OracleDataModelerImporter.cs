@@ -39,8 +39,8 @@ namespace DotNetScaffolder.Test
             // "Application should have 5 columns");
             // Assert.AreEqual(
             // 0, 
-            // data.Tables.First(t => t.TableName == "Application").RelationShips.Count, 
-            // "Application should have 0 relationships");
+            // data.Tables.First(t => t.TableName == "Application").Relationships.Count, 
+            // "Application should have 0 Relationships");
         }
 
         #endregion

@@ -95,19 +95,19 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
         {
             Logger.Trace("Started Fix()");
 
-            List<Relationship> relationshipsToDelete = new List<Relationship>();
+            List<Relationship> RelationshipsToDelete = new List<Relationship>();
 
             foreach (Table modelTable in tables)
             {
-                relationshipsToDelete = new List<Relationship>();
+                RelationshipsToDelete = new List<Relationship>();
 
-                foreach (var relationship in modelTable.RelationShips)
+                foreach (var relationship in modelTable.Relationships)
                 {
                     relationship.Table = modelTable;
                     relationship.RelatedTable = tables.FirstOrDefault(t => t.TableName == relationship.TableName);
                     if (relationship.RelatedTable == null)
                     {
-                        relationshipsToDelete.Add(relationship);
+                        RelationshipsToDelete.Add(relationship);
                     }
                     else
                     {
@@ -115,9 +115,9 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
                     }
                 }
 
-                foreach (var relationship in relationshipsToDelete)
+                foreach (var relationship in RelationshipsToDelete)
                 {
-                    modelTable.RelationShips.Remove(relationship);
+                    modelTable.Relationships.Remove(relationship);
                 }
             }
 
@@ -178,7 +178,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
 
                 foreach (var foreignKey in table.ForeignKeys)
                 {
-                    newTable.RelationShips.Add(
+                    newTable.Relationships.Add(
                         new Relationship
                             {
                                 TableName = foreignKey.RefersToTable,
@@ -195,7 +195,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
                     {
                         if (foreignKey.RefersToTable == table.Name)
                         {
-                            newTable.RelationShips.Add(
+                            newTable.Relationships.Add(
                                 new Relationship
                                     {
                                         TableName = foreignKey.TableName,

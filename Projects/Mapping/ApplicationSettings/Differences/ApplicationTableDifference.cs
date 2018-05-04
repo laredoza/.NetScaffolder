@@ -34,7 +34,7 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Differences
         public List<Column> FirstExtraColumns { get; set; }
 
         /// <summary>
-        ///     Gets or sets the first extra relationships.
+        ///     Gets or sets the first extra Relationships.
         /// </summary>
         public List<Relationship> FirstExtraRelationships { get; set; }
 
@@ -44,7 +44,7 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Differences
         public List<Column> FirstMissingColumns { get; set; }
 
         /// <summary>
-        ///     Gets or sets the first missing relationships.
+        ///     Gets or sets the first missing Relationships.
         /// </summary>
         public List<Relationship> FirstMissingRelationships { get; set; }
 
@@ -72,7 +72,7 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Differences
 
         /// <inheritdoc />
         /// <summary>
-        ///     Gets a value indicating whether has extra relationships.
+        ///     Gets a value indicating whether has extra Relationships.
         /// </summary>
         public bool HasExtraRelationships
         {
@@ -96,7 +96,7 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Differences
 
         /// <inheritdoc />
         /// <summary>
-        ///     Gets a value indicating whether has missing relationships.
+        ///     Gets a value indicating whether has missing Relationships.
         /// </summary>
         public bool HasMissingRelationships
         {
@@ -167,13 +167,13 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Differences
                 .Where(c => !firstTableColumnNameList.Contains(c.ColumnName.ToUpper())).ToList();
 
             var secondTableRelationshipTableNames =
-                new HashSet<string>(secondTable.RelationShips.Select(u => u.TableName.ToUpper()));
-            retval.FirstExtraRelationships = firstTable.RelationShips
+                new HashSet<string>(secondTable.Relationships.Select(u => u.TableName.ToUpper()));
+            retval.FirstExtraRelationships = firstTable.Relationships
                 .Where(u => !secondTableRelationshipTableNames.Contains(u.TableName.ToUpper())).ToList();
 
             var firstTableRelationshipTableNames =
-                new HashSet<string>(firstTable.RelationShips.Select(u => u.TableName.ToUpper()));
-            retval.FirstMissingRelationships = secondTable.RelationShips
+                new HashSet<string>(firstTable.Relationships.Select(u => u.TableName.ToUpper()));
+            retval.FirstMissingRelationships = secondTable.Relationships
                 .Where(u => !firstTableRelationshipTableNames.Contains(u.TableName.ToUpper())).ToList();
 
             retval.ColumnDataTypeDiffs = new List<ColumnDataTypeDifference>();

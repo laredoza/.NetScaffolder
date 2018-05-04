@@ -28,14 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.ContextEnabled = new System.Windows.Forms.CheckBox();
             this.LoggingEnabled = new System.Windows.Forms.CheckBox();
             this.InheritFromInterface = new System.Windows.Forms.TextBox();
             this.OutputFolder = new System.Windows.Forms.TextBox();
             this.Namespace = new System.Windows.Forms.TextBox();
             this.ContextName = new System.Windows.Forms.TextBox();
             this.label27 = new System.Windows.Forms.Label();
-            this.GenerateInterface = new System.Windows.Forms.CheckBox();
+            this.LazyLoading = new System.Windows.Forms.CheckBox();
             this.CreateDb = new System.Windows.Forms.CheckBox();
             this.label26 = new System.Windows.Forms.Label();
             this.label25 = new System.Windows.Forms.Label();
@@ -48,27 +47,18 @@
             this.label1 = new System.Windows.Forms.Label();
             this.OutputPath = new System.Windows.Forms.TextBox();
             this.TreeviewContextModels = new FormControls.TreeView.MultiSelectTreeView.TreeView();
+            this.ProxyCreation = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // ContextEnabled
-            // 
-            this.ContextEnabled.AutoSize = true;
-            this.ContextEnabled.Location = new System.Drawing.Point(295, 76);
-            this.ContextEnabled.Name = "ContextEnabled";
-            this.ContextEnabled.Size = new System.Drawing.Size(65, 17);
-            this.ContextEnabled.TabIndex = 56;
-            this.ContextEnabled.Text = "Enabled";
-            this.ContextEnabled.UseVisualStyleBackColor = true;
             // 
             // LoggingEnabled
             // 
             this.LoggingEnabled.AutoSize = true;
             this.LoggingEnabled.Location = new System.Drawing.Point(295, 58);
             this.LoggingEnabled.Name = "LoggingEnabled";
-            this.LoggingEnabled.Size = new System.Drawing.Size(106, 17);
+            this.LoggingEnabled.Size = new System.Drawing.Size(96, 17);
             this.LoggingEnabled.TabIndex = 55;
-            this.LoggingEnabled.Text = "Logging Enabled";
+            this.LoggingEnabled.Text = "Enable logging";
             this.LoggingEnabled.UseVisualStyleBackColor = true;
             // 
             // InheritFromInterface
@@ -111,16 +101,16 @@
             this.label27.TabIndex = 49;
             this.label27.Text = "Inherit From:";
             // 
-            // GenerateInterface
+            // LazyLoading
             // 
-            this.GenerateInterface.AutoSize = true;
-            this.GenerateInterface.Enabled = false;
-            this.GenerateInterface.Location = new System.Drawing.Point(295, 40);
-            this.GenerateInterface.Name = "GenerateInterface";
-            this.GenerateInterface.Size = new System.Drawing.Size(115, 17);
-            this.GenerateInterface.TabIndex = 48;
-            this.GenerateInterface.Text = "Generate Interface";
-            this.GenerateInterface.UseVisualStyleBackColor = true;
+            this.LazyLoading.AutoSize = true;
+            this.LazyLoading.Enabled = false;
+            this.LazyLoading.Location = new System.Drawing.Point(295, 40);
+            this.LazyLoading.Name = "LazyLoading";
+            this.LazyLoading.Size = new System.Drawing.Size(117, 17);
+            this.LazyLoading.TabIndex = 48;
+            this.LazyLoading.Text = "Enable lazy loading";
+            this.LazyLoading.UseVisualStyleBackColor = true;
             // 
             // CreateDb
             // 
@@ -170,13 +160,13 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.ProxyCreation);
             this.groupBox1.Controls.Add(this.txtCustomConnectionName);
             this.groupBox1.Controls.Add(this.btnBrowse);
             this.groupBox1.Controls.Add(this.btnNew);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.OutputPath);
             this.groupBox1.Controls.Add(this.OutputFolder);
-            this.groupBox1.Controls.Add(this.ContextEnabled);
             this.groupBox1.Controls.Add(this.label23);
             this.groupBox1.Controls.Add(this.LoggingEnabled);
             this.groupBox1.Controls.Add(this.label24);
@@ -185,7 +175,7 @@
             this.groupBox1.Controls.Add(this.label26);
             this.groupBox1.Controls.Add(this.CreateDb);
             this.groupBox1.Controls.Add(this.Namespace);
-            this.groupBox1.Controls.Add(this.GenerateInterface);
+            this.groupBox1.Controls.Add(this.LazyLoading);
             this.groupBox1.Controls.Add(this.ContextName);
             this.groupBox1.Controls.Add(this.label27);
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
@@ -250,6 +240,17 @@
             this.TreeviewContextModels.Size = new System.Drawing.Size(533, 312);
             this.TreeviewContextModels.TabIndex = 58;
             // 
+            // ProxyCreation
+            // 
+            this.ProxyCreation.AutoSize = true;
+            this.ProxyCreation.Enabled = false;
+            this.ProxyCreation.Location = new System.Drawing.Point(295, 76);
+            this.ProxyCreation.Name = "ProxyCreation";
+            this.ProxyCreation.Size = new System.Drawing.Size(128, 17);
+            this.ProxyCreation.TabIndex = 61;
+            this.ProxyCreation.Text = "Enable proxy creation";
+            this.ProxyCreation.UseVisualStyleBackColor = true;
+            // 
             // ContextUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -267,15 +268,13 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.CheckBox ContextEnabled;
         private System.Windows.Forms.CheckBox LoggingEnabled;
         private System.Windows.Forms.TextBox InheritFromInterface;
         private System.Windows.Forms.TextBox OutputFolder;
         private System.Windows.Forms.TextBox Namespace;
         private System.Windows.Forms.TextBox ContextName;
         private System.Windows.Forms.Label label27;
-        private System.Windows.Forms.CheckBox GenerateInterface;
+        private System.Windows.Forms.CheckBox LazyLoading;
         private System.Windows.Forms.CheckBox CreateDb;
         private System.Windows.Forms.Label label26;
         private System.Windows.Forms.Label label25;
@@ -288,5 +287,6 @@
         private System.Windows.Forms.Button btnBrowse;
         private FormControls.TreeView.MultiSelectTreeView.TreeView TreeviewContextModels;
         private System.Windows.Forms.TextBox txtCustomConnectionName;
+        private System.Windows.Forms.CheckBox ProxyCreation;
     }
 }

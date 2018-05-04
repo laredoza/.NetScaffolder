@@ -97,7 +97,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
 
             foreach (Table modelTable in tables)
             {
-                foreach (var relationship in modelTable.RelationShips)
+                foreach (var relationship in modelTable.Relationships)
                 {
                     relationship.Table = modelTable;
                     relationship.RelatedTable = tables.FirstOrDefault(t => t.TableName == relationship.TableName);
@@ -154,7 +154,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
 
                 foreach (var foreignKey in table.ForeignKeys)
                 {
-                    newTable.RelationShips.Add(
+                    newTable.Relationships.Add(
                         new Relationship
                             {
                                 TableName = foreignKey.RefersToTable,
@@ -170,7 +170,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
                     {
                         if (foreignKey.RefersToTable == table.Name)
                         {
-                            newTable.RelationShips.Add(
+                            newTable.Relationships.Add(
                                 new Relationship
                                     {
                                         TableName = foreignKey.TableName,

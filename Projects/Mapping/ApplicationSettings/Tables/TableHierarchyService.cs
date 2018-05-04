@@ -171,10 +171,10 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Tables
                     }
 
                     // Attempt to preserve relationship metadata
-                    if (oldTable.RelationShips != null)
+                    if (oldTable.Relationships != null)
                     {
-                        // Attempt to preserve User created relationships
-                        newTable.RelationShips.AddRange(oldTable.RelationShips.Where(u => u.UserRelationship));
+                        // Attempt to preserve User created Relationships
+                        newTable.Relationships.AddRange(oldTable.Relationships.Where(u => u.UserRelationship));
                     }
                 }
             }
@@ -192,7 +192,7 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Tables
         /// The include fields.
         /// </param>
         /// <param name="includeRelationships">
-        /// The include relationships.
+        /// The include Relationships.
         /// </param>
         /// <returns>
         /// The <see cref="List"/>.
@@ -230,7 +230,7 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Tables
                     relationshipNode = new Hierarchy { Name = "Relationships", Item = null };
                     newTable.Children.Add(relationshipNode);
 
-                    foreach (Relationship relationShip in table.RelationShips)
+                    foreach (Relationship relationShip in table.Relationships)
                     {
                         relationShip.Table = table;
                         relationShip.RelatedTable = tables.FirstOrDefault(t => t.TableName == relationShip.TableName);
@@ -293,7 +293,7 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Tables
                     relationshipNode = new Hierarchy { Name = "Relationships", Item = null };
                     newTable.Children.Add(relationshipNode);
 
-                    foreach (Relationship relationShip in table.RelationShips)
+                    foreach (Relationship relationShip in table.Relationships)
                     {
                         relationshipNode.Children.Add(
                             new Hierarchy { Name = relationShip.RelationshipName, Item = relationShip });
