@@ -158,7 +158,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                     {
                         ColumnName = "CustomerId",
                         DomainDataType = DomainDataType.Int32,
-                        IsRequired = true,
+                        IsRequired = false,
                         ColumnOrder = 4,
                         Precision = 0,
                         Scale = 0,
@@ -393,7 +393,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                     {
                         ColumnName = "CountryName",
                         DomainDataType = DomainDataType.String,
-                        IsRequired = true,
+                        IsRequired = false,
                         ColumnOrder = 2,
                         Precision = 0,
                         Scale = 0,
@@ -524,7 +524,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                     {
                         ColumnName = "ContactName",
                         DomainDataType = DomainDataType.String,
-                        IsRequired = true,
+                        IsRequired = false,
                         ColumnOrder = 4,
                         Precision = 0,
                         Scale = 0,
@@ -539,7 +539,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                     {
                         ColumnName = "ContactTitle",
                         DomainDataType = DomainDataType.String,
-                        IsRequired = true,
+                        IsRequired = false,
                         ColumnOrder = 5,
                         Precision = 0,
                         Scale = 0,
@@ -555,7 +555,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                     {
                         ColumnName = "Address",
                         DomainDataType = DomainDataType.String,
-                        IsRequired = true,
+                        IsRequired = false,
                         ColumnOrder = 6,
                         Precision = 0,
                         Scale = 0,
@@ -570,7 +570,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                     {
                         ColumnName = "City",
                         DomainDataType = DomainDataType.String,
-                        IsRequired = true,
+                        IsRequired = false,
                         ColumnOrder = 7,
                         Precision = 0,
                         Scale = 0,
@@ -585,7 +585,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                     {
                         ColumnName = "PostalCode",
                         DomainDataType = DomainDataType.String,
-                        IsRequired = true,
+                        IsRequired = false,
                         ColumnOrder = 8,
                         Precision = 0,
                         Scale = 0,
@@ -600,7 +600,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                     {
                         ColumnName = "Telephone",
                         DomainDataType = DomainDataType.String,
-                        IsRequired = true,
+                        IsRequired = false,
                         ColumnOrder = 9,
                         Precision = 0,
                         Scale = 0,
@@ -615,7 +615,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                     {
                         ColumnName = "Fax",
                         DomainDataType = DomainDataType.String,
-                        IsRequired = true,
+                        IsRequired = false,
                         ColumnOrder = 10,
                         Precision = 0,
                         Scale = 0,
@@ -630,7 +630,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                     {
                         ColumnName = "CountryId",
                         DomainDataType = DomainDataType.Int32,
-                        IsRequired = true,
+                        IsRequired = false,
                         ColumnOrder = 11,
                         Precision = 0,
                         Scale = 0,
@@ -646,7 +646,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                     {
                         ColumnName = "Photo",
                         DomainDataType = DomainDataType.String,
-                        IsRequired = true,
+                        IsRequired = false,
                         ColumnOrder = 12,
                         Precision = 0,
                         Scale = 0,
@@ -801,7 +801,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                     {
                         ColumnName = "CustomerId",
                         DomainDataType = DomainDataType.Int32,
-                        IsRequired = true,
+                        IsRequired = false ,
                         ColumnOrder = 2,
                         Precision = 0,
                         Scale = 0,
@@ -816,7 +816,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                     {
                         ColumnName = "OrderDate",
                         DomainDataType = DomainDataType.DateTime,
-                        IsRequired = true,
+                        IsRequired = false,
                         ColumnOrder = 3,
                         Precision = 0,
                         Scale = 0,
@@ -831,7 +831,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                     {
                         ColumnName = "DeliveryDate",
                         DomainDataType = DomainDataType.DateTime,
-                        IsRequired = true,
+                        IsRequired = false,
                         ColumnOrder = 4,
                         Precision = 0,
                         Scale = 0,
@@ -846,7 +846,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                     {
                         ColumnName = "ShippingName",
                         DomainDataType = DomainDataType.String,
-                        IsRequired = true,
+                        IsRequired = false,
                         ColumnOrder = 5,
                         Precision = 0,
                         Scale = 0,
@@ -861,7 +861,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                     {
                         ColumnName = "ShippingAddress",
                         DomainDataType = DomainDataType.String,
-                        IsRequired = true,
+                        IsRequired = false,
                         ColumnOrder = 6,
                         Precision = 0,
                         Scale = 0,
@@ -876,7 +876,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                     {
                         ColumnName = "ShippingCity",
                         DomainDataType = DomainDataType.String,
-                        IsRequired = true,
+                        IsRequired = false,
                         ColumnOrder = 7,
                         Precision = 0,
                         Scale = 0,
@@ -891,7 +891,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                     {
                         ColumnName = "ShippingZip",
                         DomainDataType = DomainDataType.String,
-                        IsRequired = true,
+                        IsRequired = false,
                         ColumnOrder = 8,
                         Precision = 0,
                         Scale = 0,
@@ -1106,7 +1106,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                     {
                         ColumnName = "UnitPrice",
                         DomainDataType = DomainDataType.Decimal,
-                        IsRequired = true,
+                        IsRequired = false,
                         ColumnOrder = 4,
                         Precision = 19,
                         Scale = 4,
@@ -1121,7 +1121,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                     {
                         ColumnName = "Amount",
                         DomainDataType = DomainDataType.Int16,
-                        IsRequired = true,
+                        IsRequired = false,
                         ColumnOrder = 5,
                         Precision = 0,
                         Scale = 0,
@@ -1136,7 +1136,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                     {
                         ColumnName = "Discount",
                         DomainDataType = DomainDataType.Single,
-                        IsRequired = true,
+                        IsRequired = false,
                         ColumnOrder = 6,
                         Precision = 0,
                         Scale = 0,
@@ -1271,7 +1271,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                   {
                       ColumnName = "ProductDescription",
                       DomainDataType = DomainDataType.String,
-                      IsRequired = true,
+                      IsRequired = false,
                       ColumnOrder = 2,
                       Precision = 0,
                       Scale = 0,
@@ -1286,7 +1286,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                     {
                         ColumnName = "UnitPrice",
                         DomainDataType = DomainDataType.Decimal,
-                        IsRequired = true,
+                        IsRequired = false,
                         ColumnOrder = 3,
                         Precision = 19,
                         Scale = 4,
@@ -1301,7 +1301,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                     {
                         ColumnName = "Publisher",
                         DomainDataType = DomainDataType.String,
-                        IsRequired = true,
+                        IsRequired = false,
                         ColumnOrder = 5,
                         Precision = 0,
                         Scale = 0,
@@ -1317,7 +1317,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                     {
                         ColumnName = "AmountInStock",
                         DomainDataType = DomainDataType.Int16,
-                        IsRequired = true,
+                        IsRequired = false,
                         ColumnOrder = 6,
                         Precision = 0,
                         Scale = 0,
