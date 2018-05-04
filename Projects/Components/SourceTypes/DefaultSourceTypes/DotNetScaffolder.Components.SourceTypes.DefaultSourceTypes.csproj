@@ -80,6 +80,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdoSources\AdoSource.cs" />
     <Compile Include="AdoSources\MySql\MySqlAdoSourceType.cs" />
     <Compile Include="AdoSources\MySql\MySqlAdoUserControl.cs">
       <SubType>UserControl</SubType>

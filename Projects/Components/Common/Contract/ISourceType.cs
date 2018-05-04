@@ -10,6 +10,7 @@ namespace DotNetScaffolder.Components.Common.Contract
 
     using System.Collections.Generic;
 
+    using DotNetScaffolder.Mapping.MetaData.Enum;
     using DotNetScaffolder.Mapping.MetaData.Model;
 
     #endregion
@@ -112,6 +113,17 @@ namespace DotNetScaffolder.Components.Common.Contract
         /// </param>
         void Fix(List<Table> tables);
 
+        /// <summary>
+        /// The return file path.
+        /// </summary>
+        /// <param name="basePath">
+        /// The base path.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        string ReturnFilePath(string basePath);
+       
         #endregion
     }
 }
