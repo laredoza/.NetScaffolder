@@ -149,6 +149,8 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
             // Temp workaround for issues with getting dataTypes for Oracle
             Type cSharpName = NetDataType(column);
 
+            DataType dataType = extraInfo as DataType;
+
             switch (cSharpName.Name.ToUpper())
             {
                 case "DECIMAL":
