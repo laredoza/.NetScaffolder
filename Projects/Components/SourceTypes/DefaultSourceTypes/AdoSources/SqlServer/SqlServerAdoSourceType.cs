@@ -68,7 +68,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
         /// <param name="databaseType">
         /// The database type.
         /// </param>
-        /// <param name="extraInfo">
+        /// <param name="extraInfo">h
         /// </param>
         /// <returns>
         /// The <see cref="DomainDataType"/>.
