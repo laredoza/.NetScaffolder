@@ -54,7 +54,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
                     {
                         ColumnName = column.Name,
                         DomainDataType =
-                                            this.MapDatabaseType(column.DataType.TypeName, column.DataType),
+                                            this.MapDatabaseType(column.DataType.TypeName, column),
                         IsRequired = column.IsPrimaryKey,
                         ColumnOrder = table.Columns.IndexOf(column) + 1,
                         Precision = column.Precision.HasValue ? column.Precision.Value : 0,
