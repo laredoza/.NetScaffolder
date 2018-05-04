@@ -42,7 +42,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                 bankAccountTable.Relationships.Count,
                 "There should be 3 Relationships in the BankAccounts table.");
 
-            Relationship relationship = bankAccountTable.Relationships.FirstOrDefault(r => r.TableName == "Customer");
+            Relationship relationship = bankAccountTable.Relationships.FirstOrDefault(r => r.ReferencedTableName == "Customer");
             Assert.IsNotNull(relationship, "The Customer Relationship should not be null.");
             Assert.AreEqual("CustomerId", relationship.ColumnName, "The ColumnName should be CustomerId.");
             Assert.AreEqual(
@@ -51,13 +51,13 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                 "The Customer DependencyRelationShip should be ForeignKey.");
             Assert.AreEqual(
                 "CustomerId",
-                relationship.ForeignColumnName,
-                "The ForeignColumnName should be CustomerId.");
-            Assert.AreEqual("Customer", relationship.TableName, "The relationship table name should be Customer");
+                relationship.ReferencedColumnName,
+                "The ReferencedColumnName should be CustomerId.");
+            Assert.AreEqual("Customer", relationship.ReferencedTableName, "The relationship table name should be Customer");
             Assert.AreEqual("FK_BankAccount_Customer", relationship.RelationshipName, "The relationship table name should be FK_BankAccount_Customer.");
 
             relationship = bankAccountTable.Relationships.FirstOrDefault(
-                r => r.TableName == "BankTransfers" && r.ForeignColumnName == "ToBankAccountId");
+                r => r.ReferencedTableName == "BankTransfers" && r.ReferencedColumnName == "ToBankAccountId");
             Assert.IsNotNull(relationship, "The BankTransfers1 Relationship should not be null.");
             Assert.AreEqual("BankAccountId", relationship.ColumnName, "The ColumnName should be ToBankAccountId.");
             Assert.AreEqual(
@@ -66,16 +66,16 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                 "The DependencyRelationShip should be ForeignKeyChild.");
             Assert.AreEqual(
                 "ToBankAccountId",
-                relationship.ForeignColumnName,
-                "The ForeignColumnName should be ToBankAccountId.");
+                relationship.ReferencedColumnName,
+                "The ReferencedColumnName should be ToBankAccountId.");
             Assert.AreEqual(
                 "BankTransfers",
-                relationship.TableName,
+                relationship.ReferencedTableName,
                 "The relationship table name should be BankTransfers.");
             Assert.AreEqual("FK_BankTransfers_BankAccount1", relationship.RelationshipName, "The relationship table name should be FK_BankTransfers_BankAccount1.");
 
             relationship = bankAccountTable.Relationships.FirstOrDefault(
-                r => r.TableName == "BankTransfers" && r.ForeignColumnName == "FromBankAccountId");
+                r => r.ReferencedTableName == "BankTransfers" && r.ReferencedColumnName == "FromBankAccountId");
             Assert.IsNotNull(relationship, "The BankTransfers Relationship should not be null.");
             Assert.AreEqual("BankAccountId", relationship.ColumnName, "The ColumnName should be FromBankAccountId.");
             Assert.AreEqual(
@@ -84,11 +84,11 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                 "The DependencyRelationShip should be ForeignKeyChild.");
             Assert.AreEqual(
                 "FromBankAccountId",
-                relationship.ForeignColumnName,
-                "The ForeignColumnName should be FromBankAccountId.");
+                relationship.ReferencedColumnName,
+                "The ReferencedColumnName should be FromBankAccountId.");
             Assert.AreEqual(
                 "BankTransfers",
-                relationship.TableName,
+                relationship.ReferencedTableName,
                 "The relationship table name should be BankTransfers.");
             Assert.AreEqual("FK_BankTransfers_BankAccount", relationship.RelationshipName, "The relationship table name should be FK_BankTransfers_BankAccount.");
         }
@@ -200,7 +200,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                 "There should be 2 Relationships in the bankTransfersTable table.");
 
             Relationship relationship = bankTransfersTable.Relationships.FirstOrDefault(
-                r => r.TableName == "BankAccount" && r.ColumnName == "ToBankAccountId");
+                r => r.ReferencedTableName == "BankAccount" && r.ColumnName == "ToBankAccountId");
             Assert.IsNotNull(relationship, "The BankTransfers1 Relationship should not be null.");
             Assert.AreEqual("ToBankAccountId", relationship.ColumnName, "The ColumnName should be ToBankAccountId.");
             Assert.AreEqual(
@@ -209,16 +209,16 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                 "The DependencyRelationShip should be ForeignKey.");
             Assert.AreEqual(
                 "BankAccountId",
-                relationship.ForeignColumnName,
-                "The ForeignColumnName should be BankAccountId.");
+                relationship.ReferencedColumnName,
+                "The ReferencedColumnName should be BankAccountId.");
             Assert.AreEqual(
                 "BankAccount",
-                relationship.TableName,
+                relationship.ReferencedTableName,
                 "The relationship table name should be BankTransfers.");
             Assert.AreEqual("FK_BankTransfers_BankAccount1", relationship.RelationshipName, "The relationship table name should be FK_BankTransfers_BankAccount1.");
 
             relationship = bankTransfersTable.Relationships.FirstOrDefault(
-                r => r.TableName == "BankAccount" && r.ColumnName == "FromBankAccountId");
+                r => r.ReferencedTableName == "BankAccount" && r.ColumnName == "FromBankAccountId");
             Assert.IsNotNull(relationship, "The BankTransfers Relationship should not be null.");
             Assert.AreEqual(
                 "FromBankAccountId",
@@ -230,11 +230,11 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                 "The DependencyRelationShip should be ForeignKey.");
             Assert.AreEqual(
                 "BankAccountId",
-                relationship.ForeignColumnName,
-                "The ForeignColumnName should be BankAccountId.");
+                relationship.ReferencedColumnName,
+                "The ReferencedColumnName should be BankAccountId.");
             Assert.AreEqual(
                 "BankAccount",
-                relationship.TableName,
+                relationship.ReferencedTableName,
                 "The relationship table name should be BankTransfers.");
             Assert.AreEqual("FK_BankTransfers_BankAccount", relationship.RelationshipName, "The relationship table name should be FK_BankTransfers_BankAccount.");
         }
@@ -347,15 +347,15 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                 customerTable.Relationships.Count,
                 "There should be 1 Relationships in the Customer table.");
 
-            Relationship relationship = customerTable.Relationships.FirstOrDefault(r => r.TableName == "Customer");
+            Relationship relationship = customerTable.Relationships.FirstOrDefault(r => r.ReferencedTableName == "Customer");
             Assert.IsNotNull(relationship, "The Country Relationship should not be null.");
             Assert.AreEqual("CountryId", relationship.ColumnName, "The ColumnName should be CountryId.");
             Assert.AreEqual(
                 RelationshipType.ForeignKeyChild,
                 relationship.DependencyRelationShip,
                 "The Country DependencyRelationShip should be ForeignKeyChild.");
-            Assert.AreEqual("CountryId", relationship.ForeignColumnName, "The ForeignColumnName should be CountryId.");
-            Assert.AreEqual("Customer", relationship.TableName, "The relationship table name should be Customer");
+            Assert.AreEqual("CountryId", relationship.ReferencedColumnName, "The ReferencedColumnName should be CountryId.");
+            Assert.AreEqual("Customer", relationship.ReferencedTableName, "The relationship table name should be Customer");
             Assert.AreEqual("FK_Customer_Country", relationship.RelationshipName, "The relationship table name should be FK_Customer_Country.");
         }
 
@@ -419,7 +419,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                 softwareTable.Relationships.Count,
                 "There should be 3 Relationships in the Customer table.");
 
-            Relationship relationship = softwareTable.Relationships.FirstOrDefault(r => r.TableName == "BankAccount");
+            Relationship relationship = softwareTable.Relationships.FirstOrDefault(r => r.ReferencedTableName == "BankAccount");
             Assert.IsNotNull(relationship, "The BankAccount Relationship should not be null.");
             Assert.AreEqual("CustomerId", relationship.ColumnName, "The ColumnName should be CustomerId.");
             Assert.AreEqual(
@@ -428,23 +428,23 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                 "The OrderDetails DependencyRelationShip should be ForeignKeyChild.");
             Assert.AreEqual(
                 "CustomerId",
-                relationship.ForeignColumnName,
-                "The ForeignColumnName should be CustomerId.");
-            Assert.AreEqual("BankAccount", relationship.TableName, "The relationship table name should be BankAccount");
+                relationship.ReferencedColumnName,
+                "The ReferencedColumnName should be CustomerId.");
+            Assert.AreEqual("BankAccount", relationship.ReferencedTableName, "The relationship table name should be BankAccount");
             Assert.AreEqual("FK_BankAccount_Customer", relationship.RelationshipName, "The relationship table name should be FK_BankAccount_Customer.");
 
-            relationship = softwareTable.Relationships.FirstOrDefault(r => r.TableName == "Country");
+            relationship = softwareTable.Relationships.FirstOrDefault(r => r.ReferencedTableName == "Country");
             Assert.IsNotNull(relationship, "The Country Relationship should not be null.");
             Assert.AreEqual("CountryId", relationship.ColumnName, "The ColumnName should be CountryId.");
             Assert.AreEqual(
                 RelationshipType.ForeignKey,
                 relationship.DependencyRelationShip,
                 "The DependencyRelationShip should be ForeignKey.");
-            Assert.AreEqual("CountryId", relationship.ForeignColumnName, "The ForeignColumnName should be CountryId.");
-            Assert.AreEqual("Country", relationship.TableName, "The relationship table name should be Country.");
+            Assert.AreEqual("CountryId", relationship.ReferencedColumnName, "The ReferencedColumnName should be CountryId.");
+            Assert.AreEqual("Country", relationship.ReferencedTableName, "The relationship table name should be Country.");
             Assert.AreEqual("FK_Customer_Country", relationship.RelationshipName, "The relationship table name should be FK_Customer_Country.");
 
-            relationship = softwareTable.Relationships.FirstOrDefault(r => r.TableName == "Order");
+            relationship = softwareTable.Relationships.FirstOrDefault(r => r.ReferencedTableName == "Order");
             Assert.IsNotNull(relationship, "The Order Relationship should not be null.");
             Assert.AreEqual("CustomerId", relationship.ColumnName, "The ColumnName should be CustomerId.");
             Assert.AreEqual(
@@ -453,9 +453,9 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                 "The OrderDetails DependencyRelationShip should be ForeignKeyChild.");
             Assert.AreEqual(
                 "CustomerId",
-                relationship.ForeignColumnName,
-                "The ForeignColumnName should be CustomerId.");
-            Assert.AreEqual("Order", relationship.TableName, "The relationship table name should be Order");
+                relationship.ReferencedColumnName,
+                "The ReferencedColumnName should be CustomerId.");
+            Assert.AreEqual("Order", relationship.ReferencedTableName, "The relationship table name should be Order");
             Assert.AreEqual("FK_Order_Customer", relationship.RelationshipName, "The relationship table name should be FK_Order_Customer.");
         }
 
@@ -688,7 +688,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                 orderDetailsTable.Relationships.Count,
                 "There should be 2 Relationships in the OrderDetails table.");
 
-            Relationship relationship = orderDetailsTable.Relationships.FirstOrDefault(r => r.TableName == "Product");
+            Relationship relationship = orderDetailsTable.Relationships.FirstOrDefault(r => r.ReferencedTableName == "Product");
             Assert.IsNotNull(relationship, "The Product Relationship should not be null in the Product table.");
             Assert.AreEqual(
                 "ProductId",
@@ -703,11 +703,11 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
 
             Assert.AreEqual(
                 "ProductId",
-                relationship.ForeignColumnName,
-                "The OrderDetails ForeignColumnName should be ProductId in the Product table.");
-            Assert.AreEqual("Product", relationship.TableName, "The relationship table name should be Product");
+                relationship.ReferencedColumnName,
+                "The OrderDetails ReferencedColumnName should be ProductId in the Product table.");
+            Assert.AreEqual("Product", relationship.ReferencedTableName, "The relationship table name should be Product");
 
-            relationship = orderDetailsTable.Relationships.FirstOrDefault(r => r.TableName == "Order");
+            relationship = orderDetailsTable.Relationships.FirstOrDefault(r => r.ReferencedTableName == "Order");
             Assert.IsNotNull(relationship, "The Order Relationship should not be null in the OrderDetails table.");
             Assert.AreEqual(
                 "OrderId",
@@ -719,9 +719,9 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                 "The OrderDetails DependencyRelationShip should be Child in the Order table.");
             Assert.AreEqual(
                 "OrderId",
-                relationship.ForeignColumnName,
-                "The Order ForeignColumnName should be OrderId in the Order table.");
-            Assert.AreEqual("Order", relationship.TableName, "The relationship table name should be Order");
+                relationship.ReferencedColumnName,
+                "The Order ReferencedColumnName should be OrderId in the Order table.");
+            Assert.AreEqual("Order", relationship.ReferencedTableName, "The relationship table name should be Order");
             Assert.AreEqual("FK_OrdeDetails_Order", relationship.RelationshipName, "The relationship table name should be FK_OrdeDetails_Order.");
 
         }
@@ -738,7 +738,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
             Assert.IsNotNull(ordersTable.Relationships, "The Relationships should not be null in the Orders table.");
             Assert.AreEqual(2, ordersTable.Relationships.Count, "There should be 2 Relationships in the Orders table.");
 
-            Relationship relationship = ordersTable.Relationships.FirstOrDefault(r => r.TableName == "Customer");
+            Relationship relationship = ordersTable.Relationships.FirstOrDefault(r => r.ReferencedTableName == "Customer");
             Assert.IsNotNull(relationship, "The Customer Relationship should not be null.");
             Assert.AreEqual("CustomerId", relationship.ColumnName, "The ColumnName should be CustomerId.");
             Assert.AreEqual(
@@ -747,22 +747,22 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                 "The Customer DependencyRelationShip should be ForeignKey.");
             Assert.AreEqual(
                 "CustomerId",
-                relationship.ForeignColumnName,
-                "The ForeignColumnName should be CustomerId.");
-            Assert.AreEqual("Customer", relationship.TableName, "The relationship table name should be Customer");
+                relationship.ReferencedColumnName,
+                "The ReferencedColumnName should be CustomerId.");
+            Assert.AreEqual("Customer", relationship.ReferencedTableName, "The relationship table name should be Customer");
             Assert.AreEqual("FK_Order_Customer", relationship.RelationshipName, "The relationship table name should be FK_Order_Customer.");
 
-            relationship = ordersTable.Relationships.FirstOrDefault(r => r.TableName == "OrderDetails");
+            relationship = ordersTable.Relationships.FirstOrDefault(r => r.ReferencedTableName == "OrderDetails");
             Assert.IsNotNull(relationship, "The OrderDetails Relationship should not be null.");
             Assert.AreEqual("OrderId", relationship.ColumnName, "The ColumnName should be OrderId.");
             Assert.AreEqual(
                 RelationshipType.ForeignKeyChild,
                 relationship.DependencyRelationShip,
                 "The DependencyRelationShip should be ForeignKeyChild.");
-            Assert.AreEqual("OrderId", relationship.ForeignColumnName, "The ForeignColumnName should be OrderId.");
+            Assert.AreEqual("OrderId", relationship.ReferencedColumnName, "The ReferencedColumnName should be OrderId.");
             Assert.AreEqual(
                 "OrderDetails",
-                relationship.TableName,
+                relationship.ReferencedTableName,
                 "The relationship table name should be OrderDetails.");
             Assert.AreEqual("FK_OrdeDetails_Order", relationship.RelationshipName, "The relationship table name should be FK_OrdeDetails_Order.");
         }
@@ -917,7 +917,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                 softwareTable.Relationships.Count,
                 "There should be 1 Relationships in the Software table.");
 
-            Relationship relationship = softwareTable.Relationships.FirstOrDefault(r => r.TableName == "Product");
+            Relationship relationship = softwareTable.Relationships.FirstOrDefault(r => r.ReferencedTableName == "Product");
             Assert.IsNotNull(relationship, "The Product Relationship should not be null in the Product table.");
             Assert.AreEqual(
                 "ProductId",
@@ -929,9 +929,9 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                 "The OrderDetails DependencyRelationShip should be Child in the Product table.");
             Assert.AreEqual(
                 "ProductId",
-                relationship.ForeignColumnName,
-                "The OrderDetails ForeignColumnName should be ProductId in the Product table.");
-            Assert.AreEqual("Product", relationship.TableName, "The relationship table name should be Product");
+                relationship.ReferencedColumnName,
+                "The OrderDetails ReferencedColumnName should be ProductId in the Product table.");
+            Assert.AreEqual("Product", relationship.ReferencedTableName, "The relationship table name should be Product");
             Assert.AreEqual("FK_Software_Product", relationship.RelationshipName, "The relationship table name should be FK_Software_Product.");
         }
 
@@ -1039,7 +1039,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                 orderDetailsTable.Relationships.Count,
                 "There should be 1 Relationships in the Book table.");
 
-            Relationship relationship = orderDetailsTable.Relationships.FirstOrDefault(r => r.TableName == "Product");
+            Relationship relationship = orderDetailsTable.Relationships.FirstOrDefault(r => r.ReferencedTableName == "Product");
             Assert.IsNotNull(relationship, "The Product Relationship should not be null in the Product table.");
             Assert.AreEqual(
                 "ProductId",
@@ -1051,9 +1051,9 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                 "The Book DependencyRelationShip should be Child in the Product table.");
             Assert.AreEqual(
                 "ProductId",
-                relationship.ForeignColumnName,
-                "The Book ForeignColumnName should be ProductId in the Product table.");
-            Assert.AreEqual("Product", relationship.TableName, "The relationship table name should be Product");
+                relationship.ReferencedColumnName,
+                "The Book ReferencedColumnName should be ProductId in the Product table.");
+            Assert.AreEqual("Product", relationship.ReferencedTableName, "The relationship table name should be Product");
             Assert.AreEqual("FK_Book_Product", relationship.RelationshipName, "The relationship table name should be FK_Book_Product.");
         }
 
@@ -1160,7 +1160,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                 productTable.Relationships.Count,
                 "There should be 3 Relationships in the Product table.");
 
-            Relationship relationship = productTable.Relationships.FirstOrDefault(r => r.TableName == "Book");
+            Relationship relationship = productTable.Relationships.FirstOrDefault(r => r.ReferencedTableName == "Book");
             Assert.IsNotNull(relationship, "The Book Relationship should not be null in the Product table.");
             Assert.AreEqual(
                 "ProductId",
@@ -1172,12 +1172,12 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                 "The Book DependencyRelationShip should be Child in the Product table.");
             Assert.AreEqual(
                 "ProductId",
-                relationship.ForeignColumnName,
-                "The Book ForeignColumnName should be ProductId in the Product table.");
-            Assert.AreEqual("Book", relationship.TableName, "The relationship table name should be Book.");
+                relationship.ReferencedColumnName,
+                "The Book ReferencedColumnName should be ProductId in the Product table.");
+            Assert.AreEqual("Book", relationship.ReferencedTableName, "The relationship table name should be Book.");
             Assert.AreEqual("FK_Book_Product", relationship.RelationshipName, "The relationship table name should be FK_Book_Product.");
 
-            relationship = productTable.Relationships.FirstOrDefault(r => r.TableName == "OrderDetails");
+            relationship = productTable.Relationships.FirstOrDefault(r => r.ReferencedTableName == "OrderDetails");
             Assert.AreEqual(
                 "ProductId",
                 relationship.ColumnName,
@@ -1189,15 +1189,15 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                 "The OrderDetails DependencyRelationShip should be Child in the Product table.");
             Assert.AreEqual(
                 "ProductId",
-                relationship.ForeignColumnName,
-                "The OrderDetails ForeignColumnName should be ProductId in the Product table.");
+                relationship.ReferencedColumnName,
+                "The OrderDetails ReferencedColumnName should be ProductId in the Product table.");
             Assert.AreEqual(
                 "OrderDetails",
-                relationship.TableName,
+                relationship.ReferencedTableName,
                 "The relationship table name should be OrderDetails.");
             Assert.AreEqual("FK_OrderDetails_Product", relationship.RelationshipName, "The relationship table name should be FK_OrderDetails_Product.");
 
-            relationship = productTable.Relationships.FirstOrDefault(r => r.TableName == "Software");
+            relationship = productTable.Relationships.FirstOrDefault(r => r.ReferencedTableName == "Software");
             Assert.AreEqual(
                 "ProductId",
                 relationship.ColumnName,
@@ -1209,9 +1209,9 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                 "The ProductId DependencyRelationShip should be Child in the Product table.");
             Assert.AreEqual(
                 "ProductId",
-                relationship.ForeignColumnName,
-                "The ProductId ForeignColumnName should be ProductId in the Product table.");
-            Assert.AreEqual("Software", relationship.TableName, "The relationship table name should be Software.");
+                relationship.ReferencedColumnName,
+                "The ProductId ReferencedColumnName should be ProductId in the Product table.");
+            Assert.AreEqual("Software", relationship.ReferencedTableName, "The relationship table name should be Software.");
             Assert.AreEqual("FK_Software_Product", relationship.RelationshipName, "The relationship table name should be FK_Software_Product.");
         }
 

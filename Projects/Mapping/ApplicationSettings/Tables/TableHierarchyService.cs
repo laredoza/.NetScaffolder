@@ -233,7 +233,7 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Tables
                     foreach (Relationship relationShip in table.Relationships)
                     {
                         relationShip.Table = table;
-                        relationShip.RelatedTable = tables.FirstOrDefault(t => t.TableName == relationShip.TableName);
+                        relationShip.RelatedTable = tables.FirstOrDefault(t => t.TableName == relationShip.ReferencedTableName);
                         
                         relationshipNode.Children.Add(
                             new Hierarchy { Name = relationShip.RelationshipName, Item = relationShip });

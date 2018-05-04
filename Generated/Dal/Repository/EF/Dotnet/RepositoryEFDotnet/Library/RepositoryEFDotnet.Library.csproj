@@ -51,6 +51,7 @@
     <Compile Include="Base\UowRepository.cs" />
     <Compile Include="Context\AccountContext.g.cs" />
     <Compile Include="Context\CustomerContext.g.cs" />
+    <Compile Include="Context\TestingContext.g.cs" />
     <Compile Include="Dto\BankAccountDto.g.cs" />
     <Compile Include="Dto\BankTransfersDto.g.cs" />
     <Compile Include="Dto\BookDto.g.cs" />
@@ -148,6 +149,7 @@
       <LastOutputs>
 .\Context\AccountContext.g.cs
 .\Context\CustomerContext.g.cs
+.\Context\TestingContext.g.cs
 .\Dto\BankAccountDto.g.cs
 .\Dto\BankTransfersDto.g.cs
 .\Dto\BookDto.g.cs

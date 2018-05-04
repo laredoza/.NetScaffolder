@@ -32,7 +32,7 @@ namespace <#= DataType.FullNamespace #>
 		public <#= DataType.EntityName #>()
 		{
 <#+ foreach(var child in DataType.MetaData.DistinctChildRelationships){ #>
-			this.<#= DataType.NamingConvention.ApplyNamingConvention(child.TableNamePlural) #> = new <#= DataType.CollectionOption.ClassName #> <<#= DataType.NamingConvention.ApplyNamingConvention(child.TableName) #>>();
+			this.<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableNamePlural) #> = new <#= DataType.CollectionOption.ClassName #> <<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #>>();
 <#+ } #>
 		}
 		
@@ -45,23 +45,23 @@ namespace <#= DataType.FullNamespace #>
 <#+ } #>
 
 <#+ foreach(var child in DataType.MetaData.DistinctChildRelationships){ #>
-			this.<#= DataType.NamingConvention.ApplyNamingConvention(child.TableNamePlural) #> = new <#= DataType.CollectionOption.ClassName #> <<#= DataType.NamingConvention.ApplyNamingConvention(child.TableName) #>>();
+			this.<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableNamePlural) #> = new <#= DataType.CollectionOption.ClassName #> <<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #>>();
 <#+ } #>
 
 			if(deep)
 			{
 <#+ foreach(var child in DataType.MetaData.DistinctChildRelationships){ #>
-				if(item.<#= DataType.NamingConvention.ApplyNamingConvention(child.TableNamePlural) #> != null)
+				if(item.<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableNamePlural) #> != null)
 				{
-					foreach(var childItem in item.<#= DataType.NamingConvention.ApplyNamingConvention(child.TableNamePlural) #>)
+					foreach(var childItem in item.<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableNamePlural) #>)
 					{
-						this.<#= DataType.NamingConvention.ApplyNamingConvention(child.TableNamePlural) #>.Add(new <#= DataType.NamingConvention.ApplyNamingConvention(child.TableName) #>(childItem, deep));
+						this.<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableNamePlural) #>.Add(new <#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #>(childItem, deep));
 					}
 				}
 <#+ } #>
 
 <#+ foreach(var parent in DataType.MetaData.DistinctParentRelationships){ #>
-				this.<#= DataType.NamingConvention.ApplyNamingConvention(parent.TableName) #> = new <#= DataType.NamingConvention.ApplyNamingConvention(parent.TableName) #>(item.<#= DataType.NamingConvention.ApplyNamingConvention(parent.TableName) #>, deep);
+				this.<#= DataType.NamingConvention.ApplyNamingConvention(parent.ReferencedTableName) #> = new <#= DataType.NamingConvention.ApplyNamingConvention(parent.ReferencedTableName) #>(item.<#= DataType.NamingConvention.ApplyNamingConvention(parent.ReferencedTableName) #>, deep);
 <#+ } #>
 			}
 		}
@@ -80,19 +80,19 @@ namespace <#= DataType.FullNamespace #>
 		#region Child Relationships
 		
 <#+ foreach(var child in DataType.MetaData.DistinctChildRelationships){ #>
-		<#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.NamingConvention.ApplyNamingConvention(child.TableName) #>> I<#= DataType.EntityName #>.<#= DataType.NamingConvention.ApplyNamingConvention(child.TableNamePlural) #> 
+		<#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #>> I<#= DataType.EntityName #>.<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableNamePlural) #> 
 		{ 
 			get
 			{
-				return (<#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.NamingConvention.ApplyNamingConvention(child.TableName) #>>)this.<#= DataType.NamingConvention.ApplyNamingConvention(child.TableNamePlural) #>;
+				return (<#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #>>)this.<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableNamePlural) #>;
 			}
 			set
 			{
-				this.<#= DataType.NamingConvention.ApplyNamingConvention(child.TableNamePlural) #> = (<#= DataType.CollectionOption.ClassNameInterface #><<#= DataType.NamingConvention.ApplyNamingConvention(child.TableName) #>>)value;
+				this.<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableNamePlural) #> = (<#= DataType.CollectionOption.ClassNameInterface #><<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #>>)value;
 			}			
 		}
 		
-		public virtual <#= DataType.CollectionOption.ClassNameInterface #><<#= DataType.NamingConvention.ApplyNamingConvention(child.TableName) #>> <#= DataType.NamingConvention.ApplyNamingConvention(child.TableNamePlural) #> { get; set; }
+		public virtual <#= DataType.CollectionOption.ClassNameInterface #><<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #>> <#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableNamePlural) #> { get; set; }
 <#+ } #>
 		
 		#endregion
@@ -100,19 +100,19 @@ namespace <#= DataType.FullNamespace #>
 		#region Parent Relationships
 		
 <#+ foreach(var parent in DataType.MetaData.DistinctParentRelationships){ #>
-		I<#= DataType.NamingConvention.ApplyNamingConvention(parent.TableName) #> I<#= DataType.EntityName #>.<#= DataType.NamingConvention.ApplyNamingConvention(parent.TableName) #> 
+		I<#= DataType.NamingConvention.ApplyNamingConvention(parent.ReferencedTableName) #> I<#= DataType.EntityName #>.<#= DataType.NamingConvention.ApplyNamingConvention(parent.ReferencedTableName) #> 
 		{ 
 			get
 			{
-				return this.<#= DataType.NamingConvention.ApplyNamingConvention(parent.TableName) #>;
+				return this.<#= DataType.NamingConvention.ApplyNamingConvention(parent.ReferencedTableName) #>;
 			}
 			set
 			{
-				this.<#= DataType.NamingConvention.ApplyNamingConvention(parent.TableName) #> = (<#= DataType.NamingConvention.ApplyNamingConvention(parent.TableName) #>)value;
+				this.<#= DataType.NamingConvention.ApplyNamingConvention(parent.ReferencedTableName) #> = (<#= DataType.NamingConvention.ApplyNamingConvention(parent.ReferencedTableName) #>)value;
 			}
 		}
 		
-		public virtual <#= DataType.NamingConvention.ApplyNamingConvention(parent.TableName) #> <#= DataType.NamingConvention.ApplyNamingConvention(parent.TableName) #> { get; set; }
+		public virtual <#= DataType.NamingConvention.ApplyNamingConvention(parent.ReferencedTableName) #> <#= DataType.NamingConvention.ApplyNamingConvention(parent.ReferencedTableName) #> { get; set; }
 <#+ } #>
 		
 		#endregion

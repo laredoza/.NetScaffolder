@@ -186,13 +186,11 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
     public class ContextData
     {
         private List<Relationship> exludedRelationships = null;
-        private List<Relationship> includedRelationships = null;
 
         public ContextData()
         {
             Models = new List<Table>();
             ExcludedRelationships = new List<Relationship>();
-            IncludedRelationships = new List<Relationship>();
             OutputFolder = "Context";
             ContextName = "NewContext";
             CustomConnectionName = string.Empty;
@@ -266,8 +264,8 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
                     {
                         foreach (var rel in model.Relationships.Where(o => o.Render))
                         {
-                            if (!exludedRelationships.Any(o => o.SchemaName == rel.SchemaName && o.TableName == rel.TableName) &&
-                                !Models.Any(o => o.SchemaName == rel.SchemaName && o.TableName == rel.TableName))
+                            if (!exludedRelationships.Any(o => o.SchemaName == rel.SchemaName && o.ReferencedTableName == rel.ReferencedTableName) &&
+                                !Models.Any(o => o.SchemaName == rel.SchemaName && o.TableName == rel.ReferencedTableName))
                             {
                                 exludedRelationships.Add(rel);
                             }
@@ -281,35 +279,6 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
             private set
             {
                 exludedRelationships = value;
-            }
-        }
-
-        [XmlIgnore]
-        public List<Relationship> IncludedRelationships
-        {
-            get
-            {
-                if (!includedRelationships.Any())
-                {
-                    foreach (var model in Models)
-                    {
-                        foreach (var rel in model.Relationships.Where(o => o.Render))
-                        {
-                            if (Models.Any(o => o.SchemaName == rel.SchemaName && o.TableName == rel.TableName) &&
-                                !includedRelationships.Any(o=> o.RelationshipName == rel.RelationshipName))
-                            {
-                                includedRelationships.Add(rel);
-                            }
-                        }
-                    }
-                }
-
-                return includedRelationships;
-            }
-
-            private set
-            {
-                includedRelationships = value;
             }
         }
 

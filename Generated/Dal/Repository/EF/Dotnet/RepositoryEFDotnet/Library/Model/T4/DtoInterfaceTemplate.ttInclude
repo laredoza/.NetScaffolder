@@ -35,7 +35,7 @@ namespace <#= DataType.FullNamespace #>
 		#region Child Relationships
 		
 <#+ foreach(var child in DataType.MetaData.DistinctChildRelationships){ #>
-		<#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.NamingConvention.ApplyNamingConvention(child.TableName) #>> <#= DataType.NamingConvention.ApplyNamingConvention(child.TableNamePlural) #> { get; set; }
+		<#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #>> <#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableNamePlural) #> { get; set; }
 <#+ } #>
 		
 		#endregion
@@ -43,7 +43,7 @@ namespace <#= DataType.FullNamespace #>
 		#region Parent Relationships
 		
 <#+ foreach(var parent in DataType.MetaData.DistinctParentRelationships){ #>
-		I<#= DataType.NamingConvention.ApplyNamingConvention(parent.TableName) #> <#= DataType.NamingConvention.ApplyNamingConvention(parent.TableName) #> { get; set; }
+		I<#= DataType.NamingConvention.ApplyNamingConvention(parent.ReferencedTableName) #> <#= DataType.NamingConvention.ApplyNamingConvention(parent.ReferencedTableName) #> { get; set; }
 <#+ } #>
 		
 		#endregion

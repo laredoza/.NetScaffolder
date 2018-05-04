@@ -67,18 +67,7 @@ namespace <#= ContextData.TransformFullnamespace(DataType.BaseNamespace) #>
 			modelBuilder.Entity<<#=DataType.TransformModelName(table.TableName) #>>().Property(t => t.<#= pk.ColumnName #>).HasDatabaseGeneratedOption(<#=table.TransformDatabaseGeneratedKeyType #>);
 <#+ } #>
 <#+ if(table.PrimaryKeyCount > 1){ #>
-<#+ 
-
-var cols = table.Columns.Where(o => o.IsPrimaryKey);  
-var pks = string.Empty;
-foreach(var col in cols)
-{
-	pks += col.ColumnName + ",";
-}
-
-pks.TrimEnd(',');
-#>
-			modelBuilder.Entity<<#=DataType.TransformModelName(table.TableName) #>>().HasKey(t => t.<#= pks #>);
+			// TODO: Add composite primary keys
 <#+  #>
 <#+ } #>
 <#+ } #>
@@ -87,8 +76,10 @@ pks.TrimEnd(',');
 			
 			#region Included Relationships
 			
-<#+ foreach(var rel in ContextData.IncludedRelationships){ #>
-			modelBuilder.Entity<<#=DataType.TransformModelName(rel.TableName) #>>().HasRequired<<#= rel.TableName #>>(s => s.<#= rel.TableName #>).WithMany(s => s.<#= rel.TableNamePlural #>).HasForeignKey(s => s.<#= rel.ForeignColumnName #>).WillCascadeOnDelete(false);
+<#+ foreach(var table in ContextData.Models){ #>
+<#+ foreach(var rel in table.ChildRelationships){ #>
+			modelBuilder.Entity<<#=DataType.TransformModelName(rel.ReferencedTableName) #>>().HasRequired<<#= DataType.TransformModelName(table.TableName) #>>(s => s.<#= table.TableName #>).WithMany(s => s.<#= rel.ReferencedTableNamePlural #>).HasForeignKey(s => s.<#= rel.ReferencedColumnName #>).WillCascadeOnDelete(false);
+<#+ } #>
 <#+ } #>
 			
 			#endregion
@@ -98,7 +89,7 @@ pks.TrimEnd(',');
 			// Exclude entities not part of this context
 			
 <#+ foreach(var rel in ContextData.ExcludedRelationships){ #>
-			modelBuilder.Ignore<<#= rel.TableName #>>();
+			modelBuilder.Ignore<<#= rel.ReferencedTableName #>>();
 <#+ } #>
 
 			#endregion

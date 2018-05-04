@@ -78,12 +78,13 @@ namespace Banking.Models.Customers
 			
 			#region Included Relationships
 			
-			modelBuilder.Entity<Product>().HasRequired<Product>(s => s.Product).WithMany(s => s.Products).HasForeignKey(s => s.ProductId).WillCascadeOnDelete(false);
-			modelBuilder.Entity<Customer>().HasRequired<Customer>(s => s.Customer).WithMany(s => s.Customers).HasForeignKey(s => s.CountryId).WillCascadeOnDelete(false);
-			modelBuilder.Entity<Order>().HasRequired<Order>(s => s.Order).WithMany(s => s.Orders).HasForeignKey(s => s.CustomerId).WillCascadeOnDelete(false);
-			modelBuilder.Entity<OrderDetails>().HasRequired<OrderDetails>(s => s.OrderDetails).WithMany(s => s.OrderDetails).HasForeignKey(s => s.OrderId).WillCascadeOnDelete(false);
-			modelBuilder.Entity<Product>().HasRequired<Product>(s => s.Product).WithMany(s => s.Products).HasForeignKey(s => s.ProductId).WillCascadeOnDelete(false);
-			modelBuilder.Entity<Software>().HasRequired<Software>(s => s.Software).WithMany(s => s.Softwares).HasForeignKey(s => s.ProductId).WillCascadeOnDelete(false);
+			modelBuilder.Entity<Customer>().HasRequired<Country>(s => s.Country).WithMany(s => s.Customers).HasForeignKey(s => s.CountryId).WillCascadeOnDelete(false);
+			modelBuilder.Entity<BankAccount>().HasRequired<Customer>(s => s.Customer).WithMany(s => s.BankAccounts).HasForeignKey(s => s.CustomerId).WillCascadeOnDelete(false);
+			modelBuilder.Entity<Order>().HasRequired<Customer>(s => s.Customer).WithMany(s => s.Orders).HasForeignKey(s => s.CustomerId).WillCascadeOnDelete(false);
+			modelBuilder.Entity<OrderDetails>().HasRequired<Order>(s => s.Order).WithMany(s => s.OrderDetails).HasForeignKey(s => s.OrderId).WillCascadeOnDelete(false);
+			modelBuilder.Entity<Book>().HasRequired<Product>(s => s.Product).WithMany(s => s.Books).HasForeignKey(s => s.ProductId).WillCascadeOnDelete(false);
+			modelBuilder.Entity<OrderDetails>().HasRequired<Product>(s => s.Product).WithMany(s => s.OrderDetails).HasForeignKey(s => s.ProductId).WillCascadeOnDelete(false);
+			modelBuilder.Entity<Software>().HasRequired<Product>(s => s.Product).WithMany(s => s.Softwares).HasForeignKey(s => s.ProductId).WillCascadeOnDelete(false);
 			
 			#endregion
 			

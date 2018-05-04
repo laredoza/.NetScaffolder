@@ -150,12 +150,12 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
 
             set
             {
-                if (this.DataSource != null && this.DataSource.ForeignColumnName != value)
+                if (this.DataSource != null && this.DataSource.ReferencedColumnName != value)
                 {
-                    this.DataSource.ForeignColumnName = value;
+                    this.DataSource.ReferencedColumnName = value;
                 }
 
-                if (this.ComboBoxRelatedColumn.SelectedValue != value)
+                if (this.ComboBoxRelatedColumn.SelectedValue.ToString() != value)
                 {
                     this.ComboBoxRelatedColumn.SelectedValue = value;
                 }
@@ -174,12 +174,12 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
 
             set
             {
-                if (this.DataSource != null && this.DataSource.TableName != value)
+                if (this.DataSource != null && this.DataSource.ReferencedTableName != value)
                 {
-                    this.DataSource.TableName = value;
+                    this.DataSource.ReferencedTableName = value;
                 }
 
-                if (this.ComboBoxRelatedTable.SelectedValue != value)
+                if (!string.Equals(this.ComboBoxRelatedTable.SelectedValue, value))
                 {
                     this.ComboBoxRelatedTable.SelectedValue = value;
                 }
@@ -378,7 +378,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         {
             if (this.ComboBoxRelatedColumn.SelectedValue != null)
             {
-                this.DataSource.ForeignColumnName = this.ComboBoxRelatedColumn.SelectedValue.ToString();
+                this.DataSource.ReferencedColumnName = this.ComboBoxRelatedColumn.SelectedValue.ToString();
             }
         }
 
@@ -439,8 +439,8 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
                 this.RelationshipName = this.DataSource.RelationshipName;
                 this.DependencyRelationShip = this.DataSource.DependencyRelationShip;
                 this.SchemaName = this.DataSource.SchemaName;
-                this.RelatedTableName = this.DataSource.TableName;
-                this.ForeignColumnName = this.DataSource.ForeignColumnName;
+                this.RelatedTableName = this.DataSource.ReferencedTableName;
+                this.ForeignColumnName = this.DataSource.ReferencedColumnName;
                 this.ColumnName = this.DataSource.ColumnName;
             }
             else

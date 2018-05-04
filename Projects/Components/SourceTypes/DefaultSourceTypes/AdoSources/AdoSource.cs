@@ -76,7 +76,6 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
                     newTable.Relationships.Add(
                         new Relationship
                         {
-                            TableName = table.Name,
                             ReferencedTableName = foreignKey.RefersToTable,
                             ColumnName = foreignKey.Columns[0],
                             ReferencedColumnName = foreignKey.ReferencedColumns(schema).ToList()[0],
@@ -94,8 +93,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
                             newTable.Relationships.Add(
                                 new Relationship
                                 {
-                                    TableName = foreignKey.RefersToTable,
-                                    ReferencedTableName = table.Name,
+                                    ReferencedTableName = foreignKey.RefersToTable,
                                     ColumnName = foreignKey.Columns[0],
                                     ReferencedColumnName = foreignKey.ReferencedColumns(schema).ToList()[0],
                                     DependencyRelationShip = RelationshipType.ForeignKeyChild,

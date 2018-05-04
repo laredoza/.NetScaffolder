@@ -167,14 +167,14 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Differences
                 .Where(c => !firstTableColumnNameList.Contains(c.ColumnName.ToUpper())).ToList();
 
             var secondTableRelationshipTableNames =
-                new HashSet<string>(secondTable.Relationships.Select(u => u.TableName.ToUpper()));
+                new HashSet<string>(secondTable.Relationships.Select(u => u.ReferencedTableName.ToUpper()));
             retval.FirstExtraRelationships = firstTable.Relationships
-                .Where(u => !secondTableRelationshipTableNames.Contains(u.TableName.ToUpper())).ToList();
+                .Where(u => !secondTableRelationshipTableNames.Contains(u.ReferencedTableName.ToUpper())).ToList();
 
             var firstTableRelationshipTableNames =
-                new HashSet<string>(firstTable.Relationships.Select(u => u.TableName.ToUpper()));
+                new HashSet<string>(firstTable.Relationships.Select(u => u.ReferencedTableName.ToUpper()));
             retval.FirstMissingRelationships = secondTable.Relationships
-                .Where(u => !firstTableRelationshipTableNames.Contains(u.TableName.ToUpper())).ToList();
+                .Where(u => !firstTableRelationshipTableNames.Contains(u.ReferencedTableName.ToUpper())).ToList();
 
             retval.ColumnDataTypeDiffs = new List<ColumnDataTypeDifference>();
             foreach (var column in firstTable.Columns)

@@ -99,24 +99,18 @@ namespace DotNetScaffolder.Mapping.MetaData.Model
         /// <summary>
         ///     Gets or sets the table name.
         /// </summary>
-        [XmlAttribute("TableName")]
-        public string TableName { get; set; }
-
-        /// <summary>
-        ///     Gets or sets the table name.
-        /// </summary>
         [XmlAttribute("ReferencedTableName")]
         public string ReferencedTableName { get; set; }
 
-        public string TableNamePlural
+        public string ReferencedTableNamePlural
         {
             get
             {
-                if(TableName.EndsWith("s"))
+                if(ReferencedTableName.EndsWith("s"))
                 {
-                    return TableName;
+                    return ReferencedTableName;
                 }
-                return TableName + "s";
+                return ReferencedTableName + "s";
             }
         }
 
@@ -157,7 +151,6 @@ namespace DotNetScaffolder.Mapping.MetaData.Model
 
             result.Render = this.Render;
             result.SchemaName = this.SchemaName;
-            result.TableName = this.TableName;
 
             if (this.Table != null)
             {

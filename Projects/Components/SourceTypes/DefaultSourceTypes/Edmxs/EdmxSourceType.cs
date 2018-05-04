@@ -128,23 +128,15 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.Edmxs
                 {
                     var ass = new Relationship
                     {
-                        TableName =
-          (rel.ReferentialConstraint.Dependent.Role
-           == table.Name)
-              ? rel.ReferentialConstraint.Principal
-                  .Role
-              : rel.ReferentialConstraint.Dependent
-                  .Role,
+                        ReferencedTableName =
+          (rel.ReferentialConstraint.Dependent.Role == table.Name)
+              ? rel.ReferentialConstraint.Principal.Role
+              : rel.ReferentialConstraint.Dependent.Role,
                         ColumnName =
-          (rel.ReferentialConstraint.Dependent.Role
-           == table.Name)
-              ? rel.ReferentialConstraint.Dependent
-                  .PropertyRef.Name
-              : rel.ReferentialConstraint.Principal
-                  .PropertyRef.Name,
-                        ForeignColumnName =
-          (rel.ReferentialConstraint.Principal.Role
-           == table.Name)
+          (rel.ReferentialConstraint.Dependent.Role == table.Name)
+              ? rel.ReferentialConstraint.Dependent.PropertyRef.Name
+              : rel.ReferentialConstraint.Principal.PropertyRef.Name,
+                        ReferencedColumnName = (rel.ReferentialConstraint.Principal.Role == table.Name)
               ? rel.ReferentialConstraint.Dependent
                   .PropertyRef.Name
               : rel.ReferentialConstraint.Principal
@@ -366,7 +358,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.Edmxs
                 foreach (var relationship in modelTable.Relationships)
                 {
                     relationship.Table = modelTable;
-                    relationship.RelatedTable = tables.FirstOrDefault(t => t.TableName == relationship.TableName);
+                    relationship.RelatedTable = tables.FirstOrDefault(t => t.TableName == relationship.ReferencedTableName);
                     relationship.SchemaName = relationship.RelatedTable.SchemaName;
                 }
             }
@@ -375,7 +367,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.Edmxs
 
         public DatabaseGeneratedKeyType MapDatabaseGeneratedKey(string storeGeneratedPattern)
         {
-            if(string.IsNullOrEmpty(storeGeneratedPattern))
+            if (string.IsNullOrEmpty(storeGeneratedPattern))
             {
                 return DatabaseGeneratedKeyType.None;
             }

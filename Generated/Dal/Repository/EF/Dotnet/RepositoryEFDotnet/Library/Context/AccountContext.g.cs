@@ -63,8 +63,8 @@ namespace Banking.Models.Accounts
 			
 			#region Included Relationships
 			
-			modelBuilder.Entity<BankTransfers>().HasRequired<BankTransfers>(s => s.BankTransfers).WithMany(s => s.BankTransfers).HasForeignKey(s => s.FromBankAccountId).WillCascadeOnDelete(false);
-			modelBuilder.Entity<BankTransfers>().HasRequired<BankTransfers>(s => s.BankTransfers).WithMany(s => s.BankTransfers).HasForeignKey(s => s.ToBankAccountId).WillCascadeOnDelete(false);
+			modelBuilder.Entity<BankTransfers>().HasRequired<BankAccount>(s => s.BankAccount).WithMany(s => s.BankTransfers).HasForeignKey(s => s.FromBankAccountId).WillCascadeOnDelete(false);
+			modelBuilder.Entity<BankTransfers>().HasRequired<BankAccount>(s => s.BankAccount).WithMany(s => s.BankTransfers).HasForeignKey(s => s.ToBankAccountId).WillCascadeOnDelete(false);
 			
 			#endregion
 			

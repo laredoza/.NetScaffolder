@@ -32,7 +32,7 @@ namespace <#= DataType.FullNamespace #>
 		public <#= DataType.DtoNameFull #>()
 		{
 <#+ foreach(var child in DataType.MetaData.DistinctChildRelationships){ #>
-			this.<#= DataType.NamingConvention.ApplyNamingConvention(child.TableNamePlural) #> = new <#= DataType.CollectionOption.ClassName #> <I<#= DataType.NamingConvention.ApplyNamingConvention(child.TableName) #>>();
+			this.<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableNamePlural) #> = new <#= DataType.CollectionOption.ClassName #> <I<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #>>();
 <#+ } #>
 		}
 		
@@ -45,23 +45,23 @@ namespace <#= DataType.FullNamespace #>
 <#+ } #>
 
 <#+ foreach(var child in DataType.MetaData.DistinctChildRelationships){ #>
-			this.<#= DataType.NamingConvention.ApplyNamingConvention(child.TableNamePlural) #> = new <#= DataType.CollectionOption.ClassName #> <I<#= DataType.NamingConvention.ApplyNamingConvention(child.TableName) #>>();
+			this.<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableNamePlural) #> = new <#= DataType.CollectionOption.ClassName #> <I<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #>>();
 <#+ } #>
 
 			if(deep)
 			{
 <#+ foreach(var child in DataType.MetaData.DistinctChildRelationships){ #>
-				if(item.<#= DataType.NamingConvention.ApplyNamingConvention(child.TableNamePlural) #> != null)
+				if(item.<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableNamePlural) #> != null)
 				{
-					foreach(var childItem in item.<#= DataType.NamingConvention.ApplyNamingConvention(child.TableNamePlural) #>)
+					foreach(var childItem in item.<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableNamePlural) #>)
 					{
-						this.<#= DataType.NamingConvention.ApplyNamingConvention(child.TableNamePlural) #>.Add(new <#= DataType.NamingConvention.ApplyNamingConvention(child.TableName) #><#= DataType.PostFix #>(childItem, deep));
+						this.<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableNamePlural) #>.Add(new <#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #><#= DataType.PostFix #>(childItem, deep));
 					}
 				}
 <#+ } #>
 
 <#+ foreach(var parent in DataType.MetaData.DistinctParentRelationships){ #>
-				this.<#= DataType.NamingConvention.ApplyNamingConvention(parent.TableName) #> = new <#= DataType.NamingConvention.ApplyNamingConvention(parent.TableName) #><#= DataType.PostFix #>(item.<#= DataType.NamingConvention.ApplyNamingConvention(parent.TableName) #>, deep);
+				this.<#= DataType.NamingConvention.ApplyNamingConvention(parent.ReferencedTableName) #> = new <#= DataType.NamingConvention.ApplyNamingConvention(parent.ReferencedTableName) #><#= DataType.PostFix #>(item.<#= DataType.NamingConvention.ApplyNamingConvention(parent.ReferencedTableName) #>, deep);
 <#+ } #>
 			}
 		}
@@ -80,7 +80,7 @@ namespace <#= DataType.FullNamespace #>
 		#region Child Relationships
 		
 <#+ foreach(var child in DataType.MetaData.DistinctChildRelationships){ #>
-		public <#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.NamingConvention.ApplyNamingConvention(child.TableName) #>> <#= DataType.NamingConvention.ApplyNamingConvention(child.TableNamePlural) #> { get; set; }
+		public <#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #>> <#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableNamePlural) #> { get; set; }
 <#+ } #>
 		
 		#endregion
@@ -88,7 +88,7 @@ namespace <#= DataType.FullNamespace #>
 		#region Parent Relationships
 		
 <#+ foreach(var parent in DataType.MetaData.DistinctParentRelationships){ #>
-		public I<#= DataType.NamingConvention.ApplyNamingConvention(parent.TableName) #> <#= DataType.NamingConvention.ApplyNamingConvention(parent.TableName) #> { get; set; }
+		public I<#= DataType.NamingConvention.ApplyNamingConvention(parent.ReferencedTableName) #> <#= DataType.NamingConvention.ApplyNamingConvention(parent.ReferencedTableName) #> { get; set; }
 <#+ } #>
 		
 		#endregion
