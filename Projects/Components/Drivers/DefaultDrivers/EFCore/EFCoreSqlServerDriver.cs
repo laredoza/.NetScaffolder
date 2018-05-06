@@ -4,7 +4,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EF7
+namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EFCore
 {
     #region Usings
 
