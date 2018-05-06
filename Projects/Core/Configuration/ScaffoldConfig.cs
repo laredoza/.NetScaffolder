@@ -173,6 +173,21 @@ namespace Configuration
                 d => d.Metadata["ValueMetaData"].ToString().ToLower() == optionId.ToString().ToLower()).Value;
         }
 
+        /// <summary>
+        /// Return driver.
+        /// </summary>
+        /// <param name="driverTypeId"></param>
+        /// <returns>
+        /// The <see cref="ICollectionOption"/>.
+        /// </returns>
+        public static ICollectionOption ReturnDriver(Guid driverTypeId)
+        {
+            if (CollectionOptions == null || !CollectionOptions.Any()) return null;
+
+            return CollectionOptions.FirstOrDefault(
+                d => d.Metadata["ValueMetaData"].ToString().ToLower() == driverTypeId.ToString().ToLower()).Value;
+        }
+
         #endregion
     }
 }

@@ -466,18 +466,21 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project
         public object[] ReturnDriverTypes()
         {
             List<ComboboxItem> items = new List<ComboboxItem>();
+            Guid value;
 
             foreach (var driverType in ScaffoldConfig.Drivers)
             {
+                value = new Guid(driverType.Metadata["TypeIdMetaData"].ToString());
+                if (!items.Any(i => (Guid)i.Value == value))
                 items.Add(
                     new ComboboxItem
                         {
                             Text = (string)driverType.Metadata["TypeMetaData"],
-                            Value = new Guid(driverType.Metadata["TypeIdMetaData"].ToString())
+                            Value = value
                         });
             }
 
-            return items.ToArray();
+            return items.OrderBy(i => i.Value).ToArray();
         }
 
         /// <summary>
@@ -612,10 +615,6 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project
             {
                 this.tableForm.ShowDialog();
             }
-
-            var table = this.SelectedDomain.Tables.FirstOrDefault(t => t.TableName == "Product");
-            var parentRelationships = table.DistinctParentRelationships;
-            var childRelationships = table.DistinctChildRelationships;
             Logger.Trace("Completed Refresh Clicked");
         }
 
