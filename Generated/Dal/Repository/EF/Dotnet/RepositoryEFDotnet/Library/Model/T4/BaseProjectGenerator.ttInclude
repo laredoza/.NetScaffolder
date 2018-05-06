@@ -85,7 +85,7 @@ public class BaseProjectGenerator : Generator
 					dt.SourceType = srcType;
 					dt.CollectionOption = co;
 					dt.BaseNamespace = ProjectDefinition.BaseNameSpace;
-					// dt.DriverType = driverType;
+					dt.DriverType = driverType;
 					dataTypes.Add(dt);
 				}
 			}
