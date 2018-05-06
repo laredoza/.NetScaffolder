@@ -17,6 +17,8 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ApplicationServ
     using System.IO;
     using System.Windows.Forms;
 
+    using DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Base;
+
     #endregion
 
     /// <summary>

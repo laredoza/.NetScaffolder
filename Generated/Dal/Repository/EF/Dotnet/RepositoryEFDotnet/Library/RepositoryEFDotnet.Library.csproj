@@ -47,58 +47,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Base\BaseContext.cs" />
     <Compile Include="Base\UowRepository.cs" />
     <Compile Include="Context\AccountContext.g.cs" />
     <Compile Include="Context\CustomerContext.g.cs" />
     <Compile Include="Context\TestingContext.g.cs" />
-    <Compile Include="Dto\BankAccountDto.g.cs" />
-    <Compile Include="Dto\BankTransfersDto.g.cs" />
-    <Compile Include="Dto\BookDto.g.cs" />
-    <Compile Include="Dto\CountryDto.g.cs" />
-    <Compile Include="Dto\CustomerDto.g.cs" />
-    <Compile Include="Dto\OrderDetailsDto.g.cs" />
-    <Compile Include="Dto\OrderDto.g.cs" />
-    <Compile Include="Dto\ProductDto.g.cs" />
-    <Compile Include="Dto\SoftwareDto.g.cs" />
-    <Compile Include="Entity\BankAccount.g.cs" />
-    <Compile Include="Entity\BankTransfers.g.cs" />
-    <Compile Include="Entity\Book.g.cs" />
-    <Compile Include="Entity\Country.g.cs" />
-    <Compile Include="Entity\Customer.g.cs" />
-    <Compile Include="Entity\Order.g.cs" />
-    <Compile Include="Entity\OrderDetails.g.cs" />
-    <Compile Include="Entity\Product.g.cs" />
-    <Compile Include="Entity\Software.g.cs" />
     <Compile Include="Interfaces\Base\IUnitOfWork.cs" />
-    <Compile Include="Interfaces\Dto\IBankAccount.g.cs" />
-    <Compile Include="Interfaces\Dto\IBankTransfers.g.cs" />
-    <Compile Include="Interfaces\Dto\IBook.g.cs" />
-    <Compile Include="Interfaces\Dto\ICountry.g.cs" />
-    <Compile Include="Interfaces\Dto\ICustomer.g.cs" />
-    <Compile Include="Interfaces\Dto\IOrder.g.cs" />
-    <Compile Include="Interfaces\Dto\IOrderDetails.g.cs" />
-    <Compile Include="Interfaces\Dto\IProduct.g.cs" />
-    <Compile Include="Interfaces\Dto\ISoftware.g.cs" />
-    <Compile Include="Interfaces\Repository\IBankAccountRepository.g.cs" />
-    <Compile Include="Interfaces\Repository\IBankTransfersRepository.g.cs" />
-    <Compile Include="Interfaces\Repository\IBookRepository.g.cs" />
-    <Compile Include="Interfaces\Repository\ICountryRepository.g.cs" />
-    <Compile Include="Interfaces\Repository\ICustomerRepository.g.cs" />
-    <Compile Include="Interfaces\Repository\IOrderDetailsRepository.g.cs" />
-    <Compile Include="Interfaces\Repository\IOrderRepository.g.cs" />
-    <Compile Include="Interfaces\Repository\IProductRepository.g.cs" />
-    <Compile Include="Interfaces\Repository\ISoftwareRepository.g.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repository\BankAccountRepository.g.cs" />
-    <Compile Include="Repository\BankTransfersRepository.g.cs" />
-    <Compile Include="Repository\BookRepository.g.cs" />
-    <Compile Include="Repository\CountryRepository.g.cs" />
-    <Compile Include="Repository\CustomerRepository.g.cs" />
-    <Compile Include="Repository\OrderDetailsRepository.g.cs" />
-    <Compile Include="Repository\OrderRepository.g.cs" />
-    <Compile Include="Repository\ProductRepository.g.cs" />
-    <Compile Include="Repository\SoftwareRepository.g.cs" />
     <Compile Include="RunGenerator.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -107,7 +61,9 @@
     <Compile Include="Utils\QueryableUtils.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Model\T4\BaseGenerator.ttInclude" />
     <None Include="Model\T4\BaseProjectGenerator.ttInclude" />
     <None Include="Model\T4\BaseTemplate.ttinclude" />
@@ -152,51 +108,6 @@
 .\Context\AccountContext.g.cs
 .\Context\CustomerContext.g.cs
 .\Context\TestingContext.g.cs
-.\Dto\BankAccountDto.g.cs
-.\Dto\BankTransfersDto.g.cs
-.\Dto\BookDto.g.cs
-.\Dto\CountryDto.g.cs
-.\Dto\CustomerDto.g.cs
-.\Dto\OrderDetailsDto.g.cs
-.\Dto\OrderDto.g.cs
-.\Dto\ProductDto.g.cs
-.\Dto\SoftwareDto.g.cs
-.\Entity\BankAccount.g.cs
-.\Entity\BankTransfers.g.cs
-.\Entity\Book.g.cs
-.\Entity\Country.g.cs
-.\Entity\Customer.g.cs
-.\Entity\Order.g.cs
-.\Entity\OrderDetails.g.cs
-.\Entity\Product.g.cs
-.\Entity\Software.g.cs
-.\Interfaces\Dto\IBankAccount.g.cs
-.\Interfaces\Dto\IBankTransfers.g.cs
-.\Interfaces\Dto\IBook.g.cs
-.\Interfaces\Dto\ICountry.g.cs
-.\Interfaces\Dto\ICustomer.g.cs
-.\Interfaces\Dto\IOrder.g.cs
-.\Interfaces\Dto\IOrderDetails.g.cs
-.\Interfaces\Dto\IProduct.g.cs
-.\Interfaces\Dto\ISoftware.g.cs
-.\Interfaces\Repository\IBankAccountRepository.g.cs
-.\Interfaces\Repository\IBankTransfersRepository.g.cs
-.\Interfaces\Repository\IBookRepository.g.cs
-.\Interfaces\Repository\ICountryRepository.g.cs
-.\Interfaces\Repository\ICustomerRepository.g.cs
-.\Interfaces\Repository\IOrderDetailsRepository.g.cs
-.\Interfaces\Repository\IOrderRepository.g.cs
-.\Interfaces\Repository\IProductRepository.g.cs
-.\Interfaces\Repository\ISoftwareRepository.g.cs
-.\Repository\BankAccountRepository.g.cs
-.\Repository\BankTransfersRepository.g.cs
-.\Repository\BookRepository.g.cs
-.\Repository\CountryRepository.g.cs
-.\Repository\CustomerRepository.g.cs
-.\Repository\OrderDetailsRepository.g.cs
-.\Repository\OrderRepository.g.cs
-.\Repository\ProductRepository.g.cs
-.\Repository\SoftwareRepository.g.cs
 </LastOutputs>
     </Content>
   </ItemGroup>

@@ -13,6 +13,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
     using System.Windows.Forms;
 
     using DotNetScaffolder.Components.Common.Contract;
+    using DotNetScaffolder.Components.DataTypes.DefaultDataTypes.RepoInterfaceDataTypes;
     using DotNetScaffolder.Mapping.MetaData.Domain;
 
     #endregion

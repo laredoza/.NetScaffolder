@@ -1,10 +1,10 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="EntityUserControl.cs" company="DotnetScaffolder">
+// <copyright file="DtoInterfaceUserControl.cs" company="DotnetScaffolder">
 //   MIT
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.EntityDataTypes
+namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.DtoInterfaceDataType
 {
     #region Usings
 
@@ -13,6 +13,8 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.EntityDataTypes
     using System.Windows.Forms;
 
     using DotNetScaffolder.Components.Common.Contract;
+    using DotNetScaffolder.Components.DataTypes.DefaultDataTypes.DtoInterfaceDataTypes;
+    using DotNetScaffolder.Components.DataTypes.DefaultDataTypes.EntityDataTypes;
     using DotNetScaffolder.Mapping.MetaData.Domain;
 
     #endregion
@@ -20,17 +22,18 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.EntityDataTypes
     /// <summary>
     ///     The entity user control.
     /// </summary>
-    public partial class EntityUserControl : UserControl, IDataTypeUI<IDictionary<string, string>>
+    public partial class DtoInterfaceUserControl : UserControl, IDataTypeUI<IDictionary<string, string>>
     {
         /// <summary>
         /// The data type.
         /// </summary>
-        private EntityDataType dataType;
+        private DtoInterfaceDataType dataType;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="EntityUserControl" /> class.
+        /// Initializes a new instance of the <see cref="DtoInterfaceUserControl"/> class. 
+        ///     Initializes a new instance of the <see cref="EntityUserControl"/> class.
         /// </summary>
-        public EntityUserControl()
+        public DtoInterfaceUserControl()
         {
             this.InitializeComponent();
         }
@@ -48,7 +51,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.EntityDataTypes
         /// <summary>
         ///     Gets or sets the data type.
         /// </summary>
-        public EntityDataType DataType
+        public DtoInterfaceDataType DataType
         {
             get
             {
@@ -102,37 +105,14 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.EntityDataTypes
         /// </param>
         private void btnBrowse_Click(object sender, EventArgs e)
         {
-        }
-
-        /// <summary>
-        /// The chk use interface_ checked changed.
-        /// </summary>
-        /// <param name="sender">
-        /// The sender.
-        /// </param>
-        /// <param name="e">
-        /// The e.
-        /// </param>
-        private void chkUseInterface_CheckedChanged(object sender, EventArgs e)
-        {
-            this.chkAddInjectConstructor.Enabled = this.chkUseInterface.Checked;
-            if (!this.chkUseInterface.Checked)
+            using (var dialog = new FolderBrowserDialog())
             {
-                this.chkAddInjectConstructor.Checked = false;
+                var result = dialog.ShowDialog(this);
+                if (result == DialogResult.OK)
+                {
+                    this.txtOutputPath.Text = dialog.SelectedPath;
+                }
             }
-        }
-
-        /// <summary>
-        /// The entity user control 1_ load.
-        /// </summary>
-        /// <param name="sender">
-        /// The sender.
-        /// </param>
-        /// <param name="e">
-        /// The e.
-        /// </param>
-        private void EntityUserControl1_Load(object sender, EventArgs e)
-        {
         }
 
         /// <summary>
@@ -145,9 +125,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.EntityDataTypes
             this.DataType.InheritFrom = this.txtInheritFrom.Text;
             this.DataType.Namespace = this.txtNamespace.Text;
             this.DataType.OutputFolder = this.txtOutputFolder.Text;
-            this.DataType.OutputPath = this.tstOutputPath.Text;
-            this.DataType.AddInjectConstructor = this.chkAddInjectConstructor.Checked;
-            this.DataType.UseInterface = this.chkUseInterface.Checked;
+            this.DataType.OutputPath = this.txtOutputPath.Text;
         }
 
         /// <summary>
@@ -160,9 +138,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.EntityDataTypes
             this.txtInheritFrom.Text = this.DataType.InheritFrom;
             this.txtNamespace.Text = this.DataType.Namespace;
             this.txtOutputFolder.Text = this.DataType.OutputFolder;
-            this.tstOutputPath.Text = this.DataType.OutputPath;
-            this.chkAddInjectConstructor.Checked = this.DataType.AddInjectConstructor;
-            this.chkUseInterface.Checked = this.DataType.UseInterface;
+            this.txtOutputPath.Text = this.DataType.OutputPath;
         }
     }
 }

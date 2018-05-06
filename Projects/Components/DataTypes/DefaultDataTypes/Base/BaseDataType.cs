@@ -1,46 +1,120 @@
-﻿using DotNetScaffolder.Components.Common.Contract;
-using DotNetScaffolder.Mapping.MetaData.Model;
-using FormControls.TreeView;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Serialization;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="BaseDataType.cs" company="DotnetScaffolder">
+//   MIT
+// </copyright>
+// --------------------------------------------------------------------------------------------------------------------
 
-namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
+namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Base
 {
+    #region Usings
+
+    using System.Collections.Generic;
+    using System.Xml.Serialization;
+
+    using DotNetScaffolder.Components.Common.Contract;
+    using DotNetScaffolder.Mapping.MetaData.Model;
+
+    using FormControls.TreeView;
+
+    #endregion
+
+    /// <summary>
+    ///     The base data type.
+    /// </summary>
     public abstract class BaseDataType : IDataType
     {
-        protected BaseDataType(string fileName) => FileName = fileName;
-
         /// <summary>
         ///     The fil e_ name.
         /// </summary>
         protected readonly string FileName = string.Empty;
 
-        public Table MetaData { get; set; }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BaseDataType"/> class.
+        /// </summary>
+        /// <param name="fileName">
+        /// The file name.
+        /// </param>
+        protected BaseDataType(string fileName) => this.FileName = fileName;
 
-        public abstract IDataTypeUI<IDictionary<string, string>> CreateUI(IDictionary<string, string> parameters);
-
-        public abstract IDataTypeUI<IDictionary<string, string>> CreateUI();
-
-        public abstract void Load(IDictionary<string, string> parameters);
-
-        public abstract Hierarchy ReturnNavigation();
-
-        public abstract bool Save(IDictionary<string, string> parameters);
-
+        /// <summary>
+        ///     Gets or sets the base namespace.
+        /// </summary>
         [XmlIgnore]
         public string BaseNamespace { get; set; }
 
+        /// <summary>
+        ///     Gets or sets the collection option.
+        /// </summary>
+        [XmlIgnore]
+        public ICollectionOption CollectionOption { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the driver type.
+        /// </summary>
+        [XmlIgnore]
+        public IDriver DriverType { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the meta data.
+        /// </summary>
+        public Table MetaData { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the naming convention.
+        /// </summary>
         [XmlIgnore]
         public INamingConvention NamingConvention { get; set; }
 
+        /// <summary>
+        ///     Gets or sets the source type.
+        /// </summary>
         [XmlIgnore]
         public ISourceType SourceType { get; set; }
 
-        [XmlIgnore]
-        public ICollectionOption CollectionOption { get; set; }
+        /// <summary>
+        /// The create ui.
+        /// </summary>
+        /// <param name="parameters">
+        /// The parameters.
+        /// </param>
+        /// <returns>
+        /// The <see cref="IDataTypeUI"/>.
+        /// </returns>
+        public abstract IDataTypeUI<IDictionary<string, string>> CreateUI(IDictionary<string, string> parameters);
+
+        /// <summary>
+        ///     The create ui.
+        /// </summary>
+        /// <returns>
+        ///     The <see cref="IDataTypeUI" />.
+        /// </returns>
+        public abstract IDataTypeUI<IDictionary<string, string>> CreateUI();
+
+        /// <summary>
+        /// The load.
+        /// </summary>
+        /// <param name="parameters">
+        /// The parameters.
+        /// </param>
+        public abstract void Load(IDictionary<string, string> parameters);
+
+        /// <summary>
+        ///     The return navigation.
+        /// </summary>
+        /// <returns>
+        ///     The <see cref="Hierarchy" />.
+        /// </returns>
+        public abstract Hierarchy ReturnNavigation();
+
+        /// <summary>
+        /// The save.
+        /// </summary>
+        /// <param name="parameters">
+        /// The parameters.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        public abstract bool Save(IDictionary<string, string> parameters);
     }
 }

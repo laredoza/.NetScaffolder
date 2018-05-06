@@ -157,6 +157,15 @@ namespace Configuration
                 d => d.Metadata["ValueMetaData"].ToString().ToLower() == sourceTypeId.ToString().ToLower()).Value;
         }
 
+        /// <summary>
+        /// Return naming convention.
+        /// </summary>
+        /// <param name="conventionId">
+        /// The convention id.
+        /// </param>
+        /// <returns>
+        /// The <see cref="INamingConvention"/>.
+        /// </returns>
         public static INamingConvention ReturnNamingConvention(Guid conventionId)
         {
             if (NamingConventions == null || !NamingConventions.Any()) return null;
@@ -165,6 +174,15 @@ namespace Configuration
                 d => d.Metadata["ValueMetaData"].ToString().ToLower() == conventionId.ToString().ToLower()).Value;
         }
 
+        /// <summary>
+        /// Return collection option.
+        /// </summary>
+        /// <param name="optionId">
+        /// The option id.
+        /// </param>
+        /// <returns>
+        /// The <see cref="ICollectionOption"/>.
+        /// </returns>
         public static ICollectionOption ReturnCollectionOption(Guid optionId)
         {
             if (CollectionOptions == null || !CollectionOptions.Any()) return null;
@@ -178,13 +196,13 @@ namespace Configuration
         /// </summary>
         /// <param name="driverTypeId"></param>
         /// <returns>
-        /// The <see cref="ICollectionOption"/>.
+        /// The <see cref="IDriver"/>.
         /// </returns>
-        public static ICollectionOption ReturnDriver(Guid driverTypeId)
+        public static IDriver ReturnDriver(Guid driverTypeId)
         {
-            if (CollectionOptions == null || !CollectionOptions.Any()) return null;
+            if (Drivers == null || !Drivers.Any()) return null;
 
-            return CollectionOptions.FirstOrDefault(
+            return Drivers.FirstOrDefault(
                 d => d.Metadata["ValueMetaData"].ToString().ToLower() == driverTypeId.ToString().ToLower()).Value;
         }
 

@@ -4,7 +4,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
+namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.EntityDataTypes
 {
     #region Usings
 
@@ -14,10 +14,10 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
     using System.IO;
     using System.Windows.Forms;
     using System.Xml.Serialization;
+
     using DotNetScaffolder.Components.Common.Contract;
-    using DotNetScaffolder.Components.DataTypes.DefaultDataTypes.EntityDataTypes;
+    using DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Base;
     using DotNetScaffolder.Core.Common.Serializer;
-    using DotNetScaffolder.Mapping.MetaData.Model;
 
     using FormControls.TreeView;
 
@@ -31,12 +31,57 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
     [ExportMetadata("ValueMetaData", "1BC1B0C4-1E41-9146-82CF-599181CE4440")]
     public class EntityDataType : BaseDataType
     {
-        public EntityDataType() :base("Entity.xml")
+        /// <summary>
+        /// Initializes a new instance of the <see cref="EntityDataType"/> class.
+        /// </summary>
+        public EntityDataType()
+            : base("Entity.xml")
         {
-
         }
 
-        #region Properties
+        /// <summary>
+        /// Gets or sets a value indicating whether add inject constructor.
+        /// </summary>
+        public bool AddInjectConstructor { get; set; }
+
+        /// <summary>
+        /// Gets the entity name.
+        /// </summary>
+        [XmlIgnore]
+        public string EntityName
+        {
+            get
+            {
+                if (this.MetaData == null)
+                {
+                    return string.Empty;
+                }
+
+                if (this.NamingConvention == null)
+                {
+                    return this.MetaData.TableName;
+                }
+
+                return this.NamingConvention.ApplyNamingConvention(this.MetaData.TableName);
+            }
+        }
+
+        /// <summary>
+        /// Gets the full namespace.
+        /// </summary>
+        [XmlIgnore]
+        public string FullNamespace
+        {
+            get
+            {
+                return $"{this.BaseNamespace}.{this.Namespace}";
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the inherit from.
+        /// </summary>
+        public string InheritFrom { get; set; }
 
         /// <summary>
         ///     Gets or sets the namespace.
@@ -48,23 +93,14 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
         /// </summary>
         public string OutputFolder { get; set; } = "Entity";
 
+        /// <summary>
+        /// Gets or sets the output path.
+        /// </summary>
         public string OutputPath { get; set; }
 
-        public bool AddInjectConstructor { get; set; }
-
-        public string InheritFrom { get; set; }
-
-        public bool UseInterface { get; set; }
-
-        [XmlIgnore]
-        public string FullNamespace
-        {
-            get
-            {
-                return $"{BaseNamespace}.{Namespace}";
-            }
-        }
-
+        /// <summary>
+        /// Gets the transform inherit from.
+        /// </summary>
         [XmlIgnore]
         public string TransformInheritFrom
         {
@@ -72,43 +108,25 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
             {
                 string inherit = string.Empty;
 
-                if(!string.IsNullOrEmpty(InheritFrom))
+                if (!string.IsNullOrEmpty(this.InheritFrom))
                 {
-                    inherit = $": {InheritFrom}";
+                    inherit = $": {this.InheritFrom}";
                 }
 
-                if(AddInjectConstructor || UseInterface)
+                if (this.AddInjectConstructor || this.UseInterface)
                 {
-                    inherit += !string.IsNullOrEmpty(InheritFrom) ? ", " : ": ";
-                    inherit += $"I{EntityName}";
+                    inherit += !string.IsNullOrEmpty(this.InheritFrom) ? ", " : ": ";
+                    inherit += $"I{this.EntityName}";
                 }
 
                 return inherit;
             }
         }
 
-        [XmlIgnore]
-        public string EntityName
-        {
-            get
-            {
-                if(MetaData == null)
-                {
-                    return string.Empty;
-                }
-
-                if(NamingConvention == null)
-                {
-                    return MetaData.TableName;
-                }
-
-                return NamingConvention.ApplyNamingConvention(MetaData.TableName);
-            }
-        }
-
-        #endregion
-
-        #region Public methods and operators
+        /// <summary>
+        /// Gets or sets a value indicating whether use interface.
+        /// </summary>
+        public bool UseInterface { get; set; }
 
         /// <summary>
         /// The create ui.
@@ -121,12 +139,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
         /// </returns>
         public override IDataTypeUI<IDictionary<string, string>> CreateUI(IDictionary<string, string> parameters)
         {
-            var newControl = new EntityUserControl
-                                 {
-                                     Visible = true,
-                                     Dock = DockStyle.Fill,
-                                     DataType = this
-                                 };
+            var newControl = new EntityUserControl { Visible = true, Dock = DockStyle.Fill, DataType = this };
             return newControl;
         }
 
@@ -138,7 +151,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
         /// </returns>
         public override IDataTypeUI<IDictionary<string, string>> CreateUI()
         {
-            return CreateUI(null);
+            return this.CreateUI(null);
         }
 
         /// <summary>
@@ -156,7 +169,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
                 return;
             }
 
-            var filePath = Path.Combine(parameters["basePath"], FileName);
+            var filePath = Path.Combine(parameters["basePath"], this.FileName);
 
             if (File.Exists(filePath))
             {
@@ -202,11 +215,9 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
                 return false;
             }
 
-            var filePath = Path.Combine(parameters["basePath"], FileName);
+            var filePath = Path.Combine(parameters["basePath"], this.FileName);
             ObjectXMLSerializer<EntityDataType>.Save(this, filePath);
             return true;
         }
-
-        #endregion
     }
 }

@@ -65,11 +65,11 @@
     <Compile Include="DtoDataTypes\DtoUserControl.Designer.cs">
       <DependentUpon>DtoUserControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="DtoInterfaceDataType\DtoInterfaceDataType.cs" />
-    <Compile Include="DtoInterfaceDataType\DtoInterfaceUserControl.cs">
+    <Compile Include="DtoInterfaceDataTypes\DtoInterfaceDataType.cs" />
+    <Compile Include="DtoInterfaceDataTypes\DtoInterfaceUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="DtoInterfaceDataType\DtoInterfaceUserControl.Designer.cs">
+    <Compile Include="DtoInterfaceDataTypes\DtoInterfaceUserControl.Designer.cs">
       <DependentUpon>DtoInterfaceUserControl.cs</DependentUpon>
     </Compile>
     <Compile Include="EntityDataTypes\EntityDataType.cs" />
@@ -132,7 +132,7 @@
     <EmbeddedResource Include="DtoDataTypes\DtoUserControl.resx">
       <DependentUpon>DtoUserControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DtoInterfaceDataType\DtoInterfaceUserControl.resx">
+    <EmbeddedResource Include="DtoInterfaceDataTypes\DtoInterfaceUserControl.resx">
       <DependentUpon>DtoInterfaceUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EntityDataTypes\EntityUserControl.resx">

@@ -15,6 +15,7 @@ public class ProjectGenerator : BaseProjectGenerator
 		{
 			if(dataType is DtoInterfaceDataType)
 			{
+                Debugger.Break();
 				var iDtoGen = new DtoInterfaceGenerator();
 				iDtoGen.Models = domain.Tables;
 				iDtoGen.DataType = dataType as DtoInterfaceDataType;
@@ -23,6 +24,7 @@ public class ProjectGenerator : BaseProjectGenerator
 			
 			if(dataType is EntityDataType)
 			{
+                Debugger.Break();
 				var entityGen = new EntityGenerator();
 				entityGen.Models = domain.Tables;
 				entityGen.DataType = dataType as EntityDataType;

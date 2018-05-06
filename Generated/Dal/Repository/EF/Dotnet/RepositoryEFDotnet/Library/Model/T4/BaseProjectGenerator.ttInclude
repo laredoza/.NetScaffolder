@@ -25,7 +25,16 @@
 <#@ import namespace="DotNetScaffolder.Mapping.MetaData.Domain" #>
 <#@ import namespace="DotNetScaffolder.Mapping.MetaData.Model" #>
 <#@ import namespace="DotNetScaffolder.Core.Common.Serializer" #>
-<#@ import namespace="DotNetScaffolder.Components.DataTypes.DefaultDataTypes" #>
+
+<#@ import namespace="DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ApplicationServiceDataTypes" #>
+<#@ import namespace="DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Base" #>
+<#@ import namespace="DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataTypes" #>
+<#@ import namespace="DotNetScaffolder.Components.DataTypes.DefaultDataTypes.DtoDataTypes" #>
+<#@ import namespace="DotNetScaffolder.Components.DataTypes.DefaultDataTypes.DtoInterfaceDataTypes" #>
+<#@ import namespace="DotNetScaffolder.Components.DataTypes.DefaultDataTypes.EntityDataTypes" #>
+<#@ import namespace="DotNetScaffolder.Components.DataTypes.DefaultDataTypes.RepoInterfaceDataTypes" #>
+<#@ import namespace="DotNetScaffolder.Components.DataTypes.DefaultDataTypes.RepositoryDataTypes" #>
+
 <#@ import namespace="Configuration" #>
 <#@ import namespace="DotNetScaffolder.Mapping.MetaData.Project" #>
 <#@ import namespace="DotNetScaffolder.Mapping.ApplicationServices" #>
@@ -42,14 +51,14 @@ public class BaseProjectGenerator : Generator
 	
 	protected override void RunCore()
 	{
-		Debugger.Break();
+		// Debugger.Break();
+		ScaffoldConfig.Load(PackagePath);
 		FilePersistenceOptions options = new FilePersistenceOptions { Path = ModelFilePath };
         var applicationService =
         new ProjectDefinitionApplicationServiceFile { FilePersistenceOptions = options };
         applicationService.Load();
 		
 		ProjectDefinition = applicationService.ProjectDefinition;
-		ScaffoldConfig.Load(PackagePath);
 		
 		Dictionary<string, string> parameters = new Dictionary<string, string>();
 		parameters.Add("basePath", Path.GetDirectoryName(ModelFilePath));
@@ -61,7 +70,8 @@ public class BaseProjectGenerator : Generator
 			var nc = ScaffoldConfig.ReturnNamingConvention(domain.NamingConventionId);
 			var co = ScaffoldConfig.ReturnCollectionOption(domain.CollectionOptionId);
 			var srcType = ScaffoldConfig.ReturnSourceType(domain.SourceTypeId);
-			
+			var driverType = ScaffoldConfig.ReturnDriver(domain.DriverTypeId); 
+
 			var dataTypes = new List<IDataType>();
 			
 			// Setup data types for template
@@ -75,6 +85,7 @@ public class BaseProjectGenerator : Generator
 					dt.SourceType = srcType;
 					dt.CollectionOption = co;
 					dt.BaseNamespace = ProjectDefinition.BaseNameSpace;
+					// dt.DriverType = driverType;
 					dataTypes.Add(dt);
 				}
 			}

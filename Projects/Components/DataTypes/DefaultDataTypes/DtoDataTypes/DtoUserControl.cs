@@ -4,7 +4,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
+namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.DtoDataTypes
 {
     #region Usings
 
@@ -13,6 +13,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
     using System.Windows.Forms;
 
     using DotNetScaffolder.Components.Common.Contract;
+    using DotNetScaffolder.Components.DataTypes.DefaultDataTypes.EntityDataTypes;
     using DotNetScaffolder.Mapping.MetaData.Domain;
 
     #endregion
@@ -22,30 +23,30 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
     /// </summary>
     public partial class DtoUserControl : UserControl, IDataTypeUI<IDictionary<string, string>>
     {
-        #region Constructors and Destructors
+        /// <summary>
+        ///     The data type.
+        /// </summary>
+        private DtoDataType dataType;
 
         /// <summary>
+        ///     Initializes a new instance of the <see cref="DtoUserControl" /> class.
         ///     Initializes a new instance of the <see cref="EntityUserControl" /> class.
         /// </summary>
         public DtoUserControl()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
-
-        #endregion
-
-        #region Public Events
 
         /// <summary>
         ///     The on navigation changed.
         /// </summary>
         public event EventHandler<IDataType<IDictionary<string, string>>> OnNavigationChanged;
 
-        #endregion
+        /// <summary>
+        ///     Gets or sets the data source.
+        /// </summary>
+        public DomainDefinition DataSource { get; set; }
 
-        #region Properties
-
-        private DtoDataType dataType;
         /// <summary>
         ///     Gets or sets the data type.
         /// </summary>
@@ -53,20 +54,15 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
         {
             get
             {
-                return dataType;
+                return this.dataType;
             }
+
             set
             {
-                dataType = value;
-                UpdateUI();
+                this.dataType = value;
+                this.UpdateUI();
             }
         }
-
-        public DomainDefinition DataSource { get; set; }
-
-        #endregion
-
-        #region Public methods and operators
 
         /// <summary>
         /// The load config.
@@ -76,37 +72,11 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
         /// </param>
         public void LoadConfig(IDictionary<string, string> parameters)
         {
-            if (DataType == null) return;
+            if (this.DataType == null) return;
 
-            DataType.Load(parameters);
+            this.DataType.Load(parameters);
 
-            UpdateUI();
-        }
-
-        private void UpdateUI()
-        {
-            if (DataType == null) return;
-
-            txtInheritFrom.Text = DataType.InheritFrom;
-            txtNamespace.Text = DataType.Namespace;
-            txtOutputFolder.Text = DataType.OutputFolder;
-            tstOutputPath.Text = DataType.OutputPath;
-            txtPostFix.Text = DataType.PostFix;
-            chkAddInjectConstructor.Checked = DataType.AddInjectConstructor;
-            chkUseInterface.Checked = DataType.UseInterface;
-        }
-
-        private void UpdateDataType()
-        {
-            if (DataType == null) return;
-
-            DataType.InheritFrom = txtInheritFrom.Text;
-            DataType.Namespace = txtNamespace.Text;
-            DataType.OutputFolder = txtOutputFolder.Text;
-            DataType.OutputPath = tstOutputPath.Text;
-            DataType.AddInjectConstructor = chkAddInjectConstructor.Checked;
-            DataType.UseInterface = chkUseInterface.Checked;
-            DataType.PostFix = txtPostFix.Text;
+            this.UpdateUI();
         }
 
         /// <summary>
@@ -117,15 +87,50 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
         /// </param>
         public void SaveConfig(IDictionary<string, string> parameters)
         {
-            if (DataType == null) return;
+            if (this.DataType == null) return;
 
-            UpdateDataType();
-            DataType.Save(parameters);
+            this.UpdateDataType();
+            this.DataType.Save(parameters);
         }
 
-        #endregion
+        /// <summary>
+        /// The btn browse_ click.
+        /// </summary>
+        /// <param name="sender">
+        /// The sender.
+        /// </param>
+        /// <param name="e">
+        /// The e.
+        /// </param>
+        private void btnBrowse_Click(object sender, EventArgs e)
+        {
+            using (var dialog = new FolderBrowserDialog())
+            {
+                var result = dialog.ShowDialog(this);
+                if (result == DialogResult.OK)
+                {
+                    this.tstOutputPath.Text = dialog.SelectedPath;
+                }
+            }
+        }
 
-        #region Other Methods
+        /// <summary>
+        /// The chk use interface_ checked changed.
+        /// </summary>
+        /// <param name="sender">
+        /// The sender.
+        /// </param>
+        /// <param name="e">
+        /// The e.
+        /// </param>
+        private void chkUseInterface_CheckedChanged(object sender, EventArgs e)
+        {
+            this.chkAddInjectConstructor.Enabled = this.chkUseInterface.Checked;
+            if (!this.chkUseInterface.Checked)
+            {
+                this.chkAddInjectConstructor.Checked = false;
+            }
+        }
 
         /// <summary>
         /// The entity user control 1_ load.
@@ -140,27 +145,36 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
         {
         }
 
-        #endregion
-
-        private void chkUseInterface_CheckedChanged(object sender, EventArgs e)
+        /// <summary>
+        ///     The update data type.
+        /// </summary>
+        private void UpdateDataType()
         {
-            chkAddInjectConstructor.Enabled = chkUseInterface.Checked;
-            if (!chkUseInterface.Checked)
-            {
-                chkAddInjectConstructor.Checked = false;
-            }
+            if (this.DataType == null) return;
+
+            this.DataType.InheritFrom = this.txtInheritFrom.Text;
+            this.DataType.Namespace = this.txtNamespace.Text;
+            this.DataType.OutputFolder = this.txtOutputFolder.Text;
+            this.DataType.OutputPath = this.tstOutputPath.Text;
+            this.DataType.AddInjectConstructor = this.chkAddInjectConstructor.Checked;
+            this.DataType.UseInterface = this.chkUseInterface.Checked;
+            this.DataType.PostFix = this.txtPostFix.Text;
         }
 
-        private void btnBrowse_Click(object sender, EventArgs e)
+        /// <summary>
+        ///     The update ui.
+        /// </summary>
+        private void UpdateUI()
         {
-            using (var dialog = new FolderBrowserDialog())
-            {
-                var result = dialog.ShowDialog(this);
-                if (result == DialogResult.OK)
-                {
-                    tstOutputPath.Text = dialog.SelectedPath;
-                }
-            }
+            if (this.DataType == null) return;
+
+            this.txtInheritFrom.Text = this.DataType.InheritFrom;
+            this.txtNamespace.Text = this.DataType.Namespace;
+            this.txtOutputFolder.Text = this.DataType.OutputFolder;
+            this.tstOutputPath.Text = this.DataType.OutputPath;
+            this.txtPostFix.Text = this.DataType.PostFix;
+            this.chkAddInjectConstructor.Checked = this.DataType.AddInjectConstructor;
+            this.chkUseInterface.Checked = this.DataType.UseInterface;
         }
     }
 }

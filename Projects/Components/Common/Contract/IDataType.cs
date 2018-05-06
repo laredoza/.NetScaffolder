@@ -9,6 +9,7 @@ namespace DotNetScaffolder.Components.Common.Contract
     #region Usings
 
     using System.Collections.Generic;
+    using System.Xml.Serialization;
 
     using DotNetScaffolder.Mapping.MetaData.Model;
 
@@ -23,24 +24,35 @@ namespace DotNetScaffolder.Components.Common.Contract
     /// </typeparam>
     public interface IDataType<T>
     {
-        #region Properties
+        /// <summary>
+        /// Gets or sets the base namespace.
+        /// </summary>
+        string BaseNamespace { get; set; }
 
         /// <summary>
-        /// Gets or sets the meta data.
+        /// Gets or sets the collection option.
+        /// </summary>
+        ICollectionOption CollectionOption { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the driver type.
+        /// </summary>
+        IDriver DriverType { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the meta data.
         /// </summary>
         Table MetaData { get; set; }
 
-        string BaseNamespace { get; set; }
-
+        /// <summary>
+        /// Gets or sets the naming convention.
+        /// </summary>
         INamingConvention NamingConvention { get; set; }
 
-        ICollectionOption CollectionOption { get; set; }
-
+        /// <summary>
+        /// Gets or sets the source type.
+        /// </summary>
         ISourceType SourceType { get; set; }
-
-        #endregion
-
-        #region Public methods and operators
 
         /// <summary>
         /// The create ui.
@@ -54,10 +66,10 @@ namespace DotNetScaffolder.Components.Common.Contract
         IDataTypeUI<T> CreateUI(T parameters);
 
         /// <summary>
-        /// The create ui.
+        ///     The create ui.
         /// </summary>
         /// <returns>
-        /// The <see cref="IDataTypeUI"/>.
+        ///     The <see cref="IDataTypeUI" />.
         /// </returns>
         IDataTypeUI<T> CreateUI();
 
@@ -70,10 +82,10 @@ namespace DotNetScaffolder.Components.Common.Contract
         void Load(T parameters);
 
         /// <summary>
-        /// The return navigation.
+        ///     The return navigation.
         /// </summary>
         /// <returns>
-        /// The <see cref="IHierarchy"/>.
+        ///     The <see cref="IHierarchy" />.
         /// </returns>
         Hierarchy ReturnNavigation();
 
@@ -87,12 +99,10 @@ namespace DotNetScaffolder.Components.Common.Contract
         /// The <see cref="bool"/>.
         /// </returns>
         bool Save(T parameters);
-
-        #endregion
     }
 
     /// <summary>
-    /// The DataType interface.
+    ///     The DataType interface.
     /// </summary>
     public interface IDataType : IDataType<IDictionary<string, string>>
     {

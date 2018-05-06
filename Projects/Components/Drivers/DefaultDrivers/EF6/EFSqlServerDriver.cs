@@ -8,6 +8,7 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6
 {
     #region Usings
 
+    using System.Collections.Generic;
     using System.ComponentModel.Composition;
 
     using DotNetScaffolder.Components.Common.Contract;
@@ -24,5 +25,9 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6
     [ExportMetadata("ValueMetaData", "2BC1B0C4-1E41-9146-82CF-599181CE4410")]
     public class EFSqlServerDriver : IDriver
     {
+        /// <summary>
+        /// Gets the name spaces used to generate templates.
+        /// </summary>
+        public List<string> NameSpaces => new List<string> { "System.Data.Entity" };
     }
 }

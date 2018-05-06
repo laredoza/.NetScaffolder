@@ -1,10 +1,10 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="EntityDataType.cs" company="DotnetScaffolder">
+// <copyright file="DtoInterfaceDataType.cs" company="DotnetScaffolder">
 //   MIT
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
+namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.DtoInterfaceDataTypes
 {
     #region Usings
 
@@ -14,10 +14,11 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
     using System.IO;
     using System.Windows.Forms;
     using System.Xml.Serialization;
+
     using DotNetScaffolder.Components.Common.Contract;
-    using DotNetScaffolder.Components.DataTypes.DefaultDataTypes.EntityDataTypes;
+    using DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Base;
+    using DotNetScaffolder.Components.DataTypes.DefaultDataTypes.DtoInterfaceDataType;
     using DotNetScaffolder.Core.Common.Serializer;
-    using DotNetScaffolder.Mapping.MetaData.Model;
 
     using FormControls.TreeView;
 
@@ -31,12 +32,52 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
     [ExportMetadata("ValueMetaData", "1BC1B0C4-1E41-9146-82CF-599181CE4441")]
     public class DtoInterfaceDataType : BaseDataType
     {
-        public DtoInterfaceDataType() :base("DtoInterface.xml")
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DtoInterfaceDataType"/> class.
+        /// </summary>
+        public DtoInterfaceDataType()
+            : base("DtoInterface.xml")
         {
-
         }
 
-        #region Properties
+        /// <summary>
+        /// Gets the full namespace.
+        /// </summary>
+        [XmlIgnore]
+        public string FullNamespace
+        {
+            get
+            {
+                return $"{this.BaseNamespace}.{this.Namespace}";
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the inherit from.
+        /// </summary>
+        public string InheritFrom { get; set; }
+
+        /// <summary>
+        /// Gets the interface name.
+        /// </summary>
+        [XmlIgnore]
+        public string InterfaceName
+        {
+            get
+            {
+                if (this.MetaData == null)
+                {
+                    return string.Empty;
+                }
+
+                if (this.NamingConvention == null)
+                {
+                    return this.MetaData.TableName;
+                }
+
+                return this.NamingConvention.ApplyNamingConvention(this.MetaData.TableName);
+            }
+        }
 
         /// <summary>
         ///     Gets or sets the namespace.
@@ -48,54 +89,26 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
         /// </summary>
         public string OutputFolder { get; set; } = "Interfaces";
 
+        /// <summary>
+        /// Gets or sets the output path.
+        /// </summary>
         public string OutputPath { get; set; }
 
-        public string InheritFrom { get; set; }
-
+        /// <summary>
+        /// Gets the transform inherit from.
+        /// </summary>
         public string TransformInheritFrom
         {
             get
             {
-                if(string.IsNullOrEmpty(InheritFrom))
+                if (string.IsNullOrEmpty(this.InheritFrom))
                 {
                     return string.Empty;
                 }
 
-                return $": {InheritFrom}";
+                return $": {this.InheritFrom}";
             }
         }
-
-        [XmlIgnore]
-        public string FullNamespace
-        {
-            get
-            {
-                return $"{BaseNamespace}.{Namespace}";
-            }
-        }
-
-        [XmlIgnore]
-        public string InterfaceName
-        {
-            get
-            {
-                if (MetaData == null)
-                {
-                    return string.Empty;
-                }
-
-                if (NamingConvention == null)
-                {
-                    return MetaData.TableName;
-                }
-
-                return NamingConvention.ApplyNamingConvention(MetaData.TableName);
-            }
-        }
-
-        #endregion
-
-        #region Public methods and operators
 
         /// <summary>
         /// The create ui.
@@ -108,12 +121,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
         /// </returns>
         public override IDataTypeUI<IDictionary<string, string>> CreateUI(IDictionary<string, string> parameters)
         {
-            var newControl = new DtoInterfaceUserControl
-                                 {
-                                     Visible = true,
-                                     Dock = DockStyle.Fill,
-                                     DataType = this
-                                 };
+            var newControl = new DtoInterfaceUserControl { Visible = true, Dock = DockStyle.Fill, DataType = this };
             return newControl;
         }
 
@@ -125,7 +133,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
         /// </returns>
         public override IDataTypeUI<IDictionary<string, string>> CreateUI()
         {
-            return CreateUI(null);
+            return this.CreateUI(null);
         }
 
         /// <summary>
@@ -143,7 +151,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
                 return;
             }
 
-            var filePath = Path.Combine(parameters["basePath"], FileName);
+            var filePath = Path.Combine(parameters["basePath"], this.FileName);
 
             if (File.Exists(filePath))
             {
@@ -188,11 +196,9 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
                 return false;
             }
 
-            var filePath = Path.Combine(parameters["basePath"], FileName);
+            var filePath = Path.Combine(parameters["basePath"], this.FileName);
             ObjectXMLSerializer<DtoInterfaceDataType>.Save(this, filePath);
             return true;
         }
-
-        #endregion
     }
 }

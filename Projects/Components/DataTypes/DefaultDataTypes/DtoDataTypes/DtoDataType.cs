@@ -4,19 +4,22 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
+namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.DtoDataTypes
 {
     #region Usings
 
-    using DotNetScaffolder.Components.Common.Contract;
-    using DotNetScaffolder.Core.Common.Serializer;
-    using FormControls.TreeView;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.Composition;
     using System.IO;
     using System.Windows.Forms;
     using System.Xml.Serialization;
+
+    using DotNetScaffolder.Components.Common.Contract;
+    using DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Base;
+    using DotNetScaffolder.Core.Common.Serializer;
+
+    using FormControls.TreeView;
 
     #endregion
 
@@ -28,18 +31,74 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
     [ExportMetadata("ValueMetaData", "1BC1B0C4-1E41-9146-82CF-599181CE4490")]
     public class DtoDataType : BaseDataType
     {
-        #region Fields
-
         /// <summary>
         ///     The table control.
         /// </summary>
         private Control tableControl;
 
-        #endregion
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DtoDataType"/> class.
+        /// </summary>
+        public DtoDataType()
+            : base("Dto.xml")
+        {
+        }
 
-        public DtoDataType() : base("Dto.xml") { }
+        /// <summary>
+        /// Gets or sets a value indicating whether add inject constructor.
+        /// </summary>
+        public bool AddInjectConstructor { get; set; }
 
-        #region Properties
+        /// <summary>
+        /// Gets the dto name.
+        /// </summary>
+        [XmlIgnore]
+        public string DtoName
+        {
+            get
+            {
+                if (this.MetaData == null)
+                {
+                    return string.Empty;
+                }
+
+                if (this.NamingConvention == null)
+                {
+                    return this.MetaData.TableName;
+                }
+
+                return this.NamingConvention.ApplyNamingConvention(this.MetaData.TableName);
+            }
+        }
+
+        /// <summary>
+        /// Gets the dto name full.
+        /// </summary>
+        [XmlIgnore]
+        public string DtoNameFull
+        {
+            get
+            {
+                return $"{this.DtoName}{this.PostFix}";
+            }
+        }
+
+        /// <summary>
+        /// Gets the full namespace.
+        /// </summary>
+        [XmlIgnore]
+        public string FullNamespace
+        {
+            get
+            {
+                return $"{this.BaseNamespace}.{this.Namespace}";
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the inherit from.
+        /// </summary>
+        public string InheritFrom { get; set; }
 
         /// <summary>
         ///     Gets or sets the namespace.
@@ -51,25 +110,19 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
         /// </summary>
         public string OutputFolder { get; set; } = "Dto";
 
+        /// <summary>
+        /// Gets or sets the output path.
+        /// </summary>
         public string OutputPath { get; set; }
 
-        public bool AddInjectConstructor { get; set; }
-
-        public string InheritFrom { get; set; }
-
-        public bool UseInterface { get; set; }
-
+        /// <summary>
+        /// Gets or sets the post fix.
+        /// </summary>
         public string PostFix { get; set; } = "Dto";
 
-        [XmlIgnore]
-        public string FullNamespace
-        {
-            get
-            {
-                return $"{BaseNamespace}.{Namespace}";
-            }
-        }
-
+        /// <summary>
+        /// Gets the transform inherit from.
+        /// </summary>
         [XmlIgnore]
         public string TransformInheritFrom
         {
@@ -77,52 +130,25 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
             {
                 string inherit = string.Empty;
 
-                if (!string.IsNullOrEmpty(InheritFrom))
+                if (!string.IsNullOrEmpty(this.InheritFrom))
                 {
-                    inherit = $": {InheritFrom}";
+                    inherit = $": {this.InheritFrom}";
                 }
 
-                if (AddInjectConstructor || UseInterface)
+                if (this.AddInjectConstructor || this.UseInterface)
                 {
-                    inherit += !string.IsNullOrEmpty(InheritFrom) ? ", " : ": ";
-                    inherit += $"I{DtoName}";
+                    inherit += !string.IsNullOrEmpty(this.InheritFrom) ? ", " : ": ";
+                    inherit += $"I{this.DtoName}";
                 }
 
                 return inherit;
             }
         }
 
-        [XmlIgnore]
-        public string DtoName
-        {
-            get
-            {
-                if (MetaData == null)
-                {
-                    return string.Empty;
-                }
-
-                if (NamingConvention == null)
-                {
-                    return MetaData.TableName;
-                }
-
-                return NamingConvention.ApplyNamingConvention(MetaData.TableName);
-            }
-        }
-
-        [XmlIgnore]
-        public string DtoNameFull
-        {
-            get
-            {
-                return $"{DtoName}{PostFix}";
-            }
-        }
-
-        #endregion
-
-        #region Public methods and operators
+        /// <summary>
+        /// Gets or sets a value indicating whether use interface.
+        /// </summary>
+        public bool UseInterface { get; set; }
 
         /// <summary>
         /// The create ui.
@@ -135,12 +161,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
         /// </returns>
         public override IDataTypeUI<IDictionary<string, string>> CreateUI(IDictionary<string, string> parameters)
         {
-            var newControl = new DtoUserControl
-            {
-                Visible = true,
-                Dock = DockStyle.Fill,
-                DataType = this
-            };
+            var newControl = new DtoUserControl { Visible = true, Dock = DockStyle.Fill, DataType = this };
             return newControl;
         }
 
@@ -152,7 +173,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
         /// </returns>
         public override IDataTypeUI<IDictionary<string, string>> CreateUI()
         {
-            return CreateUI(null);
+            return this.CreateUI(null);
         }
 
         /// <summary>
@@ -163,7 +184,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
         /// </param>
         public override void Load(IDictionary<string, string> parameters)
         {
-            var filePath = Path.Combine(parameters["basePath"], FileName);
+            var filePath = Path.Combine(parameters["basePath"], this.FileName);
 
             if (File.Exists(filePath))
             {
@@ -201,14 +222,10 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
         /// </returns>
         public override bool Save(IDictionary<string, string> parameters)
         {
-            var filePath = Path.Combine(parameters["basePath"], FileName);
+            var filePath = Path.Combine(parameters["basePath"], this.FileName);
             ObjectXMLSerializer<DtoDataType>.Save(this, filePath);
             return true;
         }
-
-        #endregion
-
-        #region Other Methods
 
         /// <summary>
         /// The configure control.
@@ -226,7 +243,5 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
             control.BringToFront();
             parent.Controls.Add(control);
         }
-
-        #endregion
     }
 }

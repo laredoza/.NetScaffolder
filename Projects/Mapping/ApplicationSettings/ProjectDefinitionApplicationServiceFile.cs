@@ -130,6 +130,7 @@ namespace DotNetScaffolder.Mapping.ApplicationServices
 
             foreach (var domain in this.ProjectDefinition.Domains)
             {
+                // Todo: The fix shouldn't come from the SourceType 
                 var sourceType = ScaffoldConfig.ReturnSourceType(domain.SourceTypeId);
                 sourceType.Fix(domain.Tables);
             }
