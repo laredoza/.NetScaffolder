@@ -46,6 +46,7 @@ namespace Banking.Models.Dto
 			if(deep)
 			{
 				this.Order = new OrderDto(item.Order, deep);
+				this.Product = new ProductDto(item.Product, deep);
 			}
 		}
 		
@@ -70,6 +71,7 @@ namespace Banking.Models.Dto
 		#region Parent Relationships
 		
 		public IOrder Order { get; set; }
+		public IProduct Product { get; set; }
 		
 		#endregion
 	}

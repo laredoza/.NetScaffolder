@@ -5,7 +5,7 @@ public class DtoInterfaceTemplate : BaseTemplate
 	
 	public override string TransformText()
 	{
-		Debugger.Break();
+		// Debugger.Break();
 		Header = new CopyrightHeader();
 		Header.Filename = DataType.InterfaceName;
 #>

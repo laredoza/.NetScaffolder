@@ -122,9 +122,14 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.Edmxs
                     tbl.Columns.Add(column);
                 }
 
-                foreach (var rel in edmx.Runtime.StorageModels.Schema.Associations.Where(ass => (ass.ReferentialConstraint.Dependent.Role == table.Name || ass.ReferentialConstraint.Principal.Role == table.Name) &&
-                (entityTableNames.Contains(ass.ReferentialConstraint.Dependent.Role.ToUpper()) &&
-                entityTableNames.Contains(ass.ReferentialConstraint.Principal.Role.ToUpper()))))
+                var relationships = edmx.Runtime.StorageModels.Schema.Associations.Where(
+                    ass =>
+                        (ass.ReferentialConstraint.Dependent.Role == table.Name
+                         || ass.ReferentialConstraint.Principal.Role == table.Name)
+                        && (entityTableNames.Contains(ass.ReferentialConstraint.Dependent.Role.ToUpper())
+                            && entityTableNames.Contains(ass.ReferentialConstraint.Principal.Role.ToUpper())));
+
+                foreach (var rel in relationships)
                 {
                     var ass = new Relationship
                     {

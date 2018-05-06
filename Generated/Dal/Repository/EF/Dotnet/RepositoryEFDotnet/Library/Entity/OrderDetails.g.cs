@@ -46,6 +46,7 @@ namespace Banking.Models.Entity
 			if(deep)
 			{
 				this.Order = new Order(item.Order, deep);
+				this.Product = new Product(item.Product, deep);
 			}
 		}
 		
@@ -68,7 +69,7 @@ namespace Banking.Models.Entity
 		#endregion
 		
 		#region Parent Relationships
-		
+
 		IOrder IOrderDetails.Order 
 		{ 
 			get
@@ -82,6 +83,19 @@ namespace Banking.Models.Entity
 		}
 		
 		public virtual Order Order { get; set; }
+		IProduct IOrderDetails.Product 
+		{ 
+			get
+			{
+				return this.Product;
+			}
+			set
+			{
+				this.Product = (Product)value;
+			}
+		}
+		
+		public virtual Product Product { get; set; }
 		
 		#endregion
 	}

@@ -60,7 +60,7 @@ namespace Banking.Models.Entity
 		#endregion
 		
 		#region Parent Relationships
-		
+
 		IProduct IBook.Product 
 		{ 
 			get

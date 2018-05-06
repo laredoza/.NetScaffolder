@@ -88,7 +88,7 @@ namespace Banking.Models.Entity
 		#endregion
 		
 		#region Parent Relationships
-		
+
 		ICustomer IBankAccount.Customer 
 		{ 
 			get

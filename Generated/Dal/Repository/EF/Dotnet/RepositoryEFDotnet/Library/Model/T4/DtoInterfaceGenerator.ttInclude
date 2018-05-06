@@ -9,14 +9,14 @@ public class DtoInterfaceGenerator : BaseGenerator
 
 	protected override void RunCore()
 	{
-		Debugger.Break();
+		// Debugger.Break();
 
 		foreach(var model in this.Models)
 		{
 			DataType.MetaData = model;
 			template.DataType = this.DataType;
 
-			Debugger.Break();
+			// Debugger.Break();
 			if(!string.IsNullOrEmpty(DataType.OutputPath))
 			{
 				template.RenderToFile(string.Format(@"{0}\{1}\I{2}.g.cs", DataType.OutputPath, DataType.OutputFolder, DataType.InterfaceName));

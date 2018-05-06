@@ -7,7 +7,7 @@ public class RepositoryTemplate : BaseTemplate
 	
 	public override string TransformText()
 	{
-		Debugger.Break();
+		// Debugger.Break();
 		Header = new CopyrightHeader();
 		Header.Filename = DataType.RepoName;
 #>

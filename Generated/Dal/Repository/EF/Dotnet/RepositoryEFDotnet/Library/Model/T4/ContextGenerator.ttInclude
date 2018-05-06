@@ -9,14 +9,14 @@ public class ContextGenerator : BaseGenerator
 
 	protected override void RunCore()
 	{
-		Debugger.Break();
+		// Debugger.Break();
 		template.DataType = this.DataType;
 		template.EntityNamespace = EntityDataType.FullNamespace;
 
 		foreach(var dbContext in DataType.Contexts)
 		{
 			template.ContextData = dbContext;
-			Debugger.Break();
+			// Debugger.Break();
 			if(!string.IsNullOrEmpty(dbContext.OutputPath))
 			{
 				template.RenderToFile(string.Format(@"{0}\{1}\{2}.g.cs", dbContext.OutputPath, dbContext.OutputFolder, dbContext.ContextName));

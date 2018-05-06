@@ -81,7 +81,7 @@ namespace Banking.Models.Entity
 		#endregion
 		
 		#region Parent Relationships
-		
+
 		
 		#endregion
 	}

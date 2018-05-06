@@ -31,6 +31,8 @@ namespace Banking.Models.Dto
 		public ProductDto()
 		{
 			this.Books = new List <IBook>();
+			this.OrderDetails = new List <IOrderDetails>();
+			this.Softwares = new List <ISoftware>();
 		}
 		
 		public ProductDto(IProduct item, bool deep = false)
@@ -44,6 +46,8 @@ namespace Banking.Models.Dto
 			this.Publisher = item.Publisher;
 			this.AmountInStock = item.AmountInStock;
 			this.Books = new List <IBook>();
+			this.OrderDetails = new List <IOrderDetails>();
+			this.Softwares = new List <ISoftware>();
 
 			if(deep)
 			{
@@ -52,6 +56,20 @@ namespace Banking.Models.Dto
 					foreach(var childItem in item.Books)
 					{
 						this.Books.Add(new BookDto(childItem, deep));
+					}
+				}
+				if(item.OrderDetails != null)
+				{
+					foreach(var childItem in item.OrderDetails)
+					{
+						this.OrderDetails.Add(new OrderDetailsDto(childItem, deep));
+					}
+				}
+				if(item.Softwares != null)
+				{
+					foreach(var childItem in item.Softwares)
+					{
+						this.Softwares.Add(new SoftwareDto(childItem, deep));
 					}
 				}
 			}
@@ -73,6 +91,8 @@ namespace Banking.Models.Dto
 		#region Child Relationships
 		
 		public IList<IBook> Books { get; set; }
+		public IList<IOrderDetails> OrderDetails { get; set; }
+		public IList<ISoftware> Softwares { get; set; }
 		
 		#endregion
 		

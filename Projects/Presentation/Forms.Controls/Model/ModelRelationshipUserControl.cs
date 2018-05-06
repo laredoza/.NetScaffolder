@@ -155,7 +155,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
                     this.DataSource.ReferencedColumnName = value;
                 }
 
-                if (this.ComboBoxRelatedColumn.SelectedValue.ToString() != value)
+                if (this.ComboBoxRelatedColumn.SelectedValue == null || this.ComboBoxRelatedColumn.SelectedValue.ToString() != value)
                 {
                     this.ComboBoxRelatedColumn.SelectedValue = value;
                 }

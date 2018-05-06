@@ -31,6 +31,8 @@ namespace Banking.Models.Entity
 		public Product()
 		{
 			this.Books = new List <Book>();
+			this.OrderDetails = new List <OrderDetails>();
+			this.Softwares = new List <Software>();
 		}
 		
 		public Product(IProduct item, bool deep = false)
@@ -44,6 +46,8 @@ namespace Banking.Models.Entity
 			this.Publisher = item.Publisher;
 			this.AmountInStock = item.AmountInStock;
 			this.Books = new List <Book>();
+			this.OrderDetails = new List <OrderDetails>();
+			this.Softwares = new List <Software>();
 
 			if(deep)
 			{
@@ -52,6 +56,20 @@ namespace Banking.Models.Entity
 					foreach(var childItem in item.Books)
 					{
 						this.Books.Add(new Book(childItem, deep));
+					}
+				}
+				if(item.OrderDetails != null)
+				{
+					foreach(var childItem in item.OrderDetails)
+					{
+						this.OrderDetails.Add(new OrderDetails(childItem, deep));
+					}
+				}
+				if(item.Softwares != null)
+				{
+					foreach(var childItem in item.Softwares)
+					{
+						this.Softwares.Add(new Software(childItem, deep));
 					}
 				}
 			}
@@ -85,11 +103,37 @@ namespace Banking.Models.Entity
 		}
 		
 		public virtual IList<Book> Books { get; set; }
+		IList<IOrderDetails> IProduct.OrderDetails 
+		{ 
+			get
+			{
+				return (IList<IOrderDetails>)this.OrderDetails;
+			}
+			set
+			{
+				this.OrderDetails = (IList<OrderDetails>)value;
+			}			
+		}
+		
+		public virtual IList<OrderDetails> OrderDetails { get; set; }
+		IList<ISoftware> IProduct.Softwares 
+		{ 
+			get
+			{
+				return (IList<ISoftware>)this.Softwares;
+			}
+			set
+			{
+				this.Softwares = (IList<Software>)value;
+			}			
+		}
+		
+		public virtual IList<Software> Softwares { get; set; }
 		
 		#endregion
 		
 		#region Parent Relationships
-		
+
 		
 		#endregion
 	}

@@ -66,7 +66,7 @@ namespace Banking.Models.Entity
 		#endregion
 		
 		#region Parent Relationships
-		
+
 		IBankAccount IBankTransfers.BankAccount 
 		{ 
 			get

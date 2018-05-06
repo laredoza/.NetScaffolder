@@ -7,7 +7,7 @@ public class ContextTemplate : BaseTemplate
 	
 	public override string TransformText()
 	{
-		Debugger.Break();
+		// Debugger.Break();
 		Header = new CopyrightHeader();
 		Header.Filename = ContextData.ContextName;
 #>

@@ -6,7 +6,7 @@ public class EntityTemplate : BaseTemplate
 	
 	public override string TransformText()
 	{
-		Debugger.Break();
+		// Debugger.Break();
 		Header = new CopyrightHeader();
 		Header.Filename = DataType.EntityName;
 #>
@@ -98,7 +98,7 @@ namespace <#= DataType.FullNamespace #>
 		#endregion
 		
 		#region Parent Relationships
-		
+
 <#+ foreach(var parent in DataType.MetaData.DistinctParentRelationships){ #>
 		I<#= DataType.NamingConvention.ApplyNamingConvention(parent.ReferencedTableName) #> I<#= DataType.EntityName #>.<#= DataType.NamingConvention.ApplyNamingConvention(parent.ReferencedTableName) #> 
 		{ 

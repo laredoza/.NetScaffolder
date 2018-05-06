@@ -44,6 +44,7 @@ namespace Banking.Models.Interfaces
 		#region Parent Relationships
 		
 		IOrder Order { get; set; }
+		IProduct Product { get; set; }
 		
 		#endregion
 	}

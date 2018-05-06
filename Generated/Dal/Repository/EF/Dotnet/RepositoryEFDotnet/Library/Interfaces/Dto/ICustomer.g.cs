@@ -46,6 +46,7 @@ namespace Banking.Models.Interfaces
 		#region Child Relationships
 		
 		IList<IBankAccount> BankAccounts { get; set; }
+		IList<IOrder> Orders { get; set; }
 		
 		#endregion
 		

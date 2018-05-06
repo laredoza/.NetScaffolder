@@ -31,6 +31,7 @@ namespace Banking.Models.Entity
 		public Customer()
 		{
 			this.BankAccounts = new List <BankAccount>();
+			this.Orders = new List <Order>();
 		}
 		
 		public Customer(ICustomer item, bool deep = false)
@@ -51,6 +52,7 @@ namespace Banking.Models.Entity
 			this.Photo = item.Photo;
 			this.IsEnabled = item.IsEnabled;
 			this.BankAccounts = new List <BankAccount>();
+			this.Orders = new List <Order>();
 
 			if(deep)
 			{
@@ -59,6 +61,13 @@ namespace Banking.Models.Entity
 					foreach(var childItem in item.BankAccounts)
 					{
 						this.BankAccounts.Add(new BankAccount(childItem, deep));
+					}
+				}
+				if(item.Orders != null)
+				{
+					foreach(var childItem in item.Orders)
+					{
+						this.Orders.Add(new Order(childItem, deep));
 					}
 				}
 				this.Country = new Country(item.Country, deep);
@@ -100,11 +109,24 @@ namespace Banking.Models.Entity
 		}
 		
 		public virtual IList<BankAccount> BankAccounts { get; set; }
+		IList<IOrder> ICustomer.Orders 
+		{ 
+			get
+			{
+				return (IList<IOrder>)this.Orders;
+			}
+			set
+			{
+				this.Orders = (IList<Order>)value;
+			}			
+		}
+		
+		public virtual IList<Order> Orders { get; set; }
 		
 		#endregion
 		
 		#region Parent Relationships
-		
+
 		ICountry ICustomer.Country 
 		{ 
 			get

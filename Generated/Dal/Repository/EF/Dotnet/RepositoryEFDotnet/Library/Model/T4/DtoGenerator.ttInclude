@@ -18,7 +18,6 @@ public class DtoGenerator : BaseGenerator
 			template.DataType = this.DataType;
 			template.DtoInterfaceNamespace = DtoInterfaceType.FullNamespace;
 
-			Debugger.Break();
 			if(!string.IsNullOrEmpty(DataType.OutputPath))
 			{
 				template.RenderToFile(string.Format(@"{0}\{1}\{2}.g.cs", DataType.OutputPath, DataType.OutputFolder, DataType.DtoNameFull));

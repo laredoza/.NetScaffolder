@@ -141,6 +141,8 @@
     <Content Include="Model\Package\DotNetScaffolder.Components.OutputGenerators.DefaultOutputGenerators.dll" />
     <Content Include="Model\Package\DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.dll" />
     <Content Include="Model\Package\DotNetScaffolder.Core.Common.dll" />
+    <Content Include="Model\Package\DotNetScaffolder.Mapping.ApplicationServices.dll" />
+    <Content Include="Model\Package\DotNetScaffolder.Mapping.ApplicationServices.pdb" />
     <Content Include="Model\Package\DotNetScaffolder.Mapping.MetaData.dll" />
     <Content Include="Model\Package\FormControls.dll" />
     <Content Include="RunGenerator.tt">

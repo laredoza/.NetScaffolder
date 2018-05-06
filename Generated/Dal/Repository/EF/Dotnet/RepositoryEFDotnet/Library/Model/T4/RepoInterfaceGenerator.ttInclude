@@ -10,7 +10,7 @@ public class RepoInterfaceGenerator : BaseGenerator
 
 	protected override void RunCore()
 	{
-		Debugger.Break();
+		// Debugger.Break();
 
 		foreach(var model in this.Models)
 		{
@@ -18,7 +18,7 @@ public class RepoInterfaceGenerator : BaseGenerator
 			template.DataType = this.DataType;
 			template.DtoInterfaceNamespace = DtoInterfaceType.FullNamespace;
 
-			Debugger.Break();
+			// Debugger.Break();
 			if(!string.IsNullOrEmpty(DataType.OutputPath))
 			{
 				template.RenderToFile(string.Format(@"{0}\{1}\I{2}Repository.g.cs", DataType.OutputPath, DataType.OutputFolder, DataType.RepoName));

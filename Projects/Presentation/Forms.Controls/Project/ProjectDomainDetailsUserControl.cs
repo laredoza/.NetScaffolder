@@ -613,6 +613,9 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project
                 this.tableForm.ShowDialog();
             }
 
+            var table = this.SelectedDomain.Tables.FirstOrDefault(t => t.TableName == "Product");
+            var parentRelationships = table.DistinctParentRelationships;
+            var childRelationships = table.DistinctChildRelationships;
             Logger.Trace("Completed Refresh Clicked");
         }
 
