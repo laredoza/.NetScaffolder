@@ -98,6 +98,38 @@
             <TemplatePath>ApplicationService.T4</TemplatePath>
             <Version>1</Version>
           </Template>
+          <Template>
+            <Children />
+            <Enabled>true</Enabled>
+            <HierarchyType>Item</HierarchyType>
+            <Id>d0eeb961-7489-4c1f-8c4c-129e4c2ce469</Id>
+            <Name>Entity Framework DTO Interface</Name>
+            <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
+            <Selected>false</Selected>
+            <ConfigLocation>Data</ConfigLocation>
+            <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4441</DataType>
+            <DefaultSettings />
+            <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
+            <LanguageOutputId>1bc1b0c4-1e41-9146-82cf-599181ce4410</LanguageOutputId>
+            <TemplatePath>Dto.T4</TemplatePath>
+            <Version>1</Version>
+          </Template>
+          <Template>
+            <Children />
+            <Enabled>true</Enabled>
+            <HierarchyType>Item</HierarchyType>
+            <Id>4db6d278-43fa-43b3-acaf-890c481472bb</Id>
+            <Name>Entity Framwork Repository Interface</Name>
+            <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
+            <Selected>false</Selected>
+            <ConfigLocation>Data</ConfigLocation>
+            <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4451</DataType>
+            <DefaultSettings />
+            <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
+            <LanguageOutputId>1bc1b0c4-1e41-9146-82cf-599181ce4410</LanguageOutputId>
+            <TemplatePath>RepositoryInterface.T4</TemplatePath>
+            <Version>1</Version>
+          </Template>
         </Templates>
         <Version>0</Version>
       </Package>
