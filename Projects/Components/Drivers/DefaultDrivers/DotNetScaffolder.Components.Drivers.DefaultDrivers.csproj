@@ -55,6 +55,7 @@
     <Compile Include="EF6\EFMySqlDriver.cs" />
     <Compile Include="EF6\EFOracleDriver.cs" />
     <Compile Include="EF6\EFSqlServerDriver.cs" />
+    <Compile Include="EFCore\EFCoreSqlServerDriver.cs" />
     <Compile Include="NHibernate\NHibernateSqlServerDriver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

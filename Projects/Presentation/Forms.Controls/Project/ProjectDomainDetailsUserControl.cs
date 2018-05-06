@@ -480,7 +480,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project
                         });
             }
 
-            return items.OrderBy(i => i.Value).ToArray();
+            return items.OrderBy(i => i.Text).ToArray();
         }
 
         /// <summary>

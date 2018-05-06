@@ -4,7 +4,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6
+namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EF7
 {
     #region Usings
 
@@ -15,14 +15,14 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6
     #endregion
 
     /// <summary>
-    ///     Defines the default EF 6.0 Sql Server driver.
+    ///     Defines the default EF Core Sql Server driver.
     /// </summary>
     [Export(typeof(IDriver))]
-    [ExportMetadata("TypeMetaData", "Entity Framework 6.0")]
-    [ExportMetadata("TypeIdMetaData", "2BC1B0C4-1E41-9146-82CF-599181CE4400")]
-    [ExportMetadata("NameMetaData", "Entity Framework - SqlServer (Default)")]
-    [ExportMetadata("ValueMetaData", "2BC1B0C4-1E41-9146-82CF-599181CE4410")]
-    public class EFSqlServerDriver : IDriver
+    [ExportMetadata("TypeMetaData", "Entity Framework Core")]
+    [ExportMetadata("TypeIdMetaData", "2BC1B0C4-1E41-9146-82CF-599181CE4402")]
+    [ExportMetadata("NameMetaData", "Entity Framework Core - SqlServer (Default)")]
+    [ExportMetadata("ValueMetaData", "2BC1B0C4-1E41-9146-82CF-599181CE4417")]
+    public class EFCoreSqlServerDriver : IDriver
     {
     }
 }
