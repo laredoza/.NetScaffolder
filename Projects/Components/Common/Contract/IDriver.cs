@@ -17,5 +17,15 @@ namespace DotNetScaffolder.Components.Common.Contract
         /// Gets the name spaces used to generate templates.
         /// </summary>
         List<string> NameSpaces { get; }
+
+        /// <summary>
+        /// Gets the prefix.
+        /// </summary>
+        string Prefix { get; }
+
+        /// <summary>
+        /// Gets the context attribute.
+        /// </summary>
+        string ContextAttribute { get; }
     }
 }

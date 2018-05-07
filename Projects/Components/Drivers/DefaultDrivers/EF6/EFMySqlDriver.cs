@@ -28,6 +28,16 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6
         /// <summary>
         /// Gets the name spaces used to generate templates.
         /// </summary>
-        public List<string> NameSpaces => new List<string> { "System.Data.Entity" };
+        public List<string> NameSpaces => new List<string> { "System.Data.Entity", "MySql.Data.Entity" };
+
+        /// <summary>
+        /// The prefix.
+        /// </summary>
+        public string Prefix => "EFMySql";
+
+        /// <summary>
+        /// Gets the context attribute.
+        /// </summary>
+        public string ContextAttribute => "[DbConfigurationType(typeof(MySqlEFConfiguration))]";
     }
 }

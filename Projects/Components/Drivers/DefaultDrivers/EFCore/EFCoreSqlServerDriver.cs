@@ -29,5 +29,15 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EFCore
         /// Gets the name spaces used to generate templates.
         /// </summary>
         public List<string> NameSpaces => new List<string> { "System.Data.Entity" };
+
+        /// <summary>
+        /// The prefix.
+        /// </summary>
+        public string Prefix => "EFCoreSqlServer";
+
+        /// <summary>
+        /// Gets the context attribute.
+        /// </summary>
+        public string ContextAttribute => string.Empty;
     }
 }

@@ -7,7 +7,7 @@ public class ContextTemplate : BaseTemplate
 	
 	public override string TransformText()
 	{
-		// Debugger.Break();
+		//Debugger.Break();
 		Header = new CopyrightHeader();
 		Header.Filename = ContextData.ContextName;
 #>
@@ -19,13 +19,19 @@ public class ContextTemplate : BaseTemplate
 //	USE A PARTIAL CLASS INSTEAD
 // *******************************************************************
 
-using System.Data.Entity;
+<#+ foreach(var nameSpace in DataType.DriverType.NameSpaces){ #>
+using <#= nameSpace #>;
+<#+ } #>
 using RepositoryEFDotnet.Library;
 using System.ComponentModel.DataAnnotations.Schema;
 using <#= EntityNamespace #>;
 
+
 namespace <#= ContextData.TransformFullnamespace(DataType.BaseNamespace) #>
 {
+<#+ if(!string.IsNullOrEmpty(DataType.DriverType.ContextAttribute)){ #>
+    <#=DataType.DriverType.ContextAttribute #>
+<#+ } #>
 	public partial class <#= ContextData.ContextName #> <#= ContextData.TransformInheritFrom #>
 	{	
 		#region CTOR

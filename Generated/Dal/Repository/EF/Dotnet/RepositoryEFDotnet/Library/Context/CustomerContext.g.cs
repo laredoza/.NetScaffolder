@@ -19,12 +19,15 @@
 // *******************************************************************
 
 using System.Data.Entity;
+using MySql.Data.Entity;
 using RepositoryEFDotnet.Library;
 using System.ComponentModel.DataAnnotations.Schema;
 using Banking.Models.Entity;
 
+
 namespace Banking.Models.Customers
 {
+    [DbConfigurationType(typeof(MySqlEFConfiguration))]
 	public partial class CustomerContext : BaseContext
 	{	
 		#region CTOR
