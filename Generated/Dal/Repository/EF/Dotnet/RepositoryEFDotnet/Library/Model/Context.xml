@@ -2,16 +2,12 @@
 <ArrayOfContextData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <ContextData>
     <ContextName>AccountContext</ContextName>
-    <CustomConnectionName />
-    <OutputPath />
-    <LazyLoadingEnabled>false</LazyLoadingEnabled>
-    <ProxyCreationEnabled>false</ProxyCreationEnabled>
     <CreateDb>true</CreateDb>
+    <CustomConnectionName />
     <Id>88dbf624-7f95-4d21-b207-2ec4c4aaf56f</Id>
     <InheritFrom>BaseContext</InheritFrom>
+    <LazyLoadingEnabled>false</LazyLoadingEnabled>
     <LoggingEnabled>false</LoggingEnabled>
-    <Namespace>Accounts</Namespace>
-    <OutputFolder>Context</OutputFolder>
     <Models>
       <Table Description="" SchemaName="dbo" TableName="BankAccount">
         <Columns>
@@ -53,19 +49,19 @@
         </RelationShips>
       </Table>
     </Models>
+    <Namespace>Accounts</Namespace>
+    <OutputFolder>Context</OutputFolder>
+    <OutputPath />
+    <ProxyCreationEnabled>false</ProxyCreationEnabled>
   </ContextData>
   <ContextData>
     <ContextName>CustomerContext</ContextName>
-    <CustomConnectionName />
-    <OutputPath />
-    <LazyLoadingEnabled>false</LazyLoadingEnabled>
-    <ProxyCreationEnabled>false</ProxyCreationEnabled>
     <CreateDb>true</CreateDb>
+    <CustomConnectionName />
     <Id>b138c947-9887-47e0-968c-be9dca3443aa</Id>
     <InheritFrom>BaseContext</InheritFrom>
+    <LazyLoadingEnabled>false</LazyLoadingEnabled>
     <LoggingEnabled>true</LoggingEnabled>
-    <Namespace>Customers</Namespace>
-    <OutputFolder>Context</OutputFolder>
     <Models>
       <Table Description="" SchemaName="dbo" TableName="Book">
         <Columns>
@@ -195,19 +191,19 @@
         </RelationShips>
       </Table>
     </Models>
+    <Namespace>Customers</Namespace>
+    <OutputFolder>Context</OutputFolder>
+    <OutputPath />
+    <ProxyCreationEnabled>false</ProxyCreationEnabled>
   </ContextData>
   <ContextData>
-    <ContextName>TestingContext</ContextName>
-    <CustomConnectionName>RepoTest</CustomConnectionName>
-    <OutputPath />
-    <LazyLoadingEnabled>false</LazyLoadingEnabled>
-    <ProxyCreationEnabled>false</ProxyCreationEnabled>
+    <ContextName>FullContext</ContextName>
     <CreateDb>true</CreateDb>
+    <CustomConnectionName>RepoTest</CustomConnectionName>
     <Id>a0ff1a97-31b4-4646-8911-f38e88faadef</Id>
     <InheritFrom>BaseContext</InheritFrom>
+    <LazyLoadingEnabled>false</LazyLoadingEnabled>
     <LoggingEnabled>false</LoggingEnabled>
-    <Namespace>Context</Namespace>
-    <OutputFolder>Context</OutputFolder>
     <Models>
       <Table Description="" SchemaName="dbo" TableName="BankAccount">
         <Columns>
@@ -376,5 +372,9 @@
         </RelationShips>
       </Table>
     </Models>
+    <Namespace>Context</Namespace>
+    <OutputFolder>Context</OutputFolder>
+    <OutputPath />
+    <ProxyCreationEnabled>false</ProxyCreationEnabled>
   </ContextData>
 </ArrayOfContextData>

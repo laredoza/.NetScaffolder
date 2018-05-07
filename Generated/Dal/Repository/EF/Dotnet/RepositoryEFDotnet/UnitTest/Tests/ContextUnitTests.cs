@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data.Entity;
 using Banking.Models.Accounts;
+using Banking.Models.Context;
 using Banking.Models.Customers;
 using DotNetScaffolder.Test.Components.SourceTypes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -15,10 +16,7 @@ namespace RepositoryEFDotnet.UnitTest
         {
             using (var context = new AccountContext("RepoTest"))
             {
-                var config = new DropCreateDatabaseAlways<AccountContext>();
-                
-                Database.SetInitializer(config);
-                context.Database.Initialize(true);
+                BaseContextUnitTests_CreateDbTest(context);
             }
         }
 
@@ -26,6 +24,15 @@ namespace RepositoryEFDotnet.UnitTest
         public void ContextUnitTest_CustomerContext_CreateDb()
         {
             using (var context = new CustomerContext("RepoTest"))
+            {
+                BaseContextUnitTests_CreateDbTest(context);
+            }
+        }
+
+        [TestMethod]
+        public void ContextUnitTest_FullContext_CreateDb()
+        {
+            using (var context = new FullContext("RepoTest"))
             {
                 BaseContextUnitTests_CreateDbTest(context);
             }

@@ -55,8 +55,9 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Base\BaseContextUnitTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ContextUnitTests.cs" />
+    <Compile Include="Tests\ContextUnitTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
@@ -65,11 +66,16 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\..\..\..\Tests\CodeGenerator\DotNetScaffolder.Test.csproj">
+      <Project>{96b8860e-531c-405f-9abf-2fae4e8f2759}</Project>
+      <Name>DotNetScaffolder.Test</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Library\RepositoryEFDotnet.Library.csproj">
       <Project>{19d63602-bd17-49f2-8335-e75c6813260a}</Project>
       <Name>RepositoryEFDotnet.Library</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
