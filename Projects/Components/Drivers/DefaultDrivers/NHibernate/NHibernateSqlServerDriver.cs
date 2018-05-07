@@ -35,5 +35,10 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.NHibernate
         /// The prefix.
         /// </summary>
         public string Prefix => "NHibernateSqlServer";
+
+        /// <summary>
+        /// Gets the context attribute.
+        /// </summary>
+        public string ContextAttribute => string.Empty;
     }
 }

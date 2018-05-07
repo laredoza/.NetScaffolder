@@ -22,5 +22,10 @@ namespace DotNetScaffolder.Components.Common.Contract
         /// Gets the prefix.
         /// </summary>
         string Prefix { get; }
+
+        /// <summary>
+        /// Gets the context attribute.
+        /// </summary>
+        string ContextAttribute { get; }
     }
 }

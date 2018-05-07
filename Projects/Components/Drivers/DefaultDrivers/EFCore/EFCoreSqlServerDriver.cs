@@ -34,5 +34,10 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EFCore
         /// The prefix.
         /// </summary>
         public string Prefix => "EFCoreSqlServer";
+
+        /// <summary>
+        /// Gets the context attribute.
+        /// </summary>
+        public string ContextAttribute => string.Empty;
     }
 }

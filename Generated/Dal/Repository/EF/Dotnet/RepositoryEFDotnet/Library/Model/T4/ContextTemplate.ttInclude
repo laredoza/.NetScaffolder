@@ -26,6 +26,9 @@ using RepositoryEFDotnet.Library;
 using System.ComponentModel.DataAnnotations.Schema;
 using <#= EntityNamespace #>;
 
+<#+ if(!string.IsNullOrEmpty(DataType.DriverType.ContextAttribute)){ #>
+<#= DataType.DriverType.ContextAttribute #>
+<#+ } #>
 namespace <#= ContextData.TransformFullnamespace(DataType.BaseNamespace) #>
 {
 	public partial class <#= ContextData.ContextName #> <#= ContextData.TransformInheritFrom #>
