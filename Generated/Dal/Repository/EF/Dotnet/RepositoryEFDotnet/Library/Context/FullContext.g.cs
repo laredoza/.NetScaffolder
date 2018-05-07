@@ -19,7 +19,6 @@
 // *******************************************************************
 
 using System.Data.Entity;
-using MySql.Data.Entity;
 using RepositoryEFDotnet.Library;
 using System.ComponentModel.DataAnnotations.Schema;
 using Banking.Models.Entity;
@@ -27,7 +26,6 @@ using Banking.Models.Entity;
 
 namespace Banking.Models.Context
 {
-    [DbConfigurationType(typeof(MySqlEFConfiguration))]
 	public partial class FullContext : BaseContext
 	{	
 		#region CTOR

@@ -8,6 +8,9 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace RepositoryEFDotnet.UnitTest
 {
+    using Banking.Models.Context;
+    using Banking.Models.Customers;
+
     [TestClass]
     public class ContextEF6SqlServerUnitTest : BaseContextUnitTests
     {
@@ -18,26 +21,24 @@ namespace RepositoryEFDotnet.UnitTest
             {
                 BaseContextUnitTests_CreateDbTest(context);
             }
-
-
         }
 
-        //[TestMethod]
-        //public void ContextUnitTest_CustomerContext_CreateDb()
-        //{
-        //    using (var context = new CustomerContext("RepoTest"))
-        //    {
-        //        BaseContextUnitTests_CreateDbTest(context);
-        //    }
-        //}
+        [TestMethod]
+        public void ContextUnitTest_CustomerContext_CreateDb()
+        {
+            using (var context = new CustomerContext("RepoTest"))
+            {
+                BaseContextUnitTests_CreateDbTest(context);
+            }
+        }
 
-        //[TestMethod]
-        //public void ContextUnitTest_FullContext_CreateDb()
-        //{
-        //    using (var context = new FullContext("RepoTest"))
-        //    {
-        //        BaseContextUnitTests_CreateDbTest(context);
-        //    }
-        //}
+        [TestMethod]
+        public void ContextUnitTest_FullContext_CreateDb()
+        {
+            using (var context = new FullContext("RepoTest"))
+            {
+                BaseContextUnitTests_CreateDbTest(context);
+            }
+        }
     }
 }
