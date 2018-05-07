@@ -40,5 +40,5 @@ T4 templates will be used to generate the different layers. Packages consist of 
 - [Visual Studio](https://www.visualstudio.com/downloads/)
 - [T4 Toolbox](https://marketplace.visualstudio.com/items?itemName=OlegVSych.T4ToolboxforVisualStudio2017)
 
-### Formating T4
+### Tools
 - [Devart T4 Editor](https://www.devart.com/t4-editor/download.html)
