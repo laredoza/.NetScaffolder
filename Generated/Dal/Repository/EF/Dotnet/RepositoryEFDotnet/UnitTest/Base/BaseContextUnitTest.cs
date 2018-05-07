@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Data.Entity;
 using Banking.Models.Accounts;
-using Banking.Models.Customers;
+//using Banking.Models.Customers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Data.Entity;
+using MySql.Data.Entity;
 
 namespace RepositoryEFDotnet.UnitTest
 {

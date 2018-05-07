@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContextEFDotnet.Library", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetScaffolder.Test", "..\..\..\..\..\..\Tests\CodeGenerator\DotNetScaffolder.Test.csproj", "{96B8860E-531C-405F-9ABF-2FAE4E8F2759}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsFormsApp1", "WindowsFormsApp1\WindowsFormsApp1.csproj", "{23105AE1-64DE-432B-B25E-2123CCB5235E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{96B8860E-531C-405F-9ABF-2FAE4E8F2759}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{96B8860E-531C-405F-9ABF-2FAE4E8F2759}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{96B8860E-531C-405F-9ABF-2FAE4E8F2759}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23105AE1-64DE-432B-B25E-2123CCB5235E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23105AE1-64DE-432B-B25E-2123CCB5235E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23105AE1-64DE-432B-B25E-2123CCB5235E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23105AE1-64DE-432B-B25E-2123CCB5235E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
