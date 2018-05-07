@@ -38,10 +38,10 @@ namespace Banking.Models.Interfaces
 		
 		#region Child Relationships
 		
-		IList<IBook> Books { get; set; }
 		IList<IOrderDetails> OrderDetails { get; set; }
-		IList<ISoftware> Softwares { get; set; }
-		
+		IBook Book { get; set; }
+		ISoftware Software { get; set; }
+
 		#endregion
 		
 		#region Parent Relationships

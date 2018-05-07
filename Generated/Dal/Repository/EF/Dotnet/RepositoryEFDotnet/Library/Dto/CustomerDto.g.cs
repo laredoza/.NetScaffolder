@@ -98,7 +98,7 @@ namespace Banking.Models.Dto
 		
 		public IList<IBankAccount> BankAccounts { get; set; }
 		public IList<IOrder> Orders { get; set; }
-		
+
 		#endregion
 		
 		#region Parent Relationships

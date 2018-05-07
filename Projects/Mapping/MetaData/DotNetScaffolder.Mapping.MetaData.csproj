@@ -57,6 +57,7 @@
     <Compile Include="Enum\ConfigLocation.cs" />
     <Compile Include="Enum\DatabaseGeneratedKeyType.cs" />
     <Compile Include="Enum\GenerationType.cs" />
+    <Compile Include="Enum\RelationshipMultiplicity.cs" />
     <Compile Include="Enum\RelationshipType.cs" />
     <Compile Include="Model\Column.cs" />
     <Compile Include="Model\DatabaseModel.cs" />

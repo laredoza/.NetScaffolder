@@ -204,6 +204,16 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
             this.OutputPath = string.Empty;
         }
 
+        public bool HasModel(Relationship rel)
+        {
+            if (this.Models == null || !this.Models.Any())
+            {
+                return false;
+            }
+
+            return this.Models.Any(o => o.SchemaName == rel.SchemaName && o.TableName == rel.ReferencedTableName);
+        }
+
         /// <summary>
         ///     Gets or sets the context name.
         /// </summary>

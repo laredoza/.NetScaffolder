@@ -133,10 +133,9 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.Edmxs
                 {
                     var ass = new Relationship
                     {
-                        ReferencedTableName =
-          (rel.ReferentialConstraint.Dependent.Role == table.Name)
-              ? rel.ReferentialConstraint.Principal.Role
-              : rel.ReferentialConstraint.Dependent.Role,
+                        ReferencedTableName = (rel.ReferentialConstraint.Dependent.Role == table.Name) ?
+                        rel.ReferentialConstraint.Principal.Role :
+                        rel.ReferentialConstraint.Dependent.Role,
                         ColumnName =
           (rel.ReferentialConstraint.Dependent.Role == table.Name)
               ? rel.ReferentialConstraint.Dependent.PropertyRef.Name
@@ -154,6 +153,17 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.Edmxs
                         RelationshipName = rel.Name
                     };
 
+                    if (rel.Ends.Count() != 2)
+                    {
+                        throw new Exception("Error in association multiplicity");
+                    }
+
+                    var tblMp = rel.Ends.First(o => o.Role == table.Name);
+                    var refTblMp = rel.Ends.First(o => o.Role == ass.ReferencedTableName);
+                    
+                    ass.Multiplicity = MapMultiplicity(tblMp.Multiplicity);
+                    ass.ReferencedMultiplicity = MapMultiplicity(refTblMp.Multiplicity);
+
                     tbl.Relationships.Add(ass);
                 }
             }
@@ -162,6 +172,29 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.Edmxs
 
             Logger.Trace("Completed Import()");
             return result;
+        }
+
+        private RelationshipMultiplicity MapMultiplicity(string mp)
+        {
+            switch (mp)
+            {
+                case "0..1":
+                    {
+                        return RelationshipMultiplicity.ZeroToOne;
+                    }
+                case "1":
+                    {
+                        return RelationshipMultiplicity.One;
+                    }
+                case "*":
+                    {
+                        return RelationshipMultiplicity.Many;
+                    }
+                default:
+                    {
+                        throw new Exception("Specified multiplicity coudl not be determined");
+                    }
+            }
         }
 
         /// <summary>

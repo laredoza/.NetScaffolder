@@ -34,10 +34,13 @@ namespace <#= DataType.FullNamespace #>
 		
 		#region Child Relationships
 		
-<#+ foreach(var child in DataType.MetaData.DistinctChildRelationships){ #>
+<#+ foreach(var child in DataType.MetaData.DistinctChildRelationships.Where(o => o.ReferencedMultiplicity == RelationshipMultiplicity.Many)){ #>
 		<#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #>> <#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableNamePlural) #> { get; set; }
 <#+ } #>
-		
+<#+ foreach(var child in DataType.MetaData.DistinctChildRelationships.Where(o => o.ReferencedMultiplicity != RelationshipMultiplicity.Many)){ #>
+		I<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #> <#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #> { get; set; }
+<#+ } #>
+
 		#endregion
 		
 		#region Parent Relationships

@@ -41,7 +41,7 @@ namespace Banking.Models.Interfaces
 		#region Child Relationships
 		
 		IList<IOrderDetails> OrderDetails { get; set; }
-		
+
 		#endregion
 		
 		#region Parent Relationships

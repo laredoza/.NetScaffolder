@@ -35,7 +35,7 @@ namespace Banking.Models.Interfaces
 		#region Child Relationships
 		
 		IList<ICustomer> Customers { get; set; }
-		
+
 		#endregion
 		
 		#region Parent Relationships

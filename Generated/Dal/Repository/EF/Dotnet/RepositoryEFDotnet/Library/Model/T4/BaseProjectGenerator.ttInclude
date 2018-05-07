@@ -34,6 +34,7 @@
 <#@ import namespace="DotNetScaffolder.Components.DataTypes.DefaultDataTypes.EntityDataTypes" #>
 <#@ import namespace="DotNetScaffolder.Components.DataTypes.DefaultDataTypes.RepoInterfaceDataTypes" #>
 <#@ import namespace="DotNetScaffolder.Components.DataTypes.DefaultDataTypes.RepositoryDataTypes" #>
+<#@ import namespace="DotNetScaffolder.Mapping.MetaData.Enum" #>
 
 <#@ import namespace="Configuration" #>
 <#@ import namespace="DotNetScaffolder.Mapping.MetaData.Project" #>

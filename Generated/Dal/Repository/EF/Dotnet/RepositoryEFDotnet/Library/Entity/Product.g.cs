@@ -30,9 +30,7 @@ namespace Banking.Models.Entity
 		
 		public Product()
 		{
-			this.Books = new List <Book>();
 			this.OrderDetails = new List <OrderDetails>();
-			this.Softwares = new List <Software>();
 		}
 		
 		public Product(IProduct item, bool deep = false)
@@ -45,19 +43,10 @@ namespace Banking.Models.Entity
 			this.UnitAmount = item.UnitAmount;
 			this.Publisher = item.Publisher;
 			this.AmountInStock = item.AmountInStock;
-			this.Books = new List <Book>();
 			this.OrderDetails = new List <OrderDetails>();
-			this.Softwares = new List <Software>();
 
 			if(deep)
 			{
-				if(item.Books != null)
-				{
-					foreach(var childItem in item.Books)
-					{
-						this.Books.Add(new Book(childItem, deep));
-					}
-				}
 				if(item.OrderDetails != null)
 				{
 					foreach(var childItem in item.OrderDetails)
@@ -65,13 +54,8 @@ namespace Banking.Models.Entity
 						this.OrderDetails.Add(new OrderDetails(childItem, deep));
 					}
 				}
-				if(item.Softwares != null)
-				{
-					foreach(var childItem in item.Softwares)
-					{
-						this.Softwares.Add(new Software(childItem, deep));
-					}
-				}
+				this.Book = new Book(item.Book, deep);
+				this.Software = new Software(item.Software, deep);
 			}
 		}
 		
@@ -90,19 +74,6 @@ namespace Banking.Models.Entity
 		
 		#region Child Relationships
 		
-		IList<IBook> IProduct.Books 
-		{ 
-			get
-			{
-				return (IList<IBook>)this.Books;
-			}
-			set
-			{
-				this.Books = (IList<Book>)value;
-			}			
-		}
-		
-		public virtual IList<Book> Books { get; set; }
 		IList<IOrderDetails> IProduct.OrderDetails 
 		{ 
 			get
@@ -116,19 +87,34 @@ namespace Banking.Models.Entity
 		}
 		
 		public virtual IList<OrderDetails> OrderDetails { get; set; }
-		IList<ISoftware> IProduct.Softwares 
+		
+		IBook IProduct.Book 
 		{ 
 			get
 			{
-				return (IList<ISoftware>)this.Softwares;
+				return this.Book;
 			}
 			set
 			{
-				this.Softwares = (IList<Software>)value;
-			}			
+				this.Book = (Book)value;
+			}
 		}
 		
-		public virtual IList<Software> Softwares { get; set; }
+		public virtual Book Book { get; set; }
+		
+		ISoftware IProduct.Software 
+		{ 
+			get
+			{
+				return this.Software;
+			}
+			set
+			{
+				this.Software = (Software)value;
+			}
+		}
+		
+		public virtual Software Software { get; set; }
 		
 		#endregion
 		

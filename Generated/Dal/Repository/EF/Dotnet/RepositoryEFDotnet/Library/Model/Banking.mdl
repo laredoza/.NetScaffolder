@@ -5,7 +5,7 @@
     <DomainDefinition>
       <CollectionOptionId>0bc1b0c4-1e41-9146-82cf-599181ce4411</CollectionOptionId>
       <DriverId>2bc1b0c4-1e41-9146-82cf-599181ce4400</DriverId>
-      <DriverTypeId>2bc1b0c4-1e41-9146-82cf-599181ce4412</DriverTypeId>
+      <DriverTypeId>2bc1b0c4-1e41-9146-82cf-599181ce4410</DriverTypeId>
       <Id>88e23444-4d85-4fd7-a1a7-e6d68e896281</Id>
       <Name>Domain1</Name>
       <NamingConventionId>1bc1b0c4-1e41-9146-82cf-599181ce4412</NamingConventionId>
@@ -102,23 +102,7 @@
             <Children />
             <Enabled>true</Enabled>
             <HierarchyType>Item</HierarchyType>
-            <Id>e68be9de-f51f-42cc-942b-6db36bce6501</Id>
-            <Name>Entity Framework Repo Interface</Name>
-            <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
-            <Selected>false</Selected>
-            <ConfigLocation>Data</ConfigLocation>
-            <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4451</DataType>
-            <DefaultSettings />
-            <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
-            <LanguageOutputId>1bc1b0c4-1e41-9146-82cf-599181ce4410</LanguageOutputId>
-            <TemplatePath>RepoInterface.T4</TemplatePath>
-            <Version>1</Version>
-          </Template>
-          <Template>
-            <Children />
-            <Enabled>true</Enabled>
-            <HierarchyType>Item</HierarchyType>
-            <Id>7efac698-fdb3-46d7-a531-70efbf02a865</Id>
+            <Id>53c1e778-b5ea-4ed8-8aa5-eeaee6a3df34</Id>
             <Name>Dto Interface</Name>
             <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
             <Selected>false</Selected>
@@ -127,7 +111,23 @@
             <DefaultSettings />
             <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
             <LanguageOutputId>1bc1b0c4-1e41-9146-82cf-599181ce4410</LanguageOutputId>
-            <TemplatePath>DtoInterface.T4</TemplatePath>
+            <TemplatePath>DtoInterfaceTemplate</TemplatePath>
+            <Version>1</Version>
+          </Template>
+          <Template>
+            <Children />
+            <Enabled>true</Enabled>
+            <HierarchyType>Item</HierarchyType>
+            <Id>4bbbdc0b-f7b4-4967-9088-3c4f36121712</Id>
+            <Name>RepoInterface</Name>
+            <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
+            <Selected>false</Selected>
+            <ConfigLocation>Data</ConfigLocation>
+            <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4451</DataType>
+            <DefaultSettings />
+            <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
+            <LanguageOutputId>1bc1b0c4-1e41-9146-82cf-599181ce4410</LanguageOutputId>
+            <TemplatePath>RepositoryInterfaceTemplate</TemplatePath>
             <Version>1</Version>
           </Template>
         </Templates>
@@ -145,13 +145,13 @@
           </Columns>
           <DatabaseGeneratedKeyType>Identity</DatabaseGeneratedKeyType>
           <RelationShips>
-            <RelationShip ColumnName="CustomerId" ColumnRequired="false" RelationShip="ForeignKey" ReferencedColumnName="CustomerId" Render="true" SchemaName="dbo" ReferencedTableName="Customer" UserRelationship="false">
+            <RelationShip ColumnName="CustomerId" RelationShip="ForeignKey" ReferencedColumnName="CustomerId" Render="true" SchemaName="dbo" ReferencedTableName="Customer" Multiplicity="Many" ReferencedMultiplicity="ZeroToOne" UserRelationship="false">
               <RelationshipName>FK_BankAccount_Customer</RelationshipName>
             </RelationShip>
-            <RelationShip ColumnName="BankAccountId" ColumnRequired="false" RelationShip="ForeignKeyChild" ReferencedColumnName="FromBankAccountId" Render="true" SchemaName="dbo" ReferencedTableName="BankTransfers" UserRelationship="false">
+            <RelationShip ColumnName="BankAccountId" RelationShip="ForeignKeyChild" ReferencedColumnName="FromBankAccountId" Render="true" SchemaName="dbo" ReferencedTableName="BankTransfers" Multiplicity="One" ReferencedMultiplicity="Many" UserRelationship="false">
               <RelationshipName>FK_BankTransfers_BankAccount</RelationshipName>
             </RelationShip>
-            <RelationShip ColumnName="BankAccountId" ColumnRequired="false" RelationShip="ForeignKeyChild" ReferencedColumnName="ToBankAccountId" Render="true" SchemaName="dbo" ReferencedTableName="BankTransfers" UserRelationship="false">
+            <RelationShip ColumnName="BankAccountId" RelationShip="ForeignKeyChild" ReferencedColumnName="ToBankAccountId" Render="true" SchemaName="dbo" ReferencedTableName="BankTransfers" Multiplicity="One" ReferencedMultiplicity="Many" UserRelationship="false">
               <RelationshipName>FK_BankTransfers_BankAccount1</RelationshipName>
             </RelationShip>
           </RelationShips>
@@ -166,10 +166,10 @@
           </Columns>
           <DatabaseGeneratedKeyType>Identity</DatabaseGeneratedKeyType>
           <RelationShips>
-            <RelationShip ColumnName="FromBankAccountId" ColumnRequired="false" RelationShip="ForeignKey" ReferencedColumnName="BankAccountId" Render="true" SchemaName="dbo" ReferencedTableName="BankAccount" UserRelationship="false">
+            <RelationShip ColumnName="FromBankAccountId" RelationShip="ForeignKey" ReferencedColumnName="BankAccountId" Render="true" SchemaName="dbo" ReferencedTableName="BankAccount" Multiplicity="Many" ReferencedMultiplicity="One" UserRelationship="false">
               <RelationshipName>FK_BankTransfers_BankAccount</RelationshipName>
             </RelationShip>
-            <RelationShip ColumnName="ToBankAccountId" ColumnRequired="false" RelationShip="ForeignKey" ReferencedColumnName="BankAccountId" Render="true" SchemaName="dbo" ReferencedTableName="BankAccount" UserRelationship="false">
+            <RelationShip ColumnName="ToBankAccountId" RelationShip="ForeignKey" ReferencedColumnName="BankAccountId" Render="true" SchemaName="dbo" ReferencedTableName="BankAccount" Multiplicity="Many" ReferencedMultiplicity="One" UserRelationship="false">
               <RelationshipName>FK_BankTransfers_BankAccount1</RelationshipName>
             </RelationShip>
           </RelationShips>
@@ -181,7 +181,7 @@
           </Columns>
           <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
           <RelationShips>
-            <RelationShip ColumnName="ProductId" ColumnRequired="false" RelationShip="ForeignKey" ReferencedColumnName="ProductId" Render="true" SchemaName="dbo" ReferencedTableName="Product" UserRelationship="false">
+            <RelationShip ColumnName="ProductId" RelationShip="ForeignKey" ReferencedColumnName="ProductId" Render="true" SchemaName="dbo" ReferencedTableName="Product" Multiplicity="ZeroToOne" ReferencedMultiplicity="One" UserRelationship="false">
               <RelationshipName>FK_Book_Product</RelationshipName>
             </RelationShip>
           </RelationShips>
@@ -193,7 +193,7 @@
           </Columns>
           <DatabaseGeneratedKeyType>Identity</DatabaseGeneratedKeyType>
           <RelationShips>
-            <RelationShip ColumnName="CountryId" ColumnRequired="false" RelationShip="ForeignKeyChild" ReferencedColumnName="CountryId" Render="true" SchemaName="dbo" ReferencedTableName="Customer" UserRelationship="false">
+            <RelationShip ColumnName="CountryId" RelationShip="ForeignKeyChild" ReferencedColumnName="CountryId" Render="true" SchemaName="dbo" ReferencedTableName="Customer" Multiplicity="ZeroToOne" ReferencedMultiplicity="Many" UserRelationship="false">
               <RelationshipName>FK_Customer_Country</RelationshipName>
             </RelationShip>
           </RelationShips>
@@ -216,13 +216,13 @@
           </Columns>
           <DatabaseGeneratedKeyType>Identity</DatabaseGeneratedKeyType>
           <RelationShips>
-            <RelationShip ColumnName="CustomerId" ColumnRequired="false" RelationShip="ForeignKeyChild" ReferencedColumnName="CustomerId" Render="true" SchemaName="dbo" ReferencedTableName="BankAccount" UserRelationship="false">
+            <RelationShip ColumnName="CustomerId" RelationShip="ForeignKeyChild" ReferencedColumnName="CustomerId" Render="true" SchemaName="dbo" ReferencedTableName="BankAccount" Multiplicity="ZeroToOne" ReferencedMultiplicity="Many" UserRelationship="false">
               <RelationshipName>FK_BankAccount_Customer</RelationshipName>
             </RelationShip>
-            <RelationShip ColumnName="CountryId" ColumnRequired="false" RelationShip="ForeignKey" ReferencedColumnName="CountryId" Render="true" SchemaName="dbo" ReferencedTableName="Country" UserRelationship="false">
+            <RelationShip ColumnName="CountryId" RelationShip="ForeignKey" ReferencedColumnName="CountryId" Render="true" SchemaName="dbo" ReferencedTableName="Country" Multiplicity="Many" ReferencedMultiplicity="ZeroToOne" UserRelationship="false">
               <RelationshipName>FK_Customer_Country</RelationshipName>
             </RelationShip>
-            <RelationShip ColumnName="CustomerId" ColumnRequired="false" RelationShip="ForeignKeyChild" ReferencedColumnName="CustomerId" Render="true" SchemaName="dbo" ReferencedTableName="Order" UserRelationship="false">
+            <RelationShip ColumnName="CustomerId" RelationShip="ForeignKeyChild" ReferencedColumnName="CustomerId" Render="true" SchemaName="dbo" ReferencedTableName="Order" Multiplicity="ZeroToOne" ReferencedMultiplicity="Many" UserRelationship="false">
               <RelationshipName>FK_Order_Customer</RelationshipName>
             </RelationShip>
           </RelationShips>
@@ -240,10 +240,10 @@
           </Columns>
           <DatabaseGeneratedKeyType>Identity</DatabaseGeneratedKeyType>
           <RelationShips>
-            <RelationShip ColumnName="OrderId" ColumnRequired="false" RelationShip="ForeignKeyChild" ReferencedColumnName="OrderId" Render="true" SchemaName="dbo" ReferencedTableName="OrderDetails" UserRelationship="false">
+            <RelationShip ColumnName="OrderId" RelationShip="ForeignKeyChild" ReferencedColumnName="OrderId" Render="true" SchemaName="dbo" ReferencedTableName="OrderDetails" Multiplicity="One" ReferencedMultiplicity="Many" UserRelationship="false">
               <RelationshipName>FK_OrdeDetails_Order</RelationshipName>
             </RelationShip>
-            <RelationShip ColumnName="CustomerId" ColumnRequired="false" RelationShip="ForeignKey" ReferencedColumnName="CustomerId" Render="true" SchemaName="dbo" ReferencedTableName="Customer" UserRelationship="false">
+            <RelationShip ColumnName="CustomerId" RelationShip="ForeignKey" ReferencedColumnName="CustomerId" Render="true" SchemaName="dbo" ReferencedTableName="Customer" Multiplicity="Many" ReferencedMultiplicity="ZeroToOne" UserRelationship="false">
               <RelationshipName>FK_Order_Customer</RelationshipName>
             </RelationShip>
           </RelationShips>
@@ -259,10 +259,10 @@
           </Columns>
           <DatabaseGeneratedKeyType>Identity</DatabaseGeneratedKeyType>
           <RelationShips>
-            <RelationShip ColumnName="OrderId" ColumnRequired="false" RelationShip="ForeignKey" ReferencedColumnName="OrderId" Render="true" SchemaName="dbo" ReferencedTableName="Order" UserRelationship="false">
+            <RelationShip ColumnName="OrderId" RelationShip="ForeignKey" ReferencedColumnName="OrderId" Render="true" SchemaName="dbo" ReferencedTableName="Order" Multiplicity="Many" ReferencedMultiplicity="One" UserRelationship="false">
               <RelationshipName>FK_OrdeDetails_Order</RelationshipName>
             </RelationShip>
-            <RelationShip ColumnName="ProductId" ColumnRequired="false" RelationShip="ForeignKey" ReferencedColumnName="ProductId" Render="true" SchemaName="dbo" ReferencedTableName="Product" UserRelationship="false">
+            <RelationShip ColumnName="ProductId" RelationShip="ForeignKey" ReferencedColumnName="ProductId" Render="true" SchemaName="dbo" ReferencedTableName="Product" Multiplicity="Many" ReferencedMultiplicity="One" UserRelationship="false">
               <RelationshipName>FK_OrderDetails_Product</RelationshipName>
             </RelationShip>
           </RelationShips>
@@ -278,13 +278,13 @@
           </Columns>
           <DatabaseGeneratedKeyType>Identity</DatabaseGeneratedKeyType>
           <RelationShips>
-            <RelationShip ColumnName="ProductId" ColumnRequired="false" RelationShip="ForeignKeyChild" ReferencedColumnName="ProductId" Render="true" SchemaName="dbo" ReferencedTableName="Book" UserRelationship="false">
+            <RelationShip ColumnName="ProductId" RelationShip="ForeignKeyChild" ReferencedColumnName="ProductId" Render="true" SchemaName="dbo" ReferencedTableName="Book" Multiplicity="One" ReferencedMultiplicity="ZeroToOne" UserRelationship="false">
               <RelationshipName>FK_Book_Product</RelationshipName>
             </RelationShip>
-            <RelationShip ColumnName="ProductId" ColumnRequired="false" RelationShip="ForeignKeyChild" ReferencedColumnName="ProductId" Render="true" SchemaName="dbo" ReferencedTableName="OrderDetails" UserRelationship="false">
+            <RelationShip ColumnName="ProductId" RelationShip="ForeignKeyChild" ReferencedColumnName="ProductId" Render="true" SchemaName="dbo" ReferencedTableName="OrderDetails" Multiplicity="One" ReferencedMultiplicity="Many" UserRelationship="false">
               <RelationshipName>FK_OrderDetails_Product</RelationshipName>
             </RelationShip>
-            <RelationShip ColumnName="ProductId" ColumnRequired="false" RelationShip="ForeignKeyChild" ReferencedColumnName="ProductId" Render="true" SchemaName="dbo" ReferencedTableName="Software" UserRelationship="false">
+            <RelationShip ColumnName="ProductId" RelationShip="ForeignKeyChild" ReferencedColumnName="ProductId" Render="true" SchemaName="dbo" ReferencedTableName="Software" Multiplicity="One" ReferencedMultiplicity="ZeroToOne" UserRelationship="false">
               <RelationshipName>FK_Software_Product</RelationshipName>
             </RelationShip>
           </RelationShips>
@@ -296,7 +296,7 @@
           </Columns>
           <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
           <RelationShips>
-            <RelationShip ColumnName="ProductId" ColumnRequired="false" RelationShip="ForeignKey" ReferencedColumnName="ProductId" Render="true" SchemaName="dbo" ReferencedTableName="Product" UserRelationship="false">
+            <RelationShip ColumnName="ProductId" RelationShip="ForeignKey" ReferencedColumnName="ProductId" Render="true" SchemaName="dbo" ReferencedTableName="Product" Multiplicity="ZeroToOne" ReferencedMultiplicity="One" UserRelationship="false">
               <RelationshipName>FK_Software_Product</RelationshipName>
             </RelationShip>
           </RelationShips>
@@ -305,7 +305,7 @@
     </DomainDefinition>
   </Domains>
   <GroupBy>Domain</GroupBy>
-  <ModelPath>..\..\..\..\..\Generated\Dal\Repository\EF\Dotnet\RepositoryEFDotnet\Library\Model\Banking.mdl</ModelPath>
+  <ModelPath>C:\Dev\DotNetScaffolder\Generated\Dal\Repository\EF\Dotnet\RepositoryEFDotnet\Library\Model\Banking.mdl</ModelPath>
   <OutputFolder>Models</OutputFolder>
   <Version>1</Version>
 </ProjectDefinition>
