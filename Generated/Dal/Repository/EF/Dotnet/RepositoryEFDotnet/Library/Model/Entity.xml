@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <EntityDataType xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <AddInjectConstructor>true</AddInjectConstructor>
+  <InheritFrom />
   <Namespace>Entity</Namespace>
   <OutputFolder>Entity</OutputFolder>
   <OutputPath />
-  <AddInjectConstructor>true</AddInjectConstructor>
-  <InheritFrom />
   <UseInterface>false</UseInterface>
 </EntityDataType>

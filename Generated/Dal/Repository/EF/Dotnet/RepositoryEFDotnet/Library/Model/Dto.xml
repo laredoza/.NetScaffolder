@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <DtoDataType xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <AddInjectConstructor>true</AddInjectConstructor>
+  <InheritFrom />
   <Namespace>Dto</Namespace>
   <OutputFolder>Dto</OutputFolder>
   <OutputPath />
-  <AddInjectConstructor>true</AddInjectConstructor>
-  <InheritFrom />
-  <UseInterface>false</UseInterface>
   <PostFix>Dto</PostFix>
+  <UseInterface>false</UseInterface>
 </DtoDataType>

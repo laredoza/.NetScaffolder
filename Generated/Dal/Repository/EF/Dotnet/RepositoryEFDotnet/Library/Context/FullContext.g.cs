@@ -1,5 +1,5 @@
 ﻿
-// <copyright file="TestingContext.g.cs" company="MIT">
+// <copyright file="FullContext.g.cs" company="MIT">
 //  Copyright (c) 2018 MIT
 // </copyright>  
 
@@ -25,16 +25,16 @@ using Banking.Models.Entity;
 
 namespace Banking.Models.Context
 {
-	public partial class TestingContext : BaseContext
+	public partial class FullContext : BaseContext
 	{	
 		#region CTOR
 		
-		public TestingContext(string connectionOrName) 
+		public FullContext(string connectionOrName) 
 			: base($"name={connectionOrName}") 
 		{
 		}
 		
-		public TestingContext()
+		public FullContext()
 			: base("name=RepoTest") 
 		{
 		}
@@ -179,8 +179,8 @@ namespace Banking.Models.Context
             Configuration.ProxyCreationEnabled = false;
             Configuration.AutoDetectChangesEnabled = false;
 			
-			Database.SetInitializer(new CreateDatabaseIfNotExists<TestingContext>());
-			// Database.SetInitializer(new MigrateDatabaseToLatestVersion<TestingContext, Configuration>());
+			Database.SetInitializer(new CreateDatabaseIfNotExists<FullContext>());
+			// Database.SetInitializer(new MigrateDatabaseToLatestVersion<FullContext, Configuration>());
         }
 		
 		#endregion
