@@ -209,8 +209,16 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
             return result;
         }
 
-
-        public object Load(object parameters)
+        /// <summary>
+        /// The load.
+        /// </summary>
+        /// <param name="parameters">
+        /// The parameters.
+        /// </param>
+        /// <returns>
+        /// The <see cref="object"/>.
+        /// </returns>
+        public override object Load(object parameters)
         {
             Logger.Trace("Started Import()");
 
