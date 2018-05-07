@@ -90,9 +90,9 @@ namespace Banking.Models.Context
 			modelBuilder.Entity<BankAccount>().HasRequired<Customer>(s => s.Customer).WithMany(s => s.BankAccounts).HasForeignKey(s => s.CustomerId).WillCascadeOnDelete(false);
 			modelBuilder.Entity<Order>().HasRequired<Customer>(s => s.Customer).WithMany(s => s.Orders).HasForeignKey(s => s.CustomerId).WillCascadeOnDelete(false);
 			modelBuilder.Entity<OrderDetails>().HasRequired<Order>(s => s.Order).WithMany(s => s.OrderDetails).HasForeignKey(s => s.OrderId).WillCascadeOnDelete(false);
-			modelBuilder.Entity<Book>().HasRequired<Product>(s => s.Product).WithMany(s => s.Books).HasForeignKey(s => s.ProductId).WillCascadeOnDelete(false);
 			modelBuilder.Entity<OrderDetails>().HasRequired<Product>(s => s.Product).WithMany(s => s.OrderDetails).HasForeignKey(s => s.ProductId).WillCascadeOnDelete(false);
-			modelBuilder.Entity<Software>().HasRequired<Product>(s => s.Product).WithMany(s => s.Softwares).HasForeignKey(s => s.ProductId).WillCascadeOnDelete(false);
+			modelBuilder.Entity<Book>().HasRequired<Product>(s => s.Product).WithOptional(s => s.Book).WillCascadeOnDelete(false);
+			modelBuilder.Entity<Software>().HasRequired<Product>(s => s.Product).WithOptional(s => s.Software).WillCascadeOnDelete(false);
 			
 			#endregion
 			

@@ -62,7 +62,7 @@ namespace Banking.Models.Dto
 		
 		#region Child Relationships
 		
-		
+
 		#endregion
 		
 		#region Parent Relationships

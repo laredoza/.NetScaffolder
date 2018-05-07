@@ -72,7 +72,7 @@ namespace Banking.Models.Dto
 		#region Child Relationships
 		
 		public IList<IBankTransfers> BankTransfers { get; set; }
-		
+
 		#endregion
 		
 		#region Parent Relationships

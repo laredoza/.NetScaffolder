@@ -65,7 +65,7 @@ namespace Banking.Models.Dto
 		#region Child Relationships
 		
 		public IList<ICustomer> Customers { get; set; }
-		
+
 		#endregion
 		
 		#region Parent Relationships

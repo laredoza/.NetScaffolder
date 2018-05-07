@@ -38,7 +38,7 @@ namespace Banking.Models.Interfaces
 		#region Child Relationships
 		
 		IList<IBankTransfers> BankTransfers { get; set; }
-		
+
 		#endregion
 		
 		#region Parent Relationships

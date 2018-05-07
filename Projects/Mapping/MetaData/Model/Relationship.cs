@@ -29,8 +29,21 @@ namespace DotNetScaffolder.Mapping.MetaData.Model
         [XmlAttribute("ColumnName")]
         public string ColumnName { get; set; }
 
-        [XmlAttribute("ColumnRequired")]
-        public bool ColumnRequired { get; set; }
+        public bool ColumnRequired
+        {
+            get
+            {
+                return Multiplicity == RelationshipMultiplicity.One ? true : false;
+            }
+        }
+
+        public bool ReferencedColumnRequired
+        {
+            get
+            {
+                return ReferencedMultiplicity == RelationshipMultiplicity.One ? true : false;
+            }
+        }
 
         /// <summary>
         ///     Gets or sets the dependency relation ship.
@@ -114,6 +127,18 @@ namespace DotNetScaffolder.Mapping.MetaData.Model
             }
         }
 
+        [XmlAttribute("Multiplicity")]
+        public RelationshipMultiplicity Multiplicity
+        {
+            get;set;
+        }
+
+        [XmlAttribute("ReferencedMultiplicity")]
+        public RelationshipMultiplicity ReferencedMultiplicity
+        {
+            get; set;
+        }
+
         /// <summary>
         ///     Gets or sets a value indicating whether user relationship.
         /// </summary>
@@ -143,6 +168,8 @@ namespace DotNetScaffolder.Mapping.MetaData.Model
             result.DependencyRelationShip = this.DependencyRelationShip;
             result.ReferencedColumnName = this.ReferencedColumnName;
             result.ReferencedTableName = this.ReferencedTableName;
+            result.Multiplicity = this.Multiplicity;
+            result.ReferencedMultiplicity = this.ReferencedMultiplicity;
 
             if (this.RelatedTable != null)
             {

@@ -78,7 +78,7 @@ namespace Banking.Models.Dto
 		#region Child Relationships
 		
 		public IList<IOrderDetails> OrderDetails { get; set; }
-		
+
 		#endregion
 		
 		#region Parent Relationships

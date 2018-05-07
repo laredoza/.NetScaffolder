@@ -38,7 +38,7 @@ namespace Banking.Models.Interfaces
 		
 		#region Child Relationships
 		
-		
+
 		#endregion
 		
 		#region Parent Relationships
