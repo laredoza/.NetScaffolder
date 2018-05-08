@@ -19,7 +19,6 @@
 // *******************************************************************
 
 using System.Data.Entity;
-using MySql.Data.Entity;
 using RepositoryEFDotnet.Library;
 using System.ComponentModel.DataAnnotations.Schema;
 using Banking.Models.Entity;
@@ -27,7 +26,6 @@ using Banking.Models.Entity;
 
 namespace Banking.Models.Accounts
 {
-    [DbConfigurationType(typeof(MySqlEFConfiguration))]
 	public partial class AccountContext : BaseContext
 	{	
 		#region CTOR
@@ -96,11 +94,8 @@ namespace Banking.Models.Accounts
 			modelBuilder.Entity<BankTransfers>().Property(t => t.TransferDate).IsRequired();
 			
 			#endregion
-			
-			#region Column Order
 
 			
-			#endregion
         }
 		
 		#region Db Sets

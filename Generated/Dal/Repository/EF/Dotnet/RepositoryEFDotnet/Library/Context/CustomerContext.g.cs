@@ -19,7 +19,6 @@
 // *******************************************************************
 
 using System.Data.Entity;
-using MySql.Data.Entity;
 using RepositoryEFDotnet.Library;
 using System.ComponentModel.DataAnnotations.Schema;
 using Banking.Models.Entity;
@@ -27,7 +26,6 @@ using Banking.Models.Entity;
 
 namespace Banking.Models.Customers
 {
-    [DbConfigurationType(typeof(MySqlEFConfiguration))]
 	public partial class CustomerContext : BaseContext
 	{	
 		#region CTOR
@@ -163,11 +161,51 @@ namespace Banking.Models.Customers
 			modelBuilder.Entity<Software>().Property(t => t.LicenseCode).IsRequired();
 			
 			#endregion
-			
-			#region Column Order
 
+			#region Column Order
 			
+			modelBuilder.Entity<Book>().Property(t => t.ProductId).HasColumnOrder(1);
+			modelBuilder.Entity<Book>().Property(t => t.Publisher).HasColumnOrder(2);
+			modelBuilder.Entity<Country>().Property(t => t.CountryId).HasColumnOrder(1);
+			modelBuilder.Entity<Country>().Property(t => t.CountryName).HasColumnOrder(2);
+			modelBuilder.Entity<Customer>().Property(t => t.CustomerId).HasColumnOrder(1);
+			modelBuilder.Entity<Customer>().Property(t => t.CustomerCode).HasColumnOrder(2);
+			modelBuilder.Entity<Customer>().Property(t => t.CompanyName).HasColumnOrder(3);
+			modelBuilder.Entity<Customer>().Property(t => t.ContactName).HasColumnOrder(4);
+			modelBuilder.Entity<Customer>().Property(t => t.ContactTitle).HasColumnOrder(5);
+			modelBuilder.Entity<Customer>().Property(t => t.Address).HasColumnOrder(6);
+			modelBuilder.Entity<Customer>().Property(t => t.City).HasColumnOrder(7);
+			modelBuilder.Entity<Customer>().Property(t => t.PostalCode).HasColumnOrder(8);
+			modelBuilder.Entity<Customer>().Property(t => t.Telephone).HasColumnOrder(9);
+			modelBuilder.Entity<Customer>().Property(t => t.Fax).HasColumnOrder(10);
+			modelBuilder.Entity<Customer>().Property(t => t.CountryId).HasColumnOrder(11);
+			modelBuilder.Entity<Customer>().Property(t => t.Photo).HasColumnOrder(12);
+			modelBuilder.Entity<Customer>().Property(t => t.IsEnabled).HasColumnOrder(13);
+			modelBuilder.Entity<Order>().Property(t => t.OrderId).HasColumnOrder(1);
+			modelBuilder.Entity<Order>().Property(t => t.CustomerId).HasColumnOrder(2);
+			modelBuilder.Entity<Order>().Property(t => t.OrderDate).HasColumnOrder(3);
+			modelBuilder.Entity<Order>().Property(t => t.DeliveryDate).HasColumnOrder(4);
+			modelBuilder.Entity<Order>().Property(t => t.ShippingName).HasColumnOrder(5);
+			modelBuilder.Entity<Order>().Property(t => t.ShippingAddress).HasColumnOrder(6);
+			modelBuilder.Entity<Order>().Property(t => t.ShippingCity).HasColumnOrder(7);
+			modelBuilder.Entity<Order>().Property(t => t.ShippingZip).HasColumnOrder(8);
+			modelBuilder.Entity<OrderDetails>().Property(t => t.OrderDetailsId).HasColumnOrder(1);
+			modelBuilder.Entity<OrderDetails>().Property(t => t.OrderId).HasColumnOrder(2);
+			modelBuilder.Entity<OrderDetails>().Property(t => t.ProductId).HasColumnOrder(3);
+			modelBuilder.Entity<OrderDetails>().Property(t => t.UnitPrice).HasColumnOrder(4);
+			modelBuilder.Entity<OrderDetails>().Property(t => t.Amount).HasColumnOrder(5);
+			modelBuilder.Entity<OrderDetails>().Property(t => t.Discount).HasColumnOrder(6);
+			modelBuilder.Entity<Product>().Property(t => t.ProductId).HasColumnOrder(1);
+			modelBuilder.Entity<Product>().Property(t => t.ProductDescription).HasColumnOrder(2);
+			modelBuilder.Entity<Product>().Property(t => t.UnitPrice).HasColumnOrder(3);
+			modelBuilder.Entity<Product>().Property(t => t.UnitAmount).HasColumnOrder(4);
+			modelBuilder.Entity<Product>().Property(t => t.Publisher).HasColumnOrder(5);
+			modelBuilder.Entity<Product>().Property(t => t.AmountInStock).HasColumnOrder(6);
+			modelBuilder.Entity<Software>().Property(t => t.ProductId).HasColumnOrder(1);
+			modelBuilder.Entity<Software>().Property(t => t.LicenseCode).HasColumnOrder(2);
+
 			#endregion
+			
         }
 		
 		#region Db Sets

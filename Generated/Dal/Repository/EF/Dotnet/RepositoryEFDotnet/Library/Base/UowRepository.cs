@@ -17,7 +17,7 @@
     /// <typeparam name="TEntity">
     ///     The type of underlying entity in this repository
     /// </typeparam>
-    public abstract class UowRepository<TEntity> //: IRepository<TEntity>
+    public abstract class UowRepository<TEntity> : IRepository
         where TEntity : class
     {
         #region Constructors and Destructors
@@ -37,5 +37,15 @@
         protected IUnitOfWork UnitOfWork { get; private set; }
 
         #endregion
+
+        public virtual void Commit()
+        {
+            UnitOfWork?.Commit();
+        }
+
+        public virtual void Rollback()
+        {
+            UnitOfWork?.Rollback();
+        }
     }
 }

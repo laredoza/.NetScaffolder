@@ -20,6 +20,7 @@
 
 using System;
 using System.Collections.Generic;
+using RepositoryEFDotnet.Library;
 using Banking.Models.Interfaces;
 
 namespace Banking.Models.Interfaces
@@ -27,7 +28,7 @@ namespace Banking.Models.Interfaces
 	/// <summary>
 	/// The BankAccountRepository interface that defines database functions for the BankAccount table
 	/// </summary>
-	public partial interface IBankAccountRepository
+	public partial interface IBankAccountRepository : IRepository
 	{
 		#region Load
 

@@ -120,18 +120,18 @@ namespace <#= ContextData.TransformFullnamespace(DataType.BaseNamespace) #>
 <#+ } #>
 			
 			#endregion
-			
-			#region Column Order
 
 <#+ if(ContextData.IncludeColumnOrder){ #>
+			#region Column Order
+			
 <#+ foreach(var table in ContextData.Models){ #>
 <#+ foreach(var col in table.Columns){ #>
 			modelBuilder.Entity<<#=DataType.TransformModelName(table.TableName) #>>().Property(t => t.<#= col.ColumnName #>).HasColumnOrder(<#= col.ColumnOrder #>);
 <#+ } #>
 <#+ } #>
-<#+ } #>
-			
+
 			#endregion
+<#+ } #>			
         }
 		
 		#region Db Sets

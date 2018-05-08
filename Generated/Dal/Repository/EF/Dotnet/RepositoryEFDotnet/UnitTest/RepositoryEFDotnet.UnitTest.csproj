@@ -38,6 +38,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Effort, Version=1.0.0.0, Culture=neutral, PublicKeyToken=6a46696d54971e6d, processorArchitecture=MSIL">
+      <HintPath>..\packages\Effort.EF6.1.3.3\lib\net45\Effort.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -61,6 +64,9 @@
     <Reference Include="MySql.Data.Entity.EF6, Version=6.10.7.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <HintPath>..\packages\MySql.Data.Entity.6.10.7\lib\net452\MySql.Data.Entity.EF6.dll</HintPath>
     </Reference>
+    <Reference Include="NMemory, Version=1.0.0.0, Culture=neutral, PublicKeyToken=6a46696d54971e6d, processorArchitecture=MSIL">
+      <HintPath>..\packages\NMemory.1.1.0\lib\net45\NMemory.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -78,11 +84,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Base\BaseContextUnitTest.cs" />
+    <Compile Include="Base\BaseRepositoryUnitTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TempContext\Product.cs" />
-    <Compile Include="TempContext\SellRightContext.cs" />
-    <Compile Include="Tests\ContextEF6MySqlUnitTests.cs" />
-    <Compile Include="Tests\ContextEF6SqlServerUnitTests.cs" />
+    <Compile Include="Tests\Context\ContextEF6MySqlUnitTests.cs" />
+    <Compile Include="Tests\Context\ContextEF6SqlServerUnitTests.cs" />
+    <Compile Include="Tests\Repository\RepositoryEF6SqlServerUnitTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">

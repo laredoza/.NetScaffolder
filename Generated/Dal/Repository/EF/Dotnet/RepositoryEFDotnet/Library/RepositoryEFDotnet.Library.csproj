@@ -69,6 +69,7 @@
     <Compile Include="Base\UowRepository.cs" />
     <Compile Include="Context\AccountContext.g.cs" />
     <Compile Include="Context\CustomerContext.g.cs" />
+    <Compile Include="Context\FullContext.cs" />
     <Compile Include="Context\FullContext.g.cs" />
     <Compile Include="Dto\BankAccountDto.g.cs" />
     <Compile Include="Dto\BankTransfersDto.g.cs" />
@@ -88,6 +89,7 @@
     <Compile Include="Entity\OrderDetails.g.cs" />
     <Compile Include="Entity\Product.g.cs" />
     <Compile Include="Entity\Software.g.cs" />
+    <Compile Include="Interfaces\Base\IRepository.cs" />
     <Compile Include="Interfaces\Base\IUnitOfWork.cs" />
     <Compile Include="Interfaces\Dto\IBankAccount.g.cs" />
     <Compile Include="Interfaces\Dto\IBankTransfers.g.cs" />

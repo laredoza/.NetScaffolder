@@ -21,6 +21,7 @@
 using System;
 using System.Collections.Generic;
 using RepositoryEFDotnet.Library;
+using System.Linq;
 using Banking.Models.Interfaces;
 using Banking.Models.Entity;
 
@@ -62,7 +63,7 @@ namespace Banking.Models.Repository
         /// <returns>IList<IBankAccount></returns>
 		public IList<IBankAccount> LoadByBankAccountNumber(string bankaccountnumber)
 		{
-			return (IList<IBankAccount>)this.UnitOfWork.AllMatching<BankAccount>(o => o.BankAccountNumber == bankaccountnumber);
+			return this.UnitOfWork.AllMatching<BankAccount>(o => o.BankAccountNumber == bankaccountnumber).ToList<IBankAccount>();
 		}
 		
         /// <summary>
@@ -72,7 +73,7 @@ namespace Banking.Models.Repository
         /// <returns>IList<IBankAccount></returns>
 		public IList<IBankAccount> LoadByBalance(decimal balance)
 		{
-			return (IList<IBankAccount>)this.UnitOfWork.AllMatching<BankAccount>(o => o.Balance == balance);
+			return this.UnitOfWork.AllMatching<BankAccount>(o => o.Balance == balance).ToList<IBankAccount>();
 		}
 		
         /// <summary>
@@ -82,7 +83,7 @@ namespace Banking.Models.Repository
         /// <returns>IList<IBankAccount></returns>
 		public IList<IBankAccount> LoadByCustomerId(int customerid)
 		{
-			return (IList<IBankAccount>)this.UnitOfWork.AllMatching<BankAccount>(o => o.CustomerId == customerid);
+			return this.UnitOfWork.AllMatching<BankAccount>(o => o.CustomerId == customerid).ToList<IBankAccount>();
 		}
 		
         /// <summary>
@@ -92,7 +93,7 @@ namespace Banking.Models.Repository
         /// <returns>IList<IBankAccount></returns>
 		public IList<IBankAccount> LoadByLocked(bool locked)
 		{
-			return (IList<IBankAccount>)this.UnitOfWork.AllMatching<BankAccount>(o => o.Locked == locked);
+			return this.UnitOfWork.AllMatching<BankAccount>(o => o.Locked == locked).ToList<IBankAccount>();
 		}
 		
         /// <summary>
@@ -101,7 +102,7 @@ namespace Banking.Models.Repository
         /// <returns>IList<IBankAccount></returns>
 		public IList<IBankAccount> LoadAll()
 		{
-			return (IList<IBankAccount>)this.UnitOfWork.GetAll<BankAccount>();
+			return this.UnitOfWork.GetAll<BankAccount>().ToList<IBankAccount>();
 		}
 		
 		#endregion
@@ -115,9 +116,15 @@ namespace Banking.Models.Repository
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<IBankAccount></returns>
 		public IList<IBankAccount> SearchByBankAccountNumber(string bankaccountnumber, bool caseSensitive = false)
-		{
-			return caseSensitive ? (IList<IBankAccount>)this.UnitOfWork.AllMatching<BankAccount>(o => o.BankAccountNumber.ToLower().Contains(bankaccountnumber.ToLower())) 
-						  : (IList<IBankAccount>)this.UnitOfWork.AllMatching<BankAccount>(o => o.BankAccountNumber.Contains(bankaccountnumber));
+		{		
+			if(caseSensitive) 
+			{
+				return this.UnitOfWork.AllMatching<BankAccount>(o => o.BankAccountNumber.ToLower().Contains(bankaccountnumber.ToLower())).ToList<IBankAccount>();
+			}
+			else
+			{
+				return this.UnitOfWork.AllMatching<BankAccount>(o => o.BankAccountNumber.Contains(bankaccountnumber)).ToList<IBankAccount>();
+			}
 		}
 		
 		#endregion

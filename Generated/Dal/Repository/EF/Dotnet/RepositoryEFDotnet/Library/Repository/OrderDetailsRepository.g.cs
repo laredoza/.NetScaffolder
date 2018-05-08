@@ -21,6 +21,7 @@
 using System;
 using System.Collections.Generic;
 using RepositoryEFDotnet.Library;
+using System.Linq;
 using Banking.Models.Interfaces;
 using Banking.Models.Entity;
 
@@ -62,7 +63,7 @@ namespace Banking.Models.Repository
         /// <returns>IList<IOrderDetails></returns>
 		public IList<IOrderDetails> LoadByOrderId(int orderid)
 		{
-			return (IList<IOrderDetails>)this.UnitOfWork.AllMatching<OrderDetails>(o => o.OrderId == orderid);
+			return this.UnitOfWork.AllMatching<OrderDetails>(o => o.OrderId == orderid).ToList<IOrderDetails>();
 		}
 		
         /// <summary>
@@ -72,7 +73,7 @@ namespace Banking.Models.Repository
         /// <returns>IList<IOrderDetails></returns>
 		public IList<IOrderDetails> LoadByProductId(int productid)
 		{
-			return (IList<IOrderDetails>)this.UnitOfWork.AllMatching<OrderDetails>(o => o.ProductId == productid);
+			return this.UnitOfWork.AllMatching<OrderDetails>(o => o.ProductId == productid).ToList<IOrderDetails>();
 		}
 		
         /// <summary>
@@ -82,7 +83,7 @@ namespace Banking.Models.Repository
         /// <returns>IList<IOrderDetails></returns>
 		public IList<IOrderDetails> LoadByUnitPrice(decimal unitprice)
 		{
-			return (IList<IOrderDetails>)this.UnitOfWork.AllMatching<OrderDetails>(o => o.UnitPrice == unitprice);
+			return this.UnitOfWork.AllMatching<OrderDetails>(o => o.UnitPrice == unitprice).ToList<IOrderDetails>();
 		}
 		
         /// <summary>
@@ -92,7 +93,7 @@ namespace Banking.Models.Repository
         /// <returns>IList<IOrderDetails></returns>
 		public IList<IOrderDetails> LoadByAmount(short amount)
 		{
-			return (IList<IOrderDetails>)this.UnitOfWork.AllMatching<OrderDetails>(o => o.Amount == amount);
+			return this.UnitOfWork.AllMatching<OrderDetails>(o => o.Amount == amount).ToList<IOrderDetails>();
 		}
 		
         /// <summary>
@@ -102,7 +103,7 @@ namespace Banking.Models.Repository
         /// <returns>IList<IOrderDetails></returns>
 		public IList<IOrderDetails> LoadByDiscount(float discount)
 		{
-			return (IList<IOrderDetails>)this.UnitOfWork.AllMatching<OrderDetails>(o => o.Discount == discount);
+			return this.UnitOfWork.AllMatching<OrderDetails>(o => o.Discount == discount).ToList<IOrderDetails>();
 		}
 		
         /// <summary>
@@ -111,7 +112,7 @@ namespace Banking.Models.Repository
         /// <returns>IList<IOrderDetails></returns>
 		public IList<IOrderDetails> LoadAll()
 		{
-			return (IList<IOrderDetails>)this.UnitOfWork.GetAll<OrderDetails>();
+			return this.UnitOfWork.GetAll<OrderDetails>().ToList<IOrderDetails>();
 		}
 		
 		#endregion

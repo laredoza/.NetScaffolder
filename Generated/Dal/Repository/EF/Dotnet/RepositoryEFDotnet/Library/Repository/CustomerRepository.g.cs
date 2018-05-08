@@ -21,6 +21,7 @@
 using System;
 using System.Collections.Generic;
 using RepositoryEFDotnet.Library;
+using System.Linq;
 using Banking.Models.Interfaces;
 using Banking.Models.Entity;
 
@@ -62,7 +63,7 @@ namespace Banking.Models.Repository
         /// <returns>IList<ICustomer></returns>
 		public IList<ICustomer> LoadByCustomerCode(string customercode)
 		{
-			return (IList<ICustomer>)this.UnitOfWork.AllMatching<Customer>(o => o.CustomerCode == customercode);
+			return this.UnitOfWork.AllMatching<Customer>(o => o.CustomerCode == customercode).ToList<ICustomer>();
 		}
 		
         /// <summary>
@@ -72,7 +73,7 @@ namespace Banking.Models.Repository
         /// <returns>IList<ICustomer></returns>
 		public IList<ICustomer> LoadByCompanyName(string companyname)
 		{
-			return (IList<ICustomer>)this.UnitOfWork.AllMatching<Customer>(o => o.CompanyName == companyname);
+			return this.UnitOfWork.AllMatching<Customer>(o => o.CompanyName == companyname).ToList<ICustomer>();
 		}
 		
         /// <summary>
@@ -82,7 +83,7 @@ namespace Banking.Models.Repository
         /// <returns>IList<ICustomer></returns>
 		public IList<ICustomer> LoadByContactName(string contactname)
 		{
-			return (IList<ICustomer>)this.UnitOfWork.AllMatching<Customer>(o => o.ContactName == contactname);
+			return this.UnitOfWork.AllMatching<Customer>(o => o.ContactName == contactname).ToList<ICustomer>();
 		}
 		
         /// <summary>
@@ -92,7 +93,7 @@ namespace Banking.Models.Repository
         /// <returns>IList<ICustomer></returns>
 		public IList<ICustomer> LoadByContactTitle(string contacttitle)
 		{
-			return (IList<ICustomer>)this.UnitOfWork.AllMatching<Customer>(o => o.ContactTitle == contacttitle);
+			return this.UnitOfWork.AllMatching<Customer>(o => o.ContactTitle == contacttitle).ToList<ICustomer>();
 		}
 		
         /// <summary>
@@ -102,7 +103,7 @@ namespace Banking.Models.Repository
         /// <returns>IList<ICustomer></returns>
 		public IList<ICustomer> LoadByAddress(string address)
 		{
-			return (IList<ICustomer>)this.UnitOfWork.AllMatching<Customer>(o => o.Address == address);
+			return this.UnitOfWork.AllMatching<Customer>(o => o.Address == address).ToList<ICustomer>();
 		}
 		
         /// <summary>
@@ -112,7 +113,7 @@ namespace Banking.Models.Repository
         /// <returns>IList<ICustomer></returns>
 		public IList<ICustomer> LoadByCity(string city)
 		{
-			return (IList<ICustomer>)this.UnitOfWork.AllMatching<Customer>(o => o.City == city);
+			return this.UnitOfWork.AllMatching<Customer>(o => o.City == city).ToList<ICustomer>();
 		}
 		
         /// <summary>
@@ -122,7 +123,7 @@ namespace Banking.Models.Repository
         /// <returns>IList<ICustomer></returns>
 		public IList<ICustomer> LoadByPostalCode(string postalcode)
 		{
-			return (IList<ICustomer>)this.UnitOfWork.AllMatching<Customer>(o => o.PostalCode == postalcode);
+			return this.UnitOfWork.AllMatching<Customer>(o => o.PostalCode == postalcode).ToList<ICustomer>();
 		}
 		
         /// <summary>
@@ -132,7 +133,7 @@ namespace Banking.Models.Repository
         /// <returns>IList<ICustomer></returns>
 		public IList<ICustomer> LoadByTelephone(string telephone)
 		{
-			return (IList<ICustomer>)this.UnitOfWork.AllMatching<Customer>(o => o.Telephone == telephone);
+			return this.UnitOfWork.AllMatching<Customer>(o => o.Telephone == telephone).ToList<ICustomer>();
 		}
 		
         /// <summary>
@@ -142,7 +143,7 @@ namespace Banking.Models.Repository
         /// <returns>IList<ICustomer></returns>
 		public IList<ICustomer> LoadByFax(string fax)
 		{
-			return (IList<ICustomer>)this.UnitOfWork.AllMatching<Customer>(o => o.Fax == fax);
+			return this.UnitOfWork.AllMatching<Customer>(o => o.Fax == fax).ToList<ICustomer>();
 		}
 		
         /// <summary>
@@ -152,7 +153,7 @@ namespace Banking.Models.Repository
         /// <returns>IList<ICustomer></returns>
 		public IList<ICustomer> LoadByCountryId(int countryid)
 		{
-			return (IList<ICustomer>)this.UnitOfWork.AllMatching<Customer>(o => o.CountryId == countryid);
+			return this.UnitOfWork.AllMatching<Customer>(o => o.CountryId == countryid).ToList<ICustomer>();
 		}
 		
         /// <summary>
@@ -162,7 +163,7 @@ namespace Banking.Models.Repository
         /// <returns>IList<ICustomer></returns>
 		public IList<ICustomer> LoadByPhoto(string photo)
 		{
-			return (IList<ICustomer>)this.UnitOfWork.AllMatching<Customer>(o => o.Photo == photo);
+			return this.UnitOfWork.AllMatching<Customer>(o => o.Photo == photo).ToList<ICustomer>();
 		}
 		
         /// <summary>
@@ -172,7 +173,7 @@ namespace Banking.Models.Repository
         /// <returns>IList<ICustomer></returns>
 		public IList<ICustomer> LoadByIsEnabled(bool isenabled)
 		{
-			return (IList<ICustomer>)this.UnitOfWork.AllMatching<Customer>(o => o.IsEnabled == isenabled);
+			return this.UnitOfWork.AllMatching<Customer>(o => o.IsEnabled == isenabled).ToList<ICustomer>();
 		}
 		
         /// <summary>
@@ -181,7 +182,7 @@ namespace Banking.Models.Repository
         /// <returns>IList<ICustomer></returns>
 		public IList<ICustomer> LoadAll()
 		{
-			return (IList<ICustomer>)this.UnitOfWork.GetAll<Customer>();
+			return this.UnitOfWork.GetAll<Customer>().ToList<ICustomer>();
 		}
 		
 		#endregion
@@ -195,9 +196,15 @@ namespace Banking.Models.Repository
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<ICustomer></returns>
 		public IList<ICustomer> SearchByCustomerCode(string customercode, bool caseSensitive = false)
-		{
-			return caseSensitive ? (IList<ICustomer>)this.UnitOfWork.AllMatching<Customer>(o => o.CustomerCode.ToLower().Contains(customercode.ToLower())) 
-						  : (IList<ICustomer>)this.UnitOfWork.AllMatching<Customer>(o => o.CustomerCode.Contains(customercode));
+		{		
+			if(caseSensitive) 
+			{
+				return this.UnitOfWork.AllMatching<Customer>(o => o.CustomerCode.ToLower().Contains(customercode.ToLower())).ToList<ICustomer>();
+			}
+			else
+			{
+				return this.UnitOfWork.AllMatching<Customer>(o => o.CustomerCode.Contains(customercode)).ToList<ICustomer>();
+			}
 		}
 		
         /// <summary>
@@ -207,9 +214,15 @@ namespace Banking.Models.Repository
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<ICustomer></returns>
 		public IList<ICustomer> SearchByCompanyName(string companyname, bool caseSensitive = false)
-		{
-			return caseSensitive ? (IList<ICustomer>)this.UnitOfWork.AllMatching<Customer>(o => o.CompanyName.ToLower().Contains(companyname.ToLower())) 
-						  : (IList<ICustomer>)this.UnitOfWork.AllMatching<Customer>(o => o.CompanyName.Contains(companyname));
+		{		
+			if(caseSensitive) 
+			{
+				return this.UnitOfWork.AllMatching<Customer>(o => o.CompanyName.ToLower().Contains(companyname.ToLower())).ToList<ICustomer>();
+			}
+			else
+			{
+				return this.UnitOfWork.AllMatching<Customer>(o => o.CompanyName.Contains(companyname)).ToList<ICustomer>();
+			}
 		}
 		
         /// <summary>
@@ -219,9 +232,15 @@ namespace Banking.Models.Repository
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<ICustomer></returns>
 		public IList<ICustomer> SearchByContactName(string contactname, bool caseSensitive = false)
-		{
-			return caseSensitive ? (IList<ICustomer>)this.UnitOfWork.AllMatching<Customer>(o => o.ContactName.ToLower().Contains(contactname.ToLower())) 
-						  : (IList<ICustomer>)this.UnitOfWork.AllMatching<Customer>(o => o.ContactName.Contains(contactname));
+		{		
+			if(caseSensitive) 
+			{
+				return this.UnitOfWork.AllMatching<Customer>(o => o.ContactName.ToLower().Contains(contactname.ToLower())).ToList<ICustomer>();
+			}
+			else
+			{
+				return this.UnitOfWork.AllMatching<Customer>(o => o.ContactName.Contains(contactname)).ToList<ICustomer>();
+			}
 		}
 		
         /// <summary>
@@ -231,9 +250,15 @@ namespace Banking.Models.Repository
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<ICustomer></returns>
 		public IList<ICustomer> SearchByContactTitle(string contacttitle, bool caseSensitive = false)
-		{
-			return caseSensitive ? (IList<ICustomer>)this.UnitOfWork.AllMatching<Customer>(o => o.ContactTitle.ToLower().Contains(contacttitle.ToLower())) 
-						  : (IList<ICustomer>)this.UnitOfWork.AllMatching<Customer>(o => o.ContactTitle.Contains(contacttitle));
+		{		
+			if(caseSensitive) 
+			{
+				return this.UnitOfWork.AllMatching<Customer>(o => o.ContactTitle.ToLower().Contains(contacttitle.ToLower())).ToList<ICustomer>();
+			}
+			else
+			{
+				return this.UnitOfWork.AllMatching<Customer>(o => o.ContactTitle.Contains(contacttitle)).ToList<ICustomer>();
+			}
 		}
 		
         /// <summary>
@@ -243,9 +268,15 @@ namespace Banking.Models.Repository
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<ICustomer></returns>
 		public IList<ICustomer> SearchByAddress(string address, bool caseSensitive = false)
-		{
-			return caseSensitive ? (IList<ICustomer>)this.UnitOfWork.AllMatching<Customer>(o => o.Address.ToLower().Contains(address.ToLower())) 
-						  : (IList<ICustomer>)this.UnitOfWork.AllMatching<Customer>(o => o.Address.Contains(address));
+		{		
+			if(caseSensitive) 
+			{
+				return this.UnitOfWork.AllMatching<Customer>(o => o.Address.ToLower().Contains(address.ToLower())).ToList<ICustomer>();
+			}
+			else
+			{
+				return this.UnitOfWork.AllMatching<Customer>(o => o.Address.Contains(address)).ToList<ICustomer>();
+			}
 		}
 		
         /// <summary>
@@ -255,9 +286,15 @@ namespace Banking.Models.Repository
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<ICustomer></returns>
 		public IList<ICustomer> SearchByCity(string city, bool caseSensitive = false)
-		{
-			return caseSensitive ? (IList<ICustomer>)this.UnitOfWork.AllMatching<Customer>(o => o.City.ToLower().Contains(city.ToLower())) 
-						  : (IList<ICustomer>)this.UnitOfWork.AllMatching<Customer>(o => o.City.Contains(city));
+		{		
+			if(caseSensitive) 
+			{
+				return this.UnitOfWork.AllMatching<Customer>(o => o.City.ToLower().Contains(city.ToLower())).ToList<ICustomer>();
+			}
+			else
+			{
+				return this.UnitOfWork.AllMatching<Customer>(o => o.City.Contains(city)).ToList<ICustomer>();
+			}
 		}
 		
         /// <summary>
@@ -267,9 +304,15 @@ namespace Banking.Models.Repository
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<ICustomer></returns>
 		public IList<ICustomer> SearchByPostalCode(string postalcode, bool caseSensitive = false)
-		{
-			return caseSensitive ? (IList<ICustomer>)this.UnitOfWork.AllMatching<Customer>(o => o.PostalCode.ToLower().Contains(postalcode.ToLower())) 
-						  : (IList<ICustomer>)this.UnitOfWork.AllMatching<Customer>(o => o.PostalCode.Contains(postalcode));
+		{		
+			if(caseSensitive) 
+			{
+				return this.UnitOfWork.AllMatching<Customer>(o => o.PostalCode.ToLower().Contains(postalcode.ToLower())).ToList<ICustomer>();
+			}
+			else
+			{
+				return this.UnitOfWork.AllMatching<Customer>(o => o.PostalCode.Contains(postalcode)).ToList<ICustomer>();
+			}
 		}
 		
         /// <summary>
@@ -279,9 +322,15 @@ namespace Banking.Models.Repository
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<ICustomer></returns>
 		public IList<ICustomer> SearchByTelephone(string telephone, bool caseSensitive = false)
-		{
-			return caseSensitive ? (IList<ICustomer>)this.UnitOfWork.AllMatching<Customer>(o => o.Telephone.ToLower().Contains(telephone.ToLower())) 
-						  : (IList<ICustomer>)this.UnitOfWork.AllMatching<Customer>(o => o.Telephone.Contains(telephone));
+		{		
+			if(caseSensitive) 
+			{
+				return this.UnitOfWork.AllMatching<Customer>(o => o.Telephone.ToLower().Contains(telephone.ToLower())).ToList<ICustomer>();
+			}
+			else
+			{
+				return this.UnitOfWork.AllMatching<Customer>(o => o.Telephone.Contains(telephone)).ToList<ICustomer>();
+			}
 		}
 		
         /// <summary>
@@ -291,9 +340,15 @@ namespace Banking.Models.Repository
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<ICustomer></returns>
 		public IList<ICustomer> SearchByFax(string fax, bool caseSensitive = false)
-		{
-			return caseSensitive ? (IList<ICustomer>)this.UnitOfWork.AllMatching<Customer>(o => o.Fax.ToLower().Contains(fax.ToLower())) 
-						  : (IList<ICustomer>)this.UnitOfWork.AllMatching<Customer>(o => o.Fax.Contains(fax));
+		{		
+			if(caseSensitive) 
+			{
+				return this.UnitOfWork.AllMatching<Customer>(o => o.Fax.ToLower().Contains(fax.ToLower())).ToList<ICustomer>();
+			}
+			else
+			{
+				return this.UnitOfWork.AllMatching<Customer>(o => o.Fax.Contains(fax)).ToList<ICustomer>();
+			}
 		}
 		
         /// <summary>
@@ -303,9 +358,15 @@ namespace Banking.Models.Repository
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<ICustomer></returns>
 		public IList<ICustomer> SearchByPhoto(string photo, bool caseSensitive = false)
-		{
-			return caseSensitive ? (IList<ICustomer>)this.UnitOfWork.AllMatching<Customer>(o => o.Photo.ToLower().Contains(photo.ToLower())) 
-						  : (IList<ICustomer>)this.UnitOfWork.AllMatching<Customer>(o => o.Photo.Contains(photo));
+		{		
+			if(caseSensitive) 
+			{
+				return this.UnitOfWork.AllMatching<Customer>(o => o.Photo.ToLower().Contains(photo.ToLower())).ToList<ICustomer>();
+			}
+			else
+			{
+				return this.UnitOfWork.AllMatching<Customer>(o => o.Photo.Contains(photo)).ToList<ICustomer>();
+			}
 		}
 		
 		#endregion

@@ -7,7 +7,6 @@
     using System.Data;
     using System.Data.Common;
     using System.Data.Entity;
-    using System.Data.Entity.Infrastructure;
     using System.Data.Entity.Migrations;
     using System.Linq;
     using System.Linq.Expressions;
@@ -40,6 +39,12 @@
         /// </param>
         protected BaseContext(string nameOrConnectionstring)
             : base(nameOrConnectionstring)
+        {
+            SetupContext();
+        }
+
+        protected BaseContext(DbConnection connection, bool contextOwnsConnection)
+            : base(connection, contextOwnsConnection)
         {
             SetupContext();
         }
@@ -152,14 +157,14 @@
         /// <returns>
         ///     The
         ///     <see>
-        ///         <cref>List</cref>
+        ///         <cref>IEnumerable</cref>
         ///     </see>
         ///     .
         /// </returns>
-        public List<TEntity> AllMatching<TEntity>(Expression<Func<TEntity, bool>> filter, List<string> includes = null, string hint = "")
+        public IEnumerable<TEntity> AllMatching<TEntity>(Expression<Func<TEntity, bool>> filter, IEnumerable<string> includes = null, string hint = "")
             where TEntity : class
         {
-            return GetQueryable(includes, filter).ToList();
+            return GetQueryable(includes, filter);
         }
 
         /// <summary>
@@ -180,11 +185,10 @@
         /// <returns>
         ///     The <see cref="Task" />.
         /// </returns>
-        public Task<List<TEntity>> AllMatchingAsync<TEntity>(Expression<Func<TEntity, bool>> filter, List<string> includes = null, string hint = "")
+        public Task<IEnumerable<TEntity>> AllMatchingAsync<TEntity>(Expression<Func<TEntity, bool>> filter, IEnumerable<string> includes = null, string hint = "")
             where TEntity : class
         {
-            var items = GetQueryable(includes, filter).ToListAsync();
-            return items;
+            return Task.Run(() => AllMatching(filter, includes, hint));
         }
 
         /// <summary>
@@ -202,13 +206,16 @@
         /// <returns>
         ///     The <see cref="bool" />.
         /// </returns>
-        public bool Any<TEntity>(List<string> includes = null, Expression<Func<TEntity, bool>> filter = null)
+        public bool Any<TEntity>(IEnumerable<string> includes = null, Expression<Func<TEntity, bool>> filter = null)
             where TEntity : class
         {
             IQueryable<TEntity> items = Set<TEntity>();
             if (includes != null && includes.Any())
             {
-                includes.Where(i => i != null).ToList().ForEach(i => { items = items.Include(i); });
+                foreach(var i in includes.Where(o=> o != null))
+                {
+                    items = items.Include(i);
+                }
             }
 
             if (filter != null)
@@ -219,24 +226,10 @@
             throw new Exception("No filter provided for any query");
         }
 
-        public Task<bool> AnyAsync<TEntity>(List<string> includes = null, Expression<Func<TEntity, bool>> filter = null)
+        public Task<bool> AnyAsync<TEntity>(IEnumerable<string> includes = null, Expression<Func<TEntity, bool>> filter = null)
             where TEntity : class
         {
-            return Task.Run(()=>
-            {
-                IQueryable<TEntity> items = Set<TEntity>();
-                if (includes != null && includes.Any())
-                {
-                    includes.Where(i => i != null).ToList().ForEach(i => { items = items.Include(i); });
-                }
-
-                if (filter != null)
-                {
-                    return items.Any(filter);
-                }
-
-                throw new Exception("No filter provided for any query");
-            });
+            return Task.Run(() => Any(includes, filter));
         }
 
         /// <summary>
@@ -336,14 +329,14 @@
             return Database.SqlQuery<TEntity>(sqlQuery, parameters).AsQueryable();
         }
 
-        public TEntity Get<TEntity>(Expression<Func<TEntity, bool>> filter, List<string> includes = null) where TEntity : class
+        public TEntity Get<TEntity>(Expression<Func<TEntity, bool>> filter, IEnumerable<string> includes = null) where TEntity : class
         {
             return this.GetQueryable(includes, filter).FirstOrDefault();
         }
 
-        public List<TEntity> GetAll<TEntity>(List<string> includes = null) where TEntity : class
+        public IEnumerable<TEntity> GetAll<TEntity>(IEnumerable<string> includes = null) where TEntity : class
         {
-            return GetQueryable<TEntity>(includes).ToList();
+            return GetQueryable<TEntity>(includes);
         }
 
         /// <summary>
@@ -358,23 +351,23 @@
         /// <returns>
         ///     The <see cref="Task" />.
         /// </returns>
-        public Task<List<TEntity>> GetAllAsync<TEntity>(List<string> includes = null)
+        public Task<IEnumerable<TEntity>> GetAllAsync<TEntity>(IEnumerable<string> includes = null)
             where TEntity : class
         {
             return Task.Run(() => GetAll<TEntity>(includes));
         }
 
-        public Task<TEntity> GetAsync<TEntity>(Expression<Func<TEntity, bool>> filter, List<string> includes = null) where TEntity : class
+        public Task<TEntity> GetAsync<TEntity>(Expression<Func<TEntity, bool>> filter, IEnumerable<string> includes = null) where TEntity : class
         {
             return Task.Run(() => Get(filter, includes));
         }
 
-        public TResult Max<TEntity, TResult>(Expression<Func<TEntity, TResult>> filter, List<string> includes = null) where TEntity : class
+        public TResult Max<TEntity, TResult>(Expression<Func<TEntity, TResult>> filter, IEnumerable<string> includes = null) where TEntity : class
         {
             return this.GetDbSet<TEntity>().Max(filter);
         }
 
-        public Task<TResult> MaxAsync<TEntity, TResult>(Expression<Func<TEntity, TResult>> filter, List<string> includes = null) where TEntity : class
+        public Task<TResult> MaxAsync<TEntity, TResult>(Expression<Func<TEntity, TResult>> filter, IEnumerable<string> includes = null) where TEntity : class
         {
             return Task.Run(() => Max(filter, includes));
         }
@@ -422,11 +415,11 @@
         ///     The <see cref="IQueryable" />.
         /// </returns>
         public IQueryable<TEntity> GetQueryable<TEntity>(
-            List<string> includes = null,
+            IEnumerable<string> includes = null,
             Expression<Func<TEntity, bool>> filter = null,
             int pageGo = 0,
             int pageSize = 0,
-            List<string> orderBy = null,
+            IEnumerable<string> orderBy = null,
             bool orderAscendent = false)
             where TEntity : class
         {
@@ -434,7 +427,10 @@
 
             if (includes != null && includes.Any())
             {
-                includes.Where(i => i != null).ToList().ForEach(i => { items = items.Include(i); });
+                foreach (var i in includes.Where(o => o != null))
+                {
+                    items = items.Include(i);
+                }
             }
 
             if (filter != null)
@@ -446,7 +442,11 @@
             {
                 if (orderBy != null && orderBy.Any())
                 {
-                    orderBy.Where(i => i != null).ToList().ForEach(s => items = QueryableUtils.CallOrderBy(items, s, orderAscendent));
+                    foreach (var i in orderBy.Where(o => !string.IsNullOrEmpty(o)))
+                    {
+                        items = QueryableUtils.CallOrderBy(items, i, orderAscendent);
+                    }
+
                     items = items.Skip(pageSize * (pageGo - 1));
                 }
 
@@ -520,7 +520,11 @@
         public void Rollback()
         {
             transaction?.Rollback();
-            ChangeTracker.Entries().ToList().ForEach(entry => entry.State = EntityState.Unchanged);
+
+            foreach(var entry in ChangeTracker.Entries())
+            {
+                entry.State = EntityState.Unchanged;
+            }
         }
 
         /// <summary>
@@ -586,12 +590,12 @@
             base.Dispose(disposing);
         }
 
-        public TEntity FirstOrDefault<TEntity>(Expression<Func<TEntity, bool>> filter = null, List<string> includes = null) where TEntity : class
+        public TEntity FirstOrDefault<TEntity>(Expression<Func<TEntity, bool>> filter = null, IEnumerable<string> includes = null) where TEntity : class
         {
             return this.GetDbSet<TEntity>().FirstOrDefault(filter);
         }
 
-        public Task<TEntity> FirstOrDefaultAsync<TEntity>(Expression<Func<TEntity, bool>> filter = null, List<string> includes = null) where TEntity : class
+        public Task<TEntity> FirstOrDefaultAsync<TEntity>(Expression<Func<TEntity, bool>> filter = null, IEnumerable<string> includes = null) where TEntity : class
         {
             return Task.Run(() => this.FirstOrDefault(filter, includes));
         }

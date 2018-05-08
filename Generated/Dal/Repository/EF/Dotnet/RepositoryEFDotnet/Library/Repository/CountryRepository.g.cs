@@ -21,6 +21,7 @@
 using System;
 using System.Collections.Generic;
 using RepositoryEFDotnet.Library;
+using System.Linq;
 using Banking.Models.Interfaces;
 using Banking.Models.Entity;
 
@@ -62,7 +63,7 @@ namespace Banking.Models.Repository
         /// <returns>IList<ICountry></returns>
 		public IList<ICountry> LoadByCountryName(string countryname)
 		{
-			return (IList<ICountry>)this.UnitOfWork.AllMatching<Country>(o => o.CountryName == countryname);
+			return this.UnitOfWork.AllMatching<Country>(o => o.CountryName == countryname).ToList<ICountry>();
 		}
 		
         /// <summary>
@@ -71,7 +72,7 @@ namespace Banking.Models.Repository
         /// <returns>IList<ICountry></returns>
 		public IList<ICountry> LoadAll()
 		{
-			return (IList<ICountry>)this.UnitOfWork.GetAll<Country>();
+			return this.UnitOfWork.GetAll<Country>().ToList<ICountry>();
 		}
 		
 		#endregion
@@ -85,9 +86,15 @@ namespace Banking.Models.Repository
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<ICountry></returns>
 		public IList<ICountry> SearchByCountryName(string countryname, bool caseSensitive = false)
-		{
-			return caseSensitive ? (IList<ICountry>)this.UnitOfWork.AllMatching<Country>(o => o.CountryName.ToLower().Contains(countryname.ToLower())) 
-						  : (IList<ICountry>)this.UnitOfWork.AllMatching<Country>(o => o.CountryName.Contains(countryname));
+		{		
+			if(caseSensitive) 
+			{
+				return this.UnitOfWork.AllMatching<Country>(o => o.CountryName.ToLower().Contains(countryname.ToLower())).ToList<ICountry>();
+			}
+			else
+			{
+				return this.UnitOfWork.AllMatching<Country>(o => o.CountryName.Contains(countryname)).ToList<ICountry>();
+			}
 		}
 		
 		#endregion

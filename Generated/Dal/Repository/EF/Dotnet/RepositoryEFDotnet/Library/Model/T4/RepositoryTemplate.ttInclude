@@ -22,6 +22,7 @@ public class RepositoryTemplate : BaseTemplate
 using System;
 using System.Collections.Generic;
 using RepositoryEFDotnet.Library;
+using System.Linq;
 using <#= DtoInterfaceNamespace #>;
 using <#= EntityNamespace #>;
 
@@ -66,7 +67,7 @@ namespace <#= DataType.FullNamespace #>
         /// <returns><#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>></returns>
 		public <#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>> LoadBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= DataType.SourceType.MapDomainDataTypeToOutputType(col.DomainDataType) #> <#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName).ToLower() #>)
 		{
-			return (<#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>>)this.UnitOfWork.AllMatching<<#= DataType.ModelName #>>(o => o.<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #> == <#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName).ToLower() #>);
+			return this.UnitOfWork.AllMatching<<#= DataType.ModelName #>>(o => o.<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #> == <#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName).ToLower() #>).ToList<I<#= DataType.ModelName #>>();
 		}
 		
 <#+ } } #>
@@ -79,7 +80,7 @@ namespace <#= DataType.FullNamespace #>
         /// <returns><#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>></returns>
 		public <#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>> LoadBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= DataType.SourceType.MapDomainDataTypeToOutputType(col.DomainDataType) #> <#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName).ToLower() #>)
 		{
-			return (<#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>>)this.UnitOfWork.AllMatching<<#= DataType.ModelName #>>(o => o.<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #> == <#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName).ToLower() #>);
+			return this.UnitOfWork.AllMatching<<#= DataType.ModelName #>>(o => o.<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #> == <#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName).ToLower() #>).ToList<I<#= DataType.ModelName #>>();
 		}
 		
 <#+ }  #>
@@ -89,7 +90,7 @@ namespace <#= DataType.FullNamespace #>
         /// <returns><#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>></returns>
 		public <#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>> LoadAll()
 		{
-			return (<#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>>)this.UnitOfWork.GetAll<<#= DataType.ModelName #>>();
+			return this.UnitOfWork.GetAll<<#= DataType.ModelName #>>().ToList<I<#= DataType.ModelName #>>();
 		}
 		
 		#endregion
@@ -104,9 +105,15 @@ namespace <#= DataType.FullNamespace #>
 		/// <param name="caseSensitive">bool</param>
         /// <returns><#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>></returns>
 		public <#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>> SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= DataType.SourceType.MapDomainDataTypeToOutputType(col.DomainDataType) #> <#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName).ToLower() #>, bool caseSensitive = false)
-		{
-			return caseSensitive ? (<#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>>)this.UnitOfWork.AllMatching<<#= DataType.ModelName #>>(o => o.<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>.ToLower().Contains(<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName).ToLower() #>.ToLower())) 
-						  : (<#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>>)this.UnitOfWork.AllMatching<<#= DataType.ModelName #>>(o => o.<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>.Contains(<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName).ToLower() #>));
+		{		
+			if(caseSensitive) 
+			{
+				return this.UnitOfWork.AllMatching<<#= DataType.ModelName #>>(o => o.<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>.ToLower().Contains(<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName).ToLower() #>.ToLower())).ToList<I<#= DataType.ModelName #>>();
+			}
+			else
+			{
+				return this.UnitOfWork.AllMatching<<#= DataType.ModelName #>>(o => o.<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>.Contains(<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName).ToLower() #>)).ToList<I<#= DataType.ModelName #>>();
+			}
 		}
 		
 <#+ }  #>

@@ -21,6 +21,7 @@
 using System;
 using System.Collections.Generic;
 using RepositoryEFDotnet.Library;
+using System.Linq;
 using Banking.Models.Interfaces;
 using Banking.Models.Entity;
 
@@ -62,7 +63,7 @@ namespace Banking.Models.Repository
         /// <returns>IList<ISoftware></returns>
 		public IList<ISoftware> LoadByLicenseCode(string licensecode)
 		{
-			return (IList<ISoftware>)this.UnitOfWork.AllMatching<Software>(o => o.LicenseCode == licensecode);
+			return this.UnitOfWork.AllMatching<Software>(o => o.LicenseCode == licensecode).ToList<ISoftware>();
 		}
 		
         /// <summary>
@@ -71,7 +72,7 @@ namespace Banking.Models.Repository
         /// <returns>IList<ISoftware></returns>
 		public IList<ISoftware> LoadAll()
 		{
-			return (IList<ISoftware>)this.UnitOfWork.GetAll<Software>();
+			return this.UnitOfWork.GetAll<Software>().ToList<ISoftware>();
 		}
 		
 		#endregion
@@ -85,9 +86,15 @@ namespace Banking.Models.Repository
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<ISoftware></returns>
 		public IList<ISoftware> SearchByLicenseCode(string licensecode, bool caseSensitive = false)
-		{
-			return caseSensitive ? (IList<ISoftware>)this.UnitOfWork.AllMatching<Software>(o => o.LicenseCode.ToLower().Contains(licensecode.ToLower())) 
-						  : (IList<ISoftware>)this.UnitOfWork.AllMatching<Software>(o => o.LicenseCode.Contains(licensecode));
+		{		
+			if(caseSensitive) 
+			{
+				return this.UnitOfWork.AllMatching<Software>(o => o.LicenseCode.ToLower().Contains(licensecode.ToLower())).ToList<ISoftware>();
+			}
+			else
+			{
+				return this.UnitOfWork.AllMatching<Software>(o => o.LicenseCode.Contains(licensecode)).ToList<ISoftware>();
+			}
 		}
 		
 		#endregion

@@ -21,6 +21,7 @@
 using System;
 using System.Collections.Generic;
 using RepositoryEFDotnet.Library;
+using System.Linq;
 using Banking.Models.Interfaces;
 using Banking.Models.Entity;
 
@@ -62,7 +63,7 @@ namespace Banking.Models.Repository
         /// <returns>IList<IProduct></returns>
 		public IList<IProduct> LoadByProductDescription(string productdescription)
 		{
-			return (IList<IProduct>)this.UnitOfWork.AllMatching<Product>(o => o.ProductDescription == productdescription);
+			return this.UnitOfWork.AllMatching<Product>(o => o.ProductDescription == productdescription).ToList<IProduct>();
 		}
 		
         /// <summary>
@@ -72,7 +73,7 @@ namespace Banking.Models.Repository
         /// <returns>IList<IProduct></returns>
 		public IList<IProduct> LoadByUnitPrice(decimal unitprice)
 		{
-			return (IList<IProduct>)this.UnitOfWork.AllMatching<Product>(o => o.UnitPrice == unitprice);
+			return this.UnitOfWork.AllMatching<Product>(o => o.UnitPrice == unitprice).ToList<IProduct>();
 		}
 		
         /// <summary>
@@ -82,7 +83,7 @@ namespace Banking.Models.Repository
         /// <returns>IList<IProduct></returns>
 		public IList<IProduct> LoadByUnitAmount(string unitamount)
 		{
-			return (IList<IProduct>)this.UnitOfWork.AllMatching<Product>(o => o.UnitAmount == unitamount);
+			return this.UnitOfWork.AllMatching<Product>(o => o.UnitAmount == unitamount).ToList<IProduct>();
 		}
 		
         /// <summary>
@@ -92,7 +93,7 @@ namespace Banking.Models.Repository
         /// <returns>IList<IProduct></returns>
 		public IList<IProduct> LoadByPublisher(string publisher)
 		{
-			return (IList<IProduct>)this.UnitOfWork.AllMatching<Product>(o => o.Publisher == publisher);
+			return this.UnitOfWork.AllMatching<Product>(o => o.Publisher == publisher).ToList<IProduct>();
 		}
 		
         /// <summary>
@@ -102,7 +103,7 @@ namespace Banking.Models.Repository
         /// <returns>IList<IProduct></returns>
 		public IList<IProduct> LoadByAmountInStock(short amountinstock)
 		{
-			return (IList<IProduct>)this.UnitOfWork.AllMatching<Product>(o => o.AmountInStock == amountinstock);
+			return this.UnitOfWork.AllMatching<Product>(o => o.AmountInStock == amountinstock).ToList<IProduct>();
 		}
 		
         /// <summary>
@@ -111,7 +112,7 @@ namespace Banking.Models.Repository
         /// <returns>IList<IProduct></returns>
 		public IList<IProduct> LoadAll()
 		{
-			return (IList<IProduct>)this.UnitOfWork.GetAll<Product>();
+			return this.UnitOfWork.GetAll<Product>().ToList<IProduct>();
 		}
 		
 		#endregion
@@ -125,9 +126,15 @@ namespace Banking.Models.Repository
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<IProduct></returns>
 		public IList<IProduct> SearchByProductDescription(string productdescription, bool caseSensitive = false)
-		{
-			return caseSensitive ? (IList<IProduct>)this.UnitOfWork.AllMatching<Product>(o => o.ProductDescription.ToLower().Contains(productdescription.ToLower())) 
-						  : (IList<IProduct>)this.UnitOfWork.AllMatching<Product>(o => o.ProductDescription.Contains(productdescription));
+		{		
+			if(caseSensitive) 
+			{
+				return this.UnitOfWork.AllMatching<Product>(o => o.ProductDescription.ToLower().Contains(productdescription.ToLower())).ToList<IProduct>();
+			}
+			else
+			{
+				return this.UnitOfWork.AllMatching<Product>(o => o.ProductDescription.Contains(productdescription)).ToList<IProduct>();
+			}
 		}
 		
         /// <summary>
@@ -137,9 +144,15 @@ namespace Banking.Models.Repository
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<IProduct></returns>
 		public IList<IProduct> SearchByUnitAmount(string unitamount, bool caseSensitive = false)
-		{
-			return caseSensitive ? (IList<IProduct>)this.UnitOfWork.AllMatching<Product>(o => o.UnitAmount.ToLower().Contains(unitamount.ToLower())) 
-						  : (IList<IProduct>)this.UnitOfWork.AllMatching<Product>(o => o.UnitAmount.Contains(unitamount));
+		{		
+			if(caseSensitive) 
+			{
+				return this.UnitOfWork.AllMatching<Product>(o => o.UnitAmount.ToLower().Contains(unitamount.ToLower())).ToList<IProduct>();
+			}
+			else
+			{
+				return this.UnitOfWork.AllMatching<Product>(o => o.UnitAmount.Contains(unitamount)).ToList<IProduct>();
+			}
 		}
 		
         /// <summary>
@@ -149,9 +162,15 @@ namespace Banking.Models.Repository
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<IProduct></returns>
 		public IList<IProduct> SearchByPublisher(string publisher, bool caseSensitive = false)
-		{
-			return caseSensitive ? (IList<IProduct>)this.UnitOfWork.AllMatching<Product>(o => o.Publisher.ToLower().Contains(publisher.ToLower())) 
-						  : (IList<IProduct>)this.UnitOfWork.AllMatching<Product>(o => o.Publisher.Contains(publisher));
+		{		
+			if(caseSensitive) 
+			{
+				return this.UnitOfWork.AllMatching<Product>(o => o.Publisher.ToLower().Contains(publisher.ToLower())).ToList<IProduct>();
+			}
+			else
+			{
+				return this.UnitOfWork.AllMatching<Product>(o => o.Publisher.Contains(publisher)).ToList<IProduct>();
+			}
 		}
 		
 		#endregion
