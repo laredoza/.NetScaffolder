@@ -172,6 +172,22 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
 
             return this.NamingConvention.ApplyNamingConvention(name);
         }
+
+        public string TransformRelationship(Table table, Relationship rel)
+        {
+            string colReq = rel.ColumnRequired ? "HasRequired" : "HasOptional";
+            string relString = $"modelBuilder.Entity<{TransformModelName(rel.ReferencedTableName)}>().{colReq}<{TransformModelName(table.TableName)}>(s => s.{table.TableName})";
+
+            if (rel.ReferencedMultiplicity == Mapping.MetaData.Enum.RelationshipMultiplicity.Many)
+            {
+                return $"{relString}.WithMany(s => s.{rel.ReferencedTableNamePlural}).HasForeignKey(s => s.{rel.ReferencedColumnName}).WillCascadeOnDelete(false);";
+            }
+            else
+            {
+                string refColReq = rel.ReferencedColumnRequired ? "WithRequiredDependent" : "WithOptional";
+                return $"{relString}.{refColReq}(s => s.{rel.ReferencedTableName}).WillCascadeOnDelete(false);";
+            }
+        }
     }
 
     /// <summary>
@@ -195,12 +211,8 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
             this.ContextName = "NewContext";
             this.CustomConnectionName = string.Empty;
             this.Namespace = "Context";
-            this.LoggingEnabled = false;
-            this.LazyLoadingEnabled = false;
-            this.ProxyCreationEnabled = false;
             this.InheritFrom = string.Empty;
             this.Id = Guid.NewGuid();
-            this.CreateDb = false;
             this.OutputPath = string.Empty;
         }
 
@@ -267,6 +279,8 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
         ///     Gets or sets the id.
         /// </summary>
         public Guid Id { get; set; }
+
+        public bool IncludeColumnOrder { get; set; }
 
         /// <summary>
         ///     Gets or sets the inherit from.

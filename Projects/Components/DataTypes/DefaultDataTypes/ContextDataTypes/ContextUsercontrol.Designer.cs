@@ -41,13 +41,14 @@
             this.label24 = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.ProxyCreation = new System.Windows.Forms.CheckBox();
             this.txtCustomConnectionName = new System.Windows.Forms.TextBox();
             this.btnBrowse = new System.Windows.Forms.Button();
             this.btnNew = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.OutputPath = new System.Windows.Forms.TextBox();
             this.TreeviewContextModels = new FormControls.TreeView.MultiSelectTreeView.TreeView();
-            this.ProxyCreation = new System.Windows.Forms.CheckBox();
+            this.chkColumnOrder = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -104,7 +105,6 @@
             // LazyLoading
             // 
             this.LazyLoading.AutoSize = true;
-            this.LazyLoading.Enabled = false;
             this.LazyLoading.Location = new System.Drawing.Point(295, 40);
             this.LazyLoading.Name = "LazyLoading";
             this.LazyLoading.Size = new System.Drawing.Size(117, 17);
@@ -160,6 +160,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.chkColumnOrder);
             this.groupBox1.Controls.Add(this.ProxyCreation);
             this.groupBox1.Controls.Add(this.txtCustomConnectionName);
             this.groupBox1.Controls.Add(this.btnBrowse);
@@ -184,6 +185,16 @@
             this.groupBox1.TabIndex = 57;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Context settings";
+            // 
+            // ProxyCreation
+            // 
+            this.ProxyCreation.AutoSize = true;
+            this.ProxyCreation.Location = new System.Drawing.Point(295, 76);
+            this.ProxyCreation.Name = "ProxyCreation";
+            this.ProxyCreation.Size = new System.Drawing.Size(128, 17);
+            this.ProxyCreation.TabIndex = 61;
+            this.ProxyCreation.Text = "Enable proxy creation";
+            this.ProxyCreation.UseVisualStyleBackColor = true;
             // 
             // txtCustomConnectionName
             // 
@@ -240,16 +251,15 @@
             this.TreeviewContextModels.Size = new System.Drawing.Size(533, 312);
             this.TreeviewContextModels.TabIndex = 58;
             // 
-            // ProxyCreation
+            // chkColumnOrder
             // 
-            this.ProxyCreation.AutoSize = true;
-            this.ProxyCreation.Enabled = false;
-            this.ProxyCreation.Location = new System.Drawing.Point(295, 76);
-            this.ProxyCreation.Name = "ProxyCreation";
-            this.ProxyCreation.Size = new System.Drawing.Size(128, 17);
-            this.ProxyCreation.TabIndex = 61;
-            this.ProxyCreation.Text = "Enable proxy creation";
-            this.ProxyCreation.UseVisualStyleBackColor = true;
+            this.chkColumnOrder.AutoSize = true;
+            this.chkColumnOrder.Location = new System.Drawing.Point(295, 94);
+            this.chkColumnOrder.Name = "chkColumnOrder";
+            this.chkColumnOrder.Size = new System.Drawing.Size(125, 17);
+            this.chkColumnOrder.TabIndex = 62;
+            this.chkColumnOrder.Text = "Include column order";
+            this.chkColumnOrder.UseVisualStyleBackColor = true;
             // 
             // ContextUserControl
             // 
@@ -288,5 +298,6 @@
         private FormControls.TreeView.MultiSelectTreeView.TreeView TreeviewContextModels;
         private System.Windows.Forms.TextBox txtCustomConnectionName;
         private System.Windows.Forms.CheckBox ProxyCreation;
+        private System.Windows.Forms.CheckBox chkColumnOrder;
     }
 }

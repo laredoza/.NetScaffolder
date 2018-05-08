@@ -102,8 +102,8 @@
             <Children />
             <Enabled>true</Enabled>
             <HierarchyType>Item</HierarchyType>
-            <Id>c2b89389-03c7-4bb0-a445-8d215569914f</Id>
-            <Name>Dto Interface</Name>
+            <Id>c968a87e-3415-4098-943e-71385b24b27f</Id>
+            <Name>DtoInteface</Name>
             <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
             <Selected>false</Selected>
             <ConfigLocation>Data</ConfigLocation>
@@ -111,15 +111,15 @@
             <DefaultSettings />
             <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
             <LanguageOutputId>1bc1b0c4-1e41-9146-82cf-599181ce4410</LanguageOutputId>
-            <TemplatePath>DtoInterface.T4</TemplatePath>
+            <TemplatePath>DtoInterfaceTemplate.ttinclude</TemplatePath>
             <Version>1</Version>
           </Template>
           <Template>
             <Children />
             <Enabled>true</Enabled>
             <HierarchyType>Item</HierarchyType>
-            <Id>3e71a4bf-166c-403e-a632-f8d82fc417e6</Id>
-            <Name>Repository Interface</Name>
+            <Id>b36b4f2c-0b06-474d-9477-17ed766dcc1a</Id>
+            <Name>RepoInterface</Name>
             <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
             <Selected>false</Selected>
             <ConfigLocation>Data</ConfigLocation>
@@ -127,7 +127,7 @@
             <DefaultSettings />
             <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
             <LanguageOutputId>1bc1b0c4-1e41-9146-82cf-599181ce4410</LanguageOutputId>
-            <TemplatePath>RepositoryInterface.T4</TemplatePath>
+            <TemplatePath>RepoInterfaceTemplate.ttinclude</TemplatePath>
             <Version>1</Version>
           </Template>
         </Templates>
@@ -305,7 +305,7 @@
     </DomainDefinition>
   </Domains>
   <GroupBy>Domain</GroupBy>
-  <ModelPath>..\..\..\..\..\Generated\Dal\Repository\EF\Dotnet\RepositoryEFDotnet\Library\Model\Banking.mdl</ModelPath>
+  <ModelPath>C:\Dev\DotNetScaffolder\Generated\Dal\Repository\EF\Dotnet\RepositoryEFDotnet\Library\Model\Banking.mdl</ModelPath>
   <OutputFolder>Models</OutputFolder>
   <Version>1</Version>
 </ProjectDefinition>

@@ -243,6 +243,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
             SelectedContext.LoggingEnabled = LoggingEnabled.Checked;
             SelectedContext.CustomConnectionName = txtCustomConnectionName.Text;
             SelectedContext.OutputPath = OutputPath.Text;
+            SelectedContext.IncludeColumnOrder = chkColumnOrder.Checked;
 
             SelectedContext.Models.Clear();
 
@@ -275,6 +276,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
             LoggingEnabled.Checked = SelectedContext.LoggingEnabled;
             txtCustomConnectionName.Text = SelectedContext.CustomConnectionName;
             OutputPath.Text = SelectedContext.OutputPath;
+            chkColumnOrder.Checked = SelectedContext.IncludeColumnOrder;
 
             UpdateDataSource();
         }
