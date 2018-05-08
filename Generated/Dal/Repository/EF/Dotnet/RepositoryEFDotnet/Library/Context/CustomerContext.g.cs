@@ -19,6 +19,7 @@
 // *******************************************************************
 
 using System.Data.Entity;
+using MySql.Data.Entity;
 using RepositoryEFDotnet.Library;
 using System.ComponentModel.DataAnnotations.Schema;
 using Banking.Models.Entity;
@@ -26,6 +27,7 @@ using Banking.Models.Entity;
 
 namespace Banking.Models.Customers
 {
+    [DbConfigurationType(typeof(MySqlEFConfiguration))]
 	public partial class CustomerContext : BaseContext
 	{	
 		#region CTOR
@@ -36,7 +38,7 @@ namespace Banking.Models.Customers
 		}
 		
 		public CustomerContext()
-			: base() 
+			: base("name=RepoTest") 
 		{
 		}
 		
@@ -103,37 +105,67 @@ namespace Banking.Models.Customers
 			modelBuilder.Entity<Book>().Property(t => t.Publisher).IsRequired();
 			modelBuilder.Entity<Country>().Property(t => t.CountryId).IsRequired();
 			modelBuilder.Entity<Country>().Property(t => t.CountryName).HasMaxLength(100);
+			modelBuilder.Entity<Country>().Property(t => t.CountryName).IsOptional();
 			modelBuilder.Entity<Customer>().Property(t => t.CustomerId).IsRequired();
 			modelBuilder.Entity<Customer>().Property(t => t.CustomerCode).HasMaxLength(5);
 			modelBuilder.Entity<Customer>().Property(t => t.CustomerCode).IsRequired();
 			modelBuilder.Entity<Customer>().Property(t => t.CompanyName).HasMaxLength(50);
 			modelBuilder.Entity<Customer>().Property(t => t.CompanyName).IsRequired();
 			modelBuilder.Entity<Customer>().Property(t => t.ContactName).HasMaxLength(50);
+			modelBuilder.Entity<Customer>().Property(t => t.ContactName).IsOptional();
 			modelBuilder.Entity<Customer>().Property(t => t.ContactTitle).HasMaxLength(50);
+			modelBuilder.Entity<Customer>().Property(t => t.ContactTitle).IsOptional();
 			modelBuilder.Entity<Customer>().Property(t => t.Address).HasMaxLength(50);
+			modelBuilder.Entity<Customer>().Property(t => t.Address).IsOptional();
 			modelBuilder.Entity<Customer>().Property(t => t.City).HasMaxLength(20);
+			modelBuilder.Entity<Customer>().Property(t => t.City).IsOptional();
 			modelBuilder.Entity<Customer>().Property(t => t.PostalCode).HasMaxLength(10);
+			modelBuilder.Entity<Customer>().Property(t => t.PostalCode).IsOptional();
 			modelBuilder.Entity<Customer>().Property(t => t.Telephone).HasMaxLength(50);
+			modelBuilder.Entity<Customer>().Property(t => t.Telephone).IsOptional();
 			modelBuilder.Entity<Customer>().Property(t => t.Fax).HasMaxLength(50);
+			modelBuilder.Entity<Customer>().Property(t => t.Fax).IsOptional();
+			modelBuilder.Entity<Customer>().Property(t => t.CountryId).IsOptional();
 			modelBuilder.Entity<Customer>().Property(t => t.Photo).HasMaxLength(2147483647);
+			modelBuilder.Entity<Customer>().Property(t => t.Photo).IsOptional();
 			modelBuilder.Entity<Customer>().Property(t => t.IsEnabled).IsRequired();
 			modelBuilder.Entity<Order>().Property(t => t.OrderId).IsRequired();
+			modelBuilder.Entity<Order>().Property(t => t.CustomerId).IsOptional();
+			modelBuilder.Entity<Order>().Property(t => t.OrderDate).IsOptional();
+			modelBuilder.Entity<Order>().Property(t => t.DeliveryDate).IsOptional();
 			modelBuilder.Entity<Order>().Property(t => t.ShippingName).HasMaxLength(50);
+			modelBuilder.Entity<Order>().Property(t => t.ShippingName).IsOptional();
 			modelBuilder.Entity<Order>().Property(t => t.ShippingAddress).HasMaxLength(50);
+			modelBuilder.Entity<Order>().Property(t => t.ShippingAddress).IsOptional();
 			modelBuilder.Entity<Order>().Property(t => t.ShippingCity).HasMaxLength(50);
+			modelBuilder.Entity<Order>().Property(t => t.ShippingCity).IsOptional();
 			modelBuilder.Entity<Order>().Property(t => t.ShippingZip).HasMaxLength(50);
+			modelBuilder.Entity<Order>().Property(t => t.ShippingZip).IsOptional();
 			modelBuilder.Entity<OrderDetails>().Property(t => t.OrderDetailsId).IsRequired();
 			modelBuilder.Entity<OrderDetails>().Property(t => t.OrderId).IsRequired();
 			modelBuilder.Entity<OrderDetails>().Property(t => t.ProductId).IsRequired();
+			modelBuilder.Entity<OrderDetails>().Property(t => t.UnitPrice).IsOptional();
 			modelBuilder.Entity<OrderDetails>().Property(t => t.UnitPrice).HasPrecision(19, 4);
+			modelBuilder.Entity<OrderDetails>().Property(t => t.Amount).IsOptional();
+			modelBuilder.Entity<OrderDetails>().Property(t => t.Discount).IsOptional();
 			modelBuilder.Entity<Product>().Property(t => t.ProductId).IsRequired();
 			modelBuilder.Entity<Product>().Property(t => t.ProductDescription).HasMaxLength(100);
+			modelBuilder.Entity<Product>().Property(t => t.ProductDescription).IsOptional();
+			modelBuilder.Entity<Product>().Property(t => t.UnitPrice).IsOptional();
 			modelBuilder.Entity<Product>().Property(t => t.UnitPrice).HasPrecision(19, 4);
 			modelBuilder.Entity<Product>().Property(t => t.UnitAmount).HasMaxLength(50);
+			modelBuilder.Entity<Product>().Property(t => t.UnitAmount).IsOptional();
 			modelBuilder.Entity<Product>().Property(t => t.Publisher).HasMaxLength(200);
+			modelBuilder.Entity<Product>().Property(t => t.Publisher).IsOptional();
+			modelBuilder.Entity<Product>().Property(t => t.AmountInStock).IsOptional();
 			modelBuilder.Entity<Software>().Property(t => t.ProductId).IsRequired();
 			modelBuilder.Entity<Software>().Property(t => t.LicenseCode).HasMaxLength(200);
 			modelBuilder.Entity<Software>().Property(t => t.LicenseCode).IsRequired();
+			
+			#endregion
+			
+			#region Column Order
+
 			
 			#endregion
         }

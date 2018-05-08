@@ -19,6 +19,7 @@
 // *******************************************************************
 
 using System.Data.Entity;
+using MySql.Data.Entity;
 using RepositoryEFDotnet.Library;
 using System.ComponentModel.DataAnnotations.Schema;
 using Banking.Models.Entity;
@@ -26,6 +27,7 @@ using Banking.Models.Entity;
 
 namespace Banking.Models.Accounts
 {
+    [DbConfigurationType(typeof(MySqlEFConfiguration))]
 	public partial class AccountContext : BaseContext
 	{	
 		#region CTOR
@@ -84,6 +86,7 @@ namespace Banking.Models.Accounts
 			modelBuilder.Entity<BankAccount>().Property(t => t.BankAccountNumber).IsRequired();
 			modelBuilder.Entity<BankAccount>().Property(t => t.Balance).IsRequired();
 			modelBuilder.Entity<BankAccount>().Property(t => t.Balance).HasPrecision(19, 4);
+			modelBuilder.Entity<BankAccount>().Property(t => t.CustomerId).IsOptional();
 			modelBuilder.Entity<BankAccount>().Property(t => t.Locked).IsRequired();
 			modelBuilder.Entity<BankTransfers>().Property(t => t.BankTransferId).IsRequired();
 			modelBuilder.Entity<BankTransfers>().Property(t => t.FromBankAccountId).IsRequired();
@@ -91,6 +94,11 @@ namespace Banking.Models.Accounts
 			modelBuilder.Entity<BankTransfers>().Property(t => t.Amount).IsRequired();
 			modelBuilder.Entity<BankTransfers>().Property(t => t.Amount).HasPrecision(18, 2);
 			modelBuilder.Entity<BankTransfers>().Property(t => t.TransferDate).IsRequired();
+			
+			#endregion
+			
+			#region Column Order
+
 			
 			#endregion
         }

@@ -48,6 +48,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.OutputPath = new System.Windows.Forms.TextBox();
             this.TreeviewContextModels = new FormControls.TreeView.MultiSelectTreeView.TreeView();
+            this.chkColumnOrder = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -159,6 +160,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.chkColumnOrder);
             this.groupBox1.Controls.Add(this.ProxyCreation);
             this.groupBox1.Controls.Add(this.txtCustomConnectionName);
             this.groupBox1.Controls.Add(this.btnBrowse);
@@ -249,6 +251,16 @@
             this.TreeviewContextModels.Size = new System.Drawing.Size(533, 312);
             this.TreeviewContextModels.TabIndex = 58;
             // 
+            // chkColumnOrder
+            // 
+            this.chkColumnOrder.AutoSize = true;
+            this.chkColumnOrder.Location = new System.Drawing.Point(295, 94);
+            this.chkColumnOrder.Name = "chkColumnOrder";
+            this.chkColumnOrder.Size = new System.Drawing.Size(125, 17);
+            this.chkColumnOrder.TabIndex = 62;
+            this.chkColumnOrder.Text = "Include column order";
+            this.chkColumnOrder.UseVisualStyleBackColor = true;
+            // 
             // ContextUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -286,5 +298,6 @@
         private FormControls.TreeView.MultiSelectTreeView.TreeView TreeviewContextModels;
         private System.Windows.Forms.TextBox txtCustomConnectionName;
         private System.Windows.Forms.CheckBox ProxyCreation;
+        private System.Windows.Forms.CheckBox chkColumnOrder;
     }
 }

@@ -211,12 +211,8 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
             this.ContextName = "NewContext";
             this.CustomConnectionName = string.Empty;
             this.Namespace = "Context";
-            this.LoggingEnabled = false;
-            this.LazyLoadingEnabled = false;
-            this.ProxyCreationEnabled = false;
             this.InheritFrom = string.Empty;
             this.Id = Guid.NewGuid();
-            this.CreateDb = false;
             this.OutputPath = string.Empty;
         }
 
@@ -283,6 +279,8 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
         ///     Gets or sets the id.
         /// </summary>
         public Guid Id { get; set; }
+
+        public bool IncludeColumnOrder { get; set; }
 
         /// <summary>
         ///     Gets or sets the inherit from.

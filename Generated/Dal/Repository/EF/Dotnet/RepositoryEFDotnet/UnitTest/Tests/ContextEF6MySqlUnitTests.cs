@@ -11,6 +11,8 @@ namespace RepositoryEFDotnet.UnitTest
     using WindowsFormsApp1;
 
     using MySql.Data.MySqlClient;
+    using Banking.Models.Context;
+    using Banking.Models.Customers;
 
     [TestClass]
     public class ContextEF6MySqlUnitTest : BaseContextUnitTests
@@ -48,22 +50,22 @@ namespace RepositoryEFDotnet.UnitTest
             //}
         }
 
-        //[TestMethod]
-        //public void ContextUnitTest_CustomerContext_CreateDb()
-        //{
-        //    using (var context = new CustomerContext("RepoTestMySql"))
-        //    {
-        //        BaseContextUnitTests_CreateDbTest(context);
-        //    }
-        //}
+        [TestMethod]
+        public void ContextUnitTest_CustomerContext_CreateDb()
+        {
+            using (var context = new CustomerContext("RepoTestMySql"))
+            {
+                BaseContextUnitTests_CreateDbTest(context);
+            }
+        }
 
-        //[TestMethod]
-        //public void ContextUnitTest_FullContext_CreateDb()
-        //{
-        //    using (var context = new FullContext("RepoTestMySql"))
-        //    {
-        //        BaseContextUnitTests_CreateDbTest(context);
-        //    }
-        //}
+        [TestMethod]
+        public void ContextUnitTest_FullContext_CreateDb()
+        {
+            using (var context = new FullContext("RepoTestMySql"))
+            {
+                BaseContextUnitTests_CreateDbTest(context);
+            }
+        }
     }
 }

@@ -109,9 +109,24 @@ namespace <#= ContextData.TransformFullnamespace(DataType.BaseNamespace) #>
 <#+ } #>
 <#+ if(col.IsRequired){ #>
 			modelBuilder.Entity<<#=DataType.TransformModelName(table.TableName) #>>().Property(t => t.<#= col.ColumnName #>).IsRequired();
+<#+ } else #>
+<#+ { #>
+			modelBuilder.Entity<<#=DataType.TransformModelName(table.TableName) #>>().Property(t => t.<#= col.ColumnName #>).IsOptional();
 <#+ } #>
 <#+ if(col.Precision > 0 || col.Scale > 0){ #>
 			modelBuilder.Entity<<#=DataType.TransformModelName(table.TableName) #>>().Property(t => t.<#= col.ColumnName #>).HasPrecision(<#= col.Precision #>, <#= col.Scale #>);
+<#+ } #>
+<#+ } #>
+<#+ } #>
+			
+			#endregion
+			
+			#region Column Order
+
+<#+ if(ContextData.IncludeColumnOrder){ #>
+<#+ foreach(var table in ContextData.Models){ #>
+<#+ foreach(var col in table.Columns){ #>
+			modelBuilder.Entity<<#=DataType.TransformModelName(table.TableName) #>>().Property(t => t.<#= col.ColumnName #>).HasColumnOrder(<#= col.ColumnOrder #>);
 <#+ } #>
 <#+ } #>
 <#+ } #>

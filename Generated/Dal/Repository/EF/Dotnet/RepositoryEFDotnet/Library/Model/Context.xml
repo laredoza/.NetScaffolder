@@ -5,6 +5,7 @@
     <CreateDb>true</CreateDb>
     <CustomConnectionName />
     <Id>88dbf624-7f95-4d21-b207-2ec4c4aaf56f</Id>
+    <IncludeColumnOrder>false</IncludeColumnOrder>
     <InheritFrom>BaseContext</InheritFrom>
     <LazyLoadingEnabled>false</LazyLoadingEnabled>
     <LoggingEnabled>false</LoggingEnabled>
@@ -57,8 +58,9 @@
   <ContextData>
     <ContextName>CustomerContext</ContextName>
     <CreateDb>true</CreateDb>
-    <CustomConnectionName />
+    <CustomConnectionName>RepoTest</CustomConnectionName>
     <Id>b138c947-9887-47e0-968c-be9dca3443aa</Id>
+    <IncludeColumnOrder>false</IncludeColumnOrder>
     <InheritFrom>BaseContext</InheritFrom>
     <LazyLoadingEnabled>false</LazyLoadingEnabled>
     <LoggingEnabled>true</LoggingEnabled>
@@ -201,6 +203,7 @@
     <CreateDb>true</CreateDb>
     <CustomConnectionName>RepoTest</CustomConnectionName>
     <Id>a0ff1a97-31b4-4646-8911-f38e88faadef</Id>
+    <IncludeColumnOrder>false</IncludeColumnOrder>
     <InheritFrom>BaseContext</InheritFrom>
     <LazyLoadingEnabled>false</LazyLoadingEnabled>
     <LoggingEnabled>false</LoggingEnabled>
