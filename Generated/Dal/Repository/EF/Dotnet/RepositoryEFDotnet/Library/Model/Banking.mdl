@@ -5,7 +5,7 @@
     <DomainDefinition>
       <CollectionOptionId>0bc1b0c4-1e41-9146-82cf-599181ce4411</CollectionOptionId>
       <DriverId>2bc1b0c4-1e41-9146-82cf-599181ce4400</DriverId>
-      <DriverTypeId>2bc1b0c4-1e41-9146-82cf-599181ce4410</DriverTypeId>
+      <DriverTypeId>2bc1b0c4-1e41-9146-82cf-599181ce4412</DriverTypeId>
       <Id>88e23444-4d85-4fd7-a1a7-e6d68e896281</Id>
       <Name>Domain1</Name>
       <NamingConventionId>1bc1b0c4-1e41-9146-82cf-599181ce4412</NamingConventionId>
@@ -102,7 +102,7 @@
             <Children />
             <Enabled>true</Enabled>
             <HierarchyType>Item</HierarchyType>
-            <Id>53c1e778-b5ea-4ed8-8aa5-eeaee6a3df34</Id>
+            <Id>c2b89389-03c7-4bb0-a445-8d215569914f</Id>
             <Name>Dto Interface</Name>
             <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
             <Selected>false</Selected>
@@ -111,15 +111,15 @@
             <DefaultSettings />
             <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
             <LanguageOutputId>1bc1b0c4-1e41-9146-82cf-599181ce4410</LanguageOutputId>
-            <TemplatePath>DtoInterfaceTemplate</TemplatePath>
+            <TemplatePath>DtoInterface.T4</TemplatePath>
             <Version>1</Version>
           </Template>
           <Template>
             <Children />
             <Enabled>true</Enabled>
             <HierarchyType>Item</HierarchyType>
-            <Id>4bbbdc0b-f7b4-4967-9088-3c4f36121712</Id>
-            <Name>RepoInterface</Name>
+            <Id>3e71a4bf-166c-403e-a632-f8d82fc417e6</Id>
+            <Name>Repository Interface</Name>
             <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
             <Selected>false</Selected>
             <ConfigLocation>Data</ConfigLocation>
@@ -127,7 +127,7 @@
             <DefaultSettings />
             <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
             <LanguageOutputId>1bc1b0c4-1e41-9146-82cf-599181ce4410</LanguageOutputId>
-            <TemplatePath>RepositoryInterfaceTemplate</TemplatePath>
+            <TemplatePath>RepositoryInterface.T4</TemplatePath>
             <Version>1</Version>
           </Template>
         </Templates>
@@ -305,7 +305,7 @@
     </DomainDefinition>
   </Domains>
   <GroupBy>Domain</GroupBy>
-  <ModelPath>C:\Dev\DotNetScaffolder\Generated\Dal\Repository\EF\Dotnet\RepositoryEFDotnet\Library\Model\Banking.mdl</ModelPath>
+  <ModelPath>..\..\..\..\..\Generated\Dal\Repository\EF\Dotnet\RepositoryEFDotnet\Library\Model\Banking.mdl</ModelPath>
   <OutputFolder>Models</OutputFolder>
   <Version>1</Version>
 </ProjectDefinition>
