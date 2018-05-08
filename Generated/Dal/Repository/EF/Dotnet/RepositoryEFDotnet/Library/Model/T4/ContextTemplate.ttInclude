@@ -83,13 +83,8 @@ namespace <#= ContextData.TransformFullnamespace(DataType.BaseNamespace) #>
 			#region Included Relationships
 			
 <#+ foreach(var table in ContextData.Models){ #>
-<#+ foreach(var rel in table.ChildRelationships.Where(o => o.ReferencedMultiplicity == RelationshipMultiplicity.Many && ContextData.HasModel(o))){ #>
-			modelBuilder.Entity<<#=DataType.TransformModelName(rel.ReferencedTableName) #>>().HasRequired<<#= DataType.TransformModelName(table.TableName) #>>(s => s.<#= table.TableName #>).WithMany(s => s.<#= rel.ReferencedTableNamePlural #>).HasForeignKey(s => s.<#= rel.ReferencedColumnName #>).WillCascadeOnDelete(false);
-<#+ } #>
-<#+ } #>
-<#+ foreach(var table in ContextData.Models){ #>
-<#+ foreach(var rel in table.ChildRelationships.Where(o => o.ReferencedMultiplicity != RelationshipMultiplicity.Many && ContextData.HasModel(o))){ #>
-			modelBuilder.Entity<<#=DataType.TransformModelName(rel.ReferencedTableName) #>>().HasRequired<<#= DataType.TransformModelName(table.TableName) #>>(s => s.<#= table.TableName #>).WithOptional(s => s.<#= rel.ReferencedTableName #>).WillCascadeOnDelete(false);
+<#+ foreach(var rel in table.ChildRelationships.Where(o => ContextData.HasModel(o))){ #>
+			<#=DataType.TransformRelationship(table, rel) #>
 <#+ } #>
 <#+ } #>
 			

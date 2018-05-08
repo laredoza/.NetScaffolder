@@ -41,13 +41,13 @@
             this.label24 = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.ProxyCreation = new System.Windows.Forms.CheckBox();
             this.txtCustomConnectionName = new System.Windows.Forms.TextBox();
             this.btnBrowse = new System.Windows.Forms.Button();
             this.btnNew = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.OutputPath = new System.Windows.Forms.TextBox();
             this.TreeviewContextModels = new FormControls.TreeView.MultiSelectTreeView.TreeView();
-            this.ProxyCreation = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -104,7 +104,6 @@
             // LazyLoading
             // 
             this.LazyLoading.AutoSize = true;
-            this.LazyLoading.Enabled = false;
             this.LazyLoading.Location = new System.Drawing.Point(295, 40);
             this.LazyLoading.Name = "LazyLoading";
             this.LazyLoading.Size = new System.Drawing.Size(117, 17);
@@ -185,6 +184,16 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Context settings";
             // 
+            // ProxyCreation
+            // 
+            this.ProxyCreation.AutoSize = true;
+            this.ProxyCreation.Location = new System.Drawing.Point(295, 76);
+            this.ProxyCreation.Name = "ProxyCreation";
+            this.ProxyCreation.Size = new System.Drawing.Size(128, 17);
+            this.ProxyCreation.TabIndex = 61;
+            this.ProxyCreation.Text = "Enable proxy creation";
+            this.ProxyCreation.UseVisualStyleBackColor = true;
+            // 
             // txtCustomConnectionName
             // 
             this.txtCustomConnectionName.Location = new System.Drawing.Point(151, 129);
@@ -239,17 +248,6 @@
             this.TreeviewContextModels.SelectionMode = FormControls.TreeView.MultiSelectTreeView.TreeViewSelectionMode.SingleSelect;
             this.TreeviewContextModels.Size = new System.Drawing.Size(533, 312);
             this.TreeviewContextModels.TabIndex = 58;
-            // 
-            // ProxyCreation
-            // 
-            this.ProxyCreation.AutoSize = true;
-            this.ProxyCreation.Enabled = false;
-            this.ProxyCreation.Location = new System.Drawing.Point(295, 76);
-            this.ProxyCreation.Name = "ProxyCreation";
-            this.ProxyCreation.Size = new System.Drawing.Size(128, 17);
-            this.ProxyCreation.TabIndex = 61;
-            this.ProxyCreation.Text = "Enable proxy creation";
-            this.ProxyCreation.UseVisualStyleBackColor = true;
             // 
             // ContextUserControl
             // 

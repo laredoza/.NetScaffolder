@@ -19,7 +19,6 @@
 // *******************************************************************
 
 using System.Data.Entity;
-using MySql.Data.Entity;
 using RepositoryEFDotnet.Library;
 using System.ComponentModel.DataAnnotations.Schema;
 using Banking.Models.Entity;
@@ -27,7 +26,6 @@ using Banking.Models.Entity;
 
 namespace Banking.Models.Context
 {
-    [DbConfigurationType(typeof(MySqlEFConfiguration))]
 	public partial class FullContext : BaseContext
 	{	
 		#region CTOR
@@ -89,12 +87,12 @@ namespace Banking.Models.Context
 			
 			modelBuilder.Entity<BankTransfers>().HasRequired<BankAccount>(s => s.BankAccount).WithMany(s => s.BankTransfers).HasForeignKey(s => s.FromBankAccountId).WillCascadeOnDelete(false);
 			modelBuilder.Entity<BankTransfers>().HasRequired<BankAccount>(s => s.BankAccount).WithMany(s => s.BankTransfers).HasForeignKey(s => s.ToBankAccountId).WillCascadeOnDelete(false);
-			modelBuilder.Entity<Customer>().HasRequired<Country>(s => s.Country).WithMany(s => s.Customers).HasForeignKey(s => s.CountryId).WillCascadeOnDelete(false);
-			modelBuilder.Entity<BankAccount>().HasRequired<Customer>(s => s.Customer).WithMany(s => s.BankAccounts).HasForeignKey(s => s.CustomerId).WillCascadeOnDelete(false);
-			modelBuilder.Entity<Order>().HasRequired<Customer>(s => s.Customer).WithMany(s => s.Orders).HasForeignKey(s => s.CustomerId).WillCascadeOnDelete(false);
+			modelBuilder.Entity<Customer>().HasOptional<Country>(s => s.Country).WithMany(s => s.Customers).HasForeignKey(s => s.CountryId).WillCascadeOnDelete(false);
+			modelBuilder.Entity<BankAccount>().HasOptional<Customer>(s => s.Customer).WithMany(s => s.BankAccounts).HasForeignKey(s => s.CustomerId).WillCascadeOnDelete(false);
+			modelBuilder.Entity<Order>().HasOptional<Customer>(s => s.Customer).WithMany(s => s.Orders).HasForeignKey(s => s.CustomerId).WillCascadeOnDelete(false);
 			modelBuilder.Entity<OrderDetails>().HasRequired<Order>(s => s.Order).WithMany(s => s.OrderDetails).HasForeignKey(s => s.OrderId).WillCascadeOnDelete(false);
-			modelBuilder.Entity<OrderDetails>().HasRequired<Product>(s => s.Product).WithMany(s => s.OrderDetails).HasForeignKey(s => s.ProductId).WillCascadeOnDelete(false);
 			modelBuilder.Entity<Book>().HasRequired<Product>(s => s.Product).WithOptional(s => s.Book).WillCascadeOnDelete(false);
+			modelBuilder.Entity<OrderDetails>().HasRequired<Product>(s => s.Product).WithMany(s => s.OrderDetails).HasForeignKey(s => s.ProductId).WillCascadeOnDelete(false);
 			modelBuilder.Entity<Software>().HasRequired<Product>(s => s.Product).WithOptional(s => s.Software).WillCascadeOnDelete(false);
 			
 			#endregion

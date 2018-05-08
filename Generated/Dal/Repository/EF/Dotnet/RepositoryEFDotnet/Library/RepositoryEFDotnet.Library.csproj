@@ -129,6 +129,7 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Model\Banking.mdl" />
     <None Include="Model\T4\BaseGenerator.ttInclude" />
     <None Include="Model\T4\BaseProjectGenerator.ttInclude" />
     <None Include="Model\T4\BaseTemplate.ttinclude" />
@@ -150,21 +151,15 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Model\Package\Common.Logging.Core.dll" />
-    <Content Include="Model\Package\Common.Logging.dll" />
-    <Content Include="Model\Package\Configuration.dll" />
-    <Content Include="Model\Package\DotNetScaffolder.Components.CollectionOption.dll" />
-    <Content Include="Model\Package\DotNetScaffolder.Components.Common.dll" />
-    <Content Include="Model\Package\DotNetScaffolder.Components.DataTypes.DefaultDataTypes.dll" />
-    <Content Include="Model\Package\DotNetScaffolder.Components.Drivers.DefaultDrivers.dll" />
-    <Content Include="Model\Package\DotNetScaffolder.Components.LanguageOutputs.DefaultLanguageOutput.dll" />
-    <Content Include="Model\Package\DotNetScaffolder.Components.NamingConventions.DefaultNamingConventions.dll" />
-    <Content Include="Model\Package\DotNetScaffolder.Components.OutputGenerators.DefaultOutputGenerators.dll" />
-    <Content Include="Model\Package\DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.dll" />
-    <Content Include="Model\Package\DotNetScaffolder.Core.Common.dll" />
-    <Content Include="Model\Package\DotNetScaffolder.Mapping.ApplicationServices.dll" />
-    <Content Include="Model\Package\DotNetScaffolder.Mapping.MetaData.dll" />
-    <Content Include="Model\Package\FormControls.dll" />
+    <Content Include="Model\Application.xml" />
+    <Content Include="Model\Context.xml" />
+    <Content Include="Model\Dto.xml" />
+    <Content Include="Model\DtoInterface.xml" />
+    <Content Include="Model\EdmxSourceType.xml" />
+    <Content Include="Model\Entity.xml" />
+    <Content Include="Model\GenericAdoSourceType.xml" />
+    <Content Include="Model\RepoInterface.xml" />
+    <Content Include="Model\Repository.xml" />
     <Content Include="RunGenerator.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>RunGenerator.cs</LastGenOutput>
