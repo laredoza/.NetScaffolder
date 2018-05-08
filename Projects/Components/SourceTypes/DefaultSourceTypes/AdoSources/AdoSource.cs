@@ -133,34 +133,8 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
             return DatabaseGeneratedKeyType.None;
         }
 
-        public object Load(object parameters)
-        {
-            Logger.Trace("Started Import()");
-
-            string path = this.ReturnFilePath(parameters as string);
-            Logger.Debug($"Path: {path}");
-            AdoSourceOptions result = null;
-
-            if (File.Exists(path))
-            {
-                Logger.Trace("Path Exists");
-                result = ObjectXMLSerializer<AdoSourceOptions>.Load(path);
-            }
-            else
-            {
-                Logger.Trace("Path Doesn't Exist");
-                result = new AdoSourceOptions
-                             {
-                                 ProviderName = "System.Data.SqlClient",
-                                 ConnectionString =
-                                     @"Data Source=.\SQLEXPRESS;Integrated Security=true;Initial Catalog=Banking"
-                             };
-            }
-
-            Logger.Trace("Completed Import()");
-
-            return result;
-        }
+        public abstract object Load(object parameters);
+        
 
         public abstract DomainDataType MapDatabaseType(string databaseType, object extraInfo);
 

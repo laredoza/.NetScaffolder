@@ -209,6 +209,44 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
             return result;
         }
 
+        /// <summary>
+        /// The load.
+        /// </summary>
+        /// <param name="parameters">
+        /// The parameters.
+        /// </param>
+        /// <returns>
+        /// The <see cref="object"/>.
+        /// </returns>
+        public override object Load(object parameters)
+        {
+            Logger.Trace("Started Import()");
+
+            string path = this.ReturnFilePath(parameters as string);
+            Logger.Debug($"Path: {path}");
+            AdoSourceOptions result = null;
+
+            if (File.Exists(path))
+            {
+                Logger.Trace("Path Exists");
+                result = ObjectXMLSerializer<AdoSourceOptions>.Load(path);
+            }
+            else
+            {
+                Logger.Trace("Path Doesn't Exist");
+                result = new AdoSourceOptions
+                             {
+                                 ProviderName = "MySql.Data.MySqlClient",
+                                 ConnectionString =
+                                     @"server=localhost;userid=test;password=password;database=test"
+                };
+            }
+
+            Logger.Trace("Completed Import()");
+
+            return result;
+        }
+
         #endregion
     }
 }

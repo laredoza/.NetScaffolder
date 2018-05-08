@@ -102,7 +102,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
         /// <returns>
         /// The <see cref="object"/>.
         /// </returns>
-        public object Load(object parameters)
+        public override object Load(object parameters)
         {
             Logger.Trace("Started Import()");
 
