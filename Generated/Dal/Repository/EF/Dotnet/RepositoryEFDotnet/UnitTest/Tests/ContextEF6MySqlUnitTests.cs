@@ -20,34 +20,10 @@ namespace RepositoryEFDotnet.UnitTest
         [TestMethod]
         public void ContextUnitTest_AccountContext_CreateDb()
         {
-            //using (var context = new SellRightContext())
-            //{
-            //    Database.SetInitializer(new DropCreateDatabaseAlways<SellRightContext>());
-            //    context.Database.Initialize(true);
-            //}
-
             using (var context = new AccountContext("RepoTestMySql"))
             {
                 BaseContextUnitTests_CreateDbTest(context);
             }
-
-            //using (MySqlConnection connection =
-            //    new MySqlConnection("server=localhost;userid=test;password=password;database=test"))
-            //{
-            //    // Open the connection in a try/catch block. 
-            //    // Create and execute the DataReader, writing the result
-            //    // set to the console window.
-            //    try
-            //    {
-            //        connection.Open();
-
-            //        // result = true;
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        // Logger.Error($"Unable to connect to database:{ex.Message}");
-            //    }
-            //}
         }
 
         [TestMethod]
