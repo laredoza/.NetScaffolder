@@ -60,7 +60,7 @@
     <CreateDb>true</CreateDb>
     <CustomConnectionName>RepoTest</CustomConnectionName>
     <Id>b138c947-9887-47e0-968c-be9dca3443aa</Id>
-    <IncludeColumnOrder>false</IncludeColumnOrder>
+    <IncludeColumnOrder>true</IncludeColumnOrder>
     <InheritFrom>BaseContext</InheritFrom>
     <LazyLoadingEnabled>false</LazyLoadingEnabled>
     <LoggingEnabled>true</LoggingEnabled>

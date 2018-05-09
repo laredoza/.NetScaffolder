@@ -46,7 +46,7 @@
 
         Task<bool> AddRangeAsync<TEntity>(IEnumerable<TEntity> item) where TEntity : class;
 
-        List<TEntity> AllMatching<TEntity>(Expression<Func<TEntity, bool>> filter, List<string> includes = null, string hint = "") where TEntity : class;
+        IEnumerable<TEntity> AllMatching<TEntity>(Expression<Func<TEntity, bool>> filter, IEnumerable<string> includes = null, string hint = "") where TEntity : class;
 
         /// <summary>
         ///     The all matching async.
@@ -60,7 +60,7 @@
         /// <returns>
         ///     The <see cref="Task" />.
         /// </returns>
-        Task<List<TEntity>> AllMatchingAsync<TEntity>(Expression<Func<TEntity, bool>> filter, List<string> includes = null, string hint = "") where TEntity : class;
+        Task<IEnumerable<TEntity>> AllMatchingAsync<TEntity>(Expression<Func<TEntity, bool>> filter, IEnumerable<string> includes = null, string hint = "") where TEntity : class;
 
         /// <summary>
         ///     Returns a boolean value indicating whether an expression returns a result.
@@ -77,16 +77,16 @@
         /// <returns>
         ///     The <see cref="bool" />.
         /// </returns>
-        bool Any<TEntity>(List<string> includes = null, Expression<Func<TEntity, bool>> filter = null)
+        bool Any<TEntity>(IEnumerable<string> includes = null, Expression<Func<TEntity, bool>> filter = null)
             where TEntity : class;
 
-        Task<bool> AnyAsync<TEntity>(List<string> includes = null, Expression<Func<TEntity, bool>> filter = null)
+        Task<bool> AnyAsync<TEntity>(IEnumerable<string> includes = null, Expression<Func<TEntity, bool>> filter = null)
             where TEntity : class;
 
-        TEntity FirstOrDefault<TEntity>(Expression<Func<TEntity, bool>> filter = null, List<string> includes = null)
+        TEntity FirstOrDefault<TEntity>(Expression<Func<TEntity, bool>> filter = null, IEnumerable<string> includes = null)
             where TEntity : class;
 
-        Task<TEntity> FirstOrDefaultAsync<TEntity>(Expression<Func<TEntity, bool>> filter = null, List<string> includes = null)
+        Task<TEntity> FirstOrDefaultAsync<TEntity>(Expression<Func<TEntity, bool>> filter = null, IEnumerable<string> includes = null)
             where TEntity : class;
 
         /// <summary>
@@ -162,7 +162,7 @@
         /// </returns>
         IQueryable<TEntity> ExecuteQuery<TEntity>(string sqlQuery, params object[] parameters);
 
-        List<TEntity> GetAll<TEntity>(List<string> includes = null)
+        IEnumerable<TEntity> GetAll<TEntity>(IEnumerable<string> includes = null)
             where TEntity : class;
 
         /// <summary>
@@ -176,19 +176,19 @@
         /// <returns>
         ///     The <see cref="Task" />.
         /// </returns>
-        Task<List<TEntity>> GetAllAsync<TEntity>(List<string> includes = null)
+        Task<IEnumerable<TEntity>> GetAllAsync<TEntity>(IEnumerable<string> includes = null)
             where TEntity : class;
 
-        Task<TEntity> GetAsync<TEntity>(Expression<Func<TEntity, bool>> filter, List<string> includes = null)
+        Task<TEntity> GetAsync<TEntity>(Expression<Func<TEntity, bool>> filter, IEnumerable<string> includes = null)
             where TEntity : class;
 
-        TEntity Get<TEntity>(Expression<Func<TEntity, bool>> filter, List<string> includes = null)
+        TEntity Get<TEntity>(Expression<Func<TEntity, bool>> filter, IEnumerable<string> includes = null)
             where TEntity : class;
 
-        TResult Max<TEntity, TResult>(Expression<Func<TEntity, TResult>> filter, List<string> includes = null)
+        TResult Max<TEntity, TResult>(Expression<Func<TEntity, TResult>> filter, IEnumerable<string> includes = null)
             where TEntity : class;
 
-        Task<TResult> MaxAsync<TEntity, TResult>(Expression<Func<TEntity, TResult>> filter, List<string> includes = null)
+        Task<TResult> MaxAsync<TEntity, TResult>(Expression<Func<TEntity, TResult>> filter, IEnumerable<string> includes = null)
             where TEntity : class;
 
         /// <summary>
@@ -218,11 +218,11 @@
         ///     The <see cref="IQueryable" />.
         /// </returns>
         IQueryable<TEntity> GetQueryable<TEntity>(
-            List<string> includes = null,
+            IEnumerable<string> includes = null,
             Expression<Func<TEntity, bool>> filter = null,
             int pageGo = 0,
             int pageSize = 0,
-            List<string> orderBy = null,
+            IEnumerable<string> orderBy = null,
             bool orderAscendent = false) where TEntity : class;
 
         bool Modify<TEntity>(TEntity item) where TEntity : class;

@@ -20,6 +20,7 @@
 
 using System;
 using System.Collections.Generic;
+using RepositoryEFDotnet.Library;
 using Banking.Models.Interfaces;
 
 namespace Banking.Models.Interfaces
@@ -27,7 +28,7 @@ namespace Banking.Models.Interfaces
 	/// <summary>
 	/// The ProductRepository interface that defines database functions for the Product table
 	/// </summary>
-	public partial interface IProductRepository
+	public partial interface IProductRepository : IRepository
 	{
 		#region Load
 

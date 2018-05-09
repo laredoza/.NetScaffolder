@@ -21,6 +21,7 @@
 using System;
 using System.Collections.Generic;
 using RepositoryEFDotnet.Library;
+using System.Linq;
 using Banking.Models.Interfaces;
 using Banking.Models.Entity;
 
@@ -62,7 +63,7 @@ namespace Banking.Models.Repository
         /// <returns>IList<IOrder></returns>
 		public IList<IOrder> LoadByCustomerId(int customerid)
 		{
-			return (IList<IOrder>)this.UnitOfWork.AllMatching<Order>(o => o.CustomerId == customerid);
+			return this.UnitOfWork.AllMatching<Order>(o => o.CustomerId == customerid).ToList<IOrder>();
 		}
 		
         /// <summary>
@@ -72,7 +73,7 @@ namespace Banking.Models.Repository
         /// <returns>IList<IOrder></returns>
 		public IList<IOrder> LoadByOrderDate(DateTime orderdate)
 		{
-			return (IList<IOrder>)this.UnitOfWork.AllMatching<Order>(o => o.OrderDate == orderdate);
+			return this.UnitOfWork.AllMatching<Order>(o => o.OrderDate == orderdate).ToList<IOrder>();
 		}
 		
         /// <summary>
@@ -82,7 +83,7 @@ namespace Banking.Models.Repository
         /// <returns>IList<IOrder></returns>
 		public IList<IOrder> LoadByDeliveryDate(DateTime deliverydate)
 		{
-			return (IList<IOrder>)this.UnitOfWork.AllMatching<Order>(o => o.DeliveryDate == deliverydate);
+			return this.UnitOfWork.AllMatching<Order>(o => o.DeliveryDate == deliverydate).ToList<IOrder>();
 		}
 		
         /// <summary>
@@ -92,7 +93,7 @@ namespace Banking.Models.Repository
         /// <returns>IList<IOrder></returns>
 		public IList<IOrder> LoadByShippingName(string shippingname)
 		{
-			return (IList<IOrder>)this.UnitOfWork.AllMatching<Order>(o => o.ShippingName == shippingname);
+			return this.UnitOfWork.AllMatching<Order>(o => o.ShippingName == shippingname).ToList<IOrder>();
 		}
 		
         /// <summary>
@@ -102,7 +103,7 @@ namespace Banking.Models.Repository
         /// <returns>IList<IOrder></returns>
 		public IList<IOrder> LoadByShippingAddress(string shippingaddress)
 		{
-			return (IList<IOrder>)this.UnitOfWork.AllMatching<Order>(o => o.ShippingAddress == shippingaddress);
+			return this.UnitOfWork.AllMatching<Order>(o => o.ShippingAddress == shippingaddress).ToList<IOrder>();
 		}
 		
         /// <summary>
@@ -112,7 +113,7 @@ namespace Banking.Models.Repository
         /// <returns>IList<IOrder></returns>
 		public IList<IOrder> LoadByShippingCity(string shippingcity)
 		{
-			return (IList<IOrder>)this.UnitOfWork.AllMatching<Order>(o => o.ShippingCity == shippingcity);
+			return this.UnitOfWork.AllMatching<Order>(o => o.ShippingCity == shippingcity).ToList<IOrder>();
 		}
 		
         /// <summary>
@@ -122,7 +123,7 @@ namespace Banking.Models.Repository
         /// <returns>IList<IOrder></returns>
 		public IList<IOrder> LoadByShippingZip(string shippingzip)
 		{
-			return (IList<IOrder>)this.UnitOfWork.AllMatching<Order>(o => o.ShippingZip == shippingzip);
+			return this.UnitOfWork.AllMatching<Order>(o => o.ShippingZip == shippingzip).ToList<IOrder>();
 		}
 		
         /// <summary>
@@ -131,7 +132,7 @@ namespace Banking.Models.Repository
         /// <returns>IList<IOrder></returns>
 		public IList<IOrder> LoadAll()
 		{
-			return (IList<IOrder>)this.UnitOfWork.GetAll<Order>();
+			return this.UnitOfWork.GetAll<Order>().ToList<IOrder>();
 		}
 		
 		#endregion
@@ -145,9 +146,15 @@ namespace Banking.Models.Repository
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<IOrder></returns>
 		public IList<IOrder> SearchByShippingName(string shippingname, bool caseSensitive = false)
-		{
-			return caseSensitive ? (IList<IOrder>)this.UnitOfWork.AllMatching<Order>(o => o.ShippingName.ToLower().Contains(shippingname.ToLower())) 
-						  : (IList<IOrder>)this.UnitOfWork.AllMatching<Order>(o => o.ShippingName.Contains(shippingname));
+		{		
+			if(caseSensitive) 
+			{
+				return this.UnitOfWork.AllMatching<Order>(o => o.ShippingName.ToLower().Contains(shippingname.ToLower())).ToList<IOrder>();
+			}
+			else
+			{
+				return this.UnitOfWork.AllMatching<Order>(o => o.ShippingName.Contains(shippingname)).ToList<IOrder>();
+			}
 		}
 		
         /// <summary>
@@ -157,9 +164,15 @@ namespace Banking.Models.Repository
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<IOrder></returns>
 		public IList<IOrder> SearchByShippingAddress(string shippingaddress, bool caseSensitive = false)
-		{
-			return caseSensitive ? (IList<IOrder>)this.UnitOfWork.AllMatching<Order>(o => o.ShippingAddress.ToLower().Contains(shippingaddress.ToLower())) 
-						  : (IList<IOrder>)this.UnitOfWork.AllMatching<Order>(o => o.ShippingAddress.Contains(shippingaddress));
+		{		
+			if(caseSensitive) 
+			{
+				return this.UnitOfWork.AllMatching<Order>(o => o.ShippingAddress.ToLower().Contains(shippingaddress.ToLower())).ToList<IOrder>();
+			}
+			else
+			{
+				return this.UnitOfWork.AllMatching<Order>(o => o.ShippingAddress.Contains(shippingaddress)).ToList<IOrder>();
+			}
 		}
 		
         /// <summary>
@@ -169,9 +182,15 @@ namespace Banking.Models.Repository
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<IOrder></returns>
 		public IList<IOrder> SearchByShippingCity(string shippingcity, bool caseSensitive = false)
-		{
-			return caseSensitive ? (IList<IOrder>)this.UnitOfWork.AllMatching<Order>(o => o.ShippingCity.ToLower().Contains(shippingcity.ToLower())) 
-						  : (IList<IOrder>)this.UnitOfWork.AllMatching<Order>(o => o.ShippingCity.Contains(shippingcity));
+		{		
+			if(caseSensitive) 
+			{
+				return this.UnitOfWork.AllMatching<Order>(o => o.ShippingCity.ToLower().Contains(shippingcity.ToLower())).ToList<IOrder>();
+			}
+			else
+			{
+				return this.UnitOfWork.AllMatching<Order>(o => o.ShippingCity.Contains(shippingcity)).ToList<IOrder>();
+			}
 		}
 		
         /// <summary>
@@ -181,9 +200,15 @@ namespace Banking.Models.Repository
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<IOrder></returns>
 		public IList<IOrder> SearchByShippingZip(string shippingzip, bool caseSensitive = false)
-		{
-			return caseSensitive ? (IList<IOrder>)this.UnitOfWork.AllMatching<Order>(o => o.ShippingZip.ToLower().Contains(shippingzip.ToLower())) 
-						  : (IList<IOrder>)this.UnitOfWork.AllMatching<Order>(o => o.ShippingZip.Contains(shippingzip));
+		{		
+			if(caseSensitive) 
+			{
+				return this.UnitOfWork.AllMatching<Order>(o => o.ShippingZip.ToLower().Contains(shippingzip.ToLower())).ToList<IOrder>();
+			}
+			else
+			{
+				return this.UnitOfWork.AllMatching<Order>(o => o.ShippingZip.Contains(shippingzip)).ToList<IOrder>();
+			}
 		}
 		
 		#endregion

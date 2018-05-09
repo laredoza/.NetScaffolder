@@ -73,8 +73,15 @@
   <ItemGroup>
     <Compile Include="Base\BaseContext.cs" />
     <Compile Include="Base\UowRepository.cs" />
+<<<<<<< HEAD
     <Compile Include="Config\OracleDbConfiguration.cs" />
     <Compile Include="Config\OracleHistory.cs" />
+=======
+    <Compile Include="Context\AccountContext.g.cs" />
+    <Compile Include="Context\CustomerContext.g.cs" />
+    <Compile Include="Context\FullContext.cs" />
+    <Compile Include="Context\FullContext.g.cs" />
+>>>>>>> e8c2a787f45ba8f7f77728238b5541619f2f0ce7
     <Compile Include="Dto\BankAccountDto.g.cs" />
     <Compile Include="Dto\BankTransfersDto.g.cs" />
     <Compile Include="Dto\BookDto.g.cs" />
@@ -93,6 +100,7 @@
     <Compile Include="Entity\OrderDetails.g.cs" />
     <Compile Include="Entity\Product.g.cs" />
     <Compile Include="Entity\Software.g.cs" />
+    <Compile Include="Interfaces\Base\IRepository.cs" />
     <Compile Include="Interfaces\Base\IUnitOfWork.cs" />
     <Compile Include="Interfaces\Dto\IBankAccount.g.cs" />
     <Compile Include="Interfaces\Dto\IBankTransfers.g.cs" />

@@ -21,6 +21,7 @@
 using System;
 using System.Collections.Generic;
 using RepositoryEFDotnet.Library;
+using System.Linq;
 using Banking.Models.Interfaces;
 using Banking.Models.Entity;
 
@@ -62,7 +63,7 @@ namespace Banking.Models.Repository
         /// <returns>IList<IBankTransfers></returns>
 		public IList<IBankTransfers> LoadByFromBankAccountId(int frombankaccountid)
 		{
-			return (IList<IBankTransfers>)this.UnitOfWork.AllMatching<BankTransfers>(o => o.FromBankAccountId == frombankaccountid);
+			return this.UnitOfWork.AllMatching<BankTransfers>(o => o.FromBankAccountId == frombankaccountid).ToList<IBankTransfers>();
 		}
 		
         /// <summary>
@@ -72,7 +73,7 @@ namespace Banking.Models.Repository
         /// <returns>IList<IBankTransfers></returns>
 		public IList<IBankTransfers> LoadByToBankAccountId(int tobankaccountid)
 		{
-			return (IList<IBankTransfers>)this.UnitOfWork.AllMatching<BankTransfers>(o => o.ToBankAccountId == tobankaccountid);
+			return this.UnitOfWork.AllMatching<BankTransfers>(o => o.ToBankAccountId == tobankaccountid).ToList<IBankTransfers>();
 		}
 		
         /// <summary>
@@ -82,7 +83,7 @@ namespace Banking.Models.Repository
         /// <returns>IList<IBankTransfers></returns>
 		public IList<IBankTransfers> LoadByAmount(decimal amount)
 		{
-			return (IList<IBankTransfers>)this.UnitOfWork.AllMatching<BankTransfers>(o => o.Amount == amount);
+			return this.UnitOfWork.AllMatching<BankTransfers>(o => o.Amount == amount).ToList<IBankTransfers>();
 		}
 		
         /// <summary>
@@ -92,7 +93,7 @@ namespace Banking.Models.Repository
         /// <returns>IList<IBankTransfers></returns>
 		public IList<IBankTransfers> LoadByTransferDate(DateTime transferdate)
 		{
-			return (IList<IBankTransfers>)this.UnitOfWork.AllMatching<BankTransfers>(o => o.TransferDate == transferdate);
+			return this.UnitOfWork.AllMatching<BankTransfers>(o => o.TransferDate == transferdate).ToList<IBankTransfers>();
 		}
 		
         /// <summary>
@@ -101,7 +102,7 @@ namespace Banking.Models.Repository
         /// <returns>IList<IBankTransfers></returns>
 		public IList<IBankTransfers> LoadAll()
 		{
-			return (IList<IBankTransfers>)this.UnitOfWork.GetAll<BankTransfers>();
+			return this.UnitOfWork.GetAll<BankTransfers>().ToList<IBankTransfers>();
 		}
 		
 		#endregion

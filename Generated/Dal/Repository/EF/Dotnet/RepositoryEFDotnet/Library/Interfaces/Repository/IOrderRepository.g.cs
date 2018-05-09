@@ -20,6 +20,7 @@
 
 using System;
 using System.Collections.Generic;
+using RepositoryEFDotnet.Library;
 using Banking.Models.Interfaces;
 
 namespace Banking.Models.Interfaces
@@ -27,7 +28,7 @@ namespace Banking.Models.Interfaces
 	/// <summary>
 	/// The OrderRepository interface that defines database functions for the Order table
 	/// </summary>
-	public partial interface IOrderRepository
+	public partial interface IOrderRepository : IRepository
 	{
 		#region Load
 

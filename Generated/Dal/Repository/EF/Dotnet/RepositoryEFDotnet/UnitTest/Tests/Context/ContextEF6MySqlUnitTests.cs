@@ -1,16 +1,10 @@
-﻿using System;
-using System.Data.Entity;
-using Banking.Models.Accounts;
+﻿using Banking.Models.Accounts;
 //using Banking.Models.Context;
 //using Banking.Models.Customers;
-using DotNetScaffolder.Test.Components.SourceTypes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace RepositoryEFDotnet.UnitTest
 {
-    using WindowsFormsApp1;
-
-    using MySql.Data.MySqlClient;
     using Banking.Models.Context;
     using Banking.Models.Customers;
 

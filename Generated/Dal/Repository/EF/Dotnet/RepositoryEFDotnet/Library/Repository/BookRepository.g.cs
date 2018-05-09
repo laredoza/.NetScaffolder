@@ -21,6 +21,7 @@
 using System;
 using System.Collections.Generic;
 using RepositoryEFDotnet.Library;
+using System.Linq;
 using Banking.Models.Interfaces;
 using Banking.Models.Entity;
 
@@ -62,7 +63,7 @@ namespace Banking.Models.Repository
         /// <returns>IList<IBook></returns>
 		public IList<IBook> LoadByPublisher(string publisher)
 		{
-			return (IList<IBook>)this.UnitOfWork.AllMatching<Book>(o => o.Publisher == publisher);
+			return this.UnitOfWork.AllMatching<Book>(o => o.Publisher == publisher).ToList<IBook>();
 		}
 		
         /// <summary>
@@ -71,7 +72,7 @@ namespace Banking.Models.Repository
         /// <returns>IList<IBook></returns>
 		public IList<IBook> LoadAll()
 		{
-			return (IList<IBook>)this.UnitOfWork.GetAll<Book>();
+			return this.UnitOfWork.GetAll<Book>().ToList<IBook>();
 		}
 		
 		#endregion
@@ -85,9 +86,15 @@ namespace Banking.Models.Repository
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<IBook></returns>
 		public IList<IBook> SearchByPublisher(string publisher, bool caseSensitive = false)
-		{
-			return caseSensitive ? (IList<IBook>)this.UnitOfWork.AllMatching<Book>(o => o.Publisher.ToLower().Contains(publisher.ToLower())) 
-						  : (IList<IBook>)this.UnitOfWork.AllMatching<Book>(o => o.Publisher.Contains(publisher));
+		{		
+			if(caseSensitive) 
+			{
+				return this.UnitOfWork.AllMatching<Book>(o => o.Publisher.ToLower().Contains(publisher.ToLower())).ToList<IBook>();
+			}
+			else
+			{
+				return this.UnitOfWork.AllMatching<Book>(o => o.Publisher.Contains(publisher)).ToList<IBook>();
+			}
 		}
 		
 		#endregion
