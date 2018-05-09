@@ -41,6 +41,53 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\BankAccountRepository.g.cs" />
+    <Compile Include="Repository\BankTransfersRepository.g.cs" />
+    <Compile Include="Repository\BookRepository.g.cs" />
+    <Compile Include="Repository\CountryRepository.g.cs" />
+    <Compile Include="Repository\CustomerRepository.g.cs" />
+    <Compile Include="Repository\OrderDetailsRepository.g.cs" />
+    <Compile Include="Repository\OrderRepository.g.cs" />
+    <Compile Include="Repository\ProductRepository.g.cs" />
+    <Compile Include="Repository\SoftwareRepository.g.cs" />
+    <Compile Include="RunGenerator.cs">
+      <DependentUpon>RunGenerator.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Model\Application.xml" />
+    <Content Include="Model\Context.xml" />
+    <Content Include="Model\Dto.xml" />
+    <Content Include="Model\DtoInterface.xml" />
+    <Content Include="Model\EdmxSourceType.xml" />
+    <Content Include="Model\Entity.xml" />
+    <Content Include="Model\GenericAdoSourceType.xml" />
+    <Content Include="Model\RepoInterface.xml" />
+    <Content Include="Model\Repository.xml" />
+    <Content Include="RunGenerator.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>RunGenerator.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Model\Banking.mdl" />
+    <None Include="Model\T4\BaseGenerator.ttInclude" />
+    <None Include="Model\T4\BaseProjectGenerator.ttInclude" />
+    <None Include="Model\T4\BaseTemplate.ttinclude" />
+    <None Include="Model\T4\ContextGenerator.ttInclude" />
+    <None Include="Model\T4\ContextTemplate.ttInclude" />
+    <None Include="Model\T4\CopyrightHeader.ttinclude" />
+    <None Include="Model\T4\DtoInterfaceGenerator.ttInclude" />
+    <None Include="Model\T4\DtoInterfaceTemplate.ttInclude" />
+    <None Include="Model\T4\EntityGenerator.ttInclude" />
+    <None Include="Model\T4\EntityTemplate.ttInclude" />
+    <None Include="Model\T4\ProjectGenerator.ttInclude" />
+    <None Include="Model\T4\RepoInterfaceGenerator.ttInclude" />
+    <None Include="Model\T4\RepoInterfaceTemplate.ttInclude" />
+    <None Include="Model\T4\RepositoryGenerator.ttInclude" />
+    <None Include="Model\T4\RepositoryTemplate.ttInclude" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
