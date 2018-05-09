@@ -1,35 +1,32 @@
 ﻿<#@ include file="RepositoryTemplate.ttinclude" #>
 <#+
-public class RepositoryGenerator : BaseGenerator
-{
-	public RepositoryDataType DataType { get; set; }
-	public DtoInterfaceDataType DtoInterfaceType { get; set; }
-	public EntityDataType EntityDataType { get; set; }
-	public List<Table> Models { get; set; }
+    public class RepositoryGenerator : BaseGenerator
+    {
+        public RepositoryDataType DataType { get; set; }
+        public DtoInterfaceDataType DtoInterfaceType { get; set; }
+        public EntityDataType EntityDataType { get; set; }
+        public List<Table> Models { get; set; }
 
-	private RepositoryTemplate template = new RepositoryTemplate();
+        private RepositoryTemplate template = new RepositoryTemplate();
 
-	protected override void RunCore()
-	{
-		// Debugger.Break();
+        protected override void RunCore()
+        {
+            // Debugger.Break();
 
-		foreach(var model in this.Models)
-		{
-			DataType.MetaData = model;
-			template.DataType = this.DataType;
-			template.DtoInterfaceNamespace = DtoInterfaceType.FullNamespace;
-			template.EntityNamespace = EntityDataType.FullNamespace;
+            foreach(var model in this.Models)
+            {
+                DataType.MetaData = model;
+                template.DataType = this.DataType;
+                template.DtoInterfaceNamespace = DtoInterfaceType.FullNamespace;
+                template.EntityNamespace = EntityDataType.FullNamespace;
 
-			// Debugger.Break();
-			if(!string.IsNullOrEmpty(DataType.OutputPath))
-			{
-				template.RenderToFile(string.Format(@"{0}\{1}\{2}Repository.g.cs", DataType.OutputPath, DataType.OutputFolder, DataType.RepoName));
-			}
-			else
-			{
-				template.RenderToFile(string.Format(@"{0}\{1}Repository.g.cs", DataType.OutputFolder, DataType.RepoName));	
-			}
-		}
-	}
-}
+                if(!string.IsNullOrEmpty(DataType.OutputPath))
+                {
+                    template.Output.Project = DataType.OutputPath;
+                }
+
+                template.RenderToFile(string.Format(@"{0}\{1}Repository.g.cs", DataType.OutputFolder, DataType.RepoName));	
+            }
+        }
+    }
 #>

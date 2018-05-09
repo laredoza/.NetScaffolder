@@ -22,16 +22,16 @@ public class ProjectGenerator : BaseProjectGenerator
 				iDtoGen.Run();
 			}
 			
-			//if(dataType is EntityDataType)
-			//{
-                //// Debugger.Break();
-				//var entityGen = new EntityGenerator();
-				//entityGen.Models = domain.Tables;
-				//entityGen.DataType = dataType as EntityDataType;
-				//entityGen.DtoInterfaceType = dataTypes.FirstOrDefault(o => o is DtoInterfaceDataType) as DtoInterfaceDataType;
-				//entityGen.Run();
-			//}
-//
+			if(dataType is EntityDataType)
+			{
+                // Debugger.Break();
+				var entityGen = new EntityGenerator();
+				entityGen.Models = domain.Tables;
+				entityGen.DataType = dataType as EntityDataType;
+				entityGen.DtoInterfaceType = dataTypes.FirstOrDefault(o => o is DtoInterfaceDataType) as DtoInterfaceDataType;
+				entityGen.Run();
+			}
+
 			//if(dataType is ContextDataType)
 			//{
                 //Debugger.Break();
@@ -40,34 +40,34 @@ public class ProjectGenerator : BaseProjectGenerator
 				//contxtGen.EntityDataType = dataTypes.FirstOrDefault(o => o is EntityDataType) as EntityDataType;
 				//contxtGen.Run();
 			//}
-			//
-			//if(dataType is RepoInterfaceDataType)
-			//{
-				//var iRepoGen = new RepoInterfaceGenerator();
-				//iRepoGen.Models = domain.Tables;
-				//iRepoGen.DataType = dataType as RepoInterfaceDataType;
-				//iRepoGen.DtoInterfaceType = dataTypes.FirstOrDefault(o => o is DtoInterfaceDataType) as DtoInterfaceDataType;
-				//iRepoGen.Run();
-			//}
-			//
-			//if(dataType is RepositoryDataType)
-			//{
-				//var iRepoGen = new RepositoryGenerator();
-				//iRepoGen.Models = domain.Tables;
-				//iRepoGen.DataType = dataType as RepositoryDataType;
-				//iRepoGen.DtoInterfaceType = dataTypes.FirstOrDefault(o => o is DtoInterfaceDataType) as DtoInterfaceDataType;
-				//iRepoGen.EntityDataType = dataTypes.FirstOrDefault(o => o is EntityDataType) as EntityDataType;
-				//iRepoGen.Run();
-			//}
-			//
-			//if(dataType is DtoDataType)
-			//{
-				//var iDtoGen = new DtoGenerator();
-				//iDtoGen.Models = domain.Tables;
-				//iDtoGen.DataType = dataType as DtoDataType;
-				//iDtoGen.DtoInterfaceType = dataTypes.FirstOrDefault(o => o is DtoInterfaceDataType) as DtoInterfaceDataType;
-				//iDtoGen.Run();
-			//}
+			
+			if(dataType is RepoInterfaceDataType)
+			{
+				var iRepoGen = new RepoInterfaceGenerator();
+				iRepoGen.Models = domain.Tables;
+				iRepoGen.DataType = dataType as RepoInterfaceDataType;
+				iRepoGen.DtoInterfaceType = dataTypes.FirstOrDefault(o => o is DtoInterfaceDataType) as DtoInterfaceDataType;
+				iRepoGen.Run();
+			}
+			
+			if(dataType is RepositoryDataType)
+			{
+				var iRepoGen = new RepositoryGenerator();
+				iRepoGen.Models = domain.Tables;
+				iRepoGen.DataType = dataType as RepositoryDataType;
+				iRepoGen.DtoInterfaceType = dataTypes.FirstOrDefault(o => o is DtoInterfaceDataType) as DtoInterfaceDataType;
+				iRepoGen.EntityDataType = dataTypes.FirstOrDefault(o => o is EntityDataType) as EntityDataType;
+				iRepoGen.Run();
+			}
+			
+			if(dataType is DtoDataType)
+			{
+				var iDtoGen = new DtoGenerator();
+				iDtoGen.Models = domain.Tables;
+				iDtoGen.DataType = dataType as DtoDataType;
+				iDtoGen.DtoInterfaceType = dataTypes.FirstOrDefault(o => o is DtoInterfaceDataType) as DtoInterfaceDataType;
+				iDtoGen.Run();
+			}
 		}
 	}
 }

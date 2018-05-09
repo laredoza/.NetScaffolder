@@ -20,7 +20,7 @@ public class RepoInterfaceTemplate : BaseTemplate
 
 using System;
 using System.Collections.Generic;
-using RepositoryEFDotnet.Library;
+using Core.Base;
 using <#= DtoInterfaceNamespace #>;
 
 namespace <#= DataType.FullNamespace #>

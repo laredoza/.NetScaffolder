@@ -40,17 +40,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
-    <Compile Include="Interfaces\Dto\IBankAccount.g.cs" />
-    <Compile Include="Interfaces\Dto\IBankTransfers.g.cs" />
-    <Compile Include="Interfaces\Dto\IBook.g.cs" />
-    <Compile Include="Interfaces\Dto\ICountry.g.cs" />
-    <Compile Include="Interfaces\Dto\ICustomer.g.cs" />
-    <Compile Include="Interfaces\Dto\IOrder.g.cs" />
-    <Compile Include="Interfaces\Dto\IOrderDetails.g.cs" />
-    <Compile Include="Interfaces\Dto\IProduct.g.cs" />
-    <Compile Include="Interfaces\Dto\ISoftware.g.cs" />
+    <Compile Include="Dto\BankAccountDto.g.cs" />
+    <Compile Include="Dto\BankTransfersDto.g.cs" />
+    <Compile Include="Dto\BookDto.g.cs" />
+    <Compile Include="Dto\CountryDto.g.cs" />
+    <Compile Include="Dto\CustomerDto.g.cs" />
+    <Compile Include="Dto\OrderDetailsDto.g.cs" />
+    <Compile Include="Dto\OrderDto.g.cs" />
+    <Compile Include="Dto\ProductDto.g.cs" />
+    <Compile Include="Dto\SoftwareDto.g.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Interfaces\Interface\RepositoryEFDotnet.Data.Interface.ModelInterfaces.csproj">
+      <Project>{4f6d59b6-2c03-4a37-9670-bb46225aa6e1}</Project>
+      <Name>RepositoryEFDotnet.Data.Interface.ModelInterfaces</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

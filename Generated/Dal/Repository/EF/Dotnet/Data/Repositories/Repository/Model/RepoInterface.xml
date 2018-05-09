@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RepoInterfaceDataType xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Namespace>Interfaces</Namespace>
-  <OutputFolder>Interfaces\Repository</OutputFolder>
-  <OutputPath />
+  <OutputFolder>Repository</OutputFolder>
+  <OutputPath>..\..\Interfaces\RepositoryInterfaces\RepositoryEFDotnet.Data.Interface.RepositoryInterfaces.csproj</OutputPath>
 </RepoInterfaceDataType>

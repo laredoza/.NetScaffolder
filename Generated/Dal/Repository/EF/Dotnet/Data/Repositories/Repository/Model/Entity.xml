@@ -4,6 +4,6 @@
   <InheritFrom />
   <Namespace>Entity</Namespace>
   <OutputFolder>Entity</OutputFolder>
-  <OutputPath />
+  <OutputPath>..\..\Entities\Entity\RepositoryEFDotnet.Data.Entities.Entity.csproj</OutputPath>
   <UseInterface>false</UseInterface>
 </EntityDataType>

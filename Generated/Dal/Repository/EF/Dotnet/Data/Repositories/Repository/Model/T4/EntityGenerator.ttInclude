@@ -1,33 +1,30 @@
 ﻿<#@ include file="EntityTemplate.ttinclude" #>
 <#+
-public class EntityGenerator : BaseGenerator
-{
-	public EntityDataType DataType { get; set; }
-	public DtoInterfaceDataType DtoInterfaceType { get; set; }
-	public List<Table> Models { get; set; }
+    public class EntityGenerator : BaseGenerator
+    {
+        public EntityDataType DataType { get; set; }
+        public DtoInterfaceDataType DtoInterfaceType { get; set; }
+        public List<Table> Models { get; set; }
 
-	private EntityTemplate template = new EntityTemplate();
+        private EntityTemplate template = new EntityTemplate();
 
-	protected override void RunCore()
-	{
-		// Debugger.Break();
+        protected override void RunCore()
+        {
+            // Debugger.Break();
 
-		foreach(var model in this.Models)
-		{
-			DataType.MetaData = model;
-			template.DataType = this.DataType;
-			template.DtoInterfaceNamespace = DtoInterfaceType.FullNamespace;
+            foreach(var model in this.Models)
+            {
+                DataType.MetaData = model;
+                template.DataType = this.DataType;
+                template.DtoInterfaceNamespace = DtoInterfaceType.FullNamespace;
 
-			// Debugger.Break();
-			if(!string.IsNullOrEmpty(DataType.OutputPath))
-			{
-				template.RenderToFile(string.Format(@"{0}\{1}\{2}.g.cs", DataType.OutputPath, DataType.OutputFolder, DataType.EntityName));
-			}
-			else
-			{
-				template.RenderToFile(string.Format(@"{0}\{1}.g.cs", DataType.OutputFolder, DataType.EntityName));	
-			}
-		}
-	}
-}
+                if(!string.IsNullOrEmpty(DataType.OutputPath))
+                {
+                    template.Output.Project = DataType.OutputPath;
+                }
+
+                template.RenderToFile(string.Format(@"{0}\{1}.g.cs", DataType.OutputFolder, DataType.EntityName));	
+            }
+        }
+    }
 #>
