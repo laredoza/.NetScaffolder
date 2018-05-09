@@ -13,14 +13,14 @@ public class ProjectGenerator : BaseProjectGenerator
 		// Execute generation using initialised data types
 		foreach(var dataType in dataTypes)
 		{
-			if(dataType is DtoInterfaceDataType)
-			{
-                // Debugger.Break();
-				var iDtoGen = new DtoInterfaceGenerator();
-				iDtoGen.Models = domain.Tables;
-				iDtoGen.DataType = dataType as DtoInterfaceDataType;
-				iDtoGen.Run();
-			}
+			//if(dataType is DtoInterfaceDataType)
+			//{
+                //// Debugger.Break();
+				//var iDtoGen = new DtoInterfaceGenerator();
+				//iDtoGen.Models = domain.Tables;
+				//iDtoGen.DataType = dataType as DtoInterfaceDataType;
+				//iDtoGen.Run();
+			//}
 			
 			//if(dataType is EntityDataType)
 			//{
@@ -32,15 +32,15 @@ public class ProjectGenerator : BaseProjectGenerator
 				//entityGen.Run();
 			//}
 //
-			//if(dataType is ContextDataType)
-			//{
-                //Debugger.Break();
-				//var contxtGen = new ContextGenerator();
-				//contxtGen.DataType = dataType as ContextDataType;
-				//contxtGen.EntityDataType = dataTypes.FirstOrDefault(o => o is EntityDataType) as EntityDataType;
-				//contxtGen.Run();
-			//}
-			//
+			if(dataType is ContextDataType)
+			{
+                Debugger.Break();
+				var contxtGen = new ContextGenerator();
+				contxtGen.DataType = dataType as ContextDataType;
+				contxtGen.EntityDataType = dataTypes.FirstOrDefault(o => o is EntityDataType) as EntityDataType;
+				contxtGen.Run();
+			}
+			
 			//if(dataType is RepoInterfaceDataType)
 			//{
 				//var iRepoGen = new RepoInterfaceGenerator();
