@@ -102,6 +102,18 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.EntityDataTypes
         /// </param>
         private void btnBrowse_Click(object sender, EventArgs e)
         {
+            using (var dialog = new OpenFileDialog())
+            {
+                dialog.Filter = "Project file|*.csproj";
+                dialog.Multiselect = false;
+                dialog.RestoreDirectory = true;
+
+                var result = dialog.ShowDialog(this);
+                if (result == DialogResult.OK)
+                {
+                    this.txtOutputPath.Text = dialog.FileName;
+                }
+            }
         }
 
         /// <summary>
@@ -145,7 +157,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.EntityDataTypes
             this.DataType.InheritFrom = this.txtInheritFrom.Text;
             this.DataType.Namespace = this.txtNamespace.Text;
             this.DataType.OutputFolder = this.txtOutputFolder.Text;
-            this.DataType.OutputPath = this.tstOutputPath.Text;
+            this.DataType.OutputPath = this.txtOutputPath.Text;
             this.DataType.AddInjectConstructor = this.chkAddInjectConstructor.Checked;
             this.DataType.UseInterface = this.chkUseInterface.Checked;
         }
@@ -160,7 +172,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.EntityDataTypes
             this.txtInheritFrom.Text = this.DataType.InheritFrom;
             this.txtNamespace.Text = this.DataType.Namespace;
             this.txtOutputFolder.Text = this.DataType.OutputFolder;
-            this.tstOutputPath.Text = this.DataType.OutputPath;
+            this.txtOutputPath.Text = this.DataType.OutputPath;
             this.chkAddInjectConstructor.Checked = this.DataType.AddInjectConstructor;
             this.chkUseInterface.Checked = this.DataType.UseInterface;
         }

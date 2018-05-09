@@ -102,7 +102,7 @@
             <Children />
             <Enabled>true</Enabled>
             <HierarchyType>Item</HierarchyType>
-            <Id>25643222-b88e-45bb-bcff-b9fef18ff196</Id>
+            <Id>599534c1-e261-4963-a0ee-1cf42b9d4795</Id>
             <Name>DtoInterface</Name>
             <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
             <Selected>false</Selected>
@@ -118,8 +118,8 @@
             <Children />
             <Enabled>true</Enabled>
             <HierarchyType>Item</HierarchyType>
-            <Id>2a7d490c-5a21-41ca-9bde-4acc618faeb1</Id>
-            <Name>RepositoryInterface</Name>
+            <Id>70678934-ff83-4487-a234-ad6bd9d9358b</Id>
+            <Name>RepoInterface</Name>
             <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
             <Selected>false</Selected>
             <ConfigLocation>Data</ConfigLocation>
@@ -305,7 +305,7 @@
     </DomainDefinition>
   </Domains>
   <GroupBy>Domain</GroupBy>
-  <ModelPath>C:\Dev\DotNetScaffolder\Generated\Dal\Repository\EF\Dotnet\RepositoryEFDotnet\Library\Model\Banking.mdl</ModelPath>
+  <ModelPath>..\..\..\..\..\Generated\Dal\Repository\EF\Dotnet\Data\Repositories\Repository\Model\Banking.mdl</ModelPath>
   <OutputFolder>Models</OutputFolder>
   <Version>1</Version>
 </ProjectDefinition>

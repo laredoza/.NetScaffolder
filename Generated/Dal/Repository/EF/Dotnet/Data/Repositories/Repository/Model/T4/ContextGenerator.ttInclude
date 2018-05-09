@@ -13,8 +13,6 @@ public class ContextGenerator : BaseGenerator
 		template.DataType = this.DataType;
 		template.EntityNamespace = EntityDataType.FullNamespace;
 
-
-
 		foreach(var dbContext in DataType.Contexts)
 		{
 			template.ContextData = dbContext;
@@ -29,6 +27,7 @@ public class ContextGenerator : BaseGenerator
             // template.Output.Project = @"..\..\Context\EF\Oracle\RepositoryEFDotnet.Context.EF.Oracle.csproj";
             // template.RenderToFile(string.Format(@"{0}.g.cs", dbContext.ContextName));
 		}
+
 	}
 }
 #>

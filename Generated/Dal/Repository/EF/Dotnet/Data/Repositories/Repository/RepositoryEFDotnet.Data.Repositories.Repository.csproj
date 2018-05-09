@@ -69,6 +69,17 @@
     <Content Include="RunGenerator.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>RunGenerator.cs</LastGenOutput>
+      <LastOutputs>
+..\..\Dtos\Dto\Interfaces\Dto\IBankAccount.g.cs
+..\..\Dtos\Dto\Interfaces\Dto\IBankTransfers.g.cs
+..\..\Dtos\Dto\Interfaces\Dto\IBook.g.cs
+..\..\Dtos\Dto\Interfaces\Dto\ICountry.g.cs
+..\..\Dtos\Dto\Interfaces\Dto\ICustomer.g.cs
+..\..\Dtos\Dto\Interfaces\Dto\IOrder.g.cs
+..\..\Dtos\Dto\Interfaces\Dto\IOrderDetails.g.cs
+..\..\Dtos\Dto\Interfaces\Dto\IProduct.g.cs
+..\..\Dtos\Dto\Interfaces\Dto\ISoftware.g.cs
+</LastOutputs>
     </Content>
   </ItemGroup>
   <ItemGroup>
@@ -88,6 +99,9 @@
     <None Include="Model\T4\RepoInterfaceTemplate.ttInclude" />
     <None Include="Model\T4\RepositoryGenerator.ttInclude" />
     <None Include="Model\T4\RepositoryTemplate.ttInclude" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

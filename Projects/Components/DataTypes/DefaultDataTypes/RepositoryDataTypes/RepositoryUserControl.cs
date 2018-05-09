@@ -118,18 +118,6 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
 
         #endregion
 
-        private void btnBrowse_Click(object sender, EventArgs e)
-        {
-            using (var dialog = new FolderBrowserDialog())
-            {
-                var result = dialog.ShowDialog(this);
-                if (result == DialogResult.OK)
-                {
-                    txtOutputPath.Text = dialog.SelectedPath;
-                }
-            }
-        }
-
         private void groupBox1_Enter(object sender, EventArgs e)
         {
 

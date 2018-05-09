@@ -3,5 +3,5 @@
   <InheritFrom />
   <Namespace>Interfaces</Namespace>
   <OutputFolder>Interfaces\Dto</OutputFolder>
-  <OutputPath />
+  <OutputPath>..\..\Dtos\Dto\RepositoryEFDotnet.Data.Dtos.Dto.csproj</OutputPath>
 </DtoInterfaceDataType>

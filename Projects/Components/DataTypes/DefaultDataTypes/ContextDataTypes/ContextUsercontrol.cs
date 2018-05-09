@@ -283,18 +283,6 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
 
         #endregion
 
-        private void btnBrowse_Click(object sender, EventArgs e)
-        {
-            using (var dialog = new FolderBrowserDialog())
-            {
-                var result = dialog.ShowDialog(this);
-                if (result == DialogResult.OK)
-                {
-                    OutputPath.Text = dialog.SelectedPath;
-                }
-            }
-        }
-
         private void ContextUserControl_Load(object sender, EventArgs e)
         {
 

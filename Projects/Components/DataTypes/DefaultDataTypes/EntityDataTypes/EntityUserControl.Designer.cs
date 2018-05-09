@@ -37,9 +37,8 @@
             this.label29 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.chkUseInterface = new System.Windows.Forms.CheckBox();
-            this.btnBrowse = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.tstOutputPath = new System.Windows.Forms.TextBox();
+            this.txtOutputPath = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -107,9 +106,8 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.chkUseInterface);
-            this.groupBox1.Controls.Add(this.btnBrowse);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.tstOutputPath);
+            this.groupBox1.Controls.Add(this.txtOutputPath);
             this.groupBox1.Controls.Add(this.txtNamespace);
             this.groupBox1.Controls.Add(this.txtOutputFolder);
             this.groupBox1.Controls.Add(this.label29);
@@ -135,16 +133,6 @@
             this.chkUseInterface.UseVisualStyleBackColor = true;
             this.chkUseInterface.CheckedChanged += new System.EventHandler(this.chkUseInterface_CheckedChanged);
             // 
-            // btnBrowse
-            // 
-            this.btnBrowse.Location = new System.Drawing.Point(439, 128);
-            this.btnBrowse.Name = "btnBrowse";
-            this.btnBrowse.Size = new System.Drawing.Size(75, 23);
-            this.btnBrowse.TabIndex = 62;
-            this.btnBrowse.Text = "Browse";
-            this.btnBrowse.UseVisualStyleBackColor = true;
-            this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -154,13 +142,12 @@
             this.label1.TabIndex = 61;
             this.label1.Text = "Output Path:";
             // 
-            // tstOutputPath
+            // txtOutputPath
             // 
-            this.tstOutputPath.Enabled = false;
-            this.tstOutputPath.Location = new System.Drawing.Point(131, 130);
-            this.tstOutputPath.Name = "tstOutputPath";
-            this.tstOutputPath.Size = new System.Drawing.Size(304, 20);
-            this.tstOutputPath.TabIndex = 60;
+            this.txtOutputPath.Location = new System.Drawing.Point(131, 130);
+            this.txtOutputPath.Name = "txtOutputPath";
+            this.txtOutputPath.Size = new System.Drawing.Size(406, 20);
+            this.txtOutputPath.TabIndex = 60;
             // 
             // EntityUserControl
             // 
@@ -186,9 +173,8 @@
         private System.Windows.Forms.TextBox txtInheritFrom;
         private System.Windows.Forms.Label label29;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button btnBrowse;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox tstOutputPath;
+        private System.Windows.Forms.TextBox txtOutputPath;
         private System.Windows.Forms.CheckBox chkUseInterface;
     }
 }

@@ -1,31 +1,28 @@
 ﻿<#@ include file="DtoInterfaceTemplate.ttinclude" #>
 <#+
-public class DtoInterfaceGenerator : BaseGenerator
-{
-	public DtoInterfaceDataType DataType {get;set;}
-	public List<Table> Models { get; set; }
+    public class DtoInterfaceGenerator : BaseGenerator
+    {
+        public DtoInterfaceDataType DataType {get;set;}
+        public List<Table> Models { get; set; }
 
-	private DtoInterfaceTemplate template = new DtoInterfaceTemplate();
+        private DtoInterfaceTemplate template = new DtoInterfaceTemplate();
 
-	protected override void RunCore()
-	{
-		// Debugger.Break();
+        protected override void RunCore()
+        {
+            // Debugger.Break();
 
-		foreach(var model in this.Models)
-		{
-			DataType.MetaData = model;
-			template.DataType = this.DataType;
+            foreach(var model in this.Models)
+            {
+                DataType.MetaData = model;
+                template.DataType = this.DataType;
 
-			// Debugger.Break();
-			if(!string.IsNullOrEmpty(DataType.OutputPath))
-			{
-				template.RenderToFile(string.Format(@"{0}\{1}\I{2}.g.cs", DataType.OutputPath, DataType.OutputFolder, DataType.InterfaceName));
-			}
-			else
-			{
-				template.RenderToFile(string.Format(@"{0}\I{1}.g.cs", DataType.OutputFolder, DataType.InterfaceName));	
-			}
-		}
-	}
-}
+                if(!string.IsNullOrEmpty(DataType.OutputPath))
+                {
+                    template.Output.Project = DataType.OutputPath;
+                }
+
+                template.RenderToFile(string.Format(@"{0}\I{1}.g.cs", DataType.OutputFolder, DataType.InterfaceName));
+            }
+        }
+    }
 #>

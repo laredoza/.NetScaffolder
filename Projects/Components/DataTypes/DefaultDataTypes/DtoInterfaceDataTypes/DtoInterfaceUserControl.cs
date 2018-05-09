@@ -95,27 +95,6 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.DtoInterfaceDat
         }
 
         /// <summary>
-        /// The btn browse_ click.
-        /// </summary>
-        /// <param name="sender">
-        /// The sender.
-        /// </param>
-        /// <param name="e">
-        /// The e.
-        /// </param>
-        private void btnBrowse_Click(object sender, EventArgs e)
-        {
-            using (var dialog = new FolderBrowserDialog())
-            {
-                var result = dialog.ShowDialog(this);
-                if (result == DialogResult.OK)
-                {
-                    this.txtOutputPath.Text = dialog.SelectedPath;
-                }
-            }
-        }
-
-        /// <summary>
         /// The update data type.
         /// </summary>
         private void UpdateDataType()

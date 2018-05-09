@@ -3,7 +3,7 @@
   <ContextData>
     <ContextName>AccountContext</ContextName>
     <CreateDb>true</CreateDb>
-    <CustomConnectionName />
+    <CustomConnectionName>RepoTest</CustomConnectionName>
     <Id>88dbf624-7f95-4d21-b207-2ec4c4aaf56f</Id>
     <IncludeColumnOrder>false</IncludeColumnOrder>
     <InheritFrom>BaseContext</InheritFrom>
@@ -52,7 +52,7 @@
     </Models>
     <Namespace>Accounts</Namespace>
     <OutputFolder>Context</OutputFolder>
-    <OutputPath />
+    <OutputPath>..\..\Contexts\EF\{0}\RepositoryEFDotnet.Contexts.EF.{0}.csproj</OutputPath>
     <ProxyCreationEnabled>false</ProxyCreationEnabled>
   </ContextData>
   <ContextData>
@@ -195,7 +195,7 @@
     </Models>
     <Namespace>Customers</Namespace>
     <OutputFolder>Context</OutputFolder>
-    <OutputPath />
+    <OutputPath>..\..\Contexts\EF\{0}\RepositoryEFDotnet.Contexts.EF.{0}.csproj</OutputPath>
     <ProxyCreationEnabled>false</ProxyCreationEnabled>
   </ContextData>
   <ContextData>
@@ -377,7 +377,7 @@
     </Models>
     <Namespace>Context</Namespace>
     <OutputFolder>Context</OutputFolder>
-    <OutputPath />
+    <OutputPath>..\..\Contexts\EF\{0}\RepositoryEFDotnet.Contexts.EF.{0}.csproj</OutputPath>
     <ProxyCreationEnabled>false</ProxyCreationEnabled>
   </ContextData>
 </ArrayOfContextData>

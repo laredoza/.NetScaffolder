@@ -41,14 +41,13 @@
             this.label24 = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.chkColumnOrder = new System.Windows.Forms.CheckBox();
             this.ProxyCreation = new System.Windows.Forms.CheckBox();
             this.txtCustomConnectionName = new System.Windows.Forms.TextBox();
-            this.btnBrowse = new System.Windows.Forms.Button();
             this.btnNew = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.OutputPath = new System.Windows.Forms.TextBox();
             this.TreeviewContextModels = new FormControls.TreeView.MultiSelectTreeView.TreeView();
-            this.chkColumnOrder = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -163,7 +162,6 @@
             this.groupBox1.Controls.Add(this.chkColumnOrder);
             this.groupBox1.Controls.Add(this.ProxyCreation);
             this.groupBox1.Controls.Add(this.txtCustomConnectionName);
-            this.groupBox1.Controls.Add(this.btnBrowse);
             this.groupBox1.Controls.Add(this.btnNew);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.OutputPath);
@@ -186,6 +184,16 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Context settings";
             // 
+            // chkColumnOrder
+            // 
+            this.chkColumnOrder.AutoSize = true;
+            this.chkColumnOrder.Location = new System.Drawing.Point(295, 94);
+            this.chkColumnOrder.Name = "chkColumnOrder";
+            this.chkColumnOrder.Size = new System.Drawing.Size(125, 17);
+            this.chkColumnOrder.TabIndex = 62;
+            this.chkColumnOrder.Text = "Include column order";
+            this.chkColumnOrder.UseVisualStyleBackColor = true;
+            // 
             // ProxyCreation
             // 
             this.ProxyCreation.AutoSize = true;
@@ -202,16 +210,6 @@
             this.txtCustomConnectionName.Name = "txtCustomConnectionName";
             this.txtCustomConnectionName.Size = new System.Drawing.Size(295, 20);
             this.txtCustomConnectionName.TabIndex = 60;
-            // 
-            // btnBrowse
-            // 
-            this.btnBrowse.Location = new System.Drawing.Point(452, 152);
-            this.btnBrowse.Name = "btnBrowse";
-            this.btnBrowse.Size = new System.Drawing.Size(75, 23);
-            this.btnBrowse.TabIndex = 59;
-            this.btnBrowse.Text = "Browse";
-            this.btnBrowse.UseVisualStyleBackColor = true;
-            this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
             // 
             // btnNew
             // 
@@ -235,10 +233,9 @@
             // 
             // OutputPath
             // 
-            this.OutputPath.Enabled = false;
             this.OutputPath.Location = new System.Drawing.Point(151, 154);
             this.OutputPath.Name = "OutputPath";
-            this.OutputPath.Size = new System.Drawing.Size(295, 20);
+            this.OutputPath.Size = new System.Drawing.Size(376, 20);
             this.OutputPath.TabIndex = 57;
             // 
             // TreeviewContextModels
@@ -250,16 +247,6 @@
             this.TreeviewContextModels.SelectionMode = FormControls.TreeView.MultiSelectTreeView.TreeViewSelectionMode.SingleSelect;
             this.TreeviewContextModels.Size = new System.Drawing.Size(533, 312);
             this.TreeviewContextModels.TabIndex = 58;
-            // 
-            // chkColumnOrder
-            // 
-            this.chkColumnOrder.AutoSize = true;
-            this.chkColumnOrder.Location = new System.Drawing.Point(295, 94);
-            this.chkColumnOrder.Name = "chkColumnOrder";
-            this.chkColumnOrder.Size = new System.Drawing.Size(125, 17);
-            this.chkColumnOrder.TabIndex = 62;
-            this.chkColumnOrder.Text = "Include column order";
-            this.chkColumnOrder.UseVisualStyleBackColor = true;
             // 
             // ContextUserControl
             // 
@@ -294,7 +281,6 @@
         private System.Windows.Forms.Button btnNew;
         private System.Windows.Forms.TextBox OutputPath;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button btnBrowse;
         private FormControls.TreeView.MultiSelectTreeView.TreeView TreeviewContextModels;
         private System.Windows.Forms.TextBox txtCustomConnectionName;
         private System.Windows.Forms.CheckBox ProxyCreation;

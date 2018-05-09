@@ -36,12 +36,11 @@
             this.txtInheritFrom = new System.Windows.Forms.TextBox();
             this.label29 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.chkUseInterface = new System.Windows.Forms.CheckBox();
-            this.btnBrowse = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.tstOutputPath = new System.Windows.Forms.TextBox();
             this.txtPostFix = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.chkUseInterface = new System.Windows.Forms.CheckBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtOutputPath = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -111,9 +110,8 @@
             this.groupBox1.Controls.Add(this.txtPostFix);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.chkUseInterface);
-            this.groupBox1.Controls.Add(this.btnBrowse);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.tstOutputPath);
+            this.groupBox1.Controls.Add(this.txtOutputPath);
             this.groupBox1.Controls.Add(this.txtNamespace);
             this.groupBox1.Controls.Add(this.txtOutputFolder);
             this.groupBox1.Controls.Add(this.label29);
@@ -127,44 +125,6 @@
             this.groupBox1.TabIndex = 60;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Dto settings";
-            // 
-            // chkUseInterface
-            // 
-            this.chkUseInterface.AutoSize = true;
-            this.chkUseInterface.Location = new System.Drawing.Point(131, 161);
-            this.chkUseInterface.Name = "chkUseInterface";
-            this.chkUseInterface.Size = new System.Drawing.Size(89, 17);
-            this.chkUseInterface.TabIndex = 63;
-            this.chkUseInterface.Text = "Use interface";
-            this.chkUseInterface.UseVisualStyleBackColor = true;
-            this.chkUseInterface.CheckedChanged += new System.EventHandler(this.chkUseInterface_CheckedChanged);
-            // 
-            // btnBrowse
-            // 
-            this.btnBrowse.Location = new System.Drawing.Point(439, 128);
-            this.btnBrowse.Name = "btnBrowse";
-            this.btnBrowse.Size = new System.Drawing.Size(75, 23);
-            this.btnBrowse.TabIndex = 62;
-            this.btnBrowse.Text = "Browse";
-            this.btnBrowse.UseVisualStyleBackColor = true;
-            this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(44, 133);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(67, 13);
-            this.label1.TabIndex = 61;
-            this.label1.Text = "Output Path:";
-            // 
-            // tstOutputPath
-            // 
-            this.tstOutputPath.Enabled = false;
-            this.tstOutputPath.Location = new System.Drawing.Point(131, 130);
-            this.tstOutputPath.Name = "tstOutputPath";
-            this.tstOutputPath.Size = new System.Drawing.Size(304, 20);
-            this.tstOutputPath.TabIndex = 60;
             // 
             // txtPostFix
             // 
@@ -182,6 +142,33 @@
             this.label2.Size = new System.Drawing.Size(41, 13);
             this.label2.TabIndex = 64;
             this.label2.Text = "Postfix:";
+            // 
+            // chkUseInterface
+            // 
+            this.chkUseInterface.AutoSize = true;
+            this.chkUseInterface.Location = new System.Drawing.Point(131, 161);
+            this.chkUseInterface.Name = "chkUseInterface";
+            this.chkUseInterface.Size = new System.Drawing.Size(89, 17);
+            this.chkUseInterface.TabIndex = 63;
+            this.chkUseInterface.Text = "Use interface";
+            this.chkUseInterface.UseVisualStyleBackColor = true;
+            this.chkUseInterface.CheckedChanged += new System.EventHandler(this.chkUseInterface_CheckedChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(44, 133);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(67, 13);
+            this.label1.TabIndex = 61;
+            this.label1.Text = "Output Path:";
+            // 
+            // txtOutputPath
+            // 
+            this.txtOutputPath.Location = new System.Drawing.Point(131, 130);
+            this.txtOutputPath.Name = "txtOutputPath";
+            this.txtOutputPath.Size = new System.Drawing.Size(406, 20);
+            this.txtOutputPath.TabIndex = 60;
             // 
             // DtoUserControl
             // 
@@ -207,9 +194,8 @@
         private System.Windows.Forms.TextBox txtInheritFrom;
         private System.Windows.Forms.Label label29;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button btnBrowse;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox tstOutputPath;
+        private System.Windows.Forms.TextBox txtOutputPath;
         private System.Windows.Forms.CheckBox chkUseInterface;
         private System.Windows.Forms.TextBox txtPostFix;
         private System.Windows.Forms.Label label2;

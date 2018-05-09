@@ -94,27 +94,6 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.DtoDataTypes
         }
 
         /// <summary>
-        /// The btn browse_ click.
-        /// </summary>
-        /// <param name="sender">
-        /// The sender.
-        /// </param>
-        /// <param name="e">
-        /// The e.
-        /// </param>
-        private void btnBrowse_Click(object sender, EventArgs e)
-        {
-            using (var dialog = new FolderBrowserDialog())
-            {
-                var result = dialog.ShowDialog(this);
-                if (result == DialogResult.OK)
-                {
-                    this.tstOutputPath.Text = dialog.SelectedPath;
-                }
-            }
-        }
-
-        /// <summary>
         /// The chk use interface_ checked changed.
         /// </summary>
         /// <param name="sender">
@@ -155,7 +134,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.DtoDataTypes
             this.DataType.InheritFrom = this.txtInheritFrom.Text;
             this.DataType.Namespace = this.txtNamespace.Text;
             this.DataType.OutputFolder = this.txtOutputFolder.Text;
-            this.DataType.OutputPath = this.tstOutputPath.Text;
+            this.DataType.OutputPath = this.txtOutputPath.Text;
             this.DataType.AddInjectConstructor = this.chkAddInjectConstructor.Checked;
             this.DataType.UseInterface = this.chkUseInterface.Checked;
             this.DataType.PostFix = this.txtPostFix.Text;
@@ -171,7 +150,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.DtoDataTypes
             this.txtInheritFrom.Text = this.DataType.InheritFrom;
             this.txtNamespace.Text = this.DataType.Namespace;
             this.txtOutputFolder.Text = this.DataType.OutputFolder;
-            this.tstOutputPath.Text = this.DataType.OutputPath;
+            this.txtOutputPath.Text = this.DataType.OutputPath;
             this.txtPostFix.Text = this.DataType.PostFix;
             this.chkAddInjectConstructor.Checked = this.DataType.AddInjectConstructor;
             this.chkUseInterface.Checked = this.DataType.UseInterface;
