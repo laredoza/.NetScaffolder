@@ -31,6 +31,7 @@ namespace Banking.Models.Dto
 		public BankAccountDto()
 		{
 			this.BankTransfers = new List <IBankTransfers>();
+			this.BankTransfers = new List <IBankTransfers>();
 		}
 		
 		public BankAccountDto(IBankAccount item, bool deep = false)
@@ -43,9 +44,17 @@ namespace Banking.Models.Dto
 			this.CustomerId = item.CustomerId;
 			this.Locked = item.Locked;
 			this.BankTransfers = new List <IBankTransfers>();
+			this.BankTransfers = new List <IBankTransfers>();
 
 			if(deep)
 			{
+				if(item.BankTransfers != null)
+				{
+					foreach(var childItem in item.BankTransfers)
+					{
+						this.BankTransfers.Add(new BankTransfersDto(childItem, deep));
+					}
+				}
 				if(item.BankTransfers != null)
 				{
 					foreach(var childItem in item.BankTransfers)
@@ -71,6 +80,7 @@ namespace Banking.Models.Dto
 		
 		#region Child Relationships
 		
+		public IList<IBankTransfers> BankTransfers { get; set; }
 		public IList<IBankTransfers> BankTransfers { get; set; }
 
 		#endregion

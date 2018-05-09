@@ -31,6 +31,7 @@ namespace Banking.Models.Entity
 		public BankAccount()
 		{
 			this.BankTransfers = new List <BankTransfers>();
+			this.BankTransfers = new List <BankTransfers>();
 		}
 		
 		public BankAccount(IBankAccount item, bool deep = false)
@@ -43,9 +44,17 @@ namespace Banking.Models.Entity
 			this.CustomerId = item.CustomerId;
 			this.Locked = item.Locked;
 			this.BankTransfers = new List <BankTransfers>();
+			this.BankTransfers = new List <BankTransfers>();
 
 			if(deep)
 			{
+				if(item.BankTransfers != null)
+				{
+					foreach(var childItem in item.BankTransfers)
+					{
+						this.BankTransfers.Add(new BankTransfers(childItem, deep));
+					}
+				}
 				if(item.BankTransfers != null)
 				{
 					foreach(var childItem in item.BankTransfers)
@@ -71,6 +80,19 @@ namespace Banking.Models.Entity
 		
 		#region Child Relationships
 		
+		IList<IBankTransfers> IBankAccount.BankTransfers 
+		{ 
+			get
+			{
+				return (IList<IBankTransfers>)this.BankTransfers;
+			}
+			set
+			{
+				this.BankTransfers = (IList<BankTransfers>)value;
+			}			
+		}
+		
+		public virtual IList<BankTransfers> BankTransfers { get; set; }
 		IList<IBankTransfers> IBankAccount.BankTransfers 
 		{ 
 			get

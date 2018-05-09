@@ -92,7 +92,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Model
         {
             get
             {
-                switch(this.DatabaseGeneratedKeyType)
+                switch (this.DatabaseGeneratedKeyType)
                 {
                     case DatabaseGeneratedKeyType.Computed:
                         {
@@ -125,8 +125,12 @@ namespace DotNetScaffolder.Mapping.MetaData.Model
                 foreach (var rel in this.Relationships.Where(
                     u => u.DependencyRelationShip == RelationshipType.ForeignKeyChild && u.Render))
                 {
-                    var exists = retval.FirstOrDefault(u => u.RelatedTable == rel.RelatedTable);
-                    if (exists == null) retval.Add(rel);
+                    if (!retval.Any(u => u.ReferencedTableName == rel.ReferencedTableName &&
+                     u.SchemaName == rel.SchemaName &&
+                     u.ReferencedColumnName == rel.ReferencedColumnName))
+                    {
+                        retval.Add(rel);
+                    }
                 }
 
                 return retval;
@@ -142,8 +146,13 @@ namespace DotNetScaffolder.Mapping.MetaData.Model
                 foreach (var rel in this.Relationships.Where(
                     u => u.DependencyRelationShip == RelationshipType.ForeignKey && u.Render))
                 {
-                    var exists = retval.FirstOrDefault(u => u.RelatedTable == rel.RelatedTable);
-                    if (exists == null) retval.Add(rel);
+                    if (!retval.Any(u => u.ReferencedTableName == rel.ReferencedTableName &&
+                     u.SchemaName == rel.SchemaName &&
+                     u.ReferencedColumnName == rel.ReferencedColumnName &&
+                     u.ColumnName == rel.ColumnName))
+                    {
+                        retval.Add(rel);
+                    }
                 }
 
                 return retval;
@@ -203,7 +212,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Model
             {
                 int count = 0;
 
-                if(Columns != null)
+                if (Columns != null)
                 {
                     count = Columns.Count(o => o.IsPrimaryKey);
                 }

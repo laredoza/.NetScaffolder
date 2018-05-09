@@ -45,6 +45,7 @@ namespace Banking.Models.Dto
 			if(deep)
 			{
 				this.BankAccount = new BankAccountDto(item.BankAccount, deep);
+				this.BankAccount = new BankAccountDto(item.BankAccount, deep);
 			}
 		}
 		
@@ -67,6 +68,7 @@ namespace Banking.Models.Dto
 		
 		#region Parent Relationships
 		
+		public IBankAccount BankAccount { get; set; }
 		public IBankAccount BankAccount { get; set; }
 		
 		#endregion

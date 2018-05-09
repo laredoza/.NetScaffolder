@@ -12,11 +12,21 @@ namespace DotNetScaffolder.Components.Common
     {
         public static string FormatReferencedPropertyName(Relationship rel, INamingConvention nc = null, List<Relationship> relationships = null)
         {
-            string formattedName = string.IsNullOrEmpty(rel.RelationshipAlias) ? rel.ReferencedTableName : rel.RelationshipAlias;
+            return FormatName(rel.ReferencedTableName, rel.RelationshipAlias, rel.ReferencedColumnName, nc, relationships);
+        }
 
-            if(relationships != null && relationships.Count(o=> o.ReferencedTableName == formattedName) > 1)
+        public static string FormatParentPropertyName(Relationship rel, INamingConvention nc = null, List<Relationship> relationships = null)
+        {
+            return FormatName(rel.ReferencedTableName, rel.RelationshipAlias, rel.ColumnName, nc, relationships);
+        }
+
+        private static string FormatName(string tableName, string alias, string colName, INamingConvention nc = null, List<Relationship> relationships = null)
+        {
+            string formattedName = string.IsNullOrEmpty(alias) ? tableName : alias;
+
+            if (relationships != null && relationships.Count(o => o.ReferencedTableName == formattedName) > 1)
             {
-                formattedName = $"{formattedName}_{rel.ColumnName}";
+                formattedName = $"{formattedName}_{colName}";
             }
 
             return nc != null ? nc.ApplyNamingConvention(formattedName) : formattedName;
