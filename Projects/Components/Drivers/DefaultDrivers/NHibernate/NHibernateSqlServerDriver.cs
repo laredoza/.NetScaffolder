@@ -40,5 +40,10 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.NHibernate
         /// Gets the context attribute.
         /// </summary>
         public string ContextAttribute => string.Empty;
+
+        /// <summary>
+        /// The parent folder.
+        /// </summary>
+        public string ParentFolder => "NHibernate";
     }
 }
