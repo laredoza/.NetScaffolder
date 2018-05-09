@@ -1,34 +1,29 @@
 ﻿<#@ include file="ContextTemplate.ttinclude" #>
 <#+
-public class ContextGenerator : BaseGenerator
-{
-	public ContextDataType DataType {get;set;}
-	public EntityDataType EntityDataType {get;set;}
+    public class ContextGenerator : BaseGenerator
+    {
+        public ContextDataType DataType {get;set;}
+        public EntityDataType EntityDataType {get;set;}
 	
-	private ContextTemplate template = new ContextTemplate();
+        private ContextTemplate template = new ContextTemplate();
 
-	protected override void RunCore()
-	{
-		// Debugger.Break();
-		template.DataType = this.DataType;
-		template.EntityNamespace = EntityDataType.FullNamespace;
+        protected override void RunCore()
+        {
+            Debugger.Break();
+            template.DataType = this.DataType;
+            template.EntityNamespace = EntityDataType.FullNamespace;
 
-		foreach(var dbContext in DataType.Contexts)
-		{
-			template.ContextData = dbContext;
-			//if(!string.IsNullOrEmpty(dbContext.OutputPath))
-			//{
-				//template.RenderToFile(string.Format(@"{0}\{1}\{2}.g.cs", dbContext.OutputPath, dbContext.OutputFolder, dbContext.ContextName));
-			//}
-			//else
-			//{
-				//template.RenderToFile(string.Format(@"{0}\{1}.g.cs", dbContext.OutputFolder, dbContext.ContextName));	
-			//}
-            
-             template.Output.Project = @"..\..\Contexts\EF\SqlServer\RepositoryEFDotnet.Contexts.EF.SqlServer.csproj";
-             template.RenderToFile(string.Format(@"{0}.g.cs", dbContext.ContextName));
-		}
+            foreach(var dbContext in DataType.Contexts)
+            {
+                template.ContextData = dbContext;
 
-	}
-}
+                if(!string.IsNullOrEmpty(dbContext.OutputPath))
+                {
+                    template.Output.Project =  string.Format(dbContext.OutputPath, DataType.DriverType.Prefix);
+                }
+
+                template.RenderToFile(string.Format(@"{0}\{1}{2}.g.cs", dbContext.OutputFolder,DataType.DriverType.Prefix,dbContext.ContextName));
+            }
+        }
+    }
 #>

@@ -27,7 +27,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepositoryEFDotnet.Contexts
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepositoryEFDotnet.Data.Repositories.Repository", "Data\Repositories\Repository\RepositoryEFDotnet.Data.Repositories.Repository.csproj", "{DAB86AE4-F8E1-4D5E-BAF2-855D24D7A437}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepositoryEFDotnet.Data.Interface.ModelInterfaces", "Data\Interfaces\Interface\RepositoryEFDotnet.Data.Interface.ModelInterfaces.csproj", "{4F6D59B6-2C03-4A37-9670-BB46225AA6E1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepositoryEFDotnet.Data.Interfaces.Interface", "Data\Interfaces\Interface\RepositoryEFDotnet.Data.Interfaces.Interface.csproj", "{4F6D59B6-2C03-4A37-9670-BB46225AA6E1}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.4 Entities", "1.4 Entities", "{7DD8CB06-B007-4F1F-9489-2269D01798DB}"
 EndProject
@@ -50,8 +50,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{0358EBCF-3298-4E75-AEF3-E0491F34541A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepositoryEFDotnet.Core", "Core\RepositoryEFDotnet.Core.csproj", "{0333E000-6AAF-4E18-8747-2299A8231AB1}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepositoryEFDotnet.Data.Interface.RepositoryInterfaces", "Data\Interfaces\RepositoryInterfaces\RepositoryEFDotnet.Data.Interface.RepositoryInterfaces.csproj", "{69BF017D-9632-4BCA-859B-5D24A2C4B79A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -111,10 +109,6 @@ Global
 		{0333E000-6AAF-4E18-8747-2299A8231AB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0333E000-6AAF-4E18-8747-2299A8231AB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0333E000-6AAF-4E18-8747-2299A8231AB1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{69BF017D-9632-4BCA-859B-5D24A2C4B79A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{69BF017D-9632-4BCA-859B-5D24A2C4B79A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{69BF017D-9632-4BCA-859B-5D24A2C4B79A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{69BF017D-9632-4BCA-859B-5D24A2C4B79A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -137,7 +131,6 @@ Global
 		{61D46A6E-4E3A-4D37-9169-AED9B277D33B} = {0FBF991C-AD67-45A6-A890-9040E08D6D57}
 		{A8511725-544E-49BD-8451-4C8638ADC5BA} = {CA2EECAE-3E0F-4E4A-9D33-B5BFD3B0C76F}
 		{0333E000-6AAF-4E18-8747-2299A8231AB1} = {0358EBCF-3298-4E75-AEF3-E0491F34541A}
-		{69BF017D-9632-4BCA-859B-5D24A2C4B79A} = {15CDD5A5-0B4B-45FF-B771-E6213F43A443}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BAAA9DC0-A104-423F-8507-710C11070DF0}

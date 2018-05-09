@@ -40,15 +40,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entity\BankAccount.g.cs" />
-    <Compile Include="Entity\BankTransfers.g.cs" />
-    <Compile Include="Entity\Book.g.cs" />
-    <Compile Include="Entity\Country.g.cs" />
-    <Compile Include="Entity\Customer.g.cs" />
-    <Compile Include="Entity\Order.g.cs" />
-    <Compile Include="Entity\OrderDetails.g.cs" />
-    <Compile Include="Entity\Product.g.cs" />
-    <Compile Include="Entity\Software.g.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
