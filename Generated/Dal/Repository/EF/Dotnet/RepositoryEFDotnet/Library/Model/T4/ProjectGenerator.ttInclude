@@ -15,7 +15,7 @@ public class ProjectGenerator : BaseProjectGenerator
 		{
 			if(dataType is DtoInterfaceDataType)
 			{
-                Debugger.Break();
+                // Debugger.Break();
 				var iDtoGen = new DtoInterfaceGenerator();
 				iDtoGen.Models = domain.Tables;
 				iDtoGen.DataType = dataType as DtoInterfaceDataType;
@@ -24,7 +24,7 @@ public class ProjectGenerator : BaseProjectGenerator
 			
 			if(dataType is EntityDataType)
 			{
-                Debugger.Break();
+                // Debugger.Break();
 				var entityGen = new EntityGenerator();
 				entityGen.Models = domain.Tables;
 				entityGen.DataType = dataType as EntityDataType;
@@ -34,6 +34,7 @@ public class ProjectGenerator : BaseProjectGenerator
 
 			if(dataType is ContextDataType)
 			{
+                Debugger.Break();
 				var contxtGen = new ContextGenerator();
 				contxtGen.DataType = dataType as ContextDataType;
 				contxtGen.EntityDataType = dataTypes.FirstOrDefault(o => o is EntityDataType) as EntityDataType;

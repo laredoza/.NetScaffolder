@@ -5,7 +5,11 @@
     <DomainDefinition>
       <CollectionOptionId>0bc1b0c4-1e41-9146-82cf-599181ce4411</CollectionOptionId>
       <DriverId>2bc1b0c4-1e41-9146-82cf-599181ce4400</DriverId>
+<<<<<<< HEAD
+      <DriverTypeId>2bc1b0c4-1e41-9146-82cf-599181ce4411</DriverTypeId>
+=======
       <DriverTypeId>2bc1b0c4-1e41-9146-82cf-599181ce4410</DriverTypeId>
+>>>>>>> e8c2a787f45ba8f7f77728238b5541619f2f0ce7
       <Id>88e23444-4d85-4fd7-a1a7-e6d68e896281</Id>
       <Name>Domain1</Name>
       <NamingConventionId>1bc1b0c4-1e41-9146-82cf-599181ce4412</NamingConventionId>
