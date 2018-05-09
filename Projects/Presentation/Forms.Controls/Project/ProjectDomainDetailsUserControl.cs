@@ -468,6 +468,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project
             List<ComboboxItem> items = new List<ComboboxItem>();
             Guid value;
 
+            // Todo: Remove
             foreach (var driverType in ScaffoldConfig.Drivers)
             {
                 value = new Guid(driverType.Metadata["TypeIdMetaData"].ToString());
