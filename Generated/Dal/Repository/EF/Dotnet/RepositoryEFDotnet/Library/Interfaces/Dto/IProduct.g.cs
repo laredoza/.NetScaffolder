@@ -29,10 +29,10 @@ namespace Banking.Models.Interfaces
 		
 		int ProductId { get; set; }
 		string ProductDescription { get; set; }
-		decimal UnitPrice { get; set; }
+		Nullable<decimal> UnitPrice { get; set; }
 		string UnitAmount { get; set; }
 		string Publisher { get; set; }
-		short AmountInStock { get; set; }
+		Nullable<short> AmountInStock { get; set; }
 
 		#endregion
 		

@@ -79,9 +79,9 @@ namespace Banking.Models.Repository
         /// <summary>
         /// Load OrderDetails entities from the database using the UnitPrice field
         /// </summary>
-        /// <param name="unitprice">decimal</param>
+        /// <param name="unitprice">Nullable<decimal></param>
         /// <returns>IList<IOrderDetails></returns>
-		public IList<IOrderDetails> LoadByUnitPrice(decimal unitprice)
+		public IList<IOrderDetails> LoadByUnitPrice(Nullable<decimal> unitprice)
 		{
 			return this.UnitOfWork.AllMatching<OrderDetails>(o => o.UnitPrice == unitprice).ToList<IOrderDetails>();
 		}
@@ -89,9 +89,9 @@ namespace Banking.Models.Repository
         /// <summary>
         /// Load OrderDetails entities from the database using the Amount field
         /// </summary>
-        /// <param name="amount">short</param>
+        /// <param name="amount">Nullable<short></param>
         /// <returns>IList<IOrderDetails></returns>
-		public IList<IOrderDetails> LoadByAmount(short amount)
+		public IList<IOrderDetails> LoadByAmount(Nullable<short> amount)
 		{
 			return this.UnitOfWork.AllMatching<OrderDetails>(o => o.Amount == amount).ToList<IOrderDetails>();
 		}
@@ -99,9 +99,9 @@ namespace Banking.Models.Repository
         /// <summary>
         /// Load OrderDetails entities from the database using the Discount field
         /// </summary>
-        /// <param name="discount">float</param>
+        /// <param name="discount">Nullable<float></param>
         /// <returns>IList<IOrderDetails></returns>
-		public IList<IOrderDetails> LoadByDiscount(float discount)
+		public IList<IOrderDetails> LoadByDiscount(Nullable<float> discount)
 		{
 			return this.UnitOfWork.AllMatching<OrderDetails>(o => o.Discount == discount).ToList<IOrderDetails>();
 		}

@@ -224,7 +224,7 @@ namespace RepositoryEFDotnet.UnitTest
                 Photo = "Photo goes here",
                 PostalCode = "1234567890",
                 Telephone = "Test Phone number",
-                CountryId = 1
+                //CountryId = 1
             };
         }
 
@@ -254,7 +254,7 @@ namespace RepositoryEFDotnet.UnitTest
                 Amount = 50,
                 FromBankAccountId = 1,
                 ToBankAccountId = 1,
-                TransferDate = DateTime.Now
+                TransferDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 14, 10, 12)
             };
         }
 

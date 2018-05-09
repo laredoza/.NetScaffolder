@@ -56,23 +56,23 @@ namespace Banking.Models.Interfaces
         /// <summary>
         /// Load OrderDetails entities from the database using the UnitPrice field
         /// </summary>
-        /// <param name="unitprice">decimal</param>
+        /// <param name="unitprice">Nullable<decimal></param>
         /// <returns>IList<IOrderDetails></returns>
-		IList<IOrderDetails> LoadByUnitPrice(decimal unitprice);
+		IList<IOrderDetails> LoadByUnitPrice(Nullable<decimal> unitprice);
 
         /// <summary>
         /// Load OrderDetails entities from the database using the Amount field
         /// </summary>
-        /// <param name="amount">short</param>
+        /// <param name="amount">Nullable<short></param>
         /// <returns>IList<IOrderDetails></returns>
-		IList<IOrderDetails> LoadByAmount(short amount);
+		IList<IOrderDetails> LoadByAmount(Nullable<short> amount);
 
         /// <summary>
         /// Load OrderDetails entities from the database using the Discount field
         /// </summary>
-        /// <param name="discount">float</param>
+        /// <param name="discount">Nullable<float></param>
         /// <returns>IList<IOrderDetails></returns>
-		IList<IOrderDetails> LoadByDiscount(float discount);
+		IList<IOrderDetails> LoadByDiscount(Nullable<float> discount);
 
         /// <summary>
         /// Load all OrderDetails entities from the database.

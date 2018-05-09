@@ -59,9 +59,9 @@ namespace Banking.Models.Repository
         /// <summary>
         /// Load Order entities from the database using the CustomerId field
         /// </summary>
-        /// <param name="customerid">int</param>
+        /// <param name="customerid">Nullable<int></param>
         /// <returns>IList<IOrder></returns>
-		public IList<IOrder> LoadByCustomerId(int customerid)
+		public IList<IOrder> LoadByCustomerId(Nullable<int> customerid)
 		{
 			return this.UnitOfWork.AllMatching<Order>(o => o.CustomerId == customerid).ToList<IOrder>();
 		}
@@ -69,9 +69,9 @@ namespace Banking.Models.Repository
         /// <summary>
         /// Load Order entities from the database using the OrderDate field
         /// </summary>
-        /// <param name="orderdate">DateTime</param>
+        /// <param name="orderdate">Nullable<DateTime></param>
         /// <returns>IList<IOrder></returns>
-		public IList<IOrder> LoadByOrderDate(DateTime orderdate)
+		public IList<IOrder> LoadByOrderDate(Nullable<DateTime> orderdate)
 		{
 			return this.UnitOfWork.AllMatching<Order>(o => o.OrderDate == orderdate).ToList<IOrder>();
 		}
@@ -79,9 +79,9 @@ namespace Banking.Models.Repository
         /// <summary>
         /// Load Order entities from the database using the DeliveryDate field
         /// </summary>
-        /// <param name="deliverydate">DateTime</param>
+        /// <param name="deliverydate">Nullable<DateTime></param>
         /// <returns>IList<IOrder></returns>
-		public IList<IOrder> LoadByDeliveryDate(DateTime deliverydate)
+		public IList<IOrder> LoadByDeliveryDate(Nullable<DateTime> deliverydate)
 		{
 			return this.UnitOfWork.AllMatching<Order>(o => o.DeliveryDate == deliverydate).ToList<IOrder>();
 		}

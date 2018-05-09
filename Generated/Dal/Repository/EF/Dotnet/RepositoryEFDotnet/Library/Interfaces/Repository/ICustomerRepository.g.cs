@@ -105,9 +105,9 @@ namespace Banking.Models.Interfaces
         /// <summary>
         /// Load Customer entities from the database using the CountryId field
         /// </summary>
-        /// <param name="countryid">int</param>
+        /// <param name="countryid">Nullable<int></param>
         /// <returns>IList<ICustomer></returns>
-		IList<ICustomer> LoadByCountryId(int countryid);
+		IList<ICustomer> LoadByCountryId(Nullable<int> countryid);
 
         /// <summary>
         /// Load Customer entities from the database using the Photo field

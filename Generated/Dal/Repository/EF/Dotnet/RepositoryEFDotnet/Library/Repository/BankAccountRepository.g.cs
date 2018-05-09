@@ -79,9 +79,9 @@ namespace Banking.Models.Repository
         /// <summary>
         /// Load BankAccount entities from the database using the CustomerId field
         /// </summary>
-        /// <param name="customerid">int</param>
+        /// <param name="customerid">Nullable<int></param>
         /// <returns>IList<IBankAccount></returns>
-		public IList<IBankAccount> LoadByCustomerId(int customerid)
+		public IList<IBankAccount> LoadByCustomerId(Nullable<int> customerid)
 		{
 			return this.UnitOfWork.AllMatching<BankAccount>(o => o.CustomerId == customerid).ToList<IBankAccount>();
 		}

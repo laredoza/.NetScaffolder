@@ -88,7 +88,7 @@ namespace Banking.Models.Dto
 		public string PostalCode { get; set; }
 		public string Telephone { get; set; }
 		public string Fax { get; set; }
-		public int CountryId { get; set; }
+		public Nullable<int> CountryId { get; set; }
 		public string Photo { get; set; }
 		public bool IsEnabled { get; set; }
 

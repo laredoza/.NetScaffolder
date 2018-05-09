@@ -64,7 +64,7 @@ namespace Banking.Models.Entity
 		public int BankAccountId { get; set; }
 		public string BankAccountNumber { get; set; }
 		public decimal Balance { get; set; }
-		public int CustomerId { get; set; }
+		public Nullable<int> CustomerId { get; set; }
 		public bool Locked { get; set; }
 
 		#endregion

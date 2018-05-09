@@ -28,9 +28,9 @@ namespace Banking.Models.Interfaces
 		#region Fields
 		
 		int OrderId { get; set; }
-		int CustomerId { get; set; }
-		DateTime OrderDate { get; set; }
-		DateTime DeliveryDate { get; set; }
+		Nullable<int> CustomerId { get; set; }
+		Nullable<DateTime> OrderDate { get; set; }
+		Nullable<DateTime> DeliveryDate { get; set; }
 		string ShippingName { get; set; }
 		string ShippingAddress { get; set; }
 		string ShippingCity { get; set; }

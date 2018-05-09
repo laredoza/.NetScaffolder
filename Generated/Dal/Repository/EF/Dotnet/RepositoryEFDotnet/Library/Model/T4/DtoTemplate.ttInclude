@@ -74,7 +74,7 @@ namespace <#= DataType.FullNamespace #>
 		#region Fields
 		
 <#+ foreach(var col in DataType.MetaData.Columns){ #>
-		public <#= DataType.SourceType.MapDomainDataTypeToOutputType(col.DomainDataType) #> <#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #> { get; set; }
+		public <#= CSharpOutputMapper.MapToOutput(col) #> <#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #> { get; set; }
 <#+ } #>
 
 		#endregion

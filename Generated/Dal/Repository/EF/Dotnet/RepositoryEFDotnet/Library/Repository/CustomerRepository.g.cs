@@ -149,9 +149,9 @@ namespace Banking.Models.Repository
         /// <summary>
         /// Load Customer entities from the database using the CountryId field
         /// </summary>
-        /// <param name="countryid">int</param>
+        /// <param name="countryid">Nullable<int></param>
         /// <returns>IList<ICustomer></returns>
-		public IList<ICustomer> LoadByCountryId(int countryid)
+		public IList<ICustomer> LoadByCountryId(Nullable<int> countryid)
 		{
 			return this.UnitOfWork.AllMatching<Customer>(o => o.CountryId == countryid).ToList<ICustomer>();
 		}

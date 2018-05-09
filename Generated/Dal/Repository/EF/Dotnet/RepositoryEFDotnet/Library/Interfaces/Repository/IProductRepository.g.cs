@@ -49,9 +49,9 @@ namespace Banking.Models.Interfaces
         /// <summary>
         /// Load Product entities from the database using the UnitPrice field
         /// </summary>
-        /// <param name="unitprice">decimal</param>
+        /// <param name="unitprice">Nullable<decimal></param>
         /// <returns>IList<IProduct></returns>
-		IList<IProduct> LoadByUnitPrice(decimal unitprice);
+		IList<IProduct> LoadByUnitPrice(Nullable<decimal> unitprice);
 
         /// <summary>
         /// Load Product entities from the database using the UnitAmount field
@@ -70,9 +70,9 @@ namespace Banking.Models.Interfaces
         /// <summary>
         /// Load Product entities from the database using the AmountInStock field
         /// </summary>
-        /// <param name="amountinstock">short</param>
+        /// <param name="amountinstock">Nullable<short></param>
         /// <returns>IList<IProduct></returns>
-		IList<IProduct> LoadByAmountInStock(short amountinstock);
+		IList<IProduct> LoadByAmountInStock(Nullable<short> amountinstock);
 
         /// <summary>
         /// Load all Product entities from the database.

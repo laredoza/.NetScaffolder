@@ -50,11 +50,6 @@ namespace DotNetScaffolder.Components.Common.Contract
         INamingConvention NamingConvention { get; set; }
 
         /// <summary>
-        /// Gets or sets the source type.
-        /// </summary>
-        ISourceType SourceType { get; set; }
-
-        /// <summary>
         /// The create ui.
         /// </summary>
         /// <param name="parameters">

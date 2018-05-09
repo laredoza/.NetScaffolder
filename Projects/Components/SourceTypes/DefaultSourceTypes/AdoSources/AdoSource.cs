@@ -135,10 +135,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
 
         public abstract object Load(object parameters);
         
-
         public abstract DomainDataType MapDatabaseType(string databaseType, object extraInfo);
-
-        public abstract string MapDomainDataTypeToOutputType(DomainDataType type);
         
         public void Save(object parameters)
         {

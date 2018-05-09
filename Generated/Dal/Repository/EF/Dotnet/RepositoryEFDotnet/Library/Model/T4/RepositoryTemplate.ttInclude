@@ -51,9 +51,9 @@ namespace <#= DataType.FullNamespace #>
         /// <summary>
         /// Load the <#= DataType.ModelName #> entity from the database using the <#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #> primary key
         /// </summary>
-        /// <param name="<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName).ToLower() #>"><#= DataType.SourceType.MapDomainDataTypeToOutputType(col.DomainDataType) #></param>
+        /// <param name="<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName).ToLower() #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
         /// <returns>I<#= DataType.ModelName #></returns>
-		public I<#= DataType.ModelName #> LoadBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= DataType.SourceType.MapDomainDataTypeToOutputType(col.DomainDataType) #> <#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName).ToLower() #>)
+		public I<#= DataType.ModelName #> LoadBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= CSharpOutputMapper.MapToOutput(col) #> <#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName).ToLower() #>)
 		{
 			return this.UnitOfWork.FirstOrDefault<<#= DataType.ModelName #>>(o => o.<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #> == <#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName).ToLower() #>);
 		}
@@ -63,9 +63,9 @@ namespace <#= DataType.FullNamespace #>
         /// <summary>
         /// Load <#= DataType.ModelName #> entities from the database using the <#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #> primary key
         /// </summary>
-        /// <param name="<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName).ToLower() #>"><#= DataType.SourceType.MapDomainDataTypeToOutputType(col.DomainDataType) #></param>
+        /// <param name="<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName).ToLower() #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
         /// <returns><#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>></returns>
-		public <#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>> LoadBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= DataType.SourceType.MapDomainDataTypeToOutputType(col.DomainDataType) #> <#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName).ToLower() #>)
+		public <#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>> LoadBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= CSharpOutputMapper.MapToOutput(col) #> <#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName).ToLower() #>)
 		{
 			return this.UnitOfWork.AllMatching<<#= DataType.ModelName #>>(o => o.<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #> == <#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName).ToLower() #>).ToList<I<#= DataType.ModelName #>>();
 		}
@@ -76,9 +76,9 @@ namespace <#= DataType.FullNamespace #>
         /// <summary>
         /// Load <#= DataType.ModelName #> entities from the database using the <#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #> field
         /// </summary>
-        /// <param name="<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName).ToLower() #>"><#= DataType.SourceType.MapDomainDataTypeToOutputType(col.DomainDataType) #></param>
+        /// <param name="<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName).ToLower() #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
         /// <returns><#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>></returns>
-		public <#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>> LoadBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= DataType.SourceType.MapDomainDataTypeToOutputType(col.DomainDataType) #> <#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName).ToLower() #>)
+		public <#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>> LoadBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= CSharpOutputMapper.MapToOutput(col) #> <#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName).ToLower() #>)
 		{
 			return this.UnitOfWork.AllMatching<<#= DataType.ModelName #>>(o => o.<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #> == <#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName).ToLower() #>).ToList<I<#= DataType.ModelName #>>();
 		}
@@ -101,10 +101,10 @@ namespace <#= DataType.FullNamespace #>
         /// <summary>
         /// Search for <#= DataType.ModelName #> entities in the database by <#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>
         /// </summary>
-        /// <param name="<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName).ToLower() #>"><#= DataType.SourceType.MapDomainDataTypeToOutputType(col.DomainDataType) #></param>
+        /// <param name="<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName).ToLower() #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns><#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>></returns>
-		public <#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>> SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= DataType.SourceType.MapDomainDataTypeToOutputType(col.DomainDataType) #> <#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName).ToLower() #>, bool caseSensitive = false)
+		public <#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>> SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= CSharpOutputMapper.MapToOutput(col) #> <#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName).ToLower() #>, bool caseSensitive = false)
 		{		
 			if(caseSensitive) 
 			{
@@ -182,9 +182,9 @@ namespace <#= DataType.FullNamespace #>
         /// <summary>
         /// Delete the <#= DataType.ModelName #> entity from the database using the <#= DataType.NamingConvention.ApplyNamingConvention(pk.ColumnName) #>
         /// </summary>
-        /// <param name="<#= DataType.NamingConvention.ApplyNamingConvention(pk.ColumnName).ToLower() #>"><#= DataType.SourceType.MapDomainDataTypeToOutputType(pk.DomainDataType) #></param>
+        /// <param name="<#= DataType.NamingConvention.ApplyNamingConvention(pk.ColumnName).ToLower() #>"><#= CSharpOutputMapper.MapToOutput(pk) #></param>
         /// <returns>bool</returns>
-		public bool DeleteBy<#= DataType.NamingConvention.ApplyNamingConvention(pk.ColumnName) #>(<#= DataType.SourceType.MapDomainDataTypeToOutputType(pk.DomainDataType) #> <#= DataType.NamingConvention.ApplyNamingConvention(pk.ColumnName).ToLower() #>)
+		public bool DeleteBy<#= DataType.NamingConvention.ApplyNamingConvention(pk.ColumnName) #>(<#= CSharpOutputMapper.MapToOutput(pk) #> <#= DataType.NamingConvention.ApplyNamingConvention(pk.ColumnName).ToLower() #>)
 		{
 			var entityToDelete = this.UnitOfWork.FirstOrDefault<<#= DataType.ModelName #>>(o => o.<#= DataType.NamingConvention.ApplyNamingConvention(pk.ColumnName) #> == <#= DataType.NamingConvention.ApplyNamingConvention(pk.ColumnName).ToLower() #>);
 			

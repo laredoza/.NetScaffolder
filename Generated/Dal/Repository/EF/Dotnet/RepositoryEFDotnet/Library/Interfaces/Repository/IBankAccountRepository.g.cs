@@ -56,9 +56,9 @@ namespace Banking.Models.Interfaces
         /// <summary>
         /// Load BankAccount entities from the database using the CustomerId field
         /// </summary>
-        /// <param name="customerid">int</param>
+        /// <param name="customerid">Nullable<int></param>
         /// <returns>IList<IBankAccount></returns>
-		IList<IBankAccount> LoadByCustomerId(int customerid);
+		IList<IBankAccount> LoadByCustomerId(Nullable<int> customerid);
 
         /// <summary>
         /// Load BankAccount entities from the database using the Locked field

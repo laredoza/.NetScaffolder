@@ -30,7 +30,7 @@ namespace Banking.Models.Interfaces
 		int BankAccountId { get; set; }
 		string BankAccountNumber { get; set; }
 		decimal Balance { get; set; }
-		int CustomerId { get; set; }
+		Nullable<int> CustomerId { get; set; }
 		bool Locked { get; set; }
 
 		#endregion

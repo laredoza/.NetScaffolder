@@ -70,17 +70,6 @@ namespace DotNetScaffolder.Components.Common.Contract
         DomainDataType MapDatabaseType(string databaseType, object extraInfo);
 
         /// <summary>
-        /// The map domain data type to output type.
-        /// </summary>
-        /// <param name="type">
-        /// The type.
-        /// </param>
-        /// <returns>
-        /// The <see cref="string"/>.
-        /// </returns>
-        string MapDomainDataTypeToOutputType(DomainDataType type);
-
-        /// <summary>
         /// Save parameters
         /// </summary>
         /// <param name="parameters">

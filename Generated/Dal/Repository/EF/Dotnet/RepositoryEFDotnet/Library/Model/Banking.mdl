@@ -166,10 +166,10 @@
           </Columns>
           <DatabaseGeneratedKeyType>Identity</DatabaseGeneratedKeyType>
           <RelationShips>
-            <RelationShip ColumnName="FromBankAccountId" RelationShip="ForeignKey" ReferencedColumnName="BankAccountId" Render="true" SchemaName="dbo" ReferencedTableName="BankAccount" Multiplicity="Many" ReferencedMultiplicity="One" UserRelationship="false">
+            <RelationShip ColumnName="FromBankAccountId" RelationShip="ForeignKey" ReferencedColumnName="BankAccountId" RelationshipAlias="BankTransfersFrom" Render="true" SchemaName="dbo" ReferencedTableName="BankAccount" Multiplicity="Many" ReferencedMultiplicity="One" UserRelationship="false">
               <RelationshipName>FK_BankTransfers_BankAccount</RelationshipName>
             </RelationShip>
-            <RelationShip ColumnName="ToBankAccountId" RelationShip="ForeignKey" ReferencedColumnName="BankAccountId" Render="true" SchemaName="dbo" ReferencedTableName="BankAccount" Multiplicity="Many" ReferencedMultiplicity="One" UserRelationship="false">
+            <RelationShip ColumnName="ToBankAccountId" RelationShip="ForeignKey" ReferencedColumnName="BankAccountId" RelationshipAlias="BankTransfersTo" Render="true" SchemaName="dbo" ReferencedTableName="BankAccount" Multiplicity="Many" ReferencedMultiplicity="One" UserRelationship="false">
               <RelationshipName>FK_BankTransfers_BankAccount1</RelationshipName>
             </RelationShip>
           </RelationShips>

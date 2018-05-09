@@ -65,9 +65,9 @@ namespace Banking.Models.Entity
 		#region Fields
 		
 		public int OrderId { get; set; }
-		public int CustomerId { get; set; }
-		public DateTime OrderDate { get; set; }
-		public DateTime DeliveryDate { get; set; }
+		public Nullable<int> CustomerId { get; set; }
+		public Nullable<DateTime> OrderDate { get; set; }
+		public Nullable<DateTime> DeliveryDate { get; set; }
 		public string ShippingName { get; set; }
 		public string ShippingAddress { get; set; }
 		public string ShippingCity { get; set; }

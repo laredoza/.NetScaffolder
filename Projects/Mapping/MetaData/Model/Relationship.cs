@@ -57,6 +57,9 @@ namespace DotNetScaffolder.Mapping.MetaData.Model
         [XmlAttribute("ReferencedColumnName")]
         public string ReferencedColumnName { get; set; }
 
+        [XmlAttribute("RelationshipAlias")]
+        public string RelationshipAlias { get; set; }
+
         /// <summary>
         ///     Gets or sets the related table.
         /// </summary>

@@ -58,7 +58,7 @@ namespace RepositoryEFDotnet.UnitTest
         [TestMethod]
         public void CustomerRepository_Add()
         {
-            CountryRepository_Add();
+            //CountryRepository_Add();
 
             var repo = new CustomerRepository(Context);
             BaseRepositoryUnitTest_Customer_Add(repo);

@@ -110,50 +110,6 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
         }
 
         /// <summary>
-        /// The map domain data type to output type.
-        /// </summary>
-        /// <param name="type">
-        /// The type.
-        /// </param>
-        /// <returns>
-        /// The <see cref="string"/>.
-        /// </returns>
-        /// <exception cref="NotImplementedException">
-        /// </exception>
-        public override string MapDomainDataTypeToOutputType(DomainDataType type)
-        {
-            Logger.Trace("Started MapDomainDataTypeToOutputType()");
-
-            switch (type)
-            {
-                case DomainDataType.Int16:
-                    return "short";
-                case DomainDataType.Int32:
-                    return "int";
-                case DomainDataType.Int64:
-                    return "long";
-                case DomainDataType.Boolean:
-                    return "bool";
-                case DomainDataType.Short:
-                    return "byte";
-                case DomainDataType.String:
-                    return "string";
-                case DomainDataType.Decimal:
-                    return "decimal";
-                case DomainDataType.DateTime:
-                    return "DateTime";
-                case DomainDataType.Single:
-                    return "float";
-
-                // case case DomainDataType.Int16:
-                // // Todo: Do something valid with this
-                // return DomainDataType.String;
-                default:
-                    throw new NotImplementedException($"Invalid data type {type}");
-            }
-        }
-
-        /// <summary>
         /// The return file path.
         /// </summary>
         /// <param name="basePath">

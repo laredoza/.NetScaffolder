@@ -442,6 +442,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
                 this.RelatedTableName = this.DataSource.ReferencedTableName;
                 this.ForeignColumnName = this.DataSource.ReferencedColumnName;
                 this.ColumnName = this.DataSource.ColumnName;
+                this.txtRelationshipAlias.Text = this.DataSource.RelationshipAlias;
             }
             else
             {
@@ -474,5 +475,10 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         }
 
         #endregion
+
+        private void txtRelationshipAlias_TextChanged(object sender, EventArgs e)
+        {
+            this.DataSource.RelationshipAlias = txtRelationshipAlias.Text.Trim();
+        }
     }
 }

@@ -30,9 +30,9 @@ namespace Banking.Models.Interfaces
 		int OrderDetailsId { get; set; }
 		int OrderId { get; set; }
 		int ProductId { get; set; }
-		decimal UnitPrice { get; set; }
-		short Amount { get; set; }
-		float Discount { get; set; }
+		Nullable<decimal> UnitPrice { get; set; }
+		Nullable<short> Amount { get; set; }
+		Nullable<float> Discount { get; set; }
 
 		#endregion
 		

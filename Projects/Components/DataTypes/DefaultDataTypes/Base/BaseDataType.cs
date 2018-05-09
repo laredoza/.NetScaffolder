@@ -66,12 +66,6 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Base
         public INamingConvention NamingConvention { get; set; }
 
         /// <summary>
-        ///     Gets or sets the source type.
-        /// </summary>
-        [XmlIgnore]
-        public ISourceType SourceType { get; set; }
-
-        /// <summary>
         /// The create ui.
         /// </summary>
         /// <param name="parameters">

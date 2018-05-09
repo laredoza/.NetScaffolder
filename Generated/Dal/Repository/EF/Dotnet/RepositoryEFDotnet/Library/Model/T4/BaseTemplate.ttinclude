@@ -3,6 +3,7 @@
 <#@ assembly name="$(ProjectDir)Model\Package\Common.Logging.Core.dll" #>
 <#@ assembly name="$(ProjectDir)Model\Package\Common.Logging.dll" #>
 <#@ import namespace="DotNetScaffolder.Components.Common.Contract" #>
+<#@ import namespace="DotNetScaffolder.Components.Common" #>
 <#+
 public abstract class BaseTemplate : Template 
 {

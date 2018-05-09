@@ -69,9 +69,9 @@ namespace Banking.Models.Repository
         /// <summary>
         /// Load Product entities from the database using the UnitPrice field
         /// </summary>
-        /// <param name="unitprice">decimal</param>
+        /// <param name="unitprice">Nullable<decimal></param>
         /// <returns>IList<IProduct></returns>
-		public IList<IProduct> LoadByUnitPrice(decimal unitprice)
+		public IList<IProduct> LoadByUnitPrice(Nullable<decimal> unitprice)
 		{
 			return this.UnitOfWork.AllMatching<Product>(o => o.UnitPrice == unitprice).ToList<IProduct>();
 		}
@@ -99,9 +99,9 @@ namespace Banking.Models.Repository
         /// <summary>
         /// Load Product entities from the database using the AmountInStock field
         /// </summary>
-        /// <param name="amountinstock">short</param>
+        /// <param name="amountinstock">Nullable<short></param>
         /// <returns>IList<IProduct></returns>
-		public IList<IProduct> LoadByAmountInStock(short amountinstock)
+		public IList<IProduct> LoadByAmountInStock(Nullable<short> amountinstock)
 		{
 			return this.UnitOfWork.AllMatching<Product>(o => o.AmountInStock == amountinstock).ToList<IProduct>();
 		}

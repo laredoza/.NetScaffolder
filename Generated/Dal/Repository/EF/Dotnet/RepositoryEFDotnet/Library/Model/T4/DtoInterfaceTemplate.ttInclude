@@ -27,7 +27,7 @@ namespace <#= DataType.FullNamespace #>
 		#region Fields
 		
 <#+ foreach(var col in DataType.MetaData.Columns){ #>
-		<#= DataType.SourceType.MapDomainDataTypeToOutputType(col.DomainDataType) #> <#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #> { get; set; }
+		<#= CSharpOutputMapper.MapToOutput(col) #> <#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #> { get; set; }
 <#+ } #>
 
 		#endregion
@@ -35,10 +35,10 @@ namespace <#= DataType.FullNamespace #>
 		#region Child Relationships
 		
 <#+ foreach(var child in DataType.MetaData.DistinctChildRelationships.Where(o => o.ReferencedMultiplicity == RelationshipMultiplicity.Many)){ #>
-		<#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #>> <#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableNamePlural) #> { get; set; }
+		<#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #>> <#= RelationshipNameFormatting.FormatReferencedPropertyName(child, DataType.NamingConvention, DataType.MetaData.DistinctChildRelationships) #> { get; set; }
 <#+ } #>
 <#+ foreach(var child in DataType.MetaData.DistinctChildRelationships.Where(o => o.ReferencedMultiplicity != RelationshipMultiplicity.Many)){ #>
-		I<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #> <#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #> { get; set; }
+		I<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #> <#= RelationshipNameFormatting.FormatReferencedPropertyName(child, DataType.NamingConvention, DataType.MetaData.DistinctChildRelationships) #> { get; set; }
 <#+ } #>
 
 		#endregion

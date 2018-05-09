@@ -57,9 +57,9 @@ namespace Banking.Models.Entity
 		public int OrderDetailsId { get; set; }
 		public int OrderId { get; set; }
 		public int ProductId { get; set; }
-		public decimal UnitPrice { get; set; }
-		public short Amount { get; set; }
-		public float Discount { get; set; }
+		public Nullable<decimal> UnitPrice { get; set; }
+		public Nullable<short> Amount { get; set; }
+		public Nullable<float> Discount { get; set; }
 
 		#endregion
 		

@@ -42,23 +42,23 @@ namespace Banking.Models.Interfaces
         /// <summary>
         /// Load Order entities from the database using the CustomerId field
         /// </summary>
-        /// <param name="customerid">int</param>
+        /// <param name="customerid">Nullable<int></param>
         /// <returns>IList<IOrder></returns>
-		IList<IOrder> LoadByCustomerId(int customerid);
+		IList<IOrder> LoadByCustomerId(Nullable<int> customerid);
 
         /// <summary>
         /// Load Order entities from the database using the OrderDate field
         /// </summary>
-        /// <param name="orderdate">DateTime</param>
+        /// <param name="orderdate">Nullable<DateTime></param>
         /// <returns>IList<IOrder></returns>
-		IList<IOrder> LoadByOrderDate(DateTime orderdate);
+		IList<IOrder> LoadByOrderDate(Nullable<DateTime> orderdate);
 
         /// <summary>
         /// Load Order entities from the database using the DeliveryDate field
         /// </summary>
-        /// <param name="deliverydate">DateTime</param>
+        /// <param name="deliverydate">Nullable<DateTime></param>
         /// <returns>IList<IOrder></returns>
-		IList<IOrder> LoadByDeliveryDate(DateTime deliverydate);
+		IList<IOrder> LoadByDeliveryDate(Nullable<DateTime> deliverydate);
 
         /// <summary>
         /// Load Order entities from the database using the ShippingName field

@@ -65,10 +65,10 @@ namespace Banking.Models.Dto
 		
 		public int ProductId { get; set; }
 		public string ProductDescription { get; set; }
-		public decimal UnitPrice { get; set; }
+		public Nullable<decimal> UnitPrice { get; set; }
 		public string UnitAmount { get; set; }
 		public string Publisher { get; set; }
-		public short AmountInStock { get; set; }
+		public Nullable<short> AmountInStock { get; set; }
 
 		#endregion
 		

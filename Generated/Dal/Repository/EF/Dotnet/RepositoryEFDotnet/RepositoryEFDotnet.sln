@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContextEFDotnet.Library", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetScaffolder.Test", "..\..\..\..\..\..\Tests\CodeGenerator\DotNetScaffolder.Test.csproj", "{96B8860E-531C-405F-9ABF-2FAE4E8F2759}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{42FB2BD4-B411-4B8B-84C0-8E12125F1378}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EF DotNet", "EF DotNet", "{FED5DA98-9921-4BAF-89A1-60A58667D7E4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,6 +40,12 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{19D63602-BD17-49F2-8335-E75C6813260A} = {FED5DA98-9921-4BAF-89A1-60A58667D7E4}
+		{14988671-1B3C-4977-BF65-8A0451FB2A8B} = {42FB2BD4-B411-4B8B-84C0-8E12125F1378}
+		{F7E34A41-4A37-495E-8A23-F0177FE07CE6} = {FED5DA98-9921-4BAF-89A1-60A58667D7E4}
+		{96B8860E-531C-405F-9ABF-2FAE4E8F2759} = {42FB2BD4-B411-4B8B-84C0-8E12125F1378}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BAAA9DC0-A104-423F-8507-710C11070DF0}

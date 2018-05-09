@@ -37,7 +37,7 @@ namespace Banking.Models.Interfaces
 		string PostalCode { get; set; }
 		string Telephone { get; set; }
 		string Fax { get; set; }
-		int CountryId { get; set; }
+		Nullable<int> CountryId { get; set; }
 		string Photo { get; set; }
 		bool IsEnabled { get; set; }
 
@@ -45,8 +45,8 @@ namespace Banking.Models.Interfaces
 		
 		#region Child Relationships
 		
-		IList<IBankAccount> BankAccounts { get; set; }
-		IList<IOrder> Orders { get; set; }
+		IList<IBankAccount> BankAccount { get; set; }
+		IList<IOrder> Order { get; set; }
 
 		#endregion
 		
