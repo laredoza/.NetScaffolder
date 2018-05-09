@@ -18,16 +18,17 @@ public class ContextGenerator : BaseGenerator
 		foreach(var dbContext in DataType.Contexts)
 		{
 			template.ContextData = dbContext;
-			if(!string.IsNullOrEmpty(dbContext.OutputPath))
-			{
-				template.RenderToFile(string.Format(@"{0}\{1}\{2}.g.cs", dbContext.OutputPath, dbContext.OutputFolder, dbContext.ContextName));
-			}
-			else
-			{
-				template.RenderToFile(string.Format(@"{0}\{1}.g.cs", dbContext.OutputFolder, dbContext.ContextName));	
-			}
-            // template.Output.Project = @"..\..\Context\EF\Oracle\RepositoryEFDotnet.Context.EF.Oracle.csproj";
-            // template.RenderToFile(string.Format(@"{0}.g.cs", dbContext.ContextName));
+			//if(!string.IsNullOrEmpty(dbContext.OutputPath))
+			//{
+				//template.RenderToFile(string.Format(@"{0}\{1}\{2}.g.cs", dbContext.OutputPath, dbContext.OutputFolder, dbContext.ContextName));
+			//}
+			//else
+			//{
+				//template.RenderToFile(string.Format(@"{0}\{1}.g.cs", dbContext.OutputFolder, dbContext.ContextName));	
+			//}
+            
+             template.Output.Project = @"..\..\Contexts\EF\SqlServer\RepositoryEFDotnet.Contexts.EF.SqlServer.csproj";
+             template.RenderToFile(string.Format(@"{0}.g.cs", dbContext.ContextName));
 		}
 	}
 }

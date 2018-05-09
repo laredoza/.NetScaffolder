@@ -60,6 +60,11 @@
     <Content Include="RunGenerator.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>RunGenerator.cs</LastGenOutput>
+      <LastOutputs>
+..\..\Contexts\EF\SqlServer\AccountContext.g.cs
+..\..\Contexts\EF\SqlServer\CustomerContext.g.cs
+..\..\Contexts\EF\SqlServer\FullContext.g.cs
+</LastOutputs>
     </Content>
   </ItemGroup>
   <ItemGroup>
@@ -85,6 +90,9 @@
       <Project>{0333E000-6AAF-4E18-8747-2299A8231AB1}</Project>
       <Name>RepositoryEFDotnet.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
