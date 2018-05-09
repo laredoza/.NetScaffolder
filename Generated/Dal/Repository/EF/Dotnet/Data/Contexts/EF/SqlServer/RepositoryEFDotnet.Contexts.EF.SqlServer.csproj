@@ -48,6 +48,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccountContext.g.cs" />
+    <Compile Include="Context\SqlServerAccountContext.g.cs" />
+    <Compile Include="Context\SqlServerCustomerContext.g.cs" />
+    <Compile Include="Context\SqlServerFullContext.g.cs" />
     <Compile Include="CustomerContext.g.cs" />
     <Compile Include="FullContext.g.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
