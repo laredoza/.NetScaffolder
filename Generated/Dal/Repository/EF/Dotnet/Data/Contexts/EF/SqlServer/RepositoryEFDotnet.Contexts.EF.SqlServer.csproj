@@ -56,5 +56,11 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Base\RepositoryEFDotnet.Contexts.EF.Base.csproj">
+      <Project>{A8511725-544E-49BD-8451-4C8638ADC5BA}</Project>
+      <Name>RepositoryEFDotnet.Contexts.EF.Base</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
