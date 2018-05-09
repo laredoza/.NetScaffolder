@@ -30,8 +30,8 @@ namespace Banking.Models.Dto
 		
 		public CustomerDto()
 		{
-			this.BankAccounts = new List <IBankAccount>();
-			this.Orders = new List <IOrder>();
+			this.BankAccount = new List <IBankAccount>();
+			this.Order = new List <IOrder>();
 		}
 		
 		public CustomerDto(ICustomer item, bool deep = false)
@@ -51,23 +51,23 @@ namespace Banking.Models.Dto
 			this.CountryId = item.CountryId;
 			this.Photo = item.Photo;
 			this.IsEnabled = item.IsEnabled;
-			this.BankAccounts = new List <IBankAccount>();
-			this.Orders = new List <IOrder>();
+			this.BankAccount = new List <IBankAccount>();
+			this.Order = new List <IOrder>();
 
 			if(deep)
 			{
-				if(item.BankAccounts != null)
+				if(item.BankAccount != null)
 				{
-					foreach(var childItem in item.BankAccounts)
+					foreach(var childItem in item.BankAccount)
 					{
-						this.BankAccounts.Add(new BankAccountDto(childItem, deep));
+						this.BankAccount.Add(new BankAccountDto(childItem, deep));
 					}
 				}
-				if(item.Orders != null)
+				if(item.Order != null)
 				{
-					foreach(var childItem in item.Orders)
+					foreach(var childItem in item.Order)
 					{
-						this.Orders.Add(new OrderDto(childItem, deep));
+						this.Order.Add(new OrderDto(childItem, deep));
 					}
 				}
 				this.Country = new CountryDto(item.Country, deep);
@@ -96,8 +96,8 @@ namespace Banking.Models.Dto
 		
 		#region Child Relationships
 		
-		public IList<IBankAccount> BankAccounts { get; set; }
-		public IList<IOrder> Orders { get; set; }
+		public IList<IBankAccount> BankAccount { get; set; }
+		public IList<IOrder> Order { get; set; }
 
 		#endregion
 		

@@ -32,7 +32,7 @@ namespace <#= DataType.FullNamespace #>
 		public <#= DataType.DtoNameFull #>()
 		{
 <#+ foreach(var child in DataType.MetaData.DistinctChildRelationships.Where(o => o.ReferencedMultiplicity == RelationshipMultiplicity.Many)){ #>
-			this.<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableNamePlural) #> = new <#= DataType.CollectionOption.ClassName #> <I<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #>>();
+			this.<#= RelationshipNameFormatting.FormatReferencedPropertyName(child, DataType.NamingConvention, DataType.MetaData.DistinctChildRelationships) #> = new <#= DataType.CollectionOption.ClassName #> <I<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #>>();
 <#+ } #>
 		}
 		
@@ -45,17 +45,17 @@ namespace <#= DataType.FullNamespace #>
 <#+ } #>
 
 <#+ foreach(var child in DataType.MetaData.DistinctChildRelationships.Where(o => o.ReferencedMultiplicity == RelationshipMultiplicity.Many)){ #>
-			this.<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableNamePlural) #> = new <#= DataType.CollectionOption.ClassName #> <I<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #>>();
+			this.<#= RelationshipNameFormatting.FormatReferencedPropertyName(child, DataType.NamingConvention, DataType.MetaData.DistinctChildRelationships) #> = new <#= DataType.CollectionOption.ClassName #> <I<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #>>();
 <#+ } #>
 
 			if(deep)
 			{
 <#+ foreach(var child in DataType.MetaData.DistinctChildRelationships.Where(o => o.ReferencedMultiplicity == RelationshipMultiplicity.Many)){ #>
-				if(item.<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableNamePlural) #> != null)
+				if(item.<#= RelationshipNameFormatting.FormatReferencedPropertyName(child, DataType.NamingConvention, DataType.MetaData.DistinctChildRelationships) #> != null)
 				{
-					foreach(var childItem in item.<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableNamePlural) #>)
+					foreach(var childItem in item.<#= RelationshipNameFormatting.FormatReferencedPropertyName(child, DataType.NamingConvention, DataType.MetaData.DistinctChildRelationships) #>)
 					{
-						this.<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableNamePlural) #>.Add(new <#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #><#= DataType.PostFix #>(childItem, deep));
+						this.<#= RelationshipNameFormatting.FormatReferencedPropertyName(child, DataType.NamingConvention, DataType.MetaData.DistinctChildRelationships) #>.Add(new <#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #><#= DataType.PostFix #>(childItem, deep));
 					}
 				}
 <#+ } #>
@@ -63,7 +63,7 @@ namespace <#= DataType.FullNamespace #>
 				this.<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #> = new <#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #><#= DataType.PostFix #>(item.<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #>, deep);
 <#+ } #>
 <#+ foreach(var parent in DataType.MetaData.DistinctParentRelationships){ #>
-				this.<#= DataType.NamingConvention.ApplyNamingConvention(parent.ReferencedTableName) #> = new <#= DataType.NamingConvention.ApplyNamingConvention(parent.ReferencedTableName) #><#= DataType.PostFix #>(item.<#= DataType.NamingConvention.ApplyNamingConvention(parent.ReferencedTableName) #>, deep);
+				this.<#= RelationshipNameFormatting.FormatParentPropertyName(parent, DataType.NamingConvention, DataType.MetaData.DistinctParentRelationships) #> = new <#= DataType.NamingConvention.ApplyNamingConvention(parent.ReferencedTableName) #><#= DataType.PostFix #>(item.<#= RelationshipNameFormatting.FormatParentPropertyName(parent, DataType.NamingConvention, DataType.MetaData.DistinctParentRelationships) #>, deep);
 <#+ } #>
 			}
 		}
@@ -82,7 +82,7 @@ namespace <#= DataType.FullNamespace #>
 		#region Child Relationships
 		
 <#+ foreach(var child in DataType.MetaData.DistinctChildRelationships.Where(o => o.ReferencedMultiplicity == RelationshipMultiplicity.Many)){ #>
-		public <#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #>> <#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableNamePlural) #> { get; set; }
+		public <#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #>> <#= RelationshipNameFormatting.FormatReferencedPropertyName(child, DataType.NamingConvention, DataType.MetaData.DistinctChildRelationships) #> { get; set; }
 <#+ } #>
 <#+ foreach(var child in DataType.MetaData.DistinctChildRelationships.Where(o => o.ReferencedMultiplicity != RelationshipMultiplicity.Many)){ #>
 		public I<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #> <#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #> { get; set; }
@@ -93,7 +93,7 @@ namespace <#= DataType.FullNamespace #>
 		#region Parent Relationships
 		
 <#+ foreach(var parent in DataType.MetaData.DistinctParentRelationships){ #>
-		public I<#= DataType.NamingConvention.ApplyNamingConvention(parent.ReferencedTableName) #> <#= DataType.NamingConvention.ApplyNamingConvention(parent.ReferencedTableName) #> { get; set; }
+		public I<#= DataType.NamingConvention.ApplyNamingConvention(parent.ReferencedTableName) #> <#= RelationshipNameFormatting.FormatParentPropertyName(parent, DataType.NamingConvention, DataType.MetaData.DistinctParentRelationships) #> { get; set; }
 <#+ } #>
 		
 		#endregion
