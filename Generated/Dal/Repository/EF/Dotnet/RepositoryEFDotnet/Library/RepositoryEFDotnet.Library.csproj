@@ -46,6 +46,12 @@
     <Reference Include="MySql.Data.Entity.EF6, Version=6.10.7.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <HintPath>..\packages\MySql.Data.Entity.6.10.7\lib\net452\MySql.Data.Entity.EF6.dll</HintPath>
     </Reference>
+    <Reference Include="Oracle.ManagedDataAccess, Version=4.122.1.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL">
+      <HintPath>..\packages\Oracle.ManagedDataAccess.12.2.1100\lib\net40\Oracle.ManagedDataAccess.dll</HintPath>
+    </Reference>
+    <Reference Include="Oracle.ManagedDataAccess.EntityFramework, Version=6.122.1.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL">
+      <HintPath>..\packages\Oracle.ManagedDataAccess.EntityFramework.12.2.1100\lib\net45\Oracle.ManagedDataAccess.EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -67,9 +73,8 @@
   <ItemGroup>
     <Compile Include="Base\BaseContext.cs" />
     <Compile Include="Base\UowRepository.cs" />
-    <Compile Include="Context\AccountContext.g.cs" />
-    <Compile Include="Context\CustomerContext.g.cs" />
-    <Compile Include="Context\FullContext.g.cs" />
+    <Compile Include="Config\OracleDbConfiguration.cs" />
+    <Compile Include="Config\OracleHistory.cs" />
     <Compile Include="Dto\BankAccountDto.g.cs" />
     <Compile Include="Dto\BankTransfersDto.g.cs" />
     <Compile Include="Dto\BookDto.g.cs" />
@@ -163,9 +168,9 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>RunGenerator.cs</LastGenOutput>
       <LastOutputs>
-.\Context\AccountContext.g.cs
-.\Context\CustomerContext.g.cs
-.\Context\FullContext.g.cs
+..\..\Context\EF\Oracle\AccountContext.g.cs
+..\..\Context\EF\Oracle\CustomerContext.g.cs
+..\..\Context\EF\Oracle\FullContext.g.cs
 .\Dto\BankAccountDto.g.cs
 .\Dto\BankTransfersDto.g.cs
 .\Dto\BookDto.g.cs
