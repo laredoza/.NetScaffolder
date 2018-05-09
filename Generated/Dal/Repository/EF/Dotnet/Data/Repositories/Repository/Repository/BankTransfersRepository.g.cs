@@ -51,7 +51,7 @@ namespace Banking.Models.Repository
         /// </summary>
         /// <param name="banktransferid">int</param>
         /// <returns>IBankTransfers</returns>
-		public IBankTransfers LoadByBankTransferId(int banktransferid)
+		public virtual IBankTransfers LoadByBankTransferId(int banktransferid)
 		{
 			return this.UnitOfWork.FirstOrDefault<BankTransfers>(o => o.BankTransferId == banktransferid);
 		}
@@ -61,7 +61,7 @@ namespace Banking.Models.Repository
         /// </summary>
         /// <param name="frombankaccountid">int</param>
         /// <returns>IList<IBankTransfers></returns>
-		public IList<IBankTransfers> LoadByFromBankAccountId(int frombankaccountid)
+		public virtual IList<IBankTransfers> LoadByFromBankAccountId(int frombankaccountid)
 		{
 			return this.UnitOfWork.AllMatching<BankTransfers>(o => o.FromBankAccountId == frombankaccountid).ToList<IBankTransfers>();
 		}
@@ -71,7 +71,7 @@ namespace Banking.Models.Repository
         /// </summary>
         /// <param name="tobankaccountid">int</param>
         /// <returns>IList<IBankTransfers></returns>
-		public IList<IBankTransfers> LoadByToBankAccountId(int tobankaccountid)
+		public virtual IList<IBankTransfers> LoadByToBankAccountId(int tobankaccountid)
 		{
 			return this.UnitOfWork.AllMatching<BankTransfers>(o => o.ToBankAccountId == tobankaccountid).ToList<IBankTransfers>();
 		}
@@ -81,7 +81,7 @@ namespace Banking.Models.Repository
         /// </summary>
         /// <param name="amount">decimal</param>
         /// <returns>IList<IBankTransfers></returns>
-		public IList<IBankTransfers> LoadByAmount(decimal amount)
+		public virtual IList<IBankTransfers> LoadByAmount(decimal amount)
 		{
 			return this.UnitOfWork.AllMatching<BankTransfers>(o => o.Amount == amount).ToList<IBankTransfers>();
 		}
@@ -91,7 +91,7 @@ namespace Banking.Models.Repository
         /// </summary>
         /// <param name="transferdate">DateTime</param>
         /// <returns>IList<IBankTransfers></returns>
-		public IList<IBankTransfers> LoadByTransferDate(DateTime transferdate)
+		public virtual IList<IBankTransfers> LoadByTransferDate(DateTime transferdate)
 		{
 			return this.UnitOfWork.AllMatching<BankTransfers>(o => o.TransferDate == transferdate).ToList<IBankTransfers>();
 		}
@@ -100,7 +100,7 @@ namespace Banking.Models.Repository
         /// Load all BankTransfers entities from the database.
         /// </summary>
         /// <returns>IList<IBankTransfers></returns>
-		public IList<IBankTransfers> LoadAll()
+		public virtual IList<IBankTransfers> LoadAll()
 		{
 			return this.UnitOfWork.GetAll<BankTransfers>().ToList<IBankTransfers>();
 		}
@@ -118,7 +118,7 @@ namespace Banking.Models.Repository
         /// </summary>
         /// <param name="entity">IBankTransfers</param>
         /// <returns>bool</returns>
-		public bool Save(IBankTransfers entity)
+		public virtual bool Save(IBankTransfers entity)
 		{
 			var entityToSave = new BankTransfers(entity, false);
 			return this.UnitOfWork.Add(entityToSave);
@@ -129,7 +129,7 @@ namespace Banking.Models.Repository
         /// </summary>
         /// <param name="entity">IBankTransfers</param>
         /// <returns>bool</returns>
-		public bool Update(IBankTransfers entity)
+		public virtual bool Update(IBankTransfers entity)
 		{
 			bool doUpdate = false;
 			var entityToUpdate = this.UnitOfWork.FirstOrDefault<BankTransfers>(o => o.BankTransferId == entity.BankTransferId);
@@ -159,7 +159,7 @@ namespace Banking.Models.Repository
         /// </summary>
         /// <param name="entity">IBankTransfers</param>
         /// <returns>bool</returns>
-		public bool Delete(IBankTransfers entity)
+		public virtual bool Delete(IBankTransfers entity)
 		{		
 			var entityToDelete = this.UnitOfWork.FirstOrDefault<BankTransfers>(o => o.BankTransferId == entity.BankTransferId);
 			
@@ -176,7 +176,7 @@ namespace Banking.Models.Repository
         /// </summary>
         /// <param name="banktransferid">int</param>
         /// <returns>bool</returns>
-		public bool DeleteByBankTransferId(int banktransferid)
+		public virtual bool DeleteByBankTransferId(int banktransferid)
 		{
 			var entityToDelete = this.UnitOfWork.FirstOrDefault<BankTransfers>(o => o.BankTransferId == banktransferid);
 			

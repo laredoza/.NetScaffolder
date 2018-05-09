@@ -51,7 +51,7 @@ namespace Banking.Models.Repository
         /// </summary>
         /// <param name="productid">int</param>
         /// <returns>IProduct</returns>
-		public IProduct LoadByProductId(int productid)
+		public virtual IProduct LoadByProductId(int productid)
 		{
 			return this.UnitOfWork.FirstOrDefault<Product>(o => o.ProductId == productid);
 		}
@@ -61,7 +61,7 @@ namespace Banking.Models.Repository
         /// </summary>
         /// <param name="productdescription">string</param>
         /// <returns>IList<IProduct></returns>
-		public IList<IProduct> LoadByProductDescription(string productdescription)
+		public virtual IList<IProduct> LoadByProductDescription(string productdescription)
 		{
 			return this.UnitOfWork.AllMatching<Product>(o => o.ProductDescription == productdescription).ToList<IProduct>();
 		}
@@ -71,7 +71,7 @@ namespace Banking.Models.Repository
         /// </summary>
         /// <param name="unitprice">Nullable<decimal></param>
         /// <returns>IList<IProduct></returns>
-		public IList<IProduct> LoadByUnitPrice(Nullable<decimal> unitprice)
+		public virtual IList<IProduct> LoadByUnitPrice(Nullable<decimal> unitprice)
 		{
 			return this.UnitOfWork.AllMatching<Product>(o => o.UnitPrice == unitprice).ToList<IProduct>();
 		}
@@ -81,7 +81,7 @@ namespace Banking.Models.Repository
         /// </summary>
         /// <param name="unitamount">string</param>
         /// <returns>IList<IProduct></returns>
-		public IList<IProduct> LoadByUnitAmount(string unitamount)
+		public virtual IList<IProduct> LoadByUnitAmount(string unitamount)
 		{
 			return this.UnitOfWork.AllMatching<Product>(o => o.UnitAmount == unitamount).ToList<IProduct>();
 		}
@@ -91,7 +91,7 @@ namespace Banking.Models.Repository
         /// </summary>
         /// <param name="publisher">string</param>
         /// <returns>IList<IProduct></returns>
-		public IList<IProduct> LoadByPublisher(string publisher)
+		public virtual IList<IProduct> LoadByPublisher(string publisher)
 		{
 			return this.UnitOfWork.AllMatching<Product>(o => o.Publisher == publisher).ToList<IProduct>();
 		}
@@ -101,7 +101,7 @@ namespace Banking.Models.Repository
         /// </summary>
         /// <param name="amountinstock">Nullable<short></param>
         /// <returns>IList<IProduct></returns>
-		public IList<IProduct> LoadByAmountInStock(Nullable<short> amountinstock)
+		public virtual IList<IProduct> LoadByAmountInStock(Nullable<short> amountinstock)
 		{
 			return this.UnitOfWork.AllMatching<Product>(o => o.AmountInStock == amountinstock).ToList<IProduct>();
 		}
@@ -110,7 +110,7 @@ namespace Banking.Models.Repository
         /// Load all Product entities from the database.
         /// </summary>
         /// <returns>IList<IProduct></returns>
-		public IList<IProduct> LoadAll()
+		public virtual IList<IProduct> LoadAll()
 		{
 			return this.UnitOfWork.GetAll<Product>().ToList<IProduct>();
 		}
@@ -125,7 +125,7 @@ namespace Banking.Models.Repository
         /// <param name="productdescription">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<IProduct></returns>
-		public IList<IProduct> SearchByProductDescription(string productdescription, bool caseSensitive = false)
+		public virtual IList<IProduct> SearchByProductDescription(string productdescription, bool caseSensitive = false)
 		{		
 			if(caseSensitive) 
 			{
@@ -143,7 +143,7 @@ namespace Banking.Models.Repository
         /// <param name="unitamount">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<IProduct></returns>
-		public IList<IProduct> SearchByUnitAmount(string unitamount, bool caseSensitive = false)
+		public virtual IList<IProduct> SearchByUnitAmount(string unitamount, bool caseSensitive = false)
 		{		
 			if(caseSensitive) 
 			{
@@ -161,7 +161,7 @@ namespace Banking.Models.Repository
         /// <param name="publisher">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<IProduct></returns>
-		public IList<IProduct> SearchByPublisher(string publisher, bool caseSensitive = false)
+		public virtual IList<IProduct> SearchByPublisher(string publisher, bool caseSensitive = false)
 		{		
 			if(caseSensitive) 
 			{
@@ -182,7 +182,7 @@ namespace Banking.Models.Repository
         /// </summary>
         /// <param name="entity">IProduct</param>
         /// <returns>bool</returns>
-		public bool Save(IProduct entity)
+		public virtual bool Save(IProduct entity)
 		{
 			var entityToSave = new Product(entity, false);
 			return this.UnitOfWork.Add(entityToSave);
@@ -193,7 +193,7 @@ namespace Banking.Models.Repository
         /// </summary>
         /// <param name="entity">IProduct</param>
         /// <returns>bool</returns>
-		public bool Update(IProduct entity)
+		public virtual bool Update(IProduct entity)
 		{
 			bool doUpdate = false;
 			var entityToUpdate = this.UnitOfWork.FirstOrDefault<Product>(o => o.ProductId == entity.ProductId);
@@ -224,7 +224,7 @@ namespace Banking.Models.Repository
         /// </summary>
         /// <param name="entity">IProduct</param>
         /// <returns>bool</returns>
-		public bool Delete(IProduct entity)
+		public virtual bool Delete(IProduct entity)
 		{		
 			var entityToDelete = this.UnitOfWork.FirstOrDefault<Product>(o => o.ProductId == entity.ProductId);
 			
@@ -241,7 +241,7 @@ namespace Banking.Models.Repository
         /// </summary>
         /// <param name="productid">int</param>
         /// <returns>bool</returns>
-		public bool DeleteByProductId(int productid)
+		public virtual bool DeleteByProductId(int productid)
 		{
 			var entityToDelete = this.UnitOfWork.FirstOrDefault<Product>(o => o.ProductId == productid);
 			

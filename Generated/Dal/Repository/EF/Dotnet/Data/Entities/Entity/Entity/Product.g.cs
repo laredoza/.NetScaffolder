@@ -73,8 +73,10 @@ namespace Banking.Models.Entity
 		#endregion
 		
 		#region Child Relationships
-		
-		IList<IOrderDetails> IProduct.OrderDetails 
+        
+        public virtual IList<OrderDetails> OrderDetails { get; set; }
+
+        IList<IOrderDetails> IProduct.OrderDetails 
 		{ 
 			get
 			{
@@ -85,9 +87,9 @@ namespace Banking.Models.Entity
 				this.OrderDetails = (IList<OrderDetails>)value;
 			}			
 		}
-		
-		public virtual IList<OrderDetails> OrderDetails { get; set; }
-		
+        
+        public virtual Book Book { get; set; }
+
 		IBook IProduct.Book 
 		{ 
 			get
@@ -99,9 +101,9 @@ namespace Banking.Models.Entity
 				this.Book = (Book)value;
 			}
 		}
-		
-		public virtual Book Book { get; set; }
-		
+        
+        public virtual Software Software { get; set; }
+
 		ISoftware IProduct.Software 
 		{ 
 			get
@@ -114,12 +116,9 @@ namespace Banking.Models.Entity
 			}
 		}
 		
-		public virtual Software Software { get; set; }
-		
 		#endregion
 		
 		#region Parent Relationships
-
 		
 		#endregion
 	}

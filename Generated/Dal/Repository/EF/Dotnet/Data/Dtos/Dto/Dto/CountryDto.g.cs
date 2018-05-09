@@ -30,7 +30,7 @@ namespace Banking.Models.Dto
 		
 		public CountryDto()
 		{
-			this.Customers = new List <ICustomer>();
+			this.Customer = new List <ICustomer>();
 		}
 		
 		public CountryDto(ICountry item, bool deep = false)
@@ -39,15 +39,15 @@ namespace Banking.Models.Dto
 			
 			this.CountryId = item.CountryId;
 			this.CountryName = item.CountryName;
-			this.Customers = new List <ICustomer>();
+			this.Customer = new List <ICustomer>();
 
 			if(deep)
 			{
-				if(item.Customers != null)
+				if(item.Customer != null)
 				{
-					foreach(var childItem in item.Customers)
+					foreach(var childItem in item.Customer)
 					{
-						this.Customers.Add(new CustomerDto(childItem, deep));
+						this.Customer.Add(new CustomerDto(childItem, deep));
 					}
 				}
 			}
@@ -64,7 +64,7 @@ namespace Banking.Models.Dto
 		
 		#region Child Relationships
 		
-		public IList<ICustomer> Customers { get; set; }
+		public IList<ICustomer> Customer { get; set; }
 
 		#endregion
 		

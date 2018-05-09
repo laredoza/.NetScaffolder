@@ -65,10 +65,11 @@ namespace Banking.Models.Entity
 		
 		#region Child Relationships
 		
-		
 		#endregion
 		
 		#region Parent Relationships
+
+        public virtual Order Order { get; set; }
 
 		IOrder IOrderDetails.Order 
 		{ 
@@ -81,8 +82,9 @@ namespace Banking.Models.Entity
 				this.Order = (Order)value;
 			}
 		}
-		
-		public virtual Order Order { get; set; }
+
+        public virtual Product Product { get; set; }
+
 		IProduct IOrderDetails.Product 
 		{ 
 			get
@@ -94,8 +96,6 @@ namespace Banking.Models.Entity
 				this.Product = (Product)value;
 			}
 		}
-		
-		public virtual Product Product { get; set; }
 		
 		#endregion
 	}

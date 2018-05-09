@@ -53,7 +53,7 @@ namespace <#= DataType.FullNamespace #>
         /// </summary>
         /// <param name="<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName).ToLower() #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
         /// <returns>I<#= DataType.ModelName #></returns>
-		public I<#= DataType.ModelName #> LoadBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= CSharpOutputMapper.MapToOutput(col) #> <#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName).ToLower() #>)
+		public virtual I<#= DataType.ModelName #> LoadBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= CSharpOutputMapper.MapToOutput(col) #> <#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName).ToLower() #>)
 		{
 			return this.UnitOfWork.FirstOrDefault<<#= DataType.ModelName #>>(o => o.<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #> == <#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName).ToLower() #>);
 		}
@@ -65,7 +65,7 @@ namespace <#= DataType.FullNamespace #>
         /// </summary>
         /// <param name="<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName).ToLower() #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
         /// <returns><#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>></returns>
-		public <#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>> LoadBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= CSharpOutputMapper.MapToOutput(col) #> <#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName).ToLower() #>)
+		public virtual <#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>> LoadBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= CSharpOutputMapper.MapToOutput(col) #> <#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName).ToLower() #>)
 		{
 			return this.UnitOfWork.AllMatching<<#= DataType.ModelName #>>(o => o.<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #> == <#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName).ToLower() #>).ToList<I<#= DataType.ModelName #>>();
 		}
@@ -78,7 +78,7 @@ namespace <#= DataType.FullNamespace #>
         /// </summary>
         /// <param name="<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName).ToLower() #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
         /// <returns><#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>></returns>
-		public <#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>> LoadBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= CSharpOutputMapper.MapToOutput(col) #> <#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName).ToLower() #>)
+		public virtual <#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>> LoadBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= CSharpOutputMapper.MapToOutput(col) #> <#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName).ToLower() #>)
 		{
 			return this.UnitOfWork.AllMatching<<#= DataType.ModelName #>>(o => o.<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #> == <#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName).ToLower() #>).ToList<I<#= DataType.ModelName #>>();
 		}
@@ -88,7 +88,7 @@ namespace <#= DataType.FullNamespace #>
         /// Load all <#= DataType.ModelName #> entities from the database.
         /// </summary>
         /// <returns><#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>></returns>
-		public <#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>> LoadAll()
+		public virtual <#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>> LoadAll()
 		{
 			return this.UnitOfWork.GetAll<<#= DataType.ModelName #>>().ToList<I<#= DataType.ModelName #>>();
 		}
@@ -104,7 +104,7 @@ namespace <#= DataType.FullNamespace #>
         /// <param name="<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName).ToLower() #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns><#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>></returns>
-		public <#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>> SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= CSharpOutputMapper.MapToOutput(col) #> <#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName).ToLower() #>, bool caseSensitive = false)
+		public virtual <#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>> SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= CSharpOutputMapper.MapToOutput(col) #> <#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName).ToLower() #>, bool caseSensitive = false)
 		{		
 			if(caseSensitive) 
 			{
@@ -126,7 +126,7 @@ namespace <#= DataType.FullNamespace #>
         /// </summary>
         /// <param name="entity">I<#= DataType.ModelName #></param>
         /// <returns>bool</returns>
-		public bool Save(I<#= DataType.ModelName #> entity)
+		public virtual bool Save(I<#= DataType.ModelName #> entity)
 		{
 			var entityToSave = new <#= DataType.ModelName #>(entity, false);
 			return this.UnitOfWork.Add(entityToSave);
@@ -138,7 +138,7 @@ namespace <#= DataType.FullNamespace #>
         /// </summary>
         /// <param name="entity">I<#= DataType.ModelName #></param>
         /// <returns>bool</returns>
-		public bool Update(I<#= DataType.ModelName #> entity)
+		public virtual bool Update(I<#= DataType.ModelName #> entity)
 		{
 			bool doUpdate = false;
 			var entityToUpdate = this.UnitOfWork.FirstOrDefault<<#= DataType.ModelName #>>(o => o.<#= DataType.NamingConvention.ApplyNamingConvention(pk.ColumnName) #> == entity.<#= DataType.NamingConvention.ApplyNamingConvention(pk.ColumnName) #>);
@@ -167,7 +167,7 @@ namespace <#= DataType.FullNamespace #>
         /// </summary>
         /// <param name="entity">I<#= DataType.ModelName #></param>
         /// <returns>bool</returns>
-		public bool Delete(I<#= DataType.ModelName #> entity)
+		public virtual bool Delete(I<#= DataType.ModelName #> entity)
 		{		
 			var entityToDelete = this.UnitOfWork.FirstOrDefault<<#= DataType.ModelName #>>(o => o.<#= DataType.NamingConvention.ApplyNamingConvention(pk.ColumnName) #> == entity.<#= DataType.NamingConvention.ApplyNamingConvention(pk.ColumnName) #>);
 			
@@ -184,7 +184,7 @@ namespace <#= DataType.FullNamespace #>
         /// </summary>
         /// <param name="<#= DataType.NamingConvention.ApplyNamingConvention(pk.ColumnName).ToLower() #>"><#= CSharpOutputMapper.MapToOutput(pk) #></param>
         /// <returns>bool</returns>
-		public bool DeleteBy<#= DataType.NamingConvention.ApplyNamingConvention(pk.ColumnName) #>(<#= CSharpOutputMapper.MapToOutput(pk) #> <#= DataType.NamingConvention.ApplyNamingConvention(pk.ColumnName).ToLower() #>)
+		public virtual bool DeleteBy<#= DataType.NamingConvention.ApplyNamingConvention(pk.ColumnName) #>(<#= CSharpOutputMapper.MapToOutput(pk) #> <#= DataType.NamingConvention.ApplyNamingConvention(pk.ColumnName).ToLower() #>)
 		{
 			var entityToDelete = this.UnitOfWork.FirstOrDefault<<#= DataType.ModelName #>>(o => o.<#= DataType.NamingConvention.ApplyNamingConvention(pk.ColumnName) #> == <#= DataType.NamingConvention.ApplyNamingConvention(pk.ColumnName).ToLower() #>);
 			

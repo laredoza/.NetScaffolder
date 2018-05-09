@@ -56,10 +56,11 @@ namespace Banking.Models.Entity
 		
 		#region Child Relationships
 		
-		
 		#endregion
 		
 		#region Parent Relationships
+
+        public virtual Product Product { get; set; }
 
 		IProduct ISoftware.Product 
 		{ 
@@ -72,8 +73,6 @@ namespace Banking.Models.Entity
 				this.Product = (Product)value;
 			}
 		}
-		
-		public virtual Product Product { get; set; }
 		
 		#endregion
 	}

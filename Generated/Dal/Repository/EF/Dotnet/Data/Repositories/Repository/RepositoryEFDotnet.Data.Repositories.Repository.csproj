@@ -151,6 +151,10 @@
       <Project>{4f6d59b6-2c03-4a37-9670-bb46225aa6e1}</Project>
       <Name>RepositoryEFDotnet.Data.Interface.ModelInterfaces</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Interfaces\RepositoryInterfaces\RepositoryEFDotnet.Data.Interface.RepositoryInterfaces.csproj">
+      <Project>{69bf017d-9632-4bca-859b-5d24a2c4b79a}</Project>
+      <Name>RepositoryEFDotnet.Data.Interface.RepositoryInterfaces</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

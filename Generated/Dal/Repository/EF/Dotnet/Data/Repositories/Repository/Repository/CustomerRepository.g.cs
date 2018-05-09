@@ -51,7 +51,7 @@ namespace Banking.Models.Repository
         /// </summary>
         /// <param name="customerid">int</param>
         /// <returns>ICustomer</returns>
-		public ICustomer LoadByCustomerId(int customerid)
+		public virtual ICustomer LoadByCustomerId(int customerid)
 		{
 			return this.UnitOfWork.FirstOrDefault<Customer>(o => o.CustomerId == customerid);
 		}
@@ -61,7 +61,7 @@ namespace Banking.Models.Repository
         /// </summary>
         /// <param name="customercode">string</param>
         /// <returns>IList<ICustomer></returns>
-		public IList<ICustomer> LoadByCustomerCode(string customercode)
+		public virtual IList<ICustomer> LoadByCustomerCode(string customercode)
 		{
 			return this.UnitOfWork.AllMatching<Customer>(o => o.CustomerCode == customercode).ToList<ICustomer>();
 		}
@@ -71,7 +71,7 @@ namespace Banking.Models.Repository
         /// </summary>
         /// <param name="companyname">string</param>
         /// <returns>IList<ICustomer></returns>
-		public IList<ICustomer> LoadByCompanyName(string companyname)
+		public virtual IList<ICustomer> LoadByCompanyName(string companyname)
 		{
 			return this.UnitOfWork.AllMatching<Customer>(o => o.CompanyName == companyname).ToList<ICustomer>();
 		}
@@ -81,7 +81,7 @@ namespace Banking.Models.Repository
         /// </summary>
         /// <param name="contactname">string</param>
         /// <returns>IList<ICustomer></returns>
-		public IList<ICustomer> LoadByContactName(string contactname)
+		public virtual IList<ICustomer> LoadByContactName(string contactname)
 		{
 			return this.UnitOfWork.AllMatching<Customer>(o => o.ContactName == contactname).ToList<ICustomer>();
 		}
@@ -91,7 +91,7 @@ namespace Banking.Models.Repository
         /// </summary>
         /// <param name="contacttitle">string</param>
         /// <returns>IList<ICustomer></returns>
-		public IList<ICustomer> LoadByContactTitle(string contacttitle)
+		public virtual IList<ICustomer> LoadByContactTitle(string contacttitle)
 		{
 			return this.UnitOfWork.AllMatching<Customer>(o => o.ContactTitle == contacttitle).ToList<ICustomer>();
 		}
@@ -101,7 +101,7 @@ namespace Banking.Models.Repository
         /// </summary>
         /// <param name="address">string</param>
         /// <returns>IList<ICustomer></returns>
-		public IList<ICustomer> LoadByAddress(string address)
+		public virtual IList<ICustomer> LoadByAddress(string address)
 		{
 			return this.UnitOfWork.AllMatching<Customer>(o => o.Address == address).ToList<ICustomer>();
 		}
@@ -111,7 +111,7 @@ namespace Banking.Models.Repository
         /// </summary>
         /// <param name="city">string</param>
         /// <returns>IList<ICustomer></returns>
-		public IList<ICustomer> LoadByCity(string city)
+		public virtual IList<ICustomer> LoadByCity(string city)
 		{
 			return this.UnitOfWork.AllMatching<Customer>(o => o.City == city).ToList<ICustomer>();
 		}
@@ -121,7 +121,7 @@ namespace Banking.Models.Repository
         /// </summary>
         /// <param name="postalcode">string</param>
         /// <returns>IList<ICustomer></returns>
-		public IList<ICustomer> LoadByPostalCode(string postalcode)
+		public virtual IList<ICustomer> LoadByPostalCode(string postalcode)
 		{
 			return this.UnitOfWork.AllMatching<Customer>(o => o.PostalCode == postalcode).ToList<ICustomer>();
 		}
@@ -131,7 +131,7 @@ namespace Banking.Models.Repository
         /// </summary>
         /// <param name="telephone">string</param>
         /// <returns>IList<ICustomer></returns>
-		public IList<ICustomer> LoadByTelephone(string telephone)
+		public virtual IList<ICustomer> LoadByTelephone(string telephone)
 		{
 			return this.UnitOfWork.AllMatching<Customer>(o => o.Telephone == telephone).ToList<ICustomer>();
 		}
@@ -141,7 +141,7 @@ namespace Banking.Models.Repository
         /// </summary>
         /// <param name="fax">string</param>
         /// <returns>IList<ICustomer></returns>
-		public IList<ICustomer> LoadByFax(string fax)
+		public virtual IList<ICustomer> LoadByFax(string fax)
 		{
 			return this.UnitOfWork.AllMatching<Customer>(o => o.Fax == fax).ToList<ICustomer>();
 		}
@@ -151,7 +151,7 @@ namespace Banking.Models.Repository
         /// </summary>
         /// <param name="countryid">Nullable<int></param>
         /// <returns>IList<ICustomer></returns>
-		public IList<ICustomer> LoadByCountryId(Nullable<int> countryid)
+		public virtual IList<ICustomer> LoadByCountryId(Nullable<int> countryid)
 		{
 			return this.UnitOfWork.AllMatching<Customer>(o => o.CountryId == countryid).ToList<ICustomer>();
 		}
@@ -161,7 +161,7 @@ namespace Banking.Models.Repository
         /// </summary>
         /// <param name="photo">string</param>
         /// <returns>IList<ICustomer></returns>
-		public IList<ICustomer> LoadByPhoto(string photo)
+		public virtual IList<ICustomer> LoadByPhoto(string photo)
 		{
 			return this.UnitOfWork.AllMatching<Customer>(o => o.Photo == photo).ToList<ICustomer>();
 		}
@@ -171,7 +171,7 @@ namespace Banking.Models.Repository
         /// </summary>
         /// <param name="isenabled">bool</param>
         /// <returns>IList<ICustomer></returns>
-		public IList<ICustomer> LoadByIsEnabled(bool isenabled)
+		public virtual IList<ICustomer> LoadByIsEnabled(bool isenabled)
 		{
 			return this.UnitOfWork.AllMatching<Customer>(o => o.IsEnabled == isenabled).ToList<ICustomer>();
 		}
@@ -180,7 +180,7 @@ namespace Banking.Models.Repository
         /// Load all Customer entities from the database.
         /// </summary>
         /// <returns>IList<ICustomer></returns>
-		public IList<ICustomer> LoadAll()
+		public virtual IList<ICustomer> LoadAll()
 		{
 			return this.UnitOfWork.GetAll<Customer>().ToList<ICustomer>();
 		}
@@ -195,7 +195,7 @@ namespace Banking.Models.Repository
         /// <param name="customercode">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<ICustomer></returns>
-		public IList<ICustomer> SearchByCustomerCode(string customercode, bool caseSensitive = false)
+		public virtual IList<ICustomer> SearchByCustomerCode(string customercode, bool caseSensitive = false)
 		{		
 			if(caseSensitive) 
 			{
@@ -213,7 +213,7 @@ namespace Banking.Models.Repository
         /// <param name="companyname">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<ICustomer></returns>
-		public IList<ICustomer> SearchByCompanyName(string companyname, bool caseSensitive = false)
+		public virtual IList<ICustomer> SearchByCompanyName(string companyname, bool caseSensitive = false)
 		{		
 			if(caseSensitive) 
 			{
@@ -231,7 +231,7 @@ namespace Banking.Models.Repository
         /// <param name="contactname">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<ICustomer></returns>
-		public IList<ICustomer> SearchByContactName(string contactname, bool caseSensitive = false)
+		public virtual IList<ICustomer> SearchByContactName(string contactname, bool caseSensitive = false)
 		{		
 			if(caseSensitive) 
 			{
@@ -249,7 +249,7 @@ namespace Banking.Models.Repository
         /// <param name="contacttitle">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<ICustomer></returns>
-		public IList<ICustomer> SearchByContactTitle(string contacttitle, bool caseSensitive = false)
+		public virtual IList<ICustomer> SearchByContactTitle(string contacttitle, bool caseSensitive = false)
 		{		
 			if(caseSensitive) 
 			{
@@ -267,7 +267,7 @@ namespace Banking.Models.Repository
         /// <param name="address">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<ICustomer></returns>
-		public IList<ICustomer> SearchByAddress(string address, bool caseSensitive = false)
+		public virtual IList<ICustomer> SearchByAddress(string address, bool caseSensitive = false)
 		{		
 			if(caseSensitive) 
 			{
@@ -285,7 +285,7 @@ namespace Banking.Models.Repository
         /// <param name="city">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<ICustomer></returns>
-		public IList<ICustomer> SearchByCity(string city, bool caseSensitive = false)
+		public virtual IList<ICustomer> SearchByCity(string city, bool caseSensitive = false)
 		{		
 			if(caseSensitive) 
 			{
@@ -303,7 +303,7 @@ namespace Banking.Models.Repository
         /// <param name="postalcode">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<ICustomer></returns>
-		public IList<ICustomer> SearchByPostalCode(string postalcode, bool caseSensitive = false)
+		public virtual IList<ICustomer> SearchByPostalCode(string postalcode, bool caseSensitive = false)
 		{		
 			if(caseSensitive) 
 			{
@@ -321,7 +321,7 @@ namespace Banking.Models.Repository
         /// <param name="telephone">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<ICustomer></returns>
-		public IList<ICustomer> SearchByTelephone(string telephone, bool caseSensitive = false)
+		public virtual IList<ICustomer> SearchByTelephone(string telephone, bool caseSensitive = false)
 		{		
 			if(caseSensitive) 
 			{
@@ -339,7 +339,7 @@ namespace Banking.Models.Repository
         /// <param name="fax">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<ICustomer></returns>
-		public IList<ICustomer> SearchByFax(string fax, bool caseSensitive = false)
+		public virtual IList<ICustomer> SearchByFax(string fax, bool caseSensitive = false)
 		{		
 			if(caseSensitive) 
 			{
@@ -357,7 +357,7 @@ namespace Banking.Models.Repository
         /// <param name="photo">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<ICustomer></returns>
-		public IList<ICustomer> SearchByPhoto(string photo, bool caseSensitive = false)
+		public virtual IList<ICustomer> SearchByPhoto(string photo, bool caseSensitive = false)
 		{		
 			if(caseSensitive) 
 			{
@@ -378,7 +378,7 @@ namespace Banking.Models.Repository
         /// </summary>
         /// <param name="entity">ICustomer</param>
         /// <returns>bool</returns>
-		public bool Save(ICustomer entity)
+		public virtual bool Save(ICustomer entity)
 		{
 			var entityToSave = new Customer(entity, false);
 			return this.UnitOfWork.Add(entityToSave);
@@ -389,7 +389,7 @@ namespace Banking.Models.Repository
         /// </summary>
         /// <param name="entity">ICustomer</param>
         /// <returns>bool</returns>
-		public bool Update(ICustomer entity)
+		public virtual bool Update(ICustomer entity)
 		{
 			bool doUpdate = false;
 			var entityToUpdate = this.UnitOfWork.FirstOrDefault<Customer>(o => o.CustomerId == entity.CustomerId);
@@ -427,7 +427,7 @@ namespace Banking.Models.Repository
         /// </summary>
         /// <param name="entity">ICustomer</param>
         /// <returns>bool</returns>
-		public bool Delete(ICustomer entity)
+		public virtual bool Delete(ICustomer entity)
 		{		
 			var entityToDelete = this.UnitOfWork.FirstOrDefault<Customer>(o => o.CustomerId == entity.CustomerId);
 			
@@ -444,7 +444,7 @@ namespace Banking.Models.Repository
         /// </summary>
         /// <param name="customerid">int</param>
         /// <returns>bool</returns>
-		public bool DeleteByCustomerId(int customerid)
+		public virtual bool DeleteByCustomerId(int customerid)
 		{
 			var entityToDelete = this.UnitOfWork.FirstOrDefault<Customer>(o => o.CustomerId == customerid);
 			

@@ -51,7 +51,7 @@ namespace Banking.Models.Repository
         /// </summary>
         /// <param name="countryid">int</param>
         /// <returns>ICountry</returns>
-		public ICountry LoadByCountryId(int countryid)
+		public virtual ICountry LoadByCountryId(int countryid)
 		{
 			return this.UnitOfWork.FirstOrDefault<Country>(o => o.CountryId == countryid);
 		}
@@ -61,7 +61,7 @@ namespace Banking.Models.Repository
         /// </summary>
         /// <param name="countryname">string</param>
         /// <returns>IList<ICountry></returns>
-		public IList<ICountry> LoadByCountryName(string countryname)
+		public virtual IList<ICountry> LoadByCountryName(string countryname)
 		{
 			return this.UnitOfWork.AllMatching<Country>(o => o.CountryName == countryname).ToList<ICountry>();
 		}
@@ -70,7 +70,7 @@ namespace Banking.Models.Repository
         /// Load all Country entities from the database.
         /// </summary>
         /// <returns>IList<ICountry></returns>
-		public IList<ICountry> LoadAll()
+		public virtual IList<ICountry> LoadAll()
 		{
 			return this.UnitOfWork.GetAll<Country>().ToList<ICountry>();
 		}
@@ -85,7 +85,7 @@ namespace Banking.Models.Repository
         /// <param name="countryname">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<ICountry></returns>
-		public IList<ICountry> SearchByCountryName(string countryname, bool caseSensitive = false)
+		public virtual IList<ICountry> SearchByCountryName(string countryname, bool caseSensitive = false)
 		{		
 			if(caseSensitive) 
 			{
@@ -106,7 +106,7 @@ namespace Banking.Models.Repository
         /// </summary>
         /// <param name="entity">ICountry</param>
         /// <returns>bool</returns>
-		public bool Save(ICountry entity)
+		public virtual bool Save(ICountry entity)
 		{
 			var entityToSave = new Country(entity, false);
 			return this.UnitOfWork.Add(entityToSave);
@@ -117,7 +117,7 @@ namespace Banking.Models.Repository
         /// </summary>
         /// <param name="entity">ICountry</param>
         /// <returns>bool</returns>
-		public bool Update(ICountry entity)
+		public virtual bool Update(ICountry entity)
 		{
 			bool doUpdate = false;
 			var entityToUpdate = this.UnitOfWork.FirstOrDefault<Country>(o => o.CountryId == entity.CountryId);
@@ -144,7 +144,7 @@ namespace Banking.Models.Repository
         /// </summary>
         /// <param name="entity">ICountry</param>
         /// <returns>bool</returns>
-		public bool Delete(ICountry entity)
+		public virtual bool Delete(ICountry entity)
 		{		
 			var entityToDelete = this.UnitOfWork.FirstOrDefault<Country>(o => o.CountryId == entity.CountryId);
 			
@@ -161,7 +161,7 @@ namespace Banking.Models.Repository
         /// </summary>
         /// <param name="countryid">int</param>
         /// <returns>bool</returns>
-		public bool DeleteByCountryId(int countryid)
+		public virtual bool DeleteByCountryId(int countryid)
 		{
 			var entityToDelete = this.UnitOfWork.FirstOrDefault<Country>(o => o.CountryId == countryid);
 			

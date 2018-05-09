@@ -51,7 +51,7 @@ namespace Banking.Models.Repository
         /// </summary>
         /// <param name="productid">int</param>
         /// <returns>ISoftware</returns>
-		public ISoftware LoadByProductId(int productid)
+		public virtual ISoftware LoadByProductId(int productid)
 		{
 			return this.UnitOfWork.FirstOrDefault<Software>(o => o.ProductId == productid);
 		}
@@ -61,7 +61,7 @@ namespace Banking.Models.Repository
         /// </summary>
         /// <param name="licensecode">string</param>
         /// <returns>IList<ISoftware></returns>
-		public IList<ISoftware> LoadByLicenseCode(string licensecode)
+		public virtual IList<ISoftware> LoadByLicenseCode(string licensecode)
 		{
 			return this.UnitOfWork.AllMatching<Software>(o => o.LicenseCode == licensecode).ToList<ISoftware>();
 		}
@@ -70,7 +70,7 @@ namespace Banking.Models.Repository
         /// Load all Software entities from the database.
         /// </summary>
         /// <returns>IList<ISoftware></returns>
-		public IList<ISoftware> LoadAll()
+		public virtual IList<ISoftware> LoadAll()
 		{
 			return this.UnitOfWork.GetAll<Software>().ToList<ISoftware>();
 		}
@@ -85,7 +85,7 @@ namespace Banking.Models.Repository
         /// <param name="licensecode">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<ISoftware></returns>
-		public IList<ISoftware> SearchByLicenseCode(string licensecode, bool caseSensitive = false)
+		public virtual IList<ISoftware> SearchByLicenseCode(string licensecode, bool caseSensitive = false)
 		{		
 			if(caseSensitive) 
 			{
@@ -106,7 +106,7 @@ namespace Banking.Models.Repository
         /// </summary>
         /// <param name="entity">ISoftware</param>
         /// <returns>bool</returns>
-		public bool Save(ISoftware entity)
+		public virtual bool Save(ISoftware entity)
 		{
 			var entityToSave = new Software(entity, false);
 			return this.UnitOfWork.Add(entityToSave);
@@ -117,7 +117,7 @@ namespace Banking.Models.Repository
         /// </summary>
         /// <param name="entity">ISoftware</param>
         /// <returns>bool</returns>
-		public bool Update(ISoftware entity)
+		public virtual bool Update(ISoftware entity)
 		{
 			bool doUpdate = false;
 			var entityToUpdate = this.UnitOfWork.FirstOrDefault<Software>(o => o.ProductId == entity.ProductId);
@@ -144,7 +144,7 @@ namespace Banking.Models.Repository
         /// </summary>
         /// <param name="entity">ISoftware</param>
         /// <returns>bool</returns>
-		public bool Delete(ISoftware entity)
+		public virtual bool Delete(ISoftware entity)
 		{		
 			var entityToDelete = this.UnitOfWork.FirstOrDefault<Software>(o => o.ProductId == entity.ProductId);
 			
@@ -161,7 +161,7 @@ namespace Banking.Models.Repository
         /// </summary>
         /// <param name="productid">int</param>
         /// <returns>bool</returns>
-		public bool DeleteByProductId(int productid)
+		public virtual bool DeleteByProductId(int productid)
 		{
 			var entityToDelete = this.UnitOfWork.FirstOrDefault<Software>(o => o.ProductId == productid);
 			

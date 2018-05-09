@@ -30,8 +30,8 @@ namespace Banking.Models.Entity
 		
 		public BankAccount()
 		{
-			this.BankTransfers = new List <BankTransfers>();
-			this.BankTransfers = new List <BankTransfers>();
+			this.BankTransfersFrom = new List <BankTransfers>();
+			this.BankTransfersTo = new List <BankTransfers>();
 		}
 		
 		public BankAccount(IBankAccount item, bool deep = false)
@@ -43,23 +43,23 @@ namespace Banking.Models.Entity
 			this.Balance = item.Balance;
 			this.CustomerId = item.CustomerId;
 			this.Locked = item.Locked;
-			this.BankTransfers = new List <BankTransfers>();
-			this.BankTransfers = new List <BankTransfers>();
+			this.BankTransfersFrom = new List <BankTransfers>();
+			this.BankTransfersTo = new List <BankTransfers>();
 
 			if(deep)
 			{
-				if(item.BankTransfers != null)
+				if(item.BankTransfersFrom != null)
 				{
-					foreach(var childItem in item.BankTransfers)
+					foreach(var childItem in item.BankTransfersFrom)
 					{
-						this.BankTransfers.Add(new BankTransfers(childItem, deep));
+						this.BankTransfersFrom.Add(new BankTransfers(childItem, deep));
 					}
 				}
-				if(item.BankTransfers != null)
+				if(item.BankTransfersTo != null)
 				{
-					foreach(var childItem in item.BankTransfers)
+					foreach(var childItem in item.BankTransfersTo)
 					{
-						this.BankTransfers.Add(new BankTransfers(childItem, deep));
+						this.BankTransfersTo.Add(new BankTransfers(childItem, deep));
 					}
 				}
 				this.Customer = new Customer(item.Customer, deep);
@@ -79,37 +79,40 @@ namespace Banking.Models.Entity
 		#endregion
 		
 		#region Child Relationships
-		
-		IList<IBankTransfers> IBankAccount.BankTransfers 
+        
+        public virtual IList<BankTransfers> BankTransfersFrom { get; set; }
+
+        IList<IBankTransfers> IBankAccount.BankTransfersFrom 
 		{ 
 			get
 			{
-				return (IList<IBankTransfers>)this.BankTransfers;
+				return (IList<IBankTransfers>)this.BankTransfersFrom;
 			}
 			set
 			{
-				this.BankTransfers = (IList<BankTransfers>)value;
+				this.BankTransfersFrom = (IList<BankTransfers>)value;
 			}			
 		}
-		
-		public virtual IList<BankTransfers> BankTransfers { get; set; }
-		IList<IBankTransfers> IBankAccount.BankTransfers 
+        
+        public virtual IList<BankTransfers> BankTransfersTo { get; set; }
+
+        IList<IBankTransfers> IBankAccount.BankTransfersTo 
 		{ 
 			get
 			{
-				return (IList<IBankTransfers>)this.BankTransfers;
+				return (IList<IBankTransfers>)this.BankTransfersTo;
 			}
 			set
 			{
-				this.BankTransfers = (IList<BankTransfers>)value;
+				this.BankTransfersTo = (IList<BankTransfers>)value;
 			}			
 		}
-		
-		public virtual IList<BankTransfers> BankTransfers { get; set; }
 		
 		#endregion
 		
 		#region Parent Relationships
+
+        public virtual Customer Customer { get; set; }
 
 		ICustomer IBankAccount.Customer 
 		{ 
@@ -122,8 +125,6 @@ namespace Banking.Models.Entity
 				this.Customer = (Customer)value;
 			}
 		}
-		
-		public virtual Customer Customer { get; set; }
 		
 		#endregion
 	}

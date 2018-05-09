@@ -51,7 +51,7 @@ namespace Banking.Models.Repository
         /// </summary>
         /// <param name="orderid">int</param>
         /// <returns>IOrder</returns>
-		public IOrder LoadByOrderId(int orderid)
+		public virtual IOrder LoadByOrderId(int orderid)
 		{
 			return this.UnitOfWork.FirstOrDefault<Order>(o => o.OrderId == orderid);
 		}
@@ -61,7 +61,7 @@ namespace Banking.Models.Repository
         /// </summary>
         /// <param name="customerid">Nullable<int></param>
         /// <returns>IList<IOrder></returns>
-		public IList<IOrder> LoadByCustomerId(Nullable<int> customerid)
+		public virtual IList<IOrder> LoadByCustomerId(Nullable<int> customerid)
 		{
 			return this.UnitOfWork.AllMatching<Order>(o => o.CustomerId == customerid).ToList<IOrder>();
 		}
@@ -71,7 +71,7 @@ namespace Banking.Models.Repository
         /// </summary>
         /// <param name="orderdate">Nullable<DateTime></param>
         /// <returns>IList<IOrder></returns>
-		public IList<IOrder> LoadByOrderDate(Nullable<DateTime> orderdate)
+		public virtual IList<IOrder> LoadByOrderDate(Nullable<DateTime> orderdate)
 		{
 			return this.UnitOfWork.AllMatching<Order>(o => o.OrderDate == orderdate).ToList<IOrder>();
 		}
@@ -81,7 +81,7 @@ namespace Banking.Models.Repository
         /// </summary>
         /// <param name="deliverydate">Nullable<DateTime></param>
         /// <returns>IList<IOrder></returns>
-		public IList<IOrder> LoadByDeliveryDate(Nullable<DateTime> deliverydate)
+		public virtual IList<IOrder> LoadByDeliveryDate(Nullable<DateTime> deliverydate)
 		{
 			return this.UnitOfWork.AllMatching<Order>(o => o.DeliveryDate == deliverydate).ToList<IOrder>();
 		}
@@ -91,7 +91,7 @@ namespace Banking.Models.Repository
         /// </summary>
         /// <param name="shippingname">string</param>
         /// <returns>IList<IOrder></returns>
-		public IList<IOrder> LoadByShippingName(string shippingname)
+		public virtual IList<IOrder> LoadByShippingName(string shippingname)
 		{
 			return this.UnitOfWork.AllMatching<Order>(o => o.ShippingName == shippingname).ToList<IOrder>();
 		}
@@ -101,7 +101,7 @@ namespace Banking.Models.Repository
         /// </summary>
         /// <param name="shippingaddress">string</param>
         /// <returns>IList<IOrder></returns>
-		public IList<IOrder> LoadByShippingAddress(string shippingaddress)
+		public virtual IList<IOrder> LoadByShippingAddress(string shippingaddress)
 		{
 			return this.UnitOfWork.AllMatching<Order>(o => o.ShippingAddress == shippingaddress).ToList<IOrder>();
 		}
@@ -111,7 +111,7 @@ namespace Banking.Models.Repository
         /// </summary>
         /// <param name="shippingcity">string</param>
         /// <returns>IList<IOrder></returns>
-		public IList<IOrder> LoadByShippingCity(string shippingcity)
+		public virtual IList<IOrder> LoadByShippingCity(string shippingcity)
 		{
 			return this.UnitOfWork.AllMatching<Order>(o => o.ShippingCity == shippingcity).ToList<IOrder>();
 		}
@@ -121,7 +121,7 @@ namespace Banking.Models.Repository
         /// </summary>
         /// <param name="shippingzip">string</param>
         /// <returns>IList<IOrder></returns>
-		public IList<IOrder> LoadByShippingZip(string shippingzip)
+		public virtual IList<IOrder> LoadByShippingZip(string shippingzip)
 		{
 			return this.UnitOfWork.AllMatching<Order>(o => o.ShippingZip == shippingzip).ToList<IOrder>();
 		}
@@ -130,7 +130,7 @@ namespace Banking.Models.Repository
         /// Load all Order entities from the database.
         /// </summary>
         /// <returns>IList<IOrder></returns>
-		public IList<IOrder> LoadAll()
+		public virtual IList<IOrder> LoadAll()
 		{
 			return this.UnitOfWork.GetAll<Order>().ToList<IOrder>();
 		}
@@ -145,7 +145,7 @@ namespace Banking.Models.Repository
         /// <param name="shippingname">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<IOrder></returns>
-		public IList<IOrder> SearchByShippingName(string shippingname, bool caseSensitive = false)
+		public virtual IList<IOrder> SearchByShippingName(string shippingname, bool caseSensitive = false)
 		{		
 			if(caseSensitive) 
 			{
@@ -163,7 +163,7 @@ namespace Banking.Models.Repository
         /// <param name="shippingaddress">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<IOrder></returns>
-		public IList<IOrder> SearchByShippingAddress(string shippingaddress, bool caseSensitive = false)
+		public virtual IList<IOrder> SearchByShippingAddress(string shippingaddress, bool caseSensitive = false)
 		{		
 			if(caseSensitive) 
 			{
@@ -181,7 +181,7 @@ namespace Banking.Models.Repository
         /// <param name="shippingcity">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<IOrder></returns>
-		public IList<IOrder> SearchByShippingCity(string shippingcity, bool caseSensitive = false)
+		public virtual IList<IOrder> SearchByShippingCity(string shippingcity, bool caseSensitive = false)
 		{		
 			if(caseSensitive) 
 			{
@@ -199,7 +199,7 @@ namespace Banking.Models.Repository
         /// <param name="shippingzip">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<IOrder></returns>
-		public IList<IOrder> SearchByShippingZip(string shippingzip, bool caseSensitive = false)
+		public virtual IList<IOrder> SearchByShippingZip(string shippingzip, bool caseSensitive = false)
 		{		
 			if(caseSensitive) 
 			{
@@ -220,7 +220,7 @@ namespace Banking.Models.Repository
         /// </summary>
         /// <param name="entity">IOrder</param>
         /// <returns>bool</returns>
-		public bool Save(IOrder entity)
+		public virtual bool Save(IOrder entity)
 		{
 			var entityToSave = new Order(entity, false);
 			return this.UnitOfWork.Add(entityToSave);
@@ -231,7 +231,7 @@ namespace Banking.Models.Repository
         /// </summary>
         /// <param name="entity">IOrder</param>
         /// <returns>bool</returns>
-		public bool Update(IOrder entity)
+		public virtual bool Update(IOrder entity)
 		{
 			bool doUpdate = false;
 			var entityToUpdate = this.UnitOfWork.FirstOrDefault<Order>(o => o.OrderId == entity.OrderId);
@@ -264,7 +264,7 @@ namespace Banking.Models.Repository
         /// </summary>
         /// <param name="entity">IOrder</param>
         /// <returns>bool</returns>
-		public bool Delete(IOrder entity)
+		public virtual bool Delete(IOrder entity)
 		{		
 			var entityToDelete = this.UnitOfWork.FirstOrDefault<Order>(o => o.OrderId == entity.OrderId);
 			
@@ -281,7 +281,7 @@ namespace Banking.Models.Repository
         /// </summary>
         /// <param name="orderid">int</param>
         /// <returns>bool</returns>
-		public bool DeleteByOrderId(int orderid)
+		public virtual bool DeleteByOrderId(int orderid)
 		{
 			var entityToDelete = this.UnitOfWork.FirstOrDefault<Order>(o => o.OrderId == orderid);
 			

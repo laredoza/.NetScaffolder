@@ -76,8 +76,10 @@ namespace Banking.Models.Entity
 		#endregion
 		
 		#region Child Relationships
-		
-		IList<IOrderDetails> IOrder.OrderDetails 
+        
+        public virtual IList<OrderDetails> OrderDetails { get; set; }
+
+        IList<IOrderDetails> IOrder.OrderDetails 
 		{ 
 			get
 			{
@@ -89,11 +91,11 @@ namespace Banking.Models.Entity
 			}			
 		}
 		
-		public virtual IList<OrderDetails> OrderDetails { get; set; }
-		
 		#endregion
 		
 		#region Parent Relationships
+
+        public virtual Customer Customer { get; set; }
 
 		ICustomer IOrder.Customer 
 		{ 
@@ -106,8 +108,6 @@ namespace Banking.Models.Entity
 				this.Customer = (Customer)value;
 			}
 		}
-		
-		public virtual Customer Customer { get; set; }
 		
 		#endregion
 	}

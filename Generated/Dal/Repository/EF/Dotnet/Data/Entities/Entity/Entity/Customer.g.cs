@@ -30,8 +30,8 @@ namespace Banking.Models.Entity
 		
 		public Customer()
 		{
-			this.BankAccounts = new List <BankAccount>();
-			this.Orders = new List <Order>();
+			this.BankAccount = new List <BankAccount>();
+			this.Order = new List <Order>();
 		}
 		
 		public Customer(ICustomer item, bool deep = false)
@@ -51,23 +51,23 @@ namespace Banking.Models.Entity
 			this.CountryId = item.CountryId;
 			this.Photo = item.Photo;
 			this.IsEnabled = item.IsEnabled;
-			this.BankAccounts = new List <BankAccount>();
-			this.Orders = new List <Order>();
+			this.BankAccount = new List <BankAccount>();
+			this.Order = new List <Order>();
 
 			if(deep)
 			{
-				if(item.BankAccounts != null)
+				if(item.BankAccount != null)
 				{
-					foreach(var childItem in item.BankAccounts)
+					foreach(var childItem in item.BankAccount)
 					{
-						this.BankAccounts.Add(new BankAccount(childItem, deep));
+						this.BankAccount.Add(new BankAccount(childItem, deep));
 					}
 				}
-				if(item.Orders != null)
+				if(item.Order != null)
 				{
-					foreach(var childItem in item.Orders)
+					foreach(var childItem in item.Order)
 					{
-						this.Orders.Add(new Order(childItem, deep));
+						this.Order.Add(new Order(childItem, deep));
 					}
 				}
 				this.Country = new Country(item.Country, deep);
@@ -95,37 +95,40 @@ namespace Banking.Models.Entity
 		#endregion
 		
 		#region Child Relationships
-		
-		IList<IBankAccount> ICustomer.BankAccounts 
+        
+        public virtual IList<BankAccount> BankAccount { get; set; }
+
+        IList<IBankAccount> ICustomer.BankAccount 
 		{ 
 			get
 			{
-				return (IList<IBankAccount>)this.BankAccounts;
+				return (IList<IBankAccount>)this.BankAccount;
 			}
 			set
 			{
-				this.BankAccounts = (IList<BankAccount>)value;
+				this.BankAccount = (IList<BankAccount>)value;
 			}			
 		}
-		
-		public virtual IList<BankAccount> BankAccounts { get; set; }
-		IList<IOrder> ICustomer.Orders 
+        
+        public virtual IList<Order> Order { get; set; }
+
+        IList<IOrder> ICustomer.Order 
 		{ 
 			get
 			{
-				return (IList<IOrder>)this.Orders;
+				return (IList<IOrder>)this.Order;
 			}
 			set
 			{
-				this.Orders = (IList<Order>)value;
+				this.Order = (IList<Order>)value;
 			}			
 		}
-		
-		public virtual IList<Order> Orders { get; set; }
 		
 		#endregion
 		
 		#region Parent Relationships
+
+        public virtual Country Country { get; set; }
 
 		ICountry ICustomer.Country 
 		{ 
@@ -138,8 +141,6 @@ namespace Banking.Models.Entity
 				this.Country = (Country)value;
 			}
 		}
-		
-		public virtual Country Country { get; set; }
 		
 		#endregion
 	}

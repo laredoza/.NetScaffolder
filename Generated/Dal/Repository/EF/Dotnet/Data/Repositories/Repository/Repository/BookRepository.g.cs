@@ -51,7 +51,7 @@ namespace Banking.Models.Repository
         /// </summary>
         /// <param name="productid">int</param>
         /// <returns>IBook</returns>
-		public IBook LoadByProductId(int productid)
+		public virtual IBook LoadByProductId(int productid)
 		{
 			return this.UnitOfWork.FirstOrDefault<Book>(o => o.ProductId == productid);
 		}
@@ -61,7 +61,7 @@ namespace Banking.Models.Repository
         /// </summary>
         /// <param name="publisher">string</param>
         /// <returns>IList<IBook></returns>
-		public IList<IBook> LoadByPublisher(string publisher)
+		public virtual IList<IBook> LoadByPublisher(string publisher)
 		{
 			return this.UnitOfWork.AllMatching<Book>(o => o.Publisher == publisher).ToList<IBook>();
 		}
@@ -70,7 +70,7 @@ namespace Banking.Models.Repository
         /// Load all Book entities from the database.
         /// </summary>
         /// <returns>IList<IBook></returns>
-		public IList<IBook> LoadAll()
+		public virtual IList<IBook> LoadAll()
 		{
 			return this.UnitOfWork.GetAll<Book>().ToList<IBook>();
 		}
@@ -85,7 +85,7 @@ namespace Banking.Models.Repository
         /// <param name="publisher">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<IBook></returns>
-		public IList<IBook> SearchByPublisher(string publisher, bool caseSensitive = false)
+		public virtual IList<IBook> SearchByPublisher(string publisher, bool caseSensitive = false)
 		{		
 			if(caseSensitive) 
 			{
@@ -106,7 +106,7 @@ namespace Banking.Models.Repository
         /// </summary>
         /// <param name="entity">IBook</param>
         /// <returns>bool</returns>
-		public bool Save(IBook entity)
+		public virtual bool Save(IBook entity)
 		{
 			var entityToSave = new Book(entity, false);
 			return this.UnitOfWork.Add(entityToSave);
@@ -117,7 +117,7 @@ namespace Banking.Models.Repository
         /// </summary>
         /// <param name="entity">IBook</param>
         /// <returns>bool</returns>
-		public bool Update(IBook entity)
+		public virtual bool Update(IBook entity)
 		{
 			bool doUpdate = false;
 			var entityToUpdate = this.UnitOfWork.FirstOrDefault<Book>(o => o.ProductId == entity.ProductId);
@@ -144,7 +144,7 @@ namespace Banking.Models.Repository
         /// </summary>
         /// <param name="entity">IBook</param>
         /// <returns>bool</returns>
-		public bool Delete(IBook entity)
+		public virtual bool Delete(IBook entity)
 		{		
 			var entityToDelete = this.UnitOfWork.FirstOrDefault<Book>(o => o.ProductId == entity.ProductId);
 			
@@ -161,7 +161,7 @@ namespace Banking.Models.Repository
         /// </summary>
         /// <param name="productid">int</param>
         /// <returns>bool</returns>
-		public bool DeleteByProductId(int productid)
+		public virtual bool DeleteByProductId(int productid)
 		{
 			var entityToDelete = this.UnitOfWork.FirstOrDefault<Book>(o => o.ProductId == productid);
 			
