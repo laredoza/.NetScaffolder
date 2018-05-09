@@ -33,11 +33,16 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6
         /// <summary>
         /// The prefix.
         /// </summary>
-        public string Prefix => "EFMySql";
+        public string Prefix => "MySql";
 
         /// <summary>
         /// Gets the context attribute.
         /// </summary>
         public string ContextAttribute => "[DbConfigurationType(typeof(MySqlEFConfiguration))]";
+
+        /// <summary>
+        /// The parent folder.
+        /// </summary>
+        public string ParentFolder => "EF";
     }
 }

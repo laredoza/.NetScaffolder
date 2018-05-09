@@ -33,11 +33,16 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6
         /// <summary>
         /// The prefix.
         /// </summary>
-        public string Prefix => "EFOracle";
+        public string Prefix => "Oracle";
 
         /// <summary>
         /// Gets the context attribute.
         /// </summary>
         public string ContextAttribute => string.Empty;
+
+        /// <summary>
+        /// The parent folder.
+        /// </summary>
+        public string ParentFolder => "EF";
     }
 }

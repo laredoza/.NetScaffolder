@@ -27,5 +27,10 @@ namespace DotNetScaffolder.Components.Common.Contract
         /// Gets the context attribute.
         /// </summary>
         string ContextAttribute { get; }
+
+        /// <summary>
+        /// Gets the parent folder.
+        /// </summary>
+        string ParentFolder { get; }
     }
 }
