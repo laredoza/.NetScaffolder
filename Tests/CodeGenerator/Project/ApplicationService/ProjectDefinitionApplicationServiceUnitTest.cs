@@ -45,8 +45,6 @@ namespace DotNetScaffolder.Test.Project.ApplicationService
             projectDefinition.Domains.Add(new DomainDefinition { Name = "Security" });
             projectDefinition.Domains[0].NamingConventionId = Guid.NewGuid();
             projectDefinition.Domains[0].SourceTypeId = Guid.NewGuid();
-            projectDefinition.Domains[0].DriverId = Guid.NewGuid();
-            projectDefinition.Domains[0].DriverTypeId = Guid.NewGuid();
         }
 
         /// <summary>
@@ -133,8 +131,6 @@ namespace DotNetScaffolder.Test.Project.ApplicationService
             applicationService.ProjectDefinition.ModelPath = "c";
             applicationService.ProjectDefinition.Domains[0].NamingConventionId = Guid.NewGuid();
             applicationService.ProjectDefinition.Domains[0].SourceTypeId = Guid.NewGuid();
-            applicationService.ProjectDefinition.Domains[0].DriverId = Guid.NewGuid();
-            applicationService.ProjectDefinition.Domains[0].DriverTypeId = Guid.NewGuid();
 
             domain.Name = "Test Domain";
             domain.Id = Guid.NewGuid();

@@ -255,9 +255,7 @@
             this.projectDomainDetailsUserControl1.SavePath = null;
             this.projectDomainDetailsUserControl1.SelectedCollectionOptionId = new System.Guid("00000000-0000-0000-0000-000000000000");
             this.projectDomainDetailsUserControl1.SelectedDomain = null;
-            this.projectDomainDetailsUserControl1.SelectedDriver = new System.Guid("00000000-0000-0000-0000-000000000000");
-            this.projectDomainDetailsUserControl1.SelectedDriverType = new System.Guid("00000000-0000-0000-0000-000000000000");
-            this.projectDomainDetailsUserControl1.SelectedNamingConvention = new System.Guid("00000000-0000-0000-0000-000000000000");
+          this.projectDomainDetailsUserControl1.SelectedNamingConvention = new System.Guid("00000000-0000-0000-0000-000000000000");
             this.projectDomainDetailsUserControl1.SelectedPackage = null;
             this.projectDomainDetailsUserControl1.SelectedSourceType = new System.Guid("00000000-0000-0000-0000-000000000000");
             this.projectDomainDetailsUserControl1.Size = new System.Drawing.Size(552, 338);
