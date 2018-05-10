@@ -126,8 +126,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.Edmxs
                     ass =>
                         (ass.ReferentialConstraint.Dependent.Role == table.Name
                          || ass.ReferentialConstraint.Principal.Role == table.Name)
-                        && (entityTableNames.Contains(ass.ReferentialConstraint.Dependent.Role.ToUpper())
-                            && entityTableNames.Contains(ass.ReferentialConstraint.Principal.Role.ToUpper())));
+                        && (entityTableNames.Contains(ass.ReferentialConstraint.Principal.Role.ToUpper())));
 
                 foreach (var rel in relationships)
                 {
@@ -364,7 +363,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.Edmxs
                 {
                     relationship.Table = modelTable;
                     relationship.RelatedTable = tables.FirstOrDefault(t => t.TableName == relationship.ReferencedTableName);
-                    relationship.SchemaName = relationship.RelatedTable.SchemaName;
+                    relationship.SchemaName = relationship.RelatedTable?.SchemaName;
                 }
             }
             Logger.Trace("Completed Fix()");
