@@ -28,6 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
+            "EF 6.0",
+            "MySql"}, -1);
+            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem(new string[] {
+            "EF 6.0",
+            "Oracle"}, -1);
+            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("3");
+            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("4");
             this.button5 = new System.Windows.Forms.Button();
             this.ComboBoxPackages = new System.Windows.Forms.ComboBox();
             this.label11 = new System.Windows.Forms.Label();
@@ -46,13 +54,15 @@
             this.BtnManageSource = new System.Windows.Forms.Button();
             this.BtnModel = new System.Windows.Forms.Button();
             this.BtnRefresh = new System.Windows.Forms.Button();
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.ListViewDrivers = new System.Windows.Forms.ListView();
+            this.Driver = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // button5
             // 
             this.button5.Enabled = false;
-            this.button5.Location = new System.Drawing.Point(355, 146);
+            this.button5.Location = new System.Drawing.Point(355, 141);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(75, 23);
             this.button5.TabIndex = 48;
@@ -87,7 +97,7 @@
             "Oracle Default",
             "Sql Server Default",
             "Mongo Default"});
-            this.ComboBoxDriverType.Location = new System.Drawing.Point(239, 196);
+            this.ComboBoxDriverType.Location = new System.Drawing.Point(313, 245);
             this.ComboBoxDriverType.Name = "ComboBoxDriverType";
             this.ComboBoxDriverType.Size = new System.Drawing.Size(238, 21);
             this.ComboBoxDriverType.TabIndex = 45;
@@ -192,7 +202,7 @@
             // 
             // BtnManageSource
             // 
-            this.BtnManageSource.Location = new System.Drawing.Point(356, 87);
+            this.BtnManageSource.Location = new System.Drawing.Point(356, 82);
             this.BtnManageSource.Name = "BtnManageSource";
             this.BtnManageSource.Size = new System.Drawing.Size(75, 23);
             this.BtnManageSource.TabIndex = 49;
@@ -202,7 +212,7 @@
             // 
             // BtnModel
             // 
-            this.BtnModel.Location = new System.Drawing.Point(355, 115);
+            this.BtnModel.Location = new System.Drawing.Point(355, 110);
             this.BtnModel.Margin = new System.Windows.Forms.Padding(2);
             this.BtnModel.Name = "BtnModel";
             this.BtnModel.Size = new System.Drawing.Size(75, 26);
@@ -213,7 +223,7 @@
             // 
             // BtnRefresh
             // 
-            this.BtnRefresh.Location = new System.Drawing.Point(434, 115);
+            this.BtnRefresh.Location = new System.Drawing.Point(434, 110);
             this.BtnRefresh.Margin = new System.Windows.Forms.Padding(2);
             this.BtnRefresh.Name = "BtnRefresh";
             this.BtnRefresh.Size = new System.Drawing.Size(61, 25);
@@ -222,26 +232,43 @@
             this.BtnRefresh.UseVisualStyleBackColor = true;
             this.BtnRefresh.Click += new System.EventHandler(this.BtnRefresh_Click);
             // 
-            // listBox1
+            // ListViewDrivers
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Items.AddRange(new object[] {
-            "1",
-            "2",
-            "3",
-            "4",
-            "5"});
-            this.listBox1.Location = new System.Drawing.Point(112, 170);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
-            this.listBox1.Size = new System.Drawing.Size(238, 95);
-            this.listBox1.TabIndex = 52;
+            this.ListViewDrivers.CheckBoxes = true;
+            this.ListViewDrivers.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.Driver,
+            this.columnHeader2});
+            listViewItem1.StateImageIndex = 0;
+            listViewItem2.StateImageIndex = 0;
+            listViewItem3.StateImageIndex = 0;
+            listViewItem4.StateImageIndex = 0;
+            this.ListViewDrivers.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
+            listViewItem1,
+            listViewItem2,
+            listViewItem3,
+            listViewItem4});
+            this.ListViewDrivers.Location = new System.Drawing.Point(112, 169);
+            this.ListViewDrivers.Name = "ListViewDrivers";
+            this.ListViewDrivers.Size = new System.Drawing.Size(414, 165);
+            this.ListViewDrivers.TabIndex = 53;
+            this.ListViewDrivers.UseCompatibleStateImageBehavior = false;
+            this.ListViewDrivers.View = System.Windows.Forms.View.Details;
+            // 
+            // Driver
+            // 
+            this.Driver.Text = "Driver";
+            this.Driver.Width = 150;
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "Driver Type";
+            this.columnHeader2.Width = 250;
             // 
             // ProjectDomainDetailsUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.listBox1);
+            this.Controls.Add(this.ListViewDrivers);
             this.Controls.Add(this.BtnRefresh);
             this.Controls.Add(this.BtnModel);
             this.Controls.Add(this.BtnManageSource);
@@ -261,7 +288,7 @@
             this.Controls.Add(this.TextBoxName);
             this.Controls.Add(this.label5);
             this.Name = "ProjectDomainDetailsUserControl";
-            this.Size = new System.Drawing.Size(568, 281);
+            this.Size = new System.Drawing.Size(557, 359);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -287,6 +314,8 @@
         private System.Windows.Forms.Button BtnManageSource;
         private System.Windows.Forms.Button BtnModel;
         private System.Windows.Forms.Button BtnRefresh;
-        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.ListView ListViewDrivers;
+        private System.Windows.Forms.ColumnHeader Driver;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
     }
 }

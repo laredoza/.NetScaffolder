@@ -104,7 +104,7 @@
             this.panel1.Controls.Add(this.LblPath);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel1.Location = new System.Drawing.Point(0, 638);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1022, 44);
             this.panel1.TabIndex = 7;
@@ -145,7 +145,7 @@
             this.panel2.Controls.Add(this.tabControl1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 24);
-            this.panel2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel2.Margin = new System.Windows.Forms.Padding(2);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1022, 614);
             this.panel2.TabIndex = 8;
@@ -169,7 +169,7 @@
             this.tabPage1.Controls.Add(this.groupBox2);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage1.Size = new System.Drawing.Size(1014, 588);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Project";
@@ -239,7 +239,7 @@
             this.groupBox3.Controls.Add(this.projectDomainDetailsUserControl1);
             this.groupBox3.Location = new System.Drawing.Point(16, 130);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(566, 337);
+            this.groupBox3.Size = new System.Drawing.Size(566, 366);
             this.groupBox3.TabIndex = 18;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Domain Details";
@@ -260,7 +260,7 @@
             this.projectDomainDetailsUserControl1.SelectedNamingConvention = new System.Guid("00000000-0000-0000-0000-000000000000");
             this.projectDomainDetailsUserControl1.SelectedPackage = null;
             this.projectDomainDetailsUserControl1.SelectedSourceType = new System.Guid("00000000-0000-0000-0000-000000000000");
-            this.projectDomainDetailsUserControl1.Size = new System.Drawing.Size(525, 300);
+            this.projectDomainDetailsUserControl1.Size = new System.Drawing.Size(552, 338);
             this.projectDomainDetailsUserControl1.TabIndex = 0;
             // 
             // tabPage2
@@ -269,8 +269,8 @@
             this.tabPage2.Controls.Add(this.packageUserControl1);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
-            this.tabPage2.Size = new System.Drawing.Size(1014, 590);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(1014, 588);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Packages";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -300,8 +300,8 @@
             this.tabPage3.Controls.Add(this.TemplateManagementUserControl1);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
-            this.tabPage3.Size = new System.Drawing.Size(1014, 590);
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(1014, 588);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Templates";
             this.tabPage3.UseVisualStyleBackColor = true;

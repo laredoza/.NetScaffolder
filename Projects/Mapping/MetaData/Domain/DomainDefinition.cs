@@ -60,18 +60,19 @@ namespace DotNetScaffolder.Mapping.MetaData.Domain
         public Guid CollectionOptionId { get; set; }
 
         /// <summary>
+        /// Gets or sets the driver id list.
+        /// </summary>
+        public List<Guid> DriverIdList { get; set; }
+
+        // Remove these
+        /// <summary>
         ///     Gets or sets the driver id.
         /// </summary>
         /// <example>
         ///     Entity Framework
         /// </example>
         public Guid DriverId { get; set; }
-
-        /// <summary>
-        /// Gets or sets the driver id list.
-        /// </summary>
-        public List<Guid> DriverIdList { get; set; }
-
+        
         /// <summary>
         ///     Gets or sets the driver id.
         /// </summary>
