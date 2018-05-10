@@ -252,14 +252,4 @@ SqlServerAdoSourceType.xml
 Common.Logging.Core.dll
 Common.Logging.dll
 Configuration.dll
-DotNetScaffolder.Components.CollectionOption.dll
-DotNetScaffolder.Components.Common.dll
-DotNetScaffolder.Components.DataTypes.DefaultDataTypes.dll
-DotNetScaffolder.Components.Drivers.DefaultDrivers.dll
-DotNetScaffolder.Components.LanguageOutputs.DefaultLanguageOutput.dll
-DotNetScaffolder.Components.NamingConventions.DefaultNamingConventions.dll
-DotNetScaffolder.Components.OutputGenerators.DefaultOutputGenerators.dll
-DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.dll
-DotNetScaffolder.Core.Common.dll
-DotNetScaffolder.Mapping.MetaData.dll
-FormControls.dll
+Projects/Presentation/Forms/Model/Package
