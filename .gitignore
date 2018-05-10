@@ -249,3 +249,7 @@ ModelManifest.xml
 OracleAdoSourceType.xml
 MySqlAdoSourceType.xml
 SqlServerAdoSourceType.xml
+Common.Logging.Core.dll
+Common.Logging.dll
+Configuration.dll
+Projects/Presentation/Forms/Model/Package

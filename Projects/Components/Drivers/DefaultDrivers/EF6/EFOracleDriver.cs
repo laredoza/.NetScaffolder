@@ -44,5 +44,10 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6
         /// The parent folder.
         /// </summary>
         public string ParentFolder => "EF";
+
+        /// <summary>
+        /// Force schema to uppercase.
+        /// </summary>
+        public bool ForceSchemaToUppercase => true;
     }
 }

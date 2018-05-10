@@ -44,5 +44,10 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EFCore
         /// The parent folder.
         /// </summary>
         public string ParentFolder => "EFCore";
+
+        /// <summary>
+        /// Force schema to uppercase.
+        /// </summary>
+        public bool ForceSchemaToUppercase => false;
     }
 }
