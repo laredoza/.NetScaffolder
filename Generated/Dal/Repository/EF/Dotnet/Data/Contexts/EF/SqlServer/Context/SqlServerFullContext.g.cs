@@ -54,14 +54,32 @@ namespace Banking.Models.Context
 			
 			#region Tables
 			
+
+
 			modelBuilder.Entity<BankAccount>().ToTable("BankAccount", "dbo");
+
+
 			modelBuilder.Entity<BankTransfers>().ToTable("BankTransfers", "dbo");
+
+
 			modelBuilder.Entity<Book>().ToTable("Book", "dbo");
+
+
 			modelBuilder.Entity<Country>().ToTable("Country", "dbo");
+
+
 			modelBuilder.Entity<Customer>().ToTable("Customer", "dbo");
+
+
 			modelBuilder.Entity<Order>().ToTable("Order", "dbo");
+
+
 			modelBuilder.Entity<OrderDetails>().ToTable("OrderDetails", "dbo");
+
+
 			modelBuilder.Entity<Product>().ToTable("Product", "dbo");
+
+
 			modelBuilder.Entity<Software>().ToTable("Software", "dbo");
 
 			#endregion

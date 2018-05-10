@@ -54,7 +54,11 @@ namespace Banking.Models.Accounts
 			
 			#region Tables
 			
+
+
 			modelBuilder.Entity<BankAccount>().ToTable("BankAccount", "dbo");
+
+
 			modelBuilder.Entity<BankTransfers>().ToTable("BankTransfers", "dbo");
 
 			#endregion
