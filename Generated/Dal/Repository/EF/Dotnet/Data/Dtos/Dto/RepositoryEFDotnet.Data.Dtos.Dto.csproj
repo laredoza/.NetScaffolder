@@ -53,7 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Interfaces\Interface\RepositoryEFDotnet.Data.Interface.ModelInterfaces.csproj">
-      <Project>{4f6d59b6-2c03-4a37-9670-bb46225aa6e1}</Project>
+      <Project>{f49f5825-6f92-4b8d-ae30-59d43235974b}</Project>
       <Name>RepositoryEFDotnet.Data.Interface.ModelInterfaces</Name>
     </ProjectReference>
   </ItemGroup>

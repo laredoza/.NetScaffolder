@@ -13,12 +13,14 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
     using System.ComponentModel.Composition;
     using System.IO;
     using System.Linq;
+    using System.Text;
     using System.Windows.Forms;
     using System.Xml.Serialization;
-
+    using DotNetScaffolder.Components.Common;
     using DotNetScaffolder.Components.Common.Contract;
     using DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Base;
     using DotNetScaffolder.Core.Common.Serializer;
+    using DotNetScaffolder.Mapping.MetaData.Enum;
     using DotNetScaffolder.Mapping.MetaData.Model;
 
     using FormControls.TreeView;
@@ -173,20 +175,56 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
             return this.NamingConvention.ApplyNamingConvention(name);
         }
 
-        public string TransformRelationship(Table table, Relationship rel)
+        public string TransformRelationship(string table, Relationship rel, IEnumerable<Table> models, IEnumerable<Relationship> relationships = null)
         {
-            string colReq = rel.ColumnRequired ? "HasRequired" : "HasOptional";
-            string relString = $"modelBuilder.Entity<{TransformModelName(rel.ReferencedTableName)}>().{colReq}<{TransformModelName(table.TableName)}>(s => s.{table.TableName})";
+            var sb = new StringBuilder();
 
-            if (rel.ReferencedMultiplicity == Mapping.MetaData.Enum.RelationshipMultiplicity.Many)
+            string refTableName = RelationshipNameFormatting.FormatName(rel.ReferencedTableName, rel.RelationshipAlias, rel.ReferencedColumnName, NamingConvention, relationships);
+
+            if (rel.ReferencedMultiplicity == RelationshipMultiplicity.Many)
             {
-                return $"{relString}.WithMany(s => s.{rel.ReferencedTableNamePlural}).HasForeignKey(s => s.{rel.ReferencedColumnName}).WillCascadeOnDelete(false);";
+                sb.Append($"modelBuilder.Entity<{TransformModelName(table)}>().HasMany<{TransformModelName(rel.ReferencedTableName)}>(s => s.{refTableName})");
+            }
+            else if (rel.ReferencedMultiplicity == RelationshipMultiplicity.One)
+            {
+                sb.Append($"modelBuilder.Entity<{TransformModelName(table)}>().HasRequired<{TransformModelName(rel.ReferencedTableName)}>(s => s.{refTableName})");
             }
             else
             {
-                string refColReq = rel.ReferencedColumnRequired ? "WithRequiredDependent" : "WithOptional";
-                return $"{relString}.{refColReq}(s => s.{rel.ReferencedTableName}).WillCascadeOnDelete(false);";
+                sb.Append($"modelBuilder.Entity<{TransformModelName(table)}>().HasOptional<{TransformModelName(rel.ReferencedTableName)}>(s => s.{refTableName})");
             }
+
+            string parentTableName = table;
+
+            if (relationships != null && relationships.Any())
+            {
+                var parentRels = (from tbl in models
+                                  select tbl.Relationships.FirstOrDefault(o => o.ReferencedTableName == table &&
+                                  o.SchemaName == rel.SchemaName &&
+                                  o.ColumnName == rel.ReferencedColumnName)).Where(x => x != null);
+
+                var parentRel = parentRels.FirstOrDefault();
+
+                if(parentRel != null)
+                {
+                    parentTableName = RelationshipNameFormatting.FormatName(parentRel.ReferencedTableName, parentRel.RelationshipAlias, parentRel.ColumnName, NamingConvention, relationships);
+                }
+            }
+
+            if (rel.Multiplicity == RelationshipMultiplicity.Many)
+            {
+                sb.Append($".WithMany(s => s.{parentTableName}).HasForeignKey(s => s.{rel.ColumnName}).WillCascadeOnDelete(false);");
+            }
+            else if (rel.Multiplicity == RelationshipMultiplicity.One)
+            {
+                sb.Append($".WithRequired(s => s.{parentTableName}).WillCascadeOnDelete(false);");
+            }
+            else
+            {
+                sb.Append($".WithOptional(s => s.{parentTableName}).WillCascadeOnDelete(false);");
+            }
+
+            return sb.ToString();
         }
     }
 

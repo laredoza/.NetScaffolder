@@ -10,17 +10,17 @@ namespace DotNetScaffolder.Components.Common
 {
     public static class RelationshipNameFormatting
     {
-        public static string FormatReferencedPropertyName(Relationship rel, INamingConvention nc = null, List<Relationship> relationships = null)
+        public static string FormatReferencedPropertyName(Relationship rel, INamingConvention nc = null, IEnumerable<Relationship> relationships = null)
         {
             return FormatName(rel.ReferencedTableName, rel.RelationshipAlias, rel.ReferencedColumnName, nc, relationships);
         }
 
-        public static string FormatParentPropertyName(Relationship rel, INamingConvention nc = null, List<Relationship> relationships = null)
+        public static string FormatParentPropertyName(Relationship rel, INamingConvention nc = null, IEnumerable<Relationship> relationships = null)
         {
             return FormatName(rel.ReferencedTableName, rel.RelationshipAlias, rel.ColumnName, nc, relationships);
         }
 
-        private static string FormatName(string tableName, string alias, string colName, INamingConvention nc = null, List<Relationship> relationships = null)
+        public static string FormatName(string tableName, string alias, string colName, INamingConvention nc = null, IEnumerable<Relationship> relationships = null)
         {
             string formattedName = string.IsNullOrEmpty(alias) ? tableName : alias;
 

@@ -41,6 +41,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\BankAccountRepository.g.cs" />
+    <Compile Include="Repository\BankTransfersRepository.g.cs" />
+    <Compile Include="Repository\BookRepository.g.cs" />
+    <Compile Include="Repository\CountryRepository.g.cs" />
+    <Compile Include="Repository\CustomerRepository.g.cs" />
+    <Compile Include="Repository\OrderDetailsRepository.g.cs" />
+    <Compile Include="Repository\OrderRepository.g.cs" />
+    <Compile Include="Repository\ProductRepository.g.cs" />
+    <Compile Include="Repository\SoftwareRepository.g.cs" />
     <Compile Include="RunGenerator.cs">
       <DependentUpon>RunGenerator.tt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -49,7 +58,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Model\Application.xml" />
-    <Content Include="Model\Context.xml" />
+    <Content Include="Model\Context.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Model\Dto.xml" />
     <Content Include="Model\DtoInterface.xml" />
     <Content Include="Model\EdmxSourceType.xml" />
@@ -64,6 +75,51 @@
 ..\..\Contexts\EF\SqlServer\Context\SqlServerAccountContext.g.cs
 ..\..\Contexts\EF\SqlServer\Context\SqlServerCustomerContext.g.cs
 ..\..\Contexts\EF\SqlServer\Context\SqlServerFullContext.g.cs
+..\..\Dtos\Dto\Dto\BankAccountDto.g.cs
+..\..\Dtos\Dto\Dto\BankTransfersDto.g.cs
+..\..\Dtos\Dto\Dto\BookDto.g.cs
+..\..\Dtos\Dto\Dto\CountryDto.g.cs
+..\..\Dtos\Dto\Dto\CustomerDto.g.cs
+..\..\Dtos\Dto\Dto\OrderDetailsDto.g.cs
+..\..\Dtos\Dto\Dto\OrderDto.g.cs
+..\..\Dtos\Dto\Dto\ProductDto.g.cs
+..\..\Dtos\Dto\Dto\SoftwareDto.g.cs
+..\..\Entities\Entity\Entity\BankAccount.g.cs
+..\..\Entities\Entity\Entity\BankTransfers.g.cs
+..\..\Entities\Entity\Entity\Book.g.cs
+..\..\Entities\Entity\Entity\Country.g.cs
+..\..\Entities\Entity\Entity\Customer.g.cs
+..\..\Entities\Entity\Entity\Order.g.cs
+..\..\Entities\Entity\Entity\OrderDetails.g.cs
+..\..\Entities\Entity\Entity\Product.g.cs
+..\..\Entities\Entity\Entity\Software.g.cs
+..\..\Interfaces\Interface\Dto\IBankAccount.g.cs
+..\..\Interfaces\Interface\Dto\IBankTransfers.g.cs
+..\..\Interfaces\Interface\Dto\IBook.g.cs
+..\..\Interfaces\Interface\Dto\ICountry.g.cs
+..\..\Interfaces\Interface\Dto\ICustomer.g.cs
+..\..\Interfaces\Interface\Dto\IOrder.g.cs
+..\..\Interfaces\Interface\Dto\IOrderDetails.g.cs
+..\..\Interfaces\Interface\Dto\IProduct.g.cs
+..\..\Interfaces\Interface\Dto\ISoftware.g.cs
+..\..\Interfaces\RepositoryInterfaces\Repository\IBankAccountRepository.g.cs
+..\..\Interfaces\RepositoryInterfaces\Repository\IBankTransfersRepository.g.cs
+..\..\Interfaces\RepositoryInterfaces\Repository\IBookRepository.g.cs
+..\..\Interfaces\RepositoryInterfaces\Repository\ICountryRepository.g.cs
+..\..\Interfaces\RepositoryInterfaces\Repository\ICustomerRepository.g.cs
+..\..\Interfaces\RepositoryInterfaces\Repository\IOrderDetailsRepository.g.cs
+..\..\Interfaces\RepositoryInterfaces\Repository\IOrderRepository.g.cs
+..\..\Interfaces\RepositoryInterfaces\Repository\IProductRepository.g.cs
+..\..\Interfaces\RepositoryInterfaces\Repository\ISoftwareRepository.g.cs
+.\Repository\BankAccountRepository.g.cs
+.\Repository\BankTransfersRepository.g.cs
+.\Repository\BookRepository.g.cs
+.\Repository\CountryRepository.g.cs
+.\Repository\CustomerRepository.g.cs
+.\Repository\OrderDetailsRepository.g.cs
+.\Repository\OrderRepository.g.cs
+.\Repository\ProductRepository.g.cs
+.\Repository\SoftwareRepository.g.cs
 </LastOutputs>
     </Content>
   </ItemGroup>
@@ -97,7 +153,7 @@
       <Name>RepositoryEFDotnet.Data.Entities.Entity</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Interfaces\Interface\RepositoryEFDotnet.Data.Interface.ModelInterfaces.csproj">
-      <Project>{4f6d59b6-2c03-4a37-9670-bb46225aa6e1}</Project>
+      <Project>{f49f5825-6f92-4b8d-ae30-59d43235974b}</Project>
       <Name>RepositoryEFDotnet.Data.Interface.ModelInterfaces</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Interfaces\RepositoryInterfaces\RepositoryEFDotnet.Data.Interface.RepositoryInterfaces.csproj">
