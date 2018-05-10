@@ -49,10 +49,10 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Base
         public ICollectionOption CollectionOption { get; set; }
 
         /// <summary>
-        ///     Gets or sets the driver type.
+        ///     Gets or sets the driver types.
         /// </summary>
         [XmlIgnore]
-        public IDriver DriverType { get; set; }
+        public List<IDriver> DriverTypes { get; set; }
 
         /// <summary>
         ///     Gets or sets the meta data.
