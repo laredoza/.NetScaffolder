@@ -4,6 +4,11 @@
   <Domains>
     <DomainDefinition>
       <CollectionOptionId>0bc1b0c4-1e41-9146-82cf-599181ce4411</CollectionOptionId>
+      <DriverIdList>
+        <guid>2bc1b0c4-1e41-9146-82cf-599181ce4412</guid>
+        <guid>2bc1b0c4-1e41-9146-82cf-599181ce4411</guid>
+        <guid>2bc1b0c4-1e41-9146-82cf-599181ce4417</guid>
+      </DriverIdList>
       <DriverId>2bc1b0c4-1e41-9146-82cf-599181ce4400</DriverId>
       <DriverTypeId>2bc1b0c4-1e41-9146-82cf-599181ce4410</DriverTypeId>
       <Id>88e23444-4d85-4fd7-a1a7-e6d68e896281</Id>
@@ -96,38 +101,6 @@
             <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
             <LanguageOutputId>1bc1b0c4-1e41-9146-82cf-599181ce4410</LanguageOutputId>
             <TemplatePath>ApplicationService.T4</TemplatePath>
-            <Version>1</Version>
-          </Template>
-          <Template>
-            <Children />
-            <Enabled>true</Enabled>
-            <HierarchyType>Item</HierarchyType>
-            <Id>599534c1-e261-4963-a0ee-1cf42b9d4795</Id>
-            <Name>DtoInterface</Name>
-            <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
-            <Selected>false</Selected>
-            <ConfigLocation>Data</ConfigLocation>
-            <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4441</DataType>
-            <DefaultSettings />
-            <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
-            <LanguageOutputId>1bc1b0c4-1e41-9146-82cf-599181ce4410</LanguageOutputId>
-            <TemplatePath>DtoInterfaceTemplate</TemplatePath>
-            <Version>1</Version>
-          </Template>
-          <Template>
-            <Children />
-            <Enabled>true</Enabled>
-            <HierarchyType>Item</HierarchyType>
-            <Id>70678934-ff83-4487-a234-ad6bd9d9358b</Id>
-            <Name>RepoInterface</Name>
-            <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
-            <Selected>false</Selected>
-            <ConfigLocation>Data</ConfigLocation>
-            <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4451</DataType>
-            <DefaultSettings />
-            <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
-            <LanguageOutputId>1bc1b0c4-1e41-9146-82cf-599181ce4410</LanguageOutputId>
-            <TemplatePath>RepositoryInterfaceTemplate</TemplatePath>
             <Version>1</Version>
           </Template>
         </Templates>

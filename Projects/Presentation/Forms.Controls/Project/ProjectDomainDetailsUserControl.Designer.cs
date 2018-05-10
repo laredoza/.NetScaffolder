@@ -28,14 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
-            "EF 6.0",
-            "MySql"}, -1);
-            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem(new string[] {
-            "EF 6.0",
-            "Oracle"}, -1);
-            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("3");
-            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("4");
             this.button5 = new System.Windows.Forms.Button();
             this.ComboBoxPackages = new System.Windows.Forms.ComboBox();
             this.label11 = new System.Windows.Forms.Label();
@@ -55,7 +47,7 @@
             this.BtnModel = new System.Windows.Forms.Button();
             this.BtnRefresh = new System.Windows.Forms.Button();
             this.ListViewDrivers = new System.Windows.Forms.ListView();
-            this.Driver = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.DriverType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
@@ -236,33 +228,25 @@
             // 
             this.ListViewDrivers.CheckBoxes = true;
             this.ListViewDrivers.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.Driver,
+            this.DriverType,
             this.columnHeader2});
-            listViewItem1.StateImageIndex = 0;
-            listViewItem2.StateImageIndex = 0;
-            listViewItem3.StateImageIndex = 0;
-            listViewItem4.StateImageIndex = 0;
-            this.ListViewDrivers.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1,
-            listViewItem2,
-            listViewItem3,
-            listViewItem4});
             this.ListViewDrivers.Location = new System.Drawing.Point(112, 169);
             this.ListViewDrivers.Name = "ListViewDrivers";
             this.ListViewDrivers.Size = new System.Drawing.Size(414, 165);
             this.ListViewDrivers.TabIndex = 53;
             this.ListViewDrivers.UseCompatibleStateImageBehavior = false;
             this.ListViewDrivers.View = System.Windows.Forms.View.Details;
+            this.ListViewDrivers.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.ListViewDrivers_ItemChecked);
             // 
-            // Driver
+            // DriverType
             // 
-            this.Driver.Text = "Driver";
-            this.Driver.Width = 150;
+            this.DriverType.Text = "Driver Type";
+            this.DriverType.Width = 250;
             // 
             // columnHeader2
             // 
-            this.columnHeader2.Text = "Driver Type";
-            this.columnHeader2.Width = 250;
+            this.columnHeader2.Text = "Driver";
+            this.columnHeader2.Width = 150;
             // 
             // ProjectDomainDetailsUserControl
             // 
@@ -315,7 +299,7 @@
         private System.Windows.Forms.Button BtnModel;
         private System.Windows.Forms.Button BtnRefresh;
         private System.Windows.Forms.ListView ListViewDrivers;
-        private System.Windows.Forms.ColumnHeader Driver;
+        private System.Windows.Forms.ColumnHeader DriverType;
         private System.Windows.Forms.ColumnHeader columnHeader2;
     }
 }

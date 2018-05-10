@@ -23,7 +23,6 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project
     using DotNetScaffolder.Mapping.MetaData.Project.Packages;
     using DotNetScaffolder.Presentation.Forms.Controls.Model;
     using DotNetScaffolder.Presentation.Forms.Controls.Sources;
-
     #endregion
 
     /// <summary>
@@ -431,6 +430,43 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project
             }
         }
 
+        /// <summary>
+        /// Gets or sets the selected driver types.
+        /// </summary>
+        public List<Guid> SelectedDriverTypes
+        {
+            get
+            {
+                List<Guid> result = new List<Guid>();
+
+                if (this.SelectedDomain != null)
+                {
+
+
+                    result = this.SelectedDomain.DriverIdList;
+                    Logger.Trace($"DriverIdList set to {this.SelectedDomain.SourceTypeId}.");
+                }
+                else
+                {
+                    Logger.Trace("Empty DriverIdList is returned as SelectedDomain is null.");
+                }
+
+                return result;
+            }
+
+            set
+            {
+                if (this.SelectedDomain != null)
+                {
+                    this.SelectedDomain.DriverIdList = value;
+                }
+                else
+                {
+                    Logger.Trace("Empty DriverIdList is returned as SelectedDomain is null.");
+                }
+            }
+        }
+
         #endregion
 
         #region Public Methods And Operators
@@ -451,10 +487,10 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project
                 {
                     items.Add(
                         new ComboboxItem
-                            {
-                                Text = (string)collectionOption.Metadata["NameMetaData"],
-                                Value = new Guid(collectionOption.Metadata["ValueMetaData"].ToString())
-                            });
+                        {
+                            Text = (string)collectionOption.Metadata["NameMetaData"],
+                            Value = new Guid(collectionOption.Metadata["ValueMetaData"].ToString())
+                        });
                 }
             }
 
@@ -475,17 +511,16 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project
 
             foreach (var driverType in ScaffoldConfig.Drivers)
             {
-                
-                value = new Guid(driverType.Metadata["TypeIdMetaData"].ToString());
-                item = new ListViewItem { Text = (string)driverType.Metadata["TypeMetaData"], Tag = value };
-
                 value = new Guid(driverType.Metadata["ValueMetaData"].ToString());
+                item = new ListViewItem { Text = (string)driverType.Metadata["NameMetaData"], Tag = value };
+
+                value = new Guid(driverType.Metadata["TypeIdMetaData"].ToString());
                 item.SubItems.Add(
                     new ListViewItem.ListViewSubItem
-                        {
-                            Text = (string)driverType.Metadata["NameMetaData"],
-                            Tag = value
-                        });
+                    {
+                        Text = (string)driverType.Metadata["TypeMetaData"],
+                        Tag = value
+                    });
 
                 items.Add(item);
 
@@ -514,10 +549,10 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project
                 {
                     items.Add(
                         new ComboboxItem
-                            {
-                                Text = (string)driverType.Metadata["NameMetaData"],
-                                Value = new Guid(driverType.Metadata["ValueMetaData"].ToString())
-                            });
+                        {
+                            Text = (string)driverType.Metadata["NameMetaData"],
+                            Value = new Guid(driverType.Metadata["ValueMetaData"].ToString())
+                        });
                 }
             }
 
@@ -538,10 +573,10 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project
             {
                 items.Add(
                     new ComboboxItem
-                        {
-                            Text = (string)namingConvention.Metadata["NameMetaData"],
-                            Value = new Guid(namingConvention.Metadata["ValueMetaData"].ToString())
-                        });
+                    {
+                        Text = (string)namingConvention.Metadata["NameMetaData"],
+                        Value = new Guid(namingConvention.Metadata["ValueMetaData"].ToString())
+                    });
             }
 
             return items.ToArray();
@@ -561,10 +596,10 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project
             {
                 items.Add(
                     new ComboboxItem
-                        {
-                            Text = (string)sourceType.Metadata["NameMetaData"],
-                            Value = new Guid(sourceType.Metadata["ValueMetaData"].ToString())
-                        });
+                    {
+                        Text = (string)sourceType.Metadata["NameMetaData"],
+                        Value = new Guid(sourceType.Metadata["ValueMetaData"].ToString())
+                    });
             }
 
             return items.OrderBy(i => i.Text).ToArray();
@@ -758,6 +793,21 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project
                     this.ComboBoxCollectionOption.SelectedValue = this.SelectedCollectionOptionId;
                 }
 
+                if (this.ApplicationService != null && this.ApplicationService.ProjectDefinition != null)
+                {
+                    foreach (Guid driverType in this.SelectedDriverTypes)
+                    {
+                        foreach (ListViewItem item in this.ListViewDrivers.Items)
+                        {
+                            if (new Guid(item.Tag.ToString()) == driverType)
+                            {
+                                item.Checked = true;
+                                break;
+                            }
+                        }
+                    }
+                }
+
                 this.ComboBoxPackages.SelectedValue = this.SelectedDomain.Package.Id;
             }
 
@@ -765,5 +815,27 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project
         }
 
         #endregion
+
+        /// <summary>
+        /// The list view drivers_ item checked.
+        /// </summary>
+        /// <param name="sender">
+        /// The sender.
+        /// </param>
+        /// <param name="e">
+        /// The e.
+        /// </param>
+        private void ListViewDrivers_ItemChecked(object sender, ItemCheckedEventArgs e)
+        {
+            this.SelectedDriverTypes.Clear();
+
+            foreach (ListViewItem item in this.ListViewDrivers.Items)
+            {
+                if (item != null && item.Checked)
+                {
+                    this.SelectedDriverTypes.Add(new Guid(item.Tag.ToString()));
+                }
+            }
+        }
     }
 }
