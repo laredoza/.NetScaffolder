@@ -9,7 +9,6 @@
 
         protected override void RunCore()
         {
-            Debugger.Break();
             template.DataType = this.DataType;
             template.EntityNamespace = EntityDataType.FullNamespace;
 
@@ -19,7 +18,7 @@
 
                 if(!string.IsNullOrEmpty(dbContext.OutputPath))
                 {
-                    template.Output.Project =  string.Format(dbContext.OutputPath, DataType.DriverType.Prefix);
+                    template.Output.Project =  string.Format(dbContext.OutputPath, DataType.DriverType.ParentFolder, DataType.DriverType.Prefix);
                 }
 
                 template.RenderToFile(string.Format(@"{0}\{1}{2}.g.cs", dbContext.OutputFolder,DataType.DriverType.Prefix,dbContext.ContextName));

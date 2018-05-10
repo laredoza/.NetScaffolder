@@ -91,9 +91,13 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project
             this.ComboBoxSourceType.ValueMember = "Value";
             this.ComboBoxSourceType.DataSource = this.ReturnSourceTypes();
 
-            this.ComboBoxDriver.DisplayMember = "Text";
-            this.ComboBoxDriver.ValueMember = "Value";
-            this.ComboBoxDriver.DataSource = this.ReturnDriverTypes();
+            //this.ComboBoxDriver.DisplayMember = "Text";
+            //this.ComboBoxDriver.ValueMember = "Value";
+            //this.ComboBoxDriver.DataSource = this.ReturnDriverTypes();
+
+            this.ListViewDrivers.Items.Clear();
+            ListViewItem[] drivers = this.ReturnDriverTypes();
+            this.ListViewDrivers.Items.AddRange(drivers);
 
             this.ComboBoxCollectionOption.DisplayMember = "Text";
             this.ComboBoxCollectionOption.ValueMember = "Value";
@@ -463,21 +467,29 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project
         /// <returns>
         ///     The <see cref="object[]" />.
         /// </returns>
-        public object[] ReturnDriverTypes()
+        public ListViewItem[] ReturnDriverTypes()
         {
-            List<ComboboxItem> items = new List<ComboboxItem>();
+            List<ListViewItem> items = new List<ListViewItem>();
             Guid value;
+            ListViewItem item;
 
             foreach (var driverType in ScaffoldConfig.Drivers)
             {
+                
                 value = new Guid(driverType.Metadata["TypeIdMetaData"].ToString());
-                if (!items.Any(i => (Guid)i.Value == value))
-                items.Add(
-                    new ComboboxItem
+                item = new ListViewItem { Text = (string)driverType.Metadata["TypeMetaData"], Tag = value };
+
+                value = new Guid(driverType.Metadata["ValueMetaData"].ToString());
+                item.SubItems.Add(
+                    new ListViewItem.ListViewSubItem
                         {
-                            Text = (string)driverType.Metadata["TypeMetaData"],
-                            Value = value
+                            Text = (string)driverType.Metadata["NameMetaData"],
+                            Tag = value
                         });
+
+                items.Add(item);
+
+
             }
 
             return items.OrderBy(i => i.Text).ToArray();
