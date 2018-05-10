@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2037
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepositoryEFDotnet.Library", "RepositoryEFDotnet\Library\RepositoryEFDotnet.Library.csproj", "{19D63602-BD17-49F2-8335-E75C6813260A}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepositoryEFDotnet.UnitTest", "RepositoryEFDotnet\UnitTest\RepositoryEFDotnet.UnitTest.csproj", "{14988671-1B3C-4977-BF65-8A0451FB2A8B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetScaffolder.Test", "..\..\..\..\..\Tests\CodeGenerator\DotNetScaffolder.Test.csproj", "{96B8860E-531C-405F-9ABF-2FAE4E8F2759}"
@@ -45,7 +43,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3.Presentation", "3.Present
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepositoryEFDotnet.Contexts.EF.Base", "Data\Contexts\EF\Base\RepositoryEFDotnet.Contexts.EF.Base.csproj", "{A8511725-544E-49BD-8451-4C8638ADC5BA}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{0358EBCF-3298-4E75-AEF3-E0491F34541A}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4. Core", "4. Core", "{0358EBCF-3298-4E75-AEF3-E0491F34541A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepositoryEFDotnet.Core", "Core\RepositoryEFDotnet.Core.csproj", "{0333E000-6AAF-4E18-8747-2299A8231AB1}"
 EndProject
@@ -53,16 +51,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepositoryEFDotnet.Data.Int
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepositoryEFDotnet.Data.Interface.RepositoryInterfaces", "Data\Interfaces\RepositoryInterfaces\RepositoryEFDotnet.Data.Interface.RepositoryInterfaces.csproj", "{69BF017D-9632-4BCA-859B-5D24A2C4B79A}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5. Tests", "5. Tests", "{23BCBB7F-56B2-4415-98BC-74F00E829053}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{19D63602-BD17-49F2-8335-E75C6813260A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{19D63602-BD17-49F2-8335-E75C6813260A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{19D63602-BD17-49F2-8335-E75C6813260A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{19D63602-BD17-49F2-8335-E75C6813260A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{14988671-1B3C-4977-BF65-8A0451FB2A8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{14988671-1B3C-4977-BF65-8A0451FB2A8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{14988671-1B3C-4977-BF65-8A0451FB2A8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -120,6 +116,8 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{14988671-1B3C-4977-BF65-8A0451FB2A8B} = {23BCBB7F-56B2-4415-98BC-74F00E829053}
+		{96B8860E-531C-405F-9ABF-2FAE4E8F2759} = {23BCBB7F-56B2-4415-98BC-74F00E829053}
 		{0DD34953-F235-4D97-910F-EA1F7D7CF0C9} = {DFB6CD02-EE0C-4BA2-9F3A-EE769AF952B9}
 		{CA2EECAE-3E0F-4E4A-9D33-B5BFD3B0C76F} = {0DD34953-F235-4D97-910F-EA1F7D7CF0C9}
 		{83E0D11E-2155-4D73-A5D0-88A824D9A31C} = {DFB6CD02-EE0C-4BA2-9F3A-EE769AF952B9}

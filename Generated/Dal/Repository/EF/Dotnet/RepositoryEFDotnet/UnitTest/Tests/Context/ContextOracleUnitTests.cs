@@ -1,26 +1,23 @@
-﻿using System;
-using System.Data.Entity;
-using Banking.Models.Accounts;
-//using Banking.Models.Context;
+﻿//using Banking.Models.Context;
 //using Banking.Models.Customers;
-using DotNetScaffolder.Test.Components.SourceTypes;
+using Banking.Models.Accounts;
+using Banking.Models.Context;
+using Banking.Models.Customers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Data.Entity;
 
 namespace RepositoryEFDotnet.UnitTest
 {
-    using Banking.Models.Context;
-    using Banking.Models.Customers;
-
     [TestClass]
     public class ContextOracleUnitTest : BaseContextUnitTests
     {
         [TestMethod]
         public void ContextUnitTest_AccountContext_CreateDb()
         {
-            Database.SetInitializer(new DropCreateDatabaseAlways<AccountContext>());
-            using (var context = new AccountContext("RepoTestOracle"))
+            Database.SetInitializer(new DropCreateDatabaseAlways<OracleAccountContext>());
+            using (var context = new OracleAccountContext("RepoTestOracle"))
             {
-                Database.SetInitializer(new DropCreateDatabaseAlways<AccountContext>());
+                Database.SetInitializer(new DropCreateDatabaseAlways<OracleAccountContext>());
                 // BaseContextUnitTests_CreateDbTest(context);
 
                 context.Database.Initialize(true);
@@ -30,7 +27,7 @@ namespace RepositoryEFDotnet.UnitTest
         [TestMethod]
         public void ContextUnitTest_CustomerContext_CreateDb()
         {
-            using (var context = new CustomerContext("RepoTestOracle"))
+            using (var context = new OracleCustomerContext("RepoTestOracle"))
             {
                 BaseContextUnitTests_CreateDbTest(context);
             }
@@ -39,7 +36,7 @@ namespace RepositoryEFDotnet.UnitTest
         [TestMethod]
         public void ContextUnitTest_FullContext_CreateDb()
         {
-            using (var context = new FullContext("RepoTestOracle"))
+            using (var context = new OracleFullContext("RepoTestOracle"))
             {
                 BaseContextUnitTests_CreateDbTest(context);
             }

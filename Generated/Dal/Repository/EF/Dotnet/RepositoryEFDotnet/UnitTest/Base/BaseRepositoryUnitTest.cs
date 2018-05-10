@@ -23,128 +23,64 @@ namespace RepositoryEFDotnet.UnitTest
 
         #region Base Tests
 
-        public void BaseRepositoryUnitTest_Customer_Add(ICustomerRepository repository, bool rollback = false)
+        public void BaseRepositoryUnitTest_Customer_Add(ICustomerRepository repository)
         {           
             var dto = CreateCustomerDto();
             repository.Save(dto);
 
-            if (rollback)
-            {
-                repository.Rollback();
-            }
-            else
-            {
-                repository.Commit();
-            }
-
             // Load from db and check values
             var result = repository.LoadAll();
 
-            if (rollback)
-            {
-                // Testing rollback
-                Assert.AreEqual(0, result.Count, $"Incorrect number of customers found.");
-                return;
-            }
-
             // Test count
-            Assert.AreEqual(1, result.Count, $"Incorrect number of customers found.");
+            CheckEntityCount(1, result.Count, "Customers");
 
             var savedEntity = result[0];
 
             Test_Customer(savedEntity);
         }
 
-        public void BaseRepositoryUnitTest_Country_Add(ICountryRepository repository, bool rollback = false)
+        public void BaseRepositoryUnitTest_Country_Add(ICountryRepository repository)
         {
             var dto = CreateCountryDto();
             repository.Save(dto);
 
-            if (rollback)
-            {
-                repository.Rollback();
-            }
-            else
-            {
-                repository.Commit();
-            }
-
             // Load from db and check values
             var result = repository.LoadAll();
 
-            if (rollback)
-            {
-                // Testing rollback
-                Assert.AreEqual(0, result.Count, $"Incorrect number of customers found.");
-                return;
-            }
-
             // Test count
-            Assert.AreEqual(1, result.Count, $"Incorrect number of countries found.");
+            CheckEntityCount(1, result.Count, "Country");
 
             var savedEntity = result[0];
 
             Test_Country(savedEntity);
         }
 
-        public void BaseRepositoryUnitTest_BankAccount_Add(IBankAccountRepository repository, bool rollback = false)
+        public void BaseRepositoryUnitTest_BankAccount_Add(IBankAccountRepository repository)
         {
             var dto = CreateBankAccountDto();
             repository.Save(dto);
 
-            if (rollback)
-            {
-                repository.Rollback();
-            }
-            else
-            {
-                repository.Commit();
-            }
-
             // Load from db and check values
             var result = repository.LoadAll();
 
-            if (rollback)
-            {
-                // Testing rollback
-                Assert.AreEqual(0, result.Count, $"Incorrect number of bank accounts found.");
-                return;
-            }
-
             // Test count
-            Assert.AreEqual(1, result.Count, $"Incorrect number of bank accounts found.");
+            CheckEntityCount(1, result.Count, "BankAccounts");
 
             var savedEntity = result[0];
 
             Test_BankAccount(savedEntity);
         }
 
-        public void BaseRepositoryUnitTest_BankTransfers_Add(IBankTransfersRepository repository, bool rollback = false)
+        public void BaseRepositoryUnitTest_BankTransfers_Add(IBankTransfersRepository repository)
         {
             var dto = CreateBankTransfersDto();
             repository.Save(dto);
 
-            if (rollback)
-            {
-                repository.Rollback();
-            }
-            else
-            {
-                repository.Commit();
-            }
-
             // Load from db and check values
             var result = repository.LoadAll();
 
-            if (rollback)
-            {
-                // Testing rollback
-                Assert.AreEqual(0, result.Count, $"Incorrect number of bank transfers found.");
-                return;
-            }
-
             // Test count
-            Assert.AreEqual(1, result.Count, $"Incorrect number of bank transfers found.");
+            CheckEntityCount(1, result.Count, "BankTransfers");
 
             var savedEntity = result[0];
 
@@ -154,6 +90,11 @@ namespace RepositoryEFDotnet.UnitTest
         #endregion
 
         #region Test Functions
+
+        public void CheckEntityCount(int expected, int actual, string name)
+        {
+            Assert.AreEqual(expected, actual, $"Incorrect number of {name} found.");
+        }
 
         private void Test_Customer(ICustomer savedEntity)
         {
@@ -224,7 +165,6 @@ namespace RepositoryEFDotnet.UnitTest
                 Photo = "Photo goes here",
                 PostalCode = "1234567890",
                 Telephone = "Test Phone number",
-                //CountryId = 1
             };
         }
 
@@ -242,7 +182,7 @@ namespace RepositoryEFDotnet.UnitTest
             {
                 Balance = 100,
                 BankAccountNumber = "BA-1230981",
-                CustomerId = 1,
+//                CustomerId = 1,
                 Locked = false
             };
         }

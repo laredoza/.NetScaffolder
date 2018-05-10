@@ -1,18 +1,11 @@
-﻿using System;
-using System.Data.Entity;
-using Banking.Models.Accounts;
-//using Banking.Models.Context;
+﻿//using Banking.Models.Context;
 //using Banking.Models.Customers;
-using DotNetScaffolder.Test.Components.SourceTypes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace RepositoryEFDotnet.UnitTest
 {
     using Banking.Models.Context;
-    using Banking.Models.Customers;
-    using Banking.Models.Interfaces;
     using Banking.Models.Repository;
-    using System.Configuration;
     using System.Data.Common;
 
     [TestClass]
@@ -20,7 +13,7 @@ namespace RepositoryEFDotnet.UnitTest
     {
         #region Privates
 
-        private FullContext Context;
+        private SqlServerFullContext Context;
 
         #endregion
 
@@ -30,7 +23,7 @@ namespace RepositoryEFDotnet.UnitTest
         public override void SetupDb()
         {
             Connection = Effort.DbConnectionFactory.CreateTransient();
-            Context = new FullContext(Connection as DbConnection);
+            //Context = new SqlServerFullContext(Connection as DbConnection);
         }
 
         #endregion
@@ -40,7 +33,7 @@ namespace RepositoryEFDotnet.UnitTest
         [TestMethod]
         public void BankAccountRepository_Add()
         {
-            CustomerRepository_Add();
+            //CustomerRepository_Add();
 
             var repo = new BankAccountRepository(Context);
             BaseRepositoryUnitTest_BankAccount_Add(repo);
@@ -58,8 +51,6 @@ namespace RepositoryEFDotnet.UnitTest
         [TestMethod]
         public void CustomerRepository_Add()
         {
-            //CountryRepository_Add();
-
             var repo = new CustomerRepository(Context);
             BaseRepositoryUnitTest_Customer_Add(repo);
         }
@@ -69,13 +60,6 @@ namespace RepositoryEFDotnet.UnitTest
         {
             var repo = new CountryRepository(Context);
             BaseRepositoryUnitTest_Country_Add(repo);
-        }
-
-        [TestMethod]
-        public void CountryRepository_Add_Rollback()
-        {
-            var repo = new CountryRepository(Context);
-            BaseRepositoryUnitTest_Country_Add(repo, true);
         }
 
         #endregion

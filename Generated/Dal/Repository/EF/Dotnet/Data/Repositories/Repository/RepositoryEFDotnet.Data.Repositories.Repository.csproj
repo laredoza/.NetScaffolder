@@ -130,7 +130,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Model\Banking.mdl" />
+    <None Include="Model\Banking.mdl">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Model\T4\BaseGenerator.ttInclude" />
     <None Include="Model\T4\BaseProjectGenerator.ttInclude" />
     <None Include="Model\T4\BaseTemplate.ttinclude" />

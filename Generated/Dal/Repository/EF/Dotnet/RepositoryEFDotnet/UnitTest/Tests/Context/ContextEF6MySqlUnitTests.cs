@@ -14,7 +14,7 @@ namespace RepositoryEFDotnet.UnitTest
         [TestMethod]
         public void ContextUnitTest_AccountContext_CreateDb()
         {
-            using (var context = new AccountContext("RepoTestMySql"))
+            using (var context = new MySqlAccountContext("RepoTestMySql"))
             {
                 BaseContextUnitTests_CreateDbTest(context);
             }
@@ -23,7 +23,7 @@ namespace RepositoryEFDotnet.UnitTest
         [TestMethod]
         public void ContextUnitTest_CustomerContext_CreateDb()
         {
-            using (var context = new CustomerContext("RepoTestMySql"))
+            using (var context = new MySqlCustomerContext("RepoTestMySql"))
             {
                 BaseContextUnitTests_CreateDbTest(context);
             }
@@ -32,7 +32,7 @@ namespace RepositoryEFDotnet.UnitTest
         [TestMethod]
         public void ContextUnitTest_FullContext_CreateDb()
         {
-            using (var context = new FullContext("RepoTestMySql"))
+            using (var context = new MySqlFullContext("RepoTestMySql"))
             {
                 BaseContextUnitTests_CreateDbTest(context);
             }
