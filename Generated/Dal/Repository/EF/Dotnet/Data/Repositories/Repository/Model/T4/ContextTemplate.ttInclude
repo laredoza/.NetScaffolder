@@ -4,7 +4,8 @@ public class ContextTemplate : BaseTemplate
 	public ContextDataType DataType { get; set; }
 	public ContextData ContextData { get; set; }
 	public string EntityNamespace { get; set; }
-	
+    public IDriver Driver {get; set; }
+
 	public override string TransformText()
 	{
 		//Debugger.Break();
@@ -19,7 +20,7 @@ public class ContextTemplate : BaseTemplate
 //	USE A PARTIAL CLASS INSTEAD
 // *******************************************************************
 
-<#+ foreach(var nameSpace in DataType.DriverType.NameSpaces){ #>
+<#+ foreach(var nameSpace in Driver.NameSpaces){ #>
 using <#= nameSpace #>;
 <#+ } #>
 using RepositoryEFDotnet.Library;
@@ -29,8 +30,8 @@ using <#= EntityNamespace #>;
 
 namespace <#= ContextData.TransformFullnamespace(DataType.BaseNamespace) #>
 {
-<#+ if(!string.IsNullOrEmpty(DataType.DriverType.ContextAttribute)){ #>
-    <#=DataType.DriverType.ContextAttribute #>
+<#+ if(!string.IsNullOrEmpty(Driver.ContextAttribute)){ #>
+    <#=Driver.ContextAttribute #>
 <#+ } #>
 	public partial class <#= ContextData.ContextName #> <#= ContextData.TransformInheritFrom #>
 	{	

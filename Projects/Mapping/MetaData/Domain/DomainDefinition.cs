@@ -139,7 +139,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Domain
                 this.ValidationResult.Add(new Validation(ValidationType.SourceTypeId, "SourceTypeId cannot be empty"));
             }
 
-            if (this.DriverIdList.Count > 0)
+            if (this.DriverIdList.Count == 0)
             {
                 this.ValidationResult.Add(new Validation(ValidationType.DriverTypeId, "DriverIdList cannot be empty"));
             }

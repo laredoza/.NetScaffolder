@@ -55,6 +55,9 @@
   <ItemGroup>
     <Compile Include="Config\OracleDbConfiguration.cs" />
     <Compile Include="Config\OracleHistory.cs" />
+    <Compile Include="Context\OracleAccountContext.g.cs" />
+    <Compile Include="Context\OracleCustomerContext.g.cs" />
+    <Compile Include="Context\OracleFullContext.g.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

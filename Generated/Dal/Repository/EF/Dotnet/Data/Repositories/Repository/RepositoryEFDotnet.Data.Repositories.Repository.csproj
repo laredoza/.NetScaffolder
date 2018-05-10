@@ -72,6 +72,12 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>RunGenerator.cs</LastGenOutput>
       <LastOutputs>
+..\..\Contexts\EF\MySql\Context\MySqlAccountContext.g.cs
+..\..\Contexts\EF\MySql\Context\MySqlCustomerContext.g.cs
+..\..\Contexts\EF\MySql\Context\MySqlFullContext.g.cs
+..\..\Contexts\EF\Oracle\Context\OracleAccountContext.g.cs
+..\..\Contexts\EF\Oracle\Context\OracleCustomerContext.g.cs
+..\..\Contexts\EF\Oracle\Context\OracleFullContext.g.cs
 ..\..\Contexts\EF\SqlServer\Context\SqlServerAccountContext.g.cs
 ..\..\Contexts\EF\SqlServer\Context\SqlServerCustomerContext.g.cs
 ..\..\Contexts\EF\SqlServer\Context\SqlServerFullContext.g.cs
