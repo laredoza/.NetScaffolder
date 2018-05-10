@@ -28,16 +28,16 @@ using Banking.Models.Entity;
 namespace Banking.Models.Customers
 {
     [DbConfigurationType(typeof(MySqlEFConfiguration))]
-	public partial class CustomerContext : BaseContext
+	public partial class MySqlCustomerContext : BaseContext
 	{	
 		#region CTOR
 		
-		public CustomerContext(string connectionOrName) 
+		public MySqlCustomerContext(string connectionOrName) 
 			: base($"name={connectionOrName}") 
 		{
 		}
 		
-		public CustomerContext()
+		public MySqlCustomerContext()
 			: base("name=RepoTest") 
 		{
 		}
@@ -236,8 +236,8 @@ namespace Banking.Models.Customers
             Configuration.ProxyCreationEnabled = false;
             Configuration.AutoDetectChangesEnabled = false;
 			
-			Database.SetInitializer(new CreateDatabaseIfNotExists<CustomerContext>());
-			// Database.SetInitializer(new MigrateDatabaseToLatestVersion<CustomerContext, Configuration>());
+			Database.SetInitializer(new CreateDatabaseIfNotExists<MySqlCustomerContext>());
+			// Database.SetInitializer(new MigrateDatabaseToLatestVersion<MySqlCustomerContext, Configuration>());
 			Database.Log = this.Log;
         }
 		

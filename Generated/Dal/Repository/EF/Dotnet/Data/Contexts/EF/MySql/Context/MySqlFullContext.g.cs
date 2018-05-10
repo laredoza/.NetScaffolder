@@ -28,16 +28,16 @@ using Banking.Models.Entity;
 namespace Banking.Models.Context
 {
     [DbConfigurationType(typeof(MySqlEFConfiguration))]
-	public partial class FullContext : BaseContext
+	public partial class MySqlFullContext : BaseContext
 	{	
 		#region CTOR
 		
-		public FullContext(string connectionOrName) 
+		public MySqlFullContext(string connectionOrName) 
 			: base($"name={connectionOrName}") 
 		{
 		}
 		
-		public FullContext()
+		public MySqlFullContext()
 			: base("name=RepoTest") 
 		{
 		}
@@ -219,8 +219,8 @@ namespace Banking.Models.Context
             Configuration.ProxyCreationEnabled = false;
             Configuration.AutoDetectChangesEnabled = false;
 			
-			Database.SetInitializer(new CreateDatabaseIfNotExists<FullContext>());
-			// Database.SetInitializer(new MigrateDatabaseToLatestVersion<FullContext, Configuration>());
+			Database.SetInitializer(new CreateDatabaseIfNotExists<MySqlFullContext>());
+			// Database.SetInitializer(new MigrateDatabaseToLatestVersion<MySqlFullContext, Configuration>());
         }
 		
 		#endregion

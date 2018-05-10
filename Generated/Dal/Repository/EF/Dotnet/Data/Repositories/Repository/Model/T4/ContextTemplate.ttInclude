@@ -33,16 +33,16 @@ namespace <#= ContextData.TransformFullnamespace(DataType.BaseNamespace) #>
 <#+ if(!string.IsNullOrEmpty(Driver.ContextAttribute)){ #>
     <#=Driver.ContextAttribute #>
 <#+ } #>
-	public partial class <#= ContextData.ContextName #> <#= ContextData.TransformInheritFrom #>
+	public partial class <#= string.Concat(Driver.Prefix, ContextData.ContextName) #> <#= ContextData.TransformInheritFrom #>
 	{	
 		#region CTOR
 		
-		public <#= ContextData.ContextName #>(string connectionOrName) 
+		public <#= string.Concat(Driver.Prefix, ContextData.ContextName)  #>(string connectionOrName) 
 			: base($"name={connectionOrName}") 
 		{
 		}
 		
-		public <#= ContextData.ContextName #>()
+		public <#= string.Concat(Driver.Prefix, ContextData.ContextName)  #>()
 <#+ if(!string.IsNullOrEmpty(ContextData.CustomConnectionName)){ #>
 			: base("name=<#= ContextData.CustomConnectionName #>") 
 <#+ } else #>
@@ -152,8 +152,8 @@ namespace <#= ContextData.TransformFullnamespace(DataType.BaseNamespace) #>
             Configuration.AutoDetectChangesEnabled = false;
 			
 <#+ if(ContextData.CreateDb){ #>
-			Database.SetInitializer(new CreateDatabaseIfNotExists<<#= ContextData.ContextName #>>());
-			// Database.SetInitializer(new MigrateDatabaseToLatestVersion<<#= ContextData.ContextName #>, Configuration>());
+			Database.SetInitializer(new CreateDatabaseIfNotExists<<#= string.Concat(Driver.Prefix, ContextData.ContextName)  #>>());
+			// Database.SetInitializer(new MigrateDatabaseToLatestVersion<<#= string.Concat(Driver.Prefix, ContextData.ContextName)  #>, Configuration>());
 <#+ } #>
 <#+ if(ContextData.LoggingEnabled){ #>
 			Database.Log = this.Log;

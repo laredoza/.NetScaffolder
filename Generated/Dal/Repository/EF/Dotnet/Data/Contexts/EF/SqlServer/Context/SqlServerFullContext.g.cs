@@ -26,16 +26,16 @@ using Banking.Models.Entity;
 
 namespace Banking.Models.Context
 {
-	public partial class FullContext : BaseContext
+	public partial class SqlServerFullContext : BaseContext
 	{	
 		#region CTOR
 		
-		public FullContext(string connectionOrName) 
+		public SqlServerFullContext(string connectionOrName) 
 			: base($"name={connectionOrName}") 
 		{
 		}
 		
-		public FullContext()
+		public SqlServerFullContext()
 			: base("name=RepoTest") 
 		{
 		}
@@ -217,8 +217,8 @@ namespace Banking.Models.Context
             Configuration.ProxyCreationEnabled = false;
             Configuration.AutoDetectChangesEnabled = false;
 			
-			Database.SetInitializer(new CreateDatabaseIfNotExists<FullContext>());
-			// Database.SetInitializer(new MigrateDatabaseToLatestVersion<FullContext, Configuration>());
+			Database.SetInitializer(new CreateDatabaseIfNotExists<SqlServerFullContext>());
+			// Database.SetInitializer(new MigrateDatabaseToLatestVersion<SqlServerFullContext, Configuration>());
         }
 		
 		#endregion

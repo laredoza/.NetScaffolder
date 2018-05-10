@@ -27,16 +27,16 @@ using Banking.Models.Entity;
 
 namespace Banking.Models.Customers
 {
-	public partial class CustomerContext : BaseContext
+	public partial class OracleCustomerContext : BaseContext
 	{	
 		#region CTOR
 		
-		public CustomerContext(string connectionOrName) 
+		public OracleCustomerContext(string connectionOrName) 
 			: base($"name={connectionOrName}") 
 		{
 		}
 		
-		public CustomerContext()
+		public OracleCustomerContext()
 			: base("name=RepoTest") 
 		{
 		}
@@ -235,8 +235,8 @@ namespace Banking.Models.Customers
             Configuration.ProxyCreationEnabled = false;
             Configuration.AutoDetectChangesEnabled = false;
 			
-			Database.SetInitializer(new CreateDatabaseIfNotExists<CustomerContext>());
-			// Database.SetInitializer(new MigrateDatabaseToLatestVersion<CustomerContext, Configuration>());
+			Database.SetInitializer(new CreateDatabaseIfNotExists<OracleCustomerContext>());
+			// Database.SetInitializer(new MigrateDatabaseToLatestVersion<OracleCustomerContext, Configuration>());
 			Database.Log = this.Log;
         }
 		
