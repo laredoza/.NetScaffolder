@@ -32,5 +32,10 @@ namespace DotNetScaffolder.Components.Common.Contract
         /// Gets the parent folder.
         /// </summary>
         string ParentFolder { get; }
+
+        /// <summary>
+        /// Gets a value indicating whether force schema to uppercase.
+        /// </summary>
+        bool ForceSchemaToUppercase { get;  }
     }
 }

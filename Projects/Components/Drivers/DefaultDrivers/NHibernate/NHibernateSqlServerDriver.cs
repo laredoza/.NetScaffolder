@@ -45,5 +45,10 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.NHibernate
         /// The parent folder.
         /// </summary>
         public string ParentFolder => "NHibernate";
+
+        /// <summary>
+        /// Force schema to uppercase.
+        /// </summary>
+        public bool ForceSchemaToUppercase => false;
     }
 }
