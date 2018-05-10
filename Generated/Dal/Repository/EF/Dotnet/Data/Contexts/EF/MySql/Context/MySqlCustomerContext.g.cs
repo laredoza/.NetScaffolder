@@ -19,6 +19,7 @@
 // *******************************************************************
 
 using System.Data.Entity;
+using MySql.Data.Entity;
 using RepositoryEFDotnet.Library;
 using System.ComponentModel.DataAnnotations.Schema;
 using Banking.Models.Entity;
@@ -26,16 +27,17 @@ using Banking.Models.Entity;
 
 namespace Banking.Models.Customers
 {
-	public partial class SqlServerCustomerContext : BaseContext
+    [DbConfigurationType(typeof(MySqlEFConfiguration))]
+	public partial class MySqlCustomerContext : BaseContext
 	{	
 		#region CTOR
 		
-		public SqlServerCustomerContext(string connectionOrName) 
+		public MySqlCustomerContext(string connectionOrName) 
 			: base($"name={connectionOrName}") 
 		{
 		}
 		
-		public SqlServerCustomerContext()
+		public MySqlCustomerContext()
 			: base("name=RepoTest") 
 		{
 		}
@@ -234,8 +236,8 @@ namespace Banking.Models.Customers
             Configuration.ProxyCreationEnabled = false;
             Configuration.AutoDetectChangesEnabled = false;
 			
-			Database.SetInitializer(new CreateDatabaseIfNotExists<SqlServerCustomerContext>());
-			// Database.SetInitializer(new MigrateDatabaseToLatestVersion<SqlServerCustomerContext, Configuration>());
+			Database.SetInitializer(new CreateDatabaseIfNotExists<MySqlCustomerContext>());
+			// Database.SetInitializer(new MigrateDatabaseToLatestVersion<MySqlCustomerContext, Configuration>());
 			Database.Log = this.Log;
         }
 		

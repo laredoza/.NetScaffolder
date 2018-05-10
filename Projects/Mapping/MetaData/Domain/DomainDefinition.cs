@@ -64,23 +64,6 @@ namespace DotNetScaffolder.Mapping.MetaData.Domain
         /// </summary>
         public List<Guid> DriverIdList { get; set; }
 
-        // Remove these
-        /// <summary>
-        ///     Gets or sets the driver id.
-        /// </summary>
-        /// <example>
-        ///     Entity Framework
-        /// </example>
-        public Guid DriverId { get; set; }
-        
-        /// <summary>
-        ///     Gets or sets the driver id.
-        /// </summary>
-        /// <example>
-        ///     Oracle Drivers
-        /// </example>
-        public Guid DriverTypeId { get; set; }
-
         /// <summary>
         ///     Gets or sets the id.
         /// </summary>
@@ -156,14 +139,9 @@ namespace DotNetScaffolder.Mapping.MetaData.Domain
                 this.ValidationResult.Add(new Validation(ValidationType.SourceTypeId, "SourceTypeId cannot be empty"));
             }
 
-            if (this.DriverId == Guid.Empty)
+            if (this.DriverIdList.Count == 0)
             {
-                this.ValidationResult.Add(new Validation(ValidationType.DriverId, "DriverId cannot be empty"));
-            }
-
-            if (this.DriverTypeId == Guid.Empty)
-            {
-                this.ValidationResult.Add(new Validation(ValidationType.DriverTypeId, "DriverTypeId cannot be empty"));
+                this.ValidationResult.Add(new Validation(ValidationType.DriverTypeId, "DriverIdList cannot be empty"));
             }
 
             if (this.CollectionOptionId == Guid.Empty)

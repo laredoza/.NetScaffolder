@@ -15,13 +15,18 @@
             foreach(var dbContext in DataType.Contexts)
             {
                 template.ContextData = dbContext;
-
-                if(!string.IsNullOrEmpty(dbContext.OutputPath))
+                
+                foreach( IDriver driver in DataType.DriverTypes )
                 {
-                    template.Output.Project =  string.Format(dbContext.OutputPath, DataType.DriverType.ParentFolder, DataType.DriverType.Prefix);
-                }
+                    template.Driver = driver;
 
-                template.RenderToFile(string.Format(@"{0}\{1}{2}.g.cs", dbContext.OutputFolder,DataType.DriverType.Prefix,dbContext.ContextName));
+                    if(!string.IsNullOrEmpty(dbContext.OutputPath))
+                    {
+                        template.Output.Project =  string.Format(dbContext.OutputPath, driver.ParentFolder, driver.Prefix);
+                    }
+
+                    template.RenderToFile(string.Format(@"{0}\{1}{2}.g.cs", dbContext.OutputFolder,driver.Prefix,dbContext.ContextName));
+                }
             }
         }
     }

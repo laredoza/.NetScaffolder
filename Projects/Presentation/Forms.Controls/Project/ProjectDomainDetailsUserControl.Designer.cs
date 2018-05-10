@@ -28,21 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
-            "EF 6.0",
-            "MySql"}, -1);
-            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem(new string[] {
-            "EF 6.0",
-            "Oracle"}, -1);
-            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("3");
-            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("4");
-            this.button5 = new System.Windows.Forms.Button();
             this.ComboBoxPackages = new System.Windows.Forms.ComboBox();
             this.label11 = new System.Windows.Forms.Label();
-            this.ComboBoxDriverType = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
-            this.ComboBoxDriver = new System.Windows.Forms.ComboBox();
-            this.label9 = new System.Windows.Forms.Label();
             this.ComboBoxSourceType = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
             this.ComboBoxCollectionOption = new System.Windows.Forms.ComboBox();
@@ -55,19 +43,9 @@
             this.BtnModel = new System.Windows.Forms.Button();
             this.BtnRefresh = new System.Windows.Forms.Button();
             this.ListViewDrivers = new System.Windows.Forms.ListView();
-            this.Driver = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.DriverType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
-            // 
-            // button5
-            // 
-            this.button5.Enabled = false;
-            this.button5.Location = new System.Drawing.Point(355, 141);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(75, 23);
-            this.button5.TabIndex = 48;
-            this.button5.Text = "Driver";
-            this.button5.UseVisualStyleBackColor = true;
             // 
             // ComboBoxPackages
             // 
@@ -90,45 +68,14 @@
             this.label11.TabIndex = 46;
             this.label11.Text = "Package:";
             // 
-            // ComboBoxDriverType
-            // 
-            this.ComboBoxDriverType.FormattingEnabled = true;
-            this.ComboBoxDriverType.Items.AddRange(new object[] {
-            "Oracle Default",
-            "Sql Server Default",
-            "Mongo Default"});
-            this.ComboBoxDriverType.Location = new System.Drawing.Point(313, 245);
-            this.ComboBoxDriverType.Name = "ComboBoxDriverType";
-            this.ComboBoxDriverType.Size = new System.Drawing.Size(238, 21);
-            this.ComboBoxDriverType.TabIndex = 45;
-            this.ComboBoxDriverType.SelectedIndexChanged += new System.EventHandler(this.ComboBoxDriverType_SelectedIndexChanged);
-            // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(36, 169);
+            this.label10.Location = new System.Drawing.Point(39, 144);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(65, 13);
             this.label10.TabIndex = 44;
             this.label10.Text = "Driver Type:";
-            // 
-            // ComboBoxDriver
-            // 
-            this.ComboBoxDriver.FormattingEnabled = true;
-            this.ComboBoxDriver.Location = new System.Drawing.Point(112, 142);
-            this.ComboBoxDriver.Name = "ComboBoxDriver";
-            this.ComboBoxDriver.Size = new System.Drawing.Size(238, 21);
-            this.ComboBoxDriver.TabIndex = 43;
-            this.ComboBoxDriver.SelectedIndexChanged += new System.EventHandler(this.ComboBoxDriver_SelectedIndexChanged);
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(60, 142);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(41, 13);
-            this.label9.TabIndex = 42;
-            this.label9.Text = "Driver::";
             // 
             // ComboBoxSourceType
             // 
@@ -236,33 +183,25 @@
             // 
             this.ListViewDrivers.CheckBoxes = true;
             this.ListViewDrivers.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.Driver,
+            this.DriverType,
             this.columnHeader2});
-            listViewItem1.StateImageIndex = 0;
-            listViewItem2.StateImageIndex = 0;
-            listViewItem3.StateImageIndex = 0;
-            listViewItem4.StateImageIndex = 0;
-            this.ListViewDrivers.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1,
-            listViewItem2,
-            listViewItem3,
-            listViewItem4});
-            this.ListViewDrivers.Location = new System.Drawing.Point(112, 169);
+            this.ListViewDrivers.Location = new System.Drawing.Point(112, 144);
             this.ListViewDrivers.Name = "ListViewDrivers";
-            this.ListViewDrivers.Size = new System.Drawing.Size(414, 165);
+            this.ListViewDrivers.Size = new System.Drawing.Size(414, 192);
             this.ListViewDrivers.TabIndex = 53;
             this.ListViewDrivers.UseCompatibleStateImageBehavior = false;
             this.ListViewDrivers.View = System.Windows.Forms.View.Details;
+            this.ListViewDrivers.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.ListViewDrivers_ItemChecked);
             // 
-            // Driver
+            // DriverType
             // 
-            this.Driver.Text = "Driver";
-            this.Driver.Width = 150;
+            this.DriverType.Text = "Driver Type";
+            this.DriverType.Width = 250;
             // 
             // columnHeader2
             // 
-            this.columnHeader2.Text = "Driver Type";
-            this.columnHeader2.Width = 250;
+            this.columnHeader2.Text = "Driver";
+            this.columnHeader2.Width = 150;
             // 
             // ProjectDomainDetailsUserControl
             // 
@@ -272,13 +211,9 @@
             this.Controls.Add(this.BtnRefresh);
             this.Controls.Add(this.BtnModel);
             this.Controls.Add(this.BtnManageSource);
-            this.Controls.Add(this.button5);
             this.Controls.Add(this.ComboBoxPackages);
             this.Controls.Add(this.label11);
-            this.Controls.Add(this.ComboBoxDriverType);
             this.Controls.Add(this.label10);
-            this.Controls.Add(this.ComboBoxDriver);
-            this.Controls.Add(this.label9);
             this.Controls.Add(this.ComboBoxSourceType);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.ComboBoxCollectionOption);
@@ -295,14 +230,9 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Button button5;
         private System.Windows.Forms.ComboBox ComboBoxPackages;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.ComboBox ComboBoxDriverType;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.ComboBox ComboBoxDriver;
-        private System.Windows.Forms.Label label9;
         private System.Windows.Forms.ComboBox ComboBoxSourceType;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ComboBox ComboBoxCollectionOption;
@@ -315,7 +245,7 @@
         private System.Windows.Forms.Button BtnModel;
         private System.Windows.Forms.Button BtnRefresh;
         private System.Windows.Forms.ListView ListViewDrivers;
-        private System.Windows.Forms.ColumnHeader Driver;
+        private System.Windows.Forms.ColumnHeader DriverType;
         private System.Windows.Forms.ColumnHeader columnHeader2;
     }
 }

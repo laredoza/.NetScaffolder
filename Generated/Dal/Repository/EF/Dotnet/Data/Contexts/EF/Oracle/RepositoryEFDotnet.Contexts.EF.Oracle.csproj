@@ -55,6 +55,9 @@
   <ItemGroup>
     <Compile Include="Config\OracleDbConfiguration.cs" />
     <Compile Include="Config\OracleHistory.cs" />
+    <Compile Include="Context\OracleAccountContext.g.cs" />
+    <Compile Include="Context\OracleCustomerContext.g.cs" />
+    <Compile Include="Context\OracleFullContext.g.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -62,6 +65,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Entities\Entity\RepositoryEFDotnet.Data.Entities.Entity.csproj">
+      <Project>{017da2af-1ffd-4e68-9646-b0e5c73ea037}</Project>
+      <Name>RepositoryEFDotnet.Data.Entities.Entity</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Base\RepositoryEFDotnet.Contexts.EF.Base.csproj">
       <Project>{a8511725-544e-49bd-8451-4c8638adc5ba}</Project>
       <Name>RepositoryEFDotnet.Contexts.EF.Base</Name>

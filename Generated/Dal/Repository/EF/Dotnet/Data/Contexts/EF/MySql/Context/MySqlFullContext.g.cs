@@ -1,5 +1,5 @@
 ﻿
-// <copyright file="CustomerContext.g.cs" company="MIT">
+// <copyright file="FullContext.g.cs" company="MIT">
 //  Copyright (c) 2018 MIT
 // </copyright>  
 
@@ -19,23 +19,25 @@
 // *******************************************************************
 
 using System.Data.Entity;
+using MySql.Data.Entity;
 using RepositoryEFDotnet.Library;
 using System.ComponentModel.DataAnnotations.Schema;
 using Banking.Models.Entity;
 
 
-namespace Banking.Models.Customers
+namespace Banking.Models.Context
 {
-	public partial class SqlServerCustomerContext : BaseContext
+    [DbConfigurationType(typeof(MySqlEFConfiguration))]
+	public partial class MySqlFullContext : BaseContext
 	{	
 		#region CTOR
 		
-		public SqlServerCustomerContext(string connectionOrName) 
+		public MySqlFullContext(string connectionOrName) 
 			: base($"name={connectionOrName}") 
 		{
 		}
 		
-		public SqlServerCustomerContext()
+		public MySqlFullContext()
 			: base("name=RepoTest") 
 		{
 		}
@@ -48,6 +50,8 @@ namespace Banking.Models.Customers
 			
 			#region Tables
 			
+			modelBuilder.Entity<BankAccount>().ToTable("BankAccount", "dbo");
+			modelBuilder.Entity<BankTransfers>().ToTable("BankTransfers", "dbo");
 			modelBuilder.Entity<Book>().ToTable("Book", "dbo");
 			modelBuilder.Entity<Country>().ToTable("Country", "dbo");
 			modelBuilder.Entity<Customer>().ToTable("Customer", "dbo");
@@ -60,6 +64,10 @@ namespace Banking.Models.Customers
 			
 			#region Primary keys
 			
+			modelBuilder.Entity<BankAccount>().HasKey(t => t.BankAccountId);
+			modelBuilder.Entity<BankAccount>().Property(t => t.BankAccountId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+			modelBuilder.Entity<BankTransfers>().HasKey(t => t.BankTransferId);
+			modelBuilder.Entity<BankTransfers>().Property(t => t.BankTransferId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 			modelBuilder.Entity<Book>().HasKey(t => t.ProductId);
 			modelBuilder.Entity<Book>().Property(t => t.ProductId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
 			modelBuilder.Entity<Country>().HasKey(t => t.CountryId);
@@ -79,8 +87,14 @@ namespace Banking.Models.Customers
 			
 			#region Included Relationships
 			
+			modelBuilder.Entity<BankAccount>().HasOptional<Customer>(s => s.Customer).WithMany(s => s.BankAccount).HasForeignKey(s => s.CustomerId).WillCascadeOnDelete(false);
+			modelBuilder.Entity<BankAccount>().HasMany<BankTransfers>(s => s.BankTransfersFrom).WithRequired(s => s.BankAccountFrom).WillCascadeOnDelete(false);
+			modelBuilder.Entity<BankAccount>().HasMany<BankTransfers>(s => s.BankTransfersTo).WithRequired(s => s.BankAccountTo).WillCascadeOnDelete(false);
+			modelBuilder.Entity<BankTransfers>().HasRequired<BankAccount>(s => s.BankAccountFrom).WithMany(s => s.BankTransfersFrom).HasForeignKey(s => s.FromBankAccountId).WillCascadeOnDelete(false);
+			modelBuilder.Entity<BankTransfers>().HasRequired<BankAccount>(s => s.BankAccountTo).WithMany(s => s.BankTransfersFrom).HasForeignKey(s => s.ToBankAccountId).WillCascadeOnDelete(false);
 			modelBuilder.Entity<Book>().HasRequired<Product>(s => s.Product).WithOptional(s => s.Book).WillCascadeOnDelete(false);
 			modelBuilder.Entity<Country>().HasMany<Customer>(s => s.Customer).WithOptional(s => s.Country).WillCascadeOnDelete(false);
+			modelBuilder.Entity<Customer>().HasMany<BankAccount>(s => s.BankAccount).WithOptional(s => s.Customer).WillCascadeOnDelete(false);
 			modelBuilder.Entity<Customer>().HasOptional<Country>(s => s.Country).WithMany(s => s.Customer).HasForeignKey(s => s.CountryId).WillCascadeOnDelete(false);
 			modelBuilder.Entity<Customer>().HasMany<Order>(s => s.Order).WithOptional(s => s.Customer).WillCascadeOnDelete(false);
 			modelBuilder.Entity<Order>().HasMany<OrderDetails>(s => s.OrderDetails).WithRequired(s => s.Order).WillCascadeOnDelete(false);
@@ -98,12 +112,24 @@ namespace Banking.Models.Customers
 			
 			// Exclude entities not part of this context
 			
-			modelBuilder.Ignore<BankAccount>();
 
 			#endregion
 			
 			#region Constraints
 			
+			modelBuilder.Entity<BankAccount>().Property(t => t.BankAccountId).IsRequired();
+			modelBuilder.Entity<BankAccount>().Property(t => t.BankAccountNumber).HasMaxLength(10);
+			modelBuilder.Entity<BankAccount>().Property(t => t.BankAccountNumber).IsRequired();
+			modelBuilder.Entity<BankAccount>().Property(t => t.Balance).IsRequired();
+			modelBuilder.Entity<BankAccount>().Property(t => t.Balance).HasPrecision(19, 4);
+			modelBuilder.Entity<BankAccount>().Property(t => t.CustomerId).IsOptional();
+			modelBuilder.Entity<BankAccount>().Property(t => t.Locked).IsRequired();
+			modelBuilder.Entity<BankTransfers>().Property(t => t.BankTransferId).IsRequired();
+			modelBuilder.Entity<BankTransfers>().Property(t => t.FromBankAccountId).IsRequired();
+			modelBuilder.Entity<BankTransfers>().Property(t => t.ToBankAccountId).IsRequired();
+			modelBuilder.Entity<BankTransfers>().Property(t => t.Amount).IsRequired();
+			modelBuilder.Entity<BankTransfers>().Property(t => t.Amount).HasPrecision(18, 2);
+			modelBuilder.Entity<BankTransfers>().Property(t => t.TransferDate).IsRequired();
 			modelBuilder.Entity<Book>().Property(t => t.ProductId).IsRequired();
 			modelBuilder.Entity<Book>().Property(t => t.Publisher).HasMaxLength(200);
 			modelBuilder.Entity<Book>().Property(t => t.Publisher).IsRequired();
@@ -168,54 +194,13 @@ namespace Banking.Models.Customers
 			
 			#endregion
 
-			#region Column Order
-			
-			modelBuilder.Entity<Book>().Property(t => t.ProductId).HasColumnOrder(1);
-			modelBuilder.Entity<Book>().Property(t => t.Publisher).HasColumnOrder(2);
-			modelBuilder.Entity<Country>().Property(t => t.CountryId).HasColumnOrder(1);
-			modelBuilder.Entity<Country>().Property(t => t.CountryName).HasColumnOrder(2);
-			modelBuilder.Entity<Customer>().Property(t => t.CustomerId).HasColumnOrder(1);
-			modelBuilder.Entity<Customer>().Property(t => t.CustomerCode).HasColumnOrder(2);
-			modelBuilder.Entity<Customer>().Property(t => t.CompanyName).HasColumnOrder(3);
-			modelBuilder.Entity<Customer>().Property(t => t.ContactName).HasColumnOrder(4);
-			modelBuilder.Entity<Customer>().Property(t => t.ContactTitle).HasColumnOrder(5);
-			modelBuilder.Entity<Customer>().Property(t => t.Address).HasColumnOrder(6);
-			modelBuilder.Entity<Customer>().Property(t => t.City).HasColumnOrder(7);
-			modelBuilder.Entity<Customer>().Property(t => t.PostalCode).HasColumnOrder(8);
-			modelBuilder.Entity<Customer>().Property(t => t.Telephone).HasColumnOrder(9);
-			modelBuilder.Entity<Customer>().Property(t => t.Fax).HasColumnOrder(10);
-			modelBuilder.Entity<Customer>().Property(t => t.CountryId).HasColumnOrder(11);
-			modelBuilder.Entity<Customer>().Property(t => t.Photo).HasColumnOrder(12);
-			modelBuilder.Entity<Customer>().Property(t => t.IsEnabled).HasColumnOrder(13);
-			modelBuilder.Entity<Order>().Property(t => t.OrderId).HasColumnOrder(1);
-			modelBuilder.Entity<Order>().Property(t => t.CustomerId).HasColumnOrder(2);
-			modelBuilder.Entity<Order>().Property(t => t.OrderDate).HasColumnOrder(3);
-			modelBuilder.Entity<Order>().Property(t => t.DeliveryDate).HasColumnOrder(4);
-			modelBuilder.Entity<Order>().Property(t => t.ShippingName).HasColumnOrder(5);
-			modelBuilder.Entity<Order>().Property(t => t.ShippingAddress).HasColumnOrder(6);
-			modelBuilder.Entity<Order>().Property(t => t.ShippingCity).HasColumnOrder(7);
-			modelBuilder.Entity<Order>().Property(t => t.ShippingZip).HasColumnOrder(8);
-			modelBuilder.Entity<OrderDetails>().Property(t => t.OrderDetailsId).HasColumnOrder(1);
-			modelBuilder.Entity<OrderDetails>().Property(t => t.OrderId).HasColumnOrder(2);
-			modelBuilder.Entity<OrderDetails>().Property(t => t.ProductId).HasColumnOrder(3);
-			modelBuilder.Entity<OrderDetails>().Property(t => t.UnitPrice).HasColumnOrder(4);
-			modelBuilder.Entity<OrderDetails>().Property(t => t.Amount).HasColumnOrder(5);
-			modelBuilder.Entity<OrderDetails>().Property(t => t.Discount).HasColumnOrder(6);
-			modelBuilder.Entity<Product>().Property(t => t.ProductId).HasColumnOrder(1);
-			modelBuilder.Entity<Product>().Property(t => t.ProductDescription).HasColumnOrder(2);
-			modelBuilder.Entity<Product>().Property(t => t.UnitPrice).HasColumnOrder(3);
-			modelBuilder.Entity<Product>().Property(t => t.UnitAmount).HasColumnOrder(4);
-			modelBuilder.Entity<Product>().Property(t => t.Publisher).HasColumnOrder(5);
-			modelBuilder.Entity<Product>().Property(t => t.AmountInStock).HasColumnOrder(6);
-			modelBuilder.Entity<Software>().Property(t => t.ProductId).HasColumnOrder(1);
-			modelBuilder.Entity<Software>().Property(t => t.LicenseCode).HasColumnOrder(2);
-
-			#endregion
 			
         }
 		
 		#region Db Sets
 		
+		public virtual DbSet<BankAccount> BankAccount { get; set; }
+		public virtual DbSet<BankTransfers> BankTransfers { get; set; }
 		public virtual DbSet<Book> Book { get; set; }
 		public virtual DbSet<Country> Country { get; set; }
 		public virtual DbSet<Customer> Customer { get; set; }
@@ -234,9 +219,8 @@ namespace Banking.Models.Customers
             Configuration.ProxyCreationEnabled = false;
             Configuration.AutoDetectChangesEnabled = false;
 			
-			Database.SetInitializer(new CreateDatabaseIfNotExists<SqlServerCustomerContext>());
-			// Database.SetInitializer(new MigrateDatabaseToLatestVersion<SqlServerCustomerContext, Configuration>());
-			Database.Log = this.Log;
+			Database.SetInitializer(new CreateDatabaseIfNotExists<MySqlFullContext>());
+			// Database.SetInitializer(new MigrateDatabaseToLatestVersion<MySqlFullContext, Configuration>());
         }
 		
 		#endregion

@@ -19,6 +19,7 @@
 // *******************************************************************
 
 using System.Data.Entity;
+using Oracle.ManagedDataAccess.Client;
 using RepositoryEFDotnet.Library;
 using System.ComponentModel.DataAnnotations.Schema;
 using Banking.Models.Entity;
@@ -26,16 +27,16 @@ using Banking.Models.Entity;
 
 namespace Banking.Models.Customers
 {
-	public partial class SqlServerCustomerContext : BaseContext
+	public partial class OracleCustomerContext : BaseContext
 	{	
 		#region CTOR
 		
-		public SqlServerCustomerContext(string connectionOrName) 
+		public OracleCustomerContext(string connectionOrName) 
 			: base($"name={connectionOrName}") 
 		{
 		}
 		
-		public SqlServerCustomerContext()
+		public OracleCustomerContext()
 			: base("name=RepoTest") 
 		{
 		}
@@ -234,8 +235,8 @@ namespace Banking.Models.Customers
             Configuration.ProxyCreationEnabled = false;
             Configuration.AutoDetectChangesEnabled = false;
 			
-			Database.SetInitializer(new CreateDatabaseIfNotExists<SqlServerCustomerContext>());
-			// Database.SetInitializer(new MigrateDatabaseToLatestVersion<SqlServerCustomerContext, Configuration>());
+			Database.SetInitializer(new CreateDatabaseIfNotExists<OracleCustomerContext>());
+			// Database.SetInitializer(new MigrateDatabaseToLatestVersion<OracleCustomerContext, Configuration>());
 			Database.Log = this.Log;
         }
 		

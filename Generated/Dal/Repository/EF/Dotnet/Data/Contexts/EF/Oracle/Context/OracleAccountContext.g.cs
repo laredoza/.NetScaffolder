@@ -19,6 +19,7 @@
 // *******************************************************************
 
 using System.Data.Entity;
+using Oracle.ManagedDataAccess.Client;
 using RepositoryEFDotnet.Library;
 using System.ComponentModel.DataAnnotations.Schema;
 using Banking.Models.Entity;
@@ -26,16 +27,16 @@ using Banking.Models.Entity;
 
 namespace Banking.Models.Accounts
 {
-	public partial class SqlServerAccountContext : BaseContext
+	public partial class OracleAccountContext : BaseContext
 	{	
 		#region CTOR
 		
-		public SqlServerAccountContext(string connectionOrName) 
+		public OracleAccountContext(string connectionOrName) 
 			: base($"name={connectionOrName}") 
 		{
 		}
 		
-		public SqlServerAccountContext()
+		public OracleAccountContext()
 			: base("name=RepoTest") 
 		{
 		}
@@ -115,8 +116,8 @@ namespace Banking.Models.Accounts
             Configuration.ProxyCreationEnabled = false;
             Configuration.AutoDetectChangesEnabled = false;
 			
-			Database.SetInitializer(new CreateDatabaseIfNotExists<SqlServerAccountContext>());
-			// Database.SetInitializer(new MigrateDatabaseToLatestVersion<SqlServerAccountContext, Configuration>());
+			Database.SetInitializer(new CreateDatabaseIfNotExists<OracleAccountContext>());
+			// Database.SetInitializer(new MigrateDatabaseToLatestVersion<OracleAccountContext, Configuration>());
         }
 		
 		#endregion
