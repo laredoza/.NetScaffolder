@@ -23,6 +23,7 @@ using Oracle.ManagedDataAccess.Client;
 using RepositoryEFDotnet.Library;
 using System.ComponentModel.DataAnnotations.Schema;
 using Banking.Models.Entity;
+using System.Data.Common;
 
 
 namespace Banking.Models.Context
@@ -30,6 +31,11 @@ namespace Banking.Models.Context
 	public partial class OracleFullContext : BaseContext
 	{	
 		#region CTOR
+		
+		public OracleFullContext(DbConnection dbCon, bool contextOwnsConnection = true) 
+			: base(dbCon, contextOwnsConnection) 
+		{
+		}
 		
 		public OracleFullContext(string connectionOrName) 
 			: base($"name={connectionOrName}") 
@@ -86,24 +92,15 @@ namespace Banking.Models.Context
 			
 			#region Included Relationships
 			
-			modelBuilder.Entity<BankAccount>().HasOptional<Customer>(s => s.Customer).WithMany(s => s.BankAccount).HasForeignKey(s => s.CustomerId).WillCascadeOnDelete(false);
 			modelBuilder.Entity<BankAccount>().HasMany<BankTransfers>(s => s.BankTransfersFrom).WithRequired(s => s.BankAccountFrom).WillCascadeOnDelete(false);
 			modelBuilder.Entity<BankAccount>().HasMany<BankTransfers>(s => s.BankTransfersTo).WithRequired(s => s.BankAccountTo).WillCascadeOnDelete(false);
-			modelBuilder.Entity<BankTransfers>().HasRequired<BankAccount>(s => s.BankAccountFrom).WithMany(s => s.BankTransfersFrom).HasForeignKey(s => s.FromBankAccountId).WillCascadeOnDelete(false);
-			modelBuilder.Entity<BankTransfers>().HasRequired<BankAccount>(s => s.BankAccountTo).WithMany(s => s.BankTransfersFrom).HasForeignKey(s => s.ToBankAccountId).WillCascadeOnDelete(false);
-			modelBuilder.Entity<Book>().HasRequired<Product>(s => s.Product).WithOptional(s => s.Book).WillCascadeOnDelete(false);
 			modelBuilder.Entity<Country>().HasMany<Customer>(s => s.Customer).WithOptional(s => s.Country).WillCascadeOnDelete(false);
 			modelBuilder.Entity<Customer>().HasMany<BankAccount>(s => s.BankAccount).WithOptional(s => s.Customer).WillCascadeOnDelete(false);
-			modelBuilder.Entity<Customer>().HasOptional<Country>(s => s.Country).WithMany(s => s.Customer).HasForeignKey(s => s.CountryId).WillCascadeOnDelete(false);
 			modelBuilder.Entity<Customer>().HasMany<Order>(s => s.Order).WithOptional(s => s.Customer).WillCascadeOnDelete(false);
 			modelBuilder.Entity<Order>().HasMany<OrderDetails>(s => s.OrderDetails).WithRequired(s => s.Order).WillCascadeOnDelete(false);
-			modelBuilder.Entity<Order>().HasOptional<Customer>(s => s.Customer).WithMany(s => s.Order).HasForeignKey(s => s.CustomerId).WillCascadeOnDelete(false);
-			modelBuilder.Entity<OrderDetails>().HasRequired<Order>(s => s.Order).WithMany(s => s.OrderDetails).HasForeignKey(s => s.OrderId).WillCascadeOnDelete(false);
-			modelBuilder.Entity<OrderDetails>().HasRequired<Product>(s => s.Product).WithMany(s => s.OrderDetails).HasForeignKey(s => s.ProductId).WillCascadeOnDelete(false);
 			modelBuilder.Entity<Product>().HasOptional<Book>(s => s.Book).WithRequired(s => s.Product).WillCascadeOnDelete(false);
 			modelBuilder.Entity<Product>().HasMany<OrderDetails>(s => s.OrderDetails).WithRequired(s => s.Product).WillCascadeOnDelete(false);
 			modelBuilder.Entity<Product>().HasOptional<Software>(s => s.Software).WithRequired(s => s.Product).WillCascadeOnDelete(false);
-			modelBuilder.Entity<Software>().HasRequired<Product>(s => s.Product).WithOptional(s => s.Software).WillCascadeOnDelete(false);
 			
 			#endregion
 			

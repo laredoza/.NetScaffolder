@@ -95,6 +95,8 @@
     <Compile Include="Tests\Context\ContextOracleUnitTests.cs" />
     <Compile Include="Tests\Context\ContextEF6MySqlUnitTests.cs" />
     <Compile Include="Tests\Context\ContextEF6SqlServerUnitTests.cs" />
+    <Compile Include="Tests\Repository\RepositoryEF6OracleUnitTests.cs" />
+    <Compile Include="Tests\Repository\RepositoryEF6MySqlUnitTests.cs" />
     <Compile Include="Tests\Repository\RepositoryEF6SqlServerUnitTests.cs" />
   </ItemGroup>
   <ItemGroup>

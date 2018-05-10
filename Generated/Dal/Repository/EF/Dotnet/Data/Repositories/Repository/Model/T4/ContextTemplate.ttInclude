@@ -26,6 +26,7 @@ using <#= nameSpace #>;
 using RepositoryEFDotnet.Library;
 using System.ComponentModel.DataAnnotations.Schema;
 using <#= EntityNamespace #>;
+using System.Data.Common;
 
 
 namespace <#= ContextData.TransformFullnamespace(DataType.BaseNamespace) #>
@@ -36,6 +37,11 @@ namespace <#= ContextData.TransformFullnamespace(DataType.BaseNamespace) #>
 	public partial class <#= string.Concat(Driver.Prefix, ContextData.ContextName) #> <#= ContextData.TransformInheritFrom #>
 	{	
 		#region CTOR
+		
+		public <#= string.Concat(Driver.Prefix, ContextData.ContextName)  #>(DbConnection dbCon, bool contextOwnsConnection = true) 
+			: base(dbCon, contextOwnsConnection) 
+		{
+		}
 		
 		public <#= string.Concat(Driver.Prefix, ContextData.ContextName)  #>(string connectionOrName) 
 			: base($"name={connectionOrName}") 
@@ -84,7 +90,7 @@ namespace <#= ContextData.TransformFullnamespace(DataType.BaseNamespace) #>
 			#region Included Relationships
 			
 <#+ foreach(var table in ContextData.Models){ #>
-<#+ foreach(var rel in table.Relationships.Where(o => ContextData.HasModel(o))){ #>
+<#+ foreach(var rel in table.ChildRelationships.Where(o => ContextData.HasModel(o))){ #>
 			<#=DataType.TransformRelationship(table.TableName, rel, ContextData.Models, table.Relationships.Where(o => ContextData.HasModel(o))) #>
 <#+ } #>
 <#+ } #>

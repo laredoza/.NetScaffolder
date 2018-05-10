@@ -9,7 +9,7 @@ namespace RepositoryEFDotnet.UnitTest
     using System.Data.Common;
 
     [TestClass]
-    public class RepositoryEF6SqlServerUnitTest : BaseRepositoryUnitTest
+    public class RepositoryEF6MySqlUnitTest : BaseRepositoryUnitTest
     {
         #region Init
 
@@ -17,7 +17,7 @@ namespace RepositoryEFDotnet.UnitTest
         public override void SetupDb()
         {
             Connection = Effort.DbConnectionFactory.CreateTransient();
-            Context = new SqlServerFullContext(Connection as DbConnection);
+            Context = new MySqlFullContext(Connection as DbConnection);
         }
 
         #endregion

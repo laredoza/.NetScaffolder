@@ -23,6 +23,7 @@ using MySql.Data.Entity;
 using RepositoryEFDotnet.Library;
 using System.ComponentModel.DataAnnotations.Schema;
 using Banking.Models.Entity;
+using System.Data.Common;
 
 
 namespace Banking.Models.Accounts
@@ -31,6 +32,11 @@ namespace Banking.Models.Accounts
 	public partial class MySqlAccountContext : BaseContext
 	{	
 		#region CTOR
+		
+		public MySqlAccountContext(DbConnection dbCon, bool contextOwnsConnection = true) 
+			: base(dbCon, contextOwnsConnection) 
+		{
+		}
 		
 		public MySqlAccountContext(string connectionOrName) 
 			: base($"name={connectionOrName}") 
@@ -68,8 +74,6 @@ namespace Banking.Models.Accounts
 			
 			modelBuilder.Entity<BankAccount>().HasMany<BankTransfers>(s => s.BankTransfersFrom).WithRequired(s => s.BankAccountFrom).WillCascadeOnDelete(false);
 			modelBuilder.Entity<BankAccount>().HasMany<BankTransfers>(s => s.BankTransfersTo).WithRequired(s => s.BankAccountTo).WillCascadeOnDelete(false);
-			modelBuilder.Entity<BankTransfers>().HasRequired<BankAccount>(s => s.BankAccountFrom).WithMany(s => s.BankTransfersFrom).HasForeignKey(s => s.FromBankAccountId).WillCascadeOnDelete(false);
-			modelBuilder.Entity<BankTransfers>().HasRequired<BankAccount>(s => s.BankAccountTo).WithMany(s => s.BankTransfersFrom).HasForeignKey(s => s.ToBankAccountId).WillCascadeOnDelete(false);
 			
 			#endregion
 			

@@ -1,6 +1,8 @@
 ﻿using Banking.Models.Dto;
 using Banking.Models.Interfaces;
+using Banking.Models.Repository;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using RepositoryEFDotnet.Library;
 using System;
 using System.Data;
 
@@ -12,12 +14,6 @@ namespace RepositoryEFDotnet.UnitTest
         #region Members
 
         protected IDbConnection Connection { get; set; }
-
-        #endregion
-
-        #region SetupDb
-
-        public abstract void SetupDb();
 
         #endregion
 
@@ -148,6 +144,52 @@ namespace RepositoryEFDotnet.UnitTest
 
         #endregion
 
+        #region Privates
+
+        protected IUnitOfWork Context = null;
+
+        #endregion
+
+        #region SetupDb
+
+        public abstract void SetupDb();
+
+        #endregion
+
+        #region Tests
+
+        [TestMethod]
+        public void BankAccountRepository_Add()
+        {
+            var repo = new BankAccountRepository(Context);
+            BaseRepositoryUnitTest_BankAccount_Add(repo);
+        }
+
+        [TestMethod]
+        public void BankTransfersRepository_Add()
+        {
+            BankAccountRepository_Add();
+
+            var repo = new BankTransfersRepository(Context);
+            BaseRepositoryUnitTest_BankTransfers_Add(repo);
+        }
+
+        [TestMethod]
+        public void CustomerRepository_Add()
+        {
+            var repo = new CustomerRepository(Context);
+            BaseRepositoryUnitTest_Customer_Add(repo);
+        }
+
+        [TestMethod]
+        public void CountryRepository_Add()
+        {
+            var repo = new CountryRepository(Context);
+            BaseRepositoryUnitTest_Country_Add(repo);
+        }
+
+        #endregion
+
         #region Helpers
 
         private CustomerDto CreateCustomerDto()
@@ -212,6 +254,8 @@ namespace RepositoryEFDotnet.UnitTest
                 }
                 Connection.Dispose();
             }
+
+            Context?.Dispose();
         }
 
         #endregion
