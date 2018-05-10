@@ -20,6 +20,7 @@
 
 using System.Data.Entity;
 using Oracle.ManagedDataAccess.Client;
+using Oracle.Config;
 using RepositoryEFDotnet.Library;
 using System.ComponentModel.DataAnnotations.Schema;
 using Banking.Models.Entity;
@@ -27,6 +28,7 @@ using Banking.Models.Entity;
 
 namespace Banking.Models.Accounts
 {
+    [DbConfigurationType(typeof(OracleDbConfiguration))]
 	public partial class OracleAccountContext : BaseContext
 	{	
 		#region CTOR
@@ -49,8 +51,12 @@ namespace Banking.Models.Accounts
 			
 			#region Tables
 			
-			modelBuilder.Entity<BankAccount>().ToTable("BankAccount", "dbo");
-			modelBuilder.Entity<BankTransfers>().ToTable("BankTransfers", "dbo");
+
+
+			modelBuilder.Entity<BankAccount>().ToTable("BankAccount", "DBO");
+
+
+			modelBuilder.Entity<BankTransfers>().ToTable("BankTransfers", "DBO");
 
 			#endregion
 			

@@ -60,8 +60,16 @@ namespace <#= ContextData.TransformFullnamespace(DataType.BaseNamespace) #>
 			
 			#region Tables
 			
-<#+ foreach(var table in ContextData.Models){ #>
-			modelBuilder.Entity<<#=DataType.TransformModelName(table.TableName) #>>().ToTable("<#=table.TableName #>", "<#=table.SchemaName #>");
+<#+ foreach(var table in ContextData.Models){ 
+                var schemaName = table.SchemaName;
+                if (Driver.ForceSchemaToUppercase)
+                {
+                    schemaName = schemaName.ToUpper();
+                }
+#>
+
+
+			modelBuilder.Entity<<#=DataType.TransformModelName(table.TableName) #>>().ToTable("<#=table.TableName #>", "<#= schemaName #>");
 <#+ } #>
 
 			#endregion

@@ -28,7 +28,7 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6
         /// <summary>
         /// Gets the name spaces used to generate templates.
         /// </summary>
-        public List<string> NameSpaces => new List<string> { "System.Data.Entity", "Oracle.ManagedDataAccess.Client" };
+        public List<string> NameSpaces => new List<string> { "System.Data.Entity", "Oracle.ManagedDataAccess.Client", "Oracle.Config" };
 
         /// <summary>
         /// The prefix.
@@ -38,7 +38,7 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6
         /// <summary>
         /// Gets the context attribute.
         /// </summary>
-        public string ContextAttribute => string.Empty;
+        public string ContextAttribute => "[DbConfigurationType(typeof(OracleDbConfiguration))]";
 
         /// <summary>
         /// The parent folder.

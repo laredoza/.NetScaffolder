@@ -20,6 +20,7 @@
 
 using System.Data.Entity;
 using Oracle.ManagedDataAccess.Client;
+using Oracle.Config;
 using RepositoryEFDotnet.Library;
 using System.ComponentModel.DataAnnotations.Schema;
 using Banking.Models.Entity;
@@ -27,6 +28,7 @@ using Banking.Models.Entity;
 
 namespace Banking.Models.Customers
 {
+    [DbConfigurationType(typeof(OracleDbConfiguration))]
 	public partial class OracleCustomerContext : BaseContext
 	{	
 		#region CTOR
@@ -49,13 +51,27 @@ namespace Banking.Models.Customers
 			
 			#region Tables
 			
-			modelBuilder.Entity<Book>().ToTable("Book", "dbo");
-			modelBuilder.Entity<Country>().ToTable("Country", "dbo");
-			modelBuilder.Entity<Customer>().ToTable("Customer", "dbo");
-			modelBuilder.Entity<Order>().ToTable("Order", "dbo");
-			modelBuilder.Entity<OrderDetails>().ToTable("OrderDetails", "dbo");
-			modelBuilder.Entity<Product>().ToTable("Product", "dbo");
-			modelBuilder.Entity<Software>().ToTable("Software", "dbo");
+
+
+			modelBuilder.Entity<Book>().ToTable("Book", "DBO");
+
+
+			modelBuilder.Entity<Country>().ToTable("Country", "DBO");
+
+
+			modelBuilder.Entity<Customer>().ToTable("Customer", "DBO");
+
+
+			modelBuilder.Entity<Order>().ToTable("Order", "DBO");
+
+
+			modelBuilder.Entity<OrderDetails>().ToTable("OrderDetails", "DBO");
+
+
+			modelBuilder.Entity<Product>().ToTable("Product", "DBO");
+
+
+			modelBuilder.Entity<Software>().ToTable("Software", "DBO");
 
 			#endregion
 			

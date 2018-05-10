@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace RepositoryEFDotnet.Library.Config
+﻿namespace Oracle.Config
 {
     using System.Data.Entity;
 
     using Oracle.ManagedDataAccess.Client;
 
+    using RepositoryEFDotnet.Library.Config;
+
+        
+    
     public class OracleDbConfiguration : DbConfiguration
     {
         public OracleDbConfiguration()
