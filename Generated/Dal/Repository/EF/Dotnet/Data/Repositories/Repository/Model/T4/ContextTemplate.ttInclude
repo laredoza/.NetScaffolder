@@ -83,8 +83,8 @@ namespace <#= ContextData.TransformFullnamespace(DataType.BaseNamespace) #>
 			#region Included Relationships
 			
 <#+ foreach(var table in ContextData.Models){ #>
-<#+ foreach(var rel in table.ChildRelationships.Where(o => ContextData.HasModel(o))){ #>
-			<#=DataType.TransformRelationship(table, rel) #>
+<#+ foreach(var rel in table.Relationships.Where(o => ContextData.HasModel(o))){ #>
+			<#=DataType.TransformRelationship(table.TableName, rel, ContextData.Models, table.Relationships.Where(o => ContextData.HasModel(o))) #>
 <#+ } #>
 <#+ } #>
 			
