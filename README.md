@@ -2,7 +2,14 @@
 
 ### Simple, highly flexible scaffolding framework based on T4 Scripts
 
-The aim of this project will be to quickly generate a base project from a data model. The initial aim will be to generate a MVC project with datacontexts, ef entities (or nHibernate) & presentation layer. The next will be to generate a repository layer. These will then later be combined into a Domain Driven application.
+The aim of this project will be to quickly generate a base project from a data model by using easily extendable templates. 
+
+Initially a datalayer will be created consisting of the following layers:
+- Datacontext ( Entity Framework 6.0 / Entity Framework Core / NHibernate)
+- Repository Layer
+- Entities
+- Dto
+- Application Service
 
 If for whatever reason you don't like our implementations of any of the layers it should be pretty easy to modify / create your own.
 
@@ -14,7 +21,7 @@ If for whatever reason you don't like our implementations of any of the layers i
 - Extendable Custom sources
 
 This imported data will then be saved in a xml file (.mdl). All generation will then be based on this file.
-This project file will contain domains. A domain will contain several tables ( These are imported from the data sources ). These tables are used to generate the different layers. i.e) Security Domain with a user table and a role table, etc.
+This project file will contain domains. A domain will contain several models ( These are imported from the data sources ). These tables are used to generate the different layers. i.e) Security Domain with a user table and a role table, etc.
 
 T4 templates will be used to generate the different layers. Packages consist of several templates. A domain will be set to use a package to generate all it's layers.  
 
