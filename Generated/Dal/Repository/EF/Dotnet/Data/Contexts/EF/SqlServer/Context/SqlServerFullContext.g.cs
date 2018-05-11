@@ -54,32 +54,14 @@ namespace Banking.Models.Context
 			
 			#region Tables
 			
-
-
 			modelBuilder.Entity<BankAccount>().ToTable("BankAccount", "dbo");
-
-
 			modelBuilder.Entity<BankTransfers>().ToTable("BankTransfers", "dbo");
-
-
 			modelBuilder.Entity<Book>().ToTable("Book", "dbo");
-
-
 			modelBuilder.Entity<Country>().ToTable("Country", "dbo");
-
-
 			modelBuilder.Entity<Customer>().ToTable("Customer", "dbo");
-
-
 			modelBuilder.Entity<Order>().ToTable("Order", "dbo");
-
-
 			modelBuilder.Entity<OrderDetails>().ToTable("OrderDetails", "dbo");
-
-
 			modelBuilder.Entity<Product>().ToTable("Product", "dbo");
-
-
 			modelBuilder.Entity<Software>().ToTable("Software", "dbo");
 
 			#endregion
@@ -109,14 +91,14 @@ namespace Banking.Models.Context
 			
 			#region Included Relationships
 			
-			modelBuilder.Entity<BankAccount>().HasMany<BankTransfers>(s => s.BankTransfersFrom).WithRequired(s => s.BankAccountFrom).WillCascadeOnDelete(false);
-			modelBuilder.Entity<BankAccount>().HasMany<BankTransfers>(s => s.BankTransfersTo).WithRequired(s => s.BankAccountTo).WillCascadeOnDelete(false);
-			modelBuilder.Entity<Country>().HasMany<Customer>(s => s.Customer).WithOptional(s => s.Country).WillCascadeOnDelete(false);
-			modelBuilder.Entity<Customer>().HasMany<BankAccount>(s => s.BankAccount).WithOptional(s => s.Customer).WillCascadeOnDelete(false);
-			modelBuilder.Entity<Customer>().HasMany<Order>(s => s.Order).WithOptional(s => s.Customer).WillCascadeOnDelete(false);
-			modelBuilder.Entity<Order>().HasMany<OrderDetails>(s => s.OrderDetails).WithRequired(s => s.Order).WillCascadeOnDelete(false);
+			modelBuilder.Entity<BankAccount>().HasMany<BankTransfers>(s => s.BankTransfersFrom).WithRequired(s => s.BankAccountFrom).HasForeignKey(s => s.FromBankAccountId).WillCascadeOnDelete(false);
+			modelBuilder.Entity<BankAccount>().HasMany<BankTransfers>(s => s.BankTransfersTo).WithRequired(s => s.BankAccountTo).HasForeignKey(s => s.ToBankAccountId).WillCascadeOnDelete(false);
+			modelBuilder.Entity<Country>().HasMany<Customer>(s => s.Customer).WithOptional(s => s.Country).HasForeignKey(s => s.CountryId).WillCascadeOnDelete(false);
+			modelBuilder.Entity<Customer>().HasMany<BankAccount>(s => s.BankAccount).WithOptional(s => s.Customer).HasForeignKey(s => s.CustomerId).WillCascadeOnDelete(false);
+			modelBuilder.Entity<Customer>().HasMany<Order>(s => s.Order).WithOptional(s => s.Customer).HasForeignKey(s => s.CustomerId).WillCascadeOnDelete(false);
+			modelBuilder.Entity<Order>().HasMany<OrderDetails>(s => s.OrderDetails).WithRequired(s => s.Order).HasForeignKey(s => s.OrderId).WillCascadeOnDelete(false);
 			modelBuilder.Entity<Product>().HasOptional<Book>(s => s.Book).WithRequired(s => s.Product).WillCascadeOnDelete(false);
-			modelBuilder.Entity<Product>().HasMany<OrderDetails>(s => s.OrderDetails).WithRequired(s => s.Product).WillCascadeOnDelete(false);
+			modelBuilder.Entity<Product>().HasMany<OrderDetails>(s => s.OrderDetails).WithRequired(s => s.Product).HasForeignKey(s => s.ProductId).WillCascadeOnDelete(false);
 			modelBuilder.Entity<Product>().HasOptional<Software>(s => s.Software).WithRequired(s => s.Product).WillCascadeOnDelete(false);
 			
 			#endregion
@@ -228,7 +210,7 @@ namespace Banking.Models.Context
         
 		protected override void SetupContext()
         {
-            Configuration.LazyLoadingEnabled = false;
+            Configuration.LazyLoadingEnabled = true;
             Configuration.ProxyCreationEnabled = false;
             Configuration.AutoDetectChangesEnabled = false;
 			

@@ -56,11 +56,7 @@ namespace Banking.Models.Accounts
 			
 			#region Tables
 			
-
-
 			modelBuilder.Entity<BankAccount>().ToTable("BankAccount", "dbo");
-
-
 			modelBuilder.Entity<BankTransfers>().ToTable("BankTransfers", "dbo");
 
 			#endregion
@@ -76,8 +72,8 @@ namespace Banking.Models.Accounts
 			
 			#region Included Relationships
 			
-			modelBuilder.Entity<BankAccount>().HasMany<BankTransfers>(s => s.BankTransfersFrom).WithRequired(s => s.BankAccountFrom).WillCascadeOnDelete(false);
-			modelBuilder.Entity<BankAccount>().HasMany<BankTransfers>(s => s.BankTransfersTo).WithRequired(s => s.BankAccountTo).WillCascadeOnDelete(false);
+			modelBuilder.Entity<BankAccount>().HasMany<BankTransfers>(s => s.BankTransfersFrom).WithRequired(s => s.BankAccountFrom).HasForeignKey(s => s.FromBankAccountId).WillCascadeOnDelete(false);
+			modelBuilder.Entity<BankAccount>().HasMany<BankTransfers>(s => s.BankTransfersTo).WithRequired(s => s.BankAccountTo).HasForeignKey(s => s.ToBankAccountId).WillCascadeOnDelete(false);
 			
 			#endregion
 			

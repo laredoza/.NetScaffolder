@@ -9,12 +9,12 @@ using System.Data.Entity;
 namespace RepositoryEFDotnet.UnitTest
 {
     [TestClass]
-    public class ContextOracleUnitTest : BaseContextUnitTests<OracleFullContext>
+    public class UowEF6OracleUnitTest : BaseUnitOfWorkUnitTests<OracleFullContext>
     {
         [TestInitialize]
-        public override void SetupContext()
+        public override void SetupUow()
         {
-            Context = new OracleFullContext(Effort.DbConnectionFactory.CreateTransient());
+            Uow = new OracleFullContext(Effort.DbConnectionFactory.CreateTransient());
         }
     }
 }

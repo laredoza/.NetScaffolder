@@ -6,12 +6,12 @@ namespace RepositoryEFDotnet.UnitTest
     using MySql.Data.MySqlClient;
 
     [TestClass]
-    public class ContextEF6MySqlUnitTest : BaseContextUnitTests<MySqlFullContext>
+    public class UowEF6MySqlUnitTest : BaseUnitOfWorkUnitTests<MySqlFullContext>
     {
         [TestInitialize]
-        public override void SetupContext()
+        public override void SetupUow()
         {
-            Context = new MySqlFullContext(Effort.DbConnectionFactory.CreateTransient());
+            Uow = new MySqlFullContext(Effort.DbConnectionFactory.CreateTransient());
         }
     }
 }

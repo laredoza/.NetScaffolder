@@ -45,8 +45,14 @@ namespace Banking.Models.Dto
 
 			if(deep)
 			{
-				this.Order = new OrderDto(item.Order, deep);
-				this.Product = new ProductDto(item.Product, deep);
+                if(item.Order != null)
+                {
+				    this.Order = new OrderDto(item.Order, deep);
+                }
+                if(item.Product != null)
+                {
+				    this.Product = new ProductDto(item.Product, deep);
+                }
 			}
 		}
 		

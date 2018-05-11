@@ -44,8 +44,14 @@ namespace Banking.Models.Entity
 
 			if(deep)
 			{
-				this.BankAccountFrom = new BankAccount(item.BankAccountFrom, deep);
-				this.BankAccountTo = new BankAccount(item.BankAccountTo, deep);
+				if(item.BankAccountFrom != null)
+                {
+                    this.BankAccountFrom = new BankAccount(item.BankAccountFrom, deep);
+                }
+				if(item.BankAccountTo != null)
+                {
+                    this.BankAccountTo = new BankAccount(item.BankAccountTo, deep);
+                }
 			}
 		}
 		

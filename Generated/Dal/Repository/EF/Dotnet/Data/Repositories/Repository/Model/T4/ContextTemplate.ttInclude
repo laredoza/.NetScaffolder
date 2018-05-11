@@ -73,8 +73,6 @@ namespace <#= ContextData.TransformFullnamespace(DataType.BaseNamespace) #>
                     schemaName = schemaName.ToUpper();
                 }
 #>
-
-
 			modelBuilder.Entity<<#=DataType.TransformModelName(table.TableName) #>>().ToTable("<#=table.TableName #>", "<#= schemaName #>");
 <#+ } #>
 

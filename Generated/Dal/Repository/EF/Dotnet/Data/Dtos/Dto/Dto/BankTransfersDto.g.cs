@@ -44,8 +44,14 @@ namespace Banking.Models.Dto
 
 			if(deep)
 			{
-				this.BankAccountFrom = new BankAccountDto(item.BankAccountFrom, deep);
-				this.BankAccountTo = new BankAccountDto(item.BankAccountTo, deep);
+                if(item.BankAccountFrom != null)
+                {
+				    this.BankAccountFrom = new BankAccountDto(item.BankAccountFrom, deep);
+                }
+                if(item.BankAccountTo != null)
+                {
+				    this.BankAccountTo = new BankAccountDto(item.BankAccountTo, deep);
+                }
 			}
 		}
 		

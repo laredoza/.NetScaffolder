@@ -41,7 +41,10 @@ namespace Banking.Models.Entity
 
 			if(deep)
 			{
-				this.Product = new Product(item.Product, deep);
+				if(item.Product != null)
+                {
+                    this.Product = new Product(item.Product, deep);
+                }
 			}
 		}
 		
