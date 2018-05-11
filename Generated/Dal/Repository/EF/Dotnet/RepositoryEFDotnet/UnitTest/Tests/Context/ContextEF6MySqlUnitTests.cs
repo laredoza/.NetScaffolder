@@ -9,33 +9,11 @@ namespace RepositoryEFDotnet.UnitTest
     using Banking.Models.Customers;
 
     [TestClass]
-    public class ContextEF6MySqlUnitTest : BaseContextUnitTests
+    public class ContextEF6MySqlUnitTest : BaseContextUnitTests<MySqlFullContext>
     {
-        [TestMethod]
-        public void ContextUnitTest_AccountContext_CreateDb()
+        protected ContextEF6MySqlUnitTest() 
+            : base(new MySqlFullContext(Effort.DbConnectionFactory.CreateTransient()))
         {
-            using (var context = new MySqlAccountContext("RepoTestMySql"))
-            {
-                BaseContextUnitTests_CreateDbTest(context);
-            }
-        }
-
-        [TestMethod]
-        public void ContextUnitTest_CustomerContext_CreateDb()
-        {
-            using (var context = new MySqlCustomerContext("RepoTestMySql"))
-            {
-                BaseContextUnitTests_CreateDbTest(context);
-            }
-        }
-
-        [TestMethod]
-        public void ContextUnitTest_FullContext_CreateDb()
-        {
-            using (var context = new MySqlFullContext("RepoTestMySql"))
-            {
-                BaseContextUnitTests_CreateDbTest(context);
-            }
         }
     }
 }

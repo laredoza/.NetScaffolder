@@ -242,8 +242,9 @@ namespace RepositoryEFDotnet.UnitTest
 
         #endregion
 
-        #region Dispose
+        #region Cleanup
 
+        [TestCleanup]
         public virtual void DisposeDb()
         {
             if(Connection != null)

@@ -194,7 +194,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
                              {
                                  ProviderName = "MySql.Data.MySqlClient",
                                  ConnectionString =
-                                     @"server=localhost;userid=test;password=password;database=test"
+                                     @"server=127.0.0.1;uid=root;pwd=password;database=test"
                 };
             }
 
