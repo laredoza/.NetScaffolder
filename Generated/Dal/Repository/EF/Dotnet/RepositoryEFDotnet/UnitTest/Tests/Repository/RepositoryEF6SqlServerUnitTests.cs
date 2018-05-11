@@ -16,8 +16,7 @@ namespace RepositoryEFDotnet.UnitTest
         [TestInitialize]
         public override void SetupDb()
         {
-            Connection = Effort.DbConnectionFactory.CreateTransient();
-            Context = new SqlServerFullContext(Connection as DbConnection);
+            Context = new SqlServerFullContext(Effort.DbConnectionFactory.CreateTransient());
         }
 
         #endregion

@@ -11,9 +11,10 @@ namespace RepositoryEFDotnet.UnitTest
     [TestClass]
     public class ContextOracleUnitTest : BaseContextUnitTests<OracleFullContext>
     {
-        protected ContextOracleUnitTest()
-            : base(new OracleFullContext(Effort.DbConnectionFactory.CreateTransient()))
+        [TestInitialize]
+        public override void SetupContext()
         {
+            Context = new OracleFullContext(Effort.DbConnectionFactory.CreateTransient());
         }
     }
 }

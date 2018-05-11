@@ -14,26 +14,27 @@ namespace RepositoryEFDotnet.UnitTest
 
         #endregion
 
-        #region CTOR
+        #region Setup
 
-        protected BaseContextUnitTests(TContext context)
-        {
-            Context = context ?? throw new System.ArgumentNullException("Context", "The context cannot be null");
-        }
+        public abstract void SetupContext();
 
         #endregion
 
+        #region Tests
+
         [TestMethod]
-        protected void BaseContextUnitTests_CreateDbTest()
+        public void BaseContextUnitTests_CreateDbTest()
         {
             Database.SetInitializer(new DropCreateDatabaseAlways<TContext>());
             Context.Database.Initialize(true);
         }
 
+        #endregion
+
         #region Cleanup
 
         [TestCleanup]
-        private void DisposeContext()
+        public void DisposeContext()
         {
             Context?.Dispose();
         }

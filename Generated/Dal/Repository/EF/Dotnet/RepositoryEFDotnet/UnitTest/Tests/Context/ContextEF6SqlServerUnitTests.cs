@@ -11,9 +11,10 @@ namespace RepositoryEFDotnet.UnitTest
     [TestClass]
     public class ContextEF6SqlServerUnitTest : BaseContextUnitTests<SqlServerFullContext>
     {
-        protected ContextEF6SqlServerUnitTest() 
-            : base(new SqlServerFullContext(Effort.DbConnectionFactory.CreateTransient()))
+        [TestInitialize]
+        public override void SetupContext()
         {
+            Context = new SqlServerFullContext(Effort.DbConnectionFactory.CreateTransient());
         }
     }
 }

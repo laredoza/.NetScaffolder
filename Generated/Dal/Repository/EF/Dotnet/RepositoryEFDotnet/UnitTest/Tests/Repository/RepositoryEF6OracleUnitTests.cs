@@ -16,8 +16,7 @@ namespace RepositoryEFDotnet.UnitTest
         [TestInitialize]
         public override void SetupDb()
         {
-            Connection = Effort.DbConnectionFactory.CreateTransient();
-            Context = new OracleFullContext(Connection as DbConnection);
+            Context = new OracleFullContext(Effort.DbConnectionFactory.CreateTransient());
         }
 
         #endregion

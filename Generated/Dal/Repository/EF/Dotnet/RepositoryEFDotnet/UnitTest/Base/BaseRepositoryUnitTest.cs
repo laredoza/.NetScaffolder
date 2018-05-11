@@ -11,12 +11,6 @@ namespace RepositoryEFDotnet.UnitTest
     [TestClass]
     public abstract class BaseRepositoryUnitTest
     {
-        #region Members
-
-        protected IDbConnection Connection { get; set; }
-
-        #endregion
-
         #region Base Tests
 
         public void BaseRepositoryUnitTest_Customer_Add(ICustomerRepository repository)
@@ -247,15 +241,6 @@ namespace RepositoryEFDotnet.UnitTest
         [TestCleanup]
         public virtual void DisposeDb()
         {
-            if(Connection != null)
-            {
-                if(Connection.State != ConnectionState.Closed)
-                {
-                    Connection.Close();
-                }
-                Connection.Dispose();
-            }
-
             Context?.Dispose();
         }
 
