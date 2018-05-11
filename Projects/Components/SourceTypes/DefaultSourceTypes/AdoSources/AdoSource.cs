@@ -47,14 +47,24 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
                 // Debug.WriteLine("Table " + table.Name);
                 newTable = new Table { TableName = table.Name, SchemaName = table.SchemaOwner };
                 result.Tables.Add(newTable);
+                string dataType;
 
                 foreach (var column in table.Columns)
                 {
+                    if (column.DataType != null)
+                    {
+                        dataType = column.DataType.TypeName;
+                    }
+                    else
+                    {
+                        dataType = string.Empty;
+                    }
+
                     newColumn = new Column
                     {
                         ColumnName = column.Name,
                         DomainDataType =
-                        this.MapDatabaseType(column.DataType.TypeName, column.DataType),
+                        this.MapDatabaseType(dataType, column),
                         IsRequired = column.IsPrimaryKey,
                         ColumnOrder = table.Columns.IndexOf(column) + 1,
                         Precision = column.Precision.HasValue ? column.Precision.Value : 0,

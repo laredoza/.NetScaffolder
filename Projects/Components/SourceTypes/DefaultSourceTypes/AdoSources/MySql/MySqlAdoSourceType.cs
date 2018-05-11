@@ -84,9 +84,14 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
         public override DomainDataType MapDatabaseType(string databaseType, object extraInfo)
         {
             DatabaseColumn column = extraInfo as DatabaseColumn;
-            DataType dataType = extraInfo as DataType;
-            
-            switch (databaseType.ToUpper())
+            string cSharpName = string.Empty;
+
+            if (column.DataType != null)
+            {
+                cSharpName = databaseType.ToUpper();
+            }
+
+            switch (cSharpName)
             {
                 case "VARCHAR":
                 case "LONGTEXT":
@@ -106,6 +111,8 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
                     return DomainDataType.Single;
                 case "LONGBLOB":
                     return DomainDataType.VarBinary;
+                case "":
+                    return DomainDataType.Unsupported;
                 default:
                     throw new NotImplementedException($"Invalid data type {databaseType}");
             }
