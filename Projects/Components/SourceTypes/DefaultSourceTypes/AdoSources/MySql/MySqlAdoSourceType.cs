@@ -95,11 +95,17 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
             {
                 case "VARCHAR":
                 case "LONGTEXT":
+                case "TEXT":
+                case "ENUM":
+                case "SET":
+                case "CHAR":
                     return DomainDataType.String;
                 case "TIMESTAMP":
                 case "DATE":
                     return DomainDataType.DateTime;
                 case "INT":
+                case "YEAR":
+                case "MEDIUMINT":
                     return DomainDataType.Int32;
                 case "DECIMAL":
                     return DomainDataType.Decimal;
@@ -110,6 +116,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
                 case "FLOAT":
                     return DomainDataType.Single;
                 case "LONGBLOB":
+                case "BLOB":
                     return DomainDataType.VarBinary;
                 case "":
                     return DomainDataType.Unsupported;
