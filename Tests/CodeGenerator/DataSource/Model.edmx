@@ -93,14 +93,6 @@
           <Property Name="Publisher" Type="nvarchar" MaxLength="200" />
           <Property Name="AmountInStock" Type="smallint" />
         </EntityType>
-        <EntityType Name="Role">
-          <Key>
-            <PropertyRef Name="RoleId" />
-          </Key>
-          <Property Name="RoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="RoleName" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="ParentRoleId" Type="int" />
-        </EntityType>
         <EntityType Name="Software">
           <Key>
             <PropertyRef Name="ProductId" />
@@ -204,18 +196,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_RoleParentRole">
-          <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
-          <End Role="Role1" Type="Self.Role" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Role">
-              <PropertyRef Name="RoleId" />
-            </Principal>
-            <Dependent Role="Role1">
-              <PropertyRef Name="ParentRoleId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="EntitiesModelStoreContainer">
           <EntitySet Name="BankAccount" EntityType="Self.BankAccount" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BankTransfers" EntityType="Self.BankTransfers" Schema="dbo" store:Type="Tables" />
@@ -225,7 +205,6 @@
           <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrderDetails" EntityType="Self.OrderDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Software" EntityType="Self.Software" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_dbo_BankAccount_dbo_Customer_CustomerId" Association="Self.FK_dbo_BankAccount_dbo_Customer_CustomerId">
             <End Role="Customer" EntitySet="Customer" />
@@ -258,10 +237,6 @@
           <AssociationSet Name="FK_dbo_Software_dbo_Product_ProductId" Association="Self.FK_dbo_Software_dbo_Product_ProductId">
             <End Role="Product" EntitySet="Product" />
             <End Role="Software" EntitySet="Software" />
-          </AssociationSet>
-          <AssociationSet Name="FK_RoleParentRole" Association="Self.FK_RoleParentRole">
-            <End Role="Role" EntitySet="Role" />
-            <End Role="Role1" EntitySet="Role" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -552,34 +527,7 @@
             <End Role="Product" EntitySet="Product" />
             <End Role="Software" EntitySet="Software" />
           </AssociationSet>
-          <EntitySet Name="Roles" EntityType="NModel.Role" />
-          <AssociationSet Name="FK_RoleParentRole" Association="NModel.FK_RoleParentRole">
-            <End Role="Role" EntitySet="Roles" />
-            <End Role="Role1" EntitySet="Roles" />
-          </AssociationSet>
         </EntityContainer>
-        <EntityType Name="Role">
-          <Key>
-            <PropertyRef Name="RoleId" />
-          </Key>
-          <Property Name="RoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="RoleName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ParentRoleId" Type="Int32" />
-          <NavigationProperty Name="ChildRoles" Relationship="NModel.FK_RoleParentRole" FromRole="Role" ToRole="Role1" />
-          <NavigationProperty Name="ParentRole" Relationship="NModel.FK_RoleParentRole" FromRole="Role1" ToRole="Role" />
-        </EntityType>
-        <Association Name="FK_RoleParentRole">
-          <End Type="NModel.Role" Role="Role" Multiplicity="0..1" />
-          <End Type="NModel.Role" Role="Role1" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Role">
-              <PropertyRef Name="RoleId" />
-            </Principal>
-            <Dependent Role="Role1">
-              <PropertyRef Name="ParentRoleId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -689,15 +637,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Roles">
-            <EntityTypeMapping TypeName="NModel.Role">
-              <MappingFragment StoreEntitySet="Role">
-                <ScalarProperty Name="ParentRoleId" ColumnName="ParentRoleId" />
-                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
-                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -741,8 +680,6 @@
         <AssociationConnector Association="NModel.FK_OrdeDetails_Order" ManuallyRouted="false" />
         <AssociationConnector Association="NModel.FK_OrderDetails_Product" ManuallyRouted="false" />
         <AssociationConnector Association="NModel.FK_Software_Product" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="NModel.Role" Width="1.5" PointX="0.5" PointY="0.5" />
-        <AssociationConnector Association="NModel.FK_RoleParentRole" />
       </Diagram>
     </Diagrams>
   </Designer>

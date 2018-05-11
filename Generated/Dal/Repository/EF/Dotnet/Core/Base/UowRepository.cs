@@ -39,15 +39,5 @@
         protected IUnitOfWork UnitOfWork { get; private set; }
 
         #endregion
-
-        public virtual void Commit()
-        {
-            UnitOfWork?.Commit();
-        }
-
-        public virtual void Rollback()
-        {
-            UnitOfWork?.Rollback();
-        }
     }
 }

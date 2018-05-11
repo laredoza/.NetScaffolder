@@ -71,7 +71,7 @@
       <HintPath>..\packages\Oracle.ManagedDataAccess.12.2.1100\lib\net40\Oracle.ManagedDataAccess.dll</HintPath>
     </Reference>
     <Reference Include="Oracle.ManagedDataAccess.EntityFramework, Version=6.122.1.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL">
-      <HintPath>..\packages\Oracle.ManagedDataAccess.EntityFramework.12.2.1100\lib\net45\Oracle.ManagedDataAccess.EntityFramework.dll</HintPath>
+      <HintPath>..\..\packages\Oracle.ManagedDataAccess.EntityFramework.12.2.1100\lib\net45\Oracle.ManagedDataAccess.EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel" />
@@ -95,6 +95,8 @@
     <Compile Include="Tests\Context\ContextOracleUnitTests.cs" />
     <Compile Include="Tests\Context\ContextEF6MySqlUnitTests.cs" />
     <Compile Include="Tests\Context\ContextEF6SqlServerUnitTests.cs" />
+    <Compile Include="Tests\Repository\RepositoryEF6OracleUnitTests.cs" />
+    <Compile Include="Tests\Repository\RepositoryEF6MySqlUnitTests.cs" />
     <Compile Include="Tests\Repository\RepositoryEF6SqlServerUnitTests.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -104,13 +106,41 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\..\..\..\Tests\CodeGenerator\DotNetScaffolder.Test.csproj">
-      <Project>{96b8860e-531c-405f-9abf-2fae4e8f2759}</Project>
-      <Name>DotNetScaffolder.Test</Name>
+    <ProjectReference Include="..\..\Core\RepositoryEFDotnet.Core.csproj">
+      <Project>{0333e000-6aaf-4e18-8747-2299a8231ab1}</Project>
+      <Name>RepositoryEFDotnet.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Library\RepositoryEFDotnet.Library.csproj">
-      <Project>{19d63602-bd17-49f2-8335-e75c6813260a}</Project>
-      <Name>RepositoryEFDotnet.Library</Name>
+    <ProjectReference Include="..\..\Data\Contexts\EF\Base\RepositoryEFDotnet.Contexts.EF.Base.csproj">
+      <Project>{A8511725-544E-49BD-8451-4C8638ADC5BA}</Project>
+      <Name>RepositoryEFDotnet.Contexts.EF.Base</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Data\Contexts\EF\MySql\RepositoryEFDotnet.Contexts.EF.MySql.csproj">
+      <Project>{a7a2f791-518f-4a2f-b098-358cd4067b71}</Project>
+      <Name>RepositoryEFDotnet.Contexts.EF.MySql</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Data\Contexts\EF\Oracle\RepositoryEFDotnet.Contexts.EF.Oracle.csproj">
+      <Project>{7f55c86e-d2e1-49a7-9ef4-1aabfb94a4fe}</Project>
+      <Name>RepositoryEFDotnet.Contexts.EF.Oracle</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Data\Contexts\EF\SqlServer\RepositoryEFDotnet.Contexts.EF.SqlServer.csproj">
+      <Project>{23e0edff-bdfb-45e4-ac7b-31ddfa93ae1d}</Project>
+      <Name>RepositoryEFDotnet.Contexts.EF.SqlServer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Data\Dtos\Dto\RepositoryEFDotnet.Data.Dtos.Dto.csproj">
+      <Project>{61d46a6e-4e3a-4d37-9169-aed9b277d33b}</Project>
+      <Name>RepositoryEFDotnet.Data.Dtos.Dto</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Data\Interfaces\Interface\RepositoryEFDotnet.Data.Interface.ModelInterfaces.csproj">
+      <Project>{f49f5825-6f92-4b8d-ae30-59d43235974b}</Project>
+      <Name>RepositoryEFDotnet.Data.Interface.ModelInterfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Data\Interfaces\RepositoryInterfaces\RepositoryEFDotnet.Data.Interface.RepositoryInterfaces.csproj">
+      <Project>{69bf017d-9632-4bca-859b-5d24a2c4b79a}</Project>
+      <Name>RepositoryEFDotnet.Data.Interface.RepositoryInterfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Data\Repositories\Repository\RepositoryEFDotnet.Data.Repositories.Repository.csproj">
+      <Project>{DAB86AE4-F8E1-4D5E-BAF2-855D24D7A437}</Project>
+      <Name>RepositoryEFDotnet.Data.Repositories.Repository</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

@@ -1,48 +1,19 @@
-﻿using System;
-using System.Data.Entity;
-using Banking.Models.Accounts;
-//using Banking.Models.Context;
+﻿//using Banking.Models.Context;
 //using Banking.Models.Customers;
-using DotNetScaffolder.Test.Components.SourceTypes;
+using Banking.Models.Accounts;
+using Banking.Models.Context;
+using Banking.Models.Customers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Data.Entity;
 
 namespace RepositoryEFDotnet.UnitTest
 {
-    using Banking.Models.Context;
-    using Banking.Models.Customers;
-
     [TestClass]
-    public class ContextOracleUnitTest : BaseContextUnitTests
+    public class ContextOracleUnitTest : BaseContextUnitTests<OracleFullContext>
     {
-        [TestMethod]
-        public void ContextUnitTest_AccountContext_CreateDb()
+        protected ContextOracleUnitTest()
+            : base(new OracleFullContext(Effort.DbConnectionFactory.CreateTransient()))
         {
-            Database.SetInitializer(new DropCreateDatabaseAlways<AccountContext>());
-            using (var context = new AccountContext("RepoTestOracle"))
-            {
-                Database.SetInitializer(new DropCreateDatabaseAlways<AccountContext>());
-                // BaseContextUnitTests_CreateDbTest(context);
-
-                context.Database.Initialize(true);
-            }
-        }
-
-        [TestMethod]
-        public void ContextUnitTest_CustomerContext_CreateDb()
-        {
-            using (var context = new CustomerContext("RepoTestOracle"))
-            {
-                BaseContextUnitTests_CreateDbTest(context);
-            }
-        }
-
-        [TestMethod]
-        public void ContextUnitTest_FullContext_CreateDb()
-        {
-            using (var context = new FullContext("RepoTestOracle"))
-            {
-                BaseContextUnitTests_CreateDbTest(context);
-            }
         }
     }
 }

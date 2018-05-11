@@ -12,7 +12,5 @@
     /// </summary>
     public interface IRepository
     {
-        void Commit();
-        void Rollback();
     }
 }

@@ -9,7 +9,7 @@ namespace RepositoryEFDotnet.UnitTest
     using System.Data.Common;
 
     [TestClass]
-    public class RepositoryEF6SqlServerUnitTest : BaseRepositoryUnitTest
+    public class RepositoryEF6OracleUnitTest : BaseRepositoryUnitTest
     {
         #region Init
 
@@ -17,7 +17,7 @@ namespace RepositoryEFDotnet.UnitTest
         public override void SetupDb()
         {
             Connection = Effort.DbConnectionFactory.CreateTransient();
-            Context = new SqlServerFullContext(Connection as DbConnection);
+            Context = new OracleFullContext(Connection as DbConnection);
         }
 
         #endregion
