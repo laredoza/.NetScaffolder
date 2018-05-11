@@ -14,6 +14,8 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
     using System.IO;
     using System.Windows.Forms;
 
+    using DatabaseSchemaReader.DataSchema;
+
     using DotNetScaffolder.Components.Common.Contract;
     using DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.SourceOptions;
     using DotNetScaffolder.Core.Common.Serializer;
@@ -77,42 +79,52 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
         /// </returns>
         public override DomainDataType MapDatabaseType(string databaseType, object extraInfo)
         {
-            switch (databaseType.ToUpper())
+            DatabaseColumn column = extraInfo as DatabaseColumn;
+            string cSharpName = string.Empty;
+
+            if (column.DataType != null)
             {
-                case "SMALLINT":
-                    return DomainDataType.Int16;
-                case "INT":
-                    return DomainDataType.Int32;
-                case "BIT":
-                    return DomainDataType.Boolean;
-                case "NVARCHAR":
-                    return DomainDataType.String;
-                case "VARCHAR":
-                    return DomainDataType.String;
-                case "MONEY":
-                    return DomainDataType.Decimal;
-                case "NUMERIC":
-                    return DomainDataType.Decimal;
-                case "DATETIME":
-                    return DomainDataType.DateTime;
-                case "IMAGE":
-                    // Todo: Do something valid with this
-                    return DomainDataType.String;
-                case "REAL":
-                    // Todo: Do something valid with this
-                    return DomainDataType.Single;
-                case "UNIQUEIDENTIFIER":
-                    return DomainDataType.Guid;
-                case "BIGINT":
-                    return DomainDataType.Int64;
-                case "VARBINARY":
-                    return DomainDataType.VarBinary;
-                case "DECIMAL":
-                    return DomainDataType.Decimal;
-                case "DATE":
-                    return DomainDataType.Date;
-                case "TIME":
-                    return DomainDataType.Time;
+                cSharpName = databaseType.ToUpper();
+            }
+
+            switch (cSharpName)
+            {
+                //case "SMALLINT":
+                //    return DomainDataType.Int16;
+                //case "INT":
+                //    return DomainDataType.Int32;
+                //case "BIT":
+                //    return DomainDataType.Boolean;
+                //case "NVARCHAR":
+                //    return DomainDataType.String;
+                //case "VARCHAR":
+                //    return DomainDataType.String;
+                //case "MONEY":
+                //    return DomainDataType.Decimal;
+                //case "NUMERIC":
+                //    return DomainDataType.Decimal;
+                //case "DATETIME":
+                //    return DomainDataType.DateTime;
+                //case "IMAGE":
+                //    // Todo: Do something valid with this
+                //    return DomainDataType.String;
+                //case "REAL":
+                //    // Todo: Do something valid with this
+                //    return DomainDataType.Single;
+                //case "UNIQUEIDENTIFIER":
+                //    return DomainDataType.Guid;
+                //case "BIGINT":
+                //    return DomainDataType.Int64;
+                //case "VARBINARY":
+                //    return DomainDataType.VarBinary;
+                //case "DECIMAL":
+                //    return DomainDataType.Decimal;
+                //case "DATE":
+                //    return DomainDataType.Date;
+                //case "TIME":
+                //    return DomainDataType.Time;
+                case "":
+                    return DomainDataType.Unsupported;
                 default:
                     throw new NotImplementedException($"Invalid data type {databaseType}");
             }

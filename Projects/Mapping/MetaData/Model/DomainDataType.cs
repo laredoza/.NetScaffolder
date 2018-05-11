@@ -91,6 +91,8 @@ namespace DotNetScaffolder.Mapping.MetaData.Model
         /// <summary>
         /// The float.
         /// </summary>
-        Float
+        Float,
+
+        Unsupported
     }
 }

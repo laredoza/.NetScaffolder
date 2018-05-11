@@ -145,13 +145,16 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
         public override DomainDataType MapDatabaseType(string databaseType, object extraInfo)
         {
             DatabaseColumn column = extraInfo as DatabaseColumn;
+            Type cSharpNameType = NetDataType(column);
 
-            // Temp workaround for issues with getting dataTypes for Oracle
-            Type cSharpName = NetDataType(column);
+            string cSharpName = string.Empty;
 
-            DataType dataType = extraInfo as DataType;
+            if (cSharpNameType != null)
+            {
+                cSharpName = cSharpNameType.Name.ToUpper();
+            }
 
-            switch (cSharpName.Name.ToUpper())
+            switch (cSharpName)
             {
                 case "DECIMAL":
                     return DomainDataType.Decimal;
@@ -169,6 +172,8 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
                     return DomainDataType.VarBinary;
                 case "INT64":
                     return DomainDataType.Int64;
+                case "":
+                    return DomainDataType.Unsupported;
                 default:
                     throw new NotImplementedException($"Invalid data type {databaseType}");
             }
