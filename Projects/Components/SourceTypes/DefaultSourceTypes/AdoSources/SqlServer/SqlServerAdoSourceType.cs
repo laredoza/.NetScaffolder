@@ -89,22 +89,28 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
 
             switch (cSharpName)
             {
-                //case "SMALLINT":
-                //    return DomainDataType.Int16;
-                //case "INT":
-                //    return DomainDataType.Int32;
-                //case "BIT":
-                //    return DomainDataType.Boolean;
-                //case "NVARCHAR":
-                //    return DomainDataType.String;
-                //case "VARCHAR":
-                //    return DomainDataType.String;
+                case "VARCHAR":
+                case "NVARCHAR":
+                    return DomainDataType.String;
+                case "VARBINARY":
+                    return DomainDataType.VarBinary;
+                case "INT":
+                    return DomainDataType.Int32;
+                case "DECIMAL":
+                    return DomainDataType.Decimal;
+                case "BIT":
+                    return DomainDataType.Boolean;
+                case "DATETIME":
+                    return DomainDataType.DateTime;
+                case "SMALLINT":
+                    return DomainDataType.Int16;
+                case "REAL":
+                    return DomainDataType.Single;
                 //case "MONEY":
                 //    return DomainDataType.Decimal;
                 //case "NUMERIC":
                 //    return DomainDataType.Decimal;
-                //case "DATETIME":
-                //    return DomainDataType.DateTime;
+
                 //case "IMAGE":
                 //    // Todo: Do something valid with this
                 //    return DomainDataType.String;
@@ -115,10 +121,8 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
                 //    return DomainDataType.Guid;
                 //case "BIGINT":
                 //    return DomainDataType.Int64;
-                //case "VARBINARY":
-                //    return DomainDataType.VarBinary;
-                //case "DECIMAL":
-                //    return DomainDataType.Decimal;
+
+
                 //case "DATE":
                 //    return DomainDataType.Date;
                 //case "TIME":
