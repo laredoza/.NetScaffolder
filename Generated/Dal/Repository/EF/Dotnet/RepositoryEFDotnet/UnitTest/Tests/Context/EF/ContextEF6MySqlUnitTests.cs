@@ -2,8 +2,6 @@
 
 namespace RepositoryEFDotnet.UnitTest
 {
-    using System.Data.Entity;
-
     using Banking.Models.Context;
     using MySql.Data.MySqlClient;
 
@@ -13,8 +11,7 @@ namespace RepositoryEFDotnet.UnitTest
         [TestInitialize]
         public override void SetupContext()
         {
-            // Context = new MySqlFullContext(Effort.DbConnectionFactory.CreateTransient());
-            Context = new MySqlFullContext("RepoTestMySql");
+            Context = new MySqlFullContext(Effort.DbConnectionFactory.CreateTransient());
         }
     }
 }

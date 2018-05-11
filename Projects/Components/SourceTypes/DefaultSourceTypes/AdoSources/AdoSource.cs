@@ -35,13 +35,14 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
 
             AdoSourceOptions adoOptions = options as AdoSourceOptions;
             var databaseReader = new DatabaseReader(adoOptions.ConnectionString, adoOptions.ProviderName);
+            databaseReader.Owner = "Test";
             var schema = databaseReader.ReadAll();
 
             // schema.Tables[0].CheckConstraints[0].RefersToConstraint
             Table newTable;
             Column newColumn;
 
-            foreach (var table in schema.Tables.Where(t => t.Name != "sysdiagrams"))
+            foreach (var table in schema.Tables.Where(t => t.Name != "sysdiagrams" && t.Name != "__migrationhistory"))
             {
                 // foreach (var table in schema.Tables.Where(t => t.Name == "BankAccount"))
                 // Debug.WriteLine("Table " + table.Name);
@@ -65,7 +66,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
                         ColumnName = column.Name,
                         DomainDataType =
                         this.MapDatabaseType(dataType, column),
-                        IsRequired = column.IsPrimaryKey,
+                        IsRequired = !column.Nullable || column.IsPrimaryKey,
                         ColumnOrder = table.Columns.IndexOf(column) + 1,
                         Precision = column.Precision.HasValue ? column.Precision.Value : 0,
                         Scale = column.Scale.HasValue ? column.Scale.Value : 0,
@@ -103,7 +104,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
                             newTable.Relationships.Add(
                                 new Relationship
                                 {
-                                    ReferencedTableName = foreignKey.RefersToTable,
+                                    ReferencedTableName = foreignKey.TableName,
                                     ColumnName = foreignKey.Columns[0],
                                     ReferencedColumnName = foreignKey.ReferencedColumns(schema).ToList()[0],
                                     DependencyRelationShip = RelationshipType.ForeignKeyChild,

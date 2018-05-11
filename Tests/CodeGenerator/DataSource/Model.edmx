@@ -5,14 +5,67 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="EntitiesModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="EntitiesModel.Store" Alias="Self" Provider="System.Data.SqlClient"
+              ProviderManifestToken="2008"
+              xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator"
+              xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="EntitiesModelStoreContainer">
+          <EntitySet Name="BankAccount" EntityType="EntitiesModel.Store.BankAccount" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="BankTransfers" EntityType="EntitiesModel.Store.BankTransfers" store:Type="Tables"
+                     Schema="dbo" />
+          <EntitySet Name="Book" EntityType="EntitiesModel.Store.Book" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Country" EntityType="EntitiesModel.Store.Country" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Customer" EntityType="EntitiesModel.Store.Customer" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Order" EntityType="EntitiesModel.Store.Order" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="OrderDetails" EntityType="EntitiesModel.Store.OrderDetails" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Product" EntityType="EntitiesModel.Store.Product" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Software" EntityType="EntitiesModel.Store.Software" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_BankAccount_Customer" Association="EntitiesModel.Store.FK_BankAccount_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="BankAccount" EntitySet="BankAccount" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BankTransfers_BankAccount"
+                          Association="EntitiesModel.Store.FK_BankTransfers_BankAccount">
+            <End Role="BankAccount" EntitySet="BankAccount" />
+            <End Role="BankTransfers" EntitySet="BankTransfers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BankTransfers_BankAccount1"
+                          Association="EntitiesModel.Store.FK_BankTransfers_BankAccount1">
+            <End Role="BankAccount" EntitySet="BankAccount" />
+            <End Role="BankTransfers" EntitySet="BankTransfers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Book_Product" Association="EntitiesModel.Store.FK_Book_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Book" EntitySet="Book" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customer_Country" Association="EntitiesModel.Store.FK_Customer_Country">
+            <End Role="Country" EntitySet="Country" />
+            <End Role="Customer" EntitySet="Customer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrdeDetails_Order" Association="EntitiesModel.Store.FK_OrdeDetails_Order">
+            <End Role="Order" EntitySet="Order" />
+            <End Role="OrderDetails" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Customer" Association="EntitiesModel.Store.FK_Order_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderDetails_Product" Association="EntitiesModel.Store.FK_OrderDetails_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="OrderDetails" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Software_Product" Association="EntitiesModel.Store.FK_Software_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Software" EntitySet="Software" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="BankAccount">
           <Key>
             <PropertyRef Name="BankAccountId" />
           </Key>
-          <Property Name="BankAccountId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="BankAccountNumber" Type="nvarchar" MaxLength="10" Nullable="false" />
-          <Property Name="Balance" Type="decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="BankAccountId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="BankAccountNumber" Type="nvarchar" Nullable="false" MaxLength="10" />
+          <Property Name="Balance" Type="money" Nullable="false" />
           <Property Name="CustomerId" Type="int" />
           <Property Name="Locked" Type="bit" Nullable="false" />
         </EntityType>
@@ -20,10 +73,10 @@
           <Key>
             <PropertyRef Name="BankTransferId" />
           </Key>
-          <Property Name="BankTransferId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BankTransferId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="FromBankAccountId" Type="int" Nullable="false" />
           <Property Name="ToBankAccountId" Type="int" Nullable="false" />
-          <Property Name="Amount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Amount" Type="numeric" Nullable="false" Scale="2" />
           <Property Name="TransferDate" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Book">
@@ -31,22 +84,22 @@
             <PropertyRef Name="ProductId" />
           </Key>
           <Property Name="ProductId" Type="int" Nullable="false" />
-          <Property Name="Publisher" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Publisher" Type="nvarchar" Nullable="false" MaxLength="200" />
         </EntityType>
         <EntityType Name="Country">
           <Key>
             <PropertyRef Name="CountryId" />
           </Key>
-          <Property Name="CountryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CountryId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="CountryName" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="Customer">
           <Key>
             <PropertyRef Name="CustomerId" />
           </Key>
-          <Property Name="CustomerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="CustomerCode" Type="nvarchar" MaxLength="5" Nullable="false" />
-          <Property Name="CompanyName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CustomerId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerCode" Type="nvarchar" Nullable="false" MaxLength="5" />
+          <Property Name="CompanyName" Type="nvarchar" Nullable="false" MaxLength="50" />
           <Property Name="ContactName" Type="nvarchar" MaxLength="50" />
           <Property Name="ContactTitle" Type="nvarchar" MaxLength="50" />
           <Property Name="Address" Type="nvarchar" MaxLength="50" />
@@ -55,14 +108,14 @@
           <Property Name="Telephone" Type="nvarchar" MaxLength="50" />
           <Property Name="Fax" Type="nvarchar" MaxLength="50" />
           <Property Name="CountryId" Type="int" />
-          <Property Name="Photo" Type="nvarchar(max)" />
+          <Property Name="Photo" Type="image" />
           <Property Name="IsEnabled" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Order">
           <Key>
             <PropertyRef Name="OrderId" />
           </Key>
-          <Property Name="OrderId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrderId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="CustomerId" Type="int" />
           <Property Name="OrderDate" Type="datetime" />
           <Property Name="DeliveryDate" Type="datetime" />
@@ -75,10 +128,10 @@
           <Key>
             <PropertyRef Name="OrderDetailsId" />
           </Key>
-          <Property Name="OrderDetailsId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrderDetailsId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="OrderId" Type="int" Nullable="false" />
           <Property Name="ProductId" Type="int" Nullable="false" />
-          <Property Name="UnitPrice" Type="decimal" Precision="19" Scale="4" />
+          <Property Name="UnitPrice" Type="money" />
           <Property Name="Amount" Type="smallint" />
           <Property Name="Discount" Type="real" />
         </EntityType>
@@ -86,9 +139,9 @@
           <Key>
             <PropertyRef Name="ProductId" />
           </Key>
-          <Property Name="ProductId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="ProductDescription" Type="nvarchar" MaxLength="100" />
-          <Property Name="UnitPrice" Type="decimal" Precision="19" Scale="4" />
+          <Property Name="UnitPrice" Type="money" />
           <Property Name="UnitAmount" Type="nvarchar" MaxLength="50" />
           <Property Name="Publisher" Type="nvarchar" MaxLength="200" />
           <Property Name="AmountInStock" Type="smallint" />
@@ -98,11 +151,11 @@
             <PropertyRef Name="ProductId" />
           </Key>
           <Property Name="ProductId" Type="int" Nullable="false" />
-          <Property Name="LicenseCode" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="LicenseCode" Type="nvarchar" Nullable="false" MaxLength="200" />
         </EntityType>
-        <Association Name="FK_dbo_BankAccount_dbo_Customer_CustomerId">
-          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
-          <End Role="BankAccount" Type="Self.BankAccount" Multiplicity="*" />
+        <Association Name="FK_BankAccount_Customer">
+          <End Role="Customer" Type="EntitiesModel.Store.Customer" Multiplicity="0..1" />
+          <End Role="BankAccount" Type="EntitiesModel.Store.BankAccount" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Customer">
               <PropertyRef Name="CustomerId" />
@@ -112,9 +165,21 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_dbo_BankTransfers_dbo_BankAccount_ToBankAccountId">
-          <End Role="BankAccount" Type="Self.BankAccount" Multiplicity="1" />
-          <End Role="BankTransfers" Type="Self.BankTransfers" Multiplicity="*" />
+        <Association Name="FK_BankTransfers_BankAccount">
+          <End Role="BankAccount" Type="EntitiesModel.Store.BankAccount" Multiplicity="1" />
+          <End Role="BankTransfers" Type="EntitiesModel.Store.BankTransfers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BankAccount">
+              <PropertyRef Name="BankAccountId" />
+            </Principal>
+            <Dependent Role="BankTransfers">
+              <PropertyRef Name="FromBankAccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BankTransfers_BankAccount1">
+          <End Role="BankAccount" Type="EntitiesModel.Store.BankAccount" Multiplicity="1" />
+          <End Role="BankTransfers" Type="EntitiesModel.Store.BankTransfers" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="BankAccount">
               <PropertyRef Name="BankAccountId" />
@@ -124,9 +189,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_dbo_Book_dbo_Product_ProductId">
-          <End Role="Product" Type="Self.Product" Multiplicity="1" />
-          <End Role="Book" Type="Self.Book" Multiplicity="0..1" />
+        <Association Name="FK_Book_Product">
+          <End Role="Product" Type="EntitiesModel.Store.Product" Multiplicity="1" />
+          <End Role="Book" Type="EntitiesModel.Store.Book" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="Product">
               <PropertyRef Name="ProductId" />
@@ -136,9 +201,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_dbo_Customer_dbo_Country_CountryId">
-          <End Role="Country" Type="Self.Country" Multiplicity="0..1" />
-          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+        <Association Name="FK_Customer_Country">
+          <End Role="Country" Type="EntitiesModel.Store.Country" Multiplicity="0..1" />
+          <End Role="Customer" Type="EntitiesModel.Store.Customer" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Country">
               <PropertyRef Name="CountryId" />
@@ -148,21 +213,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_dbo_Order_dbo_Customer_CustomerId">
-          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
-          <End Role="Order" Type="Self.Order" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Customer">
-              <PropertyRef Name="CustomerId" />
-            </Principal>
-            <Dependent Role="Order">
-              <PropertyRef Name="CustomerId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_dbo_OrderDetails_dbo_Order_OrderId">
-          <End Role="Order" Type="Self.Order" Multiplicity="1" />
-          <End Role="OrderDetails" Type="Self.OrderDetails" Multiplicity="*" />
+        <Association Name="FK_OrdeDetails_Order">
+          <End Role="Order" Type="EntitiesModel.Store.Order" Multiplicity="1" />
+          <End Role="OrderDetails" Type="EntitiesModel.Store.OrderDetails" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Order">
               <PropertyRef Name="OrderId" />
@@ -172,9 +225,21 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_dbo_OrderDetails_dbo_Product_ProductId">
-          <End Role="Product" Type="Self.Product" Multiplicity="1" />
-          <End Role="OrderDetails" Type="Self.OrderDetails" Multiplicity="*" />
+        <Association Name="FK_Order_Customer">
+          <End Role="Customer" Type="EntitiesModel.Store.Customer" Multiplicity="0..1" />
+          <End Role="Order" Type="EntitiesModel.Store.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerId" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderDetails_Product">
+          <End Role="Product" Type="EntitiesModel.Store.Product" Multiplicity="1" />
+          <End Role="OrderDetails" Type="EntitiesModel.Store.OrderDetails" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Product">
               <PropertyRef Name="ProductId" />
@@ -184,9 +249,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_dbo_Software_dbo_Product_ProductId">
-          <End Role="Product" Type="Self.Product" Multiplicity="1" />
-          <End Role="Software" Type="Self.Software" Multiplicity="0..1" />
+        <Association Name="FK_Software_Product">
+          <End Role="Product" Type="EntitiesModel.Store.Product" Multiplicity="1" />
+          <End Role="Software" Type="EntitiesModel.Store.Software" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="Product">
               <PropertyRef Name="ProductId" />
@@ -196,50 +261,8 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="EntitiesModelStoreContainer">
-          <EntitySet Name="BankAccount" EntityType="Self.BankAccount" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="BankTransfers" EntityType="Self.BankTransfers" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Book" EntityType="Self.Book" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="OrderDetails" EntityType="Self.OrderDetails" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Software" EntityType="Self.Software" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_dbo_BankAccount_dbo_Customer_CustomerId" Association="Self.FK_dbo_BankAccount_dbo_Customer_CustomerId">
-            <End Role="Customer" EntitySet="Customer" />
-            <End Role="BankAccount" EntitySet="BankAccount" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_BankTransfers_dbo_BankAccount_ToBankAccountId" Association="Self.FK_dbo_BankTransfers_dbo_BankAccount_ToBankAccountId">
-            <End Role="BankAccount" EntitySet="BankAccount" />
-            <End Role="BankTransfers" EntitySet="BankTransfers" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_Book_dbo_Product_ProductId" Association="Self.FK_dbo_Book_dbo_Product_ProductId">
-            <End Role="Product" EntitySet="Product" />
-            <End Role="Book" EntitySet="Book" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_Customer_dbo_Country_CountryId" Association="Self.FK_dbo_Customer_dbo_Country_CountryId">
-            <End Role="Country" EntitySet="Country" />
-            <End Role="Customer" EntitySet="Customer" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_Order_dbo_Customer_CustomerId" Association="Self.FK_dbo_Order_dbo_Customer_CustomerId">
-            <End Role="Customer" EntitySet="Customer" />
-            <End Role="Order" EntitySet="Order" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_OrderDetails_dbo_Order_OrderId" Association="Self.FK_dbo_OrderDetails_dbo_Order_OrderId">
-            <End Role="Order" EntitySet="Order" />
-            <End Role="OrderDetails" EntitySet="OrderDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_OrderDetails_dbo_Product_ProductId" Association="Self.FK_dbo_OrderDetails_dbo_Product_ProductId">
-            <End Role="Product" EntitySet="Product" />
-            <End Role="OrderDetails" EntitySet="OrderDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_Software_dbo_Product_ProductId" Association="Self.FK_dbo_Software_dbo_Product_ProductId">
-            <End Role="Product" EntitySet="Product" />
-            <End Role="Software" EntitySet="Software" />
-          </AssociationSet>
-        </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="NModel" Alias="Self" annotation:UseStrongSpatialTypes="false"
@@ -651,10 +674,10 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
-        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
         <DesignerProperty Name="ProcessDependentTemplatesOnSave" Value="False" />
       </DesignerInfoPropertySet>
     </Options>
