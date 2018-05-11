@@ -217,11 +217,25 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
             }
             else if (rel.Multiplicity == RelationshipMultiplicity.One)
             {
-                sb.Append($".WithRequired(s => s.{parentTableName}).WillCascadeOnDelete(false);");
+                if(rel.ReferencedMultiplicity == RelationshipMultiplicity.Many)
+                {
+                    sb.Append($".WithRequired(s => s.{parentTableName}).HasForeignKey(s => s.{rel.ReferencedColumnName}).WillCascadeOnDelete(false);");
+                }
+                else
+                {
+                    sb.Append($".WithRequired(s => s.{parentTableName}).WillCascadeOnDelete(false);");
+                }
             }
             else
             {
-                sb.Append($".WithOptional(s => s.{parentTableName}).WillCascadeOnDelete(false);");
+                if (rel.ReferencedMultiplicity == RelationshipMultiplicity.Many)
+                {
+                    sb.Append($".WithOptional(s => s.{parentTableName}).HasForeignKey(s => s.{rel.ReferencedColumnName}).WillCascadeOnDelete(false);");
+                }
+                else
+                {
+                    sb.Append($".WithOptional(s => s.{parentTableName}).WillCascadeOnDelete(false);");
+                }
             }
 
             return sb.ToString();

@@ -205,7 +205,7 @@
     <Id>a0ff1a97-31b4-4646-8911-f38e88faadef</Id>
     <IncludeColumnOrder>false</IncludeColumnOrder>
     <InheritFrom>BaseContext</InheritFrom>
-    <LazyLoadingEnabled>false</LazyLoadingEnabled>
+    <LazyLoadingEnabled>true</LazyLoadingEnabled>
     <LoggingEnabled>false</LoggingEnabled>
     <Models>
       <Table Description="" SchemaName="dbo" TableName="BankAccount">

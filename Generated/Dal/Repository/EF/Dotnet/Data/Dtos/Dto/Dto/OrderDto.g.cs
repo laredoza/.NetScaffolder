@@ -56,7 +56,10 @@ namespace Banking.Models.Dto
 						this.OrderDetails.Add(new OrderDetailsDto(childItem, deep));
 					}
 				}
-				this.Customer = new CustomerDto(item.Customer, deep);
+                if(item.Customer != null)
+                {
+				    this.Customer = new CustomerDto(item.Customer, deep);
+                }
 			}
 		}
 		

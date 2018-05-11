@@ -56,7 +56,10 @@ namespace Banking.Models.Entity
 						this.OrderDetails.Add(new OrderDetails(childItem, deep));
 					}
 				}
-				this.Customer = new Customer(item.Customer, deep);
+				if(item.Customer != null)
+                {
+                    this.Customer = new Customer(item.Customer, deep);
+                }
 			}
 		}
 		

@@ -4,6 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace RepositoryEFDotnet.UnitTest
 {
+    using Banking.Models.Accounts;
     using Banking.Models.Context;
     using Banking.Models.Repository;
     using System.Data.Common;

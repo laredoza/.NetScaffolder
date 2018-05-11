@@ -62,7 +62,10 @@ namespace Banking.Models.Dto
 						this.BankTransfersTo.Add(new BankTransfersDto(childItem, deep));
 					}
 				}
-				this.Customer = new CustomerDto(item.Customer, deep);
+                if(item.Customer != null)
+                {
+				    this.Customer = new CustomerDto(item.Customer, deep);
+                }
 			}
 		}
 		

@@ -54,26 +54,12 @@ namespace Banking.Models.Customers
 			
 			#region Tables
 			
-
-
 			modelBuilder.Entity<Book>().ToTable("Book", "dbo");
-
-
 			modelBuilder.Entity<Country>().ToTable("Country", "dbo");
-
-
 			modelBuilder.Entity<Customer>().ToTable("Customer", "dbo");
-
-
 			modelBuilder.Entity<Order>().ToTable("Order", "dbo");
-
-
 			modelBuilder.Entity<OrderDetails>().ToTable("OrderDetails", "dbo");
-
-
 			modelBuilder.Entity<Product>().ToTable("Product", "dbo");
-
-
 			modelBuilder.Entity<Software>().ToTable("Software", "dbo");
 
 			#endregion
@@ -99,11 +85,11 @@ namespace Banking.Models.Customers
 			
 			#region Included Relationships
 			
-			modelBuilder.Entity<Country>().HasMany<Customer>(s => s.Customer).WithOptional(s => s.Country).WillCascadeOnDelete(false);
-			modelBuilder.Entity<Customer>().HasMany<Order>(s => s.Order).WithOptional(s => s.Customer).WillCascadeOnDelete(false);
-			modelBuilder.Entity<Order>().HasMany<OrderDetails>(s => s.OrderDetails).WithRequired(s => s.Order).WillCascadeOnDelete(false);
+			modelBuilder.Entity<Country>().HasMany<Customer>(s => s.Customer).WithOptional(s => s.Country).HasForeignKey(s => s.CountryId).WillCascadeOnDelete(false);
+			modelBuilder.Entity<Customer>().HasMany<Order>(s => s.Order).WithOptional(s => s.Customer).HasForeignKey(s => s.CustomerId).WillCascadeOnDelete(false);
+			modelBuilder.Entity<Order>().HasMany<OrderDetails>(s => s.OrderDetails).WithRequired(s => s.Order).HasForeignKey(s => s.OrderId).WillCascadeOnDelete(false);
 			modelBuilder.Entity<Product>().HasOptional<Book>(s => s.Book).WithRequired(s => s.Product).WillCascadeOnDelete(false);
-			modelBuilder.Entity<Product>().HasMany<OrderDetails>(s => s.OrderDetails).WithRequired(s => s.Product).WillCascadeOnDelete(false);
+			modelBuilder.Entity<Product>().HasMany<OrderDetails>(s => s.OrderDetails).WithRequired(s => s.Product).HasForeignKey(s => s.ProductId).WillCascadeOnDelete(false);
 			modelBuilder.Entity<Product>().HasOptional<Software>(s => s.Software).WithRequired(s => s.Product).WillCascadeOnDelete(false);
 			
 			#endregion

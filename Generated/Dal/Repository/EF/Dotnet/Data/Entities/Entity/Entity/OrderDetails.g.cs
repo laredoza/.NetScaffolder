@@ -45,8 +45,14 @@ namespace Banking.Models.Entity
 
 			if(deep)
 			{
-				this.Order = new Order(item.Order, deep);
-				this.Product = new Product(item.Product, deep);
+				if(item.Order != null)
+                {
+                    this.Order = new Order(item.Order, deep);
+                }
+				if(item.Product != null)
+                {
+                    this.Product = new Product(item.Product, deep);
+                }
 			}
 		}
 		

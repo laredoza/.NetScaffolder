@@ -70,7 +70,10 @@ namespace Banking.Models.Entity
 						this.Order.Add(new Order(childItem, deep));
 					}
 				}
-				this.Country = new Country(item.Country, deep);
+				if(item.Country != null)
+                {
+                    this.Country = new Country(item.Country, deep);
+                }
 			}
 		}
 		

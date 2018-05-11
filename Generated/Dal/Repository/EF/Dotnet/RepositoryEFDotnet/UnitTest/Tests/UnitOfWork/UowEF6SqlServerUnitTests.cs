@@ -9,12 +9,12 @@ namespace RepositoryEFDotnet.UnitTest
     using Banking.Models.Customers;
 
     [TestClass]
-    public class ContextEF6SqlServerUnitTest : BaseContextUnitTests<SqlServerFullContext>
+    public class UowEF6SqlServerUnitTest : BaseUnitOfWorkUnitTests<SqlServerFullContext>
     {
         [TestInitialize]
-        public override void SetupContext()
+        public override void SetupUow()
         {
-            Context = new SqlServerFullContext(Effort.DbConnectionFactory.CreateTransient());
+            Uow = new SqlServerFullContext(Effort.DbConnectionFactory.CreateTransient());
         }
     }
 }
