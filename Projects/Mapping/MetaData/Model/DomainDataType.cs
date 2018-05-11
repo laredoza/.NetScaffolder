@@ -81,6 +81,16 @@ namespace DotNetScaffolder.Mapping.MetaData.Model
         /// <summary>
         /// The time.
         /// </summary>
-        Time
+        Time,
+
+        /// <summary>
+        /// The s byte.
+        /// </summary>
+        SByte,
+
+        /// <summary>
+        /// The float.
+        /// </summary>
+        Float
     }
 }
