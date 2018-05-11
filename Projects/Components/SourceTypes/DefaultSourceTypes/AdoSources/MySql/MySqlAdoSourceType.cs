@@ -16,6 +16,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
     using System.Windows.Forms;
 
     using DatabaseSchemaReader;
+    using DatabaseSchemaReader.DataSchema;
 
     using DotNetScaffolder.Components.Common.Contract;
     using DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.SourceOptions;
@@ -82,28 +83,29 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
         /// </returns>
         public override DomainDataType MapDatabaseType(string databaseType, object extraInfo)
         {
+            DatabaseColumn column = extraInfo as DatabaseColumn;
+            DataType dataType = extraInfo as DataType;
+            
             switch (databaseType.ToUpper())
             {
-                case "SMALLINT":
-                    return DomainDataType.Int16;
+                case "VARCHAR":
+                case "LONGTEXT":
+                    return DomainDataType.String;
+                case "TIMESTAMP":
+                case "DATE":
+                    return DomainDataType.DateTime;
                 case "INT":
                     return DomainDataType.Int32;
-                case "BIT":
-                    return DomainDataType.Boolean;
-                case "NVARCHAR":
-                    return DomainDataType.String;
-                case "MONEY":
+                case "DECIMAL":
                     return DomainDataType.Decimal;
-                case "NUMERIC":
-                    return DomainDataType.Decimal;
-                case "DATETIME":
-                    return DomainDataType.DateTime;
-                case "IMAGE":
-                    // Todo: Do something valid with this
-                    return DomainDataType.String;
-                case "REAL":
-                    // Todo: Do something valid with this
+                case "TINYINT":
+                    return DomainDataType.SByte;
+                case "SMALLINT":
+                    return DomainDataType.Int16;
+                case "FLOAT":
                     return DomainDataType.Single;
+                case "LONGBLOB":
+                    return DomainDataType.VarBinary;
                 default:
                     throw new NotImplementedException($"Invalid data type {databaseType}");
             }
@@ -194,7 +196,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
                              {
                                  ProviderName = "MySql.Data.MySqlClient",
                                  ConnectionString =
-                                     @"server=localhost;userid=test;password=password;database=test"
+                                     @"server=localhost;userid=test;password=password;database=test;SslMode=none"
                 };
             }
 

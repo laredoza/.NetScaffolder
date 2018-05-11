@@ -101,42 +101,10 @@
             <TemplatePath>ApplicationService.T4</TemplatePath>
             <Version>1</Version>
           </Template>
-          <Template>
-            <Children />
-            <Enabled>true</Enabled>
-            <HierarchyType>Item</HierarchyType>
-            <Id>0fc6e132-1713-4e53-ab40-5a19dad09aed</Id>
-            <Name>Entity Framework Repository Interface (v6)</Name>
-            <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
-            <Selected>false</Selected>
-            <ConfigLocation>Data</ConfigLocation>
-            <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4451</DataType>
-            <DefaultSettings />
-            <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
-            <LanguageOutputId>1bc1b0c4-1e41-9146-82cf-599181ce4410</LanguageOutputId>
-            <TemplatePath>Repository.T4</TemplatePath>
-            <Version>1</Version>
-          </Template>
-          <Template>
-            <Children />
-            <Enabled>true</Enabled>
-            <HierarchyType>Item</HierarchyType>
-            <Id>03ca158b-4090-467a-af02-baa4db55555a</Id>
-            <Name>Entity Framework Dto (v6)</Name>
-            <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
-            <Selected>false</Selected>
-            <ConfigLocation>Data</ConfigLocation>
-            <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4441</DataType>
-            <DefaultSettings />
-            <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
-            <LanguageOutputId>1bc1b0c4-1e41-9146-82cf-599181ce4410</LanguageOutputId>
-            <TemplatePath>Dto.T4</TemplatePath>
-            <Version>1</Version>
-          </Template>
         </Templates>
         <Version>0</Version>
       </Package>
-      <SourceTypeId>3bc1b0c4-1e41-9146-82cf-599181ce4410</SourceTypeId>
+      <SourceTypeId>4bc1b0c4-1e41-9146-82cf-799181ce4410</SourceTypeId>
       <Tables>
         <Table Description="" SchemaName="dbo" TableName="BankAccount">
           <Columns>
