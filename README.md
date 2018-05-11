@@ -24,15 +24,18 @@ T4 templates will be used to generate the different layers. Packages consist of 
 - MVC (Context, Entities (Entity Framework / NHibernate entity), Repository & Presentation)
 - MVC (Domain Driven - Entity Framework / NHibernate)
 
+### Completed
+- ~~[0.2 Basic UI Management](https://github.com/laredoza/.NetScaffolder/milestone/2)~~
+- ~~[0.31 Create Dto's](https://github.com/laredoza/.NetScaffolder/milestone/7)~~
+- ~~[0.32 Create base repository for MySql](https://github.com/laredoza/.NetScaffolder/milestone/9)~~
+
 ### Todo
 - [0.3 Create .NET base repository for EF 6](https://github.com/laredoza/.NetScaffolder/milestone/3)
 - [0.4 Create .NET Core base repository for EF Core](https://github.com/laredoza/.NetScaffolder/milestone/4)
 - [0.5 Create base repository for nHibernate](https://github.com/laredoza/.NetScaffolder/milestone/5)
 - [0.6 Create Application Service](https://github.com/laredoza/.NetScaffolder/milestone/6)
-- [0.7 Create Dto's](https://github.com/laredoza/.NetScaffolder/milestone/7)
-- [0.71 Create base repository for MySql](https://github.com/laredoza/.NetScaffolder/milestone/9)
 - [0.8 Create MVC Presentation Layer & ModelViews](https://github.com/laredoza/.NetScaffolder/milestone/8)
-- [0.9 Stabilization](https://github.com/laredoza/.NetScaffolder/milestone/12)
+- [0.7 Stabilization](https://github.com/laredoza/.NetScaffolder/milestone/12)
 - [1.0 Create Angular Presentation Layer & ModelViews](https://github.com/laredoza/.NetScaffolder/milestone/10)
 - [1.1 Create Xamarin Presentation Layer & ModelView](https://github.com/laredoza/.NetScaffolder/milestone/11)
 
