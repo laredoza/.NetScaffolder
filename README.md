@@ -37,7 +37,7 @@ T4 templates will be used to generate the different layers. Packages consist of 
 
 - MVC
 - Angular 
-- Xamrin
+- Xamarin
 
 ### Completed
 - ~~[0.2 Basic UI Management](https://github.com/laredoza/.NetScaffolder/milestone/2)~~
