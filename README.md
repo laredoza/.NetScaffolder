@@ -22,10 +22,10 @@ If for whatever reason you don't like our implementations of any of the layers i
 - Sql Server Metadata
 - Extendable Custom sources
 
-This imported data will then be saved in a xml file (.mdl). All generation will then be based on this file.
+This imported data will then be saved in a model file (.mdl). All generation will then be based off this file.
 This project file will contain domains. A domain will contain several models ( These are imported from the data sources ). These tables are used to generate the different layers. i.e) Security Domain with a user table and a role table, etc.
 
-T4 templates will be used to generate the different layers. Packages consist of several templates. A domain will be set to use a package to generate all it's layers.  
+T4 templates will be used to generate the different layers. Packages consist of several templates. A domain will be set to use a package to generate the required layers.  
 
 ### Supported Database Drivers
 
