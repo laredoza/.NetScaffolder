@@ -6,7 +6,7 @@ This project aims to quickly generate a base project from a data model by using 
 
 ### The default datalayer will consist of the following layers:
 
-- Datacontext ( Entity Framework 6.0 / Entity Framework Core / NHibernate)
+- Context ( Entity Framework 6.0 / Entity Framework Core / NHibernate)
 - Repository Layer
 - Entities
 - Dto
