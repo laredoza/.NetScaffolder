@@ -4,7 +4,7 @@
 
 . NetScaffolder is used to quickly generate a project from a data model by using easily extendable templates. 
 
-### The default datalayer will consist of the following layers:
+### The default data layers consists of the following:
 
 - Context ( Entity Framework 6.0 / Entity Framework Core / NHibernate)
 - Repository Layer
