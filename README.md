@@ -30,7 +30,7 @@ T4 templates will be used to generate the different layers. Packages consist of 
 ### Supported Database Drivers
 
 - Entity Famework 6.0 ( MySql, Sql Server, Oracle)
-- Adding support for Entity Framwork Core
+- Adding support for Entity Framework Core
 - Adding support for NHibernate
 
 ### Planned Project Types:
