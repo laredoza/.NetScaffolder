@@ -24,7 +24,7 @@ Additions and modifications are easily made to these layers.
 
 Imported data is saved in a model file (.mdl). All generation is based off this file. 
 
-T4 templates are used to generate a layer. Packages consist of several templates. A domain will be set to use a package to generate the required layers.
+T4 templates are used to generate a layer. Packages group several of these templates. A domain will be set to use a package to generate the required layers.
 
 ### Supported Database Drivers
 
