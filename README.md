@@ -7,10 +7,10 @@
 ### The default data layers consists of the following:
 
 - Context ( Entity Framework 6.0 / Entity Framework Core / NHibernate)
-- Repository Layer
 - Entities
-- Dto
+- Repository Layer
 - Application Service
+- Dto
 
 Additions and modifications are easily made to these layers.
 
@@ -22,7 +22,7 @@ Additions and modifications are easily made to these layers.
 - Sql Server Metadata
 - Extendable Custom sources
 
-Imported data is saved in a model file (.mdl) which is then used to generate the layers.
+Imported data is saved in a model file (.mdl) which is then used to generate the different layers.
 
 T4 templates (DataTypes) are used to generate a layer. Packages group several of these templates together. A domain will be set to use a package to generate the required layers.
 
