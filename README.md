@@ -2,7 +2,7 @@
 
 ### Simple, highly flexible scaffolding framework based on T4 Scripts
 
-. NetScaffolder generates a project from a data model by using easily extendable templates. 
+.NetScaffolder generates a project from a data model by using easily extendable templates. 
 
 ### The default data layers consists of the following:
 
