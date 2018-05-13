@@ -57,5 +57,5 @@ T4 templates (DataTypes) are used to generate a layer. Packages group several of
 - [Visual Studio](https://www.visualstudio.com/downloads/)
 - [T4 Toolbox](https://marketplace.visualstudio.com/items?itemName=OlegVSych.T4ToolboxforVisualStudio2017)
 
-### Tools
+### Useful Tools
 - [Devart T4 Editor](https://www.devart.com/t4-editor/download.html)
