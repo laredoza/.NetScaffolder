@@ -2,7 +2,7 @@
 
 ### Simple, highly flexible scaffolding framework based on T4 Scripts
 
-. NetScaffolder is used to quickly generate a project from a data model by using easily extendable templates. 
+. NetScaffolder generates a project from a data model by using easily extendable templates. 
 
 ### The default data layers consists of the following:
 
@@ -22,10 +22,9 @@ Additions and modifications are easily made to these layers.
 - Sql Server Metadata
 - Extendable Custom sources
 
-This imported data will then be saved in a model file (.mdl). All generation will then be based off this file.
-This project file will contain domains. A domain will contain several models ( These are imported from the data sources ). These tables are used to generate the different layers. i.e) Security Domain with a user table and a role table, etc.
+Imported data is saved in a model file (.mdl). All generation is based off this file. 
 
-T4 templates will be used to generate the different layers. Packages consist of several templates. A domain will be set to use a package to generate the required layers.  
+T4 templates generate are used to generate a layer. Packages consist of several templates. A domain will be set to use a package to generate the required layers.
 
 ### Supported Database Drivers
 
