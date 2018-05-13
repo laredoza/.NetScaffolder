@@ -7,8 +7,8 @@
 ### The default data layers consists of the following:
 
 - Context ( Entity Framework 6.0 / Entity Framework Core / NHibernate)
-- Repository Layer
 - Entities
+- Repository Layer
 - Dto
 - Application Service
 
