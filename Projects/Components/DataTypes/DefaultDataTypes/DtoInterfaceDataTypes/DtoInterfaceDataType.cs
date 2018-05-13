@@ -28,7 +28,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.DtoInterfaceDat
     ///     The entity data type.
     /// </summary>
     [Export(typeof(IDataType))]
-    [ExportMetadata("NameMetaData", "DtoInterface")]
+    [ExportMetadata("NameMetaData", "Dto Interface")]
     [ExportMetadata("ValueMetaData", "1BC1B0C4-1E41-9146-82CF-599181CE4441")]
     public class DtoInterfaceDataType : BaseDataType
     {

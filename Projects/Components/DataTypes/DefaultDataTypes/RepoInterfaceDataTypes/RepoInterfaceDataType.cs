@@ -27,7 +27,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.RepoInterfaceDa
     ///     The repository data type.
     /// </summary>
     [Export(typeof(IDataType))]
-    [ExportMetadata("NameMetaData", "RepoInterface")]
+    [ExportMetadata("NameMetaData", "Repository Interface")]
     [ExportMetadata("ValueMetaData", "1BC1B0C4-1E41-9146-82CF-599181CE4451")]
     public class RepoInterfaceDataType : BaseDataType
     {

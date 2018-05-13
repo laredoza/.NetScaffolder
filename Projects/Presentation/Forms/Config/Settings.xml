@@ -286,6 +286,37 @@
             <Hierarchy xsi:type="Template">
               <Children />
               <Enabled>true</Enabled>
+              <Id>a832889d-7f9a-42fa-ad6b-38d184828dba</Id>
+              <Name>Default Dto</Name>
+              <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
+              <HierarchyType>Item</HierarchyType>
+              <ConfigLocation>Data</ConfigLocation>
+              <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4490</DataType>
+              <DefaultSettings />
+              <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
+              <LanguageOutputId>1bc1b0c4-1e41-9146-82cf-599181ce4410</LanguageOutputId>
+              <TemplatePath>Table.T4</TemplatePath>
+              <Version>1</Version>
+            </Hierarchy>
+          </Children>
+          <Enabled>true</Enabled>
+          <Id>1bc1b0c4-1e41-9146-82cf-599181ce4490</Id>
+          <Name>Dto</Name>
+          <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
+          <HierarchyType>Group</HierarchyType>
+          <ConfigLocation>Data</ConfigLocation>
+          <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4490</DataType>
+          <DefaultSettings />
+          <GeneratorTypeId>00000000-0000-0000-0000-000000000000</GeneratorTypeId>
+          <LanguageOutputId>00000000-0000-0000-0000-000000000000</LanguageOutputId>
+          <TemplatePath />
+          <Version>1</Version>
+        </Hierarchy>
+        <Hierarchy xsi:type="Template">
+          <Children>
+            <Hierarchy xsi:type="Template">
+              <Children />
+              <Enabled>true</Enabled>
               <Id>1bc1b0c4-1e41-9146-82cf-599181ce4440</Id>
               <Name>Entity Framework Entity (v6)</Name>
               <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
@@ -337,68 +368,6 @@
           <HierarchyType>Group</HierarchyType>
           <ConfigLocation>Data</ConfigLocation>
           <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4450</DataType>
-          <DefaultSettings />
-          <GeneratorTypeId>00000000-0000-0000-0000-000000000000</GeneratorTypeId>
-          <LanguageOutputId>00000000-0000-0000-0000-000000000000</LanguageOutputId>
-          <TemplatePath />
-          <Version>1</Version>
-        </Hierarchy>
-        <Hierarchy xsi:type="Template">
-          <Children>
-            <Hierarchy xsi:type="Template">
-              <Children />
-              <Enabled>true</Enabled>
-              <Id>a832889d-7f9a-42fa-ad6b-38d184828dba</Id>
-              <Name>Default Table</Name>
-              <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
-              <HierarchyType>Item</HierarchyType>
-              <ConfigLocation>Data</ConfigLocation>
-              <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4490</DataType>
-              <DefaultSettings />
-              <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
-              <LanguageOutputId>1bc1b0c4-1e41-9146-82cf-599181ce4410</LanguageOutputId>
-              <TemplatePath>Table.T4</TemplatePath>
-              <Version>1</Version>
-            </Hierarchy>
-          </Children>
-          <Enabled>true</Enabled>
-          <Id>1bc1b0c4-1e41-9146-82cf-599181ce4490</Id>
-          <Name>Table</Name>
-          <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
-          <HierarchyType>Group</HierarchyType>
-          <ConfigLocation>Data</ConfigLocation>
-          <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4490</DataType>
-          <DefaultSettings />
-          <GeneratorTypeId>00000000-0000-0000-0000-000000000000</GeneratorTypeId>
-          <LanguageOutputId>00000000-0000-0000-0000-000000000000</LanguageOutputId>
-          <TemplatePath />
-          <Version>1</Version>
-        </Hierarchy>
-        <Hierarchy xsi:type="Template">
-          <Children>
-            <Hierarchy xsi:type="Template">
-              <Children />
-              <Enabled>true</Enabled>
-              <Id>cfcf08c0-16ec-4daa-9360-0bba9a80fa68</Id>
-              <Name>Entity Framework Unit of Work</Name>
-              <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
-              <HierarchyType>Item</HierarchyType>
-              <ConfigLocation>Data</ConfigLocation>
-              <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4480</DataType>
-              <DefaultSettings />
-              <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
-              <LanguageOutputId>1bc1b0c4-1e41-9146-82cf-599181ce4410</LanguageOutputId>
-              <TemplatePath>UnitOfWork.T4</TemplatePath>
-              <Version>1</Version>
-            </Hierarchy>
-          </Children>
-          <Enabled>true</Enabled>
-          <Id>1bc1b0c4-1e41-9146-82cf-599181ce4480</Id>
-          <Name>Unit of Work</Name>
-          <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
-          <HierarchyType>Group</HierarchyType>
-          <ConfigLocation>Data</ConfigLocation>
-          <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4480</DataType>
           <DefaultSettings />
           <GeneratorTypeId>00000000-0000-0000-0000-000000000000</GeneratorTypeId>
           <LanguageOutputId>00000000-0000-0000-0000-000000000000</LanguageOutputId>
