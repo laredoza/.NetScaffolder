@@ -22,7 +22,7 @@ Additions and modifications are easily made to these layers.
 - Sql Server Metadata
 - Extendable Custom sources
 
-Imported data is saved in a model file (.mdl). All generation is based off this file. 
+Imported data is saved in a model file (.mdl) which is used to generate the layers.
 
 T4 templates are used to generate a layer. Packages group several of these templates. A domain will be set to use a package to generate the required layers.
 
