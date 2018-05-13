@@ -9,8 +9,8 @@
 - Context ( Entity Framework 6.0 / Entity Framework Core / NHibernate)
 - Entities
 - Repository Layer
-- Dto
 - Application Service
+- Dto
 
 Additions and modifications are easily made to these layers.
 
