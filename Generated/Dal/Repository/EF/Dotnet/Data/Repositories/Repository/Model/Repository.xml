@@ -3,5 +3,5 @@
   <Enabled>false</Enabled>
   <Namespace>Repository</Namespace>
   <OutputFolder>Repository</OutputFolder>
-  <OutputPath />
+  <OutputPath>..\..\Repositories\Repository\RepositoryEFDotnet.Data.Repositories.Repository.csproj</OutputPath>
 </RepositoryDataType>
