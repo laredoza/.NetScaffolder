@@ -99,12 +99,12 @@
     <Compile Include="Tests\Repository\Database\RepositoryDbEF6MySqlUnitTests.cs" />
     <Compile Include="Tests\Repository\Database\RepositoryDbEF6OracleUnitTests.cs" />
     <Compile Include="Tests\Repository\Database\RepositoryDbEF6SqlServerUnitTests.cs" />
-    <Compile Include="Tests\UnitOfWork\UowEF6OracleUnitTests.cs" />
-    <Compile Include="Tests\UnitOfWork\UowEF6MySqlUnitTests.cs" />
-    <Compile Include="Tests\UnitOfWork\UowEF6SqlServerUnitTests.cs" />
-    <Compile Include="Tests\Repository\RepositoryEF6OracleUnitTests.cs" />
-    <Compile Include="Tests\Repository\RepositoryEF6MySqlUnitTests.cs" />
-    <Compile Include="Tests\Repository\RepositoryEF6SqlServerUnitTests.cs" />
+    <Compile Include="Tests\UnitOfWork\In-Memory\UowEF6OracleUnitTests.cs" />
+    <Compile Include="Tests\UnitOfWork\In-Memory\UowEF6MySqlUnitTests.cs" />
+    <Compile Include="Tests\UnitOfWork\In-Memory\UowEF6SqlServerUnitTests.cs" />
+    <Compile Include="Tests\Repository\In-Memory\RepositoryEF6OracleUnitTests.cs" />
+    <Compile Include="Tests\Repository\In-Memory\RepositoryEF6MySqlUnitTests.cs" />
+    <Compile Include="Tests\Repository\In-Memory\RepositoryEF6SqlServerUnitTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
