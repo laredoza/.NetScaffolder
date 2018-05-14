@@ -8,16 +8,21 @@ namespace RepositoryEFDotnet.UnitTest
     using Banking.Models.Context;
     using Banking.Models.Repository;
     using System.Data.Common;
+    using System.Data.Entity;
 
+    /*public class RepositoryDbEF6SqlServerUnitTests : BaseRepositoryUnitTest*/
     [TestClass]
-    public class RepositoryDbEF6SqlServerUnitTests : BaseRepositoryUnitTest
+    public class RepositoryDbEF6SqlServerUnitTests
     {
         #region Init
 
-        [TestInitialize]
-        public override void SetupDb()
+        //[TestInitialize]
+        [TestMethod]
+        public void SetupDb()
         {
-            Context = new SqlServerFullContext(Effort.DbConnectionFactory.CreateTransient());
+            var Context = new SqlServerFullContext("RepoTest");
+            Database.SetInitializer(new DropCreateDatabaseAlways<SqlServerFullContext>());
+            Context.Database.Initialize(true);
         }
 
         #endregion
