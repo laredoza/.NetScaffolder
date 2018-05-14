@@ -55,7 +55,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                 "There should be 3 Relationships in the BankAccounts table.");
 
             Relationship relationship =
-                bankAccountTable.Relationships.FirstOrDefault(r => r.ReferencedTableName == "Customer");
+                bankAccountTable.Relationships.FirstOrDefault(r => r.ReferencedTableName.ToLower() == "customer");
             Assert.IsNotNull(relationship, "The Customer Relationship should not be null.");
             Assert.AreEqual("CustomerId", relationship.ColumnName, "The ColumnName should be CustomerId.");
             Assert.AreEqual(
@@ -67,13 +67,13 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                 relationship.ReferencedColumnName,
                 "The ReferencedColumnName should be CustomerId.");
             Assert.AreEqual(
-                "Customer",
-                relationship.ReferencedTableName,
+                "customer",
+                relationship.ReferencedTableName.ToLower(),
                 "The relationship table name should be Customer");
 
             // Assert.AreEqual("FK_BankAccount_Customer", relationship.RelationshipName, "The relationship table name should be FK_BankAccount_Customer.");
             relationship = bankAccountTable.Relationships.FirstOrDefault(
-                r => r.ReferencedTableName == "BankTransfers" && r.ReferencedColumnName == "ToBankAccountId");
+                r => r.ReferencedTableName.ToLower() == "banktransfers" && r.ReferencedColumnName == "ToBankAccountId");
             Assert.IsNotNull(relationship, "The BankTransfers1 Relationship should not be null.");
             Assert.AreEqual("BankAccountId", relationship.ColumnName, "The ColumnName should be ToBankAccountId.");
             Assert.AreEqual(
@@ -131,7 +131,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                         DomainDataType = DomainDataType.Int32,
                         IsRequired = true,
                         ColumnOrder = 1,
-                        Precision = 0,
+                        Precision = this.ReturnDefaultInt32Precision(),
                         Scale = 0,
                         Length = 0,
                         IsPrimaryKey = true
@@ -177,7 +177,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                         DomainDataType = DomainDataType.Int32,
                         IsRequired = false,
                         ColumnOrder = 4,
-                        Precision = 0,
+                        Precision = this.ReturnDefaultInt32Precision(),
                         Scale = 0,
                         Length = 0,
                         IsPrimaryKey = false
@@ -189,10 +189,10 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                 new Column
                     {
                         ColumnName = "Locked",
-                        DomainDataType = DomainDataType.Boolean,
+                        DomainDataType = this.ReturnDefaultBoolean(),
                         IsRequired = true,
                         ColumnOrder = 5,
-                        Precision = 0,
+                        Precision = this.ReturnDefaultBooleanPrecision(),
                         Scale = 0,
                         Length = 0,
                         IsPrimaryKey = false
@@ -390,7 +390,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                 "There should be 1 Relationships in the Customer table.");
 
             Relationship relationship =
-                customerTable.Relationships.FirstOrDefault(r => r.ReferencedTableName == "Customer");
+                customerTable.Relationships.FirstOrDefault(r => r.ReferencedTableName.ToLower() == "customer");
             Assert.IsNotNull(relationship, "The Country Relationship should not be null.");
             Assert.AreEqual("CountryId", relationship.ColumnName, "The ColumnName should be CountryId.");
             Assert.AreEqual(
@@ -402,8 +402,8 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                 relationship.ReferencedColumnName,
                 "The ReferencedColumnName should be CountryId.");
             Assert.AreEqual(
-                "Customer",
-                relationship.ReferencedTableName,
+                "customer",
+                relationship.ReferencedTableName.ToLower(),
                 "The relationship table name should be Customer");
 
             // Assert.AreEqual("FK_Customer_Country", relationship.RelationshipName, "The relationship table name should be FK_Customer_Country.");
@@ -430,7 +430,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                         DomainDataType = DomainDataType.Int32,
                         IsRequired = true,
                         ColumnOrder = 1,
-                        Precision = 0,
+                        Precision = this.ReturnDefaultInt32Precision(),
                         Scale = 0,
                         Length = 0,
                         IsPrimaryKey = true
@@ -470,7 +470,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                 "There should be 3 Relationships in the Customer table.");
 
             Relationship relationship =
-                softwareTable.Relationships.FirstOrDefault(r => r.ReferencedTableName == "BankAccount");
+                softwareTable.Relationships.FirstOrDefault(r => r.ReferencedTableName.ToLower() == "bankaccount");
             Assert.IsNotNull(relationship, "The BankAccount Relationship should not be null.");
             Assert.AreEqual("CustomerId", relationship.ColumnName, "The ColumnName should be CustomerId.");
             Assert.AreEqual(
@@ -482,12 +482,12 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                 relationship.ReferencedColumnName,
                 "The ReferencedColumnName should be CustomerId.");
             Assert.AreEqual(
-                "BankAccount",
-                relationship.ReferencedTableName,
+                "bankaccount",
+                relationship.ReferencedTableName.ToLower(),
                 "The relationship table name should be BankAccount");
 
             // Assert.AreEqual("FK_BankAccount_Customer", relationship.RelationshipName, "The relationship table name should be FK_BankAccount_Customer.");
-            relationship = softwareTable.Relationships.FirstOrDefault(r => r.ReferencedTableName == "Country");
+            relationship = softwareTable.Relationships.FirstOrDefault(r => r.ReferencedTableName.ToLower() == "country");
             Assert.IsNotNull(relationship, "The Country Relationship should not be null.");
             Assert.AreEqual("CountryId", relationship.ColumnName, "The ColumnName should be CountryId.");
             Assert.AreEqual(
@@ -499,12 +499,12 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                 relationship.ReferencedColumnName,
                 "The ReferencedColumnName should be CountryId.");
             Assert.AreEqual(
-                "Country",
-                relationship.ReferencedTableName,
+                "country",
+                relationship.ReferencedTableName.ToLower(),
                 "The relationship table name should be Country.");
 
             // Assert.AreEqual("FK_Customer_Country", relationship.RelationshipName, "The relationship table name should be FK_Customer_Country.");
-            relationship = softwareTable.Relationships.FirstOrDefault(r => r.ReferencedTableName == "Order");
+            relationship = softwareTable.Relationships.FirstOrDefault(r => r.ReferencedTableName.ToLower() == "order");
             Assert.IsNotNull(relationship, "The Order Relationship should not be null.");
             Assert.AreEqual("CustomerId", relationship.ColumnName, "The ColumnName should be CustomerId.");
             Assert.AreEqual(
@@ -515,7 +515,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                 "CustomerId",
                 relationship.ReferencedColumnName,
                 "The ReferencedColumnName should be CustomerId.");
-            Assert.AreEqual("Order", relationship.ReferencedTableName, "The relationship table name should be Order");
+            Assert.AreEqual("order", relationship.ReferencedTableName.ToLower(), "The relationship table name should be Order");
 
             // Assert.AreEqual("FK_Order_Customer", relationship.RelationshipName, "The relationship table name should be FK_Order_Customer.");
         }
@@ -541,7 +541,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                         DomainDataType = DomainDataType.Int32,
                         IsRequired = true,
                         ColumnOrder = 1,
-                        Precision = 0,
+                        Precision = this.ReturnDefaultInt32Precision(),
                         Scale = 0,
                         Length = 0,
                         IsPrimaryKey = true
@@ -692,7 +692,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                         DomainDataType = DomainDataType.Int32,
                         IsRequired = false,
                         ColumnOrder = 11,
-                        Precision = 0,
+                        Precision = this.ReturnDefaultInt32Precision(),
                         Scale = 0,
                         Length = 0,
                         IsPrimaryKey = false
@@ -720,10 +720,10 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                 new Column
                     {
                         ColumnName = "IsEnabled",
-                        DomainDataType = DomainDataType.Boolean,
+                        DomainDataType = this.ReturnDefaultBoolean(),
                         IsRequired = true,
                         ColumnOrder = 13,
-                        Precision = 0,
+                        Precision = this.ReturnDefaultBooleanPrecision(),
                         Scale = 0,
                         Length = 0,
                         IsPrimaryKey = false
@@ -802,7 +802,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
             Assert.AreEqual(2, ordersTable.Relationships.Count, "There should be 2 Relationships in the Orders table.");
 
             Relationship relationship =
-                ordersTable.Relationships.FirstOrDefault(r => r.ReferencedTableName == "Customer");
+                ordersTable.Relationships.FirstOrDefault(r => r.ReferencedTableName.ToLower() == "customer");
             Assert.IsNotNull(relationship, "The Customer Relationship should not be null.");
             Assert.AreEqual("CustomerId", relationship.ColumnName, "The ColumnName should be CustomerId.");
             Assert.AreEqual(
@@ -814,12 +814,12 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                 relationship.ReferencedColumnName,
                 "The ReferencedColumnName should be CustomerId.");
             Assert.AreEqual(
-                "Customer",
-                relationship.ReferencedTableName,
+                "customer",
+                relationship.ReferencedTableName.ToLower(),
                 "The relationship table name should be Customer");
 
             // Assert.AreEqual("FK_Order_Customer", relationship.RelationshipName, "The relationship table name should be FK_Order_Customer.");
-            relationship = ordersTable.Relationships.FirstOrDefault(r => r.ReferencedTableName == "OrderDetails");
+            relationship = ordersTable.Relationships.FirstOrDefault(r => r.ReferencedTableName.ToLower() == "orderdetails");
             Assert.IsNotNull(relationship, "The OrderDetails Relationship should not be null.");
             Assert.AreEqual("OrderId", relationship.ColumnName, "The ColumnName should be OrderId.");
             Assert.AreEqual(
@@ -831,8 +831,8 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                 relationship.ReferencedColumnName,
                 "The ReferencedColumnName should be OrderId.");
             Assert.AreEqual(
-                "OrderDetails",
-                relationship.ReferencedTableName,
+                "orderdetails",
+                relationship.ReferencedTableName.ToLower(),
                 "The relationship table name should be OrderDetails.");
 
             // Assert.AreEqual("FK_OrdeDetails_Order", relationship.RelationshipName, "The relationship table name should be FK_OrdeDetails_Order.");
@@ -859,7 +859,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                         DomainDataType = DomainDataType.Int32,
                         IsRequired = true,
                         ColumnOrder = 1,
-                        Precision = 0,
+                        Precision = this.ReturnDefaultInt32Precision(),
                         Scale = 0,
                         Length = 0,
                         IsPrimaryKey = true
@@ -874,7 +874,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                         DomainDataType = DomainDataType.Int32,
                         IsRequired = false,
                         ColumnOrder = 2,
-                        Precision = 0,
+                        Precision = this.ReturnDefaultInt32Precision(),
                         Scale = 0,
                         Length = 0,
                         IsPrimaryKey = false
@@ -989,7 +989,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                 "There should be 1 Relationships in the Software table.");
 
             Relationship relationship =
-                softwareTable.Relationships.FirstOrDefault(r => r.ReferencedTableName == "Product");
+                softwareTable.Relationships.FirstOrDefault(r => r.ReferencedTableName.ToLower() == "product");
             Assert.IsNotNull(relationship, "The Product Relationship should not be null in the Product table.");
             Assert.AreEqual(
                 "ProductId",
@@ -1004,8 +1004,8 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                 relationship.ReferencedColumnName,
                 "The OrderDetails ReferencedColumnName should be ProductId in the Product table.");
             Assert.AreEqual(
-                "Product",
-                relationship.ReferencedTableName,
+                "product",
+                relationship.ReferencedTableName.ToLower(),
                 "The relationship table name should be Product");
 
             // Assert.AreEqual("FK_Software_Product", relationship.RelationshipName, "The relationship table name should be FK_Software_Product.");
@@ -1347,6 +1347,37 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
             return precision;
         }
 
+        public DomainDataType ReturnDefaultBoolean()
+        {
+            DomainDataType result = DomainDataType.Boolean;
+
+            if (this.SourceType is EdmxImporter)
+            {
+                result = DomainDataType.Boolean;
+            }
+            else if (this.SourceType is MySqlAdoSourceType)
+            {
+                result = DomainDataType.SByte;
+            }
+
+            return result;
+        }
+
+        public int ReturnDefaultBooleanPrecision()
+        {
+            int result = 0;
+
+            if (this.SourceType is EdmxImporter)
+            {
+                result = 0;
+            }
+            else if (this.SourceType is MySqlAdoSourceType)
+            {
+                result = 3;
+            }
+
+            return result;
+        }
         /// <summary>
         /// The base source type unit test_ test product table.
         /// </summary>
