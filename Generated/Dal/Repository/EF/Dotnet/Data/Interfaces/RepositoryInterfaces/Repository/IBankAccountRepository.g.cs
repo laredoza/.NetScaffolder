@@ -28,7 +28,7 @@ namespace Banking.Models.Interfaces
 	/// <summary>
 	/// The BankAccountRepository interface that defines database functions for the BankAccount table
 	/// </summary>
-	public partial interface IBankAccountRepository : IRepository
+	public partial interface IBankAccountRepository : IRepository<IBankAccount>
 	{
 		#region Load
 

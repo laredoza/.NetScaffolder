@@ -28,7 +28,7 @@ namespace Banking.Models.Interfaces
 	/// <summary>
 	/// The CountryRepository interface that defines database functions for the Country table
 	/// </summary>
-	public partial interface ICountryRepository : IRepository
+	public partial interface ICountryRepository : IRepository<ICountry>
 	{
 		#region Load
 

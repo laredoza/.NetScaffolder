@@ -28,7 +28,7 @@ namespace Banking.Models.Interfaces
 	/// <summary>
 	/// The BookRepository interface that defines database functions for the Book table
 	/// </summary>
-	public partial interface IBookRepository : IRepository
+	public partial interface IBookRepository : IRepository<IBook>
 	{
 		#region Load
 

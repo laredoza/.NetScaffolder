@@ -28,7 +28,7 @@ namespace Banking.Models.Interfaces
 	/// <summary>
 	/// The ProductRepository interface that defines database functions for the Product table
 	/// </summary>
-	public partial interface IProductRepository : IRepository
+	public partial interface IProductRepository : IRepository<IProduct>
 	{
 		#region Load
 

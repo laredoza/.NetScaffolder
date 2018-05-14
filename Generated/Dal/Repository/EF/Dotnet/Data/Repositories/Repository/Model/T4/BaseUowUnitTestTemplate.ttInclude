@@ -1,0 +1,86 @@
+﻿<#+
+public class BaseUowUnitTestTemplate : BaseTemplate 
+{
+    public List<Table> Models { get; set; }
+	
+	public override string TransformText()
+	{
+		// Debugger.Break();
+		Header = new CopyrightHeader();
+		Header.Filename = "BaseUnitOfWorkUnitTest.g.cs";
+#>
+
+<#= Header.TransformText() #>
+
+// *******************************************************************
+//	GENERATED CODE. DOT NOT MODIFY MANUALLY AS CHANGES CAN BE LOST!!!
+//	USE A PARTIAL CLASS INSTEAD
+// *******************************************************************
+
+using Banking.Models.Entity;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using RepositoryEFDotnet.Library;
+using System.Data.Entity;
+using System.Linq;
+
+namespace RepositoryEFDotnet.UnitTest
+{
+	[TestClass]
+	public abstract partial class BaseUnitOfWorkUnitTests<TUow> : BaseUnitTest where TUow : DbContext, IUnitOfWork
+	{
+        #region Fields
+
+        protected TUow Uow = null;
+
+        #endregion
+
+        #region Setup
+
+        public abstract void SetupUow();
+
+        #endregion
+
+		#region Tests
+
+        [TestMethod]
+        public virtual void BaseUnitOfWorkUnitTests_CreateDbTest()
+        {
+            Database.SetInitializer(new DropCreateDatabaseAlways<TUow>());
+            Uow.Database.Initialize(true);
+        }
+		
+<#+ foreach(var mdl in Models){ #>
+
+        [TestMethod]
+        public virtual void BaseUnitOfWorkUnitTests_Add_<#= mdl.TableName #>()
+        {
+            var entity = new <#= mdl.TableName #>();
+            Populate<#= mdl.TableName #>(entity);
+
+            Uow.Add(entity);
+            Uow.SaveChanges();
+
+            var entities = Uow.GetAll<<#= mdl.TableName #>>();
+            Check_EntityCount(1, entities.Count(), "<#= mdl.TableName #>");
+            Check_<#= mdl.TableName #>(entity, entities.FirstOrDefault());
+        }
+<#+ } #>
+
+		#endregion
+		
+        #region Cleanup
+
+        [TestCleanup]
+        public void DisposeContext()
+        {
+            Uow?.Dispose();
+        }
+
+        #endregion
+	}
+}
+<#+
+		return this.GenerationEnvironment.ToString();
+	}
+}
+#>

@@ -28,7 +28,7 @@ namespace Banking.Models.Interfaces
 	/// <summary>
 	/// The BankTransfersRepository interface that defines database functions for the BankTransfers table
 	/// </summary>
-	public partial interface IBankTransfersRepository : IRepository
+	public partial interface IBankTransfersRepository : IRepository<IBankTransfers>
 	{
 		#region Load
 

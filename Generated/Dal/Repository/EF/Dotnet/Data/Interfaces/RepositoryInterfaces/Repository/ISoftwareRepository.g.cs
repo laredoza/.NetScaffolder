@@ -28,7 +28,7 @@ namespace Banking.Models.Interfaces
 	/// <summary>
 	/// The SoftwareRepository interface that defines database functions for the Software table
 	/// </summary>
-	public partial interface ISoftwareRepository : IRepository
+	public partial interface ISoftwareRepository : IRepository<ISoftware>
 	{
 		#region Load
 

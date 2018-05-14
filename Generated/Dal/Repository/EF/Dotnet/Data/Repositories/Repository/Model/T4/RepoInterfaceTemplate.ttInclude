@@ -28,7 +28,7 @@ namespace <#= DataType.FullNamespace #>
 	/// <summary>
 	/// The <#= DataType.RepoName #>Repository interface that defines database functions for the <#= DataType.ModelName #> table
 	/// </summary>
-	public partial interface I<#= DataType.RepoName #>Repository : IRepository
+	public partial interface I<#= DataType.RepoName #>Repository : IRepository<I<#= DataType.RepoName #>>
 	{
 		#region Load
 <#+ if(DataType.MetaData.PrimaryKeyCount == 1){ foreach(var col in DataType.MetaData.Columns.Where(o => o.IsPrimaryKey)){ #>

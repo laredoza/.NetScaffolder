@@ -1,0 +1,94 @@
+﻿<#+
+public class BaseRepositoryUnitTestTemplate : BaseTemplate 
+{
+    public List<Table> Models { get; set; }
+	
+	public override string TransformText()
+	{
+		// Debugger.Break();
+		Header = new CopyrightHeader();
+		Header.Filename = "BaseRepositoryUnitTest.g.cs";
+#>
+
+<#= Header.TransformText() #>
+
+// *******************************************************************
+//	GENERATED CODE. DOT NOT MODIFY MANUALLY AS CHANGES CAN BE LOST!!!
+//	USE A PARTIAL CLASS INSTEAD
+// *******************************************************************
+
+using Banking.Models.Dto;
+using Banking.Models.Interfaces;
+using Banking.Models.Repository;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using RepositoryEFDotnet.Library;
+using System.Linq;
+
+namespace RepositoryEFDotnet.UnitTest
+{
+	[TestClass]
+	public abstract partial class BaseRepositoryUnitTest : BaseUnitTest
+	{
+        #region Privates
+
+        protected IUnitOfWork Context = null;
+
+        #endregion
+
+        #region SetupDb
+
+        public abstract void SetupDb();
+
+        #endregion
+
+        #region Tests
+		
+<#+ foreach(var mdl in Models){ #>
+
+        public void <#= mdl.TableName #>_Add()
+        {
+            var repo = new <#= mdl.TableName #>Repository(Context);
+            BaseRepositoryUnitTest_Add_<#= mdl.TableName #>(repo);
+        }
+<#+ } #>
+
+		#endregion
+		
+		#region Base Tests
+<#+ foreach(var mdl in Models){ #>
+
+        [TestMethod]
+        public virtual void BaseRepositoryUnitTest_Add_<#= mdl.TableName #>(I<#= mdl.TableName #>Repository repository)
+        {
+            var dto = new <#= mdl.TableName #>Dto();
+            Populate<#= mdl.TableName #>(dto);
+            repository.Save(dto);
+            Context.Commit();
+
+            // Load from db and check values
+            var result = repository.LoadAll();
+
+            // Test count
+            Check_EntityCount(1, result.Count, "<#= mdl.TableName #>");
+            Check_<#= mdl.TableName #>(dto, result.FirstOrDefault());
+        }
+<#+ } #>
+
+		#endregion
+		
+        #region Cleanup
+
+        [TestCleanup]
+        public virtual void DisposeDb()
+        {
+            Context?.Dispose();
+        }
+
+        #endregion
+	}
+}
+<#+
+		return this.GenerationEnvironment.ToString();
+	}
+}
+#>

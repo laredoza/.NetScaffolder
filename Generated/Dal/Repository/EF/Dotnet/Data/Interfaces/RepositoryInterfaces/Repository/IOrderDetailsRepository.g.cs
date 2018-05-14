@@ -28,7 +28,7 @@ namespace Banking.Models.Interfaces
 	/// <summary>
 	/// The OrderDetailsRepository interface that defines database functions for the OrderDetails table
 	/// </summary>
-	public partial interface IOrderDetailsRepository : IRepository
+	public partial interface IOrderDetailsRepository : IRepository<IOrderDetails>
 	{
 		#region Load
 

@@ -28,7 +28,7 @@ namespace Banking.Models.Interfaces
 	/// <summary>
 	/// The CustomerRepository interface that defines database functions for the Customer table
 	/// </summary>
-	public partial interface ICustomerRepository : IRepository
+	public partial interface ICustomerRepository : IRepository<ICustomer>
 	{
 		#region Load
 

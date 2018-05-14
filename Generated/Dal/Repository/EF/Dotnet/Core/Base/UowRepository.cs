@@ -19,7 +19,7 @@
     /// <typeparam name="TEntity">
     ///     The type of underlying entity in this repository
     /// </typeparam>
-    public abstract class UowRepository<TEntity> : IRepository
+    public abstract class UowRepository<TEntity> : IRepository<TEntity>
         where TEntity : class
     {
         #region Constructors and Destructors

@@ -72,6 +72,9 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>RunGenerator.cs</LastGenOutput>
       <LastOutputs>
+..\..\..\RepositoryEFDotnet\UnitTest\Base\BaseRepositoryUnitTest.g.cs
+..\..\..\RepositoryEFDotnet\UnitTest\Base\BaseUnitOfWorkUnitTest.g.cs
+..\..\..\RepositoryEFDotnet\UnitTest\Base\BaseUnitTest.g.cs
 ..\..\Contexts\EF\MySql\Context\MySqlAccountContext.g.cs
 ..\..\Contexts\EF\MySql\Context\MySqlCustomerContext.g.cs
 ..\..\Contexts\EF\MySql\Context\MySqlFullContext.g.cs
@@ -136,6 +139,8 @@
     <None Include="Model\T4\BaseGenerator.ttInclude" />
     <None Include="Model\T4\BaseProjectGenerator.ttInclude" />
     <None Include="Model\T4\BaseTemplate.ttinclude" />
+    <None Include="Model\T4\BaseRepositoryUnitTestTemplate.ttInclude" />
+    <None Include="Model\T4\BaseUowUnitTestTemplate.ttInclude" />
     <None Include="Model\T4\ContextGenerator.ttInclude" />
     <None Include="Model\T4\ContextTemplate.ttInclude" />
     <None Include="Model\T4\CopyrightHeader.ttinclude" />
@@ -143,7 +148,9 @@
     <None Include="Model\T4\DtoInterfaceGenerator.ttInclude" />
     <None Include="Model\T4\DtoInterfaceTemplate.ttInclude" />
     <None Include="Model\T4\DtoTemplate.ttInclude" />
+    <None Include="Model\T4\BaseUnitTestGenerator.ttInclude" />
     <None Include="Model\T4\EntityGenerator.ttInclude" />
+    <None Include="Model\T4\BaseUnitTestTemplate.ttInclude" />
     <None Include="Model\T4\EntityTemplate.ttInclude" />
     <None Include="Model\T4\ProjectGenerator.ttInclude" />
     <None Include="Model\T4\RepoInterfaceGenerator.ttInclude" />

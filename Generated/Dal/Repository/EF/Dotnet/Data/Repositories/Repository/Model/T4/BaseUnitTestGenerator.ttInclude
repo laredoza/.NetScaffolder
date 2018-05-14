@@ -1,0 +1,33 @@
+﻿<#@ include file="BaseUnitTestTemplate.ttinclude" #>
+<#@ include file="BaseUowUnitTestTemplate.ttinclude" #>
+<#@ include file="BaseRepositoryUnitTestTemplate.ttinclude" #>
+<#+
+    public class BaseUnitTestGenerator : BaseGenerator
+    {
+        public List<Table> Models { get; set; }
+        private string OutputPath = @"..\..\..\RepositoryEFDotnet\UnitTest\RepositoryEFDotnet.UnitTest.csproj";
+        private string OutputFolder = "Base";
+
+        protected override void RunCore()
+        {
+			var unitTestTemplate = new BaseUnitTestTemplate();
+			var uowTemplate = new BaseUowUnitTestTemplate();
+			var repoTemplate = new BaseRepositoryUnitTestTemplate();
+			
+            unitTestTemplate.Models = this.Models;
+			uowTemplate.Models = this.Models;
+			repoTemplate.Models = this.Models;
+
+            if(!string.IsNullOrEmpty(OutputPath))
+            {
+                unitTestTemplate.Output.Project = OutputPath;
+				uowTemplate.Output.Project = OutputPath;
+				repoTemplate.Output.Project = OutputPath;
+            }
+
+            unitTestTemplate.RenderToFile(string.Format(@"{0}\{1}.g.cs", OutputFolder, "BaseUnitTest"));
+			uowTemplate.RenderToFile(string.Format(@"{0}\{1}.g.cs", OutputFolder, "BaseUnitOfWorkUnitTest"));
+			repoTemplate.RenderToFile(string.Format(@"{0}\{1}.g.cs", OutputFolder, "BaseRepositoryUnitTest"));
+        }
+    }
+#>
