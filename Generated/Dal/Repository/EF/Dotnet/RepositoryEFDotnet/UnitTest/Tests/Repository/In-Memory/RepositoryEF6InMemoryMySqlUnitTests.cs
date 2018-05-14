@@ -9,7 +9,7 @@ namespace RepositoryEFDotnet.UnitTest
     using System.Data.Common;
 
     [TestClass]
-    public class RepositoryEF6MySqlUnitTest : BaseRepositoryUnitTest
+    public class RepositoryEF6InMemoryMySqlUnitTest : BaseRepositoryUnitTest
     {
         #region Init
 

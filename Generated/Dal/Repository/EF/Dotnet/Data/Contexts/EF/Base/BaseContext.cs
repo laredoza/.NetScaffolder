@@ -206,30 +206,16 @@
         /// <returns>
         ///     The <see cref="bool" />.
         /// </returns>
-        public bool Any<TEntity>(IEnumerable<string> includes = null, Expression<Func<TEntity, bool>> filter = null)
+        public bool Any<TEntity>(Expression<Func<TEntity, bool>> filter = null, IEnumerable<string> includes = null)
             where TEntity : class
         {
-            IQueryable<TEntity> items = Set<TEntity>();
-            if (includes != null && includes.Any())
-            {
-                foreach(var i in includes.Where(o=> o != null))
-                {
-                    items = items.Include(i);
-                }
-            }
-
-            if (filter != null)
-            {
-                return items.Any(filter);
-            }
-
-            throw new Exception("No filter provided for any query");
+            return GetQueryable(includes, filter).Any();
         }
 
-        public Task<bool> AnyAsync<TEntity>(IEnumerable<string> includes = null, Expression<Func<TEntity, bool>> filter = null)
+        public Task<bool> AnyAsync<TEntity>(Expression<Func<TEntity, bool>> filter = null, IEnumerable<string> includes = null)
             where TEntity : class
         {
-            return Task.Run(() => Any(includes, filter));
+            return GetQueryable(includes, filter).AnyAsync();
         }
 
         /// <summary>
@@ -272,7 +258,10 @@
         /// </returns>
         public Task<int> CommitAsync()
         {
-            return Task.Run(() => Commit());
+            ChangeTracker.DetectChanges();
+            var result = SaveChangesAsync();
+            transaction?.Commit();
+            return result;
         }
 
         /// <summary>
@@ -359,17 +348,17 @@
 
         public Task<TEntity> GetAsync<TEntity>(Expression<Func<TEntity, bool>> filter, IEnumerable<string> includes = null) where TEntity : class
         {
-            return Task.Run(() => Get(filter, includes));
+            return this.GetQueryable(includes, filter).FirstOrDefaultAsync();
         }
 
-        public TResult Max<TEntity, TResult>(Expression<Func<TEntity, TResult>> filter, IEnumerable<string> includes = null) where TEntity : class
+        public TResult Max<TEntity, TResult>(Expression<Func<TEntity, TResult>> filter) where TEntity : class
         {
             return this.GetDbSet<TEntity>().Max(filter);
         }
 
-        public Task<TResult> MaxAsync<TEntity, TResult>(Expression<Func<TEntity, TResult>> filter, IEnumerable<string> includes = null) where TEntity : class
+        public Task<TResult> MaxAsync<TEntity, TResult>(Expression<Func<TEntity, TResult>> filter) where TEntity : class
         {
-            return Task.Run(() => Max(filter, includes));
+            return this.GetDbSet<TEntity>().MaxAsync(filter);
         }
 
         /// <summary>
@@ -527,6 +516,11 @@
             }
         }
 
+        public async Task RollbackAsync()
+        {
+            await Task.Run(() => Rollback());
+        }
+
         /// <summary>
         ///     The set entry state.
         /// </summary>
@@ -553,6 +547,15 @@
             }
 
             entry.State = state;
+        }
+
+        private void SetEntryState<TEntity>(IEnumerable<TEntity> items, EntityState state)
+            where TEntity : class
+        {
+            foreach (var item in items)
+            {
+                SetEntryState(item, state);
+            }
         }
 
         #endregion
@@ -592,12 +595,22 @@
 
         public TEntity FirstOrDefault<TEntity>(Expression<Func<TEntity, bool>> filter = null, IEnumerable<string> includes = null) where TEntity : class
         {
-            return this.GetDbSet<TEntity>().FirstOrDefault(filter);
+            return filter != null ? this.GetDbSet<TEntity>().FirstOrDefault(filter) : this.GetDbSet<TEntity>().FirstOrDefault();
         }
 
         public Task<TEntity> FirstOrDefaultAsync<TEntity>(Expression<Func<TEntity, bool>> filter = null, IEnumerable<string> includes = null) where TEntity : class
         {
-            return Task.Run(() => this.FirstOrDefault(filter, includes));
+            return filter != null ? this.GetDbSet<TEntity>().FirstOrDefaultAsync(filter) : this.GetDbSet<TEntity>().FirstOrDefaultAsync();
+        }
+
+        public IEnumerable<TEntity> AllMatchingPaged<TEntity>(Expression<Func<TEntity, bool>> filter, int startPage, int pageSize, IEnumerable<string> orderBy, bool orderByAsc = false, IEnumerable<string> includes = null, string hint = "") where TEntity : class
+        {
+            return GetQueryable(includes, filter, startPage, pageSize, orderBy, orderByAsc);
+        }
+
+        public IEnumerable<TEntity> GetAllPaged<TEntity>(int startPage, int pageSize, IEnumerable<string> orderBy, bool orderByAsc = true, IEnumerable<string> includes = null) where TEntity : class
+        {
+            return GetQueryable<TEntity>(includes, null, startPage, pageSize, orderBy, orderByAsc);
         }
 
         #endregion

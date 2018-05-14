@@ -49,6 +49,14 @@ namespace RepositoryEFDotnet.UnitTest
 <#+ } #>
         }
 		
+        protected virtual void Change_<#= mdl.TableName #>(I<#= mdl.TableName #> dto, I<#= mdl.TableName #> savedEntity)
+        {             
+			// Test Fields
+<#+ foreach(var col in mdl.Columns){ #>
+            Assert.AreEqual(dto.<#= col.ColumnName #>, savedEntity.<#= col.ColumnName #>, $"Customer.<#= col.ColumnName #> incorrect.");
+<#+ } #>
+        }
+		
 <#+ } #>
 
 		#endregion

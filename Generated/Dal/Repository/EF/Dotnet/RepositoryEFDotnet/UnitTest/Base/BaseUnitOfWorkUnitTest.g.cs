@@ -22,7 +22,9 @@ using Banking.Models.Entity;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RepositoryEFDotnet.Library;
 using System.Data.Entity;
+using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace RepositoryEFDotnet.UnitTest
 {
@@ -52,7 +54,7 @@ namespace RepositoryEFDotnet.UnitTest
 		
 
         [TestMethod]
-        public virtual void BaseUnitOfWorkUnitTests_Add_BankAccount()
+        public virtual void BaseUnitOfWorkUnitTests_BankAccount_Add()
         {
             var entity = new BankAccount();
             PopulateBankAccount(entity);
@@ -61,120 +63,213 @@ namespace RepositoryEFDotnet.UnitTest
             Uow.SaveChanges();
 
             var entities = Uow.GetAll<BankAccount>();
-            Check_EntityCount(1, entities.Count(), "BankAccount");
+            Check_EntityCount(1, entities.Count(), "Incorrect number of BankAccount found");
             Check_BankAccount(entity, entities.FirstOrDefault());
         }
-
+		
         [TestMethod]
-        public virtual void BaseUnitOfWorkUnitTests_Add_BankTransfers()
+        public virtual async Task BaseUnitOfWorkUnitTests_BankAccount_AddAsync()
         {
-            var entity = new BankTransfers();
-            PopulateBankTransfers(entity);
+            var entity = new BankAccount();
+            PopulateBankAccount(entity);
 
-            Uow.Add(entity);
+            await Uow.AddAsync(entity);
+            await Uow.SaveChangesAsync();
+
+            var entities = await Uow.GetAllAsync<BankAccount>();
+            Check_EntityCount(1, entities.Count(), "Incorrect number of BankAccount found");
+            Check_BankAccount(entity, entities.FirstOrDefault());
+        }
+		
+        [TestMethod]
+        public virtual void BaseUnitOfWorkUnitTests_BankAccount_Modify()
+        {
+            var entity = new BankAccount();
+            PopulateBankAccount(entity, true);
+
+            Uow.Modify(entity);
             Uow.SaveChanges();
 
-            var entities = Uow.GetAll<BankTransfers>();
-            Check_EntityCount(1, entities.Count(), "BankTransfers");
-            Check_BankTransfers(entity, entities.FirstOrDefault());
+            var entities = Uow.GetAll<BankAccount>();
+            Check_EntityCount(1, entities.Count(), "Incorrect number of BankAccount found");
+            Check_BankAccount(entity, entities.FirstOrDefault());
+        }
+		
+        [TestMethod]
+        public virtual async Task BaseUnitOfWorkUnitTests_BankAccount_ModifyAsync()
+        {
+            var entity = new BankAccount();
+            PopulateBankAccount(entity, true);
+
+            await Uow.ModifyAsync(entity);
+            await Uow.SaveChangesAsync();
+
+            var entities = await Uow.GetAllAsync<BankAccount>();
+            Check_EntityCount(1, entities.Count(), "Incorrect number of BankAccount found");
+            Check_BankAccount(entity, entities.FirstOrDefault());
+        }
+		
+        [TestMethod]
+        public virtual void BaseUnitOfWorkUnitTests_BankAccount_Remove()
+        {
+			BaseUnitOfWorkUnitTests_BankAccount_Add();
+			
+            var entity = Uow.FirstOrDefault<BankAccount>();
+			
+			Assert.IsNotNull(entity, "BankAccount not found to remove");
+			
+            Uow.Remove(entity);
+            Uow.SaveChanges();
+
+            var entities = Uow.GetAll<BankAccount>();
+            Check_EntityCount(0, entities.Count(), "Incorrect number of BankAccount found");
+        }
+		
+        [TestMethod]
+        public virtual async Task BaseUnitOfWorkUnitTests_BankAccount_RemoveAsync()
+        {
+			await BaseUnitOfWorkUnitTests_BankAccount_AddAsync();
+			
+            var entity = Uow.FirstOrDefault<BankAccount>();
+			
+			Assert.IsNotNull(entity, "BankAccount not found to remove");
+			
+            await Uow.RemoveAsync(entity);
+            await Uow.SaveChangesAsync();
+
+            var entities = await Uow.GetAllAsync<BankAccount>();
+            Check_EntityCount(0, entities.Count(), "Incorrect number of BankAccount found");
+        }
+		
+        [TestMethod]
+        public virtual void BaseUnitOfWorkUnitTests_BankAccount_RemoveRange()
+        {
+			BaseUnitOfWorkUnitTests_BankAccount_AddRange();
+			
+            var entitiesToRemove = Uow.GetAll<BankAccount>();
+			
+            Uow.RemoveRange(entitiesToRemove);
+            Uow.SaveChanges();
+
+            var removedEntities = Uow.GetAll<BankAccount>();
+            Check_EntityCount(0, removedEntities.Count(), "Incorrect number of BankAccount found");
+        }
+		
+        [TestMethod]
+        public virtual async Task BaseUnitOfWorkUnitTests_BankAccount_RemoveRangeAsync()
+        {
+			await BaseUnitOfWorkUnitTests_BankAccount_AddRangeAsync();
+			
+            var entitiesToRemove = await Uow.GetAllAsync<BankAccount>();
+			
+            await Uow.RemoveRangeAsync(entitiesToRemove);
+            await Uow.SaveChangesAsync();
+
+            var removedEntities = await Uow.GetAllAsync<BankAccount>();
+            Check_EntityCount(0, removedEntities.Count(), "Incorrect number of BankAccount found");
+        }
+		
+        [TestMethod]
+        public virtual void BaseUnitOfWorkUnitTests_BankAccount_Rollback()
+        {		
+            var entity = new BankAccount();
+            PopulateBankAccount(entity);
+
+            Uow.Add(entity);
+            Uow.Rollback();
+			Uow.SaveChanges(); // Do a commit here to make sure rollback did what it was suppose to
+
+            var entities = Uow.GetAll<BankAccount>();
+            Check_EntityCount(0, entities.Count(), "Incorrect number of BankAccount found");
+        }
+		
+        [TestMethod]
+        public virtual async Task BaseUnitOfWorkUnitTests_BankAccount_RollbackAsync()
+        {		
+            var entity = new BankAccount();
+            PopulateBankAccount(entity);
+
+            await Uow.AddAsync(entity);
+            await Uow.RollbackAsync();
+			await Uow.SaveChangesAsync(); // Do a commit here to make sure rollback did what it was suppose to
+
+            var entities = await Uow.GetAllAsync<BankAccount>();
+            Check_EntityCount(0, entities.Count(), "Incorrect number of BankAccount found");
+        }
+		
+        [TestMethod]
+        public virtual void BaseUnitOfWorkUnitTests_BankAccount_Any()
+        {
+			BaseUnitOfWorkUnitTests_BankAccount_Add();
+
+            bool hasAny = Uow.Any<BankAccount>();
+            Assert.IsTrue(hasAny, "Could not find any BankAccount");
+        }
+		
+        [TestMethod]
+        public virtual async Task BaseUnitOfWorkUnitTests_BankAccount_AnyAsync()
+        {
+			await BaseUnitOfWorkUnitTests_BankAccount_AddAsync();
+
+            bool hasAny = await Uow.AnyAsync<BankAccount>();
+            Assert.IsTrue(hasAny, "Could not find any BankAccount");
         }
 
         [TestMethod]
-        public virtual void BaseUnitOfWorkUnitTests_Add_Book()
+        public virtual void BaseUnitOfWorkUnitTests_BankAccount_Any_NothingFound()
         {
-            var entity = new Book();
-            PopulateBook(entity);
-
-            Uow.Add(entity);
-            Uow.SaveChanges();
-
-            var entities = Uow.GetAll<Book>();
-            Check_EntityCount(1, entities.Count(), "Book");
-            Check_Book(entity, entities.FirstOrDefault());
+            bool hasAny = Uow.Any<BankAccount>();
+            Assert.IsFalse(hasAny, "Incorrectly found BankAccount");
         }
-
+		
         [TestMethod]
-        public virtual void BaseUnitOfWorkUnitTests_Add_Country()
+        public virtual void BaseUnitOfWorkUnitTests_BankAccount_FirstOrDefault()
         {
-            var entity = new Country();
-            PopulateCountry(entity);
+			BaseUnitOfWorkUnitTests_BankAccount_Add();
 
-            Uow.Add(entity);
-            Uow.SaveChanges();
-
-            var entities = Uow.GetAll<Country>();
-            Check_EntityCount(1, entities.Count(), "Country");
-            Check_Country(entity, entities.FirstOrDefault());
+            var entity = Uow.FirstOrDefault<BankAccount>();
+            Assert.IsNotNull(entity, "Could not find BankAccount");
         }
-
+		
         [TestMethod]
-        public virtual void BaseUnitOfWorkUnitTests_Add_Customer()
+        public virtual async Task BaseUnitOfWorkUnitTests_BankAccount_FirstOrDefaultAsync()
         {
-            var entity = new Customer();
-            PopulateCustomer(entity);
+			await BaseUnitOfWorkUnitTests_BankAccount_AddAsync();
 
-            Uow.Add(entity);
-            Uow.SaveChanges();
-
-            var entities = Uow.GetAll<Customer>();
-            Check_EntityCount(1, entities.Count(), "Customer");
-            Check_Customer(entity, entities.FirstOrDefault());
+            var entity = await Uow.FirstOrDefaultAsync<BankAccount>();
+            Assert.IsNotNull(entity, "Could not find BankAccount");
         }
-
+		
         [TestMethod]
-        public virtual void BaseUnitOfWorkUnitTests_Add_Order()
+        public virtual void BaseUnitOfWorkUnitTests_BankAccount_FirstOrDefault_NothingFound()
         {
-            var entity = new Order();
-            PopulateOrder(entity);
-
-            Uow.Add(entity);
-            Uow.SaveChanges();
-
-            var entities = Uow.GetAll<Order>();
-            Check_EntityCount(1, entities.Count(), "Order");
-            Check_Order(entity, entities.FirstOrDefault());
+            var entity = Uow.FirstOrDefault<BankAccount>();
+            Assert.IsNull(entity, "Incorrectly found BankAccount");
         }
-
+		
         [TestMethod]
-        public virtual void BaseUnitOfWorkUnitTests_Add_OrderDetails()
+        public virtual void BaseUnitOfWorkUnitTests_BankAccount_GetAll()
         {
-            var entity = new OrderDetails();
-            PopulateOrderDetails(entity);
+			BaseUnitOfWorkUnitTests_BankAccount_AddRange();
 
-            Uow.Add(entity);
-            Uow.SaveChanges();
-
-            var entities = Uow.GetAll<OrderDetails>();
-            Check_EntityCount(1, entities.Count(), "OrderDetails");
-            Check_OrderDetails(entity, entities.FirstOrDefault());
+            var entities = Uow.GetAll<BankAccount>();
+            Check_EntityCount(3, entities.Count(), "Incorrect number of BankAccount found");
         }
-
+		
         [TestMethod]
-        public virtual void BaseUnitOfWorkUnitTests_Add_Product()
+        public virtual async Task BaseUnitOfWorkUnitTests_BankAccount_GetAllAsync()
         {
-            var entity = new Product();
-            PopulateProduct(entity);
+			await BaseUnitOfWorkUnitTests_BankAccount_AddRangeAsync();
 
-            Uow.Add(entity);
-            Uow.SaveChanges();
-
-            var entities = Uow.GetAll<Product>();
-            Check_EntityCount(1, entities.Count(), "Product");
-            Check_Product(entity, entities.FirstOrDefault());
+            var entities = await Uow.GetAllAsync<BankAccount>();
+            Check_EntityCount(3, entities.Count(), "Incorrect number of BankAccount found");
         }
-
+		
         [TestMethod]
-        public virtual void BaseUnitOfWorkUnitTests_Add_Software()
+        public virtual void BaseUnitOfWorkUnitTests_BankAccount_GetAll_NothingFound()
         {
-            var entity = new Software();
-            PopulateSoftware(entity);
-
-            Uow.Add(entity);
-            Uow.SaveChanges();
-
-            var entities = Uow.GetAll<Software>();
-            Check_EntityCount(1, entities.Count(), "Software");
-            Check_Software(entity, entities.FirstOrDefault());
+            var entities = Uow.GetAll<BankAccount>();
+            Check_EntityCount(0, entities.Count(), "Incorrect number of BankAccount found");
         }
 
 		#endregion

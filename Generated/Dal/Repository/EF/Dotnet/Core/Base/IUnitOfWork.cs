@@ -48,6 +48,8 @@
 
         IEnumerable<TEntity> AllMatching<TEntity>(Expression<Func<TEntity, bool>> filter, IEnumerable<string> includes = null, string hint = "") where TEntity : class;
 
+        IEnumerable<TEntity> AllMatchingPaged<TEntity>(Expression<Func<TEntity, bool>> filter, int startPage, int pageSize, IEnumerable<string> orderBy, bool orderByAsc = false, IEnumerable<string> includes = null, string hint = "") where TEntity : class;
+
         /// <summary>
         ///     The all matching async.
         /// </summary>
@@ -77,10 +79,10 @@
         /// <returns>
         ///     The <see cref="bool" />.
         /// </returns>
-        bool Any<TEntity>(IEnumerable<string> includes = null, Expression<Func<TEntity, bool>> filter = null)
+        bool Any<TEntity>(Expression<Func<TEntity, bool>> filter = null, IEnumerable<string> includes = null)
             where TEntity : class;
 
-        Task<bool> AnyAsync<TEntity>(IEnumerable<string> includes = null, Expression<Func<TEntity, bool>> filter = null)
+        Task<bool> AnyAsync<TEntity>(Expression<Func<TEntity, bool>> filter = null, IEnumerable<string> includes = null)
             where TEntity : class;
 
         TEntity FirstOrDefault<TEntity>(Expression<Func<TEntity, bool>> filter = null, IEnumerable<string> includes = null)
@@ -162,8 +164,9 @@
         /// </returns>
         IQueryable<TEntity> ExecuteQuery<TEntity>(string sqlQuery, params object[] parameters);
 
-        IEnumerable<TEntity> GetAll<TEntity>(IEnumerable<string> includes = null)
-            where TEntity : class;
+        IEnumerable<TEntity> GetAll<TEntity>(IEnumerable<string> includes = null) where TEntity : class;
+
+        IEnumerable<TEntity> GetAllPaged<TEntity>(int startPage, int pageSize, IEnumerable<string> orderBy, bool orderByAscending = true, IEnumerable<string> includes = null) where TEntity : class;
 
         /// <summary>
         ///     The get all async.
@@ -185,10 +188,10 @@
         TEntity Get<TEntity>(Expression<Func<TEntity, bool>> filter, IEnumerable<string> includes = null)
             where TEntity : class;
 
-        TResult Max<TEntity, TResult>(Expression<Func<TEntity, TResult>> filter, IEnumerable<string> includes = null)
+        TResult Max<TEntity, TResult>(Expression<Func<TEntity, TResult>> filter)
             where TEntity : class;
 
-        Task<TResult> MaxAsync<TEntity, TResult>(Expression<Func<TEntity, TResult>> filter, IEnumerable<string> includes = null)
+        Task<TResult> MaxAsync<TEntity, TResult>(Expression<Func<TEntity, TResult>> filter)
             where TEntity : class;
 
         /// <summary>
@@ -258,6 +261,8 @@
         ///     The roll back changes.
         /// </summary>
         void Rollback();
+
+        Task RollbackAsync();
 
         void StartTransaction();
 

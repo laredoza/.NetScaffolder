@@ -45,10 +45,11 @@ namespace RepositoryEFDotnet.UnitTest
 		
 <#+ foreach(var mdl in Models){ #>
 
+		[TestMethod]
         public void <#= mdl.TableName #>_Add()
         {
             var repo = new <#= mdl.TableName #>Repository(Context);
-            BaseRepositoryUnitTest_Add_<#= mdl.TableName #>(repo);
+            BaseRepositoryUnitTest_<#= mdl.TableName #>_Add(repo);
         }
 <#+ } #>
 
@@ -57,8 +58,7 @@ namespace RepositoryEFDotnet.UnitTest
 		#region Base Tests
 <#+ foreach(var mdl in Models){ #>
 
-        [TestMethod]
-        public virtual void BaseRepositoryUnitTest_Add_<#= mdl.TableName #>(I<#= mdl.TableName #>Repository repository)
+        public virtual void BaseRepositoryUnitTest_<#= mdl.TableName #>_Add(I<#= mdl.TableName #>Repository repository)
         {
             var dto = new <#= mdl.TableName #>Dto();
             Populate<#= mdl.TableName #>(dto);
