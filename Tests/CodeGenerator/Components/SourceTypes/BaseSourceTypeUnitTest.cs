@@ -13,6 +13,8 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
     using DotNetScaffolder.Components.Common.Contract;
     using DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources;
     using DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.MySql;
+    using DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.Oracle;
+    using DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.Edmxs;
     using DotNetScaffolder.Mapping.MetaData.Enum;
     using DotNetScaffolder.Mapping.MetaData.Model;
 
@@ -71,6 +73,11 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                 relationship.ReferencedTableName.ToLower(),
                 "The relationship table name should be Customer");
 
+            Assert.AreEqual("dbo", relationship.SchemaName.ToLower(), "The SchemaName should not be null");
+            Assert.IsNull(relationship.RelationshipAlias, "The RelationshipAlias should be empty");
+            Assert.AreEqual(RelationshipMultiplicity.Many, relationship.Multiplicity, "The RelationshipMultiplicity should be Many");
+            Assert.AreEqual(RelationshipMultiplicity.ZeroToOne, relationship.ReferencedMultiplicity, "The RelationshipMultiplicity should be Many");
+            
             // Assert.AreEqual("FK_BankAccount_Customer", relationship.RelationshipName, "The relationship table name should be FK_BankAccount_Customer.");
             relationship = bankAccountTable.Relationships.FirstOrDefault(
                 r => r.ReferencedTableName.ToLower() == "banktransfers" && r.ReferencedColumnName == "ToBankAccountId");
@@ -88,6 +95,11 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                 "BankTransfers",
                 relationship.ReferencedTableName,
                 "The relationship table name should be BankTransfers.");
+
+            Assert.AreEqual("dbo", relationship.SchemaName.ToLower(), "The SchemaName should not be null");
+            Assert.IsNull(relationship.RelationshipAlias, "The RelationshipAlias should be empty");
+            Assert.AreEqual(RelationshipMultiplicity.One, relationship.Multiplicity, "The RelationshipMultiplicity should be one");
+            Assert.AreEqual(RelationshipMultiplicity.Many, relationship.ReferencedMultiplicity, "The RelationshipMultiplicity should be Many");
 
             // Assert.AreEqual("FK_BankTransfers_BankAccount1", relationship.RelationshipName, "The relationship table name should be FK_BankTransfers_BankAccount1.");
             relationship = bankAccountTable.Relationships.FirstOrDefault(
@@ -108,6 +120,11 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                 "The relationship table name should be BankTransfers.");
 
             // Assert.AreEqual("FK_BankTransfers_BankAccount", relationship.RelationshipName, "The relationship table name should be FK_BankTransfers_BankAccount.");
+
+            Assert.AreEqual("dbo", relationship.SchemaName.ToLower(), "The SchemaName should not be null");
+            Assert.IsNull(relationship.RelationshipAlias, "The RelationshipAlias should be empty");
+            Assert.AreEqual(RelationshipMultiplicity.One, relationship.Multiplicity, "The RelationshipMultiplicity should be one");
+            Assert.AreEqual(RelationshipMultiplicity.Many, relationship.ReferencedMultiplicity, "The RelationshipMultiplicity should be Many");
         }
 
         /// <summary>
@@ -133,7 +150,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                         ColumnOrder = 1,
                         Precision = this.ReturnDefaultInt32Precision(),
                         Scale = 0,
-                        Length = 0,
+                        Length = this.ReturnDefaultInt32Length(),
                         IsPrimaryKey = true
                     });
 
@@ -164,7 +181,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                         ColumnOrder = 3,
                         Precision = 19,
                         Scale = 4,
-                        Length = 0,
+                        Length = this.ReturnDefaultDecimaLength(),
                         IsPrimaryKey = false
                     });
 
@@ -179,7 +196,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                         ColumnOrder = 4,
                         Precision = this.ReturnDefaultInt32Precision(),
                         Scale = 0,
-                        Length = 0,
+                        Length = this.ReturnDefaultInt32Length(),
                         IsPrimaryKey = false
                     });
 
@@ -194,7 +211,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                         ColumnOrder = 5,
                         Precision = this.ReturnDefaultBooleanPrecision(),
                         Scale = 0,
-                        Length = 0,
+                        Length = this.ReturnBooleanLength(),
                         IsPrimaryKey = false
                     });
         }
@@ -233,6 +250,11 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                 relationship.ReferencedTableName,
                 "The relationship table name should be BankTransfers.");
 
+            Assert.AreEqual("dbo", relationship.SchemaName.ToLower(), "The SchemaName should not be null");
+            Assert.IsNull(relationship.RelationshipAlias, "The RelationshipAlias should be empty");
+            Assert.AreEqual(RelationshipMultiplicity.Many, relationship.Multiplicity, "The RelationshipMultiplicity should be Many");
+            Assert.AreEqual(RelationshipMultiplicity.One, relationship.ReferencedMultiplicity, "The RelationshipMultiplicity should be One");
+
             // Assert.AreEqual("FK_BankTransfers_BankAccount1", relationship.RelationshipName, "The relationship table name should be FK_BankTransfers_BankAccount1.");
             relationship = bankTransfersTable.Relationships.FirstOrDefault(
                 r => r.ReferencedTableName == "BankAccount" && r.ColumnName == "FromBankAccountId");
@@ -253,10 +275,16 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                 "BankAccount",
                 relationship.ReferencedTableName,
                 "The relationship table name should be BankTransfers.");
-            Assert.AreEqual(
-                "FK_BankTransfers_BankAccount",
-                relationship.RelationshipName,
-                "The relationship table name should be FK_BankTransfers_BankAccount.");
+
+            Assert.AreEqual("dbo", relationship.SchemaName.ToLower(), "The SchemaName should not be null");
+            Assert.IsNull(relationship.RelationshipAlias, "The RelationshipAlias should be empty");
+            Assert.AreEqual(RelationshipMultiplicity.Many, relationship.Multiplicity, "The RelationshipMultiplicity should be Many");
+            Assert.AreEqual(RelationshipMultiplicity.One, relationship.ReferencedMultiplicity, "The RelationshipMultiplicity should be One");
+
+            //Assert.AreEqual(
+            //    "FK_BankTransfers_BankAccount",
+            //    relationship.RelationshipName,
+            //    "The relationship table name should be FK_BankTransfers_BankAccount.");
         }
 
         /// <summary>
@@ -283,9 +311,9 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                         DomainDataType = DomainDataType.Int32,
                         IsRequired = true,
                         ColumnOrder = 1,
-                        Precision = 0,
+                        Precision = this.ReturnDefaultInt32Precision(),
                         Scale = 0,
-                        Length = 0,
+                        Length = this.ReturnDefaultInt32Length(),
                         IsPrimaryKey = true
                     });
 
@@ -298,9 +326,9 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                         DomainDataType = DomainDataType.Int32,
                         IsRequired = true,
                         ColumnOrder = 2,
-                        Precision = 0,
+                        Precision = this.ReturnDefaultInt32Precision(),
                         Scale = 0,
-                        Length = 0,
+                        Length = this.ReturnDefaultInt32Length(),
                         IsPrimaryKey = false
                     });
 
@@ -313,9 +341,9 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                         DomainDataType = DomainDataType.Int32,
                         IsRequired = true,
                         ColumnOrder = 3,
-                        Precision = 0,
+                        Precision = this.ReturnDefaultInt32Precision(),
                         Scale = 0,
-                        Length = 0,
+                        Length = this.ReturnDefaultInt32Length(),
                         IsPrimaryKey = false
                     });
 
@@ -330,7 +358,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                         ColumnOrder = 4,
                         Precision = 18,
                         Scale = 2,
-                        Length = 0,
+                        Length = this.ReturnDefaultDecimaLength(),
                         IsPrimaryKey = false
                     });
 
@@ -345,7 +373,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                         ColumnOrder = 5,
                         Precision = 0,
                         Scale = 0,
-                        Length = 0,
+                        Length = this.ReturnDefaultDateLength(),
                         IsPrimaryKey = false
                     });
         }
@@ -407,6 +435,11 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                 "The relationship table name should be Customer");
 
             // Assert.AreEqual("FK_Customer_Country", relationship.RelationshipName, "The relationship table name should be FK_Customer_Country.");
+
+            Assert.AreEqual("dbo", relationship.SchemaName.ToLower(), "The SchemaName should not be null");
+            Assert.IsNull(relationship.RelationshipAlias, "The RelationshipAlias should be empty");
+            Assert.AreEqual(RelationshipMultiplicity.ZeroToOne, relationship.Multiplicity, "The RelationshipMultiplicity should be ZeroToOne");
+            Assert.AreEqual(RelationshipMultiplicity.Many, relationship.ReferencedMultiplicity, "The RelationshipMultiplicity should be Many");
         }
 
         /// <summary>
@@ -432,7 +465,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                         ColumnOrder = 1,
                         Precision = this.ReturnDefaultInt32Precision(),
                         Scale = 0,
-                        Length = 0,
+                        Length = this.ReturnDefaultInt32Length(),
                         IsPrimaryKey = true
                     });
 
@@ -543,7 +576,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                         ColumnOrder = 1,
                         Precision = this.ReturnDefaultInt32Precision(),
                         Scale = 0,
-                        Length = 0,
+                        Length = this.ReturnDefaultInt32Length(),
                         IsPrimaryKey = true
                     });
 
@@ -694,7 +727,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                         ColumnOrder = 11,
                         Precision = this.ReturnDefaultInt32Precision(),
                         Scale = 0,
-                        Length = 0,
+                        Length = this.ReturnDefaultInt32Length(),
                         IsPrimaryKey = false
                     });
 
@@ -710,7 +743,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                         ColumnOrder = 12,
                         Precision = 0,
                         Scale = 0,
-                        Length = 2147483647,
+                        Length = this.ReturnCloblength(),
                         IsPrimaryKey = false
                     });
 
@@ -725,7 +758,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                         ColumnOrder = 13,
                         Precision = this.ReturnDefaultBooleanPrecision(),
                         Scale = 0,
-                        Length = 0,
+                        Length = this.ReturnBooleanLength(),
                         IsPrimaryKey = false
                     });
         }
@@ -818,6 +851,11 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                 relationship.ReferencedTableName.ToLower(),
                 "The relationship table name should be Customer");
 
+            Assert.AreEqual("dbo", relationship.SchemaName.ToLower(), "The SchemaName should not be null");
+            Assert.IsNull(relationship.RelationshipAlias, "The RelationshipAlias should be empty");
+            Assert.AreEqual(RelationshipMultiplicity.Many, relationship.Multiplicity, "The RelationshipMultiplicity should be Many");
+            Assert.AreEqual(RelationshipMultiplicity.ZeroToOne, relationship.ReferencedMultiplicity, "The RelationshipMultiplicity should be ZeroToOne");
+
             // Assert.AreEqual("FK_Order_Customer", relationship.RelationshipName, "The relationship table name should be FK_Order_Customer.");
             relationship = ordersTable.Relationships.FirstOrDefault(r => r.ReferencedTableName.ToLower() == "orderdetails");
             Assert.IsNotNull(relationship, "The OrderDetails Relationship should not be null.");
@@ -835,6 +873,10 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                 relationship.ReferencedTableName.ToLower(),
                 "The relationship table name should be OrderDetails.");
 
+            Assert.AreEqual("dbo", relationship.SchemaName.ToLower(), "The SchemaName should not be null");
+            Assert.IsNull(relationship.RelationshipAlias, "The RelationshipAlias should be empty");
+            Assert.AreEqual(RelationshipMultiplicity.One, relationship.Multiplicity, "The RelationshipMultiplicity should be One");
+            Assert.AreEqual(RelationshipMultiplicity.Many, relationship.ReferencedMultiplicity, "The RelationshipMultiplicity should be Many");
             // Assert.AreEqual("FK_OrdeDetails_Order", relationship.RelationshipName, "The relationship table name should be FK_OrdeDetails_Order.");
         }
 
@@ -861,7 +903,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                         ColumnOrder = 1,
                         Precision = this.ReturnDefaultInt32Precision(),
                         Scale = 0,
-                        Length = 0,
+                        Length = this.ReturnDefaultInt32Length(),
                         IsPrimaryKey = true
                     });
 
@@ -876,7 +918,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                         ColumnOrder = 2,
                         Precision = this.ReturnDefaultInt32Precision(),
                         Scale = 0,
-                        Length = 0,
+                        Length = this.ReturnDefaultInt32Length(),
                         IsPrimaryKey = false
                     });
 
@@ -891,7 +933,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                         ColumnOrder = 3,
                         Precision = 0,
                         Scale = 0,
-                        Length = 0,
+                        Length = this.ReturnDefaultDateLength(),
                         IsPrimaryKey = false
                     });
 
@@ -906,7 +948,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                         ColumnOrder = 4,
                         Precision = 0,
                         Scale = 0,
-                        Length = 0,
+                        Length = this.ReturnDefaultDateLength(),
                         IsPrimaryKey = false
                     });
 
@@ -1009,6 +1051,11 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                 "The relationship table name should be Product");
 
             // Assert.AreEqual("FK_Software_Product", relationship.RelationshipName, "The relationship table name should be FK_Software_Product.");
+
+            Assert.AreEqual("dbo", relationship.SchemaName.ToLower(), "The SchemaName should not be null");
+            Assert.IsNull(relationship.RelationshipAlias, "The RelationshipAlias should be empty");
+            Assert.AreEqual(RelationshipMultiplicity.ZeroToOne, relationship.Multiplicity, "The RelationshipMultiplicity should be ZeroToOne");
+            Assert.AreEqual(RelationshipMultiplicity.One, relationship.ReferencedMultiplicity, "The RelationshipMultiplicity should be One");
         }
 
         /// <summary>
@@ -1034,7 +1081,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                         ColumnOrder = 1,
                         Precision = this.ReturnDefaultInt32Precision(),
                         Scale = 0,
-                        Length = 0,
+                        Length = this.ReturnDefaultInt32Length(),
                         IsPrimaryKey = true
                     });
 
@@ -1077,7 +1124,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                         ColumnOrder = 1,
                         Precision = this.ReturnDefaultInt32Precision(),
                         Scale = 0,
-                        Length = 0,
+                        Length = this.ReturnDefaultInt32Length(),
                         IsPrimaryKey = true
                     });
 
@@ -1135,6 +1182,11 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                 "The relationship table name should be Product");
 
             // Assert.AreEqual("FK_Book_Product", relationship.RelationshipName, "The relationship table name should be FK_Book_Product.");
+
+            Assert.AreEqual("dbo", relationship.SchemaName.ToLower(), "The SchemaName should not be null");
+            Assert.IsNull(relationship.RelationshipAlias, "The RelationshipAlias should be empty");
+            Assert.AreEqual(RelationshipMultiplicity.ZeroToOne, relationship.Multiplicity, "The RelationshipMultiplicity should be ZeroToOne");
+            Assert.AreEqual(RelationshipMultiplicity.One, relationship.ReferencedMultiplicity, "The RelationshipMultiplicity should be One");
         }
 
         /// <summary>
@@ -1160,7 +1212,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                         ColumnOrder = 1,
                         Precision = this.ReturnDefaultInt32Precision(),
                         Scale = 0,
-                        Length = 0,
+                        Length = this.ReturnDefaultInt32Length(),
                         IsPrimaryKey = true
                     });
 
@@ -1175,7 +1227,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                         ColumnOrder = 3,
                         Precision = this.ReturnDefaultInt32Precision(),
                         Scale = 0,
-                        Length = 0,
+                        Length = this.ReturnDefaultInt32Length(),
                         IsPrimaryKey = false
                     });
 
@@ -1190,7 +1242,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                         ColumnOrder = 4,
                         Precision = 19,
                         Scale = 4,
-                        Length = 0,
+                        Length = this.ReturnDefaultDecimaLength(),
                         IsPrimaryKey = false
                     });
 
@@ -1205,7 +1257,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                         ColumnOrder = 5,
                         Precision = this.ReturnDefaultInt16Precision(),
                         Scale = 0,
-                        Length = 0,
+                        Length = this.ReturnDefaultInt16Length(),
                         IsPrimaryKey = false
                     });
 
@@ -1220,7 +1272,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                         ColumnOrder = 6,
                         Precision = this.ReturnDefaultSinglePrecision(),
                         Scale = 0,
-                        Length = 0,
+                        Length = this.ReturnSingleLength(),
                         IsPrimaryKey = false
                     });
         }
@@ -1256,6 +1308,11 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                 "The Book ReferencedColumnName should be ProductId in the Product table.");
             Assert.AreEqual("book", relationship.ReferencedTableName.ToLower(), "The relationship table name should be Book.");
 
+            Assert.AreEqual("dbo", relationship.SchemaName.ToLower(), "The SchemaName should not be null");
+            Assert.IsNull(relationship.RelationshipAlias, "The RelationshipAlias should be empty");
+            Assert.AreEqual(RelationshipMultiplicity.One, relationship.Multiplicity, "The RelationshipMultiplicity should be One");
+            Assert.AreEqual(RelationshipMultiplicity.ZeroToOne, relationship.ReferencedMultiplicity, "The RelationshipMultiplicity should be ZeroToOne");
+
             // Assert.AreEqual("FK_Book_Product", relationship.RelationshipName, "The relationship table name should be FK_Book_Product.");
             relationship = productTable.Relationships.FirstOrDefault(r => r.ReferencedTableName.ToLower() == "orderdetails");
             Assert.AreEqual(
@@ -1275,6 +1332,11 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                 "orderdetails",
                 relationship.ReferencedTableName.ToLower(),
                 "The relationship table name should be OrderDetails.");
+
+            Assert.AreEqual("dbo", relationship.SchemaName.ToLower(), "The SchemaName should not be null");
+            Assert.IsNull(relationship.RelationshipAlias, "The RelationshipAlias should be empty");
+            Assert.AreEqual(RelationshipMultiplicity.One, relationship.Multiplicity, "The RelationshipMultiplicity should be one");
+            Assert.AreEqual(RelationshipMultiplicity.Many, relationship.ReferencedMultiplicity, "The RelationshipMultiplicity should be Many");
 
             // Assert.AreEqual("FK_OrderDetails_Product", relationship.RelationshipName, "The relationship table name should be FK_OrderDetails_Product.");
             relationship = productTable.Relationships.FirstOrDefault(r => r.ReferencedTableName.ToLower() == "software");
@@ -1297,13 +1359,18 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                 "The relationship table name should be Software.");
 
             // Assert.AreEqual("FK_Software_Product", relationship.RelationshipName, "The relationship table name should be FK_Software_Product.");
+
+            Assert.AreEqual("dbo", relationship.SchemaName.ToLower(), "The SchemaName should not be null");
+            Assert.IsNull(relationship.RelationshipAlias, "The RelationshipAlias should be empty");
+            Assert.AreEqual(RelationshipMultiplicity.One, relationship.Multiplicity, "The RelationshipMultiplicity should be one");
+            Assert.AreEqual(RelationshipMultiplicity.ZeroToOne, relationship.ReferencedMultiplicity, "The RelationshipMultiplicity should be ZeroToOne");
         }
 
         public int ReturnDefaultInt32Precision()
         {
             int precision = 0;
 
-            if (this.SourceType is EdmxImporter)
+            if (this.SourceType is EdmxSourceType)
             {
                 precision = 0;
             }
@@ -1315,11 +1382,76 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
             return precision;
         }
 
+
+        public int ReturnDefaultInt32Length()
+        {
+            int precision = 0;
+
+            if (this.SourceType is EdmxSourceType || this.SourceType is MySqlAdoSourceType)
+            {
+                precision = 0;
+            }
+            else if (this.SourceType is OracleAdoSourceType)
+            {
+                precision = 22;
+            }
+
+            return precision;
+        }
+
+        public int ReturnDefaultDecimaLength()
+        {
+            int precision = 0;
+
+            if (this.SourceType is EdmxSourceType || this.SourceType is MySqlAdoSourceType)
+            {
+                precision = 0;
+            }
+            else if (this.SourceType is OracleAdoSourceType)
+            {
+                precision = 22;
+            }
+
+            return precision;
+        }
+
+        public int ReturnDefaultDateLength()
+        {
+            int precision = 0;
+
+            if (this.SourceType is EdmxSourceType || this.SourceType is MySqlAdoSourceType)
+            {
+                precision = 0;
+            }
+            else if (this.SourceType is OracleAdoSourceType)
+            {
+                precision = 7;
+            }
+
+            return precision;
+        }
+
+        public int ReturnCloblength()
+        {
+            int precision = 0;
+
+            if (this.SourceType is EdmxSourceType || this.SourceType is MySqlAdoSourceType)
+            {
+                precision = 2147483647;
+            }
+            else if (this.SourceType is OracleAdoSourceType)
+            {
+                precision = 4000;
+            }
+
+            return precision;
+        }
+
         public int ReturnDefaultInt16Precision()
         {
             int precision = 0;
 
-            if (this.SourceType is EdmxImporter)
+            if (this.SourceType is EdmxSourceType)
             {
                 precision = 0;
             }
@@ -1331,11 +1463,92 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
             return precision;
         }
 
+        public int ReturnDefaultInt16Length()
+        {
+            int precision = 0;
+
+            if (this.SourceType is EdmxSourceType || this.SourceType is MySqlAdoSourceType)
+            {
+                precision = 0;
+            }
+            else if (this.SourceType is OracleAdoSourceType)
+            {
+                precision = 22;
+            }
+
+            return precision;
+        }
+
+
+        public int ReturnDefaultTextLength()
+        {
+            int precision = 0;
+
+            if (this.SourceType is EdmxSourceType || this.SourceType is MySqlAdoSourceType)
+            {
+                precision = 0;
+            }
+            else if (this.SourceType is OracleAdoSourceType)
+            {
+                precision = 4000;
+            }
+
+            return precision;
+        }
+
+        public int ReturnSingleLength()
+        {
+            int precision = 0;
+
+            if (this.SourceType is EdmxSourceType || this.SourceType is MySqlAdoSourceType)
+            {
+                precision = 0;
+            }
+            else if (this.SourceType is OracleAdoSourceType)
+            {
+                precision = 4;
+            }
+
+            return precision;
+        }
+
+        public int ReturnBooleanLength()
+        {
+            int length = 0;
+
+            if (this.SourceType is EdmxSourceType || this.SourceType is MySqlAdoSourceType)
+            {
+                length = 0;
+            }
+            else if (this.SourceType is OracleAdoSourceType)
+            {
+                length = 22;
+            }
+
+            return length;
+        }
+
         public int ReturnDefaultSinglePrecision()
         {
             int precision = 0;
 
-            if (this.SourceType is EdmxImporter)
+            if (this.SourceType is EdmxSourceType)
+            {
+                precision = 0;
+            }
+            else if (this.SourceType is AdoSource)
+            {
+                precision = 12;
+            }
+
+            return precision;
+        }
+
+        public int ReturnDefaultDecimalPrecision()
+        {
+            int precision = 0;
+
+            if (this.SourceType is EdmxSourceType)
             {
                 precision = 0;
             }
@@ -1351,7 +1564,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
         {
             DomainDataType result = DomainDataType.Boolean;
 
-            if (this.SourceType is EdmxImporter)
+            if (this.SourceType is EdmxSourceType)
             {
                 result = DomainDataType.Boolean;
             }
@@ -1367,13 +1580,17 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
         {
             int result = 0;
 
-            if (this.SourceType is EdmxImporter)
+            if (this.SourceType is EdmxSourceType)
             {
                 result = 0;
             }
             else if (this.SourceType is MySqlAdoSourceType)
             {
                 result = 3;
+            }
+            else if (this.SourceType is OracleAdoSourceType)
+            {
+                result = 1;
             }
 
             return result;
@@ -1402,7 +1619,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                         ColumnOrder = 1,
                         Precision = this.ReturnDefaultInt32Precision(),
                         Scale = 0,
-                        Length = 0,
+                        Length = this.ReturnDefaultInt32Length(),
                         IsPrimaryKey = true
                     });
 
@@ -1432,7 +1649,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                         ColumnOrder = 3,
                         Precision = 19,
                         Scale = 4,
-                        Length = 0,
+                        Length = this.ReturnDefaultInt32Length(),
                         IsPrimaryKey = false
                     });
 
@@ -1463,7 +1680,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                         ColumnOrder = 6,
                         Precision = this.ReturnDefaultInt16Precision(),
                         Scale = 0,
-                        Length = 0,
+                        Length = this.ReturnDefaultInt16Length(),
                         IsPrimaryKey = false
                     });
         }

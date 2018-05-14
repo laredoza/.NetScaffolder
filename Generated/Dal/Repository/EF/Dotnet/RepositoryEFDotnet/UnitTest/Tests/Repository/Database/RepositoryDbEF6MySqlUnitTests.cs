@@ -19,8 +19,8 @@ namespace RepositoryEFDotnet.UnitTest
         [TestInitialize]
         public override void SetupDb()
         {
-            Context = new MySqlFullContext("RepoTestMySql");
-            Database.SetInitializer(new DropCreateDatabaseAlways<MySqlFullContext>());
+            //Context = new MySqlFullContext("RepoTestMySql");
+            //Database.SetInitializer(new DropCreateDatabaseAlways<MySqlFullContext>());
         }
 
         #endregion

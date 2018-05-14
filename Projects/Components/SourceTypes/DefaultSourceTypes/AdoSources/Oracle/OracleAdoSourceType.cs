@@ -145,13 +145,22 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
         public override DomainDataType MapDatabaseType(string databaseType, object extraInfo)
         {
             DatabaseColumn column = extraInfo as DatabaseColumn;
-            Type cSharpNameType = NetDataType(column);
+           
 
             string cSharpName = string.Empty;
 
-            if (cSharpNameType != null)
+            if (column.DbDataType != "BINARY_FLOAT")
             {
-                cSharpName = cSharpNameType.Name.ToUpper();
+                Type cSharpNameType = NetDataType(column);
+
+                if (cSharpNameType != null)
+                {
+                    cSharpName = cSharpNameType.Name.ToUpper();
+                }
+            }
+            else
+            {
+                cSharpName = "SINGLE";
             }
 
             switch (cSharpName)
@@ -165,15 +174,20 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
                 case "SYSTEM.BYTE[]":
                     return DomainDataType.VarBinary;
                 case "INT16":
-                    return DomainDataType.Int32;
+                    return DomainDataType.Int16;
                 case "INT32":
                     return DomainDataType.Int32;
                 case "BYTE[]":
                     return DomainDataType.VarBinary;
                 case "INT64":
                     return DomainDataType.Int64;
+                case "SINGLE":
+                    column.Precision = 12;
+                    return DomainDataType.Single;
                 case "":
                     return DomainDataType.Unsupported;
+                case "BOOLEAN":
+                    return DomainDataType.Boolean;
                 default:
                     throw new NotImplementedException($"Invalid data type {databaseType}");
             }
@@ -266,7 +280,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
                 return typeof(long);
             }
 
-            if (precision > 4)
+            if (precision > 5)
             {
                 // 2147483647
                 return typeof(int);
@@ -275,6 +289,11 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
             if (precision > 1)
             {
                 return typeof(short);
+            }
+
+            if (precision == 1)
+            {
+                return typeof(bool);
             }
 
             return column.DataType.GetNetType();

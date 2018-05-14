@@ -67,6 +67,12 @@
       <HintPath>..\..\.nuget\NuGetPackages\NLog.4.4.3\lib\net45\NLog.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Oracle.ManagedDataAccess, Version=4.122.1.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL">
+      <HintPath>..\..\.nuget\NuGetPackages\Oracle.ManagedDataAccess.12.2.1100\lib\net40\Oracle.ManagedDataAccess.dll</HintPath>
+    </Reference>
+    <Reference Include="Oracle.ManagedDataAccess.EntityFramework, Version=6.122.1.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL">
+      <HintPath>..\..\.nuget\NuGetPackages\Oracle.ManagedDataAccess.EntityFramework.12.2.1100\lib\net45\Oracle.ManagedDataAccess.EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel" />
     <Reference Include="System.ComponentModel.Composition" />
@@ -107,6 +113,7 @@
     <Compile Include="Components\NamingConventions\TitleCaseNamingConventionUnitTest.cs" />
     <Compile Include="Components\NamingConventions\TitleCaseNoUnderScoreNamingConventionUnitTest.cs" />
     <Compile Include="Components\SourceTypes\BaseSourceTypeUnitTest.cs" />
+    <Compile Include="Components\SourceTypes\OracleSourceTypeUnitTest.cs" />
     <Compile Include="Components\SourceTypes\MySqlSourceTypeUnitTest.cs" />
     <Compile Include="Components\SourceTypes\GenericAdoSourceTypeUnitTest.cs" />
     <Compile Include="Components\SourceTypes\EdmxSourceTypeUnitTest.cs" />
