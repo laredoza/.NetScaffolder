@@ -184,7 +184,8 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
                                 ColumnName = foreignKey.Columns[0],
                                 ReferencedColumnName = foreignKey.ReferencedColumns(schema).ToList()[0],
                                 DependencyRelationShip = RelationshipType.ForeignKey,
-                                RelationshipName = foreignKey.Name
+                                RelationshipName = foreignKey.Name,
+                                SchemaName = foreignKey.SchemaOwner
                             });
                 }
 
@@ -201,8 +202,9 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
                                         ColumnName = foreignKey.ReferencedColumns(schema).ToList()[0],
                                         ReferencedColumnName = foreignKey.Columns[0],
                                         DependencyRelationShip = RelationshipType.ForeignKeyChild,
-                                        RelationshipName = foreignKey.Name
-                                    });
+                                        RelationshipName = foreignKey.Name,
+                                        SchemaName = foreignKey.SchemaOwner
+                                });
                         }
                     }
                 }
