@@ -541,7 +541,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                         DomainDataType = DomainDataType.Int32,
                         IsRequired = true,
                         ColumnOrder = 1,
-                        Precision = 0,
+                        Precision = this.ReturnDefaultInt32Precision(),
                         Scale = 0,
                         Length = 0,
                         IsPrimaryKey = true
@@ -692,7 +692,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                         DomainDataType = DomainDataType.Int32,
                         IsRequired = false,
                         ColumnOrder = 11,
-                        Precision = 0,
+                        Precision = this.ReturnDefaultInt32Precision(),
                         Scale = 0,
                         Length = 0,
                         IsPrimaryKey = false
@@ -989,7 +989,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                 "There should be 1 Relationships in the Software table.");
 
             Relationship relationship =
-                softwareTable.Relationships.FirstOrDefault(r => r.ReferencedTableName == "Product");
+                softwareTable.Relationships.FirstOrDefault(r => r.ReferencedTableName.ToLower() == "product");
             Assert.IsNotNull(relationship, "The Product Relationship should not be null in the Product table.");
             Assert.AreEqual(
                 "ProductId",
@@ -1004,8 +1004,8 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                 relationship.ReferencedColumnName,
                 "The OrderDetails ReferencedColumnName should be ProductId in the Product table.");
             Assert.AreEqual(
-                "Product",
-                relationship.ReferencedTableName,
+                "product",
+                relationship.ReferencedTableName.ToLower(),
                 "The relationship table name should be Product");
 
             // Assert.AreEqual("FK_Software_Product", relationship.RelationshipName, "The relationship table name should be FK_Software_Product.");
