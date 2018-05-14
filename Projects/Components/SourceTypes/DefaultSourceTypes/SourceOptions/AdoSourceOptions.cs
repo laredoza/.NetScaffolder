@@ -36,6 +36,11 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.SourceOptio
         /// </summary>
         public string ProviderName { get; set; }
 
+        /// <summary>
+        /// Gets or sets the schema.
+        /// </summary>
+        public string Schema { get; set; }
+
         #endregion
     }
 }

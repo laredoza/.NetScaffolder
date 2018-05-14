@@ -5,6 +5,7 @@ namespace RepositoryEFDotnet.UnitTest
 {
     using System.Data.Common;
     using System.Data.Entity;
+    using System.Runtime.Remoting.Contexts;
 
     using Banking.Models.Context;
     using Banking.Models.Repository;
@@ -12,15 +13,16 @@ namespace RepositoryEFDotnet.UnitTest
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
-    public class RepositoryDbEF6OracleUnitTests : BaseRepositoryUnitTest
+    public class RepositoryDbEF6OracleUnitTests 
     {
         #region Init
 
-        [TestInitialize]
-        public override void SetupDb()
+        [TestMethod]
+        public virtual void BaseUnitOfWorkUnitTests_CreateDbTest()
         {
-            Context = new MySqlFullContext("RepoTestOracle");
-            Database.SetInitializer(new DropCreateDatabaseAlways<MySqlFullContext>());
+            var Context = new OracleFullContext("RepoTestOracle");
+            Database.SetInitializer(new DropCreateDatabaseAlways<OracleFullContext>());
+            Context.Database.Initialize(true);
         }
 
         #endregion

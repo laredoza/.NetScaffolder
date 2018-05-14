@@ -35,14 +35,20 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
 
             AdoSourceOptions adoOptions = options as AdoSourceOptions;
             var databaseReader = new DatabaseReader(adoOptions.ConnectionString, adoOptions.ProviderName);
-            databaseReader.Owner = "Test";
+
+            if (!string.IsNullOrEmpty(adoOptions.Schema))
+            {
+                // Todo: Handle multiple Schema's
+                databaseReader.Owner = adoOptions.Schema;
+            }
+
             var schema = databaseReader.ReadAll();
 
             // schema.Tables[0].CheckConstraints[0].RefersToConstraint
             Table newTable;
             Column newColumn;
 
-            foreach (var table in schema.Tables.Where(t => t.Name != "sysdiagrams" && t.Name != "__migrationhistory"))
+            foreach (var table in schema.Tables.Where(t => t.Name != "sysdiagrams" && t.Name != "__migrationhistory" && t.Name != "__MigrationHistory"))
             {
                 // foreach (var table in schema.Tables.Where(t => t.Name == "BankAccount"))
                 // Debug.WriteLine("Table " + table.Name);
@@ -105,8 +111,8 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
                                 new Relationship
                                 {
                                     ReferencedTableName = foreignKey.TableName,
-                                    ColumnName = foreignKey.Columns[0],
-                                    ReferencedColumnName = foreignKey.ReferencedColumns(schema).ToList()[0],
+                                    ColumnName = foreignKey.ReferencedColumns(schema).ToList()[0],
+                                    ReferencedColumnName = foreignKey.Columns[0],
                                     DependencyRelationShip = RelationshipType.ForeignKeyChild,
                                     RelationshipName = foreignKey.Name
                                 });
