@@ -119,6 +119,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>TiraggoEdmx_v3.tt</DependentUpon>
     </Compile>
+    <Compile Include="Multiplicity\MultiplicityCalculator.cs" />
     <Compile Include="Multiplicity\MultiplicityResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SourceOptions\AdoSourceOptions.cs" />
