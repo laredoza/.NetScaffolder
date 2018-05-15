@@ -12,48 +12,17 @@ namespace RepositoryEFDotnet.UnitTest
 {
     public abstract partial class BaseUnitOfWorkUnitTests<TUow>
     {
-        [TestMethod]
-        public virtual void BaseUnitOfWorkUnitTests_BankAccount_Get()
-        {
-            BaseUnitOfWorkUnitTests_BankAccount_Add();
-
-            var entity = Uow.Get<BankAccount>(o=> o.BankAccountId == 1);
-            Assert.IsNotNull(entity, "Could not find BankAccount");
-            Assert.AreEqual(1, entity.BankAccountId, "Incorrect BankAccount.BankAccountId found");
-        }
-
-        [TestMethod]
-        public virtual async Task BaseUnitOfWorkUnitTests_BankAccount_GetAsync()
-        {
-            await BaseUnitOfWorkUnitTests_BankAccount_AddAsync();
-
-            var entity = await Uow.GetAsync<BankAccount>(o => o.BankAccountId == 1);
-            Assert.IsNotNull(entity, "Could not find BankAccount");
-            Assert.AreEqual(1, entity.BankAccountId, "Incorrect BankAccount.BankAccountId found");
-        }
-
-        [TestMethod]
-        public virtual void BaseUnitOfWorkUnitTests_BankAccount_Get_NothingFound()
-        {
-            var entity = Uow.Get<BankAccount>(o => o.BankAccountId == 999);
-            Assert.IsNull(entity, "Incorrect BankAccount found");
-        }
-
-        [TestMethod]
-        public virtual void BaseUnitOfWorkUnitTests_BankAccount_FirstOrDefault_WithFilter()
-        {
-            BaseUnitOfWorkUnitTests_BankAccount_AddRange();
-
-            var entity = Uow.FirstOrDefault<BankAccount>(o => o.BankAccountId == 1);
-            Assert.AreEqual(1, entity.BankAccountId, "Incorrect BankAccount.BankAccountId found");
-            Assert.IsNotNull(entity, "Could not find BankAccount");
-        }
+        //[TestMethod]
+        //public virtual void BaseUnitOfWorkUnitTests_BankAccount_RunAll()
+        //{
+        //    BaseUnitOfWorkUnitTests_BankAccount_Add();
+        //    BaseUnitOfWorkUnitTests_BankAccount_Get();
+        //    BaseUnitOfWorkUnitTests_BankAccount_AddRange();
+        //}
 
         [TestMethod]
         public virtual void BaseUnitOfWorkUnitTests_BankAccount_FirstOrDefault_WithFilter_NothingFound()
         {
-            BaseUnitOfWorkUnitTests_BankAccount_AddRange();
-
             var entity = Uow.FirstOrDefault<BankAccount>(o => o.BankAccountId == 999);
             Assert.IsNull(entity, "Incorrect BankAccount found");
         }
@@ -61,8 +30,7 @@ namespace RepositoryEFDotnet.UnitTest
         [TestMethod]
         public virtual void BaseUnitOfWorkUnitTests_BankAccount_Max()
         {
-            BaseUnitOfWorkUnitTests_BankAccount_AddRange();
-
+            BankAccount_AddRange(3);
             var maxBalance = Uow.Max<BankAccount, decimal>(o=> o.Balance);
             Assert.AreEqual(103, maxBalance, "Incorrect max BankAccount.Balance");
         }
@@ -70,8 +38,7 @@ namespace RepositoryEFDotnet.UnitTest
         [TestMethod]
         public virtual async Task BaseUnitOfWorkUnitTests_BankAccount_MaxAsync()
         {
-            await BaseUnitOfWorkUnitTests_BankAccount_AddRangeAsync();
-
+            BankAccount_AddRange(3);
             var maxBalance = await Uow.MaxAsync<BankAccount, decimal>(o => o.Balance);
             Assert.AreEqual(103, maxBalance, "Incorrect max BankAccount.Balance");
         }
@@ -97,8 +64,7 @@ namespace RepositoryEFDotnet.UnitTest
         [TestMethod]
         public virtual void BaseUnitOfWorkUnitTests_BankAccount_Any_WithFilter()
         {
-            BaseUnitOfWorkUnitTests_BankAccount_AddRange();
-
+            BankAccount_AddRange(3, 1);
             bool hasAny = Uow.Any<BankAccount>(o=> o.Balance == 103);
             Assert.IsTrue(hasAny, "Could not find any BankAccount with balance 103");
         }
@@ -106,8 +72,6 @@ namespace RepositoryEFDotnet.UnitTest
         [TestMethod]
         public virtual void BaseUnitOfWorkUnitTests_BankAccount_Any_WithFilter_NothingFound()
         {
-            BaseUnitOfWorkUnitTests_BankAccount_AddRange();
-
             bool hasAny = Uow.Any<BankAccount>(o => o.Balance == 999);
             Assert.IsFalse(hasAny, "Incorrectly found BankAccount with balance 99");
         }
@@ -115,8 +79,7 @@ namespace RepositoryEFDotnet.UnitTest
         [TestMethod]
         public virtual void BaseUnitOfWorkUnitTests_BankAccount_AllMatching()
         {
-            BaseUnitOfWorkUnitTests_BankAccount_AddRange();
-
+            BankAccount_AddRange(3);
             var result = Uow.AllMatching<BankAccount>(o => o.Balance > 101);
             Check_EntityCount(2, result.Count(), "Incorrect number of BankAccounts found for filter");
         }
@@ -124,8 +87,7 @@ namespace RepositoryEFDotnet.UnitTest
         [TestMethod]
         public virtual async Task BaseUnitOfWorkUnitTests_BankAccount_AllMatchingAsync()
         {
-            BaseUnitOfWorkUnitTests_BankAccount_AddRange();
-
+            BankAccount_AddRange(3);
             var result = await Uow.AllMatchingAsync<BankAccount>(o => o.Balance > 101);
             Check_EntityCount(2, result.Count(), "Incorrect number of BankAccounts found for filter");
         }
@@ -133,8 +95,6 @@ namespace RepositoryEFDotnet.UnitTest
         [TestMethod]
         public virtual void BaseUnitOfWorkUnitTests_BankAccount_AllMatching_NothingFound()
         {
-            BaseUnitOfWorkUnitTests_BankAccount_AddRange();
-
             var result = Uow.AllMatching<BankAccount>(o => o.Balance > 999);
             Check_EntityCount(0, result.Count(), "Incorrect number of BankAccounts found for filter");
         }
@@ -142,8 +102,7 @@ namespace RepositoryEFDotnet.UnitTest
         [TestMethod]
         public virtual void BaseUnitOfWorkUnitTests_BankTransfers_FirstOrDefault_Includes()
         {
-            BaseUnitOfWorkUnitTests_BankAccount_AddRange();
-
+            BankAccount_AddRange(2);
             var bankTransfer = new BankTransfers();
             PopulateBankTransfers(bankTransfer);
             Uow.Add(bankTransfer);
@@ -162,28 +121,7 @@ namespace RepositoryEFDotnet.UnitTest
         [TestMethod]
         public virtual void BaseUnitOfWorkUnitTests_BankAccount_AddRange()
         {
-            var list = new List<BankAccount>();
-            var entity1 = new BankAccount();
-            var entity2 = new BankAccount();
-            var entity3 = new BankAccount();
-
-            PopulateBankAccount(entity1, false, 1);
-            PopulateBankAccount(entity2, false, 2);
-            PopulateBankAccount(entity3, false, 3);
-
-            list.Add(entity1);
-            list.Add(entity2);
-            list.Add(entity3);
-
-            Uow.AddRange(list);
-            Uow.SaveChanges();
-
-            var entities = Uow.GetAll<BankAccount>();
-            Check_EntityCount(3, entities.Count(), "Incorrect number of BankAccount found");
-
-            Check_BankAccount(entity1, entities.FirstOrDefault(o=> o.BankAccountId == 1));
-            Check_BankAccount(entity2, entities.FirstOrDefault(o => o.BankAccountId == 2));
-            Check_BankAccount(entity3, entities.FirstOrDefault(o => o.BankAccountId == 3));
+            BankAccount_AddRange(99, 2);
         }
 
         [TestMethod]
@@ -192,6 +130,7 @@ namespace RepositoryEFDotnet.UnitTest
             int itemCount = 100;
             int pageSize = 5;
             int pageCount = Math.Abs(itemCount / pageSize);
+
             BankAccount_AddRange(itemCount);
 
             for (int pageIndex = 1; pageIndex <= pageCount; pageIndex++)
@@ -206,21 +145,16 @@ namespace RepositoryEFDotnet.UnitTest
             }
         }
 
-        [TestMethod]
-        public virtual void BaseUnitOfWorkUnitTests_BankAccount_AddRange_100()
-        {
-            BankAccount_AddRange(100);
-        }
-
-        private void BankAccount_AddRange(int count)
+        private void BankAccount_AddRange(int count, int startSeed = 1)
         {
             var list = new List<BankAccount>();
 
             for (int index = 1; index <= count; index++)
             {
                 var entity = new BankAccount();
-                PopulateBankAccount(entity, false, index);
+                PopulateBankAccount(entity, false, startSeed);
                 list.Add(entity);
+                startSeed++;
             }
 
             Uow.AddRange(list);

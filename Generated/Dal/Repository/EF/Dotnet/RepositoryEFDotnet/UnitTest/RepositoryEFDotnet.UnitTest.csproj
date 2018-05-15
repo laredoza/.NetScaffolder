@@ -99,6 +99,9 @@
     <Compile Include="Tests\Repository\Database\RepositoryDbEF6MySqlUnitTests.cs" />
     <Compile Include="Tests\Repository\Database\RepositoryDbEF6OracleUnitTests.cs" />
     <Compile Include="Tests\Repository\Database\RepositoryDbEF6SqlServerUnitTests.cs" />
+    <Compile Include="Tests\UnitOfWork\Database\UowEF6DbMySqlUnitTests.cs" />
+    <Compile Include="Tests\UnitOfWork\Database\UowEF6DbOracleUnitTests.cs" />
+    <Compile Include="Tests\UnitOfWork\Database\UowEF6DbSqlServerUnitTests.cs" />
     <Compile Include="Tests\UnitOfWork\In-Memory\UowEF6InMemoryOracleUnitTests.cs" />
     <Compile Include="Tests\UnitOfWork\In-Memory\UowEF6InMemoryMySqlUnitTests.cs" />
     <Compile Include="Tests\UnitOfWork\In-Memory\UowEF6InMemorySqlServerUnitTests.cs" />

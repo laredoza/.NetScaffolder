@@ -13,8 +13,8 @@ namespace RepositoryEFDotnet.UnitTest
     {
         #region Init
 
-        [TestInitialize]
-        public override void SetupDb()
+        [ClassInitialize]
+        public static void ClassInit(TestContext context)
         {
             Context = new MySqlFullContext(Effort.DbConnectionFactory.CreateTransient());
         }

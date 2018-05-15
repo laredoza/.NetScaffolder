@@ -11,10 +11,22 @@ namespace RepositoryEFDotnet.UnitTest
     [TestClass]
     public class UowEF6InMemorySqlServerUnitTest : BaseUnitOfWorkUnitTests<SqlServerFullContext>
     {
+        [ClassInitialize]
+        public static void ClassInit(TestContext context)
+        {
+
+        }
+
         [TestInitialize]
-        public override void SetupUow()
+        public void TestInit()
         {
             Uow = new SqlServerFullContext(Effort.DbConnectionFactory.CreateTransient());
+        }
+
+        [TestCleanup]
+        public void TestCleanup()
+        {
+            Uow?.Dispose();
         }
     }
 }

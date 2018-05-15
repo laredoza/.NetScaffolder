@@ -32,13 +32,7 @@ namespace RepositoryEFDotnet.UnitTest
 	{
         #region Privates
 
-        protected IUnitOfWork Context = null;
-
-        #endregion
-
-        #region SetupDb
-
-        public abstract void SetupDb();
+        protected static IUnitOfWork Context = null;
 
         #endregion
 
@@ -251,8 +245,8 @@ namespace RepositoryEFDotnet.UnitTest
 		
         #region Cleanup
 
-        [TestCleanup]
-        public virtual void DisposeDb()
+        [ClassCleanup]
+        public virtual void ClassCleanup()
         {
             Context?.Dispose();
         }

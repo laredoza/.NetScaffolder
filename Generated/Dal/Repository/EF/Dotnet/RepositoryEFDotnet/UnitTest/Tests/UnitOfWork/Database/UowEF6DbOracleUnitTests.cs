@@ -9,24 +9,12 @@ using System.Data.Entity;
 namespace RepositoryEFDotnet.UnitTest
 {
     [TestClass]
-    public class UowEF6InMemoryOracleUnitTest : BaseUnitOfWorkUnitTests<OracleFullContext>
+    public class UowEF6DbOracleUnitTest : BaseUnitOfWorkUnitTests<OracleFullContext>
     {
         [ClassInitialize]
         public static void ClassInit(TestContext context)
         {
-
-        }
-
-        [TestInitialize]
-        public void TestInit()
-        {
-            Uow = new OracleFullContext(Effort.DbConnectionFactory.CreateTransient());
-        }
-
-        [TestCleanup]
-        public void TestCleanup()
-        {
-            Uow?.Dispose();
+            Uow = new OracleFullContext("RepoTestOracle");
         }
     }
 }

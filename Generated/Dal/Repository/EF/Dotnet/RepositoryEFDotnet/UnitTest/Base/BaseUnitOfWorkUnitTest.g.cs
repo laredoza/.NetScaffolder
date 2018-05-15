@@ -33,13 +33,7 @@ namespace RepositoryEFDotnet.UnitTest
 	{
         #region Fields
 
-        protected TUow Uow = null;
-
-        #endregion
-
-        #region Setup
-
-        public abstract void SetupUow();
+        protected static TUow Uow = null;
 
         #endregion
 
@@ -57,7 +51,7 @@ namespace RepositoryEFDotnet.UnitTest
         public virtual void BaseUnitOfWorkUnitTests_BankAccount_Add()
         {
             var entity = new BankAccount();
-            PopulateBankAccount(entity);
+            PopulateBankAccount(entity, false, 1);
 
             Uow.Add(entity);
             Uow.SaveChanges();
@@ -71,7 +65,7 @@ namespace RepositoryEFDotnet.UnitTest
         public virtual async Task BaseUnitOfWorkUnitTests_BankAccount_AddAsync()
         {
             var entity = new BankAccount();
-            PopulateBankAccount(entity);
+            PopulateBankAccount(entity, false, 1);
 
             await Uow.AddAsync(entity);
             await Uow.SaveChangesAsync();
@@ -84,15 +78,19 @@ namespace RepositoryEFDotnet.UnitTest
         [TestMethod]
         public virtual void BaseUnitOfWorkUnitTests_BankAccount_Modify()
         {
-            var entity = new BankAccount();
-            PopulateBankAccount(entity, true);
+            BankAccount_AddRange(1);
 
-            Uow.Modify(entity);
+            int id = 1;
+            var entityToUpdate = Uow.FirstOrDefault<BankAccount>(o => o.BankAccountId == id);
+			Assert.IsNotNull(entityToUpdate, $"BankAccount could not be found for BankAccountId = {id}");
+            PopulateBankAccount(entityToUpdate, true);
+
+            Uow.Modify(entityToUpdate);
             Uow.SaveChanges();
 
-            var entities = Uow.GetAll<BankAccount>();
+            var entities = Uow.AllMatching<BankAccount>(o => o.BankAccountId == id);
             Check_EntityCount(1, entities.Count(), "Incorrect number of BankAccount found");
-            Check_BankAccount(entity, entities.FirstOrDefault());
+            Check_BankAccount(entityToUpdate, entities.FirstOrDefault());
         }
 		
         [TestMethod]
@@ -248,12 +246,45 @@ namespace RepositoryEFDotnet.UnitTest
         }
 		
         [TestMethod]
+        public virtual void BaseUnitOfWorkUnitTests_BankAccount_FirstOrDefault_WithFilter()
+        {
+            BankAccount_AddRange(1);
+            var entity = Uow.FirstOrDefault<BankAccount>(o=> o.BankAccountId == 1);
+            Assert.IsNotNull(entity, "Could not find BankAccount");
+            Assert.AreEqual(1, entity.BankAccountId, "Incorrect BankAccount.BankAccountId found");
+        }
+		
+        [TestMethod]
         public virtual void BaseUnitOfWorkUnitTests_BankAccount_GetAll()
         {
-			BaseUnitOfWorkUnitTests_BankAccount_AddRange();
-
+            BankAccount_AddRange(3);
             var entities = Uow.GetAll<BankAccount>();
             Check_EntityCount(3, entities.Count(), "Incorrect number of BankAccount found");
+        }
+		
+        [TestMethod]
+        public virtual void BaseUnitOfWorkUnitTests_BankAccount_Get()
+        {
+            BankAccount_AddRange(1);
+            var entity = Uow.Get<BankAccount>(o=> o.BankAccountId == 1);
+            Assert.IsNotNull(entity, "Could not find BankAccount");
+            Assert.AreEqual(1, entity.BankAccountId, "Incorrect BankAccount.BankAccountId found");
+        }
+		
+        [TestMethod]
+        public virtual void BaseUnitOfWorkUnitTests_BankAccount_Get_NothingFound()
+        {
+            var entity = Uow.Get<BankAccount>(o=> o.BankAccountId == 999999);
+			Assert.IsNull(entity, "Incorrect BankAccount found");
+        }
+		
+        [TestMethod]
+        public virtual async Task BaseUnitOfWorkUnitTests_BankAccount_GetAsync()
+        {
+            BankAccount_AddRange(1);
+            var entity = await Uow.GetAsync<BankAccount>(o=> o.BankAccountId == 1);
+            Assert.IsNotNull(entity, "Could not find BankAccount");
+            Assert.AreEqual(1, entity.BankAccountId, "Incorrect BankAccount.BankAccountId found");
         }
 		
         [TestMethod]
@@ -276,8 +307,8 @@ namespace RepositoryEFDotnet.UnitTest
 		
         #region Cleanup
 
-        [TestCleanup]
-        public void DisposeContext()
+        [ClassCleanup]
+        public void ClassCleanup()
         {
             Uow?.Dispose();
         }

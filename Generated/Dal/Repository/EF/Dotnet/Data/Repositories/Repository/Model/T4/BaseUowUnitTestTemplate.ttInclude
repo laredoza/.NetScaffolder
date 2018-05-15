@@ -32,13 +32,7 @@ namespace RepositoryEFDotnet.UnitTest
 	{
         #region Fields
 
-        protected TUow Uow = null;
-
-        #endregion
-
-        #region Setup
-
-        public abstract void SetupUow();
+        protected static TUow Uow = null;
 
         #endregion
 
@@ -51,13 +45,15 @@ namespace RepositoryEFDotnet.UnitTest
             Uow.Database.Initialize(true);
         }
 		
-<#+ foreach(var mdl in Models.Where(o => o.TableName.Equals("BankAccount"))){ #>
+<#+ foreach(var mdl in Models.Where(o => o.TableName.Equals("BankAccount"))){ 
+		var pk = mdl.Columns.First(o => o.IsPrimaryKey);
+#>
 
         [TestMethod]
         public virtual void BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_Add()
         {
             var entity = new <#= mdl.TableName #>();
-            Populate<#= mdl.TableName #>(entity);
+            Populate<#= mdl.TableName #>(entity, false, 1);
 
             Uow.Add(entity);
             Uow.SaveChanges();
@@ -71,7 +67,7 @@ namespace RepositoryEFDotnet.UnitTest
         public virtual async Task BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_AddAsync()
         {
             var entity = new <#= mdl.TableName #>();
-            Populate<#= mdl.TableName #>(entity);
+            Populate<#= mdl.TableName #>(entity, false, 1);
 
             await Uow.AddAsync(entity);
             await Uow.SaveChangesAsync();
@@ -84,15 +80,17 @@ namespace RepositoryEFDotnet.UnitTest
         [TestMethod]
         public virtual void BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_Modify()
         {
-            var entity = new <#= mdl.TableName #>();
-            Populate<#= mdl.TableName #>(entity, true);
+			int id = 1;
+            var entityToUpdate = Uow.FirstOrDefault<<#= mdl.TableName #>>(o => o.<#= pk.ColumnName #> == id);
+			Assert.IsNotNull(entityToUpdate, $"<#= mdl.TableName #> could not be found for <#= pk.ColumnName #> = {id}");
+            Populate<#= mdl.TableName #>(entityToUpdate, true);
 
-            Uow.Modify(entity);
+            Uow.Modify(entityToUpdate);
             Uow.SaveChanges();
 
-            var entities = Uow.GetAll<<#= mdl.TableName #>>();
+            var entities = Uow.AllMatching<<#= mdl.TableName #>>(o => o.<#= pk.ColumnName #> == id);
             Check_EntityCount(1, entities.Count(), "Incorrect number of <#= mdl.TableName #> found");
-            Check_<#= mdl.TableName #>(entity, entities.FirstOrDefault());
+            Check_<#= mdl.TableName #>(entityToUpdate, entities.FirstOrDefault());
         }
 		
         [TestMethod]
@@ -248,12 +246,43 @@ namespace RepositoryEFDotnet.UnitTest
         }
 		
         [TestMethod]
+        public virtual void BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_FirstOrDefault_WithFilter()
+        {
+            var entity = Uow.FirstOrDefault<<#= mdl.TableName #>>(o=> o.<#= pk.ColumnName #> == 1);
+            Assert.IsNotNull(entity, "Could not find <#= mdl.TableName #>");
+            Assert.AreEqual(1, entity.<#= pk.ColumnName #>, "Incorrect <#= mdl.TableName #>.<#= pk.ColumnName #> found");
+        }
+		
+        [TestMethod]
         public virtual void BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_GetAll()
         {
 			BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_AddRange();
 
             var entities = Uow.GetAll<<#= mdl.TableName #>>();
             Check_EntityCount(3, entities.Count(), "Incorrect number of <#= mdl.TableName #> found");
+        }
+		
+        [TestMethod]
+        public virtual void BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_Get()
+        {
+            var entity = Uow.Get<<#= mdl.TableName #>>(o=> o.<#= pk.ColumnName #> == 1);
+            Assert.IsNotNull(entity, "Could not find <#= mdl.TableName #>");
+            Assert.AreEqual(1, entity.<#= pk.ColumnName #>, "Incorrect <#= mdl.TableName #>.<#= pk.ColumnName #> found");
+        }
+		
+        [TestMethod]
+        public virtual void BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_Get_NothingFound()
+        {
+            var entity = Uow.Get<<#= mdl.TableName #>>(o=> o.<#= pk.ColumnName #> == 999999);
+			Assert.IsNull(entity, "Incorrect <#= mdl.TableName #> found");
+        }
+		
+        [TestMethod]
+        public virtual async Task BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_GetAsync()
+        {
+            var entity = await Uow.GetAsync<<#= mdl.TableName #>>(o=> o.<#= pk.ColumnName #> == 1);
+            Assert.IsNotNull(entity, "Could not find <#= mdl.TableName #>");
+            Assert.AreEqual(1, entity.<#= pk.ColumnName #>, "Incorrect <#= mdl.TableName #>.<#= pk.ColumnName #> found");
         }
 		
         [TestMethod]
@@ -277,8 +306,8 @@ namespace RepositoryEFDotnet.UnitTest
 		
         #region Cleanup
 
-        [TestCleanup]
-        public void DisposeContext()
+        [ClassCleanup]
+        public void ClassCleanup()
         {
             Uow?.Dispose();
         }

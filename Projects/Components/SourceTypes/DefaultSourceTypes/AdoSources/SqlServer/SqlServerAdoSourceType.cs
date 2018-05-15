@@ -106,6 +106,8 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
                     return DomainDataType.Int16;
                 case "REAL":
                     return DomainDataType.Single;
+                case "UNIQUEIDENTIFIER":
+                    return DomainDataType.Guid;
                 //case "MONEY":
                 //    return DomainDataType.Decimal;
                 //case "NUMERIC":
