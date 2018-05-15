@@ -9,7 +9,7 @@ using System.Data.Entity;
 namespace RepositoryEFDotnet.UnitTest
 {
     [TestClass]
-    public class UowEF6OracleUnitTest : BaseUnitOfWorkUnitTests<OracleFullContext>
+    public class UowEF6InMemoryOracleUnitTest : BaseUnitOfWorkUnitTests<OracleFullContext>
     {
         [TestInitialize]
         public override void SetupUow()

@@ -21,7 +21,9 @@ using Banking.Models.Entity;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RepositoryEFDotnet.Library;
 using System.Data.Entity;
+using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace RepositoryEFDotnet.UnitTest
 {
@@ -49,10 +51,10 @@ namespace RepositoryEFDotnet.UnitTest
             Uow.Database.Initialize(true);
         }
 		
-<#+ foreach(var mdl in Models){ #>
+<#+ foreach(var mdl in Models.Where(o => o.TableName.Equals("BankAccount"))){ #>
 
         [TestMethod]
-        public virtual void BaseUnitOfWorkUnitTests_Add_<#= mdl.TableName #>()
+        public virtual void BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_Add()
         {
             var entity = new <#= mdl.TableName #>();
             Populate<#= mdl.TableName #>(entity);
@@ -61,8 +63,213 @@ namespace RepositoryEFDotnet.UnitTest
             Uow.SaveChanges();
 
             var entities = Uow.GetAll<<#= mdl.TableName #>>();
-            Check_EntityCount(1, entities.Count(), "<#= mdl.TableName #>");
+            Check_EntityCount(1, entities.Count(), "Incorrect number of <#= mdl.TableName #> found");
             Check_<#= mdl.TableName #>(entity, entities.FirstOrDefault());
+        }
+		
+        [TestMethod]
+        public virtual async Task BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_AddAsync()
+        {
+            var entity = new <#= mdl.TableName #>();
+            Populate<#= mdl.TableName #>(entity);
+
+            await Uow.AddAsync(entity);
+            await Uow.SaveChangesAsync();
+
+            var entities = await Uow.GetAllAsync<<#= mdl.TableName #>>();
+            Check_EntityCount(1, entities.Count(), "Incorrect number of <#= mdl.TableName #> found");
+            Check_<#= mdl.TableName #>(entity, entities.FirstOrDefault());
+        }
+		
+        [TestMethod]
+        public virtual void BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_Modify()
+        {
+            var entity = new <#= mdl.TableName #>();
+            Populate<#= mdl.TableName #>(entity, true);
+
+            Uow.Modify(entity);
+            Uow.SaveChanges();
+
+            var entities = Uow.GetAll<<#= mdl.TableName #>>();
+            Check_EntityCount(1, entities.Count(), "Incorrect number of <#= mdl.TableName #> found");
+            Check_<#= mdl.TableName #>(entity, entities.FirstOrDefault());
+        }
+		
+        [TestMethod]
+        public virtual async Task BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_ModifyAsync()
+        {
+            var entity = new <#= mdl.TableName #>();
+            Populate<#= mdl.TableName #>(entity, true);
+
+            await Uow.ModifyAsync(entity);
+            await Uow.SaveChangesAsync();
+
+            var entities = await Uow.GetAllAsync<<#= mdl.TableName #>>();
+            Check_EntityCount(1, entities.Count(), "Incorrect number of <#= mdl.TableName #> found");
+            Check_<#= mdl.TableName #>(entity, entities.FirstOrDefault());
+        }
+		
+        [TestMethod]
+        public virtual void BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_Remove()
+        {
+			BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_Add();
+			
+            var entity = Uow.FirstOrDefault<<#= mdl.TableName #>>();
+			
+			Assert.IsNotNull(entity, "<#= mdl.TableName #> not found to remove");
+			
+            Uow.Remove(entity);
+            Uow.SaveChanges();
+
+            var entities = Uow.GetAll<<#= mdl.TableName #>>();
+            Check_EntityCount(0, entities.Count(), "Incorrect number of <#= mdl.TableName #> found");
+        }
+		
+        [TestMethod]
+        public virtual async Task BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_RemoveAsync()
+        {
+			await BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_AddAsync();
+			
+            var entity = Uow.FirstOrDefault<<#= mdl.TableName #>>();
+			
+			Assert.IsNotNull(entity, "<#= mdl.TableName #> not found to remove");
+			
+            await Uow.RemoveAsync(entity);
+            await Uow.SaveChangesAsync();
+
+            var entities = await Uow.GetAllAsync<<#= mdl.TableName #>>();
+            Check_EntityCount(0, entities.Count(), "Incorrect number of <#= mdl.TableName #> found");
+        }
+		
+        [TestMethod]
+        public virtual void BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_RemoveRange()
+        {
+			BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_AddRange();
+			
+            var entitiesToRemove = Uow.GetAll<<#= mdl.TableName #>>();
+			
+            Uow.RemoveRange(entitiesToRemove);
+            Uow.SaveChanges();
+
+            var removedEntities = Uow.GetAll<<#= mdl.TableName #>>();
+            Check_EntityCount(0, removedEntities.Count(), "Incorrect number of <#= mdl.TableName #> found");
+        }
+		
+        [TestMethod]
+        public virtual async Task BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_RemoveRangeAsync()
+        {
+			await BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_AddRangeAsync();
+			
+            var entitiesToRemove = await Uow.GetAllAsync<<#= mdl.TableName #>>();
+			
+            await Uow.RemoveRangeAsync(entitiesToRemove);
+            await Uow.SaveChangesAsync();
+
+            var removedEntities = await Uow.GetAllAsync<<#= mdl.TableName #>>();
+            Check_EntityCount(0, removedEntities.Count(), "Incorrect number of <#= mdl.TableName #> found");
+        }
+		
+        [TestMethod]
+        public virtual void BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_Rollback()
+        {		
+            var entity = new <#= mdl.TableName #>();
+            Populate<#= mdl.TableName #>(entity);
+
+            Uow.Add(entity);
+            Uow.Rollback();
+			Uow.SaveChanges(); // Do a commit here to make sure rollback did what it was suppose to
+
+            var entities = Uow.GetAll<<#= mdl.TableName #>>();
+            Check_EntityCount(0, entities.Count(), "Incorrect number of <#= mdl.TableName #> found");
+        }
+		
+        [TestMethod]
+        public virtual async Task BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_RollbackAsync()
+        {		
+            var entity = new <#= mdl.TableName #>();
+            Populate<#= mdl.TableName #>(entity);
+
+            await Uow.AddAsync(entity);
+            await Uow.RollbackAsync();
+			await Uow.SaveChangesAsync(); // Do a commit here to make sure rollback did what it was suppose to
+
+            var entities = await Uow.GetAllAsync<<#= mdl.TableName #>>();
+            Check_EntityCount(0, entities.Count(), "Incorrect number of <#= mdl.TableName #> found");
+        }
+		
+        [TestMethod]
+        public virtual void BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_Any()
+        {
+			BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_Add();
+
+            bool hasAny = Uow.Any<<#= mdl.TableName #>>();
+            Assert.IsTrue(hasAny, "Could not find any <#= mdl.TableName #>");
+        }
+		
+        [TestMethod]
+        public virtual async Task BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_AnyAsync()
+        {
+			await BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_AddAsync();
+
+            bool hasAny = await Uow.AnyAsync<<#= mdl.TableName #>>();
+            Assert.IsTrue(hasAny, "Could not find any <#= mdl.TableName #>");
+        }
+
+        [TestMethod]
+        public virtual void BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_Any_NothingFound()
+        {
+            bool hasAny = Uow.Any<<#= mdl.TableName #>>();
+            Assert.IsFalse(hasAny, "Incorrectly found <#= mdl.TableName #>");
+        }
+		
+        [TestMethod]
+        public virtual void BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_FirstOrDefault()
+        {
+			BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_Add();
+
+            var entity = Uow.FirstOrDefault<<#= mdl.TableName #>>();
+            Assert.IsNotNull(entity, "Could not find <#= mdl.TableName #>");
+        }
+		
+        [TestMethod]
+        public virtual async Task BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_FirstOrDefaultAsync()
+        {
+			await BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_AddAsync();
+
+            var entity = await Uow.FirstOrDefaultAsync<<#= mdl.TableName #>>();
+            Assert.IsNotNull(entity, "Could not find <#= mdl.TableName #>");
+        }
+		
+        [TestMethod]
+        public virtual void BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_FirstOrDefault_NothingFound()
+        {
+            var entity = Uow.FirstOrDefault<<#= mdl.TableName #>>();
+            Assert.IsNull(entity, "Incorrectly found <#= mdl.TableName #>");
+        }
+		
+        [TestMethod]
+        public virtual void BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_GetAll()
+        {
+			BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_AddRange();
+
+            var entities = Uow.GetAll<<#= mdl.TableName #>>();
+            Check_EntityCount(3, entities.Count(), "Incorrect number of <#= mdl.TableName #> found");
+        }
+		
+        [TestMethod]
+        public virtual async Task BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_GetAllAsync()
+        {
+			await BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_AddRangeAsync();
+
+            var entities = await Uow.GetAllAsync<<#= mdl.TableName #>>();
+            Check_EntityCount(3, entities.Count(), "Incorrect number of <#= mdl.TableName #> found");
+        }
+		
+        [TestMethod]
+        public virtual void BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_GetAll_NothingFound()
+        {
+            var entities = Uow.GetAll<<#= mdl.TableName #>>();
+            Check_EntityCount(0, entities.Count(), "Incorrect number of <#= mdl.TableName #> found");
         }
 <#+ } #>
 

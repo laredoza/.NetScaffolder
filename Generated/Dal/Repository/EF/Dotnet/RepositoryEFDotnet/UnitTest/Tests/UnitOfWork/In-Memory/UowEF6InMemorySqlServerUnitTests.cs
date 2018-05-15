@@ -9,7 +9,7 @@ namespace RepositoryEFDotnet.UnitTest
     using Banking.Models.Customers;
 
     [TestClass]
-    public class UowEF6SqlServerUnitTest : BaseUnitOfWorkUnitTests<SqlServerFullContext>
+    public class UowEF6InMemorySqlServerUnitTest : BaseUnitOfWorkUnitTests<SqlServerFullContext>
     {
         [TestInitialize]
         public override void SetupUow()

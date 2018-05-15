@@ -45,66 +45,74 @@ namespace RepositoryEFDotnet.UnitTest
         #region Tests
 		
 
+		[TestMethod]
         public void BankAccount_Add()
         {
             var repo = new BankAccountRepository(Context);
-            BaseRepositoryUnitTest_Add_BankAccount(repo);
+            BaseRepositoryUnitTest_BankAccount_Add(repo);
         }
 
+		[TestMethod]
         public void BankTransfers_Add()
         {
             var repo = new BankTransfersRepository(Context);
-            BaseRepositoryUnitTest_Add_BankTransfers(repo);
+            BaseRepositoryUnitTest_BankTransfers_Add(repo);
         }
 
+		[TestMethod]
         public void Book_Add()
         {
             var repo = new BookRepository(Context);
-            BaseRepositoryUnitTest_Add_Book(repo);
+            BaseRepositoryUnitTest_Book_Add(repo);
         }
 
+		[TestMethod]
         public void Country_Add()
         {
             var repo = new CountryRepository(Context);
-            BaseRepositoryUnitTest_Add_Country(repo);
+            BaseRepositoryUnitTest_Country_Add(repo);
         }
 
+		[TestMethod]
         public void Customer_Add()
         {
             var repo = new CustomerRepository(Context);
-            BaseRepositoryUnitTest_Add_Customer(repo);
+            BaseRepositoryUnitTest_Customer_Add(repo);
         }
 
+		[TestMethod]
         public void Order_Add()
         {
             var repo = new OrderRepository(Context);
-            BaseRepositoryUnitTest_Add_Order(repo);
+            BaseRepositoryUnitTest_Order_Add(repo);
         }
 
+		[TestMethod]
         public void OrderDetails_Add()
         {
             var repo = new OrderDetailsRepository(Context);
-            BaseRepositoryUnitTest_Add_OrderDetails(repo);
+            BaseRepositoryUnitTest_OrderDetails_Add(repo);
         }
 
+		[TestMethod]
         public void Product_Add()
         {
             var repo = new ProductRepository(Context);
-            BaseRepositoryUnitTest_Add_Product(repo);
+            BaseRepositoryUnitTest_Product_Add(repo);
         }
 
+		[TestMethod]
         public void Software_Add()
         {
             var repo = new SoftwareRepository(Context);
-            BaseRepositoryUnitTest_Add_Software(repo);
+            BaseRepositoryUnitTest_Software_Add(repo);
         }
 
 		#endregion
 		
 		#region Base Tests
 
-        [TestMethod]
-        public virtual void BaseRepositoryUnitTest_Add_BankAccount(IBankAccountRepository repository)
+        public virtual void BaseRepositoryUnitTest_BankAccount_Add(IBankAccountRepository repository)
         {
             var dto = new BankAccountDto();
             PopulateBankAccount(dto);
@@ -119,8 +127,7 @@ namespace RepositoryEFDotnet.UnitTest
             Check_BankAccount(dto, result.FirstOrDefault());
         }
 
-        [TestMethod]
-        public virtual void BaseRepositoryUnitTest_Add_BankTransfers(IBankTransfersRepository repository)
+        public virtual void BaseRepositoryUnitTest_BankTransfers_Add(IBankTransfersRepository repository)
         {
             var dto = new BankTransfersDto();
             PopulateBankTransfers(dto);
@@ -135,8 +142,7 @@ namespace RepositoryEFDotnet.UnitTest
             Check_BankTransfers(dto, result.FirstOrDefault());
         }
 
-        [TestMethod]
-        public virtual void BaseRepositoryUnitTest_Add_Book(IBookRepository repository)
+        public virtual void BaseRepositoryUnitTest_Book_Add(IBookRepository repository)
         {
             var dto = new BookDto();
             PopulateBook(dto);
@@ -151,8 +157,7 @@ namespace RepositoryEFDotnet.UnitTest
             Check_Book(dto, result.FirstOrDefault());
         }
 
-        [TestMethod]
-        public virtual void BaseRepositoryUnitTest_Add_Country(ICountryRepository repository)
+        public virtual void BaseRepositoryUnitTest_Country_Add(ICountryRepository repository)
         {
             var dto = new CountryDto();
             PopulateCountry(dto);
@@ -167,8 +172,7 @@ namespace RepositoryEFDotnet.UnitTest
             Check_Country(dto, result.FirstOrDefault());
         }
 
-        [TestMethod]
-        public virtual void BaseRepositoryUnitTest_Add_Customer(ICustomerRepository repository)
+        public virtual void BaseRepositoryUnitTest_Customer_Add(ICustomerRepository repository)
         {
             var dto = new CustomerDto();
             PopulateCustomer(dto);
@@ -183,8 +187,7 @@ namespace RepositoryEFDotnet.UnitTest
             Check_Customer(dto, result.FirstOrDefault());
         }
 
-        [TestMethod]
-        public virtual void BaseRepositoryUnitTest_Add_Order(IOrderRepository repository)
+        public virtual void BaseRepositoryUnitTest_Order_Add(IOrderRepository repository)
         {
             var dto = new OrderDto();
             PopulateOrder(dto);
@@ -199,8 +202,7 @@ namespace RepositoryEFDotnet.UnitTest
             Check_Order(dto, result.FirstOrDefault());
         }
 
-        [TestMethod]
-        public virtual void BaseRepositoryUnitTest_Add_OrderDetails(IOrderDetailsRepository repository)
+        public virtual void BaseRepositoryUnitTest_OrderDetails_Add(IOrderDetailsRepository repository)
         {
             var dto = new OrderDetailsDto();
             PopulateOrderDetails(dto);
@@ -215,8 +217,7 @@ namespace RepositoryEFDotnet.UnitTest
             Check_OrderDetails(dto, result.FirstOrDefault());
         }
 
-        [TestMethod]
-        public virtual void BaseRepositoryUnitTest_Add_Product(IProductRepository repository)
+        public virtual void BaseRepositoryUnitTest_Product_Add(IProductRepository repository)
         {
             var dto = new ProductDto();
             PopulateProduct(dto);
@@ -231,8 +232,7 @@ namespace RepositoryEFDotnet.UnitTest
             Check_Product(dto, result.FirstOrDefault());
         }
 
-        [TestMethod]
-        public virtual void BaseRepositoryUnitTest_Add_Software(ISoftwareRepository repository)
+        public virtual void BaseRepositoryUnitTest_Software_Add(ISoftwareRepository repository)
         {
             var dto = new SoftwareDto();
             PopulateSoftware(dto);
