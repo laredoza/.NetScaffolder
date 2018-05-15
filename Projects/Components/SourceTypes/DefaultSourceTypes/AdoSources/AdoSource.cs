@@ -14,7 +14,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
 
     using DatabaseSchemaReader;
     using DatabaseSchemaReader.DataSchema;
-
+    using DotNetScaffolder.Components.Common;
     using DotNetScaffolder.Components.Common.Contract;
     using DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.Multiplicity;
     using DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.SourceOptions;
@@ -142,7 +142,8 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
                 foreignColumn.IsPrimaryKey,
                 column.IsForeignKey,
                 column.Nullable,
-                foreignColumn.Nullable);
+                foreignColumn.Nullable,
+                foreignColumn.IsForeignKey);
         }
 
         /// <summary>
@@ -237,8 +238,8 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
                                 RelationshipName = foreignKey.Name,
                                 SchemaName = foreignKey.SchemaOwner,
                                 Multiplicity = multiplicityResult.Multiplicity,
-                                ReferencedMultiplicity = multiplicityResult.ReferencedMultiplicity 
-                            });
+                                ReferencedMultiplicity = multiplicityResult.ReferencedMultiplicity
+                        });
                 }
 
                 foreach (var foreignKeyChildren in table.ForeignKeyChildren)
@@ -268,12 +269,41 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
                                 });
                         }
                     }
+
+                    foreach (var rel in newTable.Relationships)
+                    {
+                        string alias = string.Empty;
+
+                        if (rel.DependencyRelationShip == RelationshipType.ForeignKey)
+                        {
+                            alias = rel.ReferencedTableName + "Parent";
+                        }
+                        else
+                        {
+                            alias = rel.ReferencedTableName + "Children";
+                        }
+
+                        alias = RelationshipNameFormatting.FormatName(rel.ReferencedTableName, alias, "", null, newTable.Relationships, false);
+                        if(!string.Equals(rel.ReferencedTableName, alias))
+                        {
+                            rel.RelationshipAlias = alias;
+                        }
+                    }
                 }
             }
 
             this.Fix(result);
             Logger.Trace("Completed Import()");
             return result;
+        }
+
+        private string CreateChildAlias(string parentTable, string childTable)
+        {
+            if(string.Equals(parentTable, childTable))
+            {
+                return childTable + "Childrent";
+            }
+            return string.Empty;
         }
 
         /// <summary>

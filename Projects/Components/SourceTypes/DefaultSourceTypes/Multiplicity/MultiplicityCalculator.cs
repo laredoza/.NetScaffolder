@@ -17,7 +17,8 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes
             bool relatedColumnIsPrimaryKey,
             bool columnIsForeignKey,
             bool columnIsNullable,
-            bool foreignColumnIsNullable)
+            bool foreignColumnIsNullable,
+            bool relatedColumnIsForeignKey)
         {
             MultiplicityResult result = new MultiplicityResult();
 
@@ -71,7 +72,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes
                         throw new Exception();
                     }
                 }
-                else if (columnIsPrimaryKey && !columnIsForeignKey)
+                else if (columnIsPrimaryKey && relatedColumnIsForeignKey)
                 {
                     result.ReferencedMultiplicity = RelationshipMultiplicity.Many;
 

@@ -20,13 +20,20 @@ namespace DotNetScaffolder.Components.Common
             return FormatName(rel.ReferencedTableName, rel.RelationshipAlias, rel.ColumnName, nc, relationships);
         }
 
-        public static string FormatName(string tableName, string alias, string colName, INamingConvention nc = null, IEnumerable<Relationship> relationships = null)
+        public static string FormatName(string tableName, string alias, string colName, INamingConvention nc = null, IEnumerable<Relationship> relationships = null, bool alwaysUseAlias = true)
         {
-            string formattedName = string.IsNullOrEmpty(alias) ? tableName : alias;
+            string formattedName = tableName;
 
             if (relationships != null && relationships.Count(o => o.ReferencedTableName == formattedName) > 1)
             {
-                formattedName = $"{formattedName}_{colName}";
+                formattedName = string.IsNullOrEmpty(alias) ? tableName + "_" + colName : alias;
+            }
+            else
+            {
+                if (alwaysUseAlias)
+                {
+                    formattedName = string.IsNullOrEmpty(alias) ? tableName + "_" + colName : alias;
+                }
             }
 
             return nc != null ? nc.ApplyNamingConvention(formattedName) : formattedName;

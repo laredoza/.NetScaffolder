@@ -173,6 +173,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Model
             result.ReferencedTableName = this.ReferencedTableName;
             result.Multiplicity = this.Multiplicity;
             result.ReferencedMultiplicity = this.ReferencedMultiplicity;
+            result.RelationshipAlias = this.RelationshipAlias;
 
             if (this.RelatedTable != null)
             {
