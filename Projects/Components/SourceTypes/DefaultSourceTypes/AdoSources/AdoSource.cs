@@ -8,6 +8,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
 {
     #region Usings
 
+    using System;
     using System.Collections.Generic;
     using System.Linq;
 
@@ -15,6 +16,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
     using DatabaseSchemaReader.DataSchema;
 
     using DotNetScaffolder.Components.Common.Contract;
+    using DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.Multiplicity;
     using DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.SourceOptions;
     using DotNetScaffolder.Core.Common.Serializer;
     using DotNetScaffolder.Mapping.MetaData.Enum;
@@ -107,6 +109,111 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
         }
 
         /// <summary>
+        /// The return multiplicity.
+        /// </summary>
+        /// <param name="table">
+        /// The table.
+        /// </param>
+        /// <param name="columnName">
+        /// The column name.
+        /// </param>
+        /// <param name="referencedTable">
+        /// The referenced table.
+        /// </param>
+        /// <param name="referencedColumnName">
+        /// The referenced column name.
+        /// </param>
+        /// <param name="relationshipType">
+        /// The relationship type.
+        /// </param>
+        /// <returns>
+        /// The <see cref="MultiplicityResult"/>.
+        /// </returns>
+        /// <exception cref="Exception">
+        /// </exception>
+        public MultiplicityResult ReturnMultiplicity(DatabaseTable table, string columnName, DatabaseTable referencedTable, string referencedColumnName, RelationshipType relationshipType)
+        {
+            MultiplicityResult result = new MultiplicityResult();
+            
+            DatabaseColumn column = table.Columns.FirstOrDefault(c => c.Name == columnName);
+            DatabaseColumn foreignColumn = referencedTable.Columns.FirstOrDefault(c => c.Name == referencedColumnName);
+
+
+            if (relationshipType == RelationshipType.ForeignKey)
+            {
+                if (column.IsPrimaryKey && foreignColumn.IsPrimaryKey)
+                {
+                    // Extending Tables. i.e)  Book --> Product
+                    if (column.IsPrimaryKey && column.IsForeignKey)
+                    {
+                        result.Multiplicity = RelationshipMultiplicity.ZeroToOne;
+                        result.ReferencedMultiplicity = RelationshipMultiplicity.One;
+                    }
+                    else
+                    {
+                        throw new Exception();
+                    }
+                }
+                else if (!column.IsPrimaryKey && column.IsForeignKey)
+                {
+                    result.Multiplicity = RelationshipMultiplicity.Many;
+
+                    if (column.Nullable)
+                    {
+                        // Zero to Many: 
+                        result.ReferencedMultiplicity = RelationshipMultiplicity.ZeroToOne;
+                    }
+                    else
+                    {
+                        // 1 to Many
+                        result.ReferencedMultiplicity = RelationshipMultiplicity.One;
+                    }
+                }
+                else
+                {
+                    throw new Exception();
+                }
+            }
+            else if (relationshipType == RelationshipType.ForeignKeyChild)
+            {
+                if (column.IsPrimaryKey && foreignColumn.IsPrimaryKey)
+                {
+                    // Todo: Extending Tables. i.e)  Product --> Book 
+                    if (column.IsPrimaryKey && !column.IsForeignKey)
+                    {
+                        result.Multiplicity = RelationshipMultiplicity.One;
+                        result.ReferencedMultiplicity = RelationshipMultiplicity.ZeroToOne;
+                    }
+                    else
+                    {
+                        throw new Exception();
+                    }
+                }
+                else if (column.IsPrimaryKey && !column.IsForeignKey)
+                {
+                    result.ReferencedMultiplicity = RelationshipMultiplicity.Many;
+
+                    if (foreignColumn.Nullable)
+                    {
+                        // Zero to Many: 
+                        result.Multiplicity = RelationshipMultiplicity.ZeroToOne;
+                    }
+                    else
+                    {
+                        // 1 to Many
+                        result.Multiplicity = RelationshipMultiplicity.One;
+                    }
+                }
+                else
+                {
+                    throw new Exception();
+                }
+            }
+                       
+            return result;
+        }
+
+        /// <summary>
         /// The import.
         /// </summary>
         /// <param name="options">
@@ -175,17 +282,30 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
                     newTable.Columns.Add(newColumn);
                 }
 
+                string referencedForeignColumnName = string.Empty;
+                MultiplicityResult multiplicityResult;
+                
                 foreach (var foreignKey in table.ForeignKeys)
                 {
+                    referencedForeignColumnName = foreignKey.ReferencedColumns(schema).ToList()[0];
+                    multiplicityResult = this.ReturnMultiplicity(
+                        table,
+                        foreignKey.Columns[0],
+                        foreignKey.ReferencedTable(schema),
+                        referencedForeignColumnName,
+                        RelationshipType.ForeignKey);
+
                     newTable.Relationships.Add(
                         new Relationship
                             {
                                 ReferencedTableName = foreignKey.RefersToTable,
                                 ColumnName = foreignKey.Columns[0],
-                                ReferencedColumnName = foreignKey.ReferencedColumns(schema).ToList()[0],
+                                ReferencedColumnName = referencedForeignColumnName,
                                 DependencyRelationShip = RelationshipType.ForeignKey,
                                 RelationshipName = foreignKey.Name,
-                                SchemaName = foreignKey.SchemaOwner
+                                SchemaName = foreignKey.SchemaOwner,
+                                Multiplicity = multiplicityResult.Multiplicity,
+                                ReferencedMultiplicity = multiplicityResult.ReferencedMultiplicity 
                             });
                 }
 
@@ -195,6 +315,13 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
                     {
                         if (foreignKey.RefersToTable == table.Name)
                         {
+                            multiplicityResult = this.ReturnMultiplicity(
+                                table,
+                                foreignKey.ReferencedColumns(schema).ToList()[0],
+                                table.ForeignKeyChildren.FirstOrDefault(t => t.Name == foreignKey.TableName),
+                                foreignKey.Columns[0],
+                                RelationshipType.ForeignKeyChild);
+
                             newTable.Relationships.Add(
                                 new Relationship
                                     {
@@ -203,7 +330,9 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
                                         ReferencedColumnName = foreignKey.Columns[0],
                                         DependencyRelationShip = RelationshipType.ForeignKeyChild,
                                         RelationshipName = foreignKey.Name,
-                                        SchemaName = foreignKey.SchemaOwner
+                                        SchemaName = foreignKey.SchemaOwner,
+                                        Multiplicity = multiplicityResult.Multiplicity,
+                                        ReferencedMultiplicity = multiplicityResult.ReferencedMultiplicity
                                 });
                         }
                     }
