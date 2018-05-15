@@ -1,16 +1,53 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="MultiplicityCalculator.cs" company="DotnetScaffolder">
+//   MIT
+// </copyright>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes
 {
+    #region Usings
+
+    using System;
+
     using DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.Multiplicity;
     using DotNetScaffolder.Mapping.MetaData.Enum;
 
+    #endregion
+
+    /// <summary>
+    /// The multiplicity calculator.
+    /// </summary>
     public static class MultiplicityCalculator
     {
+        #region Public Methods And Operators
+
+        /// <summary>
+        /// The calculate.
+        /// </summary>
+        /// <param name="relationshipType">
+        /// The relationship type.
+        /// </param>
+        /// <param name="columnIsPrimaryKey">
+        /// The column is primary key.
+        /// </param>
+        /// <param name="relatedColumnIsPrimaryKey">
+        /// The related column is primary key.
+        /// </param>
+        /// <param name="columnIsForeignKey">
+        /// The column is foreign key.
+        /// </param>
+        /// <param name="columnIsNullable">
+        /// The column is nullable.
+        /// </param>
+        /// <param name="foreignColumnIsNullable">
+        /// The foreign column is nullable.
+        /// </param>
+        /// <returns>
+        /// The <see cref="MultiplicityResult"/>.
+        /// </returns>
+        /// <exception cref="Exception">
+        /// </exception>
         public static MultiplicityResult Calculate(
             RelationshipType relationshipType,
             bool columnIsPrimaryKey,
@@ -94,5 +131,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes
 
             return result;
         }
+
+        #endregion
     }
 }
