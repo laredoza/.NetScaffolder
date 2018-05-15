@@ -10,30 +10,24 @@ namespace DotNetScaffolder.Components.Common
 {
     public static class RelationshipNameFormatting
     {
-        public static string FormatReferencedPropertyName(Relationship rel, INamingConvention nc = null, IEnumerable<Relationship> relationships = null)
+        public static string FormatName(string tableName, string alias, INamingConvention nc = null, IEnumerable<string> names = null)
         {
-            return FormatName(rel.ReferencedTableName, rel.RelationshipAlias, rel.ReferencedColumnName, nc, relationships);
-        }
+            string formattedName = string.IsNullOrEmpty(alias) ? tableName : alias;
 
-        public static string FormatParentPropertyName(Relationship rel, INamingConvention nc = null, IEnumerable<Relationship> relationships = null)
-        {
-            return FormatName(rel.ReferencedTableName, rel.RelationshipAlias, rel.ColumnName, nc, relationships);
-        }
-
-        public static string FormatName(string tableName, string alias, string colName, INamingConvention nc = null, IEnumerable<Relationship> relationships = null, bool alwaysUseAlias = true)
-        {
-            string formattedName = tableName;
-
-            if (relationships != null && relationships.Count(o => o.ReferencedTableName == formattedName) > 1)
+            if (names != null)
             {
-                formattedName = string.IsNullOrEmpty(alias) ? tableName + "_" + colName : alias;
-            }
-            else
-            {
-                if (alwaysUseAlias)
+                int index = 1;
+                int checkCount = 1;
+                string updatedName = formattedName;
+
+                while (names.Count(o => o == updatedName) > checkCount)
                 {
-                    formattedName = string.IsNullOrEmpty(alias) ? tableName + "_" + colName : alias;
+                    updatedName = $"{formattedName}{index}";
+                    index++;
+                    checkCount = 0;
                 }
+
+                formattedName = updatedName;
             }
 
             return nc != null ? nc.ApplyNamingConvention(formattedName) : formattedName;

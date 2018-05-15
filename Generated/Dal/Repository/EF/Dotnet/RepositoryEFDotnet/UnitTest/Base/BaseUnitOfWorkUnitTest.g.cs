@@ -78,9 +78,7 @@ namespace RepositoryEFDotnet.UnitTest
         [TestMethod]
         public virtual void BaseUnitOfWorkUnitTests_BankAccount_Modify()
         {
-            BankAccount_AddRange(1);
-
-            int id = 1;
+			int id = 1;
             var entityToUpdate = Uow.FirstOrDefault<BankAccount>(o => o.BankAccountId == id);
 			Assert.IsNotNull(entityToUpdate, $"BankAccount could not be found for BankAccountId = {id}");
             PopulateBankAccount(entityToUpdate, true);
@@ -248,7 +246,6 @@ namespace RepositoryEFDotnet.UnitTest
         [TestMethod]
         public virtual void BaseUnitOfWorkUnitTests_BankAccount_FirstOrDefault_WithFilter()
         {
-            BankAccount_AddRange(1);
             var entity = Uow.FirstOrDefault<BankAccount>(o=> o.BankAccountId == 1);
             Assert.IsNotNull(entity, "Could not find BankAccount");
             Assert.AreEqual(1, entity.BankAccountId, "Incorrect BankAccount.BankAccountId found");
@@ -257,7 +254,8 @@ namespace RepositoryEFDotnet.UnitTest
         [TestMethod]
         public virtual void BaseUnitOfWorkUnitTests_BankAccount_GetAll()
         {
-            BankAccount_AddRange(3);
+			BaseUnitOfWorkUnitTests_BankAccount_AddRange();
+
             var entities = Uow.GetAll<BankAccount>();
             Check_EntityCount(3, entities.Count(), "Incorrect number of BankAccount found");
         }
@@ -265,7 +263,6 @@ namespace RepositoryEFDotnet.UnitTest
         [TestMethod]
         public virtual void BaseUnitOfWorkUnitTests_BankAccount_Get()
         {
-            BankAccount_AddRange(1);
             var entity = Uow.Get<BankAccount>(o=> o.BankAccountId == 1);
             Assert.IsNotNull(entity, "Could not find BankAccount");
             Assert.AreEqual(1, entity.BankAccountId, "Incorrect BankAccount.BankAccountId found");
@@ -281,7 +278,6 @@ namespace RepositoryEFDotnet.UnitTest
         [TestMethod]
         public virtual async Task BaseUnitOfWorkUnitTests_BankAccount_GetAsync()
         {
-            BankAccount_AddRange(1);
             var entity = await Uow.GetAsync<BankAccount>(o=> o.BankAccountId == 1);
             Assert.IsNotNull(entity, "Could not find BankAccount");
             Assert.AreEqual(1, entity.BankAccountId, "Incorrect BankAccount.BankAccountId found");

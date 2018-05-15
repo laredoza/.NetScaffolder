@@ -35,10 +35,10 @@ namespace <#= DataType.FullNamespace #>
 		#region Child Relationships
 		
 <#+ foreach(var child in DataType.MetaData.DistinctChildRelationships.Where(o => o.ReferencedMultiplicity == RelationshipMultiplicity.Many)){ #>
-		<#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #>> <#= RelationshipNameFormatting.FormatReferencedPropertyName(child, DataType.NamingConvention, DataType.MetaData.DistinctChildRelationships) #> { get; set; }
+		<#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #>> <#= RelationshipNameFormatting.FormatName(child.ReferencedTableName, child.RelationshipAlias, DataType.NamingConvention) #> { get; set; }
 <#+ } #>
 <#+ foreach(var child in DataType.MetaData.DistinctChildRelationships.Where(o => o.ReferencedMultiplicity != RelationshipMultiplicity.Many)){ #>
-		I<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #> <#= RelationshipNameFormatting.FormatReferencedPropertyName(child, DataType.NamingConvention, DataType.MetaData.DistinctChildRelationships) #> { get; set; }
+		I<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #> <#= RelationshipNameFormatting.FormatName(child.ReferencedTableName, child.RelationshipAlias, DataType.NamingConvention) #> { get; set; }
 <#+ } #>
 
 		#endregion
@@ -46,7 +46,7 @@ namespace <#= DataType.FullNamespace #>
 		#region Parent Relationships
 		
 <#+ foreach(var parent in DataType.MetaData.DistinctParentRelationships){ #>
-		I<#= DataType.NamingConvention.ApplyNamingConvention(parent.ReferencedTableName) #> <#= RelationshipNameFormatting.FormatParentPropertyName(parent, DataType.NamingConvention, DataType.MetaData.DistinctParentRelationships) #> { get; set; }
+		I<#= DataType.NamingConvention.ApplyNamingConvention(parent.ReferencedTableName) #> <#= RelationshipNameFormatting.FormatName(parent.ReferencedTableName, parent.RelationshipAlias, DataType.NamingConvention) #> { get; set; }
 <#+ } #>
 		
 		#endregion

@@ -179,7 +179,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
         {
             var sb = new StringBuilder();
 
-            string refTableName = RelationshipNameFormatting.FormatName(rel.ReferencedTableName, rel.RelationshipAlias, rel.ReferencedColumnName, NamingConvention, relationships);
+            string refTableName = RelationshipNameFormatting.FormatName(rel.ReferencedTableName, rel.RelationshipAlias, NamingConvention);
 
             if (rel.ReferencedMultiplicity == RelationshipMultiplicity.Many)
             {
@@ -207,7 +207,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
 
                 if(parentRel != null)
                 {
-                    parentTableName = RelationshipNameFormatting.FormatName(parentRel.ReferencedTableName, parentRel.RelationshipAlias, parentRel.ColumnName, NamingConvention, relationships);
+                    parentTableName = RelationshipNameFormatting.FormatName(parentRel.ReferencedTableName, parentRel.RelationshipAlias, NamingConvention);
                 }
             }
 

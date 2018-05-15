@@ -269,25 +269,23 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
                                 });
                         }
                     }
+                }
 
-                    foreach (var rel in newTable.Relationships)
+                // Format navigation property names to be unique and not equal to main table
+                foreach (var rel in newTable.Relationships.OrderBy(o => o.ColumnName).ThenBy(o => o.ReferencedColumnName))
+                {
+                    var test = (from relItem in newTable.Relationships
+                                orderby rel.ReferencedColumnName
+                                select (string.IsNullOrEmpty(relItem.RelationshipAlias) ? relItem.ReferencedTableName : relItem.RelationshipAlias)).ToList();
+
+                    test.AddRange(newTable.Columns.Select(o => o.ColumnName));
+                    test.Add(newTable.TableName);// Add table name as properties cannot have same name as main table
+
+                    string alias = RelationshipNameFormatting.FormatName(rel.ReferencedTableName, rel.RelationshipAlias, null, test);
+
+                    if (!string.Equals(rel.ReferencedTableName, alias))
                     {
-                        string alias = string.Empty;
-
-                        if (rel.DependencyRelationShip == RelationshipType.ForeignKey)
-                        {
-                            alias = rel.ReferencedTableName + "Parent";
-                        }
-                        else
-                        {
-                            alias = rel.ReferencedTableName + "Children";
-                        }
-
-                        alias = RelationshipNameFormatting.FormatName(rel.ReferencedTableName, alias, "", null, newTable.Relationships, false);
-                        if(!string.Equals(rel.ReferencedTableName, alias))
-                        {
-                            rel.RelationshipAlias = alias;
-                        }
+                        rel.RelationshipAlias = alias;
                     }
                 }
             }
