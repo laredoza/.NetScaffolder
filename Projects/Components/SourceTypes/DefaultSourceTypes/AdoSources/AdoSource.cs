@@ -133,84 +133,16 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
         /// </exception>
         public MultiplicityResult ReturnMultiplicity(DatabaseTable table, string columnName, DatabaseTable referencedTable, string referencedColumnName, RelationshipType relationshipType)
         {
-            MultiplicityResult result = new MultiplicityResult();
-            
             DatabaseColumn column = table.Columns.FirstOrDefault(c => c.Name == columnName);
             DatabaseColumn foreignColumn = referencedTable.Columns.FirstOrDefault(c => c.Name == referencedColumnName);
 
-
-            if (relationshipType == RelationshipType.ForeignKey)
-            {
-                if (column.IsPrimaryKey && foreignColumn.IsPrimaryKey)
-                {
-                    // Extending Tables. i.e)  Book --> Product
-                    if (column.IsPrimaryKey && column.IsForeignKey)
-                    {
-                        result.Multiplicity = RelationshipMultiplicity.ZeroToOne;
-                        result.ReferencedMultiplicity = RelationshipMultiplicity.One;
-                    }
-                    else
-                    {
-                        throw new Exception();
-                    }
-                }
-                else if (!column.IsPrimaryKey && column.IsForeignKey)
-                {
-                    result.Multiplicity = RelationshipMultiplicity.Many;
-
-                    if (column.Nullable)
-                    {
-                        // Zero to Many: 
-                        result.ReferencedMultiplicity = RelationshipMultiplicity.ZeroToOne;
-                    }
-                    else
-                    {
-                        // 1 to Many
-                        result.ReferencedMultiplicity = RelationshipMultiplicity.One;
-                    }
-                }
-                else
-                {
-                    throw new Exception();
-                }
-            }
-            else if (relationshipType == RelationshipType.ForeignKeyChild)
-            {
-                if (column.IsPrimaryKey && foreignColumn.IsPrimaryKey)
-                {
-                    // Todo: Extending Tables. i.e)  Product --> Book 
-                    if (column.IsPrimaryKey && !column.IsForeignKey)
-                    {
-                        result.Multiplicity = RelationshipMultiplicity.One;
-                        result.ReferencedMultiplicity = RelationshipMultiplicity.ZeroToOne;
-                    }
-                    else
-                    {
-                        throw new Exception();
-                    }
-                }
-                else if (column.IsPrimaryKey && !column.IsForeignKey)
-                {
-                    result.ReferencedMultiplicity = RelationshipMultiplicity.Many;
-
-                    if (foreignColumn.Nullable)
-                    {
-                        // Zero to Many: 
-                        result.Multiplicity = RelationshipMultiplicity.ZeroToOne;
-                    }
-                    else
-                    {
-                        // 1 to Many
-                        result.Multiplicity = RelationshipMultiplicity.One;
-                    }
-                }
-                else
-                {
-                    throw new Exception();
-                }
-            }
-                       
-            return result;
+            return MultiplicityCalculator.Calculate(
+                relationshipType,
+                column.IsPrimaryKey,
+                foreignColumn.IsPrimaryKey,
+                column.IsForeignKey,
+                column.Nullable,
+                foreignColumn.Nullable);
         }
 
         /// <summary>
