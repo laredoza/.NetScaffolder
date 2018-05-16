@@ -126,7 +126,7 @@ namespace <#= ContextData.TransformFullnamespace(DataType.BaseNamespace) #>
 <#+ { #>
 			modelBuilder.Entity<<#=DataType.TransformModelName(table.TableName) #>>().Property(t => t.<#= col.ColumnName #>).IsOptional();
 <#+ } #>
-<#+ if(col.Precision > 0 || col.Scale > 0){ #>
+<#+ if((col.Precision > 0 && !col.InValidPrecisionGeneration) || col.Scale > 0){ #>
 			modelBuilder.Entity<<#=DataType.TransformModelName(table.TableName) #>>().Property(t => t.<#= col.ColumnName #>).HasPrecision(<#= col.Precision #>, <#= col.Scale #>);
 <#+ } #>
 <#+ } #>
