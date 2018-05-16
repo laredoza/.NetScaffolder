@@ -89,7 +89,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Model
         /// </summary>
         [XmlIgnore]
         public bool InValidPrecisionGeneration =>
-            this.DomainDataType == DomainDataType.Int16 || this.DomainDataType == DomainDataType.Int32;
+            this.DomainDataType == DomainDataType.Int16 || this.DomainDataType == DomainDataType.Int32 || this.DomainDataType == DomainDataType.Int64;
 
         /// <summary>
         ///     Gets or sets a value indicating whether is primary key.
