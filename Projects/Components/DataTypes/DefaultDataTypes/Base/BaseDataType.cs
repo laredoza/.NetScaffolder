@@ -12,6 +12,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Base
     using System.Xml.Serialization;
 
     using DotNetScaffolder.Components.Common.Contract;
+    using DotNetScaffolder.Core.Common.Validation;
     using DotNetScaffolder.Mapping.MetaData.Model;
 
     using FormControls.TreeView;
@@ -21,20 +22,33 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Base
     /// <summary>
     ///     The base data type.
     /// </summary>
-    public abstract class BaseDataType : IDataType
+    public abstract class BaseDataType : IDataType, IValidate
     {
+        #region Fields
+
         /// <summary>
         ///     The fil e_ name.
         /// </summary>
         protected readonly string FileName = string.Empty;
 
+        #endregion
+
+        #region Constructors and Destructors
+
         /// <summary>
-        /// Initializes a new instance of the <see cref="BaseDataType"/> class.
+        ///     Initializes a new instance of the <see cref="BaseDataType" /> class.
         /// </summary>
         /// <param name="fileName">
-        /// The file name.
+        ///     The file name.
         /// </param>
-        protected BaseDataType(string fileName) => this.FileName = fileName;
+        protected BaseDataType(string fileName)
+        {
+            this.FileName = fileName;
+        }
+
+        #endregion
+
+        #region Public Properties
 
         /// <summary>
         ///     Gets or sets the base namespace.
@@ -66,13 +80,22 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Base
         public INamingConvention NamingConvention { get; set; }
 
         /// <summary>
-        /// The create ui.
+        ///     Gets or sets the validation result.
+        /// </summary>
+        public List<Validation> ValidationResult { get; set; }
+
+        #endregion
+
+        #region Public Methods And Operators
+
+        /// <summary>
+        ///     The create ui.
         /// </summary>
         /// <param name="parameters">
-        /// The parameters.
+        ///     The parameters.
         /// </param>
         /// <returns>
-        /// The <see cref="IDataTypeUI"/>.
+        ///     The <see cref="IDataTypeUI" />.
         /// </returns>
         public abstract IDataTypeUI<IDictionary<string, string>> CreateUI(IDictionary<string, string> parameters);
 
@@ -85,10 +108,10 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Base
         public abstract IDataTypeUI<IDictionary<string, string>> CreateUI();
 
         /// <summary>
-        /// The load.
+        ///     The load.
         /// </summary>
         /// <param name="parameters">
-        /// The parameters.
+        ///     The parameters.
         /// </param>
         public abstract void Load(IDictionary<string, string> parameters);
 
@@ -101,14 +124,24 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Base
         public abstract Hierarchy ReturnNavigation();
 
         /// <summary>
-        /// The save.
+        ///     The save.
         /// </summary>
         /// <param name="parameters">
-        /// The parameters.
+        ///     The parameters.
         /// </param>
         /// <returns>
-        /// The <see cref="bool"/>.
+        ///     The <see cref="bool" />.
         /// </returns>
         public abstract bool Save(IDictionary<string, string> parameters);
+
+        /// <summary>
+        ///     The validate.
+        /// </summary>
+        /// <returns>
+        ///     The <see cref="List" />.
+        /// </returns>
+        public abstract List<Validation> Validate();
+
+        #endregion
     }
 }

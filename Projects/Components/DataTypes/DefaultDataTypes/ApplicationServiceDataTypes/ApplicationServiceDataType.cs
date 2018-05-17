@@ -8,16 +8,18 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ApplicationServ
 {
     #region Usings
 
-    using DotNetScaffolder.Components.Common.Contract;
-    using DotNetScaffolder.Core.Common.Serializer;
-    using FormControls.TreeView;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.Composition;
     using System.IO;
     using System.Windows.Forms;
 
+    using DotNetScaffolder.Components.Common.Contract;
     using DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Base;
+    using DotNetScaffolder.Core.Common.Serializer;
+    using DotNetScaffolder.Core.Common.Validation;
+
+    using FormControls.TreeView;
 
     #endregion
 
@@ -29,9 +31,16 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ApplicationServ
     [ExportMetadata("ValueMetaData", "1BC1B0C4-1E41-9146-82CF-599181CE4420")]
     public class ApplicationServiceDataType : BaseDataType
     {
-        public ApplicationServiceDataType() : base("Application.xml") { }
+        #region Constructors and Destructors
 
-        #region Properties
+        public ApplicationServiceDataType()
+            : base("Application.xml")
+        {
+        }
+
+        #endregion
+
+        #region Public Properties
 
         /// <summary>
         ///     Gets or sets a value indicating whether enabled.
@@ -50,37 +59,35 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ApplicationServ
 
         #endregion
 
-        #region Public methods and operators
+        #region Public Methods And Operators
 
         /// <summary>
-        /// The create ui.
+        ///     The create ui.
         /// </summary>
         /// <param name="parameters">
-        /// The parameters.
+        ///     The parameters.
         /// </param>
         /// <returns>
-        /// The <see cref="IDataTypeUI"/>.
+        ///     The <see cref="IDataTypeUI" />.
         /// </returns>
         public override IDataTypeUI<IDictionary<string, string>> CreateUI(IDictionary<string, string> parameters)
         {
             var newControl = new ApplicationServiceUserControl
-            {
-                AppServiceEnabled =
-                                         {
-                                             Checked = Enabled
-                                         },
-                AppServiceNamespace =
-                                         {
-                                             Text = Namespace
-                                         },
-                AppServiceOutputFolder =
-                                         {
-                                             Text = OutputFolder
-                                         },
-                Visible = true,
-                Dock = DockStyle.Fill,
-                DataType = this
-            };
+                                 {
+                                     AppServiceEnabled = {
+                                                            Checked = this.Enabled 
+                                                         },
+                                     AppServiceNamespace = {
+                                                              Text = this.Namespace 
+                                                           },
+                                     AppServiceOutputFolder
+                                         = {
+                                              Text = this.OutputFolder 
+                                           },
+                                     Visible = true,
+                                     Dock = DockStyle.Fill,
+                                     DataType = this
+                                 };
             return newControl;
         }
 
@@ -92,18 +99,18 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ApplicationServ
         /// </returns>
         public override IDataTypeUI<IDictionary<string, string>> CreateUI()
         {
-            return CreateUI(null);
+            return this.CreateUI(null);
         }
 
         /// <summary>
-        /// The load.
+        ///     The load.
         /// </summary>
         /// <param name="parameters">
-        /// The parameters.
+        ///     The parameters.
         /// </param>
         public override void Load(IDictionary<string, string> parameters)
         {
-            var filePath = Path.Combine(parameters["basePath"], FileName);
+            var filePath = Path.Combine(parameters["basePath"], this.FileName);
 
             if (File.Exists(filePath))
             {
@@ -122,23 +129,40 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ApplicationServ
         /// </returns>
         public override Hierarchy ReturnNavigation()
         {
-            return new Hierarchy { Id = new Guid("1BC1B0C4-1E41-9146-82CF-599181CE4420"), Name = "Application Service" };
+            return new Hierarchy
+                       {
+                           Id = new Guid("1BC1B0C4-1E41-9146-82CF-599181CE4420"),
+                           Name = "Application Service"
+                       };
         }
 
         /// <summary>
-        /// The save.
+        ///     The save.
         /// </summary>
         /// <param name="parameters">
-        /// The parameters.
+        ///     The parameters.
         /// </param>
         /// <returns>
-        /// The <see cref="bool"/>.
+        ///     The <see cref="bool" />.
         /// </returns>
         public override bool Save(IDictionary<string, string> parameters)
         {
-            var filePath = Path.Combine(parameters["basePath"], FileName);
+            var filePath = Path.Combine(parameters["basePath"], this.FileName);
             ObjectXMLSerializer<ApplicationServiceDataType>.Save(this, filePath);
             return true;
+        }
+
+        /// <summary>
+        ///     The validate.
+        /// </summary>
+        /// <returns>
+        ///     The <see cref="List" />.
+        /// </returns>
+        public override List<Validation> Validate()
+        {
+            this.ValidationResult = new List<Validation>();
+
+            return this.ValidationResult;
         }
 
         #endregion

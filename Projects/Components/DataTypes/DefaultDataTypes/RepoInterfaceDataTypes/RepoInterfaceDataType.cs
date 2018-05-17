@@ -18,6 +18,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.RepoInterfaceDa
     using DotNetScaffolder.Components.Common.Contract;
     using DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Base;
     using DotNetScaffolder.Core.Common.Serializer;
+    using DotNetScaffolder.Core.Common.Validation;
 
     using FormControls.TreeView;
 
@@ -167,6 +168,14 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.RepoInterfaceDa
             var filePath = Path.Combine(parameters["basePath"], this.FileName);
             ObjectXMLSerializer<RepoInterfaceDataType>.Save(this, filePath);
             return true;
+        }
+
+        public override List<Validation> Validate()
+        {
+            this.ValidationResult = new List<Validation>();
+
+
+            return this.ValidationResult;
         }
     }
 }

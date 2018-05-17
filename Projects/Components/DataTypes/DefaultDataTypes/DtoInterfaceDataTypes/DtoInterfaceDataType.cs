@@ -19,6 +19,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.DtoInterfaceDat
     using DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Base;
     using DotNetScaffolder.Components.DataTypes.DefaultDataTypes.DtoInterfaceDataType;
     using DotNetScaffolder.Core.Common.Serializer;
+    using DotNetScaffolder.Core.Common.Validation;
 
     using FormControls.TreeView;
 
@@ -199,6 +200,20 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.DtoInterfaceDat
             var filePath = Path.Combine(parameters["basePath"], this.FileName);
             ObjectXMLSerializer<DtoInterfaceDataType>.Save(this, filePath);
             return true;
+        }
+
+        /// <summary>
+        /// The validate.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="List"/>.
+        /// </returns>
+        public override List<Validation> Validate()
+        {
+            this.ValidationResult = new List<Validation>();
+
+
+            return this.ValidationResult;
         }
     }
 }
