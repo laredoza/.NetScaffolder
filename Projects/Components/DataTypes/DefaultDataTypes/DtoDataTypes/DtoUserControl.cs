@@ -23,10 +23,16 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.DtoDataTypes
     /// </summary>
     public partial class DtoUserControl : UserControl, IDataTypeUI<IDictionary<string, string>>
     {
+        #region Fields
+
         /// <summary>
         ///     The data type.
         /// </summary>
         private DtoDataType dataType;
+
+        #endregion
+
+        #region Constructors and Destructors
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="DtoUserControl" /> class.
@@ -37,10 +43,14 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.DtoDataTypes
             this.InitializeComponent();
         }
 
+        #endregion
+
         /// <summary>
         ///     The on navigation changed.
         /// </summary>
         public event EventHandler<IDataType<IDictionary<string, string>>> OnNavigationChanged;
+
+        #region Public Properties
 
         /// <summary>
         ///     Gets or sets the data source.
@@ -63,6 +73,10 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.DtoDataTypes
                 this.UpdateUI();
             }
         }
+
+        #endregion
+
+        #region Public Methods And Operators
 
         /// <summary>
         /// The load config.
@@ -92,6 +106,10 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.DtoDataTypes
             this.UpdateDataType();
             this.DataType.Save(parameters);
         }
+
+        #endregion
+
+        #region Other Methods
 
         /// <summary>
         /// The chk use interface_ checked changed.
@@ -155,5 +173,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.DtoDataTypes
             this.chkAddInjectConstructor.Checked = this.DataType.AddInjectConstructor;
             this.chkUseInterface.Checked = this.DataType.UseInterface;
         }
+
+        #endregion
     }
 }

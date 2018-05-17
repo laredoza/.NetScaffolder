@@ -36,10 +36,10 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Base
         #region Constructors and Destructors
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="BaseDataType" /> class.
+        /// Initializes a new instance of the <see cref="BaseDataType"/> class.
         /// </summary>
         /// <param name="fileName">
-        ///     The file name.
+        /// The file name.
         /// </param>
         protected BaseDataType(string fileName)
         {
@@ -89,13 +89,13 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Base
         #region Public Methods And Operators
 
         /// <summary>
-        ///     The create ui.
+        /// The create ui.
         /// </summary>
         /// <param name="parameters">
-        ///     The parameters.
+        /// The parameters.
         /// </param>
         /// <returns>
-        ///     The <see cref="IDataTypeUI" />.
+        /// The <see cref="IDataTypeUI"/>.
         /// </returns>
         public abstract IDataTypeUI<IDictionary<string, string>> CreateUI(IDictionary<string, string> parameters);
 
@@ -108,10 +108,10 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Base
         public abstract IDataTypeUI<IDictionary<string, string>> CreateUI();
 
         /// <summary>
-        ///     The load.
+        /// The load.
         /// </summary>
         /// <param name="parameters">
-        ///     The parameters.
+        /// The parameters.
         /// </param>
         public abstract void Load(IDictionary<string, string> parameters);
 
@@ -124,13 +124,13 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Base
         public abstract Hierarchy ReturnNavigation();
 
         /// <summary>
-        ///     The save.
+        /// The save.
         /// </summary>
         /// <param name="parameters">
-        ///     The parameters.
+        /// The parameters.
         /// </param>
         /// <returns>
-        ///     The <see cref="bool" />.
+        /// The <see cref="bool"/>.
         /// </returns>
         public abstract bool Save(IDictionary<string, string> parameters);
 

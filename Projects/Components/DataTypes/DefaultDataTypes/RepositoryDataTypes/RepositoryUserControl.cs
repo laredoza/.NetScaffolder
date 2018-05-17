@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="EntityUserControl.cs" company="DotnetScaffolder">
+// <copyright file="RepositoryUserControl.cs" company="DotnetScaffolder">
 //   MIT
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
@@ -23,6 +23,15 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
     /// </summary>
     public partial class RepositoryUserControl : UserControl, IDataTypeUI<IDictionary<string, string>>
     {
+        #region Fields
+
+        /// <summary>
+        /// The data type.
+        /// </summary>
+        private RepositoryDataType dataType;
+
+        #endregion
+
         #region Constructors and Destructors
 
         /// <summary>
@@ -30,23 +39,23 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
         /// </summary>
         public RepositoryUserControl()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
 
         #endregion
-
-        #region Public Events
 
         /// <summary>
         ///     The on navigation changed.
         /// </summary>
         public event EventHandler<IDataType<IDictionary<string, string>>> OnNavigationChanged;
 
-        #endregion
+        #region Public Properties
 
-        #region Properties
+        /// <summary>
+        /// Gets or sets the data source.
+        /// </summary>
+        public DomainDefinition DataSource { get; set; }
 
-        private RepositoryDataType dataType;
         /// <summary>
         ///     Gets or sets the data type.
         /// </summary>
@@ -54,20 +63,19 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
         {
             get
             {
-                return dataType;
+                return this.dataType;
             }
+
             set
             {
-                dataType = value;
-                UpdateUI();
+                this.dataType = value;
+                this.UpdateUI();
             }
         }
 
-        public DomainDefinition DataSource { get; set; }
-
         #endregion
 
-        #region Public methods and operators
+        #region Public Methods And Operators
 
         /// <summary>
         /// The load config.
@@ -77,29 +85,11 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
         /// </param>
         public void LoadConfig(IDictionary<string, string> parameters)
         {
-            if (DataType == null) return;
+            if (this.DataType == null) return;
 
-            DataType.Load(parameters);
+            this.DataType.Load(parameters);
 
-            UpdateUI();
-        }
-
-        private void UpdateUI()
-        {
-            if (DataType == null) return;
-
-            txtNamespace.Text = DataType.Namespace;
-            txtOutputFolder.Text = DataType.OutputFolder;
-            txtOutputPath.Text = DataType.OutputPath;
-        }
-
-        private void UpdateDataType()
-        {
-            if (DataType == null) return;
-
-            DataType.Namespace = txtNamespace.Text;
-            DataType.OutputFolder = txtOutputFolder.Text;
-            DataType.OutputPath = txtOutputPath.Text;
+            this.UpdateUI();
         }
 
         /// <summary>
@@ -110,17 +100,53 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
         /// </param>
         public void SaveConfig(IDictionary<string, string> parameters)
         {
-            if (DataType == null) return;
+            if (this.DataType == null) return;
 
-            UpdateDataType();
-            DataType.Save(parameters);
+            this.UpdateDataType();
+            this.DataType.Save(parameters);
         }
 
         #endregion
 
+        #region Other Methods
+
+        /// <summary>
+        /// The group box 1_ enter.
+        /// </summary>
+        /// <param name="sender">
+        /// The sender.
+        /// </param>
+        /// <param name="e">
+        /// The e.
+        /// </param>
         private void groupBox1_Enter(object sender, EventArgs e)
         {
-
         }
+
+        /// <summary>
+        /// The update data type.
+        /// </summary>
+        private void UpdateDataType()
+        {
+            if (this.DataType == null) return;
+
+            this.DataType.Namespace = this.txtNamespace.Text;
+            this.DataType.OutputFolder = this.txtOutputFolder.Text;
+            this.DataType.OutputPath = this.txtOutputPath.Text;
+        }
+
+        /// <summary>
+        /// The update ui.
+        /// </summary>
+        private void UpdateUI()
+        {
+            if (this.DataType == null) return;
+
+            this.txtNamespace.Text = this.DataType.Namespace;
+            this.txtOutputFolder.Text = this.DataType.OutputFolder;
+            this.txtOutputPath.Text = this.DataType.OutputPath;
+        }
+
+        #endregion
     }
 }
