@@ -305,9 +305,18 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
                 {
                     if (!this.DomainDefinition.Tables.Exists(t => t.TableName == model.TableName))
                     {
-                        this.ValidationResult.Add(new Validation(ValidationType.ContextMissingModels, $"Context {contextData.ContextName} is missing Model {model.TableName} is missing"));
+                        this.ValidationResult.Add(new Validation(ValidationType.ContextMissingModels, $"Context {contextData.ContextName} is missing Model {model.TableName}"));
                     }
                 }
+            }
+
+            foreach (ContextData context in this.Contexts)
+            {
+                if (string.IsNullOrEmpty(context.ContextName))
+                {
+                    this.ValidationResult.Add(new Validation(ValidationType.ContextNameEmpty, "Contexts must have a name"));
+                }
+                
             }
 
             return this.ValidationResult;
