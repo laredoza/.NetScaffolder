@@ -33,46 +33,25 @@ namespace Banking.Models.Interfaces
 		#region Load
 
         /// <summary>
-        /// Load the Product entity from the database using the ProductId primary key
-        /// </summary>
-        /// <param name="productid">int</param>
+        /// Load Product entities from the database using the composite primary keys
+        /// </summary
+        /// <param name="productId">int</param>
         /// <returns>IProduct</returns>
-		IProduct LoadByProductId(int productid);
-
-        /// <summary>
-        /// Load Product entities from the database using the ProductDescription field
-        /// </summary>
-        /// <param name="productdescription">string</param>
-        /// <returns>IList<IProduct></returns>
-		IList<IProduct> LoadByProductDescription(string productdescription);
+		IProduct LoadByProductId(int productId);
 
         /// <summary>
         /// Load Product entities from the database using the UnitPrice field
         /// </summary>
-        /// <param name="unitprice">Nullable<decimal></param>
+        /// <param name="unitPrice">Nullable<decimal></param>
         /// <returns>IList<IProduct></returns>
-		IList<IProduct> LoadByUnitPrice(Nullable<decimal> unitprice);
-
-        /// <summary>
-        /// Load Product entities from the database using the UnitAmount field
-        /// </summary>
-        /// <param name="unitamount">string</param>
-        /// <returns>IList<IProduct></returns>
-		IList<IProduct> LoadByUnitAmount(string unitamount);
-
-        /// <summary>
-        /// Load Product entities from the database using the Publisher field
-        /// </summary>
-        /// <param name="publisher">string</param>
-        /// <returns>IList<IProduct></returns>
-		IList<IProduct> LoadByPublisher(string publisher);
+		IList<IProduct> LoadByUnitPrice(Nullable<decimal> unitPrice);
 
         /// <summary>
         /// Load Product entities from the database using the AmountInStock field
         /// </summary>
-        /// <param name="amountinstock">Nullable<short></param>
+        /// <param name="amountInStock">Nullable<short></param>
         /// <returns>IList<IProduct></returns>
-		IList<IProduct> LoadByAmountInStock(Nullable<short> amountinstock);
+		IList<IProduct> LoadByAmountInStock(Nullable<short> amountInStock);
 
         /// <summary>
         /// Load all Product entities from the database.
@@ -87,18 +66,18 @@ namespace Banking.Models.Interfaces
         /// <summary>
         /// Search for Product entities in the database by ProductDescription
         /// </summary>
-        /// <param name="productdescription">string</param>
+        /// <param name="productDescription">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<IProduct></returns>
-		IList<IProduct> SearchByProductDescription(string productdescription, bool caseSensitive = false);
+		IList<IProduct> SearchByProductDescription(string productDescription, bool caseSensitive = false);
 
         /// <summary>
         /// Search for Product entities in the database by UnitAmount
         /// </summary>
-        /// <param name="unitamount">string</param>
+        /// <param name="unitAmount">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<IProduct></returns>
-		IList<IProduct> SearchByUnitAmount(string unitamount, bool caseSensitive = false);
+		IList<IProduct> SearchByUnitAmount(string unitAmount, bool caseSensitive = false);
 
         /// <summary>
         /// Search for Product entities in the database by Publisher
@@ -118,7 +97,7 @@ namespace Banking.Models.Interfaces
         /// <param name="entity">IProduct</param>
         /// <returns>bool</returns>
 		bool Save(IProduct entity);
-		
+
         /// <summary>
         /// Update the Product entity in the database if any values have changed
         /// </summary>
@@ -132,13 +111,13 @@ namespace Banking.Models.Interfaces
         /// <param name="entity">IProduct</param>
         /// <returns>bool</returns>
 		bool Delete(IProduct entity);
-		
-        /// <summary>
-        /// Delete the Product entity from the database using the ProductId
+
+		/// <summary>
+        /// Delete the Product entity from the database
         /// </summary>
-        /// <param name="productid">int</param>
+        /// <param name="productId">int</param>
         /// <returns>bool</returns>
-		bool DeleteByProductId(int productid);
+		bool Delete( int productId);
 
 		#endregion
 	}

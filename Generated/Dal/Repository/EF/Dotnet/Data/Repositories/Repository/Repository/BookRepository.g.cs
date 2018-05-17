@@ -45,27 +45,17 @@ namespace Banking.Models.Repository
 		#endregion
 		
 		#region Load
-		
+
         /// <summary>
-        /// Load the Book entity from the database using the ProductId primary key
-        /// </summary>
-        /// <param name="productid">int</param>
+        /// Load Book entities from the database using the composite primary keys
+        /// </summary
+        /// <param name="productId">int</param>
         /// <returns>IBook</returns>
-		public virtual IBook LoadByProductId(int productid)
+		public virtual IBook LoadByProductId(int productId)
 		{
-			return this.UnitOfWork.FirstOrDefault<Book>(o => o.ProductId == productid);
+			return this.UnitOfWork.FirstOrDefault<Book>(o => o.ProductId == productId);
 		}
-		
-        /// <summary>
-        /// Load Book entities from the database using the Publisher field
-        /// </summary>
-        /// <param name="publisher">string</param>
-        /// <returns>IList<IBook></returns>
-		public virtual IList<IBook> LoadByPublisher(string publisher)
-		{
-			return this.UnitOfWork.AllMatching<Book>(o => o.Publisher == publisher).ToList<IBook>();
-		}
-		
+
         /// <summary>
         /// Load all Book entities from the database.
         /// </summary>
@@ -78,7 +68,7 @@ namespace Banking.Models.Repository
 		#endregion
 
 		#region Search
-		
+
         /// <summary>
         /// Search for Book entities in the database by Publisher
         /// </summary>
@@ -89,14 +79,14 @@ namespace Banking.Models.Repository
 		{		
 			if(caseSensitive) 
 			{
-				return this.UnitOfWork.AllMatching<Book>(o => o.Publisher.ToLower().Contains(publisher.ToLower())).ToList<IBook>();
+				return this.UnitOfWork.AllMatching<Book>(o => o.Publisher.Contains(publisher)).ToList<IBook>();
 			}
 			else
 			{
-				return this.UnitOfWork.AllMatching<Book>(o => o.Publisher.Contains(publisher)).ToList<IBook>();
+				return this.UnitOfWork.AllMatching<Book>(o => o.Publisher.ToLower().Contains(publisher.ToLower())).ToList<IBook>();
 			}
 		}
-		
+
 		#endregion
 		
 		#region Modifiers
@@ -111,7 +101,7 @@ namespace Banking.Models.Repository
 			var entityToSave = new Book(entity, false);
 			return this.UnitOfWork.Add(entityToSave);
 		}
-		
+
         /// <summary>
         /// Update the Book entity in the database if any values have changed
         /// </summary>
@@ -120,7 +110,7 @@ namespace Banking.Models.Repository
 		public virtual bool Update(IBook entity)
 		{
 			bool doUpdate = false;
-			var entityToUpdate = this.UnitOfWork.FirstOrDefault<Book>(o => o.ProductId == entity.ProductId);
+			var entityToUpdate = this.UnitOfWork.FirstOrDefault<Book>(o =>  o.ProductId == entity.ProductId );
 			
 			if (entityToUpdate == null)
 			{
@@ -146,7 +136,7 @@ namespace Banking.Models.Repository
         /// <returns>bool</returns>
 		public virtual bool Delete(IBook entity)
 		{		
-			var entityToDelete = this.UnitOfWork.FirstOrDefault<Book>(o => o.ProductId == entity.ProductId);
+			var entityToDelete = this.UnitOfWork.FirstOrDefault<Book>(o =>  o.ProductId == entity.ProductId );
 			
 			if(entityToDelete == null)
 			{
@@ -155,15 +145,15 @@ namespace Banking.Models.Repository
 			
 			return this.UnitOfWork.Remove(entityToDelete);
 		}
-		
-        /// <summary>
-        /// Delete the Book entity from the database using the ProductId
+
+		/// <summary>
+        /// Delete the Book entity from the database
         /// </summary>
-        /// <param name="productid">int</param>
+        /// <param name="productId">int</param>
         /// <returns>bool</returns>
-		public virtual bool DeleteByProductId(int productid)
+		public virtual bool Delete( int productId)
 		{
-			var entityToDelete = this.UnitOfWork.FirstOrDefault<Book>(o => o.ProductId == productid);
+			var entityToDelete = this.UnitOfWork.FirstOrDefault<Book>(o =>  o.ProductId == productId );
 			
 			if(entityToDelete == null)
 			{

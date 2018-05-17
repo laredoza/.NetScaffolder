@@ -45,27 +45,17 @@ namespace Banking.Models.Repository
 		#endregion
 		
 		#region Load
-		
+
         /// <summary>
-        /// Load the Software entity from the database using the ProductId primary key
-        /// </summary>
-        /// <param name="productid">int</param>
+        /// Load Software entities from the database using the composite primary keys
+        /// </summary
+        /// <param name="productId">int</param>
         /// <returns>ISoftware</returns>
-		public virtual ISoftware LoadByProductId(int productid)
+		public virtual ISoftware LoadByProductId(int productId)
 		{
-			return this.UnitOfWork.FirstOrDefault<Software>(o => o.ProductId == productid);
+			return this.UnitOfWork.FirstOrDefault<Software>(o => o.ProductId == productId);
 		}
-		
-        /// <summary>
-        /// Load Software entities from the database using the LicenseCode field
-        /// </summary>
-        /// <param name="licensecode">string</param>
-        /// <returns>IList<ISoftware></returns>
-		public virtual IList<ISoftware> LoadByLicenseCode(string licensecode)
-		{
-			return this.UnitOfWork.AllMatching<Software>(o => o.LicenseCode == licensecode).ToList<ISoftware>();
-		}
-		
+
         /// <summary>
         /// Load all Software entities from the database.
         /// </summary>
@@ -78,25 +68,25 @@ namespace Banking.Models.Repository
 		#endregion
 
 		#region Search
-		
+
         /// <summary>
         /// Search for Software entities in the database by LicenseCode
         /// </summary>
-        /// <param name="licensecode">string</param>
+        /// <param name="licenseCode">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<ISoftware></returns>
-		public virtual IList<ISoftware> SearchByLicenseCode(string licensecode, bool caseSensitive = false)
+		public virtual IList<ISoftware> SearchByLicenseCode(string licenseCode, bool caseSensitive = false)
 		{		
 			if(caseSensitive) 
 			{
-				return this.UnitOfWork.AllMatching<Software>(o => o.LicenseCode.ToLower().Contains(licensecode.ToLower())).ToList<ISoftware>();
+				return this.UnitOfWork.AllMatching<Software>(o => o.LicenseCode.Contains(licenseCode)).ToList<ISoftware>();
 			}
 			else
 			{
-				return this.UnitOfWork.AllMatching<Software>(o => o.LicenseCode.Contains(licensecode)).ToList<ISoftware>();
+				return this.UnitOfWork.AllMatching<Software>(o => o.LicenseCode.ToLower().Contains(licenseCode.ToLower())).ToList<ISoftware>();
 			}
 		}
-		
+
 		#endregion
 		
 		#region Modifiers
@@ -111,7 +101,7 @@ namespace Banking.Models.Repository
 			var entityToSave = new Software(entity, false);
 			return this.UnitOfWork.Add(entityToSave);
 		}
-		
+
         /// <summary>
         /// Update the Software entity in the database if any values have changed
         /// </summary>
@@ -120,7 +110,7 @@ namespace Banking.Models.Repository
 		public virtual bool Update(ISoftware entity)
 		{
 			bool doUpdate = false;
-			var entityToUpdate = this.UnitOfWork.FirstOrDefault<Software>(o => o.ProductId == entity.ProductId);
+			var entityToUpdate = this.UnitOfWork.FirstOrDefault<Software>(o =>  o.ProductId == entity.ProductId );
 			
 			if (entityToUpdate == null)
 			{
@@ -146,7 +136,7 @@ namespace Banking.Models.Repository
         /// <returns>bool</returns>
 		public virtual bool Delete(ISoftware entity)
 		{		
-			var entityToDelete = this.UnitOfWork.FirstOrDefault<Software>(o => o.ProductId == entity.ProductId);
+			var entityToDelete = this.UnitOfWork.FirstOrDefault<Software>(o =>  o.ProductId == entity.ProductId );
 			
 			if(entityToDelete == null)
 			{
@@ -155,15 +145,15 @@ namespace Banking.Models.Repository
 			
 			return this.UnitOfWork.Remove(entityToDelete);
 		}
-		
-        /// <summary>
-        /// Delete the Software entity from the database using the ProductId
+
+		/// <summary>
+        /// Delete the Software entity from the database
         /// </summary>
-        /// <param name="productid">int</param>
+        /// <param name="productId">int</param>
         /// <returns>bool</returns>
-		public virtual bool DeleteByProductId(int productid)
+		public virtual bool Delete( int productId)
 		{
-			var entityToDelete = this.UnitOfWork.FirstOrDefault<Software>(o => o.ProductId == productid);
+			var entityToDelete = this.UnitOfWork.FirstOrDefault<Software>(o =>  o.ProductId == productId );
 			
 			if(entityToDelete == null)
 			{

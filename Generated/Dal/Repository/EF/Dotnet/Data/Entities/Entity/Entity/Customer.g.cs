@@ -96,11 +96,11 @@ namespace Banking.Models.Entity
 		public bool IsEnabled { get; set; }
 
 		#endregion
-		
+
 		#region Child Relationships
         
         public virtual IList<BankAccount> BankAccount { get; set; }
-
+	
         IList<IBankAccount> ICustomer.BankAccount 
 		{ 
 			get
@@ -114,7 +114,7 @@ namespace Banking.Models.Entity
 		}
         
         public virtual IList<Order> Order { get; set; }
-
+	
         IList<IOrder> ICustomer.Order 
 		{ 
 			get
@@ -126,13 +126,12 @@ namespace Banking.Models.Entity
 				this.Order = (IList<Order>)value;
 			}			
 		}
-		
+
 		#endregion
-		
+
 		#region Parent Relationships
 
         public virtual Country Country { get; set; }
-
 		ICountry ICustomer.Country 
 		{ 
 			get

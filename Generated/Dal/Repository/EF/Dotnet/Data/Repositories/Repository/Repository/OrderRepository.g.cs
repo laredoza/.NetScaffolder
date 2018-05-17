@@ -45,87 +45,47 @@ namespace Banking.Models.Repository
 		#endregion
 		
 		#region Load
-		
+
         /// <summary>
-        /// Load the Order entity from the database using the OrderId primary key
-        /// </summary>
-        /// <param name="orderid">int</param>
+        /// Load Order entities from the database using the composite primary keys
+        /// </summary
+        /// <param name="orderId">int</param>
         /// <returns>IOrder</returns>
-		public virtual IOrder LoadByOrderId(int orderid)
+		public virtual IOrder LoadByOrderId(int orderId)
 		{
-			return this.UnitOfWork.FirstOrDefault<Order>(o => o.OrderId == orderid);
+			return this.UnitOfWork.FirstOrDefault<Order>(o => o.OrderId == orderId);
 		}
-		
+
         /// <summary>
         /// Load Order entities from the database using the CustomerId field
         /// </summary>
-        /// <param name="customerid">Nullable<int></param>
+        /// <param name="customerId">Nullable<int></param>
         /// <returns>IList<IOrder></returns>
-		public virtual IList<IOrder> LoadByCustomerId(Nullable<int> customerid)
+		public virtual IList<IOrder> LoadByCustomerId(Nullable<int> customerId)
 		{
-			return this.UnitOfWork.AllMatching<Order>(o => o.CustomerId == customerid).ToList<IOrder>();
+			return this.UnitOfWork.AllMatching<Order>(o => o.CustomerId == customerId).ToList<IOrder>();
 		}
-		
+
         /// <summary>
         /// Load Order entities from the database using the OrderDate field
         /// </summary>
-        /// <param name="orderdate">Nullable<DateTime></param>
+        /// <param name="orderDate">Nullable<DateTime></param>
         /// <returns>IList<IOrder></returns>
-		public virtual IList<IOrder> LoadByOrderDate(Nullable<DateTime> orderdate)
+		public virtual IList<IOrder> LoadByOrderDate(Nullable<DateTime> orderDate)
 		{
-			return this.UnitOfWork.AllMatching<Order>(o => o.OrderDate == orderdate).ToList<IOrder>();
+			return this.UnitOfWork.AllMatching<Order>(o => o.OrderDate == orderDate).ToList<IOrder>();
 		}
-		
+
         /// <summary>
         /// Load Order entities from the database using the DeliveryDate field
         /// </summary>
-        /// <param name="deliverydate">Nullable<DateTime></param>
+        /// <param name="deliveryDate">Nullable<DateTime></param>
         /// <returns>IList<IOrder></returns>
-		public virtual IList<IOrder> LoadByDeliveryDate(Nullable<DateTime> deliverydate)
+		public virtual IList<IOrder> LoadByDeliveryDate(Nullable<DateTime> deliveryDate)
 		{
-			return this.UnitOfWork.AllMatching<Order>(o => o.DeliveryDate == deliverydate).ToList<IOrder>();
+			return this.UnitOfWork.AllMatching<Order>(o => o.DeliveryDate == deliveryDate).ToList<IOrder>();
 		}
-		
-        /// <summary>
-        /// Load Order entities from the database using the ShippingName field
-        /// </summary>
-        /// <param name="shippingname">string</param>
-        /// <returns>IList<IOrder></returns>
-		public virtual IList<IOrder> LoadByShippingName(string shippingname)
-		{
-			return this.UnitOfWork.AllMatching<Order>(o => o.ShippingName == shippingname).ToList<IOrder>();
-		}
-		
-        /// <summary>
-        /// Load Order entities from the database using the ShippingAddress field
-        /// </summary>
-        /// <param name="shippingaddress">string</param>
-        /// <returns>IList<IOrder></returns>
-		public virtual IList<IOrder> LoadByShippingAddress(string shippingaddress)
-		{
-			return this.UnitOfWork.AllMatching<Order>(o => o.ShippingAddress == shippingaddress).ToList<IOrder>();
-		}
-		
-        /// <summary>
-        /// Load Order entities from the database using the ShippingCity field
-        /// </summary>
-        /// <param name="shippingcity">string</param>
-        /// <returns>IList<IOrder></returns>
-		public virtual IList<IOrder> LoadByShippingCity(string shippingcity)
-		{
-			return this.UnitOfWork.AllMatching<Order>(o => o.ShippingCity == shippingcity).ToList<IOrder>();
-		}
-		
-        /// <summary>
-        /// Load Order entities from the database using the ShippingZip field
-        /// </summary>
-        /// <param name="shippingzip">string</param>
-        /// <returns>IList<IOrder></returns>
-		public virtual IList<IOrder> LoadByShippingZip(string shippingzip)
-		{
-			return this.UnitOfWork.AllMatching<Order>(o => o.ShippingZip == shippingzip).ToList<IOrder>();
-		}
-		
+
         /// <summary>
         /// Load all Order entities from the database.
         /// </summary>
@@ -138,79 +98,79 @@ namespace Banking.Models.Repository
 		#endregion
 
 		#region Search
-		
+
         /// <summary>
         /// Search for Order entities in the database by ShippingName
         /// </summary>
-        /// <param name="shippingname">string</param>
+        /// <param name="shippingName">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<IOrder></returns>
-		public virtual IList<IOrder> SearchByShippingName(string shippingname, bool caseSensitive = false)
+		public virtual IList<IOrder> SearchByShippingName(string shippingName, bool caseSensitive = false)
 		{		
 			if(caseSensitive) 
 			{
-				return this.UnitOfWork.AllMatching<Order>(o => o.ShippingName.ToLower().Contains(shippingname.ToLower())).ToList<IOrder>();
+				return this.UnitOfWork.AllMatching<Order>(o => o.ShippingName.Contains(shippingName)).ToList<IOrder>();
 			}
 			else
 			{
-				return this.UnitOfWork.AllMatching<Order>(o => o.ShippingName.Contains(shippingname)).ToList<IOrder>();
+				return this.UnitOfWork.AllMatching<Order>(o => o.ShippingName.ToLower().Contains(shippingName.ToLower())).ToList<IOrder>();
 			}
 		}
-		
+
         /// <summary>
         /// Search for Order entities in the database by ShippingAddress
         /// </summary>
-        /// <param name="shippingaddress">string</param>
+        /// <param name="shippingAddress">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<IOrder></returns>
-		public virtual IList<IOrder> SearchByShippingAddress(string shippingaddress, bool caseSensitive = false)
+		public virtual IList<IOrder> SearchByShippingAddress(string shippingAddress, bool caseSensitive = false)
 		{		
 			if(caseSensitive) 
 			{
-				return this.UnitOfWork.AllMatching<Order>(o => o.ShippingAddress.ToLower().Contains(shippingaddress.ToLower())).ToList<IOrder>();
+				return this.UnitOfWork.AllMatching<Order>(o => o.ShippingAddress.Contains(shippingAddress)).ToList<IOrder>();
 			}
 			else
 			{
-				return this.UnitOfWork.AllMatching<Order>(o => o.ShippingAddress.Contains(shippingaddress)).ToList<IOrder>();
+				return this.UnitOfWork.AllMatching<Order>(o => o.ShippingAddress.ToLower().Contains(shippingAddress.ToLower())).ToList<IOrder>();
 			}
 		}
-		
+
         /// <summary>
         /// Search for Order entities in the database by ShippingCity
         /// </summary>
-        /// <param name="shippingcity">string</param>
+        /// <param name="shippingCity">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<IOrder></returns>
-		public virtual IList<IOrder> SearchByShippingCity(string shippingcity, bool caseSensitive = false)
+		public virtual IList<IOrder> SearchByShippingCity(string shippingCity, bool caseSensitive = false)
 		{		
 			if(caseSensitive) 
 			{
-				return this.UnitOfWork.AllMatching<Order>(o => o.ShippingCity.ToLower().Contains(shippingcity.ToLower())).ToList<IOrder>();
+				return this.UnitOfWork.AllMatching<Order>(o => o.ShippingCity.Contains(shippingCity)).ToList<IOrder>();
 			}
 			else
 			{
-				return this.UnitOfWork.AllMatching<Order>(o => o.ShippingCity.Contains(shippingcity)).ToList<IOrder>();
+				return this.UnitOfWork.AllMatching<Order>(o => o.ShippingCity.ToLower().Contains(shippingCity.ToLower())).ToList<IOrder>();
 			}
 		}
-		
+
         /// <summary>
         /// Search for Order entities in the database by ShippingZip
         /// </summary>
-        /// <param name="shippingzip">string</param>
+        /// <param name="shippingZip">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<IOrder></returns>
-		public virtual IList<IOrder> SearchByShippingZip(string shippingzip, bool caseSensitive = false)
+		public virtual IList<IOrder> SearchByShippingZip(string shippingZip, bool caseSensitive = false)
 		{		
 			if(caseSensitive) 
 			{
-				return this.UnitOfWork.AllMatching<Order>(o => o.ShippingZip.ToLower().Contains(shippingzip.ToLower())).ToList<IOrder>();
+				return this.UnitOfWork.AllMatching<Order>(o => o.ShippingZip.Contains(shippingZip)).ToList<IOrder>();
 			}
 			else
 			{
-				return this.UnitOfWork.AllMatching<Order>(o => o.ShippingZip.Contains(shippingzip)).ToList<IOrder>();
+				return this.UnitOfWork.AllMatching<Order>(o => o.ShippingZip.ToLower().Contains(shippingZip.ToLower())).ToList<IOrder>();
 			}
 		}
-		
+
 		#endregion
 		
 		#region Modifiers
@@ -225,7 +185,7 @@ namespace Banking.Models.Repository
 			var entityToSave = new Order(entity, false);
 			return this.UnitOfWork.Add(entityToSave);
 		}
-		
+
         /// <summary>
         /// Update the Order entity in the database if any values have changed
         /// </summary>
@@ -234,7 +194,7 @@ namespace Banking.Models.Repository
 		public virtual bool Update(IOrder entity)
 		{
 			bool doUpdate = false;
-			var entityToUpdate = this.UnitOfWork.FirstOrDefault<Order>(o => o.OrderId == entity.OrderId);
+			var entityToUpdate = this.UnitOfWork.FirstOrDefault<Order>(o =>  o.OrderId == entity.OrderId );
 			
 			if (entityToUpdate == null)
 			{
@@ -266,7 +226,7 @@ namespace Banking.Models.Repository
         /// <returns>bool</returns>
 		public virtual bool Delete(IOrder entity)
 		{		
-			var entityToDelete = this.UnitOfWork.FirstOrDefault<Order>(o => o.OrderId == entity.OrderId);
+			var entityToDelete = this.UnitOfWork.FirstOrDefault<Order>(o =>  o.OrderId == entity.OrderId );
 			
 			if(entityToDelete == null)
 			{
@@ -275,15 +235,15 @@ namespace Banking.Models.Repository
 			
 			return this.UnitOfWork.Remove(entityToDelete);
 		}
-		
-        /// <summary>
-        /// Delete the Order entity from the database using the OrderId
+
+		/// <summary>
+        /// Delete the Order entity from the database
         /// </summary>
-        /// <param name="orderid">int</param>
+        /// <param name="orderId">int</param>
         /// <returns>bool</returns>
-		public virtual bool DeleteByOrderId(int orderid)
+		public virtual bool Delete( int orderId)
 		{
-			var entityToDelete = this.UnitOfWork.FirstOrDefault<Order>(o => o.OrderId == orderid);
+			var entityToDelete = this.UnitOfWork.FirstOrDefault<Order>(o =>  o.OrderId == orderId );
 			
 			if(entityToDelete == null)
 			{

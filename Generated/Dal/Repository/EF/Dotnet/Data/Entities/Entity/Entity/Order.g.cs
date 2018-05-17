@@ -77,11 +77,11 @@ namespace Banking.Models.Entity
 		public string ShippingZip { get; set; }
 
 		#endregion
-		
+
 		#region Child Relationships
         
         public virtual IList<OrderDetails> OrderDetails { get; set; }
-
+	
         IList<IOrderDetails> IOrder.OrderDetails 
 		{ 
 			get
@@ -93,13 +93,12 @@ namespace Banking.Models.Entity
 				this.OrderDetails = (IList<OrderDetails>)value;
 			}			
 		}
-		
+
 		#endregion
-		
+
 		#region Parent Relationships
 
         public virtual Customer Customer { get; set; }
-
 		ICustomer IOrder.Customer 
 		{ 
 			get

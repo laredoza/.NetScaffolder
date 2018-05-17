@@ -14,11 +14,11 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.RepoInterfaceDa
     using System.IO;
     using System.Windows.Forms;
     using System.Xml.Serialization;
-
+    using DotNetScaffolder.Components.Common;
     using DotNetScaffolder.Components.Common.Contract;
     using DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Base;
     using DotNetScaffolder.Core.Common.Serializer;
-
+    using DotNetScaffolder.Mapping.MetaData.Model;
     using FormControls.TreeView;
 
     #endregion

@@ -66,15 +66,10 @@ namespace Banking.Models.Entity
 		public DateTime TransferDate { get; set; }
 
 		#endregion
-		
-		#region Child Relationships
-		
-		#endregion
-		
+
 		#region Parent Relationships
 
         public virtual BankAccount BankAccountFrom { get; set; }
-
 		IBankAccount IBankTransfers.BankAccountFrom 
 		{ 
 			get
@@ -88,7 +83,6 @@ namespace Banking.Models.Entity
 		}
 
         public virtual BankAccount BankAccountTo { get; set; }
-
 		IBankAccount IBankTransfers.BankAccountTo 
 		{ 
 			get

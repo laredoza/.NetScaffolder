@@ -33,60 +33,32 @@ namespace Banking.Models.Interfaces
 		#region Load
 
         /// <summary>
-        /// Load the Order entity from the database using the OrderId primary key
-        /// </summary>
-        /// <param name="orderid">int</param>
+        /// Load Order entities from the database using the composite primary keys
+        /// </summary
+        /// <param name="orderId">int</param>
         /// <returns>IOrder</returns>
-		IOrder LoadByOrderId(int orderid);
+		IOrder LoadByOrderId(int orderId);
 
         /// <summary>
         /// Load Order entities from the database using the CustomerId field
         /// </summary>
-        /// <param name="customerid">Nullable<int></param>
+        /// <param name="customerId">Nullable<int></param>
         /// <returns>IList<IOrder></returns>
-		IList<IOrder> LoadByCustomerId(Nullable<int> customerid);
+		IList<IOrder> LoadByCustomerId(Nullable<int> customerId);
 
         /// <summary>
         /// Load Order entities from the database using the OrderDate field
         /// </summary>
-        /// <param name="orderdate">Nullable<DateTime></param>
+        /// <param name="orderDate">Nullable<DateTime></param>
         /// <returns>IList<IOrder></returns>
-		IList<IOrder> LoadByOrderDate(Nullable<DateTime> orderdate);
+		IList<IOrder> LoadByOrderDate(Nullable<DateTime> orderDate);
 
         /// <summary>
         /// Load Order entities from the database using the DeliveryDate field
         /// </summary>
-        /// <param name="deliverydate">Nullable<DateTime></param>
+        /// <param name="deliveryDate">Nullable<DateTime></param>
         /// <returns>IList<IOrder></returns>
-		IList<IOrder> LoadByDeliveryDate(Nullable<DateTime> deliverydate);
-
-        /// <summary>
-        /// Load Order entities from the database using the ShippingName field
-        /// </summary>
-        /// <param name="shippingname">string</param>
-        /// <returns>IList<IOrder></returns>
-		IList<IOrder> LoadByShippingName(string shippingname);
-
-        /// <summary>
-        /// Load Order entities from the database using the ShippingAddress field
-        /// </summary>
-        /// <param name="shippingaddress">string</param>
-        /// <returns>IList<IOrder></returns>
-		IList<IOrder> LoadByShippingAddress(string shippingaddress);
-
-        /// <summary>
-        /// Load Order entities from the database using the ShippingCity field
-        /// </summary>
-        /// <param name="shippingcity">string</param>
-        /// <returns>IList<IOrder></returns>
-		IList<IOrder> LoadByShippingCity(string shippingcity);
-
-        /// <summary>
-        /// Load Order entities from the database using the ShippingZip field
-        /// </summary>
-        /// <param name="shippingzip">string</param>
-        /// <returns>IList<IOrder></returns>
-		IList<IOrder> LoadByShippingZip(string shippingzip);
+		IList<IOrder> LoadByDeliveryDate(Nullable<DateTime> deliveryDate);
 
         /// <summary>
         /// Load all Order entities from the database.
@@ -101,34 +73,34 @@ namespace Banking.Models.Interfaces
         /// <summary>
         /// Search for Order entities in the database by ShippingName
         /// </summary>
-        /// <param name="shippingname">string</param>
+        /// <param name="shippingName">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<IOrder></returns>
-		IList<IOrder> SearchByShippingName(string shippingname, bool caseSensitive = false);
+		IList<IOrder> SearchByShippingName(string shippingName, bool caseSensitive = false);
 
         /// <summary>
         /// Search for Order entities in the database by ShippingAddress
         /// </summary>
-        /// <param name="shippingaddress">string</param>
+        /// <param name="shippingAddress">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<IOrder></returns>
-		IList<IOrder> SearchByShippingAddress(string shippingaddress, bool caseSensitive = false);
+		IList<IOrder> SearchByShippingAddress(string shippingAddress, bool caseSensitive = false);
 
         /// <summary>
         /// Search for Order entities in the database by ShippingCity
         /// </summary>
-        /// <param name="shippingcity">string</param>
+        /// <param name="shippingCity">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<IOrder></returns>
-		IList<IOrder> SearchByShippingCity(string shippingcity, bool caseSensitive = false);
+		IList<IOrder> SearchByShippingCity(string shippingCity, bool caseSensitive = false);
 
         /// <summary>
         /// Search for Order entities in the database by ShippingZip
         /// </summary>
-        /// <param name="shippingzip">string</param>
+        /// <param name="shippingZip">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<IOrder></returns>
-		IList<IOrder> SearchByShippingZip(string shippingzip, bool caseSensitive = false);
+		IList<IOrder> SearchByShippingZip(string shippingZip, bool caseSensitive = false);
 
 		#endregion
 		
@@ -140,7 +112,7 @@ namespace Banking.Models.Interfaces
         /// <param name="entity">IOrder</param>
         /// <returns>bool</returns>
 		bool Save(IOrder entity);
-		
+
         /// <summary>
         /// Update the Order entity in the database if any values have changed
         /// </summary>
@@ -154,13 +126,13 @@ namespace Banking.Models.Interfaces
         /// <param name="entity">IOrder</param>
         /// <returns>bool</returns>
 		bool Delete(IOrder entity);
-		
-        /// <summary>
-        /// Delete the Order entity from the database using the OrderId
+
+		/// <summary>
+        /// Delete the Order entity from the database
         /// </summary>
-        /// <param name="orderid">int</param>
+        /// <param name="orderId">int</param>
         /// <returns>bool</returns>
-		bool DeleteByOrderId(int orderid);
+		bool Delete( int orderId);
 
 		#endregion
 	}

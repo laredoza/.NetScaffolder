@@ -20,13 +20,15 @@ public class EntityTemplate : BaseTemplate
 
 using System;
 using System.Collections.Generic;
+<#+ if(DataType.UseInterface){ #>
 using <#= DtoInterfaceNamespace #>;
+<#+ } #>
 
 namespace <#= DataType.FullNamespace #>
 {
 	public partial class <#= DataType.EntityName #> <#= DataType.TransformInheritFrom #> 
 	{
-<#+ if(DataType.AddInjectConstructor){ #>
+<#+ if(DataType.UseInterface && DataType.AddInjectConstructor){ #>
 		#region CTOR
 		
 		public <#= DataType.EntityName #>()
@@ -81,12 +83,13 @@ namespace <#= DataType.FullNamespace #>
 <#+ } #>
 
 		#endregion
-		
+<#+ if(DataType.MetaData.DistinctChildRelationships.Count > 0){ #>
+
 		#region Child Relationships
 <#+ foreach(var child in DataType.MetaData.DistinctChildRelationships.Where(o => o.ReferencedMultiplicity == RelationshipMultiplicity.Many)){ #>
         
         public virtual <#= DataType.CollectionOption.ClassNameInterface #><<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #>> <#= RelationshipNameFormatting.FormatName(child.ReferencedTableName, child.RelationshipAlias, DataType.NamingConvention) #> { get; set; }
-
+<#+ if(DataType.UseInterface) {#>	
         <#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #>> I<#= DataType.EntityName #>.<#= RelationshipNameFormatting.FormatName(child.ReferencedTableName, child.RelationshipAlias, DataType.NamingConvention) #> 
 		{ 
 			get
@@ -99,11 +102,12 @@ namespace <#= DataType.FullNamespace #>
 			}			
 		}
 <#+ } #>
+<#+ } #>
 
 <#+ foreach(var child in DataType.MetaData.DistinctChildRelationships.Where(o => o.ReferencedMultiplicity != RelationshipMultiplicity.Many)){ #>
         
         public virtual <#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #> <#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #> { get; set; }
-
+<#+ if(DataType.UseInterface) {#>
 		I<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #> I<#= DataType.EntityName #>.<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #> 
 		{ 
 			get
@@ -116,14 +120,17 @@ namespace <#= DataType.FullNamespace #>
 			}
 		}
 <#+ } #>
-		
+<#+ } #>
+
 		#endregion
-		
+<#+ } #>
+<#+ if(DataType.MetaData.DistinctParentRelationships.Count > 0) {#>
+
 		#region Parent Relationships
 <#+ foreach(var parent in DataType.MetaData.DistinctParentRelationships){ #>
 
         public virtual <#= DataType.NamingConvention.ApplyNamingConvention(parent.ReferencedTableName) #> <#= RelationshipNameFormatting.FormatName(parent.ReferencedTableName, parent.RelationshipAlias, DataType.NamingConvention) #> { get; set; }
-
+<#+ if(DataType.UseInterface) {#>
 		I<#= DataType.NamingConvention.ApplyNamingConvention(parent.ReferencedTableName) #> I<#= DataType.EntityName #>.<#= RelationshipNameFormatting.FormatName(parent.ReferencedTableName, parent.RelationshipAlias, DataType.NamingConvention) #> 
 		{ 
 			get
@@ -136,8 +143,10 @@ namespace <#= DataType.FullNamespace #>
 			}
 		}
 <#+ } #>
+<#+ } #>
 		
 		#endregion
+<#+ } #>
 	}
 }
 <#+

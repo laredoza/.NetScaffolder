@@ -6,11 +6,12 @@
 
 namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Base
 {
+    using System;
     #region Usings
 
     using System.Collections.Generic;
     using System.Xml.Serialization;
-
+    using DotNetScaffolder.Components.Common;
     using DotNetScaffolder.Components.Common.Contract;
     using DotNetScaffolder.Mapping.MetaData.Model;
 
@@ -110,5 +111,63 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Base
         /// The <see cref="bool"/>.
         /// </returns>
         public abstract bool Save(IDictionary<string, string> parameters);
+
+        public string TransformAsParameter(IEnumerable<Column> columns)
+        {
+            string pk = string.Empty;
+
+            foreach (var col in columns)
+            {
+                pk = $"{pk} {TransformAsParameter(col)}, ";
+            }
+
+            return pk.TrimEnd(' ').TrimEnd(',');
+        }
+
+        public string TransformAsParameter(Column col)
+        {
+            return $"{CSharpOutputMapper.MapToOutput(col)} {TransformParameterName(col.ColumnName)}";
+        }
+
+        public string TransformAsQuery(Column col, string entityName = "", bool caseSensitive = false)
+        {
+            if (col.DomainDataType != DomainDataType.String)
+            {
+                if (!string.IsNullOrEmpty(entityName))
+                {
+                    return $"o.{col.ColumnName} == {entityName}.{col.ColumnName}";
+                }
+                return $"o.{col.ColumnName} == {TransformParameterName(col.ColumnName)}";
+            }
+            else
+            {
+                string searchCase = !caseSensitive ? ".ToLower()" : "";
+
+                if (!string.IsNullOrEmpty(entityName))
+                {
+                    return $"o.{col.ColumnName}{searchCase}.Contains({entityName}.{col.ColumnName}{searchCase})";
+                }
+
+                return $"o.{col.ColumnName}{searchCase}.Contains({TransformParameterName(col.ColumnName)}{searchCase})";
+            }
+        }
+
+        public string TransformAsQuery(IEnumerable<Column> columns, string entityName = "", bool caseSensitive = false)
+        {
+            string query = string.Empty;
+
+            foreach (var col in columns)
+            {
+                query = $"{query} {TransformAsQuery(col, entityName, caseSensitive)} && ";
+            }
+
+            return $"{query.TrimEnd(' ').TrimEnd('&')}";
+        }
+
+        public string TransformParameterName(string name)
+        {
+            string formattedName = NamingConvention != null ? NamingConvention.ApplyNamingConvention(name) : name;
+            return Char.ToLowerInvariant(formattedName[0]) + formattedName.Substring(1);
+        }
     }
 }

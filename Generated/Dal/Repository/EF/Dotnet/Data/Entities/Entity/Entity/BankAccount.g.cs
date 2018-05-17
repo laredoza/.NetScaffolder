@@ -80,11 +80,11 @@ namespace Banking.Models.Entity
 		public bool Locked { get; set; }
 
 		#endregion
-		
+
 		#region Child Relationships
         
         public virtual IList<BankTransfers> BankTransfersFrom { get; set; }
-
+	
         IList<IBankTransfers> IBankAccount.BankTransfersFrom 
 		{ 
 			get
@@ -98,7 +98,7 @@ namespace Banking.Models.Entity
 		}
         
         public virtual IList<BankTransfers> BankTransfersTo { get; set; }
-
+	
         IList<IBankTransfers> IBankAccount.BankTransfersTo 
 		{ 
 			get
@@ -110,13 +110,12 @@ namespace Banking.Models.Entity
 				this.BankTransfersTo = (IList<BankTransfers>)value;
 			}			
 		}
-		
+
 		#endregion
-		
+
 		#region Parent Relationships
 
         public virtual Customer Customer { get; set; }
-
 		ICustomer IBankAccount.Customer 
 		{ 
 			get

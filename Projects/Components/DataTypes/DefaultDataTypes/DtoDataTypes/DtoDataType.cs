@@ -135,7 +135,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.DtoDataTypes
                     inherit = $": {this.InheritFrom}";
                 }
 
-                if (this.AddInjectConstructor || this.UseInterface)
+                if (this.UseInterface)
                 {
                     inherit += !string.IsNullOrEmpty(this.InheritFrom) ? ", " : ": ";
                     inherit += $"I{this.DtoName}";
@@ -143,6 +143,13 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.DtoDataTypes
 
                 return inherit;
             }
+        }
+
+        public string TransformDtoType(string name)
+        {
+            string formattedName = NamingConvention != null ? NamingConvention.ApplyNamingConvention(name) : name;
+
+            return UseInterface ? $"I{formattedName}" : $"{formattedName}{PostFix}";
         }
 
         /// <summary>
@@ -195,6 +202,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.DtoDataTypes
                     this.OutputFolder = dto.OutputFolder;
                     this.OutputPath = dto.OutputPath;
                     this.InheritFrom = dto.InheritFrom;
+                    this.UseInterface = dto.UseInterface;
                     this.AddInjectConstructor = dto.AddInjectConstructor;
                 }
             }

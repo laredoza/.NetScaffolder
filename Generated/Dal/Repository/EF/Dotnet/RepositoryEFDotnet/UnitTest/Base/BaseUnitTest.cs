@@ -57,6 +57,18 @@ namespace RepositoryEFDotnet.UnitTest
             }
         }
 
+        protected virtual void PopulateCompositeKeyTest(ICompositeKeyTest item, bool isUpdate = false)
+        {
+            item.PrimaryCol1 = 1;
+            item.PrimaryCol2 = 2;
+
+            if (isUpdate)
+            {
+                item.PrimaryCol1 = 3;
+                item.PrimaryCol2 = 4;
+            }
+        }
+
         protected virtual void PopulateBook(IBook item, bool isUpdate = false, int seed = 1)
         {
             throw new NotImplementedException("PopulateBook");

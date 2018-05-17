@@ -47,6 +47,13 @@ namespace RepositoryEFDotnet.UnitTest
         }
 
 		[TestMethod]
+        public void CompositeKeyTest_Add()
+        {
+            var repo = new CompositeKeyTestRepository(Context);
+            BaseRepositoryUnitTest_CompositeKeyTest_Add(repo);
+        }
+
+		[TestMethod]
         public void BankTransfers_Add()
         {
             var repo = new BankTransfersRepository(Context);
@@ -119,6 +126,21 @@ namespace RepositoryEFDotnet.UnitTest
             // Test count
             Check_EntityCount(1, result.Count, "BankAccount");
             Check_BankAccount(dto, result.FirstOrDefault());
+        }
+
+        public virtual void BaseRepositoryUnitTest_CompositeKeyTest_Add(ICompositeKeyTestRepository repository)
+        {
+            var dto = new CompositeKeyTestDto();
+            PopulateCompositeKeyTest(dto);
+            repository.Save(dto);
+            Context.Commit();
+
+            // Load from db and check values
+            var result = repository.LoadAll();
+
+            // Test count
+            Check_EntityCount(1, result.Count, "CompositeKeyTest");
+            Check_CompositeKeyTest(dto, result.FirstOrDefault());
         }
 
         public virtual void BaseRepositoryUnitTest_BankTransfers_Add(IBankTransfersRepository repository)

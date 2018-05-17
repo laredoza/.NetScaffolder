@@ -43,6 +43,7 @@
     <Compile Include="Entity\BankAccount.g.cs" />
     <Compile Include="Entity\BankTransfers.g.cs" />
     <Compile Include="Entity\Book.g.cs" />
+    <Compile Include="Entity\CompositeKeyTest.g.cs" />
     <Compile Include="Entity\Country.g.cs" />
     <Compile Include="Entity\Customer.g.cs" />
     <Compile Include="Entity\Order.g.cs" />

@@ -33,18 +33,11 @@ namespace Banking.Models.Interfaces
 		#region Load
 
         /// <summary>
-        /// Load the BankAccount entity from the database using the BankAccountId primary key
-        /// </summary>
-        /// <param name="bankaccountid">int</param>
+        /// Load BankAccount entities from the database using the composite primary keys
+        /// </summary
+        /// <param name="bankAccountId">int</param>
         /// <returns>IBankAccount</returns>
-		IBankAccount LoadByBankAccountId(int bankaccountid);
-
-        /// <summary>
-        /// Load BankAccount entities from the database using the BankAccountNumber field
-        /// </summary>
-        /// <param name="bankaccountnumber">string</param>
-        /// <returns>IList<IBankAccount></returns>
-		IList<IBankAccount> LoadByBankAccountNumber(string bankaccountnumber);
+		IBankAccount LoadByBankAccountId(int bankAccountId);
 
         /// <summary>
         /// Load BankAccount entities from the database using the Balance field
@@ -56,9 +49,9 @@ namespace Banking.Models.Interfaces
         /// <summary>
         /// Load BankAccount entities from the database using the CustomerId field
         /// </summary>
-        /// <param name="customerid">Nullable<int></param>
+        /// <param name="customerId">Nullable<int></param>
         /// <returns>IList<IBankAccount></returns>
-		IList<IBankAccount> LoadByCustomerId(Nullable<int> customerid);
+		IList<IBankAccount> LoadByCustomerId(Nullable<int> customerId);
 
         /// <summary>
         /// Load BankAccount entities from the database using the Locked field
@@ -80,10 +73,10 @@ namespace Banking.Models.Interfaces
         /// <summary>
         /// Search for BankAccount entities in the database by BankAccountNumber
         /// </summary>
-        /// <param name="bankaccountnumber">string</param>
+        /// <param name="bankAccountNumber">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<IBankAccount></returns>
-		IList<IBankAccount> SearchByBankAccountNumber(string bankaccountnumber, bool caseSensitive = false);
+		IList<IBankAccount> SearchByBankAccountNumber(string bankAccountNumber, bool caseSensitive = false);
 
 		#endregion
 		
@@ -95,7 +88,7 @@ namespace Banking.Models.Interfaces
         /// <param name="entity">IBankAccount</param>
         /// <returns>bool</returns>
 		bool Save(IBankAccount entity);
-		
+
         /// <summary>
         /// Update the BankAccount entity in the database if any values have changed
         /// </summary>
@@ -109,13 +102,13 @@ namespace Banking.Models.Interfaces
         /// <param name="entity">IBankAccount</param>
         /// <returns>bool</returns>
 		bool Delete(IBankAccount entity);
-		
-        /// <summary>
-        /// Delete the BankAccount entity from the database using the BankAccountId
+
+		/// <summary>
+        /// Delete the BankAccount entity from the database
         /// </summary>
-        /// <param name="bankaccountid">int</param>
+        /// <param name="bankAccountId">int</param>
         /// <returns>bool</returns>
-		bool DeleteByBankAccountId(int bankaccountid);
+		bool Delete( int bankAccountId);
 
 		#endregion
 	}

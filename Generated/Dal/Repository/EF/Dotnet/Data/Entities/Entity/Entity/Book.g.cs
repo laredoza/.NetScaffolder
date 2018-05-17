@@ -56,15 +56,10 @@ namespace Banking.Models.Entity
 		public string Publisher { get; set; }
 
 		#endregion
-		
-		#region Child Relationships
-		
-		#endregion
-		
+
 		#region Parent Relationships
 
         public virtual Product Product { get; set; }
-
 		IProduct IBook.Product 
 		{ 
 			get

@@ -6,5 +6,5 @@
   <OutputFolder>Dto</OutputFolder>
   <OutputPath>..\..\Dtos\Dto\RepositoryEFDotnet.Data.Dtos.Dto.csproj</OutputPath>
   <PostFix>Dto</PostFix>
-  <UseInterface>false</UseInterface>
+  <UseInterface>true</UseInterface>
 </DtoDataType>

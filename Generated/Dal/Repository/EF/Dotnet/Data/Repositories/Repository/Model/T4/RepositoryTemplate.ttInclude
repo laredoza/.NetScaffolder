@@ -46,44 +46,47 @@ namespace <#= DataType.FullNamespace #>
 		#endregion
 		
 		#region Load
-		
-<#+ if(DataType.MetaData.PrimaryKeyCount == 1){ foreach(var col in DataType.MetaData.Columns.Where(o => o.IsPrimaryKey)){ #>
-        /// <summary>
-        /// Load the <#= DataType.ModelName #> entity from the database using the <#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #> primary key
-        /// </summary>
-        /// <param name="<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName).ToLower() #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
-        /// <returns>I<#= DataType.ModelName #></returns>
-		public virtual I<#= DataType.ModelName #> LoadBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= CSharpOutputMapper.MapToOutput(col) #> <#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName).ToLower() #>)
-		{
-			return this.UnitOfWork.FirstOrDefault<<#= DataType.ModelName #>>(o => o.<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #> == <#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName).ToLower() #>);
-		}
-		
-<#+ } } #>
-<#+ else { foreach(var col in DataType.MetaData.Columns.Where(o => o.IsPrimaryKey)){ #>
-        /// <summary>
-        /// Load <#= DataType.ModelName #> entities from the database using the <#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #> primary key
-        /// </summary>
-        /// <param name="<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName).ToLower() #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
-        /// <returns><#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>></returns>
-		public virtual <#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>> LoadBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= CSharpOutputMapper.MapToOutput(col) #> <#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName).ToLower() #>)
-		{
-			return this.UnitOfWork.AllMatching<<#= DataType.ModelName #>>(o => o.<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #> == <#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName).ToLower() #>).ToList<I<#= DataType.ModelName #>>();
-		}
-		
-<#+ } } #>
+<#+ if(DataType.MetaData.PrimaryKeyCount > 1){ #>
 
-<#+ foreach(var col in DataType.MetaData.Columns.Where(o => !o.IsPrimaryKey)){ #>
+        /// <summary>
+        /// Load <#= DataType.ModelName #> entities from the database using the composite primary keys
+        /// </summary
+<#+ foreach(var col in DataType.MetaData.Columns.Where(o => o.IsPrimaryKey)) {#>
+        /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
+<#+ } #>
+        /// <returns>I<#= DataType.ModelName #></returns>
+		public virtual I<#= DataType.ModelName #> Load(<#= DataType.TransformAsParameter(DataType.MetaData.Columns.Where(o => o.IsPrimaryKey)) #>)
+		{
+			return this.UnitOfWork.FirstOrDefault<<#= DataType.ModelName #>>(o => <#= DataType.TransformAsQuery(DataType.MetaData.Columns.Where(o => o.IsPrimaryKey)) #>);
+		}
+<#+ } #>
+
+<#+ if(DataType.MetaData.PrimaryKeyCount == 1){ var col = DataType.MetaData.Columns.First(o => o.IsPrimaryKey);#>
+
+        /// <summary>
+        /// Load <#= DataType.ModelName #> entities from the database using the composite primary keys
+        /// </summary
+        /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
+        /// <returns>I<#= DataType.ModelName #></returns>
+		public virtual I<#= DataType.ModelName #> LoadBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= DataType.TransformAsParameter(col) #>)
+		{
+			return this.UnitOfWork.FirstOrDefault<<#= DataType.ModelName #>>(o => <#= DataType.TransformAsQuery(col) #>);
+		}
+<#+ } #>
+
+<#+ foreach(var col in DataType.MetaData.Columns.Where(o => !o.IsPrimaryKey && o.DomainDataType != DomainDataType.String)){ #>
+
         /// <summary>
         /// Load <#= DataType.ModelName #> entities from the database using the <#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #> field
         /// </summary>
-        /// <param name="<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName).ToLower() #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
+        /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
         /// <returns><#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>></returns>
-		public virtual <#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>> LoadBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= CSharpOutputMapper.MapToOutput(col) #> <#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName).ToLower() #>)
+		public virtual <#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>> LoadBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= DataType.TransformAsParameter(col) #>)
 		{
-			return this.UnitOfWork.AllMatching<<#= DataType.ModelName #>>(o => o.<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #> == <#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName).ToLower() #>).ToList<I<#= DataType.ModelName #>>();
+			return this.UnitOfWork.AllMatching<<#= DataType.ModelName #>>(o => <#= DataType.TransformAsQuery(col) #>).ToList<I<#= DataType.ModelName #>>();
 		}
-		
 <#+ }  #>
+
         /// <summary>
         /// Load all <#= DataType.ModelName #> entities from the database.
         /// </summary>
@@ -96,27 +99,27 @@ namespace <#= DataType.FullNamespace #>
 		#endregion
 
 		#region Search
-		
 <#+ foreach(var col in DataType.MetaData.Columns.Where(o => !o.IsPrimaryKey && o.DomainDataType == DomainDataType.String)){ #>
+
         /// <summary>
         /// Search for <#= DataType.ModelName #> entities in the database by <#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>
         /// </summary>
-        /// <param name="<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName).ToLower() #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
+        /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns><#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>></returns>
-		public virtual <#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>> SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= CSharpOutputMapper.MapToOutput(col) #> <#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName).ToLower() #>, bool caseSensitive = false)
+		public virtual <#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>> SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= DataType.TransformAsParameter(col) #>, bool caseSensitive = false)
 		{		
 			if(caseSensitive) 
 			{
-				return this.UnitOfWork.AllMatching<<#= DataType.ModelName #>>(o => o.<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>.ToLower().Contains(<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName).ToLower() #>.ToLower())).ToList<I<#= DataType.ModelName #>>();
+				return this.UnitOfWork.AllMatching<<#= DataType.ModelName #>>(o => <#= DataType.TransformAsQuery(col, "", true) #>).ToList<I<#= DataType.ModelName #>>();
 			}
 			else
 			{
-				return this.UnitOfWork.AllMatching<<#= DataType.ModelName #>>(o => o.<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>.Contains(<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName).ToLower() #>)).ToList<I<#= DataType.ModelName #>>();
+				return this.UnitOfWork.AllMatching<<#= DataType.ModelName #>>(o => <#= DataType.TransformAsQuery(col) #>).ToList<I<#= DataType.ModelName #>>();
 			}
 		}
-		
 <#+ }  #>
+
 		#endregion
 		
 		#region Modifiers
@@ -131,8 +134,7 @@ namespace <#= DataType.FullNamespace #>
 			var entityToSave = new <#= DataType.ModelName #>(entity, false);
 			return this.UnitOfWork.Add(entityToSave);
 		}
-		
-<#+ if(DataType.MetaData.Columns.Count(o => o.IsPrimaryKey) == 1){ var pk = DataType.MetaData.Columns.FirstOrDefault(o => o.IsPrimaryKey);#>
+
         /// <summary>
         /// Update the <#= DataType.ModelName #> entity in the database if any values have changed
         /// </summary>
@@ -141,7 +143,7 @@ namespace <#= DataType.FullNamespace #>
 		public virtual bool Update(I<#= DataType.ModelName #> entity)
 		{
 			bool doUpdate = false;
-			var entityToUpdate = this.UnitOfWork.FirstOrDefault<<#= DataType.ModelName #>>(o => o.<#= DataType.NamingConvention.ApplyNamingConvention(pk.ColumnName) #> == entity.<#= DataType.NamingConvention.ApplyNamingConvention(pk.ColumnName) #>);
+			var entityToUpdate = this.UnitOfWork.FirstOrDefault<<#= DataType.ModelName #>>(o => <#= DataType.TransformAsQuery(DataType.MetaData.Columns.Where(o => o.IsPrimaryKey), "entity") #>);
 			
 			if (entityToUpdate == null)
 			{
@@ -169,7 +171,7 @@ namespace <#= DataType.FullNamespace #>
         /// <returns>bool</returns>
 		public virtual bool Delete(I<#= DataType.ModelName #> entity)
 		{		
-			var entityToDelete = this.UnitOfWork.FirstOrDefault<<#= DataType.ModelName #>>(o => o.<#= DataType.NamingConvention.ApplyNamingConvention(pk.ColumnName) #> == entity.<#= DataType.NamingConvention.ApplyNamingConvention(pk.ColumnName) #>);
+			var entityToDelete = this.UnitOfWork.FirstOrDefault<<#= DataType.ModelName #>>(o => <#= DataType.TransformAsQuery(DataType.MetaData.Columns.Where(o => o.IsPrimaryKey), "entity")#>);
 			
 			if(entityToDelete == null)
 			{
@@ -178,15 +180,17 @@ namespace <#= DataType.FullNamespace #>
 			
 			return this.UnitOfWork.Remove(entityToDelete);
 		}
-		
-        /// <summary>
-        /// Delete the <#= DataType.ModelName #> entity from the database using the <#= DataType.NamingConvention.ApplyNamingConvention(pk.ColumnName) #>
+
+		/// <summary>
+        /// Delete the <#= DataType.ModelName #> entity from the database
         /// </summary>
-        /// <param name="<#= DataType.NamingConvention.ApplyNamingConvention(pk.ColumnName).ToLower() #>"><#= CSharpOutputMapper.MapToOutput(pk) #></param>
+<#+ foreach(var col in DataType.MetaData.Columns.Where(o => o.IsPrimaryKey)) {#>
+        /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
+<#+ } #>
         /// <returns>bool</returns>
-		public virtual bool DeleteBy<#= DataType.NamingConvention.ApplyNamingConvention(pk.ColumnName) #>(<#= CSharpOutputMapper.MapToOutput(pk) #> <#= DataType.NamingConvention.ApplyNamingConvention(pk.ColumnName).ToLower() #>)
+		public virtual bool Delete(<#= DataType.TransformAsParameter(DataType.MetaData.Columns.Where(o => o.IsPrimaryKey)) #>)
 		{
-			var entityToDelete = this.UnitOfWork.FirstOrDefault<<#= DataType.ModelName #>>(o => o.<#= DataType.NamingConvention.ApplyNamingConvention(pk.ColumnName) #> == <#= DataType.NamingConvention.ApplyNamingConvention(pk.ColumnName).ToLower() #>);
+			var entityToDelete = this.UnitOfWork.FirstOrDefault<<#= DataType.ModelName #>>(o => <#= DataType.TransformAsQuery(DataType.MetaData.Columns.Where(o => o.IsPrimaryKey))#>);
 			
 			if(entityToDelete == null)
 			{
@@ -195,7 +199,6 @@ namespace <#= DataType.FullNamespace #>
 			
 			return this.UnitOfWork.Remove(entityToDelete);
 		}
-<#+ }  #>
 		
 		#endregion
 	}

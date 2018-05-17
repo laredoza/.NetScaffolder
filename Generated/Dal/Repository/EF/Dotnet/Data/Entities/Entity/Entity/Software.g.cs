@@ -56,15 +56,10 @@ namespace Banking.Models.Entity
 		public string LicenseCode { get; set; }
 
 		#endregion
-		
-		#region Child Relationships
-		
-		#endregion
-		
+
 		#region Parent Relationships
 
         public virtual Product Product { get; set; }
-
 		IProduct ISoftware.Product 
 		{ 
 			get

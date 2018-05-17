@@ -1,5 +1,5 @@
 ﻿
-// <copyright file="Book.g.cs" company="MIT">
+// <copyright file="CompositeKeyTest.g.cs" company="MIT">
 //  Copyright (c) 2018 MIT
 // </copyright>  
 
@@ -26,68 +26,62 @@ using Banking.Models.Interfaces;
 namespace Banking.Models.Interfaces
 {
 	/// <summary>
-	/// The BookRepository interface that defines database functions for the Book table
+	/// The CompositeKeyTestRepository interface that defines database functions for the CompositeKeyTest table
 	/// </summary>
-	public partial interface IBookRepository : IRepository<IBook>
+	public partial interface ICompositeKeyTestRepository : IRepository<ICompositeKeyTest>
 	{
 		#region Load
 
         /// <summary>
-        /// Load Book entities from the database using the composite primary keys
+        /// Load CompositeKeyTest entities from the database using the composite primary keys
         /// </summary
-        /// <param name="productId">int</param>
-        /// <returns>IBook</returns>
-		IBook LoadByProductId(int productId);
+        /// <param name="primaryCol1">int</param>
+        /// <param name="primaryCol2">int</param>
+        /// <returns>ICompositeKeyTest</returns>
+		ICompositeKeyTest Load( int primaryCol1,  int primaryCol2);
 
         /// <summary>
-        /// Load all Book entities from the database.
+        /// Load all CompositeKeyTest entities from the database.
         /// </summary>
-        /// <returns>IList<IBook></returns>
-		IList<IBook> LoadAll();
+        /// <returns>IList<ICompositeKeyTest></returns>
+		IList<ICompositeKeyTest> LoadAll();
 		
 		#endregion
 
 		#region Search
-
-        /// <summary>
-        /// Search for Book entities in the database by Publisher
-        /// </summary>
-        /// <param name="publisher">string</param>
-		/// <param name="caseSensitive">bool</param>
-        /// <returns>IList<IBook></returns>
-		IList<IBook> SearchByPublisher(string publisher, bool caseSensitive = false);
 
 		#endregion
 		
 		#region Modifiers
 		
         /// <summary>
-        /// Save the Book entity to the database.
+        /// Save the CompositeKeyTest entity to the database.
         /// </summary>
-        /// <param name="entity">IBook</param>
+        /// <param name="entity">ICompositeKeyTest</param>
         /// <returns>bool</returns>
-		bool Save(IBook entity);
+		bool Save(ICompositeKeyTest entity);
 
         /// <summary>
-        /// Update the Book entity in the database if any values have changed
+        /// Update the CompositeKeyTest entity in the database if any values have changed
         /// </summary>
-        /// <param name="entity">IBook</param>
+        /// <param name="entity">ICompositeKeyTest</param>
         /// <returns>bool</returns>
-		bool Update(IBook entity);
+		bool Update(ICompositeKeyTest entity);
 		
         /// <summary>
-        /// Delete the Book entity from the database
+        /// Delete the CompositeKeyTest entity from the database
         /// </summary>
-        /// <param name="entity">IBook</param>
+        /// <param name="entity">ICompositeKeyTest</param>
         /// <returns>bool</returns>
-		bool Delete(IBook entity);
+		bool Delete(ICompositeKeyTest entity);
 
 		/// <summary>
-        /// Delete the Book entity from the database
+        /// Delete the CompositeKeyTest entity from the database
         /// </summary>
-        /// <param name="productId">int</param>
+        /// <param name="primaryCol1">int</param>
+        /// <param name="primaryCol2">int</param>
         /// <returns>bool</returns>
-		bool Delete( int productId);
+		bool Delete( int primaryCol1,  int primaryCol2);
 
 		#endregion
 	}

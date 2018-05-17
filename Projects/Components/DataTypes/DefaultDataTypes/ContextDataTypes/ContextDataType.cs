@@ -175,6 +175,18 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
             return this.NamingConvention.ApplyNamingConvention(name);
         }
 
+        public string TransformCompositeKeys(IEnumerable<Column> pks, string prefix)
+        {
+            string mapping = string.Empty;
+
+            foreach(var col in pks)
+            {
+                mapping = $"{mapping}{prefix}.{col.ColumnName}, ";
+            }
+
+            return mapping.TrimEnd(' ').TrimEnd(',');
+        }
+
         public string TransformRelationship(string table, Relationship rel, IEnumerable<Table> models, IEnumerable<Relationship> relationships = null)
         {
             var sb = new StringBuilder();

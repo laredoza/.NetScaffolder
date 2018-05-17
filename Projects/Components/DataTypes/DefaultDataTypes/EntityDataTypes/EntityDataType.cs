@@ -113,7 +113,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.EntityDataTypes
                     inherit = $": {this.InheritFrom}";
                 }
 
-                if (this.AddInjectConstructor || this.UseInterface)
+                if (this.UseInterface)
                 {
                     inherit += !string.IsNullOrEmpty(this.InheritFrom) ? ", " : ": ";
                     inherit += $"I{this.EntityName}";
@@ -181,6 +181,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.EntityDataTypes
                     this.OutputFolder = entity.OutputFolder;
                     this.OutputPath = entity.OutputPath;
                     this.InheritFrom = entity.InheritFrom;
+                    this.UseInterface = entity.UseInterface;
                     this.AddInjectConstructor = entity.AddInjectConstructor;
                 }
             }

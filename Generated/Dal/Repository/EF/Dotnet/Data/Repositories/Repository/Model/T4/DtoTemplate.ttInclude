@@ -20,13 +20,15 @@ public class DtoTemplate : BaseTemplate
 
 using System;
 using System.Collections.Generic;
+<#+ if(DataType.UseInterface){ #>
 using <#= DtoInterfaceNamespace #>;
+<#+ }#>
 
 namespace <#= DataType.FullNamespace #>
 {
 	public partial class <#= DataType.DtoNameFull #> <#= DataType.TransformInheritFrom #> 
 	{
-<#+ if(DataType.AddInjectConstructor){ #>
+<#+ if(DataType.UseInterface && DataType.AddInjectConstructor){ #>
 		#region CTOR
 		
 		public <#= DataType.DtoNameFull #>()
@@ -85,10 +87,10 @@ namespace <#= DataType.FullNamespace #>
 		#region Child Relationships
 		
 <#+ foreach(var child in DataType.MetaData.DistinctChildRelationships.Where(o => o.ReferencedMultiplicity == RelationshipMultiplicity.Many)){ #>
-		public <#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #>> <#= RelationshipNameFormatting.FormatName(child.ReferencedTableName, child.RelationshipAlias, DataType.NamingConvention) #> { get; set; }
+		public <#= DataType.CollectionOption.ClassNameInterface #><<#= DataType.TransformDtoType(child.ReferencedTableName) #>> <#= RelationshipNameFormatting.FormatName(child.ReferencedTableName, child.RelationshipAlias, DataType.NamingConvention) #> { get; set; }
 <#+ } #>
 <#+ foreach(var child in DataType.MetaData.DistinctChildRelationships.Where(o => o.ReferencedMultiplicity != RelationshipMultiplicity.Many)){ #>
-		public I<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #> <#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #> { get; set; }
+		public <#= DataType.TransformDtoType(child.ReferencedTableName) #> <#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #> { get; set; }
 <#+ } #>
 
 		#endregion
@@ -96,7 +98,7 @@ namespace <#= DataType.FullNamespace #>
 		#region Parent Relationships
 		
 <#+ foreach(var parent in DataType.MetaData.DistinctParentRelationships){ #>
-		public I<#= DataType.NamingConvention.ApplyNamingConvention(parent.ReferencedTableName) #> <#= RelationshipNameFormatting.FormatName(parent.ReferencedTableName, parent.RelationshipAlias, DataType.NamingConvention) #> { get; set; }
+		public <#= DataType.TransformDtoType(parent.ReferencedTableName) #> <#= RelationshipNameFormatting.FormatName(parent.ReferencedTableName, parent.RelationshipAlias, DataType.NamingConvention) #> { get; set; }
 <#+ } #>
 		
 		#endregion

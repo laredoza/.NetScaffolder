@@ -33,32 +33,32 @@ namespace Banking.Models.Interfaces
 		#region Load
 
         /// <summary>
-        /// Load the OrderDetails entity from the database using the OrderDetailsId primary key
-        /// </summary>
-        /// <param name="orderdetailsid">int</param>
+        /// Load OrderDetails entities from the database using the composite primary keys
+        /// </summary
+        /// <param name="orderDetailsId">int</param>
         /// <returns>IOrderDetails</returns>
-		IOrderDetails LoadByOrderDetailsId(int orderdetailsid);
+		IOrderDetails LoadByOrderDetailsId(int orderDetailsId);
 
         /// <summary>
         /// Load OrderDetails entities from the database using the OrderId field
         /// </summary>
-        /// <param name="orderid">int</param>
+        /// <param name="orderId">int</param>
         /// <returns>IList<IOrderDetails></returns>
-		IList<IOrderDetails> LoadByOrderId(int orderid);
+		IList<IOrderDetails> LoadByOrderId(int orderId);
 
         /// <summary>
         /// Load OrderDetails entities from the database using the ProductId field
         /// </summary>
-        /// <param name="productid">int</param>
+        /// <param name="productId">int</param>
         /// <returns>IList<IOrderDetails></returns>
-		IList<IOrderDetails> LoadByProductId(int productid);
+		IList<IOrderDetails> LoadByProductId(int productId);
 
         /// <summary>
         /// Load OrderDetails entities from the database using the UnitPrice field
         /// </summary>
-        /// <param name="unitprice">Nullable<decimal></param>
+        /// <param name="unitPrice">Nullable<decimal></param>
         /// <returns>IList<IOrderDetails></returns>
-		IList<IOrderDetails> LoadByUnitPrice(Nullable<decimal> unitprice);
+		IList<IOrderDetails> LoadByUnitPrice(Nullable<decimal> unitPrice);
 
         /// <summary>
         /// Load OrderDetails entities from the database using the Amount field
@@ -94,7 +94,7 @@ namespace Banking.Models.Interfaces
         /// <param name="entity">IOrderDetails</param>
         /// <returns>bool</returns>
 		bool Save(IOrderDetails entity);
-		
+
         /// <summary>
         /// Update the OrderDetails entity in the database if any values have changed
         /// </summary>
@@ -108,13 +108,13 @@ namespace Banking.Models.Interfaces
         /// <param name="entity">IOrderDetails</param>
         /// <returns>bool</returns>
 		bool Delete(IOrderDetails entity);
-		
-        /// <summary>
-        /// Delete the OrderDetails entity from the database using the OrderDetailsId
+
+		/// <summary>
+        /// Delete the OrderDetails entity from the database
         /// </summary>
-        /// <param name="orderdetailsid">int</param>
+        /// <param name="orderDetailsId">int</param>
         /// <returns>bool</returns>
-		bool DeleteByOrderDetailsId(int orderdetailsid);
+		bool Delete( int orderDetailsId);
 
 		#endregion
 	}

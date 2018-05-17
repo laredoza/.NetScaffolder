@@ -86,8 +86,10 @@ namespace <#= ContextData.TransformFullnamespace(DataType.BaseNamespace) #>
 			modelBuilder.Entity<<#=DataType.TransformModelName(table.TableName) #>>().Property(t => t.<#= pk.ColumnName #>).HasDatabaseGeneratedOption(<#=table.TransformDatabaseGeneratedKeyType #>);
 <#+ } #>
 <#+ if(table.PrimaryKeyCount > 1){ #>
-			// TODO: Add composite primary keys
-<#+  #>
+			modelBuilder.Entity<<#=DataType.TransformModelName(table.TableName) #>>().HasKey(t => new {<#= DataType.TransformCompositeKeys(table.Columns.Where(o => o.IsPrimaryKey), "t") #>});
+<#+ foreach(var col in table.Columns.Where(o => o.IsPrimaryKey)){ #>
+			modelBuilder.Entity<<#=DataType.TransformModelName(table.TableName) #>>().Property(t => t.<#= col.ColumnName #>).HasDatabaseGeneratedOption(<#=table.TransformDatabaseGeneratedKeyType #>);
+<#+ } #>
 <#+ } #>
 <#+ } #>
 

@@ -62,6 +62,23 @@ namespace RepositoryEFDotnet.UnitTest
         }
 		
 
+        protected virtual void Check_CompositeKeyTest(ICompositeKeyTest dto, ICompositeKeyTest savedEntity)
+        { 
+            Assert.IsNotNull(savedEntity);
+			
+			// Test Fields
+            Assert.AreEqual(dto.PrimaryCol1, savedEntity.PrimaryCol1, $"Customer.PrimaryCol1 incorrect.");
+            Assert.AreEqual(dto.PrimaryCol2, savedEntity.PrimaryCol2, $"Customer.PrimaryCol2 incorrect.");
+        }
+		
+        protected virtual void Change_CompositeKeyTest(ICompositeKeyTest dto, ICompositeKeyTest savedEntity)
+        {             
+			// Test Fields
+            Assert.AreEqual(dto.PrimaryCol1, savedEntity.PrimaryCol1, $"Customer.PrimaryCol1 incorrect.");
+            Assert.AreEqual(dto.PrimaryCol2, savedEntity.PrimaryCol2, $"Customer.PrimaryCol2 incorrect.");
+        }
+		
+
         protected virtual void Check_BankTransfers(IBankTransfers dto, IBankTransfers savedEntity)
         { 
             Assert.IsNotNull(savedEntity);

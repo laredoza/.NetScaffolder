@@ -33,95 +33,25 @@ namespace Banking.Models.Interfaces
 		#region Load
 
         /// <summary>
-        /// Load the Customer entity from the database using the CustomerId primary key
-        /// </summary>
-        /// <param name="customerid">int</param>
+        /// Load Customer entities from the database using the composite primary keys
+        /// </summary
+        /// <param name="customerId">int</param>
         /// <returns>ICustomer</returns>
-		ICustomer LoadByCustomerId(int customerid);
-
-        /// <summary>
-        /// Load Customer entities from the database using the CustomerCode field
-        /// </summary>
-        /// <param name="customercode">string</param>
-        /// <returns>IList<ICustomer></returns>
-		IList<ICustomer> LoadByCustomerCode(string customercode);
-
-        /// <summary>
-        /// Load Customer entities from the database using the CompanyName field
-        /// </summary>
-        /// <param name="companyname">string</param>
-        /// <returns>IList<ICustomer></returns>
-		IList<ICustomer> LoadByCompanyName(string companyname);
-
-        /// <summary>
-        /// Load Customer entities from the database using the ContactName field
-        /// </summary>
-        /// <param name="contactname">string</param>
-        /// <returns>IList<ICustomer></returns>
-		IList<ICustomer> LoadByContactName(string contactname);
-
-        /// <summary>
-        /// Load Customer entities from the database using the ContactTitle field
-        /// </summary>
-        /// <param name="contacttitle">string</param>
-        /// <returns>IList<ICustomer></returns>
-		IList<ICustomer> LoadByContactTitle(string contacttitle);
-
-        /// <summary>
-        /// Load Customer entities from the database using the Address field
-        /// </summary>
-        /// <param name="address">string</param>
-        /// <returns>IList<ICustomer></returns>
-		IList<ICustomer> LoadByAddress(string address);
-
-        /// <summary>
-        /// Load Customer entities from the database using the City field
-        /// </summary>
-        /// <param name="city">string</param>
-        /// <returns>IList<ICustomer></returns>
-		IList<ICustomer> LoadByCity(string city);
-
-        /// <summary>
-        /// Load Customer entities from the database using the PostalCode field
-        /// </summary>
-        /// <param name="postalcode">string</param>
-        /// <returns>IList<ICustomer></returns>
-		IList<ICustomer> LoadByPostalCode(string postalcode);
-
-        /// <summary>
-        /// Load Customer entities from the database using the Telephone field
-        /// </summary>
-        /// <param name="telephone">string</param>
-        /// <returns>IList<ICustomer></returns>
-		IList<ICustomer> LoadByTelephone(string telephone);
-
-        /// <summary>
-        /// Load Customer entities from the database using the Fax field
-        /// </summary>
-        /// <param name="fax">string</param>
-        /// <returns>IList<ICustomer></returns>
-		IList<ICustomer> LoadByFax(string fax);
+		ICustomer LoadByCustomerId(int customerId);
 
         /// <summary>
         /// Load Customer entities from the database using the CountryId field
         /// </summary>
-        /// <param name="countryid">Nullable<int></param>
+        /// <param name="countryId">Nullable<int></param>
         /// <returns>IList<ICustomer></returns>
-		IList<ICustomer> LoadByCountryId(Nullable<int> countryid);
-
-        /// <summary>
-        /// Load Customer entities from the database using the Photo field
-        /// </summary>
-        /// <param name="photo">string</param>
-        /// <returns>IList<ICustomer></returns>
-		IList<ICustomer> LoadByPhoto(string photo);
+		IList<ICustomer> LoadByCountryId(Nullable<int> countryId);
 
         /// <summary>
         /// Load Customer entities from the database using the IsEnabled field
         /// </summary>
-        /// <param name="isenabled">bool</param>
+        /// <param name="isEnabled">bool</param>
         /// <returns>IList<ICustomer></returns>
-		IList<ICustomer> LoadByIsEnabled(bool isenabled);
+		IList<ICustomer> LoadByIsEnabled(bool isEnabled);
 
         /// <summary>
         /// Load all Customer entities from the database.
@@ -136,34 +66,34 @@ namespace Banking.Models.Interfaces
         /// <summary>
         /// Search for Customer entities in the database by CustomerCode
         /// </summary>
-        /// <param name="customercode">string</param>
+        /// <param name="customerCode">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<ICustomer></returns>
-		IList<ICustomer> SearchByCustomerCode(string customercode, bool caseSensitive = false);
+		IList<ICustomer> SearchByCustomerCode(string customerCode, bool caseSensitive = false);
 
         /// <summary>
         /// Search for Customer entities in the database by CompanyName
         /// </summary>
-        /// <param name="companyname">string</param>
+        /// <param name="companyName">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<ICustomer></returns>
-		IList<ICustomer> SearchByCompanyName(string companyname, bool caseSensitive = false);
+		IList<ICustomer> SearchByCompanyName(string companyName, bool caseSensitive = false);
 
         /// <summary>
         /// Search for Customer entities in the database by ContactName
         /// </summary>
-        /// <param name="contactname">string</param>
+        /// <param name="contactName">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<ICustomer></returns>
-		IList<ICustomer> SearchByContactName(string contactname, bool caseSensitive = false);
+		IList<ICustomer> SearchByContactName(string contactName, bool caseSensitive = false);
 
         /// <summary>
         /// Search for Customer entities in the database by ContactTitle
         /// </summary>
-        /// <param name="contacttitle">string</param>
+        /// <param name="contactTitle">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<ICustomer></returns>
-		IList<ICustomer> SearchByContactTitle(string contacttitle, bool caseSensitive = false);
+		IList<ICustomer> SearchByContactTitle(string contactTitle, bool caseSensitive = false);
 
         /// <summary>
         /// Search for Customer entities in the database by Address
@@ -184,10 +114,10 @@ namespace Banking.Models.Interfaces
         /// <summary>
         /// Search for Customer entities in the database by PostalCode
         /// </summary>
-        /// <param name="postalcode">string</param>
+        /// <param name="postalCode">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<ICustomer></returns>
-		IList<ICustomer> SearchByPostalCode(string postalcode, bool caseSensitive = false);
+		IList<ICustomer> SearchByPostalCode(string postalCode, bool caseSensitive = false);
 
         /// <summary>
         /// Search for Customer entities in the database by Telephone
@@ -223,7 +153,7 @@ namespace Banking.Models.Interfaces
         /// <param name="entity">ICustomer</param>
         /// <returns>bool</returns>
 		bool Save(ICustomer entity);
-		
+
         /// <summary>
         /// Update the Customer entity in the database if any values have changed
         /// </summary>
@@ -237,13 +167,13 @@ namespace Banking.Models.Interfaces
         /// <param name="entity">ICustomer</param>
         /// <returns>bool</returns>
 		bool Delete(ICustomer entity);
-		
-        /// <summary>
-        /// Delete the Customer entity from the database using the CustomerId
+
+		/// <summary>
+        /// Delete the Customer entity from the database
         /// </summary>
-        /// <param name="customerid">int</param>
+        /// <param name="customerId">int</param>
         /// <returns>bool</returns>
-		bool DeleteByCustomerId(int customerid);
+		bool Delete( int customerId);
 
 		#endregion
 	}

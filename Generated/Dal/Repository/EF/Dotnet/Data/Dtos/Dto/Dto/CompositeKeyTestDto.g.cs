@@ -1,5 +1,5 @@
 ﻿
-// <copyright file="Country.g.cs" company="MIT">
+// <copyright file="CompositeKeyTestDto.g.cs" company="MIT">
 //  Copyright (c) 2018 MIT
 // </copyright>  
 
@@ -22,34 +22,25 @@ using System;
 using System.Collections.Generic;
 using Banking.Models.Interfaces;
 
-namespace Banking.Models.Entity
+namespace Banking.Models.Dto
 {
-	public partial class Country : ICountry 
+	public partial class CompositeKeyTestDto : ICompositeKeyTest 
 	{
 		#region CTOR
 		
-		public Country()
+		public CompositeKeyTestDto()
 		{
-			this.Customer = new List <Customer>();
 		}
 		
-		public Country(ICountry item, bool deep = false)
+		public CompositeKeyTestDto(ICompositeKeyTest item, bool deep = false)
 		{
 			if(item == null) return;
 			
-			this.CountryId = item.CountryId;
-			this.CountryName = item.CountryName;
-			this.Customer = new List <Customer>();
+			this.PrimaryCol1 = item.PrimaryCol1;
+			this.PrimaryCol2 = item.PrimaryCol2;
 
 			if(deep)
 			{
-				if(item.Customer != null)
-				{
-					foreach(var childItem in item.Customer)
-					{
-						this.Customer.Add(new Customer(childItem, deep));
-					}
-				}
 			}
 		}
 		
@@ -57,27 +48,19 @@ namespace Banking.Models.Entity
 		
 		#region Fields
 		
-		public int CountryId { get; set; }
-		public string CountryName { get; set; }
+		public int PrimaryCol1 { get; set; }
+		public int PrimaryCol2 { get; set; }
 
 		#endregion
-
+		
 		#region Child Relationships
-        
-        public virtual IList<Customer> Customer { get; set; }
-	
-        IList<ICustomer> ICountry.Customer 
-		{ 
-			get
-			{
-				return (IList<ICustomer>)this.Customer;
-			}
-			set
-			{
-				this.Customer = (IList<Customer>)value;
-			}			
-		}
+		
 
+		#endregion
+		
+		#region Parent Relationships
+		
+		
 		#endregion
 	}
 }

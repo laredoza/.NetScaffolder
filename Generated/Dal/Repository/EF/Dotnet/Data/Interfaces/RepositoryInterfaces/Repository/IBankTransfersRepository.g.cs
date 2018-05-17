@@ -33,25 +33,25 @@ namespace Banking.Models.Interfaces
 		#region Load
 
         /// <summary>
-        /// Load the BankTransfers entity from the database using the BankTransferId primary key
-        /// </summary>
-        /// <param name="banktransferid">int</param>
+        /// Load BankTransfers entities from the database using the composite primary keys
+        /// </summary
+        /// <param name="bankTransferId">int</param>
         /// <returns>IBankTransfers</returns>
-		IBankTransfers LoadByBankTransferId(int banktransferid);
+		IBankTransfers LoadByBankTransferId(int bankTransferId);
 
         /// <summary>
         /// Load BankTransfers entities from the database using the FromBankAccountId field
         /// </summary>
-        /// <param name="frombankaccountid">int</param>
+        /// <param name="fromBankAccountId">int</param>
         /// <returns>IList<IBankTransfers></returns>
-		IList<IBankTransfers> LoadByFromBankAccountId(int frombankaccountid);
+		IList<IBankTransfers> LoadByFromBankAccountId(int fromBankAccountId);
 
         /// <summary>
         /// Load BankTransfers entities from the database using the ToBankAccountId field
         /// </summary>
-        /// <param name="tobankaccountid">int</param>
+        /// <param name="toBankAccountId">int</param>
         /// <returns>IList<IBankTransfers></returns>
-		IList<IBankTransfers> LoadByToBankAccountId(int tobankaccountid);
+		IList<IBankTransfers> LoadByToBankAccountId(int toBankAccountId);
 
         /// <summary>
         /// Load BankTransfers entities from the database using the Amount field
@@ -63,9 +63,9 @@ namespace Banking.Models.Interfaces
         /// <summary>
         /// Load BankTransfers entities from the database using the TransferDate field
         /// </summary>
-        /// <param name="transferdate">DateTime</param>
+        /// <param name="transferDate">DateTime</param>
         /// <returns>IList<IBankTransfers></returns>
-		IList<IBankTransfers> LoadByTransferDate(DateTime transferdate);
+		IList<IBankTransfers> LoadByTransferDate(DateTime transferDate);
 
         /// <summary>
         /// Load all BankTransfers entities from the database.
@@ -87,7 +87,7 @@ namespace Banking.Models.Interfaces
         /// <param name="entity">IBankTransfers</param>
         /// <returns>bool</returns>
 		bool Save(IBankTransfers entity);
-		
+
         /// <summary>
         /// Update the BankTransfers entity in the database if any values have changed
         /// </summary>
@@ -101,13 +101,13 @@ namespace Banking.Models.Interfaces
         /// <param name="entity">IBankTransfers</param>
         /// <returns>bool</returns>
 		bool Delete(IBankTransfers entity);
-		
-        /// <summary>
-        /// Delete the BankTransfers entity from the database using the BankTransferId
+
+		/// <summary>
+        /// Delete the BankTransfers entity from the database
         /// </summary>
-        /// <param name="banktransferid">int</param>
+        /// <param name="bankTransferId">int</param>
         /// <returns>bool</returns>
-		bool DeleteByBankTransferId(int banktransferid);
+		bool Delete( int bankTransferId);
 
 		#endregion
 	}

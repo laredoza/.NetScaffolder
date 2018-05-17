@@ -45,47 +45,47 @@ namespace Banking.Models.Repository
 		#endregion
 		
 		#region Load
-		
+
         /// <summary>
-        /// Load the OrderDetails entity from the database using the OrderDetailsId primary key
-        /// </summary>
-        /// <param name="orderdetailsid">int</param>
+        /// Load OrderDetails entities from the database using the composite primary keys
+        /// </summary
+        /// <param name="orderDetailsId">int</param>
         /// <returns>IOrderDetails</returns>
-		public virtual IOrderDetails LoadByOrderDetailsId(int orderdetailsid)
+		public virtual IOrderDetails LoadByOrderDetailsId(int orderDetailsId)
 		{
-			return this.UnitOfWork.FirstOrDefault<OrderDetails>(o => o.OrderDetailsId == orderdetailsid);
+			return this.UnitOfWork.FirstOrDefault<OrderDetails>(o => o.OrderDetailsId == orderDetailsId);
 		}
-		
+
         /// <summary>
         /// Load OrderDetails entities from the database using the OrderId field
         /// </summary>
-        /// <param name="orderid">int</param>
+        /// <param name="orderId">int</param>
         /// <returns>IList<IOrderDetails></returns>
-		public virtual IList<IOrderDetails> LoadByOrderId(int orderid)
+		public virtual IList<IOrderDetails> LoadByOrderId(int orderId)
 		{
-			return this.UnitOfWork.AllMatching<OrderDetails>(o => o.OrderId == orderid).ToList<IOrderDetails>();
+			return this.UnitOfWork.AllMatching<OrderDetails>(o => o.OrderId == orderId).ToList<IOrderDetails>();
 		}
-		
+
         /// <summary>
         /// Load OrderDetails entities from the database using the ProductId field
         /// </summary>
-        /// <param name="productid">int</param>
+        /// <param name="productId">int</param>
         /// <returns>IList<IOrderDetails></returns>
-		public virtual IList<IOrderDetails> LoadByProductId(int productid)
+		public virtual IList<IOrderDetails> LoadByProductId(int productId)
 		{
-			return this.UnitOfWork.AllMatching<OrderDetails>(o => o.ProductId == productid).ToList<IOrderDetails>();
+			return this.UnitOfWork.AllMatching<OrderDetails>(o => o.ProductId == productId).ToList<IOrderDetails>();
 		}
-		
+
         /// <summary>
         /// Load OrderDetails entities from the database using the UnitPrice field
         /// </summary>
-        /// <param name="unitprice">Nullable<decimal></param>
+        /// <param name="unitPrice">Nullable<decimal></param>
         /// <returns>IList<IOrderDetails></returns>
-		public virtual IList<IOrderDetails> LoadByUnitPrice(Nullable<decimal> unitprice)
+		public virtual IList<IOrderDetails> LoadByUnitPrice(Nullable<decimal> unitPrice)
 		{
-			return this.UnitOfWork.AllMatching<OrderDetails>(o => o.UnitPrice == unitprice).ToList<IOrderDetails>();
+			return this.UnitOfWork.AllMatching<OrderDetails>(o => o.UnitPrice == unitPrice).ToList<IOrderDetails>();
 		}
-		
+
         /// <summary>
         /// Load OrderDetails entities from the database using the Amount field
         /// </summary>
@@ -95,7 +95,7 @@ namespace Banking.Models.Repository
 		{
 			return this.UnitOfWork.AllMatching<OrderDetails>(o => o.Amount == amount).ToList<IOrderDetails>();
 		}
-		
+
         /// <summary>
         /// Load OrderDetails entities from the database using the Discount field
         /// </summary>
@@ -105,7 +105,7 @@ namespace Banking.Models.Repository
 		{
 			return this.UnitOfWork.AllMatching<OrderDetails>(o => o.Discount == discount).ToList<IOrderDetails>();
 		}
-		
+
         /// <summary>
         /// Load all OrderDetails entities from the database.
         /// </summary>
@@ -118,7 +118,7 @@ namespace Banking.Models.Repository
 		#endregion
 
 		#region Search
-		
+
 		#endregion
 		
 		#region Modifiers
@@ -133,7 +133,7 @@ namespace Banking.Models.Repository
 			var entityToSave = new OrderDetails(entity, false);
 			return this.UnitOfWork.Add(entityToSave);
 		}
-		
+
         /// <summary>
         /// Update the OrderDetails entity in the database if any values have changed
         /// </summary>
@@ -142,7 +142,7 @@ namespace Banking.Models.Repository
 		public virtual bool Update(IOrderDetails entity)
 		{
 			bool doUpdate = false;
-			var entityToUpdate = this.UnitOfWork.FirstOrDefault<OrderDetails>(o => o.OrderDetailsId == entity.OrderDetailsId);
+			var entityToUpdate = this.UnitOfWork.FirstOrDefault<OrderDetails>(o =>  o.OrderDetailsId == entity.OrderDetailsId );
 			
 			if (entityToUpdate == null)
 			{
@@ -172,7 +172,7 @@ namespace Banking.Models.Repository
         /// <returns>bool</returns>
 		public virtual bool Delete(IOrderDetails entity)
 		{		
-			var entityToDelete = this.UnitOfWork.FirstOrDefault<OrderDetails>(o => o.OrderDetailsId == entity.OrderDetailsId);
+			var entityToDelete = this.UnitOfWork.FirstOrDefault<OrderDetails>(o =>  o.OrderDetailsId == entity.OrderDetailsId );
 			
 			if(entityToDelete == null)
 			{
@@ -181,15 +181,15 @@ namespace Banking.Models.Repository
 			
 			return this.UnitOfWork.Remove(entityToDelete);
 		}
-		
-        /// <summary>
-        /// Delete the OrderDetails entity from the database using the OrderDetailsId
+
+		/// <summary>
+        /// Delete the OrderDetails entity from the database
         /// </summary>
-        /// <param name="orderdetailsid">int</param>
+        /// <param name="orderDetailsId">int</param>
         /// <returns>bool</returns>
-		public virtual bool DeleteByOrderDetailsId(int orderdetailsid)
+		public virtual bool Delete( int orderDetailsId)
 		{
-			var entityToDelete = this.UnitOfWork.FirstOrDefault<OrderDetails>(o => o.OrderDetailsId == orderdetailsid);
+			var entityToDelete = this.UnitOfWork.FirstOrDefault<OrderDetails>(o =>  o.OrderDetailsId == orderDetailsId );
 			
 			if(entityToDelete == null)
 			{

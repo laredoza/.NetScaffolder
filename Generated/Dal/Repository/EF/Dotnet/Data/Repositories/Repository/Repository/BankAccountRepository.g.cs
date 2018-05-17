@@ -45,27 +45,17 @@ namespace Banking.Models.Repository
 		#endregion
 		
 		#region Load
-		
+
         /// <summary>
-        /// Load the BankAccount entity from the database using the BankAccountId primary key
-        /// </summary>
-        /// <param name="bankaccountid">int</param>
+        /// Load BankAccount entities from the database using the composite primary keys
+        /// </summary
+        /// <param name="bankAccountId">int</param>
         /// <returns>IBankAccount</returns>
-		public virtual IBankAccount LoadByBankAccountId(int bankaccountid)
+		public virtual IBankAccount LoadByBankAccountId(int bankAccountId)
 		{
-			return this.UnitOfWork.FirstOrDefault<BankAccount>(o => o.BankAccountId == bankaccountid);
+			return this.UnitOfWork.FirstOrDefault<BankAccount>(o => o.BankAccountId == bankAccountId);
 		}
-		
-        /// <summary>
-        /// Load BankAccount entities from the database using the BankAccountNumber field
-        /// </summary>
-        /// <param name="bankaccountnumber">string</param>
-        /// <returns>IList<IBankAccount></returns>
-		public virtual IList<IBankAccount> LoadByBankAccountNumber(string bankaccountnumber)
-		{
-			return this.UnitOfWork.AllMatching<BankAccount>(o => o.BankAccountNumber == bankaccountnumber).ToList<IBankAccount>();
-		}
-		
+
         /// <summary>
         /// Load BankAccount entities from the database using the Balance field
         /// </summary>
@@ -75,17 +65,17 @@ namespace Banking.Models.Repository
 		{
 			return this.UnitOfWork.AllMatching<BankAccount>(o => o.Balance == balance).ToList<IBankAccount>();
 		}
-		
+
         /// <summary>
         /// Load BankAccount entities from the database using the CustomerId field
         /// </summary>
-        /// <param name="customerid">Nullable<int></param>
+        /// <param name="customerId">Nullable<int></param>
         /// <returns>IList<IBankAccount></returns>
-		public virtual IList<IBankAccount> LoadByCustomerId(Nullable<int> customerid)
+		public virtual IList<IBankAccount> LoadByCustomerId(Nullable<int> customerId)
 		{
-			return this.UnitOfWork.AllMatching<BankAccount>(o => o.CustomerId == customerid).ToList<IBankAccount>();
+			return this.UnitOfWork.AllMatching<BankAccount>(o => o.CustomerId == customerId).ToList<IBankAccount>();
 		}
-		
+
         /// <summary>
         /// Load BankAccount entities from the database using the Locked field
         /// </summary>
@@ -95,7 +85,7 @@ namespace Banking.Models.Repository
 		{
 			return this.UnitOfWork.AllMatching<BankAccount>(o => o.Locked == locked).ToList<IBankAccount>();
 		}
-		
+
         /// <summary>
         /// Load all BankAccount entities from the database.
         /// </summary>
@@ -108,25 +98,25 @@ namespace Banking.Models.Repository
 		#endregion
 
 		#region Search
-		
+
         /// <summary>
         /// Search for BankAccount entities in the database by BankAccountNumber
         /// </summary>
-        /// <param name="bankaccountnumber">string</param>
+        /// <param name="bankAccountNumber">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<IBankAccount></returns>
-		public virtual IList<IBankAccount> SearchByBankAccountNumber(string bankaccountnumber, bool caseSensitive = false)
+		public virtual IList<IBankAccount> SearchByBankAccountNumber(string bankAccountNumber, bool caseSensitive = false)
 		{		
 			if(caseSensitive) 
 			{
-				return this.UnitOfWork.AllMatching<BankAccount>(o => o.BankAccountNumber.ToLower().Contains(bankaccountnumber.ToLower())).ToList<IBankAccount>();
+				return this.UnitOfWork.AllMatching<BankAccount>(o => o.BankAccountNumber.Contains(bankAccountNumber)).ToList<IBankAccount>();
 			}
 			else
 			{
-				return this.UnitOfWork.AllMatching<BankAccount>(o => o.BankAccountNumber.Contains(bankaccountnumber)).ToList<IBankAccount>();
+				return this.UnitOfWork.AllMatching<BankAccount>(o => o.BankAccountNumber.ToLower().Contains(bankAccountNumber.ToLower())).ToList<IBankAccount>();
 			}
 		}
-		
+
 		#endregion
 		
 		#region Modifiers
@@ -141,7 +131,7 @@ namespace Banking.Models.Repository
 			var entityToSave = new BankAccount(entity, false);
 			return this.UnitOfWork.Add(entityToSave);
 		}
-		
+
         /// <summary>
         /// Update the BankAccount entity in the database if any values have changed
         /// </summary>
@@ -150,7 +140,7 @@ namespace Banking.Models.Repository
 		public virtual bool Update(IBankAccount entity)
 		{
 			bool doUpdate = false;
-			var entityToUpdate = this.UnitOfWork.FirstOrDefault<BankAccount>(o => o.BankAccountId == entity.BankAccountId);
+			var entityToUpdate = this.UnitOfWork.FirstOrDefault<BankAccount>(o =>  o.BankAccountId == entity.BankAccountId );
 			
 			if (entityToUpdate == null)
 			{
@@ -179,7 +169,7 @@ namespace Banking.Models.Repository
         /// <returns>bool</returns>
 		public virtual bool Delete(IBankAccount entity)
 		{		
-			var entityToDelete = this.UnitOfWork.FirstOrDefault<BankAccount>(o => o.BankAccountId == entity.BankAccountId);
+			var entityToDelete = this.UnitOfWork.FirstOrDefault<BankAccount>(o =>  o.BankAccountId == entity.BankAccountId );
 			
 			if(entityToDelete == null)
 			{
@@ -188,15 +178,15 @@ namespace Banking.Models.Repository
 			
 			return this.UnitOfWork.Remove(entityToDelete);
 		}
-		
-        /// <summary>
-        /// Delete the BankAccount entity from the database using the BankAccountId
+
+		/// <summary>
+        /// Delete the BankAccount entity from the database
         /// </summary>
-        /// <param name="bankaccountid">int</param>
+        /// <param name="bankAccountId">int</param>
         /// <returns>bool</returns>
-		public virtual bool DeleteByBankAccountId(int bankaccountid)
+		public virtual bool Delete( int bankAccountId)
 		{
-			var entityToDelete = this.UnitOfWork.FirstOrDefault<BankAccount>(o => o.BankAccountId == bankaccountid);
+			var entityToDelete = this.UnitOfWork.FirstOrDefault<BankAccount>(o =>  o.BankAccountId == bankAccountId );
 			
 			if(entityToDelete == null)
 			{

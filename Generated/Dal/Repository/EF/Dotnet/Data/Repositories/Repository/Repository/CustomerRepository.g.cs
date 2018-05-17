@@ -45,137 +45,37 @@ namespace Banking.Models.Repository
 		#endregion
 		
 		#region Load
-		
+
         /// <summary>
-        /// Load the Customer entity from the database using the CustomerId primary key
-        /// </summary>
-        /// <param name="customerid">int</param>
+        /// Load Customer entities from the database using the composite primary keys
+        /// </summary
+        /// <param name="customerId">int</param>
         /// <returns>ICustomer</returns>
-		public virtual ICustomer LoadByCustomerId(int customerid)
+		public virtual ICustomer LoadByCustomerId(int customerId)
 		{
-			return this.UnitOfWork.FirstOrDefault<Customer>(o => o.CustomerId == customerid);
+			return this.UnitOfWork.FirstOrDefault<Customer>(o => o.CustomerId == customerId);
 		}
-		
-        /// <summary>
-        /// Load Customer entities from the database using the CustomerCode field
-        /// </summary>
-        /// <param name="customercode">string</param>
-        /// <returns>IList<ICustomer></returns>
-		public virtual IList<ICustomer> LoadByCustomerCode(string customercode)
-		{
-			return this.UnitOfWork.AllMatching<Customer>(o => o.CustomerCode == customercode).ToList<ICustomer>();
-		}
-		
-        /// <summary>
-        /// Load Customer entities from the database using the CompanyName field
-        /// </summary>
-        /// <param name="companyname">string</param>
-        /// <returns>IList<ICustomer></returns>
-		public virtual IList<ICustomer> LoadByCompanyName(string companyname)
-		{
-			return this.UnitOfWork.AllMatching<Customer>(o => o.CompanyName == companyname).ToList<ICustomer>();
-		}
-		
-        /// <summary>
-        /// Load Customer entities from the database using the ContactName field
-        /// </summary>
-        /// <param name="contactname">string</param>
-        /// <returns>IList<ICustomer></returns>
-		public virtual IList<ICustomer> LoadByContactName(string contactname)
-		{
-			return this.UnitOfWork.AllMatching<Customer>(o => o.ContactName == contactname).ToList<ICustomer>();
-		}
-		
-        /// <summary>
-        /// Load Customer entities from the database using the ContactTitle field
-        /// </summary>
-        /// <param name="contacttitle">string</param>
-        /// <returns>IList<ICustomer></returns>
-		public virtual IList<ICustomer> LoadByContactTitle(string contacttitle)
-		{
-			return this.UnitOfWork.AllMatching<Customer>(o => o.ContactTitle == contacttitle).ToList<ICustomer>();
-		}
-		
-        /// <summary>
-        /// Load Customer entities from the database using the Address field
-        /// </summary>
-        /// <param name="address">string</param>
-        /// <returns>IList<ICustomer></returns>
-		public virtual IList<ICustomer> LoadByAddress(string address)
-		{
-			return this.UnitOfWork.AllMatching<Customer>(o => o.Address == address).ToList<ICustomer>();
-		}
-		
-        /// <summary>
-        /// Load Customer entities from the database using the City field
-        /// </summary>
-        /// <param name="city">string</param>
-        /// <returns>IList<ICustomer></returns>
-		public virtual IList<ICustomer> LoadByCity(string city)
-		{
-			return this.UnitOfWork.AllMatching<Customer>(o => o.City == city).ToList<ICustomer>();
-		}
-		
-        /// <summary>
-        /// Load Customer entities from the database using the PostalCode field
-        /// </summary>
-        /// <param name="postalcode">string</param>
-        /// <returns>IList<ICustomer></returns>
-		public virtual IList<ICustomer> LoadByPostalCode(string postalcode)
-		{
-			return this.UnitOfWork.AllMatching<Customer>(o => o.PostalCode == postalcode).ToList<ICustomer>();
-		}
-		
-        /// <summary>
-        /// Load Customer entities from the database using the Telephone field
-        /// </summary>
-        /// <param name="telephone">string</param>
-        /// <returns>IList<ICustomer></returns>
-		public virtual IList<ICustomer> LoadByTelephone(string telephone)
-		{
-			return this.UnitOfWork.AllMatching<Customer>(o => o.Telephone == telephone).ToList<ICustomer>();
-		}
-		
-        /// <summary>
-        /// Load Customer entities from the database using the Fax field
-        /// </summary>
-        /// <param name="fax">string</param>
-        /// <returns>IList<ICustomer></returns>
-		public virtual IList<ICustomer> LoadByFax(string fax)
-		{
-			return this.UnitOfWork.AllMatching<Customer>(o => o.Fax == fax).ToList<ICustomer>();
-		}
-		
+
         /// <summary>
         /// Load Customer entities from the database using the CountryId field
         /// </summary>
-        /// <param name="countryid">Nullable<int></param>
+        /// <param name="countryId">Nullable<int></param>
         /// <returns>IList<ICustomer></returns>
-		public virtual IList<ICustomer> LoadByCountryId(Nullable<int> countryid)
+		public virtual IList<ICustomer> LoadByCountryId(Nullable<int> countryId)
 		{
-			return this.UnitOfWork.AllMatching<Customer>(o => o.CountryId == countryid).ToList<ICustomer>();
+			return this.UnitOfWork.AllMatching<Customer>(o => o.CountryId == countryId).ToList<ICustomer>();
 		}
-		
-        /// <summary>
-        /// Load Customer entities from the database using the Photo field
-        /// </summary>
-        /// <param name="photo">string</param>
-        /// <returns>IList<ICustomer></returns>
-		public virtual IList<ICustomer> LoadByPhoto(string photo)
-		{
-			return this.UnitOfWork.AllMatching<Customer>(o => o.Photo == photo).ToList<ICustomer>();
-		}
-		
+
         /// <summary>
         /// Load Customer entities from the database using the IsEnabled field
         /// </summary>
-        /// <param name="isenabled">bool</param>
+        /// <param name="isEnabled">bool</param>
         /// <returns>IList<ICustomer></returns>
-		public virtual IList<ICustomer> LoadByIsEnabled(bool isenabled)
+		public virtual IList<ICustomer> LoadByIsEnabled(bool isEnabled)
 		{
-			return this.UnitOfWork.AllMatching<Customer>(o => o.IsEnabled == isenabled).ToList<ICustomer>();
+			return this.UnitOfWork.AllMatching<Customer>(o => o.IsEnabled == isEnabled).ToList<ICustomer>();
 		}
-		
+
         /// <summary>
         /// Load all Customer entities from the database.
         /// </summary>
@@ -188,79 +88,79 @@ namespace Banking.Models.Repository
 		#endregion
 
 		#region Search
-		
+
         /// <summary>
         /// Search for Customer entities in the database by CustomerCode
         /// </summary>
-        /// <param name="customercode">string</param>
+        /// <param name="customerCode">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<ICustomer></returns>
-		public virtual IList<ICustomer> SearchByCustomerCode(string customercode, bool caseSensitive = false)
+		public virtual IList<ICustomer> SearchByCustomerCode(string customerCode, bool caseSensitive = false)
 		{		
 			if(caseSensitive) 
 			{
-				return this.UnitOfWork.AllMatching<Customer>(o => o.CustomerCode.ToLower().Contains(customercode.ToLower())).ToList<ICustomer>();
+				return this.UnitOfWork.AllMatching<Customer>(o => o.CustomerCode.Contains(customerCode)).ToList<ICustomer>();
 			}
 			else
 			{
-				return this.UnitOfWork.AllMatching<Customer>(o => o.CustomerCode.Contains(customercode)).ToList<ICustomer>();
+				return this.UnitOfWork.AllMatching<Customer>(o => o.CustomerCode.ToLower().Contains(customerCode.ToLower())).ToList<ICustomer>();
 			}
 		}
-		
+
         /// <summary>
         /// Search for Customer entities in the database by CompanyName
         /// </summary>
-        /// <param name="companyname">string</param>
+        /// <param name="companyName">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<ICustomer></returns>
-		public virtual IList<ICustomer> SearchByCompanyName(string companyname, bool caseSensitive = false)
+		public virtual IList<ICustomer> SearchByCompanyName(string companyName, bool caseSensitive = false)
 		{		
 			if(caseSensitive) 
 			{
-				return this.UnitOfWork.AllMatching<Customer>(o => o.CompanyName.ToLower().Contains(companyname.ToLower())).ToList<ICustomer>();
+				return this.UnitOfWork.AllMatching<Customer>(o => o.CompanyName.Contains(companyName)).ToList<ICustomer>();
 			}
 			else
 			{
-				return this.UnitOfWork.AllMatching<Customer>(o => o.CompanyName.Contains(companyname)).ToList<ICustomer>();
+				return this.UnitOfWork.AllMatching<Customer>(o => o.CompanyName.ToLower().Contains(companyName.ToLower())).ToList<ICustomer>();
 			}
 		}
-		
+
         /// <summary>
         /// Search for Customer entities in the database by ContactName
         /// </summary>
-        /// <param name="contactname">string</param>
+        /// <param name="contactName">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<ICustomer></returns>
-		public virtual IList<ICustomer> SearchByContactName(string contactname, bool caseSensitive = false)
+		public virtual IList<ICustomer> SearchByContactName(string contactName, bool caseSensitive = false)
 		{		
 			if(caseSensitive) 
 			{
-				return this.UnitOfWork.AllMatching<Customer>(o => o.ContactName.ToLower().Contains(contactname.ToLower())).ToList<ICustomer>();
+				return this.UnitOfWork.AllMatching<Customer>(o => o.ContactName.Contains(contactName)).ToList<ICustomer>();
 			}
 			else
 			{
-				return this.UnitOfWork.AllMatching<Customer>(o => o.ContactName.Contains(contactname)).ToList<ICustomer>();
+				return this.UnitOfWork.AllMatching<Customer>(o => o.ContactName.ToLower().Contains(contactName.ToLower())).ToList<ICustomer>();
 			}
 		}
-		
+
         /// <summary>
         /// Search for Customer entities in the database by ContactTitle
         /// </summary>
-        /// <param name="contacttitle">string</param>
+        /// <param name="contactTitle">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<ICustomer></returns>
-		public virtual IList<ICustomer> SearchByContactTitle(string contacttitle, bool caseSensitive = false)
+		public virtual IList<ICustomer> SearchByContactTitle(string contactTitle, bool caseSensitive = false)
 		{		
 			if(caseSensitive) 
 			{
-				return this.UnitOfWork.AllMatching<Customer>(o => o.ContactTitle.ToLower().Contains(contacttitle.ToLower())).ToList<ICustomer>();
+				return this.UnitOfWork.AllMatching<Customer>(o => o.ContactTitle.Contains(contactTitle)).ToList<ICustomer>();
 			}
 			else
 			{
-				return this.UnitOfWork.AllMatching<Customer>(o => o.ContactTitle.Contains(contacttitle)).ToList<ICustomer>();
+				return this.UnitOfWork.AllMatching<Customer>(o => o.ContactTitle.ToLower().Contains(contactTitle.ToLower())).ToList<ICustomer>();
 			}
 		}
-		
+
         /// <summary>
         /// Search for Customer entities in the database by Address
         /// </summary>
@@ -271,14 +171,14 @@ namespace Banking.Models.Repository
 		{		
 			if(caseSensitive) 
 			{
-				return this.UnitOfWork.AllMatching<Customer>(o => o.Address.ToLower().Contains(address.ToLower())).ToList<ICustomer>();
+				return this.UnitOfWork.AllMatching<Customer>(o => o.Address.Contains(address)).ToList<ICustomer>();
 			}
 			else
 			{
-				return this.UnitOfWork.AllMatching<Customer>(o => o.Address.Contains(address)).ToList<ICustomer>();
+				return this.UnitOfWork.AllMatching<Customer>(o => o.Address.ToLower().Contains(address.ToLower())).ToList<ICustomer>();
 			}
 		}
-		
+
         /// <summary>
         /// Search for Customer entities in the database by City
         /// </summary>
@@ -289,32 +189,32 @@ namespace Banking.Models.Repository
 		{		
 			if(caseSensitive) 
 			{
-				return this.UnitOfWork.AllMatching<Customer>(o => o.City.ToLower().Contains(city.ToLower())).ToList<ICustomer>();
+				return this.UnitOfWork.AllMatching<Customer>(o => o.City.Contains(city)).ToList<ICustomer>();
 			}
 			else
 			{
-				return this.UnitOfWork.AllMatching<Customer>(o => o.City.Contains(city)).ToList<ICustomer>();
+				return this.UnitOfWork.AllMatching<Customer>(o => o.City.ToLower().Contains(city.ToLower())).ToList<ICustomer>();
 			}
 		}
-		
+
         /// <summary>
         /// Search for Customer entities in the database by PostalCode
         /// </summary>
-        /// <param name="postalcode">string</param>
+        /// <param name="postalCode">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<ICustomer></returns>
-		public virtual IList<ICustomer> SearchByPostalCode(string postalcode, bool caseSensitive = false)
+		public virtual IList<ICustomer> SearchByPostalCode(string postalCode, bool caseSensitive = false)
 		{		
 			if(caseSensitive) 
 			{
-				return this.UnitOfWork.AllMatching<Customer>(o => o.PostalCode.ToLower().Contains(postalcode.ToLower())).ToList<ICustomer>();
+				return this.UnitOfWork.AllMatching<Customer>(o => o.PostalCode.Contains(postalCode)).ToList<ICustomer>();
 			}
 			else
 			{
-				return this.UnitOfWork.AllMatching<Customer>(o => o.PostalCode.Contains(postalcode)).ToList<ICustomer>();
+				return this.UnitOfWork.AllMatching<Customer>(o => o.PostalCode.ToLower().Contains(postalCode.ToLower())).ToList<ICustomer>();
 			}
 		}
-		
+
         /// <summary>
         /// Search for Customer entities in the database by Telephone
         /// </summary>
@@ -325,14 +225,14 @@ namespace Banking.Models.Repository
 		{		
 			if(caseSensitive) 
 			{
-				return this.UnitOfWork.AllMatching<Customer>(o => o.Telephone.ToLower().Contains(telephone.ToLower())).ToList<ICustomer>();
+				return this.UnitOfWork.AllMatching<Customer>(o => o.Telephone.Contains(telephone)).ToList<ICustomer>();
 			}
 			else
 			{
-				return this.UnitOfWork.AllMatching<Customer>(o => o.Telephone.Contains(telephone)).ToList<ICustomer>();
+				return this.UnitOfWork.AllMatching<Customer>(o => o.Telephone.ToLower().Contains(telephone.ToLower())).ToList<ICustomer>();
 			}
 		}
-		
+
         /// <summary>
         /// Search for Customer entities in the database by Fax
         /// </summary>
@@ -343,14 +243,14 @@ namespace Banking.Models.Repository
 		{		
 			if(caseSensitive) 
 			{
-				return this.UnitOfWork.AllMatching<Customer>(o => o.Fax.ToLower().Contains(fax.ToLower())).ToList<ICustomer>();
+				return this.UnitOfWork.AllMatching<Customer>(o => o.Fax.Contains(fax)).ToList<ICustomer>();
 			}
 			else
 			{
-				return this.UnitOfWork.AllMatching<Customer>(o => o.Fax.Contains(fax)).ToList<ICustomer>();
+				return this.UnitOfWork.AllMatching<Customer>(o => o.Fax.ToLower().Contains(fax.ToLower())).ToList<ICustomer>();
 			}
 		}
-		
+
         /// <summary>
         /// Search for Customer entities in the database by Photo
         /// </summary>
@@ -361,14 +261,14 @@ namespace Banking.Models.Repository
 		{		
 			if(caseSensitive) 
 			{
-				return this.UnitOfWork.AllMatching<Customer>(o => o.Photo.ToLower().Contains(photo.ToLower())).ToList<ICustomer>();
+				return this.UnitOfWork.AllMatching<Customer>(o => o.Photo.Contains(photo)).ToList<ICustomer>();
 			}
 			else
 			{
-				return this.UnitOfWork.AllMatching<Customer>(o => o.Photo.Contains(photo)).ToList<ICustomer>();
+				return this.UnitOfWork.AllMatching<Customer>(o => o.Photo.ToLower().Contains(photo.ToLower())).ToList<ICustomer>();
 			}
 		}
-		
+
 		#endregion
 		
 		#region Modifiers
@@ -383,7 +283,7 @@ namespace Banking.Models.Repository
 			var entityToSave = new Customer(entity, false);
 			return this.UnitOfWork.Add(entityToSave);
 		}
-		
+
         /// <summary>
         /// Update the Customer entity in the database if any values have changed
         /// </summary>
@@ -392,7 +292,7 @@ namespace Banking.Models.Repository
 		public virtual bool Update(ICustomer entity)
 		{
 			bool doUpdate = false;
-			var entityToUpdate = this.UnitOfWork.FirstOrDefault<Customer>(o => o.CustomerId == entity.CustomerId);
+			var entityToUpdate = this.UnitOfWork.FirstOrDefault<Customer>(o =>  o.CustomerId == entity.CustomerId );
 			
 			if (entityToUpdate == null)
 			{
@@ -429,7 +329,7 @@ namespace Banking.Models.Repository
         /// <returns>bool</returns>
 		public virtual bool Delete(ICustomer entity)
 		{		
-			var entityToDelete = this.UnitOfWork.FirstOrDefault<Customer>(o => o.CustomerId == entity.CustomerId);
+			var entityToDelete = this.UnitOfWork.FirstOrDefault<Customer>(o =>  o.CustomerId == entity.CustomerId );
 			
 			if(entityToDelete == null)
 			{
@@ -438,15 +338,15 @@ namespace Banking.Models.Repository
 			
 			return this.UnitOfWork.Remove(entityToDelete);
 		}
-		
-        /// <summary>
-        /// Delete the Customer entity from the database using the CustomerId
+
+		/// <summary>
+        /// Delete the Customer entity from the database
         /// </summary>
-        /// <param name="customerid">int</param>
+        /// <param name="customerId">int</param>
         /// <returns>bool</returns>
-		public virtual bool DeleteByCustomerId(int customerid)
+		public virtual bool Delete( int customerId)
 		{
-			var entityToDelete = this.UnitOfWork.FirstOrDefault<Customer>(o => o.CustomerId == customerid);
+			var entityToDelete = this.UnitOfWork.FirstOrDefault<Customer>(o =>  o.CustomerId == customerId );
 			
 			if(entityToDelete == null)
 			{

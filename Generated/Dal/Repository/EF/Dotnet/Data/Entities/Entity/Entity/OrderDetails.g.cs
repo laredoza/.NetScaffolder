@@ -68,15 +68,10 @@ namespace Banking.Models.Entity
 		public Nullable<float> Discount { get; set; }
 
 		#endregion
-		
-		#region Child Relationships
-		
-		#endregion
-		
+
 		#region Parent Relationships
 
         public virtual Order Order { get; set; }
-
 		IOrder IOrderDetails.Order 
 		{ 
 			get
@@ -90,7 +85,6 @@ namespace Banking.Models.Entity
 		}
 
         public virtual Product Product { get; set; }
-
 		IProduct IOrderDetails.Product 
 		{ 
 			get

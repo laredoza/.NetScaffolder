@@ -71,11 +71,11 @@ namespace Banking.Models.Entity
 		public Nullable<short> AmountInStock { get; set; }
 
 		#endregion
-		
+
 		#region Child Relationships
         
         public virtual IList<OrderDetails> OrderDetails { get; set; }
-
+	
         IList<IOrderDetails> IProduct.OrderDetails 
 		{ 
 			get
@@ -89,7 +89,6 @@ namespace Banking.Models.Entity
 		}
         
         public virtual Book Book { get; set; }
-
 		IBook IProduct.Book 
 		{ 
 			get
@@ -103,7 +102,6 @@ namespace Banking.Models.Entity
 		}
         
         public virtual Software Software { get; set; }
-
 		ISoftware IProduct.Software 
 		{ 
 			get
@@ -115,11 +113,7 @@ namespace Banking.Models.Entity
 				this.Software = (Software)value;
 			}
 		}
-		
-		#endregion
-		
-		#region Parent Relationships
-		
+
 		#endregion
 	}
 }

@@ -55,6 +55,7 @@ namespace Banking.Models.Context
 			#region Tables
 			
 			modelBuilder.Entity<BankAccount>().ToTable("BankAccount", "dbo");
+			modelBuilder.Entity<CompositeKeyTest>().ToTable("CompositeKeyTest", "dbo");
 			modelBuilder.Entity<BankTransfers>().ToTable("BankTransfers", "dbo");
 			modelBuilder.Entity<Book>().ToTable("Book", "dbo");
 			modelBuilder.Entity<Country>().ToTable("Country", "dbo");
@@ -70,6 +71,9 @@ namespace Banking.Models.Context
 			
 			modelBuilder.Entity<BankAccount>().HasKey(t => t.BankAccountId);
 			modelBuilder.Entity<BankAccount>().Property(t => t.BankAccountId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+			modelBuilder.Entity<CompositeKeyTest>().HasKey(t => new {t.PrimaryCol1, t.PrimaryCol2});
+			modelBuilder.Entity<CompositeKeyTest>().Property(t => t.PrimaryCol1).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+			modelBuilder.Entity<CompositeKeyTest>().Property(t => t.PrimaryCol2).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
 			modelBuilder.Entity<BankTransfers>().HasKey(t => t.BankTransferId);
 			modelBuilder.Entity<BankTransfers>().Property(t => t.BankTransferId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 			modelBuilder.Entity<Book>().HasKey(t => t.ProductId);
@@ -119,6 +123,8 @@ namespace Banking.Models.Context
 			modelBuilder.Entity<BankAccount>().Property(t => t.Balance).HasPrecision(19, 4);
 			modelBuilder.Entity<BankAccount>().Property(t => t.CustomerId).IsOptional();
 			modelBuilder.Entity<BankAccount>().Property(t => t.Locked).IsRequired();
+			modelBuilder.Entity<CompositeKeyTest>().Property(t => t.PrimaryCol1).IsRequired();
+			modelBuilder.Entity<CompositeKeyTest>().Property(t => t.PrimaryCol2).IsRequired();
 			modelBuilder.Entity<BankTransfers>().Property(t => t.BankTransferId).IsRequired();
 			modelBuilder.Entity<BankTransfers>().Property(t => t.FromBankAccountId).IsRequired();
 			modelBuilder.Entity<BankTransfers>().Property(t => t.ToBankAccountId).IsRequired();
@@ -195,6 +201,7 @@ namespace Banking.Models.Context
 		#region Db Sets
 		
 		public virtual DbSet<BankAccount> BankAccount { get; set; }
+		public virtual DbSet<CompositeKeyTest> CompositeKeyTest { get; set; }
 		public virtual DbSet<BankTransfers> BankTransfers { get; set; }
 		public virtual DbSet<Book> Book { get; set; }
 		public virtual DbSet<Country> Country { get; set; }

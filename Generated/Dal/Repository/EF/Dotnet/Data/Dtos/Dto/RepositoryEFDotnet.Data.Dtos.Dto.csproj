@@ -43,6 +43,7 @@
     <Compile Include="Dto\BankAccountDto.g.cs" />
     <Compile Include="Dto\BankTransfersDto.g.cs" />
     <Compile Include="Dto\BookDto.g.cs" />
+    <Compile Include="Dto\CompositeKeyTestDto.g.cs" />
     <Compile Include="Dto\CountryDto.g.cs" />
     <Compile Include="Dto\CustomerDto.g.cs" />
     <Compile Include="Dto\OrderDetailsDto.g.cs" />
