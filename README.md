@@ -40,11 +40,11 @@ T4 templates (DataTypes) are used to generate a layer. Packages group several of
 
 ### Completed
 - ~~[0.2 Basic UI Management](https://github.com/laredoza/.NetScaffolder/milestone/2)~~
+- --[0.3 Create .NET base repository for EF 6](https://github.com/laredoza/.NetScaffolder/milestone/3)--
 - ~~[0.31 Create Dto's](https://github.com/laredoza/.NetScaffolder/milestone/7)~~
 - ~~[0.32 Create base repository for MySql](https://github.com/laredoza/.NetScaffolder/milestone/9)~~
 
 ### Todo
-- [0.3 Create .NET base repository for EF 6](https://github.com/laredoza/.NetScaffolder/milestone/3)
 - [0.4 Create .NET Core base repository for EF Core](https://github.com/laredoza/.NetScaffolder/milestone/4)
 - [0.5 Create base repository for nHibernate](https://github.com/laredoza/.NetScaffolder/milestone/5)
 - [0.6 Create Application Service](https://github.com/laredoza/.NetScaffolder/milestone/6)
