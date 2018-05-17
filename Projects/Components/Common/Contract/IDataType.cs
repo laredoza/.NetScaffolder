@@ -11,6 +11,7 @@ namespace DotNetScaffolder.Components.Common.Contract
     using System.Collections.Generic;
     using System.Xml.Serialization;
 
+    using DotNetScaffolder.Core.Common.Validation;
     using DotNetScaffolder.Mapping.MetaData.Domain;
     using DotNetScaffolder.Mapping.MetaData.Model;
 
@@ -23,7 +24,7 @@ namespace DotNetScaffolder.Components.Common.Contract
     /// </summary>
     /// <typeparam name="T">
     /// </typeparam>
-    public interface IDataType<T>
+    public interface IDataType<T> : IValidate
     {
         /// <summary>
         /// Gets or sets the base namespace.

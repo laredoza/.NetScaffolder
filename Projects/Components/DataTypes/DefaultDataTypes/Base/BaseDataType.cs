@@ -23,7 +23,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Base
     /// <summary>
     ///     The base data type.
     /// </summary>
-    public abstract class BaseDataType : IDataType, IValidate
+    public abstract class BaseDataType : IDataType 
     {
         #region Fields
 
@@ -142,11 +142,12 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Base
         /// </returns>
         public abstract bool Save(IDictionary<string, string> parameters);
 
+        /// <inheritdoc />
         /// <summary>
         ///     The validate.
         /// </summary>
         /// <returns>
-        ///     The <see cref="List" />.
+        ///     The <see cref="T:System.Collections.Generic.List`1" />.
         /// </returns>
         public abstract List<Validation> Validate();
 
