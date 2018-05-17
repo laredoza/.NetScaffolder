@@ -10,6 +10,7 @@ namespace DotNetScaffolder.Components.Common.Contract
 
     using System;
 
+    using DotNetScaffolder.Core.Common.Validation;
     using DotNetScaffolder.Mapping.MetaData.Domain;
 
     #region Usings
@@ -23,7 +24,7 @@ namespace DotNetScaffolder.Components.Common.Contract
     /// </summary>
     /// <typeparam name="T">
     /// </typeparam>
-    public interface IDataTypeUI<T>
+    public interface IDataTypeUI<T>: IValidate
     {
         /// <summary>
         ///     The on navigation changed.

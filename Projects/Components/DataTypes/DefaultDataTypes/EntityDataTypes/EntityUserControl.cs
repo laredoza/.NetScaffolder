@@ -13,6 +13,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.EntityDataTypes
     using System.Windows.Forms;
 
     using DotNetScaffolder.Components.Common.Contract;
+    using DotNetScaffolder.Core.Common.Validation;
     using DotNetScaffolder.Mapping.MetaData.Domain;
 
     #endregion
@@ -72,6 +73,11 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.EntityDataTypes
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the validation result.
+        /// </summary>
+        public List<Validation> ValidationResult { get; set; }
+
         #endregion
 
         #region Public Methods And Operators
@@ -103,6 +109,18 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.EntityDataTypes
 
             this.UpdateDataType();
             this.DataType.Save(parameters);
+        }
+
+        /// <summary>
+        ///     The validate.
+        /// </summary>
+        /// <returns>
+        ///     The <see cref="List" />.
+        /// </returns>
+        public virtual List<Validation> Validate()
+        {
+            this.ValidationResult = this.DataType.Validate();
+            return this.ValidationResult;
         }
 
         #endregion

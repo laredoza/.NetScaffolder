@@ -13,6 +13,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ApplicationServ
     using System.Windows.Forms;
 
     using DotNetScaffolder.Components.Common.Contract;
+    using DotNetScaffolder.Core.Common.Validation;
     using DotNetScaffolder.Mapping.MetaData.Domain;
 
     #endregion
@@ -42,7 +43,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ApplicationServ
         #region Public Properties
 
         /// <summary>
-        /// Gets or sets the data source.
+        ///     Gets or sets the data source.
         /// </summary>
         public DomainDefinition DataSource { get; set; }
 
@@ -50,6 +51,11 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ApplicationServ
         ///     Gets or sets the data type.
         /// </summary>
         public ApplicationServiceDataType DataType { get; set; }
+
+        /// <summary>
+        /// Gets or sets the validation result.
+        /// </summary>
+        public List<Validation> ValidationResult { get; set; }
 
         #endregion
 
@@ -86,6 +92,18 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ApplicationServ
             this.DataType.Namespace = this.AppServiceNamespace.Text;
             this.DataType.OutputFolder = this.AppServiceOutputFolder.Text;
             this.DataType.Save(parameters);
+        }
+
+        /// <summary>
+        /// The validate.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="List"/>.
+        /// </returns>
+        public virtual List<Validation> Validate()
+        {
+            this.ValidationResult = this.DataType.Validate();
+            return this.ValidationResult;
         }
 
         #endregion

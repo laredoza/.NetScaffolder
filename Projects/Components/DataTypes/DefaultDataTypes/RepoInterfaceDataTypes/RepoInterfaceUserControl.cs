@@ -14,6 +14,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
 
     using DotNetScaffolder.Components.Common.Contract;
     using DotNetScaffolder.Components.DataTypes.DefaultDataTypes.RepoInterfaceDataTypes;
+    using DotNetScaffolder.Core.Common.Validation;
     using DotNetScaffolder.Mapping.MetaData.Domain;
 
     #endregion
@@ -26,7 +27,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
         #region Fields
 
         /// <summary>
-        /// The data type.
+        ///     The data type.
         /// </summary>
         private RepoInterfaceDataType dataType;
 
@@ -52,7 +53,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
         #region Public Properties
 
         /// <summary>
-        /// Gets or sets the data source.
+        ///     Gets or sets the data source.
         /// </summary>
         public DomainDefinition DataSource { get; set; }
 
@@ -72,6 +73,11 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
                 this.UpdateUI();
             }
         }
+
+        /// <summary>
+        ///     Gets or sets the validation result.
+        /// </summary>
+        public List<Validation> ValidationResult { get; set; }
 
         #endregion
 
@@ -106,6 +112,18 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
             this.DataType.Save(parameters);
         }
 
+        /// <summary>
+        ///     The validate.
+        /// </summary>
+        /// <returns>
+        ///     The <see cref="List" />.
+        /// </returns>
+        public virtual List<Validation> Validate()
+        {
+            this.ValidationResult = this.DataType.Validate();
+            return this.ValidationResult;
+        }
+
         #endregion
 
         #region Other Methods
@@ -124,7 +142,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
         }
 
         /// <summary>
-        /// The update data type.
+        ///     The update data type.
         /// </summary>
         private void UpdateDataType()
         {
@@ -136,7 +154,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
         }
 
         /// <summary>
-        /// The update ui.
+        ///     The update ui.
         /// </summary>
         private void UpdateUI()
         {

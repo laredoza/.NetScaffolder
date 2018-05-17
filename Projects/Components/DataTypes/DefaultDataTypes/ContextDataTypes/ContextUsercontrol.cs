@@ -106,6 +106,11 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
         /// </summary>
         public ContextData SelectedContext { get; set; }
 
+        /// <summary>
+        /// Gets or sets the validation result.
+        /// </summary>
+        public List<Validation> ValidationResult { get; set; }
+
         #endregion
 
         #region Public Methods And Operators
@@ -203,6 +208,18 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
             this.UpdateContext();
 
             this.DataType.Save(parameters);
+        }
+
+        /// <summary>
+        ///     The validate.
+        /// </summary>
+        /// <returns>
+        ///     The <see cref="List" />.
+        /// </returns>
+        public virtual List<Validation> Validate()
+        {
+            this.ValidationResult = this.DataType.Validate();
+            return this.ValidationResult;
         }
 
         #endregion
