@@ -13,6 +13,8 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Base
     using System.Xml.Serialization;
     using DotNetScaffolder.Components.Common;
     using DotNetScaffolder.Components.Common.Contract;
+    using DotNetScaffolder.Core.Common.Validation;
+    using DotNetScaffolder.Mapping.MetaData.Domain;
     using DotNetScaffolder.Mapping.MetaData.Model;
 
     using FormControls.TreeView;
@@ -22,12 +24,18 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Base
     /// <summary>
     ///     The base data type.
     /// </summary>
-    public abstract class BaseDataType : IDataType
+    public abstract class BaseDataType : IDataType 
     {
+        #region Fields
+
         /// <summary>
         ///     The fil e_ name.
         /// </summary>
         protected readonly string FileName = string.Empty;
+
+        #endregion
+
+        #region Constructors and Destructors
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BaseDataType"/> class.
@@ -35,7 +43,14 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Base
         /// <param name="fileName">
         /// The file name.
         /// </param>
-        protected BaseDataType(string fileName) => this.FileName = fileName;
+        protected BaseDataType(string fileName)
+        {
+            this.FileName = fileName;
+        }
+
+        #endregion
+
+        #region Public Properties
 
         /// <summary>
         ///     Gets or sets the base namespace.
@@ -65,6 +80,22 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Base
         /// </summary>
         [XmlIgnore]
         public INamingConvention NamingConvention { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the validation result.
+        /// </summary>
+        [XmlIgnore]
+        public List<Validation> ValidationResult { get; set; }
+
+        /// <summary>
+        /// Gets or sets the domain definition.
+        /// </summary>
+        [XmlIgnore]
+        public DomainDefinition DomainDefinition { get; set; }
+
+        #endregion
+
+        #region Public Methods And Operators
 
         /// <summary>
         /// The create ui.
@@ -111,6 +142,17 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Base
         /// The <see cref="bool"/>.
         /// </returns>
         public abstract bool Save(IDictionary<string, string> parameters);
+
+        /// <inheritdoc />
+        /// <summary>
+        ///     The validate.
+        /// </summary>
+        /// <returns>
+        ///     The <see cref="T:System.Collections.Generic.List`1" />.
+        /// </returns>
+        public abstract List<Validation> Validate();
+
+        #endregion
 
         public string TransformAsParameter(IEnumerable<Column> columns)
         {

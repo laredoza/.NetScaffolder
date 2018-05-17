@@ -42,73 +42,83 @@ namespace DotNetScaffolder.Core.Common.Validation
         ProjectModelPath,
 
         /// <summary>
-        /// The source type id.
+        ///     The source type id.
         /// </summary>
         SourceTypeId,
 
         /// <summary>
-        /// The naming convention id.
+        ///     The naming convention id.
         /// </summary>
         NamingConventionId,
 
         /// <summary>
-        /// The driver id.
+        ///     The driver id.
         /// </summary>
         DriverId,
 
         /// <summary>
-        /// The driver type id.
+        ///     The driver type id.
         /// </summary>
         DriverTypeId,
 
         /// <summary>
-        /// The template id.
+        ///     The template id.
         /// </summary>
         TemplateId,
 
         /// <summary>
-        /// The template name.
+        ///     The template name.
         /// </summary>
         TemplateName,
 
         /// <summary>
-        /// The template path.
+        ///     The template path.
         /// </summary>
         TemplatePath,
 
         /// <summary>
-        /// The template version.
+        ///     The template version.
         /// </summary>
         TemplateVersion,
 
         /// <summary>
-        /// The template language output id.
+        ///     The template language output id.
         /// </summary>
         TemplateLanguageOutputId,
 
         /// <summary>
-        /// The template generator type id.
+        ///     The template generator type id.
         /// </summary>
         TemplateGeneratorTypeId,
 
         /// <summary>
-        /// The collection option id.
+        ///     The collection option id.
         /// </summary>
         CollectionOptionId,
 
         /// <summary>
-        /// The model error name.
+        ///     The model error name.
         /// </summary>
         ModelErrorName,
 
         /// <summary>
-        /// The model field error.
+        ///     The model field error.
         /// </summary>
         ModelFieldError,
 
         /// <summary>
-        /// The model field repository.
+        ///     The model field repository.
         /// </summary>
-        ModelFieldRepository
+        ModelFieldRepository,
+
+        /// <summary>
+        ///     The context missing models.
+        /// </summary>
+        ContextMissingModels,
+
+        /// <summary>
+        /// The context name is empty.
+        /// </summary>
+        ContextNameEmpty
     }
 }

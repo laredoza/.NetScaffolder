@@ -17,10 +17,12 @@ namespace DotNetScaffolder.Mapping.ApplicationServices
 
     using Configuration;
 
+    using DotNetScaffolder.Components.Common.Contract;
     using DotNetScaffolder.Core.Common.Serializer;
     using DotNetScaffolder.Core.Common.Validation;
     using DotNetScaffolder.Mapping.MetaData.Domain;
     using DotNetScaffolder.Mapping.MetaData.Project;
+    using DotNetScaffolder.Mapping.MetaData.Project.Packages;
 
     #endregion
 
@@ -145,8 +147,6 @@ namespace DotNetScaffolder.Mapping.ApplicationServices
         {
             Logger.Trace($"Started Save() - Path: {this.FilePersistenceOptions.Path}");
 
-            this.ValidationResult = this.ProjectDefinition.Validate();
-
             if (this.Validate().Count == 0)
             {
                 ObjectXMLSerializer<ProjectDefinition>.Save(
@@ -187,6 +187,26 @@ namespace DotNetScaffolder.Mapping.ApplicationServices
         {
             Logger.Trace($"Started Validate()");
             this.ValidationResult = this.ProjectDefinition.Validate();
+            List<Validation> validations;
+
+            foreach (DomainDefinition definition in this.ProjectDefinition.Domains)
+            {
+                foreach (Template template in definition.Package.Templates)
+                {
+                    var parameters = new Dictionary<string, string> { { "basePath", this.ProjectDefinition.OutputPath } };
+
+                    IDataType dataType = ScaffoldConfig.ReturnDataType(template.DataType);
+                    dataType.Load(parameters);
+                    dataType.DomainDefinition = this.ProjectDefinition.Domains[0];
+                    validations = dataType.Validate();
+
+                    foreach (Validation validation in validations)
+                    {
+                       this.ValidationResult.Add(validation); 
+                    }
+                }
+            }
+
             Logger.Trace($"Completed Validate()");
             return this.ValidationResult;
         }

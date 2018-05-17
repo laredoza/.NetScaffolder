@@ -19,6 +19,8 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.RepoInterfaceDa
     using DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Base;
     using DotNetScaffolder.Core.Common.Serializer;
     using DotNetScaffolder.Mapping.MetaData.Model;
+    using DotNetScaffolder.Core.Common.Validation;
+
     using FormControls.TreeView;
 
     #endregion
@@ -31,16 +33,22 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.RepoInterfaceDa
     [ExportMetadata("ValueMetaData", "1BC1B0C4-1E41-9146-82CF-599181CE4451")]
     public class RepoInterfaceDataType : BaseDataType
     {
+        #region Constructors and Destructors
+
         /// <summary>
-        /// Initializes a new instance of the <see cref="RepoInterfaceDataType"/> class.
+        ///     Initializes a new instance of the <see cref="RepoInterfaceDataType" /> class.
         /// </summary>
         public RepoInterfaceDataType()
             : base("RepoInterface.xml")
         {
         }
 
+        #endregion
+
+        #region Public Properties
+
         /// <summary>
-        /// Gets the full namespace.
+        ///     Gets the full namespace.
         /// </summary>
         [XmlIgnore]
         public string FullNamespace
@@ -52,7 +60,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.RepoInterfaceDa
         }
 
         /// <summary>
-        /// Gets the model name.
+        ///     Gets the model name.
         /// </summary>
         [XmlIgnore]
         public string ModelName
@@ -76,12 +84,12 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.RepoInterfaceDa
         public string OutputFolder { get; set; } = "Repository";
 
         /// <summary>
-        /// Gets or sets the output path.
+        ///     Gets or sets the output path.
         /// </summary>
         public string OutputPath { get; set; }
 
         /// <summary>
-        /// Gets the repo name.
+        ///     Gets the repo name.
         /// </summary>
         [XmlIgnore]
         public string RepoName
@@ -93,6 +101,10 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.RepoInterfaceDa
                            : string.Empty;
             }
         }
+
+        #endregion
+
+        #region Public Methods And Operators
 
         /// <summary>
         /// The create ui.
@@ -168,5 +180,20 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.RepoInterfaceDa
             ObjectXMLSerializer<RepoInterfaceDataType>.Save(this, filePath);
             return true;
         }
+
+        /// <summary>
+        /// The validate.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="List"/>.
+        /// </returns>
+        public override List<Validation> Validate()
+        {
+            this.ValidationResult = new List<Validation>();
+
+            return this.ValidationResult;
+        }
+
+        #endregion
     }
 }

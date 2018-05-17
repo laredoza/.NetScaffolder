@@ -13,6 +13,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.EntityDataTypes
     using System.Windows.Forms;
 
     using DotNetScaffolder.Components.Common.Contract;
+    using DotNetScaffolder.Core.Common.Validation;
     using DotNetScaffolder.Mapping.MetaData.Domain;
 
     #endregion
@@ -22,10 +23,16 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.EntityDataTypes
     /// </summary>
     public partial class EntityUserControl : UserControl, IDataTypeUI<IDictionary<string, string>>
     {
+        #region Fields
+
         /// <summary>
-        /// The data type.
+        ///     The data type.
         /// </summary>
         private EntityDataType dataType;
+
+        #endregion
+
+        #region Constructors and Destructors
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="EntityUserControl" /> class.
@@ -35,13 +42,17 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.EntityDataTypes
             this.InitializeComponent();
         }
 
+        #endregion
+
         /// <summary>
         ///     The on navigation changed.
         /// </summary>
         public event EventHandler<IDataType<IDictionary<string, string>>> OnNavigationChanged;
 
+        #region Public Properties
+
         /// <summary>
-        /// Gets or sets the data source.
+        ///     Gets or sets the data source.
         /// </summary>
         public DomainDefinition DataSource { get; set; }
 
@@ -61,6 +72,15 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.EntityDataTypes
                 this.UpdateUI();
             }
         }
+
+        /// <summary>
+        ///     Gets or sets the validation result.
+        /// </summary>
+        public List<Validation> ValidationResult { get; set; }
+
+        #endregion
+
+        #region Public Methods And Operators
 
         /// <summary>
         /// The load config.
@@ -90,6 +110,22 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.EntityDataTypes
             this.UpdateDataType();
             this.DataType.Save(parameters);
         }
+
+        /// <summary>
+        ///     The validate.
+        /// </summary>
+        /// <returns>
+        ///     The <see cref="List" />.
+        /// </returns>
+        public virtual List<Validation> Validate()
+        {
+            this.ValidationResult = this.DataType.Validate();
+            return this.ValidationResult;
+        }
+
+        #endregion
+
+        #region Other Methods
 
         /// <summary>
         /// The btn browse_ click.
@@ -148,7 +184,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.EntityDataTypes
         }
 
         /// <summary>
-        /// The update data type.
+        ///     The update data type.
         /// </summary>
         private void UpdateDataType()
         {
@@ -163,7 +199,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.EntityDataTypes
         }
 
         /// <summary>
-        /// The update ui.
+        ///     The update ui.
         /// </summary>
         private void UpdateUI()
         {
@@ -176,5 +212,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.EntityDataTypes
             this.chkAddInjectConstructor.Checked = this.DataType.AddInjectConstructor;
             this.chkUseInterface.Checked = this.DataType.UseInterface;
         }
+
+        #endregion
     }
 }

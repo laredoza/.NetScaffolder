@@ -11,6 +11,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Text;
     using System.Windows.Forms;
 
     using Common.Logging;
@@ -18,6 +19,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
     using Configuration;
 
     using DotNetScaffolder.Components.Common.Contract;
+    using DotNetScaffolder.Core.Common.Validation;
     using DotNetScaffolder.Mapping.MetaData.Domain;
 
     #endregion
@@ -100,13 +102,35 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         public void Save()
         {
             Logger.Trace("Started Save()");
+            List<Validation> validationResult;
 
             if (this.DataSource != null)
             {
                 var parameters = new Dictionary<string, string> { { "basePath", this.OutputPath } };
                 foreach (TreeNode node in this.DomainTreeView.Nodes)
                 {
-                    (node.Tag as IDataTypeUI<IDictionary<string, string>>)?.SaveConfig(parameters);
+                    validationResult = (node.Tag as IDataTypeUI<IDictionary<string, string>>)?.Validate();
+                    
+                    if (validationResult.Count > 0)
+                    {
+                        (node.Tag as IDataTypeUI<IDictionary<string, string>>)?.SaveConfig(parameters);
+                    }
+                    else
+                    {
+                        StringBuilder sb = new StringBuilder();
+                        validationResult = (node.Tag as IDataTypeUI<IDictionary<string, string>>)?.Validate();
+                        
+                        foreach (var validation in validationResult)
+                        {
+                            sb.AppendLine(validation.Description);
+                        }
+
+                        MessageBox.Show(
+                            sb.ToString(),
+                            "Error Saving DataType",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Error);
+                    }
                 }
 
                 // TODO: Replace with something less annoying
@@ -114,6 +138,12 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
             }
             else
             {
+                MessageBox.Show(
+                    "The DataSource may not be empty",
+                    "Error Saving DataType",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+
                 Logger.Trace("Data Source is null ");
             }
 

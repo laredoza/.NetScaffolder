@@ -18,6 +18,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.DtoDataTypes
     using DotNetScaffolder.Components.Common.Contract;
     using DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Base;
     using DotNetScaffolder.Core.Common.Serializer;
+    using DotNetScaffolder.Core.Common.Validation;
 
     using FormControls.TreeView;
 
@@ -31,26 +32,36 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.DtoDataTypes
     [ExportMetadata("ValueMetaData", "1BC1B0C4-1E41-9146-82CF-599181CE4490")]
     public class DtoDataType : BaseDataType
     {
+        #region Fields
+
         /// <summary>
         ///     The table control.
         /// </summary>
         private Control tableControl;
 
+        #endregion
+
+        #region Constructors and Destructors
+
         /// <summary>
-        /// Initializes a new instance of the <see cref="DtoDataType"/> class.
+        ///     Initializes a new instance of the <see cref="DtoDataType" /> class.
         /// </summary>
         public DtoDataType()
             : base("Dto.xml")
         {
         }
 
+        #endregion
+
+        #region Public Properties
+
         /// <summary>
-        /// Gets or sets a value indicating whether add inject constructor.
+        ///     Gets or sets a value indicating whether add inject constructor.
         /// </summary>
         public bool AddInjectConstructor { get; set; }
 
         /// <summary>
-        /// Gets the dto name.
+        ///     Gets the dto name.
         /// </summary>
         [XmlIgnore]
         public string DtoName
@@ -72,7 +83,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.DtoDataTypes
         }
 
         /// <summary>
-        /// Gets the dto name full.
+        ///     Gets the dto name full.
         /// </summary>
         [XmlIgnore]
         public string DtoNameFull
@@ -84,7 +95,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.DtoDataTypes
         }
 
         /// <summary>
-        /// Gets the full namespace.
+        ///     Gets the full namespace.
         /// </summary>
         [XmlIgnore]
         public string FullNamespace
@@ -96,7 +107,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.DtoDataTypes
         }
 
         /// <summary>
-        /// Gets or sets the inherit from.
+        ///     Gets or sets the inherit from.
         /// </summary>
         public string InheritFrom { get; set; }
 
@@ -111,17 +122,17 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.DtoDataTypes
         public string OutputFolder { get; set; } = "Dto";
 
         /// <summary>
-        /// Gets or sets the output path.
+        ///     Gets or sets the output path.
         /// </summary>
         public string OutputPath { get; set; }
 
         /// <summary>
-        /// Gets or sets the post fix.
+        ///     Gets or sets the post fix.
         /// </summary>
         public string PostFix { get; set; } = "Dto";
 
         /// <summary>
-        /// Gets the transform inherit from.
+        ///     Gets the transform inherit from.
         /// </summary>
         [XmlIgnore]
         public string TransformInheritFrom
@@ -153,9 +164,13 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.DtoDataTypes
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether use interface.
+        ///     Gets or sets a value indicating whether use interface.
         /// </summary>
         public bool UseInterface { get; set; }
+
+        #endregion
+
+        #region Public Methods And Operators
 
         /// <summary>
         /// The create ui.
@@ -236,6 +251,23 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.DtoDataTypes
         }
 
         /// <summary>
+        ///     The validate.
+        /// </summary>
+        /// <returns>
+        ///     The <see cref="List" />.
+        /// </returns>
+        public override List<Validation> Validate()
+        {
+            this.ValidationResult = new List<Validation>();
+
+            return this.ValidationResult;
+        }
+
+        #endregion
+
+        #region Other Methods
+
+        /// <summary>
         /// The configure control.
         /// </summary>
         /// <param name="control">
@@ -251,5 +283,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.DtoDataTypes
             control.BringToFront();
             parent.Controls.Add(control);
         }
+
+        #endregion
     }
 }
