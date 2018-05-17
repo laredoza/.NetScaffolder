@@ -6,10 +6,15 @@
 
 namespace DotNetScaffolder.Components.Common.Contract
 {
-    using DotNetScaffolder.Mapping.MetaData.Domain;
     #region Usings
 
     using System;
+
+    using DotNetScaffolder.Mapping.MetaData.Domain;
+
+    #region Usings
+
+    #endregion
 
     #endregion
 
@@ -20,16 +25,21 @@ namespace DotNetScaffolder.Components.Common.Contract
     /// </typeparam>
     public interface IDataTypeUI<T>
     {
-        #region Public Events
-
         /// <summary>
-        /// The on navigation changed.
+        ///     The on navigation changed.
         /// </summary>
         event EventHandler<IDataType<T>> OnNavigationChanged;
 
+        #region Public Properties
+
+        /// <summary>
+        ///     Gets or sets the data source.
+        /// </summary>
+        DomainDefinition DataSource { get; set; }
+
         #endregion
 
-        #region Public methods and operators
+        #region Public Methods And Operators
 
         /// <summary>
         /// The load config.
@@ -46,8 +56,6 @@ namespace DotNetScaffolder.Components.Common.Contract
         /// The parameters.
         /// </param>
         void SaveConfig(T parameters);
-
-        DomainDefinition DataSource { get; set; }
 
         #endregion
     }

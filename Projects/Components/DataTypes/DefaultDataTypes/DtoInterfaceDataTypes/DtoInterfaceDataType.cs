@@ -33,16 +33,22 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.DtoInterfaceDat
     [ExportMetadata("ValueMetaData", "1BC1B0C4-1E41-9146-82CF-599181CE4441")]
     public class DtoInterfaceDataType : BaseDataType
     {
+        #region Constructors and Destructors
+
         /// <summary>
-        /// Initializes a new instance of the <see cref="DtoInterfaceDataType"/> class.
+        ///     Initializes a new instance of the <see cref="DtoInterfaceDataType" /> class.
         /// </summary>
         public DtoInterfaceDataType()
             : base("DtoInterface.xml")
         {
         }
 
+        #endregion
+
+        #region Public Properties
+
         /// <summary>
-        /// Gets the full namespace.
+        ///     Gets the full namespace.
         /// </summary>
         [XmlIgnore]
         public string FullNamespace
@@ -54,12 +60,12 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.DtoInterfaceDat
         }
 
         /// <summary>
-        /// Gets or sets the inherit from.
+        ///     Gets or sets the inherit from.
         /// </summary>
         public string InheritFrom { get; set; }
 
         /// <summary>
-        /// Gets the interface name.
+        ///     Gets the interface name.
         /// </summary>
         [XmlIgnore]
         public string InterfaceName
@@ -91,12 +97,12 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.DtoInterfaceDat
         public string OutputFolder { get; set; } = "Interfaces";
 
         /// <summary>
-        /// Gets or sets the output path.
+        ///     Gets or sets the output path.
         /// </summary>
         public string OutputPath { get; set; }
 
         /// <summary>
-        /// Gets the transform inherit from.
+        ///     Gets the transform inherit from.
         /// </summary>
         public string TransformInheritFrom
         {
@@ -110,6 +116,10 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.DtoInterfaceDat
                 return $": {this.InheritFrom}";
             }
         }
+
+        #endregion
+
+        #region Public Methods And Operators
 
         /// <summary>
         /// The create ui.
@@ -203,17 +213,18 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.DtoInterfaceDat
         }
 
         /// <summary>
-        /// The validate.
+        ///     The validate.
         /// </summary>
         /// <returns>
-        /// The <see cref="List"/>.
+        ///     The <see cref="List" />.
         /// </returns>
         public override List<Validation> Validate()
         {
             this.ValidationResult = new List<Validation>();
 
-
             return this.ValidationResult;
         }
+
+        #endregion
     }
 }

@@ -32,21 +32,27 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.EntityDataTypes
     [ExportMetadata("ValueMetaData", "1BC1B0C4-1E41-9146-82CF-599181CE4440")]
     public class EntityDataType : BaseDataType
     {
+        #region Constructors and Destructors
+
         /// <summary>
-        /// Initializes a new instance of the <see cref="EntityDataType"/> class.
+        ///     Initializes a new instance of the <see cref="EntityDataType" /> class.
         /// </summary>
         public EntityDataType()
             : base("Entity.xml")
         {
         }
 
+        #endregion
+
+        #region Public Properties
+
         /// <summary>
-        /// Gets or sets a value indicating whether add inject constructor.
+        ///     Gets or sets a value indicating whether add inject constructor.
         /// </summary>
         public bool AddInjectConstructor { get; set; }
 
         /// <summary>
-        /// Gets the entity name.
+        ///     Gets the entity name.
         /// </summary>
         [XmlIgnore]
         public string EntityName
@@ -68,7 +74,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.EntityDataTypes
         }
 
         /// <summary>
-        /// Gets the full namespace.
+        ///     Gets the full namespace.
         /// </summary>
         [XmlIgnore]
         public string FullNamespace
@@ -80,7 +86,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.EntityDataTypes
         }
 
         /// <summary>
-        /// Gets or sets the inherit from.
+        ///     Gets or sets the inherit from.
         /// </summary>
         public string InheritFrom { get; set; }
 
@@ -95,12 +101,12 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.EntityDataTypes
         public string OutputFolder { get; set; } = "Entity";
 
         /// <summary>
-        /// Gets or sets the output path.
+        ///     Gets or sets the output path.
         /// </summary>
         public string OutputPath { get; set; }
 
         /// <summary>
-        /// Gets the transform inherit from.
+        ///     Gets the transform inherit from.
         /// </summary>
         [XmlIgnore]
         public string TransformInheritFrom
@@ -125,9 +131,13 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.EntityDataTypes
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether use interface.
+        ///     Gets or sets a value indicating whether use interface.
         /// </summary>
         public bool UseInterface { get; set; }
+
+        #endregion
+
+        #region Public Methods And Operators
 
         /// <summary>
         /// The create ui.
@@ -222,17 +232,18 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.EntityDataTypes
         }
 
         /// <summary>
-        /// The validate.
+        ///     The validate.
         /// </summary>
         /// <returns>
-        /// The <see cref="List"/>.
+        ///     The <see cref="List" />.
         /// </returns>
         public override List<Validation> Validate()
         {
             this.ValidationResult = new List<Validation>();
 
-
             return this.ValidationResult;
         }
+
+        #endregion
     }
 }

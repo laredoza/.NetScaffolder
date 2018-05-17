@@ -11,6 +11,7 @@ namespace DotNetScaffolder.Components.Common.Contract
     using System.Collections.Generic;
     using System.Xml.Serialization;
 
+    using DotNetScaffolder.Mapping.MetaData.Domain;
     using DotNetScaffolder.Mapping.MetaData.Model;
 
     using FormControls.TreeView;
@@ -94,6 +95,11 @@ namespace DotNetScaffolder.Components.Common.Contract
         /// The <see cref="bool"/>.
         /// </returns>
         bool Save(T parameters);
+
+        /// <summary>
+        /// Gets or sets the domain definition.
+        /// </summary>
+        DomainDefinition DomainDefinition { get; set; }
     }
 
     /// <summary>

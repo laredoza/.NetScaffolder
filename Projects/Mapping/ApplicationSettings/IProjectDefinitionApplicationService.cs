@@ -60,11 +60,6 @@ namespace DotNetScaffolder.Mapping.ApplicationServices
         void Save();
 
         #endregion
-
-        // <summary>
-        // Returns the data types as Templates
-        /// </summary>
-        /// <returns></returns>
-        // List<Template> DataTypesAsTemplates();
+        
     }
 }

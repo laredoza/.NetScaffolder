@@ -11,9 +11,11 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Text;
     using System.Windows.Forms;
 
     using DotNetScaffolder.Components.Common.Contract;
+    using DotNetScaffolder.Core.Common.Validation;
     using DotNetScaffolder.Mapping.ApplicationServices.Tables;
     using DotNetScaffolder.Mapping.MetaData.Domain;
 
@@ -172,6 +174,18 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
             }
 
             this.UpdateUI();
+
+            if (this.DataType.Validate().Count > 0)
+            {
+                StringBuilder sb = new StringBuilder();
+
+                foreach (Validation validation in this.DataType.ValidationResult)
+                {
+                    sb.AppendLine(validation.Description);
+                }
+
+                MessageBox.Show(sb.ToString(), "Invalid Context", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         /// <summary>
@@ -329,6 +343,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
         {
             if (this.DataSource != null)
             {
+                this.DataType.DomainDefinition = this.DataSource;
                 ITableHierarchyService applicationService = new TempateHierarchyService();
                 List<Hierarchy> hierarchy = applicationService.ReturnSelectedHierarchyFromList(
                     this.DataSource.Tables,

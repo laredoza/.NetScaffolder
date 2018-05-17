@@ -13,6 +13,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Base
 
     using DotNetScaffolder.Components.Common.Contract;
     using DotNetScaffolder.Core.Common.Validation;
+    using DotNetScaffolder.Mapping.MetaData.Domain;
     using DotNetScaffolder.Mapping.MetaData.Model;
 
     using FormControls.TreeView;
@@ -82,7 +83,14 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Base
         /// <summary>
         ///     Gets or sets the validation result.
         /// </summary>
+        [XmlIgnore]
         public List<Validation> ValidationResult { get; set; }
+
+        /// <summary>
+        /// Gets or sets the domain definition.
+        /// </summary>
+        [XmlIgnore]
+        public DomainDefinition DomainDefinition { get; set; }
 
         #endregion
 

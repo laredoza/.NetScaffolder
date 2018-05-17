@@ -33,6 +33,9 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ApplicationServ
     {
         #region Constructors and Destructors
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ApplicationServiceDataType"/> class.
+        /// </summary>
         public ApplicationServiceDataType()
             : base("Application.xml")
         {
@@ -62,13 +65,13 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ApplicationServ
         #region Public Methods And Operators
 
         /// <summary>
-        ///     The create ui.
+        /// The create ui.
         /// </summary>
         /// <param name="parameters">
-        ///     The parameters.
+        /// The parameters.
         /// </param>
         /// <returns>
-        ///     The <see cref="IDataTypeUI" />.
+        /// The <see cref="IDataTypeUI"/>.
         /// </returns>
         public override IDataTypeUI<IDictionary<string, string>> CreateUI(IDictionary<string, string> parameters)
         {
@@ -103,10 +106,10 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ApplicationServ
         }
 
         /// <summary>
-        ///     The load.
+        /// The load.
         /// </summary>
         /// <param name="parameters">
-        ///     The parameters.
+        /// The parameters.
         /// </param>
         public override void Load(IDictionary<string, string> parameters)
         {
@@ -137,13 +140,13 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ApplicationServ
         }
 
         /// <summary>
-        ///     The save.
+        /// The save.
         /// </summary>
         /// <param name="parameters">
-        ///     The parameters.
+        /// The parameters.
         /// </param>
         /// <returns>
-        ///     The <see cref="bool" />.
+        /// The <see cref="bool"/>.
         /// </returns>
         public override bool Save(IDictionary<string, string> parameters)
         {

@@ -16,6 +16,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
     using System.Text;
     using System.Windows.Forms;
     using System.Xml.Serialization;
+
     using DotNetScaffolder.Components.Common;
     using DotNetScaffolder.Components.Common.Contract;
     using DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Base;
@@ -36,6 +37,8 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
     [ExportMetadata("ValueMetaData", "1BC1B0C4-1E41-9146-82CF-599181CE4430")]
     public class ContextDataType : BaseDataType
     {
+        #region Constructors and Destructors
+
         /// <summary>
         ///     Initializes a new instance of the <see cref="ContextDataType" /> class.
         /// </summary>
@@ -45,10 +48,18 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
             this.Contexts = new List<ContextData>();
         }
 
+        #endregion
+
+        #region Public Properties
+
         /// <summary>
         ///     Gets the contexts.
         /// </summary>
         public List<ContextData> Contexts { get; private set; }
+
+        #endregion
+
+        #region Public Methods And Operators
 
         /// <summary>
         /// The create ui.
@@ -158,20 +169,6 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
         }
 
         /// <summary>
-        /// The validate.
-        /// </summary>
-        /// <returns>
-        /// The <see cref="List"/>.
-        /// </returns>
-        public override List<Validation> Validate()
-        {
-            this.ValidationResult = new List<Validation>();
-
-
-            return this.ValidationResult;
-        }
-
-        /// <summary>
         /// The transform model name.
         /// </summary>
         /// <param name="name">
@@ -190,51 +187,86 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
             return this.NamingConvention.ApplyNamingConvention(name);
         }
 
-        public string TransformRelationship(string table, Relationship rel, IEnumerable<Table> models, IEnumerable<Relationship> relationships = null)
+        /// <summary>
+        /// The transform relationship.
+        /// </summary>
+        /// <param name="table">
+        /// The table.
+        /// </param>
+        /// <param name="rel">
+        /// The rel.
+        /// </param>
+        /// <param name="models">
+        /// The models.
+        /// </param>
+        /// <param name="relationships">
+        /// The relationships.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        public string TransformRelationship(
+            string table,
+            Relationship rel,
+            IEnumerable<Table> models,
+            IEnumerable<Relationship> relationships = null)
         {
             var sb = new StringBuilder();
 
-            string refTableName = RelationshipNameFormatting.FormatName(rel.ReferencedTableName, rel.RelationshipAlias, NamingConvention);
+            string refTableName = RelationshipNameFormatting.FormatName(
+                rel.ReferencedTableName,
+                rel.RelationshipAlias,
+                this.NamingConvention);
 
             if (rel.ReferencedMultiplicity == RelationshipMultiplicity.Many)
             {
-                sb.Append($"modelBuilder.Entity<{TransformModelName(table)}>().HasMany<{TransformModelName(rel.ReferencedTableName)}>(s => s.{refTableName})");
+                sb.Append(
+                    $"modelBuilder.Entity<{this.TransformModelName(table)}>().HasMany<{this.TransformModelName(rel.ReferencedTableName)}>(s => s.{refTableName})");
             }
             else if (rel.ReferencedMultiplicity == RelationshipMultiplicity.One)
             {
-                sb.Append($"modelBuilder.Entity<{TransformModelName(table)}>().HasRequired<{TransformModelName(rel.ReferencedTableName)}>(s => s.{refTableName})");
+                sb.Append(
+                    $"modelBuilder.Entity<{this.TransformModelName(table)}>().HasRequired<{this.TransformModelName(rel.ReferencedTableName)}>(s => s.{refTableName})");
             }
             else
             {
-                sb.Append($"modelBuilder.Entity<{TransformModelName(table)}>().HasOptional<{TransformModelName(rel.ReferencedTableName)}>(s => s.{refTableName})");
+                sb.Append(
+                    $"modelBuilder.Entity<{this.TransformModelName(table)}>().HasOptional<{this.TransformModelName(rel.ReferencedTableName)}>(s => s.{refTableName})");
             }
 
             string parentTableName = table;
 
             if (relationships != null && relationships.Any())
             {
-                var parentRels = (from tbl in models
-                                  select tbl.Relationships.FirstOrDefault(o => o.ReferencedTableName == table &&
-                                  o.SchemaName == rel.SchemaName &&
-                                  o.ColumnName == rel.ReferencedColumnName)).Where(x => x != null);
+                var parentRels =
+                    (from tbl in models
+                     select tbl.Relationships.FirstOrDefault(
+                         o => o.ReferencedTableName == table && o.SchemaName == rel.SchemaName
+                                                             && o.ColumnName == rel.ReferencedColumnName))
+                    .Where(x => x != null);
 
                 var parentRel = parentRels.FirstOrDefault();
 
-                if(parentRel != null)
+                if (parentRel != null)
                 {
-                    parentTableName = RelationshipNameFormatting.FormatName(parentRel.ReferencedTableName, parentRel.RelationshipAlias, NamingConvention);
+                    parentTableName = RelationshipNameFormatting.FormatName(
+                        parentRel.ReferencedTableName,
+                        parentRel.RelationshipAlias,
+                        this.NamingConvention);
                 }
             }
 
             if (rel.Multiplicity == RelationshipMultiplicity.Many)
             {
-                sb.Append($".WithMany(s => s.{parentTableName}).HasForeignKey(s => s.{rel.ColumnName}).WillCascadeOnDelete(false);");
+                sb.Append(
+                    $".WithMany(s => s.{parentTableName}).HasForeignKey(s => s.{rel.ColumnName}).WillCascadeOnDelete(false);");
             }
             else if (rel.Multiplicity == RelationshipMultiplicity.One)
             {
-                if(rel.ReferencedMultiplicity == RelationshipMultiplicity.Many)
+                if (rel.ReferencedMultiplicity == RelationshipMultiplicity.Many)
                 {
-                    sb.Append($".WithRequired(s => s.{parentTableName}).HasForeignKey(s => s.{rel.ReferencedColumnName}).WillCascadeOnDelete(false);");
+                    sb.Append(
+                        $".WithRequired(s => s.{parentTableName}).HasForeignKey(s => s.{rel.ReferencedColumnName}).WillCascadeOnDelete(false);");
                 }
                 else
                 {
@@ -245,7 +277,8 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
             {
                 if (rel.ReferencedMultiplicity == RelationshipMultiplicity.Many)
                 {
-                    sb.Append($".WithOptional(s => s.{parentTableName}).HasForeignKey(s => s.{rel.ReferencedColumnName}).WillCascadeOnDelete(false);");
+                    sb.Append(
+                        $".WithOptional(s => s.{parentTableName}).HasForeignKey(s => s.{rel.ReferencedColumnName}).WillCascadeOnDelete(false);");
                 }
                 else
                 {
@@ -255,6 +288,32 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
 
             return sb.ToString();
         }
+
+        /// <summary>
+        ///     The validate.
+        /// </summary>
+        /// <returns>
+        ///     The <see cref="List" />.
+        /// </returns>
+        public override List<Validation> Validate()
+        {
+            this.ValidationResult = new List<Validation>();
+
+            foreach (var contextData in this.Contexts)
+            {
+                foreach (Table model in contextData.Models)
+                {
+                    if (!this.DomainDefinition.Tables.Exists(t => t.TableName == model.TableName))
+                    {
+                        this.ValidationResult.Add(new Validation(ValidationType.ContextMissingModels, $"Context {contextData.ContextName} is missing Model {model.TableName} is missing"));
+                    }
+                }
+            }
+
+            return this.ValidationResult;
+        }
+
+        #endregion
     }
 
     /// <summary>
@@ -262,13 +321,19 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
     /// </summary>
     public class ContextData
     {
+        #region Fields
+
         /// <summary>
-        /// The exluded relationships.
+        ///     The exluded relationships.
         /// </summary>
         private List<Relationship> exludedRelationships;
 
+        #endregion
+
+        #region Constructors and Destructors
+
         /// <summary>
-        /// Initializes a new instance of the <see cref="ContextData"/> class.
+        ///     Initializes a new instance of the <see cref="ContextData" /> class.
         /// </summary>
         public ContextData()
         {
@@ -283,15 +348,9 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
             this.OutputPath = string.Empty;
         }
 
-        public bool HasModel(Relationship rel)
-        {
-            if (this.Models == null || !this.Models.Any())
-            {
-                return false;
-            }
+        #endregion
 
-            return this.Models.Any(o => o.SchemaName == rel.SchemaName && o.TableName == rel.ReferencedTableName);
-        }
+        #region Public Properties
 
         /// <summary>
         ///     Gets or sets the context name.
@@ -304,12 +363,12 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
         public bool CreateDb { get; set; }
 
         /// <summary>
-        /// Gets or sets the custom connection name.
+        ///     Gets or sets the custom connection name.
         /// </summary>
         public string CustomConnectionName { get; set; }
 
         /// <summary>
-        /// Gets the excluded relationships.
+        ///     Gets the excluded relationships.
         /// </summary>
         [XmlIgnore]
         public List<Relationship> ExcludedRelationships
@@ -347,6 +406,9 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
         /// </summary>
         public Guid Id { get; set; }
 
+        /// <summary>
+        ///     Gets or sets a value indicating whether include column order.
+        /// </summary>
         public bool IncludeColumnOrder { get; set; }
 
         /// <summary>
@@ -355,7 +417,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
         public string InheritFrom { get; set; } = "BaseContext";
 
         /// <summary>
-        /// Gets or sets a value indicating whether lazy loading enabled.
+        ///     Gets or sets a value indicating whether lazy loading enabled.
         /// </summary>
         public bool LazyLoadingEnabled { get; set; }
 
@@ -365,7 +427,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
         public bool LoggingEnabled { get; set; }
 
         /// <summary>
-        /// Gets the models.
+        ///     Gets the models.
         /// </summary>
         public List<Table> Models { get; }
 
@@ -380,17 +442,17 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
         public string OutputFolder { get; set; }
 
         /// <summary>
-        /// Gets or sets the output path.
+        ///     Gets or sets the output path.
         /// </summary>
         public string OutputPath { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether proxy creation enabled.
+        ///     Gets or sets a value indicating whether proxy creation enabled.
         /// </summary>
         public bool ProxyCreationEnabled { get; set; }
 
         /// <summary>
-        /// Gets the transform inherit from.
+        ///     Gets the transform inherit from.
         /// </summary>
         [XmlIgnore]
         public string TransformInheritFrom
@@ -406,6 +468,29 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
             }
         }
 
+        #endregion
+
+        #region Public Methods And Operators
+
+        /// <summary>
+        /// The has model.
+        /// </summary>
+        /// <param name="rel">
+        /// The rel.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        public bool HasModel(Relationship rel)
+        {
+            if (this.Models == null || !this.Models.Any())
+            {
+                return false;
+            }
+
+            return this.Models.Any(o => o.SchemaName == rel.SchemaName && o.TableName == rel.ReferencedTableName);
+        }
+
         /// <summary>
         /// The transform fullnamespace.
         /// </summary>
@@ -419,5 +504,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
         {
             return $"{baseNs}.{this.Namespace}";
         }
+
+        #endregion
     }
 }
