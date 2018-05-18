@@ -107,7 +107,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.RepoInterfaceDa
         #region Public Methods And Operators
 
         /// <summary>
-        /// The create ui.
+        /// Create ui.
         /// </summary>
         /// <param name="parameters">
         /// The parameters.
