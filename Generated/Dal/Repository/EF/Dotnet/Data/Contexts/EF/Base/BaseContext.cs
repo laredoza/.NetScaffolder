@@ -12,6 +12,9 @@
     using System.Linq.Expressions;
     using System.Threading.Tasks;
 
+    using RepositoryEFDotnet.Core.Base;
+    using RepositoryEFDotnet.Core.Utils;
+
     #endregion
 
     /// <summary>

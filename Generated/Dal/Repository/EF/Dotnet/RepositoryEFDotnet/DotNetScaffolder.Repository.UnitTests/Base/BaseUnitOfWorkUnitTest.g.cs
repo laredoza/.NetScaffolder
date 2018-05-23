@@ -28,7 +28,9 @@ using System.Threading.Tasks;
 
 namespace RepositoryEFDotnet.UnitTest
 {
-	[TestClass]
+    using RepositoryEFDotnet.Core.Base;
+
+    [TestClass]
 	public abstract partial class BaseUnitOfWorkUnitTests<TUow> : BaseUnitTest where TUow : IUnitOfWork
 	{
         #region Fields

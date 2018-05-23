@@ -20,12 +20,14 @@
 
 using System;
 using System.Collections.Generic;
-using Core.Base;
+
 using Banking.Models.Interfaces;
 
 namespace Banking.Models.Interfaces
 {
-	/// <summary>
+    using RepositoryEFDotnet.Core.Base;
+
+    /// <summary>
 	/// The BookRepository interface that defines database functions for the Book table
 	/// </summary>
 	public partial interface IBookRepository : IRepository<IBook>

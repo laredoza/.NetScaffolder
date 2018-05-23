@@ -1,66 +1,12 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{69BF017D-9632-4BCA-859B-5D24A2C4B79A}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>RepositoryInterfaces</RootNamespace>
-    <AssemblyName>RepositoryInterfaces</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <TargetFrameworks>netstandard2.0</TargetFrameworks>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xml" />
+    <ProjectReference Include="..\..\..\Core\RepositoryEFDotnet.Core.csproj" />
+    <ProjectReference Include="..\..\Entities\Entity\RepositoryEFDotnet.Data.Entities.Entity.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repository\IBankAccountRepository.g.cs" />
-    <Compile Include="Repository\IBankTransfersRepository.g.cs" />
-    <Compile Include="Repository\IBookRepository.g.cs" />
-    <Compile Include="Repository\ICompositeKeyTestRepository.g.cs" />
-    <Compile Include="Repository\ICountryRepository.g.cs" />
-    <Compile Include="Repository\ICustomerRepository.g.cs" />
-    <Compile Include="Repository\IOrderDetailsRepository.g.cs" />
-    <Compile Include="Repository\IOrderRepository.g.cs" />
-    <Compile Include="Repository\IProductRepository.g.cs" />
-    <Compile Include="Repository\ISoftwareRepository.g.cs" />
+    <Folder Include="Repository\" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\Core\RepositoryEFDotnet.Core.csproj">
-      <Project>{0333e000-6aaf-4e18-8747-2299a8231ab1}</Project>
-      <Name>RepositoryEFDotnet.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Interface\RepositoryEFDotnet.Data.Interface.ModelInterfaces.csproj">
-      <Project>{4f6d59b6-2c03-4a37-9670-bb46225aa6e1}</Project>
-      <Name>RepositoryEFDotnet.Data.Interface.ModelInterfaces</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

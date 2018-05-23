@@ -20,12 +20,14 @@
 
 using System;
 using System.Collections.Generic;
-using Core.Base;
+
 using Banking.Models.Interfaces;
 
 namespace Banking.Models.Interfaces
 {
-	/// <summary>
+    using RepositoryEFDotnet.Core.Base;
+
+    /// <summary>
 	/// The ProductRepository interface that defines database functions for the Product table
 	/// </summary>
 	public partial interface IProductRepository : IRepository<IProduct>

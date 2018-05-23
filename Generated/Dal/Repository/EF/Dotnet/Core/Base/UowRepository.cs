@@ -1,15 +1,17 @@
-﻿namespace RepositoryEFDotnet.Library
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="UowRepository.cs" company="DotnetScaffolder">
+//   MIT
+// </copyright>
+// <summary>
+//   Repository base class
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
+
+namespace RepositoryEFDotnet.Core.Base
 {
-    #region Using
-
     using System;
-    using System.Collections.Generic;
-    using System.Data.Entity;
-    using System.Linq;
-    using System.Linq.Expressions;
-    using System.Threading.Tasks;
 
-    using Core.Base;
+    #region Using
 
     #endregion
 
@@ -24,6 +26,12 @@
     {
         #region Constructors and Destructors
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UowRepository{TEntity}"/> class.
+        /// </summary>
+        /// <param name="unitOfWork">
+        /// The unit of work.
+        /// </param>
         protected UowRepository(IUnitOfWork unitOfWork)
         {
             this.UnitOfWork = unitOfWork ?? throw new ArgumentNullException($"unitOfWork");
@@ -31,12 +39,12 @@
 
         #endregion
 
-        #region Properties
+        #region Other Properties
 
         /// <summary>
         ///     Get the unit of work in this repository
         /// </summary>
-        protected IUnitOfWork UnitOfWork { get; private set; }
+        protected IUnitOfWork UnitOfWork { get; }
 
         #endregion
     }

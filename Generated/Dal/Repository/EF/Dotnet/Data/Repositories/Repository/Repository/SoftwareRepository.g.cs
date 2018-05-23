@@ -20,14 +20,15 @@
 
 using System;
 using System.Collections.Generic;
-using RepositoryEFDotnet.Library;
 using System.Linq;
 using Banking.Models.Interfaces;
 using Banking.Models.Entity;
 
 namespace Banking.Models.Repository
 {
-	/// <summary>
+    using RepositoryEFDotnet.Core.Base;
+
+    /// <summary>
 	/// The SoftwareRepository class responsible for database functions in the Software table
 	/// </summary>
 	public partial class SoftwareRepository : UowRepository<Software> , ISoftwareRepository

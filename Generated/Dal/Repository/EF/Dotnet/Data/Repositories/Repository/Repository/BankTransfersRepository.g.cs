@@ -20,14 +20,15 @@
 
 using System;
 using System.Collections.Generic;
-using RepositoryEFDotnet.Library;
 using System.Linq;
 using Banking.Models.Interfaces;
 using Banking.Models.Entity;
 
 namespace Banking.Models.Repository
 {
-	/// <summary>
+    using RepositoryEFDotnet.Core.Base;
+
+    /// <summary>
 	/// The BankTransfersRepository class responsible for database functions in the BankTransfers table
 	/// </summary>
 	public partial class BankTransfersRepository : UowRepository<BankTransfers> , IBankTransfersRepository
