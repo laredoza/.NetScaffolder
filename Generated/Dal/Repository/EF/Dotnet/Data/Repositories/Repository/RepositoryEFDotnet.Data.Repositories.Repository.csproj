@@ -1,75 +1,25 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{DAB86AE4-F8E1-4D5E-BAF2-855D24D7A437}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DataRepository</RootNamespace>
-    <AssemblyName>DataRepository</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <TargetFrameworks>netstandard2.0</TargetFrameworks>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xml" />
+    <ProjectReference Include="..\..\..\Core\RepositoryEFDotnet.Core.csproj" />
+    <ProjectReference Include="..\..\Entities\Entity\RepositoryEFDotnet.Data.Entities.Entity.csproj" />
+    <ProjectReference Include="..\..\Interfaces\Interface\RepositoryEFDotnet.Data.Interface.ModelInterfaces.csproj" />
+    <ProjectReference Include="..\..\Interfaces\RepositoryInterfaces\RepositoryEFDotnet.Data.Interface.RepositoryInterfaces.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repository\BankAccountRepository.g.cs" />
-    <Compile Include="Repository\BankTransfersRepository.g.cs" />
-    <Compile Include="Repository\BookRepository.g.cs" />
-    <Compile Include="Repository\CompositeKeyTestRepository.g.cs" />
-    <Compile Include="Repository\CountryRepository.g.cs" />
-    <Compile Include="Repository\CustomerRepository.g.cs" />
-    <Compile Include="Repository\OrderDetailsRepository.g.cs" />
-    <Compile Include="Repository\OrderRepository.g.cs" />
-    <Compile Include="Repository\ProductRepository.g.cs" />
-    <Compile Include="Repository\SoftwareRepository.g.cs" />
-    <Compile Include="RunGenerator.cs">
-      <DependentUpon>RunGenerator.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="RunGenerator.cs">
       <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>RunGenerator.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Model\Application.xml" />
-    <Content Include="Model\Context.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Model\Dto.xml" />
-    <Content Include="Model\DtoInterface.xml" />
-    <Content Include="Model\EdmxSourceType.xml" />
-    <Content Include="Model\Entity.xml" />
-    <Content Include="Model\GenericAdoSourceType.xml" />
-    <Content Include="Model\RepoInterface.xml" />
-    <Content Include="Model\Repository.xml" />
-    <Content Include="RunGenerator.tt">
+    <None Update="RunGenerator.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>RunGenerator.cs</LastGenOutput>
       <LastOutputs>
@@ -136,56 +86,9 @@
 .\Repository\ProductRepository.g.cs
 .\Repository\SoftwareRepository.g.cs
 </LastOutputs>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Model\Banking.mdl">
-      <SubType>Designer</SubType>
     </None>
-    <None Include="Model\T4\BaseGenerator.ttInclude" />
-    <None Include="Model\T4\BaseProjectGenerator.ttInclude" />
-    <None Include="Model\T4\BaseTemplate.ttinclude" />
-    <None Include="Model\T4\BaseRepositoryUnitTestTemplate.ttInclude" />
-    <None Include="Model\T4\BaseUowUnitTestTemplate.ttInclude" />
-    <None Include="Model\T4\ContextCoreGenerator.ttInclude" />
-    <None Include="Model\T4\ContextCoreTemplate.ttInclude" />
-    <None Include="Model\T4\ContextGenerator.ttInclude" />
-    <None Include="Model\T4\ContextTemplate.ttInclude" />
-    <None Include="Model\T4\CopyrightHeader.ttinclude" />
-    <None Include="Model\T4\DtoGenerator.ttInclude" />
-    <None Include="Model\T4\DtoInterfaceGenerator.ttInclude" />
-    <None Include="Model\T4\DtoInterfaceTemplate.ttInclude" />
-    <None Include="Model\T4\DtoTemplate.ttInclude" />
-    <None Include="Model\T4\BaseUnitTestGenerator.ttInclude" />
-    <None Include="Model\T4\EntityGenerator.ttInclude" />
-    <None Include="Model\T4\BaseUnitTestTemplate.ttInclude" />
-    <None Include="Model\T4\EntityTemplate.ttInclude" />
-    <None Include="Model\T4\ProjectGenerator.ttInclude" />
-    <None Include="Model\T4\RepoInterfaceGenerator.ttInclude" />
-    <None Include="Model\T4\RepoInterfaceTemplate.ttInclude" />
-    <None Include="Model\T4\RepositoryGenerator.ttInclude" />
-    <None Include="Model\T4\RepositoryTemplate.ttInclude" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Core\RepositoryEFDotnet.Core.csproj">
-      <Project>{0333E000-6AAF-4E18-8747-2299A8231AB1}</Project>
-      <Name>RepositoryEFDotnet.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Entities\Entity\RepositoryEFDotnet.Data.Entities.Entity.csproj">
-      <Project>{017da2af-1ffd-4e68-9646-b0e5c73ea037}</Project>
-      <Name>RepositoryEFDotnet.Data.Entities.Entity</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Interfaces\Interface\RepositoryEFDotnet.Data.Interface.ModelInterfaces.csproj">
-      <Project>{f49f5825-6f92-4b8d-ae30-59d43235974b}</Project>
-      <Name>RepositoryEFDotnet.Data.Interface.ModelInterfaces</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Interfaces\RepositoryInterfaces\RepositoryEFDotnet.Data.Interface.RepositoryInterfaces.csproj">
-      <Project>{69bf017d-9632-4bca-859b-5d24a2c4b79a}</Project>
-      <Name>RepositoryEFDotnet.Data.Interface.RepositoryInterfaces</Name>
-    </ProjectReference>
+    <Folder Include="Repository\" />
   </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

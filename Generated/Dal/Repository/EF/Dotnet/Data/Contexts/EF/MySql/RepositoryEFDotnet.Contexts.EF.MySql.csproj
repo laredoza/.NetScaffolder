@@ -64,9 +64,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Context\MySqlAccountContext.g.cs" />
-    <Compile Include="Context\MySqlCustomerContext.g.cs" />
-    <Compile Include="Context\MySqlFullContext.g.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -82,6 +79,9 @@
       <Project>{a8511725-544e-49bd-8451-4c8638adc5ba}</Project>
       <Name>RepositoryEFDotnet.Contexts.EF.Base</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Context\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

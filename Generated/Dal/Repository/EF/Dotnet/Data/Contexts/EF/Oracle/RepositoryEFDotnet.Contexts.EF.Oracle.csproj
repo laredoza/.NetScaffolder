@@ -55,9 +55,6 @@
   <ItemGroup>
     <Compile Include="Config\OracleDbConfiguration.cs" />
     <Compile Include="Config\OracleHistory.cs" />
-    <Compile Include="Context\OracleAccountContext.g.cs" />
-    <Compile Include="Context\OracleCustomerContext.g.cs" />
-    <Compile Include="Context\OracleFullContext.g.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -73,6 +70,9 @@
       <Project>{a8511725-544e-49bd-8451-4c8638adc5ba}</Project>
       <Name>RepositoryEFDotnet.Contexts.EF.Base</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Context\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

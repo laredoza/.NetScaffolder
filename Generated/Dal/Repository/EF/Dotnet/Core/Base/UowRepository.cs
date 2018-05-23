@@ -1,15 +1,13 @@
 ﻿namespace RepositoryEFDotnet.Library
 {
+    using global::Core.Base;
     #region Using
 
     using System;
     using System.Collections.Generic;
-    using System.Data.Entity;
     using System.Linq;
     using System.Linq.Expressions;
     using System.Threading.Tasks;
-
-    using Core.Base;
 
     #endregion
 
