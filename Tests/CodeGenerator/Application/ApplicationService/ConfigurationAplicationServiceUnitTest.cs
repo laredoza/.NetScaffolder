@@ -11,8 +11,7 @@ namespace DotNetScaffolder.Test.Application.ApplicationService
     using System;
     using System.Collections.Generic;
 
-    using Configuration;
-
+    using DotNetScaffolder.Core.Configuration;
     using DotNetScaffolder.Mapping.ApplicationServices;
     using DotNetScaffolder.Mapping.MetaData.Enum;
     using DotNetScaffolder.Mapping.MetaData.Project.Packages;
