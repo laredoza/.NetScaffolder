@@ -13,10 +13,9 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Sources
 
     using Common.Logging;
 
-    using Configuration;
-
     using DotNetScaffolder.Components.Common.Contract;
     using DotNetScaffolder.Components.Common.Contract.UI;
+    using DotNetScaffolder.Core.Configuration;
     using DotNetScaffolder.Mapping.MetaData.Domain;
 
     #endregion
@@ -90,6 +89,9 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Sources
         /// </summary>
         public string SavePath { get; set; }
 
+        /// <summary>
+        /// Gets a value indicating whether valid.
+        /// </summary>
         public bool Valid
         {
             get
@@ -97,6 +99,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Sources
                 return this.updateModelsFromSourceUserControl1.Valid;
             }
         }
+
         #endregion
 
         #region Other Methods

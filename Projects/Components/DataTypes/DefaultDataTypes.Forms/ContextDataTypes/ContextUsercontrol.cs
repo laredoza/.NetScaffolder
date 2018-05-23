@@ -1,20 +1,22 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ContextUserControl.cs" company="DotnetScaffolder">
+// <copyright file="ContextUsercontrol.cs" company="DotnetScaffolder">
 //   MIT
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataTypes
+namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.ContextDataTypes
 {
     #region Usings
 
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.Composition;
     using System.Linq;
     using System.Text;
     using System.Windows.Forms;
 
     using DotNetScaffolder.Components.Common.Contract;
+    using DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataTypes;
     using DotNetScaffolder.Core.Common.Validation;
     using DotNetScaffolder.Mapping.ApplicationServices.Tables;
     using DotNetScaffolder.Mapping.MetaData.Domain;
@@ -26,7 +28,12 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
     /// <summary>
     ///     The context user control.
     /// </summary>
-    public partial class ContextUserControl : UserControl, IDataTypeUI<IDictionary<string, string>>
+    [Export(typeof(IDataTypeUI))]
+    [ExportMetadata("NameMetaData", "ContextUI")]
+    [ExportMetadata("ValueMetaData", "1BC1B0C4-1E41-9146-82CF-599181CE4430")]
+    [ExportMetadata("DisplayType", DisplayType.WinForm)]
+    [ExportMetadata("DataType", "1BC1B0C4-1E41-9146-82CF-599181CE4430")]
+    public partial class ContextUserControl : UserControl, IDataTypeUI
     {
         #region Fields
 
@@ -38,7 +45,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
         /// <summary>
         ///     The data type.
         /// </summary>
-        private ContextDataType dataType;
+        private IDataType dataType;
 
         #endregion
 
@@ -58,7 +65,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
         /// <summary>
         ///     The on navigation changed.
         /// </summary>
-        public event EventHandler<IDataType<IDictionary<string, string>>> OnNavigationChanged;
+        public event EventHandler<IDataType> OnNavigationChanged;
 
         #region Public Properties
 
@@ -82,7 +89,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
         /// <summary>
         ///     Gets or sets the data type.
         /// </summary>
-        public ContextDataType DataType
+        public IDataType DataType
         {
             get
             {
@@ -97,17 +104,17 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
         }
 
         /// <summary>
-        ///     Gets or sets the save path.
+        /// Gets or sets the save path.
         /// </summary>
         public string SavePath { get; set; }
 
         /// <summary>
-        ///     Gets or sets the selected context.
+        /// Gets or sets the selected context.
         /// </summary>
         public ContextData SelectedContext { get; set; }
 
         /// <summary>
-        /// Gets or sets the validation result.
+        ///     Gets or sets the validation result.
         /// </summary>
         public List<Validation> ValidationResult { get; set; }
 
@@ -148,16 +155,18 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
         /// <param name="parameters">
         /// The parameters.
         /// </param>
-        public void LoadConfig(IDictionary<string, string> parameters)
+        public void LoadConfig(object parameters)
         {
             if (this.DataType == null) return;
 
-            this.DataType?.Load(parameters);
+            IDictionary<string, string> parameterDictionary = parameters as IDictionary<string, string>;
+            this.DataType?.Load(parameterDictionary);
 
-            if (parameters.ContainsKey("name"))
+            if (parameterDictionary.ContainsKey("name"))
             {
                 this.SelectedContext =
-                    this.DataType.Contexts.FirstOrDefault(o => o.Id.ToString() == parameters["name"]);
+                    (this.DataType as ContextDataType).Contexts.FirstOrDefault(
+                        o => o.Id.ToString() == parameterDictionary["name"]);
             }
 
             if (this.SelectedContext == null)
@@ -199,15 +208,17 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
         /// <param name="parameters">
         /// The parameters.
         /// </param>
-        public void SaveConfig(IDictionary<string, string> parameters)
+        public void SaveConfig(object parameters)
         {
             if (this.DataType == null || this.SelectedContext == null) return;
 
-            this.SelectedContext = this.DataType.Contexts.FirstOrDefault(o => o.Id == this.SelectedContext.Id);
+            this.SelectedContext =
+                (this.DataType as ContextDataType).Contexts.FirstOrDefault(o => o.Id == this.SelectedContext.Id);
 
             this.UpdateContext();
 
-            this.DataType.Save(parameters);
+            IDictionary<string, string> parameterDictionary = parameters as IDictionary<string, string>;
+            this.DataType.Save(parameterDictionary);
         }
 
         /// <summary>
@@ -242,15 +253,16 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
             if (btn.Tag.ToString() == "Add")
             {
                 this.UpdateContext();
-                this.DataType.Contexts.Add(this.SelectedContext);
+                (this.DataType as ContextDataType).Contexts.Add(this.SelectedContext);
             }
             else if (btn.Tag.ToString() == "Delete")
             {
-                var context = this.DataType.Contexts.FirstOrDefault(o => o.Id == this.SelectedContext.Id);
+                var context =
+                    (this.DataType as ContextDataType).Contexts.FirstOrDefault(o => o.Id == this.SelectedContext.Id);
 
                 if (context != null)
                 {
-                    this.DataType.Contexts.Remove(context);
+                    (this.DataType as ContextDataType).Contexts.Remove(context);
                 }
 
                 this.SelectedContext = null;
@@ -280,19 +292,6 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
                 child.Checked = newCheckedValue;
                 this.clicked(child, newCheckedValue);
             }
-        }
-
-        /// <summary>
-        /// The context user control_ load.
-        /// </summary>
-        /// <param name="sender">
-        /// The sender.
-        /// </param>
-        /// <param name="e">
-        /// The e.
-        /// </param>
-        private void ContextUserControl_Load(object sender, EventArgs e)
-        {
         }
 
         /// <summary>

@@ -12,7 +12,6 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.RepositoryDataT
     using System.Collections.Generic;
     using System.ComponentModel.Composition;
     using System.IO;
-    using System.Windows.Forms;
     using System.Xml.Serialization;
 
     using DotNetScaffolder.Components.Common.Contract;
@@ -111,33 +110,6 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.RepositoryDataT
         #region Public Methods And Operators
 
         /// <summary>
-        /// The create ui.
-        /// </summary>
-        /// <param name="parameters">
-        /// The parameters.
-        /// </param>
-        /// <returns>
-        /// The <see cref="IDataTypeUI"/>.
-        /// </returns>
-        public override IDataTypeUI<IDictionary<string, string>> CreateUI(IDictionary<string, string> parameters)
-        {
-            RepositoryUserControl newControl =
-                new RepositoryUserControl { Visible = true, Dock = DockStyle.Fill, DataType = this };
-            return newControl;
-        }
-
-        /// <summary>
-        ///     The create ui.
-        /// </summary>
-        /// <returns>
-        ///     The <see cref="IDataTypeUI" />.
-        /// </returns>
-        public override IDataTypeUI<IDictionary<string, string>> CreateUI()
-        {
-            return this.CreateUI(null);
-        }
-
-        /// <summary>
         /// The load.
         /// </summary>
         /// <param name="parameters">
@@ -187,10 +159,10 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.RepositoryDataT
         }
 
         /// <summary>
-        /// The validate.
+        ///     The validate.
         /// </summary>
         /// <returns>
-        /// The <see cref="List"/>.
+        ///     The <see cref="List" />.
         /// </returns>
         public override List<Validation> Validate()
         {

@@ -4,15 +4,17 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.EntityDataTypes
+namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.EntityDataTypes
 {
     #region Usings
 
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.Composition;
     using System.Windows.Forms;
 
     using DotNetScaffolder.Components.Common.Contract;
+    using DotNetScaffolder.Components.DataTypes.DefaultDataTypes.EntityDataTypes;
     using DotNetScaffolder.Core.Common.Validation;
     using DotNetScaffolder.Mapping.MetaData.Domain;
 
@@ -21,14 +23,19 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.EntityDataTypes
     /// <summary>
     ///     The entity user control.
     /// </summary>
-    public partial class EntityUserControl : UserControl, IDataTypeUI<IDictionary<string, string>>
+    [Export(typeof(IDataTypeUI))]
+    [ExportMetadata("NameMetaData", "ContextUI")]
+    [ExportMetadata("ValueMetaData", "1BC1B0C4-1E41-9146-82CF-599181CE4440")]
+    [ExportMetadata("DisplayType", DisplayType.WinForm)]
+    [ExportMetadata("DataType", "1BC1B0C4-1E41-9146-82CF-599181CE4440")]
+    public partial class EntityUserControl : UserControl, IDataTypeUI
     {
         #region Fields
 
         /// <summary>
         ///     The data type.
         /// </summary>
-        private EntityDataType dataType;
+        private IDataType dataType;
 
         #endregion
 
@@ -47,7 +54,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.EntityDataTypes
         /// <summary>
         ///     The on navigation changed.
         /// </summary>
-        public event EventHandler<IDataType<IDictionary<string, string>>> OnNavigationChanged;
+        public event EventHandler<IDataType> OnNavigationChanged;
 
         #region Public Properties
 
@@ -57,9 +64,14 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.EntityDataTypes
         public DomainDefinition DataSource { get; set; }
 
         /// <summary>
+        ///     Gets or sets the validation result.
+        /// </summary>
+        public List<Validation> ValidationResult { get; set; }
+        
+        /// <summary>
         ///     Gets or sets the data type.
         /// </summary>
-        public EntityDataType DataType
+        public IDataType DataType
         {
             get
             {
@@ -73,11 +85,6 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.EntityDataTypes
             }
         }
 
-        /// <summary>
-        ///     Gets or sets the validation result.
-        /// </summary>
-        public List<Validation> ValidationResult { get; set; }
-
         #endregion
 
         #region Public Methods And Operators
@@ -88,11 +95,12 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.EntityDataTypes
         /// <param name="parameters">
         /// The parameters.
         /// </param>
-        public void LoadConfig(IDictionary<string, string> parameters)
+        public void LoadConfig(object parameters)
         {
+            IDictionary<string, string> parameterList = parameters as IDictionary<string, string>;
             if (this.DataType == null) return;
 
-            this.DataType.Load(parameters);
+            this.DataType.Load(parameterList);
 
             this.UpdateUI();
         }
@@ -103,19 +111,20 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.EntityDataTypes
         /// <param name="parameters">
         /// The parameters.
         /// </param>
-        public void SaveConfig(IDictionary<string, string> parameters)
+        public void SaveConfig(object parameters)
         {
+            IDictionary<string, string> parameterList = parameters as IDictionary<string, string>;
             if (this.DataType == null) return;
 
             this.UpdateDataType();
-            this.DataType.Save(parameters);
+            this.DataType.Save(parameterList);
         }
 
         /// <summary>
-        ///     The validate.
+        /// The validate.
         /// </summary>
         /// <returns>
-        ///     The <see cref="List" />.
+        /// The <see cref="List"/>.
         /// </returns>
         public virtual List<Validation> Validate()
         {
@@ -126,31 +135,6 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.EntityDataTypes
         #endregion
 
         #region Other Methods
-
-        /// <summary>
-        /// The btn browse_ click.
-        /// </summary>
-        /// <param name="sender">
-        /// The sender.
-        /// </param>
-        /// <param name="e">
-        /// The e.
-        /// </param>
-        private void btnBrowse_Click(object sender, EventArgs e)
-        {
-            using (var dialog = new OpenFileDialog())
-            {
-                dialog.Filter = "Project file|*.csproj";
-                dialog.Multiselect = false;
-                dialog.RestoreDirectory = true;
-
-                var result = dialog.ShowDialog(this);
-                if (result == DialogResult.OK)
-                {
-                    this.txtOutputPath.Text = dialog.FileName;
-                }
-            }
-        }
 
         /// <summary>
         /// The chk use interface_ checked changed.
@@ -171,31 +155,18 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.EntityDataTypes
         }
 
         /// <summary>
-        /// The entity user control 1_ load.
-        /// </summary>
-        /// <param name="sender">
-        /// The sender.
-        /// </param>
-        /// <param name="e">
-        /// The e.
-        /// </param>
-        private void EntityUserControl1_Load(object sender, EventArgs e)
-        {
-        }
-
-        /// <summary>
         ///     The update data type.
         /// </summary>
         private void UpdateDataType()
         {
             if (this.DataType == null) return;
 
-            this.DataType.InheritFrom = this.txtInheritFrom.Text;
-            this.DataType.Namespace = this.txtNamespace.Text;
-            this.DataType.OutputFolder = this.txtOutputFolder.Text;
-            this.DataType.OutputPath = this.txtOutputPath.Text;
-            this.DataType.AddInjectConstructor = this.chkAddInjectConstructor.Checked;
-            this.DataType.UseInterface = this.chkUseInterface.Checked;
+            (this.DataType as EntityDataType).InheritFrom = this.txtInheritFrom.Text;
+            (this.DataType as EntityDataType).Namespace = this.txtNamespace.Text;
+            (this.DataType as EntityDataType).OutputFolder = this.txtOutputFolder.Text;
+            (this.DataType as EntityDataType).OutputPath = this.txtOutputPath.Text;
+            (this.DataType as EntityDataType).AddInjectConstructor = this.chkAddInjectConstructor.Checked;
+            (this.DataType as EntityDataType).UseInterface = this.chkUseInterface.Checked;
         }
 
         /// <summary>
@@ -205,12 +176,12 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.EntityDataTypes
         {
             if (this.DataType == null) return;
 
-            this.txtInheritFrom.Text = this.DataType.InheritFrom;
-            this.txtNamespace.Text = this.DataType.Namespace;
-            this.txtOutputFolder.Text = this.DataType.OutputFolder;
-            this.txtOutputPath.Text = this.DataType.OutputPath;
-            this.chkAddInjectConstructor.Checked = this.DataType.AddInjectConstructor;
-            this.chkUseInterface.Checked = this.DataType.UseInterface;
+            this.txtInheritFrom.Text = (this.DataType as EntityDataType).InheritFrom;
+            this.txtNamespace.Text = (this.DataType as EntityDataType).Namespace;
+            this.txtOutputFolder.Text = (this.DataType as EntityDataType).OutputFolder;
+            this.txtOutputPath.Text = (this.DataType as EntityDataType).OutputPath;
+            this.chkAddInjectConstructor.Checked = (this.DataType as EntityDataType).AddInjectConstructor;
+            this.chkUseInterface.Checked = (this.DataType as EntityDataType).UseInterface;
         }
 
         #endregion

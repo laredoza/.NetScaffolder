@@ -6,11 +6,11 @@
 
 namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Base
 {
-    using System;
     #region Usings
 
     using System.Collections.Generic;
     using System.Xml.Serialization;
+
     using DotNetScaffolder.Components.Common;
     using DotNetScaffolder.Components.Common.Contract;
     using DotNetScaffolder.Core.Common.Validation;
@@ -24,7 +24,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Base
     /// <summary>
     ///     The base data type.
     /// </summary>
-    public abstract class BaseDataType : IDataType 
+    public abstract class BaseDataType : IDataType
     {
         #region Fields
 
@@ -53,6 +53,11 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Base
         #region Public Properties
 
         /// <summary>
+        ///     Gets or sets the additional namespaces.
+        /// </summary>
+        public List<string> AdditionalNamespaces { get; set; } = new List<string>();
+
+        /// <summary>
         ///     Gets or sets the base namespace.
         /// </summary>
         [XmlIgnore]
@@ -63,6 +68,12 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Base
         /// </summary>
         [XmlIgnore]
         public ICollectionOption CollectionOption { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the domain definition.
+        /// </summary>
+        [XmlIgnore]
+        public DomainDefinition DomainDefinition { get; set; }
 
         /// <summary>
         ///     Gets or sets the driver types.
@@ -87,34 +98,9 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Base
         [XmlIgnore]
         public List<Validation> ValidationResult { get; set; }
 
-        /// <summary>
-        /// Gets or sets the domain definition.
-        /// </summary>
-        [XmlIgnore]
-        public DomainDefinition DomainDefinition { get; set; }
-
         #endregion
 
         #region Public Methods And Operators
-
-        /// <summary>
-        /// The create ui.
-        /// </summary>
-        /// <param name="parameters">
-        /// The parameters.
-        /// </param>
-        /// <returns>
-        /// The <see cref="IDataTypeUI"/>.
-        /// </returns>
-        public abstract IDataTypeUI<IDictionary<string, string>> CreateUI(IDictionary<string, string> parameters);
-
-        /// <summary>
-        ///     The create ui.
-        /// </summary>
-        /// <returns>
-        ///     The <see cref="IDataTypeUI" />.
-        /// </returns>
-        public abstract IDataTypeUI<IDictionary<string, string>> CreateUI();
 
         /// <summary>
         /// The load.
@@ -143,6 +129,122 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Base
         /// </returns>
         public abstract bool Save(IDictionary<string, string> parameters);
 
+        /// <summary>
+        /// The transform as parameter.
+        /// </summary>
+        /// <param name="columns">
+        /// The columns.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        public string TransformAsParameter(IEnumerable<Column> columns)
+        {
+            string pk = string.Empty;
+
+            foreach (var col in columns)
+            {
+                pk = $"{pk} {this.TransformAsParameter(col)}, ";
+            }
+
+            return pk.TrimEnd(' ').TrimEnd(',');
+        }
+
+        /// <summary>
+        /// The transform as parameter.
+        /// </summary>
+        /// <param name="col">
+        /// The col.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        public string TransformAsParameter(Column col)
+        {
+            return $"{CSharpOutputMapper.MapToOutput(col)} {this.TransformParameterName(col.ColumnName)}";
+        }
+
+        /// <summary>
+        /// The transform as query.
+        /// </summary>
+        /// <param name="col">
+        /// The col.
+        /// </param>
+        /// <param name="entityName">
+        /// The entity name.
+        /// </param>
+        /// <param name="caseSensitive">
+        /// The case sensitive.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        public string TransformAsQuery(Column col, string entityName = "", bool caseSensitive = false)
+        {
+            if (col.DomainDataType != DomainDataType.String)
+            {
+                if (!string.IsNullOrEmpty(entityName))
+                {
+                    return $"o.{col.ColumnName} == {entityName}.{col.ColumnName}";
+                }
+
+                return $"o.{col.ColumnName} == {this.TransformParameterName(col.ColumnName)}";
+            }
+
+            string searchCase = !caseSensitive ? ".ToLower()" : string.Empty;
+
+            if (!string.IsNullOrEmpty(entityName))
+            {
+                return $"o.{col.ColumnName}{searchCase}.Contains({entityName}.{col.ColumnName}{searchCase})";
+            }
+
+            return
+                $"o.{col.ColumnName}{searchCase}.Contains({this.TransformParameterName(col.ColumnName)}{searchCase})";
+        }
+
+        /// <summary>
+        /// The transform as query.
+        /// </summary>
+        /// <param name="columns">
+        /// The columns.
+        /// </param>
+        /// <param name="entityName">
+        /// The entity name.
+        /// </param>
+        /// <param name="caseSensitive">
+        /// The case sensitive.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        public string TransformAsQuery(IEnumerable<Column> columns, string entityName = "", bool caseSensitive = false)
+        {
+            string query = string.Empty;
+
+            foreach (var col in columns)
+            {
+                query = $"{query} {this.TransformAsQuery(col, entityName, caseSensitive)} && ";
+            }
+
+            return $"{query.TrimEnd(' ').TrimEnd('&')}";
+        }
+
+        /// <summary>
+        /// The transform parameter name.
+        /// </summary>
+        /// <param name="name">
+        /// The name.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        public string TransformParameterName(string name)
+        {
+            string formattedName =
+                this.NamingConvention != null ? this.NamingConvention.ApplyNamingConvention(name) : name;
+            return char.ToLowerInvariant(formattedName[0]) + formattedName.Substring(1);
+        }
+
         /// <inheritdoc />
         /// <summary>
         ///     The validate.
@@ -153,63 +255,5 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Base
         public abstract List<Validation> Validate();
 
         #endregion
-
-        public string TransformAsParameter(IEnumerable<Column> columns)
-        {
-            string pk = string.Empty;
-
-            foreach (var col in columns)
-            {
-                pk = $"{pk} {TransformAsParameter(col)}, ";
-            }
-
-            return pk.TrimEnd(' ').TrimEnd(',');
-        }
-
-        public string TransformAsParameter(Column col)
-        {
-            return $"{CSharpOutputMapper.MapToOutput(col)} {TransformParameterName(col.ColumnName)}";
-        }
-
-        public string TransformAsQuery(Column col, string entityName = "", bool caseSensitive = false)
-        {
-            if (col.DomainDataType != DomainDataType.String)
-            {
-                if (!string.IsNullOrEmpty(entityName))
-                {
-                    return $"o.{col.ColumnName} == {entityName}.{col.ColumnName}";
-                }
-                return $"o.{col.ColumnName} == {TransformParameterName(col.ColumnName)}";
-            }
-            else
-            {
-                string searchCase = !caseSensitive ? ".ToLower()" : "";
-
-                if (!string.IsNullOrEmpty(entityName))
-                {
-                    return $"o.{col.ColumnName}{searchCase}.Contains({entityName}.{col.ColumnName}{searchCase})";
-                }
-
-                return $"o.{col.ColumnName}{searchCase}.Contains({TransformParameterName(col.ColumnName)}{searchCase})";
-            }
-        }
-
-        public string TransformAsQuery(IEnumerable<Column> columns, string entityName = "", bool caseSensitive = false)
-        {
-            string query = string.Empty;
-
-            foreach (var col in columns)
-            {
-                query = $"{query} {TransformAsQuery(col, entityName, caseSensitive)} && ";
-            }
-
-            return $"{query.TrimEnd(' ').TrimEnd('&')}";
-        }
-
-        public string TransformParameterName(string name)
-        {
-            string formattedName = NamingConvention != null ? NamingConvention.ApplyNamingConvention(name) : name;
-            return Char.ToLowerInvariant(formattedName[0]) + formattedName.Substring(1);
-        }
     }
 }

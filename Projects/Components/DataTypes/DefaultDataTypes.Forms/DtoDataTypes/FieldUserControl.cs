@@ -4,7 +4,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.TableDataTypes
+namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.DtoDataTypes
 {
     #region Usings
 
@@ -24,7 +24,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.TableDataTypes
         /// </summary>
         public FieldUserControl()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
 
         #endregion

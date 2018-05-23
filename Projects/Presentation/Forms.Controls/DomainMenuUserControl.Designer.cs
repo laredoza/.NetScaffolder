@@ -39,7 +39,6 @@
             this.DomainTreeView.Size = new System.Drawing.Size(383, 508);
             this.DomainTreeView.TabIndex = 3;
             this.DomainTreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.DomainTreeView_AfterSelect);
-            this.DomainTreeView.Click += new System.EventHandler(this.DomainTreeView_Click);
             // 
             // DomainMenuUserControl
             // 

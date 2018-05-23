@@ -15,10 +15,9 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
 
     using Common.Logging;
 
-    using Configuration;
-
     using DotNetScaffolder.Core.Common;
     using DotNetScaffolder.Core.Common.Validation;
+    using DotNetScaffolder.Core.Configuration;
     using DotNetScaffolder.Mapping.MetaData.Enum;
     using DotNetScaffolder.Mapping.MetaData.Project.Packages;
 

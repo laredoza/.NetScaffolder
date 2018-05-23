@@ -155,7 +155,8 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
                     this.DataSource.ReferencedColumnName = value;
                 }
 
-                if (this.ComboBoxRelatedColumn.SelectedValue == null || this.ComboBoxRelatedColumn.SelectedValue.ToString() != value)
+                if (this.ComboBoxRelatedColumn.SelectedValue == null
+                    || this.ComboBoxRelatedColumn.SelectedValue.ToString() != value)
                 {
                     this.ComboBoxRelatedColumn.SelectedValue = value;
                 }
@@ -179,7 +180,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
                     this.DataSource.ReferencedTableName = value;
                 }
 
-                if (!string.Equals(this.ComboBoxRelatedTable.SelectedValue, value))
+                if (!Equals(this.ComboBoxRelatedTable.SelectedValue, value))
                 {
                     this.ComboBoxRelatedTable.SelectedValue = value;
                 }
@@ -235,7 +236,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         }
 
         /// <summary>
-        /// Gets or sets the validation result.
+        ///     Gets or sets the validation result.
         /// </summary>
         public List<Validation> ValidationResult { get; set; }
 
@@ -325,10 +326,10 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         }
 
         /// <summary>
-        /// The validate.
+        ///     The validate.
         /// </summary>
         /// <returns>
-        /// The <see cref="List"/>.
+        ///     The <see cref="List" />.
         /// </returns>
         public List<Validation> Validate()
         {
@@ -424,6 +425,20 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         }
 
         /// <summary>
+        /// The txt relationship alias_ text changed.
+        /// </summary>
+        /// <param name="sender">
+        /// The sender.
+        /// </param>
+        /// <param name="e">
+        /// The e.
+        /// </param>
+        private void txtRelationshipAlias_TextChanged(object sender, EventArgs e)
+        {
+            this.DataSource.RelationshipAlias = this.txtRelationshipAlias.Text.Trim();
+        }
+
+        /// <summary>
         ///     The update data source.
         /// </summary>
         private void UpdateDataSource()
@@ -475,10 +490,5 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         }
 
         #endregion
-
-        private void txtRelationshipAlias_TextChanged(object sender, EventArgs e)
-        {
-            this.DataSource.RelationshipAlias = txtRelationshipAlias.Text.Trim();
-        }
     }
 }

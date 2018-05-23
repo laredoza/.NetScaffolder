@@ -106,6 +106,14 @@
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="Model\T4\BaseGenerator.ttInclude" />
+    <None Include="Model\T4\BaseTemplate.ttinclude" />
+    <None Include="Model\T4\ContextGenerator.ttInclude" />
+    <None Include="Model\T4\ContextTemplate.ttInclude" />
+    <None Include="Model\T4\CopyrightHeader.ttinclude" />
+    <None Include="Model\T4\EntityGenerator.ttInclude" />
+    <None Include="Model\T4\EntityTemplate.ttInclude" />
+    <None Include="Model\T4\ProjectGenerator.ttInclude" />
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -131,6 +139,10 @@
     <ProjectReference Include="..\..\Components\Common\DotNetScaffolder.Components.Common.csproj">
       <Project>{b39709b5-d887-46e1-acc6-cbd7880e90c5}</Project>
       <Name>DotNetScaffolder.Components.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Components\DataTypes\DefaultDataTypes.Forms\DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.csproj">
+      <Project>{4d3153e7-fb28-4b1a-887b-f82c506cc7e9}</Project>
+      <Name>DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Components\DataTypes\DefaultDataTypes\DotNetScaffolder.Components.DataTypes.DefaultDataTypes.csproj">
       <Project>{b50f4bea-cda2-42e1-818b-6e700fde771b}</Project>
@@ -164,9 +176,9 @@
       <Project>{ECF3D386-0124-450F-A763-92175FF00547}</Project>
       <Name>DotNetScaffolder.Core.Configuration</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Core\Forms\FormControls\FormControls.csproj">
+    <ProjectReference Include="..\..\Core\Forms\FormControls\DotNetScaffolder.Core.Forms.FormControls.csproj">
       <Project>{6A2E8779-4539-46D1-B3A0-1C3B205A95AB}</Project>
-      <Name>FormControls</Name>
+      <Name>DotNetScaffolder.Core.Forms.FormControls</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Mapping\ApplicationSettings\DotNetScaffolder.Mapping.ApplicationServices.csproj">
       <Project>{0afff1d6-5fe5-4ff8-84e8-59352e42e658}</Project>
@@ -186,7 +198,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\Package\" />
-    <Folder Include="Model\T4\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

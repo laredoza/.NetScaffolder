@@ -13,14 +13,14 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
     #endregion
 
     /// <summary>
-    /// The default model user control.
+    ///     The default model user control.
     /// </summary>
     public partial class DefaultModelUserControl : UserControl
     {
         #region Constructors and Destructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="DefaultModelUserControl"/> class.
+        ///     Initializes a new instance of the <see cref="DefaultModelUserControl" /> class.
         /// </summary>
         public DefaultModelUserControl()
         {

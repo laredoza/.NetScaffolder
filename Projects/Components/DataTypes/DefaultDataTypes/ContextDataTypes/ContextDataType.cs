@@ -14,7 +14,6 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
     using System.IO;
     using System.Linq;
     using System.Text;
-    using System.Windows.Forms;
     using System.Xml.Serialization;
 
     using DotNetScaffolder.Components.Common;
@@ -62,45 +61,6 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
         #region Public Methods And Operators
 
         /// <summary>
-        /// The create ui.
-        /// </summary>
-        /// <param name="parameters">
-        /// The parameters.
-        /// </param>
-        /// <returns>
-        /// The <see cref="IDataTypeUI"/>.
-        /// </returns>
-        public override IDataTypeUI<IDictionary<string, string>> CreateUI(IDictionary<string, string> parameters)
-        {
-            string savePath = string.Empty;
-
-            if (parameters != null && parameters.ContainsKey("basePath"))
-            {
-                savePath = parameters["basePath"];
-            }
-
-            var newControl = new ContextUserControl
-                                 {
-                                     Visible = true,
-                                     Dock = DockStyle.Fill,
-                                     DataType = this,
-                                     SavePath = savePath
-                                 };
-            return newControl;
-        }
-
-        /// <summary>
-        ///     The create ui.
-        /// </summary>
-        /// <returns>
-        ///     The <see cref="IDataTypeUI" />.
-        /// </returns>
-        public override IDataTypeUI<IDictionary<string, string>> CreateUI()
-        {
-            return this.CreateUI(null);
-        }
-
-        /// <summary>
         /// The load.
         /// </summary>
         /// <param name="parameters">
@@ -124,10 +84,10 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
         }
 
         /// <summary>
-        ///     The return navigation.
+        /// The return navigation.
         /// </summary>
         /// <returns>
-        ///     The <see cref="IHierarchy" />.
+        /// The <see cref="Hierarchy"/>.
         /// </returns>
         public override Hierarchy ReturnNavigation()
         {
@@ -199,6 +159,24 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
             return mapping.TrimEnd(' ').TrimEnd(',');
         }
 
+        /// <summary>
+        /// The transform relationship.
+        /// </summary>
+        /// <param name="table">
+        /// The table.
+        /// </param>
+        /// <param name="rel">
+        /// The rel.
+        /// </param>
+        /// <param name="models">
+        /// The models.
+        /// </param>
+        /// <param name="relationships">
+        /// The relationships.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
         public string TransformRelationship(string table, Relationship rel, IEnumerable<Table> models, IEnumerable<Relationship> relationships = null)
         {
             var sb = new StringBuilder();
@@ -310,198 +288,6 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
             }
 
             return this.ValidationResult;
-        }
-
-        #endregion
-    }
-
-    /// <summary>
-    ///     The context data.
-    /// </summary>
-    public class ContextData
-    {
-        #region Fields
-
-        /// <summary>
-        ///     The exluded relationships.
-        /// </summary>
-        private List<Relationship> exludedRelationships;
-
-        #endregion
-
-        #region Constructors and Destructors
-
-        /// <summary>
-        ///     Initializes a new instance of the <see cref="ContextData" /> class.
-        /// </summary>
-        public ContextData()
-        {
-            this.Models = new List<Table>();
-            this.ExcludedRelationships = new List<Relationship>();
-            this.OutputFolder = "Context";
-            this.ContextName = "NewContext";
-            this.CustomConnectionName = string.Empty;
-            this.Namespace = "Context";
-            this.InheritFrom = string.Empty;
-            this.Id = Guid.NewGuid();
-            this.OutputPath = string.Empty;
-        }
-
-        #endregion
-
-        #region Public Properties
-
-        /// <summary>
-        ///     Gets or sets the context name.
-        /// </summary>
-        public string ContextName { get; set; }
-
-        /// <summary>
-        ///     Gets or sets a value indicating whether create db.
-        /// </summary>
-        public bool CreateDb { get; set; }
-
-        /// <summary>
-        ///     Gets or sets the custom connection name.
-        /// </summary>
-        public string CustomConnectionName { get; set; }
-
-        /// <summary>
-        ///     Gets the excluded relationships.
-        /// </summary>
-        [XmlIgnore]
-        public List<Relationship> ExcludedRelationships
-        {
-            get
-            {
-                if (!this.exludedRelationships.Any())
-                {
-                    foreach (var model in this.Models)
-                    {
-                        foreach (var rel in model.Relationships.Where(o => o.Render))
-                        {
-                            if (!this.exludedRelationships.Any(
-                                    o => o.SchemaName == rel.SchemaName
-                                         && o.ReferencedTableName == rel.ReferencedTableName) && !this.Models.Any(
-                                    o => o.SchemaName == rel.SchemaName && o.TableName == rel.ReferencedTableName))
-                            {
-                                this.exludedRelationships.Add(rel);
-                            }
-                        }
-                    }
-                }
-
-                return this.exludedRelationships;
-            }
-
-            private set
-            {
-                this.exludedRelationships = value;
-            }
-        }
-
-        /// <summary>
-        ///     Gets or sets the id.
-        /// </summary>
-        public Guid Id { get; set; }
-
-        /// <summary>
-        ///     Gets or sets a value indicating whether include column order.
-        /// </summary>
-        public bool IncludeColumnOrder { get; set; }
-
-        /// <summary>
-        ///     Gets or sets the inherit from.
-        /// </summary>
-        public string InheritFrom { get; set; } = "BaseContext";
-
-        /// <summary>
-        ///     Gets or sets a value indicating whether lazy loading enabled.
-        /// </summary>
-        public bool LazyLoadingEnabled { get; set; }
-
-        /// <summary>
-        ///     Gets or sets a value indicating whether logging enabled.
-        /// </summary>
-        public bool LoggingEnabled { get; set; }
-
-        /// <summary>
-        ///     Gets the models.
-        /// </summary>
-        public List<Table> Models { get; }
-
-        /// <summary>
-        ///     Gets or sets the namespace.
-        /// </summary>
-        public string Namespace { get; set; }
-
-        /// <summary>
-        ///     Gets or sets the output folder.
-        /// </summary>
-        public string OutputFolder { get; set; }
-
-        /// <summary>
-        ///     Gets or sets the output path.
-        /// </summary>
-        public string OutputPath { get; set; }
-
-        /// <summary>
-        ///     Gets or sets a value indicating whether proxy creation enabled.
-        /// </summary>
-        public bool ProxyCreationEnabled { get; set; }
-
-        /// <summary>
-        ///     Gets the transform inherit from.
-        /// </summary>
-        [XmlIgnore]
-        public string TransformInheritFrom
-        {
-            get
-            {
-                if (string.IsNullOrEmpty(this.InheritFrom))
-                {
-                    return string.Empty;
-                }
-
-                return $": {this.InheritFrom}";
-            }
-        }
-
-        #endregion
-
-        #region Public Methods And Operators
-
-        /// <summary>
-        /// The has model.
-        /// </summary>
-        /// <param name="rel">
-        /// The rel.
-        /// </param>
-        /// <returns>
-        /// The <see cref="bool"/>.
-        /// </returns>
-        public bool HasModel(Relationship rel)
-        {
-            if (this.Models == null || !this.Models.Any())
-            {
-                return false;
-            }
-
-            return this.Models.Any(o => o.SchemaName == rel.SchemaName && o.TableName == rel.ReferencedTableName);
-        }
-
-        /// <summary>
-        /// The transform fullnamespace.
-        /// </summary>
-        /// <param name="baseNs">
-        /// The base ns.
-        /// </param>
-        /// <returns>
-        /// The <see cref="string"/>.
-        /// </returns>
-        public string TransformFullnamespace(string baseNs)
-        {
-            return $"{baseNs}.{this.Namespace}";
         }
 
         #endregion

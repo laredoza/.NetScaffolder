@@ -12,7 +12,6 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ApplicationServ
     using System.Collections.Generic;
     using System.ComponentModel.Composition;
     using System.IO;
-    using System.Windows.Forms;
 
     using DotNetScaffolder.Components.Common.Contract;
     using DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Base;
@@ -34,7 +33,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ApplicationServ
         #region Constructors and Destructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ApplicationServiceDataType"/> class.
+        ///     Initializes a new instance of the <see cref="ApplicationServiceDataType" /> class.
         /// </summary>
         public ApplicationServiceDataType()
             : base("Application.xml")
@@ -63,47 +62,6 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ApplicationServ
         #endregion
 
         #region Public Methods And Operators
-
-        /// <summary>
-        /// The create ui.
-        /// </summary>
-        /// <param name="parameters">
-        /// The parameters.
-        /// </param>
-        /// <returns>
-        /// The <see cref="IDataTypeUI"/>.
-        /// </returns>
-        public override IDataTypeUI<IDictionary<string, string>> CreateUI(IDictionary<string, string> parameters)
-        {
-            var newControl = new ApplicationServiceUserControl
-                                 {
-                                     AppServiceEnabled = {
-                                                            Checked = this.Enabled 
-                                                         },
-                                     AppServiceNamespace = {
-                                                              Text = this.Namespace 
-                                                           },
-                                     AppServiceOutputFolder
-                                         = {
-                                              Text = this.OutputFolder 
-                                           },
-                                     Visible = true,
-                                     Dock = DockStyle.Fill,
-                                     DataType = this
-                                 };
-            return newControl;
-        }
-
-        /// <summary>
-        ///     The create ui.
-        /// </summary>
-        /// <returns>
-        ///     The <see cref="IDataTypeUI" />.
-        /// </returns>
-        public override IDataTypeUI<IDictionary<string, string>> CreateUI()
-        {
-            return this.CreateUI(null);
-        }
 
         /// <summary>
         /// The load.

@@ -74,7 +74,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         }
 
         /// <summary>
-        /// Gets or sets the description.
+        ///     Gets or sets the description.
         /// </summary>
         public string Description
         {
@@ -98,7 +98,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         }
 
         /// <summary>
-        /// Gets or sets the model name.
+        ///     Gets or sets the model name.
         /// </summary>
         public string ModelName
         {
@@ -122,7 +122,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         }
 
         /// <summary>
-        /// Gets or sets the schema name.
+        ///     Gets or sets the schema name.
         /// </summary>
         public string SchemaName
         {
@@ -143,6 +143,41 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
                     this.TxtSchema.Text = value;
                 }
             }
+        }
+
+        /// <summary>
+        ///     Gets or sets the validation result.
+        /// </summary>
+        /// >
+        public List<Validation> ValidationResult { get; set; }
+
+        #endregion
+
+        #region Public Methods And Operators
+
+        /// <summary>
+        ///     The validate.
+        /// </summary>
+        /// <returns>
+        ///     The <see cref="List" />.
+        /// </returns>
+        public List<Validation> Validate()
+        {
+            Logger.Trace("Started Validation()");
+
+            List<Validation> result = new List<Validation>();
+
+            if (string.IsNullOrEmpty(this.TxtName.Text))
+            {
+                Validation validation = new Validation(
+                    ValidationType.ModelErrorName,
+                    "The model name may not be empty");
+                result.Add(validation);
+                this.ErrorProvider1.SetError(this.TxtName, validation.Description);
+            }
+
+            Logger.Trace("Completed Validation()");
+            return result;
         }
 
         #endregion
@@ -199,33 +234,5 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         }
 
         #endregion
-
-        /// <summary>
-        /// Gets or sets the validation result.
-        /// </summary>>
-        public List<Validation> ValidationResult { get; set; }
-
-        /// <summary>
-        /// The validate.
-        /// </summary>
-        /// <returns>
-        /// The <see cref="List"/>.
-        /// </returns>
-        public List<Validation> Validate()
-        {
-            Logger.Trace("Started Validation()");
-
-            List<Validation> result = new List<Validation>();
-
-            if (string.IsNullOrEmpty(this.TxtName.Text))
-            {
-                Validation validation = new Validation(ValidationType.ModelErrorName, "The model name may not be empty");
-                result.Add(validation);
-                this.ErrorProvider1.SetError(this.TxtName, validation.Description);
-            }
-
-            Logger.Trace("Completed Validation()");
-            return result;
-        }
     }
 }

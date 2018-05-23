@@ -15,9 +15,8 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project
 
     using Common.Logging;
 
-    using Configuration;
-
     using DotNetScaffolder.Core.Common;
+    using DotNetScaffolder.Core.Configuration;
     using DotNetScaffolder.Mapping.ApplicationServices;
     using DotNetScaffolder.Mapping.MetaData.Domain;
     using DotNetScaffolder.Mapping.MetaData.Project.Packages;
@@ -407,13 +406,13 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project
         }
 
         /// <summary>
-        ///     The return driver types.
+        /// The return driver types.
         /// </summary>
         /// <param name="driver">
-        ///     The driver.
+        /// The driver.
         /// </param>
         /// <returns>
-        ///     The <see cref="object[]" />.
+        /// The <see cref="object[]"/>.
         /// </returns>
         public object[] ReturnDriverTypes(ComboboxItem driver)
         {
@@ -478,13 +477,13 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project
         #region Other Methods
 
         /// <summary>
-        ///     The btn manage source_ click.
+        /// The btn manage source_ click.
         /// </summary>
         /// <param name="sender">
-        ///     The sender.
+        /// The sender.
         /// </param>
         /// <param name="e">
-        ///     The e.
+        /// The e.
         /// </param>
         private void BtnManageSource_Click(object sender, EventArgs e)
         {
@@ -495,13 +494,13 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project
         }
 
         /// <summary>
-        ///     The btn model_ click.
+        /// The btn model_ click.
         /// </summary>
         /// <param name="sender">
-        ///     The sender.
+        /// The sender.
         /// </param>
         /// <param name="e">
-        ///     The e.
+        /// The e.
         /// </param>
         private void BtnModel_Click(object sender, EventArgs e)
         {
@@ -513,13 +512,13 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project
         }
 
         /// <summary>
-        ///     The btn refresh_ click.
+        /// The btn refresh_ click.
         /// </summary>
         /// <param name="sender">
-        ///     The sender.
+        /// The sender.
         /// </param>
         /// <param name="e">
-        ///     The e.
+        /// The e.
         /// </param>
         private void BtnRefresh_Click(object sender, EventArgs e)
         {
@@ -531,13 +530,13 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project
         }
 
         /// <summary>
-        ///     The combo box collection option_ selected index changed.
+        /// The combo box collection option_ selected index changed.
         /// </summary>
         /// <param name="sender">
-        ///     The sender.
+        /// The sender.
         /// </param>
         /// <param name="e">
-        ///     The e.
+        /// The e.
         /// </param>
         private void ComboBoxCollectionOption_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -547,13 +546,13 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project
         }
 
         /// <summary>
-        ///     The combo box naming convention_ selected index changed.
+        /// The combo box naming convention_ selected index changed.
         /// </summary>
         /// <param name="sender">
-        ///     The sender.
+        /// The sender.
         /// </param>
         /// <param name="e">
-        ///     The e.
+        /// The e.
         /// </param>
         private void ComboBoxNamingConvention_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -561,13 +560,13 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project
         }
 
         /// <summary>
-        ///     The combo box packages_ selected index changed.
+        /// The combo box packages_ selected index changed.
         /// </summary>
         /// <param name="sender">
-        ///     The sender.
+        /// The sender.
         /// </param>
         /// <param name="e">
-        ///     The e.
+        /// The e.
         /// </param>
         private void ComboBoxPackages_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -575,13 +574,13 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project
         }
 
         /// <summary>
-        ///     The combo box source type_ selected index changed.
+        /// The combo box source type_ selected index changed.
         /// </summary>
         /// <param name="sender">
-        ///     The sender.
+        /// The sender.
         /// </param>
         /// <param name="e">
-        ///     The e.
+        /// The e.
         /// </param>
         private void ComboBoxSourceType_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -589,13 +588,13 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project
         }
 
         /// <summary>
-        ///     The list view drivers_ item checked.
+        /// The list view drivers_ item checked.
         /// </summary>
         /// <param name="sender">
-        ///     The sender.
+        /// The sender.
         /// </param>
         /// <param name="e">
-        ///     The e.
+        /// The e.
         /// </param>
         private void ListViewDrivers_ItemChecked(object sender, ItemCheckedEventArgs e)
         {

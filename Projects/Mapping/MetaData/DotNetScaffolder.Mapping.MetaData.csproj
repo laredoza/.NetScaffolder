@@ -79,9 +79,9 @@
       <Project>{CDACE52C-F991-40B5-80ED-4947A100EC52}</Project>
       <Name>DotNetScaffolder.Core.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Core\Forms\FormControls\FormControls.csproj">
+    <ProjectReference Include="..\..\Core\Forms\FormControls\DotNetScaffolder.Core.Forms.FormControls.csproj">
       <Project>{6A2E8779-4539-46D1-B3A0-1C3B205A95AB}</Project>
-      <Name>FormControls</Name>
+      <Name>DotNetScaffolder.Core.Forms.FormControls</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

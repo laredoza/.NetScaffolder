@@ -45,54 +45,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationServiceDataTypes\ApplicationServiceDataType.cs" />
-    <Compile Include="ApplicationServiceDataTypes\ApplicationServiceUserControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="ApplicationServiceDataTypes\ApplicationServiceUserControl.Designer.cs">
-      <DependentUpon>ApplicationServiceUserControl.cs</DependentUpon>
-    </Compile>
     <Compile Include="Base\BaseDataType.cs" />
-    <Compile Include="ContextDataTypes\ContextUserControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="ContextDataTypes\ContextUserControl.Designer.cs">
-      <DependentUpon>ContextUserControl.cs</DependentUpon>
-    </Compile>
+    <Compile Include="ContextDataTypes\ContextData.cs" />
     <Compile Include="ContextDataTypes\ContextDataType.cs" />
-    <Compile Include="DtoDataTypes\DtoUserControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="DtoDataTypes\DtoUserControl.Designer.cs">
-      <DependentUpon>DtoUserControl.cs</DependentUpon>
-    </Compile>
     <Compile Include="DtoInterfaceDataTypes\DtoInterfaceDataType.cs" />
-    <Compile Include="DtoInterfaceDataTypes\DtoInterfaceUserControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="DtoInterfaceDataTypes\DtoInterfaceUserControl.Designer.cs">
-      <DependentUpon>DtoInterfaceUserControl.cs</DependentUpon>
-    </Compile>
     <Compile Include="EntityDataTypes\EntityDataType.cs" />
-    <Compile Include="EntityDataTypes\EntityUserControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="EntityDataTypes\EntityUserControl.Designer.cs">
-      <DependentUpon>EntityUserControl.cs</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RepoInterfaceDataTypes\RepoInterfaceUserControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="RepoInterfaceDataTypes\RepoInterfaceUserControl.Designer.cs">
-      <DependentUpon>RepoInterfaceUserControl.cs</DependentUpon>
-    </Compile>
     <Compile Include="RepoInterfaceDataTypes\RepoInterfaceDataType.cs" />
-    <Compile Include="RepositoryDataTypes\RepositoryUserControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="RepositoryDataTypes\RepositoryUserControl.Designer.cs">
-      <DependentUpon>RepositoryUserControl.cs</DependentUpon>
-    </Compile>
     <Compile Include="RepositoryDataTypes\RepositoryDataType.cs" />
     <Compile Include="DtoDataTypes\DtoDataType.cs" />
   </ItemGroup>
@@ -101,9 +60,9 @@
       <Project>{cdace52c-f991-40b5-80ed-4947a100ec52}</Project>
       <Name>DotNetScaffolder.Core.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Core\Forms\FormControls\FormControls.csproj">
+    <ProjectReference Include="..\..\..\Core\Forms\FormControls\DotNetScaffolder.Core.Forms.FormControls.csproj">
       <Project>{6A2E8779-4539-46D1-B3A0-1C3B205A95AB}</Project>
-      <Name>FormControls</Name>
+      <Name>DotNetScaffolder.Core.Forms.FormControls</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\Mapping\ApplicationSettings\DotNetScaffolder.Mapping.ApplicationServices.csproj">
       <Project>{0afff1d6-5fe5-4ff8-84e8-59352e42e658}</Project>
@@ -121,29 +80,6 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="ApplicationServiceDataTypes\ApplicationServiceUserControl.resx">
-      <DependentUpon>ApplicationServiceUserControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ContextDataTypes\ContextUserControl.resx">
-      <DependentUpon>ContextUserControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DtoDataTypes\DtoUserControl.resx">
-      <DependentUpon>DtoUserControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DtoInterfaceDataTypes\DtoInterfaceUserControl.resx">
-      <DependentUpon>DtoInterfaceUserControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="EntityDataTypes\EntityUserControl.resx">
-      <DependentUpon>EntityUserControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="RepoInterfaceDataTypes\RepoInterfaceUserControl.resx">
-      <DependentUpon>RepoInterfaceUserControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="RepositoryDataTypes\RepositoryUserControl.resx">
-      <DependentUpon>RepositoryUserControl.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
