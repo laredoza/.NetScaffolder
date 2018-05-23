@@ -8,21 +8,17 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
 {
     #region Usings
 
-    using System;
-    using System.Composition;
-    using System.IO;
-    using System.Windows.Forms;
-
     using DatabaseSchemaReader.DataSchema;
-
     using DotNetScaffolder.Components.Common.Contract;
     using DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.SourceOptions;
     using DotNetScaffolder.Core.Common.Serializer;
     using DotNetScaffolder.Mapping.MetaData.Model;
-
     using global::Common.Logging;
-
     using global::Oracle.ManagedDataAccess.Client;
+    using System;
+    using System.ComponentModel.Composition;
+    using System.IO;
+    using System.Windows.Forms;
 
     // using System.Data.OracleClient
     #endregion

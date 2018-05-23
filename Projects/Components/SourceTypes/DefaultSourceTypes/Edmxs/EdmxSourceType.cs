@@ -8,21 +8,18 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.Edmxs
 {
     #region Usings
 
-    using System;
-    using System.Collections.Generic;
-    using System.Composition;
-    using System.IO;
-    using System.Linq;
-    using System.Windows.Forms;
-
     using DotNetScaffolder.Components.Common.Contract;
     using DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.SourceOptions;
     using DotNetScaffolder.Core.Common.Serializer;
     using DotNetScaffolder.Mapping.MetaData.Enum;
     using DotNetScaffolder.Mapping.MetaData.Model;
-
     using global::Common.Logging;
-
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.Composition;
+    using System.IO;
+    using System.Linq;
+    using System.Windows.Forms;
     using TiraggoEdmx_v3;
 
     #endregion
