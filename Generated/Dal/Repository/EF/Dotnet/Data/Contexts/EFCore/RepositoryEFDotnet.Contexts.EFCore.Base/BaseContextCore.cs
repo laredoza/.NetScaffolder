@@ -17,7 +17,8 @@ namespace DotNetScaffolder.Contexts.EFCore
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Storage;
 
-    using RepositoryEFDotnet.Library;
+    using RepositoryEFDotnet.Core.Base;
+    using RepositoryEFDotnet.Core.Utils;
 
     #endregion
 

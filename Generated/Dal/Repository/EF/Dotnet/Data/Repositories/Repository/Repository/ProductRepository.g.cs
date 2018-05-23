@@ -20,14 +20,15 @@
 
 using System;
 using System.Collections.Generic;
-using RepositoryEFDotnet.Library;
 using System.Linq;
 using Banking.Models.Interfaces;
 using Banking.Models.Entity;
 
 namespace Banking.Models.Repository
 {
-	/// <summary>
+    using RepositoryEFDotnet.Core.Base;
+
+    /// <summary>
 	/// The ProductRepository class responsible for database functions in the Product table
 	/// </summary>
 	public partial class ProductRepository : UowRepository<Product> , IProductRepository

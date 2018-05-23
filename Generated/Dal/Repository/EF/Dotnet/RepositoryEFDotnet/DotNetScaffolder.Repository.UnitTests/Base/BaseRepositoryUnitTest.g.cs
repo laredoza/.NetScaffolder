@@ -27,7 +27,9 @@ using System.Linq;
 
 namespace RepositoryEFDotnet.UnitTest
 {
-	[TestClass]
+    using RepositoryEFDotnet.Core.Base;
+
+    [TestClass]
 	public abstract partial class BaseRepositoryUnitTest : BaseUnitTest
 	{
         #region Privates

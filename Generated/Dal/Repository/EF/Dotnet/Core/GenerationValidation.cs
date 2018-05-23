@@ -1,21 +1,37 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="GenerationValidation.cs" company="DotnetScaffolder">
+//   MIT
+// </copyright>
+// <summary>
+//   Defines the GenerationValidation type.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace RepositoryEFDotnet.Core
 {
+    /// <summary>
+    /// The generation validation.
+    /// </summary>
     public class GenerationValidation
     {
-        bool InvalidPrecision(object type)
+        #region Other Methods
+
+        /// <summary>
+        /// The invalid precision.
+        /// </summary>
+        /// <param name="type">
+        /// The type.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        private bool InvalidPrecision(object type)
         {
-            if (type is Int16 || type is Int32)
-            {
-                return true;
-            }
+            if (type is short || type is int) return true;
 
             return false;
         }
+
+        #endregion
     }
 }
