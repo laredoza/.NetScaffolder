@@ -10,8 +10,7 @@ namespace DotNetScaffolder.Test.Presentation.Controls
 
     using System;
 
-    using Configuration;
-
+    using DotNetScaffolder.Core.Configuration;
     using DotNetScaffolder.Mapping.ApplicationServices;
     using DotNetScaffolder.Presentation.Forms.Controls;
     using DotNetScaffolder.Presentation.Forms.Controls.Project;

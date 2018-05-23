@@ -11,8 +11,7 @@ namespace Presentation.UI
     using System;
     using System.Windows.Forms;
 
-    using Configuration;
-
+    using DotNetScaffolder.Core.Configuration;
     using DotNetScaffolder.Presentation.Forms;
 
     #endregion

@@ -253,9 +253,13 @@
       <Project>{ECF3D386-0124-450F-A763-92175FF00547}</Project>
       <Name>DotNetScaffolder.Core.Configuration</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Core\Forms\FormControls\FormControls.csproj">
+    <ProjectReference Include="..\..\Core\Forms\FormControls\DotNetScaffolder.Core.Forms.FormControls.csproj">
       <Project>{6A2E8779-4539-46D1-B3A0-1C3B205A95AB}</Project>
-      <Name>FormControls</Name>
+      <Name>DotNetScaffolder.Core.Forms.FormControls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Mapping\ApplicationServices.Forms\DotNetScaffolder.Mapping.ApplicationServices.Forms.csproj">
+      <Project>{A4E7BEC8-D3C8-4AC2-90B6-2B54009F7A2B}</Project>
+      <Name>DotNetScaffolder.Mapping.ApplicationServices.Forms</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Mapping\ApplicationSettings\DotNetScaffolder.Mapping.ApplicationServices.csproj">
       <Project>{0afff1d6-5fe5-4ff8-84e8-59352e42e658}</Project>

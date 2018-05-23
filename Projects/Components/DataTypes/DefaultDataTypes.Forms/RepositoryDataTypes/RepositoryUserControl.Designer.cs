@@ -1,6 +1,6 @@
-﻿namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
+﻿namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.RepositoryDataTypes
 {
-    partial class RepoInterfaceUserControl
+    partial class RepositoryUserControl
     {
         /// <summary> 
         /// Required designer variable.
@@ -13,9 +13,9 @@
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
-            if (disposing && (components != null))
+            if (disposing && (this.components != null))
             {
-                components.Dispose();
+                this.components.Dispose();
             }
             base.Dispose(disposing);
         }
@@ -44,7 +44,7 @@
             this.txtOutputFolder.Name = "txtOutputFolder";
             this.txtOutputFolder.Size = new System.Drawing.Size(121, 20);
             this.txtOutputFolder.TabIndex = 59;
-            this.txtOutputFolder.Text = "Entity";
+            this.txtOutputFolder.Text = "Repository";
             // 
             // label31
             // 
@@ -61,7 +61,7 @@
             this.txtNamespace.Name = "txtNamespace";
             this.txtNamespace.Size = new System.Drawing.Size(121, 20);
             this.txtNamespace.TabIndex = 57;
-            this.txtNamespace.Text = "Entity";
+            this.txtNamespace.Text = "Repository";
             // 
             // label30
             // 
@@ -85,8 +85,7 @@
             this.groupBox1.Size = new System.Drawing.Size(543, 138);
             this.groupBox1.TabIndex = 60;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Repository interface settings";
-            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
+            this.groupBox1.Text = "Repository settings";
             // 
             // label1
             // 
@@ -104,13 +103,13 @@
             this.txtOutputPath.Size = new System.Drawing.Size(413, 20);
             this.txtOutputPath.TabIndex = 60;
             // 
-            // RepoInterfaceUserControl
+            // RepositoryUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.groupBox1);
             this.Margin = new System.Windows.Forms.Padding(2);
-            this.Name = "RepoInterfaceUserControl";
+            this.Name = "RepositoryUserControl";
             this.Size = new System.Drawing.Size(549, 144);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

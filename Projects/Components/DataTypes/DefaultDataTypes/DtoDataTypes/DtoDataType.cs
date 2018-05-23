@@ -12,7 +12,6 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.DtoDataTypes
     using System.Collections.Generic;
     using System.ComponentModel.Composition;
     using System.IO;
-    using System.Windows.Forms;
     using System.Xml.Serialization;
 
     using DotNetScaffolder.Components.Common.Contract;
@@ -32,24 +31,23 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.DtoDataTypes
     [ExportMetadata("ValueMetaData", "1BC1B0C4-1E41-9146-82CF-599181CE4490")]
     public class DtoDataType : BaseDataType
     {
+        #region Constructors and Destructors
+
         #region Fields
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="DtoDataType"/> class. 
         ///     The table control.
         /// </summary>
-        private Control tableControl;
-
-        #endregion
-
-        #region Constructors and Destructors
-
         /// <summary>
-        ///     Initializes a new instance of the <see cref="DtoDataType" /> class.
+        /// Initializes a new instance of the <see cref="DtoDataType"/> class.
         /// </summary>
         public DtoDataType()
             : base("Dto.xml")
         {
         }
+
+        #endregion
 
         #endregion
 
@@ -156,13 +154,6 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.DtoDataTypes
             }
         }
 
-        public string TransformDtoType(string name)
-        {
-            string formattedName = NamingConvention != null ? NamingConvention.ApplyNamingConvention(name) : name;
-
-            return UseInterface ? $"I{formattedName}" : $"{formattedName}{PostFix}";
-        }
-
         /// <summary>
         ///     Gets or sets a value indicating whether use interface.
         /// </summary>
@@ -171,32 +162,6 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.DtoDataTypes
         #endregion
 
         #region Public Methods And Operators
-
-        /// <summary>
-        /// The create ui.
-        /// </summary>
-        /// <param name="parameters">
-        /// The parameters.
-        /// </param>
-        /// <returns>
-        /// The <see cref="IDataTypeUI"/>.
-        /// </returns>
-        public override IDataTypeUI<IDictionary<string, string>> CreateUI(IDictionary<string, string> parameters)
-        {
-            var newControl = new DtoUserControl { Visible = true, Dock = DockStyle.Fill, DataType = this };
-            return newControl;
-        }
-
-        /// <summary>
-        ///     The create ui.
-        /// </summary>
-        /// <returns>
-        ///     The <see cref="IDataTypeUI" />.
-        /// </returns>
-        public override IDataTypeUI<IDictionary<string, string>> CreateUI()
-        {
-            return this.CreateUI(null);
-        }
 
         /// <summary>
         /// The load.
@@ -224,10 +189,10 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.DtoDataTypes
         }
 
         /// <summary>
-        ///     The return navigation.
+        /// The return navigation.
         /// </summary>
         /// <returns>
-        ///     The <see cref="IHierarchy" />.
+        /// The <see cref="Hierarchy"/>.
         /// </returns>
         public override Hierarchy ReturnNavigation()
         {
@@ -251,6 +216,23 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.DtoDataTypes
         }
 
         /// <summary>
+        /// The transform dto type.
+        /// </summary>
+        /// <param name="name">
+        /// The name.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        public string TransformDtoType(string name)
+        {
+            string formattedName =
+                this.NamingConvention != null ? this.NamingConvention.ApplyNamingConvention(name) : name;
+
+            return this.UseInterface ? $"I{formattedName}" : $"{formattedName}{this.PostFix}";
+        }
+
+        /// <summary>
         ///     The validate.
         /// </summary>
         /// <returns>
@@ -261,27 +243,6 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.DtoDataTypes
             this.ValidationResult = new List<Validation>();
 
             return this.ValidationResult;
-        }
-
-        #endregion
-
-        #region Other Methods
-
-        /// <summary>
-        /// The configure control.
-        /// </summary>
-        /// <param name="control">
-        /// The control.
-        /// </param>
-        /// <param name="parent">
-        /// The parent.
-        /// </param>
-        private void ConfigureControl(Control control, Control parent)
-        {
-            control.Visible = true;
-            control.Dock = DockStyle.Fill;
-            control.BringToFront();
-            parent.Controls.Add(control);
         }
 
         #endregion

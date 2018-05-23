@@ -1,19 +1,20 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="DtoUserControl.cs" company="DotnetScaffolder">
+// <copyright file="DtoInterfaceUserControl.cs" company="DotnetScaffolder">
 //   MIT
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.DtoDataTypes
+namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.DtoInterfaceDataTypes
 {
     #region Usings
 
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.Composition;
     using System.Windows.Forms;
 
     using DotNetScaffolder.Components.Common.Contract;
-    using DotNetScaffolder.Components.DataTypes.DefaultDataTypes.EntityDataTypes;
+    using DotNetScaffolder.Components.DataTypes.DefaultDataTypes.DtoInterfaceDataTypes;
     using DotNetScaffolder.Core.Common.Validation;
     using DotNetScaffolder.Mapping.MetaData.Domain;
 
@@ -22,24 +23,28 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.DtoDataTypes
     /// <summary>
     ///     The entity user control.
     /// </summary>
-    public partial class DtoUserControl : UserControl, IDataTypeUI<IDictionary<string, string>>
+    [Export(typeof(IDataTypeUI))]
+    [ExportMetadata("NameMetaData", "ContextUI")]
+    [ExportMetadata("ValueMetaData", "1BC1B0C4-1E41-9146-82CF-599181CE4441")]
+    [ExportMetadata("DisplayType", DisplayType.WinForm)]
+    [ExportMetadata("DataType", "1BC1B0C4-1E41-9146-82CF-599181CE4441")]
+    public partial class DtoInterfaceUserControl : UserControl, IDataTypeUI
     {
         #region Fields
 
         /// <summary>
         ///     The data type.
         /// </summary>
-        private DtoDataType dataType;
+        private IDataType dataType;
 
         #endregion
 
         #region Constructors and Destructors
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="DtoUserControl" /> class.
-        ///     Initializes a new instance of the <see cref="EntityUserControl" /> class.
+        ///     Initializes a new instance of the <see cref="DtoInterfaceUserControl" /> class.
         /// </summary>
-        public DtoUserControl()
+        public DtoInterfaceUserControl()
         {
             this.InitializeComponent();
         }
@@ -49,7 +54,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.DtoDataTypes
         /// <summary>
         ///     The on navigation changed.
         /// </summary>
-        public event EventHandler<IDataType<IDictionary<string, string>>> OnNavigationChanged;
+        public event EventHandler<IDataType> OnNavigationChanged;
 
         #region Public Properties
 
@@ -61,7 +66,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.DtoDataTypes
         /// <summary>
         ///     Gets or sets the data type.
         /// </summary>
-        public DtoDataType DataType
+        public IDataType DataType
         {
             get
             {
@@ -76,7 +81,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.DtoDataTypes
         }
 
         /// <summary>
-        /// Gets or sets the validation result.
+        ///     Gets or sets the validation result.
         /// </summary>
         public List<Validation> ValidationResult { get; set; }
 
@@ -90,11 +95,12 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.DtoDataTypes
         /// <param name="parameters">
         /// The parameters.
         /// </param>
-        public void LoadConfig(IDictionary<string, string> parameters)
+        public void LoadConfig(object parameters)
         {
+            IDictionary<string, string> parameterList = parameters as IDictionary<string, string>;
             if (this.DataType == null) return;
 
-            this.DataType.Load(parameters);
+            this.DataType.Load(parameterList);
 
             this.UpdateUI();
         }
@@ -105,12 +111,13 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.DtoDataTypes
         /// <param name="parameters">
         /// The parameters.
         /// </param>
-        public void SaveConfig(IDictionary<string, string> parameters)
+        public void SaveConfig(object parameters)
         {
+            IDictionary<string, string> parameterList = parameters as IDictionary<string, string>;
             if (this.DataType == null) return;
 
             this.UpdateDataType();
-            this.DataType.Save(parameters);
+            this.DataType.Save(parameterList);
         }
 
         /// <summary>
@@ -130,50 +137,16 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.DtoDataTypes
         #region Other Methods
 
         /// <summary>
-        /// The chk use interface_ checked changed.
-        /// </summary>
-        /// <param name="sender">
-        /// The sender.
-        /// </param>
-        /// <param name="e">
-        /// The e.
-        /// </param>
-        private void chkUseInterface_CheckedChanged(object sender, EventArgs e)
-        {
-            this.chkAddInjectConstructor.Enabled = this.chkUseInterface.Checked;
-            if (!this.chkUseInterface.Checked)
-            {
-                this.chkAddInjectConstructor.Checked = false;
-            }
-        }
-
-        /// <summary>
-        /// The entity user control 1_ load.
-        /// </summary>
-        /// <param name="sender">
-        /// The sender.
-        /// </param>
-        /// <param name="e">
-        /// The e.
-        /// </param>
-        private void EntityUserControl1_Load(object sender, EventArgs e)
-        {
-        }
-
-        /// <summary>
         ///     The update data type.
         /// </summary>
         private void UpdateDataType()
         {
             if (this.DataType == null) return;
 
-            this.DataType.InheritFrom = this.txtInheritFrom.Text;
-            this.DataType.Namespace = this.txtNamespace.Text;
-            this.DataType.OutputFolder = this.txtOutputFolder.Text;
-            this.DataType.OutputPath = this.txtOutputPath.Text;
-            this.DataType.AddInjectConstructor = this.chkAddInjectConstructor.Checked;
-            this.DataType.UseInterface = this.chkUseInterface.Checked;
-            this.DataType.PostFix = this.txtPostFix.Text;
+            (this.DataType as DtoInterfaceDataType).InheritFrom = this.txtInheritFrom.Text;
+            (this.DataType as DtoInterfaceDataType).Namespace = this.txtNamespace.Text;
+            (this.DataType as DtoInterfaceDataType).OutputFolder = this.txtOutputFolder.Text;
+            (this.DataType as DtoInterfaceDataType).OutputPath = this.txtOutputPath.Text;
         }
 
         /// <summary>
@@ -183,13 +156,10 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.DtoDataTypes
         {
             if (this.DataType == null) return;
 
-            this.txtInheritFrom.Text = this.DataType.InheritFrom;
-            this.txtNamespace.Text = this.DataType.Namespace;
-            this.txtOutputFolder.Text = this.DataType.OutputFolder;
-            this.txtOutputPath.Text = this.DataType.OutputPath;
-            this.txtPostFix.Text = this.DataType.PostFix;
-            this.chkAddInjectConstructor.Checked = this.DataType.AddInjectConstructor;
-            this.chkUseInterface.Checked = this.DataType.UseInterface;
+            this.txtInheritFrom.Text = (this.DataType as DtoInterfaceDataType).InheritFrom;
+            this.txtNamespace.Text = (this.DataType as DtoInterfaceDataType).Namespace;
+            this.txtOutputFolder.Text = (this.DataType as DtoInterfaceDataType).OutputFolder;
+            this.txtOutputPath.Text = (this.DataType as DtoInterfaceDataType).OutputPath;
         }
 
         #endregion

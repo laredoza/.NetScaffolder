@@ -1,4 +1,4 @@
-﻿namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.DtoDataTypes
+﻿namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.DtoDataTypes
 {
     partial class DtoUserControl
     {
@@ -178,7 +178,6 @@
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "DtoUserControl";
             this.Size = new System.Drawing.Size(549, 219);
-            this.Load += new System.EventHandler(this.EntityUserControl1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);

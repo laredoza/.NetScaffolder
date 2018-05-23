@@ -13,9 +13,8 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Sources
 
     using Common.Logging;
 
-    using Configuration;
-
     using DotNetScaffolder.Components.Common.Contract;
+    using DotNetScaffolder.Core.Configuration;
     using DotNetScaffolder.Mapping.ApplicationServices.Differences;
     using DotNetScaffolder.Mapping.ApplicationServices.Tables;
     using DotNetScaffolder.Mapping.MetaData.Domain;

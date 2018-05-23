@@ -1,20 +1,20 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="DtoInterfaceUserControl.cs" company="DotnetScaffolder">
+// <copyright file="RepoInterfaceUserControl.cs" company="DotnetScaffolder">
 //   MIT
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.DtoInterfaceDataType
+namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.RepoInterfaceDataTypes
 {
     #region Usings
 
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.Composition;
     using System.Windows.Forms;
 
     using DotNetScaffolder.Components.Common.Contract;
-    using DotNetScaffolder.Components.DataTypes.DefaultDataTypes.DtoInterfaceDataTypes;
-    using DotNetScaffolder.Components.DataTypes.DefaultDataTypes.EntityDataTypes;
+    using DotNetScaffolder.Components.DataTypes.DefaultDataTypes.RepoInterfaceDataTypes;
     using DotNetScaffolder.Core.Common.Validation;
     using DotNetScaffolder.Mapping.MetaData.Domain;
 
@@ -23,24 +23,28 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.DtoInterfaceDat
     /// <summary>
     ///     The entity user control.
     /// </summary>
-    public partial class DtoInterfaceUserControl : UserControl, IDataTypeUI<IDictionary<string, string>>
+    [Export(typeof(IDataTypeUI))]
+    [ExportMetadata("NameMetaData", "ContextUI")]
+    [ExportMetadata("ValueMetaData", "1BC1B0C4-1E41-9146-82CF-599181CE4451")]
+    [ExportMetadata("DisplayType", DisplayType.WinForm)]
+    [ExportMetadata("DataType", "1BC1B0C4-1E41-9146-82CF-599181CE4451")]
+    public partial class RepoInterfaceUserControl : UserControl, IDataTypeUI
     {
         #region Fields
 
         /// <summary>
         ///     The data type.
         /// </summary>
-        private DtoInterfaceDataType dataType;
+        private IDataType dataType;
 
         #endregion
 
         #region Constructors and Destructors
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="DtoInterfaceUserControl" /> class.
-        ///     Initializes a new instance of the <see cref="EntityUserControl" /> class.
+        ///     Initializes a new instance of the <see cref="RepoInterfaceUserControl" /> class.
         /// </summary>
-        public DtoInterfaceUserControl()
+        public RepoInterfaceUserControl()
         {
             this.InitializeComponent();
         }
@@ -50,7 +54,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.DtoInterfaceDat
         /// <summary>
         ///     The on navigation changed.
         /// </summary>
-        public event EventHandler<IDataType<IDictionary<string, string>>> OnNavigationChanged;
+        public event EventHandler<IDataType> OnNavigationChanged;
 
         #region Public Properties
 
@@ -62,7 +66,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.DtoInterfaceDat
         /// <summary>
         ///     Gets or sets the data type.
         /// </summary>
-        public DtoInterfaceDataType DataType
+        public IDataType DataType
         {
             get
             {
@@ -91,11 +95,13 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.DtoInterfaceDat
         /// <param name="parameters">
         /// The parameters.
         /// </param>
-        public void LoadConfig(IDictionary<string, string> parameters)
+        public void LoadConfig(object parameters)
         {
+            IDictionary<string, string> parameterList = parameters as IDictionary<string, string>;
+
             if (this.DataType == null) return;
 
-            this.DataType.Load(parameters);
+            this.DataType.Load(parameterList);
 
             this.UpdateUI();
         }
@@ -106,12 +112,14 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.DtoInterfaceDat
         /// <param name="parameters">
         /// The parameters.
         /// </param>
-        public void SaveConfig(IDictionary<string, string> parameters)
+        public void SaveConfig(object parameters)
         {
+            IDictionary<string, string> parameterList = parameters as IDictionary<string, string>;
+
             if (this.DataType == null) return;
 
             this.UpdateDataType();
-            this.DataType.Save(parameters);
+            this.DataType.Save(parameterList);
         }
 
         /// <summary>
@@ -137,10 +145,9 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.DtoInterfaceDat
         {
             if (this.DataType == null) return;
 
-            this.DataType.InheritFrom = this.txtInheritFrom.Text;
-            this.DataType.Namespace = this.txtNamespace.Text;
-            this.DataType.OutputFolder = this.txtOutputFolder.Text;
-            this.DataType.OutputPath = this.txtOutputPath.Text;
+            (this.DataType as RepoInterfaceDataType).Namespace = this.txtNamespace.Text;
+            (this.DataType as RepoInterfaceDataType).OutputFolder = this.txtOutputFolder.Text;
+            (this.DataType as RepoInterfaceDataType).OutputPath = this.txtOutputPath.Text;
         }
 
         /// <summary>
@@ -150,10 +157,9 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.DtoInterfaceDat
         {
             if (this.DataType == null) return;
 
-            this.txtInheritFrom.Text = this.DataType.InheritFrom;
-            this.txtNamespace.Text = this.DataType.Namespace;
-            this.txtOutputFolder.Text = this.DataType.OutputFolder;
-            this.txtOutputPath.Text = this.DataType.OutputPath;
+            this.txtNamespace.Text = (this.DataType as RepoInterfaceDataType).Namespace;
+            this.txtOutputFolder.Text = (this.DataType as RepoInterfaceDataType).OutputFolder;
+            this.txtOutputPath.Text = (this.DataType as RepoInterfaceDataType).OutputPath;
         }
 
         #endregion

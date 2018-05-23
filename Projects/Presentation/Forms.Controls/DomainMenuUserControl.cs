@@ -8,7 +8,6 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
 {
     #region Usings
 
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
@@ -16,10 +15,10 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
 
     using Common.Logging;
 
-    using Configuration;
-
     using DotNetScaffolder.Components.Common.Contract;
+    using DotNetScaffolder.Components.DataTypes.DefaultDataTypes;
     using DotNetScaffolder.Core.Common.Validation;
+    using DotNetScaffolder.Core.Configuration;
     using DotNetScaffolder.Mapping.MetaData.Domain;
 
     #endregion
@@ -109,17 +108,17 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
                 var parameters = new Dictionary<string, string> { { "basePath", this.OutputPath } };
                 foreach (TreeNode node in this.DomainTreeView.Nodes)
                 {
-                    validationResult = (node.Tag as IDataTypeUI<IDictionary<string, string>>)?.Validate();
-                    
-                    if (validationResult.Count > 0)
+                    validationResult = (node.Tag as IDataTypeUI)?.Validate();
+
+                    if (validationResult.Count == 0)
                     {
-                        (node.Tag as IDataTypeUI<IDictionary<string, string>>)?.SaveConfig(parameters);
+                        (node.Tag as IDataTypeUI)?.SaveConfig(parameters);
                     }
                     else
                     {
                         StringBuilder sb = new StringBuilder();
-                        validationResult = (node.Tag as IDataTypeUI<IDictionary<string, string>>)?.Validate();
-                        
+                        validationResult = (node.Tag as IDataTypeUI)?.Validate();
+
                         foreach (var validation in validationResult)
                         {
                             sb.AppendLine(validation.Description);
@@ -168,7 +167,9 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
                     dataType.Load(parameters);
                     var navigation = dataType.ReturnNavigation();
 
-                    var configControl = dataType.CreateUI(parameters);
+                    var configControl = ScaffoldConfig.ReturnDataTypeUI(template.DataType, DisplayType.WinForm);
+                    configControl.DataType = dataType;
+
                     configControl.DataSource = this.DataSource;
                     var control = configControl as Control;
 
@@ -276,7 +277,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
                 this.activeControl.Visible = false;
             }
 
-            if (e.Node.Tag is IDataTypeUI<IDictionary<string, string>> configControl)
+            if (e.Node.Tag is IDataTypeUI configControl)
             {
                 var parameters =
                     new Dictionary<string, string> { { "basePath", this.OutputPath }, { "name", e.Node.Name } };
@@ -290,19 +291,6 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
                     this.activeControl.BringToFront();
                 }
             }
-        }
-
-        /// <summary>
-        /// The domain tree view_ click.
-        /// </summary>
-        /// <param name="sender">
-        /// The sender.
-        /// </param>
-        /// <param name="e">
-        /// The e.
-        /// </param>
-        private void DomainTreeView_Click(object sender, EventArgs e)
-        {
         }
 
         #endregion

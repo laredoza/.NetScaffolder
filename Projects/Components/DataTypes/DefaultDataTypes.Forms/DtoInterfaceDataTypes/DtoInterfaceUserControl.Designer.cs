@@ -1,4 +1,4 @@
-﻿namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.DtoInterfaceDataType
+﻿namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.DtoInterfaceDataTypes
 {
     partial class DtoInterfaceUserControl
     {

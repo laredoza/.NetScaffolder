@@ -1,4 +1,4 @@
-﻿namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataTypes
+﻿namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.ContextDataTypes
 {
     partial class ContextUserControl
     {
@@ -13,9 +13,9 @@
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
-            if (disposing && (components != null))
+            if (disposing && (this.components != null))
             {
-                components.Dispose();
+                this.components.Dispose();
             }
             base.Dispose(disposing);
         }
@@ -257,7 +257,6 @@
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "ContextUserControl";
             this.Size = new System.Drawing.Size(821, 504);
-            this.Load += new System.EventHandler(this.ContextUserControl_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);

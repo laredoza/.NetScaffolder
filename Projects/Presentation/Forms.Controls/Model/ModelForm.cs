@@ -13,10 +13,9 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
 
     using Common.Logging;
 
-    using Configuration;
-
     using DotNetScaffolder.Components.Common.Contract;
     using DotNetScaffolder.Components.Common.Contract.UI;
+    using DotNetScaffolder.Core.Configuration;
     using DotNetScaffolder.Mapping.MetaData.Domain;
 
     #endregion

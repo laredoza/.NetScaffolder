@@ -12,13 +12,11 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.RepoInterfaceDa
     using System.Collections.Generic;
     using System.ComponentModel.Composition;
     using System.IO;
-    using System.Windows.Forms;
     using System.Xml.Serialization;
-    using DotNetScaffolder.Components.Common;
+
     using DotNetScaffolder.Components.Common.Contract;
     using DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Base;
     using DotNetScaffolder.Core.Common.Serializer;
-    using DotNetScaffolder.Mapping.MetaData.Model;
     using DotNetScaffolder.Core.Common.Validation;
 
     using FormControls.TreeView;
@@ -107,32 +105,6 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.RepoInterfaceDa
         #region Public Methods And Operators
 
         /// <summary>
-        /// Create ui.
-        /// </summary>
-        /// <param name="parameters">
-        /// The parameters.
-        /// </param>
-        /// <returns>
-        /// The <see cref="IDataTypeUI"/>.
-        /// </returns>
-        public override IDataTypeUI<IDictionary<string, string>> CreateUI(IDictionary<string, string> parameters)
-        {
-            var newControl = new RepoInterfaceUserControl { Visible = true, Dock = DockStyle.Fill, DataType = this };
-            return newControl;
-        }
-
-        /// <summary>
-        ///     The create ui.
-        /// </summary>
-        /// <returns>
-        ///     The <see cref="IDataTypeUI" />.
-        /// </returns>
-        public override IDataTypeUI<IDictionary<string, string>> CreateUI()
-        {
-            return this.CreateUI(null);
-        }
-
-        /// <summary>
         /// The load.
         /// </summary>
         /// <param name="parameters">
@@ -155,10 +127,10 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.RepoInterfaceDa
         }
 
         /// <summary>
-        ///     The return navigation.
+        /// The return navigation.
         /// </summary>
         /// <returns>
-        ///     The <see cref="IHierarchy" />.
+        /// The <see cref="Hierarchy"/>.
         /// </returns>
         public override Hierarchy ReturnNavigation()
         {
@@ -182,10 +154,10 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.RepoInterfaceDa
         }
 
         /// <summary>
-        /// The validate.
+        ///     The validate.
         /// </summary>
         /// <returns>
-        /// The <see cref="List"/>.
+        ///     The <see cref="List" />.
         /// </returns>
         public override List<Validation> Validate()
         {

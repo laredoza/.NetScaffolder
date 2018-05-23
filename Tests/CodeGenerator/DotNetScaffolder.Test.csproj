@@ -179,6 +179,10 @@
       <Project>{e21010ea-7789-4cce-a09e-52b55e04a083}</Project>
       <Name>DotNetScaffolder.Components.LanguageOutputs.DefaultLanguageOutput</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Projects\Components\MEF\Importer.Net\DotNetScaffolder.Components.Importers.Net.csproj">
+      <Project>{90DC5EEE-B71C-4684-B30C-36B85099AAED}</Project>
+      <Name>DotNetScaffolder.Components.Importers.Net</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Projects\Components\NamingConventions\DefaultNamingConventions\DotNetScaffolder.Components.NamingConventions.DefaultNamingConventions.csproj">
       <Project>{5f5a03d7-a884-4495-96f4-d6859ecb1489}</Project>
       <Name>DotNetScaffolder.Components.NamingConventions.DefaultNamingConventions</Name>
@@ -203,7 +207,7 @@
       <Project>{f8a24fdb-4bdb-4e74-83f1-d646883ba511}</Project>
       <Name>DotNetScaffolder.Core.Extensions</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Projects\Core\Forms\FormControls\FormControls.csproj">
+    <ProjectReference Include="..\..\Projects\Core\Forms\FormControls\DotNetScaffolder.Core.Forms.FormControls.csproj">
       <Project>{6A2E8779-4539-46D1-B3A0-1C3B205A95AB}</Project>
       <Name>FormControls</Name>
     </ProjectReference>

@@ -13,8 +13,7 @@ namespace DotNetScaffolder.Presentation.Forms
     using System.Linq;
     using System.Windows.Forms;
 
-    using Configuration;
-
+    using DotNetScaffolder.Core.Configuration;
     using DotNetScaffolder.Mapping.ApplicationServices;
     using DotNetScaffolder.Mapping.MetaData.Project;
     using DotNetScaffolder.Presentation.Forms.Controls;
@@ -163,8 +162,7 @@ namespace DotNetScaffolder.Presentation.Forms
 
                     this.TemplateManagementUserControl1.DataSource =
                         this.applicationConfiguration.ApplicationSettings.Templates[0];
-                    this.packageUserControl1.DataSource =
-                        this.applicationConfiguration.ApplicationSettings.Packages[0];
+                    this.packageUserControl1.DataSource = this.applicationConfiguration.ApplicationSettings.Packages[0];
 
                     if (this.applicationConfiguration.ApplicationSettings.Templates.Count > 0)
                     {
@@ -190,7 +188,7 @@ namespace DotNetScaffolder.Presentation.Forms
                     this.LblPath.Text = "No Model File Loaded";
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 this.tabControl1.Enabled = false;
                 this.BtnSave.Enabled = false;

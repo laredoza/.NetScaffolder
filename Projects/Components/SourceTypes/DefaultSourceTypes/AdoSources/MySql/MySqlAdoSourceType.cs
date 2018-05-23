@@ -9,7 +9,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
     #region Usings
 
     using System;
-    using System.ComponentModel.Composition;
+    using System.Composition;
     using System.IO;
     using System.Windows.Forms;
 

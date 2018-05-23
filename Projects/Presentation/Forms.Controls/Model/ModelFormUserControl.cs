@@ -13,10 +13,9 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
 
     using Common.Logging;
 
-    using Configuration;
-
     using DotNetScaffolder.Components.Common.Contract;
     using DotNetScaffolder.Core.Common.Validation;
+    using DotNetScaffolder.Core.Configuration;
     using DotNetScaffolder.Mapping.ApplicationServices.Tables;
     using DotNetScaffolder.Mapping.MetaData.Domain;
     using DotNetScaffolder.Mapping.MetaData.Model;
@@ -30,10 +29,16 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
     /// </summary>
     public partial class ModelFormUserControl : UserControl
     {
+        #region Static Fields
+
         /// <summary>
         ///     The logger.
         /// </summary>
         private static readonly ILog Logger = LogManager.GetLogger(string.Empty);
+
+        #endregion
+
+        #region Fields
 
         /// <summary>
         ///     The default model control.
@@ -65,6 +70,10 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         /// </summary>
         private ISourceType sourceType;
 
+        #endregion
+
+        #region Constructors and Destructors
+
         /// <summary>
         ///     Initializes a new instance of the <see cref="ModelFormUserControl" /> class.
         /// </summary>
@@ -90,8 +99,12 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
             this.defaultModelControl.BringToFront();
         }
 
+        #endregion
+
+        #region Public Properties
+
         /// <summary>
-        /// Gets or sets the currently selected control.
+        ///     Gets or sets the currently selected control.
         /// </summary>
         public IValidate CurrentlySelectedControl { get; set; }
 
@@ -116,6 +129,10 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         ///     Gets or sets the save path.
         /// </summary>
         public string SavePath { get; set; }
+
+        #endregion
+
+        #region Public Methods And Operators
 
         /// <summary>
         /// The add nodes.
@@ -143,6 +160,10 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
             treeView.Nodes[0].Nodes.AddRange(applicationService.ConvertHierarchyToNodes(hierarchy).ToArray());
             treeView.Nodes[0].Expand();
         }
+
+        #endregion
+
+        #region Other Methods
 
         /// <summary>
         /// The domain tree view_ before select.
@@ -228,5 +249,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
 
             Logger.Trace("Completed UpdateDataSource()");
         }
+
+        #endregion
     }
 }
