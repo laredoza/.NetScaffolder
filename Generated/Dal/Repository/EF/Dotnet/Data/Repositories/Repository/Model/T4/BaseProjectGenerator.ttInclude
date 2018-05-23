@@ -10,7 +10,7 @@
 <#@ assembly name="$(ProjectDir)Model\Package\DotNetScaffolder.Components.DataTypes.DefaultDataTypes.dll" #>
 <#@ assembly name="$(ProjectDir)Model\Package\FormControls.dll" #>
 <#@ assembly name="$(ProjectDir)Model\Package\DotNetScaffolder.Components.Common.dll" #>
-<#@ assembly name="$(ProjectDir)Model\Package\Configuration.dll" #>
+<#@ assembly name="$(ProjectDir)Model\Package\DotNetScaffolder.Core.Configuration.dll" #>
 <#@ assembly name="$(ProjectDir)Model\Package\DotNetScaffolder.Mapping.ApplicationServices.dll" #>
 <#@ import namespace="System" #>
 <#@ import namespace="System.Configuration" #>
@@ -36,7 +36,7 @@
 <#@ import namespace="DotNetScaffolder.Components.DataTypes.DefaultDataTypes.RepositoryDataTypes" #>
 <#@ import namespace="DotNetScaffolder.Mapping.MetaData.Enum" #>
 
-<#@ import namespace="Configuration" #>
+<#@ import namespace="DotNetScaffolder.Core.Configuration" #>
 <#@ import namespace="DotNetScaffolder.Mapping.MetaData.Project" #>
 <#@ import namespace="DotNetScaffolder.Mapping.ApplicationServices" #>
 

@@ -8,7 +8,7 @@
 <#@ assembly name="$(ProjectDir)Model\Package\DotNetScaffolder.Mapping.MetaData.dll" #>
 <#@ assembly name="$(ProjectDir)Model\Package\FormControls.dll" #>
 <#@ assembly name="$(ProjectDir)Model\Package\DotNetScaffolder.Components.Common.dll" #>
-<#@ assembly name="$(ProjectDir)Model\Package\Configuration.dll" #>
+<#@ assembly name="$(ProjectDir)Model\Package\DotNetScaffolder.Core.Configuration.dll" #>
 <#@ import namespace="System" #>
 <#@ import namespace="System.Configuration" #>
 <#@ import namespace="System.Globalization" #>
@@ -21,7 +21,7 @@
 <#@ import namespace="DotNetScaffolder.Mapping.MetaData.Project" #>
 <#@ import namespace="DotNetScaffolder.Mapping.MetaData.Model" #>
 <#@ import namespace="DotNetScaffolder.Core.Common.Serializer" #>
-<#@ import namespace="Configuration" #>
+<#@ import namespace="DotNetScaffolder.Core.Configuration" #>
 <#+
 public abstract class BaseGenerator : Generator
 {
