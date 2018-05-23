@@ -1,17 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{ECF3D386-0124-450F-A763-92175FF00547}</ProjectGuid>
+    <ProjectGuid>{A4E7BEC8-D3C8-4AC2-90B6-2B54009F7A2B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DotNetScaffolder.Core.Configuration</RootNamespace>
-    <AssemblyName>DotNetScaffolder.Core.Configuration</AssemblyName>
+    <RootNamespace>DotNetScaffolder.Mapping.ApplicationServices.Forms</RootNamespace>
+    <AssemblyName>DotNetScaffolder.Mapping.ApplicationServices.Forms</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -32,8 +31,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -42,24 +41,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ScaffoldConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tables\ITableHierarchyService.cs" />
+    <Compile Include="Tables\TableHierarchyService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Components\Common\DotNetScaffolder.Components.Common.csproj">
-      <Project>{b39709b5-d887-46e1-acc6-cbd7880e90c5}</Project>
+      <Project>{B39709B5-D887-46E1-ACC6-CBD7880E90C5}</Project>
       <Name>DotNetScaffolder.Components.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\Common\DotNetScaffolder.Core.Common.csproj">
+      <Project>{CDACE52C-F991-40B5-80ED-4947A100EC52}</Project>
+      <Name>DotNetScaffolder.Core.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ApplicationSettings\DotNetScaffolder.Mapping.ApplicationServices.csproj">
+      <Project>{0AFFF1D6-5FE5-4FF8-84E8-59352E42E658}</Project>
+      <Name>DotNetScaffolder.Mapping.ApplicationServices</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MetaData\DotNetScaffolder.Mapping.MetaData.csproj">
+      <Project>{3F206474-14C2-4586-B57A-4EDC76795161}</Project>
+      <Name>DotNetScaffolder.Mapping.MetaData</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <PropertyGroup>
-    <PostBuildEvent>echo f | xcopy /i /y "$(ProjectDir)bin\$(ConfigurationName)\$(TargetFileName)" "$(SolutionDir)\Projects\Presentation\Forms\Model\Package\$(TargetFileName)"</PostBuildEvent>
-  </PropertyGroup>
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>

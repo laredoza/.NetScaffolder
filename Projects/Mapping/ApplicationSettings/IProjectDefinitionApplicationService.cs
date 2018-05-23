@@ -60,6 +60,5 @@ namespace DotNetScaffolder.Mapping.ApplicationServices
         void Save();
 
         #endregion
-        
     }
 }

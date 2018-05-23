@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="SqlServerAdoUserControl.cs" company="DotnetScaffolder">
+// <copyright file="MySqlAdoUserControl.cs" company="DotnetScaffolder">
 //   MIT
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
@@ -38,7 +38,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
         #region Fields
 
         /// <summary>
-        /// The options.
+        ///     The options.
         /// </summary>
         private AdoSourceOptions options;
 
@@ -69,12 +69,12 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
         public object Parameters { get; set; }
 
         /// <summary>
-        /// Gets or sets the source type.
+        ///     Gets or sets the source type.
         /// </summary>
         public ISourceType SourceType { get; set; }
 
         /// <summary>
-        /// Gets or sets the validation result.
+        ///     Gets or sets the validation result.
         /// </summary>
         public List<Validation> ValidationResult { get; set; }
 
@@ -143,7 +143,11 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
             }
             else
             {
-                MessageBox.Show("Unable to Connected to MySQl Server", "Test", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(
+                    "Unable to Connected to MySQl Server",
+                    "Test",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
             }
 
             Logger.Trace("Completed TestData()");
@@ -174,9 +178,22 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
 
         #endregion
 
+        #region Other Methods
+
+        /// <summary>
+        /// The txt connection_ text changed.
+        /// </summary>
+        /// <param name="sender">
+        /// The sender.
+        /// </param>
+        /// <param name="e">
+        /// The e.
+        /// </param>
         private void TxtConnection_TextChanged(object sender, EventArgs e)
         {
             this.options.ConnectionString = this.TxtConnection.Text;
         }
+
+        #endregion
     }
 }

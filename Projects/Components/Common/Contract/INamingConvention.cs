@@ -13,7 +13,7 @@ namespace DotNetScaffolder.Components.Common.Contract
     /// </summary>
     public interface INamingConvention
     {
-        #region Public methods and operators
+        #region Public Methods And Operators
 
         /// <summary>
         /// Apply the naming convention.

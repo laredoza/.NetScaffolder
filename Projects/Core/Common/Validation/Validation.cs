@@ -7,7 +7,7 @@
 namespace DotNetScaffolder.Core.Common.Validation
 {
     /// <summary>
-    /// The validation.
+    ///     The validation.
     /// </summary>
     public class Validation
     {
@@ -24,21 +24,21 @@ namespace DotNetScaffolder.Core.Common.Validation
         /// </param>
         public Validation(ValidationType validationType, string description)
         {
-            ValidationType = validationType;
-            Description = description;
+            this.ValidationType = validationType;
+            this.Description = description;
         }
 
         #endregion
 
-        #region Properties
+        #region Public Properties
 
         /// <summary>
-        /// Gets or sets the description.
+        ///     Gets or sets the description.
         /// </summary>
         public string Description { get; set; }
 
         /// <summary>
-        /// Gets or sets the validation type.
+        ///     Gets or sets the validation type.
         /// </summary>
         public ValidationType ValidationType { get; set; }
 

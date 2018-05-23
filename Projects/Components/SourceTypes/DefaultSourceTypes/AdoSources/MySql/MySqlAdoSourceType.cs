@@ -9,19 +9,15 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
     #region Usings
 
     using System;
-    using System.Collections.Generic;
     using System.ComponentModel.Composition;
     using System.IO;
-    using System.Linq;
     using System.Windows.Forms;
 
-    using DatabaseSchemaReader;
     using DatabaseSchemaReader.DataSchema;
 
     using DotNetScaffolder.Components.Common.Contract;
     using DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.SourceOptions;
     using DotNetScaffolder.Core.Common.Serializer;
-    using DotNetScaffolder.Mapping.MetaData.Enum;
     using DotNetScaffolder.Mapping.MetaData.Model;
 
     using global::Common.Logging;
@@ -72,12 +68,51 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
         }
 
         /// <summary>
+        /// The load.
+        /// </summary>
+        /// <param name="parameters">
+        /// The parameters.
+        /// </param>
+        /// <returns>
+        /// The <see cref="object"/>.
+        /// </returns>
+        public override object Load(object parameters)
+        {
+            Logger.Trace("Started Import()");
+
+            string path = this.ReturnFilePath(parameters as string);
+            Logger.Debug($"Path: {path}");
+            AdoSourceOptions result = null;
+
+            if (File.Exists(path))
+            {
+                Logger.Trace("Path Exists");
+                result = ObjectXMLSerializer<AdoSourceOptions>.Load(path);
+            }
+            else
+            {
+                Logger.Trace("Path Doesn't Exist");
+                result = new AdoSourceOptions
+                             {
+                                 ProviderName = "MySql.Data.MySqlClient",
+                                 ConnectionString =
+                                     @"server=localhost;userid=test;password=password;database=test;SslMode=none"
+                             };
+            }
+
+            Logger.Trace("Completed Import()");
+
+            return result;
+        }
+
+        /// <summary>
         /// Map database type to c# type.
         /// </summary>
         /// <param name="databaseType">
-        ///     The database type.
+        /// The database type.
         /// </param>
-        /// <param name="extraInfo"></param>
+        /// <param name="extraInfo">
+        /// </param>
         /// <returns>
         /// The <see cref="DomainDataType"/>.
         /// </returns>
@@ -158,8 +193,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
             bool result = false;
 
             AdoSourceOptions adoOptions = parameters as AdoSourceOptions;
-            using (MySqlConnection connection =
-                new MySqlConnection(adoOptions.ConnectionString))
+            using (MySqlConnection connection = new MySqlConnection(adoOptions.ConnectionString))
             {
                 // Open the connection in a try/catch block. 
                 // Create and execute the DataReader, writing the result
@@ -177,44 +211,6 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
             }
 
             Logger.Trace("Complete Test()");
-
-            return result;
-        }
-
-        /// <summary>
-        /// The load.
-        /// </summary>
-        /// <param name="parameters">
-        /// The parameters.
-        /// </param>
-        /// <returns>
-        /// The <see cref="object"/>.
-        /// </returns>
-        public override object Load(object parameters)
-        {
-            Logger.Trace("Started Import()");
-
-            string path = this.ReturnFilePath(parameters as string);
-            Logger.Debug($"Path: {path}");
-            AdoSourceOptions result = null;
-
-            if (File.Exists(path))
-            {
-                Logger.Trace("Path Exists");
-                result = ObjectXMLSerializer<AdoSourceOptions>.Load(path);
-            }
-            else
-            {
-                Logger.Trace("Path Doesn't Exist");
-                result = new AdoSourceOptions
-                             {
-                                 ProviderName = "MySql.Data.MySqlClient",
-                                 ConnectionString =
-                                     @"server=localhost;userid=test;password=password;database=test;SslMode=none"
-                };
-            }
-
-            Logger.Trace("Completed Import()");
 
             return result;
         }

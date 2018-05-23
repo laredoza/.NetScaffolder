@@ -15,39 +15,44 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EFCore
 
     #endregion
 
-    /// <summary>
-    ///     Defines the default EF Core Sql Server driver.
+    // <summary>
+    /// Defines the default EF Core Sql Server driver.
     /// </summary>
-    //[Export(typeof(IDriver))]
-    //[ExportMetadata("TypeMetaData", "Entity Framework Core")]
-    //[ExportMetadata("TypeIdMetaData", "2BC1B0C4-1E41-9146-82CF-599181CE4402")]
-    //[ExportMetadata("NameMetaData", "Entity Framework Core - SqlServer (Default)")]
-    //[ExportMetadata("ValueMetaData", "2BC1B0C4-1E41-9146-82CF-599181CE4417")]
-    //public class EFCoreSqlServerDriver : IDriver
-    //{
-    //    /// <summary>
-    //    /// Gets the name spaces used to generate templates.
-    //    /// </summary>
-    //    public List<string> NameSpaces => new List<string> { "System.Data.Entity" };
+    [Export(typeof(IDriver))]
+    [ExportMetadata("TypeMetaData", "Entity Framework Core")]
+    [ExportMetadata("TypeIdMetaData", "2BC1B0C4-1E41-9146-82CF-599181CE4402")]
+    [ExportMetadata("NameMetaData", "Entity Framework Core - SqlServer (Default)")]
+    [ExportMetadata("ValueMetaData", "2BC1B0C4-1E41-9146-82CF-599181CE4417")]
+    public class EFCoreSqlServerDriver : IDriver
+    {
+        #region Public Properties
 
-    //    /// <summary>
-    //    /// The prefix.
-    //    /// </summary>
-    //    public string Prefix => "EFCoreSqlServer";
+        /// <summary>
+        ///     Gets the context attribute.
+        /// </summary>
+        public string ContextAttribute => string.Empty;
 
-    //    /// <summary>
-    //    /// Gets the context attribute.
-    //    /// </summary>
-    //    public string ContextAttribute => string.Empty;
+        /// <summary>
+        ///     Force schema to uppercase.
+        /// </summary>
+        public bool ForceSchemaToUppercase => false;
 
-    //    /// <summary>
-    //    /// The parent folder.
-    //    /// </summary>
-    //    public string ParentFolder => "EFCore";
+        /// <summary>
+        ///     Gets the name spaces used to generate templates.
+        /// </summary>
+        public List<string> NameSpaces =>
+            new List<string> { "Microsoft.EntityFrameworkCore", "Microsoft.EntityFrameworkCore.Storage" };
 
-    //    /// <summary>
-    //    /// Force schema to uppercase.
-    //    /// </summary>
-    //    public bool ForceSchemaToUppercase => false;
-    //}
+        /// <summary>
+        ///     The parent folder.
+        /// </summary>
+        public string ParentFolder => "EFCore";
+
+        /// <summary>
+        ///     The prefix.
+        /// </summary>
+        public string Prefix => "SqlServer";
+
+        #endregion
+    }
 }

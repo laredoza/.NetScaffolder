@@ -190,7 +190,7 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Differences
                                 FirstColumnName = column.ColumnName,
                                 FirstColumnDataType = column.DomainDataType,
                                 SecondColumnDataType = secondColumn.DomainDataType
-                        });
+                            });
             }
 
             if (retval.IsBroken)

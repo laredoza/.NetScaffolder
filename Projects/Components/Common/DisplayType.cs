@@ -1,24 +1,24 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="TreeViewType.cs" company="DotnetScaffolder">
+// <copyright file="DisplayType.cs" company="DotnetScaffolder">
 //   MIT
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace FormControls.Enum
+namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
 {
     /// <summary>
-    /// The tree view type.
+    /// The display type.
     /// </summary>
-    public enum TreeViewType
+    public enum DisplayType
     {
         /// <summary>
-        /// The package.
+        /// The win form.
         /// </summary>
-        Package,
+        WinForm,
 
         /// <summary>
-        /// The template.
+        /// The wpf.
         /// </summary>
-        Template
+        WPF
     }
 }

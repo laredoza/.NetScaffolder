@@ -9,7 +9,6 @@ namespace DotNetScaffolder.Components.Common.Contract
     #region Usings
 
     using System.Collections.Generic;
-    using System.Xml.Serialization;
 
     using DotNetScaffolder.Core.Common.Validation;
     using DotNetScaffolder.Mapping.MetaData.Domain;
@@ -26,15 +25,22 @@ namespace DotNetScaffolder.Components.Common.Contract
     /// </typeparam>
     public interface IDataType<T> : IValidate
     {
+        #region Public Properties
+
         /// <summary>
-        /// Gets or sets the base namespace.
+        ///     Gets or sets the base namespace.
         /// </summary>
         string BaseNamespace { get; set; }
 
         /// <summary>
-        /// Gets or sets the collection option.
+        ///     Gets or sets the collection option.
         /// </summary>
         ICollectionOption CollectionOption { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the domain definition.
+        /// </summary>
+        DomainDefinition DomainDefinition { get; set; }
 
         /// <summary>
         ///     Gets or sets the driver type.
@@ -47,9 +53,13 @@ namespace DotNetScaffolder.Components.Common.Contract
         Table MetaData { get; set; }
 
         /// <summary>
-        /// Gets or sets the naming convention.
+        ///     Gets or sets the naming convention.
         /// </summary>
         INamingConvention NamingConvention { get; set; }
+
+        #endregion
+
+        #region Public Methods And Operators
 
         /// <summary>
         /// The create ui.
@@ -57,19 +67,12 @@ namespace DotNetScaffolder.Components.Common.Contract
         /// <param name="parameters">
         /// The parameters.
         /// </param>
+        /// <summary>
+        /// The create ui.
+        /// </summary>
         /// <returns>
         /// The <see cref="IDataTypeUI"/>.
         /// </returns>
-        IDataTypeUI<T> CreateUI(T parameters);
-
-        /// <summary>
-        ///     The create ui.
-        /// </summary>
-        /// <returns>
-        ///     The <see cref="IDataTypeUI" />.
-        /// </returns>
-        IDataTypeUI<T> CreateUI();
-
         /// <summary>
         /// The load.
         /// </summary>
@@ -97,10 +100,7 @@ namespace DotNetScaffolder.Components.Common.Contract
         /// </returns>
         bool Save(T parameters);
 
-        /// <summary>
-        /// Gets or sets the domain definition.
-        /// </summary>
-        DomainDefinition DomainDefinition { get; set; }
+        #endregion
     }
 
     /// <summary>

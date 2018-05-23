@@ -13,23 +13,19 @@ namespace DotNetScaffolder.Components.Common.Contract
     using DotNetScaffolder.Core.Common.Validation;
     using DotNetScaffolder.Mapping.MetaData.Domain;
 
-    #region Usings
-
-    #endregion
-
     #endregion
 
     /// <summary>
-    /// The DataTypeUI interface.
+    ///     The DataTypeUI interface.
     /// </summary>
     /// <typeparam name="T">
     /// </typeparam>
-    public interface IDataTypeUI<T>: IValidate
+    public interface IDataTypeUI : IValidate
     {
         /// <summary>
         ///     The on navigation changed.
         /// </summary>
-        event EventHandler<IDataType<T>> OnNavigationChanged;
+        event EventHandler<IDataType> OnNavigationChanged;
 
         #region Public Properties
 
@@ -37,6 +33,11 @@ namespace DotNetScaffolder.Components.Common.Contract
         ///     Gets or sets the data source.
         /// </summary>
         DomainDefinition DataSource { get; set; }
+
+        /// <summary>
+        /// Gets or sets the data type.
+        /// </summary>
+        IDataType DataType { get; set; }
 
         #endregion
 
@@ -48,7 +49,7 @@ namespace DotNetScaffolder.Components.Common.Contract
         /// <param name="parameters">
         /// The parameters.
         /// </param>
-        void LoadConfig(T parameters);
+        void LoadConfig(object parameters);
 
         /// <summary>
         /// The save config.
@@ -56,7 +57,7 @@ namespace DotNetScaffolder.Components.Common.Contract
         /// <param name="parameters">
         /// The parameters.
         /// </param>
-        void SaveConfig(T parameters);
+        void SaveConfig(object parameters);
 
         #endregion
     }

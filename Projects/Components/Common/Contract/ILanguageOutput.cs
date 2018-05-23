@@ -7,7 +7,7 @@
 namespace DotNetScaffolder.Components.Common.Contract
 {
     /// <summary>
-    /// The LanguageOutput interface.
+    ///     The LanguageOutput interface.
     /// </summary>
     public interface ILanguageOutput
     {

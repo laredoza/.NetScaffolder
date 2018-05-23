@@ -19,7 +19,7 @@ namespace FormControls.TreeView
     ///     The hierarchy.
     /// </summary>
     [Serializable]
-    public class Hierarchy  
+    public class Hierarchy
     {
         #region Constructors and Destructors
 
@@ -28,14 +28,14 @@ namespace FormControls.TreeView
         /// </summary>
         public Hierarchy()
         {
-            Enabled = true;
-            Children = new List<Hierarchy>();
-            HierarchyType = HierarchyType.Group;
+            this.Enabled = true;
+            this.Children = new List<Hierarchy>();
+            this.HierarchyType = HierarchyType.Group;
         }
 
         #endregion
 
-        #region Properties
+        #region Public Properties
 
         /// <summary>
         ///     Gets or sets the children.
@@ -72,6 +72,9 @@ namespace FormControls.TreeView
         /// </summary>
         public Guid ParentId { get; set; }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether selected.
+        /// </summary>
         public bool Selected { get; set; }
 
         #endregion

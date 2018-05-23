@@ -117,7 +117,7 @@ namespace DotNetScaffolder.Core.Common.Validation
         ContextMissingModels,
 
         /// <summary>
-        /// The context name is empty.
+        ///     The context name is empty.
         /// </summary>
         ContextNameEmpty
     }

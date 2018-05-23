@@ -10,7 +10,6 @@ namespace DotNetScaffolder.Components.Common.Contract
 
     using System.Collections.Generic;
 
-    using DotNetScaffolder.Mapping.MetaData.Enum;
     using DotNetScaffolder.Mapping.MetaData.Model;
 
     #endregion
@@ -34,6 +33,22 @@ namespace DotNetScaffolder.Components.Common.Contract
         /// The <see cref="object"/>.
         /// </returns>
         object AddConfigUI(object parameters);
+
+        /// <summary>
+        /// The fix.
+        /// </summary>
+        /// <param name="model">
+        /// The model.
+        /// </param>
+        void Fix(DatabaseModel model);
+
+        /// <summary>
+        /// The fix.
+        /// </summary>
+        /// <param name="tables">
+        /// The tables.
+        /// </param>
+        void Fix(List<Table> tables);
 
         /// <summary>
         /// The import.
@@ -61,13 +76,25 @@ namespace DotNetScaffolder.Components.Common.Contract
         /// Map database type to c# type.
         /// </summary>
         /// <param name="databaseType">
-        ///     The database type.
+        /// The database type.
         /// </param>
-        /// <param name="extraInfo"></param>
+        /// <param name="extraInfo">
+        /// </param>
         /// <returns>
         /// The <see cref="DomainDataType"/>.
         /// </returns>
         DomainDataType MapDatabaseType(string databaseType, object extraInfo);
+
+        /// <summary>
+        /// The return file path.
+        /// </summary>
+        /// <param name="basePath">
+        /// The base path.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        string ReturnFilePath(string basePath);
 
         /// <summary>
         /// Save parameters
@@ -86,33 +113,6 @@ namespace DotNetScaffolder.Components.Common.Contract
         /// </returns>
         bool Test(object parameters);
 
-        /// <summary>
-        /// The fix.
-        /// </summary>
-        /// <param name="model">
-        /// The model.
-        /// </param>
-        void Fix(DatabaseModel model);
-
-        /// <summary>
-        /// The fix.
-        /// </summary>
-        /// <param name="tables">
-        /// The tables.
-        /// </param>
-        void Fix(List<Table> tables);
-
-        /// <summary>
-        /// The return file path.
-        /// </summary>
-        /// <param name="basePath">
-        /// The base path.
-        /// </param>
-        /// <returns>
-        /// The <see cref="string"/>.
-        /// </returns>
-        string ReturnFilePath(string basePath);
-       
         #endregion
     }
 }

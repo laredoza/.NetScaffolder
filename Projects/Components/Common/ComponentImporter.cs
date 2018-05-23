@@ -79,6 +79,8 @@ namespace DotNetScaffolder.Components.Common
         [ImportMany]
         public Lazy<ISourceType, IDictionary<string, object>>[] SourceTypes { get; set; }
 
+        [ImportMany]
+        public Lazy<IDataTypeUI, IDictionary<string, object>>[] DataTypeUIs { get; set; }
         #endregion
 
         #region Public methods and operators

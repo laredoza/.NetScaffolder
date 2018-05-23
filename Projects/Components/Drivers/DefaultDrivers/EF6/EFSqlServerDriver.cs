@@ -25,29 +25,33 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6
     [ExportMetadata("ValueMetaData", "2BC1B0C4-1E41-9146-82CF-599181CE4410")]
     public class EFSqlServerDriver : IDriver
     {
-        /// <summary>
-        /// Gets the name spaces used to generate templates.
-        /// </summary>
-        public List<string> NameSpaces => new List<string> { "System.Data.Entity" };
-        
-        /// <summary>
-        /// The prefix.
-        /// </summary>
-        public string Prefix => "SqlServer";
+        #region Public Properties
 
         /// <summary>
-        /// Gets the context attribute.
+        ///     Gets the context attribute.
         /// </summary>
         public string ContextAttribute => string.Empty;
 
         /// <summary>
-        /// The parent folder.
+        ///     Force schema to uppercase.
+        /// </summary>
+        public bool ForceSchemaToUppercase => false;
+
+        /// <summary>
+        ///     Gets the name spaces used to generate templates.
+        /// </summary>
+        public List<string> NameSpaces => new List<string> { "System.Data.Entity" };
+
+        /// <summary>
+        ///     The parent folder.
         /// </summary>
         public string ParentFolder => "EF";
 
         /// <summary>
-        /// Force schema to uppercase.
+        ///     The prefix.
         /// </summary>
-        public bool ForceSchemaToUppercase => false;
+        public string Prefix => "SqlServer";
+
+        #endregion
     }
 }

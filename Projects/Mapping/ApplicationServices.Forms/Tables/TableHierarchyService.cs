@@ -12,16 +12,11 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Tables
     using System.Collections.Generic;
     using System.Linq;
     using System.Windows.Forms;
-
     using DotNetScaffolder.Components.Common.Contract;
     using DotNetScaffolder.Mapping.ApplicationServices.Differences;
     using DotNetScaffolder.Mapping.MetaData.Model;
 
     using FormControls.TreeView;
-
-    #endregion
-
-    #region Usings
 
     #endregion
 
@@ -47,7 +42,13 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Tables
 
             foreach (Hierarchy item in items)
             {
-                var node = new TreeNode { Tag = item.Item, Text = item.Name, Name = item.Id.ToString(), Checked = item.Selected };
+                var node = new TreeNode
+                               {
+                                   Tag = item.Item,
+                                   Text = item.Name,
+                                   Name = item.Id.ToString(),
+                                   Checked = item.Selected
+                               };
                 nodes.Add(node);
 
                 node.Nodes.AddRange(this.ConvertHierarchyToNodes(item.Children).ToArray());
@@ -127,6 +128,9 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Tables
         /// </param>
         /// <param name="oldTableList">
         /// The old table list.
+        /// </param>
+        /// <param name="sourceType">
+        /// The source Type.
         /// </param>
         public void PreserveCustomMetadata(List<Table> newTableList, List<Table> oldTableList, ISourceType sourceType)
         {
@@ -209,7 +213,7 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Tables
             Hierarchy schema = null;
             Hierarchy fieldNode = null;
             Hierarchy relationshipNode = null;
-            
+
             foreach (Table table in tables)
             {
                 newTable = this.NewNode(table);
@@ -221,7 +225,7 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Tables
 
                     foreach (Column column in table.Columns)
                     {
-                        fieldNode.Children.Add(new Hierarchy { Name = column.ColumnName, Item = column});
+                        fieldNode.Children.Add(new Hierarchy { Name = column.ColumnName, Item = column });
                     }
                 }
 
@@ -233,8 +237,9 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Tables
                     foreach (Relationship relationShip in table.Relationships)
                     {
                         relationShip.Table = table;
-                        relationShip.RelatedTable = tables.FirstOrDefault(t => t.TableName == relationShip.ReferencedTableName);
-                        
+                        relationShip.RelatedTable =
+                            tables.FirstOrDefault(t => t.TableName == relationShip.ReferencedTableName);
+
                         relationshipNode.Children.Add(
                             new Hierarchy { Name = relationShip.RelationshipName, Item = relationShip });
                     }
@@ -257,7 +262,29 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Tables
             return result;
         }
 
-        public List<Hierarchy> ReturnSelectedHierarchyFromList(List<Table> sourceTables, List<Table> selectedTables, bool includeFields, bool includeRelationships)
+        /// <summary>
+        /// The return selected hierarchy from list.
+        /// </summary>
+        /// <param name="sourceTables">
+        /// The source tables.
+        /// </param>
+        /// <param name="selectedTables">
+        /// The selected tables.
+        /// </param>
+        /// <param name="includeFields">
+        /// The include fields.
+        /// </param>
+        /// <param name="includeRelationships">
+        /// The include relationships.
+        /// </param>
+        /// <returns>
+        /// The <see cref="List"/>.
+        /// </returns>
+        public List<Hierarchy> ReturnSelectedHierarchyFromList(
+            List<Table> sourceTables,
+            List<Table> selectedTables,
+            bool includeFields,
+            bool includeRelationships)
         {
             List<Hierarchy> result = new List<Hierarchy>();
             Hierarchy newTable = null;
@@ -269,7 +296,8 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Tables
             {
                 bool isChecked = false;
 
-                if (selectedTables != null && selectedTables.Any(o=> o.SchemaName == table.SchemaName && o.TableName == table.TableName))
+                if (selectedTables != null && selectedTables.Any(
+                        o => o.SchemaName == table.SchemaName && o.TableName == table.TableName))
                 {
                     isChecked = true;
                 }
@@ -323,6 +351,9 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Tables
         /// <param name="parentNode">
         /// The parent node.
         /// </param>
+        /// <param name="all">
+        /// The all.
+        /// </param>
         /// <returns>
         /// The <see cref="List"/>.
         /// </returns>
@@ -334,7 +365,7 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Tables
             {
                 foreach (TreeNode child in node.Nodes)
                 {
-                    if(all)
+                    if (all)
                     {
                         result.Add(child.Tag as Table);
                     }

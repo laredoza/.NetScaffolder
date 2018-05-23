@@ -22,11 +22,18 @@ namespace DotNetScaffolder.Components.CollectionOption
     [ExportMetadata("ValueMetaData", "0BC1B0C4-1E41-9146-82CF-599181CE4410")]
     public class CollectionAndHashSetCollectionOption : ICollectionOption
     {
+        #region Public Properties
+
         /// <summary>
         ///     The class name.
         /// </summary>
         public string ClassName => "HashSet";
 
+        /// <summary>
+        /// The class name interface.
+        /// </summary>
         public string ClassNameInterface => "ICollection";
+
+        #endregion
     }
 }

@@ -52,6 +52,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ComboBoxItem.cs" />
+    <Compile Include="Forms\Enum\HierarchyType.cs" />
+    <Compile Include="Forms\Enum\TreeViewType.cs" />
+    <Compile Include="Forms\Hierarchy.cs" />
+    <Compile Include="Forms\IHierarchy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Serializer\ObjectXMLSerializer.cs" />
     <Compile Include="Serializer\SerializedFormat.cs" />

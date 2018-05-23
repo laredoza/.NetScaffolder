@@ -106,9 +106,6 @@
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <None Include="Model\T4\CopyrightHeader.ttinclude" />
-    <None Include="Model\T4\EntityGenerator.ttInclude" />
-    <None Include="Model\T4\EntityTemplate.ttInclude" />
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -122,15 +119,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="Model\T4\BaseGenerator.ttinclude">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>BaseGenerator2.cs</LastGenOutput>
-      <LastOutputs>.\BaseGenerator1.cs</LastOutputs>
-    </None>
-    <None Include="Model\T4\BaseTemplate.ttinclude" />
-    <None Include="Model\T4\ContextGenerator.ttInclude" />
-    <None Include="Model\T4\ContextTemplate.ttInclude" />
-    <None Include="Model\T4\ProjectGenerator.ttInclude" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -198,6 +186,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\Package\" />
+    <Folder Include="Model\T4\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

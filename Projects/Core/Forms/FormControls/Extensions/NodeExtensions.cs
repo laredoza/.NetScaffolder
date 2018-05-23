@@ -10,7 +10,7 @@ namespace DotNetScaffolder.Core.Extensions
 
     using System.Windows.Forms;
 
-    using Common.Logging;
+    using global::Common.Logging;
 
     #endregion
 
@@ -28,7 +28,7 @@ namespace DotNetScaffolder.Core.Extensions
 
         #endregion
 
-        #region Public methods and operators
+        #region Public Methods And Operators
 
         /// <summary>
         /// Moves node down.

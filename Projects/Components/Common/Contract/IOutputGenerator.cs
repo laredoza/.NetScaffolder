@@ -7,7 +7,7 @@
 namespace DotNetScaffolder.Components.Common.Contract
 {
     /// <summary>
-    /// The OutputGenerator interface.
+    ///     The OutputGenerator interface.
     /// </summary>
     public interface IOutputGenerator
     {

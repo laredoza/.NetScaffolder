@@ -4,14 +4,18 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-using DotNetScaffolder.Core.Common.Validation;
-
 namespace DotNetScaffolder.Components.Common.Contract.UI
 {
+    #region Usings
+
+    using DotNetScaffolder.Core.Common.Validation;
+
+    #endregion
+
     /// <summary>
     ///     The DataSourceUI interface.
     /// </summary>
-    public interface IDataSourceUI: IValidate
+    public interface IDataSourceUI : IValidate
     {
         #region Public Properties
 
@@ -21,7 +25,7 @@ namespace DotNetScaffolder.Components.Common.Contract.UI
         object Parameters { get; set; }
 
         /// <summary>
-        /// Gets or sets the source type.
+        ///     Gets or sets the source type.
         /// </summary>
         ISourceType SourceType { get; set; }
 

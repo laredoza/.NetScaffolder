@@ -32,7 +32,7 @@ namespace FormControls.TreeView
 
         #endregion
 
-        #region Properties
+        #region Public Properties
 
         /// <summary>
         ///     Gets or sets a value indicating whether add group enabled.
@@ -51,15 +51,15 @@ namespace FormControls.TreeView
         {
             get
             {
-                return data;
+                return this.data;
             }
 
             set
             {
-                if (data != value)
+                if (this.data != value)
                 {
-                    data = value;
-                    UpdateNodes();
+                    this.data = value;
+                    this.UpdateNodes();
                 }
             }
         }
@@ -84,7 +84,7 @@ namespace FormControls.TreeView
 
         #endregion
 
-        #region Public methods and operators
+        #region Public Methods And Operators
 
         /// <summary>
         /// Move down.
@@ -144,7 +144,7 @@ namespace FormControls.TreeView
                     return node;
                 }
 
-                TreeNode next = Search(itemId, node);
+                TreeNode next = this.Search(itemId, node);
 
                 if (next != null)
                 {
@@ -165,19 +165,19 @@ namespace FormControls.TreeView
         {
             if (selectedNode.Level == 0)
             {
-                UpEnabled = false;
-                DownEnabled = false;
-                DeleteEnabled = false;
-                AddGroupEnabled = false;
-                AddItemEnabled = false;
+                this.UpEnabled = false;
+                this.DownEnabled = false;
+                this.DeleteEnabled = false;
+                this.AddGroupEnabled = false;
+                this.AddItemEnabled = false;
             }
             else if (selectedNode.Level == 1)
             {
-                UpEnabled = false;
-                DownEnabled = false;
-                DeleteEnabled = false;
-                AddGroupEnabled = true;
-                AddItemEnabled = true;
+                this.UpEnabled = false;
+                this.DownEnabled = false;
+                this.DeleteEnabled = false;
+                this.AddGroupEnabled = true;
+                this.AddItemEnabled = true;
             }
             else
             {
@@ -185,23 +185,23 @@ namespace FormControls.TreeView
                 {
                     if (selectedNode.Parent.Nodes.Count == 1)
                     {
-                        UpEnabled = false;
-                        DownEnabled = false;
+                        this.UpEnabled = false;
+                        this.DownEnabled = false;
                     }
                     else if (selectedNode.Index == 0)
                     {
-                        UpEnabled = false;
-                        DownEnabled = true;
+                        this.UpEnabled = false;
+                        this.DownEnabled = true;
                     }
                     else if (selectedNode.Index == selectedNode.Parent.Nodes.Count - 1)
                     {
-                        UpEnabled = true;
-                        DownEnabled = false;
+                        this.UpEnabled = true;
+                        this.DownEnabled = false;
                     }
 
-                    DeleteEnabled = true;
-                    AddGroupEnabled = false;
-                    AddItemEnabled = true;
+                    this.DeleteEnabled = true;
+                    this.AddGroupEnabled = false;
+                    this.AddItemEnabled = true;
                 }
             }
         }
@@ -221,11 +221,11 @@ namespace FormControls.TreeView
         /// </returns>
         private TreeNode AddNode(Hierarchy hierarchyItem)
         {
-            TreeNode node = new TreeNode(hierarchyItem.Name) { Tag = hierarchyItem, Name = Data.Id.ToString() };
+            TreeNode node = new TreeNode(hierarchyItem.Name) { Tag = hierarchyItem, Name = this.Data.Id.ToString() };
 
             foreach (var child in hierarchyItem.Children)
             {
-                node.Nodes.Add(AddNode(child));
+                node.Nodes.Add(this.AddNode(child));
             }
 
             return node;
@@ -236,8 +236,8 @@ namespace FormControls.TreeView
         /// </summary>
         private void UpdateNodes()
         {
-            Nodes.Clear();
-            Nodes.Add(AddNode(Data));
+            this.Nodes.Clear();
+            this.Nodes.Add(this.AddNode(this.Data));
         }
 
         #endregion

@@ -25,29 +25,34 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6
     [ExportMetadata("ValueMetaData", "2BC1B0C4-1E41-9146-82CF-599181CE4411")]
     public class EFOracleDriver : IDriver
     {
-        /// <summary>
-        /// Gets the name spaces used to generate templates.
-        /// </summary>
-        public List<string> NameSpaces => new List<string> { "System.Data.Entity", "Oracle.ManagedDataAccess.Client", "Oracle.Config" };
+        #region Public Properties
 
         /// <summary>
-        /// The prefix.
-        /// </summary>
-        public string Prefix => "Oracle";
-
-        /// <summary>
-        /// Gets the context attribute.
+        ///     Gets the context attribute.
         /// </summary>
         public string ContextAttribute => "[DbConfigurationType(typeof(OracleDbConfiguration))]";
 
         /// <summary>
-        /// The parent folder.
+        ///     Force schema to uppercase.
+        /// </summary>
+        public bool ForceSchemaToUppercase => true;
+
+        /// <summary>
+        ///     Gets the name spaces used to generate templates.
+        /// </summary>
+        public List<string> NameSpaces =>
+            new List<string> { "System.Data.Entity", "Oracle.ManagedDataAccess.Client", "Oracle.Config" };
+
+        /// <summary>
+        ///     The parent folder.
         /// </summary>
         public string ParentFolder => "EF";
 
         /// <summary>
-        /// Force schema to uppercase.
+        ///     The prefix.
         /// </summary>
-        public bool ForceSchemaToUppercase => true;
+        public string Prefix => "Oracle";
+
+        #endregion
     }
 }
