@@ -28,22 +28,15 @@ using System.Threading.Tasks;
 namespace RepositoryEFDotnet.UnitTest
 {
 	[TestClass]
-	public abstract partial class BaseUnitOfWorkUnitTests<TUow> : BaseUnitTest where TUow : DbContext, IUnitOfWork
+	public abstract partial class BaseUnitOfWorkUnitTests<TUow> : BaseUnitTest where TUow : IUnitOfWork
 	{
         #region Fields
 
-        protected static TUow Uow = null;
+        protected static TUow Uow;
 
         #endregion
 
 		#region Tests
-
-        [TestMethod]
-        public virtual void BaseUnitOfWorkUnitTests_CreateDbTest()
-        {
-            Database.SetInitializer(new DropCreateDatabaseAlways<TUow>());
-            Uow.Database.Initialize(true);
-        }
 		
 <#+ foreach(var mdl in Models.Where(o => o.TableName.Equals("BankAccount"))){ 
 		var pk = mdl.Columns.First(o => o.IsPrimaryKey);
@@ -56,7 +49,7 @@ namespace RepositoryEFDotnet.UnitTest
             Populate<#= mdl.TableName #>(entity, false, 1);
 
             Uow.Add(entity);
-            Uow.SaveChanges();
+            Uow.Commit();
 
             var entities = Uow.GetAll<<#= mdl.TableName #>>();
             Check_EntityCount(1, entities.Count(), "Incorrect number of <#= mdl.TableName #> found");
@@ -70,7 +63,7 @@ namespace RepositoryEFDotnet.UnitTest
             Populate<#= mdl.TableName #>(entity, false, 1);
 
             await Uow.AddAsync(entity);
-            await Uow.SaveChangesAsync();
+            await Uow.CommitAsync();
 
             var entities = await Uow.GetAllAsync<<#= mdl.TableName #>>();
             Check_EntityCount(1, entities.Count(), "Incorrect number of <#= mdl.TableName #> found");
@@ -86,7 +79,7 @@ namespace RepositoryEFDotnet.UnitTest
             Populate<#= mdl.TableName #>(entityToUpdate, true);
 
             Uow.Modify(entityToUpdate);
-            Uow.SaveChanges();
+            Uow.Commit();
 
             var entities = Uow.AllMatching<<#= mdl.TableName #>>(o => o.<#= pk.ColumnName #> == id);
             Check_EntityCount(1, entities.Count(), "Incorrect number of <#= mdl.TableName #> found");
@@ -100,7 +93,7 @@ namespace RepositoryEFDotnet.UnitTest
             Populate<#= mdl.TableName #>(entity, true);
 
             await Uow.ModifyAsync(entity);
-            await Uow.SaveChangesAsync();
+            await Uow.CommitAsync();
 
             var entities = await Uow.GetAllAsync<<#= mdl.TableName #>>();
             Check_EntityCount(1, entities.Count(), "Incorrect number of <#= mdl.TableName #> found");
@@ -117,7 +110,7 @@ namespace RepositoryEFDotnet.UnitTest
 			Assert.IsNotNull(entity, "<#= mdl.TableName #> not found to remove");
 			
             Uow.Remove(entity);
-            Uow.SaveChanges();
+            Uow.Commit();
 
             var entities = Uow.GetAll<<#= mdl.TableName #>>();
             Check_EntityCount(0, entities.Count(), "Incorrect number of <#= mdl.TableName #> found");
@@ -133,7 +126,7 @@ namespace RepositoryEFDotnet.UnitTest
 			Assert.IsNotNull(entity, "<#= mdl.TableName #> not found to remove");
 			
             await Uow.RemoveAsync(entity);
-            await Uow.SaveChangesAsync();
+            await Uow.CommitAsync();
 
             var entities = await Uow.GetAllAsync<<#= mdl.TableName #>>();
             Check_EntityCount(0, entities.Count(), "Incorrect number of <#= mdl.TableName #> found");
@@ -147,7 +140,7 @@ namespace RepositoryEFDotnet.UnitTest
             var entitiesToRemove = Uow.GetAll<<#= mdl.TableName #>>();
 			
             Uow.RemoveRange(entitiesToRemove);
-            Uow.SaveChanges();
+            Uow.Commit();
 
             var removedEntities = Uow.GetAll<<#= mdl.TableName #>>();
             Check_EntityCount(0, removedEntities.Count(), "Incorrect number of <#= mdl.TableName #> found");
@@ -161,7 +154,7 @@ namespace RepositoryEFDotnet.UnitTest
             var entitiesToRemove = await Uow.GetAllAsync<<#= mdl.TableName #>>();
 			
             await Uow.RemoveRangeAsync(entitiesToRemove);
-            await Uow.SaveChangesAsync();
+            await Uow.CommitAsync();
 
             var removedEntities = await Uow.GetAllAsync<<#= mdl.TableName #>>();
             Check_EntityCount(0, removedEntities.Count(), "Incorrect number of <#= mdl.TableName #> found");
@@ -175,7 +168,7 @@ namespace RepositoryEFDotnet.UnitTest
 
             Uow.Add(entity);
             Uow.Rollback();
-			Uow.SaveChanges(); // Do a commit here to make sure rollback did what it was suppose to
+			Uow.Commit(); // Do a commit here to make sure rollback did what it was suppose to
 
             var entities = Uow.GetAll<<#= mdl.TableName #>>();
             Check_EntityCount(0, entities.Count(), "Incorrect number of <#= mdl.TableName #> found");
@@ -189,7 +182,7 @@ namespace RepositoryEFDotnet.UnitTest
 
             await Uow.AddAsync(entity);
             await Uow.RollbackAsync();
-			await Uow.SaveChangesAsync(); // Do a commit here to make sure rollback did what it was suppose to
+			await Uow.CommitAsync(); // Do a commit here to make sure rollback did what it was suppose to
 
             var entities = await Uow.GetAllAsync<<#= mdl.TableName #>>();
             Check_EntityCount(0, entities.Count(), "Incorrect number of <#= mdl.TableName #> found");

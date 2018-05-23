@@ -38,6 +38,7 @@ namespace RepositoryEFDotnet.UnitTest
         #endregion
 
 		#region Tests
+		
 
         [TestMethod]
         public virtual void BaseUnitOfWorkUnitTests_BankAccount_Add()
@@ -100,6 +101,8 @@ namespace RepositoryEFDotnet.UnitTest
         [TestMethod]
         public virtual void BaseUnitOfWorkUnitTests_BankAccount_Remove()
         {
+			BaseUnitOfWorkUnitTests_BankAccount_Add();
+			
             var entity = Uow.FirstOrDefault<BankAccount>();
 			
 			Assert.IsNotNull(entity, "BankAccount not found to remove");
@@ -110,10 +113,12 @@ namespace RepositoryEFDotnet.UnitTest
             var entities = Uow.GetAll<BankAccount>();
             Check_EntityCount(0, entities.Count(), "Incorrect number of BankAccount found");
         }
-
+		
         [TestMethod]
         public virtual async Task BaseUnitOfWorkUnitTests_BankAccount_RemoveAsync()
-        {			
+        {
+			await BaseUnitOfWorkUnitTests_BankAccount_AddAsync();
+			
             var entity = Uow.FirstOrDefault<BankAccount>();
 			
 			Assert.IsNotNull(entity, "BankAccount not found to remove");
@@ -127,7 +132,9 @@ namespace RepositoryEFDotnet.UnitTest
 		
         [TestMethod]
         public virtual void BaseUnitOfWorkUnitTests_BankAccount_RemoveRange()
-        {		
+        {
+			BaseUnitOfWorkUnitTests_BankAccount_AddRange();
+			
             var entitiesToRemove = Uow.GetAll<BankAccount>();
 			
             Uow.RemoveRange(entitiesToRemove);
@@ -139,7 +146,9 @@ namespace RepositoryEFDotnet.UnitTest
 		
         [TestMethod]
         public virtual async Task BaseUnitOfWorkUnitTests_BankAccount_RemoveRangeAsync()
-        {		
+        {
+			await BaseUnitOfWorkUnitTests_BankAccount_AddRangeAsync();
+			
             var entitiesToRemove = await Uow.GetAllAsync<BankAccount>();
 			
             await Uow.RemoveRangeAsync(entitiesToRemove);
@@ -153,13 +162,13 @@ namespace RepositoryEFDotnet.UnitTest
         public virtual void BaseUnitOfWorkUnitTests_BankAccount_Rollback()
         {		
             var entity = new BankAccount();
-            PopulateBankAccount(entity, false, 1000);
+            PopulateBankAccount(entity);
 
-            Uow.StartTransaction();
             Uow.Add(entity);
             Uow.Rollback();
+			Uow.Commit(); // Do a commit here to make sure rollback did what it was suppose to
 
-            var entities = Uow.AllMatching<BankAccount>(o=> o.Balance == 1100);
+            var entities = Uow.GetAll<BankAccount>();
             Check_EntityCount(0, entities.Count(), "Incorrect number of BankAccount found");
         }
 		
@@ -167,19 +176,21 @@ namespace RepositoryEFDotnet.UnitTest
         public virtual async Task BaseUnitOfWorkUnitTests_BankAccount_RollbackAsync()
         {		
             var entity = new BankAccount();
-            PopulateBankAccount(entity, false, 1000);
+            PopulateBankAccount(entity);
 
-            Uow.StartTransaction();
             await Uow.AddAsync(entity);
             await Uow.RollbackAsync();
+			await Uow.CommitAsync(); // Do a commit here to make sure rollback did what it was suppose to
 
-            var entities = await Uow.AllMatchingAsync<BankAccount>(o => o.Balance == 1100);
+            var entities = await Uow.GetAllAsync<BankAccount>();
             Check_EntityCount(0, entities.Count(), "Incorrect number of BankAccount found");
         }
 		
         [TestMethod]
         public virtual void BaseUnitOfWorkUnitTests_BankAccount_Any()
         {
+			BaseUnitOfWorkUnitTests_BankAccount_Add();
+
             bool hasAny = Uow.Any<BankAccount>();
             Assert.IsTrue(hasAny, "Could not find any BankAccount");
         }
@@ -187,6 +198,8 @@ namespace RepositoryEFDotnet.UnitTest
         [TestMethod]
         public virtual async Task BaseUnitOfWorkUnitTests_BankAccount_AnyAsync()
         {
+			await BaseUnitOfWorkUnitTests_BankAccount_AddAsync();
+
             bool hasAny = await Uow.AnyAsync<BankAccount>();
             Assert.IsTrue(hasAny, "Could not find any BankAccount");
         }
@@ -201,6 +214,8 @@ namespace RepositoryEFDotnet.UnitTest
         [TestMethod]
         public virtual void BaseUnitOfWorkUnitTests_BankAccount_FirstOrDefault()
         {
+			BaseUnitOfWorkUnitTests_BankAccount_Add();
+
             var entity = Uow.FirstOrDefault<BankAccount>();
             Assert.IsNotNull(entity, "Could not find BankAccount");
         }
@@ -208,6 +223,8 @@ namespace RepositoryEFDotnet.UnitTest
         [TestMethod]
         public virtual async Task BaseUnitOfWorkUnitTests_BankAccount_FirstOrDefaultAsync()
         {
+			await BaseUnitOfWorkUnitTests_BankAccount_AddAsync();
+
             var entity = await Uow.FirstOrDefaultAsync<BankAccount>();
             Assert.IsNotNull(entity, "Could not find BankAccount");
         }
@@ -230,6 +247,8 @@ namespace RepositoryEFDotnet.UnitTest
         [TestMethod]
         public virtual void BaseUnitOfWorkUnitTests_BankAccount_GetAll()
         {
+			BaseUnitOfWorkUnitTests_BankAccount_AddRange();
+
             var entities = Uow.GetAll<BankAccount>();
             Check_EntityCount(3, entities.Count(), "Incorrect number of BankAccount found");
         }
@@ -260,6 +279,8 @@ namespace RepositoryEFDotnet.UnitTest
         [TestMethod]
         public virtual async Task BaseUnitOfWorkUnitTests_BankAccount_GetAllAsync()
         {
+			await BaseUnitOfWorkUnitTests_BankAccount_AddRangeAsync();
+
             var entities = await Uow.GetAllAsync<BankAccount>();
             Check_EntityCount(3, entities.Count(), "Incorrect number of BankAccount found");
         }

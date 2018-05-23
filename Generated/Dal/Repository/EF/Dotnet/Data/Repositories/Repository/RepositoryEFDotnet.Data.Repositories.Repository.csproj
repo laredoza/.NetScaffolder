@@ -73,9 +73,9 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>RunGenerator.cs</LastGenOutput>
       <LastOutputs>
-..\..\..\RepositoryEFDotnet\UnitTest\Base\BaseRepositoryUnitTest.g.cs
-..\..\..\RepositoryEFDotnet\UnitTest\Base\BaseUnitOfWorkUnitTest.g.cs
-..\..\..\RepositoryEFDotnet\UnitTest\Base\BaseUnitTest.g.cs
+..\..\..\RepositoryEFDotnet\DotNetScaffolder.Repository.UnitTests\Base\BaseRepositoryUnitTest.g.cs
+..\..\..\RepositoryEFDotnet\DotNetScaffolder.Repository.UnitTests\Base\BaseUnitOfWorkUnitTest.g.cs
+..\..\..\RepositoryEFDotnet\DotNetScaffolder.Repository.UnitTests\Base\BaseUnitTest.g.cs
 ..\..\Contexts\EF\MySql\Context\MySqlAccountContext.g.cs
 ..\..\Contexts\EF\MySql\Context\MySqlCustomerContext.g.cs
 ..\..\Contexts\EF\MySql\Context\MySqlFullContext.g.cs
