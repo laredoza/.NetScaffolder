@@ -1,19 +1,15 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="EFSqlServerDriver.cs" company="DotnetScaffolder">
+// <copyright file="EFCoreSqlServerDriver.cs" company="DotnetScaffolder">
 //   MIT
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EFCore
 {
-    #region Usings
-
     using System.Collections.Generic;
     using System.ComponentModel.Composition;
 
     using DotNetScaffolder.Components.Common.Contract;
-
-    #endregion
 
     // <summary>
     /// Defines the default EF Core Sql Server driver.

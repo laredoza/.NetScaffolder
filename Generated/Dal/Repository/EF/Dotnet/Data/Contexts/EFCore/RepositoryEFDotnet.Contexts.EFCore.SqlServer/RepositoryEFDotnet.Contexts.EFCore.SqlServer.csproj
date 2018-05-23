@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.0.3" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.4.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Entities\Entity\RepositoryEFDotnet.Data.Entities.Entity.csproj" />
+    <ProjectReference Include="..\RepositoryEFDotnet.Contexts.EFCore.Base\RepositoryEFDotnet.Contexts.EFCore.Base.csproj" />
+  </ItemGroup>
+
+</Project>

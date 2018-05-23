@@ -147,6 +147,8 @@
     <None Include="Model\T4\BaseTemplate.ttinclude" />
     <None Include="Model\T4\BaseRepositoryUnitTestTemplate.ttInclude" />
     <None Include="Model\T4\BaseUowUnitTestTemplate.ttInclude" />
+    <None Include="Model\T4\ContextCoreGenerator.ttInclude" />
+    <None Include="Model\T4\ContextCoreTemplate.ttInclude" />
     <None Include="Model\T4\ContextGenerator.ttInclude" />
     <None Include="Model\T4\ContextTemplate.ttInclude" />
     <None Include="Model\T4\CopyrightHeader.ttinclude" />

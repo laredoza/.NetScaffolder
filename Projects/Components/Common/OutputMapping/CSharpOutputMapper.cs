@@ -15,26 +15,26 @@ namespace DotNetScaffolder.Components.Common
     #endregion
 
     /// <summary>
-    /// The c sharp output mapper.
+    ///     The c sharp output mapper.
     /// </summary>
     public static class CSharpOutputMapper
     {
         #region Public Methods And Operators
 
-        /// <summary>
-        /// The map to output.
-        /// </summary>
-        /// <param name="col">
-        /// The col.
-        /// </param>
-        /// <returns>
-        /// The <see cref="string"/>.
-        /// </returns>
-        /// <exception cref="NotImplementedException">
-        /// </exception>
-        public static string MapToOutput(Column col)
+        public static string MapToConstraint(Column col)
         {
-            string nullableFormat = "Nullable<{0}>";
+            var output = MapToOutput(col, false);
+
+            if (col.Precision > 0 || col.Length > 0) output = $"{output}({col.Precision}, {col.Length})";
+
+            return output;
+        }
+
+        public static string MapToOutput(Column col, bool nullable = true)
+        {
+            var nullableFormat = "Nullable<{0}>";
+
+            if (!nullable) nullableFormat = "{0}";
 
             switch (col.DomainDataType)
             {

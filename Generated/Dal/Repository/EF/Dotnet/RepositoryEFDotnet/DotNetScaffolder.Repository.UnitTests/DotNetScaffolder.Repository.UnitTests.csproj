@@ -1,0 +1,243 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\..\packages\MSTest.TestAdapter.1.2.1\build\net45\MSTest.TestAdapter.props" Condition="Exists('..\..\packages\MSTest.TestAdapter.1.2.1\build\net45\MSTest.TestAdapter.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{ADBCABF9-1D8B-428C-8178-F2DF82AAFC35}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DotNetScaffolder.Repository.UnitTests</RootNamespace>
+    <AssemblyName>DotNetScaffolder.Repository.UnitTests</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">15.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+    <ReferencePath>$(ProgramFiles)\Common Files\microsoft shared\VSTT\$(VisualStudioVersion)\UITestExtensionPackages</ReferencePath>
+    <IsCodedUITest>False</IsCodedUITest>
+    <TestProjectType>UnitTest</TestProjectType>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Effort, Version=1.0.0.0, Culture=neutral, PublicKeyToken=6a46696d54971e6d, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Effort.EF6.1.3.3\lib\net45\Effort.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Protobuf, Version=3.5.1.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Google.Protobuf.3.5.1\lib\net45\Google.Protobuf.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.EntityFrameworkCore, Version=2.0.3.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.EntityFrameworkCore.2.0.3\lib\netstandard2.0\Microsoft.EntityFrameworkCore.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.EntityFrameworkCore.InMemory, Version=2.0.3.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.EntityFrameworkCore.InMemory.2.0.3\lib\netstandard2.0\Microsoft.EntityFrameworkCore.InMemory.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.EntityFrameworkCore.Relational, Version=2.0.3.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.EntityFrameworkCore.Relational.2.0.3\lib\netstandard2.0\Microsoft.EntityFrameworkCore.Relational.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.EntityFrameworkCore.SqlServer, Version=2.0.3.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.EntityFrameworkCore.SqlServer.2.0.3\lib\netstandard2.0\Microsoft.EntityFrameworkCore.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Caching.Abstractions, Version=2.0.2.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.Extensions.Caching.Abstractions.2.0.2\lib\netstandard2.0\Microsoft.Extensions.Caching.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Caching.Memory, Version=2.0.2.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.Extensions.Caching.Memory.2.0.2\lib\netstandard2.0\Microsoft.Extensions.Caching.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Configuration.Abstractions, Version=2.0.2.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.Extensions.Configuration.Abstractions.2.0.2\lib\netstandard2.0\Microsoft.Extensions.Configuration.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection, Version=2.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.Extensions.DependencyInjection.2.0.0\lib\netstandard2.0\Microsoft.Extensions.DependencyInjection.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=2.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.2.0.0\lib\netstandard2.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging, Version=2.0.2.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.Extensions.Logging.2.0.2\lib\netstandard2.0\Microsoft.Extensions.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=2.0.2.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.Extensions.Logging.Abstractions.2.0.2\lib\netstandard2.0\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Options, Version=2.0.2.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.Extensions.Options.2.0.2\lib\netstandard2.0\Microsoft.Extensions.Options.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Primitives, Version=2.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.Extensions.Primitives.2.0.0\lib\netstandard2.0\Microsoft.Extensions.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.TestPlatform.TestFramework, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\MSTest.TestFramework.1.2.1\lib\net45\Microsoft.VisualStudio.TestPlatform.TestFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\MSTest.TestFramework.1.2.1\lib\net45\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data, Version=8.0.11.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\MySql.Data.8.0.11\lib\net452\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data.EntityFramework, Version=8.0.11.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\MySql.Data.EntityFramework.8.0.11\lib\net452\MySql.Data.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="NMemory, Version=1.0.0.0, Culture=neutral, PublicKeyToken=6a46696d54971e6d, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\NMemory.1.1.0\lib\net45\NMemory.dll</HintPath>
+    </Reference>
+    <Reference Include="Oracle.ManagedDataAccess, Version=4.122.1.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Oracle.ManagedDataAccess.12.2.1100\lib\net40\Oracle.ManagedDataAccess.dll</HintPath>
+    </Reference>
+    <Reference Include="Oracle.ManagedDataAccess.EntityFramework, Version=6.122.1.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Oracle.ManagedDataAccess.EntityFramework.12.2.1100\lib\net45\Oracle.ManagedDataAccess.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Remotion.Linq, Version=2.1.0.0, Culture=neutral, PublicKeyToken=fee00910d6e5f53b, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Remotion.Linq.2.1.1\lib\net45\Remotion.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Collections.Immutable, Version=1.2.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Collections.Immutable.1.4.0\lib\netstandard2.0\System.Collections.Immutable.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="System.ComponentModel.Annotations, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.ComponentModel.Annotations.4.4.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.ConfigurationManager, Version=4.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Configuration.ConfigurationManager.4.4.1\lib\net461\System.Configuration.ConfigurationManager.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Configuration.Install" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data.SqlClient, Version=4.2.0.2, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Data.SqlClient.4.4.3\lib\net461\System.Data.SqlClient.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.2.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Diagnostics.DiagnosticSource.4.4.1\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Drawing.Design" />
+    <Reference Include="System.Interactive.Async, Version=3.0.3000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Interactive.Async.3.1.1\lib\net46\System.Interactive.Async.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Management" />
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Runtime.CompilerServices.Unsafe.4.4.0\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Base\BaseRepositoryUnitTest.cs" />
+    <Compile Include="Base\BaseRepositoryUnitTest.g.cs" />
+    <Compile Include="Base\BaseUnitOfWorkUnitTest.cs" />
+    <Compile Include="Base\BaseUnitOfWorkUnitTest.g.cs" />
+    <Compile Include="Base\BaseUnitTest.cs" />
+    <Compile Include="Base\BaseUnitTest.g.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tests\Repository\Database\EFCore\RepositoryDbEFCoreSqlServerUnitTests.cs" />
+    <Compile Include="Tests\Repository\Database\EF\RepositoryDbEF6MySqlUnitTests.cs" />
+    <Compile Include="Tests\Repository\Database\EF\RepositoryDbEF6OracleUnitTests.cs" />
+    <Compile Include="Tests\Repository\Database\EF\RepositoryDbEF6SqlServerUnitTests.cs" />
+    <Compile Include="Tests\Repository\In-Memory\EFCore\RepositoryEFCoreInMemorySqlServerUnitTests.cs" />
+    <Compile Include="Tests\Repository\In-Memory\EF\RepositoryEF6InMemoryMySqlUnitTests.cs" />
+    <Compile Include="Tests\Repository\In-Memory\EF\RepositoryEF6InMemoryOracleUnitTests.cs" />
+    <Compile Include="Tests\Repository\In-Memory\EF\RepositoryEF6InMemorySqlServerUnitTests.cs" />
+    <Compile Include="Tests\UnitOfWork\Database\EFCore\UowEFCoreDbSqlServerUnitTests.cs" />
+    <Compile Include="Tests\UnitOfWork\Database\EF\UowEF6DbMySqlUnitTests.cs" />
+    <Compile Include="Tests\UnitOfWork\Database\EF\UowEF6DbOracleUnitTests.cs" />
+    <Compile Include="Tests\UnitOfWork\Database\EF\UowEF6DbSqlServerUnitTests.cs" />
+    <Compile Include="Tests\UnitOfWork\In-Memory\EFCore\UowEFCoreInMemorySqlServerUnitTests.cs" />
+    <Compile Include="Tests\UnitOfWork\In-Memory\EF\UowEF6InMemoryMySqlUnitTests.cs" />
+    <Compile Include="Tests\UnitOfWork\In-Memory\EF\UowEF6InMemoryOracleUnitTests.cs" />
+    <Compile Include="Tests\UnitOfWork\In-Memory\EF\UowEF6InMemorySqlServerUnitTests.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Core\RepositoryEFDotnet.Core.csproj">
+      <Project>{0333e000-6aaf-4e18-8747-2299a8231ab1}</Project>
+      <Name>RepositoryEFDotnet.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Data\Contexts\EFCore\RepositoryEFDotnet.Contexts.EFCore.Base\RepositoryEFDotnet.Contexts.EFCore.Base.csproj">
+      <Project>{5a81040b-86f0-4218-ab1a-b0013d581530}</Project>
+      <Name>RepositoryEFDotnet.Contexts.EFCore.Base</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Data\Contexts\EFCore\RepositoryEFDotnet.Contexts.EFCore.SqlServer\RepositoryEFDotnet.Contexts.EFCore.SqlServer.csproj">
+      <Project>{5adf20d2-dbc7-495a-af8a-4408daa5d0e7}</Project>
+      <Name>RepositoryEFDotnet.Contexts.EFCore.SqlServer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Data\Contexts\EF\Base\RepositoryEFDotnet.Contexts.EF.Base.csproj">
+      <Project>{a8511725-544e-49bd-8451-4c8638adc5ba}</Project>
+      <Name>RepositoryEFDotnet.Contexts.EF.Base</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Data\Contexts\EF\MySql\RepositoryEFDotnet.Contexts.EF.MySql.csproj">
+      <Project>{a7a2f791-518f-4a2f-b098-358cd4067b71}</Project>
+      <Name>RepositoryEFDotnet.Contexts.EF.MySql</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Data\Contexts\EF\Oracle\RepositoryEFDotnet.Contexts.EF.Oracle.csproj">
+      <Project>{7f55c86e-d2e1-49a7-9ef4-1aabfb94a4fe}</Project>
+      <Name>RepositoryEFDotnet.Contexts.EF.Oracle</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Data\Contexts\EF\SqlServer\RepositoryEFDotnet.Contexts.EF.SqlServer.csproj">
+      <Project>{23e0edff-bdfb-45e4-ac7b-31ddfa93ae1d}</Project>
+      <Name>RepositoryEFDotnet.Contexts.EF.SqlServer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Data\Dtos\Dto\RepositoryEFDotnet.Data.Dtos.Dto.csproj">
+      <Project>{61d46a6e-4e3a-4d37-9169-aed9b277d33b}</Project>
+      <Name>RepositoryEFDotnet.Data.Dtos.Dto</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Data\Entities\Entity\RepositoryEFDotnet.Data.Entities.Entity.csproj">
+      <Project>{017da2af-1ffd-4e68-9646-b0e5c73ea037}</Project>
+      <Name>RepositoryEFDotnet.Data.Entities.Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Data\Interfaces\Interface\RepositoryEFDotnet.Data.Interface.ModelInterfaces.csproj">
+      <Project>{f49f5825-6f92-4b8d-ae30-59d43235974b}</Project>
+      <Name>RepositoryEFDotnet.Data.Interface.ModelInterfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Data\Interfaces\RepositoryInterfaces\RepositoryEFDotnet.Data.Interface.RepositoryInterfaces.csproj">
+      <Project>{69bf017d-9632-4bca-859b-5d24a2c4b79a}</Project>
+      <Name>RepositoryEFDotnet.Data.Interface.RepositoryInterfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Data\Repositories\Repository\RepositoryEFDotnet.Data.Repositories.Repository.csproj">
+      <Project>{dab86ae4-f8e1-4d5e-baf2-855d24d7a437}</Project>
+      <Name>RepositoryEFDotnet.Data.Repositories.Repository</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\..\packages\MSTest.TestAdapter.1.2.1\build\net45\MSTest.TestAdapter.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\MSTest.TestAdapter.1.2.1\build\net45\MSTest.TestAdapter.props'))" />
+    <Error Condition="!Exists('..\..\packages\MSTest.TestAdapter.1.2.1\build\net45\MSTest.TestAdapter.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\MSTest.TestAdapter.1.2.1\build\net45\MSTest.TestAdapter.targets'))" />
+  </Target>
+  <Import Project="..\..\packages\MSTest.TestAdapter.1.2.1\build\net45\MSTest.TestAdapter.targets" Condition="Exists('..\..\packages\MSTest.TestAdapter.1.2.1\build\net45\MSTest.TestAdapter.targets')" />
+</Project>
