@@ -1,17 +1,40 @@
-﻿using DotNetScaffolder.Mapping.MetaData.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="CSharpOutputMapper.cs" company="DotnetScaffolder">
+//   MIT
+// </copyright>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace DotNetScaffolder.Components.Common
 {
+    #region Usings
+
+    using System;
+
+    using DotNetScaffolder.Mapping.MetaData.Model;
+
+    #endregion
+
+    /// <summary>
+    ///     The c sharp output mapper.
+    /// </summary>
     public static class CSharpOutputMapper
     {
-        public static string MapToOutput(Column col)
+        #region Public Methods And Operators
+
+        public static string MapToConstraint(Column col)
         {
-            string nullableFormat = "Nullable<{0}>";
+            var output = MapToOutput(col, false);
+
+            if (col.Precision > 0 || col.Length > 0) output = $"{output}({col.Precision}, {col.Length})";
+
+            return output;
+        }
+
+        public static string MapToOutput(Column col, bool nullable = true)
+        {
+            var nullableFormat = "Nullable<{0}>";
+
+            if (!nullable) nullableFormat = "{0}";
 
             switch (col.DomainDataType)
             {
@@ -45,5 +68,7 @@ namespace DotNetScaffolder.Components.Common
                     throw new NotImplementedException($"Invalid data type {col.DomainDataType}");
             }
         }
+
+        #endregion
     }
 }
