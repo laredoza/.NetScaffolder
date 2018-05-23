@@ -58,8 +58,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Differences\ApplicationTableCollectionDifference.cs" />
     <Compile Include="Differences\ApplicationTableDifference.cs" />
-    <Compile Include="Tables\ITableHierarchyService.cs" />
-    <Compile Include="Tables\TableHierarchyService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Components\Common\DotNetScaffolder.Components.Common.csproj">

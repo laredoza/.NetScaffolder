@@ -1,27 +1,27 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ICollectionOption.cs" company="DotnetScaffolder">
+// <copyright file="BaseMetaData.cs" company="DotnetScaffolder">
 //   MIT
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace DotNetScaffolder.Components.Common.Contract
+namespace DotNetScaffolder.Components.Common.ContractData
 {
     /// <summary>
-    ///     The CollectionOption interface.
+    /// The base meta data.
     /// </summary>
-    public interface ICollectionOption
+    public class BaseMetaData
     {
         #region Public Properties
 
         /// <summary>
-        ///     Gets the class name.
+        /// Gets or sets the name meta data.
         /// </summary>
-        string ClassName { get; }
+        public string NameMetaData { get; set; }
 
         /// <summary>
-        /// Gets the class name interface.
+        /// Gets or sets the value meta data.
         /// </summary>
-        string ClassNameInterface { get; }
+        public string ValueMetaData { get; set; }
 
         #endregion
     }

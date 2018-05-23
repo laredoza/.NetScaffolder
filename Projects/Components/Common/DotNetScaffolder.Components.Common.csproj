@@ -62,7 +62,9 @@
     <Compile Include="Contract\IOutputGenerator.cs" />
     <Compile Include="Contract\ISourceType.cs" />
     <Compile Include="Contract\UI\IDataSourceUI.cs" />
+    <Compile Include="DisplayType.cs" />
     <Compile Include="Formatting\RelationshipNameFormatting.cs" />
+    <Compile Include="MetaData\BaseMetaData.cs" />
     <Compile Include="OutputMapping\CSharpOutputMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

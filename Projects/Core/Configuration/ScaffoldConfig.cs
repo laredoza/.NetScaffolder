@@ -4,7 +4,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Configuration
+namespace DotNetScaffolder.Core.Configuration
 {
     #region Usings
 
@@ -15,6 +15,7 @@ namespace Configuration
 
     using DotNetScaffolder.Components.Common;
     using DotNetScaffolder.Components.Common.Contract;
+    using DotNetScaffolder.Components.DataTypes.DefaultDataTypes;
 
     #endregion
 
@@ -36,6 +37,7 @@ namespace Configuration
             SourceTypes = new Lazy<ISourceType, IDictionary<string, object>>[0];
             NamingConventions = new Lazy<INamingConvention, IDictionary<string, object>>[0];
             Drivers = new Lazy<IDriver, IDictionary<string, object>>[0];
+            DataTypeUIs = new Lazy<IDataTypeUI, IDictionary<string, object>>[0]; 
 
 #if DEBUG
             ModelPath = @"..\..\..\..\..\Generated\Dal\Repository\EF\Dotnet\Data\Repositories\Repository\Model\Banking.mdl";
@@ -50,7 +52,6 @@ namespace Configuration
         /// <summary>
         ///     Gets or sets the collection options.
         /// </summary>
-        [ImportMany]
         public static Lazy<ICollectionOption, IDictionary<string, object>>[] CollectionOptions { get; set; }
 
         /// <summary>
@@ -61,19 +62,17 @@ namespace Configuration
         /// <summary>
         ///     Gets or sets the DataTypes
         /// </summary>
-        [ImportMany]
         public static Lazy<IDataType, IDictionary<string, object>>[] DataTypes { get; set; }
 
         /// <summary>
         ///     Gets or sets the drivers.
         /// </summary>
-        [ImportMany]
+        ////[ImportMany]
         public static Lazy<IDriver, IDictionary<string, object>>[] Drivers { get; set; }
 
         /// <summary>
         ///     Gets or sets the language outputs.
         /// </summary>
-        [ImportMany]
         public static Lazy<ILanguageOutput, IDictionary<string, object>>[] LanguageOutputs { get; set; }
 
         /// <summary>
@@ -84,20 +83,23 @@ namespace Configuration
         /// <summary>
         ///     Gets or sets the naming conventions.
         /// </summary>
-        [ImportMany]
         public static Lazy<INamingConvention, IDictionary<string, object>>[] NamingConventions { get; set; }
 
         /// <summary>
         ///     Gets or sets the output generators.
         /// </summary>
-        [ImportMany]
         public static Lazy<IOutputGenerator, IDictionary<string, object>>[] OutputGenerators { get; set; }
 
         /// <summary>
         ///     Gets or sets the source types.
         /// </summary>
-        [ImportMany]
         public static Lazy<ISourceType, IDictionary<string, object>>[] SourceTypes { get; set; }
+
+        /// <summary>
+        /// Gets or sets the data type u is.
+        /// </summary>
+        public static Lazy<IDataTypeUI, IDictionary<string, object>>[] DataTypeUIs { get; set; }
+
 
         #endregion
 
@@ -121,6 +123,7 @@ namespace Configuration
             OutputGenerators = importer.OutputGenerators;
             DataTypes = importer.DataTypes;
             CollectionOptions = importer.CollectionOptions;
+            DataTypeUIs = importer.DataTypeUIs;
         }
 
         /// <summary>
@@ -204,6 +207,15 @@ namespace Configuration
 
             return Drivers.FirstOrDefault(
                 d => d.Metadata["ValueMetaData"].ToString().ToLower() == driverTypeId.ToString().ToLower()).Value;
+        }
+
+        public static IDataTypeUI ReturnDataTypeUI(Guid dataTypeId, DisplayType displayType)
+        {
+            if (DataTypeUIs == null || !DataTypeUIs.Any()) return null;
+
+            return DataTypeUIs.FirstOrDefault(
+               d => d.Metadata["DataType"].ToString().ToLower() == dataTypeId.ToString().ToLower()
+               && d.Metadata["DisplayType"].ToString().ToLower() == displayType.ToString().ToLower()).Value;
         }
 
         #endregion

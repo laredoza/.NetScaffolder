@@ -1,16 +1,50 @@
-﻿using DotNetScaffolder.Components.Common.Contract;
-using DotNetScaffolder.Mapping.MetaData.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="RelationshipNameFormatting.cs" company="DotnetScaffolder">
+//   MIT
+// </copyright>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace DotNetScaffolder.Components.Common
 {
+    #region Usings
+
+    using System.Collections.Generic;
+    using System.Linq;
+
+    using DotNetScaffolder.Components.Common.Contract;
+
+    #endregion
+
+    /// <summary>
+    /// The relationship name formatting.
+    /// </summary>
     public static class RelationshipNameFormatting
     {
-        public static string FormatName(string tableName, string alias, INamingConvention nc = null, IEnumerable<string> names = null)
+        #region Public Methods And Operators
+
+        /// <summary>
+        /// The format name.
+        /// </summary>
+        /// <param name="tableName">
+        /// The table name.
+        /// </param>
+        /// <param name="alias">
+        /// The alias.
+        /// </param>
+        /// <param name="nc">
+        /// The nc.
+        /// </param>
+        /// <param name="names">
+        /// The names.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        public static string FormatName(
+            string tableName,
+            string alias,
+            INamingConvention nc = null,
+            IEnumerable<string> names = null)
         {
             string formattedName = string.IsNullOrEmpty(alias) ? tableName : alias;
 
@@ -32,5 +66,7 @@ namespace DotNetScaffolder.Components.Common
 
             return nc != null ? nc.ApplyNamingConvention(formattedName) : formattedName;
         }
+
+        #endregion
     }
 }

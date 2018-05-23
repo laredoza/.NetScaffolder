@@ -14,8 +14,7 @@ namespace DotNetScaffolder.Core.Common.Serializer
     using System.Runtime.Serialization.Formatters.Binary;
     using System.Xml.Serialization;
 
-    using global::Common.Logging;
-
+    // using global::Common.Logging;
     #endregion
 
     /// <summary>
@@ -27,17 +26,330 @@ namespace DotNetScaffolder.Core.Common.Serializer
     public static class ObjectXMLSerializer<T>
         where T : class
     {
-        #region Static Fields
+        #region Other Methods
 
         /// <summary>
-        ///     The logger.
+        /// The create file stream.
         /// </summary>
-        private static readonly ILog Logger = LogManager.GetLogger(string.Empty);
+        /// <param name="isolatedStorageFolder">
+        /// The isolated storage folder.
+        /// </param>
+        /// <param name="path">
+        /// The path.
+        /// </param>
+        /// <returns>
+        /// The <see cref="FileStream"/>.
+        /// </returns>
+        private static FileStream CreateFileStream(IsolatedStorageFile isolatedStorageFolder, string path)
+        {
+            // Logger.Trace($"Started CreateFileStream() - path: {path}, isolatedStorageDirectory {isolatedStorageFolder}");
+            if (string.IsNullOrEmpty(path))
+            {
+                // Logger.Error("path may not be empty");
+                throw new ArgumentException("path may not be empty");
+            }
+
+            FileStream fileStream = null;
+
+            if (isolatedStorageFolder == null)
+            {
+                fileStream = new FileStream(path, FileMode.OpenOrCreate);
+            }
+            else
+            {
+                fileStream = new IsolatedStorageFileStream(path, FileMode.OpenOrCreate, isolatedStorageFolder);
+            }
+
+            // Logger.Trace(
+            // $"Completed CreateFileStream() - path: {path}, isolatedStorageDirectory {isolatedStorageFolder}");
+            return fileStream;
+        }
+
+        /// <summary>
+        /// The create text reader.
+        /// </summary>
+        /// <param name="isolatedStorageFolder">
+        /// The isolated storage folder.
+        /// </param>
+        /// <param name="path">
+        /// The path.
+        /// </param>
+        /// <returns>
+        /// The <see cref="TextReader"/>.
+        /// </returns>
+        private static TextReader CreateTextReader(IsolatedStorageFile isolatedStorageFolder, string path)
+        {
+            // Logger.Trace($"Started CreateTextReader() - path: {path}, isolatedStorageDirectory {isolatedStorageFolder}");
+            if (string.IsNullOrEmpty(path))
+            {
+                // Logger.Error("path may not be empty");
+                throw new ArgumentException("path may not be empty");
+            }
+
+            if (!File.Exists(path))
+            {
+                // Logger.Error("Path does not exist");
+                throw new ArgumentException("Path does not exist");
+            }
+
+            TextReader textReader = null;
+
+            if (isolatedStorageFolder == null)
+            {
+                textReader = new StreamReader(path);
+            }
+            else
+            {
+                textReader = new StreamReader(
+                    new IsolatedStorageFileStream(path, FileMode.Open, isolatedStorageFolder));
+            }
+
+            // Logger.Trace(
+            // $"Completed CreateTextReader() - path: {path}, isolatedStorageDirectory {isolatedStorageFolder}");
+            return textReader;
+        }
+
+        /// <summary>
+        /// The create text writer.
+        /// </summary>
+        /// <param name="isolatedStorageFolder">
+        /// The isolated storage folder.
+        /// </param>
+        /// <param name="path">
+        /// The path.
+        /// </param>
+        /// <returns>
+        /// The <see cref="TextWriter"/>.
+        /// </returns>
+        private static TextWriter CreateTextWriter(IsolatedStorageFile isolatedStorageFolder, string path)
+        {
+            // Logger.Trace($"Started CreateTextWriter() - path: {path}, isolatedStorageDirectory {isolatedStorageFolder}");
+            if (string.IsNullOrEmpty(path))
+            {
+                // Logger.Error("path may not be empty");
+                throw new ArgumentException("path may not be empty");
+            }
+
+            TextWriter textWriter = null;
+
+            if (isolatedStorageFolder == null)
+            {
+                textWriter = new StreamWriter(path);
+            }
+            else
+            {
+                textWriter = new StreamWriter(
+                    new IsolatedStorageFileStream(path, FileMode.OpenOrCreate, isolatedStorageFolder));
+            }
+
+            // Logger.Trace(
+            // $"Completed CreateTextWriter() - path: {path}, isolatedStorageDirectory {isolatedStorageFolder}");
+            return textWriter;
+        }
+
+        /// <summary>
+        /// The create xml serializer.
+        /// </summary>
+        /// <param name="extraTypes">
+        /// The extra types.
+        /// </param>
+        /// <returns>
+        /// The <see cref="XmlSerializer"/>.
+        /// </returns>
+        private static XmlSerializer CreateXmlSerializer(Type[] extraTypes)
+        {
+            // Logger.Trace($"Started CreateXmlSerializer() - extraTypes: {extraTypes}");
+            Type objectType = typeof(T);
+
+            XmlSerializer xmlSerializer = null;
+
+            if (extraTypes != null)
+            {
+                xmlSerializer = new XmlSerializer(objectType, extraTypes);
+            }
+            else
+            {
+                xmlSerializer = new XmlSerializer(objectType);
+            }
+
+            // Logger.Trace($"Completed CreateXmlSerializer() - extraTypes: {extraTypes}");
+            return xmlSerializer;
+        }
+
+        /// <summary>
+        /// The load from binary format.
+        /// </summary>
+        /// <param name="path">
+        /// The path.
+        /// </param>
+        /// <param name="isolatedStorageFolder">
+        /// The isolated storage folder.
+        /// </param>
+        /// <returns>
+        /// The <see cref="T"/>.
+        /// </returns>
+        private static T LoadFromBinaryFormat(string path, IsolatedStorageFile isolatedStorageFolder)
+        {
+            // Logger.Trace(
+            // $"Started LoadFromBinaryFormat() - path: {path}, isolatedStorageFolder: {isolatedStorageFolder}");
+            if (string.IsNullOrEmpty(path))
+            {
+                // Logger.Error("Path may not be empty");
+                throw new ArgumentException("Path may not be empty");
+            }
+
+            if (!File.Exists(path))
+            {
+                // Logger.Error("Path does not exist");
+                throw new ArgumentException("Path does not exist");
+            }
+
+            T serializableObject = null;
+
+            using (FileStream fileStream = CreateFileStream(isolatedStorageFolder, path))
+            {
+                BinaryFormatter binaryFormatter = new BinaryFormatter();
+                serializableObject = binaryFormatter.Deserialize(fileStream) as T;
+            }
+
+            // Logger.Trace(
+            // $"Completed LoadFromBinaryFormat() - path: {path}, isolatedStorageFolder: {isolatedStorageFolder}");
+            return serializableObject;
+        }
+
+        /// <summary>
+        /// The load from document format.
+        /// </summary>
+        /// <param name="extraTypes">
+        /// The extra types.
+        /// </param>
+        /// <param name="path">
+        /// The path.
+        /// </param>
+        /// <param name="isolatedStorageFolder">
+        /// The isolated storage folder.
+        /// </param>
+        /// <returns>
+        /// The <see cref="T"/>.
+        /// </returns>
+        private static T LoadFromDocumentFormat(
+            Type[] extraTypes,
+            string path,
+            IsolatedStorageFile isolatedStorageFolder)
+        {
+            // Logger.Trace(
+            // $"Started LoadFromDocumentFormat() - path: {path}, isolatedStorageFolder: {isolatedStorageFolder}, extraTypes: {extraTypes}");
+            if (string.IsNullOrEmpty(path))
+            {
+                // Logger.Error("Path may not be empty");
+                throw new ArgumentException("Path may not be empty");
+            }
+
+            if (!File.Exists(path))
+            {
+                // Logger.Error("Path does not exist");
+                throw new ArgumentException("Path does not exist");
+            }
+
+            T serializableObject = null;
+
+            using (TextReader textReader = CreateTextReader(isolatedStorageFolder, path))
+            {
+                XmlSerializer xmlSerializer = CreateXmlSerializer(extraTypes);
+                serializableObject = xmlSerializer.Deserialize(textReader) as T;
+            }
+
+            // Logger.Trace(
+            // $"Completed LoadFromDocumentFormat() - path: {path}, isolatedStorageFolder: {isolatedStorageFolder}, extraTypes: {extraTypes}");
+            return serializableObject;
+        }
+
+        /// <summary>
+        /// The save to binary format.
+        /// </summary>
+        /// <param name="serializableObject">
+        /// The serializable object.
+        /// </param>
+        /// <param name="path">
+        /// The path.
+        /// </param>
+        /// <param name="isolatedStorageFolder">
+        /// The isolated storage folder.
+        /// </param>
+        private static void SaveToBinaryFormat(
+            T serializableObject,
+            string path,
+            IsolatedStorageFile isolatedStorageFolder)
+        {
+            // Logger.Trace($"Started SaveToBinaryFormat() - path: {path}, isolatedStorageFolder: {isolatedStorageFolder}");
+            if (string.IsNullOrEmpty(path))
+            {
+                // Logger.Error("Path may not be empty");
+                throw new ArgumentException("Path may not be empty");
+            }
+
+            if (!File.Exists(path))
+            {
+                // Logger.Error("Path does not exist");
+                throw new ArgumentException("Path does not exist");
+            }
+
+            using (FileStream fileStream = CreateFileStream(isolatedStorageFolder, path))
+            {
+                BinaryFormatter binaryFormatter = new BinaryFormatter();
+                binaryFormatter.Serialize(fileStream, serializableObject);
+            }
+
+            // Logger.Trace(
+            // $"Completed SaveToBinaryFormat() - path: {path}, isolatedStorageFolder: {isolatedStorageFolder}");
+        }
+
+        /// <summary>
+        /// The save to document format.
+        /// </summary>
+        /// <param name="serializableObject">
+        /// The serializable object.
+        /// </param>
+        /// <param name="extraTypes">
+        /// The extra types.
+        /// </param>
+        /// <param name="path">
+        /// The path.
+        /// </param>
+        /// <param name="isolatedStorageFolder">
+        /// The isolated storage folder.
+        /// </param>
+        private static void SaveToDocumentFormat(
+            T serializableObject,
+            Type[] extraTypes,
+            string path,
+            IsolatedStorageFile isolatedStorageFolder)
+        {
+            // Logger.Trace(
+            // $"Started SaveToBinaryFormat() - path: {path}, isolatedStorageFolder: {isolatedStorageFolder}, extraTypes: {extraTypes}");
+            if (string.IsNullOrEmpty(path))
+            {
+                // Logger.Error("Path may not be empty");
+                throw new ArgumentException("Path may not be empty");
+            }
+
+            using (TextWriter textWriter = CreateTextWriter(isolatedStorageFolder, path))
+            {
+                XmlSerializer xmlSerializer = CreateXmlSerializer(extraTypes);
+                xmlSerializer.Serialize(textWriter, serializableObject);
+            }
+
+            // Logger.Trace(
+            // $"Completed SaveToBinaryFormat() - path: {path}, isolatedStorageFolder: {isolatedStorageFolder}, extraTypes: {extraTypes}");
+        }
 
         #endregion
 
-        #region Public methods and operators
+        #region Static Fields
 
+        /// <summary>
+        /// The logger.
+        /// </summary>
         /// <summary>
         /// Loads an object from an XML file in Document format.
         /// </summary>
@@ -54,15 +366,16 @@ namespace DotNetScaffolder.Core.Common.Serializer
         /// </returns>
         public static T Load(string path)
         {
-            Logger.Trace($"Started Load() - path: {path}");
+            // Logger.Trace($"Started Load() - path: {path}");
             if (string.IsNullOrEmpty(path))
             {
-                Logger.Error("Path may not be empty");
+                // Logger.Error("Path may not be empty");
                 throw new ArgumentException("Path may not be empty");
             }
 
             T serializableObject = LoadFromDocumentFormat(null, path, null);
-            Logger.Trace($"Completed Load() - path: {path}");
+
+            // Logger.Trace($"Completed Load() - path: {path}");
             return serializableObject;
         }
 
@@ -85,11 +398,10 @@ namespace DotNetScaffolder.Core.Common.Serializer
         /// </returns>
         public static T Load(string path, SerializedFormat serializedFormat)
         {
-            Logger.Trace($"Started Load() - path: {path}, serializedFormat: {serializedFormat}");
-
+            // Logger.Trace($"Started Load() - path: {path}, serializedFormat: {serializedFormat}");
             if (string.IsNullOrEmpty(path))
             {
-                Logger.Error("Path may not be empty");
+                // Logger.Error("Path may not be empty");
                 throw new ArgumentException("Path may not be empty");
             }
 
@@ -107,7 +419,7 @@ namespace DotNetScaffolder.Core.Common.Serializer
                     break;
             }
 
-            Logger.Trace($"Completed Load() - path: {path}, serializedFormat: {serializedFormat}");
+            // Logger.Trace($"Completed Load() - path: {path}, serializedFormat: {serializedFormat}");
             return serializableObject;
         }
 
@@ -131,17 +443,16 @@ namespace DotNetScaffolder.Core.Common.Serializer
         /// </returns>
         public static T Load(string path, Type[] extraTypes)
         {
-            Logger.Trace($"Started Load() - path: {path}, extraTypes: {extraTypes}");
-
+            // Logger.Trace($"Started Load() - path: {path}, extraTypes: {extraTypes}");
             if (string.IsNullOrEmpty(path))
             {
-                Logger.Error("Path may not be empty");
+                // Logger.Error("Path may not be empty");
                 throw new ArgumentException("Path may not be empty");
             }
 
             T serializableObject = LoadFromDocumentFormat(extraTypes, path, null);
 
-            Logger.Trace($"Completed Load() - path: {path}, extraTypes: {extraTypes}");
+            // Logger.Trace($"Completed Load() - path: {path}, extraTypes: {extraTypes}");
             return serializableObject;
         }
 
@@ -164,25 +475,24 @@ namespace DotNetScaffolder.Core.Common.Serializer
         /// </returns>
         public static T Load(string fileName, IsolatedStorageFile isolatedStorageDirectory)
         {
-            Logger.Trace(
-                $"Started Load() - fileName: {fileName}, isolatedStorageDirectory: {isolatedStorageDirectory}");
-
+            // Logger.Trace(
+            // $"Started Load() - fileName: {fileName}, isolatedStorageDirectory: {isolatedStorageDirectory}");
             if (string.IsNullOrEmpty(fileName))
             {
-                Logger.Error("fileName may not be empty");
+                // Logger.Error("fileName may not be empty");
                 throw new ArgumentException("fileName may not be empty");
             }
 
             if (isolatedStorageDirectory == null)
             {
-                Logger.Error("isolatedStorageDirectory may not be null");
+                // Logger.Error("isolatedStorageDirectory may not be null");
                 throw new ArgumentException("isolatedStorageDirectory may not be null");
             }
 
             T serializableObject = LoadFromDocumentFormat(null, fileName, isolatedStorageDirectory);
 
-            Logger.Trace(
-                $"Completed Load() - fileName: {fileName}, isolatedStorageDirectory: {isolatedStorageDirectory}");
+            // Logger.Trace(
+            // $"Completed Load() - fileName: {fileName}, isolatedStorageDirectory: {isolatedStorageDirectory}");
             return serializableObject;
         }
 
@@ -212,18 +522,17 @@ namespace DotNetScaffolder.Core.Common.Serializer
             IsolatedStorageFile isolatedStorageDirectory,
             SerializedFormat serializedFormat)
         {
-            Logger.Trace(
-                $"Started Load() - fileName: {fileName}, isolatedStorageDirectory: {isolatedStorageDirectory}, serializedFormat: {serializedFormat.ToString()}");
-
+            // Logger.Trace(
+            // $"Started Load() - fileName: {fileName}, isolatedStorageDirectory: {isolatedStorageDirectory}, serializedFormat: {serializedFormat.ToString()}");
             if (string.IsNullOrEmpty(fileName))
             {
-                Logger.Error("fileName may not be empty");
+                // Logger.Error("fileName may not be empty");
                 throw new ArgumentException("fileName may not be empty");
             }
 
             if (isolatedStorageDirectory == null)
             {
-                Logger.Error("isolatedStorageDirectory may not be null");
+                // Logger.Error("isolatedStorageDirectory may not be null");
                 throw new ArgumentException("isolatedStorageDirectory may not be null");
             }
 
@@ -241,8 +550,8 @@ namespace DotNetScaffolder.Core.Common.Serializer
                     break;
             }
 
-            Logger.Trace(
-                $"Completed Load() - fileName: {fileName}, isolatedStorageDirectory: {isolatedStorageDirectory}, serializedFormat: {serializedFormat.ToString()}");
+            // Logger.Trace(
+            // $"Completed Load() - fileName: {fileName}, isolatedStorageDirectory: {isolatedStorageDirectory}, serializedFormat: {serializedFormat.ToString()}");
             return serializableObject;
         }
 
@@ -270,25 +579,24 @@ namespace DotNetScaffolder.Core.Common.Serializer
         /// </returns>
         public static T Load(string fileName, IsolatedStorageFile isolatedStorageDirectory, Type[] extraTypes)
         {
-            Logger.Trace(
-                $"Started Load() - fileName: {fileName}, isolatedStorageDirectory: {isolatedStorageDirectory}, serializedFormat: {extraTypes}");
-
+            // Logger.Trace(
+            // $"Started Load() - fileName: {fileName}, isolatedStorageDirectory: {isolatedStorageDirectory}, serializedFormat: {extraTypes}");
             if (string.IsNullOrEmpty(fileName))
             {
-                Logger.Error("fileName may not be empty");
+                // Logger.Error("fileName may not be empty");
                 throw new ArgumentException("fileName may not be empty");
             }
 
             if (isolatedStorageDirectory == null)
             {
-                Logger.Error("isolatedStorageDirectory may not be null");
+                // Logger.Error("isolatedStorageDirectory may not be null");
                 throw new ArgumentException("isolatedStorageDirectory may not be null");
             }
 
             T serializableObject = LoadFromDocumentFormat(null, fileName, isolatedStorageDirectory);
 
-            Logger.Trace(
-                $"Completed Load() - fileName: {fileName}, isolatedStorageDirectory: {isolatedStorageDirectory}, serializedFormat: {extraTypes}");
+            // Logger.Trace(
+            // $"Completed Load() - fileName: {fileName}, isolatedStorageDirectory: {isolatedStorageDirectory}, serializedFormat: {extraTypes}");
             return serializableObject;
         }
 
@@ -311,17 +619,16 @@ namespace DotNetScaffolder.Core.Common.Serializer
         /// </param>
         public static void Save(T serializableObject, string path)
         {
-            Logger.Trace($"Started Save() - path: {path},  serializableObject: {serializableObject.ToString()}");
-
+            // Logger.Trace($"Started Save() - path: {path},  serializableObject: {serializableObject.ToString()}");
             if (string.IsNullOrEmpty(path))
             {
-                Logger.Error("path may not be empty");
+                // Logger.Error("path may not be empty");
                 throw new ArgumentException("path may not be empty");
             }
 
             SaveToDocumentFormat(serializableObject, null, path, null);
 
-            Logger.Trace($"Completed Save() - path: {path},  serializableObject: {serializableObject.ToString()}");
+            ////Logger.Trace($"Completed Save() - path: {path},  serializableObject: {serializableObject.ToString()}");
         }
 
         /// <summary>
@@ -345,11 +652,10 @@ namespace DotNetScaffolder.Core.Common.Serializer
         /// </param>
         public static void Save(T serializableObject, string path, SerializedFormat serializedFormat)
         {
-            Logger.Trace($"Started Save() - path: {path},  serializableObject: {serializableObject.ToString()}");
-
+            // Logger.Trace($"Started Save() - path: {path},  serializableObject: {serializableObject.ToString()}");
             if (string.IsNullOrEmpty(path))
             {
-                Logger.Error("path may not be empty");
+                // Logger.Error("path may not be empty");
                 throw new ArgumentException("path may not be empty");
             }
 
@@ -365,7 +671,7 @@ namespace DotNetScaffolder.Core.Common.Serializer
                     break;
             }
 
-            Logger.Trace($"Completed Save() - path: {path},  serializableObject: {serializableObject.ToString()}");
+            // Logger.Trace($"Completed Save() - path: {path},  serializableObject: {serializableObject.ToString()}");
         }
 
         /// <summary>
@@ -391,19 +697,18 @@ namespace DotNetScaffolder.Core.Common.Serializer
         /// </param>
         public static void Save(T serializableObject, string path, Type[] extraTypes)
         {
-            Logger.Trace(
-                $"Started Save() - fileName: {path},  serializableObject: {serializableObject.ToString()}, extraType {extraTypes}");
-
+            ////Logger.Trace(
+            ////    $"Started Save() - fileName: {path},  serializableObject: {serializableObject.ToString()}, extraType {extraTypes}");
             if (string.IsNullOrEmpty(path))
             {
-                Logger.Error("path may not be empty");
+                // Logger.Error("path may not be empty");
                 throw new ArgumentException("path may not be empty");
             }
 
             SaveToDocumentFormat(serializableObject, extraTypes, path, null);
 
-            Logger.Trace(
-                $"Completed Save() - fileName: {path},  serializableObject: {serializableObject.ToString()}, extraType {extraTypes}");
+            // Logger.Trace(
+            // $"Completed Save() - fileName: {path},  serializableObject: {serializableObject.ToString()}, extraType {extraTypes}");
         }
 
         /// <summary>
@@ -428,19 +733,18 @@ namespace DotNetScaffolder.Core.Common.Serializer
         /// </param>
         public static void Save(T serializableObject, string fileName, IsolatedStorageFile isolatedStorageDirectory)
         {
-            Logger.Trace(
-                $"Started Save() - fileName: {fileName},  serializableObject: {serializableObject.ToString()}, isolatedStorageDirectory {isolatedStorageDirectory}");
-
+            ////Logger.Trace(
+            ////    $"Started Save() - fileName: {fileName},  serializableObject: {serializableObject.ToString()}, isolatedStorageDirectory {isolatedStorageDirectory}");
             if (string.IsNullOrEmpty(fileName))
             {
-                Logger.Error("path may not be empty");
+                // Logger.Error("path may not be empty");
                 throw new ArgumentException("path may not be empty");
             }
 
             SaveToDocumentFormat(serializableObject, null, fileName, isolatedStorageDirectory);
 
-            Logger.Trace(
-                $"Started Save() - fileName: {fileName},  serializableObject: {serializableObject.ToString()}, isolatedStorageDirectory {isolatedStorageDirectory}");
+            // Logger.Trace(
+            // $"Started Save() - fileName: {fileName},  serializableObject: {serializableObject.ToString()}, isolatedStorageDirectory {isolatedStorageDirectory}");
         }
 
         /// <summary>
@@ -472,12 +776,11 @@ namespace DotNetScaffolder.Core.Common.Serializer
             IsolatedStorageFile isolatedStorageDirectory,
             SerializedFormat serializedFormat)
         {
-            Logger.Trace(
-                $"Started Save() - fileName: {fileName},  serializableObject: {serializableObject.ToString()}, isolatedStorageDirectory {isolatedStorageDirectory}, serializedFormat : {serializedFormat}");
-
+            // Logger.Trace(
+            // $"Started Save() - fileName: {fileName},  serializableObject: {serializableObject.ToString()}, isolatedStorageDirectory {isolatedStorageDirectory}, serializedFormat : {serializedFormat}");
             if (string.IsNullOrEmpty(fileName))
             {
-                Logger.Error("path may not be empty");
+                // Logger.Error("path may not be empty");
                 throw new ArgumentException("path may not be empty");
             }
 
@@ -493,8 +796,8 @@ namespace DotNetScaffolder.Core.Common.Serializer
                     break;
             }
 
-            Logger.Trace(
-                $"Completed Save() - fileName: {fileName},  serializableObject: {serializableObject.ToString()}, isolatedStorageDirectory {isolatedStorageDirectory}, serializedFormat : {serializedFormat}");
+            // Logger.Trace(
+            // $"Completed Save() - fileName: {fileName},  serializableObject: {serializableObject.ToString()}, isolatedStorageDirectory {isolatedStorageDirectory}, serializedFormat : {serializedFormat}");
         }
 
         /// <summary>
@@ -526,345 +829,18 @@ namespace DotNetScaffolder.Core.Common.Serializer
             IsolatedStorageFile isolatedStorageDirectory,
             Type[] extraTypes)
         {
-            Logger.Trace(
-                $"Started Save() - fileName: {fileName},  serializableObject: {serializableObject.ToString()}, isolatedStorageDirectory {isolatedStorageDirectory}, extraTypes : {extraTypes}");
-
+            // Logger.Trace(
+            // $"Started Save() - fileName: {fileName},  serializableObject: {serializableObject.ToString()}, isolatedStorageDirectory {isolatedStorageDirectory}, extraTypes : {extraTypes}");
             if (string.IsNullOrEmpty(fileName))
             {
-                Logger.Error("path may not be empty");
+                // Logger.Error("path may not be empty");
                 throw new ArgumentException("path may not be empty");
             }
 
             SaveToDocumentFormat(serializableObject, null, fileName, isolatedStorageDirectory);
 
-            Logger.Trace(
-                $"Completed Save() - fileName: {fileName},  serializableObject: {serializableObject.ToString()}, isolatedStorageDirectory {isolatedStorageDirectory}, extraTypes : {extraTypes}");
-        }
-
-        #endregion
-
-        #region Other Methods
-
-        /// <summary>
-        /// The create file stream.
-        /// </summary>
-        /// <param name="isolatedStorageFolder">
-        /// The isolated storage folder.
-        /// </param>
-        /// <param name="path">
-        /// The path.
-        /// </param>
-        /// <returns>
-        /// The <see cref="FileStream"/>.
-        /// </returns>
-        private static FileStream CreateFileStream(IsolatedStorageFile isolatedStorageFolder, string path)
-        {
-            Logger.Trace($"Started CreateFileStream() - path: {path}, isolatedStorageDirectory {isolatedStorageFolder}");
-
-            if (string.IsNullOrEmpty(path))
-            {
-                Logger.Error("path may not be empty");
-                throw new ArgumentException("path may not be empty");
-            }
-
-            FileStream fileStream = null;
-
-            if (isolatedStorageFolder == null)
-            {
-                fileStream = new FileStream(path, FileMode.OpenOrCreate);
-            }
-            else
-            {
-                fileStream = new IsolatedStorageFileStream(path, FileMode.OpenOrCreate, isolatedStorageFolder);
-            }
-
-            Logger.Trace(
-                $"Completed CreateFileStream() - path: {path}, isolatedStorageDirectory {isolatedStorageFolder}");
-            return fileStream;
-        }
-
-        /// <summary>
-        /// The create text reader.
-        /// </summary>
-        /// <param name="isolatedStorageFolder">
-        /// The isolated storage folder.
-        /// </param>
-        /// <param name="path">
-        /// The path.
-        /// </param>
-        /// <returns>
-        /// The <see cref="TextReader"/>.
-        /// </returns>
-        private static TextReader CreateTextReader(IsolatedStorageFile isolatedStorageFolder, string path)
-        {
-            Logger.Trace($"Started CreateTextReader() - path: {path}, isolatedStorageDirectory {isolatedStorageFolder}");
-
-            if (string.IsNullOrEmpty(path))
-            {
-                Logger.Error("path may not be empty");
-                throw new ArgumentException("path may not be empty");
-            }
-
-            if (!File.Exists(path))
-            {
-                Logger.Error("Path does not exist");
-                throw new ArgumentException("Path does not exist");
-            }
-
-            TextReader textReader = null;
-
-            if (isolatedStorageFolder == null)
-            {
-                textReader = new StreamReader(path);
-            }
-            else
-            {
-                textReader = new StreamReader(new IsolatedStorageFileStream(path, FileMode.Open, isolatedStorageFolder));
-            }
-
-            Logger.Trace(
-                $"Completed CreateTextReader() - path: {path}, isolatedStorageDirectory {isolatedStorageFolder}");
-            return textReader;
-        }
-
-        /// <summary>
-        /// The create text writer.
-        /// </summary>
-        /// <param name="isolatedStorageFolder">
-        /// The isolated storage folder.
-        /// </param>
-        /// <param name="path">
-        /// The path.
-        /// </param>
-        /// <returns>
-        /// The <see cref="TextWriter"/>.
-        /// </returns>
-        private static TextWriter CreateTextWriter(IsolatedStorageFile isolatedStorageFolder, string path)
-        {
-            Logger.Trace($"Started CreateTextWriter() - path: {path}, isolatedStorageDirectory {isolatedStorageFolder}");
-
-            if (string.IsNullOrEmpty(path))
-            {
-                Logger.Error("path may not be empty");
-                throw new ArgumentException("path may not be empty");
-            }
-
-            TextWriter textWriter = null;
-
-            if (isolatedStorageFolder == null)
-            {
-                textWriter = new StreamWriter(path);
-            }
-            else
-            {
-                textWriter =
-                    new StreamWriter(new IsolatedStorageFileStream(path, FileMode.OpenOrCreate, isolatedStorageFolder));
-            }
-
-            Logger.Trace(
-                $"Completed CreateTextWriter() - path: {path}, isolatedStorageDirectory {isolatedStorageFolder}");
-            return textWriter;
-        }
-
-        /// <summary>
-        /// The create xml serializer.
-        /// </summary>
-        /// <param name="extraTypes">
-        /// The extra types.
-        /// </param>
-        /// <returns>
-        /// The <see cref="XmlSerializer"/>.
-        /// </returns>
-        private static XmlSerializer CreateXmlSerializer(Type[] extraTypes)
-        {
-            Logger.Trace($"Started CreateXmlSerializer() - extraTypes: {extraTypes}");
-
-            Type objectType = typeof(T);
-
-            XmlSerializer xmlSerializer = null;
-
-            if (extraTypes != null)
-            {
-                xmlSerializer = new XmlSerializer(objectType, extraTypes);
-            }
-            else
-            {
-                xmlSerializer = new XmlSerializer(objectType);
-            }
-
-            Logger.Trace($"Completed CreateXmlSerializer() - extraTypes: {extraTypes}");
-            return xmlSerializer;
-        }
-
-        /// <summary>
-        /// The load from binary format.
-        /// </summary>
-        /// <param name="path">
-        /// The path.
-        /// </param>
-        /// <param name="isolatedStorageFolder">
-        /// The isolated storage folder.
-        /// </param>
-        /// <returns>
-        /// The <see cref="T"/>.
-        /// </returns>
-        private static T LoadFromBinaryFormat(string path, IsolatedStorageFile isolatedStorageFolder)
-        {
-            Logger.Trace(
-                $"Started LoadFromBinaryFormat() - path: {path}, isolatedStorageFolder: {isolatedStorageFolder}");
-
-            if (string.IsNullOrEmpty(path))
-            {
-                Logger.Error("Path may not be empty");
-                throw new ArgumentException("Path may not be empty");
-            }
-
-            if (!File.Exists(path))
-            {
-                Logger.Error("Path does not exist");
-                throw new ArgumentException("Path does not exist");
-            }
-
-            T serializableObject = null;
-
-            using (FileStream fileStream = CreateFileStream(isolatedStorageFolder, path))
-            {
-                BinaryFormatter binaryFormatter = new BinaryFormatter();
-                serializableObject = binaryFormatter.Deserialize(fileStream) as T;
-            }
-
-            Logger.Trace(
-                $"Completed LoadFromBinaryFormat() - path: {path}, isolatedStorageFolder: {isolatedStorageFolder}");
-            return serializableObject;
-        }
-
-        /// <summary>
-        /// The load from document format.
-        /// </summary>
-        /// <param name="extraTypes">
-        /// The extra types.
-        /// </param>
-        /// <param name="path">
-        /// The path.
-        /// </param>
-        /// <param name="isolatedStorageFolder">
-        /// The isolated storage folder.
-        /// </param>
-        /// <returns>
-        /// The <see cref="T"/>.
-        /// </returns>
-        private static T LoadFromDocumentFormat(
-            Type[] extraTypes,
-            string path,
-            IsolatedStorageFile isolatedStorageFolder)
-        {
-            Logger.Trace(
-                $"Started LoadFromDocumentFormat() - path: {path}, isolatedStorageFolder: {isolatedStorageFolder}, extraTypes: {extraTypes}");
-
-            if (string.IsNullOrEmpty(path))
-            {
-                Logger.Error("Path may not be empty");
-                throw new ArgumentException("Path may not be empty");
-            }
-
-            if(!File.Exists(path))
-            {
-                Logger.Error("Path does not exist");
-                throw new ArgumentException("Path does not exist");
-            }
-
-            T serializableObject = null;
-
-            using (TextReader textReader = CreateTextReader(isolatedStorageFolder, path))
-            {
-                XmlSerializer xmlSerializer = CreateXmlSerializer(extraTypes);
-                serializableObject = xmlSerializer.Deserialize(textReader) as T;
-            }
-
-            Logger.Trace(
-                $"Completed LoadFromDocumentFormat() - path: {path}, isolatedStorageFolder: {isolatedStorageFolder}, extraTypes: {extraTypes}");
-            return serializableObject;
-        }
-
-        /// <summary>
-        /// The save to binary format.
-        /// </summary>
-        /// <param name="serializableObject">
-        /// The serializable object.
-        /// </param>
-        /// <param name="path">
-        /// The path.
-        /// </param>
-        /// <param name="isolatedStorageFolder">
-        /// The isolated storage folder.
-        /// </param>
-        private static void SaveToBinaryFormat(
-            T serializableObject,
-            string path,
-            IsolatedStorageFile isolatedStorageFolder)
-        {
-            Logger.Trace($"Started SaveToBinaryFormat() - path: {path}, isolatedStorageFolder: {isolatedStorageFolder}");
-
-            if (string.IsNullOrEmpty(path))
-            {
-                Logger.Error("Path may not be empty");
-                throw new ArgumentException("Path may not be empty");
-            }
-
-            if (!File.Exists(path))
-            {
-                Logger.Error("Path does not exist");
-                throw new ArgumentException("Path does not exist");
-            }
-
-            using (FileStream fileStream = CreateFileStream(isolatedStorageFolder, path))
-            {
-                BinaryFormatter binaryFormatter = new BinaryFormatter();
-                binaryFormatter.Serialize(fileStream, serializableObject);
-            }
-
-            Logger.Trace(
-                $"Completed SaveToBinaryFormat() - path: {path}, isolatedStorageFolder: {isolatedStorageFolder}");
-        }
-
-        /// <summary>
-        /// The save to document format.
-        /// </summary>
-        /// <param name="serializableObject">
-        /// The serializable object.
-        /// </param>
-        /// <param name="extraTypes">
-        /// The extra types.
-        /// </param>
-        /// <param name="path">
-        /// The path.
-        /// </param>
-        /// <param name="isolatedStorageFolder">
-        /// The isolated storage folder.
-        /// </param>
-        private static void SaveToDocumentFormat(
-            T serializableObject,
-            Type[] extraTypes,
-            string path,
-            IsolatedStorageFile isolatedStorageFolder)
-        {
-            Logger.Trace(
-                $"Started SaveToBinaryFormat() - path: {path}, isolatedStorageFolder: {isolatedStorageFolder}, extraTypes: {extraTypes}");
-
-            if (string.IsNullOrEmpty(path))
-            {
-                Logger.Error("Path may not be empty");
-                throw new ArgumentException("Path may not be empty");
-            }
-
-            using (TextWriter textWriter = CreateTextWriter(isolatedStorageFolder, path))
-            {
-                XmlSerializer xmlSerializer = CreateXmlSerializer(extraTypes);
-                xmlSerializer.Serialize(textWriter, serializableObject);
-            }
-
-            Logger.Trace(
-                $"Completed SaveToBinaryFormat() - path: {path}, isolatedStorageFolder: {isolatedStorageFolder}, extraTypes: {extraTypes}");
+            // Logger.Trace(
+            // $"Completed Save() - fileName: {fileName},  serializableObject: {serializableObject.ToString()}, isolatedStorageDirectory {isolatedStorageDirectory}, extraTypes : {extraTypes}");
         }
 
         #endregion

@@ -10,16 +10,11 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Tables
 
     using System.Collections.Generic;
     using System.Windows.Forms;
-
     using DotNetScaffolder.Components.Common.Contract;
     using DotNetScaffolder.Mapping.ApplicationServices.Differences;
     using DotNetScaffolder.Mapping.MetaData.Model;
 
     using FormControls.TreeView;
-
-    #endregion
-
-    #region Usings
 
     #endregion
 
@@ -96,12 +91,37 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Tables
         /// </returns>
         List<Hierarchy> ReturnHierarchyFromList(List<Table> tables, bool includeFields, bool includeRelationships);
 
-        List<Hierarchy> ReturnSelectedHierarchyFromList(List<Table> sourceTables, List<Table> selectedTables, bool includeFields, bool includeRelationships);
+        /// <summary>
+        /// The return selected hierarchy from list.
+        /// </summary>
+        /// <param name="sourceTables">
+        /// The source tables.
+        /// </param>
+        /// <param name="selectedTables">
+        /// The selected tables.
+        /// </param>
+        /// <param name="includeFields">
+        /// The include fields.
+        /// </param>
+        /// <param name="includeRelationships">
+        /// The include relationships.
+        /// </param>
+        /// <returns>
+        /// The <see cref="List"/>.
+        /// </returns>
+        List<Hierarchy> ReturnSelectedHierarchyFromList(
+            List<Table> sourceTables,
+            List<Table> selectedTables,
+            bool includeFields,
+            bool includeRelationships);
 
         /// <summary>
         /// Return Tables
         /// </summary>
         /// <param name="parentNode">
+        /// </param>
+        /// <param name="all">
+        /// The all.
         /// </param>
         /// <returns>
         /// The <see cref="List"/>.

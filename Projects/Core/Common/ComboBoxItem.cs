@@ -11,7 +11,7 @@ namespace DotNetScaffolder.Core.Common
     /// </summary>
     public class ComboboxItem
     {
-        #region Properties
+        #region Public Properties
 
         /// <summary>
         ///     Gets or sets the text.
@@ -25,7 +25,7 @@ namespace DotNetScaffolder.Core.Common
 
         #endregion
 
-        #region Public methods and operators
+        #region Public Methods And Operators
 
         /// <summary>
         ///     The to string.
@@ -35,7 +35,7 @@ namespace DotNetScaffolder.Core.Common
         /// </returns>
         public override string ToString()
         {
-            return Text;
+            return this.Text;
         }
 
         #endregion

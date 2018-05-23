@@ -14,12 +14,10 @@ namespace DotNetScaffolder.Mapping.ApplicationServices
     using System.Xml.Serialization;
 
     using Common.Logging;
-
-    using Configuration;
-
     using DotNetScaffolder.Components.Common.Contract;
     using DotNetScaffolder.Core.Common.Serializer;
     using DotNetScaffolder.Core.Common.Validation;
+    using DotNetScaffolder.Core.Configuration;
     using DotNetScaffolder.Mapping.MetaData.Application;
     using DotNetScaffolder.Mapping.MetaData.Project;
     using DotNetScaffolder.Mapping.MetaData.Project.Packages;

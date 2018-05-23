@@ -26,17 +26,6 @@ namespace DotNetScaffolder.Components.NamingConventions.DefaultNamingConventions
     {
         #region Public methods and operators
 
-        /// <summary>
-        /// The apply naming convention.
-        /// </summary>
-        /// <param name="value">
-        /// The value.
-        /// </param>
-        /// <returns>
-        /// The <see cref="string"/>.
-        /// </returns>
-        /// <exception cref="NotImplementedException">
-        /// </exception>
         public string ApplyNamingConvention(string value)
         {
             return System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(value);

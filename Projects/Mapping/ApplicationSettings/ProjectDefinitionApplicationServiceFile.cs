@@ -15,11 +15,10 @@ namespace DotNetScaffolder.Mapping.ApplicationServices
 
     using Common.Logging;
 
-    using Configuration;
-
     using DotNetScaffolder.Components.Common.Contract;
     using DotNetScaffolder.Core.Common.Serializer;
     using DotNetScaffolder.Core.Common.Validation;
+    using DotNetScaffolder.Core.Configuration;
     using DotNetScaffolder.Mapping.MetaData.Domain;
     using DotNetScaffolder.Mapping.MetaData.Project;
     using DotNetScaffolder.Mapping.MetaData.Project.Packages;
@@ -193,7 +192,8 @@ namespace DotNetScaffolder.Mapping.ApplicationServices
             {
                 foreach (Template template in definition.Package.Templates)
                 {
-                    var parameters = new Dictionary<string, string> { { "basePath", this.ProjectDefinition.OutputPath } };
+                    var parameters =
+                        new Dictionary<string, string> { { "basePath", this.ProjectDefinition.OutputPath } };
 
                     IDataType dataType = ScaffoldConfig.ReturnDataType(template.DataType);
                     dataType.Load(parameters);
@@ -202,7 +202,7 @@ namespace DotNetScaffolder.Mapping.ApplicationServices
 
                     foreach (Validation validation in validations)
                     {
-                       this.ValidationResult.Add(validation); 
+                        this.ValidationResult.Add(validation);
                     }
                 }
             }

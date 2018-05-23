@@ -17,16 +17,16 @@ namespace DotNetScaffolder.Core.Common.Validation
     /// </summary>
     public interface IValidate
     {
-        #region Properties
+        #region Public Properties
 
         /// <summary>
-        /// Gets or sets the validation result.
+        ///     Gets or sets the validation result.
         /// </summary>
         List<Validation> ValidationResult { get; set; }
 
         #endregion
 
-        #region Public methods and operators
+        #region Public Methods And Operators
 
         /// <summary>
         ///     Validate class.
