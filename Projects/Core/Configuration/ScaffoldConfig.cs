@@ -15,6 +15,7 @@ namespace DotNetScaffolder.Core.Configuration
 
     using DotNetScaffolder.Components.Common;
     using DotNetScaffolder.Components.Common.Contract;
+    using DotNetScaffolder.Components.Common.Contract.UI;
     using DotNetScaffolder.Components.DataTypes.DefaultDataTypes;
 
     #endregion
@@ -71,6 +72,11 @@ namespace DotNetScaffolder.Core.Configuration
         public static Lazy<IDataTypeUI, IDictionary<string, object>>[] DataTypeUIs { get; set; }
 
         /// <summary>
+        /// Gets or sets the i driver type ui.
+        /// </summary>
+        public static Lazy<IDriverTypeUI, IDictionary<string, object>>[] DriverTypeUIs { get; set; }
+
+        /// <summary>
         ///     Gets or sets the drivers.
         /// </summary>
         ////[ImportMany]
@@ -79,7 +85,6 @@ namespace DotNetScaffolder.Core.Configuration
         /// <summary>
         ///     Gets or sets the driver types.
         /// </summary>
-        [ImportMany]
         public static Lazy<IDriverType, IDictionary<string, object>>[] DriverTypes { get; set; }
 
         /// <summary>
@@ -131,6 +136,7 @@ namespace DotNetScaffolder.Core.Configuration
             CollectionOptions = importer.CollectionOptions;
             DataTypeUIs = importer.DataTypeUIs;
             DriverTypes = importer.DriverTypes;
+            DriverTypeUIs = importer.DriverTypeUI;
         }
 
         /// <summary>
@@ -185,6 +191,27 @@ namespace DotNetScaffolder.Core.Configuration
 
             return DataTypeUIs.FirstOrDefault(
                 d => d.Metadata["DataType"].ToString().ToLower() == dataTypeId.ToString().ToLower()
+                     && d.Metadata["DisplayType"].ToString().ToLower() == displayType.ToString().ToLower()).Value;
+        }
+
+        /// <summary>
+        /// The return driver data type ui.
+        /// </summary>
+        /// <param name="driverTypeId">
+        /// The driver type id.
+        /// </param>
+        /// <param name="displayType">
+        /// The display type.
+        /// </param>
+        /// <returns>
+        /// The <see cref="IDriverTypeUI"/>.
+        /// </returns>
+        public static IDriverTypeUI ReturnDriverDataTypeUi(Guid driverTypeId, DisplayType displayType)
+        {
+            if (DriverTypeUIs == null || !DriverTypeUIs.Any()) return null;
+
+            return DriverTypeUIs.FirstOrDefault(
+                d => d.Metadata["DriverType"].ToString().ToLower() == driverTypeId.ToString().ToLower()
                      && d.Metadata["DisplayType"].ToString().ToLower() == displayType.ToString().ToLower()).Value;
         }
 

@@ -8,6 +8,7 @@
         <guid>2bc1b0c4-1e41-9146-82cf-599181ce4412</guid>
         <guid>2bc1b0c4-1e41-9146-82cf-599181ce4411</guid>
         <guid>2bc1b0c4-1e41-9146-82cf-599181ce4410</guid>
+        <guid>2bc1b0c4-1e41-9146-82cf-599181ce4417</guid>
       </DriverIdList>
       <Id>88e23444-4d85-4fd7-a1a7-e6d68e896281</Id>
       <Name>Domain1</Name>
@@ -99,6 +100,22 @@
             <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
             <LanguageOutputId>1bc1b0c4-1e41-9146-82cf-599181ce4410</LanguageOutputId>
             <TemplatePath>ApplicationService.T4</TemplatePath>
+            <Version>1</Version>
+          </Template>
+          <Template>
+            <Children />
+            <Enabled>true</Enabled>
+            <HierarchyType>Item</HierarchyType>
+            <Id>99d48be6-6570-465d-bc29-0793ea47233f</Id>
+            <Name>Entity Framework Context (v6)</Name>
+            <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
+            <Selected>false</Selected>
+            <ConfigLocation>Data</ConfigLocation>
+            <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4430</DataType>
+            <DefaultSettings />
+            <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
+            <LanguageOutputId>1bc1b0c4-1e41-9146-82cf-599181ce4410</LanguageOutputId>
+            <TemplatePath>Bogus.T4</TemplatePath>
             <Version>1</Version>
           </Template>
           <Template>
@@ -316,7 +333,7 @@
     </DomainDefinition>
   </Domains>
   <GroupBy>Domain</GroupBy>
-  <ModelPath>C:\Dev\DotNetScaffolder\Generated\Dal\Repository\EF\Dotnet\Data\Repositories\Repository\Model\Banking.mdl</ModelPath>
+  <ModelPath>..\..\..\..\..\Generated\Dal\Repository\EF\Dotnet\Data\Repositories\Repository\Model\Banking.mdl</ModelPath>
   <OutputFolder>Models</OutputFolder>
   <Version>1</Version>
 </ProjectDefinition>

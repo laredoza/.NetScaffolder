@@ -16,6 +16,7 @@ namespace DotNetScaffolder.Components.Common
     using System.Reflection;
 
     using DotNetScaffolder.Components.Common.Contract;
+    using DotNetScaffolder.Components.Common.Contract.UI;
 
     using global::Common.Logging;
 
@@ -50,7 +51,7 @@ namespace DotNetScaffolder.Components.Common
         public Lazy<IDataType, IDictionary<string, object>>[] DataTypes { get; set; }
 
         /// <summary>
-        /// Gets or sets the data type u is.
+        ///     Gets or sets the data type u is.
         /// </summary>
         [ImportMany]
         public Lazy<IDataTypeUI, IDictionary<string, object>>[] DataTypeUIs { get; set; }
@@ -62,10 +63,16 @@ namespace DotNetScaffolder.Components.Common
         public Lazy<IDriver, IDictionary<string, object>>[] Drivers { get; set; }
 
         /// <summary>
-        /// Gets or sets the driver types.
+        ///     Gets or sets the driver types.
         /// </summary>
         [ImportMany]
         public Lazy<IDriverType, IDictionary<string, object>>[] DriverTypes { get; set; }
+
+        /// <summary>
+        /// Gets or sets the driver type ui.
+        /// </summary>
+        [ImportMany]
+        public Lazy<IDriverTypeUI, IDictionary<string, object>>[] DriverTypeUI { get; set; }
 
         /// <summary>
         ///     Gets or sets LanguageOutputs

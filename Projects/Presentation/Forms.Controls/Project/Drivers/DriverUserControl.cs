@@ -14,13 +14,14 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project.Drivers
     using System.Windows.Forms;
 
     using DotNetScaffolder.Components.Common.Contract;
+    using DotNetScaffolder.Components.DataTypes.DefaultDataTypes;
     using DotNetScaffolder.Core.Configuration;
     using DotNetScaffolder.Mapping.MetaData.Domain;
 
     #endregion
 
     /// <summary>
-    /// The driver user control.
+    ///     The driver user control.
     /// </summary>
     public partial class DriverUserControl : UserControl
     {
@@ -41,7 +42,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project.Drivers
         #region Constructors and Destructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="DriverUserControl"/> class.
+        ///     Initializes a new instance of the <see cref="DriverUserControl" /> class.
         /// </summary>
         public DriverUserControl()
         {
@@ -68,7 +69,8 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project.Drivers
                 if (this.dataSource != value)
                 {
                     this.dataSource = value;
-                    this.driverTypes = this.returnDriverTypes();
+                    this.driverTypes = this.ReturnDriverTypes();
+                    this.UpdateDataSource();
                 }
             }
         }
@@ -94,12 +96,12 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project.Drivers
         /// <returns>
         /// The <see cref="List"/>.
         /// </returns>
-        private List<IDriverType> returnDriverTypes()
+        private List<IDriverType> ReturnDriverTypes()
         {
             List<IDriverType> result = new List<IDriverType>();
 
             IDriver driver;
-                
+
             foreach (Guid driverId in this.DataSource.DriverIdList)
             {
                 driver = ScaffoldConfig.ReturnDriver(driverId);
@@ -111,6 +113,26 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project.Drivers
             }
 
             return result;
+        }
+
+        /// <summary>
+        ///     The update data source.
+        /// </summary>
+        private void UpdateDataSource()
+        {
+            if (this.DataSource != null)
+            {
+                this.TabControl.TabPages.Clear();
+
+                TabPage page;
+                foreach (IDriverType driverType in this.DriverTypes)
+                {
+                    page = new TabPage();
+                    page.Text = driverType.Name;
+                    page.Controls.Add(ScaffoldConfig.ReturnDriverDataTypeUi(driverType.Id, DisplayType.WinForm) as Control);
+                    this.TabControl.TabPages.Add(page);
+                }
+            }
         }
 
         #endregion
