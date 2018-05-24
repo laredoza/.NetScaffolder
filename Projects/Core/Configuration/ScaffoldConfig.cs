@@ -223,7 +223,7 @@ namespace DotNetScaffolder.Core.Configuration
             {
                 if (foundDriverType.Value.Id == driverTypeId)
                 {
-                    if (!result.Contains(foundDriverType.Value))
+                    if (!result.Any(d => d.Id == foundDriverType.Value.Id))
                     {
                         result.Add(foundDriverType.Value);
                     }

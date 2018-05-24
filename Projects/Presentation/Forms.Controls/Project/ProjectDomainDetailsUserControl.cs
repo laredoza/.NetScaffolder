@@ -474,7 +474,11 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project
         /// </param>
         private void BtnDrivers_Click(object sender, EventArgs e)
         {
-            this.driverForm = new DriverForm();
+            this.driverForm = new DriverForm
+            {
+                DataSource = this.SelectedDomain
+            };
+
             this.driverForm.Show();
         }
 

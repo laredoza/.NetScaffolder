@@ -78,6 +78,12 @@
     <Compile Include="Project\Drivers\DriverForm.Designer.cs">
       <DependentUpon>DriverForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Project\Drivers\DriverUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Project\Drivers\DriverUserControl.Designer.cs">
+      <DependentUpon>DriverUserControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Sources\ManageDataSourceForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -196,6 +202,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Project\Drivers\DriverForm.resx">
       <DependentUpon>DriverForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Project\Drivers\DriverUserControl.resx">
+      <DependentUpon>DriverUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Sources\ManageDataSourceForm.resx">
       <DependentUpon>ManageDataSourceForm.cs</DependentUpon>
