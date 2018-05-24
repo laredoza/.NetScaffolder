@@ -35,7 +35,7 @@ namespace RepositoryEFDotnet.UnitTest
         protected static TUow Uow;
 
         #endregion
-
+		
 		#region Tests
 		
 <#+ foreach(var mdl in Models.Where(o => o.TableName.Equals("BankAccount"))){ 
@@ -43,40 +43,144 @@ namespace RepositoryEFDotnet.UnitTest
 #>
 
         [TestMethod]
-        public virtual void BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_Add()
+        public virtual void BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_RunAll()
         {
-            var entity = new <#= mdl.TableName #>();
-            Populate<#= mdl.TableName #>(entity, false, 1);
+			this.BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_Add();
+            this.BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_Get();
 
-            Uow.Add(entity);
-            Uow.Commit();
+            this.BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_Any();
+            this.BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_Any_WithFilter();
+            this.BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_Any_WithFilter_NothingFound();
 
-            var entities = Uow.GetAll<<#= mdl.TableName #>>();
-            Check_EntityCount(1, entities.Count(), "Incorrect number of <#= mdl.TableName #> found");
-            Check_<#= mdl.TableName #>(entity, entities.FirstOrDefault());
+            this.BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_FirstOrDefault();
+            this.BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_FirstOrDefault_WithFilter();
+            this.BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_FirstOrDefault_WithFilter_NothingFound();
+
+			this.BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_Modify();
+			
+            this.BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_Remove();
+            this.BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_GetAll_NothingFound();
+            this.BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_Any_NothingFound();
+            this.BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_FirstOrDefault_NothingFound();
+            this.BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_AddRange(100, 5);
+            this.BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_GetAll();
+
+            this.BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_AllMatching();
+            this.BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_AllMatching_NothingFound();
+
+            this.BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_GetAllPaged();
+            this.BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_Max();
+			this.BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_RemoveRange();
+            this.BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_Rollback();
         }
 		
-        [TestMethod]
-        public virtual async Task BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_AddAsync()
+		[TestMethod]
+        public virtual async Task BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_RunAllAsync()
         {
-            var entity = new <#= mdl.TableName #>();
-            Populate<#= mdl.TableName #>(entity, false, 1);
+            await this.BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_AddAsync();
+            await this.BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_GetAsync();
+            await this.BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_AnyAsync();
+            await this.BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_FirstOrDefaultAsync();
+            await this.BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_RemoveAsync();
+            await this.BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_AddRangeAsync(100, 5);
+            await this.BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_GetAllAsync();
+            await this.BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_AllMatchingAsync();
+            await this.BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_MaxAsync();
+			await this.BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_RemoveRangeAsync();
+            await this.BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_RollbackAsync();
+        }
+		
+        public virtual void BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_GetAllPaged()
+        {
+            var itemCount = 100;
+            var pageSize = 5;
+            var pageCount = System.Math.Abs(itemCount / pageSize);
 
-            await Uow.AddAsync(entity);
+            for (var pageIndex = 1; pageIndex <= pageCount; pageIndex++)
+            {
+                var entities = Uow.GetAllPaged<<#= mdl.TableName #>>(pageIndex, pageSize, new List<string> { "<#= pk.ColumnName #>" }).ToList();
+                this.Check_EntityCount(pageSize, entities.Count(), "Incorrect number of <#= mdl.TableName #> found");
+
+                if (entities.Min(o => o.<#= pk.ColumnName #>) < pageIndex * pageSize || entities.Max(o => o.<#= pk.ColumnName #>) > pageIndex * pageSize + (pageSize - 1))
+				{
+					Assert.Fail("Incorrect paging detected");
+				}
+            }
+        }
+
+        /// <summary>
+        /// The <#= mdl.TableName #> add range.
+        /// </summary>
+        /// <param name="count">
+        /// The count.
+        /// </param>
+        /// <param name="startSeed">
+        /// The start seed.
+        /// </param>
+        private void BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_AddRange(int count, int startSeed = 1)
+        {
+            var list = new List<<#= mdl.TableName #>>();
+            var seed = startSeed;
+            for (var index = 1; index <= count; index++)
+            {
+                var entity = new <#= mdl.TableName #>();
+                this.Populate<#= mdl.TableName #>(entity, false, seed);
+                list.Add(entity);
+                seed++;
+            }
+
+            Uow.AddRange(list);
+            Uow.Commit();
+
+            var entities = Uow.GetAll<<#= mdl.TableName #>>().ToList();
+            this.Check_EntityCount(count, entities.Count(), "Incorrect number of <#= mdl.TableName #> found");
+
+            for (var index = 1; index <= count; index++)
+			{
+                this.Check_<#= mdl.TableName #>(list.FirstOrDefault(o => o.<#= pk.ColumnName #> == index + startSeed - 1),entities.FirstOrDefault(o => o.<#= pk.ColumnName #> == index + startSeed - 1));
+			}
+        }
+		
+        private async Task BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_AddRangeAsync(int count, int startSeed = 1)
+        {
+            var list = new List<<#= mdl.TableName #>>();
+            var seed = startSeed;
+            for (var index = 1; index <= count; index++)
+            {
+                var entity = new <#= mdl.TableName #>();
+                this.Populate<#= mdl.TableName #>(entity, false, seed);
+                list.Add(entity);
+                seed++;
+            }
+
+            await Uow.AddRangeAsync(list);
             await Uow.CommitAsync();
 
             var entities = await Uow.GetAllAsync<<#= mdl.TableName #>>();
-            Check_EntityCount(1, entities.Count(), "Incorrect number of <#= mdl.TableName #> found");
-            Check_<#= mdl.TableName #>(entity, entities.FirstOrDefault());
+            this.Check_EntityCount(count, entities.Count(), "Incorrect number of <#= mdl.TableName #> found");
+
+            for (var index = 1; index <= count; index++)
+			{
+                this.Check_<#= mdl.TableName #>(list.FirstOrDefault(o => o.<#= pk.ColumnName #> == index + startSeed - 1),entities.FirstOrDefault(o => o.<#= pk.ColumnName #> == index + startSeed - 1));
+			}
         }
 		
-        [TestMethod]
+        public virtual void BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_Add()
+        {
+			BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_AddRange(1, 1);
+        }
+		
+        public virtual async Task BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_AddAsync()
+        {
+			BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_AddRange(1, 1);
+        }
+		
         public virtual void BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_Modify()
         {
 			int id = 1;
             var entityToUpdate = Uow.FirstOrDefault<<#= mdl.TableName #>>(o => o.<#= pk.ColumnName #> == id);
 			Assert.IsNotNull(entityToUpdate, $"<#= mdl.TableName #> could not be found for <#= pk.ColumnName #> = {id}");
-            Populate<#= mdl.TableName #>(entityToUpdate, true);
+            Populate<#= mdl.TableName #>(entityToUpdate, true, 2);
 
             Uow.Modify(entityToUpdate);
             Uow.Commit();
@@ -86,11 +190,10 @@ namespace RepositoryEFDotnet.UnitTest
             Check_<#= mdl.TableName #>(entityToUpdate, entities.FirstOrDefault());
         }
 		
-        [TestMethod]
         public virtual async Task BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_ModifyAsync()
         {
             var entity = new <#= mdl.TableName #>();
-            Populate<#= mdl.TableName #>(entity, true);
+            Populate<#= mdl.TableName #>(entity, true, 2);
 
             await Uow.ModifyAsync(entity);
             await Uow.CommitAsync();
@@ -100,11 +203,8 @@ namespace RepositoryEFDotnet.UnitTest
             Check_<#= mdl.TableName #>(entity, entities.FirstOrDefault());
         }
 		
-        [TestMethod]
         public virtual void BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_Remove()
-        {
-			BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_Add();
-			
+        {		
             var entity = Uow.FirstOrDefault<<#= mdl.TableName #>>();
 			
 			Assert.IsNotNull(entity, "<#= mdl.TableName #> not found to remove");
@@ -116,11 +216,8 @@ namespace RepositoryEFDotnet.UnitTest
             Check_EntityCount(0, entities.Count(), "Incorrect number of <#= mdl.TableName #> found");
         }
 		
-        [TestMethod]
         public virtual async Task BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_RemoveAsync()
-        {
-			await BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_AddAsync();
-			
+        {			
             var entity = Uow.FirstOrDefault<<#= mdl.TableName #>>();
 			
 			Assert.IsNotNull(entity, "<#= mdl.TableName #> not found to remove");
@@ -132,11 +229,8 @@ namespace RepositoryEFDotnet.UnitTest
             Check_EntityCount(0, entities.Count(), "Incorrect number of <#= mdl.TableName #> found");
         }
 		
-        [TestMethod]
         public virtual void BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_RemoveRange()
-        {
-			BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_AddRange();
-			
+        {			
             var entitiesToRemove = Uow.GetAll<<#= mdl.TableName #>>();
 			
             Uow.RemoveRange(entitiesToRemove);
@@ -146,11 +240,8 @@ namespace RepositoryEFDotnet.UnitTest
             Check_EntityCount(0, removedEntities.Count(), "Incorrect number of <#= mdl.TableName #> found");
         }
 		
-        [TestMethod]
         public virtual async Task BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_RemoveRangeAsync()
-        {
-			await BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_AddRangeAsync();
-			
+        {			
             var entitiesToRemove = await Uow.GetAllAsync<<#= mdl.TableName #>>();
 			
             await Uow.RemoveRangeAsync(entitiesToRemove);
@@ -160,7 +251,6 @@ namespace RepositoryEFDotnet.UnitTest
             Check_EntityCount(0, removedEntities.Count(), "Incorrect number of <#= mdl.TableName #> found");
         }
 		
-        [TestMethod]
         public virtual void BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_Rollback()
         {		
             var entity = new <#= mdl.TableName #>();
@@ -174,7 +264,6 @@ namespace RepositoryEFDotnet.UnitTest
             Check_EntityCount(0, entities.Count(), "Incorrect number of <#= mdl.TableName #> found");
         }
 		
-        [TestMethod]
         public virtual async Task BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_RollbackAsync()
         {		
             var entity = new <#= mdl.TableName #>();
@@ -188,57 +277,54 @@ namespace RepositoryEFDotnet.UnitTest
             Check_EntityCount(0, entities.Count(), "Incorrect number of <#= mdl.TableName #> found");
         }
 		
-        [TestMethod]
         public virtual void BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_Any()
         {
-			BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_Add();
-
             bool hasAny = Uow.Any<<#= mdl.TableName #>>();
             Assert.IsTrue(hasAny, "Could not find any <#= mdl.TableName #>");
         }
 		
-        [TestMethod]
         public virtual async Task BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_AnyAsync()
         {
-			await BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_AddAsync();
-
             bool hasAny = await Uow.AnyAsync<<#= mdl.TableName #>>();
             Assert.IsTrue(hasAny, "Could not find any <#= mdl.TableName #>");
         }
 
-        [TestMethod]
         public virtual void BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_Any_NothingFound()
         {
             bool hasAny = Uow.Any<<#= mdl.TableName #>>();
             Assert.IsFalse(hasAny, "Incorrectly found <#= mdl.TableName #>");
         }
 		
-        [TestMethod]
+        public virtual void BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_Any_WithFilter()
+        {
+            bool hasAny = Uow.Any<<#= mdl.TableName #>>(o => o.<#= pk.ColumnName #> == 1);
+            Assert.IsTrue(hasAny, "Could not find any <#= mdl.TableName #> with <#= pk.ColumnName #> 1");
+        }
+		
+        public virtual void BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_Any_WithFilter_NothingFound()
+        {
+            bool hasAny = Uow.Any<<#= mdl.TableName #>>(o => o.<#= pk.ColumnName #> == 999);
+            Assert.IsFalse(hasAny, "Incorrectly found <#= mdl.TableName #> with <#= pk.ColumnName #> 999");
+        }
+		
         public virtual void BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_FirstOrDefault()
         {
-			BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_Add();
-
             var entity = Uow.FirstOrDefault<<#= mdl.TableName #>>();
             Assert.IsNotNull(entity, "Could not find <#= mdl.TableName #>");
         }
 		
-        [TestMethod]
         public virtual async Task BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_FirstOrDefaultAsync()
         {
-			await BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_AddAsync();
-
             var entity = await Uow.FirstOrDefaultAsync<<#= mdl.TableName #>>();
             Assert.IsNotNull(entity, "Could not find <#= mdl.TableName #>");
         }
 		
-        [TestMethod]
         public virtual void BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_FirstOrDefault_NothingFound()
         {
             var entity = Uow.FirstOrDefault<<#= mdl.TableName #>>();
             Assert.IsNull(entity, "Incorrectly found <#= mdl.TableName #>");
         }
 		
-        [TestMethod]
         public virtual void BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_FirstOrDefault_WithFilter()
         {
             var entity = Uow.FirstOrDefault<<#= mdl.TableName #>>(o=> o.<#= pk.ColumnName #> == 1);
@@ -246,16 +332,18 @@ namespace RepositoryEFDotnet.UnitTest
             Assert.AreEqual(1, entity.<#= pk.ColumnName #>, "Incorrect <#= mdl.TableName #>.<#= pk.ColumnName #> found");
         }
 		
-        [TestMethod]
+        public virtual void BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_FirstOrDefault_WithFilter_NothingFound()
+        {
+            var entity = Uow.FirstOrDefault<<#= mdl.TableName #>>(o=> o.<#= pk.ColumnName #> == 999);
+			Assert.IsNull(entity, "Incorrect <#= mdl.TableName #> found");
+        }
+		
         public virtual void BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_GetAll()
         {
-			BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_AddRange();
-
             var entities = Uow.GetAll<<#= mdl.TableName #>>();
             Check_EntityCount(3, entities.Count(), "Incorrect number of <#= mdl.TableName #> found");
         }
 		
-        [TestMethod]
         public virtual void BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_Get()
         {
             var entity = Uow.Get<<#= mdl.TableName #>>(o=> o.<#= pk.ColumnName #> == 1);
@@ -263,14 +351,12 @@ namespace RepositoryEFDotnet.UnitTest
             Assert.AreEqual(1, entity.<#= pk.ColumnName #>, "Incorrect <#= mdl.TableName #>.<#= pk.ColumnName #> found");
         }
 		
-        [TestMethod]
         public virtual void BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_Get_NothingFound()
         {
             var entity = Uow.Get<<#= mdl.TableName #>>(o=> o.<#= pk.ColumnName #> == 999999);
 			Assert.IsNull(entity, "Incorrect <#= mdl.TableName #> found");
         }
 		
-        [TestMethod]
         public virtual async Task BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_GetAsync()
         {
             var entity = await Uow.GetAsync<<#= mdl.TableName #>>(o=> o.<#= pk.ColumnName #> == 1);
@@ -278,20 +364,52 @@ namespace RepositoryEFDotnet.UnitTest
             Assert.AreEqual(1, entity.<#= pk.ColumnName #>, "Incorrect <#= mdl.TableName #>.<#= pk.ColumnName #> found");
         }
 		
-        [TestMethod]
         public virtual async Task BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_GetAllAsync()
         {
-			await BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_AddRangeAsync();
-
             var entities = await Uow.GetAllAsync<<#= mdl.TableName #>>();
             Check_EntityCount(3, entities.Count(), "Incorrect number of <#= mdl.TableName #> found");
         }
 		
-        [TestMethod]
         public virtual void BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_GetAll_NothingFound()
         {
             var entities = Uow.GetAll<<#= mdl.TableName #>>();
             Check_EntityCount(0, entities.Count(), "Incorrect number of <#= mdl.TableName #> found");
+        }
+		
+        public virtual void BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_AllMatching()
+        {
+            var result = Uow.AllMatching<<#= mdl.TableName #>>(o => o.<#= pk.ColumnName #> > 50);
+            this.Check_EntityCount(50, result.Count(), "Incorrect number of <#= mdl.TableName #> found for filter");
+        }
+		
+        public virtual async Task BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_AllMatchingAsync()
+        {
+            var result = await Uow.AllMatchingAsync<<#= mdl.TableName #>>(o => o.<#= pk.ColumnName #> > 50);
+            this.Check_EntityCount(50, result.Count(), "Incorrect number of <#= mdl.TableName #> found for filter");
+        }
+		
+        public virtual void BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_AllMatching_NothingFound()
+        {
+            var result = Uow.AllMatching<<#= mdl.TableName #>>(o => o.<#= pk.ColumnName #> > 999);
+            this.Check_EntityCount(0, result.Count(), "Incorrect number of <#= mdl.TableName #> found for filter");
+        }
+		
+        public virtual async Task BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_AllMatchingAsync_NothingFound()
+        {
+            var result = await Uow.AllMatchingAsync<<#= mdl.TableName #>>(o => o.<#= pk.ColumnName #> > 999);
+            this.Check_EntityCount(0, result.Count(), "Incorrect number of <#= mdl.TableName #> found for filter");
+        }
+		
+        public virtual void BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_Max()
+        {
+            var max<#= pk.ColumnName #> = Uow.Max<<#= mdl.TableName #>, decimal>(o => o.<#= pk.ColumnName #>);
+            Assert.AreEqual(204, max<#= pk.ColumnName #>, "Incorrect max <#= mdl.TableName #>.<#= pk.ColumnName #>");
+        }
+		
+        public virtual async Task BaseUnitOfWorkUnitTests_<#= mdl.TableName #>_MaxAsync()
+        {
+            var max<#= pk.ColumnName #> = await Uow.MaxAsync<<#= mdl.TableName #>, decimal>(o => o.<#= pk.ColumnName #>);
+            Assert.AreEqual(204, max<#= pk.ColumnName #>, "Incorrect max <#= mdl.TableName #>.<#= pk.ColumnName #>");
         }
 <#+ } #>
 

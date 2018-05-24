@@ -40,7 +40,6 @@ namespace RepositoryEFDotnet.UnitTest
         /// <summary>
         /// The base unit of work unit tests_ bank account_ rollback.
         /// </summary>
-        [TestMethod]
         public override void BaseUnitOfWorkUnitTests_BankAccount_Rollback()
         {
             // Transactions not supported by in-memory connections
@@ -52,10 +51,10 @@ namespace RepositoryEFDotnet.UnitTest
         /// <returns>
         ///     The <see cref="Task" />.
         /// </returns>
-        [TestMethod]
         public override async Task BaseUnitOfWorkUnitTests_BankAccount_RollbackAsync()
         {
             // Transactions not supported by in-memory connections
+            await Task.CompletedTask;
         }
 
         #endregion
