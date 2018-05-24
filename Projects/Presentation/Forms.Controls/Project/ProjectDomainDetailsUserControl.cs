@@ -22,6 +22,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project
     using DotNetScaffolder.Mapping.MetaData.Domain;
     using DotNetScaffolder.Mapping.MetaData.Project.Packages;
     using DotNetScaffolder.Presentation.Forms.Controls.Model;
+    using DotNetScaffolder.Presentation.Forms.Controls.Project.Drivers;
     using DotNetScaffolder.Presentation.Forms.Controls.Sources;
 
     #endregion
@@ -63,6 +64,11 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project
         private IProjectDefinitionApplicationService applicationService;
 
         /// <summary>
+        ///     The driver form.
+        /// </summary>
+        private DriverForm driverForm;
+
+        /// <summary>
         ///     The save path.
         /// </summary>
         private string savePath;
@@ -91,9 +97,6 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project
             this.ComboBoxSourceType.ValueMember = "Value";
             this.ComboBoxSourceType.DataSource = this.ReturnSourceTypes();
 
-            // this.ComboBoxDriver.DisplayMember = "Text";
-            // this.ComboBoxDriver.ValueMember = "Value";
-            // this.ComboBoxDriver.DataSource = this.ReturnDrivers();
             this.ListViewDrivers.Items.Clear();
             var drivers = this.ReturnDrivers();
             this.ListViewDrivers.Items.AddRange(drivers);
@@ -105,6 +108,8 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project
             this.manageDataSourceForm = new ManageDataSourceForm();
             this.modelForm = new ModelForm();
             this.tableForm = new UpdateModelsFromSourceForm();
+
+            this.driverForm = new DriverForm();
         }
 
         #endregion
@@ -395,11 +400,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project
                 item = new ListViewItem { Text = (string)driver.Metadata["NameMetaData"], Tag = value };
 
                 item.SubItems.Add(
-                    new ListViewItem.ListViewSubItem
-                        {
-                            Text = driverObject.DriverType.Name,
-                            Tag = value
-                        });
+                    new ListViewItem.ListViewSubItem { Text = driverObject.DriverType.Name, Tag = value });
 
                 items.Add(item);
             }
@@ -408,30 +409,14 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project
         }
 
         /// <summary>
-        /// The return driver types.
+        ///     The return driver types.
         /// </summary>
         /// <param name="driver">
-        /// The driver.
+        ///     The driver.
         /// </param>
         /// <returns>
-        /// The <see cref="object[]"/>.
+        ///     The <see cref="object[]" />.
         /// </returns>
-        //public object[] ReturnDrivers(ComboboxItem driver)
-        //{
-        //    var items = new List<ComboboxItem>();
-
-        //    foreach (var driverType in ScaffoldConfig.Drivers)
-        //        if (driverType.Metadata["TypeIdMetaData"].ToString() == driver.Value.ToString().ToUpper())
-        //            items.Add(
-        //                new ComboboxItem
-        //                    {
-        //                        Text = (string)driverType.Metadata["NameMetaData"],
-        //                        Value = new Guid(driverType.Metadata["ValueMetaData"].ToString())
-        //                    });
-
-        //    return items.ToArray();
-        //}
-
         /// <summary>
         ///     Return naming conventions.
         /// </summary>
@@ -477,6 +462,21 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project
         #endregion
 
         #region Other Methods
+
+        /// <summary>
+        /// The btn drivers_ click.
+        /// </summary>
+        /// <param name="sender">
+        /// The sender.
+        /// </param>
+        /// <param name="e">
+        /// The e.
+        /// </param>
+        private void BtnDrivers_Click(object sender, EventArgs e)
+        {
+            this.driverForm = new DriverForm();
+            this.driverForm.Show();
+        }
 
         /// <summary>
         /// The btn manage source_ click.

@@ -45,6 +45,7 @@
             this.ListViewDrivers = new System.Windows.Forms.ListView();
             this.DriverType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.BtnDrivers = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // ComboBoxPackages
@@ -187,7 +188,7 @@
             this.columnHeader2});
             this.ListViewDrivers.Location = new System.Drawing.Point(112, 144);
             this.ListViewDrivers.Name = "ListViewDrivers";
-            this.ListViewDrivers.Size = new System.Drawing.Size(414, 192);
+            this.ListViewDrivers.Size = new System.Drawing.Size(414, 164);
             this.ListViewDrivers.TabIndex = 53;
             this.ListViewDrivers.UseCompatibleStateImageBehavior = false;
             this.ListViewDrivers.View = System.Windows.Forms.View.Details;
@@ -203,10 +204,21 @@
             this.columnHeader2.Text = "Driver";
             this.columnHeader2.Width = 150;
             // 
+            // BtnDrivers
+            // 
+            this.BtnDrivers.Location = new System.Drawing.Point(434, 314);
+            this.BtnDrivers.Name = "BtnDrivers";
+            this.BtnDrivers.Size = new System.Drawing.Size(75, 23);
+            this.BtnDrivers.TabIndex = 54;
+            this.BtnDrivers.Text = "Drivers";
+            this.BtnDrivers.UseVisualStyleBackColor = true;
+            this.BtnDrivers.Click += new System.EventHandler(this.BtnDrivers_Click);
+            // 
             // ProjectDomainDetailsUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.BtnDrivers);
             this.Controls.Add(this.ListViewDrivers);
             this.Controls.Add(this.BtnRefresh);
             this.Controls.Add(this.BtnModel);
@@ -247,5 +259,6 @@
         private System.Windows.Forms.ListView ListViewDrivers;
         private System.Windows.Forms.ColumnHeader DriverType;
         private System.Windows.Forms.ColumnHeader columnHeader2;
+        private System.Windows.Forms.Button BtnDrivers;
     }
 }

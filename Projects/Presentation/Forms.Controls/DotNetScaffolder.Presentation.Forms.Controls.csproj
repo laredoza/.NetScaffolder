@@ -72,6 +72,12 @@
     <Compile Include="Core\ManageCollectionsTreeViewUserControl.Designer.cs">
       <DependentUpon>ManageCollectionsTreeViewUserControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Project\Drivers\DriverForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Project\Drivers\DriverForm.Designer.cs">
+      <DependentUpon>DriverForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Sources\ManageDataSourceForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -187,6 +193,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Core\ManageCollectionsTreeViewUserControl.resx">
       <DependentUpon>ManageCollectionsTreeViewUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Project\Drivers\DriverForm.resx">
+      <DependentUpon>DriverForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Sources\ManageDataSourceForm.resx">
       <DependentUpon>ManageDataSourceForm.cs</DependentUpon>
