@@ -81,6 +81,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetScaffolder.Mapping.Ap
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms", "Projects\Components\DataTypes\DefaultDataTypes.Forms\DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.csproj", "{4D3153E7-FB28-4B1A-887B-F82C506CC7E9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetScaffolder.Components.Drivers.DefaultDrivers.Forms", "Projects\Components\Drivers\DefaultDrivers.Forms\DotNetScaffolder.Components.Drivers.DefaultDrivers.Forms.csproj", "{1BBFA5C5-C2B3-4FD9-818C-59259372EB01}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -163,6 +165,10 @@ Global
 		{4D3153E7-FB28-4B1A-887B-F82C506CC7E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4D3153E7-FB28-4B1A-887B-F82C506CC7E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4D3153E7-FB28-4B1A-887B-F82C506CC7E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1BBFA5C5-C2B3-4FD9-818C-59259372EB01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1BBFA5C5-C2B3-4FD9-818C-59259372EB01}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1BBFA5C5-C2B3-4FD9-818C-59259372EB01}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1BBFA5C5-C2B3-4FD9-818C-59259372EB01}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -195,6 +201,7 @@ Global
 		{B50A7E34-08C6-4D3D-A2B3-E3CE2086384A} = {7AE2C134-C4B2-447E-8524-CA02744A2A34}
 		{A4E7BEC8-D3C8-4AC2-90B6-2B54009F7A2B} = {27FE13BD-77E2-4E09-8722-79A72EE332A3}
 		{4D3153E7-FB28-4B1A-887B-F82C506CC7E9} = {B5808469-2046-4498-A605-80815955F007}
+		{1BBFA5C5-C2B3-4FD9-818C-59259372EB01} = {25CD886E-9282-4874-94A5-25DD198531C5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8C063C9C-8EFE-42DA-AE58-93472DC6F4C8}

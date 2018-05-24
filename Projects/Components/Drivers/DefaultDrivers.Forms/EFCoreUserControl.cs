@@ -4,7 +4,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.DriverTypes
+namespace DefaultDrivers.Forms
 {
     #region Usings
 
@@ -15,6 +15,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.DriverTyp
 
     using DotNetScaffolder.Components.Common.Contract;
     using DotNetScaffolder.Components.Common.Contract.UI;
+    using DotNetScaffolder.Components.DataTypes.DefaultDataTypes;
     using DotNetScaffolder.Components.Drivers.DefaultDrivers.EFCore;
     using DotNetScaffolder.Core.Common.Validation;
     using DotNetScaffolder.Mapping.MetaData.Domain;

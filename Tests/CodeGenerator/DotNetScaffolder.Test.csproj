@@ -209,7 +209,7 @@
     </ProjectReference>
     <ProjectReference Include="..\..\Projects\Core\Forms\FormControls\DotNetScaffolder.Core.Forms.FormControls.csproj">
       <Project>{6A2E8779-4539-46D1-B3A0-1C3B205A95AB}</Project>
-      <Name>FormControls</Name>
+      <Name>DotNetScaffolder.Core.Forms.FormControls</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Projects\Mapping\ApplicationSettings\DotNetScaffolder.Mapping.ApplicationServices.csproj">
       <Project>{0afff1d6-5fe5-4ff8-84e8-59352e42e658}</Project>

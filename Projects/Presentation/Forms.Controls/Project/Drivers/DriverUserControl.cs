@@ -127,8 +127,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project.Drivers
                 TabPage page;
                 foreach (IDriverType driverType in this.DriverTypes)
                 {
-                    page = new TabPage();
-                    page.Text = driverType.Name;
+                    page = new TabPage { Text = driverType.Name, BackColor = DefaultBackColor };
                     page.Controls.Add(ScaffoldConfig.ReturnDriverDataTypeUi(driverType.Id, DisplayType.WinForm) as Control);
                     this.TabControl.TabPages.Add(page);
                 }
