@@ -37,17 +37,18 @@ namespace DotNetScaffolder.Core.Configuration
             SourceTypes = new Lazy<ISourceType, IDictionary<string, object>>[0];
             NamingConventions = new Lazy<INamingConvention, IDictionary<string, object>>[0];
             Drivers = new Lazy<IDriver, IDictionary<string, object>>[0];
-            DataTypeUIs = new Lazy<IDataTypeUI, IDictionary<string, object>>[0]; 
+            DataTypeUIs = new Lazy<IDataTypeUI, IDictionary<string, object>>[0];
 
 #if DEBUG
-            ModelPath = @"..\..\..\..\..\Generated\Dal\Repository\EF\Dotnet\Data\Repositories\Repository\Model\Banking.mdl";
+            ModelPath =
+                @"..\..\..\..\..\Generated\Dal\Repository\EF\Dotnet\Data\Repositories\Repository\Model\Banking.mdl";
             ConfigPath = @"Config\Settings.xml";
 #endif
         }
 
         #endregion
 
-        #region Properties
+        #region Public Properties
 
         /// <summary>
         ///     Gets or sets the collection options.
@@ -65,10 +66,21 @@ namespace DotNetScaffolder.Core.Configuration
         public static Lazy<IDataType, IDictionary<string, object>>[] DataTypes { get; set; }
 
         /// <summary>
+        ///     Gets or sets the data type u is.
+        /// </summary>
+        public static Lazy<IDataTypeUI, IDictionary<string, object>>[] DataTypeUIs { get; set; }
+
+        /// <summary>
         ///     Gets or sets the drivers.
         /// </summary>
         ////[ImportMany]
         public static Lazy<IDriver, IDictionary<string, object>>[] Drivers { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the driver types.
+        /// </summary>
+        [ImportMany]
+        public static Lazy<IDriverType, IDictionary<string, object>>[] DriverTypes { get; set; }
 
         /// <summary>
         ///     Gets or sets the language outputs.
@@ -95,20 +107,9 @@ namespace DotNetScaffolder.Core.Configuration
         /// </summary>
         public static Lazy<ISourceType, IDictionary<string, object>>[] SourceTypes { get; set; }
 
-        /// <summary>
-        /// Gets or sets the data type u is.
-        /// </summary>
-        public static Lazy<IDataTypeUI, IDictionary<string, object>>[] DataTypeUIs { get; set; }
-
-        /// <summary>
-        /// Gets or sets the driver types.
-        /// </summary>
-        [ImportMany]
-        public static Lazy<IDriverType, IDictionary<string, object>>[] DriverTypes { get; set; }
-
         #endregion
 
-        #region Public methods and operators
+        #region Public Methods And Operators
 
         /// <summary>
         /// The load.
@@ -133,57 +134,6 @@ namespace DotNetScaffolder.Core.Configuration
         }
 
         /// <summary>
-        /// The return data type.
-        /// </summary>
-        /// <param name="dataTypeId">
-        /// The data type id.
-        /// </param>
-        /// <returns>
-        /// The <see cref="IDataType"/>.
-        /// </returns>
-        public static IDataType ReturnDataType(Guid dataTypeId)
-        {
-            if (DataTypes == null || !DataTypes.Any()) return null;
-
-            return DataTypes.FirstOrDefault(
-                d => d.Metadata["ValueMetaData"].ToString().ToLower() == dataTypeId.ToString().ToLower()).Value;
-        }
-
-        /// <summary>
-        /// The return source type.
-        /// </summary>
-        /// <param name="sourceTypeId">
-        /// The source type id.
-        /// </param>
-        /// <returns>
-        /// The <see cref="ISourceType"/>.
-        /// </returns>
-        public static ISourceType ReturnSourceType(Guid sourceTypeId)
-        {
-            if (SourceTypes == null || !SourceTypes.Any()) return null;
-
-            return SourceTypes.FirstOrDefault(
-                d => d.Metadata["ValueMetaData"].ToString().ToLower() == sourceTypeId.ToString().ToLower()).Value;
-        }
-
-        /// <summary>
-        /// Return naming convention.
-        /// </summary>
-        /// <param name="conventionId">
-        /// The convention id.
-        /// </param>
-        /// <returns>
-        /// The <see cref="INamingConvention"/>.
-        /// </returns>
-        public static INamingConvention ReturnNamingConvention(Guid conventionId)
-        {
-            if (NamingConventions == null || !NamingConventions.Any()) return null;
-
-            return NamingConventions.FirstOrDefault(
-                d => d.Metadata["ValueMetaData"].ToString().ToLower() == conventionId.ToString().ToLower()).Value;
-        }
-
-        /// <summary>
         /// Return collection option.
         /// </summary>
         /// <param name="optionId">
@@ -201,18 +151,20 @@ namespace DotNetScaffolder.Core.Configuration
         }
 
         /// <summary>
-        /// Return driver.
+        /// The return data type.
         /// </summary>
-        /// <param name="driverTypeId"></param>
+        /// <param name="dataTypeId">
+        /// The data type id.
+        /// </param>
         /// <returns>
-        /// The <see cref="IDriver"/>.
+        /// The <see cref="IDataType"/>.
         /// </returns>
-        public static IDriver ReturnDriver(Guid driverTypeId)
+        public static IDataType ReturnDataType(Guid dataTypeId)
         {
-            if (Drivers == null || !Drivers.Any()) return null;
+            if (DataTypes == null || !DataTypes.Any()) return null;
 
-            return Drivers.FirstOrDefault(
-                d => d.Metadata["ValueMetaData"].ToString().ToLower() == driverTypeId.ToString().ToLower()).Value;
+            return DataTypes.FirstOrDefault(
+                d => d.Metadata["ValueMetaData"].ToString().ToLower() == dataTypeId.ToString().ToLower()).Value;
         }
 
         /// <summary>
@@ -232,8 +184,24 @@ namespace DotNetScaffolder.Core.Configuration
             if (DataTypeUIs == null || !DataTypeUIs.Any()) return null;
 
             return DataTypeUIs.FirstOrDefault(
-               d => d.Metadata["DataType"].ToString().ToLower() == dataTypeId.ToString().ToLower()
-               && d.Metadata["DisplayType"].ToString().ToLower() == displayType.ToString().ToLower()).Value;
+                d => d.Metadata["DataType"].ToString().ToLower() == dataTypeId.ToString().ToLower()
+                     && d.Metadata["DisplayType"].ToString().ToLower() == displayType.ToString().ToLower()).Value;
+        }
+
+        /// <summary>
+        /// Return driver.
+        /// </summary>
+        /// <param name="driverTypeId">
+        /// </param>
+        /// <returns>
+        /// The <see cref="IDriver"/>.
+        /// </returns>
+        public static IDriver ReturnDriver(Guid driverTypeId)
+        {
+            if (Drivers == null || !Drivers.Any()) return null;
+
+            return Drivers.FirstOrDefault(
+                d => d.Metadata["ValueMetaData"].ToString().ToLower() == driverTypeId.ToString().ToLower()).Value;
         }
 
         /// <summary>
@@ -263,6 +231,40 @@ namespace DotNetScaffolder.Core.Configuration
             }
 
             return result;
+        }
+
+        /// <summary>
+        /// Return naming convention.
+        /// </summary>
+        /// <param name="conventionId">
+        /// The convention id.
+        /// </param>
+        /// <returns>
+        /// The <see cref="INamingConvention"/>.
+        /// </returns>
+        public static INamingConvention ReturnNamingConvention(Guid conventionId)
+        {
+            if (NamingConventions == null || !NamingConventions.Any()) return null;
+
+            return NamingConventions.FirstOrDefault(
+                d => d.Metadata["ValueMetaData"].ToString().ToLower() == conventionId.ToString().ToLower()).Value;
+        }
+
+        /// <summary>
+        /// The return source type.
+        /// </summary>
+        /// <param name="sourceTypeId">
+        /// The source type id.
+        /// </param>
+        /// <returns>
+        /// The <see cref="ISourceType"/>.
+        /// </returns>
+        public static ISourceType ReturnSourceType(Guid sourceTypeId)
+        {
+            if (SourceTypes == null || !SourceTypes.Any()) return null;
+
+            return SourceTypes.FirstOrDefault(
+                d => d.Metadata["ValueMetaData"].ToString().ToLower() == sourceTypeId.ToString().ToLower()).Value;
         }
 
         #endregion

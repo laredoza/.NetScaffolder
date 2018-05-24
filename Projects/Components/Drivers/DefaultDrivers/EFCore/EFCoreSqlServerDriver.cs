@@ -51,7 +51,7 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EFCore
         /// <summary>
         /// The driver type.
         /// </summary>
-        public IDriverType DriverType => new EFDriverType();
+        public IDriverType DriverType => new EFCoreDriverType();
 
         #endregion
     }
