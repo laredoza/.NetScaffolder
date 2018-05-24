@@ -33,6 +33,34 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6
         /// </summary>
         public string Name => "Entity Framework 6";
 
+        /// <summary>
+        ///     Gets or sets a value indicating whether create db.
+        /// </summary>
+        public bool CreateDb { get; set; }
+
+        /// <summary>
+        ///     Gets or sets a value indicating whether lazy loading enabled.
+        /// </summary>
+        public bool LazyLoadingEnabled { get; set; }
+
+
+        /// <summary>
+        ///     Gets or sets a value indicating whether logging enabled.
+        /// </summary>
+        public bool LoggingEnabled { get; set; }
+
+
+        /// <summary>
+        ///     Gets or sets a value indicating whether proxy creation enabled.
+        /// </summary>
+        public bool ProxyCreationEnabled { get; set; }
+
+
+        /// <summary>
+        ///     Gets or sets a value indicating whether include column order.
+        /// </summary>
+        public bool IncludeColumnOrder { get; set; }
+
         #endregion
     }
 }
