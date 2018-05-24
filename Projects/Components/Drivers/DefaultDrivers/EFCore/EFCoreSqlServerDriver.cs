@@ -10,13 +10,12 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EFCore
     using System.ComponentModel.Composition;
 
     using DotNetScaffolder.Components.Common.Contract;
+    using DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6;
 
-    // <summary>
+    /// <summary>
     /// Defines the default EF Core Sql Server driver.
     /// </summary>
     [Export(typeof(IDriver))]
-    [ExportMetadata("TypeMetaData", "Entity Framework Core")]
-    [ExportMetadata("TypeIdMetaData", "2BC1B0C4-1E41-9146-82CF-599181CE4402")]
     [ExportMetadata("NameMetaData", "Entity Framework Core - SqlServer (Default)")]
     [ExportMetadata("ValueMetaData", "2BC1B0C4-1E41-9146-82CF-599181CE4417")]
     public class EFCoreSqlServerDriver : IDriver
@@ -48,6 +47,11 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EFCore
         ///     The prefix.
         /// </summary>
         public string Prefix => "SqlServer";
+
+        /// <summary>
+        /// The driver type.
+        /// </summary>
+        public IDriverType DriverType => new EFDriverType();
 
         #endregion
     }

@@ -44,6 +44,11 @@ namespace DotNetScaffolder.Components.Common.Contract
         /// </summary>
         string Prefix { get; }
 
+        /// <summary>
+        /// Gets the driver type.
+        /// </summary>
+        IDriverType DriverType { get; }
+
         #endregion
     }
 }

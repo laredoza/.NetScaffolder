@@ -19,8 +19,6 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6
     ///     Defines the default EF 6.0 Sql Server driver.
     /// </summary>
     [Export(typeof(IDriver))]
-    [ExportMetadata("TypeMetaData", "Entity Framework 6.0")]
-    [ExportMetadata("TypeIdMetaData", "2BC1B0C4-1E41-9146-82CF-599181CE4400")]
     [ExportMetadata("NameMetaData", "Entity Framework - MySql (Default)")]
     [ExportMetadata("ValueMetaData", "2BC1B0C4-1E41-9146-82CF-599181CE4412")]
     public class EFMySqlDriver : IDriver
@@ -51,6 +49,11 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6
         ///     The prefix.
         /// </summary>
         public string Prefix => "MySql";
+
+        /// <summary>
+        /// The driver type.
+        /// </summary>
+        public IDriverType DriverType => new EFDriverType();
 
         #endregion
     }

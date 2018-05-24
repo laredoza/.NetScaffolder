@@ -100,6 +100,11 @@ namespace DotNetScaffolder.Core.Configuration
         /// </summary>
         public static Lazy<IDataTypeUI, IDictionary<string, object>>[] DataTypeUIs { get; set; }
 
+        /// <summary>
+        /// Gets or sets the driver types.
+        /// </summary>
+        [ImportMany]
+        public static Lazy<IDriverType, IDictionary<string, object>>[] DriverTypes { get; set; }
 
         #endregion
 
@@ -124,6 +129,7 @@ namespace DotNetScaffolder.Core.Configuration
             DataTypes = importer.DataTypes;
             CollectionOptions = importer.CollectionOptions;
             DataTypeUIs = importer.DataTypeUIs;
+            DriverTypes = importer.DriverTypes;
         }
 
         /// <summary>
@@ -209,6 +215,18 @@ namespace DotNetScaffolder.Core.Configuration
                 d => d.Metadata["ValueMetaData"].ToString().ToLower() == driverTypeId.ToString().ToLower()).Value;
         }
 
+        /// <summary>
+        /// The return data type ui.
+        /// </summary>
+        /// <param name="dataTypeId">
+        /// The data type id.
+        /// </param>
+        /// <param name="displayType">
+        /// The display type.
+        /// </param>
+        /// <returns>
+        /// The <see cref="IDataTypeUI"/>.
+        /// </returns>
         public static IDataTypeUI ReturnDataTypeUI(Guid dataTypeId, DisplayType displayType)
         {
             if (DataTypeUIs == null || !DataTypeUIs.Any()) return null;
@@ -216,6 +234,35 @@ namespace DotNetScaffolder.Core.Configuration
             return DataTypeUIs.FirstOrDefault(
                d => d.Metadata["DataType"].ToString().ToLower() == dataTypeId.ToString().ToLower()
                && d.Metadata["DisplayType"].ToString().ToLower() == displayType.ToString().ToLower()).Value;
+        }
+
+        /// <summary>
+        /// The return driver types.
+        /// </summary>
+        /// <param name="driverTypeId">
+        /// The driver type id.
+        /// </param>
+        /// <returns>
+        /// The <see cref="List"/>.
+        /// </returns>
+        public static List<IDriverType> ReturnDriverTypes(Guid driverTypeId)
+        {
+            if (DriverTypes == null || !DriverTypes.Any()) return null;
+
+            List<IDriverType> result = new List<IDriverType>();
+
+            foreach (Lazy<IDriverType, IDictionary<string, object>> foundDriverType in DriverTypes)
+            {
+                if (foundDriverType.Value.Id == driverTypeId)
+                {
+                    if (!result.Contains(foundDriverType.Value))
+                    {
+                        result.Add(foundDriverType.Value);
+                    }
+                }
+            }
+
+            return result;
         }
 
         #endregion

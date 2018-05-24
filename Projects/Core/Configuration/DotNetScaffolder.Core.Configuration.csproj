@@ -50,6 +50,10 @@
       <Project>{b39709b5-d887-46e1-acc6-cbd7880e90c5}</Project>
       <Name>DotNetScaffolder.Components.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Common\DotNetScaffolder.Core.Common.csproj">
+      <Project>{cdace52c-f991-40b5-80ed-4947a100ec52}</Project>
+      <Name>DotNetScaffolder.Core.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

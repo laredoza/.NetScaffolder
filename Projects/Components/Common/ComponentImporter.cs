@@ -35,7 +35,7 @@ namespace DotNetScaffolder.Components.Common
 
         #endregion
 
-        #region Properties
+        #region Public Properties
 
         /// <summary>
         ///     Gets or sets the collection options.
@@ -50,10 +50,22 @@ namespace DotNetScaffolder.Components.Common
         public Lazy<IDataType, IDictionary<string, object>>[] DataTypes { get; set; }
 
         /// <summary>
+        /// Gets or sets the data type u is.
+        /// </summary>
+        [ImportMany]
+        public Lazy<IDataTypeUI, IDictionary<string, object>>[] DataTypeUIs { get; set; }
+
+        /// <summary>
         ///     Gets or sets the driver types.
         /// </summary>
         [ImportMany]
         public Lazy<IDriver, IDictionary<string, object>>[] Drivers { get; set; }
+
+        /// <summary>
+        /// Gets or sets the driver types.
+        /// </summary>
+        [ImportMany]
+        public Lazy<IDriverType, IDictionary<string, object>>[] DriverTypes { get; set; }
 
         /// <summary>
         ///     Gets or sets LanguageOutputs
@@ -79,11 +91,9 @@ namespace DotNetScaffolder.Components.Common
         [ImportMany]
         public Lazy<ISourceType, IDictionary<string, object>>[] SourceTypes { get; set; }
 
-        [ImportMany]
-        public Lazy<IDataTypeUI, IDictionary<string, object>>[] DataTypeUIs { get; set; }
         #endregion
 
-        #region Public methods and operators
+        #region Public Methods And Operators
 
         /// <summary>
         /// The apply naming convention.
@@ -99,7 +109,7 @@ namespace DotNetScaffolder.Components.Common
         /// </returns>
         public string ApplyNamingConvention(string value, string conventionName)
         {
-            foreach (var convention in NamingConventions)
+            foreach (var convention in this.NamingConventions)
             {
                 if ((string)convention.Metadata["NameMetaData"] == conventionName)
                 {

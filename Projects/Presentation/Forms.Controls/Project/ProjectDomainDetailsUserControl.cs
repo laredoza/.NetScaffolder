@@ -15,6 +15,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project
 
     using Common.Logging;
 
+    using DotNetScaffolder.Components.Common.Contract;
     using DotNetScaffolder.Core.Common;
     using DotNetScaffolder.Core.Configuration;
     using DotNetScaffolder.Mapping.ApplicationServices;
@@ -92,9 +93,9 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project
 
             // this.ComboBoxDriver.DisplayMember = "Text";
             // this.ComboBoxDriver.ValueMember = "Value";
-            // this.ComboBoxDriver.DataSource = this.ReturnDriverTypes();
+            // this.ComboBoxDriver.DataSource = this.ReturnDrivers();
             this.ListViewDrivers.Items.Clear();
-            var drivers = this.ReturnDriverTypes();
+            var drivers = this.ReturnDrivers();
             this.ListViewDrivers.Items.AddRange(drivers);
 
             this.ComboBoxCollectionOption.DisplayMember = "Text";
@@ -380,22 +381,23 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project
         /// <returns>
         ///     The <see cref="object[]" />.
         /// </returns>
-        public ListViewItem[] ReturnDriverTypes()
+        public ListViewItem[] ReturnDrivers()
         {
             var items = new List<ListViewItem>();
             Guid value;
             ListViewItem item;
+            IDriver driverObject;
 
-            foreach (var driverType in ScaffoldConfig.Drivers)
+            foreach (var driver in ScaffoldConfig.Drivers)
             {
-                value = new Guid(driverType.Metadata["ValueMetaData"].ToString());
-                item = new ListViewItem { Text = (string)driverType.Metadata["NameMetaData"], Tag = value };
+                driverObject = driver.Value;
+                value = new Guid(driver.Metadata["ValueMetaData"].ToString());
+                item = new ListViewItem { Text = (string)driver.Metadata["NameMetaData"], Tag = value };
 
-                value = new Guid(driverType.Metadata["TypeIdMetaData"].ToString());
                 item.SubItems.Add(
                     new ListViewItem.ListViewSubItem
                         {
-                            Text = (string)driverType.Metadata["TypeMetaData"],
+                            Text = driverObject.DriverType.Name,
                             Tag = value
                         });
 
@@ -414,21 +416,21 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project
         /// <returns>
         /// The <see cref="object[]"/>.
         /// </returns>
-        public object[] ReturnDriverTypes(ComboboxItem driver)
-        {
-            var items = new List<ComboboxItem>();
+        //public object[] ReturnDrivers(ComboboxItem driver)
+        //{
+        //    var items = new List<ComboboxItem>();
 
-            foreach (var driverType in ScaffoldConfig.Drivers)
-                if (driverType.Metadata["TypeIdMetaData"].ToString() == driver.Value.ToString().ToUpper())
-                    items.Add(
-                        new ComboboxItem
-                            {
-                                Text = (string)driverType.Metadata["NameMetaData"],
-                                Value = new Guid(driverType.Metadata["ValueMetaData"].ToString())
-                            });
+        //    foreach (var driverType in ScaffoldConfig.Drivers)
+        //        if (driverType.Metadata["TypeIdMetaData"].ToString() == driver.Value.ToString().ToUpper())
+        //            items.Add(
+        //                new ComboboxItem
+        //                    {
+        //                        Text = (string)driverType.Metadata["NameMetaData"],
+        //                        Value = new Guid(driverType.Metadata["ValueMetaData"].ToString())
+        //                    });
 
-            return items.ToArray();
-        }
+        //    return items.ToArray();
+        //}
 
         /// <summary>
         ///     Return naming conventions.

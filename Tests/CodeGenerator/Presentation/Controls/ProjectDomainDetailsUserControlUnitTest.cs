@@ -48,7 +48,7 @@ namespace DotNetScaffolder.Test.Presentation.Controls
             // new Guid(ScaffoldConfig.LanguageOutputs[0].Metadata["ValueMetaData"].ToString())
             control.SelectedDomain = control.ApplicationService.ProjectDefinition.Domains[0];
 
-            Assert.AreEqual(1, control.ReturnDriverTypes().Length, "There should 1 DriverType");
+            Assert.AreEqual(1, control.ReturnDrivers().Length, "There should 1 DriverType");
             Assert.AreEqual(3, control.ReturnNamingConventions().Length, "Three should 3 NamingConventionId");
             Assert.AreEqual(1, control.ReturnSourceTypes().Length, "There should 1 Sourcetype");
         }
