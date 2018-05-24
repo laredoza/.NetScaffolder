@@ -6,6 +6,7 @@
 
 namespace DotNetScaffolder.Components.Common.Contract
 {
+    using DotNetScaffolder.Core.Common.Validation;
     #region Usings
 
     using System;
@@ -15,7 +16,7 @@ namespace DotNetScaffolder.Components.Common.Contract
     /// <summary>
     ///     The DriverType interface.
     /// </summary>
-    public interface IDriverType
+    public interface IDriverType : IValidate
     {
         #region Public Properties
 
@@ -30,5 +31,9 @@ namespace DotNetScaffolder.Components.Common.Contract
         string Name { get; }
 
         #endregion
+ 
+        void LoadConfig(object parameters);
+
+        bool SaveConfig(object parameters);
     }
 }

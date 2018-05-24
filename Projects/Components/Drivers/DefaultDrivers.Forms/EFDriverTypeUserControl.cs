@@ -18,6 +18,7 @@ namespace DefaultDrivers.Forms
     using DotNetScaffolder.Components.Common.Contract;
     using DotNetScaffolder.Components.Common.Contract.UI;
     using DotNetScaffolder.Components.DataTypes.DefaultDataTypes;
+    using DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6;
     using DotNetScaffolder.Components.Drivers.DefaultDrivers.EFCore;
     using DotNetScaffolder.Core.Common.Validation;
     using DotNetScaffolder.Mapping.MetaData.Domain;
@@ -58,7 +59,7 @@ namespace DefaultDrivers.Forms
         /// <summary>
         ///     Gets or sets the driver type.
         /// </summary>
-        public IDriverType DriverType => new EFCoreDriverType();
+        public IDriverType DriverType => new EFDriverType("EFDriverType.xml");
 
         /// <summary>
         ///     Gets or sets the validation result.
@@ -79,7 +80,7 @@ namespace DefaultDrivers.Forms
         /// </exception>
         public void LoadConfig(object parameters)
         {
-            throw new NotImplementedException();
+            IDictionary<string, string> parameterList = parameters as IDictionary<string, string>;
         }
 
         /// <summary>
@@ -92,7 +93,7 @@ namespace DefaultDrivers.Forms
         /// </exception>
         public void SaveConfig(object parameters)
         {
-            throw new NotImplementedException();
+            IDictionary<string, string> parameterList = parameters as IDictionary<string, string>;
         }
 
         /// <summary>
@@ -105,7 +106,8 @@ namespace DefaultDrivers.Forms
         /// </exception>
         public List<Validation> Validate()
         {
-            throw new NotImplementedException();
+            this.ValidationResult = this.DriverType.Validate();
+            return this.ValidationResult;
         }
 
         #endregion

@@ -179,10 +179,6 @@
       <Project>{e21010ea-7789-4cce-a09e-52b55e04a083}</Project>
       <Name>DotNetScaffolder.Components.LanguageOutputs.DefaultLanguageOutput</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Projects\Components\MEF\Importer.Net\DotNetScaffolder.Components.Importers.Net.csproj">
-      <Project>{90DC5EEE-B71C-4684-B30C-36B85099AAED}</Project>
-      <Name>DotNetScaffolder.Components.Importers.Net</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Projects\Components\NamingConventions\DefaultNamingConventions\DotNetScaffolder.Components.NamingConventions.DefaultNamingConventions.csproj">
       <Project>{5f5a03d7-a884-4495-96f4-d6859ecb1489}</Project>
       <Name>DotNetScaffolder.Components.NamingConventions.DefaultNamingConventions</Name>

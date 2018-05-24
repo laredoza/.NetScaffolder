@@ -54,7 +54,7 @@ namespace DefaultDrivers.Forms
         /// <summary>
         /// The driver type.
         /// </summary>
-        public IDriverType DriverType => new EFCoreDriverType();
+        public IDriverType DriverType => new EFCoreDriverType("EFCoreDriverType.xml");
 
         /// <summary>
         /// Gets or sets the validation result.

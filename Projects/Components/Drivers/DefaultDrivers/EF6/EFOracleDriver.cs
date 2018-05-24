@@ -54,7 +54,7 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6
         /// <summary>
         /// The driver type.
         /// </summary>
-        public IDriverType DriverType => new EFDriverType(); 
+        public IDriverType DriverType => new EFDriverType("EFDriverType.xml"); 
 
         #endregion
     }

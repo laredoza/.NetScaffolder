@@ -66,6 +66,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Core\Common\DotNetScaffolder.Core.Common.csproj">
+      <Project>{CDACE52C-F991-40B5-80ED-4947A100EC52}</Project>
+      <Name>DotNetScaffolder.Core.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Common\DotNetScaffolder.Components.Common.csproj">
       <Project>{b39709b5-d887-46e1-acc6-cbd7880e90c5}</Project>
       <Name>DotNetScaffolder.Components.Common</Name>
