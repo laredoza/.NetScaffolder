@@ -12,6 +12,8 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6
     using System.Collections.Generic;
     using System.ComponentModel.Composition;
     using System.IO;
+    using System.Xml.Serialization;
+
     using DotNetScaffolder.Components.Common.Contract;
     using DotNetScaffolder.Core.Common.Serializer;
     using DotNetScaffolder.Core.Common.Validation;
@@ -24,27 +26,38 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6
     [Export(typeof(IDriverType))]
     public class EFDriverType : IDriverType
     {
-        public EFDriverType(string fileName)
-        {
-            this.FileName = fileName;
-        }
+        #region Fields
 
-        #region Public Properties
-        
         /// <summary>
         ///     The fil e_ name.
         /// </summary>
         protected readonly string FileName = string.Empty;
 
-        /// <summary>
-        /// The id.
-        /// </summary>
-        public Guid Id => new Guid("2BC1B0C4-1E41-9146-82CF-599181CE4410");
+        #endregion
+
+        #region Constructors and Destructors
 
         /// <summary>
-        /// The name.
+        /// Initializes a new instance of the <see cref="EFDriverType"/> class.
         /// </summary>
-        public string Name => "Entity Framework 6";
+        /// <param name="fileName">
+        /// The file name.
+        /// </param>
+        public EFDriverType(string fileName)
+        {
+            this.FileName = fileName;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="EFDriverType"/> class.
+        /// </summary>
+        public EFDriverType()
+        {
+        }
+
+        #endregion
+
+        #region Public Properties
 
         /// <summary>
         ///     Gets or sets a value indicating whether create db.
@@ -52,28 +65,44 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6
         public bool CreateDb { get; set; }
 
         /// <summary>
+        ///     The id.
+        /// </summary>
+        public Guid Id => new Guid("2BC1B0C4-1E41-9146-82CF-599181CE4410");
+
+        /// <summary>
+        ///     Gets or sets a value indicating whether include column order.
+        /// </summary>
+        public bool IncludeColumnOrder { get; set; }
+
+        /// <summary>
         ///     Gets or sets a value indicating whether lazy loading enabled.
         /// </summary>
         public bool LazyLoadingEnabled { get; set; }
-
 
         /// <summary>
         ///     Gets or sets a value indicating whether logging enabled.
         /// </summary>
         public bool LoggingEnabled { get; set; }
 
+        /// <summary>
+        ///     The name.
+        /// </summary>
+        public string Name => "Entity Framework 6";
 
         /// <summary>
         ///     Gets or sets a value indicating whether proxy creation enabled.
         /// </summary>
         public bool ProxyCreationEnabled { get; set; }
 
-
         /// <summary>
-        ///     Gets or sets a value indicating whether include column order.
+        /// Gets or sets the validation result.
         /// </summary>
-        public bool IncludeColumnOrder { get; set; }
-        public List<Validation> ValidationResult { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        [XmlIgnore]
+        public List<Validation> ValidationResult { get; set; }
+
+        #endregion
+
+        #region Public Methods And Operators
 
         /// <summary>
         /// The load config.
@@ -91,15 +120,14 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6
 
             if (File.Exists(filePath))
             {
-                var driverType = ObjectXMLSerializer<EFDriverType>.Load(filePath);
-                if (driverType != null)
+                var loadedDriverType = ObjectXMLSerializer<EFDriverType>.Load(filePath);
+                if (loadedDriverType != null)
                 {
-                    //this.Namespace = dto.Namespace;
-                    //this.OutputFolder = dto.OutputFolder;
-                    //this.OutputPath = dto.OutputPath;
-                    //this.InheritFrom = dto.InheritFrom;
-                    //this.UseInterface = dto.UseInterface;
-                    //this.AddInjectConstructor = dto.AddInjectConstructor;
+                    this.CreateDb = loadedDriverType.CreateDb;
+                    this.IncludeColumnOrder = loadedDriverType.IncludeColumnOrder;
+                    this.LazyLoadingEnabled = loadedDriverType.LazyLoadingEnabled;
+                    this.LoggingEnabled = loadedDriverType.LoggingEnabled;
+                    this.ProxyCreationEnabled = loadedDriverType.ProxyCreationEnabled;
                 }
             }
         }
@@ -112,6 +140,9 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6
         /// </param>
         /// <exception cref="NotImplementedException">
         /// </exception>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
         public bool SaveConfig(object parameters)
         {
             IDictionary<string, string> parameterList = parameters as IDictionary<string, string>;
@@ -120,9 +151,18 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6
             return true;
         }
 
+        /// <summary>
+        /// The validate.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="List"/>.
+        /// </returns>
+        /// <exception cref="NotImplementedException">
+        /// </exception>
         public List<Validation> Validate()
         {
-            throw new NotImplementedException();
+            return this.ValidationResult;
+
         }
 
         #endregion
