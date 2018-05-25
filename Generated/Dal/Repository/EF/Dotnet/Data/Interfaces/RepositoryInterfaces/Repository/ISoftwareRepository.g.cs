@@ -20,14 +20,12 @@
 
 using System;
 using System.Collections.Generic;
-
+using RepositoryEFDotnet.Core.Base;
 using Banking.Models.Interfaces;
 
 namespace Banking.Models.Interfaces
 {
-    using RepositoryEFDotnet.Core.Base;
-
-    /// <summary>
+	/// <summary>
 	/// The SoftwareRepository interface that defines database functions for the Software table
 	/// </summary>
 	public partial interface ISoftwareRepository : IRepository<ISoftware>

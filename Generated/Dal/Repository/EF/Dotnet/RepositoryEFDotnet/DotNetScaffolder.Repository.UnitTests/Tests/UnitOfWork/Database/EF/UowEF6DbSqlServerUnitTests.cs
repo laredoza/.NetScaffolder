@@ -7,38 +7,54 @@
 namespace RepositoryEFDotnet.UnitTest
 {
     using System.Data.Entity;
+    using System.Threading.Tasks;
 
     using Banking.Models.Context;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
+    using RepositoryEFDotnet.Core.Base;
+
     /// <summary>
     /// The uow e f 6 db sql server unit test.
     /// </summary>
     [TestClass]
-    public class UowEF6DbSqlServerUnitTest : BaseUnitOfWorkUnitTests<SqlServerFullContext>
+    public class UowEF6DbSqlServerUnitTest : BaseUnitOfWorkUnitTests
     {
-        #region Public Methods And Operators
+        private const string DbConfig = "RepoTest";
 
-        /// <summary>
-        /// The recreate db.
-        /// </summary>
-        /// <param name="context">
-        /// The context.
-        /// </param>
-        [ClassInitialize]
-        public static void RecreateDb(TestContext context)
+        [TestInitialize]
+        public void Init()
         {
-            if (Database.Exists("RepoTest"))
+            if (Database.Exists(DbConfig))
             {
-                Database.Delete("RepoTest");
+                Database.Delete(DbConfig);
                 Database.SetInitializer(new DropCreateDatabaseAlways<SqlServerFullContext>());
             }
 
-            Uow = new SqlServerFullContext("RepoTest");
-            Uow.Database.Initialize(true);
+            using (var context = new SqlServerFullContext(DbConfig))
+            {
+                context.Database.Initialize(true);
+            }
         }
 
-        #endregion
+
+        [TestMethod]
+        public override void RunAll()
+        {
+            using (var context = new SqlServerFullContext(DbConfig))
+            {
+                this.BaseUnitOfWorkUnitTests_BankAccount_RunAll(context);
+            }
+        }
+
+        [TestMethod]
+        public override async Task RunAllAsync()
+        {
+            using (var context = new SqlServerFullContext(DbConfig))
+            {
+                await this.BaseUnitOfWorkUnitTests_BankAccount_RunAllAsync(context);
+            }
+        }
     }
 }

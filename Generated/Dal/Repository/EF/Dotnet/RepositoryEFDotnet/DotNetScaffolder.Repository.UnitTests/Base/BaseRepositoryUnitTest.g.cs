@@ -22,14 +22,12 @@ using Banking.Models.Dto;
 using Banking.Models.Interfaces;
 using Banking.Models.Repository;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using RepositoryEFDotnet.Library;
+using RepositoryEFDotnet.Core.Base;
 using System.Linq;
 
 namespace RepositoryEFDotnet.UnitTest
 {
-    using RepositoryEFDotnet.Core.Base;
-
-    [TestClass]
+	[TestClass]
 	public abstract partial class BaseRepositoryUnitTest : BaseUnitTest
 	{
         #region Privates

@@ -6,49 +6,38 @@
 
 namespace RepositoryEFDotnet.UnitTest
 {
+    using System.Threading.Tasks;
+
     using Banking.Models.Context;
 
     using Effort;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
+    using RepositoryEFDotnet.Core.Base;
+
     /// <summary>
     /// The uow e f 6 in memory my sql unit test.
     /// </summary>
     [TestClass]
-    public class UowEF6InMemoryMySqlUnitTest : BaseUnitOfWorkUnitTests<MySqlFullContext>
+    public class UowEF6InMemoryMySqlUnitTest : BaseUnitOfWorkUnitTests
     {
-        #region Public Methods And Operators
-
-        /// <summary>
-        /// The class init.
-        /// </summary>
-        /// <param name="context">
-        /// The context.
-        /// </param>
-        [ClassInitialize]
-        public static void ClassInit(TestContext context)
+        [TestMethod]
+        public override void RunAll()
         {
+            using (var context = new MySqlFullContext(DbConnectionFactory.CreateTransient()))
+            {
+                this.BaseUnitOfWorkUnitTests_BankAccount_RunAll(context);
+            }
         }
 
-        /// <summary>
-        /// The test cleanup.
-        /// </summary>
-        [TestCleanup]
-        public void TestCleanup()
+        [TestMethod]
+        public override async Task RunAllAsync()
         {
-            Uow?.Dispose();
+            using (var context = new MySqlFullContext(DbConnectionFactory.CreateTransient()))
+            {
+                await this.BaseUnitOfWorkUnitTests_BankAccount_RunAllAsync(context);
+            }
         }
-
-        /// <summary>
-        /// The test init.
-        /// </summary>
-        [TestInitialize]
-        public void TestInit()
-        {
-            Uow = new MySqlFullContext(DbConnectionFactory.CreateTransient());
-        }
-
-        #endregion
     }
 }

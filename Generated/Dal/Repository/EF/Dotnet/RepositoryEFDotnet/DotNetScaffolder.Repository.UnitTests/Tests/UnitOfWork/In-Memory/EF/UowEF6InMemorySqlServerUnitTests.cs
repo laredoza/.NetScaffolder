@@ -6,58 +6,41 @@
 
 namespace RepositoryEFDotnet.UnitTest
 {
+    using System;
+    using System.Threading.Tasks;
+
     using Banking.Models.Context;
+    using Banking.Models.Context.Core;
 
     using Effort;
 
+    using Microsoft.EntityFrameworkCore;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+    using RepositoryEFDotnet.Core.Base;
 
     /// <summary>
     /// The uow e f 6 in memory sql server unit test.
     /// </summary>
     [TestClass]
-    public class UowEF6InMemorySqlServerUnitTest : BaseUnitOfWorkUnitTests<SqlServerFullContext>
+    public class UowEF6InMemorySqlServerUnitTest : BaseUnitOfWorkUnitTests
     {
-        #region Public Methods And Operators
-
-        /// <summary>
-        /// The class init.
-        /// </summary>
-        /// <param name="context">
-        /// The context.
-        /// </param>
-        [ClassInitialize]
-        public static void ClassInit(TestContext context)
-        {
-        }
-
-        /// <summary>
-        /// The base unit of work unit tests_ create db test.
-        /// </summary>
         [TestMethod]
-        public virtual void BaseUnitOfWorkUnitTests_CreateDbTest()
+        public override void RunAll()
         {
-            Uow.Database.Initialize(true);
+            using (var context = new SqlServerFullContext(DbConnectionFactory.CreateTransient()))
+            {
+                this.BaseUnitOfWorkUnitTests_BankAccount_RunAll(context);
+            }
         }
 
-        /// <summary>
-        /// The test cleanup.
-        /// </summary>
-        [TestCleanup]
-        public void TestCleanup()
+        [TestMethod]
+        public override async Task RunAllAsync()
         {
-            Uow?.Dispose();
+            using (var context = new SqlServerFullContext(DbConnectionFactory.CreateTransient()))
+            {
+                await this.BaseUnitOfWorkUnitTests_BankAccount_RunAllAsync(context);
+            }
         }
-
-        /// <summary>
-        /// The test init.
-        /// </summary>
-        [TestInitialize]
-        public void TestInit()
-        {
-            Uow = new SqlServerFullContext(DbConnectionFactory.CreateTransient());
-        }
-
-        #endregion
     }
 }

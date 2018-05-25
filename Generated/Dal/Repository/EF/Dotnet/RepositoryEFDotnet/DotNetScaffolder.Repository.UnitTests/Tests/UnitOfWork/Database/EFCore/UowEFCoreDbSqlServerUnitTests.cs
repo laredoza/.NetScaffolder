@@ -6,32 +6,51 @@
 
 namespace RepositoryEFDotnet.UnitTest
 {
+    using System;
+    using System.Threading.Tasks;
+
     using Banking.Models.Context.Core;
 
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.EntityFrameworkCore.Infrastructure;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+    using RepositoryEFDotnet.Core.Base;
 
     /// <summary>
     /// The uow ef core db sql server unit test.
     /// </summary>
     [TestClass]
-    public class UowEFCoreDbSqlServerUnitTest : BaseUnitOfWorkUnitTests<EFCoreSqlServerFullContext>
+    public class UowEFCoreDbSqlServerUnitTest : BaseUnitOfWorkUnitTests
     {
-        #region Public Methods And Operators
+        private const string DbConfig = "RepoTest";
 
-        /// <summary>
-        /// The class init.
-        /// </summary>
-        /// <param name="context">
-        /// The context.
-        /// </param>
-        [ClassInitialize]
-        public static void ClassInit(TestContext context)
+        [TestInitialize]
+        public void Init()
         {
-            Uow = new EFCoreSqlServerFullContext("RepoTest");
-            Uow.Database.EnsureDeleted();
-            Uow.Database.EnsureCreated();
+            using (var context = new EFCoreSqlServerFullContext(DbConfig))
+            {
+                context.Database.EnsureDeleted();
+                context.Database.EnsureCreated();
+            }
         }
 
-        #endregion
+        [TestMethod]
+        public override void RunAll()
+        {
+            using (var context = new EFCoreSqlServerFullContext(DbConfig))
+            {
+                this.BaseUnitOfWorkUnitTests_BankAccount_RunAll(context);
+            }
+        }
+
+        [TestMethod]
+        public override async Task RunAllAsync()
+        {
+            using (var context = new EFCoreSqlServerFullContext(DbConfig))
+            {
+                await this.BaseUnitOfWorkUnitTests_BankAccount_RunAllAsync(context);
+            }
+        }
     }
 }
