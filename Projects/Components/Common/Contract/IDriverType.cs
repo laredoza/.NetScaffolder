@@ -9,8 +9,10 @@ namespace DotNetScaffolder.Components.Common.Contract
     #region Usings
 
     using System;
+    using System.Collections.Generic;
 
     using DotNetScaffolder.Core.Common.Validation;
+    using DotNetScaffolder.Mapping.MetaData.Model;
 
     #region Usings
 
@@ -82,6 +84,15 @@ namespace DotNetScaffolder.Components.Common.Contract
         /// The <see cref="bool"/>.
         /// </returns>
         bool SaveConfig(object parameters);
+
+        string TransformRelationship(
+            string table,
+            Relationship rel,
+            IEnumerable<Table> models,
+            IEnumerable<Relationship> relationships = null,
+            INamingConvention nc = null);
+
+        string TransformDbGeneratedKey(Table table);
 
         #endregion
     }

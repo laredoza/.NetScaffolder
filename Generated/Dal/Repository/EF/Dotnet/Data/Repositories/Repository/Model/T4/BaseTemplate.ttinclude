@@ -1,9 +1,12 @@
 <#@ assembly name="$(ProjectDir)Model\Package\DotNetScaffolder.Components.Common.dll" #>
 <#@ assembly name="$(ProjectDir)Model\Package\DotNetScaffolder.Mapping.MetaData.dll" #>
+<#@ assembly name="$(ProjectDir)Model\Package\DotNetScaffolder.Mapping.MetaData.dll" #>
+<#@ assembly name="$(ProjectDir)Model\Package\DotNetScaffolder.Components.Drivers.DefaultDrivers.dll" #>
 <#@ assembly name="$(ProjectDir)Model\Package\Common.Logging.Core.dll" #>
 <#@ assembly name="$(ProjectDir)Model\Package\Common.Logging.dll" #>
 <#@ import namespace="DotNetScaffolder.Components.Common.Contract" #>
 <#@ import namespace="DotNetScaffolder.Components.Common" #>
+<#@ import namespace="DotNetScaffolder.Components.Drivers.DefaultDrivers" #>
 <#+
 public abstract class BaseTemplate : Template 
 {

@@ -1,33 +1,61 @@
 ﻿<#@ include file="ContextTemplate.ttinclude" #>
+<#@ include file="ContextCoreTemplate.ttinclude" #>
 <#+
     public class ContextGenerator : BaseGenerator
     {
         public ContextDataType DataType {get;set;}
         public EntityDataType EntityDataType {get;set;}
-	
-        private ContextTemplate template = new ContextTemplate();
 
         protected override void RunCore()
         {
-            template.DataType = this.DataType;
-            template.EntityNamespace = EntityDataType.FullNamespace;
-
             foreach(var dbContext in DataType.Contexts)
-            {
-                template.ContextData = dbContext;
-                
-                foreach( IDriver driver in DataType.DriverTypes )
+            {                
+                foreach(IDriver driver in DataType.Drivers )
                 {
-                    template.Driver = driver;
-
-                    if(!string.IsNullOrEmpty(dbContext.OutputPath))
-                    {
-                        template.Output.Project =  string.Format(dbContext.OutputPath, driver.ParentFolder, driver.Prefix);
-                    }
-
-                    template.RenderToFile(string.Format(@"{0}\{1}{2}.g.cs", dbContext.OutputFolder,driver.Prefix,dbContext.ContextName));
+					Debugger.Break();
+					
+					if(driver.DriverType is EFDriverType)
+					{
+						GenerateEFContext(driver, dbContext);
+					}
+					else if(driver.DriverType is EFCoreDriverType)
+					{
+						GenerateEFCoreContext(driver, dbContext);
+					}
                 }
             }
         }
+		
+		private void GenerateEFContext(IDriver driver, ContextData contextData)
+		{	
+			var template = new ContextTemplate();
+		    template.DataType = DataType;
+            template.EntityNamespace = EntityDataType.FullNamespace;
+			template.ContextData = contextData;
+			template.Driver = driver;
+
+			if(!string.IsNullOrEmpty(contextData.OutputPath))
+			{
+				template.Output.Project =  string.Format(contextData.OutputPath, driver.ParentFolder, driver.Prefix);
+			}
+
+			template.RenderToFile(string.Format(@"{0}\{1}{2}.g.cs", contextData.OutputFolder,driver.Prefix,contextData.ContextName));
+		}
+		
+		private void GenerateEFCoreContext(IDriver driver, ContextData contextData)
+		{	
+			var template = new ContextCoreTemplate();
+		    template.DataType = DataType;
+            template.EntityNamespace = EntityDataType.FullNamespace;
+			template.ContextData = contextData;
+			template.Driver = driver;
+
+			if(!string.IsNullOrEmpty(contextData.OutputPath))
+			{
+				template.Output.Project =  string.Format(contextData.OutputPath, driver.ParentFolder, driver.Prefix);
+			}
+
+			template.RenderToFile(string.Format(@"{0}\{1}{2}.g.cs", contextData.OutputFolder,driver.Prefix,contextData.ContextName));
+		}
     }
 #>

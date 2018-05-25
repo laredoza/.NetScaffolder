@@ -79,7 +79,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Base
         ///     Gets or sets the driver types.
         /// </summary>
         [XmlIgnore]
-        public List<IDriver> DriverTypes { get; set; }
+        public List<IDriver> Drivers { get; set; }
 
         /// <summary>
         ///     Gets or sets the meta data.

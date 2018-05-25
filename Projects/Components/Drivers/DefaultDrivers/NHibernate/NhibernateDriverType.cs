@@ -17,6 +17,7 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.NHibernate
     using DotNetScaffolder.Components.Common.Contract;
     using DotNetScaffolder.Core.Common.Serializer;
     using DotNetScaffolder.Core.Common.Validation;
+    using DotNetScaffolder.Mapping.MetaData.Model;
 
     #endregion
 
@@ -162,6 +163,20 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.NHibernate
         public List<Validation> Validate()
         {
             return this.ValidationResult;
+        }
+
+        public string TransformRelationship(string table,
+                                            Relationship rel,
+                                            IEnumerable<Table> models,
+                                            IEnumerable<Relationship> relationships = null,
+                                            INamingConvention nc = null)
+        {
+            return string.Empty;
+        }
+
+        public string TransformDbGeneratedKey(Table table)
+        {
+            throw new NotImplementedException();
         }
 
         #endregion

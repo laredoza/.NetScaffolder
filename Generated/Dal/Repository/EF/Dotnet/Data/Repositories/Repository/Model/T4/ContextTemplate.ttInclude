@@ -99,7 +99,7 @@ namespace <#= ContextData.TransformFullnamespace(DataType.BaseNamespace) #>
 			
 <#+ foreach(var table in ContextData.Models){ #>
 <#+ foreach(var rel in table.ChildRelationships.Where(o => ContextData.HasModel(o))){ #>
-			<#=DataType.TransformRelationship(table.TableName, rel, ContextData.Models, table.Relationships.Where(o => ContextData.HasModel(o))) #>
+			<#= Driver.DriverType.TransformRelationship(table.TableName, rel, ContextData.Models, table.Relationships.Where(o => ContextData.HasModel(o)), DataType.NamingConvention) #>
 <#+ } #>
 <#+ } #>
 			

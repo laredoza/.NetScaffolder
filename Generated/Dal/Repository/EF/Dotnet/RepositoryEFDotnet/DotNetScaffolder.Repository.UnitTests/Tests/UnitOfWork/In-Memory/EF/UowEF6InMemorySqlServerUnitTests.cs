@@ -19,6 +19,8 @@ namespace RepositoryEFDotnet.UnitTest
 
     using RepositoryEFDotnet.Core.Base;
 
+    using SqlServerFullContext = Banking.Models.Context.SqlServerFullContext;
+
     /// <summary>
     /// The uow e f 6 in memory sql server unit test.
     /// </summary>

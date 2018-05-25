@@ -28,7 +28,7 @@ namespace RepositoryEFDotnet.UnitTest
         [TestInitialize]
         public void Init()
         {
-            using (var context = new EFCoreSqlServerFullContext(DbConfig))
+            using (var context = new SqlServerFullContext(DbConfig))
             {
                 context.Database.EnsureDeleted();
                 context.Database.EnsureCreated();
@@ -38,7 +38,7 @@ namespace RepositoryEFDotnet.UnitTest
         [TestMethod]
         public override void RunAll()
         {
-            using (var context = new EFCoreSqlServerFullContext(DbConfig))
+            using (var context = new SqlServerFullContext(DbConfig))
             {
                 this.BaseUnitOfWorkUnitTests_BankAccount_RunAll(context);
             }
@@ -47,7 +47,7 @@ namespace RepositoryEFDotnet.UnitTest
         [TestMethod]
         public override async Task RunAllAsync()
         {
-            using (var context = new EFCoreSqlServerFullContext(DbConfig))
+            using (var context = new SqlServerFullContext(DbConfig))
             {
                 await this.BaseUnitOfWorkUnitTests_BankAccount_RunAllAsync(context);
             }
