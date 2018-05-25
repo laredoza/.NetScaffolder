@@ -45,6 +45,7 @@ namespace DefaultDrivers.Forms
         public EFDriverTypeUserControl()
         {
             this.InitializeComponent();
+            this.DriverType = new EFDriverType("EFDriverType.xml");
         }
 
         #endregion
@@ -56,10 +57,7 @@ namespace DefaultDrivers.Forms
         /// </summary>
         public DomainDefinition DataSource { get; set; }
 
-        /// <summary>
-        ///     Gets or sets the driver type.
-        /// </summary>
-        public IDriverType DriverType => new EFDriverType("EFDriverType.xml");
+        public IDriverType DriverType { get; set; }
 
         /// <summary>
         ///     Gets or sets the validation result.
@@ -76,11 +74,14 @@ namespace DefaultDrivers.Forms
         /// <param name="parameters">
         /// The parameters.
         /// </param>
-        /// <exception cref="NotImplementedException">
-        /// </exception>
         public void LoadConfig(object parameters)
         {
-            IDictionary<string, string> parameterList = parameters as IDictionary<string, string>;
+            this.DriverType.LoadConfig(parameters);
+            this.CreateDb.Checked = this.DriverType.CreateDb;
+            this.LazyLoading.Checked = this.DriverType.LazyLoadingEnabled;
+            this.LoggingEnabled.Checked = this.DriverType.LoggingEnabled;
+            this.ProxyCreation.Checked = this.DriverType.ProxyCreationEnabled;
+            this.chkColumnOrder.Checked = this.DriverType.IncludeColumnOrder;
         }
 
         /// <summary>
@@ -89,11 +90,15 @@ namespace DefaultDrivers.Forms
         /// <param name="parameters">
         /// The parameters.
         /// </param>
-        /// <exception cref="NotImplementedException">
-        /// </exception>
         public void SaveConfig(object parameters)
         {
-            IDictionary<string, string> parameterList = parameters as IDictionary<string, string>;
+            this.DriverType.CreateDb = this.CreateDb.Checked;
+            this.DriverType.LazyLoadingEnabled = this.LazyLoading.Checked;
+            this.DriverType.LoggingEnabled = this.LoggingEnabled.Checked;
+            this.DriverType.ProxyCreationEnabled = this.ProxyCreation.Checked;
+            this.DriverType.IncludeColumnOrder = this.chkColumnOrder.Checked;
+
+            this.DriverType.SaveConfig(parameters);
         }
 
         /// <summary>
@@ -102,8 +107,6 @@ namespace DefaultDrivers.Forms
         /// <returns>
         ///     The <see cref="List" />.
         /// </returns>
-        /// <exception cref="NotImplementedException">
-        /// </exception>
         public List<Validation> Validate()
         {
             this.ValidationResult = this.DriverType.Validate();

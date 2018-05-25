@@ -58,6 +58,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="EFCoreUserControl.resx">
+      <DependentUpon>EFCoreUserControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="EFDriverTypeUserControl.resx">
       <DependentUpon>EFDriverTypeUserControl.cs</DependentUpon>
     </EmbeddedResource>

@@ -30,6 +30,7 @@
         {
             this.ButtonClose = new System.Windows.Forms.Button();
             this.DriverUserControl1 = new DotNetScaffolder.Presentation.Forms.Controls.Project.Drivers.DriverUserControl();
+            this.BtnSave = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // ButtonClose
@@ -44,16 +45,29 @@
             // 
             // DriverUserControl1
             // 
+            this.DriverUserControl1.DataSource = null;
             this.DriverUserControl1.Location = new System.Drawing.Point(2, 12);
             this.DriverUserControl1.Name = "DriverUserControl1";
+            this.DriverUserControl1.SavePath = null;
             this.DriverUserControl1.Size = new System.Drawing.Size(357, 171);
             this.DriverUserControl1.TabIndex = 1;
+            // 
+            // BtnSave
+            // 
+            this.BtnSave.Location = new System.Drawing.Point(157, 192);
+            this.BtnSave.Name = "BtnSave";
+            this.BtnSave.Size = new System.Drawing.Size(75, 23);
+            this.BtnSave.TabIndex = 2;
+            this.BtnSave.Text = "Save";
+            this.BtnSave.UseVisualStyleBackColor = true;
+            this.BtnSave.Click += new System.EventHandler(this.BtnSave_Click);
             // 
             // DriverForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(371, 224);
+            this.Controls.Add(this.BtnSave);
             this.Controls.Add(this.DriverUserControl1);
             this.Controls.Add(this.ButtonClose);
             this.Name = "DriverForm";
@@ -66,5 +80,6 @@
 
         private System.Windows.Forms.Button ButtonClose;
         private DriverUserControl DriverUserControl1;
+        private System.Windows.Forms.Button BtnSave;
     }
 }

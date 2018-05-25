@@ -48,5 +48,29 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project.Drivers
         {
             this.Close();
         }
+
+        private string savePath;
+
+        /// <summary>
+        ///     Gets or sets the save path.
+        /// </summary>
+        public string SavePath
+        {
+            get => this.savePath;
+
+            set
+            {
+                if (this.savePath != value)
+                {
+                    this.savePath = value;
+                    this.DriverUserControl1.SavePath = this.savePath;
+                }
+            }
+        }
+
+        private void BtnSave_Click(object sender, EventArgs e)
+        {
+            this.DriverUserControl1.Save();
+        }
     }
 }
