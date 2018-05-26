@@ -36,7 +36,13 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EFCore
         ///     Gets the name spaces used to generate templates.
         /// </summary>
         public List<string> NameSpaces =>
-            new List<string> { "Microsoft.EntityFrameworkCore", "Microsoft.EntityFrameworkCore.Storage" };
+            new List<string>
+                {
+                    "Microsoft.EntityFrameworkCore",
+                    "Microsoft.EntityFrameworkCore.Storage",
+                    "RepositoryEFDotnet.Contexts.EFCore",
+                    "System.Configuration"
+                };
 
         /// <summary>
         ///     The parent folder.
@@ -51,7 +57,12 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EFCore
         /// <summary>
         /// The driver type.
         /// </summary>
-        public IDriverType DriverType => new EFCoreDriverType("EFCoreDriverType.xml");
+        public EFCoreDriverType DriverType { get; set; }
+
+        /// <summary>
+        /// The driver type.
+        /// </summary>
+        IDriverType IDriver.DriverType => this.DriverType ?? (this.DriverType = new EFCoreDriverType("EFCoreDriverType.xml"));
 
         #endregion
     }

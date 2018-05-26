@@ -58,8 +58,8 @@ namespace RepositoryEFDotnet.UnitTest
         protected virtual void PopulateBankTransfers(IBankTransfers item, bool isUpdate = false, int seed = 1)
         {
             item.Amount = 50 + seed;
-            item.FromBankAccountId = 2;
-            item.ToBankAccountId = 3;
+            item.FromBankAccountId = 1;
+            item.ToBankAccountId = 2;
             item.TransferDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 14, 10, 12);
 
             if (isUpdate)

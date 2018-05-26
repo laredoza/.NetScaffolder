@@ -20,14 +20,12 @@
 
 using System;
 using System.Collections.Generic;
-
+using RepositoryEFDotnet.Core.Base;
 using Banking.Models.Interfaces;
 
 namespace Banking.Models.Interfaces
 {
-    using RepositoryEFDotnet.Core.Base;
-
-    /// <summary>
+	/// <summary>
 	/// The OrderDetailsRepository interface that defines database functions for the OrderDetails table
 	/// </summary>
 	public partial interface IOrderDetailsRepository : IRepository<IOrderDetails>

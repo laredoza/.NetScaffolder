@@ -4,7 +4,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace DotNetScaffolder.Contexts.EFCore
+namespace RepositoryEFDotnet.Contexts.EFCore
 {
     #region Using
 
@@ -28,7 +28,7 @@ namespace DotNetScaffolder.Contexts.EFCore
     /// <typeparam name="TContext">
     ///     The Context Type
     /// </typeparam>
-    public abstract class BaseContextCore : DbContext, IUnitOfWork
+    public abstract class BaseContext : DbContext, IUnitOfWork
     {
         #region Fields
 
@@ -42,33 +42,33 @@ namespace DotNetScaffolder.Contexts.EFCore
         #region Constructors and Destructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="BaseContextCore"/> class.
+        /// Initializes a new instance of the <see cref="BaseContext"/> class.
         /// </summary>
-        protected BaseContextCore()
+        protected BaseContext()
         {
             this.SetupContext();
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="BaseContextCore"/> class.
+        /// Initializes a new instance of the <see cref="BaseContext"/> class.
         /// </summary>
         /// <param name="connectionName">
         /// The connection name.
         /// </param>
-        protected BaseContextCore(string connectionName)
+        protected BaseContext(string connectionName)
         {
             this.ConnectionName = connectionName;
             this.SetupContext();
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="BaseContextCore"/> class. 
+        /// Initializes a new instance of the <see cref="BaseContext"/> class. 
         /// Initializes a new instance of the <see cref="BaseContext"/> class.
         /// </summary>
         /// <param name="options">
         /// The options.
         /// </param>
-        protected BaseContextCore(DbContextOptions options)
+        protected BaseContext(DbContextOptions options)
             : base(options)
         {
             this.SetupContext();

@@ -21,7 +21,7 @@ public class RepositoryTemplate : BaseTemplate
 
 using System;
 using System.Collections.Generic;
-using RepositoryEFDotnet.Library;
+using RepositoryEFDotnet.Core.Base;
 using System.Linq;
 using <#= DtoInterfaceNamespace #>;
 using <#= EntityNamespace #>;

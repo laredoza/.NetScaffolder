@@ -476,6 +476,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project
         {
             this.driverForm = new DriverForm
             {
+                SavePath = this.SavePath,
                 DataSource = this.SelectedDomain
             };
 

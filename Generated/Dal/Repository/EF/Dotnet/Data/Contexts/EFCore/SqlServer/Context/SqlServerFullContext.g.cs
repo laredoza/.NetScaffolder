@@ -18,45 +18,47 @@
 //	USE A PARTIAL CLASS INSTEAD
 // *******************************************************************
 
-using Banking.Models.Entity;
-using DotNetScaffolder.Contexts.EFCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
+using RepositoryEFDotnet.Contexts.EFCore;
+using System.Configuration;
 using System.ComponentModel.DataAnnotations.Schema;
+using Banking.Models.Entity;
 
 namespace Banking.Models.Context.Core
 {
-    using System.Configuration;
+	public partial class SqlServerFullContext : BaseContext
+	{	
+		#region CTOR
 
-    public partial class EFCoreSqlServerFullContext : BaseContextCore
-	{
-        #region CTOR
-
-	    public EFCoreSqlServerFullContext()
-	    {
-
-	    }
-
-	    public EFCoreSqlServerFullContext(string connectionName)
+	    public SqlServerFullContext(string connectionName)
 	        : base(connectionName)
 	    {
-
+			SetupContext();
 	    }
 
-	    public EFCoreSqlServerFullContext(DbContextOptions<EFCoreSqlServerFullContext> options) 
+	    public SqlServerFullContext(DbContextOptions<SqlServerFullContext> options) 
 			: base(options) 
 		{
+			SetupContext();
 		}
-
-        #endregion
-
+		
+		public SqlServerFullContext()
+			: base("name=RepoTest") 
+		{
+			SetupContext();
+		}
+		
+		#endregion
+		
 	    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 	    {
-	        if (!string.IsNullOrEmpty(ConnectionName))
+	        if (!string.IsNullOrEmpty(ConnectionName) && !optionsBuilder.IsConfigured)
 	        {
-	            optionsBuilder.UseSqlServer(ConfigurationManager.ConnectionStrings[ConnectionName].ConnectionString);
+				optionsBuilder.UseSqlServer(ConfigurationManager.ConnectionStrings[ConnectionName].ConnectionString);
 	        }
 	    }
-
+		
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -104,32 +106,32 @@ namespace Banking.Models.Context.Core
 			
 			#region Included Relationships
 			
-			modelBuilder.Entity<BankAccount>().HasMany<BankTransfers>(s => s.BankTransfersFrom).WithOne(s => s.BankAccountFrom).IsRequired().HasForeignKey(s => s.FromBankAccountId).OnDelete(DeleteBehavior.Restrict);
+			modelBuilder.Entity<BankAccount>().HasMany<BankTransfers>(s => s.BankTransfersFrom).WithOne(s => s.BankAccountFrom).HasForeignKey(s => s.FromBankAccountId).OnDelete(DeleteBehavior.Restrict);
 			modelBuilder.Entity<BankAccount>().HasMany<BankTransfers>(s => s.BankTransfersTo).WithOne(s => s.BankAccountTo).HasForeignKey(s => s.ToBankAccountId).OnDelete(DeleteBehavior.Restrict);
 			modelBuilder.Entity<Country>().HasMany<Customer>(s => s.Customer).WithOne(s => s.Country).HasForeignKey(s => s.CountryId).OnDelete(DeleteBehavior.Restrict);
-            modelBuilder.Entity<Customer>().HasMany<BankAccount>(s => s.BankAccount).WithOne(s => s.Customer).HasForeignKey(s => s.CustomerId).OnDelete(DeleteBehavior.Restrict);
-            modelBuilder.Entity<Customer>().HasMany<Order>(s => s.Order).WithOne(s => s.Customer).HasForeignKey(s => s.CustomerId).OnDelete(DeleteBehavior.Restrict);
-            modelBuilder.Entity<Order>().HasMany<OrderDetails>(s => s.OrderDetails).WithOne(s => s.Order).HasForeignKey(s => s.OrderId).OnDelete(DeleteBehavior.Restrict);
-            modelBuilder.Entity<Product>().HasOne<Book>(s => s.Book).WithOne(s => s.Product).OnDelete(DeleteBehavior.Restrict);
-            modelBuilder.Entity<Product>().HasMany<OrderDetails>(s => s.OrderDetails).WithOne(s => s.Product).HasForeignKey(s => s.ProductId).OnDelete(DeleteBehavior.Restrict);
-            modelBuilder.Entity<Product>().HasOne<Software>(s => s.Software).WithOne(s => s.Product).OnDelete(DeleteBehavior.Restrict);
+			modelBuilder.Entity<Customer>().HasMany<BankAccount>(s => s.BankAccount).WithOne(s => s.Customer).HasForeignKey(s => s.CustomerId).OnDelete(DeleteBehavior.Restrict);
+			modelBuilder.Entity<Customer>().HasMany<Order>(s => s.Order).WithOne(s => s.Customer).HasForeignKey(s => s.CustomerId).OnDelete(DeleteBehavior.Restrict);
+			modelBuilder.Entity<Order>().HasMany<OrderDetails>(s => s.OrderDetails).WithOne(s => s.Order).HasForeignKey(s => s.OrderId).OnDelete(DeleteBehavior.Restrict);
+			modelBuilder.Entity<Product>().HasOne<Book>(s => s.Book).WithOne(s => s.Product).OnDelete(DeleteBehavior.Restrict);
+			modelBuilder.Entity<Product>().HasMany<OrderDetails>(s => s.OrderDetails).WithOne(s => s.Product).HasForeignKey(s => s.ProductId).OnDelete(DeleteBehavior.Restrict);
+			modelBuilder.Entity<Product>().HasOne<Software>(s => s.Software).WithOne(s => s.Product).OnDelete(DeleteBehavior.Restrict);
+			
+			#endregion
+			
+			#region Excluded Relationships
+			
+			// Exclude entities not part of this context
+			
 
-            #endregion
-
-            #region Excluded Relationships
-
-            // Exclude entities not part of this context
-
-
-            #endregion
-
-            #region Constraints
-
-            modelBuilder.Entity<BankAccount>().Property(t => t.BankAccountId).IsRequired();
+			#endregion
+			
+			#region Constraints
+			
+			modelBuilder.Entity<BankAccount>().Property(t => t.BankAccountId).IsRequired();
 			modelBuilder.Entity<BankAccount>().Property(t => t.BankAccountNumber).HasMaxLength(10);
 			modelBuilder.Entity<BankAccount>().Property(t => t.BankAccountNumber).IsRequired();
 			modelBuilder.Entity<BankAccount>().Property(t => t.Balance).IsRequired();
-			modelBuilder.Entity<BankAccount>().Property(t => t.Balance).HasColumnType("decimal(19, 4)");
+			// TODO: modelBuilder.Entity<BankAccount>().Property(t => t.Balance).HasPrecision(19, 4);
 			modelBuilder.Entity<BankAccount>().Property(t => t.CustomerId).IsRequired(false);
 			modelBuilder.Entity<BankAccount>().Property(t => t.Locked).IsRequired();
 			modelBuilder.Entity<CompositeKeyTest>().Property(t => t.PrimaryCol1).IsRequired();
@@ -138,8 +140,8 @@ namespace Banking.Models.Context.Core
 			modelBuilder.Entity<BankTransfers>().Property(t => t.FromBankAccountId).IsRequired();
 			modelBuilder.Entity<BankTransfers>().Property(t => t.ToBankAccountId).IsRequired();
 			modelBuilder.Entity<BankTransfers>().Property(t => t.Amount).IsRequired();
-			modelBuilder.Entity<BankTransfers>().Property(t => t.Amount).HasColumnType("decimal(18,2)");
-            modelBuilder.Entity<BankTransfers>().Property(t => t.TransferDate).IsRequired();
+			// TODO: modelBuilder.Entity<BankTransfers>().Property(t => t.Amount).HasPrecision(18, 2);
+			modelBuilder.Entity<BankTransfers>().Property(t => t.TransferDate).IsRequired();
 			modelBuilder.Entity<Book>().Property(t => t.ProductId).IsRequired();
 			modelBuilder.Entity<Book>().Property(t => t.Publisher).HasMaxLength(200);
 			modelBuilder.Entity<Book>().Property(t => t.Publisher).IsRequired();
@@ -185,15 +187,15 @@ namespace Banking.Models.Context.Core
 			modelBuilder.Entity<OrderDetails>().Property(t => t.OrderId).IsRequired();
 			modelBuilder.Entity<OrderDetails>().Property(t => t.ProductId).IsRequired();
 			modelBuilder.Entity<OrderDetails>().Property(t => t.UnitPrice).IsRequired(false);
-			modelBuilder.Entity<OrderDetails>().Property(t => t.UnitPrice).HasColumnType("decimal(19, 4)");
-            modelBuilder.Entity<OrderDetails>().Property(t => t.Amount).IsRequired(false);
+			// TODO: modelBuilder.Entity<OrderDetails>().Property(t => t.UnitPrice).HasPrecision(19, 4);
+			modelBuilder.Entity<OrderDetails>().Property(t => t.Amount).IsRequired(false);
 			modelBuilder.Entity<OrderDetails>().Property(t => t.Discount).IsRequired(false);
 			modelBuilder.Entity<Product>().Property(t => t.ProductId).IsRequired();
 			modelBuilder.Entity<Product>().Property(t => t.ProductDescription).HasMaxLength(100);
 			modelBuilder.Entity<Product>().Property(t => t.ProductDescription).IsRequired(false);
 			modelBuilder.Entity<Product>().Property(t => t.UnitPrice).IsRequired(false);
-			modelBuilder.Entity<Product>().Property(t => t.UnitPrice).HasColumnType("decimal(19, 4)");
-            modelBuilder.Entity<Product>().Property(t => t.UnitAmount).HasMaxLength(50);
+			// TODO: modelBuilder.Entity<Product>().Property(t => t.UnitPrice).HasPrecision(19, 4);
+			modelBuilder.Entity<Product>().Property(t => t.UnitAmount).HasMaxLength(50);
 			modelBuilder.Entity<Product>().Property(t => t.UnitAmount).IsRequired(false);
 			modelBuilder.Entity<Product>().Property(t => t.Publisher).HasMaxLength(200);
 			modelBuilder.Entity<Product>().Property(t => t.Publisher).IsRequired(false);
@@ -230,7 +232,8 @@ namespace Banking.Models.Context.Core
             //Configuration.ProxyCreationEnabled = false;
             //Configuration.AutoDetectChangesEnabled = false;
 			
-			//Database.EnsureCreated();
+			//Database.SetInitializer(new CreateDatabaseIfNotExists<SqlServerFullContext>());
+			// Database.SetInitializer(new MigrateDatabaseToLatestVersion<SqlServerFullContext, Configuration>());
         }
 		
 		#endregion

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ApplicationServiceDataType xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <AdditionalNamespaces />
   <Enabled>false</Enabled>
-  <Namespace>ApplicationService</Namespace>
-  <OutputFolder>Application Service</OutputFolder>
+  <Namespace>UnitOfWork</Namespace>
+  <OutputFolder>UnitOfWork</OutputFolder>
 </ApplicationServiceDataType>

@@ -52,7 +52,7 @@
     </Models>
     <Namespace>Accounts</Namespace>
     <OutputFolder>Context</OutputFolder>
-    <OutputPath>..\..\Contexts\{0}\{1}\RepositoryEFDotnet.Contexts.EF.{1}.csproj</OutputPath>
+    <OutputPath>..\..\Contexts\{0}\{1}\RepositoryEFDotnet.Contexts.{0}.{1}.csproj</OutputPath>
     <ProxyCreationEnabled>false</ProxyCreationEnabled>
   </ContextData>
   <ContextData>
@@ -195,7 +195,7 @@
     </Models>
     <Namespace>Customers</Namespace>
     <OutputFolder>Context</OutputFolder>
-    <OutputPath>..\..\Contexts\{0}\{1}\RepositoryEFDotnet.Contexts.EF.{1}.csproj</OutputPath>
+    <OutputPath>..\..\Contexts\{0}\{1}\RepositoryEFDotnet.Contexts.{0}.{1}.csproj</OutputPath>
     <ProxyCreationEnabled>false</ProxyCreationEnabled>
   </ContextData>
   <ContextData>
@@ -385,7 +385,7 @@
     </Models>
     <Namespace>Context</Namespace>
     <OutputFolder>Context</OutputFolder>
-    <OutputPath>..\..\Contexts\{0}\{1}\RepositoryEFDotnet.Contexts.EF.{1}.csproj</OutputPath>
+    <OutputPath>..\..\Contexts\{0}\{1}\RepositoryEFDotnet.Contexts.{0}.{1}.csproj</OutputPath>
     <ProxyCreationEnabled>false</ProxyCreationEnabled>
   </ContextData>
 </ArrayOfContextData>

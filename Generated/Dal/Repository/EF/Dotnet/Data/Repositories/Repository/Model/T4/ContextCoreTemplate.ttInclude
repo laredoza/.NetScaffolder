@@ -26,13 +26,10 @@ using <#= nameSpace #>;
 <#+ foreach(var nameSpace in DataType.AdditionalNamespaces){ #>
 using <#= nameSpace #>;
 <#+ } #>
-using RepositoryEFDotnet.Library;
 using System.ComponentModel.DataAnnotations.Schema;
 using <#= EntityNamespace #>;
-using System.Data.Common;
 
-
-namespace <#= ContextData.TransformFullnamespace(DataType.BaseNamespace) #>
+namespace <#= ContextData.TransformFullnamespace(DataType.BaseNamespace) #>.Core
 {
 <#+ if(!string.IsNullOrEmpty(Driver.ContextAttribute)){ #>
     <#=Driver.ContextAttribute #>
@@ -40,15 +37,17 @@ namespace <#= ContextData.TransformFullnamespace(DataType.BaseNamespace) #>
 	public partial class <#= string.Concat(Driver.Prefix, ContextData.ContextName) #> <#= ContextData.TransformInheritFrom #>
 	{	
 		#region CTOR
-		
-		public <#= string.Concat(Driver.Prefix, ContextData.ContextName)  #>(DbConnection dbCon, bool contextOwnsConnection = true) 
-			: base(dbCon, contextOwnsConnection) 
+
+	    public <#= string.Concat(Driver.Prefix, ContextData.ContextName)  #>(string connectionName)
+	        : base(connectionName)
+	    {
+			SetupContext();
+	    }
+
+	    public <#= string.Concat(Driver.Prefix, ContextData.ContextName)  #>(DbContextOptions<<#= string.Concat(Driver.Prefix, ContextData.ContextName)  #>> options) 
+			: base(options) 
 		{
-		}
-		
-		public <#= string.Concat(Driver.Prefix, ContextData.ContextName)  #>(string connectionOrName) 
-			: base($"name={connectionOrName}") 
-		{
+			SetupContext();
 		}
 		
 		public <#= string.Concat(Driver.Prefix, ContextData.ContextName)  #>()
@@ -59,11 +58,22 @@ namespace <#= ContextData.TransformFullnamespace(DataType.BaseNamespace) #>
 			: base() 
 <#+ } #>
 		{
+			SetupContext();
 		}
 		
 		#endregion
 		
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+	    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+	    {
+	        if (!string.IsNullOrEmpty(ConnectionName) && !optionsBuilder.IsConfigured)
+	        {
+<#+ if(Driver is EFCoreSqlServerDriver) { #>
+				optionsBuilder.UseSqlServer(ConfigurationManager.ConnectionStrings[ConnectionName].ConnectionString);
+<#+ }#>
+	        }
+	    }
+		
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 			
@@ -86,12 +96,12 @@ namespace <#= ContextData.TransformFullnamespace(DataType.BaseNamespace) #>
 <#+ foreach(var table in ContextData.Models){ #>
 <#+ if(table.PrimaryKeyCount == 1){ var pk = table.Columns.First(o => o.IsPrimaryKey);#>
 			modelBuilder.Entity<<#=DataType.TransformModelName(table.TableName) #>>().HasKey(t => t.<#= pk.ColumnName #>);
-			modelBuilder.Entity<<#=DataType.TransformModelName(table.TableName) #>>().Property(t => t.<#= pk.ColumnName #>).HasDatabaseGeneratedOption(<#=table.TransformDatabaseGeneratedKeyType #>);
+			modelBuilder.Entity<<#=DataType.TransformModelName(table.TableName) #>>().Property(t => t.<#= pk.ColumnName #>)<#=Driver.DriverType.TransformDbGeneratedKey(table) #>;
 <#+ } #>
 <#+ if(table.PrimaryKeyCount > 1){ #>
 			modelBuilder.Entity<<#=DataType.TransformModelName(table.TableName) #>>().HasKey(t => new {<#= DataType.TransformCompositeKeys(table.Columns.Where(o => o.IsPrimaryKey), "t") #>});
 <#+ foreach(var col in table.Columns.Where(o => o.IsPrimaryKey)){ #>
-			modelBuilder.Entity<<#=DataType.TransformModelName(table.TableName) #>>().Property(t => t.<#= col.ColumnName #>).HasDatabaseGeneratedOption(<#=table.TransformDatabaseGeneratedKeyType #>);
+			modelBuilder.Entity<<#=DataType.TransformModelName(table.TableName) #>>().Property(t => t.<#= col.ColumnName #>)<#=Driver.DriverType.TransformDbGeneratedKey(table) #>;
 <#+ } #>
 <#+ } #>
 <#+ } #>
@@ -102,7 +112,7 @@ namespace <#= ContextData.TransformFullnamespace(DataType.BaseNamespace) #>
 			
 <#+ foreach(var table in ContextData.Models){ #>
 <#+ foreach(var rel in table.ChildRelationships.Where(o => ContextData.HasModel(o))){ #>
-			<#=DataType.TransformRelationship(table.TableName, rel, ContextData.Models, table.Relationships.Where(o => ContextData.HasModel(o))) #>
+			<#= Driver.DriverType.TransformRelationship(table.TableName, rel, ContextData.Models, table.Relationships.Where(o => ContextData.HasModel(o)), DataType.NamingConvention) #>
 <#+ } #>
 <#+ } #>
 			
@@ -129,10 +139,10 @@ namespace <#= ContextData.TransformFullnamespace(DataType.BaseNamespace) #>
 			modelBuilder.Entity<<#=DataType.TransformModelName(table.TableName) #>>().Property(t => t.<#= col.ColumnName #>).IsRequired();
 <#+ } else #>
 <#+ { #>
-			modelBuilder.Entity<<#=DataType.TransformModelName(table.TableName) #>>().Property(t => t.<#= col.ColumnName #>).IsOptional();
+			modelBuilder.Entity<<#=DataType.TransformModelName(table.TableName) #>>().Property(t => t.<#= col.ColumnName #>).IsRequired(false);
 <#+ } #>
 <#+ if((col.Precision > 0 && !col.InValidPrecisionGeneration) || col.Scale > 0){ #>
-			modelBuilder.Entity<<#=DataType.TransformModelName(table.TableName) #>>().Property(t => t.<#= col.ColumnName #>).HasPrecision(<#= col.Precision #>, <#= col.Scale #>);
+			// TODO: modelBuilder.Entity<<#=DataType.TransformModelName(table.TableName) #>>().Property(t => t.<#= col.ColumnName #>).HasPrecision(<#= col.Precision #>, <#= col.Scale #>);
 <#+ } #>
 <#+ } #>
 <#+ } #>
@@ -144,7 +154,7 @@ namespace <#= ContextData.TransformFullnamespace(DataType.BaseNamespace) #>
 			
 <#+ foreach(var table in ContextData.Models){ #>
 <#+ foreach(var col in table.Columns){ #>
-			modelBuilder.Entity<<#=DataType.TransformModelName(table.TableName) #>>().Property(t => t.<#= col.ColumnName #>).HasColumnOrder(<#= col.ColumnOrder #>);
+			//TODO: modelBuilder.Entity<<#=DataType.TransformModelName(table.TableName) #>>().Property(t => t.<#= col.ColumnName #>).HasColumnOrder(<#= col.ColumnOrder #>);
 <#+ } #>
 <#+ } #>
 
@@ -164,16 +174,16 @@ namespace <#= ContextData.TransformFullnamespace(DataType.BaseNamespace) #>
         
 		protected override void SetupContext()
         {
-            Configuration.LazyLoadingEnabled = <#= ContextData.LazyLoadingEnabled.ToString().ToLower() #>;
-            Configuration.ProxyCreationEnabled = <#= ContextData.ProxyCreationEnabled.ToString().ToLower() #>;
-            Configuration.AutoDetectChangesEnabled = false;
+            //Configuration.LazyLoadingEnabled = <#= ContextData.LazyLoadingEnabled.ToString().ToLower() #>;
+            //Configuration.ProxyCreationEnabled = <#= ContextData.ProxyCreationEnabled.ToString().ToLower() #>;
+            //Configuration.AutoDetectChangesEnabled = false;
 			
 <#+ if(ContextData.CreateDb){ #>
-			Database.SetInitializer(new CreateDatabaseIfNotExists<<#= string.Concat(Driver.Prefix, ContextData.ContextName)  #>>());
+			//Database.SetInitializer(new CreateDatabaseIfNotExists<<#= string.Concat(Driver.Prefix, ContextData.ContextName)  #>>());
 			// Database.SetInitializer(new MigrateDatabaseToLatestVersion<<#= string.Concat(Driver.Prefix, ContextData.ContextName)  #>, Configuration>());
 <#+ } #>
 <#+ if(ContextData.LoggingEnabled){ #>
-			Database.Log = this.Log;
+			//Database.Log = this.Log;
 <#+ } #>
         }
 		

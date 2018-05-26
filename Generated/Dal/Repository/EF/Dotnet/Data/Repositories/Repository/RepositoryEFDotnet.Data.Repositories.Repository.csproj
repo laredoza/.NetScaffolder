@@ -3,6 +3,11 @@
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="Model\Package\**" />
+    <EmbeddedResource Remove="Model\Package\**" />
+    <None Remove="Model\Package\**" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\..\..\Core\RepositoryEFDotnet.Core.csproj" />
     <ProjectReference Include="..\..\Entities\Entity\RepositoryEFDotnet.Data.Entities.Entity.csproj" />
     <ProjectReference Include="..\..\Interfaces\Interface\RepositoryEFDotnet.Data.Interface.ModelInterfaces.csproj" />
@@ -35,6 +40,9 @@
 ..\..\Contexts\EF\SqlServer\Context\SqlServerAccountContext.g.cs
 ..\..\Contexts\EF\SqlServer\Context\SqlServerCustomerContext.g.cs
 ..\..\Contexts\EF\SqlServer\Context\SqlServerFullContext.g.cs
+..\..\Contexts\EFCore\SqlServer\Context\SqlServerAccountContext.g.cs
+..\..\Contexts\EFCore\SqlServer\Context\SqlServerCustomerContext.g.cs
+..\..\Contexts\EFCore\SqlServer\Context\SqlServerFullContext.g.cs
 ..\..\Dtos\Dto\Dto\BankAccountDto.g.cs
 ..\..\Dtos\Dto\Dto\BankTransfersDto.g.cs
 ..\..\Dtos\Dto\Dto\BookDto.g.cs

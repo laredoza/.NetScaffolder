@@ -8,6 +8,7 @@
 <#@ assembly name="$(ProjectDir)Model\Package\DotNetScaffolder.Core.Common.dll" #>
 <#@ assembly name="$(ProjectDir)Model\Package\DotNetScaffolder.Mapping.MetaData.dll" #>
 <#@ assembly name="$(ProjectDir)Model\Package\DotNetScaffolder.Components.DataTypes.DefaultDataTypes.dll" #>
+<#@ assembly name="$(ProjectDir)Model\Package\DotNetScaffolder.Components.Drivers.DefaultDrivers.dll" #>
 <#@ assembly name="$(ProjectDir)Model\Package\FormControls.dll" #>
 <#@ assembly name="$(ProjectDir)Model\Package\DotNetScaffolder.Components.Common.dll" #>
 <#@ assembly name="$(ProjectDir)Model\Package\DotNetScaffolder.Core.Configuration.dll" #>
@@ -34,6 +35,8 @@
 <#@ import namespace="DotNetScaffolder.Components.DataTypes.DefaultDataTypes.EntityDataTypes" #>
 <#@ import namespace="DotNetScaffolder.Components.DataTypes.DefaultDataTypes.RepoInterfaceDataTypes" #>
 <#@ import namespace="DotNetScaffolder.Components.DataTypes.DefaultDataTypes.RepositoryDataTypes" #>
+<#@ import namespace="DotNetScaffolder.Components.Drivers.DefaultDrivers.EFCore" #>
+<#@ import namespace="DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6" #>
 <#@ import namespace="DotNetScaffolder.Mapping.MetaData.Enum" #>
 
 <#@ import namespace="DotNetScaffolder.Core.Configuration" #>
@@ -89,7 +92,7 @@
                         dt.NamingConvention = nc;
                         dt.CollectionOption = co;
 			            dt.BaseNamespace = ProjectDefinition.BaseNameSpace;
-                        dt.DriverTypes = drivers;
+                        dt.Drivers = drivers;
                         dataTypes.Add(dt);
                     }
                 }

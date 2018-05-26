@@ -45,7 +45,7 @@ namespace DotNetScaffolder.Components.Common.Contract
         /// <summary>
         ///     Gets or sets the driver type.
         /// </summary>
-        List<IDriver> DriverTypes { get; set; }
+        List<IDriver> Drivers { get; set; }
 
         /// <summary>
         ///     Gets or sets the meta data.

@@ -31,7 +31,7 @@ namespace DotNetScaffolder.Components.Common.Contract.UI
         /// <summary>
         /// Gets or sets the driver type.
         /// </summary>
-        IDriverType DriverType { get; }
+        IDriverType DriverType { get; set; }
 
         #endregion
 

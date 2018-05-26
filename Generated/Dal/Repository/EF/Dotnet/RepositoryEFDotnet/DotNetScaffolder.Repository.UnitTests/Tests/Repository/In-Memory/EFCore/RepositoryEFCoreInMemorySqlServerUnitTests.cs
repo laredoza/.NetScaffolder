@@ -28,10 +28,10 @@ namespace RepositoryEFDotnet.UnitTest
         [ClassInitialize]
         public static void ClassInit(TestContext context)
         {
-            var options = new DbContextOptionsBuilder<EFCoreSqlServerFullContext>().UseInMemoryDatabase("EFCORE_SqlServer").Options;
-            Context = new EFCoreSqlServerFullContext(options);
+            var options = new DbContextOptionsBuilder<SqlServerFullContext>().UseInMemoryDatabase("EFCORE_SqlServer").Options;
+            Context = new SqlServerFullContext(options);
 
-            ((EFCoreSqlServerFullContext)Context).Database.EnsureCreated();
+            ((SqlServerFullContext)Context).Database.EnsureCreated();
         }
         #endregion
     }

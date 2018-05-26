@@ -28,9 +28,9 @@ namespace RepositoryEFDotnet.UnitTest
         [ClassInitialize]
         public static void ClassInit(TestContext context)
         {
-            Context = new EFCoreSqlServerFullContext("RepoTest");
-            ((EFCoreSqlServerFullContext)Context).Database.EnsureDeleted();
-            ((EFCoreSqlServerFullContext)Context).Database.EnsureCreated();
+            Context = new SqlServerFullContext("RepoTest");
+            ((SqlServerFullContext)Context).Database.EnsureDeleted();
+            ((SqlServerFullContext)Context).Database.EnsureCreated();
         }
         #endregion
     }

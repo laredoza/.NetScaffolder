@@ -20,14 +20,12 @@
 
 using System;
 using System.Collections.Generic;
-
+using RepositoryEFDotnet.Core.Base;
 using Banking.Models.Interfaces;
 
 namespace Banking.Models.Interfaces
 {
-    using RepositoryEFDotnet.Core.Base;
-
-    /// <summary>
+	/// <summary>
 	/// The OrderRepository interface that defines database functions for the Order table
 	/// </summary>
 	public partial interface IOrderRepository : IRepository<IOrder>

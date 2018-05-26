@@ -185,12 +185,12 @@
       <Project>{0333e000-6aaf-4e18-8747-2299a8231ab1}</Project>
       <Name>RepositoryEFDotnet.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Data\Contexts\EFCore\RepositoryEFDotnet.Contexts.EFCore.Base\RepositoryEFDotnet.Contexts.EFCore.Base.csproj">
-      <Project>{5a81040b-86f0-4218-ab1a-b0013d581530}</Project>
+    <ProjectReference Include="..\..\Data\Contexts\EFCore\Base\RepositoryEFDotnet.Contexts.EFCore.Base.csproj">
+      <Project>{b801261b-ece7-4b9e-86c8-0b5f631b0065}</Project>
       <Name>RepositoryEFDotnet.Contexts.EFCore.Base</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Data\Contexts\EFCore\RepositoryEFDotnet.Contexts.EFCore.SqlServer\RepositoryEFDotnet.Contexts.EFCore.SqlServer.csproj">
-      <Project>{5adf20d2-dbc7-495a-af8a-4408daa5d0e7}</Project>
+    <ProjectReference Include="..\..\Data\Contexts\EFCore\SqlServer\RepositoryEFDotnet.Contexts.EFCore.SqlServer.csproj">
+      <Project>{098a8e5b-f469-4e24-b513-ddc0656b2e42}</Project>
       <Name>RepositoryEFDotnet.Contexts.EFCore.SqlServer</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Data\Contexts\EF\Base\RepositoryEFDotnet.Contexts.EF.Base.csproj">

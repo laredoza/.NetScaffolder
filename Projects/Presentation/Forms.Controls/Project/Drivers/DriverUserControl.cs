@@ -14,6 +14,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project.Drivers
     using System.Windows.Forms;
 
     using DotNetScaffolder.Components.Common.Contract;
+    using DotNetScaffolder.Components.Common.Contract.UI;
     using DotNetScaffolder.Components.DataTypes.DefaultDataTypes;
     using DotNetScaffolder.Core.Configuration;
     using DotNetScaffolder.Mapping.MetaData.Domain;
@@ -86,6 +87,11 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project.Drivers
             }
         }
 
+        /// <summary>
+        /// Gets or sets the save path.
+        /// </summary>
+        public string SavePath { get; set; }
+
         #endregion
 
         #region Other Methods
@@ -123,13 +129,31 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project.Drivers
             if (this.DataSource != null)
             {
                 this.TabControl.TabPages.Clear();
+                IDriverTypeUI driverTypeUI;
 
                 foreach (IDriverType driverType in this.DriverTypes)
                 {
                     var page = new TabPage { Text = driverType.Name, BackColor = DefaultBackColor };
-                    page.Controls.Add(ScaffoldConfig.ReturnDriverDataTypeUi(driverType.Id, DisplayType.WinForm) as Control);
+                    driverTypeUI = ScaffoldConfig.ReturnDriverDataTypeUi(driverType.Id, DisplayType.WinForm);
+                    page.Controls.Add(driverTypeUI as Control);
+                    IDictionary<string, string> parameterList = new Dictionary<string, string>();
+                    parameterList.Add("basePath", this.SavePath);
+                    driverTypeUI.LoadConfig(parameterList);
                     this.TabControl.TabPages.Add(page);
                 }
+            }
+        }
+
+        public void Save()
+        {
+            IDriverTypeUI driverTypeUI;
+            
+            foreach (IDriverType driverType in this.DriverTypes)
+            {
+                driverTypeUI = ScaffoldConfig.ReturnDriverDataTypeUi(driverType.Id, DisplayType.WinForm);
+                IDictionary<string, string> parameterList = new Dictionary<string, string>();
+                parameterList.Add("basePath", this.SavePath);
+                driverTypeUI.SaveConfig(parameterList);
             }
         }
 
