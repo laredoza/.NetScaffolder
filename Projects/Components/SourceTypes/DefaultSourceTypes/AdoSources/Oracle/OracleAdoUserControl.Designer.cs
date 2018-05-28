@@ -32,6 +32,9 @@
             this.TxtConnection = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.ErrorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.ListViewDrivers = new System.Windows.Forms.ListView();
+            this.Schema = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -56,14 +59,42 @@
             // 
             this.ErrorProvider1.ContainerControl = this;
             // 
+            // ListViewDrivers
+            // 
+            this.ListViewDrivers.CheckBoxes = true;
+            this.ListViewDrivers.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.Schema});
+            this.ListViewDrivers.Location = new System.Drawing.Point(82, 52);
+            this.ListViewDrivers.Name = "ListViewDrivers";
+            this.ListViewDrivers.Size = new System.Drawing.Size(352, 176);
+            this.ListViewDrivers.TabIndex = 56;
+            this.ListViewDrivers.UseCompatibleStateImageBehavior = false;
+            this.ListViewDrivers.View = System.Windows.Forms.View.Details;
+            // 
+            // Schema
+            // 
+            this.Schema.Text = "Schema";
+            this.Schema.Width = 250;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(15, 52);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(49, 13);
+            this.label1.TabIndex = 55;
+            this.label1.Text = "Schema:";
+            // 
             // OracleAdoUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.ListViewDrivers);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.TxtConnection);
             this.Controls.Add(this.label2);
             this.Name = "OracleAdoUserControl";
-            this.Size = new System.Drawing.Size(463, 60);
+            this.Size = new System.Drawing.Size(502, 245);
             ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -75,5 +106,8 @@
         private System.Windows.Forms.TextBox TxtConnection;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ErrorProvider ErrorProvider1;
+        private System.Windows.Forms.ListView ListViewDrivers;
+        private System.Windows.Forms.ColumnHeader Schema;
+        private System.Windows.Forms.Label label1;
     }
 }

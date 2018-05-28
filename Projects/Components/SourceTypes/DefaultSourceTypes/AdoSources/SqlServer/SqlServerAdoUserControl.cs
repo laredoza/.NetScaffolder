@@ -178,5 +178,10 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
         {
             this.options.ConnectionString = this.TxtConnection.Text;
         }
+
+        private void ListViewDrivers_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
