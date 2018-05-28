@@ -176,6 +176,13 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
             return this.Schemas;
         }
 
+        private void Import(object options, DatabaseModel result, List<string> schemas, DatabaseReader databaseReader)
+        {
+            AdoSourceOptions adoOptions = options as AdoSourceOptions;
+
+            
+        }
+
         /// <summary>
         /// The import.
         /// </summary>
@@ -187,125 +194,92 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
         /// </returns>
         public DatabaseModel Import(object options)
         {
-            //, List<string> schemaExclusions
             Logger.Trace("Started Import()");
             DatabaseModel result = new DatabaseModel();
 
             AdoSourceOptions adoOptions = options as AdoSourceOptions;
             var databaseReader = new DatabaseReader(adoOptions.ConnectionString, adoOptions.ProviderName);
 
-            if (adoOptions.Schemas.Count > 0)
-            {
-                // Todo: Handle multiple Schemas's
-                databaseReader.Owner = adoOptions.Schemas[0];
-                //databaseReader.Owner = "dbo,Demo";
-
-                //databaseReader.Exclusions.
-            }
-
-            var schemaMetaData = databaseReader.ReadAll();
-
+            databaseReader.AllTables();
+            databaseReader.AllViews();
+            //databaseReader.AllStoredProcedures(); //but not this one!
+            //var schemaMetaData = databaseReader.ReadAll();
+            var schemaMetaData = databaseReader.DatabaseSchema;
             // schema.Tables[0].CheckConstraints[0].RefersToConstraint
             Table newTable;
             Column newColumn;
-            
 
-            foreach (var table in schemaMetaData.Tables.Where(
-                t => t.Name != "sysdiagrams" && t.Name != "__migrationhistory" && t.Name != "__MigrationHistory"))
+            List<DatabaseTable> tables = schemaMetaData.Tables.Where(
+                t => t.Name != "sysdiagrams" && t.Name != "__migrationhistory" && t.Name != "__MigrationHistory").ToList();
+
+            foreach (var table in tables)
             {
-                // foreach (var table in schema.Tables.Where(t => t.Name == "BankAccount"))
-                // Debug.WriteLine("Table " + table.Name);
-                newTable = new Table { TableName = table.Name, SchemaName = table.SchemaOwner };
-                result.Tables.Add(newTable);
-                string dataType;
-
-                foreach (var column in table.Columns)
+                if (adoOptions.Schemas.Any(s => s == table.SchemaOwner))
                 {
-                    if (column.DataType != null)
+                    DatabaseSchemaFixer.UpdateReferences(schemaMetaData);
+
+                    // foreach (var table in schema.Tables.Where(t => t.Name == "BankAccount"))
+                    // Debug.WriteLine("Table " + table.Name);
+                    newTable = new Table { TableName = table.Name, SchemaName = table.SchemaOwner };
+                    result.Tables.Add(newTable);
+                    string dataType;
+
+                    foreach (var column in table.Columns)
                     {
-                        dataType = column.DataType.TypeName;
-                    }
-                    else
-                    {
-                        dataType = string.Empty;
-                    }
-
-                    newColumn = new Column
-                    {
-                        ColumnName = column.Name,
-                        DomainDataType = this.MapDatabaseType(dataType, column),
-                        IsRequired = !column.Nullable || column.IsPrimaryKey,
-                        ColumnOrder = table.Columns.IndexOf(column) + 1,
-                        Precision = column.Precision.HasValue ? column.Precision.Value : 0,
-                        Scale = column.Scale.HasValue ? column.Scale.Value : 0,
-                        Length = column.Length.HasValue ? column.Length.Value : 0,
-                        IsPrimaryKey = column.IsPrimaryKey
-                    };
-
-                    if (column.IsPrimaryKey)
-                    {
-                        newTable.DatabaseGeneratedKeyType = this.MapDatabaseGeneratedKey(column);
-                    }
-
-                    newTable.Columns.Add(newColumn);
-                }
-
-                string referencedForeignColumnName = string.Empty;
-                MultiplicityResult multiplicityResult;
-
-                foreach (var foreignKey in table.ForeignKeys)
-                {
-                    var referencedForeignColumn = foreignKey.ReferencedColumns(schemaMetaData);
-
-                    if (referencedForeignColumn != null)
-                    {
-                        referencedForeignColumnName = referencedForeignColumn.ToList()[0];
-
-                        multiplicityResult = this.ReturnMultiplicity(
-                            table,
-                            foreignKey.Columns[0],
-                            foreignKey.ReferencedTable(schemaMetaData),
-                            referencedForeignColumnName,
-                            RelationshipType.ForeignKey);
-
-                        newTable.Relationships.Add(
-                            new Relationship
-                            {
-                                ReferencedTableName = foreignKey.RefersToTable,
-                                ColumnName = foreignKey.Columns[0],
-                                ReferencedColumnName = referencedForeignColumnName,
-                                DependencyRelationShip = RelationshipType.ForeignKey,
-                                RelationshipName = foreignKey.Name,
-                                SchemaName = foreignKey.SchemaOwner,
-                                Multiplicity = multiplicityResult.Multiplicity,
-                                ReferencedMultiplicity = multiplicityResult.ReferencedMultiplicity
-                            });
-                    }
-                }
-
-                foreach (var foreignKeyChildren in table.ForeignKeyChildren)
-                {
-                    foreach (var foreignKey in foreignKeyChildren.ForeignKeys)
-                    {
-                        var referencedForeignColumn = foreignKey.ReferencedColumns(schemaMetaData).ToList();
-                        if (foreignKey.RefersToTable == table.Name && referencedForeignColumn.Count > 0)
+                        if (column.DataType != null)
                         {
-                            var referencedForeignColumnString = referencedForeignColumn[0];
+                            dataType = column.DataType.TypeName;
+                        }
+                        else
+                        {
+                            dataType = string.Empty;
+                        }
+
+                        newColumn = new Column
+                        {
+                            ColumnName = column.Name,
+                            DomainDataType = this.MapDatabaseType(dataType, column),
+                            IsRequired = !column.Nullable || column.IsPrimaryKey,
+                            ColumnOrder = table.Columns.IndexOf(column) + 1,
+                            Precision = column.Precision.HasValue ? column.Precision.Value : 0,
+                            Scale = column.Scale.HasValue ? column.Scale.Value : 0,
+                            Length = column.Length.HasValue ? column.Length.Value : 0,
+                            IsPrimaryKey = column.IsPrimaryKey
+                        };
+
+                        if (column.IsPrimaryKey)
+                        {
+                            newTable.DatabaseGeneratedKeyType = this.MapDatabaseGeneratedKey(column);
+                        }
+
+                        newTable.Columns.Add(newColumn);
+                    }
+
+                    string referencedForeignColumnName = string.Empty;
+                    MultiplicityResult multiplicityResult;
+
+                    foreach (var foreignKey in table.ForeignKeys)
+                    {
+                        var referencedForeignColumn = foreignKey.ReferencedColumns(schemaMetaData);
+
+                        if (referencedForeignColumn != null)
+                        {
+                            referencedForeignColumnName = referencedForeignColumn.ToList()[0];
 
                             multiplicityResult = this.ReturnMultiplicity(
-                            table,
-                            referencedForeignColumnString,
-                            table.ForeignKeyChildren.FirstOrDefault(t => t.Name == foreignKey.TableName),
-                            foreignKey.Columns[0],
-                            RelationshipType.ForeignKeyChild);
+                                table,
+                                foreignKey.Columns[0],
+                                foreignKey.ReferencedTable(schemaMetaData),
+                                referencedForeignColumnName,
+                                RelationshipType.ForeignKey);
 
                             newTable.Relationships.Add(
                                 new Relationship
                                 {
-                                    ReferencedTableName = foreignKey.TableName,
-                                    ColumnName = referencedForeignColumnString,
-                                    ReferencedColumnName = foreignKey.Columns[0],
-                                    DependencyRelationShip = RelationshipType.ForeignKeyChild,
+                                    ReferencedTableName = foreignKey.RefersToTable,
+                                    ColumnName = foreignKey.Columns[0],
+                                    ReferencedColumnName = referencedForeignColumnName,
+                                    DependencyRelationShip = RelationshipType.ForeignKey,
                                     RelationshipName = foreignKey.Name,
                                     SchemaName = foreignKey.SchemaOwner,
                                     Multiplicity = multiplicityResult.Multiplicity,
@@ -313,28 +287,58 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
                                 });
                         }
                     }
-                }
 
-                // Format navigation property names to be unique and not equal to main table
-                foreach (var rel in newTable.Relationships.OrderBy(o => o.ColumnName).ThenBy(o => o.ReferencedColumnName))
-                {
-                    var test = (from relItem in newTable.Relationships
-                                orderby rel.ReferencedColumnName
-                                select (string.IsNullOrEmpty(relItem.RelationshipAlias) ? relItem.ReferencedTableName : relItem.RelationshipAlias)).ToList();
-
-                    test.AddRange(newTable.Columns.Select(o => o.ColumnName));
-                    test.Add(newTable.TableName);// Add table name as properties cannot have same name as main table
-
-                    string alias = RelationshipNameFormatting.FormatName(rel.ReferencedTableName, rel.RelationshipAlias, null, test);
-
-                    if (!string.Equals(rel.ReferencedTableName, alias))
+                    foreach (var foreignKeyChildren in table.ForeignKeyChildren)
                     {
-                        rel.RelationshipAlias = alias;
+                        foreach (var foreignKey in foreignKeyChildren.ForeignKeys)
+                        {
+                            var referencedForeignColumn = foreignKey.ReferencedColumns(schemaMetaData).ToList();
+                            if (foreignKey.RefersToTable == table.Name && referencedForeignColumn.Count > 0)
+                            {
+                                var referencedForeignColumnString = referencedForeignColumn[0];
+
+                                multiplicityResult = this.ReturnMultiplicity(
+                                table,
+                                referencedForeignColumnString,
+                                table.ForeignKeyChildren.FirstOrDefault(t => t.Name == foreignKey.TableName),
+                                foreignKey.Columns[0],
+                                RelationshipType.ForeignKeyChild);
+
+                                newTable.Relationships.Add(
+                                    new Relationship
+                                    {
+                                        ReferencedTableName = foreignKey.TableName,
+                                        ColumnName = referencedForeignColumnString,
+                                        ReferencedColumnName = foreignKey.Columns[0],
+                                        DependencyRelationShip = RelationshipType.ForeignKeyChild,
+                                        RelationshipName = foreignKey.Name,
+                                        SchemaName = foreignKey.SchemaOwner,
+                                        Multiplicity = multiplicityResult.Multiplicity,
+                                        ReferencedMultiplicity = multiplicityResult.ReferencedMultiplicity
+                                    });
+                            }
+                        }
+                    }
+
+                    // Format navigation property names to be unique and not equal to main table
+                    foreach (var rel in newTable.Relationships.OrderBy(o => o.ColumnName).ThenBy(o => o.ReferencedColumnName))
+                    {
+                        var test = (from relItem in newTable.Relationships
+                                    orderby rel.ReferencedColumnName
+                                    select (string.IsNullOrEmpty(relItem.RelationshipAlias) ? relItem.ReferencedTableName : relItem.RelationshipAlias)).ToList();
+
+                        test.AddRange(newTable.Columns.Select(o => o.ColumnName));
+                        test.Add(newTable.TableName);// Add table name as properties cannot have same name as main table
+
+                        string alias = RelationshipNameFormatting.FormatName(rel.ReferencedTableName, rel.RelationshipAlias, null, test);
+
+                        if (!string.Equals(rel.ReferencedTableName, alias))
+                        {
+                            rel.RelationshipAlias = alias;
+                        }
                     }
                 }
             }
-
-            this.Schemas = this.Schemas.OrderBy(s => s).ToList();
 
             this.Fix(result);
             Logger.Trace("Completed Import()");
