@@ -93,6 +93,10 @@ namespace DotNetScaffolder.Mapping.MetaData.Model
         /// </summary>
         Float,
 
-        Unsupported
+        Unsupported,
+
+        Double,
+
+        TimeSpan
     }
 }
