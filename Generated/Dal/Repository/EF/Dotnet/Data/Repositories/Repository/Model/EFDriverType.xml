@@ -5,4 +5,5 @@
   <LazyLoadingEnabled>false</LazyLoadingEnabled>
   <LoggingEnabled>true</LoggingEnabled>
   <ProxyCreationEnabled>false</ProxyCreationEnabled>
+  <UseSeperateConfigClasses>false</UseSeperateConfigClasses>
 </EFDriverType>

@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="EFSqlServerDriver.cs" company="DotnetScaffolder">
+// <copyright file="EFOracleDriver.cs" company="DotnetScaffolder">
 //   MIT
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
@@ -31,6 +31,11 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6
         public string ContextAttribute => "[DbConfigurationType(typeof(OracleDbConfiguration))]";
 
         /// <summary>
+        /// The driver type.
+        /// </summary>
+        public EFDriverType DriverType { get; set; }
+
+        /// <summary>
         ///     Force schema to uppercase.
         /// </summary>
         public bool ForceSchemaToUppercase => true;
@@ -51,16 +56,11 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6
         /// </summary>
         public string Prefix => "Oracle";
 
-        /// <summary>
-        /// The driver type.
-        /// </summary>
-        public EFDriverType DriverType { get; set; }
+        #endregion
 
         /// <summary>
         /// The driver type.
         /// </summary>
         IDriverType IDriver.DriverType => this.DriverType ?? (this.DriverType = new EFDriverType("EFDriverType.xml"));
-
-        #endregion
     }
 }

@@ -28,21 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.LoggingEnabled = new System.Windows.Forms.CheckBox();
             this.InheritFromInterface = new System.Windows.Forms.TextBox();
             this.OutputFolder = new System.Windows.Forms.TextBox();
             this.Namespace = new System.Windows.Forms.TextBox();
             this.ContextName = new System.Windows.Forms.TextBox();
             this.label27 = new System.Windows.Forms.Label();
-            this.LazyLoading = new System.Windows.Forms.CheckBox();
-            this.CreateDb = new System.Windows.Forms.CheckBox();
             this.label26 = new System.Windows.Forms.Label();
             this.label25 = new System.Windows.Forms.Label();
             this.label24 = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.chkColumnOrder = new System.Windows.Forms.CheckBox();
-            this.ProxyCreation = new System.Windows.Forms.CheckBox();
             this.txtCustomConnectionName = new System.Windows.Forms.TextBox();
             this.btnNew = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -51,28 +46,18 @@
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // LoggingEnabled
-            // 
-            this.LoggingEnabled.AutoSize = true;
-            this.LoggingEnabled.Location = new System.Drawing.Point(295, 58);
-            this.LoggingEnabled.Name = "LoggingEnabled";
-            this.LoggingEnabled.Size = new System.Drawing.Size(96, 17);
-            this.LoggingEnabled.TabIndex = 55;
-            this.LoggingEnabled.Text = "Enable logging";
-            this.LoggingEnabled.UseVisualStyleBackColor = true;
-            // 
             // InheritFromInterface
             // 
             this.InheritFromInterface.Location = new System.Drawing.Point(151, 102);
             this.InheritFromInterface.Name = "InheritFromInterface";
-            this.InheritFromInterface.Size = new System.Drawing.Size(121, 20);
+            this.InheritFromInterface.Size = new System.Drawing.Size(171, 20);
             this.InheritFromInterface.TabIndex = 54;
             // 
             // OutputFolder
             // 
             this.OutputFolder.Location = new System.Drawing.Point(151, 74);
             this.OutputFolder.Name = "OutputFolder";
-            this.OutputFolder.Size = new System.Drawing.Size(121, 20);
+            this.OutputFolder.Size = new System.Drawing.Size(171, 20);
             this.OutputFolder.TabIndex = 52;
             this.OutputFolder.Text = "Context";
             // 
@@ -80,7 +65,7 @@
             // 
             this.Namespace.Location = new System.Drawing.Point(151, 45);
             this.Namespace.Name = "Namespace";
-            this.Namespace.Size = new System.Drawing.Size(121, 20);
+            this.Namespace.Size = new System.Drawing.Size(171, 20);
             this.Namespace.TabIndex = 51;
             this.Namespace.Text = "Context";
             // 
@@ -88,7 +73,7 @@
             // 
             this.ContextName.Location = new System.Drawing.Point(151, 19);
             this.ContextName.Name = "ContextName";
-            this.ContextName.Size = new System.Drawing.Size(121, 20);
+            this.ContextName.Size = new System.Drawing.Size(171, 20);
             this.ContextName.TabIndex = 50;
             this.ContextName.Text = "Security Model";
             // 
@@ -100,26 +85,6 @@
             this.label27.Size = new System.Drawing.Size(65, 13);
             this.label27.TabIndex = 49;
             this.label27.Text = "Inherit From:";
-            // 
-            // LazyLoading
-            // 
-            this.LazyLoading.AutoSize = true;
-            this.LazyLoading.Location = new System.Drawing.Point(295, 40);
-            this.LazyLoading.Name = "LazyLoading";
-            this.LazyLoading.Size = new System.Drawing.Size(117, 17);
-            this.LazyLoading.TabIndex = 48;
-            this.LazyLoading.Text = "Enable lazy loading";
-            this.LazyLoading.UseVisualStyleBackColor = true;
-            // 
-            // CreateDb
-            // 
-            this.CreateDb.AutoSize = true;
-            this.CreateDb.Location = new System.Drawing.Point(295, 21);
-            this.CreateDb.Name = "CreateDb";
-            this.CreateDb.Size = new System.Drawing.Size(184, 17);
-            this.CreateDb.TabIndex = 47;
-            this.CreateDb.Text = "Create Database If it doesn\'t exist";
-            this.CreateDb.UseVisualStyleBackColor = true;
             // 
             // label26
             // 
@@ -159,22 +124,17 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.chkColumnOrder);
-            this.groupBox1.Controls.Add(this.ProxyCreation);
             this.groupBox1.Controls.Add(this.txtCustomConnectionName);
             this.groupBox1.Controls.Add(this.btnNew);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.OutputPath);
             this.groupBox1.Controls.Add(this.OutputFolder);
             this.groupBox1.Controls.Add(this.label23);
-            this.groupBox1.Controls.Add(this.LoggingEnabled);
             this.groupBox1.Controls.Add(this.label24);
             this.groupBox1.Controls.Add(this.InheritFromInterface);
             this.groupBox1.Controls.Add(this.label25);
             this.groupBox1.Controls.Add(this.label26);
-            this.groupBox1.Controls.Add(this.CreateDb);
             this.groupBox1.Controls.Add(this.Namespace);
-            this.groupBox1.Controls.Add(this.LazyLoading);
             this.groupBox1.Controls.Add(this.ContextName);
             this.groupBox1.Controls.Add(this.label27);
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
@@ -183,26 +143,6 @@
             this.groupBox1.TabIndex = 57;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Context settings";
-            // 
-            // chkColumnOrder
-            // 
-            this.chkColumnOrder.AutoSize = true;
-            this.chkColumnOrder.Location = new System.Drawing.Point(295, 94);
-            this.chkColumnOrder.Name = "chkColumnOrder";
-            this.chkColumnOrder.Size = new System.Drawing.Size(125, 17);
-            this.chkColumnOrder.TabIndex = 62;
-            this.chkColumnOrder.Text = "Include column order";
-            this.chkColumnOrder.UseVisualStyleBackColor = true;
-            // 
-            // ProxyCreation
-            // 
-            this.ProxyCreation.AutoSize = true;
-            this.ProxyCreation.Location = new System.Drawing.Point(295, 76);
-            this.ProxyCreation.Name = "ProxyCreation";
-            this.ProxyCreation.Size = new System.Drawing.Size(128, 17);
-            this.ProxyCreation.TabIndex = 61;
-            this.ProxyCreation.Text = "Enable proxy creation";
-            this.ProxyCreation.UseVisualStyleBackColor = true;
             // 
             // txtCustomConnectionName
             // 
@@ -264,14 +204,11 @@
         }
 
         #endregion
-        private System.Windows.Forms.CheckBox LoggingEnabled;
         private System.Windows.Forms.TextBox InheritFromInterface;
         private System.Windows.Forms.TextBox OutputFolder;
         private System.Windows.Forms.TextBox Namespace;
         private System.Windows.Forms.TextBox ContextName;
         private System.Windows.Forms.Label label27;
-        private System.Windows.Forms.CheckBox LazyLoading;
-        private System.Windows.Forms.CheckBox CreateDb;
         private System.Windows.Forms.Label label26;
         private System.Windows.Forms.Label label25;
         private System.Windows.Forms.Label label24;
@@ -282,7 +219,5 @@
         private System.Windows.Forms.Label label1;
         private FormControls.TreeView.MultiSelectTreeView.TreeView TreeviewContextModels;
         private System.Windows.Forms.TextBox txtCustomConnectionName;
-        private System.Windows.Forms.CheckBox ProxyCreation;
-        private System.Windows.Forms.CheckBox chkColumnOrder;
     }
 }

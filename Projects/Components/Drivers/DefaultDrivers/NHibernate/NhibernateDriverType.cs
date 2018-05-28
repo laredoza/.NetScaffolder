@@ -96,6 +96,11 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.NHibernate
         public bool ProxyCreationEnabled { get; set; }
 
         /// <summary>
+        /// Gets or sets a value indicating whether use seperate config classes.
+        /// </summary>
+        public bool UseSeperateConfigClasses { get; set; }
+
+        /// <summary>
         ///     Gets or sets the validation result.
         /// </summary>
         [XmlIgnore]
@@ -129,6 +134,7 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.NHibernate
                     this.LazyLoadingEnabled = loadedDriverType.LazyLoadingEnabled;
                     this.LoggingEnabled = loadedDriverType.LoggingEnabled;
                     this.ProxyCreationEnabled = loadedDriverType.ProxyCreationEnabled;
+                    this.UseSeperateConfigClasses = loadedDriverType.UseSeperateConfigClasses;
                 }
             }
         }
@@ -153,6 +159,69 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.NHibernate
         }
 
         /// <summary>
+        /// The transform column precision.
+        /// </summary>
+        /// <param name="col">
+        /// The col.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        /// <exception cref="NotImplementedException">
+        /// </exception>
+        public string TransformColumnPrecision(Column col)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// The transform db generated key.
+        /// </summary>
+        /// <param name="table">
+        /// The table.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        /// <exception cref="NotImplementedException">
+        /// </exception>
+        public string TransformDbGeneratedKey(Table table)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// The transform relationship.
+        /// </summary>
+        /// <param name="table">
+        /// The table.
+        /// </param>
+        /// <param name="rel">
+        /// The rel.
+        /// </param>
+        /// <param name="models">
+        /// The models.
+        /// </param>
+        /// <param name="relationships">
+        /// The relationships.
+        /// </param>
+        /// <param name="nc">
+        /// The nc.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        public string TransformRelationship(
+            string table,
+            Relationship rel,
+            IEnumerable<Table> models,
+            IEnumerable<Relationship> relationships = null,
+            INamingConvention nc = null)
+        {
+            return string.Empty;
+        }
+
+        /// <summary>
         /// The validate.
         /// </summary>
         /// <returns>
@@ -163,25 +232,6 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.NHibernate
         public List<Validation> Validate()
         {
             return this.ValidationResult;
-        }
-
-        public string TransformRelationship(string table,
-                                            Relationship rel,
-                                            IEnumerable<Table> models,
-                                            IEnumerable<Relationship> relationships = null,
-                                            INamingConvention nc = null)
-        {
-            return string.Empty;
-        }
-
-        public string TransformDbGeneratedKey(Table table)
-        {
-            throw new NotImplementedException();
-        }
-
-        public string TransformColumnPrecision(Column col)
-        {
-            throw new NotImplementedException();
         }
 
         #endregion

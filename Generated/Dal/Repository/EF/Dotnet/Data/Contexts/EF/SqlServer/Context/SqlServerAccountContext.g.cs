@@ -119,8 +119,6 @@ namespace Banking.Models.Accounts
             Configuration.ProxyCreationEnabled = false;
             Configuration.AutoDetectChangesEnabled = false;
 			
-			Database.SetInitializer(new CreateDatabaseIfNotExists<SqlServerAccountContext>());
-			// Database.SetInitializer(new MigrateDatabaseToLatestVersion<SqlServerAccountContext, Configuration>());
         }
 		
 		#endregion

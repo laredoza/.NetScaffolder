@@ -59,11 +59,6 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
         public string ContextName { get; set; }
 
         /// <summary>
-        ///     Gets or sets a value indicating whether create db.
-        /// </summary>
-        public bool CreateDb { get; set; }
-
-        /// <summary>
         ///     Gets or sets the custom connection name.
         /// </summary>
         public string CustomConnectionName { get; set; }
@@ -108,24 +103,9 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
         public Guid Id { get; set; }
 
         /// <summary>
-        ///     Gets or sets a value indicating whether include column order.
-        /// </summary>
-        public bool IncludeColumnOrder { get; set; }
-
-        /// <summary>
         ///     Gets or sets the inherit from.
         /// </summary>
         public string InheritFrom { get; set; } = "BaseContext";
-
-        /// <summary>
-        ///     Gets or sets a value indicating whether lazy loading enabled.
-        /// </summary>
-        public bool LazyLoadingEnabled { get; set; }
-
-        /// <summary>
-        ///     Gets or sets a value indicating whether logging enabled.
-        /// </summary>
-        public bool LoggingEnabled { get; set; }
 
         /// <summary>
         ///     Gets the models.
@@ -146,11 +126,6 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
         ///     Gets or sets the output path.
         /// </summary>
         public string OutputPath { get; set; }
-
-        /// <summary>
-        ///     Gets or sets a value indicating whether proxy creation enabled.
-        /// </summary>
-        public bool ProxyCreationEnabled { get; set; }
 
         /// <summary>
         ///     Gets the transform inherit from.

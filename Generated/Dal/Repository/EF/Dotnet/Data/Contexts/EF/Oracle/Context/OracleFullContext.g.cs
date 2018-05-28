@@ -220,12 +220,10 @@ namespace Banking.Models.Context
         
 		protected override void SetupContext()
         {
-            Configuration.LazyLoadingEnabled = true;
+            Configuration.LazyLoadingEnabled = false;
             Configuration.ProxyCreationEnabled = false;
             Configuration.AutoDetectChangesEnabled = false;
 			
-			Database.SetInitializer(new CreateDatabaseIfNotExists<OracleFullContext>());
-			// Database.SetInitializer(new MigrateDatabaseToLatestVersion<OracleFullContext, Configuration>());
         }
 		
 		#endregion

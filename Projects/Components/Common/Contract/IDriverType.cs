@@ -62,6 +62,8 @@ namespace DotNetScaffolder.Components.Common.Contract
         /// </summary>
         bool ProxyCreationEnabled { get; set; }
 
+        bool UseSeperateConfigClasses { get; set; }
+
         #endregion
 
         #region Public Methods And Operators

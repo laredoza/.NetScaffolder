@@ -1,22 +1,13 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="EFSqlServerDriver.cs" company="DotnetScaffolder">
+// <copyright file="NHibernateSqlServerDriver.cs" company="DotnetScaffolder">
 //   MIT
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.NHibernate
 {
-    #region Usings
-
-    using System.Collections.Generic;
-    using System.ComponentModel.Composition;
-
-    using DotNetScaffolder.Components.Common.Contract;
-
-    #endregion
-
     // <summary>
-    ///     Defines the default NHibernate 4.0 Sql Server driver.
+    // Defines the default NHibernate 4.0 Sql Server driver.
     /// </summary>
     // [Export(typeof(IDriver))]
     // [ExportMetadata("TypeMetaData", "NHibernate 4.0")]

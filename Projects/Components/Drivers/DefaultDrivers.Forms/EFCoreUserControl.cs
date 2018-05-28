@@ -80,6 +80,7 @@ namespace DefaultDrivers.Forms
             this.LoggingEnabled.Checked = this.DriverType.LoggingEnabled;
             this.ProxyCreation.Checked = this.DriverType.ProxyCreationEnabled;
             this.chkColumnOrder.Checked = this.DriverType.IncludeColumnOrder;
+            this.chkUseConfigClasses.Checked = this.DriverType.UseSeperateConfigClasses;
         }
 
         /// <summary>
@@ -95,6 +96,7 @@ namespace DefaultDrivers.Forms
             this.DriverType.LoggingEnabled = this.LoggingEnabled.Checked;
             this.DriverType.ProxyCreationEnabled = this.ProxyCreation.Checked;
             this.DriverType.IncludeColumnOrder = this.chkColumnOrder.Checked;
+            this.DriverType.UseSeperateConfigClasses = this.chkUseConfigClasses.Checked;
 
             this.DriverType.SaveConfig(parameters);
         }

@@ -122,8 +122,6 @@ namespace Banking.Models.Accounts
             Configuration.ProxyCreationEnabled = false;
             Configuration.AutoDetectChangesEnabled = false;
 			
-			Database.SetInitializer(new CreateDatabaseIfNotExists<OracleAccountContext>());
-			// Database.SetInitializer(new MigrateDatabaseToLatestVersion<OracleAccountContext, Configuration>());
         }
 		
 		#endregion

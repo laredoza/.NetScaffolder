@@ -121,8 +121,6 @@ namespace Banking.Models.Accounts
             Configuration.ProxyCreationEnabled = false;
             Configuration.AutoDetectChangesEnabled = false;
 			
-			Database.SetInitializer(new CreateDatabaseIfNotExists<MySqlAccountContext>());
-			// Database.SetInitializer(new MigrateDatabaseToLatestVersion<MySqlAccountContext, Configuration>());
         }
 		
 		#endregion

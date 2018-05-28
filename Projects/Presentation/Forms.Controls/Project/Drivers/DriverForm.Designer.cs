@@ -71,6 +71,7 @@
             this.Controls.Add(this.DriverUserControl1);
             this.Controls.Add(this.ButtonClose);
             this.Name = "DriverForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Manage Drivers";
             this.ResumeLayout(false);
 

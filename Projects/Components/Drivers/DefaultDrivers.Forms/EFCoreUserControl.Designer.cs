@@ -33,6 +33,7 @@
             this.LoggingEnabled = new System.Windows.Forms.CheckBox();
             this.CreateDb = new System.Windows.Forms.CheckBox();
             this.LazyLoading = new System.Windows.Forms.CheckBox();
+            this.chkUseConfigClasses = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // chkColumnOrder
@@ -85,17 +86,28 @@
             this.LazyLoading.Text = "Enable lazy loading";
             this.LazyLoading.UseVisualStyleBackColor = true;
             // 
+            // chkUseConfigClasses
+            // 
+            this.chkUseConfigClasses.AutoSize = true;
+            this.chkUseConfigClasses.Location = new System.Drawing.Point(12, 104);
+            this.chkUseConfigClasses.Name = "chkUseConfigClasses";
+            this.chkUseConfigClasses.Size = new System.Drawing.Size(191, 17);
+            this.chkUseConfigClasses.TabIndex = 73;
+            this.chkUseConfigClasses.Text = "Use seperate configuration classes";
+            this.chkUseConfigClasses.UseVisualStyleBackColor = true;
+            // 
             // EFCoreUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.chkUseConfigClasses);
             this.Controls.Add(this.chkColumnOrder);
             this.Controls.Add(this.ProxyCreation);
             this.Controls.Add(this.LoggingEnabled);
             this.Controls.Add(this.CreateDb);
             this.Controls.Add(this.LazyLoading);
             this.Name = "EFCoreUserControl";
-            this.Size = new System.Drawing.Size(237, 117);
+            this.Size = new System.Drawing.Size(237, 125);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -108,5 +120,6 @@
         private System.Windows.Forms.CheckBox LoggingEnabled;
         private System.Windows.Forms.CheckBox CreateDb;
         private System.Windows.Forms.CheckBox LazyLoading;
+        private System.Windows.Forms.CheckBox chkUseConfigClasses;
     }
 }

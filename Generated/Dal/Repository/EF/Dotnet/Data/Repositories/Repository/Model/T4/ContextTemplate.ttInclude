@@ -136,7 +136,7 @@ namespace <#= ContextData.TransformFullnamespace(DataType.BaseNamespace) #>
 			
 			#endregion
 
-<#+ if(ContextData.IncludeColumnOrder){ #>
+<#+ if(Driver.DriverType.IncludeColumnOrder){ #>
 			#region Column Order
 			
 <#+ foreach(var table in ContextData.Models){ #>
@@ -161,15 +161,14 @@ namespace <#= ContextData.TransformFullnamespace(DataType.BaseNamespace) #>
         
 		protected override void SetupContext()
         {
-            Configuration.LazyLoadingEnabled = <#= ContextData.LazyLoadingEnabled.ToString().ToLower() #>;
-            Configuration.ProxyCreationEnabled = <#= ContextData.ProxyCreationEnabled.ToString().ToLower() #>;
+            Configuration.LazyLoadingEnabled = <#= Driver.DriverType.LazyLoadingEnabled.ToString().ToLower() #>;
+            Configuration.ProxyCreationEnabled = <#= Driver.DriverType.ProxyCreationEnabled.ToString().ToLower() #>;
             Configuration.AutoDetectChangesEnabled = false;
 			
-<#+ if(ContextData.CreateDb){ #>
+<#+ if(Driver.DriverType.CreateDb){ #>
 			Database.SetInitializer(new CreateDatabaseIfNotExists<<#= string.Concat(Driver.Prefix, ContextData.ContextName)  #>>());
-			// Database.SetInitializer(new MigrateDatabaseToLatestVersion<<#= string.Concat(Driver.Prefix, ContextData.ContextName)  #>, Configuration>());
 <#+ } #>
-<#+ if(ContextData.LoggingEnabled){ #>
+<#+ if(Driver.DriverType.LoggingEnabled){ #>
 			Database.Log = this.Log;
 <#+ } #>
         }

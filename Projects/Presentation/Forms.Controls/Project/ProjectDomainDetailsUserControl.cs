@@ -475,12 +475,13 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project
         private void BtnDrivers_Click(object sender, EventArgs e)
         {
             this.driverForm = new DriverForm
-            {
-                SavePath = this.SavePath,
-                DataSource = this.SelectedDomain
-            };
+                                  {
+                                      SavePath = this.SavePath,
+                                      DataSource = this.SelectedDomain,
+                                      StartPosition = FormStartPosition.CenterParent
+                                  };
 
-            this.driverForm.Show();
+            this.driverForm.Show(this.ParentForm);
         }
 
         /// <summary>

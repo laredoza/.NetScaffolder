@@ -100,6 +100,11 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6
         public bool ProxyCreationEnabled { get; set; }
 
         /// <summary>
+        /// Gets or sets a value indicating whether use seperate config classes.
+        /// </summary>
+        public bool UseSeperateConfigClasses { get; set; }
+
+        /// <summary>
         /// Gets or sets the validation result.
         /// </summary>
         [XmlIgnore]
@@ -133,6 +138,7 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6
                     this.LazyLoadingEnabled = loadedDriverType.LazyLoadingEnabled;
                     this.LoggingEnabled = loadedDriverType.LoggingEnabled;
                     this.ProxyCreationEnabled = loadedDriverType.ProxyCreationEnabled;
+                    this.UseSeperateConfigClasses = loadedDriverType.UseSeperateConfigClasses;
                 }
             }
         }

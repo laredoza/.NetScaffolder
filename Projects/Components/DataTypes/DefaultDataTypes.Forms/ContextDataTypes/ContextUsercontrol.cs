@@ -327,16 +327,11 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.ContextDa
             if (this.SelectedContext == null) return;
 
             this.SelectedContext.OutputFolder = this.OutputFolder.Text;
-            this.SelectedContext.LazyLoadingEnabled = this.LazyLoading.Checked;
             this.SelectedContext.Namespace = this.Namespace.Text;
             this.SelectedContext.ContextName = this.ContextName.Text;
-            this.SelectedContext.CreateDb = this.CreateDb.Checked;
-            this.SelectedContext.ProxyCreationEnabled = this.ProxyCreation.Checked;
             this.SelectedContext.InheritFrom = this.InheritFromInterface.Text;
-            this.SelectedContext.LoggingEnabled = this.LoggingEnabled.Checked;
             this.SelectedContext.CustomConnectionName = this.txtCustomConnectionName.Text;
             this.SelectedContext.OutputPath = this.OutputPath.Text;
-            this.SelectedContext.IncludeColumnOrder = this.chkColumnOrder.Checked;
 
             this.SelectedContext.Models.Clear();
 
@@ -379,16 +374,11 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.ContextDa
             if (this.SelectedContext == null) return;
 
             this.OutputFolder.Text = this.SelectedContext.OutputFolder;
-            this.LazyLoading.Checked = this.SelectedContext.LazyLoadingEnabled;
             this.Namespace.Text = this.SelectedContext.Namespace;
             this.ContextName.Text = this.SelectedContext.ContextName;
-            this.CreateDb.Checked = this.SelectedContext.CreateDb;
-            this.ProxyCreation.Checked = this.SelectedContext.ProxyCreationEnabled;
             this.InheritFromInterface.Text = this.SelectedContext.InheritFrom;
-            this.LoggingEnabled.Checked = this.SelectedContext.LoggingEnabled;
             this.txtCustomConnectionName.Text = this.SelectedContext.CustomConnectionName;
             this.OutputPath.Text = this.SelectedContext.OutputPath;
-            this.chkColumnOrder.Checked = this.SelectedContext.IncludeColumnOrder;
 
             this.UpdateDataSource();
         }

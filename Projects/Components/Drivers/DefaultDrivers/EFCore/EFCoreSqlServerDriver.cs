@@ -10,7 +10,6 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EFCore
     using System.ComponentModel.Composition;
 
     using DotNetScaffolder.Components.Common.Contract;
-    using DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6;
 
     /// <summary>
     /// Defines the default EF Core Sql Server driver.
@@ -26,6 +25,11 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EFCore
         ///     Gets the context attribute.
         /// </summary>
         public string ContextAttribute => string.Empty;
+
+        /// <summary>
+        /// The driver type.
+        /// </summary>
+        public EFCoreDriverType DriverType { get; set; }
 
         /// <summary>
         ///     Force schema to uppercase.
@@ -54,16 +58,12 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EFCore
         /// </summary>
         public string Prefix => "SqlServer";
 
-        /// <summary>
-        /// The driver type.
-        /// </summary>
-        public EFCoreDriverType DriverType { get; set; }
-
-        /// <summary>
-        /// The driver type.
-        /// </summary>
-        IDriverType IDriver.DriverType => this.DriverType ?? (this.DriverType = new EFCoreDriverType("EFCoreDriverType.xml"));
-
         #endregion
+
+        /// <summary>
+        /// The driver type.
+        /// </summary>
+        IDriverType IDriver.DriverType =>
+            this.DriverType ?? (this.DriverType = new EFCoreDriverType("EFCoreDriverType.xml"));
     }
 }

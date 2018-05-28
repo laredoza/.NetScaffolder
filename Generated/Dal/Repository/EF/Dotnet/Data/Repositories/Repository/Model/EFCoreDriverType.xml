@@ -5,4 +5,5 @@
   <LazyLoadingEnabled>true</LazyLoadingEnabled>
   <LoggingEnabled>true</LoggingEnabled>
   <ProxyCreationEnabled>true</ProxyCreationEnabled>
+  <UseSeperateConfigClasses>false</UseSeperateConfigClasses>
 </EFCoreDriverType>
