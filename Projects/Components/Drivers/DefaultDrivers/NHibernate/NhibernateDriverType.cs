@@ -179,6 +179,11 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.NHibernate
             throw new NotImplementedException();
         }
 
+        public string TransformColumnPrecision(Column col)
+        {
+            throw new NotImplementedException();
+        }
+
         #endregion
     }
 }

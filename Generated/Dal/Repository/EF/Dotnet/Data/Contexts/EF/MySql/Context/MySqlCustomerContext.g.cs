@@ -151,14 +151,14 @@ namespace Banking.Models.Customers
 			modelBuilder.Entity<OrderDetails>().Property(t => t.OrderId).IsRequired();
 			modelBuilder.Entity<OrderDetails>().Property(t => t.ProductId).IsRequired();
 			modelBuilder.Entity<OrderDetails>().Property(t => t.UnitPrice).IsOptional();
-			modelBuilder.Entity<OrderDetails>().Property(t => t.UnitPrice).HasPrecision(19, 4);
+			modelBuilder.Entity<OrderDetails>().Property(t => t.UnitPrice).HasPrecision(19, 0);
 			modelBuilder.Entity<OrderDetails>().Property(t => t.Amount).IsOptional();
 			modelBuilder.Entity<OrderDetails>().Property(t => t.Discount).IsOptional();
 			modelBuilder.Entity<Product>().Property(t => t.ProductId).IsRequired();
 			modelBuilder.Entity<Product>().Property(t => t.ProductDescription).HasMaxLength(100);
 			modelBuilder.Entity<Product>().Property(t => t.ProductDescription).IsOptional();
 			modelBuilder.Entity<Product>().Property(t => t.UnitPrice).IsOptional();
-			modelBuilder.Entity<Product>().Property(t => t.UnitPrice).HasPrecision(19, 4);
+			modelBuilder.Entity<Product>().Property(t => t.UnitPrice).HasPrecision(19, 0);
 			modelBuilder.Entity<Product>().Property(t => t.UnitAmount).HasMaxLength(50);
 			modelBuilder.Entity<Product>().Property(t => t.UnitAmount).IsOptional();
 			modelBuilder.Entity<Product>().Property(t => t.Publisher).HasMaxLength(200);

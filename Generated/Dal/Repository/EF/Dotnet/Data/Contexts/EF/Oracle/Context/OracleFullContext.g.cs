@@ -123,7 +123,7 @@ namespace Banking.Models.Context
 			modelBuilder.Entity<BankAccount>().Property(t => t.BankAccountNumber).HasMaxLength(10);
 			modelBuilder.Entity<BankAccount>().Property(t => t.BankAccountNumber).IsRequired();
 			modelBuilder.Entity<BankAccount>().Property(t => t.Balance).IsRequired();
-			modelBuilder.Entity<BankAccount>().Property(t => t.Balance).HasPrecision(19, 4);
+			modelBuilder.Entity<BankAccount>().Property(t => t.Balance).HasPrecision(19, 0);
 			modelBuilder.Entity<BankAccount>().Property(t => t.CustomerId).IsOptional();
 			modelBuilder.Entity<BankAccount>().Property(t => t.Locked).IsRequired();
 			modelBuilder.Entity<CompositeKeyTest>().Property(t => t.PrimaryCol1).IsRequired();
@@ -132,7 +132,7 @@ namespace Banking.Models.Context
 			modelBuilder.Entity<BankTransfers>().Property(t => t.FromBankAccountId).IsRequired();
 			modelBuilder.Entity<BankTransfers>().Property(t => t.ToBankAccountId).IsRequired();
 			modelBuilder.Entity<BankTransfers>().Property(t => t.Amount).IsRequired();
-			modelBuilder.Entity<BankTransfers>().Property(t => t.Amount).HasPrecision(18, 2);
+			modelBuilder.Entity<BankTransfers>().Property(t => t.Amount).HasPrecision(18, 0);
 			modelBuilder.Entity<BankTransfers>().Property(t => t.TransferDate).IsRequired();
 			modelBuilder.Entity<Book>().Property(t => t.ProductId).IsRequired();
 			modelBuilder.Entity<Book>().Property(t => t.Publisher).HasMaxLength(200);
@@ -179,14 +179,14 @@ namespace Banking.Models.Context
 			modelBuilder.Entity<OrderDetails>().Property(t => t.OrderId).IsRequired();
 			modelBuilder.Entity<OrderDetails>().Property(t => t.ProductId).IsRequired();
 			modelBuilder.Entity<OrderDetails>().Property(t => t.UnitPrice).IsOptional();
-			modelBuilder.Entity<OrderDetails>().Property(t => t.UnitPrice).HasPrecision(19, 4);
+			modelBuilder.Entity<OrderDetails>().Property(t => t.UnitPrice).HasPrecision(19, 0);
 			modelBuilder.Entity<OrderDetails>().Property(t => t.Amount).IsOptional();
 			modelBuilder.Entity<OrderDetails>().Property(t => t.Discount).IsOptional();
 			modelBuilder.Entity<Product>().Property(t => t.ProductId).IsRequired();
 			modelBuilder.Entity<Product>().Property(t => t.ProductDescription).HasMaxLength(100);
 			modelBuilder.Entity<Product>().Property(t => t.ProductDescription).IsOptional();
 			modelBuilder.Entity<Product>().Property(t => t.UnitPrice).IsOptional();
-			modelBuilder.Entity<Product>().Property(t => t.UnitPrice).HasPrecision(19, 4);
+			modelBuilder.Entity<Product>().Property(t => t.UnitPrice).HasPrecision(19, 0);
 			modelBuilder.Entity<Product>().Property(t => t.UnitAmount).HasMaxLength(50);
 			modelBuilder.Entity<Product>().Property(t => t.UnitAmount).IsOptional();
 			modelBuilder.Entity<Product>().Property(t => t.Publisher).HasMaxLength(200);

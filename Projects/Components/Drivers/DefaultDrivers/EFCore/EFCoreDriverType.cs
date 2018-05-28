@@ -157,18 +157,60 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EFCore
         }
 
         /// <summary>
-        /// The validate.
+        /// The transform column precision.
         /// </summary>
+        /// <param name="col">
+        /// The col.
+        /// </param>
         /// <returns>
-        /// The <see cref="List"/>.
+        /// The <see cref="string"/>.
         /// </returns>
         /// <exception cref="NotImplementedException">
         /// </exception>
-        public List<Validation> Validate()
+        public string TransformColumnPrecision(Column col)
         {
-            return this.ValidationResult;
+            if ((col.Precision > 0 && !col.InValidPrecisionGeneration) || col.Scale > 0)
+            {
+                return $".HasColumnType(\"{CSharpOutputMapper.MapToConstraint(col)}\")";
+            }
+
+            return string.Empty;
         }
 
+        /// <summary>
+        /// The transform db generated key.
+        /// </summary>
+        /// <param name="table">
+        /// The table.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        public string TransformDbGeneratedKey(Table table)
+        {
+            if (table.DatabaseGeneratedKeyType == DatabaseGeneratedKeyType.None
+                || table.DatabaseGeneratedKeyType == DatabaseGeneratedKeyType.Ignore)
+            {
+                return ".ValueGeneratedNever()";
+            }
+            else
+            {
+                return ".ValueGeneratedOnAdd()";
+            }
+        }
+
+        /// <summary>
+        /// The transform model name.
+        /// </summary>
+        /// <param name="name">
+        /// The name.
+        /// </param>
+        /// <param name="nc">
+        /// The nc.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
         public string TransformModelName(string name, INamingConvention nc = null)
         {
             if (nc == null)
@@ -179,6 +221,27 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EFCore
             return nc.ApplyNamingConvention(name);
         }
 
+        /// <summary>
+        /// The transform relationship.
+        /// </summary>
+        /// <param name="table">
+        /// The table.
+        /// </param>
+        /// <param name="rel">
+        /// The rel.
+        /// </param>
+        /// <param name="models">
+        /// The models.
+        /// </param>
+        /// <param name="relationships">
+        /// The relationships.
+        /// </param>
+        /// <param name="nc">
+        /// The nc.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
         public string TransformRelationship(
             string table,
             Relationship rel,
@@ -228,13 +291,15 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EFCore
 
             if (rel.Multiplicity == RelationshipMultiplicity.Many)
             {
-                sb.Append($".WithMany(s => s.{parentTableName}).HasForeignKey(s => s.{rel.ColumnName}).OnDelete(DeleteBehavior.Restrict);");
+                sb.Append(
+                    $".WithMany(s => s.{parentTableName}).HasForeignKey(s => s.{rel.ColumnName}).OnDelete(DeleteBehavior.Restrict);");
             }
             else
             {
                 if (rel.ReferencedMultiplicity == RelationshipMultiplicity.Many)
                 {
-                    sb.Append($".WithOne(s => s.{parentTableName}).HasForeignKey(s => s.{rel.ReferencedColumnName}).OnDelete(DeleteBehavior.Restrict);");
+                    sb.Append(
+                        $".WithOne(s => s.{parentTableName}).HasForeignKey(s => s.{rel.ReferencedColumnName}).OnDelete(DeleteBehavior.Restrict);");
                 }
                 else
                 {
@@ -245,17 +310,17 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EFCore
             return sb.ToString();
         }
 
-        public string TransformDbGeneratedKey(Table table)
+        /// <summary>
+        /// The validate.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="List"/>.
+        /// </returns>
+        /// <exception cref="NotImplementedException">
+        /// </exception>
+        public List<Validation> Validate()
         {
-            if (table.DatabaseGeneratedKeyType == DatabaseGeneratedKeyType.None || 
-                table.DatabaseGeneratedKeyType == DatabaseGeneratedKeyType.Ignore)
-            {
-                return ".ValueGeneratedNever()";
-            }
-            else
-            {
-                return ".ValueGeneratedOnAdd()";
-            }
+            return this.ValidationResult;
         }
 
         #endregion

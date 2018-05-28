@@ -160,14 +160,14 @@ namespace Banking.Models.Customers.Core
 			modelBuilder.Entity<OrderDetails>().Property(t => t.OrderId).IsRequired();
 			modelBuilder.Entity<OrderDetails>().Property(t => t.ProductId).IsRequired();
 			modelBuilder.Entity<OrderDetails>().Property(t => t.UnitPrice).IsRequired(false);
-			// TODO: modelBuilder.Entity<OrderDetails>().Property(t => t.UnitPrice).HasPrecision(19, 4);
+			modelBuilder.Entity<OrderDetails>().Property(t => t.UnitPrice).HasColumnType("decimal(19, 0)");
 			modelBuilder.Entity<OrderDetails>().Property(t => t.Amount).IsRequired(false);
 			modelBuilder.Entity<OrderDetails>().Property(t => t.Discount).IsRequired(false);
 			modelBuilder.Entity<Product>().Property(t => t.ProductId).IsRequired();
 			modelBuilder.Entity<Product>().Property(t => t.ProductDescription).HasMaxLength(100);
 			modelBuilder.Entity<Product>().Property(t => t.ProductDescription).IsRequired(false);
 			modelBuilder.Entity<Product>().Property(t => t.UnitPrice).IsRequired(false);
-			// TODO: modelBuilder.Entity<Product>().Property(t => t.UnitPrice).HasPrecision(19, 4);
+			modelBuilder.Entity<Product>().Property(t => t.UnitPrice).HasColumnType("decimal(19, 0)");
 			modelBuilder.Entity<Product>().Property(t => t.UnitAmount).HasMaxLength(50);
 			modelBuilder.Entity<Product>().Property(t => t.UnitAmount).IsRequired(false);
 			modelBuilder.Entity<Product>().Property(t => t.Publisher).HasMaxLength(200);
@@ -181,6 +181,8 @@ namespace Banking.Models.Customers.Core
 
 			#region Column Order
 			
+			// Column ordering available in EF Core 2.1 - https://data.uservoice.com/forums/72025-entity-framework-core-feature-suggestions/suggestions/18936844-ef-core-migrations-column-ordering
+			// Waiting for that release before implementing
 			//TODO: modelBuilder.Entity<Book>().Property(t => t.ProductId).HasColumnOrder(1);
 			//TODO: modelBuilder.Entity<Book>().Property(t => t.Publisher).HasColumnOrder(2);
 			//TODO: modelBuilder.Entity<Country>().Property(t => t.CountryId).HasColumnOrder(1);

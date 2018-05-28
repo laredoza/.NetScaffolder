@@ -142,7 +142,7 @@ namespace <#= ContextData.TransformFullnamespace(DataType.BaseNamespace) #>.Core
 			modelBuilder.Entity<<#=DataType.TransformModelName(table.TableName) #>>().Property(t => t.<#= col.ColumnName #>).IsRequired(false);
 <#+ } #>
 <#+ if((col.Precision > 0 && !col.InValidPrecisionGeneration) || col.Scale > 0){ #>
-			// TODO: modelBuilder.Entity<<#=DataType.TransformModelName(table.TableName) #>>().Property(t => t.<#= col.ColumnName #>).HasPrecision(<#= col.Precision #>, <#= col.Scale #>);
+			modelBuilder.Entity<<#=DataType.TransformModelName(table.TableName) #>>().Property(t => t.<#= col.ColumnName #>)<#= Driver.DriverType.TransformColumnPrecision(col) #>;
 <#+ } #>
 <#+ } #>
 <#+ } #>
@@ -152,6 +152,8 @@ namespace <#= ContextData.TransformFullnamespace(DataType.BaseNamespace) #>.Core
 <#+ if(ContextData.IncludeColumnOrder){ #>
 			#region Column Order
 			
+			// Column ordering available in EF Core 2.1 - https://data.uservoice.com/forums/72025-entity-framework-core-feature-suggestions/suggestions/18936844-ef-core-migrations-column-ordering
+			// Waiting for that release before implementing
 <#+ foreach(var table in ContextData.Models){ #>
 <#+ foreach(var col in table.Columns){ #>
 			//TODO: modelBuilder.Entity<<#=DataType.TransformModelName(table.TableName) #>>().Property(t => t.<#= col.ColumnName #>).HasColumnOrder(<#= col.ColumnOrder #>);

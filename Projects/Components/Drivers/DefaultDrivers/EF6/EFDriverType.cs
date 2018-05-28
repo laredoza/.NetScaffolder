@@ -156,6 +156,51 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6
             return true;
         }
 
+        /// <summary>
+        /// The transform column precision.
+        /// </summary>
+        /// <param name="col">
+        /// The col.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        public string TransformColumnPrecision(Column col)
+        {
+            if ((col.Precision > 0 && !col.InValidPrecisionGeneration) || col.Scale > 0)
+            {
+                return $".HasPrecision({col.Precision}, {col.Length})";
+            }
+
+            return string.Empty;
+        }
+
+        /// <summary>
+        /// The transform db generated key.
+        /// </summary>
+        /// <param name="table">
+        /// The table.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        public string TransformDbGeneratedKey(Table table)
+        {
+            return $".HasDatabaseGeneratedOption({table.TransformDatabaseGeneratedKeyType})";
+        }
+
+        /// <summary>
+        /// The transform model name.
+        /// </summary>
+        /// <param name="name">
+        /// The name.
+        /// </param>
+        /// <param name="nc">
+        /// The nc.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
         public string TransformModelName(string name, INamingConvention nc = null)
         {
             if (nc == null)
@@ -166,6 +211,27 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6
             return nc.ApplyNamingConvention(name);
         }
 
+        /// <summary>
+        /// The transform relationship.
+        /// </summary>
+        /// <param name="table">
+        /// The table.
+        /// </param>
+        /// <param name="rel">
+        /// The rel.
+        /// </param>
+        /// <param name="models">
+        /// The models.
+        /// </param>
+        /// <param name="relationships">
+        /// The relationships.
+        /// </param>
+        /// <param name="nc">
+        /// The nc.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
         public string TransformRelationship(
             string table,
             Relationship rel,
@@ -188,12 +254,12 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6
             else if (rel.ReferencedMultiplicity == RelationshipMultiplicity.One)
             {
                 sb.Append(
-                    $"modelBuilder.Entity<{this.TransformModelName(table, nc)}>().HasRequired<{this.TransformModelName(rel.ReferencedTableName,nc)}>(s => s.{refTableName})");
+                    $"modelBuilder.Entity<{this.TransformModelName(table, nc)}>().HasRequired<{this.TransformModelName(rel.ReferencedTableName, nc)}>(s => s.{refTableName})");
             }
             else
             {
                 sb.Append(
-                    $"modelBuilder.Entity<{this.TransformModelName(table, nc)}>().HasOptional<{this.TransformModelName(rel.ReferencedTableName,nc)}>(s => s.{refTableName})");
+                    $"modelBuilder.Entity<{this.TransformModelName(table, nc)}>().HasOptional<{this.TransformModelName(rel.ReferencedTableName, nc)}>(s => s.{refTableName})");
             }
 
             string parentTableName = table;
@@ -225,35 +291,20 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6
             }
             else if (rel.Multiplicity == RelationshipMultiplicity.One)
             {
-                if (rel.ReferencedMultiplicity == RelationshipMultiplicity.Many)
-                {
-                    sb.Append(
-                        $".WithRequired(s => s.{parentTableName}).HasForeignKey(s => s.{rel.ReferencedColumnName}).WillCascadeOnDelete(false);");
-                }
-                else
-                {
-                    sb.Append($".WithRequired(s => s.{parentTableName}).WillCascadeOnDelete(false);");
-                }
+                sb.Append(
+                    rel.ReferencedMultiplicity == RelationshipMultiplicity.Many
+                        ? $".WithRequired(s => s.{parentTableName}).HasForeignKey(s => s.{rel.ReferencedColumnName}).WillCascadeOnDelete(false);"
+                        : $".WithRequired(s => s.{parentTableName}).WillCascadeOnDelete(false);");
             }
             else
             {
-                if (rel.ReferencedMultiplicity == RelationshipMultiplicity.Many)
-                {
-                    sb.Append(
-                        $".WithOptional(s => s.{parentTableName}).HasForeignKey(s => s.{rel.ReferencedColumnName}).WillCascadeOnDelete(false);");
-                }
-                else
-                {
-                    sb.Append($".WithOptional(s => s.{parentTableName}).WillCascadeOnDelete(false);");
-                }
+                sb.Append(
+                    rel.ReferencedMultiplicity == RelationshipMultiplicity.Many
+                        ? $".WithOptional(s => s.{parentTableName}).HasForeignKey(s => s.{rel.ReferencedColumnName}).WillCascadeOnDelete(false);"
+                        : $".WithOptional(s => s.{parentTableName}).WillCascadeOnDelete(false);");
             }
 
             return sb.ToString();
-        }
-
-        public string TransformDbGeneratedKey(Table table)
-        {
-            return $".HasDatabaseGeneratedOption({table.TransformDatabaseGeneratedKeyType})";
         }
 
         /// <summary>
@@ -262,12 +313,9 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6
         /// <returns>
         /// The <see cref="List"/>.
         /// </returns>
-        /// <exception cref="NotImplementedException">
-        /// </exception>
         public List<Validation> Validate()
         {
             return this.ValidationResult;
-
         }
 
         #endregion

@@ -92,14 +92,14 @@ namespace Banking.Models.Accounts
 			modelBuilder.Entity<BankAccount>().Property(t => t.BankAccountNumber).HasMaxLength(10);
 			modelBuilder.Entity<BankAccount>().Property(t => t.BankAccountNumber).IsRequired();
 			modelBuilder.Entity<BankAccount>().Property(t => t.Balance).IsRequired();
-			modelBuilder.Entity<BankAccount>().Property(t => t.Balance).HasPrecision(19, 4);
+			modelBuilder.Entity<BankAccount>().Property(t => t.Balance).HasPrecision(19, 0);
 			modelBuilder.Entity<BankAccount>().Property(t => t.CustomerId).IsOptional();
 			modelBuilder.Entity<BankAccount>().Property(t => t.Locked).IsRequired();
 			modelBuilder.Entity<BankTransfers>().Property(t => t.BankTransferId).IsRequired();
 			modelBuilder.Entity<BankTransfers>().Property(t => t.FromBankAccountId).IsRequired();
 			modelBuilder.Entity<BankTransfers>().Property(t => t.ToBankAccountId).IsRequired();
 			modelBuilder.Entity<BankTransfers>().Property(t => t.Amount).IsRequired();
-			modelBuilder.Entity<BankTransfers>().Property(t => t.Amount).HasPrecision(18, 2);
+			modelBuilder.Entity<BankTransfers>().Property(t => t.Amount).HasPrecision(18, 0);
 			modelBuilder.Entity<BankTransfers>().Property(t => t.TransferDate).IsRequired();
 			
 			#endregion
