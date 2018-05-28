@@ -128,13 +128,16 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.Edmxs
         /// <param name="parameters">
         /// The parameters.
         /// </param>
-        public void TestData(object parameters)
+        public void TestData(object parameters, bool displayMessageOnSucceed)
         {
             Logger.Trace("Started TestData()");
 
             if (this.SourceType.Test(this.options))
             {
-                MessageBox.Show("Edmx Path Correct", "Test", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                if (displayMessageOnSucceed)
+                {
+                    MessageBox.Show("Edmx Path Correct", "Test", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
             else
             {

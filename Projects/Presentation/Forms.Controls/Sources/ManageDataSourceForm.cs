@@ -126,7 +126,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Sources
 
             if (this.DataSource != null && this.sourceTypeControl.Validate().Count == 0)
             {
-                this.sourceTypeControl.TestData(this.SavePath);
+                this.sourceTypeControl.TestData(this.SavePath, true);
             }
 
             Logger.Trace("Test Button Click Completed");

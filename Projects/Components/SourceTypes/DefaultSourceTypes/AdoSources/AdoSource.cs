@@ -31,12 +31,20 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
     /// </summary>
     public abstract class AdoSource : ISourceType
     {
+
+        public AdoSource()
+        {
+            this.Schemas = new List<string>();
+        }
+
         #region Static Fields
 
         /// <summary>
         ///     The logger.
         /// </summary>
         private static readonly ILog Logger = LogManager.GetLogger(string.Empty);
+
+        public List<string> Schemas { get; set; }
 
         #endregion
 
@@ -146,6 +154,28 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
                 foreignColumn.IsForeignKey);
         }
 
+
+        public List<string> ReturnSchemas(object options)
+        {
+            this.Schemas.Clear();
+            AdoSourceOptions adoOptions = options as AdoSourceOptions;
+            var databaseReader = new DatabaseReader(adoOptions.ConnectionString, adoOptions.ProviderName);
+
+            IList<DatabaseTable> tables = databaseReader.TableList();
+
+            foreach (var table in tables)
+            {
+                if (!this.Schemas.Any(s => s == table.SchemaOwner))
+                {
+                    this.Schemas.Add(table.SchemaOwner);
+                }
+            }
+
+            this.Schemas = this.Schemas.OrderBy(s => s).ToList();
+
+            return this.Schemas;
+        }
+
         /// <summary>
         /// The import.
         /// </summary>
@@ -157,6 +187,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
         /// </returns>
         public DatabaseModel Import(object options)
         {
+            //, List<string> schemaExclusions
             Logger.Trace("Started Import()");
             DatabaseModel result = new DatabaseModel();
 
@@ -167,15 +198,19 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
             {
                 // Todo: Handle multiple Schemas's
                 databaseReader.Owner = adoOptions.Schemas[0];
+                //databaseReader.Owner = "dbo,Demo";
+
+                //databaseReader.Exclusions.
             }
 
-            var schema = databaseReader.ReadAll();
+            var schemaMetaData = databaseReader.ReadAll();
 
             // schema.Tables[0].CheckConstraints[0].RefersToConstraint
             Table newTable;
             Column newColumn;
+            
 
-            foreach (var table in schema.Tables.Where(
+            foreach (var table in schemaMetaData.Tables.Where(
                 t => t.Name != "sysdiagrams" && t.Name != "__migrationhistory" && t.Name != "__MigrationHistory"))
             {
                 // foreach (var table in schema.Tables.Where(t => t.Name == "BankAccount"))
@@ -220,7 +255,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
 
                 foreach (var foreignKey in table.ForeignKeys)
                 {
-                    var referencedForeignColumn = foreignKey.ReferencedColumns(schema);
+                    var referencedForeignColumn = foreignKey.ReferencedColumns(schemaMetaData);
 
                     if (referencedForeignColumn != null)
                     {
@@ -229,7 +264,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
                         multiplicityResult = this.ReturnMultiplicity(
                             table,
                             foreignKey.Columns[0],
-                            foreignKey.ReferencedTable(schema),
+                            foreignKey.ReferencedTable(schemaMetaData),
                             referencedForeignColumnName,
                             RelationshipType.ForeignKey);
 
@@ -252,7 +287,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
                 {
                     foreach (var foreignKey in foreignKeyChildren.ForeignKeys)
                     {
-                        var referencedForeignColumn = foreignKey.ReferencedColumns(schema).ToList();
+                        var referencedForeignColumn = foreignKey.ReferencedColumns(schemaMetaData).ToList();
                         if (foreignKey.RefersToTable == table.Name && referencedForeignColumn.Count > 0)
                         {
                             var referencedForeignColumnString = referencedForeignColumn[0];
@@ -298,6 +333,8 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
                     }
                 }
             }
+
+            this.Schemas = this.Schemas.OrderBy(s => s).ToList();
 
             this.Fix(result);
             Logger.Trace("Completed Import()");
