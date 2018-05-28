@@ -94,6 +94,8 @@ namespace DotNetScaffolder.Components.Common.Contract
 
         string TransformDbGeneratedKey(Table table);
 
+        string TransformColumnPrecision(Column col);
+
         #endregion
     }
 }
