@@ -66,7 +66,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(49, 13);
             this.label1.TabIndex = 9;
-            this.label1.Text = "Schema:";
+            this.label1.Text = "Schemas:";
             // 
             // ListViewDrivers
             // 
@@ -81,9 +81,9 @@
             this.ListViewDrivers.View = System.Windows.Forms.View.Details;
             this.ListViewDrivers.SelectedIndexChanged += new System.EventHandler(this.ListViewDrivers_SelectedIndexChanged);
             // 
-            // Schema
+            // Schemas
             // 
-            this.Schema.Text = "Schema";
+            this.Schema.Text = "Schemas";
             this.Schema.Width = 250;
             // 
             // SqlServerAdoUserControl

@@ -36,7 +36,11 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
         {
             MySqlAdoSourceType import = new MySqlAdoSourceType();
             this.SourceType = import;
-            DatabaseModel databaseModel = import.Import(new AdoSourceOptions { ProviderName = "MySql.Data.MySqlClient", ConnectionString = ConfigurationManager.ConnectionStrings["RepoTestMySql"].ConnectionString, Schema = "Test"});
+            
+            AdoSourceOptions sourceOptions = new AdoSourceOptions { ProviderName = "MySql.Data.MySqlClient", ConnectionString = ConfigurationManager.ConnectionStrings["RepoTestMySql"].ConnectionString };
+            sourceOptions.Schemas.Add("Test");
+
+            DatabaseModel databaseModel = import.Import(sourceOptions);
             this.BaseSourceTypeUnitTest_TestValues(databaseModel);
         }
 

@@ -163,10 +163,10 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
             AdoSourceOptions adoOptions = options as AdoSourceOptions;
             var databaseReader = new DatabaseReader(adoOptions.ConnectionString, adoOptions.ProviderName);
 
-            if (!string.IsNullOrEmpty(adoOptions.Schema))
+            if (adoOptions.Schemas.Count > 0)
             {
-                // Todo: Handle multiple Schema's
-                databaseReader.Owner = adoOptions.Schema;
+                // Todo: Handle multiple Schemas's
+                databaseReader.Owner = adoOptions.Schemas[0];
             }
 
             var schema = databaseReader.ReadAll();

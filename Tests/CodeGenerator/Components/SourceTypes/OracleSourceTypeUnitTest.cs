@@ -37,7 +37,11 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
         {
             OracleAdoSourceType import = new OracleAdoSourceType();
             this.SourceType = import;
-            DatabaseModel databaseModel = import.Import(new AdoSourceOptions { ProviderName = "Oracle.ManagedDataAccess.Client", ConnectionString = ConfigurationManager.ConnectionStrings["RepoTestOracle"].ConnectionString, Schema = "DBO"});
+
+            AdoSourceOptions sourceOptions = new AdoSourceOptions { ProviderName = "Oracle.ManagedDataAccess.Client", ConnectionString = ConfigurationManager.ConnectionStrings["RepoTestOracle"].ConnectionString};
+            sourceOptions.Schemas.Add("DBO");
+
+            DatabaseModel databaseModel = import.Import(sourceOptions);
             this.BaseSourceTypeUnitTest_TestValues(databaseModel);
         }
 

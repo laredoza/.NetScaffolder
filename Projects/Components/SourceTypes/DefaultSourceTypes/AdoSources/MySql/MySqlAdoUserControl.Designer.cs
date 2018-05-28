@@ -71,9 +71,9 @@
             this.ListViewDrivers.UseCompatibleStateImageBehavior = false;
             this.ListViewDrivers.View = System.Windows.Forms.View.Details;
             // 
-            // Schema
+            // Schemas
             // 
-            this.Schema.Text = "Schema";
+            this.Schema.Text = "Schemas";
             this.Schema.Width = 250;
             // 
             // label1
@@ -83,7 +83,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(49, 13);
             this.label1.TabIndex = 55;
-            this.label1.Text = "Schema:";
+            this.label1.Text = "Schemas:";
             // 
             // MySqlAdoUserControl
             // 

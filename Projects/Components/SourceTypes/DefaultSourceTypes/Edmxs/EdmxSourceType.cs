@@ -119,7 +119,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.Edmxs
                     tbl.Columns.Add(column);
                 }
 
-                //var relationships = edmx.Runtime.StorageModels.Schema.Associations.Where(ass => (ass.ReferentialConstraint.Dependent.Role == table.Name || ass.ReferentialConstraint.Principal.Role == table.Name) &&
+                //var relationships = edmx.Runtime.StorageModels.Schemas.Associations.Where(ass => (ass.ReferentialConstraint.Dependent.Role == table.Name || ass.ReferentialConstraint.Principal.Role == table.Name) &&
                 //                                                                                   (entityTableNames.Contains(ass.ReferentialConstraint.Dependent.Role.ToUpper()) &&
                 //                                                                                    entityTableNames.Contains(ass.ReferentialConstraint.Principal.Role.ToUpper())));
 
