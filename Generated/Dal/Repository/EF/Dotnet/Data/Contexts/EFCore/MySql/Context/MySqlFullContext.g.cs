@@ -19,7 +19,6 @@
 // *******************************************************************
 
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage;
 using RepositoryEFDotnet.Contexts.EFCore;
 using System.Configuration;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -27,21 +26,21 @@ using Banking.Models.Entity;
 
 namespace Banking.Models.Context.Core
 {
-	public partial class SqlServerFullContext : BaseContext
+	public partial class MySqlFullContext : BaseContext
 	{	
 		#region CTOR
 
-	    public SqlServerFullContext(string connectionName)
+	    public MySqlFullContext(string connectionName)
 	        : base(connectionName)
 	    {
 	    }
 
-	    public SqlServerFullContext(DbContextOptions<SqlServerFullContext> options) 
+	    public MySqlFullContext(DbContextOptions<MySqlFullContext> options) 
 			: base(options) 
 		{
 		}
 		
-		public SqlServerFullContext()
+		public MySqlFullContext()
 			: base("name=RepoTest") 
 		{
 		}
@@ -52,7 +51,7 @@ namespace Banking.Models.Context.Core
 	    {
 	        if (!string.IsNullOrEmpty(ConnectionName) && !optionsBuilder.IsConfigured)
 	        {
-				optionsBuilder.UseSqlServer(ConfigurationManager.ConnectionStrings[ConnectionName].ConnectionString);
+				optionsBuilder.UseMySql(ConfigurationManager.ConnectionStrings[ConnectionName].ConnectionString);
 	        }
 	    }
 		
@@ -62,16 +61,16 @@ namespace Banking.Models.Context.Core
 			
 			#region Tables
 			
-			modelBuilder.Entity<BankAccount>().ToTable("BankAccount", "dbo");
-			modelBuilder.Entity<CompositeKeyTest>().ToTable("CompositeKeyTest", "dbo");
-			modelBuilder.Entity<BankTransfers>().ToTable("BankTransfers", "dbo");
-			modelBuilder.Entity<Book>().ToTable("Book", "dbo");
-			modelBuilder.Entity<Country>().ToTable("Country", "dbo");
-			modelBuilder.Entity<Customer>().ToTable("Customer", "dbo");
-			modelBuilder.Entity<Order>().ToTable("Order", "dbo");
-			modelBuilder.Entity<OrderDetails>().ToTable("OrderDetails", "dbo");
-			modelBuilder.Entity<Product>().ToTable("Product", "dbo");
-			modelBuilder.Entity<Software>().ToTable("Software", "dbo");
+			modelBuilder.Entity<BankAccount>().ToTable("BankAccount");
+			modelBuilder.Entity<CompositeKeyTest>().ToTable("CompositeKeyTest");
+			modelBuilder.Entity<BankTransfers>().ToTable("BankTransfers");
+			modelBuilder.Entity<Book>().ToTable("Book");
+			modelBuilder.Entity<Country>().ToTable("Country");
+			modelBuilder.Entity<Customer>().ToTable("Customer");
+			modelBuilder.Entity<Order>().ToTable("Order");
+			modelBuilder.Entity<OrderDetails>().ToTable("OrderDetails");
+			modelBuilder.Entity<Product>().ToTable("Product");
+			modelBuilder.Entity<Software>().ToTable("Software");
 
 			#endregion
 			

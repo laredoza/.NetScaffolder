@@ -14,14 +14,17 @@ namespace RepositoryEFDotnet.UnitTest
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-    using RepositoryEFDotnet.Core.Base;
-
     /// <summary>
     /// The uow e f 6 in memory my sql unit test.
     /// </summary>
     [TestClass]
     public class UowEF6InMemoryMySqlUnitTest : BaseUnitOfWorkUnitTests
     {
+        #region Public Methods And Operators
+
+        /// <summary>
+        /// The run all.
+        /// </summary>
         [TestMethod]
         public override void RunAll()
         {
@@ -31,6 +34,12 @@ namespace RepositoryEFDotnet.UnitTest
             }
         }
 
+        /// <summary>
+        /// The run all async.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>
         [TestMethod]
         public override async Task RunAllAsync()
         {
@@ -39,5 +48,7 @@ namespace RepositoryEFDotnet.UnitTest
                 await this.BaseUnitOfWorkUnitTests_BankAccount_RunAllAsync(context);
             }
         }
+
+        #endregion
     }
 }

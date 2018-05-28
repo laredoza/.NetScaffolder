@@ -41,13 +41,11 @@ namespace <#= ContextData.TransformFullnamespace(DataType.BaseNamespace) #>.Core
 	    public <#= string.Concat(Driver.Prefix, ContextData.ContextName)  #>(string connectionName)
 	        : base(connectionName)
 	    {
-			SetupContext();
 	    }
 
 	    public <#= string.Concat(Driver.Prefix, ContextData.ContextName)  #>(DbContextOptions<<#= string.Concat(Driver.Prefix, ContextData.ContextName)  #>> options) 
 			: base(options) 
 		{
-			SetupContext();
 		}
 		
 		public <#= string.Concat(Driver.Prefix, ContextData.ContextName)  #>()
@@ -58,7 +56,6 @@ namespace <#= ContextData.TransformFullnamespace(DataType.BaseNamespace) #>.Core
 			: base() 
 <#+ } #>
 		{
-			SetupContext();
 		}
 		
 		#endregion
@@ -69,6 +66,9 @@ namespace <#= ContextData.TransformFullnamespace(DataType.BaseNamespace) #>.Core
 	        {
 <#+ if(Driver is EFCoreSqlServerDriver) { #>
 				optionsBuilder.UseSqlServer(ConfigurationManager.ConnectionStrings[ConnectionName].ConnectionString);
+<#+ }#>
+<#+ if(Driver is EFCoreMySqlDriver) { #>
+				optionsBuilder.UseMySql(ConfigurationManager.ConnectionStrings[ConnectionName].ConnectionString);
 <#+ }#>
 	        }
 	    }
@@ -86,7 +86,12 @@ namespace <#= ContextData.TransformFullnamespace(DataType.BaseNamespace) #>.Core
                     schemaName = schemaName.ToUpper();
                 }
 #>
+<#+ if(Driver is EFCoreMySqlDriver) { #>
+			modelBuilder.Entity<<#=DataType.TransformModelName(table.TableName) #>>().ToTable("<#=table.TableName #>");
+<#+ } else #>
+<#+ {#>
 			modelBuilder.Entity<<#=DataType.TransformModelName(table.TableName) #>>().ToTable("<#=table.TableName #>", "<#= schemaName #>");
+<#+ }#>
 <#+ } #>
 
 			#endregion

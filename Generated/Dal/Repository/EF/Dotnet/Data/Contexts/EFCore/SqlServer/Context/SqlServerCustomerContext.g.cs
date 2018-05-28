@@ -34,19 +34,16 @@ namespace Banking.Models.Customers.Core
 	    public SqlServerCustomerContext(string connectionName)
 	        : base(connectionName)
 	    {
-			SetupContext();
 	    }
 
 	    public SqlServerCustomerContext(DbContextOptions<SqlServerCustomerContext> options) 
 			: base(options) 
 		{
-			SetupContext();
 		}
 		
 		public SqlServerCustomerContext()
 			: base("name=RepoTest") 
 		{
-			SetupContext();
 		}
 		
 		#endregion

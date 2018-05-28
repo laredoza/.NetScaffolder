@@ -40,6 +40,9 @@
 ..\..\Contexts\EF\SqlServer\Context\SqlServerAccountContext.g.cs
 ..\..\Contexts\EF\SqlServer\Context\SqlServerCustomerContext.g.cs
 ..\..\Contexts\EF\SqlServer\Context\SqlServerFullContext.g.cs
+..\..\Contexts\EFCore\MySql\Context\MySqlAccountContext.g.cs
+..\..\Contexts\EFCore\MySql\Context\MySqlCustomerContext.g.cs
+..\..\Contexts\EFCore\MySql\Context\MySqlFullContext.g.cs
 ..\..\Contexts\EFCore\SqlServer\Context\SqlServerAccountContext.g.cs
 ..\..\Contexts\EFCore\SqlServer\Context\SqlServerCustomerContext.g.cs
 ..\..\Contexts\EFCore\SqlServer\Context\SqlServerFullContext.g.cs

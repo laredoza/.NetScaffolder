@@ -58,6 +58,7 @@
     <Compile Include="EF6\EFSqlServerDriver.cs" />
     <Compile Include="EFCore\EFCoreSqlServerDriver.cs" />
     <Compile Include="EFCore\EFCoreDriverType.cs" />
+    <Compile Include="EFCore\EFCoreMySqlDriver.cs" />
     <Compile Include="NHibernate\NhibernateDriverType.cs" />
     <Compile Include="NHibernate\NHibernateSqlServerDriver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

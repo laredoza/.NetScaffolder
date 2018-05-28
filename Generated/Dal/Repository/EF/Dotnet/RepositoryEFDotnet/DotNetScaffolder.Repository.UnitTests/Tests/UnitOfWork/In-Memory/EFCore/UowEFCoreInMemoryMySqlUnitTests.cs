@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="UowEFCoreInMemorySqlServerUnitTests.cs" company="DotnetScaffolder">
+// <copyright file="UowEFCoreInMemoryMySqlUnitTests.cs" company="DotnetScaffolder">
 //   MIT
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
@@ -19,7 +19,7 @@ namespace RepositoryEFDotnet.UnitTest
     /// The uow ef core in memory sql server unit test.
     /// </summary>
     [TestClass]
-    public class UowEFCoreInMemorySqlServerUnitTest : BaseUnitOfWorkUnitTests
+    public class UowEFCoreInMemoryMySqlUnitTest : BaseUnitOfWorkUnitTests
     {
         #region Public Methods And Operators
 
@@ -56,8 +56,8 @@ namespace RepositoryEFDotnet.UnitTest
         public override void RunAll()
         {
             string dbInstance = "EFCORE_Sql";
-            var options = new DbContextOptionsBuilder<SqlServerFullContext>().UseInMemoryDatabase(dbInstance).Options;
-            using (var context = new SqlServerFullContext(options))
+            var options = new DbContextOptionsBuilder<MySqlFullContext>().UseInMemoryDatabase(dbInstance).Options;
+            using (var context = new MySqlFullContext(options))
             {
                 context.Database.EnsureDeleted();
                 context.Database.EnsureCreated();
@@ -75,9 +75,9 @@ namespace RepositoryEFDotnet.UnitTest
         public override async Task RunAllAsync()
         {
             string dbInstance = "EFCORE_SqlAsync";
-            var options = new DbContextOptionsBuilder<SqlServerFullContext>().UseInMemoryDatabase(dbInstance).Options;
+            var options = new DbContextOptionsBuilder<MySqlFullContext>().UseInMemoryDatabase(dbInstance).Options;
 
-            using (var context = new SqlServerFullContext(options))
+            using (var context = new MySqlFullContext(options))
             {
                 context.Database.EnsureDeleted();
                 context.Database.EnsureCreated();

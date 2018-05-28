@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="RepositoryEF6InMemorySqlServerUnitTests.cs" company="DotnetScaffolder">
+// <copyright file="RepositoryEFCoreInMemorySqlServerUnitTests.cs" company="DotnetScaffolder">
 //   MIT
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
@@ -28,11 +28,13 @@ namespace RepositoryEFDotnet.UnitTest
         [ClassInitialize]
         public static void ClassInit(TestContext context)
         {
-            var options = new DbContextOptionsBuilder<SqlServerFullContext>().UseInMemoryDatabase("EFCORE_SqlServer").Options;
+            var options = new DbContextOptionsBuilder<SqlServerFullContext>().UseInMemoryDatabase("EFCORE_SqlServer")
+                .Options;
             Context = new SqlServerFullContext(options);
 
             ((SqlServerFullContext)Context).Database.EnsureCreated();
         }
+
         #endregion
     }
 }

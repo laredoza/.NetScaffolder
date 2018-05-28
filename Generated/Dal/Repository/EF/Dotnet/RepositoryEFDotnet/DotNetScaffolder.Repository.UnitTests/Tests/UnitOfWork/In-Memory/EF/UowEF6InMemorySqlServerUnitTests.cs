@@ -6,20 +6,13 @@
 
 namespace RepositoryEFDotnet.UnitTest
 {
-    using System;
     using System.Threading.Tasks;
 
     using Banking.Models.Context;
-    using Banking.Models.Context.Core;
 
     using Effort;
 
-    using Microsoft.EntityFrameworkCore;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-    using RepositoryEFDotnet.Core.Base;
-
-    using SqlServerFullContext = Banking.Models.Context.SqlServerFullContext;
 
     /// <summary>
     /// The uow e f 6 in memory sql server unit test.
@@ -27,6 +20,11 @@ namespace RepositoryEFDotnet.UnitTest
     [TestClass]
     public class UowEF6InMemorySqlServerUnitTest : BaseUnitOfWorkUnitTests
     {
+        #region Public Methods And Operators
+
+        /// <summary>
+        /// The run all.
+        /// </summary>
         [TestMethod]
         public override void RunAll()
         {
@@ -36,6 +34,12 @@ namespace RepositoryEFDotnet.UnitTest
             }
         }
 
+        /// <summary>
+        /// The run all async.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>
         [TestMethod]
         public override async Task RunAllAsync()
         {
@@ -44,5 +48,7 @@ namespace RepositoryEFDotnet.UnitTest
                 await this.BaseUnitOfWorkUnitTests_BankAccount_RunAllAsync(context);
             }
         }
+
+        #endregion
     }
 }

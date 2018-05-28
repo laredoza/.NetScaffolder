@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="RepositoryEF6InMemorySqlServerUnitTests.cs" company="DotnetScaffolder">
+// <copyright file="RepositoryDbEFCoreSqlServerUnitTests.cs" company="DotnetScaffolder">
 //   MIT
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
@@ -8,7 +8,6 @@ namespace RepositoryEFDotnet.UnitTest
 {
     using Banking.Models.Context.Core;
 
-    using Microsoft.EntityFrameworkCore;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     /// <summary>
@@ -32,6 +31,7 @@ namespace RepositoryEFDotnet.UnitTest
             ((SqlServerFullContext)Context).Database.EnsureDeleted();
             ((SqlServerFullContext)Context).Database.EnsureCreated();
         }
+
         #endregion
     }
 }

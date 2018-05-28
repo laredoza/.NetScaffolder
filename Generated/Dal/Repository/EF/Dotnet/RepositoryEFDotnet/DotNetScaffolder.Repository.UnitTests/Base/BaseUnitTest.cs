@@ -109,15 +109,15 @@ namespace RepositoryEFDotnet.UnitTest
         /// <param name="isUpdate">
         /// The is update.
         /// </param>
-        protected virtual void PopulateCompositeKeyTest(ICompositeKeyTest item, bool isUpdate = false)
+        protected virtual void PopulateCompositeKeyTest(ICompositeKeyTest item, bool isUpdate = false, int seed = 1)
         {
-            item.PrimaryCol1 = 1;
-            item.PrimaryCol2 = 2;
+            item.PrimaryCol1 = seed;
+            item.PrimaryCol2 = seed + 1;
 
             if (isUpdate)
             {
-                item.PrimaryCol1 = 3;
-                item.PrimaryCol2 = 4;
+                item.PrimaryCol1 = seed + 2;
+                item.PrimaryCol2 = seed + 3;
             }
         }
 
@@ -206,7 +206,7 @@ namespace RepositoryEFDotnet.UnitTest
         protected virtual void PopulateOrder(IOrder item, bool isUpdate = false, int seed = 1)
         {
             item.CustomerId = 1;
-            item.DeliveryDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 8, 50, 20);         
+            item.DeliveryDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 8, 50, 20);
             item.OrderDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day - seed, 10, 30, 10);
             item.ShippingAddress = $"Shipping Address {seed}";
             item.ShippingCity = $"Shipping city {seed}";

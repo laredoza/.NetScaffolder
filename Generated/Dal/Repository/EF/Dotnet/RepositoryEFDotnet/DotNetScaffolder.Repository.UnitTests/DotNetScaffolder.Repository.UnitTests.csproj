@@ -54,6 +54,9 @@
     <Reference Include="Microsoft.EntityFrameworkCore, Version=2.0.3.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Microsoft.EntityFrameworkCore.2.0.3\lib\netstandard2.0\Microsoft.EntityFrameworkCore.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.EntityFrameworkCore.Design, Version=2.0.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.EntityFrameworkCore.Design.2.0.1\lib\net461\Microsoft.EntityFrameworkCore.Design.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.EntityFrameworkCore.InMemory, Version=2.0.3.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Microsoft.EntityFrameworkCore.InMemory.2.0.3\lib\netstandard2.0\Microsoft.EntityFrameworkCore.InMemory.dll</HintPath>
     </Reference>
@@ -84,6 +87,9 @@
     <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=2.0.2.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Microsoft.Extensions.Logging.Abstractions.2.0.2\lib\netstandard2.0\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Extensions.Logging.Console, Version=2.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.Extensions.Logging.Console.2.0.0\lib\netstandard2.0\Microsoft.Extensions.Logging.Console.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Extensions.Options, Version=2.0.2.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Microsoft.Extensions.Options.2.0.2\lib\netstandard2.0\Microsoft.Extensions.Options.dll</HintPath>
     </Reference>
@@ -102,6 +108,12 @@
     <Reference Include="MySql.Data.EntityFramework, Version=8.0.11.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <HintPath>..\..\packages\MySql.Data.EntityFramework.8.0.11\lib\net452\MySql.Data.EntityFramework.dll</HintPath>
     </Reference>
+    <Reference Include="MySqlConnector, Version=0.32.0.0, Culture=neutral, PublicKeyToken=d33d3e53aa5f8c92, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\MySqlConnector.0.32.0\lib\net46\MySqlConnector.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="NMemory, Version=1.0.0.0, Culture=neutral, PublicKeyToken=6a46696d54971e6d, processorArchitecture=MSIL">
       <HintPath>..\..\packages\NMemory.1.1.0\lib\net45\NMemory.dll</HintPath>
     </Reference>
@@ -111,10 +123,19 @@
     <Reference Include="Oracle.ManagedDataAccess.EntityFramework, Version=6.122.1.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Oracle.ManagedDataAccess.EntityFramework.12.2.1100\lib\net45\Oracle.ManagedDataAccess.EntityFramework.dll</HintPath>
     </Reference>
+    <Reference Include="Pomelo.EntityFrameworkCore.MySql, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Pomelo.EntityFrameworkCore.MySql.2.0.1\lib\netstandard2.0\Pomelo.EntityFrameworkCore.MySql.dll</HintPath>
+    </Reference>
+    <Reference Include="Pomelo.JsonObject, Version=1.1.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Pomelo.JsonObject.1.1.1\lib\net451\Pomelo.JsonObject.dll</HintPath>
+    </Reference>
     <Reference Include="Remotion.Linq, Version=2.1.0.0, Culture=neutral, PublicKeyToken=fee00910d6e5f53b, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Remotion.Linq.2.1.1\lib\net45\Remotion.Linq.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Buffers.4.3.0\lib\netstandard1.1\System.Buffers.dll</HintPath>
+    </Reference>
     <Reference Include="System.Collections.Immutable, Version=1.2.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\..\packages\System.Collections.Immutable.1.4.0\lib\netstandard2.0\System.Collections.Immutable.dll</HintPath>
     </Reference>
@@ -144,10 +165,14 @@
       <HintPath>..\..\packages\System.Interactive.Async.3.1.1\lib\net46\System.Interactive.Async.dll</HintPath>
     </Reference>
     <Reference Include="System.Management" />
+    <Reference Include="System.Runtime, Version=4.1.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\..\packages\System.Runtime.CompilerServices.Unsafe.4.4.0\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
     <Reference Include="System.Security" />
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.1.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Threading.Tasks.Extensions.4.3.0\lib\portable-net45+win8+wp8+wpa81\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
     <Reference Include="System.Transactions" />
     <Reference Include="System.Xml" />
   </ItemGroup>
@@ -159,18 +184,22 @@
     <Compile Include="Base\BaseUnitTest.cs" />
     <Compile Include="Base\BaseUnitTest.g.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tests\Repository\Database\EFCore\RepositoryDbEFCoreMySqlUnitTests.cs" />
     <Compile Include="Tests\Repository\Database\EFCore\RepositoryDbEFCoreSqlServerUnitTests.cs" />
     <Compile Include="Tests\Repository\Database\EF\RepositoryDbEF6MySqlUnitTests.cs" />
     <Compile Include="Tests\Repository\Database\EF\RepositoryDbEF6OracleUnitTests.cs" />
     <Compile Include="Tests\Repository\Database\EF\RepositoryDbEF6SqlServerUnitTests.cs" />
+    <Compile Include="Tests\Repository\In-Memory\EFCore\RepositoryEFCoreInMemoryMySqlUnitTests.cs" />
     <Compile Include="Tests\Repository\In-Memory\EFCore\RepositoryEFCoreInMemorySqlServerUnitTests.cs" />
     <Compile Include="Tests\Repository\In-Memory\EF\RepositoryEF6InMemoryMySqlUnitTests.cs" />
     <Compile Include="Tests\Repository\In-Memory\EF\RepositoryEF6InMemoryOracleUnitTests.cs" />
     <Compile Include="Tests\Repository\In-Memory\EF\RepositoryEF6InMemorySqlServerUnitTests.cs" />
+    <Compile Include="Tests\UnitOfWork\Database\EFCore\UowEFCoreDbMySqlUnitTests.cs" />
     <Compile Include="Tests\UnitOfWork\Database\EFCore\UowEFCoreDbSqlServerUnitTests.cs" />
     <Compile Include="Tests\UnitOfWork\Database\EF\UowEF6DbMySqlUnitTests.cs" />
     <Compile Include="Tests\UnitOfWork\Database\EF\UowEF6DbOracleUnitTests.cs" />
     <Compile Include="Tests\UnitOfWork\Database\EF\UowEF6DbSqlServerUnitTests.cs" />
+    <Compile Include="Tests\UnitOfWork\In-Memory\EFCore\UowEFCoreInMemoryMySqlUnitTests.cs" />
     <Compile Include="Tests\UnitOfWork\In-Memory\EFCore\UowEFCoreInMemorySqlServerUnitTests.cs" />
     <Compile Include="Tests\UnitOfWork\In-Memory\EF\UowEF6InMemoryMySqlUnitTests.cs" />
     <Compile Include="Tests\UnitOfWork\In-Memory\EF\UowEF6InMemoryOracleUnitTests.cs" />
@@ -188,6 +217,10 @@
     <ProjectReference Include="..\..\Data\Contexts\EFCore\Base\RepositoryEFDotnet.Contexts.EFCore.Base.csproj">
       <Project>{b801261b-ece7-4b9e-86c8-0b5f631b0065}</Project>
       <Name>RepositoryEFDotnet.Contexts.EFCore.Base</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Data\Contexts\EFCore\MySql\RepositoryEFDotnet.Contexts.EFCore.MySql.csproj">
+      <Project>{f5647c02-1232-42d4-935c-adb9442fe96b}</Project>
+      <Name>RepositoryEFDotnet.Contexts.EFCore.MySql</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Data\Contexts\EFCore\SqlServer\RepositoryEFDotnet.Contexts.EFCore.SqlServer.csproj">
       <Project>{098a8e5b-f469-4e24-b513-ddc0656b2e42}</Project>

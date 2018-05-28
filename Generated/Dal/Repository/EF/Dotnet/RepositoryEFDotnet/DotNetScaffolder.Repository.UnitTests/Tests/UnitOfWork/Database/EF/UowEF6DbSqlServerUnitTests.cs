@@ -13,16 +13,26 @@ namespace RepositoryEFDotnet.UnitTest
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-    using RepositoryEFDotnet.Core.Base;
-
     /// <summary>
     /// The uow e f 6 db sql server unit test.
     /// </summary>
     [TestClass]
     public class UowEF6DbSqlServerUnitTest : BaseUnitOfWorkUnitTests
     {
+        #region Constants
+
+        /// <summary>
+        /// The db config.
+        /// </summary>
         private const string DbConfig = "RepoTest";
 
+        #endregion
+
+        #region Public Methods And Operators
+
+        /// <summary>
+        /// The init.
+        /// </summary>
         [TestInitialize]
         public void Init()
         {
@@ -38,7 +48,9 @@ namespace RepositoryEFDotnet.UnitTest
             }
         }
 
-
+        /// <summary>
+        /// The run all.
+        /// </summary>
         [TestMethod]
         public override void RunAll()
         {
@@ -48,6 +60,12 @@ namespace RepositoryEFDotnet.UnitTest
             }
         }
 
+        /// <summary>
+        /// The run all async.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>
         [TestMethod]
         public override async Task RunAllAsync()
         {
@@ -56,5 +74,7 @@ namespace RepositoryEFDotnet.UnitTest
                 await this.BaseUnitOfWorkUnitTests_BankAccount_RunAllAsync(context);
             }
         }
+
+        #endregion
     }
 }

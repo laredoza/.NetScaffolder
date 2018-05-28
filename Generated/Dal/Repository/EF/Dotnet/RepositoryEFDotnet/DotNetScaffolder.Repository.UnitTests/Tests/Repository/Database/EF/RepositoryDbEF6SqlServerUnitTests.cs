@@ -22,6 +22,12 @@ namespace RepositoryEFDotnet.UnitTest
     {
         #region Public Methods And Operators
 
+        /// <summary>
+        /// The class init.
+        /// </summary>
+        /// <param name="context">
+        /// The context.
+        /// </param>
         [ClassInitialize]
         public static void ClassInit(TestContext context)
         {

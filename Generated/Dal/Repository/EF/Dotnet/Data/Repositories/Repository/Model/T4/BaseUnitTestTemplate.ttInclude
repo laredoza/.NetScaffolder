@@ -42,21 +42,13 @@ namespace RepositoryEFDotnet.UnitTest
         protected virtual void Check_<#= mdl.TableName #>(I<#= mdl.TableName #> dto, I<#= mdl.TableName #> savedEntity)
         { 
             Assert.IsNotNull(savedEntity);
+			Assert.IsNotNull(dto);
 			
 			// Test Fields
-<#+ foreach(var col in mdl.Columns){ #>
+<#+ foreach(var col in mdl.Columns.Where(o => !o.IsPrimaryKey)){ #>
             Assert.AreEqual(dto.<#= col.ColumnName #>, savedEntity.<#= col.ColumnName #>, $"Customer.<#= col.ColumnName #> incorrect.");
 <#+ } #>
-        }
-		
-        protected virtual void Change_<#= mdl.TableName #>(I<#= mdl.TableName #> dto, I<#= mdl.TableName #> savedEntity)
-        {             
-			// Test Fields
-<#+ foreach(var col in mdl.Columns){ #>
-            Assert.AreEqual(dto.<#= col.ColumnName #>, savedEntity.<#= col.ColumnName #>, $"Customer.<#= col.ColumnName #> incorrect.");
-<#+ } #>
-        }
-		
+        }		
 <#+ } #>
 
 		#endregion

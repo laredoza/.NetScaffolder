@@ -1,5 +1,5 @@
 ﻿
-// <copyright file="FullContext.g.cs" company="MIT">
+// <copyright file="CustomerContext.g.cs" company="MIT">
 //  Copyright (c) 2018 MIT
 // </copyright>  
 
@@ -19,29 +19,28 @@
 // *******************************************************************
 
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage;
 using RepositoryEFDotnet.Contexts.EFCore;
 using System.Configuration;
 using System.ComponentModel.DataAnnotations.Schema;
 using Banking.Models.Entity;
 
-namespace Banking.Models.Context.Core
+namespace Banking.Models.Customers.Core
 {
-	public partial class SqlServerFullContext : BaseContext
+	public partial class MySqlCustomerContext : BaseContext
 	{	
 		#region CTOR
 
-	    public SqlServerFullContext(string connectionName)
+	    public MySqlCustomerContext(string connectionName)
 	        : base(connectionName)
 	    {
 	    }
 
-	    public SqlServerFullContext(DbContextOptions<SqlServerFullContext> options) 
+	    public MySqlCustomerContext(DbContextOptions<MySqlCustomerContext> options) 
 			: base(options) 
 		{
 		}
 		
-		public SqlServerFullContext()
+		public MySqlCustomerContext()
 			: base("name=RepoTest") 
 		{
 		}
@@ -52,7 +51,7 @@ namespace Banking.Models.Context.Core
 	    {
 	        if (!string.IsNullOrEmpty(ConnectionName) && !optionsBuilder.IsConfigured)
 	        {
-				optionsBuilder.UseSqlServer(ConfigurationManager.ConnectionStrings[ConnectionName].ConnectionString);
+				optionsBuilder.UseMySql(ConfigurationManager.ConnectionStrings[ConnectionName].ConnectionString);
 	        }
 	    }
 		
@@ -62,28 +61,18 @@ namespace Banking.Models.Context.Core
 			
 			#region Tables
 			
-			modelBuilder.Entity<BankAccount>().ToTable("BankAccount", "dbo");
-			modelBuilder.Entity<CompositeKeyTest>().ToTable("CompositeKeyTest", "dbo");
-			modelBuilder.Entity<BankTransfers>().ToTable("BankTransfers", "dbo");
-			modelBuilder.Entity<Book>().ToTable("Book", "dbo");
-			modelBuilder.Entity<Country>().ToTable("Country", "dbo");
-			modelBuilder.Entity<Customer>().ToTable("Customer", "dbo");
-			modelBuilder.Entity<Order>().ToTable("Order", "dbo");
-			modelBuilder.Entity<OrderDetails>().ToTable("OrderDetails", "dbo");
-			modelBuilder.Entity<Product>().ToTable("Product", "dbo");
-			modelBuilder.Entity<Software>().ToTable("Software", "dbo");
+			modelBuilder.Entity<Book>().ToTable("Book");
+			modelBuilder.Entity<Country>().ToTable("Country");
+			modelBuilder.Entity<Customer>().ToTable("Customer");
+			modelBuilder.Entity<Order>().ToTable("Order");
+			modelBuilder.Entity<OrderDetails>().ToTable("OrderDetails");
+			modelBuilder.Entity<Product>().ToTable("Product");
+			modelBuilder.Entity<Software>().ToTable("Software");
 
 			#endregion
 			
 			#region Primary keys
 			
-			modelBuilder.Entity<BankAccount>().HasKey(t => t.BankAccountId);
-			modelBuilder.Entity<BankAccount>().Property(t => t.BankAccountId).ValueGeneratedOnAdd();
-			modelBuilder.Entity<CompositeKeyTest>().HasKey(t => new {t.PrimaryCol1, t.PrimaryCol2});
-			modelBuilder.Entity<CompositeKeyTest>().Property(t => t.PrimaryCol1).ValueGeneratedNever();
-			modelBuilder.Entity<CompositeKeyTest>().Property(t => t.PrimaryCol2).ValueGeneratedNever();
-			modelBuilder.Entity<BankTransfers>().HasKey(t => t.BankTransferId);
-			modelBuilder.Entity<BankTransfers>().Property(t => t.BankTransferId).ValueGeneratedOnAdd();
 			modelBuilder.Entity<Book>().HasKey(t => t.ProductId);
 			modelBuilder.Entity<Book>().Property(t => t.ProductId).ValueGeneratedNever();
 			modelBuilder.Entity<Country>().HasKey(t => t.CountryId);
@@ -103,10 +92,7 @@ namespace Banking.Models.Context.Core
 			
 			#region Included Relationships
 			
-			modelBuilder.Entity<BankAccount>().HasMany<BankTransfers>(s => s.BankTransfersFrom).WithOne(s => s.BankAccountFrom).HasForeignKey(s => s.FromBankAccountId).OnDelete(DeleteBehavior.Restrict);
-			modelBuilder.Entity<BankAccount>().HasMany<BankTransfers>(s => s.BankTransfersTo).WithOne(s => s.BankAccountTo).HasForeignKey(s => s.ToBankAccountId).OnDelete(DeleteBehavior.Restrict);
 			modelBuilder.Entity<Country>().HasMany<Customer>(s => s.Customer).WithOne(s => s.Country).HasForeignKey(s => s.CountryId).OnDelete(DeleteBehavior.Restrict);
-			modelBuilder.Entity<Customer>().HasMany<BankAccount>(s => s.BankAccount).WithOne(s => s.Customer).HasForeignKey(s => s.CustomerId).OnDelete(DeleteBehavior.Restrict);
 			modelBuilder.Entity<Customer>().HasMany<Order>(s => s.Order).WithOne(s => s.Customer).HasForeignKey(s => s.CustomerId).OnDelete(DeleteBehavior.Restrict);
 			modelBuilder.Entity<Order>().HasMany<OrderDetails>(s => s.OrderDetails).WithOne(s => s.Order).HasForeignKey(s => s.OrderId).OnDelete(DeleteBehavior.Restrict);
 			modelBuilder.Entity<Product>().HasOne<Book>(s => s.Book).WithOne(s => s.Product).OnDelete(DeleteBehavior.Restrict);
@@ -119,26 +105,12 @@ namespace Banking.Models.Context.Core
 			
 			// Exclude entities not part of this context
 			
+			modelBuilder.Ignore<BankAccount>();
 
 			#endregion
 			
 			#region Constraints
 			
-			modelBuilder.Entity<BankAccount>().Property(t => t.BankAccountId).IsRequired();
-			modelBuilder.Entity<BankAccount>().Property(t => t.BankAccountNumber).HasMaxLength(10);
-			modelBuilder.Entity<BankAccount>().Property(t => t.BankAccountNumber).IsRequired();
-			modelBuilder.Entity<BankAccount>().Property(t => t.Balance).IsRequired();
-			modelBuilder.Entity<BankAccount>().Property(t => t.Balance).HasColumnType("decimal(19, 0)");
-			modelBuilder.Entity<BankAccount>().Property(t => t.CustomerId).IsRequired(false);
-			modelBuilder.Entity<BankAccount>().Property(t => t.Locked).IsRequired();
-			modelBuilder.Entity<CompositeKeyTest>().Property(t => t.PrimaryCol1).IsRequired();
-			modelBuilder.Entity<CompositeKeyTest>().Property(t => t.PrimaryCol2).IsRequired();
-			modelBuilder.Entity<BankTransfers>().Property(t => t.BankTransferId).IsRequired();
-			modelBuilder.Entity<BankTransfers>().Property(t => t.FromBankAccountId).IsRequired();
-			modelBuilder.Entity<BankTransfers>().Property(t => t.ToBankAccountId).IsRequired();
-			modelBuilder.Entity<BankTransfers>().Property(t => t.Amount).IsRequired();
-			modelBuilder.Entity<BankTransfers>().Property(t => t.Amount).HasColumnType("decimal(18, 0)");
-			modelBuilder.Entity<BankTransfers>().Property(t => t.TransferDate).IsRequired();
 			modelBuilder.Entity<Book>().Property(t => t.ProductId).IsRequired();
 			modelBuilder.Entity<Book>().Property(t => t.Publisher).HasMaxLength(200);
 			modelBuilder.Entity<Book>().Property(t => t.Publisher).IsRequired();
@@ -208,9 +180,6 @@ namespace Banking.Models.Context.Core
 		
 		#region Db Sets
 		
-		public virtual DbSet<BankAccount> BankAccount { get; set; }
-		public virtual DbSet<CompositeKeyTest> CompositeKeyTest { get; set; }
-		public virtual DbSet<BankTransfers> BankTransfers { get; set; }
 		public virtual DbSet<Book> Book { get; set; }
 		public virtual DbSet<Country> Country { get; set; }
 		public virtual DbSet<Customer> Customer { get; set; }

@@ -24,6 +24,7 @@ using Banking.Models.Repository;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RepositoryEFDotnet.Core.Base;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace RepositoryEFDotnet.UnitTest
 {
@@ -37,230 +38,375 @@ namespace RepositoryEFDotnet.UnitTest
         #endregion
 
         #region Tests
+
+        [TestMethod]
+        public void RunAll()
+        {
+			BankAccount_Add();
+			//BankAccount_LoadAll();
+			//BankAccount_Search();
+			//BankAccount_Update();
+			//BankAccount_Delete();
+			CompositeKeyTest_Add();
+			//CompositeKeyTest_LoadAll();
+			//CompositeKeyTest_Search();
+			//CompositeKeyTest_Update();
+			//CompositeKeyTest_Delete();
+			BankTransfers_Add();
+			//BankTransfers_LoadAll();
+			//BankTransfers_Search();
+			//BankTransfers_Update();
+			//BankTransfers_Delete();
+			Book_Add();
+			//Book_LoadAll();
+			//Book_Search();
+			//Book_Update();
+			//Book_Delete();
+			Country_Add();
+			//Country_LoadAll();
+			//Country_Search();
+			//Country_Update();
+			//Country_Delete();
+			Customer_Add();
+			//Customer_LoadAll();
+			//Customer_Search();
+			//Customer_Update();
+			//Customer_Delete();
+			Order_Add();
+			//Order_LoadAll();
+			//Order_Search();
+			//Order_Update();
+			//Order_Delete();
+			OrderDetails_Add();
+			//OrderDetails_LoadAll();
+			//OrderDetails_Search();
+			//OrderDetails_Update();
+			//OrderDetails_Delete();
+			Product_Add();
+			//Product_LoadAll();
+			//Product_Search();
+			//Product_Update();
+			//Product_Delete();
+			Software_Add();
+			//Software_LoadAll();
+			//Software_Search();
+			//Software_Update();
+			//Software_Delete();
+        }
 		
 
-		[TestMethod]
-        public void BankAccount_Add()
+        public void BankAccount_Add(int count = 1, int startSeed = 1, int expected = 1)
         {
             var repo = new BankAccountRepository(Context);
-            BaseRepositoryUnitTest_BankAccount_Add(repo);
+            BaseRepositoryUnitTest_BankAccount_AddRange(repo, count, startSeed, expected);
         }
 
-		[TestMethod]
-        public void CompositeKeyTest_Add()
+        public void CompositeKeyTest_Add(int count = 1, int startSeed = 1, int expected = 1)
         {
             var repo = new CompositeKeyTestRepository(Context);
-            BaseRepositoryUnitTest_CompositeKeyTest_Add(repo);
+            BaseRepositoryUnitTest_CompositeKeyTest_AddRange(repo, count, startSeed, expected);
         }
 
-		[TestMethod]
-        public void BankTransfers_Add()
+        public void BankTransfers_Add(int count = 1, int startSeed = 1, int expected = 1)
         {
             var repo = new BankTransfersRepository(Context);
-            BaseRepositoryUnitTest_BankTransfers_Add(repo);
+            BaseRepositoryUnitTest_BankTransfers_AddRange(repo, count, startSeed, expected);
         }
 
-		[TestMethod]
-        public void Book_Add()
+        public void Book_Add(int count = 1, int startSeed = 1, int expected = 1)
         {
             var repo = new BookRepository(Context);
-            BaseRepositoryUnitTest_Book_Add(repo);
+            BaseRepositoryUnitTest_Book_AddRange(repo, count, startSeed, expected);
         }
 
-		[TestMethod]
-        public void Country_Add()
+        public void Country_Add(int count = 1, int startSeed = 1, int expected = 1)
         {
             var repo = new CountryRepository(Context);
-            BaseRepositoryUnitTest_Country_Add(repo);
+            BaseRepositoryUnitTest_Country_AddRange(repo, count, startSeed, expected);
         }
 
-		[TestMethod]
-        public void Customer_Add()
+        public void Customer_Add(int count = 1, int startSeed = 1, int expected = 1)
         {
             var repo = new CustomerRepository(Context);
-            BaseRepositoryUnitTest_Customer_Add(repo);
+            BaseRepositoryUnitTest_Customer_AddRange(repo, count, startSeed, expected);
         }
 
-		[TestMethod]
-        public void Order_Add()
+        public void Order_Add(int count = 1, int startSeed = 1, int expected = 1)
         {
             var repo = new OrderRepository(Context);
-            BaseRepositoryUnitTest_Order_Add(repo);
+            BaseRepositoryUnitTest_Order_AddRange(repo, count, startSeed, expected);
         }
 
-		[TestMethod]
-        public void OrderDetails_Add()
+        public void OrderDetails_Add(int count = 1, int startSeed = 1, int expected = 1)
         {
             var repo = new OrderDetailsRepository(Context);
-            BaseRepositoryUnitTest_OrderDetails_Add(repo);
+            BaseRepositoryUnitTest_OrderDetails_AddRange(repo, count, startSeed, expected);
         }
 
-		[TestMethod]
-        public void Product_Add()
+        public void Product_Add(int count = 1, int startSeed = 1, int expected = 1)
         {
             var repo = new ProductRepository(Context);
-            BaseRepositoryUnitTest_Product_Add(repo);
+            BaseRepositoryUnitTest_Product_AddRange(repo, count, startSeed, expected);
         }
 
-		[TestMethod]
-        public void Software_Add()
+        public void Software_Add(int count = 1, int startSeed = 1, int expected = 1)
         {
             var repo = new SoftwareRepository(Context);
-            BaseRepositoryUnitTest_Software_Add(repo);
+            BaseRepositoryUnitTest_Software_AddRange(repo, count, startSeed, expected);
         }
 
 		#endregion
 		
 		#region Base Tests
 
-        public virtual void BaseRepositoryUnitTest_BankAccount_Add(IBankAccountRepository repository)
-        {
-            var dto = new BankAccountDto();
-            PopulateBankAccount(dto);
-            repository.Save(dto);
+        protected virtual void BaseRepositoryUnitTest_BankAccount_AddRange(IBankAccountRepository repository, int count = 1, int startSeed = 1, int expected = 1)
+        {		
+            var list = new List<IBankAccount>();
+            var seed = startSeed;
+            for (var index = 1; index <= count; index++)
+            {
+                var dto = new BankAccountDto();
+                PopulateBankAccount(dto, false, seed);
+                list.Add(dto);
+				repository.Save(dto);
+                seed++;
+            }
+
             Context.Commit();
 
-            // Load from db and check values
-            var result = repository.LoadAll();
+            var items = repository.LoadAll();
+            this.Check_EntityCount(expected, items.Count(), "Incorrect number of BankAccount found");
 
-            // Test count
-            Check_EntityCount(1, result.Count, "BankAccount");
-            Check_BankAccount(dto, result.FirstOrDefault());
+            for (var index = 1; index <= count; index++)
+			{
+				int id = index + startSeed - 1;
+                this.Check_BankAccount(list.FirstOrDefault(o => o.BankAccountId == id),items.FirstOrDefault(o => o.BankAccountId == id));
+			}
         }
 
-        public virtual void BaseRepositoryUnitTest_CompositeKeyTest_Add(ICompositeKeyTestRepository repository)
-        {
-            var dto = new CompositeKeyTestDto();
-            PopulateCompositeKeyTest(dto);
-            repository.Save(dto);
+        protected virtual void BaseRepositoryUnitTest_CompositeKeyTest_AddRange(ICompositeKeyTestRepository repository, int count = 1, int startSeed = 1, int expected = 1)
+        {		
+            var list = new List<ICompositeKeyTest>();
+            var seed = startSeed;
+            for (var index = 1; index <= count; index++)
+            {
+                var dto = new CompositeKeyTestDto();
+                PopulateCompositeKeyTest(dto, false, seed);
+                list.Add(dto);
+				repository.Save(dto);
+                seed++;
+            }
+
             Context.Commit();
 
-            // Load from db and check values
-            var result = repository.LoadAll();
+            var items = repository.LoadAll();
+            this.Check_EntityCount(expected, items.Count(), "Incorrect number of CompositeKeyTest found");
 
-            // Test count
-            Check_EntityCount(1, result.Count, "CompositeKeyTest");
-            Check_CompositeKeyTest(dto, result.FirstOrDefault());
+            for (var index = 1; index <= count; index++)
+			{
+				int id = index + startSeed - 1;
+                this.Check_CompositeKeyTest(list.FirstOrDefault(o => o.PrimaryCol1 == id),items.FirstOrDefault(o => o.PrimaryCol1 == id));
+			}
         }
 
-        public virtual void BaseRepositoryUnitTest_BankTransfers_Add(IBankTransfersRepository repository)
-        {
-            var dto = new BankTransfersDto();
-            PopulateBankTransfers(dto);
-            repository.Save(dto);
+        protected virtual void BaseRepositoryUnitTest_BankTransfers_AddRange(IBankTransfersRepository repository, int count = 1, int startSeed = 1, int expected = 1)
+        {		
+            var list = new List<IBankTransfers>();
+            var seed = startSeed;
+            for (var index = 1; index <= count; index++)
+            {
+                var dto = new BankTransfersDto();
+                PopulateBankTransfers(dto, false, seed);
+                list.Add(dto);
+				repository.Save(dto);
+                seed++;
+            }
+
             Context.Commit();
 
-            // Load from db and check values
-            var result = repository.LoadAll();
+            var items = repository.LoadAll();
+            this.Check_EntityCount(expected, items.Count(), "Incorrect number of BankTransfers found");
 
-            // Test count
-            Check_EntityCount(1, result.Count, "BankTransfers");
-            Check_BankTransfers(dto, result.FirstOrDefault());
+            for (var index = 1; index <= count; index++)
+			{
+				int id = index + startSeed - 1;
+                this.Check_BankTransfers(list.FirstOrDefault(o => o.BankTransferId == id),items.FirstOrDefault(o => o.BankTransferId == id));
+			}
         }
 
-        public virtual void BaseRepositoryUnitTest_Book_Add(IBookRepository repository)
-        {
-            var dto = new BookDto();
-            PopulateBook(dto);
-            repository.Save(dto);
+        protected virtual void BaseRepositoryUnitTest_Book_AddRange(IBookRepository repository, int count = 1, int startSeed = 1, int expected = 1)
+        {		
+            var list = new List<IBook>();
+            var seed = startSeed;
+            for (var index = 1; index <= count; index++)
+            {
+                var dto = new BookDto();
+                PopulateBook(dto, false, seed);
+                list.Add(dto);
+				repository.Save(dto);
+                seed++;
+            }
+
             Context.Commit();
 
-            // Load from db and check values
-            var result = repository.LoadAll();
+            var items = repository.LoadAll();
+            this.Check_EntityCount(expected, items.Count(), "Incorrect number of Book found");
 
-            // Test count
-            Check_EntityCount(1, result.Count, "Book");
-            Check_Book(dto, result.FirstOrDefault());
+            for (var index = 1; index <= count; index++)
+			{
+				int id = index + startSeed - 1;
+                this.Check_Book(list.FirstOrDefault(o => o.ProductId == id),items.FirstOrDefault(o => o.ProductId == id));
+			}
         }
 
-        public virtual void BaseRepositoryUnitTest_Country_Add(ICountryRepository repository)
-        {
-            var dto = new CountryDto();
-            PopulateCountry(dto);
-            repository.Save(dto);
+        protected virtual void BaseRepositoryUnitTest_Country_AddRange(ICountryRepository repository, int count = 1, int startSeed = 1, int expected = 1)
+        {		
+            var list = new List<ICountry>();
+            var seed = startSeed;
+            for (var index = 1; index <= count; index++)
+            {
+                var dto = new CountryDto();
+                PopulateCountry(dto, false, seed);
+                list.Add(dto);
+				repository.Save(dto);
+                seed++;
+            }
+
             Context.Commit();
 
-            // Load from db and check values
-            var result = repository.LoadAll();
+            var items = repository.LoadAll();
+            this.Check_EntityCount(expected, items.Count(), "Incorrect number of Country found");
 
-            // Test count
-            Check_EntityCount(1, result.Count, "Country");
-            Check_Country(dto, result.FirstOrDefault());
+            for (var index = 1; index <= count; index++)
+			{
+				int id = index + startSeed - 1;
+                this.Check_Country(list.FirstOrDefault(o => o.CountryId == id),items.FirstOrDefault(o => o.CountryId == id));
+			}
         }
 
-        public virtual void BaseRepositoryUnitTest_Customer_Add(ICustomerRepository repository)
-        {
-            var dto = new CustomerDto();
-            PopulateCustomer(dto);
-            repository.Save(dto);
+        protected virtual void BaseRepositoryUnitTest_Customer_AddRange(ICustomerRepository repository, int count = 1, int startSeed = 1, int expected = 1)
+        {		
+            var list = new List<ICustomer>();
+            var seed = startSeed;
+            for (var index = 1; index <= count; index++)
+            {
+                var dto = new CustomerDto();
+                PopulateCustomer(dto, false, seed);
+                list.Add(dto);
+				repository.Save(dto);
+                seed++;
+            }
+
             Context.Commit();
 
-            // Load from db and check values
-            var result = repository.LoadAll();
+            var items = repository.LoadAll();
+            this.Check_EntityCount(expected, items.Count(), "Incorrect number of Customer found");
 
-            // Test count
-            Check_EntityCount(1, result.Count, "Customer");
-            Check_Customer(dto, result.FirstOrDefault());
+            for (var index = 1; index <= count; index++)
+			{
+				int id = index + startSeed - 1;
+                this.Check_Customer(list.FirstOrDefault(o => o.CustomerId == id),items.FirstOrDefault(o => o.CustomerId == id));
+			}
         }
 
-        public virtual void BaseRepositoryUnitTest_Order_Add(IOrderRepository repository)
-        {
-            var dto = new OrderDto();
-            PopulateOrder(dto);
-            repository.Save(dto);
+        protected virtual void BaseRepositoryUnitTest_Order_AddRange(IOrderRepository repository, int count = 1, int startSeed = 1, int expected = 1)
+        {		
+            var list = new List<IOrder>();
+            var seed = startSeed;
+            for (var index = 1; index <= count; index++)
+            {
+                var dto = new OrderDto();
+                PopulateOrder(dto, false, seed);
+                list.Add(dto);
+				repository.Save(dto);
+                seed++;
+            }
+
             Context.Commit();
 
-            // Load from db and check values
-            var result = repository.LoadAll();
+            var items = repository.LoadAll();
+            this.Check_EntityCount(expected, items.Count(), "Incorrect number of Order found");
 
-            // Test count
-            Check_EntityCount(1, result.Count, "Order");
-            Check_Order(dto, result.FirstOrDefault());
+            for (var index = 1; index <= count; index++)
+			{
+				int id = index + startSeed - 1;
+                this.Check_Order(list.FirstOrDefault(o => o.OrderId == id),items.FirstOrDefault(o => o.OrderId == id));
+			}
         }
 
-        public virtual void BaseRepositoryUnitTest_OrderDetails_Add(IOrderDetailsRepository repository)
-        {
-            var dto = new OrderDetailsDto();
-            PopulateOrderDetails(dto);
-            repository.Save(dto);
+        protected virtual void BaseRepositoryUnitTest_OrderDetails_AddRange(IOrderDetailsRepository repository, int count = 1, int startSeed = 1, int expected = 1)
+        {		
+            var list = new List<IOrderDetails>();
+            var seed = startSeed;
+            for (var index = 1; index <= count; index++)
+            {
+                var dto = new OrderDetailsDto();
+                PopulateOrderDetails(dto, false, seed);
+                list.Add(dto);
+				repository.Save(dto);
+                seed++;
+            }
+
             Context.Commit();
 
-            // Load from db and check values
-            var result = repository.LoadAll();
+            var items = repository.LoadAll();
+            this.Check_EntityCount(expected, items.Count(), "Incorrect number of OrderDetails found");
 
-            // Test count
-            Check_EntityCount(1, result.Count, "OrderDetails");
-            Check_OrderDetails(dto, result.FirstOrDefault());
+            for (var index = 1; index <= count; index++)
+			{
+				int id = index + startSeed - 1;
+                this.Check_OrderDetails(list.FirstOrDefault(o => o.OrderDetailsId == id),items.FirstOrDefault(o => o.OrderDetailsId == id));
+			}
         }
 
-        public virtual void BaseRepositoryUnitTest_Product_Add(IProductRepository repository)
-        {
-            var dto = new ProductDto();
-            PopulateProduct(dto);
-            repository.Save(dto);
+        protected virtual void BaseRepositoryUnitTest_Product_AddRange(IProductRepository repository, int count = 1, int startSeed = 1, int expected = 1)
+        {		
+            var list = new List<IProduct>();
+            var seed = startSeed;
+            for (var index = 1; index <= count; index++)
+            {
+                var dto = new ProductDto();
+                PopulateProduct(dto, false, seed);
+                list.Add(dto);
+				repository.Save(dto);
+                seed++;
+            }
+
             Context.Commit();
 
-            // Load from db and check values
-            var result = repository.LoadAll();
+            var items = repository.LoadAll();
+            this.Check_EntityCount(expected, items.Count(), "Incorrect number of Product found");
 
-            // Test count
-            Check_EntityCount(1, result.Count, "Product");
-            Check_Product(dto, result.FirstOrDefault());
+            for (var index = 1; index <= count; index++)
+			{
+				int id = index + startSeed - 1;
+                this.Check_Product(list.FirstOrDefault(o => o.ProductId == id),items.FirstOrDefault(o => o.ProductId == id));
+			}
         }
 
-        public virtual void BaseRepositoryUnitTest_Software_Add(ISoftwareRepository repository)
-        {
-            var dto = new SoftwareDto();
-            PopulateSoftware(dto);
-            repository.Save(dto);
+        protected virtual void BaseRepositoryUnitTest_Software_AddRange(ISoftwareRepository repository, int count = 1, int startSeed = 1, int expected = 1)
+        {		
+            var list = new List<ISoftware>();
+            var seed = startSeed;
+            for (var index = 1; index <= count; index++)
+            {
+                var dto = new SoftwareDto();
+                PopulateSoftware(dto, false, seed);
+                list.Add(dto);
+				repository.Save(dto);
+                seed++;
+            }
+
             Context.Commit();
 
-            // Load from db and check values
-            var result = repository.LoadAll();
+            var items = repository.LoadAll();
+            this.Check_EntityCount(expected, items.Count(), "Incorrect number of Software found");
 
-            // Test count
-            Check_EntityCount(1, result.Count, "Software");
-            Check_Software(dto, result.FirstOrDefault());
+            for (var index = 1; index <= count; index++)
+			{
+				int id = index + startSeed - 1;
+                this.Check_Software(list.FirstOrDefault(o => o.ProductId == id),items.FirstOrDefault(o => o.ProductId == id));
+			}
         }
 
 		#endregion

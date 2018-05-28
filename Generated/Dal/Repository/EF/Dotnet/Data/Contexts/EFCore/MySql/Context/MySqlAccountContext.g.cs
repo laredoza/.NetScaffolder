@@ -19,7 +19,6 @@
 // *******************************************************************
 
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage;
 using RepositoryEFDotnet.Contexts.EFCore;
 using System.Configuration;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -27,21 +26,21 @@ using Banking.Models.Entity;
 
 namespace Banking.Models.Accounts.Core
 {
-	public partial class SqlServerAccountContext : BaseContext
+	public partial class MySqlAccountContext : BaseContext
 	{	
 		#region CTOR
 
-	    public SqlServerAccountContext(string connectionName)
+	    public MySqlAccountContext(string connectionName)
 	        : base(connectionName)
 	    {
 	    }
 
-	    public SqlServerAccountContext(DbContextOptions<SqlServerAccountContext> options) 
+	    public MySqlAccountContext(DbContextOptions<MySqlAccountContext> options) 
 			: base(options) 
 		{
 		}
 		
-		public SqlServerAccountContext()
+		public MySqlAccountContext()
 			: base("name=RepoTest") 
 		{
 		}
@@ -52,7 +51,7 @@ namespace Banking.Models.Accounts.Core
 	    {
 	        if (!string.IsNullOrEmpty(ConnectionName) && !optionsBuilder.IsConfigured)
 	        {
-				optionsBuilder.UseSqlServer(ConfigurationManager.ConnectionStrings[ConnectionName].ConnectionString);
+				optionsBuilder.UseMySql(ConfigurationManager.ConnectionStrings[ConnectionName].ConnectionString);
 	        }
 	    }
 		
@@ -62,8 +61,8 @@ namespace Banking.Models.Accounts.Core
 			
 			#region Tables
 			
-			modelBuilder.Entity<BankAccount>().ToTable("BankAccount", "dbo");
-			modelBuilder.Entity<BankTransfers>().ToTable("BankTransfers", "dbo");
+			modelBuilder.Entity<BankAccount>().ToTable("BankAccount");
+			modelBuilder.Entity<BankTransfers>().ToTable("BankTransfers");
 
 			#endregion
 			

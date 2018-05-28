@@ -7,7 +7,6 @@
 namespace RepositoryEFDotnet.UnitTest
 {
     using Banking.Models.Context;
-    using Banking.Models.Repository;
 
     using Effort;
 

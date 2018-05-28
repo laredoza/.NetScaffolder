@@ -1,22 +1,21 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="RepositoryEF6InMemoryMySqlUnitTests.cs" company="DotnetScaffolder">
+// <copyright file="RepositoryEFCoreInMemorySqlServerUnitTests.cs" company="DotnetScaffolder">
 //   MIT
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace RepositoryEFDotnet.UnitTest
 {
-    using Banking.Models.Context;
+    using Banking.Models.Context.Core;
 
-    using Effort;
-
+    using Microsoft.EntityFrameworkCore;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     /// <summary>
-    /// The repository e f 6 in memory my sql unit test.
+    /// The repository e f 6 in memory sql server unit test.
     /// </summary>
     [TestClass]
-    public class RepositoryEF6InMemoryMySqlUnitTest : BaseRepositoryUnitTest
+    public class RepositoryEFCoreInMemoryMySqlUnitTest : BaseRepositoryUnitTest
     {
         #region Public Methods And Operators
 
@@ -29,7 +28,10 @@ namespace RepositoryEFDotnet.UnitTest
         [ClassInitialize]
         public static void ClassInit(TestContext context)
         {
-            Context = new MySqlFullContext(DbConnectionFactory.CreateTransient());
+            var options = new DbContextOptionsBuilder<MySqlFullContext>().UseInMemoryDatabase("EFCORE_MySql").Options;
+            Context = new MySqlFullContext(options);
+
+            ((MySqlFullContext)Context).Database.EnsureCreated();
         }
 
         #endregion
