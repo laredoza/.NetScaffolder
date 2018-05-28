@@ -196,16 +196,16 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
                     }
 
                     newColumn = new Column
-                                    {
-                                        ColumnName = column.Name,
-                                        DomainDataType = this.MapDatabaseType(dataType, column),
-                                        IsRequired = !column.Nullable || column.IsPrimaryKey,
-                                        ColumnOrder = table.Columns.IndexOf(column) + 1,
-                                        Precision = column.Precision.HasValue ? column.Precision.Value : 0,
-                                        Scale = column.Scale.HasValue ? column.Scale.Value : 0,
-                                        Length = column.Length.HasValue ? column.Length.Value : 0,
-                                        IsPrimaryKey = column.IsPrimaryKey
-                                    };
+                    {
+                        ColumnName = column.Name,
+                        DomainDataType = this.MapDatabaseType(dataType, column),
+                        IsRequired = !column.Nullable || column.IsPrimaryKey,
+                        ColumnOrder = table.Columns.IndexOf(column) + 1,
+                        Precision = column.Precision.HasValue ? column.Precision.Value : 0,
+                        Scale = column.Scale.HasValue ? column.Scale.Value : 0,
+                        Length = column.Length.HasValue ? column.Length.Value : 0,
+                        IsPrimaryKey = column.IsPrimaryKey
+                    };
 
                     if (column.IsPrimaryKey)
                     {
@@ -217,19 +217,24 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
 
                 string referencedForeignColumnName = string.Empty;
                 MultiplicityResult multiplicityResult;
-                
+
                 foreach (var foreignKey in table.ForeignKeys)
                 {
-                    referencedForeignColumnName = foreignKey.ReferencedColumns(schema).ToList()[0];
-                    multiplicityResult = this.ReturnMultiplicity(
-                        table,
-                        foreignKey.Columns[0],
-                        foreignKey.ReferencedTable(schema),
-                        referencedForeignColumnName,
-                        RelationshipType.ForeignKey);
+                    var referencedForeignColumn = foreignKey.ReferencedColumns(schema);
 
-                    newTable.Relationships.Add(
-                        new Relationship
+                    if (referencedForeignColumn != null)
+                    {
+                        referencedForeignColumnName = referencedForeignColumn.ToList()[0];
+
+                        multiplicityResult = this.ReturnMultiplicity(
+                            table,
+                            foreignKey.Columns[0],
+                            foreignKey.ReferencedTable(schema),
+                            referencedForeignColumnName,
+                            RelationshipType.ForeignKey);
+
+                        newTable.Relationships.Add(
+                            new Relationship
                             {
                                 ReferencedTableName = foreignKey.RefersToTable,
                                 ColumnName = foreignKey.Columns[0],
@@ -239,33 +244,37 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
                                 SchemaName = foreignKey.SchemaOwner,
                                 Multiplicity = multiplicityResult.Multiplicity,
                                 ReferencedMultiplicity = multiplicityResult.ReferencedMultiplicity
-                        });
+                            });
+                    }
                 }
 
                 foreach (var foreignKeyChildren in table.ForeignKeyChildren)
                 {
                     foreach (var foreignKey in foreignKeyChildren.ForeignKeys)
                     {
-                        if (foreignKey.RefersToTable == table.Name)
+                        var referencedForeignColumn = foreignKey.ReferencedColumns(schema).ToList();
+                        if (foreignKey.RefersToTable == table.Name && referencedForeignColumn.Count > 0)
                         {
+                            var referencedForeignColumnString = referencedForeignColumn[0];
+
                             multiplicityResult = this.ReturnMultiplicity(
-                                table,
-                                foreignKey.ReferencedColumns(schema).ToList()[0],
-                                table.ForeignKeyChildren.FirstOrDefault(t => t.Name == foreignKey.TableName),
-                                foreignKey.Columns[0],
-                                RelationshipType.ForeignKeyChild);
+                            table,
+                            referencedForeignColumnString,
+                            table.ForeignKeyChildren.FirstOrDefault(t => t.Name == foreignKey.TableName),
+                            foreignKey.Columns[0],
+                            RelationshipType.ForeignKeyChild);
 
                             newTable.Relationships.Add(
                                 new Relationship
-                                    {
-                                        ReferencedTableName = foreignKey.TableName,
-                                        ColumnName = foreignKey.ReferencedColumns(schema).ToList()[0],
-                                        ReferencedColumnName = foreignKey.Columns[0],
-                                        DependencyRelationShip = RelationshipType.ForeignKeyChild,
-                                        RelationshipName = foreignKey.Name,
-                                        SchemaName = foreignKey.SchemaOwner,
-                                        Multiplicity = multiplicityResult.Multiplicity,
-                                        ReferencedMultiplicity = multiplicityResult.ReferencedMultiplicity
+                                {
+                                    ReferencedTableName = foreignKey.TableName,
+                                    ColumnName = referencedForeignColumnString,
+                                    ReferencedColumnName = foreignKey.Columns[0],
+                                    DependencyRelationShip = RelationshipType.ForeignKeyChild,
+                                    RelationshipName = foreignKey.Name,
+                                    SchemaName = foreignKey.SchemaOwner,
+                                    Multiplicity = multiplicityResult.Multiplicity,
+                                    ReferencedMultiplicity = multiplicityResult.ReferencedMultiplicity
                                 });
                         }
                     }
@@ -297,7 +306,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
 
         private string CreateChildAlias(string parentTable, string childTable)
         {
-            if(string.Equals(parentTable, childTable))
+            if (string.Equals(parentTable, childTable))
             {
                 return childTable + "Childrent";
             }

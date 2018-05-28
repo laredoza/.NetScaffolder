@@ -141,7 +141,6 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
         public override DomainDataType MapDatabaseType(string databaseType, object extraInfo)
         {
             DatabaseColumn column = extraInfo as DatabaseColumn;
-           
 
             string cSharpName = string.Empty;
 

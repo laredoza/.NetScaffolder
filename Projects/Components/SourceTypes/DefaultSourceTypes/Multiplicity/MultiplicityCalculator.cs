@@ -106,7 +106,8 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes
                     }
                     else
                     {
-                        throw new Exception();
+                        result.Multiplicity = RelationshipMultiplicity.One;
+                        result.ReferencedMultiplicity = RelationshipMultiplicity.One;
                     }
                 }
                 else if (columnIsPrimaryKey && relatedColumnIsForeignKey)

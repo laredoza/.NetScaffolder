@@ -86,9 +86,15 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
 
             switch (cSharpName)
             {
+                case "TEXT":
+                case "CHAR":
+                case "NTEXT":
                 case "VARCHAR":
                 case "NVARCHAR":
+                case "NCHAR":
+                case "XML":
                     return DomainDataType.String;
+                case "IMAGE":
                 case "VARBINARY":
                     return DomainDataType.VarBinary;
                 case "INT":
@@ -98,19 +104,20 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
                 case "BIT":
                     return DomainDataType.Boolean;
                 case "DATETIME":
+                case "DATETIME2":
                     return DomainDataType.DateTime;
                 case "SMALLINT":
                     return DomainDataType.Int16;
                 case "REAL":
                     return DomainDataType.Single;
-                //case "MONEY":
-                //    return DomainDataType.Decimal;
-                //case "NUMERIC":
-                //    return DomainDataType.Decimal;
-
-                //case "IMAGE":
-                //    // Todo: Do something valid with this
-                //    return DomainDataType.String;
+                case "FLOAT":
+                    return DomainDataType.Double;
+                case "TINYINT":
+                    return DomainDataType.SByte;
+                case "MONEY":
+                case "SMALLMONEY":
+                case "NUMERIC":
+                    return DomainDataType.Decimal;
                 //case "REAL":
                 //    // Todo: Do something valid with this
                 //    return DomainDataType.Single;
@@ -120,8 +127,8 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
                     return DomainDataType.Int64;
                 case "DATE":
                     return DomainDataType.Date;
-                //case "TIME":
-                //    return DomainDataType.Time;
+                case "TIME":
+                    return DomainDataType.TimeSpan;
                 case "":
                     return DomainDataType.Unsupported;
                 default:

@@ -37,20 +37,18 @@
             // 
             // BtnSave
             // 
-            this.BtnSave.Location = new System.Drawing.Point(567, 225);
-            this.BtnSave.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.BtnSave.Location = new System.Drawing.Point(384, 287);
             this.BtnSave.Name = "BtnSave";
-            this.BtnSave.Size = new System.Drawing.Size(112, 35);
+            this.BtnSave.Size = new System.Drawing.Size(75, 23);
             this.BtnSave.TabIndex = 9;
             this.BtnSave.Text = "Close";
             this.BtnSave.Click += new System.EventHandler(this.BtnSave_Click);
             // 
             // BtnTest
             // 
-            this.BtnTest.Location = new System.Drawing.Point(447, 225);
-            this.BtnTest.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.BtnTest.Location = new System.Drawing.Point(303, 287);
             this.BtnTest.Name = "BtnTest";
-            this.BtnTest.Size = new System.Drawing.Size(112, 35);
+            this.BtnTest.Size = new System.Drawing.Size(75, 23);
             this.BtnTest.TabIndex = 5;
             this.BtnTest.Text = "Test";
             this.BtnTest.UseVisualStyleBackColor = true;
@@ -59,32 +57,33 @@
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Location = new System.Drawing.Point(12, 12);
+            this.tabControl1.Location = new System.Drawing.Point(8, 8);
+            this.tabControl1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(723, 205);
+            this.tabControl1.Size = new System.Drawing.Size(482, 274);
             this.tabControl1.TabIndex = 10;
             // 
             // tabPage2
             // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 29);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(715, 172);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPage2.Size = new System.Drawing.Size(474, 248);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Settings";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // ManageDataSourceForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(747, 274);
+            this.ClientSize = new System.Drawing.Size(498, 322);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.BtnSave);
             this.Controls.Add(this.BtnTest);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.MaximizeBox = false;
             this.Name = "ManageDataSourceForm";
             this.Text = "Update Datasource";
