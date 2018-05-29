@@ -135,8 +135,9 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
                 case "SET":
                 case "CHAR":
                     return DomainDataType.String;
-                case "TIMESTAMP":
+                case "DATETIME":
                 case "DATE":
+                case "TIMESTAMP":
                     return DomainDataType.DateTime;
                 case "INT":
                 case "YEAR":
@@ -150,6 +151,8 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
                     return DomainDataType.Int16;
                 case "FLOAT":
                     return DomainDataType.Single;
+                case "TIME":
+                    return DomainDataType.TimeSpan;
                 case "LONGBLOB":
                 case "BLOB":
                     return DomainDataType.VarBinary;

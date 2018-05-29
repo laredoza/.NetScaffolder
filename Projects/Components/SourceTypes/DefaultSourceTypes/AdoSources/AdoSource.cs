@@ -394,8 +394,8 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
             string referencedColumnName,
             RelationshipType relationshipType)
         {
-            DatabaseColumn column = table.Columns.FirstOrDefault(c => c.Name == columnName);
-            DatabaseColumn foreignColumn = referencedTable.Columns.FirstOrDefault(c => c.Name == referencedColumnName);
+            DatabaseColumn column = table.Columns.FirstOrDefault(c => c.Name.ToLower() == columnName.ToLower());
+            DatabaseColumn foreignColumn = referencedTable.Columns.FirstOrDefault(c => c.Name.ToLower() == referencedColumnName.ToLower());
 
             return MultiplicityCalculator.Calculate(
                 relationshipType,
