@@ -35,30 +35,26 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
         /// </summary>
         private static readonly ILog Logger = LogManager.GetLogger(string.Empty);
 
+        private AdoSourceUi AdoSourceUi;
+
         #endregion
 
         #region Fields
-
-        /// <summary>
-        /// The options.
-        /// </summary>
-        private AdoSourceOptions options;
 
         #endregion
 
         #region Constructors and Destructors
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="MySql.MySqlAdoUserControl" /> class.
+        ///     Initializes a new instance of the <see cref="SqlServerAdoUserControl" /> class.
         /// </summary>
         public OracleAdoUserControl()
         {
-            Logger.Trace("Started OracleAdoUserControl()");
-
+            Logger.Trace("Started SqlServerAdoUserControl()");
             this.InitializeComponent();
-            this.options = new AdoSourceOptions();
+            this.AdoSourceUi = new AdoSourceUi(this.TxtConnection, this.ListViewDrivers);
 
-            Logger.Trace("Completed OracleAdoUserControl()");
+            Logger.Trace("Completed SqlServerAdoUserControl()");
         }
 
         #endregion
@@ -70,10 +66,21 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
         /// </summary>
         public object Parameters { get; set; }
 
-        /// <summary>
-        /// Gets or sets the source type.
-        /// </summary>
-        public ISourceType SourceType { get; set; }
+        public ISourceType SourceType
+        {
+            get
+            {
+                return this.AdoSourceUi.SourceType;
+            }
+
+            set
+            {
+                if (this.AdoSourceUi.SourceType != value)
+                {
+                    this.AdoSourceUi.SourceType = value;
+                }
+            }
+        }
 
         /// <summary>
         /// Gets or sets the validation result.
@@ -94,22 +101,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
         /// </exception>
         public void LoadData(object parameters)
         {
-            Logger.Trace("Started LoadData()");
-
-            this.options = this.SourceType.Load(parameters) as AdoSourceOptions;
-
-            if (this.options != null)
-            {
-                this.TxtConnection.Text = this.options.ConnectionString;
-
-                this.TestData(this.options, false);
-            }
-            else
-            {
-                this.TxtConnection.Text = string.Empty;
-            }
-
-            Logger.Trace("Completed LoadData()");
+            this.AdoSourceUi.LoadData(parameters);
         }
 
         /// <inheritdoc />
@@ -123,13 +115,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
         /// </exception>
         public void SaveData(object parameters)
         {
-            Logger.Trace("Started SaveData()");
-            List<object> saveParameters = new List<object> { parameters, this.options };
-            this.options.Schemas.Clear();
-            this.options.Schemas.AddRange(this.ReturnSelectedSchemas());
-            this.SourceType.Save(saveParameters);
-
-            Logger.Trace("Completed SaveData()");
+            this.AdoSourceUi.SaveData(parameters);
         }
 
         /// <summary>
@@ -140,36 +126,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
         /// </param>
         public void TestData(object parameters, bool displayMessageOnSucceed)
         {
-            Logger.Trace("Started TestData()");
-
-            if (this.SourceType.Test(this.options))
-            {
-
-                if (displayMessageOnSucceed)
-                {
-                    MessageBox.Show("Connected to Oracle Server", "Test", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-
-                this.SourceType.ReturnSchemas(this.options);
-                this.ListViewDrivers.Items.AddRange(this.ReturnSchemasSchemaListViewItems().ToArray());
-
-                foreach (var schema in this.options.Schemas)
-                {
-                    ListViewItem item = this.ListViewDrivers.FindItemWithText(schema);
-                    //items = this.ListViewDrivers.Items.Find(schema, false);
-
-                    if (item != null)
-                    {
-                        item.Checked = true;
-                    }
-                }
-            }
-            else
-            {
-                MessageBox.Show("Unable to Connected to  Oracle Server", "Test", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-
-            Logger.Trace("Completed TestData()");
+            this.AdoSourceUi.TestData(parameters, displayMessageOnSucceed);
         }
 
         /// <summary>
@@ -199,41 +156,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
 
         private void TxtConnection_TextChanged(object sender, EventArgs e)
         {
-            this.options.ConnectionString = this.TxtConnection.Text;
-        }
-
-        /// <summary>
-        ///     The return driver types.
-        /// </summary>
-        /// <returns>
-        ///     The <see cref="object[]" />.
-        /// </returns>
-        private ListViewItem[] ReturnSchemasSchemaListViewItems()
-        {
-            var items = new List<ListViewItem>();
-            ListViewItem item;
-
-            foreach (var schema in this.SourceType.Schemas)
-            {
-                items.Add(new ListViewItem { Text = schema, Tag = schema });
-            }
-
-            return items.OrderBy(i => i.Text).ToArray();
-        }
-
-        private List<string> ReturnSelectedSchemas()
-        {
-            List<string> result = new List<string>();
-
-            foreach (ListViewItem schema in this.ListViewDrivers.Items)
-            {
-                if (schema.Checked)
-                {
-                    result.Add(schema.Text);
-                }
-            }
-
-            return result;
+            this.AdoSourceUi.Options.ConnectionString = this.TxtConnection.Text;
         }
 
     }
