@@ -61,7 +61,7 @@ namespace RepositoryEFDotnet.UnitTest
             this.BaseUnitOfWorkUnitTests_BankAccount_AllMatching(uow);
             this.BaseUnitOfWorkUnitTests_BankAccount_AllMatching_NothingFound(uow);
 
-            this.BaseUnitOfWorkUnitTests_BankAccount_GetAllPaged(uow, 2);
+            //this.BaseUnitOfWorkUnitTests_BankAccount_GetAllPaged(uow, 2);
             this.BaseUnitOfWorkUnitTests_BankAccount_Max(uow);
 			this.BaseUnitOfWorkUnitTests_BankAccount_RemoveRange(uow);
             this.BaseUnitOfWorkUnitTests_BankAccount_Rollback(uow);
@@ -121,6 +121,7 @@ namespace RepositoryEFDotnet.UnitTest
                 seed++;
             }
 
+			uow.StartTransaction();
             uow.AddRange(list);
             uow.Commit();
 
@@ -146,6 +147,7 @@ namespace RepositoryEFDotnet.UnitTest
                 seed++;
             }
 
+			uow.StartTransaction();
             await uow.AddRangeAsync(list);
             await uow.CommitAsync();
 
@@ -176,6 +178,7 @@ namespace RepositoryEFDotnet.UnitTest
 			Assert.IsNotNull(entityToUpdate, $"BankAccount could not be found for BankAccountId = {id}");
             PopulateBankAccount(entityToUpdate, true, 2);
 
+			uow.StartTransaction();
             uow.Modify(entityToUpdate);
             uow.Commit();
 
@@ -189,6 +192,7 @@ namespace RepositoryEFDotnet.UnitTest
             var entity = new BankAccount();
             PopulateBankAccount(entity, true, 2);
 
+			uow.StartTransaction();
             await uow.ModifyAsync(entity);
             await uow.CommitAsync();
 
@@ -203,6 +207,7 @@ namespace RepositoryEFDotnet.UnitTest
 			
 			Assert.IsNotNull(entity, "BankAccount not found to remove");
 			
+			uow.StartTransaction();
             uow.Remove(entity);
             uow.Commit();
 
@@ -216,6 +221,7 @@ namespace RepositoryEFDotnet.UnitTest
 			
 			Assert.IsNotNull(entity, "BankAccount not found to remove");
 			
+			uow.StartTransaction();
             await uow.RemoveAsync(entity);
             await uow.CommitAsync();
 
@@ -227,6 +233,7 @@ namespace RepositoryEFDotnet.UnitTest
         {			
             var entitiesToRemove = uow.GetAll<BankAccount>();
 			
+			uow.StartTransaction();
             uow.RemoveRange(entitiesToRemove);
             uow.Commit();
 
@@ -238,6 +245,7 @@ namespace RepositoryEFDotnet.UnitTest
         {			
             var entitiesToRemove = await uow.GetAllAsync<BankAccount>();
 			
+			uow.StartTransaction();
             await uow.RemoveRangeAsync(entitiesToRemove);
             await uow.CommitAsync();
 

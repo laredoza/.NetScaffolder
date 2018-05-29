@@ -81,19 +81,19 @@ namespace Banking.Models.Entity
 		
 		#region Fields
 		
-		public int CustomerId { get; set; }
-		public string CustomerCode { get; set; }
-		public string CompanyName { get; set; }
-		public string ContactName { get; set; }
-		public string ContactTitle { get; set; }
-		public string Address { get; set; }
-		public string City { get; set; }
-		public string PostalCode { get; set; }
-		public string Telephone { get; set; }
-		public string Fax { get; set; }
-		public Nullable<int> CountryId { get; set; }
-		public string Photo { get; set; }
-		public bool IsEnabled { get; set; }
+		public virtual int CustomerId { get; set; }
+		public virtual string CustomerCode { get; set; }
+		public virtual string CompanyName { get; set; }
+		public virtual string ContactName { get; set; }
+		public virtual string ContactTitle { get; set; }
+		public virtual string Address { get; set; }
+		public virtual string City { get; set; }
+		public virtual string PostalCode { get; set; }
+		public virtual string Telephone { get; set; }
+		public virtual string Fax { get; set; }
+		public virtual Nullable<int> CountryId { get; set; }
+		public virtual string Photo { get; set; }
+		public virtual bool IsEnabled { get; set; }
 
 		#endregion
 

@@ -48,8 +48,8 @@ namespace Banking.Models.Entity
 		
 		#region Fields
 		
-		public int PrimaryCol1 { get; set; }
-		public int PrimaryCol2 { get; set; }
+		public virtual int PrimaryCol1 { get; set; }
+		public virtual int PrimaryCol2 { get; set; }
 
 		#endregion
 	}

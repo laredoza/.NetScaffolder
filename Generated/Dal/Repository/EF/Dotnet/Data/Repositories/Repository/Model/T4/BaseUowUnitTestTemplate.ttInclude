@@ -123,6 +123,7 @@ namespace RepositoryEFDotnet.UnitTest
                 seed++;
             }
 
+			uow.StartTransaction();
             uow.AddRange(list);
             uow.Commit();
 
@@ -148,6 +149,7 @@ namespace RepositoryEFDotnet.UnitTest
                 seed++;
             }
 
+			uow.StartTransaction();
             await uow.AddRangeAsync(list);
             await uow.CommitAsync();
 
@@ -178,6 +180,7 @@ namespace RepositoryEFDotnet.UnitTest
 			Assert.IsNotNull(entityToUpdate, $"<#= mdl.TableName #> could not be found for <#= pk.ColumnName #> = {id}");
             Populate<#= mdl.TableName #>(entityToUpdate, true, 2);
 
+			uow.StartTransaction();
             uow.Modify(entityToUpdate);
             uow.Commit();
 
@@ -191,6 +194,7 @@ namespace RepositoryEFDotnet.UnitTest
             var entity = new <#= mdl.TableName #>();
             Populate<#= mdl.TableName #>(entity, true, 2);
 
+			uow.StartTransaction();
             await uow.ModifyAsync(entity);
             await uow.CommitAsync();
 
@@ -205,6 +209,7 @@ namespace RepositoryEFDotnet.UnitTest
 			
 			Assert.IsNotNull(entity, "<#= mdl.TableName #> not found to remove");
 			
+			uow.StartTransaction();
             uow.Remove(entity);
             uow.Commit();
 
@@ -218,6 +223,7 @@ namespace RepositoryEFDotnet.UnitTest
 			
 			Assert.IsNotNull(entity, "<#= mdl.TableName #> not found to remove");
 			
+			uow.StartTransaction();
             await uow.RemoveAsync(entity);
             await uow.CommitAsync();
 
@@ -229,6 +235,7 @@ namespace RepositoryEFDotnet.UnitTest
         {			
             var entitiesToRemove = uow.GetAll<<#= mdl.TableName #>>();
 			
+			uow.StartTransaction();
             uow.RemoveRange(entitiesToRemove);
             uow.Commit();
 
@@ -240,6 +247,7 @@ namespace RepositoryEFDotnet.UnitTest
         {			
             var entitiesToRemove = await uow.GetAllAsync<<#= mdl.TableName #>>();
 			
+			uow.StartTransaction();
             await uow.RemoveRangeAsync(entitiesToRemove);
             await uow.CommitAsync();
 

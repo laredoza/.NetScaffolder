@@ -67,14 +67,14 @@ namespace Banking.Models.Entity
 		
 		#region Fields
 		
-		public int OrderId { get; set; }
-		public Nullable<int> CustomerId { get; set; }
-		public Nullable<DateTime> OrderDate { get; set; }
-		public Nullable<DateTime> DeliveryDate { get; set; }
-		public string ShippingName { get; set; }
-		public string ShippingAddress { get; set; }
-		public string ShippingCity { get; set; }
-		public string ShippingZip { get; set; }
+		public virtual int OrderId { get; set; }
+		public virtual Nullable<int> CustomerId { get; set; }
+		public virtual Nullable<DateTime> OrderDate { get; set; }
+		public virtual Nullable<DateTime> DeliveryDate { get; set; }
+		public virtual string ShippingName { get; set; }
+		public virtual string ShippingAddress { get; set; }
+		public virtual string ShippingCity { get; set; }
+		public virtual string ShippingZip { get; set; }
 
 		#endregion
 

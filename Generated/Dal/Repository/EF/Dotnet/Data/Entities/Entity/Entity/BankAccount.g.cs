@@ -73,11 +73,11 @@ namespace Banking.Models.Entity
 		
 		#region Fields
 		
-		public int BankAccountId { get; set; }
-		public string BankAccountNumber { get; set; }
-		public decimal Balance { get; set; }
-		public Nullable<int> CustomerId { get; set; }
-		public bool Locked { get; set; }
+		public virtual int BankAccountId { get; set; }
+		public virtual string BankAccountNumber { get; set; }
+		public virtual decimal Balance { get; set; }
+		public virtual Nullable<int> CustomerId { get; set; }
+		public virtual bool Locked { get; set; }
 
 		#endregion
 

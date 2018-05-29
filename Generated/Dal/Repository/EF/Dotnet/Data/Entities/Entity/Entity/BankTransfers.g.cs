@@ -59,11 +59,11 @@ namespace Banking.Models.Entity
 		
 		#region Fields
 		
-		public int BankTransferId { get; set; }
-		public int FromBankAccountId { get; set; }
-		public int ToBankAccountId { get; set; }
-		public decimal Amount { get; set; }
-		public DateTime TransferDate { get; set; }
+		public virtual int BankTransferId { get; set; }
+		public virtual int FromBankAccountId { get; set; }
+		public virtual int ToBankAccountId { get; set; }
+		public virtual decimal Amount { get; set; }
+		public virtual DateTime TransferDate { get; set; }
 
 		#endregion
 

@@ -52,8 +52,8 @@ namespace Banking.Models.Entity
 		
 		#region Fields
 		
-		public int ProductId { get; set; }
-		public string Publisher { get; set; }
+		public virtual int ProductId { get; set; }
+		public virtual string Publisher { get; set; }
 
 		#endregion
 

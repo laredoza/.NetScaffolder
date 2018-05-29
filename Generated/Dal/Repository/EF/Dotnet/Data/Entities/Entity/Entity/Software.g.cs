@@ -52,8 +52,8 @@ namespace Banking.Models.Entity
 		
 		#region Fields
 		
-		public int ProductId { get; set; }
-		public string LicenseCode { get; set; }
+		public virtual int ProductId { get; set; }
+		public virtual string LicenseCode { get; set; }
 
 		#endregion
 
