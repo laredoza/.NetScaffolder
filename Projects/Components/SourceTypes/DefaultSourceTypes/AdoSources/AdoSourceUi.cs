@@ -1,22 +1,52 @@
-﻿using Common.Logging;
-using DotNetScaffolder.Components.Common.Contract;
-using DotNetScaffolder.Components.Common.Contract.UI;
-using DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.SourceOptions;
-using DotNetScaffolder.Core.Common.Validation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="AdoSourceUi.cs" company="DotnetScaffolder">
+//   MIT
+// </copyright>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
 {
+    #region Usings
+
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Windows.Forms;
+
+    using DotNetScaffolder.Components.Common.Contract;
+    using DotNetScaffolder.Components.Common.Contract.UI;
+    using DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.SourceOptions;
+    using DotNetScaffolder.Core.Common.Validation;
+
+    using global::Common.Logging;
+
+    #endregion
+
+    /// <summary>
+    /// The ado source ui.
+    /// </summary>
     public class AdoSourceUi : IDataSourceUI
     {
-        public TextBox TxtConnection { get; set; }
-        public ListView ListViewDrivers { get; set; }
+        #region Static Fields
 
+        /// <summary>
+        ///     The logger.
+        /// </summary>
+        private static readonly ILog Logger = LogManager.GetLogger(string.Empty);
+
+        #endregion
+
+        #region Constructors and Destructors
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AdoSourceUi"/> class.
+        /// </summary>
+        /// <param name="textBox">
+        /// The text box.
+        /// </param>
+        /// <param name="listViewDrivers">
+        /// The list view drivers.
+        /// </param>
         public AdoSourceUi(TextBox textBox, ListView listViewDrivers)
         {
             this.TxtConnection = textBox;
@@ -24,13 +54,17 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
             this.Options = new AdoSourceOptions();
         }
 
-        /// <summary>
-        ///     The logger.
-        /// </summary>
-        private static readonly ILog Logger = LogManager.GetLogger(string.Empty);
+        #endregion
+
+        #region Public Properties
 
         /// <summary>
-        /// The options.
+        /// Gets or sets the list view drivers.
+        /// </summary>
+        public ListView ListViewDrivers { get; set; }
+
+        /// <summary>
+        ///     The options.
         /// </summary>
         public AdoSourceOptions Options { get; set; }
 
@@ -40,14 +74,23 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
         public object Parameters { get; set; }
 
         /// <summary>
-        /// Gets or sets the source type.
+        ///     Gets or sets the source type.
         /// </summary>
         public ISourceType SourceType { get; set; }
 
         /// <summary>
-        /// Gets or sets the validation result.
+        /// Gets or sets the txt connection.
+        /// </summary>
+        public TextBox TxtConnection { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the validation result.
         /// </summary>
         public List<Validation> ValidationResult { get; set; }
+
+        #endregion
+
+        #region Public Methods And Operators
 
         /// <summary>
         /// The load data.
@@ -103,6 +146,9 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
         /// <param name="parameters">
         /// The parameters.
         /// </param>
+        /// <param name="displayMessageOnSucceed">
+        /// The display Message On Succeed.
+        /// </param>
         public void TestData(object parameters, bool displayMessageOnSucceed)
         {
             Logger.Trace("Started TestData()");
@@ -111,7 +157,11 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
             {
                 if (displayMessageOnSucceed)
                 {
-                    MessageBox.Show("Connected to Sql Server", "Test", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(
+                        "Connected to Sql Server",
+                        "Test",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
                 }
 
                 this.SourceType.ReturnSchemas(this.Options);
@@ -120,8 +170,8 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
                 foreach (var schema in this.Options.Schemas)
                 {
                     ListViewItem item = this.ListViewDrivers.FindItemWithText(schema);
-                    //items = this.ListViewDrivers.Items.Find(schema, false);
 
+                    // items = this.ListViewDrivers.Items.Find(schema, false);
                     if (item != null)
                     {
                         item.Checked = true;
@@ -130,17 +180,21 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
             }
             else
             {
-                MessageBox.Show("Unable to Connect to Sql Server", "Test", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(
+                    "Unable to Connect to Sql Server",
+                    "Test",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
             }
 
             Logger.Trace("Completed TestData()");
         }
 
         /// <summary>
-        /// The validate.
+        ///     The validate.
         /// </summary>
         /// <returns>
-        /// The <see cref="List"/>.
+        ///     The <see cref="List" />.
         /// </returns>
         public List<Validation> Validate()
         {
@@ -150,6 +204,10 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
 
             return result;
         }
+
+        #endregion
+
+        #region Other Methods
 
         /// <summary>
         ///     The return driver types.
@@ -170,6 +228,12 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
             return items.OrderBy(i => i.Text).ToArray();
         }
 
+        /// <summary>
+        /// The return selected schemas.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="List"/>.
+        /// </returns>
         private List<string> ReturnSelectedSchemas()
         {
             List<string> result = new List<string>();
@@ -184,5 +248,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
 
             return result;
         }
+
+        #endregion
     }
 }

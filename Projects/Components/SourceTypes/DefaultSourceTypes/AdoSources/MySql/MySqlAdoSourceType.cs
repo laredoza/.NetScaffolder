@@ -8,17 +8,21 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
 {
     #region Usings
 
-    using DatabaseSchemaReader.DataSchema;
-    using DotNetScaffolder.Components.Common.Contract;
-    using DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.SourceOptions;
-    using DotNetScaffolder.Core.Common.Serializer;
-    using DotNetScaffolder.Mapping.MetaData.Model;
-    using global::Common.Logging;
-    using global::MySql.Data.MySqlClient;
     using System;
     using System.ComponentModel.Composition;
     using System.IO;
     using System.Windows.Forms;
+
+    using DatabaseSchemaReader.DataSchema;
+
+    using DotNetScaffolder.Components.Common.Contract;
+    using DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.SourceOptions;
+    using DotNetScaffolder.Core.Common.Serializer;
+    using DotNetScaffolder.Mapping.MetaData.Model;
+
+    using global::Common.Logging;
+
+    using global::MySql.Data.MySqlClient;
 
     #endregion
 

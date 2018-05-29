@@ -1,1 +1,6 @@
-﻿// Either the Model1.edmx was not found or it's not a V2 EDMX File. You must change this in the Models\TiraggoEdmx_v2.tt file.
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="TiraggoEdmx_v2.cs" company="DotnetScaffolder">
+//   MIT
+// </copyright>
+// --------------------------------------------------------------------------------------------------------------------
+

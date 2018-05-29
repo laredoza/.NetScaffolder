@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="SqlServerAdoUserControl.cs" company="DotnetScaffolder">
+// <copyright file="OracleAdoUserControl.cs" company="DotnetScaffolder">
 //   MIT
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
@@ -10,13 +10,10 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
 
     using System;
     using System.Collections.Generic;
-    using System.Linq;
     using System.Windows.Forms;
 
     using DotNetScaffolder.Components.Common.Contract;
     using DotNetScaffolder.Components.Common.Contract.UI;
-    using DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.MySql;
-    using DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.SourceOptions;
     using DotNetScaffolder.Core.Common.Validation;
 
     using global::Common.Logging;
@@ -35,18 +32,22 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
         /// </summary>
         private static readonly ILog Logger = LogManager.GetLogger(string.Empty);
 
-        private AdoSourceUi AdoSourceUi;
-
         #endregion
 
         #region Fields
+
+        /// <summary>
+        /// The ado source ui.
+        /// </summary>
+        private readonly AdoSourceUi AdoSourceUi;
 
         #endregion
 
         #region Constructors and Destructors
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="SqlServerAdoUserControl" /> class.
+        /// Initializes a new instance of the <see cref="OracleAdoUserControl"/> class. 
+        ///     Initializes a new instance of the <see cref="SqlServerAdoUserControl"/> class.
         /// </summary>
         public OracleAdoUserControl()
         {
@@ -66,6 +67,9 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
         /// </summary>
         public object Parameters { get; set; }
 
+        /// <summary>
+        /// Gets or sets the source type.
+        /// </summary>
         public ISourceType SourceType
         {
             get
@@ -83,7 +87,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
         }
 
         /// <summary>
-        /// Gets or sets the validation result.
+        ///     Gets or sets the validation result.
         /// </summary>
         public List<Validation> ValidationResult { get; set; }
 
@@ -124,16 +128,19 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
         /// <param name="parameters">
         /// The parameters.
         /// </param>
+        /// <param name="displayMessageOnSucceed">
+        /// The display Message On Succeed.
+        /// </param>
         public void TestData(object parameters, bool displayMessageOnSucceed)
         {
             this.AdoSourceUi.TestData(parameters, displayMessageOnSucceed);
         }
 
         /// <summary>
-        /// The validate.
+        ///     The validate.
         /// </summary>
         /// <returns>
-        /// The <see cref="List"/>.
+        ///     The <see cref="List" />.
         /// </returns>
         public List<Validation> Validate()
         {
@@ -154,10 +161,22 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
 
         #endregion
 
+        #region Other Methods
+
+        /// <summary>
+        /// The txt connection_ text changed.
+        /// </summary>
+        /// <param name="sender">
+        /// The sender.
+        /// </param>
+        /// <param name="e">
+        /// The e.
+        /// </param>
         private void TxtConnection_TextChanged(object sender, EventArgs e)
         {
             this.AdoSourceUi.Options.ConnectionString = this.TxtConnection.Text;
         }
 
+        #endregion
     }
 }
