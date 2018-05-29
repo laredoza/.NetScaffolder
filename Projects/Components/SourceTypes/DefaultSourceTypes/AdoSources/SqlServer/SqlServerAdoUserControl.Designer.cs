@@ -79,7 +79,6 @@
             this.ListViewDrivers.TabIndex = 54;
             this.ListViewDrivers.UseCompatibleStateImageBehavior = false;
             this.ListViewDrivers.View = System.Windows.Forms.View.Details;
-            this.ListViewDrivers.SelectedIndexChanged += new System.EventHandler(this.ListViewDrivers_SelectedIndexChanged);
             // 
             // Schemas
             // 

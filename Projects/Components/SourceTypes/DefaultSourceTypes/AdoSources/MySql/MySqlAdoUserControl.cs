@@ -33,30 +33,26 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
         /// </summary>
         private static readonly ILog Logger = LogManager.GetLogger(string.Empty);
 
+        private AdoSourceUi AdoSourceUi;
+
         #endregion
 
         #region Fields
-
-        /// <summary>
-        ///     The options.
-        /// </summary>
-        private AdoSourceOptions options;
 
         #endregion
 
         #region Constructors and Destructors
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="MySqlAdoUserControl" /> class.
+        ///     Initializes a new instance of the <see cref="SqlServerAdoUserControl" /> class.
         /// </summary>
         public MySqlAdoUserControl()
         {
-            Logger.Trace("Started OracleAdoUserControl()");
+            Logger.Trace("Started SqlServerAdoUserControl()");
             this.InitializeComponent();
+            this.AdoSourceUi = new AdoSourceUi(this.TxtConnection, this.ListViewDrivers);
 
-            this.options = new AdoSourceOptions();
-
-            Logger.Trace("Completed OracleAdoUserControl()");
+            Logger.Trace("Completed SqlServerAdoUserControl()");
         }
 
         #endregion
@@ -68,13 +64,24 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
         /// </summary>
         public object Parameters { get; set; }
 
-        /// <summary>
-        ///     Gets or sets the source type.
-        /// </summary>
-        public ISourceType SourceType { get; set; }
+        public ISourceType SourceType
+        {
+            get
+            {
+                return this.AdoSourceUi.SourceType;
+            }
+
+            set
+            {
+                if (this.AdoSourceUi.SourceType != value)
+                {
+                    this.AdoSourceUi.SourceType = value;
+                }
+            }
+        }
 
         /// <summary>
-        ///     Gets or sets the validation result.
+        /// Gets or sets the validation result.
         /// </summary>
         public List<Validation> ValidationResult { get; set; }
 
@@ -92,20 +99,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
         /// </exception>
         public void LoadData(object parameters)
         {
-            Logger.Trace("Started LoadData()");
-
-            this.options = this.SourceType.Load(parameters) as AdoSourceOptions;
-
-            if (this.options != null)
-            {
-                this.TxtConnection.Text = this.options.ConnectionString;
-            }
-            else
-            {
-                this.TxtConnection.Text = string.Empty;
-            }
-
-            Logger.Trace("Completed LoadData()");
+            this.AdoSourceUi.LoadData(parameters);
         }
 
         /// <inheritdoc />
@@ -119,12 +113,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
         /// </exception>
         public void SaveData(object parameters)
         {
-            Logger.Trace("Started SaveData()");
-
-            List<object> saveParameters = new List<object> { parameters, this.options };
-            this.SourceType.Save(saveParameters);
-
-            Logger.Trace("Completed SaveData()");
+            this.AdoSourceUi.SaveData(parameters);
         }
 
         /// <summary>
@@ -135,25 +124,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
         /// </param>
         public void TestData(object parameters, bool displayMessageOnSucceed)
         {
-            Logger.Trace("Started TestData()");
-
-            if (this.SourceType.Test(this.options))
-            {
-                if (displayMessageOnSucceed)
-                {
-                    MessageBox.Show("Connected to MySQL Server", "Test", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-            }
-            else
-            {
-                MessageBox.Show(
-                    "Unable to Connected to MySQl Server",
-                    "Test",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information);
-            }
-
-            Logger.Trace("Completed TestData()");
+            this.AdoSourceUi.TestData(parameters, displayMessageOnSucceed);
         }
 
         /// <summary>
@@ -181,22 +152,10 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
 
         #endregion
 
-        #region Other Methods
-
-        /// <summary>
-        /// The txt connection_ text changed.
-        /// </summary>
-        /// <param name="sender">
-        /// The sender.
-        /// </param>
-        /// <param name="e">
-        /// The e.
-        /// </param>
         private void TxtConnection_TextChanged(object sender, EventArgs e)
         {
-            this.options.ConnectionString = this.TxtConnection.Text;
+            this.AdoSourceUi.Options.ConnectionString = this.TxtConnection.Text;
         }
 
-        #endregion
     }
 }
