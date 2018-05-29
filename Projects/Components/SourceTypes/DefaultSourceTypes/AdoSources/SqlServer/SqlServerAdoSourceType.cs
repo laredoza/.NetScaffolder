@@ -8,17 +8,20 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
 {
     #region Usings
 
-    using DatabaseSchemaReader.DataSchema;
-    using DotNetScaffolder.Components.Common.Contract;
-    using DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.SourceOptions;
-    using DotNetScaffolder.Core.Common.Serializer;
-    using DotNetScaffolder.Mapping.MetaData.Model;
-    using global::Common.Logging;
     using System;
     using System.ComponentModel.Composition;
     using System.Data.SqlClient;
     using System.IO;
     using System.Windows.Forms;
+
+    using DatabaseSchemaReader.DataSchema;
+
+    using DotNetScaffolder.Components.Common.Contract;
+    using DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.SourceOptions;
+    using DotNetScaffolder.Core.Common.Serializer;
+    using DotNetScaffolder.Mapping.MetaData.Model;
+
+    using global::Common.Logging;
 
     #endregion
 
@@ -64,12 +67,51 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
         }
 
         /// <summary>
+        /// The load.
+        /// </summary>
+        /// <param name="parameters">
+        /// The parameters.
+        /// </param>
+        /// <returns>
+        /// The <see cref="object"/>.
+        /// </returns>
+        public override object Load(object parameters)
+        {
+            Logger.Trace("Started Import()");
+
+            string path = this.ReturnFilePath(parameters as string);
+            Logger.Debug($"Path: {path}");
+            AdoSourceOptions result = null;
+
+            if (File.Exists(path))
+            {
+                Logger.Trace("Path Exists");
+                result = ObjectXMLSerializer<AdoSourceOptions>.Load(path);
+            }
+            else
+            {
+                Logger.Trace("Path Doesn't Exist");
+                result = new AdoSourceOptions
+                             {
+                                 ProviderName = "System.Data.SqlClient",
+                                 ConnectionString =
+                                     @"Data Source=.\SQLEXPRESS;Integrated Security=true;Initial Catalog=Banking"
+                             };
+            }
+
+            Logger.Trace("Completed Import()");
+
+            return result;
+        }
+
+        /// <summary>
         /// Map database type to c# type.
         /// </summary>
         /// <param name="databaseType">
         /// The database type.
         /// </param>
-        /// <param name="extraInfo">h
+        /// <param name="extraInfo">
+        /// h
         /// </param>
         /// <returns>
         /// The <see cref="DomainDataType"/>.
@@ -118,9 +160,10 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
                 case "SMALLMONEY":
                 case "NUMERIC":
                     return DomainDataType.Decimal;
-                //case "REAL":
-                //    // Todo: Do something valid with this
-                //    return DomainDataType.Single;
+
+                // case "REAL":
+                // // Todo: Do something valid with this
+                // return DomainDataType.Single;
                 case "UNIQUEIDENTIFIER":
                     return DomainDataType.Guid;
                 case "BIGINT":
@@ -190,45 +233,6 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
 
             return result;
         }
-
-        /// <summary>
-        /// The load.
-        /// </summary>
-        /// <param name="parameters">
-        /// The parameters.
-        /// </param>
-        /// <returns>
-        /// The <see cref="object"/>.
-        /// </returns>
-        public override object Load(object parameters)
-        {
-            Logger.Trace("Started Import()");
-
-            string path = this.ReturnFilePath(parameters as string);
-            Logger.Debug($"Path: {path}");
-            AdoSourceOptions result = null;
-
-            if (File.Exists(path))
-            {
-                Logger.Trace("Path Exists");
-                result = ObjectXMLSerializer<AdoSourceOptions>.Load(path);
-            }
-            else
-            {
-                Logger.Trace("Path Doesn't Exist");
-                result = new AdoSourceOptions
-                {
-                    ProviderName = "System.Data.SqlClient",
-                    ConnectionString =
-                                     @"Data Source=.\SQLEXPRESS;Integrated Security=true;Initial Catalog=Banking"
-                };
-            }
-
-            Logger.Trace("Completed Import()");
-
-            return result;
-        }
-
 
         #endregion
     }

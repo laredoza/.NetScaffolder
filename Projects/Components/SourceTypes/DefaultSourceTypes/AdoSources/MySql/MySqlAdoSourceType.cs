@@ -8,17 +8,21 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
 {
     #region Usings
 
-    using DatabaseSchemaReader.DataSchema;
-    using DotNetScaffolder.Components.Common.Contract;
-    using DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.SourceOptions;
-    using DotNetScaffolder.Core.Common.Serializer;
-    using DotNetScaffolder.Mapping.MetaData.Model;
-    using global::Common.Logging;
-    using global::MySql.Data.MySqlClient;
     using System;
     using System.ComponentModel.Composition;
     using System.IO;
     using System.Windows.Forms;
+
+    using DatabaseSchemaReader.DataSchema;
+
+    using DotNetScaffolder.Components.Common.Contract;
+    using DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.SourceOptions;
+    using DotNetScaffolder.Core.Common.Serializer;
+    using DotNetScaffolder.Mapping.MetaData.Model;
+
+    using global::Common.Logging;
+
+    using global::MySql.Data.MySqlClient;
 
     #endregion
 
@@ -131,8 +135,9 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
                 case "SET":
                 case "CHAR":
                     return DomainDataType.String;
-                case "TIMESTAMP":
+                case "DATETIME":
                 case "DATE":
+                case "TIMESTAMP":
                     return DomainDataType.DateTime;
                 case "INT":
                 case "YEAR":
@@ -146,6 +151,8 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
                     return DomainDataType.Int16;
                 case "FLOAT":
                     return DomainDataType.Single;
+                case "TIME":
+                    return DomainDataType.TimeSpan;
                 case "LONGBLOB":
                 case "BLOB":
                     return DomainDataType.VarBinary;

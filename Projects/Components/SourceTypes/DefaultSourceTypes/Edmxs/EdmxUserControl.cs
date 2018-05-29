@@ -72,7 +72,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.Edmxs
         public ISourceType SourceType { get; set; }
 
         /// <summary>
-        /// Gets or sets the validation result.
+        ///     Gets or sets the validation result.
         /// </summary>
         public List<Validation> ValidationResult { get; set; }
 
@@ -128,6 +128,9 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.Edmxs
         /// <param name="parameters">
         /// The parameters.
         /// </param>
+        /// <param name="displayMessageOnSucceed">
+        /// The display Message On Succeed.
+        /// </param>
         public void TestData(object parameters, bool displayMessageOnSucceed)
         {
             Logger.Trace("Started TestData()");
@@ -148,10 +151,10 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.Edmxs
         }
 
         /// <summary>
-        /// The validate.
+        ///     The validate.
         /// </summary>
         /// <returns>
-        /// The <see cref="List"/>.
+        ///     The <see cref="List" />.
         /// </returns>
         public List<Validation> Validate()
         {

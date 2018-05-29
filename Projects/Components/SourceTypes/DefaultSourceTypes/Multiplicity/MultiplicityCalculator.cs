@@ -16,7 +16,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes
     #endregion
 
     /// <summary>
-    /// The multiplicity calculator.
+    ///     The multiplicity calculator.
     /// </summary>
     public static class MultiplicityCalculator
     {
@@ -42,6 +42,9 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes
         /// </param>
         /// <param name="foreignColumnIsNullable">
         /// The foreign column is nullable.
+        /// </param>
+        /// <param name="relatedColumnIsForeignKey">
+        /// The related Column Is Foreign Key.
         /// </param>
         /// <returns>
         /// The <see cref="MultiplicityResult"/>.

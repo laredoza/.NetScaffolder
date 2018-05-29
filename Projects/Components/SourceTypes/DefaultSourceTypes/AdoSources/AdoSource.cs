@@ -14,6 +14,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
 
     using DatabaseSchemaReader;
     using DatabaseSchemaReader.DataSchema;
+
     using DotNetScaffolder.Components.Common;
     using DotNetScaffolder.Components.Common.Contract;
     using DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.Multiplicity;
@@ -27,16 +28,10 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
     #endregion
 
     /// <summary>
-    /// The ado source.
+    ///     The ado source.
     /// </summary>
     public abstract class AdoSource : ISourceType
     {
-
-        public AdoSource()
-        {
-            this.Schemas = new List<string>();
-        }
-
         #region Static Fields
 
         /// <summary>
@@ -44,6 +39,25 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
         /// </summary>
         private static readonly ILog Logger = LogManager.GetLogger(string.Empty);
 
+        #endregion
+
+        #region Constructors and Destructors
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AdoSource"/> class.
+        /// </summary>
+        public AdoSource()
+        {
+            this.Schemas = new List<string>();
+        }
+
+        #endregion
+
+        #region Public Properties
+
+        /// <summary>
+        /// Gets or sets the schemas.
+        /// </summary>
         public List<string> Schemas { get; set; }
 
         #endregion
@@ -86,11 +100,11 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
         {
             Logger.Trace("Started Fix()");
 
-            List<Relationship> RelationshipsToDelete = new List<Relationship>();
+            List<Relationship> relationshipsToDelete = new List<Relationship>();
 
             foreach (Table modelTable in tables)
             {
-                RelationshipsToDelete = new List<Relationship>();
+                relationshipsToDelete = new List<Relationship>();
 
                 foreach (var relationship in modelTable.Relationships)
                 {
@@ -99,7 +113,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
                         tables.FirstOrDefault(t => t.TableName == relationship.ReferencedTableName);
                     if (relationship.RelatedTable == null)
                     {
-                        RelationshipsToDelete.Add(relationship);
+                        relationshipsToDelete.Add(relationship);
                     }
                     else
                     {
@@ -107,80 +121,13 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
                     }
                 }
 
-                foreach (var relationship in RelationshipsToDelete)
+                foreach (var relationship in relationshipsToDelete)
                 {
                     modelTable.Relationships.Remove(relationship);
                 }
             }
 
             Logger.Trace("Completed Fix()");
-        }
-
-        /// <summary>
-        /// The return multiplicity.
-        /// </summary>
-        /// <param name="table">
-        /// The table.
-        /// </param>
-        /// <param name="columnName">
-        /// The column name.
-        /// </param>
-        /// <param name="referencedTable">
-        /// The referenced table.
-        /// </param>
-        /// <param name="referencedColumnName">
-        /// The referenced column name.
-        /// </param>
-        /// <param name="relationshipType">
-        /// The relationship type.
-        /// </param>
-        /// <returns>
-        /// The <see cref="MultiplicityResult"/>.
-        /// </returns>
-        /// <exception cref="Exception">
-        /// </exception>
-        public MultiplicityResult ReturnMultiplicity(DatabaseTable table, string columnName, DatabaseTable referencedTable, string referencedColumnName, RelationshipType relationshipType)
-        {
-            DatabaseColumn column = table.Columns.FirstOrDefault(c => c.Name == columnName);
-            DatabaseColumn foreignColumn = referencedTable.Columns.FirstOrDefault(c => c.Name == referencedColumnName);
-
-            return MultiplicityCalculator.Calculate(
-                relationshipType,
-                column.IsPrimaryKey,
-                foreignColumn.IsPrimaryKey,
-                column.IsForeignKey,
-                column.Nullable,
-                foreignColumn.Nullable,
-                foreignColumn.IsForeignKey);
-        }
-
-
-        public List<string> ReturnSchemas(object options)
-        {
-            this.Schemas.Clear();
-            AdoSourceOptions adoOptions = options as AdoSourceOptions;
-            var databaseReader = new DatabaseReader(adoOptions.ConnectionString, adoOptions.ProviderName);
-
-            IList<DatabaseTable> tables = databaseReader.TableList();
-
-            foreach (var table in tables)
-            {
-                if (!this.Schemas.Any(s => s == table.SchemaOwner))
-                {
-                    this.Schemas.Add(table.SchemaOwner);
-                }
-            }
-
-            this.Schemas = this.Schemas.OrderBy(s => s).ToList();
-
-            return this.Schemas;
-        }
-
-        private void Import(object options, DatabaseModel result, List<string> schemas, DatabaseReader databaseReader)
-        {
-            AdoSourceOptions adoOptions = options as AdoSourceOptions;
-
-            
         }
 
         /// <summary>
@@ -202,15 +149,18 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
 
             databaseReader.AllTables();
             databaseReader.AllViews();
-            //databaseReader.AllStoredProcedures(); //but not this one!
-            //var schemaMetaData = databaseReader.ReadAll();
+
+            // databaseReader.AllStoredProcedures(); //but not this one!
+            // var schemaMetaData = databaseReader.ReadAll();
             var schemaMetaData = databaseReader.DatabaseSchema;
+
             // schema.Tables[0].CheckConstraints[0].RefersToConstraint
             Table newTable;
             Column newColumn;
 
             List<DatabaseTable> tables = schemaMetaData.Tables.Where(
-                t => t.Name != "sysdiagrams" && t.Name != "__migrationhistory" && t.Name != "__MigrationHistory").ToList();
+                    t => t.Name != "sysdiagrams" && t.Name != "__migrationhistory" && t.Name != "__MigrationHistory")
+                .ToList();
 
             foreach (var table in tables)
             {
@@ -236,16 +186,16 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
                         }
 
                         newColumn = new Column
-                        {
-                            ColumnName = column.Name,
-                            DomainDataType = this.MapDatabaseType(dataType, column),
-                            IsRequired = !column.Nullable || column.IsPrimaryKey,
-                            ColumnOrder = table.Columns.IndexOf(column) + 1,
-                            Precision = column.Precision.HasValue ? column.Precision.Value : 0,
-                            Scale = column.Scale.HasValue ? column.Scale.Value : 0,
-                            Length = column.Length.HasValue ? column.Length.Value : 0,
-                            IsPrimaryKey = column.IsPrimaryKey
-                        };
+                                        {
+                                            ColumnName = column.Name,
+                                            DomainDataType = this.MapDatabaseType(dataType, column),
+                                            IsRequired = !column.Nullable || column.IsPrimaryKey,
+                                            ColumnOrder = table.Columns.IndexOf(column) + 1,
+                                            Precision = column.Precision.HasValue ? column.Precision.Value : 0,
+                                            Scale = column.Scale.HasValue ? column.Scale.Value : 0,
+                                            Length = column.Length.HasValue ? column.Length.Value : 0,
+                                            IsPrimaryKey = column.IsPrimaryKey
+                                        };
 
                         if (column.IsPrimaryKey)
                         {
@@ -275,16 +225,16 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
 
                             newTable.Relationships.Add(
                                 new Relationship
-                                {
-                                    ReferencedTableName = foreignKey.RefersToTable,
-                                    ColumnName = foreignKey.Columns[0],
-                                    ReferencedColumnName = referencedForeignColumnName,
-                                    DependencyRelationShip = RelationshipType.ForeignKey,
-                                    RelationshipName = foreignKey.Name,
-                                    SchemaName = foreignKey.SchemaOwner,
-                                    Multiplicity = multiplicityResult.Multiplicity,
-                                    ReferencedMultiplicity = multiplicityResult.ReferencedMultiplicity
-                                });
+                                    {
+                                        ReferencedTableName = foreignKey.RefersToTable,
+                                        ColumnName = foreignKey.Columns[0],
+                                        ReferencedColumnName = referencedForeignColumnName,
+                                        DependencyRelationShip = RelationshipType.ForeignKey,
+                                        RelationshipName = foreignKey.Name,
+                                        SchemaName = foreignKey.SchemaOwner,
+                                        Multiplicity = multiplicityResult.Multiplicity,
+                                        ReferencedMultiplicity = multiplicityResult.ReferencedMultiplicity
+                                    });
                         }
                     }
 
@@ -298,39 +248,48 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
                                 var referencedForeignColumnString = referencedForeignColumn[0];
 
                                 multiplicityResult = this.ReturnMultiplicity(
-                                table,
-                                referencedForeignColumnString,
-                                table.ForeignKeyChildren.FirstOrDefault(t => t.Name == foreignKey.TableName),
-                                foreignKey.Columns[0],
-                                RelationshipType.ForeignKeyChild);
+                                    table,
+                                    referencedForeignColumnString,
+                                    table.ForeignKeyChildren.FirstOrDefault(t => t.Name == foreignKey.TableName),
+                                    foreignKey.Columns[0],
+                                    RelationshipType.ForeignKeyChild);
 
                                 newTable.Relationships.Add(
                                     new Relationship
-                                    {
-                                        ReferencedTableName = foreignKey.TableName,
-                                        ColumnName = referencedForeignColumnString,
-                                        ReferencedColumnName = foreignKey.Columns[0],
-                                        DependencyRelationShip = RelationshipType.ForeignKeyChild,
-                                        RelationshipName = foreignKey.Name,
-                                        SchemaName = foreignKey.SchemaOwner,
-                                        Multiplicity = multiplicityResult.Multiplicity,
-                                        ReferencedMultiplicity = multiplicityResult.ReferencedMultiplicity
-                                    });
+                                        {
+                                            ReferencedTableName = foreignKey.TableName,
+                                            ColumnName = referencedForeignColumnString,
+                                            ReferencedColumnName = foreignKey.Columns[0],
+                                            DependencyRelationShip = RelationshipType.ForeignKeyChild,
+                                            RelationshipName = foreignKey.Name,
+                                            SchemaName = foreignKey.SchemaOwner,
+                                            Multiplicity = multiplicityResult.Multiplicity,
+                                            ReferencedMultiplicity =
+                                                multiplicityResult.ReferencedMultiplicity
+                                        });
                             }
                         }
                     }
 
                     // Format navigation property names to be unique and not equal to main table
-                    foreach (var rel in newTable.Relationships.OrderBy(o => o.ColumnName).ThenBy(o => o.ReferencedColumnName))
+                    foreach (var rel in newTable.Relationships.OrderBy(o => o.ColumnName)
+                        .ThenBy(o => o.ReferencedColumnName))
                     {
                         var test = (from relItem in newTable.Relationships
                                     orderby rel.ReferencedColumnName
-                                    select (string.IsNullOrEmpty(relItem.RelationshipAlias) ? relItem.ReferencedTableName : relItem.RelationshipAlias)).ToList();
+                                    select string.IsNullOrEmpty(relItem.RelationshipAlias)
+                                               ? relItem.ReferencedTableName
+                                               : relItem.RelationshipAlias).ToList();
 
                         test.AddRange(newTable.Columns.Select(o => o.ColumnName));
-                        test.Add(newTable.TableName);// Add table name as properties cannot have same name as main table
+                        test.Add(
+                            newTable.TableName); // Add table name as properties cannot have same name as main table
 
-                        string alias = RelationshipNameFormatting.FormatName(rel.ReferencedTableName, rel.RelationshipAlias, null, test);
+                        string alias = RelationshipNameFormatting.FormatName(
+                            rel.ReferencedTableName,
+                            rel.RelationshipAlias,
+                            null,
+                            test);
 
                         if (!string.Equals(rel.ReferencedTableName, alias))
                         {
@@ -343,15 +302,6 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
             this.Fix(result);
             Logger.Trace("Completed Import()");
             return result;
-        }
-
-        private string CreateChildAlias(string parentTable, string childTable)
-        {
-            if (string.Equals(parentTable, childTable))
-            {
-                return childTable + "Childrent";
-            }
-            return string.Empty;
         }
 
         /// <summary>
@@ -415,6 +365,79 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
         public abstract string ReturnFilePath(string basePath);
 
         /// <summary>
+        /// The return multiplicity.
+        /// </summary>
+        /// <param name="table">
+        /// The table.
+        /// </param>
+        /// <param name="columnName">
+        /// The column name.
+        /// </param>
+        /// <param name="referencedTable">
+        /// The referenced table.
+        /// </param>
+        /// <param name="referencedColumnName">
+        /// The referenced column name.
+        /// </param>
+        /// <param name="relationshipType">
+        /// The relationship type.
+        /// </param>
+        /// <returns>
+        /// The <see cref="MultiplicityResult"/>.
+        /// </returns>
+        /// <exception cref="Exception">
+        /// </exception>
+        public MultiplicityResult ReturnMultiplicity(
+            DatabaseTable table,
+            string columnName,
+            DatabaseTable referencedTable,
+            string referencedColumnName,
+            RelationshipType relationshipType)
+        {
+            DatabaseColumn column = table.Columns.FirstOrDefault(c => c.Name.ToLower() == columnName.ToLower());
+            DatabaseColumn foreignColumn = referencedTable.Columns.FirstOrDefault(c => c.Name.ToLower() == referencedColumnName.ToLower());
+
+            return MultiplicityCalculator.Calculate(
+                relationshipType,
+                column.IsPrimaryKey,
+                foreignColumn.IsPrimaryKey,
+                column.IsForeignKey,
+                column.Nullable,
+                foreignColumn.Nullable,
+                foreignColumn.IsForeignKey);
+        }
+
+        /// <summary>
+        /// The return schemas.
+        /// </summary>
+        /// <param name="options">
+        /// The options.
+        /// </param>
+        /// <returns>
+        /// The <see cref="List"/>.
+        /// </returns>
+        public List<string> ReturnSchemas(object options)
+        {
+            this.Schemas.Clear();
+            AdoSourceOptions adoOptions = options as AdoSourceOptions;
+            var databaseReader = new DatabaseReader(adoOptions.ConnectionString, adoOptions.ProviderName);
+
+            IList<DatabaseTable> tables = databaseReader.TableList();
+
+            foreach (var table in tables)
+            {
+                if (!this.Schemas.Any(s => s == table.SchemaOwner))
+                {
+                    this.Schemas.Add(table.SchemaOwner);
+                }
+            }
+
+            this.Schemas = this.Schemas.OrderBy(s => s).ToList();
+
+            return this.Schemas;
+        }
+
+        /// <summary>
         /// The save.
         /// </summary>
         /// <param name="parameters">
@@ -450,6 +473,52 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
         /// The <see cref="bool"/>.
         /// </returns>
         public abstract bool Test(object parameters);
+
+        #endregion
+
+        #region Other Methods
+
+        /// <summary>
+        /// The create child alias.
+        /// </summary>
+        /// <param name="parentTable">
+        /// The parent table.
+        /// </param>
+        /// <param name="childTable">
+        /// The child table.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        private string CreateChildAlias(string parentTable, string childTable)
+        {
+            if (string.Equals(parentTable, childTable))
+            {
+                return childTable + "Childrent";
+            }
+
+            return string.Empty;
+        }
+
+        /// <summary>
+        /// The import.
+        /// </summary>
+        /// <param name="options">
+        /// The options.
+        /// </param>
+        /// <param name="result">
+        /// The result.
+        /// </param>
+        /// <param name="schemas">
+        /// The schemas.
+        /// </param>
+        /// <param name="databaseReader">
+        /// The database reader.
+        /// </param>
+        private void Import(object options, DatabaseModel result, List<string> schemas, DatabaseReader databaseReader)
+        {
+            AdoSourceOptions adoOptions = options as AdoSourceOptions;
+        }
 
         #endregion
     }

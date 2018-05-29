@@ -13,19 +13,19 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.Multiplicit
     #endregion
 
     /// <summary>
-    /// The multiplicity result.
+    ///     The multiplicity result.
     /// </summary>
     public class MultiplicityResult
     {
         #region Public Properties
 
         /// <summary>
-        /// Gets or sets the multiplicity.
+        ///     Gets or sets the multiplicity.
         /// </summary>
         public RelationshipMultiplicity Multiplicity { get; set; }
 
         /// <summary>
-        /// Gets or sets the referenced multiplicity.
+        ///     Gets or sets the referenced multiplicity.
         /// </summary>
         public RelationshipMultiplicity ReferencedMultiplicity { get; set; }
 
