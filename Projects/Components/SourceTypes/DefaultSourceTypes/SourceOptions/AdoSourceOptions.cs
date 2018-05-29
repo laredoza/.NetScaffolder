@@ -4,6 +4,8 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System.Collections.Generic;
+
 namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.SourceOptions
 {
     /// <summary>
@@ -20,6 +22,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.SourceOptio
         {
             this.ProviderName = "System.Data.SqlClient";
             this.ConnectionString = @"Data Source=.\SQLEXPRESS;Integrated Security=true;Initial Catalog=AutoNLayered";
+            this.Schemas = new List<string>();
         }
 
         #endregion
@@ -39,7 +42,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.SourceOptio
         /// <summary>
         /// Gets or sets the schema.
         /// </summary>
-        public string Schema { get; set; }
+        public List<string> Schemas { get; set; }
 
         #endregion
     }

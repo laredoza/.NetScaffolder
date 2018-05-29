@@ -113,6 +113,11 @@ namespace DefaultDrivers.Forms
             return this.ValidationResult;
         }
 
+        public void Dispose()
+        {
+
+        }
+
         #endregion
     }
 }

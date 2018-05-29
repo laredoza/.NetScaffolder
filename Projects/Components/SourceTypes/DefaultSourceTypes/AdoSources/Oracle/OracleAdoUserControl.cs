@@ -134,13 +134,17 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
         /// <param name="parameters">
         /// The parameters.
         /// </param>
-        public void TestData(object parameters)
+        public void TestData(object parameters, bool displayMessageOnSucceed)
         {
             Logger.Trace("Started TestData()");
 
             if (this.SourceType.Test(this.options))
             {
-                MessageBox.Show("Connected to Oracle Server", "Test", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                if (displayMessageOnSucceed)
+                {
+                    MessageBox.Show("Connected to Oracle Server", "Test", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
             else
             {

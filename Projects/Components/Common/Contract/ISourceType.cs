@@ -59,7 +59,10 @@ namespace DotNetScaffolder.Components.Common.Contract
         /// <returns>
         /// The <see cref="List"/>.
         /// </returns>
-        DatabaseModel Import(object options);
+        DatabaseModel Import(object optionss);
+        //, List<string> schemaExclusion
+
+        List<string> ReturnSchemas(object options);
 
         /// <summary>
         /// The load.
@@ -112,6 +115,8 @@ namespace DotNetScaffolder.Components.Common.Contract
         /// The <see cref="bool"/>.
         /// </returns>
         bool Test(object parameters);
+
+        List<string> Schemas { get; set; }
 
         #endregion
     }

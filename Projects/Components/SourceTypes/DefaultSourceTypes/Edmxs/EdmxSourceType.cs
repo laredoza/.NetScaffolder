@@ -32,10 +32,18 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.Edmxs
     [ExportMetadata("ValueMetaData", "3BC1B0C4-1E41-9146-82CF-599181CE4410")]
     public class EdmxSourceType : ISourceType
     {
+        public EdmxSourceType()
+        {
+            this.Schemas = new List<string>();
+        }
+
         /// <summary>
         ///     The logger.
         /// </summary>
         private static readonly ILog Logger = LogManager.GetLogger(string.Empty);
+
+        public List<string> Schemas { get; set; }
+
 
         #region Public Methods And Operators
 
@@ -119,7 +127,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.Edmxs
                     tbl.Columns.Add(column);
                 }
 
-                //var relationships = edmx.Runtime.StorageModels.Schema.Associations.Where(ass => (ass.ReferentialConstraint.Dependent.Role == table.Name || ass.ReferentialConstraint.Principal.Role == table.Name) &&
+                //var relationships = edmx.Runtime.StorageModels.Schemas.Associations.Where(ass => (ass.ReferentialConstraint.Dependent.Role == table.Name || ass.ReferentialConstraint.Principal.Role == table.Name) &&
                 //                                                                                   (entityTableNames.Contains(ass.ReferentialConstraint.Dependent.Role.ToUpper()) &&
                 //                                                                                    entityTableNames.Contains(ass.ReferentialConstraint.Principal.Role.ToUpper())));
 
@@ -388,6 +396,24 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.Edmxs
             }
 
             return DatabaseGeneratedKeyType.None;
+        }
+
+        public List<string> ReturnSchemas(object options)
+        {
+            this.Schemas.Clear();
+            //AdoSourceOptions adoOptions = options as AdoSourceOptions;
+            //var databaseReader = new DatabaseReader(adoOptions.ConnectionString, adoOptions.ProviderName);
+
+            //IList<DatabaseTable> tables = databaseReader.TableList();
+
+            //foreach (var table in tables)
+            //{
+            //    this.Schemas.Add(table.Name);
+            //}
+
+            //this.Schemas = this.Schemas.OrderBy(s => s).ToList();
+
+            return this.Schemas;
         }
     }
 }
