@@ -122,7 +122,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
                              {
                                  ProviderName = "Oracle.ManagedDataAccess.Client",
                                  ConnectionString =
-                                     @"DATA SOURCE=localhost:1521/xe;PERSIST SECURITY INFO=True;USER ID=test;PASSWORD=Test"
+                                     @"DATA SOURCE=localhost:1521/xe;PERSIST SECURITY INFO=True;USER ID=dbo;PASSWORD=Password123#"
                              };
             }
 
