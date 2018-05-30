@@ -130,10 +130,9 @@ namespace RepositoryEFDotnet.UnitTest
             var entities = uow.GetAll<<#= mdl.TableName #>>().ToList();
             this.Check_EntityCount(count, entities.Count(), "Incorrect number of <#= mdl.TableName #> found");
 
-            for (var index = 1; index <= count; index++)
+            foreach(var item in list)
 			{
-				int id = index + startSeed - 1;
-                this.Check_<#= mdl.TableName #>(list.FirstOrDefault(o => o.<#= pk.ColumnName #> == id),entities.FirstOrDefault(o => o.<#= pk.ColumnName #> == id));
+                this.Check_<#= mdl.TableName #>(item,entities.FirstOrDefault(o => o.<#= pk.ColumnName #> == item.<#= pk.ColumnName #>));
 			}
         }
 		
@@ -156,10 +155,9 @@ namespace RepositoryEFDotnet.UnitTest
             var entities = await uow.GetAllAsync<<#= mdl.TableName #>>();
             this.Check_EntityCount(count, entities.Count(), "Incorrect number of <#= mdl.TableName #> found");
 
-            for (var index = 1; index <= count; index++)
+            foreach(var item in list)
 			{
-				int id = index + startSeed - 1;
-                this.Check_<#= mdl.TableName #>(list.FirstOrDefault(o => o.<#= pk.ColumnName #> == id),entities.FirstOrDefault(o => o.<#= pk.ColumnName #> == id));
+                this.Check_<#= mdl.TableName #>(item,entities.FirstOrDefault(o => o.<#= pk.ColumnName #> == item.<#= pk.ColumnName #>));
 			}
         }
 		

@@ -47,11 +47,6 @@ namespace RepositoryEFDotnet.UnitTest
 			//BankAccount_Search();
 			//BankAccount_Update();
 			//BankAccount_Delete();
-			CompositeKeyTest_Add();
-			//CompositeKeyTest_LoadAll();
-			//CompositeKeyTest_Search();
-			//CompositeKeyTest_Update();
-			//CompositeKeyTest_Delete();
 			BankTransfers_Add();
 			//BankTransfers_LoadAll();
 			//BankTransfers_Search();
@@ -62,6 +57,11 @@ namespace RepositoryEFDotnet.UnitTest
 			//Book_Search();
 			//Book_Update();
 			//Book_Delete();
+			CompositeKeyTest_Add();
+			//CompositeKeyTest_LoadAll();
+			//CompositeKeyTest_Search();
+			//CompositeKeyTest_Update();
+			//CompositeKeyTest_Delete();
 			Country_Add();
 			//Country_LoadAll();
 			//Country_Search();
@@ -101,12 +101,6 @@ namespace RepositoryEFDotnet.UnitTest
             BaseRepositoryUnitTest_BankAccount_AddRange(repo, count, startSeed, expected);
         }
 
-        public void CompositeKeyTest_Add(int count = 1, int startSeed = 1, int expected = 1)
-        {
-            var repo = new CompositeKeyTestRepository(Context);
-            BaseRepositoryUnitTest_CompositeKeyTest_AddRange(repo, count, startSeed, expected);
-        }
-
         public void BankTransfers_Add(int count = 1, int startSeed = 1, int expected = 1)
         {
             var repo = new BankTransfersRepository(Context);
@@ -117,6 +111,12 @@ namespace RepositoryEFDotnet.UnitTest
         {
             var repo = new BookRepository(Context);
             BaseRepositoryUnitTest_Book_AddRange(repo, count, startSeed, expected);
+        }
+
+        public void CompositeKeyTest_Add(int count = 1, int startSeed = 1, int expected = 1)
+        {
+            var repo = new CompositeKeyTestRepository(Context);
+            BaseRepositoryUnitTest_CompositeKeyTest_AddRange(repo, count, startSeed, expected);
         }
 
         public void Country_Add(int count = 1, int startSeed = 1, int expected = 1)
@@ -184,31 +184,6 @@ namespace RepositoryEFDotnet.UnitTest
 			}
         }
 
-        protected virtual void BaseRepositoryUnitTest_CompositeKeyTest_AddRange(ICompositeKeyTestRepository repository, int count = 1, int startSeed = 1, int expected = 1)
-        {		
-            var list = new List<ICompositeKeyTest>();
-            var seed = startSeed;
-            for (var index = 1; index <= count; index++)
-            {
-                var dto = new CompositeKeyTestDto();
-                PopulateCompositeKeyTest(dto, false, seed);
-                list.Add(dto);
-				repository.Save(dto);
-                seed++;
-            }
-
-            Context.Commit();
-
-            var items = repository.LoadAll();
-            this.Check_EntityCount(expected, items.Count(), "Incorrect number of CompositeKeyTest found");
-
-            for (var index = 1; index <= count; index++)
-			{
-				int id = index + startSeed - 1;
-                this.Check_CompositeKeyTest(list.FirstOrDefault(o => o.PrimaryCol1 == id),items.FirstOrDefault(o => o.PrimaryCol1 == id));
-			}
-        }
-
         protected virtual void BaseRepositoryUnitTest_BankTransfers_AddRange(IBankTransfersRepository repository, int count = 1, int startSeed = 1, int expected = 1)
         {		
             var list = new List<IBankTransfers>();
@@ -256,6 +231,31 @@ namespace RepositoryEFDotnet.UnitTest
 			{
 				int id = index + startSeed - 1;
                 this.Check_Book(list.FirstOrDefault(o => o.ProductId == id),items.FirstOrDefault(o => o.ProductId == id));
+			}
+        }
+
+        protected virtual void BaseRepositoryUnitTest_CompositeKeyTest_AddRange(ICompositeKeyTestRepository repository, int count = 1, int startSeed = 1, int expected = 1)
+        {		
+            var list = new List<ICompositeKeyTest>();
+            var seed = startSeed;
+            for (var index = 1; index <= count; index++)
+            {
+                var dto = new CompositeKeyTestDto();
+                PopulateCompositeKeyTest(dto, false, seed);
+                list.Add(dto);
+				repository.Save(dto);
+                seed++;
+            }
+
+            Context.Commit();
+
+            var items = repository.LoadAll();
+            this.Check_EntityCount(expected, items.Count(), "Incorrect number of CompositeKeyTest found");
+
+            for (var index = 1; index <= count; index++)
+			{
+				int id = index + startSeed - 1;
+                this.Check_CompositeKeyTest(list.FirstOrDefault(o => o.PrimaryCol1 == id),items.FirstOrDefault(o => o.PrimaryCol1 == id));
 			}
         }
 

@@ -42,8 +42,8 @@ namespace Banking.Models.Interfaces
 		
 		#region Parent Relationships
 		
-		IBankAccount BankAccountFrom { get; set; }
-		IBankAccount BankAccountTo { get; set; }
+		IBankAccount FromBankAccount { get; set; }
+		IBankAccount ToBankAccount { get; set; }
 		
 		#endregion
 	}

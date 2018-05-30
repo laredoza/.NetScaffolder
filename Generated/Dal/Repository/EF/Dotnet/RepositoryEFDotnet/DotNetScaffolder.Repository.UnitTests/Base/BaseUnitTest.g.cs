@@ -45,18 +45,11 @@ namespace RepositoryEFDotnet.UnitTest
 			Assert.IsNotNull(dto);
 			
 			// Test Fields
+            Assert.AreEqual(dto.BankAccountId, savedEntity.BankAccountId, $"Customer.BankAccountId incorrect.");
             Assert.AreEqual(dto.BankAccountNumber, savedEntity.BankAccountNumber, $"Customer.BankAccountNumber incorrect.");
             Assert.AreEqual(dto.Balance, savedEntity.Balance, $"Customer.Balance incorrect.");
             Assert.AreEqual(dto.CustomerId, savedEntity.CustomerId, $"Customer.CustomerId incorrect.");
             Assert.AreEqual(dto.Locked, savedEntity.Locked, $"Customer.Locked incorrect.");
-        }		
-
-        protected virtual void Check_CompositeKeyTest(ICompositeKeyTest dto, ICompositeKeyTest savedEntity)
-        { 
-            Assert.IsNotNull(savedEntity);
-			Assert.IsNotNull(dto);
-			
-			// Test Fields
         }		
 
         protected virtual void Check_BankTransfers(IBankTransfers dto, IBankTransfers savedEntity)
@@ -65,6 +58,7 @@ namespace RepositoryEFDotnet.UnitTest
 			Assert.IsNotNull(dto);
 			
 			// Test Fields
+            Assert.AreEqual(dto.BankTransferId, savedEntity.BankTransferId, $"Customer.BankTransferId incorrect.");
             Assert.AreEqual(dto.FromBankAccountId, savedEntity.FromBankAccountId, $"Customer.FromBankAccountId incorrect.");
             Assert.AreEqual(dto.ToBankAccountId, savedEntity.ToBankAccountId, $"Customer.ToBankAccountId incorrect.");
             Assert.AreEqual(dto.Amount, savedEntity.Amount, $"Customer.Amount incorrect.");
@@ -77,7 +71,18 @@ namespace RepositoryEFDotnet.UnitTest
 			Assert.IsNotNull(dto);
 			
 			// Test Fields
+            Assert.AreEqual(dto.ProductId, savedEntity.ProductId, $"Customer.ProductId incorrect.");
             Assert.AreEqual(dto.Publisher, savedEntity.Publisher, $"Customer.Publisher incorrect.");
+        }		
+
+        protected virtual void Check_CompositeKeyTest(ICompositeKeyTest dto, ICompositeKeyTest savedEntity)
+        { 
+            Assert.IsNotNull(savedEntity);
+			Assert.IsNotNull(dto);
+			
+			// Test Fields
+            Assert.AreEqual(dto.PrimaryCol1, savedEntity.PrimaryCol1, $"Customer.PrimaryCol1 incorrect.");
+            Assert.AreEqual(dto.PrimaryCol2, savedEntity.PrimaryCol2, $"Customer.PrimaryCol2 incorrect.");
         }		
 
         protected virtual void Check_Country(ICountry dto, ICountry savedEntity)
@@ -86,6 +91,7 @@ namespace RepositoryEFDotnet.UnitTest
 			Assert.IsNotNull(dto);
 			
 			// Test Fields
+            Assert.AreEqual(dto.CountryId, savedEntity.CountryId, $"Customer.CountryId incorrect.");
             Assert.AreEqual(dto.CountryName, savedEntity.CountryName, $"Customer.CountryName incorrect.");
         }		
 
@@ -95,6 +101,7 @@ namespace RepositoryEFDotnet.UnitTest
 			Assert.IsNotNull(dto);
 			
 			// Test Fields
+            Assert.AreEqual(dto.CustomerId, savedEntity.CustomerId, $"Customer.CustomerId incorrect.");
             Assert.AreEqual(dto.CustomerCode, savedEntity.CustomerCode, $"Customer.CustomerCode incorrect.");
             Assert.AreEqual(dto.CompanyName, savedEntity.CompanyName, $"Customer.CompanyName incorrect.");
             Assert.AreEqual(dto.ContactName, savedEntity.ContactName, $"Customer.ContactName incorrect.");
@@ -115,6 +122,7 @@ namespace RepositoryEFDotnet.UnitTest
 			Assert.IsNotNull(dto);
 			
 			// Test Fields
+            Assert.AreEqual(dto.OrderId, savedEntity.OrderId, $"Customer.OrderId incorrect.");
             Assert.AreEqual(dto.CustomerId, savedEntity.CustomerId, $"Customer.CustomerId incorrect.");
             Assert.AreEqual(dto.OrderDate, savedEntity.OrderDate, $"Customer.OrderDate incorrect.");
             Assert.AreEqual(dto.DeliveryDate, savedEntity.DeliveryDate, $"Customer.DeliveryDate incorrect.");
@@ -130,6 +138,7 @@ namespace RepositoryEFDotnet.UnitTest
 			Assert.IsNotNull(dto);
 			
 			// Test Fields
+            Assert.AreEqual(dto.OrderDetailsId, savedEntity.OrderDetailsId, $"Customer.OrderDetailsId incorrect.");
             Assert.AreEqual(dto.OrderId, savedEntity.OrderId, $"Customer.OrderId incorrect.");
             Assert.AreEqual(dto.ProductId, savedEntity.ProductId, $"Customer.ProductId incorrect.");
             Assert.AreEqual(dto.UnitPrice, savedEntity.UnitPrice, $"Customer.UnitPrice incorrect.");
@@ -143,6 +152,7 @@ namespace RepositoryEFDotnet.UnitTest
 			Assert.IsNotNull(dto);
 			
 			// Test Fields
+            Assert.AreEqual(dto.ProductId, savedEntity.ProductId, $"Customer.ProductId incorrect.");
             Assert.AreEqual(dto.ProductDescription, savedEntity.ProductDescription, $"Customer.ProductDescription incorrect.");
             Assert.AreEqual(dto.UnitPrice, savedEntity.UnitPrice, $"Customer.UnitPrice incorrect.");
             Assert.AreEqual(dto.UnitAmount, savedEntity.UnitAmount, $"Customer.UnitAmount incorrect.");
@@ -156,6 +166,7 @@ namespace RepositoryEFDotnet.UnitTest
 			Assert.IsNotNull(dto);
 			
 			// Test Fields
+            Assert.AreEqual(dto.ProductId, savedEntity.ProductId, $"Customer.ProductId incorrect.");
             Assert.AreEqual(dto.LicenseCode, savedEntity.LicenseCode, $"Customer.LicenseCode incorrect.");
         }		
 

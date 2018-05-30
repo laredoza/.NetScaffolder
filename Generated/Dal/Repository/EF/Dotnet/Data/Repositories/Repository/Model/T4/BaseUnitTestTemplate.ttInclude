@@ -45,7 +45,7 @@ namespace RepositoryEFDotnet.UnitTest
 			Assert.IsNotNull(dto);
 			
 			// Test Fields
-<#+ foreach(var col in mdl.Columns.Where(o => !o.IsPrimaryKey)){ #>
+<#+ foreach(var col in mdl.Columns){ #>
             Assert.AreEqual(dto.<#= col.ColumnName #>, savedEntity.<#= col.ColumnName #>, $"Customer.<#= col.ColumnName #> incorrect.");
 <#+ } #>
         }		

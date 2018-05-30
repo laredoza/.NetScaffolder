@@ -44,13 +44,13 @@ namespace Banking.Models.Entity
 
 			if(deep)
 			{
-				if(item.BankAccountFrom != null)
+				if(item.FromBankAccount != null)
                 {
-                    this.BankAccountFrom = new BankAccount(item.BankAccountFrom, deep);
+                    this.FromBankAccount = new BankAccount(item.FromBankAccount, deep);
                 }
-				if(item.BankAccountTo != null)
+				if(item.ToBankAccount != null)
                 {
-                    this.BankAccountTo = new BankAccount(item.BankAccountTo, deep);
+                    this.ToBankAccount = new BankAccount(item.ToBankAccount, deep);
                 }
 			}
 		}
@@ -69,29 +69,29 @@ namespace Banking.Models.Entity
 
 		#region Parent Relationships
 
-        public virtual BankAccount BankAccountFrom { get; set; }
-		IBankAccount IBankTransfers.BankAccountFrom 
+        public virtual BankAccount FromBankAccount { get; set; }
+		IBankAccount IBankTransfers.FromBankAccount 
 		{ 
 			get
 			{
-				return this.BankAccountFrom;
+				return this.FromBankAccount;
 			}
 			set
 			{
-				this.BankAccountFrom = (BankAccount)value;
+				this.FromBankAccount = (BankAccount)value;
 			}
 		}
 
-        public virtual BankAccount BankAccountTo { get; set; }
-		IBankAccount IBankTransfers.BankAccountTo 
+        public virtual BankAccount ToBankAccount { get; set; }
+		IBankAccount IBankTransfers.ToBankAccount 
 		{ 
 			get
 			{
-				return this.BankAccountTo;
+				return this.ToBankAccount;
 			}
 			set
 			{
-				this.BankAccountTo = (BankAccount)value;
+				this.ToBankAccount = (BankAccount)value;
 			}
 		}
 		

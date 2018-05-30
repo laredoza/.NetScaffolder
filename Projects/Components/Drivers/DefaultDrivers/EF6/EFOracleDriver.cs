@@ -44,7 +44,13 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6
         ///     Gets the name spaces used to generate templates.
         /// </summary>
         public List<string> NameSpaces =>
-            new List<string> { "System.Data.Entity", "Oracle.ManagedDataAccess.Client", "Oracle.Config" };
+            new List<string>
+                {
+                    "System.Data.Entity",
+                    "System.Data.Entity.ModelConfiguration",
+                    "Oracle.ManagedDataAccess.Client",
+                    "Oracle.Config"
+                };
 
         /// <summary>
         ///     The parent folder.

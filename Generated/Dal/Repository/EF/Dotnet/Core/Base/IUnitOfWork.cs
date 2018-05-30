@@ -524,6 +524,8 @@ namespace RepositoryEFDotnet.Core.Base
         /// </summary>
         void StartTransaction();
 
+        Task StartTransactionAsync();
+
         #endregion
     }
 }

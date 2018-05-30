@@ -4,7 +4,10 @@ public class ContextCoreTemplate : BaseTemplate
 	public ContextDataType DataType { get; set; }
 	public ContextData ContextData { get; set; }
 	public string EntityNamespace { get; set; }
+	public string MappingNamespace { get; set; }
+	public string MappingPostFix { get; set; }
     public IDriver Driver {get; set; }
+	public List<Table> Models { get; set; }
 
 	public override string TransformText()
 	{
@@ -27,6 +30,7 @@ using <#= nameSpace #>;
 using <#= nameSpace #>;
 <#+ } #>
 using System.ComponentModel.DataAnnotations.Schema;
+using <#= MappingNamespace #>.<#= Driver.Prefix #>;
 using <#= EntityNamespace #>;
 
 namespace <#= ContextData.TransformFullnamespace(DataType.BaseNamespace) #>.Core
@@ -77,101 +81,28 @@ namespace <#= ContextData.TransformFullnamespace(DataType.BaseNamespace) #>.Core
         {
             base.OnModelCreating(modelBuilder);
 			
-			#region Tables
+			#region Mappings
 			
-<#+ foreach(var table in ContextData.Models){ 
-                var schemaName = table.SchemaName;
-                if (Driver.ForceSchemaToUppercase)
-                {
-                    schemaName = schemaName.ToUpper();
-                }
-#>
-<#+ if(Driver is EFCoreMySqlDriver) { #>
-			modelBuilder.Entity<<#=DataType.TransformModelName(table.TableName) #>>().ToTable("<#=table.TableName #>");
-<#+ } else #>
-<#+ {#>
-			modelBuilder.Entity<<#=DataType.TransformModelName(table.TableName) #>>().ToTable("<#=table.TableName #>", "<#= schemaName #>");
-<#+ }#>
+<#+ foreach(var table in this.Models){ #>
+			modelBuilder.ApplyConfiguration(new <#= table.TableName #><#= MappingPostFix #>());
 <#+ } #>
 
-			#endregion
-			
-			#region Primary keys
-			
-<#+ foreach(var table in ContextData.Models){ #>
-<#+ if(table.PrimaryKeyCount == 1){ var pk = table.Columns.First(o => o.IsPrimaryKey);#>
-			modelBuilder.Entity<<#=DataType.TransformModelName(table.TableName) #>>().HasKey(t => t.<#= pk.ColumnName #>);
-			modelBuilder.Entity<<#=DataType.TransformModelName(table.TableName) #>>().Property(t => t.<#= pk.ColumnName #>)<#=Driver.DriverType.TransformDbGeneratedKey(table) #>;
-<#+ } #>
-<#+ if(table.PrimaryKeyCount > 1){ #>
-			modelBuilder.Entity<<#=DataType.TransformModelName(table.TableName) #>>().HasKey(t => new {<#= DataType.TransformCompositeKeys(table.Columns.Where(o => o.IsPrimaryKey), "t") #>});
-<#+ foreach(var col in table.Columns.Where(o => o.IsPrimaryKey)){ #>
-			modelBuilder.Entity<<#=DataType.TransformModelName(table.TableName) #>>().Property(t => t.<#= col.ColumnName #>)<#=Driver.DriverType.TransformDbGeneratedKey(table) #>;
-<#+ } #>
-<#+ } #>
-<#+ } #>
-
-			#endregion
-			
-			#region Included Relationships
-			
-<#+ foreach(var table in ContextData.Models){ #>
-<#+ foreach(var rel in table.ChildRelationships.Where(o => ContextData.HasModel(o))){ #>
-			<#= Driver.DriverType.TransformRelationship(table.TableName, rel, ContextData.Models, table.Relationships.Where(o => ContextData.HasModel(o)), DataType.NamingConvention) #>
-<#+ } #>
-<#+ } #>
-			
 			#endregion
 			
 			#region Excluded Relationships
 			
 			// Exclude entities not part of this context
 			
-<#+ foreach(var rel in ContextData.ExcludedRelationships){ #>
+<#+ foreach(var rel in ContextData.ExcludedRelationships(Models)){ #>
 			modelBuilder.Ignore<<#= rel.ReferencedTableName #>>();
 <#+ } #>
 
 			#endregion
-			
-			#region Constraints
-			
-<#+ foreach(var table in ContextData.Models){ #>
-<#+ foreach(var col in table.Columns){ #>
-<#+ if(col.Length > 0){ #>
-			modelBuilder.Entity<<#=DataType.TransformModelName(table.TableName) #>>().Property(t => t.<#= col.ColumnName #>).HasMaxLength(<#= col.Length #>);
-<#+ } #>
-<#+ if(col.IsRequired){ #>
-			modelBuilder.Entity<<#=DataType.TransformModelName(table.TableName) #>>().Property(t => t.<#= col.ColumnName #>).IsRequired();
-<#+ } else #>
-<#+ { #>
-			modelBuilder.Entity<<#=DataType.TransformModelName(table.TableName) #>>().Property(t => t.<#= col.ColumnName #>).IsRequired(false);
-<#+ } #>
-<#+ if((col.Precision > 0 && !col.InValidPrecisionGeneration) || col.Scale > 0){ #>
-			modelBuilder.Entity<<#=DataType.TransformModelName(table.TableName) #>>().Property(t => t.<#= col.ColumnName #>)<#= Driver.DriverType.TransformColumnPrecision(col) #>;
-<#+ } #>
-<#+ } #>
-<#+ } #>
-			
-			#endregion
-
-<#+ if(Driver.DriverType.IncludeColumnOrder){ #>
-			#region Column Order
-			
-			// Column ordering available in EF Core 2.1 - https://data.uservoice.com/forums/72025-entity-framework-core-feature-suggestions/suggestions/18936844-ef-core-migrations-column-ordering
-			// Waiting for that release before implementing
-<#+ foreach(var table in ContextData.Models){ #>
-<#+ foreach(var col in table.Columns){ #>
-			//TODO: modelBuilder.Entity<<#=DataType.TransformModelName(table.TableName) #>>().Property(t => t.<#= col.ColumnName #>).HasColumnOrder(<#= col.ColumnOrder #>);
-<#+ } #>
-<#+ } #>
-
-			#endregion
-<#+ } #>			
         }
 		
 		#region Db Sets
 		
-<#+ foreach(var table in ContextData.Models){ #>
+<#+ foreach(var table in Models){ #>
 		public virtual DbSet<<#= DataType.TransformModelName(table.TableName) #>> <#=DataType.TransformModelName(table.TableName) #> { get; set; }
 <#+ } #>
 

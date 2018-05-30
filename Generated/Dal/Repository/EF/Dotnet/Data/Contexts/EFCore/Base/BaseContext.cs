@@ -30,15 +30,6 @@ namespace RepositoryEFDotnet.Contexts.EFCore
     /// </typeparam>
     public abstract class BaseContext : DbContext, IUnitOfWork
     {
-        #region Fields
-
-        /// <summary>
-        /// The transaction.
-        /// </summary>
-        protected IDbContextTransaction Transaction;
-
-        #endregion
-
         #region Constructors and Destructors
 
         /// <summary>
@@ -332,7 +323,7 @@ namespace RepositoryEFDotnet.Contexts.EFCore
         {
             this.ChangeTracker.DetectChanges();
             var result = this.SaveChanges();
-            this.Transaction?.Commit();
+            this.Database.CurrentTransaction?.Commit();
             return result;
         }
 
@@ -342,11 +333,11 @@ namespace RepositoryEFDotnet.Contexts.EFCore
         /// <returns>
         ///     The <see cref="Task" />.
         /// </returns>
-        public Task<int> CommitAsync()
+        public async Task<int> CommitAsync()
         {
             this.ChangeTracker.DetectChanges();
-            var result = this.SaveChangesAsync();
-            this.Transaction?.Commit();
+            var result = await this.SaveChangesAsync();
+            this.Database.CurrentTransaction?.Commit();
             return result;
         }
 
@@ -355,10 +346,8 @@ namespace RepositoryEFDotnet.Contexts.EFCore
         /// </summary>
         public override void Dispose()
         {
-            this.Transaction?.Dispose();
-            this.Transaction = null;
-
-            // this.Database.UseTransaction(null);
+            this.Database.CurrentTransaction?.Rollback();
+            this.Database.CurrentTransaction?.Dispose();
             base.Dispose();
         }
 
@@ -811,9 +800,17 @@ namespace RepositoryEFDotnet.Contexts.EFCore
         /// </summary>
         public virtual void StartTransaction()
         {
-            if (this.Transaction == null)
+            if (this.Database.CurrentTransaction == null)
             {
-                this.Transaction = this.Database.BeginTransaction();
+                this.Database.BeginTransaction();
+            }
+        }
+
+        public virtual async Task StartTransactionAsync()
+        {
+            if (this.Database.CurrentTransaction == null)
+            {
+                await this.Database.BeginTransactionAsync();
             }
         }
 

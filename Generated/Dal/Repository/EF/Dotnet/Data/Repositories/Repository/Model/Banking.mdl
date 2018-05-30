@@ -140,7 +140,180 @@
       </Package>
       <SourceTypeId>4bc1b0c4-1e41-9146-82cf-599181ce4410</SourceTypeId>
       <Tables>
-          
+        <Table Description="" SchemaName="dbo" TableName="BankAccount">
+          <Columns>
+            <Column ColumnName="BankAccountId" ColumnOrder="1" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
+            <Column ColumnName="BankAccountNumber" ColumnOrder="2" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="10" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
+            <Column ColumnName="Balance" ColumnOrder="3" DataType="Decimal" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="0" Precision="19" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
+            <Column ColumnName="CustomerId" ColumnOrder="4" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
+            <Column ColumnName="Locked" ColumnOrder="5" DataType="Boolean" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="0" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
+          </Columns>
+          <DatabaseGeneratedKeyType>Identity</DatabaseGeneratedKeyType>
+          <RelationShips>
+            <RelationShip ColumnName="CustomerId" RelationShip="ForeignKey" ReferencedColumnName="CustomerId" Render="true" SchemaName="dbo" ReferencedTableName="Customer" Multiplicity="Many" ReferencedMultiplicity="ZeroToOne" UserRelationship="false">
+              <RelationshipName>FK_dbo.BankAccount_dbo.Customer_CustomerId</RelationshipName>
+            </RelationShip>
+            <RelationShip ColumnName="BankAccountId" RelationShip="ForeignKeyChild" ReferencedColumnName="FromBankAccountId" RelationshipAlias="BankTransfersFrom" Render="true" SchemaName="dbo" ReferencedTableName="BankTransfers" Multiplicity="One" ReferencedMultiplicity="Many" UserRelationship="false">
+              <RelationshipName>FK_dbo.BankTransfers_dbo.BankAccount_FromBankAccountId</RelationshipName>
+            </RelationShip>
+            <RelationShip ColumnName="BankAccountId" RelationShip="ForeignKeyChild" ReferencedColumnName="ToBankAccountId" RelationshipAlias="BankTransfersTo" Render="true" SchemaName="dbo" ReferencedTableName="BankTransfers" Multiplicity="One" ReferencedMultiplicity="Many" UserRelationship="false">
+              <RelationshipName>FK_dbo.BankTransfers_dbo.BankAccount_ToBankAccountId</RelationshipName>
+            </RelationShip>
+          </RelationShips>
+        </Table>
+        <Table Description="" SchemaName="dbo" TableName="BankTransfers">
+          <Columns>
+            <Column ColumnName="BankTransferId" ColumnOrder="1" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
+            <Column ColumnName="FromBankAccountId" ColumnOrder="2" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
+            <Column ColumnName="ToBankAccountId" ColumnOrder="3" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
+            <Column ColumnName="Amount" ColumnOrder="4" DataType="Decimal" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="0" Precision="18" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
+            <Column ColumnName="TransferDate" ColumnOrder="5" DataType="DateTime" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="0" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
+          </Columns>
+          <DatabaseGeneratedKeyType>Identity</DatabaseGeneratedKeyType>
+          <RelationShips>
+            <RelationShip ColumnName="FromBankAccountId" RelationShip="ForeignKey" ReferencedColumnName="BankAccountId" RelationshipAlias="FromBankAccount" Render="true" SchemaName="dbo" ReferencedTableName="BankAccount" Multiplicity="Many" ReferencedMultiplicity="One" UserRelationship="false">
+              <RelationshipName>FK_dbo.BankTransfers_dbo.BankAccount_FromBankAccountId</RelationshipName>
+            </RelationShip>
+            <RelationShip ColumnName="ToBankAccountId" RelationShip="ForeignKey" ReferencedColumnName="BankAccountId" RelationshipAlias="ToBankAccount" Render="true" SchemaName="dbo" ReferencedTableName="BankAccount" Multiplicity="Many" ReferencedMultiplicity="One" UserRelationship="false">
+              <RelationshipName>FK_dbo.BankTransfers_dbo.BankAccount_ToBankAccountId</RelationshipName>
+            </RelationShip>
+          </RelationShips>
+        </Table>
+        <Table Description="" SchemaName="dbo" TableName="Book">
+          <Columns>
+            <Column ColumnName="ProductId" ColumnOrder="1" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
+            <Column ColumnName="Publisher" ColumnOrder="2" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="200" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
+          </Columns>
+          <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
+          <RelationShips>
+            <RelationShip ColumnName="ProductId" RelationShip="ForeignKey" ReferencedColumnName="ProductId" Render="true" SchemaName="dbo" ReferencedTableName="Product" Multiplicity="ZeroToOne" ReferencedMultiplicity="One" UserRelationship="false">
+              <RelationshipName>FK_dbo.Book_dbo.Product_ProductId</RelationshipName>
+            </RelationShip>
+          </RelationShips>
+        </Table>
+        <Table Description="" SchemaName="dbo" TableName="CompositeKeyTest">
+          <Columns>
+            <Column ColumnName="PrimaryCol1" ColumnOrder="1" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
+            <Column ColumnName="PrimaryCol2" ColumnOrder="2" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
+          </Columns>
+          <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
+          <RelationShips />
+        </Table>
+        <Table Description="" SchemaName="dbo" TableName="Country">
+          <Columns>
+            <Column ColumnName="CountryId" ColumnOrder="1" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
+            <Column ColumnName="CountryName" ColumnOrder="2" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="100" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
+          </Columns>
+          <DatabaseGeneratedKeyType>Identity</DatabaseGeneratedKeyType>
+          <RelationShips>
+            <RelationShip ColumnName="CountryId" RelationShip="ForeignKeyChild" ReferencedColumnName="CountryId" Render="true" SchemaName="dbo" ReferencedTableName="Customer" Multiplicity="ZeroToOne" ReferencedMultiplicity="Many" UserRelationship="false">
+              <RelationshipName>FK_dbo.Customer_dbo.Country_CountryId</RelationshipName>
+            </RelationShip>
+          </RelationShips>
+        </Table>
+        <Table Description="" SchemaName="dbo" TableName="Customer">
+          <Columns>
+            <Column ColumnName="CustomerId" ColumnOrder="1" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
+            <Column ColumnName="CustomerCode" ColumnOrder="2" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="5" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
+            <Column ColumnName="CompanyName" ColumnOrder="3" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="50" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
+            <Column ColumnName="ContactName" ColumnOrder="4" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="50" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
+            <Column ColumnName="ContactTitle" ColumnOrder="5" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="50" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
+            <Column ColumnName="Address" ColumnOrder="6" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="50" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
+            <Column ColumnName="City" ColumnOrder="7" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="20" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
+            <Column ColumnName="PostalCode" ColumnOrder="8" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="10" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
+            <Column ColumnName="Telephone" ColumnOrder="9" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="50" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
+            <Column ColumnName="Fax" ColumnOrder="10" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="50" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
+            <Column ColumnName="CountryId" ColumnOrder="11" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
+            <Column ColumnName="Photo" ColumnOrder="12" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="-1" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
+            <Column ColumnName="IsEnabled" ColumnOrder="13" DataType="Boolean" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="0" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
+          </Columns>
+          <DatabaseGeneratedKeyType>Identity</DatabaseGeneratedKeyType>
+          <RelationShips>
+            <RelationShip ColumnName="CountryId" RelationShip="ForeignKey" ReferencedColumnName="CountryId" Render="true" SchemaName="dbo" ReferencedTableName="Country" Multiplicity="Many" ReferencedMultiplicity="ZeroToOne" UserRelationship="false">
+              <RelationshipName>FK_dbo.Customer_dbo.Country_CountryId</RelationshipName>
+            </RelationShip>
+            <RelationShip ColumnName="CustomerId" RelationShip="ForeignKeyChild" ReferencedColumnName="CustomerId" Render="true" SchemaName="dbo" ReferencedTableName="BankAccount" Multiplicity="ZeroToOne" ReferencedMultiplicity="Many" UserRelationship="false">
+              <RelationshipName>FK_dbo.BankAccount_dbo.Customer_CustomerId</RelationshipName>
+            </RelationShip>
+            <RelationShip ColumnName="CustomerId" RelationShip="ForeignKeyChild" ReferencedColumnName="CustomerId" Render="true" SchemaName="dbo" ReferencedTableName="Order" Multiplicity="ZeroToOne" ReferencedMultiplicity="Many" UserRelationship="false">
+              <RelationshipName>FK_dbo.Order_dbo.Customer_CustomerId</RelationshipName>
+            </RelationShip>
+          </RelationShips>
+        </Table>
+        <Table Description="" SchemaName="dbo" TableName="Order">
+          <Columns>
+            <Column ColumnName="OrderId" ColumnOrder="1" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
+            <Column ColumnName="CustomerId" ColumnOrder="2" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
+            <Column ColumnName="OrderDate" ColumnOrder="3" DataType="DateTime" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="0" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
+            <Column ColumnName="DeliveryDate" ColumnOrder="4" DataType="DateTime" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="0" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
+            <Column ColumnName="ShippingName" ColumnOrder="5" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="50" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
+            <Column ColumnName="ShippingAddress" ColumnOrder="6" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="50" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
+            <Column ColumnName="ShippingCity" ColumnOrder="7" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="50" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
+            <Column ColumnName="ShippingZip" ColumnOrder="8" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="50" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
+          </Columns>
+          <DatabaseGeneratedKeyType>Identity</DatabaseGeneratedKeyType>
+          <RelationShips>
+            <RelationShip ColumnName="CustomerId" RelationShip="ForeignKey" ReferencedColumnName="CustomerId" Render="true" SchemaName="dbo" ReferencedTableName="Customer" Multiplicity="Many" ReferencedMultiplicity="ZeroToOne" UserRelationship="false">
+              <RelationshipName>FK_dbo.Order_dbo.Customer_CustomerId</RelationshipName>
+            </RelationShip>
+            <RelationShip ColumnName="OrderId" RelationShip="ForeignKeyChild" ReferencedColumnName="OrderId" Render="true" SchemaName="dbo" ReferencedTableName="OrderDetails" Multiplicity="One" ReferencedMultiplicity="Many" UserRelationship="false">
+              <RelationshipName>FK_dbo.OrderDetails_dbo.Order_OrderId</RelationshipName>
+            </RelationShip>
+          </RelationShips>
+        </Table>
+        <Table Description="" SchemaName="dbo" TableName="OrderDetails">
+          <Columns>
+            <Column ColumnName="OrderDetailsId" ColumnOrder="1" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
+            <Column ColumnName="OrderId" ColumnOrder="2" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
+            <Column ColumnName="ProductId" ColumnOrder="3" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
+            <Column ColumnName="UnitPrice" ColumnOrder="4" DataType="Decimal" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="0" Precision="19" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
+            <Column ColumnName="Amount" ColumnOrder="5" DataType="Int16" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="0" Precision="5" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
+            <Column ColumnName="Discount" ColumnOrder="6" DataType="Single" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="0" Precision="24" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
+          </Columns>
+          <DatabaseGeneratedKeyType>Identity</DatabaseGeneratedKeyType>
+          <RelationShips>
+            <RelationShip ColumnName="OrderId" RelationShip="ForeignKey" ReferencedColumnName="OrderId" Render="true" SchemaName="dbo" ReferencedTableName="Order" Multiplicity="Many" ReferencedMultiplicity="One" UserRelationship="false">
+              <RelationshipName>FK_dbo.OrderDetails_dbo.Order_OrderId</RelationshipName>
+            </RelationShip>
+            <RelationShip ColumnName="ProductId" RelationShip="ForeignKey" ReferencedColumnName="ProductId" Render="true" SchemaName="dbo" ReferencedTableName="Product" Multiplicity="Many" ReferencedMultiplicity="One" UserRelationship="false">
+              <RelationshipName>FK_dbo.OrderDetails_dbo.Product_ProductId</RelationshipName>
+            </RelationShip>
+          </RelationShips>
+        </Table>
+        <Table Description="" SchemaName="dbo" TableName="Product">
+          <Columns>
+            <Column ColumnName="ProductId" ColumnOrder="1" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
+            <Column ColumnName="ProductDescription" ColumnOrder="2" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="100" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
+            <Column ColumnName="UnitPrice" ColumnOrder="3" DataType="Decimal" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="0" Precision="19" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
+            <Column ColumnName="UnitAmount" ColumnOrder="4" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="50" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
+            <Column ColumnName="Publisher" ColumnOrder="5" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="200" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
+            <Column ColumnName="AmountInStock" ColumnOrder="6" DataType="Int16" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="0" Precision="5" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
+          </Columns>
+          <DatabaseGeneratedKeyType>Identity</DatabaseGeneratedKeyType>
+          <RelationShips>
+            <RelationShip ColumnName="ProductId" RelationShip="ForeignKeyChild" ReferencedColumnName="ProductId" Render="true" SchemaName="dbo" ReferencedTableName="Book" Multiplicity="One" ReferencedMultiplicity="ZeroToOne" UserRelationship="false">
+              <RelationshipName>FK_dbo.Book_dbo.Product_ProductId</RelationshipName>
+            </RelationShip>
+            <RelationShip ColumnName="ProductId" RelationShip="ForeignKeyChild" ReferencedColumnName="ProductId" Render="true" SchemaName="dbo" ReferencedTableName="OrderDetails" Multiplicity="One" ReferencedMultiplicity="Many" UserRelationship="false">
+              <RelationshipName>FK_dbo.OrderDetails_dbo.Product_ProductId</RelationshipName>
+            </RelationShip>
+            <RelationShip ColumnName="ProductId" RelationShip="ForeignKeyChild" ReferencedColumnName="ProductId" Render="true" SchemaName="dbo" ReferencedTableName="Software" Multiplicity="One" ReferencedMultiplicity="ZeroToOne" UserRelationship="false">
+              <RelationshipName>FK_dbo.Software_dbo.Product_ProductId</RelationshipName>
+            </RelationShip>
+          </RelationShips>
+        </Table>
+        <Table Description="" SchemaName="dbo" TableName="Software">
+          <Columns>
+            <Column ColumnName="ProductId" ColumnOrder="1" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
+            <Column ColumnName="LicenseCode" ColumnOrder="2" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="200" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
+          </Columns>
+          <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
+          <RelationShips>
+            <RelationShip ColumnName="ProductId" RelationShip="ForeignKey" ReferencedColumnName="ProductId" Render="true" SchemaName="dbo" ReferencedTableName="Product" Multiplicity="ZeroToOne" ReferencedMultiplicity="One" UserRelationship="false">
+              <RelationshipName>FK_dbo.Software_dbo.Product_ProductId</RelationshipName>
+            </RelationShip>
+          </RelationShips>
+        </Table>
       </Tables>
     </DomainDefinition>
   </Domains>

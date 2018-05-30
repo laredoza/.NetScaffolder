@@ -61,7 +61,7 @@ namespace RepositoryEFDotnet.UnitTest
             this.BaseUnitOfWorkUnitTests_BankAccount_AllMatching(uow);
             this.BaseUnitOfWorkUnitTests_BankAccount_AllMatching_NothingFound(uow);
 
-            //this.BaseUnitOfWorkUnitTests_BankAccount_GetAllPaged(uow, 2);
+            this.BaseUnitOfWorkUnitTests_BankAccount_GetAllPaged(uow, 2);
             this.BaseUnitOfWorkUnitTests_BankAccount_Max(uow);
 			this.BaseUnitOfWorkUnitTests_BankAccount_RemoveRange(uow);
             this.BaseUnitOfWorkUnitTests_BankAccount_Rollback(uow);
@@ -128,10 +128,9 @@ namespace RepositoryEFDotnet.UnitTest
             var entities = uow.GetAll<BankAccount>().ToList();
             this.Check_EntityCount(count, entities.Count(), "Incorrect number of BankAccount found");
 
-            for (var index = 1; index <= count; index++)
+            foreach(var item in list)
 			{
-				int id = index + startSeed - 1;
-                this.Check_BankAccount(list.FirstOrDefault(o => o.BankAccountId == id),entities.FirstOrDefault(o => o.BankAccountId == id));
+                this.Check_BankAccount(item,entities.FirstOrDefault(o => o.BankAccountId == item.BankAccountId));
 			}
         }
 		
@@ -154,10 +153,9 @@ namespace RepositoryEFDotnet.UnitTest
             var entities = await uow.GetAllAsync<BankAccount>();
             this.Check_EntityCount(count, entities.Count(), "Incorrect number of BankAccount found");
 
-            for (var index = 1; index <= count; index++)
+            foreach(var item in list)
 			{
-				int id = index + startSeed - 1;
-                this.Check_BankAccount(list.FirstOrDefault(o => o.BankAccountId == id),entities.FirstOrDefault(o => o.BankAccountId == id));
+                this.Check_BankAccount(item,entities.FirstOrDefault(o => o.BankAccountId == item.BankAccountId));
 			}
         }
 		

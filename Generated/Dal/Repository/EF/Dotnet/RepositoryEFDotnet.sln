@@ -63,7 +63,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RepositoryEFDotnet.Contexts
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NHibernate", "NHibernate", "{59453B38-9D13-4A2B-B66D-F5686055C1FF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepositoryEFDotnet.Contexts.NHibernate.SqlServer", "Data\Contexts\NHibernate\SqlServer\RepositoryEFDotnet.Contexts.NHibernate.SqlServer.csproj", "{C632DC7F-0364-4BB9-BE84-54794F9AD469}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RepositoryEFDotnet.Contexts.NHibernate.SqlServer", "Data\Contexts\NHibernate\SqlServer\RepositoryEFDotnet.Contexts.NHibernate.SqlServer.csproj", "{C632DC7F-0364-4BB9-BE84-54794F9AD469}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

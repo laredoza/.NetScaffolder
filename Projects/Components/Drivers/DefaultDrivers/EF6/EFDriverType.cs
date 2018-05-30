@@ -173,7 +173,7 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6
         /// </returns>
         public string TransformColumnPrecision(Column col)
         {
-            if ((col.Precision > 0 && !col.InValidPrecisionGeneration) || col.Scale > 0)
+            if (!col.InValidPrecisionGeneration && (col.Precision > 0 || col.Scale > 0))
             {
                 return $".HasPrecision({col.Precision}, {col.Length})";
             }
@@ -255,17 +255,17 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6
             if (rel.ReferencedMultiplicity == RelationshipMultiplicity.Many)
             {
                 sb.Append(
-                    $"modelBuilder.Entity<{this.TransformModelName(table, nc)}>().HasMany<{this.TransformModelName(rel.ReferencedTableName, nc)}>(s => s.{refTableName})");
+                    $"HasMany<{this.TransformModelName(rel.ReferencedTableName, nc)}>(s => s.{refTableName})");
             }
             else if (rel.ReferencedMultiplicity == RelationshipMultiplicity.One)
             {
                 sb.Append(
-                    $"modelBuilder.Entity<{this.TransformModelName(table, nc)}>().HasRequired<{this.TransformModelName(rel.ReferencedTableName, nc)}>(s => s.{refTableName})");
+                    $"HasRequired<{this.TransformModelName(rel.ReferencedTableName, nc)}>(s => s.{refTableName})");
             }
             else
             {
                 sb.Append(
-                    $"modelBuilder.Entity<{this.TransformModelName(table, nc)}>().HasOptional<{this.TransformModelName(rel.ReferencedTableName, nc)}>(s => s.{refTableName})");
+                    $"HasOptional<{this.TransformModelName(rel.ReferencedTableName, nc)}>(s => s.{refTableName})");
             }
 
             string parentTableName = table;

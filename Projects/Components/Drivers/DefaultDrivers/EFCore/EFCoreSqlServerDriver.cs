@@ -44,6 +44,7 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EFCore
                 {
                     "Microsoft.EntityFrameworkCore",
                     "Microsoft.EntityFrameworkCore.Storage",
+                    "Microsoft.EntityFrameworkCore.Metadata.Builders",
                     "RepositoryEFDotnet.Contexts.EFCore",
                     "System.Configuration"
                 };

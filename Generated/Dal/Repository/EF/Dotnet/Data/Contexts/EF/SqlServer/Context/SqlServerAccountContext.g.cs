@@ -19,9 +19,11 @@
 // *******************************************************************
 
 using System.Data.Entity;
+using System.Data.Entity.ModelConfiguration;
 using RepositoryEFDotnet.Library;
 using System.ComponentModel.DataAnnotations.Schema;
 using Banking.Models.Entity;
+using Banking.Models.Mappings.SqlServer;
 using System.Data.Common;
 
 
@@ -52,27 +54,11 @@ namespace Banking.Models.Accounts
         {
             base.OnModelCreating(modelBuilder);
 			
-			#region Tables
+			#region Mappings
 			
-			modelBuilder.Entity<BankAccount>().ToTable("BankAccount", "dbo");
-			modelBuilder.Entity<BankTransfers>().ToTable("BankTransfers", "dbo");
+			modelBuilder.Configurations.Add(new BankAccountMap());
+			modelBuilder.Configurations.Add(new BankTransfersMap());
 
-			#endregion
-			
-			#region Primary keys
-			
-			modelBuilder.Entity<BankAccount>().HasKey(t => t.BankAccountId);
-			modelBuilder.Entity<BankAccount>().Property(t => t.BankAccountId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
-			modelBuilder.Entity<BankTransfers>().HasKey(t => t.BankTransferId);
-			modelBuilder.Entity<BankTransfers>().Property(t => t.BankTransferId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
-
-			#endregion
-			
-			#region Included Relationships
-			
-			modelBuilder.Entity<BankAccount>().HasMany<BankTransfers>(s => s.BankTransfersFrom).WithRequired(s => s.BankAccountFrom).HasForeignKey(s => s.FromBankAccountId).WillCascadeOnDelete(false);
-			modelBuilder.Entity<BankAccount>().HasMany<BankTransfers>(s => s.BankTransfersTo).WithRequired(s => s.BankAccountTo).HasForeignKey(s => s.ToBankAccountId).WillCascadeOnDelete(false);
-			
 			#endregion
 			
 			#region Excluded Relationships
@@ -81,27 +67,7 @@ namespace Banking.Models.Accounts
 			
 			modelBuilder.Ignore<Customer>();
 
-			#endregion
-			
-			#region Constraints
-			
-			modelBuilder.Entity<BankAccount>().Property(t => t.BankAccountId).IsRequired();
-			modelBuilder.Entity<BankAccount>().Property(t => t.BankAccountNumber).HasMaxLength(10);
-			modelBuilder.Entity<BankAccount>().Property(t => t.BankAccountNumber).IsRequired();
-			modelBuilder.Entity<BankAccount>().Property(t => t.Balance).IsRequired();
-			modelBuilder.Entity<BankAccount>().Property(t => t.Balance).HasPrecision(19, 0);
-			modelBuilder.Entity<BankAccount>().Property(t => t.CustomerId).IsOptional();
-			modelBuilder.Entity<BankAccount>().Property(t => t.Locked).IsRequired();
-			modelBuilder.Entity<BankTransfers>().Property(t => t.BankTransferId).IsRequired();
-			modelBuilder.Entity<BankTransfers>().Property(t => t.FromBankAccountId).IsRequired();
-			modelBuilder.Entity<BankTransfers>().Property(t => t.ToBankAccountId).IsRequired();
-			modelBuilder.Entity<BankTransfers>().Property(t => t.Amount).IsRequired();
-			modelBuilder.Entity<BankTransfers>().Property(t => t.Amount).HasPrecision(18, 0);
-			modelBuilder.Entity<BankTransfers>().Property(t => t.TransferDate).IsRequired();
-			
-			#endregion
-
-			
+			#endregion		
         }
 		
 		#region Db Sets

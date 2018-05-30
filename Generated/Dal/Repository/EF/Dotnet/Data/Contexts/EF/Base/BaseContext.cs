@@ -25,8 +25,6 @@
     /// </typeparam>
     public abstract class BaseContext : DbContext, IUnitOfWork
     {
-        private DbContextTransaction transaction = null;
-
         #region Constructors and Destructors
 
         protected BaseContext()
@@ -249,7 +247,7 @@
         {
             ChangeTracker.DetectChanges();
             var result = SaveChanges();
-            transaction?.Commit();
+            this.Database.CurrentTransaction?.Commit();
             return result;
         }
 
@@ -259,11 +257,11 @@
         /// <returns>
         ///     The <see cref="Task" />.
         /// </returns>
-        public Task<int> CommitAsync()
+        public async Task<int> CommitAsync()
         {
             ChangeTracker.DetectChanges();
-            var result = SaveChangesAsync();
-            transaction?.Commit();
+            var result = await SaveChangesAsync();
+            this.Database.CurrentTransaction?.Commit();
             return result;
         }
 
@@ -511,7 +509,7 @@
         /// </summary>
         public void Rollback()
         {
-            transaction?.Rollback();
+            this.Database.CurrentTransaction?.Rollback();
 
             foreach(var entry in ChangeTracker.Entries())
             {
@@ -582,16 +580,23 @@
 
         public void StartTransaction()
         {
-            if (transaction == null)
+            if (this.Database.CurrentTransaction == null)
             {
-                transaction = this.Database.BeginTransaction(IsolationLevel.ReadCommitted);
+                this.Database.BeginTransaction(IsolationLevel.ReadCommitted);
+            }
+        }
+
+        public virtual async Task StartTransactionAsync()
+        {
+            if (this.Database.CurrentTransaction == null)
+            {
+                await Task.Run(() => this.Database.BeginTransaction());
             }
         }
 
         protected override void Dispose(bool disposing)
         {
-            transaction?.Dispose();
-            transaction = null;
+            this.Database.CurrentTransaction?.Dispose();
             this.Database.UseTransaction(null);
             base.Dispose(disposing);
         }

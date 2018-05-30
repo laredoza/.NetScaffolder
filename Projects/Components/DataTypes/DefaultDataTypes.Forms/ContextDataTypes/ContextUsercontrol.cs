@@ -20,6 +20,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.ContextDa
     using DotNetScaffolder.Core.Common.Validation;
     using DotNetScaffolder.Mapping.ApplicationServices.Tables;
     using DotNetScaffolder.Mapping.MetaData.Domain;
+    using DotNetScaffolder.Mapping.MetaData.Model;
 
     using FormControls.TreeView;
 
@@ -342,7 +343,14 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.ContextDa
                 var tables = applicationService.ReturnTables(this.TreeviewContextModels.Nodes[0]);
                 if (tables != null && tables.Any())
                 {
-                    this.SelectedContext.Models.AddRange(tables);
+                    foreach (var table in tables)
+                    {
+                        this.SelectedContext.Models.Add(new Table
+                                                            {
+                                                                TableName = table.TableName,
+                                                                SchemaName = table.SchemaName
+                                                            });
+                    }
                 }
             }
         }
