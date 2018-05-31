@@ -49,7 +49,7 @@ namespace Banking.Models.Mappings.SqlServer
 			builder.Property(t => t.FromBankAccountId).IsRequired();
 			builder.Property(t => t.ToBankAccountId).IsRequired();
 			builder.Property(t => t.Amount).IsRequired();
-			builder.Property(t => t.Amount).HasColumnType("decimal(18, 0)");
+			builder.Property(t => t.Amount).HasColumnType("decimal(18, 2)");
 			builder.Property(t => t.TransferDate).IsRequired();
 			
 			#endregion

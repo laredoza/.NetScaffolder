@@ -175,7 +175,7 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6
         {
             if (!col.InValidPrecisionGeneration && (col.Precision > 0 || col.Scale > 0))
             {
-                return $".HasPrecision({col.Precision}, {col.Length})";
+                return $".HasPrecision({col.Precision}, {col.Scale})";
             }
 
             return string.Empty;

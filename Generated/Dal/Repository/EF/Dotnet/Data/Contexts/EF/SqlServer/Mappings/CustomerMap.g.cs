@@ -63,6 +63,7 @@ namespace Banking.Models.Mappings.SqlServer
 			Property(t => t.Fax).HasMaxLength(50);
 			Property(t => t.Fax).IsOptional();
 			Property(t => t.CountryId).IsOptional();
+			Property(t => t.Photo).HasMaxLength(2147483647);
 			Property(t => t.Photo).IsOptional();
 			Property(t => t.IsEnabled).IsRequired();
 			

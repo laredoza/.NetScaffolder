@@ -49,7 +49,7 @@ namespace Banking.Models.Mappings.SqlServer
 			builder.Property(t => t.BankAccountNumber).HasMaxLength(10);
 			builder.Property(t => t.BankAccountNumber).IsRequired();
 			builder.Property(t => t.Balance).IsRequired();
-			builder.Property(t => t.Balance).HasColumnType("decimal(19, 0)");
+			builder.Property(t => t.Balance).HasColumnType("decimal(19, 4)");
 			builder.Property(t => t.CustomerId).IsRequired(false);
 			builder.Property(t => t.Locked).IsRequired();
 			
@@ -57,8 +57,7 @@ namespace Banking.Models.Mappings.SqlServer
 
 			#region Relationships
 			
-			builder.HasMany<BankTransfers>(s => s.BankTransfersFrom).WithOne(s => s.FromBankAccount).HasForeignKey(s => s.FromBankAccountId).OnDelete(DeleteBehavior.Restrict);
-			builder.HasMany<BankTransfers>(s => s.BankTransfersTo).WithOne(s => s.ToBankAccount).HasForeignKey(s => s.ToBankAccountId).OnDelete(DeleteBehavior.Restrict);
+			builder.HasMany<BankTransfers>(s => s.BankTransfers).WithOne(s => s.BankAccount).HasForeignKey(s => s.ToBankAccountId).OnDelete(DeleteBehavior.Restrict);
 			
 			#endregion	
 	    }

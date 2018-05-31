@@ -70,7 +70,6 @@
     <Compile Include="Mappings\BankAccountMap.g.cs" />
     <Compile Include="Mappings\BankTransfersMap.g.cs" />
     <Compile Include="Mappings\BookMap.g.cs" />
-    <Compile Include="Mappings\CompositeKeyTestMap.g.cs" />
     <Compile Include="Mappings\CountryMap.g.cs" />
     <Compile Include="Mappings\CustomerMap.g.cs" />
     <Compile Include="Mappings\OrderDetailsMap.g.cs" />

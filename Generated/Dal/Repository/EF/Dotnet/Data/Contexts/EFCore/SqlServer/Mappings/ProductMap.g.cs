@@ -49,7 +49,7 @@ namespace Banking.Models.Mappings.SqlServer
 			builder.Property(t => t.ProductDescription).HasMaxLength(100);
 			builder.Property(t => t.ProductDescription).IsRequired(false);
 			builder.Property(t => t.UnitPrice).IsRequired(false);
-			builder.Property(t => t.UnitPrice).HasColumnType("decimal(19, 0)");
+			builder.Property(t => t.UnitPrice).HasColumnType("decimal(19, 4)");
 			builder.Property(t => t.UnitAmount).HasMaxLength(50);
 			builder.Property(t => t.UnitAmount).IsRequired(false);
 			builder.Property(t => t.Publisher).HasMaxLength(200);

@@ -37,7 +37,6 @@
 ..\..\Contexts\EF\MySql\Mappings\BankAccountMap.g.cs
 ..\..\Contexts\EF\MySql\Mappings\BankTransfersMap.g.cs
 ..\..\Contexts\EF\MySql\Mappings\BookMap.g.cs
-..\..\Contexts\EF\MySql\Mappings\CompositeKeyTestMap.g.cs
 ..\..\Contexts\EF\MySql\Mappings\CountryMap.g.cs
 ..\..\Contexts\EF\MySql\Mappings\CustomerMap.g.cs
 ..\..\Contexts\EF\MySql\Mappings\OrderDetailsMap.g.cs
@@ -50,7 +49,6 @@
 ..\..\Contexts\EF\Oracle\Mappings\BankAccountMap.g.cs
 ..\..\Contexts\EF\Oracle\Mappings\BankTransfersMap.g.cs
 ..\..\Contexts\EF\Oracle\Mappings\BookMap.g.cs
-..\..\Contexts\EF\Oracle\Mappings\CompositeKeyTestMap.g.cs
 ..\..\Contexts\EF\Oracle\Mappings\CountryMap.g.cs
 ..\..\Contexts\EF\Oracle\Mappings\CustomerMap.g.cs
 ..\..\Contexts\EF\Oracle\Mappings\OrderDetailsMap.g.cs
@@ -63,7 +61,6 @@
 ..\..\Contexts\EF\SqlServer\Mappings\BankAccountMap.g.cs
 ..\..\Contexts\EF\SqlServer\Mappings\BankTransfersMap.g.cs
 ..\..\Contexts\EF\SqlServer\Mappings\BookMap.g.cs
-..\..\Contexts\EF\SqlServer\Mappings\CompositeKeyTestMap.g.cs
 ..\..\Contexts\EF\SqlServer\Mappings\CountryMap.g.cs
 ..\..\Contexts\EF\SqlServer\Mappings\CustomerMap.g.cs
 ..\..\Contexts\EF\SqlServer\Mappings\OrderDetailsMap.g.cs
@@ -76,7 +73,6 @@
 ..\..\Contexts\EFCore\MySql\Mappings\BankAccountMap.g.cs
 ..\..\Contexts\EFCore\MySql\Mappings\BankTransfersMap.g.cs
 ..\..\Contexts\EFCore\MySql\Mappings\BookMap.g.cs
-..\..\Contexts\EFCore\MySql\Mappings\CompositeKeyTestMap.g.cs
 ..\..\Contexts\EFCore\MySql\Mappings\CountryMap.g.cs
 ..\..\Contexts\EFCore\MySql\Mappings\CustomerMap.g.cs
 ..\..\Contexts\EFCore\MySql\Mappings\OrderDetailsMap.g.cs
@@ -89,7 +85,6 @@
 ..\..\Contexts\EFCore\SqlServer\Mappings\BankAccountMap.g.cs
 ..\..\Contexts\EFCore\SqlServer\Mappings\BankTransfersMap.g.cs
 ..\..\Contexts\EFCore\SqlServer\Mappings\BookMap.g.cs
-..\..\Contexts\EFCore\SqlServer\Mappings\CompositeKeyTestMap.g.cs
 ..\..\Contexts\EFCore\SqlServer\Mappings\CountryMap.g.cs
 ..\..\Contexts\EFCore\SqlServer\Mappings\CustomerMap.g.cs
 ..\..\Contexts\EFCore\SqlServer\Mappings\OrderDetailsMap.g.cs
@@ -99,7 +94,6 @@
 ..\..\Dtos\Dto\Dto\BankAccountDto.g.cs
 ..\..\Dtos\Dto\Dto\BankTransfersDto.g.cs
 ..\..\Dtos\Dto\Dto\BookDto.g.cs
-..\..\Dtos\Dto\Dto\CompositeKeyTestDto.g.cs
 ..\..\Dtos\Dto\Dto\CountryDto.g.cs
 ..\..\Dtos\Dto\Dto\CustomerDto.g.cs
 ..\..\Dtos\Dto\Dto\OrderDetailsDto.g.cs
@@ -109,7 +103,6 @@
 ..\..\Entities\Entity\Entity\BankAccount.g.cs
 ..\..\Entities\Entity\Entity\BankTransfers.g.cs
 ..\..\Entities\Entity\Entity\Book.g.cs
-..\..\Entities\Entity\Entity\CompositeKeyTest.g.cs
 ..\..\Entities\Entity\Entity\Country.g.cs
 ..\..\Entities\Entity\Entity\Customer.g.cs
 ..\..\Entities\Entity\Entity\Order.g.cs
@@ -119,7 +112,6 @@
 ..\..\Interfaces\Interface\Dto\IBankAccount.g.cs
 ..\..\Interfaces\Interface\Dto\IBankTransfers.g.cs
 ..\..\Interfaces\Interface\Dto\IBook.g.cs
-..\..\Interfaces\Interface\Dto\ICompositeKeyTest.g.cs
 ..\..\Interfaces\Interface\Dto\ICountry.g.cs
 ..\..\Interfaces\Interface\Dto\ICustomer.g.cs
 ..\..\Interfaces\Interface\Dto\IOrder.g.cs
@@ -129,7 +121,6 @@
 ..\..\Interfaces\RepositoryInterfaces\Repository\IBankAccountRepository.g.cs
 ..\..\Interfaces\RepositoryInterfaces\Repository\IBankTransfersRepository.g.cs
 ..\..\Interfaces\RepositoryInterfaces\Repository\IBookRepository.g.cs
-..\..\Interfaces\RepositoryInterfaces\Repository\ICompositeKeyTestRepository.g.cs
 ..\..\Interfaces\RepositoryInterfaces\Repository\ICountryRepository.g.cs
 ..\..\Interfaces\RepositoryInterfaces\Repository\ICustomerRepository.g.cs
 ..\..\Interfaces\RepositoryInterfaces\Repository\IOrderDetailsRepository.g.cs
@@ -139,7 +130,6 @@
 .\Repository\BankAccountRepository.g.cs
 .\Repository\BankTransfersRepository.g.cs
 .\Repository\BookRepository.g.cs
-.\Repository\CompositeKeyTestRepository.g.cs
 .\Repository\CountryRepository.g.cs
 .\Repository\CustomerRepository.g.cs
 .\Repository\OrderDetailsRepository.g.cs

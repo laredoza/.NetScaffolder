@@ -48,7 +48,7 @@ namespace Banking.Models.Mappings.MySql
 			Property(t => t.FromBankAccountId).IsRequired();
 			Property(t => t.ToBankAccountId).IsRequired();
 			Property(t => t.Amount).IsRequired();
-			Property(t => t.Amount).HasPrecision(18, 0);
+			Property(t => t.Amount).HasPrecision(18, 2);
 			Property(t => t.TransferDate).IsRequired();
 			
 			#endregion

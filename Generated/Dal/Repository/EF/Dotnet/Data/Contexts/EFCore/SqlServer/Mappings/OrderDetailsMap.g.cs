@@ -49,7 +49,7 @@ namespace Banking.Models.Mappings.SqlServer
 			builder.Property(t => t.OrderId).IsRequired();
 			builder.Property(t => t.ProductId).IsRequired();
 			builder.Property(t => t.UnitPrice).IsRequired(false);
-			builder.Property(t => t.UnitPrice).HasColumnType("decimal(19, 0)");
+			builder.Property(t => t.UnitPrice).HasColumnType("decimal(19, 4)");
 			builder.Property(t => t.Amount).IsRequired(false);
 			builder.Property(t => t.Discount).IsRequired(false);
 			

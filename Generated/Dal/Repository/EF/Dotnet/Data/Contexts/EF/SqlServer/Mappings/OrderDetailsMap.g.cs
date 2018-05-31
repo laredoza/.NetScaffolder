@@ -47,7 +47,7 @@ namespace Banking.Models.Mappings.SqlServer
 			Property(t => t.OrderId).IsRequired();
 			Property(t => t.ProductId).IsRequired();
 			Property(t => t.UnitPrice).IsOptional();
-			Property(t => t.UnitPrice).HasPrecision(19, 0);
+			Property(t => t.UnitPrice).HasPrecision(19, 4);
 			Property(t => t.Amount).IsOptional();
 			Property(t => t.Discount).IsOptional();
 			
