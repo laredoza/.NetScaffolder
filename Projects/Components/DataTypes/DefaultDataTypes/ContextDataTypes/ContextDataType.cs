@@ -45,6 +45,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
             : base("Context.xml")
         {
             this.Contexts = new List<ContextData>();
+            this.MissingTables = new List<ContextDataError>();
         }
 
         #endregion
@@ -55,6 +56,8 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
         ///     Gets the contexts.
         /// </summary>
         public List<ContextData> Contexts { get; private set; }
+
+        public List<ContextDataError> MissingTables { get; set; }
 
         #endregion
 
@@ -156,6 +159,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
         public override List<Validation> Validate()
         {
             this.ValidationResult = new List<Validation>();
+            this.MissingTables.Clear();
 
             foreach (var contextData in this.Contexts)
             {
@@ -163,18 +167,16 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
                 {
                     if (!this.DomainDefinition.Tables.Exists(t => t.TableName == model.TableName))
                     {
-                        this.ValidationResult.Add(new Validation(ValidationType.ContextMissingModels, $"Context {contextData.ContextName} is missing Model {model.TableName}"));
+                        this.ValidationResult.Add(new Validation(ValidationType.ContextMissingModels, $"The {contextData.ContextName} Context is missing {model.TableName} Model"));
+                        this.MissingTables.Add(new ContextDataError { TableName = model.TableName, ContextData = contextData });
                     }
                 }
-            }
 
-            foreach (ContextData context in this.Contexts)
-            {
-                if (string.IsNullOrEmpty(context.ContextName))
+                if (string.IsNullOrEmpty(contextData.ContextName))
                 {
-                    this.ValidationResult.Add(new Validation(ValidationType.ContextNameEmpty, "Contexts must have a name"));
+                    this.ValidationResult.Add(new Validation(ValidationType.ContextNameEmpty, $"Contexts must have a name"));
                 }
-                
+
             }
 
             return this.ValidationResult;

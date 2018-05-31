@@ -88,11 +88,6 @@
         <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
         <RelationShips />
       </Table>
-      <Table Description="" SchemaName="dbo" TableName="CompositeKeyTest">
-        <Columns />
-        <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
-        <RelationShips />
-      </Table>
       <Table Description="" SchemaName="dbo" TableName="Country">
         <Columns />
         <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
