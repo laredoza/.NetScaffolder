@@ -27,8 +27,8 @@ namespace SplashScreenThreaded
         {
             InitializeComponent();
             this.label1.Parent = this.pictureBox1;
-            this.label1.BackColor = Color.Transparent;
-            label1.ForeColor = Color.Green;
+            //this.label1.BackColor = Color.Transparent;
+            //label1.ForeColor = Color.Green;
 
             //this.progressBar1.Parent = this.pictureBox1;
             //this.progressBar1.BackColor = Color.Transparent;
@@ -79,7 +79,7 @@ namespace SplashScreenThreaded
                 return;
             }
             // Must be on the UI thread if we've got this far
-            label1.ForeColor = Color.Green;
+            //label1.ForeColor = Color.Green;
             label1.Text = Text;
         }
 
@@ -107,7 +107,7 @@ namespace SplashScreenThreaded
                     label1.ForeColor = Color.Yellow;
                     break;
                 case TypeOfMessage.Success:
-                    label1.ForeColor = Color.Green;
+                    //label1.ForeColor = Color.Green;
                     break;
             }
             label1.Text = Text;
