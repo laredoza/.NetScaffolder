@@ -121,16 +121,16 @@ namespace RepositoryEFDotnet.UnitTest
                 seed++;
             }
 
+			uow.StartTransaction();
             uow.AddRange(list);
             uow.Commit();
 
             var entities = uow.GetAll<BankAccount>().ToList();
             this.Check_EntityCount(count, entities.Count(), "Incorrect number of BankAccount found");
 
-            for (var index = 1; index <= count; index++)
+            foreach(var item in list)
 			{
-				int id = index + startSeed - 1;
-                this.Check_BankAccount(list.FirstOrDefault(o => o.BankAccountId == id),entities.FirstOrDefault(o => o.BankAccountId == id));
+                this.Check_BankAccount(item,entities.FirstOrDefault(o => o.BankAccountId == item.BankAccountId));
 			}
         }
 		
@@ -146,16 +146,16 @@ namespace RepositoryEFDotnet.UnitTest
                 seed++;
             }
 
+			uow.StartTransaction();
             await uow.AddRangeAsync(list);
             await uow.CommitAsync();
 
             var entities = await uow.GetAllAsync<BankAccount>();
             this.Check_EntityCount(count, entities.Count(), "Incorrect number of BankAccount found");
 
-            for (var index = 1; index <= count; index++)
+            foreach(var item in list)
 			{
-				int id = index + startSeed - 1;
-                this.Check_BankAccount(list.FirstOrDefault(o => o.BankAccountId == id),entities.FirstOrDefault(o => o.BankAccountId == id));
+                this.Check_BankAccount(item,entities.FirstOrDefault(o => o.BankAccountId == item.BankAccountId));
 			}
         }
 		
@@ -176,6 +176,7 @@ namespace RepositoryEFDotnet.UnitTest
 			Assert.IsNotNull(entityToUpdate, $"BankAccount could not be found for BankAccountId = {id}");
             PopulateBankAccount(entityToUpdate, true, 2);
 
+			uow.StartTransaction();
             uow.Modify(entityToUpdate);
             uow.Commit();
 
@@ -189,6 +190,7 @@ namespace RepositoryEFDotnet.UnitTest
             var entity = new BankAccount();
             PopulateBankAccount(entity, true, 2);
 
+			uow.StartTransaction();
             await uow.ModifyAsync(entity);
             await uow.CommitAsync();
 
@@ -203,6 +205,7 @@ namespace RepositoryEFDotnet.UnitTest
 			
 			Assert.IsNotNull(entity, "BankAccount not found to remove");
 			
+			uow.StartTransaction();
             uow.Remove(entity);
             uow.Commit();
 
@@ -216,6 +219,7 @@ namespace RepositoryEFDotnet.UnitTest
 			
 			Assert.IsNotNull(entity, "BankAccount not found to remove");
 			
+			uow.StartTransaction();
             await uow.RemoveAsync(entity);
             await uow.CommitAsync();
 
@@ -227,6 +231,7 @@ namespace RepositoryEFDotnet.UnitTest
         {			
             var entitiesToRemove = uow.GetAll<BankAccount>();
 			
+			uow.StartTransaction();
             uow.RemoveRange(entitiesToRemove);
             uow.Commit();
 
@@ -238,6 +243,7 @@ namespace RepositoryEFDotnet.UnitTest
         {			
             var entitiesToRemove = await uow.GetAllAsync<BankAccount>();
 			
+			uow.StartTransaction();
             await uow.RemoveRangeAsync(entitiesToRemove);
             await uow.CommitAsync();
 

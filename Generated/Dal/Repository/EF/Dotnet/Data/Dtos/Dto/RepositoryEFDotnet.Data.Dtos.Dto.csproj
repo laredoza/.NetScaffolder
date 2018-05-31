@@ -5,7 +5,4 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Interfaces\Interface\RepositoryEFDotnet.Data.Interface.ModelInterfaces.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Dto\" />
-  </ItemGroup>
 </Project>

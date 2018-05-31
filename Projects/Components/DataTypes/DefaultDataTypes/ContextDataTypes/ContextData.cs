@@ -27,7 +27,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
         /// <summary>
         ///     The exluded relationships.
         /// </summary>
-        private List<Relationship> exludedRelationships;
+        private readonly List<Relationship> exludedRelationships;
 
         #endregion
 
@@ -38,8 +38,8 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
         /// </summary>
         public ContextData()
         {
+            this.exludedRelationships = new List<Relationship>();
             this.Models = new List<Table>();
-            this.ExcludedRelationships = new List<Relationship>();
             this.OutputFolder = "Context";
             this.ContextName = "NewContext";
             this.CustomConnectionName = string.Empty;
@@ -63,38 +63,26 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
         /// </summary>
         public string CustomConnectionName { get; set; }
 
-        /// <summary>
-        ///     Gets the excluded relationships.
-        /// </summary>
-        [XmlIgnore]
-        public List<Relationship> ExcludedRelationships
+        public List<Relationship> ExcludedRelationships(List<Table> models)
         {
-            get
+            if (!this.exludedRelationships.Any())
             {
-                if (!this.exludedRelationships.Any())
+                foreach (var model in models)
                 {
-                    foreach (var model in this.Models)
+                    foreach (var rel in model.Relationships.Where(o => o.Render))
                     {
-                        foreach (var rel in model.Relationships.Where(o => o.Render))
+                        if (!this.exludedRelationships.Any(
+                                o => o.SchemaName == rel.SchemaName && o.ReferencedTableName == rel.ReferencedTableName)
+                            && !this.Models.Any(
+                                o => o.SchemaName == rel.SchemaName && o.TableName == rel.ReferencedTableName))
                         {
-                            if (!this.exludedRelationships.Any(
-                                    o => o.SchemaName == rel.SchemaName
-                                         && o.ReferencedTableName == rel.ReferencedTableName) && !this.Models.Any(
-                                    o => o.SchemaName == rel.SchemaName && o.TableName == rel.ReferencedTableName))
-                            {
-                                this.exludedRelationships.Add(rel);
-                            }
+                            this.exludedRelationships.Add(rel);
                         }
                     }
                 }
-
-                return this.exludedRelationships;
             }
 
-            private set
-            {
-                this.exludedRelationships = value;
-            }
+            return this.exludedRelationships;
         }
 
         /// <summary>

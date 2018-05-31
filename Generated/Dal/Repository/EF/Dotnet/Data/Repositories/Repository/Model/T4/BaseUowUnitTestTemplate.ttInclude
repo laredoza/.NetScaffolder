@@ -123,16 +123,16 @@ namespace RepositoryEFDotnet.UnitTest
                 seed++;
             }
 
+			uow.StartTransaction();
             uow.AddRange(list);
             uow.Commit();
 
             var entities = uow.GetAll<<#= mdl.TableName #>>().ToList();
             this.Check_EntityCount(count, entities.Count(), "Incorrect number of <#= mdl.TableName #> found");
 
-            for (var index = 1; index <= count; index++)
+            foreach(var item in list)
 			{
-				int id = index + startSeed - 1;
-                this.Check_<#= mdl.TableName #>(list.FirstOrDefault(o => o.<#= pk.ColumnName #> == id),entities.FirstOrDefault(o => o.<#= pk.ColumnName #> == id));
+                this.Check_<#= mdl.TableName #>(item,entities.FirstOrDefault(o => o.<#= pk.ColumnName #> == item.<#= pk.ColumnName #>));
 			}
         }
 		
@@ -148,16 +148,16 @@ namespace RepositoryEFDotnet.UnitTest
                 seed++;
             }
 
+			uow.StartTransaction();
             await uow.AddRangeAsync(list);
             await uow.CommitAsync();
 
             var entities = await uow.GetAllAsync<<#= mdl.TableName #>>();
             this.Check_EntityCount(count, entities.Count(), "Incorrect number of <#= mdl.TableName #> found");
 
-            for (var index = 1; index <= count; index++)
+            foreach(var item in list)
 			{
-				int id = index + startSeed - 1;
-                this.Check_<#= mdl.TableName #>(list.FirstOrDefault(o => o.<#= pk.ColumnName #> == id),entities.FirstOrDefault(o => o.<#= pk.ColumnName #> == id));
+                this.Check_<#= mdl.TableName #>(item,entities.FirstOrDefault(o => o.<#= pk.ColumnName #> == item.<#= pk.ColumnName #>));
 			}
         }
 		
@@ -178,6 +178,7 @@ namespace RepositoryEFDotnet.UnitTest
 			Assert.IsNotNull(entityToUpdate, $"<#= mdl.TableName #> could not be found for <#= pk.ColumnName #> = {id}");
             Populate<#= mdl.TableName #>(entityToUpdate, true, 2);
 
+			uow.StartTransaction();
             uow.Modify(entityToUpdate);
             uow.Commit();
 
@@ -191,6 +192,7 @@ namespace RepositoryEFDotnet.UnitTest
             var entity = new <#= mdl.TableName #>();
             Populate<#= mdl.TableName #>(entity, true, 2);
 
+			uow.StartTransaction();
             await uow.ModifyAsync(entity);
             await uow.CommitAsync();
 
@@ -205,6 +207,7 @@ namespace RepositoryEFDotnet.UnitTest
 			
 			Assert.IsNotNull(entity, "<#= mdl.TableName #> not found to remove");
 			
+			uow.StartTransaction();
             uow.Remove(entity);
             uow.Commit();
 
@@ -218,6 +221,7 @@ namespace RepositoryEFDotnet.UnitTest
 			
 			Assert.IsNotNull(entity, "<#= mdl.TableName #> not found to remove");
 			
+			uow.StartTransaction();
             await uow.RemoveAsync(entity);
             await uow.CommitAsync();
 
@@ -229,6 +233,7 @@ namespace RepositoryEFDotnet.UnitTest
         {			
             var entitiesToRemove = uow.GetAll<<#= mdl.TableName #>>();
 			
+			uow.StartTransaction();
             uow.RemoveRange(entitiesToRemove);
             uow.Commit();
 
@@ -240,6 +245,7 @@ namespace RepositoryEFDotnet.UnitTest
         {			
             var entitiesToRemove = await uow.GetAllAsync<<#= mdl.TableName #>>();
 			
+			uow.StartTransaction();
             await uow.RemoveRangeAsync(entitiesToRemove);
             await uow.CommitAsync();
 

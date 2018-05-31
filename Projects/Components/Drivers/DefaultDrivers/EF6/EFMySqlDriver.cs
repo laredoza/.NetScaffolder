@@ -43,7 +43,8 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6
         /// <summary>
         ///     Gets the name spaces used to generate templates.
         /// </summary>
-        public List<string> NameSpaces => new List<string> { "System.Data.Entity", "MySql.Data.Entity" };
+        public List<string> NameSpaces =>
+            new List<string> { "System.Data.Entity", "System.Data.Entity.ModelConfiguration", "MySql.Data.Entity" };
 
         /// <summary>
         ///     The parent folder.

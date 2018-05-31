@@ -57,8 +57,8 @@ namespace Banking.Models.Entity
 		
 		#region Fields
 		
-		public int CountryId { get; set; }
-		public string CountryName { get; set; }
+		public virtual int CountryId { get; set; }
+		public virtual string CountryName { get; set; }
 
 		#endregion
 

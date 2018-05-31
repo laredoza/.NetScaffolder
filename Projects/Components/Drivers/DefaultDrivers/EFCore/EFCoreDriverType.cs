@@ -175,7 +175,7 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EFCore
         /// </exception>
         public string TransformColumnPrecision(Column col)
         {
-            if ((col.Precision > 0 && !col.InValidPrecisionGeneration) || col.Scale > 0)
+            if (!col.InValidPrecisionGeneration && (col.Precision > 0 || col.Scale > 0))
             {
                 return $".HasColumnType(\"{CSharpOutputMapper.MapToConstraint(col)}\")";
             }
@@ -265,12 +265,12 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EFCore
             if (rel.ReferencedMultiplicity == RelationshipMultiplicity.Many)
             {
                 sb.Append(
-                    $"modelBuilder.Entity<{this.TransformModelName(table, nc)}>().HasMany<{this.TransformModelName(rel.ReferencedTableName, nc)}>(s => s.{refTableName})");
+                    $"builder.HasMany<{this.TransformModelName(rel.ReferencedTableName, nc)}>(s => s.{refTableName})");
             }
             else
             {
                 sb.Append(
-                    $"modelBuilder.Entity<{this.TransformModelName(table, nc)}>().HasOne<{this.TransformModelName(rel.ReferencedTableName, nc)}>(s => s.{refTableName})");
+                    $"builder.HasOne<{this.TransformModelName(rel.ReferencedTableName, nc)}>(s => s.{refTableName})");
             }
 
             string parentTableName = table;

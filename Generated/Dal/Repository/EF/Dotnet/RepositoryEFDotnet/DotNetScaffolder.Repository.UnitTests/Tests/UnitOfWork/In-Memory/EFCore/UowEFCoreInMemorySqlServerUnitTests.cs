@@ -11,6 +11,7 @@ namespace RepositoryEFDotnet.UnitTest
     using Banking.Models.Context.Core;
 
     using Microsoft.EntityFrameworkCore;
+    using Microsoft.EntityFrameworkCore.Diagnostics;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     using RepositoryEFDotnet.Core.Base;
@@ -56,11 +57,9 @@ namespace RepositoryEFDotnet.UnitTest
         public override void RunAll()
         {
             string dbInstance = "EFCORE_Sql";
-            var options = new DbContextOptionsBuilder<SqlServerFullContext>().UseInMemoryDatabase(dbInstance).Options;
+            var options = new DbContextOptionsBuilder<SqlServerFullContext>().UseInMemoryDatabase(dbInstance).ConfigureWarnings(w => w.Ignore(InMemoryEventId.TransactionIgnoredWarning)).Options;
             using (var context = new SqlServerFullContext(options))
             {
-                context.Database.EnsureDeleted();
-                context.Database.EnsureCreated();
                 this.BaseUnitOfWorkUnitTests_BankAccount_RunAll(context);
             }
         }
@@ -75,12 +74,12 @@ namespace RepositoryEFDotnet.UnitTest
         public override async Task RunAllAsync()
         {
             string dbInstance = "EFCORE_SqlAsync";
-            var options = new DbContextOptionsBuilder<SqlServerFullContext>().UseInMemoryDatabase(dbInstance).Options;
+            var options = new DbContextOptionsBuilder<SqlServerFullContext>().UseInMemoryDatabase(dbInstance).ConfigureWarnings(w => w.Ignore(InMemoryEventId.TransactionIgnoredWarning)).Options;
 
             using (var context = new SqlServerFullContext(options))
             {
-                context.Database.EnsureDeleted();
-                context.Database.EnsureCreated();
+                await context.Database.EnsureDeletedAsync();
+                await context.Database.EnsureCreatedAsync();
                 await this.BaseUnitOfWorkUnitTests_BankAccount_RunAllAsync(context);
             }
         }

@@ -5,6 +5,9 @@
     {
         public ContextDataType DataType {get;set;}
         public EntityDataType EntityDataType {get;set;}
+		public List<Table> Models { get; set; }
+		public string MappingNamespace { get; set;}
+		public string MappingPostFix { get; set; }
 
         protected override void RunCore()
         {
@@ -28,11 +31,16 @@
 		
 		private void GenerateEFContext(IDriver driver, ContextData contextData)
 		{	
+			var contextModels = Models.Where(o => contextData.Models.Exists(x => x.SchemaName == o.SchemaName && x.TableName == o.TableName)).ToList();
+		
 			var template = new ContextTemplate();
 		    template.DataType = DataType;
             template.EntityNamespace = EntityDataType.FullNamespace;
 			template.ContextData = contextData;
 			template.Driver = driver;
+			template.MappingNamespace = MappingNamespace;
+			template.MappingPostFix = MappingPostFix;
+			template.Models = contextModels;
 
 			if(!string.IsNullOrEmpty(contextData.OutputPath))
 			{
@@ -44,11 +52,16 @@
 		
 		private void GenerateEFCoreContext(IDriver driver, ContextData contextData)
 		{	
+			var contextModels = Models.Where(o => contextData.Models.Exists(x => x.SchemaName == o.SchemaName && x.TableName == o.TableName)).ToList();
+			
 			var template = new ContextCoreTemplate();
 		    template.DataType = DataType;
             template.EntityNamespace = EntityDataType.FullNamespace;
 			template.ContextData = contextData;
 			template.Driver = driver;
+			template.MappingNamespace = MappingNamespace;
+			template.MappingPostFix = MappingPostFix;
+			template.Models = contextModels;
 
 			if(!string.IsNullOrEmpty(contextData.OutputPath))
 			{

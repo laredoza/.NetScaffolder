@@ -63,12 +63,12 @@ namespace Banking.Models.Entity
 		
 		#region Fields
 		
-		public int ProductId { get; set; }
-		public string ProductDescription { get; set; }
-		public Nullable<decimal> UnitPrice { get; set; }
-		public string UnitAmount { get; set; }
-		public string Publisher { get; set; }
-		public Nullable<short> AmountInStock { get; set; }
+		public virtual int ProductId { get; set; }
+		public virtual string ProductDescription { get; set; }
+		public virtual Nullable<decimal> UnitPrice { get; set; }
+		public virtual string UnitAmount { get; set; }
+		public virtual string Publisher { get; set; }
+		public virtual Nullable<short> AmountInStock { get; set; }
 
 		#endregion
 

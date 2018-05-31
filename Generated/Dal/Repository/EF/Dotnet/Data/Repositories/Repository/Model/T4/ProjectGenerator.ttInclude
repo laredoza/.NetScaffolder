@@ -5,6 +5,7 @@
 <#@ include file="DtoGenerator.ttInclude" #>
 <#@ include file="RepoInterfaceGenerator.ttInclude" #>
 <#@ include file="RepositoryGenerator.ttInclude" #>
+<#@ include file="MappingGenerator.ttInclude" #>
 <#@ include file="BaseUnitTestGenerator.ttInclude" #>
 <#+
     public class ProjectGenerator : BaseProjectGenerator
@@ -36,10 +37,32 @@
                 if(dataType is ContextDataType)
                 {
                     Debugger.Break();
+					
                     var contxtGen = new ContextGenerator();
+					
+					contxtGen.Models = domain.Tables;
                     contxtGen.DataType = dataType as ContextDataType;
                     contxtGen.EntityDataType = dataTypes.FirstOrDefault(o => o is EntityDataType) as EntityDataType;
+					contxtGen.MappingNamespace = dataType.BaseNamespace + ".Mappings";
+					contxtGen.MappingPostFix = new MappingGenerator().MappingPostFix;
                     contxtGen.Run();
+					
+					var mappingGen = new MappingGenerator();
+					
+					foreach(var contextData in contxtGen.DataType.Contexts)
+					{					
+						if(contextData != null)
+						{
+							mappingGen.Models = domain.Tables.Where(o => contextData.Models.Exists(x => x.SchemaName == o.SchemaName && x.TableName == o.TableName)).ToList();;
+							mappingGen.Drivers = dataType.Drivers;
+							mappingGen.ProjectOutputPath = contextData.OutputPath;
+							mappingGen.EntityNamespace = contxtGen.EntityDataType.FullNamespace;
+							mappingGen.MappingNamespace = dataType.BaseNamespace + ".Mappings";
+							mappingGen.NamingConvention = dataType.NamingConvention;
+							mappingGen.ContextData = contextData;
+							mappingGen.Run();
+						}
+					}
                 }
 			
                 if(dataType is RepoInterfaceDataType)

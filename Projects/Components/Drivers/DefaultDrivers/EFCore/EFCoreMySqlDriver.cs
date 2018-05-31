@@ -43,7 +43,7 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EFCore
             new List<string>
                 {
                     "Microsoft.EntityFrameworkCore",
-                    //"MySql.Data.EntityFrameworkCore.Extensions",
+                    "Microsoft.EntityFrameworkCore.Metadata.Builders",
                     "RepositoryEFDotnet.Contexts.EFCore",
                     "System.Configuration"
                 };

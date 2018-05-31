@@ -19,11 +19,13 @@
 // *******************************************************************
 
 using System.Data.Entity;
+using System.Data.Entity.ModelConfiguration;
 using Oracle.ManagedDataAccess.Client;
 using Oracle.Config;
 using RepositoryEFDotnet.Library;
 using System.ComponentModel.DataAnnotations.Schema;
 using Banking.Models.Entity;
+using Banking.Models.Mappings.Oracle;
 using System.Data.Common;
 
 
@@ -55,46 +57,16 @@ namespace Banking.Models.Customers
         {
             base.OnModelCreating(modelBuilder);
 			
-			#region Tables
+			#region Mappings
 			
-			modelBuilder.Entity<Book>().ToTable("Book", "DBO");
-			modelBuilder.Entity<Country>().ToTable("Country", "DBO");
-			modelBuilder.Entity<Customer>().ToTable("Customer", "DBO");
-			modelBuilder.Entity<Order>().ToTable("Order", "DBO");
-			modelBuilder.Entity<OrderDetails>().ToTable("OrderDetails", "DBO");
-			modelBuilder.Entity<Product>().ToTable("Product", "DBO");
-			modelBuilder.Entity<Software>().ToTable("Software", "DBO");
+			modelBuilder.Configurations.Add(new BookMap());
+			modelBuilder.Configurations.Add(new CountryMap());
+			modelBuilder.Configurations.Add(new CustomerMap());
+			modelBuilder.Configurations.Add(new OrderMap());
+			modelBuilder.Configurations.Add(new OrderDetailsMap());
+			modelBuilder.Configurations.Add(new ProductMap());
+			modelBuilder.Configurations.Add(new SoftwareMap());
 
-			#endregion
-			
-			#region Primary keys
-			
-			modelBuilder.Entity<Book>().HasKey(t => t.ProductId);
-			modelBuilder.Entity<Book>().Property(t => t.ProductId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
-			modelBuilder.Entity<Country>().HasKey(t => t.CountryId);
-			modelBuilder.Entity<Country>().Property(t => t.CountryId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
-			modelBuilder.Entity<Customer>().HasKey(t => t.CustomerId);
-			modelBuilder.Entity<Customer>().Property(t => t.CustomerId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
-			modelBuilder.Entity<Order>().HasKey(t => t.OrderId);
-			modelBuilder.Entity<Order>().Property(t => t.OrderId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
-			modelBuilder.Entity<OrderDetails>().HasKey(t => t.OrderDetailsId);
-			modelBuilder.Entity<OrderDetails>().Property(t => t.OrderDetailsId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
-			modelBuilder.Entity<Product>().HasKey(t => t.ProductId);
-			modelBuilder.Entity<Product>().Property(t => t.ProductId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
-			modelBuilder.Entity<Software>().HasKey(t => t.ProductId);
-			modelBuilder.Entity<Software>().Property(t => t.ProductId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
-
-			#endregion
-			
-			#region Included Relationships
-			
-			modelBuilder.Entity<Country>().HasMany<Customer>(s => s.Customer).WithOptional(s => s.Country).HasForeignKey(s => s.CountryId).WillCascadeOnDelete(false);
-			modelBuilder.Entity<Customer>().HasMany<Order>(s => s.Order).WithOptional(s => s.Customer).HasForeignKey(s => s.CustomerId).WillCascadeOnDelete(false);
-			modelBuilder.Entity<Order>().HasMany<OrderDetails>(s => s.OrderDetails).WithRequired(s => s.Order).HasForeignKey(s => s.OrderId).WillCascadeOnDelete(false);
-			modelBuilder.Entity<Product>().HasOptional<Book>(s => s.Book).WithRequired(s => s.Product).WillCascadeOnDelete(false);
-			modelBuilder.Entity<Product>().HasMany<OrderDetails>(s => s.OrderDetails).WithRequired(s => s.Product).HasForeignKey(s => s.ProductId).WillCascadeOnDelete(false);
-			modelBuilder.Entity<Product>().HasOptional<Software>(s => s.Software).WithRequired(s => s.Product).WillCascadeOnDelete(false);
-			
 			#endregion
 			
 			#region Excluded Relationships
@@ -103,75 +75,7 @@ namespace Banking.Models.Customers
 			
 			modelBuilder.Ignore<BankAccount>();
 
-			#endregion
-			
-			#region Constraints
-			
-			modelBuilder.Entity<Book>().Property(t => t.ProductId).IsRequired();
-			modelBuilder.Entity<Book>().Property(t => t.Publisher).HasMaxLength(200);
-			modelBuilder.Entity<Book>().Property(t => t.Publisher).IsRequired();
-			modelBuilder.Entity<Country>().Property(t => t.CountryId).IsRequired();
-			modelBuilder.Entity<Country>().Property(t => t.CountryName).HasMaxLength(100);
-			modelBuilder.Entity<Country>().Property(t => t.CountryName).IsOptional();
-			modelBuilder.Entity<Customer>().Property(t => t.CustomerId).IsRequired();
-			modelBuilder.Entity<Customer>().Property(t => t.CustomerCode).HasMaxLength(5);
-			modelBuilder.Entity<Customer>().Property(t => t.CustomerCode).IsRequired();
-			modelBuilder.Entity<Customer>().Property(t => t.CompanyName).HasMaxLength(50);
-			modelBuilder.Entity<Customer>().Property(t => t.CompanyName).IsRequired();
-			modelBuilder.Entity<Customer>().Property(t => t.ContactName).HasMaxLength(50);
-			modelBuilder.Entity<Customer>().Property(t => t.ContactName).IsOptional();
-			modelBuilder.Entity<Customer>().Property(t => t.ContactTitle).HasMaxLength(50);
-			modelBuilder.Entity<Customer>().Property(t => t.ContactTitle).IsOptional();
-			modelBuilder.Entity<Customer>().Property(t => t.Address).HasMaxLength(50);
-			modelBuilder.Entity<Customer>().Property(t => t.Address).IsOptional();
-			modelBuilder.Entity<Customer>().Property(t => t.City).HasMaxLength(20);
-			modelBuilder.Entity<Customer>().Property(t => t.City).IsOptional();
-			modelBuilder.Entity<Customer>().Property(t => t.PostalCode).HasMaxLength(10);
-			modelBuilder.Entity<Customer>().Property(t => t.PostalCode).IsOptional();
-			modelBuilder.Entity<Customer>().Property(t => t.Telephone).HasMaxLength(50);
-			modelBuilder.Entity<Customer>().Property(t => t.Telephone).IsOptional();
-			modelBuilder.Entity<Customer>().Property(t => t.Fax).HasMaxLength(50);
-			modelBuilder.Entity<Customer>().Property(t => t.Fax).IsOptional();
-			modelBuilder.Entity<Customer>().Property(t => t.CountryId).IsOptional();
-			modelBuilder.Entity<Customer>().Property(t => t.Photo).HasMaxLength(2147483647);
-			modelBuilder.Entity<Customer>().Property(t => t.Photo).IsOptional();
-			modelBuilder.Entity<Customer>().Property(t => t.IsEnabled).IsRequired();
-			modelBuilder.Entity<Order>().Property(t => t.OrderId).IsRequired();
-			modelBuilder.Entity<Order>().Property(t => t.CustomerId).IsOptional();
-			modelBuilder.Entity<Order>().Property(t => t.OrderDate).IsOptional();
-			modelBuilder.Entity<Order>().Property(t => t.DeliveryDate).IsOptional();
-			modelBuilder.Entity<Order>().Property(t => t.ShippingName).HasMaxLength(50);
-			modelBuilder.Entity<Order>().Property(t => t.ShippingName).IsOptional();
-			modelBuilder.Entity<Order>().Property(t => t.ShippingAddress).HasMaxLength(50);
-			modelBuilder.Entity<Order>().Property(t => t.ShippingAddress).IsOptional();
-			modelBuilder.Entity<Order>().Property(t => t.ShippingCity).HasMaxLength(50);
-			modelBuilder.Entity<Order>().Property(t => t.ShippingCity).IsOptional();
-			modelBuilder.Entity<Order>().Property(t => t.ShippingZip).HasMaxLength(50);
-			modelBuilder.Entity<Order>().Property(t => t.ShippingZip).IsOptional();
-			modelBuilder.Entity<OrderDetails>().Property(t => t.OrderDetailsId).IsRequired();
-			modelBuilder.Entity<OrderDetails>().Property(t => t.OrderId).IsRequired();
-			modelBuilder.Entity<OrderDetails>().Property(t => t.ProductId).IsRequired();
-			modelBuilder.Entity<OrderDetails>().Property(t => t.UnitPrice).IsOptional();
-			modelBuilder.Entity<OrderDetails>().Property(t => t.UnitPrice).HasPrecision(19, 0);
-			modelBuilder.Entity<OrderDetails>().Property(t => t.Amount).IsOptional();
-			modelBuilder.Entity<OrderDetails>().Property(t => t.Discount).IsOptional();
-			modelBuilder.Entity<Product>().Property(t => t.ProductId).IsRequired();
-			modelBuilder.Entity<Product>().Property(t => t.ProductDescription).HasMaxLength(100);
-			modelBuilder.Entity<Product>().Property(t => t.ProductDescription).IsOptional();
-			modelBuilder.Entity<Product>().Property(t => t.UnitPrice).IsOptional();
-			modelBuilder.Entity<Product>().Property(t => t.UnitPrice).HasPrecision(19, 0);
-			modelBuilder.Entity<Product>().Property(t => t.UnitAmount).HasMaxLength(50);
-			modelBuilder.Entity<Product>().Property(t => t.UnitAmount).IsOptional();
-			modelBuilder.Entity<Product>().Property(t => t.Publisher).HasMaxLength(200);
-			modelBuilder.Entity<Product>().Property(t => t.Publisher).IsOptional();
-			modelBuilder.Entity<Product>().Property(t => t.AmountInStock).IsOptional();
-			modelBuilder.Entity<Software>().Property(t => t.ProductId).IsRequired();
-			modelBuilder.Entity<Software>().Property(t => t.LicenseCode).HasMaxLength(200);
-			modelBuilder.Entity<Software>().Property(t => t.LicenseCode).IsRequired();
-			
-			#endregion
-
-			
+			#endregion		
         }
 		
 		#region Db Sets

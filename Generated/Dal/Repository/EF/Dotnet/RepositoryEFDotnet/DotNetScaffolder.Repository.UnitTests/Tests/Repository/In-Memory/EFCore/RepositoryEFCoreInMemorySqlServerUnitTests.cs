@@ -12,7 +12,7 @@ namespace RepositoryEFDotnet.UnitTest
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     /// <summary>
-    /// The repository e f 6 in memory sql server unit test.
+    /// The repository ef core in memory sql server unit test.
     /// </summary>
     [TestClass]
     public class RepositoryEFCoreInMemorySqlServerUnitTest : BaseRepositoryUnitTest

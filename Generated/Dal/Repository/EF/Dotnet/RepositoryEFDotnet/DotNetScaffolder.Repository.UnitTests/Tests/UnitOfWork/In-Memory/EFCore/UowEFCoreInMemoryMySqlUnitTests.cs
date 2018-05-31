@@ -11,6 +11,7 @@ namespace RepositoryEFDotnet.UnitTest
     using Banking.Models.Context.Core;
 
     using Microsoft.EntityFrameworkCore;
+    using Microsoft.EntityFrameworkCore.Diagnostics;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     using RepositoryEFDotnet.Core.Base;
@@ -56,7 +57,7 @@ namespace RepositoryEFDotnet.UnitTest
         public override void RunAll()
         {
             string dbInstance = "EFCORE_Sql";
-            var options = new DbContextOptionsBuilder<MySqlFullContext>().UseInMemoryDatabase(dbInstance).Options;
+            var options = new DbContextOptionsBuilder<MySqlFullContext>().UseInMemoryDatabase(dbInstance).ConfigureWarnings(w => w.Ignore(InMemoryEventId.TransactionIgnoredWarning)).Options;
             using (var context = new MySqlFullContext(options))
             {
                 context.Database.EnsureDeleted();
@@ -75,7 +76,7 @@ namespace RepositoryEFDotnet.UnitTest
         public override async Task RunAllAsync()
         {
             string dbInstance = "EFCORE_SqlAsync";
-            var options = new DbContextOptionsBuilder<MySqlFullContext>().UseInMemoryDatabase(dbInstance).Options;
+            var options = new DbContextOptionsBuilder<MySqlFullContext>().UseInMemoryDatabase(dbInstance).ConfigureWarnings(w => w.Ignore(InMemoryEventId.TransactionIgnoredWarning)).Options;
 
             using (var context = new MySqlFullContext(options))
             {

@@ -6,10 +6,12 @@
 
 namespace RepositoryEFDotnet.UnitTest
 {
+    using System.Configuration;
     using System.Threading.Tasks;
 
     using Banking.Models.Context.Core;
 
+    using Microsoft.EntityFrameworkCore;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     /// <summary>
@@ -25,6 +27,8 @@ namespace RepositoryEFDotnet.UnitTest
         /// </summary>
         private const string DbConfig = "RepoTest";
 
+        private DbContextOptions<SqlServerFullContext> Options;
+
         #endregion
 
         #region Public Methods And Operators
@@ -35,7 +39,8 @@ namespace RepositoryEFDotnet.UnitTest
         [TestInitialize]
         public void Init()
         {
-            using (var context = new SqlServerFullContext(DbConfig))
+            Options = new DbContextOptionsBuilder<SqlServerFullContext>().UseSqlServer(ConfigurationManager.ConnectionStrings[DbConfig].ConnectionString).Options;
+            using (var context = new SqlServerFullContext(Options))
             {
                 context.Database.EnsureDeleted();
                 context.Database.EnsureCreated();
@@ -48,7 +53,7 @@ namespace RepositoryEFDotnet.UnitTest
         [TestMethod]
         public override void RunAll()
         {
-            using (var context = new SqlServerFullContext(DbConfig))
+            using (var context = new SqlServerFullContext(Options))
             {
                 this.BaseUnitOfWorkUnitTests_BankAccount_RunAll(context);
             }
@@ -63,7 +68,7 @@ namespace RepositoryEFDotnet.UnitTest
         [TestMethod]
         public override async Task RunAllAsync()
         {
-            using (var context = new SqlServerFullContext(DbConfig))
+            using (var context = new SqlServerFullContext(Options))
             {
                 await this.BaseUnitOfWorkUnitTests_BankAccount_RunAllAsync(context);
             }
