@@ -174,6 +174,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
         private void TxtConnection_TextChanged(object sender, EventArgs e)
         {
             this.AdoSourceUi.Options.ConnectionString = this.TxtConnection.Text;
+            this.ListViewDrivers.Items.Clear();
         }
 
         #endregion
