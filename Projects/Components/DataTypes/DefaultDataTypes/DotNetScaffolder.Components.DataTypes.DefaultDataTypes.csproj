@@ -47,6 +47,7 @@
     <Compile Include="ApplicationServiceDataTypes\ApplicationServiceDataType.cs" />
     <Compile Include="Base\BaseDataType.cs" />
     <Compile Include="ContextDataTypes\ContextData.cs" />
+    <Compile Include="ContextDataTypes\ContextDataError.cs" />
     <Compile Include="ContextDataTypes\ContextDataType.cs" />
     <Compile Include="DtoInterfaceDataTypes\DtoInterfaceDataType.cs" />
     <Compile Include="EntityDataTypes\EntityDataType.cs" />

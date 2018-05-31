@@ -43,7 +43,7 @@ namespace Banking.Models.Mappings.EF
 			Property(t => t.BankAccountNumber).HasMaxLength(10);
 			Property(t => t.BankAccountNumber).IsRequired();
 			Property(t => t.Balance).IsRequired();
-			Property(t => t.Balance).HasPrecision(19, 0);
+			Property(t => t.Balance).HasPrecision(19, 4);
 			Property(t => t.CustomerId).IsOptional();
 			Property(t => t.Locked).IsRequired();
 			
@@ -51,8 +51,7 @@ namespace Banking.Models.Mappings.EF
 
 			#region Relationships
 			
-			HasMany<BankTransfers>(s => s.BankTransfersFrom).WithRequired(s => s.FromBankAccount).HasForeignKey(s => s.FromBankAccountId).WillCascadeOnDelete(false);
-			HasMany<BankTransfers>(s => s.BankTransfersTo).WithRequired(s => s.ToBankAccount).HasForeignKey(s => s.ToBankAccountId).WillCascadeOnDelete(false);
+			HasMany<BankTransfers>(s => s.BankTransfers).WithRequired(s => s.BankAccount).HasForeignKey(s => s.ToBankAccountId).WillCascadeOnDelete(false);
 			
 			#endregion			
 	

@@ -75,16 +75,6 @@ namespace RepositoryEFDotnet.UnitTest
             Assert.AreEqual(dto.Publisher, savedEntity.Publisher, $"Customer.Publisher incorrect.");
         }		
 
-        protected virtual void Check_CompositeKeyTest(ICompositeKeyTest dto, ICompositeKeyTest savedEntity)
-        { 
-            Assert.IsNotNull(savedEntity);
-			Assert.IsNotNull(dto);
-			
-			// Test Fields
-            Assert.AreEqual(dto.PrimaryCol1, savedEntity.PrimaryCol1, $"Customer.PrimaryCol1 incorrect.");
-            Assert.AreEqual(dto.PrimaryCol2, savedEntity.PrimaryCol2, $"Customer.PrimaryCol2 incorrect.");
-        }		
-
         protected virtual void Check_Country(ICountry dto, ICountry savedEntity)
         { 
             Assert.IsNotNull(savedEntity);

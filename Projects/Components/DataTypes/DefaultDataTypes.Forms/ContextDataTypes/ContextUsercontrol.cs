@@ -194,12 +194,38 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.ContextDa
             {
                 StringBuilder sb = new StringBuilder();
 
-                foreach (Validation validation in this.DataType.ValidationResult)
+                var contextDataType = this.DataType as ContextDataType;
+                bool removed = false;
+
+                foreach (var error in contextDataType.MissingTables)
                 {
-                    sb.AppendLine(validation.Description);
+                    DialogResult result = MessageBox.Show($"Delete missing table {error.TableName} from the context {error.ContextData.ContextName}", "Missing Table", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+
+                    if (result == DialogResult.Yes)
+                    {
+                        var model = error.ContextData.Models.FirstOrDefault(m => m.TableName == error.TableName);
+                        error.ContextData.Models.Remove(model);
+                        removed = true;
+                    }
                 }
 
-                MessageBox.Show(sb.ToString(), "Invalid Context", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (removed)
+                {
+                    this.SaveConfig(parameterDictionary);
+                }
+
+                foreach (Validation validation in this.DataType.ValidationResult)
+                {
+                    if (validation.ValidationType != ValidationType.ContextMissingModels)
+                    {
+                        sb.AppendLine(validation.Description);
+                    }
+                }
+
+                if (sb.Length > 0)
+                {
+                    MessageBox.Show(sb.ToString(), "Invalid Context", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 

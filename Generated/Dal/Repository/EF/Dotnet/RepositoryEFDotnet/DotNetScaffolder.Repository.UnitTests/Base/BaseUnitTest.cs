@@ -109,17 +109,17 @@ namespace RepositoryEFDotnet.UnitTest
         /// <param name="isUpdate">
         /// The is update.
         /// </param>
-        protected virtual void PopulateCompositeKeyTest(ICompositeKeyTest item, bool isUpdate = false, int seed = 1)
-        {
-            item.PrimaryCol1 = seed;
-            item.PrimaryCol2 = seed + 1;
+        //protected virtual void PopulateCompositeKeyTest(ICompositeKeyTest item, bool isUpdate = false, int seed = 1)
+        //{
+        //    item.PrimaryCol1 = seed;
+        //    item.PrimaryCol2 = seed + 1;
 
-            if (isUpdate)
-            {
-                item.PrimaryCol1 = seed + 2;
-                item.PrimaryCol2 = seed + 3;
-            }
-        }
+        //    if (isUpdate)
+        //    {
+        //        item.PrimaryCol1 = seed + 2;
+        //        item.PrimaryCol2 = seed + 3;
+        //    }
+        //}
 
         /// <summary>
         /// The populate country.

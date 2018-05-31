@@ -25,7 +25,7 @@ namespace DotNetScaffolder.Components.Common
         {
             var output = MapToOutput(col, false);
 
-            if (col.Precision > 0 || col.Length > 0) output = $"{output}({col.Precision}, {col.Length})";
+            if (col.Precision > 0 || col.Scale > 0) output = $"{output}({col.Precision}, {col.Scale})";
 
             return output;
         }

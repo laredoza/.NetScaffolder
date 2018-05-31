@@ -152,6 +152,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
         public void TestData(object parameters, bool displayMessageOnSucceed)
         {
             Logger.Trace("Started TestData()");
+            this.ListViewDrivers.Items.Clear();
 
             if (this.SourceType.Test(this.Options))
             {
@@ -181,7 +182,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
             else
             {
                 MessageBox.Show(
-                    "Unable to Connect to Sql Server",
+                    "Unable to Connect",
                     "Test",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Information);

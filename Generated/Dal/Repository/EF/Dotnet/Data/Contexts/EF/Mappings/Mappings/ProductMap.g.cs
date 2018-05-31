@@ -43,7 +43,7 @@ namespace Banking.Models.Mappings.EF
 			Property(t => t.ProductDescription).HasMaxLength(100);
 			Property(t => t.ProductDescription).IsOptional();
 			Property(t => t.UnitPrice).IsOptional();
-			Property(t => t.UnitPrice).HasPrecision(19, 0);
+			Property(t => t.UnitPrice).HasPrecision(19, 4);
 			Property(t => t.UnitAmount).HasMaxLength(50);
 			Property(t => t.UnitAmount).IsOptional();
 			Property(t => t.Publisher).HasMaxLength(200);

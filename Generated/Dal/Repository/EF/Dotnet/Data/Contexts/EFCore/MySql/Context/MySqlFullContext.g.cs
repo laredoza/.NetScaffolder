@@ -66,7 +66,6 @@ namespace Banking.Models.Context.Core
 			modelBuilder.ApplyConfiguration(new BankAccountMap());
 			modelBuilder.ApplyConfiguration(new BankTransfersMap());
 			modelBuilder.ApplyConfiguration(new BookMap());
-			modelBuilder.ApplyConfiguration(new CompositeKeyTestMap());
 			modelBuilder.ApplyConfiguration(new CountryMap());
 			modelBuilder.ApplyConfiguration(new CustomerMap());
 			modelBuilder.ApplyConfiguration(new OrderMap());
@@ -89,7 +88,6 @@ namespace Banking.Models.Context.Core
 		public virtual DbSet<BankAccount> BankAccount { get; set; }
 		public virtual DbSet<BankTransfers> BankTransfers { get; set; }
 		public virtual DbSet<Book> Book { get; set; }
-		public virtual DbSet<CompositeKeyTest> CompositeKeyTest { get; set; }
 		public virtual DbSet<Country> Country { get; set; }
 		public virtual DbSet<Customer> Customer { get; set; }
 		public virtual DbSet<Order> Order { get; set; }

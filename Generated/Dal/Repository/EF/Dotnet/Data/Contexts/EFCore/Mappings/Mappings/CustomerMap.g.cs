@@ -59,6 +59,7 @@ namespace Banking.Models.Mappings.EFCore
 			builder.Property(t => t.Fax).HasMaxLength(50);
 			builder.Property(t => t.Fax).IsRequired(false);
 			builder.Property(t => t.CountryId).IsRequired(false);
+			builder.Property(t => t.Photo).HasMaxLength(2147483647);
 			builder.Property(t => t.Photo).IsRequired(false);
 			builder.Property(t => t.IsEnabled).IsRequired();
 			

@@ -422,6 +422,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
             AdoSourceOptions adoOptions = options as AdoSourceOptions;
             var databaseReader = new DatabaseReader(adoOptions.ConnectionString, adoOptions.ProviderName);
 
+            this.Schemas.Clear();
             IList<DatabaseTable> tables = databaseReader.TableList();
 
             foreach (var table in tables)

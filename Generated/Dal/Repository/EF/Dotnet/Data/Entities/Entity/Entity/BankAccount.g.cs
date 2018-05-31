@@ -30,8 +30,7 @@ namespace Banking.Models.Entity
 		
 		public BankAccount()
 		{
-			this.BankTransfersFrom = new List <BankTransfers>();
-			this.BankTransfersTo = new List <BankTransfers>();
+			this.BankTransfers = new List <BankTransfers>();
 		}
 		
 		public BankAccount(IBankAccount item, bool deep = false)
@@ -43,23 +42,15 @@ namespace Banking.Models.Entity
 			this.Balance = item.Balance;
 			this.CustomerId = item.CustomerId;
 			this.Locked = item.Locked;
-			this.BankTransfersFrom = new List <BankTransfers>();
-			this.BankTransfersTo = new List <BankTransfers>();
+			this.BankTransfers = new List <BankTransfers>();
 
 			if(deep)
 			{
-				if(item.BankTransfersFrom != null)
+				if(item.BankTransfers != null)
 				{
-					foreach(var childItem in item.BankTransfersFrom)
+					foreach(var childItem in item.BankTransfers)
 					{
-						this.BankTransfersFrom.Add(new BankTransfers(childItem, deep));
-					}
-				}
-				if(item.BankTransfersTo != null)
-				{
-					foreach(var childItem in item.BankTransfersTo)
-					{
-						this.BankTransfersTo.Add(new BankTransfers(childItem, deep));
+						this.BankTransfers.Add(new BankTransfers(childItem, deep));
 					}
 				}
 				if(item.Customer != null)
@@ -83,31 +74,17 @@ namespace Banking.Models.Entity
 
 		#region Child Relationships
         
-        public virtual IList<BankTransfers> BankTransfersFrom { get; set; }
+        public virtual IList<BankTransfers> BankTransfers { get; set; }
 	
-        IList<IBankTransfers> IBankAccount.BankTransfersFrom 
+        IList<IBankTransfers> IBankAccount.BankTransfers 
 		{ 
 			get
 			{
-				return (IList<IBankTransfers>)this.BankTransfersFrom;
+				return (IList<IBankTransfers>)this.BankTransfers;
 			}
 			set
 			{
-				this.BankTransfersFrom = (IList<BankTransfers>)value;
-			}			
-		}
-        
-        public virtual IList<BankTransfers> BankTransfersTo { get; set; }
-	
-        IList<IBankTransfers> IBankAccount.BankTransfersTo 
-		{ 
-			get
-			{
-				return (IList<IBankTransfers>)this.BankTransfersTo;
-			}
-			set
-			{
-				this.BankTransfersTo = (IList<BankTransfers>)value;
+				this.BankTransfers = (IList<BankTransfers>)value;
 			}			
 		}
 
