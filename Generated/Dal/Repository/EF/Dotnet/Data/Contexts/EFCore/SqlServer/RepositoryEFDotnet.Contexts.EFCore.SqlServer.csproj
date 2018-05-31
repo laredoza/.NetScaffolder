@@ -12,7 +12,6 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\Entities\Entity\RepositoryEFDotnet.Data.Entities.Entity.csproj" />
     <ProjectReference Include="..\Base\RepositoryEFDotnet.Contexts.EFCore.Base.csproj" />
-    <ProjectReference Include="..\Mappings\RepositoryEFDotnet.Contexts.EFCore.Mappings.csproj" />
   </ItemGroup>
 
 </Project>

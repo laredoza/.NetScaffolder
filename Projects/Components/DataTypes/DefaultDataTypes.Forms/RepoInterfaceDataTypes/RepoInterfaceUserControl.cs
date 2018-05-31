@@ -8,15 +8,13 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.RepoInter
 {
     #region Usings
 
+    using DotNetScaffolder.Components.Common.Contract;
+    using DotNetScaffolder.Core.Common.Validation;
+    using DotNetScaffolder.Mapping.MetaData.Domain;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.Composition;
     using System.Windows.Forms;
-
-    using DotNetScaffolder.Components.Common.Contract;
-    using DotNetScaffolder.Components.DataTypes.DefaultDataTypes.RepoInterfaceDataTypes;
-    using DotNetScaffolder.Core.Common.Validation;
-    using DotNetScaffolder.Mapping.MetaData.Domain;
 
     #endregion
 

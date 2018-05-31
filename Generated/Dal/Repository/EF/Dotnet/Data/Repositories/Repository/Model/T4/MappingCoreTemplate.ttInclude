@@ -30,7 +30,7 @@ using <#= EntityNamespace #>;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace <#= Namespace #>.EFCore
+namespace <#= Namespace #>
 {
 	public partial class <#= ModelName #><#= PostFix #> : IEntityTypeConfiguration<<#= ModelName #>>
 	{	

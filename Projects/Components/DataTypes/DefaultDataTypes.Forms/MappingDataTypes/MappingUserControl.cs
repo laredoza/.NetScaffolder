@@ -8,15 +8,13 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.Repositor
 {
     #region Usings
 
+    using DotNetScaffolder.Components.Common.Contract;
+    using DotNetScaffolder.Core.Common.Validation;
+    using DotNetScaffolder.Mapping.MetaData.Domain;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.Composition;
     using System.Windows.Forms;
-
-    using DotNetScaffolder.Components.Common.Contract;
-    using DotNetScaffolder.Components.DataTypes.DefaultDataTypes.RepositoryDataTypes;
-    using DotNetScaffolder.Core.Common.Validation;
-    using DotNetScaffolder.Mapping.MetaData.Domain;
 
     #endregion
 
@@ -143,9 +141,9 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.Repositor
         {
             if (this.DataType == null) return;
 
-            (this.DataType as RepositoryDataType).Namespace = this.txtNamespace.Text;
-            (this.DataType as RepositoryDataType).OutputFolder = this.txtOutputFolder.Text;
-            (this.DataType as RepositoryDataType).OutputPath = this.txtOutputPath.Text;
+            (this.DataType as MappingDataType).Namespace = this.txtNamespace.Text;
+            (this.DataType as MappingDataType).OutputFolder = this.txtOutputFolder.Text;
+            (this.DataType as MappingDataType).PostFix = this.txtPostfix.Text;
         }
 
         /// <summary>
@@ -155,9 +153,9 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.Repositor
         {
             if (this.DataType == null) return;
 
-            this.txtNamespace.Text = (this.DataType as RepositoryDataType).Namespace;
-            this.txtOutputFolder.Text = (this.DataType as RepositoryDataType).OutputFolder;
-            this.txtOutputPath.Text = (this.DataType as RepositoryDataType).OutputPath;
+            this.txtNamespace.Text = (this.DataType as MappingDataType).Namespace;
+            this.txtOutputFolder.Text = (this.DataType as MappingDataType).OutputFolder;
+            this.txtPostfix.Text = (this.DataType as MappingDataType).PostFix;
         }
 
         #endregion

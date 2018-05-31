@@ -4,7 +4,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.RepositoryDataTypes
+namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
 {
     #region Usings
 
@@ -46,11 +46,6 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.RepositoryDataT
         #region Public Properties
 
         /// <summary>
-        ///     Gets or sets a value indicating whether enabled.
-        /// </summary>
-        public bool Enabled { get; set; } = false;
-
-        /// <summary>
         ///     Gets the full namespace.
         /// </summary>
         [XmlIgnore]
@@ -86,10 +81,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.RepositoryDataT
         /// </summary>
         public string OutputFolder { get; set; } = "Mappings";
 
-        /// <summary>
-        ///     Gets or sets the output path.
-        /// </summary>
-        public string OutputPath { get; set; }
+        public string PostFix { get; set; } = "Map";
 
         #endregion
 
@@ -112,7 +104,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.RepositoryDataT
                 {
                     this.Namespace = appService.Namespace;
                     this.OutputFolder = appService.OutputFolder;
-                    this.OutputPath = appService.OutputPath;
+                    this.PostFix = appService.PostFix;
                 }
             }
         }

@@ -30,7 +30,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using <#= EntityNamespace #>;
 
 
-namespace <#= Namespace #>.EF
+namespace <#= Namespace #>
 {
 	public partial class <#= ModelName #><#= PostFix #> : EntityTypeConfiguration<<#= ModelName #>>
 	{	

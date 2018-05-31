@@ -50,6 +50,24 @@
     <Compile Include="Context\SqlServerAccountContext.g.cs" />
     <Compile Include="Context\SqlServerCustomerContext.g.cs" />
     <Compile Include="Context\SqlServerFullContext.g.cs" />
+    <Compile Include="Mappings\AccountContext\BankAccountMap.g.cs" />
+    <Compile Include="Mappings\AccountContext\BankTransfersMap.g.cs" />
+    <Compile Include="Mappings\CustomerContext\BookMap.g.cs" />
+    <Compile Include="Mappings\CustomerContext\CountryMap.g.cs" />
+    <Compile Include="Mappings\CustomerContext\CustomerMap.g.cs" />
+    <Compile Include="Mappings\CustomerContext\OrderDetailsMap.g.cs" />
+    <Compile Include="Mappings\CustomerContext\OrderMap.g.cs" />
+    <Compile Include="Mappings\CustomerContext\ProductMap.g.cs" />
+    <Compile Include="Mappings\CustomerContext\SoftwareMap.g.cs" />
+    <Compile Include="Mappings\FullContext\BankAccountMap.g.cs" />
+    <Compile Include="Mappings\FullContext\BankTransfersMap.g.cs" />
+    <Compile Include="Mappings\FullContext\BookMap.g.cs" />
+    <Compile Include="Mappings\FullContext\CountryMap.g.cs" />
+    <Compile Include="Mappings\FullContext\CustomerMap.g.cs" />
+    <Compile Include="Mappings\FullContext\OrderDetailsMap.g.cs" />
+    <Compile Include="Mappings\FullContext\OrderMap.g.cs" />
+    <Compile Include="Mappings\FullContext\ProductMap.g.cs" />
+    <Compile Include="Mappings\FullContext\SoftwareMap.g.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

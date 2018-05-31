@@ -6,20 +6,29 @@
 		public string ProjectOutputPath { get; set; }
         public string EntityNamespace {get;set;}
 		public List<Table> Models { get; set; }
-		public string MappingNamespace { get; set;}
-        public string MappingPostFix { get { return "Map" ;} }
-		public List<IDriver> Drivers { get; set; }
-		public INamingConvention NamingConvention { get; set; }
 		public ContextData ContextData { get; set; }
+		public MappingDataType MappingDataType {get;set;}
+		
+		public string FullNamespace
+		{
+			get
+			{
+				return string.Format("{0}.{1}", ContextData.TransformFullnamespace(MappingDataType.BaseNamespace), MappingDataType.Namespace);
+			}
+		}
 
 		private List<string> processedModels = new List<string>();
 		
+		private string projectPath = string.Empty;
+		
         protected override void RunCore()
         {					
-			foreach(IDriver driver in Drivers )
+			foreach(IDriver driver in MappingDataType.Drivers )
 			{
 				Debugger.Break();
-							
+				
+				projectPath = string.Format(ProjectOutputPath, driver.ParentFolder, driver.Prefix);
+				
 				if(driver.DriverType is EFDriverType)
 				{
 					GenerateEFMappings(driver);
@@ -34,31 +43,24 @@
 		private void GenerateEFMappings(IDriver driver)
 		{				
 			foreach(var model in Models)
-			{
-				string key = model.SchemaName+model.TableName+model.TableName+driver.ParentFolder;
-				if(processedModels.Any(o => o == key))
-				{
-					continue;
-				}
-				
-				processedModels.Add(key);
-				
-				string mappingFileName = string.Format(@"{0}\{1}{2}.g.cs", "Mappings", NamingConvention != null ? NamingConvention.ApplyNamingConvention(model.TableName) : model.TableName, MappingPostFix);
+			{				
+				MappingDataType.MetaData = model;
+				string mappingFileName = string.Format(@"{0}\{1}\{2}{3}.g.cs", MappingDataType.OutputFolder, ContextData.ContextName, MappingDataType.ModelName, MappingDataType.PostFix);
 				
 				// Generate configurations
 				var configTemplate = new MappingTemplate();
 				configTemplate.EntityNamespace = EntityNamespace;
 				configTemplate.Driver = driver;
-				configTemplate.PostFix = MappingPostFix;
-				configTemplate.Namespace = MappingNamespace;
+				configTemplate.PostFix = MappingDataType.PostFix;
+				configTemplate.Namespace = FullNamespace;
 				configTemplate.NamingConvention = NamingConvention;
 				configTemplate.Model = model;
 				configTemplate.Models = Models;
 				configTemplate.ContextData = ContextData;
 			
-				if(!string.IsNullOrEmpty(ProjectOutputPath))
+				if(!string.IsNullOrEmpty(projectPath))
 				{
-					configTemplate.Output.Project =  string.Format(ProjectOutputPath, driver.ParentFolder, "Mappings");
+					configTemplate.Output.Project =  projectPath;
 				}
 				
 				configTemplate.RenderToFile(mappingFileName);
@@ -68,31 +70,24 @@
 		private void GenerateEFCoreMappings(IDriver driver)
 		{				
 			foreach(var model in Models)
-			{
-				string key = model.SchemaName+model.TableName+model.TableName+driver.ParentFolder;
-				if(processedModels.Any(o => o == key))
-				{
-					continue;
-				}
-				
-				processedModels.Add(key);
-				
-				string mappingFileName = string.Format(@"{0}\{1}{2}.g.cs", "Mappings", NamingConvention != null ? NamingConvention.ApplyNamingConvention(model.TableName) : model.TableName, MappingPostFix);
+			{				
+				MappingDataType.MetaData = model;
+				string mappingFileName = string.Format(@"{0}\{1}\{2}{3}.g.cs", MappingDataType.OutputFolder, ContextData.ContextName, MappingDataType.ModelName, MappingDataType.PostFix);
 				
 				// Generate configurations
 				var configTemplate = new MappingCoreTemplate();
 				configTemplate.EntityNamespace = EntityNamespace;
 				configTemplate.Driver = driver;
-				configTemplate.PostFix = MappingPostFix;
-				configTemplate.Namespace = MappingNamespace;
+				configTemplate.PostFix = MappingDataType.PostFix;
+				configTemplate.Namespace = FullNamespace;
 				configTemplate.NamingConvention = NamingConvention;
 				configTemplate.Model = model;
 				configTemplate.Models = Models;
 				configTemplate.ContextData = ContextData;
 			
-				if(!string.IsNullOrEmpty(ProjectOutputPath))
+				if(!string.IsNullOrEmpty(projectPath))
 				{
-					configTemplate.Output.Project =  string.Format(ProjectOutputPath, driver.ParentFolder, "Mappings");
+					configTemplate.Output.Project =  projectPath;
 				}
 				
 				configTemplate.RenderToFile(mappingFileName);

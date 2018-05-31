@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataTypes
+namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
 {
     public class ContextDataError
     {

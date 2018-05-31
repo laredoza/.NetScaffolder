@@ -33,8 +33,8 @@
             this.txtNamespace = new System.Windows.Forms.TextBox();
             this.label30 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txtPostfix = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.txtOutputPath = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -74,8 +74,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.txtPostfix);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.txtOutputPath);
             this.groupBox1.Controls.Add(this.txtNamespace);
             this.groupBox1.Controls.Add(this.txtOutputFolder);
             this.groupBox1.Controls.Add(this.label31);
@@ -87,21 +87,22 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Repository settings";
             // 
+            // txtPostfix
+            // 
+            this.txtPostfix.Location = new System.Drawing.Point(124, 97);
+            this.txtPostfix.Name = "txtPostfix";
+            this.txtPostfix.Size = new System.Drawing.Size(121, 20);
+            this.txtPostfix.TabIndex = 61;
+            this.txtPostfix.Text = "Map";
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(37, 100);
+            this.label1.Location = new System.Drawing.Point(66, 100);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(67, 13);
-            this.label1.TabIndex = 61;
-            this.label1.Text = "Output Path:";
-            // 
-            // txtOutputPath
-            // 
-            this.txtOutputPath.Location = new System.Drawing.Point(124, 97);
-            this.txtOutputPath.Name = "txtOutputPath";
-            this.txtOutputPath.Size = new System.Drawing.Size(413, 20);
-            this.txtOutputPath.TabIndex = 60;
+            this.label1.Size = new System.Drawing.Size(38, 13);
+            this.label1.TabIndex = 60;
+            this.label1.Text = "Postfix";
             // 
             // MappingUserControl
             // 
@@ -123,7 +124,7 @@
         private System.Windows.Forms.TextBox txtNamespace;
         private System.Windows.Forms.Label label30;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.TextBox txtPostfix;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txtOutputPath;
     }
 }
