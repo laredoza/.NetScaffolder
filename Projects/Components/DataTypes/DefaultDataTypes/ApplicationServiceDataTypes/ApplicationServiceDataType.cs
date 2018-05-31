@@ -4,7 +4,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ApplicationServiceDataTypes
+namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
 {
     #region Usings
 

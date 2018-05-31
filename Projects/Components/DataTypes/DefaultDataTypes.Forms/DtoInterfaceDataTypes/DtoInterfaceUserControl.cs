@@ -8,15 +8,13 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.DtoInterf
 {
     #region Usings
 
+    using DotNetScaffolder.Components.Common.Contract;
+    using DotNetScaffolder.Core.Common.Validation;
+    using DotNetScaffolder.Mapping.MetaData.Domain;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.Composition;
     using System.Windows.Forms;
-
-    using DotNetScaffolder.Components.Common.Contract;
-    using DotNetScaffolder.Components.DataTypes.DefaultDataTypes.DtoInterfaceDataTypes;
-    using DotNetScaffolder.Core.Common.Validation;
-    using DotNetScaffolder.Mapping.MetaData.Domain;
 
     #endregion
 

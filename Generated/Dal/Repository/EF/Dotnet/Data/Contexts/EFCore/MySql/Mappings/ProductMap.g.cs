@@ -18,16 +18,11 @@
 //	USE A PARTIAL CLASS INSTEAD
 // *******************************************************************
 
+using Banking.Models.Entity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using RepositoryEFDotnet.Contexts.EFCore;
-using System.Configuration;
-using System.ComponentModel.DataAnnotations.Schema;
-using Banking.Models.Entity;
-using System.Data.Common;
 
-
-namespace Banking.Models.Mappings.MySql
+namespace Banking.Models.Customers.Mappings
 {
 	public partial class ProductMap : IEntityTypeConfiguration<Product>
 	{	

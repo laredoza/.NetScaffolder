@@ -18,17 +18,11 @@
 //	USE A PARTIAL CLASS INSTEAD
 // *******************************************************************
 
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using RepositoryEFDotnet.Contexts.EFCore;
-using System.Configuration;
-using System.ComponentModel.DataAnnotations.Schema;
 using Banking.Models.Entity;
-using System.Data.Common;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-
-namespace Banking.Models.Mappings.SqlServer
+namespace Banking.Models.Customers.Mappings
 {
 	public partial class CountryMap : IEntityTypeConfiguration<Country>
 	{	

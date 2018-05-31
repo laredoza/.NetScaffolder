@@ -51,6 +51,7 @@
     <Compile Include="ContextDataTypes\ContextDataType.cs" />
     <Compile Include="DtoInterfaceDataTypes\DtoInterfaceDataType.cs" />
     <Compile Include="EntityDataTypes\EntityDataType.cs" />
+    <Compile Include="MappingDataTypes\MappingDataType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RepoInterfaceDataTypes\RepoInterfaceDataType.cs" />
     <Compile Include="RepositoryDataTypes\RepositoryDataType.cs" />

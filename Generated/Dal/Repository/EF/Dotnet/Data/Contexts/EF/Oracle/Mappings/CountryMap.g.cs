@@ -17,18 +17,12 @@
 //	GENERATED CODE. DOT NOT MODIFY MANUALLY AS CHANGES CAN BE LOST!!!
 //	USE A PARTIAL CLASS INSTEAD
 // *******************************************************************
-
-using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration;
-using Oracle.ManagedDataAccess.Client;
-using Oracle.Config;
-using RepositoryEFDotnet.Library;
 using System.ComponentModel.DataAnnotations.Schema;
 using Banking.Models.Entity;
-using System.Data.Common;
 
 
-namespace Banking.Models.Mappings.Oracle
+namespace Banking.Models.Customers.Mappings
 {
 	public partial class CountryMap : EntityTypeConfiguration<Country>
 	{	
