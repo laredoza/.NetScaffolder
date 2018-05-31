@@ -29,7 +29,7 @@ using <#= nameSpace #>;
 using RepositoryEFDotnet.Library;
 using System.ComponentModel.DataAnnotations.Schema;
 using <#= EntityNamespace #>;
-using <#= MappingNamespace #>.<#= Driver.Prefix #>;
+using <#= MappingNamespace #>.<#= Driver.ParentFolder #>;
 using System.Data.Common;
 
 

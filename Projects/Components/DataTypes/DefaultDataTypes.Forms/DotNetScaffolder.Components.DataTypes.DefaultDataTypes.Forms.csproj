@@ -86,6 +86,12 @@
     <Compile Include="RepoInterfaceDataTypes\RepoInterfaceUserControl.Designer.cs">
       <DependentUpon>RepoInterfaceUserControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="MappingDataTypes\MappingUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MappingDataTypes\MappingUserControl.Designer.cs">
+      <DependentUpon>MappingUserControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="RepositoryDataTypes\RepositoryUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -114,6 +120,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="RepoInterfaceDataTypes\RepoInterfaceUserControl.resx">
       <DependentUpon>RepoInterfaceUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MappingDataTypes\MappingUserControl.resx">
+      <DependentUpon>MappingUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="RepositoryDataTypes\RepositoryUserControl.resx">
       <DependentUpon>RepositoryUserControl.cs</DependentUpon>

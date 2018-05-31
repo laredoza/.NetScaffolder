@@ -26,15 +26,11 @@ public class MappingCoreTemplate : BaseTemplate
 //	USE A PARTIAL CLASS INSTEAD
 // *******************************************************************
 
-<#+ foreach(var nameSpace in Driver.NameSpaces){ #>
-using <#= nameSpace #>;
-<#+ } #>
-using System.ComponentModel.DataAnnotations.Schema;
 using <#= EntityNamespace #>;
-using System.Data.Common;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-
-namespace <#= Namespace #>.<#= Driver.Prefix #>
+namespace <#= Namespace #>.EFCore
 {
 	public partial class <#= ModelName #><#= PostFix #> : IEntityTypeConfiguration<<#= ModelName #>>
 	{	

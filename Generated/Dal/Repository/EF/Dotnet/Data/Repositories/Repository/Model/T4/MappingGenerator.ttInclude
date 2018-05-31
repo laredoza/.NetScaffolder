@@ -35,7 +35,7 @@
 		{				
 			foreach(var model in Models)
 			{
-				string key = model.SchemaName+model.TableName+model.TableName+ProjectOutputPath+driver.Prefix+driver.ParentFolder;
+				string key = model.SchemaName+model.TableName+model.TableName+driver.ParentFolder;
 				if(processedModels.Any(o => o == key))
 				{
 					continue;
@@ -58,7 +58,7 @@
 			
 				if(!string.IsNullOrEmpty(ProjectOutputPath))
 				{
-					configTemplate.Output.Project =  string.Format(ProjectOutputPath, driver.ParentFolder, driver.Prefix);
+					configTemplate.Output.Project =  string.Format(ProjectOutputPath, driver.ParentFolder, "Mappings");
 				}
 				
 				configTemplate.RenderToFile(mappingFileName);
@@ -69,7 +69,7 @@
 		{				
 			foreach(var model in Models)
 			{
-				string key = model.SchemaName+model.TableName+model.TableName+ProjectOutputPath+driver.Prefix+driver.ParentFolder;
+				string key = model.SchemaName+model.TableName+model.TableName+driver.ParentFolder;
 				if(processedModels.Any(o => o == key))
 				{
 					continue;
@@ -92,7 +92,7 @@
 			
 				if(!string.IsNullOrEmpty(ProjectOutputPath))
 				{
-					configTemplate.Output.Project =  string.Format(ProjectOutputPath, driver.ParentFolder, driver.Prefix);
+					configTemplate.Output.Project =  string.Format(ProjectOutputPath, driver.ParentFolder, "Mappings");
 				}
 				
 				configTemplate.RenderToFile(mappingFileName);

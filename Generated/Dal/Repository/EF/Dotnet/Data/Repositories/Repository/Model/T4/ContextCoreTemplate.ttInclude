@@ -30,7 +30,7 @@ using <#= nameSpace #>;
 using <#= nameSpace #>;
 <#+ } #>
 using System.ComponentModel.DataAnnotations.Schema;
-using <#= MappingNamespace #>.<#= Driver.Prefix #>;
+using <#= MappingNamespace #>.<#= Driver.ParentFolder #>;
 using <#= EntityNamespace #>;
 
 namespace <#= ContextData.TransformFullnamespace(DataType.BaseNamespace) #>.Core

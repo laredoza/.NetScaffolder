@@ -25,7 +25,7 @@ using Oracle.Config;
 using RepositoryEFDotnet.Library;
 using System.ComponentModel.DataAnnotations.Schema;
 using Banking.Models.Entity;
-using Banking.Models.Mappings.Oracle;
+using Banking.Models.Mappings.EF;
 using System.Data.Common;
 
 

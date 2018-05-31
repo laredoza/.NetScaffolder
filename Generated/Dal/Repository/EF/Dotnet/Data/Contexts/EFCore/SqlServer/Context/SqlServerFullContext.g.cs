@@ -24,7 +24,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using RepositoryEFDotnet.Contexts.EFCore;
 using System.Configuration;
 using System.ComponentModel.DataAnnotations.Schema;
-using Banking.Models.Mappings.SqlServer;
+using Banking.Models.Mappings.EFCore;
 using Banking.Models.Entity;
 
 namespace Banking.Models.Context.Core
