@@ -9,6 +9,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Sources
     #region Usings
 
     using System;
+    using System.Threading;
     using System.Windows.Forms;
 
     using Common.Logging;
@@ -17,6 +18,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Sources
     using DotNetScaffolder.Components.Common.Contract.UI;
     using DotNetScaffolder.Core.Configuration;
     using DotNetScaffolder.Mapping.MetaData.Domain;
+    using SplashScreenThreaded;
 
     #endregion
 
@@ -126,10 +128,36 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Sources
 
             if (this.DataSource != null && this.sourceTypeControl.Validate().Count == 0)
             {
+                Thread splashthread = this.StartSplashScreen();
+                Thread.Sleep(100);
+                SplashScreen.UdpateStatusText("Loading schema information");
                 this.sourceTypeControl.TestData(this.SavePath, true);
+                Thread.Sleep(100);
+                this.CloseSplashScreen();
             }
 
             Logger.Trace("Test Button Click Completed");
+        }
+
+        private Thread StartSplashScreen()
+        {
+            this.Hide();
+            Thread splashthread = new Thread(new ThreadStart(SplashScreen.ShowSplashScreen));
+            splashthread.IsBackground = true;
+            splashthread.Start();
+
+            return splashthread;
+        }
+
+        private void CloseSplashScreen(bool show = true)
+        {
+            if (show)
+            {
+                this.Show();
+            }
+
+            SplashScreen.CloseSplashScreen();
+            this.Activate();
         }
 
         /// <summary>
@@ -141,11 +169,18 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Sources
 
             if (this.DataSource != null)
             {
+                Thread splashthread = this.StartSplashScreen();
+                Thread.Sleep(100);
+                SplashScreen.UdpateStatusText("Loading schema information");
+
                 this.sourceType = ScaffoldConfig.ReturnSourceType(this.DataSource.SourceTypeId);
                 this.tabPage2.Controls.Clear();
                 this.sourceTypeControl = this.sourceType.AddConfigUI(this.tabPage2) as IDataSourceUI;
                 this.sourceTypeControl.SourceType = this.sourceType;
                 this.sourceTypeControl.LoadData(this.SavePath);
+
+                Thread.Sleep(100);
+                this.CloseSplashScreen(false);
             }
             else
             {

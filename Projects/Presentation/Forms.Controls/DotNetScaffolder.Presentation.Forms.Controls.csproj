@@ -158,12 +158,14 @@
     <Compile Include="Model\ModelUserControl.Designer.cs">
       <DependentUpon>ModelUserControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="SplashForm.cs">
+    <Compile Include="SplashScreens\SplashScreen.cs" />
+    <Compile Include="SplashScreens\SplashScreenForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SplashForm.Designer.cs">
-      <DependentUpon>SplashForm.cs</DependentUpon>
+    <Compile Include="SplashScreens\SplashScreenForm.Designer.cs">
+      <DependentUpon>SplashScreenForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="SplashScreens\TypeOfMessage.cs" />
     <Compile Include="Templates\TemplateDetailsUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -242,8 +244,8 @@
     <EmbeddedResource Include="Model\ModelUserControl.resx">
       <DependentUpon>ModelUserControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SplashForm.resx">
-      <DependentUpon>SplashForm.cs</DependentUpon>
+    <EmbeddedResource Include="SplashScreens\SplashScreenForm.resx">
+      <DependentUpon>SplashScreenForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Templates\TemplateDetailsUserControl.resx">
       <DependentUpon>TemplateDetailsUserControl.cs</DependentUpon>
