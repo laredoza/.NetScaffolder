@@ -46,6 +46,7 @@
             this.DriverType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.BtnDrivers = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // ComboBoxPackages
@@ -150,7 +151,7 @@
             // 
             // BtnManageSource
             // 
-            this.BtnManageSource.Location = new System.Drawing.Point(356, 82);
+            this.BtnManageSource.Location = new System.Drawing.Point(354, 87);
             this.BtnManageSource.Name = "BtnManageSource";
             this.BtnManageSource.Size = new System.Drawing.Size(75, 23);
             this.BtnManageSource.TabIndex = 49;
@@ -160,10 +161,10 @@
             // 
             // BtnModel
             // 
-            this.BtnModel.Location = new System.Drawing.Point(355, 110);
+            this.BtnModel.Location = new System.Drawing.Point(354, 314);
             this.BtnModel.Margin = new System.Windows.Forms.Padding(2);
             this.BtnModel.Name = "BtnModel";
-            this.BtnModel.Size = new System.Drawing.Size(75, 26);
+            this.BtnModel.Size = new System.Drawing.Size(75, 24);
             this.BtnModel.TabIndex = 50;
             this.BtnModel.Text = "Models";
             this.BtnModel.UseVisualStyleBackColor = true;
@@ -171,10 +172,10 @@
             // 
             // BtnRefresh
             // 
-            this.BtnRefresh.Location = new System.Drawing.Point(434, 110);
+            this.BtnRefresh.Location = new System.Drawing.Point(434, 87);
             this.BtnRefresh.Margin = new System.Windows.Forms.Padding(2);
             this.BtnRefresh.Name = "BtnRefresh";
-            this.BtnRefresh.Size = new System.Drawing.Size(61, 25);
+            this.BtnRefresh.Size = new System.Drawing.Size(61, 23);
             this.BtnRefresh.TabIndex = 51;
             this.BtnRefresh.Text = "Refresh";
             this.BtnRefresh.UseVisualStyleBackColor = true;
@@ -214,10 +215,20 @@
             this.BtnDrivers.UseVisualStyleBackColor = true;
             this.BtnDrivers.Click += new System.EventHandler(this.BtnDrivers_Click);
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(354, 112);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 56;
+            this.button2.Text = "Update";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
             // ProjectDomainDetailsUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.BtnDrivers);
             this.Controls.Add(this.ListViewDrivers);
             this.Controls.Add(this.BtnRefresh);
@@ -235,7 +246,7 @@
             this.Controls.Add(this.TextBoxName);
             this.Controls.Add(this.label5);
             this.Name = "ProjectDomainDetailsUserControl";
-            this.Size = new System.Drawing.Size(557, 359);
+            this.Size = new System.Drawing.Size(546, 359);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -260,5 +271,6 @@
         private System.Windows.Forms.ColumnHeader DriverType;
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.Button BtnDrivers;
+        private System.Windows.Forms.Button button2;
     }
 }
