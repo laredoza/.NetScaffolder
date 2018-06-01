@@ -358,7 +358,11 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Packages
             this.AvailableTemplates.Remove(selectedTemplate);
             this.UpdateDataSource();
             this.ComboBoxSearch.Text = string.Empty;
-            this.SelectedPackage.Templates = this.DataSource.Templates;
+
+            if (this.SelectedPackage.Templates != null)
+            {
+                this.SelectedPackage.Templates = this.DataSource.Templates;
+            }
         }
 
         /// <summary>
@@ -378,7 +382,10 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Packages
             this.UpdateDataSource();
             this.ComboBoxSearch.Text = string.Empty;
 
-            this.SelectedPackage.Templates = this.DataSource.Templates;
+            if (this.SelectedPackage.Templates != null)
+            {
+                this.SelectedPackage.Templates = this.DataSource.Templates;
+            }
         }
 
         /// <summary>

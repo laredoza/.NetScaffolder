@@ -16,6 +16,7 @@ namespace DotNetScaffolder.Presentation.Forms
     using DotNetScaffolder.Core.Configuration;
     using DotNetScaffolder.Mapping.ApplicationServices;
     using DotNetScaffolder.Mapping.MetaData.Project;
+    using DotNetScaffolder.Mapping.MetaData.Project.Packages;
     using DotNetScaffolder.Presentation.Forms.Controls;
 
     #endregion
@@ -25,8 +26,6 @@ namespace DotNetScaffolder.Presentation.Forms
     /// </summary>
     public partial class Form1 : Form
     {
-        #region Fields
-
         /// <summary>
         ///     The application configuration.
         /// </summary>
@@ -42,10 +41,6 @@ namespace DotNetScaffolder.Presentation.Forms
         /// </summary>
         private string modelPath;
 
-        #endregion
-
-        #region Constructors and Destructors
-
         /// <summary>
         ///     Initializes a new instance of the <see cref="Form1" /> class.
         /// </summary>
@@ -57,10 +52,6 @@ namespace DotNetScaffolder.Presentation.Forms
             this.ConfigPath = ScaffoldConfig.ConfigPath;
             this.LoadData();
         }
-
-        #endregion
-
-        #region Public Properties
 
         /// <summary>
         ///     Gets or sets the config path.
@@ -86,10 +77,6 @@ namespace DotNetScaffolder.Presentation.Forms
                 }
             }
         }
-
-        #endregion
-
-        #region Other Methods
 
         /// <summary>
         /// The btn close_ click.
@@ -162,12 +149,13 @@ namespace DotNetScaffolder.Presentation.Forms
 
                     this.TemplateManagementUserControl1.DataSource =
                         this.applicationConfiguration.ApplicationSettings.Templates[0];
-                    
+
                     if (this.applicationService.ProjectDefinition.Domains.Count > 0)
                     {
                         this.packageUserControl1.SelectedPackage =
                             this.applicationService.ProjectDefinition.Domains[0].Package;
-                        this.packageUserControl1.DataSource = this.applicationConfiguration.ApplicationSettings.Packages[0];
+                        this.packageUserControl1.DataSource =
+                            this.applicationConfiguration.ApplicationSettings.Packages[0];
                     }
 
                     if (this.applicationConfiguration.ApplicationSettings.Templates.Count > 0)
@@ -240,7 +228,7 @@ namespace DotNetScaffolder.Presentation.Forms
         }
 
         /// <summary>
-        /// The project domain user control 1_ selected index changed.
+        /// The project domain index changed.
         /// </summary>
         /// <param name="sender">
         /// The sender.
@@ -256,11 +244,36 @@ namespace DotNetScaffolder.Presentation.Forms
                 this.projectDomainDetailsUserControl1.SelectedDomain =
                     this.applicationService.ProjectDefinition.Domains.FirstOrDefault(d => d.Id == e.Id);
 
-                this.packageUserControl1.SelectedPackage =
-                    this.projectDomainDetailsUserControl1.SelectedDomain.Package;
+                this.packageUserControl1.SelectedPackage = this.projectDomainDetailsUserControl1.SelectedDomain.Package;
+
+                if (this.projectDomainDetailsUserControl1.SelectedDomain.Package != null)
+                {
+                    var settingsPackageHierarchy = this.applicationConfiguration.ApplicationSettings.Packages[0]
+                        .Find(this.projectDomainDetailsUserControl1.SelectedDomain.Package.Id);
+
+                    var settingsPackage = settingsPackageHierarchy as Package;
+
+                    if (settingsPackage != null)
+                    {
+                        this.projectDomainDetailsUserControl1.ConfigPackage = settingsPackage;
+
+                        if (settingsPackage.Templates.Count != this.projectDomainDetailsUserControl1.SelectedDomain
+                                .Package.Templates.Count)
+                        {
+                            // Todo: Better comparison
+                            this.projectDomainDetailsUserControl1.UpdatePackageVisible = true;
+                        }
+                        else
+                        {
+                            this.projectDomainDetailsUserControl1.UpdatePackageVisible = false;
+                        }
+                    }
+                    else
+                    {
+                        this.projectDomainDetailsUserControl1.UpdatePackageVisible = false;
+                    }
+                }
             }
         }
-
-        #endregion
     }
 }
