@@ -8,7 +8,7 @@ namespace RepositoryEFDotnet.UnitTest
 {
     using System.Data.Entity;
 
-    using Banking.Models.Context;
+    using Banking.Models.Context.EF;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 

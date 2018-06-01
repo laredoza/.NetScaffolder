@@ -26,6 +26,11 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6
         #region Public Properties
 
         /// <summary>
+        /// The configuration class.
+        /// </summary>
+        public string ConfigurationClass => string.Empty;
+
+        /// <summary>
         ///     Gets the context attribute.
         /// </summary>
         public string ContextAttribute => "[DbConfigurationType(typeof(OracleDbConfiguration))]";

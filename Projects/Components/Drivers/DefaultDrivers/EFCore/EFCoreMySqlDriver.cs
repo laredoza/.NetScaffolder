@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="EFCoreSqlServerDriver.cs" company="DotnetScaffolder">
+// <copyright file="EFCoreMySqlDriver.cs" company="DotnetScaffolder">
 //   MIT
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
@@ -20,6 +20,11 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EFCore
     public class EFCoreMySqlDriver : IDriver
     {
         #region Public Properties
+
+        /// <summary>
+        /// The configuration class.
+        /// </summary>
+        public string ConfigurationClass => string.Empty;
 
         /// <summary>
         ///     Gets the context attribute.

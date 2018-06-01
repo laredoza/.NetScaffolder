@@ -33,7 +33,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using <#= MappingNamespace #>;
 using <#= EntityNamespace #>;
 
-namespace <#= ContextData.TransformFullnamespace(DataType.BaseNamespace) #>.Core
+namespace <#= ContextData.TransformFullnamespace(DataType.BaseNamespace) #>.<#= Driver.ParentFolder #>
 {
 <#+ if(!string.IsNullOrEmpty(Driver.ContextAttribute)){ #>
     <#=Driver.ContextAttribute #>

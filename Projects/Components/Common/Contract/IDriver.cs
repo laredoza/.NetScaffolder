@@ -49,6 +49,8 @@ namespace DotNetScaffolder.Components.Common.Contract
         /// </summary>
         IDriverType DriverType { get; }
 
+        string ConfigurationClass { get; }
+
         #endregion
     }
 }

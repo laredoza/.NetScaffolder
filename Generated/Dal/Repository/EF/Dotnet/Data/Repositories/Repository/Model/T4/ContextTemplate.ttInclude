@@ -33,7 +33,7 @@ using <#= MappingNamespace #>;
 using System.Data.Common;
 
 
-namespace <#= ContextData.TransformFullnamespace(DataType.BaseNamespace) #>
+namespace <#= ContextData.TransformFullnamespace(DataType.BaseNamespace) #>.<#= Driver.ParentFolder #>
 {
 <#+ if(!string.IsNullOrEmpty(Driver.ContextAttribute)){ #>
     <#=Driver.ContextAttribute #>

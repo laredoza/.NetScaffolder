@@ -9,7 +9,7 @@ namespace RepositoryEFDotnet.UnitTest
     using System.Configuration;
     using System.Threading.Tasks;
 
-    using Banking.Models.Context.Core;
+    using Banking.Models.Context.EFCore;
 
     using Microsoft.EntityFrameworkCore;
     using Microsoft.VisualStudio.TestTools.UnitTesting;

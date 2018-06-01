@@ -31,6 +31,7 @@
 <#@ import namespace="DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Base" #>
 <#@ import namespace="DotNetScaffolder.Components.Drivers.DefaultDrivers.EFCore" #>
 <#@ import namespace="DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6" #>
+<#@ import namespace="DotNetScaffolder.Components.Drivers.DefaultDrivers.NHibernate" #>
 <#@ import namespace="DotNetScaffolder.Mapping.MetaData.Enum" #>
 
 <#@ import namespace="DotNetScaffolder.Core.Configuration" #>

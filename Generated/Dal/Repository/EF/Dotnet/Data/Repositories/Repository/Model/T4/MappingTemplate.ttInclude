@@ -49,12 +49,12 @@ namespace <#= Namespace #>
 			
 <#+ if(Model.PrimaryKeyCount == 1){ var pk = Model.Columns.First(o => o.IsPrimaryKey);#>
 			HasKey(t => t.<#= pk.ColumnName #>);
-			Property(t => t.<#= pk.ColumnName #>).HasDatabaseGeneratedOption(<#=Model.TransformDatabaseGeneratedKeyType #>);
+			Property(t => t.<#= pk.ColumnName #>)<#=Driver.DriverType.TransformDbGeneratedKey(Model) #>;
 <#+ } #>
 <#+ if(Model.PrimaryKeyCount > 1){ #>
 			HasKey(t => new {<#= Model.TransformCompositeKeys(Model.Columns.Where(o => o.IsPrimaryKey), "t") #>});
 <#+ foreach(var col in Model.Columns.Where(o => o.IsPrimaryKey)){ #>
-			Property(t => t.<#= col.ColumnName #>).HasDatabaseGeneratedOption(<#=Model.TransformDatabaseGeneratedKeyType #>);
+			Property(t => t.<#= col.ColumnName #>)<#=Driver.DriverType.TransformDbGeneratedKey(Model) #>;
 <#+ } #>
 <#+ } #>
 
@@ -81,7 +81,7 @@ namespace <#= Namespace #>
 
 			#region Relationships
 			
-<#+ foreach(var rel in Model.ChildRelationships.Where(o => ContextData.HasModel(o))){ #>
+<#+ foreach(var rel in Model.Relationships.Where(o => ContextData.HasModel(o))){ #>
 			<#= Driver.DriverType.TransformRelationship(Model.TableName, rel, Models, Model.Relationships.Where(o => ContextData.HasModel(o)), NamingConvention) #>
 <#+ } #>
 			

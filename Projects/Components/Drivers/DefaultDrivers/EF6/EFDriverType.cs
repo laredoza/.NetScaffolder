@@ -254,8 +254,7 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6
 
             if (rel.ReferencedMultiplicity == RelationshipMultiplicity.Many)
             {
-                sb.Append(
-                    $"HasMany<{this.TransformModelName(rel.ReferencedTableName, nc)}>(s => s.{refTableName})");
+                sb.Append($"HasMany<{this.TransformModelName(rel.ReferencedTableName, nc)}>(s => s.{refTableName})");
             }
             else if (rel.ReferencedMultiplicity == RelationshipMultiplicity.One)
             {

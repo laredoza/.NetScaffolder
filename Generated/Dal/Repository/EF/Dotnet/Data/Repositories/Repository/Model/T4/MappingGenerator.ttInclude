@@ -1,5 +1,6 @@
 ﻿<#@ include file="MappingTemplate.ttinclude" #>
 <#@ include file="MappingCoreTemplate.ttinclude" #>
+<#@ include file="MappingNHibernateTemplate.ttinclude" #>
 <#+
     public class MappingGenerator : BaseGenerator
     {
@@ -28,24 +29,56 @@
 				Debugger.Break();
 				
 				projectPath = string.Format(ProjectOutputPath, driver.ParentFolder, driver.Prefix);
+				var contextModels = Models.Where(o => ContextData.Models.Exists(x => x.SchemaName == o.SchemaName && x.TableName == o.TableName));
 				
 				if(driver.DriverType is EFDriverType)
 				{
-					GenerateEFMappings(driver);
+					GenerateEFMappings(driver, contextModels);
 				}
 				else if(driver.DriverType is EFCoreDriverType)
 				{
-					GenerateEFCoreMappings(driver);
+					GenerateEFCoreMappings(driver, contextModels);
+				}
+				else if(driver.DriverType is NhibernateDriverType)
+				{
+					GenerateNHibernateMappings(driver, contextModels);
 				}
 			}
         }
 		
-		private void GenerateEFMappings(IDriver driver)
+		private void GenerateNHibernateMappings(IDriver driver, IEnumerable<Table> contextModels)
 		{				
-			foreach(var model in Models)
+			foreach(var model in contextModels)
 			{				
 				MappingDataType.MetaData = model;
-				string mappingFileName = string.Format(@"{0}\{1}\{2}{3}.g.cs", MappingDataType.OutputFolder, ContextData.ContextName, MappingDataType.ModelName, MappingDataType.PostFix);
+				string mappingFileName = string.Format(@"{0}\{1}\{2}{3}.g.cs", MappingDataType.OutputFolder, string.Concat(driver.Prefix, ContextData.ContextName), MappingDataType.ModelName, MappingDataType.PostFix);
+				
+				// Generate configurations
+				var configTemplate = new MappingNHibernateTemplate();
+				configTemplate.EntityNamespace = EntityNamespace;
+				configTemplate.Driver = driver;
+				configTemplate.PostFix = MappingDataType.PostFix;
+				configTemplate.Namespace = FullNamespace;
+				configTemplate.NamingConvention = NamingConvention;
+				configTemplate.Model = model;
+				configTemplate.Models = Models;
+				configTemplate.ContextData = ContextData;
+			
+				if(!string.IsNullOrEmpty(projectPath))
+				{
+					configTemplate.Output.Project =  projectPath;
+				}
+				
+				configTemplate.RenderToFile(mappingFileName);
+			}
+		}
+		
+		private void GenerateEFMappings(IDriver driver, IEnumerable<Table> contextModels)
+		{				
+			foreach(var model in contextModels)
+			{				
+				MappingDataType.MetaData = model;
+				string mappingFileName = string.Format(@"{0}\{1}\{2}{3}.g.cs", MappingDataType.OutputFolder, string.Concat(driver.Prefix, ContextData.ContextName), MappingDataType.ModelName, MappingDataType.PostFix);
 				
 				// Generate configurations
 				var configTemplate = new MappingTemplate();
@@ -67,12 +100,12 @@
 			}
 		}
 		
-		private void GenerateEFCoreMappings(IDriver driver)
+		private void GenerateEFCoreMappings(IDriver driver, IEnumerable<Table> contextModels)
 		{				
-			foreach(var model in Models)
+			foreach(var model in contextModels)
 			{				
 				MappingDataType.MetaData = model;
-				string mappingFileName = string.Format(@"{0}\{1}\{2}{3}.g.cs", MappingDataType.OutputFolder, ContextData.ContextName, MappingDataType.ModelName, MappingDataType.PostFix);
+				string mappingFileName = string.Format(@"{0}\{1}\{2}{3}.g.cs", MappingDataType.OutputFolder, string.Concat(driver.Prefix, ContextData.ContextName), MappingDataType.ModelName, MappingDataType.PostFix);
 				
 				// Generate configurations
 				var configTemplate = new MappingCoreTemplate();

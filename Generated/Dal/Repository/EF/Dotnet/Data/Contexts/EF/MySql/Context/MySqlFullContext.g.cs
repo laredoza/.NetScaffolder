@@ -28,7 +28,7 @@ using Banking.Models.Context.Mappings;
 using System.Data.Common;
 
 
-namespace Banking.Models.Context
+namespace Banking.Models.Context.EF
 {
     [DbConfigurationType(typeof(MySqlEFConfiguration))]
 	public partial class MySqlFullContext : BaseContext

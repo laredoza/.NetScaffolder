@@ -26,7 +26,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using Banking.Models.Accounts.Mappings;
 using Banking.Models.Entity;
 
-namespace Banking.Models.Accounts.Core
+namespace Banking.Models.Accounts.EFCore
 {
 	public partial class MySqlAccountContext : BaseContext
 	{	

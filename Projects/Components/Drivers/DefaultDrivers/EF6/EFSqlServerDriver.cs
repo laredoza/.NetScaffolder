@@ -26,6 +26,11 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6
         #region Public Properties
 
         /// <summary>
+        /// The configuration class.
+        /// </summary>
+        public string ConfigurationClass => string.Empty;
+
+        /// <summary>
         ///     Gets the context attribute.
         /// </summary>
         public string ContextAttribute => string.Empty;
@@ -43,7 +48,8 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6
         /// <summary>
         ///     Gets the name spaces used to generate templates.
         /// </summary>
-        public List<string> NameSpaces => new List<string> { "System.Data.Entity", "System.Data.Entity.ModelConfiguration" };
+        public List<string> NameSpaces =>
+            new List<string> { "System.Data.Entity", "System.Data.Entity.ModelConfiguration" };
 
         /// <summary>
         ///     The parent folder.

@@ -50,7 +50,7 @@
 					
 							if(mappingDataType != null)
 							{
-								mappingGen.Models = domain.Tables.Where(o => contextData.Models.Exists(x => x.SchemaName == o.SchemaName && x.TableName == o.TableName)).ToList();;
+								mappingGen.Models = domain.Tables;
 								mappingGen.ProjectOutputPath = contextData.OutputPath;
 								mappingGen.EntityNamespace = entityDataType.FullNamespace;
 								mappingGen.ContextData = contextData;

@@ -1,5 +1,6 @@
 ﻿<#@ include file="ContextTemplate.ttinclude" #>
 <#@ include file="ContextCoreTemplate.ttinclude" #>
+<#@ include file="ContextNHibernateTemplate.ttinclude" #>
 <#+
     public class ContextGenerator : BaseGenerator
     {
@@ -28,8 +29,33 @@
 				{
 					GenerateEFCoreContext(driver);
 				}
+				else if(driver.DriverType is NhibernateDriverType)
+				{
+					GenerateNHibernateContext(driver);
+				}
 			}
         }
+		
+		private void GenerateNHibernateContext(IDriver driver)
+		{	
+			var contextModels = Models.Where(o => ContextData.Models.Exists(x => x.SchemaName == o.SchemaName && x.TableName == o.TableName)).ToList();
+		
+			var template = new ContextNHibernateTemplate();
+		    template.DataType = DataType;
+            //template.EntityNamespace = EntityDataType.FullNamespace;
+			template.ContextData = ContextData;
+			template.Driver = driver;
+			template.MappingNamespace = MappingNamespace;
+			template.MappingPostFix = MappingPostFix;
+			template.Models = contextModels;
+
+			if(!string.IsNullOrEmpty(projectPath))
+			{
+				template.Output.Project =  projectPath;
+			}
+
+			template.RenderToFile(string.Format(@"{0}\{1}{2}.g.cs", ContextData.OutputFolder,driver.Prefix,ContextData.ContextName));
+		}
 		
 		private void GenerateEFContext(IDriver driver)
 		{	

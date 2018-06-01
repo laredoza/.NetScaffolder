@@ -29,7 +29,7 @@ using Banking.Models.Customers.Mappings;
 using System.Data.Common;
 
 
-namespace Banking.Models.Customers
+namespace Banking.Models.Customers.EF
 {
     [DbConfigurationType(typeof(OracleDbConfiguration))]
 	public partial class OracleCustomerContext : BaseContext

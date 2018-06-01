@@ -12,11 +12,14 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.NHibernate
     using System.Collections.Generic;
     using System.ComponentModel.Composition;
     using System.IO;
+    using System.Text;
     using System.Xml.Serialization;
 
+    using DotNetScaffolder.Components.Common;
     using DotNetScaffolder.Components.Common.Contract;
     using DotNetScaffolder.Core.Common.Serializer;
     using DotNetScaffolder.Core.Common.Validation;
+    using DotNetScaffolder.Mapping.MetaData.Enum;
     using DotNetScaffolder.Mapping.MetaData.Model;
 
     #endregion
@@ -68,7 +71,7 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.NHibernate
         /// <summary>
         ///     The id.
         /// </summary>
-        public Guid Id => new Guid("2BC1B0C4-1E41-9146-82CF-599181CE4412");
+        public Guid Id => new Guid("BB7460EE-5C1D-4E64-8515-C0DFD3752CB6");
 
         /// <summary>
         ///     Gets or sets a value indicating whether include column order.
@@ -134,7 +137,6 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.NHibernate
                     this.LazyLoadingEnabled = loadedDriverType.LazyLoadingEnabled;
                     this.LoggingEnabled = loadedDriverType.LoggingEnabled;
                     this.ProxyCreationEnabled = loadedDriverType.ProxyCreationEnabled;
-                    this.UseSeperateConfigClasses = loadedDriverType.UseSeperateConfigClasses;
                 }
             }
         }
@@ -171,7 +173,24 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.NHibernate
         /// </exception>
         public string TransformColumnPrecision(Column col)
         {
-            throw new NotImplementedException();
+            if (!col.InValidPrecisionGeneration)
+            {
+                string precisionString = string.Empty;
+
+                if (col.Precision > 0)
+                {
+                    precisionString = $".Precision({col.Precision})";
+                }
+
+                if (col.Scale > 0)
+                {
+                    precisionString = $"{precisionString}.Scale({col.Scale})";
+                }
+
+                return precisionString;
+            }
+
+            return string.Empty;
         }
 
         /// <summary>
@@ -187,7 +206,15 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.NHibernate
         /// </exception>
         public string TransformDbGeneratedKey(Table table)
         {
-            throw new NotImplementedException();
+            if (table.DatabaseGeneratedKeyType == DatabaseGeneratedKeyType.None
+                || table.DatabaseGeneratedKeyType == DatabaseGeneratedKeyType.Ignore)
+            {
+                return string.Empty;
+            }
+            else
+            {
+                return ".GeneratedBy.Identity()";
+            }
         }
 
         /// <summary>
@@ -218,7 +245,37 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.NHibernate
             IEnumerable<Relationship> relationships = null,
             INamingConvention nc = null)
         {
-            return string.Empty;
+            var sb = new StringBuilder();
+
+            string refTableName = RelationshipNameFormatting.FormatName(
+                rel.ReferencedTableName,
+                rel.RelationshipAlias,
+                nc);
+
+            if (rel.Multiplicity == RelationshipMultiplicity.Many)
+            {
+                if (rel.ReferencedMultiplicity == RelationshipMultiplicity.Many)
+                {
+                    sb.Append($"HasManyToMany(o => o.{refTableName});");
+                }
+                else
+                {
+                    sb.Append($"References(o => o.{refTableName}).Column(\"{rel.ReferencedColumnName}\").Unique();");
+                }
+            }
+            else
+            {
+                if (rel.ReferencedMultiplicity == RelationshipMultiplicity.Many)
+                {
+                    sb.Append($"HasMany(s => s.{refTableName});");
+                }
+                else
+                {
+                    sb.Append($"HasOne(s => s.{refTableName}).PropertyRef(o => o.{rel.ReferencedColumnName});");
+                }
+            }
+
+            return sb.ToString();
         }
 
         /// <summary>

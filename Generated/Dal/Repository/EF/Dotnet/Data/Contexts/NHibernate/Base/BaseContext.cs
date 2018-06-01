@@ -1,10 +1,10 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="SqlServerNHibernateContext.cs" company="DotnetScaffolder">
+// <copyright file="BaseContext.cs" company="DotnetScaffolder">
 //   MIT
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Banking.Models.Context.NHibernate
+namespace RepositoryEFDotnet.Contexts.NHibernate
 {
     using System;
     using System.Collections.Generic;
@@ -12,8 +12,15 @@ namespace Banking.Models.Context.NHibernate
     using System.Linq.Expressions;
     using System.Threading.Tasks;
 
+    using FluentNHibernate.Cfg;
+    using FluentNHibernate.Cfg.Db;
+    using FluentNHibernate.Conventions.Helpers;
+    using FluentNHibernate.Conventions.Inspections;
+
     using global::NHibernate;
+    using global::NHibernate.Cfg;
     using global::NHibernate.Linq;
+    using global::NHibernate.Tool.hbm2ddl;
 
     using RepositoryEFDotnet.Core.Base;
     using RepositoryEFDotnet.Core.Utils;
@@ -23,27 +30,32 @@ namespace Banking.Models.Context.NHibernate
     /// </summary>
     public abstract class BaseContext : IUnitOfWork
     {
-        #region Fields
-
-        /// <summary>
-        /// The current session.
-        /// </summary>
-        private ISession CurrentSession;
-
-        #endregion
-
         #region Constructors and Destructors
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BaseContext"/> class.
         /// </summary>
-        /// <param name="session">
-        /// The session.
-        /// </param>
-        protected BaseContext(ISession session)
+        protected BaseContext()
         {
-            this.CurrentSession = session;
         }
+
+        #endregion
+
+        #region Public Properties
+
+        /// <summary>
+        /// Gets the configuration.
+        /// </summary>
+        public Configuration Configuration { get; private set; }
+
+        #endregion
+
+        #region Other Properties
+
+        /// <summary>
+        /// The current session.
+        /// </summary>
+        protected ISession CurrentSession { get; set; }
 
         #endregion
 
@@ -237,7 +249,9 @@ namespace Banking.Models.Context.NHibernate
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        public virtual bool Any<TEntity>(Expression<Func<TEntity, bool>> filter = null, IEnumerable<string> includes = null)
+        public virtual bool Any<TEntity>(
+            Expression<Func<TEntity, bool>> filter = null,
+            IEnumerable<string> includes = null)
             where TEntity : class
         {
             return this.GetQueryable(includes, filter).Any();
@@ -317,6 +331,15 @@ namespace Banking.Models.Context.NHibernate
         }
 
         /// <summary>
+        /// The create database.
+        /// </summary>
+        public void CreateDatabase()
+        {
+            var export = new SchemaExport(this.Configuration);
+            export.Execute(true, true, false, this.CurrentSession?.Connection, null);
+        }
+
+        /// <summary>
         /// The dispose.
         /// </summary>
         public virtual void Dispose()
@@ -330,9 +353,18 @@ namespace Banking.Models.Context.NHibernate
                 }
 
                 // CurrentSessionContext.Unbind(_sessionFactory);
-                this.closeTransaction();
-                this.closeSession();
+                this.CloseTransaction();
+                this.CloseSession();
             }
+        }
+
+        /// <summary>
+        /// The drop database.
+        /// </summary>
+        public void DropDatabase()
+        {
+            var export = new SchemaExport(this.Configuration);
+            export.Execute(true, true, true, this.CurrentSession?.Connection, null);
         }
 
         /// <summary>
@@ -822,9 +854,71 @@ namespace Banking.Models.Context.NHibernate
         #region Other Methods
 
         /// <summary>
+        /// The configure mappings.
+        /// </summary>
+        /// <param name="config">
+        /// The config.
+        /// </param>
+        protected abstract void ConfigureMappings(MappingConfiguration config);
+
+        /// <summary>
+        /// The create session.
+        /// </summary>
+        /// <param name="config">
+        /// The config.
+        /// </param>
+        protected void CreateSession(IPersistenceConfigurer config)
+        {
+            using (var factory = Fluently.Configure().Database(config).Mappings(this.SetupConventions)
+                .Mappings(this.ConfigureMappings).ExposeConfiguration(cfg => this.Configuration = cfg)
+                .BuildSessionFactory())
+            {
+                this.CurrentSession = factory.OpenSession();
+            }
+        }
+
+        /// <summary>
+        /// The setup conventions.
+        /// </summary>
+        /// <param name="config">
+        /// The config.
+        /// </param>
+        /// <exception cref="Exception">
+        /// </exception>
+        protected virtual void SetupConventions(MappingConfiguration config)
+        {
+            config.FluentMappings.Conventions.Add(
+                ConventionBuilder.Class.Always(z => { z.BatchSize(512); }),
+                ConventionBuilder.HasMany.Always(
+                    z =>
+                        {
+                            try
+                            {
+                                IColumnInspector othercol = z.OtherSide?.Columns.FirstOrDefault();
+
+                                // if (othercol != null)
+                                // {
+                                // z.Key.Column(othercol.Name);
+                                // }
+                                z.Inverse();
+                                z.LazyLoad();
+                                z.Cascade.AllDeleteOrphan();
+                                z.BatchSize(512);
+                            }
+                            catch (Exception ex)
+                            {
+                                throw new Exception("Error mapping " + z, ex);
+                            }
+                        }),
+                ConventionBuilder.Property.When(
+                    z => z.Expect(p => p.Property.PropertyType.IsEnum),
+                    z => z.CustomType(z.Property.PropertyType)));
+        }
+
+        /// <summary>
         /// The close session.
         /// </summary>
-        private void closeSession()
+        private void CloseSession()
         {
             if (this.CurrentSession != null && this.CurrentSession.IsOpen) this.CurrentSession.Close();
             this.CurrentSession.Dispose();
@@ -834,7 +928,7 @@ namespace Banking.Models.Context.NHibernate
         /// <summary>
         /// The close transaction.
         /// </summary>
-        private void closeTransaction()
+        private void CloseTransaction()
         {
             this.CurrentSession?.Transaction?.Dispose();
         }

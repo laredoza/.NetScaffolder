@@ -8,7 +8,7 @@ namespace RepositoryEFDotnet.UnitTest
 {
     using System.Threading.Tasks;
 
-    using Banking.Models.Context.Core;
+    using Banking.Models.Context.EFCore;
 
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Diagnostics;

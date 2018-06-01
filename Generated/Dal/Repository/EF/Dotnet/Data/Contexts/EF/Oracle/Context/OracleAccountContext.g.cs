@@ -29,7 +29,7 @@ using Banking.Models.Accounts.Mappings;
 using System.Data.Common;
 
 
-namespace Banking.Models.Accounts
+namespace Banking.Models.Accounts.EF
 {
     [DbConfigurationType(typeof(OracleDbConfiguration))]
 	public partial class OracleAccountContext : BaseContext

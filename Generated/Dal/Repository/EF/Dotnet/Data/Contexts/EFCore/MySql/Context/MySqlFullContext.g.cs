@@ -26,7 +26,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using Banking.Models.Context.Mappings;
 using Banking.Models.Entity;
 
-namespace Banking.Models.Context.Core
+namespace Banking.Models.Context.EFCore
 {
 	public partial class MySqlFullContext : BaseContext
 	{	
