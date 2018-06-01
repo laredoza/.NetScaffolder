@@ -1,5 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-
+<?xml version="1.0" encoding="utf-8"?>
 <ApplicationSettings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <DataTypes />
   <Packages>
@@ -13,8 +12,8 @@
                   <Children />
                   <Enabled>true</Enabled>
                   <HierarchyType>Item</HierarchyType>
-                  <Id>3738f28b-18b7-42b4-a1e5-b1829b5fb396</Id>
-                  <Name>Entity Framework 6 (Standard)</Name>
+                  <Id>cfcb7ada-0e0e-4bcd-a4ae-3fe56d279b7d</Id>
+                  <Name>Default Repository</Name>
                   <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
                   <Selected>false</Selected>
                   <Templates>
@@ -22,8 +21,8 @@
                       <Children />
                       <Enabled>true</Enabled>
                       <HierarchyType>Item</HierarchyType>
-                      <Id>1bc1b0c4-1e41-9146-82cf-599181ce4430</Id>
-                      <Name>Entity Framework Context (v6)</Name>
+                      <Id>99d48be6-6570-465d-bc29-0793ea47233f</Id>
+                      <Name>Default Context</Name>
                       <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
                       <Selected>false</Selected>
                       <ConfigLocation>Data</ConfigLocation>
@@ -38,8 +37,24 @@
                       <Children />
                       <Enabled>true</Enabled>
                       <HierarchyType>Item</HierarchyType>
+                      <Id>07bc3131-eb4d-490b-8b5f-a68a657ef688</Id>
+                      <Name>Default Mapping</Name>
+                      <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
+                      <Selected>false</Selected>
+                      <ConfigLocation>Data</ConfigLocation>
+                      <DataType>361ac82c-8f2a-4d7c-b455-ae5effba9d4a</DataType>
+                      <DefaultSettings />
+                      <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
+                      <LanguageOutputId>1bc1b0c4-1e41-9146-82cf-599181ce4410</LanguageOutputId>
+                      <TemplatePath>Test.T4</TemplatePath>
+                      <Version>1</Version>
+                    </Template>
+                    <Template>
+                      <Children />
+                      <Enabled>true</Enabled>
+                      <HierarchyType>Item</HierarchyType>
                       <Id>1bc1b0c4-1e41-9146-82cf-599181ce4440</Id>
-                      <Name>Entity Framework Entity (v6)</Name>
+                      <Name>Default Entity</Name>
                       <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
                       <Selected>false</Selected>
                       <ConfigLocation>Data</ConfigLocation>
@@ -50,48 +65,20 @@
                       <TemplatePath>Bogus.T4</TemplatePath>
                       <Version>1</Version>
                     </Template>
-                  </Templates>
-                  <Version>0</Version>
-                </Hierarchy>
-                <Hierarchy xsi:type="Package">
-                  <Children />
-                  <Enabled>true</Enabled>
-                  <HierarchyType>Item</HierarchyType>
-                  <Id>be0b9c03-3970-4792-b440-f7512150e295</Id>
-                  <Name>Entity Framework 6 (Repository)</Name>
-                  <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
-                  <Selected>false</Selected>
-                  <Templates>
                     <Template>
                       <Children />
                       <Enabled>true</Enabled>
                       <HierarchyType>Item</HierarchyType>
-                      <Id>1bc1b0c4-1e41-9146-82cf-599181ce4430</Id>
-                      <Name>Entity Framework Context (v6)</Name>
+                      <Id>bad391c6-e8a8-45f5-b3ec-f5d57d6a6b90</Id>
+                      <Name>Default Repository Interface</Name>
                       <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
                       <Selected>false</Selected>
                       <ConfigLocation>Data</ConfigLocation>
-                      <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4430</DataType>
+                      <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4451</DataType>
                       <DefaultSettings />
                       <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
                       <LanguageOutputId>1bc1b0c4-1e41-9146-82cf-599181ce4410</LanguageOutputId>
-                      <TemplatePath>Bogus.T4</TemplatePath>
-                      <Version>1</Version>
-                    </Template>
-                    <Template>
-                      <Children />
-                      <Enabled>true</Enabled>
-                      <HierarchyType>Item</HierarchyType>
-                      <Id>1bc1b0c4-1e41-9146-82cf-599181ce4440</Id>
-                      <Name>Entity Framework Entity (v6)</Name>
-                      <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
-                      <Selected>false</Selected>
-                      <ConfigLocation>Data</ConfigLocation>
-                      <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4440</DataType>
-                      <DefaultSettings />
-                      <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
-                      <LanguageOutputId>1bc1b0c4-1e41-9146-82cf-599181ce4410</LanguageOutputId>
-                      <TemplatePath>Bogus.T4</TemplatePath>
+                      <TemplatePath>RepositoryInterface.T4</TemplatePath>
                       <Version>1</Version>
                     </Template>
                     <Template>
@@ -99,7 +86,7 @@
                       <Enabled>true</Enabled>
                       <HierarchyType>Item</HierarchyType>
                       <Id>3ab0816d-5ad5-4990-a655-a14a743e416c</Id>
-                      <Name>Entity Framework Repository</Name>
+                      <Name>Default Repository</Name>
                       <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
                       <Selected>false</Selected>
                       <ConfigLocation>Data</ConfigLocation>
@@ -114,56 +101,8 @@
                       <Children />
                       <Enabled>true</Enabled>
                       <HierarchyType>Item</HierarchyType>
-                      <Id>a832889d-7f9a-42fa-ad6b-38d184828dba</Id>
-                      <Name>Default Table</Name>
-                      <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
-                      <Selected>false</Selected>
-                      <ConfigLocation>Data</ConfigLocation>
-                      <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4490</DataType>
-                      <DefaultSettings />
-                      <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
-                      <LanguageOutputId>1bc1b0c4-1e41-9146-82cf-599181ce4410</LanguageOutputId>
-                      <TemplatePath>Table.T4</TemplatePath>
-                      <Version>1</Version>
-                    </Template>
-                    <Template>
-                      <Children />
-                      <Enabled>true</Enabled>
-                      <HierarchyType>Item</HierarchyType>
-                      <Id>f41c4006-d9d1-499b-80be-bbbbc4cb0001</Id>
-                      <Name>Entity Framework Application Service (v6)</Name>
-                      <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
-                      <Selected>false</Selected>
-                      <ConfigLocation>Data</ConfigLocation>
-                      <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4420</DataType>
-                      <DefaultSettings />
-                      <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
-                      <LanguageOutputId>1bc1b0c4-1e41-9146-82cf-599181ce4410</LanguageOutputId>
-                      <TemplatePath>ApplicationService.T4</TemplatePath>
-                      <Version>1</Version>
-                    </Template>
-                    <Template>
-                      <Children />
-                      <Enabled>true</Enabled>
-                      <HierarchyType>Item</HierarchyType>
-                      <Id>99d48be6-6570-465d-bc29-0793ea47233f</Id>
-                      <Name>Entity Framework Context (v6)</Name>
-                      <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
-                      <Selected>false</Selected>
-                      <ConfigLocation>Data</ConfigLocation>
-                      <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4430</DataType>
-                      <DefaultSettings />
-                      <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
-                      <LanguageOutputId>1bc1b0c4-1e41-9146-82cf-599181ce4410</LanguageOutputId>
-                      <TemplatePath>Bogus.T4</TemplatePath>
-                      <Version>1</Version>
-                    </Template>
-                    <Template>
-                      <Children />
-                      <Enabled>true</Enabled>
-                      <HierarchyType>Item</HierarchyType>
                       <Id>a3e5f98c-ac76-40fd-9896-1a3d19dabefe</Id>
-                      <Name>Dto Interface</Name>
+                      <Name>Default Dto Interface</Name>
                       <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
                       <Selected>false</Selected>
                       <ConfigLocation>Data</ConfigLocation>
@@ -178,87 +117,30 @@
                       <Children />
                       <Enabled>true</Enabled>
                       <HierarchyType>Item</HierarchyType>
-                      <Id>bad391c6-e8a8-45f5-b3ec-f5d57d6a6b90</Id>
-                      <Name>Repository Interface</Name>
+                      <Id>a832889d-7f9a-42fa-ad6b-38d184828dba</Id>
+                      <Name>Default Dto</Name>
                       <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
                       <Selected>false</Selected>
                       <ConfigLocation>Data</ConfigLocation>
-                      <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4451</DataType>
+                      <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4490</DataType>
                       <DefaultSettings />
                       <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
                       <LanguageOutputId>1bc1b0c4-1e41-9146-82cf-599181ce4410</LanguageOutputId>
-                      <TemplatePath>RepositoryInterface.T4</TemplatePath>
+                      <TemplatePath>Table.T4</TemplatePath>
                       <Version>1</Version>
                     </Template>
                   </Templates>
-                  <Version>0</Version>
+                  <Version>1</Version>
                 </Hierarchy>
               </Children>
               <Enabled>true</Enabled>
               <HierarchyType>Group</HierarchyType>
               <Id>9777af5c-429a-4297-b6da-853b6b4a4b90</Id>
-              <Name>Entity Framework Microsoft</Name>
+              <Name>Repository</Name>
               <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
               <Selected>false</Selected>
               <Templates />
               <Version>0</Version>
-            </Hierarchy>
-            <Hierarchy xsi:type="Package">
-              <Children>
-                <Hierarchy xsi:type="Package">
-                  <Children />
-                  <Enabled>true</Enabled>
-                  <HierarchyType>Item</HierarchyType>
-                  <Id>9393df85-34f8-447a-ab99-cf58f21b0cb8</Id>
-                  <Name>Mongo Official (Standard)</Name>
-                  <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
-                  <Selected>false</Selected>
-                  <Templates />
-                  <Version>0</Version>
-                </Hierarchy>
-              </Children>
-              <Enabled>true</Enabled>
-              <HierarchyType>Group</HierarchyType>
-              <Id>c5734e26-5226-4823-9324-b596d20fc976</Id>
-              <Name>Mongo Official</Name>
-              <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
-              <Selected>false</Selected>
-              <Templates />
-              <Version>0</Version>
-            </Hierarchy>
-            <Hierarchy xsi:type="Package">
-              <Children>
-                <Hierarchy xsi:type="Package">
-                  <Children />
-                  <Enabled>true</Enabled>
-                  <HierarchyType>Item</HierarchyType>
-                  <Id>086fbc22-f6d5-412c-b95c-ee79204c5c6b</Id>
-                  <Name>MySQL Official 6 (Standard)</Name>
-                  <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
-                  <Selected>false</Selected>
-                  <Templates />
-                  <Version>1</Version>
-                </Hierarchy>
-                <Hierarchy xsi:type="Package">
-                  <Children />
-                  <Enabled>true</Enabled>
-                  <HierarchyType>Item</HierarchyType>
-                  <Id>c6e59623-77f0-4325-b688-b38c160bbe51</Id>
-                  <Name>MySQL Official 6 (Repository)</Name>
-                  <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
-                  <Selected>false</Selected>
-                  <Templates />
-                  <Version>1</Version>
-                </Hierarchy>
-              </Children>
-              <Enabled>true</Enabled>
-              <HierarchyType>Group</HierarchyType>
-              <Id>edf7c5ca-8d30-4559-a4ab-c21536952579</Id>
-              <Name>MySQL</Name>
-              <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
-              <Selected>false</Selected>
-              <Templates />
-              <Version>1</Version>
             </Hierarchy>
           </Children>
           <Enabled>true</Enabled>
@@ -291,7 +173,7 @@
               <Enabled>true</Enabled>
               <HierarchyType>Item</HierarchyType>
               <Id>f41c4006-d9d1-499b-80be-bbbbc4cb0001</Id>
-              <Name>Entity Framework Application Service (v6)</Name>
+              <Name>Default Application Service</Name>
               <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
               <Selected>false</Selected>
               <ConfigLocation>Data</ConfigLocation>
@@ -324,7 +206,7 @@
               <Enabled>true</Enabled>
               <HierarchyType>Item</HierarchyType>
               <Id>99d48be6-6570-465d-bc29-0793ea47233f</Id>
-              <Name>Entity Framework Context (v6)</Name>
+              <Name>Default Context</Name>
               <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
               <Selected>false</Selected>
               <ConfigLocation>Data</ConfigLocation>
@@ -390,7 +272,7 @@
               <Enabled>true</Enabled>
               <HierarchyType>Item</HierarchyType>
               <Id>a3e5f98c-ac76-40fd-9896-1a3d19dabefe</Id>
-              <Name>Dto Interface</Name>
+              <Name>Default Dto Interface</Name>
               <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
               <Selected>false</Selected>
               <ConfigLocation>Data</ConfigLocation>
@@ -423,7 +305,7 @@
               <Enabled>true</Enabled>
               <HierarchyType>Item</HierarchyType>
               <Id>1bc1b0c4-1e41-9146-82cf-599181ce4440</Id>
-              <Name>Entity Framework Entity (v6)</Name>
+              <Name>Default Entity</Name>
               <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
               <Selected>false</Selected>
               <ConfigLocation>Data</ConfigLocation>
@@ -455,8 +337,41 @@
               <Children />
               <Enabled>true</Enabled>
               <HierarchyType>Item</HierarchyType>
+              <Id>07bc3131-eb4d-490b-8b5f-a68a657ef688</Id>
+              <Name>Default Mapping</Name>
+              <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
+              <Selected>false</Selected>
+              <ConfigLocation>Data</ConfigLocation>
+              <DataType>361ac82c-8f2a-4d7c-b455-ae5effba9d4a</DataType>
+              <DefaultSettings />
+              <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
+              <LanguageOutputId>1bc1b0c4-1e41-9146-82cf-599181ce4410</LanguageOutputId>
+              <TemplatePath>Test.T4</TemplatePath>
+              <Version>1</Version>
+            </Hierarchy>
+          </Children>
+          <Enabled>true</Enabled>
+          <HierarchyType>Group</HierarchyType>
+          <Id>361ac82c-8f2a-4d7c-b455-ae5effba9d4a</Id>
+          <Name>Mapping</Name>
+          <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
+          <Selected>false</Selected>
+          <ConfigLocation>Data</ConfigLocation>
+          <DataType>361ac82c-8f2a-4d7c-b455-ae5effba9d4a</DataType>
+          <DefaultSettings />
+          <GeneratorTypeId>00000000-0000-0000-0000-000000000000</GeneratorTypeId>
+          <LanguageOutputId>00000000-0000-0000-0000-000000000000</LanguageOutputId>
+          <TemplatePath />
+          <Version>1</Version>
+        </Hierarchy>
+        <Hierarchy xsi:type="Template">
+          <Children>
+            <Hierarchy xsi:type="Template">
+              <Children />
+              <Enabled>true</Enabled>
+              <HierarchyType>Item</HierarchyType>
               <Id>3ab0816d-5ad5-4990-a655-a14a743e416c</Id>
-              <Name>Entity Framework Repository</Name>
+              <Name>Default Repository</Name>
               <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
               <Selected>false</Selected>
               <ConfigLocation>Data</ConfigLocation>
@@ -489,7 +404,7 @@
               <Enabled>true</Enabled>
               <HierarchyType>Item</HierarchyType>
               <Id>bad391c6-e8a8-45f5-b3ec-f5d57d6a6b90</Id>
-              <Name>Repository Interface</Name>
+              <Name>Default Repository Interface</Name>
               <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
               <Selected>false</Selected>
               <ConfigLocation>Data</ConfigLocation>

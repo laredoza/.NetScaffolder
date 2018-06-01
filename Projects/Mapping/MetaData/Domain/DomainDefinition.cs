@@ -47,6 +47,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Domain
             this.Id = Guid.NewGuid();
             this.ValidationResult = new List<Validation>();
             this.DriverIdList = new List<Guid>();
+            this.Package = new Package();
         }
 
         #endregion

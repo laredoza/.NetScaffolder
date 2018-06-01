@@ -132,32 +132,6 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
             tables.ShowDialog();
         }
 
-        /// <summary>
-        /// The label 1_ click.
-        /// </summary>
-        /// <param name="sender">
-        /// The sender.
-        /// </param>
-        /// <param name="e">
-        /// The e.
-        /// </param>
-        private void label1_Click(object sender, EventArgs e)
-        {
-        }
-
-        /// <summary>
-        /// The panel config_ paint.
-        /// </summary>
-        /// <param name="sender">
-        /// The sender.
-        /// </param>
-        /// <param name="e">
-        /// The e.
-        /// </param>
-        private void PanelConfig_Paint(object sender, PaintEventArgs e)
-        {
-        }
-
         #endregion
     }
 }

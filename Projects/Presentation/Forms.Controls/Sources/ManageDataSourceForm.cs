@@ -18,6 +18,8 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Sources
     using DotNetScaffolder.Components.Common.Contract.UI;
     using DotNetScaffolder.Core.Configuration;
     using DotNetScaffolder.Mapping.MetaData.Domain;
+    using DotNetScaffolder.Presentation.Forms.Controls.SplashScreens;
+
     using SplashScreenThreaded;
 
     #endregion

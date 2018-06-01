@@ -18,6 +18,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Packages
     using DotNetScaffolder.Mapping.MetaData.Project.Packages;
 
     using FormControls.Enum;
+    using FormControls.TreeView;
 
     #endregion
 
@@ -242,6 +243,11 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Packages
             }
         }
 
+        /// <summary>
+        /// Gets or sets the selected package.
+        /// </summary>
+        public Package SelectedPackage { get; set; }
+
         #endregion
 
         #region Other Properties
@@ -352,8 +358,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Packages
             this.AvailableTemplates.Remove(selectedTemplate);
             this.UpdateDataSource();
             this.ComboBoxSearch.Text = string.Empty;
-
-            // this.TemplateListBox.DataSource = this.DataSource.Templates[0].ReturnTemplateItems();
+            this.SelectedPackage.Templates = this.DataSource.Templates;
         }
 
         /// <summary>
@@ -372,6 +377,8 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Packages
             this.AvailableTemplates.Add(selectedTemplate);
             this.UpdateDataSource();
             this.ComboBoxSearch.Text = string.Empty;
+
+            this.SelectedPackage.Templates = this.DataSource.Templates;
         }
 
         /// <summary>

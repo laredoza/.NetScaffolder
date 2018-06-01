@@ -1,67 +1,84 @@
-﻿using DotNetScaffolder.Presentation.Forms.Controls.SplashScreens;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
-using System.Windows.Forms;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="SplashScreen.cs" company="DotnetScaffolder">
+//   MIT
+// </copyright>
+// --------------------------------------------------------------------------------------------------------------------
 
-namespace SplashScreenThreaded
+namespace DotNetScaffolder.Presentation.Forms.Controls.SplashScreens
 {
+    #region Usings
+
+    using SplashScreenThreaded;
+
+    #endregion
+
     /// <summary>
-    /// Initiate instance of SplashScreen
+    ///     Initiate instance of SplashScreen
     /// </summary>
     public static class SplashScreen
     {
-        static SplashScreenForm sf = null;
+        #region Static Fields
 
         /// <summary>
-        /// Displays the splashscreen
+        /// The splashScreen.
         /// </summary>
-        public static void ShowSplashScreen()
+        private static SplashScreenForm splashScreen;
+
+        #endregion
+
+        #region Public Methods And Operators
+
+        /// <summary>
+        ///     Closes the SplashScreen
+        /// </summary>
+        public static void CloseSplashScreen()
         {
-            if (sf == null)
+            if (splashScreen != null)
             {
-                sf = new SplashScreenForm();
-                sf.ShowSplashScreen();
+                splashScreen.CloseSplashScreen();
+                splashScreen = null;
             }
         }
 
         /// <summary>
-        /// Closes the SplashScreen
+        ///     Displays the Splash Screen
         /// </summary>
-        public static void CloseSplashScreen()
+        public static void ShowSplashScreen()
         {
-            if (sf != null)
+            if (splashScreen == null)
             {
-                sf.CloseSplashScreen();
-                sf = null;
+                splashScreen = new SplashScreenForm();
+                splashScreen.ShowSplashScreen();
             }
         }
 
         /// <summary>
         /// Update text in default green color of success message
         /// </summary>
-        /// <param name="Text">Message</param>
+        /// <param name="Text">
+        /// Message
+        /// </param>
         public static void UdpateStatusText(string Text)
         {
-            if (sf != null)
-                sf.UdpateStatusText(Text);
-
+            if (splashScreen != null)
+                splashScreen.UdpateStatusText(Text);
         }
-        
+
         /// <summary>
         /// Update text with message color defined as green/yellow/red/ for success/warning/failure
         /// </summary>
-        /// <param name="Text">Message</param>
-        /// <param name="tom">Type of Message</param>
-        public static void UdpateStatusTextWithStatus(string Text,TypeOfMessage tom)
+        /// <param name="Text">
+        /// Message
+        /// </param>
+        /// <param name="tom">
+        /// Type of Message
+        /// </param>
+        public static void UdpateStatusTextWithStatus(string Text, TypeOfMessage tom)
         {
-            
-            if (sf != null)
-                sf.UdpateStatusTextWithStatus(Text, tom);
+            if (splashScreen != null)
+                splashScreen.UdpateStatusTextWithStatus(Text, tom);
         }
-    }
 
+        #endregion
+    }
 }

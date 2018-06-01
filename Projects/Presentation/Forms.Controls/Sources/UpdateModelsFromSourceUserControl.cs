@@ -20,6 +20,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Sources
     using DotNetScaffolder.Mapping.ApplicationServices.Tables;
     using DotNetScaffolder.Mapping.MetaData.Domain;
     using DotNetScaffolder.Mapping.MetaData.Model;
+    using DotNetScaffolder.Presentation.Forms.Controls.SplashScreens;
 
     using FormControls.TreeView;
     using SplashScreenThreaded;
