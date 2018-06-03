@@ -4,7 +4,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
+namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ApplicationServiceDataTypes
 {
     #region Usings
 
@@ -14,6 +14,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
     using System.IO;
 
     using DotNetScaffolder.Components.Common.Contract;
+    using DotNetScaffolder.Components.Common.MetaData;
     using DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Base;
     using DotNetScaffolder.Core.Common.Serializer;
     using DotNetScaffolder.Core.Common.Validation;
@@ -38,6 +39,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
         public ApplicationServiceDataType()
             : base("Application.xml")
         {
+            this.LanguageOutputDetails.Add(new LanguageOutputDetails{ LanguageOutput = new Guid("1BC1B0C4-1E41-9146-82CF-599181CE4410"), TemplateName = ""});
         }
 
         #endregion
@@ -91,10 +93,10 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
         public override Hierarchy ReturnNavigation()
         {
             return new Hierarchy
-                       {
-                           Id = new Guid("1BC1B0C4-1E41-9146-82CF-599181CE4420"),
-                           Name = "Application Service"
-                       };
+            {
+                Id = new Guid("1BC1B0C4-1E41-9146-82CF-599181CE4420"),
+                Name = "Application Service"
+            };
         }
 
         /// <summary>
@@ -122,6 +124,11 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes
         public override List<Validation> Validate()
         {
             this.ValidationResult = new List<Validation>();
+
+            if (this.LanguageOutputDetails.Count == 0)
+            {
+                this.ValidationResult.Add(new Validation(ValidationType.DataTypeLanguageMissing, "A Datatype must have at least one LanguageOption"));
+            }
 
             return this.ValidationResult;
         }

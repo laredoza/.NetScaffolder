@@ -8,8 +8,10 @@ namespace DotNetScaffolder.Components.Common.Contract
 {
     #region Usings
 
+    using System;
     using System.Collections.Generic;
 
+    using DotNetScaffolder.Components.Common.MetaData;
     using DotNetScaffolder.Core.Common.Validation;
     using DotNetScaffolder.Mapping.MetaData.Domain;
     using DotNetScaffolder.Mapping.MetaData.Model;
@@ -56,6 +58,11 @@ namespace DotNetScaffolder.Components.Common.Contract
         ///     Gets or sets the naming convention.
         /// </summary>
         INamingConvention NamingConvention { get; set; }
+
+        /// <summary>
+        /// Gets or sets the language output details.
+        /// </summary>
+        List<LanguageOutputDetails> LanguageOutputDetails { get; set; }
 
         #endregion
 

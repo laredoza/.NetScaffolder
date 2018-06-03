@@ -119,6 +119,11 @@ namespace DotNetScaffolder.Core.Common.Validation
         /// <summary>
         ///     The context name is empty.
         /// </summary>
-        ContextNameEmpty
+        ContextNameEmpty,
+
+        /// <summary>
+        /// The data type language missing.
+        /// </summary>
+        DataTypeLanguageMissing
     }
 }

@@ -67,6 +67,7 @@
     <Compile Include="DisplayType.cs" />
     <Compile Include="Formatting\RelationshipNameFormatting.cs" />
     <Compile Include="MetaData\BaseMetaData.cs" />
+    <Compile Include="MetaData\LanguageOutputDetails.cs" />
     <Compile Include="OutputMapping\CSharpOutputMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

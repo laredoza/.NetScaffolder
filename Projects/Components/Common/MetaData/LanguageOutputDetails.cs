@@ -1,27 +1,33 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ContextDataError.cs" company="DotnetScaffolder">
+// <copyright file="LanguageOutputDetails.cs" company="DotnetScaffolder">
 //   MIT
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataTypes
+namespace DotNetScaffolder.Components.Common.MetaData
 {
+    #region Usings
+
+    using System;
+
+    #endregion
+
     /// <summary>
-    ///     The context data error.
+    /// The language output details.
     /// </summary>
-    public class ContextDataError
+    public class LanguageOutputDetails
     {
         #region Public Properties
 
         /// <summary>
-        ///     Gets or sets the context data.
+        /// Gets or sets the language output.
         /// </summary>
-        public ContextData ContextData { get; set; }
+        public Guid LanguageOutput { get; set; }
 
         /// <summary>
-        ///     Gets or sets the table name.
+        /// Gets or sets the template name.
         /// </summary>
-        public string TableName { get; set; }
+        public string TemplateName { get; set; }
 
         #endregion
     }

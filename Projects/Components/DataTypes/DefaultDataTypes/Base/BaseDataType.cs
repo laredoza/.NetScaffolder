@@ -8,11 +8,13 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Base
 {
     #region Usings
 
+    using System;
     using System.Collections.Generic;
     using System.Xml.Serialization;
 
     using DotNetScaffolder.Components.Common;
     using DotNetScaffolder.Components.Common.Contract;
+    using DotNetScaffolder.Components.Common.MetaData;
     using DotNetScaffolder.Core.Common.Validation;
     using DotNetScaffolder.Mapping.MetaData.Domain;
     using DotNetScaffolder.Mapping.MetaData.Model;
@@ -46,6 +48,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Base
         protected BaseDataType(string fileName)
         {
             this.FileName = fileName;
+            this.LanguageOutputDetails = new List<LanguageOutputDetails>(); 
         }
 
         #endregion
@@ -91,6 +94,8 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Base
         /// </summary>
         [XmlIgnore]
         public INamingConvention NamingConvention { get; set; }
+
+        public List<LanguageOutputDetails> LanguageOutputDetails { get; set; } 
 
         /// <summary>
         ///     Gets or sets the validation result.

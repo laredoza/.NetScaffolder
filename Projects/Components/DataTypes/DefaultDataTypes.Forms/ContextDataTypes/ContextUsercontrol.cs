@@ -21,6 +21,8 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.ContextDa
     using System.Text;
     using System.Windows.Forms;
 
+    using DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataTypes;
+
     #endregion
 
     /// <summary>
