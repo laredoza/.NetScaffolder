@@ -238,8 +238,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Base\BaseRepositoryUnitTest.cs" />
+    <Compile Include="Base\BaseRepositoryUnitTest.g.cs" />
     <Compile Include="Base\BaseUnitOfWorkUnitTest.cs" />
+    <Compile Include="Base\BaseUnitOfWorkUnitTest.g.cs" />
     <Compile Include="Base\BaseUnitTest.cs" />
+    <Compile Include="Base\BaseUnitTest.g.cs" />
     <Compile Include="Base\NHibernateHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tests\Repository\Database\EFCore\RepositoryDbEFCoreMySqlUnitTests.cs" />

@@ -16,6 +16,8 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.RepoInter
     using System.ComponentModel.Composition;
     using System.Windows.Forms;
 
+    using DotNetScaffolder.Components.DataTypes.DefaultDataTypes.RepoInterfaceDataTypes;
+
     #endregion
 
     /// <summary>

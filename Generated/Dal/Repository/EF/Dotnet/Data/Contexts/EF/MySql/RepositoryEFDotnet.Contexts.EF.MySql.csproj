@@ -64,6 +64,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Context\MySqlAccountContext.g.cs" />
+    <Compile Include="Context\MySqlCustomerContext.g.cs" />
+    <Compile Include="Context\MySqlFullContext.g.cs" />
+    <Compile Include="Mappings\BankAccountMap.g.cs" />
+    <Compile Include="Mappings\BankTransfersMap.g.cs" />
+    <Compile Include="Mappings\BookMap.g.cs" />
+    <Compile Include="Mappings\CountryMap.g.cs" />
+    <Compile Include="Mappings\CustomerMap.g.cs" />
+    <Compile Include="Mappings\OrderDetailsMap.g.cs" />
+    <Compile Include="Mappings\OrderMap.g.cs" />
+    <Compile Include="Mappings\ProductMap.g.cs" />
+    <Compile Include="Mappings\SoftwareMap.g.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
