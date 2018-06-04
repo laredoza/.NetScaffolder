@@ -16,6 +16,8 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.EntityDat
     using System.ComponentModel.Composition;
     using System.Windows.Forms;
 
+    using DotNetScaffolder.Components.DataTypes.DefaultDataTypes.EntityDataTypes;
+
     #endregion
 
     /// <summary>

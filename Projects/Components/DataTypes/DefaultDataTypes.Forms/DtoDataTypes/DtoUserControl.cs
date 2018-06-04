@@ -16,6 +16,8 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.DtoDataTy
     using System.ComponentModel.Composition;
     using System.Windows.Forms;
 
+    using DotNetScaffolder.Components.DataTypes.DefaultDataTypes.DtoDataTypes;
+
     #endregion
 
     /// <summary>

@@ -33,6 +33,7 @@
 <#@ import namespace="DotNetScaffolder.Components.DataTypes.DefaultDataTypes.DtoDataTypes" #>
 <#@ import namespace="DotNetScaffolder.Components.DataTypes.DefaultDataTypes.DtoInterfaceDataTypes" #>
 <#@ import namespace="DotNetScaffolder.Components.DataTypes.DefaultDataTypes.EntityDataTypes" #>
+<#@ import namespace="DotNetScaffolder.Components.DataTypes.DefaultDataTypes.MappingDataTypes" #>
 <#@ import namespace="DotNetScaffolder.Components.DataTypes.DefaultDataTypes.RepoInterfaceDataTypes" #>
 <#@ import namespace="DotNetScaffolder.Components.DataTypes.DefaultDataTypes.RepositoryDataTypes" #>
 <#@ import namespace="DotNetScaffolder.Components.Drivers.DefaultDrivers.EFCore" #>

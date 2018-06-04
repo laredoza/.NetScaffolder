@@ -78,5 +78,46 @@ namespace FormControls.TreeView
         public bool Selected { get; set; }
 
         #endregion
+
+        public Hierarchy Find(Guid id)
+        {
+            return this.Find(id, this.Children);
+        }
+
+        /// <summary>
+        /// Find.
+        /// </summary>
+        /// <param name="id">
+        /// The id.
+        /// </param>
+        /// <param name="children">
+        /// The children.
+        /// </param>
+        /// <returns>
+        /// The <see cref="Hierarchy"/>.
+        /// </returns>
+        public Hierarchy Find(Guid id, List<Hierarchy> children)
+        {
+            Hierarchy result = null; 
+
+            foreach (var child in children)
+            {
+                if (child.Id == id)
+                {
+                    return child;
+                }
+                else
+                {
+                    result = this.Find(id, child.Children);
+
+                    if (result != null)
+                    {
+                        return result;
+                    }
+                }
+            }
+
+            return result;
+        }
     }
 }

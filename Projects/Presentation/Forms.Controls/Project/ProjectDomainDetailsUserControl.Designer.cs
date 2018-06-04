@@ -46,7 +46,7 @@
             this.DriverType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.BtnDrivers = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.BtnUpdate = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // ComboBoxPackages
@@ -215,20 +215,21 @@
             this.BtnDrivers.UseVisualStyleBackColor = true;
             this.BtnDrivers.Click += new System.EventHandler(this.BtnDrivers_Click);
             // 
-            // button2
+            // BtnUpdate
             // 
-            this.button2.Location = new System.Drawing.Point(354, 112);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 56;
-            this.button2.Text = "Update";
-            this.button2.UseVisualStyleBackColor = true;
+            this.BtnUpdate.Location = new System.Drawing.Point(354, 112);
+            this.BtnUpdate.Name = "BtnUpdate";
+            this.BtnUpdate.Size = new System.Drawing.Size(75, 23);
+            this.BtnUpdate.TabIndex = 56;
+            this.BtnUpdate.Text = "Update";
+            this.BtnUpdate.UseVisualStyleBackColor = true;
+            this.BtnUpdate.Click += new System.EventHandler(this.BtnUpdate_Click);
             // 
             // ProjectDomainDetailsUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.BtnUpdate);
             this.Controls.Add(this.BtnDrivers);
             this.Controls.Add(this.ListViewDrivers);
             this.Controls.Add(this.BtnRefresh);
@@ -271,6 +272,6 @@
         private System.Windows.Forms.ColumnHeader DriverType;
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.Button BtnDrivers;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button BtnUpdate;
     }
 }

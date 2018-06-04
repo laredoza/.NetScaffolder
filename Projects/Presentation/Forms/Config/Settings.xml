@@ -173,7 +173,7 @@
               <Enabled>true</Enabled>
               <HierarchyType>Item</HierarchyType>
               <Id>f41c4006-d9d1-499b-80be-bbbbc4cb0001</Id>
-              <Name>Default Application Service</Name>
+              <Name>Default Application Service ( C# )</Name>
               <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
               <Selected>false</Selected>
               <ConfigLocation>Data</ConfigLocation>
@@ -206,7 +206,7 @@
               <Enabled>true</Enabled>
               <HierarchyType>Item</HierarchyType>
               <Id>99d48be6-6570-465d-bc29-0793ea47233f</Id>
-              <Name>Default Context</Name>
+              <Name>Default Context ( C# )</Name>
               <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
               <Selected>false</Selected>
               <ConfigLocation>Data</ConfigLocation>
@@ -239,7 +239,7 @@
               <Enabled>true</Enabled>
               <HierarchyType>Item</HierarchyType>
               <Id>a832889d-7f9a-42fa-ad6b-38d184828dba</Id>
-              <Name>Default Dto</Name>
+              <Name>Default Dto ( C# )</Name>
               <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
               <Selected>false</Selected>
               <ConfigLocation>Data</ConfigLocation>
@@ -272,7 +272,7 @@
               <Enabled>true</Enabled>
               <HierarchyType>Item</HierarchyType>
               <Id>a3e5f98c-ac76-40fd-9896-1a3d19dabefe</Id>
-              <Name>Default Dto Interface</Name>
+              <Name>Default Dto Interface ( C# )</Name>
               <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
               <Selected>false</Selected>
               <ConfigLocation>Data</ConfigLocation>
@@ -305,7 +305,7 @@
               <Enabled>true</Enabled>
               <HierarchyType>Item</HierarchyType>
               <Id>1bc1b0c4-1e41-9146-82cf-599181ce4440</Id>
-              <Name>Default Entity</Name>
+              <Name>Default Entity ( C# )</Name>
               <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
               <Selected>false</Selected>
               <ConfigLocation>Data</ConfigLocation>
@@ -338,7 +338,7 @@
               <Enabled>true</Enabled>
               <HierarchyType>Item</HierarchyType>
               <Id>07bc3131-eb4d-490b-8b5f-a68a657ef688</Id>
-              <Name>Default Mapping</Name>
+              <Name>Default Mapping ( C# )</Name>
               <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
               <Selected>false</Selected>
               <ConfigLocation>Data</ConfigLocation>
@@ -371,7 +371,7 @@
               <Enabled>true</Enabled>
               <HierarchyType>Item</HierarchyType>
               <Id>3ab0816d-5ad5-4990-a655-a14a743e416c</Id>
-              <Name>Default Repository</Name>
+              <Name>Default Repository ( C# )</Name>
               <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
               <Selected>false</Selected>
               <ConfigLocation>Data</ConfigLocation>
@@ -404,7 +404,7 @@
               <Enabled>true</Enabled>
               <HierarchyType>Item</HierarchyType>
               <Id>bad391c6-e8a8-45f5-b3ec-f5d57d6a6b90</Id>
-              <Name>Default Repository Interface</Name>
+              <Name>Default Repository Interface ( C# )</Name>
               <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
               <Selected>false</Selected>
               <ConfigLocation>Data</ConfigLocation>

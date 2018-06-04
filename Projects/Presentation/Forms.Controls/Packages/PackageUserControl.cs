@@ -45,6 +45,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Packages
         #endregion
 
         #region Public Properties
+       
 
         /// <summary>
         ///     Gets or sets the data source.
