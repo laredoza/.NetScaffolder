@@ -9,6 +9,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Sources
     #region Usings
 
     using System.Collections.Generic;
+    using System.Threading;
     using System.Windows.Forms;
 
     using Common.Logging;
@@ -19,8 +20,10 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Sources
     using DotNetScaffolder.Mapping.ApplicationServices.Tables;
     using DotNetScaffolder.Mapping.MetaData.Domain;
     using DotNetScaffolder.Mapping.MetaData.Model;
+    using DotNetScaffolder.Presentation.Forms.Controls.SplashScreens;
 
     using FormControls.TreeView;
+    using SplashScreenThreaded;
 
     #endregion
 
@@ -191,6 +194,27 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Sources
             }
         }
 
+        private Thread StartSplashScreen()
+        {
+            (this.Parent as Form).Hide();
+            Thread splashthread = new Thread(new ThreadStart(SplashScreen.ShowSplashScreen));
+            splashthread.IsBackground = true;
+            splashthread.Start();
+
+            return splashthread;
+        }
+
+        private void CloseSplashScreen(bool show = true)
+        {
+            if (show)
+            {
+                this.Show();
+            }
+
+            SplashScreen.CloseSplashScreen();
+            (this.Parent as Form).Activate();
+        }
+
         /// <summary>
         ///     The update data source.
         /// </summary>
@@ -206,6 +230,10 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Sources
 
                 if (this.sourceType.Test(sourceOptions))
                 {
+                    Thread splashthread = this.StartSplashScreen();
+                    Thread.Sleep(100);
+                    SplashScreen.UdpateStatusText("Loading schema information");
+
                     var sourceDomain = this.sourceType.Import(sourceOptions);
 
                     IApplicationTableCollectionDifference differenceService =
@@ -230,6 +258,9 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Sources
 
                     this.AddNodes("Models", this.TreeViewDelete, hierarchy, applicationService);
                     this.Valid = true;
+
+                    Thread.Sleep(100);
+                    this.CloseSplashScreen(false);
                 }
                 else
                 {

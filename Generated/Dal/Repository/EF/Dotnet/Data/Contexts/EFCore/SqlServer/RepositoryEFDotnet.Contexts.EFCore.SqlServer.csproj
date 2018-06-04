@@ -14,4 +14,8 @@
     <ProjectReference Include="..\Base\RepositoryEFDotnet.Contexts.EFCore.Base.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Mappings\" />
+  </ItemGroup>
+
 </Project>

@@ -73,7 +73,6 @@
             this.PanelConfig.Name = "PanelConfig";
             this.PanelConfig.Size = new System.Drawing.Size(777, 454);
             this.PanelConfig.TabIndex = 7;
-            this.PanelConfig.Paint += new System.Windows.Forms.PaintEventHandler(this.PanelConfig_Paint);
             // 
             // btnClose
             // 

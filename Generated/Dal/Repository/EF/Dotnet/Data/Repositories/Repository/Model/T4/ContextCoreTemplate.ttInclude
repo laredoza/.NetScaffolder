@@ -6,7 +6,7 @@ public class ContextCoreTemplate : BaseTemplate
 	public string EntityNamespace { get; set; }
 	public string MappingNamespace { get; set; }
 	public string MappingPostFix { get; set; }
-    public IDriver Driver { get; set; }
+    public IDriver Driver {get; set; }
 	public List<Table> Models { get; set; }
 
 	public override string TransformText()
@@ -30,7 +30,7 @@ using <#= nameSpace #>;
 using <#= nameSpace #>;
 <#+ } #>
 using System.ComponentModel.DataAnnotations.Schema;
-using <#= MappingNamespace #>;
+using <#= MappingNamespace #>.<#= Driver.Prefix #>;
 using <#= EntityNamespace #>;
 
 namespace <#= ContextData.TransformFullnamespace(DataType.BaseNamespace) #>.<#= Driver.ParentFolder #>

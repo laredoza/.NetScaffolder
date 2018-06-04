@@ -62,9 +62,15 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Packages
                 {
                     this.ManageCollectionsTreeViewUserControl1.DataSource = value;
                     this.ManageCollectionsTreeViewUserControl1.SelectFirstNode();
+                    this.PackageDetailsUserControl1.SelectedPackage = this.SelectedPackage;
                 }
             }
         }
+
+        /// <summary>
+        /// Gets or sets the selected package.
+        /// </summary>
+        public Package SelectedPackage { get; set; }
 
         /// <summary>
         ///     Gets or sets the templates.

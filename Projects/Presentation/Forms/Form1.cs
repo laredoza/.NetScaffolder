@@ -162,7 +162,13 @@ namespace DotNetScaffolder.Presentation.Forms
 
                     this.TemplateManagementUserControl1.DataSource =
                         this.applicationConfiguration.ApplicationSettings.Templates[0];
-                    this.packageUserControl1.DataSource = this.applicationConfiguration.ApplicationSettings.Packages[0];
+                    
+                    if (this.applicationService.ProjectDefinition.Domains.Count > 0)
+                    {
+                        this.packageUserControl1.SelectedPackage =
+                            this.applicationService.ProjectDefinition.Domains[0].Package;
+                        this.packageUserControl1.DataSource = this.applicationConfiguration.ApplicationSettings.Packages[0];
+                    }
 
                     if (this.applicationConfiguration.ApplicationSettings.Templates.Count > 0)
                     {
@@ -249,6 +255,9 @@ namespace DotNetScaffolder.Presentation.Forms
             {
                 this.projectDomainDetailsUserControl1.SelectedDomain =
                     this.applicationService.ProjectDefinition.Domains.FirstOrDefault(d => d.Id == e.Id);
+
+                this.packageUserControl1.SelectedPackage =
+                    this.projectDomainDetailsUserControl1.SelectedDomain.Package;
             }
         }
 

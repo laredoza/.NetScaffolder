@@ -1,5 +1,5 @@
 ﻿
-// <copyright file="CustomerContext.g.cs" company="MIT">
+// <copyright file="AccountContext.g.cs" company="MIT">
 //  Copyright (c) 2018 MIT
 // </copyright>  
 
@@ -27,23 +27,23 @@ using Banking.Models.Mappings.SqlServer;
 using System.Data.Common;
 
 
-namespace Banking.Models.Customers.EF
+namespace Banking.Models.Accounts.EF
 {
-	public partial class SqlServerCustomerContext : BaseContext
+	public partial class SqlServerAccountContext : BaseContext
 	{	
 		#region CTOR
 		
-		public SqlServerCustomerContext(DbConnection dbCon, bool contextOwnsConnection = true) 
+		public SqlServerAccountContext(DbConnection dbCon, bool contextOwnsConnection = true) 
 			: base(dbCon, contextOwnsConnection) 
 		{
 		}
 		
-		public SqlServerCustomerContext(string connectionOrName) 
+		public SqlServerAccountContext(string connectionOrName) 
 			: base($"name={connectionOrName}") 
 		{
 		}
 		
-		public SqlServerCustomerContext()
+		public SqlServerAccountContext()
 			: base("name=RepoTest") 
 		{
 		}
@@ -56,13 +56,8 @@ namespace Banking.Models.Customers.EF
 			
 			#region Mappings
 			
-			modelBuilder.Configurations.Add(new BookMap());
-			modelBuilder.Configurations.Add(new CountryMap());
-			modelBuilder.Configurations.Add(new CustomerMap());
-			modelBuilder.Configurations.Add(new OrderMap());
-			modelBuilder.Configurations.Add(new OrderDetailsMap());
-			modelBuilder.Configurations.Add(new ProductMap());
-			modelBuilder.Configurations.Add(new SoftwareMap());
+			modelBuilder.Configurations.Add(new BankAccountMap());
+			modelBuilder.Configurations.Add(new BankTransfersMap());
 
 			#endregion
 			
@@ -70,20 +65,15 @@ namespace Banking.Models.Customers.EF
 			
 			// Exclude entities not part of this context
 			
-			modelBuilder.Ignore<BankAccount>();
+			modelBuilder.Ignore<Customer>();
 
 			#endregion		
         }
 		
 		#region Db Sets
 		
-		public virtual DbSet<Book> Book { get; set; }
-		public virtual DbSet<Country> Country { get; set; }
-		public virtual DbSet<Customer> Customer { get; set; }
-		public virtual DbSet<Order> Order { get; set; }
-		public virtual DbSet<OrderDetails> OrderDetails { get; set; }
-		public virtual DbSet<Product> Product { get; set; }
-		public virtual DbSet<Software> Software { get; set; }
+		public virtual DbSet<BankAccount> BankAccount { get; set; }
+		public virtual DbSet<BankTransfers> BankTransfers { get; set; }
 
 		#endregion
 		

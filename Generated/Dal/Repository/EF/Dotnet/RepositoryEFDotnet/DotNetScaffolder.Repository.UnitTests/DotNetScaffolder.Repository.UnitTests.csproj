@@ -238,11 +238,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Base\BaseRepositoryUnitTest.cs" />
-    <Compile Include="Base\BaseRepositoryUnitTest.g.cs" />
     <Compile Include="Base\BaseUnitOfWorkUnitTest.cs" />
-    <Compile Include="Base\BaseUnitOfWorkUnitTest.g.cs" />
     <Compile Include="Base\BaseUnitTest.cs" />
-    <Compile Include="Base\BaseUnitTest.g.cs" />
     <Compile Include="Base\NHibernateHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tests\Repository\Database\EFCore\RepositoryDbEFCoreMySqlUnitTests.cs" />
@@ -304,10 +301,6 @@
     <ProjectReference Include="..\..\Data\Contexts\EF\SqlServer\RepositoryEFDotnet.Contexts.EF.SqlServer.csproj">
       <Project>{23e0edff-bdfb-45e4-ac7b-31ddfa93ae1d}</Project>
       <Name>RepositoryEFDotnet.Contexts.EF.SqlServer</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Data\Contexts\NHibernate\Base\RepositoryEFDotnet.Contexts.NHibernate.Base.csproj">
-      <Project>{f0b75e62-1dda-4971-8782-3034011c5472}</Project>
-      <Name>RepositoryEFDotnet.Contexts.NHibernate.Base</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Data\Contexts\NHibernate\SqlServer\RepositoryEFDotnet.Contexts.NHibernate.SqlServer.csproj">
       <Project>{c632dc7f-0364-4bb9-be84-54794f9ad469}</Project>

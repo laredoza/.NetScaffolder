@@ -372,10 +372,10 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project
                 foreach (var collectionOption in ScaffoldConfig.CollectionOptions)
                     items.Add(
                         new ComboboxItem
-                            {
-                                Text = (string)collectionOption.Metadata["NameMetaData"],
-                                Value = new Guid(collectionOption.Metadata["ValueMetaData"].ToString())
-                            });
+                        {
+                            Text = (string)collectionOption.Metadata["NameMetaData"],
+                            Value = new Guid(collectionOption.Metadata["ValueMetaData"].ToString())
+                        });
 
             return items.OrderBy(i => i.Text).ToArray();
         }
@@ -430,10 +430,10 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project
             foreach (var namingConvention in ScaffoldConfig.NamingConventions)
                 items.Add(
                     new ComboboxItem
-                        {
-                            Text = (string)namingConvention.Metadata["NameMetaData"],
-                            Value = new Guid(namingConvention.Metadata["ValueMetaData"].ToString())
-                        });
+                    {
+                        Text = (string)namingConvention.Metadata["NameMetaData"],
+                        Value = new Guid(namingConvention.Metadata["ValueMetaData"].ToString())
+                    });
 
             return items.ToArray();
         }
@@ -451,10 +451,10 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project
             foreach (var sourceType in ScaffoldConfig.SourceTypes)
                 items.Add(
                     new ComboboxItem
-                        {
-                            Text = (string)sourceType.Metadata["NameMetaData"],
-                            Value = new Guid(sourceType.Metadata["ValueMetaData"].ToString())
-                        });
+                    {
+                        Text = (string)sourceType.Metadata["NameMetaData"],
+                        Value = new Guid(sourceType.Metadata["ValueMetaData"].ToString())
+                    });
 
             return items.OrderBy(i => i.Text).ToArray();
         }
@@ -475,11 +475,11 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project
         private void BtnDrivers_Click(object sender, EventArgs e)
         {
             this.driverForm = new DriverForm
-                                  {
-                                      SavePath = this.SavePath,
-                                      DataSource = this.SelectedDomain,
-                                      StartPosition = FormStartPosition.CenterParent
-                                  };
+            {
+                SavePath = this.SavePath,
+                DataSource = this.SelectedDomain,
+                StartPosition = FormStartPosition.CenterParent
+            };
 
             this.driverForm.Show(this.ParentForm);
         }
@@ -533,7 +533,12 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project
             Logger.Trace("Started Refresh Clicked");
             this.tableForm.SavePath = this.SavePath;
             this.tableForm.DataSource = this.SelectedDomain;
-            if (this.tableForm.Valid) this.tableForm.ShowDialog();
+
+            if (this.tableForm.Valid)
+            {
+                this.tableForm.ShowDialog();
+            }
+
             Logger.Trace("Completed Refresh Clicked");
         }
 
@@ -634,12 +639,12 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project
 
                 if (this.ApplicationService != null && this.ApplicationService.ProjectDefinition != null)
                     foreach (var driverType in this.SelectedDriverTypes)
-                    foreach (ListViewItem item in this.ListViewDrivers.Items)
-                        if (new Guid(item.Tag.ToString()) == driverType)
-                        {
-                            item.Checked = true;
-                            break;
-                        }
+                        foreach (ListViewItem item in this.ListViewDrivers.Items)
+                            if (new Guid(item.Tag.ToString()) == driverType)
+                            {
+                                item.Checked = true;
+                                break;
+                            }
 
                 this.ComboBoxPackages.SelectedValue = this.SelectedDomain.Package.Id;
             }
