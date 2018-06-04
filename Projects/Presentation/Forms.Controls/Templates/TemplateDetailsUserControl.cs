@@ -71,44 +71,6 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         #region Public Properties
 
         /// <summary>
-        ///     Gets or sets the config location.
-        /// </summary>
-        public ConfigLocation ConfigLocation
-        {
-            get
-            {
-                ConfigLocation result = ConfigLocation.Data;
-
-                if (this.data != null)
-                {
-                    result = this.Data.ConfigLocation;
-                    Logger.Trace($"ConfigLocation set to {this.Data.ConfigLocation}.");
-                }
-                else
-                {
-                    result = ConfigLocation.Data;
-                    Logger.Trace("Empty ConfigLocation is not returned as data is null.");
-                }
-
-                return result;
-            }
-
-            set
-            {
-                if (this.Data != null)
-                {
-                    this.Data.ConfigLocation = value;
-
-                    // this.TreeNode.Text = this.TextBoxName.Text;
-                }
-                else
-                {
-                    Logger.Trace("ConfigLocation is not set as Data is null.");
-                }
-            }
-        }
-
-        /// <summary>
         ///     Gets or sets the data.
         /// </summary>
         public Template Data
@@ -536,25 +498,6 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         }
 
         /// <summary>
-        /// The combo box setup location_ selected index changed.
-        /// </summary>
-        /// <param name="sender">
-        /// The sender.
-        /// </param>
-        /// <param name="e">
-        /// The e.
-        /// </param>
-        private void ComboBoxSetupLocation_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if ((sender as ComboBox).SelectedItem != null)
-            {
-                this.ConfigLocation = (ConfigLocation)Enum.Parse(
-                    typeof(ConfigLocation),
-                    (sender as ComboBox).SelectedItem.ToString());
-            }
-        }
-
-        /// <summary>
         /// The text box name_ text changed.
         /// </summary>
         /// <param name="sender">
@@ -612,7 +555,6 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
             this.TextBoxName.Text = this.Data.Name;
             this.TextBoxTemplate.Text = this.Data.TemplatePath;
             this.TextBoxVersion.Text = this.Data.Version.ToString();
-            this.ComboBoxSetupLocation.SelectedIndex = this.Data.ConfigLocation.GetHashCode();
             this.CheckBoxEnabled.Checked = this.Data.Enabled;
 
             if (this.data.HierarchyType == HierarchyType.Item)

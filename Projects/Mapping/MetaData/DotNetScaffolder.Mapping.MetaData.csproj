@@ -54,7 +54,6 @@
   <ItemGroup>
     <Compile Include="Application\ApplicationSettings.cs" />
     <Compile Include="Domain\DomainDefinition.cs" />
-    <Compile Include="Enum\ConfigLocation.cs" />
     <Compile Include="Enum\DatabaseGeneratedKeyType.cs" />
     <Compile Include="Enum\GenerationType.cs" />
     <Compile Include="Enum\RelationshipMultiplicity.cs" />

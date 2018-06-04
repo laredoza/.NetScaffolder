@@ -45,8 +45,6 @@
             this.label19 = new System.Windows.Forms.Label();
             this.ComboBoxLanguageOutput = new System.Windows.Forms.ComboBox();
             this.label18 = new System.Windows.Forms.Label();
-            this.ComboBoxSetupLocation = new System.Windows.Forms.ComboBox();
-            this.label16 = new System.Windows.Forms.Label();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.panel1.SuspendLayout();
             this.PanelTemplate.SuspendLayout();
@@ -111,7 +109,7 @@
             this.PanelTemplate.Dock = System.Windows.Forms.DockStyle.Top;
             this.PanelTemplate.Location = new System.Drawing.Point(0, 43);
             this.PanelTemplate.Name = "PanelTemplate";
-            this.PanelTemplate.Size = new System.Drawing.Size(451, 169);
+            this.PanelTemplate.Size = new System.Drawing.Size(451, 143);
             this.PanelTemplate.TabIndex = 60;
             // 
             // groupBox1
@@ -125,11 +123,9 @@
             this.groupBox1.Controls.Add(this.label19);
             this.groupBox1.Controls.Add(this.ComboBoxLanguageOutput);
             this.groupBox1.Controls.Add(this.label18);
-            this.groupBox1.Controls.Add(this.ComboBoxSetupLocation);
-            this.groupBox1.Controls.Add(this.label16);
             this.groupBox1.Location = new System.Drawing.Point(3, 6);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(445, 161);
+            this.groupBox1.Size = new System.Drawing.Size(445, 130);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Template";
@@ -137,7 +133,7 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(54, 129);
+            this.label15.Location = new System.Drawing.Point(54, 104);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(45, 13);
             this.label15.TabIndex = 82;
@@ -145,7 +141,7 @@
             // 
             // TextBoxVersion
             // 
-            this.TextBoxVersion.Location = new System.Drawing.Point(112, 126);
+            this.TextBoxVersion.Location = new System.Drawing.Point(112, 101);
             this.TextBoxVersion.Name = "TextBoxVersion";
             this.TextBoxVersion.Size = new System.Drawing.Size(238, 20);
             this.TextBoxVersion.TabIndex = 81;
@@ -156,7 +152,7 @@
             // 
             this.button8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.button8.Enabled = false;
-            this.button8.Location = new System.Drawing.Point(364, 98);
+            this.button8.Location = new System.Drawing.Point(364, 48);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(75, 23);
             this.button8.TabIndex = 78;
@@ -165,7 +161,7 @@
             // 
             // TextBoxTemplate
             // 
-            this.TextBoxTemplate.Location = new System.Drawing.Point(112, 100);
+            this.TextBoxTemplate.Location = new System.Drawing.Point(112, 75);
             this.TextBoxTemplate.Name = "TextBoxTemplate";
             this.TextBoxTemplate.Size = new System.Drawing.Size(238, 20);
             this.TextBoxTemplate.TabIndex = 80;
@@ -175,7 +171,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(47, 100);
+            this.label14.Location = new System.Drawing.Point(47, 75);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(54, 13);
             this.label14.TabIndex = 79;
@@ -185,7 +181,7 @@
             // 
             this.ComboBoxGeneratorOutput.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ComboBoxGeneratorOutput.FormattingEnabled = true;
-            this.ComboBoxGeneratorOutput.Location = new System.Drawing.Point(112, 73);
+            this.ComboBoxGeneratorOutput.Location = new System.Drawing.Point(112, 48);
             this.ComboBoxGeneratorOutput.Name = "ComboBoxGeneratorOutput";
             this.ComboBoxGeneratorOutput.Size = new System.Drawing.Size(238, 21);
             this.ComboBoxGeneratorOutput.TabIndex = 77;
@@ -194,7 +190,7 @@
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(17, 73);
+            this.label19.Location = new System.Drawing.Point(17, 48);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(84, 13);
             this.label19.TabIndex = 76;
@@ -219,28 +215,6 @@
             this.label18.TabIndex = 74;
             this.label18.Text = "Language Output:";
             // 
-            // ComboBoxSetupLocation
-            // 
-            this.ComboBoxSetupLocation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ComboBoxSetupLocation.FormattingEnabled = true;
-            this.ComboBoxSetupLocation.Items.AddRange(new object[] {
-            "Data",
-            "Driver"});
-            this.ComboBoxSetupLocation.Location = new System.Drawing.Point(112, 46);
-            this.ComboBoxSetupLocation.Name = "ComboBoxSetupLocation";
-            this.ComboBoxSetupLocation.Size = new System.Drawing.Size(238, 21);
-            this.ComboBoxSetupLocation.TabIndex = 73;
-            this.ComboBoxSetupLocation.SelectedIndexChanged += new System.EventHandler(this.ComboBoxSetupLocation_SelectedIndexChanged);
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(19, 49);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(82, 13);
-            this.label16.TabIndex = 72;
-            this.label16.Text = "Setup Location:";
-            // 
             // errorProvider1
             // 
             this.errorProvider1.ContainerControl = this;
@@ -252,7 +226,7 @@
             this.Controls.Add(this.PanelTemplate);
             this.Controls.Add(this.panel1);
             this.Name = "TemplateDetailsUserControl";
-            this.Size = new System.Drawing.Size(451, 223);
+            this.Size = new System.Drawing.Size(451, 191);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.PanelTemplate.ResumeLayout(false);
@@ -281,8 +255,6 @@
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.ComboBox ComboBoxLanguageOutput;
         private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.ComboBox ComboBoxSetupLocation;
-        private System.Windows.Forms.Label label16;
         private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }

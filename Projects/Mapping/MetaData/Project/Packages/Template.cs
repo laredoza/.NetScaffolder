@@ -58,11 +58,6 @@ namespace DotNetScaffolder.Mapping.MetaData.Project.Packages
         #region Public Properties
 
         /// <summary>
-        ///     Gets or sets the config location.
-        /// </summary>
-        public ConfigLocation ConfigLocation { get; set; }
-
-        /// <summary>
         ///     Gets or sets the data type.
         /// </summary>
         public Guid DataType { get; set; }

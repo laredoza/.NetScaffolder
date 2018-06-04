@@ -9,6 +9,7 @@ namespace DotNetScaffolder.Components.Common.MetaData
     #region Usings
 
     using System;
+    using System.Collections.Generic;
 
     #endregion
 
@@ -25,9 +26,14 @@ namespace DotNetScaffolder.Components.Common.MetaData
         public Guid LanguageOutput { get; set; }
 
         /// <summary>
-        /// Gets or sets the template name.
+        /// Gets or sets the templates.
         /// </summary>
-        public string TemplateName { get; set; }
+        public List<string> Templates { get; set; }
+
+        /// <summary>
+        /// Gets or sets the output generator.
+        /// </summary>
+        public Guid OutputGenerator { get; set; }
 
         #endregion
     }
