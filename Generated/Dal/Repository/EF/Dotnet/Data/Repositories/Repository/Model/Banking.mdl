@@ -32,7 +32,6 @@
             <Name>Default Context</Name>
             <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
             <Selected>false</Selected>
-            <ConfigLocation>Data</ConfigLocation>
             <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4430</DataType>
             <DefaultSettings />
             <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
@@ -48,7 +47,6 @@
             <Name>Default Mapping</Name>
             <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
             <Selected>false</Selected>
-            <ConfigLocation>Data</ConfigLocation>
             <DataType>361ac82c-8f2a-4d7c-b455-ae5effba9d4a</DataType>
             <DefaultSettings />
             <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
@@ -64,7 +62,6 @@
             <Name>Default Entity</Name>
             <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
             <Selected>false</Selected>
-            <ConfigLocation>Data</ConfigLocation>
             <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4440</DataType>
             <DefaultSettings />
             <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
@@ -80,7 +77,6 @@
             <Name>Default Repository Interface</Name>
             <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
             <Selected>false</Selected>
-            <ConfigLocation>Data</ConfigLocation>
             <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4451</DataType>
             <DefaultSettings />
             <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
@@ -96,7 +92,6 @@
             <Name>Default Repository</Name>
             <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
             <Selected>false</Selected>
-            <ConfigLocation>Data</ConfigLocation>
             <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4450</DataType>
             <DefaultSettings />
             <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
@@ -112,7 +107,6 @@
             <Name>Default Dto Interface</Name>
             <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
             <Selected>false</Selected>
-            <ConfigLocation>Data</ConfigLocation>
             <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4441</DataType>
             <DefaultSettings />
             <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
@@ -128,7 +122,6 @@
             <Name>Default Dto</Name>
             <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
             <Selected>false</Selected>
-            <ConfigLocation>Data</ConfigLocation>
             <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4490</DataType>
             <DefaultSettings />
             <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>

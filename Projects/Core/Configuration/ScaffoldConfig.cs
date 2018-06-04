@@ -10,7 +10,6 @@ namespace DotNetScaffolder.Core.Configuration
 
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.Composition;
     using System.Linq;
 
     using DotNetScaffolder.Components.Common;
@@ -72,11 +71,6 @@ namespace DotNetScaffolder.Core.Configuration
         public static Lazy<IDataTypeUI, IDictionary<string, object>>[] DataTypeUIs { get; set; }
 
         /// <summary>
-        /// Gets or sets the i driver type ui.
-        /// </summary>
-        public static Lazy<IDriverTypeUI, IDictionary<string, object>>[] DriverTypeUIs { get; set; }
-
-        /// <summary>
         ///     Gets or sets the drivers.
         /// </summary>
         ////[ImportMany]
@@ -86,6 +80,11 @@ namespace DotNetScaffolder.Core.Configuration
         ///     Gets or sets the driver types.
         /// </summary>
         public static Lazy<IDriverType, IDictionary<string, object>>[] DriverTypes { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the i driver type ui.
+        /// </summary>
+        public static Lazy<IDriverTypeUI, IDictionary<string, object>>[] DriverTypeUIs { get; set; }
 
         /// <summary>
         ///     Gets or sets the language outputs.
@@ -195,6 +194,22 @@ namespace DotNetScaffolder.Core.Configuration
         }
 
         /// <summary>
+        /// Return driver.
+        /// </summary>
+        /// <param name="driverTypeId">
+        /// </param>
+        /// <returns>
+        /// The <see cref="IDriver"/>.
+        /// </returns>
+        public static IDriver ReturnDriver(Guid driverTypeId)
+        {
+            if (Drivers == null || !Drivers.Any()) return null;
+
+            return Drivers.FirstOrDefault(
+                d => d.Metadata["ValueMetaData"].ToString().ToLower() == driverTypeId.ToString().ToLower()).Value;
+        }
+
+        /// <summary>
         /// The return driver data type ui.
         /// </summary>
         /// <param name="driverTypeId">
@@ -211,24 +226,9 @@ namespace DotNetScaffolder.Core.Configuration
             if (DriverTypeUIs == null || !DriverTypeUIs.Any()) return null;
 
             return DriverTypeUIs.FirstOrDefault(
-                d => d.IsValueCreated &&  d.Metadata["DriverType"].ToString().ToLower() == driverTypeId.ToString().ToLower()
+                d => d.IsValueCreated
+                     && d.Metadata["DriverType"].ToString().ToLower() == driverTypeId.ToString().ToLower()
                      && d.Metadata["DisplayType"].ToString().ToLower() == displayType.ToString().ToLower()).Value;
-        }
-
-        /// <summary>
-        /// Return driver.
-        /// </summary>
-        /// <param name="driverTypeId">
-        /// </param>
-        /// <returns>
-        /// The <see cref="IDriver"/>.
-        /// </returns>
-        public static IDriver ReturnDriver(Guid driverTypeId)
-        {
-            if (Drivers == null || !Drivers.Any()) return null;
-
-            return Drivers.FirstOrDefault(
-                d => d.Metadata["ValueMetaData"].ToString().ToLower() == driverTypeId.ToString().ToLower()).Value;
         }
 
         /// <summary>
@@ -258,6 +258,23 @@ namespace DotNetScaffolder.Core.Configuration
             }
 
             return result;
+        }
+
+        /// <summary>
+        /// The return language output.
+        /// </summary>
+        /// <param name="languageOutputId">
+        /// The language output id.
+        /// </param>
+        /// <returns>
+        /// The <see cref="ILanguageOutput"/>.
+        /// </returns>
+        public static ILanguageOutput ReturnLanguageOutput(Guid languageOutputId)
+        {
+            if (LanguageOutputs == null || !LanguageOutputs.Any()) return null;
+
+            return LanguageOutputs.FirstOrDefault(
+                d => d.Metadata["ValueMetaData"].ToString().ToLower() == languageOutputId.ToString().ToLower()).Value;
         }
 
         /// <summary>

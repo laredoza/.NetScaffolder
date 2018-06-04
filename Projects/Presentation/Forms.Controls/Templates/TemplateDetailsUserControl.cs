@@ -15,6 +15,8 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
 
     using Common.Logging;
 
+    using DotNetScaffolder.Components.Common.Contract;
+    using DotNetScaffolder.Components.Common.MetaData;
     using DotNetScaffolder.Core.Common;
     using DotNetScaffolder.Core.Common.Validation;
     using DotNetScaffolder.Core.Configuration;
@@ -22,6 +24,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
     using DotNetScaffolder.Mapping.MetaData.Project.Packages;
 
     using FormControls.Enum;
+    using FormControls.TreeView;
 
     #endregion
 
@@ -56,19 +59,16 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         public TemplateDetailsUserControl()
         {
             this.InitializeComponent();
-
-            this.ComboBoxLanguageOutput.DataSource = this.ReturnLanguageOutputs();
-            this.ComboBoxLanguageOutput.DisplayMember = "Text";
-            this.ComboBoxLanguageOutput.ValueMember = "Value";
-
-            this.ComboBoxGeneratorOutput.DataSource = this.ReturnOutputGenerators();
-            this.ComboBoxGeneratorOutput.DisplayMember = "Text";
-            this.ComboBoxGeneratorOutput.ValueMember = "Value";
         }
 
         #endregion
 
         #region Public Properties
+
+        /// <summary>
+        /// Gets or sets a value indicating whether data source initialized.
+        /// </summary>
+        public bool DataSourceInitialized { get; set; }
 
         /// <summary>
         ///     Gets or sets the data.
@@ -329,15 +329,30 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         public object[] ReturnLanguageOutputs()
         {
             List<ComboboxItem> items = new List<ComboboxItem>();
+            items.Add(new ComboboxItem{ Text = "Please select"});
 
-            foreach (var language in ScaffoldConfig.LanguageOutputs)
+            if (this.Data != null)
             {
-                items.Add(
-                    new ComboboxItem
+                IDataType dataType = ScaffoldConfig.ReturnDataType(this.Data.DataType);
+
+                foreach (LanguageOutputDetails selectedLanguageDetails in dataType.LanguageOutputDetails)
+                {
+                    foreach (var language in ScaffoldConfig.LanguageOutputs)
+                    {
+                        if (selectedLanguageDetails.LanguageOutput
+                            == new Guid(language.Metadata["ValueMetaData"].ToString()))
                         {
-                            Text = (string)language.Metadata["NameMetaData"],
-                            Value = new Guid(language.Metadata["ValueMetaData"].ToString())
-                        });
+                            items.Add(
+                                new ComboboxItem
+                                {
+                                    Text = (string)language.Metadata["NameMetaData"],
+                                    Value = new Guid(language.Metadata["ValueMetaData"].ToString())
+                                });
+
+                            break;
+                        }
+                    }
+                }
             }
 
             return items.ToArray();
@@ -352,15 +367,16 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         public object[] ReturnOutputGenerators()
         {
             List<ComboboxItem> items = new List<ComboboxItem>();
+            items.Add(new ComboboxItem { Text = "Please select" });
 
             foreach (var outputGenerator in ScaffoldConfig.OutputGenerators)
             {
                 items.Add(
                     new ComboboxItem
-                        {
-                            Text = (string)outputGenerator.Metadata["NameMetaData"],
-                            Value = new Guid(outputGenerator.Metadata["ValueMetaData"].ToString())
-                        });
+                    {
+                        Text = (string)outputGenerator.Metadata["NameMetaData"],
+                        Value = new Guid(outputGenerator.Metadata["ValueMetaData"].ToString())
+                    });
             }
 
             return items.ToArray();
@@ -415,25 +431,6 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
                         this.errorProvider1.SetError(this.ComboBoxGeneratorOutput, validation.Description);
                         result++;
                     }
-
-                    if (this.data.ValidationResult.Any(v => v.ValidationType == ValidationType.TemplatePath))
-                    {
-                        validation =
-                            this.data.ValidationResult.FirstOrDefault(
-                                v => v.ValidationType == ValidationType.TemplatePath);
-                        this.TextBoxTemplate.Focus();
-                        this.errorProvider1.SetError(this.TextBoxTemplate, validation.Description);
-                        result++;
-                    }
-
-                    if (this.data.ValidationResult.Any(v => v.ValidationType == ValidationType.TemplateVersion))
-                    {
-                        validation = this.data.ValidationResult.FirstOrDefault(
-                            v => v.ValidationType == ValidationType.TemplateVersion);
-                        this.TextBoxVersion.Focus();
-                        this.errorProvider1.SetError(this.TextBoxVersion, validation.Description);
-                        result++;
-                    }
                 }
             }
 
@@ -460,25 +457,6 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         }
 
         /// <summary>
-        /// The combo box generator output_ selected index changed.
-        /// </summary>
-        /// <param name="sender">
-        /// The sender.
-        /// </param>
-        /// <param name="e">
-        /// The e.
-        /// </param>
-        private void ComboBoxGeneratorOutput_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            ComboboxItem selectedItem = (sender as ComboBox).SelectedItem as ComboboxItem;
-
-            if (selectedItem != null)
-            {
-                this.GeneratorTypeId = new Guid(selectedItem.Value.ToString());
-            }
-        }
-
-        /// <summary>
         /// The combo box language output_ selected index changed.
         /// </summary>
         /// <param name="sender">
@@ -491,9 +469,33 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         {
             ComboboxItem selectedItem = (sender as ComboBox).SelectedItem as ComboboxItem;
 
-            if (selectedItem != null)
+            if (selectedItem != null && this.DataSourceInitialized)
             {
-                this.LanguageId = new Guid(selectedItem.Value.ToString());
+                if (selectedItem.Value != null)
+                {
+                    this.LanguageId = new Guid(selectedItem.Value.ToString());
+
+                    IDataType dataType = ScaffoldConfig.ReturnDataType(this.Data.DataType);
+                    LanguageOutputDetails languageOutputDetail =
+                        dataType.LanguageOutputDetails.FirstOrDefault(l => l.LanguageOutput == this.LanguageId);
+
+                    this.GeneratorTypeId = languageOutputDetail.OutputGenerator;
+
+                    this.ComboBoxGeneratorOutput.SelectedValue = this.GeneratorTypeId;
+
+                    this.ListBoxTemplates.Items.Clear();
+                    foreach (string template in languageOutputDetail.Templates)
+                    {
+                        this.ListBoxTemplates.Items.Add(template);
+                    }
+                }
+                else
+                {
+                    this.LanguageId = Guid.Empty;
+                    this.GeneratorTypeId = Guid.Empty;
+                    this.ComboBoxGeneratorOutput.SelectedIndex = 0;
+                    this.ListBoxTemplates.Items.Clear();
+                }
             }
         }
 
@@ -512,56 +514,34 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         }
 
         /// <summary>
-        /// The text box template_ text changed.
-        /// </summary>
-        /// <param name="sender">
-        /// The sender.
-        /// </param>
-        /// <param name="e">
-        /// The e.
-        /// </param>
-        private void TextBoxTemplate_TextChanged(object sender, EventArgs e)
-        {
-            this.TemplatePath = this.TextBoxTemplate.Text;
-        }
-
-        /// <summary>
-        /// The text box version_ text changed.
-        /// </summary>
-        /// <param name="sender">
-        /// The sender.
-        /// </param>
-        /// <param name="e">
-        /// The e.
-        /// </param>
-        private void TextBoxVersion_TextChanged(object sender, EventArgs e)
-        {
-            if (!string.IsNullOrEmpty(this.TextBoxVersion.Text))
-            {
-                this.Version = Convert.ToDouble(this.TextBoxVersion.Text);
-            }
-            else
-            {
-                this.Version = 0;
-                this.TextBoxVersion.Text = 0.ToString();
-            }
-        }
-
-        /// <summary>
         ///     The update data source.
         /// </summary>
         private void UpdateDataSource()
         {
+
+            this.DataSourceInitialized = false;
             this.TextBoxName.Text = this.Data.Name;
-            this.TextBoxTemplate.Text = this.Data.TemplatePath;
-            this.TextBoxVersion.Text = this.Data.Version.ToString();
             this.CheckBoxEnabled.Checked = this.Data.Enabled;
 
             if (this.data.HierarchyType == HierarchyType.Item)
             {
                 this.ComboBoxLanguageOutput.SelectedValue = this.Data.LanguageOutputId;
-                this.ComboBoxGeneratorOutput.SelectedValue = this.Data.GeneratorTypeId;
+                //this.ComboBoxGeneratorOutput.SelectedValue = this.Data.GeneratorTypeId;
                 this.PanelTemplate.Visible = true;
+
+                this.ComboBoxLanguageOutput.DataSource = null;
+                this.ComboBoxGeneratorOutput.DataSource = null;
+
+                this.ComboBoxLanguageOutput.DataSource = this.ReturnLanguageOutputs();
+                this.ComboBoxLanguageOutput.DisplayMember = "Text";
+                this.ComboBoxLanguageOutput.ValueMember = "Value";
+
+                this.ComboBoxGeneratorOutput.DataSource = this.ReturnOutputGenerators();
+                this.ComboBoxGeneratorOutput.DisplayMember = "Text";
+                this.ComboBoxGeneratorOutput.ValueMember = "Value";
+
+                this.DataSourceInitialized = true;
+                this.ComboBoxLanguageOutput.SelectedValue = this.LanguageId;
             }
             else
             {

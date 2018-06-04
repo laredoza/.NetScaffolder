@@ -79,6 +79,15 @@ namespace FormControls.TreeView
 
         #endregion
 
+        /// <summary>
+        /// The find.
+        /// </summary>
+        /// <param name="id">
+        /// The id.
+        /// </param>
+        /// <returns>
+        /// The <see cref="Hierarchy"/>.
+        /// </returns>
         public Hierarchy Find(Guid id)
         {
             return this.Find(id, this.Children);
