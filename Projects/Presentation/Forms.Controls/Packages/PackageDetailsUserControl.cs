@@ -363,6 +363,8 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Packages
             {
                 this.SelectedPackage.Templates = this.DataSource.Templates;
             }
+
+            this.BtnAdd.Enabled = false;
         }
 
         /// <summary>
@@ -441,7 +443,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Packages
                         this.BtnRemove.Enabled = false;
                     }
 
-                    if (this.availableTemplates.Count == 0)
+                    if (this.availableTemplates.Count == 0 )
                     {
                         this.BtnAdd.Enabled = false;
                         this.ComboBoxSearch.Enabled = false;
@@ -464,6 +466,11 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Packages
                         this.ComboBoxSearch.Items.Clear();
                         this.ComboBoxSearch.Items.AddRange(availableTemplates.ToArray());
                     }
+
+                    if (string.IsNullOrEmpty(this.ComboBoxSearch.Text))
+                    {
+                        this.BtnAdd.Enabled = false;
+                    }
                 }
                 else
                 {
@@ -473,5 +480,30 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Packages
         }
 
         #endregion
+
+        private void ComboBoxSearch_SelectedValueChanged(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(this.ComboBoxSearch.Text))
+            {
+                this.BtnAdd.Enabled = false;
+            }
+            else
+            {
+                this.BtnAdd.Enabled = true;
+            }
+
+        }
+
+        private void ComboBoxSearch_TextUpdate(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(this.ComboBoxSearch.Text))
+            {
+                this.BtnAdd.Enabled = false;
+            }
+            else if (this.ComboBoxSearch.Text.Trim().Length > 1)
+            {
+                this.BtnAdd.Enabled = true;
+            }
+        }
     }
 }
