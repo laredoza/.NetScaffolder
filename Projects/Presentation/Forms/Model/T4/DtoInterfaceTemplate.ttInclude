@@ -1,0 +1,59 @@
+﻿<#+
+public class DtoInterfaceTemplate : BaseTemplate 
+{
+	public DtoInterfaceDataType DataType { get; set; }
+	
+	public override string TransformText()
+	{
+		// Debugger.Break();
+		Header = new CopyrightHeader();
+		Header.Filename = DataType.InterfaceName;
+#>
+
+<#= Header.TransformText() #>
+
+// *******************************************************************
+//	GENERATED CODE. DOT NOT MODIFY MANUALLY AS CHANGES CAN BE LOST!!!
+//	USE A PARTIAL CLASS INSTEAD
+// *******************************************************************
+
+using System;
+using System.Collections.Generic;
+
+namespace <#= DataType.FullNamespace #>
+{
+	public partial interface I<#= DataType.InterfaceName #> <#= DataType.TransformInheritFrom #> 
+	{
+		#region Fields
+		
+<#+ foreach(var col in DataType.MetaData.Columns){ #>
+		<#= CSharpOutputMapper.MapToOutput(col) #> <#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #> { get; set; }
+<#+ } #>
+
+		#endregion
+		
+		#region Child Relationships
+		
+<#+ foreach(var child in DataType.MetaData.DistinctChildRelationships.Where(o => o.ReferencedMultiplicity == RelationshipMultiplicity.Many)){ #>
+		<#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #>> <#= RelationshipNameFormatting.FormatName(child.ReferencedTableName, child.RelationshipAlias, DataType.NamingConvention) #> { get; set; }
+<#+ } #>
+<#+ foreach(var child in DataType.MetaData.DistinctChildRelationships.Where(o => o.ReferencedMultiplicity != RelationshipMultiplicity.Many)){ #>
+		I<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #> <#= RelationshipNameFormatting.FormatName(child.ReferencedTableName, child.RelationshipAlias, DataType.NamingConvention) #> { get; set; }
+<#+ } #>
+
+		#endregion
+		
+		#region Parent Relationships
+		
+<#+ foreach(var parent in DataType.MetaData.DistinctParentRelationships){ #>
+		I<#= DataType.NamingConvention.ApplyNamingConvention(parent.ReferencedTableName) #> <#= RelationshipNameFormatting.FormatName(parent.ReferencedTableName, parent.RelationshipAlias, DataType.NamingConvention) #> { get; set; }
+<#+ } #>
+		
+		#endregion
+	}
+}
+<#+
+		return this.GenerationEnvironment.ToString();
+	}
+}
+#>

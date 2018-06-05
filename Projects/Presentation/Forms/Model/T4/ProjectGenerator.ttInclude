@@ -1,84 +1,109 @@
-﻿<#@ assembly name="System" #>
-<#@ assembly name="System.Configuration" #>
-<#@ assembly name="System.Globalization" #>
-<#@ assembly name="System.Xml" #>
-<#@ assembly name="$(ProjectDir)Model\Package\Common.Logging.Core.dll" #>
-<#@ assembly name="$(ProjectDir)Model\Package\Common.Logging.dll" #>
-<#@ assembly name="$(ProjectDir)Model\Package\DotNetScaffolder.Core.Common.dll" #>
-<#@ assembly name="$(ProjectDir)Model\Package\DotNetScaffolder.Mapping.MetaData.dll" #>
-<#@ assembly name="$(ProjectDir)Model\Package\FormControls.dll" #>
-<#@ assembly name="$(ProjectDir)Model\Package\DotNetScaffolder.Components.Common.dll" #>
-<#@ assembly name="$(ProjectDir)Model\Package\Configuration.dll" #>
-<#@ import namespace="System" #>
-<#@ import namespace="System.Configuration" #>
-<#@ import namespace="System.Globalization" #>
-<#@ import namespace="System.Xml" #>
-<#@ import namespace="System.IO" #>
-<#@ import namespace="System.Xml.Serialization" #>
-<#@ import namespace="System.Collections.Generic" #>
-<#@ import namespace="System.Diagnostics" #>
-<#@ import namespace="DotNetScaffolder.Mapping.MetaData.Project" #>
-<#@ import namespace="DotNetScaffolder.Mapping.MetaData.Model" #>
-<#@ import namespace="DotNetScaffolder.Core.Common.Serializer" #>
-<#@ import namespace="Configuration" #>
-<#@ include file="CopyrightHeader.ttinclude" #>
-<#@ include file="BaseGenerator.ttinclude" #>
-<#@ include file="BaseTemplate.ttinclude" #>
+﻿<#@ include file="BaseProjectGenerator.ttInclude" #>
 <#@ include file="ContextGenerator.ttInclude" #>
 <#@ include file="EntityGenerator.ttInclude" #>
+<#@ include file="DtoInterfaceGenerator.ttInclude" #>
+<#@ include file="DtoGenerator.ttInclude" #>
+<#@ include file="RepoInterfaceGenerator.ttInclude" #>
+<#@ include file="RepositoryGenerator.ttInclude" #>
+<#@ include file="MappingGenerator.ttInclude" #>
+<#@ include file="BaseUnitTestGenerator.ttInclude" #>
 <#+
-public class ProjectGenerator : Generator
-{
-	public string ModelFilePath {get;set;}
-	public string PackagePath {get;set;}
+    public class ProjectGenerator : BaseProjectGenerator
+    {
+        protected override void ExecuteGenerators(List<IDataType> dataTypes, DomainDefinition domain)
+        {
+            // Execute generation using initialised data types
+            foreach(var dataType in dataTypes)
+            {
+                if(dataType is DtoInterfaceDataType)
+                {
+                    // Debugger.Break();
+                    var iDtoGen = new DtoInterfaceGenerator();
+                    iDtoGen.Models = domain.Tables;
+                    iDtoGen.DataType = dataType as DtoInterfaceDataType;
+                    iDtoGen.Run();
+                }
+			
+                if(dataType is EntityDataType)
+                {
+                    // Debugger.Break();
+                    var entityGen = new EntityGenerator();
+                    entityGen.Models = domain.Tables;
+                    entityGen.DataType = dataType as EntityDataType;
+                    entityGen.DtoInterfaceType = dataTypes.FirstOrDefault(o => o is DtoInterfaceDataType) as DtoInterfaceDataType;
+                    entityGen.Run();
+                }
 
-	protected override void RunCore()
-	{
-		var projectDefinition = ObjectXMLSerializer<ProjectDefinition>.Load(ModelFilePath);
-		Debugger.Break();
-		ScaffoldConfig.Load(PackagePath);
-		
-		Dictionary<string, string> parameters = new Dictionary<string, string>();
-		parameters.Add("basePath", Path.GetDirectoryName(ModelFilePath));
-		
-		foreach(var domain in projectDefinition.Domains)
-		{
-			if(domain.Package == null) continue;
-			
-			var nc = ScaffoldConfig.ReturnNamingConvention(domain.NamingConventionId);
-			var co = ScaffoldConfig.ReturnCollectionOption(domain.CollectionOptionId);
-			
-			foreach(var template in domain.Package.Templates)
-			{
-				if(template.Enabled)
-				{
-					var dt = ScaffoldConfig.ReturnDataType(template.DataType);
-					dt.Load(parameters);
+                if(dataType is ContextDataType)
+                {
+                    Debugger.Break();
 					
-					if(dt is EntityDataType)
-					{
-						EntityGenerator entityGen = new EntityGenerator();
-						
-						entityGen.Models = domain.Tables;
-						entityGen.DataType = dt;
-						entityGen.NamingConvention = nc;
-						entityGen.CollectionOption = co;
-						entityGen.BaseNamespace = projectDefinition.BaseNameSpace;
-						entityGen.Run();
-					}
+					var contextDataType = dataType as ContextDataType;
+					var entityDataType = dataTypes.FirstOrDefault(o => o is EntityDataType) as EntityDataType;
 					
-					if(dt is ContextDataType)
-					{
-						ContextGenerator contxtGen = new ContextGenerator();
-						contxtGen.DataType = dt;
-						contxtGen.NamingConvention = nc;
-						contxtGen.CollectionOption = co;
-						contxtGen.BaseNamespace = projectDefinition.BaseNameSpace;
-						contxtGen.Run();
+					foreach(var contextData in contextDataType.Contexts)
+					{					
+						if(contextData != null)
+						{
+							var mappingGen = new MappingGenerator();
+							var mappingDataType = dataTypes.FirstOrDefault(o => o is MappingDataType) as MappingDataType;
+					
+							if(mappingDataType != null)
+							{
+								mappingGen.Models = domain.Tables;
+								mappingGen.ProjectOutputPath = contextData.OutputPath;
+								mappingGen.EntityNamespace = entityDataType.FullNamespace;
+								mappingGen.ContextData = contextData;
+								mappingGen.MappingDataType = mappingDataType;
+								mappingGen.Run();
+							}
+							
+							var contxtGen = new ContextGenerator();
+							
+							contxtGen.Models = domain.Tables;
+							contxtGen.DataType = contextDataType;
+							contxtGen.ContextData = contextData;
+							contxtGen.EntityDataType = entityDataType;
+							contxtGen.MappingNamespace = mappingGen.FullNamespace;
+							contxtGen.MappingPostFix = mappingDataType.PostFix;
+							contxtGen.Run();
+						}
 					}
-				}
-			}
-		}
-	}
+                }
+			
+                if(dataType is RepoInterfaceDataType)
+                {
+                    var iRepoGen = new RepoInterfaceGenerator();
+                    iRepoGen.Models = domain.Tables;
+                    iRepoGen.DataType = dataType as RepoInterfaceDataType;
+                    iRepoGen.DtoInterfaceType = dataTypes.FirstOrDefault(o => o is DtoInterfaceDataType) as DtoInterfaceDataType;
+                    iRepoGen.Run();
+                }
+			
+                if(dataType is RepositoryDataType)
+                {
+                    var iRepoGen = new RepositoryGenerator();
+                    iRepoGen.Models = domain.Tables;
+                    iRepoGen.DataType = dataType as RepositoryDataType;
+                    iRepoGen.DtoInterfaceType = dataTypes.FirstOrDefault(o => o is DtoInterfaceDataType) as DtoInterfaceDataType;
+                    iRepoGen.EntityDataType = dataTypes.FirstOrDefault(o => o is EntityDataType) as EntityDataType;
+                    iRepoGen.Run();
+                }
+			
+                if(dataType is DtoDataType)
+                {
+                    var iDtoGen = new DtoGenerator();
+                    iDtoGen.Models = domain.Tables;
+                    iDtoGen.DataType = dataType as DtoDataType;
+                    iDtoGen.DtoInterfaceType = dataTypes.FirstOrDefault(o => o is DtoInterfaceDataType) as DtoInterfaceDataType;
+                    iDtoGen.Run();
+                }
+            }
+			
+			// Unit Test generation
+			var unitTestGen = new BaseUnitTestGenerator();
+			unitTestGen.Models = domain.Tables;
+			unitTestGen.Run();
+        }
 }
-#>
+    #>

@@ -1,12 +1,12 @@
-﻿<#@ include file="EntityTemplate.ttinclude" #>
+﻿<#@ include file="RepoInterfaceTemplate.ttinclude" #>
 <#+
-    public class EntityGenerator : BaseGenerator
+    public class RepoInterfaceGenerator : BaseGenerator
     {
-        public EntityDataType DataType { get; set; }
+        public RepoInterfaceDataType DataType { get; set; }
         public DtoInterfaceDataType DtoInterfaceType { get; set; }
         public List<Table> Models { get; set; }
 
-        private EntityTemplate template = new EntityTemplate();
+        private RepoInterfaceTemplate template = new RepoInterfaceTemplate();
 
         protected override void RunCore()
         {
@@ -23,7 +23,7 @@
                     template.Output.Project = DataType.OutputPath;
                 }
 
-                template.RenderToFile(string.Format(@"{0}\{1}.g.cs", DataType.OutputFolder, DataType.EntityName));	
+                template.RenderToFile(string.Format(@"{0}\I{1}Repository.g.cs", DataType.OutputFolder, DataType.RepoName));	
             }
         }
     }

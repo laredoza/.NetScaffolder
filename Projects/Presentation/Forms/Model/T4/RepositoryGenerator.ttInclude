@@ -1,12 +1,13 @@
-﻿<#@ include file="EntityTemplate.ttinclude" #>
+﻿<#@ include file="RepositoryTemplate.ttinclude" #>
 <#+
-    public class EntityGenerator : BaseGenerator
+    public class RepositoryGenerator : BaseGenerator
     {
-        public EntityDataType DataType { get; set; }
+        public RepositoryDataType DataType { get; set; }
         public DtoInterfaceDataType DtoInterfaceType { get; set; }
+        public EntityDataType EntityDataType { get; set; }
         public List<Table> Models { get; set; }
 
-        private EntityTemplate template = new EntityTemplate();
+        private RepositoryTemplate template = new RepositoryTemplate();
 
         protected override void RunCore()
         {
@@ -17,13 +18,14 @@
                 DataType.MetaData = model;
                 template.DataType = this.DataType;
                 template.DtoInterfaceNamespace = DtoInterfaceType.FullNamespace;
+                template.EntityNamespace = EntityDataType.FullNamespace;
 
                 if(!string.IsNullOrEmpty(DataType.OutputPath))
                 {
                     template.Output.Project = DataType.OutputPath;
                 }
 
-                template.RenderToFile(string.Format(@"{0}\{1}.g.cs", DataType.OutputFolder, DataType.EntityName));	
+                template.RenderToFile(string.Format(@"{0}\{1}Repository.g.cs", DataType.OutputFolder, DataType.RepoName));	
             }
         }
     }

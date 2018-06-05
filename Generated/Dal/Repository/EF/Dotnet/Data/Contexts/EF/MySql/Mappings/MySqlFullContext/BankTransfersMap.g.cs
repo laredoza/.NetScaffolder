@@ -33,7 +33,7 @@ namespace Banking.Models.Context.Mappings.MySql
 	{	
 		public BankTransfersMap ()
 		{
-			ToTable("`BankTransfers`", "`dbo`");
+			ToTable("BankTransfers", "dbo");
 			
 			#region Primary Keys
 			

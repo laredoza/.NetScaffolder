@@ -1,0 +1,62 @@
+﻿<#+
+public class BaseUnitTestTemplate : BaseTemplate 
+{
+    public List<Table> Models { get; set; }
+	
+	public override string TransformText()
+	{
+		// Debugger.Break();
+		Header = new CopyrightHeader();
+		Header.Filename = "BaseUnitTest.g.cs";
+#>
+
+<#= Header.TransformText() #>
+
+// *******************************************************************
+//	GENERATED CODE. DOT NOT MODIFY MANUALLY AS CHANGES CAN BE LOST!!!
+//	USE A PARTIAL CLASS INSTEAD
+// *******************************************************************
+
+using Banking.Models.Dto;
+using Banking.Models.Interfaces;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace RepositoryEFDotnet.UnitTest
+{
+	public abstract partial class BaseUnitTest
+	{
+        protected virtual void Check_EntityCount(int expected, int actual, string name)
+        {
+            Assert.AreEqual(expected, actual, $"Incorrect number of {name} found.");
+        }
+
+		#region Fields
+
+<#+ foreach(var mdl in Models){ #>
+
+        protected virtual void Check_<#= mdl.TableName #>(I<#= mdl.TableName #> dto, I<#= mdl.TableName #> savedEntity)
+        { 
+            Assert.IsNotNull(savedEntity);
+			Assert.IsNotNull(dto);
+			
+			// Test Fields
+<#+ foreach(var col in mdl.Columns){ #>
+            Assert.AreEqual(dto.<#= col.ColumnName #>, savedEntity.<#= col.ColumnName #>, $"Customer.<#= col.ColumnName #> incorrect.");
+<#+ } #>
+        }		
+<#+ } #>
+
+		#endregion
+		
+	}
+}
+<#+
+		return this.GenerationEnvironment.ToString();
+	}
+}
+#>

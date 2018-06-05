@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="CSharpLanguageOutput.cs" company="DotnetScaffolder">
+// <copyright file="VBLanguageOutput.cs" company="DotnetScaffolder">
 //   MIT
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
@@ -15,13 +15,13 @@ namespace DotNetScaffolder.Components.LanguageOutputs.DefaultLanguageOutput
     #endregion
 
     /// <summary>
-    ///     Visual Basic LanguageOutput.
+    ///     CSharp LanguageOutput.
     /// </summary>
     /// <example>securityview will be SecurityView</example>
     [Export(typeof(ILanguageOutput))]
-    [ExportMetadata("NameMetaData", "C#")]
-    [ExportMetadata("ValueMetaData", "1BC1B0C4-1E41-9146-82CF-599181CE4410")]
-    public class VBLanguageOutput : ILanguageOutput
+    [ExportMetadata("NameMetaData", "VB")]
+    [ExportMetadata("ValueMetaData", "1BC1B0C4-1E41-9146-82CF-599181CE4411")]
+    public class CSharpLanguageOutput : ILanguageOutput
     {
     }
 }

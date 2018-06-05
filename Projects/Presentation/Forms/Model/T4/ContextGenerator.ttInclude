@@ -1,65 +1,102 @@
-﻿<#@ assembly name="System" #>
-<#@ assembly name="System.Configuration" #>
-<#@ assembly name="System.Globalization" #>
-<#@ assembly name="System.Xml" #>
-<#@ assembly name="$(ProjectDir)Model\Package\Common.Logging.Core.dll" #>
-<#@ assembly name="$(ProjectDir)Model\Package\Common.Logging.dll" #>
-<#@ assembly name="$(ProjectDir)Model\Package\DotNetScaffolder.Core.Common.dll" #>
-<#@ assembly name="$(ProjectDir)Model\Package\DotNetScaffolder.Mapping.MetaData.dll" #>
-<#@ assembly name="$(ProjectDir)Model\Package\DotNetScaffolder.Components.DataTypes.DefaultDataTypes.dll" #>
-<#@ assembly name="$(ProjectDir)Model\Package\FormControls.dll" #>
-<#@ assembly name="$(ProjectDir)Model\Package\DotNetScaffolder.Components.Common.dll" #>
-<#@ assembly name="$(ProjectDir)Model\Package\Configuration.dll" #>
-<#@ import namespace="System" #>
-<#@ import namespace="System.Configuration" #>
-<#@ import namespace="System.Globalization" #>
-<#@ import namespace="System.Xml" #>
-<#@ import namespace="System.IO" #>
-<#@ import namespace="System.Xml.Serialization" #>
-<#@ import namespace="System.Collections.Generic" #>
-<#@ import namespace="System.Diagnostics" #>
-<#@ import namespace="DotNetScaffolder.Mapping.MetaData.Project" #>
-<#@ import namespace="DotNetScaffolder.Mapping.MetaData.Model" #>
-<#@ import namespace="DotNetScaffolder.Core.Common.Serializer" #>
-<#@ import namespace="DotNetScaffolder.Components.DataTypes.DefaultDataTypes" #>
-<#@ import namespace="Configuration" #>
-<#@ include file="ContextTemplate.ttinclude" #>
+﻿<#@ include file="ContextTemplate.ttinclude" #>
+<#@ include file="ContextCoreTemplate.ttinclude" #>
+<#@ include file="ContextNHibernateTemplate.ttinclude" #>
 <#+
-public class ContextGenerator : BaseGenerator
-{
-	public IDataType DataType {get;set;}
-	public string BaseNamespace{get;set;}
-	
-	public ContextDataType ContextDataType
-	{
-		get
-		{
-			return (ContextDataType)this.DataType;
-		}
-	}
-	private ContextTemplate contextTemplate = new ContextTemplate();
+    public class ContextGenerator : BaseGenerator
+    {
+        public ContextDataType DataType {get;set;}
+		public ContextData ContextData {get;set;}
+        public EntityDataType EntityDataType {get;set;}
+		public List<Table> Models { get; set; }
+		public string MappingPostFix { get; set;}
+		public string MappingNamespace {get; set;}
 
-	protected override void RunCore()
-	{
-		Debugger.Break();
-		contextTemplate.DataType = this.ContextDataType;
-		contextTemplate.NamingConvention = NamingConvention;
-		contextTemplate.CollectionOption = CollectionOption;
-		contextTemplate.BaseNamespace = BaseNamespace;
+		private string projectPath = string.Empty;
+		
+        protected override void RunCore()
+        {
+			foreach(IDriver driver in DataType.Drivers )
+			{
+				Debugger.Break();
+				
+				projectPath = string.Format(ContextData.OutputPath, driver.ParentFolder, driver.Prefix);	
+				
+				if(driver.DriverType is EFDriverType)
+				{
+					GenerateEFContext(driver);
+				}
+				else if(driver.DriverType is EFCoreDriverType)
+				{
+					GenerateEFCoreContext(driver);
+				}
+				else if(driver.DriverType is NhibernateDriverType)
+				{
+					GenerateNHibernateContext(driver);
+				}
+			}
+        }
+		
+		private void GenerateNHibernateContext(IDriver driver)
+		{	
+			var contextModels = Models.Where(o => ContextData.Models.Exists(x => x.SchemaName == o.SchemaName && x.TableName == o.TableName)).ToList();
+		
+			var template = new ContextNHibernateTemplate();
+		    template.DataType = DataType;
+            //template.EntityNamespace = EntityDataType.FullNamespace;
+			template.ContextData = ContextData;
+			template.Driver = driver;
+			template.MappingNamespace = MappingNamespace;
+			template.MappingPostFix = MappingPostFix;
+			template.Models = contextModels;
 
-		foreach(var dbContext in ContextDataType.Contexts)
-		{
-			contextTemplate.ContextData = dbContext;
-			Debugger.Break();
-			if(!string.IsNullOrEmpty(dbContext.OutputPath))
+			if(!string.IsNullOrEmpty(projectPath))
 			{
-				contextTemplate.RenderToFile(string.Format(@"{0}\{1}\{2}.g.cs", dbContext.OutputPath, dbContext.OutputFolder, dbContext.ContextName));
+				template.Output.Project =  projectPath;
 			}
-			else
-			{
-				contextTemplate.RenderToFile(string.Format(@"{0}\{1}.g.cs", dbContext.OutputFolder, dbContext.ContextName));	
-			}
+
+			template.RenderToFile(string.Format(@"{0}\{1}{2}.g.cs", ContextData.OutputFolder,driver.Prefix,ContextData.ContextName));
 		}
-	}
-}
+		
+		private void GenerateEFContext(IDriver driver)
+		{	
+			var contextModels = Models.Where(o => ContextData.Models.Exists(x => x.SchemaName == o.SchemaName && x.TableName == o.TableName)).ToList();
+		
+			var template = new ContextTemplate();
+		    template.DataType = DataType;
+            template.EntityNamespace = EntityDataType.FullNamespace;
+			template.ContextData = ContextData;
+			template.Driver = driver;
+			template.MappingNamespace = MappingNamespace;
+			template.MappingPostFix = MappingPostFix;
+			template.Models = contextModels;
+
+			if(!string.IsNullOrEmpty(projectPath))
+			{
+				template.Output.Project =  projectPath;
+			}
+
+			template.RenderToFile(string.Format(@"{0}\{1}{2}.g.cs", ContextData.OutputFolder,driver.Prefix,ContextData.ContextName));
+		}
+		
+		private void GenerateEFCoreContext(IDriver driver)
+		{	
+			var contextModels = Models.Where(o => ContextData.Models.Exists(x => x.SchemaName == o.SchemaName && x.TableName == o.TableName)).ToList();
+			
+			var template = new ContextCoreTemplate();
+		    template.DataType = DataType;
+            template.EntityNamespace = EntityDataType.FullNamespace;
+			template.ContextData = ContextData;
+			template.Driver = driver;
+			template.MappingNamespace = MappingNamespace;
+			template.MappingPostFix = MappingPostFix;
+			template.Models = contextModels;
+
+			if(!string.IsNullOrEmpty(projectPath))
+			{
+				template.Output.Project =  projectPath;
+			}
+
+			template.RenderToFile(string.Format(@"{0}\{1}{2}.g.cs", ContextData.OutputFolder,driver.Prefix,ContextData.ContextName));
+		}
+    }
 #>

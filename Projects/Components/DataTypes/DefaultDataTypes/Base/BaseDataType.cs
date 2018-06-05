@@ -95,6 +95,9 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Base
         [XmlIgnore]
         public INamingConvention NamingConvention { get; set; }
 
+        /// <summary>
+        /// Gets or sets the language output details.
+        /// </summary>
         public List<LanguageOutputDetails> LanguageOutputDetails { get; set; } 
 
         /// <summary>

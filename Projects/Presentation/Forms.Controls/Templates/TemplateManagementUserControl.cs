@@ -123,7 +123,6 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
             Template newTemplate = new Template
                                        {
                                            Id = Guid.NewGuid(),
-                                           ConfigLocation = parentTemplate.ConfigLocation,
                                            DataType = parentTemplate.DataType,
                                            Enabled = true,
                                            LanguageOutputId = parentTemplate.LanguageOutputId,
@@ -166,7 +165,6 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
             Template newTemplate = new Template
                                        {
                                            Id = Guid.NewGuid(),
-                                           ConfigLocation = parentTemplate.ConfigLocation,
                                            DataType = parentTemplate.DataType,
                                            Enabled = true,
                                            LanguageOutputId = parentTemplate.LanguageOutputId,

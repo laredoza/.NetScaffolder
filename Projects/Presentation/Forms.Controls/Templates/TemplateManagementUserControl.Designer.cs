@@ -52,13 +52,12 @@
             // 
             // TemplateDetailsUserControl1
             // 
-            this.TemplateDetailsUserControl1.ConfigLocation = DotNetScaffolder.Mapping.MetaData.Enum.ConfigLocation.Data;
             this.TemplateDetailsUserControl1.Data = null;
             this.TemplateDetailsUserControl1.GeneratorTypeId = new System.Guid("00000000-0000-0000-0000-000000000000");
             this.TemplateDetailsUserControl1.LanguageId = new System.Guid("00000000-0000-0000-0000-000000000000");
             this.TemplateDetailsUserControl1.Location = new System.Drawing.Point(15, 19);
             this.TemplateDetailsUserControl1.Name = "TemplateDetailsUserControl1";
-            this.TemplateDetailsUserControl1.Size = new System.Drawing.Size(451, 223);
+            this.TemplateDetailsUserControl1.Size = new System.Drawing.Size(469, 255);
             this.TemplateDetailsUserControl1.TabIndex = 0;
             this.TemplateDetailsUserControl1.TemplateEnabled = false;
             this.TemplateDetailsUserControl1.TemplateName = "";

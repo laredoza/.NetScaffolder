@@ -1,0 +1,105 @@
+﻿<#+
+public class MappingNHibernateTemplate : BaseTemplate 
+{
+	public string Namespace { get; set; }
+	public string EntityNamespace { get; set; }
+	public ContextData ContextData { get; set; } 
+	public IDriver Driver { get; set; }
+	public Table Model { get; set; }
+	public List<Table> Models { get; set; }
+	public INamingConvention NamingConvention { get; set; }
+	public string PostFix { get; set; }
+
+	public override string TransformText()
+	{		
+        string ModelName = NamingConvention == null ? Model.TableName : NamingConvention.ApplyNamingConvention(Model.TableName);
+
+		//Debugger.Break();
+		Header = new CopyrightHeader();
+		Header.Filename = ModelName + PostFix + ".g.cs";
+#>
+
+<#= Header.TransformText() #>
+
+// *******************************************************************
+//	GENERATED CODE. DOT NOT MODIFY MANUALLY AS CHANGES CAN BE LOST!!!
+//	USE A PARTIAL CLASS INSTEAD
+// *******************************************************************
+using <#= EntityNamespace #>;
+using FluentNHibernate.Mapping;
+
+namespace <#= Namespace #>
+{
+	public partial class <#= ModelName #><#= PostFix #> : ClassMap<<#= ModelName #>>
+	{	
+		public <#= ModelName #><#= PostFix #> ()
+		{
+<#+
+			var schemaName = Model.SchemaName;
+			if (Driver.ForceSchemaToUppercase)
+			{
+				schemaName = schemaName.ToUpper();
+			}
+#>
+			Table("<#= ModelName #>");
+			Schema("<#= schemaName #>");
+			
+			#region Primary Keys
+			
+<#+ if(Model.PrimaryKeyCount == 1){ var pk = Model.Columns.First(o => o.IsPrimaryKey);#>
+			Id(t => t.<#= pk.ColumnName #>)<#=Driver.DriverType.TransformDbGeneratedKey(Model) #>;
+<#+ } #>
+<#+ if(Model.PrimaryKeyCount > 1){ #>
+			CompositeId()<#+ foreach(var col in Model.Columns.Where(o => o.IsPrimaryKey)){ #>.KeyProperty(t => t.<#= col.ColumnName #>)<#+ } #>;
+<#+ } #>
+
+			#endregion
+
+			#region Constraints
+			
+<#+ foreach(var col in Model.Columns){ #>
+<#+ if(col.IsPrimaryKey){ #>
+			Map(t => t.<#= col.ColumnName #>).Generated.Insert()
+<#+ } else  #>
+<#+ { #>
+			Map(t => t.<#= col.ColumnName #>)
+<#+ } #>
+<#+ if((col.Precision > 0 && !col.InValidPrecisionGeneration) || col.Scale > 0){ #>
+			<#= Driver.DriverType.TransformColumnPrecision(col) #>
+<#+ } #>
+<#+ if(col.Length > 0){ #>
+			.Length(<#= col.Length #>)
+<#+ } #>
+<#+ if(col.IsRequired){ #>
+			.Not.Nullable();
+<#+ } else #>
+<#+ { #>
+			.Nullable();
+<#+ } #>
+<#+ } #>
+			
+			#endregion
+
+			#region Relationships
+			
+<#+ foreach(var rel in Model.Relationships.Where(o => ContextData.HasModel(o))){ #>
+			<#= Driver.DriverType.TransformRelationship(Model.TableName, rel, Models, Model.Relationships.Where(o => ContextData.HasModel(o)), NamingConvention) #>
+<#+ } #>
+			
+			#endregion			
+<#+ if(Driver.DriverType.IncludeColumnOrder){ #>
+
+			#region Column Order
+			
+			// Not available in NHibernate at the moment
+
+			#endregion
+<#+ } #>	
+		}
+	}
+}
+<#+
+		return this.GenerationEnvironment.ToString();
+	}
+}
+#>

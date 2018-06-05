@@ -33,20 +33,17 @@
             this.CheckBoxEnabled = new System.Windows.Forms.CheckBox();
             this.TextBoxName = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
-            this.button11 = new System.Windows.Forms.Button();
             this.PanelTemplate = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label15 = new System.Windows.Forms.Label();
-            this.TextBoxVersion = new System.Windows.Forms.TextBox();
-            this.button8 = new System.Windows.Forms.Button();
-            this.TextBoxTemplate = new System.Windows.Forms.TextBox();
-            this.label14 = new System.Windows.Forms.Label();
             this.ComboBoxGeneratorOutput = new System.Windows.Forms.ComboBox();
+            this.LblVersion = new System.Windows.Forms.Label();
+            this.ListBoxTemplates = new System.Windows.Forms.ListBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.BtnOpen = new System.Windows.Forms.Button();
+            this.label14 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
             this.ComboBoxLanguageOutput = new System.Windows.Forms.ComboBox();
             this.label18 = new System.Windows.Forms.Label();
-            this.ComboBoxSetupLocation = new System.Windows.Forms.ComboBox();
-            this.label16 = new System.Windows.Forms.Label();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.panel1.SuspendLayout();
             this.PanelTemplate.SuspendLayout();
@@ -59,11 +56,10 @@
             this.panel1.Controls.Add(this.CheckBoxEnabled);
             this.panel1.Controls.Add(this.TextBoxName);
             this.panel1.Controls.Add(this.label13);
-            this.panel1.Controls.Add(this.button11);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(451, 43);
+            this.panel1.Size = new System.Drawing.Size(466, 43);
             this.panel1.TabIndex = 59;
             // 
             // CheckBoxEnabled
@@ -95,106 +91,93 @@
             this.label13.TabIndex = 53;
             this.label13.Text = "Name:";
             // 
-            // button11
-            // 
-            this.button11.Enabled = false;
-            this.button11.Location = new System.Drawing.Point(373, -2);
-            this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(75, 23);
-            this.button11.TabIndex = 62;
-            this.button11.Text = "Default";
-            this.button11.UseVisualStyleBackColor = true;
-            // 
             // PanelTemplate
             // 
             this.PanelTemplate.Controls.Add(this.groupBox1);
             this.PanelTemplate.Dock = System.Windows.Forms.DockStyle.Top;
             this.PanelTemplate.Location = new System.Drawing.Point(0, 43);
             this.PanelTemplate.Name = "PanelTemplate";
-            this.PanelTemplate.Size = new System.Drawing.Size(451, 169);
+            this.PanelTemplate.Size = new System.Drawing.Size(466, 206);
             this.PanelTemplate.TabIndex = 60;
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.label15);
-            this.groupBox1.Controls.Add(this.TextBoxVersion);
-            this.groupBox1.Controls.Add(this.button8);
-            this.groupBox1.Controls.Add(this.TextBoxTemplate);
-            this.groupBox1.Controls.Add(this.label14);
             this.groupBox1.Controls.Add(this.ComboBoxGeneratorOutput);
+            this.groupBox1.Controls.Add(this.LblVersion);
+            this.groupBox1.Controls.Add(this.ListBoxTemplates);
+            this.groupBox1.Controls.Add(this.label15);
+            this.groupBox1.Controls.Add(this.BtnOpen);
+            this.groupBox1.Controls.Add(this.label14);
             this.groupBox1.Controls.Add(this.label19);
             this.groupBox1.Controls.Add(this.ComboBoxLanguageOutput);
             this.groupBox1.Controls.Add(this.label18);
-            this.groupBox1.Controls.Add(this.ComboBoxSetupLocation);
-            this.groupBox1.Controls.Add(this.label16);
             this.groupBox1.Location = new System.Drawing.Point(3, 6);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(445, 161);
+            this.groupBox1.Size = new System.Drawing.Size(460, 189);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Template";
             // 
+            // ComboBoxGeneratorOutput
+            // 
+            this.ComboBoxGeneratorOutput.Enabled = false;
+            this.ComboBoxGeneratorOutput.FormattingEnabled = true;
+            this.ComboBoxGeneratorOutput.Location = new System.Drawing.Point(112, 48);
+            this.ComboBoxGeneratorOutput.Name = "ComboBoxGeneratorOutput";
+            this.ComboBoxGeneratorOutput.Size = new System.Drawing.Size(238, 21);
+            this.ComboBoxGeneratorOutput.TabIndex = 86;
+            // 
+            // LblVersion
+            // 
+            this.LblVersion.AutoSize = true;
+            this.LblVersion.Location = new System.Drawing.Point(109, 163);
+            this.LblVersion.Name = "LblVersion";
+            this.LblVersion.Size = new System.Drawing.Size(13, 13);
+            this.LblVersion.TabIndex = 85;
+            this.LblVersion.Text = "1";
+            // 
+            // ListBoxTemplates
+            // 
+            this.ListBoxTemplates.Enabled = false;
+            this.ListBoxTemplates.FormattingEnabled = true;
+            this.ListBoxTemplates.Location = new System.Drawing.Point(112, 75);
+            this.ListBoxTemplates.Name = "ListBoxTemplates";
+            this.ListBoxTemplates.Size = new System.Drawing.Size(238, 82);
+            this.ListBoxTemplates.TabIndex = 84;
+            // 
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(54, 129);
+            this.label15.Location = new System.Drawing.Point(47, 163);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(45, 13);
             this.label15.TabIndex = 82;
             this.label15.Text = "Version:";
             // 
-            // TextBoxVersion
+            // BtnOpen
             // 
-            this.TextBoxVersion.Location = new System.Drawing.Point(112, 126);
-            this.TextBoxVersion.Name = "TextBoxVersion";
-            this.TextBoxVersion.Size = new System.Drawing.Size(238, 20);
-            this.TextBoxVersion.TabIndex = 81;
-            this.TextBoxVersion.Text = "0";
-            this.TextBoxVersion.TextChanged += new System.EventHandler(this.TextBoxVersion_TextChanged);
-            // 
-            // button8
-            // 
-            this.button8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button8.Enabled = false;
-            this.button8.Location = new System.Drawing.Point(364, 98);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(75, 23);
-            this.button8.TabIndex = 78;
-            this.button8.Text = "Edit";
-            this.button8.UseVisualStyleBackColor = true;
-            // 
-            // TextBoxTemplate
-            // 
-            this.TextBoxTemplate.Location = new System.Drawing.Point(112, 100);
-            this.TextBoxTemplate.Name = "TextBoxTemplate";
-            this.TextBoxTemplate.Size = new System.Drawing.Size(238, 20);
-            this.TextBoxTemplate.TabIndex = 80;
-            this.TextBoxTemplate.Text = "Entity\\EntityFramework.tmp";
-            this.TextBoxTemplate.TextChanged += new System.EventHandler(this.TextBoxTemplate_TextChanged);
+            this.BtnOpen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtnOpen.Enabled = false;
+            this.BtnOpen.Location = new System.Drawing.Point(370, 134);
+            this.BtnOpen.Name = "BtnOpen";
+            this.BtnOpen.Size = new System.Drawing.Size(75, 23);
+            this.BtnOpen.TabIndex = 78;
+            this.BtnOpen.Text = "Open";
+            this.BtnOpen.UseVisualStyleBackColor = true;
             // 
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(47, 100);
+            this.label14.Location = new System.Drawing.Point(47, 75);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(54, 13);
+            this.label14.Size = new System.Drawing.Size(59, 13);
             this.label14.TabIndex = 79;
-            this.label14.Text = "Template:";
-            // 
-            // ComboBoxGeneratorOutput
-            // 
-            this.ComboBoxGeneratorOutput.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ComboBoxGeneratorOutput.FormattingEnabled = true;
-            this.ComboBoxGeneratorOutput.Location = new System.Drawing.Point(112, 73);
-            this.ComboBoxGeneratorOutput.Name = "ComboBoxGeneratorOutput";
-            this.ComboBoxGeneratorOutput.Size = new System.Drawing.Size(238, 21);
-            this.ComboBoxGeneratorOutput.TabIndex = 77;
-            this.ComboBoxGeneratorOutput.SelectedIndexChanged += new System.EventHandler(this.ComboBoxGeneratorOutput_SelectedIndexChanged);
+            this.label14.Text = "Templates:";
             // 
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(17, 73);
+            this.label19.Location = new System.Drawing.Point(17, 48);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(84, 13);
             this.label19.TabIndex = 76;
@@ -219,28 +202,6 @@
             this.label18.TabIndex = 74;
             this.label18.Text = "Language Output:";
             // 
-            // ComboBoxSetupLocation
-            // 
-            this.ComboBoxSetupLocation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ComboBoxSetupLocation.FormattingEnabled = true;
-            this.ComboBoxSetupLocation.Items.AddRange(new object[] {
-            "Data",
-            "Driver"});
-            this.ComboBoxSetupLocation.Location = new System.Drawing.Point(112, 46);
-            this.ComboBoxSetupLocation.Name = "ComboBoxSetupLocation";
-            this.ComboBoxSetupLocation.Size = new System.Drawing.Size(238, 21);
-            this.ComboBoxSetupLocation.TabIndex = 73;
-            this.ComboBoxSetupLocation.SelectedIndexChanged += new System.EventHandler(this.ComboBoxSetupLocation_SelectedIndexChanged);
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(19, 49);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(82, 13);
-            this.label16.TabIndex = 72;
-            this.label16.Text = "Setup Location:";
-            // 
             // errorProvider1
             // 
             this.errorProvider1.ContainerControl = this;
@@ -252,7 +213,7 @@
             this.Controls.Add(this.PanelTemplate);
             this.Controls.Add(this.panel1);
             this.Name = "TemplateDetailsUserControl";
-            this.Size = new System.Drawing.Size(451, 223);
+            this.Size = new System.Drawing.Size(466, 255);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.PanelTemplate.ResumeLayout(false);
@@ -267,22 +228,19 @@
 
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel PanelTemplate;
-        private System.Windows.Forms.Button button11;
         private System.Windows.Forms.TextBox TextBoxName;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.CheckBox CheckBoxEnabled;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.TextBox TextBoxVersion;
-        private System.Windows.Forms.Button button8;
-        private System.Windows.Forms.TextBox TextBoxTemplate;
+        private System.Windows.Forms.Button BtnOpen;
         private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.ComboBox ComboBoxGeneratorOutput;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.ComboBox ComboBoxLanguageOutput;
         private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.ComboBox ComboBoxSetupLocation;
-        private System.Windows.Forms.Label label16;
         private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.ListBox ListBoxTemplates;
+        private System.Windows.Forms.Label LblVersion;
+        private System.Windows.Forms.ComboBox ComboBoxGeneratorOutput;
     }
 }
