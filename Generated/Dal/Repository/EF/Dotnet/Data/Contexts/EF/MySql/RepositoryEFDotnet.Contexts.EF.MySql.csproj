@@ -67,6 +67,24 @@
     <Compile Include="Context\MySqlAccountContext.g.cs" />
     <Compile Include="Context\MySqlCustomerContext.g.cs" />
     <Compile Include="Context\MySqlFullContext.g.cs" />
+    <Compile Include="Mappings\MySqlAccountContext\BankAccountMap.g.cs" />
+    <Compile Include="Mappings\MySqlAccountContext\BankTransfersMap.g.cs" />
+    <Compile Include="Mappings\MySqlCustomerContext\BookMap.g.cs" />
+    <Compile Include="Mappings\MySqlCustomerContext\CountryMap.g.cs" />
+    <Compile Include="Mappings\MySqlCustomerContext\CustomerMap.g.cs" />
+    <Compile Include="Mappings\MySqlCustomerContext\OrderDetailsMap.g.cs" />
+    <Compile Include="Mappings\MySqlCustomerContext\OrderMap.g.cs" />
+    <Compile Include="Mappings\MySqlCustomerContext\ProductMap.g.cs" />
+    <Compile Include="Mappings\MySqlCustomerContext\SoftwareMap.g.cs" />
+    <Compile Include="Mappings\MySqlFullContext\BankAccountMap.g.cs" />
+    <Compile Include="Mappings\MySqlFullContext\BankTransfersMap.g.cs" />
+    <Compile Include="Mappings\MySqlFullContext\BookMap.g.cs" />
+    <Compile Include="Mappings\MySqlFullContext\CountryMap.g.cs" />
+    <Compile Include="Mappings\MySqlFullContext\CustomerMap.g.cs" />
+    <Compile Include="Mappings\MySqlFullContext\OrderDetailsMap.g.cs" />
+    <Compile Include="Mappings\MySqlFullContext\OrderMap.g.cs" />
+    <Compile Include="Mappings\MySqlFullContext\ProductMap.g.cs" />
+    <Compile Include="Mappings\MySqlFullContext\SoftwareMap.g.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -83,8 +101,6 @@
       <Name>RepositoryEFDotnet.Contexts.EF.Base</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Mappings\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
