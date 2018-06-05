@@ -73,7 +73,6 @@ namespace DotNetScaffolder.Mapping.MetaData.Project.Packages
         public List<Package> ReturnPackageItems(List<Package> packages)
         {
             List<Package> results = new List<Package>();
-
             foreach (Package package in packages)
             {
                 results.AddRange(this.ReturnPackageItems(package));

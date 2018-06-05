@@ -18,7 +18,6 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Packages
     using DotNetScaffolder.Mapping.MetaData.Project.Packages;
 
     using FormControls.Enum;
-    using FormControls.TreeView;
 
     #endregion
 
@@ -167,6 +166,11 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Packages
         }
 
         /// <summary>
+        ///     Gets or sets the selected package.
+        /// </summary>
+        public Package SelectedPackage { get; set; }
+
+        /// <summary>
         ///     Gets or sets a value indicating whether template enabled.
         /// </summary>
         public bool TemplateEnabled
@@ -242,11 +246,6 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Packages
                 }
             }
         }
-
-        /// <summary>
-        /// Gets or sets the selected package.
-        /// </summary>
-        public Package SelectedPackage { get; set; }
 
         #endregion
 
@@ -363,6 +362,8 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Packages
             {
                 this.SelectedPackage.Templates = this.DataSource.Templates;
             }
+
+            this.BtnAdd.Enabled = false;
         }
 
         /// <summary>
@@ -400,6 +401,48 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Packages
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
             this.TemplateEnabled = (sender as CheckBox).Checked;
+        }
+
+        /// <summary>
+        /// The combo box search_ selected value changed.
+        /// </summary>
+        /// <param name="sender">
+        /// The sender.
+        /// </param>
+        /// <param name="e">
+        /// The e.
+        /// </param>
+        private void ComboBoxSearch_SelectedValueChanged(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(this.ComboBoxSearch.Text))
+            {
+                this.BtnAdd.Enabled = false;
+            }
+            else
+            {
+                this.BtnAdd.Enabled = true;
+            }
+        }
+
+        /// <summary>
+        /// The combo box search_ text update.
+        /// </summary>
+        /// <param name="sender">
+        /// The sender.
+        /// </param>
+        /// <param name="e">
+        /// The e.
+        /// </param>
+        private void ComboBoxSearch_TextUpdate(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(this.ComboBoxSearch.Text))
+            {
+                this.BtnAdd.Enabled = false;
+            }
+            else if (this.ComboBoxSearch.Text.Trim().Length > 1)
+            {
+                this.BtnAdd.Enabled = true;
+            }
         }
 
         /// <summary>
@@ -463,6 +506,11 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Packages
                         this.ComboBoxSearch.AutoCompleteCustomSource.AddRange(availableTemplates.ToArray());
                         this.ComboBoxSearch.Items.Clear();
                         this.ComboBoxSearch.Items.AddRange(availableTemplates.ToArray());
+                    }
+
+                    if (string.IsNullOrEmpty(this.ComboBoxSearch.Text))
+                    {
+                        this.BtnAdd.Enabled = false;
                     }
                 }
                 else

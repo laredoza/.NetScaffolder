@@ -26,6 +26,8 @@ namespace DotNetScaffolder.Presentation.Forms
     /// </summary>
     public partial class Form1 : Form
     {
+        #region Fields
+
         /// <summary>
         ///     The application configuration.
         /// </summary>
@@ -41,6 +43,10 @@ namespace DotNetScaffolder.Presentation.Forms
         /// </summary>
         private string modelPath;
 
+        #endregion
+
+        #region Constructors and Destructors
+
         /// <summary>
         ///     Initializes a new instance of the <see cref="Form1" /> class.
         /// </summary>
@@ -52,6 +58,10 @@ namespace DotNetScaffolder.Presentation.Forms
             this.ConfigPath = ScaffoldConfig.ConfigPath;
             this.LoadData();
         }
+
+        #endregion
+
+        #region Public Properties
 
         /// <summary>
         ///     Gets or sets the config path.
@@ -77,6 +87,10 @@ namespace DotNetScaffolder.Presentation.Forms
                 }
             }
         }
+
+        #endregion
+
+        #region Other Methods
 
         /// <summary>
         /// The btn close_ click.
@@ -125,6 +139,7 @@ namespace DotNetScaffolder.Presentation.Forms
         }
 
         /// <summary>
+        ///     ProjectDefinition
         ///     The load data.
         /// </summary>
         private void LoadData()
@@ -152,10 +167,13 @@ namespace DotNetScaffolder.Presentation.Forms
 
                     if (this.applicationService.ProjectDefinition.Domains.Count > 0)
                     {
+                        // By default use the first domain
                         this.packageUserControl1.SelectedPackage =
                             this.applicationService.ProjectDefinition.Domains[0].Package;
                         this.packageUserControl1.DataSource =
                             this.applicationConfiguration.ApplicationSettings.Packages[0];
+                        this.packageUserControl1.DomainDefinition =
+                            this.applicationService.ProjectDefinition.Domains[0];
                     }
 
                     if (this.applicationConfiguration.ApplicationSettings.Templates.Count > 0)
@@ -244,6 +262,8 @@ namespace DotNetScaffolder.Presentation.Forms
                 this.projectDomainDetailsUserControl1.SelectedDomain =
                     this.applicationService.ProjectDefinition.Domains.FirstOrDefault(d => d.Id == e.Id);
 
+                // Update Domain info for packages
+                this.packageUserControl1.DomainDefinition = this.projectDomainDetailsUserControl1.SelectedDomain;
                 this.packageUserControl1.SelectedPackage = this.projectDomainDetailsUserControl1.SelectedDomain.Package;
 
                 if (this.projectDomainDetailsUserControl1.SelectedDomain.Package != null)
@@ -275,5 +295,27 @@ namespace DotNetScaffolder.Presentation.Forms
                 }
             }
         }
+
+        /// <summary>
+        /// The tab control 1_ selected index changed.
+        /// </summary>
+        /// <param name="sender">
+        /// The sender.
+        /// </param>
+        /// <param name="e">
+        /// The e.
+        /// </param>
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            TabControl tabControl = sender as TabControl;
+
+            if (tabControl.SelectedIndex == 0)
+            {
+                this.projectDomainDetailsUserControl1.DataSourceInitialized = false;
+                this.projectDomainDetailsUserControl1.UpdateDomainPackages();
+            }
+        }
+
+        #endregion
     }
 }
