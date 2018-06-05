@@ -4,7 +4,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace DotNetScaffolder.Presentation.Forms.Controls
+namespace DotNetScaffolder.Presentation.Forms.Controls.Templates
 {
     #region Usings
 
@@ -63,6 +63,11 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
             }
         }
 
+        /// <summary>
+        /// Gets or sets the selected package.
+        /// </summary>
+        public Package SelectedPackage { get; set; }
+
         #endregion
 
         #region Public Methods And Operators
@@ -95,6 +100,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         {
             this.TemplateDetailsUserControl1.TreeNode = e.Node;
             this.TemplateDetailsUserControl1.Data = e.Node.Tag as Template;
+            this.TemplateDetailsUserControl1.SelectedPackage = this.SelectedPackage;
         }
 
         /// <summary>

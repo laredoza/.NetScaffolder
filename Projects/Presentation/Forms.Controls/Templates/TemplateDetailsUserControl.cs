@@ -4,7 +4,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace DotNetScaffolder.Presentation.Forms.Controls
+namespace DotNetScaffolder.Presentation.Forms.Controls.Templates
 {
     #region Usings
 
@@ -20,11 +20,9 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
     using DotNetScaffolder.Core.Common;
     using DotNetScaffolder.Core.Common.Validation;
     using DotNetScaffolder.Core.Configuration;
-    using DotNetScaffolder.Mapping.MetaData.Enum;
     using DotNetScaffolder.Mapping.MetaData.Project.Packages;
 
     using FormControls.Enum;
-    using FormControls.TreeView;
 
     #endregion
 
@@ -316,6 +314,11 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
             }
         }
 
+        /// <summary>
+        /// Gets or sets the selected package.
+        /// </summary>
+        public Package SelectedPackage { get; set; }
+
         #endregion
 
         #region Public Methods And Operators
@@ -453,7 +456,11 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         /// </param>
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-            this.TemplateEnabled = (sender as CheckBox).Checked;
+            if (this.DataSourceInitialized)
+            {
+                this.TemplateEnabled = (sender as CheckBox).Checked;
+                this.UpdateRelatedPackages();
+            }
         }
 
         /// <summary>
@@ -496,6 +503,8 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
                     this.ComboBoxGeneratorOutput.SelectedIndex = 0;
                     this.ListBoxTemplates.Items.Clear();
                 }
+
+                this.UpdateRelatedPackages();
             }
         }
 
@@ -510,7 +519,31 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         /// </param>
         private void TextBoxName_TextChanged(object sender, EventArgs e)
         {
-            this.TemplateName = this.TextBoxName.Text;
+            if (this.DataSourceInitialized)
+            {
+                this.TemplateName = this.TextBoxName.Text;
+                this.UpdateRelatedPackages();
+            }
+        }
+
+        private void UpdateRelatedPackages()
+        {
+            if (this.SelectedPackage != null)
+            {
+                Template template = this.SelectedPackage.Templates.FirstOrDefault(t => t.Id == this.Data.Id);
+                Template packageTemplate;
+
+                for (int i = 0; i <= this.SelectedPackage.Templates.Count - 1; i++)
+                {
+                    packageTemplate = this.SelectedPackage.Templates[i];
+
+                    if (packageTemplate.Id == this.Data.Id)
+                    {
+                        this.SelectedPackage.Templates[i] = this.Data;
+                        break;
+                    }
+                }
+            }
         }
 
         /// <summary>

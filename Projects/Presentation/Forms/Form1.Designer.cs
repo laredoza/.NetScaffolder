@@ -4,6 +4,7 @@
     using DotNetScaffolder.Presentation.Forms.Controls;
     using DotNetScaffolder.Presentation.Forms.Controls.Packages;
     using DotNetScaffolder.Presentation.Forms.Controls.Project;
+    using DotNetScaffolder.Presentation.Forms.Controls.Templates;
 
     partial class Form1
     {
@@ -56,7 +57,7 @@
             this.packageUserControl1 = new DotNetScaffolder.Presentation.Forms.Controls.Packages.PackageUserControl();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.label3 = new System.Windows.Forms.Label();
-            this.TemplateManagementUserControl1 = new DotNetScaffolder.Presentation.Forms.Controls.TemplateManagementUserControl();
+            this.TemplateManagementUserControl1 = new TemplateManagementUserControl();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -373,7 +374,6 @@
 
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
-        private TemplateDetailsUserControl TemplateDetailsUserControl1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button BtnSave;
         private System.Windows.Forms.Button BtnClose;

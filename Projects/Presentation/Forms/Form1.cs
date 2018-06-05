@@ -266,6 +266,8 @@ namespace DotNetScaffolder.Presentation.Forms
                 this.packageUserControl1.DomainDefinition = this.projectDomainDetailsUserControl1.SelectedDomain;
                 this.packageUserControl1.SelectedPackage = this.projectDomainDetailsUserControl1.SelectedDomain.Package;
 
+                this.TemplateManagementUserControl1.SelectedPackage = this.projectDomainDetailsUserControl1.SelectedDomain.Package;
+
                 if (this.projectDomainDetailsUserControl1.SelectedDomain.Package != null)
                 {
                     var settingsPackageHierarchy = this.applicationConfiguration.ApplicationSettings.Packages[0]
