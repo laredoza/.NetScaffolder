@@ -226,8 +226,8 @@ namespace DotNetScaffolder.Core.Configuration
             if (DriverTypeUIs == null || !DriverTypeUIs.Any()) return null;
 
             return DriverTypeUIs.FirstOrDefault(
-                d => d.IsValueCreated
-                     && d.Metadata["DriverType"].ToString().ToLower() == driverTypeId.ToString().ToLower()
+                d => 
+                     d.Metadata["DriverType"].ToString().ToLower() == driverTypeId.ToString().ToLower()
                      && d.Metadata["DisplayType"].ToString().ToLower() == displayType.ToString().ToLower()).Value;
         }
 

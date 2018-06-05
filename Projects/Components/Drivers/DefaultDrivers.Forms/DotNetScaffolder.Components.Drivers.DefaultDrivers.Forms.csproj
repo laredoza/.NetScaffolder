@@ -43,12 +43,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="NHibernateUserControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="NHibernateUserControl.Designer.cs">
-      <DependentUpon>NHibernateUserControl.cs</DependentUpon>
-    </Compile>
     <Compile Include="EFCoreUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -61,17 +55,23 @@
     <Compile Include="EFDriverTypeUserControl.Designer.cs">
       <DependentUpon>EFDriverTypeUserControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="NHibernateUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="NHibernateUserControl.Designer.cs">
+      <DependentUpon>NHibernateUserControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="NHibernateUserControl.resx">
-      <DependentUpon>NHibernateUserControl.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="EFCoreUserControl.resx">
       <DependentUpon>EFCoreUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EFDriverTypeUserControl.resx">
       <DependentUpon>EFDriverTypeUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NHibernateUserControl.resx">
+      <DependentUpon>NHibernateUserControl.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
