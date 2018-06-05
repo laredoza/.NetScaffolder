@@ -309,13 +309,11 @@ namespace DotNetScaffolder.Presentation.Forms
         {
             TabControl tabControl = sender as TabControl;
 
-            if (tabControl.SelectedIndex == 0 )
+            if (tabControl.SelectedIndex == 0)
             {
                 this.projectDomainDetailsUserControl1.DataSourceInitialized = false;
                 this.projectDomainDetailsUserControl1.UpdateDomainPackages();
             }
-
-            //this.projectDomainDetailsUserControl1.UpdateDomainPackages();
         }
 
         #endregion
