@@ -1,5 +1,5 @@
 ﻿
-// <copyright file="BookMap.g.cs.g.cs" company="MIT">
+// <copyright file="OrderDetailsMap.g.cs.g.cs" company="MIT">
 //  Copyright (c) 2018 MIT
 // </copyright>  
 
@@ -20,38 +20,45 @@
 
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration;
-using MySql.Data.Entity;
+using Oracle.ManagedDataAccess.Client;
+using Oracle.Config;
 using RepositoryEFDotnet.Library;
 using System.ComponentModel.DataAnnotations.Schema;
 using Banking.Models.Entity;
 using System.Data.Common;
 
 
-namespace Banking.Models.Mappings.MySql
+namespace Banking.Models.Customers.Mappings.Oracle
 {
-	public partial class BookMap : EntityTypeConfiguration<Book>
+	public partial class OrderDetailsMap : EntityTypeConfiguration<OrderDetails>
 	{	
-		public BookMap ()
+		public OrderDetailsMap ()
 		{
-			ToTable("Book", "dbo");
+			ToTable("OrderDetails", "DBO");
 			
 			#region Primary Keys
 			
-			HasKey(t => t.ProductId);
-			Property(t => t.ProductId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+			HasKey(t => t.OrderDetailsId);
+			Property(t => t.OrderDetailsId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
 			#endregion
 
 			#region Constraints
 			
+			Property(t => t.OrderDetailsId).IsRequired();
+			Property(t => t.OrderId).IsRequired();
 			Property(t => t.ProductId).IsRequired();
-			Property(t => t.Publisher).HasMaxLength(200);
-			Property(t => t.Publisher).IsRequired();
+			Property(t => t.UnitPrice).IsOptional();
+			Property(t => t.UnitPrice).HasPrecision(19, 4);
+			Property(t => t.Amount).IsOptional();
+			Property(t => t.Discount).IsOptional();
 			
 			#endregion
 
 			#region Relationships
 			
+			HasRequired<Order>(s => s.Order).WithMany(s => s.OrderDetails).HasForeignKey(s => s.OrderId).WillCascadeOnDelete(false);
+			HasRequired<Product>(s => s.Product).WithMany(s => s.OrderDetails).HasForeignKey(s => s.ProductId).WillCascadeOnDelete(false);
 			
 			#endregion			
 	

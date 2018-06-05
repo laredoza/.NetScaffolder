@@ -17,12 +17,17 @@
 //	GENERATED CODE. DOT NOT MODIFY MANUALLY AS CHANGES CAN BE LOST!!!
 //	USE A PARTIAL CLASS INSTEAD
 // *******************************************************************
+
+using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration;
+using MySql.Data.Entity;
+using RepositoryEFDotnet.Library;
 using System.ComponentModel.DataAnnotations.Schema;
 using Banking.Models.Entity;
+using System.Data.Common;
 
 
-namespace Banking.Models.Context.Mappings
+namespace Banking.Models.Context.Mappings.MySql
 {
 	public partial class BankAccountMap : EntityTypeConfiguration<BankAccount>
 	{	

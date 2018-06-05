@@ -1,5 +1,5 @@
 ﻿
-// <copyright file="SoftwareMap.g.cs.g.cs" company="MIT">
+// <copyright file="CountryMap.g.cs.g.cs" company="MIT">
 //  Copyright (c) 2018 MIT
 // </copyright>  
 
@@ -27,31 +27,32 @@ using Banking.Models.Entity;
 using System.Data.Common;
 
 
-namespace Banking.Models.Mappings.MySql
+namespace Banking.Models.Customers.Mappings.MySql
 {
-	public partial class SoftwareMap : EntityTypeConfiguration<Software>
+	public partial class CountryMap : EntityTypeConfiguration<Country>
 	{	
-		public SoftwareMap ()
+		public CountryMap ()
 		{
-			ToTable("Software", "dbo");
+			ToTable("Country", "dbo");
 			
 			#region Primary Keys
 			
-			HasKey(t => t.ProductId);
-			Property(t => t.ProductId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+			HasKey(t => t.CountryId);
+			Property(t => t.CountryId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
 			#endregion
 
 			#region Constraints
 			
-			Property(t => t.ProductId).IsRequired();
-			Property(t => t.LicenseCode).HasMaxLength(200);
-			Property(t => t.LicenseCode).IsRequired();
+			Property(t => t.CountryId).IsRequired();
+			Property(t => t.CountryName).HasMaxLength(100);
+			Property(t => t.CountryName).IsOptional();
 			
 			#endregion
 
 			#region Relationships
 			
+			HasMany<Customer>(s => s.Customer).WithOptional(s => s.Country).HasForeignKey(s => s.CountryId).WillCascadeOnDelete(false);
 			
 			#endregion			
 	

@@ -13,7 +13,7 @@
                   <Enabled>true</Enabled>
                   <HierarchyType>Item</HierarchyType>
                   <Id>cfcb7ada-0e0e-4bcd-a4ae-3fe56d279b7d</Id>
-                  <Name>Default Repository</Name>
+                  <Name>Default Repository ( C# )</Name>
                   <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
                   <Selected>false</Selected>
                   <Templates>
@@ -22,10 +22,9 @@
                       <Enabled>true</Enabled>
                       <HierarchyType>Item</HierarchyType>
                       <Id>99d48be6-6570-465d-bc29-0793ea47233f</Id>
-                      <Name>Default Context</Name>
+                      <Name>Default Context ( C# )</Name>
                       <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
                       <Selected>false</Selected>
-                      <ConfigLocation>Data</ConfigLocation>
                       <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4430</DataType>
                       <DefaultSettings />
                       <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
@@ -38,10 +37,9 @@
                       <Enabled>true</Enabled>
                       <HierarchyType>Item</HierarchyType>
                       <Id>07bc3131-eb4d-490b-8b5f-a68a657ef688</Id>
-                      <Name>Default Mapping</Name>
+                      <Name>Default Mapping ( C# )</Name>
                       <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
                       <Selected>false</Selected>
-                      <ConfigLocation>Data</ConfigLocation>
                       <DataType>361ac82c-8f2a-4d7c-b455-ae5effba9d4a</DataType>
                       <DefaultSettings />
                       <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
@@ -54,10 +52,9 @@
                       <Enabled>true</Enabled>
                       <HierarchyType>Item</HierarchyType>
                       <Id>1bc1b0c4-1e41-9146-82cf-599181ce4440</Id>
-                      <Name>Default Entity</Name>
+                      <Name>Default Entity ( C# )</Name>
                       <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
                       <Selected>false</Selected>
-                      <ConfigLocation>Data</ConfigLocation>
                       <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4440</DataType>
                       <DefaultSettings />
                       <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
@@ -70,10 +67,9 @@
                       <Enabled>true</Enabled>
                       <HierarchyType>Item</HierarchyType>
                       <Id>bad391c6-e8a8-45f5-b3ec-f5d57d6a6b90</Id>
-                      <Name>Default Repository Interface</Name>
+                      <Name>Default Repository Interface ( C# )</Name>
                       <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
                       <Selected>false</Selected>
-                      <ConfigLocation>Data</ConfigLocation>
                       <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4451</DataType>
                       <DefaultSettings />
                       <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
@@ -86,47 +82,14 @@
                       <Enabled>true</Enabled>
                       <HierarchyType>Item</HierarchyType>
                       <Id>3ab0816d-5ad5-4990-a655-a14a743e416c</Id>
-                      <Name>Default Repository</Name>
+                      <Name>Default Repository ( C# )</Name>
                       <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
                       <Selected>false</Selected>
-                      <ConfigLocation>Data</ConfigLocation>
                       <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4450</DataType>
                       <DefaultSettings />
                       <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
                       <LanguageOutputId>1bc1b0c4-1e41-9146-82cf-599181ce4410</LanguageOutputId>
                       <TemplatePath>Repository.T4</TemplatePath>
-                      <Version>1</Version>
-                    </Template>
-                    <Template>
-                      <Children />
-                      <Enabled>true</Enabled>
-                      <HierarchyType>Item</HierarchyType>
-                      <Id>a3e5f98c-ac76-40fd-9896-1a3d19dabefe</Id>
-                      <Name>Default Dto Interface</Name>
-                      <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
-                      <Selected>false</Selected>
-                      <ConfigLocation>Data</ConfigLocation>
-                      <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4441</DataType>
-                      <DefaultSettings />
-                      <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
-                      <LanguageOutputId>1bc1b0c4-1e41-9146-82cf-599181ce4410</LanguageOutputId>
-                      <TemplatePath>Dto Interface.T4</TemplatePath>
-                      <Version>1</Version>
-                    </Template>
-                    <Template>
-                      <Children />
-                      <Enabled>true</Enabled>
-                      <HierarchyType>Item</HierarchyType>
-                      <Id>a832889d-7f9a-42fa-ad6b-38d184828dba</Id>
-                      <Name>Default Dto</Name>
-                      <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
-                      <Selected>false</Selected>
-                      <ConfigLocation>Data</ConfigLocation>
-                      <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4490</DataType>
-                      <DefaultSettings />
-                      <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
-                      <LanguageOutputId>1bc1b0c4-1e41-9146-82cf-599181ce4410</LanguageOutputId>
-                      <TemplatePath>Table.T4</TemplatePath>
                       <Version>1</Version>
                     </Template>
                   </Templates>
@@ -141,6 +104,150 @@
               <Selected>false</Selected>
               <Templates />
               <Version>0</Version>
+            </Hierarchy>
+            <Hierarchy xsi:type="Package">
+              <Children>
+                <Hierarchy xsi:type="Package">
+                  <Children />
+                  <Enabled>true</Enabled>
+                  <HierarchyType>Item</HierarchyType>
+                  <Id>b459fac5-61a2-43b2-b826-a09c0879559e</Id>
+                  <Name>Default Domain Driven ( C# )</Name>
+                  <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
+                  <Selected>false</Selected>
+                  <Templates>
+                    <Template>
+                      <Children />
+                      <Enabled>true</Enabled>
+                      <HierarchyType>Item</HierarchyType>
+                      <Id>99d48be6-6570-465d-bc29-0793ea47233f</Id>
+                      <Name>Default Context ( C# )</Name>
+                      <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
+                      <Selected>false</Selected>
+                      <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4430</DataType>
+                      <DefaultSettings />
+                      <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
+                      <LanguageOutputId>1bc1b0c4-1e41-9146-82cf-599181ce4410</LanguageOutputId>
+                      <TemplatePath>Bogus.T4</TemplatePath>
+                      <Version>1</Version>
+                    </Template>
+                    <Template>
+                      <Children />
+                      <Enabled>true</Enabled>
+                      <HierarchyType>Item</HierarchyType>
+                      <Id>07bc3131-eb4d-490b-8b5f-a68a657ef688</Id>
+                      <Name>Default Mapping ( C# )</Name>
+                      <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
+                      <Selected>false</Selected>
+                      <DataType>361ac82c-8f2a-4d7c-b455-ae5effba9d4a</DataType>
+                      <DefaultSettings />
+                      <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
+                      <LanguageOutputId>1bc1b0c4-1e41-9146-82cf-599181ce4410</LanguageOutputId>
+                      <TemplatePath>Test.T4</TemplatePath>
+                      <Version>1</Version>
+                    </Template>
+                    <Template>
+                      <Children />
+                      <Enabled>true</Enabled>
+                      <HierarchyType>Item</HierarchyType>
+                      <Id>1bc1b0c4-1e41-9146-82cf-599181ce4440</Id>
+                      <Name>Default Entity ( C# )</Name>
+                      <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
+                      <Selected>false</Selected>
+                      <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4440</DataType>
+                      <DefaultSettings />
+                      <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
+                      <LanguageOutputId>1bc1b0c4-1e41-9146-82cf-599181ce4410</LanguageOutputId>
+                      <TemplatePath>Bogus.T4</TemplatePath>
+                      <Version>1</Version>
+                    </Template>
+                    <Template>
+                      <Children />
+                      <Enabled>true</Enabled>
+                      <HierarchyType>Item</HierarchyType>
+                      <Id>bad391c6-e8a8-45f5-b3ec-f5d57d6a6b90</Id>
+                      <Name>Default Repository Interface ( C# )</Name>
+                      <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
+                      <Selected>false</Selected>
+                      <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4451</DataType>
+                      <DefaultSettings />
+                      <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
+                      <LanguageOutputId>1bc1b0c4-1e41-9146-82cf-599181ce4410</LanguageOutputId>
+                      <TemplatePath>RepositoryInterface.T4</TemplatePath>
+                      <Version>1</Version>
+                    </Template>
+                    <Template>
+                      <Children />
+                      <Enabled>true</Enabled>
+                      <HierarchyType>Item</HierarchyType>
+                      <Id>3ab0816d-5ad5-4990-a655-a14a743e416c</Id>
+                      <Name>Default Repository ( C# )</Name>
+                      <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
+                      <Selected>false</Selected>
+                      <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4450</DataType>
+                      <DefaultSettings />
+                      <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
+                      <LanguageOutputId>1bc1b0c4-1e41-9146-82cf-599181ce4410</LanguageOutputId>
+                      <TemplatePath>Repository.T4</TemplatePath>
+                      <Version>1</Version>
+                    </Template>
+                    <Template>
+                      <Children />
+                      <Enabled>true</Enabled>
+                      <HierarchyType>Item</HierarchyType>
+                      <Id>f41c4006-d9d1-499b-80be-bbbbc4cb0001</Id>
+                      <Name>Default Application Service ( C# )</Name>
+                      <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
+                      <Selected>false</Selected>
+                      <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4420</DataType>
+                      <DefaultSettings />
+                      <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
+                      <LanguageOutputId>1bc1b0c4-1e41-9146-82cf-599181ce4410</LanguageOutputId>
+                      <TemplatePath>ApplicationService.T4</TemplatePath>
+                      <Version>1</Version>
+                    </Template>
+                    <Template>
+                      <Children />
+                      <Enabled>true</Enabled>
+                      <HierarchyType>Item</HierarchyType>
+                      <Id>a3e5f98c-ac76-40fd-9896-1a3d19dabefe</Id>
+                      <Name>Default Dto Interface ( C# )</Name>
+                      <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
+                      <Selected>false</Selected>
+                      <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4441</DataType>
+                      <DefaultSettings />
+                      <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
+                      <LanguageOutputId>1bc1b0c4-1e41-9146-82cf-599181ce4410</LanguageOutputId>
+                      <TemplatePath>Dto Interface.T4</TemplatePath>
+                      <Version>1</Version>
+                    </Template>
+                    <Template>
+                      <Children />
+                      <Enabled>true</Enabled>
+                      <HierarchyType>Item</HierarchyType>
+                      <Id>a832889d-7f9a-42fa-ad6b-38d184828dba</Id>
+                      <Name>Default Dto ( C# )</Name>
+                      <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
+                      <Selected>false</Selected>
+                      <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4490</DataType>
+                      <DefaultSettings />
+                      <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
+                      <LanguageOutputId>1bc1b0c4-1e41-9146-82cf-599181ce4410</LanguageOutputId>
+                      <TemplatePath>Table.T4</TemplatePath>
+                      <Version>1</Version>
+                    </Template>
+                  </Templates>
+                  <Version>1</Version>
+                </Hierarchy>
+              </Children>
+              <Enabled>true</Enabled>
+              <HierarchyType>Group</HierarchyType>
+              <Id>e254d8e2-3165-47c4-b5c5-a9bc6e31bb36</Id>
+              <Name>Domain Driven</Name>
+              <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
+              <Selected>false</Selected>
+              <Templates />
+              <Version>1</Version>
             </Hierarchy>
           </Children>
           <Enabled>true</Enabled>
@@ -176,7 +283,6 @@
               <Name>Default Application Service ( C# )</Name>
               <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
               <Selected>false</Selected>
-              <ConfigLocation>Data</ConfigLocation>
               <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4420</DataType>
               <DefaultSettings />
               <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
@@ -191,7 +297,6 @@
           <Name>Application Service</Name>
           <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
           <Selected>false</Selected>
-          <ConfigLocation>Data</ConfigLocation>
           <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4420</DataType>
           <DefaultSettings />
           <GeneratorTypeId>00000000-0000-0000-0000-000000000000</GeneratorTypeId>
@@ -209,7 +314,6 @@
               <Name>Default Context ( C# )</Name>
               <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
               <Selected>false</Selected>
-              <ConfigLocation>Data</ConfigLocation>
               <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4430</DataType>
               <DefaultSettings />
               <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
@@ -224,7 +328,6 @@
           <Name>Context</Name>
           <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
           <Selected>false</Selected>
-          <ConfigLocation>Data</ConfigLocation>
           <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4430</DataType>
           <DefaultSettings />
           <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
@@ -242,7 +345,6 @@
               <Name>Default Dto ( C# )</Name>
               <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
               <Selected>false</Selected>
-              <ConfigLocation>Data</ConfigLocation>
               <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4490</DataType>
               <DefaultSettings />
               <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
@@ -257,7 +359,6 @@
           <Name>Dto</Name>
           <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
           <Selected>false</Selected>
-          <ConfigLocation>Data</ConfigLocation>
           <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4490</DataType>
           <DefaultSettings />
           <GeneratorTypeId>00000000-0000-0000-0000-000000000000</GeneratorTypeId>
@@ -275,7 +376,6 @@
               <Name>Default Dto Interface ( C# )</Name>
               <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
               <Selected>false</Selected>
-              <ConfigLocation>Data</ConfigLocation>
               <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4441</DataType>
               <DefaultSettings />
               <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
@@ -290,7 +390,6 @@
           <Name>Dto Interface</Name>
           <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
           <Selected>false</Selected>
-          <ConfigLocation>Data</ConfigLocation>
           <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4441</DataType>
           <DefaultSettings />
           <GeneratorTypeId>00000000-0000-0000-0000-000000000000</GeneratorTypeId>
@@ -308,7 +407,6 @@
               <Name>Default Entity ( C# )</Name>
               <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
               <Selected>false</Selected>
-              <ConfigLocation>Data</ConfigLocation>
               <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4440</DataType>
               <DefaultSettings />
               <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
@@ -323,7 +421,6 @@
           <Name>Entity</Name>
           <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
           <Selected>false</Selected>
-          <ConfigLocation>Data</ConfigLocation>
           <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4440</DataType>
           <DefaultSettings />
           <GeneratorTypeId>838ec2ba-82cd-4a8b-af5f-7f4ea9c6ae8b</GeneratorTypeId>
@@ -341,7 +438,6 @@
               <Name>Default Mapping ( C# )</Name>
               <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
               <Selected>false</Selected>
-              <ConfigLocation>Data</ConfigLocation>
               <DataType>361ac82c-8f2a-4d7c-b455-ae5effba9d4a</DataType>
               <DefaultSettings />
               <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
@@ -356,7 +452,6 @@
           <Name>Mapping</Name>
           <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
           <Selected>false</Selected>
-          <ConfigLocation>Data</ConfigLocation>
           <DataType>361ac82c-8f2a-4d7c-b455-ae5effba9d4a</DataType>
           <DefaultSettings />
           <GeneratorTypeId>00000000-0000-0000-0000-000000000000</GeneratorTypeId>
@@ -374,7 +469,6 @@
               <Name>Default Repository ( C# )</Name>
               <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
               <Selected>false</Selected>
-              <ConfigLocation>Data</ConfigLocation>
               <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4450</DataType>
               <DefaultSettings />
               <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
@@ -389,7 +483,6 @@
           <Name>Repository</Name>
           <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
           <Selected>false</Selected>
-          <ConfigLocation>Data</ConfigLocation>
           <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4450</DataType>
           <DefaultSettings />
           <GeneratorTypeId>00000000-0000-0000-0000-000000000000</GeneratorTypeId>
@@ -407,7 +500,6 @@
               <Name>Default Repository Interface ( C# )</Name>
               <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
               <Selected>false</Selected>
-              <ConfigLocation>Data</ConfigLocation>
               <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4451</DataType>
               <DefaultSettings />
               <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
@@ -422,7 +514,6 @@
           <Name>Repository Interface</Name>
           <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
           <Selected>false</Selected>
-          <ConfigLocation>Data</ConfigLocation>
           <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4451</DataType>
           <DefaultSettings />
           <GeneratorTypeId>00000000-0000-0000-0000-000000000000</GeneratorTypeId>
@@ -437,7 +528,6 @@
       <Name>Templates</Name>
       <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
       <Selected>false</Selected>
-      <ConfigLocation>Data</ConfigLocation>
       <DataType>00000000-0000-0000-0000-000000000000</DataType>
       <DefaultSettings />
       <GeneratorTypeId>c0863551-adcb-4df0-8052-7518d2dd9841</GeneratorTypeId>

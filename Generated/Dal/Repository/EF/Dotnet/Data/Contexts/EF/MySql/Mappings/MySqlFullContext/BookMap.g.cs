@@ -1,5 +1,5 @@
 ﻿
-// <copyright file="OrderDetailsMap.g.cs.g.cs" company="MIT">
+// <copyright file="BookMap.g.cs.g.cs" company="MIT">
 //  Copyright (c) 2018 MIT
 // </copyright>  
 
@@ -27,35 +27,32 @@ using Banking.Models.Entity;
 using System.Data.Common;
 
 
-namespace Banking.Models.Mappings.MySql
+namespace Banking.Models.Context.Mappings.MySql
 {
-	public partial class OrderDetailsMap : EntityTypeConfiguration<OrderDetails>
+	public partial class BookMap : EntityTypeConfiguration<Book>
 	{	
-		public OrderDetailsMap ()
+		public BookMap ()
 		{
-			ToTable("OrderDetails", "dbo");
+			ToTable("Book", "dbo");
 			
 			#region Primary Keys
 			
-			HasKey(t => t.OrderDetailsId);
-			Property(t => t.OrderDetailsId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+			HasKey(t => t.ProductId);
+			Property(t => t.ProductId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
 
 			#endregion
 
 			#region Constraints
 			
-			Property(t => t.OrderDetailsId).IsRequired();
-			Property(t => t.OrderId).IsRequired();
 			Property(t => t.ProductId).IsRequired();
-			Property(t => t.UnitPrice).IsOptional();
-			Property(t => t.UnitPrice).HasPrecision(19, 4);
-			Property(t => t.Amount).IsOptional();
-			Property(t => t.Discount).IsOptional();
+			Property(t => t.Publisher).HasMaxLength(200);
+			Property(t => t.Publisher).IsRequired();
 			
 			#endregion
 
 			#region Relationships
 			
+			HasRequired<Product>(s => s.Product).WithOptional(s => s.Book).WillCascadeOnDelete(false);
 			
 			#endregion			
 	

@@ -1,5 +1,5 @@
 ﻿
-// <copyright file="CustomerMap.g.cs.g.cs" company="MIT">
+// <copyright file="SoftwareMap.g.cs.g.cs" company="MIT">
 //  Copyright (c) 2018 MIT
 // </copyright>  
 
@@ -27,52 +27,32 @@ using Banking.Models.Entity;
 using System.Data.Common;
 
 
-namespace Banking.Models.Mappings.MySql
+namespace Banking.Models.Customers.Mappings.MySql
 {
-	public partial class CustomerMap : EntityTypeConfiguration<Customer>
+	public partial class SoftwareMap : EntityTypeConfiguration<Software>
 	{	
-		public CustomerMap ()
+		public SoftwareMap ()
 		{
-			ToTable("Customer", "dbo");
+			ToTable("Software", "dbo");
 			
 			#region Primary Keys
 			
-			HasKey(t => t.CustomerId);
-			Property(t => t.CustomerId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+			HasKey(t => t.ProductId);
+			Property(t => t.ProductId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
 
 			#endregion
 
 			#region Constraints
 			
-			Property(t => t.CustomerId).IsRequired();
-			Property(t => t.CustomerCode).HasMaxLength(5);
-			Property(t => t.CustomerCode).IsRequired();
-			Property(t => t.CompanyName).HasMaxLength(50);
-			Property(t => t.CompanyName).IsRequired();
-			Property(t => t.ContactName).HasMaxLength(50);
-			Property(t => t.ContactName).IsOptional();
-			Property(t => t.ContactTitle).HasMaxLength(50);
-			Property(t => t.ContactTitle).IsOptional();
-			Property(t => t.Address).HasMaxLength(50);
-			Property(t => t.Address).IsOptional();
-			Property(t => t.City).HasMaxLength(20);
-			Property(t => t.City).IsOptional();
-			Property(t => t.PostalCode).HasMaxLength(10);
-			Property(t => t.PostalCode).IsOptional();
-			Property(t => t.Telephone).HasMaxLength(50);
-			Property(t => t.Telephone).IsOptional();
-			Property(t => t.Fax).HasMaxLength(50);
-			Property(t => t.Fax).IsOptional();
-			Property(t => t.CountryId).IsOptional();
-			Property(t => t.Photo).HasMaxLength(2147483647);
-			Property(t => t.Photo).IsOptional();
-			Property(t => t.IsEnabled).IsRequired();
+			Property(t => t.ProductId).IsRequired();
+			Property(t => t.LicenseCode).HasMaxLength(200);
+			Property(t => t.LicenseCode).IsRequired();
 			
 			#endregion
 
 			#region Relationships
 			
-			HasMany<Order>(s => s.Order).WithOptional(s => s.Customer).HasForeignKey(s => s.CustomerId).WillCascadeOnDelete(false);
+			HasRequired<Product>(s => s.Product).WithOptional(s => s.Software).WillCascadeOnDelete(false);
 			
 			#endregion			
 	

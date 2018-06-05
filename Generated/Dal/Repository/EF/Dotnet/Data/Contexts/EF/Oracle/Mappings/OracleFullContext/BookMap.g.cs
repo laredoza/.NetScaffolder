@@ -1,5 +1,5 @@
 ﻿
-// <copyright file="OrderMap.g.cs.g.cs" company="MIT">
+// <copyright file="BookMap.g.cs.g.cs" company="MIT">
 //  Copyright (c) 2018 MIT
 // </copyright>  
 
@@ -20,48 +20,40 @@
 
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration;
-using MySql.Data.Entity;
+using Oracle.ManagedDataAccess.Client;
+using Oracle.Config;
 using RepositoryEFDotnet.Library;
 using System.ComponentModel.DataAnnotations.Schema;
 using Banking.Models.Entity;
 using System.Data.Common;
 
 
-namespace Banking.Models.Mappings.MySql
+namespace Banking.Models.Context.Mappings.Oracle
 {
-	public partial class OrderMap : EntityTypeConfiguration<Order>
+	public partial class BookMap : EntityTypeConfiguration<Book>
 	{	
-		public OrderMap ()
+		public BookMap ()
 		{
-			ToTable("Order", "dbo");
+			ToTable("Book", "DBO");
 			
 			#region Primary Keys
 			
-			HasKey(t => t.OrderId);
-			Property(t => t.OrderId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+			HasKey(t => t.ProductId);
+			Property(t => t.ProductId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
 
 			#endregion
 
 			#region Constraints
 			
-			Property(t => t.OrderId).IsRequired();
-			Property(t => t.CustomerId).IsOptional();
-			Property(t => t.OrderDate).IsOptional();
-			Property(t => t.DeliveryDate).IsOptional();
-			Property(t => t.ShippingName).HasMaxLength(50);
-			Property(t => t.ShippingName).IsOptional();
-			Property(t => t.ShippingAddress).HasMaxLength(50);
-			Property(t => t.ShippingAddress).IsOptional();
-			Property(t => t.ShippingCity).HasMaxLength(50);
-			Property(t => t.ShippingCity).IsOptional();
-			Property(t => t.ShippingZip).HasMaxLength(50);
-			Property(t => t.ShippingZip).IsOptional();
+			Property(t => t.ProductId).IsRequired();
+			Property(t => t.Publisher).HasMaxLength(200);
+			Property(t => t.Publisher).IsRequired();
 			
 			#endregion
 
 			#region Relationships
 			
-			HasMany<OrderDetails>(s => s.OrderDetails).WithRequired(s => s.Order).HasForeignKey(s => s.OrderId).WillCascadeOnDelete(false);
+			HasRequired<Product>(s => s.Product).WithOptional(s => s.Book).WillCascadeOnDelete(false);
 			
 			#endregion			
 	

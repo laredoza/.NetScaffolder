@@ -1,5 +1,5 @@
 ﻿
-// <copyright file="BankTransfersMap.g.cs.g.cs" company="MIT">
+// <copyright file="BankAccountMap.g.cs.g.cs" company="MIT">
 //  Copyright (c) 2018 MIT
 // </copyright>  
 
@@ -20,41 +20,45 @@
 
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration;
-using MySql.Data.Entity;
+using Oracle.ManagedDataAccess.Client;
+using Oracle.Config;
 using RepositoryEFDotnet.Library;
 using System.ComponentModel.DataAnnotations.Schema;
 using Banking.Models.Entity;
 using System.Data.Common;
 
 
-namespace Banking.Models.Mappings.MySql
+namespace Banking.Models.Context.Mappings.Oracle
 {
-	public partial class BankTransfersMap : EntityTypeConfiguration<BankTransfers>
+	public partial class BankAccountMap : EntityTypeConfiguration<BankAccount>
 	{	
-		public BankTransfersMap ()
+		public BankAccountMap ()
 		{
-			ToTable("BankTransfers", "dbo");
+			ToTable("BankAccount", "DBO");
 			
 			#region Primary Keys
 			
-			HasKey(t => t.BankTransferId);
-			Property(t => t.BankTransferId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+			HasKey(t => t.BankAccountId);
+			Property(t => t.BankAccountId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
 			#endregion
 
 			#region Constraints
 			
-			Property(t => t.BankTransferId).IsRequired();
-			Property(t => t.FromBankAccountId).IsRequired();
-			Property(t => t.ToBankAccountId).IsRequired();
-			Property(t => t.Amount).IsRequired();
-			Property(t => t.Amount).HasPrecision(18, 2);
-			Property(t => t.TransferDate).IsRequired();
+			Property(t => t.BankAccountId).IsRequired();
+			Property(t => t.BankAccountNumber).HasMaxLength(10);
+			Property(t => t.BankAccountNumber).IsRequired();
+			Property(t => t.Balance).IsRequired();
+			Property(t => t.Balance).HasPrecision(19, 4);
+			Property(t => t.CustomerId).IsOptional();
+			Property(t => t.Locked).IsRequired();
 			
 			#endregion
 
 			#region Relationships
 			
+			HasOptional<Customer>(s => s.Customer).WithMany(s => s.BankAccount).HasForeignKey(s => s.CustomerId).WillCascadeOnDelete(false);
+			HasMany<BankTransfers>(s => s.BankTransfers).WithRequired(s => s.BankAccount).HasForeignKey(s => s.ToBankAccountId).WillCascadeOnDelete(false);
 			
 			#endregion			
 	

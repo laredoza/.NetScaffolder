@@ -1,5 +1,5 @@
 ﻿
-// <copyright file="ProductMap.g.cs.g.cs" company="MIT">
+// <copyright file="OrderMap.g.cs.g.cs" company="MIT">
 //  Copyright (c) 2018 MIT
 // </copyright>  
 
@@ -27,41 +27,42 @@ using Banking.Models.Entity;
 using System.Data.Common;
 
 
-namespace Banking.Models.Mappings.MySql
+namespace Banking.Models.Context.Mappings.MySql
 {
-	public partial class ProductMap : EntityTypeConfiguration<Product>
+	public partial class OrderMap : EntityTypeConfiguration<Order>
 	{	
-		public ProductMap ()
+		public OrderMap ()
 		{
-			ToTable("Product", "dbo");
+			ToTable("Order", "dbo");
 			
 			#region Primary Keys
 			
-			HasKey(t => t.ProductId);
-			Property(t => t.ProductId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+			HasKey(t => t.OrderId);
+			Property(t => t.OrderId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
 			#endregion
 
 			#region Constraints
 			
-			Property(t => t.ProductId).IsRequired();
-			Property(t => t.ProductDescription).HasMaxLength(100);
-			Property(t => t.ProductDescription).IsOptional();
-			Property(t => t.UnitPrice).IsOptional();
-			Property(t => t.UnitPrice).HasPrecision(19, 4);
-			Property(t => t.UnitAmount).HasMaxLength(50);
-			Property(t => t.UnitAmount).IsOptional();
-			Property(t => t.Publisher).HasMaxLength(200);
-			Property(t => t.Publisher).IsOptional();
-			Property(t => t.AmountInStock).IsOptional();
+			Property(t => t.OrderId).IsRequired();
+			Property(t => t.CustomerId).IsOptional();
+			Property(t => t.OrderDate).IsOptional();
+			Property(t => t.DeliveryDate).IsOptional();
+			Property(t => t.ShippingName).HasMaxLength(50);
+			Property(t => t.ShippingName).IsOptional();
+			Property(t => t.ShippingAddress).HasMaxLength(50);
+			Property(t => t.ShippingAddress).IsOptional();
+			Property(t => t.ShippingCity).HasMaxLength(50);
+			Property(t => t.ShippingCity).IsOptional();
+			Property(t => t.ShippingZip).HasMaxLength(50);
+			Property(t => t.ShippingZip).IsOptional();
 			
 			#endregion
 
 			#region Relationships
 			
-			HasOptional<Book>(s => s.Book).WithRequired(s => s.Product).WillCascadeOnDelete(false);
-			HasMany<OrderDetails>(s => s.OrderDetails).WithRequired(s => s.Product).HasForeignKey(s => s.ProductId).WillCascadeOnDelete(false);
-			HasOptional<Software>(s => s.Software).WithRequired(s => s.Product).WillCascadeOnDelete(false);
+			HasOptional<Customer>(s => s.Customer).WithMany(s => s.Order).HasForeignKey(s => s.CustomerId).WillCascadeOnDelete(false);
+			HasMany<OrderDetails>(s => s.OrderDetails).WithRequired(s => s.Order).HasForeignKey(s => s.OrderId).WillCascadeOnDelete(false);
 			
 			#endregion			
 	

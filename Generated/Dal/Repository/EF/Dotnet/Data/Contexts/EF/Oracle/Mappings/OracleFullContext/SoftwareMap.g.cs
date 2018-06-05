@@ -1,5 +1,5 @@
 ﻿
-// <copyright file="BankAccountMap.g.cs.g.cs" company="MIT">
+// <copyright file="SoftwareMap.g.cs.g.cs" company="MIT">
 //  Copyright (c) 2018 MIT
 // </copyright>  
 
@@ -20,43 +20,40 @@
 
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration;
-using MySql.Data.Entity;
+using Oracle.ManagedDataAccess.Client;
+using Oracle.Config;
 using RepositoryEFDotnet.Library;
 using System.ComponentModel.DataAnnotations.Schema;
 using Banking.Models.Entity;
 using System.Data.Common;
 
 
-namespace Banking.Models.Mappings.MySql
+namespace Banking.Models.Context.Mappings.Oracle
 {
-	public partial class BankAccountMap : EntityTypeConfiguration<BankAccount>
+	public partial class SoftwareMap : EntityTypeConfiguration<Software>
 	{	
-		public BankAccountMap ()
+		public SoftwareMap ()
 		{
-			ToTable("BankAccount", "dbo");
+			ToTable("Software", "DBO");
 			
 			#region Primary Keys
 			
-			HasKey(t => t.BankAccountId);
-			Property(t => t.BankAccountId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+			HasKey(t => t.ProductId);
+			Property(t => t.ProductId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
 
 			#endregion
 
 			#region Constraints
 			
-			Property(t => t.BankAccountId).IsRequired();
-			Property(t => t.BankAccountNumber).HasMaxLength(10);
-			Property(t => t.BankAccountNumber).IsRequired();
-			Property(t => t.Balance).IsRequired();
-			Property(t => t.Balance).HasPrecision(19, 4);
-			Property(t => t.CustomerId).IsOptional();
-			Property(t => t.Locked).IsRequired();
+			Property(t => t.ProductId).IsRequired();
+			Property(t => t.LicenseCode).HasMaxLength(200);
+			Property(t => t.LicenseCode).IsRequired();
 			
 			#endregion
 
 			#region Relationships
 			
-			HasMany<BankTransfers>(s => s.BankTransfers).WithRequired(s => s.BankAccount).HasForeignKey(s => s.ToBankAccountId).WillCascadeOnDelete(false);
+			HasRequired<Product>(s => s.Product).WithOptional(s => s.Software).WillCascadeOnDelete(false);
 			
 			#endregion			
 	

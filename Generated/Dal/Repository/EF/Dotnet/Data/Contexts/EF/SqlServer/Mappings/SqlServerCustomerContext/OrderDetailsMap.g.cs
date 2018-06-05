@@ -1,5 +1,5 @@
 ﻿
-// <copyright file="CountryMap.g.cs.g.cs" company="MIT">
+// <copyright file="OrderDetailsMap.g.cs.g.cs" company="MIT">
 //  Copyright (c) 2018 MIT
 // </copyright>  
 
@@ -20,39 +20,43 @@
 
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration;
-using MySql.Data.Entity;
 using RepositoryEFDotnet.Library;
 using System.ComponentModel.DataAnnotations.Schema;
 using Banking.Models.Entity;
 using System.Data.Common;
 
 
-namespace Banking.Models.Mappings.MySql
+namespace Banking.Models.Customers.Mappings.SqlServer
 {
-	public partial class CountryMap : EntityTypeConfiguration<Country>
+	public partial class OrderDetailsMap : EntityTypeConfiguration<OrderDetails>
 	{	
-		public CountryMap ()
+		public OrderDetailsMap ()
 		{
-			ToTable("Country", "dbo");
+			ToTable("OrderDetails", "dbo");
 			
 			#region Primary Keys
 			
-			HasKey(t => t.CountryId);
-			Property(t => t.CountryId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+			HasKey(t => t.OrderDetailsId);
+			Property(t => t.OrderDetailsId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
 			#endregion
 
 			#region Constraints
 			
-			Property(t => t.CountryId).IsRequired();
-			Property(t => t.CountryName).HasMaxLength(100);
-			Property(t => t.CountryName).IsOptional();
+			Property(t => t.OrderDetailsId).IsRequired();
+			Property(t => t.OrderId).IsRequired();
+			Property(t => t.ProductId).IsRequired();
+			Property(t => t.UnitPrice).IsOptional();
+			Property(t => t.UnitPrice).HasPrecision(19, 4);
+			Property(t => t.Amount).IsOptional();
+			Property(t => t.Discount).IsOptional();
 			
 			#endregion
 
 			#region Relationships
 			
-			HasMany<Customer>(s => s.Customer).WithOptional(s => s.Country).HasForeignKey(s => s.CountryId).WillCascadeOnDelete(false);
+			HasRequired<Order>(s => s.Order).WithMany(s => s.OrderDetails).HasForeignKey(s => s.OrderId).WillCascadeOnDelete(false);
+			HasRequired<Product>(s => s.Product).WithMany(s => s.OrderDetails).HasForeignKey(s => s.ProductId).WillCascadeOnDelete(false);
 			
 			#endregion			
 	
