@@ -41,6 +41,8 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.RepositoryDataT
             : base("Repository.xml")
         {
             this.LanguageOutputDetails.Add(new LanguageOutputDetails { LanguageOutput = new Guid("1BC1B0C4-1E41-9146-82CF-599181CE4410"), OutputGenerator = new Guid("1BC1B0C4-1E41-9146-82CF-599181CE4410") });
+            this.LanguageOutputDetails[0].Templates.Add("RepositoryGenerator.ttInclude");
+            this.LanguageOutputDetails[0].Templates.Add("RepositoryTemplate.ttInclude");
         }
 
         #endregion
