@@ -1,0 +1,75 @@
+﻿<#+
+public class ContextNHibernateTemplate : BaseTemplate 
+{
+	public ContextDataType DataType { get; set; }
+	public ContextData ContextData { get; set; }
+	//public string EntityNamespace { get; set; }
+	public string MappingNamespace { get; set; }
+	public string MappingPostFix { get; set; }
+    public IDriver Driver { get; set; }
+	public List<Table> Models { get; set; }
+
+	public override string TransformText()
+	{
+		//Debugger.Break();
+		Header = new CopyrightHeader();
+		Header.Filename = ContextData.ContextName;
+#>
+
+<#= Header.TransformText() #>
+
+// *******************************************************************
+//	GENERATED CODE. DOT NOT MODIFY MANUALLY AS CHANGES CAN BE LOST!!!
+//	USE A PARTIAL CLASS INSTEAD
+// *******************************************************************
+
+<#+ foreach(var nameSpace in Driver.NameSpaces){ #>
+using <#= nameSpace #>;
+<#+ } #>
+using <#= MappingNamespace #>;
+using RepositoryEFDotnet.Contexts.NHibernate;
+using System.Data;
+
+namespace <#= ContextData.TransformFullnamespace(DataType.BaseNamespace) #>.<#= Driver.ParentFolder #>
+{
+	public partial class <#= string.Concat(Driver.Prefix, ContextData.ContextName) #> <#= ContextData.TransformInheritFrom #>
+	{	
+		#region CTOR
+		
+		// Use in memory as target
+	    public <#= string.Concat(Driver.Prefix, ContextData.ContextName)  #>(MsSqliteConfiguration config, bool showSql = false)
+	    {
+			if(showSql)
+			{
+				config.InMemory().ShowSql();
+			}
+			else
+			{
+				config.InMemory();
+			}
+			
+	        CreateSession(config);
+        }
+		
+		// Use db as target
+	    public <#= string.Concat(Driver.Prefix, ContextData.ContextName)  #>(<#= Driver.ConfigurationClass #> config)
+	    {
+            config.IsolationLevel(IsolationLevel.ReadCommitted);
+            CreateSession(config);
+	    }
+		
+		#endregion
+		
+	    protected override void ConfigureMappings(MappingConfiguration config)
+	    {
+<#+ foreach(var model in Models) { #>
+			config.FluentMappings.Add(typeof(<#= DataType.TransformModelName(model.TableName) #><#= MappingPostFix #>));
+<#+ } #>
+        }
+	}
+}
+<#+
+		return this.GenerationEnvironment.ToString();
+	}
+}
+#>

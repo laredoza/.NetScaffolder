@@ -1,0 +1,127 @@
+﻿<#+
+public class RepoInterfaceTemplate : BaseTemplate 
+{
+	public RepoInterfaceDataType DataType { get; set; }
+	public string DtoInterfaceNamespace { get; set; }
+	
+	public override string TransformText()
+	{
+		// Debugger.Break();
+		Header = new CopyrightHeader();
+		Header.Filename = DataType.RepoName;
+#>
+
+<#= Header.TransformText() #>
+
+// *******************************************************************
+//	GENERATED CODE. DOT NOT MODIFY MANUALLY AS CHANGES CAN BE LOST!!!
+//	USE A PARTIAL CLASS INSTEAD
+// *******************************************************************
+
+using System;
+using System.Collections.Generic;
+using RepositoryEFDotnet.Core.Base;
+using <#= DtoInterfaceNamespace #>;
+
+namespace <#= DataType.FullNamespace #>
+{
+	/// <summary>
+	/// The <#= DataType.RepoName #>Repository interface that defines database functions for the <#= DataType.ModelName #> table
+	/// </summary>
+	public partial interface I<#= DataType.RepoName #>Repository : IRepository<I<#= DataType.RepoName #>>
+	{
+		#region Load
+<#+ if(DataType.MetaData.PrimaryKeyCount > 1){ #>
+
+        /// <summary>
+        /// Load <#= DataType.ModelName #> entities from the database using the composite primary keys
+        /// </summary
+<#+ foreach(var col in DataType.MetaData.Columns.Where(o => o.IsPrimaryKey)) {#>
+        /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
+<#+ } #>
+        /// <returns>I<#= DataType.ModelName #></returns>
+		I<#= DataType.ModelName #> Load(<#= DataType.TransformAsParameter(DataType.MetaData.Columns.Where(o => o.IsPrimaryKey)) #>);
+<#+ } #>
+
+<#+ if(DataType.MetaData.PrimaryKeyCount == 1){ var col = DataType.MetaData.Columns.First(o => o.IsPrimaryKey);#>
+
+        /// <summary>
+        /// Load <#= DataType.ModelName #> entities from the database using the composite primary keys
+        /// </summary
+        /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
+        /// <returns>I<#= DataType.ModelName #></returns>
+		I<#= DataType.ModelName #> LoadBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= DataType.TransformAsParameter(col) #>);
+<#+ } #>
+
+<#+ foreach(var col in DataType.MetaData.Columns.Where(o => !o.IsPrimaryKey && o.DomainDataType != DomainDataType.String)){ #>
+
+        /// <summary>
+        /// Load <#= DataType.ModelName #> entities from the database using the <#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #> field
+        /// </summary>
+        /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
+        /// <returns><#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>></returns>
+		<#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>> LoadBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= DataType.TransformAsParameter(col) #>);
+<#+ }  #>
+
+        /// <summary>
+        /// Load all <#= DataType.ModelName #> entities from the database.
+        /// </summary>
+        /// <returns><#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>></returns>
+		<#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>> LoadAll();
+		
+		#endregion
+
+		#region Search
+<#+ foreach(var col in DataType.MetaData.Columns.Where(o => !o.IsPrimaryKey && o.DomainDataType == DomainDataType.String)){ #>
+
+        /// <summary>
+        /// Search for <#= DataType.ModelName #> entities in the database by <#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>
+        /// </summary>
+        /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
+		/// <param name="caseSensitive">bool</param>
+        /// <returns><#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>></returns>
+		<#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>> SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= DataType.TransformAsParameter(col) #>, bool caseSensitive = false);
+<#+ }  #>
+
+		#endregion
+		
+		#region Modifiers
+		
+        /// <summary>
+        /// Save the <#= DataType.ModelName #> entity to the database.
+        /// </summary>
+        /// <param name="entity">I<#= DataType.ModelName #></param>
+        /// <returns>bool</returns>
+		bool Save(I<#= DataType.ModelName #> entity);
+
+        /// <summary>
+        /// Update the <#= DataType.ModelName #> entity in the database if any values have changed
+        /// </summary>
+        /// <param name="entity">I<#= DataType.ModelName #></param>
+        /// <returns>bool</returns>
+		bool Update(I<#= DataType.ModelName #> entity);
+		
+        /// <summary>
+        /// Delete the <#= DataType.ModelName #> entity from the database
+        /// </summary>
+        /// <param name="entity">I<#= DataType.ModelName #></param>
+        /// <returns>bool</returns>
+		bool Delete(I<#= DataType.ModelName #> entity);
+
+		/// <summary>
+        /// Delete the <#= DataType.ModelName #> entity from the database
+        /// </summary>
+<#+ foreach(var col in DataType.MetaData.Columns.Where(o => o.IsPrimaryKey)) {#>
+        /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
+<#+ } #>
+        /// <returns>bool</returns>
+		bool Delete(<#= DataType.TransformAsParameter(DataType.MetaData.Columns.Where(o => o.IsPrimaryKey)) #>);
+
+		#endregion
+	}
+}
+<#+
+		return this.GenerationEnvironment.ToString();
+	}
+}
+#>

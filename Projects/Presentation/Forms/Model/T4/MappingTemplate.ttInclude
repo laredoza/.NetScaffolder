@@ -1,0 +1,111 @@
+﻿<#+
+public class MappingTemplate : BaseTemplate 
+{
+	public string Namespace { get; set; }
+	public string EntityNamespace { get; set; }
+	public ContextData ContextData { get; set; } 
+	public IDriver Driver { get; set; }
+	public Table Model { get; set; }
+	public List<Table> Models { get; set; }
+	public INamingConvention NamingConvention { get; set; }
+	public string PostFix { get; set; }
+
+	public override string TransformText()
+	{		
+        string ModelName = NamingConvention == null ? Model.TableName : NamingConvention.ApplyNamingConvention(Model.TableName);
+
+		//Debugger.Break();
+		Header = new CopyrightHeader();
+		Header.Filename = ModelName + PostFix + ".g.cs";
+#>
+
+<#= Header.TransformText() #>
+
+// *******************************************************************
+//	GENERATED CODE. DOT NOT MODIFY MANUALLY AS CHANGES CAN BE LOST!!!
+//	USE A PARTIAL CLASS INSTEAD
+// *******************************************************************
+
+<#+ foreach(var nameSpace in Driver.NameSpaces){ #>
+using <#= nameSpace #>;
+<#+ } #>
+using RepositoryEFDotnet.Library;
+using System.ComponentModel.DataAnnotations.Schema;
+using <#= EntityNamespace #>;
+using System.Data.Common;
+
+
+namespace <#= Namespace #>.<#= Driver.Prefix #>
+{
+	public partial class <#= ModelName #><#= PostFix #> : EntityTypeConfiguration<<#= ModelName #>>
+	{	
+		public <#= ModelName #><#= PostFix #> ()
+		{
+<#+
+			var schemaName = Model.SchemaName;
+			if (Driver.ForceSchemaToUppercase)
+			{
+				schemaName = schemaName.ToUpper();
+			}
+#>
+			ToTable("<#= ModelName #>", "<#= schemaName #>");
+			
+			#region Primary Keys
+			
+<#+ if(Model.PrimaryKeyCount == 1){ var pk = Model.Columns.First(o => o.IsPrimaryKey);#>
+			HasKey(t => t.<#= pk.ColumnName #>);
+			Property(t => t.<#= pk.ColumnName #>)<#=Driver.DriverType.TransformDbGeneratedKey(Model) #>;
+<#+ } #>
+<#+ if(Model.PrimaryKeyCount > 1){ #>
+			HasKey(t => new {<#= Model.TransformCompositeKeys(Model.Columns.Where(o => o.IsPrimaryKey), "t") #>});
+<#+ foreach(var col in Model.Columns.Where(o => o.IsPrimaryKey)){ #>
+			Property(t => t.<#= col.ColumnName #>)<#=Driver.DriverType.TransformDbGeneratedKey(Model) #>;
+<#+ } #>
+<#+ } #>
+
+			#endregion
+
+			#region Constraints
+			
+<#+ foreach(var col in Model.Columns){ #>
+<#+ if(col.Length > 0){ #>
+			Property(t => t.<#= col.ColumnName #>).HasMaxLength(<#= col.Length #>);
+<#+ } #>
+<#+ if(col.IsRequired){ #>
+			Property(t => t.<#= col.ColumnName #>).IsRequired();
+<#+ } else #>
+<#+ { #>
+			Property(t => t.<#= col.ColumnName #>).IsOptional();
+<#+ } #>
+<#+ if((col.Precision > 0 && !col.InValidPrecisionGeneration) || col.Scale > 0){ #>
+			Property(t => t.<#= col.ColumnName #>)<#= Driver.DriverType.TransformColumnPrecision(col) #>;
+<#+ } #>
+<#+ } #>
+			
+			#endregion
+
+			#region Relationships
+			
+<#+ foreach(var rel in Model.Relationships.Where(o => ContextData.HasModel(o))){ #>
+			<#= Driver.DriverType.TransformRelationship(Model.TableName, rel, Models, Model.Relationships.Where(o => ContextData.HasModel(o)), NamingConvention) #>
+<#+ } #>
+			
+			#endregion			
+<#+ if(Driver.DriverType.IncludeColumnOrder){ #>
+
+			#region Column Order
+			
+<#+ foreach(var col in Model.Columns){ #>
+			Property(t => t.<#= col.ColumnName #>).HasColumnOrder(<#= col.ColumnOrder #>);
+<#+ } #>
+
+			#endregion
+<#+ } #>	
+		}
+	}
+}
+<#+
+		return this.GenerationEnvironment.ToString();
+	}
+}
+#>

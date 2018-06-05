@@ -1,0 +1,210 @@
+﻿<#+
+public class RepositoryTemplate : BaseTemplate 
+{
+	public RepositoryDataType DataType { get; set; }
+	public string DtoInterfaceNamespace { get; set; }
+	public string EntityNamespace { get; set; }
+	
+	public override string TransformText()
+	{
+		// Debugger.Break();
+		Header = new CopyrightHeader();
+		Header.Filename = DataType.RepoName;
+#>
+
+<#= Header.TransformText() #>
+
+// *******************************************************************
+//	GENERATED CODE. DOT NOT MODIFY MANUALLY AS CHANGES CAN BE LOST!!!
+//	USE A PARTIAL CLASS INSTEAD
+// *******************************************************************
+
+using System;
+using System.Collections.Generic;
+using RepositoryEFDotnet.Core.Base;
+using System.Linq;
+using <#= DtoInterfaceNamespace #>;
+using <#= EntityNamespace #>;
+
+namespace <#= DataType.FullNamespace #>
+{
+	/// <summary>
+	/// The <#= DataType.RepoName #>Repository class responsible for database functions in the <#= DataType.ModelName #> table
+	/// </summary>
+	public partial class <#= DataType.RepoName #>Repository : UowRepository<<#= DataType.RepoName #>> , I<#= DataType.RepoName #>Repository
+	{		
+		#region CTOR
+		
+		/// <summary>
+        /// The constructor for <#= DataType.RepoName #>Repository
+        /// </summary>
+        /// <param name="uow">IUnitOfWork</param>
+		public <#= DataType.RepoName #>Repository(IUnitOfWork uow) : base(uow)
+		{
+		}
+		
+		#endregion
+		
+		#region Load
+<#+ if(DataType.MetaData.PrimaryKeyCount > 1){ #>
+
+        /// <summary>
+        /// Load <#= DataType.ModelName #> entities from the database using the composite primary keys
+        /// </summary
+<#+ foreach(var col in DataType.MetaData.Columns.Where(o => o.IsPrimaryKey)) {#>
+        /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
+<#+ } #>
+        /// <returns>I<#= DataType.ModelName #></returns>
+		public virtual I<#= DataType.ModelName #> Load(<#= DataType.TransformAsParameter(DataType.MetaData.Columns.Where(o => o.IsPrimaryKey)) #>)
+		{
+			return this.UnitOfWork.FirstOrDefault<<#= DataType.ModelName #>>(o => <#= DataType.TransformAsQuery(DataType.MetaData.Columns.Where(o => o.IsPrimaryKey)) #>);
+		}
+<#+ } #>
+
+<#+ if(DataType.MetaData.PrimaryKeyCount == 1){ var col = DataType.MetaData.Columns.First(o => o.IsPrimaryKey);#>
+
+        /// <summary>
+        /// Load <#= DataType.ModelName #> entities from the database using the composite primary keys
+        /// </summary
+        /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
+        /// <returns>I<#= DataType.ModelName #></returns>
+		public virtual I<#= DataType.ModelName #> LoadBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= DataType.TransformAsParameter(col) #>)
+		{
+			return this.UnitOfWork.FirstOrDefault<<#= DataType.ModelName #>>(o => <#= DataType.TransformAsQuery(col) #>);
+		}
+<#+ } #>
+
+<#+ foreach(var col in DataType.MetaData.Columns.Where(o => !o.IsPrimaryKey && o.DomainDataType != DomainDataType.String)){ #>
+
+        /// <summary>
+        /// Load <#= DataType.ModelName #> entities from the database using the <#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #> field
+        /// </summary>
+        /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
+        /// <returns><#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>></returns>
+		public virtual <#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>> LoadBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= DataType.TransformAsParameter(col) #>)
+		{
+			return this.UnitOfWork.AllMatching<<#= DataType.ModelName #>>(o => <#= DataType.TransformAsQuery(col) #>).ToList<I<#= DataType.ModelName #>>();
+		}
+<#+ }  #>
+
+        /// <summary>
+        /// Load all <#= DataType.ModelName #> entities from the database.
+        /// </summary>
+        /// <returns><#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>></returns>
+		public virtual <#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>> LoadAll()
+		{
+			return this.UnitOfWork.GetAll<<#= DataType.ModelName #>>().ToList<I<#= DataType.ModelName #>>();
+		}
+		
+		#endregion
+
+		#region Search
+<#+ foreach(var col in DataType.MetaData.Columns.Where(o => !o.IsPrimaryKey && o.DomainDataType == DomainDataType.String)){ #>
+
+        /// <summary>
+        /// Search for <#= DataType.ModelName #> entities in the database by <#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>
+        /// </summary>
+        /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
+		/// <param name="caseSensitive">bool</param>
+        /// <returns><#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>></returns>
+		public virtual <#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>> SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= DataType.TransformAsParameter(col) #>, bool caseSensitive = false)
+		{		
+			if(caseSensitive) 
+			{
+				return this.UnitOfWork.AllMatching<<#= DataType.ModelName #>>(o => <#= DataType.TransformAsQuery(col, "", true) #>).ToList<I<#= DataType.ModelName #>>();
+			}
+			else
+			{
+				return this.UnitOfWork.AllMatching<<#= DataType.ModelName #>>(o => <#= DataType.TransformAsQuery(col) #>).ToList<I<#= DataType.ModelName #>>();
+			}
+		}
+<#+ }  #>
+
+		#endregion
+		
+		#region Modifiers
+		
+        /// <summary>
+        /// Save the <#= DataType.ModelName #> entity to the database.
+        /// </summary>
+        /// <param name="entity">I<#= DataType.ModelName #></param>
+        /// <returns>bool</returns>
+		public virtual bool Save(I<#= DataType.ModelName #> entity)
+		{
+			var entityToSave = new <#= DataType.ModelName #>(entity, false);
+			return this.UnitOfWork.Add(entityToSave);
+		}
+
+        /// <summary>
+        /// Update the <#= DataType.ModelName #> entity in the database if any values have changed
+        /// </summary>
+        /// <param name="entity">I<#= DataType.ModelName #></param>
+        /// <returns>bool</returns>
+		public virtual bool Update(I<#= DataType.ModelName #> entity)
+		{
+			bool doUpdate = false;
+			var entityToUpdate = this.UnitOfWork.FirstOrDefault<<#= DataType.ModelName #>>(o => <#= DataType.TransformAsQuery(DataType.MetaData.Columns.Where(o => o.IsPrimaryKey), "entity") #>);
+			
+			if (entityToUpdate == null)
+			{
+				throw new Exception("The <#= DataType.ModelName #> entity does not exist");
+			}
+			
+			// Optimisation: Flag if any field has changed
+<#+ foreach(var col in DataType.MetaData.Columns.Where(o => !o.IsPrimaryKey)){ #>
+			if (entityToUpdate.<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #> != entity.<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>) { entityToUpdate.<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #> = entity.<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>;doUpdate = true; }
+<#+ }  #>
+
+			// Optimisation: Only execute update if a field has changed
+			if (doUpdate)
+			{
+				return this.UnitOfWork.Modify(entityToUpdate);
+			}
+			
+			return false;
+		}
+		
+        /// <summary>
+        /// Delete the <#= DataType.ModelName #> entity from the database
+        /// </summary>
+        /// <param name="entity">I<#= DataType.ModelName #></param>
+        /// <returns>bool</returns>
+		public virtual bool Delete(I<#= DataType.ModelName #> entity)
+		{		
+			var entityToDelete = this.UnitOfWork.FirstOrDefault<<#= DataType.ModelName #>>(o => <#= DataType.TransformAsQuery(DataType.MetaData.Columns.Where(o => o.IsPrimaryKey), "entity")#>);
+			
+			if(entityToDelete == null)
+			{
+				throw new Exception("The <#= DataType.ModelName #> entity does not exist");
+			}
+			
+			return this.UnitOfWork.Remove(entityToDelete);
+		}
+
+		/// <summary>
+        /// Delete the <#= DataType.ModelName #> entity from the database
+        /// </summary>
+<#+ foreach(var col in DataType.MetaData.Columns.Where(o => o.IsPrimaryKey)) {#>
+        /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
+<#+ } #>
+        /// <returns>bool</returns>
+		public virtual bool Delete(<#= DataType.TransformAsParameter(DataType.MetaData.Columns.Where(o => o.IsPrimaryKey)) #>)
+		{
+			var entityToDelete = this.UnitOfWork.FirstOrDefault<<#= DataType.ModelName #>>(o => <#= DataType.TransformAsQuery(DataType.MetaData.Columns.Where(o => o.IsPrimaryKey))#>);
+			
+			if(entityToDelete == null)
+			{
+				throw new Exception("The <#= DataType.ModelName #> entity does not exist");
+			}
+			
+			return this.UnitOfWork.Remove(entityToDelete);
+		}
+		
+		#endregion
+	}
+}
+<#+
+		return this.GenerationEnvironment.ToString();
+	}
+}
+#>

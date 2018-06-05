@@ -1,12 +1,11 @@
-﻿<#@ include file="EntityTemplate.ttinclude" #>
+﻿<#@ include file="DtoInterfaceTemplate.ttinclude" #>
 <#+
-    public class EntityGenerator : BaseGenerator
+    public class DtoInterfaceGenerator : BaseGenerator
     {
-        public EntityDataType DataType { get; set; }
-        public DtoInterfaceDataType DtoInterfaceType { get; set; }
+        public DtoInterfaceDataType DataType {get;set;}
         public List<Table> Models { get; set; }
 
-        private EntityTemplate template = new EntityTemplate();
+        private DtoInterfaceTemplate template = new DtoInterfaceTemplate();
 
         protected override void RunCore()
         {
@@ -16,14 +15,13 @@
             {
                 DataType.MetaData = model;
                 template.DataType = this.DataType;
-                template.DtoInterfaceNamespace = DtoInterfaceType.FullNamespace;
 
                 if(!string.IsNullOrEmpty(DataType.OutputPath))
                 {
                     template.Output.Project = DataType.OutputPath;
                 }
 
-                template.RenderToFile(string.Format(@"{0}\{1}.g.cs", DataType.OutputFolder, DataType.EntityName));	
+                template.RenderToFile(string.Format(@"{0}\I{1}.g.cs", DataType.OutputFolder, DataType.InterfaceName));
             }
         }
     }

@@ -1,0 +1,130 @@
+﻿<#@ include file="MappingTemplate.ttinclude" #>
+<#@ include file="MappingCoreTemplate.ttinclude" #>
+<#@ include file="MappingNHibernateTemplate.ttinclude" #>
+<#+
+    public class MappingGenerator : BaseGenerator
+    {
+		public string ProjectOutputPath { get; set; }
+        public string EntityNamespace {get;set;}
+		public List<Table> Models { get; set; }
+		public ContextData ContextData { get; set; }
+		public MappingDataType MappingDataType {get;set;}
+		
+		public string FullNamespace
+		{
+			get
+			{
+				return string.Format("{0}.{1}", ContextData.TransformFullnamespace(MappingDataType.BaseNamespace), MappingDataType.Namespace);
+			}
+		}
+
+		private List<string> processedModels = new List<string>();
+		
+		private string projectPath = string.Empty;
+		
+        protected override void RunCore()
+        {					
+			foreach(IDriver driver in MappingDataType.Drivers )
+			{
+				Debugger.Break();
+				
+				projectPath = string.Format(ProjectOutputPath, driver.ParentFolder, driver.Prefix);
+				var contextModels = Models.Where(o => ContextData.Models.Exists(x => x.SchemaName == o.SchemaName && x.TableName == o.TableName));
+				
+				if(driver.DriverType is EFDriverType)
+				{
+					GenerateEFMappings(driver, contextModels);
+				}
+				else if(driver.DriverType is EFCoreDriverType)
+				{
+					GenerateEFCoreMappings(driver, contextModels);
+				}
+				else if(driver.DriverType is NhibernateDriverType)
+				{
+					GenerateNHibernateMappings(driver, contextModels);
+				}
+			}
+        }
+		
+		private void GenerateNHibernateMappings(IDriver driver, IEnumerable<Table> contextModels)
+		{				
+			foreach(var model in contextModels)
+			{				
+				MappingDataType.MetaData = model;
+				string mappingFileName = string.Format(@"{0}\{1}\{2}{3}.g.cs", MappingDataType.OutputFolder, string.Concat(driver.Prefix, ContextData.ContextName), MappingDataType.ModelName, MappingDataType.PostFix);
+				
+				// Generate configurations
+				var configTemplate = new MappingNHibernateTemplate();
+				configTemplate.EntityNamespace = EntityNamespace;
+				configTemplate.Driver = driver;
+				configTemplate.PostFix = MappingDataType.PostFix;
+				configTemplate.Namespace = FullNamespace;
+				configTemplate.NamingConvention = NamingConvention;
+				configTemplate.Model = model;
+				configTemplate.Models = Models;
+				configTemplate.ContextData = ContextData;
+			
+				if(!string.IsNullOrEmpty(projectPath))
+				{
+					configTemplate.Output.Project =  projectPath;
+				}
+				
+				configTemplate.RenderToFile(mappingFileName);
+			}
+		}
+		
+		private void GenerateEFMappings(IDriver driver, IEnumerable<Table> contextModels)
+		{				
+			foreach(var model in contextModels)
+			{				
+				MappingDataType.MetaData = model;
+				string mappingFileName = string.Format(@"{0}\{1}\{2}{3}.g.cs", MappingDataType.OutputFolder, string.Concat(driver.Prefix, ContextData.ContextName), MappingDataType.ModelName, MappingDataType.PostFix);
+				
+				// Generate configurations
+				var configTemplate = new MappingTemplate();
+				configTemplate.EntityNamespace = EntityNamespace;
+				configTemplate.Driver = driver;
+				configTemplate.PostFix = MappingDataType.PostFix;
+				configTemplate.Namespace = FullNamespace;
+				configTemplate.NamingConvention = NamingConvention;
+				configTemplate.Model = model;
+				configTemplate.Models = Models;
+				configTemplate.ContextData = ContextData;
+			
+				if(!string.IsNullOrEmpty(projectPath))
+				{
+					configTemplate.Output.Project =  projectPath;
+				}
+				
+				configTemplate.RenderToFile(mappingFileName);
+			}
+		}
+		
+		private void GenerateEFCoreMappings(IDriver driver, IEnumerable<Table> contextModels)
+		{				
+			foreach(var model in contextModels)
+			{				
+				MappingDataType.MetaData = model;
+				string mappingFileName = string.Format(@"{0}\{1}\{2}{3}.g.cs", MappingDataType.OutputFolder, string.Concat(driver.Prefix, ContextData.ContextName), MappingDataType.ModelName, MappingDataType.PostFix);
+				
+				// Generate configurations
+				var configTemplate = new MappingCoreTemplate();
+				configTemplate.EntityNamespace = EntityNamespace;
+				configTemplate.Driver = driver;
+				configTemplate.PostFix = MappingDataType.PostFix;
+				configTemplate.Namespace = FullNamespace;
+				configTemplate.NamingConvention = NamingConvention;
+				configTemplate.Model = model;
+				configTemplate.Models = Models;
+				configTemplate.ContextData = ContextData;
+			
+				if(!string.IsNullOrEmpty(projectPath))
+				{
+					configTemplate.Output.Project =  projectPath;
+				}
+				
+				configTemplate.RenderToFile(mappingFileName);
+			}
+		}
+    }
+#>

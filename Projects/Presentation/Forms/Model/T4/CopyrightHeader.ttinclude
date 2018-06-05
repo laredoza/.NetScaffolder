@@ -7,8 +7,7 @@ public class CopyrightHeader : Template
 
 	public override string TransformText()
 	{
-#>
-// <copyright file="<#= Filename #>.g.cs" company="MIT">
+#>// <copyright file="<#= Filename #>.g.cs" company="MIT">
 //  Copyright (c) <#= DateTime.Now.Year #> MIT
 // </copyright>  
 

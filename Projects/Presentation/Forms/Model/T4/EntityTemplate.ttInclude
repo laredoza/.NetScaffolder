@@ -1,37 +1,13 @@
-﻿<#@ assembly name="System" #>
-<#@ assembly name="System.Configuration" #>
-<#@ assembly name="System.Globalization" #>
-<#@ assembly name="System.Xml" #>
-<#@ assembly name="$(ProjectDir)Model\Package\Common.Logging.Core.dll" #>
-<#@ assembly name="$(ProjectDir)Model\Package\Common.Logging.dll" #>
-<#@ assembly name="$(ProjectDir)Model\Package\DotNetScaffolder.Core.Common.dll" #>
-<#@ assembly name="$(ProjectDir)Model\Package\DotNetScaffolder.Mapping.MetaData.dll" #>
-<#@ assembly name="$(ProjectDir)Model\Package\DotNetScaffolder.Components.DataTypes.DefaultDataTypes.dll" #>
-<#@ assembly name="$(ProjectDir)Model\Package\FormControls.dll" #>
-<#@ assembly name="$(ProjectDir)Model\Package\DotNetScaffolder.Components.Common.dll" #>
-<#@ assembly name="$(ProjectDir)Model\Package\Configuration.dll" #>
-<#@ import namespace="System" #>
-<#@ import namespace="System.Configuration" #>
-<#@ import namespace="System.Globalization" #>
-<#@ import namespace="System.Xml" #>
-<#@ import namespace="System.IO" #>
-<#@ import namespace="System.Xml.Serialization" #>
-<#@ import namespace="System.Collections.Generic" #>
-<#@ import namespace="System.Diagnostics" #>
-<#@ import namespace="DotNetScaffolder.Mapping.MetaData.Project" #>
-<#@ import namespace="DotNetScaffolder.Mapping.MetaData.Model" #>
-<#@ import namespace="DotNetScaffolder.Core.Common.Serializer" #>
-<#@ import namespace="DotNetScaffolder.Components.DataTypes.DefaultDataTypes" #>
-<#@ import namespace="Configuration" #>
-<#+
+﻿<#+
 public class EntityTemplate : BaseTemplate 
 {
 	public EntityDataType DataType { get; set; }
-	public string BaseNamespace{ get; set; }
+	public string DtoInterfaceNamespace { get; set; }
 	
 	public override string TransformText()
 	{
-		Debugger.Break();
+		// Debugger.Break();
+		Header = new CopyrightHeader();
 		Header.Filename = DataType.EntityName;
 #>
 
@@ -42,19 +18,135 @@ public class EntityTemplate : BaseTemplate
 //	USE A PARTIAL CLASS INSTEAD
 // *******************************************************************
 
-using System.Data.Entity;
+using System;
+using System.Collections.Generic;
+<#+ if(DataType.UseInterface){ #>
+using <#= DtoInterfaceNamespace #>;
+<#+ } #>
 
-namespace <#= BaseNamespace #>.<#= DataType.OutputFolder #>.<#= DataType.Namespace #>
+namespace <#= DataType.FullNamespace #>
 {
-	public partial class <#= NamingConvention.ApplyNamingConvention(DataType.EntityName) #> <#= DataType.TransformInheritFrom #>
+	public partial class <#= DataType.EntityName #> <#= DataType.TransformInheritFrom #> 
 	{
-		#region Db Sets
+<#+ if(DataType.UseInterface && DataType.AddInjectConstructor){ #>
+		#region CTOR
 		
-		<#+ foreach(var col in DataType.MetaData.Columns){ #>
-		<#= NamingConvention.ApplyNamingConvention(col.ColumnName) #>
-		<#+ } #>
+		public <#= DataType.EntityName #>()
+		{
+<#+ foreach(var child in DataType.MetaData.DistinctChildRelationships.Where(o => o.ReferencedMultiplicity == RelationshipMultiplicity.Many)){ #>
+			this.<#= RelationshipNameFormatting.FormatName(child.ReferencedTableName, child.RelationshipAlias, DataType.NamingConvention) #> = new <#= DataType.CollectionOption.ClassName #> <<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #>>();
+<#+ } #>
+		}
+		
+		public <#= DataType.EntityName #>(I<#= DataType.EntityName #> item, bool deep = false)
+		{
+			if(item == null) return;
+			
+<#+ foreach(var col in DataType.MetaData.Columns){ #>
+			this.<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #> = item.<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>;
+<#+ } #>
+
+<#+ foreach(var child in DataType.MetaData.DistinctChildRelationships.Where(o => o.ReferencedMultiplicity == RelationshipMultiplicity.Many)){ #>
+			this.<#= RelationshipNameFormatting.FormatName(child.ReferencedTableName, child.RelationshipAlias, DataType.NamingConvention) #> = new <#= DataType.CollectionOption.ClassName #> <<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #>>();
+<#+ } #>
+
+			if(deep)
+			{
+<#+ foreach(var child in DataType.MetaData.DistinctChildRelationships.Where(o => o.ReferencedMultiplicity == RelationshipMultiplicity.Many)){ #>
+				if(item.<#= RelationshipNameFormatting.FormatName(child.ReferencedTableName, child.RelationshipAlias, DataType.NamingConvention) #> != null)
+				{
+					foreach(var childItem in item.<#= RelationshipNameFormatting.FormatName(child.ReferencedTableName, child.RelationshipAlias, DataType.NamingConvention) #>)
+					{
+						this.<#= RelationshipNameFormatting.FormatName(child.ReferencedTableName, child.RelationshipAlias, DataType.NamingConvention) #>.Add(new <#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #>(childItem, deep));
+					}
+				}
+<#+ } #>
+<#+ foreach(var child in DataType.MetaData.DistinctChildRelationships.Where(o => o.ReferencedMultiplicity != RelationshipMultiplicity.Many)){ #>
+				this.<#= RelationshipNameFormatting.FormatName(child.ReferencedTableName, child.RelationshipAlias, DataType.NamingConvention) #> = new <#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #>(item.<#= RelationshipNameFormatting.FormatName(child.ReferencedTableName, child.RelationshipAlias, DataType.NamingConvention) #>, deep);
+<#+ } #>
+<#+ foreach(var parent in DataType.MetaData.DistinctParentRelationships){ #>
+				if(item.<#= RelationshipNameFormatting.FormatName(parent.ReferencedTableName, parent.RelationshipAlias, DataType.NamingConvention) #> != null)
+                {
+                    this.<#= RelationshipNameFormatting.FormatName(parent.ReferencedTableName, parent.RelationshipAlias, DataType.NamingConvention) #> = new <#= DataType.NamingConvention.ApplyNamingConvention(parent.ReferencedTableName) #>(item.<#= RelationshipNameFormatting.FormatName(parent.ReferencedTableName, parent.RelationshipAlias, DataType.NamingConvention) #>, deep);
+                }
+<#+ } #>
+			}
+		}
+		
+		#endregion
+		
+<#+ } #>
+		#region Fields
+		
+<#+ foreach(var col in DataType.MetaData.Columns){ #>
+		public virtual <#= CSharpOutputMapper.MapToOutput(col) #> <#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #> { get; set; }
+<#+ } #>
 
 		#endregion
+<#+ if(DataType.MetaData.DistinctChildRelationships.Count > 0){ #>
+
+		#region Child Relationships
+<#+ foreach(var child in DataType.MetaData.DistinctChildRelationships.Where(o => o.ReferencedMultiplicity == RelationshipMultiplicity.Many)){ #>
+        
+        public virtual <#= DataType.CollectionOption.ClassNameInterface #><<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #>> <#= RelationshipNameFormatting.FormatName(child.ReferencedTableName, child.RelationshipAlias, DataType.NamingConvention) #> { get; set; }
+<#+ if(DataType.UseInterface) {#>	
+        <#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #>> I<#= DataType.EntityName #>.<#= RelationshipNameFormatting.FormatName(child.ReferencedTableName, child.RelationshipAlias, DataType.NamingConvention) #> 
+		{ 
+			get
+			{
+				return (<#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #>>)this.<#= RelationshipNameFormatting.FormatName(child.ReferencedTableName, child.RelationshipAlias, DataType.NamingConvention) #>;
+			}
+			set
+			{
+				this.<#= RelationshipNameFormatting.FormatName(child.ReferencedTableName, child.RelationshipAlias, DataType.NamingConvention) #> = (<#= DataType.CollectionOption.ClassNameInterface #><<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #>>)value;
+			}			
+		}
+<#+ } #>
+<#+ } #>
+
+<#+ foreach(var child in DataType.MetaData.DistinctChildRelationships.Where(o => o.ReferencedMultiplicity != RelationshipMultiplicity.Many)){ #>
+        
+        public virtual <#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #> <#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #> { get; set; }
+<#+ if(DataType.UseInterface) {#>
+		I<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #> I<#= DataType.EntityName #>.<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #> 
+		{ 
+			get
+			{
+				return this.<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #>;
+			}
+			set
+			{
+				this.<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #> = (<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #>)value;
+			}
+		}
+<#+ } #>
+<#+ } #>
+
+		#endregion
+<#+ } #>
+<#+ if(DataType.MetaData.DistinctParentRelationships.Count > 0) {#>
+
+		#region Parent Relationships
+<#+ foreach(var parent in DataType.MetaData.DistinctParentRelationships){ #>
+
+        public virtual <#= DataType.NamingConvention.ApplyNamingConvention(parent.ReferencedTableName) #> <#= RelationshipNameFormatting.FormatName(parent.ReferencedTableName, parent.RelationshipAlias, DataType.NamingConvention) #> { get; set; }
+<#+ if(DataType.UseInterface) {#>
+		I<#= DataType.NamingConvention.ApplyNamingConvention(parent.ReferencedTableName) #> I<#= DataType.EntityName #>.<#= RelationshipNameFormatting.FormatName(parent.ReferencedTableName, parent.RelationshipAlias, DataType.NamingConvention) #> 
+		{ 
+			get
+			{
+				return this.<#= RelationshipNameFormatting.FormatName(parent.ReferencedTableName, parent.RelationshipAlias, DataType.NamingConvention) #>;
+			}
+			set
+			{
+				this.<#= RelationshipNameFormatting.FormatName(parent.ReferencedTableName, parent.RelationshipAlias, DataType.NamingConvention) #> = (<#= DataType.NamingConvention.ApplyNamingConvention(parent.ReferencedTableName) #>)value;
+			}
+		}
+<#+ } #>
+<#+ } #>
+		
+		#endregion
+<#+ } #>
 	}
 }
 <#+

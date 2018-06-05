@@ -1,0 +1,112 @@
+﻿<#+
+public class BaseRepositoryUnitTestTemplate : BaseTemplate 
+{
+    public List<Table> Models { get; set; }
+	
+	public override string TransformText()
+	{
+		// Debugger.Break();
+		Header = new CopyrightHeader();
+		Header.Filename = "BaseRepositoryUnitTest.g.cs";
+#>
+
+<#= Header.TransformText() #>
+
+// *******************************************************************
+//	GENERATED CODE. DOT NOT MODIFY MANUALLY AS CHANGES CAN BE LOST!!!
+//	USE A PARTIAL CLASS INSTEAD
+// *******************************************************************
+
+using Banking.Models.Dto;
+using Banking.Models.Interfaces;
+using Banking.Models.Repository;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using RepositoryEFDotnet.Core.Base;
+using System.Linq;
+using System.Collections.Generic;
+
+namespace RepositoryEFDotnet.UnitTest
+{
+	[TestClass]
+	public abstract partial class BaseRepositoryUnitTest : BaseUnitTest
+	{
+        #region Privates
+
+        protected static IUnitOfWork Context = null;
+
+        #endregion
+
+        #region Tests
+
+        [TestMethod]
+        public void RunAll()
+        {
+<#+ foreach(var mdl in Models){ #>
+			<#= mdl.TableName #>_Add();
+			//<#= mdl.TableName #>_LoadAll();
+			//<#= mdl.TableName #>_Search();
+			//<#= mdl.TableName #>_Update();
+			//<#= mdl.TableName #>_Delete();
+<#+ } #>
+        }
+		
+<#+ foreach(var mdl in Models){ #>
+
+        public void <#= mdl.TableName #>_Add(int count = 1, int startSeed = 1, int expected = 1)
+        {
+            var repo = new <#= mdl.TableName #>Repository(Context);
+            BaseRepositoryUnitTest_<#= mdl.TableName #>_AddRange(repo, count, startSeed, expected);
+        }
+<#+ } #>
+
+		#endregion
+		
+		#region Base Tests
+<#+ foreach(var mdl in Models){ 
+var pk = mdl.Columns.First(o => o.IsPrimaryKey);
+#>
+
+        protected virtual void BaseRepositoryUnitTest_<#= mdl.TableName #>_AddRange(I<#= mdl.TableName #>Repository repository, int count = 1, int startSeed = 1, int expected = 1)
+        {		
+            var list = new List<I<#= mdl.TableName #>>();
+            var seed = startSeed;
+            for (var index = 1; index <= count; index++)
+            {
+                var dto = new <#= mdl.TableName #>Dto();
+                Populate<#= mdl.TableName #>(dto, false, seed);
+                list.Add(dto);
+				repository.Save(dto);
+                seed++;
+            }
+
+            Context.Commit();
+
+            var items = repository.LoadAll();
+            this.Check_EntityCount(expected, items.Count(), "Incorrect number of <#= mdl.TableName #> found");
+
+            for (var index = 1; index <= count; index++)
+			{
+				int id = index + startSeed - 1;
+                this.Check_<#= mdl.TableName #>(list.FirstOrDefault(o => o.<#= pk.ColumnName #> == id),items.FirstOrDefault(o => o.<#= pk.ColumnName #> == id));
+			}
+        }
+<#+ } #>
+
+		#endregion
+		
+        #region Cleanup
+
+        [ClassCleanup]
+        public virtual void ClassCleanup()
+        {
+            Context?.Dispose();
+        }
+
+        #endregion
+	}
+}
+<#+
+		return this.GenerationEnvironment.ToString();
+	}
+}
+#>
