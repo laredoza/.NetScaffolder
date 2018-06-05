@@ -33,7 +33,6 @@
             this.CheckBoxEnabled = new System.Windows.Forms.CheckBox();
             this.TextBoxName = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
-            this.button11 = new System.Windows.Forms.Button();
             this.PanelTemplate = new System.Windows.Forms.Panel();
             this.Templates = new System.Windows.Forms.GroupBox();
             this.BtnAdd = new System.Windows.Forms.Button();
@@ -54,7 +53,6 @@
             this.panel1.Controls.Add(this.CheckBoxEnabled);
             this.panel1.Controls.Add(this.TextBoxName);
             this.panel1.Controls.Add(this.label13);
-            this.panel1.Controls.Add(this.button11);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
@@ -88,16 +86,6 @@
             this.label13.Size = new System.Drawing.Size(38, 13);
             this.label13.TabIndex = 53;
             this.label13.Text = "Name:";
-            // 
-            // button11
-            // 
-            this.button11.Enabled = false;
-            this.button11.Location = new System.Drawing.Point(373, -2);
-            this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(75, 23);
-            this.button11.TabIndex = 62;
-            this.button11.Text = "Default";
-            this.button11.UseVisualStyleBackColor = true;
             // 
             // PanelTemplate
             // 
@@ -202,7 +190,6 @@
 
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel PanelTemplate;
-        private System.Windows.Forms.Button button11;
         private System.Windows.Forms.TextBox TextBoxName;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.CheckBox CheckBoxEnabled;

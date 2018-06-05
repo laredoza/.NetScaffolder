@@ -12,6 +12,8 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Packages
     using System.Collections.Generic;
     using System.Windows.Forms;
 
+    using DotNetScaffolder.Mapping.MetaData.Domain;
+    using DotNetScaffolder.Mapping.MetaData.Project;
     using DotNetScaffolder.Mapping.MetaData.Project.Packages;
 
     using FormControls.Enum;
@@ -45,7 +47,6 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Packages
         #endregion
 
         #region Public Properties
-       
 
         /// <summary>
         ///     Gets or sets the data source.
@@ -77,6 +78,11 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Packages
         ///     Gets or sets the templates.
         /// </summary>
         public List<Template> Templates { get; set; }
+
+        /// <summary>
+        /// Gets or sets the domain definition.
+        /// </summary>
+        public DomainDefinition DomainDefinition { get; set; }
 
         #endregion
 
@@ -141,19 +147,19 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Packages
             }
 
             Package newPackage = new Package
-                                     {
-                                         Id = Guid.NewGuid(),
+            {
+                Id = Guid.NewGuid(),
 
-                                         // ConfigLocation = parentPackage.ConfigLocation,
-                                         // DataType = parentPackage.DataType,
-                                         Enabled = true,
+                // ConfigLocation = parentPackage.ConfigLocation,
+                // DataType = parentPackage.DataType,
+                Enabled = true,
 
-                                         // LanguageOutputId = parentPackage.LanguageOutputId,
-                                         // GeneratorTypeId = parentPackage.GeneratorTypeId,
-                                         HierarchyType = HierarchyType.Group,
-                                         Name = "Group 1",
-                                         Version = 1
-                                     };
+                // LanguageOutputId = parentPackage.LanguageOutputId,
+                // GeneratorTypeId = parentPackage.GeneratorTypeId,
+                HierarchyType = HierarchyType.Group,
+                Name = "Group 1",
+                Version = 1
+            };
 
             parentPackage.Children.Add(newPackage);
             TreeNode newTreeNode = new TreeNode { Text = newPackage.Name, Tag = newPackage };
@@ -186,19 +192,19 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Packages
             }
 
             Package newPackage = new Package
-                                     {
-                                         Id = Guid.NewGuid(),
+            {
+                Id = Guid.NewGuid(),
 
-                                         // ConfigLocation = parentPackage.ConfigLocation,
-                                         // DataType = parentPackage.DataType,
-                                         Enabled = true,
+                // ConfigLocation = parentPackage.ConfigLocation,
+                // DataType = parentPackage.DataType,
+                Enabled = true,
 
-                                         // LanguageOutputId = parentPackage.LanguageOutputId,
-                                         // GeneratorTypeId = parentPackage.GeneratorTypeId,
-                                         HierarchyType = HierarchyType.Item,
-                                         Name = "Package1",
-                                         Version = 1
-                                     };
+                // LanguageOutputId = parentPackage.LanguageOutputId,
+                // GeneratorTypeId = parentPackage.GeneratorTypeId,
+                HierarchyType = HierarchyType.Item,
+                Name = "Package1",
+                Version = 1
+            };
 
             parentPackage.Children.Add(newPackage);
             TreeNode newTreeNode = new TreeNode { Text = newPackage.Name, Tag = newPackage };
@@ -227,10 +233,16 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Packages
         /// </param>
         private void BtnDeleteClick(object sender, EventArgs eventArgs)
         {
-            Package currentTemplate = this.PackageDetailsUserControl1.TreeNode.Tag as Package;
-            Package parentTemplate = this.PackageDetailsUserControl1.TreeNode.Parent.Tag as Package;
+            Package currentPackage = this.PackageDetailsUserControl1.TreeNode.Tag as Package;
+            Package parentPackage = this.PackageDetailsUserControl1.TreeNode.Parent.Tag as Package;
 
-            parentTemplate.Children.Remove(currentTemplate);
+            parentPackage.Children.Remove(currentPackage);
+
+            if (this.SelectedPackage.Id == currentPackage.Id)
+            {
+                this.DomainDefinition.Package = null;
+            }
+
             this.PackageDetailsUserControl1.TreeNode.Remove();
         }
 

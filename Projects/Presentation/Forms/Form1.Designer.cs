@@ -46,18 +46,18 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.ProjectDetailsUserControl1 = new DotNetScaffolder.Presentation.Forms.Controls.Project.ProjectDetailsUserControl();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.ProjectDomainUserControl1 = new DotNetScaffolder.Presentation.Forms.Controls.Project.ProjectDomainUserControl();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.projectDomainDetailsUserControl1 = new DotNetScaffolder.Presentation.Forms.Controls.Project.ProjectDomainDetailsUserControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.label2 = new System.Windows.Forms.Label();
+            this.packageUserControl1 = new DotNetScaffolder.Presentation.Forms.Controls.Packages.PackageUserControl();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.label3 = new System.Windows.Forms.Label();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.ProjectDetailsUserControl1 = new DotNetScaffolder.Presentation.Forms.Controls.Project.ProjectDetailsUserControl();
-            this.ProjectDomainUserControl1 = new DotNetScaffolder.Presentation.Forms.Controls.Project.ProjectDomainUserControl();
-            this.projectDomainDetailsUserControl1 = new DotNetScaffolder.Presentation.Forms.Controls.Project.ProjectDomainDetailsUserControl();
-            this.packageUserControl1 = new DotNetScaffolder.Presentation.Forms.Controls.Packages.PackageUserControl();
             this.TemplateManagementUserControl1 = new DotNetScaffolder.Presentation.Forms.Controls.TemplateManagementUserControl();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -161,6 +161,7 @@
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(1052, 614);
             this.tabControl1.TabIndex = 2;
+            this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
             // tabPage1
             // 
@@ -197,6 +198,19 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Project Details";
             // 
+            // ProjectDetailsUserControl1
+            // 
+            this.ProjectDetailsUserControl1.BaseNameSpace = "";
+            this.ProjectDetailsUserControl1.Changed = false;
+            this.ProjectDetailsUserControl1.GroupBy = DotNetScaffolder.Mapping.MetaData.Enum.GenerationType.Domain;
+            this.ProjectDetailsUserControl1.Location = new System.Drawing.Point(6, 20);
+            this.ProjectDetailsUserControl1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.ProjectDetailsUserControl1.Name = "ProjectDetailsUserControl1";
+            this.ProjectDetailsUserControl1.OutputFolder = "";
+            this.ProjectDetailsUserControl1.Project = null;
+            this.ProjectDetailsUserControl1.Size = new System.Drawing.Size(382, 123);
+            this.ProjectDetailsUserControl1.TabIndex = 0;
+            // 
             // groupBox2
             // 
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -211,77 +225,6 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Project Domains";
             // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.projectDomainDetailsUserControl1);
-            this.groupBox3.Location = new System.Drawing.Point(16, 130);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(576, 366);
-            this.groupBox3.TabIndex = 18;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Domain Details";
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Controls.Add(this.label2);
-            this.tabPage2.Controls.Add(this.packageUserControl1);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1050, 588);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Packages";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(11, 538);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(381, 13);
-            this.label2.TabIndex = 15;
-            this.label2.Text = "Packages consist of templates.Each template will be used to render files/layers.";
-            // 
-            // tabPage3
-            // 
-            this.tabPage3.Controls.Add(this.label3);
-            this.tabPage3.Controls.Add(this.TemplateManagementUserControl1);
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(1050, 588);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Templates";
-            this.tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(11, 538);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(427, 13);
-            this.label3.TabIndex = 16;
-            this.label3.Text = "A template is used specify a T4 script.This script will then be used to generate " +
-    "a file/layer.";
-            // 
-            // openFileDialog1
-            // 
-            this.openFileDialog1.FileName = "openFileDialog1";
-            this.openFileDialog1.Filter = "Model files|*.mdl";
-            // 
-            // ProjectDetailsUserControl1
-            // 
-            this.ProjectDetailsUserControl1.BaseNameSpace = "";
-            this.ProjectDetailsUserControl1.Changed = false;
-            this.ProjectDetailsUserControl1.GroupBy = DotNetScaffolder.Mapping.MetaData.Enum.GenerationType.Domain;
-            this.ProjectDetailsUserControl1.Location = new System.Drawing.Point(6, 20);
-            this.ProjectDetailsUserControl1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.ProjectDetailsUserControl1.Name = "ProjectDetailsUserControl1";
-            this.ProjectDetailsUserControl1.OutputFolder = "";
-            this.ProjectDetailsUserControl1.Project = null;
-            this.ProjectDetailsUserControl1.Size = new System.Drawing.Size(382, 123);
-            this.ProjectDetailsUserControl1.TabIndex = 0;
-            // 
             // ProjectDomainUserControl1
             // 
             this.ProjectDomainUserControl1.ApplicationService = null;
@@ -292,9 +235,21 @@
             this.ProjectDomainUserControl1.Size = new System.Drawing.Size(324, 106);
             this.ProjectDomainUserControl1.TabIndex = 19;
             // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.projectDomainDetailsUserControl1);
+            this.groupBox3.Location = new System.Drawing.Point(16, 130);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(576, 366);
+            this.groupBox3.TabIndex = 18;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Domain Details";
+            // 
             // projectDomainDetailsUserControl1
             // 
             this.projectDomainDetailsUserControl1.ApplicationService = null;
+            this.projectDomainDetailsUserControl1.ConfigPackage = null;
+            this.projectDomainDetailsUserControl1.DataSourceInitialized = false;
             this.projectDomainDetailsUserControl1.DomainName = "";
             this.projectDomainDetailsUserControl1.Location = new System.Drawing.Point(7, 20);
             this.projectDomainDetailsUserControl1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -309,10 +264,33 @@
             this.projectDomainDetailsUserControl1.SelectedSourceType = new System.Guid("00000000-0000-0000-0000-000000000000");
             this.projectDomainDetailsUserControl1.Size = new System.Drawing.Size(557, 338);
             this.projectDomainDetailsUserControl1.TabIndex = 0;
+            this.projectDomainDetailsUserControl1.UpdatePackageVisible = true;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.label2);
+            this.tabPage2.Controls.Add(this.packageUserControl1);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(1044, 588);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Packages";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(11, 538);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(381, 13);
+            this.label2.TabIndex = 15;
+            this.label2.Text = "Packages consist of templates.Each template will be used to render files/layers.";
             // 
             // packageUserControl1
             // 
             this.packageUserControl1.DataSource = null;
+            this.packageUserControl1.DomainDefinition = null;
             this.packageUserControl1.Location = new System.Drawing.Point(6, 6);
             this.packageUserControl1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.packageUserControl1.Name = "packageUserControl1";
@@ -320,6 +298,28 @@
             this.packageUserControl1.Size = new System.Drawing.Size(975, 514);
             this.packageUserControl1.TabIndex = 0;
             this.packageUserControl1.Templates = ((System.Collections.Generic.List<DotNetScaffolder.Mapping.MetaData.Project.Packages.Template>)(resources.GetObject("packageUserControl1.Templates")));
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.label3);
+            this.tabPage3.Controls.Add(this.TemplateManagementUserControl1);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(1044, 588);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Templates";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(11, 538);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(427, 13);
+            this.label3.TabIndex = 16;
+            this.label3.Text = "A template is used specify a T4 script.This script will then be used to generate " +
+    "a file/layer.";
             // 
             // TemplateManagementUserControl1
             // 
@@ -329,6 +329,11 @@
             this.TemplateManagementUserControl1.Name = "TemplateManagementUserControl1";
             this.TemplateManagementUserControl1.Size = new System.Drawing.Size(938, 506);
             this.TemplateManagementUserControl1.TabIndex = 0;
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            this.openFileDialog1.Filter = "Model files|*.mdl";
             // 
             // Form1
             // 
