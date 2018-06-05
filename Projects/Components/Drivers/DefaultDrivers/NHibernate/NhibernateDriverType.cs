@@ -260,14 +260,14 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.NHibernate
                 }
                 else
                 {
-                    sb.Append($"References(o => o.{refTableName}).Column(\"{rel.ReferencedColumnName}\").Unique();");
+                    sb.Append($"References(o => o.{refTableName}).Column(\"{rel.ReferencedColumnName}\").Unique().Not.Insert().Not.Update();");
                 }
             }
             else
             {
                 if (rel.ReferencedMultiplicity == RelationshipMultiplicity.Many)
                 {
-                    sb.Append($"HasMany(s => s.{refTableName});");
+                    sb.Append($"HasMany(s => s.{refTableName}).KeyColumn(\"{rel.ReferencedColumnName}\");");
                 }
                 else
                 {

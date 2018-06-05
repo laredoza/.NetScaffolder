@@ -18,17 +18,22 @@
 //	USE A PARTIAL CLASS INSTEAD
 // *******************************************************************
 
-using Banking.Models.Entity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using RepositoryEFDotnet.Contexts.EFCore;
+using System.Configuration;
+using System.ComponentModel.DataAnnotations.Schema;
+using Banking.Models.Entity;
+using System.Data.Common;
 
-namespace Banking.Models.Context.Mappings
+
+namespace Banking.Models.Context.Mappings.MySql
 {
 	public partial class CustomerMap : IEntityTypeConfiguration<Customer>
 	{	
 	    public void Configure(EntityTypeBuilder<Customer> builder)
 	    {
-			builder.ToTable("Customer");
+			builder.ToTable("`Customer`");
 			
 			#region Primary keys
 			

@@ -26,8 +26,8 @@ namespace Banking.Models.Customers.Mappings
 	{	
 		public SoftwareMap ()
 		{
-			Table("Software");
-			Schema("dbo");
+			Table("[Software]");
+			Schema("[dbo]");
 			
 			#region Primary Keys
 			
@@ -37,7 +37,7 @@ namespace Banking.Models.Customers.Mappings
 
 			#region Constraints
 			
-			Map(t => t.ProductId).Generated.Insert()
+			Map(t => t.ProductId).ReadOnly().Generated.Insert()
 			.Not.Nullable();
 			Map(t => t.LicenseCode)
 			.Length(200)

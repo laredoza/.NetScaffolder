@@ -26,8 +26,8 @@ namespace Banking.Models.Context.Mappings
 	{	
 		public ProductMap ()
 		{
-			Table("Product");
-			Schema("dbo");
+			Table("[Product]");
+			Schema("[dbo]");
 			
 			#region Primary Keys
 			
@@ -37,7 +37,7 @@ namespace Banking.Models.Context.Mappings
 
 			#region Constraints
 			
-			Map(t => t.ProductId).Generated.Insert()
+			Map(t => t.ProductId).ReadOnly().Generated.Insert()
 			.Not.Nullable();
 			Map(t => t.ProductDescription)
 			.Length(100)
@@ -59,7 +59,7 @@ namespace Banking.Models.Context.Mappings
 			#region Relationships
 			
 			HasOne(s => s.Book).PropertyRef(o => o.ProductId);
-			HasMany(s => s.OrderDetails);
+			HasMany(s => s.OrderDetails).KeyColumn("ProductId");
 			HasOne(s => s.Software).PropertyRef(o => o.ProductId);
 			
 			#endregion			

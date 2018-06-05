@@ -94,11 +94,21 @@ namespace <#= DataType.FullNamespace #>
 		{ 
 			get
 			{
-				return (<#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #>>)this.<#= RelationshipNameFormatting.FormatName(child.ReferencedTableName, child.RelationshipAlias, DataType.NamingConvention) #>;
+				return this.<#= RelationshipNameFormatting.FormatName(child.ReferencedTableName, child.RelationshipAlias, DataType.NamingConvention) #> == null ? null : (<#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #>>)this.<#= RelationshipNameFormatting.FormatName(child.ReferencedTableName, child.RelationshipAlias, DataType.NamingConvention) #>;
 			}
 			set
 			{
-				this.<#= RelationshipNameFormatting.FormatName(child.ReferencedTableName, child.RelationshipAlias, DataType.NamingConvention) #> = (<#= DataType.CollectionOption.ClassNameInterface #><<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #>>)value;
+				if(value != this.<#= RelationshipNameFormatting.FormatName(child.ReferencedTableName, child.RelationshipAlias, DataType.NamingConvention) #>)
+				{
+					if(value != null)
+					{
+						this.<#= RelationshipNameFormatting.FormatName(child.ReferencedTableName, child.RelationshipAlias, DataType.NamingConvention) #> = (<#= DataType.CollectionOption.ClassNameInterface #><<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #>>)value;
+					}
+					else
+					{
+						this.<#= RelationshipNameFormatting.FormatName(child.ReferencedTableName, child.RelationshipAlias, DataType.NamingConvention) #> = null;
+					}
+				}
 			}			
 		}
 <#+ } #>
@@ -116,7 +126,17 @@ namespace <#= DataType.FullNamespace #>
 			}
 			set
 			{
-				this.<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #> = (<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #>)value;
+				if(value != this.<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #>)
+				{
+					if(value != null)
+					{
+						this.<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #> = (<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #>)value;
+					}
+					else
+					{
+						this.<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #> = null;
+					}
+				}
 			}
 		}
 <#+ } #>
@@ -139,7 +159,17 @@ namespace <#= DataType.FullNamespace #>
 			}
 			set
 			{
-				this.<#= RelationshipNameFormatting.FormatName(parent.ReferencedTableName, parent.RelationshipAlias, DataType.NamingConvention) #> = (<#= DataType.NamingConvention.ApplyNamingConvention(parent.ReferencedTableName) #>)value;
+				if(value != this.<#= RelationshipNameFormatting.FormatName(parent.ReferencedTableName, parent.RelationshipAlias, DataType.NamingConvention) #>)
+				{
+					if(value != null)
+					{
+						this.<#= RelationshipNameFormatting.FormatName(parent.ReferencedTableName, parent.RelationshipAlias, DataType.NamingConvention) #> = (<#= DataType.NamingConvention.ApplyNamingConvention(parent.ReferencedTableName) #>)value;
+					}
+					else
+					{
+						this.<#= RelationshipNameFormatting.FormatName(parent.ReferencedTableName, parent.RelationshipAlias, DataType.NamingConvention) #> = null;
+					}
+				}
 			}
 		}
 <#+ } #>

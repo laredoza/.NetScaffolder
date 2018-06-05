@@ -26,6 +26,11 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EFCore
         /// </summary>
         public string ConfigurationClass => string.Empty;
 
+        public string AsAlias(string name)
+        {
+            return $"`{name}`";
+        }
+
         /// <summary>
         ///     Gets the context attribute.
         /// </summary>

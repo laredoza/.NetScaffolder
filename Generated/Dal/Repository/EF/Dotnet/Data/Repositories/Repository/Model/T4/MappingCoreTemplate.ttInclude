@@ -48,10 +48,10 @@ if (Driver.ForceSchemaToUppercase)
 }
 #>
 <#+ if(Driver is EFCoreMySqlDriver) { #>
-			builder.ToTable("<#=Model.TableName #>");
+			builder.ToTable("<#= Driver.AsAlias(Model.TableName) #>");
 <#+ } else #>
 <#+ {#>
-			builder.ToTable("<#=Model.TableName #>", "<#= schemaName #>");
+			builder.ToTable("<#= Driver.AsAlias(Model.TableName) #>", "<#= Driver.AsAlias(schemaName) #>");
 <#+ }#>
 			
 			#region Primary keys

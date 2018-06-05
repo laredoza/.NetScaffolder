@@ -7,6 +7,7 @@
 namespace RepositoryEFDotnet.UnitTest
 {
     using System.Configuration;
+    using System.Data.SqlClient;
 
     using FluentNHibernate.Cfg;
     using FluentNHibernate.Cfg.Db;
@@ -40,9 +41,32 @@ namespace RepositoryEFDotnet.UnitTest
         [ClassInitialize]
         public static void Init(TestContext context)
         {
+            DropCreateDatabase();
+
             Config =
                 MsSqlConfiguration.MsSql2012.ConnectionString(
                     ConfigurationManager.ConnectionStrings[DbConfig].ConnectionString);
+        }
+
+        private static void DropCreateDatabase()
+        {
+            using (var con = new SqlConnection(@"Data Source=.\SQLEXPRESS;Initial Catalog=master;Integrated Security=True;Pooling=False"))
+            {
+                using (var cmd = con.CreateCommand())
+                {
+                    cmd.CommandText = @"IF (db_id('RepoTest') IS NOT NULL)
+                                        BEGIN
+                                            ALTER DATABASE [RepoTest] SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
+                                            DROP DATABASE [RepoTest];
+                                        END;
+                                        
+                                        CREATE DATABASE [RepoTest];";
+
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                }
+            }
         }
 
         /// <summary>
@@ -53,8 +77,8 @@ namespace RepositoryEFDotnet.UnitTest
         {
             using (var context = new SqlServerFullContext(Config))
             {
-                context.DropDatabase();
-                context.CreateDatabase();
+                context.DropSchema();
+                context.CreateSchema();
             }
         }
 

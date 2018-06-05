@@ -36,19 +36,10 @@ namespace <#= ContextData.TransformFullnamespace(DataType.BaseNamespace) #>.<#= 
 	{	
 		#region CTOR
 		
-		// Use in memory as target
-	    public <#= string.Concat(Driver.Prefix, ContextData.ContextName)  #>(MsSqliteConfiguration config, bool showSql = false)
+		// Use other target e.g. in memory sqlite
+	    public <#= string.Concat(Driver.Prefix, ContextData.ContextName)  #>(Configuration config)
 	    {
-			if(showSql)
-			{
-				config.InMemory().ShowSql();
-			}
-			else
-			{
-				config.InMemory();
-			}
-			
-	        CreateSession(config);
+			CreateSession(config);
         }
 		
 		// Use db as target

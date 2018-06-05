@@ -30,6 +30,11 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.NHibernate
         /// </summary>
         public string ConfigurationClass => "MsSqlConfiguration";
 
+        public string AsAlias(string name)
+        {
+            return $"[{name}]";
+        }
+
         /// <summary>
         /// Gets the context attribute.
         /// </summary>
@@ -49,7 +54,13 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.NHibernate
         /// Gets the name spaces used to generate templates.
         /// </summary>
         public List<string> NameSpaces =>
-            new List<string> { "NHibernate", "FluentNHibernate.Cfg.Db", "FluentNHibernate.Cfg" };
+            new List<string>
+                {
+                    "NHibernate",
+                    "NHibernate.Cfg",
+                    "FluentNHibernate.Cfg.Db",
+                    "FluentNHibernate.Cfg"
+                };
 
         /// <summary>
         /// The parent folder.

@@ -26,8 +26,8 @@ namespace Banking.Models.Context.Mappings
 	{	
 		public CountryMap ()
 		{
-			Table("Country");
-			Schema("dbo");
+			Table("[Country]");
+			Schema("[dbo]");
 			
 			#region Primary Keys
 			
@@ -37,7 +37,7 @@ namespace Banking.Models.Context.Mappings
 
 			#region Constraints
 			
-			Map(t => t.CountryId).Generated.Insert()
+			Map(t => t.CountryId).ReadOnly().Generated.Insert()
 			.Not.Nullable();
 			Map(t => t.CountryName)
 			.Length(100)
@@ -47,7 +47,7 @@ namespace Banking.Models.Context.Mappings
 
 			#region Relationships
 			
-			HasMany(s => s.Customer);
+			HasMany(s => s.Customer).KeyColumn("CountryId");
 			
 			#endregion			
 	

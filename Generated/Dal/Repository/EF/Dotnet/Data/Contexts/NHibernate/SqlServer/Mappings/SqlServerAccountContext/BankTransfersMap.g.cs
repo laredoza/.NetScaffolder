@@ -26,8 +26,8 @@ namespace Banking.Models.Accounts.Mappings
 	{	
 		public BankTransfersMap ()
 		{
-			Table("BankTransfers");
-			Schema("dbo");
+			Table("[BankTransfers]");
+			Schema("[dbo]");
 			
 			#region Primary Keys
 			
@@ -37,7 +37,7 @@ namespace Banking.Models.Accounts.Mappings
 
 			#region Constraints
 			
-			Map(t => t.BankTransferId).Generated.Insert()
+			Map(t => t.BankTransferId).ReadOnly().Generated.Insert()
 			.Not.Nullable();
 			Map(t => t.FromBankAccountId)
 			.Not.Nullable();
@@ -53,7 +53,7 @@ namespace Banking.Models.Accounts.Mappings
 
 			#region Relationships
 			
-			References(o => o.BankAccount).Column("BankAccountId").Unique();
+			References(o => o.BankAccount).Column("BankAccountId").Unique().Not.Insert().Not.Update();
 			
 			#endregion			
 	

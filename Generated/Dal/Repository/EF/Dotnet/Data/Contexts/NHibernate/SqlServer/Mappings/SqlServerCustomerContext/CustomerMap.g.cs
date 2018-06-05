@@ -26,8 +26,8 @@ namespace Banking.Models.Customers.Mappings
 	{	
 		public CustomerMap ()
 		{
-			Table("Customer");
-			Schema("dbo");
+			Table("[Customer]");
+			Schema("[dbo]");
 			
 			#region Primary Keys
 			
@@ -37,7 +37,7 @@ namespace Banking.Models.Customers.Mappings
 
 			#region Constraints
 			
-			Map(t => t.CustomerId).Generated.Insert()
+			Map(t => t.CustomerId).ReadOnly().Generated.Insert()
 			.Not.Nullable();
 			Map(t => t.CustomerCode)
 			.Length(5)
@@ -78,8 +78,8 @@ namespace Banking.Models.Customers.Mappings
 
 			#region Relationships
 			
-			References(o => o.Country).Column("CountryId").Unique();
-			HasMany(s => s.Order);
+			References(o => o.Country).Column("CountryId").Unique().Not.Insert().Not.Update();
+			HasMany(s => s.Order).KeyColumn("CustomerId");
 			
 			#endregion			
 	

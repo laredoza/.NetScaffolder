@@ -80,11 +80,21 @@ namespace Banking.Models.Entity
 		{ 
 			get
 			{
-				return (IList<IOrderDetails>)this.OrderDetails;
+				return this.OrderDetails == null ? null : (IList<IOrderDetails>)this.OrderDetails;
 			}
 			set
 			{
-				this.OrderDetails = (IList<OrderDetails>)value;
+				if(value != this.OrderDetails)
+				{
+					if(value != null)
+					{
+						this.OrderDetails = (IList<OrderDetails>)value;
+					}
+					else
+					{
+						this.OrderDetails = null;
+					}
+				}
 			}			
 		}
         
@@ -97,7 +107,17 @@ namespace Banking.Models.Entity
 			}
 			set
 			{
-				this.Book = (Book)value;
+				if(value != this.Book)
+				{
+					if(value != null)
+					{
+						this.Book = (Book)value;
+					}
+					else
+					{
+						this.Book = null;
+					}
+				}
 			}
 		}
         
@@ -110,7 +130,17 @@ namespace Banking.Models.Entity
 			}
 			set
 			{
-				this.Software = (Software)value;
+				if(value != this.Software)
+				{
+					if(value != null)
+					{
+						this.Software = (Software)value;
+					}
+					else
+					{
+						this.Software = null;
+					}
+				}
 			}
 		}
 

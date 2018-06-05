@@ -41,8 +41,8 @@ namespace <#= Namespace #>
 				schemaName = schemaName.ToUpper();
 			}
 #>
-			Table("<#= ModelName #>");
-			Schema("<#= schemaName #>");
+			Table("<#= Driver.AsAlias(ModelName) #>");
+			Schema("<#= Driver.AsAlias(schemaName) #>");
 			
 			#region Primary Keys
 			
@@ -59,7 +59,7 @@ namespace <#= Namespace #>
 			
 <#+ foreach(var col in Model.Columns){ #>
 <#+ if(col.IsPrimaryKey){ #>
-			Map(t => t.<#= col.ColumnName #>).Generated.Insert()
+			Map(t => t.<#= col.ColumnName #>).ReadOnly().Generated.Insert()
 <#+ } else  #>
 <#+ { #>
 			Map(t => t.<#= col.ColumnName #>)

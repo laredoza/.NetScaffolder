@@ -86,11 +86,21 @@ namespace Banking.Models.Entity
 		{ 
 			get
 			{
-				return (IList<IOrderDetails>)this.OrderDetails;
+				return this.OrderDetails == null ? null : (IList<IOrderDetails>)this.OrderDetails;
 			}
 			set
 			{
-				this.OrderDetails = (IList<OrderDetails>)value;
+				if(value != this.OrderDetails)
+				{
+					if(value != null)
+					{
+						this.OrderDetails = (IList<OrderDetails>)value;
+					}
+					else
+					{
+						this.OrderDetails = null;
+					}
+				}
 			}			
 		}
 
@@ -107,7 +117,17 @@ namespace Banking.Models.Entity
 			}
 			set
 			{
-				this.Customer = (Customer)value;
+				if(value != this.Customer)
+				{
+					if(value != null)
+					{
+						this.Customer = (Customer)value;
+					}
+					else
+					{
+						this.Customer = null;
+					}
+				}
 			}
 		}
 		

@@ -68,7 +68,17 @@ namespace Banking.Models.Entity
 			}
 			set
 			{
-				this.Product = (Product)value;
+				if(value != this.Product)
+				{
+					if(value != null)
+					{
+						this.Product = (Product)value;
+					}
+					else
+					{
+						this.Product = null;
+					}
+				}
 			}
 		}
 		

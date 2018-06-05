@@ -24,7 +24,7 @@ using MySql.Data.Entity;
 using RepositoryEFDotnet.Library;
 using System.ComponentModel.DataAnnotations.Schema;
 using Banking.Models.Entity;
-using Banking.Models.Context.Mappings;
+using Banking.Models.Context.Mappings.MySql;
 using System.Data.Common;
 
 

@@ -18,17 +18,23 @@
 //	USE A PARTIAL CLASS INSTEAD
 // *******************************************************************
 
-using Banking.Models.Entity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using RepositoryEFDotnet.Contexts.EFCore;
+using System.Configuration;
+using System.ComponentModel.DataAnnotations.Schema;
+using Banking.Models.Entity;
+using System.Data.Common;
 
-namespace Banking.Models.Context.Mappings
+
+namespace Banking.Models.Context.Mappings.SqlServer
 {
 	public partial class ProductMap : IEntityTypeConfiguration<Product>
 	{	
 	    public void Configure(EntityTypeBuilder<Product> builder)
 	    {
-			builder.ToTable("Product", "dbo");
+			builder.ToTable("[Product]", "[dbo]");
 			
 			#region Primary keys
 			

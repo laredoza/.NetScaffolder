@@ -70,11 +70,21 @@ namespace Banking.Models.Entity
 		{ 
 			get
 			{
-				return (IList<ICustomer>)this.Customer;
+				return this.Customer == null ? null : (IList<ICustomer>)this.Customer;
 			}
 			set
 			{
-				this.Customer = (IList<Customer>)value;
+				if(value != this.Customer)
+				{
+					if(value != null)
+					{
+						this.Customer = (IList<Customer>)value;
+					}
+					else
+					{
+						this.Customer = null;
+					}
+				}
 			}			
 		}
 
