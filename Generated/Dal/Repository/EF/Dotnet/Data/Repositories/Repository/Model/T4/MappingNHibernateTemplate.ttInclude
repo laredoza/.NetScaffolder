@@ -28,7 +28,7 @@ public class MappingNHibernateTemplate : BaseTemplate
 using <#= EntityNamespace #>;
 using FluentNHibernate.Mapping;
 
-namespace <#= Namespace #>
+namespace <#= Namespace #>.<#= Driver.ParentFolder #>.<#= Driver.Prefix #>
 {
 	public partial class <#= ModelName #><#= PostFix #> : ClassMap<<#= ModelName #>>
 	{	
@@ -41,8 +41,10 @@ namespace <#= Namespace #>
 				schemaName = schemaName.ToUpper();
 			}
 #>
-			Table("<#= Driver.AsAlias(ModelName) #>");
-			Schema("<#= Driver.AsAlias(schemaName) #>");
+			Table("<#= ModelName #>");
+<#+ if(Driver.UseSchema){ #>
+			Schema("<#= schemaName #>");
+<#+ } #>
 			
 			#region Primary Keys
 			

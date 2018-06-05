@@ -27,13 +27,13 @@ using Banking.Models.Entity;
 using System.Data.Common;
 
 
-namespace Banking.Models.Accounts.Mappings.MySql
+namespace Banking.Models.Accounts.Mappings.EF.MySql
 {
 	public partial class BankAccountMap : EntityTypeConfiguration<BankAccount>
 	{	
 		public BankAccountMap ()
 		{
-			ToTable("BankAccount", "dbo");
+			ToTable("BankAccount");
 			
 			#region Primary Keys
 			

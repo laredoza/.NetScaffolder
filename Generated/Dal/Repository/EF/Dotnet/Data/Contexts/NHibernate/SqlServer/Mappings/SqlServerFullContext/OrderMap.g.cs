@@ -20,14 +20,14 @@
 using Banking.Models.Entity;
 using FluentNHibernate.Mapping;
 
-namespace Banking.Models.Context.Mappings
+namespace Banking.Models.Context.Mappings.NHibernate.SqlServer
 {
 	public partial class OrderMap : ClassMap<Order>
 	{	
 		public OrderMap ()
 		{
-			Table("[Order]");
-			Schema("[dbo]");
+			Table("Order");
+			Schema("dbo");
 			
 			#region Primary Keys
 			

@@ -28,13 +28,13 @@ using Banking.Models.Entity;
 using System.Data.Common;
 
 
-namespace Banking.Models.Context.Mappings.Oracle
+namespace Banking.Models.Context.Mappings.EF.Oracle
 {
 	public partial class BankTransfersMap : EntityTypeConfiguration<BankTransfers>
 	{	
 		public BankTransfersMap ()
 		{
-			ToTable("\"BankTransfers\"", "\"DBO\"");
+			ToTable("BankTransfers", "DBO");
 			
 			#region Primary Keys
 			

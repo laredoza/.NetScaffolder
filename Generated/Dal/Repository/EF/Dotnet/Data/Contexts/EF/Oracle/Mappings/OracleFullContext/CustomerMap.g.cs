@@ -28,13 +28,13 @@ using Banking.Models.Entity;
 using System.Data.Common;
 
 
-namespace Banking.Models.Context.Mappings.Oracle
+namespace Banking.Models.Context.Mappings.EF.Oracle
 {
 	public partial class CustomerMap : EntityTypeConfiguration<Customer>
 	{	
 		public CustomerMap ()
 		{
-			ToTable("\"Customer\"", "\"DBO\"");
+			ToTable("Customer", "DBO");
 			
 			#region Primary Keys
 			

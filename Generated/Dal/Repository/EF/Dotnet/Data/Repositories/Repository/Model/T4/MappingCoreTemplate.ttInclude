@@ -34,7 +34,7 @@ using <#= EntityNamespace #>;
 using System.Data.Common;
 
 
-namespace <#= Namespace #>.<#= Driver.Prefix #>
+namespace <#= Namespace #>.<#= Driver.ParentFolder #>.<#= Driver.Prefix #>
 {
 	public partial class <#= ModelName #><#= PostFix #> : IEntityTypeConfiguration<<#= ModelName #>>
 	{	
@@ -47,11 +47,11 @@ if (Driver.ForceSchemaToUppercase)
 	schemaName = schemaName.ToUpper();
 }
 #>
-<#+ if(Driver is EFCoreMySqlDriver) { #>
-			builder.ToTable("<#= Driver.AsAlias(Model.TableName) #>");
+<#+ if(Driver.UseSchema) { #>
+			builder.ToTable("<#= Driver.AsAlias(Model.TableName) #>", "<#= Driver.AsAlias(schemaName) #>");
 <#+ } else #>
 <#+ {#>
-			builder.ToTable("<#= Driver.AsAlias(Model.TableName) #>", "<#= Driver.AsAlias(schemaName) #>");
+			builder.ToTable("<#= Driver.AsAlias(Model.TableName) #>");
 <#+ }#>
 			
 			#region Primary keys

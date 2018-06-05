@@ -18,15 +18,12 @@
 //	USE A PARTIAL CLASS INSTEAD
 // *******************************************************************
 
-using System.Data.Entity;
-using System.Data.Entity.ModelConfiguration;
-using Oracle.ManagedDataAccess.Client;
+using Banking.Models.Context.Mappings.EF.Oracle;
+using Banking.Models.Entity;
 using Oracle.Config;
 using RepositoryEFDotnet.Library;
-using System.ComponentModel.DataAnnotations.Schema;
-using Banking.Models.Entity;
-using Banking.Models.Context.Mappings.Oracle;
 using System.Data.Common;
+using System.Data.Entity;
 
 
 namespace Banking.Models.Context.EF

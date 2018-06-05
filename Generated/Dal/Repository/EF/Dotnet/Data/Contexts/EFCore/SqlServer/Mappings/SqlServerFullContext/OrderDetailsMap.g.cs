@@ -28,7 +28,7 @@ using Banking.Models.Entity;
 using System.Data.Common;
 
 
-namespace Banking.Models.Context.Mappings.SqlServer
+namespace Banking.Models.Context.Mappings.EFCore.SqlServer
 {
 	public partial class OrderDetailsMap : IEntityTypeConfiguration<OrderDetails>
 	{	

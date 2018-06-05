@@ -23,7 +23,7 @@ using System.Data.Entity.ModelConfiguration;
 using RepositoryEFDotnet.Library;
 using System.ComponentModel.DataAnnotations.Schema;
 using Banking.Models.Entity;
-using Banking.Models.Customers.Mappings.SqlServer;
+using Banking.Models.Customers.Mappings.EF.SqlServer;
 using System.Data.Common;
 
 

@@ -28,7 +28,7 @@ using Banking.Models.Entity;
 using System.Data.Common;
 
 
-namespace Banking.Models.Customers.Mappings.SqlServer
+namespace Banking.Models.Customers.Mappings.EFCore.SqlServer
 {
 	public partial class CountryMap : IEntityTypeConfiguration<Country>
 	{	

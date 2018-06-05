@@ -35,7 +35,7 @@ using <#= EntityNamespace #>;
 using System.Data.Common;
 
 
-namespace <#= Namespace #>.<#= Driver.Prefix #>
+namespace <#= Namespace #>.<#= Driver.ParentFolder #>.<#= Driver.Prefix #>
 {
 	public partial class <#= ModelName #><#= PostFix #> : EntityTypeConfiguration<<#= ModelName #>>
 	{	
@@ -48,7 +48,12 @@ namespace <#= Namespace #>.<#= Driver.Prefix #>
 				schemaName = schemaName.ToUpper();
 			}
 #>
-			ToTable("<#= Driver.AsAlias(ModelName) #>", "<#= Driver.AsAlias(schemaName) #>");
+<#+ if(Driver.UseSchema) { #>
+			ToTable("<#= ModelName #>", "<#= schemaName #>");
+<#+ } else #>
+<#+ {#>
+			ToTable("<#= ModelName #>");
+<#+ }#>
 			
 			#region Primary Keys
 			

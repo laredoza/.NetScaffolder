@@ -28,7 +28,7 @@ using Banking.Models.Entity;
 using System.Data.Common;
 
 
-namespace Banking.Models.Accounts.Mappings.SqlServer
+namespace Banking.Models.Accounts.Mappings.EFCore.SqlServer
 {
 	public partial class BankTransfersMap : IEntityTypeConfiguration<BankTransfers>
 	{	

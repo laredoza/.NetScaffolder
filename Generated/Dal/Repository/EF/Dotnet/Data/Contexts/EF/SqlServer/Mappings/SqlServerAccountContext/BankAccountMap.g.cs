@@ -26,13 +26,13 @@ using Banking.Models.Entity;
 using System.Data.Common;
 
 
-namespace Banking.Models.Accounts.Mappings.SqlServer
+namespace Banking.Models.Accounts.Mappings.EF.SqlServer
 {
 	public partial class BankAccountMap : EntityTypeConfiguration<BankAccount>
 	{	
 		public BankAccountMap ()
 		{
-			ToTable("[BankAccount]", "[dbo]");
+			ToTable("BankAccount", "dbo");
 			
 			#region Primary Keys
 			

@@ -46,6 +46,8 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EFCore
         /// </summary>
         public bool ForceSchemaToUppercase => false;
 
+        public bool UseSchema => false;
+
         /// <summary>
         ///     Gets the name spaces used to generate templates.
         /// </summary>

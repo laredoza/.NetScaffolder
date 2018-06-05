@@ -23,7 +23,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using RepositoryEFDotnet.Contexts.EFCore;
 using System.Configuration;
 using System.ComponentModel.DataAnnotations.Schema;
-using Banking.Models.Context.Mappings.MySql;
+using Banking.Models.Context.Mappings.EFCore.MySql;
 using Banking.Models.Entity;
 
 namespace Banking.Models.Context.EFCore

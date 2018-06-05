@@ -26,13 +26,13 @@ using Banking.Models.Entity;
 using System.Data.Common;
 
 
-namespace Banking.Models.Context.Mappings.SqlServer
+namespace Banking.Models.Context.Mappings.EF.SqlServer
 {
 	public partial class OrderDetailsMap : EntityTypeConfiguration<OrderDetails>
 	{	
 		public OrderDetailsMap ()
 		{
-			ToTable("[OrderDetails]", "[dbo]");
+			ToTable("OrderDetails", "dbo");
 			
 			#region Primary Keys
 			

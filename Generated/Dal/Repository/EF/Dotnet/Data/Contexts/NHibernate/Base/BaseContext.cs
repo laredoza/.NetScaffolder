@@ -20,6 +20,7 @@ namespace RepositoryEFDotnet.Contexts.NHibernate
 
     using global::NHibernate;
     using global::NHibernate.Cfg;
+    using global::NHibernate.Dialect;
     using global::NHibernate.Linq;
     using global::NHibernate.Mapping;
     using global::NHibernate.Tool.hbm2ddl;
@@ -585,7 +586,7 @@ namespace RepositoryEFDotnet.Contexts.NHibernate
             IEnumerable<string> includes = null)
             where TEntity : class
         {
-            throw new NotImplementedException();
+            return this.GetQueryable<TEntity>(includes, null, startPage, pageSize, orderBy, orderByAscending);
         }
 
         /// <summary>
@@ -897,8 +898,12 @@ namespace RepositoryEFDotnet.Contexts.NHibernate
         /// </param>
         protected void CreateSession(IPersistenceConfigurer config)
         {
-            Fluently.Configure().Database(config).Mappings(this.SetupConventions).Mappings(this.ConfigureMappings)
-                .ExposeConfiguration(cfg => this.Configuration = cfg);
+            this.Configuration = Fluently.Configure().Database(config).Mappings(this.SetupConventions)
+                .Mappings(this.ConfigureMappings).BuildConfiguration();
+
+            SchemaMetadataUpdater.QuoteTableAndColumns(
+                this.Configuration,
+                Dialect.GetDialect(this.Configuration.Properties));
 
             using (var factory = this.Configuration.BuildSessionFactory())
             {
@@ -909,6 +914,9 @@ namespace RepositoryEFDotnet.Contexts.NHibernate
         protected void CreateSession(Configuration config)
         {
             this.Configuration = config ?? throw new Exception("ISessionFactory cannot be null");
+            SchemaMetadataUpdater.QuoteTableAndColumns(
+                this.Configuration,
+                Dialect.GetDialect(this.Configuration.Properties));
             this.CurrentSession = config.BuildSessionFactory().OpenSession();
         }
 

@@ -20,14 +20,14 @@
 using Banking.Models.Entity;
 using FluentNHibernate.Mapping;
 
-namespace Banking.Models.Context.Mappings
+namespace Banking.Models.Context.Mappings.NHibernate.SqlServer
 {
 	public partial class ProductMap : ClassMap<Product>
 	{	
 		public ProductMap ()
 		{
-			Table("[Product]");
-			Schema("[dbo]");
+			Table("Product");
+			Schema("dbo");
 			
 			#region Primary Keys
 			

@@ -26,13 +26,13 @@ using Banking.Models.Entity;
 using System.Data.Common;
 
 
-namespace Banking.Models.Customers.Mappings.SqlServer
+namespace Banking.Models.Customers.Mappings.EF.SqlServer
 {
 	public partial class SoftwareMap : EntityTypeConfiguration<Software>
 	{	
 		public SoftwareMap ()
 		{
-			ToTable("[Software]", "[dbo]");
+			ToTable("Software", "dbo");
 			
 			#region Primary Keys
 			

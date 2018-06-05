@@ -27,7 +27,7 @@ using Banking.Models.Entity;
 using System.Data.Common;
 
 
-namespace Banking.Models.Accounts.Mappings.MySql
+namespace Banking.Models.Accounts.Mappings.EFCore.MySql
 {
 	public partial class BankAccountMap : IEntityTypeConfiguration<BankAccount>
 	{	

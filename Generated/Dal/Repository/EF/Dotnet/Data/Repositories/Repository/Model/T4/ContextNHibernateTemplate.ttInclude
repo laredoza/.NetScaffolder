@@ -26,7 +26,7 @@ public class ContextNHibernateTemplate : BaseTemplate
 <#+ foreach(var nameSpace in Driver.NameSpaces){ #>
 using <#= nameSpace #>;
 <#+ } #>
-using <#= MappingNamespace #>;
+using <#= MappingNamespace #>.<#= Driver.ParentFolder #>.<#= Driver.Prefix #>;
 using RepositoryEFDotnet.Contexts.NHibernate;
 using System.Data;
 

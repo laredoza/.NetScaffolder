@@ -27,13 +27,13 @@ using Banking.Models.Entity;
 using System.Data.Common;
 
 
-namespace Banking.Models.Customers.Mappings.MySql
+namespace Banking.Models.Customers.Mappings.EF.MySql
 {
 	public partial class CountryMap : EntityTypeConfiguration<Country>
 	{	
 		public CountryMap ()
 		{
-			ToTable("`Country`", "`dbo`");
+			ToTable("Country");
 			
 			#region Primary Keys
 			

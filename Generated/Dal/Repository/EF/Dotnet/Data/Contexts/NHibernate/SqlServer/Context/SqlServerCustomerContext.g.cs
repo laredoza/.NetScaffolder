@@ -22,7 +22,7 @@ using NHibernate;
 using NHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using FluentNHibernate.Cfg;
-using Banking.Models.Customers.Mappings;
+using Banking.Models.Customers.Mappings.NHibernate.SqlServer;
 using RepositoryEFDotnet.Contexts.NHibernate;
 using System.Data;
 

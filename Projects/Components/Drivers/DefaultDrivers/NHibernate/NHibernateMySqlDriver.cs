@@ -32,7 +32,7 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.NHibernate
 
         public string AsAlias(string name)
         {
-            return $"[{name}]";
+            return $"`{name}`";
         }
 
         /// <summary>
@@ -49,6 +49,8 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.NHibernate
         /// Force schema to uppercase.
         /// </summary>
         public bool ForceSchemaToUppercase => false;
+
+        public bool UseSchema => false;
 
         /// <summary>
         /// Gets the name spaces used to generate templates.

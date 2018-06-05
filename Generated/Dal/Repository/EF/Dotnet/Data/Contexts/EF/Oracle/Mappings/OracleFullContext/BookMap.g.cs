@@ -28,13 +28,13 @@ using Banking.Models.Entity;
 using System.Data.Common;
 
 
-namespace Banking.Models.Context.Mappings.Oracle
+namespace Banking.Models.Context.Mappings.EF.Oracle
 {
 	public partial class BookMap : EntityTypeConfiguration<Book>
 	{	
 		public BookMap ()
 		{
-			ToTable("\"Book\"", "\"DBO\"");
+			ToTable("Book", "DBO");
 			
 			#region Primary Keys
 			

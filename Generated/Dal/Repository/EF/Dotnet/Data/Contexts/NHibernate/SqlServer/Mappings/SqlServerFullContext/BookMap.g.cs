@@ -20,14 +20,14 @@
 using Banking.Models.Entity;
 using FluentNHibernate.Mapping;
 
-namespace Banking.Models.Context.Mappings
+namespace Banking.Models.Context.Mappings.NHibernate.SqlServer
 {
 	public partial class BookMap : ClassMap<Book>
 	{	
 		public BookMap ()
 		{
-			Table("[Book]");
-			Schema("[dbo]");
+			Table("Book");
+			Schema("dbo");
 			
 			#region Primary Keys
 			

@@ -50,6 +50,8 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6
         /// </summary>
         public bool ForceSchemaToUppercase => false;
 
+        public bool UseSchema => true;
+
         /// <summary>
         ///     Gets the name spaces used to generate templates.
         /// </summary>

@@ -29,6 +29,8 @@ namespace DotNetScaffolder.Components.Common.Contract
         /// </summary>
         bool ForceSchemaToUppercase { get; }
 
+        bool UseSchema { get; }
+
         /// <summary>
         ///     Gets the name spaces used to generate templates.
         /// </summary>

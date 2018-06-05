@@ -27,7 +27,7 @@ using Banking.Models.Entity;
 using System.Data.Common;
 
 
-namespace Banking.Models.Context.Mappings.MySql
+namespace Banking.Models.Context.Mappings.EFCore.MySql
 {
 	public partial class BookMap : IEntityTypeConfiguration<Book>
 	{	

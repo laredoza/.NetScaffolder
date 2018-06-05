@@ -27,7 +27,7 @@ using Banking.Models.Entity;
 using System.Data.Common;
 
 
-namespace Banking.Models.Customers.Mappings.MySql
+namespace Banking.Models.Customers.Mappings.EFCore.MySql
 {
 	public partial class ProductMap : IEntityTypeConfiguration<Product>
 	{	
