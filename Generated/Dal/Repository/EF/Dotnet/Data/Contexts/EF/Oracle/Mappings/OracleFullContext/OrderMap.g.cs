@@ -34,7 +34,7 @@ namespace Banking.Models.Context.Mappings.Oracle
 	{	
 		public OrderMap ()
 		{
-			ToTable("Order", "DBO");
+			ToTable("\"Order\"", "\"DBO\"");
 			
 			#region Primary Keys
 			

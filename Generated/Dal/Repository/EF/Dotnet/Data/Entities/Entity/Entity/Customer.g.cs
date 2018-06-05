@@ -105,11 +105,21 @@ namespace Banking.Models.Entity
 		{ 
 			get
 			{
-				return (IList<IBankAccount>)this.BankAccount;
+				return this.BankAccount == null ? null : (IList<IBankAccount>)this.BankAccount;
 			}
 			set
 			{
-				this.BankAccount = (IList<BankAccount>)value;
+				if(value != this.BankAccount)
+				{
+					if(value != null)
+					{
+						this.BankAccount = (IList<BankAccount>)value;
+					}
+					else
+					{
+						this.BankAccount = null;
+					}
+				}
 			}			
 		}
         
@@ -119,11 +129,21 @@ namespace Banking.Models.Entity
 		{ 
 			get
 			{
-				return (IList<IOrder>)this.Order;
+				return this.Order == null ? null : (IList<IOrder>)this.Order;
 			}
 			set
 			{
-				this.Order = (IList<Order>)value;
+				if(value != this.Order)
+				{
+					if(value != null)
+					{
+						this.Order = (IList<Order>)value;
+					}
+					else
+					{
+						this.Order = null;
+					}
+				}
 			}			
 		}
 
@@ -140,7 +160,17 @@ namespace Banking.Models.Entity
 			}
 			set
 			{
-				this.Country = (Country)value;
+				if(value != this.Country)
+				{
+					if(value != null)
+					{
+						this.Country = (Country)value;
+					}
+					else
+					{
+						this.Country = null;
+					}
+				}
 			}
 		}
 		

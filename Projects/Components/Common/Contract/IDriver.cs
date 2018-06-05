@@ -51,6 +51,8 @@ namespace DotNetScaffolder.Components.Common.Contract
 
         string ConfigurationClass { get; }
 
+        string AsAlias(string name);
+
         #endregion
     }
 }

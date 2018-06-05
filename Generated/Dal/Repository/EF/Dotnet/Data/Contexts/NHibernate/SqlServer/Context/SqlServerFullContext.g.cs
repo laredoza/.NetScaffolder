@@ -19,6 +19,7 @@
 // *******************************************************************
 
 using NHibernate;
+using NHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using FluentNHibernate.Cfg;
 using Banking.Models.Context.Mappings;
@@ -31,19 +32,10 @@ namespace Banking.Models.Context.NHibernate
 	{	
 		#region CTOR
 		
-		// Use in memory as target
-	    public SqlServerFullContext(MsSqliteConfiguration config, bool showSql = false)
+		// Use other target e.g. in memory sqlite
+	    public SqlServerFullContext(Configuration config)
 	    {
-			if(showSql)
-			{
-				config.InMemory().ShowSql();
-			}
-			else
-			{
-				config.InMemory();
-			}
-			
-	        CreateSession(config);
+			CreateSession(config);
         }
 		
 		// Use db as target

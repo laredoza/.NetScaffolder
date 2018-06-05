@@ -48,7 +48,7 @@ namespace <#= Namespace #>.<#= Driver.Prefix #>
 				schemaName = schemaName.ToUpper();
 			}
 #>
-			ToTable("<#= ModelName #>", "<#= schemaName #>");
+			ToTable("<#= Driver.AsAlias(ModelName) #>", "<#= Driver.AsAlias(schemaName) #>");
 			
 			#region Primary Keys
 			

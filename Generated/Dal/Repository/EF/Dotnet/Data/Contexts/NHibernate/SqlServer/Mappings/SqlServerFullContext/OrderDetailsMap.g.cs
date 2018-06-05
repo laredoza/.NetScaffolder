@@ -26,8 +26,8 @@ namespace Banking.Models.Context.Mappings
 	{	
 		public OrderDetailsMap ()
 		{
-			Table("OrderDetails");
-			Schema("dbo");
+			Table("[OrderDetails]");
+			Schema("[dbo]");
 			
 			#region Primary Keys
 			
@@ -37,7 +37,7 @@ namespace Banking.Models.Context.Mappings
 
 			#region Constraints
 			
-			Map(t => t.OrderDetailsId).Generated.Insert()
+			Map(t => t.OrderDetailsId).ReadOnly().Generated.Insert()
 			.Not.Nullable();
 			Map(t => t.OrderId)
 			.Not.Nullable();
@@ -55,8 +55,8 @@ namespace Banking.Models.Context.Mappings
 
 			#region Relationships
 			
-			References(o => o.Order).Column("OrderId").Unique();
-			References(o => o.Product).Column("ProductId").Unique();
+			References(o => o.Order).Column("OrderId").Unique().Not.Insert().Not.Update();
+			References(o => o.Product).Column("ProductId").Unique().Not.Insert().Not.Update();
 			
 			#endregion			
 	

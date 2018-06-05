@@ -32,7 +32,7 @@ namespace Banking.Models.Context.Mappings.SqlServer
 	{	
 		public CountryMap ()
 		{
-			ToTable("Country", "dbo");
+			ToTable("[Country]", "[dbo]");
 			
 			#region Primary Keys
 			

@@ -8,6 +8,7 @@ namespace RepositoryEFDotnet.Contexts.NHibernate
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
     using System.Linq.Expressions;
     using System.Threading.Tasks;
@@ -20,6 +21,7 @@ namespace RepositoryEFDotnet.Contexts.NHibernate
     using global::NHibernate;
     using global::NHibernate.Cfg;
     using global::NHibernate.Linq;
+    using global::NHibernate.Mapping;
     using global::NHibernate.Tool.hbm2ddl;
 
     using RepositoryEFDotnet.Core.Base;
@@ -333,11 +335,37 @@ namespace RepositoryEFDotnet.Contexts.NHibernate
         /// <summary>
         /// The create database.
         /// </summary>
-        public void CreateDatabase()
+        public void CreateSchema()
         {
             var export = new SchemaExport(this.Configuration);
+
+#if DEBUG
+            this.CreateLogDir();
+
+            using (var file = new FileStream(
+                @"C:\TestOutput\NHibernate\CreateSchema.sql",
+                FileMode.Create,
+                FileAccess.Write))
+            {
+                using (var sw = new StreamWriter(file))
+                {
+                    export.Execute(true, true, false, this.CurrentSession?.Connection, sw);
+                }
+            }
+#else
             export.Execute(true, true, false, this.CurrentSession?.Connection, null);
+#endif
         }
+
+#if DEBUG
+        private void CreateLogDir()
+        {
+            if (!Directory.Exists(@"C:\TestOutput\NHibernate\"))
+            {
+                Directory.CreateDirectory(@"C:\TestOutput\NHibernate\");
+            }
+        }
+#endif
 
         /// <summary>
         /// The dispose.
@@ -361,7 +389,7 @@ namespace RepositoryEFDotnet.Contexts.NHibernate
         /// <summary>
         /// The drop database.
         /// </summary>
-        public void DropDatabase()
+        public void DropSchema()
         {
             var export = new SchemaExport(this.Configuration);
             export.Execute(true, true, true, this.CurrentSession?.Connection, null);
@@ -849,9 +877,9 @@ namespace RepositoryEFDotnet.Contexts.NHibernate
             await Task.Run(() => this.CurrentSession.BeginTransaction(System.Data.IsolationLevel.ReadCommitted));
         }
 
-        #endregion
+#endregion
 
-        #region Other Methods
+#region Other Methods
 
         /// <summary>
         /// The configure mappings.
@@ -869,12 +897,19 @@ namespace RepositoryEFDotnet.Contexts.NHibernate
         /// </param>
         protected void CreateSession(IPersistenceConfigurer config)
         {
-            using (var factory = Fluently.Configure().Database(config).Mappings(this.SetupConventions)
-                .Mappings(this.ConfigureMappings).ExposeConfiguration(cfg => this.Configuration = cfg)
-                .BuildSessionFactory())
+            Fluently.Configure().Database(config).Mappings(this.SetupConventions).Mappings(this.ConfigureMappings)
+                .ExposeConfiguration(cfg => this.Configuration = cfg);
+
+            using (var factory = this.Configuration.BuildSessionFactory())
             {
                 this.CurrentSession = factory.OpenSession();
             }
+        }
+
+        protected void CreateSession(Configuration config)
+        {
+            this.Configuration = config ?? throw new Exception("ISessionFactory cannot be null");
+            this.CurrentSession = config.BuildSessionFactory().OpenSession();
         }
 
         /// <summary>
@@ -933,6 +968,6 @@ namespace RepositoryEFDotnet.Contexts.NHibernate
             this.CurrentSession?.Transaction?.Dispose();
         }
 
-        #endregion
+#endregion
     }
 }

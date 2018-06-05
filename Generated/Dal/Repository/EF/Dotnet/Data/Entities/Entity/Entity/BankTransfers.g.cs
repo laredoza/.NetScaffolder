@@ -74,7 +74,17 @@ namespace Banking.Models.Entity
 			}
 			set
 			{
-				this.BankAccount = (BankAccount)value;
+				if(value != this.BankAccount)
+				{
+					if(value != null)
+					{
+						this.BankAccount = (BankAccount)value;
+					}
+					else
+					{
+						this.BankAccount = null;
+					}
+				}
 			}
 		}
 		

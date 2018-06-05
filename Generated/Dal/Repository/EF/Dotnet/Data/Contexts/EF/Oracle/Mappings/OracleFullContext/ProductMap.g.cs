@@ -34,7 +34,7 @@ namespace Banking.Models.Context.Mappings.Oracle
 	{	
 		public ProductMap ()
 		{
-			ToTable("Product", "DBO");
+			ToTable("\"Product\"", "\"DBO\"");
 			
 			#region Primary Keys
 			

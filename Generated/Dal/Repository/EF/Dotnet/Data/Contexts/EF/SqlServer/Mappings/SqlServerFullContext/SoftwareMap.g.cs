@@ -32,7 +32,7 @@ namespace Banking.Models.Context.Mappings.SqlServer
 	{	
 		public SoftwareMap ()
 		{
-			ToTable("Software", "dbo");
+			ToTable("[Software]", "[dbo]");
 			
 			#region Primary Keys
 			

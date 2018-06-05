@@ -80,7 +80,17 @@ namespace Banking.Models.Entity
 			}
 			set
 			{
-				this.Order = (Order)value;
+				if(value != this.Order)
+				{
+					if(value != null)
+					{
+						this.Order = (Order)value;
+					}
+					else
+					{
+						this.Order = null;
+					}
+				}
 			}
 		}
 
@@ -93,7 +103,17 @@ namespace Banking.Models.Entity
 			}
 			set
 			{
-				this.Product = (Product)value;
+				if(value != this.Product)
+				{
+					if(value != null)
+					{
+						this.Product = (Product)value;
+					}
+					else
+					{
+						this.Product = null;
+					}
+				}
 			}
 		}
 		

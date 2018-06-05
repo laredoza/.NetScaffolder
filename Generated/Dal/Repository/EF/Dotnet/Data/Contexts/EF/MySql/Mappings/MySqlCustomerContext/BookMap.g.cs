@@ -33,7 +33,7 @@ namespace Banking.Models.Customers.Mappings.MySql
 	{	
 		public BookMap ()
 		{
-			ToTable("Book", "dbo");
+			ToTable("`Book`", "`dbo`");
 			
 			#region Primary Keys
 			

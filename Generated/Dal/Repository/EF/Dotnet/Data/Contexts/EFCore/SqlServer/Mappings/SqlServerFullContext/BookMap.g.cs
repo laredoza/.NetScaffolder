@@ -34,7 +34,7 @@ namespace Banking.Models.Context.Mappings.SqlServer
 	{	
 	    public void Configure(EntityTypeBuilder<Book> builder)
 	    {
-			builder.ToTable("Book", "dbo");
+			builder.ToTable("[Book]", "[dbo]");
 			
 			#region Primary keys
 			

@@ -32,7 +32,7 @@ namespace Banking.Models.Context.Mappings.SqlServer
 	{	
 		public OrderDetailsMap ()
 		{
-			ToTable("OrderDetails", "dbo");
+			ToTable("[OrderDetails]", "[dbo]");
 			
 			#region Primary Keys
 			

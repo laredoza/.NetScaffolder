@@ -34,7 +34,7 @@ namespace Banking.Models.Accounts.Mappings.SqlServer
 	{	
 	    public void Configure(EntityTypeBuilder<BankTransfers> builder)
 	    {
-			builder.ToTable("BankTransfers", "dbo");
+			builder.ToTable("[BankTransfers]", "[dbo]");
 			
 			#region Primary keys
 			

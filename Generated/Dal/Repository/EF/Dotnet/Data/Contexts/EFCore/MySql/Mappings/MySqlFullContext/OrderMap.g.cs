@@ -33,7 +33,7 @@ namespace Banking.Models.Context.Mappings.MySql
 	{	
 	    public void Configure(EntityTypeBuilder<Order> builder)
 	    {
-			builder.ToTable("Order");
+			builder.ToTable("`Order`");
 			
 			#region Primary keys
 			

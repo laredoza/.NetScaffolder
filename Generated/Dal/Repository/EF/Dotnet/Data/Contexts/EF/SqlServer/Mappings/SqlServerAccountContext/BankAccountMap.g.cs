@@ -32,7 +32,7 @@ namespace Banking.Models.Accounts.Mappings.SqlServer
 	{	
 		public BankAccountMap ()
 		{
-			ToTable("BankAccount", "dbo");
+			ToTable("[BankAccount]", "[dbo]");
 			
 			#region Primary Keys
 			

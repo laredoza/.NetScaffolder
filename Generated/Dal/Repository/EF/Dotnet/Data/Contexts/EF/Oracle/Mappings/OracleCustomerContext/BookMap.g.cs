@@ -34,7 +34,7 @@ namespace Banking.Models.Customers.Mappings.Oracle
 	{	
 		public BookMap ()
 		{
-			ToTable("Book", "DBO");
+			ToTable("\"Book\"", "\"DBO\"");
 			
 			#region Primary Keys
 			
