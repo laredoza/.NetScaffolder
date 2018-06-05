@@ -520,7 +520,11 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project
                 this.ComboBoxPackages.DataSource = this.ReturnPackages();
 
                 // this.ComboBoxPackages.SelectedValue = this.SelectedDomain.Package.Id;
-                this.ComboBoxPackages.SelectedValue = this.SelectedDomain.Package.Id;
+                if (this.SelectedDomain.Package != null)
+                {
+                    this.ComboBoxPackages.SelectedValue = this.SelectedDomain.Package.Id;
+                }
+
                 this.DataSourceInitialized = true;
             }
         }
