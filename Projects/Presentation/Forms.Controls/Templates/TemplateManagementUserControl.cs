@@ -11,6 +11,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Templates
     using System;
     using System.Windows.Forms;
 
+    using DotNetScaffolder.Mapping.MetaData.Project;
     using DotNetScaffolder.Mapping.MetaData.Project.Packages;
 
     using FormControls.Enum;
@@ -63,6 +64,21 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Templates
             }
         }
 
+        public ProjectDefinition ProjectDefinition
+        {
+            get
+            {
+                return this.TemplateDetailsUserControl1.ProjectDefinition;
+            }
+            set
+            {
+                if (this.TemplateDetailsUserControl1.ProjectDefinition != value)
+                {
+                    this.TemplateDetailsUserControl1.ProjectDefinition = value;
+                }
+            }
+        }
+
         /// <summary>
         /// Gets or sets the selected package.
         /// </summary>
@@ -100,7 +116,6 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Templates
         {
             this.TemplateDetailsUserControl1.TreeNode = e.Node;
             this.TemplateDetailsUserControl1.Data = e.Node.Tag as Template;
-            this.TemplateDetailsUserControl1.SelectedPackage = this.SelectedPackage;
         }
 
         /// <summary>

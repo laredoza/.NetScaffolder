@@ -182,6 +182,8 @@ namespace DotNetScaffolder.Presentation.Forms
                             this.applicationConfiguration.ApplicationSettings.Templates;
                     }
 
+                    this.TemplateManagementUserControl1.ProjectDefinition = this.applicationService.ProjectDefinition;
+
                     this.ProjectDetailsUserControl1.Project = this.applicationService.ProjectDefinition;
                     this.ProjectDomainUserControl1.SelectedIndexChanged +=
                         this.ProjectDomainUserControl1_SelectedIndexChanged;

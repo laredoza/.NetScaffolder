@@ -20,6 +20,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Templates
     using DotNetScaffolder.Core.Common;
     using DotNetScaffolder.Core.Common.Validation;
     using DotNetScaffolder.Core.Configuration;
+    using DotNetScaffolder.Mapping.MetaData.Project;
     using DotNetScaffolder.Mapping.MetaData.Project.Packages;
 
     using FormControls.Enum;
@@ -64,11 +65,6 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Templates
         #region Public Properties
 
         /// <summary>
-        /// Gets or sets a value indicating whether data source initialized.
-        /// </summary>
-        public bool DataSourceInitialized { get; set; }
-
-        /// <summary>
         ///     Gets or sets the data.
         /// </summary>
         public Template Data
@@ -87,6 +83,11 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Templates
                 }
             }
         }
+
+        /// <summary>
+        ///     Gets or sets a value indicating whether data source initialized.
+        /// </summary>
+        public bool DataSourceInitialized { get; set; }
 
         /// <summary>
         ///     Gets or sets the generator type id.
@@ -163,6 +164,16 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Templates
                 }
             }
         }
+
+        /// <summary>
+        ///     Gets or sets the selected package.
+        /// </summary>
+        //public Package SelectedPackage { get; set; }
+
+        /// <summary>
+        /// Gets or sets the project definition.
+        /// </summary>
+        public ProjectDefinition ProjectDefinition { get; set; }
 
         /// <summary>
         ///     Gets or sets a value indicating whether template enabled.
@@ -314,11 +325,6 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Templates
             }
         }
 
-        /// <summary>
-        /// Gets or sets the selected package.
-        /// </summary>
-        public Package SelectedPackage { get; set; }
-
         #endregion
 
         #region Public Methods And Operators
@@ -332,7 +338,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Templates
         public object[] ReturnLanguageOutputs()
         {
             List<ComboboxItem> items = new List<ComboboxItem>();
-            items.Add(new ComboboxItem{ Text = "Please select"});
+            items.Add(new ComboboxItem { Text = "Please select" });
 
             if (this.Data != null)
             {
@@ -526,32 +532,11 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Templates
             }
         }
 
-        private void UpdateRelatedPackages()
-        {
-            if (this.SelectedPackage != null)
-            {
-                Template template = this.SelectedPackage.Templates.FirstOrDefault(t => t.Id == this.Data.Id);
-                Template packageTemplate;
-
-                for (int i = 0; i <= this.SelectedPackage.Templates.Count - 1; i++)
-                {
-                    packageTemplate = this.SelectedPackage.Templates[i];
-
-                    if (packageTemplate.Id == this.Data.Id)
-                    {
-                        this.SelectedPackage.Templates[i] = this.Data;
-                        break;
-                    }
-                }
-            }
-        }
-
         /// <summary>
         ///     The update data source.
         /// </summary>
         private void UpdateDataSource()
         {
-
             this.DataSourceInitialized = false;
             this.TextBoxName.Text = this.Data.Name;
             this.CheckBoxEnabled.Checked = this.Data.Enabled;
@@ -559,7 +544,8 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Templates
             if (this.data.HierarchyType == HierarchyType.Item)
             {
                 this.ComboBoxLanguageOutput.SelectedValue = this.Data.LanguageOutputId;
-                //this.ComboBoxGeneratorOutput.SelectedValue = this.Data.GeneratorTypeId;
+
+                // this.ComboBoxGeneratorOutput.SelectedValue = this.Data.GeneratorTypeId;
                 this.PanelTemplate.Visible = true;
 
                 this.ComboBoxLanguageOutput.DataSource = null;
@@ -579,6 +565,36 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Templates
             else
             {
                 this.PanelTemplate.Visible = false;
+            }
+        }
+
+        /// <summary>
+        /// The update related packages.
+        /// </summary>
+        private void UpdateRelatedPackages()
+        {
+            if (this.ProjectDefinition != null)
+            {
+                foreach (var definition in this.ProjectDefinition.Domains)
+                {
+                    if (definition.Package != null)
+                    {
+                        Template template = definition.Package.Templates.FirstOrDefault(t => t.Id == this.Data.Id);
+
+                        for (int i = 0; i <= definition.Package.Templates.Count - 1; i++)
+                        {
+                            var packageTemplate = definition.Package.Templates[i];
+
+                            if (packageTemplate.Id == this.Data.Id)
+                            {
+                                definition.Package.Templates[i] = this.Data;
+                                break;
+                            }
+                        }
+                    }
+                }
+
+
             }
         }
 
