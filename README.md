@@ -48,8 +48,8 @@ T4 templates (DataTypes) are used to generate a layer. Packages group several of
 ### Todo
 - [0.5 Create base repository for nHibernate](https://github.com/laredoza/.NetScaffolder/milestone/5)
 - [0.6 Create Application Service](https://github.com/laredoza/.NetScaffolder/milestone/6)
-- [0.8 Create MVC Presentation Layer & ModelViews](https://github.com/laredoza/.NetScaffolder/milestone/8)
 - [0.7 Stabilization](https://github.com/laredoza/.NetScaffolder/milestone/12)
+- [0.8 Create MVC Presentation Layer & ModelViews](https://github.com/laredoza/.NetScaffolder/milestone/8)
 - [1.0 Create Angular Presentation Layer & ModelViews](https://github.com/laredoza/.NetScaffolder/milestone/10)
 - [1.1 Create Xamarin Presentation Layer & ModelView](https://github.com/laredoza/.NetScaffolder/milestone/11)
 
