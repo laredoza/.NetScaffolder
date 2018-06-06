@@ -573,6 +573,14 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Templates
         /// </summary>
         private void UpdateRelatedPackages()
         {
+            this.UpdateSelectedPackages();
+        }
+
+        /// <summary>
+        /// The update selected packages.
+        /// </summary>
+        private void UpdateSelectedPackages()
+        {
             if (this.ProjectDefinition != null)
             {
                 foreach (var definition in this.ProjectDefinition.Domains)
@@ -593,8 +601,6 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Templates
                         }
                     }
                 }
-
-
             }
         }
 
