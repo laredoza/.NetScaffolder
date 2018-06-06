@@ -189,6 +189,14 @@ namespace RepositoryEFDotnet.Core.Base
         int Commit();
 
         /// <summary>
+        /// Save changes to the database
+        /// </summary>
+        /// <returns></returns>
+        bool Save();
+
+        Task<bool> SaveAsync();
+
+        /// <summary>
         ///     The commit async.
         /// </summary>
         /// <returns>

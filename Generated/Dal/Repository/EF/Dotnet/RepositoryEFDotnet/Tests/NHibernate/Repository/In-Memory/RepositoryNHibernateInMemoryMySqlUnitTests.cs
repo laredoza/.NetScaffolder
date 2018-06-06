@@ -1,43 +1,30 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="UowNHibernateInMemorySqlServerUnitTests.cs" company="DotnetScaffolder">
+// <copyright file="RepositoryEFCoreInMemorySqlServerUnitTests.cs" company="DotnetScaffolder">
 //   MIT
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace RepositoryEFDotnet.UnitTest
 {
-    using System.Runtime.CompilerServices;
-
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using NHibernate;
-    using System.Threading.Tasks;
     using Banking.Models.Context.NHibernate;
 
     using FluentNHibernate.Cfg;
     using FluentNHibernate.Cfg.Db;
 
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
     using NHibernate.Cfg;
-    using NHibernate.Mapping;
 
     using RepositoryEFDotnet.UnitTest.Base;
 
     /// <summary>
-    /// The uow n hibernate in memory sql server unit test.
+    /// The repository e f 6 in memory sql server unit test.
     /// </summary>
     [TestClass]
-    public class UowNHibernateInMemorySqlServerUnitTest : BaseUnitOfWorkUnitTests
+    public class RepositoryNHibernateInMemoryMySqlUnitTest : BaseRepositoryUnitTest
     {
-        #region Constants
-
-        /// <summary>
-        /// The db config.
-        /// </summary>
-        private const string DbConfig = "RepoTest";
-
         private static Configuration Configuration = null;
-        private static SqlServerFullContext Context = null;
-
-        #endregion
+        private static MySqlFullContext OpenContext = null;
 
         [ClassInitialize]
         public static void TestInit(TestContext tstContext)
@@ -48,38 +35,22 @@ namespace RepositoryEFDotnet.UnitTest
 
             // Keep connection to in-memory db alive for duration of test
             // otherwise the db gets discarded when all connections are closed
-            Context = new SqlServerFullContext(Configuration);
-            Context.CreateSchema();
+            OpenContext = new MySqlFullContext(Configuration);
+            OpenContext.CreateSchema();
         }
 
         #region Public Methods And Operators
 
         /// <summary>
-        /// The run all.
+        /// The class init.
         /// </summary>
-        [TestMethod]
-        public override void RunAll()
+        /// <param name="context">
+        /// The context.
+        /// </param>
+        [TestInitialize]
+        public void Init()
         {
-            using (var context = new SqlServerFullContext(Configuration))
-            {
-                this.BaseUnitOfWorkUnitTests_BankAccount_RunAll(context);
-            }
-        }
-
-        /// <summary>
-        /// The run all async.
-        /// </summary>
-        /// <returns>
-        /// The <see cref="Task"/>.
-        /// </returns>
-        [TestMethod]
-        public override async Task RunAllAsync()
-        {
-            using (var context = new SqlServerFullContext(Configuration))
-            {
-                context.CreateSchema();
-                await this.BaseUnitOfWorkUnitTests_BankAccount_RunAllAsync(context);
-            }
+            Context = new MySqlFullContext(Configuration);
         }
 
         #endregion
@@ -90,6 +61,8 @@ namespace RepositoryEFDotnet.UnitTest
             Context?.Dispose();
             Context = null;
             Configuration = null;
+            OpenContext?.Dispose();
+            OpenContext = null;
         }
     }
 }

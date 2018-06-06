@@ -5,7 +5,7 @@
     public class BaseUnitTestGenerator : BaseGenerator
     {
         public List<Table> Models { get; set; }
-        private string OutputPath = @"..\..\..\RepositoryEFDotnet\DotNetScaffolder.Repository.UnitTests\DotNetScaffolder.Repository.UnitTests.csproj";
+        private string OutputPath = @"..\..\..\RepositoryEFDotnet\Tests\Base\DotNetScaffolder.Repository.UnitTests.Base.csproj";
         private string OutputFolder = "Base";
 
         protected override void RunCore()

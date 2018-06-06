@@ -183,7 +183,20 @@ namespace Banking.Models.Repository
 		public virtual bool Save(IOrder entity)
 		{
 			var entityToSave = new Order(entity, false);
-			return this.UnitOfWork.Add(entityToSave);
+			this.UnitOfWork.Add(entityToSave);
+			bool result = this.UnitOfWork.Save();
+			
+			// Populate passed in entity with newly saved values
+			entity.OrderId = entityToSave.OrderId;
+			entity.CustomerId = entityToSave.CustomerId;
+			entity.OrderDate = entityToSave.OrderDate;
+			entity.DeliveryDate = entityToSave.DeliveryDate;
+			entity.ShippingName = entityToSave.ShippingName;
+			entity.ShippingAddress = entityToSave.ShippingAddress;
+			entity.ShippingCity = entityToSave.ShippingCity;
+			entity.ShippingZip = entityToSave.ShippingZip;
+			
+			return result;
 		}
 
         /// <summary>

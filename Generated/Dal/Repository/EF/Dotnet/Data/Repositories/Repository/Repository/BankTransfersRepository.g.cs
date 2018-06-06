@@ -121,7 +121,17 @@ namespace Banking.Models.Repository
 		public virtual bool Save(IBankTransfers entity)
 		{
 			var entityToSave = new BankTransfers(entity, false);
-			return this.UnitOfWork.Add(entityToSave);
+			this.UnitOfWork.Add(entityToSave);
+			bool result = this.UnitOfWork.Save();
+			
+			// Populate passed in entity with newly saved values
+			entity.BankTransferId = entityToSave.BankTransferId;
+			entity.FromBankAccountId = entityToSave.FromBankAccountId;
+			entity.ToBankAccountId = entityToSave.ToBankAccountId;
+			entity.Amount = entityToSave.Amount;
+			entity.TransferDate = entityToSave.TransferDate;
+			
+			return result;
 		}
 
         /// <summary>

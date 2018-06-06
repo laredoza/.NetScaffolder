@@ -99,7 +99,14 @@ namespace Banking.Models.Repository
 		public virtual bool Save(ICountry entity)
 		{
 			var entityToSave = new Country(entity, false);
-			return this.UnitOfWork.Add(entityToSave);
+			this.UnitOfWork.Add(entityToSave);
+			bool result = this.UnitOfWork.Save();
+			
+			// Populate passed in entity with newly saved values
+			entity.CountryId = entityToSave.CountryId;
+			entity.CountryName = entityToSave.CountryName;
+			
+			return result;
 		}
 
         /// <summary>

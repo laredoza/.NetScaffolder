@@ -58,8 +58,8 @@ namespace RepositoryEFDotnet.UnitTest.Base
         protected virtual void PopulateBankTransfers(IBankTransfers item, bool isUpdate = false, int seed = 1)
         {
             item.Amount = 50 + seed;
-            item.FromBankAccountId = 1;
-            item.ToBankAccountId = 2;
+            item.FromBankAccountId = seed;
+            item.ToBankAccountId = seed + 1;
             item.TransferDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 14, 10, 12);
 
             if (isUpdate)
@@ -205,7 +205,7 @@ namespace RepositoryEFDotnet.UnitTest.Base
         /// </exception>
         protected virtual void PopulateOrder(IOrder item, bool isUpdate = false, int seed = 1)
         {
-            item.CustomerId = 1;
+            item.CustomerId = 2;
             item.DeliveryDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 8, 50, 20);
             item.OrderDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day - seed, 10, 30, 10);
             item.ShippingAddress = $"Shipping Address {seed}";
@@ -257,8 +257,8 @@ namespace RepositoryEFDotnet.UnitTest.Base
             item.UnitPrice = seed;
             item.Amount = Convert.ToInt16(seed);
             item.Discount = seed;
-            item.OrderId = 1;
-            item.ProductId = 1;
+            item.OrderId = seed;
+            item.ProductId = seed  + 1;
 
             if (isUpdate)
             {
@@ -284,7 +284,6 @@ namespace RepositoryEFDotnet.UnitTest.Base
         {
             item.AmountInStock = 1;
             item.ProductDescription = $"Product description {seed}";
-            item.ProductId = seed;
             item.Publisher = $"Publisher {seed}";
             item.UnitAmount = $"Unit amount {seed}";
             item.UnitPrice = seed;
@@ -317,7 +316,7 @@ namespace RepositoryEFDotnet.UnitTest.Base
         protected virtual void PopulateSoftware(ISoftware item, bool isUpdate = false, int seed = 1)
         {
             item.LicenseCode = $"License code {seed}";
-            item.ProductId = 1;
+            item.ProductId = seed;
 
             if (isUpdate)
             {

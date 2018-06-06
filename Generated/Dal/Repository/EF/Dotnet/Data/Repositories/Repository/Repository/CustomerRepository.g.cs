@@ -281,7 +281,25 @@ namespace Banking.Models.Repository
 		public virtual bool Save(ICustomer entity)
 		{
 			var entityToSave = new Customer(entity, false);
-			return this.UnitOfWork.Add(entityToSave);
+			this.UnitOfWork.Add(entityToSave);
+			bool result = this.UnitOfWork.Save();
+			
+			// Populate passed in entity with newly saved values
+			entity.CustomerId = entityToSave.CustomerId;
+			entity.CustomerCode = entityToSave.CustomerCode;
+			entity.CompanyName = entityToSave.CompanyName;
+			entity.ContactName = entityToSave.ContactName;
+			entity.ContactTitle = entityToSave.ContactTitle;
+			entity.Address = entityToSave.Address;
+			entity.City = entityToSave.City;
+			entity.PostalCode = entityToSave.PostalCode;
+			entity.Telephone = entityToSave.Telephone;
+			entity.Fax = entityToSave.Fax;
+			entity.CountryId = entityToSave.CountryId;
+			entity.Photo = entityToSave.Photo;
+			entity.IsEnabled = entityToSave.IsEnabled;
+			
+			return result;
 		}
 
         /// <summary>

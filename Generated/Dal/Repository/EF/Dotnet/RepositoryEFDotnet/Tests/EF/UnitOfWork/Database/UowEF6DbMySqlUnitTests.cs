@@ -6,22 +6,18 @@
 
 namespace RepositoryEFDotnet.UnitTest
 {
+    using Banking.Models.Context.EF;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using MySql.Data.EntityFramework;
+    using RepositoryEFDotnet.UnitTest.Base;
     using System.Data.Entity;
     using System.Threading.Tasks;
-
-    using Banking.Models.Context.EF;
-
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-    using MySql.Data.Entity;
-
-    using RepositoryEFDotnet.UnitTest.Base;
 
     /// <summary>
     /// The uow e f 6 i db my sql unit test.
     /// </summary>
     [TestClass]
-    public class UowEF6IDbMySqlUnitTest : BaseUnitOfWorkUnitTests
+    public class UowEF6DbMySqlUnitTest : BaseUnitOfWorkUnitTests
     {
         #region Constants
 

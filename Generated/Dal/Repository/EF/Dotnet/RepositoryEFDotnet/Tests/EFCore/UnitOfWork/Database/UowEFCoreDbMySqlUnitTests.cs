@@ -6,16 +6,12 @@
 
 namespace RepositoryEFDotnet.UnitTest
 {
-    using System.Configuration;
-    using System.Threading.Tasks;
-
     using Banking.Models.Context.EFCore;
-
     using Microsoft.EntityFrameworkCore;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using MySql.Data.EntityFrameworkCore.Extensions;
-
     using RepositoryEFDotnet.UnitTest.Base;
+    using System.Configuration;
+    using System.Threading.Tasks;
 
     /// <summary>
     /// The uow ef core db sql server unit test.
@@ -42,7 +38,7 @@ namespace RepositoryEFDotnet.UnitTest
         [TestInitialize]
         public void Init()
         {
-            Options = new DbContextOptionsBuilder<MySqlFullContext>().UseMySQL(ConfigurationManager.ConnectionStrings[DbConfig].ConnectionString).Options;
+            Options = new DbContextOptionsBuilder<MySqlFullContext>().UseMySql(ConfigurationManager.ConnectionStrings[DbConfig].ConnectionString).Options;
 
             using (var context = new MySqlFullContext(this.Options))
             {
