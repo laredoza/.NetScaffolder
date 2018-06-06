@@ -203,7 +203,6 @@
             // 
             this.ProjectDetailsUserControl1.BaseNameSpace = "";
             this.ProjectDetailsUserControl1.Changed = false;
-            this.ProjectDetailsUserControl1.GroupBy = DotNetScaffolder.Mapping.MetaData.Enum.GenerationType.Domain;
             this.ProjectDetailsUserControl1.Location = new System.Drawing.Point(6, 20);
             this.ProjectDetailsUserControl1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.ProjectDetailsUserControl1.Name = "ProjectDetailsUserControl1";

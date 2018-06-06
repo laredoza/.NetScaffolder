@@ -15,6 +15,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project
 
     using DotNetScaffolder.Mapping.ApplicationServices;
     using DotNetScaffolder.Mapping.MetaData.Domain;
+    using DotNetScaffolder.Presentation.Forms.Controls.Model;
 
     #endregion
 
@@ -183,7 +184,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project
         /// </param>
         private void BtnTables_Click(object sender, EventArgs e)
         {
-            DomainTableForm domainTableform = new DomainTableForm();
+            DomainModelForm domainTableform = new DomainModelForm();
 
             if (this.DomainsListBox.SelectedItem != null)
             {

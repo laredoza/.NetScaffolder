@@ -29,8 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.ComboBoxGroupBy = new System.Windows.Forms.ComboBox();
-            this.label4 = new System.Windows.Forms.Label();
             this.TextBoxBaseNamespace = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.TextBoxOutputFolderName = new System.Windows.Forms.TextBox();
@@ -38,27 +36,6 @@
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // ComboBoxGroupBy
-            // 
-            this.ComboBoxGroupBy.FormattingEnabled = true;
-            this.ComboBoxGroupBy.Items.AddRange(new object[] {
-            "Domain",
-            "Layer"});
-            this.ComboBoxGroupBy.Location = new System.Drawing.Point(115, 76);
-            this.ComboBoxGroupBy.Name = "ComboBoxGroupBy";
-            this.ComboBoxGroupBy.Size = new System.Drawing.Size(238, 21);
-            this.ComboBoxGroupBy.TabIndex = 11;
-            this.ComboBoxGroupBy.SelectedIndexChanged += new System.EventHandler(this.ComboBoxGroupBy_SelectedIndexChanged);
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(54, 76);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(54, 13);
-            this.label4.TabIndex = 10;
-            this.label4.Text = "Group By:";
             // 
             // TextBoxBaseNamespace
             // 
@@ -102,14 +79,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.ComboBoxGroupBy);
-            this.Controls.Add(this.label4);
             this.Controls.Add(this.TextBoxBaseNamespace);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.TextBoxOutputFolderName);
             this.Controls.Add(this.label2);
             this.Name = "ProjectDetailsUserControl";
-            this.Size = new System.Drawing.Size(380, 123);
+            this.Size = new System.Drawing.Size(380, 78);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -117,9 +92,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.ComboBox ComboBoxGroupBy;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox TextBoxBaseNamespace;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox TextBoxOutputFolderName;

@@ -39,7 +39,6 @@ namespace DotNetScaffolder.Test.Project.ApplicationService
         {
             projectDefinition.OutputFolder = "Out";
             projectDefinition.BaseNameSpace = "Test";
-            projectDefinition.GroupBy = GenerationType.Domain;
             projectDefinition.ModelPath = "test.mdl";
             projectDefinition.Version = 0.1;
             projectDefinition.Domains.Add(new DomainDefinition { Name = "Security" });
@@ -102,7 +101,6 @@ namespace DotNetScaffolder.Test.Project.ApplicationService
         {
             Assert.AreEqual("Out", projectDefinition.OutputFolder, "OutputFolder should have a value of Out");
             Assert.AreEqual("Test", projectDefinition.BaseNameSpace, "BaseNameSpace should have a value of Test");
-            Assert.AreEqual(GenerationType.Domain, projectDefinition.GroupBy, "GroupBy should have a value of Domain");
             Assert.AreEqual("test.mdl", projectDefinition.ModelPath, "ModelPath should have a value of test.mdl");
             Assert.AreEqual(0.1, projectDefinition.Version, "Version should have a value of 0.1");
             Assert.IsNotNull(projectDefinition.Domains);

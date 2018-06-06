@@ -63,11 +63,6 @@ namespace DotNetScaffolder.Mapping.MetaData.Project
         public List<DomainDefinition> Domains { get; set; }
 
         /// <summary>
-        ///     Gets or sets how layers are generated
-        /// </summary>
-        public GenerationType GroupBy { get; set; }
-
-        /// <summary>
         ///     Gets or sets the model path.
         /// </summary>
         public string ModelPath { get; set; }

@@ -1,10 +1,13 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="DomainTableForm.cs" company="DotnetScaffolder">
+// <copyright file="DomainModelForm.cs" company="DotnetScaffolder">
 //   MIT
 // </copyright>
+// <summary>
+//   The domain table form.
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace DotNetScaffolder.Presentation.Forms.Controls
+namespace DotNetScaffolder.Presentation.Forms.Controls.Model
 {
     #region Usings
 
@@ -21,7 +24,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
     /// <summary>
     ///     The domain table form.
     /// </summary>
-    public partial class DomainTableForm : Form
+    public partial class DomainModelForm : Form
     {
         #region Static Fields
 
@@ -45,9 +48,9 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
 
         // public Package MyProperty { get; set; }
         /// <summary>
-        ///     Initializes a new instance of the <see cref="DomainTableForm" /> class.
+        ///     Initializes a new instance of the <see cref="DomainModelForm" /> class.
         /// </summary>
-        public DomainTableForm()
+        public DomainModelForm()
         {
             this.InitializeComponent();
         }
