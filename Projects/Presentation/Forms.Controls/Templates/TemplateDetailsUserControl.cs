@@ -4,7 +4,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace DotNetScaffolder.Presentation.Forms.Controls
+namespace DotNetScaffolder.Presentation.Forms.Controls.Templates
 {
     #region Usings
 
@@ -20,11 +20,10 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
     using DotNetScaffolder.Core.Common;
     using DotNetScaffolder.Core.Common.Validation;
     using DotNetScaffolder.Core.Configuration;
-    using DotNetScaffolder.Mapping.MetaData.Enum;
+    using DotNetScaffolder.Mapping.MetaData.Project;
     using DotNetScaffolder.Mapping.MetaData.Project.Packages;
 
     using FormControls.Enum;
-    using FormControls.TreeView;
 
     #endregion
 
@@ -66,11 +65,6 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         #region Public Properties
 
         /// <summary>
-        /// Gets or sets a value indicating whether data source initialized.
-        /// </summary>
-        public bool DataSourceInitialized { get; set; }
-
-        /// <summary>
         ///     Gets or sets the data.
         /// </summary>
         public Template Data
@@ -89,6 +83,11 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
                 }
             }
         }
+
+        /// <summary>
+        ///     Gets or sets a value indicating whether data source initialized.
+        /// </summary>
+        public bool DataSourceInitialized { get; set; }
 
         /// <summary>
         ///     Gets or sets the generator type id.
@@ -165,6 +164,16 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
                 }
             }
         }
+
+        /// <summary>
+        /// Gets or sets the packages.
+        /// </summary>
+        public List<Package> Packages { get; set; }
+
+        /// <summary>
+        /// Gets or sets the project definition.
+        /// </summary>
+        public ProjectDefinition ProjectDefinition { get; set; }
 
         /// <summary>
         ///     Gets or sets a value indicating whether template enabled.
@@ -329,7 +338,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         public object[] ReturnLanguageOutputs()
         {
             List<ComboboxItem> items = new List<ComboboxItem>();
-            items.Add(new ComboboxItem{ Text = "Please select"});
+            items.Add(new ComboboxItem { Text = "Please select" });
 
             if (this.Data != null)
             {
@@ -453,7 +462,11 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         /// </param>
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-            this.TemplateEnabled = (sender as CheckBox).Checked;
+            if (this.DataSourceInitialized)
+            {
+                this.TemplateEnabled = (sender as CheckBox).Checked;
+                this.UpdateRelatedPackages();
+            }
         }
 
         /// <summary>
@@ -496,6 +509,8 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
                     this.ComboBoxGeneratorOutput.SelectedIndex = 0;
                     this.ListBoxTemplates.Items.Clear();
                 }
+
+                this.UpdateRelatedPackages();
             }
         }
 
@@ -510,7 +525,11 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         /// </param>
         private void TextBoxName_TextChanged(object sender, EventArgs e)
         {
-            this.TemplateName = this.TextBoxName.Text;
+            if (this.DataSourceInitialized)
+            {
+                this.TemplateName = this.TextBoxName.Text;
+                this.UpdateRelatedPackages();
+            }
         }
 
         /// <summary>
@@ -518,7 +537,6 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         /// </summary>
         private void UpdateDataSource()
         {
-
             this.DataSourceInitialized = false;
             this.TextBoxName.Text = this.Data.Name;
             this.CheckBoxEnabled.Checked = this.Data.Enabled;
@@ -526,7 +544,6 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
             if (this.data.HierarchyType == HierarchyType.Item)
             {
                 this.ComboBoxLanguageOutput.SelectedValue = this.Data.LanguageOutputId;
-                //this.ComboBoxGeneratorOutput.SelectedValue = this.Data.GeneratorTypeId;
                 this.PanelTemplate.Visible = true;
 
                 this.ComboBoxLanguageOutput.DataSource = null;
@@ -546,6 +563,54 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
             else
             {
                 this.PanelTemplate.Visible = false;
+            }
+        }
+
+        /// <summary>
+        /// The update related packages.
+        /// </summary>
+        private void UpdateRelatedPackages()
+        {
+            foreach (Package package in this.Packages)
+            {
+                for (int i = 0; i <= package.Templates.Count - 1; i++)
+                {
+                    var packageTemplate = package.Templates[i];
+
+                    if (packageTemplate.Id == this.Data.Id)
+                    {
+                        package.Templates[i] = this.Data;
+                        break;
+                    }
+                }
+            }
+
+            this.UpdateSelectedPackages();
+        }
+
+        /// <summary>
+        /// The update selected packages.
+        /// </summary>
+        private void UpdateSelectedPackages()
+        {
+            if (this.ProjectDefinition != null)
+            {
+                foreach (var definition in this.ProjectDefinition.Domains)
+                {
+                    if (definition.Package != null)
+                    {
+                        for (int i = 0; i <= definition.Package.Templates.Count - 1; i++)
+                        {
+                            var packageTemplate = definition.Package.Templates[i];
+
+                            if (packageTemplate.Id == this.Data.Id)
+                            {
+                                definition.Package.Templates[i] = this.Data;
+                                break;
+                            }
+                        }
+                    }
+                }
             }
         }
 

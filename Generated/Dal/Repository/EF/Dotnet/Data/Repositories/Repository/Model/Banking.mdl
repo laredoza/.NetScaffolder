@@ -313,8 +313,7 @@
       </Tables>
     </DomainDefinition>
   </Domains>
-  <GroupBy>Domain</GroupBy>
-  <ModelPath>C:\Dev\.NetScaffolder\Generated\Dal\Repository\EF\Dotnet\Data\Repositories\Repository\Model\Banking.mdl</ModelPath>
+  <ModelPath>..\..\..\..\..\Generated\Dal\Repository\EF\Dotnet\Data\Repositories\Repository\Model\Banking.mdl</ModelPath>
   <OutputFolder>Models</OutputFolder>
   <Version>1</Version>
 </ProjectDefinition>

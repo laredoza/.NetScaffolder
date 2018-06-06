@@ -1,8 +1,6 @@
-﻿namespace DotNetScaffolder.Presentation.Forms.Controls
+﻿namespace DotNetScaffolder.Presentation.Forms.Controls.Templates
 {
     using DotNetScaffolder.Presentation.Forms.Controls.Core;
-
-    using FormControls.Enum;
 
     partial class TemplateManagementUserControl
     {
@@ -17,9 +15,9 @@
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
-            if (disposing && (components != null))
+            if (disposing && (this.components != null))
             {
-                components.Dispose();
+                this.components.Dispose();
             }
             base.Dispose(disposing);
         }
@@ -33,7 +31,7 @@
         private void InitializeComponent()
         {
             this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.TemplateDetailsUserControl1 = new DotNetScaffolder.Presentation.Forms.Controls.TemplateDetailsUserControl();
+            this.TemplateDetailsUserControl1 = new TemplateDetailsUserControl();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.ManageTemplateTreeViewUserControl1 = new DotNetScaffolder.Presentation.Forms.Controls.Core.ManageCollectionsTreeViewUserControl();
             this.groupBox5.SuspendLayout();

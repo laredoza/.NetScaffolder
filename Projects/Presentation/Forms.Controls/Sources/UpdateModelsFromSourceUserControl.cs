@@ -168,12 +168,12 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Sources
         /// <param name="newCheckedValue">
         /// The new checked value.
         /// </param>
-        private void clicked(TreeNode node, bool newCheckedValue)
+        private void Clicked(TreeNode node, bool newCheckedValue)
         {
             foreach (TreeNode child in node.Nodes)
             {
                 child.Checked = newCheckedValue;
-                this.clicked(child, newCheckedValue);
+                this.Clicked(child, newCheckedValue);
             }
         }
 
@@ -190,7 +190,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Sources
         {
             if (e.Action != TreeViewAction.Unknown)
             {
-                this.clicked(e.Node, e.Node.Checked);
+                this.Clicked(e.Node, e.Node.Checked);
             }
         }
 
@@ -204,6 +204,12 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Sources
             return splashthread;
         }
 
+        /// <summary>
+        /// The close splash screen.
+        /// </summary>
+        /// <param name="show">
+        /// The show.
+        /// </param>
         private void CloseSplashScreen(bool show = true)
         {
             if (show)
@@ -230,7 +236,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Sources
 
                 if (this.sourceType.Test(sourceOptions))
                 {
-                    Thread splashthread = this.StartSplashScreen();
+                    this.StartSplashScreen();
                     Thread.Sleep(100);
                     SplashScreen.UdpateStatusText("Loading schema information");
 

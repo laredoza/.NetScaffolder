@@ -182,6 +182,10 @@ namespace DotNetScaffolder.Presentation.Forms
                             this.applicationConfiguration.ApplicationSettings.Templates;
                     }
 
+                    this.TemplateManagementUserControl1.ProjectDefinition = this.applicationService.ProjectDefinition;
+                    this.TemplateManagementUserControl1.Packages = this.applicationConfiguration.ApplicationSettings
+                        .Packages[0].ReturnPackageItems();
+
                     this.ProjectDetailsUserControl1.Project = this.applicationService.ProjectDefinition;
                     this.ProjectDomainUserControl1.SelectedIndexChanged +=
                         this.ProjectDomainUserControl1_SelectedIndexChanged;
@@ -265,6 +269,8 @@ namespace DotNetScaffolder.Presentation.Forms
                 // Update Domain info for packages
                 this.packageUserControl1.DomainDefinition = this.projectDomainDetailsUserControl1.SelectedDomain;
                 this.packageUserControl1.SelectedPackage = this.projectDomainDetailsUserControl1.SelectedDomain.Package;
+
+                this.TemplateManagementUserControl1.SelectedPackage = this.projectDomainDetailsUserControl1.SelectedDomain.Package;
 
                 if (this.projectDomainDetailsUserControl1.SelectedDomain.Package != null)
                 {

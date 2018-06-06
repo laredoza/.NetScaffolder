@@ -259,6 +259,40 @@
           <Templates />
           <Version>0</Version>
         </Hierarchy>
+        <Hierarchy xsi:type="Package">
+          <Children>
+            <Hierarchy xsi:type="Package">
+              <Children />
+              <Enabled>true</Enabled>
+              <HierarchyType>Group</HierarchyType>
+              <Id>f379eb70-e9ec-4468-bec2-00d7d7f1eaf7</Id>
+              <Name>Angular</Name>
+              <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
+              <Selected>false</Selected>
+              <Templates />
+              <Version>1</Version>
+            </Hierarchy>
+            <Hierarchy xsi:type="Package">
+              <Children />
+              <Enabled>true</Enabled>
+              <HierarchyType>Group</HierarchyType>
+              <Id>77c86354-4a92-48e5-8e2c-2fbe2ea2d0d0</Id>
+              <Name>MVC</Name>
+              <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
+              <Selected>false</Selected>
+              <Templates />
+              <Version>1</Version>
+            </Hierarchy>
+          </Children>
+          <Enabled>true</Enabled>
+          <HierarchyType>Group</HierarchyType>
+          <Id>8c9f472c-19a0-498c-a169-8b8cab34c908</Id>
+          <Name>Presentation</Name>
+          <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
+          <Selected>false</Selected>
+          <Templates />
+          <Version>0</Version>
+        </Hierarchy>
       </Children>
       <Enabled>true</Enabled>
       <HierarchyType>Group</HierarchyType>

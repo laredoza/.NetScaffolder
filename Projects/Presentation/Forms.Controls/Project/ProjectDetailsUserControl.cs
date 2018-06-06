@@ -95,38 +95,6 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project
         public bool Changed { get; set; }
 
         /// <summary>
-        ///     Gets or sets how layers are generated
-        /// </summary>
-        public GenerationType GroupBy
-        {
-            get
-            {
-                if (this.Project == null)
-                {
-                    Logger.Trace("Default GroupBy is returned as Project is null.");
-                    return GenerationType.Domain;
-                }
-
-                Logger.Trace($"GroupBy: {this.Project.GroupBy}");
-                return this.Project.GroupBy;
-            }
-
-            set
-            {
-                if (this.Project != null)
-                {
-                    this.Changed = true;
-                    this.Project.GroupBy = value;
-                    Logger.Trace($"GroupBy is set to {this.Project.GroupBy.ToString()}");
-                }
-                else
-                {
-                    Logger.Trace("GroupBy is not set as Project is null.");
-                }
-            }
-        }
-
-        /// <summary>
         ///     Gets or sets the output folder.
         /// </summary>
         public string OutputFolder
@@ -194,7 +162,6 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project
             {
                 this.TextBoxOutputFolderName.Text = this.Project.OutputFolder;
                 this.TextBoxBaseNamespace.Text = this.Project.BaseNameSpace;
-                this.ComboBoxGroupBy.SelectedIndex = this.Project.GroupBy.GetHashCode();
             }
             else
             {
@@ -252,23 +219,6 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project
         #endregion
 
         #region Other Methods
-
-        /// <summary>
-        /// The combo box group by_ selected index changed.
-        /// </summary>
-        /// <param name="sender">
-        /// The sender.
-        /// </param>
-        /// <param name="e">
-        /// The e.
-        /// </param>
-        private void ComboBoxGroupBy_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (this.Project != null)
-            {
-                this.Project.GroupBy = (GenerationType)this.ComboBoxGroupBy.SelectedIndex;
-            }
-        }
 
         /// <summary>
         /// The text box base namespace_ text changed.

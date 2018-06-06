@@ -4,13 +4,15 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace DotNetScaffolder.Presentation.Forms.Controls
+namespace DotNetScaffolder.Presentation.Forms.Controls.Templates
 {
     #region Usings
 
     using System;
+    using System.Collections.Generic;
     using System.Windows.Forms;
 
+    using DotNetScaffolder.Mapping.MetaData.Project;
     using DotNetScaffolder.Mapping.MetaData.Project.Packages;
 
     using FormControls.Enum;
@@ -59,6 +61,47 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
                 {
                     this.ManageTemplateTreeViewUserControl1.DataSource = value;
                     this.ManageTemplateTreeViewUserControl1.SelectFirstNode();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the project definition.
+        /// </summary>
+        public ProjectDefinition ProjectDefinition
+        {
+            get
+            {
+                return this.TemplateDetailsUserControl1.ProjectDefinition;
+            }
+            set
+            {
+                if (this.TemplateDetailsUserControl1.ProjectDefinition != value)
+                {
+                    this.TemplateDetailsUserControl1.ProjectDefinition = value;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the selected package.
+        /// </summary>
+        public Package SelectedPackage { get; set; }
+
+        /// <summary>
+        /// Gets or sets the packages.
+        /// </summary>
+        public List<Package> Packages
+        {
+            get
+            {
+                return this.TemplateDetailsUserControl1.Packages;
+            }
+            set
+            {
+                if (this.TemplateDetailsUserControl1.Packages != value)
+                {
+                    this.TemplateDetailsUserControl1.Packages = value;
                 }
             }
         }

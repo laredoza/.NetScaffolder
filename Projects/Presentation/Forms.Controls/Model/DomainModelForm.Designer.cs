@@ -1,6 +1,6 @@
-﻿namespace DotNetScaffolder.Presentation.Forms.Controls
+﻿namespace DotNetScaffolder.Presentation.Forms.Controls.Model
 {
-    partial class DomainTableForm
+    partial class DomainModelForm
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.domainMenuUserControl1 = new DotNetScaffolder.Presentation.Forms.Controls.DomainMenuUserControl();
+            this.domainMenuUserControl1 = new DomainModelMenuUserControl();
             this.PanelConfig = new System.Windows.Forms.Panel();
             this.btnClose = new System.Windows.Forms.Button();
             this.btnRefresh = new System.Windows.Forms.Button();
@@ -130,7 +130,7 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Button btnRefresh;
-        private DomainMenuUserControl domainMenuUserControl1;
+        private DomainModelMenuUserControl domainMenuUserControl1;
         private System.Windows.Forms.Panel PanelConfig;
         private System.Windows.Forms.Button btnSave;
     }

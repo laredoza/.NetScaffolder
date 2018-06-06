@@ -1,10 +1,13 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="DomainMenuUserControl.cs" company="DotnetScaffolder">
+// <copyright file="DomainModelMenuUserControl.cs" company="DotnetScaffolder">
 //   MIT
 // </copyright>
+// <summary>
+//   The domain menu user control.
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace DotNetScaffolder.Presentation.Forms.Controls
+namespace DotNetScaffolder.Presentation.Forms.Controls.Model
 {
     #region Usings
 
@@ -26,7 +29,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
     /// <summary>
     ///     The domain menu user control.
     /// </summary>
-    public partial class DomainMenuUserControl : UserControl
+    public partial class DomainModelMenuUserControl : UserControl
     {
         #region Static Fields
 
@@ -54,9 +57,9 @@ namespace DotNetScaffolder.Presentation.Forms.Controls
         #region Constructors and Destructors
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="DomainMenuUserControl" /> class.
+        ///     Initializes a new instance of the <see cref="DomainModelMenuUserControl" /> class.
         /// </summary>
-        public DomainMenuUserControl()
+        public DomainModelMenuUserControl()
         {
             this.InitializeComponent();
         }
