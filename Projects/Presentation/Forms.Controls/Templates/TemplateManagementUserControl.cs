@@ -9,6 +9,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Templates
     #region Usings
 
     using System;
+    using System.Collections.Generic;
     using System.Windows.Forms;
 
     using DotNetScaffolder.Mapping.MetaData.Project;
@@ -64,6 +65,9 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Templates
             }
         }
 
+        /// <summary>
+        /// Gets or sets the project definition.
+        /// </summary>
         public ProjectDefinition ProjectDefinition
         {
             get
@@ -83,6 +87,24 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Templates
         /// Gets or sets the selected package.
         /// </summary>
         public Package SelectedPackage { get; set; }
+
+        /// <summary>
+        /// Gets or sets the packages.
+        /// </summary>
+        public List<Package> Packages
+        {
+            get
+            {
+                return this.TemplateDetailsUserControl1.Packages;
+            }
+            set
+            {
+                if (this.TemplateDetailsUserControl1.Packages != value)
+                {
+                    this.TemplateDetailsUserControl1.Packages = value;
+                }
+            }
+        }
 
         #endregion
 

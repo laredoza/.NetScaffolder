@@ -166,9 +166,9 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Templates
         }
 
         /// <summary>
-        ///     Gets or sets the selected package.
+        /// Gets or sets the packages.
         /// </summary>
-        //public Package SelectedPackage { get; set; }
+        public List<Package> Packages { get; set; }
 
         /// <summary>
         /// Gets or sets the project definition.
@@ -544,8 +544,6 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Templates
             if (this.data.HierarchyType == HierarchyType.Item)
             {
                 this.ComboBoxLanguageOutput.SelectedValue = this.Data.LanguageOutputId;
-
-                // this.ComboBoxGeneratorOutput.SelectedValue = this.Data.GeneratorTypeId;
                 this.PanelTemplate.Visible = true;
 
                 this.ComboBoxLanguageOutput.DataSource = null;
@@ -573,6 +571,20 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Templates
         /// </summary>
         private void UpdateRelatedPackages()
         {
+            foreach (Package package in this.Packages)
+            {
+                for (int i = 0; i <= package.Templates.Count - 1; i++)
+                {
+                    var packageTemplate = package.Templates[i];
+
+                    if (packageTemplate.Id == this.Data.Id)
+                    {
+                        package.Templates[i] = this.Data;
+                        break;
+                    }
+                }
+            }
+
             this.UpdateSelectedPackages();
         }
 
@@ -587,8 +599,6 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Templates
                 {
                     if (definition.Package != null)
                     {
-                        Template template = definition.Package.Templates.FirstOrDefault(t => t.Id == this.Data.Id);
-
                         for (int i = 0; i <= definition.Package.Templates.Count - 1; i++)
                         {
                             var packageTemplate = definition.Package.Templates[i];
