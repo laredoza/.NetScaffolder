@@ -29,7 +29,7 @@ T4 templates (DataTypes) are used to generate a layer. Packages group several of
 ### Supported Database Drivers
 
 - Entity Famework 6.0 ( MySql, Sql Server, Oracle)
-- Adding support for Entity Framework Core
+- Entity Framework Core ( MySql - Pomelo Driver, Sql Server)
 - Adding support for NHibernate
 
 ### Planned Project Types:
@@ -48,10 +48,10 @@ T4 templates (DataTypes) are used to generate a layer. Packages group several of
 ### Todo
 - [0.5 Create base repository for nHibernate](https://github.com/laredoza/.NetScaffolder/milestone/5)
 - [0.6 Create Application Service](https://github.com/laredoza/.NetScaffolder/milestone/6)
+- [0.7 Stabilization 1](https://github.com/laredoza/.NetScaffolder/milestone/12)
 - [0.8 Create MVC Presentation Layer & ModelViews](https://github.com/laredoza/.NetScaffolder/milestone/8)
-- [0.7 Stabilization](https://github.com/laredoza/.NetScaffolder/milestone/12)
-- [1.0 Create Angular Presentation Layer & ModelViews](https://github.com/laredoza/.NetScaffolder/milestone/10)
-- [1.1 Create Xamarin Presentation Layer & ModelView](https://github.com/laredoza/.NetScaffolder/milestone/11)
+- [0.81 Create Angular Presentation Layer & ModelViews](https://github.com/laredoza/.NetScaffolder/milestone/10)
+- [0.82 Create Xamarin Presentation Layer & ModelView](https://github.com/laredoza/.NetScaffolder/milestone/11)
 
 ### Software Requirements
 - [Visual Studio](https://www.visualstudio.com/downloads/)
