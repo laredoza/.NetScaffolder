@@ -29,7 +29,7 @@ T4 templates (DataTypes) are used to generate a layer. Packages group several of
 ### Supported Database Drivers
 
 - Entity Famework 6.0 ( MySql, Sql Server, Oracle)
-- Adding support for Entity Framework Core
+- Entity Framework Core
 - Adding support for NHibernate
 
 ### Planned Project Types:
