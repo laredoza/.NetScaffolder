@@ -181,16 +181,31 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Differences
             {
                 var secondColumn =
                     secondTable.Columns.FirstOrDefault(u => u.ColumnName.ToUpper() == column.ColumnName.ToUpper());
-                if (secondColumn != null && column.DomainDataType != secondColumn.DomainDataType)
+                if (secondColumn != null && (
+                                                column.DomainDataType != secondColumn.DomainDataType
+                                                || column.ColumnOrder != secondColumn.ColumnOrder
+                                                || column.IsPrimaryKey != secondColumn.IsPrimaryKey
+                                                || column.IsRequired != secondColumn.IsRequired
+                                                || column.Length != secondColumn.Length
+                                                || column.Precision != secondColumn.Precision
+                                                || column.Scale != secondColumn.Scale
+                                             )
+                )
                     retval.ColumnDataTypeDiffs.Add(
                         new ColumnDataTypeDifference
-                            {
-                                FirstColumn = column,
-                                SecondColumn = secondColumn,
-                                FirstColumnName = column.ColumnName,
-                                FirstColumnDataType = column.DomainDataType,
-                                SecondColumnDataType = secondColumn.DomainDataType
-                            });
+                        {
+                            FirstColumn = column,
+                            SecondColumn = secondColumn,
+                            FirstColumnName = column.ColumnName,
+                            FirstColumnDataType = column.DomainDataType,
+                            SecondColumnDataType = secondColumn.DomainDataType,
+                            ColumnOrderIsDifferent = column.ColumnOrder != secondColumn.ColumnOrder,
+                            PrimaryKeyIsDifferent = column.IsPrimaryKey != secondColumn.IsPrimaryKey,
+                            IsRequiredDifferent = column.IsRequired != secondColumn.IsRequired,
+                            LengthIsDifferent = column.Length != secondColumn.Length,
+                            PrecisionIsDifferent = column.Precision != secondColumn.Precision,
+                            ScaleIsDifferent = column.Scale != secondColumn.Scale
+                        });
             }
 
             if (retval.IsBroken)

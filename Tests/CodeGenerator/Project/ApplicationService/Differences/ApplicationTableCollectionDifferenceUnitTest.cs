@@ -1,8 +1,13 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="ApplicationTableCollectionDifferenceUnitTest.cs" company="DotnetScaffolder">
+//   MIT
+// </copyright>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace DotNetScaffolder.Test.Project.ApplicationService.Differences
 {
+    #region Usings
+
     using System.IO;
 
     using DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.Edmxs;
@@ -10,9 +15,21 @@ namespace DotNetScaffolder.Test.Project.ApplicationService.Differences
     using DotNetScaffolder.Mapping.ApplicationServices.Differences;
     using DotNetScaffolder.Mapping.MetaData.Model;
 
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+    #endregion
+
+    /// <summary>
+    /// The application table collection difference unit test.
+    /// </summary>
     [TestClass]
     public class ApplicationTableCollectionDifferenceUnitTest : BaseApplicationTableCollectionDifferenceUnitTest
     {
+        #region Public Methods And Operators
+
+        /// <summary>
+        /// The test method 1.
+        /// </summary>
         [TestMethod]
         public void TestMethod1()
         {
@@ -26,5 +43,7 @@ namespace DotNetScaffolder.Test.Project.ApplicationService.Differences
             this.Differences = new ApplicationTableCollectionDifference(new ApplicationTableDifference());
             this.BaseApplicationTableCollectionDifferenceUnitTest_RunTests(originalDatabaseModel, changedDatabaseModel);
         }
+
+        #endregion
     }
 }
