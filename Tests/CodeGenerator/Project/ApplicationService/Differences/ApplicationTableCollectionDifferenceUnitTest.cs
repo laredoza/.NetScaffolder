@@ -7,6 +7,7 @@ namespace DotNetScaffolder.Test.Project.ApplicationService.Differences
 
     using DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.Edmxs;
     using DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.SourceOptions;
+    using DotNetScaffolder.Mapping.ApplicationServices.Differences;
     using DotNetScaffolder.Mapping.MetaData.Model;
 
     [TestClass]
@@ -19,7 +20,11 @@ namespace DotNetScaffolder.Test.Project.ApplicationService.Differences
             this.SourceType = import;
 
             string filePath = Path.Combine(Directory.GetCurrentDirectory(), @"..\..\DataSource\model.edmx");
-            DatabaseModel databaseModel = import.Import(new FileSourceOptions { Path = filePath });
+            DatabaseModel originalDatabaseModel = import.Import(new FileSourceOptions { Path = filePath });
+            DatabaseModel changedDatabaseModel = import.Import(new FileSourceOptions { Path = filePath });
+
+            this.Differences = new ApplicationTableCollectionDifference(new ApplicationTableDifference());
+            this.RunTests(originalDatabaseModel, changedDatabaseModel);
         }
     }
 }
