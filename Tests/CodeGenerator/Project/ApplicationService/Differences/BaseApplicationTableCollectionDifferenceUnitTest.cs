@@ -13,7 +13,6 @@ namespace DotNetScaffolder.Test.Project.ApplicationService.Differences
     using DotNetScaffolder.Components.Common.Contract;
     using DotNetScaffolder.Mapping.ApplicationServices.Differences;
     using DotNetScaffolder.Mapping.MetaData.Model;
-    using DotNetScaffolder.Mapping.MetaData.Model.Difference;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -59,9 +58,15 @@ namespace DotNetScaffolder.Test.Project.ApplicationService.Differences
                 originalDatabaseModel,
                 changedDatabaseModel);
 
-            this.BaseApplicationTableCollectionDifferenceUnitTest_RemoveTable(originalDatabaseModel, changedDatabaseModel);
-            this.BaseApplicationTableCollectionDifferenceUnitTest_RemoveColumn(originalDatabaseModel, changedDatabaseModel);
-            this.BaseApplicationTableCollectionDifferenceUnitTest_UpdateColumn(originalDatabaseModel, changedDatabaseModel);
+            this.BaseApplicationTableCollectionDifferenceUnitTest_RemoveTable(
+                originalDatabaseModel,
+                changedDatabaseModel);
+            this.BaseApplicationTableCollectionDifferenceUnitTest_RemoveColumn(
+                originalDatabaseModel,
+                changedDatabaseModel);
+            this.BaseApplicationTableCollectionDifferenceUnitTest_UpdateColumn(
+                originalDatabaseModel,
+                changedDatabaseModel);
         }
 
         #endregion
@@ -69,7 +74,7 @@ namespace DotNetScaffolder.Test.Project.ApplicationService.Differences
         #region Other Methods
 
         /// <summary>
-        /// The base application table collection difference unit test_ test nodifference.
+        /// The base application table collection difference unit test_ remove column.
         /// </summary>
         /// <param name="originalDatabaseModel">
         /// The original database model.
@@ -77,38 +82,6 @@ namespace DotNetScaffolder.Test.Project.ApplicationService.Differences
         /// <param name="changedDatabaseModel">
         /// The changed database model.
         /// </param>
-        private void BaseApplicationTableCollectionDifferenceUnitTest_TestNodifference(
-            DatabaseModel originalDatabaseModel,
-            DatabaseModel changedDatabaseModel)
-        {
-            ApplicationTableCollectionDifference differences = this.Differences.CompareTables(
-                originalDatabaseModel.Tables,
-                changedDatabaseModel.Tables);
-            Assert.AreEqual(0, differences.FirstExtraTables.Count, "There should be 0 Extra tables");
-            Assert.AreEqual(0, differences.FirstMissingTables.Count, "There should be 0 missing tables");
-            Assert.AreEqual(0, differences.ProblemTables.Count, "There should be 0 problem tables");
-            Assert.AreEqual(0, differences.RefreshTable.Count, "There should be 0 refresh tables");
-        }
-
-        private void BaseApplicationTableCollectionDifferenceUnitTest_RemoveTable(
-            DatabaseModel originalDatabaseModel,
-            DatabaseModel changedDatabaseModel)
-        {
-            Table bankTransfers = changedDatabaseModel.Tables.FirstOrDefault(t => t.TableName == "BankTransfers");
-            changedDatabaseModel.Tables.Remove(bankTransfers);
-
-            ApplicationTableCollectionDifference differences = this.Differences.CompareTables(
-                originalDatabaseModel.Tables,
-                changedDatabaseModel.Tables);
-
-            Assert.AreEqual(0, differences.FirstExtraTables.Count, "There should be 0 Extra tables");
-            Assert.AreEqual(1, differences.FirstMissingTables.Count, "There should be 1 missing table");
-            Assert.AreEqual(0, differences.ProblemTables.Count, "There should be 0 problem tables");
-            Assert.AreEqual(0, differences.RefreshTable.Count, "There should be 0 refresh tables");
-
-            changedDatabaseModel.Tables.Insert(0, bankTransfers);
-        }
-
         private void BaseApplicationTableCollectionDifferenceUnitTest_RemoveColumn(
             DatabaseModel originalDatabaseModel,
             DatabaseModel changedDatabaseModel)
@@ -134,6 +107,65 @@ namespace DotNetScaffolder.Test.Project.ApplicationService.Differences
             bankTransfers.Columns.Insert(0, bankTransfersIdColumn);
         }
 
+        /// <summary>
+        /// The base application table collection difference unit test_ remove table.
+        /// </summary>
+        /// <param name="originalDatabaseModel">
+        /// The original database model.
+        /// </param>
+        /// <param name="changedDatabaseModel">
+        /// The changed database model.
+        /// </param>
+        private void BaseApplicationTableCollectionDifferenceUnitTest_RemoveTable(
+            DatabaseModel originalDatabaseModel,
+            DatabaseModel changedDatabaseModel)
+        {
+            Table bankTransfers = changedDatabaseModel.Tables.FirstOrDefault(t => t.TableName == "BankTransfers");
+            changedDatabaseModel.Tables.Remove(bankTransfers);
+
+            ApplicationTableCollectionDifference differences = this.Differences.CompareTables(
+                originalDatabaseModel.Tables,
+                changedDatabaseModel.Tables);
+
+            Assert.AreEqual(0, differences.FirstExtraTables.Count, "There should be 0 Extra tables");
+            Assert.AreEqual(1, differences.FirstMissingTables.Count, "There should be 1 missing table");
+            Assert.AreEqual(0, differences.ProblemTables.Count, "There should be 0 problem tables");
+            Assert.AreEqual(0, differences.RefreshTable.Count, "There should be 0 refresh tables");
+
+            changedDatabaseModel.Tables.Insert(0, bankTransfers);
+        }
+
+        /// <summary>
+        /// The base application table collection difference unit test_ test nodifference.
+        /// </summary>
+        /// <param name="originalDatabaseModel">
+        /// The original database model.
+        /// </param>
+        /// <param name="changedDatabaseModel">
+        /// The changed database model.
+        /// </param>
+        private void BaseApplicationTableCollectionDifferenceUnitTest_TestNodifference(
+            DatabaseModel originalDatabaseModel,
+            DatabaseModel changedDatabaseModel)
+        {
+            ApplicationTableCollectionDifference differences = this.Differences.CompareTables(
+                originalDatabaseModel.Tables,
+                changedDatabaseModel.Tables);
+            Assert.AreEqual(0, differences.FirstExtraTables.Count, "There should be 0 Extra tables");
+            Assert.AreEqual(0, differences.FirstMissingTables.Count, "There should be 0 missing tables");
+            Assert.AreEqual(0, differences.ProblemTables.Count, "There should be 0 problem tables");
+            Assert.AreEqual(0, differences.RefreshTable.Count, "There should be 0 refresh tables");
+        }
+
+        /// <summary>
+        /// The base application table collection difference unit test_ update column.
+        /// </summary>
+        /// <param name="originalDatabaseModel">
+        /// The original database model.
+        /// </param>
+        /// <param name="changedDatabaseModel">
+        /// The changed database model.
+        /// </param>
         private void BaseApplicationTableCollectionDifferenceUnitTest_UpdateColumn(
             DatabaseModel originalDatabaseModel,
             DatabaseModel changedDatabaseModel)
@@ -149,17 +181,19 @@ namespace DotNetScaffolder.Test.Project.ApplicationService.Differences
                 changedDatabaseModel.Tables);
 
             this.SharedColumnChanged(differences);
-            Assert.AreEqual(DomainDataType.Int32, differences.ProblemTables[0].ColumnDataTypeDiffs[0].FirstColumnDataType);
-            Assert.AreEqual(DomainDataType.Boolean, differences.ProblemTables[0].ColumnDataTypeDiffs[0].SecondColumnDataType);
+            Assert.AreEqual(
+                DomainDataType.Int32,
+                differences.ProblemTables[0].ColumnDataTypeDiffs[0].FirstColumnDataType);
+            Assert.AreEqual(
+                DomainDataType.Boolean,
+                differences.ProblemTables[0].ColumnDataTypeDiffs[0].SecondColumnDataType);
 
             bankTransfersIdColumn.DomainDataType = DomainDataType.Int32;
 
             // Test ColumnOrder
             bankTransfersIdColumn.ColumnOrder = 3;
 
-            differences = this.Differences.CompareTables(
-                originalDatabaseModel.Tables,
-                changedDatabaseModel.Tables);
+            differences = this.Differences.CompareTables(originalDatabaseModel.Tables, changedDatabaseModel.Tables);
 
             this.SharedColumnChanged(differences);
 
@@ -169,9 +203,7 @@ namespace DotNetScaffolder.Test.Project.ApplicationService.Differences
             // Test IsPrimaryKey
             bankTransfersIdColumn.IsPrimaryKey = false;
 
-            differences = this.Differences.CompareTables(
-                originalDatabaseModel.Tables,
-                changedDatabaseModel.Tables);
+            differences = this.Differences.CompareTables(originalDatabaseModel.Tables, changedDatabaseModel.Tables);
 
             this.SharedColumnChanged(differences);
 
@@ -181,9 +213,7 @@ namespace DotNetScaffolder.Test.Project.ApplicationService.Differences
             // Test IsRequired
             bankTransfersIdColumn.IsRequired = false;
 
-            differences = this.Differences.CompareTables(
-                originalDatabaseModel.Tables,
-                changedDatabaseModel.Tables);
+            differences = this.Differences.CompareTables(originalDatabaseModel.Tables, changedDatabaseModel.Tables);
 
             this.SharedColumnChanged(differences);
 
@@ -193,9 +223,7 @@ namespace DotNetScaffolder.Test.Project.ApplicationService.Differences
             // Test Length
             bankTransfersIdColumn.Length = 1;
 
-            differences = this.Differences.CompareTables(
-                originalDatabaseModel.Tables,
-                changedDatabaseModel.Tables);
+            differences = this.Differences.CompareTables(originalDatabaseModel.Tables, changedDatabaseModel.Tables);
 
             this.SharedColumnChanged(differences);
 
@@ -205,9 +233,7 @@ namespace DotNetScaffolder.Test.Project.ApplicationService.Differences
             // Test Precision
             bankTransfersIdColumn.Precision = 1;
 
-            differences = this.Differences.CompareTables(
-                originalDatabaseModel.Tables,
-                changedDatabaseModel.Tables);
+            differences = this.Differences.CompareTables(originalDatabaseModel.Tables, changedDatabaseModel.Tables);
 
             this.SharedColumnChanged(differences);
 
@@ -217,9 +243,7 @@ namespace DotNetScaffolder.Test.Project.ApplicationService.Differences
             // Test Scale 
             bankTransfersIdColumn.Scale = 1;
 
-            differences = this.Differences.CompareTables(
-                originalDatabaseModel.Tables,
-                changedDatabaseModel.Tables);
+            differences = this.Differences.CompareTables(originalDatabaseModel.Tables, changedDatabaseModel.Tables);
 
             this.SharedColumnChanged(differences);
 
@@ -227,6 +251,12 @@ namespace DotNetScaffolder.Test.Project.ApplicationService.Differences
             bankTransfersIdColumn.Scale = 0;
         }
 
+        /// <summary>
+        /// The shared column changed.
+        /// </summary>
+        /// <param name="differences">
+        /// The differences.
+        /// </param>
         private void SharedColumnChanged(ApplicationTableCollectionDifference differences)
         {
             Assert.AreEqual(0, differences.FirstExtraTables.Count, "There should be 0 Extra tables");
@@ -236,7 +266,9 @@ namespace DotNetScaffolder.Test.Project.ApplicationService.Differences
 
             Assert.AreEqual(1, differences.ProblemTables[0].ColumnDataTypeDiffs.Count);
 
-            Assert.AreEqual("BankTransferId", differences.ProblemTables[0].ColumnDataTypeDiffs[0].FirstColumn.ColumnName);
+            Assert.AreEqual(
+                "BankTransferId",
+                differences.ProblemTables[0].ColumnDataTypeDiffs[0].FirstColumn.ColumnName);
             Assert.AreEqual("BankTransfers", differences.RefreshTable[0].TableName);
         }
 
