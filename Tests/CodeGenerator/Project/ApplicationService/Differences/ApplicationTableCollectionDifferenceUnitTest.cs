@@ -24,7 +24,7 @@ namespace DotNetScaffolder.Test.Project.ApplicationService.Differences
             DatabaseModel changedDatabaseModel = import.Import(new FileSourceOptions { Path = filePath });
 
             this.Differences = new ApplicationTableCollectionDifference(new ApplicationTableDifference());
-            this.RunTests(originalDatabaseModel, changedDatabaseModel);
+            this.BaseApplicationTableCollectionDifferenceUnitTest_RunTests(originalDatabaseModel, changedDatabaseModel);
         }
     }
 }

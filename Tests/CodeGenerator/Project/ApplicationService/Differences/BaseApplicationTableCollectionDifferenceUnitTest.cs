@@ -26,7 +26,7 @@ namespace DotNetScaffolder.Test.Project.ApplicationService.Differences
         [TestMethod]
         public void BaseApplicationTableCollectionDifferenceUnitTest_RunTests(DatabaseModel originalDatabaseModel, DatabaseModel changedDatabaseModel)
         {
-            this.BaseApplicationTableCollectionDifferenceUnitTest_TestNodifferencea(originalDatabaseModel, changedDatabaseModel);
+            this.BaseApplicationTableCollectionDifferenceUnitTest_TestNodifference(originalDatabaseModel, changedDatabaseModel);
         }
 
         private void BaseApplicationTableCollectionDifferenceUnitTest_TestNodifference
