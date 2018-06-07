@@ -213,7 +213,7 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.NHibernate
             }
             else
             {
-                return ".GeneratedBy.Identity()";
+                return ".GeneratedBy.Increment()";
             }
         }
 

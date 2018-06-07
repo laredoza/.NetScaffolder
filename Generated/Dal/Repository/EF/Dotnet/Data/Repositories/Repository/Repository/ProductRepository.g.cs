@@ -155,7 +155,18 @@ namespace Banking.Models.Repository
 		public virtual bool Save(IProduct entity)
 		{
 			var entityToSave = new Product(entity, false);
-			return this.UnitOfWork.Add(entityToSave);
+			this.UnitOfWork.Add(entityToSave);
+			bool result = this.UnitOfWork.Save();
+			
+			// Populate passed in entity with newly saved values
+			entity.ProductId = entityToSave.ProductId;
+			entity.ProductDescription = entityToSave.ProductDescription;
+			entity.UnitPrice = entityToSave.UnitPrice;
+			entity.UnitAmount = entityToSave.UnitAmount;
+			entity.Publisher = entityToSave.Publisher;
+			entity.AmountInStock = entityToSave.AmountInStock;
+			
+			return result;
 		}
 
         /// <summary>

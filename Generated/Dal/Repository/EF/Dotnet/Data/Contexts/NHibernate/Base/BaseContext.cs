@@ -8,6 +8,7 @@ namespace RepositoryEFDotnet.Contexts.NHibernate
 {
     using System;
     using System.Collections.Generic;
+    using System.Data;
     using System.IO;
     using System.Linq;
     using System.Linq.Expressions;
@@ -22,7 +23,6 @@ namespace RepositoryEFDotnet.Contexts.NHibernate
     using global::NHibernate.Cfg;
     using global::NHibernate.Dialect;
     using global::NHibernate.Linq;
-    using global::NHibernate.Mapping;
     using global::NHibernate.Tool.hbm2ddl;
 
     using RepositoryEFDotnet.Core.Base;
@@ -33,6 +33,15 @@ namespace RepositoryEFDotnet.Contexts.NHibernate
     /// </summary>
     public abstract class BaseContext : IUnitOfWork
     {
+        #region Fields
+
+        /// <summary>
+        /// The current session.
+        /// </summary>
+        private ISession currentSession = null;
+
+        #endregion
+
         #region Constructors and Destructors
 
         /// <summary>
@@ -58,7 +67,14 @@ namespace RepositoryEFDotnet.Contexts.NHibernate
         /// <summary>
         /// The current session.
         /// </summary>
-        protected ISession CurrentSession { get; set; }
+        protected ISession CurrentSession
+        {
+            get
+            {
+                this.CreateSession();
+                return this.currentSession;
+            }
+        }
 
         #endregion
 
@@ -311,9 +327,12 @@ namespace RepositoryEFDotnet.Contexts.NHibernate
         {
             if (this.CurrentSession?.Transaction != null && this.CurrentSession.Transaction.IsActive)
             {
-                this.CurrentSession.Transaction.Commit();
+                this.CurrentSession?.Flush();
+                this.CurrentSession?.Transaction.Commit();
+                this.CloseTransaction();
             }
 
+            this.CloseSession();
             return 1;
         }
 
@@ -327,8 +346,12 @@ namespace RepositoryEFDotnet.Contexts.NHibernate
         {
             if (this.CurrentSession?.Transaction != null && this.CurrentSession.Transaction.IsActive)
             {
-                await this.CurrentSession.Transaction.CommitAsync();
+                await this.CurrentSession?.FlushAsync();
+                await this.CurrentSession?.Transaction.CommitAsync();
+                this.CloseTransaction();
             }
+
+            this.CloseSession();
 
             return 1;
         }
@@ -353,20 +376,11 @@ namespace RepositoryEFDotnet.Contexts.NHibernate
                     export.Execute(true, true, false, this.CurrentSession?.Connection, sw);
                 }
             }
+
 #else
             export.Execute(true, true, false, this.CurrentSession?.Connection, null);
 #endif
         }
-
-#if DEBUG
-        private void CreateLogDir()
-        {
-            if (!Directory.Exists(@"C:\TestOutput\NHibernate\"))
-            {
-                Directory.CreateDirectory(@"C:\TestOutput\NHibernate\");
-            }
-        }
-#endif
 
         /// <summary>
         /// The dispose.
@@ -829,8 +843,11 @@ namespace RepositoryEFDotnet.Contexts.NHibernate
         {
             if (this.CurrentSession?.Transaction != null && this.CurrentSession.Transaction.IsActive)
             {
-                this.CurrentSession.Transaction.Rollback();
+                this.CurrentSession?.Transaction.Rollback();
             }
+
+            this.CloseTransaction();
+            this.CloseSession();
         }
 
         /// <summary>
@@ -843,8 +860,33 @@ namespace RepositoryEFDotnet.Contexts.NHibernate
         {
             if (this.CurrentSession?.Transaction != null && this.CurrentSession.Transaction.IsActive)
             {
-                await this.CurrentSession.Transaction.RollbackAsync();
+                await this.CurrentSession?.Transaction.RollbackAsync();
             }
+
+            this.CloseTransaction();
+            this.CloseSession();
+        }
+
+        /// <summary>
+        /// The save.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        public bool Save()
+        {
+            return false;
+        }
+
+        /// <summary>
+        /// The save async.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>
+        public async Task<bool> SaveAsync()
+        {
+            return this.Save();
         }
 
         /// <summary>
@@ -852,13 +894,12 @@ namespace RepositoryEFDotnet.Contexts.NHibernate
         /// </summary>
         public virtual void StartTransaction()
         {
-            if (this.CurrentSession == null
-                || (this.CurrentSession.Transaction != null && this.CurrentSession.Transaction.IsActive))
+            if (this.CurrentSession.Transaction != null && this.CurrentSession.Transaction.IsActive)
             {
                 return;
             }
 
-            this.CurrentSession.BeginTransaction(System.Data.IsolationLevel.ReadCommitted);
+            this.CurrentSession.BeginTransaction(IsolationLevel.ReadCommitted);
         }
 
         /// <summary>
@@ -869,18 +910,17 @@ namespace RepositoryEFDotnet.Contexts.NHibernate
         /// </returns>
         public virtual async Task StartTransactionAsync()
         {
-            if (this.CurrentSession == null
-                || (this.CurrentSession.Transaction != null && this.CurrentSession.Transaction.IsActive))
+            if (this.CurrentSession.Transaction != null && this.CurrentSession.Transaction.IsActive)
             {
                 return;
             }
 
-            await Task.Run(() => this.CurrentSession.BeginTransaction(System.Data.IsolationLevel.ReadCommitted));
+            await Task.Run(() => this.CurrentSession.BeginTransaction(IsolationLevel.ReadCommitted));
         }
 
-#endregion
+        #endregion
 
-#region Other Methods
+        #region Other Methods
 
         /// <summary>
         /// The configure mappings.
@@ -896,7 +936,7 @@ namespace RepositoryEFDotnet.Contexts.NHibernate
         /// <param name="config">
         /// The config.
         /// </param>
-        protected void CreateSession(IPersistenceConfigurer config)
+        protected void SetConfig(IPersistenceConfigurer config)
         {
             this.Configuration = Fluently.Configure().Database(config).Mappings(this.SetupConventions)
                 .Mappings(this.ConfigureMappings).BuildConfiguration();
@@ -904,20 +944,20 @@ namespace RepositoryEFDotnet.Contexts.NHibernate
             SchemaMetadataUpdater.QuoteTableAndColumns(
                 this.Configuration,
                 Dialect.GetDialect(this.Configuration.Properties));
-
-            using (var factory = this.Configuration.BuildSessionFactory())
-            {
-                this.CurrentSession = factory.OpenSession();
-            }
         }
 
-        protected void CreateSession(Configuration config)
+        /// <summary>
+        /// The set config.
+        /// </summary>
+        /// <param name="config">
+        /// The config.
+        /// </param>
+        protected void SetConfig(Configuration config)
         {
-            this.Configuration = config ?? throw new Exception("ISessionFactory cannot be null");
+            this.Configuration = config ?? throw new Exception("Configuration cannot be null");
             SchemaMetadataUpdater.QuoteTableAndColumns(
                 this.Configuration,
                 Dialect.GetDialect(this.Configuration.Properties));
-            this.CurrentSession = config.BuildSessionFactory().OpenSession();
         }
 
         /// <summary>
@@ -963,9 +1003,13 @@ namespace RepositoryEFDotnet.Contexts.NHibernate
         /// </summary>
         private void CloseSession()
         {
-            if (this.CurrentSession != null && this.CurrentSession.IsOpen) this.CurrentSession.Close();
-            this.CurrentSession.Dispose();
-            this.CurrentSession = null;
+            if (this.currentSession != null && this.currentSession.IsOpen)
+            {
+                this.currentSession.Close();
+            }
+
+            this.currentSession?.Dispose();
+            this.currentSession = null;
         }
 
         /// <summary>
@@ -973,9 +1017,50 @@ namespace RepositoryEFDotnet.Contexts.NHibernate
         /// </summary>
         private void CloseTransaction()
         {
-            this.CurrentSession?.Transaction?.Dispose();
+            this.currentSession?.Transaction?.Dispose();
         }
 
-#endregion
+#if DEBUG
+
+        /// <summary>
+        /// The create log dir.
+        /// </summary>
+        private void CreateLogDir()
+        {
+            if (!Directory.Exists(@"C:\TestOutput\NHibernate\"))
+            {
+                Directory.CreateDirectory(@"C:\TestOutput\NHibernate\");
+            }
+        }
+
+#endif
+
+        /// <summary>
+        /// The create session.
+        /// </summary>
+        /// <exception cref="Exception">
+        /// </exception>
+        private void CreateSession()
+        {
+            if (this.Configuration == null)
+            {
+                throw new Exception("Configuration cannot be null");
+            }
+
+            if (this.currentSession == null || !this.currentSession.IsOpen)
+            {
+                using (var factory = this.Configuration.BuildSessionFactory())
+                {
+                    this.currentSession = factory.OpenSession();
+                }
+            }
+
+            if (this.currentSession != null && !this.currentSession.IsOpen)
+            {
+                this.currentSession.Reconnect();
+            }
+        }
+
+        #endregion
     }
 }

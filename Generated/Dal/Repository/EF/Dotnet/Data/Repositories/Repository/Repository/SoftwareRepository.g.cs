@@ -99,7 +99,14 @@ namespace Banking.Models.Repository
 		public virtual bool Save(ISoftware entity)
 		{
 			var entityToSave = new Software(entity, false);
-			return this.UnitOfWork.Add(entityToSave);
+			this.UnitOfWork.Add(entityToSave);
+			bool result = this.UnitOfWork.Save();
+			
+			// Populate passed in entity with newly saved values
+			entity.ProductId = entityToSave.ProductId;
+			entity.LicenseCode = entityToSave.LicenseCode;
+			
+			return result;
 		}
 
         /// <summary>

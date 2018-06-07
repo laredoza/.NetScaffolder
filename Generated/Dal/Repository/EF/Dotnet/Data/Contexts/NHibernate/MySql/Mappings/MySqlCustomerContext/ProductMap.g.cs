@@ -30,7 +30,7 @@ namespace Banking.Models.Customers.Mappings.NHibernate.MySql
 			
 			#region Primary Keys
 			
-			Id(t => t.ProductId).GeneratedBy.Identity();
+			Id(t => t.ProductId).GeneratedBy.Increment();
 
 			#endregion
 

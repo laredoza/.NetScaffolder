@@ -327,6 +327,17 @@ namespace RepositoryEFDotnet.Contexts.EFCore
             return result;
         }
 
+        public async Task<bool> SaveAsync()
+        {
+            var result = await Task.Run(() => base.SaveChanges());
+            return result > 0;
+        }
+
+        public bool Save()
+        {
+            return this.SaveChanges() > 0;
+        }
+
         /// <summary>
         ///     The commit async.
         /// </summary>
@@ -336,7 +347,7 @@ namespace RepositoryEFDotnet.Contexts.EFCore
         public async Task<int> CommitAsync()
         {
             this.ChangeTracker.DetectChanges();
-            var result = await this.SaveChangesAsync();
+            var result = await base.SaveChangesAsync();
             this.Database.CurrentTransaction?.Commit();
             return result;
         }
@@ -870,10 +881,17 @@ namespace RepositoryEFDotnet.Contexts.EFCore
             var entry = this.Entry(item);
 
             if (state == EntityState.Deleted || state == EntityState.Modified)
+            {
                 if (entry.State == EntityState.Detached)
+                {
                     this.GetDbSet<TEntity>().Attach(item);
+                }
+            }
 
-            entry.State = state;
+            if (entry.State != state)
+            {
+                entry.State = state;
+            }
         }
 
         /// <summary>

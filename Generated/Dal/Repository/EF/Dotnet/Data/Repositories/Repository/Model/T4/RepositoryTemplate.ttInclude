@@ -132,7 +132,15 @@ namespace <#= DataType.FullNamespace #>
 		public virtual bool Save(I<#= DataType.ModelName #> entity)
 		{
 			var entityToSave = new <#= DataType.ModelName #>(entity, false);
-			return this.UnitOfWork.Add(entityToSave);
+			this.UnitOfWork.Add(entityToSave);
+			bool result = this.UnitOfWork.Save();
+			
+			// Populate passed in entity with newly saved values
+<#+ foreach(var col in DataType.MetaData.Columns){ #>
+			entity.<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #> = entityToSave.<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>;
+<#+ }  #>
+			
+			return result;
 		}
 
         /// <summary>

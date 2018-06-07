@@ -37,6 +37,12 @@ namespace RepositoryEFDotnet.UnitTest
             ((SqlServerFullContext)Context).Database.EnsureCreated();
         }
 
+        [TestInitialize]
+        public void DisableTransactions()
+        {
+            this.UseTransactions = false;
+        }
+
         #endregion
     }
 }

@@ -20,13 +20,14 @@
 
 using Banking.Models.Entity;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using RepositoryEFDotnet.Core.Base;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using RepositoryEFDotnet.Core.Base;
 
 namespace RepositoryEFDotnet.UnitTest.Base
 {
+	[TestClass]
 	public abstract partial class BaseUnitOfWorkUnitTests : BaseUnitTest
 	{		
 		#region Tests

@@ -31,7 +31,7 @@ namespace Banking.Models.Customers.Mappings.NHibernate.SqlServer
 			
 			#region Primary Keys
 			
-			Id(t => t.OrderDetailsId).GeneratedBy.Identity();
+			Id(t => t.OrderDetailsId).GeneratedBy.Increment();
 
 			#endregion
 

@@ -21,14 +21,21 @@
 
         private static Configuration Configuration = null;
 
+        private static MySqlFullContext Context = null;
+
         #endregion
 
         [ClassInitialize]
         public static void TestInit(TestContext tstContext)
         {
-            Configuration = Fluently.Configure().Database(MsSqliteConfiguration.Standard.InMemory()).Mappings(
+            Configuration = Fluently.Configure().Database(MsSqliteConfiguration.Standard.ConnectionString("Data Source=:memory:;cache=shared;mode=memory")).Mappings(
                 o => o.FluentMappings
                     .AddFromAssemblyOf<Banking.Models.Context.Mappings.NHibernate.SqlServer.BankAccountMap>()).BuildConfiguration();
+
+            // Keep connection to in-memory db alive for duration of test
+            // otherwise the db gets discarded when all connections are closed
+            Context = new MySqlFullContext(Configuration);
+            Context.CreateSchema();
         }
 
         #region Public Methods And Operators
@@ -63,5 +70,13 @@
         }
 
         #endregion
+
+        [ClassCleanup]
+        public static void Cleanup()
+        {
+            Context?.Dispose();
+            Context = null;
+            Configuration = null;
+        }
     }
 }

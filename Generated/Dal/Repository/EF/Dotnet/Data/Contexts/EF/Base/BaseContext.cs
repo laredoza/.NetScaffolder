@@ -251,6 +251,17 @@
             return result;
         }
 
+        public bool Save()
+        {
+            return this.SaveChanges() > 0;
+        }
+
+        public async Task<bool> SaveAsync()
+        {
+            var result = await this.SaveChangesAsync();
+            return result > 0;
+        }
+
         /// <summary>
         ///     The commit async.
         /// </summary>

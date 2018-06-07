@@ -99,7 +99,14 @@ namespace Banking.Models.Repository
 		public virtual bool Save(IBook entity)
 		{
 			var entityToSave = new Book(entity, false);
-			return this.UnitOfWork.Add(entityToSave);
+			this.UnitOfWork.Add(entityToSave);
+			bool result = this.UnitOfWork.Save();
+			
+			// Populate passed in entity with newly saved values
+			entity.ProductId = entityToSave.ProductId;
+			entity.Publisher = entityToSave.Publisher;
+			
+			return result;
 		}
 
         /// <summary>

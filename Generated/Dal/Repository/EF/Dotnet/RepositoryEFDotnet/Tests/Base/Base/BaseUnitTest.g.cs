@@ -18,12 +18,18 @@
 //	USE A PARTIAL CLASS INSTEAD
 // *******************************************************************
 
+using Banking.Models.Dto;
 using Banking.Models.Interfaces;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace RepositoryEFDotnet.UnitTest.Base
 {
-    public abstract partial class BaseUnitTest
+	public abstract partial class BaseUnitTest
 	{
         protected virtual void Check_EntityCount(int expected, int actual, string name)
         {

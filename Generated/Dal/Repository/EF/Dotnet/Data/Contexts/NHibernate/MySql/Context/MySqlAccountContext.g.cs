@@ -35,14 +35,14 @@ namespace Banking.Models.Accounts.NHibernate
 		// Use other target e.g. in memory sqlite
 	    public MySqlAccountContext(Configuration config)
 	    {
-			CreateSession(config);
+			SetConfig(config);
         }
 		
 		// Use db as target
 	    public MySqlAccountContext(MySQLConfiguration config)
 	    {
             config.IsolationLevel(IsolationLevel.ReadCommitted);
-            CreateSession(config);
+            SetConfig(config);
 	    }
 		
 		#endregion
