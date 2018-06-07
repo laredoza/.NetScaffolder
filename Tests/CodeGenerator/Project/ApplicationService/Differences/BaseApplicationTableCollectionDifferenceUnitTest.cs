@@ -58,13 +58,19 @@ namespace DotNetScaffolder.Test.Project.ApplicationService.Differences
                 originalDatabaseModel,
                 changedDatabaseModel);
 
-            this.BaseApplicationTableCollectionDifferenceUnitTest_RemoveTable(
+            this.BaseApplicationTableCollectionDifferenceUnitTest_RemoveTableFromChangedModel(
                 originalDatabaseModel,
                 changedDatabaseModel);
+
             this.BaseApplicationTableCollectionDifferenceUnitTest_RemoveColumn(
                 originalDatabaseModel,
                 changedDatabaseModel);
+            
             this.BaseApplicationTableCollectionDifferenceUnitTest_UpdateColumn(
+                originalDatabaseModel,
+                changedDatabaseModel);
+
+            this.BaseApplicationTableCollectionDifferenceUnitTest_AddTableToSource(
                 originalDatabaseModel,
                 changedDatabaseModel);
         }
@@ -108,7 +114,7 @@ namespace DotNetScaffolder.Test.Project.ApplicationService.Differences
         }
 
         /// <summary>
-        /// The base application table collection difference unit test_ remove table.
+        /// The base application table collection difference unit test_ add table to source.
         /// </summary>
         /// <param name="originalDatabaseModel">
         /// The original database model.
@@ -116,7 +122,28 @@ namespace DotNetScaffolder.Test.Project.ApplicationService.Differences
         /// <param name="changedDatabaseModel">
         /// The changed database model.
         /// </param>
-        private void BaseApplicationTableCollectionDifferenceUnitTest_RemoveTable(
+        private void BaseApplicationTableCollectionDifferenceUnitTest_AddTableToSource(
+            DatabaseModel originalDatabaseModel,
+            DatabaseModel changedDatabaseModel)
+        {
+            Table bankTransfers = originalDatabaseModel.Tables.FirstOrDefault(t => t.TableName == "BankTransfers");
+            originalDatabaseModel.Tables.Remove(bankTransfers);
+
+            ApplicationTableCollectionDifference differences = this.Differences.CompareTables(
+                originalDatabaseModel.Tables,
+                changedDatabaseModel.Tables);
+
+            Assert.AreEqual(1, differences.FirstExtraTables.Count, "There should be 1 Extra tables");
+            Assert.AreEqual(0, differences.FirstMissingTables.Count, "There should be 0 missing tables");
+            Assert.AreEqual(0, differences.ProblemTables.Count, "There should be 0 problem tables");
+            Assert.AreEqual(0, differences.RefreshTable.Count, "There should be 0 refresh tables");
+
+            Assert.AreEqual("BankTransfers", differences.FirstExtraTables[0].TableName);
+
+            originalDatabaseModel.Tables.Insert(0, bankTransfers);
+        }
+
+        private void BaseApplicationTableCollectionDifferenceUnitTest_RemoveTableFromChangedModel(
             DatabaseModel originalDatabaseModel,
             DatabaseModel changedDatabaseModel)
         {
