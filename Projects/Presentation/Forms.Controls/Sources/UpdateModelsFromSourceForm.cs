@@ -122,7 +122,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Sources
         /// <summary>
         /// The button 3_ click.
         /// </summary>
-        /// <param name="sender">
+        ///// <param name="sender">
         /// The sender.
         /// </param>
         /// <param name="e">

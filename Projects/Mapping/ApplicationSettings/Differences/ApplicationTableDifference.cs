@@ -211,7 +211,8 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Differences
 
             if (retval.IsBroken)
             {
-                retval.ProblemTable = firstTable;
+                // retval.ProblemTable = firstTable;
+                retval.ProblemTable = secondTable;
                 return retval;
             }
 

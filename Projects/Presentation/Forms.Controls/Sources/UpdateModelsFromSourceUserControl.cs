@@ -59,6 +59,11 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Sources
         /// </summary>
         private ISourceType sourceType;
 
+        /// <summary>
+        /// The source domain.
+        /// </summary>
+        private DatabaseModel sourceDomain;
+
         #endregion
 
         #region Constructors and Destructors
@@ -155,7 +160,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Sources
 
             // Todo: Test
             //applicationService.PreserveCustomMetadata(newTables, this.DataSource.Tables, this.sourceType);
-            sourceType.Fix(newTables);
+            //sourceType.Fix(newTables);
             this.DataSource.Tables = newTables;
         }
 
@@ -250,11 +255,11 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Sources
                     Thread.Sleep(100);
                     SplashScreen.UdpateStatusText("Loading schema information");
 
-                    var sourceDomain = this.sourceType.Import(sourceOptions);
+                    this.sourceDomain = this.sourceType.Import(sourceOptions);
 
                     IApplicationTableCollectionDifference differenceService =
                         new ApplicationTableCollectionDifference(new ApplicationTableDifference());
-                    this.differences = differenceService.CompareTables(this.DataSource.Tables, sourceDomain.Tables);
+                    this.differences = differenceService.CompareTables(this.DataSource.Tables, this.sourceDomain.Tables);
 
                     ITableHierarchyService applicationService = new TempateHierarchyService();
                     List<Hierarchy> hierarchy = applicationService.ReturnHierarchyFromList(
