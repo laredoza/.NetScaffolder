@@ -151,17 +151,18 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Sources
             List<Table> addTables = applicationService.ReturnTables(this.TreeViewAdd.Nodes[0]);
             List<Table> removeTables = applicationService.ReturnTables(this.TreeViewDelete.Nodes[0]);
             List<Table> refreshedTables = applicationService.ReturnTables(this.TreeViewRefresh.Nodes[0]);
-            List<Table> newTables = applicationService.DoTableCollectionDiff(
-                this.DataSource.Tables,
-                addTables,
-                removeTables,
-                refreshedTables,
-                this.differences);
+            if (addTables.Count > 0 || removeTables.Count > 0 || refreshedTables.Count > 0)
+            {
+                List<Table> newTables = applicationService.DoTableCollectionDiff(
+                    this.DataSource.Tables,
+                    addTables,
+                    removeTables,
+                    refreshedTables,
+                    this.differences);
 
-            // Todo: Test
-            //applicationService.PreserveCustomMetadata(newTables, this.DataSource.Tables, this.sourceType);
-            //sourceType.Fix(newTables);
-            this.DataSource.Tables = newTables;
+                this.sourceType.Fix(newTables);
+                this.DataSource.Tables = newTables;
+            }
         }
 
         #endregion

@@ -79,6 +79,11 @@ namespace DotNetScaffolder.Mapping.MetaData.Model
         public DomainDataType DomainDataType { get; set; }
 
         /// <summary>
+        /// Gets or sets the remap data type.
+        /// </summary>
+        public DomainDataType? RemapDataType { get; set; }
+
+        /// <summary>
         ///     Gets or sets the grid column width.
         /// </summary>
         [XmlAttribute("GridColumnWidth")]
@@ -198,7 +203,8 @@ namespace DotNetScaffolder.Mapping.MetaData.Model
                                  RenderToEntity = this.renderToEntity,
                                  RenderToView = this.RenderToView,
                                  RenderToViewOrder = this.RenderToViewOrder,
-                                 Scale = this.Scale
+                                 Scale = this.Scale,
+                                 RemapDataType = this.RemapDataType
                              };
 
             if (result.Table != null) result.Table = this.Table.Clone() as Table;

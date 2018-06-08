@@ -45,7 +45,7 @@
             this.ComboBoxDataType = new System.Windows.Forms.ComboBox();
             this.LblOrder = new System.Windows.Forms.Label();
             this.LblName = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.ComboBoxRemapDataType = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -72,7 +72,7 @@
             this.groupBox1.Controls.Add(this.ComboBoxDataType);
             this.groupBox1.Controls.Add(this.LblOrder);
             this.groupBox1.Controls.Add(this.LblName);
-            this.groupBox1.Controls.Add(this.comboBox1);
+            this.groupBox1.Controls.Add(this.ComboBoxRemapDataType);
             this.groupBox1.Controls.Add(this.label10);
             this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.Controls.Add(this.label6);
@@ -225,17 +225,18 @@
             this.LblName.TabIndex = 62;
             this.LblName.Text = "Id";
             // 
-            // comboBox1
+            // ComboBoxRemapDataType
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
+            this.ComboBoxRemapDataType.FormattingEnabled = true;
+            this.ComboBoxRemapDataType.Items.AddRange(new object[] {
             "None",
             "Integer",
             "Decimal"});
-            this.comboBox1.Location = new System.Drawing.Point(113, 142);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 61;
+            this.ComboBoxRemapDataType.Location = new System.Drawing.Point(113, 142);
+            this.ComboBoxRemapDataType.Name = "ComboBoxRemapDataType";
+            this.ComboBoxRemapDataType.Size = new System.Drawing.Size(121, 21);
+            this.ComboBoxRemapDataType.TabIndex = 61;
+            this.ComboBoxRemapDataType.SelectedIndexChanged += new System.EventHandler(this.ComboBoxRemapDataType_SelectedIndexChanged);
             // 
             // label10
             // 
@@ -310,7 +311,7 @@
         private System.Windows.Forms.ComboBox ComboBoxDataType;
         private System.Windows.Forms.Label LblOrder;
         private System.Windows.Forms.Label LblName;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox ComboBoxRemapDataType;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label6;

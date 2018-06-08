@@ -10,6 +10,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
 
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Windows.Forms;
 
     using Common.Logging;
@@ -41,6 +42,11 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         /// </summary>
         private Column dataSource;
 
+        /// <summary>
+        /// The update data source.
+        /// </summary>
+        private bool updateDataSource;
+
         #endregion
 
         #region Constructors and Destructors
@@ -52,6 +58,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         {
             this.InitializeComponent();
             this.InitComboBoxDataType();
+            this.InitComboBoxRemapDataType();
         }
 
         #endregion
@@ -112,9 +119,38 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
                     this.DataSource.DomainDataType = value;
                 }
 
-                if (this.ComboBoxDataType.SelectedIndex != value.GetHashCode())
+                if (this.ComboBoxDataType.SelectedValue.ToString() != value.GetHashCode().ToString())
                 {
-                    this.ComboBoxDataType.SelectedIndex = value.GetHashCode();
+                    this.ComboBoxDataType.SelectedValue = value.GetHashCode();
+                }
+            }
+        }
+
+        /// <summary>
+        ///     Gets or sets the data type.
+        /// </summary>
+        public DomainDataType? RemapDataType
+        {
+            get
+            {
+                var item = this.ComboBoxRemapDataType.SelectedItem as ComboboxItem;
+                var index = Convert.ToInt32(item.Value);
+                return (DomainDataType)index;
+            }
+
+            set
+            {
+                if (this.DataSource != null && this.DataSource.RemapDataType != value)
+                {
+                    this.DataSource.RemapDataType = value;
+                }
+
+                if (this.ComboBoxRemapDataType.SelectedValue == null || this.ComboBoxRemapDataType.SelectedValue.ToString() != value.GetHashCode().ToString())
+                {
+                    if (this.ComboBoxRemapDataType.SelectedValue != null || value != null)
+                    {
+                        this.ComboBoxRemapDataType.SelectedValue = value.GetHashCode();
+                    }
                 }
             }
         }
@@ -310,7 +346,26 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
 
             this.ComboBoxDataType.DisplayMember = "Text";
             this.ComboBoxDataType.ValueMember = "Value";
-            this.ComboBoxDataType.DataSource = items;
+            this.ComboBoxDataType.DataSource = items.OrderBy(i => i.Text).ToList();
+        }
+
+        /// <summary>
+        /// The init combo box remap data type.
+        /// </summary>
+        public void InitComboBoxRemapDataType()
+        {
+            var items = new List<ComboboxItem>();
+            foreach (DomainDataType p in Enum.GetValues(typeof(DomainDataType)))
+            {
+                items.Add(new ComboboxItem { Text = p.ToString(), Value = p.GetHashCode() });
+            }
+
+            items = items.OrderBy(i => i.Text).ToList();
+
+            items.Insert(0, new ComboboxItem { Text = "None" });
+            this.ComboBoxRemapDataType.DisplayMember = "Text";
+            this.ComboBoxRemapDataType.ValueMember = "Value";
+            this.ComboBoxRemapDataType.DataSource = items;
         }
 
         /// <summary>
@@ -484,6 +539,8 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         {
             Logger.Trace("Started UpdateDataSource()");
 
+            this.updateDataSource = false;
+
             if (this.DataSource != null)
             {
                 this.ColumnName = this.DataSource.ColumnName;
@@ -496,15 +553,41 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
                 this.DefaultValue = this.DataSource.DefaultFieldValue;
                 this.IsRequired = this.DataSource.IsRequired;
                 this.IsPrimaryKey = this.DataSource.IsPrimaryKey;
+
+                if (this.DataSource.RemapDataType.HasValue)
+                {
+                    this.RemapDataType = this.DataSource.RemapDataType.Value;
+                }
+                else
+                {
+                    this.ComboBoxRemapDataType.SelectedIndex = 0;
+                }
             }
             else
             {
                 Logger.Trace("Data Source not updated as domain is null ");
             }
 
+            this.updateDataSource = true;
+
             Logger.Trace("Completed UpdateDataSource()");
         }
 
         #endregion
+
+        private void ComboBoxRemapDataType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.updateDataSource)
+            {
+                if (this.ComboBoxRemapDataType.SelectedValue != null)
+                {
+                    this.RemapDataType = (DomainDataType)this.ComboBoxRemapDataType.SelectedValue;
+                }
+                else
+                {
+                    this.RemapDataType = null;
+                }
+            }
+        }
     }
 }

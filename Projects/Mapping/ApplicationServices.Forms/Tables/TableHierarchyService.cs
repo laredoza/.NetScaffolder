@@ -408,20 +408,9 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Forms.Tables
                         newColumn.DefaultFieldValue = oldColumn.DefaultFieldValue;
                         newColumn.Description = oldColumn.Description;
                         newColumn.GridColumnWidth = oldColumn.GridColumnWidth;
-
-                        // newColumn.GridViewControlType = oldColumn.GridViewControlType;
                         newColumn.LookupClassName = oldColumn.LookupClassName;
                         newColumn.RenderToViewOrder = oldColumn.RenderToViewOrder;
-
-                        // if (oldColumn.CustomNumberTypeMapping != CustomTypeMapping.None)
-                        // {
-                        // newColumn.CustomNumberTypeMapping = oldColumn.CustomNumberTypeMapping;
-                        // if (oldColumn.CustomNumberTypeMapping == CustomTypeMapping.Decimal)
-                        // {
-                        // newColumn.Precision = oldColumn.Precision;
-                        // newColumn.Scale = oldColumn.Scale;
-                        // }
-                        // }
+                        newColumn.RemapDataType = oldColumn.RemapDataType;
                     }
                 }
 
@@ -435,11 +424,5 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Forms.Tables
         }
 
         #endregion
-
-        // MainViewModel.cs
-
-        // private static void PreserveCustomMetadata(List<MetadataTable> newTableList, List<MetadataTable> oldTableList)
-        // {
-        // }
     }
 }
