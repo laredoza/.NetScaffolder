@@ -4,7 +4,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace DotNetScaffolder.Mapping.ApplicationServices.Tables
+namespace DotNetScaffolder.Mapping.ApplicationServices.Forms.Tables
 {
     #region Usings
 
@@ -12,8 +12,10 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Tables
     using System.Collections.Generic;
     using System.Linq;
     using System.Windows.Forms;
+
     using DotNetScaffolder.Components.Common.Contract;
     using DotNetScaffolder.Mapping.ApplicationServices.Differences;
+    using DotNetScaffolder.Mapping.ApplicationServices.Tables;
     using DotNetScaffolder.Mapping.MetaData.Model;
 
     using FormControls.TreeView;
@@ -69,6 +71,9 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Tables
         /// <param name="removedTables">
         /// The removed tables.
         /// </param>
+        /// <param name="refreshedTables">
+        /// The refreshed Tables.
+        /// </param>
         /// <param name="comparison">
         /// The comparison.
         /// </param>
@@ -79,12 +84,28 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Tables
             List<Table> originalTableList,
             List<Table> addedTables,
             List<Table> removedTables,
+            List<Table> refreshedTables,
             ApplicationTableCollectionDifference comparison)
         {
             List<Table> newList = new List<Table>();
             foreach (Table table in originalTableList)
             {
-                newList.Add(table.Clone() as Table);
+                if (!refreshedTables.Exists(
+                        t => t.TableName.ToUpper() == table.TableName.ToUpper()
+                             && t.SchemaName.ToUpper() == table.SchemaName.ToUpper()))
+                {
+                    newList.Add(table.Clone() as Table);
+                }
+                else
+                {
+                    // add updated table
+                    // Copy Changeable Data
+                    Table refreshedTable = refreshedTables.First(
+                        t => t.TableName.ToUpper() == table.TableName.ToUpper()
+                             && t.SchemaName.ToUpper() == table.SchemaName.ToUpper());
+                    PreserveCustomMetadata(refreshedTable, table);
+                    newList.Add(refreshedTable);
+                }
             }
 
             foreach (Table table in addedTables)
@@ -96,7 +117,9 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Tables
             foreach (Table table in removedTables)
             {
                 tableToRemove = newList.FirstOrDefault(
-                    t => t.SchemaName == table.SchemaName && t.TableName == table.TableName);
+                    t => t.SchemaName.ToUpper() == table.SchemaName.ToUpper()
+                         && t.TableName.ToUpper() == table.TableName.ToUpper());
+
                 if (tableToRemove != null)
                 {
                     newList.Remove(tableToRemove);
@@ -137,50 +160,7 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Tables
             // Do our best to preserve table, column and relationship metadata
             foreach (var newTable in newTableList)
             {
-                var oldTable = oldTableList.FirstOrDefault(
-                    u => (u.SchemaName.ToUpper() == newTable.SchemaName.ToUpper())
-                         && (u.TableName.ToUpper() == newTable.TableName.ToUpper()));
-                if (oldTable != null)
-                {
-                    newTable.Description = oldTable.Description;
-
-                    // Attempt to preserve column metadata
-                    foreach (var newColumn in newTable.Columns)
-                    {
-                        var oldColumn = oldTable.Columns.FirstOrDefault(
-                            u => u.ColumnName.ToUpper() == newColumn.ColumnName.ToUpper());
-                        if (oldColumn != null)
-                        {
-                            // Todo: Review missing values
-                            newColumn.RenderToEntity = oldColumn.RenderToEntity;
-                            newColumn.RenderToView = oldColumn.RenderToView;
-                            newColumn.DefaultFieldValue = oldColumn.DefaultFieldValue;
-                            newColumn.Description = oldColumn.Description;
-                            newColumn.GridColumnWidth = oldColumn.GridColumnWidth;
-
-                            // newColumn.GridViewControlType = oldColumn.GridViewControlType;
-                            newColumn.LookupClassName = oldColumn.LookupClassName;
-                            newColumn.RenderToViewOrder = oldColumn.RenderToViewOrder;
-
-                            // if (oldColumn.CustomNumberTypeMapping != CustomTypeMapping.None)
-                            // {
-                            // newColumn.CustomNumberTypeMapping = oldColumn.CustomNumberTypeMapping;
-                            // if (oldColumn.CustomNumberTypeMapping == CustomTypeMapping.Decimal)
-                            // {
-                            // newColumn.Precision = oldColumn.Precision;
-                            // newColumn.Scale = oldColumn.Scale;
-                            // }
-                            // }
-                        }
-                    }
-
-                    // Attempt to preserve relationship metadata
-                    if (oldTable.Relationships != null)
-                    {
-                        // Attempt to preserve User created Relationships
-                        newTable.Relationships.AddRange(oldTable.Relationships.Where(u => u.UserRelationship));
-                    }
-                }
+                PreserveCustomMetadata(oldTableList, newTable);
             }
 
             sourceType.Fix(newTableList);
@@ -377,6 +357,81 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Tables
             }
 
             return result;
+        }
+
+        #endregion
+
+        #region Other Methods
+
+        /// <summary>
+        /// The preserve custom metadata.
+        /// </summary>
+        /// <param name="oldTableList">
+        /// The old table list.
+        /// </param>
+        /// <param name="newTable">
+        /// The new table.
+        /// </param>
+        private static void PreserveCustomMetadata(List<Table> oldTableList, Table newTable)
+        {
+            var oldTable = oldTableList.FirstOrDefault(
+                u => (u.SchemaName.ToUpper() == newTable.SchemaName.ToUpper())
+                     && (u.TableName.ToUpper() == newTable.TableName.ToUpper()));
+            PreserveCustomMetadata(newTable, oldTable);
+        }
+
+        /// <summary>
+        /// The preserve custom metadata.
+        /// </summary>
+        /// <param name="newTable">
+        /// The new table.
+        /// </param>
+        /// <param name="oldTable">
+        /// The old table.
+        /// </param>
+        private static void PreserveCustomMetadata(Table newTable, Table oldTable)
+        {
+            if (oldTable != null)
+            {
+                newTable.Description = oldTable.Description;
+
+                // Attempt to preserve column metadata
+                foreach (var newColumn in newTable.Columns)
+                {
+                    var oldColumn = oldTable.Columns.FirstOrDefault(
+                        u => u.ColumnName.ToUpper() == newColumn.ColumnName.ToUpper());
+                    if (oldColumn != null)
+                    {
+                        // Todo: Review missing values
+                        newColumn.RenderToEntity = oldColumn.RenderToEntity;
+                        newColumn.RenderToView = oldColumn.RenderToView;
+                        newColumn.DefaultFieldValue = oldColumn.DefaultFieldValue;
+                        newColumn.Description = oldColumn.Description;
+                        newColumn.GridColumnWidth = oldColumn.GridColumnWidth;
+
+                        // newColumn.GridViewControlType = oldColumn.GridViewControlType;
+                        newColumn.LookupClassName = oldColumn.LookupClassName;
+                        newColumn.RenderToViewOrder = oldColumn.RenderToViewOrder;
+
+                        // if (oldColumn.CustomNumberTypeMapping != CustomTypeMapping.None)
+                        // {
+                        // newColumn.CustomNumberTypeMapping = oldColumn.CustomNumberTypeMapping;
+                        // if (oldColumn.CustomNumberTypeMapping == CustomTypeMapping.Decimal)
+                        // {
+                        // newColumn.Precision = oldColumn.Precision;
+                        // newColumn.Scale = oldColumn.Scale;
+                        // }
+                        // }
+                    }
+                }
+
+                // Attempt to preserve relationship metadata
+                if (oldTable.Relationships != null)
+                {
+                    // Attempt to preserve User created Relationships
+                    newTable.Relationships.AddRange(oldTable.Relationships.Where(u => u.UserRelationship));
+                }
+            }
         }
 
         #endregion

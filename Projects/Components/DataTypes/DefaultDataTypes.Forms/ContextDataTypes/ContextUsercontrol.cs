@@ -22,6 +22,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.ContextDa
     using System.Windows.Forms;
 
     using DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataTypes;
+    using DotNetScaffolder.Mapping.ApplicationServices.Forms.Tables;
 
     #endregion
 

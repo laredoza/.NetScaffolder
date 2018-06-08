@@ -17,6 +17,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Sources
     using DotNetScaffolder.Components.Common.Contract;
     using DotNetScaffolder.Core.Configuration;
     using DotNetScaffolder.Mapping.ApplicationServices.Differences;
+    using DotNetScaffolder.Mapping.ApplicationServices.Forms.Tables;
     using DotNetScaffolder.Mapping.ApplicationServices.Tables;
     using DotNetScaffolder.Mapping.MetaData.Domain;
     using DotNetScaffolder.Mapping.MetaData.Model;
@@ -144,14 +145,17 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Sources
 
             List<Table> addTables = applicationService.ReturnTables(this.TreeViewAdd.Nodes[0]);
             List<Table> removeTables = applicationService.ReturnTables(this.TreeViewDelete.Nodes[0]);
+            List<Table> refreshedTables = applicationService.ReturnTables(this.TreeViewRefresh.Nodes[0]);
             List<Table> newTables = applicationService.DoTableCollectionDiff(
                 this.DataSource.Tables,
                 addTables,
                 removeTables,
+                refreshedTables,
                 this.differences);
 
             // Todo: Test
-            applicationService.PreserveCustomMetadata(newTables, this.DataSource.Tables, this.sourceType);
+            //applicationService.PreserveCustomMetadata(newTables, this.DataSource.Tables, this.sourceType);
+            sourceType.Fix(newTables);
             this.DataSource.Tables = newTables;
         }
 
@@ -194,6 +198,12 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Sources
             }
         }
 
+        /// <summary>
+        /// The start splash screen.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="Thread"/>.
+        /// </returns>
         private Thread StartSplashScreen()
         {
             (this.Parent as Form).Hide();

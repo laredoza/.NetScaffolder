@@ -54,23 +54,23 @@ namespace DotNetScaffolder.Test.Project.ApplicationService.Differences
             DatabaseModel originalDatabaseModel,
             DatabaseModel changedDatabaseModel)
         {
-            this.BaseApplicationTableCollectionDifferenceUnitTest_TestNodifference(
+            this.TestNodifference(
                 originalDatabaseModel,
                 changedDatabaseModel);
 
-            this.BaseApplicationTableCollectionDifferenceUnitTest_RemoveTableFromChangedModel(
+            this.RemoveTableFromChangedModel(
                 originalDatabaseModel,
                 changedDatabaseModel);
 
-            this.BaseApplicationTableCollectionDifferenceUnitTest_RemoveColumn(
+            this.RemoveColumn(
                 originalDatabaseModel,
                 changedDatabaseModel);
             
-            this.BaseApplicationTableCollectionDifferenceUnitTest_UpdateColumn(
+            this.UpdateColumn(
                 originalDatabaseModel,
                 changedDatabaseModel);
 
-            this.BaseApplicationTableCollectionDifferenceUnitTest_AddTableToSource(
+            this.AddTableToSource(
                 originalDatabaseModel,
                 changedDatabaseModel);
         }
@@ -88,7 +88,7 @@ namespace DotNetScaffolder.Test.Project.ApplicationService.Differences
         /// <param name="changedDatabaseModel">
         /// The changed database model.
         /// </param>
-        private void BaseApplicationTableCollectionDifferenceUnitTest_RemoveColumn(
+        private void RemoveColumn(
             DatabaseModel originalDatabaseModel,
             DatabaseModel changedDatabaseModel)
         {
@@ -122,7 +122,7 @@ namespace DotNetScaffolder.Test.Project.ApplicationService.Differences
         /// <param name="changedDatabaseModel">
         /// The changed database model.
         /// </param>
-        private void BaseApplicationTableCollectionDifferenceUnitTest_AddTableToSource(
+        private void AddTableToSource(
             DatabaseModel originalDatabaseModel,
             DatabaseModel changedDatabaseModel)
         {
@@ -143,7 +143,16 @@ namespace DotNetScaffolder.Test.Project.ApplicationService.Differences
             originalDatabaseModel.Tables.Insert(0, bankTransfers);
         }
 
-        private void BaseApplicationTableCollectionDifferenceUnitTest_RemoveTableFromChangedModel(
+        /// <summary>
+        /// The remove table from changed model.
+        /// </summary>
+        /// <param name="originalDatabaseModel">
+        /// The original database model.
+        /// </param>
+        /// <param name="changedDatabaseModel">
+        /// The changed database model.
+        /// </param>
+        private void RemoveTableFromChangedModel(
             DatabaseModel originalDatabaseModel,
             DatabaseModel changedDatabaseModel)
         {
@@ -163,7 +172,7 @@ namespace DotNetScaffolder.Test.Project.ApplicationService.Differences
         }
 
         /// <summary>
-        /// The base application table collection difference unit test_ test nodifference.
+        /// The test nodifference.
         /// </summary>
         /// <param name="originalDatabaseModel">
         /// The original database model.
@@ -171,7 +180,7 @@ namespace DotNetScaffolder.Test.Project.ApplicationService.Differences
         /// <param name="changedDatabaseModel">
         /// The changed database model.
         /// </param>
-        private void BaseApplicationTableCollectionDifferenceUnitTest_TestNodifference(
+        private void TestNodifference(
             DatabaseModel originalDatabaseModel,
             DatabaseModel changedDatabaseModel)
         {
@@ -185,7 +194,7 @@ namespace DotNetScaffolder.Test.Project.ApplicationService.Differences
         }
 
         /// <summary>
-        /// The base application table collection difference unit test_ update column.
+        /// The update column.
         /// </summary>
         /// <param name="originalDatabaseModel">
         /// The original database model.
@@ -193,7 +202,7 @@ namespace DotNetScaffolder.Test.Project.ApplicationService.Differences
         /// <param name="changedDatabaseModel">
         /// The changed database model.
         /// </param>
-        private void BaseApplicationTableCollectionDifferenceUnitTest_UpdateColumn(
+        private void UpdateColumn(
             DatabaseModel originalDatabaseModel,
             DatabaseModel changedDatabaseModel)
         {

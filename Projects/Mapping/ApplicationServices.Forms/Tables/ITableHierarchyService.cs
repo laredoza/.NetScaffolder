@@ -48,6 +48,9 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Tables
         /// <param name="removedTables">
         /// The removed tables.
         /// </param>
+        /// <param name="refreshedTables">
+        /// The refreshed tables.
+        /// </param>
         /// <param name="comparison">
         /// The comparison.
         /// </param>
@@ -58,6 +61,7 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Tables
             List<Table> originalTableList,
             List<Table> addedTables,
             List<Table> removedTables,
+            List<Table> refreshedTables,
             ApplicationTableCollectionDifference comparison);
 
         /// <summary>

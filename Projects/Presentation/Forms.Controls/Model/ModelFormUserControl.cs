@@ -16,6 +16,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
     using DotNetScaffolder.Components.Common.Contract;
     using DotNetScaffolder.Core.Common.Validation;
     using DotNetScaffolder.Core.Configuration;
+    using DotNetScaffolder.Mapping.ApplicationServices.Forms.Tables;
     using DotNetScaffolder.Mapping.ApplicationServices.Tables;
     using DotNetScaffolder.Mapping.MetaData.Domain;
     using DotNetScaffolder.Mapping.MetaData.Model;
