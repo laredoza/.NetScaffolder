@@ -154,10 +154,6 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
             // var schemaMetaData = databaseReader.ReadAll();
             var schemaMetaData = databaseReader.DatabaseSchema;
 
-            // schema.Tables[0].CheckConstraints[0].RefersToConstraint
-            Table newTable;
-            Column newColumn;
-
             List<DatabaseTable> tables = schemaMetaData.Tables.Where(
                     t => t.Name != "sysdiagrams" && t.Name != "__migrationhistory" && t.Name != "__MigrationHistory")
                 .ToList();
@@ -167,141 +163,219 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
                 if (adoOptions.Schemas.Any(s => s == table.SchemaOwner))
                 {
                     DatabaseSchemaFixer.UpdateReferences(schemaMetaData);
-
-                    // foreach (var table in schema.Tables.Where(t => t.Name == "BankAccount"))
-                    // Debug.WriteLine("Table " + table.Name);
-                    newTable = new Table { TableName = table.Name, SchemaName = table.SchemaOwner };
+                    
+                    var newTable = new Table { TableName = table.Name, SchemaName = table.SchemaOwner };
                     result.Tables.Add(newTable);
-                    string dataType;
 
-                    foreach (var column in table.Columns)
-                    {
-                        if (column.DataType != null)
-                        {
-                            dataType = column.DataType.TypeName;
-                        }
-                        else
-                        {
-                            dataType = string.Empty;
-                        }
+                    this.AddColumns(table, newTable);
 
-                        newColumn = new Column
-                                        {
-                                            ColumnName = column.Name,
-                                            DomainDataType = this.MapDatabaseType(dataType, column),
-                                            IsRequired = !column.Nullable || column.IsPrimaryKey,
-                                            ColumnOrder = table.Columns.IndexOf(column) + 1,
-                                            Precision = column.Precision.HasValue ? column.Precision.Value : 0,
-                                            Scale = column.Scale.HasValue ? column.Scale.Value : 0,
-                                            Length = column.Length.HasValue ? column.Length.Value : 0,
-                                            IsPrimaryKey = column.IsPrimaryKey
-                                        };
+                    this.AddforeignKeys(table, schemaMetaData, newTable);
 
-                        if (column.IsPrimaryKey)
-                        {
-                            newTable.DatabaseGeneratedKeyType = this.MapDatabaseGeneratedKey(column);
-                        }
+                    this.AddforeignKeyChildren(table, schemaMetaData, newTable);
 
-                        newTable.Columns.Add(newColumn);
-                    }
+                    FormatNavigationPropertiesToBeUnique(newTable);
 
-                    string referencedForeignColumnName = string.Empty;
-                    MultiplicityResult multiplicityResult;
-
-                    foreach (var foreignKey in table.ForeignKeys)
-                    {
-                        var referencedForeignColumn = foreignKey.ReferencedColumns(schemaMetaData);
-
-                        if (referencedForeignColumn != null)
-                        {
-                            referencedForeignColumnName = referencedForeignColumn.ToList()[0];
-
-                            multiplicityResult = this.ReturnMultiplicity(
-                                table,
-                                foreignKey.Columns[0],
-                                foreignKey.ReferencedTable(schemaMetaData),
-                                referencedForeignColumnName,
-                                RelationshipType.ForeignKey);
-
-                            newTable.Relationships.Add(
-                                new Relationship
-                                    {
-                                        ReferencedTableName = foreignKey.RefersToTable,
-                                        ColumnName = foreignKey.Columns[0],
-                                        ReferencedColumnName = referencedForeignColumnName,
-                                        DependencyRelationShip = RelationshipType.ForeignKey,
-                                        RelationshipName = foreignKey.Name,
-                                        SchemaName = foreignKey.SchemaOwner,
-                                        Multiplicity = multiplicityResult.Multiplicity,
-                                        ReferencedMultiplicity = multiplicityResult.ReferencedMultiplicity
-                                    });
-                        }
-                    }
-
-                    foreach (var foreignKeyChildren in table.ForeignKeyChildren)
-                    {
-                        foreach (var foreignKey in foreignKeyChildren.ForeignKeys)
-                        {
-                            var referencedForeignColumn = foreignKey.ReferencedColumns(schemaMetaData).ToList();
-                            if (foreignKey.RefersToTable == table.Name && referencedForeignColumn.Count > 0)
-                            {
-                                var referencedForeignColumnString = referencedForeignColumn[0];
-
-                                multiplicityResult = this.ReturnMultiplicity(
-                                    table,
-                                    referencedForeignColumnString,
-                                    table.ForeignKeyChildren.FirstOrDefault(t => t.Name == foreignKey.TableName),
-                                    foreignKey.Columns[0],
-                                    RelationshipType.ForeignKeyChild);
-
-                                newTable.Relationships.Add(
-                                    new Relationship
-                                        {
-                                            ReferencedTableName = foreignKey.TableName,
-                                            ColumnName = referencedForeignColumnString,
-                                            ReferencedColumnName = foreignKey.Columns[0],
-                                            DependencyRelationShip = RelationshipType.ForeignKeyChild,
-                                            RelationshipName = foreignKey.Name,
-                                            SchemaName = foreignKey.SchemaOwner,
-                                            Multiplicity = multiplicityResult.Multiplicity,
-                                            ReferencedMultiplicity =
-                                                multiplicityResult.ReferencedMultiplicity
-                                        });
-                            }
-                        }
-                    }
-
-                    // Format navigation property names to be unique and not equal to main table
-                    foreach (var rel in newTable.Relationships.OrderBy(o => o.ColumnName)
-                        .ThenBy(o => o.ReferencedColumnName))
-                    {
-                        var test = (from relItem in newTable.Relationships
-                                    orderby rel.ReferencedColumnName
-                                    select string.IsNullOrEmpty(relItem.RelationshipAlias)
-                                               ? relItem.ReferencedTableName
-                                               : relItem.RelationshipAlias).ToList();
-
-                        test.AddRange(newTable.Columns.Select(o => o.ColumnName));
-                        test.Add(
-                            newTable.TableName); // Add table name as properties cannot have same name as main table
-
-                        string alias = RelationshipNameFormatting.FormatName(
-                            rel.ReferencedTableName,
-                            rel.RelationshipAlias,
-                            null,
-                            test);
-
-                        if (!string.Equals(rel.ReferencedTableName, alias))
-                        {
-                            rel.RelationshipAlias = alias;
-                        }
-                    }
+                    AddIndexes(table, newTable);
                 }
             }
-
+            
             this.Fix(result);
             Logger.Trace("Completed Import()");
             return result;
+        }
+
+        /// <summary>
+        /// The format navigation properties to be unique.
+        /// </summary>
+        /// <param name="newTable">
+        /// The new table.
+        /// </param>
+        private static void FormatNavigationPropertiesToBeUnique(Table newTable)
+        {
+            // Format navigation property names to be unique and not equal to main table
+            foreach (var rel in newTable.Relationships.OrderBy(o => o.ColumnName).ThenBy(o => o.ReferencedColumnName))
+            {
+                var test = (from relItem in newTable.Relationships
+                            orderby rel.ReferencedColumnName
+                            select string.IsNullOrEmpty(relItem.RelationshipAlias)
+                                       ? relItem.ReferencedTableName
+                                       : relItem.RelationshipAlias).ToList();
+
+                test.AddRange(newTable.Columns.Select(o => o.ColumnName));
+                test.Add(newTable.TableName); // Add table name as properties cannot have same name as main table
+
+                string alias = RelationshipNameFormatting.FormatName(
+                    rel.ReferencedTableName,
+                    rel.RelationshipAlias,
+                    null,
+                    test);
+
+                if (!string.Equals(rel.ReferencedTableName, alias))
+                {
+                    rel.RelationshipAlias = alias;
+                }
+            }
+        }
+
+        /// <summary>
+        /// The add columns.
+        /// </summary>
+        /// <param name="table">
+        /// The table.
+        /// </param>
+        /// <param name="newTable">
+        /// The new table.
+        /// </param>
+        private void AddColumns(DatabaseTable table, Table newTable)
+        {
+            foreach (var column in table.Columns)
+            {
+                string dataType;
+                if (column.DataType != null)
+                {
+                    dataType = column.DataType.TypeName;
+                }
+                else
+                {
+                    dataType = string.Empty;
+                }
+
+                Column newColumn = new Column
+                                {
+                                    ColumnName = column.Name,
+                                    DomainDataType = this.MapDatabaseType(dataType, column),
+                                    IsRequired = !column.Nullable || column.IsPrimaryKey,
+                                    ColumnOrder = table.Columns.IndexOf(column) + 1,
+                                    Precision = column.Precision.HasValue ? column.Precision.Value : 0,
+                                    Scale = column.Scale.HasValue ? column.Scale.Value : 0,
+                                    Length = column.Length.HasValue ? column.Length.Value : 0,
+                                    IsPrimaryKey = column.IsPrimaryKey
+                                };
+
+                if (column.IsPrimaryKey)
+                {
+                    newTable.DatabaseGeneratedKeyType = this.MapDatabaseGeneratedKey(column);
+                }
+
+                newTable.Columns.Add(newColumn);
+            }
+        }
+
+        /// <summary>
+        /// The addforeign keys.
+        /// </summary>
+        /// <param name="table">
+        /// The table.
+        /// </param>
+        /// <param name="schemaMetaData">
+        /// The schema meta data.
+        /// </param>
+        /// <param name="newTable">
+        /// The new table.
+        /// </param>
+        private void AddforeignKeys(DatabaseTable table, DatabaseSchema schemaMetaData, Table newTable)
+        {
+            foreach (var foreignKey in table.ForeignKeys)
+            {
+                var referencedForeignColumn = foreignKey.ReferencedColumns(schemaMetaData);
+
+                if (referencedForeignColumn != null)
+                {
+                    var referencedForeignColumnName = referencedForeignColumn.ToList()[0];
+
+                    var multiplicityResult = this.ReturnMultiplicity(
+                        table,
+                        foreignKey.Columns[0],
+                        foreignKey.ReferencedTable(schemaMetaData),
+                        referencedForeignColumnName,
+                        RelationshipType.ForeignKey);
+
+                    newTable.Relationships.Add(
+                        new Relationship
+                            {
+                                ReferencedTableName = foreignKey.RefersToTable,
+                                ColumnName = foreignKey.Columns[0],
+                                ReferencedColumnName = referencedForeignColumnName,
+                                DependencyRelationShip = RelationshipType.ForeignKey,
+                                RelationshipName = foreignKey.Name,
+                                SchemaName = foreignKey.SchemaOwner,
+                                Multiplicity = multiplicityResult.Multiplicity,
+                                ReferencedMultiplicity = multiplicityResult.ReferencedMultiplicity
+                            });
+                }
+            }
+        }
+
+        /// <summary>
+        /// The addforeign key children.
+        /// </summary>
+        /// <param name="table">
+        /// The table.
+        /// </param>
+        /// <param name="schemaMetaData">
+        /// The schema meta data.
+        /// </param>
+        /// <param name="newTable">
+        /// The new table.
+        /// </param>
+        private void AddforeignKeyChildren(DatabaseTable table, DatabaseSchema schemaMetaData, Table newTable)
+        {
+            foreach (var foreignKeyChildren in table.ForeignKeyChildren)
+            {
+                foreach (var foreignKey in foreignKeyChildren.ForeignKeys)
+                {
+                    var referencedForeignColumn = foreignKey.ReferencedColumns(schemaMetaData).ToList();
+                    if (foreignKey.RefersToTable == table.Name && referencedForeignColumn.Count > 0)
+                    {
+                        var referencedForeignColumnString = referencedForeignColumn[0];
+
+                        var multiplicityResult = this.ReturnMultiplicity(
+                            table,
+                            referencedForeignColumnString,
+                            table.ForeignKeyChildren.FirstOrDefault(t => t.Name == foreignKey.TableName),
+                            foreignKey.Columns[0],
+                            RelationshipType.ForeignKeyChild);
+
+                        newTable.Relationships.Add(
+                            new Relationship
+                                {
+                                    ReferencedTableName = foreignKey.TableName,
+                                    ColumnName = referencedForeignColumnString,
+                                    ReferencedColumnName = foreignKey.Columns[0],
+                                    DependencyRelationShip = RelationshipType.ForeignKeyChild,
+                                    RelationshipName = foreignKey.Name,
+                                    SchemaName = foreignKey.SchemaOwner,
+                                    Multiplicity = multiplicityResult.Multiplicity,
+                                    ReferencedMultiplicity = multiplicityResult.ReferencedMultiplicity
+                                });
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// The add indexes.
+        /// </summary>
+        /// <param name="table">
+        /// The table.
+        /// </param>
+        /// <param name="newTable">
+        /// The new table.
+        /// </param>
+        private static void AddIndexes(DatabaseTable table, Table newTable)
+        {
+            foreach (DatabaseIndex index in table.Indexes)
+            {
+                Index newIndex = new Index { IndexType = index.IndexType, IsUnique = index.IsUnique, Name = index.Name };
+
+                foreach (DatabaseColumn column in index.Columns)
+                {
+                    newIndex.Columns.Add(
+                        newTable.Columns.FirstOrDefault(c => c.ColumnName.ToLower() == column.Name.ToLower()).ColumnName);
+                }
+
+                newTable.Indexes.Add(newIndex);
+            }
         }
 
         /// <summary>

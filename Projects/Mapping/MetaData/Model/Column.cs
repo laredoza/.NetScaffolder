@@ -9,6 +9,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Model
     #region Usings
 
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel;
     using System.Xml.Serialization;
 

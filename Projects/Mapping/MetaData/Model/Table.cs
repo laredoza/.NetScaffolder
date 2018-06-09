@@ -33,6 +33,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Model
             this.DatabaseGeneratedKeyType = DatabaseGeneratedKeyType.None;
             this.Columns = new List<Column>();
             this.Relationships = new List<Relationship>();
+            this.Indexes = new List<Index>();
         }
 
         #endregion
@@ -233,6 +234,11 @@ namespace DotNetScaffolder.Mapping.MetaData.Model
             }
         }
 
+        /// <summary>
+        /// Gets or sets the indexes.
+        /// </summary>
+        public List<Index> Indexes { get; set; }
+
         #endregion
 
         #region Public Methods And Operators
@@ -262,6 +268,11 @@ namespace DotNetScaffolder.Mapping.MetaData.Model
             result.SchemaName = this.SchemaName;
             result.TableName = this.TableName;
             result.DatabaseGeneratedKeyType = this.DatabaseGeneratedKeyType;
+
+            foreach (var index in this.Indexes)
+            {
+                result.Indexes.Add(index.Clone() as Index);
+            }
 
             return result;
         }

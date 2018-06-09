@@ -61,6 +61,7 @@
     <Compile Include="Model\DatabaseModel.cs" />
     <Compile Include="Model\Difference\ColumnDataTypeDifference.cs" />
     <Compile Include="Model\DomainDataType.cs" />
+    <Compile Include="Model\Index.cs" />
     <Compile Include="Model\Relationship.cs" />
     <Compile Include="Model\Table.cs" />
     <Compile Include="Project\FilePersistenceOptions.cs" />
