@@ -152,11 +152,21 @@
       <Tables>
         <Table Description="" SchemaName="dbo" TableName="BankAccount">
           <Columns>
-            <Column ColumnName="BankAccountId" ColumnOrder="1" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
-            <Column ColumnName="BankAccountNumber" ColumnOrder="2" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="10" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
-            <Column ColumnName="Balance" ColumnOrder="3" DataType="Decimal" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="0" Precision="19" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="4" />
-            <Column ColumnName="CustomerId" ColumnOrder="4" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
-            <Column ColumnName="Locked" ColumnOrder="5" DataType="Boolean" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="0" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
+            <Column ColumnName="BankAccountId" ColumnOrder="1" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="BankAccountNumber" ColumnOrder="2" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="10" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="Balance" ColumnOrder="3" DataType="Decimal" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="0" Precision="19" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="4">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="CustomerId" ColumnOrder="4" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="Locked" ColumnOrder="5" DataType="Boolean" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="0" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
           </Columns>
           <DatabaseGeneratedKeyType>Identity</DatabaseGeneratedKeyType>
           <RelationShips>
@@ -167,14 +177,42 @@
               <RelationshipName>FK_dbo.BankTransfers_dbo.BankAccount_ToBankAccountId</RelationshipName>
             </RelationShip>
           </RelationShips>
+          <Indexes>
+            <Index>
+              <IndexType>NonClustered</IndexType>
+              <IsUnique>false</IsUnique>
+              <Name>IX_CustomerId</Name>
+              <Columns>
+                <string>CustomerId</string>
+              </Columns>
+            </Index>
+            <Index>
+              <IndexType>PrimaryKey</IndexType>
+              <IsUnique>false</IsUnique>
+              <Name>PK_dbo.BankAccount</Name>
+              <Columns>
+                <string>BankAccountId</string>
+              </Columns>
+            </Index>
+          </Indexes>
         </Table>
         <Table Description="" SchemaName="dbo" TableName="BankTransfers">
           <Columns>
-            <Column ColumnName="BankTransferId" ColumnOrder="1" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
-            <Column ColumnName="FromBankAccountId" ColumnOrder="2" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
-            <Column ColumnName="ToBankAccountId" ColumnOrder="3" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
-            <Column ColumnName="Amount" ColumnOrder="4" DataType="Decimal" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="0" Precision="18" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="2" />
-            <Column ColumnName="TransferDate" ColumnOrder="5" DataType="DateTime" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="0" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
+            <Column ColumnName="BankTransferId" ColumnOrder="1" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="FromBankAccountId" ColumnOrder="2" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="ToBankAccountId" ColumnOrder="3" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="Amount" ColumnOrder="4" DataType="Decimal" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="0" Precision="18" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="2">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="TransferDate" ColumnOrder="5" DataType="DateTime" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="0" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
           </Columns>
           <DatabaseGeneratedKeyType>Identity</DatabaseGeneratedKeyType>
           <RelationShips>
@@ -182,11 +220,33 @@
               <RelationshipName>FK_dbo.BankTransfers_dbo.BankAccount_ToBankAccountId</RelationshipName>
             </RelationShip>
           </RelationShips>
+          <Indexes>
+            <Index>
+              <IndexType>NonClustered</IndexType>
+              <IsUnique>false</IsUnique>
+              <Name>IX_ToBankAccountId</Name>
+              <Columns>
+                <string>ToBankAccountId</string>
+              </Columns>
+            </Index>
+            <Index>
+              <IndexType>PrimaryKey</IndexType>
+              <IsUnique>false</IsUnique>
+              <Name>PK_dbo.BankTransfers</Name>
+              <Columns>
+                <string>BankTransferId</string>
+              </Columns>
+            </Index>
+          </Indexes>
         </Table>
         <Table Description="" SchemaName="dbo" TableName="Book">
           <Columns>
-            <Column ColumnName="ProductId" ColumnOrder="1" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
-            <Column ColumnName="Publisher" ColumnOrder="2" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="200" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
+            <Column ColumnName="ProductId" ColumnOrder="1" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="Publisher" ColumnOrder="2" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="200" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
           </Columns>
           <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
           <RelationShips>
@@ -194,11 +254,33 @@
               <RelationshipName>FK_dbo.Book_dbo.Product_ProductId</RelationshipName>
             </RelationShip>
           </RelationShips>
+          <Indexes>
+            <Index>
+              <IndexType>NonClustered</IndexType>
+              <IsUnique>false</IsUnique>
+              <Name>IX_ProductId</Name>
+              <Columns>
+                <string>ProductId</string>
+              </Columns>
+            </Index>
+            <Index>
+              <IndexType>PrimaryKey</IndexType>
+              <IsUnique>false</IsUnique>
+              <Name>PK_dbo.Book</Name>
+              <Columns>
+                <string>ProductId</string>
+              </Columns>
+            </Index>
+          </Indexes>
         </Table>
         <Table Description="" SchemaName="dbo" TableName="Country">
           <Columns>
-            <Column ColumnName="CountryId" ColumnOrder="1" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
-            <Column ColumnName="CountryName" ColumnOrder="2" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="100" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
+            <Column ColumnName="CountryId" ColumnOrder="1" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="CountryName" ColumnOrder="2" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="100" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
           </Columns>
           <DatabaseGeneratedKeyType>Identity</DatabaseGeneratedKeyType>
           <RelationShips>
@@ -206,22 +288,58 @@
               <RelationshipName>FK_dbo.Customer_dbo.Country_CountryId</RelationshipName>
             </RelationShip>
           </RelationShips>
+          <Indexes>
+            <Index>
+              <IndexType>PrimaryKey</IndexType>
+              <IsUnique>false</IsUnique>
+              <Name>PK_dbo.Country</Name>
+              <Columns>
+                <string>CountryId</string>
+              </Columns>
+            </Index>
+          </Indexes>
         </Table>
         <Table Description="" SchemaName="dbo" TableName="Customer">
           <Columns>
-            <Column ColumnName="CustomerId" ColumnOrder="1" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
-            <Column ColumnName="CustomerCode" ColumnOrder="2" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="5" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
-            <Column ColumnName="CompanyName" ColumnOrder="3" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="50" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
-            <Column ColumnName="ContactName" ColumnOrder="4" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="50" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
-            <Column ColumnName="ContactTitle" ColumnOrder="5" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="50" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
-            <Column ColumnName="Address" ColumnOrder="6" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="50" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
-            <Column ColumnName="City" ColumnOrder="7" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="20" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
-            <Column ColumnName="PostalCode" ColumnOrder="8" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="10" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
-            <Column ColumnName="Telephone" ColumnOrder="9" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="50" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
-            <Column ColumnName="CountryId" ColumnOrder="10" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
-            <Column ColumnName="Photo" ColumnOrder="11" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="-1" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
-            <Column ColumnName="IsEnabled" ColumnOrder="12" DataType="Boolean" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="0" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
-            <Column ColumnName="Test" ColumnOrder="13" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="10" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
+            <Column ColumnName="CustomerId" ColumnOrder="1" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="CustomerCode" ColumnOrder="2" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="5" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="CompanyName" ColumnOrder="3" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="50" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="ContactName" ColumnOrder="4" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="50" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="ContactTitle" ColumnOrder="5" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="50" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="Address" ColumnOrder="6" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="50" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="City" ColumnOrder="7" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="20" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="PostalCode" ColumnOrder="8" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="10" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="Telephone" ColumnOrder="9" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="50" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="Fax" ColumnOrder="10" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="50" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="CountryId" ColumnOrder="11" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="Photo" ColumnOrder="12" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="-1" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="IsEnabled" ColumnOrder="13" DataType="Boolean" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="0" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
           </Columns>
           <DatabaseGeneratedKeyType>Identity</DatabaseGeneratedKeyType>
           <RelationShips>
@@ -235,17 +353,51 @@
               <RelationshipName>FK_dbo.Order_dbo.Customer_CustomerId</RelationshipName>
             </RelationShip>
           </RelationShips>
+          <Indexes>
+            <Index>
+              <IndexType>NonClustered</IndexType>
+              <IsUnique>false</IsUnique>
+              <Name>IX_CountryId</Name>
+              <Columns>
+                <string>CountryId</string>
+              </Columns>
+            </Index>
+            <Index>
+              <IndexType>PrimaryKey</IndexType>
+              <IsUnique>false</IsUnique>
+              <Name>PK_dbo.Customer</Name>
+              <Columns>
+                <string>CustomerId</string>
+              </Columns>
+            </Index>
+          </Indexes>
         </Table>
         <Table Description="" SchemaName="dbo" TableName="Order">
           <Columns>
-            <Column ColumnName="OrderId" ColumnOrder="1" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
-            <Column ColumnName="CustomerId" ColumnOrder="2" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
-            <Column ColumnName="OrderDate" ColumnOrder="3" DataType="DateTime" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="0" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
-            <Column ColumnName="DeliveryDate" ColumnOrder="4" DataType="DateTime" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="0" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
-            <Column ColumnName="ShippingName" ColumnOrder="5" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="50" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
-            <Column ColumnName="ShippingAddress" ColumnOrder="6" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="50" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
-            <Column ColumnName="ShippingCity" ColumnOrder="7" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="50" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
-            <Column ColumnName="ShippingZip" ColumnOrder="8" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="50" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
+            <Column ColumnName="OrderId" ColumnOrder="1" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="CustomerId" ColumnOrder="2" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="OrderDate" ColumnOrder="3" DataType="DateTime" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="0" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="DeliveryDate" ColumnOrder="4" DataType="DateTime" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="0" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="ShippingName" ColumnOrder="5" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="50" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="ShippingAddress" ColumnOrder="6" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="50" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="ShippingCity" ColumnOrder="7" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="50" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="ShippingZip" ColumnOrder="8" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="50" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
           </Columns>
           <DatabaseGeneratedKeyType>Identity</DatabaseGeneratedKeyType>
           <RelationShips>
@@ -256,15 +408,45 @@
               <RelationshipName>FK_dbo.OrderDetails_dbo.Order_OrderId</RelationshipName>
             </RelationShip>
           </RelationShips>
+          <Indexes>
+            <Index>
+              <IndexType>NonClustered</IndexType>
+              <IsUnique>false</IsUnique>
+              <Name>IX_CustomerId</Name>
+              <Columns>
+                <string>CustomerId</string>
+              </Columns>
+            </Index>
+            <Index>
+              <IndexType>PrimaryKey</IndexType>
+              <IsUnique>false</IsUnique>
+              <Name>PK_dbo.Order</Name>
+              <Columns>
+                <string>OrderId</string>
+              </Columns>
+            </Index>
+          </Indexes>
         </Table>
         <Table Description="" SchemaName="dbo" TableName="OrderDetails">
           <Columns>
-            <Column ColumnName="OrderDetailsId" ColumnOrder="1" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
-            <Column ColumnName="OrderId" ColumnOrder="2" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
-            <Column ColumnName="ProductId" ColumnOrder="3" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
-            <Column ColumnName="UnitPrice" ColumnOrder="4" DataType="Decimal" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="0" Precision="19" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="4" />
-            <Column ColumnName="Amount" ColumnOrder="5" DataType="Int16" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="0" Precision="5" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
-            <Column ColumnName="Discount" ColumnOrder="6" DataType="Single" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="0" Precision="24" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
+            <Column ColumnName="OrderDetailsId" ColumnOrder="1" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="OrderId" ColumnOrder="2" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="ProductId" ColumnOrder="3" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="UnitPrice" ColumnOrder="4" DataType="Decimal" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="0" Precision="19" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="4">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="Amount" ColumnOrder="5" DataType="Int16" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="0" Precision="5" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="Discount" ColumnOrder="6" DataType="Single" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="0" Precision="24" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
           </Columns>
           <DatabaseGeneratedKeyType>Identity</DatabaseGeneratedKeyType>
           <RelationShips>
@@ -275,15 +457,53 @@
               <RelationshipName>FK_dbo.OrderDetails_dbo.Product_ProductId</RelationshipName>
             </RelationShip>
           </RelationShips>
+          <Indexes>
+            <Index>
+              <IndexType>NonClustered</IndexType>
+              <IsUnique>false</IsUnique>
+              <Name>IX_OrderId</Name>
+              <Columns>
+                <string>OrderId</string>
+              </Columns>
+            </Index>
+            <Index>
+              <IndexType>NonClustered</IndexType>
+              <IsUnique>false</IsUnique>
+              <Name>IX_ProductId</Name>
+              <Columns>
+                <string>ProductId</string>
+              </Columns>
+            </Index>
+            <Index>
+              <IndexType>PrimaryKey</IndexType>
+              <IsUnique>false</IsUnique>
+              <Name>PK_dbo.OrderDetails</Name>
+              <Columns>
+                <string>OrderDetailsId</string>
+              </Columns>
+            </Index>
+          </Indexes>
         </Table>
         <Table Description="" SchemaName="dbo" TableName="Product">
           <Columns>
-            <Column ColumnName="ProductId" ColumnOrder="1" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
-            <Column ColumnName="ProductDescription" ColumnOrder="2" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="100" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
-            <Column ColumnName="UnitPrice" ColumnOrder="3" DataType="Decimal" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="0" Precision="19" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="4" />
-            <Column ColumnName="UnitAmount" ColumnOrder="4" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="50" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
-            <Column ColumnName="Publisher" ColumnOrder="5" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="200" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
-            <Column ColumnName="AmountInStock" ColumnOrder="6" DataType="Int16" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="0" Precision="5" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
+            <Column ColumnName="ProductId" ColumnOrder="1" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="ProductDescription" ColumnOrder="2" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="100" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="UnitPrice" ColumnOrder="3" DataType="Decimal" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="0" Precision="19" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="4">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="UnitAmount" ColumnOrder="4" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="50" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="Publisher" ColumnOrder="5" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="200" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="AmountInStock" ColumnOrder="6" DataType="Int16" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="0" Precision="5" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
           </Columns>
           <DatabaseGeneratedKeyType>Identity</DatabaseGeneratedKeyType>
           <RelationShips>
@@ -297,11 +517,25 @@
               <RelationshipName>FK_dbo.Software_dbo.Product_ProductId</RelationshipName>
             </RelationShip>
           </RelationShips>
+          <Indexes>
+            <Index>
+              <IndexType>PrimaryKey</IndexType>
+              <IsUnique>false</IsUnique>
+              <Name>PK_dbo.Product</Name>
+              <Columns>
+                <string>ProductId</string>
+              </Columns>
+            </Index>
+          </Indexes>
         </Table>
         <Table Description="" SchemaName="dbo" TableName="Software">
           <Columns>
-            <Column ColumnName="ProductId" ColumnOrder="1" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
-            <Column ColumnName="LicenseCode" ColumnOrder="2" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="200" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" />
+            <Column ColumnName="ProductId" ColumnOrder="1" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="LicenseCode" ColumnOrder="2" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="200" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
           </Columns>
           <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
           <RelationShips>
@@ -309,6 +543,24 @@
               <RelationshipName>FK_dbo.Software_dbo.Product_ProductId</RelationshipName>
             </RelationShip>
           </RelationShips>
+          <Indexes>
+            <Index>
+              <IndexType>NonClustered</IndexType>
+              <IsUnique>false</IsUnique>
+              <Name>IX_ProductId</Name>
+              <Columns>
+                <string>ProductId</string>
+              </Columns>
+            </Index>
+            <Index>
+              <IndexType>PrimaryKey</IndexType>
+              <IsUnique>false</IsUnique>
+              <Name>PK_dbo.Software</Name>
+              <Columns>
+                <string>ProductId</string>
+              </Columns>
+            </Index>
+          </Indexes>
         </Table>
       </Tables>
     </DomainDefinition>

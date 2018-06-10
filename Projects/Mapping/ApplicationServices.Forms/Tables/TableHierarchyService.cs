@@ -178,6 +178,9 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Forms.Tables
         /// <param name="includeRelationships">
         /// The include Relationships.
         /// </param>
+        /// <param name="includeIndexes">
+        /// The include Indexes.
+        /// </param>
         /// <returns>
         /// The <see cref="List"/>.
         /// </returns>
@@ -186,13 +189,15 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Forms.Tables
         public List<Hierarchy> ReturnHierarchyFromList(
             List<Table> tables,
             bool includeFields,
-            bool includeRelationships)
+            bool includeRelationships,
+            bool includeIndexes = false)
         {
             List<Hierarchy> result = new List<Hierarchy>();
             Hierarchy newTable = null;
             Hierarchy schema = null;
             Hierarchy fieldNode = null;
             Hierarchy relationshipNode = null;
+            Hierarchy indexNode = null;
 
             foreach (Table table in tables)
             {
@@ -222,6 +227,19 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Forms.Tables
 
                         relationshipNode.Children.Add(
                             new Hierarchy { Name = relationShip.RelationshipName, Item = relationShip });
+                    }
+                }
+
+                if (includeIndexes)
+                {
+                    indexNode = new Hierarchy { Name = "Indexes", Item = null };
+                    newTable.Children.Add(indexNode);
+
+                    foreach (Index index in table.Indexes)
+                    {
+                        index.Table = table;
+                        indexNode.Children.Add(
+                            new Hierarchy { Name = index.Name, Item = index});
                     }
                 }
 

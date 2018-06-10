@@ -79,7 +79,7 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Tables
         void PreserveCustomMetadata(List<Table> newTableList, List<Table> oldTableList, ISourceType sourceType);
 
         /// <summary>
-        /// Return hierarchy from list.
+        /// The return hierarchy from list.
         /// </summary>
         /// <param name="tables">
         /// The tables.
@@ -88,12 +88,15 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Tables
         /// The include fields.
         /// </param>
         /// <param name="includeRelationships">
-        /// The include Relationships.
+        /// The include relationships.
+        /// </param>
+        /// <param name="includeIndexes">
+        /// The include indexes.
         /// </param>
         /// <returns>
         /// The <see cref="List"/>.
         /// </returns>
-        List<Hierarchy> ReturnHierarchyFromList(List<Table> tables, bool includeFields, bool includeRelationships);
+        List<Hierarchy> ReturnHierarchyFromList(List<Table> tables, bool includeFields, bool includeRelationships, bool includeIndexes);
 
         /// <summary>
         /// The return selected hierarchy from list.

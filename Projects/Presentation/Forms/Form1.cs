@@ -206,6 +206,7 @@ namespace DotNetScaffolder.Presentation.Forms
             }
             catch (Exception ex)
             {
+                MessageBox.Show(ex.Message, "Error Loading", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.tabControl1.Enabled = false;
                 this.BtnSave.Enabled = false;
                 this.LblPath.Text = "Model file does not exist!";

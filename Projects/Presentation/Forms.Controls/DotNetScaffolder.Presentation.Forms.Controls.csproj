@@ -72,6 +72,12 @@
     <Compile Include="Core\ManageCollectionsTreeViewUserControl.Designer.cs">
       <DependentUpon>ManageCollectionsTreeViewUserControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Model\IndexUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Model\IndexUserControl.Designer.cs">
+      <DependentUpon>IndexUserControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Project\Drivers\DriverForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -206,6 +212,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Core\ManageCollectionsTreeViewUserControl.resx">
       <DependentUpon>ManageCollectionsTreeViewUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Model\IndexUserControl.resx">
+      <DependentUpon>IndexUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Project\Drivers\DriverForm.resx">
       <DependentUpon>DriverForm.cs</DependentUpon>

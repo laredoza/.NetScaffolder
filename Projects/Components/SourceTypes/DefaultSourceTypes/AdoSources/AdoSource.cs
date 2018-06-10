@@ -125,6 +125,11 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
                 {
                     modelTable.Relationships.Remove(relationship);
                 }
+
+                foreach (Index index in modelTable.Indexes)
+                {
+                    index.Table = modelTable;
+                }
             }
 
             Logger.Trace("Completed Fix()");
@@ -375,10 +380,34 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
             {
                 Index newIndex = new Index
                                      {
-                                         IndexType = index.IndexType,
                                          IsUnique = index.IsUnique,
-                                         Name = index.Name
+                                         Name = index.Name,
+                                         Table = newTable
                                      };
+
+                switch (index.IndexType.ToUpper())
+                {
+                    case "NONCLUSTERED":
+                        newIndex.IndexType = IndexType.NonClustered;
+                        break;
+                    case "NONCLUSTERED HASH":
+                        newIndex.IndexType = IndexType.NonClusteredHash;
+                        break;
+                    case "CLUSTERED":
+                        newIndex.IndexType = IndexType.Clustered;
+                        break;
+                    case "PRIMARY":
+                        newIndex.IndexType = IndexType.PrimaryKey;
+                        break;
+                    case "PRIMARY NONCLUSTERED":
+                        newIndex.IndexType = IndexType.PrimaryNonClusteredKey;
+                        break;
+                    case "XML":
+                        newIndex.IndexType = IndexType.Xml;
+                        break;
+                    default:
+                        throw new NotImplementedException($"Invalid index type {index.IndexType}");
+                }
 
                 foreach (DatabaseColumn column in index.Columns)
                 {

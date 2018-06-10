@@ -266,15 +266,17 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Sources
                     List<Hierarchy> hierarchy = applicationService.ReturnHierarchyFromList(
                         this.differences.FirstExtraTables,
                         false,
+                        false,
                         false);
                     this.AddNodes("Models", this.TreeViewAdd, hierarchy, applicationService);
 
-                    hierarchy = applicationService.ReturnHierarchyFromList(this.differences.RefreshTable, false, false);
+                    hierarchy = applicationService.ReturnHierarchyFromList(this.differences.RefreshTable, false, false, false);
 
                     this.AddNodes("Models", this.TreeViewRefresh, hierarchy, applicationService);
 
                     hierarchy = applicationService.ReturnHierarchyFromList(
                         this.differences.FirstMissingTables,
+                        false,
                         false,
                         false);
 

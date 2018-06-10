@@ -10,6 +10,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Model
 
     using System;
     using System.Collections.Generic;
+    using System.Xml.Serialization;
 
     #endregion
 
@@ -18,6 +19,9 @@ namespace DotNetScaffolder.Mapping.MetaData.Model
     /// </summary>
     public class Index : ICloneable
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Index"/> class.
+        /// </summary>
         public Index()
         {
             this.Columns = new List<string>();
@@ -28,7 +32,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Model
         /// <summary>
         ///     Gets or sets the index type.
         /// </summary>
-        public string IndexType { get; set; }
+        public IndexType IndexType { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether is unique.
@@ -44,6 +48,12 @@ namespace DotNetScaffolder.Mapping.MetaData.Model
         /// Gets or sets the columns.
         /// </summary>
         public List<string> Columns { get; set; }
+
+        /// <summary>
+        /// Gets or sets the table.
+        /// </summary>
+        [XmlIgnore]
+        public Table Table { get; set; }
 
         #endregion
 

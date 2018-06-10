@@ -62,6 +62,11 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         private readonly ModelRelationshipUserControl relationshipControl;
 
         /// <summary>
+        /// The index user control.
+        /// </summary>
+        private readonly IndexUserControl indexUserControl;
+
+        /// <summary>
         ///     The data source.
         /// </summary>
         private DomainDefinition dataSource;
@@ -81,21 +86,21 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         public ModelFormUserControl()
         {
             this.InitializeComponent();
-            this.modelControl = new ModelUserControl();
-            this.modelControl.Dock = DockStyle.Fill;
+            this.modelControl = new ModelUserControl { Dock = DockStyle.Fill };
             this.PanelConfig.Controls.Add(this.modelControl);
 
-            this.defaultModelControl = new DefaultModelUserControl();
-            this.defaultModelControl.Dock = DockStyle.Fill;
+            this.defaultModelControl = new DefaultModelUserControl { Dock = DockStyle.Fill };
             this.PanelConfig.Controls.Add(this.defaultModelControl);
 
-            this.fieldControl = new ModelFieldUserControl();
-            this.fieldControl.Dock = DockStyle.Fill;
+            this.fieldControl = new ModelFieldUserControl { Dock = DockStyle.Fill };
             this.PanelConfig.Controls.Add(this.fieldControl);
 
-            this.relationshipControl = new ModelRelationshipUserControl();
-            this.relationshipControl.Dock = DockStyle.Fill;
+            this.relationshipControl = new ModelRelationshipUserControl { Dock = DockStyle.Fill };
             this.PanelConfig.Controls.Add(this.relationshipControl);
+
+
+            this.indexUserControl = new IndexUserControl { Dock = DockStyle.Fill };
+            this.PanelConfig.Controls.Add(this.indexUserControl);
 
             this.defaultModelControl.BringToFront();
         }
@@ -219,6 +224,13 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
                     this.CurrentlySelectedControl = this.relationshipControl;
                     this.relationshipControl.BringToFront();
                 }
+                else if (e.Node.Tag is Index)
+                {
+                    var index = e.Node.Tag as Index;
+                    this.indexUserControl.DataSource = index;
+                    this.CurrentlySelectedControl = this.indexUserControl;
+                    this.indexUserControl.BringToFront();
+                }
                 else if (e.Node.Tag == null)
                 {
                     this.defaultModelControl.BringToFront();
@@ -239,7 +251,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
 
                 ITableHierarchyService applicationService = new TempateHierarchyService();
                 List<Hierarchy> hierarchy =
-                    applicationService.ReturnHierarchyFromList(this.DataSource.Tables, true, true);
+                    applicationService.ReturnHierarchyFromList(this.DataSource.Tables, true, true, true);
 
                 this.AddNodes("Models", this.DomainTreeView, hierarchy, applicationService);
             }
