@@ -113,7 +113,9 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Differences
                 {
                     var diff = this.ApplicationTableDifference.CompareTableColumns(firstTable, secondTable);
                     if (diff != null)
+                    {
                         retval.ProblemTables.Add(diff);
+                    }
                 }
             }
 

@@ -46,7 +46,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         public IndexUserControl()
         {
             this.InitializeComponent();
-            this.InitComboBoxRelationshipType();
+            this.InitComboBoxIndexTypes();
         }
 
         #endregion
@@ -206,7 +206,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         /// <summary>
         ///     The init combo box relationship type.
         /// </summary>
-        public void InitComboBoxRelationshipType()
+        public void InitComboBoxIndexTypes()
         {
             var items = new List<ComboboxItem>();
 
