@@ -21,12 +21,29 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Differences
     /// </summary>
     public class ApplicationTableDifference : IApplicationTableDifference
     {
+        #region Constructors and Destructors
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ApplicationTableDifference"/> class.
+        /// </summary>
+        public ApplicationTableDifference()
+        {
+            this.ProblemIndexes = new List<Index>();
+        }
+
+        #endregion
+
         #region Public Properties
 
         /// <summary>
         ///     Gets or sets the column data type diffs.
         /// </summary>
         public List<ColumnDataTypeDifference> ColumnDataTypeDiffs { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the extra indexes.
+        /// </summary>
+        public List<Index> ExtraIndexes { get; set; }
 
         /// <summary>
         ///     Gets or sets the first extra columns.
@@ -114,12 +131,25 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Differences
         {
             get
             {
-                return ((this.FirstMissingColumns.Count > 0) || (this.FirstExtraColumns.Count > 0)
+                return (this.FirstMissingColumns.Count > 0) || (this.FirstExtraColumns.Count > 0)
                                                              || (this.FirstExtraRelationships.Count > 0)
-                                                             || (this.FirstMissingRelationships.Count > 0))
-                       || (this.ColumnDataTypeDiffs.Count > 0);
+                                                             || (this.FirstMissingRelationships.Count > 0)
+                                                             || (this.ColumnDataTypeDiffs.Count > 0)
+                                                             || (this.ExtraIndexes.Count > 0)
+                                                             || (this.MissingIndexes.Count > 0)
+                                                             || (this.ProblemIndexes.Count > 0);
             }
         }
+
+        /// <summary>
+        ///     Gets or sets the missing indexes.
+        /// </summary>
+        public List<Index> MissingIndexes { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the problem indexes.
+        /// </summary>
+        public List<Index> ProblemIndexes { get; set; }
 
         /// <summary>
         ///     Gets or sets the problem table.
@@ -155,8 +185,11 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Differences
         /// </returns>
         public ApplicationTableDifference CompareTableColumns(Table firstTable, Table secondTable)
         {
+            this.ProblemIndexes = new List<Index>();
+
             var retval = new ApplicationTableDifference();
 
+            // Extra Columns
             var secondTableColumnNameList =
                 new HashSet<string>(secondTable.Columns.Select(u => u.ColumnName.ToUpper()));
             retval.FirstExtraColumns = firstTable.Columns
@@ -166,6 +199,7 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Differences
             retval.FirstMissingColumns = secondTable.Columns
                 .Where(c => !firstTableColumnNameList.Contains(c.ColumnName.ToUpper())).ToList();
 
+            // Relationshi[ps
             var secondTableRelationshipTableNames =
                 new HashSet<string>(secondTable.Relationships.Select(u => u.ReferencedTableName.ToUpper()));
             retval.FirstExtraRelationships = firstTable.Relationships
@@ -175,6 +209,8 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Differences
                 new HashSet<string>(firstTable.Relationships.Select(u => u.ReferencedTableName.ToUpper()));
             retval.FirstMissingRelationships = secondTable.Relationships
                 .Where(u => !firstTableRelationshipTableNames.Contains(u.ReferencedTableName.ToUpper())).ToList();
+
+            RefreshIndexes(firstTable, secondTable, retval);
 
             retval.ColumnDataTypeDiffs = new List<ColumnDataTypeDifference>();
             foreach (var column in firstTable.Columns)
@@ -217,6 +253,86 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Differences
             }
 
             return null;
+        }
+
+        #endregion
+
+        #region Other Methods
+
+        /// <summary>
+        /// The refresh indexes.
+        /// </summary>
+        /// <param name="firstTable">
+        /// The first table.
+        /// </param>
+        /// <param name="secondTable">
+        /// The second table.
+        /// </param>
+        /// <param name="retval">
+        /// The retval.
+        /// </param>
+        private static void RefreshIndexes(Table firstTable, Table secondTable, ApplicationTableDifference retval)
+        {
+            // Indexes
+            var secondTableIndexTableNames = new HashSet<string>(secondTable.Indexes.Select(u => u.Name.ToUpper()));
+            retval.ExtraIndexes = firstTable.Indexes.Where(u => !secondTableIndexTableNames.Contains(u.Name.ToUpper()))
+                .ToList();
+
+            var firstTableIndexTableNames = new HashSet<string>(firstTable.Indexes.Select(u => u.Name.ToUpper()));
+            retval.MissingIndexes = secondTable.Indexes
+                .Where(u => !firstTableIndexTableNames.Contains(u.Name.ToUpper())).ToList();
+
+            if (retval.ExtraIndexes.Count == 0 && retval.MissingIndexes.Count == 0)
+            {
+                foreach (Index index in firstTable.Indexes)
+                {
+                    Index secondIndex =
+                        secondTable.Indexes.FirstOrDefault(i => i.Name.ToUpper() == index.Name.ToUpper());
+                    if (secondIndex != null)
+                    {
+                        if (index.IsUnique != secondIndex.IsUnique || index.Name.ToUpper() != secondIndex.Name.ToUpper()
+                                                                   || index.IndexType != secondIndex.IndexType)
+                        {
+                            retval.ProblemIndexes.Add(index);
+                        }
+                        else
+                        {
+                            var secondIndexColumnNames =
+                                new HashSet<string>(secondIndex.Columns.Select(u => u.ToUpper()));
+                            var extraIndexColumns = index.Columns
+                                .Where(u => !secondIndexColumnNames.Contains(u.ToUpper())).ToList();
+                            if (extraIndexColumns.Count > 0)
+                            {
+                                retval.ProblemIndexes.Add(index);
+                            }
+                            else
+                            {
+                                var firstIndexColumnNames = new HashSet<string>(index.Columns.Select(u => u.ToUpper()));
+                                var missingIndexColumns = secondIndex.Columns
+                                    .Where(u => !firstIndexColumnNames.Contains(u.ToUpper())).ToList();
+
+                                if (missingIndexColumns.Count > 0)
+                                {
+                                    retval.ProblemIndexes.Add(index);
+                                }
+                                else
+                                {
+                                    foreach (string column in index.Columns)
+                                    {
+                                        var secondColumn =
+                                            secondIndex.Columns.FirstOrDefault(c => c.ToUpper() == column.ToUpper());
+
+                                        if (column.ToUpper() != secondColumn.ToUpper())
+                                        {
+                                            retval.ProblemIndexes.Add(index);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         #endregion
