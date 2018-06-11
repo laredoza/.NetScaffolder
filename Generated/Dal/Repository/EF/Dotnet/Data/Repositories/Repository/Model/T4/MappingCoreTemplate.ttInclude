@@ -88,6 +88,14 @@ if (Driver.ForceSchemaToUppercase)
 			
 			#endregion
 
+			#region Indexes
+<#+ foreach(var col in Model.Columns){ #>
+<#+ foreach(var idx in Model.Indexes.Where(o => o.IndexType != IndexType.PrimaryKey && o.Columns.Contains(col.ColumnName))){ #>
+			builder.<#=Driver.TransformIndex(idx) #>;
+<#+ } #>
+<#+ } #>
+			#endregion
+			
 			#region Relationships
 			
 <#+ foreach(var rel in Model.Relationships.Where(o => ContextData.HasModel(o))){ #>

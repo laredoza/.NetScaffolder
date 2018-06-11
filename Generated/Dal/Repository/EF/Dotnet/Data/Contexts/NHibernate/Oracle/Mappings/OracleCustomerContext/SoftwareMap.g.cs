@@ -1,5 +1,5 @@
 ﻿
-// <copyright file="BankTransfersMap.g.cs.g.cs" company="MIT">
+// <copyright file="SoftwareMap.g.cs.g.cs" company="MIT">
 //  Copyright (c) 2018 MIT
 // </copyright>  
 
@@ -17,46 +17,39 @@
 //	GENERATED CODE. DOT NOT MODIFY MANUALLY AS CHANGES CAN BE LOST!!!
 //	USE A PARTIAL CLASS INSTEAD
 // *******************************************************************
-
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using RepositoryEFDotnet.Contexts.EFCore;
-using System.Configuration;
-using System.ComponentModel.DataAnnotations.Schema;
 using Banking.Models.Entity;
-using System.Data.Common;
+using FluentNHibernate.Mapping;
 
-
-namespace Banking.Models.Mappings.MySql
+namespace Banking.Models.Customers.Mappings.NHibernate.Oracle
 {
-	public partial class BankTransfersMap : IEntityTypeConfiguration<BankTransfers>
+	public partial class SoftwareMap : ClassMap<Software>
 	{	
-	    public void Configure(EntityTypeBuilder<BankTransfers> builder)
-	    {
-			builder.ToTable("BankTransfers");
+		public SoftwareMap ()
+		{
+			Table("Software");
 			
-			#region Primary keys
+			#region Primary Keys
 			
-			builder.HasKey(t => t.BankTransferId);
-			builder.Property(t => t.BankTransferId).ValueGeneratedOnAdd();
+			Id(t => t.ProductId);
 
 			#endregion
 
 			#region Constraints
 			
-			builder.Property(t => t.BankTransferId).IsRequired();
-			builder.Property(t => t.FromBankAccountId).IsRequired();
-			builder.Property(t => t.ToBankAccountId).IsRequired();
-			builder.Property(t => t.Amount).IsRequired();
-			builder.Property(t => t.Amount).HasColumnType("decimal(18, 2)");
-			builder.Property(t => t.TransferDate).IsRequired();
+			Map(t => t.ProductId).ReadOnly().Generated.Insert()
+			.Not.Nullable();
+			Map(t => t.LicenseCode)
+			.Length(200)
+			.Not.Nullable();
 			
 			#endregion
 
 			#region Relationships
 			
+			HasOne(s => s.Product).PropertyRef(o => o.ProductId);
 			
-			#endregion	
-	    }
+			#endregion			
+	
+		}
 	}
 }

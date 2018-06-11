@@ -50,6 +50,10 @@ namespace Banking.Models.Customers.Mappings.EFCore.MySql
 			
 			#endregion
 
+			#region Indexes
+			builder.HasIndex(i => new {i.ProductId}).IsUnique(false);
+			#endregion
+			
 			#region Relationships
 			
 			builder.HasOne<Product>(s => s.Product).WithOne(s => s.Book).OnDelete(DeleteBehavior.Restrict);

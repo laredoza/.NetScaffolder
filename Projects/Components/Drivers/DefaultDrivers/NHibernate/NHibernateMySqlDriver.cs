@@ -10,6 +10,7 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.NHibernate
     using System.ComponentModel.Composition;
 
     using DotNetScaffolder.Components.Common.Contract;
+    using DotNetScaffolder.Mapping.MetaData.Model;
 
     // <summary>
     // Defines the default NHibernate 4.0 Sql Server driver.
@@ -17,7 +18,7 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.NHibernate
     /// The n hibernate sql server driver.
     /// </summary>
     [Export(typeof(IDriver))]
-    [ExportMetadata("TypeMetaData", "NHibernate 4.0")]
+    [ExportMetadata("TypeMetaData", "NHibernate 5.0")]
     [ExportMetadata("TypeIdMetaData", "27D66D81-8F2D-481A-8547-C1E5B5444569")]
     [ExportMetadata("NameMetaData", "NHibernate - MySql (Default)")]
     [ExportMetadata("ValueMetaData", "27D66D81-8F2D-481A-8547-C1E5B5444569")]
@@ -33,6 +34,11 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.NHibernate
         public string AsAlias(string name)
         {
             return $"`{name}`";
+        }
+
+        public string TransformIndex(Index index)
+        {
+            throw new System.NotImplementedException();
         }
 
         /// <summary>

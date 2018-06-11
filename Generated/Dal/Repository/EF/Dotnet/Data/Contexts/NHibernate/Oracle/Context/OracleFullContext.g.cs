@@ -1,5 +1,5 @@
 ﻿
-// <copyright file="SoftwareMap.g.cs.g.cs" company="MIT">
+// <copyright file="FullContext.g.cs" company="MIT">
 //  Copyright (c) 2018 MIT
 // </copyright>  
 
@@ -18,43 +18,46 @@
 //	USE A PARTIAL CLASS INSTEAD
 // *******************************************************************
 
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using RepositoryEFDotnet.Contexts.EFCore;
-using System.Configuration;
-using System.ComponentModel.DataAnnotations.Schema;
-using Banking.Models.Entity;
-using System.Data.Common;
+using NHibernate;
+using NHibernate.Cfg;
+using FluentNHibernate.Cfg.Db;
+using FluentNHibernate.Cfg;
+using Banking.Models.Context.Mappings.NHibernate.Oracle;
+using RepositoryEFDotnet.Contexts.NHibernate;
+using System.Data;
 
-
-namespace Banking.Models.Mappings.SqlServer
+namespace Banking.Models.Context.NHibernate
 {
-	public partial class SoftwareMap : IEntityTypeConfiguration<Software>
+	public partial class OracleFullContext : BaseContext
 	{	
-	    public void Configure(EntityTypeBuilder<Software> builder)
+		#region CTOR
+		
+		// Use other target e.g. in memory sqlite
+	    public OracleFullContext(Configuration config)
 	    {
-			builder.ToTable("Software", "dbo");
-			
-			#region Primary keys
-			
-			builder.HasKey(t => t.ProductId);
-			builder.Property(t => t.ProductId).ValueGeneratedNever();
-
-			#endregion
-
-			#region Constraints
-			
-			builder.Property(t => t.ProductId).IsRequired();
-			builder.Property(t => t.LicenseCode).HasMaxLength(200);
-			builder.Property(t => t.LicenseCode).IsRequired();
-			
-			#endregion
-
-			#region Relationships
-			
-			
-			#endregion	
+			SetConfig(config);
+        }
+		
+		// Use db as target
+	    public OracleFullContext(OracleDataClientConfiguration config)
+	    {
+            config.IsolationLevel(IsolationLevel.ReadCommitted);
+            SetConfig(config);
 	    }
+		
+		#endregion
+		
+	    protected override void ConfigureMappings(MappingConfiguration config)
+	    {
+			config.FluentMappings.Add(typeof(BankAccountMap));
+			config.FluentMappings.Add(typeof(BankTransfersMap));
+			config.FluentMappings.Add(typeof(BookMap));
+			config.FluentMappings.Add(typeof(CountryMap));
+			config.FluentMappings.Add(typeof(CustomerMap));
+			config.FluentMappings.Add(typeof(OrderMap));
+			config.FluentMappings.Add(typeof(OrderDetailsMap));
+			config.FluentMappings.Add(typeof(ProductMap));
+			config.FluentMappings.Add(typeof(SoftwareMap));
+        }
 	}
 }

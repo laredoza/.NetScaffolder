@@ -22,16 +22,55 @@ namespace RepositoryEFDotnet.UnitTest
     {
         #region Public Methods And Operators
 
-        /// <summary>
-        /// The class init.
-        /// </summary>
-        /// <param name="context">
-        /// The context.
-        /// </param>
-        [ClassInitialize]
-        public static void ClassInit(TestContext context)
+        [TestMethod]
+        public void RunAll()
         {
-            Context = new OracleFullContext(DbConnectionFactory.CreateTransient());
+            string dbId = "EFRepoTestOracle";
+
+            using (var uow = new OracleFullContext(DbConnectionFactory.CreatePersistent(dbId)))
+            {
+                this.Country_Add(uow);
+            }
+
+            using (var uow = new OracleFullContext(DbConnectionFactory.CreatePersistent(dbId)))
+            {
+                this.Customer_Add(uow, 2, 1, 2);
+            }
+
+            using (var uow = new OracleFullContext(DbConnectionFactory.CreatePersistent(dbId)))
+            {
+                this.Product_Add(uow, 5, 1, 5);
+            }
+
+            using (var uow = new OracleFullContext(DbConnectionFactory.CreatePersistent(dbId)))
+            {
+                this.Book_Add(uow);
+            }
+
+            using (var uow = new OracleFullContext(DbConnectionFactory.CreatePersistent(dbId)))
+            {
+                this.Software_Add(uow, 1, 2);
+            }
+
+            using (var uow = new OracleFullContext(DbConnectionFactory.CreatePersistent(dbId)))
+            {
+                this.Order_Add(uow, 2, 1, 2);
+            }
+
+            using (var uow = new OracleFullContext(DbConnectionFactory.CreatePersistent(dbId)))
+            {
+                this.OrderDetails_Add(uow, 2, 1, 2);
+            }
+
+            using (var uow = new OracleFullContext(DbConnectionFactory.CreatePersistent(dbId)))
+            {
+                this.BankAccount_Add(uow, 2, 1, 2);
+            }
+
+            using (var uow = new OracleFullContext(DbConnectionFactory.CreatePersistent(dbId)))
+            {
+                this.BankTransfers_Add(uow);
+            }
         }
 
         #endregion

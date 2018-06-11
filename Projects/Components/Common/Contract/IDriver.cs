@@ -10,6 +10,8 @@ namespace DotNetScaffolder.Components.Common.Contract
 
     using System.Collections.Generic;
 
+    using DotNetScaffolder.Mapping.MetaData.Model;
+
     #endregion
 
     /// <summary>
@@ -54,6 +56,8 @@ namespace DotNetScaffolder.Components.Common.Contract
         string ConfigurationClass { get; }
 
         string AsAlias(string name);
+
+        string TransformIndex(Index index);
 
         #endregion
     }

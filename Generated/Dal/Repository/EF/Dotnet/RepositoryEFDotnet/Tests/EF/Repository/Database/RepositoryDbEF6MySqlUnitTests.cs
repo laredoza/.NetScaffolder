@@ -20,6 +20,8 @@ namespace RepositoryEFDotnet.UnitTest
     [TestClass]
     public class RepositoryDbEF6MySqlUnitTests : BaseRepositoryUnitTest
     {
+        private static string DbConfig = "RepoTestMySql";
+
         #region Public Methods And Operators
 
         /// <summary>
@@ -31,15 +33,65 @@ namespace RepositoryEFDotnet.UnitTest
         [ClassInitialize]
         public static void ClassInit(TestContext context)
         {
-            Context = new MySqlFullContext("RepoTestMySql");
-
-            if (Database.Exists("RepoTestMySql"))
+            using (var uow = new MySqlFullContext(DbConfig))
             {
-                Database.Delete("RepoTestMySql");
+                if (Database.Exists(DbConfig))
+                {
+                    Database.Delete(DbConfig);
+                }
+
+                Database.SetInitializer(new CreateDatabaseIfNotExists<MySqlFullContext>());
+                uow.Database.Initialize(true);
+            }
+        }
+
+        [TestMethod]
+        public void RunAll()
+        {
+            using (var uow = new MySqlFullContext(DbConfig))
+            {
+                this.Country_Add(uow);
             }
 
-            Database.SetInitializer(new CreateDatabaseIfNotExists<MySqlFullContext>());
-            ((MySqlFullContext)Context).Database.Initialize(true);
+            using (var uow = new MySqlFullContext(DbConfig))
+            {
+                this.Customer_Add(uow, 2, 1, 2);
+            }
+
+            using (var uow = new MySqlFullContext(DbConfig))
+            {
+                this.Product_Add(uow, 5, 1, 5);
+            }
+
+            using (var uow = new MySqlFullContext(DbConfig))
+            {
+                this.Book_Add(uow);
+            }
+
+            using (var uow = new MySqlFullContext(DbConfig))
+            {
+                this.Software_Add(uow, 1, 2);
+            }
+
+            using (var uow = new MySqlFullContext(DbConfig))
+            {
+                this.Order_Add(uow, 2, 1, 2);
+            }
+
+            using (var uow = new MySqlFullContext(DbConfig))
+            {
+                this.OrderDetails_Add(uow, 2, 1, 2);
+            }
+
+            using (var uow = new MySqlFullContext(DbConfig))
+            {
+                this.BankAccount_Add(uow, 2, 1, 2);
+            }
+
+            using (var uow = new MySqlFullContext(DbConfig))
+            {
+                this.BankTransfers_Add(uow);
+            }
         }
 
         #endregion

@@ -53,6 +53,10 @@ namespace Banking.Models.Context.Mappings.EFCore.MySql
 			
 			#endregion
 
+			#region Indexes
+			builder.HasIndex(i => new {i.ToBankAccountId}).IsUnique(false);
+			#endregion
+			
 			#region Relationships
 			
 			builder.HasOne<BankAccount>(s => s.BankAccount).WithMany(s => s.BankTransfers).HasForeignKey(s => s.ToBankAccountId).OnDelete(DeleteBehavior.Restrict);

@@ -20,6 +20,7 @@
 
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration;
+using System.Data.Entity.Infrastructure.Annotations;
 using MySql.Data.EntityFramework;
 using RepositoryEFDotnet.Library;
 using System.ComponentModel.DataAnnotations.Schema;

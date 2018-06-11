@@ -886,7 +886,7 @@ namespace RepositoryEFDotnet.Contexts.NHibernate
         /// </returns>
         public async Task<bool> SaveAsync()
         {
-            return this.Save();
+            return false;
         }
 
         /// <summary>

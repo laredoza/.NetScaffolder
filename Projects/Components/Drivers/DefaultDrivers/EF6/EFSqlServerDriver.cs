@@ -12,6 +12,7 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6
     using System.ComponentModel.Composition;
 
     using DotNetScaffolder.Components.Common.Contract;
+    using DotNetScaffolder.Mapping.MetaData.Model;
 
     #endregion
 
@@ -56,7 +57,7 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6
         ///     Gets the name spaces used to generate templates.
         /// </summary>
         public List<string> NameSpaces =>
-            new List<string> { "System.Data.Entity", "System.Data.Entity.ModelConfiguration" };
+            new List<string> { "System.Data.Entity", "System.Data.Entity.ModelConfiguration", "System.Data.Entity.Infrastructure.Annotations" };
 
         /// <summary>
         ///     The parent folder.
@@ -74,5 +75,10 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6
         /// The driver type.
         /// </summary>
         IDriverType IDriver.DriverType => this.DriverType ?? (this.DriverType = new EFDriverType("EFDriverType.xml"));
+
+        public string TransformIndex(Index index)
+        {
+            return EFDriverType.TransformIndex(index);
+        }
     }
 }

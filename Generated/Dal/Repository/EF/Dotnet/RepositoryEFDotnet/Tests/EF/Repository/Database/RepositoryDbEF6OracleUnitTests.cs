@@ -20,6 +20,8 @@ namespace RepositoryEFDotnet.UnitTest
     [TestClass]
     public class RepositoryDbEF6OracleUnitTests : BaseRepositoryUnitTest
     {
+        private static string DbConfig = "RepoTestOracle";
+
         #region Public Methods And Operators
 
         /// <summary>
@@ -31,15 +33,65 @@ namespace RepositoryEFDotnet.UnitTest
         [ClassInitialize]
         public static void ClassInit(TestContext context)
         {
-            Context = new OracleFullContext("RepoTestOracle");
-
-            if (Database.Exists("RepoTestOracle"))
+            using (var uow = new OracleFullContext(DbConfig))
             {
-                Database.Delete("RepoTestOracle");
+                if (Database.Exists(DbConfig))
+                {
+                    Database.Delete(DbConfig);
+                }
+
+                Database.SetInitializer(new CreateDatabaseIfNotExists<OracleFullContext>());
+                uow.Database.Initialize(true);
+            }
+        }
+
+        [TestMethod]
+        public void RunAll()
+        {
+            using (var uow = new OracleFullContext(DbConfig))
+            {
+                this.Country_Add(uow);
             }
 
-            Database.SetInitializer(new CreateDatabaseIfNotExists<OracleFullContext>());
-            ((OracleFullContext)Context).Database.Initialize(true);
+            using (var uow = new OracleFullContext(DbConfig))
+            {
+                this.Customer_Add(uow, 2, 1, 2);
+            }
+
+            using (var uow = new OracleFullContext(DbConfig))
+            {
+                this.Product_Add(uow, 5, 1, 5);
+            }
+
+            using (var uow = new OracleFullContext(DbConfig))
+            {
+                this.Book_Add(uow);
+            }
+
+            using (var uow = new OracleFullContext(DbConfig))
+            {
+                this.Software_Add(uow, 1, 2);
+            }
+
+            using (var uow = new OracleFullContext(DbConfig))
+            {
+                this.Order_Add(uow, 2, 1, 2);
+            }
+
+            using (var uow = new OracleFullContext(DbConfig))
+            {
+                this.OrderDetails_Add(uow, 2, 1, 2);
+            }
+
+            using (var uow = new OracleFullContext(DbConfig))
+            {
+                this.BankAccount_Add(uow, 2, 1, 2);
+            }
+
+            using (var uow = new OracleFullContext(DbConfig))
+            {
+                this.BankTransfers_Add(uow);
+            }
         }
 
         #endregion

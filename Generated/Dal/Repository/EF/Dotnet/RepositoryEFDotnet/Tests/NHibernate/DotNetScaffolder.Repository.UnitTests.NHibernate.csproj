@@ -66,6 +66,9 @@
     <Reference Include="NHibernate, Version=5.1.0.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\NHibernate.5.1.2\lib\net461\NHibernate.dll</HintPath>
     </Reference>
+    <Reference Include="Oracle.ManagedDataAccess, Version=4.122.1.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Oracle.ManagedDataAccess.12.2.1100\lib\net40\Oracle.ManagedDataAccess.dll</HintPath>
+    </Reference>
     <Reference Include="Remotion.Linq, Version=2.2.0.0, Culture=neutral, PublicKeyToken=fee00910d6e5f53b, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Remotion.Linq.2.2.0\lib\net45\Remotion.Linq.dll</HintPath>
     </Reference>
@@ -101,11 +104,15 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\Database\RepositoryDbNHibernateMySqlUnitTests.cs" />
+    <Compile Include="Repository\Database\RepositoryDbNHibernateOracleUnitTests.cs" />
     <Compile Include="Repository\Database\RepositoryDbNHibernateSqlServerUnitTests.cs" />
     <Compile Include="Repository\In-Memory\RepositoryNHibernateInMemoryMySqlUnitTests.cs" />
+    <Compile Include="Repository\In-Memory\RepositoryNHibernateInMemoryOracleUnitTests.cs" />
     <Compile Include="Repository\In-Memory\RepositoryNHibernateInMemorySqlServerUnitTests.cs" />
     <Compile Include="UnitOfWork\Database\UowNHibernateDbMySqlUnitTests.cs" />
+    <Compile Include="UnitOfWork\Database\UowNHibernateDbOracleUnitTests.cs" />
     <Compile Include="UnitOfWork\Database\UowNHibernateDbSqlServerUnitTests.cs" />
+    <Compile Include="UnitOfWork\In-Memory\UowNHibernateInMemoryOracleUnitTests.cs" />
     <Compile Include="UnitOfWork\In-Memory\UowNHibernateInMemoryMySqlUnitTests.cs" />
     <Compile Include="UnitOfWork\In-Memory\UowNHibernateInMemorySqlServerUnitTests.cs" />
   </ItemGroup>
@@ -126,6 +133,10 @@
     <ProjectReference Include="..\..\..\Data\Contexts\NHibernate\MySql\RepositoryEFDotnet.Contexts.NHibernate.MySql.csproj">
       <Project>{e354fad9-cc4c-48e9-b93a-f755a499e03d}</Project>
       <Name>RepositoryEFDotnet.Contexts.NHibernate.MySql</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Data\Contexts\NHibernate\Oracle\RepositoryEFDotnet.Contexts.NHibernate.Oracle.csproj">
+      <Project>{5ac65642-4318-4e9b-bbb8-ea0ffdf4068d}</Project>
+      <Name>RepositoryEFDotnet.Contexts.NHibernate.Oracle</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\Data\Contexts\NHibernate\SqlServer\RepositoryEFDotnet.Contexts.NHibernate.SqlServer.csproj">
       <Project>{c632dc7f-0364-4bb9-be84-54794f9ad469}</Project>

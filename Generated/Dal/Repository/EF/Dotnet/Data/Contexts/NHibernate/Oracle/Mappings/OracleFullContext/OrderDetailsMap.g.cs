@@ -1,5 +1,5 @@
 ﻿
-// <copyright file="BookMap.g.cs.g.cs" company="MIT">
+// <copyright file="OrderDetailsMap.g.cs.g.cs" company="MIT">
 //  Copyright (c) 2018 MIT
 // </copyright>  
 
@@ -17,44 +17,48 @@
 //	GENERATED CODE. DOT NOT MODIFY MANUALLY AS CHANGES CAN BE LOST!!!
 //	USE A PARTIAL CLASS INSTEAD
 // *******************************************************************
-
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using RepositoryEFDotnet.Contexts.EFCore;
-using System.Configuration;
-using System.ComponentModel.DataAnnotations.Schema;
 using Banking.Models.Entity;
-using System.Data.Common;
+using FluentNHibernate.Mapping;
 
-
-namespace Banking.Models.Mappings.SqlServer
+namespace Banking.Models.Context.Mappings.NHibernate.Oracle
 {
-	public partial class BookMap : IEntityTypeConfiguration<Book>
+	public partial class OrderDetailsMap : ClassMap<OrderDetails>
 	{	
-	    public void Configure(EntityTypeBuilder<Book> builder)
-	    {
-			builder.ToTable("Book", "dbo");
+		public OrderDetailsMap ()
+		{
+			Table("OrderDetails");
 			
-			#region Primary keys
+			#region Primary Keys
 			
-			builder.HasKey(t => t.ProductId);
-			builder.Property(t => t.ProductId).ValueGeneratedNever();
+			Id(t => t.OrderDetailsId).GeneratedBy.Increment();
 
 			#endregion
 
 			#region Constraints
 			
-			builder.Property(t => t.ProductId).IsRequired();
-			builder.Property(t => t.Publisher).HasMaxLength(200);
-			builder.Property(t => t.Publisher).IsRequired();
+			Map(t => t.OrderDetailsId).ReadOnly().Generated.Insert()
+			.Not.Nullable();
+			Map(t => t.OrderId)
+			.Not.Nullable();
+			Map(t => t.ProductId)
+			.Not.Nullable();
+			Map(t => t.UnitPrice)
+			.Precision(19).Scale(4)
+			.Nullable();
+			Map(t => t.Amount)
+			.Nullable();
+			Map(t => t.Discount)
+			.Nullable();
 			
 			#endregion
 
 			#region Relationships
 			
+			References(o => o.Order).Column("OrderId").Unique().Not.Insert().Not.Update();
+			References(o => o.Product).Column("ProductId").Unique().Not.Insert().Not.Update();
 			
-			#endregion	
-	    }
+			#endregion			
+	
+		}
 	}
 }

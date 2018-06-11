@@ -20,6 +20,7 @@
 
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration;
+using System.Data.Entity.Infrastructure.Annotations;
 using MySql.Data.EntityFramework;
 using RepositoryEFDotnet.Library;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -48,6 +49,10 @@ namespace Banking.Models.Context.Mappings.EF.MySql
 			Property(t => t.LicenseCode).HasMaxLength(200);
 			Property(t => t.LicenseCode).IsRequired();
 			
+			#endregion
+			
+			#region Indexes
+			Property(t => t.ProductId).HasColumnAnnotation("IX_ProductId", new IndexAnnotation(new [] { new IndexAttribute("IX_ProductId"){ IsClustered = false, IsUnique = false, Order = 0}}));
 			#endregion
 
 			#region Relationships

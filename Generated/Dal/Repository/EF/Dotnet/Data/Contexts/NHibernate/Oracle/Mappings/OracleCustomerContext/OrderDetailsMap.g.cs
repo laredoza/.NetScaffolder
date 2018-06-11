@@ -1,5 +1,5 @@
 ﻿
-// <copyright file="OrderMap.g.cs.g.cs" company="MIT">
+// <copyright file="OrderDetailsMap.g.cs.g.cs" company="MIT">
 //  Copyright (c) 2018 MIT
 // </copyright>  
 
@@ -17,53 +17,48 @@
 //	GENERATED CODE. DOT NOT MODIFY MANUALLY AS CHANGES CAN BE LOST!!!
 //	USE A PARTIAL CLASS INSTEAD
 // *******************************************************************
-
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using RepositoryEFDotnet.Contexts.EFCore;
-using System.Configuration;
-using System.ComponentModel.DataAnnotations.Schema;
 using Banking.Models.Entity;
-using System.Data.Common;
+using FluentNHibernate.Mapping;
 
-
-namespace Banking.Models.Mappings.MySql
+namespace Banking.Models.Customers.Mappings.NHibernate.Oracle
 {
-	public partial class OrderMap : IEntityTypeConfiguration<Order>
+	public partial class OrderDetailsMap : ClassMap<OrderDetails>
 	{	
-	    public void Configure(EntityTypeBuilder<Order> builder)
-	    {
-			builder.ToTable("Order");
+		public OrderDetailsMap ()
+		{
+			Table("OrderDetails");
 			
-			#region Primary keys
+			#region Primary Keys
 			
-			builder.HasKey(t => t.OrderId);
-			builder.Property(t => t.OrderId).ValueGeneratedOnAdd();
+			Id(t => t.OrderDetailsId).GeneratedBy.Increment();
 
 			#endregion
 
 			#region Constraints
 			
-			builder.Property(t => t.OrderId).IsRequired();
-			builder.Property(t => t.CustomerId).IsRequired(false);
-			builder.Property(t => t.OrderDate).IsRequired(false);
-			builder.Property(t => t.DeliveryDate).IsRequired(false);
-			builder.Property(t => t.ShippingName).HasMaxLength(50);
-			builder.Property(t => t.ShippingName).IsRequired(false);
-			builder.Property(t => t.ShippingAddress).HasMaxLength(50);
-			builder.Property(t => t.ShippingAddress).IsRequired(false);
-			builder.Property(t => t.ShippingCity).HasMaxLength(50);
-			builder.Property(t => t.ShippingCity).IsRequired(false);
-			builder.Property(t => t.ShippingZip).HasMaxLength(50);
-			builder.Property(t => t.ShippingZip).IsRequired(false);
+			Map(t => t.OrderDetailsId).ReadOnly().Generated.Insert()
+			.Not.Nullable();
+			Map(t => t.OrderId)
+			.Not.Nullable();
+			Map(t => t.ProductId)
+			.Not.Nullable();
+			Map(t => t.UnitPrice)
+			.Precision(19).Scale(4)
+			.Nullable();
+			Map(t => t.Amount)
+			.Nullable();
+			Map(t => t.Discount)
+			.Nullable();
 			
 			#endregion
 
 			#region Relationships
 			
-			builder.HasMany<OrderDetails>(s => s.OrderDetails).WithOne(s => s.Order).HasForeignKey(s => s.OrderId).OnDelete(DeleteBehavior.Restrict);
+			References(o => o.Order).Column("OrderId").Unique().Not.Insert().Not.Update();
+			References(o => o.Product).Column("ProductId").Unique().Not.Insert().Not.Update();
 			
-			#endregion	
-	    }
+			#endregion			
+	
+		}
 	}
 }

@@ -6,16 +6,12 @@
 
 namespace RepositoryEFDotnet.UnitTest
 {
+    using Banking.Models.Context.NHibernate;
+    using FluentNHibernate.Cfg.Db;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using RepositoryEFDotnet.UnitTest.Base;
     using System.Configuration;
     using System.Data.SqlClient;
-
-    using Banking.Models.Context.NHibernate;
-
-    using FluentNHibernate.Cfg.Db;
-
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-    using RepositoryEFDotnet.UnitTest.Base;
 
     /// <summary>
     /// The repository e f 6 in memory sql server unit test.
@@ -57,16 +53,66 @@ namespace RepositoryEFDotnet.UnitTest
             }
         }
 
+        [TestMethod]
+        public void RunAll()
+        {
+            using (var uow = new SqlServerFullContext(Config))
+            {
+                this.Country_Add(uow);
+            }
+
+            using (var uow = new SqlServerFullContext(Config))
+            {
+                this.Customer_Add(uow, 2, 1, 2);
+            }
+
+            using (var uow = new SqlServerFullContext(Config))
+            {
+                this.Product_Add(uow, 5, 1, 5);
+            }
+
+            using (var uow = new SqlServerFullContext(Config))
+            {
+                this.Book_Add(uow);
+            }
+
+            using (var uow = new SqlServerFullContext(Config))
+            {
+                this.Software_Add(uow, 1, 2);
+            }
+
+            using (var uow = new SqlServerFullContext(Config))
+            {
+                this.Order_Add(uow, 2, 1, 2);
+            }
+
+            using (var uow = new SqlServerFullContext(Config))
+            {
+                this.OrderDetails_Add(uow, 2, 1, 2);
+            }
+
+            using (var uow = new SqlServerFullContext(Config))
+            {
+                this.BankAccount_Add(uow, 2, 1, 2);
+            }
+
+            using (var uow = new SqlServerFullContext(Config))
+            {
+                this.BankTransfers_Add(uow);
+            }
+        }
+
         /// <summary>
         /// The init.
         /// </summary>
         [TestInitialize]
         public void Init()
         {
-            Context = new SqlServerFullContext(Config);
-
-            ((SqlServerFullContext)Context).DropSchema();
-            ((SqlServerFullContext)Context).CreateSchema();
+            using (var uow = new SqlServerFullContext(Config))
+            {
+                uow.DropSchema();
+                uow.CreateSchema();
+            }
         }
 
         #endregion

@@ -22,6 +22,8 @@ namespace RepositoryEFDotnet.UnitTest
     [TestClass]
     public class RepositoryDbEF6SqlServerUnitTests : BaseRepositoryUnitTest
     {
+        private static string DbConfig = "RepoTest";
+
         #region Public Methods And Operators
 
         /// <summary>
@@ -33,15 +35,65 @@ namespace RepositoryEFDotnet.UnitTest
         [ClassInitialize]
         public static void ClassInit(TestContext context)
         {
-            Context = new SqlServerFullContext("RepoTest");
-
-            if (Database.Exists("RepoTest"))
+            using (var uow = new SqlServerFullContext(DbConfig))
             {
-                Database.Delete("RepoTest");
+                if (Database.Exists(DbConfig))
+                {
+                    Database.Delete(DbConfig);
+                }
+
+                Database.SetInitializer(new CreateDatabaseIfNotExists<SqlServerFullContext>());
+                uow.Database.Initialize(true);
+            }
+        }
+
+        [TestMethod]
+        public void RunAll()
+        {
+            using (var uow = new SqlServerFullContext(DbConfig))
+            {
+                this.Country_Add(uow);
             }
 
-            Database.SetInitializer(new CreateDatabaseIfNotExists<SqlServerFullContext>());
-            ((SqlServerFullContext)Context).Database.Initialize(true);
+            using (var uow = new SqlServerFullContext(DbConfig))
+            {
+                this.Customer_Add(uow, 2, 1, 2);
+            }
+
+            using (var uow = new SqlServerFullContext(DbConfig))
+            {
+                this.Product_Add(uow, 5, 1, 5);
+            }
+
+            using (var uow = new SqlServerFullContext(DbConfig))
+            {
+                this.Book_Add(uow);
+            }
+
+            using (var uow = new SqlServerFullContext(DbConfig))
+            {
+                this.Software_Add(uow, 1, 2);
+            }
+
+            using (var uow = new SqlServerFullContext(DbConfig))
+            {
+                this.Order_Add(uow, 2, 1, 2);
+            }
+
+            using (var uow = new SqlServerFullContext(DbConfig))
+            {
+                this.OrderDetails_Add(uow, 2, 1, 2);
+            }
+
+            using (var uow = new SqlServerFullContext(DbConfig))
+            {
+                this.BankAccount_Add(uow, 2, 1, 2);
+            }
+
+            using (var uow = new SqlServerFullContext(DbConfig))
+            {
+                this.BankTransfers_Add(uow);
+            }
         }
 
         #endregion

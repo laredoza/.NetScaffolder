@@ -1,5 +1,5 @@
 ﻿
-// <copyright file="CountryMap.g.cs.g.cs" company="MIT">
+// <copyright file="BookMap.g.cs.g.cs" company="MIT">
 //  Copyright (c) 2018 MIT
 // </copyright>  
 
@@ -17,45 +17,39 @@
 //	GENERATED CODE. DOT NOT MODIFY MANUALLY AS CHANGES CAN BE LOST!!!
 //	USE A PARTIAL CLASS INSTEAD
 // *******************************************************************
-
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using RepositoryEFDotnet.Contexts.EFCore;
-using System.Configuration;
-using System.ComponentModel.DataAnnotations.Schema;
 using Banking.Models.Entity;
-using System.Data.Common;
+using FluentNHibernate.Mapping;
 
-
-namespace Banking.Models.Mappings.SqlServer
+namespace Banking.Models.Context.Mappings.NHibernate.Oracle
 {
-	public partial class CountryMap : IEntityTypeConfiguration<Country>
+	public partial class BookMap : ClassMap<Book>
 	{	
-	    public void Configure(EntityTypeBuilder<Country> builder)
-	    {
-			builder.ToTable("Country", "dbo");
+		public BookMap ()
+		{
+			Table("Book");
 			
-			#region Primary keys
+			#region Primary Keys
 			
-			builder.HasKey(t => t.CountryId);
-			builder.Property(t => t.CountryId).ValueGeneratedOnAdd();
+			Id(t => t.ProductId);
 
 			#endregion
 
 			#region Constraints
 			
-			builder.Property(t => t.CountryId).IsRequired();
-			builder.Property(t => t.CountryName).HasMaxLength(100);
-			builder.Property(t => t.CountryName).IsRequired(false);
+			Map(t => t.ProductId).ReadOnly().Generated.Insert()
+			.Not.Nullable();
+			Map(t => t.Publisher)
+			.Length(200)
+			.Not.Nullable();
 			
 			#endregion
 
 			#region Relationships
 			
-			builder.HasMany<Customer>(s => s.Customer).WithOne(s => s.Country).HasForeignKey(s => s.CountryId).OnDelete(DeleteBehavior.Restrict);
+			HasOne(s => s.Product).PropertyRef(o => o.ProductId);
 			
-			#endregion	
-	    }
+			#endregion			
+	
+		}
 	}
 }

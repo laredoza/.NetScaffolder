@@ -17,53 +17,52 @@
 //	GENERATED CODE. DOT NOT MODIFY MANUALLY AS CHANGES CAN BE LOST!!!
 //	USE A PARTIAL CLASS INSTEAD
 // *******************************************************************
-
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using RepositoryEFDotnet.Contexts.EFCore;
-using System.Configuration;
-using System.ComponentModel.DataAnnotations.Schema;
 using Banking.Models.Entity;
-using System.Data.Common;
+using FluentNHibernate.Mapping;
 
-
-namespace Banking.Models.Mappings.MySql
+namespace Banking.Models.Context.Mappings.NHibernate.Oracle
 {
-	public partial class ProductMap : IEntityTypeConfiguration<Product>
+	public partial class ProductMap : ClassMap<Product>
 	{	
-	    public void Configure(EntityTypeBuilder<Product> builder)
-	    {
-			builder.ToTable("Product");
+		public ProductMap ()
+		{
+			Table("Product");
 			
-			#region Primary keys
+			#region Primary Keys
 			
-			builder.HasKey(t => t.ProductId);
-			builder.Property(t => t.ProductId).ValueGeneratedOnAdd();
+			Id(t => t.ProductId).GeneratedBy.Increment();
 
 			#endregion
 
 			#region Constraints
 			
-			builder.Property(t => t.ProductId).IsRequired();
-			builder.Property(t => t.ProductDescription).HasMaxLength(100);
-			builder.Property(t => t.ProductDescription).IsRequired(false);
-			builder.Property(t => t.UnitPrice).IsRequired(false);
-			builder.Property(t => t.UnitPrice).HasColumnType("decimal(19, 4)");
-			builder.Property(t => t.UnitAmount).HasMaxLength(50);
-			builder.Property(t => t.UnitAmount).IsRequired(false);
-			builder.Property(t => t.Publisher).HasMaxLength(200);
-			builder.Property(t => t.Publisher).IsRequired(false);
-			builder.Property(t => t.AmountInStock).IsRequired(false);
+			Map(t => t.ProductId).ReadOnly().Generated.Insert()
+			.Not.Nullable();
+			Map(t => t.ProductDescription)
+			.Length(100)
+			.Nullable();
+			Map(t => t.UnitPrice)
+			.Precision(19).Scale(4)
+			.Nullable();
+			Map(t => t.UnitAmount)
+			.Length(50)
+			.Nullable();
+			Map(t => t.Publisher)
+			.Length(200)
+			.Nullable();
+			Map(t => t.AmountInStock)
+			.Nullable();
 			
 			#endregion
 
 			#region Relationships
 			
-			builder.HasOne<Book>(s => s.Book).WithOne(s => s.Product).OnDelete(DeleteBehavior.Restrict);
-			builder.HasMany<OrderDetails>(s => s.OrderDetails).WithOne(s => s.Product).HasForeignKey(s => s.ProductId).OnDelete(DeleteBehavior.Restrict);
-			builder.HasOne<Software>(s => s.Software).WithOne(s => s.Product).OnDelete(DeleteBehavior.Restrict);
+			HasOne(s => s.Book).PropertyRef(o => o.ProductId);
+			HasMany(s => s.OrderDetails).KeyColumn("ProductId");
+			HasOne(s => s.Software).PropertyRef(o => o.ProductId);
 			
-			#endregion	
-	    }
+			#endregion			
+	
+		}
 	}
 }

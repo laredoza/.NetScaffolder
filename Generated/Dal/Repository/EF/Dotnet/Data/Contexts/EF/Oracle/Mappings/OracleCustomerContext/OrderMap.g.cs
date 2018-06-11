@@ -20,6 +20,7 @@
 
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration;
+using System.Data.Entity.Infrastructure.Annotations;
 using Oracle.ManagedDataAccess.Client;
 using Oracle.Config;
 using RepositoryEFDotnet.Library;
@@ -58,6 +59,10 @@ namespace Banking.Models.Customers.Mappings.EF.Oracle
 			Property(t => t.ShippingZip).HasMaxLength(50);
 			Property(t => t.ShippingZip).IsOptional();
 			
+			#endregion
+			
+			#region Indexes
+			Property(t => t.CustomerId).HasColumnAnnotation("IX_CustomerId", new IndexAnnotation(new [] { new IndexAttribute("IX_CustomerId"){ IsClustered = false, IsUnique = false, Order = 0}}));
 			#endregion
 
 			#region Relationships

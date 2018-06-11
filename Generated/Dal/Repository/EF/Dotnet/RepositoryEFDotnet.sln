@@ -75,6 +75,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetScaffolder.Repository
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetScaffolder.Repository.UnitTests.Base", "RepositoryEFDotnet\Tests\Base\DotNetScaffolder.Repository.UnitTests.Base.csproj", "{63198DD0-0BD2-4321-8768-FF14303610AA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepositoryEFDotnet.Contexts.NHibernate.Oracle", "Data\Contexts\NHibernate\Oracle\RepositoryEFDotnet.Contexts.NHibernate.Oracle.csproj", "{5AC65642-4318-4E9B-BBB8-EA0FFDF4068D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -169,6 +171,10 @@ Global
 		{63198DD0-0BD2-4321-8768-FF14303610AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{63198DD0-0BD2-4321-8768-FF14303610AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{63198DD0-0BD2-4321-8768-FF14303610AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5AC65642-4318-4E9B-BBB8-EA0FFDF4068D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5AC65642-4318-4E9B-BBB8-EA0FFDF4068D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5AC65642-4318-4E9B-BBB8-EA0FFDF4068D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5AC65642-4318-4E9B-BBB8-EA0FFDF4068D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -205,6 +211,7 @@ Global
 		{BE950B5D-03D0-4F11-8A08-AE35C1EAE76D} = {23BCBB7F-56B2-4415-98BC-74F00E829053}
 		{858466F8-15BF-4061-B88E-7A4FA8E060FC} = {23BCBB7F-56B2-4415-98BC-74F00E829053}
 		{63198DD0-0BD2-4321-8768-FF14303610AA} = {23BCBB7F-56B2-4415-98BC-74F00E829053}
+		{5AC65642-4318-4E9B-BBB8-EA0FFDF4068D} = {59453B38-9D13-4A2B-B66D-F5686055C1FF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BAAA9DC0-A104-423F-8507-710C11070DF0}

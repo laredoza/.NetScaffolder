@@ -20,6 +20,7 @@
 
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration;
+using System.Data.Entity.Infrastructure.Annotations;
 using Oracle.ManagedDataAccess.Client;
 using Oracle.Config;
 using RepositoryEFDotnet.Library;
@@ -49,6 +50,9 @@ namespace Banking.Models.Customers.Mappings.EF.Oracle
 			Property(t => t.CountryName).HasMaxLength(100);
 			Property(t => t.CountryName).IsOptional();
 			
+			#endregion
+			
+			#region Indexes
 			#endregion
 
 			#region Relationships

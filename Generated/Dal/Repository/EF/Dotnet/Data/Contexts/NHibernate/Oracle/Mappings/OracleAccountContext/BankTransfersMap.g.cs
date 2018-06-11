@@ -1,5 +1,5 @@
 ﻿
-// <copyright file="BankAccountMap.g.cs.g.cs" company="MIT">
+// <copyright file="BankTransfersMap.g.cs.g.cs" company="MIT">
 //  Copyright (c) 2018 MIT
 // </copyright>  
 
@@ -17,49 +17,45 @@
 //	GENERATED CODE. DOT NOT MODIFY MANUALLY AS CHANGES CAN BE LOST!!!
 //	USE A PARTIAL CLASS INSTEAD
 // *******************************************************************
-
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using RepositoryEFDotnet.Contexts.EFCore;
-using System.Configuration;
-using System.ComponentModel.DataAnnotations.Schema;
 using Banking.Models.Entity;
-using System.Data.Common;
+using FluentNHibernate.Mapping;
 
-
-namespace Banking.Models.Mappings.SqlServer
+namespace Banking.Models.Accounts.Mappings.NHibernate.Oracle
 {
-	public partial class BankAccountMap : IEntityTypeConfiguration<BankAccount>
+	public partial class BankTransfersMap : ClassMap<BankTransfers>
 	{	
-	    public void Configure(EntityTypeBuilder<BankAccount> builder)
-	    {
-			builder.ToTable("BankAccount", "dbo");
+		public BankTransfersMap ()
+		{
+			Table("BankTransfers");
 			
-			#region Primary keys
+			#region Primary Keys
 			
-			builder.HasKey(t => t.BankAccountId);
-			builder.Property(t => t.BankAccountId).ValueGeneratedOnAdd();
+			Id(t => t.BankTransferId).GeneratedBy.Increment();
 
 			#endregion
 
 			#region Constraints
 			
-			builder.Property(t => t.BankAccountId).IsRequired();
-			builder.Property(t => t.BankAccountNumber).HasMaxLength(10);
-			builder.Property(t => t.BankAccountNumber).IsRequired();
-			builder.Property(t => t.Balance).IsRequired();
-			builder.Property(t => t.Balance).HasColumnType("decimal(19, 4)");
-			builder.Property(t => t.CustomerId).IsRequired(false);
-			builder.Property(t => t.Locked).IsRequired();
+			Map(t => t.BankTransferId).ReadOnly().Generated.Insert()
+			.Not.Nullable();
+			Map(t => t.FromBankAccountId)
+			.Not.Nullable();
+			Map(t => t.ToBankAccountId)
+			.Not.Nullable();
+			Map(t => t.Amount)
+			.Precision(18).Scale(2)
+			.Not.Nullable();
+			Map(t => t.TransferDate)
+			.Not.Nullable();
 			
 			#endregion
 
 			#region Relationships
 			
-			builder.HasMany<BankTransfers>(s => s.BankTransfers).WithOne(s => s.BankAccount).HasForeignKey(s => s.ToBankAccountId).OnDelete(DeleteBehavior.Restrict);
+			References(o => o.BankAccount).Column("BankAccountId").Unique().Not.Insert().Not.Update();
 			
-			#endregion	
-	    }
+			#endregion			
+	
+		}
 	}
 }

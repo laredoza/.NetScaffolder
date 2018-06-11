@@ -1,5 +1,5 @@
 ﻿
-// <copyright file="BookMap.g.cs.g.cs" company="MIT">
+// <copyright file="BankTransfersMap.g.cs.g.cs" company="MIT">
 //  Copyright (c) 2018 MIT
 // </copyright>  
 
@@ -17,43 +17,45 @@
 //	GENERATED CODE. DOT NOT MODIFY MANUALLY AS CHANGES CAN BE LOST!!!
 //	USE A PARTIAL CLASS INSTEAD
 // *******************************************************************
-
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using RepositoryEFDotnet.Contexts.EFCore;
-using System.Configuration;
-using System.ComponentModel.DataAnnotations.Schema;
 using Banking.Models.Entity;
-using System.Data.Common;
+using FluentNHibernate.Mapping;
 
-
-namespace Banking.Models.Mappings.MySql
+namespace Banking.Models.Context.Mappings.NHibernate.Oracle
 {
-	public partial class BookMap : IEntityTypeConfiguration<Book>
+	public partial class BankTransfersMap : ClassMap<BankTransfers>
 	{	
-	    public void Configure(EntityTypeBuilder<Book> builder)
-	    {
-			builder.ToTable("Book");
+		public BankTransfersMap ()
+		{
+			Table("BankTransfers");
 			
-			#region Primary keys
+			#region Primary Keys
 			
-			builder.HasKey(t => t.ProductId);
-			builder.Property(t => t.ProductId).ValueGeneratedNever();
+			Id(t => t.BankTransferId).GeneratedBy.Increment();
 
 			#endregion
 
 			#region Constraints
 			
-			builder.Property(t => t.ProductId).IsRequired();
-			builder.Property(t => t.Publisher).HasMaxLength(200);
-			builder.Property(t => t.Publisher).IsRequired();
+			Map(t => t.BankTransferId).ReadOnly().Generated.Insert()
+			.Not.Nullable();
+			Map(t => t.FromBankAccountId)
+			.Not.Nullable();
+			Map(t => t.ToBankAccountId)
+			.Not.Nullable();
+			Map(t => t.Amount)
+			.Precision(18).Scale(2)
+			.Not.Nullable();
+			Map(t => t.TransferDate)
+			.Not.Nullable();
 			
 			#endregion
 
 			#region Relationships
 			
+			References(o => o.BankAccount).Column("BankAccountId").Unique().Not.Insert().Not.Update();
 			
-			#endregion	
-	    }
+			#endregion			
+	
+		}
 	}
 }

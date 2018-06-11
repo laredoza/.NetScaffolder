@@ -8,8 +8,11 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EFCore
 {
     using System.Collections.Generic;
     using System.ComponentModel.Composition;
+    using System.Linq;
+    using System.Text;
 
     using DotNetScaffolder.Components.Common.Contract;
+    using DotNetScaffolder.Mapping.MetaData.Model;
 
     /// <summary>
     /// Defines the default EF Core Sql Server driver.
@@ -78,5 +81,34 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EFCore
         /// </summary>
         IDriverType IDriver.DriverType =>
             this.DriverType ?? (this.DriverType = new EFCoreDriverType("EFCoreDriverType.xml"));
+
+        public string TransformIndex(Index index)
+        {
+            var idxs = new StringBuilder("HasIndex(i => new {");
+            bool isClustered = index.IndexType == IndexType.Clustered;
+
+            if (index.Columns != null && index.Columns.Any())
+            {
+                for (int i = 0; i < index.Columns.Count; i++)
+                {
+                    if (i > 0)
+                    {
+                        idxs.Append(", ");
+                    }
+
+                    idxs.Append($"i.{index.Columns[i]}");
+                }
+            }
+
+            idxs.Append("})");
+            idxs.Append($".IsUnique({index.IsUnique.ToString().ToLower()})");
+
+            if (isClustered)
+            {
+                idxs.Append(".ForSqlServerIsClustered()");
+            }
+
+            return idxs.ToString();
+        }
     }
 }

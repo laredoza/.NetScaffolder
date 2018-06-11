@@ -17,54 +17,55 @@
 //	GENERATED CODE. DOT NOT MODIFY MANUALLY AS CHANGES CAN BE LOST!!!
 //	USE A PARTIAL CLASS INSTEAD
 // *******************************************************************
-
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using RepositoryEFDotnet.Contexts.EFCore;
-using System.Configuration;
-using System.ComponentModel.DataAnnotations.Schema;
 using Banking.Models.Entity;
-using System.Data.Common;
+using FluentNHibernate.Mapping;
 
-
-namespace Banking.Models.Mappings.SqlServer
+namespace Banking.Models.Customers.Mappings.NHibernate.Oracle
 {
-	public partial class OrderMap : IEntityTypeConfiguration<Order>
+	public partial class OrderMap : ClassMap<Order>
 	{	
-	    public void Configure(EntityTypeBuilder<Order> builder)
-	    {
-			builder.ToTable("Order", "dbo");
+		public OrderMap ()
+		{
+			Table("Order");
 			
-			#region Primary keys
+			#region Primary Keys
 			
-			builder.HasKey(t => t.OrderId);
-			builder.Property(t => t.OrderId).ValueGeneratedOnAdd();
+			Id(t => t.OrderId).GeneratedBy.Increment();
 
 			#endregion
 
 			#region Constraints
 			
-			builder.Property(t => t.OrderId).IsRequired();
-			builder.Property(t => t.CustomerId).IsRequired(false);
-			builder.Property(t => t.OrderDate).IsRequired(false);
-			builder.Property(t => t.DeliveryDate).IsRequired(false);
-			builder.Property(t => t.ShippingName).HasMaxLength(50);
-			builder.Property(t => t.ShippingName).IsRequired(false);
-			builder.Property(t => t.ShippingAddress).HasMaxLength(50);
-			builder.Property(t => t.ShippingAddress).IsRequired(false);
-			builder.Property(t => t.ShippingCity).HasMaxLength(50);
-			builder.Property(t => t.ShippingCity).IsRequired(false);
-			builder.Property(t => t.ShippingZip).HasMaxLength(50);
-			builder.Property(t => t.ShippingZip).IsRequired(false);
+			Map(t => t.OrderId).ReadOnly().Generated.Insert()
+			.Not.Nullable();
+			Map(t => t.CustomerId)
+			.Nullable();
+			Map(t => t.OrderDate)
+			.Nullable();
+			Map(t => t.DeliveryDate)
+			.Nullable();
+			Map(t => t.ShippingName)
+			.Length(50)
+			.Nullable();
+			Map(t => t.ShippingAddress)
+			.Length(50)
+			.Nullable();
+			Map(t => t.ShippingCity)
+			.Length(50)
+			.Nullable();
+			Map(t => t.ShippingZip)
+			.Length(50)
+			.Nullable();
 			
 			#endregion
 
 			#region Relationships
 			
-			builder.HasMany<OrderDetails>(s => s.OrderDetails).WithOne(s => s.Order).HasForeignKey(s => s.OrderId).OnDelete(DeleteBehavior.Restrict);
+			References(o => o.Customer).Column("CustomerId").Unique().Not.Insert().Not.Update();
+			HasMany(s => s.OrderDetails).KeyColumn("OrderId");
 			
-			#endregion	
-	    }
+			#endregion			
+	
+		}
 	}
 }

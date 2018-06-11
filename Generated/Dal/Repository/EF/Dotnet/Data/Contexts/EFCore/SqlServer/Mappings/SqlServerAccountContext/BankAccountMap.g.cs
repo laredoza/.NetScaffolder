@@ -55,6 +55,10 @@ namespace Banking.Models.Accounts.Mappings.EFCore.SqlServer
 			
 			#endregion
 
+			#region Indexes
+			builder.HasIndex(i => new {i.CustomerId}).IsUnique(false);
+			#endregion
+			
 			#region Relationships
 			
 			builder.HasMany<BankTransfers>(s => s.BankTransfers).WithOne(s => s.BankAccount).HasForeignKey(s => s.ToBankAccountId).OnDelete(DeleteBehavior.Restrict);

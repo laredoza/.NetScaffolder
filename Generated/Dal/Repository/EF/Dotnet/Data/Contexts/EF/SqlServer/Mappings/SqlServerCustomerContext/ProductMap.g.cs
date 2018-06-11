@@ -20,6 +20,7 @@
 
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration;
+using System.Data.Entity.Infrastructure.Annotations;
 using RepositoryEFDotnet.Library;
 using System.ComponentModel.DataAnnotations.Schema;
 using Banking.Models.Entity;
@@ -54,6 +55,9 @@ namespace Banking.Models.Customers.Mappings.EF.SqlServer
 			Property(t => t.Publisher).IsOptional();
 			Property(t => t.AmountInStock).IsOptional();
 			
+			#endregion
+			
+			#region Indexes
 			#endregion
 
 			#region Relationships

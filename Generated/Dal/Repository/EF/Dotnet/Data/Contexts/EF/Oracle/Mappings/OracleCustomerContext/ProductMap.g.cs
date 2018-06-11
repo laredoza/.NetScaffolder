@@ -20,6 +20,7 @@
 
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration;
+using System.Data.Entity.Infrastructure.Annotations;
 using Oracle.ManagedDataAccess.Client;
 using Oracle.Config;
 using RepositoryEFDotnet.Library;
@@ -56,6 +57,9 @@ namespace Banking.Models.Customers.Mappings.EF.Oracle
 			Property(t => t.Publisher).IsOptional();
 			Property(t => t.AmountInStock).IsOptional();
 			
+			#endregion
+			
+			#region Indexes
 			#endregion
 
 			#region Relationships

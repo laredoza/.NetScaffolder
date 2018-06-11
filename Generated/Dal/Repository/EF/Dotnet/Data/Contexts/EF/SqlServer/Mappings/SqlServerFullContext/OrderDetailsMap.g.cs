@@ -20,6 +20,7 @@
 
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration;
+using System.Data.Entity.Infrastructure.Annotations;
 using RepositoryEFDotnet.Library;
 using System.ComponentModel.DataAnnotations.Schema;
 using Banking.Models.Entity;
@@ -51,6 +52,11 @@ namespace Banking.Models.Context.Mappings.EF.SqlServer
 			Property(t => t.Amount).IsOptional();
 			Property(t => t.Discount).IsOptional();
 			
+			#endregion
+			
+			#region Indexes
+			Property(t => t.OrderId).HasColumnAnnotation("IX_OrderId", new IndexAnnotation(new [] { new IndexAttribute("IX_OrderId"){ IsClustered = false, IsUnique = false, Order = 0}}));
+			Property(t => t.ProductId).HasColumnAnnotation("IX_ProductId", new IndexAnnotation(new [] { new IndexAttribute("IX_ProductId"){ IsClustered = false, IsUnique = false, Order = 0}}));
 			#endregion
 
 			#region Relationships

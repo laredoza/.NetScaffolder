@@ -30,12 +30,6 @@ namespace RepositoryEFDotnet.UnitTest.Base
 	[TestClass]
 	public abstract partial class BaseRepositoryUnitTest : BaseUnitTest
 	{
-        #region Privates
-
-        protected static IUnitOfWork Context = null;
-
-        #endregion
-
 		#region Public
 		
 		protected bool UseTransactions { get; set; } = true;
@@ -43,55 +37,23 @@ namespace RepositoryEFDotnet.UnitTest.Base
 		#endregion
 		
         #region Tests
-
-        [TestMethod]
-        public void RunAll()
-        {
-			// Rollback Tests
-			Country_Rollback();
-			Customer_Rollback();
-			Product_Rollback();
-			BankAccount_Rollback();
-
-			// Add tests
-			Country_Add();
-			Customer_Add(1,2,1);
-			Product_Add(5, 2, 5);
-			Book_Add(1, 2, 1);
-			Software_Add(1, 3, 1);
-			Order_Add(2, 1, 2);
-			OrderDetails_Add(2, 1, 2);
-			BankAccount_Add(2, 2, 2);
-			BankTransfers_Add(1, 2, 1);
-			
-			// Dependent rollback tests
-			Book_Rollback(1, 4, 1);
-			Software_Rollback(1, 5, 1);
-			Order_Rollback(1, 3, 2);
-			OrderDetails_Rollback(1, 2, 2);
-			BankTransfers_Rollback(1, 2, 1);
-			
-<#+ foreach(var mdl in Models){ #>
-
-			//<#= mdl.TableName #>_LoadAll();
-			//<#= mdl.TableName #>_Search();
-			//<#= mdl.TableName #>_Update();
-			//<#= mdl.TableName #>_Delete();
-<#+ } #>
-        }
 		
 <#+ foreach(var mdl in Models){ #>
 
-        public void <#= mdl.TableName #>_Add(int count = 1, int startSeed = 1, int expected = 1)
+        public void <#= mdl.TableName #>_Add(IUnitOfWork uow, int count = 1, int startSeed = 1, int expected = 1)
         {
-            var repo = new <#= mdl.TableName #>Repository(Context);
-            BaseRepositoryUnitTest_<#= mdl.TableName #>_AddRange(repo, count, startSeed, expected);
-        }
-		
-        public void <#= mdl.TableName #>_Rollback(int count = 1, int startSeed = 1, int expected = 0)
-        {
-            var repo = new <#= mdl.TableName #>Repository(Context);
-            BaseRepositoryUnitTest_<#= mdl.TableName #>_AddRange(repo, count, startSeed, expected, true);
+            var repo = new <#= mdl.TableName #>Repository(uow);
+			
+			if(UseTransactions)
+			{
+				uow.StartTransaction();
+			}
+			
+            var list = BaseRepositoryUnitTest_<#= mdl.TableName #>_AddRange(repo, count, startSeed);
+			
+			uow.Commit();
+			
+			BaseRepositoryUnitTest_<#= mdl.TableName #>_CheckData(repo, list, expected);
         }
 <#+ } #>
 
@@ -101,16 +63,10 @@ namespace RepositoryEFDotnet.UnitTest.Base
 <#+ foreach(var mdl in Models){ 
 var pk = mdl.Columns.First(o => o.IsPrimaryKey);
 #>
-
-        protected virtual void BaseRepositoryUnitTest_<#= mdl.TableName #>_AddRange(I<#= mdl.TableName #>Repository repository, int count = 1, int startSeed = 1, int expected = 1, bool rollback = false)
+        protected virtual List<I<#= mdl.TableName #>> BaseRepositoryUnitTest_<#= mdl.TableName #>_AddRange(I<#= mdl.TableName #>Repository repository, int count = 1, int startSeed = 1)
         {		
             var list = new List<I<#= mdl.TableName #>>();
             var seed = startSeed;
-			
-			if(UseTransactions)
-			{
-				Context.StartTransaction();
-			}
 			
             for (var index = 1; index <= count; index++)
             {
@@ -120,40 +76,23 @@ var pk = mdl.Columns.First(o => o.IsPrimaryKey);
 				repository.Save(dto);
                 seed++;
             }
-
-            if (!rollback)
-            {
-                Context.Commit();
-            }
-            else
-            {
-                Context.Rollback();
-            }
-
-            var items = repository.LoadAll();
+			
+			return list;
+        }
+		
+		protected virtual void BaseRepositoryUnitTest_<#= mdl.TableName #>_CheckData(I<#= mdl.TableName #>Repository repository, List<I<#= mdl.TableName #>> list, int expected)
+		{
+			var items = repository.LoadAll();
             this.Check_EntityCount(expected, items.Count(), "Incorrect number of <#= mdl.TableName #> found");
 
-			if(!rollback)
+			foreach (var item in list)
 			{
-				foreach (var item in list)
-				{
-					this.Check_<#= mdl.TableName #>(item, items.FirstOrDefault(o => o.<#= pk.ColumnName #> == item.<#= pk.ColumnName #>));
-				}
+				this.Check_<#= mdl.TableName #>(item, items.FirstOrDefault(o => o.<#= pk.ColumnName #> == item.<#= pk.ColumnName #>));
 			}
-        }
+		}
 <#+ } #>
 
 		#endregion
-		
-        #region Cleanup
-
-        [ClassCleanup]
-        public virtual void ClassCleanup()
-        {
-            Context?.Dispose();
-        }
-
-        #endregion
 	}
 }
 <#+

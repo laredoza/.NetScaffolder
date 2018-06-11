@@ -25,7 +25,10 @@ namespace DotNetScaffolder.Components.Common
         {
             var output = MapToOutput(col, false);
 
-            if (col.Precision > 0 || col.Scale > 0) output = $"{output}({col.Precision}, {col.Scale})";
+            if (col.Precision > 0 || col.Scale > 0)
+            {
+                output = $"{output}({col.Precision}, {col.Scale})";
+            }
 
             return output;
         }
@@ -36,7 +39,9 @@ namespace DotNetScaffolder.Components.Common
 
             if (!nullable) nullableFormat = "{0}";
 
-            switch (col.DomainDataType)
+            var dbType = col.RemapDataType ?? col.DomainDataType;
+
+            switch (dbType)
             {
                 case DomainDataType.Int16:
                     return col.IsRequired ? "short" : string.Format(nullableFormat, "short");

@@ -53,16 +53,67 @@ namespace RepositoryEFDotnet.UnitTest
             }
         }
 
+
+        [TestMethod]
+        public void RunAll()
+        {
+            using (var uow = new MySqlFullContext(Config))
+            {
+                this.Country_Add(uow);
+            }
+
+            using (var uow = new MySqlFullContext(Config))
+            {
+                this.Customer_Add(uow, 2, 1, 2);
+            }
+
+            using (var uow = new MySqlFullContext(Config))
+            {
+                this.Product_Add(uow, 5, 1, 5);
+            }
+
+            using (var uow = new MySqlFullContext(Config))
+            {
+                this.Book_Add(uow);
+            }
+
+            using (var uow = new MySqlFullContext(Config))
+            {
+                this.Software_Add(uow, 1, 2);
+            }
+
+            using (var uow = new MySqlFullContext(Config))
+            {
+                this.Order_Add(uow, 2, 1, 2);
+            }
+
+            using (var uow = new MySqlFullContext(Config))
+            {
+                this.OrderDetails_Add(uow, 2, 1, 2);
+            }
+
+            using (var uow = new MySqlFullContext(Config))
+            {
+                this.BankAccount_Add(uow, 2, 1, 2);
+            }
+
+            using (var uow = new MySqlFullContext(Config))
+            {
+                this.BankTransfers_Add(uow);
+            }
+        }
+
         /// <summary>
         /// The init.
         /// </summary>
         [TestInitialize]
         public void Init()
         {
-            Context = new MySqlFullContext(Config);
-
-            ((MySqlFullContext)Context).DropSchema();
-            ((MySqlFullContext)Context).CreateSchema();
+            using (var uow = new MySqlFullContext(Config))
+            {
+                uow.DropSchema();
+                uow.CreateSchema();
+            }
         }
 
         #endregion

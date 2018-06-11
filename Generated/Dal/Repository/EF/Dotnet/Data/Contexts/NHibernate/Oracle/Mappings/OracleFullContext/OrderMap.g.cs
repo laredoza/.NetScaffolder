@@ -1,5 +1,5 @@
 ﻿
-// <copyright file="SoftwareMap.g.cs.g.cs" company="MIT">
+// <copyright file="OrderMap.g.cs.g.cs" company="MIT">
 //  Copyright (c) 2018 MIT
 // </copyright>  
 
@@ -17,43 +17,55 @@
 //	GENERATED CODE. DOT NOT MODIFY MANUALLY AS CHANGES CAN BE LOST!!!
 //	USE A PARTIAL CLASS INSTEAD
 // *******************************************************************
-
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using RepositoryEFDotnet.Contexts.EFCore;
-using System.Configuration;
-using System.ComponentModel.DataAnnotations.Schema;
 using Banking.Models.Entity;
-using System.Data.Common;
+using FluentNHibernate.Mapping;
 
-
-namespace Banking.Models.Mappings.MySql
+namespace Banking.Models.Context.Mappings.NHibernate.Oracle
 {
-	public partial class SoftwareMap : IEntityTypeConfiguration<Software>
+	public partial class OrderMap : ClassMap<Order>
 	{	
-	    public void Configure(EntityTypeBuilder<Software> builder)
-	    {
-			builder.ToTable("Software");
+		public OrderMap ()
+		{
+			Table("Order");
 			
-			#region Primary keys
+			#region Primary Keys
 			
-			builder.HasKey(t => t.ProductId);
-			builder.Property(t => t.ProductId).ValueGeneratedNever();
+			Id(t => t.OrderId).GeneratedBy.Increment();
 
 			#endregion
 
 			#region Constraints
 			
-			builder.Property(t => t.ProductId).IsRequired();
-			builder.Property(t => t.LicenseCode).HasMaxLength(200);
-			builder.Property(t => t.LicenseCode).IsRequired();
+			Map(t => t.OrderId).ReadOnly().Generated.Insert()
+			.Not.Nullable();
+			Map(t => t.CustomerId)
+			.Nullable();
+			Map(t => t.OrderDate)
+			.Nullable();
+			Map(t => t.DeliveryDate)
+			.Nullable();
+			Map(t => t.ShippingName)
+			.Length(50)
+			.Nullable();
+			Map(t => t.ShippingAddress)
+			.Length(50)
+			.Nullable();
+			Map(t => t.ShippingCity)
+			.Length(50)
+			.Nullable();
+			Map(t => t.ShippingZip)
+			.Length(50)
+			.Nullable();
 			
 			#endregion
 
 			#region Relationships
 			
+			References(o => o.Customer).Column("CustomerId").Unique().Not.Insert().Not.Update();
+			HasMany(s => s.OrderDetails).KeyColumn("OrderId");
 			
-			#endregion	
-	    }
+			#endregion			
+	
+		}
 	}
 }

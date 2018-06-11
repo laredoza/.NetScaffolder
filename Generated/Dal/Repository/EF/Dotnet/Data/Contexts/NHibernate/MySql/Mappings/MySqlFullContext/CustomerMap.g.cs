@@ -68,7 +68,6 @@ namespace Banking.Models.Context.Mappings.NHibernate.MySql
 			Map(t => t.CountryId)
 			.Nullable();
 			Map(t => t.Photo)
-			.Length(2147483647)
 			.Nullable();
 			Map(t => t.IsEnabled)
 			.Not.Nullable();
@@ -77,8 +76,8 @@ namespace Banking.Models.Context.Mappings.NHibernate.MySql
 
 			#region Relationships
 			
-			HasMany(s => s.BankAccount).KeyColumn("CustomerId");
 			References(o => o.Country).Column("CountryId").Unique().Not.Insert().Not.Update();
+			HasMany(s => s.BankAccount).KeyColumn("CustomerId");
 			HasMany(s => s.Order).KeyColumn("CustomerId");
 			
 			#endregion			

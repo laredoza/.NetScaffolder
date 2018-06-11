@@ -20,6 +20,7 @@
 
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration;
+using System.Data.Entity.Infrastructure.Annotations;
 using MySql.Data.EntityFramework;
 using RepositoryEFDotnet.Library;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -55,6 +56,9 @@ namespace Banking.Models.Customers.Mappings.EF.MySql
 			Property(t => t.Publisher).IsOptional();
 			Property(t => t.AmountInStock).IsOptional();
 			
+			#endregion
+			
+			#region Indexes
 			#endregion
 
 			#region Relationships

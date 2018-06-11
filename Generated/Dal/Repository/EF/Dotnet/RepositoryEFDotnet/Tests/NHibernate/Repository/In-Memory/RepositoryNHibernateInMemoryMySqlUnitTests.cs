@@ -41,16 +41,53 @@ namespace RepositoryEFDotnet.UnitTest
 
         #region Public Methods And Operators
 
-        /// <summary>
-        /// The class init.
-        /// </summary>
-        /// <param name="context">
-        /// The context.
-        /// </param>
-        [TestInitialize]
-        public void Init()
+        [TestMethod]
+        public void RunAll()
         {
-            Context = new MySqlFullContext(Configuration);
+            using (var uow = new MySqlFullContext(Configuration))
+            {
+                this.Country_Add(uow);
+            }
+
+            using (var uow = new MySqlFullContext(Configuration))
+            {
+                this.Customer_Add(uow, 2, 1, 2);
+            }
+
+            using (var uow = new MySqlFullContext(Configuration))
+            {
+                this.Product_Add(uow, 5, 1, 5);
+            }
+
+            using (var uow = new MySqlFullContext(Configuration))
+            {
+                this.Book_Add(uow);
+            }
+
+            using (var uow = new MySqlFullContext(Configuration))
+            {
+                this.Software_Add(uow, 1, 2);
+            }
+
+            using (var uow = new MySqlFullContext(Configuration))
+            {
+                this.Order_Add(uow, 2, 1, 2);
+            }
+
+            using (var uow = new MySqlFullContext(Configuration))
+            {
+                this.OrderDetails_Add(uow, 2, 1, 2);
+            }
+
+            using (var uow = new MySqlFullContext(Configuration))
+            {
+                this.BankAccount_Add(uow, 2, 1, 2);
+            }
+
+            using (var uow = new MySqlFullContext(Configuration))
+            {
+                this.BankTransfers_Add(uow);
+            }
         }
 
         #endregion
@@ -58,8 +95,6 @@ namespace RepositoryEFDotnet.UnitTest
         [ClassCleanup]
         public static void Cleanup()
         {
-            Context?.Dispose();
-            Context = null;
             Configuration = null;
             OpenContext?.Dispose();
             OpenContext = null;

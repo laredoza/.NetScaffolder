@@ -6,6 +6,8 @@
 
 namespace RepositoryEFDotnet.UnitTest
 {
+    using System.Runtime.CompilerServices;
+
     using Banking.Models.Context.EFCore;
 
     using Microsoft.EntityFrameworkCore;
@@ -19,6 +21,9 @@ namespace RepositoryEFDotnet.UnitTest
     [TestClass]
     public class RepositoryEFCoreInMemorySqlServerUnitTest : BaseRepositoryUnitTest
     {
+        private static string DbId = "EFCORE_SqlServer";
+        private static DbContextOptions<SqlServerFullContext> Options;
+
         #region Public Methods And Operators
 
         /// <summary>
@@ -30,17 +35,67 @@ namespace RepositoryEFDotnet.UnitTest
         [ClassInitialize]
         public static void ClassInit(TestContext context)
         {
-            var options = new DbContextOptionsBuilder<SqlServerFullContext>().UseInMemoryDatabase("EFCORE_SqlServer")
-                .Options;
-            Context = new SqlServerFullContext(options);
+            Options = new DbContextOptionsBuilder<SqlServerFullContext>().UseInMemoryDatabase("EFCORE_SqlServer").Options;
 
-            ((SqlServerFullContext)Context).Database.EnsureCreated();
+            using (var uow = new SqlServerFullContext(Options))
+            {
+                uow.Database.EnsureCreated();
+            }
         }
 
         [TestInitialize]
         public void DisableTransactions()
         {
             this.UseTransactions = false;
+        }
+
+        [TestMethod]
+        public void RunAll()
+        {
+            using (var uow = new SqlServerFullContext(Options))
+            {
+                this.Country_Add(uow);
+            }
+
+            using (var uow = new SqlServerFullContext(Options))
+            {
+                this.Customer_Add(uow, 2, 1, 2);
+            }
+
+            using (var uow = new SqlServerFullContext(Options))
+            {
+                this.Product_Add(uow, 5, 1, 5);
+            }
+
+            using (var uow = new SqlServerFullContext(Options))
+            {
+                this.Book_Add(uow);
+            }
+
+            using (var uow = new SqlServerFullContext(Options))
+            {
+                this.Software_Add(uow, 1, 2);
+            }
+
+            using (var uow = new SqlServerFullContext(Options))
+            {
+                this.Order_Add(uow, 2, 1, 2);
+            }
+
+            using (var uow = new SqlServerFullContext(Options))
+            {
+                this.OrderDetails_Add(uow, 2, 1, 2);
+            }
+
+            using (var uow = new SqlServerFullContext(Options))
+            {
+                this.BankAccount_Add(uow, 2, 1, 2);
+            }
+
+            using (var uow = new SqlServerFullContext(Options))
+            {
+                this.BankTransfers_Add(uow);
+            }
         }
 
         #endregion

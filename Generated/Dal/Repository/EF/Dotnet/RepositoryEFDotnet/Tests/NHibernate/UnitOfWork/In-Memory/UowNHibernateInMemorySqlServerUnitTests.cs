@@ -40,7 +40,7 @@ namespace RepositoryEFDotnet.UnitTest
         #endregion
 
         [ClassInitialize]
-        public static void TestInit(TestContext tstContext)
+        public static void Init(TestContext tstContext)
         {
             Configuration = Fluently.Configure().Database(MsSqliteConfiguration.Standard.ConnectionString("Data Source=:memory:;cache=shared;mode=memory")).Mappings(
                 o => o.FluentMappings
@@ -60,9 +60,109 @@ namespace RepositoryEFDotnet.UnitTest
         [TestMethod]
         public override void RunAll()
         {
-            using (var context = new SqlServerFullContext(Configuration))
+            using (var uow = new SqlServerFullContext(Configuration))
             {
-                this.BaseUnitOfWorkUnitTests_BankAccount_RunAll(context);
+                this.BaseUnitOfWorkUnitTests_BankAccount_Add(uow);
+            }
+
+            using (var uow = new SqlServerFullContext(Configuration))
+            {
+                this.BaseUnitOfWorkUnitTests_BankAccount_Get(uow);
+            }
+
+            using (var uow = new SqlServerFullContext(Configuration))
+            {
+                this.BaseUnitOfWorkUnitTests_BankAccount_Any(uow);
+            }
+
+            using (var uow = new SqlServerFullContext(Configuration))
+            {
+                this.BaseUnitOfWorkUnitTests_BankAccount_Any_WithFilter(uow);
+            }
+
+            using (var uow = new SqlServerFullContext(Configuration))
+            {
+                this.BaseUnitOfWorkUnitTests_BankAccount_Any_WithFilter_NothingFound(uow);
+            }
+
+            using (var uow = new SqlServerFullContext(Configuration))
+            {
+                this.BaseUnitOfWorkUnitTests_BankAccount_FirstOrDefault(uow);
+            }
+
+            using (var uow = new SqlServerFullContext(Configuration))
+            {
+                this.BaseUnitOfWorkUnitTests_BankAccount_FirstOrDefault_WithFilter(uow);
+            }
+
+            using (var uow = new SqlServerFullContext(Configuration))
+            {
+                this.BaseUnitOfWorkUnitTests_BankAccount_FirstOrDefault_WithFilter_NothingFound(uow);
+            }
+
+            using (var uow = new SqlServerFullContext(Configuration))
+            {
+                this.BaseUnitOfWorkUnitTests_BankAccount_Modify(uow);
+            }
+
+            using (var uow = new SqlServerFullContext(Configuration))
+            {
+                this.BaseUnitOfWorkUnitTests_BankAccount_Remove(uow);
+            }
+
+            using (var uow = new SqlServerFullContext(Configuration))
+            {
+                this.BaseUnitOfWorkUnitTests_BankAccount_GetAll_NothingFound(uow);
+            }
+
+            using (var uow = new SqlServerFullContext(Configuration))
+            {
+                this.BaseUnitOfWorkUnitTests_BankAccount_Any_NothingFound(uow);
+            }
+
+            using (var uow = new SqlServerFullContext(Configuration))
+            {
+                this.BaseUnitOfWorkUnitTests_BankAccount_FirstOrDefault_NothingFound(uow);
+            }
+
+            using (var uow = new SqlServerFullContext(Configuration))
+            {
+                this.BaseUnitOfWorkUnitTests_BankAccount_AddRange(uow, 100);
+            }
+
+            using (var uow = new SqlServerFullContext(Configuration))
+            {
+                this.BaseUnitOfWorkUnitTests_BankAccount_GetAll(uow);
+            }
+
+            using (var uow = new SqlServerFullContext(Configuration))
+            {
+                this.BaseUnitOfWorkUnitTests_BankAccount_AllMatching(uow, 50);
+            }
+
+            using (var uow = new SqlServerFullContext(Configuration))
+            {
+                this.BaseUnitOfWorkUnitTests_BankAccount_AllMatching_NothingFound(uow);
+            }
+
+            using (var uow = new SqlServerFullContext(Configuration))
+            {
+                this.BaseUnitOfWorkUnitTests_BankAccount_GetAllPaged(uow);
+            }
+
+            using (var uow = new SqlServerFullContext(Configuration))
+            {
+                this.BaseUnitOfWorkUnitTests_BankAccount_Max(uow, 100);
+            }
+
+            using (var uow = new SqlServerFullContext(Configuration))
+            {
+                this.BaseUnitOfWorkUnitTests_BankAccount_RemoveRange(uow);
+            }
+
+            using (var uow = new SqlServerFullContext(Configuration))
+            {
+                this.BaseUnitOfWorkUnitTests_BankAccount_Rollback(uow);
             }
         }
 
@@ -75,10 +175,59 @@ namespace RepositoryEFDotnet.UnitTest
         [TestMethod]
         public override async Task RunAllAsync()
         {
-            using (var context = new SqlServerFullContext(Configuration))
+            using (var uow = new SqlServerFullContext(Configuration))
             {
-                context.CreateSchema();
-                await this.BaseUnitOfWorkUnitTests_BankAccount_RunAllAsync(context);
+                await this.BaseUnitOfWorkUnitTests_BankAccount_AddAsync(uow);
+            }
+
+            using (var uow = new SqlServerFullContext(Configuration))
+            {
+                await this.BaseUnitOfWorkUnitTests_BankAccount_GetAsync(uow);
+            }
+
+            using (var uow = new SqlServerFullContext(Configuration))
+            {
+                await this.BaseUnitOfWorkUnitTests_BankAccount_AnyAsync(uow);
+            }
+
+            using (var uow = new SqlServerFullContext(Configuration))
+            {
+                await this.BaseUnitOfWorkUnitTests_BankAccount_FirstOrDefaultAsync(uow);
+            }
+
+            using (var uow = new SqlServerFullContext(Configuration))
+            {
+                await this.BaseUnitOfWorkUnitTests_BankAccount_RemoveAsync(uow);
+            }
+
+            using (var uow = new SqlServerFullContext(Configuration))
+            {
+                await this.BaseUnitOfWorkUnitTests_BankAccount_AddRangeAsync(uow, 100);
+            }
+
+            using (var uow = new SqlServerFullContext(Configuration))
+            {
+                await this.BaseUnitOfWorkUnitTests_BankAccount_GetAllAsync(uow);
+            }
+
+            using (var uow = new SqlServerFullContext(Configuration))
+            {
+                await this.BaseUnitOfWorkUnitTests_BankAccount_AllMatchingAsync(uow, 50);
+            }
+
+            using (var uow = new SqlServerFullContext(Configuration))
+            {
+                await this.BaseUnitOfWorkUnitTests_BankAccount_MaxAsync(uow, 100);
+            }
+
+            using (var uow = new SqlServerFullContext(Configuration))
+            {
+                await this.BaseUnitOfWorkUnitTests_BankAccount_RemoveRangeAsync(uow);
+            }
+
+            using (var uow = new SqlServerFullContext(Configuration))
+            {
+                await this.BaseUnitOfWorkUnitTests_BankAccount_RollbackAsync(uow);
             }
         }
 

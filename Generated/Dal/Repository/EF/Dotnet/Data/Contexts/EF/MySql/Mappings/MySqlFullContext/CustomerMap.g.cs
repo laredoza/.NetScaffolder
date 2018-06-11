@@ -20,6 +20,7 @@
 
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration;
+using System.Data.Entity.Infrastructure.Annotations;
 using MySql.Data.EntityFramework;
 using RepositoryEFDotnet.Library;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -64,16 +65,19 @@ namespace Banking.Models.Context.Mappings.EF.MySql
 			Property(t => t.Fax).HasMaxLength(50);
 			Property(t => t.Fax).IsOptional();
 			Property(t => t.CountryId).IsOptional();
-			Property(t => t.Photo).HasMaxLength(2147483647);
 			Property(t => t.Photo).IsOptional();
 			Property(t => t.IsEnabled).IsRequired();
 			
 			#endregion
+			
+			#region Indexes
+			Property(t => t.CountryId).HasColumnAnnotation("IX_CountryId", new IndexAnnotation(new [] { new IndexAttribute("IX_CountryId"){ IsClustered = false, IsUnique = false, Order = 0}}));
+			#endregion
 
 			#region Relationships
 			
-			HasMany<BankAccount>(s => s.BankAccount).WithOptional(s => s.Customer).HasForeignKey(s => s.CustomerId).WillCascadeOnDelete(false);
 			HasOptional<Country>(s => s.Country).WithMany(s => s.Customer).HasForeignKey(s => s.CountryId).WillCascadeOnDelete(false);
+			HasMany<BankAccount>(s => s.BankAccount).WithOptional(s => s.Customer).HasForeignKey(s => s.CustomerId).WillCascadeOnDelete(false);
 			HasMany<Order>(s => s.Order).WithOptional(s => s.Customer).HasForeignKey(s => s.CustomerId).WillCascadeOnDelete(false);
 			
 			#endregion			

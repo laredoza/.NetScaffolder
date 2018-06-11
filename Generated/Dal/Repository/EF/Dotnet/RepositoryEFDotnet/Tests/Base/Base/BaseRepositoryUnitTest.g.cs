@@ -31,12 +31,6 @@ namespace RepositoryEFDotnet.UnitTest.Base
 	[TestClass]
 	public abstract partial class BaseRepositoryUnitTest : BaseUnitTest
 	{
-        #region Privates
-
-        protected static IUnitOfWork Context = null;
-
-        #endregion
-
 		#region Public
 		
 		protected bool UseTransactions { get; set; } = true;
@@ -44,203 +38,159 @@ namespace RepositoryEFDotnet.UnitTest.Base
 		#endregion
 		
         #region Tests
+		
 
-        [TestMethod]
-        public void RunAll()
+        public void BankAccount_Add(IUnitOfWork uow, int count = 1, int startSeed = 1, int expected = 1)
         {
-			// Rollback Tests
-			Country_Rollback();
-			Customer_Rollback();
-			Product_Rollback();
-			BankAccount_Rollback();
-
-			// Add tests
-			Country_Add();
-			Customer_Add(1,2,1);
-			Product_Add(5, 2, 5);
-			Book_Add(1, 2, 1);
-			Software_Add(1, 3, 1);
-			Order_Add(2, 1, 2);
-			OrderDetails_Add(2, 1, 2);
-			BankAccount_Add(2, 2, 2);
-			BankTransfers_Add(1, 2, 1);
+            var repo = new BankAccountRepository(uow);
 			
-			// Dependent rollback tests
-			Book_Rollback(1, 4, 1);
-			Software_Rollback(1, 5, 1);
-			Order_Rollback(1, 3, 2);
-			OrderDetails_Rollback(1, 2, 2);
-			BankTransfers_Rollback(1, 2, 1);
+			if(UseTransactions)
+			{
+				uow.StartTransaction();
+			}
 			
-
-			//BankAccount_LoadAll();
-			//BankAccount_Search();
-			//BankAccount_Update();
-			//BankAccount_Delete();
-
-			//BankTransfers_LoadAll();
-			//BankTransfers_Search();
-			//BankTransfers_Update();
-			//BankTransfers_Delete();
-
-			//Book_LoadAll();
-			//Book_Search();
-			//Book_Update();
-			//Book_Delete();
-
-			//Country_LoadAll();
-			//Country_Search();
-			//Country_Update();
-			//Country_Delete();
-
-			//Customer_LoadAll();
-			//Customer_Search();
-			//Customer_Update();
-			//Customer_Delete();
-
-			//Order_LoadAll();
-			//Order_Search();
-			//Order_Update();
-			//Order_Delete();
-
-			//OrderDetails_LoadAll();
-			//OrderDetails_Search();
-			//OrderDetails_Update();
-			//OrderDetails_Delete();
-
-			//Product_LoadAll();
-			//Product_Search();
-			//Product_Update();
-			//Product_Delete();
-
-			//Software_LoadAll();
-			//Software_Search();
-			//Software_Update();
-			//Software_Delete();
-        }
-		
-
-        public void BankAccount_Add(int count = 1, int startSeed = 1, int expected = 1)
-        {
-            var repo = new BankAccountRepository(Context);
-            BaseRepositoryUnitTest_BankAccount_AddRange(repo, count, startSeed, expected);
-        }
-		
-        public void BankAccount_Rollback(int count = 1, int startSeed = 1, int expected = 0)
-        {
-            var repo = new BankAccountRepository(Context);
-            BaseRepositoryUnitTest_BankAccount_AddRange(repo, count, startSeed, expected, true);
+            var list = BaseRepositoryUnitTest_BankAccount_AddRange(repo, count, startSeed);
+			
+			uow.Commit();
+			
+			BaseRepositoryUnitTest_BankAccount_CheckData(repo, list, expected);
         }
 
-        public void BankTransfers_Add(int count = 1, int startSeed = 1, int expected = 1)
+        public void BankTransfers_Add(IUnitOfWork uow, int count = 1, int startSeed = 1, int expected = 1)
         {
-            var repo = new BankTransfersRepository(Context);
-            BaseRepositoryUnitTest_BankTransfers_AddRange(repo, count, startSeed, expected);
-        }
-		
-        public void BankTransfers_Rollback(int count = 1, int startSeed = 1, int expected = 0)
-        {
-            var repo = new BankTransfersRepository(Context);
-            BaseRepositoryUnitTest_BankTransfers_AddRange(repo, count, startSeed, expected, true);
-        }
-
-        public void Book_Add(int count = 1, int startSeed = 1, int expected = 1)
-        {
-            var repo = new BookRepository(Context);
-            BaseRepositoryUnitTest_Book_AddRange(repo, count, startSeed, expected);
-        }
-		
-        public void Book_Rollback(int count = 1, int startSeed = 1, int expected = 0)
-        {
-            var repo = new BookRepository(Context);
-            BaseRepositoryUnitTest_Book_AddRange(repo, count, startSeed, expected, true);
+            var repo = new BankTransfersRepository(uow);
+			
+			if(UseTransactions)
+			{
+				uow.StartTransaction();
+			}
+			
+            var list = BaseRepositoryUnitTest_BankTransfers_AddRange(repo, count, startSeed);
+			
+			uow.Commit();
+			
+			BaseRepositoryUnitTest_BankTransfers_CheckData(repo, list, expected);
         }
 
-        public void Country_Add(int count = 1, int startSeed = 1, int expected = 1)
+        public void Book_Add(IUnitOfWork uow, int count = 1, int startSeed = 1, int expected = 1)
         {
-            var repo = new CountryRepository(Context);
-            BaseRepositoryUnitTest_Country_AddRange(repo, count, startSeed, expected);
-        }
-		
-        public void Country_Rollback(int count = 1, int startSeed = 1, int expected = 0)
-        {
-            var repo = new CountryRepository(Context);
-            BaseRepositoryUnitTest_Country_AddRange(repo, count, startSeed, expected, true);
-        }
-
-        public void Customer_Add(int count = 1, int startSeed = 1, int expected = 1)
-        {
-            var repo = new CustomerRepository(Context);
-            BaseRepositoryUnitTest_Customer_AddRange(repo, count, startSeed, expected);
-        }
-		
-        public void Customer_Rollback(int count = 1, int startSeed = 1, int expected = 0)
-        {
-            var repo = new CustomerRepository(Context);
-            BaseRepositoryUnitTest_Customer_AddRange(repo, count, startSeed, expected, true);
+            var repo = new BookRepository(uow);
+			
+			if(UseTransactions)
+			{
+				uow.StartTransaction();
+			}
+			
+            var list = BaseRepositoryUnitTest_Book_AddRange(repo, count, startSeed);
+			
+			uow.Commit();
+			
+			BaseRepositoryUnitTest_Book_CheckData(repo, list, expected);
         }
 
-        public void Order_Add(int count = 1, int startSeed = 1, int expected = 1)
+        public void Country_Add(IUnitOfWork uow, int count = 1, int startSeed = 1, int expected = 1)
         {
-            var repo = new OrderRepository(Context);
-            BaseRepositoryUnitTest_Order_AddRange(repo, count, startSeed, expected);
-        }
-		
-        public void Order_Rollback(int count = 1, int startSeed = 1, int expected = 0)
-        {
-            var repo = new OrderRepository(Context);
-            BaseRepositoryUnitTest_Order_AddRange(repo, count, startSeed, expected, true);
-        }
-
-        public void OrderDetails_Add(int count = 1, int startSeed = 1, int expected = 1)
-        {
-            var repo = new OrderDetailsRepository(Context);
-            BaseRepositoryUnitTest_OrderDetails_AddRange(repo, count, startSeed, expected);
-        }
-		
-        public void OrderDetails_Rollback(int count = 1, int startSeed = 1, int expected = 0)
-        {
-            var repo = new OrderDetailsRepository(Context);
-            BaseRepositoryUnitTest_OrderDetails_AddRange(repo, count, startSeed, expected, true);
+            var repo = new CountryRepository(uow);
+			
+			if(UseTransactions)
+			{
+				uow.StartTransaction();
+			}
+			
+            var list = BaseRepositoryUnitTest_Country_AddRange(repo, count, startSeed);
+			
+			uow.Commit();
+			
+			BaseRepositoryUnitTest_Country_CheckData(repo, list, expected);
         }
 
-        public void Product_Add(int count = 1, int startSeed = 1, int expected = 1)
+        public void Customer_Add(IUnitOfWork uow, int count = 1, int startSeed = 1, int expected = 1)
         {
-            var repo = new ProductRepository(Context);
-            BaseRepositoryUnitTest_Product_AddRange(repo, count, startSeed, expected);
-        }
-		
-        public void Product_Rollback(int count = 1, int startSeed = 1, int expected = 0)
-        {
-            var repo = new ProductRepository(Context);
-            BaseRepositoryUnitTest_Product_AddRange(repo, count, startSeed, expected, true);
+            var repo = new CustomerRepository(uow);
+			
+			if(UseTransactions)
+			{
+				uow.StartTransaction();
+			}
+			
+            var list = BaseRepositoryUnitTest_Customer_AddRange(repo, count, startSeed);
+			
+			uow.Commit();
+			
+			BaseRepositoryUnitTest_Customer_CheckData(repo, list, expected);
         }
 
-        public void Software_Add(int count = 1, int startSeed = 1, int expected = 1)
+        public void Order_Add(IUnitOfWork uow, int count = 1, int startSeed = 1, int expected = 1)
         {
-            var repo = new SoftwareRepository(Context);
-            BaseRepositoryUnitTest_Software_AddRange(repo, count, startSeed, expected);
+            var repo = new OrderRepository(uow);
+			
+			if(UseTransactions)
+			{
+				uow.StartTransaction();
+			}
+			
+            var list = BaseRepositoryUnitTest_Order_AddRange(repo, count, startSeed);
+			
+			uow.Commit();
+			
+			BaseRepositoryUnitTest_Order_CheckData(repo, list, expected);
         }
-		
-        public void Software_Rollback(int count = 1, int startSeed = 1, int expected = 0)
+
+        public void OrderDetails_Add(IUnitOfWork uow, int count = 1, int startSeed = 1, int expected = 1)
         {
-            var repo = new SoftwareRepository(Context);
-            BaseRepositoryUnitTest_Software_AddRange(repo, count, startSeed, expected, true);
+            var repo = new OrderDetailsRepository(uow);
+			
+			if(UseTransactions)
+			{
+				uow.StartTransaction();
+			}
+			
+            var list = BaseRepositoryUnitTest_OrderDetails_AddRange(repo, count, startSeed);
+			
+			uow.Commit();
+			
+			BaseRepositoryUnitTest_OrderDetails_CheckData(repo, list, expected);
+        }
+
+        public void Product_Add(IUnitOfWork uow, int count = 1, int startSeed = 1, int expected = 1)
+        {
+            var repo = new ProductRepository(uow);
+			
+			if(UseTransactions)
+			{
+				uow.StartTransaction();
+			}
+			
+            var list = BaseRepositoryUnitTest_Product_AddRange(repo, count, startSeed);
+			
+			uow.Commit();
+			
+			BaseRepositoryUnitTest_Product_CheckData(repo, list, expected);
+        }
+
+        public void Software_Add(IUnitOfWork uow, int count = 1, int startSeed = 1, int expected = 1)
+        {
+            var repo = new SoftwareRepository(uow);
+			
+			if(UseTransactions)
+			{
+				uow.StartTransaction();
+			}
+			
+            var list = BaseRepositoryUnitTest_Software_AddRange(repo, count, startSeed);
+			
+			uow.Commit();
+			
+			BaseRepositoryUnitTest_Software_CheckData(repo, list, expected);
         }
 
 		#endregion
 		
 		#region Base Tests
-
-        protected virtual void BaseRepositoryUnitTest_BankAccount_AddRange(IBankAccountRepository repository, int count = 1, int startSeed = 1, int expected = 1, bool rollback = false)
+        protected virtual List<IBankAccount> BaseRepositoryUnitTest_BankAccount_AddRange(IBankAccountRepository repository, int count = 1, int startSeed = 1)
         {		
             var list = new List<IBankAccount>();
             var seed = startSeed;
-			
-			if(UseTransactions)
-			{
-				Context.StartTransaction();
-			}
 			
             for (var index = 1; index <= count; index++)
             {
@@ -250,37 +200,24 @@ namespace RepositoryEFDotnet.UnitTest.Base
 				repository.Save(dto);
                 seed++;
             }
-
-            if (!rollback)
-            {
-                Context.Commit();
-            }
-            else
-            {
-                Context.Rollback();
-            }
-
-            var items = repository.LoadAll();
+			
+			return list;
+        }
+		
+		protected virtual void BaseRepositoryUnitTest_BankAccount_CheckData(IBankAccountRepository repository, List<IBankAccount> list, int expected)
+		{
+			var items = repository.LoadAll();
             this.Check_EntityCount(expected, items.Count(), "Incorrect number of BankAccount found");
 
-			if(!rollback)
+			foreach (var item in list)
 			{
-				foreach (var item in list)
-				{
-					this.Check_BankAccount(item, items.FirstOrDefault(o => o.BankAccountId == item.BankAccountId));
-				}
+				this.Check_BankAccount(item, items.FirstOrDefault(o => o.BankAccountId == item.BankAccountId));
 			}
-        }
-
-        protected virtual void BaseRepositoryUnitTest_BankTransfers_AddRange(IBankTransfersRepository repository, int count = 1, int startSeed = 1, int expected = 1, bool rollback = false)
+		}
+        protected virtual List<IBankTransfers> BaseRepositoryUnitTest_BankTransfers_AddRange(IBankTransfersRepository repository, int count = 1, int startSeed = 1)
         {		
             var list = new List<IBankTransfers>();
             var seed = startSeed;
-			
-			if(UseTransactions)
-			{
-				Context.StartTransaction();
-			}
 			
             for (var index = 1; index <= count; index++)
             {
@@ -290,37 +227,24 @@ namespace RepositoryEFDotnet.UnitTest.Base
 				repository.Save(dto);
                 seed++;
             }
-
-            if (!rollback)
-            {
-                Context.Commit();
-            }
-            else
-            {
-                Context.Rollback();
-            }
-
-            var items = repository.LoadAll();
+			
+			return list;
+        }
+		
+		protected virtual void BaseRepositoryUnitTest_BankTransfers_CheckData(IBankTransfersRepository repository, List<IBankTransfers> list, int expected)
+		{
+			var items = repository.LoadAll();
             this.Check_EntityCount(expected, items.Count(), "Incorrect number of BankTransfers found");
 
-			if(!rollback)
+			foreach (var item in list)
 			{
-				foreach (var item in list)
-				{
-					this.Check_BankTransfers(item, items.FirstOrDefault(o => o.BankTransferId == item.BankTransferId));
-				}
+				this.Check_BankTransfers(item, items.FirstOrDefault(o => o.BankTransferId == item.BankTransferId));
 			}
-        }
-
-        protected virtual void BaseRepositoryUnitTest_Book_AddRange(IBookRepository repository, int count = 1, int startSeed = 1, int expected = 1, bool rollback = false)
+		}
+        protected virtual List<IBook> BaseRepositoryUnitTest_Book_AddRange(IBookRepository repository, int count = 1, int startSeed = 1)
         {		
             var list = new List<IBook>();
             var seed = startSeed;
-			
-			if(UseTransactions)
-			{
-				Context.StartTransaction();
-			}
 			
             for (var index = 1; index <= count; index++)
             {
@@ -330,37 +254,24 @@ namespace RepositoryEFDotnet.UnitTest.Base
 				repository.Save(dto);
                 seed++;
             }
-
-            if (!rollback)
-            {
-                Context.Commit();
-            }
-            else
-            {
-                Context.Rollback();
-            }
-
-            var items = repository.LoadAll();
+			
+			return list;
+        }
+		
+		protected virtual void BaseRepositoryUnitTest_Book_CheckData(IBookRepository repository, List<IBook> list, int expected)
+		{
+			var items = repository.LoadAll();
             this.Check_EntityCount(expected, items.Count(), "Incorrect number of Book found");
 
-			if(!rollback)
+			foreach (var item in list)
 			{
-				foreach (var item in list)
-				{
-					this.Check_Book(item, items.FirstOrDefault(o => o.ProductId == item.ProductId));
-				}
+				this.Check_Book(item, items.FirstOrDefault(o => o.ProductId == item.ProductId));
 			}
-        }
-
-        protected virtual void BaseRepositoryUnitTest_Country_AddRange(ICountryRepository repository, int count = 1, int startSeed = 1, int expected = 1, bool rollback = false)
+		}
+        protected virtual List<ICountry> BaseRepositoryUnitTest_Country_AddRange(ICountryRepository repository, int count = 1, int startSeed = 1)
         {		
             var list = new List<ICountry>();
             var seed = startSeed;
-			
-			if(UseTransactions)
-			{
-				Context.StartTransaction();
-			}
 			
             for (var index = 1; index <= count; index++)
             {
@@ -370,37 +281,24 @@ namespace RepositoryEFDotnet.UnitTest.Base
 				repository.Save(dto);
                 seed++;
             }
-
-            if (!rollback)
-            {
-                Context.Commit();
-            }
-            else
-            {
-                Context.Rollback();
-            }
-
-            var items = repository.LoadAll();
+			
+			return list;
+        }
+		
+		protected virtual void BaseRepositoryUnitTest_Country_CheckData(ICountryRepository repository, List<ICountry> list, int expected)
+		{
+			var items = repository.LoadAll();
             this.Check_EntityCount(expected, items.Count(), "Incorrect number of Country found");
 
-			if(!rollback)
+			foreach (var item in list)
 			{
-				foreach (var item in list)
-				{
-					this.Check_Country(item, items.FirstOrDefault(o => o.CountryId == item.CountryId));
-				}
+				this.Check_Country(item, items.FirstOrDefault(o => o.CountryId == item.CountryId));
 			}
-        }
-
-        protected virtual void BaseRepositoryUnitTest_Customer_AddRange(ICustomerRepository repository, int count = 1, int startSeed = 1, int expected = 1, bool rollback = false)
+		}
+        protected virtual List<ICustomer> BaseRepositoryUnitTest_Customer_AddRange(ICustomerRepository repository, int count = 1, int startSeed = 1)
         {		
             var list = new List<ICustomer>();
             var seed = startSeed;
-			
-			if(UseTransactions)
-			{
-				Context.StartTransaction();
-			}
 			
             for (var index = 1; index <= count; index++)
             {
@@ -410,37 +308,24 @@ namespace RepositoryEFDotnet.UnitTest.Base
 				repository.Save(dto);
                 seed++;
             }
-
-            if (!rollback)
-            {
-                Context.Commit();
-            }
-            else
-            {
-                Context.Rollback();
-            }
-
-            var items = repository.LoadAll();
+			
+			return list;
+        }
+		
+		protected virtual void BaseRepositoryUnitTest_Customer_CheckData(ICustomerRepository repository, List<ICustomer> list, int expected)
+		{
+			var items = repository.LoadAll();
             this.Check_EntityCount(expected, items.Count(), "Incorrect number of Customer found");
 
-			if(!rollback)
+			foreach (var item in list)
 			{
-				foreach (var item in list)
-				{
-					this.Check_Customer(item, items.FirstOrDefault(o => o.CustomerId == item.CustomerId));
-				}
+				this.Check_Customer(item, items.FirstOrDefault(o => o.CustomerId == item.CustomerId));
 			}
-        }
-
-        protected virtual void BaseRepositoryUnitTest_Order_AddRange(IOrderRepository repository, int count = 1, int startSeed = 1, int expected = 1, bool rollback = false)
+		}
+        protected virtual List<IOrder> BaseRepositoryUnitTest_Order_AddRange(IOrderRepository repository, int count = 1, int startSeed = 1)
         {		
             var list = new List<IOrder>();
             var seed = startSeed;
-			
-			if(UseTransactions)
-			{
-				Context.StartTransaction();
-			}
 			
             for (var index = 1; index <= count; index++)
             {
@@ -450,37 +335,24 @@ namespace RepositoryEFDotnet.UnitTest.Base
 				repository.Save(dto);
                 seed++;
             }
-
-            if (!rollback)
-            {
-                Context.Commit();
-            }
-            else
-            {
-                Context.Rollback();
-            }
-
-            var items = repository.LoadAll();
+			
+			return list;
+        }
+		
+		protected virtual void BaseRepositoryUnitTest_Order_CheckData(IOrderRepository repository, List<IOrder> list, int expected)
+		{
+			var items = repository.LoadAll();
             this.Check_EntityCount(expected, items.Count(), "Incorrect number of Order found");
 
-			if(!rollback)
+			foreach (var item in list)
 			{
-				foreach (var item in list)
-				{
-					this.Check_Order(item, items.FirstOrDefault(o => o.OrderId == item.OrderId));
-				}
+				this.Check_Order(item, items.FirstOrDefault(o => o.OrderId == item.OrderId));
 			}
-        }
-
-        protected virtual void BaseRepositoryUnitTest_OrderDetails_AddRange(IOrderDetailsRepository repository, int count = 1, int startSeed = 1, int expected = 1, bool rollback = false)
+		}
+        protected virtual List<IOrderDetails> BaseRepositoryUnitTest_OrderDetails_AddRange(IOrderDetailsRepository repository, int count = 1, int startSeed = 1)
         {		
             var list = new List<IOrderDetails>();
             var seed = startSeed;
-			
-			if(UseTransactions)
-			{
-				Context.StartTransaction();
-			}
 			
             for (var index = 1; index <= count; index++)
             {
@@ -490,37 +362,24 @@ namespace RepositoryEFDotnet.UnitTest.Base
 				repository.Save(dto);
                 seed++;
             }
-
-            if (!rollback)
-            {
-                Context.Commit();
-            }
-            else
-            {
-                Context.Rollback();
-            }
-
-            var items = repository.LoadAll();
+			
+			return list;
+        }
+		
+		protected virtual void BaseRepositoryUnitTest_OrderDetails_CheckData(IOrderDetailsRepository repository, List<IOrderDetails> list, int expected)
+		{
+			var items = repository.LoadAll();
             this.Check_EntityCount(expected, items.Count(), "Incorrect number of OrderDetails found");
 
-			if(!rollback)
+			foreach (var item in list)
 			{
-				foreach (var item in list)
-				{
-					this.Check_OrderDetails(item, items.FirstOrDefault(o => o.OrderDetailsId == item.OrderDetailsId));
-				}
+				this.Check_OrderDetails(item, items.FirstOrDefault(o => o.OrderDetailsId == item.OrderDetailsId));
 			}
-        }
-
-        protected virtual void BaseRepositoryUnitTest_Product_AddRange(IProductRepository repository, int count = 1, int startSeed = 1, int expected = 1, bool rollback = false)
+		}
+        protected virtual List<IProduct> BaseRepositoryUnitTest_Product_AddRange(IProductRepository repository, int count = 1, int startSeed = 1)
         {		
             var list = new List<IProduct>();
             var seed = startSeed;
-			
-			if(UseTransactions)
-			{
-				Context.StartTransaction();
-			}
 			
             for (var index = 1; index <= count; index++)
             {
@@ -530,37 +389,24 @@ namespace RepositoryEFDotnet.UnitTest.Base
 				repository.Save(dto);
                 seed++;
             }
-
-            if (!rollback)
-            {
-                Context.Commit();
-            }
-            else
-            {
-                Context.Rollback();
-            }
-
-            var items = repository.LoadAll();
+			
+			return list;
+        }
+		
+		protected virtual void BaseRepositoryUnitTest_Product_CheckData(IProductRepository repository, List<IProduct> list, int expected)
+		{
+			var items = repository.LoadAll();
             this.Check_EntityCount(expected, items.Count(), "Incorrect number of Product found");
 
-			if(!rollback)
+			foreach (var item in list)
 			{
-				foreach (var item in list)
-				{
-					this.Check_Product(item, items.FirstOrDefault(o => o.ProductId == item.ProductId));
-				}
+				this.Check_Product(item, items.FirstOrDefault(o => o.ProductId == item.ProductId));
 			}
-        }
-
-        protected virtual void BaseRepositoryUnitTest_Software_AddRange(ISoftwareRepository repository, int count = 1, int startSeed = 1, int expected = 1, bool rollback = false)
+		}
+        protected virtual List<ISoftware> BaseRepositoryUnitTest_Software_AddRange(ISoftwareRepository repository, int count = 1, int startSeed = 1)
         {		
             var list = new List<ISoftware>();
             var seed = startSeed;
-			
-			if(UseTransactions)
-			{
-				Context.StartTransaction();
-			}
 			
             for (var index = 1; index <= count; index++)
             {
@@ -570,38 +416,21 @@ namespace RepositoryEFDotnet.UnitTest.Base
 				repository.Save(dto);
                 seed++;
             }
-
-            if (!rollback)
-            {
-                Context.Commit();
-            }
-            else
-            {
-                Context.Rollback();
-            }
-
-            var items = repository.LoadAll();
+			
+			return list;
+        }
+		
+		protected virtual void BaseRepositoryUnitTest_Software_CheckData(ISoftwareRepository repository, List<ISoftware> list, int expected)
+		{
+			var items = repository.LoadAll();
             this.Check_EntityCount(expected, items.Count(), "Incorrect number of Software found");
 
-			if(!rollback)
+			foreach (var item in list)
 			{
-				foreach (var item in list)
-				{
-					this.Check_Software(item, items.FirstOrDefault(o => o.ProductId == item.ProductId));
-				}
+				this.Check_Software(item, items.FirstOrDefault(o => o.ProductId == item.ProductId));
 			}
-        }
+		}
 
 		#endregion
-		
-        #region Cleanup
-
-        [ClassCleanup]
-        public virtual void ClassCleanup()
-        {
-            Context?.Dispose();
-        }
-
-        #endregion
 	}
 }

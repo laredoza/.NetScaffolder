@@ -1,5 +1,5 @@
 ﻿
-// <copyright file="OrderDetailsMap.g.cs.g.cs" company="MIT">
+// <copyright file="BankAccountMap.g.cs.g.cs" company="MIT">
 //  Copyright (c) 2018 MIT
 // </copyright>  
 
@@ -17,48 +17,47 @@
 //	GENERATED CODE. DOT NOT MODIFY MANUALLY AS CHANGES CAN BE LOST!!!
 //	USE A PARTIAL CLASS INSTEAD
 // *******************************************************************
-
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using RepositoryEFDotnet.Contexts.EFCore;
-using System.Configuration;
-using System.ComponentModel.DataAnnotations.Schema;
 using Banking.Models.Entity;
-using System.Data.Common;
+using FluentNHibernate.Mapping;
 
-
-namespace Banking.Models.Mappings.SqlServer
+namespace Banking.Models.Context.Mappings.NHibernate.Oracle
 {
-	public partial class OrderDetailsMap : IEntityTypeConfiguration<OrderDetails>
+	public partial class BankAccountMap : ClassMap<BankAccount>
 	{	
-	    public void Configure(EntityTypeBuilder<OrderDetails> builder)
-	    {
-			builder.ToTable("OrderDetails", "dbo");
+		public BankAccountMap ()
+		{
+			Table("BankAccount");
 			
-			#region Primary keys
+			#region Primary Keys
 			
-			builder.HasKey(t => t.OrderDetailsId);
-			builder.Property(t => t.OrderDetailsId).ValueGeneratedOnAdd();
+			Id(t => t.BankAccountId).GeneratedBy.Increment();
 
 			#endregion
 
 			#region Constraints
 			
-			builder.Property(t => t.OrderDetailsId).IsRequired();
-			builder.Property(t => t.OrderId).IsRequired();
-			builder.Property(t => t.ProductId).IsRequired();
-			builder.Property(t => t.UnitPrice).IsRequired(false);
-			builder.Property(t => t.UnitPrice).HasColumnType("decimal(19, 4)");
-			builder.Property(t => t.Amount).IsRequired(false);
-			builder.Property(t => t.Discount).IsRequired(false);
+			Map(t => t.BankAccountId).ReadOnly().Generated.Insert()
+			.Not.Nullable();
+			Map(t => t.BankAccountNumber)
+			.Length(10)
+			.Not.Nullable();
+			Map(t => t.Balance)
+			.Precision(19).Scale(4)
+			.Not.Nullable();
+			Map(t => t.CustomerId)
+			.Nullable();
+			Map(t => t.Locked)
+			.Not.Nullable();
 			
 			#endregion
 
 			#region Relationships
 			
+			References(o => o.Customer).Column("CustomerId").Unique().Not.Insert().Not.Update();
+			HasMany(s => s.BankTransfers).KeyColumn("ToBankAccountId");
 			
-			#endregion	
-	    }
+			#endregion			
+	
+		}
 	}
 }

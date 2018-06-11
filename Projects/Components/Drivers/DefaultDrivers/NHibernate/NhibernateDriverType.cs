@@ -12,6 +12,7 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.NHibernate
     using System.Collections.Generic;
     using System.ComponentModel.Composition;
     using System.IO;
+    using System.Linq;
     using System.Text;
     using System.Xml.Serialization;
 
@@ -112,6 +113,25 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.NHibernate
         #endregion
 
         #region Public Methods And Operators
+
+        public string TransformIndex(Index index)
+        {
+            string transIndex = string.Empty;
+
+            if (index.Columns != null && index.Columns.Any())
+            {
+                if (index.Columns.Count == 1)
+                {
+
+                }
+                else
+                {
+
+                }
+            }
+
+            return transIndex;
+        }
 
         /// <summary>
         /// The load config.

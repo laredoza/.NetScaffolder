@@ -55,6 +55,11 @@ namespace Banking.Models.Customers.Mappings.EFCore.SqlServer
 			
 			#endregion
 
+			#region Indexes
+			builder.HasIndex(i => new {i.OrderId}).IsUnique(false);
+			builder.HasIndex(i => new {i.ProductId}).IsUnique(false);
+			#endregion
+			
 			#region Relationships
 			
 			builder.HasOne<Order>(s => s.Order).WithMany(s => s.OrderDetails).HasForeignKey(s => s.OrderId).OnDelete(DeleteBehavior.Restrict);

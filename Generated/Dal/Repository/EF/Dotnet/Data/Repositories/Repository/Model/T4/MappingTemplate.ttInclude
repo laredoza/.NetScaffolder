@@ -88,6 +88,14 @@ namespace <#= Namespace #>.<#= Driver.ParentFolder #>.<#= Driver.Prefix #>
 <#+ } #>
 			
 			#endregion
+			
+			#region Indexes
+<#+ foreach(var col in Model.Columns){ #>
+<#+ foreach(var idx in Model.Indexes.Where(o => o.IndexType != IndexType.PrimaryKey && o.Columns.Contains(col.ColumnName))){ #>
+			Property(t => t.<#= col.ColumnName #>)<#=Driver.TransformIndex(idx) #>;
+<#+ } #>
+<#+ } #>
+			#endregion
 
 			#region Relationships
 			

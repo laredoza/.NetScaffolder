@@ -68,7 +68,6 @@ namespace Banking.Models.Customers.Mappings.NHibernate.MySql
 			Map(t => t.CountryId)
 			.Nullable();
 			Map(t => t.Photo)
-			.Length(2147483647)
 			.Nullable();
 			Map(t => t.IsEnabled)
 			.Not.Nullable();

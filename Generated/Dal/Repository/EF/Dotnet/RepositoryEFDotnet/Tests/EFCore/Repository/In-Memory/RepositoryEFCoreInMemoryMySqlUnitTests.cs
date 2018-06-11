@@ -19,6 +19,9 @@ namespace RepositoryEFDotnet.UnitTest
     [TestClass]
     public class RepositoryEFCoreInMemoryMySqlUnitTest : BaseRepositoryUnitTest
     {
+        private static string DbId = "EFCORE_MySql";
+        private static DbContextOptions<MySqlFullContext> Options;
+
         #region Public Methods And Operators
 
         /// <summary>
@@ -30,10 +33,12 @@ namespace RepositoryEFDotnet.UnitTest
         [ClassInitialize]
         public static void ClassInit(TestContext context)
         {
-            var options = new DbContextOptionsBuilder<MySqlFullContext>().UseInMemoryDatabase("EFCORE_MySql").Options;
-            Context = new MySqlFullContext(options);
+            Options = new DbContextOptionsBuilder<MySqlFullContext>().UseInMemoryDatabase("EFCORE_SqlServer").Options;
 
-            ((MySqlFullContext)Context).Database.EnsureCreated();
+            using (var uow = new MySqlFullContext(Options))
+            {
+                uow.Database.EnsureCreated();
+            }
         }
 
         [TestInitialize]
@@ -41,6 +46,56 @@ namespace RepositoryEFDotnet.UnitTest
         {
             this.UseTransactions = false;
         }
+
+        [TestMethod]
+        public void RunAll()
+        {
+            using (var uow = new MySqlFullContext(Options))
+            {
+                this.Country_Add(uow);
+            }
+
+            using (var uow = new MySqlFullContext(Options))
+            {
+                this.Customer_Add(uow, 2, 1, 2);
+            }
+
+            using (var uow = new MySqlFullContext(Options))
+            {
+                this.Product_Add(uow, 5, 1, 5);
+            }
+
+            using (var uow = new MySqlFullContext(Options))
+            {
+                this.Book_Add(uow);
+            }
+
+            using (var uow = new MySqlFullContext(Options))
+            {
+                this.Software_Add(uow, 1, 2);
+            }
+
+            using (var uow = new MySqlFullContext(Options))
+            {
+                this.Order_Add(uow, 2, 1, 2);
+            }
+
+            using (var uow = new MySqlFullContext(Options))
+            {
+                this.OrderDetails_Add(uow, 2, 1, 2);
+            }
+
+            using (var uow = new MySqlFullContext(Options))
+            {
+                this.BankAccount_Add(uow, 2, 1, 2);
+            }
+
+            using (var uow = new MySqlFullContext(Options))
+            {
+                this.BankTransfers_Add(uow);
+            }
+        }
+
         #endregion
     }
 }

@@ -12,6 +12,7 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6
     using System.ComponentModel.Composition;
 
     using DotNetScaffolder.Components.Common.Contract;
+    using DotNetScaffolder.Mapping.MetaData.Model;
 
     #endregion
 
@@ -60,6 +61,7 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6
                 {
                     "System.Data.Entity",
                     "System.Data.Entity.ModelConfiguration",
+                    "System.Data.Entity.Infrastructure.Annotations",
                     "Oracle.ManagedDataAccess.Client",
                     "Oracle.Config"
                 };
@@ -80,5 +82,10 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6
         /// The driver type.
         /// </summary>
         IDriverType IDriver.DriverType => this.DriverType ?? (this.DriverType = new EFDriverType("EFDriverType.xml"));
+
+        public string TransformIndex(Index index)
+        {
+            return EFDriverType.TransformIndex(index);
+        }
     }
 }

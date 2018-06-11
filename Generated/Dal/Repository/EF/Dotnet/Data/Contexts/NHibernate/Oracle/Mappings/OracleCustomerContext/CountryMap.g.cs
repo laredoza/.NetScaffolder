@@ -17,44 +17,39 @@
 //	GENERATED CODE. DOT NOT MODIFY MANUALLY AS CHANGES CAN BE LOST!!!
 //	USE A PARTIAL CLASS INSTEAD
 // *******************************************************************
-
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using RepositoryEFDotnet.Contexts.EFCore;
-using System.Configuration;
-using System.ComponentModel.DataAnnotations.Schema;
 using Banking.Models.Entity;
-using System.Data.Common;
+using FluentNHibernate.Mapping;
 
-
-namespace Banking.Models.Mappings.MySql
+namespace Banking.Models.Customers.Mappings.NHibernate.Oracle
 {
-	public partial class CountryMap : IEntityTypeConfiguration<Country>
+	public partial class CountryMap : ClassMap<Country>
 	{	
-	    public void Configure(EntityTypeBuilder<Country> builder)
-	    {
-			builder.ToTable("Country");
+		public CountryMap ()
+		{
+			Table("Country");
 			
-			#region Primary keys
+			#region Primary Keys
 			
-			builder.HasKey(t => t.CountryId);
-			builder.Property(t => t.CountryId).ValueGeneratedOnAdd();
+			Id(t => t.CountryId).GeneratedBy.Increment();
 
 			#endregion
 
 			#region Constraints
 			
-			builder.Property(t => t.CountryId).IsRequired();
-			builder.Property(t => t.CountryName).HasMaxLength(100);
-			builder.Property(t => t.CountryName).IsRequired(false);
+			Map(t => t.CountryId).ReadOnly().Generated.Insert()
+			.Not.Nullable();
+			Map(t => t.CountryName)
+			.Length(100)
+			.Nullable();
 			
 			#endregion
 
 			#region Relationships
 			
-			builder.HasMany<Customer>(s => s.Customer).WithOne(s => s.Country).HasForeignKey(s => s.CountryId).OnDelete(DeleteBehavior.Restrict);
+			HasMany(s => s.Customer).KeyColumn("CountryId");
 			
-			#endregion	
-	    }
+			#endregion			
+	
+		}
 	}
 }

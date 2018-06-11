@@ -41,16 +41,53 @@ namespace RepositoryEFDotnet.UnitTest
 
         #region Public Methods And Operators
 
-        /// <summary>
-        /// The class init.
-        /// </summary>
-        /// <param name="context">
-        /// The context.
-        /// </param>
-        [TestInitialize]
-        public void Init()
+        [TestMethod]
+        public void RunAll()
         {
-            Context = new SqlServerFullContext(Configuration);
+            using (var uow = new SqlServerFullContext(Configuration))
+            {
+                this.Country_Add(uow);
+            }
+
+            using (var uow = new SqlServerFullContext(Configuration))
+            {
+                this.Customer_Add(uow, 2, 1, 2);
+            }
+
+            using (var uow = new SqlServerFullContext(Configuration))
+            {
+                this.Product_Add(uow, 5, 1, 5);
+            }
+
+            using (var uow = new SqlServerFullContext(Configuration))
+            {
+                this.Book_Add(uow);
+            }
+
+            using (var uow = new SqlServerFullContext(Configuration))
+            {
+                this.Software_Add(uow, 1, 2);
+            }
+
+            using (var uow = new SqlServerFullContext(Configuration))
+            {
+                this.Order_Add(uow, 2, 1, 2);
+            }
+
+            using (var uow = new SqlServerFullContext(Configuration))
+            {
+                this.OrderDetails_Add(uow, 2, 1, 2);
+            }
+
+            using (var uow = new SqlServerFullContext(Configuration))
+            {
+                this.BankAccount_Add(uow, 2, 1, 2);
+            }
+
+            using (var uow = new SqlServerFullContext(Configuration))
+            {
+                this.BankTransfers_Add(uow);
+            }
         }
 
         #endregion
@@ -58,8 +95,6 @@ namespace RepositoryEFDotnet.UnitTest
         [ClassCleanup]
         public static void Cleanup()
         {
-            Context?.Dispose();
-            Context = null;
             Configuration = null;
             OpenContext?.Dispose();
             OpenContext = null;

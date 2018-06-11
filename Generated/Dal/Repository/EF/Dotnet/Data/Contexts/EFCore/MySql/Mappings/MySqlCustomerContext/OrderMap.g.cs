@@ -59,6 +59,10 @@ namespace Banking.Models.Customers.Mappings.EFCore.MySql
 			
 			#endregion
 
+			#region Indexes
+			builder.HasIndex(i => new {i.CustomerId}).IsUnique(false);
+			#endregion
+			
 			#region Relationships
 			
 			builder.HasOne<Customer>(s => s.Customer).WithMany(s => s.Order).HasForeignKey(s => s.CustomerId).OnDelete(DeleteBehavior.Restrict);

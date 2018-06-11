@@ -1,5 +1,5 @@
 ﻿
-// <copyright file="BankAccountMap.g.cs.g.cs" company="MIT">
+// <copyright file="BookMap.g.cs.g.cs" company="MIT">
 //  Copyright (c) 2018 MIT
 // </copyright>  
 
@@ -17,48 +17,39 @@
 //	GENERATED CODE. DOT NOT MODIFY MANUALLY AS CHANGES CAN BE LOST!!!
 //	USE A PARTIAL CLASS INSTEAD
 // *******************************************************************
-
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using RepositoryEFDotnet.Contexts.EFCore;
-using System.Configuration;
-using System.ComponentModel.DataAnnotations.Schema;
 using Banking.Models.Entity;
-using System.Data.Common;
+using FluentNHibernate.Mapping;
 
-
-namespace Banking.Models.Mappings.MySql
+namespace Banking.Models.Customers.Mappings.NHibernate.Oracle
 {
-	public partial class BankAccountMap : IEntityTypeConfiguration<BankAccount>
+	public partial class BookMap : ClassMap<Book>
 	{	
-	    public void Configure(EntityTypeBuilder<BankAccount> builder)
-	    {
-			builder.ToTable("BankAccount");
+		public BookMap ()
+		{
+			Table("Book");
 			
-			#region Primary keys
+			#region Primary Keys
 			
-			builder.HasKey(t => t.BankAccountId);
-			builder.Property(t => t.BankAccountId).ValueGeneratedOnAdd();
+			Id(t => t.ProductId);
 
 			#endregion
 
 			#region Constraints
 			
-			builder.Property(t => t.BankAccountId).IsRequired();
-			builder.Property(t => t.BankAccountNumber).HasMaxLength(10);
-			builder.Property(t => t.BankAccountNumber).IsRequired();
-			builder.Property(t => t.Balance).IsRequired();
-			builder.Property(t => t.Balance).HasColumnType("decimal(19, 4)");
-			builder.Property(t => t.CustomerId).IsRequired(false);
-			builder.Property(t => t.Locked).IsRequired();
+			Map(t => t.ProductId).ReadOnly().Generated.Insert()
+			.Not.Nullable();
+			Map(t => t.Publisher)
+			.Length(200)
+			.Not.Nullable();
 			
 			#endregion
 
 			#region Relationships
 			
-			builder.HasMany<BankTransfers>(s => s.BankTransfers).WithOne(s => s.BankAccount).HasForeignKey(s => s.ToBankAccountId).OnDelete(DeleteBehavior.Restrict);
+			HasOne(s => s.Product).PropertyRef(o => o.ProductId);
 			
-			#endregion	
-	    }
+			#endregion			
+	
+		}
 	}
 }

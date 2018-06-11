@@ -1,5 +1,5 @@
 ﻿
-// <copyright file="OrderDetailsMap.g.cs.g.cs" company="MIT">
+// <copyright file="CustomerMap.g.cs.g.cs" company="MIT">
 //  Copyright (c) 2018 MIT
 // </copyright>  
 
@@ -17,47 +17,71 @@
 //	GENERATED CODE. DOT NOT MODIFY MANUALLY AS CHANGES CAN BE LOST!!!
 //	USE A PARTIAL CLASS INSTEAD
 // *******************************************************************
-
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using RepositoryEFDotnet.Contexts.EFCore;
-using System.Configuration;
-using System.ComponentModel.DataAnnotations.Schema;
 using Banking.Models.Entity;
-using System.Data.Common;
+using FluentNHibernate.Mapping;
 
-
-namespace Banking.Models.Mappings.MySql
+namespace Banking.Models.Context.Mappings.NHibernate.Oracle
 {
-	public partial class OrderDetailsMap : IEntityTypeConfiguration<OrderDetails>
+	public partial class CustomerMap : ClassMap<Customer>
 	{	
-	    public void Configure(EntityTypeBuilder<OrderDetails> builder)
-	    {
-			builder.ToTable("OrderDetails");
+		public CustomerMap ()
+		{
+			Table("Customer");
 			
-			#region Primary keys
+			#region Primary Keys
 			
-			builder.HasKey(t => t.OrderDetailsId);
-			builder.Property(t => t.OrderDetailsId).ValueGeneratedOnAdd();
+			Id(t => t.CustomerId).GeneratedBy.Increment();
 
 			#endregion
 
 			#region Constraints
 			
-			builder.Property(t => t.OrderDetailsId).IsRequired();
-			builder.Property(t => t.OrderId).IsRequired();
-			builder.Property(t => t.ProductId).IsRequired();
-			builder.Property(t => t.UnitPrice).IsRequired(false);
-			builder.Property(t => t.UnitPrice).HasColumnType("decimal(19, 4)");
-			builder.Property(t => t.Amount).IsRequired(false);
-			builder.Property(t => t.Discount).IsRequired(false);
+			Map(t => t.CustomerId).ReadOnly().Generated.Insert()
+			.Not.Nullable();
+			Map(t => t.CustomerCode)
+			.Length(5)
+			.Not.Nullable();
+			Map(t => t.CompanyName)
+			.Length(50)
+			.Not.Nullable();
+			Map(t => t.ContactName)
+			.Length(50)
+			.Nullable();
+			Map(t => t.ContactTitle)
+			.Length(50)
+			.Nullable();
+			Map(t => t.Address)
+			.Length(50)
+			.Nullable();
+			Map(t => t.City)
+			.Length(20)
+			.Nullable();
+			Map(t => t.PostalCode)
+			.Length(10)
+			.Nullable();
+			Map(t => t.Telephone)
+			.Length(50)
+			.Nullable();
+			Map(t => t.Fax)
+			.Length(50)
+			.Nullable();
+			Map(t => t.CountryId)
+			.Nullable();
+			Map(t => t.Photo)
+			.Nullable();
+			Map(t => t.IsEnabled)
+			.Not.Nullable();
 			
 			#endregion
 
 			#region Relationships
 			
+			References(o => o.Country).Column("CountryId").Unique().Not.Insert().Not.Update();
+			HasMany(s => s.BankAccount).KeyColumn("CustomerId");
+			HasMany(s => s.Order).KeyColumn("CustomerId");
 			
-			#endregion	
-	    }
+			#endregion			
+	
+		}
 	}
 }

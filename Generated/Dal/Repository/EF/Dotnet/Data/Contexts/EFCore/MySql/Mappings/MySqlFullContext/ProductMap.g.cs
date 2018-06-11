@@ -57,6 +57,9 @@ namespace Banking.Models.Context.Mappings.EFCore.MySql
 			
 			#endregion
 
+			#region Indexes
+			#endregion
+			
 			#region Relationships
 			
 			builder.HasOne<Book>(s => s.Book).WithOne(s => s.Product).OnDelete(DeleteBehavior.Restrict);
