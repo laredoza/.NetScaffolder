@@ -165,6 +165,9 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
             treeView.Nodes.Add(new TreeNode { Text = parentName });
             treeView.Nodes[0].Nodes.AddRange(applicationService.ConvertHierarchyToNodes(hierarchy).ToArray());
             treeView.Nodes[0].Expand();
+
+            treeView.SelectedNode = treeView.Nodes[0];
+            // DomainTreeView_NodeMouseClick(this, new TreeNodeMouseClickEventArgs() );
         }
 
         #endregion
@@ -198,6 +201,38 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         /// The e.
         /// </param>
         private void DomainTreeView_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+
+        }
+
+        /// <summary>
+        ///     The update data source.
+        /// </summary>
+        private void UpdateDataSource()
+        {
+            Logger.Trace("Started UpdateDataSource()");
+
+            if (this.DataSource != null)
+            {
+                this.sourceType = ScaffoldConfig.ReturnSourceType(this.DataSource.SourceTypeId);
+
+                ITableHierarchyService applicationService = new TempateHierarchyService();
+                List<Hierarchy> hierarchy =
+                    applicationService.ReturnHierarchyFromList(this.DataSource.Tables, true, true, true);
+
+                this.AddNodes("Models", this.DomainTreeView, hierarchy, applicationService);
+            }
+            else
+            {
+                Logger.Trace("Data Source not updated as domain is null ");
+            }
+
+            Logger.Trace("Completed UpdateDataSource()");
+        }
+
+        #endregion
+
+        private void DomainTreeView_AfterSelect(object sender, TreeViewEventArgs e)
         {
             if (this.CurrentlySelectedControl == null
                 || (this.CurrentlySelectedControl != null && this.CurrentlySelectedControl.Validate().Count == 0))
@@ -237,32 +272,5 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
                 }
             }
         }
-
-        /// <summary>
-        ///     The update data source.
-        /// </summary>
-        private void UpdateDataSource()
-        {
-            Logger.Trace("Started UpdateDataSource()");
-
-            if (this.DataSource != null)
-            {
-                this.sourceType = ScaffoldConfig.ReturnSourceType(this.DataSource.SourceTypeId);
-
-                ITableHierarchyService applicationService = new TempateHierarchyService();
-                List<Hierarchy> hierarchy =
-                    applicationService.ReturnHierarchyFromList(this.DataSource.Tables, true, true, true);
-
-                this.AddNodes("Models", this.DomainTreeView, hierarchy, applicationService);
-            }
-            else
-            {
-                Logger.Trace("Data Source not updated as domain is null ");
-            }
-
-            Logger.Trace("Completed UpdateDataSource()");
-        }
-
-        #endregion
     }
 }
