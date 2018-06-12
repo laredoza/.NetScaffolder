@@ -91,12 +91,15 @@ namespace RepositoryEFDotnet.UnitTest.Base
         /// </exception>
         protected virtual void PopulateBook(IBook item, bool isUpdate = false, int seed = 1)
         {
-            item.ProductId = seed;
             item.Publisher = $"Publisher {seed}";
 
             if (isUpdate)
             {
                 item.Publisher = $"Publisher {seed} updated";
+            }
+            else
+            {
+                item.ProductId = seed;
             }
         }
 
@@ -173,19 +176,19 @@ namespace RepositoryEFDotnet.UnitTest.Base
 
             if (isUpdate)
             {
-                var updateString = " updated";
+                var updateString = " new";
 
                 item.Address = $"{item.Address} {updateString}";
-                item.City = $"{item.Address} {updateString}";
-                item.CompanyName = $"{item.Address} {updateString}";
-                item.ContactName = $"{item.Address} {updateString}";
-                item.ContactTitle = $"{item.Address} {updateString}";
-                item.CustomerCode = $"{item.Address} {updateString}";
-                item.Fax = $"{item.Address} {updateString}";
+                item.City = $"{item.City} {updateString}";
+                item.CompanyName = $"{item.CompanyName} {updateString}";
+                item.ContactName = $"{item.ContactName} {updateString}";
+                item.ContactTitle = $"{item.ContactTitle} {updateString}";
+                item.CustomerCode = $"{updateString}{item.CustomerId}";
+                item.Fax = $"{item.Fax} {updateString}";
                 item.IsEnabled = false;
-                item.Photo = $"{item.Address} {updateString}";
-                item.PostalCode = $"{item.Address} {updateString}";
-                item.Telephone = $"{item.Address} {updateString}";
+                item.Photo = $"{item.Photo} {updateString}";
+                item.PostalCode = $"{updateString}-{seed}";
+                item.Telephone = $"{item.Telephone} {updateString}";
             }
         }
 
@@ -316,11 +319,14 @@ namespace RepositoryEFDotnet.UnitTest.Base
         protected virtual void PopulateSoftware(ISoftware item, bool isUpdate = false, int seed = 1)
         {
             item.LicenseCode = $"License code {seed}";
-            item.ProductId = seed;
 
             if (isUpdate)
             {
                 item.LicenseCode = $"{item.LicenseCode} updated";
+            }
+            else
+            {
+                item.ProductId = seed;
             }
         }
 

@@ -1,5 +1,5 @@
 ﻿
-// <copyright file="BankTransfersMap.g.cs.g.cs" company="MIT">
+// <copyright file="BankTransfersMap.g.cs" company="MIT">
 //  Copyright (c) 2018 MIT
 // </copyright>  
 

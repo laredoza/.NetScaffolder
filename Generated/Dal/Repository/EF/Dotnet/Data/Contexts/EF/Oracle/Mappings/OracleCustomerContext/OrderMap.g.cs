@@ -1,5 +1,5 @@
 ﻿
-// <copyright file="OrderMap.g.cs.g.cs" company="MIT">
+// <copyright file="OrderMap.g.cs" company="MIT">
 //  Copyright (c) 2018 MIT
 // </copyright>  
 

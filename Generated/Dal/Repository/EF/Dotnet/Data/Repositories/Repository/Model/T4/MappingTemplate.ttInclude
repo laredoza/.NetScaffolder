@@ -16,7 +16,7 @@ public class MappingTemplate : BaseTemplate
 
 		//Debugger.Break();
 		Header = new CopyrightHeader();
-		Header.Filename = ModelName + PostFix + ".g.cs";
+		Header.Filename = ModelName + PostFix;
 #>
 
 <#= Header.TransformText() #>
