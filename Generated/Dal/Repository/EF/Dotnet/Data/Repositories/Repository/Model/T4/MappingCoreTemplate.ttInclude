@@ -38,7 +38,7 @@ namespace <#= Namespace #>.<#= Driver.ParentFolder #>.<#= Driver.Prefix #>
 {
 	public partial class <#= ModelName #><#= PostFix #> : IEntityTypeConfiguration<<#= ModelName #>>
 	{	
-	    public void Configure(EntityTypeBuilder<<#= ModelName #>> builder)
+	    public virtual void Configure(EntityTypeBuilder<<#= ModelName #>> builder)
 	    {
 <#+
 var schemaName = Model.SchemaName;

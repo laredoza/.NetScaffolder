@@ -8,8 +8,6 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EFCore
 {
     using System.Collections.Generic;
     using System.ComponentModel.Composition;
-    using System.Linq;
-    using System.Text;
 
     using DotNetScaffolder.Components.Common.Contract;
     using DotNetScaffolder.Mapping.MetaData.Model;
@@ -29,11 +27,6 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EFCore
         /// </summary>
         public string ConfigurationClass => string.Empty;
 
-        public string AsAlias(string name)
-        {
-            return $"[{name}]";
-        }
-
         /// <summary>
         ///     Gets the context attribute.
         /// </summary>
@@ -48,8 +41,6 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EFCore
         ///     Force schema to uppercase.
         /// </summary>
         public bool ForceSchemaToUppercase => false;
-
-        public bool UseSchema => true;
 
         /// <summary>
         ///     Gets the name spaces used to generate templates.
@@ -74,6 +65,11 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EFCore
         /// </summary>
         public string Prefix => "SqlServer";
 
+        /// <summary>
+        /// The use schema.
+        /// </summary>
+        public bool UseSchema => true;
+
         #endregion
 
         /// <summary>
@@ -82,33 +78,44 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EFCore
         IDriverType IDriver.DriverType =>
             this.DriverType ?? (this.DriverType = new EFCoreDriverType("EFCoreDriverType.xml"));
 
+        #region Public Methods And Operators
+
+        /// <summary>
+        /// The as alias.
+        /// </summary>
+        /// <param name="name">
+        /// The name.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        public string AsAlias(string name)
+        {
+            return $"[{name}]";
+        }
+
+        /// <summary>
+        /// The transform index.
+        /// </summary>
+        /// <param name="index">
+        /// The index.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
         public string TransformIndex(Index index)
         {
-            var idxs = new StringBuilder("HasIndex(i => new {");
+            var idxs = EFCoreDriverType.TransformIndex(index);
             bool isClustered = index.IndexType == IndexType.Clustered;
-
-            if (index.Columns != null && index.Columns.Any())
-            {
-                for (int i = 0; i < index.Columns.Count; i++)
-                {
-                    if (i > 0)
-                    {
-                        idxs.Append(", ");
-                    }
-
-                    idxs.Append($"i.{index.Columns[i]}");
-                }
-            }
-
-            idxs.Append("})");
-            idxs.Append($".IsUnique({index.IsUnique.ToString().ToLower()})");
 
             if (isClustered)
             {
-                idxs.Append(".ForSqlServerIsClustered()");
+                idxs = $"{idxs}.ForSqlServerIsClustered()";
             }
 
-            return idxs.ToString();
+            return idxs;
         }
+
+        #endregion
     }
 }

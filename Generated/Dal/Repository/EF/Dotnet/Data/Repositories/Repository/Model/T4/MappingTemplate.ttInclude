@@ -41,6 +41,11 @@ namespace <#= Namespace #>.<#= Driver.ParentFolder #>.<#= Driver.Prefix #>
 	{	
 		public <#= ModelName #><#= PostFix #> ()
 		{
+			CreateMapping();
+		}
+		
+		protected virtual void CreateMapping()
+		{
 <#+
 			var schemaName = Model.SchemaName;
 			if (Driver.ForceSchemaToUppercase)

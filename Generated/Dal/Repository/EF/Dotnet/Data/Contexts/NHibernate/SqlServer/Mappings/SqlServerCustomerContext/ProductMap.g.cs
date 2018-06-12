@@ -26,6 +26,11 @@ namespace Banking.Models.Customers.Mappings.NHibernate.SqlServer
 	{	
 		public ProductMap ()
 		{
+			CreateMapping();
+		}
+		
+		protected virtual void CreateMapping()
+		{
 			Table("Product");
 			Schema("dbo");
 			
@@ -55,7 +60,7 @@ namespace Banking.Models.Customers.Mappings.NHibernate.SqlServer
 			.Nullable();
 			
 			#endregion
-
+			
 			#region Relationships
 			
 			HasOne(s => s.Book).PropertyRef(o => o.ProductId);

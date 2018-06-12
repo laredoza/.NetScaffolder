@@ -31,7 +31,7 @@ namespace Banking.Models.Context.Mappings.EFCore.MySql
 {
 	public partial class BankAccountMap : IEntityTypeConfiguration<BankAccount>
 	{	
-	    public void Configure(EntityTypeBuilder<BankAccount> builder)
+	    public virtual void Configure(EntityTypeBuilder<BankAccount> builder)
 	    {
 			builder.ToTable("`BankAccount`");
 			
@@ -55,7 +55,7 @@ namespace Banking.Models.Context.Mappings.EFCore.MySql
 			#endregion
 
 			#region Indexes
-			builder.HasIndex(i => new {i.CustomerId}).IsUnique(false);
+			builder.HasIndex(i => new {i.CustomerId}).HasName("IX_CustomerId").IsUnique(false);
 			#endregion
 			
 			#region Relationships

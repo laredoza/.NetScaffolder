@@ -26,6 +26,11 @@ namespace Banking.Models.Context.Mappings.NHibernate.Oracle
 	{	
 		public CustomerMap ()
 		{
+			CreateMapping();
+		}
+		
+		protected virtual void CreateMapping()
+		{
 			Table("Customer");
 			
 			#region Primary Keys
@@ -66,6 +71,7 @@ namespace Banking.Models.Context.Mappings.NHibernate.Oracle
 			.Length(50)
 			.Nullable();
 			Map(t => t.CountryId)
+			.Index("IX_CountryId")
 			.Nullable();
 			Map(t => t.Photo)
 			.Nullable();
@@ -73,7 +79,7 @@ namespace Banking.Models.Context.Mappings.NHibernate.Oracle
 			.Not.Nullable();
 			
 			#endregion
-
+			
 			#region Relationships
 			
 			References(o => o.Country).Column("CountryId").Unique().Not.Insert().Not.Update();

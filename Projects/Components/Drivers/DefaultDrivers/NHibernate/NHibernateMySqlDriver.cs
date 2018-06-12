@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="NHibernateSqlServerDriver.cs" company="DotnetScaffolder">
+// <copyright file="NHibernateMySqlDriver.cs" company="DotnetScaffolder">
 //   MIT
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
@@ -31,16 +31,6 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.NHibernate
         /// </summary>
         public string ConfigurationClass => "MySQLConfiguration";
 
-        public string AsAlias(string name)
-        {
-            return $"`{name}`";
-        }
-
-        public string TransformIndex(Index index)
-        {
-            throw new System.NotImplementedException();
-        }
-
         /// <summary>
         /// Gets the context attribute.
         /// </summary>
@@ -56,19 +46,11 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.NHibernate
         /// </summary>
         public bool ForceSchemaToUppercase => false;
 
-        public bool UseSchema => false;
-
         /// <summary>
         /// Gets the name spaces used to generate templates.
         /// </summary>
         public List<string> NameSpaces =>
-            new List<string>
-                {
-                    "NHibernate",
-                    "NHibernate.Cfg",
-                    "FluentNHibernate.Cfg.Db",
-                    "FluentNHibernate.Cfg"
-                };
+            new List<string> { "NHibernate", "NHibernate.Cfg", "FluentNHibernate.Cfg.Db", "FluentNHibernate.Cfg" };
 
         /// <summary>
         /// The parent folder.
@@ -80,6 +62,11 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.NHibernate
         /// </summary>
         public string Prefix => "MySql";
 
+        /// <summary>
+        /// The use schema.
+        /// </summary>
+        public bool UseSchema => false;
+
         #endregion
 
         /// <summary>
@@ -87,5 +74,37 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.NHibernate
         /// </summary>
         IDriverType IDriver.DriverType =>
             this.DriverType ?? (this.DriverType = new NhibernateDriverType("NHibernateDriverType.xml"));
+
+        #region Public Methods And Operators
+
+        /// <summary>
+        /// The as alias.
+        /// </summary>
+        /// <param name="name">
+        /// The name.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        public string AsAlias(string name)
+        {
+            return $"`{name}`";
+        }
+
+        /// <summary>
+        /// The transform index.
+        /// </summary>
+        /// <param name="index">
+        /// The index.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        public string TransformIndex(Index index)
+        {
+            return NhibernateDriverType.TransformIndex(index);
+        }
+
+        #endregion
     }
 }

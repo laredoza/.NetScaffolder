@@ -35,6 +35,11 @@ namespace Banking.Models.Context.Mappings.EF.Oracle
 	{	
 		public CountryMap ()
 		{
+			CreateMapping();
+		}
+		
+		protected virtual void CreateMapping()
+		{
 			ToTable("Country", "DBO");
 			
 			#region Primary Keys

@@ -32,7 +32,7 @@ namespace Banking.Models.Context.Mappings.EFCore.SqlServer
 {
 	public partial class CountryMap : IEntityTypeConfiguration<Country>
 	{	
-	    public void Configure(EntityTypeBuilder<Country> builder)
+	    public virtual void Configure(EntityTypeBuilder<Country> builder)
 	    {
 			builder.ToTable("[Country]", "[dbo]");
 			

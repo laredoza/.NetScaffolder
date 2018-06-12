@@ -33,6 +33,11 @@ namespace Banking.Models.Customers.Mappings.EF.SqlServer
 	{	
 		public SoftwareMap ()
 		{
+			CreateMapping();
+		}
+		
+		protected virtual void CreateMapping()
+		{
 			ToTable("Software", "dbo");
 			
 			#region Primary Keys

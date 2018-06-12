@@ -26,6 +26,11 @@ namespace Banking.Models.Context.Mappings.NHibernate.Oracle
 	{	
 		public ProductMap ()
 		{
+			CreateMapping();
+		}
+		
+		protected virtual void CreateMapping()
+		{
 			Table("Product");
 			
 			#region Primary Keys
@@ -54,7 +59,7 @@ namespace Banking.Models.Context.Mappings.NHibernate.Oracle
 			.Nullable();
 			
 			#endregion
-
+			
 			#region Relationships
 			
 			HasOne(s => s.Book).PropertyRef(o => o.ProductId);

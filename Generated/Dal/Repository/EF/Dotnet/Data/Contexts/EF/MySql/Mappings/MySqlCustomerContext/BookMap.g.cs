@@ -34,6 +34,11 @@ namespace Banking.Models.Customers.Mappings.EF.MySql
 	{	
 		public BookMap ()
 		{
+			CreateMapping();
+		}
+		
+		protected virtual void CreateMapping()
+		{
 			ToTable("Book");
 			
 			#region Primary Keys

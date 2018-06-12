@@ -26,6 +26,11 @@ namespace Banking.Models.Customers.Mappings.NHibernate.SqlServer
 	{	
 		public CustomerMap ()
 		{
+			CreateMapping();
+		}
+		
+		protected virtual void CreateMapping()
+		{
 			Table("Customer");
 			Schema("dbo");
 			
@@ -67,6 +72,7 @@ namespace Banking.Models.Customers.Mappings.NHibernate.SqlServer
 			.Length(50)
 			.Nullable();
 			Map(t => t.CountryId)
+			.Index("IX_CountryId")
 			.Nullable();
 			Map(t => t.Photo)
 			.Nullable();
@@ -74,7 +80,7 @@ namespace Banking.Models.Customers.Mappings.NHibernate.SqlServer
 			.Not.Nullable();
 			
 			#endregion
-
+			
 			#region Relationships
 			
 			References(o => o.Country).Column("CountryId").Unique().Not.Insert().Not.Update();

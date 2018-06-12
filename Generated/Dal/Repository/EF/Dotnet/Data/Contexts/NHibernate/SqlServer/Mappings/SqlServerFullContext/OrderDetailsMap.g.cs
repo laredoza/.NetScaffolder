@@ -26,6 +26,11 @@ namespace Banking.Models.Context.Mappings.NHibernate.SqlServer
 	{	
 		public OrderDetailsMap ()
 		{
+			CreateMapping();
+		}
+		
+		protected virtual void CreateMapping()
+		{
 			Table("OrderDetails");
 			Schema("dbo");
 			
@@ -40,8 +45,10 @@ namespace Banking.Models.Context.Mappings.NHibernate.SqlServer
 			Map(t => t.OrderDetailsId).ReadOnly().Generated.Insert()
 			.Not.Nullable();
 			Map(t => t.OrderId)
+			.Index("IX_OrderId")
 			.Not.Nullable();
 			Map(t => t.ProductId)
+			.Index("IX_ProductId")
 			.Not.Nullable();
 			Map(t => t.UnitPrice)
 			.Precision(19).Scale(4)
@@ -52,7 +59,7 @@ namespace Banking.Models.Context.Mappings.NHibernate.SqlServer
 			.Nullable();
 			
 			#endregion
-
+			
 			#region Relationships
 			
 			References(o => o.Order).Column("OrderId").Unique().Not.Insert().Not.Update();

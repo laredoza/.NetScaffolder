@@ -34,6 +34,11 @@ namespace <#= Namespace #>.<#= Driver.ParentFolder #>.<#= Driver.Prefix #>
 	{	
 		public <#= ModelName #><#= PostFix #> ()
 		{
+			CreateMapping();
+		}
+		
+		protected virtual void CreateMapping()
+		{
 <#+
 			var schemaName = Model.SchemaName;
 			if (Driver.ForceSchemaToUppercase)
@@ -66,6 +71,9 @@ namespace <#= Namespace #>.<#= Driver.ParentFolder #>.<#= Driver.Prefix #>
 <#+ { #>
 			Map(t => t.<#= col.ColumnName #>)
 <#+ } #>
+<#+ foreach(var idx in Model.Indexes.Where(o => o.IndexType != IndexType.PrimaryKey && o.Columns.Contains(col.ColumnName))){ #>
+			<#=Driver.TransformIndex(idx) #>
+<#+ } #>
 <#+ if((col.Precision > 0 && !col.InValidPrecisionGeneration) || col.Scale > 0){ #>
 			<#= Driver.DriverType.TransformColumnPrecision(col) #>
 <#+ } #>
@@ -81,7 +89,7 @@ namespace <#= Namespace #>.<#= Driver.ParentFolder #>.<#= Driver.Prefix #>
 <#+ } #>
 			
 			#endregion
-
+			
 			#region Relationships
 			
 <#+ foreach(var rel in Model.Relationships.Where(o => ContextData.HasModel(o))){ #>

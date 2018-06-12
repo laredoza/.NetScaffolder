@@ -35,6 +35,11 @@ namespace Banking.Models.Customers.Mappings.EF.Oracle
 	{	
 		public ProductMap ()
 		{
+			CreateMapping();
+		}
+		
+		protected virtual void CreateMapping()
+		{
 			ToTable("Product", "DBO");
 			
 			#region Primary Keys

@@ -32,7 +32,7 @@ namespace Banking.Models.Customers.Mappings.EFCore.SqlServer
 {
 	public partial class CustomerMap : IEntityTypeConfiguration<Customer>
 	{	
-	    public void Configure(EntityTypeBuilder<Customer> builder)
+	    public virtual void Configure(EntityTypeBuilder<Customer> builder)
 	    {
 			builder.ToTable("[Customer]", "[dbo]");
 			
@@ -71,7 +71,7 @@ namespace Banking.Models.Customers.Mappings.EFCore.SqlServer
 			#endregion
 
 			#region Indexes
-			builder.HasIndex(i => new {i.CountryId}).IsUnique(false);
+			builder.HasIndex(i => new {i.CountryId}).HasName("IX_CountryId").IsUnique(false);
 			#endregion
 			
 			#region Relationships

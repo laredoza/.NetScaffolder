@@ -26,6 +26,11 @@ namespace Banking.Models.Context.Mappings.NHibernate.MySql
 	{	
 		public OrderMap ()
 		{
+			CreateMapping();
+		}
+		
+		protected virtual void CreateMapping()
+		{
 			Table("Order");
 			
 			#region Primary Keys
@@ -39,6 +44,7 @@ namespace Banking.Models.Context.Mappings.NHibernate.MySql
 			Map(t => t.OrderId).ReadOnly().Generated.Insert()
 			.Not.Nullable();
 			Map(t => t.CustomerId)
+			.Index("IX_CustomerId")
 			.Nullable();
 			Map(t => t.OrderDate)
 			.Nullable();
@@ -58,7 +64,7 @@ namespace Banking.Models.Context.Mappings.NHibernate.MySql
 			.Nullable();
 			
 			#endregion
-
+			
 			#region Relationships
 			
 			References(o => o.Customer).Column("CustomerId").Unique().Not.Insert().Not.Update();
