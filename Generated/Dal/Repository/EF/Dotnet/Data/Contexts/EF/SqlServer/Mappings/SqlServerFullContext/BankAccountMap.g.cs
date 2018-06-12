@@ -33,6 +33,11 @@ namespace Banking.Models.Context.Mappings.EF.SqlServer
 	{	
 		public BankAccountMap ()
 		{
+			CreateMapping();
+		}
+		
+		protected virtual void CreateMapping()
+		{
 			ToTable("BankAccount", "dbo");
 			
 			#region Primary Keys

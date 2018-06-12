@@ -12,7 +12,6 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.NHibernate
     using System.Collections.Generic;
     using System.ComponentModel.Composition;
     using System.IO;
-    using System.Linq;
     using System.Text;
     using System.Xml.Serialization;
 
@@ -114,23 +113,30 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.NHibernate
 
         #region Public Methods And Operators
 
-        public string TransformIndex(Index index)
+        /// <summary>
+        /// The transform index.
+        /// </summary>
+        /// <param name="index">
+        /// The index.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        public static string TransformIndex(Index index)
         {
-            string transIndex = string.Empty;
+            bool isClustered = index.IndexType == IndexType.Clustered;
+            var idxs = new StringBuilder();
 
-            if (index.Columns != null && index.Columns.Any())
+            if (index.IsUnique)
             {
-                if (index.Columns.Count == 1)
-                {
-
-                }
-                else
-                {
-
-                }
+                idxs.Append($".UniqueKey(\"{index.Name}\")");
+            }
+            else
+            {
+                idxs.Append($".Index(\"{index.Name}\")");
             }
 
-            return transIndex;
+            return idxs.ToString();
         }
 
         /// <summary>
@@ -280,7 +286,8 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.NHibernate
                 }
                 else
                 {
-                    sb.Append($"References(o => o.{refTableName}).Column(\"{rel.ReferencedColumnName}\").Unique().Not.Insert().Not.Update();");
+                    sb.Append(
+                        $"References(o => o.{refTableName}).Column(\"{rel.ReferencedColumnName}\").Unique().Not.Insert().Not.Update();");
                 }
             }
             else

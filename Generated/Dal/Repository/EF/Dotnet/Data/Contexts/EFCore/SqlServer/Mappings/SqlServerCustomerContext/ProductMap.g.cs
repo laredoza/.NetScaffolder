@@ -32,7 +32,7 @@ namespace Banking.Models.Customers.Mappings.EFCore.SqlServer
 {
 	public partial class ProductMap : IEntityTypeConfiguration<Product>
 	{	
-	    public void Configure(EntityTypeBuilder<Product> builder)
+	    public virtual void Configure(EntityTypeBuilder<Product> builder)
 	    {
 			builder.ToTable("[Product]", "[dbo]");
 			

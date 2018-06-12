@@ -26,6 +26,11 @@ namespace Banking.Models.Customers.Mappings.NHibernate.SqlServer
 	{	
 		public CountryMap ()
 		{
+			CreateMapping();
+		}
+		
+		protected virtual void CreateMapping()
+		{
 			Table("Country");
 			Schema("dbo");
 			
@@ -44,7 +49,7 @@ namespace Banking.Models.Customers.Mappings.NHibernate.SqlServer
 			.Nullable();
 			
 			#endregion
-
+			
 			#region Relationships
 			
 			HasMany(s => s.Customer).KeyColumn("CountryId");

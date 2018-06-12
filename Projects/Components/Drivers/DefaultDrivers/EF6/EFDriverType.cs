@@ -115,6 +115,38 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6
         #region Public Methods And Operators
 
         /// <summary>
+        /// The transform index.
+        /// </summary>
+        /// <param name="index">
+        /// The index.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        public static string TransformIndex(Index index)
+        {
+            var idxs = new StringBuilder(".HasColumnAnnotation(\"" + index.Name + "\", new IndexAnnotation(new [] { ");
+            bool isClustered = index.IndexType == IndexType.Clustered;
+
+            if (index.Columns != null && index.Columns.Any())
+            {
+                for (int i = 0; i < index.Columns.Count; i++)
+                {
+                    if (i > 0)
+                    {
+                        idxs.Append(", ");
+                    }
+
+                    idxs.Append(
+                        "new IndexAttribute(\"" + index.Name + "\"){ IsClustered = " + isClustered.ToString().ToLower()
+                        + ", IsUnique = " + index.IsUnique.ToString().ToLower() + ", Order = " + i + "}");
+                }
+            }
+
+            return idxs.Append("}))").ToString();
+        }
+
+        /// <summary>
         /// The load config.
         /// </summary>
         /// <param name="parameters">
@@ -179,29 +211,6 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6
             }
 
             return string.Empty;
-        }
-
-        public static string TransformIndex(Index index)
-        {
-            var idxs = new StringBuilder(".HasColumnAnnotation(\"" + index.Name + "\", new IndexAnnotation(new [] { ");
-            bool isClustered = index.IndexType == IndexType.Clustered;
-
-            if (index.Columns != null && index.Columns.Any())
-            {
-                for (int i = 0;i < index.Columns.Count; i++)
-                {
-                    if (i > 0)
-                    {
-                        idxs.Append(", ");
-                    }
-
-                    idxs.Append(
-                        "new IndexAttribute(\"" + index.Name + "\"){ IsClustered = " + isClustered.ToString().ToLower()
-                        + ", IsUnique = " + index.IsUnique.ToString().ToLower() + ", Order = " + i + "}");
-                }
-            }
-
-            return idxs.Append("}))").ToString();
         }
 
         /// <summary>

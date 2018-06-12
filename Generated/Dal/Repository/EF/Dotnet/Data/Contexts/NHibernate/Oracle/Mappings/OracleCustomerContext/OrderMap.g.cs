@@ -26,6 +26,11 @@ namespace Banking.Models.Customers.Mappings.NHibernate.Oracle
 	{	
 		public OrderMap ()
 		{
+			CreateMapping();
+		}
+		
+		protected virtual void CreateMapping()
+		{
 			Table("Order");
 			
 			#region Primary Keys
@@ -39,6 +44,7 @@ namespace Banking.Models.Customers.Mappings.NHibernate.Oracle
 			Map(t => t.OrderId).ReadOnly().Generated.Insert()
 			.Not.Nullable();
 			Map(t => t.CustomerId)
+			.Index("IX_CustomerId")
 			.Nullable();
 			Map(t => t.OrderDate)
 			.Nullable();
@@ -58,7 +64,7 @@ namespace Banking.Models.Customers.Mappings.NHibernate.Oracle
 			.Nullable();
 			
 			#endregion
-
+			
 			#region Relationships
 			
 			References(o => o.Customer).Column("CustomerId").Unique().Not.Insert().Not.Update();

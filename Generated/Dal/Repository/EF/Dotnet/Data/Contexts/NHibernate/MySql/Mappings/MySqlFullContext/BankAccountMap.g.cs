@@ -26,6 +26,11 @@ namespace Banking.Models.Context.Mappings.NHibernate.MySql
 	{	
 		public BankAccountMap ()
 		{
+			CreateMapping();
+		}
+		
+		protected virtual void CreateMapping()
+		{
 			Table("BankAccount");
 			
 			#region Primary Keys
@@ -45,12 +50,13 @@ namespace Banking.Models.Context.Mappings.NHibernate.MySql
 			.Precision(19).Scale(4)
 			.Not.Nullable();
 			Map(t => t.CustomerId)
+			.Index("IX_CustomerId")
 			.Nullable();
 			Map(t => t.Locked)
 			.Not.Nullable();
 			
 			#endregion
-
+			
 			#region Relationships
 			
 			References(o => o.Customer).Column("CustomerId").Unique().Not.Insert().Not.Update();

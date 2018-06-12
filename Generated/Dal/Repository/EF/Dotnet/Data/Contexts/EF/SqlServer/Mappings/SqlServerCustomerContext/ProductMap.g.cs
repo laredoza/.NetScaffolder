@@ -33,6 +33,11 @@ namespace Banking.Models.Customers.Mappings.EF.SqlServer
 	{	
 		public ProductMap ()
 		{
+			CreateMapping();
+		}
+		
+		protected virtual void CreateMapping()
+		{
 			ToTable("Product", "dbo");
 			
 			#region Primary Keys

@@ -32,7 +32,7 @@ namespace Banking.Models.Customers.Mappings.EFCore.SqlServer
 {
 	public partial class BookMap : IEntityTypeConfiguration<Book>
 	{	
-	    public void Configure(EntityTypeBuilder<Book> builder)
+	    public virtual void Configure(EntityTypeBuilder<Book> builder)
 	    {
 			builder.ToTable("[Book]", "[dbo]");
 			
@@ -52,7 +52,7 @@ namespace Banking.Models.Customers.Mappings.EFCore.SqlServer
 			#endregion
 
 			#region Indexes
-			builder.HasIndex(i => new {i.ProductId}).IsUnique(false);
+			builder.HasIndex(i => new {i.ProductId}).HasName("IX_ProductId").IsUnique(false);
 			#endregion
 			
 			#region Relationships

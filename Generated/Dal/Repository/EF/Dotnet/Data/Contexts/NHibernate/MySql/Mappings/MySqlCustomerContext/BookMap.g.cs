@@ -26,6 +26,11 @@ namespace Banking.Models.Customers.Mappings.NHibernate.MySql
 	{	
 		public BookMap ()
 		{
+			CreateMapping();
+		}
+		
+		protected virtual void CreateMapping()
+		{
 			Table("Book");
 			
 			#region Primary Keys
@@ -37,13 +42,14 @@ namespace Banking.Models.Customers.Mappings.NHibernate.MySql
 			#region Constraints
 			
 			Map(t => t.ProductId).ReadOnly().Generated.Insert()
+			.Index("IX_ProductId")
 			.Not.Nullable();
 			Map(t => t.Publisher)
 			.Length(200)
 			.Not.Nullable();
 			
 			#endregion
-
+			
 			#region Relationships
 			
 			HasOne(s => s.Product).PropertyRef(o => o.ProductId);

@@ -26,6 +26,11 @@ namespace Banking.Models.Context.Mappings.NHibernate.MySql
 	{	
 		public ProductMap ()
 		{
+			CreateMapping();
+		}
+		
+		protected virtual void CreateMapping()
+		{
 			Table("Product");
 			
 			#region Primary Keys
@@ -54,7 +59,7 @@ namespace Banking.Models.Context.Mappings.NHibernate.MySql
 			.Nullable();
 			
 			#endregion
-
+			
 			#region Relationships
 			
 			HasOne(s => s.Book).PropertyRef(o => o.ProductId);

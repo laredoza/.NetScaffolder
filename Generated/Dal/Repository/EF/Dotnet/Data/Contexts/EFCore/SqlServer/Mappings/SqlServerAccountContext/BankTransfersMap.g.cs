@@ -32,7 +32,7 @@ namespace Banking.Models.Accounts.Mappings.EFCore.SqlServer
 {
 	public partial class BankTransfersMap : IEntityTypeConfiguration<BankTransfers>
 	{	
-	    public void Configure(EntityTypeBuilder<BankTransfers> builder)
+	    public virtual void Configure(EntityTypeBuilder<BankTransfers> builder)
 	    {
 			builder.ToTable("[BankTransfers]", "[dbo]");
 			
@@ -55,7 +55,7 @@ namespace Banking.Models.Accounts.Mappings.EFCore.SqlServer
 			#endregion
 
 			#region Indexes
-			builder.HasIndex(i => new {i.ToBankAccountId}).IsUnique(false);
+			builder.HasIndex(i => new {i.ToBankAccountId}).HasName("IX_ToBankAccountId").IsUnique(false);
 			#endregion
 			
 			#region Relationships

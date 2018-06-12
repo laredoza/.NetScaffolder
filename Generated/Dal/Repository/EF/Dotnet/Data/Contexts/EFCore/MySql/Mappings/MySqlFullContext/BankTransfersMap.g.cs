@@ -31,7 +31,7 @@ namespace Banking.Models.Context.Mappings.EFCore.MySql
 {
 	public partial class BankTransfersMap : IEntityTypeConfiguration<BankTransfers>
 	{	
-	    public void Configure(EntityTypeBuilder<BankTransfers> builder)
+	    public virtual void Configure(EntityTypeBuilder<BankTransfers> builder)
 	    {
 			builder.ToTable("`BankTransfers`");
 			
@@ -54,7 +54,7 @@ namespace Banking.Models.Context.Mappings.EFCore.MySql
 			#endregion
 
 			#region Indexes
-			builder.HasIndex(i => new {i.ToBankAccountId}).IsUnique(false);
+			builder.HasIndex(i => new {i.ToBankAccountId}).HasName("IX_ToBankAccountId").IsUnique(false);
 			#endregion
 			
 			#region Relationships

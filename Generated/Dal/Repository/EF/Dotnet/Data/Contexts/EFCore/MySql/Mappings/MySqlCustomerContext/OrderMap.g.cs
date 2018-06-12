@@ -31,7 +31,7 @@ namespace Banking.Models.Customers.Mappings.EFCore.MySql
 {
 	public partial class OrderMap : IEntityTypeConfiguration<Order>
 	{	
-	    public void Configure(EntityTypeBuilder<Order> builder)
+	    public virtual void Configure(EntityTypeBuilder<Order> builder)
 	    {
 			builder.ToTable("`Order`");
 			
@@ -60,7 +60,7 @@ namespace Banking.Models.Customers.Mappings.EFCore.MySql
 			#endregion
 
 			#region Indexes
-			builder.HasIndex(i => new {i.CustomerId}).IsUnique(false);
+			builder.HasIndex(i => new {i.CustomerId}).HasName("IX_CustomerId").IsUnique(false);
 			#endregion
 			
 			#region Relationships

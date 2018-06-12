@@ -26,6 +26,11 @@ namespace Banking.Models.Context.Mappings.NHibernate.MySql
 	{	
 		public SoftwareMap ()
 		{
+			CreateMapping();
+		}
+		
+		protected virtual void CreateMapping()
+		{
 			Table("Software");
 			
 			#region Primary Keys
@@ -37,13 +42,14 @@ namespace Banking.Models.Context.Mappings.NHibernate.MySql
 			#region Constraints
 			
 			Map(t => t.ProductId).ReadOnly().Generated.Insert()
+			.Index("IX_ProductId")
 			.Not.Nullable();
 			Map(t => t.LicenseCode)
 			.Length(200)
 			.Not.Nullable();
 			
 			#endregion
-
+			
 			#region Relationships
 			
 			HasOne(s => s.Product).PropertyRef(o => o.ProductId);

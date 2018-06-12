@@ -26,6 +26,11 @@ namespace Banking.Models.Accounts.Mappings.NHibernate.Oracle
 	{	
 		public BankTransfersMap ()
 		{
+			CreateMapping();
+		}
+		
+		protected virtual void CreateMapping()
+		{
 			Table("BankTransfers");
 			
 			#region Primary Keys
@@ -41,6 +46,7 @@ namespace Banking.Models.Accounts.Mappings.NHibernate.Oracle
 			Map(t => t.FromBankAccountId)
 			.Not.Nullable();
 			Map(t => t.ToBankAccountId)
+			.Index("IX_ToBankAccountId")
 			.Not.Nullable();
 			Map(t => t.Amount)
 			.Precision(18).Scale(2)
@@ -49,7 +55,7 @@ namespace Banking.Models.Accounts.Mappings.NHibernate.Oracle
 			.Not.Nullable();
 			
 			#endregion
-
+			
 			#region Relationships
 			
 			References(o => o.BankAccount).Column("BankAccountId").Unique().Not.Insert().Not.Update();

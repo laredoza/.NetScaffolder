@@ -35,6 +35,11 @@ namespace Banking.Models.Accounts.Mappings.EF.Oracle
 	{	
 		public BankAccountMap ()
 		{
+			CreateMapping();
+		}
+		
+		protected virtual void CreateMapping()
+		{
 			ToTable("BankAccount", "DBO");
 			
 			#region Primary Keys

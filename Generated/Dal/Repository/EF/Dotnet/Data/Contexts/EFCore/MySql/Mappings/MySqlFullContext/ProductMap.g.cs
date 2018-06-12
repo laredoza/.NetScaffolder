@@ -31,7 +31,7 @@ namespace Banking.Models.Context.Mappings.EFCore.MySql
 {
 	public partial class ProductMap : IEntityTypeConfiguration<Product>
 	{	
-	    public void Configure(EntityTypeBuilder<Product> builder)
+	    public virtual void Configure(EntityTypeBuilder<Product> builder)
 	    {
 			builder.ToTable("`Product`");
 			

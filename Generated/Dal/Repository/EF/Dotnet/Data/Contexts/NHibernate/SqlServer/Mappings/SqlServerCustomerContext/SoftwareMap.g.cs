@@ -26,6 +26,11 @@ namespace Banking.Models.Customers.Mappings.NHibernate.SqlServer
 	{	
 		public SoftwareMap ()
 		{
+			CreateMapping();
+		}
+		
+		protected virtual void CreateMapping()
+		{
 			Table("Software");
 			Schema("dbo");
 			
@@ -38,13 +43,14 @@ namespace Banking.Models.Customers.Mappings.NHibernate.SqlServer
 			#region Constraints
 			
 			Map(t => t.ProductId).ReadOnly().Generated.Insert()
+			.Index("IX_ProductId")
 			.Not.Nullable();
 			Map(t => t.LicenseCode)
 			.Length(200)
 			.Not.Nullable();
 			
 			#endregion
-
+			
 			#region Relationships
 			
 			HasOne(s => s.Product).PropertyRef(o => o.ProductId);

@@ -26,6 +26,11 @@ namespace Banking.Models.Customers.Mappings.NHibernate.Oracle
 	{	
 		public CountryMap ()
 		{
+			CreateMapping();
+		}
+		
+		protected virtual void CreateMapping()
+		{
 			Table("Country");
 			
 			#region Primary Keys
@@ -43,7 +48,7 @@ namespace Banking.Models.Customers.Mappings.NHibernate.Oracle
 			.Nullable();
 			
 			#endregion
-
+			
 			#region Relationships
 			
 			HasMany(s => s.Customer).KeyColumn("CountryId");

@@ -31,7 +31,7 @@ namespace Banking.Models.Context.Mappings.EFCore.MySql
 {
 	public partial class BookMap : IEntityTypeConfiguration<Book>
 	{	
-	    public void Configure(EntityTypeBuilder<Book> builder)
+	    public virtual void Configure(EntityTypeBuilder<Book> builder)
 	    {
 			builder.ToTable("`Book`");
 			
@@ -51,7 +51,7 @@ namespace Banking.Models.Context.Mappings.EFCore.MySql
 			#endregion
 
 			#region Indexes
-			builder.HasIndex(i => new {i.ProductId}).IsUnique(false);
+			builder.HasIndex(i => new {i.ProductId}).HasName("IX_ProductId").IsUnique(false);
 			#endregion
 			
 			#region Relationships

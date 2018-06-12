@@ -26,6 +26,11 @@ namespace Banking.Models.Context.Mappings.NHibernate.SqlServer
 	{	
 		public BankAccountMap ()
 		{
+			CreateMapping();
+		}
+		
+		protected virtual void CreateMapping()
+		{
 			Table("BankAccount");
 			Schema("dbo");
 			
@@ -46,12 +51,13 @@ namespace Banking.Models.Context.Mappings.NHibernate.SqlServer
 			.Precision(19).Scale(4)
 			.Not.Nullable();
 			Map(t => t.CustomerId)
+			.Index("IX_CustomerId")
 			.Nullable();
 			Map(t => t.Locked)
 			.Not.Nullable();
 			
 			#endregion
-
+			
 			#region Relationships
 			
 			References(o => o.Customer).Column("CustomerId").Unique().Not.Insert().Not.Update();

@@ -31,11 +31,6 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6
         /// </summary>
         public string ConfigurationClass => string.Empty;
 
-        public string AsAlias(string name)
-        {
-            return $"\\\"{name}\\\"";
-        }
-
         /// <summary>
         ///     Gets the context attribute.
         /// </summary>
@@ -50,8 +45,6 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6
         ///     Force schema to uppercase.
         /// </summary>
         public bool ForceSchemaToUppercase => true;
-
-        public bool UseSchema => true;
 
         /// <summary>
         ///     Gets the name spaces used to generate templates.
@@ -76,6 +69,11 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6
         /// </summary>
         public string Prefix => "Oracle";
 
+        /// <summary>
+        /// The use schema.
+        /// </summary>
+        public bool UseSchema => true;
+
         #endregion
 
         /// <summary>
@@ -83,9 +81,36 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6
         /// </summary>
         IDriverType IDriver.DriverType => this.DriverType ?? (this.DriverType = new EFDriverType("EFDriverType.xml"));
 
+        #region Public Methods And Operators
+
+        /// <summary>
+        /// The as alias.
+        /// </summary>
+        /// <param name="name">
+        /// The name.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        public string AsAlias(string name)
+        {
+            return $"\\\"{name}\\\"";
+        }
+
+        /// <summary>
+        /// The transform index.
+        /// </summary>
+        /// <param name="index">
+        /// The index.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
         public string TransformIndex(Index index)
         {
             return EFDriverType.TransformIndex(index);
         }
+
+        #endregion
     }
 }
