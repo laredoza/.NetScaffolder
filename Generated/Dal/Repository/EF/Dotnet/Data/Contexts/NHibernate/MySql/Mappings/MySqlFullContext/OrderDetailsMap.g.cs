@@ -35,14 +35,14 @@ namespace Banking.Models.Context.Mappings.NHibernate.MySql
 			
 			#region Primary Keys
 			
-			Id(t => t.OrderDetailsId).GeneratedBy.Increment();
+			Id(t => t.OrderDetailsId).GeneratedBy.Increment().Unique()
+			.Not.Nullable();
+			Map(t => t.OrderDetailsId).ReadOnly().Generated.Insert();
 
 			#endregion
 
-			#region Constraints
+			#region Properties
 			
-			Map(t => t.OrderDetailsId).ReadOnly().Generated.Insert()
-			.Not.Nullable();
 			Map(t => t.OrderId)
 			.Index("IX_OrderId")
 			.Not.Nullable();

@@ -12,6 +12,7 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.NHibernate
     using System.Collections.Generic;
     using System.ComponentModel.Composition;
     using System.IO;
+    using System.Linq;
     using System.Text;
     using System.Xml.Serialization;
 
@@ -235,11 +236,11 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.NHibernate
             if (table.DatabaseGeneratedKeyType == DatabaseGeneratedKeyType.None
                 || table.DatabaseGeneratedKeyType == DatabaseGeneratedKeyType.Ignore)
             {
-                return string.Empty;
+                return ".GeneratedBy.Assigned()";
             }
             else
             {
-                return ".GeneratedBy.Increment()";
+                return ".GeneratedBy.Increment().Unique()";
             }
         }
 
@@ -278,28 +279,48 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.NHibernate
                 rel.RelationshipAlias,
                 nc);
 
+            string parentTableName = table;
+
+            if (relationships != null && relationships.Any())
+            {
+                var parentRels =
+                    (from tbl in models
+                     select tbl.Relationships.FirstOrDefault(
+                         o => o.ReferencedTableName == table && o.SchemaName == rel.SchemaName
+                                                             && o.ColumnName == rel.ReferencedColumnName))
+                    .Where(x => x != null);
+
+                var parentRel = parentRels.FirstOrDefault();
+
+                if (parentRel != null)
+                {
+                    parentTableName = RelationshipNameFormatting.FormatName(
+                        parentRel.ReferencedTableName,
+                        parentRel.RelationshipAlias,
+                        nc);
+                }
+            }
+
             if (rel.Multiplicity == RelationshipMultiplicity.Many)
             {
-                if (rel.ReferencedMultiplicity == RelationshipMultiplicity.Many)
-                {
-                    sb.Append($"HasManyToMany(o => o.{refTableName});");
-                }
-                else
-                {
-                    sb.Append(
-                        $"References(o => o.{refTableName}).Column(\"{rel.ReferencedColumnName}\").Unique().Not.Insert().Not.Update();");
-                }
+                sb.Append(
+                    rel.ReferencedMultiplicity == RelationshipMultiplicity.Many
+                        ? $"HasManyToMany(o => o.{refTableName});"
+                        : $"References(o => o.{refTableName}).Column(\"{rel.ReferencedColumnName}\").Unique().Not.Insert().Not.Update();");
+            }
+            else if (rel.Multiplicity == RelationshipMultiplicity.One)
+            {
+                sb.Append(
+                    rel.ReferencedMultiplicity == RelationshipMultiplicity.Many
+                        ? $"HasMany(s => s.{refTableName}).KeyColumn(\"{rel.ReferencedColumnName}\");"
+                        : $"HasOne(s => s.{refTableName}).PropertyRef(o => o.{parentTableName});");
             }
             else
             {
-                if (rel.ReferencedMultiplicity == RelationshipMultiplicity.Many)
-                {
-                    sb.Append($"HasMany(s => s.{refTableName}).KeyColumn(\"{rel.ReferencedColumnName}\");");
-                }
-                else
-                {
-                    sb.Append($"HasOne(s => s.{refTableName}).PropertyRef(o => o.{rel.ReferencedColumnName});");
-                }
+                sb.Append(
+                    rel.ReferencedMultiplicity == RelationshipMultiplicity.Many
+                        ? $"HasMany(s => s.{refTableName}).KeyColumn(\"{rel.ReferencedColumnName}\");"
+                        : $"HasOne(s => s.{refTableName});");
             }
 
             return sb.ToString();

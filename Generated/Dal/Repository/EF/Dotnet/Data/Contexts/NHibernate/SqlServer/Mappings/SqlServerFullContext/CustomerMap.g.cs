@@ -36,14 +36,14 @@ namespace Banking.Models.Context.Mappings.NHibernate.SqlServer
 			
 			#region Primary Keys
 			
-			Id(t => t.CustomerId).GeneratedBy.Increment();
+			Id(t => t.CustomerId).GeneratedBy.Increment().Unique()
+			.Not.Nullable();
+			Map(t => t.CustomerId).ReadOnly().Generated.Insert();
 
 			#endregion
 
-			#region Constraints
+			#region Properties
 			
-			Map(t => t.CustomerId).ReadOnly().Generated.Insert()
-			.Not.Nullable();
 			Map(t => t.CustomerCode)
 			.Length(5)
 			.Not.Nullable();

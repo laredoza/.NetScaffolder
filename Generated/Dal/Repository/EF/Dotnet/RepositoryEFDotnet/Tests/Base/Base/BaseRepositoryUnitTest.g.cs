@@ -1,5 +1,5 @@
 ﻿
-// <copyright file="BaseRepositoryUnitTest.g.cs.g.cs" company="MIT">
+// <copyright file="BaseRepositoryUnitTest.g.cs" company="MIT">
 //  Copyright (c) 2018 MIT
 // </copyright>  
 
@@ -40,8 +40,7 @@ namespace RepositoryEFDotnet.UnitTest.Base
 		
         #region Tests
 		
-
-        public void BankAccount_Add(IUnitOfWork uow, int count = 1, int startSeed = 1, int expected = 1)
+        protected void BankAccount_Add(IUnitOfWork uow, int count = 1, int startSeed = 1, int expected = 1)
         {
             var repo = new BankAccountRepository(uow);
 			
@@ -54,150 +53,68 @@ namespace RepositoryEFDotnet.UnitTest.Base
 			
 			uow.Commit();
 			
-			BaseRepositoryUnitTest_BankAccount_CheckData(repo, list, expected);
+			BaseRepositoryUnitTest_BankAccount_CheckData(uow, list, expected);
         }
 		
-
-        public void BankTransfers_Add(IUnitOfWork uow, int count = 1, int startSeed = 1, int expected = 1)
+		protected virtual void BankAccount_LoadTests(IUnitOfWork uow)
+		{
+			BankAccount_LoadAll(uow);
+			BankAccount_LoadById(uow);
+			BankAccount_LoadByBalance(uow);
+			BankAccount_LoadByCustomerId(uow);
+			BankAccount_LoadByLocked(uow);
+		}
+		
+		protected virtual void BankAccount_SearchTests(IUnitOfWork uow)
+		{
+			BankAccount_SearchByBankAccountNumber(uow);
+			BankAccount_SearchByBankAccountNumber(uow, false);
+		}
+		
+        protected void BankAccount_Update(IUnitOfWork uow)
         {
-            var repo = new BankTransfersRepository(uow);
+            var repo = new BankAccountRepository(uow);
 			
 			if(UseTransactions)
 			{
 				uow.StartTransaction();
 			}
 			
-            var list = BaseRepositoryUnitTest_BankTransfers_AddRange(repo, count, startSeed);
+			var list = repo.LoadAll().ToList();
+			
+			foreach(var dto in list)
+			{
+				PopulateBankAccount(dto, true);
+				repo.Update(dto);
+			}
 			
 			uow.Commit();
 			
-			BaseRepositoryUnitTest_BankTransfers_CheckData(repo, list, expected);
+			BaseRepositoryUnitTest_BankAccount_CheckData(uow, list, list.Count());
         }
 		
-
-        public void Book_Add(IUnitOfWork uow, int count = 1, int startSeed = 1, int expected = 1)
+        protected void BankAccount_Delete(IUnitOfWork uow)
         {
-            var repo = new BookRepository(uow);
+            var repo = new BankAccountRepository(uow);
+            var list = repo.LoadAll().ToList();
 			
 			if(UseTransactions)
 			{
 				uow.StartTransaction();
 			}
 			
-            var list = BaseRepositoryUnitTest_Book_AddRange(repo, count, startSeed);
-			
-			uow.Commit();
-			
-			BaseRepositoryUnitTest_Book_CheckData(repo, list, expected);
-        }
-		
-
-        public void Country_Add(IUnitOfWork uow, int count = 1, int startSeed = 1, int expected = 1)
-        {
-            var repo = new CountryRepository(uow);
-			
-			if(UseTransactions)
+			foreach(var item in list.Select(o => o.BankAccountId).Distinct())
 			{
-				uow.StartTransaction();
+				repo.Delete(item);
 			}
 			
-            var list = BaseRepositoryUnitTest_Country_AddRange(repo, count, startSeed);
-			
 			uow.Commit();
 			
-			BaseRepositoryUnitTest_Country_CheckData(repo, list, expected);
+			list = repo.LoadAll().ToList();
+			this.Check_EntityCount(0, list.Count(), "Incorrect number of BankAccount found");
         }
 		
-
-        public void Customer_Add(IUnitOfWork uow, int count = 1, int startSeed = 1, int expected = 1)
-        {
-            var repo = new CustomerRepository(uow);
-			
-			if(UseTransactions)
-			{
-				uow.StartTransaction();
-			}
-			
-            var list = BaseRepositoryUnitTest_Customer_AddRange(repo, count, startSeed);
-			
-			uow.Commit();
-			
-			BaseRepositoryUnitTest_Customer_CheckData(repo, list, expected);
-        }
-		
-
-        public void Order_Add(IUnitOfWork uow, int count = 1, int startSeed = 1, int expected = 1)
-        {
-            var repo = new OrderRepository(uow);
-			
-			if(UseTransactions)
-			{
-				uow.StartTransaction();
-			}
-			
-            var list = BaseRepositoryUnitTest_Order_AddRange(repo, count, startSeed);
-			
-			uow.Commit();
-			
-			BaseRepositoryUnitTest_Order_CheckData(repo, list, expected);
-        }
-		
-
-        public void OrderDetails_Add(IUnitOfWork uow, int count = 1, int startSeed = 1, int expected = 1)
-        {
-            var repo = new OrderDetailsRepository(uow);
-			
-			if(UseTransactions)
-			{
-				uow.StartTransaction();
-			}
-			
-            var list = BaseRepositoryUnitTest_OrderDetails_AddRange(repo, count, startSeed);
-			
-			uow.Commit();
-			
-			BaseRepositoryUnitTest_OrderDetails_CheckData(repo, list, expected);
-        }
-		
-
-        public void Product_Add(IUnitOfWork uow, int count = 1, int startSeed = 1, int expected = 1)
-        {
-            var repo = new ProductRepository(uow);
-			
-			if(UseTransactions)
-			{
-				uow.StartTransaction();
-			}
-			
-            var list = BaseRepositoryUnitTest_Product_AddRange(repo, count, startSeed);
-			
-			uow.Commit();
-			
-			BaseRepositoryUnitTest_Product_CheckData(repo, list, expected);
-        }
-		
-
-        public void Software_Add(IUnitOfWork uow, int count = 1, int startSeed = 1, int expected = 1)
-        {
-            var repo = new SoftwareRepository(uow);
-			
-			if(UseTransactions)
-			{
-				uow.StartTransaction();
-			}
-			
-            var list = BaseRepositoryUnitTest_Software_AddRange(repo, count, startSeed);
-			
-			uow.Commit();
-			
-			BaseRepositoryUnitTest_Software_CheckData(repo, list, expected);
-        }
-		
-
-		#endregion
-		
-		#region Base Tests
-        protected virtual IList<IBankAccount> BaseRepositoryUnitTest_BankAccount_AddRange(IBankAccountRepository repository, int count = 1, int startSeed = 1)
+        private IList<IBankAccount> BaseRepositoryUnitTest_BankAccount_AddRange(IBankAccountRepository repository, int count = 1, int startSeed = 1)
         {		
             var list = new List<IBankAccount>();
             var seed = startSeed;
@@ -214,76 +131,98 @@ namespace RepositoryEFDotnet.UnitTest.Base
 			return list;
         }
 		
-        protected virtual IList<IBankAccount> BaseRepositoryUnitTest_BankAccount_Update(IBankAccountRepository repository)
-        {		
-			var list = repository.LoadAll();
-			foreach(var dto in list)
-			{
-				PopulateBankAccount(dto, true);
-				repository.Update(dto);
-			}
-			return list;
-		}
-		
-        public void BankAccount_Update(IUnitOfWork uow)
+        private void BankAccount_LoadAll(IUnitOfWork uow)
         {
             var repo = new BankAccountRepository(uow);
 			
-			if(UseTransactions)
-			{
-				uow.StartTransaction();
-			}
+            var list = repo.LoadAll();
 			
-            var list = BaseRepositoryUnitTest_BankAccount_Update(repo);
-			
-			uow.Commit();
-			
-			BaseRepositoryUnitTest_BankAccount_CheckData(repo, list, list.Count());
+			BaseRepositoryUnitTest_BankAccount_CheckData(uow, list, list.Count());
         }
 		
-        public void BankAccount_LoadAll(IUnitOfWork uow)
-        {
-            var repo = new BankAccountRepository(uow);
-			
-            var list = uow.GetAll<BankAccount>().Cast<IBankAccount>().ToList();
-			
-			BaseRepositoryUnitTest_BankAccount_CheckData(repo, list, list.Count());
-        }
-		
-        public void BankAccount_LoadById(IUnitOfWork uow)
+        private void BankAccount_LoadById(IUnitOfWork uow)
         {
 			var loadedList = new List<IBankAccount>();
             var repo = new BankAccountRepository(uow);
 			
             var list = repo.LoadAll().ToList();
 			
-			foreach(var item in list)
+			foreach(var item in list.Select(o => o.BankAccountId).Distinct())
 			{
-				loadedList.Add(repo.LoadByBankAccountId(item.BankAccountId));
+				loadedList.Add(repo.LoadByBankAccountId(item));
 			}
 			
-			BaseRepositoryUnitTest_BankAccount_CheckData(repo, loadedList, loadedList.Count());
+			BaseRepositoryUnitTest_BankAccount_CheckData(uow, loadedList, loadedList.Count());
         }
 		
 
-        public void BankAccount_SearchByBankAccountNumber(IUnitOfWork uow, string search, bool caseSensitive = true)
+        private void BankAccount_LoadByBalance(IUnitOfWork uow)
+        {
+			var loadedList = new List<IBankAccount>();
+            var repo = new BankAccountRepository(uow);
+			
+            var list = repo.LoadAll().ToList();
+			
+			foreach(var item in list.Select(o => o.Balance).Distinct())
+			{
+				loadedList.AddRange(repo.LoadByBalance(item));
+			}
+			
+			BaseRepositoryUnitTest_BankAccount_CheckData(uow, loadedList, loadedList.Count());
+        }
+
+        private void BankAccount_LoadByCustomerId(IUnitOfWork uow)
+        {
+			var loadedList = new List<IBankAccount>();
+            var repo = new BankAccountRepository(uow);
+			
+            var list = repo.LoadAll().ToList();
+			
+			foreach(var item in list.Select(o => o.CustomerId).Distinct())
+			{
+				loadedList.AddRange(repo.LoadByCustomerId(item));
+			}
+			
+			BaseRepositoryUnitTest_BankAccount_CheckData(uow, loadedList, loadedList.Count());
+        }
+
+        private void BankAccount_LoadByLocked(IUnitOfWork uow)
+        {
+			var loadedList = new List<IBankAccount>();
+            var repo = new BankAccountRepository(uow);
+			
+            var list = repo.LoadAll().ToList();
+			
+			foreach(var item in list.Select(o => o.Locked).Distinct())
+			{
+				loadedList.AddRange(repo.LoadByLocked(item));
+			}
+			
+			BaseRepositoryUnitTest_BankAccount_CheckData(uow, loadedList, loadedList.Count());
+        }
+		
+
+        private void BankAccount_SearchByBankAccountNumber(IUnitOfWork uow, bool caseSensitive = true)
         {
             var repo = new BankAccountRepository(uow);
 			var list = new List<IBankAccount>();
+			var dto = new BankAccountDto();
+			PopulateBankAccount(dto);
 			
 			if(caseSensitive)
 			{
-				list = uow.AllMatching<BankAccount>(i => i.BankAccountNumber.Contains(search)).Cast<IBankAccount>().ToList();
+				string searchTxt = dto.BankAccountNumber.Substring(0, 4);
+				list = uow.AllMatching<BankAccount>(i => i.BankAccountNumber.Contains(searchTxt)).Cast<IBankAccount>().ToList();
 			}
 			else
 			{
-				string loweredSearch = search.ToLower();
-				list = uow.AllMatching<BankAccount>(i => i.BankAccountNumber.ToLower().Contains(loweredSearch)).Cast<IBankAccount>().ToList();
+				string searchTxt = dto.BankAccountNumber.Substring(0, 4).ToLower();
+				list = uow.AllMatching<BankAccount>(i => i.BankAccountNumber.ToLower().Contains(searchTxt)).Cast<IBankAccount>().ToList();
 			}
 			
-			var searchList = repo.SearchByBankAccountNumber(search, caseSensitive);
+			var searchList = repo.SearchByBankAccountNumber(dto.BankAccountNumber.Substring(0, 4), caseSensitive);
 			
-			Assert.IsTrue(searchList.Count > 0, "No BankAccount found");
+			Assert.IsTrue(searchList.Count > 0, "No BankAccount found using BankAccountNumber");
 			
 			this.Check_EntityCount(list.Count(), searchList.Count(), "Incorrect number of BankAccount found");
 
@@ -293,18 +232,91 @@ namespace RepositoryEFDotnet.UnitTest.Base
 			}
         }
 
-
-		protected virtual void BaseRepositoryUnitTest_BankAccount_CheckData(IBankAccountRepository repository, IList<IBankAccount> list, int expected)
+		private void BaseRepositoryUnitTest_BankAccount_CheckData(IUnitOfWork uow, IList<IBankAccount> list, int expected)
 		{
-			var items = repository.LoadAll();
+			var items = uow.GetAll<BankAccount>().Cast<IBankAccount>().ToList();
             this.Check_EntityCount(expected, items.Count(), "Incorrect number of BankAccount found");
 
-			foreach (var item in list)
+			foreach (var item in items)
 			{
-				this.Check_BankAccount(item, items.FirstOrDefault(o => o.BankAccountId == item.BankAccountId));
+				this.Check_BankAccount(item, list.FirstOrDefault(o => o.BankAccountId == item.BankAccountId));
 			}
 		}
-        protected virtual IList<IBankTransfers> BaseRepositoryUnitTest_BankTransfers_AddRange(IBankTransfersRepository repository, int count = 1, int startSeed = 1)
+		
+        protected void BankTransfers_Add(IUnitOfWork uow, int count = 1, int startSeed = 1, int expected = 1)
+        {
+            var repo = new BankTransfersRepository(uow);
+			
+			if(UseTransactions)
+			{
+				uow.StartTransaction();
+			}
+			
+            var list = BaseRepositoryUnitTest_BankTransfers_AddRange(repo, count, startSeed);
+			
+			uow.Commit();
+			
+			BaseRepositoryUnitTest_BankTransfers_CheckData(uow, list, expected);
+        }
+		
+		protected virtual void BankTransfers_LoadTests(IUnitOfWork uow)
+		{
+			BankTransfers_LoadAll(uow);
+			BankTransfers_LoadById(uow);
+			BankTransfers_LoadByFromBankAccountId(uow);
+			BankTransfers_LoadByToBankAccountId(uow);
+			BankTransfers_LoadByAmount(uow);
+			BankTransfers_LoadByTransferDate(uow);
+		}
+		
+		protected virtual void BankTransfers_SearchTests(IUnitOfWork uow)
+		{
+		}
+		
+        protected void BankTransfers_Update(IUnitOfWork uow)
+        {
+            var repo = new BankTransfersRepository(uow);
+			
+			if(UseTransactions)
+			{
+				uow.StartTransaction();
+			}
+			
+			var list = repo.LoadAll().ToList();
+			
+			foreach(var dto in list)
+			{
+				PopulateBankTransfers(dto, true);
+				repo.Update(dto);
+			}
+			
+			uow.Commit();
+			
+			BaseRepositoryUnitTest_BankTransfers_CheckData(uow, list, list.Count());
+        }
+		
+        protected void BankTransfers_Delete(IUnitOfWork uow)
+        {
+            var repo = new BankTransfersRepository(uow);
+            var list = repo.LoadAll().ToList();
+			
+			if(UseTransactions)
+			{
+				uow.StartTransaction();
+			}
+			
+			foreach(var item in list.Select(o => o.BankTransferId).Distinct())
+			{
+				repo.Delete(item);
+			}
+			
+			uow.Commit();
+			
+			list = repo.LoadAll().ToList();
+			this.Check_EntityCount(0, list.Count(), "Incorrect number of BankTransfers found");
+        }
+		
+        private IList<IBankTransfers> BaseRepositoryUnitTest_BankTransfers_AddRange(IBankTransfersRepository repository, int count = 1, int startSeed = 1)
         {		
             var list = new List<IBankTransfers>();
             var seed = startSeed;
@@ -321,69 +333,175 @@ namespace RepositoryEFDotnet.UnitTest.Base
 			return list;
         }
 		
-        protected virtual IList<IBankTransfers> BaseRepositoryUnitTest_BankTransfers_Update(IBankTransfersRepository repository)
-        {		
-			var list = repository.LoadAll();
-			foreach(var dto in list)
-			{
-				PopulateBankTransfers(dto, true);
-				repository.Update(dto);
-			}
-			return list;
-		}
-		
-        public void BankTransfers_Update(IUnitOfWork uow)
+        private void BankTransfers_LoadAll(IUnitOfWork uow)
         {
             var repo = new BankTransfersRepository(uow);
 			
-			if(UseTransactions)
-			{
-				uow.StartTransaction();
-			}
+            var list = repo.LoadAll();
 			
-            var list = BaseRepositoryUnitTest_BankTransfers_Update(repo);
-			
-			uow.Commit();
-			
-			BaseRepositoryUnitTest_BankTransfers_CheckData(repo, list, list.Count());
+			BaseRepositoryUnitTest_BankTransfers_CheckData(uow, list, list.Count());
         }
 		
-        public void BankTransfers_LoadAll(IUnitOfWork uow)
-        {
-            var repo = new BankTransfersRepository(uow);
-			
-            var list = uow.GetAll<BankTransfers>().Cast<IBankTransfers>().ToList();
-			
-			BaseRepositoryUnitTest_BankTransfers_CheckData(repo, list, list.Count());
-        }
-		
-        public void BankTransfers_LoadById(IUnitOfWork uow)
+        private void BankTransfers_LoadById(IUnitOfWork uow)
         {
 			var loadedList = new List<IBankTransfers>();
             var repo = new BankTransfersRepository(uow);
 			
             var list = repo.LoadAll().ToList();
 			
-			foreach(var item in list)
+			foreach(var item in list.Select(o => o.BankTransferId).Distinct())
 			{
-				loadedList.Add(repo.LoadByBankTransferId(item.BankTransferId));
+				loadedList.Add(repo.LoadByBankTransferId(item));
 			}
 			
-			BaseRepositoryUnitTest_BankTransfers_CheckData(repo, loadedList, loadedList.Count());
+			BaseRepositoryUnitTest_BankTransfers_CheckData(uow, loadedList, loadedList.Count());
         }
 		
 
-		protected virtual void BaseRepositoryUnitTest_BankTransfers_CheckData(IBankTransfersRepository repository, IList<IBankTransfers> list, int expected)
+        private void BankTransfers_LoadByFromBankAccountId(IUnitOfWork uow)
+        {
+			var loadedList = new List<IBankTransfers>();
+            var repo = new BankTransfersRepository(uow);
+			
+            var list = repo.LoadAll().ToList();
+			
+			foreach(var item in list.Select(o => o.FromBankAccountId).Distinct())
+			{
+				loadedList.AddRange(repo.LoadByFromBankAccountId(item));
+			}
+			
+			BaseRepositoryUnitTest_BankTransfers_CheckData(uow, loadedList, loadedList.Count());
+        }
+
+        private void BankTransfers_LoadByToBankAccountId(IUnitOfWork uow)
+        {
+			var loadedList = new List<IBankTransfers>();
+            var repo = new BankTransfersRepository(uow);
+			
+            var list = repo.LoadAll().ToList();
+			
+			foreach(var item in list.Select(o => o.ToBankAccountId).Distinct())
+			{
+				loadedList.AddRange(repo.LoadByToBankAccountId(item));
+			}
+			
+			BaseRepositoryUnitTest_BankTransfers_CheckData(uow, loadedList, loadedList.Count());
+        }
+
+        private void BankTransfers_LoadByAmount(IUnitOfWork uow)
+        {
+			var loadedList = new List<IBankTransfers>();
+            var repo = new BankTransfersRepository(uow);
+			
+            var list = repo.LoadAll().ToList();
+			
+			foreach(var item in list.Select(o => o.Amount).Distinct())
+			{
+				loadedList.AddRange(repo.LoadByAmount(item));
+			}
+			
+			BaseRepositoryUnitTest_BankTransfers_CheckData(uow, loadedList, loadedList.Count());
+        }
+
+        private void BankTransfers_LoadByTransferDate(IUnitOfWork uow)
+        {
+			var loadedList = new List<IBankTransfers>();
+            var repo = new BankTransfersRepository(uow);
+			
+            var list = repo.LoadAll().ToList();
+			
+			foreach(var item in list.Select(o => o.TransferDate).Distinct())
+			{
+				loadedList.AddRange(repo.LoadByTransferDate(item));
+			}
+			
+			BaseRepositoryUnitTest_BankTransfers_CheckData(uow, loadedList, loadedList.Count());
+        }
+		
+
+		private void BaseRepositoryUnitTest_BankTransfers_CheckData(IUnitOfWork uow, IList<IBankTransfers> list, int expected)
 		{
-			var items = repository.LoadAll();
+			var items = uow.GetAll<BankTransfers>().Cast<IBankTransfers>().ToList();
             this.Check_EntityCount(expected, items.Count(), "Incorrect number of BankTransfers found");
 
-			foreach (var item in list)
+			foreach (var item in items)
 			{
-				this.Check_BankTransfers(item, items.FirstOrDefault(o => o.BankTransferId == item.BankTransferId));
+				this.Check_BankTransfers(item, list.FirstOrDefault(o => o.BankTransferId == item.BankTransferId));
 			}
 		}
-        protected virtual IList<IBook> BaseRepositoryUnitTest_Book_AddRange(IBookRepository repository, int count = 1, int startSeed = 1)
+		
+        protected void Book_Add(IUnitOfWork uow, int count = 1, int startSeed = 1, int expected = 1)
+        {
+            var repo = new BookRepository(uow);
+			
+			if(UseTransactions)
+			{
+				uow.StartTransaction();
+			}
+			
+            var list = BaseRepositoryUnitTest_Book_AddRange(repo, count, startSeed);
+			
+			uow.Commit();
+			
+			BaseRepositoryUnitTest_Book_CheckData(uow, list, expected);
+        }
+		
+		protected virtual void Book_LoadTests(IUnitOfWork uow)
+		{
+			Book_LoadAll(uow);
+			Book_LoadById(uow);
+		}
+		
+		protected virtual void Book_SearchTests(IUnitOfWork uow)
+		{
+			Book_SearchByPublisher(uow);
+			Book_SearchByPublisher(uow, false);
+		}
+		
+        protected void Book_Update(IUnitOfWork uow)
+        {
+            var repo = new BookRepository(uow);
+			
+			if(UseTransactions)
+			{
+				uow.StartTransaction();
+			}
+			
+			var list = repo.LoadAll().ToList();
+			
+			foreach(var dto in list)
+			{
+				PopulateBook(dto, true);
+				repo.Update(dto);
+			}
+			
+			uow.Commit();
+			
+			BaseRepositoryUnitTest_Book_CheckData(uow, list, list.Count());
+        }
+		
+        protected void Book_Delete(IUnitOfWork uow)
+        {
+            var repo = new BookRepository(uow);
+            var list = repo.LoadAll().ToList();
+			
+			if(UseTransactions)
+			{
+				uow.StartTransaction();
+			}
+			
+			foreach(var item in list.Select(o => o.ProductId).Distinct())
+			{
+				repo.Delete(item);
+			}
+			
+			uow.Commit();
+			
+			list = repo.LoadAll().ToList();
+			this.Check_EntityCount(0, list.Count(), "Incorrect number of Book found");
+        }
+		
+        private IList<IBook> BaseRepositoryUnitTest_Book_AddRange(IBookRepository repository, int count = 1, int startSeed = 1)
         {		
             var list = new List<IBook>();
             var seed = startSeed;
@@ -400,76 +518,53 @@ namespace RepositoryEFDotnet.UnitTest.Base
 			return list;
         }
 		
-        protected virtual IList<IBook> BaseRepositoryUnitTest_Book_Update(IBookRepository repository)
-        {		
-			var list = repository.LoadAll();
-			foreach(var dto in list)
-			{
-				PopulateBook(dto, true);
-				repository.Update(dto);
-			}
-			return list;
-		}
-		
-        public void Book_Update(IUnitOfWork uow)
+        private void Book_LoadAll(IUnitOfWork uow)
         {
             var repo = new BookRepository(uow);
 			
-			if(UseTransactions)
-			{
-				uow.StartTransaction();
-			}
+            var list = repo.LoadAll();
 			
-            var list = BaseRepositoryUnitTest_Book_Update(repo);
-			
-			uow.Commit();
-			
-			BaseRepositoryUnitTest_Book_CheckData(repo, list, list.Count());
+			BaseRepositoryUnitTest_Book_CheckData(uow, list, list.Count());
         }
 		
-        public void Book_LoadAll(IUnitOfWork uow)
-        {
-            var repo = new BookRepository(uow);
-			
-            var list = uow.GetAll<Book>().Cast<IBook>().ToList();
-			
-			BaseRepositoryUnitTest_Book_CheckData(repo, list, list.Count());
-        }
-		
-        public void Book_LoadById(IUnitOfWork uow)
+        private void Book_LoadById(IUnitOfWork uow)
         {
 			var loadedList = new List<IBook>();
             var repo = new BookRepository(uow);
 			
             var list = repo.LoadAll().ToList();
 			
-			foreach(var item in list)
+			foreach(var item in list.Select(o => o.ProductId).Distinct())
 			{
-				loadedList.Add(repo.LoadByProductId(item.ProductId));
+				loadedList.Add(repo.LoadByProductId(item));
 			}
 			
-			BaseRepositoryUnitTest_Book_CheckData(repo, loadedList, loadedList.Count());
+			BaseRepositoryUnitTest_Book_CheckData(uow, loadedList, loadedList.Count());
         }
 		
+		
 
-        public void Book_SearchByPublisher(IUnitOfWork uow, string search, bool caseSensitive = true)
+        private void Book_SearchByPublisher(IUnitOfWork uow, bool caseSensitive = true)
         {
             var repo = new BookRepository(uow);
 			var list = new List<IBook>();
+			var dto = new BookDto();
+			PopulateBook(dto);
 			
 			if(caseSensitive)
 			{
-				list = uow.AllMatching<Book>(i => i.Publisher.Contains(search)).Cast<IBook>().ToList();
+				string searchTxt = dto.Publisher.Substring(0, 4);
+				list = uow.AllMatching<Book>(i => i.Publisher.Contains(searchTxt)).Cast<IBook>().ToList();
 			}
 			else
 			{
-				string loweredSearch = search.ToLower();
-				list = uow.AllMatching<Book>(i => i.Publisher.ToLower().Contains(loweredSearch)).Cast<IBook>().ToList();
+				string searchTxt = dto.Publisher.Substring(0, 4).ToLower();
+				list = uow.AllMatching<Book>(i => i.Publisher.ToLower().Contains(searchTxt)).Cast<IBook>().ToList();
 			}
 			
-			var searchList = repo.SearchByPublisher(search, caseSensitive);
+			var searchList = repo.SearchByPublisher(dto.Publisher.Substring(0, 4), caseSensitive);
 			
-			Assert.IsTrue(searchList.Count > 0, "No Book found");
+			Assert.IsTrue(searchList.Count > 0, "No Book found using Publisher");
 			
 			this.Check_EntityCount(list.Count(), searchList.Count(), "Incorrect number of Book found");
 
@@ -479,18 +574,89 @@ namespace RepositoryEFDotnet.UnitTest.Base
 			}
         }
 
-
-		protected virtual void BaseRepositoryUnitTest_Book_CheckData(IBookRepository repository, IList<IBook> list, int expected)
+		private void BaseRepositoryUnitTest_Book_CheckData(IUnitOfWork uow, IList<IBook> list, int expected)
 		{
-			var items = repository.LoadAll();
+			var items = uow.GetAll<Book>().Cast<IBook>().ToList();
             this.Check_EntityCount(expected, items.Count(), "Incorrect number of Book found");
 
-			foreach (var item in list)
+			foreach (var item in items)
 			{
-				this.Check_Book(item, items.FirstOrDefault(o => o.ProductId == item.ProductId));
+				this.Check_Book(item, list.FirstOrDefault(o => o.ProductId == item.ProductId));
 			}
 		}
-        protected virtual IList<ICountry> BaseRepositoryUnitTest_Country_AddRange(ICountryRepository repository, int count = 1, int startSeed = 1)
+		
+        protected void Country_Add(IUnitOfWork uow, int count = 1, int startSeed = 1, int expected = 1)
+        {
+            var repo = new CountryRepository(uow);
+			
+			if(UseTransactions)
+			{
+				uow.StartTransaction();
+			}
+			
+            var list = BaseRepositoryUnitTest_Country_AddRange(repo, count, startSeed);
+			
+			uow.Commit();
+			
+			BaseRepositoryUnitTest_Country_CheckData(uow, list, expected);
+        }
+		
+		protected virtual void Country_LoadTests(IUnitOfWork uow)
+		{
+			Country_LoadAll(uow);
+			Country_LoadById(uow);
+		}
+		
+		protected virtual void Country_SearchTests(IUnitOfWork uow)
+		{
+			Country_SearchByCountryName(uow);
+			Country_SearchByCountryName(uow, false);
+		}
+		
+        protected void Country_Update(IUnitOfWork uow)
+        {
+            var repo = new CountryRepository(uow);
+			
+			if(UseTransactions)
+			{
+				uow.StartTransaction();
+			}
+			
+			var list = repo.LoadAll().ToList();
+			
+			foreach(var dto in list)
+			{
+				PopulateCountry(dto, true);
+				repo.Update(dto);
+			}
+			
+			uow.Commit();
+			
+			BaseRepositoryUnitTest_Country_CheckData(uow, list, list.Count());
+        }
+		
+        protected void Country_Delete(IUnitOfWork uow)
+        {
+            var repo = new CountryRepository(uow);
+            var list = repo.LoadAll().ToList();
+			
+			if(UseTransactions)
+			{
+				uow.StartTransaction();
+			}
+			
+			foreach(var item in list.Select(o => o.CountryId).Distinct())
+			{
+				repo.Delete(item);
+			}
+			
+			uow.Commit();
+			
+			list = repo.LoadAll().ToList();
+			this.Check_EntityCount(0, list.Count(), "Incorrect number of Country found");
+        }
+		
+        private IList<ICountry> BaseRepositoryUnitTest_Country_AddRange(ICountryRepository repository, int count = 1, int startSeed = 1)
         {		
             var list = new List<ICountry>();
             var seed = startSeed;
@@ -507,76 +673,53 @@ namespace RepositoryEFDotnet.UnitTest.Base
 			return list;
         }
 		
-        protected virtual IList<ICountry> BaseRepositoryUnitTest_Country_Update(ICountryRepository repository)
-        {		
-			var list = repository.LoadAll();
-			foreach(var dto in list)
-			{
-				PopulateCountry(dto, true);
-				repository.Update(dto);
-			}
-			return list;
-		}
-		
-        public void Country_Update(IUnitOfWork uow)
+        private void Country_LoadAll(IUnitOfWork uow)
         {
             var repo = new CountryRepository(uow);
 			
-			if(UseTransactions)
-			{
-				uow.StartTransaction();
-			}
+            var list = repo.LoadAll();
 			
-            var list = BaseRepositoryUnitTest_Country_Update(repo);
-			
-			uow.Commit();
-			
-			BaseRepositoryUnitTest_Country_CheckData(repo, list, list.Count());
+			BaseRepositoryUnitTest_Country_CheckData(uow, list, list.Count());
         }
 		
-        public void Country_LoadAll(IUnitOfWork uow)
-        {
-            var repo = new CountryRepository(uow);
-			
-            var list = uow.GetAll<Country>().Cast<ICountry>().ToList();
-			
-			BaseRepositoryUnitTest_Country_CheckData(repo, list, list.Count());
-        }
-		
-        public void Country_LoadById(IUnitOfWork uow)
+        private void Country_LoadById(IUnitOfWork uow)
         {
 			var loadedList = new List<ICountry>();
             var repo = new CountryRepository(uow);
 			
             var list = repo.LoadAll().ToList();
 			
-			foreach(var item in list)
+			foreach(var item in list.Select(o => o.CountryId).Distinct())
 			{
-				loadedList.Add(repo.LoadByCountryId(item.CountryId));
+				loadedList.Add(repo.LoadByCountryId(item));
 			}
 			
-			BaseRepositoryUnitTest_Country_CheckData(repo, loadedList, loadedList.Count());
+			BaseRepositoryUnitTest_Country_CheckData(uow, loadedList, loadedList.Count());
         }
 		
+		
 
-        public void Country_SearchByCountryName(IUnitOfWork uow, string search, bool caseSensitive = true)
+        private void Country_SearchByCountryName(IUnitOfWork uow, bool caseSensitive = true)
         {
             var repo = new CountryRepository(uow);
 			var list = new List<ICountry>();
+			var dto = new CountryDto();
+			PopulateCountry(dto);
 			
 			if(caseSensitive)
 			{
-				list = uow.AllMatching<Country>(i => i.CountryName.Contains(search)).Cast<ICountry>().ToList();
+				string searchTxt = dto.CountryName.Substring(0, 4);
+				list = uow.AllMatching<Country>(i => i.CountryName.Contains(searchTxt)).Cast<ICountry>().ToList();
 			}
 			else
 			{
-				string loweredSearch = search.ToLower();
-				list = uow.AllMatching<Country>(i => i.CountryName.ToLower().Contains(loweredSearch)).Cast<ICountry>().ToList();
+				string searchTxt = dto.CountryName.Substring(0, 4).ToLower();
+				list = uow.AllMatching<Country>(i => i.CountryName.ToLower().Contains(searchTxt)).Cast<ICountry>().ToList();
 			}
 			
-			var searchList = repo.SearchByCountryName(search, caseSensitive);
+			var searchList = repo.SearchByCountryName(dto.CountryName.Substring(0, 4), caseSensitive);
 			
-			Assert.IsTrue(searchList.Count > 0, "No Country found");
+			Assert.IsTrue(searchList.Count > 0, "No Country found using CountryName");
 			
 			this.Check_EntityCount(list.Count(), searchList.Count(), "Incorrect number of Country found");
 
@@ -586,18 +729,109 @@ namespace RepositoryEFDotnet.UnitTest.Base
 			}
         }
 
-
-		protected virtual void BaseRepositoryUnitTest_Country_CheckData(ICountryRepository repository, IList<ICountry> list, int expected)
+		private void BaseRepositoryUnitTest_Country_CheckData(IUnitOfWork uow, IList<ICountry> list, int expected)
 		{
-			var items = repository.LoadAll();
+			var items = uow.GetAll<Country>().Cast<ICountry>().ToList();
             this.Check_EntityCount(expected, items.Count(), "Incorrect number of Country found");
 
-			foreach (var item in list)
+			foreach (var item in items)
 			{
-				this.Check_Country(item, items.FirstOrDefault(o => o.CountryId == item.CountryId));
+				this.Check_Country(item, list.FirstOrDefault(o => o.CountryId == item.CountryId));
 			}
 		}
-        protected virtual IList<ICustomer> BaseRepositoryUnitTest_Customer_AddRange(ICustomerRepository repository, int count = 1, int startSeed = 1)
+		
+        protected void Customer_Add(IUnitOfWork uow, int count = 1, int startSeed = 1, int expected = 1)
+        {
+            var repo = new CustomerRepository(uow);
+			
+			if(UseTransactions)
+			{
+				uow.StartTransaction();
+			}
+			
+            var list = BaseRepositoryUnitTest_Customer_AddRange(repo, count, startSeed);
+			
+			uow.Commit();
+			
+			BaseRepositoryUnitTest_Customer_CheckData(uow, list, expected);
+        }
+		
+		protected virtual void Customer_LoadTests(IUnitOfWork uow)
+		{
+			Customer_LoadAll(uow);
+			Customer_LoadById(uow);
+			Customer_LoadByCountryId(uow);
+			Customer_LoadByIsEnabled(uow);
+		}
+		
+		protected virtual void Customer_SearchTests(IUnitOfWork uow)
+		{
+			Customer_SearchByCustomerCode(uow);
+			Customer_SearchByCustomerCode(uow, false);
+			Customer_SearchByCompanyName(uow);
+			Customer_SearchByCompanyName(uow, false);
+			Customer_SearchByContactName(uow);
+			Customer_SearchByContactName(uow, false);
+			Customer_SearchByContactTitle(uow);
+			Customer_SearchByContactTitle(uow, false);
+			Customer_SearchByAddress(uow);
+			Customer_SearchByAddress(uow, false);
+			Customer_SearchByCity(uow);
+			Customer_SearchByCity(uow, false);
+			Customer_SearchByPostalCode(uow);
+			Customer_SearchByPostalCode(uow, false);
+			Customer_SearchByTelephone(uow);
+			Customer_SearchByTelephone(uow, false);
+			Customer_SearchByFax(uow);
+			Customer_SearchByFax(uow, false);
+			Customer_SearchByPhoto(uow);
+			Customer_SearchByPhoto(uow, false);
+		}
+		
+        protected void Customer_Update(IUnitOfWork uow)
+        {
+            var repo = new CustomerRepository(uow);
+			
+			if(UseTransactions)
+			{
+				uow.StartTransaction();
+			}
+			
+			var list = repo.LoadAll().ToList();
+			
+			foreach(var dto in list)
+			{
+				PopulateCustomer(dto, true);
+				repo.Update(dto);
+			}
+			
+			uow.Commit();
+			
+			BaseRepositoryUnitTest_Customer_CheckData(uow, list, list.Count());
+        }
+		
+        protected void Customer_Delete(IUnitOfWork uow)
+        {
+            var repo = new CustomerRepository(uow);
+            var list = repo.LoadAll().ToList();
+			
+			if(UseTransactions)
+			{
+				uow.StartTransaction();
+			}
+			
+			foreach(var item in list.Select(o => o.CustomerId).Distinct())
+			{
+				repo.Delete(item);
+			}
+			
+			uow.Commit();
+			
+			list = repo.LoadAll().ToList();
+			this.Check_EntityCount(0, list.Count(), "Incorrect number of Customer found");
+        }
+		
+        private IList<ICustomer> BaseRepositoryUnitTest_Customer_AddRange(ICustomerRepository repository, int count = 1, int startSeed = 1)
         {		
             var list = new List<ICustomer>();
             var seed = startSeed;
@@ -614,76 +848,83 @@ namespace RepositoryEFDotnet.UnitTest.Base
 			return list;
         }
 		
-        protected virtual IList<ICustomer> BaseRepositoryUnitTest_Customer_Update(ICustomerRepository repository)
-        {		
-			var list = repository.LoadAll();
-			foreach(var dto in list)
-			{
-				PopulateCustomer(dto, true);
-				repository.Update(dto);
-			}
-			return list;
-		}
-		
-        public void Customer_Update(IUnitOfWork uow)
+        private void Customer_LoadAll(IUnitOfWork uow)
         {
             var repo = new CustomerRepository(uow);
 			
-			if(UseTransactions)
-			{
-				uow.StartTransaction();
-			}
+            var list = repo.LoadAll();
 			
-            var list = BaseRepositoryUnitTest_Customer_Update(repo);
-			
-			uow.Commit();
-			
-			BaseRepositoryUnitTest_Customer_CheckData(repo, list, list.Count());
+			BaseRepositoryUnitTest_Customer_CheckData(uow, list, list.Count());
         }
 		
-        public void Customer_LoadAll(IUnitOfWork uow)
-        {
-            var repo = new CustomerRepository(uow);
-			
-            var list = uow.GetAll<Customer>().Cast<ICustomer>().ToList();
-			
-			BaseRepositoryUnitTest_Customer_CheckData(repo, list, list.Count());
-        }
-		
-        public void Customer_LoadById(IUnitOfWork uow)
+        private void Customer_LoadById(IUnitOfWork uow)
         {
 			var loadedList = new List<ICustomer>();
             var repo = new CustomerRepository(uow);
 			
             var list = repo.LoadAll().ToList();
 			
-			foreach(var item in list)
+			foreach(var item in list.Select(o => o.CustomerId).Distinct())
 			{
-				loadedList.Add(repo.LoadByCustomerId(item.CustomerId));
+				loadedList.Add(repo.LoadByCustomerId(item));
 			}
 			
-			BaseRepositoryUnitTest_Customer_CheckData(repo, loadedList, loadedList.Count());
+			BaseRepositoryUnitTest_Customer_CheckData(uow, loadedList, loadedList.Count());
         }
 		
 
-        public void Customer_SearchByCustomerCode(IUnitOfWork uow, string search, bool caseSensitive = true)
+        private void Customer_LoadByCountryId(IUnitOfWork uow)
+        {
+			var loadedList = new List<ICustomer>();
+            var repo = new CustomerRepository(uow);
+			
+            var list = repo.LoadAll().ToList();
+			
+			foreach(var item in list.Select(o => o.CountryId).Distinct())
+			{
+				loadedList.AddRange(repo.LoadByCountryId(item));
+			}
+			
+			BaseRepositoryUnitTest_Customer_CheckData(uow, loadedList, loadedList.Count());
+        }
+
+        private void Customer_LoadByIsEnabled(IUnitOfWork uow)
+        {
+			var loadedList = new List<ICustomer>();
+            var repo = new CustomerRepository(uow);
+			
+            var list = repo.LoadAll().ToList();
+			
+			foreach(var item in list.Select(o => o.IsEnabled).Distinct())
+			{
+				loadedList.AddRange(repo.LoadByIsEnabled(item));
+			}
+			
+			BaseRepositoryUnitTest_Customer_CheckData(uow, loadedList, loadedList.Count());
+        }
+		
+
+        private void Customer_SearchByCustomerCode(IUnitOfWork uow, bool caseSensitive = true)
         {
             var repo = new CustomerRepository(uow);
 			var list = new List<ICustomer>();
+			var dto = new CustomerDto();
+			PopulateCustomer(dto);
 			
 			if(caseSensitive)
 			{
-				list = uow.AllMatching<Customer>(i => i.CustomerCode.Contains(search)).Cast<ICustomer>().ToList();
+				string searchTxt = dto.CustomerCode.Substring(0, 4);
+				list = uow.AllMatching<Customer>(i => i.CustomerCode.Contains(searchTxt)).Cast<ICustomer>().ToList();
 			}
 			else
 			{
-				string loweredSearch = search.ToLower();
-				list = uow.AllMatching<Customer>(i => i.CustomerCode.ToLower().Contains(loweredSearch)).Cast<ICustomer>().ToList();
+				string searchTxt = dto.CustomerCode.Substring(0, 4).ToLower();
+				list = uow.AllMatching<Customer>(i => i.CustomerCode.ToLower().Contains(searchTxt)).Cast<ICustomer>().ToList();
 			}
 			
-			var searchList = repo.SearchByCustomerCode(search, caseSensitive);
+			var searchList = repo.SearchByCustomerCode(dto.CustomerCode.Substring(0, 4), caseSensitive);
 			
-			Assert.IsTrue(searchList.Count > 0, "No Customer found");
+			Assert.IsTrue(searchList.Count > 0, "No Customer found using CustomerCode");
 			
 			this.Check_EntityCount(list.Count(), searchList.Count(), "Incorrect number of Customer found");
 
@@ -693,25 +934,27 @@ namespace RepositoryEFDotnet.UnitTest.Base
 			}
         }
 
-
-        public void Customer_SearchByCompanyName(IUnitOfWork uow, string search, bool caseSensitive = true)
+        private void Customer_SearchByCompanyName(IUnitOfWork uow, bool caseSensitive = true)
         {
             var repo = new CustomerRepository(uow);
 			var list = new List<ICustomer>();
+			var dto = new CustomerDto();
+			PopulateCustomer(dto);
 			
 			if(caseSensitive)
 			{
-				list = uow.AllMatching<Customer>(i => i.CompanyName.Contains(search)).Cast<ICustomer>().ToList();
+				string searchTxt = dto.CompanyName.Substring(0, 4);
+				list = uow.AllMatching<Customer>(i => i.CompanyName.Contains(searchTxt)).Cast<ICustomer>().ToList();
 			}
 			else
 			{
-				string loweredSearch = search.ToLower();
-				list = uow.AllMatching<Customer>(i => i.CompanyName.ToLower().Contains(loweredSearch)).Cast<ICustomer>().ToList();
+				string searchTxt = dto.CompanyName.Substring(0, 4).ToLower();
+				list = uow.AllMatching<Customer>(i => i.CompanyName.ToLower().Contains(searchTxt)).Cast<ICustomer>().ToList();
 			}
 			
-			var searchList = repo.SearchByCompanyName(search, caseSensitive);
+			var searchList = repo.SearchByCompanyName(dto.CompanyName.Substring(0, 4), caseSensitive);
 			
-			Assert.IsTrue(searchList.Count > 0, "No Customer found");
+			Assert.IsTrue(searchList.Count > 0, "No Customer found using CompanyName");
 			
 			this.Check_EntityCount(list.Count(), searchList.Count(), "Incorrect number of Customer found");
 
@@ -721,25 +964,27 @@ namespace RepositoryEFDotnet.UnitTest.Base
 			}
         }
 
-
-        public void Customer_SearchByContactName(IUnitOfWork uow, string search, bool caseSensitive = true)
+        private void Customer_SearchByContactName(IUnitOfWork uow, bool caseSensitive = true)
         {
             var repo = new CustomerRepository(uow);
 			var list = new List<ICustomer>();
+			var dto = new CustomerDto();
+			PopulateCustomer(dto);
 			
 			if(caseSensitive)
 			{
-				list = uow.AllMatching<Customer>(i => i.ContactName.Contains(search)).Cast<ICustomer>().ToList();
+				string searchTxt = dto.ContactName.Substring(0, 4);
+				list = uow.AllMatching<Customer>(i => i.ContactName.Contains(searchTxt)).Cast<ICustomer>().ToList();
 			}
 			else
 			{
-				string loweredSearch = search.ToLower();
-				list = uow.AllMatching<Customer>(i => i.ContactName.ToLower().Contains(loweredSearch)).Cast<ICustomer>().ToList();
+				string searchTxt = dto.ContactName.Substring(0, 4).ToLower();
+				list = uow.AllMatching<Customer>(i => i.ContactName.ToLower().Contains(searchTxt)).Cast<ICustomer>().ToList();
 			}
 			
-			var searchList = repo.SearchByContactName(search, caseSensitive);
+			var searchList = repo.SearchByContactName(dto.ContactName.Substring(0, 4), caseSensitive);
 			
-			Assert.IsTrue(searchList.Count > 0, "No Customer found");
+			Assert.IsTrue(searchList.Count > 0, "No Customer found using ContactName");
 			
 			this.Check_EntityCount(list.Count(), searchList.Count(), "Incorrect number of Customer found");
 
@@ -749,25 +994,27 @@ namespace RepositoryEFDotnet.UnitTest.Base
 			}
         }
 
-
-        public void Customer_SearchByContactTitle(IUnitOfWork uow, string search, bool caseSensitive = true)
+        private void Customer_SearchByContactTitle(IUnitOfWork uow, bool caseSensitive = true)
         {
             var repo = new CustomerRepository(uow);
 			var list = new List<ICustomer>();
+			var dto = new CustomerDto();
+			PopulateCustomer(dto);
 			
 			if(caseSensitive)
 			{
-				list = uow.AllMatching<Customer>(i => i.ContactTitle.Contains(search)).Cast<ICustomer>().ToList();
+				string searchTxt = dto.ContactTitle.Substring(0, 4);
+				list = uow.AllMatching<Customer>(i => i.ContactTitle.Contains(searchTxt)).Cast<ICustomer>().ToList();
 			}
 			else
 			{
-				string loweredSearch = search.ToLower();
-				list = uow.AllMatching<Customer>(i => i.ContactTitle.ToLower().Contains(loweredSearch)).Cast<ICustomer>().ToList();
+				string searchTxt = dto.ContactTitle.Substring(0, 4).ToLower();
+				list = uow.AllMatching<Customer>(i => i.ContactTitle.ToLower().Contains(searchTxt)).Cast<ICustomer>().ToList();
 			}
 			
-			var searchList = repo.SearchByContactTitle(search, caseSensitive);
+			var searchList = repo.SearchByContactTitle(dto.ContactTitle.Substring(0, 4), caseSensitive);
 			
-			Assert.IsTrue(searchList.Count > 0, "No Customer found");
+			Assert.IsTrue(searchList.Count > 0, "No Customer found using ContactTitle");
 			
 			this.Check_EntityCount(list.Count(), searchList.Count(), "Incorrect number of Customer found");
 
@@ -777,25 +1024,27 @@ namespace RepositoryEFDotnet.UnitTest.Base
 			}
         }
 
-
-        public void Customer_SearchByAddress(IUnitOfWork uow, string search, bool caseSensitive = true)
+        private void Customer_SearchByAddress(IUnitOfWork uow, bool caseSensitive = true)
         {
             var repo = new CustomerRepository(uow);
 			var list = new List<ICustomer>();
+			var dto = new CustomerDto();
+			PopulateCustomer(dto);
 			
 			if(caseSensitive)
 			{
-				list = uow.AllMatching<Customer>(i => i.Address.Contains(search)).Cast<ICustomer>().ToList();
+				string searchTxt = dto.Address.Substring(0, 4);
+				list = uow.AllMatching<Customer>(i => i.Address.Contains(searchTxt)).Cast<ICustomer>().ToList();
 			}
 			else
 			{
-				string loweredSearch = search.ToLower();
-				list = uow.AllMatching<Customer>(i => i.Address.ToLower().Contains(loweredSearch)).Cast<ICustomer>().ToList();
+				string searchTxt = dto.Address.Substring(0, 4).ToLower();
+				list = uow.AllMatching<Customer>(i => i.Address.ToLower().Contains(searchTxt)).Cast<ICustomer>().ToList();
 			}
 			
-			var searchList = repo.SearchByAddress(search, caseSensitive);
+			var searchList = repo.SearchByAddress(dto.Address.Substring(0, 4), caseSensitive);
 			
-			Assert.IsTrue(searchList.Count > 0, "No Customer found");
+			Assert.IsTrue(searchList.Count > 0, "No Customer found using Address");
 			
 			this.Check_EntityCount(list.Count(), searchList.Count(), "Incorrect number of Customer found");
 
@@ -805,25 +1054,27 @@ namespace RepositoryEFDotnet.UnitTest.Base
 			}
         }
 
-
-        public void Customer_SearchByCity(IUnitOfWork uow, string search, bool caseSensitive = true)
+        private void Customer_SearchByCity(IUnitOfWork uow, bool caseSensitive = true)
         {
             var repo = new CustomerRepository(uow);
 			var list = new List<ICustomer>();
+			var dto = new CustomerDto();
+			PopulateCustomer(dto);
 			
 			if(caseSensitive)
 			{
-				list = uow.AllMatching<Customer>(i => i.City.Contains(search)).Cast<ICustomer>().ToList();
+				string searchTxt = dto.City.Substring(0, 4);
+				list = uow.AllMatching<Customer>(i => i.City.Contains(searchTxt)).Cast<ICustomer>().ToList();
 			}
 			else
 			{
-				string loweredSearch = search.ToLower();
-				list = uow.AllMatching<Customer>(i => i.City.ToLower().Contains(loweredSearch)).Cast<ICustomer>().ToList();
+				string searchTxt = dto.City.Substring(0, 4).ToLower();
+				list = uow.AllMatching<Customer>(i => i.City.ToLower().Contains(searchTxt)).Cast<ICustomer>().ToList();
 			}
 			
-			var searchList = repo.SearchByCity(search, caseSensitive);
+			var searchList = repo.SearchByCity(dto.City.Substring(0, 4), caseSensitive);
 			
-			Assert.IsTrue(searchList.Count > 0, "No Customer found");
+			Assert.IsTrue(searchList.Count > 0, "No Customer found using City");
 			
 			this.Check_EntityCount(list.Count(), searchList.Count(), "Incorrect number of Customer found");
 
@@ -833,25 +1084,27 @@ namespace RepositoryEFDotnet.UnitTest.Base
 			}
         }
 
-
-        public void Customer_SearchByPostalCode(IUnitOfWork uow, string search, bool caseSensitive = true)
+        private void Customer_SearchByPostalCode(IUnitOfWork uow, bool caseSensitive = true)
         {
             var repo = new CustomerRepository(uow);
 			var list = new List<ICustomer>();
+			var dto = new CustomerDto();
+			PopulateCustomer(dto);
 			
 			if(caseSensitive)
 			{
-				list = uow.AllMatching<Customer>(i => i.PostalCode.Contains(search)).Cast<ICustomer>().ToList();
+				string searchTxt = dto.PostalCode.Substring(0, 4);
+				list = uow.AllMatching<Customer>(i => i.PostalCode.Contains(searchTxt)).Cast<ICustomer>().ToList();
 			}
 			else
 			{
-				string loweredSearch = search.ToLower();
-				list = uow.AllMatching<Customer>(i => i.PostalCode.ToLower().Contains(loweredSearch)).Cast<ICustomer>().ToList();
+				string searchTxt = dto.PostalCode.Substring(0, 4).ToLower();
+				list = uow.AllMatching<Customer>(i => i.PostalCode.ToLower().Contains(searchTxt)).Cast<ICustomer>().ToList();
 			}
 			
-			var searchList = repo.SearchByPostalCode(search, caseSensitive);
+			var searchList = repo.SearchByPostalCode(dto.PostalCode.Substring(0, 4), caseSensitive);
 			
-			Assert.IsTrue(searchList.Count > 0, "No Customer found");
+			Assert.IsTrue(searchList.Count > 0, "No Customer found using PostalCode");
 			
 			this.Check_EntityCount(list.Count(), searchList.Count(), "Incorrect number of Customer found");
 
@@ -861,25 +1114,27 @@ namespace RepositoryEFDotnet.UnitTest.Base
 			}
         }
 
-
-        public void Customer_SearchByTelephone(IUnitOfWork uow, string search, bool caseSensitive = true)
+        private void Customer_SearchByTelephone(IUnitOfWork uow, bool caseSensitive = true)
         {
             var repo = new CustomerRepository(uow);
 			var list = new List<ICustomer>();
+			var dto = new CustomerDto();
+			PopulateCustomer(dto);
 			
 			if(caseSensitive)
 			{
-				list = uow.AllMatching<Customer>(i => i.Telephone.Contains(search)).Cast<ICustomer>().ToList();
+				string searchTxt = dto.Telephone.Substring(0, 4);
+				list = uow.AllMatching<Customer>(i => i.Telephone.Contains(searchTxt)).Cast<ICustomer>().ToList();
 			}
 			else
 			{
-				string loweredSearch = search.ToLower();
-				list = uow.AllMatching<Customer>(i => i.Telephone.ToLower().Contains(loweredSearch)).Cast<ICustomer>().ToList();
+				string searchTxt = dto.Telephone.Substring(0, 4).ToLower();
+				list = uow.AllMatching<Customer>(i => i.Telephone.ToLower().Contains(searchTxt)).Cast<ICustomer>().ToList();
 			}
 			
-			var searchList = repo.SearchByTelephone(search, caseSensitive);
+			var searchList = repo.SearchByTelephone(dto.Telephone.Substring(0, 4), caseSensitive);
 			
-			Assert.IsTrue(searchList.Count > 0, "No Customer found");
+			Assert.IsTrue(searchList.Count > 0, "No Customer found using Telephone");
 			
 			this.Check_EntityCount(list.Count(), searchList.Count(), "Incorrect number of Customer found");
 
@@ -889,25 +1144,27 @@ namespace RepositoryEFDotnet.UnitTest.Base
 			}
         }
 
-
-        public void Customer_SearchByFax(IUnitOfWork uow, string search, bool caseSensitive = true)
+        private void Customer_SearchByFax(IUnitOfWork uow, bool caseSensitive = true)
         {
             var repo = new CustomerRepository(uow);
 			var list = new List<ICustomer>();
+			var dto = new CustomerDto();
+			PopulateCustomer(dto);
 			
 			if(caseSensitive)
 			{
-				list = uow.AllMatching<Customer>(i => i.Fax.Contains(search)).Cast<ICustomer>().ToList();
+				string searchTxt = dto.Fax.Substring(0, 4);
+				list = uow.AllMatching<Customer>(i => i.Fax.Contains(searchTxt)).Cast<ICustomer>().ToList();
 			}
 			else
 			{
-				string loweredSearch = search.ToLower();
-				list = uow.AllMatching<Customer>(i => i.Fax.ToLower().Contains(loweredSearch)).Cast<ICustomer>().ToList();
+				string searchTxt = dto.Fax.Substring(0, 4).ToLower();
+				list = uow.AllMatching<Customer>(i => i.Fax.ToLower().Contains(searchTxt)).Cast<ICustomer>().ToList();
 			}
 			
-			var searchList = repo.SearchByFax(search, caseSensitive);
+			var searchList = repo.SearchByFax(dto.Fax.Substring(0, 4), caseSensitive);
 			
-			Assert.IsTrue(searchList.Count > 0, "No Customer found");
+			Assert.IsTrue(searchList.Count > 0, "No Customer found using Fax");
 			
 			this.Check_EntityCount(list.Count(), searchList.Count(), "Incorrect number of Customer found");
 
@@ -917,25 +1174,27 @@ namespace RepositoryEFDotnet.UnitTest.Base
 			}
         }
 
-
-        public void Customer_SearchByPhoto(IUnitOfWork uow, string search, bool caseSensitive = true)
+        private void Customer_SearchByPhoto(IUnitOfWork uow, bool caseSensitive = true)
         {
             var repo = new CustomerRepository(uow);
 			var list = new List<ICustomer>();
+			var dto = new CustomerDto();
+			PopulateCustomer(dto);
 			
 			if(caseSensitive)
 			{
-				list = uow.AllMatching<Customer>(i => i.Photo.Contains(search)).Cast<ICustomer>().ToList();
+				string searchTxt = dto.Photo.Substring(0, 4);
+				list = uow.AllMatching<Customer>(i => i.Photo.Contains(searchTxt)).Cast<ICustomer>().ToList();
 			}
 			else
 			{
-				string loweredSearch = search.ToLower();
-				list = uow.AllMatching<Customer>(i => i.Photo.ToLower().Contains(loweredSearch)).Cast<ICustomer>().ToList();
+				string searchTxt = dto.Photo.Substring(0, 4).ToLower();
+				list = uow.AllMatching<Customer>(i => i.Photo.ToLower().Contains(searchTxt)).Cast<ICustomer>().ToList();
 			}
 			
-			var searchList = repo.SearchByPhoto(search, caseSensitive);
+			var searchList = repo.SearchByPhoto(dto.Photo.Substring(0, 4), caseSensitive);
 			
-			Assert.IsTrue(searchList.Count > 0, "No Customer found");
+			Assert.IsTrue(searchList.Count > 0, "No Customer found using Photo");
 			
 			this.Check_EntityCount(list.Count(), searchList.Count(), "Incorrect number of Customer found");
 
@@ -945,18 +1204,98 @@ namespace RepositoryEFDotnet.UnitTest.Base
 			}
         }
 
-
-		protected virtual void BaseRepositoryUnitTest_Customer_CheckData(ICustomerRepository repository, IList<ICustomer> list, int expected)
+		private void BaseRepositoryUnitTest_Customer_CheckData(IUnitOfWork uow, IList<ICustomer> list, int expected)
 		{
-			var items = repository.LoadAll();
+			var items = uow.GetAll<Customer>().Cast<ICustomer>().ToList();
             this.Check_EntityCount(expected, items.Count(), "Incorrect number of Customer found");
 
-			foreach (var item in list)
+			foreach (var item in items)
 			{
-				this.Check_Customer(item, items.FirstOrDefault(o => o.CustomerId == item.CustomerId));
+				this.Check_Customer(item, list.FirstOrDefault(o => o.CustomerId == item.CustomerId));
 			}
 		}
-        protected virtual IList<IOrder> BaseRepositoryUnitTest_Order_AddRange(IOrderRepository repository, int count = 1, int startSeed = 1)
+		
+        protected void Order_Add(IUnitOfWork uow, int count = 1, int startSeed = 1, int expected = 1)
+        {
+            var repo = new OrderRepository(uow);
+			
+			if(UseTransactions)
+			{
+				uow.StartTransaction();
+			}
+			
+            var list = BaseRepositoryUnitTest_Order_AddRange(repo, count, startSeed);
+			
+			uow.Commit();
+			
+			BaseRepositoryUnitTest_Order_CheckData(uow, list, expected);
+        }
+		
+		protected virtual void Order_LoadTests(IUnitOfWork uow)
+		{
+			Order_LoadAll(uow);
+			Order_LoadById(uow);
+			Order_LoadByCustomerId(uow);
+			Order_LoadByOrderDate(uow);
+			Order_LoadByDeliveryDate(uow);
+		}
+		
+		protected virtual void Order_SearchTests(IUnitOfWork uow)
+		{
+			Order_SearchByShippingName(uow);
+			Order_SearchByShippingName(uow, false);
+			Order_SearchByShippingAddress(uow);
+			Order_SearchByShippingAddress(uow, false);
+			Order_SearchByShippingCity(uow);
+			Order_SearchByShippingCity(uow, false);
+			Order_SearchByShippingZip(uow);
+			Order_SearchByShippingZip(uow, false);
+		}
+		
+        protected void Order_Update(IUnitOfWork uow)
+        {
+            var repo = new OrderRepository(uow);
+			
+			if(UseTransactions)
+			{
+				uow.StartTransaction();
+			}
+			
+			var list = repo.LoadAll().ToList();
+			
+			foreach(var dto in list)
+			{
+				PopulateOrder(dto, true);
+				repo.Update(dto);
+			}
+			
+			uow.Commit();
+			
+			BaseRepositoryUnitTest_Order_CheckData(uow, list, list.Count());
+        }
+		
+        protected void Order_Delete(IUnitOfWork uow)
+        {
+            var repo = new OrderRepository(uow);
+            var list = repo.LoadAll().ToList();
+			
+			if(UseTransactions)
+			{
+				uow.StartTransaction();
+			}
+			
+			foreach(var item in list.Select(o => o.OrderId).Distinct())
+			{
+				repo.Delete(item);
+			}
+			
+			uow.Commit();
+			
+			list = repo.LoadAll().ToList();
+			this.Check_EntityCount(0, list.Count(), "Incorrect number of Order found");
+        }
+		
+        private IList<IOrder> BaseRepositoryUnitTest_Order_AddRange(IOrderRepository repository, int count = 1, int startSeed = 1)
         {		
             var list = new List<IOrder>();
             var seed = startSeed;
@@ -973,76 +1312,98 @@ namespace RepositoryEFDotnet.UnitTest.Base
 			return list;
         }
 		
-        protected virtual IList<IOrder> BaseRepositoryUnitTest_Order_Update(IOrderRepository repository)
-        {		
-			var list = repository.LoadAll();
-			foreach(var dto in list)
-			{
-				PopulateOrder(dto, true);
-				repository.Update(dto);
-			}
-			return list;
-		}
-		
-        public void Order_Update(IUnitOfWork uow)
+        private void Order_LoadAll(IUnitOfWork uow)
         {
             var repo = new OrderRepository(uow);
 			
-			if(UseTransactions)
-			{
-				uow.StartTransaction();
-			}
+            var list = repo.LoadAll();
 			
-            var list = BaseRepositoryUnitTest_Order_Update(repo);
-			
-			uow.Commit();
-			
-			BaseRepositoryUnitTest_Order_CheckData(repo, list, list.Count());
+			BaseRepositoryUnitTest_Order_CheckData(uow, list, list.Count());
         }
 		
-        public void Order_LoadAll(IUnitOfWork uow)
-        {
-            var repo = new OrderRepository(uow);
-			
-            var list = uow.GetAll<Order>().Cast<IOrder>().ToList();
-			
-			BaseRepositoryUnitTest_Order_CheckData(repo, list, list.Count());
-        }
-		
-        public void Order_LoadById(IUnitOfWork uow)
+        private void Order_LoadById(IUnitOfWork uow)
         {
 			var loadedList = new List<IOrder>();
             var repo = new OrderRepository(uow);
 			
             var list = repo.LoadAll().ToList();
 			
-			foreach(var item in list)
+			foreach(var item in list.Select(o => o.OrderId).Distinct())
 			{
-				loadedList.Add(repo.LoadByOrderId(item.OrderId));
+				loadedList.Add(repo.LoadByOrderId(item));
 			}
 			
-			BaseRepositoryUnitTest_Order_CheckData(repo, loadedList, loadedList.Count());
+			BaseRepositoryUnitTest_Order_CheckData(uow, loadedList, loadedList.Count());
         }
 		
 
-        public void Order_SearchByShippingName(IUnitOfWork uow, string search, bool caseSensitive = true)
+        private void Order_LoadByCustomerId(IUnitOfWork uow)
+        {
+			var loadedList = new List<IOrder>();
+            var repo = new OrderRepository(uow);
+			
+            var list = repo.LoadAll().ToList();
+			
+			foreach(var item in list.Select(o => o.CustomerId).Distinct())
+			{
+				loadedList.AddRange(repo.LoadByCustomerId(item));
+			}
+			
+			BaseRepositoryUnitTest_Order_CheckData(uow, loadedList, loadedList.Count());
+        }
+
+        private void Order_LoadByOrderDate(IUnitOfWork uow)
+        {
+			var loadedList = new List<IOrder>();
+            var repo = new OrderRepository(uow);
+			
+            var list = repo.LoadAll().ToList();
+			
+			foreach(var item in list.Select(o => o.OrderDate).Distinct())
+			{
+				loadedList.AddRange(repo.LoadByOrderDate(item));
+			}
+			
+			BaseRepositoryUnitTest_Order_CheckData(uow, loadedList, loadedList.Count());
+        }
+
+        private void Order_LoadByDeliveryDate(IUnitOfWork uow)
+        {
+			var loadedList = new List<IOrder>();
+            var repo = new OrderRepository(uow);
+			
+            var list = repo.LoadAll().ToList();
+			
+			foreach(var item in list.Select(o => o.DeliveryDate).Distinct())
+			{
+				loadedList.AddRange(repo.LoadByDeliveryDate(item));
+			}
+			
+			BaseRepositoryUnitTest_Order_CheckData(uow, loadedList, loadedList.Count());
+        }
+		
+
+        private void Order_SearchByShippingName(IUnitOfWork uow, bool caseSensitive = true)
         {
             var repo = new OrderRepository(uow);
 			var list = new List<IOrder>();
+			var dto = new OrderDto();
+			PopulateOrder(dto);
 			
 			if(caseSensitive)
 			{
-				list = uow.AllMatching<Order>(i => i.ShippingName.Contains(search)).Cast<IOrder>().ToList();
+				string searchTxt = dto.ShippingName.Substring(0, 4);
+				list = uow.AllMatching<Order>(i => i.ShippingName.Contains(searchTxt)).Cast<IOrder>().ToList();
 			}
 			else
 			{
-				string loweredSearch = search.ToLower();
-				list = uow.AllMatching<Order>(i => i.ShippingName.ToLower().Contains(loweredSearch)).Cast<IOrder>().ToList();
+				string searchTxt = dto.ShippingName.Substring(0, 4).ToLower();
+				list = uow.AllMatching<Order>(i => i.ShippingName.ToLower().Contains(searchTxt)).Cast<IOrder>().ToList();
 			}
 			
-			var searchList = repo.SearchByShippingName(search, caseSensitive);
+			var searchList = repo.SearchByShippingName(dto.ShippingName.Substring(0, 4), caseSensitive);
 			
-			Assert.IsTrue(searchList.Count > 0, "No Order found");
+			Assert.IsTrue(searchList.Count > 0, "No Order found using ShippingName");
 			
 			this.Check_EntityCount(list.Count(), searchList.Count(), "Incorrect number of Order found");
 
@@ -1052,25 +1413,27 @@ namespace RepositoryEFDotnet.UnitTest.Base
 			}
         }
 
-
-        public void Order_SearchByShippingAddress(IUnitOfWork uow, string search, bool caseSensitive = true)
+        private void Order_SearchByShippingAddress(IUnitOfWork uow, bool caseSensitive = true)
         {
             var repo = new OrderRepository(uow);
 			var list = new List<IOrder>();
+			var dto = new OrderDto();
+			PopulateOrder(dto);
 			
 			if(caseSensitive)
 			{
-				list = uow.AllMatching<Order>(i => i.ShippingAddress.Contains(search)).Cast<IOrder>().ToList();
+				string searchTxt = dto.ShippingAddress.Substring(0, 4);
+				list = uow.AllMatching<Order>(i => i.ShippingAddress.Contains(searchTxt)).Cast<IOrder>().ToList();
 			}
 			else
 			{
-				string loweredSearch = search.ToLower();
-				list = uow.AllMatching<Order>(i => i.ShippingAddress.ToLower().Contains(loweredSearch)).Cast<IOrder>().ToList();
+				string searchTxt = dto.ShippingAddress.Substring(0, 4).ToLower();
+				list = uow.AllMatching<Order>(i => i.ShippingAddress.ToLower().Contains(searchTxt)).Cast<IOrder>().ToList();
 			}
 			
-			var searchList = repo.SearchByShippingAddress(search, caseSensitive);
+			var searchList = repo.SearchByShippingAddress(dto.ShippingAddress.Substring(0, 4), caseSensitive);
 			
-			Assert.IsTrue(searchList.Count > 0, "No Order found");
+			Assert.IsTrue(searchList.Count > 0, "No Order found using ShippingAddress");
 			
 			this.Check_EntityCount(list.Count(), searchList.Count(), "Incorrect number of Order found");
 
@@ -1080,25 +1443,27 @@ namespace RepositoryEFDotnet.UnitTest.Base
 			}
         }
 
-
-        public void Order_SearchByShippingCity(IUnitOfWork uow, string search, bool caseSensitive = true)
+        private void Order_SearchByShippingCity(IUnitOfWork uow, bool caseSensitive = true)
         {
             var repo = new OrderRepository(uow);
 			var list = new List<IOrder>();
+			var dto = new OrderDto();
+			PopulateOrder(dto);
 			
 			if(caseSensitive)
 			{
-				list = uow.AllMatching<Order>(i => i.ShippingCity.Contains(search)).Cast<IOrder>().ToList();
+				string searchTxt = dto.ShippingCity.Substring(0, 4);
+				list = uow.AllMatching<Order>(i => i.ShippingCity.Contains(searchTxt)).Cast<IOrder>().ToList();
 			}
 			else
 			{
-				string loweredSearch = search.ToLower();
-				list = uow.AllMatching<Order>(i => i.ShippingCity.ToLower().Contains(loweredSearch)).Cast<IOrder>().ToList();
+				string searchTxt = dto.ShippingCity.Substring(0, 4).ToLower();
+				list = uow.AllMatching<Order>(i => i.ShippingCity.ToLower().Contains(searchTxt)).Cast<IOrder>().ToList();
 			}
 			
-			var searchList = repo.SearchByShippingCity(search, caseSensitive);
+			var searchList = repo.SearchByShippingCity(dto.ShippingCity.Substring(0, 4), caseSensitive);
 			
-			Assert.IsTrue(searchList.Count > 0, "No Order found");
+			Assert.IsTrue(searchList.Count > 0, "No Order found using ShippingCity");
 			
 			this.Check_EntityCount(list.Count(), searchList.Count(), "Incorrect number of Order found");
 
@@ -1108,25 +1473,27 @@ namespace RepositoryEFDotnet.UnitTest.Base
 			}
         }
 
-
-        public void Order_SearchByShippingZip(IUnitOfWork uow, string search, bool caseSensitive = true)
+        private void Order_SearchByShippingZip(IUnitOfWork uow, bool caseSensitive = true)
         {
             var repo = new OrderRepository(uow);
 			var list = new List<IOrder>();
+			var dto = new OrderDto();
+			PopulateOrder(dto);
 			
 			if(caseSensitive)
 			{
-				list = uow.AllMatching<Order>(i => i.ShippingZip.Contains(search)).Cast<IOrder>().ToList();
+				string searchTxt = dto.ShippingZip.Substring(0, 4);
+				list = uow.AllMatching<Order>(i => i.ShippingZip.Contains(searchTxt)).Cast<IOrder>().ToList();
 			}
 			else
 			{
-				string loweredSearch = search.ToLower();
-				list = uow.AllMatching<Order>(i => i.ShippingZip.ToLower().Contains(loweredSearch)).Cast<IOrder>().ToList();
+				string searchTxt = dto.ShippingZip.Substring(0, 4).ToLower();
+				list = uow.AllMatching<Order>(i => i.ShippingZip.ToLower().Contains(searchTxt)).Cast<IOrder>().ToList();
 			}
 			
-			var searchList = repo.SearchByShippingZip(search, caseSensitive);
+			var searchList = repo.SearchByShippingZip(dto.ShippingZip.Substring(0, 4), caseSensitive);
 			
-			Assert.IsTrue(searchList.Count > 0, "No Order found");
+			Assert.IsTrue(searchList.Count > 0, "No Order found using ShippingZip");
 			
 			this.Check_EntityCount(list.Count(), searchList.Count(), "Incorrect number of Order found");
 
@@ -1136,18 +1503,92 @@ namespace RepositoryEFDotnet.UnitTest.Base
 			}
         }
 
-
-		protected virtual void BaseRepositoryUnitTest_Order_CheckData(IOrderRepository repository, IList<IOrder> list, int expected)
+		private void BaseRepositoryUnitTest_Order_CheckData(IUnitOfWork uow, IList<IOrder> list, int expected)
 		{
-			var items = repository.LoadAll();
+			var items = uow.GetAll<Order>().Cast<IOrder>().ToList();
             this.Check_EntityCount(expected, items.Count(), "Incorrect number of Order found");
 
-			foreach (var item in list)
+			foreach (var item in items)
 			{
-				this.Check_Order(item, items.FirstOrDefault(o => o.OrderId == item.OrderId));
+				this.Check_Order(item, list.FirstOrDefault(o => o.OrderId == item.OrderId));
 			}
 		}
-        protected virtual IList<IOrderDetails> BaseRepositoryUnitTest_OrderDetails_AddRange(IOrderDetailsRepository repository, int count = 1, int startSeed = 1)
+		
+        protected void OrderDetails_Add(IUnitOfWork uow, int count = 1, int startSeed = 1, int expected = 1)
+        {
+            var repo = new OrderDetailsRepository(uow);
+			
+			if(UseTransactions)
+			{
+				uow.StartTransaction();
+			}
+			
+            var list = BaseRepositoryUnitTest_OrderDetails_AddRange(repo, count, startSeed);
+			
+			uow.Commit();
+			
+			BaseRepositoryUnitTest_OrderDetails_CheckData(uow, list, expected);
+        }
+		
+		protected virtual void OrderDetails_LoadTests(IUnitOfWork uow)
+		{
+			OrderDetails_LoadAll(uow);
+			OrderDetails_LoadById(uow);
+			OrderDetails_LoadByOrderId(uow);
+			OrderDetails_LoadByProductId(uow);
+			OrderDetails_LoadByUnitPrice(uow);
+			OrderDetails_LoadByAmount(uow);
+			OrderDetails_LoadByDiscount(uow);
+		}
+		
+		protected virtual void OrderDetails_SearchTests(IUnitOfWork uow)
+		{
+		}
+		
+        protected void OrderDetails_Update(IUnitOfWork uow)
+        {
+            var repo = new OrderDetailsRepository(uow);
+			
+			if(UseTransactions)
+			{
+				uow.StartTransaction();
+			}
+			
+			var list = repo.LoadAll().ToList();
+			
+			foreach(var dto in list)
+			{
+				PopulateOrderDetails(dto, true);
+				repo.Update(dto);
+			}
+			
+			uow.Commit();
+			
+			BaseRepositoryUnitTest_OrderDetails_CheckData(uow, list, list.Count());
+        }
+		
+        protected void OrderDetails_Delete(IUnitOfWork uow)
+        {
+            var repo = new OrderDetailsRepository(uow);
+            var list = repo.LoadAll().ToList();
+			
+			if(UseTransactions)
+			{
+				uow.StartTransaction();
+			}
+			
+			foreach(var item in list.Select(o => o.OrderDetailsId).Distinct())
+			{
+				repo.Delete(item);
+			}
+			
+			uow.Commit();
+			
+			list = repo.LoadAll().ToList();
+			this.Check_EntityCount(0, list.Count(), "Incorrect number of OrderDetails found");
+        }
+		
+        private IList<IOrderDetails> BaseRepositoryUnitTest_OrderDetails_AddRange(IOrderDetailsRepository repository, int count = 1, int startSeed = 1)
         {		
             var list = new List<IOrderDetails>();
             var seed = startSeed;
@@ -1164,69 +1605,196 @@ namespace RepositoryEFDotnet.UnitTest.Base
 			return list;
         }
 		
-        protected virtual IList<IOrderDetails> BaseRepositoryUnitTest_OrderDetails_Update(IOrderDetailsRepository repository)
-        {		
-			var list = repository.LoadAll();
-			foreach(var dto in list)
-			{
-				PopulateOrderDetails(dto, true);
-				repository.Update(dto);
-			}
-			return list;
-		}
-		
-        public void OrderDetails_Update(IUnitOfWork uow)
+        private void OrderDetails_LoadAll(IUnitOfWork uow)
         {
             var repo = new OrderDetailsRepository(uow);
 			
-			if(UseTransactions)
-			{
-				uow.StartTransaction();
-			}
+            var list = repo.LoadAll();
 			
-            var list = BaseRepositoryUnitTest_OrderDetails_Update(repo);
-			
-			uow.Commit();
-			
-			BaseRepositoryUnitTest_OrderDetails_CheckData(repo, list, list.Count());
+			BaseRepositoryUnitTest_OrderDetails_CheckData(uow, list, list.Count());
         }
 		
-        public void OrderDetails_LoadAll(IUnitOfWork uow)
-        {
-            var repo = new OrderDetailsRepository(uow);
-			
-            var list = uow.GetAll<OrderDetails>().Cast<IOrderDetails>().ToList();
-			
-			BaseRepositoryUnitTest_OrderDetails_CheckData(repo, list, list.Count());
-        }
-		
-        public void OrderDetails_LoadById(IUnitOfWork uow)
+        private void OrderDetails_LoadById(IUnitOfWork uow)
         {
 			var loadedList = new List<IOrderDetails>();
             var repo = new OrderDetailsRepository(uow);
 			
             var list = repo.LoadAll().ToList();
 			
-			foreach(var item in list)
+			foreach(var item in list.Select(o => o.OrderDetailsId).Distinct())
 			{
-				loadedList.Add(repo.LoadByOrderDetailsId(item.OrderDetailsId));
+				loadedList.Add(repo.LoadByOrderDetailsId(item));
 			}
 			
-			BaseRepositoryUnitTest_OrderDetails_CheckData(repo, loadedList, loadedList.Count());
+			BaseRepositoryUnitTest_OrderDetails_CheckData(uow, loadedList, loadedList.Count());
         }
 		
 
-		protected virtual void BaseRepositoryUnitTest_OrderDetails_CheckData(IOrderDetailsRepository repository, IList<IOrderDetails> list, int expected)
+        private void OrderDetails_LoadByOrderId(IUnitOfWork uow)
+        {
+			var loadedList = new List<IOrderDetails>();
+            var repo = new OrderDetailsRepository(uow);
+			
+            var list = repo.LoadAll().ToList();
+			
+			foreach(var item in list.Select(o => o.OrderId).Distinct())
+			{
+				loadedList.AddRange(repo.LoadByOrderId(item));
+			}
+			
+			BaseRepositoryUnitTest_OrderDetails_CheckData(uow, loadedList, loadedList.Count());
+        }
+
+        private void OrderDetails_LoadByProductId(IUnitOfWork uow)
+        {
+			var loadedList = new List<IOrderDetails>();
+            var repo = new OrderDetailsRepository(uow);
+			
+            var list = repo.LoadAll().ToList();
+			
+			foreach(var item in list.Select(o => o.ProductId).Distinct())
+			{
+				loadedList.AddRange(repo.LoadByProductId(item));
+			}
+			
+			BaseRepositoryUnitTest_OrderDetails_CheckData(uow, loadedList, loadedList.Count());
+        }
+
+        private void OrderDetails_LoadByUnitPrice(IUnitOfWork uow)
+        {
+			var loadedList = new List<IOrderDetails>();
+            var repo = new OrderDetailsRepository(uow);
+			
+            var list = repo.LoadAll().ToList();
+			
+			foreach(var item in list.Select(o => o.UnitPrice).Distinct())
+			{
+				loadedList.AddRange(repo.LoadByUnitPrice(item));
+			}
+			
+			BaseRepositoryUnitTest_OrderDetails_CheckData(uow, loadedList, loadedList.Count());
+        }
+
+        private void OrderDetails_LoadByAmount(IUnitOfWork uow)
+        {
+			var loadedList = new List<IOrderDetails>();
+            var repo = new OrderDetailsRepository(uow);
+			
+            var list = repo.LoadAll().ToList();
+			
+			foreach(var item in list.Select(o => o.Amount).Distinct())
+			{
+				loadedList.AddRange(repo.LoadByAmount(item));
+			}
+			
+			BaseRepositoryUnitTest_OrderDetails_CheckData(uow, loadedList, loadedList.Count());
+        }
+
+        private void OrderDetails_LoadByDiscount(IUnitOfWork uow)
+        {
+			var loadedList = new List<IOrderDetails>();
+            var repo = new OrderDetailsRepository(uow);
+			
+            var list = repo.LoadAll().ToList();
+			
+			foreach(var item in list.Select(o => o.Discount).Distinct())
+			{
+				loadedList.AddRange(repo.LoadByDiscount(item));
+			}
+			
+			BaseRepositoryUnitTest_OrderDetails_CheckData(uow, loadedList, loadedList.Count());
+        }
+		
+
+		private void BaseRepositoryUnitTest_OrderDetails_CheckData(IUnitOfWork uow, IList<IOrderDetails> list, int expected)
 		{
-			var items = repository.LoadAll();
+			var items = uow.GetAll<OrderDetails>().Cast<IOrderDetails>().ToList();
             this.Check_EntityCount(expected, items.Count(), "Incorrect number of OrderDetails found");
 
-			foreach (var item in list)
+			foreach (var item in items)
 			{
-				this.Check_OrderDetails(item, items.FirstOrDefault(o => o.OrderDetailsId == item.OrderDetailsId));
+				this.Check_OrderDetails(item, list.FirstOrDefault(o => o.OrderDetailsId == item.OrderDetailsId));
 			}
 		}
-        protected virtual IList<IProduct> BaseRepositoryUnitTest_Product_AddRange(IProductRepository repository, int count = 1, int startSeed = 1)
+		
+        protected void Product_Add(IUnitOfWork uow, int count = 1, int startSeed = 1, int expected = 1)
+        {
+            var repo = new ProductRepository(uow);
+			
+			if(UseTransactions)
+			{
+				uow.StartTransaction();
+			}
+			
+            var list = BaseRepositoryUnitTest_Product_AddRange(repo, count, startSeed);
+			
+			uow.Commit();
+			
+			BaseRepositoryUnitTest_Product_CheckData(uow, list, expected);
+        }
+		
+		protected virtual void Product_LoadTests(IUnitOfWork uow)
+		{
+			Product_LoadAll(uow);
+			Product_LoadById(uow);
+			Product_LoadByUnitPrice(uow);
+			Product_LoadByAmountInStock(uow);
+		}
+		
+		protected virtual void Product_SearchTests(IUnitOfWork uow)
+		{
+			Product_SearchByProductDescription(uow);
+			Product_SearchByProductDescription(uow, false);
+			Product_SearchByUnitAmount(uow);
+			Product_SearchByUnitAmount(uow, false);
+			Product_SearchByPublisher(uow);
+			Product_SearchByPublisher(uow, false);
+		}
+		
+        protected void Product_Update(IUnitOfWork uow)
+        {
+            var repo = new ProductRepository(uow);
+			
+			if(UseTransactions)
+			{
+				uow.StartTransaction();
+			}
+			
+			var list = repo.LoadAll().ToList();
+			
+			foreach(var dto in list)
+			{
+				PopulateProduct(dto, true);
+				repo.Update(dto);
+			}
+			
+			uow.Commit();
+			
+			BaseRepositoryUnitTest_Product_CheckData(uow, list, list.Count());
+        }
+		
+        protected void Product_Delete(IUnitOfWork uow)
+        {
+            var repo = new ProductRepository(uow);
+            var list = repo.LoadAll().ToList();
+			
+			if(UseTransactions)
+			{
+				uow.StartTransaction();
+			}
+			
+			foreach(var item in list.Select(o => o.ProductId).Distinct())
+			{
+				repo.Delete(item);
+			}
+			
+			uow.Commit();
+			
+			list = repo.LoadAll().ToList();
+			this.Check_EntityCount(0, list.Count(), "Incorrect number of Product found");
+        }
+		
+        private IList<IProduct> BaseRepositoryUnitTest_Product_AddRange(IProductRepository repository, int count = 1, int startSeed = 1)
         {		
             var list = new List<IProduct>();
             var seed = startSeed;
@@ -1243,76 +1811,83 @@ namespace RepositoryEFDotnet.UnitTest.Base
 			return list;
         }
 		
-        protected virtual IList<IProduct> BaseRepositoryUnitTest_Product_Update(IProductRepository repository)
-        {		
-			var list = repository.LoadAll();
-			foreach(var dto in list)
-			{
-				PopulateProduct(dto, true);
-				repository.Update(dto);
-			}
-			return list;
-		}
-		
-        public void Product_Update(IUnitOfWork uow)
+        private void Product_LoadAll(IUnitOfWork uow)
         {
             var repo = new ProductRepository(uow);
 			
-			if(UseTransactions)
-			{
-				uow.StartTransaction();
-			}
+            var list = repo.LoadAll();
 			
-            var list = BaseRepositoryUnitTest_Product_Update(repo);
-			
-			uow.Commit();
-			
-			BaseRepositoryUnitTest_Product_CheckData(repo, list, list.Count());
+			BaseRepositoryUnitTest_Product_CheckData(uow, list, list.Count());
         }
 		
-        public void Product_LoadAll(IUnitOfWork uow)
-        {
-            var repo = new ProductRepository(uow);
-			
-            var list = uow.GetAll<Product>().Cast<IProduct>().ToList();
-			
-			BaseRepositoryUnitTest_Product_CheckData(repo, list, list.Count());
-        }
-		
-        public void Product_LoadById(IUnitOfWork uow)
+        private void Product_LoadById(IUnitOfWork uow)
         {
 			var loadedList = new List<IProduct>();
             var repo = new ProductRepository(uow);
 			
             var list = repo.LoadAll().ToList();
 			
-			foreach(var item in list)
+			foreach(var item in list.Select(o => o.ProductId).Distinct())
 			{
-				loadedList.Add(repo.LoadByProductId(item.ProductId));
+				loadedList.Add(repo.LoadByProductId(item));
 			}
 			
-			BaseRepositoryUnitTest_Product_CheckData(repo, loadedList, loadedList.Count());
+			BaseRepositoryUnitTest_Product_CheckData(uow, loadedList, loadedList.Count());
         }
 		
 
-        public void Product_SearchByProductDescription(IUnitOfWork uow, string search, bool caseSensitive = true)
+        private void Product_LoadByUnitPrice(IUnitOfWork uow)
+        {
+			var loadedList = new List<IProduct>();
+            var repo = new ProductRepository(uow);
+			
+            var list = repo.LoadAll().ToList();
+			
+			foreach(var item in list.Select(o => o.UnitPrice).Distinct())
+			{
+				loadedList.AddRange(repo.LoadByUnitPrice(item));
+			}
+			
+			BaseRepositoryUnitTest_Product_CheckData(uow, loadedList, loadedList.Count());
+        }
+
+        private void Product_LoadByAmountInStock(IUnitOfWork uow)
+        {
+			var loadedList = new List<IProduct>();
+            var repo = new ProductRepository(uow);
+			
+            var list = repo.LoadAll().ToList();
+			
+			foreach(var item in list.Select(o => o.AmountInStock).Distinct())
+			{
+				loadedList.AddRange(repo.LoadByAmountInStock(item));
+			}
+			
+			BaseRepositoryUnitTest_Product_CheckData(uow, loadedList, loadedList.Count());
+        }
+		
+
+        private void Product_SearchByProductDescription(IUnitOfWork uow, bool caseSensitive = true)
         {
             var repo = new ProductRepository(uow);
 			var list = new List<IProduct>();
+			var dto = new ProductDto();
+			PopulateProduct(dto);
 			
 			if(caseSensitive)
 			{
-				list = uow.AllMatching<Product>(i => i.ProductDescription.Contains(search)).Cast<IProduct>().ToList();
+				string searchTxt = dto.ProductDescription.Substring(0, 4);
+				list = uow.AllMatching<Product>(i => i.ProductDescription.Contains(searchTxt)).Cast<IProduct>().ToList();
 			}
 			else
 			{
-				string loweredSearch = search.ToLower();
-				list = uow.AllMatching<Product>(i => i.ProductDescription.ToLower().Contains(loweredSearch)).Cast<IProduct>().ToList();
+				string searchTxt = dto.ProductDescription.Substring(0, 4).ToLower();
+				list = uow.AllMatching<Product>(i => i.ProductDescription.ToLower().Contains(searchTxt)).Cast<IProduct>().ToList();
 			}
 			
-			var searchList = repo.SearchByProductDescription(search, caseSensitive);
+			var searchList = repo.SearchByProductDescription(dto.ProductDescription.Substring(0, 4), caseSensitive);
 			
-			Assert.IsTrue(searchList.Count > 0, "No Product found");
+			Assert.IsTrue(searchList.Count > 0, "No Product found using ProductDescription");
 			
 			this.Check_EntityCount(list.Count(), searchList.Count(), "Incorrect number of Product found");
 
@@ -1322,25 +1897,27 @@ namespace RepositoryEFDotnet.UnitTest.Base
 			}
         }
 
-
-        public void Product_SearchByUnitAmount(IUnitOfWork uow, string search, bool caseSensitive = true)
+        private void Product_SearchByUnitAmount(IUnitOfWork uow, bool caseSensitive = true)
         {
             var repo = new ProductRepository(uow);
 			var list = new List<IProduct>();
+			var dto = new ProductDto();
+			PopulateProduct(dto);
 			
 			if(caseSensitive)
 			{
-				list = uow.AllMatching<Product>(i => i.UnitAmount.Contains(search)).Cast<IProduct>().ToList();
+				string searchTxt = dto.UnitAmount.Substring(0, 4);
+				list = uow.AllMatching<Product>(i => i.UnitAmount.Contains(searchTxt)).Cast<IProduct>().ToList();
 			}
 			else
 			{
-				string loweredSearch = search.ToLower();
-				list = uow.AllMatching<Product>(i => i.UnitAmount.ToLower().Contains(loweredSearch)).Cast<IProduct>().ToList();
+				string searchTxt = dto.UnitAmount.Substring(0, 4).ToLower();
+				list = uow.AllMatching<Product>(i => i.UnitAmount.ToLower().Contains(searchTxt)).Cast<IProduct>().ToList();
 			}
 			
-			var searchList = repo.SearchByUnitAmount(search, caseSensitive);
+			var searchList = repo.SearchByUnitAmount(dto.UnitAmount.Substring(0, 4), caseSensitive);
 			
-			Assert.IsTrue(searchList.Count > 0, "No Product found");
+			Assert.IsTrue(searchList.Count > 0, "No Product found using UnitAmount");
 			
 			this.Check_EntityCount(list.Count(), searchList.Count(), "Incorrect number of Product found");
 
@@ -1350,25 +1927,27 @@ namespace RepositoryEFDotnet.UnitTest.Base
 			}
         }
 
-
-        public void Product_SearchByPublisher(IUnitOfWork uow, string search, bool caseSensitive = true)
+        private void Product_SearchByPublisher(IUnitOfWork uow, bool caseSensitive = true)
         {
             var repo = new ProductRepository(uow);
 			var list = new List<IProduct>();
+			var dto = new ProductDto();
+			PopulateProduct(dto);
 			
 			if(caseSensitive)
 			{
-				list = uow.AllMatching<Product>(i => i.Publisher.Contains(search)).Cast<IProduct>().ToList();
+				string searchTxt = dto.Publisher.Substring(0, 4);
+				list = uow.AllMatching<Product>(i => i.Publisher.Contains(searchTxt)).Cast<IProduct>().ToList();
 			}
 			else
 			{
-				string loweredSearch = search.ToLower();
-				list = uow.AllMatching<Product>(i => i.Publisher.ToLower().Contains(loweredSearch)).Cast<IProduct>().ToList();
+				string searchTxt = dto.Publisher.Substring(0, 4).ToLower();
+				list = uow.AllMatching<Product>(i => i.Publisher.ToLower().Contains(searchTxt)).Cast<IProduct>().ToList();
 			}
 			
-			var searchList = repo.SearchByPublisher(search, caseSensitive);
+			var searchList = repo.SearchByPublisher(dto.Publisher.Substring(0, 4), caseSensitive);
 			
-			Assert.IsTrue(searchList.Count > 0, "No Product found");
+			Assert.IsTrue(searchList.Count > 0, "No Product found using Publisher");
 			
 			this.Check_EntityCount(list.Count(), searchList.Count(), "Incorrect number of Product found");
 
@@ -1378,18 +1957,89 @@ namespace RepositoryEFDotnet.UnitTest.Base
 			}
         }
 
-
-		protected virtual void BaseRepositoryUnitTest_Product_CheckData(IProductRepository repository, IList<IProduct> list, int expected)
+		private void BaseRepositoryUnitTest_Product_CheckData(IUnitOfWork uow, IList<IProduct> list, int expected)
 		{
-			var items = repository.LoadAll();
+			var items = uow.GetAll<Product>().Cast<IProduct>().ToList();
             this.Check_EntityCount(expected, items.Count(), "Incorrect number of Product found");
 
-			foreach (var item in list)
+			foreach (var item in items)
 			{
-				this.Check_Product(item, items.FirstOrDefault(o => o.ProductId == item.ProductId));
+				this.Check_Product(item, list.FirstOrDefault(o => o.ProductId == item.ProductId));
 			}
 		}
-        protected virtual IList<ISoftware> BaseRepositoryUnitTest_Software_AddRange(ISoftwareRepository repository, int count = 1, int startSeed = 1)
+		
+        protected void Software_Add(IUnitOfWork uow, int count = 1, int startSeed = 1, int expected = 1)
+        {
+            var repo = new SoftwareRepository(uow);
+			
+			if(UseTransactions)
+			{
+				uow.StartTransaction();
+			}
+			
+            var list = BaseRepositoryUnitTest_Software_AddRange(repo, count, startSeed);
+			
+			uow.Commit();
+			
+			BaseRepositoryUnitTest_Software_CheckData(uow, list, expected);
+        }
+		
+		protected virtual void Software_LoadTests(IUnitOfWork uow)
+		{
+			Software_LoadAll(uow);
+			Software_LoadById(uow);
+		}
+		
+		protected virtual void Software_SearchTests(IUnitOfWork uow)
+		{
+			Software_SearchByLicenseCode(uow);
+			Software_SearchByLicenseCode(uow, false);
+		}
+		
+        protected void Software_Update(IUnitOfWork uow)
+        {
+            var repo = new SoftwareRepository(uow);
+			
+			if(UseTransactions)
+			{
+				uow.StartTransaction();
+			}
+			
+			var list = repo.LoadAll().ToList();
+			
+			foreach(var dto in list)
+			{
+				PopulateSoftware(dto, true);
+				repo.Update(dto);
+			}
+			
+			uow.Commit();
+			
+			BaseRepositoryUnitTest_Software_CheckData(uow, list, list.Count());
+        }
+		
+        protected void Software_Delete(IUnitOfWork uow)
+        {
+            var repo = new SoftwareRepository(uow);
+            var list = repo.LoadAll().ToList();
+			
+			if(UseTransactions)
+			{
+				uow.StartTransaction();
+			}
+			
+			foreach(var item in list.Select(o => o.ProductId).Distinct())
+			{
+				repo.Delete(item);
+			}
+			
+			uow.Commit();
+			
+			list = repo.LoadAll().ToList();
+			this.Check_EntityCount(0, list.Count(), "Incorrect number of Software found");
+        }
+		
+        private IList<ISoftware> BaseRepositoryUnitTest_Software_AddRange(ISoftwareRepository repository, int count = 1, int startSeed = 1)
         {		
             var list = new List<ISoftware>();
             var seed = startSeed;
@@ -1406,76 +2056,53 @@ namespace RepositoryEFDotnet.UnitTest.Base
 			return list;
         }
 		
-        protected virtual IList<ISoftware> BaseRepositoryUnitTest_Software_Update(ISoftwareRepository repository)
-        {		
-			var list = repository.LoadAll();
-			foreach(var dto in list)
-			{
-				PopulateSoftware(dto, true);
-				repository.Update(dto);
-			}
-			return list;
-		}
-		
-        public void Software_Update(IUnitOfWork uow)
+        private void Software_LoadAll(IUnitOfWork uow)
         {
             var repo = new SoftwareRepository(uow);
 			
-			if(UseTransactions)
-			{
-				uow.StartTransaction();
-			}
+            var list = repo.LoadAll();
 			
-            var list = BaseRepositoryUnitTest_Software_Update(repo);
-			
-			uow.Commit();
-			
-			BaseRepositoryUnitTest_Software_CheckData(repo, list, list.Count());
+			BaseRepositoryUnitTest_Software_CheckData(uow, list, list.Count());
         }
 		
-        public void Software_LoadAll(IUnitOfWork uow)
-        {
-            var repo = new SoftwareRepository(uow);
-			
-            var list = uow.GetAll<Software>().Cast<ISoftware>().ToList();
-			
-			BaseRepositoryUnitTest_Software_CheckData(repo, list, list.Count());
-        }
-		
-        public void Software_LoadById(IUnitOfWork uow)
+        private void Software_LoadById(IUnitOfWork uow)
         {
 			var loadedList = new List<ISoftware>();
             var repo = new SoftwareRepository(uow);
 			
             var list = repo.LoadAll().ToList();
 			
-			foreach(var item in list)
+			foreach(var item in list.Select(o => o.ProductId).Distinct())
 			{
-				loadedList.Add(repo.LoadByProductId(item.ProductId));
+				loadedList.Add(repo.LoadByProductId(item));
 			}
 			
-			BaseRepositoryUnitTest_Software_CheckData(repo, loadedList, loadedList.Count());
+			BaseRepositoryUnitTest_Software_CheckData(uow, loadedList, loadedList.Count());
         }
 		
+		
 
-        public void Software_SearchByLicenseCode(IUnitOfWork uow, string search, bool caseSensitive = true)
+        private void Software_SearchByLicenseCode(IUnitOfWork uow, bool caseSensitive = true)
         {
             var repo = new SoftwareRepository(uow);
 			var list = new List<ISoftware>();
+			var dto = new SoftwareDto();
+			PopulateSoftware(dto);
 			
 			if(caseSensitive)
 			{
-				list = uow.AllMatching<Software>(i => i.LicenseCode.Contains(search)).Cast<ISoftware>().ToList();
+				string searchTxt = dto.LicenseCode.Substring(0, 4);
+				list = uow.AllMatching<Software>(i => i.LicenseCode.Contains(searchTxt)).Cast<ISoftware>().ToList();
 			}
 			else
 			{
-				string loweredSearch = search.ToLower();
-				list = uow.AllMatching<Software>(i => i.LicenseCode.ToLower().Contains(loweredSearch)).Cast<ISoftware>().ToList();
+				string searchTxt = dto.LicenseCode.Substring(0, 4).ToLower();
+				list = uow.AllMatching<Software>(i => i.LicenseCode.ToLower().Contains(searchTxt)).Cast<ISoftware>().ToList();
 			}
 			
-			var searchList = repo.SearchByLicenseCode(search, caseSensitive);
+			var searchList = repo.SearchByLicenseCode(dto.LicenseCode.Substring(0, 4), caseSensitive);
 			
-			Assert.IsTrue(searchList.Count > 0, "No Software found");
+			Assert.IsTrue(searchList.Count > 0, "No Software found using LicenseCode");
 			
 			this.Check_EntityCount(list.Count(), searchList.Count(), "Incorrect number of Software found");
 
@@ -1485,18 +2112,17 @@ namespace RepositoryEFDotnet.UnitTest.Base
 			}
         }
 
-
-		protected virtual void BaseRepositoryUnitTest_Software_CheckData(ISoftwareRepository repository, IList<ISoftware> list, int expected)
+		private void BaseRepositoryUnitTest_Software_CheckData(IUnitOfWork uow, IList<ISoftware> list, int expected)
 		{
-			var items = repository.LoadAll();
+			var items = uow.GetAll<Software>().Cast<ISoftware>().ToList();
             this.Check_EntityCount(expected, items.Count(), "Incorrect number of Software found");
 
-			foreach (var item in list)
+			foreach (var item in items)
 			{
-				this.Check_Software(item, items.FirstOrDefault(o => o.ProductId == item.ProductId));
+				this.Check_Software(item, list.FirstOrDefault(o => o.ProductId == item.ProductId));
 			}
 		}
-
+		
 		#endregion
 	}
 }

@@ -7,7 +7,7 @@ public class BaseRepositoryUnitTestTemplate : BaseTemplate
 	{
 		// Debugger.Break();
 		Header = new CopyrightHeader();
-		Header.Filename = "BaseRepositoryUnitTest.g.cs";
+		Header.Filename = "BaseRepositoryUnitTest";
 #>
 
 <#= Header.TransformText() #>
@@ -39,9 +39,10 @@ namespace RepositoryEFDotnet.UnitTest.Base
 		
         #region Tests
 		
-<#+ foreach(var mdl in Models){ #>
-
-        public void <#= mdl.TableName #>_Add(IUnitOfWork uow, int count = 1, int startSeed = 1, int expected = 1)
+<#+ foreach(var mdl in Models){ 
+var pk = mdl.Columns.First(o => o.IsPrimaryKey);
+#>
+        protected void <#= mdl.TableName #>_Add(IUnitOfWork uow, int count = 1, int startSeed = 1, int expected = 1)
         {
             var repo = new <#= mdl.TableName #>Repository(uow);
 			
@@ -54,18 +55,70 @@ namespace RepositoryEFDotnet.UnitTest.Base
 			
 			uow.Commit();
 			
-			BaseRepositoryUnitTest_<#= mdl.TableName #>_CheckData(repo, list, expected);
+			BaseRepositoryUnitTest_<#= mdl.TableName #>_CheckData(uow, list, expected);
         }
 		
-<#+ } #>
-
-		#endregion
+		protected virtual void <#= mdl.TableName #>_LoadTests(IUnitOfWork uow)
+		{
+			<#= mdl.TableName #>_LoadAll(uow);
+			<#= mdl.TableName #>_LoadById(uow);
+<#+ foreach(var col in mdl.Columns.Where(o => !o.IsPrimaryKey && o.DomainDataType != DomainDataType.String)){ #>
+			<#= mdl.TableName #>_LoadBy<#= col.ColumnName #>(uow);
+<#+ }#>
+		}
 		
-		#region Base Tests
-<#+ foreach(var mdl in Models){ 
-var pk = mdl.Columns.First(o => o.IsPrimaryKey);
-#>
-        protected virtual IList<I<#= mdl.TableName #>> BaseRepositoryUnitTest_<#= mdl.TableName #>_AddRange(I<#= mdl.TableName #>Repository repository, int count = 1, int startSeed = 1)
+		protected virtual void <#= mdl.TableName #>_SearchTests(IUnitOfWork uow)
+		{
+<#+ foreach(var col in mdl.Columns.Where(o => !o.IsPrimaryKey && o.DomainDataType == DomainDataType.String)){ #>
+			<#= mdl.TableName #>_SearchBy<#= col.ColumnName #>(uow);
+			<#= mdl.TableName #>_SearchBy<#= col.ColumnName #>(uow, false);
+<#+ }#>
+		}
+		
+        protected void <#= mdl.TableName #>_Update(IUnitOfWork uow)
+        {
+            var repo = new <#= mdl.TableName #>Repository(uow);
+			
+			if(UseTransactions)
+			{
+				uow.StartTransaction();
+			}
+			
+			var list = repo.LoadAll().ToList();
+			
+			foreach(var dto in list)
+			{
+				Populate<#= mdl.TableName #>(dto, true);
+				repo.Update(dto);
+			}
+			
+			uow.Commit();
+			
+			BaseRepositoryUnitTest_<#= mdl.TableName #>_CheckData(uow, list, list.Count());
+        }
+		
+        protected void <#= mdl.TableName #>_Delete(IUnitOfWork uow)
+        {
+            var repo = new <#= mdl.TableName #>Repository(uow);
+            var list = repo.LoadAll().ToList();
+			
+			if(UseTransactions)
+			{
+				uow.StartTransaction();
+			}
+			
+			foreach(var item in list.Select(o => o.<#= pk.ColumnName #>).Distinct())
+			{
+				repo.Delete(item);
+			}
+			
+			uow.Commit();
+			
+			list = repo.LoadAll().ToList();
+			this.Check_EntityCount(0, list.Count(), "Incorrect number of <#= mdl.TableName #> found");
+        }
+		
+        private IList<I<#= mdl.TableName #>> BaseRepositoryUnitTest_<#= mdl.TableName #>_AddRange(I<#= mdl.TableName #>Repository repository, int count = 1, int startSeed = 1)
         {		
             var list = new List<I<#= mdl.TableName #>>();
             var seed = startSeed;
@@ -82,77 +135,71 @@ var pk = mdl.Columns.First(o => o.IsPrimaryKey);
 			return list;
         }
 		
-        protected virtual IList<I<#= mdl.TableName #>> BaseRepositoryUnitTest_<#= mdl.TableName #>_Update(I<#= mdl.TableName #>Repository repository)
-        {		
-			var list = repository.LoadAll();
-			foreach(var dto in list)
-			{
-				Populate<#= mdl.TableName #>(dto, true);
-				repository.Update(dto);
-			}
-			return list;
-		}
-		
-        public void <#= mdl.TableName #>_Update(IUnitOfWork uow)
+        private void <#= mdl.TableName #>_LoadAll(IUnitOfWork uow)
         {
             var repo = new <#= mdl.TableName #>Repository(uow);
 			
-			if(UseTransactions)
-			{
-				uow.StartTransaction();
-			}
+            var list = repo.LoadAll();
 			
-            var list = BaseRepositoryUnitTest_<#= mdl.TableName #>_Update(repo);
-			
-			uow.Commit();
-			
-			BaseRepositoryUnitTest_<#= mdl.TableName #>_CheckData(repo, list, list.Count());
+			BaseRepositoryUnitTest_<#= mdl.TableName #>_CheckData(uow, list, list.Count());
         }
 		
-        public void <#= mdl.TableName #>_LoadAll(IUnitOfWork uow)
-        {
-            var repo = new <#= mdl.TableName #>Repository(uow);
-			
-            var list = uow.GetAll<<#= mdl.TableName #>>().Cast<I<#= mdl.TableName #>>().ToList();
-			
-			BaseRepositoryUnitTest_<#= mdl.TableName #>_CheckData(repo, list, list.Count());
-        }
-		
-        public void <#= mdl.TableName #>_LoadById(IUnitOfWork uow)
+        private void <#= mdl.TableName #>_LoadById(IUnitOfWork uow)
         {
 			var loadedList = new List<I<#= mdl.TableName #>>();
             var repo = new <#= mdl.TableName #>Repository(uow);
 			
             var list = repo.LoadAll().ToList();
 			
-			foreach(var item in list)
+			foreach(var item in list.Select(o => o.<#= pk.ColumnName #>).Distinct())
 			{
-				loadedList.Add(repo.LoadBy<#= pk.ColumnName #>(item.<#= pk.ColumnName #>));
+				loadedList.Add(repo.LoadBy<#= pk.ColumnName #>(item));
 			}
 			
-			BaseRepositoryUnitTest_<#= mdl.TableName #>_CheckData(repo, loadedList, loadedList.Count());
+			BaseRepositoryUnitTest_<#= mdl.TableName #>_CheckData(uow, loadedList, loadedList.Count());
         }
+		
+<#+ foreach(var col in mdl.Columns.Where(o => !o.IsPrimaryKey && o.DomainDataType != DomainDataType.String)){ #>
+
+        private void <#= mdl.TableName #>_LoadBy<#= col.ColumnName #>(IUnitOfWork uow)
+        {
+			var loadedList = new List<I<#= mdl.TableName #>>();
+            var repo = new <#= mdl.TableName #>Repository(uow);
+			
+            var list = repo.LoadAll().ToList();
+			
+			foreach(var item in list.Select(o => o.<#= col.ColumnName #>).Distinct())
+			{
+				loadedList.AddRange(repo.LoadBy<#= col.ColumnName #>(item));
+			}
+			
+			BaseRepositoryUnitTest_<#= mdl.TableName #>_CheckData(uow, loadedList, loadedList.Count());
+        }
+<#+ }#>
 		
 <#+ foreach(var col in mdl.Columns.Where(o => !o.IsPrimaryKey && o.DomainDataType == DomainDataType.String)){ #>
 
-        public void <#= mdl.TableName #>_SearchBy<#= col.ColumnName #>(IUnitOfWork uow, string search, bool caseSensitive = true)
+        private void <#= mdl.TableName #>_SearchBy<#= col.ColumnName #>(IUnitOfWork uow, bool caseSensitive = true)
         {
             var repo = new <#= mdl.TableName #>Repository(uow);
 			var list = new List<I<#= mdl.TableName #>>();
+			var dto = new <#= mdl.TableName #>Dto();
+			Populate<#= mdl.TableName #>(dto);
 			
 			if(caseSensitive)
 			{
-				list = uow.AllMatching<<#= mdl.TableName #>>(i => i.<#= col.ColumnName #>.Contains(search)).Cast<I<#= mdl.TableName #>>().ToList();
+				string searchTxt = dto.<#= col.ColumnName #>.Substring(0, 4);
+				list = uow.AllMatching<<#= mdl.TableName #>>(i => i.<#= col.ColumnName #>.Contains(searchTxt)).Cast<I<#= mdl.TableName #>>().ToList();
 			}
 			else
 			{
-				string loweredSearch = search.ToLower();
-				list = uow.AllMatching<<#= mdl.TableName #>>(i => i.<#= col.ColumnName #>.ToLower().Contains(loweredSearch)).Cast<I<#= mdl.TableName #>>().ToList();
+				string searchTxt = dto.<#= col.ColumnName #>.Substring(0, 4).ToLower();
+				list = uow.AllMatching<<#= mdl.TableName #>>(i => i.<#= col.ColumnName #>.ToLower().Contains(searchTxt)).Cast<I<#= mdl.TableName #>>().ToList();
 			}
 			
-			var searchList = repo.SearchBy<#= col.ColumnName #>(search, caseSensitive);
+			var searchList = repo.SearchBy<#= col.ColumnName #>(dto.<#= col.ColumnName #>.Substring(0, 4), caseSensitive);
 			
-			Assert.IsTrue(searchList.Count > 0, "No <#= mdl.TableName #> found");
+			Assert.IsTrue(searchList.Count > 0, "No <#= mdl.TableName #> found using <#= col.ColumnName #>");
 			
 			this.Check_EntityCount(list.Count(), searchList.Count(), "Incorrect number of <#= mdl.TableName #> found");
 
@@ -161,21 +208,20 @@ var pk = mdl.Columns.First(o => o.IsPrimaryKey);
 				this.Check_<#= mdl.TableName #>(item, searchList.FirstOrDefault(o => o.<#= pk.ColumnName #> == item.<#= pk.ColumnName #>));
 			}
         }
-
 <#+ }#>
 
-		protected virtual void BaseRepositoryUnitTest_<#= mdl.TableName #>_CheckData(I<#= mdl.TableName #>Repository repository, IList<I<#= mdl.TableName #>> list, int expected)
+		private void BaseRepositoryUnitTest_<#= mdl.TableName #>_CheckData(IUnitOfWork uow, IList<I<#= mdl.TableName #>> list, int expected)
 		{
-			var items = repository.LoadAll();
+			var items = uow.GetAll<<#= mdl.TableName #>>().Cast<I<#= mdl.TableName #>>().ToList();
             this.Check_EntityCount(expected, items.Count(), "Incorrect number of <#= mdl.TableName #> found");
 
-			foreach (var item in list)
+			foreach (var item in items)
 			{
-				this.Check_<#= mdl.TableName #>(item, items.FirstOrDefault(o => o.<#= pk.ColumnName #> == item.<#= pk.ColumnName #>));
+				this.Check_<#= mdl.TableName #>(item, list.FirstOrDefault(o => o.<#= pk.ColumnName #> == item.<#= pk.ColumnName #>));
 			}
 		}
+		
 <#+ } #>
-
 		#endregion
 	}
 }

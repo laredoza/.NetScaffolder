@@ -36,15 +36,14 @@ namespace Banking.Models.Customers.Mappings.NHibernate.SqlServer
 			
 			#region Primary Keys
 			
-			Id(t => t.ProductId);
+			Id(t => t.ProductId).GeneratedBy.Assigned()
+			.Index("IX_ProductId")
+			.Not.Nullable();
 
 			#endregion
 
-			#region Constraints
+			#region Properties
 			
-			Map(t => t.ProductId).ReadOnly().Generated.Insert()
-			.Index("IX_ProductId")
-			.Not.Nullable();
 			Map(t => t.Publisher)
 			.Length(200)
 			.Not.Nullable();
@@ -53,7 +52,7 @@ namespace Banking.Models.Customers.Mappings.NHibernate.SqlServer
 			
 			#region Relationships
 			
-			HasOne(s => s.Product).PropertyRef(o => o.ProductId);
+			HasOne(s => s.Product);
 			
 			#endregion			
 	

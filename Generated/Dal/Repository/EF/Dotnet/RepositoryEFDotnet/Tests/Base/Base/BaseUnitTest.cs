@@ -31,15 +31,17 @@ namespace RepositoryEFDotnet.UnitTest.Base
         /// </param>
         protected virtual void PopulateBankAccount(IBankAccount item, bool isUpdate = false, int seed = 1)
         {
-            item.Balance = 100 + seed;
-            item.BankAccountNumber = $"BA1234-{seed}";
-            item.Locked = false;
-
             if (isUpdate)
             {
                 item.Balance = item.Balance - 10;
                 item.BankAccountNumber = $"{item.BankAccountNumber}-1";
                 item.Locked = true;
+            }
+            else
+            {
+                item.Balance = 100 + seed;
+                item.BankAccountNumber = $"BA1234-{seed}";
+                item.Locked = false;
             }
         }
 
@@ -57,11 +59,6 @@ namespace RepositoryEFDotnet.UnitTest.Base
         /// </param>
         protected virtual void PopulateBankTransfers(IBankTransfers item, bool isUpdate = false, int seed = 1)
         {
-            item.Amount = 50 + seed;
-            item.FromBankAccountId = seed;
-            item.ToBankAccountId = seed + 1;
-            item.TransferDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 14, 10, 12);
-
             if (isUpdate)
             {
                 item.Amount = item.Amount - 10;
@@ -72,6 +69,13 @@ namespace RepositoryEFDotnet.UnitTest.Base
                     14,
                     10,
                     12);
+            }
+            else
+            {
+                item.Amount = 50 + seed;
+                item.FromBankAccountId = seed;
+                item.ToBankAccountId = seed + 1;
+                item.TransferDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 14, 10, 12);
             }
         }
 
@@ -91,8 +95,6 @@ namespace RepositoryEFDotnet.UnitTest.Base
         /// </exception>
         protected virtual void PopulateBook(IBook item, bool isUpdate = false, int seed = 1)
         {
-            item.Publisher = $"Publisher {seed}";
-
             if (isUpdate)
             {
                 item.Publisher = $"Publisher {seed} updated";
@@ -100,6 +102,7 @@ namespace RepositoryEFDotnet.UnitTest.Base
             else
             {
                 item.ProductId = seed;
+                item.Publisher = $"Publisher {seed}";
             }
         }
 
@@ -138,13 +141,14 @@ namespace RepositoryEFDotnet.UnitTest.Base
         /// </param>
         protected virtual void PopulateCountry(ICountry item, bool isUpdate = false, int seed = 1)
         {
-            item.CountryName = $"Country {seed}";
-
             if (isUpdate)
             {
                 var updateString = " updated";
-
                 item.CountryName = $"{item.CountryName} {updateString}";
+            }
+            else
+            {
+                item.CountryName = $"Country {seed}";
             }
         }
 
@@ -162,18 +166,6 @@ namespace RepositoryEFDotnet.UnitTest.Base
         /// </param>
         protected virtual void PopulateCustomer(ICustomer item, bool isUpdate = false, int seed = 1)
         {
-            item.Address = $"Customer Address {seed}";
-            item.City = $"Test City {seed}";
-            item.CompanyName = $"Test Company {seed}";
-            item.ContactName = $"Test Contact {seed}";
-            item.ContactTitle = $"Test Title {seed}";
-            item.CustomerCode = $"12-{seed}";
-            item.Fax = $"Fax 123 {seed}";
-            item.IsEnabled = true;
-            item.Photo = $"Photo goes here {seed}";
-            item.PostalCode = $"12345-{seed}";
-            item.Telephone = $"Test Phone number {seed}";
-
             if (isUpdate)
             {
                 var updateString = " new";
@@ -189,6 +181,20 @@ namespace RepositoryEFDotnet.UnitTest.Base
                 item.Photo = $"{item.Photo} {updateString}";
                 item.PostalCode = $"{updateString}-{seed}";
                 item.Telephone = $"{item.Telephone} {updateString}";
+            }
+            else
+            {
+                item.Address = $"Customer Address {seed}";
+                item.City = $"Test City {seed}";
+                item.CompanyName = $"Test Company {seed}";
+                item.ContactName = $"Test Contact {seed}";
+                item.ContactTitle = $"Test Title {seed}";
+                item.CustomerCode = $"12-{seed}";
+                item.Fax = $"Fax 123 {seed}";
+                item.IsEnabled = true;
+                item.Photo = $"Photo goes here {seed}";
+                item.PostalCode = $"12345-{seed}";
+                item.Telephone = $"Test Phone number {seed}";
             }
         }
 
@@ -208,14 +214,6 @@ namespace RepositoryEFDotnet.UnitTest.Base
         /// </exception>
         protected virtual void PopulateOrder(IOrder item, bool isUpdate = false, int seed = 1)
         {
-            item.CustomerId = 2;
-            item.DeliveryDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 8, 50, 20);
-            item.OrderDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day - seed, 10, 30, 10);
-            item.ShippingAddress = $"Shipping Address {seed}";
-            item.ShippingCity = $"Shipping city {seed}";
-            item.ShippingName = $"Shipping name {seed}";
-            item.ShippingZip = $"12-{seed}";
-
             if (isUpdate)
             {
                 var updateString = " updated";
@@ -239,6 +237,16 @@ namespace RepositoryEFDotnet.UnitTest.Base
                 item.ShippingName = $"{item.ShippingName} {updateString}";
                 item.ShippingZip = $"11-{seed}";
             }
+            else
+            {
+                item.CustomerId = 2;
+                item.DeliveryDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 8, 50, 20);
+                item.OrderDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day - seed, 10, 30, 10);
+                item.ShippingAddress = $"Shipping Address {seed}";
+                item.ShippingCity = $"Shipping city {seed}";
+                item.ShippingName = $"Shipping name {seed}";
+                item.ShippingZip = $"12-{seed}";
+            }
         }
 
         /// <summary>
@@ -257,17 +265,19 @@ namespace RepositoryEFDotnet.UnitTest.Base
         /// </exception>
         protected virtual void PopulateOrderDetails(IOrderDetails item, bool isUpdate = false, int seed = 1)
         {
-            item.UnitPrice = seed;
-            item.Amount = Convert.ToInt16(seed);
-            item.Discount = seed;
-            item.OrderId = seed;
-            item.ProductId = seed  + 1;
-
             if (isUpdate)
             {
                 item.UnitPrice = seed * seed;
                 item.Amount = Convert.ToInt16(seed * seed);
                 item.Discount = seed * seed;
+            }
+            else
+            {
+                item.UnitPrice = seed;
+                item.Amount = Convert.ToInt16(seed);
+                item.Discount = seed;
+                item.OrderId = seed;
+                item.ProductId = seed + 1;
             }
         }
 
@@ -285,12 +295,6 @@ namespace RepositoryEFDotnet.UnitTest.Base
         /// </param>
         protected virtual void PopulateProduct(IProduct item, bool isUpdate = false, int seed = 1)
         {
-            item.AmountInStock = 1;
-            item.ProductDescription = $"Product description {seed}";
-            item.Publisher = $"Publisher {seed}";
-            item.UnitAmount = $"Unit amount {seed}";
-            item.UnitPrice = seed;
-
             if (isUpdate)
             {
                 var updateString = " updated";
@@ -299,6 +303,14 @@ namespace RepositoryEFDotnet.UnitTest.Base
                 item.Publisher = $"Publisher {seed} {updateString}";
                 item.UnitAmount = $"Unit amount {seed} {updateString}";
                 item.UnitPrice = item.UnitPrice * item.UnitPrice;
+            }
+            else
+            {
+                item.AmountInStock = 1;
+                item.ProductDescription = $"Product description {seed}";
+                item.Publisher = $"Publisher {seed}";
+                item.UnitAmount = $"Unit amount {seed}";
+                item.UnitPrice = seed;
             }
         }
 
@@ -318,8 +330,6 @@ namespace RepositoryEFDotnet.UnitTest.Base
         /// </exception>
         protected virtual void PopulateSoftware(ISoftware item, bool isUpdate = false, int seed = 1)
         {
-            item.LicenseCode = $"License code {seed}";
-
             if (isUpdate)
             {
                 item.LicenseCode = $"{item.LicenseCode} updated";
@@ -327,6 +337,7 @@ namespace RepositoryEFDotnet.UnitTest.Base
             else
             {
                 item.ProductId = seed;
+                item.LicenseCode = $"License code {seed}";
             }
         }
 

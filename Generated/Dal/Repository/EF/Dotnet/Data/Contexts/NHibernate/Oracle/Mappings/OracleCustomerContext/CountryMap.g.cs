@@ -35,14 +35,14 @@ namespace Banking.Models.Customers.Mappings.NHibernate.Oracle
 			
 			#region Primary Keys
 			
-			Id(t => t.CountryId).GeneratedBy.Increment();
+			Id(t => t.CountryId).GeneratedBy.Increment().Unique()
+			.Not.Nullable();
+			Map(t => t.CountryId).ReadOnly().Generated.Insert();
 
 			#endregion
 
-			#region Constraints
+			#region Properties
 			
-			Map(t => t.CountryId).ReadOnly().Generated.Insert()
-			.Not.Nullable();
 			Map(t => t.CountryName)
 			.Length(100)
 			.Nullable();

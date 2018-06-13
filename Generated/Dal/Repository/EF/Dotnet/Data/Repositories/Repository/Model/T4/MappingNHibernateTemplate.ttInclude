@@ -54,7 +54,25 @@ namespace <#= Namespace #>.<#= Driver.ParentFolder #>.<#= Driver.Prefix #>
 			#region Primary Keys
 			
 <#+ if(Model.PrimaryKeyCount == 1){ var pk = Model.Columns.First(o => o.IsPrimaryKey);#>
-			Id(t => t.<#= pk.ColumnName #>)<#=Driver.DriverType.TransformDbGeneratedKey(Model) #>;
+			Id(t => t.<#= pk.ColumnName #>)<#=Driver.DriverType.TransformDbGeneratedKey(Model) #>
+<#+ foreach(var idx in Model.Indexes.Where(o => o.IndexType != IndexType.PrimaryKey && o.Columns.Contains(pk.ColumnName))){ #>
+			<#=Driver.TransformIndex(idx) #>
+<#+ } #>
+<#+ if((pk.Precision > 0 && !pk.InValidPrecisionGeneration) || pk.Scale > 0){ #>
+			<#= Driver.DriverType.TransformColumnPrecision(pk) #>
+<#+ } #>
+<#+ if(pk.Length > 0){ #>
+			.Length(<#= pk.Length #>)
+<#+ } #>
+<#+ if(pk.IsRequired){ #>
+			.Not.Nullable();
+<#+ } else #>
+<#+ { #>
+			.Nullable();
+<#+ } #>
+<#+ if(Model.DatabaseGeneratedKeyType != DatabaseGeneratedKeyType.None && Model.DatabaseGeneratedKeyType != DatabaseGeneratedKeyType.Ignore) {#>
+			Map(t => t.<#= pk.ColumnName #>).ReadOnly().Generated.Insert();
+<#+ } #>
 <#+ } #>
 <#+ if(Model.PrimaryKeyCount > 1){ #>
 			CompositeId()<#+ foreach(var col in Model.Columns.Where(o => o.IsPrimaryKey)){ #>.KeyProperty(t => t.<#= col.ColumnName #>)<#+ } #>;
@@ -62,15 +80,10 @@ namespace <#= Namespace #>.<#= Driver.ParentFolder #>.<#= Driver.Prefix #>
 
 			#endregion
 
-			#region Constraints
+			#region Properties
 			
-<#+ foreach(var col in Model.Columns){ #>
-<#+ if(col.IsPrimaryKey){ #>
-			Map(t => t.<#= col.ColumnName #>).ReadOnly().Generated.Insert()
-<#+ } else  #>
-<#+ { #>
+<#+ foreach(var col in Model.Columns.Where(o => !o.IsPrimaryKey)){ #>
 			Map(t => t.<#= col.ColumnName #>)
-<#+ } #>
 <#+ foreach(var idx in Model.Indexes.Where(o => o.IndexType != IndexType.PrimaryKey && o.Columns.Contains(col.ColumnName))){ #>
 			<#=Driver.TransformIndex(idx) #>
 <#+ } #>

@@ -35,15 +35,14 @@ namespace Banking.Models.Context.Mappings.NHibernate.MySql
 			
 			#region Primary Keys
 			
-			Id(t => t.ProductId);
+			Id(t => t.ProductId).GeneratedBy.Assigned()
+			.Index("IX_ProductId")
+			.Not.Nullable();
 
 			#endregion
 
-			#region Constraints
+			#region Properties
 			
-			Map(t => t.ProductId).ReadOnly().Generated.Insert()
-			.Index("IX_ProductId")
-			.Not.Nullable();
 			Map(t => t.LicenseCode)
 			.Length(200)
 			.Not.Nullable();
@@ -52,7 +51,7 @@ namespace Banking.Models.Context.Mappings.NHibernate.MySql
 			
 			#region Relationships
 			
-			HasOne(s => s.Product).PropertyRef(o => o.ProductId);
+			HasOne(s => s.Product);
 			
 			#endregion			
 	

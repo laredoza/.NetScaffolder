@@ -111,10 +111,11 @@ namespace RepositoryEFDotnet.Contexts.NHibernate
         /// </returns>
         /// <exception cref="NotImplementedException">
         /// </exception>
-        public Task<bool> AddAsync<TEntity>(TEntity item)
+        public async Task<bool> AddAsync<TEntity>(TEntity item)
             where TEntity : class
         {
-            throw new NotImplementedException();
+            await this.CurrentSession.PersistAsync(item);
+            return true;
         }
 
         /// <summary>
@@ -332,7 +333,7 @@ namespace RepositoryEFDotnet.Contexts.NHibernate
                 this.CloseTransaction();
             }
 
-            this.CloseSession();
+            // this.CloseSession();
             return 1;
         }
 
@@ -351,7 +352,7 @@ namespace RepositoryEFDotnet.Contexts.NHibernate
                 this.CloseTransaction();
             }
 
-            this.CloseSession();
+            // this.CloseSession();
 
             return 1;
         }
