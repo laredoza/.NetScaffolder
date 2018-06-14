@@ -17,6 +17,7 @@ namespace DefaultDrivers.Forms
     using DotNetScaffolder.Components.Common.Contract.UI;
     using DotNetScaffolder.Components.DataTypes.DefaultDataTypes;
     using DotNetScaffolder.Components.Drivers.DefaultDrivers.EFCore;
+    using DotNetScaffolder.Components.Drivers.DefaultDrivers.NHibernate;
     using DotNetScaffolder.Core.Common.Validation;
     using DotNetScaffolder.Mapping.MetaData.Domain;
 
@@ -35,12 +36,12 @@ namespace DefaultDrivers.Forms
         #region Constructors and Destructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="EFCoreUserControl"/> class.
+        /// Initializes a new instance of the <see cref="NHibernateUserControl"/> class.
         /// </summary>
         public NHibernateUserControl()
         {
             this.InitializeComponent();
-            this.DriverType = new EFCoreDriverType("NHibernateDriverType.xml");
+            this.DriverType = new NhibernateDriverType("NHibernateDriverType.xml");
         }
 
         #endregion

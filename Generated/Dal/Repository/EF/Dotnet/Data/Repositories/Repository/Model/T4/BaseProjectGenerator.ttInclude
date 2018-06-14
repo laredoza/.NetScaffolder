@@ -81,7 +81,9 @@
                 drivers = new List<IDriver>();
                 foreach( Guid driverTypeTypeId in domain.DriverIdList)
                 {
-                    drivers.Add(ScaffoldConfig.ReturnDriver(driverTypeTypeId));
+					var drvr = ScaffoldConfig.ReturnDriver(driverTypeTypeId);
+					drvr.DriverType.LoadConfig(parameters);
+                    drivers.Add(drvr);
                 }
 
                 // Setup data types for template
