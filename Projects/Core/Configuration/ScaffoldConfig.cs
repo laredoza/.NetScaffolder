@@ -41,7 +41,7 @@ namespace DotNetScaffolder.Core.Configuration
 
 #if DEBUG
             ModelPath =
-                @"..\..\..\..\..\Generated\Dal\Repository\EF\Dotnet\Data\Repositories\Repository\Model\Banking.mdl";
+                @"..\..\..\..\..\..\BCX\Quirc.V3\Data\Repository\Model\Quirc.mdl";
             ConfigPath = @"Config\Settings.xml";
 #endif
         }

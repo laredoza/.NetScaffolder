@@ -58,7 +58,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Base
         /// <summary>
         ///     Gets or sets the additional namespaces.
         /// </summary>
-        public List<string> AdditionalNamespaces { get; set; } = new List<string>();
+        public IList<string> AdditionalNamespaces { get; } = new List<string>();
 
         /// <summary>
         ///     Gets or sets the base namespace.

@@ -163,6 +163,11 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.ContextDa
             IDictionary<string, string> parameterDictionary = parameters as IDictionary<string, string>;
             this.DataType?.Load(parameterDictionary);
 
+            if (parameterDictionary.ContainsKey("basePath"))
+            {
+                this.SavePath = parameterDictionary["basePath"];
+            }
+
             if (parameterDictionary.ContainsKey("name"))
             {
                 this.SelectedContext =

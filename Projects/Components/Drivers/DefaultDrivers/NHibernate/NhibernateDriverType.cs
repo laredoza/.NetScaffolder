@@ -283,11 +283,11 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.NHibernate
 
             if (relationships != null && relationships.Any())
             {
-                var parentRels =
-                    (from tbl in models
-                     select tbl.Relationships.FirstOrDefault(
-                         o => o.ReferencedTableName == table && o.SchemaName == rel.SchemaName
-                                                             && o.ColumnName == rel.ReferencedColumnName))
+                var parentRels = (from tbl in models
+                                  select tbl.Relationships.FirstOrDefault(
+                                      o => o.ReferencedTableName == table && o.SchemaName == rel.SchemaName
+                                                                          && o.ColumnName == rel.ReferencedColumnName
+                                                                          && o.ReferencedColumnName == rel.ColumnName))
                     .Where(x => x != null);
 
                 var parentRel = parentRels.FirstOrDefault();
