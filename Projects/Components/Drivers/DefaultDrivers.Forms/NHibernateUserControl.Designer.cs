@@ -33,6 +33,7 @@
             this.LoggingEnabled = new System.Windows.Forms.CheckBox();
             this.CreateDb = new System.Windows.Forms.CheckBox();
             this.LazyLoading = new System.Windows.Forms.CheckBox();
+            this.chkUseAlias = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // chkColumnOrder
@@ -85,17 +86,28 @@
             this.LazyLoading.Text = "Enable lazy loading";
             this.LazyLoading.UseVisualStyleBackColor = true;
             // 
+            // chkUseAlias
+            // 
+            this.chkUseAlias.AutoSize = true;
+            this.chkUseAlias.Location = new System.Drawing.Point(12, 104);
+            this.chkUseAlias.Name = "chkUseAlias";
+            this.chkUseAlias.Size = new System.Drawing.Size(70, 17);
+            this.chkUseAlias.TabIndex = 74;
+            this.chkUseAlias.Text = "Use Alias";
+            this.chkUseAlias.UseVisualStyleBackColor = true;
+            // 
             // NHibernateUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.chkUseAlias);
             this.Controls.Add(this.chkColumnOrder);
             this.Controls.Add(this.ProxyCreation);
             this.Controls.Add(this.LoggingEnabled);
             this.Controls.Add(this.CreateDb);
             this.Controls.Add(this.LazyLoading);
             this.Name = "NHibernateUserControl";
-            this.Size = new System.Drawing.Size(237, 125);
+            this.Size = new System.Drawing.Size(237, 135);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -108,5 +120,6 @@
         private System.Windows.Forms.CheckBox LoggingEnabled;
         private System.Windows.Forms.CheckBox CreateDb;
         private System.Windows.Forms.CheckBox LazyLoading;
+        private System.Windows.Forms.CheckBox chkUseAlias;
     }
 }

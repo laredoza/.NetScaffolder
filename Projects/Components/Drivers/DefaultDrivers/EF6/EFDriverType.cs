@@ -99,6 +99,8 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6
         /// </summary>
         public bool ProxyCreationEnabled { get; set; }
 
+        public bool UseAlias { get; set; } = true;
+
         /// <summary>
         /// Gets or sets a value indicating whether use seperate config classes.
         /// </summary>
@@ -171,6 +173,7 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6
                     this.LoggingEnabled = loadedDriverType.LoggingEnabled;
                     this.ProxyCreationEnabled = loadedDriverType.ProxyCreationEnabled;
                     this.UseSeperateConfigClasses = loadedDriverType.UseSeperateConfigClasses;
+                    this.UseAlias = loadedDriverType.UseAlias;
                 }
             }
         }

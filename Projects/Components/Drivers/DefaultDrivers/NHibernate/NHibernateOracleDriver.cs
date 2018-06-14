@@ -88,7 +88,7 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.NHibernate
         /// </returns>
         public string AsAlias(string name)
         {
-            return $"`{name}`";
+            return !this.DriverType.UseAlias ? name : $"`{name}`";
         }
 
         /// <summary>

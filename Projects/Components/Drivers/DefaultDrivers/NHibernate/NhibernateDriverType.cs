@@ -99,6 +99,8 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.NHibernate
         /// </summary>
         public bool ProxyCreationEnabled { get; set; }
 
+        public bool UseAlias { get; set; } = true;
+
         /// <summary>
         /// Gets or sets a value indicating whether use seperate config classes.
         /// </summary>
@@ -164,6 +166,7 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.NHibernate
                     this.LazyLoadingEnabled = loadedDriverType.LazyLoadingEnabled;
                     this.LoggingEnabled = loadedDriverType.LoggingEnabled;
                     this.ProxyCreationEnabled = loadedDriverType.ProxyCreationEnabled;
+                    this.UseAlias = loadedDriverType.UseAlias;
                 }
             }
         }

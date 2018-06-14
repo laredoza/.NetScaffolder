@@ -33,7 +33,7 @@
             this.LoggingEnabled = new System.Windows.Forms.CheckBox();
             this.CreateDb = new System.Windows.Forms.CheckBox();
             this.LazyLoading = new System.Windows.Forms.CheckBox();
-            this.chkUseConfigClasses = new System.Windows.Forms.CheckBox();
+            this.chkUseAlias = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // chkColumnOrder
@@ -86,21 +86,21 @@
             this.LazyLoading.Text = "Enable lazy loading";
             this.LazyLoading.UseVisualStyleBackColor = true;
             // 
-            // chkUseConfigClasses
+            // chkUseAlias
             // 
-            this.chkUseConfigClasses.AutoSize = true;
-            this.chkUseConfigClasses.Location = new System.Drawing.Point(14, 103);
-            this.chkUseConfigClasses.Name = "chkUseConfigClasses";
-            this.chkUseConfigClasses.Size = new System.Drawing.Size(191, 17);
-            this.chkUseConfigClasses.TabIndex = 74;
-            this.chkUseConfigClasses.Text = "Use seperate configuration classes";
-            this.chkUseConfigClasses.UseVisualStyleBackColor = true;
+            this.chkUseAlias.AutoSize = true;
+            this.chkUseAlias.Location = new System.Drawing.Point(14, 103);
+            this.chkUseAlias.Name = "chkUseAlias";
+            this.chkUseAlias.Size = new System.Drawing.Size(70, 17);
+            this.chkUseAlias.TabIndex = 74;
+            this.chkUseAlias.Text = "Use Alias";
+            this.chkUseAlias.UseVisualStyleBackColor = true;
             // 
             // EFDriverTypeUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.chkUseConfigClasses);
+            this.Controls.Add(this.chkUseAlias);
             this.Controls.Add(this.chkColumnOrder);
             this.Controls.Add(this.ProxyCreation);
             this.Controls.Add(this.LoggingEnabled);
@@ -120,6 +120,6 @@
         private System.Windows.Forms.CheckBox LoggingEnabled;
         private System.Windows.Forms.CheckBox CreateDb;
         private System.Windows.Forms.CheckBox LazyLoading;
-        private System.Windows.Forms.CheckBox chkUseConfigClasses;
+        private System.Windows.Forms.CheckBox chkUseAlias;
     }
 }

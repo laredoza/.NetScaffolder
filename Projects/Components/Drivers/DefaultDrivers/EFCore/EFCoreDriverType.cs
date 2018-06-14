@@ -99,6 +99,8 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EFCore
         /// </summary>
         public bool ProxyCreationEnabled { get; set; }
 
+        public bool UseAlias { get; set; } = true;
+
         /// <summary>
         /// Gets or sets a value indicating whether use seperate config classes.
         /// </summary>
@@ -172,6 +174,7 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EFCore
                     this.LoggingEnabled = loadedDriverType.LoggingEnabled;
                     this.ProxyCreationEnabled = loadedDriverType.ProxyCreationEnabled;
                     this.UseSeperateConfigClasses = loadedDriverType.UseSeperateConfigClasses;
+                    this.UseAlias = loadedDriverType.UseAlias;
                 }
             }
         }
@@ -295,11 +298,6 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EFCore
                 rel.RelationshipAlias,
                 nc);
 
-            sb.Append(
-                rel.ReferencedMultiplicity == RelationshipMultiplicity.Many
-                    ? $"builder.HasMany<{this.TransformModelName(rel.ReferencedTableName, nc)}>(s => s.{refTableName})"
-                    : $"builder.HasOne<{this.TransformModelName(rel.ReferencedTableName, nc)}>(s => s.{refTableName})");
-
             string parentTableName = table;
 
             if (relationships != null && relationships.Any())
@@ -322,10 +320,22 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EFCore
                 }
             }
 
+            sb.Append(
+                rel.ReferencedMultiplicity == RelationshipMultiplicity.Many
+                    ? $"builder.HasMany<{this.TransformModelName(rel.ReferencedTableName, nc)}>(s => s.{refTableName})"
+                    : $"builder.HasOne<{this.TransformModelName(rel.ReferencedTableName, nc)}>(s => s.{refTableName})");
+
             if (rel.Multiplicity == RelationshipMultiplicity.Many)
             {
                 sb.Append(
                     $".WithMany(s => s.{parentTableName}).HasForeignKey(s => s.{rel.ColumnName}).OnDelete(DeleteBehavior.Restrict);");
+            }
+            else if (rel.Multiplicity == RelationshipMultiplicity.One)
+            {
+                sb.Append(
+                    rel.ReferencedMultiplicity == RelationshipMultiplicity.Many
+                        ? $".WithOne(s => s.{parentTableName}).HasForeignKey(s => s.{rel.ReferencedColumnName}).OnDelete(DeleteBehavior.Restrict);"
+                        : $".WithOne(s => s.{parentTableName}).HasForeignKey<{this.TransformModelName(rel.ReferencedTableName, nc)}>(s => s.{rel.ReferencedColumnName}).OnDelete(DeleteBehavior.Restrict);");
             }
             else
             {
