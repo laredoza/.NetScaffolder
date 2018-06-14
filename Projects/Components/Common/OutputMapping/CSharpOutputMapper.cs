@@ -36,7 +36,7 @@ namespace DotNetScaffolder.Components.Common
         public static string MapToOutput(Column col, bool nullable = true)
         {
             var nullableFormat = "Nullable<{0}>";
-
+            
             if (!nullable) nullableFormat = "{0}";
 
             var dbType = col.RemapDataType ?? col.DomainDataType;
@@ -69,6 +69,8 @@ namespace DotNetScaffolder.Components.Common
                     return col.IsRequired ? "DateTime" : string.Format(nullableFormat, "DateTime");
                 case DomainDataType.Time:
                     return col.IsRequired ? "DateTime" : string.Format(nullableFormat, "DateTime");
+                case DomainDataType.Double:
+                    return col.IsRequired ? "double" : string.Format(nullableFormat, "double");
                 default:
                     throw new NotImplementedException($"Invalid data type {col.DomainDataType}");
             }

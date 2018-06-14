@@ -201,7 +201,7 @@ namespace DotNetScaffolder.Presentation.Forms
                 {
                     this.tabControl1.Enabled = false;
                     this.BtnSave.Enabled = false;
-                    this.LblPath.Text = "No Model File Loaded";
+                    this.LblPath.Text = "No Model File Loading";
                 }
             }
             catch (Exception ex)
