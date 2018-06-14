@@ -57,13 +57,13 @@ if (Driver.ForceSchemaToUppercase)
 			#region Primary keys
 			
 <#+ if(Model.PrimaryKeyCount == 1){ var pk = Model.Columns.First(o => o.IsPrimaryKey);#>
-			builder.HasKey(t => t.<#= pk.ColumnName #>);
-			builder.Property(t => t.<#= pk.ColumnName #>)<#=Driver.DriverType.TransformDbGeneratedKey(Model) #>;
+			builder.HasKey(t => t.<#= NamingConvention.ApplyNamingConvention(pk.ColumnName) #>);
+			builder.Property(t => t.<#= NamingConvention.ApplyNamingConvention(pk.ColumnName) #>).HasColumnName("<#= pk.ColumnName #>")<#=Driver.DriverType.TransformDbGeneratedKey(Model) #>;
 <#+ } #>
 <#+ if(Model.PrimaryKeyCount > 1){ #>
 			builder.HasKey(t => new {<#= Model.TransformCompositeKeys(Model.Columns.Where(o => o.IsPrimaryKey), "t") #>});
 <#+ foreach(var col in Model.Columns.Where(o => o.IsPrimaryKey)){ #>
-			builder.Property(t => t.<#= col.ColumnName #>)<#=Driver.DriverType.TransformDbGeneratedKey(Model) #>;
+			builder.Property(t => t.<#= NamingConvention.ApplyNamingConvention(col.ColumnName) #>).HasColumnName("<#= col.ColumnName #>")<#=Driver.DriverType.TransformDbGeneratedKey(Model) #>;
 <#+ } #>
 <#+ } #>
 
@@ -73,16 +73,16 @@ if (Driver.ForceSchemaToUppercase)
 			
 <#+ foreach(var col in Model.Columns){ #>
 <#+ if(col.Length > 0){ #>
-			builder.Property(t => t.<#= col.ColumnName #>).HasMaxLength(<#= col.Length #>);
+			builder.Property(t => t.<#= NamingConvention.ApplyNamingConvention(col.ColumnName) #>).HasMaxLength(<#= col.Length #>);
 <#+ } #>
 <#+ if(col.IsRequired){ #>
-			builder.Property(t => t.<#= col.ColumnName #>).IsRequired();
+			builder.Property(t => t.<#= NamingConvention.ApplyNamingConvention(col.ColumnName) #>).HasColumnName("<#= col.ColumnName #>").IsRequired();
 <#+ } else #>
 <#+ { #>
-			builder.Property(t => t.<#= col.ColumnName #>).IsRequired(false);
+			builder.Property(t => t.<#= NamingConvention.ApplyNamingConvention(col.ColumnName) #>).HasColumnName("<#= col.ColumnName #>").IsRequired(false);
 <#+ } #>
 <#+ if((col.Precision > 0 && !col.InValidPrecisionGeneration) || col.Scale > 0){ #>
-			builder.Property(t => t.<#= col.ColumnName #>)<#= Driver.DriverType.TransformColumnPrecision(col) #>;
+			builder.Property(t => t.<#= NamingConvention.ApplyNamingConvention(col.ColumnName) #>)<#= Driver.DriverType.TransformColumnPrecision(col) #>;
 <#+ } #>
 <#+ } #>
 			

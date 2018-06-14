@@ -189,25 +189,29 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Base
         /// </returns>
         public string TransformAsQuery(Column col, string entityName = "", bool caseSensitive = false)
         {
+            string colName = this.NamingConvention != null
+                                 ? this.NamingConvention.ApplyNamingConvention(col.ColumnName)
+                                 : col.ColumnName;
+
             if (col.DomainDataType != DomainDataType.String)
             {
                 if (!string.IsNullOrEmpty(entityName))
                 {
-                    return $"o.{col.ColumnName} == {entityName}.{col.ColumnName}";
+                    return $"o.{colName} == {entityName}.{colName}";
                 }
 
-                return $"o.{col.ColumnName} == {this.TransformParameterName(col.ColumnName)}";
+                return $"o.{colName} == {this.TransformParameterName(col.ColumnName)}";
             }
 
             string searchCase = !caseSensitive ? ".ToLower()" : string.Empty;
 
             if (!string.IsNullOrEmpty(entityName))
             {
-                return $"o.{col.ColumnName}{searchCase}.Contains({entityName}.{col.ColumnName}{searchCase})";
+                return $"o.{colName}{searchCase}.Contains({entityName}.{colName}{searchCase})";
             }
 
             return
-                $"o.{col.ColumnName}{searchCase}.Contains({this.TransformParameterName(col.ColumnName)}{searchCase})";
+                $"o.{colName}{searchCase}.Contains({this.TransformParameterName(col.ColumnName)}{searchCase})";
         }
 
         /// <summary>

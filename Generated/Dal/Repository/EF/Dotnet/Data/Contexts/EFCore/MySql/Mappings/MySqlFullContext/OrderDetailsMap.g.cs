@@ -20,7 +20,6 @@
 
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using RepositoryEFDotnet.Contexts.EFCore;
 using System.Configuration;
 using System.ComponentModel.DataAnnotations.Schema;
 using Banking.Models.Entity;
@@ -38,19 +37,19 @@ namespace Banking.Models.Context.Mappings.EFCore.MySql
 			#region Primary keys
 			
 			builder.HasKey(t => t.OrderDetailsId);
-			builder.Property(t => t.OrderDetailsId).ValueGeneratedOnAdd();
+			builder.Property(t => t.OrderDetailsId).HasColumnName("OrderDetailsId").ValueGeneratedOnAdd();
 
 			#endregion
 
 			#region Constraints
 			
-			builder.Property(t => t.OrderDetailsId).IsRequired();
-			builder.Property(t => t.OrderId).IsRequired();
-			builder.Property(t => t.ProductId).IsRequired();
-			builder.Property(t => t.UnitPrice).IsRequired(false);
+			builder.Property(t => t.OrderDetailsId).HasColumnName("OrderDetailsId").IsRequired();
+			builder.Property(t => t.OrderId).HasColumnName("OrderId").IsRequired();
+			builder.Property(t => t.ProductId).HasColumnName("ProductId").IsRequired();
+			builder.Property(t => t.UnitPrice).HasColumnName("UnitPrice").IsRequired(false);
 			builder.Property(t => t.UnitPrice).HasColumnType("decimal(19, 4)");
-			builder.Property(t => t.Amount).IsRequired(false);
-			builder.Property(t => t.Discount).IsRequired(false);
+			builder.Property(t => t.Amount).HasColumnName("Amount").IsRequired(false);
+			builder.Property(t => t.Discount).HasColumnName("Discount").IsRequired(false);
 			
 			#endregion
 

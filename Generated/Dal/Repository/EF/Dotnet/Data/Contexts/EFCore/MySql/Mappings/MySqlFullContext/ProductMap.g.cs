@@ -20,7 +20,6 @@
 
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using RepositoryEFDotnet.Contexts.EFCore;
 using System.Configuration;
 using System.ComponentModel.DataAnnotations.Schema;
 using Banking.Models.Entity;
@@ -38,22 +37,22 @@ namespace Banking.Models.Context.Mappings.EFCore.MySql
 			#region Primary keys
 			
 			builder.HasKey(t => t.ProductId);
-			builder.Property(t => t.ProductId).ValueGeneratedOnAdd();
+			builder.Property(t => t.ProductId).HasColumnName("ProductId").ValueGeneratedOnAdd();
 
 			#endregion
 
 			#region Constraints
 			
-			builder.Property(t => t.ProductId).IsRequired();
+			builder.Property(t => t.ProductId).HasColumnName("ProductId").IsRequired();
 			builder.Property(t => t.ProductDescription).HasMaxLength(100);
-			builder.Property(t => t.ProductDescription).IsRequired(false);
-			builder.Property(t => t.UnitPrice).IsRequired(false);
+			builder.Property(t => t.ProductDescription).HasColumnName("ProductDescription").IsRequired(false);
+			builder.Property(t => t.UnitPrice).HasColumnName("UnitPrice").IsRequired(false);
 			builder.Property(t => t.UnitPrice).HasColumnType("decimal(19, 4)");
 			builder.Property(t => t.UnitAmount).HasMaxLength(50);
-			builder.Property(t => t.UnitAmount).IsRequired(false);
+			builder.Property(t => t.UnitAmount).HasColumnName("UnitAmount").IsRequired(false);
 			builder.Property(t => t.Publisher).HasMaxLength(200);
-			builder.Property(t => t.Publisher).IsRequired(false);
-			builder.Property(t => t.AmountInStock).IsRequired(false);
+			builder.Property(t => t.Publisher).HasColumnName("Publisher").IsRequired(false);
+			builder.Property(t => t.AmountInStock).HasColumnName("AmountInStock").IsRequired(false);
 			
 			#endregion
 

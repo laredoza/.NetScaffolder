@@ -37,45 +37,45 @@ namespace Banking.Models.Customers.Mappings.NHibernate.Oracle
 			
 			Id(t => t.CustomerId).GeneratedBy.Increment().Unique()
 			.Not.Nullable();
-			Map(t => t.CustomerId).ReadOnly().Generated.Insert();
+			Map(t => t.CustomerId).Column("CustomerId").ReadOnly().Generated.Insert();
 
 			#endregion
 
 			#region Properties
 			
-			Map(t => t.CustomerCode)
+			Map(t => t.CustomerCode).Column("CustomerCode")
 			.Length(5)
 			.Not.Nullable();
-			Map(t => t.CompanyName)
+			Map(t => t.CompanyName).Column("CompanyName")
 			.Length(50)
 			.Not.Nullable();
-			Map(t => t.ContactName)
+			Map(t => t.ContactName).Column("ContactName")
 			.Length(50)
 			.Nullable();
-			Map(t => t.ContactTitle)
+			Map(t => t.ContactTitle).Column("ContactTitle")
 			.Length(50)
 			.Nullable();
-			Map(t => t.Address)
+			Map(t => t.Address).Column("Address")
 			.Length(50)
 			.Nullable();
-			Map(t => t.City)
+			Map(t => t.City).Column("City")
 			.Length(20)
 			.Nullable();
-			Map(t => t.PostalCode)
+			Map(t => t.PostalCode).Column("PostalCode")
 			.Length(10)
 			.Nullable();
-			Map(t => t.Telephone)
+			Map(t => t.Telephone).Column("Telephone")
 			.Length(50)
 			.Nullable();
-			Map(t => t.Fax)
+			Map(t => t.Fax).Column("Fax")
 			.Length(50)
 			.Nullable();
-			Map(t => t.CountryId)
+			Map(t => t.CountryId).Column("CountryId")
 			.Index("IX_CountryId")
 			.Nullable();
-			Map(t => t.Photo)
+			Map(t => t.Photo).Column("Photo")
 			.Nullable();
-			Map(t => t.IsEnabled)
+			Map(t => t.IsEnabled).Column("IsEnabled")
 			.Not.Nullable();
 			
 			#endregion

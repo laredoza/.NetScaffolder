@@ -37,21 +37,21 @@ namespace Banking.Models.Accounts.Mappings.NHibernate.Oracle
 			
 			Id(t => t.BankTransferId).GeneratedBy.Increment().Unique()
 			.Not.Nullable();
-			Map(t => t.BankTransferId).ReadOnly().Generated.Insert();
+			Map(t => t.BankTransferId).Column("BankTransferId").ReadOnly().Generated.Insert();
 
 			#endregion
 
 			#region Properties
 			
-			Map(t => t.FromBankAccountId)
+			Map(t => t.FromBankAccountId).Column("FromBankAccountId")
 			.Not.Nullable();
-			Map(t => t.ToBankAccountId)
+			Map(t => t.ToBankAccountId).Column("ToBankAccountId")
 			.Index("IX_ToBankAccountId")
 			.Not.Nullable();
-			Map(t => t.Amount)
+			Map(t => t.Amount).Column("Amount")
 			.Precision(18).Scale(2)
 			.Not.Nullable();
-			Map(t => t.TransferDate)
+			Map(t => t.TransferDate).Column("TransferDate")
 			.Not.Nullable();
 			
 			#endregion

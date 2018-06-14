@@ -43,7 +43,7 @@ namespace Banking.Models.Customers.Mappings.NHibernate.Oracle
 
 			#region Properties
 			
-			Map(t => t.Publisher)
+			Map(t => t.Publisher).Column("Publisher")
 			.Length(200)
 			.Not.Nullable();
 			

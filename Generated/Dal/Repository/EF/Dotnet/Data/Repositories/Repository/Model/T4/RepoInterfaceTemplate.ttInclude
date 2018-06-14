@@ -20,8 +20,11 @@ public class RepoInterfaceTemplate : BaseTemplate
 
 using System;
 using System.Collections.Generic;
-using RepositoryEFDotnet.Core.Base;
 using <#= DtoInterfaceNamespace #>;
+<#+ foreach(var nameSpace in DataType.AdditionalNamespaces){ #>
+using <#= nameSpace #>;
+<#+ } #>
+
 
 namespace <#= DataType.FullNamespace #>
 {

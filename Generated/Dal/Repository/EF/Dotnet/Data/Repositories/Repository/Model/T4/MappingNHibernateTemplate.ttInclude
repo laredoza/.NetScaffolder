@@ -54,8 +54,8 @@ namespace <#= Namespace #>.<#= Driver.ParentFolder #>.<#= Driver.Prefix #>
 			#region Primary Keys
 			
 <#+ if(Model.PrimaryKeyCount == 1){ var pk = Model.Columns.First(o => o.IsPrimaryKey);#>
-			Id(t => t.<#= pk.ColumnName #>)<#=Driver.DriverType.TransformDbGeneratedKey(Model) #>
-<#+ foreach(var idx in Model.Indexes.Where(o => o.IndexType != IndexType.PrimaryKey && o.Columns.Contains(pk.ColumnName))){ #>
+			Id(t => t.<#= NamingConvention.ApplyNamingConvention(pk.ColumnName) #>)<#=Driver.DriverType.TransformDbGeneratedKey(Model) #>
+<#+ foreach(var idx in Model.Indexes.Where(o => o.IndexType != IndexType.PrimaryKey && o.Columns.Contains(NamingConvention.ApplyNamingConvention(pk.ColumnName)))){ #>
 			<#=Driver.TransformIndex(idx) #>
 <#+ } #>
 <#+ if((pk.Precision > 0 && !pk.InValidPrecisionGeneration) || pk.Scale > 0){ #>
@@ -71,11 +71,11 @@ namespace <#= Namespace #>.<#= Driver.ParentFolder #>.<#= Driver.Prefix #>
 			.Nullable();
 <#+ } #>
 <#+ if(Model.DatabaseGeneratedKeyType != DatabaseGeneratedKeyType.None && Model.DatabaseGeneratedKeyType != DatabaseGeneratedKeyType.Ignore) {#>
-			Map(t => t.<#= pk.ColumnName #>).ReadOnly().Generated.Insert();
+			Map(t => t.<#= NamingConvention.ApplyNamingConvention(pk.ColumnName) #>).Column("<#= pk.ColumnName #>").ReadOnly().Generated.Insert();
 <#+ } #>
 <#+ } #>
 <#+ if(Model.PrimaryKeyCount > 1){ #>
-			CompositeId()<#+ foreach(var col in Model.Columns.Where(o => o.IsPrimaryKey)){ #>.KeyProperty(t => t.<#= col.ColumnName #>)<#+ } #>;
+			CompositeId()<#+ foreach(var col in Model.Columns.Where(o => o.IsPrimaryKey)){ #>.KeyProperty(t => t.<#= NamingConvention.ApplyNamingConvention(col.ColumnName) #>)<#+ } #>;
 <#+ } #>
 
 			#endregion
@@ -83,8 +83,8 @@ namespace <#= Namespace #>.<#= Driver.ParentFolder #>.<#= Driver.Prefix #>
 			#region Properties
 			
 <#+ foreach(var col in Model.Columns.Where(o => !o.IsPrimaryKey)){ #>
-			Map(t => t.<#= col.ColumnName #>)
-<#+ foreach(var idx in Model.Indexes.Where(o => o.IndexType != IndexType.PrimaryKey && o.Columns.Contains(col.ColumnName))){ #>
+			Map(t => t.<#= NamingConvention.ApplyNamingConvention(col.ColumnName) #>).Column("<#= col.ColumnName #>")
+<#+ foreach(var idx in Model.Indexes.Where(o => o.IndexType != IndexType.PrimaryKey && o.Columns.Contains(NamingConvention.ApplyNamingConvention(col.ColumnName)))){ #>
 			<#=Driver.TransformIndex(idx) #>
 <#+ } #>
 <#+ if((col.Precision > 0 && !col.InValidPrecisionGeneration) || col.Scale > 0){ #>

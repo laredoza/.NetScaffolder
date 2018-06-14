@@ -295,16 +295,10 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EFCore
                 rel.RelationshipAlias,
                 nc);
 
-            if (rel.ReferencedMultiplicity == RelationshipMultiplicity.Many)
-            {
-                sb.Append(
-                    $"builder.HasMany<{this.TransformModelName(rel.ReferencedTableName, nc)}>(s => s.{refTableName})");
-            }
-            else
-            {
-                sb.Append(
-                    $"builder.HasOne<{this.TransformModelName(rel.ReferencedTableName, nc)}>(s => s.{refTableName})");
-            }
+            sb.Append(
+                rel.ReferencedMultiplicity == RelationshipMultiplicity.Many
+                    ? $"builder.HasMany<{this.TransformModelName(rel.ReferencedTableName, nc)}>(s => s.{refTableName})"
+                    : $"builder.HasOne<{this.TransformModelName(rel.ReferencedTableName, nc)}>(s => s.{refTableName})");
 
             string parentTableName = table;
 
@@ -335,15 +329,10 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EFCore
             }
             else
             {
-                if (rel.ReferencedMultiplicity == RelationshipMultiplicity.Many)
-                {
-                    sb.Append(
-                        $".WithOne(s => s.{parentTableName}).HasForeignKey(s => s.{rel.ReferencedColumnName}).OnDelete(DeleteBehavior.Restrict);");
-                }
-                else
-                {
-                    sb.Append($".WithOne(s => s.{parentTableName}).OnDelete(DeleteBehavior.Restrict);");
-                }
+                sb.Append(
+                    rel.ReferencedMultiplicity == RelationshipMultiplicity.Many
+                        ? $".WithOne(s => s.{parentTableName}).HasForeignKey(s => s.{rel.ReferencedColumnName}).OnDelete(DeleteBehavior.Restrict);"
+                        : $".WithOne(s => s.{parentTableName}).OnDelete(DeleteBehavior.Restrict);");
             }
 
             return sb.ToString();

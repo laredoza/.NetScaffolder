@@ -21,10 +21,12 @@ public class RepositoryTemplate : BaseTemplate
 
 using System;
 using System.Collections.Generic;
-using RepositoryEFDotnet.Core.Base;
 using System.Linq;
 using <#= DtoInterfaceNamespace #>;
 using <#= EntityNamespace #>;
+<#+ foreach(var nameSpace in DataType.AdditionalNamespaces){ #>
+using <#= nameSpace #>;
+<#+ } #>
 
 namespace <#= DataType.FullNamespace #>
 {

@@ -20,7 +20,6 @@
 
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using RepositoryEFDotnet.Contexts.EFCore;
 using System.Configuration;
 using System.ComponentModel.DataAnnotations.Schema;
 using Banking.Models.Entity;
@@ -38,24 +37,24 @@ namespace Banking.Models.Context.Mappings.EFCore.MySql
 			#region Primary keys
 			
 			builder.HasKey(t => t.OrderId);
-			builder.Property(t => t.OrderId).ValueGeneratedOnAdd();
+			builder.Property(t => t.OrderId).HasColumnName("OrderId").ValueGeneratedOnAdd();
 
 			#endregion
 
 			#region Constraints
 			
-			builder.Property(t => t.OrderId).IsRequired();
-			builder.Property(t => t.CustomerId).IsRequired(false);
-			builder.Property(t => t.OrderDate).IsRequired(false);
-			builder.Property(t => t.DeliveryDate).IsRequired(false);
+			builder.Property(t => t.OrderId).HasColumnName("OrderId").IsRequired();
+			builder.Property(t => t.CustomerId).HasColumnName("CustomerId").IsRequired(false);
+			builder.Property(t => t.OrderDate).HasColumnName("OrderDate").IsRequired(false);
+			builder.Property(t => t.DeliveryDate).HasColumnName("DeliveryDate").IsRequired(false);
 			builder.Property(t => t.ShippingName).HasMaxLength(50);
-			builder.Property(t => t.ShippingName).IsRequired(false);
+			builder.Property(t => t.ShippingName).HasColumnName("ShippingName").IsRequired(false);
 			builder.Property(t => t.ShippingAddress).HasMaxLength(50);
-			builder.Property(t => t.ShippingAddress).IsRequired(false);
+			builder.Property(t => t.ShippingAddress).HasColumnName("ShippingAddress").IsRequired(false);
 			builder.Property(t => t.ShippingCity).HasMaxLength(50);
-			builder.Property(t => t.ShippingCity).IsRequired(false);
+			builder.Property(t => t.ShippingCity).HasColumnName("ShippingCity").IsRequired(false);
 			builder.Property(t => t.ShippingZip).HasMaxLength(50);
-			builder.Property(t => t.ShippingZip).IsRequired(false);
+			builder.Property(t => t.ShippingZip).HasColumnName("ShippingZip").IsRequired(false);
 			
 			#endregion
 

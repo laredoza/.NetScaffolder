@@ -29,7 +29,6 @@ public class MappingTemplate : BaseTemplate
 <#+ foreach(var nameSpace in Driver.NameSpaces){ #>
 using <#= nameSpace #>;
 <#+ } #>
-using RepositoryEFDotnet.Library;
 using System.ComponentModel.DataAnnotations.Schema;
 using <#= EntityNamespace #>;
 using System.Data.Common;

@@ -37,24 +37,24 @@ namespace Banking.Models.Customers.Mappings.NHibernate.MySql
 			
 			Id(t => t.OrderDetailsId).GeneratedBy.Increment().Unique()
 			.Not.Nullable();
-			Map(t => t.OrderDetailsId).ReadOnly().Generated.Insert();
+			Map(t => t.OrderDetailsId).Column("OrderDetailsId").ReadOnly().Generated.Insert();
 
 			#endregion
 
 			#region Properties
 			
-			Map(t => t.OrderId)
+			Map(t => t.OrderId).Column("OrderId")
 			.Index("IX_OrderId")
 			.Not.Nullable();
-			Map(t => t.ProductId)
+			Map(t => t.ProductId).Column("ProductId")
 			.Index("IX_ProductId")
 			.Not.Nullable();
-			Map(t => t.UnitPrice)
+			Map(t => t.UnitPrice).Column("UnitPrice")
 			.Precision(19).Scale(4)
 			.Nullable();
-			Map(t => t.Amount)
+			Map(t => t.Amount).Column("Amount")
 			.Nullable();
-			Map(t => t.Discount)
+			Map(t => t.Discount).Column("Discount")
 			.Nullable();
 			
 			#endregion

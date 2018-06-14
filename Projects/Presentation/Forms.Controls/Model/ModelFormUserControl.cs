@@ -202,7 +202,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         /// </param>
         private void DomainTreeView_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-
+            
         }
 
         /// <summary>

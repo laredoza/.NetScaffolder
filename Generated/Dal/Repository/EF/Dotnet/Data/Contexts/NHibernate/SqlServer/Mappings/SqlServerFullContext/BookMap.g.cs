@@ -44,7 +44,7 @@ namespace Banking.Models.Context.Mappings.NHibernate.SqlServer
 
 			#region Properties
 			
-			Map(t => t.Publisher)
+			Map(t => t.Publisher).Column("Publisher")
 			.Length(200)
 			.Not.Nullable();
 			

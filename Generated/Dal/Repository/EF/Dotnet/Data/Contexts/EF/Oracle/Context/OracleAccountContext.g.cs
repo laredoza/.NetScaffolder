@@ -23,11 +23,11 @@ using System.Data.Entity.ModelConfiguration;
 using System.Data.Entity.Infrastructure.Annotations;
 using Oracle.ManagedDataAccess.Client;
 using Oracle.Config;
-using RepositoryEFDotnet.Library;
 using System.ComponentModel.DataAnnotations.Schema;
 using Banking.Models.Entity;
 using Banking.Models.Accounts.Mappings.EF.Oracle;
 using System.Data.Common;
+using RepositoryEFDotnet.Contexts.EF;
 
 
 namespace Banking.Models.Accounts.EF

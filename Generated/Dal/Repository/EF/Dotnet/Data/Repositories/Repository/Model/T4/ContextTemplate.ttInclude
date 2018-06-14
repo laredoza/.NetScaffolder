@@ -26,11 +26,11 @@ public class ContextTemplate : BaseTemplate
 <#+ foreach(var nameSpace in Driver.NameSpaces){ #>
 using <#= nameSpace #>;
 <#+ } #>
-using RepositoryEFDotnet.Library;
 using System.ComponentModel.DataAnnotations.Schema;
 using <#= EntityNamespace #>;
 using <#= MappingNamespace #>.<#= Driver.ParentFolder #>.<#= Driver.Prefix #>;
 using System.Data.Common;
+using RepositoryEFDotnet.Contexts.<#= Driver.ParentFolder #>;
 
 
 namespace <#= ContextData.TransformFullnamespace(DataType.BaseNamespace) #>.<#= Driver.ParentFolder #>

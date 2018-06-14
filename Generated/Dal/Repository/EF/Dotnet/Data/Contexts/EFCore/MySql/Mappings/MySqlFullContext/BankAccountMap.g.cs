@@ -20,7 +20,6 @@
 
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using RepositoryEFDotnet.Contexts.EFCore;
 using System.Configuration;
 using System.ComponentModel.DataAnnotations.Schema;
 using Banking.Models.Entity;
@@ -38,19 +37,19 @@ namespace Banking.Models.Context.Mappings.EFCore.MySql
 			#region Primary keys
 			
 			builder.HasKey(t => t.BankAccountId);
-			builder.Property(t => t.BankAccountId).ValueGeneratedOnAdd();
+			builder.Property(t => t.BankAccountId).HasColumnName("BankAccountId").ValueGeneratedOnAdd();
 
 			#endregion
 
 			#region Constraints
 			
-			builder.Property(t => t.BankAccountId).IsRequired();
+			builder.Property(t => t.BankAccountId).HasColumnName("BankAccountId").IsRequired();
 			builder.Property(t => t.BankAccountNumber).HasMaxLength(10);
-			builder.Property(t => t.BankAccountNumber).IsRequired();
-			builder.Property(t => t.Balance).IsRequired();
+			builder.Property(t => t.BankAccountNumber).HasColumnName("BankAccountNumber").IsRequired();
+			builder.Property(t => t.Balance).HasColumnName("Balance").IsRequired();
 			builder.Property(t => t.Balance).HasColumnType("decimal(19, 4)");
-			builder.Property(t => t.CustomerId).IsRequired(false);
-			builder.Property(t => t.Locked).IsRequired();
+			builder.Property(t => t.CustomerId).HasColumnName("CustomerId").IsRequired(false);
+			builder.Property(t => t.Locked).HasColumnName("Locked").IsRequired();
 			
 			#endregion
 

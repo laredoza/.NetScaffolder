@@ -14,7 +14,7 @@
         {
             // Execute generation using initialised data types
             foreach(var dataType in dataTypes)
-            {
+            {              
                 if(dataType is DtoInterfaceDataType)
                 {
                     // Debugger.Break();
@@ -36,7 +36,7 @@
 
                 if(dataType is ContextDataType)
                 {
-                    Debugger.Break();
+					//dataType.AdditionalNamespaces.Add("Quirc.Data.Context.EFCore.Base");
 					
 					var contextDataType = dataType as ContextDataType;
 					var entityDataType = dataTypes.FirstOrDefault(o => o is EntityDataType) as EntityDataType;
@@ -55,6 +55,7 @@
 								mappingGen.EntityNamespace = entityDataType.FullNamespace;
 								mappingGen.ContextData = contextData;
 								mappingGen.MappingDataType = mappingDataType;
+								mappingGen.NamingConvention = dataType.NamingConvention;
 								mappingGen.Run();
 							}
 							
@@ -73,6 +74,8 @@
 			
                 if(dataType is RepoInterfaceDataType)
                 {
+					dataType.AdditionalNamespaces.Add("RepositoryEFDotnet.Core.Base");
+					
                     var iRepoGen = new RepoInterfaceGenerator();
                     iRepoGen.Models = domain.Tables;
                     iRepoGen.DataType = dataType as RepoInterfaceDataType;
@@ -82,6 +85,8 @@
 			
                 if(dataType is RepositoryDataType)
                 {
+                    dataType.AdditionalNamespaces.Add("RepositoryEFDotnet.Core.Base");
+
                     var iRepoGen = new RepositoryGenerator();
                     iRepoGen.Models = domain.Tables;
                     iRepoGen.DataType = dataType as RepositoryDataType;

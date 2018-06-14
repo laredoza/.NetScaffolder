@@ -20,10 +20,10 @@
 
 using System;
 using System.Collections.Generic;
-using RepositoryEFDotnet.Core.Base;
 using System.Linq;
 using Banking.Models.Interfaces;
 using Banking.Models.Entity;
+using RepositoryEFDotnet.Core.Base;
 
 namespace Banking.Models.Repository
 {

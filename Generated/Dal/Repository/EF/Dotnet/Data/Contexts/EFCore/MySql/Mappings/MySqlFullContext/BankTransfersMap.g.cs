@@ -20,7 +20,6 @@
 
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using RepositoryEFDotnet.Contexts.EFCore;
 using System.Configuration;
 using System.ComponentModel.DataAnnotations.Schema;
 using Banking.Models.Entity;
@@ -38,18 +37,18 @@ namespace Banking.Models.Context.Mappings.EFCore.MySql
 			#region Primary keys
 			
 			builder.HasKey(t => t.BankTransferId);
-			builder.Property(t => t.BankTransferId).ValueGeneratedOnAdd();
+			builder.Property(t => t.BankTransferId).HasColumnName("BankTransferId").ValueGeneratedOnAdd();
 
 			#endregion
 
 			#region Constraints
 			
-			builder.Property(t => t.BankTransferId).IsRequired();
-			builder.Property(t => t.FromBankAccountId).IsRequired();
-			builder.Property(t => t.ToBankAccountId).IsRequired();
-			builder.Property(t => t.Amount).IsRequired();
+			builder.Property(t => t.BankTransferId).HasColumnName("BankTransferId").IsRequired();
+			builder.Property(t => t.FromBankAccountId).HasColumnName("FromBankAccountId").IsRequired();
+			builder.Property(t => t.ToBankAccountId).HasColumnName("ToBankAccountId").IsRequired();
+			builder.Property(t => t.Amount).HasColumnName("Amount").IsRequired();
 			builder.Property(t => t.Amount).HasColumnType("decimal(18, 2)");
-			builder.Property(t => t.TransferDate).IsRequired();
+			builder.Property(t => t.TransferDate).HasColumnName("TransferDate").IsRequired();
 			
 			#endregion
 

@@ -27,7 +27,7 @@ public class ContextNHibernateTemplate : BaseTemplate
 using <#= nameSpace #>;
 <#+ } #>
 using <#= MappingNamespace #>.<#= Driver.ParentFolder #>.<#= Driver.Prefix #>;
-using RepositoryEFDotnet.Contexts.NHibernate;
+using RepositoryEFDotnet.Contexts.<#= Driver.ParentFolder #>;
 using System.Data;
 
 namespace <#= ContextData.TransformFullnamespace(DataType.BaseNamespace) #>.<#= Driver.ParentFolder #>

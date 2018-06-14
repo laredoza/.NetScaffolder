@@ -37,13 +37,13 @@ namespace Banking.Models.Customers.Mappings.NHibernate.Oracle
 			
 			Id(t => t.CountryId).GeneratedBy.Increment().Unique()
 			.Not.Nullable();
-			Map(t => t.CountryId).ReadOnly().Generated.Insert();
+			Map(t => t.CountryId).Column("CountryId").ReadOnly().Generated.Insert();
 
 			#endregion
 
 			#region Properties
 			
-			Map(t => t.CountryName)
+			Map(t => t.CountryName).Column("CountryName")
 			.Length(100)
 			.Nullable();
 			

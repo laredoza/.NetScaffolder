@@ -9,6 +9,7 @@
 		public List<Table> Models { get; set; }
 		public ContextData ContextData { get; set; }
 		public MappingDataType MappingDataType {get;set;}
+		public INamingConvention NamingConvention { get; set; }
 		
 		public string FullNamespace
 		{

@@ -43,7 +43,7 @@ namespace Banking.Models.Customers.Mappings.NHibernate.Oracle
 
 			#region Properties
 			
-			Map(t => t.LicenseCode)
+			Map(t => t.LicenseCode).Column("LicenseCode")
 			.Length(200)
 			.Not.Nullable();
 			

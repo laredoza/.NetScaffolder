@@ -52,6 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="UnChangedNoUnderScoreNamingConvention.cs" />
     <Compile Include="UnChangedNamingConvention.cs" />
     <Compile Include="TitleCaseNamingConvention.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

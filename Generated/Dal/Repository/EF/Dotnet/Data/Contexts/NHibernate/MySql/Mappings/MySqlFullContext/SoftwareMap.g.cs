@@ -43,7 +43,7 @@ namespace Banking.Models.Context.Mappings.NHibernate.MySql
 
 			#region Properties
 			
-			Map(t => t.LicenseCode)
+			Map(t => t.LicenseCode).Column("LicenseCode")
 			.Length(200)
 			.Not.Nullable();
 			

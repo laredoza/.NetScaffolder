@@ -21,7 +21,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using RepositoryEFDotnet.Contexts.EFCore;
 using System.Configuration;
 using System.ComponentModel.DataAnnotations.Schema;
 using Banking.Models.Entity;
@@ -39,34 +38,34 @@ namespace Banking.Models.Customers.Mappings.EFCore.SqlServer
 			#region Primary keys
 			
 			builder.HasKey(t => t.CustomerId);
-			builder.Property(t => t.CustomerId).ValueGeneratedOnAdd();
+			builder.Property(t => t.CustomerId).HasColumnName("CustomerId").ValueGeneratedOnAdd();
 
 			#endregion
 
 			#region Constraints
 			
-			builder.Property(t => t.CustomerId).IsRequired();
+			builder.Property(t => t.CustomerId).HasColumnName("CustomerId").IsRequired();
 			builder.Property(t => t.CustomerCode).HasMaxLength(5);
-			builder.Property(t => t.CustomerCode).IsRequired();
+			builder.Property(t => t.CustomerCode).HasColumnName("CustomerCode").IsRequired();
 			builder.Property(t => t.CompanyName).HasMaxLength(50);
-			builder.Property(t => t.CompanyName).IsRequired();
+			builder.Property(t => t.CompanyName).HasColumnName("CompanyName").IsRequired();
 			builder.Property(t => t.ContactName).HasMaxLength(50);
-			builder.Property(t => t.ContactName).IsRequired(false);
+			builder.Property(t => t.ContactName).HasColumnName("ContactName").IsRequired(false);
 			builder.Property(t => t.ContactTitle).HasMaxLength(50);
-			builder.Property(t => t.ContactTitle).IsRequired(false);
+			builder.Property(t => t.ContactTitle).HasColumnName("ContactTitle").IsRequired(false);
 			builder.Property(t => t.Address).HasMaxLength(50);
-			builder.Property(t => t.Address).IsRequired(false);
+			builder.Property(t => t.Address).HasColumnName("Address").IsRequired(false);
 			builder.Property(t => t.City).HasMaxLength(20);
-			builder.Property(t => t.City).IsRequired(false);
+			builder.Property(t => t.City).HasColumnName("City").IsRequired(false);
 			builder.Property(t => t.PostalCode).HasMaxLength(10);
-			builder.Property(t => t.PostalCode).IsRequired(false);
+			builder.Property(t => t.PostalCode).HasColumnName("PostalCode").IsRequired(false);
 			builder.Property(t => t.Telephone).HasMaxLength(50);
-			builder.Property(t => t.Telephone).IsRequired(false);
+			builder.Property(t => t.Telephone).HasColumnName("Telephone").IsRequired(false);
 			builder.Property(t => t.Fax).HasMaxLength(50);
-			builder.Property(t => t.Fax).IsRequired(false);
-			builder.Property(t => t.CountryId).IsRequired(false);
-			builder.Property(t => t.Photo).IsRequired(false);
-			builder.Property(t => t.IsEnabled).IsRequired();
+			builder.Property(t => t.Fax).HasColumnName("Fax").IsRequired(false);
+			builder.Property(t => t.CountryId).HasColumnName("CountryId").IsRequired(false);
+			builder.Property(t => t.Photo).HasColumnName("Photo").IsRequired(false);
+			builder.Property(t => t.IsEnabled).HasColumnName("IsEnabled").IsRequired();
 			
 			#endregion
 

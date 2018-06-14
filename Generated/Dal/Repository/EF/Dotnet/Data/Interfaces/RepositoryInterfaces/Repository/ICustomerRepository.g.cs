@@ -20,8 +20,9 @@
 
 using System;
 using System.Collections.Generic;
-using RepositoryEFDotnet.Core.Base;
 using Banking.Models.Interfaces;
+using RepositoryEFDotnet.Core.Base;
+
 
 namespace Banking.Models.Interfaces
 {

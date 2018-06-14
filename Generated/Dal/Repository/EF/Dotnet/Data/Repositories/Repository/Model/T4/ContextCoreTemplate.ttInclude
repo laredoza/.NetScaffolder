@@ -32,6 +32,7 @@ using <#= nameSpace #>;
 using System.ComponentModel.DataAnnotations.Schema;
 using <#= MappingNamespace #>.<#= Driver.ParentFolder #>.<#= Driver.Prefix #>;
 using <#= EntityNamespace #>;
+using RepositoryEFDotnet.Contexts.<#= Driver.ParentFolder #>;
 
 namespace <#= ContextData.TransformFullnamespace(DataType.BaseNamespace) #>.<#= Driver.ParentFolder #>
 {
@@ -84,7 +85,7 @@ namespace <#= ContextData.TransformFullnamespace(DataType.BaseNamespace) #>.<#= 
 			#region Mappings
 			
 <#+ foreach(var table in this.Models){ #>
-			modelBuilder.ApplyConfiguration(new <#= table.TableName #><#= MappingPostFix #>());
+			modelBuilder.ApplyConfiguration(new <#= DataType.TransformModelName(table.TableName) #><#= MappingPostFix #>());
 <#+ } #>
 
 			#endregion
@@ -94,7 +95,7 @@ namespace <#= ContextData.TransformFullnamespace(DataType.BaseNamespace) #>.<#= 
 			// Exclude entities not part of this context
 			
 <#+ foreach(var rel in ContextData.ExcludedRelationships(Models)){ #>
-			modelBuilder.Ignore<<#= rel.ReferencedTableName #>>();
+			modelBuilder.Ignore<<#= DataType.TransformModelName(rel.ReferencedTableName) #>>();
 <#+ } #>
 
 			#endregion

@@ -21,7 +21,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using RepositoryEFDotnet.Contexts.EFCore;
 using System.Configuration;
 using System.ComponentModel.DataAnnotations.Schema;
 using Banking.Models.Entity;
@@ -39,15 +38,15 @@ namespace Banking.Models.Context.Mappings.EFCore.SqlServer
 			#region Primary keys
 			
 			builder.HasKey(t => t.ProductId);
-			builder.Property(t => t.ProductId).ValueGeneratedNever();
+			builder.Property(t => t.ProductId).HasColumnName("ProductId").ValueGeneratedNever();
 
 			#endregion
 
 			#region Constraints
 			
-			builder.Property(t => t.ProductId).IsRequired();
+			builder.Property(t => t.ProductId).HasColumnName("ProductId").IsRequired();
 			builder.Property(t => t.LicenseCode).HasMaxLength(200);
-			builder.Property(t => t.LicenseCode).IsRequired();
+			builder.Property(t => t.LicenseCode).HasColumnName("LicenseCode").IsRequired();
 			
 			#endregion
 

@@ -21,7 +21,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using RepositoryEFDotnet.Contexts.EFCore;
 using System.Configuration;
 using System.ComponentModel.DataAnnotations.Schema;
 using Banking.Models.Entity;
@@ -39,15 +38,15 @@ namespace Banking.Models.Context.Mappings.EFCore.SqlServer
 			#region Primary keys
 			
 			builder.HasKey(t => t.CountryId);
-			builder.Property(t => t.CountryId).ValueGeneratedOnAdd();
+			builder.Property(t => t.CountryId).HasColumnName("CountryId").ValueGeneratedOnAdd();
 
 			#endregion
 
 			#region Constraints
 			
-			builder.Property(t => t.CountryId).IsRequired();
+			builder.Property(t => t.CountryId).HasColumnName("CountryId").IsRequired();
 			builder.Property(t => t.CountryName).HasMaxLength(100);
-			builder.Property(t => t.CountryName).IsRequired(false);
+			builder.Property(t => t.CountryName).HasColumnName("CountryName").IsRequired(false);
 			
 			#endregion
 

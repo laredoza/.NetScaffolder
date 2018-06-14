@@ -1,4 +1,4 @@
-﻿namespace RepositoryEFDotnet.Library
+﻿namespace RepositoryEFDotnet.Contexts.EF
 {
     #region Using
 

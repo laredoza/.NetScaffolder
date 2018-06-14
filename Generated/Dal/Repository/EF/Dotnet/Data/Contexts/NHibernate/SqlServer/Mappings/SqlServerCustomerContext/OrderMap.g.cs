@@ -38,29 +38,29 @@ namespace Banking.Models.Customers.Mappings.NHibernate.SqlServer
 			
 			Id(t => t.OrderId).GeneratedBy.Increment().Unique()
 			.Not.Nullable();
-			Map(t => t.OrderId).ReadOnly().Generated.Insert();
+			Map(t => t.OrderId).Column("OrderId").ReadOnly().Generated.Insert();
 
 			#endregion
 
 			#region Properties
 			
-			Map(t => t.CustomerId)
+			Map(t => t.CustomerId).Column("CustomerId")
 			.Index("IX_CustomerId")
 			.Nullable();
-			Map(t => t.OrderDate)
+			Map(t => t.OrderDate).Column("OrderDate")
 			.Nullable();
-			Map(t => t.DeliveryDate)
+			Map(t => t.DeliveryDate).Column("DeliveryDate")
 			.Nullable();
-			Map(t => t.ShippingName)
+			Map(t => t.ShippingName).Column("ShippingName")
 			.Length(50)
 			.Nullable();
-			Map(t => t.ShippingAddress)
+			Map(t => t.ShippingAddress).Column("ShippingAddress")
 			.Length(50)
 			.Nullable();
-			Map(t => t.ShippingCity)
+			Map(t => t.ShippingCity).Column("ShippingCity")
 			.Length(50)
 			.Nullable();
-			Map(t => t.ShippingZip)
+			Map(t => t.ShippingZip).Column("ShippingZip")
 			.Length(50)
 			.Nullable();
 			

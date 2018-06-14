@@ -38,22 +38,22 @@ namespace Banking.Models.Accounts.Mappings.NHibernate.SqlServer
 			
 			Id(t => t.BankAccountId).GeneratedBy.Increment().Unique()
 			.Not.Nullable();
-			Map(t => t.BankAccountId).ReadOnly().Generated.Insert();
+			Map(t => t.BankAccountId).Column("BankAccountId").ReadOnly().Generated.Insert();
 
 			#endregion
 
 			#region Properties
 			
-			Map(t => t.BankAccountNumber)
+			Map(t => t.BankAccountNumber).Column("BankAccountNumber")
 			.Length(10)
 			.Not.Nullable();
-			Map(t => t.Balance)
+			Map(t => t.Balance).Column("Balance")
 			.Precision(19).Scale(4)
 			.Not.Nullable();
-			Map(t => t.CustomerId)
+			Map(t => t.CustomerId).Column("CustomerId")
 			.Index("IX_CustomerId")
 			.Nullable();
-			Map(t => t.Locked)
+			Map(t => t.Locked).Column("Locked")
 			.Not.Nullable();
 			
 			#endregion
