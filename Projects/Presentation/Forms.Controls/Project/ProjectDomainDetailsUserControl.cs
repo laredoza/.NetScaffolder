@@ -117,6 +117,11 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project
         #region Public Properties
 
         /// <summary>
+        /// Gets or sets a value indicating whether loaded.
+        /// </summary>
+        public bool Loading { get; set; }
+
+        /// <summary>
         ///     Gets or sets the application service.
         /// </summary>
         public IProjectDefinitionApplicationService ApplicationService
@@ -700,13 +705,16 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project
         /// </param>
         private void ListViewDrivers_ItemChecked(object sender, ItemCheckedEventArgs e)
         {
-            this.SelectedDriverTypes.Clear();
-
-            foreach (ListViewItem item in this.ListViewDrivers.Items)
+            if (!this.Loading)
             {
-                if (item != null && item.Checked)
+                this.SelectedDriverTypes.Clear();
+
+                foreach (ListViewItem item in this.ListViewDrivers.Items)
                 {
-                    this.SelectedDriverTypes.Add(new Guid(item.Tag.ToString()));
+                    if (item != null && item.Checked)
+                    {
+                        this.SelectedDriverTypes.Add(new Guid(item.Tag.ToString()));
+                    }
                 }
             }
         }
@@ -735,6 +743,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project
 
             if (this.SelectedDomain != null)
             {
+                this.Loading = true;
                 this.UpdateDomainPackages();
 
                 this.TextBoxName.Text = this.SelectedDomain.Name;
@@ -767,7 +776,10 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project
                         }
                     }
                 }
+
+                this.Loading = false;
             }
+
 
             Logger.Trace("Completed UpdateDataSource()");
         }

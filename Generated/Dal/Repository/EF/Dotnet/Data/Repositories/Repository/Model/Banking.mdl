@@ -566,7 +566,7 @@
       </Tables>
     </DomainDefinition>
   </Domains>
-  <ModelPath>C:\Dev\.NetScaffolder\Generated\Dal\Repository\EF\Dotnet\Data\Repositories\Repository\Model\Banking.mdl</ModelPath>
+  <ModelPath>C:\Dev\Github\.NetScaffolder\Generated\Dal\Repository\EF\Dotnet\Data\Repositories\Repository\Model\Banking.mdl</ModelPath>
   <OutputFolder>Models</OutputFolder>
   <Version>1</Version>
 </ProjectDefinition>
