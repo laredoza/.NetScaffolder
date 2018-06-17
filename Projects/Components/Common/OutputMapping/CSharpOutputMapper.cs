@@ -70,7 +70,7 @@ namespace DotNetScaffolder.Components.Common
                 case DomainDataType.Time:
                     return col.IsRequired ? "DateTime" : string.Format(nullableFormat, "DateTime");
                 case DomainDataType.Double:
-                    return col.IsRequired ? "double" : string.Format(nullableFormat, "double");
+                    return col.IsRequired ? "double" : string.Format(nullableFormat, "float");
                 default:
                     throw new NotImplementedException($"Invalid data type {col.DomainDataType}");
             }
