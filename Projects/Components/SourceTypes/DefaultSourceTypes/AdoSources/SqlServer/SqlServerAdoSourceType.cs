@@ -153,6 +153,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
                 case "REAL":
                     return DomainDataType.Single;
                 case "FLOAT":
+                    column.Precision = 0;
                     return DomainDataType.Double;
                 case "TINYINT":
                     return DomainDataType.SByte;

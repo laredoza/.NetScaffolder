@@ -1,4 +1,4 @@
-﻿<#@ template language="C#" hostspecific="true" debug="true" #>
+﻿<#@ template language="C#" hostspecific="true" debug="false" #>
 <#@ include file="T4Toolbox.tt" #>
 <#@ assembly name="System.IO" #>
 <#@ include file="$(ProjectDir)Model\T4\ProjectGenerator.ttInclude" #>
