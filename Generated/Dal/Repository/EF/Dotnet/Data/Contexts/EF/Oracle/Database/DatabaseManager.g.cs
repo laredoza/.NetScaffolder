@@ -1,5 +1,5 @@
 ﻿
-// <copyright file="ProductMap.g.cs.g.cs" company="MIT">
+// <copyright file="FullContext.g.cs" company="MIT">
 //  Copyright (c) 2018 MIT
 // </copyright>  
 
@@ -17,49 +17,45 @@
 //	GENERATED CODE. DOT NOT MODIFY MANUALLY AS CHANGES CAN BE LOST!!!
 //	USE A PARTIAL CLASS INSTEAD
 // *******************************************************************
+using RepositoryEFDotnet.Core.Base;
+using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration;
-using System.ComponentModel.DataAnnotations.Schema;
-using Banking.Models.Entity;
+using System.Data.Entity.Infrastructure.Annotations;
+using Oracle.ManagedDataAccess.Client;
+using Oracle.Config;
+using Banking.Models.Context.EF;
+using System;
+using System.Collections.Generic;
 
-
-namespace Banking.Models.Context.Mappings
+namespace Banking.Models.Context.Oracle.EF.Database
 {
-	public partial class ProductMap : EntityTypeConfiguration<Product>
+	public class DatabaseManager : IDatabaseManager
 	{	
-		public ProductMap ()
+		private IDictionary<string, string> configuration;
+		
+		#region CTOR
+		
+		public DatabaseManager(IDictionary<string, string> configuration)
 		{
-			ToTable("Product", "dbo");
-			
-			#region Primary Keys
-			
-			HasKey(t => t.ProductId);
-			Property(t => t.ProductId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
-
-			#endregion
-
-			#region Constraints
-			
-			Property(t => t.ProductId).IsRequired();
-			Property(t => t.ProductDescription).HasMaxLength(100);
-			Property(t => t.ProductDescription).IsOptional();
-			Property(t => t.UnitPrice).IsOptional();
-			Property(t => t.UnitPrice).HasPrecision(19, 4);
-			Property(t => t.UnitAmount).HasMaxLength(50);
-			Property(t => t.UnitAmount).IsOptional();
-			Property(t => t.Publisher).HasMaxLength(200);
-			Property(t => t.Publisher).IsOptional();
-			Property(t => t.AmountInStock).IsOptional();
-			
-			#endregion
-
-			#region Relationships
-			
-			HasOptional<Book>(s => s.Book).WithRequired(s => s.Product).WillCascadeOnDelete(false);
-			HasMany<OrderDetails>(s => s.OrderDetails).WithRequired(s => s.Product).HasForeignKey(s => s.ProductId).WillCascadeOnDelete(false);
-			HasOptional<Software>(s => s.Software).WithRequired(s => s.Product).WillCascadeOnDelete(false);
-			
-			#endregion			
-	
+			this.configuration = configuration;
 		}
+		
+		#endregion
+		
+        /// <summary>
+        /// The begin unit of work.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="IUnitOfWork"/>.
+        /// </returns>
+        public virtual IUnitOfWork BeginUnitOfWork()
+        {
+            if (this.configuration == null || !this.configuration.ContainsKey("QUIRCOracle"))
+            {
+                throw new Exception("Invalid configuration specified in database manager");
+            }
+
+			return new OracleFullContext(this.configuration["QUIRCOracle"]);
+        }
 	}
 }

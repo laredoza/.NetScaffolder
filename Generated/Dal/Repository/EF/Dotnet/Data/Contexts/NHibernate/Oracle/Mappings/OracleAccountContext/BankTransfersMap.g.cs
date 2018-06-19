@@ -61,6 +61,12 @@ namespace Banking.Models.Accounts.Mappings.NHibernate.Oracle
 			References(o => o.BankAccount).Column("BankAccountId").Unique().Not.Insert().Not.Update();
 			
 			#endregion			
+
+			#region Column Order
+			
+			// Not available in NHibernate at the moment
+
+			#endregion
 	
 		}
 	}

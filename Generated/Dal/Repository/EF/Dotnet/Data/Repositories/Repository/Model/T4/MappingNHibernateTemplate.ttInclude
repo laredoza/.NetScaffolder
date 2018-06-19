@@ -75,7 +75,7 @@ namespace <#= Namespace #>.<#= Driver.ParentFolder #>.<#= Driver.Prefix #>
 <#+ } #>
 <#+ } #>
 <#+ if(Model.PrimaryKeyCount > 1){ #>
-			CompositeId()<#+ foreach(var col in Model.Columns.Where(o => o.IsPrimaryKey)){ #>.KeyProperty(t => t.<#= NamingConvention.ApplyNamingConvention(col.ColumnName) #>)<#+ } #>;
+			CompositeId()<#+ foreach(var col in Model.Columns.Where(o => o.IsPrimaryKey)){ #>.KeyProperty(t => t.<#= NamingConvention.ApplyNamingConvention(col.ColumnName) #>, "<#= col.ColumnName #>")<#+ } #>;
 <#+ } #>
 
 			#endregion

@@ -26,7 +26,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 using Banking.Models.Entity;
 using System.Data.Common;
 
-
 namespace Banking.Models.Context.Mappings.EF.MySql
 {
 	public partial class CountryMap : EntityTypeConfiguration<Country>
@@ -63,6 +62,13 @@ namespace Banking.Models.Context.Mappings.EF.MySql
 			HasMany<Customer>(s => s.Customer).WithOptional(s => s.Country).HasForeignKey(s => s.CountryId).WillCascadeOnDelete(false);
 			
 			#endregion			
+
+			#region Column Order
+			
+			Property(t => t.CountryId).HasColumnOrder(1);
+			Property(t => t.CountryName).HasColumnOrder(2);
+
+			#endregion
 	
 		}
 	}

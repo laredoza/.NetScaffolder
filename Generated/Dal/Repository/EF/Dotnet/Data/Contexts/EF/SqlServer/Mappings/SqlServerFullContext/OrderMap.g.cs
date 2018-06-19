@@ -25,7 +25,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 using Banking.Models.Entity;
 using System.Data.Common;
 
-
 namespace Banking.Models.Context.Mappings.EF.SqlServer
 {
 	public partial class OrderMap : EntityTypeConfiguration<Order>
@@ -73,6 +72,19 @@ namespace Banking.Models.Context.Mappings.EF.SqlServer
 			HasMany<OrderDetails>(s => s.OrderDetails).WithRequired(s => s.Order).HasForeignKey(s => s.OrderId).WillCascadeOnDelete(false);
 			
 			#endregion			
+
+			#region Column Order
+			
+			Property(t => t.OrderId).HasColumnOrder(1);
+			Property(t => t.CustomerId).HasColumnOrder(2);
+			Property(t => t.OrderDate).HasColumnOrder(3);
+			Property(t => t.DeliveryDate).HasColumnOrder(4);
+			Property(t => t.ShippingName).HasColumnOrder(5);
+			Property(t => t.ShippingAddress).HasColumnOrder(6);
+			Property(t => t.ShippingCity).HasColumnOrder(7);
+			Property(t => t.ShippingZip).HasColumnOrder(8);
+
+			#endregion
 	
 		}
 	}

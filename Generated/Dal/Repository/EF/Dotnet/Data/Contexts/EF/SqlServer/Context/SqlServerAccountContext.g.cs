@@ -23,10 +23,10 @@ using System.Data.Entity.ModelConfiguration;
 using System.Data.Entity.Infrastructure.Annotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Banking.Models.Entity;
+using RepositoryEFDotnet.Core.Base;
 using Banking.Models.Accounts.Mappings.EF.SqlServer;
 using System.Data.Common;
 using RepositoryEFDotnet.Contexts.EF;
-
 
 namespace Banking.Models.Accounts.EF
 {
@@ -86,6 +86,8 @@ namespace Banking.Models.Accounts.EF
             Configuration.ProxyCreationEnabled = false;
             Configuration.AutoDetectChangesEnabled = false;
 			
+			Database.SetInitializer(new CreateDatabaseIfNotExists<SqlServerAccountContext>());
+			Database.Log = this.Log;
         }
 		
 		#endregion

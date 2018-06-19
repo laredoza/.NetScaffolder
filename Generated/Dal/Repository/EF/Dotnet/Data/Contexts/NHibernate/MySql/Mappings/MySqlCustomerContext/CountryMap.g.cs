@@ -54,6 +54,12 @@ namespace Banking.Models.Customers.Mappings.NHibernate.MySql
 			HasMany(s => s.Customer).KeyColumn("CountryId");
 			
 			#endregion			
+
+			#region Column Order
+			
+			// Not available in NHibernate at the moment
+
+			#endregion
 	
 		}
 	}

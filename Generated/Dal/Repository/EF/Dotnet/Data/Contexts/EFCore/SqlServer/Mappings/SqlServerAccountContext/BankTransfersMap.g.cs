@@ -26,7 +26,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 using Banking.Models.Entity;
 using System.Data.Common;
 
-
 namespace Banking.Models.Accounts.Mappings.EFCore.SqlServer
 {
 	public partial class BankTransfersMap : IEntityTypeConfiguration<BankTransfers>
@@ -61,6 +60,17 @@ namespace Banking.Models.Accounts.Mappings.EFCore.SqlServer
 			
 			builder.HasOne<BankAccount>(s => s.BankAccount).WithMany(s => s.BankTransfers).HasForeignKey(s => s.ToBankAccountId).OnDelete(DeleteBehavior.Restrict);
 			
+			#endregion	
+			#region Column Order
+			
+			// Column ordering available in EF Core 2.1 - https://data.uservoice.com/forums/72025-entity-framework-core-feature-suggestions/suggestions/18936844-ef-core-migrations-column-ordering
+			// Waiting for that release before implementing
+			//TODO: builder.Property(t => t.BankTransferId).HasColumnOrder(1);
+			//TODO: builder.Property(t => t.FromBankAccountId).HasColumnOrder(2);
+			//TODO: builder.Property(t => t.ToBankAccountId).HasColumnOrder(3);
+			//TODO: builder.Property(t => t.Amount).HasColumnOrder(4);
+			//TODO: builder.Property(t => t.TransferDate).HasColumnOrder(5);
+
 			#endregion	
 	    }
 	}

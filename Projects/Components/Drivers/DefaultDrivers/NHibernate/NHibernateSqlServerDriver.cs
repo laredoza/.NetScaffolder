@@ -31,6 +31,8 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.NHibernate
         /// </summary>
         public string ConfigurationClass => "MsSqlConfiguration";
 
+        public string ConfigurationOption { get; set; } = "MsSql2012";
+
         /// <summary>
         /// Gets the context attribute.
         /// </summary>

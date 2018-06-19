@@ -31,6 +31,8 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.NHibernate
         /// </summary>
         public string ConfigurationClass => "OracleDataClientConfiguration";
 
+        public string ConfigurationOption { get; set; } = "Oracle10";
+
         /// <summary>
         /// Gets the context attribute.
         /// </summary>

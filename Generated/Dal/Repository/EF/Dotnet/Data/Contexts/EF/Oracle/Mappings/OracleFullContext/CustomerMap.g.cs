@@ -27,7 +27,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 using Banking.Models.Entity;
 using System.Data.Common;
 
-
 namespace Banking.Models.Context.Mappings.EF.Oracle
 {
 	public partial class CustomerMap : EntityTypeConfiguration<Customer>
@@ -86,6 +85,24 @@ namespace Banking.Models.Context.Mappings.EF.Oracle
 			HasMany<Order>(s => s.Order).WithOptional(s => s.Customer).HasForeignKey(s => s.CustomerId).WillCascadeOnDelete(false);
 			
 			#endregion			
+
+			#region Column Order
+			
+			Property(t => t.CustomerId).HasColumnOrder(1);
+			Property(t => t.CustomerCode).HasColumnOrder(2);
+			Property(t => t.CompanyName).HasColumnOrder(3);
+			Property(t => t.ContactName).HasColumnOrder(4);
+			Property(t => t.ContactTitle).HasColumnOrder(5);
+			Property(t => t.Address).HasColumnOrder(6);
+			Property(t => t.City).HasColumnOrder(7);
+			Property(t => t.PostalCode).HasColumnOrder(8);
+			Property(t => t.Telephone).HasColumnOrder(9);
+			Property(t => t.Fax).HasColumnOrder(10);
+			Property(t => t.CountryId).HasColumnOrder(11);
+			Property(t => t.Photo).HasColumnOrder(12);
+			Property(t => t.IsEnabled).HasColumnOrder(13);
+
+			#endregion
 	
 		}
 	}

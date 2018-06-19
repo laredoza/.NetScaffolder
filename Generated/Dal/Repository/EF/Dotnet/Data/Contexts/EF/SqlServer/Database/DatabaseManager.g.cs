@@ -1,5 +1,5 @@
 ﻿
-// <copyright file="OrderMap.g.cs.g.cs" company="MIT">
+// <copyright file="FullContext.g.cs" company="MIT">
 //  Copyright (c) 2018 MIT
 // </copyright>  
 
@@ -17,53 +17,43 @@
 //	GENERATED CODE. DOT NOT MODIFY MANUALLY AS CHANGES CAN BE LOST!!!
 //	USE A PARTIAL CLASS INSTEAD
 // *******************************************************************
-
+using RepositoryEFDotnet.Core.Base;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration;
-using RepositoryEFDotnet.Library;
-using System.ComponentModel.DataAnnotations.Schema;
-using Banking.Models.Entity;
-using System.Data.Common;
+using System.Data.Entity.Infrastructure.Annotations;
+using Banking.Models.Context.EF;
+using System;
+using System.Collections.Generic;
 
-
-namespace Banking.Models.Mappings.SqlServer
+namespace Banking.Models.Context.SqlServer.EF.Database
 {
-	public partial class OrderMap : EntityTypeConfiguration<Order>
+	public class DatabaseManager : IDatabaseManager
 	{	
-		public OrderMap ()
+		private IDictionary<string, string> configuration;
+		
+		#region CTOR
+		
+		public DatabaseManager(IDictionary<string, string> configuration)
 		{
-			ToTable("Order", "dbo");
-			
-			#region Primary Keys
-			
-			HasKey(t => t.OrderId);
-			Property(t => t.OrderId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
-
-			#endregion
-
-			#region Constraints
-			
-			Property(t => t.OrderId).IsRequired();
-			Property(t => t.CustomerId).IsOptional();
-			Property(t => t.OrderDate).IsOptional();
-			Property(t => t.DeliveryDate).IsOptional();
-			Property(t => t.ShippingName).HasMaxLength(50);
-			Property(t => t.ShippingName).IsOptional();
-			Property(t => t.ShippingAddress).HasMaxLength(50);
-			Property(t => t.ShippingAddress).IsOptional();
-			Property(t => t.ShippingCity).HasMaxLength(50);
-			Property(t => t.ShippingCity).IsOptional();
-			Property(t => t.ShippingZip).HasMaxLength(50);
-			Property(t => t.ShippingZip).IsOptional();
-			
-			#endregion
-
-			#region Relationships
-			
-			HasMany<OrderDetails>(s => s.OrderDetails).WithRequired(s => s.Order).HasForeignKey(s => s.OrderId).WillCascadeOnDelete(false);
-			
-			#endregion			
-	
+			this.configuration = configuration;
 		}
+		
+		#endregion
+		
+        /// <summary>
+        /// The begin unit of work.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="IUnitOfWork"/>.
+        /// </returns>
+        public virtual IUnitOfWork BeginUnitOfWork()
+        {
+            if (this.configuration == null || !this.configuration.ContainsKey("QUIRCSqlServer"))
+            {
+                throw new Exception("Invalid configuration specified in database manager");
+            }
+
+			return new SqlServerFullContext(this.configuration["QUIRCSqlServer"]);
+        }
 	}
 }

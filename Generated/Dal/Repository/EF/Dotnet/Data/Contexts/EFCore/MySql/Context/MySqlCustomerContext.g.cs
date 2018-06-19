@@ -18,10 +18,11 @@
 //	USE A PARTIAL CLASS INSTEAD
 // *******************************************************************
 
+using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System.Configuration;
-using System.ComponentModel.DataAnnotations.Schema;
+using RepositoryEFDotnet.Core.Base;
 using Banking.Models.Customers.Mappings.EFCore.MySql;
 using Banking.Models.Entity;
 using RepositoryEFDotnet.Contexts.EFCore;
@@ -32,8 +33,8 @@ namespace Banking.Models.Customers.EFCore
 	{	
 		#region CTOR
 
-	    public MySqlCustomerContext(string connectionName)
-	        : base(connectionName)
+	    public MySqlCustomerContext(string connectionString)
+	        : base(connectionString)
 	    {
 	    }
 
@@ -42,18 +43,13 @@ namespace Banking.Models.Customers.EFCore
 		{
 		}
 		
-		public MySqlCustomerContext()
-			: base("name=RepoTest") 
-		{
-		}
-		
 		#endregion
 		
 	    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 	    {
-	        if (!string.IsNullOrEmpty(ConnectionName) && !optionsBuilder.IsConfigured)
+	        if (!string.IsNullOrEmpty(ConnectionString) && !optionsBuilder.IsConfigured)
 	        {
-				optionsBuilder.UseMySql(ConfigurationManager.ConnectionStrings[ConnectionName].ConnectionString);
+				optionsBuilder.UseMySql(ConnectionString);
 	        }
 	    }
 		
@@ -98,10 +94,13 @@ namespace Banking.Models.Customers.EFCore
         
 		protected override void SetupContext()
         {
-            //Configuration.LazyLoadingEnabled = false;
-            //Configuration.ProxyCreationEnabled = false;
+            //Configuration.LazyLoadingEnabled = true;
+            //Configuration.ProxyCreationEnabled = true;
             //Configuration.AutoDetectChangesEnabled = false;
 			
+			//Database.SetInitializer(new CreateDatabaseIfNotExists<MySqlCustomerContext>());
+			// Database.SetInitializer(new MigrateDatabaseToLatestVersion<MySqlCustomerContext, Configuration>());
+			//Database.Log = this.Log;
         }
 		
 		#endregion

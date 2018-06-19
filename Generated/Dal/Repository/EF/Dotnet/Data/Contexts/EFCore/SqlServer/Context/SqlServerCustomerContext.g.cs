@@ -18,11 +18,12 @@
 //	USE A PARTIAL CLASS INSTEAD
 // *******************************************************************
 
+using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System.Configuration;
-using System.ComponentModel.DataAnnotations.Schema;
+using RepositoryEFDotnet.Core.Base;
 using Banking.Models.Customers.Mappings.EFCore.SqlServer;
 using Banking.Models.Entity;
 using RepositoryEFDotnet.Contexts.EFCore;
@@ -33,8 +34,8 @@ namespace Banking.Models.Customers.EFCore
 	{	
 		#region CTOR
 
-	    public SqlServerCustomerContext(string connectionName)
-	        : base(connectionName)
+	    public SqlServerCustomerContext(string connectionString)
+	        : base(connectionString)
 	    {
 	    }
 
@@ -43,18 +44,13 @@ namespace Banking.Models.Customers.EFCore
 		{
 		}
 		
-		public SqlServerCustomerContext()
-			: base("name=RepoTest") 
-		{
-		}
-		
 		#endregion
 		
 	    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 	    {
-	        if (!string.IsNullOrEmpty(ConnectionName) && !optionsBuilder.IsConfigured)
+	        if (!string.IsNullOrEmpty(ConnectionString) && !optionsBuilder.IsConfigured)
 	        {
-				optionsBuilder.UseSqlServer(ConfigurationManager.ConnectionStrings[ConnectionName].ConnectionString);
+				optionsBuilder.UseSqlServer(ConnectionString);
 	        }
 	    }
 		
@@ -99,10 +95,13 @@ namespace Banking.Models.Customers.EFCore
         
 		protected override void SetupContext()
         {
-            //Configuration.LazyLoadingEnabled = false;
-            //Configuration.ProxyCreationEnabled = false;
+            //Configuration.LazyLoadingEnabled = true;
+            //Configuration.ProxyCreationEnabled = true;
             //Configuration.AutoDetectChangesEnabled = false;
 			
+			//Database.SetInitializer(new CreateDatabaseIfNotExists<SqlServerCustomerContext>());
+			// Database.SetInitializer(new MigrateDatabaseToLatestVersion<SqlServerCustomerContext, Configuration>());
+			//Database.Log = this.Log;
         }
 		
 		#endregion

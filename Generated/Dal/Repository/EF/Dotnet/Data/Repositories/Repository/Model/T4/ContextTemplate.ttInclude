@@ -28,10 +28,12 @@ using <#= nameSpace #>;
 <#+ } #>
 using System.ComponentModel.DataAnnotations.Schema;
 using <#= EntityNamespace #>;
+<#+ foreach(var nameSpace in DataType.AdditionalNamespaces){ #>
+using <#= nameSpace #>;
+<#+ } #>
 using <#= MappingNamespace #>.<#= Driver.ParentFolder #>.<#= Driver.Prefix #>;
 using System.Data.Common;
 using RepositoryEFDotnet.Contexts.<#= Driver.ParentFolder #>;
-
 
 namespace <#= ContextData.TransformFullnamespace(DataType.BaseNamespace) #>.<#= Driver.ParentFolder #>
 {

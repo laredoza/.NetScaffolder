@@ -18,13 +18,14 @@
 //	USE A PARTIAL CLASS INSTEAD
 // *******************************************************************
 
+using System.Data;
 using NHibernate;
 using NHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using FluentNHibernate.Cfg;
+using RepositoryEFDotnet.Core.Base;
 using Banking.Models.Customers.Mappings.NHibernate.SqlServer;
 using RepositoryEFDotnet.Contexts.NHibernate;
-using System.Data;
 
 namespace Banking.Models.Customers.NHibernate
 {

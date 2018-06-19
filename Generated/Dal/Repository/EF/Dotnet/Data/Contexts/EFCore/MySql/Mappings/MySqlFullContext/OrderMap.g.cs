@@ -25,7 +25,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 using Banking.Models.Entity;
 using System.Data.Common;
 
-
 namespace Banking.Models.Context.Mappings.EFCore.MySql
 {
 	public partial class OrderMap : IEntityTypeConfiguration<Order>
@@ -67,6 +66,20 @@ namespace Banking.Models.Context.Mappings.EFCore.MySql
 			builder.HasOne<Customer>(s => s.Customer).WithMany(s => s.Order).HasForeignKey(s => s.CustomerId).OnDelete(DeleteBehavior.Restrict);
 			builder.HasMany<OrderDetails>(s => s.OrderDetails).WithOne(s => s.Order).HasForeignKey(s => s.OrderId).OnDelete(DeleteBehavior.Restrict);
 			
+			#endregion	
+			#region Column Order
+			
+			// Column ordering available in EF Core 2.1 - https://data.uservoice.com/forums/72025-entity-framework-core-feature-suggestions/suggestions/18936844-ef-core-migrations-column-ordering
+			// Waiting for that release before implementing
+			//TODO: builder.Property(t => t.OrderId).HasColumnOrder(1);
+			//TODO: builder.Property(t => t.CustomerId).HasColumnOrder(2);
+			//TODO: builder.Property(t => t.OrderDate).HasColumnOrder(3);
+			//TODO: builder.Property(t => t.DeliveryDate).HasColumnOrder(4);
+			//TODO: builder.Property(t => t.ShippingName).HasColumnOrder(5);
+			//TODO: builder.Property(t => t.ShippingAddress).HasColumnOrder(6);
+			//TODO: builder.Property(t => t.ShippingCity).HasColumnOrder(7);
+			//TODO: builder.Property(t => t.ShippingZip).HasColumnOrder(8);
+
 			#endregion	
 	    }
 	}

@@ -55,6 +55,8 @@ namespace DotNetScaffolder.Components.Common.Contract
 
         string ConfigurationClass { get; }
 
+        string ConfigurationOption { get; set; }
+
         string AsAlias(string name);
 
         string TransformIndex(Index index);

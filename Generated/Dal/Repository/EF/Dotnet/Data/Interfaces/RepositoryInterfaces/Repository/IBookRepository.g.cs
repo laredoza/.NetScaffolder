@@ -23,7 +23,6 @@ using System.Collections.Generic;
 using Banking.Models.Interfaces;
 using RepositoryEFDotnet.Core.Base;
 
-
 namespace Banking.Models.Interfaces
 {
 	/// <summary>

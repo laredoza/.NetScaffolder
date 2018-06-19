@@ -27,7 +27,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 using Banking.Models.Entity;
 using System.Data.Common;
 
-
 namespace Banking.Models.Context.Mappings.EF.Oracle
 {
 	public partial class BankTransfersMap : EntityTypeConfiguration<BankTransfers>
@@ -68,6 +67,16 @@ namespace Banking.Models.Context.Mappings.EF.Oracle
 			HasRequired<BankAccount>(s => s.BankAccount).WithMany(s => s.BankTransfers).HasForeignKey(s => s.ToBankAccountId).WillCascadeOnDelete(false);
 			
 			#endregion			
+
+			#region Column Order
+			
+			Property(t => t.BankTransferId).HasColumnOrder(1);
+			Property(t => t.FromBankAccountId).HasColumnOrder(2);
+			Property(t => t.ToBankAccountId).HasColumnOrder(3);
+			Property(t => t.Amount).HasColumnOrder(4);
+			Property(t => t.TransferDate).HasColumnOrder(5);
+
+			#endregion
 	
 		}
 	}

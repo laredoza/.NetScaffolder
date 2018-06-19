@@ -25,7 +25,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 using Banking.Models.Entity;
 using System.Data.Common;
 
-
 namespace Banking.Models.Context.Mappings.EFCore.MySql
 {
 	public partial class CustomerMap : IEntityTypeConfiguration<Customer>
@@ -78,6 +77,25 @@ namespace Banking.Models.Context.Mappings.EFCore.MySql
 			builder.HasMany<BankAccount>(s => s.BankAccount).WithOne(s => s.Customer).HasForeignKey(s => s.CustomerId).OnDelete(DeleteBehavior.Restrict);
 			builder.HasMany<Order>(s => s.Order).WithOne(s => s.Customer).HasForeignKey(s => s.CustomerId).OnDelete(DeleteBehavior.Restrict);
 			
+			#endregion	
+			#region Column Order
+			
+			// Column ordering available in EF Core 2.1 - https://data.uservoice.com/forums/72025-entity-framework-core-feature-suggestions/suggestions/18936844-ef-core-migrations-column-ordering
+			// Waiting for that release before implementing
+			//TODO: builder.Property(t => t.CustomerId).HasColumnOrder(1);
+			//TODO: builder.Property(t => t.CustomerCode).HasColumnOrder(2);
+			//TODO: builder.Property(t => t.CompanyName).HasColumnOrder(3);
+			//TODO: builder.Property(t => t.ContactName).HasColumnOrder(4);
+			//TODO: builder.Property(t => t.ContactTitle).HasColumnOrder(5);
+			//TODO: builder.Property(t => t.Address).HasColumnOrder(6);
+			//TODO: builder.Property(t => t.City).HasColumnOrder(7);
+			//TODO: builder.Property(t => t.PostalCode).HasColumnOrder(8);
+			//TODO: builder.Property(t => t.Telephone).HasColumnOrder(9);
+			//TODO: builder.Property(t => t.Fax).HasColumnOrder(10);
+			//TODO: builder.Property(t => t.CountryId).HasColumnOrder(11);
+			//TODO: builder.Property(t => t.Photo).HasColumnOrder(12);
+			//TODO: builder.Property(t => t.IsEnabled).HasColumnOrder(13);
+
 			#endregion	
 	    }
 	}

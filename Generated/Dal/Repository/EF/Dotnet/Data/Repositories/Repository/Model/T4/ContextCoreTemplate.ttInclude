@@ -23,13 +23,13 @@ public class ContextCoreTemplate : BaseTemplate
 //	USE A PARTIAL CLASS INSTEAD
 // *******************************************************************
 
+using System.ComponentModel.DataAnnotations.Schema;
 <#+ foreach(var nameSpace in Driver.NameSpaces){ #>
 using <#= nameSpace #>;
 <#+ } #>
 <#+ foreach(var nameSpace in DataType.AdditionalNamespaces){ #>
 using <#= nameSpace #>;
 <#+ } #>
-using System.ComponentModel.DataAnnotations.Schema;
 using <#= MappingNamespace #>.<#= Driver.ParentFolder #>.<#= Driver.Prefix #>;
 using <#= EntityNamespace #>;
 using RepositoryEFDotnet.Contexts.<#= Driver.ParentFolder #>;
@@ -43,8 +43,8 @@ namespace <#= ContextData.TransformFullnamespace(DataType.BaseNamespace) #>.<#= 
 	{	
 		#region CTOR
 
-	    public <#= string.Concat(Driver.Prefix, ContextData.ContextName)  #>(string connectionName)
-	        : base(connectionName)
+	    public <#= string.Concat(Driver.Prefix, ContextData.ContextName)  #>(string connectionString)
+	        : base(connectionString)
 	    {
 	    }
 
@@ -53,27 +53,17 @@ namespace <#= ContextData.TransformFullnamespace(DataType.BaseNamespace) #>.<#= 
 		{
 		}
 		
-		public <#= string.Concat(Driver.Prefix, ContextData.ContextName)  #>()
-<#+ if(!string.IsNullOrEmpty(ContextData.CustomConnectionName)){ #>
-			: base("name=<#= ContextData.CustomConnectionName #>") 
-<#+ } else #>
-<#+ { #>
-			: base() 
-<#+ } #>
-		{
-		}
-		
 		#endregion
 		
 	    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 	    {
-	        if (!string.IsNullOrEmpty(ConnectionName) && !optionsBuilder.IsConfigured)
+	        if (!string.IsNullOrEmpty(ConnectionString) && !optionsBuilder.IsConfigured)
 	        {
 <#+ if(Driver is EFCoreSqlServerDriver) { #>
-				optionsBuilder.UseSqlServer(ConfigurationManager.ConnectionStrings[ConnectionName].ConnectionString);
+				optionsBuilder.UseSqlServer(ConnectionString);
 <#+ }#>
 <#+ if(Driver is EFCoreMySqlDriver) { #>
-				optionsBuilder.UseMySql(ConfigurationManager.ConnectionStrings[ConnectionName].ConnectionString);
+				optionsBuilder.UseMySql(ConnectionString);
 <#+ }#>
 	        }
 	    }

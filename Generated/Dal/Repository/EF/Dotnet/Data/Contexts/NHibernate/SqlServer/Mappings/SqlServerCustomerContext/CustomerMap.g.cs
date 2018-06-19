@@ -87,6 +87,12 @@ namespace Banking.Models.Customers.Mappings.NHibernate.SqlServer
 			HasMany(s => s.Order).KeyColumn("CustomerId");
 			
 			#endregion			
+
+			#region Column Order
+			
+			// Not available in NHibernate at the moment
+
+			#endregion
 	
 		}
 	}

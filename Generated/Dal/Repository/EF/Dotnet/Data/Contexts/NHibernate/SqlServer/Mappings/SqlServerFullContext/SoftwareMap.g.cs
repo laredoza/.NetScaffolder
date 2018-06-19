@@ -55,6 +55,12 @@ namespace Banking.Models.Context.Mappings.NHibernate.SqlServer
 			HasOne(s => s.Product);
 			
 			#endregion			
+
+			#region Column Order
+			
+			// Not available in NHibernate at the moment
+
+			#endregion
 	
 		}
 	}

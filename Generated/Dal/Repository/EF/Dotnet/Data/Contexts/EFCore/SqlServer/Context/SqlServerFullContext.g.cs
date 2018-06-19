@@ -18,11 +18,12 @@
 //	USE A PARTIAL CLASS INSTEAD
 // *******************************************************************
 
+using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System.Configuration;
-using System.ComponentModel.DataAnnotations.Schema;
+using RepositoryEFDotnet.Core.Base;
 using Banking.Models.Context.Mappings.EFCore.SqlServer;
 using Banking.Models.Entity;
 using RepositoryEFDotnet.Contexts.EFCore;
@@ -33,8 +34,8 @@ namespace Banking.Models.Context.EFCore
 	{	
 		#region CTOR
 
-	    public SqlServerFullContext(string connectionName)
-	        : base(connectionName)
+	    public SqlServerFullContext(string connectionString)
+	        : base(connectionString)
 	    {
 	    }
 
@@ -43,18 +44,13 @@ namespace Banking.Models.Context.EFCore
 		{
 		}
 		
-		public SqlServerFullContext()
-			: base("name=RepoTest") 
-		{
-		}
-		
 		#endregion
 		
 	    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 	    {
-	        if (!string.IsNullOrEmpty(ConnectionName) && !optionsBuilder.IsConfigured)
+	        if (!string.IsNullOrEmpty(ConnectionString) && !optionsBuilder.IsConfigured)
 	        {
-				optionsBuilder.UseSqlServer(ConfigurationManager.ConnectionStrings[ConnectionName].ConnectionString);
+				optionsBuilder.UseSqlServer(ConnectionString);
 	        }
 	    }
 		
@@ -102,10 +98,13 @@ namespace Banking.Models.Context.EFCore
         
 		protected override void SetupContext()
         {
-            //Configuration.LazyLoadingEnabled = false;
-            //Configuration.ProxyCreationEnabled = false;
+            //Configuration.LazyLoadingEnabled = true;
+            //Configuration.ProxyCreationEnabled = true;
             //Configuration.AutoDetectChangesEnabled = false;
 			
+			//Database.SetInitializer(new CreateDatabaseIfNotExists<SqlServerFullContext>());
+			// Database.SetInitializer(new MigrateDatabaseToLatestVersion<SqlServerFullContext, Configuration>());
+			//Database.Log = this.Log;
         }
 		
 		#endregion

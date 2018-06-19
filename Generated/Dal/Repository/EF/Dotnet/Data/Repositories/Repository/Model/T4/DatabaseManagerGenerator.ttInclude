@@ -1,0 +1,33 @@
+﻿<#@ include file="DatabaseManagerTemplate.ttinclude" #>
+<#+
+    public class DatabaseManagerGenerator : BaseGenerator
+    {
+        public ContextDataType DataType { get; set; }
+        public List<IDriver> Drivers {get;set;}
+		public ContextData ContextData {get;set;}
+
+		private string projectPath = string.Empty;
+		
+        protected override void RunCore()
+        {
+			var template = new DatabaseManagerTemplate();
+			
+			foreach(IDriver driver in Drivers )
+			{
+				Debugger.Break();
+				
+				projectPath = string.Format(ContextData.OutputPath, driver.ParentFolder, driver.Prefix);
+				
+				if(!string.IsNullOrEmpty(projectPath))
+				{
+					template.Output.Project =  projectPath;
+				}
+
+                template.DataType = DataType;
+				template.ContextData = ContextData;
+                template.Driver = driver;
+				template.RenderToFile(string.Format(@"{0}\{1}.g.cs", "Database", "DatabaseManager"));
+			}
+        }
+    }
+#>

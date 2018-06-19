@@ -26,7 +26,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 using Banking.Models.Entity;
 using System.Data.Common;
 
-
 namespace Banking.Models.Customers.Mappings.EF.MySql
 {
 	public partial class OrderDetailsMap : EntityTypeConfiguration<OrderDetails>
@@ -70,6 +69,17 @@ namespace Banking.Models.Customers.Mappings.EF.MySql
 			HasRequired<Product>(s => s.Product).WithMany(s => s.OrderDetails).HasForeignKey(s => s.ProductId).WillCascadeOnDelete(false);
 			
 			#endregion			
+
+			#region Column Order
+			
+			Property(t => t.OrderDetailsId).HasColumnOrder(1);
+			Property(t => t.OrderId).HasColumnOrder(2);
+			Property(t => t.ProductId).HasColumnOrder(3);
+			Property(t => t.UnitPrice).HasColumnOrder(4);
+			Property(t => t.Amount).HasColumnOrder(5);
+			Property(t => t.Discount).HasColumnOrder(6);
+
+			#endregion
 	
 		}
 	}

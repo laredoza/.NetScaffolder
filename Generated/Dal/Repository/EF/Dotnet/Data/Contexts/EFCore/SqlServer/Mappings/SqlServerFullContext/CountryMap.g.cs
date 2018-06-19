@@ -26,7 +26,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 using Banking.Models.Entity;
 using System.Data.Common;
 
-
 namespace Banking.Models.Context.Mappings.EFCore.SqlServer
 {
 	public partial class CountryMap : IEntityTypeConfiguration<Country>
@@ -57,6 +56,14 @@ namespace Banking.Models.Context.Mappings.EFCore.SqlServer
 			
 			builder.HasMany<Customer>(s => s.Customer).WithOne(s => s.Country).HasForeignKey(s => s.CountryId).OnDelete(DeleteBehavior.Restrict);
 			
+			#endregion	
+			#region Column Order
+			
+			// Column ordering available in EF Core 2.1 - https://data.uservoice.com/forums/72025-entity-framework-core-feature-suggestions/suggestions/18936844-ef-core-migrations-column-ordering
+			// Waiting for that release before implementing
+			//TODO: builder.Property(t => t.CountryId).HasColumnOrder(1);
+			//TODO: builder.Property(t => t.CountryName).HasColumnOrder(2);
+
 			#endregion	
 	    }
 	}

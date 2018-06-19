@@ -50,6 +50,7 @@
     <Compile Include="Context\SqlServerAccountContext.g.cs" />
     <Compile Include="Context\SqlServerCustomerContext.g.cs" />
     <Compile Include="Context\SqlServerFullContext.g.cs" />
+    <Compile Include="Database\DatabaseManager.g.cs" />
     <Compile Include="Mappings\SqlServerAccountContext\BankAccountMap.g.cs" />
     <Compile Include="Mappings\SqlServerAccountContext\BankTransfersMap.g.cs" />
     <Compile Include="Mappings\SqlServerCustomerContext\BookMap.g.cs" />
@@ -75,6 +76,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Core\RepositoryEFDotnet.Core.csproj">
+      <Project>{0333e000-6aaf-4e18-8747-2299a8231ab1}</Project>
+      <Name>RepositoryEFDotnet.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Entities\Entity\RepositoryEFDotnet.Data.Entities.Entity.csproj">
       <Project>{017da2af-1ffd-4e68-9646-b0e5c73ea037}</Project>
       <Name>RepositoryEFDotnet.Data.Entities.Entity</Name>

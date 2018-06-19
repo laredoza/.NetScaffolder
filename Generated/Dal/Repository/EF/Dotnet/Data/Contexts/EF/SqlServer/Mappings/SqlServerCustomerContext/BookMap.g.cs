@@ -25,7 +25,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 using Banking.Models.Entity;
 using System.Data.Common;
 
-
 namespace Banking.Models.Customers.Mappings.EF.SqlServer
 {
 	public partial class BookMap : EntityTypeConfiguration<Book>
@@ -63,6 +62,13 @@ namespace Banking.Models.Customers.Mappings.EF.SqlServer
 			HasRequired<Product>(s => s.Product).WithOptional(s => s.Book).WillCascadeOnDelete(false);
 			
 			#endregion			
+
+			#region Column Order
+			
+			Property(t => t.ProductId).HasColumnOrder(1);
+			Property(t => t.Publisher).HasColumnOrder(2);
+
+			#endregion
 	
 		}
 	}

@@ -34,6 +34,7 @@
 ..\..\Contexts\EF\MySql\Context\MySqlAccountContext.g.cs
 ..\..\Contexts\EF\MySql\Context\MySqlCustomerContext.g.cs
 ..\..\Contexts\EF\MySql\Context\MySqlFullContext.g.cs
+..\..\Contexts\EF\MySql\Database\DatabaseManager.g.cs
 ..\..\Contexts\EF\MySql\Mappings\MySqlAccountContext\BankAccountMap.g.cs
 ..\..\Contexts\EF\MySql\Mappings\MySqlAccountContext\BankTransfersMap.g.cs
 ..\..\Contexts\EF\MySql\Mappings\MySqlCustomerContext\BookMap.g.cs
@@ -55,6 +56,7 @@
 ..\..\Contexts\EF\Oracle\Context\OracleAccountContext.g.cs
 ..\..\Contexts\EF\Oracle\Context\OracleCustomerContext.g.cs
 ..\..\Contexts\EF\Oracle\Context\OracleFullContext.g.cs
+..\..\Contexts\EF\Oracle\Database\DatabaseManager.g.cs
 ..\..\Contexts\EF\Oracle\Mappings\OracleAccountContext\BankAccountMap.g.cs
 ..\..\Contexts\EF\Oracle\Mappings\OracleAccountContext\BankTransfersMap.g.cs
 ..\..\Contexts\EF\Oracle\Mappings\OracleCustomerContext\BookMap.g.cs
@@ -76,6 +78,7 @@
 ..\..\Contexts\EF\SqlServer\Context\SqlServerAccountContext.g.cs
 ..\..\Contexts\EF\SqlServer\Context\SqlServerCustomerContext.g.cs
 ..\..\Contexts\EF\SqlServer\Context\SqlServerFullContext.g.cs
+..\..\Contexts\EF\SqlServer\Database\DatabaseManager.g.cs
 ..\..\Contexts\EF\SqlServer\Mappings\SqlServerAccountContext\BankAccountMap.g.cs
 ..\..\Contexts\EF\SqlServer\Mappings\SqlServerAccountContext\BankTransfersMap.g.cs
 ..\..\Contexts\EF\SqlServer\Mappings\SqlServerCustomerContext\BookMap.g.cs
@@ -97,6 +100,7 @@
 ..\..\Contexts\EFCore\MySql\Context\MySqlAccountContext.g.cs
 ..\..\Contexts\EFCore\MySql\Context\MySqlCustomerContext.g.cs
 ..\..\Contexts\EFCore\MySql\Context\MySqlFullContext.g.cs
+..\..\Contexts\EFCore\MySql\Database\DatabaseManager.g.cs
 ..\..\Contexts\EFCore\MySql\Mappings\MySqlAccountContext\BankAccountMap.g.cs
 ..\..\Contexts\EFCore\MySql\Mappings\MySqlAccountContext\BankTransfersMap.g.cs
 ..\..\Contexts\EFCore\MySql\Mappings\MySqlCustomerContext\BookMap.g.cs
@@ -118,6 +122,7 @@
 ..\..\Contexts\EFCore\SqlServer\Context\SqlServerAccountContext.g.cs
 ..\..\Contexts\EFCore\SqlServer\Context\SqlServerCustomerContext.g.cs
 ..\..\Contexts\EFCore\SqlServer\Context\SqlServerFullContext.g.cs
+..\..\Contexts\EFCore\SqlServer\Database\DatabaseManager.g.cs
 ..\..\Contexts\EFCore\SqlServer\Mappings\SqlServerAccountContext\BankAccountMap.g.cs
 ..\..\Contexts\EFCore\SqlServer\Mappings\SqlServerAccountContext\BankTransfersMap.g.cs
 ..\..\Contexts\EFCore\SqlServer\Mappings\SqlServerCustomerContext\BookMap.g.cs
@@ -139,6 +144,7 @@
 ..\..\Contexts\NHibernate\MySql\Context\MySqlAccountContext.g.cs
 ..\..\Contexts\NHibernate\MySql\Context\MySqlCustomerContext.g.cs
 ..\..\Contexts\NHibernate\MySql\Context\MySqlFullContext.g.cs
+..\..\Contexts\NHibernate\MySql\Database\DatabaseManager.g.cs
 ..\..\Contexts\NHibernate\MySql\Mappings\MySqlAccountContext\BankAccountMap.g.cs
 ..\..\Contexts\NHibernate\MySql\Mappings\MySqlAccountContext\BankTransfersMap.g.cs
 ..\..\Contexts\NHibernate\MySql\Mappings\MySqlCustomerContext\BookMap.g.cs
@@ -160,6 +166,7 @@
 ..\..\Contexts\NHibernate\Oracle\Context\OracleAccountContext.g.cs
 ..\..\Contexts\NHibernate\Oracle\Context\OracleCustomerContext.g.cs
 ..\..\Contexts\NHibernate\Oracle\Context\OracleFullContext.g.cs
+..\..\Contexts\NHibernate\Oracle\Database\DatabaseManager.g.cs
 ..\..\Contexts\NHibernate\Oracle\Mappings\OracleAccountContext\BankAccountMap.g.cs
 ..\..\Contexts\NHibernate\Oracle\Mappings\OracleAccountContext\BankTransfersMap.g.cs
 ..\..\Contexts\NHibernate\Oracle\Mappings\OracleCustomerContext\BookMap.g.cs
@@ -181,6 +188,7 @@
 ..\..\Contexts\NHibernate\SqlServer\Context\SqlServerAccountContext.g.cs
 ..\..\Contexts\NHibernate\SqlServer\Context\SqlServerCustomerContext.g.cs
 ..\..\Contexts\NHibernate\SqlServer\Context\SqlServerFullContext.g.cs
+..\..\Contexts\NHibernate\SqlServer\Database\DatabaseManager.g.cs
 ..\..\Contexts\NHibernate\SqlServer\Mappings\SqlServerAccountContext\BankAccountMap.g.cs
 ..\..\Contexts\NHibernate\SqlServer\Mappings\SqlServerAccountContext\BankTransfersMap.g.cs
 ..\..\Contexts\NHibernate\SqlServer\Mappings\SqlServerCustomerContext\BookMap.g.cs

@@ -1,5 +1,5 @@
 ﻿
-// <copyright file="SoftwareMap.g.cs.g.cs" company="MIT">
+// <copyright file="FullContext.g.cs" company="MIT">
 //  Copyright (c) 2018 MIT
 // </copyright>  
 
@@ -17,45 +17,44 @@
 //	GENERATED CODE. DOT NOT MODIFY MANUALLY AS CHANGES CAN BE LOST!!!
 //	USE A PARTIAL CLASS INSTEAD
 // *******************************************************************
+using RepositoryEFDotnet.Core.Base;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System.Configuration;
+using Banking.Models.Context.EFCore;
+using System;
+using System.Collections.Generic;
 
-using System.Data.Entity;
-using System.Data.Entity.ModelConfiguration;
-using Oracle.ManagedDataAccess.Client;
-using Oracle.Config;
-using RepositoryEFDotnet.Library;
-using System.ComponentModel.DataAnnotations.Schema;
-using Banking.Models.Entity;
-using System.Data.Common;
-
-
-namespace Banking.Models.Mappings.Oracle
+namespace Banking.Models.Context.SqlServer.EFCore.Database
 {
-	public partial class SoftwareMap : EntityTypeConfiguration<Software>
+	public class DatabaseManager : IDatabaseManager
 	{	
-		public SoftwareMap ()
+		private IDictionary<string, string> configuration;
+		
+		#region CTOR
+		
+		public DatabaseManager(IDictionary<string, string> configuration)
 		{
-			ToTable("Software", "DBO");
-			
-			#region Primary Keys
-			
-			HasKey(t => t.ProductId);
-			Property(t => t.ProductId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
-
-			#endregion
-
-			#region Constraints
-			
-			Property(t => t.ProductId).IsRequired();
-			Property(t => t.LicenseCode).HasMaxLength(200);
-			Property(t => t.LicenseCode).IsRequired();
-			
-			#endregion
-
-			#region Relationships
-			
-			
-			#endregion			
-	
+			this.configuration = configuration;
 		}
+		
+		#endregion
+		
+        /// <summary>
+        /// The begin unit of work.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="IUnitOfWork"/>.
+        /// </returns>
+        public virtual IUnitOfWork BeginUnitOfWork()
+        {
+            if (this.configuration == null || !this.configuration.ContainsKey("QUIRCSqlServer"))
+            {
+                throw new Exception("Invalid configuration specified in database manager");
+            }
+
+			return new SqlServerFullContext(this.configuration["QUIRCSqlServer"]);
+        }
 	}
 }

@@ -177,6 +177,7 @@ namespace <#= DataType.FullNamespace #>
 		
 		#endregion
 <#+ } #>
+
 <#+ if(DataType.MetaData.PrimaryKeyCount > 1) { 
 int index = 0;
 #>

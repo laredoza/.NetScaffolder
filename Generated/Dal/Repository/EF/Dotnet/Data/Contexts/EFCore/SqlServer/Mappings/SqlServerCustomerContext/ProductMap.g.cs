@@ -26,7 +26,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 using Banking.Models.Entity;
 using System.Data.Common;
 
-
 namespace Banking.Models.Customers.Mappings.EFCore.SqlServer
 {
 	public partial class ProductMap : IEntityTypeConfiguration<Product>
@@ -62,10 +61,22 @@ namespace Banking.Models.Customers.Mappings.EFCore.SqlServer
 			
 			#region Relationships
 			
-			builder.HasOne<Book>(s => s.Book).WithOne(s => s.Product).OnDelete(DeleteBehavior.Restrict);
+			builder.HasOne<Book>(s => s.Book).WithOne(s => s.Product).HasForeignKey<Book>(s => s.ProductId).OnDelete(DeleteBehavior.Restrict);
 			builder.HasMany<OrderDetails>(s => s.OrderDetails).WithOne(s => s.Product).HasForeignKey(s => s.ProductId).OnDelete(DeleteBehavior.Restrict);
-			builder.HasOne<Software>(s => s.Software).WithOne(s => s.Product).OnDelete(DeleteBehavior.Restrict);
+			builder.HasOne<Software>(s => s.Software).WithOne(s => s.Product).HasForeignKey<Software>(s => s.ProductId).OnDelete(DeleteBehavior.Restrict);
 			
+			#endregion	
+			#region Column Order
+			
+			// Column ordering available in EF Core 2.1 - https://data.uservoice.com/forums/72025-entity-framework-core-feature-suggestions/suggestions/18936844-ef-core-migrations-column-ordering
+			// Waiting for that release before implementing
+			//TODO: builder.Property(t => t.ProductId).HasColumnOrder(1);
+			//TODO: builder.Property(t => t.ProductDescription).HasColumnOrder(2);
+			//TODO: builder.Property(t => t.UnitPrice).HasColumnOrder(3);
+			//TODO: builder.Property(t => t.UnitAmount).HasColumnOrder(4);
+			//TODO: builder.Property(t => t.Publisher).HasColumnOrder(5);
+			//TODO: builder.Property(t => t.AmountInStock).HasColumnOrder(6);
+
 			#endregion	
 	    }
 	}

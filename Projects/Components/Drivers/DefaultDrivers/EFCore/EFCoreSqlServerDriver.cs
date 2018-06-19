@@ -27,6 +27,8 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EFCore
         /// </summary>
         public string ConfigurationClass => string.Empty;
 
+        public string ConfigurationOption { get; set; }
+
         /// <summary>
         ///     Gets the context attribute.
         /// </summary>

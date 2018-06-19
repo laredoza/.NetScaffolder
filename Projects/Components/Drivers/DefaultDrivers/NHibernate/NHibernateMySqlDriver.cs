@@ -31,6 +31,8 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.NHibernate
         /// </summary>
         public string ConfigurationClass => "MySQLConfiguration";
 
+        public string ConfigurationOption { get; set; } = "Standard";
+
         /// <summary>
         /// Gets the context attribute.
         /// </summary>

@@ -46,15 +46,14 @@ namespace RepositoryEFDotnet.Contexts.EFCore
         /// <param name="connectionName">
         /// The connection name.
         /// </param>
-        protected BaseContext(string connectionName)
+        protected BaseContext(string connectionString)
         {
-            this.ConnectionName = connectionName;
+            this.ConnectionString = connectionString;
             this.SetupContext();
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BaseContext"/> class. 
-        /// Initializes a new instance of the <see cref="BaseContext"/> class.
         /// </summary>
         /// <param name="options">
         /// The options.
@@ -72,7 +71,7 @@ namespace RepositoryEFDotnet.Contexts.EFCore
         /// <summary>
         /// Gets or sets the connection name.
         /// </summary>
-        protected string ConnectionName { get; }
+        protected string ConnectionString { get; }
 
         #endregion
 

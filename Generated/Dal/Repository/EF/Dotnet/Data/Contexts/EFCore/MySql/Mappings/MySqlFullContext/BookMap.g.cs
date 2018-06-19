@@ -25,7 +25,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 using Banking.Models.Entity;
 using System.Data.Common;
 
-
 namespace Banking.Models.Context.Mappings.EFCore.MySql
 {
 	public partial class BookMap : IEntityTypeConfiguration<Book>
@@ -57,6 +56,14 @@ namespace Banking.Models.Context.Mappings.EFCore.MySql
 			
 			builder.HasOne<Product>(s => s.Product).WithOne(s => s.Book).OnDelete(DeleteBehavior.Restrict);
 			
+			#endregion	
+			#region Column Order
+			
+			// Column ordering available in EF Core 2.1 - https://data.uservoice.com/forums/72025-entity-framework-core-feature-suggestions/suggestions/18936844-ef-core-migrations-column-ordering
+			// Waiting for that release before implementing
+			//TODO: builder.Property(t => t.ProductId).HasColumnOrder(1);
+			//TODO: builder.Property(t => t.Publisher).HasColumnOrder(2);
+
 			#endregion	
 	    }
 	}

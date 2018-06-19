@@ -33,7 +33,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 using <#= EntityNamespace #>;
 using System.Data.Common;
 
-
 namespace <#= Namespace #>.<#= Driver.ParentFolder #>.<#= Driver.Prefix #>
 {
 	public partial class <#= ModelName #><#= PostFix #> : IEntityTypeConfiguration<<#= ModelName #>>

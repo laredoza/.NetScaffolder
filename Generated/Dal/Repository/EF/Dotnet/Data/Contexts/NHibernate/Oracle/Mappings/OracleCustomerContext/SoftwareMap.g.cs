@@ -54,6 +54,12 @@ namespace Banking.Models.Customers.Mappings.NHibernate.Oracle
 			HasOne(s => s.Product);
 			
 			#endregion			
+
+			#region Column Order
+			
+			// Not available in NHibernate at the moment
+
+			#endregion
 	
 		}
 	}

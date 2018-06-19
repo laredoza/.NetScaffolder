@@ -1,5 +1,5 @@
 ﻿
-// <copyright file="SoftwareMap.g.cs.g.cs" company="MIT">
+// <copyright file="FullContext.g.cs" company="MIT">
 //  Copyright (c) 2018 MIT
 // </copyright>  
 
@@ -17,39 +17,45 @@
 //	GENERATED CODE. DOT NOT MODIFY MANUALLY AS CHANGES CAN BE LOST!!!
 //	USE A PARTIAL CLASS INSTEAD
 // *******************************************************************
-using System.Data.Entity.ModelConfiguration;
-using System.ComponentModel.DataAnnotations.Schema;
-using Banking.Models.Entity;
+using RepositoryEFDotnet.Core.Base;
+using NHibernate;
+using NHibernate.Cfg;
+using FluentNHibernate.Cfg.Db;
+using FluentNHibernate.Cfg;
+using Banking.Models.Context.NHibernate;
+using System;
+using System.Collections.Generic;
 
-
-namespace Banking.Models.Customers.Mappings
+namespace Banking.Models.Context.MySql.NHibernate.Database
 {
-	public partial class SoftwareMap : EntityTypeConfiguration<Software>
+	public class DatabaseManager : IDatabaseManager
 	{	
-		public SoftwareMap ()
+		private IDictionary<string, string> configuration;
+		
+		#region CTOR
+		
+		public DatabaseManager(IDictionary<string, string> configuration)
 		{
-			ToTable("Software", "dbo");
-			
-			#region Primary Keys
-			
-			HasKey(t => t.ProductId);
-			Property(t => t.ProductId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
-
-			#endregion
-
-			#region Constraints
-			
-			Property(t => t.ProductId).IsRequired();
-			Property(t => t.LicenseCode).HasMaxLength(200);
-			Property(t => t.LicenseCode).IsRequired();
-			
-			#endregion
-
-			#region Relationships
-			
-			
-			#endregion			
-	
+			this.configuration = configuration;
 		}
+		
+		#endregion
+		
+        /// <summary>
+        /// The begin unit of work.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="IUnitOfWork"/>.
+        /// </returns>
+        public virtual IUnitOfWork BeginUnitOfWork()
+        {
+            if (this.configuration == null || !this.configuration.ContainsKey("QUIRCMySql"))
+            {
+                throw new Exception("Invalid configuration specified in database manager");
+            }
+
+			var config = MySQLConfiguration.Standard.ConnectionString(this.configuration["QUIRCMySql"]);
+			return new MySqlFullContext(config);
+        }
 	}
 }

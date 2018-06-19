@@ -26,7 +26,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 using Banking.Models.Entity;
 using System.Data.Common;
 
-
 namespace Banking.Models.Context.Mappings.EF.MySql
 {
 	public partial class SoftwareMap : EntityTypeConfiguration<Software>
@@ -64,6 +63,13 @@ namespace Banking.Models.Context.Mappings.EF.MySql
 			HasRequired<Product>(s => s.Product).WithOptional(s => s.Software).WillCascadeOnDelete(false);
 			
 			#endregion			
+
+			#region Column Order
+			
+			Property(t => t.ProductId).HasColumnOrder(1);
+			Property(t => t.LicenseCode).HasColumnOrder(2);
+
+			#endregion
 	
 		}
 	}

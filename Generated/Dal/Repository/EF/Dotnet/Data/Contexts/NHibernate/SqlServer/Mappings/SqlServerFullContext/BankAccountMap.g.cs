@@ -64,6 +64,12 @@ namespace Banking.Models.Context.Mappings.NHibernate.SqlServer
 			HasMany(s => s.BankTransfers).KeyColumn("ToBankAccountId");
 			
 			#endregion			
+
+			#region Column Order
+			
+			// Not available in NHibernate at the moment
+
+			#endregion
 	
 		}
 	}

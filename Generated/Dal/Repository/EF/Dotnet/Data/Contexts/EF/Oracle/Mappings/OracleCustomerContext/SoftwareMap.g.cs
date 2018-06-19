@@ -27,7 +27,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 using Banking.Models.Entity;
 using System.Data.Common;
 
-
 namespace Banking.Models.Customers.Mappings.EF.Oracle
 {
 	public partial class SoftwareMap : EntityTypeConfiguration<Software>
@@ -65,6 +64,13 @@ namespace Banking.Models.Customers.Mappings.EF.Oracle
 			HasRequired<Product>(s => s.Product).WithOptional(s => s.Software).WillCascadeOnDelete(false);
 			
 			#endregion			
+
+			#region Column Order
+			
+			Property(t => t.ProductId).HasColumnOrder(1);
+			Property(t => t.LicenseCode).HasColumnOrder(2);
+
+			#endregion
 	
 		}
 	}

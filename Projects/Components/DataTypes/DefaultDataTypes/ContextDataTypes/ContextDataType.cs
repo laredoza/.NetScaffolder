@@ -107,7 +107,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
 
             if (this.Contexts.Any())
             {
-                foreach (var context in this.Contexts)
+                foreach (var context in this.Contexts.Where(o => o != null))
                 {
                     parent.Children.Add(
                         new Hierarchy { ParentId = parent.Id, Id = context.Id, Name = context.ContextName });

@@ -1,5 +1,5 @@
 ﻿
-// <copyright file="BankTransfersMap.g.cs.g.cs" company="MIT">
+// <copyright file="FullContext.g.cs" company="MIT">
 //  Copyright (c) 2018 MIT
 // </copyright>  
 
@@ -17,42 +17,45 @@
 //	GENERATED CODE. DOT NOT MODIFY MANUALLY AS CHANGES CAN BE LOST!!!
 //	USE A PARTIAL CLASS INSTEAD
 // *******************************************************************
-using System.Data.Entity.ModelConfiguration;
-using System.ComponentModel.DataAnnotations.Schema;
-using Banking.Models.Entity;
+using RepositoryEFDotnet.Core.Base;
+using NHibernate;
+using NHibernate.Cfg;
+using FluentNHibernate.Cfg.Db;
+using FluentNHibernate.Cfg;
+using Banking.Models.Context.NHibernate;
+using System;
+using System.Collections.Generic;
 
-
-namespace Banking.Models.Context.Mappings
+namespace Banking.Models.Context.SqlServer.NHibernate.Database
 {
-	public partial class BankTransfersMap : EntityTypeConfiguration<BankTransfers>
+	public class DatabaseManager : IDatabaseManager
 	{	
-		public BankTransfersMap ()
+		private IDictionary<string, string> configuration;
+		
+		#region CTOR
+		
+		public DatabaseManager(IDictionary<string, string> configuration)
 		{
-			ToTable("BankTransfers", "dbo");
-			
-			#region Primary Keys
-			
-			HasKey(t => t.BankTransferId);
-			Property(t => t.BankTransferId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
-
-			#endregion
-
-			#region Constraints
-			
-			Property(t => t.BankTransferId).IsRequired();
-			Property(t => t.FromBankAccountId).IsRequired();
-			Property(t => t.ToBankAccountId).IsRequired();
-			Property(t => t.Amount).IsRequired();
-			Property(t => t.Amount).HasPrecision(18, 2);
-			Property(t => t.TransferDate).IsRequired();
-			
-			#endregion
-
-			#region Relationships
-			
-			
-			#endregion			
-	
+			this.configuration = configuration;
 		}
+		
+		#endregion
+		
+        /// <summary>
+        /// The begin unit of work.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="IUnitOfWork"/>.
+        /// </returns>
+        public virtual IUnitOfWork BeginUnitOfWork()
+        {
+            if (this.configuration == null || !this.configuration.ContainsKey("QUIRCSqlServer"))
+            {
+                throw new Exception("Invalid configuration specified in database manager");
+            }
+
+			var config = MsSqlConfiguration.MsSql2012.ConnectionString(this.configuration["QUIRCSqlServer"]);
+			return new SqlServerFullContext(config);
+        }
 	}
 }

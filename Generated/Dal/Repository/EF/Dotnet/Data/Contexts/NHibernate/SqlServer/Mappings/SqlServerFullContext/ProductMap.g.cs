@@ -68,6 +68,12 @@ namespace Banking.Models.Context.Mappings.NHibernate.SqlServer
 			HasOne(s => s.Software).PropertyRef(o => o.Product);
 			
 			#endregion			
+
+			#region Column Order
+			
+			// Not available in NHibernate at the moment
+
+			#endregion
 	
 		}
 	}
