@@ -14,116 +14,120 @@ namespace DotNetScaffolder.Core.Common.Validation
         /// <summary>
         ///     The domain name.
         /// </summary>
-        DomainName,
+        DomainName = 0,
 
         /// <summary>
         ///     The domain id.
         /// </summary>
-        DomainId,
+        DomainId = 1,
 
         /// <summary>
         ///     The project base name space.
         /// </summary>
-        ProjectBaseNameSpace,
+        ProjectBaseNameSpace = 2,
 
         /// <summary>
         ///     The project output folder.
         /// </summary>
-        ProjectOutputFolder,
+        ProjectOutputFolder = 3,
 
         /// <summary>
         ///     The project version.
         /// </summary>
-        ProjectVersion,
+        ProjectVersion = 4,
 
         /// <summary>
         ///     The project model path.
         /// </summary>
-        ProjectModelPath,
+        ProjectModelPath = 5,
 
         /// <summary>
         ///     The source type id.
         /// </summary>
-        SourceTypeId,
+        SourceTypeId = 6,
 
         /// <summary>
         ///     The naming convention id.
         /// </summary>
-        NamingConventionId,
+        NamingConventionId = 7,
 
         /// <summary>
         ///     The driver id.
         /// </summary>
-        DriverId,
+        DriverId = 8,
 
         /// <summary>
         ///     The driver type id.
         /// </summary>
-        DriverTypeId,
+        DriverTypeId = 9,
 
         /// <summary>
         ///     The template id.
         /// </summary>
-        TemplateId,
+        TemplateId = 10,
 
         /// <summary>
         ///     The template name.
         /// </summary>
-        TemplateName,
+        TemplateName = 11,
 
         /// <summary>
         ///     The template path.
         /// </summary>
-        TemplatePath,
+        TemplatePath = 12,
 
         /// <summary>
         ///     The template version.
         /// </summary>
-        TemplateVersion,
+        TemplateVersion = 13,
 
         /// <summary>
         ///     The template language output id.
         /// </summary>
-        TemplateLanguageOutputId,
+        TemplateLanguageOutputId = 14,
 
         /// <summary>
         ///     The template generator type id.
         /// </summary>
-        TemplateGeneratorTypeId,
+        TemplateGeneratorTypeId = 15,
 
         /// <summary>
         ///     The collection option id.
         /// </summary>
-        CollectionOptionId,
+        CollectionOptionId = 16,
 
         /// <summary>
         ///     The model error name.
         /// </summary>
-        ModelErrorName,
+        ModelErrorName = 17,
 
         /// <summary>
         ///     The model field error.
         /// </summary>
-        ModelFieldError,
+        ModelFieldError = 18,
 
         /// <summary>
         ///     The model field repository.
         /// </summary>
-        ModelFieldRepository,
+        ModelFieldRepository = 19,
 
         /// <summary>
         ///     The context missing models.
         /// </summary>
-        ContextMissingModels,
+        ContextMissingModels = 20,
 
         /// <summary>
         ///     The context name is empty.
         /// </summary>
-        ContextNameEmpty,
+        ContextNameEmpty = 21,
 
         /// <summary>
         /// The data type language missing.
         /// </summary>
-        DataTypeLanguageMissing
+        DataTypeLanguageMissing = 22,
+
+        ContextDuplicateIsDefaultConfig = 23
+        ,
+        ContextIsDefaultNotSet = 24
     }
 }

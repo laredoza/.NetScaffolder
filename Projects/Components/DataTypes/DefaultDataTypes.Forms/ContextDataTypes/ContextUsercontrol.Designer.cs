@@ -38,12 +38,16 @@
             this.label24 = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.chkIsDefault = new System.Windows.Forms.CheckBox();
             this.txtCustomConnectionName = new System.Windows.Forms.TextBox();
             this.btnNew = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.OutputPath = new System.Windows.Forms.TextBox();
+            this.gbAdditionalNamespaces = new System.Windows.Forms.GroupBox();
+            this.txtNamespaces = new System.Windows.Forms.TextBox();
             this.TreeviewContextModels = new FormControls.TreeView.MultiSelectTreeView.TreeView();
             this.groupBox1.SuspendLayout();
+            this.gbAdditionalNamespaces.SuspendLayout();
             this.SuspendLayout();
             // 
             // InheritFromInterface
@@ -124,6 +128,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.chkIsDefault);
             this.groupBox1.Controls.Add(this.txtCustomConnectionName);
             this.groupBox1.Controls.Add(this.btnNew);
             this.groupBox1.Controls.Add(this.label1);
@@ -139,21 +144,32 @@
             this.groupBox1.Controls.Add(this.label27);
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(533, 180);
+            this.groupBox1.Size = new System.Drawing.Size(492, 206);
             this.groupBox1.TabIndex = 57;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Context settings";
+            // 
+            // chkIsDefault
+            // 
+            this.chkIsDefault.AutoSize = true;
+            this.chkIsDefault.Location = new System.Drawing.Point(151, 181);
+            this.chkIsDefault.Name = "chkIsDefault";
+            this.chkIsDefault.Size = new System.Drawing.Size(71, 17);
+            this.chkIsDefault.TabIndex = 61;
+            this.chkIsDefault.Text = "Is Default";
+            this.chkIsDefault.UseVisualStyleBackColor = true;
+            this.chkIsDefault.CheckedChanged += new System.EventHandler(this.chkIsDefault_CheckedChanged);
             // 
             // txtCustomConnectionName
             // 
             this.txtCustomConnectionName.Location = new System.Drawing.Point(151, 129);
             this.txtCustomConnectionName.Name = "txtCustomConnectionName";
-            this.txtCustomConnectionName.Size = new System.Drawing.Size(295, 20);
+            this.txtCustomConnectionName.Size = new System.Drawing.Size(255, 20);
             this.txtCustomConnectionName.TabIndex = 60;
             // 
             // btnNew
             // 
-            this.btnNew.Location = new System.Drawing.Point(452, 126);
+            this.btnNew.Location = new System.Drawing.Point(412, 127);
             this.btnNew.Name = "btnNew";
             this.btnNew.Size = new System.Drawing.Size(75, 23);
             this.btnNew.TabIndex = 58;
@@ -175,30 +191,52 @@
             // 
             this.OutputPath.Location = new System.Drawing.Point(151, 154);
             this.OutputPath.Name = "OutputPath";
-            this.OutputPath.Size = new System.Drawing.Size(376, 20);
+            this.OutputPath.Size = new System.Drawing.Size(336, 20);
             this.OutputPath.TabIndex = 57;
+            // 
+            // gbAdditionalNamespaces
+            // 
+            this.gbAdditionalNamespaces.Controls.Add(this.txtNamespaces);
+            this.gbAdditionalNamespaces.Location = new System.Drawing.Point(501, 3);
+            this.gbAdditionalNamespaces.Name = "gbAdditionalNamespaces";
+            this.gbAdditionalNamespaces.Size = new System.Drawing.Size(251, 206);
+            this.gbAdditionalNamespaces.TabIndex = 60;
+            this.gbAdditionalNamespaces.TabStop = false;
+            this.gbAdditionalNamespaces.Text = "Additional Namespaces:";
+            // 
+            // txtNamespaces
+            // 
+            this.txtNamespaces.AcceptsReturn = true;
+            this.txtNamespaces.Location = new System.Drawing.Point(6, 19);
+            this.txtNamespaces.Multiline = true;
+            this.txtNamespaces.Name = "txtNamespaces";
+            this.txtNamespaces.Size = new System.Drawing.Size(239, 179);
+            this.txtNamespaces.TabIndex = 0;
             // 
             // TreeviewContextModels
             // 
             this.TreeviewContextModels.CheckBoxes = true;
-            this.TreeviewContextModels.Location = new System.Drawing.Point(3, 189);
+            this.TreeviewContextModels.Location = new System.Drawing.Point(3, 215);
             this.TreeviewContextModels.Name = "TreeviewContextModels";
             this.TreeviewContextModels.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             this.TreeviewContextModels.SelectionMode = FormControls.TreeView.MultiSelectTreeView.TreeViewSelectionMode.SingleSelect;
-            this.TreeviewContextModels.Size = new System.Drawing.Size(533, 312);
+            this.TreeviewContextModels.Size = new System.Drawing.Size(492, 286);
             this.TreeviewContextModels.TabIndex = 58;
             // 
             // ContextUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.gbAdditionalNamespaces);
             this.Controls.Add(this.TreeviewContextModels);
             this.Controls.Add(this.groupBox1);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "ContextUserControl";
-            this.Size = new System.Drawing.Size(821, 504);
+            this.Size = new System.Drawing.Size(796, 504);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.gbAdditionalNamespaces.ResumeLayout(false);
+            this.gbAdditionalNamespaces.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -219,5 +257,8 @@
         private System.Windows.Forms.Label label1;
         private FormControls.TreeView.MultiSelectTreeView.TreeView TreeviewContextModels;
         private System.Windows.Forms.TextBox txtCustomConnectionName;
+        private System.Windows.Forms.CheckBox chkIsDefault;
+        private System.Windows.Forms.GroupBox gbAdditionalNamespaces;
+        private System.Windows.Forms.TextBox txtNamespaces;
     }
 }

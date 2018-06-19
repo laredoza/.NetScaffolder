@@ -33,6 +33,9 @@
             this.label34 = new System.Windows.Forms.Label();
             this.AppServiceNamespace = new System.Windows.Forms.TextBox();
             this.label35 = new System.Windows.Forms.Label();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.txtNamespaces = new System.Windows.Forms.TextBox();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // AppServiceEnabled
@@ -79,18 +82,40 @@
             this.label35.TabIndex = 59;
             this.label35.Text = "Namespace:";
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.txtNamespaces);
+            this.groupBox2.Location = new System.Drawing.Point(233, 8);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(305, 90);
+            this.groupBox2.TabIndex = 67;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Additional Namespaces:";
+            // 
+            // txtNamespaces
+            // 
+            this.txtNamespaces.AcceptsReturn = true;
+            this.txtNamespaces.Location = new System.Drawing.Point(6, 19);
+            this.txtNamespaces.Multiline = true;
+            this.txtNamespaces.Name = "txtNamespaces";
+            this.txtNamespaces.Size = new System.Drawing.Size(293, 65);
+            this.txtNamespaces.TabIndex = 0;
+            // 
             // ApplicationServiceUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.AppServiceEnabled);
             this.Controls.Add(this.AppServiceOutputFolder);
             this.Controls.Add(this.label34);
             this.Controls.Add(this.AppServiceNamespace);
             this.Controls.Add(this.label35);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "ApplicationServiceUserControl";
-            this.Size = new System.Drawing.Size(273, 112);
+            this.Size = new System.Drawing.Size(541, 101);
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -102,5 +127,7 @@
         public System.Windows.Forms.CheckBox AppServiceEnabled;
         public System.Windows.Forms.TextBox AppServiceOutputFolder;
         public System.Windows.Forms.TextBox AppServiceNamespace;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.TextBox txtNamespaces;
     }
 }

@@ -110,6 +110,9 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.MappingDataType
                     this.Namespace = appService.Namespace;
                     this.OutputFolder = appService.OutputFolder;
                     this.PostFix = appService.PostFix;
+
+                    this.AdditionalNamespaces.Clear();
+                    this.AdditionalNamespaces.AddRange(appService.AdditionalNamespaces);
                 }
             }
         }

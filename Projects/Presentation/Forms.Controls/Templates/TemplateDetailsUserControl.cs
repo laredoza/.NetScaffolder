@@ -501,6 +501,11 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Templates
                     {
                         this.ListBoxTemplates.Items.Add(template);
                     }
+
+                    if (languageOutputDetail?.Templates != null && languageOutputDetail.Templates.Any())
+                    {
+                        this.TemplatePath = languageOutputDetail.Templates[0];
+                    }
                 }
                 else
                 {
@@ -509,7 +514,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Templates
                     this.ComboBoxGeneratorOutput.SelectedIndex = 0;
                     this.ListBoxTemplates.Items.Clear();
                 }
-
+                
                 this.UpdateRelatedPackages();
             }
         }

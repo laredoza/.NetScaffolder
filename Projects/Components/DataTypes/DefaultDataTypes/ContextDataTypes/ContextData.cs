@@ -47,6 +47,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
             this.InheritFrom = string.Empty;
             this.Id = Guid.NewGuid();
             this.OutputPath = string.Empty;
+            this.IsDefault = false;
         }
 
         #endregion
@@ -114,6 +115,8 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
         ///     Gets or sets the output path.
         /// </summary>
         public string OutputPath { get; set; }
+
+        public bool IsDefault { get; set; }
 
         /// <summary>
         ///     Gets the transform inherit from.

@@ -126,6 +126,9 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.RepoInterfaceDa
                     this.Namespace = appService.Namespace;
                     this.OutputFolder = appService.OutputFolder;
                     this.OutputPath = appService.OutputPath;
+
+                    this.AdditionalNamespaces.Clear();
+                    this.AdditionalNamespaces.AddRange(appService.AdditionalNamespaces);
                 }
             }
         }

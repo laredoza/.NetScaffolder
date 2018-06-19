@@ -183,6 +183,9 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.DtoDataTypes
                     this.InheritFrom = dto.InheritFrom;
                     this.UseInterface = dto.UseInterface;
                     this.AddInjectConstructor = dto.AddInjectConstructor;
+
+                    this.AdditionalNamespaces.Clear();
+                    this.AdditionalNamespaces.AddRange(dto.AdditionalNamespaces);
                 }
             }
         }

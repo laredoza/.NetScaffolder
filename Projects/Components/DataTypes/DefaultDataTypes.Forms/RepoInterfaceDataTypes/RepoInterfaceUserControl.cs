@@ -148,6 +148,9 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.RepoInter
             (this.DataType as RepoInterfaceDataType).Namespace = this.txtNamespace.Text;
             (this.DataType as RepoInterfaceDataType).OutputFolder = this.txtOutputFolder.Text;
             (this.DataType as RepoInterfaceDataType).OutputPath = this.txtOutputPath.Text;
+
+            this.DataType.AdditionalNamespaces.Clear();
+            this.DataType.AdditionalNamespaces.AddRange(this.txtNamespaces.Lines);
         }
 
         /// <summary>
@@ -160,6 +163,8 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.RepoInter
             this.txtNamespace.Text = (this.DataType as RepoInterfaceDataType).Namespace;
             this.txtOutputFolder.Text = (this.DataType as RepoInterfaceDataType).OutputFolder;
             this.txtOutputPath.Text = (this.DataType as RepoInterfaceDataType).OutputPath;
+
+            this.txtNamespaces.Lines = this.DataType.AdditionalNamespaces.ToArray();
         }
 
         #endregion

@@ -147,6 +147,9 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.DtoInterf
             (this.DataType as DtoInterfaceDataType).Namespace = this.txtNamespace.Text;
             (this.DataType as DtoInterfaceDataType).OutputFolder = this.txtOutputFolder.Text;
             (this.DataType as DtoInterfaceDataType).OutputPath = this.txtOutputPath.Text;
+
+            this.DataType.AdditionalNamespaces.Clear();
+            this.DataType.AdditionalNamespaces.AddRange(this.txtNamespaces.Lines);
         }
 
         /// <summary>
@@ -160,6 +163,8 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.DtoInterf
             this.txtNamespace.Text = (this.DataType as DtoInterfaceDataType).Namespace;
             this.txtOutputFolder.Text = (this.DataType as DtoInterfaceDataType).OutputFolder;
             this.txtOutputPath.Text = (this.DataType as DtoInterfaceDataType).OutputPath;
+
+            this.txtNamespaces.Lines = this.DataType.AdditionalNamespaces.ToArray();
         }
 
         #endregion

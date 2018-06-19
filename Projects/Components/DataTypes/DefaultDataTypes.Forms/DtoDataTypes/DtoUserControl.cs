@@ -168,6 +168,9 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.DtoDataTy
             (this.DataType as DtoDataType).AddInjectConstructor = this.chkAddInjectConstructor.Checked;
             (this.DataType as DtoDataType).UseInterface = this.chkUseInterface.Checked;
             (this.DataType as DtoDataType).PostFix = this.txtPostFix.Text;
+
+            this.DataType.AdditionalNamespaces.Clear();
+            this.DataType.AdditionalNamespaces.AddRange(this.txtNamespaces.Lines);
         }
 
         /// <summary>
@@ -184,6 +187,8 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.DtoDataTy
             this.txtPostFix.Text = (this.DataType as DtoDataType).PostFix;
             this.chkAddInjectConstructor.Checked = (this.DataType as DtoDataType).AddInjectConstructor;
             this.chkUseInterface.Checked = (this.DataType as DtoDataType).UseInterface;
+
+            this.txtNamespaces.Lines = this.DataType.AdditionalNamespaces.ToArray();
         }
 
         #endregion

@@ -85,6 +85,8 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.Applicati
             this.AppServiceEnabled.Checked = (this.DataType as ApplicationServiceDataType).Enabled;
             this.AppServiceNamespace.Text = (this.DataType as ApplicationServiceDataType).Namespace;
             this.AppServiceOutputFolder.Text = (this.DataType as ApplicationServiceDataType).OutputFolder;
+
+            this.txtNamespaces.Lines = this.DataType.AdditionalNamespaces.ToArray();
         }
 
         /// <summary>
@@ -102,6 +104,10 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.Applicati
             (this.DataType as ApplicationServiceDataType).Enabled = this.AppServiceEnabled.Checked;
             (this.DataType as ApplicationServiceDataType).Namespace = this.AppServiceNamespace.Text;
             (this.DataType as ApplicationServiceDataType).OutputFolder = this.AppServiceOutputFolder.Text;
+
+            this.DataType.AdditionalNamespaces.Clear();
+            this.DataType.AdditionalNamespaces.AddRange(this.txtNamespaces.Lines);
+
             this.DataType.Save(parameterList);
         }
 

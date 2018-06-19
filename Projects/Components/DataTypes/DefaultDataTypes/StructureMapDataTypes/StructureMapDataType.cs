@@ -1,10 +1,10 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="RepositoryDataType.cs" company="DotnetScaffolder">
+// <copyright file="DtoDataType.cs" company="DotnetScaffolder">
 //   MIT
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.RepositoryDataTypes
+namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.StructureMapDataTypes
 {
     #region Usings
 
@@ -25,24 +25,23 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.RepositoryDataT
     #endregion
 
     /// <summary>
-    ///     The repository data type.
+    ///     The dto data type.
     /// </summary>
     [Export(typeof(IDataType))]
-    [ExportMetadata("NameMetaData", "Repository")]
-    [ExportMetadata("ValueMetaData", "1BC1B0C4-1E41-9146-82CF-599181CE4450")]
-    public class RepositoryDataType : BaseDataType
+    [ExportMetadata("NameMetaData", "Structure Map")]
+    [ExportMetadata("ValueMetaData", "CB2445E3-5F8D-4BEC-ADDC-0D1430E15CAA")]
+    public class StructureMapDataType : BaseDataType
     {
         #region Constructors and Destructors
 
-        /// <summary>
-        ///     Initializes a new instance of the <see cref="RepositoryDataType" /> class.
-        /// </summary>
-        public RepositoryDataType()
-            : base("Repository.xml")
+        public StructureMapDataType() : base("StructureMap.xml")
         {
-            this.LanguageOutputDetails.Add(new LanguageOutputDetails { LanguageOutput = new Guid("1BC1B0C4-1E41-9146-82CF-599181CE4410"), OutputGenerator = new Guid("1BC1B0C4-1E41-9146-82CF-599181CE4410") });
-            this.LanguageOutputDetails[0].Templates.Add("RepositoryGenerator.ttInclude");
-            this.LanguageOutputDetails[0].Templates.Add("RepositoryTemplate.ttInclude");
+            this.LanguageOutputDetails.Add(new LanguageOutputDetails
+            {
+                LanguageOutput = new Guid("1BC1B0C4-1E41-9146-82CF-599181CE4410"),
+                OutputGenerator = new Guid("1BC1B0C4-1E41-9146-82CF-599181CE4410")
+            });
+            this.LanguageOutputDetails[0].Templates.Add("StructureMapGenerator.ttInclude");
         }
 
         #endregion
@@ -50,64 +49,22 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.RepositoryDataT
         #region Public Properties
 
         /// <summary>
-        ///     Gets or sets a value indicating whether enabled.
-        /// </summary>
-        public bool Enabled { get; set; } = false;
-
-        /// <summary>
         ///     Gets the full namespace.
         /// </summary>
         [XmlIgnore]
-        public string FullNamespace
-        {
-            get
-            {
-                return $"{this.BaseNamespace}.{this.Namespace}";
-            }
-        }
+        public string FullNamespace => $"{this.BaseNamespace}.{this.Namespace}";
 
-        /// <summary>
-        ///     Gets the model name.
-        /// </summary>
-        [XmlIgnore]
-        public string ModelName
-        {
-            get
-            {
-                return this.MetaData != null
-                           ? this.NamingConvention.ApplyNamingConvention(this.MetaData.TableName)
-                           : string.Empty;
-            }
-        }
-
-        /// <summary>
-        ///     Gets or sets the namespace.
-        /// </summary>
-        public string Namespace { get; set; } = "Repository";
+        public string Namespace { get; set; } = "Registry";
 
         /// <summary>
         ///     Gets or sets the output folder.
         /// </summary>
-        public string OutputFolder { get; set; } = "Repository";
+        public string OutputFolder { get; set; } = "Registry";
 
         /// <summary>
         ///     Gets or sets the output path.
         /// </summary>
         public string OutputPath { get; set; }
-
-        /// <summary>
-        ///     Gets the repo name.
-        /// </summary>
-        [XmlIgnore]
-        public string RepoName
-        {
-            get
-            {
-                return this.MetaData != null
-                           ? this.NamingConvention.ApplyNamingConvention(this.MetaData.TableName)
-                           : string.Empty;
-            }
-        }
 
         #endregion
 
@@ -125,28 +82,26 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.RepositoryDataT
 
             if (File.Exists(filePath))
             {
-                var appService = ObjectXMLSerializer<RepositoryDataType>.Load(filePath);
-                if (appService != null)
+                var dt = ObjectXMLSerializer<StructureMapDataType>.Load(filePath);
+                if (dt != null)
                 {
-                    this.Namespace = appService.Namespace;
-                    this.OutputFolder = appService.OutputFolder;
-                    this.OutputPath = appService.OutputPath;
+                    this.Namespace = dt.Namespace;
 
                     this.AdditionalNamespaces.Clear();
-                    this.AdditionalNamespaces.AddRange(appService.AdditionalNamespaces);
+                    this.AdditionalNamespaces.AddRange(dt.AdditionalNamespaces);
                 }
             }
         }
 
         /// <summary>
-        ///     The return navigation.
+        /// The return navigation.
         /// </summary>
         /// <returns>
-        ///     The <see cref="IHierarchy" />.
+        /// The <see cref="Hierarchy"/>.
         /// </returns>
         public override Hierarchy ReturnNavigation()
         {
-            return new Hierarchy { Id = new Guid("1BC1B0C4-1E41-9146-82CF-599181CE4450"), Name = "Repository" };
+            return new Hierarchy { Id = new Guid("CB2445E3-5F8D-4BEC-ADDC-0D1430E15CAA"), Name = "Structure Map" };
         }
 
         /// <summary>
@@ -161,7 +116,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.RepositoryDataT
         public override bool Save(IDictionary<string, string> parameters)
         {
             var filePath = Path.Combine(parameters["basePath"], this.FileName);
-            ObjectXMLSerializer<RepositoryDataType>.Save(this, filePath);
+            ObjectXMLSerializer<StructureMapDataType>.Save(this, filePath);
             return true;
         }
 

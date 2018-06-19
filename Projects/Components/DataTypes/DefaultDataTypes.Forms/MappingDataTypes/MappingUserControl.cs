@@ -146,6 +146,9 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.Repositor
             (this.DataType as MappingDataType).Namespace = this.txtNamespace.Text;
             (this.DataType as MappingDataType).OutputFolder = this.txtOutputFolder.Text;
             (this.DataType as MappingDataType).PostFix = this.txtPostfix.Text;
+
+            this.DataType.AdditionalNamespaces.Clear();
+            this.DataType.AdditionalNamespaces.AddRange(this.txtNamespaces.Lines);
         }
 
         /// <summary>
@@ -158,6 +161,8 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.Repositor
             this.txtNamespace.Text = (this.DataType as MappingDataType).Namespace;
             this.txtOutputFolder.Text = (this.DataType as MappingDataType).OutputFolder;
             this.txtPostfix.Text = (this.DataType as MappingDataType).PostFix;
+
+            this.txtNamespaces.Lines = this.DataType.AdditionalNamespaces.ToArray();
         }
 
         #endregion

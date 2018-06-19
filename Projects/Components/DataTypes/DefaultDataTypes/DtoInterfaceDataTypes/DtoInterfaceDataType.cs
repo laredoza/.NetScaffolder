@@ -142,7 +142,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.DtoInterfaceDat
 
             if (File.Exists(filePath))
             {
-                DtoInterfaceDataType entity = ObjectXMLSerializer<DtoInterfaceDataType>.Load(filePath);
+                var entity = ObjectXMLSerializer<DtoInterfaceDataType>.Load(filePath);
 
                 if (entity != null)
                 {
@@ -150,6 +150,9 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.DtoInterfaceDat
                     this.OutputFolder = entity.OutputFolder;
                     this.OutputPath = entity.OutputPath;
                     this.InheritFrom = entity.InheritFrom;
+
+                    this.AdditionalNamespaces.Clear();
+                    this.AdditionalNamespaces.AddRange(entity.AdditionalNamespaces);
                 }
             }
         }

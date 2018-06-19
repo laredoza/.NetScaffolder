@@ -49,6 +49,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Base
         {
             this.FileName = fileName;
             this.LanguageOutputDetails = new List<LanguageOutputDetails>(); 
+            this.AdditionalNamespaces = new List<string>();
         }
 
         #endregion
@@ -58,7 +59,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Base
         /// <summary>
         ///     Gets or sets the additional namespaces.
         /// </summary>
-        public IList<string> AdditionalNamespaces { get; } = new List<string>();
+        public List<string> AdditionalNamespaces { get; }
 
         /// <summary>
         ///     Gets or sets the base namespace.
@@ -84,9 +85,11 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Base
         [XmlIgnore]
         public List<IDriver> Drivers { get; set; }
 
+
         /// <summary>
         ///     Gets or sets the meta data.
         /// </summary>
+        [XmlIgnore]
         public Table MetaData { get; set; }
 
         /// <summary>
@@ -98,6 +101,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Base
         /// <summary>
         /// Gets or sets the language output details.
         /// </summary>
+        [XmlIgnore]
         public List<LanguageOutputDetails> LanguageOutputDetails { get; set; } 
 
         /// <summary>

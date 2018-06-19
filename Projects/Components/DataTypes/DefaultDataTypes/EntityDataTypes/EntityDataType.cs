@@ -171,6 +171,9 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.EntityDataTypes
                     this.InheritFrom = entity.InheritFrom;
                     this.UseInterface = entity.UseInterface;
                     this.AddInjectConstructor = entity.AddInjectConstructor;
+
+                    this.AdditionalNamespaces.Clear();
+                    this.AdditionalNamespaces.AddRange(entity.AdditionalNamespaces);
                 }
             }
         }

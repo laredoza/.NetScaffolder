@@ -107,7 +107,7 @@ namespace DotNetScaffolder.Components.Common.Contract
         /// </returns>
         bool Save(T parameters);
 
-        IList<string> AdditionalNamespaces { get; }
+        List<string> AdditionalNamespaces { get; }
 
         #endregion
     }

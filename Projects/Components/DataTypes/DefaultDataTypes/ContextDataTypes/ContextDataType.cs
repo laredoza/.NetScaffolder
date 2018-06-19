@@ -87,7 +87,11 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
 
             if (File.Exists(filePath))
             {
-                this.Contexts = ObjectXMLSerializer<List<ContextData>>.Load(filePath);
+                var dt = ObjectXMLSerializer<ContextDataType>.Load(filePath);
+                this.Contexts = dt.Contexts;
+
+                this.AdditionalNamespaces.Clear();
+                this.AdditionalNamespaces.AddRange(dt.AdditionalNamespaces);
             }
         }
 
@@ -132,7 +136,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
             }
 
             var filePath = Path.Combine(parameters["basePath"], this.FileName);
-            ObjectXMLSerializer<List<ContextData>>.Save(this.Contexts, filePath);
+            ObjectXMLSerializer<ContextDataType>.Save(this, filePath);
             return true;
         }
 
@@ -187,6 +191,16 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
             if (this.LanguageOutputDetails.Count == 0)
             {
                 this.ValidationResult.Add(new Validation(ValidationType.DataTypeLanguageMissing, "A Datatype must have at least one LanguageOption"));
+            }
+
+            if (this.Contexts.Any() && !this.Contexts.Any(o => o.IsDefault))
+            {
+                this.ValidationResult.Add(new Validation(ValidationType.ContextIsDefaultNotSet, "Please set the default context"));
+            }
+
+            if (this.Contexts.Count(o => o.IsDefault) > 1)
+            {
+                this.ValidationResult.Add(new Validation(ValidationType.ContextDuplicateIsDefaultConfig, "There is already a context set as default"));
             }
 
             return this.ValidationResult;

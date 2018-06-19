@@ -18,6 +18,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.ContextDa
     using System.Collections.Generic;
     using System.ComponentModel.Composition;
     using System.Linq;
+    using System.Runtime.InteropServices;
     using System.Text;
     using System.Windows.Forms;
 
@@ -187,6 +188,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.ContextDa
             }
 
             this.TreeviewContextModels.Visible = this.SelectedContext != null;
+            this.gbAdditionalNamespaces.Visible = this.SelectedContext == null;
 
             if (this.SelectedContext == null)
             {
@@ -244,6 +246,17 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.ContextDa
         {
             if (this.DataType == null || this.SelectedContext == null) return;
 
+            this.DataType.AdditionalNamespaces.Clear();
+
+            foreach (var ns in this.txtNamespaces.Lines)
+            {
+                var item = ns.Trim();
+                if (!string.IsNullOrEmpty(item) && !this.DataType.AdditionalNamespaces.Contains(item))
+                {
+                    this.DataType.AdditionalNamespaces.Add(item);
+                }
+            }
+
             this.SelectedContext =
                 (this.DataType as ContextDataType).Contexts.FirstOrDefault(o => o.Id == this.SelectedContext.Id);
 
@@ -300,8 +313,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.ContextDa
                 this.SelectedContext = null;
             }
 
-            var parameters = new Dictionary<string, string>();
-            parameters.Add("basePath", this.SavePath);
+            var parameters = new Dictionary<string, string> { { "basePath", this.SavePath } };
             this.DataType.Save(parameters);
             this.OnNavigationChanged?.Invoke(this, this.DataType);
             this.SetupDefault();
@@ -364,6 +376,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.ContextDa
             this.SelectedContext.InheritFrom = this.InheritFromInterface.Text;
             this.SelectedContext.CustomConnectionName = this.txtCustomConnectionName.Text;
             this.SelectedContext.OutputPath = this.OutputPath.Text;
+            this.SelectedContext.IsDefault = this.chkIsDefault.Checked || !(this.DataType as ContextDataType).Contexts.Any(o => o.IsDefault);
 
             this.SelectedContext.Models.Clear();
 
@@ -418,10 +431,36 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.ContextDa
             this.InheritFromInterface.Text = this.SelectedContext.InheritFrom;
             this.txtCustomConnectionName.Text = this.SelectedContext.CustomConnectionName;
             this.OutputPath.Text = this.SelectedContext.OutputPath;
-
+            this.chkIsDefault.Checked = this.SelectedContext.IsDefault;
+            this.txtNamespaces.Lines = this.DataType.AdditionalNamespaces.ToArray();
             this.UpdateDataSource();
         }
 
         #endregion
+
+        private void chkIsDefault_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.SelectedContext == null)
+            {
+                return;
+            }
+
+            var dt = this.DataType as ContextDataType;
+
+            if (dt?.Contexts == null)
+            {
+                return;
+            }
+
+            if (this.chkIsDefault.Checked)
+            {
+                foreach (var ctx in dt.Contexts)
+                {
+                    ctx.IsDefault = false;
+                }
+            }
+
+            this.SelectedContext.IsDefault = this.chkIsDefault.Checked;
+        }
     }
 }

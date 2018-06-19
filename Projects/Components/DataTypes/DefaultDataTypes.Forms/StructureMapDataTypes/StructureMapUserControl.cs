@@ -1,10 +1,10 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="EntityUserControl.cs" company="DotnetScaffolder">
+// <copyright file="DtoUserControl.cs" company="DotnetScaffolder">
 //   MIT
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.EntityDataTypes
+namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.DtoDataTypes
 {
     #region Usings
 
@@ -16,7 +16,8 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.EntityDat
     using System.ComponentModel.Composition;
     using System.Windows.Forms;
 
-    using DotNetScaffolder.Components.DataTypes.DefaultDataTypes.EntityDataTypes;
+    using DotNetScaffolder.Components.DataTypes.DefaultDataTypes.DtoDataTypes;
+    using DotNetScaffolder.Components.DataTypes.DefaultDataTypes.StructureMapDataTypes;
 
     #endregion
 
@@ -24,11 +25,11 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.EntityDat
     ///     The entity user control.
     /// </summary>
     [Export(typeof(IDataTypeUI))]
-    [ExportMetadata("NameMetaData", "ContextUI")]
-    [ExportMetadata("ValueMetaData", "1BC1B0C4-1E41-9146-82CF-599181CE4440")]
+    [ExportMetadata("NameMetaData", "StructureMapUI")]
+    [ExportMetadata("ValueMetaData", "CB2445E3-5F8D-4BEC-ADDC-0D1430E15CAA")]
     [ExportMetadata("DisplayType", DisplayType.WinForm)]
-    [ExportMetadata("DataType", "1BC1B0C4-1E41-9146-82CF-599181CE4440")]
-    public partial class EntityUserControl : UserControl, IDataTypeUI
+    [ExportMetadata("DataType", "CB2445E3-5F8D-4BEC-ADDC-0D1430E15CAA")]
+    public partial class StructureMapUserControl : UserControl, IDataTypeUI
     {
         #region Fields
 
@@ -42,9 +43,9 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.EntityDat
         #region Constructors and Destructors
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="EntityUserControl" /> class.
+        /// Initializes a new instance of the <see cref="StructureMapUserControl"/> class.
         /// </summary>
-        public EntityUserControl()
+        public StructureMapUserControl()
         {
             this.InitializeComponent();
         }
@@ -59,15 +60,10 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.EntityDat
         #region Public Properties
 
         /// <summary>
-        ///     Gets or sets the data source.
+        /// Gets or sets the data source.
         /// </summary>
         public DomainDefinition DataSource { get; set; }
 
-        /// <summary>
-        ///     Gets or sets the validation result.
-        /// </summary>
-        public List<Validation> ValidationResult { get; set; }
-        
         /// <summary>
         ///     Gets or sets the data type.
         /// </summary>
@@ -84,6 +80,11 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.EntityDat
                 this.UpdateUI();
             }
         }
+
+        /// <summary>
+        ///     Gets or sets the validation result.
+        /// </summary>
+        public List<Validation> ValidationResult { get; set; }
 
         #endregion
 
@@ -121,10 +122,10 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.EntityDat
         }
 
         /// <summary>
-        /// The validate.
+        ///     The validate.
         /// </summary>
         /// <returns>
-        /// The <see cref="List"/>.
+        ///     The <see cref="List" />.
         /// </returns>
         public virtual List<Validation> Validate()
         {
@@ -137,36 +138,15 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.EntityDat
         #region Other Methods
 
         /// <summary>
-        /// The chk use interface_ checked changed.
-        /// </summary>
-        /// <param name="sender">
-        /// The sender.
-        /// </param>
-        /// <param name="e">
-        /// The e.
-        /// </param>
-        private void chkUseInterface_CheckedChanged(object sender, EventArgs e)
-        {
-            this.chkAddInjectConstructor.Enabled = this.chkUseInterface.Checked;
-            if (!this.chkUseInterface.Checked)
-            {
-                this.chkAddInjectConstructor.Checked = false;
-            }
-        }
-
-        /// <summary>
         ///     The update data type.
         /// </summary>
         private void UpdateDataType()
         {
             if (this.DataType == null) return;
 
-            (this.DataType as EntityDataType).InheritFrom = this.txtInheritFrom.Text;
-            (this.DataType as EntityDataType).Namespace = this.txtNamespace.Text;
-            (this.DataType as EntityDataType).OutputFolder = this.txtOutputFolder.Text;
-            (this.DataType as EntityDataType).OutputPath = this.txtOutputPath.Text;
-            (this.DataType as EntityDataType).AddInjectConstructor = this.chkAddInjectConstructor.Checked;
-            (this.DataType as EntityDataType).UseInterface = this.chkUseInterface.Checked;
+            (this.DataType as StructureMapDataType).Namespace = this.txtNamespace.Text;
+            (this.DataType as StructureMapDataType).OutputFolder = this.txtOutputFolder.Text;
+            (this.DataType as StructureMapDataType).OutputPath = this.txtOutputPath.Text;
 
             this.DataType.AdditionalNamespaces.Clear();
             this.DataType.AdditionalNamespaces.AddRange(this.txtNamespaces.Lines);
@@ -179,12 +159,9 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.EntityDat
         {
             if (this.DataType == null) return;
 
-            this.txtInheritFrom.Text = (this.DataType as EntityDataType).InheritFrom;
-            this.txtNamespace.Text = (this.DataType as EntityDataType).Namespace;
-            this.txtOutputFolder.Text = (this.DataType as EntityDataType).OutputFolder;
-            this.txtOutputPath.Text = (this.DataType as EntityDataType).OutputPath;
-            this.chkAddInjectConstructor.Checked = (this.DataType as EntityDataType).AddInjectConstructor;
-            this.chkUseInterface.Checked = (this.DataType as EntityDataType).UseInterface;
+            this.txtNamespace.Text = (this.DataType as StructureMapDataType).Namespace;
+            this.txtOutputFolder.Text = (this.DataType as StructureMapDataType).OutputFolder;
+            this.txtOutputPath.Text = (this.DataType as StructureMapDataType).OutputPath;
 
             this.txtNamespaces.Lines = this.DataType.AdditionalNamespaces.ToArray();
         }

@@ -55,6 +55,12 @@
     <Compile Include="ContextDataTypes\ContextUsercontrol.Designer.cs">
       <DependentUpon>ContextUsercontrol.cs</DependentUpon>
     </Compile>
+    <Compile Include="StructureMapDataTypes\StructureMapUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="StructureMapDataTypes\StructureMapUserControl.Designer.cs">
+      <DependentUpon>StructureMapUserControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="DtoDataTypes\DtoUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -105,6 +111,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ContextDataTypes\ContextUserControl.resx">
       <DependentUpon>ContextUsercontrol.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StructureMapDataTypes\StructureMapUserControl.resx">
+      <DependentUpon>StructureMapUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DtoDataTypes\DtoUserControl.resx">
       <DependentUpon>DtoUserControl.cs</DependentUpon>

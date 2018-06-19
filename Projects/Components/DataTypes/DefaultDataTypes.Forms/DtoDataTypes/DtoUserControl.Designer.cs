@@ -41,7 +41,10 @@
             this.chkUseInterface = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.txtOutputPath = new System.Windows.Forms.TextBox();
+            this.txtNamespaces = new System.Windows.Forms.TextBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtOutputFolder
@@ -107,6 +110,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.groupBox2);
             this.groupBox1.Controls.Add(this.txtPostFix);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.chkUseInterface);
@@ -170,6 +174,25 @@
             this.txtOutputPath.Size = new System.Drawing.Size(406, 20);
             this.txtOutputPath.TabIndex = 60;
             // 
+            // txtNamespaces
+            // 
+            this.txtNamespaces.AcceptsReturn = true;
+            this.txtNamespaces.Location = new System.Drawing.Point(6, 19);
+            this.txtNamespaces.Multiline = true;
+            this.txtNamespaces.Name = "txtNamespaces";
+            this.txtNamespaces.Size = new System.Drawing.Size(267, 88);
+            this.txtNamespaces.TabIndex = 0;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.txtNamespaces);
+            this.groupBox2.Location = new System.Drawing.Point(258, 10);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(279, 114);
+            this.groupBox2.TabIndex = 66;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Additional Namespaces:";
+            // 
             // DtoUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -180,6 +203,8 @@
             this.Size = new System.Drawing.Size(549, 219);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -198,5 +223,7 @@
         private System.Windows.Forms.CheckBox chkUseInterface;
         private System.Windows.Forms.TextBox txtPostFix;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.TextBox txtNamespaces;
     }
 }
