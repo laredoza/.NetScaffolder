@@ -36,18 +36,19 @@
             this.txtInheritFrom = new System.Windows.Forms.TextBox();
             this.label29 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.txtNamespaces = new System.Windows.Forms.TextBox();
             this.chkUseInterface = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.txtOutputPath = new System.Windows.Forms.TextBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.txtNamespaces = new System.Windows.Forms.TextBox();
+            this.chkUseGenerics = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtOutputFolder
             // 
-            this.txtOutputFolder.Location = new System.Drawing.Point(131, 93);
+            this.txtOutputFolder.Location = new System.Drawing.Point(131, 111);
             this.txtOutputFolder.Name = "txtOutputFolder";
             this.txtOutputFolder.Size = new System.Drawing.Size(121, 20);
             this.txtOutputFolder.TabIndex = 59;
@@ -56,7 +57,7 @@
             // label31
             // 
             this.label31.AutoSize = true;
-            this.label31.Location = new System.Drawing.Point(37, 96);
+            this.label31.Location = new System.Drawing.Point(37, 114);
             this.label31.Name = "label31";
             this.label31.Size = new System.Drawing.Size(74, 13);
             this.label31.TabIndex = 58;
@@ -64,7 +65,7 @@
             // 
             // txtNamespace
             // 
-            this.txtNamespace.Location = new System.Drawing.Point(131, 57);
+            this.txtNamespace.Location = new System.Drawing.Point(131, 82);
             this.txtNamespace.Name = "txtNamespace";
             this.txtNamespace.Size = new System.Drawing.Size(121, 20);
             this.txtNamespace.TabIndex = 57;
@@ -73,7 +74,7 @@
             // label30
             // 
             this.label30.AutoSize = true;
-            this.label30.Location = new System.Drawing.Point(44, 60);
+            this.label30.Location = new System.Drawing.Point(44, 85);
             this.label30.Name = "label30";
             this.label30.Size = new System.Drawing.Size(67, 13);
             this.label30.TabIndex = 56;
@@ -83,7 +84,7 @@
             // 
             this.chkAddInjectConstructor.AutoSize = true;
             this.chkAddInjectConstructor.Enabled = false;
-            this.chkAddInjectConstructor.Location = new System.Drawing.Point(131, 188);
+            this.chkAddInjectConstructor.Location = new System.Drawing.Point(131, 190);
             this.chkAddInjectConstructor.Name = "chkAddInjectConstructor";
             this.chkAddInjectConstructor.Size = new System.Drawing.Size(187, 17);
             this.chkAddInjectConstructor.TabIndex = 55;
@@ -108,6 +109,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.chkUseGenerics);
             this.groupBox1.Controls.Add(this.groupBox2);
             this.groupBox1.Controls.Add(this.chkUseInterface);
             this.groupBox1.Controls.Add(this.label1);
@@ -125,33 +127,6 @@
             this.groupBox1.TabIndex = 60;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Entity settings";
-            // 
-            // chkUseInterface
-            // 
-            this.chkUseInterface.AutoSize = true;
-            this.chkUseInterface.Location = new System.Drawing.Point(131, 161);
-            this.chkUseInterface.Name = "chkUseInterface";
-            this.chkUseInterface.Size = new System.Drawing.Size(89, 17);
-            this.chkUseInterface.TabIndex = 63;
-            this.chkUseInterface.Text = "Use interface";
-            this.chkUseInterface.UseVisualStyleBackColor = true;
-            this.chkUseInterface.CheckedChanged += new System.EventHandler(this.chkUseInterface_CheckedChanged);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(44, 133);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(67, 13);
-            this.label1.TabIndex = 61;
-            this.label1.Text = "Output Path:";
-            // 
-            // txtOutputPath
-            // 
-            this.txtOutputPath.Location = new System.Drawing.Point(131, 130);
-            this.txtOutputPath.Name = "txtOutputPath";
-            this.txtOutputPath.Size = new System.Drawing.Size(406, 20);
-            this.txtOutputPath.TabIndex = 60;
             // 
             // groupBox2
             // 
@@ -171,6 +146,42 @@
             this.txtNamespaces.Name = "txtNamespaces";
             this.txtNamespaces.Size = new System.Drawing.Size(267, 88);
             this.txtNamespaces.TabIndex = 0;
+            // 
+            // chkUseInterface
+            // 
+            this.chkUseInterface.AutoSize = true;
+            this.chkUseInterface.Location = new System.Drawing.Point(131, 168);
+            this.chkUseInterface.Name = "chkUseInterface";
+            this.chkUseInterface.Size = new System.Drawing.Size(89, 17);
+            this.chkUseInterface.TabIndex = 63;
+            this.chkUseInterface.Text = "Use interface";
+            this.chkUseInterface.UseVisualStyleBackColor = true;
+            this.chkUseInterface.CheckedChanged += new System.EventHandler(this.chkUseInterface_CheckedChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(44, 142);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(67, 13);
+            this.label1.TabIndex = 61;
+            this.label1.Text = "Output Path:";
+            // 
+            // txtOutputPath
+            // 
+            this.txtOutputPath.Location = new System.Drawing.Point(131, 139);
+            this.txtOutputPath.Name = "txtOutputPath";
+            this.txtOutputPath.Size = new System.Drawing.Size(406, 20);
+            this.txtOutputPath.TabIndex = 60;
+            // 
+            // chkUseGenerics
+            // 
+            this.chkUseGenerics.Location = new System.Drawing.Point(131, 44);
+            this.chkUseGenerics.Name = "chkUseGenerics";
+            this.chkUseGenerics.Size = new System.Drawing.Size(121, 37);
+            this.chkUseGenerics.TabIndex = 68;
+            this.chkUseGenerics.Text = "Use generics for inheritance";
+            this.chkUseGenerics.UseVisualStyleBackColor = true;
             // 
             // EntityUserControl
             // 
@@ -202,5 +213,6 @@
         private System.Windows.Forms.CheckBox chkUseInterface;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.TextBox txtNamespaces;
+        private System.Windows.Forms.CheckBox chkUseGenerics;
     }
 }

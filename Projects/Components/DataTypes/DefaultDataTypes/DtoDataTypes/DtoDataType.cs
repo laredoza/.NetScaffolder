@@ -57,6 +57,8 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.DtoDataTypes
         /// </summary>
         public bool AddInjectConstructor { get; set; }
 
+        public bool UseGenerics { get; set; } = false;
+
         /// <summary>
         ///     Gets the dto name.
         /// </summary>
@@ -140,7 +142,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.DtoDataTypes
 
                 if (!string.IsNullOrEmpty(this.InheritFrom))
                 {
-                    inherit = $": {this.InheritFrom}";
+                    inherit = UseGenerics ? $": {this.InheritFrom}<{this.DtoNameFull}>" : $": {this.InheritFrom}";
                 }
 
                 if (this.UseInterface)
@@ -183,6 +185,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.DtoDataTypes
                     this.InheritFrom = dto.InheritFrom;
                     this.UseInterface = dto.UseInterface;
                     this.AddInjectConstructor = dto.AddInjectConstructor;
+                    this.UseGenerics = dto.UseGenerics;
 
                     this.AdditionalNamespaces.Clear();
                     this.AdditionalNamespaces.AddRange(dto.AdditionalNamespaces);

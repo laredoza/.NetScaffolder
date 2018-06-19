@@ -108,6 +108,8 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.EntityDataTypes
         /// </summary>
         public string OutputPath { get; set; }
 
+        public bool UseGenerics { get; set; } = false;
+
         /// <summary>
         ///     Gets the transform inherit from.
         /// </summary>
@@ -120,7 +122,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.EntityDataTypes
 
                 if (!string.IsNullOrEmpty(this.InheritFrom))
                 {
-                    inherit = $": {this.InheritFrom}";
+                    inherit = UseGenerics ? $": {this.InheritFrom}<{this.EntityName}>" : $": {this.InheritFrom}";
                 }
 
                 if (this.UseInterface)
@@ -171,6 +173,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.EntityDataTypes
                     this.InheritFrom = entity.InheritFrom;
                     this.UseInterface = entity.UseInterface;
                     this.AddInjectConstructor = entity.AddInjectConstructor;
+                    this.UseGenerics = entity.UseGenerics;
 
                     this.AdditionalNamespaces.Clear();
                     this.AdditionalNamespaces.AddRange(entity.AdditionalNamespaces);

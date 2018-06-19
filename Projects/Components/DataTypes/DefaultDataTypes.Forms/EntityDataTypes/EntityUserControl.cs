@@ -167,6 +167,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.EntityDat
             (this.DataType as EntityDataType).OutputPath = this.txtOutputPath.Text;
             (this.DataType as EntityDataType).AddInjectConstructor = this.chkAddInjectConstructor.Checked;
             (this.DataType as EntityDataType).UseInterface = this.chkUseInterface.Checked;
+            (this.DataType as EntityDataType).UseGenerics = this.chkUseGenerics.Checked;
 
             this.DataType.AdditionalNamespaces.Clear();
             this.DataType.AdditionalNamespaces.AddRange(this.txtNamespaces.Lines);
@@ -185,6 +186,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.EntityDat
             this.txtOutputPath.Text = (this.DataType as EntityDataType).OutputPath;
             this.chkAddInjectConstructor.Checked = (this.DataType as EntityDataType).AddInjectConstructor;
             this.chkUseInterface.Checked = (this.DataType as EntityDataType).UseInterface;
+            this.chkUseGenerics.Checked = (this.DataType as EntityDataType).UseGenerics;
 
             this.txtNamespaces.Lines = this.DataType.AdditionalNamespaces.ToArray();
         }

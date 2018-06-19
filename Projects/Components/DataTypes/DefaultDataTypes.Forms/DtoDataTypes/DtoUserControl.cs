@@ -167,6 +167,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.DtoDataTy
             (this.DataType as DtoDataType).OutputPath = this.txtOutputPath.Text;
             (this.DataType as DtoDataType).AddInjectConstructor = this.chkAddInjectConstructor.Checked;
             (this.DataType as DtoDataType).UseInterface = this.chkUseInterface.Checked;
+            (this.DataType as DtoDataType).UseGenerics = this.chkUseGenerics.Checked;
             (this.DataType as DtoDataType).PostFix = this.txtPostFix.Text;
 
             this.DataType.AdditionalNamespaces.Clear();
@@ -187,10 +188,16 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.DtoDataTy
             this.txtPostFix.Text = (this.DataType as DtoDataType).PostFix;
             this.chkAddInjectConstructor.Checked = (this.DataType as DtoDataType).AddInjectConstructor;
             this.chkUseInterface.Checked = (this.DataType as DtoDataType).UseInterface;
+            this.chkUseGenerics.Checked = (this.DataType as DtoDataType).UseGenerics;
 
             this.txtNamespaces.Lines = this.DataType.AdditionalNamespaces.ToArray();
         }
 
         #endregion
+
+        private void groupBox2_Enter(object sender, EventArgs e)
+        {
+
+        }
     }
 }
