@@ -54,12 +54,12 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.StructureMapDat
         [XmlIgnore]
         public string FullNamespace => $"{this.BaseNamespace}.{this.Namespace}";
 
-        public string Namespace { get; set; } = "Registry";
+        public string Namespace { get; set; } = "Register";
 
         /// <summary>
         ///     Gets or sets the output folder.
         /// </summary>
-        public string OutputFolder { get; set; } = "Registry";
+        public string OutputFolder { get; set; } = "Register";
 
         /// <summary>
         ///     Gets or sets the output path.
@@ -86,6 +86,8 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.StructureMapDat
                 if (dt != null)
                 {
                     this.Namespace = dt.Namespace;
+                    this.OutputFolder = dt.OutputFolder;
+                    this.OutputPath = dt.OutputPath;
 
                     this.AdditionalNamespaces.Clear();
                     this.AdditionalNamespaces.AddRange(dt.AdditionalNamespaces);
