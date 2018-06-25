@@ -57,7 +57,7 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.NHibernate
         /// <summary>
         /// The parent folder.
         /// </summary>
-        public string ParentFolder => "NHibernate";
+        public string ParentFolder => "NHib";
 
         /// <summary>
         /// The prefix.
