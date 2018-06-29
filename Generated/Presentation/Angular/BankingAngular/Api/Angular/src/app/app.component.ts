@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http'
 import { DataService } from "../services/data.services";
-//import DataService = Dataservices.DataService;
+
+
 
 @Component({
   selector: 'app-root',
