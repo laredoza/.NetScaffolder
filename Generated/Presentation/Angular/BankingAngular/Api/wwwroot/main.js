@@ -57,6 +57,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AppComponent", function() { return AppComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/http */ "./node_modules/@angular/http/fesm5/http.js");
+/* harmony import */ var _services_data_services__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../services/data.services */ "./src/services/data.services.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -68,14 +69,18 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 };
 
 
+
+//import DataService = Dataservices.DataService;
 var AppComponent = /** @class */ (function () {
-    function AppComponent(_httpService) {
-        this._httpService = _httpService;
+    function AppComponent(httpService) {
+        this.httpService = httpService;
         this.apiValues = [];
     }
     AppComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this._httpService.get('/api/values').subscribe(function (values) {
+        var dataService = new _services_data_services__WEBPACK_IMPORTED_MODULE_2__["DataService"](this.httpService);
+        console.log("Data Service Call Result:" + dataService.returnValues());
+        this.httpService.get('/api/values').subscribe(function (values) {
             _this.apiValues = values.json();
         });
     };
@@ -193,6 +198,34 @@ if (_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].produc
 }
 Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformBrowserDynamic"])().bootstrapModule(_app_app_module__WEBPACK_IMPORTED_MODULE_2__["AppModule"])
     .catch(function (err) { return console.log(err); });
+
+
+/***/ }),
+
+/***/ "./src/services/data.services.ts":
+/*!***************************************!*\
+  !*** ./src/services/data.services.ts ***!
+  \***************************************/
+/*! exports provided: DataService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DataService", function() { return DataService; });
+var DataService = /** @class */ (function () {
+    function DataService(httpService) {
+        this.apiValues = [];
+        this.httpService = httpService;
+    }
+    DataService.prototype.returnValues = function () {
+        this.httpService.get('/api/values').toPromise().then(function (values) {
+            //this.apiValues = values.json() as string[];
+            return values.json();
+        });
+    };
+    return DataService;
+}());
+
 
 
 /***/ }),
