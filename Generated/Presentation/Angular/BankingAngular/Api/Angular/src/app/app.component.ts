@@ -1,16 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http'
+import { DataService } from "../services/data.services";
+
+
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  constructor(private _httpService: Http) { }
+  constructor(private httpService: Http) { }
   apiValues: string[] = [];
   ngOnInit() {
-    this._httpService.get('/api/values').subscribe(values => {
-      this.apiValues = values.json() as string[];
+    let dataService: DataService = new DataService(this.httpService);
+    dataService.returnValues().then((data) => {
+      this.apiValues = data;
+    }).catch((error) => {
+      console.log("An unknown error occured while returning values: " + error);
     });
   }
 }
