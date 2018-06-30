@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.domainMenuUserControl1 = new DomainModelMenuUserControl();
+            this.domainMenuUserControl1 = new DotNetScaffolder.Presentation.Forms.Controls.Model.DomainModelMenuUserControl();
             this.PanelConfig = new System.Windows.Forms.Panel();
             this.btnClose = new System.Windows.Forms.Button();
             this.btnRefresh = new System.Windows.Forms.Button();
@@ -49,7 +49,7 @@
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 458F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 458F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1059, 458);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1059, 481);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
             // domainMenuUserControl1
@@ -60,7 +60,7 @@
             this.domainMenuUserControl1.Name = "domainMenuUserControl1";
             this.domainMenuUserControl1.OutputPath = null;
             this.domainMenuUserControl1.ParentConfigControl = null;
-            this.domainMenuUserControl1.Size = new System.Drawing.Size(273, 454);
+            this.domainMenuUserControl1.Size = new System.Drawing.Size(276, 477);
             this.domainMenuUserControl1.TabIndex = 6;
             // 
             // PanelConfig
@@ -71,12 +71,12 @@
             this.PanelConfig.Location = new System.Drawing.Point(280, 2);
             this.PanelConfig.Margin = new System.Windows.Forms.Padding(2);
             this.PanelConfig.Name = "PanelConfig";
-            this.PanelConfig.Size = new System.Drawing.Size(777, 454);
+            this.PanelConfig.Size = new System.Drawing.Size(777, 477);
             this.PanelConfig.TabIndex = 7;
             // 
             // btnClose
             // 
-            this.btnClose.Location = new System.Drawing.Point(982, 464);
+            this.btnClose.Location = new System.Drawing.Point(984, 507);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(75, 23);
             this.btnClose.TabIndex = 2;
@@ -86,7 +86,7 @@
             // 
             // btnRefresh
             // 
-            this.btnRefresh.Location = new System.Drawing.Point(820, 464);
+            this.btnRefresh.Location = new System.Drawing.Point(822, 507);
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(75, 23);
             this.btnRefresh.TabIndex = 3;
@@ -96,7 +96,7 @@
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(901, 464);
+            this.btnSave.Location = new System.Drawing.Point(903, 507);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 4;
@@ -104,19 +104,19 @@
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // DomainTableForm
+            // DomainModelForm
             // 
             this.AcceptButton = this.btnSave;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1059, 499);
+            this.ClientSize = new System.Drawing.Size(1070, 542);
             this.ControlBox = false;
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.tableLayoutPanel1);
             this.DoubleBuffered = true;
-            this.Name = "DomainTableForm";
+            this.Name = "DomainModelForm";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Domain";
