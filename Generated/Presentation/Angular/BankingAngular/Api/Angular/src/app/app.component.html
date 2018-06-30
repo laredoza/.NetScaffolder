@@ -1,6 +1,88 @@
-<h1>Application says what?</h1>
+<!--<h1>Application says what?</h1>
 <ul>
   <li *ngFor="let value of apiValues">{{value}}</li>
 </ul>
 
-<app-hero-form></app-hero-form>
+<app-hero-form></app-hero-form>-->
+
+<!--<div>
+  <mat-toolbar color="primary">
+    <span><mat-icon>mood</mat-icon></span>
+
+    <span>Yay, Material in Angular 2!</span>
+
+    <button mat-icon-button [mat-menu-trigger-for]="menu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+  </mat-toolbar>
+  <mat-menu x-position="before" #menu="matMenu">
+    <button mat-menu-item>Option 1</button>
+    <button mat-menu-item>Option 2</button>
+  </mat-menu>
+
+  <mat-card>
+    <button mat-button>All</button>
+    <button mat-raised-button>Of</button>
+    <button mat-raised-button color="primary">The</button>
+    <button mat-raised-button color="accent">Buttons</button>
+  </mat-card>
+
+  <span class="done">
+    <button mat-fab>
+      <mat-icon>check circle</mat-icon>
+    </button>
+  </span>
+</div>-->
+
+<mat-sidenav-container fullscreen>
+
+  <mat-sidenav #start>
+    <mat-nav-list>
+
+      <a mat-list-item routerLink="/">
+        <mat-icon>library_books</mat-icon>
+        <span>Hero</span>
+      </a>
+
+      <a mat-list-item routerLink="bankAccount">
+        <mat-icon>account_balance</mat-icon>
+        <span>Bank Account</span>
+      </a>
+      <a mat-list-item routerLink="books">
+        <mat-icon>library_books</mat-icon>
+        <span>Books</span>
+      </a>
+      <a mat-list-item routerLink="countries">
+        <mat-icon>question_answer</mat-icon>
+        <span>Countries</span>
+      </a>
+      <a mat-list-item routerLink="customers">
+        <mat-icon>contacts</mat-icon>
+        <span>Customers</span>
+      </a>
+      <a mat-list-item routerLink="software">
+        <mat-icon>web</mat-icon>
+        <span>Software</span>
+      </a>
+      <a mat-list-item>
+        <mat-icon>person_add</mat-icon>
+        <span>Register</span>
+      </a>
+      <a mat-list-item routerLink="login">
+        <mat-icon>account_circle</mat-icon>
+        <span>Login</span>
+      </a>
+
+    </mat-nav-list>
+
+  </mat-sidenav>
+
+  <mat-toolbar color="primary">
+    <button mat-icon-button (click)="start.open('mouse')">
+      <mat-icon>menu</mat-icon>
+    </button>
+  </mat-toolbar>
+
+  <router-outlet></router-outlet>
+
+</mat-sidenav-container>
