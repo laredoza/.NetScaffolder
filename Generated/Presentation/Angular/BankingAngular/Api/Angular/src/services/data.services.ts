@@ -1,4 +1,5 @@
 import { Http } from '@angular/http'
+import { Hero } from '../app/hero';
 
 export class DataService {
   httpService: Http;
@@ -18,6 +19,19 @@ export class DataService {
         reject(error);
       });
 
+    });
+  }
+
+  public returnHero(): Promise<Hero> {
+
+    return new Promise((resolve, reject) => {
+      //this.httpService.get('/api/values').toPromise().then(values => {
+      //  resolve(values.json() as Hero);
+      //}).catch((error) => {
+      //  reject(error);
+      //});
+      resolve(new Hero(18, 'Dr IQ', 'Really Smart', 'Chuck Overstreet'));
+    //);
     });
   }
 }
