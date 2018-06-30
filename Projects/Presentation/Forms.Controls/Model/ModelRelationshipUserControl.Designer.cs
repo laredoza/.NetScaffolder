@@ -30,6 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txtRelationshipAlias = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.LblRelationship = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.ComboBoxRelatedColumn = new System.Windows.Forms.ComboBox();
@@ -43,8 +45,6 @@
             this.label16 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.ErrorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.label2 = new System.Windows.Forms.Label();
-            this.txtRelationshipAlias = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider1)).BeginInit();
             this.SuspendLayout();
@@ -72,6 +72,23 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Relationship Details";
             // 
+            // txtRelationshipAlias
+            // 
+            this.txtRelationshipAlias.Location = new System.Drawing.Point(125, 42);
+            this.txtRelationshipAlias.Name = "txtRelationshipAlias";
+            this.txtRelationshipAlias.Size = new System.Drawing.Size(300, 20);
+            this.txtRelationshipAlias.TabIndex = 58;
+            this.txtRelationshipAlias.TextChanged += new System.EventHandler(this.txtRelationshipAlias_TextChanged);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(26, 45);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(93, 13);
+            this.label2.TabIndex = 57;
+            this.label2.Text = "Relationship Alias:";
+            // 
             // LblRelationship
             // 
             this.LblRelationship.AutoSize = true;
@@ -98,7 +115,7 @@
             "Parent"});
             this.ComboBoxRelatedColumn.Location = new System.Drawing.Point(125, 168);
             this.ComboBoxRelatedColumn.Name = "ComboBoxRelatedColumn";
-            this.ComboBoxRelatedColumn.Size = new System.Drawing.Size(121, 21);
+            this.ComboBoxRelatedColumn.Size = new System.Drawing.Size(300, 21);
             this.ComboBoxRelatedColumn.TabIndex = 54;
             this.ComboBoxRelatedColumn.Text = "Id";
             this.ComboBoxRelatedColumn.SelectedIndexChanged += new System.EventHandler(this.ComboBoxRelatedColumn_SelectedIndexChanged);
@@ -110,7 +127,7 @@
             "Parent"});
             this.ComboBoxRelatedTable.Location = new System.Drawing.Point(125, 141);
             this.ComboBoxRelatedTable.Name = "ComboBoxRelatedTable";
-            this.ComboBoxRelatedTable.Size = new System.Drawing.Size(121, 21);
+            this.ComboBoxRelatedTable.Size = new System.Drawing.Size(300, 21);
             this.ComboBoxRelatedTable.TabIndex = 53;
             this.ComboBoxRelatedTable.Text = "Users";
             this.ComboBoxRelatedTable.SelectedIndexChanged += new System.EventHandler(this.ComboBoxRelatedTable_SelectedIndexChanged);
@@ -123,7 +140,7 @@
             "RoleName"});
             this.ComboBoxColumn.Location = new System.Drawing.Point(125, 113);
             this.ComboBoxColumn.Name = "ComboBoxColumn";
-            this.ComboBoxColumn.Size = new System.Drawing.Size(121, 21);
+            this.ComboBoxColumn.Size = new System.Drawing.Size(300, 21);
             this.ComboBoxColumn.TabIndex = 52;
             this.ComboBoxColumn.SelectedIndexChanged += new System.EventHandler(this.ComboBoxColumn_SelectedIndexChanged);
             // 
@@ -143,7 +160,7 @@
             "Parent"});
             this.ComboBoxRelationshipType.Location = new System.Drawing.Point(125, 68);
             this.ComboBoxRelationshipType.Name = "ComboBoxRelationshipType";
-            this.ComboBoxRelationshipType.Size = new System.Drawing.Size(121, 21);
+            this.ComboBoxRelationshipType.Size = new System.Drawing.Size(300, 21);
             this.ComboBoxRelationshipType.TabIndex = 49;
             this.ComboBoxRelationshipType.SelectedIndexChanged += new System.EventHandler(this.ComboBoxRelationshipType_SelectedIndexChanged);
             // 
@@ -195,23 +212,6 @@
             // ErrorProvider1
             // 
             this.ErrorProvider1.ContainerControl = this;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(26, 45);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(93, 13);
-            this.label2.TabIndex = 57;
-            this.label2.Text = "Relationship Alias:";
-            // 
-            // txtRelationshipAlias
-            // 
-            this.txtRelationshipAlias.Location = new System.Drawing.Point(125, 42);
-            this.txtRelationshipAlias.Name = "txtRelationshipAlias";
-            this.txtRelationshipAlias.Size = new System.Drawing.Size(121, 20);
-            this.txtRelationshipAlias.TabIndex = 58;
-            this.txtRelationshipAlias.TextChanged += new System.EventHandler(this.txtRelationshipAlias_TextChanged);
             // 
             // ModelRelationshipUserControl
             // 
