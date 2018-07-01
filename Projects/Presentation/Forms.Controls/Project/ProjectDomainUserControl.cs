@@ -293,5 +293,19 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project
         }
 
         #endregion
+
+        public bool ManageDataTypesEnabled {
+            get
+            {
+                return this.BtnTables.Enabled;
+            }
+            set
+            {
+                if (this.BtnTables.Enabled != value)
+                {
+                    this.BtnTables.Enabled = value;
+                }
+            }
+        }
     }
 }

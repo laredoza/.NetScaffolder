@@ -668,6 +668,14 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project
             if (!this.Loading)
             {
                 SelectedPackage = ComboBoxPackages.SelectedItem as Package;
+                if (this.SelectedPackage.Templates.Count == 0)
+                {
+                    this.ProjectDomainUserControl.ManageDataTypesEnabled = false;
+                }
+                else
+                {
+                    this.ProjectDomainUserControl.ManageDataTypesEnabled = true;
+                }
             }
         }
 
