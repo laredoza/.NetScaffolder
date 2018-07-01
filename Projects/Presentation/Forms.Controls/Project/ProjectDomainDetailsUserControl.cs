@@ -778,5 +778,23 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project
         }
 
         #endregion
+
+        private void TextBoxName_TextChanged(object sender, EventArgs e)
+        {
+            if (!this.Loading)
+            {
+                this.DomainName = this.TextBoxName.Text.Trim();
+
+                if (this.ProjectDomainUserControl != null)
+                {
+                    this.ProjectDomainUserControl.UpdateselectedDomainName(this.DomainName);
+                }
+            }
+        }
+
+        public ProjectDomainUserControl ProjectDomainUserControl { get; set; }
+
+
+
     }
 }

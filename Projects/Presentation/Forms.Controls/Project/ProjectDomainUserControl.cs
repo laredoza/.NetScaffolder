@@ -156,7 +156,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project
         /// </param>
         protected virtual void OnSelectedIndexChanged(SelectedEventArgs e)
         {
-            if (!this.loading)
+            if (!loading)
             {
                 EventHandler<SelectedEventArgs> handler = SelectedIndexChanged;
 
@@ -164,7 +164,6 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project
                 {
                     handler(this, e);
                 }
-
             }
         }
 
@@ -174,6 +173,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project
         /// <param name="sender">
         ///     The sender.
         /// </param>
+
         /// <param name="e">
         ///     The e.
         /// </param>
@@ -239,13 +239,13 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project
         /// </param>
         private void DomainsListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (!this.loading)
+            if (!loading)
             {
                 if (ApplicationService != null && ApplicationService.ProjectDefinition != null
                                                && DomainsListBox.SelectedItem != null)
                 {
                     SelectedEventArgs eventArgs =
-                        new SelectedEventArgs { Id = (DomainsListBox.SelectedItem as DomainDefinition).Id };
+                        new SelectedEventArgs {Id = (DomainsListBox.SelectedItem as DomainDefinition).Id};
                     OnSelectedIndexChanged(eventArgs);
                 }
             }
@@ -276,6 +276,20 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project
             ButtonDelete.Enabled = EnableDeleteButton;
 
             Logger.Trace("Completed UpdateDataSource()");
+        }
+
+        public void UpdateselectedDomainName(string name)
+        {
+            DomainDefinition definition = this.DomainsListBox.SelectedItem as DomainDefinition;
+
+            DomainsListBox.DataSource = null;
+
+            DomainsListBox.DataSource = ApplicationService.ProjectDefinition.Domains;
+            DomainsListBox.DisplayMember = "Name";
+            DomainsListBox.ValueMember = "Id";
+
+            this.DomainsListBox.SelectedItem = definition;
+            //definition.Name = name;
         }
 
         #endregion

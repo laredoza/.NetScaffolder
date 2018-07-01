@@ -193,6 +193,8 @@ namespace DotNetScaffolder.Presentation.Forms
                     this.projectDomainDetailsUserControl1.Packages =
                         this.applicationConfiguration.ApplicationSettings.Packages;
                     this.projectDomainDetailsUserControl1.ApplicationService = this.applicationService;
+                    this.projectDomainDetailsUserControl1.ProjectDomainUserControl = this.ProjectDomainUserControl1;
+
                     this.tabControl1.Enabled = true;
                     this.BtnSave.Enabled = true;
                     this.LblPath.Text = this.ModelPath;
