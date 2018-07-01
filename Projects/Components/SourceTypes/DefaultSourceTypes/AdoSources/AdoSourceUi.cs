@@ -149,22 +149,15 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
         /// <param name="displayMessageOnSucceed">
         /// The display Message On Succeed.
         /// </param>
-        public void TestData(object parameters, bool displayMessageOnSucceed)
+        public bool TestData(object parameters, bool displayMessageOnSucceed)
         {
+            bool result = false;
+
             Logger.Trace("Started TestData()");
             this.ListViewDrivers.Items.Clear();
 
             if (this.SourceType.Test(this.Options))
             {
-                if (displayMessageOnSucceed)
-                {
-                    MessageBox.Show(
-                        "Connected to Sql Server",
-                        "Test",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Information);
-                }
-
                 this.SourceType.ReturnSchemas(this.Options);
                 this.ListViewDrivers.Items.AddRange(this.ReturnSchemasSchemaListViewItems().ToArray());
 
@@ -178,17 +171,16 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
                         item.Checked = true;
                     }
                 }
+
+                result = true;
             }
             else
             {
-                MessageBox.Show(
-                    "Unable to Connect",
-                    "Test",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information);
+                result = false;
             }
 
             Logger.Trace("Completed TestData()");
+            return result;
         }
 
         /// <summary>

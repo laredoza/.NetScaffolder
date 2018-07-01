@@ -133,9 +133,30 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Sources
                 Thread splashthread = this.StartSplashScreen();
                 Thread.Sleep(100);
                 SplashScreen.UdpateStatusText("Loading schema information");
-                this.sourceTypeControl.TestData(this.SavePath, true);
-                Thread.Sleep(100);
-                this.CloseSplashScreen();
+
+                if (this.sourceTypeControl.TestData(this.SavePath, true))
+                {
+                    Thread.Sleep(100);
+                    this.CloseSplashScreen();
+
+                    MessageBox.Show(
+                        "Connected to Datasource",
+                        "Test",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+                }
+                else
+                {
+                    Thread.Sleep(100);
+                    this.CloseSplashScreen();
+
+                    MessageBox.Show(
+                        "Failed to Connect to Datasource",
+                        "Test",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+                }
+
             }
 
             Logger.Trace("Test Button Click Completed");

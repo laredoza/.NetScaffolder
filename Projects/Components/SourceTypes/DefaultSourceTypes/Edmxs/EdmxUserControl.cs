@@ -131,23 +131,30 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.Edmxs
         /// <param name="displayMessageOnSucceed">
         /// The display Message On Succeed.
         /// </param>
-        public void TestData(object parameters, bool displayMessageOnSucceed)
+        public bool TestData(object parameters, bool displayMessageOnSucceed)
         {
             Logger.Trace("Started TestData()");
 
+            bool result = false;
+
             if (this.SourceType.Test(this.options))
             {
-                if (displayMessageOnSucceed)
-                {
-                    MessageBox.Show("Edmx Path Correct", "Test", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
+                //if (displayMessageOnSucceed)
+                //{
+                //    MessageBox.Show("Edmx Path Correct", "Test", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //}
+
+                result = true;
             }
             else
             {
                 MessageBox.Show("Edmx Path Is Incorrect", "Test", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                result = false;
             }
 
             Logger.Trace("Completed TestData()");
+
+            return result;
         }
 
         /// <summary>

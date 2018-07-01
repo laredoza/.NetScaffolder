@@ -49,7 +49,7 @@ namespace DotNetScaffolder.Components.Common.Contract.UI
         /// </param>
         void SaveData(object parameters);
 
-        void TestData(object parameters, bool displayMessageOnSucceed);
+        bool TestData(object parameters, bool displayMessageOnSucceed);
 
         #endregion
     }
