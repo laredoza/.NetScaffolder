@@ -1,22 +1,17 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ProjectDetailsUserControl.cs" company="DotnetScaffolder">
-//   MIT
-// </copyright>
-// --------------------------------------------------------------------------------------------------------------------
+﻿#region Usings
+
+using System;
+using System.Linq;
+using System.Windows.Forms;
+using Common.Logging;
+using DotNetScaffolder.Core.Common.Validation;
+using DotNetScaffolder.Mapping.MetaData.Project;
+
+#endregion
 
 namespace DotNetScaffolder.Presentation.Forms.Controls.Project
 {
     #region Usings
-
-    using System;
-    using System.Linq;
-    using System.Windows.Forms;
-
-    using Common.Logging;
-
-    using DotNetScaffolder.Core.Common.Validation;
-    using DotNetScaffolder.Mapping.MetaData.Enum;
-    using DotNetScaffolder.Mapping.MetaData.Project;
 
     #endregion
 
@@ -36,6 +31,8 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project
 
         #region Fields
 
+        private bool loading;
+
         /// <summary>
         ///     The project.
         /// </summary>
@@ -50,7 +47,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project
         /// </summary>
         public ProjectDetailsUserControl()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         #endregion
@@ -64,23 +61,23 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project
         {
             get
             {
-                if (this.Project == null)
+                if (Project == null)
                 {
                     Logger.Trace("Empty BaseNameSpace is returned as Project is null.");
                     return string.Empty;
                 }
 
-                Logger.Trace($"BaseNameSpace: {this.Project.BaseNameSpace}");
-                return this.Project.BaseNameSpace;
+                Logger.Trace($"BaseNameSpace: {Project.BaseNameSpace}");
+                return Project.BaseNameSpace;
             }
 
             set
             {
-                if (this.Project != null)
+                if (Project != null)
                 {
-                    this.Changed = true;
-                    this.Project.BaseNameSpace = value.Trim();
-                    Logger.Trace($"BaseNameSpace set to {this.Project.BaseNameSpace}");
+                    Changed = true;
+                    Project.BaseNameSpace = value.Trim();
+                    Logger.Trace($"BaseNameSpace set to {Project.BaseNameSpace}");
                 }
                 else
                 {
@@ -94,6 +91,93 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project
         /// </summary>
         public bool Changed { get; set; }
 
+        public string Company
+        {
+            get
+            {
+                if (Project == null)
+                {
+                    Logger.Trace("Company is returned empty as Project is null.");
+                    return string.Empty;
+                }
+
+                Logger.Trace($"Company: {Project.Company}");
+                return Project.Company;
+            }
+
+            set
+            {
+                if (Project != null)
+                {
+                    Changed = true;
+                    Project.Company = value.Trim();
+                    Logger.Trace($"Company is changed to {Project.Company}");
+                }
+                else
+                {
+                    Logger.Trace("Company is not changed as Project is null.");
+                }
+            }
+        }
+
+        public string HeaderText
+        {
+            get
+            {
+                if (Project == null)
+                {
+                    Logger.Trace("HeaderText is returned empty as Project is null.");
+                    return string.Empty;
+                }
+
+                Logger.Trace($"HeaderText: {Project.HeaderText}");
+                return Project.HeaderText;
+            }
+
+            set
+            {
+                if (Project != null)
+                {
+                    Changed = true;
+                    Project.HeaderText = value.Trim();
+                    Logger.Trace($"HeaderText is changed to {Project.HeaderText}");
+                }
+                else
+                {
+                    Logger.Trace("HeaderText is not changed as Project is null.");
+                }
+            }
+        }
+
+        public string License
+        {
+            get
+            {
+                if (Project == null)
+                {
+                    Logger.Trace("License is returned empty as Project is null.");
+                    return string.Empty;
+                }
+
+                Logger.Trace($"Company: {Project.License}");
+                return Project.License;
+            }
+
+            set
+            {
+                if (Project != null)
+                {
+                    Changed = true;
+                    Project.License = value.Trim();
+                    Logger.Trace($"Company is changed to {Project.License}");
+                }
+                else
+                {
+                    Logger.Trace("License is not changed as Project is null.");
+                }
+            }
+        }
+
         /// <summary>
         ///     Gets or sets the output folder.
         /// </summary>
@@ -101,23 +185,23 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project
         {
             get
             {
-                if (this.Project == null)
+                if (Project == null)
                 {
                     Logger.Trace("OutputFolder is returned empty as Project is null.");
                     return string.Empty;
                 }
 
-                Logger.Trace($"OutputFolder: {this.Project.OutputFolder}");
-                return this.Project.OutputFolder;
+                Logger.Trace($"OutputFolder: {Project.OutputFolder}");
+                return Project.OutputFolder;
             }
 
             set
             {
-                if (this.Project != null)
+                if (Project != null)
                 {
-                    this.Changed = true;
-                    this.Project.OutputFolder = value.Trim();
-                    Logger.Trace($"OutputFolder is changed to {this.Project.OutputFolder}");
+                    Changed = true;
+                    Project.OutputFolder = value.Trim();
+                    Logger.Trace($"OutputFolder is changed to {Project.OutputFolder}");
                 }
                 else
                 {
@@ -131,18 +215,15 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project
         /// </summary>
         public ProjectDefinition Project
         {
-            get
-            {
-                return this.project;
-            }
+            get { return project; }
 
             set
             {
-                this.project = value;
+                project = value;
 
-                if (!this.Changed)
+                if (!Changed)
                 {
-                    this.UpdateDataSource();
+                    UpdateDataSource();
                 }
             }
         }
@@ -158,10 +239,17 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project
         {
             Logger.Trace("Started UpdateDataSource()");
 
-            if (this.Project != null)
+            if (Project != null)
             {
-                this.TextBoxOutputFolderName.Text = this.Project.OutputFolder;
-                this.TextBoxBaseNamespace.Text = this.Project.BaseNameSpace;
+                loading = true;
+
+                TextBoxOutputFolderName.Text = Project.OutputFolder;
+                TextBoxBaseNamespace.Text = Project.BaseNameSpace;
+                TextBoxHeader.Text = Project.HeaderText;
+                TextBoxCompany.Text = Project.Company;
+                TextBoxLicense.Text = Project.License;
+
+                loading = false;
             }
             else
             {
@@ -183,30 +271,30 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project
 
             int result = 0;
 
-            if (this.Project != null)
+            if (Project != null)
             {
-                this.errorProvider1.Clear();
-                this.Project.Validate();
+                errorProvider1.Clear();
+                Project.Validate();
 
-                if (this.Project.ValidationResult.Count > 0)
+                if (Project.ValidationResult.Count > 0)
                 {
                     Validation validation = null;
 
-                    if (this.Project.ValidationResult.Any(v => v.ValidationType == ValidationType.ProjectBaseNameSpace))
+                    if (Project.ValidationResult.Any(v => v.ValidationType == ValidationType.ProjectBaseNameSpace))
                     {
-                        validation = this.Project.ValidationResult.FirstOrDefault(
+                        validation = Project.ValidationResult.FirstOrDefault(
                             v => v.ValidationType == ValidationType.ProjectBaseNameSpace);
-                        this.TextBoxBaseNamespace.Focus();
-                        this.errorProvider1.SetError(this.TextBoxBaseNamespace, validation.Description);
+                        TextBoxBaseNamespace.Focus();
+                        errorProvider1.SetError(TextBoxBaseNamespace, validation.Description);
                         result++;
                     }
 
-                    if (this.Project.ValidationResult.Any(v => v.ValidationType == ValidationType.ProjectOutputFolder))
+                    if (Project.ValidationResult.Any(v => v.ValidationType == ValidationType.ProjectOutputFolder))
                     {
-                        validation = this.Project.ValidationResult.FirstOrDefault(
+                        validation = Project.ValidationResult.FirstOrDefault(
                             v => v.ValidationType == ValidationType.ProjectOutputFolder);
-                        this.TextBoxOutputFolderName.Focus();
-                        this.errorProvider1.SetError(this.TextBoxOutputFolderName, validation.Description);
+                        TextBoxOutputFolderName.Focus();
+                        errorProvider1.SetError(TextBoxOutputFolderName, validation.Description);
                         result++;
                     }
                 }
@@ -220,37 +308,61 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project
 
         #region Other Methods
 
-        /// <summary>
-        /// The text box base namespace_ text changed.
-        /// </summary>
-        /// <param name="sender">
-        /// The sender.
-        /// </param>
-        /// <param name="e">
-        /// The e.
-        /// </param>
-        private void TextBoxBaseNamespace_TextChanged(object sender, EventArgs e)
+        private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            if (this.Project != null)
+            if (Project != null && !loading)
             {
-                this.Project.BaseNameSpace = this.TextBoxBaseNamespace.Text;
+                Project.Company = TextBoxCompany.Text;
             }
         }
 
         /// <summary>
-        /// The text box output folder name_ text changed.
+        ///     The text box base namespace_ text changed.
         /// </summary>
         /// <param name="sender">
-        /// The sender.
+        ///     The sender.
         /// </param>
         /// <param name="e">
-        /// The e.
+        ///     The e.
+        /// </param>
+        private void TextBoxBaseNamespace_TextChanged(object sender, EventArgs e)
+        {
+            if (Project != null && !loading)
+            {
+                Project.BaseNameSpace = TextBoxBaseNamespace.Text;
+            }
+        }
+
+        private void TextBoxHeader_TextChanged(object sender, EventArgs e)
+        {
+            if (Project != null && !loading)
+            {
+                Project.HeaderText = TextBoxHeader.Text;
+            }
+        }
+
+        private void TextBoxLicense_TextChanged(object sender, EventArgs e)
+        {
+            if (Project != null && !loading)
+            {
+                Project.License = TextBoxLicense.Text;
+            }
+        }
+
+        /// <summary>
+        ///     The text box output folder name_ text changed.
+        /// </summary>
+        /// <param name="sender">
+        ///     The sender.
+        /// </param>
+        /// <param name="e">
+        ///     The e.
         /// </param>
         private void TextBoxOutputFolderName_TextChanged(object sender, EventArgs e)
         {
-            if (this.Project != null)
+            if (Project != null && !loading)
             {
-                this.Project.OutputFolder = this.TextBoxOutputFolderName.Text;
+                Project.OutputFolder = TextBoxOutputFolderName.Text;
             }
         }
 
