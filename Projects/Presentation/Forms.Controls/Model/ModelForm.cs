@@ -1,22 +1,18 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ModelForm.cs" company="DotnetScaffolder">
-//   MIT
-// </copyright>
-// --------------------------------------------------------------------------------------------------------------------
+﻿#region Usings
+
+using System;
+using System.Windows.Forms;
+using Common.Logging;
+using DotNetScaffolder.Components.Common.Contract;
+using DotNetScaffolder.Components.Common.Contract.UI;
+using DotNetScaffolder.Core.Configuration;
+using DotNetScaffolder.Mapping.MetaData.Domain;
+
+#endregion
 
 namespace DotNetScaffolder.Presentation.Forms.Controls.Model
 {
     #region Usings
-
-    using System;
-    using System.Windows.Forms;
-
-    using Common.Logging;
-
-    using DotNetScaffolder.Components.Common.Contract;
-    using DotNetScaffolder.Components.Common.Contract.UI;
-    using DotNetScaffolder.Core.Configuration;
-    using DotNetScaffolder.Mapping.MetaData.Domain;
 
     #endregion
 
@@ -41,6 +37,8 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         /// </summary>
         private DomainDefinition dataSource;
 
+        private bool loading;
+
         /// <summary>
         ///     The source type.
         /// </summary>
@@ -60,7 +58,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         /// </summary>
         public ModelForm()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         #endregion
@@ -72,15 +70,12 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         /// </summary>
         public DomainDefinition DataSource
         {
-            get
-            {
-                return this.dataSource;
-            }
+            get { return dataSource; }
 
             set
             {
-                this.dataSource = value;
-                this.UpdateDataSource();
+                dataSource = value;
+                UpdateDataSource();
             }
         }
 
@@ -94,21 +89,21 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         #region Other Methods
 
         /// <summary>
-        /// The btn close_ click.
+        ///     The btn close_ click.
         /// </summary>
         /// <param name="sender">
-        /// The sender.
+        ///     The sender.
         /// </param>
         /// <param name="e">
-        /// The e.
+        ///     The e.
         /// </param>
         private void BtnClose_Click(object sender, EventArgs e)
         {
-            if (this.ModelFormUserControl1.CurrentlySelectedControl == null
-                || (this.ModelFormUserControl1.CurrentlySelectedControl != null
-                    && this.ModelFormUserControl1.CurrentlySelectedControl.Validate().Count == 0))
+            if (ModelFormUserControl1.CurrentlySelectedControl == null
+                || (ModelFormUserControl1.CurrentlySelectedControl != null
+                    && ModelFormUserControl1.CurrentlySelectedControl.Validate().Count == 0))
             {
-                this.Close();
+                Close();
             }
         }
 
@@ -119,11 +114,15 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         {
             Logger.Trace("Started UpdateDataSource()");
 
-            if (this.DataSource != null)
+            if (DataSource != null)
             {
-                this.ModelFormUserControl1.SavePath = this.SavePath;
-                this.sourceType = ScaffoldConfig.ReturnSourceType(this.DataSource.SourceTypeId);
-                this.ModelFormUserControl1.DataSource = this.DataSource;
+                this.loading = true;
+
+                ModelFormUserControl1.SavePath = SavePath;
+                sourceType = ScaffoldConfig.ReturnSourceType(DataSource.SourceTypeId);
+                ModelFormUserControl1.DataSource = DataSource;
+
+                this.loading = false;
             }
             else
             {

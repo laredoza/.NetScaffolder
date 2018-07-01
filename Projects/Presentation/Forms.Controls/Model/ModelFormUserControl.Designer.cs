@@ -69,7 +69,6 @@
             this.DomainTreeView.TabIndex = 9;
             this.DomainTreeView.BeforeSelect += new System.Windows.Forms.TreeViewCancelEventHandler(this.DomainTreeView_BeforeSelect);
             this.DomainTreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.DomainTreeView_AfterSelect);
-            this.DomainTreeView.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.DomainTreeView_NodeMouseClick);
             // 
             // ModelFormUserControl
             // 
