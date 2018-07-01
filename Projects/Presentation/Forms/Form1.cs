@@ -36,7 +36,7 @@ namespace DotNetScaffolder.Presentation.Forms
         /// <summary>
         ///     The application service.
         /// </summary>
-        private IProjectDefinitionApplicationService applicationService;
+        private IProjectDefinitionApplicationService projectApplicationService;
 
         /// <summary>
         ///     The model path.
@@ -129,12 +129,59 @@ namespace DotNetScaffolder.Presentation.Forms
             if (this.ProjectDetailsUserControl1.Validation() == 0)
             {
                 // Save
-                this.applicationService.Save();
-            }
+                try
+                {
+                    this.projectApplicationService.Save();
 
-            if (this.TemplateManagementUserControl1.Validation() == 0)
+                    if (this.TemplateManagementUserControl1.Validation() == 0)
+                    {
+                        try
+                        {
+                            this.applicationConfiguration.Save();
+
+                            MessageBox.Show(
+                                $"Saved Data",
+                                "Failed Saving Application Settings",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Information);
+                        }
+                        catch (Exception exception)
+                        {
+                            MessageBox.Show(
+                                $"Error Details:{exception.Message}",
+                                "Failed Saving Application Settings",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Error);
+                        }
+
+                    }
+                    else
+                    {
+                        MessageBox.Show(
+                            "There are failed validation errors",
+                            "Failed Saving Application Settings",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Error);
+                    }
+
+                }
+                catch (Exception exception)
+                {
+                    MessageBox.Show(
+                        $"Error Details:{exception.Message}",
+                        "Failed Saving Project Settings",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                }
+
+            }
+            else
             {
-                this.applicationConfiguration.Save();
+                MessageBox.Show(
+                    "There are failed validation errors",
+                    "Failed Saving Project Settings",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
             }
         }
 
@@ -150,11 +197,11 @@ namespace DotNetScaffolder.Presentation.Forms
                 {
                     FilePersistenceOptions options = new FilePersistenceOptions { Path = this.ModelPath };
 
-                    this.applicationService =
+                    this.projectApplicationService =
                         new ProjectDefinitionApplicationServiceFile { FilePersistenceOptions = options };
-                    this.applicationService.Load();
-                    this.applicationService.ProjectDefinition.ModelPath = options.Path;
-                    this.applicationService.ProjectDefinition.Version = 1;
+                    this.projectApplicationService.Load();
+                    this.projectApplicationService.ProjectDefinition.ModelPath = options.Path;
+                    this.projectApplicationService.ProjectDefinition.Version = 1;
 
                     FilePersistenceOptions configOptions = new FilePersistenceOptions { Path = this.ConfigPath };
                     this.applicationConfiguration =
@@ -165,15 +212,15 @@ namespace DotNetScaffolder.Presentation.Forms
                     this.TemplateManagementUserControl1.DataSource =
                         this.applicationConfiguration.ApplicationSettings.Templates[0];
 
-                    if (this.applicationService.ProjectDefinition.Domains.Count > 0)
+                    if (this.projectApplicationService.ProjectDefinition.Domains.Count > 0)
                     {
                         // By default use the first domain
                         this.packageUserControl1.SelectedPackage =
-                            this.applicationService.ProjectDefinition.Domains[0].Package;
+                            this.projectApplicationService.ProjectDefinition.Domains[0].Package;
                         this.packageUserControl1.DataSource =
                             this.applicationConfiguration.ApplicationSettings.Packages[0];
                         this.packageUserControl1.DomainDefinition =
-                            this.applicationService.ProjectDefinition.Domains[0];
+                            this.projectApplicationService.ProjectDefinition.Domains[0];
                     }
 
                     if (this.applicationConfiguration.ApplicationSettings.Templates.Count > 0)
@@ -182,17 +229,17 @@ namespace DotNetScaffolder.Presentation.Forms
                             this.applicationConfiguration.ApplicationSettings.Templates;
                     }
 
-                    this.TemplateManagementUserControl1.ProjectDefinition = this.applicationService.ProjectDefinition;
+                    this.TemplateManagementUserControl1.ProjectDefinition = this.projectApplicationService.ProjectDefinition;
                     this.TemplateManagementUserControl1.Packages = this.applicationConfiguration.ApplicationSettings
                         .Packages[0].ReturnPackageItems();
 
-                    this.ProjectDetailsUserControl1.Project = this.applicationService.ProjectDefinition;
+                    this.ProjectDetailsUserControl1.Project = this.projectApplicationService.ProjectDefinition;
                     this.ProjectDomainUserControl1.SelectedIndexChanged +=
                         this.ProjectDomainUserControl1_SelectedIndexChanged;
-                    this.ProjectDomainUserControl1.ApplicationService = this.applicationService;
+                    this.ProjectDomainUserControl1.ApplicationService = this.projectApplicationService;
                     this.projectDomainDetailsUserControl1.Packages =
                         this.applicationConfiguration.ApplicationSettings.Packages;
-                    this.projectDomainDetailsUserControl1.ApplicationService = this.applicationService;
+                    this.projectDomainDetailsUserControl1.ApplicationService = this.projectApplicationService;
                     this.projectDomainDetailsUserControl1.ProjectDomainUserControl = this.ProjectDomainUserControl1;
 
                     this.tabControl1.Enabled = true;
@@ -264,10 +311,10 @@ namespace DotNetScaffolder.Presentation.Forms
         private void ProjectDomainUserControl1_SelectedIndexChanged(object sender, SelectedEventArgs e)
         {
             // Todo: Check Changed Status before changing 
-            if (this.applicationService.ProjectDefinition.Domains.Exists(d => d.Id == e.Id))
+            if (this.projectApplicationService.ProjectDefinition.Domains.Exists(d => d.Id == e.Id))
             {
                 this.projectDomainDetailsUserControl1.SelectedDomain =
-                    this.applicationService.ProjectDefinition.Domains.FirstOrDefault(d => d.Id == e.Id);
+                    this.projectApplicationService.ProjectDefinition.Domains.FirstOrDefault(d => d.Id == e.Id);
 
                 // Update Domain info for packages
                 this.packageUserControl1.DomainDefinition = this.projectDomainDetailsUserControl1.SelectedDomain;
