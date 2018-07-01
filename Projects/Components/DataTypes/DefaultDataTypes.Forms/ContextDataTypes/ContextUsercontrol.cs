@@ -1,29 +1,25 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ContextUsercontrol.cs" company="DotnetScaffolder">
-//   MIT
-// </copyright>
-// --------------------------------------------------------------------------------------------------------------------
+﻿#region Usings
+
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.Composition;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+using DotNetScaffolder.Components.Common.Contract;
+using DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataTypes;
+using DotNetScaffolder.Core.Common.Validation;
+using DotNetScaffolder.Mapping.ApplicationServices.Forms.Tables;
+using DotNetScaffolder.Mapping.ApplicationServices.Tables;
+using DotNetScaffolder.Mapping.MetaData.Domain;
+using DotNetScaffolder.Mapping.MetaData.Model;
+using FormControls.TreeView;
+
+#endregion
 
 namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.ContextDataTypes
 {
     #region Usings
-
-    using DotNetScaffolder.Components.Common.Contract;
-    using DotNetScaffolder.Core.Common.Validation;
-    using DotNetScaffolder.Mapping.ApplicationServices.Tables;
-    using DotNetScaffolder.Mapping.MetaData.Domain;
-    using DotNetScaffolder.Mapping.MetaData.Model;
-    using FormControls.TreeView;
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.Composition;
-    using System.Linq;
-    using System.Runtime.InteropServices;
-    using System.Text;
-    using System.Windows.Forms;
-
-    using DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataTypes;
-    using DotNetScaffolder.Mapping.ApplicationServices.Forms.Tables;
 
     #endregion
 
@@ -58,8 +54,8 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.ContextDa
         /// </summary>
         public ContextUserControl()
         {
-            this.InitializeComponent();
-            this.TreeviewContextModels.AfterCheck += this.TreeviewContextModels_AfterCheck;
+            InitializeComponent();
+            TreeviewContextModels.AfterCheck += TreeviewContextModels_AfterCheck;
         }
 
         #endregion
@@ -76,15 +72,12 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.ContextDa
         /// </summary>
         public DomainDefinition DataSource
         {
-            get
-            {
-                return this.dataSource;
-            }
+            get { return dataSource; }
 
             set
             {
-                this.dataSource = value;
-                this.UpdateDataSource();
+                dataSource = value;
+                UpdateDataSource();
             }
         }
 
@@ -93,25 +86,22 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.ContextDa
         /// </summary>
         public IDataType DataType
         {
-            get
-            {
-                return this.dataType;
-            }
+            get { return dataType; }
 
             set
             {
-                this.dataType = value;
-                this.UpdateUI();
+                dataType = value;
+                UpdateUI();
             }
         }
 
         /// <summary>
-        /// Gets or sets the save path.
+        ///     Gets or sets the save path.
         /// </summary>
         public string SavePath { get; set; }
 
         /// <summary>
-        /// Gets or sets the selected context.
+        ///     Gets or sets the selected context.
         /// </summary>
         public ContextData SelectedContext { get; set; }
 
@@ -125,19 +115,19 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.ContextDa
         #region Public Methods And Operators
 
         /// <summary>
-        /// The add nodes.
+        ///     The add nodes.
         /// </summary>
         /// <param name="parentName">
-        /// The parent name.
+        ///     The parent name.
         /// </param>
         /// <param name="treeView">
-        /// The tree view.
+        ///     The tree view.
         /// </param>
         /// <param name="hierarchy">
-        /// The hierarchy.
+        ///     The hierarchy.
         /// </param>
         /// <param name="applicationService">
-        /// The application service.
+        ///     The application service.
         /// </param>
         public void AddNodes(
             string parentName,
@@ -146,67 +136,70 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.ContextDa
             ITableHierarchyService applicationService)
         {
             treeView.Nodes.Clear();
-            treeView.Nodes.Add(new TreeNode { Text = parentName });
+            treeView.Nodes.Add(new TreeNode {Text = parentName});
             treeView.Nodes[0].Nodes.AddRange(applicationService.ConvertHierarchyToNodes(hierarchy).ToArray());
             treeView.Nodes[0].Expand();
         }
 
         /// <summary>
-        /// The load config.
+        ///     The load config.
         /// </summary>
         /// <param name="parameters">
-        /// The parameters.
+        ///     The parameters.
         /// </param>
         public void LoadConfig(object parameters)
         {
-            if (this.DataType == null) return;
+            if (DataType == null) return;
 
             IDictionary<string, string> parameterDictionary = parameters as IDictionary<string, string>;
-            this.DataType?.Load(parameterDictionary);
+            DataType?.Load(parameterDictionary);
 
             if (parameterDictionary.ContainsKey("basePath"))
             {
-                this.SavePath = parameterDictionary["basePath"];
+                SavePath = parameterDictionary["basePath"];
             }
 
             if (parameterDictionary.ContainsKey("name"))
             {
-                this.SelectedContext =
-                    (this.DataType as ContextDataType).Contexts.FirstOrDefault(
+                SelectedContext =
+                    (DataType as ContextDataType).Contexts.FirstOrDefault(
                         o => o.Id.ToString() == parameterDictionary["name"]);
             }
 
-            if (this.SelectedContext == null)
+            if (SelectedContext == null)
             {
-                this.btnNew.Text = "Add";
-                this.btnNew.Tag = "Add";
+                btnNew.Text = "Add";
+                btnNew.Tag = "Add";
             }
             else
             {
-                this.btnNew.Text = "Delete";
-                this.btnNew.Tag = "Delete";
+                btnNew.Text = "Delete";
+                btnNew.Tag = "Delete";
             }
 
-            this.TreeviewContextModels.Visible = this.SelectedContext != null;
-            this.gbAdditionalNamespaces.Visible = this.SelectedContext == null;
+            TreeviewContextModels.Visible = SelectedContext != null;
+            gbAdditionalNamespaces.Visible = SelectedContext == null;
 
-            if (this.SelectedContext == null)
+            if (SelectedContext == null)
             {
-                this.SetupDefault();
+                SetupDefault();
             }
 
-            this.UpdateUI();
+            UpdateUI();
 
-            if (this.DataType.Validate().Count > 0)
+            if (DataType.Validate().Count > 0)
             {
                 StringBuilder sb = new StringBuilder();
 
-                var contextDataType = this.DataType as ContextDataType;
+                var contextDataType = DataType as ContextDataType;
                 bool removed = false;
 
                 foreach (var error in contextDataType.MissingTables)
                 {
-                    DialogResult result = MessageBox.Show($"Delete missing table {error.TableName} from the context {error.ContextData.ContextName}", "Missing Table", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+                    DialogResult result =
+                        MessageBox.Show(
+                            $"Delete missing table {error.TableName} from the context {error.ContextData.ContextName}",
+                            "Missing Table", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
 
                     if (result == DialogResult.Yes)
                     {
@@ -218,10 +211,10 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.ContextDa
 
                 if (removed)
                 {
-                    this.SaveConfig(parameterDictionary);
+                    SaveConfig(parameterDictionary);
                 }
 
-                foreach (Validation validation in this.DataType.ValidationResult)
+                foreach (Validation validation in DataType.ValidationResult)
                 {
                     if (validation.ValidationType != ValidationType.ContextMissingModels)
                     {
@@ -237,33 +230,33 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.ContextDa
         }
 
         /// <summary>
-        /// The save config.
+        ///     The save config.
         /// </summary>
         /// <param name="parameters">
-        /// The parameters.
+        ///     The parameters.
         /// </param>
         public void SaveConfig(object parameters)
         {
-            if (this.DataType == null || this.SelectedContext == null) return;
+            if (DataType == null || SelectedContext == null) return;
 
-            this.DataType.AdditionalNamespaces.Clear();
+            DataType.AdditionalNamespaces.Clear();
 
-            foreach (var ns in this.txtNamespaces.Lines)
+            foreach (var ns in txtNamespaces.Lines)
             {
                 var item = ns.Trim();
-                if (!string.IsNullOrEmpty(item) && !this.DataType.AdditionalNamespaces.Contains(item))
+                if (!string.IsNullOrEmpty(item) && !DataType.AdditionalNamespaces.Contains(item))
                 {
-                    this.DataType.AdditionalNamespaces.Add(item);
+                    DataType.AdditionalNamespaces.Add(item);
                 }
             }
 
-            this.SelectedContext =
-                (this.DataType as ContextDataType).Contexts.FirstOrDefault(o => o.Id == this.SelectedContext.Id);
+            SelectedContext =
+                (DataType as ContextDataType).Contexts.FirstOrDefault(o => o.Id == SelectedContext.Id);
 
-            this.UpdateContext();
+            UpdateContext();
 
             IDictionary<string, string> parameterDictionary = parameters as IDictionary<string, string>;
-            this.DataType.Save(parameterDictionary);
+            DataType.Save(parameterDictionary);
         }
 
         /// <summary>
@@ -274,8 +267,8 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.ContextDa
         /// </returns>
         public virtual List<Validation> Validate()
         {
-            this.ValidationResult = this.DataType.Validate();
-            return this.ValidationResult;
+            ValidationResult = DataType.Validate();
+            return ValidationResult;
         }
 
         #endregion
@@ -283,58 +276,83 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.ContextDa
         #region Other Methods
 
         /// <summary>
-        /// The btn new_ click.
+        ///     The btn new_ click.
         /// </summary>
         /// <param name="sender">
-        /// The sender.
+        ///     The sender.
         /// </param>
         /// <param name="e">
-        /// The e.
+        ///     The e.
         /// </param>
         private void btnNew_Click(object sender, EventArgs e)
         {
-            var btn = (Button)sender;
+            var btn = (Button) sender;
 
             if (btn.Tag.ToString() == "Add")
             {
-                this.UpdateContext();
-                (this.DataType as ContextDataType).Contexts.Add(this.SelectedContext);
+                UpdateContext();
+                (DataType as ContextDataType).Contexts.Add(SelectedContext);
             }
             else if (btn.Tag.ToString() == "Delete")
             {
                 var context =
-                    (this.DataType as ContextDataType).Contexts.FirstOrDefault(o => o.Id == this.SelectedContext.Id);
+                    (DataType as ContextDataType).Contexts.FirstOrDefault(o => o.Id == SelectedContext.Id);
 
                 if (context != null)
                 {
-                    (this.DataType as ContextDataType).Contexts.Remove(context);
+                    (DataType as ContextDataType).Contexts.Remove(context);
                 }
 
-                this.SelectedContext = null;
+                SelectedContext = null;
             }
 
-            var parameters = new Dictionary<string, string> { { "basePath", this.SavePath } };
-            this.DataType.Save(parameters);
-            this.OnNavigationChanged?.Invoke(this, this.DataType);
-            this.SetupDefault();
-            this.UpdateUI();
+            var parameters = new Dictionary<string, string> {{"basePath", SavePath}};
+            DataType.Save(parameters);
+            OnNavigationChanged?.Invoke(this, DataType);
+            SetupDefault();
+            UpdateUI();
+        }
+
+        private void chkIsDefault_CheckedChanged(object sender, EventArgs e)
+        {
+            if (SelectedContext == null)
+            {
+                return;
+            }
+
+            var dt = DataType as ContextDataType;
+
+            if (dt?.Contexts == null)
+            {
+                return;
+            }
+
+            if (chkIsDefault.Checked)
+            {
+                foreach (var ctx in dt.Contexts)
+                {
+                    ctx.IsDefault = false;
+                }
+            }
+
+            SelectedContext.IsDefault = chkIsDefault.Checked;
         }
 
         /// <summary>
-        /// The clicked.
+        ///     The clicked.
         /// </summary>
         /// <param name="node">
-        /// The node.
+        ///     The node.
         /// </param>
         /// <param name="newCheckedValue">
-        /// The new checked value.
+        ///     The new checked value.
         /// </param>
         private void clicked(TreeNode node, bool newCheckedValue)
         {
             foreach (TreeNode child in node.Nodes)
             {
                 child.Checked = newCheckedValue;
-                this.clicked(child, newCheckedValue);
+                clicked(child, newCheckedValue);
             }
         }
 
@@ -343,23 +361,23 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.ContextDa
         /// </summary>
         private void SetupDefault()
         {
-            this.SelectedContext = new ContextData { Id = Guid.NewGuid() };
+            SelectedContext = new ContextData {Id = Guid.NewGuid()};
         }
 
         /// <summary>
-        /// The treeview context models_ after check.
+        ///     The treeview context models_ after check.
         /// </summary>
         /// <param name="sender">
-        /// The sender.
+        ///     The sender.
         /// </param>
         /// <param name="e">
-        /// The e.
+        ///     The e.
         /// </param>
         private void TreeviewContextModels_AfterCheck(object sender, TreeViewEventArgs e)
         {
             if (e.Action != TreeViewAction.Unknown)
             {
-                this.clicked(e.Node, e.Node.Checked);
+                clicked(e.Node, e.Node.Checked);
             }
         }
 
@@ -368,32 +386,33 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.ContextDa
         /// </summary>
         private void UpdateContext()
         {
-            if (this.SelectedContext == null) return;
+            if (SelectedContext == null) return;
 
-            this.SelectedContext.OutputFolder = this.OutputFolder.Text;
-            this.SelectedContext.Namespace = this.Namespace.Text;
-            this.SelectedContext.ContextName = this.ContextName.Text;
-            this.SelectedContext.InheritFrom = this.InheritFromInterface.Text;
-            this.SelectedContext.CustomConnectionName = this.txtCustomConnectionName.Text;
-            this.SelectedContext.OutputPath = this.OutputPath.Text;
-            this.SelectedContext.IsDefault = this.chkIsDefault.Checked || !(this.DataType as ContextDataType).Contexts.Any(o => o.IsDefault);
+            SelectedContext.OutputFolder = OutputFolder.Text;
+            SelectedContext.Namespace = Namespace.Text;
+            SelectedContext.ContextName = ContextName.Text;
+            SelectedContext.InheritFrom = InheritFromInterface.Text;
+            SelectedContext.CustomConnectionName = txtCustomConnectionName.Text;
+            SelectedContext.OutputPath = OutputPath.Text;
+            SelectedContext.IsDefault =
+                chkIsDefault.Checked || !(DataType as ContextDataType).Contexts.Any(o => o.IsDefault);
 
-            this.SelectedContext.Models.Clear();
+            SelectedContext.Models.Clear();
 
-            if (this.TreeviewContextModels.Nodes.Count > 0)
+            if (TreeviewContextModels.Nodes.Count > 0)
             {
                 ITableHierarchyService applicationService = new TempateHierarchyService();
 
-                var tables = applicationService.ReturnTables(this.TreeviewContextModels.Nodes[0]);
+                var tables = applicationService.ReturnTables(TreeviewContextModels.Nodes[0]);
                 if (tables != null && tables.Any())
                 {
                     foreach (var table in tables)
                     {
-                        this.SelectedContext.Models.Add(new Table
-                                                            {
-                                                                TableName = table.TableName,
-                                                                SchemaName = table.SchemaName
-                                                            });
+                        SelectedContext.Models.Add(new Table
+                        {
+                            TableName = table.TableName,
+                            SchemaName = table.SchemaName
+                        });
                     }
                 }
             }
@@ -404,17 +423,17 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.ContextDa
         /// </summary>
         private void UpdateDataSource()
         {
-            if (this.DataSource != null)
+            if (DataSource != null)
             {
-                this.DataType.DomainDefinition = this.DataSource;
+                DataType.DomainDefinition = DataSource;
                 ITableHierarchyService applicationService = new TempateHierarchyService();
                 List<Hierarchy> hierarchy = applicationService.ReturnSelectedHierarchyFromList(
-                    this.DataSource.Tables,
-                    this.SelectedContext?.Models ?? null,
+                    DataSource.Tables,
+                    SelectedContext?.Models ?? null,
                     false,
                     false);
 
-                this.AddNodes("Models", this.TreeviewContextModels, hierarchy, applicationService);
+                AddNodes("Models", TreeviewContextModels, hierarchy, applicationService);
             }
         }
 
@@ -423,44 +442,19 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.ContextDa
         /// </summary>
         private void UpdateUI()
         {
-            if (this.SelectedContext == null) return;
+            if (SelectedContext == null) return;
 
-            this.OutputFolder.Text = this.SelectedContext.OutputFolder;
-            this.Namespace.Text = this.SelectedContext.Namespace;
-            this.ContextName.Text = this.SelectedContext.ContextName;
-            this.InheritFromInterface.Text = this.SelectedContext.InheritFrom;
-            this.txtCustomConnectionName.Text = this.SelectedContext.CustomConnectionName;
-            this.OutputPath.Text = this.SelectedContext.OutputPath;
-            this.chkIsDefault.Checked = this.SelectedContext.IsDefault;
-            this.txtNamespaces.Lines = this.DataType.AdditionalNamespaces.ToArray();
-            this.UpdateDataSource();
+            OutputFolder.Text = SelectedContext.OutputFolder;
+            Namespace.Text = SelectedContext.Namespace;
+            ContextName.Text = SelectedContext.ContextName;
+            InheritFromInterface.Text = SelectedContext.InheritFrom;
+            txtCustomConnectionName.Text = SelectedContext.CustomConnectionName;
+            OutputPath.Text = SelectedContext.OutputPath;
+            chkIsDefault.Checked = SelectedContext.IsDefault;
+            txtNamespaces.Lines = DataType.AdditionalNamespaces.ToArray();
+            UpdateDataSource();
         }
 
         #endregion
-
-        private void chkIsDefault_CheckedChanged(object sender, EventArgs e)
-        {
-            if (this.SelectedContext == null)
-            {
-                return;
-            }
-
-            var dt = this.DataType as ContextDataType;
-
-            if (dt?.Contexts == null)
-            {
-                return;
-            }
-
-            if (this.chkIsDefault.Checked)
-            {
-                foreach (var ctx in dt.Contexts)
-                {
-                    ctx.IsDefault = false;
-                }
-            }
-
-            this.SelectedContext.IsDefault = this.chkIsDefault.Checked;
-        }
     }
 }

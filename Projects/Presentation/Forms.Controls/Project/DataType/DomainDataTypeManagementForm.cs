@@ -7,17 +7,15 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace DotNetScaffolder.Presentation.Forms.Controls.Model
+using System;
+using System.Windows.Forms;
+using Common.Logging;
+using DotNetScaffolder.Mapping.MetaData.Domain;
+using DotNetScaffolder.Presentation.Forms.Controls.Sources;
+
+namespace DotNetScaffolder.Presentation.Forms.Controls.Project.DataType
 {
     #region Usings
-
-    using System;
-    using System.Windows.Forms;
-
-    using Common.Logging;
-
-    using DotNetScaffolder.Mapping.MetaData.Domain;
-    using DotNetScaffolder.Presentation.Forms.Controls.Sources;
 
     #endregion
 

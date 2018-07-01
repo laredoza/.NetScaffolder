@@ -1,6 +1,6 @@
-﻿namespace DotNetScaffolder.Presentation.Forms.Controls.Model
+﻿namespace DotNetScaffolder.Presentation.Forms.Controls.Project.DataType
 {
-    partial class DomainModelMenuUserControl
+    partial class DefaultModelUserControl
     {
         /// <summary> 
         /// Required designer variable.
@@ -13,9 +13,9 @@
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
-            if (disposing && (this.components != null))
+            if (disposing && (components != null))
             {
-                this.components.Dispose();
+                components.Dispose();
             }
             base.Dispose(disposing);
         }
@@ -28,32 +28,32 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.DomainTreeView = new System.Windows.Forms.TreeView();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.SuspendLayout();
             // 
-            // DomainTreeView
+            // groupBox1
             // 
-            this.DomainTreeView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.DomainTreeView.Location = new System.Drawing.Point(0, 0);
-            this.DomainTreeView.Name = "DomainTreeView";
-            this.DomainTreeView.Size = new System.Drawing.Size(383, 508);
-            this.DomainTreeView.TabIndex = 3;
-            this.DomainTreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.DomainTreeView_AfterSelect);
+            this.groupBox1.Location = new System.Drawing.Point(3, 3);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(713, 491);
+            this.groupBox1.TabIndex = 0;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Default";
             // 
-            // DomainMenuUserControl
+            // DefaultModelUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.DomainTreeView);
+            this.Controls.Add(this.groupBox1);
             this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.Name = "DomainMenuUserControl";
-            this.Size = new System.Drawing.Size(383, 508);
+            this.Name = "DefaultModelUserControl";
+            this.Size = new System.Drawing.Size(724, 502);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.TreeView DomainTreeView;
+        private System.Windows.Forms.GroupBox groupBox1;
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace DotNetScaffolder.Presentation.Forms.Controls.Model
+﻿namespace DotNetScaffolder.Presentation.Forms.Controls.Project.DataType
 {
     partial class DomainModelForm
     {
@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.domainMenuUserControl1 = new DotNetScaffolder.Presentation.Forms.Controls.Model.DomainModelMenuUserControl();
             this.PanelConfig = new System.Windows.Forms.Panel();
             this.btnClose = new System.Windows.Forms.Button();
             this.btnRefresh = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
+            this.domainMenuUserControl1 = new DomainModelMenuUserControl();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -47,21 +47,10 @@
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 458F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 458F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 481F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 481F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1059, 481);
             this.tableLayoutPanel1.TabIndex = 1;
-            // 
-            // domainMenuUserControl1
-            // 
-            this.domainMenuUserControl1.DataSource = null;
-            this.domainMenuUserControl1.Location = new System.Drawing.Point(1, 1);
-            this.domainMenuUserControl1.Margin = new System.Windows.Forms.Padding(1);
-            this.domainMenuUserControl1.Name = "domainMenuUserControl1";
-            this.domainMenuUserControl1.OutputPath = null;
-            this.domainMenuUserControl1.ParentConfigControl = null;
-            this.domainMenuUserControl1.Size = new System.Drawing.Size(276, 477);
-            this.domainMenuUserControl1.TabIndex = 6;
             // 
             // PanelConfig
             // 
@@ -104,6 +93,17 @@
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
+            // domainMenuUserControl1
+            // 
+            this.domainMenuUserControl1.DataSource = null;
+            this.domainMenuUserControl1.Location = new System.Drawing.Point(1, 1);
+            this.domainMenuUserControl1.Margin = new System.Windows.Forms.Padding(1);
+            this.domainMenuUserControl1.Name = "domainMenuUserControl1";
+            this.domainMenuUserControl1.OutputPath = null;
+            this.domainMenuUserControl1.ParentConfigControl = null;
+            this.domainMenuUserControl1.Size = new System.Drawing.Size(276, 477);
+            this.domainMenuUserControl1.TabIndex = 6;
+            // 
             // DomainModelForm
             // 
             this.AcceptButton = this.btnSave;
@@ -119,7 +119,7 @@
             this.Name = "DomainModelForm";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Domain";
+            this.Text = "Manage Domain Data Types";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 

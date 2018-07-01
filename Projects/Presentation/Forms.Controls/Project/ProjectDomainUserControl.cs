@@ -4,6 +4,8 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
+using DotNetScaffolder.Presentation.Forms.Controls.Project.DataType;
+
 namespace DotNetScaffolder.Presentation.Forms.Controls.Project
 {
     #region Usings
