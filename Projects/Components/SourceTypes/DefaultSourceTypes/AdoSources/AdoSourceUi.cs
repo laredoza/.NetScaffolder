@@ -100,9 +100,10 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
         /// </param>
         /// <exception cref="NotImplementedException">
         /// </exception>
-        public void LoadData(object parameters)
+        public bool LoadData(object parameters)
         {
             Logger.Trace("Started LoadData()");
+            bool result = false;
 
             this.Options = this.SourceType.Load(parameters) as AdoSourceOptions;
 
@@ -110,7 +111,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
             {
                 this.TxtConnection.Text = this.Options.ConnectionString;
 
-                this.TestData(this.Options, false);
+                result = this.TestData(this.Options, false);
             }
             else
             {
@@ -118,6 +119,8 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
             }
 
             Logger.Trace("Completed LoadData()");
+
+            return result;
         }
 
         /// <inheritdoc />

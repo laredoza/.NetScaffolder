@@ -86,9 +86,10 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.Edmxs
         /// </summary>
         /// <exception cref="T:System.NotImplementedException">
         /// </exception>
-        public void LoadData(object parameters)
+        public bool LoadData(object parameters)
         {
             Logger.Trace("Started LoadData()");
+            bool result = false;
 
             this.options = this.SourceType.Load(parameters) as FileSourceOptions;
 
@@ -102,6 +103,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.Edmxs
             }
 
             Logger.Trace("Completed LoadData()");
+            return result;
         }
 
         /// <summary>

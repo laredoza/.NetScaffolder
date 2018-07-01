@@ -102,9 +102,9 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
         /// </param>
         /// <exception cref="NotImplementedException">
         /// </exception>
-        public void LoadData(object parameters)
+        public bool LoadData(object parameters)
         {
-            this.AdoSourceUi.LoadData(parameters);
+            return this.AdoSourceUi.LoadData(parameters);
         }
 
         /// <inheritdoc />

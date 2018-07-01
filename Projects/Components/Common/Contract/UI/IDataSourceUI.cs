@@ -39,7 +39,7 @@ namespace DotNetScaffolder.Components.Common.Contract.UI
         /// <param name="parameters">
         /// The parameters.
         /// </param>
-        void LoadData(object parameters);
+        bool LoadData(object parameters);
 
         /// <summary>
         /// The save data.

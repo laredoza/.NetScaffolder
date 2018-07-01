@@ -560,6 +560,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project
         {
             Logger.Trace("Started Manage Source Clicked");
             manageDataSourceForm.DataSource = SelectedDomain;
+            manageDataSourceForm.Visible = false;
             manageDataSourceForm.ShowDialog();
             Logger.Trace("Completed Manage Source Clicked");
         }

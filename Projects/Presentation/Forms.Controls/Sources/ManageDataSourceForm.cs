@@ -200,10 +200,23 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Sources
                 this.tabPage2.Controls.Clear();
                 this.sourceTypeControl = this.sourceType.AddConfigUI(this.tabPage2) as IDataSourceUI;
                 this.sourceTypeControl.SourceType = this.sourceType;
-                this.sourceTypeControl.LoadData(this.SavePath);
 
-                Thread.Sleep(100);
-                this.CloseSplashScreen(false);
+                if (this.sourceTypeControl.LoadData(this.SavePath))
+                {
+                    Thread.Sleep(100);
+                    this.CloseSplashScreen();
+                }
+                else
+                {
+                    Thread.Sleep(100);
+                    this.CloseSplashScreen();
+
+                    MessageBox.Show(
+                        "Failed to Connect to Datasource",
+                        "Loading",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+                }
             }
             else
             {
