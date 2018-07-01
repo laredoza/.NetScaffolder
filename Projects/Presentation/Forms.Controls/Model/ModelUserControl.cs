@@ -1,21 +1,17 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ModelUserControl.cs" company="DotnetScaffolder">
-//   MIT
-// </copyright>
-// --------------------------------------------------------------------------------------------------------------------
+﻿#region Usings
+
+using System;
+using System.Collections.Generic;
+using System.Windows.Forms;
+using Common.Logging;
+using DotNetScaffolder.Core.Common.Validation;
+using DotNetScaffolder.Mapping.MetaData.Model;
+
+#endregion
 
 namespace DotNetScaffolder.Presentation.Forms.Controls.Model
 {
     #region Usings
-
-    using System;
-    using System.Collections.Generic;
-    using System.Windows.Forms;
-
-    using Common.Logging;
-
-    using DotNetScaffolder.Core.Common.Validation;
-    using DotNetScaffolder.Mapping.MetaData.Model;
 
     #endregion
 
@@ -40,6 +36,8 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         /// </summary>
         private Table dataSource;
 
+        private bool loading;
+
         #endregion
 
         #region Constructors and Destructors
@@ -49,7 +47,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         /// </summary>
         public ModelUserControl()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         #endregion
@@ -61,15 +59,12 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         /// </summary>
         public Table DataSource
         {
-            get
-            {
-                return this.dataSource;
-            }
+            get { return dataSource; }
 
             set
             {
-                this.dataSource = value;
-                this.UpdateDataSource();
+                dataSource = value;
+                UpdateDataSource();
             }
         }
 
@@ -78,21 +73,18 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         /// </summary>
         public string Description
         {
-            get
-            {
-                return this.TxtDescription.Text;
-            }
+            get { return TxtDescription.Text; }
 
             set
             {
-                if (this.DataSource.Description != value)
+                if (DataSource.Description != value)
                 {
-                    this.DataSource.Description = value;
+                    DataSource.Description = value;
                 }
 
-                if (this.TxtDescription.Text != value)
+                if (TxtDescription.Text != value)
                 {
-                    this.TxtDescription.Text = value;
+                    TxtDescription.Text = value;
                 }
             }
         }
@@ -102,21 +94,18 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         /// </summary>
         public string ModelName
         {
-            get
-            {
-                return this.TxtName.Text;
-            }
+            get { return TxtName.Text; }
 
             set
             {
-                if (this.DataSource.TableName != value)
+                if (DataSource.TableName != value)
                 {
-                    this.DataSource.TableName = value;
+                    DataSource.TableName = value;
                 }
 
-                if (this.TxtName.Text != value)
+                if (TxtName.Text != value)
                 {
-                    this.TxtName.Text = value;
+                    TxtName.Text = value;
                 }
             }
         }
@@ -126,21 +115,18 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         /// </summary>
         public string SchemaName
         {
-            get
-            {
-                return this.TxtSchema.Text;
-            }
+            get { return TxtSchema.Text; }
 
             set
             {
-                if (this.DataSource.SchemaName != value)
+                if (DataSource.SchemaName != value)
                 {
-                    this.DataSource.SchemaName = value;
+                    DataSource.SchemaName = value;
                 }
 
-                if (this.TxtSchema.Text != value)
+                if (TxtSchema.Text != value)
                 {
-                    this.TxtSchema.Text = value;
+                    TxtSchema.Text = value;
                 }
             }
         }
@@ -167,13 +153,13 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
 
             List<Validation> result = new List<Validation>();
 
-            if (string.IsNullOrEmpty(this.TxtName.Text))
+            if (string.IsNullOrEmpty(TxtName.Text))
             {
                 Validation validation = new Validation(
                     ValidationType.ModelErrorName,
                     "The model name may not be empty");
                 result.Add(validation);
-                this.ErrorProvider1.SetError(this.TxtName, validation.Description);
+                ErrorProvider1.SetError(TxtName, validation.Description);
             }
 
             Logger.Trace("Completed Validation()");
@@ -185,31 +171,37 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         #region Other Methods
 
         /// <summary>
-        /// The txt description_ text changed.
+        ///     The txt description_ text changed.
         /// </summary>
         /// <param name="sender">
-        /// The sender.
+        ///     The sender.
         /// </param>
         /// <param name="e">
-        /// The e.
+        ///     The e.
         /// </param>
         private void TxtDescription_TextChanged(object sender, EventArgs e)
         {
-            this.Description = this.TxtDescription.Text;
+            if (!this.loading)
+            {
+                Description = TxtDescription.Text;
+            }
         }
 
         /// <summary>
-        /// The txt name_ text changed.
+        ///     The txt name_ text changed.
         /// </summary>
         /// <param name="sender">
-        /// The sender.
+        ///     The sender.
         /// </param>
         /// <param name="e">
-        /// The e.
+        ///     The e.
         /// </param>
         private void TxtName_TextChanged(object sender, EventArgs e)
         {
-            this.ModelName = this.TxtName.Text;
+            if (!this.loading)
+            {
+                ModelName = TxtName.Text;
+            }
         }
 
         /// <summary>
@@ -219,11 +211,15 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         {
             Logger.Trace("Started UpdateDataSource()");
 
-            if (this.DataSource != null)
+            if (DataSource != null)
             {
-                this.SchemaName = this.DataSource.SchemaName;
-                this.ModelName = this.DataSource.TableName;
-                this.Description = this.Description;
+                this.loading = true;
+
+                SchemaName = DataSource.SchemaName;
+                ModelName = DataSource.TableName;
+                Description = Description;
+
+                this.loading = false;
             }
             else
             {
