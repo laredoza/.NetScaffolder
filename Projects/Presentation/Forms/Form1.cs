@@ -318,7 +318,7 @@ namespace DotNetScaffolder.Presentation.Forms
 
             if (tabControl.SelectedIndex == 0)
             {
-                this.projectDomainDetailsUserControl1.DataSourceInitialized = false;
+                this.projectDomainDetailsUserControl1.Loading = false;
                 this.projectDomainDetailsUserControl1.UpdateDomainPackages();
             }
         }

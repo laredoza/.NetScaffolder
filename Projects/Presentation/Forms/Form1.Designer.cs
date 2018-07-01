@@ -300,7 +300,7 @@
             // 
             this.projectDomainDetailsUserControl1.ApplicationService = null;
             this.projectDomainDetailsUserControl1.ConfigPackage = null;
-            this.projectDomainDetailsUserControl1.DataSourceInitialized = false;
+            this.projectDomainDetailsUserControl1.Loading = false;
             this.projectDomainDetailsUserControl1.DomainName = "";
             this.projectDomainDetailsUserControl1.Loading = false;
             this.projectDomainDetailsUserControl1.Location = new System.Drawing.Point(7, 20);
