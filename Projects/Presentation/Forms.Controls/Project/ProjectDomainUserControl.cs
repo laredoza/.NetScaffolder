@@ -1,23 +1,17 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ProjectDomainUserControl.cs" company="DotnetScaffolder">
-//   MIT
-// </copyright>
-// --------------------------------------------------------------------------------------------------------------------
+﻿#region Usings
 
+using System;
+using System.Windows.Forms;
+using Common.Logging;
+using DotNetScaffolder.Mapping.ApplicationServices;
+using DotNetScaffolder.Mapping.MetaData.Domain;
 using DotNetScaffolder.Presentation.Forms.Controls.Project.DataType;
+
+#endregion
 
 namespace DotNetScaffolder.Presentation.Forms.Controls.Project
 {
     #region Usings
-
-    using System;
-    using System.Windows.Forms;
-
-    using Common.Logging;
-
-    using DotNetScaffolder.Mapping.ApplicationServices;
-    using DotNetScaffolder.Mapping.MetaData.Domain;
-    using DotNetScaffolder.Presentation.Forms.Controls.Model;
 
     #endregion
 
@@ -43,6 +37,8 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project
         /// </summary>
         private IProjectDefinitionApplicationService applicationService;
 
+        private bool loading;
+
         #endregion
 
         #region Constructors and Destructors
@@ -52,7 +48,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project
         /// </summary>
         public ProjectDomainUserControl()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         #endregion
@@ -69,16 +65,13 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project
         /// </summary>
         public IProjectDefinitionApplicationService ApplicationService
         {
-            get
-            {
-                return this.applicationService;
-            }
+            get { return applicationService; }
 
             set
             {
-                this.applicationService = value;
-                this.UpdateDataSource();
-                this.DomainsListBox_SelectedIndexChanged(this, new EventArgs());
+                applicationService = value;
+                UpdateDataSource();
+                DomainsListBox_SelectedIndexChanged(this, new EventArgs());
             }
         }
 
@@ -96,9 +89,9 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project
             {
                 bool result = false;
 
-                if (this.ApplicationService != null && this.ApplicationService.ProjectDefinition != null)
+                if (ApplicationService != null && ApplicationService.ProjectDefinition != null)
                 {
-                    result = this.ApplicationService.ProjectDefinition.Domains.Count > 0;
+                    result = ApplicationService.ProjectDefinition.Domains.Count > 0;
                 }
 
                 return result;
@@ -119,35 +112,35 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project
         {
             Logger.Trace("Started AddDomain()");
 
-            DomainDefinition result = this.ApplicationService.AddDomain();
-            this.UpdateDataSource();
-            this.Changed = true;
+            DomainDefinition result = ApplicationService.AddDomain();
+            UpdateDataSource();
+            Changed = true;
 
-            this.DomainsListBox.SelectedItem = result;
+            DomainsListBox.SelectedItem = result;
             Logger.Trace("Completed AddDomain()");
 
             return result;
         }
 
         /// <summary>
-        /// The delete domain.
+        ///     The delete domain.
         /// </summary>
         /// <param name="id">
-        /// The id.
+        ///     The id.
         /// </param>
         public void DeleteDomain(Guid id)
         {
             Logger.Trace($"Started DeleteDomain() - id: {id}");
 
-            this.ApplicationService.Delete(id);
-            this.UpdateDataSource();
+            ApplicationService.Delete(id);
+            UpdateDataSource();
 
-            if (this.DomainsListBox.Items.Count > 0)
+            if (DomainsListBox.Items.Count > 0)
             {
-                this.DomainsListBox.SelectedItem = this.DomainsListBox.Items[this.DomainsListBox.Items.Count - 1];
+                DomainsListBox.SelectedItem = DomainsListBox.Items[DomainsListBox.Items.Count - 1];
             }
 
-            this.Changed = true;
+            Changed = true;
             Logger.Trace($"Completed DeleteDomain() - id: {id}");
         }
 
@@ -156,106 +149,106 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project
         #region Other Methods
 
         /// <summary>
-        /// The on selected index changed.
+        ///     The on selected index changed.
         /// </summary>
         /// <param name="e">
-        /// The e.
+        ///     The e.
         /// </param>
         protected virtual void OnSelectedIndexChanged(SelectedEventArgs e)
         {
-            Logger.Trace($"Started OnSelectedIndexChanged() - Id:{e.Id}");
-
-            EventHandler<SelectedEventArgs> handler = this.SelectedIndexChanged;
-
-            if (handler != null)
+            if (!this.loading)
             {
-                handler(this, e);
-            }
+                EventHandler<SelectedEventArgs> handler = SelectedIndexChanged;
 
-            Logger.Trace($"Completed OnSelectedIndexChanged() - Id:{e.Id}");
+                if (handler != null)
+                {
+                    handler(this, e);
+                }
+
+            }
         }
 
         /// <summary>
-        /// The btn tables_ click.
+        ///     The btn tables_ click.
         /// </summary>
         /// <param name="sender">
-        /// The sender.
+        ///     The sender.
         /// </param>
         /// <param name="e">
-        /// The e.
+        ///     The e.
         /// </param>
         private void BtnTables_Click(object sender, EventArgs e)
         {
             DomainModelForm domainTableform = new DomainModelForm();
 
-            if (this.DomainsListBox.SelectedItem != null)
+            if (DomainsListBox.SelectedItem != null)
             {
-                domainTableform.OutputFolder = this.ApplicationService.ProjectDefinition.OutputPath;
-                domainTableform.DataSource = this.DomainsListBox.SelectedItem as DomainDefinition;
+                domainTableform.OutputFolder = ApplicationService.ProjectDefinition.OutputPath;
+                domainTableform.DataSource = DomainsListBox.SelectedItem as DomainDefinition;
                 domainTableform.ShowDialog();
             }
         }
 
         /// <summary>
-        /// The button add_ click.
+        ///     The button add_ click.
         /// </summary>
         /// <param name="sender">
-        /// The sender.
+        ///     The sender.
         /// </param>
         /// <param name="e">
-        /// The e.
+        ///     The e.
         /// </param>
         private void ButtonAdd_Click(object sender, EventArgs e)
         {
             Logger.Trace($"Started ButtonAdd_Click()");
-            this.AddDomain();
+            AddDomain();
             Logger.Trace($"Completed ButtonAdd_Click()");
         }
 
         /// <summary>
-        /// The button delete_ click.
+        ///     The button delete_ click.
         /// </summary>
         /// <param name="sender">
-        /// The sender.
+        ///     The sender.
         /// </param>
         /// <param name="e">
-        /// The e.
+        ///     The e.
         /// </param>
         private void ButtonDelete_Click(object sender, EventArgs e)
         {
             Logger.Trace("Started ButtonDelete_Click()");
 
-            DomainDefinition definition = this.DomainsListBox.SelectedItem as DomainDefinition;
+            DomainDefinition definition = DomainsListBox.SelectedItem as DomainDefinition;
 
             if (definition != null)
             {
-                this.DeleteDomain(definition.Id);
+                DeleteDomain(definition.Id);
             }
 
             Logger.Trace($"Completed ButtonDelete_Click()");
         }
 
         /// <summary>
-        /// The domains list box_ selected index changed.
+        ///     The domains list box_ selected index changed.
         /// </summary>
         /// <param name="sender">
-        /// The sender.
+        ///     The sender.
         /// </param>
         /// <param name="e">
-        /// The e.
+        ///     The e.
         /// </param>
         private void DomainsListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Logger.Trace("Started DomainsListBox_SelectedIndexChanged event.");
-            if (this.ApplicationService != null && this.ApplicationService.ProjectDefinition != null
-                                                && this.DomainsListBox.SelectedItem != null)
+            if (!this.loading)
             {
-                SelectedEventArgs eventArgs =
-                    new SelectedEventArgs { Id = (this.DomainsListBox.SelectedItem as DomainDefinition).Id };
-                this.OnSelectedIndexChanged(eventArgs);
+                if (ApplicationService != null && ApplicationService.ProjectDefinition != null
+                                               && DomainsListBox.SelectedItem != null)
+                {
+                    SelectedEventArgs eventArgs =
+                        new SelectedEventArgs { Id = (DomainsListBox.SelectedItem as DomainDefinition).Id };
+                    OnSelectedIndexChanged(eventArgs);
+                }
             }
-
-            Logger.Trace("Completed DomainsListBox_SelectedIndexChanged event.");
         }
 
         /// <summary>
@@ -265,19 +258,22 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project
         {
             Logger.Trace("Started UpdateDataSource()");
 
-            this.DomainsListBox.DataSource = null;
+            DomainsListBox.DataSource = null;
             {
-                // if (!this.Changed)
-                if (this.ApplicationService != null && this.ApplicationService.ProjectDefinition != null
-                                                    && this.ApplicationService.ProjectDefinition.Domains != null)
+                loading = true;
+
+                if (ApplicationService != null && ApplicationService.ProjectDefinition != null
+                                               && ApplicationService.ProjectDefinition.Domains != null)
                 {
-                    this.DomainsListBox.DataSource = this.ApplicationService.ProjectDefinition.Domains;
-                    this.DomainsListBox.DisplayMember = "Name";
-                    this.DomainsListBox.ValueMember = "Id";
+                    DomainsListBox.DataSource = ApplicationService.ProjectDefinition.Domains;
+                    DomainsListBox.DisplayMember = "Name";
+                    DomainsListBox.ValueMember = "Id";
                 }
+
+                loading = false;
             }
 
-            this.ButtonDelete.Enabled = this.EnableDeleteButton;
+            ButtonDelete.Enabled = EnableDeleteButton;
 
             Logger.Trace("Completed UpdateDataSource()");
         }
