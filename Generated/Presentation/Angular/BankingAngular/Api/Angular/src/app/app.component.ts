@@ -14,7 +14,8 @@ import { MediaMatcher } from '@angular/cdk/layout';
 export class AppComponent implements OnInit {
 
   mobileQuery: MediaQueryList;
-
+  links: Array<{ text: string, path: string, icon: string }> = [];
+  
   fillerNav = Array.from({ length: 50 }, (_, i) => `Nav Item ${i + 1}`);
 
   fillerContent = Array.from({ length: 50 }, () =>
@@ -27,9 +28,21 @@ export class AppComponent implements OnInit {
   private _mobileQueryListener: () => void;
 
   constructor(private httpService: Http, changeDetectorRef: ChangeDetectorRef, media: MediaMatcher) {
-    //this.mobileQuery = media.matchMedia('(max-width: 600px)');
-    //this._mobileQueryListener = () => changeDetectorRef.detectChanges();
-    //this.mobileQuery.addListener(this._mobileQueryListener);
+    this.mobileQuery = media.matchMedia('(max-width: 600px)');
+    this._mobileQueryListener = () => changeDetectorRef.detectChanges();
+    this.mobileQuery.addListener(this._mobileQueryListener);
+
+    this.links.push(
+      { text: 'Hero', path: '/', icon: "library_books" },
+      { text: 'Bank Account', path: 'bankAccount', icon: "account_balance" },
+      { text: 'Books', path: 'books', icon: "library_books" },
+      { text: 'Countries', path: 'countries', icon: "question_answer" },
+      { text: 'Customers', path: 'customers', icon: "contacts" },
+      { text: 'Software', path: 'software', icon: "web" },
+      { text: 'Register', path: '', icon: "person_add" },
+      { text: 'Login', path: 'login', icon: "account_circle" }
+    );
+
   }
 
   apiValues: string[] = [];
@@ -41,4 +54,8 @@ export class AppComponent implements OnInit {
     //  console.log("An unknown error occured while returning values: " + error);
     //});
   }
+
+    //shouldRun = [/(^|\.)plnkr\.co$/, /(^|\.)stackblitz\.io$/].some(h => h.test(window.location.host));
+
+    shouldRun = true;
 }
