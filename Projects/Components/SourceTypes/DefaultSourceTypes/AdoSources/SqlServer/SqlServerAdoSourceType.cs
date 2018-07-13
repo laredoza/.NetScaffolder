@@ -175,6 +175,8 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
                     return DomainDataType.TimeSpan;
                 case "":
                     return DomainDataType.Unsupported;
+                case "DATETIMEOFFSET":
+                        return DomainDataType.DateTimeOffSet;
                 default:
                     throw new NotImplementedException($"Invalid data type {databaseType}");
             }

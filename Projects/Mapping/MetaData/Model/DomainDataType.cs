@@ -106,6 +106,8 @@ namespace DotNetScaffolder.Mapping.MetaData.Model
         /// <summary>
         /// The time span.
         /// </summary>
-        TimeSpan
+        TimeSpan,
+
+        DateTimeOffSet
     }
 }
