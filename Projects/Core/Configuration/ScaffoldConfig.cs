@@ -10,6 +10,7 @@ namespace DotNetScaffolder.Core.Configuration
 
     using System;
     using System.Collections.Generic;
+    using System.Configuration;
     using System.Linq;
 
     using DotNetScaffolder.Components.Common;
@@ -40,9 +41,7 @@ namespace DotNetScaffolder.Core.Configuration
             DataTypeUIs = new Lazy<IDataTypeUI, IDictionary<string, object>>[0];
 
 #if DEBUG
-            ModelPath =
-            @"..\..\..\..\..\..\BCX\Quirc.V3\src\Quirc\DataAccess\Repository\Model\Quirc.mdl";
-                //@"..\..\..\..\..\Generated\Dal\Repository\EF\Dotnet\Data\Repositories\Repository\Model\Banking.mdl";
+            ModelPath = ConfigurationManager.AppSettings["ModelPath"];
             ConfigPath = @"Config\Settings.xml";
 #endif
         }
