@@ -33,6 +33,11 @@ namespace FormControls.TreeView.MultiSelectTreeView
     [ToolboxItem(true)]
     public class TreeView : System.Windows.Forms.TreeView
     {
+        public TreeView()
+        {
+            this.Scrollable = true;
+        }
+
         #region Fields
 
         /// <summary>

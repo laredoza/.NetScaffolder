@@ -102,9 +102,9 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
         /// </param>
         /// <exception cref="NotImplementedException">
         /// </exception>
-        public void LoadData(object parameters)
+        public bool LoadData(object parameters)
         {
-            this.AdoSourceUi.LoadData(parameters);
+            return this.AdoSourceUi.LoadData(parameters);
         }
 
         /// <inheritdoc />
@@ -130,9 +130,9 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
         /// <param name="displayMessageOnSucceed">
         /// The display Message On Succeed.
         /// </param>
-        public void TestData(object parameters, bool displayMessageOnSucceed)
+        public bool TestData(object parameters, bool displayMessageOnSucceed)
         {
-            this.AdoSourceUi.TestData(parameters, displayMessageOnSucceed);
+            return this.AdoSourceUi.TestData(parameters, displayMessageOnSucceed);
         }
 
         /// <summary>

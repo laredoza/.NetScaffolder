@@ -7,22 +7,20 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace DotNetScaffolder.Presentation.Forms.Controls.Model
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+using Common.Logging;
+using DotNetScaffolder.Components.Common.Contract;
+using DotNetScaffolder.Components.DataTypes.DefaultDataTypes;
+using DotNetScaffolder.Core.Common.Validation;
+using DotNetScaffolder.Core.Configuration;
+using DotNetScaffolder.Mapping.MetaData.Domain;
+
+namespace DotNetScaffolder.Presentation.Forms.Controls.Project.DataType
 {
     #region Usings
-
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Windows.Forms;
-
-    using Common.Logging;
-
-    using DotNetScaffolder.Components.Common.Contract;
-    using DotNetScaffolder.Components.DataTypes.DefaultDataTypes;
-    using DotNetScaffolder.Core.Common.Validation;
-    using DotNetScaffolder.Core.Configuration;
-    using DotNetScaffolder.Mapping.MetaData.Domain;
 
     #endregion
 
@@ -51,6 +49,11 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         ///     The data source.
         /// </summary>
         private DomainDefinition dataSource;
+
+        /// <summary>
+        ///     The loading.
+        /// </summary>
+        private bool loading;
 
         #endregion
 
@@ -161,6 +164,8 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
 
             if (this.DataSource != null)
             {
+                this.loading = true;
+
                 foreach (var hierarchy in this.DataSource.Package.Templates)
                 {
                     var parameters = new Dictionary<string, string> { { "basePath", this.OutputPath } };
@@ -205,6 +210,8 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
 
                     this.DomainTreeView.Nodes.Add(node);
                 }
+
+                this.loading = false;
             }
             else
             {
@@ -229,36 +236,39 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         /// </param>
         private void ConfigControlOnOnNavigationChanged(object sender, IDataType<IDictionary<string, string>> type)
         {
-            var navigation = type.ReturnNavigation();
-            var node = this.DomainTreeView.Nodes.Find(navigation.Id.ToString(), false).FirstOrDefault();
-
-            if (node != null)
+            if (!this.loading)
             {
-                foreach (var nav in navigation.Children)
+                var navigation = type.ReturnNavigation();
+                var node = this.DomainTreeView.Nodes.Find(navigation.Id.ToString(), false).FirstOrDefault();
+
+                if (node != null)
                 {
-                    var childNode = node.Nodes.Find(nav.Id.ToString(), true).FirstOrDefault();
-
-                    if (childNode != null)
+                    foreach (var nav in navigation.Children)
                     {
-                        childNode.Text = nav.Name;
+                        var childNode = node.Nodes.Find(nav.Id.ToString(), true).FirstOrDefault();
+
+                        if (childNode != null)
+                        {
+                            childNode.Text = nav.Name;
+                        }
+                        else
+                        {
+                            childNode = new TreeNode {Tag = node.Tag, Text = nav.Name, Name = nav.Id.ToString()};
+                            node.Nodes.Add(childNode);
+                            node.Expand();
+                        }
                     }
-                    else
+
+                    foreach (TreeNode child in node.Nodes)
                     {
-                        childNode = new TreeNode { Tag = node.Tag, Text = nav.Name, Name = nav.Id.ToString() };
-                        node.Nodes.Add(childNode);
-                        node.Expand();
-                    }
-                }
+                        if (child == null) continue;
 
-                foreach (TreeNode child in node.Nodes)
-                {
-                    if (child == null) continue;
+                        var nav = navigation.Children.FirstOrDefault(o => o.Id.ToString() == child.Name);
 
-                    var nav = navigation.Children.FirstOrDefault(o => o.Id.ToString() == child.Name);
-
-                    if (nav == null)
-                    {
-                        node.Nodes.RemoveByKey(child.Name);
+                        if (nav == null)
+                        {
+                            node.Nodes.RemoveByKey(child.Name);
+                        }
                     }
                 }
             }
@@ -275,23 +285,26 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         /// </param>
         private void DomainTreeView_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            if (this.activeControl != null)
+            if (!this.loading)
             {
-                this.activeControl.Visible = false;
-            }
-
-            if (e.Node.Tag is IDataTypeUI configControl)
-            {
-                var parameters =
-                    new Dictionary<string, string> { { "basePath", this.OutputPath }, { "name", e.Node.Name } };
-
-                configControl.LoadConfig(parameters);
-
-                if (e.Node.Tag is Control control)
+                if (this.activeControl != null)
                 {
-                    this.activeControl = control;
-                    this.activeControl.Visible = true;
-                    this.activeControl.BringToFront();
+                    this.activeControl.Visible = false;
+                }
+
+                if (e.Node.Tag is IDataTypeUI configControl)
+                {
+                    var parameters =
+                        new Dictionary<string, string> {{"basePath", this.OutputPath}, {"name", e.Node.Name}};
+
+                    configControl.LoadConfig(parameters);
+
+                    if (e.Node.Tag is Control control)
+                    {
+                        this.activeControl = control;
+                        this.activeControl.Visible = true;
+                        this.activeControl.BringToFront();
+                    }
                 }
             }
         }

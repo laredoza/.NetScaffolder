@@ -46,6 +46,7 @@
             // 
             // ButtonDelete
             // 
+            this.ButtonDelete.Enabled = false;
             this.ButtonDelete.Location = new System.Drawing.Point(242, 33);
             this.ButtonDelete.Name = "ButtonDelete";
             this.ButtonDelete.Size = new System.Drawing.Size(75, 23);
@@ -56,6 +57,7 @@
             // 
             // ButtonAdd
             // 
+            this.ButtonAdd.Enabled = false;
             this.ButtonAdd.Location = new System.Drawing.Point(242, 2);
             this.ButtonAdd.Name = "ButtonAdd";
             this.ButtonAdd.Size = new System.Drawing.Size(75, 23);

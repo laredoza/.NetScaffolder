@@ -1,27 +1,23 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ModelFormUserControl.cs" company="DotnetScaffolder">
-//   MIT
-// </copyright>
-// --------------------------------------------------------------------------------------------------------------------
+﻿#region Usings
+
+using System.Collections.Generic;
+using System.Windows.Forms;
+using Common.Logging;
+using DotNetScaffolder.Components.Common.Contract;
+using DotNetScaffolder.Core.Common.Validation;
+using DotNetScaffolder.Core.Configuration;
+using DotNetScaffolder.Mapping.ApplicationServices.Forms.Tables;
+using DotNetScaffolder.Mapping.ApplicationServices.Tables;
+using DotNetScaffolder.Mapping.MetaData.Domain;
+using DotNetScaffolder.Mapping.MetaData.Model;
+using DotNetScaffolder.Presentation.Forms.Controls.Project.DataType;
+using FormControls.TreeView;
+
+#endregion
 
 namespace DotNetScaffolder.Presentation.Forms.Controls.Model
 {
     #region Usings
-
-    using System.Collections.Generic;
-    using System.Windows.Forms;
-
-    using Common.Logging;
-
-    using DotNetScaffolder.Components.Common.Contract;
-    using DotNetScaffolder.Core.Common.Validation;
-    using DotNetScaffolder.Core.Configuration;
-    using DotNetScaffolder.Mapping.ApplicationServices.Forms.Tables;
-    using DotNetScaffolder.Mapping.ApplicationServices.Tables;
-    using DotNetScaffolder.Mapping.MetaData.Domain;
-    using DotNetScaffolder.Mapping.MetaData.Model;
-
-    using FormControls.TreeView;
 
     #endregion
 
@@ -52,6 +48,11 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         private readonly ModelFieldUserControl fieldControl;
 
         /// <summary>
+        ///     The index user control.
+        /// </summary>
+        private readonly IndexUserControl indexUserControl;
+
+        /// <summary>
         ///     The model control.
         /// </summary>
         private readonly ModelUserControl modelControl;
@@ -62,14 +63,11 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         private readonly ModelRelationshipUserControl relationshipControl;
 
         /// <summary>
-        /// The index user control.
-        /// </summary>
-        private readonly IndexUserControl indexUserControl;
-
-        /// <summary>
         ///     The data source.
         /// </summary>
         private DomainDefinition dataSource;
+
+        private bool loading;
 
         /// <summary>
         ///     The source type.
@@ -85,24 +83,24 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         /// </summary>
         public ModelFormUserControl()
         {
-            this.InitializeComponent();
-            this.modelControl = new ModelUserControl { Dock = DockStyle.Fill };
-            this.PanelConfig.Controls.Add(this.modelControl);
+            InitializeComponent();
+            modelControl = new ModelUserControl {Dock = DockStyle.Fill};
+            PanelConfig.Controls.Add(modelControl);
 
-            this.defaultModelControl = new DefaultModelUserControl { Dock = DockStyle.Fill };
-            this.PanelConfig.Controls.Add(this.defaultModelControl);
+            defaultModelControl = new DefaultModelUserControl {Dock = DockStyle.Fill};
+            PanelConfig.Controls.Add(defaultModelControl);
 
-            this.fieldControl = new ModelFieldUserControl { Dock = DockStyle.Fill };
-            this.PanelConfig.Controls.Add(this.fieldControl);
+            fieldControl = new ModelFieldUserControl {Dock = DockStyle.Fill};
+            PanelConfig.Controls.Add(fieldControl);
 
-            this.relationshipControl = new ModelRelationshipUserControl { Dock = DockStyle.Fill };
-            this.PanelConfig.Controls.Add(this.relationshipControl);
+            relationshipControl = new ModelRelationshipUserControl {Dock = DockStyle.Fill};
+            PanelConfig.Controls.Add(relationshipControl);
 
 
-            this.indexUserControl = new IndexUserControl { Dock = DockStyle.Fill };
-            this.PanelConfig.Controls.Add(this.indexUserControl);
+            indexUserControl = new IndexUserControl {Dock = DockStyle.Fill};
+            PanelConfig.Controls.Add(indexUserControl);
 
-            this.defaultModelControl.BringToFront();
+            defaultModelControl.BringToFront();
         }
 
         #endregion
@@ -119,15 +117,12 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         /// </summary>
         public DomainDefinition DataSource
         {
-            get
-            {
-                return this.dataSource;
-            }
+            get { return dataSource; }
 
             set
             {
-                this.dataSource = value;
-                this.UpdateDataSource();
+                dataSource = value;
+                UpdateDataSource();
             }
         }
 
@@ -141,19 +136,19 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         #region Public Methods And Operators
 
         /// <summary>
-        /// The add nodes.
+        ///     The add nodes.
         /// </summary>
         /// <param name="parentName">
-        /// The parent name.
+        ///     The parent name.
         /// </param>
         /// <param name="treeView">
-        /// The tree view.
+        ///     The tree view.
         /// </param>
         /// <param name="hierarchy">
-        /// The hierarchy.
+        ///     The hierarchy.
         /// </param>
         /// <param name="applicationService">
-        /// The application service.
+        ///     The application service.
         /// </param>
         public void AddNodes(
             string parentName,
@@ -162,7 +157,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
             ITableHierarchyService applicationService)
         {
             treeView.Nodes.Clear();
-            treeView.Nodes.Add(new TreeNode { Text = parentName });
+            treeView.Nodes.Add(new TreeNode {Text = parentName});
             treeView.Nodes[0].Nodes.AddRange(applicationService.ConvertHierarchyToNodes(hierarchy).ToArray());
             treeView.Nodes[0].Expand();
 
@@ -174,35 +169,62 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
 
         #region Other Methods
 
-        /// <summary>
-        /// The domain tree view_ before select.
-        /// </summary>
-        /// <param name="sender">
-        /// The sender.
-        /// </param>
-        /// <param name="e">
-        /// The e.
-        /// </param>
-        private void DomainTreeView_BeforeSelect(object sender, TreeViewCancelEventArgs e)
+        private void DomainTreeView_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            if (this.CurrentlySelectedControl != null && this.CurrentlySelectedControl.Validate().Count > 0)
+            if (CurrentlySelectedControl == null
+                || (CurrentlySelectedControl != null && CurrentlySelectedControl.Validate().Count == 0))
             {
-                e.Cancel = true;
+                if (e.Node.Tag is Table)
+                {
+                    var table = e.Node.Tag as Table;
+                    modelControl.DataSource = table;
+                    CurrentlySelectedControl = modelControl;
+                    modelControl.BringToFront();
+                }
+                else if (e.Node.Tag is Column)
+                {
+                    var column = e.Node.Tag as Column;
+                    fieldControl.DataSource = column;
+                    CurrentlySelectedControl = fieldControl;
+                    fieldControl.BringToFront();
+                }
+                else if (e.Node.Tag is Relationship)
+                {
+                    var relationship = e.Node.Tag as Relationship;
+                    relationshipControl.Domain = DataSource;
+                    relationshipControl.DataSource = relationship;
+                    CurrentlySelectedControl = relationshipControl;
+                    relationshipControl.BringToFront();
+                }
+                else if (e.Node.Tag is Index)
+                {
+                    var index = e.Node.Tag as Index;
+                    indexUserControl.DataSource = index;
+                    CurrentlySelectedControl = indexUserControl;
+                    indexUserControl.BringToFront();
+                }
+                else if (e.Node.Tag == null)
+                {
+                    defaultModelControl.BringToFront();
+                }
             }
         }
 
         /// <summary>
-        /// The domain tree view_ node mouse click.
+        ///     The domain tree view_ before select.
         /// </summary>
         /// <param name="sender">
-        /// The sender.
+        ///     The sender.
         /// </param>
         /// <param name="e">
-        /// The e.
+        ///     The e.
         /// </param>
-        private void DomainTreeView_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        private void DomainTreeView_BeforeSelect(object sender, TreeViewCancelEventArgs e)
         {
-            
+            if (CurrentlySelectedControl != null && CurrentlySelectedControl.Validate().Count > 0)
+            {
+                e.Cancel = true;
+            }
         }
 
         /// <summary>
@@ -212,15 +234,19 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         {
             Logger.Trace("Started UpdateDataSource()");
 
-            if (this.DataSource != null)
+            if (DataSource != null)
             {
-                this.sourceType = ScaffoldConfig.ReturnSourceType(this.DataSource.SourceTypeId);
+                this.loading = true;
+
+                sourceType = ScaffoldConfig.ReturnSourceType(DataSource.SourceTypeId);
 
                 ITableHierarchyService applicationService = new TempateHierarchyService();
                 List<Hierarchy> hierarchy =
-                    applicationService.ReturnHierarchyFromList(this.DataSource.Tables, true, true, true);
+                    applicationService.ReturnHierarchyFromList(DataSource.Tables, true, true, true);
 
-                this.AddNodes("Models", this.DomainTreeView, hierarchy, applicationService);
+                AddNodes("Models", DomainTreeView, hierarchy, applicationService);
+
+                this.loading = false;
             }
             else
             {
@@ -231,46 +257,5 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         }
 
         #endregion
-
-        private void DomainTreeView_AfterSelect(object sender, TreeViewEventArgs e)
-        {
-            if (this.CurrentlySelectedControl == null
-                || (this.CurrentlySelectedControl != null && this.CurrentlySelectedControl.Validate().Count == 0))
-            {
-                if (e.Node.Tag is Table)
-                {
-                    var table = e.Node.Tag as Table;
-                    this.modelControl.DataSource = table;
-                    this.CurrentlySelectedControl = this.modelControl;
-                    this.modelControl.BringToFront();
-                }
-                else if (e.Node.Tag is Column)
-                {
-                    var column = e.Node.Tag as Column;
-                    this.fieldControl.DataSource = column;
-                    this.CurrentlySelectedControl = this.fieldControl;
-                    this.fieldControl.BringToFront();
-                }
-                else if (e.Node.Tag is Relationship)
-                {
-                    var relationship = e.Node.Tag as Relationship;
-                    this.relationshipControl.Domain = this.DataSource;
-                    this.relationshipControl.DataSource = relationship;
-                    this.CurrentlySelectedControl = this.relationshipControl;
-                    this.relationshipControl.BringToFront();
-                }
-                else if (e.Node.Tag is Index)
-                {
-                    var index = e.Node.Tag as Index;
-                    this.indexUserControl.DataSource = index;
-                    this.CurrentlySelectedControl = this.indexUserControl;
-                    this.indexUserControl.BringToFront();
-                }
-                else if (e.Node.Tag == null)
-                {
-                    this.defaultModelControl.BringToFront();
-                }
-            }
-        }
     }
 }

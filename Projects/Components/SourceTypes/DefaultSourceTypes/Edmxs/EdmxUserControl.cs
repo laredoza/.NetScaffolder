@@ -86,9 +86,10 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.Edmxs
         /// </summary>
         /// <exception cref="T:System.NotImplementedException">
         /// </exception>
-        public void LoadData(object parameters)
+        public bool LoadData(object parameters)
         {
             Logger.Trace("Started LoadData()");
+            bool result = false;
 
             this.options = this.SourceType.Load(parameters) as FileSourceOptions;
 
@@ -102,6 +103,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.Edmxs
             }
 
             Logger.Trace("Completed LoadData()");
+            return result;
         }
 
         /// <summary>
@@ -131,23 +133,30 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.Edmxs
         /// <param name="displayMessageOnSucceed">
         /// The display Message On Succeed.
         /// </param>
-        public void TestData(object parameters, bool displayMessageOnSucceed)
+        public bool TestData(object parameters, bool displayMessageOnSucceed)
         {
             Logger.Trace("Started TestData()");
 
+            bool result = false;
+
             if (this.SourceType.Test(this.options))
             {
-                if (displayMessageOnSucceed)
-                {
-                    MessageBox.Show("Edmx Path Correct", "Test", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
+                //if (displayMessageOnSucceed)
+                //{
+                //    MessageBox.Show("Edmx Path Correct", "Test", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //}
+
+                result = true;
             }
             else
             {
                 MessageBox.Show("Edmx Path Is Incorrect", "Test", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                result = false;
             }
 
             Logger.Trace("Completed TestData()");
+
+            return result;
         }
 
         /// <summary>

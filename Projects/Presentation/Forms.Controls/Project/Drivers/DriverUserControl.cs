@@ -38,6 +38,8 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project.Drivers
         /// </summary>
         private List<IDriverType> driverTypes;
 
+        private bool loading;
+
         #endregion
 
         #region Constructors and Destructors
@@ -128,6 +130,8 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project.Drivers
         {
             if (this.DataSource != null)
             {
+                this.loading = true;
+
                 this.TabControl.TabPages.Clear();
                 IDriverTypeUI driverTypeUI;
 
@@ -141,6 +145,8 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project.Drivers
                     driverTypeUI.LoadConfig(parameterList);
                     this.TabControl.TabPages.Add(page);
                 }
+
+                this.loading = false;
             }
         }
 

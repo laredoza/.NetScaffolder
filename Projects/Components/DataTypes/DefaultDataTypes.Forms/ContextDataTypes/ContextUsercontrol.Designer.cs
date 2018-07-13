@@ -220,7 +220,7 @@
             this.TreeviewContextModels.Name = "TreeviewContextModels";
             this.TreeviewContextModels.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             this.TreeviewContextModels.SelectionMode = FormControls.TreeView.MultiSelectTreeView.TreeViewSelectionMode.SingleSelect;
-            this.TreeviewContextModels.Size = new System.Drawing.Size(492, 286);
+            this.TreeviewContextModels.Size = new System.Drawing.Size(492, 258);
             this.TreeviewContextModels.TabIndex = 58;
             // 
             // ContextUserControl

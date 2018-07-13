@@ -47,7 +47,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         /// <summary>
         ///     The data source loaded.
         /// </summary>
-        private bool dataSourceLoaded;
+        private bool loaded;
 
         #endregion
 
@@ -360,7 +360,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         /// </param>
         private void ComboBoxColumn_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (this.ComboBoxColumn.SelectedValue != null)
+            if (!this.loaded)
             {
                 this.DataSource.ColumnName = this.ComboBoxColumn.SelectedValue.ToString();
             }
@@ -377,7 +377,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         /// </param>
         private void ComboBoxRelatedColumn_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (this.ComboBoxRelatedColumn.SelectedValue != null)
+            if (!this.loaded)
             {
                 this.DataSource.ReferencedColumnName = this.ComboBoxRelatedColumn.SelectedValue.ToString();
             }
@@ -394,7 +394,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         /// </param>
         private void ComboBoxRelatedTable_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (this.ComboBoxRelatedTable.SelectedValue != null)
+            if (!this.loaded)
             {
                 this.RelatedTableName = this.ComboBoxRelatedTable.SelectedValue.ToString();
                 this.DataSource.RelatedTable =
@@ -417,7 +417,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         /// </param>
         private void ComboBoxRelationshipType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (this.ComboBoxRelationshipType.SelectedItem != null)
+            if (!this.loaded)
             {
                 this.DependencyRelationShip =
                     (RelationshipType)(this.ComboBoxRelationshipType.SelectedItem as ComboboxItem).Value;
@@ -435,7 +435,10 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         /// </param>
         private void txtRelationshipAlias_TextChanged(object sender, EventArgs e)
         {
-            this.DataSource.RelationshipAlias = this.txtRelationshipAlias.Text.Trim();
+            if (!this.loaded)
+            {
+                this.DataSource.RelationshipAlias = this.txtRelationshipAlias.Text.Trim();
+            }
         }
 
         /// <summary>
@@ -447,7 +450,8 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
 
             if (this.DataSource != null)
             {
-                this.dataSourceLoaded = true;
+                this.loaded = true;
+
                 this.InitComboBoxColumn();
                 this.InitComboBoxRelatedTable();
                 this.InitComboBoxForeignColumn();
@@ -458,6 +462,8 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
                 this.ForeignColumnName = this.DataSource.ReferencedColumnName;
                 this.ColumnName = this.DataSource.ColumnName;
                 this.txtRelationshipAlias.Text = this.DataSource.RelationshipAlias;
+
+                this.loaded = false;
             }
             else
             {

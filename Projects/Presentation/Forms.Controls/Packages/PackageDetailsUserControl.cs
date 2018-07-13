@@ -1,23 +1,18 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="PackageDetailsUserControl.cs" company="DotnetScaffolder">
-//   MIT
-// </copyright>
-// --------------------------------------------------------------------------------------------------------------------
+﻿#region Usings
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Windows.Forms;
+using Common.Logging;
+using DotNetScaffolder.Mapping.MetaData.Project.Packages;
+using FormControls.Enum;
+
+#endregion
 
 namespace DotNetScaffolder.Presentation.Forms.Controls.Packages
 {
     #region Usings
-
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Windows.Forms;
-
-    using Common.Logging;
-
-    using DotNetScaffolder.Mapping.MetaData.Project.Packages;
-
-    using FormControls.Enum;
 
     #endregion
 
@@ -42,6 +37,8 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Packages
         /// </summary>
         private Package dataSource;
 
+        private bool loading;
+
         #endregion
 
         #region Constructors and Destructors
@@ -51,15 +48,15 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Packages
         /// </summary>
         public PackageDetailsUserControl()
         {
-            this.availableTemplates = this.availableTemplates;
-            this.InitializeComponent();
+            availableTemplates = availableTemplates;
+            InitializeComponent();
 
-            this.ComboBoxSearch.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            this.ComboBoxSearch.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            ComboBoxSearch.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            ComboBoxSearch.AutoCompleteSource = AutoCompleteSource.CustomSource;
 
             // this.TemplateListBox.DisplayMember = "Name";
             // this.TemplateListBox.ValueMember = "Id";
-            this.AvailableTemplates = new List<Template>();
+            AvailableTemplates = new List<Template>();
         }
 
         #endregion
@@ -71,36 +68,33 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Packages
         /// </summary>
         public List<Template> AvailableTemplates
         {
-            get
-            {
-                return this.availableTemplates;
-            }
+            get { return availableTemplates; }
 
             set
             {
-                if (this.availableTemplates != value)
+                if (availableTemplates != value)
                 {
-                    this.TemplateListBox.DisplayMember = "Name";
-                    this.TemplateListBox.ValueMember = "Id";
+                    TemplateListBox.DisplayMember = "Name";
+                    TemplateListBox.ValueMember = "Id";
 
-                    this.availableTemplates = value;
+                    availableTemplates = value;
 
-                    if (this.DataSource != null && this.DataSource.Templates.Count > 0)
+                    if (DataSource != null && DataSource.Templates.Count > 0)
                     {
                         List<Template> currentTemplates =
-                            this.DataSource.Templates[0].ReturnTemplateItems(this.DataSource.Templates);
+                            DataSource.Templates[0].ReturnTemplateItems(DataSource.Templates);
 
                         foreach (Template currentTemplate in currentTemplates)
                         {
-                            if (this.availableTemplates.Any(t => t.Id == currentTemplate.Id))
+                            if (availableTemplates.Any(t => t.Id == currentTemplate.Id))
                             {
-                                this.availableTemplates.Remove(
-                                    this.availableTemplates.First(t => t.Id == currentTemplate.Id));
+                                availableTemplates.Remove(
+                                    availableTemplates.First(t => t.Id == currentTemplate.Id));
                             }
                         }
                     }
 
-                    this.UpdateDataSource();
+                    UpdateDataSource();
                 }
             }
         }
@@ -113,17 +107,14 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Packages
         /// </summary>
         public Package DataSource
         {
-            get
-            {
-                return this.dataSource;
-            }
+            get { return dataSource; }
 
             set
             {
-                if (this.dataSource != value)
+                if (dataSource != value)
                 {
-                    this.dataSource = value;
-                    this.UpdateDataSource();
+                    dataSource = value;
+                    UpdateDataSource();
                 }
             }
         }
@@ -137,10 +128,10 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Packages
             {
                 string result = string.Empty;
 
-                if (this.dataSource != null)
+                if (dataSource != null)
                 {
-                    result = this.DataSource.Name;
-                    Logger.Trace($"PackageName set to {this.DataSource.Name}.");
+                    result = DataSource.Name;
+                    Logger.Trace($"PackageName set to {DataSource.Name}.");
                 }
                 else
                 {
@@ -153,10 +144,10 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Packages
 
             set
             {
-                if (this.DataSource != null)
+                if (DataSource != null)
                 {
-                    this.DataSource.Name = value;
-                    this.TreeNode.Text = this.TextBoxName.Text;
+                    DataSource.Name = value;
+                    TreeNode.Text = TextBoxName.Text;
                 }
                 else
                 {
@@ -179,10 +170,10 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Packages
             {
                 bool result = false;
 
-                if (this.dataSource != null)
+                if (dataSource != null)
                 {
-                    result = this.DataSource.Enabled;
-                    Logger.Trace($"Enabled set to {this.DataSource.Enabled}.");
+                    result = DataSource.Enabled;
+                    Logger.Trace($"Enabled set to {DataSource.Enabled}.");
                 }
                 else
                 {
@@ -195,9 +186,9 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Packages
 
             set
             {
-                if (this.DataSource != null)
+                if (DataSource != null)
                 {
-                    this.DataSource.Enabled = value;
+                    DataSource.Enabled = value;
                 }
                 else
                 {
@@ -220,10 +211,10 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Packages
             {
                 double result = 1;
 
-                if (this.dataSource != null)
+                if (dataSource != null)
                 {
-                    result = this.DataSource.Version;
-                    Logger.Trace($"Version set to {this.DataSource.Version}.");
+                    result = DataSource.Version;
+                    Logger.Trace($"Version set to {DataSource.Version}.");
                 }
                 else
                 {
@@ -236,9 +227,9 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Packages
 
             set
             {
-                if (this.DataSource != null)
+                if (DataSource != null)
                 {
-                    this.DataSource.Version = value;
+                    DataSource.Version = value;
                 }
                 else
                 {
@@ -272,7 +263,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Packages
 
             int result = 0;
 
-            if (this.DataSource != null)
+            if (DataSource != null)
             {
                 // this.errorProvider1.Clear();
                 // this.DataSource.Validate();
@@ -342,121 +333,133 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Packages
         #region Other Methods
 
         /// <summary>
-        /// The btn add_ click.
+        ///     The btn add_ click.
         /// </summary>
         /// <param name="sender">
-        /// The sender.
+        ///     The sender.
         /// </param>
         /// <param name="e">
-        /// The e.
+        ///     The e.
         /// </param>
         private void BtnAdd_Click(object sender, EventArgs e)
         {
-            Template selectedTemplate = this.AvailableTemplates.First(t => t.Name == this.ComboBoxSearch.Text);
-            this.DataSource.Templates.Add(selectedTemplate);
-            this.AvailableTemplates.Remove(selectedTemplate);
-            this.UpdateDataSource();
-            this.ComboBoxSearch.Text = string.Empty;
+            Template selectedTemplate = AvailableTemplates.First(t => t.Name == ComboBoxSearch.Text);
+            DataSource.Templates.Add(selectedTemplate);
+            AvailableTemplates.Remove(selectedTemplate);
+            UpdateDataSource();
+            ComboBoxSearch.Text = string.Empty;
 
-            if (this.SelectedPackage.Templates != null)
+            if (SelectedPackage.Templates != null)
             {
-                this.SelectedPackage.Templates = this.DataSource.Templates;
+                SelectedPackage.Templates = DataSource.Templates;
             }
 
-            this.BtnAdd.Enabled = false;
+            BtnAdd.Enabled = false;
         }
 
         /// <summary>
-        /// The btn remove_ click.
+        ///     The btn remove_ click.
         /// </summary>
         /// <param name="sender">
-        /// The sender.
+        ///     The sender.
         /// </param>
         /// <param name="e">
-        /// The e.
+        ///     The e.
         /// </param>
         private void BtnRemove_Click(object sender, EventArgs e)
         {
-            Template selectedTemplate = this.TemplateListBox.SelectedItem as Template;
-            this.DataSource.Templates.Remove(selectedTemplate);
-            this.AvailableTemplates.Add(selectedTemplate);
-            this.UpdateDataSource();
-            this.ComboBoxSearch.Text = string.Empty;
+            Template selectedTemplate = TemplateListBox.SelectedItem as Template;
+            DataSource.Templates.Remove(selectedTemplate);
+            AvailableTemplates.Add(selectedTemplate);
+            UpdateDataSource();
+            ComboBoxSearch.Text = string.Empty;
 
-            if (this.SelectedPackage.Templates != null)
+            if (SelectedPackage.Templates != null)
             {
-                this.SelectedPackage.Templates = this.DataSource.Templates;
+                SelectedPackage.Templates = DataSource.Templates;
             }
         }
 
         /// <summary>
-        /// The check box 1_ checked changed.
+        ///     The check box 1_ checked changed.
         /// </summary>
         /// <param name="sender">
-        /// The sender.
+        ///     The sender.
         /// </param>
         /// <param name="e">
-        /// The e.
+        ///     The e.
         /// </param>
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-            this.TemplateEnabled = (sender as CheckBox).Checked;
+            if (!loading)
+            {
+                TemplateEnabled = (sender as CheckBox).Checked;
+            }
         }
 
         /// <summary>
-        /// The combo box search_ selected value changed.
+        ///     The combo box search_ selected value changed.
         /// </summary>
         /// <param name="sender">
-        /// The sender.
+        ///     The sender.
         /// </param>
         /// <param name="e">
-        /// The e.
+        ///     The e.
         /// </param>
         private void ComboBoxSearch_SelectedValueChanged(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(this.ComboBoxSearch.Text))
+            if (!loading)
             {
-                this.BtnAdd.Enabled = false;
-            }
-            else
-            {
-                this.BtnAdd.Enabled = true;
+                if (string.IsNullOrEmpty(ComboBoxSearch.Text))
+                {
+                    BtnAdd.Enabled = false;
+                }
+                else
+                {
+                    BtnAdd.Enabled = true;
+                }
             }
         }
 
         /// <summary>
-        /// The combo box search_ text update.
+        ///     The combo box search_ text update.
         /// </summary>
         /// <param name="sender">
-        /// The sender.
+        ///     The sender.
         /// </param>
         /// <param name="e">
-        /// The e.
+        ///     The e.
         /// </param>
         private void ComboBoxSearch_TextUpdate(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(this.ComboBoxSearch.Text))
+            if (!loading)
             {
-                this.BtnAdd.Enabled = false;
-            }
-            else if (this.ComboBoxSearch.Text.Trim().Length > 1)
-            {
-                this.BtnAdd.Enabled = true;
+                if (string.IsNullOrEmpty(ComboBoxSearch.Text))
+                {
+                    BtnAdd.Enabled = false;
+                }
+                else if (ComboBoxSearch.Text.Trim().Length > 1)
+                {
+                    BtnAdd.Enabled = true;
+                }
             }
         }
 
         /// <summary>
-        /// The text box name_ text changed.
+        ///     The text box name_ text changed.
         /// </summary>
         /// <param name="sender">
-        /// The sender.
+        ///     The sender.
         /// </param>
         /// <param name="e">
-        /// The e.
+        ///     The e.
         /// </param>
         private void TextBoxName_TextChanged(object sender, EventArgs e)
         {
-            this.PackageName = this.TextBoxName.Text;
+            if (!loading)
+            {
+                PackageName = TextBoxName.Text;
+            }
         }
 
         /// <summary>
@@ -464,36 +467,38 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Packages
         /// </summary>
         private void UpdateDataSource()
         {
-            if (this.DataSource != null)
+            if (DataSource != null)
             {
-                this.TextBoxName.Text = this.DataSource.Name;
-                this.CheckBoxEnabled.Checked = this.DataSource.Enabled;
+                loading = true;
 
-                if (this.dataSource.HierarchyType == HierarchyType.Item)
+                TextBoxName.Text = DataSource.Name;
+                CheckBoxEnabled.Checked = DataSource.Enabled;
+
+                if (dataSource.HierarchyType == HierarchyType.Item)
                 {
-                    this.PanelTemplate.Visible = true;
-                    if (this.DataSource.Templates.Count > 0)
+                    PanelTemplate.Visible = true;
+                    if (DataSource.Templates.Count > 0)
                     {
-                        this.TemplateListBox.DataSource =
-                            this.DataSource.Templates[0].ReturnTemplateItems(this.DataSource.Templates);
-                        this.BtnRemove.Enabled = true;
+                        TemplateListBox.DataSource =
+                            DataSource.Templates[0].ReturnTemplateItems(DataSource.Templates);
+                        BtnRemove.Enabled = true;
                     }
                     else
                     {
-                        this.TemplateListBox.DataSource = null;
-                        this.BtnRemove.Enabled = false;
+                        TemplateListBox.DataSource = null;
+                        BtnRemove.Enabled = false;
                     }
 
                     if (this.availableTemplates.Count == 0)
                     {
-                        this.BtnAdd.Enabled = false;
-                        this.ComboBoxSearch.Enabled = false;
-                        this.ComboBoxSearch.AutoCompleteCustomSource.Clear();
+                        BtnAdd.Enabled = false;
+                        ComboBoxSearch.Enabled = false;
+                        ComboBoxSearch.AutoCompleteCustomSource.Clear();
                     }
                     else
                     {
-                        this.BtnAdd.Enabled = true;
-                        this.ComboBoxSearch.Enabled = true;
+                        BtnAdd.Enabled = true;
+                        ComboBoxSearch.Enabled = true;
 
                         List<string> availableTemplates = new List<string>();
 
@@ -502,21 +507,23 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Packages
                             availableTemplates.Add(template.Name);
                         }
 
-                        this.ComboBoxSearch.AutoCompleteCustomSource.Clear();
-                        this.ComboBoxSearch.AutoCompleteCustomSource.AddRange(availableTemplates.ToArray());
-                        this.ComboBoxSearch.Items.Clear();
-                        this.ComboBoxSearch.Items.AddRange(availableTemplates.ToArray());
+                        ComboBoxSearch.AutoCompleteCustomSource.Clear();
+                        ComboBoxSearch.AutoCompleteCustomSource.AddRange(availableTemplates.ToArray());
+                        ComboBoxSearch.Items.Clear();
+                        ComboBoxSearch.Items.AddRange(availableTemplates.ToArray());
                     }
 
-                    if (string.IsNullOrEmpty(this.ComboBoxSearch.Text))
+                    if (string.IsNullOrEmpty(ComboBoxSearch.Text))
                     {
-                        this.BtnAdd.Enabled = false;
+                        BtnAdd.Enabled = false;
                     }
                 }
                 else
                 {
-                    this.PanelTemplate.Visible = false;
+                    PanelTemplate.Visible = false;
                 }
+
+                loading = false;
             }
         }
 

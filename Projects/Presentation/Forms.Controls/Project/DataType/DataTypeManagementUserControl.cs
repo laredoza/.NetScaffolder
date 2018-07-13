@@ -4,11 +4,11 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace DotNetScaffolder.Presentation.Forms.Controls.Model
+using System.Windows.Forms;
+
+namespace DotNetScaffolder.Presentation.Forms.Controls.Project.DataType
 {
     #region Usings
-
-    using System.Windows.Forms;
 
     #endregion
 

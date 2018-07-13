@@ -45,7 +45,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         /// <summary>
         /// The update data source.
         /// </summary>
-        private bool updateDataSource;
+        private bool loading;
 
         #endregion
 
@@ -410,7 +410,10 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         /// </param>
         private void CheckBoxPrimaryKey_CheckedChanged(object sender, EventArgs e)
         {
-            this.IsPrimaryKey = this.CheckBoxPrimaryKey.Checked;
+            if (!this.loading)
+            {
+                this.IsPrimaryKey = this.CheckBoxPrimaryKey.Checked;
+            }
         }
 
         /// <summary>
@@ -424,7 +427,10 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         /// </param>
         private void CheckBoxRequired_CheckedChanged(object sender, EventArgs e)
         {
-            this.IsRequired = this.CheckBoxRequired.Checked;
+            if (!this.loading)
+            {
+                this.IsRequired = this.CheckBoxRequired.Checked;
+            }
         }
 
         /// <summary>
@@ -438,7 +444,10 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         /// </param>
         private void ComboBoxDataType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            this.DataType = (DomainDataType)this.ComboBoxDataType.SelectedValue;
+            if (!this.loading)
+            {
+                this.DataType = (DomainDataType) this.ComboBoxDataType.SelectedValue;
+            }
         }
 
         /// <summary>
@@ -452,7 +461,10 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         /// </param>
         private void TxtBoxDefault_TextChanged(object sender, EventArgs e)
         {
-            this.DefaultValue = this.TxtBoxDefault.Text;
+            if (!this.loading)
+            {
+                this.DefaultValue = this.TxtBoxDefault.Text;
+            }
         }
 
         /// <summary>
@@ -466,14 +478,17 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         /// </param>
         private void TxtBoxLength_TextChanged(object sender, EventArgs e)
         {
-            int length = 0;
-
-            if (!string.IsNullOrEmpty(this.TxtBoxLength.Text))
+            if (!this.loading)
             {
-                int.TryParse(this.TxtBoxLength.Text, out length);
-            }
+                int length = 0;
 
-            this.Length = length;
+                if (!string.IsNullOrEmpty(this.TxtBoxLength.Text))
+                {
+                    int.TryParse(this.TxtBoxLength.Text, out length);
+                }
+
+                this.Length = length;
+            }
         }
 
         /// <summary>
@@ -487,14 +502,17 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         /// </param>
         private void TxtBoxPrecision_TextChanged(object sender, EventArgs e)
         {
-            int precision = 0;
-
-            if (!string.IsNullOrEmpty(this.TxtBoxPrecision.Text))
+            if (!this.loading)
             {
-                int.TryParse(this.TxtBoxPrecision.Text, out precision);
-            }
+                int precision = 0;
 
-            this.Precision = precision;
+                if (!string.IsNullOrEmpty(this.TxtBoxPrecision.Text))
+                {
+                    int.TryParse(this.TxtBoxPrecision.Text, out precision);
+                }
+
+                this.Precision = precision;
+            }
         }
 
         /// <summary>
@@ -508,14 +526,17 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         /// </param>
         private void TxtBoxScale_TextChanged(object sender, EventArgs e)
         {
-            int scale = 0;
-
-            if (!string.IsNullOrEmpty(this.TxtBoxScale.Text))
+            if (!this.loading)
             {
-                int.TryParse(this.TxtBoxScale.Text, out scale);
-            }
+                int scale = 0;
 
-            this.Scale = scale;
+                if (!string.IsNullOrEmpty(this.TxtBoxScale.Text))
+                {
+                    int.TryParse(this.TxtBoxScale.Text, out scale);
+                }
+
+                this.Scale = scale;
+            }
         }
 
         /// <summary>
@@ -529,7 +550,10 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         /// </param>
         private void TxtDescription_TextChanged(object sender, EventArgs e)
         {
-            this.Description = this.TxtDescription.Text;
+            if (!this.loading)
+            {
+                this.Description = this.TxtDescription.Text;
+            }
         }
 
         /// <summary>
@@ -539,7 +563,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         {
             Logger.Trace("Started UpdateDataSource()");
 
-            this.updateDataSource = false;
+            this.loading = true;
 
             if (this.DataSource != null)
             {
@@ -568,7 +592,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
                 Logger.Trace("Data Source not updated as domain is null ");
             }
 
-            this.updateDataSource = true;
+            this.loading = false;
 
             Logger.Trace("Completed UpdateDataSource()");
         }
@@ -577,7 +601,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
 
         private void ComboBoxRemapDataType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (this.updateDataSource)
+            if (!this.loading)
             {
                 if (this.ComboBoxRemapDataType.SelectedValue != null)
                 {

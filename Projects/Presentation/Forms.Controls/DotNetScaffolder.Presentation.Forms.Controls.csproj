@@ -54,17 +54,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\DomainModelMenuUserControl.cs">
+    <Compile Include="Project\DataType\DataTypeManagementMenuUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Model\DomainModelMenuUserControl.Designer.cs">
-      <DependentUpon>DomainModelMenuUserControl.cs</DependentUpon>
+    <Compile Include="Project\DataType\DataTypeManagementMenuUserControl.Designer.cs">
+      <DependentUpon>DataTypeManagementMenuUserControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Model\DomainModelForm.cs">
+    <Compile Include="Project\DataType\DomainDataTypeManagementForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Model\DomainModelForm.Designer.cs">
-      <DependentUpon>DomainModelForm.cs</DependentUpon>
+    <Compile Include="Project\DataType\DomainDataTypeManagementForm.Designer.cs">
+      <DependentUpon>DomainDataTypeManagementForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Core\ManageCollectionsTreeViewUserControl.cs">
       <SubType>UserControl</SubType>
@@ -119,11 +119,11 @@
     <Compile Include="Model\ModelFormUserControl.Designer.cs">
       <DependentUpon>ModelFormUserControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Model\DefaultModelUserControl.cs">
+    <Compile Include="Project\DataType\DataTypeManagementUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Model\DefaultModelUserControl.Designer.cs">
-      <DependentUpon>DefaultModelUserControl.cs</DependentUpon>
+    <Compile Include="Project\DataType\DataTypeManagementUserControl.Designer.cs">
+      <DependentUpon>DataTypeManagementUserControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\ModelFieldUserControl.cs">
       <SubType>UserControl</SubType>
@@ -204,11 +204,11 @@
     <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Model\DomainModelMenuUserControl.resx">
-      <DependentUpon>DomainModelMenuUserControl.cs</DependentUpon>
+    <EmbeddedResource Include="Project\DataType\DataTypeManagementMenuUserControl.resx">
+      <DependentUpon>DataTypeManagementMenuUserControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Model\DomainModelForm.resx">
-      <DependentUpon>DomainModelForm.cs</DependentUpon>
+    <EmbeddedResource Include="Project\DataType\DomainDataTypeManagementForm.resx">
+      <DependentUpon>DomainDataTypeManagementForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Core\ManageCollectionsTreeViewUserControl.resx">
       <DependentUpon>ManageCollectionsTreeViewUserControl.cs</DependentUpon>
@@ -238,8 +238,8 @@
     <EmbeddedResource Include="Model\ModelFormUserControl.resx">
       <DependentUpon>ModelFormUserControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Model\DefaultModelUserControl.resx">
-      <DependentUpon>DefaultModelUserControl.cs</DependentUpon>
+    <EmbeddedResource Include="Project\DataType\DataTypeManagementUserControl.resx">
+      <DependentUpon>DataTypeManagementUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Model\ModelFieldUserControl.resx">
       <DependentUpon>ModelFieldUserControl.cs</DependentUpon>
@@ -311,9 +311,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
