@@ -90,6 +90,12 @@
     <Compile Include="Project\Drivers\DriverUserControl.Designer.cs">
       <DependentUpon>DriverUserControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Project\ProjectUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Project\ProjectUserControl.Designer.cs">
+      <DependentUpon>ProjectUserControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -221,6 +227,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Project\Drivers\DriverUserControl.resx">
       <DependentUpon>DriverUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Project\ProjectUserControl.resx">
+      <DependentUpon>ProjectUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

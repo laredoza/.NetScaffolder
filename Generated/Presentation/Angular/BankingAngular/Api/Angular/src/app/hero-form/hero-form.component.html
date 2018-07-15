@@ -59,8 +59,9 @@
     </mat-card-content>
     <mat-card-actions>
       <div [hidden]="submitted">
-        <button mat-button type="submit" [disabled]="!heroForm.form.valid">Submit</button>
-        <button mat-button type="button" (click)="newHero(); heroForm.reset()" color="primary" mat-raised-button>New Hero</button>
+        <span class="fill-space"></span>
+        <button mat-button type="button" (click)="newHero(); heroForm.reset()">New Hero</button>
+        <button mat-button type="submit" [disabled]="!heroForm.form.valid" color="primary" mat-raised-button>Submit</button>
       </div>
       <div [hidden]="!submitted">
         <button color="primary" mat-raised-button (click)="submitted=false">Edit</button>
