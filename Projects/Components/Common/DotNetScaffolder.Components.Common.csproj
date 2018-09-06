@@ -65,6 +65,7 @@
     <Compile Include="Contract\UI\IDataSourceUI.cs" />
     <Compile Include="Contract\UI\IDriverTypeUI.cs" />
     <Compile Include="DisplayType.cs" />
+    <Compile Include="Formatting\NameFormatting.cs" />
     <Compile Include="Formatting\RelationshipNameFormatting.cs" />
     <Compile Include="MetaData\BaseMetaData.cs" />
     <Compile Include="MetaData\LanguageOutputDetails.cs" />

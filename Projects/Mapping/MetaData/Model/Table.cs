@@ -138,18 +138,6 @@ namespace DotNetScaffolder.Mapping.MetaData.Model
             }
         }
 
-        public string TransformCompositeKeys(IEnumerable<Column> pks, string prefix)
-        {
-            string mapping = string.Empty;
-
-            foreach (var col in pks)
-            {
-                mapping = $"{mapping}{prefix}.{col.ColumnName}, ";
-            }
-
-            return mapping.TrimEnd(' ').TrimEnd(',');
-        }
-
         [XmlIgnore]
         public List<Relationship> DistinctParentRelationships
         {

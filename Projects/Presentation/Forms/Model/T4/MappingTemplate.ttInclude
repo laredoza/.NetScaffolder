@@ -57,7 +57,7 @@ namespace <#= Namespace #>.<#= Driver.Prefix #>
 			Property(t => t.<#= pk.ColumnName #>)<#=Driver.DriverType.TransformDbGeneratedKey(Model) #>;
 <#+ } #>
 <#+ if(Model.PrimaryKeyCount > 1){ #>
-			HasKey(t => new {<#= Model.TransformCompositeKeys(Model.Columns.Where(o => o.IsPrimaryKey), "t") #>});
+			HasKey(t => new {<#= NameFormatting.TransformCompositeKeys(Model.Columns.Where(o => o.IsPrimaryKey), "t") #>});
 <#+ foreach(var col in Model.Columns.Where(o => o.IsPrimaryKey)){ #>
 			Property(t => t.<#= col.ColumnName #>)<#=Driver.DriverType.TransformDbGeneratedKey(Model) #>;
 <#+ } #>

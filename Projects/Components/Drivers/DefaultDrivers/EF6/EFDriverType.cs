@@ -213,6 +213,11 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6
                 return $".HasPrecision({col.Precision}, {col.Scale})";
             }
 
+            if (!col.InValidPrecisionGeneration && col.DomainDataType == DomainDataType.DateTime)
+            {
+                return $".HasPrecision({col.Precision})";
+            }
+
             return string.Empty;
         }
 
@@ -302,18 +307,19 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6
                     $"HasOptional<{this.TransformModelName(rel.ReferencedTableName, nc)}>(s => s.{refTableName})");
             }
 
-            string parentTableName = table;
+            bool referencedRelExists = true;
+
+            string parentTableName = nc != null ? nc.ApplyNamingConvention(table) : table;
 
             if (relationships != null && relationships.Any())
             {
-                var parentRels =
-                    (from tbl in models
-                     select tbl.Relationships.FirstOrDefault(
-                         o => o.ReferencedTableName == table && o.SchemaName == rel.SchemaName
-                                                             && o.ColumnName == rel.ReferencedColumnName
-                                                             && o.ReferencedColumnName == rel.ColumnName)).Where(x => x != null);
+                var parentRels = (from tbl in models
+                                  select tbl.Relationships.FirstOrDefault(
+                                      o => o.ReferencedTableName == table && o.Table.TableName == rel.ReferencedTableName && o.SchemaName == rel.SchemaName && o.ColumnName == rel.ReferencedColumnName
+                                           && o.ReferencedColumnName == rel.ColumnName)).Where(x => x != null);
 
                 var parentRel = parentRels.FirstOrDefault();
+                referencedRelExists = parentRel != null;
 
                 if (parentRel != null)
                 {
@@ -326,25 +332,50 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6
 
             if (rel.Multiplicity == RelationshipMultiplicity.Many)
             {
-                sb.Append(
-                    $".WithMany(s => s.{parentTableName}).HasForeignKey(s => s.{rel.ColumnName}).WillCascadeOnDelete(false);");
+                if (referencedRelExists)
+                {
+                    sb.Append($".WithMany(s => s.{parentTableName}).HasForeignKey(s => s.{this.ApplyNamingConvention(nc, rel.ColumnName)}).WillCascadeOnDelete(false);");
+                }
+                else
+                {
+                    if (rel.ColumnRequired)
+                    {
+                        sb.Append(".WithRequiredDependent();");
+                    }
+                    else
+                    {
+                        if (rel.ReferencedColumnRequired)
+                        {
+                            sb.Append(".WithOptional();");
+                        }
+                        else
+                        {
+                            sb.Append(".WithOptionalDependent();");
+                        }
+                    }
+                }
             }
             else if (rel.Multiplicity == RelationshipMultiplicity.One)
             {
                 sb.Append(
                     rel.ReferencedMultiplicity == RelationshipMultiplicity.Many
-                        ? $".WithRequired(s => s.{parentTableName}).HasForeignKey(s => s.{rel.ReferencedColumnName}).WillCascadeOnDelete(false);"
+                        ? $".WithRequired(s => s.{parentTableName}).HasForeignKey(s => s.{this.ApplyNamingConvention(nc, rel.ReferencedColumnName)}).WillCascadeOnDelete(false);"
                         : $".WithRequired(s => s.{parentTableName}).WillCascadeOnDelete(false);");
             }
             else
             {
                 sb.Append(
                     rel.ReferencedMultiplicity == RelationshipMultiplicity.Many
-                        ? $".WithOptional(s => s.{parentTableName}).HasForeignKey(s => s.{rel.ReferencedColumnName}).WillCascadeOnDelete(false);"
+                        ? $".WithOptional(s => s.{parentTableName}).HasForeignKey(s => s.{this.ApplyNamingConvention(nc, rel.ReferencedColumnName)}).WillCascadeOnDelete(false);"
                         : $".WithOptional(s => s.{parentTableName}).WillCascadeOnDelete(false);");
             }
 
             return sb.ToString();
+        }
+
+        private string ApplyNamingConvention(INamingConvention nc, string name)
+        {
+            return nc != null ? nc.ApplyNamingConvention(name) : name;
         }
 
         /// <summary>

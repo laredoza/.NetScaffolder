@@ -39,6 +39,8 @@ namespace DotNetScaffolder.Mapping.MetaData.Model
         /// <summary>
         /// The xml.
         /// </summary>
-        Xml = 5
+        Xml = 5,
+
+        Normal = 6
     }
 }

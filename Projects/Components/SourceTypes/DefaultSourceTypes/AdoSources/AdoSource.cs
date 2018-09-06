@@ -150,37 +150,44 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
             DatabaseModel result = new DatabaseModel();
 
             AdoSourceOptions adoOptions = options as AdoSourceOptions;
-            var databaseReader = new DatabaseReader(adoOptions.ConnectionString, adoOptions.ProviderName);
 
-            databaseReader.AllTables();
-            databaseReader.AllViews();
-
-            // databaseReader.AllStoredProcedures(); //but not this one!
-            // var schemaMetaData = databaseReader.ReadAll();
-            var schemaMetaData = databaseReader.DatabaseSchema;
-
-            List<DatabaseTable> tables = schemaMetaData.Tables.Where(
-                    t => t.Name != "sysdiagrams" && t.Name != "__migrationhistory" && t.Name != "__MigrationHistory")
-                .ToList();
-
-            foreach (var table in tables)
+            if (adoOptions == null)
             {
-                if (adoOptions.Schemas.Any(s => s == table.SchemaOwner))
+                return result;
+            }
+
+            //foreach (var schemaOwner in adoOptions.Schemas)
+            {
+                var databaseReader = new DatabaseReader(adoOptions.ConnectionString, adoOptions.ProviderName);
+
+                databaseReader.AllTables();
+                databaseReader.AllViews();
+
+                // databaseReader.AllStoredProcedures(); //but not this one!
+                // var schemaMetaData = databaseReader.ReadAll();
+                var schemaMetaData = databaseReader.DatabaseSchema;
+
+                List<DatabaseTable> tables = schemaMetaData.Tables.Where(t => t.Name != "sysdiagrams" && t.Name != "__migrationhistory" && t.Name != "__MigrationHistory").ToList();
+
+                foreach (var table in tables)
                 {
-                    DatabaseSchemaFixer.UpdateReferences(schemaMetaData);
+                    if (adoOptions.Schemas.Any(s => s == table.SchemaOwner))
+                    {
+                        DatabaseSchemaFixer.UpdateReferences(schemaMetaData);
 
-                    var newTable = new Table { TableName = table.Name, SchemaName = table.SchemaOwner };
-                    result.Tables.Add(newTable);
+                        var newTable = new Table { TableName = table.Name, SchemaName = table.SchemaOwner };
+                        result.Tables.Add(newTable);
 
-                    this.AddColumns(table, newTable);
+                        this.AddColumns(table, newTable);
 
-                    this.AddforeignKeys(table, schemaMetaData, newTable);
+                        this.AddforeignKeys(table, schemaMetaData, newTable);
 
-                    this.AddforeignKeyChildren(table, schemaMetaData, newTable);
+                        this.AddforeignKeyChildren(table, schemaMetaData, newTable);
 
-                    FormatNavigationPropertiesToBeUnique(newTable);
+                        FormatNavigationPropertiesToBeUnique(newTable);
 
-                    AddIndexes(table, newTable);
+                        AddIndexes(table, newTable);
+                    }
                 }
             }
 
@@ -280,17 +287,31 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
             RelationshipType relationshipType)
         {
             DatabaseColumn column = table.Columns.FirstOrDefault(c => c.Name.ToLower() == columnName.ToLower());
-            DatabaseColumn foreignColumn =
+            DatabaseColumn referencedColumn =
                 referencedTable.Columns.FirstOrDefault(c => c.Name.ToLower() == referencedColumnName.ToLower());
+
+            bool isForeignKey = false;
+            bool isRefColumnForeignKey = false;
+
+            if (relationshipType == RelationshipType.ForeignKey)
+            {
+                isForeignKey = table.ForeignKeys.Exists(o => o.Columns.Exists(x => x == columnName));
+                isRefColumnForeignKey = referencedTable.ForeignKeys.Exists(o => o.Columns.Exists(x => x == referencedColumnName));
+            }
+            else if (relationshipType == RelationshipType.ForeignKeyChild)
+            {
+                isForeignKey = referencedTable.ForeignKeyChildren.Exists(o => o.Columns.Exists(x => x.Name == columnName));
+                isRefColumnForeignKey = table.ForeignKeyChildren.Exists(o => o.Columns.Exists(x => x.Name == referencedColumnName));
+            }
 
             return MultiplicityCalculator.Calculate(
                 relationshipType,
                 column.IsPrimaryKey,
-                foreignColumn.IsPrimaryKey,
-                column.IsForeignKey,
+                referencedColumn.IsPrimaryKey,
+                isForeignKey,
                 column.Nullable,
-                foreignColumn.Nullable,
-                foreignColumn.IsForeignKey);
+                referencedColumn.Nullable,
+                isRefColumnForeignKey);
         }
 
         /// <summary>
@@ -385,35 +406,43 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
                                          Table = newTable
                                      };
 
-                switch (index.IndexType.ToUpper())
+                if (index.IndexType == null)
                 {
-                    case "NONCLUSTERED":
-                        newIndex.IndexType = IndexType.NonClustered;
-                        break;
-                    case "NONCLUSTERED HASH":
-                        newIndex.IndexType = IndexType.NonClusteredHash;
-                        break;
-                    case "CLUSTERED":
-                        newIndex.IndexType = IndexType.Clustered;
-                        break;
-                    case "PRIMARY":
-                        newIndex.IndexType = IndexType.PrimaryKey;
-                        break;
-                    case "PRIMARY NONCLUSTERED":
-                        newIndex.IndexType = IndexType.PrimaryNonClusteredKey;
-                        break;
-                    case "XML":
-                        newIndex.IndexType = IndexType.Xml;
-                        break;
-                    default:
-                        throw new NotImplementedException($"Invalid index type {index.IndexType}");
+                    newIndex.IndexType = IndexType.Normal;
+                }
+                else
+                {
+                    switch (index.IndexType.ToUpper())
+                    {
+                        case "NONCLUSTERED":
+                            newIndex.IndexType = IndexType.NonClustered;
+                            break;
+                        case "NONCLUSTERED HASH":
+                            newIndex.IndexType = IndexType.NonClusteredHash;
+                            break;
+                        case "CLUSTERED":
+                            newIndex.IndexType = IndexType.Clustered;
+                            break;
+                        case "PRIMARY":
+                            newIndex.IndexType = IndexType.PrimaryKey;
+                            break;
+                        case "PRIMARY NONCLUSTERED":
+                            newIndex.IndexType = IndexType.PrimaryNonClusteredKey;
+                            break;
+                        case "XML":
+                            newIndex.IndexType = IndexType.Xml;
+                            break;
+                        default:
+                            throw new NotImplementedException($"Invalid index type {index.IndexType}");
+                    }
                 }
 
                 foreach (DatabaseColumn column in index.Columns)
                 {
-                    newIndex.Columns.Add(
-                        newTable.Columns.FirstOrDefault(c => c.ColumnName.ToLower() == column.Name.ToLower())
-                            .ColumnName);
+                    if (newTable.Columns.Any(c => string.Equals(c.ColumnName, column.Name, StringComparison.InvariantCultureIgnoreCase)))
+                    {
+                        newIndex.Columns.Add(column.Name);
+                    }
                 }
 
                 newTable.Indexes.Add(newIndex);
@@ -476,24 +505,29 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
                     dataType = string.Empty;
                 }
 
-                Column newColumn = new Column
-                                       {
-                                           ColumnName = column.Name,
-                                           DomainDataType = this.MapDatabaseType(dataType, column),
-                                           IsRequired = !column.Nullable || column.IsPrimaryKey,
-                                           ColumnOrder = table.Columns.IndexOf(column) + 1,
-                                           Precision = column.Precision.HasValue ? column.Precision.Value : 0,
-                                           Scale = column.Scale.HasValue ? column.Scale.Value : 0,
-                                           Length = column.Length.HasValue ? column.Length.Value : 0,
-                                           IsPrimaryKey = column.IsPrimaryKey
-                                       };
+                var colType = this.MapDatabaseType(dataType, column);
 
-                if (column.IsPrimaryKey)
+                if (colType != DomainDataType.Unsupported)
                 {
-                    newTable.DatabaseGeneratedKeyType = this.MapDatabaseGeneratedKey(column);
-                }
+                    Column newColumn = new Column
+                                           {
+                                               ColumnName = column.Name,
+                                               DomainDataType = colType,
+                                               IsRequired = !column.Nullable || column.IsPrimaryKey,
+                                               ColumnOrder = table.Columns.IndexOf(column) + 1,
+                                               Precision = column.Precision.HasValue ? column.Precision.Value : 0,
+                                               Scale = column.Scale.HasValue ? column.Scale.Value : 0,
+                                               Length = column.Length.HasValue ? column.Length.Value : 0,
+                                               IsPrimaryKey = column.IsPrimaryKey
+                                           };
 
-                newTable.Columns.Add(newColumn);
+                    if (column.IsPrimaryKey)
+                    {
+                        newTable.DatabaseGeneratedKeyType = this.MapDatabaseGeneratedKey(column);
+                    }
+
+                    newTable.Columns.Add(newColumn);
+                }
             }
         }
 
@@ -565,18 +599,19 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
                 if (referencedForeignColumn != null)
                 {
                     var referencedForeignColumnName = referencedForeignColumn.ToList()[0];
+                    var referencedTable = foreignKey.ReferencedTable(schemaMetaData);
 
                     var multiplicityResult = this.ReturnMultiplicity(
                         table,
                         foreignKey.Columns[0],
-                        foreignKey.ReferencedTable(schemaMetaData),
+                        referencedTable,
                         referencedForeignColumnName,
                         RelationshipType.ForeignKey);
 
                     newTable.Relationships.Add(
                         new Relationship
                             {
-                                ReferencedTableName = foreignKey.RefersToTable,
+                                ReferencedTableName = referencedTable.Name,
                                 ColumnName = foreignKey.Columns[0],
                                 ReferencedColumnName = referencedForeignColumnName,
                                 DependencyRelationShip = RelationshipType.ForeignKey,

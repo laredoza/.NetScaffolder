@@ -279,7 +279,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
                 return typeof(long);
             }
 
-            if (precision > 5)
+            if (precision > 4)
             {
                 // 2147483647
                 return typeof(int);
