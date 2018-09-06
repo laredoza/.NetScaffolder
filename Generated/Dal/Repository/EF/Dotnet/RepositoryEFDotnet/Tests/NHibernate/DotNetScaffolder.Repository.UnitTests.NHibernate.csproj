@@ -126,21 +126,21 @@
       <Project>{0333e000-6aaf-4e18-8747-2299a8231ab1}</Project>
       <Name>RepositoryEFDotnet.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Data\Contexts\NHibernate\Base\RepositoryEFDotnet.Contexts.NHibernate.Base.csproj">
-      <Project>{400e5fed-6b88-4803-882a-51bbc34d12c8}</Project>
-      <Name>RepositoryEFDotnet.Contexts.NHibernate.Base</Name>
+    <ProjectReference Include="..\..\..\Data\Contexts\NHib\Base\RepositoryEFDotnet.Contexts.NHib.Base.csproj">
+      <Project>{15c80d7a-0311-4dd9-9383-bde3a2c9b1d9}</Project>
+      <Name>RepositoryEFDotnet.Contexts.NHib.Base</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Data\Contexts\NHibernate\MySql\RepositoryEFDotnet.Contexts.NHibernate.MySql.csproj">
-      <Project>{e354fad9-cc4c-48e9-b93a-f755a499e03d}</Project>
-      <Name>RepositoryEFDotnet.Contexts.NHibernate.MySql</Name>
+    <ProjectReference Include="..\..\..\Data\Contexts\NHib\MySql\RepositoryEFDotnet.Contexts.NHib.MySql.csproj">
+      <Project>{0ba29331-41d7-4de4-b2ab-0a297c8f6314}</Project>
+      <Name>RepositoryEFDotnet.Contexts.NHib.MySql</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Data\Contexts\NHibernate\Oracle\RepositoryEFDotnet.Contexts.NHibernate.Oracle.csproj">
-      <Project>{5ac65642-4318-4e9b-bbb8-ea0ffdf4068d}</Project>
-      <Name>RepositoryEFDotnet.Contexts.NHibernate.Oracle</Name>
+    <ProjectReference Include="..\..\..\Data\Contexts\NHib\Oracle\RepositoryEFDotnet.Contexts.NHib.Oracle.csproj">
+      <Project>{1a17e595-c9f1-4a7b-b273-19089a5d27ed}</Project>
+      <Name>RepositoryEFDotnet.Contexts.NHib.Oracle</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Data\Contexts\NHibernate\SqlServer\RepositoryEFDotnet.Contexts.NHibernate.SqlServer.csproj">
-      <Project>{c632dc7f-0364-4bb9-be84-54794f9ad469}</Project>
-      <Name>RepositoryEFDotnet.Contexts.NHibernate.SqlServer</Name>
+    <ProjectReference Include="..\..\..\Data\Contexts\NHib\SqlServer\RepositoryEFDotnet.Contexts.NHib.SqlServer.csproj">
+      <Project>{440e3142-f770-4cd8-9cac-be5b053a78f2}</Project>
+      <Name>RepositoryEFDotnet.Contexts.NHib.SqlServer</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\Data\Dtos\Dto\RepositoryEFDotnet.Data.Dtos.Dto.csproj">
       <Project>{61d46a6e-4e3a-4d37-9169-aed9b277d33b}</Project>

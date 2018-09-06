@@ -11,7 +11,7 @@ namespace RepositoryEFDotnet.UnitTest
     using Oracle.ManagedDataAccess.Client;
     using RepositoryEFDotnet.UnitTest.Base;
     using System.Configuration;
-    using DatabaseContext = Banking.Models.Context.NHibernate.OracleFullContext;
+    using DatabaseContext = Banking.Models.Context.NHib.OracleFullContext;
 
     /// <summary>
     /// The repository e f 6 in memory sql server unit test.

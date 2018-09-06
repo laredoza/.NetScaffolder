@@ -6,7 +6,7 @@
 
 namespace RepositoryEFDotnet.UnitTest
 {
-    using Banking.Models.Context.NHibernate;
+    using Banking.Models.Context.NHib;
     using FluentNHibernate.Cfg.Db;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using System.Configuration;

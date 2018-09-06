@@ -6,13 +6,13 @@
 
 namespace RepositoryEFDotnet.UnitTest
 {
-    using Banking.Models.Context.NHibernate;
+    using Banking.Models.Context.NHib;
     using FluentNHibernate.Cfg.Db;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using RepositoryEFDotnet.UnitTest.Base;
     using System.Configuration;
     using System.Data.SqlClient;
-    using DatabaseContext = Banking.Models.Context.NHibernate.SqlServerFullContext;
+    using DatabaseContext = Banking.Models.Context.NHib.SqlServerFullContext;
 
     /// <summary>
     /// The repository e f 6 in memory sql server unit test.

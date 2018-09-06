@@ -8,7 +8,7 @@ namespace RepositoryEFDotnet.UnitTest
 {
     using System.Configuration;
 
-    using Banking.Models.Context.NHibernate;
+    using Banking.Models.Context.NHib;
 
     using FluentNHibernate.Cfg.Db;
 
@@ -17,7 +17,7 @@ namespace RepositoryEFDotnet.UnitTest
     using MySql.Data.MySqlClient;
 
     using RepositoryEFDotnet.UnitTest.Base;
-    using DatabaseContext = Banking.Models.Context.NHibernate.MySqlFullContext;
+    using DatabaseContext = Banking.Models.Context.NHib.MySqlFullContext;
 
     /// <summary>
     /// The repository e f 6 in memory sql server unit test.

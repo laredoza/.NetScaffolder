@@ -1,6 +1,6 @@
 ﻿namespace RepositoryEFDotnet.UnitTest
 {
-    using Banking.Models.Context.NHibernate;
+    using Banking.Models.Context.NHib;
     using FluentNHibernate.Cfg;
     using FluentNHibernate.Cfg.Db;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -29,7 +29,7 @@
         public static void TestInit(TestContext tstContext)
         {
             Configuration = Fluently.Configure().Database(MsSqliteConfiguration.Standard.ConnectionString("Data Source=:memory:;cache=shared;mode=memory")).Mappings(
-                o => o.FluentMappings.AddFromAssemblyOf<Banking.Models.Context.Mappings.NHibernate.SqlServer.BankAccountMap>()).BuildConfiguration();
+                o => o.FluentMappings.AddFromAssemblyOf<Banking.Models.Context.Mappings.NHib.SqlServer.BankAccountMap>()).BuildConfiguration();
 
             // Keep connection to in-memory db alive for duration of test
             // otherwise the db gets discarded when all connections are closed

@@ -60,7 +60,7 @@ if (Driver.ForceSchemaToUppercase)
 			builder.Property(t => t.<#= NamingConvention.ApplyNamingConvention(pk.ColumnName) #>).HasColumnName("<#= pk.ColumnName #>")<#=Driver.DriverType.TransformDbGeneratedKey(Model) #>;
 <#+ } #>
 <#+ if(Model.PrimaryKeyCount > 1){ #>
-			builder.HasKey(t => new {<#= Model.TransformCompositeKeys(Model.Columns.Where(o => o.IsPrimaryKey), "t") #>});
+			builder.HasKey(t => new {<#= NameFormatting.TransformCompositeKeys(Model.Columns.Where(o => o.IsPrimaryKey), "t") #>});
 <#+ foreach(var col in Model.Columns.Where(o => o.IsPrimaryKey)){ #>
 			builder.Property(t => t.<#= NamingConvention.ApplyNamingConvention(col.ColumnName) #>).HasColumnName("<#= col.ColumnName #>")<#=Driver.DriverType.TransformDbGeneratedKey(Model) #>;
 <#+ } #>

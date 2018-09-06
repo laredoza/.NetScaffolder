@@ -40,6 +40,7 @@
 <#@ import namespace="DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6" #>
 <#@ import namespace="DotNetScaffolder.Components.Drivers.DefaultDrivers.NHibernate" #>
 <#@ import namespace="DotNetScaffolder.Mapping.MetaData.Enum" #>
+<#@ import namespace="DotNetScaffolder.Components.Common.Formatting" #>
 
 <#@ import namespace="DotNetScaffolder.Core.Configuration" #>
 <#@ import namespace="DotNetScaffolder.Mapping.MetaData.Project" #>
