@@ -59,7 +59,9 @@ namespace DotNetScaffolder.Components.Common.Contract
 
         string AsAlias(string name);
 
-        string TransformIndex(Index index);
+        string TransformIndex(Index index, INamingConvention nc = null);
+
+        int CheckPrecision(Column col);
 
         #endregion
     }

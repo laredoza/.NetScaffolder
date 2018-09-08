@@ -125,7 +125,7 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EFCore
         /// <returns>
         /// The <see cref="string"/>.
         /// </returns>
-        public static string TransformIndex(Index index)
+        public static string TransformIndex(Index index, INamingConvention nc = null)
         {
             var idxs = new StringBuilder("HasIndex(i => new {");
             bool isClustered = index.IndexType == IndexType.Clustered;
@@ -139,7 +139,9 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EFCore
                         idxs.Append(", ");
                     }
 
-                    idxs.Append($"i.{index.Columns[i]}");
+                    string colName = nc != null ? nc.ApplyNamingConvention(index.Columns[i]) : index.Columns[i];
+
+                    idxs.Append($"i.{colName}");
                 }
             }
 
@@ -209,7 +211,7 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EFCore
         /// </returns>
         /// <exception cref="NotImplementedException">
         /// </exception>
-        public string TransformColumnPrecision(Column col)
+        public string TransformColumnPrecision(Column col, IDriver driver = null)
         {
             if (!col.InValidPrecisionGeneration && (col.Precision > 0 || col.Scale > 0))
             {

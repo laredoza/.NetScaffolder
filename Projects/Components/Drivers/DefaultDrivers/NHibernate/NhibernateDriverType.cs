@@ -125,7 +125,7 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.NHibernate
         /// <returns>
         /// The <see cref="string"/>.
         /// </returns>
-        public static string TransformIndex(Index index)
+        public static string TransformIndex(Index index, INamingConvention nc = null)
         {
             bool isClustered = index.IndexType == IndexType.Clustered;
             var idxs = new StringBuilder();
@@ -201,7 +201,7 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.NHibernate
         /// </returns>
         /// <exception cref="NotImplementedException">
         /// </exception>
-        public string TransformColumnPrecision(Column col)
+        public string TransformColumnPrecision(Column col, IDriver driver = null)
         {
             if (!col.InValidPrecisionGeneration)
             {

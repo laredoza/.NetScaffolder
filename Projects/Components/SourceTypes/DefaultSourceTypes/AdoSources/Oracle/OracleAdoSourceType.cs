@@ -60,10 +60,22 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
         /// </remarks>
         public static Type NetDataType(DatabaseColumn column)
         {
-            if (column == null) return null;
-            if (column.DataType == null) return null;
+            if (column?.DataType == null)
+            {
+                return null;
+            }
 
-            if (!column.DataType.IsNumeric || column.DataType.IsInt) return column.DataType.GetNetType();
+            if (!column.DataType.IsNumeric || column.DataType.IsInt)
+            {
+                // TODO: Remove this and use configuration instead
+                if (column.DbDataType == "RAW" && column.Length == 16)
+                {
+                    return typeof(System.Guid);
+                }
+
+                return column.DataType.GetNetType();
+            }
+
             var precision = column.Precision.GetValueOrDefault();
             var scale = column.Scale.GetValueOrDefault();
             return NetTypeForIntegers(column, scale, precision);
@@ -187,6 +199,8 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
                     return DomainDataType.Unsupported;
                 case "BOOLEAN":
                     return DomainDataType.Boolean;
+                case "GUID":
+                    return DomainDataType.Guid;
                 default:
                     throw new NotImplementedException($"Invalid data type {databaseType}");
             }

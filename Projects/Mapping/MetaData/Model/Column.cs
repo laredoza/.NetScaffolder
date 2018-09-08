@@ -101,7 +101,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Model
         [XmlIgnore]
         public bool InValidMaxLengthGeneration =>
             this.DomainDataType == DomainDataType.Int16 || this.DomainDataType == DomainDataType.Int32 || this.DomainDataType == DomainDataType.Int64 || this.DomainDataType == DomainDataType.Boolean
-            || this.DomainDataType == DomainDataType.Decimal || this.DomainDataType == DomainDataType.DateTime;
+            || this.DomainDataType == DomainDataType.Decimal || this.DomainDataType == DomainDataType.DateTime || this.DomainDataType == DomainDataType.Guid;
 
         /// <summary>
         ///     Gets or sets a value indicating whether is primary key.

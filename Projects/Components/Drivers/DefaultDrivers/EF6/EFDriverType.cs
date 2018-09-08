@@ -18,6 +18,7 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6
 
     using DotNetScaffolder.Components.Common;
     using DotNetScaffolder.Components.Common.Contract;
+    using DotNetScaffolder.Components.Drivers.DefaultDrivers.EFCore;
     using DotNetScaffolder.Core.Common.Serializer;
     using DotNetScaffolder.Core.Common.Validation;
     using DotNetScaffolder.Mapping.MetaData.Enum;
@@ -125,27 +126,9 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6
         /// <returns>
         /// The <see cref="string"/>.
         /// </returns>
-        public static string TransformIndex(Index index)
+        public static string TransformIndex(Index index, INamingConvention nc = null)
         {
-            var idxs = new StringBuilder(".HasColumnAnnotation(\"" + index.Name + "\", new IndexAnnotation(new [] { ");
-            bool isClustered = index.IndexType == IndexType.Clustered;
-
-            if (index.Columns != null && index.Columns.Any())
-            {
-                for (int i = 0; i < index.Columns.Count; i++)
-                {
-                    if (i > 0)
-                    {
-                        idxs.Append(", ");
-                    }
-
-                    idxs.Append(
-                        "new IndexAttribute(\"" + index.Name + "\"){ IsClustered = " + isClustered.ToString().ToLower()
-                        + ", IsUnique = " + index.IsUnique.ToString().ToLower() + ", Order = " + i + "}");
-                }
-            }
-
-            return idxs.Append("}))").ToString();
+            return EFCoreDriverType.TransformIndex(index, nc);
         }
 
         /// <summary>
@@ -206,16 +189,18 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6
         /// <returns>
         /// The <see cref="string"/>.
         /// </returns>
-        public string TransformColumnPrecision(Column col)
+        public string TransformColumnPrecision(Column col, IDriver driver = null)
         {
+            int precision = driver?.CheckPrecision(col) ?? col.Precision;
+
             if (!col.InValidPrecisionGeneration && (col.Precision > 0 || col.Scale > 0))
             {
-                return $".HasPrecision({col.Precision}, {col.Scale})";
+                return $".HasPrecision({precision}, {col.Scale})";
             }
 
             if (!col.InValidPrecisionGeneration && col.DomainDataType == DomainDataType.DateTime)
             {
-                return $".HasPrecision({col.Precision})";
+                return $".HasPrecision({precision})";
             }
 
             return string.Empty;

@@ -102,9 +102,14 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.NHibernate
         /// <returns>
         /// The <see cref="string"/>.
         /// </returns>
-        public string TransformIndex(Index index)
+        public string TransformIndex(Index index, INamingConvention nc = null)
         {
-            return NhibernateDriverType.TransformIndex(index);
+            return NhibernateDriverType.TransformIndex(index, nc);
+        }
+
+        public int CheckPrecision(Column col)
+        {
+            return col.Precision;
         }
 
         #endregion

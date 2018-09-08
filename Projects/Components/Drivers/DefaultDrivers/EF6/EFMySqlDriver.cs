@@ -107,9 +107,14 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6
         /// <returns>
         /// The <see cref="string"/>.
         /// </returns>
-        public string TransformIndex(Index index)
+        public string TransformIndex(Index index, INamingConvention nc = null)
         {
-            return EFDriverType.TransformIndex(index);
+            return EFDriverType.TransformIndex(index, nc);
+        }
+
+        public int CheckPrecision(Column col)
+        {
+            return col.Precision;
         }
 
         #endregion

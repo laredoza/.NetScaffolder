@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="EFSqlServerDriver.cs" company="DotnetScaffolder">
+// <copyright file="EFMySqlDriver.cs" company="DotnetScaffolder">
 //   MIT
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
@@ -20,9 +20,9 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6
     ///     Defines the default EF 6.0 Sql Server driver.
     /// </summary>
     [Export(typeof(IDriver))]
-    [ExportMetadata("NameMetaData", "Entity Framework - SqlServer (Default)")]
-    [ExportMetadata("ValueMetaData", "2BC1B0C4-1E41-9146-82CF-599181CE4410")]
-    public class EFSqlServerDriver : IDriver
+    [ExportMetadata("NameMetaData", "Entity Framework - Postgres (Default)")]
+    [ExportMetadata("ValueMetaData", "2ED41F2A-84C9-7A41-8524-07557F37A5C1")]
+    public class EFPostgresDriver : IDriver
     {
         #region Public Properties
 
@@ -36,7 +36,7 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6
         /// <summary>
         ///     Gets the context attribute.
         /// </summary>
-        public string ContextAttribute => string.Empty;
+        public string ContextAttribute => "";
 
         /// <summary>
         /// The driver type.
@@ -54,9 +54,10 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6
         public List<string> NameSpaces =>
             new List<string>
                 {
+                    "Npgsql",
                     "System.Data.Entity",
                     "System.Data.Entity.ModelConfiguration",
-                    "System.Data.Entity.Infrastructure.Annotations"
+                    "System.Data.Entity.Infrastructure.Annotations",
                 };
 
         /// <summary>
@@ -67,7 +68,7 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6
         /// <summary>
         ///     The prefix.
         /// </summary>
-        public string Prefix => "SqlServer";
+        public string Prefix => "Postgres";
 
         /// <summary>
         /// The use schema.
@@ -94,7 +95,7 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6
         /// </returns>
         public string AsAlias(string name)
         {
-            return !this.DriverType.UseAlias ? name : $"[{name}]";
+            return !this.DriverType.UseAlias ? name : $"`{name}`";
         }
 
         /// <summary>
@@ -113,6 +114,14 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6
 
         public int CheckPrecision(Column col)
         {
+            if (col.DomainDataType == DomainDataType.Decimal)
+            {
+                if (col.Precision > 29)
+                {
+                    return 29;
+                }
+            }
+
             return col.Precision;
         }
 

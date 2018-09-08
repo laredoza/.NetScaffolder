@@ -104,9 +104,9 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EFCore
         /// <returns>
         /// The <see cref="string"/>.
         /// </returns>
-        public string TransformIndex(Index index)
+        public string TransformIndex(Index index, INamingConvention nc = null)
         {
-            var idxs = EFCoreDriverType.TransformIndex(index);
+            var idxs = EFCoreDriverType.TransformIndex(index, nc);
             bool isClustered = index.IndexType == IndexType.Clustered;
 
             if (isClustered)
@@ -115,6 +115,11 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EFCore
             }
 
             return idxs;
+        }
+
+        public int CheckPrecision(Column col)
+        {
+            return col.Precision;
         }
 
         #endregion

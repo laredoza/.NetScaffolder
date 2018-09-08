@@ -256,3 +256,4 @@ Common.Logging.Core.dll
 Common.Logging.dll
 Configuration.dll
 Projects/Presentation/Forms/Model/Package
+/Generated/Dal/Repository/EF/Dotnet/Data

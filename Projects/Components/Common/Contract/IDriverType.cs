@@ -98,7 +98,7 @@ namespace DotNetScaffolder.Components.Common.Contract
 
         string TransformDbGeneratedKey(Table table);
 
-        string TransformColumnPrecision(Column col);
+        string TransformColumnPrecision(Column col, IDriver driver = null);
 
         #endregion
     }

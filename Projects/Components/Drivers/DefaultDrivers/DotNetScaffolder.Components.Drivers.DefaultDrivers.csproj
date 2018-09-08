@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EF6\EFDriverType.cs" />
+    <Compile Include="EF6\EFPostgresDriver.cs" />
     <Compile Include="EF6\EFMySqlDriver.cs" />
     <Compile Include="EF6\EFOracleDriver.cs" />
     <Compile Include="EF6\EFSqlServerDriver.cs" />

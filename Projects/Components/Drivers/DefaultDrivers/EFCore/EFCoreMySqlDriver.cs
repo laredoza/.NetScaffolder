@@ -103,9 +103,14 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EFCore
         /// <returns>
         /// The <see cref="string"/>.
         /// </returns>
-        public string TransformIndex(Index index)
+        public string TransformIndex(Index index, INamingConvention nc = null)
         {
-            return EFCoreDriverType.TransformIndex(index);
+            return EFCoreDriverType.TransformIndex(index, nc);
+        }
+
+        public int CheckPrecision(Column col)
+        {
+            return col.Precision;
         }
 
         #endregion
