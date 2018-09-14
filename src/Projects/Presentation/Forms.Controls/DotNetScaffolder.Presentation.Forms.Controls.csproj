@@ -1,0 +1,333 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{5A674854-AFD7-40C8-8445-4BFC7F49AAD3}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DotNetScaffolder.Presentation.Forms.Controls</RootNamespace>
+    <AssemblyName>DotNetScaffolder.Presentation.Forms.Controls</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Common.Logging, Version=3.4.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>..\..\..\.nuget\NuGetPackages\Common.Logging.3.4.1\lib\net40\Common.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging.Core, Version=3.4.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>..\..\..\.nuget\NuGetPackages\Common.Logging.Core.3.4.1\lib\net40\Common.Logging.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Core\PromptDialog.cs" />
+    <Compile Include="Project\DataType\DataTypeManagementMenuUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Project\DataType\DataTypeManagementMenuUserControl.Designer.cs">
+      <DependentUpon>DataTypeManagementMenuUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Project\DataType\DomainDataTypeManagementForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Project\DataType\DomainDataTypeManagementForm.Designer.cs">
+      <DependentUpon>DomainDataTypeManagementForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Core\ManageCollectionsTreeViewUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Core\ManageCollectionsTreeViewUserControl.Designer.cs">
+      <DependentUpon>ManageCollectionsTreeViewUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Model\IndexUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Model\IndexUserControl.Designer.cs">
+      <DependentUpon>IndexUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Project\Drivers\DriverForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Project\Drivers\DriverForm.Designer.cs">
+      <DependentUpon>DriverForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Project\Drivers\DriverUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Project\Drivers\DriverUserControl.Designer.cs">
+      <DependentUpon>DriverUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Project\ProjectUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Project\ProjectUserControl.Designer.cs">
+      <DependentUpon>ProjectUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Sources\ManageDataSourceForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sources\ManageDataSourceForm.Designer.cs">
+      <DependentUpon>ManageDataSourceForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Packages\PackageUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Packages\PackageUserControl.Designer.cs">
+      <DependentUpon>PackageUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ModelForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Model\ModelForm.Designer.cs">
+      <DependentUpon>ModelForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ModelFormUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Model\ModelFormUserControl.Designer.cs">
+      <DependentUpon>ModelFormUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Project\DataType\DataTypeManagementUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Project\DataType\DataTypeManagementUserControl.Designer.cs">
+      <DependentUpon>DataTypeManagementUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ModelFieldUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Model\ModelFieldUserControl.Designer.cs">
+      <DependentUpon>ModelFieldUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ModelRelationshipUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Model\ModelRelationshipUserControl.Designer.cs">
+      <DependentUpon>ModelRelationshipUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Project\ProjectDetailsUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Project\ProjectDetailsUserControl.Designer.cs">
+      <DependentUpon>ProjectDetailsUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Project\ProjectDomainDetailsUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Project\ProjectDomainDetailsUserControl.Designer.cs">
+      <DependentUpon>ProjectDomainDetailsUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Project\ProjectDomainUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Project\ProjectDomainUserControl.Designer.cs">
+      <DependentUpon>ProjectDomainUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SelectedEventArgs.cs" />
+    <Compile Include="Packages\PackageDetailsUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Packages\PackageDetailsUserControl.Designer.cs">
+      <DependentUpon>PackageDetailsUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ModelUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Model\ModelUserControl.Designer.cs">
+      <DependentUpon>ModelUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SplashScreens\SplashScreen.cs" />
+    <Compile Include="SplashScreens\SplashScreenForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SplashScreens\SplashScreenForm.Designer.cs">
+      <DependentUpon>SplashScreenForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SplashScreens\TypeOfMessage.cs" />
+    <Compile Include="Templates\TemplateDetailsUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Templates\TemplateDetailsUserControl.Designer.cs">
+      <DependentUpon>TemplateDetailsUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\TemplateManagementUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Templates\TemplateManagementUserControl.Designer.cs">
+      <DependentUpon>TemplateManagementUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sources\UpdateModelsFromSourceForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sources\UpdateModelsFromSourceForm.Designer.cs">
+      <DependentUpon>UpdateModelsFromSourceForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sources\UpdateModelsFromSourceUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Sources\UpdateModelsFromSourceUserControl.Designer.cs">
+      <DependentUpon>UpdateModelsFromSourceUserControl.cs</DependentUpon>
+    </Compile>
+    <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Project\DataType\DataTypeManagementMenuUserControl.resx">
+      <DependentUpon>DataTypeManagementMenuUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Project\DataType\DomainDataTypeManagementForm.resx">
+      <DependentUpon>DomainDataTypeManagementForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Core\ManageCollectionsTreeViewUserControl.resx">
+      <DependentUpon>ManageCollectionsTreeViewUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Model\IndexUserControl.resx">
+      <DependentUpon>IndexUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Project\Drivers\DriverForm.resx">
+      <DependentUpon>DriverForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Project\Drivers\DriverUserControl.resx">
+      <DependentUpon>DriverUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Project\ProjectUserControl.resx">
+      <DependentUpon>ProjectUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sources\ManageDataSourceForm.resx">
+      <DependentUpon>ManageDataSourceForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Packages\PackageUserControl.resx">
+      <DependentUpon>PackageUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Model\ModelForm.resx">
+      <DependentUpon>ModelForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Model\ModelFormUserControl.resx">
+      <DependentUpon>ModelFormUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Project\DataType\DataTypeManagementUserControl.resx">
+      <DependentUpon>DataTypeManagementUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Model\ModelFieldUserControl.resx">
+      <DependentUpon>ModelFieldUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Model\ModelRelationshipUserControl.resx">
+      <DependentUpon>ModelRelationshipUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Project\ProjectDetailsUserControl.resx">
+      <DependentUpon>ProjectDetailsUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Project\ProjectDomainDetailsUserControl.resx">
+      <DependentUpon>ProjectDomainDetailsUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Project\ProjectDomainUserControl.resx">
+      <DependentUpon>ProjectDomainUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Packages\PackageDetailsUserControl.resx">
+      <DependentUpon>PackageDetailsUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Model\ModelUserControl.resx">
+      <DependentUpon>ModelUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SplashScreens\SplashScreenForm.resx">
+      <DependentUpon>SplashScreenForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Templates\TemplateDetailsUserControl.resx">
+      <DependentUpon>TemplateDetailsUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Templates\TemplateManagementUserControl.resx">
+      <DependentUpon>TemplateManagementUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sources\UpdateModelsFromSourceForm.resx">
+      <DependentUpon>UpdateModelsFromSourceForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sources\UpdateModelsFromSourceUserControl.resx">
+      <DependentUpon>UpdateModelsFromSourceUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Components\Common\DotNetScaffolder.Components.Common.csproj">
+      <Project>{b39709b5-d887-46e1-acc6-cbd7880e90c5}</Project>
+      <Name>DotNetScaffolder.Components.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\Common\DotNetScaffolder.Core.Common.csproj">
+      <Project>{CDACE52C-F991-40B5-80ED-4947A100EC52}</Project>
+      <Name>DotNetScaffolder.Core.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\Configuration\DotNetScaffolder.Core.Configuration.csproj">
+      <Project>{ECF3D386-0124-450F-A763-92175FF00547}</Project>
+      <Name>DotNetScaffolder.Core.Configuration</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\Forms\FormControls\DotNetScaffolder.Core.Forms.FormControls.csproj">
+      <Project>{6A2E8779-4539-46D1-B3A0-1C3B205A95AB}</Project>
+      <Name>DotNetScaffolder.Core.Forms.FormControls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Mapping\ApplicationServices.Forms\DotNetScaffolder.Mapping.ApplicationServices.Forms.csproj">
+      <Project>{A4E7BEC8-D3C8-4AC2-90B6-2B54009F7A2B}</Project>
+      <Name>DotNetScaffolder.Mapping.ApplicationServices.Forms</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Mapping\ApplicationSettings\DotNetScaffolder.Mapping.ApplicationServices.csproj">
+      <Project>{0afff1d6-5fe5-4ff8-84e8-59352e42e658}</Project>
+      <Name>DotNetScaffolder.Mapping.ApplicationServices</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Mapping\MetaData\DotNetScaffolder.Mapping.MetaData.csproj">
+      <Project>{3F206474-14C2-4586-B57A-4EDC76795161}</Project>
+      <Name>DotNetScaffolder.Mapping.MetaData</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
