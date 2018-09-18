@@ -227,6 +227,11 @@ namespace DotNetScaffolder.Mapping.MetaData.Model
         /// </summary>
         public List<Index> Indexes { get; set; }
 
+
+        [XmlAttribute("EnabledForCodeGeneration")]
+        public bool EnabledForCodeGeneration { get; set; } = true;
+
+
         #endregion
 
         #region Public Methods And Operators

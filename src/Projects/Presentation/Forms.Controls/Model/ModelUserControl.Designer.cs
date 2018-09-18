@@ -37,12 +37,14 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.ErrorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.chkEnabledForCodeGeneration = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.chkEnabledForCodeGeneration);
             this.groupBox1.Controls.Add(this.TxtDescription);
             this.groupBox1.Controls.Add(this.TxtName);
             this.groupBox1.Controls.Add(this.TxtSchema);
@@ -111,12 +113,23 @@
             // 
             this.ErrorProvider1.ContainerControl = this;
             // 
+            // chkEnabledForCodeGeneration
+            // 
+            this.chkEnabledForCodeGeneration.AutoSize = true;
+            this.chkEnabledForCodeGeneration.Location = new System.Drawing.Point(91, 108);
+            this.chkEnabledForCodeGeneration.Name = "chkEnabledForCodeGeneration";
+            this.chkEnabledForCodeGeneration.Size = new System.Drawing.Size(166, 17);
+            this.chkEnabledForCodeGeneration.TabIndex = 19;
+            this.chkEnabledForCodeGeneration.Text = "Enabled For Code Generation";
+            this.chkEnabledForCodeGeneration.UseVisualStyleBackColor = true;
+            this.chkEnabledForCodeGeneration.CheckedChanged += new System.EventHandler(this.chkEnabledForCodeGeneration_CheckedChanged);
+            // 
             // ModelUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.groupBox1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "ModelUserControl";
             this.Size = new System.Drawing.Size(724, 504);
             this.groupBox1.ResumeLayout(false);
@@ -136,5 +149,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ErrorProvider ErrorProvider1;
+        private System.Windows.Forms.CheckBox chkEnabledForCodeGeneration;
     }
 }

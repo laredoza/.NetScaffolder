@@ -1,0 +1,10 @@
+﻿<#@ template language="C#" hostspecific="true" debug="false" #>
+<#@ include file="T4Toolbox.tt" #>
+<#@ assembly name="System.IO" #>
+<#@ include file="$(ProjectDir)Model\T4\ProjectGenerator.ttInclude" #>
+<#
+	var projectGen = new ProjectGenerator();
+	projectGen.ModelFilePath = this.Host.ResolvePath("Model/Banking.mdl");
+	projectGen.PackagePath = this.Host.ResolvePath("Model/Package");
+	projectGen.Run();
+#>

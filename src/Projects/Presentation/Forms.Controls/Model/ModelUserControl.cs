@@ -132,6 +132,29 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         }
 
         /// <summary>
+        ///     Gets or sets the EnabledForCodeGeneration .
+        /// </summary>
+        public bool EnabledForCodeGeneration
+        {
+            get { return chkEnabledForCodeGeneration.Checked; }
+
+            set
+            {
+                if (DataSource.EnabledForCodeGeneration != value)
+                {
+                    DataSource.EnabledForCodeGeneration = value;
+                }
+
+                if (chkEnabledForCodeGeneration.Checked != value)
+                {
+                    chkEnabledForCodeGeneration.Checked = value;
+                }
+            }
+        }
+
+
+
+        /// <summary>
         ///     Gets or sets the validation result.
         /// </summary>
         /// >
@@ -205,6 +228,19 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         }
 
         /// <summary>
+        /// The chkEnabledForCodeGeneration Checked changed.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void chkEnabledForCodeGeneration_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!this.loading)
+            {
+                EnabledForCodeGeneration = chkEnabledForCodeGeneration.Checked;
+            }
+        }
+
+        /// <summary>
         ///     The update data source.
         /// </summary>
         private void UpdateDataSource()
@@ -218,6 +254,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
                 SchemaName = DataSource.SchemaName;
                 ModelName = DataSource.TableName;
                 Description = Description;
+                EnabledForCodeGeneration = DataSource.EnabledForCodeGeneration;
 
                 this.loading = false;
             }
@@ -230,5 +267,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         }
 
         #endregion
+
+        
     }
 }

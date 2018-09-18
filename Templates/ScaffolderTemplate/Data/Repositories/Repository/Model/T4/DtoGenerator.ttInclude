@@ -1,0 +1,30 @@
+﻿<#@ include file="DtoTemplate.ttinclude" #>
+<#+
+    public class DtoGenerator : BaseGenerator
+    {
+        public DtoDataType DataType { get; set; }
+        public DtoInterfaceDataType DtoInterfaceType { get; set; }
+        public List<Table> Models { get; set; }
+
+        private DtoTemplate template = new DtoTemplate();
+
+        protected override void RunCore()
+        {
+            Debugger.Break();
+
+            foreach(var model in this.Models)
+            {
+                DataType.MetaData = model;
+                template.DataType = this.DataType;
+                template.DtoInterfaceNamespace = DtoInterfaceType.FullNamespace;
+
+                if(!string.IsNullOrEmpty(DataType.OutputPath))
+                {
+                    template.Output.Project = DataType.OutputPath;
+                }
+
+                template.RenderToFile(string.Format(@"{0}\{1}.g.cs", DataType.OutputFolder, DataType.DtoNameFull));	
+            }
+        }
+    }
+#>

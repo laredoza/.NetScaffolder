@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContextDataType xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <AdditionalNamespaces>
+    <string>RepositoryEFDotnet.Core.Base</string>
+  </AdditionalNamespaces>
+  <Contexts>
+    <ContextData>
+      <ContextName>FullContext</ContextName>
+      <CustomConnectionName>RepoTest</CustomConnectionName>
+      <Id>7d5d7239-42e3-4c2d-a0b9-abc8b00ff3cc</Id>
+      <InheritFrom>BaseContext</InheritFrom>
+      <Models>
+        <Table Description="" SchemaName="dbo" TableName="BankAccount">
+          <Columns />
+          <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
+          <RelationShips />
+          <Indexes />
+        </Table>
+        <Table Description="" SchemaName="dbo" TableName="BankTransfers">
+          <Columns />
+          <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
+          <RelationShips />
+          <Indexes />
+        </Table>
+        <Table Description="" SchemaName="dbo" TableName="Book">
+          <Columns />
+          <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
+          <RelationShips />
+          <Indexes />
+        </Table>
+        <Table Description="" SchemaName="dbo" TableName="Country">
+          <Columns />
+          <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
+          <RelationShips />
+          <Indexes />
+        </Table>
+        <Table Description="" SchemaName="dbo" TableName="Customer">
+          <Columns />
+          <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
+          <RelationShips />
+          <Indexes />
+        </Table>
+        <Table Description="" SchemaName="dbo" TableName="Order">
+          <Columns />
+          <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
+          <RelationShips />
+          <Indexes />
+        </Table>
+        <Table Description="" SchemaName="dbo" TableName="OrderDetails">
+          <Columns />
+          <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
+          <RelationShips />
+          <Indexes />
+        </Table>
+        <Table Description="" SchemaName="dbo" TableName="Product">
+          <Columns />
+          <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
+          <RelationShips />
+          <Indexes />
+        </Table>
+        <Table Description="" SchemaName="dbo" TableName="Software">
+          <Columns />
+          <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
+          <RelationShips />
+          <Indexes />
+        </Table>
+      </Models>
+      <Namespace>Context</Namespace>
+      <OutputFolder>Context</OutputFolder>
+      <OutputPath>..\..\Contexts\{0}\{1}\RepositoryEFDotnet.Contexts.{0}.{1}.csproj</OutputPath>
+      <IsDefault>true</IsDefault>
+    </ContextData>
+  </Contexts>
+  <MissingTables />
+</ContextDataType>

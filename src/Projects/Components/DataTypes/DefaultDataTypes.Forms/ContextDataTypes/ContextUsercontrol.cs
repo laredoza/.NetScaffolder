@@ -411,7 +411,8 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.ContextDa
                         SelectedContext.Models.Add(new Table
                         {
                             TableName = table.TableName,
-                            SchemaName = table.SchemaName
+                            SchemaName = table.SchemaName,
+                            EnabledForCodeGeneration = table.EnabledForCodeGeneration
                         });
                     }
                 }
