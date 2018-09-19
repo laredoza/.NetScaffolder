@@ -64,6 +64,7 @@ namespace DotNetScaffolder.Components.Common.Contract
         /// </summary>
         List<LanguageOutputDetails> LanguageOutputDetails { get; set; }
 
+
         #endregion
 
         #region Public Methods And Operators

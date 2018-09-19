@@ -52,11 +52,14 @@
     <Compile Include="Mappings\SqlServerFullContext\BankAccountMap.g.cs" />
     <Compile Include="Mappings\SqlServerFullContext\BankTransfersMap.g.cs" />
     <Compile Include="Mappings\SqlServerFullContext\BookMap.g.cs" />
+    <Compile Include="Mappings\SqlServerFullContext\burgerTableMap.g.cs" />
     <Compile Include="Mappings\SqlServerFullContext\CountryMap.g.cs" />
     <Compile Include="Mappings\SqlServerFullContext\CustomerMap.g.cs" />
     <Compile Include="Mappings\SqlServerFullContext\OrderDetailsMap.g.cs" />
     <Compile Include="Mappings\SqlServerFullContext\OrderMap.g.cs" />
     <Compile Include="Mappings\SqlServerFullContext\ProductMap.g.cs" />
+    <Compile Include="Mappings\SqlServerFullContext\SoftwareMap.g.cs" />
+    <Compile Include="Mappings\SqlServerFullContext\softwareproviderMap.g.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -8,12 +8,12 @@ public class ContextNHibernateTemplate : BaseTemplate
 	public string MappingPostFix { get; set; }
     public IDriver Driver { get; set; }
 	public List<Table> Models { get; set; }
+	public CopyrightHeader Header { get; set; }
 
 	public override string TransformText()
 	{
 		//Debugger.Break();
-		Header = new CopyrightHeader();
-		Header.Filename = ContextData.ContextName;
+		Header = GetHeader(ContextData.ContextName);
 #>
 
 <#= Header.TransformText() #>

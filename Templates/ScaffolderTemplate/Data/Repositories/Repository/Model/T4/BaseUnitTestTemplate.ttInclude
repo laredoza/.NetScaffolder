@@ -2,12 +2,12 @@
 public class BaseUnitTestTemplate : BaseTemplate 
 {
     public List<Table> Models { get; set; }
-	
+	public CopyrightHeader Header { get; set; }
+
 	public override string TransformText()
 	{
 		// Debugger.Break();
-		Header = new CopyrightHeader();
-		Header.Filename = "BaseUnitTest.g.cs";
+		Header = GetHeader("BaseUnitTest.g.cs");
 #>
 
 <#= Header.TransformText() #>

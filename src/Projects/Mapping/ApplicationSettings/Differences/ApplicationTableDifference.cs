@@ -210,7 +210,46 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Differences
             retval.FirstMissingRelationships = secondTable.Relationships
                 .Where(u => !firstTableRelationshipTableNames.Contains(u.ReferencedTableName.ToUpper())).ToList();
 
+
+              secondTableRelationshipTableNames =
+          new HashSet<string>(secondTable.Relationships.Select(u => u.RelationshipName.ToUpper()));
+            retval.FirstExtraRelationships = firstTable.Relationships
+                .Where(u => !secondTableRelationshipTableNames.Contains(u.RelationshipName.ToUpper())).ToList();
+
+              firstTableRelationshipTableNames =
+                new HashSet<string>(firstTable.Relationships.Select(u => u.RelationshipName.ToUpper()));
+            retval.FirstMissingRelationships = secondTable.Relationships
+                .Where(u => !firstTableRelationshipTableNames.Contains(u.RelationshipName.ToUpper())).ToList();
+
+
+
+            secondTableRelationshipTableNames =
+        new HashSet<string>(secondTable.Relationships.Select(u => u.ColumnName.ToUpper()));
+            retval.FirstExtraRelationships = firstTable.Relationships
+                .Where(u => !secondTableRelationshipTableNames.Contains(u.ColumnName.ToUpper())).ToList();
+
+            firstTableRelationshipTableNames =
+              new HashSet<string>(firstTable.Relationships.Select(u => u.ColumnName.ToUpper()));
+            retval.FirstMissingRelationships = secondTable.Relationships
+                .Where(u => !firstTableRelationshipTableNames.Contains(u.ColumnName.ToUpper())).ToList();
+
+            secondTableRelationshipTableNames =
+                 new HashSet<string>(secondTable.Relationships.Select(u => u.ReferencedColumnName.ToUpper()));
+            retval.FirstExtraRelationships = firstTable.Relationships
+                .Where(u => !secondTableRelationshipTableNames.Contains(u.ReferencedColumnName.ToUpper())).ToList();
+
+            firstTableRelationshipTableNames =
+              new HashSet<string>(firstTable.Relationships.Select(u => u.ReferencedColumnName.ToUpper()));
+            retval.FirstMissingRelationships = secondTable.Relationships
+                .Where(u => !firstTableRelationshipTableNames.Contains(u.ReferencedColumnName.ToUpper())).ToList();
+
+
+
+
             RefreshIndexes(firstTable, secondTable, retval);
+
+      
+
 
             retval.ColumnDataTypeDiffs = new List<ColumnDataTypeDifference>();
             foreach (var column in firstTable.Columns)
@@ -334,7 +373,7 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Differences
                 }
             }
         }
-
+ 
         #endregion
     }
 }

@@ -62,11 +62,14 @@
     <Compile Include="Mappings\OracleFullContext\BankAccountMap.g.cs" />
     <Compile Include="Mappings\OracleFullContext\BankTransfersMap.g.cs" />
     <Compile Include="Mappings\OracleFullContext\BookMap.g.cs" />
+    <Compile Include="Mappings\OracleFullContext\burgerTableMap.g.cs" />
     <Compile Include="Mappings\OracleFullContext\CountryMap.g.cs" />
     <Compile Include="Mappings\OracleFullContext\CustomerMap.g.cs" />
     <Compile Include="Mappings\OracleFullContext\OrderDetailsMap.g.cs" />
     <Compile Include="Mappings\OracleFullContext\OrderMap.g.cs" />
     <Compile Include="Mappings\OracleFullContext\ProductMap.g.cs" />
+    <Compile Include="Mappings\OracleFullContext\SoftwareMap.g.cs" />
+    <Compile Include="Mappings\OracleFullContext\softwareproviderMap.g.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

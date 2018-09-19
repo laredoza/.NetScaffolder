@@ -72,11 +72,14 @@
     <Compile Include="Mappings\PostgresFullContext\BankAccountMap.g.cs" />
     <Compile Include="Mappings\PostgresFullContext\BankTransfersMap.g.cs" />
     <Compile Include="Mappings\PostgresFullContext\BookMap.g.cs" />
+    <Compile Include="Mappings\PostgresFullContext\burgerTableMap.g.cs" />
     <Compile Include="Mappings\PostgresFullContext\CountryMap.g.cs" />
     <Compile Include="Mappings\PostgresFullContext\CustomerMap.g.cs" />
     <Compile Include="Mappings\PostgresFullContext\OrderDetailsMap.g.cs" />
     <Compile Include="Mappings\PostgresFullContext\OrderMap.g.cs" />
     <Compile Include="Mappings\PostgresFullContext\ProductMap.g.cs" />
+    <Compile Include="Mappings\PostgresFullContext\SoftwareMap.g.cs" />
+    <Compile Include="Mappings\PostgresFullContext\softwareproviderMap.g.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

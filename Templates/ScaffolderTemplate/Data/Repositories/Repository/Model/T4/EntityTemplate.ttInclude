@@ -3,12 +3,12 @@ public class EntityTemplate : BaseTemplate
 {
 	public EntityDataType DataType { get; set; }
 	public string DtoInterfaceNamespace { get; set; }
+	public CopyrightHeader Header { get; set; }
 	
 	public override string TransformText()
 	{
 		// Debugger.Break();
-		Header = new CopyrightHeader();
-		Header.Filename = DataType.EntityName;
+		Header = GetHeader(DataType.EntityName);
 #>
 
 <#= Header.TransformText() #>

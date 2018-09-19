@@ -131,6 +131,7 @@
             this.TextBoxHeader.Size = new System.Drawing.Size(422, 332);
             this.TextBoxHeader.TabIndex = 16;
             this.TextBoxHeader.Text = "";
+            this.TextBoxHeader.TextChanged += new System.EventHandler(this.TextBoxHeader_TextChanged);
             // 
             // ProjectDetailsUserControl
             // 

@@ -9,8 +9,16 @@
         private string OutputPath = @"..\..\..\RepositoryEFDotnet\Tests\Base\DotNetScaffolder.Repository.UnitTests.Base.csproj";
         private string OutputFolder = "Base";
 
+		protected override void setHeader(ProjectDefinition projectDefinition)
+		{
+			CompanyText = projectDefinition.Company;
+			LicenseText = projectDefinition.License;
+			HeaderText = projectDefinition.HeaderText;
+		}
+
         protected override void RunCore()
         {
+
 			var unitTestTemplate = new BaseUnitTestTemplate();
 			var uowTemplate = new BaseUowUnitTestTemplate();
 			var repoTemplate = new BaseRepositoryUnitTestTemplate();

@@ -72,11 +72,14 @@
     <Compile Include="Mappings\MySqlFullContext\BankAccountMap.g.cs" />
     <Compile Include="Mappings\MySqlFullContext\BankTransfersMap.g.cs" />
     <Compile Include="Mappings\MySqlFullContext\BookMap.g.cs" />
+    <Compile Include="Mappings\MySqlFullContext\burgerTableMap.g.cs" />
     <Compile Include="Mappings\MySqlFullContext\CountryMap.g.cs" />
     <Compile Include="Mappings\MySqlFullContext\CustomerMap.g.cs" />
     <Compile Include="Mappings\MySqlFullContext\OrderDetailsMap.g.cs" />
     <Compile Include="Mappings\MySqlFullContext\OrderMap.g.cs" />
     <Compile Include="Mappings\MySqlFullContext\ProductMap.g.cs" />
+    <Compile Include="Mappings\MySqlFullContext\SoftwareMap.g.cs" />
+    <Compile Include="Mappings\MySqlFullContext\softwareproviderMap.g.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

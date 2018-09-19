@@ -58,6 +58,7 @@
 	
         protected override void RunCore()
         {
+
             //Debugger.Break();
             ScaffoldConfig.Load(PackagePath);
             FilePersistenceOptions options = new FilePersistenceOptions { Path = ModelFilePath };
@@ -102,11 +103,11 @@
                     }
                 }
 			
-                ExecuteGenerators(dataTypes, domain);
+                ExecuteGenerators(dataTypes, domain,ProjectDefinition);
             }
         }
 	
-        protected virtual void ExecuteGenerators(List<IDataType> dataTypes, DomainDefinition domain)
+        protected virtual void ExecuteGenerators(List<IDataType> dataTypes, DomainDefinition domain, ProjectDefinition projectDefinition)
         {
 		
         }

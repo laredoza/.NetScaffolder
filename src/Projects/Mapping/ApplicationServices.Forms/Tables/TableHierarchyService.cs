@@ -105,6 +105,18 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Forms.Tables
                              && t.SchemaName.ToUpper() == table.SchemaName.ToUpper());
                     PreserveCustomMetadata(refreshedTable, table);
                     newList.Add(refreshedTable);
+
+                    // update relations
+                    //foreach (var item in refreshedTable.Relationships.Select(a=>a.RelatedTable))
+                    //{
+                    //    var megatest = newList.First(
+                    //    t => t.TableName.ToUpper() == item.TableName.ToUpper()
+                    //         && t.SchemaName.ToUpper() == item.SchemaName.ToUpper());
+
+                    //    PreserveCustomMetadata(megatest, item);
+                    //}
+
+
                 }
             }
 
@@ -447,6 +459,14 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Forms.Tables
                         if (existing != null && existing.Count() == 1)
                         {
                             existing.Single().RelationshipAlias = item.RelationshipAlias;
+
+                            // attempt to update columnnames if changed.
+                            //if(existing.Single().ColumnName != item.ColumnName)
+                            //    existing.Single().RelatedTable.Relationships.Where(a => a.RelationshipName == item.RelationshipName).FirstOrDefault()
+                            //        //existing.Single().RelatedTable.Relationships.Where(a=>a.RelationshipName == "").FirstOrDefault().ColumnName = item.ColumnName;
+
+                            //if (existing.Single().ReferencedColumnName != item.ReferencedColumnName)
+                            //    existing.Single().ReferencedColumnName = item.ReferencedColumnName;
                         }
                     }
 
@@ -458,12 +478,27 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Forms.Tables
                                     && a.ColumnName == item.ColumnName
                                     && a.ReferencedColumnName == item.ReferencedColumnName
                                     && a.ReferencedTableName == item.ReferencedTableName
-                                    && a.RelationshipAlias == item.RelationshipAlias)
+                                    //&& (string.IsNullOrEmpty(a.RelationshipAlias)? item.RelationshipAlias : a.RelationshipAlias) == item.RelationshipAlias)
+                                    )
                             .ToList();
                         if (existing != null && existing.Count() == 1)
                         {
                             existing.Single().RelationshipAlias = item.RelationshipAlias;
                         }
+
+                        //existing = newTable.Relationships
+                        //    .Where(a => a.RelationshipName == item.RelationshipName
+                        //            && (a.ColumnName != item.ColumnName
+                        //            || a.ReferencedColumnName != item.ReferencedColumnName)
+                        //            && a.ReferencedTableName == item.ReferencedTableName
+                        //            //&& (string.IsNullOrEmpty(a.RelationshipAlias)? item.RelationshipAlias : a.RelationshipAlias) == item.RelationshipAlias)
+                        //            )
+                        //    .ToList();
+                        //if (existing != null && existing.Count() == 1)
+                        //{
+                        //    existing.Single().ColumnName = item.ColumnName;
+                        //    existing.Single().ReferencedColumnName = item.ReferencedColumnName;
+                        //}
                     }
 
 

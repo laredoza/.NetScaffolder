@@ -2,12 +2,12 @@
 public class DtoInterfaceTemplate : BaseTemplate 
 {
 	public DtoInterfaceDataType DataType { get; set; }
+	public CopyrightHeader Header { get; set; }
 	
 	public override string TransformText()
 	{
 		// Debugger.Break();
-		Header = new CopyrightHeader();
-		Header.Filename = DataType.InterfaceName;
+		Header = GetHeader(DataType.InterfaceName);
 #>
 
 <#= Header.TransformText() #>

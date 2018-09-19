@@ -109,7 +109,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Base
         /// </summary>
         [XmlIgnore]
         public List<Validation> ValidationResult { get; set; }
-
+ 
         #endregion
 
         #region Public Methods And Operators
