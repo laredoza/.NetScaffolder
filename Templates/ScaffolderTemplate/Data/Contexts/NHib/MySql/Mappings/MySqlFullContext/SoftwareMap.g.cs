@@ -42,7 +42,6 @@ namespace Banking.Models.Context.Mappings.NHib.MySql
 			#region Primary Keys
 			
 			Id(t => t.ProductId).GeneratedBy.Assigned()
-			.Index("IX_ProductId")
 			.Not.Nullable();
 
 			#endregion
@@ -57,6 +56,7 @@ namespace Banking.Models.Context.Mappings.NHib.MySql
 			
 			#region Relationships
 			
+			HasMany(s => s.SelfRefTAble).KeyColumn("SoftwareId");
 			
 			#endregion			
 

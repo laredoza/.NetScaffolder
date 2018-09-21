@@ -40,6 +40,7 @@ namespace Banking.Models.Interfaces
 		
 		#region Child Relationships
 		
+		IList<ISelfRefTAble> SelfRefTAble { get; set; }
 
 		#endregion
 		

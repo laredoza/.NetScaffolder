@@ -163,6 +163,10 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Sources
                 this.sourceType.Fix(newTables);
                 this.DataSource.Tables = newTables;
             }
+
+            
+                this.sourceType.Fix(this.DataSource.Tables);
+             
         }
 
         #endregion

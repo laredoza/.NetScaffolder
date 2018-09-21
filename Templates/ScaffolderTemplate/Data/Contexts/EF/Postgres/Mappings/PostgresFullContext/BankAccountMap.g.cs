@@ -65,8 +65,6 @@ namespace Banking.Models.Context.Mappings.EF.Postgres
 			#endregion
 			
 			#region Indexes
-			HasIndex(i => new {i.BankAccountId}).HasName("UQ__BankAcco__4FC8E4A0C45281C8").IsUnique(true);
-			HasIndex(i => new {i.CustomerId}).HasName("IX_CustomerId").IsUnique(false);
 			#endregion
 
 			#region Relationships

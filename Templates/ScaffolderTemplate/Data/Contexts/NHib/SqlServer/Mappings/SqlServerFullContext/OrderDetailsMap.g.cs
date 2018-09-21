@@ -43,7 +43,6 @@ namespace Banking.Models.Context.Mappings.NHib.SqlServer
 			#region Primary Keys
 			
 			Id(t => t.OrderDetailsId).GeneratedBy.Assigned()
-			.UniqueKey("UQ__OrderDet__9DD74DBC8AA17DA0")
 			.Not.Nullable();
 
 			#endregion
@@ -51,10 +50,8 @@ namespace Banking.Models.Context.Mappings.NHib.SqlServer
 			#region Properties
 			
 			Map(t => t.OrderId).Column("OrderId")
-			.Index("IX_OrderId")
 			.Not.Nullable();
 			Map(t => t.ProductId).Column("ProductId")
-			.Index("IX_ProductId")
 			.Not.Nullable();
 			Map(t => t.UnitPrice).Column("UnitPrice")
 			.Precision(19).Scale(4)

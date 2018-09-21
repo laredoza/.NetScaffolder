@@ -56,11 +56,11 @@ namespace Banking.Models.Context.Mappings.EFCore.SqlServer
 			#endregion
 
 			#region Indexes
-			builder.HasIndex(i => new {i.ProductId}).HasName("IX_ProductId").IsUnique(false);
 			#endregion
 			
 			#region Relationships
 			
+			builder.HasMany<SelfRefTAble>(s => s.SelfRefTAble).WithOne(s => s.Software).HasForeignKey(s => s.SoftwareId).OnDelete(DeleteBehavior.Restrict);
 			
 			#endregion	
 			#region Column Order

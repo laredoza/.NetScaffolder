@@ -70,15 +70,13 @@ namespace Banking.Models.Context.Mappings.EF.Postgres
 			#endregion
 			
 			#region Indexes
-			HasIndex(i => new {i.OrderId}).HasName("UQ__Order__C3905BCE3C614174").IsUnique(true);
-			HasIndex(i => new {i.CustomerId}).HasName("IX_CustomerId").IsUnique(false);
 			#endregion
 
 			#region Relationships
 			
-			HasOptional<Customer>(s => s.Customer).WithMany(s => s.Order).HasForeignKey(s => s.CustomerId).WillCascadeOnDelete(false);
-			HasMany<OrderDetails>(s => s.OrderDetails).WithRequired(s => s.Order).HasForeignKey(s => s.OrderId).WillCascadeOnDelete(false);
 			HasMany<softwareprovider>(s => s.softwareprovider).WithRequired(s => s.somealies).HasForeignKey(s => s.ProductIdDDB).WillCascadeOnDelete(false);
+			HasMany<OrderDetails>(s => s.OrderDetails).WithRequired(s => s.Order).HasForeignKey(s => s.OrderId).WillCascadeOnDelete(false);
+			HasOptional<Customer>(s => s.Customer).WithMany(s => s.Order).HasForeignKey(s => s.CustomerId).WillCascadeOnDelete(false);
 			
 			#endregion			
 

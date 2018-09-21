@@ -119,10 +119,16 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.Edmxs
                 foreach (var relationship in modelTable.Relationships)
                 {
                     relationship.Table = modelTable;
-                    relationship.RelatedTable =
+
+                    if (relationship.RelatedTable != null && relationship.RelatedTable != modelTable)
+                    {
+                        relationship.RelatedTable =
                         tables.FirstOrDefault(t => t.TableName == relationship.ReferencedTableName);
+                    }
                     relationship.SchemaName = relationship.RelatedTable?.SchemaName;
                 }
+
+                FormatNavigationPropertiesToBeUnique(modelTable);
             }
 
             Logger.Trace("Completed Fix()");
@@ -199,6 +205,8 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.Edmxs
 
                 foreach (var rel in relationships)
                 {
+ 
+
                     var ass = new Relationship
                                   {
                                       ReferencedTableName =
@@ -231,15 +239,157 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.Edmxs
                     ass.Multiplicity = this.MapMultiplicity(tblMp.Multiplicity);
                     ass.ReferencedMultiplicity = this.MapMultiplicity(refTblMp.Multiplicity);
 
+
+                    // check For Recursive Reference:
+                    var checker = rel.Ends.First().Type;
+                    bool isSelfRef = true;
+
+                    foreach (var item in rel.Ends)
+                    {
+                        if (checker != item.Type)
+                            isSelfRef = false;
+                    }
+
+                    Relationship assClone = null;
+                    if (isSelfRef)
+                    {
+                        ass.RelatedTable = tbl;
+                        ass.ReferencedTableName = table.Name;
+                        ass.Table = tbl;
+                        ass.RelationshipAlias = table.Name + "_1";
+
+                        assClone = ass.Clone() as Relationship;
+                        assClone.RelationshipAlias = table.Name + "_2";
+                        assClone.ColumnName = ass.ReferencedColumnName;
+                        assClone.ReferencedColumnName = ass.ColumnName;
+                        assClone.DependencyRelationShip = RelationshipType.ForeignKey;
+                        assClone.Multiplicity = ass.ReferencedMultiplicity;
+                        assClone.ReferencedMultiplicity = ass.Multiplicity;
+
+
+                    }
+
+
                     tbl.Relationships.Add(ass);
+                    if(assClone!=null ) 
+                            tbl.Relationships.Add(assClone);
                 }
+
+                FormatNavigationPropertiesToBeUnique(tbl);
+
             }
+
+
 
             this.Fix(result);
 
             Logger.Trace("Completed Import()");
             return result;
         }
+
+
+        /// <summary>
+        /// The format navigation properties to be unique.
+        /// </summary>
+        /// <param name="newTable">
+        /// The new table.
+        /// </param>
+        private static void FormatNavigationPropertiesToBeUnique(Table newTable)
+        {
+            // Format navigation property names to be unique and not equal to main table
+            foreach (var rel in newTable.Relationships.OrderBy(o => o.ColumnName).ThenBy(o => o.ReferencedColumnName))
+            {
+                var test = (from relItem in newTable.Relationships
+                            orderby rel.ReferencedColumnName
+                            select string.IsNullOrEmpty(relItem.RelationshipAlias)
+                                       ? relItem.ReferencedTableName
+                                       : relItem.RelationshipAlias).ToList();
+
+                test.AddRange(newTable.Columns.Select(o => o.ColumnName));
+                test.Add(newTable.TableName); // Add table name as properties cannot have same name as main table
+
+                string alias = Common.RelationshipNameFormatting.FormatName(
+                    rel.ReferencedTableName,
+                    rel.RelationshipAlias,
+                    null,
+                    test);
+                // only change alias if it is null. 
+                if (!string.Equals(rel.ReferencedTableName, alias) && string.IsNullOrEmpty(alias))
+                {
+                    rel.RelationshipAlias = alias;
+                }
+
+                if (!string.Equals(rel.RelationshipAlias, alias) && !string.Equals(rel.ReferencedTableName, alias) && !string.Equals(rel.RelationshipAlias, rel.ReferencedTableName) && string.IsNullOrEmpty(rel.RelationshipAlias))
+                {
+                    rel.RelationshipAlias = alias;
+                }
+
+            }
+        }
+
+         /// <summary>
+        /// The add indexes.
+        /// </summary>
+        /// <param name="table">
+        /// The table.
+        /// </param>
+        /// <param name="newTable">
+        /// The new table.
+        /// </param>
+        //private static void AddIndexes(DatabaseTable table, Table newTable)
+        //{
+        //    foreach (DatabaseIndex index in table.Indexes)
+        //    {
+        //        Index newIndex = new Index
+        //                             {
+        //                                 IsUnique = index.IsUnique,
+        //                                 Name = index.Name,
+        //                                 Table = newTable
+        //                             };
+
+        //        if (index.IndexType == null)
+        //        {
+        //            newIndex.IndexType = IndexType.Normal;
+        //        }
+        //        else
+        //        {
+        //            switch (index.IndexType.ToUpper())
+        //            {
+        //                case "NONCLUSTERED":
+        //                    newIndex.IndexType = IndexType.NonClustered;
+        //                    break;
+        //                case "NONCLUSTERED HASH":
+        //                    newIndex.IndexType = IndexType.NonClusteredHash;
+        //                    break;
+        //                case "CLUSTERED":
+        //                    newIndex.IndexType = IndexType.Clustered;
+        //                    break;
+        //                case "PRIMARY":
+        //                    newIndex.IndexType = IndexType.PrimaryKey;
+        //                    break;
+        //                case "PRIMARY NONCLUSTERED":
+        //                    newIndex.IndexType = IndexType.PrimaryNonClusteredKey;
+        //                    break;
+        //                case "XML":
+        //                    newIndex.IndexType = IndexType.Xml;
+        //                    break;
+        //                default:
+        //                    throw new NotImplementedException($"Invalid index type {index.IndexType}");
+        //            }
+        //        }
+
+        //        foreach (DatabaseColumn column in index.Columns)
+        //        {
+        //            if (newTable.Columns.Any(c => string.Equals(c.ColumnName, column.Name, StringComparison.InvariantCultureIgnoreCase)))
+        //            {
+        //                newIndex.Columns.Add(column.Name);
+        //            }
+        //        }
+
+        //        newTable.Indexes.Add(newIndex);
+        //    }
+        //}
+
 
         /// <summary>
         /// Load Data

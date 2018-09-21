@@ -16,12 +16,6 @@
           <RelationShips />
           <Indexes />
         </Table>
-        <Table Description="" SchemaName="dbo" TableName="BankTransfers" EnabledForCodeGeneration="true">
-          <Columns />
-          <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
-          <RelationShips />
-          <Indexes />
-        </Table>
         <Table Description="" SchemaName="dbo" TableName="Book" EnabledForCodeGeneration="true">
           <Columns />
           <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
@@ -46,12 +40,6 @@
           <RelationShips />
           <Indexes />
         </Table>
-        <Table Description="" SchemaName="dbo" TableName="OrderDetails" EnabledForCodeGeneration="true">
-          <Columns />
-          <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
-          <RelationShips />
-          <Indexes />
-        </Table>
         <Table Description="" SchemaName="dbo" TableName="Product" EnabledForCodeGeneration="true">
           <Columns />
           <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
@@ -71,6 +59,24 @@
           <Indexes />
         </Table>
         <Table Description="" SchemaName="dbo" TableName="burgerTable" EnabledForCodeGeneration="true">
+          <Columns />
+          <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
+          <RelationShips />
+          <Indexes />
+        </Table>
+        <Table Description="" SchemaName="dbo" TableName="BankTransfers" EnabledForCodeGeneration="true">
+          <Columns />
+          <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
+          <RelationShips />
+          <Indexes />
+        </Table>
+        <Table Description="" SchemaName="dbo" TableName="OrderDetails" EnabledForCodeGeneration="true">
+          <Columns />
+          <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
+          <RelationShips />
+          <Indexes />
+        </Table>
+        <Table Description="" SchemaName="dbo" TableName="SelfRefTAble" EnabledForCodeGeneration="true">
           <Columns />
           <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
           <RelationShips />

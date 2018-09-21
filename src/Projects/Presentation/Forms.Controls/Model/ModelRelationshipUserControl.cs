@@ -274,6 +274,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         /// </summary>
         public void InitComboBoxForeignColumn()
         {
+            if(this.DataSource.RelatedTable!=null)
             this.InitFieldsComboBox(this.DataSource.RelatedTable.Columns, this.ComboBoxRelatedColumn);
         }
 

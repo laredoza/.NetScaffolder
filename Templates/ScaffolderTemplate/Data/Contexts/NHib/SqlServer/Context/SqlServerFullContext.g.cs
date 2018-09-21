@@ -57,16 +57,17 @@ namespace Banking.Models.Context.NHib
 	    protected override void ConfigureMappings(MappingConfiguration config)
 	    {
 			config.FluentMappings.Add(typeof(BankAccountMap));
-			config.FluentMappings.Add(typeof(BankTransfersMap));
 			config.FluentMappings.Add(typeof(BookMap));
 			config.FluentMappings.Add(typeof(CountryMap));
 			config.FluentMappings.Add(typeof(CustomerMap));
 			config.FluentMappings.Add(typeof(OrderMap));
-			config.FluentMappings.Add(typeof(OrderDetailsMap));
 			config.FluentMappings.Add(typeof(ProductMap));
 			config.FluentMappings.Add(typeof(SoftwareMap));
 			config.FluentMappings.Add(typeof(softwareproviderMap));
 			config.FluentMappings.Add(typeof(burgerTableMap));
+			config.FluentMappings.Add(typeof(BankTransfersMap));
+			config.FluentMappings.Add(typeof(OrderDetailsMap));
+			config.FluentMappings.Add(typeof(SelfRefTAbleMap));
         }
 	}
 }

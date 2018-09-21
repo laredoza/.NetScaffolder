@@ -56,7 +56,6 @@ namespace Banking.Models.Context.Mappings.EFCore.SqlServer
 			#endregion
 
 			#region Indexes
-			builder.HasIndex(i => new {i.CountryId}).HasName("UQ__Country__10D1609E8CC26505").IsUnique(true);
 			#endregion
 			
 			#region Relationships

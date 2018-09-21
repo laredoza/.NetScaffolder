@@ -36,6 +36,7 @@ namespace Banking.Models.Entity
 		
 		public Software()
 		{
+			this.SelfRefTAble = new List <SelfRefTAble>();
 		}
 		
 		public Software(ISoftware item, bool deep = false)
@@ -44,9 +45,17 @@ namespace Banking.Models.Entity
 			
 			this.ProductId = item.ProductId;
 			this.LicenseCode = item.LicenseCode;
+			this.SelfRefTAble = new List <SelfRefTAble>();
 
 			if(deep)
 			{
+				if(item.SelfRefTAble != null)
+				{
+					foreach(var childItem in item.SelfRefTAble)
+					{
+						this.SelfRefTAble.Add(new SelfRefTAble(childItem, deep));
+					}
+				}
 			}
 		}
 		
@@ -56,6 +65,34 @@ namespace Banking.Models.Entity
 		
 		public virtual int ProductId { get; set; }
 		public virtual string LicenseCode { get; set; }
+
+		#endregion
+
+		#region Child Relationships
+        
+        public virtual IList<SelfRefTAble> SelfRefTAble { get; set; }
+	
+        IList<ISelfRefTAble> ISoftware.SelfRefTAble 
+		{ 
+			get
+			{
+				return this.SelfRefTAble == null ? null : (IList<ISelfRefTAble>)this.SelfRefTAble;
+			}
+			set
+			{
+				if(value != this.SelfRefTAble)
+				{
+					if(value != null)
+					{
+						this.SelfRefTAble = (IList<SelfRefTAble>)value;
+					}
+					else
+					{
+						this.SelfRefTAble = null;
+					}
+				}
+			}			
+		}
 
 		#endregion
 	}

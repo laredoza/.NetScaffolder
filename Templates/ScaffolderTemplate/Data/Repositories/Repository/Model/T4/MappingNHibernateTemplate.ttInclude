@@ -105,8 +105,8 @@ namespace <#= Namespace #>.<#= Driver.ParentFolder #>.<#= Driver.Prefix #>
 			
 			#region Relationships
 			
-<#+ foreach(var rel in Model.Relationships.Where(o => ContextData.HasModel(o) && o.RelatedTable.EnabledForCodeGeneration)){ #>
-			<#= Driver.DriverType.TransformRelationship(Model.TableName, rel, Models, Model.Relationships.Where(o => ContextData.HasModel(o) && o.RelatedTable.EnabledForCodeGeneration), NamingConvention) #>
+<#+ foreach(var rel in Model.Relationships.Where(o => ContextData.HasModel(o) && ( o.RelatedTable==null?true:o.RelatedTable.EnabledForCodeGeneration))){ #>
+			<#= Driver.DriverType.TransformRelationship(Model.TableName, rel, Models, Model.Relationships.Where(o => ContextData.HasModel(o) && ( o.RelatedTable==null?true:o.RelatedTable.EnabledForCodeGeneration)), NamingConvention) #>
 <#+ } #>
 			
 			#endregion			

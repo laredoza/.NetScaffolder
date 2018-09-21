@@ -36,6 +36,7 @@ namespace Banking.Models.Dto
 		
 		public SoftwareDto()
 		{
+			this.SelfRefTAble = new List <ISelfRefTAble>();
 		}
 		
 		public SoftwareDto(ISoftware item, bool deep = false)
@@ -44,9 +45,17 @@ namespace Banking.Models.Dto
 			
 			this.ProductId = item.ProductId;
 			this.LicenseCode = item.LicenseCode;
+			this.SelfRefTAble = new List <ISelfRefTAble>();
 
 			if(deep)
 			{
+				if(item.SelfRefTAble != null)
+				{
+					foreach(var childItem in item.SelfRefTAble)
+					{
+						this.SelfRefTAble.Add(new SelfRefTAbleDto(childItem, deep));
+					}
+				}
 			}
 		}
 		
@@ -61,6 +70,7 @@ namespace Banking.Models.Dto
 		
 		#region Child Relationships
 		
+		public IList<ISelfRefTAble> SelfRefTAble { get; set; }
 
 		#endregion
 		

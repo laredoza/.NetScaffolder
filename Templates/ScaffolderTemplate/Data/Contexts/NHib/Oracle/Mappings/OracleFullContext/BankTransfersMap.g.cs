@@ -42,7 +42,6 @@ namespace Banking.Models.Context.Mappings.NHib.Oracle
 			#region Primary Keys
 			
 			Id(t => t.BankTransferId).GeneratedBy.Assigned()
-			.UniqueKey("UQ__BankTran__2E82727AB11DB584")
 			.Not.Nullable();
 
 			#endregion
@@ -52,7 +51,6 @@ namespace Banking.Models.Context.Mappings.NHib.Oracle
 			Map(t => t.FromBankAccountId).Column("FromBankAccountId")
 			.Not.Nullable();
 			Map(t => t.ToBankAccountId).Column("ToBankAccountId")
-			.Index("IX_ToBankAccountId")
 			.Not.Nullable();
 			Map(t => t.Amount).Column("Amount")
 			.Precision(18).Scale(2)
@@ -60,7 +58,6 @@ namespace Banking.Models.Context.Mappings.NHib.Oracle
 			Map(t => t.TransferDate).Column("TransferDate")
 			.Not.Nullable();
 			Map(t => t.BankAccountId).Column("BankAccountId")
-			.UniqueKey("UQ__BankTran__4FC8E4A0CE69E10D")
 			.Nullable();
 			
 			#endregion

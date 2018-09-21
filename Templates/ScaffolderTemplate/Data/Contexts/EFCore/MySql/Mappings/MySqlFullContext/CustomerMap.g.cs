@@ -75,15 +75,13 @@ namespace Banking.Models.Context.Mappings.EFCore.MySql
 			#endregion
 
 			#region Indexes
-			builder.HasIndex(i => new {i.CustomerId}).HasName("UQ__Customer__A4AE64D98B60CE6B").IsUnique(true);
-			builder.HasIndex(i => new {i.CountryId}).HasName("IX_CountryId").IsUnique(false);
 			#endregion
 			
 			#region Relationships
 			
-			builder.HasOne<Country>(s => s.Country).WithMany(s => s.Customer).HasForeignKey(s => s.CountryId).OnDelete(DeleteBehavior.Restrict);
 			builder.HasMany<BankAccount>(s => s.BankAccount).WithOne(s => s.Customer).HasForeignKey(s => s.CustomerId).OnDelete(DeleteBehavior.Restrict);
 			builder.HasMany<Order>(s => s.Order).WithOne(s => s.Customer).HasForeignKey(s => s.CustomerId).OnDelete(DeleteBehavior.Restrict);
+			builder.HasOne<Country>(s => s.Country).WithMany(s => s.Customer).HasForeignKey(s => s.CountryId).OnDelete(DeleteBehavior.Restrict);
 			
 			#endregion	
 			#region Column Order

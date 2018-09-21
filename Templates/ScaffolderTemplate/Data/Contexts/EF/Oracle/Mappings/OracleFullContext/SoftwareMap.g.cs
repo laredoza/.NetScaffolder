@@ -62,11 +62,11 @@ namespace Banking.Models.Context.Mappings.EF.Oracle
 			#endregion
 			
 			#region Indexes
-			HasIndex(i => new {i.ProductId}).HasName("IX_ProductId").IsUnique(false);
 			#endregion
 
 			#region Relationships
 			
+			HasMany<SelfRefTAble>(s => s.SelfRefTAble).WithOptional(s => s.Software).HasForeignKey(s => s.SoftwareId).WillCascadeOnDelete(false);
 			
 			#endregion			
 

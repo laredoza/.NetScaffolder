@@ -64,9 +64,6 @@ namespace Banking.Models.Context.Mappings.EF.SqlServer
 			#endregion
 			
 			#region Indexes
-			HasIndex(i => new {i.OrderDetailsId}).HasName("UQ__OrderDet__9DD74DBC8AA17DA0").IsUnique(true);
-			HasIndex(i => new {i.OrderId}).HasName("IX_OrderId").IsUnique(false);
-			HasIndex(i => new {i.ProductId}).HasName("IX_ProductId").IsUnique(false);
 			#endregion
 
 			#region Relationships

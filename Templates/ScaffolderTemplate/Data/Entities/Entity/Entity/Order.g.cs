@@ -36,8 +36,8 @@ namespace Banking.Models.Entity
 		
 		public Order()
 		{
-			this.OrderDetails = new List <OrderDetails>();
 			this.softwareprovider = new List <softwareprovider>();
+			this.OrderDetails = new List <OrderDetails>();
 		}
 		
 		public Order(IOrder item, bool deep = false)
@@ -52,23 +52,23 @@ namespace Banking.Models.Entity
 			this.ShippingAddress = item.ShippingAddress;
 			this.ShippingCity = item.ShippingCity;
 			this.ShippingZip = item.ShippingZip;
-			this.OrderDetails = new List <OrderDetails>();
 			this.softwareprovider = new List <softwareprovider>();
+			this.OrderDetails = new List <OrderDetails>();
 
 			if(deep)
 			{
-				if(item.OrderDetails != null)
-				{
-					foreach(var childItem in item.OrderDetails)
-					{
-						this.OrderDetails.Add(new OrderDetails(childItem, deep));
-					}
-				}
 				if(item.softwareprovider != null)
 				{
 					foreach(var childItem in item.softwareprovider)
 					{
 						this.softwareprovider.Add(new softwareprovider(childItem, deep));
+					}
+				}
+				if(item.OrderDetails != null)
+				{
+					foreach(var childItem in item.OrderDetails)
+					{
+						this.OrderDetails.Add(new OrderDetails(childItem, deep));
 					}
 				}
 				if(item.Customer != null)
@@ -95,30 +95,6 @@ namespace Banking.Models.Entity
 
 		#region Child Relationships
         
-        public virtual IList<OrderDetails> OrderDetails { get; set; }
-	
-        IList<IOrderDetails> IOrder.OrderDetails 
-		{ 
-			get
-			{
-				return this.OrderDetails == null ? null : (IList<IOrderDetails>)this.OrderDetails;
-			}
-			set
-			{
-				if(value != this.OrderDetails)
-				{
-					if(value != null)
-					{
-						this.OrderDetails = (IList<OrderDetails>)value;
-					}
-					else
-					{
-						this.OrderDetails = null;
-					}
-				}
-			}			
-		}
-        
         public virtual IList<softwareprovider> softwareprovider { get; set; }
 	
         IList<Isoftwareprovider> IOrder.softwareprovider 
@@ -138,6 +114,30 @@ namespace Banking.Models.Entity
 					else
 					{
 						this.softwareprovider = null;
+					}
+				}
+			}			
+		}
+        
+        public virtual IList<OrderDetails> OrderDetails { get; set; }
+	
+        IList<IOrderDetails> IOrder.OrderDetails 
+		{ 
+			get
+			{
+				return this.OrderDetails == null ? null : (IList<IOrderDetails>)this.OrderDetails;
+			}
+			set
+			{
+				if(value != this.OrderDetails)
+				{
+					if(value != null)
+					{
+						this.OrderDetails = (IList<OrderDetails>)value;
+					}
+					else
+					{
+						this.OrderDetails = null;
 					}
 				}
 			}			

@@ -78,6 +78,7 @@
     <Compile Include="Mappings\MySqlFullContext\OrderDetailsMap.g.cs" />
     <Compile Include="Mappings\MySqlFullContext\OrderMap.g.cs" />
     <Compile Include="Mappings\MySqlFullContext\ProductMap.g.cs" />
+    <Compile Include="Mappings\MySqlFullContext\SelfRefTAbleMap.g.cs" />
     <Compile Include="Mappings\MySqlFullContext\SoftwareMap.g.cs" />
     <Compile Include="Mappings\MySqlFullContext\softwareproviderMap.g.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

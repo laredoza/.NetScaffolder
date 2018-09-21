@@ -34,10 +34,10 @@ namespace <#= DataType.FullNamespace #>
 		
 		#region Child Relationships
 		
-<#+ foreach(var child in DataType.MetaData.DistinctChildRelationships.Where(o => o.ReferencedMultiplicity == RelationshipMultiplicity.Many && o.RelatedTable.EnabledForCodeGeneration)){ #>
+<#+ foreach(var child in DataType.MetaData.DistinctChildRelationships.Where(o => o.ReferencedMultiplicity == RelationshipMultiplicity.Many && ( o.RelatedTable==null?true:o.RelatedTable.EnabledForCodeGeneration))){ #>
 		<#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #>> <#= RelationshipNameFormatting.FormatName(child.ReferencedTableName, child.RelationshipAlias, DataType.NamingConvention) #> { get; set; }
 <#+ } #>
-<#+ foreach(var child in DataType.MetaData.DistinctChildRelationships.Where(o => o.ReferencedMultiplicity != RelationshipMultiplicity.Many && o.RelatedTable.EnabledForCodeGeneration)){ #>
+<#+ foreach(var child in DataType.MetaData.DistinctChildRelationships.Where(o => o.ReferencedMultiplicity != RelationshipMultiplicity.Many && ( o.RelatedTable==null?true:o.RelatedTable.EnabledForCodeGeneration))){ #>
 		I<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #> <#= RelationshipNameFormatting.FormatName(child.ReferencedTableName, child.RelationshipAlias, DataType.NamingConvention) #> { get; set; }
 <#+ } #>
 
@@ -45,7 +45,7 @@ namespace <#= DataType.FullNamespace #>
 		
 		#region Parent Relationships
 		
-<#+ foreach(var parent in DataType.MetaData.DistinctParentRelationships.Where( a=>a.RelatedTable.EnabledForCodeGeneration).ToList() ){ #>
+<#+ foreach(var parent in DataType.MetaData.DistinctParentRelationships.Where( a=>a.RelatedTable==null?true:a.RelatedTable.EnabledForCodeGeneration).ToList() ){ #>
 		I<#= DataType.NamingConvention.ApplyNamingConvention(parent.ReferencedTableName) #> <#= RelationshipNameFormatting.FormatName(parent.ReferencedTableName, parent.RelationshipAlias, DataType.NamingConvention) #> { get; set; }
 <#+ } #>
 		

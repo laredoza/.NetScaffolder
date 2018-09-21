@@ -39,6 +39,7 @@
 ..\..\Contexts\EF\MySql\Mappings\MySqlFullContext\OrderDetailsMap.g.cs
 ..\..\Contexts\EF\MySql\Mappings\MySqlFullContext\OrderMap.g.cs
 ..\..\Contexts\EF\MySql\Mappings\MySqlFullContext\ProductMap.g.cs
+..\..\Contexts\EF\MySql\Mappings\MySqlFullContext\SelfRefTAbleMap.g.cs
 ..\..\Contexts\EF\MySql\Mappings\MySqlFullContext\SoftwareMap.g.cs
 ..\..\Contexts\EF\MySql\Mappings\MySqlFullContext\softwareproviderMap.g.cs
 ..\..\Contexts\EF\Oracle\Context\OracleFullContext.g.cs
@@ -52,6 +53,7 @@
 ..\..\Contexts\EF\Oracle\Mappings\OracleFullContext\OrderDetailsMap.g.cs
 ..\..\Contexts\EF\Oracle\Mappings\OracleFullContext\OrderMap.g.cs
 ..\..\Contexts\EF\Oracle\Mappings\OracleFullContext\ProductMap.g.cs
+..\..\Contexts\EF\Oracle\Mappings\OracleFullContext\SelfRefTAbleMap.g.cs
 ..\..\Contexts\EF\Oracle\Mappings\OracleFullContext\SoftwareMap.g.cs
 ..\..\Contexts\EF\Oracle\Mappings\OracleFullContext\softwareproviderMap.g.cs
 ..\..\Contexts\EF\Postgres\Context\PostgresFullContext.g.cs
@@ -65,6 +67,7 @@
 ..\..\Contexts\EF\Postgres\Mappings\PostgresFullContext\OrderDetailsMap.g.cs
 ..\..\Contexts\EF\Postgres\Mappings\PostgresFullContext\OrderMap.g.cs
 ..\..\Contexts\EF\Postgres\Mappings\PostgresFullContext\ProductMap.g.cs
+..\..\Contexts\EF\Postgres\Mappings\PostgresFullContext\SelfRefTAbleMap.g.cs
 ..\..\Contexts\EF\Postgres\Mappings\PostgresFullContext\SoftwareMap.g.cs
 ..\..\Contexts\EF\Postgres\Mappings\PostgresFullContext\softwareproviderMap.g.cs
 ..\..\Contexts\EF\SqlServer\Context\SqlServerFullContext.g.cs
@@ -78,6 +81,7 @@
 ..\..\Contexts\EF\SqlServer\Mappings\SqlServerFullContext\OrderDetailsMap.g.cs
 ..\..\Contexts\EF\SqlServer\Mappings\SqlServerFullContext\OrderMap.g.cs
 ..\..\Contexts\EF\SqlServer\Mappings\SqlServerFullContext\ProductMap.g.cs
+..\..\Contexts\EF\SqlServer\Mappings\SqlServerFullContext\SelfRefTAbleMap.g.cs
 ..\..\Contexts\EF\SqlServer\Mappings\SqlServerFullContext\SoftwareMap.g.cs
 ..\..\Contexts\EF\SqlServer\Mappings\SqlServerFullContext\softwareproviderMap.g.cs
 ..\..\Contexts\EFCore\MySql\Context\MySqlFullContext.g.cs
@@ -91,6 +95,7 @@
 ..\..\Contexts\EFCore\MySql\Mappings\MySqlFullContext\OrderDetailsMap.g.cs
 ..\..\Contexts\EFCore\MySql\Mappings\MySqlFullContext\OrderMap.g.cs
 ..\..\Contexts\EFCore\MySql\Mappings\MySqlFullContext\ProductMap.g.cs
+..\..\Contexts\EFCore\MySql\Mappings\MySqlFullContext\SelfRefTAbleMap.g.cs
 ..\..\Contexts\EFCore\MySql\Mappings\MySqlFullContext\SoftwareMap.g.cs
 ..\..\Contexts\EFCore\MySql\Mappings\MySqlFullContext\softwareproviderMap.g.cs
 ..\..\Contexts\EFCore\SqlServer\Context\SqlServerFullContext.g.cs
@@ -104,6 +109,7 @@
 ..\..\Contexts\EFCore\SqlServer\Mappings\SqlServerFullContext\OrderDetailsMap.g.cs
 ..\..\Contexts\EFCore\SqlServer\Mappings\SqlServerFullContext\OrderMap.g.cs
 ..\..\Contexts\EFCore\SqlServer\Mappings\SqlServerFullContext\ProductMap.g.cs
+..\..\Contexts\EFCore\SqlServer\Mappings\SqlServerFullContext\SelfRefTAbleMap.g.cs
 ..\..\Contexts\EFCore\SqlServer\Mappings\SqlServerFullContext\SoftwareMap.g.cs
 ..\..\Contexts\EFCore\SqlServer\Mappings\SqlServerFullContext\softwareproviderMap.g.cs
 ..\..\Contexts\NHib\MySql\Context\MySqlFullContext.g.cs
@@ -117,6 +123,7 @@
 ..\..\Contexts\NHib\MySql\Mappings\MySqlFullContext\OrderDetailsMap.g.cs
 ..\..\Contexts\NHib\MySql\Mappings\MySqlFullContext\OrderMap.g.cs
 ..\..\Contexts\NHib\MySql\Mappings\MySqlFullContext\ProductMap.g.cs
+..\..\Contexts\NHib\MySql\Mappings\MySqlFullContext\SelfRefTAbleMap.g.cs
 ..\..\Contexts\NHib\MySql\Mappings\MySqlFullContext\SoftwareMap.g.cs
 ..\..\Contexts\NHib\MySql\Mappings\MySqlFullContext\softwareproviderMap.g.cs
 ..\..\Contexts\NHib\Oracle\Context\OracleFullContext.g.cs
@@ -130,6 +137,7 @@
 ..\..\Contexts\NHib\Oracle\Mappings\OracleFullContext\OrderDetailsMap.g.cs
 ..\..\Contexts\NHib\Oracle\Mappings\OracleFullContext\OrderMap.g.cs
 ..\..\Contexts\NHib\Oracle\Mappings\OracleFullContext\ProductMap.g.cs
+..\..\Contexts\NHib\Oracle\Mappings\OracleFullContext\SelfRefTAbleMap.g.cs
 ..\..\Contexts\NHib\Oracle\Mappings\OracleFullContext\SoftwareMap.g.cs
 ..\..\Contexts\NHib\Oracle\Mappings\OracleFullContext\softwareproviderMap.g.cs
 ..\..\Contexts\NHib\SqlServer\Context\SqlServerFullContext.g.cs
@@ -143,6 +151,7 @@
 ..\..\Contexts\NHib\SqlServer\Mappings\SqlServerFullContext\OrderDetailsMap.g.cs
 ..\..\Contexts\NHib\SqlServer\Mappings\SqlServerFullContext\OrderMap.g.cs
 ..\..\Contexts\NHib\SqlServer\Mappings\SqlServerFullContext\ProductMap.g.cs
+..\..\Contexts\NHib\SqlServer\Mappings\SqlServerFullContext\SelfRefTAbleMap.g.cs
 ..\..\Contexts\NHib\SqlServer\Mappings\SqlServerFullContext\SoftwareMap.g.cs
 ..\..\Contexts\NHib\SqlServer\Mappings\SqlServerFullContext\softwareproviderMap.g.cs
 ..\..\Dtos\Dto\Dto\BankAccountDto.g.cs
@@ -154,6 +163,7 @@
 ..\..\Dtos\Dto\Dto\OrderDetailsDto.g.cs
 ..\..\Dtos\Dto\Dto\OrderDto.g.cs
 ..\..\Dtos\Dto\Dto\ProductDto.g.cs
+..\..\Dtos\Dto\Dto\SelfRefTAbleDto.g.cs
 ..\..\Dtos\Dto\Dto\SoftwareDto.g.cs
 ..\..\Dtos\Dto\Dto\softwareproviderDto.g.cs
 ..\..\Entities\Entity\Entity\BankAccount.g.cs
@@ -165,6 +175,7 @@
 ..\..\Entities\Entity\Entity\Order.g.cs
 ..\..\Entities\Entity\Entity\OrderDetails.g.cs
 ..\..\Entities\Entity\Entity\Product.g.cs
+..\..\Entities\Entity\Entity\SelfRefTAble.g.cs
 ..\..\Entities\Entity\Entity\Software.g.cs
 ..\..\Entities\Entity\Entity\softwareprovider.g.cs
 ..\..\Interfaces\Interface\Dto\IBankAccount.g.cs
@@ -176,6 +187,7 @@
 ..\..\Interfaces\Interface\Dto\IOrder.g.cs
 ..\..\Interfaces\Interface\Dto\IOrderDetails.g.cs
 ..\..\Interfaces\Interface\Dto\IProduct.g.cs
+..\..\Interfaces\Interface\Dto\ISelfRefTAble.g.cs
 ..\..\Interfaces\Interface\Dto\ISoftware.g.cs
 ..\..\Interfaces\Interface\Dto\Isoftwareprovider.g.cs
 ..\..\Interfaces\RepositoryInterfaces\Repository\IBankAccountRepository.g.cs
@@ -187,6 +199,7 @@
 ..\..\Interfaces\RepositoryInterfaces\Repository\IOrderDetailsRepository.g.cs
 ..\..\Interfaces\RepositoryInterfaces\Repository\IOrderRepository.g.cs
 ..\..\Interfaces\RepositoryInterfaces\Repository\IProductRepository.g.cs
+..\..\Interfaces\RepositoryInterfaces\Repository\ISelfRefTAbleRepository.g.cs
 ..\..\Interfaces\RepositoryInterfaces\Repository\IsoftwareproviderRepository.g.cs
 ..\..\Interfaces\RepositoryInterfaces\Repository\ISoftwareRepository.g.cs
 .\Repository\BankAccountRepository.g.cs
@@ -198,6 +211,7 @@
 .\Repository\OrderDetailsRepository.g.cs
 .\Repository\OrderRepository.g.cs
 .\Repository\ProductRepository.g.cs
+.\Repository\SelfRefTAbleRepository.g.cs
 .\Repository\softwareproviderRepository.g.cs
 .\Repository\SoftwareRepository.g.cs
 </LastOutputs>

@@ -42,7 +42,6 @@ namespace Banking.Models.Context.Mappings.NHib.MySql
 			#region Primary Keys
 			
 			Id(t => t.CustomerId).GeneratedBy.Assigned()
-			.UniqueKey("UQ__Customer__A4AE64D98B60CE6B")
 			.Not.Nullable();
 
 			#endregion
@@ -77,7 +76,6 @@ namespace Banking.Models.Context.Mappings.NHib.MySql
 			.Length(50)
 			.Nullable();
 			Map(t => t.CountryId).Column("CountryId")
-			.Index("IX_CountryId")
 			.Nullable();
 			Map(t => t.Photo).Column("Photo")
 			.Length(255)
@@ -89,9 +87,9 @@ namespace Banking.Models.Context.Mappings.NHib.MySql
 			
 			#region Relationships
 			
-			References(o => o.Country).Column("CountryId").Unique().Not.Insert().Not.Update();
 			HasMany(s => s.BankAccount).KeyColumn("CustomerId");
 			HasMany(s => s.Order).KeyColumn("CustomerId");
+			References(o => o.Country).Column("CountryId").Unique().Not.Insert().Not.Update();
 			
 			#endregion			
 

@@ -68,6 +68,7 @@
     <Compile Include="Mappings\OracleFullContext\OrderDetailsMap.g.cs" />
     <Compile Include="Mappings\OracleFullContext\OrderMap.g.cs" />
     <Compile Include="Mappings\OracleFullContext\ProductMap.g.cs" />
+    <Compile Include="Mappings\OracleFullContext\SelfRefTAbleMap.g.cs" />
     <Compile Include="Mappings\OracleFullContext\SoftwareMap.g.cs" />
     <Compile Include="Mappings\OracleFullContext\softwareproviderMap.g.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

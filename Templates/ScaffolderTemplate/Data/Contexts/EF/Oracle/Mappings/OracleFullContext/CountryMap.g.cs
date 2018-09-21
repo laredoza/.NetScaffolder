@@ -62,7 +62,6 @@ namespace Banking.Models.Context.Mappings.EF.Oracle
 			#endregion
 			
 			#region Indexes
-			HasIndex(i => new {i.CountryId}).HasName("UQ__Country__10D1609E8CC26505").IsUnique(true);
 			#endregion
 
 			#region Relationships

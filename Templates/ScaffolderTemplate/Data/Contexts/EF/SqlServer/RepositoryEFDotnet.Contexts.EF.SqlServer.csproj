@@ -58,6 +58,7 @@
     <Compile Include="Mappings\SqlServerFullContext\OrderDetailsMap.g.cs" />
     <Compile Include="Mappings\SqlServerFullContext\OrderMap.g.cs" />
     <Compile Include="Mappings\SqlServerFullContext\ProductMap.g.cs" />
+    <Compile Include="Mappings\SqlServerFullContext\SelfRefTAbleMap.g.cs" />
     <Compile Include="Mappings\SqlServerFullContext\SoftwareMap.g.cs" />
     <Compile Include="Mappings\SqlServerFullContext\softwareproviderMap.g.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

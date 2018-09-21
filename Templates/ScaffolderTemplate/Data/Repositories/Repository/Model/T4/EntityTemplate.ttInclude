@@ -33,7 +33,7 @@ namespace <#= DataType.FullNamespace #>
 		
 		public <#= DataType.EntityName #>()
 		{
-<#+ foreach(var child in DataType.MetaData.DistinctChildRelationships.Where(o => o.ReferencedMultiplicity == RelationshipMultiplicity.Many && o.RelatedTable.EnabledForCodeGeneration)){ #>
+<#+ foreach(var child in DataType.MetaData.DistinctChildRelationships.Where(o => o.ReferencedMultiplicity == RelationshipMultiplicity.Many && o.RelatedTable==null?true: o.RelatedTable.EnabledForCodeGeneration)){ #>
 			this.<#= RelationshipNameFormatting.FormatName(child.ReferencedTableName, child.RelationshipAlias, DataType.NamingConvention) #> = new <#= DataType.CollectionOption.ClassName #> <<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #>>();
 <#+ } #>
 		}
@@ -46,13 +46,13 @@ namespace <#= DataType.FullNamespace #>
 			this.<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #> = item.<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>;
 <#+ } #>
 
-<#+ foreach(var child in DataType.MetaData.DistinctChildRelationships.Where(o => o.ReferencedMultiplicity == RelationshipMultiplicity.Many && o.RelatedTable.EnabledForCodeGeneration)){ #>
+<#+ foreach(var child in DataType.MetaData.DistinctChildRelationships.Where(o => o.ReferencedMultiplicity == RelationshipMultiplicity.Many && o.RelatedTable==null?true:o.RelatedTable.EnabledForCodeGeneration)){ #>
 			this.<#= RelationshipNameFormatting.FormatName(child.ReferencedTableName, child.RelationshipAlias, DataType.NamingConvention) #> = new <#= DataType.CollectionOption.ClassName #> <<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #>>();
 <#+ } #>
 
 			if(deep)
 			{
-<#+ foreach(var child in DataType.MetaData.DistinctChildRelationships.Where(o => o.ReferencedMultiplicity == RelationshipMultiplicity.Many && o.RelatedTable.EnabledForCodeGeneration)){ #>
+<#+ foreach(var child in DataType.MetaData.DistinctChildRelationships.Where(o => o.ReferencedMultiplicity == RelationshipMultiplicity.Many && o.RelatedTable==null?true:o.RelatedTable.EnabledForCodeGeneration)){ #>
 				if(item.<#= RelationshipNameFormatting.FormatName(child.ReferencedTableName, child.RelationshipAlias, DataType.NamingConvention) #> != null)
 				{
 					foreach(var childItem in item.<#= RelationshipNameFormatting.FormatName(child.ReferencedTableName, child.RelationshipAlias, DataType.NamingConvention) #>)
@@ -61,10 +61,10 @@ namespace <#= DataType.FullNamespace #>
 					}
 				}
 <#+ } #>
-<#+ foreach(var child in DataType.MetaData.DistinctChildRelationships.Where(o => o.ReferencedMultiplicity != RelationshipMultiplicity.Many && o.RelatedTable.EnabledForCodeGeneration)){ #>
+<#+ foreach(var child in DataType.MetaData.DistinctChildRelationships.Where(o => o.ReferencedMultiplicity != RelationshipMultiplicity.Many && (o.RelatedTable==null?true:o.RelatedTable.EnabledForCodeGeneration))){ #>
 				this.<#= RelationshipNameFormatting.FormatName(child.ReferencedTableName, child.RelationshipAlias, DataType.NamingConvention) #> = new <#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #>(item.<#= RelationshipNameFormatting.FormatName(child.ReferencedTableName, child.RelationshipAlias, DataType.NamingConvention) #>, deep);
 <#+ } #>
-<#+ foreach(var parent in DataType.MetaData.DistinctParentRelationships.Where( a=>a.RelatedTable.EnabledForCodeGeneration).ToList()){ #>
+<#+ foreach(var parent in DataType.MetaData.DistinctParentRelationships.Where( a=>a.RelatedTable==null?true:a.RelatedTable.EnabledForCodeGeneration).ToList()){ #>
 				if(item.<#= RelationshipNameFormatting.FormatName(parent.ReferencedTableName, parent.RelationshipAlias, DataType.NamingConvention) #> != null)
                 {
                     this.<#= RelationshipNameFormatting.FormatName(parent.ReferencedTableName, parent.RelationshipAlias, DataType.NamingConvention) #> = new <#= DataType.NamingConvention.ApplyNamingConvention(parent.ReferencedTableName) #>(item.<#= RelationshipNameFormatting.FormatName(parent.ReferencedTableName, parent.RelationshipAlias, DataType.NamingConvention) #>, deep);
@@ -86,7 +86,7 @@ namespace <#= DataType.FullNamespace #>
 <#+ if(DataType.MetaData.DistinctChildRelationships.Count > 0){ #>
 
 		#region Child Relationships
-<#+ foreach(var child in DataType.MetaData.DistinctChildRelationships.Where(o => o.ReferencedMultiplicity == RelationshipMultiplicity.Many && o.RelatedTable.EnabledForCodeGeneration)){ #>
+<#+ foreach(var child in DataType.MetaData.DistinctChildRelationships.Where(o => o.ReferencedMultiplicity == RelationshipMultiplicity.Many && (o.RelatedTable==null?true:o.RelatedTable.EnabledForCodeGeneration))){ #>
         
         public virtual <#= DataType.CollectionOption.ClassNameInterface #><<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #>> <#= RelationshipNameFormatting.FormatName(child.ReferencedTableName, child.RelationshipAlias, DataType.NamingConvention) #> { get; set; }
 <#+ if(DataType.UseInterface) {#>	
@@ -114,7 +114,7 @@ namespace <#= DataType.FullNamespace #>
 <#+ } #>
 <#+ } #>
 
-<#+ foreach(var child in DataType.MetaData.DistinctChildRelationships.Where(o => o.ReferencedMultiplicity != RelationshipMultiplicity.Many && o.RelatedTable.EnabledForCodeGeneration)){ #>
+<#+ foreach(var child in DataType.MetaData.DistinctChildRelationships.Where(o => o.ReferencedMultiplicity != RelationshipMultiplicity.Many &&( o.RelatedTable==null?true:o.RelatedTable.EnabledForCodeGeneration))){ #>
         
         public virtual <#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #> <#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #> { get; set; }
 <#+ if(DataType.UseInterface) {#>
@@ -144,10 +144,10 @@ namespace <#= DataType.FullNamespace #>
 
 		#endregion
 <#+ } #>
-<#+ if(DataType.MetaData.DistinctParentRelationships.Where( a=>a.RelatedTable.EnabledForCodeGeneration).ToList().Count > 0) {#>
+<#+ if(DataType.MetaData.DistinctParentRelationships.Where( a=>a.RelatedTable==null?true:a.RelatedTable.EnabledForCodeGeneration).ToList().Count > 0) {#>
 
 		#region Parent Relationships
-<#+ foreach(var parent in DataType.MetaData.DistinctParentRelationships.Where( a=>a.RelatedTable.EnabledForCodeGeneration).ToList()){ #>
+<#+ foreach(var parent in DataType.MetaData.DistinctParentRelationships.Where( a=>a.RelatedTable==null?true:a.RelatedTable.EnabledForCodeGeneration).ToList()){ #>
 
         public virtual <#= DataType.NamingConvention.ApplyNamingConvention(parent.ReferencedTableName) #> <#= RelationshipNameFormatting.FormatName(parent.ReferencedTableName, parent.RelationshipAlias, DataType.NamingConvention) #> { get; set; }
 <#+ if(DataType.UseInterface) {#>

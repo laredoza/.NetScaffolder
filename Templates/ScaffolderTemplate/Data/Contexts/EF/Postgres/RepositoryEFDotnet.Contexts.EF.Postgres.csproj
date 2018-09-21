@@ -78,6 +78,7 @@
     <Compile Include="Mappings\PostgresFullContext\OrderDetailsMap.g.cs" />
     <Compile Include="Mappings\PostgresFullContext\OrderMap.g.cs" />
     <Compile Include="Mappings\PostgresFullContext\ProductMap.g.cs" />
+    <Compile Include="Mappings\PostgresFullContext\SelfRefTAbleMap.g.cs" />
     <Compile Include="Mappings\PostgresFullContext\SoftwareMap.g.cs" />
     <Compile Include="Mappings\PostgresFullContext\softwareproviderMap.g.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

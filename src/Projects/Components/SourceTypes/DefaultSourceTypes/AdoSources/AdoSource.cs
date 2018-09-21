@@ -130,6 +130,8 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
                 {
                     index.Table = modelTable;
                 }
+
+                FormatNavigationPropertiesToBeUnique(modelTable);
             }
 
             Logger.Trace("Completed Fix()");
@@ -479,6 +481,12 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
                 {
                     rel.RelationshipAlias = alias;
                 }
+
+                if (!string.Equals(rel.RelationshipAlias, alias) && !string.Equals(rel.ReferencedTableName, alias) && !string.Equals(rel.RelationshipAlias, rel.ReferencedTableName) && string.IsNullOrEmpty(rel.RelationshipAlias))
+                {
+                    rel.RelationshipAlias = alias;
+                }
+
             }
         }
 

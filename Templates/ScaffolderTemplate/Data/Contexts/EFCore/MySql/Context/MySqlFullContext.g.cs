@@ -66,16 +66,17 @@ namespace Banking.Models.Context.EFCore
 			#region Mappings
 			
 			modelBuilder.ApplyConfiguration(new BankAccountMap());
-			modelBuilder.ApplyConfiguration(new BankTransfersMap());
 			modelBuilder.ApplyConfiguration(new BookMap());
 			modelBuilder.ApplyConfiguration(new CountryMap());
 			modelBuilder.ApplyConfiguration(new CustomerMap());
 			modelBuilder.ApplyConfiguration(new OrderMap());
-			modelBuilder.ApplyConfiguration(new OrderDetailsMap());
 			modelBuilder.ApplyConfiguration(new ProductMap());
 			modelBuilder.ApplyConfiguration(new SoftwareMap());
 			modelBuilder.ApplyConfiguration(new softwareproviderMap());
 			modelBuilder.ApplyConfiguration(new burgerTableMap());
+			modelBuilder.ApplyConfiguration(new BankTransfersMap());
+			modelBuilder.ApplyConfiguration(new OrderDetailsMap());
+			modelBuilder.ApplyConfiguration(new SelfRefTAbleMap());
 
 			#endregion
 			
@@ -90,16 +91,17 @@ namespace Banking.Models.Context.EFCore
 		#region Db Sets
 		
 		public virtual DbSet<BankAccount> BankAccount { get; set; }
-		public virtual DbSet<BankTransfers> BankTransfers { get; set; }
 		public virtual DbSet<Book> Book { get; set; }
 		public virtual DbSet<Country> Country { get; set; }
 		public virtual DbSet<Customer> Customer { get; set; }
 		public virtual DbSet<Order> Order { get; set; }
-		public virtual DbSet<OrderDetails> OrderDetails { get; set; }
 		public virtual DbSet<Product> Product { get; set; }
 		public virtual DbSet<Software> Software { get; set; }
 		public virtual DbSet<softwareprovider> softwareprovider { get; set; }
 		public virtual DbSet<burgerTable> burgerTable { get; set; }
+		public virtual DbSet<BankTransfers> BankTransfers { get; set; }
+		public virtual DbSet<OrderDetails> OrderDetails { get; set; }
+		public virtual DbSet<SelfRefTAble> SelfRefTAble { get; set; }
 
 		#endregion
 		
