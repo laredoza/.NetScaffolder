@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.panel2 = new System.Windows.Forms.Panel();
+            this.BtnClose = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.BtnClose = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.ModelFormUserControl1 = new DotNetScaffolder.Presentation.Forms.Controls.Model.ModelFormUserControl();
             this.panel2.SuspendLayout();
@@ -45,10 +45,22 @@
             this.panel2.Controls.Add(this.tabControl1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 0);
-            this.panel2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel2.Margin = new System.Windows.Forms.Padding(2);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1116, 640);
             this.panel2.TabIndex = 2;
+            // 
+            // BtnClose
+            // 
+            this.BtnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtnClose.Location = new System.Drawing.Point(1012, 601);
+            this.BtnClose.Margin = new System.Windows.Forms.Padding(2);
+            this.BtnClose.Name = "BtnClose";
+            this.BtnClose.Size = new System.Drawing.Size(65, 28);
+            this.BtnClose.TabIndex = 1;
+            this.BtnClose.Text = "Close";
+            this.BtnClose.UseVisualStyleBackColor = true;
+            this.BtnClose.Click += new System.EventHandler(this.BtnClose_Click);
             // 
             // tabControl1
             // 
@@ -71,18 +83,6 @@
             this.tabPage1.Text = "Models";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // BtnClose
-            // 
-            this.BtnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtnClose.Location = new System.Drawing.Point(1012, 601);
-            this.BtnClose.Margin = new System.Windows.Forms.Padding(2);
-            this.BtnClose.Name = "BtnClose";
-            this.BtnClose.Size = new System.Drawing.Size(65, 28);
-            this.BtnClose.TabIndex = 1;
-            this.BtnClose.Text = "Close";
-            this.BtnClose.UseVisualStyleBackColor = true;
-            this.BtnClose.Click += new System.EventHandler(this.BtnClose_Click);
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -94,6 +94,7 @@
             // 
             // ModelFormUserControl1
             // 
+            this.ModelFormUserControl1.CurrentlySelectedControl = null;
             this.ModelFormUserControl1.DataSource = null;
             this.ModelFormUserControl1.Location = new System.Drawing.Point(18, 13);
             this.ModelFormUserControl1.Margin = new System.Windows.Forms.Padding(1);
@@ -109,7 +110,7 @@
             this.ClientSize = new System.Drawing.Size(1116, 640);
             this.Controls.Add(this.panel2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.Name = "ModelForm";
             this.Text = "Manage Models";

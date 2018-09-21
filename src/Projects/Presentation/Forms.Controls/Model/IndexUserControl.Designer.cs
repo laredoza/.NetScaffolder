@@ -37,11 +37,13 @@
             this.ComboBoxRelationshipType = new System.Windows.Forms.ComboBox();
             this.label18 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
+            this.btnRemoveIndex = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnRemoveIndex);
             this.groupBox1.Controls.Add(this.ListViewColumns);
             this.groupBox1.Controls.Add(this.CheckBoxIsUnique);
             this.groupBox1.Controls.Add(this.TextBoxIndexName);
@@ -132,6 +134,16 @@
             this.label15.TabIndex = 42;
             this.label15.Text = "Index Type:";
             // 
+            // btnRemoveIndex
+            // 
+            this.btnRemoveIndex.Location = new System.Drawing.Point(12, 452);
+            this.btnRemoveIndex.Name = "btnRemoveIndex";
+            this.btnRemoveIndex.Size = new System.Drawing.Size(75, 23);
+            this.btnRemoveIndex.TabIndex = 60;
+            this.btnRemoveIndex.Text = "Remove Index";
+            this.btnRemoveIndex.UseVisualStyleBackColor = true;
+            this.btnRemoveIndex.Click += new System.EventHandler(this.btnRemoveIndex_Click);
+            // 
             // IndexUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -156,5 +168,6 @@
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.ListView ListViewColumns;
         private System.Windows.Forms.ColumnHeader ColumnName;
+        private System.Windows.Forms.Button btnRemoveIndex;
     }
 }

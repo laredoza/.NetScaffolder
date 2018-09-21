@@ -378,5 +378,14 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         }
 
         #endregion
+
+        private void btnRemoveIndex_Click(object sender, EventArgs e)
+        {
+
+            dataSource.Table.Indexes.Remove(dataSource);
+            (this.ParentForm.ActiveControl as ModelFormUserControl).ForceReFreshDataSource(true);
+
+
+        }
     }
 }

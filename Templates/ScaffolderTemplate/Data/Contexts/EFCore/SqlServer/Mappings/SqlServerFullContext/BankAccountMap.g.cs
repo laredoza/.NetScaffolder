@@ -60,6 +60,9 @@ namespace Banking.Models.Context.Mappings.EFCore.SqlServer
 			#endregion
 
 			#region Indexes
+			builder.HasIndex(i => new {i.BankAccountId, i.BankAccountNumber, i.CustomerId}).HasName("NewIndex").IsUnique(false);
+			builder.HasIndex(i => new {i.BankAccountId, i.BankAccountNumber, i.CustomerId}).HasName("NewIndex").IsUnique(false);
+			builder.HasIndex(i => new {i.BankAccountId, i.BankAccountNumber, i.CustomerId}).HasName("NewIndex").IsUnique(false);
 			#endregion
 			
 			#region Relationships

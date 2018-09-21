@@ -157,33 +157,33 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.Edmxs
             foreach (var table in edmx.Runtime.ConceptualModels.Schema.EntityTypes)
             {
                 var tbl = new Table
-                              {
-                                  TableName = table.Name,
-                                  SchemaName = new TiraggoEntityInfo(
+                {
+                    TableName = table.Name,
+                    SchemaName = new TiraggoEntityInfo(
                                           edmx,
                                           $"{edmx.Runtime.ConceptualModels.Schema.Namespace}.{table.Name}")
                                       .StorageInfo.Schema
-                              };
+                };
 
                 result.Tables.Add(tbl);
 
                 foreach (var col in table.Properties)
                 {
                     var column = new Column
-                                     {
-                                         ColumnName = col.Name,
-                                         DomainDataType = this.MapDatabaseType(col.Type, null),
-                                         IsPrimaryKey = table.Key.Any(pk => pk.Name == col.Name),
-                                         IsRequired =
+                    {
+                        ColumnName = col.Name,
+                        DomainDataType = this.MapDatabaseType(col.Type, null),
+                        IsPrimaryKey = table.Key.Any(pk => pk.Name == col.Name),
+                        IsRequired =
                                              (col.NullableSpecified && !col.Nullable)
                                              || table.Key.Any(pk => pk.Name == col.Name),
-                                         ColumnOrder = table.Properties.ToList().IndexOf(col) + 1,
-                                         Precision = (col.Precision > 0 && col.Scale > 0) ? col.Precision : 0,
-                                         Scale = (col.Precision > 0 && col.Scale > 0) ? col.Scale : 0,
-                                         Length = string.IsNullOrEmpty(col.MaxLength)
+                        ColumnOrder = table.Properties.ToList().IndexOf(col) + 1,
+                        Precision = (col.Precision > 0 && col.Scale > 0) ? col.Precision : 0,
+                        Scale = (col.Precision > 0 && col.Scale > 0) ? col.Scale : 0,
+                        Length = string.IsNullOrEmpty(col.MaxLength)
                                                       ? 0
                                                       : Convert.ToInt32(col.MaxLength)
-                                     };
+                    };
 
                     if (column.IsPrimaryKey)
                     {
@@ -205,28 +205,28 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.Edmxs
 
                 foreach (var rel in relationships)
                 {
- 
+
 
                     var ass = new Relationship
-                                  {
-                                      ReferencedTableName =
+                    {
+                        ReferencedTableName =
                                           (rel.ReferentialConstraint.Dependent.Role == table.Name)
                                               ? rel.ReferentialConstraint.Principal.Role
                                               : rel.ReferentialConstraint.Dependent.Role,
-                                      ColumnName =
+                        ColumnName =
                                           (rel.ReferentialConstraint.Dependent.Role == table.Name)
                                               ? rel.ReferentialConstraint.Dependent.PropertyRef.Name
                                               : rel.ReferentialConstraint.Principal.PropertyRef.Name,
-                                      ReferencedColumnName =
+                        ReferencedColumnName =
                                           (rel.ReferentialConstraint.Principal.Role == table.Name)
                                               ? rel.ReferentialConstraint.Dependent.PropertyRef.Name
                                               : rel.ReferentialConstraint.Principal.PropertyRef.Name,
-                                      DependencyRelationShip =
+                        DependencyRelationShip =
                                           (rel.ReferentialConstraint.Dependent.Role == table.Name)
                                               ? RelationshipType.ForeignKey
                                               : RelationshipType.ForeignKeyChild,
-                                      RelationshipName = rel.Name
-                                  };
+                        RelationshipName = rel.Name
+                    };
 
                     if (rel.Ends.Count() != 2)
                     {
@@ -271,8 +271,8 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.Edmxs
 
 
                     tbl.Relationships.Add(ass);
-                    if(assClone!=null ) 
-                            tbl.Relationships.Add(assClone);
+                    if (assClone != null)
+                        tbl.Relationships.Add(assClone);
                 }
 
                 FormatNavigationPropertiesToBeUnique(tbl);
@@ -327,68 +327,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.Edmxs
             }
         }
 
-         /// <summary>
-        /// The add indexes.
-        /// </summary>
-        /// <param name="table">
-        /// The table.
-        /// </param>
-        /// <param name="newTable">
-        /// The new table.
-        /// </param>
-        //private static void AddIndexes(DatabaseTable table, Table newTable)
-        //{
-        //    foreach (DatabaseIndex index in table.Indexes)
-        //    {
-        //        Index newIndex = new Index
-        //                             {
-        //                                 IsUnique = index.IsUnique,
-        //                                 Name = index.Name,
-        //                                 Table = newTable
-        //                             };
 
-        //        if (index.IndexType == null)
-        //        {
-        //            newIndex.IndexType = IndexType.Normal;
-        //        }
-        //        else
-        //        {
-        //            switch (index.IndexType.ToUpper())
-        //            {
-        //                case "NONCLUSTERED":
-        //                    newIndex.IndexType = IndexType.NonClustered;
-        //                    break;
-        //                case "NONCLUSTERED HASH":
-        //                    newIndex.IndexType = IndexType.NonClusteredHash;
-        //                    break;
-        //                case "CLUSTERED":
-        //                    newIndex.IndexType = IndexType.Clustered;
-        //                    break;
-        //                case "PRIMARY":
-        //                    newIndex.IndexType = IndexType.PrimaryKey;
-        //                    break;
-        //                case "PRIMARY NONCLUSTERED":
-        //                    newIndex.IndexType = IndexType.PrimaryNonClusteredKey;
-        //                    break;
-        //                case "XML":
-        //                    newIndex.IndexType = IndexType.Xml;
-        //                    break;
-        //                default:
-        //                    throw new NotImplementedException($"Invalid index type {index.IndexType}");
-        //            }
-        //        }
-
-        //        foreach (DatabaseColumn column in index.Columns)
-        //        {
-        //            if (newTable.Columns.Any(c => string.Equals(c.ColumnName, column.Name, StringComparison.InvariantCultureIgnoreCase)))
-        //            {
-        //                newIndex.Columns.Add(column.Name);
-        //            }
-        //        }
-
-        //        newTable.Indexes.Add(newIndex);
-        //    }
-        //}
 
 
         /// <summary>

@@ -1,6 +1,7 @@
 ﻿#region Usings
 
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 using Common.Logging;
 using DotNetScaffolder.Components.Common.Contract;
@@ -73,6 +74,8 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         ///     The source type.
         /// </summary>
         private ISourceType sourceType;
+
+        public Table SelectedTable { get; set; }
 
         #endregion
 
@@ -206,6 +209,22 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
                 else if (e.Node.Tag == null)
                 {
                     defaultModelControl.BringToFront();
+
+                    if (e.Node.Text.ToLower() == "indexes" && ScaffoldConfig.ReturnSourceType(DataSource.SourceTypeId).GetType().Name == "EdmxSourceType")
+                    {
+                        SelectedTable = e.Node.Parent.Tag as Table;
+                        btnAddIndex.BringToFront();
+                        lblAddIndex.BringToFront();
+                    }
+                    else
+                    {
+                        SelectedTable = null;
+                        btnAddIndex.SendToBack();
+                        lblAddIndex.SendToBack();
+                    }
+
+
+
                 }
             }
         }
@@ -257,5 +276,33 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Model
         }
 
         #endregion
+
+        public void ForceReFreshDataSource(bool forParentPath = false)
+        {
+            var currentNodeName = DomainTreeView.SelectedNode.Name;
+            var currentNodeNamePath = forParentPath ? DomainTreeView.SelectedNode.Parent.FullPath:  DomainTreeView.SelectedNode.FullPath;
+
+            
+            UpdateDataSource();
+
+            foreach (var item in DomainTreeView.Nodes.Find(currentNodeName, true))
+            {
+                if (item.FullPath == currentNodeNamePath)
+                {
+                    DomainTreeView.SelectedNode = item.LastNode==null? item : item.LastNode;
+                    DomainTreeView.Focus();
+                    break;
+                }
+            }
+        }
+
+
+        private void btnAddIndex_Click(object sender, System.EventArgs e)
+        {
+            SelectedTable.Indexes.Add(new Index { Name = "NewIndex", Table = SelectedTable });
+            ForceReFreshDataSource();
+        }
+
+         
     }
 }

@@ -27,6 +27,9 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project.DataType
             this.InitializeComponent();
         }
 
+
         #endregion
+
+        
     }
 }

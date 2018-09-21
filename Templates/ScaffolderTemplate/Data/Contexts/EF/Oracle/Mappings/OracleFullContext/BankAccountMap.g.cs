@@ -66,6 +66,9 @@ namespace Banking.Models.Context.Mappings.EF.Oracle
 			#endregion
 			
 			#region Indexes
+			HasIndex(i => new {i.BankAccountId, i.BankAccountNumber, i.CustomerId}).HasName("NewIndex").IsUnique(false);
+			HasIndex(i => new {i.BankAccountId, i.BankAccountNumber, i.CustomerId}).HasName("NewIndex").IsUnique(false);
+			HasIndex(i => new {i.BankAccountId, i.BankAccountNumber, i.CustomerId}).HasName("NewIndex").IsUnique(false);
 			#endregion
 
 			#region Relationships
