@@ -33,8 +33,8 @@ T4 templates (DataTypes) are used to generate a layer. Packages group several of
 
 ### Supported Database Drivers
 
-- Entity Famework 6.0 ( MySql, Sql Server, Oracle, PostgreSQL)
-- Entity Framework Core 2.1 ( MySql - Pomelo Driver, Sql Server)
+- Entity Famework 6.0 ( MySql, Sql Server, Oracle, PostgreSQL )
+- Entity Framework Core 2.1 ( MySql - Pomelo Driver, Sql Server )
 - Adding support for NHibernate ( Mysql, Sql Server, Oracle )
 
 ### Planned Project Types:
@@ -66,4 +66,4 @@ T4 templates (DataTypes) are used to generate a layer. Packages group several of
 - [Devart T4 Editor](https://www.devart.com/t4-editor/download.html)
 
 ### Known Issues
-- Please execute a git clone as downloading the project's zip causes T4 security issues. We will look for work arounds at a later stage.
+- Please retrieve source code by using a git clone instead of downloading the project's zip as this causes T4 security issues. We will look for work arounds at a later stage.
