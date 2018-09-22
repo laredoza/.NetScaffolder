@@ -65,5 +65,5 @@ T4 templates (DataTypes) are used to generate a layer. Packages group several of
 ### Useful Tools
 - [Devart T4 Editor](https://www.devart.com/t4-editor/download.html)
 
-#Known Issues
+### Known Issues
 - Please execute a git clone as downloading the projet's zip causes T4 security issues. We will look for work arounds at a later stage.
