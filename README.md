@@ -23,7 +23,7 @@ Additions and modifications are easily made to these layers.
 - PostgreSQL ( Planned )
 - Extendable Custom sources
 
-The [Scaffolder Application](https://github.com/laredoza/.NetScaffolder/blob/vNext/src/DotNetScaffolder.sln) is used to import and manage models.
+The [Scaffolder Application](https://github.com/laredoza/.NetScaffolder/blob/master/src/DotNetScaffolder.sln) is used to import and manage models.
 
 Imported data is saved in a [model file](https://github.com/laredoza/.NetScaffolder/blob/master/Templates/Generated/Dal/Repository/EF/Dotnet/Data/Repositories/Repository/Model/Banking.mdl) which is then used to generate the different layers.
 
