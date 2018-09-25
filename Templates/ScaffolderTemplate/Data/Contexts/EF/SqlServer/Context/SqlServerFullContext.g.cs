@@ -76,25 +76,19 @@ namespace Banking.Models.Context.EF
 			modelBuilder.Configurations.Add(new OrderDetailsMap());
 			modelBuilder.Configurations.Add(new SelfRefTAbleMap());
 
-            #endregion
+			#endregion
+			
+			#region Excluded Relationships
+			
+			// Exclude entities not part of this context
+			
 
-            #region Excluded Relationships
-
-            // Exclude entities not part of this context
-
-
-            #endregion
-
-            #region Conventions
-
-            this.AddCustomConventions(modelBuilder);
-
-            #endregion
+			#endregion		
         }
-
-        #region Db Sets
-
-        public virtual DbSet<BankAccount> BankAccount { get; set; }
+		
+		#region Db Sets
+		
+		public virtual DbSet<BankAccount> BankAccount { get; set; }
 		public virtual DbSet<Book> Book { get; set; }
 		public virtual DbSet<Country> Country { get; set; }
 		public virtual DbSet<Customer> Customer { get; set; }

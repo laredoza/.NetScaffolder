@@ -55,9 +55,9 @@ namespace Banking.Models.Repository
         /// <summary>
         /// Load BankAccount entities from the database using the composite primary keys
         /// </summary
-        /// <param name="bankAccountId">long</param>
+        /// <param name="bankAccountId">int</param>
         /// <returns>IBankAccount</returns>
-		public virtual IBankAccount LoadByBankAccountId(long bankAccountId)
+		public virtual IBankAccount LoadByBankAccountId(int bankAccountId)
 		{
 			return this.UnitOfWork.FirstOrDefault<BankAccount>(o => o.BankAccountId == bankAccountId);
 		}
@@ -198,9 +198,9 @@ namespace Banking.Models.Repository
 		/// <summary>
         /// Delete the BankAccount entity from the database
         /// </summary>
-        /// <param name="bankAccountId">long</param>
+        /// <param name="bankAccountId">int</param>
         /// <returns>bool</returns>
-		public virtual bool Delete( long bankAccountId)
+		public virtual bool Delete( int bankAccountId)
 		{
 			var entityToDelete = this.UnitOfWork.FirstOrDefault<BankAccount>(o =>  o.BankAccountId == bankAccountId );
 			

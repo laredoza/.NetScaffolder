@@ -79,7 +79,7 @@ namespace Banking.Models.Dto
 		
 		#region Fields
 		
-		public long BankAccountId { get; set; }
+		public int BankAccountId { get; set; }
 		public string BankAccountNumber { get; set; }
 		public decimal Balance { get; set; }
 		public Nullable<int> CustomerId { get; set; }

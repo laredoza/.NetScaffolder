@@ -79,7 +79,7 @@ namespace Banking.Models.Entity
 		
 		#region Fields
 		
-		public virtual long BankAccountId { get; set; }
+		public virtual int BankAccountId { get; set; }
 		public virtual string BankAccountNumber { get; set; }
 		public virtual decimal Balance { get; set; }
 		public virtual Nullable<int> CustomerId { get; set; }

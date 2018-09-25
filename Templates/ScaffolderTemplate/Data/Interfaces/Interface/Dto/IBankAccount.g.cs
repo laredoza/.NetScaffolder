@@ -33,7 +33,7 @@ namespace Banking.Models.Interfaces
 	{
 		#region Fields
 		
-		long BankAccountId { get; set; }
+		int BankAccountId { get; set; }
 		string BankAccountNumber { get; set; }
 		decimal Balance { get; set; }
 		Nullable<int> CustomerId { get; set; }

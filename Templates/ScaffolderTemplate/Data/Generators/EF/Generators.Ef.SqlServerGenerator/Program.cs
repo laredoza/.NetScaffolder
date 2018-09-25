@@ -14,7 +14,7 @@ namespace Generators.Ef.SqlServerGenerator
             Console.WriteLine("Creating SqlServer database...");
             try
             {
-                using (SqlServerFullContext uow = new SqlServerFullContext("SardsSqlServer"))
+                using (SqlServerFullContext uow = new SqlServerFullContext("DefaultConnection"))
                 {
                     uow.Database.CreateIfNotExists();
                     Console.WriteLine("Creating SqlServer database...Completed");

@@ -41,9 +41,9 @@ namespace Banking.Models.Interfaces
         /// <summary>
         /// Load BankAccount entities from the database using the composite primary keys
         /// </summary
-        /// <param name="bankAccountId">long</param>
+        /// <param name="bankAccountId">int</param>
         /// <returns>IBankAccount</returns>
-		IBankAccount LoadByBankAccountId(long bankAccountId);
+		IBankAccount LoadByBankAccountId(int bankAccountId);
 
         /// <summary>
         /// Load BankAccount entities from the database using the Balance field
@@ -112,9 +112,9 @@ namespace Banking.Models.Interfaces
 		/// <summary>
         /// Delete the BankAccount entity from the database
         /// </summary>
-        /// <param name="bankAccountId">long</param>
+        /// <param name="bankAccountId">int</param>
         /// <returns>bool</returns>
-		bool Delete( long bankAccountId);
+		bool Delete( int bankAccountId);
 
 		#endregion
 	}
