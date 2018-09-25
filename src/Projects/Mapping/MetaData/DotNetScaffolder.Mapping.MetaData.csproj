@@ -66,11 +66,11 @@
     <Compile Include="Model\Relationship.cs" />
     <Compile Include="Model\Table.cs" />
     <Compile Include="Project\FilePersistenceOptions.cs" />
-    <Compile Include="Project\Packages\DataType.cs" />
-    <Compile Include="Project\Packages\Package.cs" />
-    <Compile Include="Project\Packages\Packages.cs" />
-    <Compile Include="Project\Packages\Template.cs" />
-    <Compile Include="Project\Packages\Templates.cs" />
+    <Compile Include="Project\PackagesLib\DataType.cs" />
+    <Compile Include="Project\PackagesLib\Package.cs" />
+    <Compile Include="Project\PackagesLib\Packages.cs" />
+    <Compile Include="Project\PackagesLib\Template.cs" />
+    <Compile Include="Project\PackagesLib\Templates.cs" />
     <Compile Include="Project\ProjectDefinition.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

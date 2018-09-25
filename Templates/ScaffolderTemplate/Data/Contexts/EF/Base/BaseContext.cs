@@ -632,6 +632,11 @@
             return GetQueryable<TEntity>(includes, null, startPage, pageSize, orderBy, orderByAsc);
         }
 
+        protected virtual void AddCustomConventions(DbModelBuilder modelBuilder)
+        {
+
+        }
+
         #endregion
     }
 }

@@ -4,15 +4,17 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{23E0EDFF-BDFB-45E4-AC7B-31DDFA93AE1D}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SqlServer</RootNamespace>
-    <AssemblyName>SqlServer</AssemblyName>
+    <ProjectGuid>{723321B6-E22D-46AA-933A-B910D7F108D2}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>Generators.Ef.SqlServerGenerator</RootNamespace>
+    <AssemblyName>Generators.Ef.SqlServerGenerator</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,6 +24,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -47,23 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Configuration\ForeignKeyConstraintNameFormatter.cs" />
-    <Compile Include="Configuration\SqlServerConfiguration.cs" />
-    <Compile Include="Context\SqlServerFullContext.cs" />
-    <Compile Include="Context\SqlServerFullContext.g.cs" />
-    <Compile Include="Database\DatabaseManager.g.cs" />
-    <Compile Include="Mappings\SqlServerFullContext\BankAccountMap.g.cs" />
-    <Compile Include="Mappings\SqlServerFullContext\BankTransfersMap.g.cs" />
-    <Compile Include="Mappings\SqlServerFullContext\BookMap.g.cs" />
-    <Compile Include="Mappings\SqlServerFullContext\burgerTableMap.g.cs" />
-    <Compile Include="Mappings\SqlServerFullContext\CountryMap.g.cs" />
-    <Compile Include="Mappings\SqlServerFullContext\CustomerMap.g.cs" />
-    <Compile Include="Mappings\SqlServerFullContext\OrderDetailsMap.g.cs" />
-    <Compile Include="Mappings\SqlServerFullContext\OrderMap.g.cs" />
-    <Compile Include="Mappings\SqlServerFullContext\ProductMap.g.cs" />
-    <Compile Include="Mappings\SqlServerFullContext\SelfRefTAbleMap.g.cs" />
-    <Compile Include="Mappings\SqlServerFullContext\SoftwareMap.g.cs" />
-    <Compile Include="Mappings\SqlServerFullContext\softwareproviderMap.g.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -72,16 +59,16 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\Core\RepositoryEFDotnet.Core.csproj">
-      <Project>{0333e000-6aaf-4e18-8747-2299a8231ab1}</Project>
+      <Project>{0333E000-6AAF-4E18-8747-2299A8231AB1}</Project>
       <Name>RepositoryEFDotnet.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Entities\Entity\RepositoryEFDotnet.Data.Entities.Entity.csproj">
-      <Project>{017da2af-1ffd-4e68-9646-b0e5c73ea037}</Project>
-      <Name>RepositoryEFDotnet.Data.Entities.Entity</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Base\RepositoryEFDotnet.Contexts.EF.Base.csproj">
-      <Project>{A8511725-544E-49BD-8451-4C8638ADC5BA}</Project>
+    <ProjectReference Include="..\..\..\Contexts\EF\Base\RepositoryEFDotnet.Contexts.EF.Base.csproj">
+      <Project>{a8511725-544e-49bd-8451-4c8638adc5ba}</Project>
       <Name>RepositoryEFDotnet.Contexts.EF.Base</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Contexts\EF\SqlServer\RepositoryEFDotnet.Contexts.EF.SqlServer.csproj">
+      <Project>{23e0edff-bdfb-45e4-ac7b-31ddfa93ae1d}</Project>
+      <Name>RepositoryEFDotnet.Contexts.EF.SqlServer</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
