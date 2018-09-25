@@ -224,7 +224,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Components\SourceTypes\DataSources\" />
-    <Folder Include="Project\Packages\" />
+    <Folder Include="Project\PackagesLib\" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

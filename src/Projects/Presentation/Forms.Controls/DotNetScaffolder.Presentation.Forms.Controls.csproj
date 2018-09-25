@@ -108,10 +108,10 @@
     <Compile Include="Sources\ManageDataSourceForm.Designer.cs">
       <DependentUpon>ManageDataSourceForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Packages\PackageUserControl.cs">
+    <Compile Include="PackagesLib\PackageUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Packages\PackageUserControl.Designer.cs">
+    <Compile Include="PackagesLib\PackageUserControl.Designer.cs">
       <DependentUpon>PackageUserControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\ModelForm.cs">
@@ -164,10 +164,10 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SelectedEventArgs.cs" />
-    <Compile Include="Packages\PackageDetailsUserControl.cs">
+    <Compile Include="PackagesLib\PackageDetailsUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Packages\PackageDetailsUserControl.Designer.cs">
+    <Compile Include="PackagesLib\PackageDetailsUserControl.Designer.cs">
       <DependentUpon>PackageDetailsUserControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\ModelUserControl.cs">
@@ -239,7 +239,7 @@
     <EmbeddedResource Include="Sources\ManageDataSourceForm.resx">
       <DependentUpon>ManageDataSourceForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Packages\PackageUserControl.resx">
+    <EmbeddedResource Include="PackagesLib\PackageUserControl.resx">
       <DependentUpon>PackageUserControl.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -267,7 +267,7 @@
     <EmbeddedResource Include="Project\ProjectDomainUserControl.resx">
       <DependentUpon>ProjectDomainUserControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Packages\PackageDetailsUserControl.resx">
+    <EmbeddedResource Include="PackagesLib\PackageDetailsUserControl.resx">
       <DependentUpon>PackageDetailsUserControl.cs</DependentUpon>
       <CustomToolNamespace>DotNetScaffolder.Mapping.MetaData.Project.PackagesLib</CustomToolNamespace>
     </EmbeddedResource>
