@@ -8,13 +8,7 @@
 		
         private string OutputPath = @"..\..\..\RepositoryEFDotnet\Tests\Base\DotNetScaffolder.Repository.UnitTests.Base.csproj";
         private string OutputFolder = "Base";
-
-		protected override void setHeader(ProjectDefinition projectDefinition)
-		{
-			CompanyText = projectDefinition.Company;
-			LicenseText = projectDefinition.License;
-			HeaderText = projectDefinition.HeaderText;
-		}
+			
 
         protected override void RunCore()
         {
@@ -33,6 +27,19 @@
 				uowTemplate.Output.Project = OutputPath;
 				repoTemplate.Output.Project = OutputPath;
             }
+
+
+			unitTestTemplate.CompanyText = CompanyText;
+			unitTestTemplate.LicenseText = LicenseText;
+			unitTestTemplate.HeaderText = HeaderText;
+
+			uowTemplate.CompanyText = CompanyText;
+			uowTemplate.LicenseText = LicenseText;
+			uowTemplate.HeaderText = HeaderText;
+
+			repoTemplate.CompanyText = CompanyText;
+			repoTemplate.LicenseText = LicenseText;
+			repoTemplate.HeaderText = HeaderText;
 
             unitTestTemplate.RenderToFile(string.Format(@"{0}\{1}.g.cs", OutputFolder, "BaseUnitTest"));
 			uowTemplate.RenderToFile(string.Format(@"{0}\{1}.g.cs", OutputFolder, "BaseUnitOfWorkUnitTest"));

@@ -7,6 +7,7 @@
 <#@ include file="RepositoryGenerator.ttInclude" #>
 <#@ include file="MappingGenerator.ttInclude" #>
 <#@ include file="DatabaseManagerGenerator.ttInclude" #>
+<#@ include file="BaseUnitTestGenerator.ttInclude" #>
 <#+
     public class ProjectGenerator : BaseProjectGenerator
     {
@@ -135,10 +136,10 @@
 			
 			// Unit Test generation
 			// ~~~~~ include file="BaseUnitTestGenerator.ttInclude" 
-			//var unitTestGen = new BaseUnitTestGenerator();
-			//unitTestGen.setHeader(projectDefinition);
-			//unitTestGen.Models = domain.Tables.Where(a=>a.EnabledForCodeGeneration).ToList();
-			//unitTestGen.Run();
+			var unitTestGen = new BaseUnitTestGenerator();
+			unitTestGen.setHeader(projectDefinition);
+			unitTestGen.Models = domain.Tables.Where(a=>a.EnabledForCodeGeneration).ToList();
+			unitTestGen.Run();
         }
 }
     #>

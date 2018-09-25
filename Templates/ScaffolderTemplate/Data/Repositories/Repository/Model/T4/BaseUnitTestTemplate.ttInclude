@@ -52,6 +52,19 @@ namespace RepositoryEFDotnet.UnitTest.Base
 <#+ } #>
 
 		#endregion
+
+
+		#region Base Populate Implemented
+
+<#+ foreach(var mdl in Models){ #>
+
+        protected virtual void Populate<#= mdl.TableName #>(I<#= mdl.TableName #> item, bool isUpdate = false, int seed = 1)
+        { 
+            throw new NotImplementedException("when implementing move the method to your own partial class.");
+        }		
+<#+ } #>
+
+		#endregion
 		
 	}
 }

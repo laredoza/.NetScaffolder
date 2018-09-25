@@ -49,7 +49,10 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Base\BaseRepositoryUnitTest.g.cs" />
+    <Compile Include="Base\BaseUnitOfWorkUnitTest.g.cs" />
     <Compile Include="Base\BaseUnitTest.cs" />
+    <Compile Include="Base\BaseUnitTest.g.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
