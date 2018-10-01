@@ -129,6 +129,7 @@ namespace DotNetScaffolder.Mapping.ApplicationServices
             Logger.Trace($"Started Load() - Path: {this.FilePersistenceOptions.Path}");
             this.ProjectDefinition = ObjectXMLSerializer<ProjectDefinition>.Load(this.FilePersistenceOptions.Path);
 
+            ScaffoldConfig.Load();
             foreach (var domain in this.ProjectDefinition.Domains)
             {
                 // Todo: The fix shouldn't come from the SourceType 

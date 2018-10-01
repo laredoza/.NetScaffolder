@@ -32,7 +32,12 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
         public void GenericAdoSourceTypeUnitTest_Import()
         {
             SqlServerAdoSourceType import = new SqlServerAdoSourceType();
-            DatabaseModel databaseModel = import.Import(new AdoSourceOptions());
+            this.SourceType = import;
+            var options = new AdoSourceOptions();
+            options.ConnectionString = @"Data Source=.\SQLEXPRESS2017;Integrated Security=true;Initial Catalog=AutoNLayered";
+            options.Schemas.Add("dbo");
+            DatabaseModel databaseModel = import.Import(options);
+            
             this.BaseSourceTypeUnitTest_TestValues(databaseModel);
         }
 

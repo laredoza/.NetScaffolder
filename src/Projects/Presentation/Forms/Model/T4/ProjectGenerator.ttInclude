@@ -7,11 +7,15 @@
 <#@ include file="RepositoryGenerator.ttInclude" #>
 <#@ include file="MappingGenerator.ttInclude" #>
 <#@ include file="DatabaseManagerGenerator.ttInclude" #>
+<#@ include file="BaseUnitTestGenerator.ttInclude" #>
 <#+
     public class ProjectGenerator : BaseProjectGenerator
     {
-        protected override void ExecuteGenerators(List<IDataType> dataTypes, DomainDefinition domain)
+
+	
+        protected override void ExecuteGenerators(List<IDataType> dataTypes, DomainDefinition domain, ProjectDefinition projectDefinition)
         {
+		
             // Execute generation using initialised data types
             foreach(var dataType in dataTypes)
             {              
@@ -19,7 +23,11 @@
                 {
                     // Debugger.Break();
                     var iDtoGen = new DtoInterfaceGenerator();
-                    iDtoGen.Models = domain.Tables.Where(a=>a.EnabledForCodeGeneration).ToList();
+					iDtoGen.setHeader(projectDefinition);
+					
+					
+                    
+					iDtoGen.Models = domain.Tables.Where(a=>a.EnabledForCodeGeneration).ToList();
                     iDtoGen.DataType = dataType as DtoInterfaceDataType;
                     iDtoGen.Run();
                 }
@@ -28,6 +36,7 @@
                 {
                     // Debugger.Break();
                     var entityGen = new EntityGenerator();
+					entityGen.setHeader(projectDefinition);
                     entityGen.Models = domain.Tables.Where(a=>a.EnabledForCodeGeneration).ToList();
                     entityGen.DataType = dataType as EntityDataType;
                     entityGen.DtoInterfaceType = dataTypes.FirstOrDefault(o => o is DtoInterfaceDataType) as DtoInterfaceDataType;
@@ -44,6 +53,8 @@
 						if(contextData != null)
 						{
 							var mappingGen = new MappingGenerator();
+							mappingGen.setHeader(projectDefinition);							
+
 							var mappingDataType = dataTypes.FirstOrDefault(o => o is MappingDataType) as MappingDataType;
 					
 							if(mappingDataType != null)
@@ -58,7 +69,7 @@
 							}
 							
 							var contxtGen = new ContextGenerator();
-							
+							contxtGen.setHeader(projectDefinition);
 							contxtGen.Models = domain.Tables.Where(a=>a.EnabledForCodeGeneration).ToList();
 							contxtGen.DataType = contextDataType;
 							contxtGen.ContextData = contextData;
@@ -72,6 +83,7 @@
 					if(contextDataType.Contexts.Any())
 					{
 						var dbManGen = new DatabaseManagerGenerator();
+						dbManGen.setHeader(projectDefinition);
 						dbManGen.ContextData = contextDataType.Contexts.Any(o => o.IsDefault) ? contextDataType.Contexts.First(o => o.IsDefault) : contextDataType.Contexts.FirstOrDefault();
 						dbManGen.Drivers = contextDataType.Drivers;
                         dbManGen.DataType = contextDataType;
@@ -83,6 +95,7 @@
                 // {
 				
                     // var structMapGen = new RepoInterfaceGenerator();
+					// structMapGen.setHeader(projectDefinition);
                     // iRepoGen.Models = domain.Tables.Where(a=>a.EnabledForCodeGeneration).ToList();
                     // iRepoGen.DataType = dataType as RepoInterfaceDataType;
                     // iRepoGen.DtoInterfaceType = dataTypes.FirstOrDefault(o => o is DtoInterfaceDataType) as DtoInterfaceDataType;
@@ -92,6 +105,7 @@
                 if(dataType is RepoInterfaceDataType)
                 {					
                     var iRepoGen = new RepoInterfaceGenerator();
+					iRepoGen.setHeader(projectDefinition);
                     iRepoGen.Models = domain.Tables.Where(a=>a.EnabledForCodeGeneration).ToList();
                     iRepoGen.DataType = dataType as RepoInterfaceDataType;
                     iRepoGen.DtoInterfaceType = dataTypes.FirstOrDefault(o => o is DtoInterfaceDataType) as DtoInterfaceDataType;
@@ -101,6 +115,7 @@
                 if(dataType is RepositoryDataType)
                 {
                     var iRepoGen = new RepositoryGenerator();
+					iRepoGen.setHeader(projectDefinition);
                     iRepoGen.Models = domain.Tables.Where(a=>a.EnabledForCodeGeneration).ToList();
                     iRepoGen.DataType = dataType as RepositoryDataType;
                     iRepoGen.DtoInterfaceType = dataTypes.FirstOrDefault(o => o is DtoInterfaceDataType) as DtoInterfaceDataType;
@@ -111,6 +126,7 @@
                 if(dataType is DtoDataType)
                 {
                     var iDtoGen = new DtoGenerator();
+					iDtoGen.setHeader(projectDefinition);
                     iDtoGen.Models = domain.Tables.Where(a=>a.EnabledForCodeGeneration).ToList();
                     iDtoGen.DataType = dataType as DtoDataType;
                     iDtoGen.DtoInterfaceType = dataTypes.FirstOrDefault(o => o is DtoInterfaceDataType) as DtoInterfaceDataType;
@@ -120,9 +136,10 @@
 			
 			// Unit Test generation
 			// ~~~~~ include file="BaseUnitTestGenerator.ttInclude" 
-			//var unitTestGen = new BaseUnitTestGenerator();
-			//unitTestGen.Models = domain.Tables.Where(a=>a.EnabledForCodeGeneration).ToList();
-			//unitTestGen.Run();
+			var unitTestGen = new BaseUnitTestGenerator();
+			unitTestGen.setHeader(projectDefinition);
+			unitTestGen.Models = domain.Tables.Where(a=>a.EnabledForCodeGeneration).ToList();
+			unitTestGen.Run();
         }
 }
     #>

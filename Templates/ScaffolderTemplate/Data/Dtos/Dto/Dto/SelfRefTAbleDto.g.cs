@@ -36,7 +36,7 @@ namespace Banking.Models.Dto
 		
 		public SelfRefTAbleDto()
 		{
-			this.SelfRefTAble_1 = new List <ISelfRefTAble>();
+			this.SelfRefTAble1 = new List <ISelfRefTAble>();
 		}
 		
 		public SelfRefTAbleDto(ISelfRefTAble item, bool deep = false)
@@ -47,20 +47,20 @@ namespace Banking.Models.Dto
 			this.Description = item.Description;
 			this.ParentId = item.ParentId;
 			this.SoftwareId = item.SoftwareId;
-			this.SelfRefTAble_1 = new List <ISelfRefTAble>();
+			this.SelfRefTAble1 = new List <ISelfRefTAble>();
 
 			if(deep)
 			{
-				if(item.SelfRefTAble_1 != null)
+				if(item.SelfRefTAble1 != null)
 				{
-					foreach(var childItem in item.SelfRefTAble_1)
+					foreach(var childItem in item.SelfRefTAble1)
 					{
-						this.SelfRefTAble_1.Add(new SelfRefTAbleDto(childItem, deep));
+						this.SelfRefTAble1.Add(new SelfRefTAbleDto(childItem, deep));
 					}
 				}
-                if(item.SelfRefTAble_2 != null)
+                if(item.SelfRefTAble2 != null)
                 {
-				    this.SelfRefTAble_2 = new SelfRefTAbleDto(item.SelfRefTAble_2, deep);
+				    this.SelfRefTAble2 = new SelfRefTAbleDto(item.SelfRefTAble2, deep);
                 }
                 if(item.Software != null)
                 {
@@ -82,13 +82,13 @@ namespace Banking.Models.Dto
 		
 		#region Child Relationships
 		
-		public IList<ISelfRefTAble> SelfRefTAble_1 { get; set; }
+		public IList<ISelfRefTAble> SelfRefTAble1 { get; set; }
 
 		#endregion
 		
 		#region Parent Relationships
 		
-		public ISelfRefTAble SelfRefTAble_2 { get; set; }
+		public ISelfRefTAble SelfRefTAble2 { get; set; }
 		public ISoftware Software { get; set; }
 		
 		#endregion

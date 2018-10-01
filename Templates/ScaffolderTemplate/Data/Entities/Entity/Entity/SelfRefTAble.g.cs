@@ -36,7 +36,7 @@ namespace Banking.Models.Entity
 		
 		public SelfRefTAble()
 		{
-			this.SelfRefTAble_1 = new List <SelfRefTAble>();
+			this.SelfRefTAble1 = new List <SelfRefTAble>();
 		}
 		
 		public SelfRefTAble(ISelfRefTAble item, bool deep = false)
@@ -47,20 +47,20 @@ namespace Banking.Models.Entity
 			this.Description = item.Description;
 			this.ParentId = item.ParentId;
 			this.SoftwareId = item.SoftwareId;
-			this.SelfRefTAble_1 = new List <SelfRefTAble>();
+			this.SelfRefTAble1 = new List <SelfRefTAble>();
 
 			if(deep)
 			{
-				if(item.SelfRefTAble_1 != null)
+				if(item.SelfRefTAble1 != null)
 				{
-					foreach(var childItem in item.SelfRefTAble_1)
+					foreach(var childItem in item.SelfRefTAble1)
 					{
-						this.SelfRefTAble_1.Add(new SelfRefTAble(childItem, deep));
+						this.SelfRefTAble1.Add(new SelfRefTAble(childItem, deep));
 					}
 				}
-				if(item.SelfRefTAble_2 != null)
+				if(item.SelfRefTAble2 != null)
                 {
-                    this.SelfRefTAble_2 = new SelfRefTAble(item.SelfRefTAble_2, deep);
+                    this.SelfRefTAble2 = new SelfRefTAble(item.SelfRefTAble2, deep);
                 }
 				if(item.Software != null)
                 {
@@ -82,25 +82,25 @@ namespace Banking.Models.Entity
 
 		#region Child Relationships
         
-        public virtual IList<SelfRefTAble> SelfRefTAble_1 { get; set; }
+        public virtual IList<SelfRefTAble> SelfRefTAble1 { get; set; }
 	
-        IList<ISelfRefTAble> ISelfRefTAble.SelfRefTAble_1 
+        IList<ISelfRefTAble> ISelfRefTAble.SelfRefTAble1 
 		{ 
 			get
 			{
-				return this.SelfRefTAble_1 == null ? null : (IList<ISelfRefTAble>)this.SelfRefTAble_1;
+				return this.SelfRefTAble1 == null ? null : (IList<ISelfRefTAble>)this.SelfRefTAble1;
 			}
 			set
 			{
-				if(value != this.SelfRefTAble_1)
+				if(value != this.SelfRefTAble1)
 				{
 					if(value != null)
 					{
-						this.SelfRefTAble_1 = (IList<SelfRefTAble>)value;
+						this.SelfRefTAble1 = (IList<SelfRefTAble>)value;
 					}
 					else
 					{
-						this.SelfRefTAble_1 = null;
+						this.SelfRefTAble1 = null;
 					}
 				}
 			}			
@@ -110,24 +110,24 @@ namespace Banking.Models.Entity
 
 		#region Parent Relationships
 
-        public virtual SelfRefTAble SelfRefTAble_2 { get; set; }
-		ISelfRefTAble ISelfRefTAble.SelfRefTAble_2 
+        public virtual SelfRefTAble SelfRefTAble2 { get; set; }
+		ISelfRefTAble ISelfRefTAble.SelfRefTAble2 
 		{ 
 			get
 			{
-				return this.SelfRefTAble_2;
+				return this.SelfRefTAble2;
 			}
 			set
 			{
-				if(value != this.SelfRefTAble_2)
+				if(value != this.SelfRefTAble2)
 				{
 					if(value != null)
 					{
-						this.SelfRefTAble_2 = (SelfRefTAble)value;
+						this.SelfRefTAble2 = (SelfRefTAble)value;
 					}
 					else
 					{
-						this.SelfRefTAble_2 = null;
+						this.SelfRefTAble2 = null;
 					}
 				}
 			}

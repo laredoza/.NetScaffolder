@@ -36,8 +36,8 @@ namespace Banking.Models.Entity
 		
 		public Order()
 		{
-			this.softwareprovider = new List <softwareprovider>();
 			this.OrderDetails = new List <OrderDetails>();
+			this.softwareprovider = new List <softwareprovider>();
 		}
 		
 		public Order(IOrder item, bool deep = false)
@@ -52,23 +52,23 @@ namespace Banking.Models.Entity
 			this.ShippingAddress = item.ShippingAddress;
 			this.ShippingCity = item.ShippingCity;
 			this.ShippingZip = item.ShippingZip;
-			this.softwareprovider = new List <softwareprovider>();
 			this.OrderDetails = new List <OrderDetails>();
+			this.softwareprovider = new List <softwareprovider>();
 
 			if(deep)
 			{
-				if(item.softwareprovider != null)
-				{
-					foreach(var childItem in item.softwareprovider)
-					{
-						this.softwareprovider.Add(new softwareprovider(childItem, deep));
-					}
-				}
 				if(item.OrderDetails != null)
 				{
 					foreach(var childItem in item.OrderDetails)
 					{
 						this.OrderDetails.Add(new OrderDetails(childItem, deep));
+					}
+				}
+				if(item.softwareprovider != null)
+				{
+					foreach(var childItem in item.softwareprovider)
+					{
+						this.softwareprovider.Add(new softwareprovider(childItem, deep));
 					}
 				}
 				if(item.Customer != null)
@@ -95,30 +95,6 @@ namespace Banking.Models.Entity
 
 		#region Child Relationships
         
-        public virtual IList<softwareprovider> softwareprovider { get; set; }
-	
-        IList<Isoftwareprovider> IOrder.softwareprovider 
-		{ 
-			get
-			{
-				return this.softwareprovider == null ? null : (IList<Isoftwareprovider>)this.softwareprovider;
-			}
-			set
-			{
-				if(value != this.softwareprovider)
-				{
-					if(value != null)
-					{
-						this.softwareprovider = (IList<softwareprovider>)value;
-					}
-					else
-					{
-						this.softwareprovider = null;
-					}
-				}
-			}			
-		}
-        
         public virtual IList<OrderDetails> OrderDetails { get; set; }
 	
         IList<IOrderDetails> IOrder.OrderDetails 
@@ -138,6 +114,30 @@ namespace Banking.Models.Entity
 					else
 					{
 						this.OrderDetails = null;
+					}
+				}
+			}			
+		}
+        
+        public virtual IList<softwareprovider> softwareprovider { get; set; }
+	
+        IList<Isoftwareprovider> IOrder.softwareprovider 
+		{ 
+			get
+			{
+				return this.softwareprovider == null ? null : (IList<Isoftwareprovider>)this.softwareprovider;
+			}
+			set
+			{
+				if(value != this.softwareprovider)
+				{
+					if(value != null)
+					{
+						this.softwareprovider = (IList<softwareprovider>)value;
+					}
+					else
+					{
+						this.softwareprovider = null;
 					}
 				}
 			}			

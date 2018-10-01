@@ -41,8 +41,8 @@
     <Reference Include="Common.Logging.Core, Version=3.4.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
       <HintPath>..\..\..\..\.nuget\NuGetPackages\Common.Logging.Core.3.4.1\lib\net40\Common.Logging.Core.dll</HintPath>
     </Reference>
-    <Reference Include="DatabaseSchemaReader, Version=2.6.1.4, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\.nuget\NuGetPackages\DatabaseSchemaReader.2.6.1\lib\net45\DatabaseSchemaReader.dll</HintPath>
+    <Reference Include="DatabaseSchemaReader, Version=2.6.3.4, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\.nuget\NuGetPackages\DatabaseSchemaReader.2.6.3\lib\net45\DatabaseSchemaReader.dll</HintPath>
     </Reference>
     <Reference Include="Google.Protobuf, Version=3.5.1.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
       <HintPath>..\..\..\..\.nuget\NuGetPackages\Google.Protobuf.3.5.1\lib\net45\Google.Protobuf.dll</HintPath>

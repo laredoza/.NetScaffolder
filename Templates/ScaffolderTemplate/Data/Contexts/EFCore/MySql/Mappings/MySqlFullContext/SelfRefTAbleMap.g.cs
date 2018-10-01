@@ -61,9 +61,9 @@ namespace Banking.Models.Context.Mappings.EFCore.MySql
 			
 			#region Relationships
 			
-			builder.HasMany<SelfRefTAble>(s => s.SelfRefTAble_1).WithOne(s => s.SelfRefTAble_2).HasForeignKey(s => s.ParentId).OnDelete(DeleteBehavior.Restrict);
-			builder.HasOne<SelfRefTAble>(s => s.SelfRefTAble_2).WithMany(s => s.SelfRefTAble_1).HasForeignKey(s => s.ParentId).OnDelete(DeleteBehavior.Restrict);
+			builder.HasOne<SelfRefTAble>(s => s.SelfRefTAble2).WithMany(s => s.SelfRefTAble1).HasForeignKey(s => s.ParentId).OnDelete(DeleteBehavior.Restrict);
 			builder.HasOne<Software>(s => s.Software).WithMany(s => s.SelfRefTAble).HasForeignKey(s => s.SoftwareId).OnDelete(DeleteBehavior.Restrict);
+			builder.HasMany<SelfRefTAble>(s => s.SelfRefTAble1).WithOne(s => s.SelfRefTAble2).HasForeignKey(s => s.ParentId).OnDelete(DeleteBehavior.Restrict);
 			
 			#endregion	
 			#region Column Order

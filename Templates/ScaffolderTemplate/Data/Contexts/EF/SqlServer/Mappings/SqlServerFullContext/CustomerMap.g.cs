@@ -80,13 +80,15 @@ namespace Banking.Models.Context.Mappings.EF.SqlServer
 			#endregion
 			
 			#region Indexes
+			HasIndex(i => new {i.CustomerId}).HasName("UQ__Customer__A4AE64D98B60CE6B").IsUnique(true);
+			HasIndex(i => new {i.CountryId}).HasName("IX_CountryId").IsUnique(false);
 			#endregion
 
 			#region Relationships
 			
+			HasOptional<Country>(s => s.Country).WithMany(s => s.Customer).HasForeignKey(s => s.CountryId).WillCascadeOnDelete(false);
 			HasMany<BankAccount>(s => s.BankAccount).WithOptional(s => s.Customer).HasForeignKey(s => s.CustomerId).WillCascadeOnDelete(false);
 			HasMany<Order>(s => s.Order).WithOptional(s => s.Customer).HasForeignKey(s => s.CustomerId).WillCascadeOnDelete(false);
-			HasOptional<Country>(s => s.Country).WithMany(s => s.Customer).HasForeignKey(s => s.CountryId).WillCascadeOnDelete(false);
 			
 			#endregion			
 

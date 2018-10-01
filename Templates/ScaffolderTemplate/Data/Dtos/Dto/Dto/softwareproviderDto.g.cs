@@ -60,7 +60,7 @@ namespace Banking.Models.Dto
 		
 		#region Fields
 		
-		public string id { get; set; }
+		public long id { get; set; }
 		public int ProductIdDDB { get; set; }
 		public string name { get; set; }
 		public string x1 { get; set; }

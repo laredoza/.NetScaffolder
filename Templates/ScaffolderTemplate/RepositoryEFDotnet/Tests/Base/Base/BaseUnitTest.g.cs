@@ -206,7 +206,42 @@ namespace RepositoryEFDotnet.UnitTest.Base
 
 
 		#region Base Populate Implemented
-         
+
+
+        protected virtual void PopulateBankAccount(IBankAccount item, bool isUpdate = false, int seed = 1)
+        { 
+            throw new NotImplementedException("when implementing move the method to your own partial class.");
+        }		
+
+        protected virtual void PopulateBook(IBook item, bool isUpdate = false, int seed = 1)
+        { 
+            throw new NotImplementedException("when implementing move the method to your own partial class.");
+        }		
+
+        protected virtual void PopulateCountry(ICountry item, bool isUpdate = false, int seed = 1)
+        { 
+            throw new NotImplementedException("when implementing move the method to your own partial class.");
+        }		
+
+        protected virtual void PopulateCustomer(ICustomer item, bool isUpdate = false, int seed = 1)
+        { 
+            throw new NotImplementedException("when implementing move the method to your own partial class.");
+        }		
+
+        protected virtual void PopulateOrder(IOrder item, bool isUpdate = false, int seed = 1)
+        { 
+            throw new NotImplementedException("when implementing move the method to your own partial class.");
+        }		
+
+        protected virtual void PopulateProduct(IProduct item, bool isUpdate = false, int seed = 1)
+        { 
+            throw new NotImplementedException("when implementing move the method to your own partial class.");
+        }		
+
+        protected virtual void PopulateSoftware(ISoftware item, bool isUpdate = false, int seed = 1)
+        { 
+            throw new NotImplementedException("when implementing move the method to your own partial class.");
+        }		
 
         protected virtual void Populatesoftwareprovider(Isoftwareprovider item, bool isUpdate = false, int seed = 1)
         { 
@@ -214,6 +249,16 @@ namespace RepositoryEFDotnet.UnitTest.Base
         }		
 
         protected virtual void PopulateburgerTable(IburgerTable item, bool isUpdate = false, int seed = 1)
+        { 
+            throw new NotImplementedException("when implementing move the method to your own partial class.");
+        }		
+
+        protected virtual void PopulateBankTransfers(IBankTransfers item, bool isUpdate = false, int seed = 1)
+        { 
+            throw new NotImplementedException("when implementing move the method to your own partial class.");
+        }		
+
+        protected virtual void PopulateOrderDetails(IOrderDetails item, bool isUpdate = false, int seed = 1)
         { 
             throw new NotImplementedException("when implementing move the method to your own partial class.");
         }		

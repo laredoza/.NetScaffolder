@@ -4,12 +4,14 @@ public class RepositoryTemplate : BaseTemplate
 	public RepositoryDataType DataType { get; set; }
 	public string DtoInterfaceNamespace { get; set; }
 	public string EntityNamespace { get; set; }
+	public CopyrightHeader Header { get; set; }
 	
 	public override string TransformText()
 	{
 		// Debugger.Break();
-		Header = new CopyrightHeader();
-		Header.Filename = DataType.RepoName;
+		Header = GetHeader(DataType.RepoName);
+
+		 
 #>
 
 <#= Header.TransformText() #>

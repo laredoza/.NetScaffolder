@@ -43,6 +43,7 @@ namespace Banking.Models.Context.Mappings.NHib.SqlServer
 			#region Primary Keys
 			
 			Id(t => t.OrderId).GeneratedBy.Assigned()
+			.UniqueKey("UQ__Order__C3905BCE3C614174")
 			.Not.Nullable();
 
 			#endregion
@@ -50,6 +51,7 @@ namespace Banking.Models.Context.Mappings.NHib.SqlServer
 			#region Properties
 			
 			Map(t => t.CustomerId).Column("CustomerId")
+			.Index("IX_CustomerId")
 			.Nullable();
 			Map(t => t.OrderDate).Column("OrderDate")
 			.Nullable();
@@ -72,9 +74,9 @@ namespace Banking.Models.Context.Mappings.NHib.SqlServer
 			
 			#region Relationships
 			
-			HasMany(s => s.softwareprovider).KeyColumn("ProductIdDDB");
-			HasMany(s => s.OrderDetails).KeyColumn("OrderId");
 			References(o => o.Customer).Column("CustomerId").Unique().Not.Insert().Not.Update();
+			HasMany(s => s.OrderDetails).KeyColumn("OrderId");
+			HasMany(s => s.softwareprovider).KeyColumn("ProductIdDDB");
 			
 			#endregion			
 

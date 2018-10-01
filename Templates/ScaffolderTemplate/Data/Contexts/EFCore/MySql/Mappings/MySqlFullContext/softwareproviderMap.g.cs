@@ -42,13 +42,12 @@ namespace Banking.Models.Context.Mappings.EFCore.MySql
 			#region Primary keys
 			
 			builder.HasKey(t => t.id);
-			builder.Property(t => t.id).HasColumnName("id").ValueGeneratedNever();
+			builder.Property(t => t.id).HasColumnName("id").ValueGeneratedOnAdd();
 
 			#endregion
 
 			#region Constraints
 			
-			builder.Property(t => t.id).HasMaxLength(10);
 			builder.Property(t => t.id).HasColumnName("id").IsRequired();
 			builder.Property(t => t.ProductIdDDB).HasColumnName("ProductIdDDB").IsRequired();
 			builder.Property(t => t.name).HasMaxLength(50);

@@ -48,13 +48,12 @@ namespace Banking.Models.Context.Mappings.EF.MySql
 			#region Primary Keys
 			
 			HasKey(t => t.id);
-			Property(t => t.id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+			Property(t => t.id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
 			#endregion
 
 			#region Constraints
 			
-			Property(t => t.id).HasMaxLength(10);
 			Property(t => t.id).IsRequired();
 			Property(t => t.ProductIdDDB).IsRequired();
 			Property(t => t.name).HasMaxLength(50);

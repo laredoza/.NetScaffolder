@@ -67,9 +67,9 @@ namespace Banking.Models.Context.Mappings.EF.MySql
 
 			#region Relationships
 			
-			HasMany<SelfRefTAble>(s => s.SelfRefTAble_1).WithOptional(s => s.SelfRefTAble_2).HasForeignKey(s => s.ParentId).WillCascadeOnDelete(false);
-			HasOptional<SelfRefTAble>(s => s.SelfRefTAble_2).WithMany(s => s.SelfRefTAble_1).HasForeignKey(s => s.ParentId).WillCascadeOnDelete(false);
+			HasOptional<SelfRefTAble>(s => s.SelfRefTAble2).WithMany(s => s.SelfRefTAble1).HasForeignKey(s => s.ParentId).WillCascadeOnDelete(false);
 			HasOptional<Software>(s => s.Software).WithMany(s => s.SelfRefTAble).HasForeignKey(s => s.SoftwareId).WillCascadeOnDelete(false);
+			HasMany<SelfRefTAble>(s => s.SelfRefTAble1).WithOptional(s => s.SelfRefTAble2).HasForeignKey(s => s.ParentId).WillCascadeOnDelete(false);
 			
 			#endregion			
 

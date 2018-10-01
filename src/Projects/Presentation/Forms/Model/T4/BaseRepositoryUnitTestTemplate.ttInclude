@@ -2,12 +2,23 @@
 public class BaseRepositoryUnitTestTemplate : BaseTemplate 
 {
     public List<Table> Models { get; set; }
+	public CopyrightHeader Header { get; set; }
+
+
+	public string CompKeySelectLinq(List<Column> columns, string objectName){
+
+	string result = columns.Select(i => objectName+"."+i.ColumnName).Aggregate((i, j) => i + ", " + j);
+	return result; 
+	//return "d => new {d."+ columns.First().ColumnName + " , d."+ columns.Last().ColumnName + "}";
+
+
+
+	}
 	
 	public override string TransformText()
 	{
 		// Debugger.Break();
-		Header = new CopyrightHeader();
-		Header.Filename = "BaseRepositoryUnitTest";
+		Header = GetHeader("BaseRepositoryUnitTest");
 #>
 
 <#= Header.TransformText() #>
@@ -41,6 +52,7 @@ namespace RepositoryEFDotnet.UnitTest.Base
 		
 <#+ foreach(var mdl in Models){ 
 var pk = mdl.Columns.First(o => o.IsPrimaryKey);
+var pkList = mdl.Columns.Where(o => o.IsPrimaryKey).ToList();
 #>
         protected void <#= mdl.TableName #>_Add(IUnitOfWork uow, int count = 1, int startSeed = 1, int expected = 1)
         {
@@ -106,11 +118,21 @@ var pk = mdl.Columns.First(o => o.IsPrimaryKey);
 			{
 				uow.StartTransaction();
 			}
-			
+
+			<#+ if(mdl.PrimaryKeyCount > 1 ) { #>
+	foreach(var item in list.Select(d => new {<#= CompKeySelectLinq(pkList, "d") #>}).Distinct())
+			{
+			repo.Delete(<#= CompKeySelectLinq(pkList, "item") #>);
+			}
+		<#+}  else { #>
 			foreach(var item in list.Select(o => o.<#= pk.ColumnName #>).Distinct())
 			{
 				repo.Delete(item);
 			}
+		<#+ } #>
+
+
+			
 			
 			uow.Commit();
 			
@@ -150,12 +172,18 @@ var pk = mdl.Columns.First(o => o.IsPrimaryKey);
             var repo = new <#= mdl.TableName #>Repository(uow);
 			
             var list = repo.LoadAll().ToList();
-			
+		<#+ if(mdl.PrimaryKeyCount > 1 ) { #>
+	foreach(var item in list.Select(d => new {<#= CompKeySelectLinq(pkList, "d") #>}).Distinct())
+			{
+				loadedList.Add(repo.Load(<#= CompKeySelectLinq(pkList, "item") #>));
+			}
+		<#+}  else { #>
 			foreach(var item in list.Select(o => o.<#= pk.ColumnName #>).Distinct())
 			{
 				loadedList.Add(repo.LoadBy<#= pk.ColumnName #>(item));
 			}
-			
+		<#+ } #>
+
 			BaseRepositoryUnitTest_<#= mdl.TableName #>_CheckData(uow, loadedList, loadedList.Count());
         }
 		

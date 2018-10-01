@@ -43,6 +43,7 @@ namespace Banking.Models.Context.Mappings.NHib.SqlServer
 			#region Primary Keys
 			
 			Id(t => t.ProductId).GeneratedBy.Assigned()
+			.Index("IX_ProductId")
 			.Not.Nullable();
 
 			#endregion

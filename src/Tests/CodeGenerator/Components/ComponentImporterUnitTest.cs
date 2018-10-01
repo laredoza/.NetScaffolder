@@ -32,14 +32,14 @@ namespace DotNetScaffolder.Test.Components
 
             importer.Import();
             Assert.IsNotNull(importer.NamingConventions, "NamingConventions should not be null");
-            Assert.AreEqual(3, importer.NamingConventions.Length, "There should be 3 NamingConventions");
+            Assert.AreEqual(4, importer.NamingConventions.Length, "There should be 4 NamingConventions");
             Assert.IsNotNull(importer.SourceTypes, "SourceTypes should not be null");
-            Assert.AreEqual(2, importer.SourceTypes.Length, "There should be 2 SourceTypes");
+            Assert.AreEqual(4, importer.SourceTypes.Length, "There should be 4 SourceTypes");
             Assert.IsNotNull(importer.Drivers, "DriverTypes should not be null");
-            Assert.AreEqual(1, importer.Drivers.Length, "There should be 1 DriverType");
-            Assert.AreEqual(1, importer.LanguageOutputs.Length, "There should be 1 LanguageOutput");
+            Assert.AreEqual(9, importer.Drivers.Length, "There should be 9 DriverType");
+            Assert.AreEqual(2, importer.LanguageOutputs.Length, "There should be 2 LanguageOutput");
             Assert.AreEqual(1, importer.OutputGenerators.Length, "There should be 1 OutputGenerator");
-            Assert.AreEqual(4, importer.DataTypes.Length, "There should be 4 DataTypes");
+            Assert.AreEqual(9, importer.DataTypes.Length, "There should be 9 DataTypes");
         }
 
         #endregion

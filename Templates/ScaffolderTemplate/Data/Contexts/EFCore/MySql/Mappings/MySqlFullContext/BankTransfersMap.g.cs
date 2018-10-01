@@ -59,6 +59,9 @@ namespace Banking.Models.Context.Mappings.EFCore.MySql
 			#endregion
 
 			#region Indexes
+			builder.HasIndex(i => new {i.BankTransferId}).HasName("UQ__BankTran__2E82727AB11DB584").IsUnique(true);
+			builder.HasIndex(i => new {i.ToBankAccountId}).HasName("IX_ToBankAccountId").IsUnique(false);
+			builder.HasIndex(i => new {i.BankAccountId}).HasName("UQ__BankTran__4FC8E4A0CE69E10D").IsUnique(true);
 			#endregion
 			
 			#region Relationships

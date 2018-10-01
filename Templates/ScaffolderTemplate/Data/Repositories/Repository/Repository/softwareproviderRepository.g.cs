@@ -55,11 +55,11 @@ namespace Banking.Models.Repository
         /// <summary>
         /// Load softwareprovider entities from the database using the composite primary keys
         /// </summary
-        /// <param name="id">string</param>
+        /// <param name="id">long</param>
         /// <returns>Isoftwareprovider</returns>
-		public virtual Isoftwareprovider LoadByid(string id)
+		public virtual Isoftwareprovider LoadByid(long id)
 		{
-			return this.UnitOfWork.FirstOrDefault<softwareprovider>(o => o.id.ToLower().Contains(id.ToLower()));
+			return this.UnitOfWork.FirstOrDefault<softwareprovider>(o => o.id == id);
 		}
 
         /// <summary>
@@ -153,7 +153,7 @@ namespace Banking.Models.Repository
 		public virtual bool Update(Isoftwareprovider entity)
 		{
 			bool doUpdate = false;
-			var entityToUpdate = this.UnitOfWork.FirstOrDefault<softwareprovider>(o =>  o.id.ToLower().Contains(entity.id.ToLower()) );
+			var entityToUpdate = this.UnitOfWork.FirstOrDefault<softwareprovider>(o =>  o.id == entity.id );
 			
 			if (entityToUpdate == null)
 			{
@@ -181,7 +181,7 @@ namespace Banking.Models.Repository
         /// <returns>bool</returns>
 		public virtual bool Delete(Isoftwareprovider entity)
 		{		
-			var entityToDelete = this.UnitOfWork.FirstOrDefault<softwareprovider>(o =>  o.id.ToLower().Contains(entity.id.ToLower()) );
+			var entityToDelete = this.UnitOfWork.FirstOrDefault<softwareprovider>(o =>  o.id == entity.id );
 			
 			if(entityToDelete == null)
 			{
@@ -194,11 +194,11 @@ namespace Banking.Models.Repository
 		/// <summary>
         /// Delete the softwareprovider entity from the database
         /// </summary>
-        /// <param name="id">string</param>
+        /// <param name="id">long</param>
         /// <returns>bool</returns>
-		public virtual bool Delete( string id)
+		public virtual bool Delete( long id)
 		{
-			var entityToDelete = this.UnitOfWork.FirstOrDefault<softwareprovider>(o =>  o.id.ToLower().Contains(id.ToLower()) );
+			var entityToDelete = this.UnitOfWork.FirstOrDefault<softwareprovider>(o =>  o.id == id );
 			
 			if(entityToDelete == null)
 			{

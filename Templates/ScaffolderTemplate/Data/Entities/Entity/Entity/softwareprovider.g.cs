@@ -60,7 +60,7 @@ namespace Banking.Models.Entity
 		
 		#region Fields
 		
-		public virtual string id { get; set; }
+		public virtual long id { get; set; }
 		public virtual int ProductIdDDB { get; set; }
 		public virtual string name { get; set; }
 		public virtual string x1 { get; set; }

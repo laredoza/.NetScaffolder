@@ -41,9 +41,9 @@ namespace Banking.Models.Interfaces
         /// <summary>
         /// Load softwareprovider entities from the database using the composite primary keys
         /// </summary
-        /// <param name="id">string</param>
+        /// <param name="id">long</param>
         /// <returns>Isoftwareprovider</returns>
-		Isoftwareprovider LoadByid(string id);
+		Isoftwareprovider LoadByid(long id);
 
         /// <summary>
         /// Load softwareprovider entities from the database using the ProductIdDDB field
@@ -106,9 +106,9 @@ namespace Banking.Models.Interfaces
 		/// <summary>
         /// Delete the softwareprovider entity from the database
         /// </summary>
-        /// <param name="id">string</param>
+        /// <param name="id">long</param>
         /// <returns>bool</returns>
-		bool Delete( string id);
+		bool Delete( long id);
 
 		#endregion
 	}

@@ -22,9 +22,9 @@
 		private List<string> processedModels = new List<string>();
 		
 		private string projectPath = string.Empty;
-		
+
         protected override void RunCore()
-        {					
+        {		
 			foreach(IDriver driver in MappingDataType.Drivers )
 			{
 				//Debugger.Break();
@@ -56,6 +56,7 @@
 				
 				// Generate configurations
 				var configTemplate = new MappingNHibernateTemplate();
+				
 				configTemplate.EntityNamespace = EntityNamespace;
 				configTemplate.Driver = driver;
 				configTemplate.PostFix = MappingDataType.PostFix;
@@ -64,12 +65,20 @@
 				configTemplate.Model = model;
 				configTemplate.Models = Models;
 				configTemplate.ContextData = ContextData;
+
+
+				
 			
 				if(!string.IsNullOrEmpty(projectPath))
 				{
 					configTemplate.Output.Project =  projectPath;
 				}
 				
+				configTemplate.CompanyText = CompanyText;
+			configTemplate.LicenseText = LicenseText;
+			configTemplate.HeaderText = HeaderText;
+
+			
 				configTemplate.RenderToFile(mappingFileName);
 			}
 		}
@@ -91,12 +100,16 @@
 				configTemplate.Model = model;
 				configTemplate.Models = Models;
 				configTemplate.ContextData = ContextData;
+
+				
 			
 				if(!string.IsNullOrEmpty(projectPath))
 				{
 					configTemplate.Output.Project =  projectPath;
 				}
-				
+				configTemplate.CompanyText = CompanyText;
+			configTemplate.LicenseText = LicenseText;
+			configTemplate.HeaderText = HeaderText;
 				configTemplate.RenderToFile(mappingFileName);
 			}
 		}
@@ -118,12 +131,16 @@
 				configTemplate.Model = model;
 				configTemplate.Models = Models;
 				configTemplate.ContextData = ContextData;
+
+				
 			
 				if(!string.IsNullOrEmpty(projectPath))
 				{
 					configTemplate.Output.Project =  projectPath;
 				}
-				
+				configTemplate.CompanyText = CompanyText;
+			configTemplate.LicenseText = LicenseText;
+			configTemplate.HeaderText = HeaderText;
 				configTemplate.RenderToFile(mappingFileName);
 			}
 		}

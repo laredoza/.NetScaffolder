@@ -41,9 +41,9 @@ namespace Banking.Models.Context.Mappings.NHib.MySql
 			
 			#region Primary Keys
 			
-			Id(t => t.id).GeneratedBy.Assigned()
-			.Length(10)
+			Id(t => t.id).GeneratedBy.Increment().Unique()
 			.Not.Nullable();
+			Map(t => t.id).Column("id").ReadOnly().Generated.Insert();
 
 			#endregion
 

@@ -307,6 +307,8 @@ namespace DotNetScaffolder.Core.Configuration
         {
             if (SourceTypes == null || !SourceTypes.Any()) return null;
 
+            //var test = SourceTypes.Where(d => d.Metadata["ValueMetaData"].ToString().ToLower() == sourceTypeId.ToString().ToLower());
+
             return SourceTypes.FirstOrDefault(
                 d => d.Metadata["ValueMetaData"].ToString().ToLower() == sourceTypeId.ToString().ToLower()).Value;
         }

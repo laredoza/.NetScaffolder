@@ -35,7 +35,7 @@ namespace DotNetScaffolder.Test.Application
 
             applicationSettings.Validate();
             Assert.IsNotNull(applicationSettings.ValidationResult);
-            Assert.AreEqual(10, applicationSettings.ValidationResult.Count);
+            Assert.AreEqual(5, applicationSettings.ValidationResult.Count);
         }
 
         #endregion

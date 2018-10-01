@@ -12,8 +12,8 @@
 		public string MappingNamespace {get; set;}
 
 		private string projectPath = string.Empty;
-		
-        protected override void RunCore()
+        
+		protected override void RunCore()
         {
 			foreach(IDriver driver in DataType.Drivers )
 			{
@@ -53,7 +53,9 @@
 			{
 				template.Output.Project =  projectPath;
 			}
-
+			template.CompanyText = CompanyText;
+			template.LicenseText = LicenseText;
+			template.HeaderText = HeaderText;
 			template.RenderToFile(string.Format(@"{0}\{1}{2}.g.cs", ContextData.OutputFolder,driver.Prefix,ContextData.ContextName));
 		}
 		
@@ -74,7 +76,9 @@
 			{
 				template.Output.Project =  projectPath;
 			}
-
+			template.CompanyText = CompanyText;
+			template.LicenseText = LicenseText;
+			template.HeaderText = HeaderText;
 			template.RenderToFile(string.Format(@"{0}\{1}{2}.g.cs", ContextData.OutputFolder,driver.Prefix,ContextData.ContextName));
 		}
 		
@@ -95,7 +99,9 @@
 			{
 				template.Output.Project =  projectPath;
 			}
-
+			template.CompanyText = CompanyText;
+			template.LicenseText = LicenseText;
+			template.HeaderText = HeaderText;
 			template.RenderToFile(string.Format(@"{0}\{1}{2}.g.cs", ContextData.OutputFolder,driver.Prefix,ContextData.ContextName));
 		}
     }

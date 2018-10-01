@@ -181,6 +181,27 @@ namespace DotNetScaffolder.Mapping.MetaData.Model
         /// </summary>
         private bool Nullable => !this.IsRequired && !this.IsPrimaryKey;
 
+
+        /// <summary>
+        ///     Gets or sets the scale.
+        /// </summary>
+        [XmlAttribute("IsIdentity")]
+        public bool IsIdentity { get; set; }
+
+
+        /// <summary>
+        ///     Gets or sets the scale.
+        /// </summary>
+        [XmlAttribute("IdentitySeed")]
+        public long IdentitySeed { get; set; }
+
+
+        /// <summary>
+        ///     Gets or sets the scale.
+        /// </summary>
+        [XmlAttribute("IdentityIncrement")]
+        public long IdentityIncrement { get; set; }
+
         #endregion
 
         #region Public Methods And Operators
@@ -211,8 +232,11 @@ namespace DotNetScaffolder.Mapping.MetaData.Model
                                  RenderToView = this.RenderToView,
                                  RenderToViewOrder = this.RenderToViewOrder,
                                  Scale = this.Scale,
-                                 RemapDataType = this.RemapDataType
-                             };
+                                 RemapDataType = this.RemapDataType,
+                                 IsIdentity  = this.IsIdentity,
+                IdentitySeed = this.IdentitySeed,
+                IdentityIncrement = this.IdentityIncrement,
+            };
 
             if (result.Table != null) result.Table = this.Table.Clone() as Table;
 

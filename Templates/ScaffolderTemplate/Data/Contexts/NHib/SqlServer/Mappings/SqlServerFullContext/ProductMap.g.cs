@@ -43,6 +43,7 @@ namespace Banking.Models.Context.Mappings.NHib.SqlServer
 			#region Primary Keys
 			
 			Id(t => t.ProductId).GeneratedBy.Assigned()
+			.UniqueKey("UQ__Product__B40CC6CC5F2A0195")
 			.Not.Nullable();
 
 			#endregion

@@ -20,7 +20,9 @@
                 {
                     template.Output.Project = DataType.OutputPath;
                 }
-
+				template.CompanyText = CompanyText;
+			template.LicenseText = LicenseText;
+			template.HeaderText = HeaderText;
                 template.RenderToFile(string.Format(@"{0}\I{1}.g.cs", DataType.OutputFolder, DataType.InterfaceName));
             }
         }

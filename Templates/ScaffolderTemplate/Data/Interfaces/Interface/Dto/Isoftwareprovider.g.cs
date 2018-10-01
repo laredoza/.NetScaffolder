@@ -33,7 +33,7 @@ namespace Banking.Models.Interfaces
 	{
 		#region Fields
 		
-		string id { get; set; }
+		long id { get; set; }
 		int ProductIdDDB { get; set; }
 		string name { get; set; }
 		string x1 { get; set; }

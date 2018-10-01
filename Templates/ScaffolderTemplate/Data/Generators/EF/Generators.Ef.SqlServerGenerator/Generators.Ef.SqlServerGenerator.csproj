@@ -67,7 +67,7 @@
       <Name>RepositoryEFDotnet.Contexts.EF.Base</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\Contexts\EF\SqlServer\RepositoryEFDotnet.Contexts.EF.SqlServer.csproj">
-      <Project>{23e0edff-bdfb-45e4-ac7b-31ddfa93ae1d}</Project>
+      <Project>{23E0EDFF-BDFB-45E4-AC7B-31DDFA93AE1D}</Project>
       <Name>RepositoryEFDotnet.Contexts.EF.SqlServer</Name>
     </ProjectReference>
   </ItemGroup>

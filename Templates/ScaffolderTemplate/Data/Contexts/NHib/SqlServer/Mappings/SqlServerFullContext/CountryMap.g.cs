@@ -43,6 +43,7 @@ namespace Banking.Models.Context.Mappings.NHib.SqlServer
 			#region Primary Keys
 			
 			Id(t => t.CountryId).GeneratedBy.Assigned()
+			.UniqueKey("UQ__Country__10D1609E8CC26505")
 			.Not.Nullable();
 
 			#endregion

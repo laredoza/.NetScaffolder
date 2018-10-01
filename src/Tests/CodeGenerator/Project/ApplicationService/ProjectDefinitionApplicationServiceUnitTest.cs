@@ -43,7 +43,11 @@ namespace DotNetScaffolder.Test.Project.ApplicationService
             projectDefinition.Version = 0.1;
             projectDefinition.Domains.Add(new DomainDefinition { Name = "Security" });
             projectDefinition.Domains[0].NamingConventionId = Guid.NewGuid();
-            projectDefinition.Domains[0].SourceTypeId = Guid.NewGuid();
+            projectDefinition.Domains[0].SourceTypeId = Guid.Parse("3BC1B0C4-1E41-9146-82CF-599181CE4410"); //  Guid.NewGuid();
+
+            projectDefinition.Domains[0].DriverIdList.Add(Guid.NewGuid());
+            projectDefinition.Domains[0].CollectionOptionId = Guid.NewGuid();
+
         }
 
         /// <summary>
@@ -119,6 +123,8 @@ namespace DotNetScaffolder.Test.Project.ApplicationService
             DomainDefinition domain = new DomainDefinition();
             domain.Id = Guid.Empty;
 
+            
+
             applicationService.ProjectDefinition.Domains.Add(domain);
             applicationService.Validate();
             Assert.AreEqual(10, applicationService.ValidationResult.Count, "There should be 10 validation errors");
@@ -132,6 +138,8 @@ namespace DotNetScaffolder.Test.Project.ApplicationService
 
             domain.Name = "Test Domain";
             domain.Id = Guid.NewGuid();
+            domain.DriverIdList.Add(Guid.NewGuid());
+            domain.CollectionOptionId = Guid.NewGuid();
             applicationService.Validate();
 
             Assert.AreEqual(0, applicationService.ValidationResult.Count, "There should be 0 validation errors");

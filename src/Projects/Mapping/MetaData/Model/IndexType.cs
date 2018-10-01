@@ -41,6 +41,8 @@ namespace DotNetScaffolder.Mapping.MetaData.Model
         /// </summary>
         Xml = 5,
 
-        Normal = 6
+        Normal = 6,
+
+        BTREE = 7
     }
 }

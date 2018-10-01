@@ -3,12 +3,12 @@ public class RepoInterfaceTemplate : BaseTemplate
 {
 	public RepoInterfaceDataType DataType { get; set; }
 	public string DtoInterfaceNamespace { get; set; }
+	public CopyrightHeader Header { get; set; }
 	
 	public override string TransformText()
 	{
 		// Debugger.Break();
-		Header = new CopyrightHeader();
-		Header.Filename = DataType.RepoName;
+		Header = GetHeader(DataType.RepoName);
 #>
 
 <#= Header.TransformText() #>

@@ -61,6 +61,7 @@ namespace Banking.Models.Context.Mappings.EF.MySql
 			#endregion
 			
 			#region Indexes
+			HasIndex(i => new {i.ProductId}).HasName("IX_ProductId").IsUnique(false);
 			#endregion
 
 			#region Relationships

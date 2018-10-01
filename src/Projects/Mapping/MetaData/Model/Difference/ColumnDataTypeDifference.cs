@@ -68,6 +68,9 @@ namespace DotNetScaffolder.Mapping.MetaData.Model.Difference
         /// </summary>
         public DomainDataType SecondColumnDataType { get; set; }
 
+
+
+
         #endregion
     }
 }

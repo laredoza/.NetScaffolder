@@ -262,7 +262,12 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Differences
                                              || column.IsRequired != secondColumn.IsRequired
                                              || column.Length != secondColumn.Length
                                              || column.Precision != secondColumn.Precision
-                                             || column.Scale != secondColumn.Scale))
+                                             || column.Scale != secondColumn.Scale
+                                             || column.IsIdentity != secondColumn.IsIdentity
+                                             || column.IdentityIncrement != secondColumn.IdentityIncrement
+                                             || column.IdentitySeed != secondColumn.IdentitySeed
+
+                                             ))
                     retval.ColumnDataTypeDiffs.Add(
                         new ColumnDataTypeDifference
                             {
@@ -280,8 +285,12 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Differences
                                 LengthIsDifferent = column.Length != secondColumn.Length,
                                 PrecisionIsDifferent =
                                     column.Precision != secondColumn.Precision,
-                                ScaleIsDifferent = column.Scale != secondColumn.Scale
-                            });
+                                ScaleIsDifferent = column.Scale != secondColumn.Scale,
+
+                                //IsIdentity = column.IsIdentity != secondColumn.IsIdentity
+                                //IdentityIncrement = column.IdentityIncrement != secondColumn.IdentityIncrement
+                                //IdentitySeed = column.IdentitySeed != secondColumn.IdentitySeed
+                        });
             }
 
             if (retval.IsBroken)

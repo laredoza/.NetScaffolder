@@ -125,7 +125,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.Edmxs
                         relationship.RelatedTable =
                         tables.FirstOrDefault(t => t.TableName == relationship.ReferencedTableName);
                     }
-                    relationship.SchemaName = relationship.RelatedTable?.SchemaName;
+                    //relationship.SchemaName = relationship.RelatedTable?.SchemaName;
                 }
 
                 FormatNavigationPropertiesToBeUnique(modelTable);
@@ -225,7 +225,13 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.Edmxs
                                           (rel.ReferentialConstraint.Dependent.Role == table.Name)
                                               ? RelationshipType.ForeignKey
                                               : RelationshipType.ForeignKeyChild,
-                        RelationshipName = rel.Name
+                        RelationshipName = rel.Name,
+
+                        SchemaName = new TiraggoEntityInfo(
+                                          edmx,
+                                          $"{edmx.Runtime.ConceptualModels.Schema.Namespace}.{table.Name}")
+                                      .StorageInfo.Schema
+
                     };
 
                     if (rel.Ends.Count() != 2)

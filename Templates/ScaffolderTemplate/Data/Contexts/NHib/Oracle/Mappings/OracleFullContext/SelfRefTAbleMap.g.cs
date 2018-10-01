@@ -61,9 +61,9 @@ namespace Banking.Models.Context.Mappings.NHib.Oracle
 			
 			#region Relationships
 			
-			HasMany(s => s.SelfRefTAble_1).KeyColumn("ParentId");
-			References(o => o.SelfRefTAble_2).Column("Id").Unique().Not.Insert().Not.Update();
+			References(o => o.SelfRefTAble2).Column("Id").Unique().Not.Insert().Not.Update();
 			References(o => o.Software).Column("ProductId").Unique().Not.Insert().Not.Update();
+			HasMany(s => s.SelfRefTAble1).KeyColumn("ParentId");
 			
 			#endregion			
 

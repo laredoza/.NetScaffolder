@@ -85,6 +85,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EF", "EF", "{F31A71CE-04A8-
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Generators.Ef.SqlServerGenerator", "Data\Generators\EF\Generators.Ef.SqlServerGenerator\Generators.Ef.SqlServerGenerator.csproj", "{723321B6-E22D-46AA-933A-B910D7F108D2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Generators.Ef.MySqlServerGenerator", "Data\Generators\EF\Generators.Ef.MySqlServerGenerator\Generators.Ef.MySqlServerGenerator.csproj", "{4BBB41CD-3789-48FC-A3AD-4F53C9BE0A0B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -191,6 +193,10 @@ Global
 		{723321B6-E22D-46AA-933A-B910D7F108D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{723321B6-E22D-46AA-933A-B910D7F108D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{723321B6-E22D-46AA-933A-B910D7F108D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4BBB41CD-3789-48FC-A3AD-4F53C9BE0A0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4BBB41CD-3789-48FC-A3AD-4F53C9BE0A0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4BBB41CD-3789-48FC-A3AD-4F53C9BE0A0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4BBB41CD-3789-48FC-A3AD-4F53C9BE0A0B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -232,6 +238,7 @@ Global
 		{99E552FE-857C-4749-B02F-97FBEFB4E177} = {DFB6CD02-EE0C-4BA2-9F3A-EE769AF952B9}
 		{F31A71CE-04A8-47BB-9B59-EAF114E283E1} = {99E552FE-857C-4749-B02F-97FBEFB4E177}
 		{723321B6-E22D-46AA-933A-B910D7F108D2} = {F31A71CE-04A8-47BB-9B59-EAF114E283E1}
+		{4BBB41CD-3789-48FC-A3AD-4F53C9BE0A0B} = {F31A71CE-04A8-47BB-9B59-EAF114E283E1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BAAA9DC0-A104-423F-8507-710C11070DF0}

@@ -341,6 +341,13 @@ namespace RepositoryEFDotnet.UnitTest.Base
             }
         }
 
+
+        protected virtual void PopulateSelfRefTAble(ISelfRefTAble item, bool isUpdate = false, int seed = 1)
+        {
+            throw new NotImplementedException("when implementing move the method to your own partial class.");
+        }
+
+
         #endregion
     }
 }

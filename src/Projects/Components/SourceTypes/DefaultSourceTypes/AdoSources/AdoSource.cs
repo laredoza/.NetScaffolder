@@ -162,14 +162,23 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
             {
                 var databaseReader = new DatabaseReader(adoOptions.ConnectionString, adoOptions.ProviderName);
 
+                databaseReader.Exclusions.TableFilter.FilterExclusions.Add("sysdiagrams");
+                databaseReader.Exclusions.TableFilter.FilterExclusions.Add("__migrationhistory");
+                databaseReader.Exclusions.TableFilter.FilterExclusions.Add("__MigrationHistory");
+                databaseReader.Exclusions.TableFilter.FilterExclusions.Add("sys_config");
+
                 databaseReader.AllTables();
                 databaseReader.AllViews();
+
+                
 
                 // databaseReader.AllStoredProcedures(); //but not this one!
                 // var schemaMetaData = databaseReader.ReadAll();
                 var schemaMetaData = databaseReader.DatabaseSchema;
-
-                List<DatabaseTable> tables = schemaMetaData.Tables.Where(t => t.Name != "sysdiagrams" && t.Name != "__migrationhistory" && t.Name != "__MigrationHistory").ToList();
+                
+                List<DatabaseTable> tables = schemaMetaData.Tables
+                    //.Where(t => t.Name != "sysdiagrams" && t.Name != "__migrationhistory" && t.Name != "__MigrationHistory")
+                    .ToList();
 
                 foreach (var table in tables)
                 {
@@ -434,6 +443,9 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
                         case "XML":
                             newIndex.IndexType = IndexType.Xml;
                             break;
+                        case "BTREE":
+                            newIndex.IndexType = IndexType.Normal;
+                            break;
                         default:
                             throw new NotImplementedException($"Invalid index type {index.IndexType}");
                     }
@@ -526,7 +538,10 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
                                                Precision = column.Precision.HasValue ? column.Precision.Value : 0,
                                                Scale = column.Scale.HasValue ? column.Scale.Value : 0,
                                                Length = column.Length.HasValue ? column.Length.Value : 0,
-                                               IsPrimaryKey = column.IsPrimaryKey
+                                               IsPrimaryKey = column.IsPrimaryKey,
+                                               IsIdentity = column.IdentityDefinition!=null? true:false,
+                                               IdentitySeed = column.IdentityDefinition != null ? column.IdentityDefinition.IdentitySeed:0,
+                                               IdentityIncrement = column.IdentityDefinition != null ? column.IdentityDefinition.IdentityIncrement:0
                                            };
 
                     if (column.IsPrimaryKey)

@@ -42,13 +42,13 @@ namespace Banking.Models.Interfaces
 		
 		#region Child Relationships
 		
-		IList<ISelfRefTAble> SelfRefTAble_1 { get; set; }
+		IList<ISelfRefTAble> SelfRefTAble1 { get; set; }
 
 		#endregion
 		
 		#region Parent Relationships
 		
-		ISelfRefTAble SelfRefTAble_2 { get; set; }
+		ISelfRefTAble SelfRefTAble2 { get; set; }
 		ISoftware Software { get; set; }
 		
 		#endregion

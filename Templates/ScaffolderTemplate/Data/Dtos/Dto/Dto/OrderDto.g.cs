@@ -36,8 +36,8 @@ namespace Banking.Models.Dto
 		
 		public OrderDto()
 		{
-			this.softwareprovider = new List <Isoftwareprovider>();
 			this.OrderDetails = new List <IOrderDetails>();
+			this.softwareprovider = new List <Isoftwareprovider>();
 		}
 		
 		public OrderDto(IOrder item, bool deep = false)
@@ -52,23 +52,23 @@ namespace Banking.Models.Dto
 			this.ShippingAddress = item.ShippingAddress;
 			this.ShippingCity = item.ShippingCity;
 			this.ShippingZip = item.ShippingZip;
-			this.softwareprovider = new List <Isoftwareprovider>();
 			this.OrderDetails = new List <IOrderDetails>();
+			this.softwareprovider = new List <Isoftwareprovider>();
 
 			if(deep)
 			{
-				if(item.softwareprovider != null)
-				{
-					foreach(var childItem in item.softwareprovider)
-					{
-						this.softwareprovider.Add(new softwareproviderDto(childItem, deep));
-					}
-				}
 				if(item.OrderDetails != null)
 				{
 					foreach(var childItem in item.OrderDetails)
 					{
 						this.OrderDetails.Add(new OrderDetailsDto(childItem, deep));
+					}
+				}
+				if(item.softwareprovider != null)
+				{
+					foreach(var childItem in item.softwareprovider)
+					{
+						this.softwareprovider.Add(new softwareproviderDto(childItem, deep));
 					}
 				}
                 if(item.Customer != null)
@@ -95,8 +95,8 @@ namespace Banking.Models.Dto
 		
 		#region Child Relationships
 		
-		public IList<Isoftwareprovider> softwareprovider { get; set; }
 		public IList<IOrderDetails> OrderDetails { get; set; }
+		public IList<Isoftwareprovider> softwareprovider { get; set; }
 
 		#endregion
 		

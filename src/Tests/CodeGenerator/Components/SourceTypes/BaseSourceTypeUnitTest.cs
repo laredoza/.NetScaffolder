@@ -52,7 +52,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                 bankAccountTable.Relationships,
                 "The Relationships should not be null in the BankAccounts table.");
             Assert.AreEqual(
-                3,
+                4,
                 bankAccountTable.Relationships.Count,
                 "There should be 3 Relationships in the BankAccounts table.");
 
@@ -73,7 +73,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                 relationship.ReferencedTableName.ToLower(),
                 "The relationship table name should be Customer");
 
-            Assert.AreEqual("dbo", relationship.SchemaName.ToLower(), "The SchemaName should not be null");
+            ValidateSchema(relationship.SchemaName.ToLower());
             Assert.IsNull(relationship.RelationshipAlias, "The RelationshipAlias should be empty");
             Assert.AreEqual(RelationshipMultiplicity.Many, relationship.Multiplicity, "The RelationshipMultiplicity should be Many");
             Assert.AreEqual(RelationshipMultiplicity.ZeroToOne, relationship.ReferencedMultiplicity, "The RelationshipMultiplicity should be Many");
@@ -92,18 +92,18 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                 relationship.ReferencedColumnName,
                 "The ReferencedColumnName should be ToBankAccountId.");
             Assert.AreEqual(
-                "BankTransfers",
-                relationship.ReferencedTableName,
+                "BankTransfers".ToLower(),
+                relationship.ReferencedTableName.ToLower(),
                 "The relationship table name should be BankTransfers.");
 
-            Assert.AreEqual("dbo", relationship.SchemaName.ToLower(), "The SchemaName should not be null");
+            ValidateSchema(relationship.SchemaName.ToLower());
             Assert.IsNull(relationship.RelationshipAlias, "The RelationshipAlias should be empty");
             Assert.AreEqual(RelationshipMultiplicity.One, relationship.Multiplicity, "The RelationshipMultiplicity should be one");
             Assert.AreEqual(RelationshipMultiplicity.Many, relationship.ReferencedMultiplicity, "The RelationshipMultiplicity should be Many");
 
             // Assert.AreEqual("FK_BankTransfers_BankAccount1", relationship.RelationshipName, "The relationship table name should be FK_BankTransfers_BankAccount1.");
             relationship = bankAccountTable.Relationships.FirstOrDefault(
-                r => r.ReferencedTableName == "BankTransfers" && r.ReferencedColumnName == "FromBankAccountId");
+                r => r.ReferencedTableName.ToLower() == "BankTransfers".ToLower() && r.ReferencedColumnName.ToLower() == "FromBankAccountId".ToLower());
             Assert.IsNotNull(relationship, "The BankTransfers Relationship should not be null.");
             Assert.AreEqual("BankAccountId", relationship.ColumnName, "The ColumnName should be FromBankAccountId.");
             Assert.AreEqual(
@@ -115,14 +115,14 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                 relationship.ReferencedColumnName,
                 "The ReferencedColumnName should be FromBankAccountId.");
             Assert.AreEqual(
-                "BankTransfers",
-                relationship.ReferencedTableName,
+                "BankTransfers".ToLower(),
+                relationship.ReferencedTableName.ToLower(),
                 "The relationship table name should be BankTransfers.");
 
             // Assert.AreEqual("FK_BankTransfers_BankAccount", relationship.RelationshipName, "The relationship table name should be FK_BankTransfers_BankAccount.");
 
-            Assert.AreEqual("dbo", relationship.SchemaName.ToLower(), "The SchemaName should not be null");
-            Assert.IsNull(relationship.RelationshipAlias, "The RelationshipAlias should be empty");
+            ValidateSchema(relationship.SchemaName.ToLower());
+            Assert.IsNotNull(relationship.RelationshipAlias, "The RelationshipAlias should be empty");
             Assert.AreEqual(RelationshipMultiplicity.One, relationship.Multiplicity, "The RelationshipMultiplicity should be one");
             Assert.AreEqual(RelationshipMultiplicity.Many, relationship.ReferencedMultiplicity, "The RelationshipMultiplicity should be Many");
         }
@@ -229,12 +229,12 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                 bankTransfersTable.Relationships,
                 "The Relationships should not be null in the bankTransfersTable table.");
             Assert.AreEqual(
-                2,
+                3,
                 bankTransfersTable.Relationships.Count,
                 "There should be 2 Relationships in the bankTransfersTable table.");
 
             Relationship relationship = bankTransfersTable.Relationships.FirstOrDefault(
-                r => r.ReferencedTableName == "BankAccount" && r.ColumnName == "ToBankAccountId");
+                r => r.ReferencedTableName.ToLower() == "BankAccount".ToLower() && r.ColumnName.ToLower() == "ToBankAccountId".ToLower());
             Assert.IsNotNull(relationship, "The BankTransfers1 Relationship should not be null.");
             Assert.AreEqual("ToBankAccountId", relationship.ColumnName, "The ColumnName should be ToBankAccountId.");
             Assert.AreEqual(
@@ -246,18 +246,18 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                 relationship.ReferencedColumnName,
                 "The ReferencedColumnName should be BankAccountId.");
             Assert.AreEqual(
-                "BankAccount",
-                relationship.ReferencedTableName,
+                "BankAccount".ToLower(),
+                relationship.ReferencedTableName.ToLower(),
                 "The relationship table name should be BankTransfers.");
 
-            Assert.AreEqual("dbo", relationship.SchemaName.ToLower(), "The SchemaName should not be null");
+            ValidateSchema(relationship.SchemaName.ToLower());
             Assert.IsNull(relationship.RelationshipAlias, "The RelationshipAlias should be empty");
             Assert.AreEqual(RelationshipMultiplicity.Many, relationship.Multiplicity, "The RelationshipMultiplicity should be Many");
             Assert.AreEqual(RelationshipMultiplicity.One, relationship.ReferencedMultiplicity, "The RelationshipMultiplicity should be One");
 
             // Assert.AreEqual("FK_BankTransfers_BankAccount1", relationship.RelationshipName, "The relationship table name should be FK_BankTransfers_BankAccount1.");
             relationship = bankTransfersTable.Relationships.FirstOrDefault(
-                r => r.ReferencedTableName == "BankAccount" && r.ColumnName == "FromBankAccountId");
+                r => r.ReferencedTableName.ToLower() == "BankAccount".ToLower() && r.ColumnName.ToLower() == "FromBankAccountId".ToLower());
             Assert.IsNotNull(relationship, "The BankTransfers Relationship should not be null.");
             Assert.AreEqual(
                 "FromBankAccountId",
@@ -272,12 +272,12 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                 relationship.ReferencedColumnName,
                 "The ReferencedColumnName should be BankAccountId.");
             Assert.AreEqual(
-                "BankAccount",
-                relationship.ReferencedTableName,
+                "BankAccount".ToLower(),
+                relationship.ReferencedTableName.ToLower(),
                 "The relationship table name should be BankTransfers.");
 
-            Assert.AreEqual("dbo", relationship.SchemaName.ToLower(), "The SchemaName should not be null");
-            Assert.IsNull(relationship.RelationshipAlias, "The RelationshipAlias should be empty");
+            ValidateSchema(relationship.SchemaName.ToLower());
+            Assert.IsNotNull(relationship.RelationshipAlias, "The RelationshipAlias should be empty");
             Assert.AreEqual(RelationshipMultiplicity.Many, relationship.Multiplicity, "The RelationshipMultiplicity should be Many");
             Assert.AreEqual(RelationshipMultiplicity.One, relationship.ReferencedMultiplicity, "The RelationshipMultiplicity should be One");
 
@@ -298,7 +298,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
         {
             Assert.IsNotNull(bankTransfersTable, "The table should not be null");
             Assert.AreEqual(
-                5,
+                6,
                 bankTransfersTable.Columns.Count,
                 "There should be 5 Columns in the BankTransfers table.");
 
@@ -436,7 +436,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
 
             // Assert.AreEqual("FK_Customer_Country", relationship.RelationshipName, "The relationship table name should be FK_Customer_Country.");
 
-            Assert.AreEqual("dbo", relationship.SchemaName.ToLower(), "The SchemaName should not be null");
+            ValidateSchema(relationship.SchemaName.ToLower());
             Assert.IsNull(relationship.RelationshipAlias, "The RelationshipAlias should be empty");
             Assert.AreEqual(RelationshipMultiplicity.ZeroToOne, relationship.Multiplicity, "The RelationshipMultiplicity should be ZeroToOne");
             Assert.AreEqual(RelationshipMultiplicity.Many, relationship.ReferencedMultiplicity, "The RelationshipMultiplicity should be Many");
@@ -850,8 +850,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                 "customer",
                 relationship.ReferencedTableName.ToLower(),
                 "The relationship table name should be Customer");
-
-            Assert.AreEqual("dbo", relationship.SchemaName.ToLower(), "The SchemaName should not be null");
+            ValidateSchema(relationship.SchemaName.ToLower());
             Assert.IsNull(relationship.RelationshipAlias, "The RelationshipAlias should be empty");
             Assert.AreEqual(RelationshipMultiplicity.Many, relationship.Multiplicity, "The RelationshipMultiplicity should be Many");
             Assert.AreEqual(RelationshipMultiplicity.ZeroToOne, relationship.ReferencedMultiplicity, "The RelationshipMultiplicity should be ZeroToOne");
@@ -873,11 +872,18 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                 relationship.ReferencedTableName.ToLower(),
                 "The relationship table name should be OrderDetails.");
 
-            Assert.AreEqual("dbo", relationship.SchemaName.ToLower(), "The SchemaName should not be null");
+            
+            ValidateSchema(relationship.SchemaName.ToLower());
             Assert.IsNull(relationship.RelationshipAlias, "The RelationshipAlias should be empty");
             Assert.AreEqual(RelationshipMultiplicity.One, relationship.Multiplicity, "The RelationshipMultiplicity should be One");
             Assert.AreEqual(RelationshipMultiplicity.Many, relationship.ReferencedMultiplicity, "The RelationshipMultiplicity should be Many");
             // Assert.AreEqual("FK_OrdeDetails_Order", relationship.RelationshipName, "The relationship table name should be FK_OrdeDetails_Order.");
+        }
+
+        private   void ValidateSchema( string SchemaName)
+        {
+            string testForText = this.SourceType is MySqlAdoSourceType? "repotest" : "dbo";
+                Assert.AreEqual(testForText, SchemaName, "The SchemaName should not be: "  + SchemaName);
         }
 
         /// <summary>
@@ -1052,7 +1058,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
 
             // Assert.AreEqual("FK_Software_Product", relationship.RelationshipName, "The relationship table name should be FK_Software_Product.");
 
-            Assert.AreEqual("dbo", relationship.SchemaName.ToLower(), "The SchemaName should not be null");
+            ValidateSchema(relationship.SchemaName.ToLower());
             Assert.IsNull(relationship.RelationshipAlias, "The RelationshipAlias should be empty");
             Assert.AreEqual(RelationshipMultiplicity.ZeroToOne, relationship.Multiplicity, "The RelationshipMultiplicity should be ZeroToOne");
             Assert.AreEqual(RelationshipMultiplicity.One, relationship.ReferencedMultiplicity, "The RelationshipMultiplicity should be One");
@@ -1183,7 +1189,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
 
             // Assert.AreEqual("FK_Book_Product", relationship.RelationshipName, "The relationship table name should be FK_Book_Product.");
 
-            Assert.AreEqual("dbo", relationship.SchemaName.ToLower(), "The SchemaName should not be null");
+            ValidateSchema(relationship.SchemaName.ToLower());
             Assert.IsNull(relationship.RelationshipAlias, "The RelationshipAlias should be empty");
             Assert.AreEqual(RelationshipMultiplicity.ZeroToOne, relationship.Multiplicity, "The RelationshipMultiplicity should be ZeroToOne");
             Assert.AreEqual(RelationshipMultiplicity.One, relationship.ReferencedMultiplicity, "The RelationshipMultiplicity should be One");
@@ -1287,6 +1293,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
         public void BaseSourceTypeUnitTest_TestProductRelationships(Table productTable)
         {
             Assert.IsNotNull(productTable.Relationships, "The Relationships should not be null in the Product table.");
+ 
             Assert.AreEqual(
                 3,
                 productTable.Relationships.Count,
@@ -1308,7 +1315,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                 "The Book ReferencedColumnName should be ProductId in the Product table.");
             Assert.AreEqual("book", relationship.ReferencedTableName.ToLower(), "The relationship table name should be Book.");
 
-            Assert.AreEqual("dbo", relationship.SchemaName.ToLower(), "The SchemaName should not be null");
+            ValidateSchema(relationship.SchemaName.ToLower());
             Assert.IsNull(relationship.RelationshipAlias, "The RelationshipAlias should be empty");
             Assert.AreEqual(RelationshipMultiplicity.One, relationship.Multiplicity, "The RelationshipMultiplicity should be One");
             Assert.AreEqual(RelationshipMultiplicity.ZeroToOne, relationship.ReferencedMultiplicity, "The RelationshipMultiplicity should be ZeroToOne");
@@ -1333,7 +1340,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
                 relationship.ReferencedTableName.ToLower(),
                 "The relationship table name should be OrderDetails.");
 
-            Assert.AreEqual("dbo", relationship.SchemaName.ToLower(), "The SchemaName should not be null");
+            ValidateSchema(relationship.SchemaName.ToLower());
             Assert.IsNull(relationship.RelationshipAlias, "The RelationshipAlias should be empty");
             Assert.AreEqual(RelationshipMultiplicity.One, relationship.Multiplicity, "The RelationshipMultiplicity should be one");
             Assert.AreEqual(RelationshipMultiplicity.Many, relationship.ReferencedMultiplicity, "The RelationshipMultiplicity should be Many");
@@ -1360,7 +1367,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
 
             // Assert.AreEqual("FK_Software_Product", relationship.RelationshipName, "The relationship table name should be FK_Software_Product.");
 
-            Assert.AreEqual("dbo", relationship.SchemaName.ToLower(), "The SchemaName should not be null");
+            ValidateSchema(relationship.SchemaName.ToLower());
             Assert.IsNull(relationship.RelationshipAlias, "The RelationshipAlias should be empty");
             Assert.AreEqual(RelationshipMultiplicity.One, relationship.Multiplicity, "The RelationshipMultiplicity should be one");
             Assert.AreEqual(RelationshipMultiplicity.ZeroToOne, relationship.ReferencedMultiplicity, "The RelationshipMultiplicity should be ZeroToOne");
@@ -1370,6 +1377,8 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
         {
             int precision = 0;
 
+             
+
             if (this.SourceType is EdmxSourceType)
             {
                 precision = 0;
@@ -1378,6 +1387,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
             {
                 precision = 10;
             }
+             
 
             return precision;
         }
@@ -1437,11 +1447,16 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
 
             if (this.SourceType is EdmxSourceType || this.SourceType is MySqlAdoSourceType)
             {
-                precision = 2147483647;
+                //precision = 2147483647;
+                precision = 255;
             }
             else if (this.SourceType is OracleAdoSourceType)
             {
                 precision = 4000;
+            }
+            else if (this.SourceType is AdoSource)
+            {
+                precision = 255;
             }
 
             return precision;
@@ -1536,10 +1551,15 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
             {
                 precision = 0;
             }
-            else if (this.SourceType is AdoSource)
+            else if (this.SourceType is MySqlAdoSourceType)
             {
                 precision = 12;
             }
+            else if (this.SourceType is AdoSource)
+            {
+                precision = 24;
+            }
+            
 
             return precision;
         }
@@ -1556,6 +1576,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
             {
                 precision = 12;
             }
+            
 
             return precision;
         }
@@ -1697,6 +1718,18 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
             Assert.IsNotNull(databaseModel, "The database should not be null");
             Assert.IsNotNull(databaseModel.Tables, "Tables should not be null");
             Assert.AreEqual(9, databaseModel.Tables.Count, "There should be 9 Tables.");
+
+            this.BaseSourceTypeUnitTest_OrderTable(
+           databaseModel.Tables.FirstOrDefault(t => t.TableName.ToLower() == "order"));
+            this.BaseSourceTypeUnitTest_OrderRelationship(
+                databaseModel.Tables.FirstOrDefault(t => t.TableName.ToLower() == "order"));
+
+            this.BaseSourceTypeUnitTest_TestOrderDetailsTable(
+              databaseModel.Tables.FirstOrDefault(t => t.TableName.ToLower() == "orderdetails"));
+            this.BaseSourceTypeUnitTest_OrderDetailsBook(
+                databaseModel.Tables.FirstOrDefault(t => t.TableName.ToLower() == "orderdetails"));
+
+
             this.BaseSourceTypeUnitTest_TestProductTable(
                 databaseModel.Tables.FirstOrDefault(t => t.TableName.ToLower() == "product"));
             this.BaseSourceTypeUnitTest_TestProductRelationships(
@@ -1706,10 +1739,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
             this.BaseSourceTypeUnitTest_TestBookRelationships(
                 databaseModel.Tables.FirstOrDefault(t => t.TableName.ToLower() == "book"));
 
-            this.BaseSourceTypeUnitTest_TestOrderDetailsTable(
-                databaseModel.Tables.FirstOrDefault(t => t.TableName.ToLower() == "orderdetails"));
-            this.BaseSourceTypeUnitTest_OrderDetailsBook(
-                databaseModel.Tables.FirstOrDefault(t => t.TableName.ToLower() == "orderdetails"));
+          
 
             this.BaseSourceTypeUnitTest_SoftwareTable(
                 databaseModel.Tables.FirstOrDefault(t => t.TableName.ToLower() == "software"));
@@ -1721,10 +1751,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
             this.BaseSourceTypeUnitTest_CustomerRelationship(
                 databaseModel.Tables.FirstOrDefault(t => t.TableName.ToLower() == "customer"));
 
-            this.BaseSourceTypeUnitTest_OrderTable(
-                databaseModel.Tables.FirstOrDefault(t => t.TableName.ToLower() == "order"));
-            this.BaseSourceTypeUnitTest_OrderRelationship(
-                databaseModel.Tables.FirstOrDefault(t => t.TableName.ToLower() == "order"));
+       
 
             this.BaseSourceTypeUnitTest_CountryTable(
                 databaseModel.Tables.FirstOrDefault(t => t.TableName.ToLower() == "country"));

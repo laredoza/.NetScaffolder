@@ -67,6 +67,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configuration\MySQLConfiguration.cs" />
+    <Compile Include="Configuration\MySQLMigrationGenerator.cs" />
     <Compile Include="Context\MySqlFullContext.g.cs" />
     <Compile Include="Database\DatabaseManager.g.cs" />
     <Compile Include="Mappings\MySqlFullContext\BankAccountMap.g.cs" />

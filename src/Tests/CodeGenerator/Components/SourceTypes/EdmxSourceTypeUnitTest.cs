@@ -35,7 +35,7 @@ namespace DotNetScaffolder.Test.Components.SourceTypes
             EdmxSourceType import = new EdmxSourceType();
             this.SourceType = import;
 
-            string filePath = Path.Combine(Directory.GetCurrentDirectory(), @"..\..\DataSource\model.edmx");
+            string filePath = Path.Combine(Directory.GetCurrentDirectory(), @"..\..\DataSource\ModelAutoNLayered.edmx");
             DatabaseModel databaseModel = import.Import(new FileSourceOptions { Path = filePath });
             this.BaseSourceTypeUnitTest_TestValues(databaseModel);
         }

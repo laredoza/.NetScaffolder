@@ -42,7 +42,7 @@ namespace Banking.Models.Context.Mappings.NHib.Oracle
 			#region Primary Keys
 			
 			Id(t => t.BankAccountId).GeneratedBy.Assigned()
-			.Index("NewIndex")
+			.UniqueKey("UQ__BankAcco__4FC8E4A0C45281C8")
 			.Not.Nullable();
 
 			#endregion
@@ -50,14 +50,13 @@ namespace Banking.Models.Context.Mappings.NHib.Oracle
 			#region Properties
 			
 			Map(t => t.BankAccountNumber).Column("BankAccountNumber")
-			.Index("NewIndex")
 			.Length(10)
 			.Not.Nullable();
 			Map(t => t.Balance).Column("Balance")
 			.Precision(19).Scale(4)
 			.Not.Nullable();
 			Map(t => t.CustomerId).Column("CustomerId")
-			.Index("NewIndex")
+			.Index("IX_CustomerId")
 			.Nullable();
 			Map(t => t.Locked).Column("Locked")
 			.Not.Nullable();
