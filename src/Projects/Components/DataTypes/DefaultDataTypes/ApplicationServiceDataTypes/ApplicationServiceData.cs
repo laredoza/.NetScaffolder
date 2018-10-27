@@ -42,7 +42,6 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ApplicationServ
             this.Models = new List<Table>();
             this.OutputFolder = "ApplicationService";
             this.ApplicationServiceName = "NewApplicationService";
-            this.CustomConnectionName = string.Empty;
             this.Namespace = "ApplicationService";
             this.InheritFrom = string.Empty;
             this.Id = Guid.NewGuid();
@@ -58,11 +57,6 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ApplicationServ
         ///     Gets or sets the application service name.
         /// </summary>
         public string ApplicationServiceName { get; set; }
-
-        /// <summary>
-        ///     Gets or sets the custom connection name.
-        /// </summary>
-        public string CustomConnectionName { get; set; }
 
         public List<Relationship> ExcludedRelationships(List<Table> models)
         {

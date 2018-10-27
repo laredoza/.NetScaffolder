@@ -2,6 +2,7 @@
 <DtoDataType xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <AdditionalNamespaces />
   <AddInjectConstructor>true</AddInjectConstructor>
+  <UseGenerics>false</UseGenerics>
   <InheritFrom />
   <Namespace>Dto</Namespace>
   <OutputFolder>Dto</OutputFolder>

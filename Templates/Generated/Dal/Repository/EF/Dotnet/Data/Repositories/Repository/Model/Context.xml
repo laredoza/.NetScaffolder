@@ -10,55 +10,55 @@
       <Id>7d5d7239-42e3-4c2d-a0b9-abc8b00ff3cc</Id>
       <InheritFrom>BaseContext</InheritFrom>
       <Models>
-        <Table Description="" SchemaName="dbo" TableName="BankAccount">
+        <Table Description="" SchemaName="dbo" TableName="BankAccount" EnabledForCodeGeneration="true">
           <Columns />
           <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
           <RelationShips />
           <Indexes />
         </Table>
-        <Table Description="" SchemaName="dbo" TableName="BankTransfers">
+        <Table Description="" SchemaName="dbo" TableName="BankTransfers" EnabledForCodeGeneration="true">
           <Columns />
           <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
           <RelationShips />
           <Indexes />
         </Table>
-        <Table Description="" SchemaName="dbo" TableName="Book">
+        <Table Description="" SchemaName="dbo" TableName="Book" EnabledForCodeGeneration="true">
           <Columns />
           <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
           <RelationShips />
           <Indexes />
         </Table>
-        <Table Description="" SchemaName="dbo" TableName="Country">
+        <Table Description="" SchemaName="dbo" TableName="Country" EnabledForCodeGeneration="true">
           <Columns />
           <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
           <RelationShips />
           <Indexes />
         </Table>
-        <Table Description="" SchemaName="dbo" TableName="Customer">
+        <Table Description="" SchemaName="dbo" TableName="Customer" EnabledForCodeGeneration="true">
           <Columns />
           <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
           <RelationShips />
           <Indexes />
         </Table>
-        <Table Description="" SchemaName="dbo" TableName="Order">
+        <Table Description="" SchemaName="dbo" TableName="Order" EnabledForCodeGeneration="true">
           <Columns />
           <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
           <RelationShips />
           <Indexes />
         </Table>
-        <Table Description="" SchemaName="dbo" TableName="OrderDetails">
+        <Table Description="" SchemaName="dbo" TableName="OrderDetails" EnabledForCodeGeneration="true">
           <Columns />
           <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
           <RelationShips />
           <Indexes />
         </Table>
-        <Table Description="" SchemaName="dbo" TableName="Product">
+        <Table Description="" SchemaName="dbo" TableName="Product" EnabledForCodeGeneration="true">
           <Columns />
           <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
           <RelationShips />
           <Indexes />
         </Table>
-        <Table Description="" SchemaName="dbo" TableName="Software">
+        <Table Description="" SchemaName="dbo" TableName="Software" EnabledForCodeGeneration="true">
           <Columns />
           <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
           <RelationShips />
@@ -76,13 +76,13 @@
       <Id>9a84c809-6a36-4495-a611-f856787c0649</Id>
       <InheritFrom>BaseContext</InheritFrom>
       <Models>
-        <Table Description="" SchemaName="dbo" TableName="BankAccount">
+        <Table Description="" SchemaName="dbo" TableName="BankAccount" EnabledForCodeGeneration="true">
           <Columns />
           <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
           <RelationShips />
           <Indexes />
         </Table>
-        <Table Description="" SchemaName="dbo" TableName="BankTransfers">
+        <Table Description="" SchemaName="dbo" TableName="BankTransfers" EnabledForCodeGeneration="true">
           <Columns />
           <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
           <RelationShips />
@@ -100,43 +100,43 @@
       <Id>53110a66-f0d6-4cd7-8c7d-1c27b873b0be</Id>
       <InheritFrom>BaseContext</InheritFrom>
       <Models>
-        <Table Description="" SchemaName="dbo" TableName="Book">
+        <Table Description="" SchemaName="dbo" TableName="Book" EnabledForCodeGeneration="true">
           <Columns />
           <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
           <RelationShips />
           <Indexes />
         </Table>
-        <Table Description="" SchemaName="dbo" TableName="Country">
+        <Table Description="" SchemaName="dbo" TableName="Country" EnabledForCodeGeneration="true">
           <Columns />
           <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
           <RelationShips />
           <Indexes />
         </Table>
-        <Table Description="" SchemaName="dbo" TableName="Customer">
+        <Table Description="" SchemaName="dbo" TableName="Customer" EnabledForCodeGeneration="true">
           <Columns />
           <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
           <RelationShips />
           <Indexes />
         </Table>
-        <Table Description="" SchemaName="dbo" TableName="Order">
+        <Table Description="" SchemaName="dbo" TableName="Order" EnabledForCodeGeneration="true">
           <Columns />
           <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
           <RelationShips />
           <Indexes />
         </Table>
-        <Table Description="" SchemaName="dbo" TableName="OrderDetails">
+        <Table Description="" SchemaName="dbo" TableName="OrderDetails" EnabledForCodeGeneration="true">
           <Columns />
           <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
           <RelationShips />
           <Indexes />
         </Table>
-        <Table Description="" SchemaName="dbo" TableName="Product">
+        <Table Description="" SchemaName="dbo" TableName="Product" EnabledForCodeGeneration="true">
           <Columns />
           <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
           <RelationShips />
           <Indexes />
         </Table>
-        <Table Description="" SchemaName="dbo" TableName="Software">
+        <Table Description="" SchemaName="dbo" TableName="Software" EnabledForCodeGeneration="true">
           <Columns />
           <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
           <RelationShips />

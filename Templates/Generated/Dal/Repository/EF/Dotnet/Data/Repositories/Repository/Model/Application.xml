@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ApplicationServiceDataType xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <AdditionalNamespaces />
+  <ApplicationServiceData>
+    <ApplicationServiceData>
+      <ApplicationServiceName>Security</ApplicationServiceName>
+      <CustomConnectionName />
+      <Id>e3833a9b-b31b-42a7-8264-61ce13ef2bbb</Id>
+      <InheritFrom />
+      <Models>
+        <Table Description="" SchemaName="dbo" TableName="BankAccount" EnabledForCodeGeneration="true">
+          <Columns />
+          <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
+          <RelationShips />
+          <Indexes />
+        </Table>
+        <Table Description="" SchemaName="dbo" TableName="BankTransfers" EnabledForCodeGeneration="true">
+          <Columns />
+          <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
+          <RelationShips />
+          <Indexes />
+        </Table>
+        <Table Description="" SchemaName="dbo" TableName="Country" EnabledForCodeGeneration="true">
+          <Columns />
+          <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
+          <RelationShips />
+          <Indexes />
+        </Table>
+        <Table Description="" SchemaName="dbo" TableName="OrderDetails" EnabledForCodeGeneration="true">
+          <Columns />
+          <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
+          <RelationShips />
+          <Indexes />
+        </Table>
+        <Table Description="" SchemaName="dbo" TableName="Software" EnabledForCodeGeneration="true">
+          <Columns />
+          <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
+          <RelationShips />
+          <Indexes />
+        </Table>
+      </Models>
+      <Namespace>ApplicationService</Namespace>
+      <OutputFolder>ApplicationService</OutputFolder>
+      <OutputPath />
+      <IsDefault>true</IsDefault>
+    </ApplicationServiceData>
+  </ApplicationServiceData>
+  <MissingTables />
+</ApplicationServiceDataType>
