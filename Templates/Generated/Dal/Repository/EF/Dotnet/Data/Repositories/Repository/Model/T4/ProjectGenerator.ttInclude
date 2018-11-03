@@ -8,6 +8,7 @@
 <#@ include file="MappingGenerator.ttInclude" #>
 <#@ include file="BaseUnitTestGenerator.ttInclude" #>
 <#@ include file="DatabaseManagerGenerator.ttInclude" #>
+//<#@ include file="ApplicationServiceGenerator.ttInclude" #>
 <#+
     public class ProjectGenerator : BaseProjectGenerator
     {
@@ -34,6 +35,36 @@
                     entityGen.DtoInterfaceType = dataTypes.FirstOrDefault(o => o is DtoInterfaceDataType) as DtoInterfaceDataType;
                     entityGen.Run();
                 }
+
+				//if (dataType is ApplicationServiceDataType)
+				//{
+                    //Debugger.Break();
+					//var applicationDataType = dataType as ApplicationServiceDataType;
+					//var entityDataType = dataTypes.FirstOrDefault(o => o is EntityDataType) as EntityDataType;
+//
+					//foreach(var applicationServiceData in applicationDataType.ApplicationServiceData)
+					//{	
+						//if(applicationServiceData != null)
+						//{
+//							var mappingGen = new MappingGenerator();
+//							var mappingDataType = dataTypes.FirstOrDefault(o => o is MappingDataType) as MappingDataType;
+					
+//							if(mappingDataType != null)
+//							{
+//								mappingGen.Models = domain.Tables;
+//								mappingGen.ProjectOutputPath = contextData.OutputPath;
+//								mappingGen.EntityNamespace = entityDataType.FullNamespace;
+//								mappingGen.ContextData = contextData;
+//								mappingGen.MappingDataType = mappingDataType;
+//								mappingGen.NamingConvention = dataType.NamingConvention;
+//								mappingGen.Run();
+//							}
+
+
+						//}
+//
+					//}
+				//}
 
                 if(dataType is ContextDataType)
                 {				
