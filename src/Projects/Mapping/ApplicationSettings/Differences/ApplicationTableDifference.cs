@@ -29,6 +29,8 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Differences
         public ApplicationTableDifference()
         {
             this.ProblemIndexes = new List<Index>();
+            this.FirstMissingRelationships = new List<Relationship>();
+            this.FirstExtraRelationships = new List<Relationship>();
         }
 
         #endregion
@@ -199,57 +201,9 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Differences
             retval.FirstMissingColumns = secondTable.Columns
                 .Where(c => !firstTableColumnNameList.Contains(c.ColumnName.ToUpper())).ToList();
 
-            // Relationshi[ps
-            var secondTableRelationshipTableNames =
-                new HashSet<string>(secondTable.Relationships.Select(u => u.ReferencedTableName.ToUpper()));
-            retval.FirstExtraRelationships = firstTable.Relationships
-                .Where(u => !secondTableRelationshipTableNames.Contains(u.ReferencedTableName.ToUpper())).ToList();
-
-            var firstTableRelationshipTableNames =
-                new HashSet<string>(firstTable.Relationships.Select(u => u.ReferencedTableName.ToUpper()));
-            retval.FirstMissingRelationships = secondTable.Relationships
-                .Where(u => !firstTableRelationshipTableNames.Contains(u.ReferencedTableName.ToUpper())).ToList();
-
-
-              secondTableRelationshipTableNames =
-          new HashSet<string>(secondTable.Relationships.Select(u => u.RelationshipName.ToUpper()));
-            retval.FirstExtraRelationships = firstTable.Relationships
-                .Where(u => !secondTableRelationshipTableNames.Contains(u.RelationshipName.ToUpper())).ToList();
-
-              firstTableRelationshipTableNames =
-                new HashSet<string>(firstTable.Relationships.Select(u => u.RelationshipName.ToUpper()));
-            retval.FirstMissingRelationships = secondTable.Relationships
-                .Where(u => !firstTableRelationshipTableNames.Contains(u.RelationshipName.ToUpper())).ToList();
-
-
-
-            secondTableRelationshipTableNames =
-        new HashSet<string>(secondTable.Relationships.Select(u => u.ColumnName.ToUpper()));
-            retval.FirstExtraRelationships = firstTable.Relationships
-                .Where(u => !secondTableRelationshipTableNames.Contains(u.ColumnName.ToUpper())).ToList();
-
-            firstTableRelationshipTableNames =
-              new HashSet<string>(firstTable.Relationships.Select(u => u.ColumnName.ToUpper()));
-            retval.FirstMissingRelationships = secondTable.Relationships
-                .Where(u => !firstTableRelationshipTableNames.Contains(u.ColumnName.ToUpper())).ToList();
-
-            secondTableRelationshipTableNames =
-                 new HashSet<string>(secondTable.Relationships.Select(u => u.ReferencedColumnName.ToUpper()));
-            retval.FirstExtraRelationships = firstTable.Relationships
-                .Where(u => !secondTableRelationshipTableNames.Contains(u.ReferencedColumnName.ToUpper())).ToList();
-
-            firstTableRelationshipTableNames =
-              new HashSet<string>(firstTable.Relationships.Select(u => u.ReferencedColumnName.ToUpper()));
-            retval.FirstMissingRelationships = secondTable.Relationships
-                .Where(u => !firstTableRelationshipTableNames.Contains(u.ReferencedColumnName.ToUpper())).ToList();
-
-
-
+            FindRelationshipDifferences(firstTable, secondTable, retval);
 
             RefreshIndexes(firstTable, secondTable, retval);
-
-      
-
 
             retval.ColumnDataTypeDiffs = new List<ColumnDataTypeDifference>();
             foreach (var column in firstTable.Columns)
@@ -301,6 +255,53 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Differences
             }
 
             return null;
+        }
+
+        private static void FindRelationshipDifferences(Table firstTable, Table secondTable, ApplicationTableDifference retval)
+        {
+            // Relationships
+            var secondTableRelationshipTableNames =
+                new HashSet<string>(secondTable.Relationships.Select(u => u.ReferencedTableName.ToUpper()));
+            retval.FirstExtraRelationships.AddRange(firstTable.Relationships
+                .Where(u => !secondTableRelationshipTableNames.Contains(u.ReferencedTableName.ToUpper())).ToList());
+
+            var firstTableRelationshipTableNames =
+                new HashSet<string>(firstTable.Relationships.Select(u => u.ReferencedTableName.ToUpper()));
+            retval.FirstMissingRelationships.AddRange(secondTable.Relationships
+                .Where(u => !firstTableRelationshipTableNames.Contains(u.ReferencedTableName.ToUpper())).ToList());
+
+            secondTableRelationshipTableNames =
+                new HashSet<string>(secondTable.Relationships.Select(u => u.RelationshipName.ToUpper()));
+            retval.FirstExtraRelationships.AddRange(firstTable.Relationships
+                .Where(u => !secondTableRelationshipTableNames.Contains(u.RelationshipName.ToUpper())).ToList());
+
+            firstTableRelationshipTableNames =
+                new HashSet<string>(firstTable.Relationships.Select(u => u.RelationshipName.ToUpper()));
+            retval.FirstMissingRelationships.AddRange(secondTable.Relationships
+                .Where(u => !firstTableRelationshipTableNames.Contains(u.RelationshipName.ToUpper())).ToList());
+
+            secondTableRelationshipTableNames =
+                new HashSet<string>(secondTable.Relationships.Select(u => u.ColumnName.ToUpper()));
+            retval.FirstExtraRelationships.AddRange(firstTable.Relationships
+                .Where(u => !secondTableRelationshipTableNames.Contains(u.ColumnName.ToUpper())).ToList());
+
+            firstTableRelationshipTableNames =
+                new HashSet<string>(firstTable.Relationships.Select(u => u.ColumnName.ToUpper()));
+            retval.FirstMissingRelationships.AddRange(secondTable.Relationships
+                .Where(u => !firstTableRelationshipTableNames.Contains(u.ColumnName.ToUpper())).ToList());
+
+            secondTableRelationshipTableNames =
+                new HashSet<string>(secondTable.Relationships.Select(u => u.ReferencedColumnName.ToUpper()));
+            retval.FirstExtraRelationships.AddRange(firstTable.Relationships
+                .Where(u => !secondTableRelationshipTableNames.Contains(u.ReferencedColumnName.ToUpper())).ToList());
+
+            firstTableRelationshipTableNames =
+                new HashSet<string>(firstTable.Relationships.Select(u => u.ReferencedColumnName.ToUpper()));
+            retval.FirstMissingRelationships.AddRange(secondTable.Relationships
+                .Where(u => !firstTableRelationshipTableNames.Contains(u.ReferencedColumnName.ToUpper())).ToList());
+
+            retval.FirstExtraRelationships.GroupBy(a => a.RelationshipName);
+            retval.FirstMissingRelationships.GroupBy(a => a.RelationshipName);
         }
 
         #endregion
