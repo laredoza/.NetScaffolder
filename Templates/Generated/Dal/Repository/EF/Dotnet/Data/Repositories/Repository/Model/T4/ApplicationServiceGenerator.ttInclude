@@ -1,6 +1,8 @@
 ﻿<#+
-    public class ApplicationService : BaseGenerator
+    public class ApplicationServiceGenerator : BaseGenerator
     {
+        public ApplicationServiceDataType DataType{get;set;}
+
 //		public ContextDataType DataType {get;set;}
 //	    public ContextData ContextData {get;set;}
 //      public EntityDataType EntityDataType {get;set;}
@@ -10,96 +12,31 @@
 //
 //		private string projectPath = string.Empty;
         
+        private ApplicationServiceInterfaceTemplate templateInterface = new ApplicationServiceInterfaceTemplate();
+        private ApplicationServiceTemplate template = new ApplicationServiceTemplate();
+
 		protected override void RunCore()
         {
-//			foreach(IDriver driver in DataType.Drivers )
-//			{
-//				//Debugger.Break();
-//				
-//				projectPath = string.Format(ContextData.OutputPath, driver.ParentFolder, driver.Prefix);	
-//				
-//				if(driver.DriverType is EFDriverType)
-//				{
-//					GenerateEFContext(driver);
-//				}
-//				else if(driver.DriverType is EFCoreDriverType)
-//				{
-//					GenerateEFCoreContext(driver);
-//				}
-//				else if(driver.DriverType is NhibernateDriverType)
-//				{
-//					GenerateNHibernateContext(driver);
-//				}
-//			}
+            
+			foreach(ApplicationServiceData applicationServiceData in DataType.ApplicationServiceData )
+			{
+				//Debugger.Break();
+                templateInterface.DataType = applicationServiceData;
+                if(!string.IsNullOrEmpty(applicationServiceData.OutputPath))
+                {
+                    templateInterface.Output.Project = applicationServiceData.OutputPath;
+                }
+
+                templateInterface.RenderToFile(string.Format(@"{0}\I{1}ApplicationService.g.cs", applicationServiceData.OutputFolder, applicationServiceData.ApplicationServiceName));	
+
+                template.DataType = applicationServiceData;
+                if(!string.IsNullOrEmpty(applicationServiceData.OutputPath))
+                {
+                    template.Output.Project = applicationServiceData.OutputPath;
+                }
+
+                template.RenderToFile(string.Format(@"{0}\{1}ApplicationService.g.cs", applicationServiceData.OutputFolder, applicationServiceData.ApplicationServiceName));	
+			}
         }
-		
-//		private void GenerateNHibernateContext(IDriver driver)
-//		{	
-//			var contextModels = Models.Where(o => ContextData.Models.Exists(x => x.SchemaName == o.SchemaName && x.TableName == o.TableName)).ToList();
-//		
-//			var template = new ContextNHibernateTemplate();
-//		    template.DataType = DataType;
-//            //template.EntityNamespace = EntityDataType.FullNamespace;
-//			template.ContextData = ContextData;
-//			template.Driver = driver;
-//			template.MappingNamespace = MappingNamespace;
-//			template.MappingPostFix = MappingPostFix;
-//			template.Models = contextModels;
-//
-//			if(!string.IsNullOrEmpty(projectPath))
-//			{
-//				template.Output.Project =  projectPath;
-//			}
-//			template.CompanyText = CompanyText;
-//			template.LicenseText = LicenseText;
-//			template.HeaderText = HeaderText;
-//			template.RenderToFile(string.Format(@"{0}\{1}{2}.g.cs", ContextData.OutputFolder,driver.Prefix,ContextData.ContextName));
-//		}
-//		
-//		private void GenerateEFContext(IDriver driver)
-//		{	
-//			var contextModels = Models.Where(o => ContextData.Models.Exists(x => x.SchemaName == o.SchemaName && x.TableName == o.TableName)).ToList();
-//		
-//			var template = new ContextTemplate();
-//		    template.DataType = DataType;
-//            template.EntityNamespace = EntityDataType.FullNamespace;
-//			template.ContextData = ContextData;
-//			template.Driver = driver;
-//			template.MappingNamespace = MappingNamespace;
-//			template.MappingPostFix = MappingPostFix;
-//			template.Models = contextModels;
-//
-//			if(!string.IsNullOrEmpty(projectPath))
-//			{
-//				template.Output.Project =  projectPath;
-//			}
-//			template.CompanyText = CompanyText;
-//			template.LicenseText = LicenseText;
-//			template.HeaderText = HeaderText;
-//			template.RenderToFile(string.Format(@"{0}\{1}{2}.g.cs", ContextData.OutputFolder,driver.Prefix,ContextData.ContextName));
-//		}
-//		
-//		private void GenerateEFCoreContext(IDriver driver)
-//		{	
-//			var contextModels = Models.Where(o => ContextData.Models.Exists(x => x.SchemaName == o.SchemaName && x.TableName == o.TableName)).ToList();
-//			
-//			var template = new ContextCoreTemplate();
-//		    template.DataType = DataType;
-//            template.EntityNamespace = EntityDataType.FullNamespace;
-//			template.ContextData = ContextData;
-//			template.Driver = driver;
-//			template.MappingNamespace = MappingNamespace;
-//			template.MappingPostFix = MappingPostFix;
-//			template.Models = contextModels;
-//
-//			if(!string.IsNullOrEmpty(projectPath))
-//			{
-//				template.Output.Project =  projectPath;
-//			}
-//			template.CompanyText = CompanyText;
-//			template.LicenseText = LicenseText;
-//			template.HeaderText = HeaderText;
-//			template.RenderToFile(string.Format(@"{0}\{1}{2}.g.cs", ContextData.OutputFolder,driver.Prefix,ContextData.ContextName));
-//		}
     }
 #>

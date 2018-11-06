@@ -58,28 +58,6 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ApplicationServ
         /// </summary>
         public string ApplicationServiceName { get; set; }
 
-        public List<Relationship> ExcludedRelationships(List<Table> models)
-        {
-            if (!this.exludedRelationships.Any())
-            {
-                foreach (var model in models)
-                {
-                    foreach (var rel in model.Relationships.Where(o => o.Render))
-                    {
-                        if (!this.exludedRelationships.Any(
-                                o => o.SchemaName == rel.SchemaName && o.ReferencedTableName == rel.ReferencedTableName)
-                            && !this.Models.Any(
-                                o => o.SchemaName == rel.SchemaName && o.TableName == rel.ReferencedTableName))
-                        {
-                            this.exludedRelationships.Add(rel);
-                        }
-                    }
-                }
-            }
-
-            return this.exludedRelationships;
-        }
-
         /// <summary>
         ///     Gets or sets the id.
         /// </summary>

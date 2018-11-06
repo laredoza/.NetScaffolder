@@ -243,6 +243,8 @@
 ..\..\Interfaces\RepositoryInterfaces\Repository\IOrderRepository.g.cs
 ..\..\Interfaces\RepositoryInterfaces\Repository\IProductRepository.g.cs
 ..\..\Interfaces\RepositoryInterfaces\Repository\ISoftwareRepository.g.cs
+.\ApplicationService\ISecurityApplicationService.g.cs
+.\ApplicationService\SecurityApplicationService.g.cs
 .\Repository\BankAccountRepository.g.cs
 .\Repository\BankTransfersRepository.g.cs
 .\Repository\BookRepository.g.cs

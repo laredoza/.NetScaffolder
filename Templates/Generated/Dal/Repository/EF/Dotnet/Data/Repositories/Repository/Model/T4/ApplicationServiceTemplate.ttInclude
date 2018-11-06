@@ -1,0 +1,21 @@
+﻿<#+
+public class ApplicationServiceTemplate : BaseTemplate 
+{
+	public ApplicationServiceData DataType { get; set; }
+	public string DtoInterfaceNamespace { get; set; }
+	
+	public override string TransformText()
+	{
+		// Debugger.Break();
+		Header = new CopyrightHeader();
+		//Header.Filename = DataType.RepoName;
+#>
+
+<#= Header.TransformText() #>
+
+
+<#+
+		return this.GenerationEnvironment.ToString();
+	}
+}
+#>
