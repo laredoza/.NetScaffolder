@@ -57,7 +57,7 @@ namespace Banking.Models.Accounts.Mappings.EF.SqlServer
 			#endregion
 			
 			#region Indexes
-			Property(t => t.ToBankAccountId).HasColumnAnnotation("IX_ToBankAccountId", new IndexAnnotation(new [] { new IndexAttribute("IX_ToBankAccountId"){ IsClustered = false, IsUnique = false, Order = 0}}));
+			Property(t => t.ToBankAccountId)HasIndex(i => new {i.ToBankAccountId}).HasName("IX_ToBankAccountId").IsUnique(false);
 			#endregion
 
 			#region Relationships

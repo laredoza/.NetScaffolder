@@ -4,6 +4,8 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System.Xml.Serialization;
+
 namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ApplicationServiceDataTypes
 {
     #region Usings
@@ -45,6 +47,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ApplicationServ
             this.LanguageOutputDetails[0].Templates.Add("ApplicationServiceGenerator.ttInclude");
             this.LanguageOutputDetails[0].Templates.Add("ApplicationServiceInterfaceTemplate.ttInclude");
             this.LanguageOutputDetails[0].Templates.Add("ApplicationServiceTemplate.ttInclude");
+            this.AdditionalNamespacesInterfaces = new List<string>();
         }
 
         #endregion
@@ -58,6 +61,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ApplicationServ
 
         public List<ApplicationServiceDataError> MissingTables { get; set; }
 
+        public List<string> AdditionalNamespacesInterfaces { get; set; }
         #endregion
 
         #region Public Methods And Operators
@@ -86,6 +90,9 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ApplicationServ
 
                 this.AdditionalNamespaces.Clear();
                 this.AdditionalNamespaces.AddRange(dt.AdditionalNamespaces);
+
+                this.AdditionalNamespacesInterfaces.Clear();
+                this.AdditionalNamespacesInterfaces.AddRange(dt.AdditionalNamespacesInterfaces);
             }
         }
 
@@ -185,16 +192,6 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ApplicationServ
             if (this.LanguageOutputDetails.Count == 0)
             {
                 this.ValidationResult.Add(new Validation(ValidationType.DataTypeLanguageMissing, "A Datatype must have at least one LanguageOption"));
-            }
-
-            if (this.ApplicationServiceData.Any() && !this.ApplicationServiceData.Any(o => o.IsDefault))
-            {
-                this.ValidationResult.Add(new Validation(ValidationType.ApplicationServiceDefaultNotSet, "Please set the default Application Service"));
-            }
-
-            if (this.ApplicationServiceData.Count(o => o.IsDefault) > 1)
-            {
-                this.ValidationResult.Add(new Validation(ValidationType.ApplicationServiceDuplicateIsDefaultConfig, "There is already a Application Service set as default"));
             }
 
             return this.ValidationResult;

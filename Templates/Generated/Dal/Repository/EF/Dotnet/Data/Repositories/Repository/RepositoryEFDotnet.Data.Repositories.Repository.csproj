@@ -225,6 +225,7 @@
 ..\..\Entities\Entity\Entity\OrderDetails.g.cs
 ..\..\Entities\Entity\Entity\Product.g.cs
 ..\..\Entities\Entity\Entity\Software.g.cs
+..\..\Interfaces\ApplicationService\ApplicationService\INewApplicationService.g.cs
 ..\..\Interfaces\Interface\Dto\IBankAccount.g.cs
 ..\..\Interfaces\Interface\Dto\IBankTransfers.g.cs
 ..\..\Interfaces\Interface\Dto\IBook.g.cs
@@ -243,8 +244,6 @@
 ..\..\Interfaces\RepositoryInterfaces\Repository\IOrderRepository.g.cs
 ..\..\Interfaces\RepositoryInterfaces\Repository\IProductRepository.g.cs
 ..\..\Interfaces\RepositoryInterfaces\Repository\ISoftwareRepository.g.cs
-.\ApplicationService\ISecurityApplicationService.g.cs
-.\ApplicationService\SecurityApplicationService.g.cs
 .\Repository\BankAccountRepository.g.cs
 .\Repository\BankTransfersRepository.g.cs
 .\Repository\BookRepository.g.cs

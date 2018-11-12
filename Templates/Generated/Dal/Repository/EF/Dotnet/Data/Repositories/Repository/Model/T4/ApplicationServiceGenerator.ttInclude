@@ -2,7 +2,10 @@
     public class ApplicationServiceGenerator : BaseGenerator
     {
         public ApplicationServiceDataType DataType{get;set;}
+        public DtoInterfaceDataType DtoInterfaceDataType{get;set;}
 
+        
+        //public INamingConvention NamingConvention { get; set; }
 //		public ContextDataType DataType {get;set;}
 //	    public ContextData ContextData {get;set;}
 //      public EntityDataType EntityDataType {get;set;}
@@ -20,22 +23,25 @@
             
 			foreach(ApplicationServiceData applicationServiceData in DataType.ApplicationServiceData )
 			{
-				//Debugger.Break();
-                templateInterface.DataType = applicationServiceData;
-                if(!string.IsNullOrEmpty(applicationServiceData.OutputPath))
+				Debugger.Break();
+                templateInterface.DataType = DataType;
+                templateInterface.CurrentApplicationData = applicationServiceData;
+                templateInterface.DtoInterfaceDataType = this.DtoInterfaceDataType;
+
+                if(!string.IsNullOrEmpty(applicationServiceData.OutputPathInterface))
                 {
-                    templateInterface.Output.Project = applicationServiceData.OutputPath;
+                    templateInterface.Output.Project = applicationServiceData.OutputPathInterface;
                 }
 
-                templateInterface.RenderToFile(string.Format(@"{0}\I{1}ApplicationService.g.cs", applicationServiceData.OutputFolder, applicationServiceData.ApplicationServiceName));	
+                templateInterface.RenderToFile(string.Format(@"{0}\I{1}ApplicationService.g.cs", applicationServiceData.OutputFolderInterface, applicationServiceData.ApplicationServiceName));	
 
-                template.DataType = applicationServiceData;
-                if(!string.IsNullOrEmpty(applicationServiceData.OutputPath))
-                {
-                    template.Output.Project = applicationServiceData.OutputPath;
-                }
-
-                template.RenderToFile(string.Format(@"{0}\{1}ApplicationService.g.cs", applicationServiceData.OutputFolder, applicationServiceData.ApplicationServiceName));	
+                //template.DataType = applicationServiceData;
+                //if(!string.IsNullOrEmpty(applicationServiceData.OutputPath))
+                //{
+                    //template.Output.Project = applicationServiceData.OutputPath;
+                //}
+//
+                //template.RenderToFile(string.Format(@"{0}\{1}ApplicationService.g.cs", applicationServiceData.OutputFolder, applicationServiceData.ApplicationServiceName));	
 			}
         }
     }

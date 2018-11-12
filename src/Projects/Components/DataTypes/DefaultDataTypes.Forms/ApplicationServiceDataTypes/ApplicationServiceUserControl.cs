@@ -179,6 +179,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.Applicati
 
             TreeviewContextModels.Visible = SelectedApplicationService != null;
             gbAdditionalNamespaces.Visible = SelectedApplicationService == null;
+            gbAdditionalNamespacesInterfaces.Visible = SelectedApplicationService == null;
 
             if (SelectedApplicationService == null)
             {
@@ -240,6 +241,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.Applicati
             if (DataType == null || SelectedApplicationService == null) return;
 
             DataType.AdditionalNamespaces.Clear();
+            
 
             foreach (var ns in txtNamespaces.Lines)
             {
@@ -250,8 +252,20 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.Applicati
                 }
             }
 
+            var applicationServiceDataType = (DataType as ApplicationServiceDataType);
+            applicationServiceDataType.AdditionalNamespacesInterfaces.Clear();
+
+            foreach (var ns in txtNamespacesInterfaces.Lines)
+            {
+                var item = ns.Trim();
+                if (!string.IsNullOrEmpty(item) && !applicationServiceDataType.AdditionalNamespacesInterfaces.Contains(item))
+                {
+                    applicationServiceDataType.AdditionalNamespacesInterfaces.Add(item);
+                }
+            }
+
             SelectedApplicationService =
-                (DataType as ApplicationServiceDataType).ApplicationServiceData.FirstOrDefault(o => o.Id == SelectedApplicationService.Id);
+                applicationServiceDataType.ApplicationServiceData.FirstOrDefault(o => o.Id == SelectedApplicationService.Id);
 
             UpdateApplicationService();
 
@@ -313,31 +327,6 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.Applicati
             UpdateUI();
         }
 
-        private void chkIsDefault_CheckedChanged(object sender, EventArgs e)
-        {
-            if (SelectedApplicationService == null)
-            {
-                return;
-            }
-
-            var dt = DataType as ApplicationServiceDataType;
-
-            if (dt?.ApplicationServiceData == null)
-            {
-                return;
-            }
-
-            if (chkIsDefault.Checked)
-            {
-                foreach (var ctx in dt.ApplicationServiceData)
-                {
-                    ctx.IsDefault = false;
-                }
-            }
-
-            SelectedApplicationService.IsDefault = chkIsDefault.Checked;
-        }
-
         /// <summary>
         ///     The clicked.
         /// </summary>
@@ -391,12 +380,14 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.Applicati
             SelectedApplicationService.OutputFolder = OutputFolder.Text;
             SelectedApplicationService.Namespace = Namespace.Text;
             SelectedApplicationService.ApplicationServiceName = ApplicationServiceName.Text;
-            SelectedApplicationService.InheritFrom = InheritFromInterface.Text;
+            SelectedApplicationService.InheritFrom = InheritFrom.Text;
             SelectedApplicationService.OutputPath = OutputPath.Text;
-            SelectedApplicationService.IsDefault =
-                chkIsDefault.Checked || !(DataType as ApplicationServiceDataType).ApplicationServiceData.Any(o => o.IsDefault);
-
             SelectedApplicationService.Models.Clear();
+
+            SelectedApplicationService.OutputFolderInterface = OutputFolderInterface.Text;
+            SelectedApplicationService.NamespaceInterface = NamespaceInterface.Text;
+            SelectedApplicationService.InheritFromInterface = InheritFromInterface.Text;
+            SelectedApplicationService.OutputPathInterface = OutputPathInterface.Text;
 
             if (TreeviewContextModels.Nodes.Count > 0)
             {
@@ -447,10 +438,16 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.Applicati
             OutputFolder.Text = SelectedApplicationService.OutputFolder;
             Namespace.Text = SelectedApplicationService.Namespace;
             ApplicationServiceName.Text = SelectedApplicationService.ApplicationServiceName;
-            InheritFromInterface.Text = SelectedApplicationService.InheritFrom;
+            InheritFrom.Text = SelectedApplicationService.InheritFrom;
             OutputPath.Text = SelectedApplicationService.OutputPath;
-            chkIsDefault.Checked = SelectedApplicationService.IsDefault;
             txtNamespaces.Lines = DataType.AdditionalNamespaces.ToArray();
+
+            this.OutputFolderInterface.Text = this.SelectedApplicationService.OutputFolderInterface;
+            NamespaceInterface.Text = SelectedApplicationService.NamespaceInterface;
+            InheritFromInterface.Text = SelectedApplicationService.InheritFromInterface;
+            OutputPathInterface.Text = SelectedApplicationService.OutputPathInterface;
+            txtNamespacesInterfaces.Lines = (DataType as ApplicationServiceDataType).AdditionalNamespacesInterfaces.ToArray();
+
             UpdateDataSource();
         }
 

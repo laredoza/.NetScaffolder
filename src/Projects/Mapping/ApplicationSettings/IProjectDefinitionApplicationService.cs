@@ -49,10 +49,7 @@ namespace DotNetScaffolder.Mapping.ApplicationServices
         /// </param>
         void Delete(Guid id);
 
-        /// <summary>
-        ///     Load ProjectDefinition.
-        /// </summary>
-        void Load();
+        void Load(string dllPath = "");
 
         /// <summary>
         ///     Save ProjectDefinition.

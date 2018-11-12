@@ -5,6 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Interface\RepositoryEFDotnet.Data.Interface.ModelInterfaces.csproj" />
+    <ProjectReference Include="..\RepositoryInterfaces\RepositoryEFDotnet.Data.Interface.RepositoryInterfaces.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="ApplicationService\" />
   </ItemGroup>
 

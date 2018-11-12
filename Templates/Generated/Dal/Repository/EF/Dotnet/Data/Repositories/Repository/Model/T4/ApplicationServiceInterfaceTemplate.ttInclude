@@ -1,21 +1,133 @@
 ﻿<#+
-public class ApplicationServiceInterfaceTemplate : BaseTemplate 
-{
-	public ApplicationServiceData DataType { get; set; }
-	public string DtoInterfaceNamespace { get; set; }
-	
-	public override string TransformText()
-	{
-		// Debugger.Break();
-		Header = new CopyrightHeader();
-		//Header.Filename = DataType.RepoName;
+    public class ApplicationServiceInterfaceTemplate : BaseTemplate 
+    {
+        public ApplicationServiceDataType DataType { get; set; }
+        public string DtoInterfaceNamespace { get; set; }
+        public ApplicationServiceData CurrentApplicationData{ get; set; }
+        public DtoInterfaceDataType DtoInterfaceDataType{get;set;}
+
+        public override string TransformText()
+        {
+            // Debugger.Break();
+            Header = new CopyrightHeader();
+            //Header.Filename = DataType.RepoName;
 #>
 
-<#= Header.TransformText() #>
+<#=            Header.TransformText() #>
 
+// *******************************************************************
+//	GENERATED CODE. DOT NOT MODIFY MANUALLY AS CHANGES CAN BE LOST!!!
+//	USE A PARTIAL CLASS INSTEAD
+// *******************************************************************
+
+using System;
+using System.Collections.Generic;
+using <#=             DtoInterfaceDataType.FullNamespace#>;
+<#+            foreach(var nameSpace in DataType.AdditionalNamespaces){ #>
+using <#=                nameSpace #>;
+<#+            } #>
+
+namespace <#= CurrentApplicationData.TransformFullnamespaceInterface(DataType.BaseNamespace) #>
+{
+    /// <summary>
+	/// The <#= CurrentApplicationData.ApplicationServiceName #>Application Service interface that defines database functions for the <#= CurrentApplicationData.ApplicationServiceName #> table
+	/// </summary>
+	public partial interface I<#= CurrentApplicationData.ApplicationServiceName #>ApplicationService <#= CurrentApplicationData.TransformInheritFromInterface #>
+	{
+
+        #region Load
+<#+            foreach(var model in CurrentApplicationData.Models){ #>
+<#+ 
+string ModelName = DataType.NamingConvention == null ? model.TableName : DataType.NamingConvention.ApplyNamingConvention(model.TableName);
+if(model.PrimaryKeyCount > 1){ #>
+
+        /// <summary>
+        /// Load <#= ModelName #> entities from the database using the composite primary keys
+        /// </summary
+<#+ foreach(var col in model.Columns.Where(o => o.IsPrimaryKey)) {#>
+        /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
+<#+ } #>
+        /// <returns>I<#= ModelName #></returns>
+		I<#= ModelName #> Load(<#= DataType.TransformAsParameter(model.Columns.Where(o => o.IsPrimaryKey)) #>);
+<#+ } #>
+
+<#+ if(model.PrimaryKeyCount == 1){ var col = model.Columns.First(o => o.IsPrimaryKey);#>
+
+        /// <summary>
+        /// Load <#= ModelName #> entities from the database using the primary key
+        /// </summary
+        /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
+        /// <returns>I<#= ModelName #></returns>
+		I<#= ModelName #> LoadBy<#= ModelName #><#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= DataType.TransformAsParameter(col) #>);
+<#+ } #>
+
+        /// <summary>
+        /// Load all <#= ModelName #> entities from the database.
+        /// </summary>
+        /// <returns><#= DataType.CollectionOption.ClassNameInterface #><I<#= ModelName #>></returns>
+		<#= DataType.CollectionOption.ClassNameInterface #><I<#= ModelName #>> <#= ModelName #>LoadAll();
+<#+            } #>
+        #endregion
+
+        #region Search
+<#+            foreach(var model in CurrentApplicationData.Models){ #>
+<#+ 
+string ModelName = DataType.NamingConvention == null ? model.TableName : DataType.NamingConvention.ApplyNamingConvention(model.TableName); #>
+<#+ foreach(var col in model.Columns.Where(o => !o.IsPrimaryKey && o.DomainDataType == DomainDataType.String)){ #>
+
+        /// <summary>
+        /// Search for <#= ModelName #> entities in the database by <#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>
+        /// </summary>
+        /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
+		/// <param name="caseSensitive">bool</param>
+        /// <returns><#= DataType.CollectionOption.ClassNameInterface #><I<#= ModelName #>></returns>
+		<#= DataType.CollectionOption.ClassNameInterface #><I<#= ModelName #>> <#= ModelName #>SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= DataType.TransformAsParameter(col) #>, bool caseSensitive = false);
+<#+ }  #>
+<#+            } #>
+		#endregion
+
+		#region Modifiers
+<#+            foreach(var model in CurrentApplicationData.Models){ #>
+<#+ 
+string ModelName = DataType.NamingConvention == null ? model.TableName : DataType.NamingConvention.ApplyNamingConvention(model.TableName); #>		
+        /// <summary>
+        /// Save the <#= ModelName #> entity to the database.
+        /// </summary>
+        /// <param name="entity">I<#= ModelName #></param>
+        /// <returns>bool</returns>
+		bool <#= ModelName #>Save(I<#= ModelName #> entity);
+
+        /// <summary>
+        /// Update the <#= ModelName #> entity in the database if any values have changed
+        /// </summary>
+        /// <param name="entity">I<#= ModelName #></param>
+        /// <returns>bool</returns>
+		bool <#= ModelName #>Update(I<#= ModelName #> entity);
+		
+        /// <summary>
+        /// Delete the <#= ModelName #> entity from the database
+        /// </summary>
+        /// <param name="entity">I<#= ModelName #></param>
+        /// <returns>bool</returns>
+		bool <#= ModelName #>Delete(I<#= ModelName #> entity);
+
+		/// <summary>
+        /// Delete the <#= ModelName #> entity from the database
+        /// </summary>
+<#+ foreach(var col in model.Columns.Where(o => o.IsPrimaryKey)) {#>
+        /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
+<#+ } #>
+        /// <returns>bool</returns>
+		bool <#= ModelName #>Delete(<#= DataType.TransformAsParameter(model.Columns.Where(o => o.IsPrimaryKey)) #>);
+<#+            } #>
+
+		#endregion
+
+    }
+}
 
 <#+
-		return this.GenerationEnvironment.ToString();
+            return this.GenerationEnvironment.ToString();
 	}
-}
+            }
 #>

@@ -41,12 +41,15 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ApplicationServ
             this.exludedRelationships = new List<Relationship>();
             this.Models = new List<Table>();
             this.OutputFolder = "ApplicationService";
-            this.ApplicationServiceName = "NewApplicationService";
+            this.OutputFolderInterface = "ApplicationService";
+            this.ApplicationServiceName = "New";
             this.Namespace = "ApplicationService";
+            this.NamespaceInterface = "ApplicationService";
             this.InheritFrom = string.Empty;
+            this.InheritFromInterface = string.Empty;
             this.Id = Guid.NewGuid();
-            this.OutputPath = string.Empty;
-            this.IsDefault = false;
+            this.OutputPath = @"..\..\ApplicationService\RepositoryEFDotnet.Data.ApplicationServices.ApplicationService.csproj";
+            this.OutputPathInterface = @"..\..\Interfaces\ApplicationService\RepositoryEFDotnet.Data.Interface.ApplicationService.csproj";
         }
 
         #endregion
@@ -66,7 +69,9 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ApplicationServ
         /// <summary>
         ///     Gets or sets the inherit from.
         /// </summary>
-        public string InheritFrom { get; set; } = "BaseApplicationService";
+        public string InheritFrom { get; set; }
+
+        public string InheritFromInterface { get; set; }
 
         /// <summary>
         ///     Gets the models.
@@ -78,17 +83,21 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ApplicationServ
         /// </summary>
         public string Namespace { get; set; }
 
+        public string NamespaceInterface { get; set; }
+
         /// <summary>
         ///     Gets or sets the output folder.
         /// </summary>
         public string OutputFolder { get; set; }
+
+        public string OutputFolderInterface { get; set; }
 
         /// <summary>
         ///     Gets or sets the output path.
         /// </summary>
         public string OutputPath { get; set; }
 
-        public bool IsDefault { get; set; }
+        public string OutputPathInterface { get; set; }
 
         /// <summary>
         ///     Gets the transform inherit from.
@@ -104,6 +113,20 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ApplicationServ
                 }
 
                 return $": {this.InheritFrom}";
+            }
+        }
+        
+        [XmlIgnore]
+        public string TransformInheritFromInterface
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(this.InheritFromInterface))
+                {
+                    return string.Empty;
+                }
+
+                return $": {this.InheritFromInterface}";
             }
         }
 
@@ -142,6 +165,11 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ApplicationServ
         public string TransformFullnamespace(string baseNs)
         {
             return $"{baseNs}.{this.Namespace}";
+        }
+
+        public string TransformFullnamespaceInterface(string baseNs)
+        {
+            return $"{baseNs}.{this.NamespaceInterface}";
         }
 
         #endregion

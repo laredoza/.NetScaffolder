@@ -3,18 +3,12 @@
   <AdditionalNamespaces />
   <ApplicationServiceData>
     <ApplicationServiceData>
-      <ApplicationServiceName>Security</ApplicationServiceName>
-      <CustomConnectionName />
-      <Id>e3833a9b-b31b-42a7-8264-61ce13ef2bbb</Id>
+      <ApplicationServiceName>New</ApplicationServiceName>
+      <Id>97b08554-075b-47f3-97d3-001064f37455</Id>
       <InheritFrom />
+      <InheritFromInterface />
       <Models>
         <Table Description="" SchemaName="dbo" TableName="BankAccount" EnabledForCodeGeneration="true">
-          <Columns />
-          <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
-          <RelationShips />
-          <Indexes />
-        </Table>
-        <Table Description="" SchemaName="dbo" TableName="BankTransfers" EnabledForCodeGeneration="true">
           <Columns />
           <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
           <RelationShips />
@@ -26,24 +20,15 @@
           <RelationShips />
           <Indexes />
         </Table>
-        <Table Description="" SchemaName="dbo" TableName="OrderDetails" EnabledForCodeGeneration="true">
-          <Columns />
-          <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
-          <RelationShips />
-          <Indexes />
-        </Table>
-        <Table Description="" SchemaName="dbo" TableName="Software" EnabledForCodeGeneration="true">
-          <Columns />
-          <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
-          <RelationShips />
-          <Indexes />
-        </Table>
       </Models>
       <Namespace>ApplicationService</Namespace>
+      <NamespaceInterface>ApplicationService</NamespaceInterface>
       <OutputFolder>ApplicationService</OutputFolder>
-      <OutputPath />
-      <IsDefault>true</IsDefault>
+      <OutputFolderInterface>ApplicationService</OutputFolderInterface>
+      <OutputPath>..\..\ApplicationService\RepositoryEFDotnet.Data.ApplicationServices.ApplicationService.csproj</OutputPath>
+      <OutputPathInterface>..\..\Interfaces\ApplicationService\RepositoryEFDotnet.Data.Interface.ApplicationService.csproj</OutputPathInterface>
     </ApplicationServiceData>
   </ApplicationServiceData>
   <MissingTables />
+  <AdditionalNamespacesInterfaces />
 </ApplicationServiceDataType>

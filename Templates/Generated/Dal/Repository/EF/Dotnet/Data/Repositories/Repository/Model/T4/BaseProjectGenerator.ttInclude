@@ -65,7 +65,7 @@
             FilePersistenceOptions options = new FilePersistenceOptions { Path = ModelFilePath };
             var applicationService =
                 new ProjectDefinitionApplicationServiceFile { FilePersistenceOptions = options };
-            applicationService.Load();
+            applicationService.Load(this.PackagePath);
 		
             ProjectDefinition = applicationService.ProjectDefinition;
 		

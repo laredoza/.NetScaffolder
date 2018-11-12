@@ -45,10 +45,12 @@
 					ApplicationServiceDataType applicationDataType = dataType as ApplicationServiceDataType;
 					var entityDataType = dataTypes.FirstOrDefault(o => o is EntityDataType) as EntityDataType;
 
-                    var repoInterface = new ApplicationServiceGenerator {
-                                    DataType = applicationDataType 
+                    var applicationServiceGenerator = new ApplicationServiceGenerator {
+                                    DataType = applicationDataType,
+                                    DtoInterfaceDataType = dataTypes.FirstOrDefault(o => o is DtoInterfaceDataType) as DtoInterfaceDataType 
                                 };
-                    repoInterface.Run();
+
+                    applicationServiceGenerator.Run();
 				}
 
                 if(dataType is ContextDataType)
