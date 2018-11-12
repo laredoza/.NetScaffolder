@@ -4,6 +4,7 @@
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Core\RepositoryEFDotnet.Core.csproj" />
+    <ProjectReference Include="..\..\Interfaces\ApplicationService\RepositoryEFDotnet.Data.Interface.ApplicationService.csproj" />
     <ProjectReference Include="..\..\Interfaces\Interface\RepositoryEFDotnet.Data.Interface.ModelInterfaces.csproj" />
     <ProjectReference Include="..\..\Repositories\Repository\RepositoryEFDotnet.Data.Repositories.Repository.csproj" />
   </ItemGroup>

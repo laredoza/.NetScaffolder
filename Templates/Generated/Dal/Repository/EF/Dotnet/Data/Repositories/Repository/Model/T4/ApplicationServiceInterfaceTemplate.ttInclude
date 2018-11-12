@@ -23,7 +23,7 @@
 using System;
 using System.Collections.Generic;
 using <#=             DtoInterfaceDataType.FullNamespace#>;
-<#+            foreach(var nameSpace in DataType.AdditionalNamespaces){ #>
+<#+            foreach(var nameSpace in DataType.AdditionalNamespacesInterfaces){ #>
 using <#=                nameSpace #>;
 <#+            } #>
 

@@ -59,7 +59,7 @@ namespace Banking.Models.Accounts.Mappings.EF.Oracle
 			#endregion
 			
 			#region Indexes
-			Property(t => t.ToBankAccountId)HasIndex(i => new {i.ToBankAccountId}).HasName("IX_ToBankAccountId").IsUnique(false);
+			Property(t => t.ToBankAccountId).HasIndex(i => new {i.ToBankAccountId}).HasName("IX_ToBankAccountId").IsUnique(false);
 			#endregion
 
 			#region Relationships

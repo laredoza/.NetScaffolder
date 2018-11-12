@@ -31,6 +31,7 @@
 ..\..\..\RepositoryEFDotnet\Tests\Base\Base\BaseRepositoryUnitTest.g.cs
 ..\..\..\RepositoryEFDotnet\Tests\Base\Base\BaseUnitOfWorkUnitTest.g.cs
 ..\..\..\RepositoryEFDotnet\Tests\Base\Base\BaseUnitTest.g.cs
+..\..\ApplicationServices\ApplicationService\ApplicationService\NewApplicationService.g.cs
 ..\..\Contexts\EF\MySql\Context\MySqlAccountContext.g.cs
 ..\..\Contexts\EF\MySql\Context\MySqlCustomerContext.g.cs
 ..\..\Contexts\EF\MySql\Context\MySqlFullContext.g.cs

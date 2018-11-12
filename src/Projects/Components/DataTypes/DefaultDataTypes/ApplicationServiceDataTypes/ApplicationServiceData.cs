@@ -48,7 +48,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ApplicationServ
             this.InheritFrom = string.Empty;
             this.InheritFromInterface = string.Empty;
             this.Id = Guid.NewGuid();
-            this.OutputPath = @"..\..\ApplicationService\RepositoryEFDotnet.Data.ApplicationServices.ApplicationService.csproj";
+            this.OutputPath = @"..\..\ApplicationServices\ApplicationService\RepositoryEFDotnet.Data.ApplicationServices.ApplicationService.csproj";
             this.OutputPathInterface = @"..\..\Interfaces\ApplicationService\RepositoryEFDotnet.Data.Interface.ApplicationService.csproj";
         }
 
@@ -109,10 +109,10 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ApplicationServ
             {
                 if (string.IsNullOrEmpty(this.InheritFrom))
                 {
-                    return string.Empty;
+                    return $" : I{this.ApplicationServiceName}ApplicationService";
                 }
 
-                return $": {this.InheritFrom}";
+                return $": {this.InheritFrom},I{this.ApplicationServiceName}ApplicationService";
             }
         }
         

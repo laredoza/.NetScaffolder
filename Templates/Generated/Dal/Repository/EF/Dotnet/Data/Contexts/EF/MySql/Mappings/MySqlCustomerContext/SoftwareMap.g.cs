@@ -55,7 +55,7 @@ namespace Banking.Models.Customers.Mappings.EF.MySql
 			#endregion
 			
 			#region Indexes
-			Property(t => t.ProductId)HasIndex(i => new {i.ProductId}).HasName("IX_ProductId").IsUnique(false);
+			Property(t => t.ProductId).HasIndex(i => new {i.ProductId}).HasName("IX_ProductId").IsUnique(false);
 			#endregion
 
 			#region Relationships

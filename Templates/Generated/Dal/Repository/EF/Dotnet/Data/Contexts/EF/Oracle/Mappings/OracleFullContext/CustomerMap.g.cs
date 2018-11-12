@@ -75,7 +75,7 @@ namespace Banking.Models.Context.Mappings.EF.Oracle
 			#endregion
 			
 			#region Indexes
-			Property(t => t.CountryId)HasIndex(i => new {i.CountryId}).HasName("IX_CountryId").IsUnique(false);
+			Property(t => t.CountryId).HasIndex(i => new {i.CountryId}).HasName("IX_CountryId").IsUnique(false);
 			#endregion
 
 			#region Relationships

@@ -1,8 +1,10 @@
 ﻿<#+
 public class ApplicationServiceTemplate : BaseTemplate 
 {
-	public ApplicationServiceData DataType { get; set; }
-	public string DtoInterfaceNamespace { get; set; }
+	public ApplicationServiceDataType DataType { get; set; }
+        public string DtoInterfaceNamespace { get; set; }
+        public ApplicationServiceData CurrentApplicationData{ get; set; }
+        public DtoInterfaceDataType DtoInterfaceDataType{get;set;}
 	
 	public override string TransformText()
 	{
@@ -14,8 +16,171 @@ public class ApplicationServiceTemplate : BaseTemplate
 <#= Header.TransformText() #>
 
 
-<#+
-		return this.GenerationEnvironment.ToString();
-	}
+// *******************************************************************
+//	GENERATED CODE. DOT NOT MODIFY MANUALLY AS CHANGES CAN BE LOST!!!
+//	USE A PARTIAL CLASS INSTEAD
+// *******************************************************************
+
+using System;
+using System.Collections.Generic;
+using <#=             DtoInterfaceDataType.FullNamespace#>;
+<#+            foreach(var nameSpace in DataType.AdditionalNamespaces){ #>
+using <#=                nameSpace #>;
+<#+            } #>
+
+namespace <#= CurrentApplicationData.TransformFullnamespace(DataType.BaseNamespace) #>
+{
+    /// <summary>
+	/// The <#= CurrentApplicationData.ApplicationServiceName #>Application Service 
+	/// </summary>
+	public partial class <#= CurrentApplicationData.ApplicationServiceName #>ApplicationService <#= CurrentApplicationData.TransformInheritFrom #>
+	{
+
+<#+            foreach(var model in CurrentApplicationData.Models){ 
+string modelName = DataType.NamingConvention == null ? model.TableName : DataType.NamingConvention.ApplyNamingConvention(model.TableName); #>
+
+        protected I<#= modelName #>Repository <#= modelName #>Repository { get; set; }
+<#+ } #>
+
+        public <#= CurrentApplicationData.ApplicationServiceName #>ApplicationService (
+<#+            for(int n = 0; n < CurrentApplicationData.Models.Count; n++)
+                   { 
+                var model = CurrentApplicationData.Models[n];
+                    string modelName = DataType.NamingConvention == null ? model.TableName : DataType.NamingConvention.ApplyNamingConvention(model.TableName); #>
+                    <#+ if (n < CurrentApplicationData.Models.Count - 1) {#>
+                        I<#= modelName #>Repository <#= Char.ToLowerInvariant(modelName[0]) + modelName.Substring(1) #>Repository,
+                    <#+                }  else { #>
+    I<#= modelName #>Repository <#= Char.ToLowerInvariant(modelName[0]) + modelName.Substring(1) #>Repository
+                    <#+                } #>
+<#+                } #>
+                 )
+        {
+
+
+        }
+
+        #region Load
+<#+            foreach(var model in CurrentApplicationData.Models){ #>
+<#+ 
+string ModelName = DataType.NamingConvention == null ? model.TableName : DataType.NamingConvention.ApplyNamingConvention(model.TableName);
+if(model.PrimaryKeyCount > 1){ #>
+
+        /// <summary>
+        /// Load <#= ModelName #> entities from the database using the composite primary keys
+        /// </summary
+<#+ foreach(var col in model.Columns.Where(o => o.IsPrimaryKey)) {#>
+        /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
+<#+ } #>
+        /// <returns>I<#= ModelName #></returns>
+		I<#= ModelName #> Load(<#= DataType.TransformAsParameter(model.Columns.Where(o => o.IsPrimaryKey)) #>)
+        {
+            throw new NotImplementedException();
+        }
+<#+ } #>
+
+<#+ if(model.PrimaryKeyCount == 1){ var col = model.Columns.First(o => o.IsPrimaryKey);#>
+
+        /// <summary>
+        /// Load <#= ModelName #> entities from the database using the primary key
+        /// </summary
+        /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
+        /// <returns>I<#= ModelName #></returns>
+		public I<#= ModelName #> LoadBy<#= ModelName #><#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= DataType.TransformAsParameter(col) #>)
+        {
+            throw new NotImplementedException();
+        }
+
+<#+ } #>
+
+        /// <summary>
+        /// Load all <#= ModelName #> entities from the database.
+        /// </summary>
+        /// <returns><#= DataType.CollectionOption.ClassNameInterface #><I<#= ModelName #>></returns>
+		public <#= DataType.CollectionOption.ClassNameInterface #><I<#= ModelName #>> <#= ModelName #>LoadAll()
+        {
+            throw new NotImplementedException();
+        }
+
+<#+            } #>
+
+        #endregion
+
+        #region Search
+<#+            foreach(var model in CurrentApplicationData.Models){ #>
+<#+ 
+string ModelName = DataType.NamingConvention == null ? model.TableName : DataType.NamingConvention.ApplyNamingConvention(model.TableName); #>
+<#+ foreach(var col in model.Columns.Where(o => !o.IsPrimaryKey && o.DomainDataType == DomainDataType.String)){ #>
+
+        /// <summary>
+        /// Search for <#= ModelName #> entities in the database by <#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>
+        /// </summary>
+        /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
+		/// <param name="caseSensitive">bool</param>
+        /// <returns><#= DataType.CollectionOption.ClassNameInterface #><I<#= ModelName #>></returns>
+		public <#= DataType.CollectionOption.ClassNameInterface #><I<#= ModelName #>> <#= ModelName #>SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= DataType.TransformAsParameter(col) #>, bool caseSensitive = false)
+        {
+            throw new NotImplementedException();
+        }
+
+<#+ }  #>
+<#+            } #>
+		#endregion
+
+		#region Modifiers
+<#+            foreach(var model in CurrentApplicationData.Models){ #>
+<#+ 
+string ModelName = DataType.NamingConvention == null ? model.TableName : DataType.NamingConvention.ApplyNamingConvention(model.TableName); #>		
+        /// <summary>
+        /// Save the <#= ModelName #> entity to the database.
+        /// </summary>
+        /// <param name="entity">I<#= ModelName #></param>
+        /// <returns>bool</returns>
+		public bool <#= ModelName #>Save(I<#= ModelName #> entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Update the <#= ModelName #> entity in the database if any values have changed
+        /// </summary>
+        /// <param name="entity">I<#= ModelName #></param>
+        /// <returns>bool</returns>
+		public bool <#= ModelName #>Update(I<#= ModelName #> entity)
+        {
+            throw new NotImplementedException();
+        }
+		
+        /// <summary>
+        /// Delete the <#= ModelName #> entity from the database
+        /// </summary>
+        /// <param name="entity">I<#= ModelName #></param>
+        /// <returns>bool</returns>
+		public bool <#= ModelName #>Delete(I<#= ModelName #> entity)
+        {
+            throw new NotImplementedException();
+        }
+
+		/// <summary>
+        /// Delete the <#= ModelName #> entity from the database
+        /// </summary>
+<#+ foreach(var col in model.Columns.Where(o => o.IsPrimaryKey)) {#>
+        /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
+<#+ } #>
+        /// <returns>bool</returns>
+		public bool <#= ModelName #>Delete(<#= DataType.TransformAsParameter(model.Columns.Where(o => o.IsPrimaryKey)) #>)
+        {
+            throw new NotImplementedException();
+        }
+
+<#+            } #>
+
+		#endregion
+
+    }
 }
+
+<#+
+            return this.GenerationEnvironment.ToString();
+	}
+            }
 #>

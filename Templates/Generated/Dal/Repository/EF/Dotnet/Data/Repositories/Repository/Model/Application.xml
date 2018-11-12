@@ -25,7 +25,7 @@
       <NamespaceInterface>ApplicationService</NamespaceInterface>
       <OutputFolder>ApplicationService</OutputFolder>
       <OutputFolderInterface>ApplicationService</OutputFolderInterface>
-      <OutputPath>..\..\ApplicationService\RepositoryEFDotnet.Data.ApplicationServices.ApplicationService.csproj</OutputPath>
+      <OutputPath>..\..\ApplicationServices\ApplicationService\RepositoryEFDotnet.Data.ApplicationServices.ApplicationService.csproj</OutputPath>
       <OutputPathInterface>..\..\Interfaces\ApplicationService\RepositoryEFDotnet.Data.Interface.ApplicationService.csproj</OutputPathInterface>
     </ApplicationServiceData>
   </ApplicationServiceData>

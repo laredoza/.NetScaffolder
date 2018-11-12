@@ -58,7 +58,7 @@ namespace Banking.Models.Accounts.Mappings.EF.SqlServer
 			#endregion
 			
 			#region Indexes
-			Property(t => t.CustomerId)HasIndex(i => new {i.CustomerId}).HasName("IX_CustomerId").IsUnique(false);
+			Property(t => t.CustomerId).HasIndex(i => new {i.CustomerId}).HasName("IX_CustomerId").IsUnique(false);
 			#endregion
 
 			#region Relationships

@@ -8,11 +8,13 @@ using System.Threading.Tasks;
 
 namespace ApplicationService
 {
-    public class BankingApplicationServiceTemplate
+    public partial class BankingApplicationServiceTemplate
     {
-        protected BankAccountRepository bankAccountRepository { get; set; }
+        private IBankAccountRepository bankAccountRepository { get; set; }
 
-        public BankingApplicationServiceTemplate(BankAccountRepository bankAccountRepository)
+        public BankingApplicationServiceTemplate(
+            IBankAccountRepository bankAccountRepository
+            )
         {
             this.bankAccountRepository = bankAccountRepository;
         }
