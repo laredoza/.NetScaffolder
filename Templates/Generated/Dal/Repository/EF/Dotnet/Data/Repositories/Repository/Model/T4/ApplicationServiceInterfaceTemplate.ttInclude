@@ -30,7 +30,7 @@ using <#=                nameSpace #>;
 namespace <#= CurrentApplicationData.TransformFullnamespaceInterface(DataType.BaseNamespace) #>
 {
     /// <summary>
-	/// The <#= CurrentApplicationData.ApplicationServiceName #>Application Service interface that defines database functions for the <#= CurrentApplicationData.ApplicationServiceName #> table
+	/// The <#= CurrentApplicationData.ApplicationServiceName #>Application Service interface that defines database functions for the <#= CurrentApplicationData.ApplicationServiceName #> application service
 	/// </summary>
 	public partial interface I<#= CurrentApplicationData.ApplicationServiceName #>ApplicationService <#= CurrentApplicationData.TransformInheritFromInterface #>
 	{
@@ -67,6 +67,7 @@ if(model.PrimaryKeyCount > 1){ #>
         /// <returns><#= DataType.CollectionOption.ClassNameInterface #><I<#= ModelName #>></returns>
 		<#= DataType.CollectionOption.ClassNameInterface #><I<#= ModelName #>> <#= ModelName #>LoadAll();
 <#+            } #>
+
         #endregion
 
         #region Search

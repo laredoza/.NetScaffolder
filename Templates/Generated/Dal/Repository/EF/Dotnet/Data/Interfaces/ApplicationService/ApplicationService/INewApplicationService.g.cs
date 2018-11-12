@@ -25,7 +25,7 @@ using Banking.Models.Interfaces;
 namespace Banking.Models.ApplicationService
 {
     /// <summary>
-	/// The NewApplication Service interface that defines database functions for the New table
+	/// The NewApplication Service interface that defines database functions for the New application service
 	/// </summary>
 	public partial interface INewApplicationService 
 	{
@@ -43,6 +43,7 @@ namespace Banking.Models.ApplicationService
         /// </summary>
         /// <returns>IList<ICountry></returns>
 		IList<ICountry> CountryLoadAll();
+
         #endregion
 
         #region Search
