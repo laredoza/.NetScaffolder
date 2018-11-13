@@ -402,7 +402,8 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.Applicati
                         {
                             TableName = table.TableName,
                             SchemaName = table.SchemaName,
-                            EnabledForCodeGeneration = table.EnabledForCodeGeneration
+                            EnabledForCodeGeneration = table.EnabledForCodeGeneration,
+                            Columns = table.Columns
                         });
                     }
                 }

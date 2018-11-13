@@ -33,10 +33,24 @@ namespace Banking.Models.ApplicationService
         #region Load
 
         /// <summary>
+        /// Load BankAccount entities from the database using the primary key
+        /// </summary
+        /// <param name="bankAccountId">int</param>
+        /// <returns>IBankAccount</returns>
+		IBankAccount LoadByBankAccountBankAccountId(int bankAccountId);
+
+        /// <summary>
         /// Load all BankAccount entities from the database.
         /// </summary>
         /// <returns>IList<IBankAccount></returns>
 		IList<IBankAccount> BankAccountLoadAll();
+
+        /// <summary>
+        /// Load Country entities from the database using the primary key
+        /// </summary
+        /// <param name="countryId">int</param>
+        /// <returns>ICountry</returns>
+		ICountry LoadByCountryCountryId(int countryId);
 
         /// <summary>
         /// Load all Country entities from the database.
@@ -47,6 +61,22 @@ namespace Banking.Models.ApplicationService
         #endregion
 
         #region Search
+
+        /// <summary>
+        /// Search for BankAccount entities in the database by BankAccountNumber
+        /// </summary>
+        /// <param name="bankAccountNumber">string</param>
+		/// <param name="caseSensitive">bool</param>
+        /// <returns>IList<IBankAccount></returns>
+		IList<IBankAccount> BankAccountSearchByBankAccountNumber(string bankAccountNumber, bool caseSensitive = false);
+
+        /// <summary>
+        /// Search for Country entities in the database by CountryName
+        /// </summary>
+        /// <param name="countryName">string</param>
+		/// <param name="caseSensitive">bool</param>
+        /// <returns>IList<ICountry></returns>
+		IList<ICountry> CountrySearchByCountryName(string countryName, bool caseSensitive = false);
 		#endregion
 
 		#region Modifiers
@@ -75,8 +105,9 @@ namespace Banking.Models.ApplicationService
 		/// <summary>
         /// Delete the BankAccount entity from the database
         /// </summary>
+        /// <param name="bankAccountId">int</param>
         /// <returns>bool</returns>
-		bool BankAccountDelete();
+		bool BankAccountDelete( int bankAccountId);
 		
         /// <summary>
         /// Save the Country entity to the database.
@@ -102,8 +133,9 @@ namespace Banking.Models.ApplicationService
 		/// <summary>
         /// Delete the Country entity from the database
         /// </summary>
+        /// <param name="countryId">int</param>
         /// <returns>bool</returns>
-		bool CountryDelete();
+		bool CountryDelete( int countryId);
 
 		#endregion
 

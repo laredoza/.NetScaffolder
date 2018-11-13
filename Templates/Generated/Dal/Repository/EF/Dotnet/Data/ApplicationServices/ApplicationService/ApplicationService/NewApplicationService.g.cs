@@ -37,15 +37,26 @@ namespace Banking.Models.ApplicationService
         protected ICountryRepository CountryRepository { get; set; }
 
         public NewApplicationService (
-                                            IBankAccountRepository bankAccountRepository,
-                                            ICountryRepository countryRepository
+                                          IBankAccountRepository bankAccountRepository,
+                                          ICountryRepository countryRepository
                                      )
         {
-
-
+            this.BankAccountRepository = bankAccountRepository;
+            this.CountryRepository = countryRepository;
         }
 
         #region Load
+
+        /// <summary>
+        /// Load BankAccount entities from the database using the primary key
+        /// </summary
+        /// <param name="bankAccountId">int</param>
+        /// <returns>IBankAccount</returns>
+		public IBankAccount LoadByBankAccountBankAccountId(int bankAccountId)
+        {
+            return this.BankAccountRepository.LoadByBankAccountId(bankAccountId);
+        }
+
 
         /// <summary>
         /// Load all BankAccount entities from the database.
@@ -53,7 +64,18 @@ namespace Banking.Models.ApplicationService
         /// <returns>IList<IBankAccount></returns>
 		public IList<IBankAccount> BankAccountLoadAll()
         {
-            throw new NotImplementedException();
+            return this.BankAccountRepository.LoadAll();
+        }
+
+
+        /// <summary>
+        /// Load Country entities from the database using the primary key
+        /// </summary
+        /// <param name="countryId">int</param>
+        /// <returns>ICountry</returns>
+		public ICountry LoadByCountryCountryId(int countryId)
+        {
+            return this.CountryRepository.LoadByCountryCountryId(countryId);
         }
 
 
@@ -63,13 +85,37 @@ namespace Banking.Models.ApplicationService
         /// <returns>IList<ICountry></returns>
 		public IList<ICountry> CountryLoadAll()
         {
-            throw new NotImplementedException();
+            return this.CountryRepository.LoadAll();
         }
 
 
         #endregion
 
         #region Search
+
+        /// <summary>
+        /// Search for BankAccount entities in the database by BankAccountNumber
+        /// </summary>
+        /// <param name="bankAccountNumber">string</param>
+		/// <param name="caseSensitive">bool</param>
+        /// <returns>IList<IBankAccount></returns>
+		public IList<IBankAccount> BankAccountSearchByBankAccountNumber(string bankAccountNumber, bool caseSensitive = false)
+        {
+            return this.BankAccountRepository.SearchByBankAccountNumber(bankAccountNumber,caseSensitive);
+        }
+
+
+        /// <summary>
+        /// Search for Country entities in the database by CountryName
+        /// </summary>
+        /// <param name="countryName">string</param>
+		/// <param name="caseSensitive">bool</param>
+        /// <returns>IList<ICountry></returns>
+		public IList<ICountry> CountrySearchByCountryName(string countryName, bool caseSensitive = false)
+        {
+            return this.CountryRepository.SearchByCountryName(countryName,caseSensitive);
+        }
+
 		#endregion
 
 		#region Modifiers
@@ -81,7 +127,7 @@ namespace Banking.Models.ApplicationService
         /// <returns>bool</returns>
 		public bool BankAccountSave(IBankAccount entity)
         {
-            throw new NotImplementedException();
+            return this.BankAccountRepository.Save(entity);
         }
 
         /// <summary>
@@ -91,7 +137,7 @@ namespace Banking.Models.ApplicationService
         /// <returns>bool</returns>
 		public bool BankAccountUpdate(IBankAccount entity)
         {
-            throw new NotImplementedException();
+            return this.BankAccountRepository.Update(entity);
         }
 		
         /// <summary>
@@ -101,16 +147,17 @@ namespace Banking.Models.ApplicationService
         /// <returns>bool</returns>
 		public bool BankAccountDelete(IBankAccount entity)
         {
-            throw new NotImplementedException();
+            return this.BankAccountRepository.Delete(entity);
         }
 
 		/// <summary>
         /// Delete the BankAccount entity from the database
         /// </summary>
+        /// <param name="bankAccountId">int</param>
         /// <returns>bool</returns>
-		public bool BankAccountDelete()
+		public bool BankAccountDelete( int bankAccountId)
         {
-            throw new NotImplementedException();
+            return this.BankAccountRepository.Delete( bankAccountId);
         }
 
 		
@@ -121,7 +168,7 @@ namespace Banking.Models.ApplicationService
         /// <returns>bool</returns>
 		public bool CountrySave(ICountry entity)
         {
-            throw new NotImplementedException();
+            return this.CountryRepository.Save(entity);
         }
 
         /// <summary>
@@ -131,7 +178,7 @@ namespace Banking.Models.ApplicationService
         /// <returns>bool</returns>
 		public bool CountryUpdate(ICountry entity)
         {
-            throw new NotImplementedException();
+            return this.CountryRepository.Update(entity);
         }
 		
         /// <summary>
@@ -141,16 +188,17 @@ namespace Banking.Models.ApplicationService
         /// <returns>bool</returns>
 		public bool CountryDelete(ICountry entity)
         {
-            throw new NotImplementedException();
+            return this.CountryRepository.Delete(entity);
         }
 
 		/// <summary>
         /// Delete the Country entity from the database
         /// </summary>
+        /// <param name="countryId">int</param>
         /// <returns>bool</returns>
-		public bool CountryDelete()
+		public bool CountryDelete( int countryId)
         {
-            throw new NotImplementedException();
+            return this.CountryRepository.Delete( countryId);
         }
 
 

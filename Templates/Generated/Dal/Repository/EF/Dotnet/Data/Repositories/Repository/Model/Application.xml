@@ -4,18 +4,41 @@
   <ApplicationServiceData>
     <ApplicationServiceData>
       <ApplicationServiceName>New</ApplicationServiceName>
-      <Id>97b08554-075b-47f3-97d3-001064f37455</Id>
+      <Id>b94df9f7-89a9-4e52-a141-9b431da747f2</Id>
       <InheritFrom />
       <InheritFromInterface />
       <Models>
         <Table Description="" SchemaName="dbo" TableName="BankAccount" EnabledForCodeGeneration="true">
-          <Columns />
+          <Columns>
+            <Column ColumnName="BankAccountId" ColumnOrder="1" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="BankAccountNumber" ColumnOrder="2" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="10" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="Balance" ColumnOrder="3" DataType="Decimal" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="0" Precision="19" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="4" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="CustomerId" ColumnOrder="4" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="Locked" ColumnOrder="5" DataType="Boolean" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="0" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+          </Columns>
           <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
           <RelationShips />
           <Indexes />
         </Table>
         <Table Description="" SchemaName="dbo" TableName="Country" EnabledForCodeGeneration="true">
-          <Columns />
+          <Columns>
+            <Column ColumnName="CountryId" ColumnOrder="1" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="CountryName" ColumnOrder="2" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="100" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+          </Columns>
           <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
           <RelationShips />
           <Indexes />
