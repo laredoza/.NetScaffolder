@@ -78,7 +78,7 @@ if(model.PrimaryKeyCount > 1){ #>
         /// <returns>I<#= modelName #></returns>
 		I<#= modelName #> Load(<#= DataType.TransformAsParameter(model.Columns.Where(o => o.IsPrimaryKey)) #>)
         {
-            return this.<#= modelName #>Repository.Load(<#= DataType.TransformAsParameter(model.Columns.Where(o => o.IsPrimaryKey)) #>)
+            return this.<#= modelName #>Repository.Load(<#= DataType.TransformAsParameterName(model.Columns.Where(o => o.IsPrimaryKey)) #>)
         }
 <#+ } #>
 
@@ -91,7 +91,7 @@ if(model.PrimaryKeyCount > 1){ #>
         /// <returns>I<#= modelName #></returns>
 		public I<#= modelName #> LoadBy<#= modelName #><#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= DataType.TransformAsParameter(col) #>)
         {
-            return this.<#= modelName #>Repository.LoadBy<#= modelName #><#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= DataType.TransformAsParameter(col) #>);
+            return this.<#= modelName #>Repository.LoadBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= DataType.TransformAsParameterName(col) #>);
         }
 
 <#+ } #>
@@ -113,7 +113,7 @@ if(model.PrimaryKeyCount > 1){ #>
 <#+            foreach(var model in CurrentApplicationData.Models){ #>
 <#+ 
 string modelName = DataType.NamingConvention == null ? model.TableName : DataType.NamingConvention.ApplyNamingConvention(model.TableName); #>
-<#+                foreach(var col in model.Columns.Where(o => !o.IsPrimaryKey && o.DomainDataType == DomainDataType.String)){ var colName = DataType.NamingConvention.ApplyNamingConvention(col.ColumnName); #>
+<#+                foreach(var col in model.Columns.Where(o => !o.IsPrimaryKey && o.DomainDataType == DomainDataType.String)){  #>
 
         /// <summary>
         /// Search for <#= modelName #> entities in the database by <#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>
@@ -123,7 +123,7 @@ string modelName = DataType.NamingConvention == null ? model.TableName : DataTyp
         /// <returns><#= DataType.CollectionOption.ClassNameInterface #><I<#= modelName #>></returns>
 		public <#= DataType.CollectionOption.ClassNameInterface #><I<#= modelName #>> <#= modelName #>SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= DataType.TransformAsParameter(col) #>, bool caseSensitive = false)
         {
-            return this.<#= modelName #>Repository.SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= Char.ToLowerInvariant(colName[0]) + colName.Substring(1) #>,caseSensitive);
+            return this.<#= modelName #>Repository.SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= DataType.TransformAsParameterName(col)  #>,caseSensitive);
         }
 
 <#+ }  #>
@@ -173,7 +173,7 @@ string modelName = DataType.NamingConvention == null ? model.TableName : DataTyp
         /// <returns>bool</returns>
 		public bool <#= modelName #>Delete(<#= DataType.TransformAsParameter(model.Columns.Where(o => o.IsPrimaryKey)) #>)
         {
-            return this.<#= modelName #>Repository.Delete(<#= DataType.TransformAsParameter(model.Columns.Where(o => o.IsPrimaryKey)) #>);
+            return this.<#= modelName #>Repository.Delete(<#= DataType.TransformAsParameterName(model.Columns.Where(o => o.IsPrimaryKey)) #>);
         }
 
 <#+            } #>
