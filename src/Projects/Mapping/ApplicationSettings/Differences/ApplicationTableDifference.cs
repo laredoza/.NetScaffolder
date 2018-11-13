@@ -31,6 +31,7 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Differences
             this.ProblemIndexes = new List<Index>();
             this.FirstMissingRelationships = new List<Relationship>();
             this.FirstExtraRelationships = new List<Relationship>();
+            this.UpdatedRelationships = new List<Relationship>();
         }
 
         #endregion
@@ -56,6 +57,8 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Differences
         ///     Gets or sets the first extra Relationships.
         /// </summary>
         public List<Relationship> FirstExtraRelationships { get; set; }
+
+        public List<Relationship> UpdatedRelationships { get; set; }
 
         /// <summary>
         ///     Gets or sets the first missing columns.
@@ -139,7 +142,8 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Differences
                                                              || (this.ColumnDataTypeDiffs.Count > 0)
                                                              || (this.ExtraIndexes.Count > 0)
                                                              || (this.MissingIndexes.Count > 0)
-                                                             || (this.ProblemIndexes.Count > 0);
+                                                             || (this.ProblemIndexes.Count > 0)
+                                                             || (this.UpdatedRelationships.Count > 0);
             }
         }
 
@@ -302,6 +306,31 @@ namespace DotNetScaffolder.Mapping.ApplicationServices.Differences
 
             retval.FirstExtraRelationships.GroupBy(a => a.RelationshipName);
             retval.FirstMissingRelationships.GroupBy(a => a.RelationshipName);
+
+            //Check for multiplicaity changes
+
+            foreach (var firstTableRelationship in firstTable.Relationships)
+            {
+                //Checking on DependencyRelationShip as a self referencing table has both a parent and child relationship
+                if (secondTable.Relationships.Any(r =>
+                    r.RelationshipName == firstTableRelationship.RelationshipName && r.DependencyRelationShip == firstTableRelationship.DependencyRelationShip && (r.Multiplicity != firstTableRelationship.Multiplicity || r.ReferencedMultiplicity != firstTableRelationship.ReferencedMultiplicity)))
+                {
+                    var secondTableRelationships = secondTable.Relationships.Where(r =>
+                        r.RelationshipName == firstTableRelationship.RelationshipName && firstTableRelationship.DependencyRelationShip == firstTableRelationship.DependencyRelationShip);
+
+                    foreach (var secondTableRelationship in secondTableRelationships)
+                    {
+                        if (secondTableRelationship != null)
+                        {
+                            firstTableRelationship.Multiplicity = secondTableRelationship.Multiplicity;
+                            firstTableRelationship.ReferencedMultiplicity = secondTableRelationship.ReferencedMultiplicity;
+                            retval.UpdatedRelationships.Add(firstTableRelationship);
+                        }
+                    }
+
+                    
+                }
+            }
         }
 
         #endregion
