@@ -20,9 +20,9 @@
 
 using System;
 using System.Collections.Generic;
-using Banking.Models.Interfaces;
+using RepositoryEFDotnet.Data.Interfaces;
 
-namespace Banking.Models.Dto
+namespace RepositoryEFDotnet.Data.Dto
 {
 	public partial class SoftwareDto : ISoftware 
 	{

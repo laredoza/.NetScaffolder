@@ -1,6 +1,8 @@
 ﻿<#@ include file="ContextTemplate.ttinclude" #>
 <#@ include file="ContextCoreTemplate.ttinclude" #>
+<#@ include file="ContextCoreTemplateCustom.ttInclude" #>
 <#@ include file="ContextNHibernateTemplate.ttinclude" #>
+
 <#+
     public class ContextGenerator : BaseGenerator
     {
@@ -95,6 +97,24 @@
 			}
 
 			template.RenderToFile(string.Format(@"{0}\{1}{2}.g.cs", ContextData.OutputFolder,driver.Prefix,ContextData.ContextName));
+
+            var customTemplate = new ContextCoreTemplateCustom();
+            customTemplate.DataType = DataType;
+            customTemplate.EntityNamespace = EntityDataType.FullNamespace;
+			customTemplate.ContextData = ContextData;
+			customTemplate.Driver = driver;
+			customTemplate.MappingNamespace = MappingNamespace;
+			customTemplate.MappingPostFix = MappingPostFix;
+			customTemplate.Models = contextModels;
+
+			if(!string.IsNullOrEmpty(projectPath))
+			{
+				customTemplate.Output.Project =  projectPath;
+			}
+
+            customTemplate.Output.PreserveExistingFile = true;
+			customTemplate.RenderToFile(string.Format(@"{0}\{1}{2}.cs", ContextData.OutputFolder,driver.Prefix,ContextData.ContextName));
+
 		}
     }
 #>

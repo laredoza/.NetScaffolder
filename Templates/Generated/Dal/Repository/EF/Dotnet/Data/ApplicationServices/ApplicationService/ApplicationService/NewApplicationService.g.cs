@@ -23,9 +23,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using Banking.Models.Interfaces;
+using RepositoryEFDotnet.Data.Interfaces;
 
-namespace Banking.Models.ApplicationService
+namespace RepositoryEFDotnet.Data.ApplicationService
 {
     /// <summary>
 	/// The NewApplication Service 

@@ -4,35 +4,26 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-using RepositoryEFDotnet.Contexts.NHib.Base;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.IO;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
+using FluentNHibernate.Cfg;
+using FluentNHibernate.Cfg.Db;
+using FluentNHibernate.Conventions.Helpers;
+using NHibernate;
+using NHibernate.Cfg;
+using NHibernate.Dialect;
+using NHibernate.Linq;
+using NHibernate.Tool.hbm2ddl;
+using RepositoryEFDotnet.Core.Base;
+using RepositoryEFDotnet.Core.Utils;
 
-namespace RepositoryEFDotnet.Contexts.NHib
+namespace RepositoryEFDotnet.Contexts.NHib.Base
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Data;
-    using System.IO;
-    using System.Linq;
-    using System.Linq.Expressions;
-    using System.Threading.Tasks;
-
-    using FluentNHibernate.Cfg;
-    using FluentNHibernate.Cfg.Db;
-    using FluentNHibernate.Conventions.Helpers;
-    using FluentNHibernate.Conventions.Inspections;
-
-    using global::NHibernate;
-    using global::NHibernate.Cfg;
-    using global::NHibernate.Dialect;
-    using global::NHibernate.Linq;
-    using global::NHibernate.Tool.hbm2ddl;
-
-    using RepositoryEFDotnet.Core.Base;
-    using RepositoryEFDotnet.Core.Utils;
-
-    /// <summary>
-    /// The sql server n hibernate context.
-    /// </summary>
     public abstract class BaseContext : INHibUnitOfWork
     {
         #region Fields

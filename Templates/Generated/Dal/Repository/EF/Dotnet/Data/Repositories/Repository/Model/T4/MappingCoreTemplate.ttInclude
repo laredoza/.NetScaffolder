@@ -35,7 +35,7 @@ using System.Data.Common;
 
 namespace <#= Namespace #>.<#= Driver.ParentFolder #>.<#= Driver.Prefix #>
 {
-	public partial class <#= ModelName #><#= PostFix #> : IEntityTypeConfiguration<<#= ModelName #>>
+	public partial class <#= ContextData.ContextName #><#= ModelName #><#= PostFix #> : IEntityTypeConfiguration<<#= ModelName #>>
 	{	
 	    public virtual void Configure(EntityTypeBuilder<<#= ModelName #>> builder)
 	    {
@@ -60,7 +60,7 @@ if (Driver.ForceSchemaToUppercase)
 			builder.Property(t => t.<#= NamingConvention.ApplyNamingConvention(pk.ColumnName) #>).HasColumnName("<#= pk.ColumnName #>")<#=Driver.DriverType.TransformDbGeneratedKey(Model) #>;
 <#+ } #>
 <#+ if(Model.PrimaryKeyCount > 1){ #>
-			builder.HasKey(t => new {<#= NameFormatting.TransformCompositeKeys(Model.Columns.Where(o => o.IsPrimaryKey), "t") #>});
+			builder.HasKey(t => new {<#= NameFormatting.TransformCompositeKeys(Model.Columns.Where(o => o.IsPrimaryKey), "t", NamingConvention) #>});
 <#+ foreach(var col in Model.Columns.Where(o => o.IsPrimaryKey)){ #>
 			builder.Property(t => t.<#= NamingConvention.ApplyNamingConvention(col.ColumnName) #>).HasColumnName("<#= col.ColumnName #>")<#=Driver.DriverType.TransformDbGeneratedKey(Model) #>;
 <#+ } #>
@@ -103,6 +103,7 @@ if (Driver.ForceSchemaToUppercase)
 			
 			#endregion	
 <#+ if(Driver.DriverType.IncludeColumnOrder){ #>
+
 			#region Column Order
 			
 			// Column ordering available in EF Core 2.1 - https://data.uservoice.com/forums/72025-entity-framework-core-feature-suggestions/suggestions/18936844-ef-core-migrations-column-ordering

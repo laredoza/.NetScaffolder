@@ -23,24 +23,25 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System.Configuration;
+using RepositoryEFDotnet.Contexts.EFCore.Base;
 using RepositoryEFDotnet.Core.Base;
-using Banking.Models.Customers.Mappings.EFCore.SqlServer;
-using Banking.Models.Entity;
-using RepositoryEFDotnet.Contexts.EFCore;
+using RepositoryEFDotnet.Data.Customers.Mappings.EFCore.SqlServer;
+using RepositoryEFDotnet.Data.Entity;
+using System;
 
-namespace Banking.Models.Customers.EFCore
+namespace RepositoryEFDotnet.Data.Customers.EFCore
 {
 	public partial class SqlServerCustomerContext : BaseContext
 	{	
 		#region CTOR
 
-	    public SqlServerCustomerContext(string connectionString)
-	        : base(connectionString)
+	    public SqlServerCustomerContext(string connectionString, IServiceProvider provider = null)
+	        : base(connectionString, provider)
 	    {
 	    }
 
-	    public SqlServerCustomerContext(DbContextOptions<SqlServerCustomerContext> options) 
-			: base(options) 
+	    public SqlServerCustomerContext(DbContextOptions<SqlServerCustomerContext> options, IServiceProvider provider = null) 
+			: base(options, provider) 
 		{
 		}
 		
@@ -50,7 +51,7 @@ namespace Banking.Models.Customers.EFCore
 	    {
 	        if (!string.IsNullOrEmpty(ConnectionString) && !optionsBuilder.IsConfigured)
 	        {
-				optionsBuilder.UseSqlServer(ConnectionString);
+				optionsBuilder.UseLazyLoadingProxies().UseSqlServer(ConnectionString);
 	        }
 	    }
 		
@@ -60,13 +61,13 @@ namespace Banking.Models.Customers.EFCore
 			
 			#region Mappings
 			
-			modelBuilder.ApplyConfiguration(new BookMap());
-			modelBuilder.ApplyConfiguration(new CountryMap());
-			modelBuilder.ApplyConfiguration(new CustomerMap());
-			modelBuilder.ApplyConfiguration(new OrderMap());
-			modelBuilder.ApplyConfiguration(new OrderDetailsMap());
-			modelBuilder.ApplyConfiguration(new ProductMap());
-			modelBuilder.ApplyConfiguration(new SoftwareMap());
+			modelBuilder.ApplyConfiguration(new CustomerContextBookMap());
+			modelBuilder.ApplyConfiguration(new CustomerContextCountryMap());
+			modelBuilder.ApplyConfiguration(new CustomerContextCustomerMap());
+			modelBuilder.ApplyConfiguration(new CustomerContextOrderMap());
+			modelBuilder.ApplyConfiguration(new CustomerContextOrderDetailsMap());
+			modelBuilder.ApplyConfiguration(new CustomerContextProductMap());
+			modelBuilder.ApplyConfiguration(new CustomerContextSoftwareMap());
 
 			#endregion
 			
@@ -77,6 +78,8 @@ namespace Banking.Models.Customers.EFCore
 			modelBuilder.Ignore<BankAccount>();
 
 			#endregion
+			
+			this.Seed(modelBuilder);
         }
 		
 		#region Db Sets

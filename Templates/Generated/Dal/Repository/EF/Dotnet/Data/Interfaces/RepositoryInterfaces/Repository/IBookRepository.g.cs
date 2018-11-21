@@ -22,10 +22,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using Banking.Models.Interfaces;
+using RepositoryEFDotnet.Data.Interfaces;
 using RepositoryEFDotnet.Core.Base;
 
-namespace Banking.Models.Interfaces
+namespace RepositoryEFDotnet.Data.Interfaces
 {
 	/// <summary>
 	/// The BookRepository interface that defines database functions for the Book table

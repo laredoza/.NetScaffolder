@@ -23,24 +23,25 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System.Configuration;
+using RepositoryEFDotnet.Contexts.EFCore.Base;
 using RepositoryEFDotnet.Core.Base;
-using Banking.Models.Context.Mappings.EFCore.SqlServer;
-using Banking.Models.Entity;
-using RepositoryEFDotnet.Contexts.EFCore;
+using RepositoryEFDotnet.Data.Context.Mappings.EFCore.SqlServer;
+using RepositoryEFDotnet.Data.Entity;
+using System;
 
-namespace Banking.Models.Context.EFCore
+namespace RepositoryEFDotnet.Data.Context.EFCore
 {
 	public partial class SqlServerFullContext : BaseContext
 	{	
 		#region CTOR
 
-	    public SqlServerFullContext(string connectionString)
-	        : base(connectionString)
+	    public SqlServerFullContext(string connectionString, IServiceProvider provider = null)
+	        : base(connectionString, provider)
 	    {
 	    }
 
-	    public SqlServerFullContext(DbContextOptions<SqlServerFullContext> options) 
-			: base(options) 
+	    public SqlServerFullContext(DbContextOptions<SqlServerFullContext> options, IServiceProvider provider = null) 
+			: base(options, provider) 
 		{
 		}
 		
@@ -50,7 +51,7 @@ namespace Banking.Models.Context.EFCore
 	    {
 	        if (!string.IsNullOrEmpty(ConnectionString) && !optionsBuilder.IsConfigured)
 	        {
-				optionsBuilder.UseSqlServer(ConnectionString);
+				optionsBuilder.UseLazyLoadingProxies().UseSqlServer(ConnectionString);
 	        }
 	    }
 		
@@ -60,15 +61,15 @@ namespace Banking.Models.Context.EFCore
 			
 			#region Mappings
 			
-			modelBuilder.ApplyConfiguration(new BankAccountMap());
-			modelBuilder.ApplyConfiguration(new BankTransfersMap());
-			modelBuilder.ApplyConfiguration(new BookMap());
-			modelBuilder.ApplyConfiguration(new CountryMap());
-			modelBuilder.ApplyConfiguration(new CustomerMap());
-			modelBuilder.ApplyConfiguration(new OrderMap());
-			modelBuilder.ApplyConfiguration(new OrderDetailsMap());
-			modelBuilder.ApplyConfiguration(new ProductMap());
-			modelBuilder.ApplyConfiguration(new SoftwareMap());
+			modelBuilder.ApplyConfiguration(new FullContextBankAccountMap());
+			modelBuilder.ApplyConfiguration(new FullContextBankTransfersMap());
+			modelBuilder.ApplyConfiguration(new FullContextBookMap());
+			modelBuilder.ApplyConfiguration(new FullContextCountryMap());
+			modelBuilder.ApplyConfiguration(new FullContextCustomerMap());
+			modelBuilder.ApplyConfiguration(new FullContextOrderMap());
+			modelBuilder.ApplyConfiguration(new FullContextOrderDetailsMap());
+			modelBuilder.ApplyConfiguration(new FullContextProductMap());
+			modelBuilder.ApplyConfiguration(new FullContextSoftwareMap());
 
 			#endregion
 			
@@ -78,6 +79,8 @@ namespace Banking.Models.Context.EFCore
 			
 
 			#endregion
+			
+			this.Seed(modelBuilder);
         }
 		
 		#region Db Sets

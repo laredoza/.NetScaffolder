@@ -46,7 +46,8 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
             this.LanguageOutputDetails.Add(new LanguageOutputDetails { LanguageOutput = new Guid("1BC1B0C4-1E41-9146-82CF-599181CE4410"), OutputGenerator = new Guid("1BC1B0C4-1E41-9146-82CF-599181CE4410") });
             this.LanguageOutputDetails[0].Templates.Add("ContextGenerator.ttInclude");
             this.LanguageOutputDetails[0].Templates.Add("ContextCoreTemplate.ttInclude");
-
+            this.AdditionalNamespaces.Add("RepositoryEFDotnet.Contexts.EFCore.Base");
+            this.AdditionalNamespaces.Add("RepositoryEFDotnet.Core.Base");
             //this.LanguageOutputDetails.Add(new LanguageOutputDetails { LanguageOutput = new Guid("1BC1B0C4-1E41-9146-82CF-599181CE4411"), OutputGenerator = new Guid("1BC1B0C4-1E41-9146-82CF-599181CE4410") });
             //this.LanguageOutputDetails[1].Templates.Add("File3.tt");
             //this.LanguageOutputDetails[1].Templates.Add("File4.tt");

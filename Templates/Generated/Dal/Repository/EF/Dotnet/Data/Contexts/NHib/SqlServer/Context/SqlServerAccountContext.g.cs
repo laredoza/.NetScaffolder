@@ -25,7 +25,8 @@ using FluentNHibernate.Cfg.Db;
 using FluentNHibernate.Cfg;
 using RepositoryEFDotnet.Core.Base;
 using Banking.Models.Accounts.Mappings.NHib.SqlServer;
-using Quirc.DataAccess.Context.NHib.Base;
+using RepositoryEFDotnet.Contexts.NHib.Base;
+using Banking.Models.Accounts.Mappings.NHib.SqlServer;
 
 namespace Banking.Models.Accounts.NHib
 {

@@ -23,11 +23,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using Banking.Models.Interfaces;
-using Banking.Models.Entity;
+using RepositoryEFDotnet.Data.Interfaces;
+using RepositoryEFDotnet.Data.Entity;
 using RepositoryEFDotnet.Core.Base;
 
-namespace Banking.Models.Repository
+namespace RepositoryEFDotnet.Data.Repository
 {
 	/// <summary>
 	/// The ProductRepository class responsible for database functions in the Product table

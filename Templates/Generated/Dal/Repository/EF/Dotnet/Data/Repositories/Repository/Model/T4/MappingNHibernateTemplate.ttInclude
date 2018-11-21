@@ -30,9 +30,9 @@ using FluentNHibernate.Mapping;
 
 namespace <#= Namespace #>.<#= Driver.ParentFolder #>.<#= Driver.Prefix #>
 {
-	public partial class <#= ModelName #><#= PostFix #> : ClassMap<<#= ModelName #>>
+	public partial class <#= ContextData.ContextName #><#= ModelName #><#= PostFix #> : ClassMap<<#= ModelName #>>
 	{	
-		public <#= ModelName #><#= PostFix #> ()
+		public <#= ContextData.ContextName #><#= ModelName #><#= PostFix #> ()
 		{
 			CreateMapping();
 		}

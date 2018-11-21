@@ -23,24 +23,25 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System.Configuration;
+using RepositoryEFDotnet.Contexts.EFCore.Base;
 using RepositoryEFDotnet.Core.Base;
-using Banking.Models.Accounts.Mappings.EFCore.SqlServer;
-using Banking.Models.Entity;
-using RepositoryEFDotnet.Contexts.EFCore;
+using RepositoryEFDotnet.Data.Accounts.Mappings.EFCore.SqlServer;
+using RepositoryEFDotnet.Data.Entity;
+using System;
 
-namespace Banking.Models.Accounts.EFCore
+namespace RepositoryEFDotnet.Data.Accounts.EFCore
 {
 	public partial class SqlServerAccountContext : BaseContext
 	{	
 		#region CTOR
 
-	    public SqlServerAccountContext(string connectionString)
-	        : base(connectionString)
+	    public SqlServerAccountContext(string connectionString, IServiceProvider provider = null)
+	        : base(connectionString, provider)
 	    {
 	    }
 
-	    public SqlServerAccountContext(DbContextOptions<SqlServerAccountContext> options) 
-			: base(options) 
+	    public SqlServerAccountContext(DbContextOptions<SqlServerAccountContext> options, IServiceProvider provider = null) 
+			: base(options, provider) 
 		{
 		}
 		
@@ -50,7 +51,7 @@ namespace Banking.Models.Accounts.EFCore
 	    {
 	        if (!string.IsNullOrEmpty(ConnectionString) && !optionsBuilder.IsConfigured)
 	        {
-				optionsBuilder.UseSqlServer(ConnectionString);
+				optionsBuilder.UseLazyLoadingProxies().UseSqlServer(ConnectionString);
 	        }
 	    }
 		
@@ -60,8 +61,8 @@ namespace Banking.Models.Accounts.EFCore
 			
 			#region Mappings
 			
-			modelBuilder.ApplyConfiguration(new BankAccountMap());
-			modelBuilder.ApplyConfiguration(new BankTransfersMap());
+			modelBuilder.ApplyConfiguration(new AccountContextBankAccountMap());
+			modelBuilder.ApplyConfiguration(new AccountContextBankTransfersMap());
 
 			#endregion
 			
@@ -72,6 +73,8 @@ namespace Banking.Models.Accounts.EFCore
 			modelBuilder.Ignore<Customer>();
 
 			#endregion
+			
+			this.Seed(modelBuilder);
         }
 		
 		#region Db Sets

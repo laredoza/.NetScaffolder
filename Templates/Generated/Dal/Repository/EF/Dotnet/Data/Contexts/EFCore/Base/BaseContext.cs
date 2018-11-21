@@ -4,25 +4,22 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace RepositoryEFDotnet.Contexts.EFCore
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
+using EFSecondLevelCache.Core;
+using EFSecondLevelCache.Core.Contracts;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using RepositoryEFDotnet.Core.Base;
+using RepositoryEFDotnet.Core.Utils;
+
+namespace RepositoryEFDotnet.Contexts.EFCore.Base
 {
     #region Using
-
-    using System;
-    using System.Collections.Generic;
-    using System.Data;
-    using System.Linq;
-    using System.Linq.Expressions;
-    using System.Threading.Tasks;
-
-    using EFSecondLevelCache.Core;
-    using EFSecondLevelCache.Core.Contracts;
-
-    using Microsoft.EntityFrameworkCore;
-    using Microsoft.Extensions.DependencyInjection;
-
-    using RepositoryEFDotnet.Core.Base;
-    using RepositoryEFDotnet.Core.Utils;
 
     #endregion
 

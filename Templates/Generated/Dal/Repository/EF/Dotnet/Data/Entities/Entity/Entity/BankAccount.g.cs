@@ -20,9 +20,9 @@
 
 using System;
 using System.Collections.Generic;
-using Banking.Models.Interfaces;
+using RepositoryEFDotnet.Data.Interfaces;
 
-namespace Banking.Models.Entity
+namespace RepositoryEFDotnet.Data.Entity
 {
 	public partial class BankAccount : IBankAccount 
 	{

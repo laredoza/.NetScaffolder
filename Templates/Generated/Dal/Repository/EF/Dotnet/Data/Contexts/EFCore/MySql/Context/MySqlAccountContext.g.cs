@@ -22,24 +22,25 @@ using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System.Configuration;
+using RepositoryEFDotnet.Contexts.EFCore.Base;
 using RepositoryEFDotnet.Core.Base;
-using Banking.Models.Accounts.Mappings.EFCore.MySql;
-using Banking.Models.Entity;
-using RepositoryEFDotnet.Contexts.EFCore;
+using RepositoryEFDotnet.Data.Accounts.Mappings.EFCore.MySql;
+using RepositoryEFDotnet.Data.Entity;
+using System;
 
-namespace Banking.Models.Accounts.EFCore
+namespace RepositoryEFDotnet.Data.Accounts.EFCore
 {
 	public partial class MySqlAccountContext : BaseContext
 	{	
 		#region CTOR
 
-	    public MySqlAccountContext(string connectionString)
-	        : base(connectionString)
+	    public MySqlAccountContext(string connectionString, IServiceProvider provider = null)
+	        : base(connectionString, provider)
 	    {
 	    }
 
-	    public MySqlAccountContext(DbContextOptions<MySqlAccountContext> options) 
-			: base(options) 
+	    public MySqlAccountContext(DbContextOptions<MySqlAccountContext> options, IServiceProvider provider = null) 
+			: base(options, provider) 
 		{
 		}
 		
@@ -59,8 +60,8 @@ namespace Banking.Models.Accounts.EFCore
 			
 			#region Mappings
 			
-			modelBuilder.ApplyConfiguration(new BankAccountMap());
-			modelBuilder.ApplyConfiguration(new BankTransfersMap());
+			modelBuilder.ApplyConfiguration(new AccountContextBankAccountMap());
+			modelBuilder.ApplyConfiguration(new AccountContextBankTransfersMap());
 
 			#endregion
 			
@@ -71,6 +72,8 @@ namespace Banking.Models.Accounts.EFCore
 			modelBuilder.Ignore<Customer>();
 
 			#endregion
+			
+			this.Seed(modelBuilder);
         }
 		
 		#region Db Sets

@@ -21,7 +21,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Banking.Models.Interfaces
+namespace RepositoryEFDotnet.Data.Interfaces
 {
 	public partial interface ISoftware  
 	{

@@ -17,16 +17,17 @@
 //	GENERATED CODE. DOT NOT MODIFY MANUALLY AS CHANGES CAN BE LOST!!!
 //	USE A PARTIAL CLASS INSTEAD
 // *******************************************************************
+using RepositoryEFDotnet.Contexts.EFCore.Base;
 using RepositoryEFDotnet.Core.Base;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System.Configuration;
-using Banking.Models.Context.EFCore;
+using RepositoryEFDotnet.Data.Context.EFCore;
 using System;
 using System.Collections.Generic;
 
-namespace Banking.Models.Context.SqlServer.EFCore.Database
+namespace RepositoryEFDotnet.Data.Context.SqlServer.EFCore.Database
 {
 	public class DatabaseManager : IDatabaseManager
 	{	

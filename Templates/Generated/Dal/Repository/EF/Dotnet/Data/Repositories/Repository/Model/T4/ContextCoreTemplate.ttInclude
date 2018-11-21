@@ -32,7 +32,7 @@ using <#= nameSpace #>;
 <#+ } #>
 using <#= MappingNamespace #>.<#= Driver.ParentFolder #>.<#= Driver.Prefix #>;
 using <#= EntityNamespace #>;
-using RepositoryEFDotnet.Contexts.<#= Driver.ParentFolder #>;
+using System;
 
 namespace <#= ContextData.TransformFullnamespace(DataType.BaseNamespace) #>.<#= Driver.ParentFolder #>
 {
@@ -43,13 +43,13 @@ namespace <#= ContextData.TransformFullnamespace(DataType.BaseNamespace) #>.<#= 
 	{	
 		#region CTOR
 
-	    public <#= string.Concat(Driver.Prefix, ContextData.ContextName)  #>(string connectionString)
-	        : base(connectionString)
+	    public <#= string.Concat(Driver.Prefix, ContextData.ContextName)  #>(string connectionString, IServiceProvider provider = null)
+	        : base(connectionString, provider)
 	    {
 	    }
 
-	    public <#= string.Concat(Driver.Prefix, ContextData.ContextName)  #>(DbContextOptions<<#= string.Concat(Driver.Prefix, ContextData.ContextName)  #>> options) 
-			: base(options) 
+	    public <#= string.Concat(Driver.Prefix, ContextData.ContextName)  #>(DbContextOptions<<#= string.Concat(Driver.Prefix, ContextData.ContextName)  #>> options, IServiceProvider provider = null) 
+			: base(options, provider) 
 		{
 		}
 		
@@ -60,7 +60,11 @@ namespace <#= ContextData.TransformFullnamespace(DataType.BaseNamespace) #>.<#= 
 	        if (!string.IsNullOrEmpty(ConnectionString) && !optionsBuilder.IsConfigured)
 	        {
 <#+ if(Driver is EFCoreSqlServerDriver) { #>
+<#+ if(Driver.DriverType.LazyLoadingEnabled) { #>
+				optionsBuilder.UseLazyLoadingProxies().UseSqlServer(ConnectionString);
+<#+ } else { #>
 				optionsBuilder.UseSqlServer(ConnectionString);
+<#+ } #>
 <#+ }#>
 <#+ if(Driver is EFCoreMySqlDriver) { #>
 				optionsBuilder.UseMySql(ConnectionString);
@@ -75,7 +79,7 @@ namespace <#= ContextData.TransformFullnamespace(DataType.BaseNamespace) #>.<#= 
 			#region Mappings
 			
 <#+ foreach(var table in this.Models){ #>
-			modelBuilder.ApplyConfiguration(new <#= DataType.TransformModelName(table.TableName) #><#= MappingPostFix #>());
+			modelBuilder.ApplyConfiguration(new <#= string.Concat(ContextData.ContextName,DataType.TransformModelName(table.TableName), MappingPostFix) #>());
 <#+ } #>
 
 			#endregion
@@ -89,6 +93,8 @@ namespace <#= ContextData.TransformFullnamespace(DataType.BaseNamespace) #>.<#= 
 <#+ } #>
 
 			#endregion
+			
+			this.Seed(modelBuilder);
         }
 		
 		#region Db Sets
