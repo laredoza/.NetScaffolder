@@ -20,6 +20,8 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
 using Banking.Models.Interfaces;
 using RepositoryEFDotnet.Core.Base;
 
@@ -36,14 +38,31 @@ namespace Banking.Models.Interfaces
         /// Load Country entities from the database using the composite primary keys
         /// </summary
         /// <param name="countryId">int</param>
+		/// <param name="includes">params Expression<Func<ICountry, object>>[]</param>
         /// <returns>ICountry</returns>
-		ICountry LoadByCountryId(int countryId);
+		ICountry LoadByCountryId(int countryId, params Expression<Func<ICountry, object>>[] includes);
+		
+        /// <summary>
+        /// Load Country entities async from the database using the composite primary keys
+        /// </summary
+        /// <param name="countryId">int</param>
+		/// <param name="includes">params Expression<Func<ICountry, object>>[]</param>
+        /// <returns>ICountry</returns>
+		Task<ICountry> LoadByCountryIdAsync(int countryId, params Expression<Func<ICountry, object>>[] includes);
 
         /// <summary>
         /// Load all Country entities from the database.
         /// </summary>
+		/// <param name="includes">params Expression<Func<ICountry, object>>[]</param>
         /// <returns>IList<ICountry></returns>
-		IList<ICountry> LoadAll();
+		IList<ICountry> LoadAll(params Expression<Func<ICountry, object>>[] includes);
+		
+        /// <summary>
+        /// Load all Country entities async from the database.
+        /// </summary>
+		/// <param name="includes">params Expression<Func<ICountry, object>>[]</param>
+        /// <returns>IList<ICountry></returns>
+		Task<IList<ICountry>> LoadAllAsync(params Expression<Func<ICountry, object>>[] includes);
 		
 		#endregion
 
@@ -53,20 +72,37 @@ namespace Banking.Models.Interfaces
         /// Search for Country entities in the database by CountryName
         /// </summary>
         /// <param name="countryName">string</param>
-		/// <param name="caseSensitive">bool</param>
+		/// <param name="caseSensitive">bool</param
+		/// <param name="includes">params Expression<Func<ICountry, object>>[]</param>
         /// <returns>IList<ICountry></returns>
-		IList<ICountry> SearchByCountryName(string countryName, bool caseSensitive = false);
+		IList<ICountry> SearchByCountryName(string countryName, bool caseSensitive = false, params Expression<Func<ICountry, object>>[] includes);
+		
+        /// <summary>
+        /// Search for Country entities async in the database by CountryName
+        /// </summary>
+        /// <param name="countryName">string</param>
+		/// <param name="caseSensitive">bool</param
+		/// <param name="includes">params Expression<Func<ICountry, object>>[]</param>
+        /// <returns>IList<ICountry></returns>
+		Task<IList<ICountry>> SearchByCountryNameAsync(string countryName, bool caseSensitive = false, params Expression<Func<ICountry, object>>[] includes);
 
 		#endregion
 		
 		#region Modifiers
 		
         /// <summary>
-        /// Save the Country entity to the database.
+        /// Add the Country entity to the database.
         /// </summary>
         /// <param name="entity">ICountry</param>
         /// <returns>bool</returns>
-		bool Save(ICountry entity);
+		bool Add(ICountry entity);
+		
+        /// <summary>
+        /// Add the Country entity async to the database.
+        /// </summary>
+        /// <param name="entity">ICountry</param>
+        /// <returns>bool</returns>
+		Task<bool> AddAsync(ICountry entity);
 
         /// <summary>
         /// Update the Country entity in the database if any values have changed
@@ -76,11 +112,25 @@ namespace Banking.Models.Interfaces
 		bool Update(ICountry entity);
 		
         /// <summary>
+        /// Update the Country entity async in the database if any values have changed
+        /// </summary>
+        /// <param name="entity">ICountry</param>
+        /// <returns>bool</returns>
+		Task<bool> UpdateAsync(ICountry entity);
+		
+        /// <summary>
         /// Delete the Country entity from the database
         /// </summary>
         /// <param name="entity">ICountry</param>
         /// <returns>bool</returns>
 		bool Delete(ICountry entity);
+		
+        /// <summary>
+        /// Delete the Country entity async from the database
+        /// </summary>
+        /// <param name="entity">ICountry</param>
+        /// <returns>bool</returns>
+		Task<bool> DeleteAsync(ICountry entity);
 
 		/// <summary>
         /// Delete the Country entity from the database
@@ -89,6 +139,25 @@ namespace Banking.Models.Interfaces
         /// <returns>bool</returns>
 		bool Delete( int countryId);
 
+		/// <summary>
+        /// Delete the Country entity async from the database
+        /// </summary>
+        /// <param name="countryId">int</param>
+        /// <returns>bool</returns>
+		Task<bool> DeleteAsync( int countryId);
+		
+		#endregion
+		
+		#region Aggregates
+		
+		TResult Max<TResult>(Expression<Func<ICountry, TResult>> maxExpression);
+		
+		Task<TResult> MaxAsync<TResult>(Expression<Func<ICountry, TResult>> maxExpression);
+		
+		TResult Min<TResult>(Expression<Func<ICountry, TResult>> maxExpression);
+		
+		Task<TResult> MinAsync<TResult>(Expression<Func<ICountry, TResult>> maxExpression);
+		
 		#endregion
 	}
 }

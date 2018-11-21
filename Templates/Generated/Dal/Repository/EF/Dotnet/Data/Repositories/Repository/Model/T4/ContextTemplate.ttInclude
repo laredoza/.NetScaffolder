@@ -33,7 +33,7 @@ using <#= nameSpace #>;
 <#+ } #>
 using <#= MappingNamespace #>.<#= Driver.ParentFolder #>.<#= Driver.Prefix #>;
 using System.Data.Common;
-using RepositoryEFDotnet.Contexts.<#= Driver.ParentFolder #>;
+using Quirc.DataAccess.Context.EF.Base;
 
 namespace <#= ContextData.TransformFullnamespace(DataType.BaseNamespace) #>.<#= Driver.ParentFolder #>
 {
@@ -73,7 +73,7 @@ namespace <#= ContextData.TransformFullnamespace(DataType.BaseNamespace) #>.<#= 
 			#region Mappings
 			
 <#+ foreach(var table in this.Models){ #>
-			modelBuilder.Configurations.Add(new <#= table.TableName #><#= MappingPostFix #>());
+			modelBuilder.Configurations.Add(new <#= string.Concat(ContextData.ContextName, table.TableName, MappingPostFix) #>());
 <#+ } #>
 
 			#endregion

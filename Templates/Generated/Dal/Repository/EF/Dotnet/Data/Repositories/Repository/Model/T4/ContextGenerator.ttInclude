@@ -16,9 +16,7 @@
         protected override void RunCore()
         {
 			foreach(IDriver driver in DataType.Drivers )
-			{
-				Debugger.Break();
-				
+			{				
 				projectPath = string.Format(ContextData.OutputPath, driver.ParentFolder, driver.Prefix);	
 				
 				if(driver.DriverType is EFDriverType)

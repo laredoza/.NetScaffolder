@@ -50,7 +50,6 @@
   <ItemGroup>
     <Compile Include="Base\BaseRepositoryUnitTest.g.cs" />
     <Compile Include="Base\BaseUnitOfWorkUnitTest.g.cs" />
-    <Compile Include="Base\BaseUnitTest.cs" />
     <Compile Include="Base\BaseUnitTest.g.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -83,6 +82,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

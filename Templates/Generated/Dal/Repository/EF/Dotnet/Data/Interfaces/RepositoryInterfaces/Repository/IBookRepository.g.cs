@@ -20,6 +20,8 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
 using Banking.Models.Interfaces;
 using RepositoryEFDotnet.Core.Base;
 
@@ -36,14 +38,31 @@ namespace Banking.Models.Interfaces
         /// Load Book entities from the database using the composite primary keys
         /// </summary
         /// <param name="productId">int</param>
+		/// <param name="includes">params Expression<Func<IBook, object>>[]</param>
         /// <returns>IBook</returns>
-		IBook LoadByProductId(int productId);
+		IBook LoadByProductId(int productId, params Expression<Func<IBook, object>>[] includes);
+		
+        /// <summary>
+        /// Load Book entities async from the database using the composite primary keys
+        /// </summary
+        /// <param name="productId">int</param>
+		/// <param name="includes">params Expression<Func<IBook, object>>[]</param>
+        /// <returns>IBook</returns>
+		Task<IBook> LoadByProductIdAsync(int productId, params Expression<Func<IBook, object>>[] includes);
 
         /// <summary>
         /// Load all Book entities from the database.
         /// </summary>
+		/// <param name="includes">params Expression<Func<IBook, object>>[]</param>
         /// <returns>IList<IBook></returns>
-		IList<IBook> LoadAll();
+		IList<IBook> LoadAll(params Expression<Func<IBook, object>>[] includes);
+		
+        /// <summary>
+        /// Load all Book entities async from the database.
+        /// </summary>
+		/// <param name="includes">params Expression<Func<IBook, object>>[]</param>
+        /// <returns>IList<IBook></returns>
+		Task<IList<IBook>> LoadAllAsync(params Expression<Func<IBook, object>>[] includes);
 		
 		#endregion
 
@@ -53,20 +72,37 @@ namespace Banking.Models.Interfaces
         /// Search for Book entities in the database by Publisher
         /// </summary>
         /// <param name="publisher">string</param>
-		/// <param name="caseSensitive">bool</param>
+		/// <param name="caseSensitive">bool</param
+		/// <param name="includes">params Expression<Func<IBook, object>>[]</param>
         /// <returns>IList<IBook></returns>
-		IList<IBook> SearchByPublisher(string publisher, bool caseSensitive = false);
+		IList<IBook> SearchByPublisher(string publisher, bool caseSensitive = false, params Expression<Func<IBook, object>>[] includes);
+		
+        /// <summary>
+        /// Search for Book entities async in the database by Publisher
+        /// </summary>
+        /// <param name="publisher">string</param>
+		/// <param name="caseSensitive">bool</param
+		/// <param name="includes">params Expression<Func<IBook, object>>[]</param>
+        /// <returns>IList<IBook></returns>
+		Task<IList<IBook>> SearchByPublisherAsync(string publisher, bool caseSensitive = false, params Expression<Func<IBook, object>>[] includes);
 
 		#endregion
 		
 		#region Modifiers
 		
         /// <summary>
-        /// Save the Book entity to the database.
+        /// Add the Book entity to the database.
         /// </summary>
         /// <param name="entity">IBook</param>
         /// <returns>bool</returns>
-		bool Save(IBook entity);
+		bool Add(IBook entity);
+		
+        /// <summary>
+        /// Add the Book entity async to the database.
+        /// </summary>
+        /// <param name="entity">IBook</param>
+        /// <returns>bool</returns>
+		Task<bool> AddAsync(IBook entity);
 
         /// <summary>
         /// Update the Book entity in the database if any values have changed
@@ -76,11 +112,25 @@ namespace Banking.Models.Interfaces
 		bool Update(IBook entity);
 		
         /// <summary>
+        /// Update the Book entity async in the database if any values have changed
+        /// </summary>
+        /// <param name="entity">IBook</param>
+        /// <returns>bool</returns>
+		Task<bool> UpdateAsync(IBook entity);
+		
+        /// <summary>
         /// Delete the Book entity from the database
         /// </summary>
         /// <param name="entity">IBook</param>
         /// <returns>bool</returns>
 		bool Delete(IBook entity);
+		
+        /// <summary>
+        /// Delete the Book entity async from the database
+        /// </summary>
+        /// <param name="entity">IBook</param>
+        /// <returns>bool</returns>
+		Task<bool> DeleteAsync(IBook entity);
 
 		/// <summary>
         /// Delete the Book entity from the database
@@ -89,6 +139,25 @@ namespace Banking.Models.Interfaces
         /// <returns>bool</returns>
 		bool Delete( int productId);
 
+		/// <summary>
+        /// Delete the Book entity async from the database
+        /// </summary>
+        /// <param name="productId">int</param>
+        /// <returns>bool</returns>
+		Task<bool> DeleteAsync( int productId);
+		
+		#endregion
+		
+		#region Aggregates
+		
+		TResult Max<TResult>(Expression<Func<IBook, TResult>> maxExpression);
+		
+		Task<TResult> MaxAsync<TResult>(Expression<Func<IBook, TResult>> maxExpression);
+		
+		TResult Min<TResult>(Expression<Func<IBook, TResult>> maxExpression);
+		
+		Task<TResult> MinAsync<TResult>(Expression<Func<IBook, TResult>> maxExpression);
+		
 		#endregion
 	}
 }

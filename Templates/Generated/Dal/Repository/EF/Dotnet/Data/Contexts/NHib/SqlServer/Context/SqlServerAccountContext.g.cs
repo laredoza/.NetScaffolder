@@ -25,7 +25,7 @@ using FluentNHibernate.Cfg.Db;
 using FluentNHibernate.Cfg;
 using RepositoryEFDotnet.Core.Base;
 using Banking.Models.Accounts.Mappings.NHib.SqlServer;
-using RepositoryEFDotnet.Contexts.NHib;
+using Quirc.DataAccess.Context.NHib.Base;
 
 namespace Banking.Models.Accounts.NHib
 {
@@ -34,24 +34,37 @@ namespace Banking.Models.Accounts.NHib
 		#region CTOR
 		
 		// Use other target e.g. in memory sqlite
-	    public SqlServerAccountContext(Configuration config)
+	    public SqlServerAccountContext(Configuration config) : base(config)
 	    {
-			SetConfig(config);
         }
 		
 		// Use db as target
-	    public SqlServerAccountContext(MsSqlConfiguration config)
+	    public SqlServerAccountContext(MsSqlConfiguration config) : base(config)
 	    {
             config.IsolationLevel(IsolationLevel.ReadCommitted);
-            SetConfig(config);
+	    }
+		
+		// Use external factory
+	    public SqlServerAccountContext(ISessionFactory factory) : base(factory)
+	    {
+	    }
+		
+		// Use persistence configurer
+	    public SqlServerAccountContext(IPersistenceConfigurer config) : base(config)
+	    {
+	    }
+		
+		// Use Fluent Configuration
+	    public SqlServerAccountContext(FluentConfiguration config) : base(config)
+	    {
 	    }
 		
 		#endregion
 		
 	    protected override void ConfigureMappings(MappingConfiguration config)
 	    {
-			config.FluentMappings.Add(typeof(BankAccountMap));
-			config.FluentMappings.Add(typeof(BankTransfersMap));
+			config.FluentMappings.Add(typeof(AccountContextBankAccountMap));
+			config.FluentMappings.Add(typeof(AccountContextBankTransfersMap));
         }
 	}
 }

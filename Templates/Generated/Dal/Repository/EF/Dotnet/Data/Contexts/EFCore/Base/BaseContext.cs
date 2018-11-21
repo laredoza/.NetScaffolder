@@ -10,12 +10,16 @@ namespace RepositoryEFDotnet.Contexts.EFCore
 
     using System;
     using System.Collections.Generic;
+    using System.Data;
     using System.Linq;
     using System.Linq.Expressions;
     using System.Threading.Tasks;
 
+    using EFSecondLevelCache.Core;
+    using EFSecondLevelCache.Core.Contracts;
+
     using Microsoft.EntityFrameworkCore;
-    using Microsoft.EntityFrameworkCore.Storage;
+    using Microsoft.Extensions.DependencyInjection;
 
     using RepositoryEFDotnet.Core.Base;
     using RepositoryEFDotnet.Core.Utils;
@@ -30,14 +34,24 @@ namespace RepositoryEFDotnet.Contexts.EFCore
     /// </typeparam>
     public abstract class BaseContext : DbContext, IUnitOfWork
     {
+        #region Fields
+
+        private readonly IServiceProvider serviceProvider;
+
+        protected IEFCacheServiceProvider cacheProvider;
+
+        #endregion
+
         #region Constructors and Destructors
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BaseContext"/> class.
         /// </summary>
-        protected BaseContext()
+        protected BaseContext(IServiceProvider provider = null)
         {
+            this.serviceProvider = provider;
             this.SetupContext();
+            this.InitCacheProvider();
         }
 
         /// <summary>
@@ -46,10 +60,12 @@ namespace RepositoryEFDotnet.Contexts.EFCore
         /// <param name="connectionName">
         /// The connection name.
         /// </param>
-        protected BaseContext(string connectionString)
+        protected BaseContext(string connectionString, IServiceProvider provider = null)
         {
+            this.serviceProvider = provider;
             this.ConnectionString = connectionString;
             this.SetupContext();
+            this.InitCacheProvider();
         }
 
         /// <summary>
@@ -58,10 +74,12 @@ namespace RepositoryEFDotnet.Contexts.EFCore
         /// <param name="options">
         /// The options.
         /// </param>
-        protected BaseContext(DbContextOptions options)
+        protected BaseContext(DbContextOptions options, IServiceProvider provider = null)
             : base(options)
         {
+            this.serviceProvider = provider;
             this.SetupContext();
+            this.InitCacheProvider();
         }
 
         #endregion
@@ -77,6 +95,7 @@ namespace RepositoryEFDotnet.Contexts.EFCore
 
         #region Public Methods And Operators
 
+        /// <inheritdoc />
         /// <summary>
         /// The add.
         /// </summary>
@@ -87,9 +106,9 @@ namespace RepositoryEFDotnet.Contexts.EFCore
         /// Entity Type
         /// </typeparam>
         /// <returns>
-        /// The <see cref="bool"/>.
+        /// The <see cref="T:System.Boolean" />.
         /// </returns>
-        public bool Add<TEntity>(TEntity item)
+        public new bool Add<TEntity>(TEntity item)
             where TEntity : class
         {
             this.SetEntryState(item, EntityState.Added);
@@ -109,10 +128,12 @@ namespace RepositoryEFDotnet.Contexts.EFCore
         /// <returns>
         /// The <see cref="Task"/>.
         /// </returns>
-        public Task<bool> AddAsync<TEntity>(TEntity item)
+        public async Task<bool> AddAsync<TEntity>(TEntity item)
             where TEntity : class
         {
-            return Task.Run(() => this.Add(item));
+            this.SetEntryState(item, EntityState.Added);
+            await this.GetDbSet<TEntity>().AddAsync(item);
+            return true;
         }
 
         /// <summary>
@@ -129,8 +150,9 @@ namespace RepositoryEFDotnet.Contexts.EFCore
         public bool AddRange<TEntity>(IEnumerable<TEntity> items)
             where TEntity : class
         {
-            this.SetEntryState(items, EntityState.Added);
-            this.GetDbSet<TEntity>().AddRange(items);
+            var itemList = items.ToList();
+            this.SetEntryState(itemList, EntityState.Added);
+            this.GetDbSet<TEntity>().AddRange(itemList);
             return true;
         }
 
@@ -145,110 +167,53 @@ namespace RepositoryEFDotnet.Contexts.EFCore
         /// <returns>
         /// The <see cref="Task"/>.
         /// </returns>
-        public Task<bool> AddRangeAsync<TEntity>(IEnumerable<TEntity> items)
+        public async Task<bool> AddRangeAsync<TEntity>(IEnumerable<TEntity> items)
             where TEntity : class
         {
-            return Task.Run(() => this.AddRange(items));
+            var itemList = items.ToList();
+            this.SetEntryState(itemList, EntityState.Added);
+            await this.GetDbSet<TEntity>().AddRangeAsync(itemList);
+            return true;
         }
 
-        /// <summary>
-        /// The all matching.
-        /// </summary>
-        /// <param name="filter">
-        /// The filter.
-        /// </param>
-        /// <param name="includes">
-        /// The includes.
-        /// </param>
-        /// <param name="hint">
-        /// The hint.
-        /// </param>
-        /// <typeparam name="TEntity">
-        /// Entity Type
-        /// </typeparam>
-        /// <returns>
-        /// The
-        ///     <see>
-        ///         <cref>IEnumerable</cref>
-        ///     </see>
-        ///     .
-        /// </returns>
         public IEnumerable<TEntity> AllMatching<TEntity>(
             Expression<Func<TEntity, bool>> filter,
-            IEnumerable<string> includes = null,
-            string hint = "")
+            params Expression<Func<TEntity, object>>[] includes)
             where TEntity : class
         {
-            return this.GetQueryable(includes, filter);
+            return this.GetQueryable(filter, 0, 0, null, false, includes);
         }
 
-        /// <summary>
-        /// The all matching async.
-        /// </summary>
-        /// <typeparam name="TEntity">
-        /// The Entity Type
-        /// </typeparam>
-        /// <param name="filter">
-        /// The filter.
-        /// </param>
-        /// <param name="includes">
-        /// The includes.
-        /// </param>
-        /// <param name="hint">
-        /// The hint.
-        /// </param>
-        /// <returns>
-        /// The <see cref="Task"/>.
-        /// </returns>
-        public Task<IEnumerable<TEntity>> AllMatchingAsync<TEntity>(
+        public async Task<IEnumerable<TEntity>> AllMatchingAsync<TEntity>(
             Expression<Func<TEntity, bool>> filter,
-            IEnumerable<string> includes = null,
-            string hint = "")
+            params Expression<Func<TEntity, object>>[] includes)
             where TEntity : class
         {
-            return Task.Run(() => this.AllMatching(filter, includes, hint));
+            return await this.GetQueryable(filter, 0, 0, null, false, includes).ToListAsync();
         }
 
-        /// <summary>
-        /// The all matching paged.
-        /// </summary>
-        /// <param name="filter">
-        /// The filter.
-        /// </param>
-        /// <param name="startPage">
-        /// The start page.
-        /// </param>
-        /// <param name="pageSize">
-        /// The page size.
-        /// </param>
-        /// <param name="orderBy">
-        /// The order by.
-        /// </param>
-        /// <param name="orderByAsc">
-        /// The order by asc.
-        /// </param>
-        /// <param name="includes">
-        /// The includes.
-        /// </param>
-        /// <param name="hint">
-        /// The hint.
-        /// </param>
-        /// <typeparam name="TEntity">
-        /// </typeparam>
-        /// <returns>
-        /// The <see cref="IEnumerable"/>.
-        /// </returns>
         public IEnumerable<TEntity> AllMatchingPaged<TEntity>(
             Expression<Func<TEntity, bool>> filter,
             int startPage,
             int pageSize,
             IEnumerable<string> orderBy,
             bool orderByAsc = false,
-            IEnumerable<string> includes = null,
-            string hint = "")
+            params Expression<Func<TEntity, object>>[] includes)
             where TEntity : class
         {
-            return this.GetQueryable(includes, filter, startPage, pageSize, orderBy, orderByAsc);
+            return this.GetQueryable(filter, startPage, pageSize, orderBy, orderByAsc, includes).ToList();
+        }
+
+        public virtual async Task<IEnumerable<TEntity>> AllMatchingPagedAsync<TEntity>(
+            Expression<Func<TEntity, bool>> filter,
+            int startPage,
+            int pageSize,
+            IEnumerable<string> orderBy,
+            bool orderByAsc = false,
+            params Expression<Func<TEntity, object>>[] includes)
+            where TEntity : class
+        {
+            return await this.GetQueryable(filter, startPage, pageSize, orderBy, orderByAsc, includes).ToListAsync();
         }
 
         /// <summary>
@@ -266,10 +231,18 @@ namespace RepositoryEFDotnet.Contexts.EFCore
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        public bool Any<TEntity>(Expression<Func<TEntity, bool>> filter = null, IEnumerable<string> includes = null)
+        public bool Any<TEntity>(
+            Expression<Func<TEntity, bool>> filter = null,
+            params Expression<Func<TEntity, object>>[] includes)
             where TEntity : class
         {
-            return this.GetQueryable(includes, filter).Any();
+            return this.GetQueryable(filter, 0, 0, null, false, includes).Any();
+        }
+
+        public bool Any<TEntity>(params Expression<Func<TEntity, object>>[] includes)
+            where TEntity : class
+        {
+            return this.GetQueryable(null, 0, 0, null, false, includes).Any();
         }
 
         /// <summary>
@@ -286,12 +259,18 @@ namespace RepositoryEFDotnet.Contexts.EFCore
         /// <returns>
         /// The <see cref="Task"/>.
         /// </returns>
-        public Task<bool> AnyAsync<TEntity>(
+        public async Task<bool> AnyAsync<TEntity>(
             Expression<Func<TEntity, bool>> filter = null,
-            IEnumerable<string> includes = null)
+            params Expression<Func<TEntity, object>>[] includes)
             where TEntity : class
         {
-            return this.GetQueryable(includes, filter).AnyAsync();
+            return await this.GetQueryable(filter, 0, 0, null, false, includes).AnyAsync();
+        }
+
+        public async Task<bool> AnyAsync<TEntity>(params Expression<Func<TEntity, object>>[] includes)
+            where TEntity : class
+        {
+            return await this.GetQueryable(null, 0, 0, null, false, includes).AnyAsync();
         }
 
         /// <summary>
@@ -326,17 +305,6 @@ namespace RepositoryEFDotnet.Contexts.EFCore
             return result;
         }
 
-        public async Task<bool> SaveAsync()
-        {
-            var result = await Task.Run(() => base.SaveChanges());
-            return result > 0;
-        }
-
-        public bool Save()
-        {
-            return this.SaveChanges() > 0;
-        }
-
         /// <summary>
         ///     The commit async.
         /// </summary>
@@ -346,7 +314,7 @@ namespace RepositoryEFDotnet.Contexts.EFCore
         public async Task<int> CommitAsync()
         {
             this.ChangeTracker.DetectChanges();
-            var result = await base.SaveChangesAsync();
+            var result = await this.SaveChangesAsync();
             this.Database.CurrentTransaction?.Commit();
             return result;
         }
@@ -356,8 +324,16 @@ namespace RepositoryEFDotnet.Contexts.EFCore
         /// </summary>
         public override void Dispose()
         {
-            this.Database.CurrentTransaction?.Rollback();
-            this.Database.CurrentTransaction?.Dispose();
+            if (this.Database.CurrentTransaction != null)
+            {
+                this.Database.CurrentTransaction?.Rollback();
+                this.Database.CurrentTransaction?.Dispose();
+            }
+            else
+            {
+                this.Database.CloseConnection();
+            }
+
             base.Dispose();
         }
 
@@ -373,10 +349,14 @@ namespace RepositoryEFDotnet.Contexts.EFCore
         /// <returns>
         /// The <see cref="int"/>.
         /// </returns>
-        public int ExecuteCommand(string sqlCommand, params object[] parameters)
+        public int ExecuteCommand(string sqlCommand, IEnumerable<IDataParameter> parameters = null)
         {
-            // return this.Database.ExecuteSqlCommand(sqlCommand, parameters);
-            throw new NotImplementedException();
+            if (parameters != null)
+            {
+                return this.Database.ExecuteSqlCommand(sqlCommand, parameters);
+            }
+
+            return this.Database.ExecuteSqlCommand(sqlCommand);
         }
 
         /// <summary>
@@ -391,10 +371,14 @@ namespace RepositoryEFDotnet.Contexts.EFCore
         /// <returns>
         /// The <see cref="Task"/>.
         /// </returns>
-        public Task<int> ExecuteCommandAsync(string sqlCommand, params object[] parameters)
+        public async Task<int> ExecuteCommandAsync(string sqlCommand, IEnumerable<IDataParameter> parameters = null)
         {
-            // return this.Database.ExecuteSqlCommandAsync(sqlCommand, parameters);
-            throw new NotImplementedException();
+            if (parameters != null)
+            {
+                return await this.Database.ExecuteSqlCommandAsync(sqlCommand, parameters);
+            }
+
+            return await this.Database.ExecuteSqlCommandAsync(sqlCommand);
         }
 
         /// <summary>
@@ -412,9 +396,18 @@ namespace RepositoryEFDotnet.Contexts.EFCore
         /// <returns>
         /// The <see cref="IQueryable"/>.
         /// </returns>
-        public IQueryable<TEntity> ExecuteQuery<TEntity>(string sqlQuery, params object[] parameters)
+        public IQueryable<TEntity> ExecuteQuery<TEntity>(string sqlQuery, IEnumerable<IDataParameter> parameters = null)
+            where TEntity : class
         {
-            throw new NotImplementedException("Execute Query");
+            return this.GetDbSet<TEntity>().FromSql(sqlQuery, parameters);
+        }
+
+        public async Task<IQueryable<TEntity>> ExecuteQueryAsync<TEntity>(
+            string sqlQuery,
+            IEnumerable<IDataParameter> parameters = null)
+            where TEntity : class
+        {
+            return await Task.Run(() => this.GetDbSet<TEntity>().FromSql(sqlQuery, parameters));
         }
 
         /// <summary>
@@ -433,12 +426,16 @@ namespace RepositoryEFDotnet.Contexts.EFCore
         /// </returns>
         public TEntity FirstOrDefault<TEntity>(
             Expression<Func<TEntity, bool>> filter = null,
-            IEnumerable<string> includes = null)
+            params Expression<Func<TEntity, object>>[] includes)
             where TEntity : class
         {
-            return filter != null
-                       ? this.GetDbSet<TEntity>().FirstOrDefault(filter)
-                       : this.GetDbSet<TEntity>().FirstOrDefault();
+            return this.GetQueryable(filter, 0, 0, null, false, includes).FirstOrDefault();
+        }
+
+        public TEntity FirstOrDefault<TEntity>(params Expression<Func<TEntity, object>>[] includes)
+            where TEntity : class
+        {
+            return this.GetQueryable(null, 0, 0, null, false, includes).FirstOrDefault();
         }
 
         /// <summary>
@@ -455,14 +452,18 @@ namespace RepositoryEFDotnet.Contexts.EFCore
         /// <returns>
         /// The <see cref="Task"/>.
         /// </returns>
-        public Task<TEntity> FirstOrDefaultAsync<TEntity>(
+        public async Task<TEntity> FirstOrDefaultAsync<TEntity>(
             Expression<Func<TEntity, bool>> filter = null,
-            IEnumerable<string> includes = null)
+            params Expression<Func<TEntity, object>>[] includes)
             where TEntity : class
         {
-            return filter != null
-                       ? this.GetDbSet<TEntity>().FirstOrDefaultAsync(filter)
-                       : this.GetDbSet<TEntity>().FirstOrDefaultAsync();
+            return await this.GetQueryable(filter, 0, 0, null, false, includes).FirstOrDefaultAsync();
+        }
+
+        public async Task<TEntity> FirstOrDefaultAsync<TEntity>(params Expression<Func<TEntity, object>>[] includes)
+            where TEntity : class
+        {
+            return await this.GetQueryable(null, 0, 0, null, false, includes).FirstOrDefaultAsync();
         }
 
         /// <summary>
@@ -479,10 +480,12 @@ namespace RepositoryEFDotnet.Contexts.EFCore
         /// <returns>
         /// The <see cref="TEntity"/>.
         /// </returns>
-        public TEntity Get<TEntity>(Expression<Func<TEntity, bool>> filter, IEnumerable<string> includes = null)
+        public TEntity Get<TEntity>(
+            Expression<Func<TEntity, bool>> filter,
+            params Expression<Func<TEntity, object>>[] includes)
             where TEntity : class
         {
-            return this.GetQueryable(includes, filter).FirstOrDefault();
+            return this.GetQueryable(filter, 0, 0, null, false, includes).FirstOrDefault();
         }
 
         /// <summary>
@@ -496,10 +499,10 @@ namespace RepositoryEFDotnet.Contexts.EFCore
         /// <returns>
         /// The <see cref="IEnumerable"/>.
         /// </returns>
-        public IEnumerable<TEntity> GetAll<TEntity>(IEnumerable<string> includes = null)
+        public IEnumerable<TEntity> GetAll<TEntity>(params Expression<Func<TEntity, object>>[] includes)
             where TEntity : class
         {
-            return this.GetQueryable<TEntity>(includes);
+            return this.GetQueryable(null, 0, 0, null, false, includes).ToList();
         }
 
         /// <summary>
@@ -514,10 +517,11 @@ namespace RepositoryEFDotnet.Contexts.EFCore
         /// <returns>
         /// The <see cref="Task"/>.
         /// </returns>
-        public Task<IEnumerable<TEntity>> GetAllAsync<TEntity>(IEnumerable<string> includes = null)
+        public async Task<IEnumerable<TEntity>> GetAllAsync<TEntity>(
+            params Expression<Func<TEntity, object>>[] includes)
             where TEntity : class
         {
-            return Task.Run(() => this.GetAll<TEntity>(includes));
+            return await this.GetQueryable(null, 0, 0, null, false, includes).ToListAsync();
         }
 
         /// <summary>
@@ -548,10 +552,21 @@ namespace RepositoryEFDotnet.Contexts.EFCore
             int pageSize,
             IEnumerable<string> orderBy,
             bool orderByAsc = true,
-            IEnumerable<string> includes = null)
+            params Expression<Func<TEntity, object>>[] includes)
             where TEntity : class
         {
-            return this.GetQueryable<TEntity>(includes, null, startPage, pageSize, orderBy, orderByAsc);
+            return this.GetQueryable(null, startPage, pageSize, orderBy, orderByAsc, includes).ToList();
+        }
+
+        public virtual async Task<IEnumerable<TEntity>> GetAllPagedAsync<TEntity>(
+            int startPage,
+            int pageSize,
+            IEnumerable<string> orderBy,
+            bool orderByAsc = true,
+            params Expression<Func<TEntity, object>>[] includes)
+            where TEntity : class
+        {
+            return await this.GetQueryable(null, startPage, pageSize, orderBy, orderByAsc, includes).ToListAsync();
         }
 
         /// <summary>
@@ -570,11 +585,22 @@ namespace RepositoryEFDotnet.Contexts.EFCore
         /// </returns>
         public Task<TEntity> GetAsync<TEntity>(
             Expression<Func<TEntity, bool>> filter,
-            IEnumerable<string> includes = null)
+            params Expression<Func<TEntity, object>>[] includes)
             where TEntity : class
         {
-            return this.GetQueryable(includes, filter).FirstOrDefaultAsync();
+            return this.GetQueryable(filter, 0, 0, null, false, includes).FirstOrDefaultAsync();
         }
+
+
+        //public abstract IQueryable<TEntity> GetQueryable<TEntity>(
+        //    Expression<Func<TEntity, bool>> filter = null,
+        //    int pageGo = 0,
+        //    int pageSize = 0,
+        //    IEnumerable<string> orderBy = null,
+        //    bool orderAscendent = false,
+        //    params Expression<Func<TEntity, object>>[] includes)
+        //    where TEntity : class;
+
 
         /// <summary>
         /// The get queryable.
@@ -603,29 +629,57 @@ namespace RepositoryEFDotnet.Contexts.EFCore
         /// <returns>
         /// The <see cref="IQueryable"/>.
         /// </returns>
-        public IQueryable<TEntity> GetQueryable<TEntity>(
-            IEnumerable<string> includes = null,
+        public virtual IQueryable<TEntity> GetQueryable<TEntity>(
             Expression<Func<TEntity, bool>> filter = null,
             int pageGo = 0,
             int pageSize = 0,
             IEnumerable<string> orderBy = null,
-            bool orderAscendent = false)
-            where TEntity : class
+            bool orderAscendent = false,
+            params Expression<Func<TEntity, object>>[] includes)
+        where TEntity : class
         {
-            IQueryable<TEntity> items = this.Set<TEntity>();
+            IQueryable<TEntity> items = null;
 
             if (includes != null && includes.Any())
-                foreach (var i in includes.Where(o => o != null))
-                    items = items.Include(i);
+            {
+                string include = string.Empty;
+                bool first = true;
 
-            if (filter != null) items = items.Where(filter);
+                foreach (var includeExpression in includes)
+                {
+                    //items.Include(includeExpression);
+                    include = GetPath(includeExpression);
+                    if (first)
+                    {
+                        items = this.Set<TEntity>().Include(include);
+                        first = false;
+                    }
+                    else
+                    {
+                        items = items.Include(include);
+                    }
+                }
+            }
+            else
+            {
+                items = this.Set<TEntity>();
+            }
+
+            if (filter != null)
+            {
+                items = items.Where(filter);
+            }
 
             if (pageSize > 0)
             {
-                if (orderBy != null && orderBy.Any())
+                var orderByList = orderBy == null ? new List<string>() : orderBy.ToList();
+
+                if (orderByList.Any())
                 {
-                    foreach (var i in orderBy.Where(o => !string.IsNullOrEmpty(o)))
+                    foreach (var i in orderByList.Where(o => !string.IsNullOrEmpty(o)))
+                    {
                         items = QueryableUtils.CallOrderBy(items, i, orderAscendent);
+                    }
 
                     items = items.Skip(pageSize * (pageGo - 1));
                 }
@@ -633,7 +687,45 @@ namespace RepositoryEFDotnet.Contexts.EFCore
                 items = items.Take(pageSize);
             }
 
+            //return this.cacheProvider != null ? items.Cacheable() : items;
+
+
             return items;
+        }
+
+        public static string GetPath(Expression exp)
+        {
+            switch (exp.NodeType)
+            {
+                case ExpressionType.MemberAccess:
+                    var name = GetPath(((MemberExpression)exp).Expression) ?? "";
+
+                    if (name.Length > 0)
+                        name += ".";
+
+                    return name + ((MemberExpression)exp).Member.Name;
+
+                case ExpressionType.Convert:
+                case ExpressionType.Quote:
+                    return GetPath(((UnaryExpression)exp).Operand);
+
+                case ExpressionType.Lambda:
+                    return GetPath(((LambdaExpression)exp).Body);
+                case ExpressionType.Call:
+
+                    string result = string.Empty;
+
+                    var a = exp as MethodCallExpression;
+
+                    foreach (var argument in a.Arguments)
+                    {
+                        result += $".{GetPath(argument)}";
+                    }
+
+                    return result.Trim('.');
+                default:
+                    return null;
+            }
         }
 
         /// <summary>
@@ -672,6 +764,18 @@ namespace RepositoryEFDotnet.Contexts.EFCore
             where TEntity : class
         {
             return this.GetDbSet<TEntity>().MaxAsync(filter);
+        }
+
+        public virtual TResult Min<TEntity, TResult>(Expression<Func<TEntity, TResult>> filter)
+            where TEntity : class
+        {
+            return this.GetQueryable<TEntity>().Min(filter);
+        }
+
+        public virtual async Task<TResult> MinAsync<TEntity, TResult>(Expression<Func<TEntity, TResult>> filter)
+            where TEntity : class
+        {
+            return await this.GetQueryable<TEntity>().MinAsync(filter);
         }
 
         /// <summary>
@@ -805,6 +909,29 @@ namespace RepositoryEFDotnet.Contexts.EFCore
             await Task.Run(() => this.Rollback());
         }
 
+        public bool Save()
+        {
+            return this.SaveChanges() > 0;
+        }
+
+        public async Task<bool> SaveAsync()
+        {
+            var result = await Task.Run(() => this.Save());
+            return result;
+        }
+
+        public override int SaveChanges()
+        {
+            this.ChangeTracker.DetectChanges();
+            var changedEntityNames = this.cacheProvider != null ? this.GetChangedEntityNames() : new string[0];
+
+            var result = base.SaveChanges();
+
+            this.cacheProvider?.InvalidateCacheDependencies(changedEntityNames);
+
+            return result;
+        }
+
         /// <summary>
         /// The start transaction.
         /// </summary>
@@ -822,6 +949,11 @@ namespace RepositoryEFDotnet.Contexts.EFCore
             {
                 await this.Database.BeginTransactionAsync();
             }
+        }
+
+        public void NoTracking<TEntity>(TEntity item) where TEntity : class
+        {
+            this.SetEntryState(item, EntityState.Detached);
         }
 
         #endregion
@@ -860,6 +992,23 @@ namespace RepositoryEFDotnet.Contexts.EFCore
             where TEntity : class
         {
             return this.Set<TEntity>();
+        }
+
+        private void InitCacheProvider()
+        {
+            try
+            {
+                if (this.serviceProvider != null)
+                {
+                    this.cacheProvider = this.serviceProvider.GetService<IEFCacheServiceProvider>();
+                }
+            }
+            catch (Exception ex)
+            {
+                // Don't fall over when caching not set up
+                this.Log("EFCore Caching not setup");
+                this.Log(ex.GetBaseException().Message);
+            }
         }
 
         /// <summary>
@@ -909,6 +1058,7 @@ namespace RepositoryEFDotnet.Contexts.EFCore
         {
             foreach (var item in items) this.SetEntryState(item, state);
         }
+
 
         #endregion
 

@@ -25,7 +25,7 @@ using FluentNHibernate.Cfg.Db;
 using FluentNHibernate.Cfg;
 using RepositoryEFDotnet.Core.Base;
 using Banking.Models.Customers.Mappings.NHib.Oracle;
-using RepositoryEFDotnet.Contexts.NHib;
+using Quirc.DataAccess.Context.NHib.Base;
 
 namespace Banking.Models.Customers.NHib
 {
@@ -34,29 +34,42 @@ namespace Banking.Models.Customers.NHib
 		#region CTOR
 		
 		// Use other target e.g. in memory sqlite
-	    public OracleCustomerContext(Configuration config)
+	    public OracleCustomerContext(Configuration config) : base(config)
 	    {
-			SetConfig(config);
         }
 		
 		// Use db as target
-	    public OracleCustomerContext(OracleDataClientConfiguration config)
+	    public OracleCustomerContext(OracleDataClientConfiguration config) : base(config)
 	    {
             config.IsolationLevel(IsolationLevel.ReadCommitted);
-            SetConfig(config);
+	    }
+		
+		// Use external factory
+	    public OracleCustomerContext(ISessionFactory factory) : base(factory)
+	    {
+	    }
+		
+		// Use persistence configurer
+	    public OracleCustomerContext(IPersistenceConfigurer config) : base(config)
+	    {
+	    }
+		
+		// Use Fluent Configuration
+	    public OracleCustomerContext(FluentConfiguration config) : base(config)
+	    {
 	    }
 		
 		#endregion
 		
 	    protected override void ConfigureMappings(MappingConfiguration config)
 	    {
-			config.FluentMappings.Add(typeof(BookMap));
-			config.FluentMappings.Add(typeof(CountryMap));
-			config.FluentMappings.Add(typeof(CustomerMap));
-			config.FluentMappings.Add(typeof(OrderMap));
-			config.FluentMappings.Add(typeof(OrderDetailsMap));
-			config.FluentMappings.Add(typeof(ProductMap));
-			config.FluentMappings.Add(typeof(SoftwareMap));
+			config.FluentMappings.Add(typeof(CustomerContextBookMap));
+			config.FluentMappings.Add(typeof(CustomerContextCountryMap));
+			config.FluentMappings.Add(typeof(CustomerContextCustomerMap));
+			config.FluentMappings.Add(typeof(CustomerContextOrderMap));
+			config.FluentMappings.Add(typeof(CustomerContextOrderDetailsMap));
+			config.FluentMappings.Add(typeof(CustomerContextProductMap));
+			config.FluentMappings.Add(typeof(CustomerContextSoftwareMap));
         }
 	}
 }

@@ -103,24 +103,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repository\Database\RepositoryDbNHibernateMySqlUnitTests.cs" />
-    <Compile Include="Repository\Database\RepositoryDbNHibernateOracleUnitTests.cs" />
-    <Compile Include="Repository\Database\RepositoryDbNHibernateSqlServerUnitTests.cs" />
-    <Compile Include="Repository\In-Memory\RepositoryNHibernateInMemoryMySqlUnitTests.cs" />
-    <Compile Include="Repository\In-Memory\RepositoryNHibernateInMemoryOracleUnitTests.cs" />
-    <Compile Include="Repository\In-Memory\RepositoryNHibernateInMemorySqlServerUnitTests.cs" />
-    <Compile Include="UnitOfWork\Database\UowNHibernateDbMySqlUnitTests.cs" />
-    <Compile Include="UnitOfWork\Database\UowNHibernateDbOracleUnitTests.cs" />
-    <Compile Include="UnitOfWork\Database\UowNHibernateDbSqlServerUnitTests.cs" />
-    <Compile Include="UnitOfWork\In-Memory\UowNHibernateInMemoryOracleUnitTests.cs" />
-    <Compile Include="UnitOfWork\In-Memory\UowNHibernateInMemoryMySqlUnitTests.cs" />
-    <Compile Include="UnitOfWork\In-Memory\UowNHibernateInMemorySqlServerUnitTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Repository\Database\" />
+    <Folder Include="Repository\In-Memory\" />
+    <Folder Include="UnitOfWork\Database\" />
+    <Folder Include="UnitOfWork\In-Memory\" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Core\RepositoryEFDotnet.Core.csproj">
       <Project>{0333e000-6aaf-4e18-8747-2299a8231ab1}</Project>

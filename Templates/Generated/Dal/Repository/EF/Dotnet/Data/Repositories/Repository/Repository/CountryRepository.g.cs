@@ -21,6 +21,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
 using Banking.Models.Interfaces;
 using Banking.Models.Entity;
 using RepositoryEFDotnet.Core.Base;
@@ -30,7 +32,7 @@ namespace Banking.Models.Repository
 	/// <summary>
 	/// The CountryRepository class responsible for database functions in the Country table
 	/// </summary>
-	public partial class CountryRepository : UowRepository<Country> , ICountryRepository
+	public partial class CountryRepository : UowRepository<ICountry> , ICountryRepository
 	{		
 		#region CTOR
 		
@@ -42,6 +44,11 @@ namespace Banking.Models.Repository
 		{
 		}
 		
+		/// <summary>
+        /// The constructor for CountryRepository
+        /// </summary>
+		public CountryRepository() {}
+		
 		#endregion
 		
 		#region Load
@@ -50,19 +57,47 @@ namespace Banking.Models.Repository
         /// Load Country entities from the database using the composite primary keys
         /// </summary
         /// <param name="countryId">int</param>
+		/// <param name="includes">params Expression<Func<ICountry, object>>[]</param>
         /// <returns>ICountry</returns>
-		public virtual ICountry LoadByCountryId(int countryId)
+		public virtual ICountry LoadByCountryId(int countryId, params Expression<Func<ICountry, object>>[] includes)
 		{
-			return this.UnitOfWork.FirstOrDefault<Country>(o => o.CountryId == countryId);
+			var expr = this.Convert(includes);
+			return this.UnitOfWork.FirstOrDefault<Country>(o => o.CountryId == countryId, expr);
+		}
+		
+        /// <summary>
+        /// Load Country entities async from the database using the composite primary keys
+        /// </summary
+        /// <param name="countryId">int</param>
+		/// <param name="includes">params Expression<Func<ICountry, object>>[]</param>
+        /// <returns>ICountry</returns>
+		public virtual async Task<ICountry> LoadByCountryIdAsync(int countryId, params Expression<Func<ICountry, object>>[] includes)
+		{
+			var expr = this.Convert(includes);
+			return await this.UnitOfWork.FirstOrDefaultAsync<Country>(o => o.CountryId == countryId, expr);
 		}
 
         /// <summary>
         /// Load all Country entities from the database.
         /// </summary>
+		/// <param name="includes">params Expression<Func<ICountry, object>>[]</param>
         /// <returns>IList<ICountry></returns>
-		public virtual IList<ICountry> LoadAll()
+		public virtual IList<ICountry> LoadAll(params Expression<Func<ICountry, object>>[] includes)
 		{
-			return this.UnitOfWork.GetAll<Country>().ToList<ICountry>();
+			var expr = this.Convert(includes);
+			return this.UnitOfWork.GetAll<Country>(expr).ToList<ICountry>();
+		}
+		
+        /// <summary>
+        /// Load all Country entities async from the database.
+        /// </summary>
+		/// <param name="includes">params Expression<Func<ICountry, object>>[]</param>
+        /// <returns>IList<ICountry></returns>
+		public virtual async Task<IList<ICountry>> LoadAllAsync(params Expression<Func<ICountry, object>>[] includes)
+		{
+			var expr = this.Convert(includes);
+			var result = await this.UnitOfWork.GetAllAsync<Country>(expr);
+			return result.ToList<ICountry>();
 		}
 		
 		#endregion
@@ -74,16 +109,40 @@ namespace Banking.Models.Repository
         /// </summary>
         /// <param name="countryName">string</param>
 		/// <param name="caseSensitive">bool</param>
+		/// <param name="includes">params Expression<Func<ICountry, object>>[]</param>
         /// <returns>IList<ICountry></returns>
-		public virtual IList<ICountry> SearchByCountryName(string countryName, bool caseSensitive = false)
+		public virtual IList<ICountry> SearchByCountryName(string countryName, bool caseSensitive = false, params Expression<Func<ICountry, object>>[] includes)
 		{		
+			var expr = this.Convert(includes);
 			if(caseSensitive) 
 			{
-				return this.UnitOfWork.AllMatching<Country>(o => o.CountryName.Contains(countryName)).ToList<ICountry>();
+				return this.UnitOfWork.AllMatching<Country>(o => o.CountryName.Contains(countryName), expr).ToList<ICountry>();
 			}
 			else
 			{
-				return this.UnitOfWork.AllMatching<Country>(o => o.CountryName.ToLower().Contains(countryName.ToLower())).ToList<ICountry>();
+				return this.UnitOfWork.AllMatching<Country>(o => o.CountryName.ToLower().Contains(countryName.ToLower()), expr).ToList<ICountry>();
+			}
+		}
+		
+        /// <summary>
+        /// Search for Country entities async in the database by CountryName
+        /// </summary>
+        /// <param name="countryName">string</param>
+		/// <param name="caseSensitive">bool</param>
+		/// <param name="includes">params Expression<Func<ICountry, object>>[]</param>
+        /// <returns>IList<ICountry></returns>
+		public virtual async Task<IList<ICountry>> SearchByCountryNameAsync(string countryName, bool caseSensitive = false, params Expression<Func<ICountry, object>>[] includes)
+		{		
+			var expr = this.Convert(includes);
+			if(caseSensitive) 
+			{
+				var result = await this.UnitOfWork.AllMatchingAsync<Country>(o => o.CountryName.Contains(countryName), expr);
+				return result.ToList<ICountry>();
+			}
+			else
+			{
+				var result = await this.UnitOfWork.AllMatchingAsync<Country>(o => o.CountryName.ToLower().Contains(countryName.ToLower()), expr);
+				return result.ToList<ICountry>();
 			}
 		}
 
@@ -92,15 +151,33 @@ namespace Banking.Models.Repository
 		#region Modifiers
 		
         /// <summary>
-        /// Save the Country entity to the database.
+        /// Add the Country entity to the database.
         /// </summary>
         /// <param name="entity">ICountry</param>
         /// <returns>bool</returns>
-		public virtual bool Save(ICountry entity)
+		public virtual bool Add(ICountry entity)
 		{
 			var entityToSave = new Country(entity, false);
 			this.UnitOfWork.Add(entityToSave);
 			bool result = this.UnitOfWork.Save();
+			
+			// Populate passed in entity with newly saved values
+			entity.CountryId = entityToSave.CountryId;
+			entity.CountryName = entityToSave.CountryName;
+			
+			return result;
+		}
+		
+        /// <summary>
+        /// Add the Country entity async to the database.
+        /// </summary>
+        /// <param name="entity">ICountry</param>
+        /// <returns>bool</returns>
+		public virtual async Task<bool> AddAsync(ICountry entity)
+		{
+			var entityToSave = new Country(entity, false);
+			await this.UnitOfWork.AddAsync(entityToSave);
+			bool result = await this.UnitOfWork.SaveAsync();
 			
 			// Populate passed in entity with newly saved values
 			entity.CountryId = entityToSave.CountryId;
@@ -137,6 +214,33 @@ namespace Banking.Models.Repository
 		}
 		
         /// <summary>
+        /// Update the Country entity async in the database if any values have changed
+        /// </summary>
+        /// <param name="entity">ICountry</param>
+        /// <returns>bool</returns>
+		public virtual async Task<bool> UpdateAsync(ICountry entity)
+		{
+			bool doUpdate = false;
+			var entityToUpdate = await this.UnitOfWork.FirstOrDefaultAsync<Country>(o =>  o.CountryId == entity.CountryId );
+			
+			if (entityToUpdate == null)
+			{
+				throw new Exception("The Country entity does not exist");
+			}
+			
+			// Optimisation: Flag if any field has changed
+			if (entityToUpdate.CountryName != entity.CountryName) { entityToUpdate.CountryName = entity.CountryName;doUpdate = true; }
+
+			// Optimisation: Only execute update if a field has changed
+			if (doUpdate)
+			{
+				return await this.UnitOfWork.ModifyAsync(entityToUpdate);
+			}
+			
+			return false;
+		}
+		
+        /// <summary>
         /// Delete the Country entity from the database
         /// </summary>
         /// <param name="entity">ICountry</param>
@@ -151,6 +255,23 @@ namespace Banking.Models.Repository
 			}
 			
 			return this.UnitOfWork.Remove(entityToDelete);
+		}
+		
+        /// <summary>
+        /// Delete the Country entity async from the database
+        /// </summary>
+        /// <param name="entity">ICountry</param>
+        /// <returns>bool</returns>
+		public virtual async Task<bool> DeleteAsync(ICountry entity)
+		{		
+			var entityToDelete = await this.UnitOfWork.FirstOrDefaultAsync<Country>(o =>  o.CountryId == entity.CountryId );
+			
+			if(entityToDelete == null)
+			{
+				throw new Exception("The Country entity does not exist");
+			}
+			
+			return await this.UnitOfWork.RemoveAsync(entityToDelete);
 		}
 
 		/// <summary>
@@ -169,6 +290,62 @@ namespace Banking.Models.Repository
 			
 			return this.UnitOfWork.Remove(entityToDelete);
 		}
+		
+		/// <summary>
+        /// Delete the Country entity async from the database
+        /// </summary>
+        /// <param name="countryId">int</param>
+        /// <returns>bool</returns>
+		public virtual async Task<bool> DeleteAsync( int countryId)
+		{
+			var entityToDelete = await this.UnitOfWork.FirstOrDefaultAsync<Country>(o =>  o.CountryId == countryId );
+			
+			if(entityToDelete == null)
+			{
+				throw new Exception("The Country entity does not exist");
+			}
+			
+			return await this.UnitOfWork.RemoveAsync(entityToDelete);
+		}
+		
+		#endregion
+		
+		#region Aggregates
+		
+		public virtual TResult Max<TResult>(Expression<Func<ICountry, TResult>> maxExpression)
+		{
+			return this.UnitOfWork.Max(Expression.Lambda<Func<Country, TResult>>(maxExpression.Body, maxExpression.Parameters));
+		}
+		
+		public virtual async Task<TResult> MaxAsync<TResult>(Expression<Func<ICountry, TResult>> maxExpression)
+		{
+			return await this.UnitOfWork.MaxAsync(Expression.Lambda<Func<Country, TResult>>(maxExpression.Body, maxExpression.Parameters));
+		}
+		
+		public virtual TResult Min<TResult>(Expression<Func<ICountry, TResult>> minExpression)
+		{
+			return this.UnitOfWork.Min(Expression.Lambda<Func<Country, TResult>>(minExpression.Body, minExpression.Parameters));
+		}
+		
+		public virtual async Task<TResult> MinAsync<TResult>(Expression<Func<ICountry, TResult>> minExpression)
+		{
+			return await this.UnitOfWork.MinAsync(Expression.Lambda<Func<Country, TResult>>(minExpression.Body, minExpression.Parameters));
+		}
+		
+		#endregion
+		
+		#region Helpers
+		
+	    protected virtual Expression<Func<Country, object>>[] Convert(params Expression<Func<ICountry, object>>[] includes)
+	    {
+	        var expr = new List<Expression<Func<Country, object>>>();
+	        foreach (var exprItem in includes)
+	        {
+	            expr.Add(Expression.Lambda<Func<Country, object>>(exprItem.Body, exprItem.Parameters));
+	        }
+
+	        return expr.ToArray();
+	    }
 		
 		#endregion
 	}

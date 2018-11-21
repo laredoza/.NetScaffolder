@@ -20,6 +20,8 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
 using Banking.Models.Interfaces;
 using RepositoryEFDotnet.Core.Base;
 
@@ -36,14 +38,31 @@ namespace Banking.Models.Interfaces
         /// Load Software entities from the database using the composite primary keys
         /// </summary
         /// <param name="productId">int</param>
+		/// <param name="includes">params Expression<Func<ISoftware, object>>[]</param>
         /// <returns>ISoftware</returns>
-		ISoftware LoadByProductId(int productId);
+		ISoftware LoadByProductId(int productId, params Expression<Func<ISoftware, object>>[] includes);
+		
+        /// <summary>
+        /// Load Software entities async from the database using the composite primary keys
+        /// </summary
+        /// <param name="productId">int</param>
+		/// <param name="includes">params Expression<Func<ISoftware, object>>[]</param>
+        /// <returns>ISoftware</returns>
+		Task<ISoftware> LoadByProductIdAsync(int productId, params Expression<Func<ISoftware, object>>[] includes);
 
         /// <summary>
         /// Load all Software entities from the database.
         /// </summary>
+		/// <param name="includes">params Expression<Func<ISoftware, object>>[]</param>
         /// <returns>IList<ISoftware></returns>
-		IList<ISoftware> LoadAll();
+		IList<ISoftware> LoadAll(params Expression<Func<ISoftware, object>>[] includes);
+		
+        /// <summary>
+        /// Load all Software entities async from the database.
+        /// </summary>
+		/// <param name="includes">params Expression<Func<ISoftware, object>>[]</param>
+        /// <returns>IList<ISoftware></returns>
+		Task<IList<ISoftware>> LoadAllAsync(params Expression<Func<ISoftware, object>>[] includes);
 		
 		#endregion
 
@@ -53,20 +72,37 @@ namespace Banking.Models.Interfaces
         /// Search for Software entities in the database by LicenseCode
         /// </summary>
         /// <param name="licenseCode">string</param>
-		/// <param name="caseSensitive">bool</param>
+		/// <param name="caseSensitive">bool</param
+		/// <param name="includes">params Expression<Func<ISoftware, object>>[]</param>
         /// <returns>IList<ISoftware></returns>
-		IList<ISoftware> SearchByLicenseCode(string licenseCode, bool caseSensitive = false);
+		IList<ISoftware> SearchByLicenseCode(string licenseCode, bool caseSensitive = false, params Expression<Func<ISoftware, object>>[] includes);
+		
+        /// <summary>
+        /// Search for Software entities async in the database by LicenseCode
+        /// </summary>
+        /// <param name="licenseCode">string</param>
+		/// <param name="caseSensitive">bool</param
+		/// <param name="includes">params Expression<Func<ISoftware, object>>[]</param>
+        /// <returns>IList<ISoftware></returns>
+		Task<IList<ISoftware>> SearchByLicenseCodeAsync(string licenseCode, bool caseSensitive = false, params Expression<Func<ISoftware, object>>[] includes);
 
 		#endregion
 		
 		#region Modifiers
 		
         /// <summary>
-        /// Save the Software entity to the database.
+        /// Add the Software entity to the database.
         /// </summary>
         /// <param name="entity">ISoftware</param>
         /// <returns>bool</returns>
-		bool Save(ISoftware entity);
+		bool Add(ISoftware entity);
+		
+        /// <summary>
+        /// Add the Software entity async to the database.
+        /// </summary>
+        /// <param name="entity">ISoftware</param>
+        /// <returns>bool</returns>
+		Task<bool> AddAsync(ISoftware entity);
 
         /// <summary>
         /// Update the Software entity in the database if any values have changed
@@ -76,11 +112,25 @@ namespace Banking.Models.Interfaces
 		bool Update(ISoftware entity);
 		
         /// <summary>
+        /// Update the Software entity async in the database if any values have changed
+        /// </summary>
+        /// <param name="entity">ISoftware</param>
+        /// <returns>bool</returns>
+		Task<bool> UpdateAsync(ISoftware entity);
+		
+        /// <summary>
         /// Delete the Software entity from the database
         /// </summary>
         /// <param name="entity">ISoftware</param>
         /// <returns>bool</returns>
 		bool Delete(ISoftware entity);
+		
+        /// <summary>
+        /// Delete the Software entity async from the database
+        /// </summary>
+        /// <param name="entity">ISoftware</param>
+        /// <returns>bool</returns>
+		Task<bool> DeleteAsync(ISoftware entity);
 
 		/// <summary>
         /// Delete the Software entity from the database
@@ -89,6 +139,25 @@ namespace Banking.Models.Interfaces
         /// <returns>bool</returns>
 		bool Delete( int productId);
 
+		/// <summary>
+        /// Delete the Software entity async from the database
+        /// </summary>
+        /// <param name="productId">int</param>
+        /// <returns>bool</returns>
+		Task<bool> DeleteAsync( int productId);
+		
+		#endregion
+		
+		#region Aggregates
+		
+		TResult Max<TResult>(Expression<Func<ISoftware, TResult>> maxExpression);
+		
+		Task<TResult> MaxAsync<TResult>(Expression<Func<ISoftware, TResult>> maxExpression);
+		
+		TResult Min<TResult>(Expression<Func<ISoftware, TResult>> maxExpression);
+		
+		Task<TResult> MinAsync<TResult>(Expression<Func<ISoftware, TResult>> maxExpression);
+		
 		#endregion
 	}
 }

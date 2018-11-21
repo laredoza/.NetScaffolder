@@ -26,7 +26,7 @@ using Banking.Models.Entity;
 using RepositoryEFDotnet.Core.Base;
 using Banking.Models.Context.Mappings.EF.SqlServer;
 using System.Data.Common;
-using RepositoryEFDotnet.Contexts.EF;
+using Quirc.DataAccess.Context.EF.Base;
 
 namespace Banking.Models.Context.EF
 {
@@ -57,15 +57,15 @@ namespace Banking.Models.Context.EF
 			
 			#region Mappings
 			
-			modelBuilder.Configurations.Add(new BankAccountMap());
-			modelBuilder.Configurations.Add(new BankTransfersMap());
-			modelBuilder.Configurations.Add(new BookMap());
-			modelBuilder.Configurations.Add(new CountryMap());
-			modelBuilder.Configurations.Add(new CustomerMap());
-			modelBuilder.Configurations.Add(new OrderMap());
-			modelBuilder.Configurations.Add(new OrderDetailsMap());
-			modelBuilder.Configurations.Add(new ProductMap());
-			modelBuilder.Configurations.Add(new SoftwareMap());
+			modelBuilder.Configurations.Add(new FullContextBankAccountMap());
+			modelBuilder.Configurations.Add(new FullContextBankTransfersMap());
+			modelBuilder.Configurations.Add(new FullContextBookMap());
+			modelBuilder.Configurations.Add(new FullContextCountryMap());
+			modelBuilder.Configurations.Add(new FullContextCustomerMap());
+			modelBuilder.Configurations.Add(new FullContextOrderMap());
+			modelBuilder.Configurations.Add(new FullContextOrderDetailsMap());
+			modelBuilder.Configurations.Add(new FullContextProductMap());
+			modelBuilder.Configurations.Add(new FullContextSoftwareMap());
 
 			#endregion
 			

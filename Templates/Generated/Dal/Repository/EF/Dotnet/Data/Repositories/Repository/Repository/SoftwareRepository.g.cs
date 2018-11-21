@@ -21,6 +21,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
 using Banking.Models.Interfaces;
 using Banking.Models.Entity;
 using RepositoryEFDotnet.Core.Base;
@@ -30,7 +32,7 @@ namespace Banking.Models.Repository
 	/// <summary>
 	/// The SoftwareRepository class responsible for database functions in the Software table
 	/// </summary>
-	public partial class SoftwareRepository : UowRepository<Software> , ISoftwareRepository
+	public partial class SoftwareRepository : UowRepository<ISoftware> , ISoftwareRepository
 	{		
 		#region CTOR
 		
@@ -42,6 +44,11 @@ namespace Banking.Models.Repository
 		{
 		}
 		
+		/// <summary>
+        /// The constructor for SoftwareRepository
+        /// </summary>
+		public SoftwareRepository() {}
+		
 		#endregion
 		
 		#region Load
@@ -50,19 +57,47 @@ namespace Banking.Models.Repository
         /// Load Software entities from the database using the composite primary keys
         /// </summary
         /// <param name="productId">int</param>
+		/// <param name="includes">params Expression<Func<ISoftware, object>>[]</param>
         /// <returns>ISoftware</returns>
-		public virtual ISoftware LoadByProductId(int productId)
+		public virtual ISoftware LoadByProductId(int productId, params Expression<Func<ISoftware, object>>[] includes)
 		{
-			return this.UnitOfWork.FirstOrDefault<Software>(o => o.ProductId == productId);
+			var expr = this.Convert(includes);
+			return this.UnitOfWork.FirstOrDefault<Software>(o => o.ProductId == productId, expr);
+		}
+		
+        /// <summary>
+        /// Load Software entities async from the database using the composite primary keys
+        /// </summary
+        /// <param name="productId">int</param>
+		/// <param name="includes">params Expression<Func<ISoftware, object>>[]</param>
+        /// <returns>ISoftware</returns>
+		public virtual async Task<ISoftware> LoadByProductIdAsync(int productId, params Expression<Func<ISoftware, object>>[] includes)
+		{
+			var expr = this.Convert(includes);
+			return await this.UnitOfWork.FirstOrDefaultAsync<Software>(o => o.ProductId == productId, expr);
 		}
 
         /// <summary>
         /// Load all Software entities from the database.
         /// </summary>
+		/// <param name="includes">params Expression<Func<ISoftware, object>>[]</param>
         /// <returns>IList<ISoftware></returns>
-		public virtual IList<ISoftware> LoadAll()
+		public virtual IList<ISoftware> LoadAll(params Expression<Func<ISoftware, object>>[] includes)
 		{
-			return this.UnitOfWork.GetAll<Software>().ToList<ISoftware>();
+			var expr = this.Convert(includes);
+			return this.UnitOfWork.GetAll<Software>(expr).ToList<ISoftware>();
+		}
+		
+        /// <summary>
+        /// Load all Software entities async from the database.
+        /// </summary>
+		/// <param name="includes">params Expression<Func<ISoftware, object>>[]</param>
+        /// <returns>IList<ISoftware></returns>
+		public virtual async Task<IList<ISoftware>> LoadAllAsync(params Expression<Func<ISoftware, object>>[] includes)
+		{
+			var expr = this.Convert(includes);
+			var result = await this.UnitOfWork.GetAllAsync<Software>(expr);
+			return result.ToList<ISoftware>();
 		}
 		
 		#endregion
@@ -74,16 +109,40 @@ namespace Banking.Models.Repository
         /// </summary>
         /// <param name="licenseCode">string</param>
 		/// <param name="caseSensitive">bool</param>
+		/// <param name="includes">params Expression<Func<ISoftware, object>>[]</param>
         /// <returns>IList<ISoftware></returns>
-		public virtual IList<ISoftware> SearchByLicenseCode(string licenseCode, bool caseSensitive = false)
+		public virtual IList<ISoftware> SearchByLicenseCode(string licenseCode, bool caseSensitive = false, params Expression<Func<ISoftware, object>>[] includes)
 		{		
+			var expr = this.Convert(includes);
 			if(caseSensitive) 
 			{
-				return this.UnitOfWork.AllMatching<Software>(o => o.LicenseCode.Contains(licenseCode)).ToList<ISoftware>();
+				return this.UnitOfWork.AllMatching<Software>(o => o.LicenseCode.Contains(licenseCode), expr).ToList<ISoftware>();
 			}
 			else
 			{
-				return this.UnitOfWork.AllMatching<Software>(o => o.LicenseCode.ToLower().Contains(licenseCode.ToLower())).ToList<ISoftware>();
+				return this.UnitOfWork.AllMatching<Software>(o => o.LicenseCode.ToLower().Contains(licenseCode.ToLower()), expr).ToList<ISoftware>();
+			}
+		}
+		
+        /// <summary>
+        /// Search for Software entities async in the database by LicenseCode
+        /// </summary>
+        /// <param name="licenseCode">string</param>
+		/// <param name="caseSensitive">bool</param>
+		/// <param name="includes">params Expression<Func<ISoftware, object>>[]</param>
+        /// <returns>IList<ISoftware></returns>
+		public virtual async Task<IList<ISoftware>> SearchByLicenseCodeAsync(string licenseCode, bool caseSensitive = false, params Expression<Func<ISoftware, object>>[] includes)
+		{		
+			var expr = this.Convert(includes);
+			if(caseSensitive) 
+			{
+				var result = await this.UnitOfWork.AllMatchingAsync<Software>(o => o.LicenseCode.Contains(licenseCode), expr);
+				return result.ToList<ISoftware>();
+			}
+			else
+			{
+				var result = await this.UnitOfWork.AllMatchingAsync<Software>(o => o.LicenseCode.ToLower().Contains(licenseCode.ToLower()), expr);
+				return result.ToList<ISoftware>();
 			}
 		}
 
@@ -92,15 +151,33 @@ namespace Banking.Models.Repository
 		#region Modifiers
 		
         /// <summary>
-        /// Save the Software entity to the database.
+        /// Add the Software entity to the database.
         /// </summary>
         /// <param name="entity">ISoftware</param>
         /// <returns>bool</returns>
-		public virtual bool Save(ISoftware entity)
+		public virtual bool Add(ISoftware entity)
 		{
 			var entityToSave = new Software(entity, false);
 			this.UnitOfWork.Add(entityToSave);
 			bool result = this.UnitOfWork.Save();
+			
+			// Populate passed in entity with newly saved values
+			entity.ProductId = entityToSave.ProductId;
+			entity.LicenseCode = entityToSave.LicenseCode;
+			
+			return result;
+		}
+		
+        /// <summary>
+        /// Add the Software entity async to the database.
+        /// </summary>
+        /// <param name="entity">ISoftware</param>
+        /// <returns>bool</returns>
+		public virtual async Task<bool> AddAsync(ISoftware entity)
+		{
+			var entityToSave = new Software(entity, false);
+			await this.UnitOfWork.AddAsync(entityToSave);
+			bool result = await this.UnitOfWork.SaveAsync();
 			
 			// Populate passed in entity with newly saved values
 			entity.ProductId = entityToSave.ProductId;
@@ -137,6 +214,33 @@ namespace Banking.Models.Repository
 		}
 		
         /// <summary>
+        /// Update the Software entity async in the database if any values have changed
+        /// </summary>
+        /// <param name="entity">ISoftware</param>
+        /// <returns>bool</returns>
+		public virtual async Task<bool> UpdateAsync(ISoftware entity)
+		{
+			bool doUpdate = false;
+			var entityToUpdate = await this.UnitOfWork.FirstOrDefaultAsync<Software>(o =>  o.ProductId == entity.ProductId );
+			
+			if (entityToUpdate == null)
+			{
+				throw new Exception("The Software entity does not exist");
+			}
+			
+			// Optimisation: Flag if any field has changed
+			if (entityToUpdate.LicenseCode != entity.LicenseCode) { entityToUpdate.LicenseCode = entity.LicenseCode;doUpdate = true; }
+
+			// Optimisation: Only execute update if a field has changed
+			if (doUpdate)
+			{
+				return await this.UnitOfWork.ModifyAsync(entityToUpdate);
+			}
+			
+			return false;
+		}
+		
+        /// <summary>
         /// Delete the Software entity from the database
         /// </summary>
         /// <param name="entity">ISoftware</param>
@@ -151,6 +255,23 @@ namespace Banking.Models.Repository
 			}
 			
 			return this.UnitOfWork.Remove(entityToDelete);
+		}
+		
+        /// <summary>
+        /// Delete the Software entity async from the database
+        /// </summary>
+        /// <param name="entity">ISoftware</param>
+        /// <returns>bool</returns>
+		public virtual async Task<bool> DeleteAsync(ISoftware entity)
+		{		
+			var entityToDelete = await this.UnitOfWork.FirstOrDefaultAsync<Software>(o =>  o.ProductId == entity.ProductId );
+			
+			if(entityToDelete == null)
+			{
+				throw new Exception("The Software entity does not exist");
+			}
+			
+			return await this.UnitOfWork.RemoveAsync(entityToDelete);
 		}
 
 		/// <summary>
@@ -169,6 +290,62 @@ namespace Banking.Models.Repository
 			
 			return this.UnitOfWork.Remove(entityToDelete);
 		}
+		
+		/// <summary>
+        /// Delete the Software entity async from the database
+        /// </summary>
+        /// <param name="productId">int</param>
+        /// <returns>bool</returns>
+		public virtual async Task<bool> DeleteAsync( int productId)
+		{
+			var entityToDelete = await this.UnitOfWork.FirstOrDefaultAsync<Software>(o =>  o.ProductId == productId );
+			
+			if(entityToDelete == null)
+			{
+				throw new Exception("The Software entity does not exist");
+			}
+			
+			return await this.UnitOfWork.RemoveAsync(entityToDelete);
+		}
+		
+		#endregion
+		
+		#region Aggregates
+		
+		public virtual TResult Max<TResult>(Expression<Func<ISoftware, TResult>> maxExpression)
+		{
+			return this.UnitOfWork.Max(Expression.Lambda<Func<Software, TResult>>(maxExpression.Body, maxExpression.Parameters));
+		}
+		
+		public virtual async Task<TResult> MaxAsync<TResult>(Expression<Func<ISoftware, TResult>> maxExpression)
+		{
+			return await this.UnitOfWork.MaxAsync(Expression.Lambda<Func<Software, TResult>>(maxExpression.Body, maxExpression.Parameters));
+		}
+		
+		public virtual TResult Min<TResult>(Expression<Func<ISoftware, TResult>> minExpression)
+		{
+			return this.UnitOfWork.Min(Expression.Lambda<Func<Software, TResult>>(minExpression.Body, minExpression.Parameters));
+		}
+		
+		public virtual async Task<TResult> MinAsync<TResult>(Expression<Func<ISoftware, TResult>> minExpression)
+		{
+			return await this.UnitOfWork.MinAsync(Expression.Lambda<Func<Software, TResult>>(minExpression.Body, minExpression.Parameters));
+		}
+		
+		#endregion
+		
+		#region Helpers
+		
+	    protected virtual Expression<Func<Software, object>>[] Convert(params Expression<Func<ISoftware, object>>[] includes)
+	    {
+	        var expr = new List<Expression<Func<Software, object>>>();
+	        foreach (var exprItem in includes)
+	        {
+	            expr.Add(Expression.Lambda<Func<Software, object>>(exprItem.Body, exprItem.Parameters));
+	        }
+
+	        return expr.ToArray();
+	    }
 		
 		#endregion
 	}

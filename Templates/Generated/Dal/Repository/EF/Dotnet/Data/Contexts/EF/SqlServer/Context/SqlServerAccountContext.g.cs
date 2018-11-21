@@ -26,7 +26,7 @@ using Banking.Models.Entity;
 using RepositoryEFDotnet.Core.Base;
 using Banking.Models.Accounts.Mappings.EF.SqlServer;
 using System.Data.Common;
-using RepositoryEFDotnet.Contexts.EF;
+using Quirc.DataAccess.Context.EF.Base;
 
 namespace Banking.Models.Accounts.EF
 {
@@ -57,8 +57,8 @@ namespace Banking.Models.Accounts.EF
 			
 			#region Mappings
 			
-			modelBuilder.Configurations.Add(new BankAccountMap());
-			modelBuilder.Configurations.Add(new BankTransfersMap());
+			modelBuilder.Configurations.Add(new AccountContextBankAccountMap());
+			modelBuilder.Configurations.Add(new AccountContextBankTransfersMap());
 
 			#endregion
 			

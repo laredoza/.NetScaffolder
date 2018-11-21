@@ -25,7 +25,7 @@ using FluentNHibernate.Cfg.Db;
 using FluentNHibernate.Cfg;
 using RepositoryEFDotnet.Core.Base;
 using Banking.Models.Accounts.Mappings.NHib.Oracle;
-using RepositoryEFDotnet.Contexts.NHib;
+using Quirc.DataAccess.Context.NHib.Base;
 
 namespace Banking.Models.Accounts.NHib
 {
@@ -34,24 +34,37 @@ namespace Banking.Models.Accounts.NHib
 		#region CTOR
 		
 		// Use other target e.g. in memory sqlite
-	    public OracleAccountContext(Configuration config)
+	    public OracleAccountContext(Configuration config) : base(config)
 	    {
-			SetConfig(config);
         }
 		
 		// Use db as target
-	    public OracleAccountContext(OracleDataClientConfiguration config)
+	    public OracleAccountContext(OracleDataClientConfiguration config) : base(config)
 	    {
             config.IsolationLevel(IsolationLevel.ReadCommitted);
-            SetConfig(config);
+	    }
+		
+		// Use external factory
+	    public OracleAccountContext(ISessionFactory factory) : base(factory)
+	    {
+	    }
+		
+		// Use persistence configurer
+	    public OracleAccountContext(IPersistenceConfigurer config) : base(config)
+	    {
+	    }
+		
+		// Use Fluent Configuration
+	    public OracleAccountContext(FluentConfiguration config) : base(config)
+	    {
 	    }
 		
 		#endregion
 		
 	    protected override void ConfigureMappings(MappingConfiguration config)
 	    {
-			config.FluentMappings.Add(typeof(BankAccountMap));
-			config.FluentMappings.Add(typeof(BankTransfersMap));
+			config.FluentMappings.Add(typeof(AccountContextBankAccountMap));
+			config.FluentMappings.Add(typeof(AccountContextBankTransfersMap));
         }
 	}
 }

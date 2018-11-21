@@ -7,6 +7,8 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System.Data;
+
 namespace RepositoryEFDotnet.Core.Base
 {
     #region Using
@@ -30,24 +32,27 @@ namespace RepositoryEFDotnet.Core.Base
         #region Public Methods And Operators
 
         /// <summary>
-        ///     The add.
+        /// The add.
         /// </summary>
         /// <param name="item">
-        ///     The item.
+        /// The item.
         /// </param>
         /// <typeparam name="TEntity">
         /// </typeparam>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
         bool Add<TEntity>(TEntity item)
             where TEntity : class;
 
         /// <summary>
-        ///     The add async.
+        /// The add async.
         /// </summary>
         /// <param name="item">
-        ///     The item.
+        /// The item.
         /// </param>
         /// <returns>
-        ///     The <see cref="Task" />.
+        /// The <see cref="Task"/>.
         /// </returns>
         Task<bool> AddAsync<TEntity>(TEntity item)
             where TEntity : class;
@@ -89,9 +94,6 @@ namespace RepositoryEFDotnet.Core.Base
         /// <param name="includes">
         /// The includes.
         /// </param>
-        /// <param name="hint">
-        /// The hint.
-        /// </param>
         /// <typeparam name="TEntity">
         /// </typeparam>
         /// <returns>
@@ -99,54 +101,128 @@ namespace RepositoryEFDotnet.Core.Base
         /// </returns>
         IEnumerable<TEntity> AllMatching<TEntity>(
             Expression<Func<TEntity, bool>> filter,
-            IEnumerable<string> includes = null,
-            string hint = "")
+            params Expression<Func<TEntity, object>>[] includes)
             where TEntity : class;
 
         /// <summary>
-        ///     The all matching async.
+        /// The all matching async.
         /// </summary>
         /// <param name="filter">
-        ///     The filter.
+        /// The filter.
         /// </param>
         /// <param name="includes">
-        ///     The includes.
+        /// The includes.
         /// </param>
+        /// <typeparam name="TEntity">
+        /// </typeparam>
         /// <returns>
-        ///     The <see cref="Task" />.
+        /// The <see cref="Task"/>.
         /// </returns>
         Task<IEnumerable<TEntity>> AllMatchingAsync<TEntity>(
             Expression<Func<TEntity, bool>> filter,
-            IEnumerable<string> includes = null,
-            string hint = "")
+            params Expression<Func<TEntity, object>>[] includes)
             where TEntity : class;
 
+        /// <summary>
+        /// The all matching paged.
+        /// </summary>
+        /// <param name="filter">
+        /// The filter.
+        /// </param>
+        /// <param name="startPage">
+        /// The start page.
+        /// </param>
+        /// <param name="pageSize">
+        /// The page size.
+        /// </param>
+        /// <param name="orderBy">
+        /// The order by.
+        /// </param>
+        /// <param name="orderByAsc">
+        /// The order by asc.
+        /// </param>
+        /// <param name="includes">
+        /// The includes.
+        /// </param>
+        /// <typeparam name="TEntity">
+        /// </typeparam>
+        /// <returns>
+        /// The <see cref="IEnumerable"/>.
+        /// </returns>
         IEnumerable<TEntity> AllMatchingPaged<TEntity>(
             Expression<Func<TEntity, bool>> filter,
             int startPage,
             int pageSize,
             IEnumerable<string> orderBy,
             bool orderByAsc = false,
-            IEnumerable<string> includes = null,
-            string hint = "")
+            params Expression<Func<TEntity, object>>[] includes)
             where TEntity : class;
 
         /// <summary>
-        ///     Returns a boolean value indicating whether an expression returns a result.
+        /// The all matching paged async.
+        /// </summary>
+        /// <param name="filter">
+        /// The filter.
+        /// </param>
+        /// <param name="startPage">
+        /// The start page.
+        /// </param>
+        /// <param name="pageSize">
+        /// The page size.
+        /// </param>
+        /// <param name="orderBy">
+        /// The order by.
+        /// </param>
+        /// <param name="orderByAsc">
+        /// The order by asc.
+        /// </param>
+        /// <param name="includes">
+        /// The includes.
+        /// </param>
+        /// <typeparam name="TEntity">
+        /// </typeparam>
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>
+        Task<IEnumerable<TEntity>> AllMatchingPagedAsync<TEntity>(
+            Expression<Func<TEntity, bool>> filter,
+            int startPage,
+            int pageSize,
+            IEnumerable<string> orderBy,
+            bool orderByAsc = false,
+            params Expression<Func<TEntity, object>>[] includes)
+            where TEntity : class;
+
+        /// <summary>
+        /// Returns a boolean value indicating whether an expression returns a result.
         /// </summary>
         /// <typeparam name="TEntity">
-        ///     The type of the entity.
+        /// The type of the entity.
         /// </typeparam>
-        /// <param name="includes">
-        ///     The includes.
-        /// </param>
         /// <param name="filter">
-        ///     The filter.
+        /// The filter.
+        /// </param>
+        /// <param name="includes">
+        /// The includes.
         /// </param>
         /// <returns>
-        ///     The <see cref="bool" />.
+        /// The <see cref="bool"/>.
         /// </returns>
-        bool Any<TEntity>(Expression<Func<TEntity, bool>> filter = null, IEnumerable<string> includes = null)
+        bool Any<TEntity>(Expression<Func<TEntity, bool>> filter, params Expression<Func<TEntity, object>>[] includes)
+            where TEntity : class;
+
+        /// <summary>
+        /// The any.
+        /// </summary>
+        /// <param name="includes">
+        /// The includes.
+        /// </param>
+        /// <typeparam name="TEntity">
+        /// </typeparam>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        bool Any<TEntity>(params Expression<Func<TEntity, object>>[] includes)
             where TEntity : class;
 
         /// <summary>
@@ -163,17 +239,33 @@ namespace RepositoryEFDotnet.Core.Base
         /// <returns>
         /// The <see cref="Task"/>.
         /// </returns>
-        Task<bool> AnyAsync<TEntity>(Expression<Func<TEntity, bool>> filter = null, IEnumerable<string> includes = null)
+        Task<bool> AnyAsync<TEntity>(
+            Expression<Func<TEntity, bool>> filter,
+            params Expression<Func<TEntity, object>>[] includes)
             where TEntity : class;
 
         /// <summary>
-        ///     The apply current values.
+        /// The any async.
+        /// </summary>
+        /// <param name="includes">
+        /// The includes.
+        /// </param>
+        /// <typeparam name="TEntity">
+        /// </typeparam>
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>
+        Task<bool> AnyAsync<TEntity>(params Expression<Func<TEntity, object>>[] includes)
+            where TEntity : class;
+
+        /// <summary>
+        /// The apply current values.
         /// </summary>
         /// <param name="original">
-        ///     The original.
+        /// The original.
         /// </param>
         /// <param name="current">
-        ///     The current.
+        /// The current.
         /// </param>
         /// <typeparam name="TEntity">
         /// </typeparam>
@@ -189,14 +281,6 @@ namespace RepositoryEFDotnet.Core.Base
         int Commit();
 
         /// <summary>
-        /// Save changes to the database
-        /// </summary>
-        /// <returns></returns>
-        bool Save();
-
-        Task<bool> SaveAsync();
-
-        /// <summary>
         ///     The commit async.
         /// </summary>
         /// <returns>
@@ -205,48 +289,68 @@ namespace RepositoryEFDotnet.Core.Base
         Task<int> CommitAsync();
 
         /// <summary>
-        ///     The execute command.
+        /// The execute command.
         /// </summary>
         /// <param name="sqlCommand">
-        ///     The sql command.
+        /// The sql command.
         /// </param>
         /// <param name="parameters">
-        ///     The parameters.
+        /// The parameters.
         /// </param>
         /// <returns>
-        ///     The <see cref="int" />.
+        /// The <see cref="int"/>.
         /// </returns>
-        int ExecuteCommand(string sqlCommand, params object[] parameters);
+        int ExecuteCommand(string sqlCommand, IEnumerable<IDataParameter> parameters = null);
 
         /// <summary>
-        ///     The execute command async.
+        /// The execute command async.
         /// </summary>
         /// <param name="sqlCommand">
-        ///     The sql command.
+        /// The sql command.
         /// </param>
         /// <param name="parameters">
-        ///     The parameters.
+        /// The parameters.
         /// </param>
         /// <returns>
-        ///     The <see cref="Task" />.
+        /// The <see cref="Task"/>.
         /// </returns>
-        Task<int> ExecuteCommandAsync(string sqlCommand, params object[] parameters);
+        Task<int> ExecuteCommandAsync(string sqlCommand, IEnumerable<IDataParameter> parameters = null);
 
         /// <summary>
-        ///     The execute query.
+        /// The execute query.
         /// </summary>
         /// <param name="sqlQuery">
-        ///     The sql query.
+        /// The sql query.
         /// </param>
         /// <param name="parameters">
-        ///     The parameters.
+        /// The parameters.
         /// </param>
         /// <typeparam name="TEntity">
         /// </typeparam>
         /// <returns>
-        ///     The <see cref="IQueryable" />.
+        /// The <see cref="IQueryable"/>.
         /// </returns>
-        IQueryable<TEntity> ExecuteQuery<TEntity>(string sqlQuery, params object[] parameters);
+        IQueryable<TEntity> ExecuteQuery<TEntity>(string sqlQuery, IEnumerable<IDataParameter> parameters = null)
+            where TEntity : class;
+
+        /// <summary>
+        /// The execute query async.
+        /// </summary>
+        /// <param name="sqlQuery">
+        /// The sql query.
+        /// </param>
+        /// <param name="parameters">
+        /// The parameters.
+        /// </param>
+        /// <typeparam name="TEntity">
+        /// </typeparam>
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>
+        Task<IQueryable<TEntity>> ExecuteQueryAsync<TEntity>(
+            string sqlQuery,
+            IEnumerable<IDataParameter> parameters = null)
+            where TEntity : class;
 
         /// <summary>
         /// The first or default.
@@ -263,8 +367,22 @@ namespace RepositoryEFDotnet.Core.Base
         /// The <see cref="TEntity"/>.
         /// </returns>
         TEntity FirstOrDefault<TEntity>(
-            Expression<Func<TEntity, bool>> filter = null,
-            IEnumerable<string> includes = null)
+            Expression<Func<TEntity, bool>> filter,
+            params Expression<Func<TEntity, object>>[] includes)
+            where TEntity : class;
+
+        /// <summary>
+        /// The first or default.
+        /// </summary>
+        /// <param name="includes">
+        /// The includes.
+        /// </param>
+        /// <typeparam name="TEntity">
+        /// </typeparam>
+        /// <returns>
+        /// The <see cref="TEntity"/>.
+        /// </returns>
+        TEntity FirstOrDefault<TEntity>(params Expression<Func<TEntity, object>>[] includes)
             where TEntity : class;
 
         /// <summary>
@@ -282,8 +400,22 @@ namespace RepositoryEFDotnet.Core.Base
         /// The <see cref="Task"/>.
         /// </returns>
         Task<TEntity> FirstOrDefaultAsync<TEntity>(
-            Expression<Func<TEntity, bool>> filter = null,
-            IEnumerable<string> includes = null)
+            Expression<Func<TEntity, bool>> filter,
+            params Expression<Func<TEntity, object>>[] includes)
+            where TEntity : class;
+
+        /// <summary>
+        /// The first or default async.
+        /// </summary>
+        /// <param name="includes">
+        /// The includes.
+        /// </param>
+        /// <typeparam name="TEntity">
+        /// </typeparam>
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>
+        Task<TEntity> FirstOrDefaultAsync<TEntity>(params Expression<Func<TEntity, object>>[] includes)
             where TEntity : class;
 
         /// <summary>
@@ -300,24 +432,37 @@ namespace RepositoryEFDotnet.Core.Base
         /// <returns>
         /// The <see cref="TEntity"/>.
         /// </returns>
-        TEntity Get<TEntity>(Expression<Func<TEntity, bool>> filter, IEnumerable<string> includes = null)
-            where TEntity : class;
-
-        IEnumerable<TEntity> GetAll<TEntity>(IEnumerable<string> includes = null)
+        TEntity Get<TEntity>(
+            Expression<Func<TEntity, bool>> filter,
+            params Expression<Func<TEntity, object>>[] includes)
             where TEntity : class;
 
         /// <summary>
-        ///     The get all async.
+        /// The get all.
         /// </summary>
         /// <param name="includes">
-        ///     The includes.
+        /// The includes.
         /// </param>
         /// <typeparam name="TEntity">
         /// </typeparam>
         /// <returns>
-        ///     The <see cref="Task" />.
+        /// The <see cref="IEnumerable"/>.
         /// </returns>
-        Task<IEnumerable<TEntity>> GetAllAsync<TEntity>(IEnumerable<string> includes = null)
+        IEnumerable<TEntity> GetAll<TEntity>(params Expression<Func<TEntity, object>>[] includes)
+            where TEntity : class;
+
+        /// <summary>
+        /// The get all async.
+        /// </summary>
+        /// <param name="includes">
+        /// The includes.
+        /// </param>
+        /// <typeparam name="TEntity">
+        /// </typeparam>
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>
+        Task<IEnumerable<TEntity>> GetAllAsync<TEntity>(params Expression<Func<TEntity, object>>[] includes)
             where TEntity : class;
 
         /// <summary>
@@ -348,7 +493,38 @@ namespace RepositoryEFDotnet.Core.Base
             int pageSize,
             IEnumerable<string> orderBy,
             bool orderByAscending = true,
-            IEnumerable<string> includes = null)
+            params Expression<Func<TEntity, object>>[] includes)
+            where TEntity : class;
+
+        /// <summary>
+        /// The get all paged async.
+        /// </summary>
+        /// <param name="startPage">
+        /// The start page.
+        /// </param>
+        /// <param name="pageSize">
+        /// The page size.
+        /// </param>
+        /// <param name="orderBy">
+        /// The order by.
+        /// </param>
+        /// <param name="orderByAscending">
+        /// The order by ascending.
+        /// </param>
+        /// <param name="includes">
+        /// The includes.
+        /// </param>
+        /// <typeparam name="TEntity">
+        /// </typeparam>
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>
+        Task<IEnumerable<TEntity>> GetAllPagedAsync<TEntity>(
+            int startPage,
+            int pageSize,
+            IEnumerable<string> orderBy,
+            bool orderByAscending = true,
+            params Expression<Func<TEntity, object>>[] includes)
             where TEntity : class;
 
         /// <summary>
@@ -365,42 +541,44 @@ namespace RepositoryEFDotnet.Core.Base
         /// <returns>
         /// The <see cref="Task"/>.
         /// </returns>
-        Task<TEntity> GetAsync<TEntity>(Expression<Func<TEntity, bool>> filter, IEnumerable<string> includes = null)
+        Task<TEntity> GetAsync<TEntity>(
+            Expression<Func<TEntity, bool>> filter,
+            params Expression<Func<TEntity, object>>[] includes)
             where TEntity : class;
 
         /// <summary>
-        ///     The get queryable.
+        /// The get queryable.
         /// </summary>
-        /// <param name="includes">
-        ///     The includes.
-        /// </param>
         /// <param name="filter">
-        ///     The filter.
+        /// The filter.
         /// </param>
         /// <param name="pageGo">
-        ///     The page go.
+        /// The page go.
         /// </param>
         /// <param name="pageSize">
-        ///     The page size.
+        /// The page size.
         /// </param>
         /// <param name="orderBy">
-        ///     The order by.
+        /// The order by.
         /// </param>
         /// <param name="orderAscendent">
-        ///     The order ascendent.
+        /// The order ascendent.
+        /// </param>
+        /// <param name="includes">
+        /// The includes.
         /// </param>
         /// <typeparam name="TEntity">
         /// </typeparam>
         /// <returns>
-        ///     The <see cref="IQueryable" />.
+        /// The <see cref="IQueryable"/>.
         /// </returns>
         IQueryable<TEntity> GetQueryable<TEntity>(
-            IEnumerable<string> includes = null,
             Expression<Func<TEntity, bool>> filter = null,
             int pageGo = 0,
             int pageSize = 0,
             IEnumerable<string> orderBy = null,
-            bool orderAscendent = false)
+            bool orderAscendent = false,
+            params Expression<Func<TEntity, object>>[] includes)
             where TEntity : class;
 
         /// <summary>
@@ -436,6 +614,38 @@ namespace RepositoryEFDotnet.Core.Base
             where TEntity : class;
 
         /// <summary>
+        /// The min.
+        /// </summary>
+        /// <param name="filter">
+        /// The filter.
+        /// </param>
+        /// <typeparam name="TEntity">
+        /// </typeparam>
+        /// <typeparam name="TResult">
+        /// </typeparam>
+        /// <returns>
+        /// The <see cref="TResult"/>.
+        /// </returns>
+        TResult Min<TEntity, TResult>(Expression<Func<TEntity, TResult>> filter)
+            where TEntity : class;
+
+        /// <summary>
+        /// The min async.
+        /// </summary>
+        /// <param name="filter">
+        /// The filter.
+        /// </param>
+        /// <typeparam name="TEntity">
+        /// </typeparam>
+        /// <typeparam name="TResult">
+        /// </typeparam>
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>
+        Task<TResult> MinAsync<TEntity, TResult>(Expression<Func<TEntity, TResult>> filter)
+            where TEntity : class;
+
+        /// <summary>
         /// The modify.
         /// </summary>
         /// <param name="item">
@@ -464,24 +674,27 @@ namespace RepositoryEFDotnet.Core.Base
             where TEntity : class;
 
         /// <summary>
-        ///     The remove.
+        /// The remove.
         /// </summary>
         /// <param name="item">
-        ///     The item.
+        /// The item.
         /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
         bool Remove<TEntity>(TEntity item)
             where TEntity : class;
 
         /// <summary>
-        ///     The remove async.
+        /// The remove async.
         /// </summary>
         /// <param name="item">
-        ///     The item.
+        /// The item.
         /// </param>
         /// <typeparam name="TEntity">
         /// </typeparam>
         /// <returns>
-        ///     The <see cref="Task" />.
+        /// The <see cref="Task"/>.
         /// </returns>
         Task<bool> RemoveAsync<TEntity>(TEntity item)
             where TEntity : class;
@@ -520,19 +733,43 @@ namespace RepositoryEFDotnet.Core.Base
         void Rollback();
 
         /// <summary>
-        /// The rollback async.
+        ///     The rollback async.
         /// </summary>
         /// <returns>
-        /// The <see cref="Task"/>.
+        ///     The <see cref="Task" />.
         /// </returns>
         Task RollbackAsync();
 
         /// <summary>
-        /// The start transaction.
+        /// Save changes to the database
+        /// </summary>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        bool Save();
+
+        /// <summary>
+        /// The save async.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>
+        Task<bool> SaveAsync();
+
+        /// <summary>
+        ///     The start transaction.
         /// </summary>
         void StartTransaction();
 
+        /// <summary>
+        /// The start transaction async.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>
         Task StartTransactionAsync();
+
+        void NoTracking<TEntity>(TEntity item) where TEntity : class;
 
         #endregion
     }

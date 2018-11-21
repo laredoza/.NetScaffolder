@@ -20,6 +20,8 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
 using Banking.Models.Interfaces;
 using RepositoryEFDotnet.Core.Base;
 
@@ -36,49 +38,111 @@ namespace Banking.Models.Interfaces
         /// Load OrderDetails entities from the database using the composite primary keys
         /// </summary
         /// <param name="orderDetailsId">int</param>
+		/// <param name="includes">params Expression<Func<IOrderDetails, object>>[]</param>
         /// <returns>IOrderDetails</returns>
-		IOrderDetails LoadByOrderDetailsId(int orderDetailsId);
+		IOrderDetails LoadByOrderDetailsId(int orderDetailsId, params Expression<Func<IOrderDetails, object>>[] includes);
+		
+        /// <summary>
+        /// Load OrderDetails entities async from the database using the composite primary keys
+        /// </summary
+        /// <param name="orderDetailsId">int</param>
+		/// <param name="includes">params Expression<Func<IOrderDetails, object>>[]</param>
+        /// <returns>IOrderDetails</returns>
+		Task<IOrderDetails> LoadByOrderDetailsIdAsync(int orderDetailsId, params Expression<Func<IOrderDetails, object>>[] includes);
 
         /// <summary>
         /// Load OrderDetails entities from the database using the OrderId field
         /// </summary>
-        /// <param name="orderId">int</param>
+        /// <param name="orderId">int</param
+		/// <param name="includes">params Expression<Func<IOrderDetails, object>>[]</param>
         /// <returns>IList<IOrderDetails></returns>
-		IList<IOrderDetails> LoadByOrderId(int orderId);
+		IList<IOrderDetails> LoadByOrderId(int orderId, params Expression<Func<IOrderDetails, object>>[] includes);
+		
+        /// <summary>
+        /// Load OrderDetails entities async from the database using the OrderId field
+        /// </summary>
+        /// <param name="orderId">int</param
+		/// <param name="includes">params Expression<Func<IOrderDetails, object>>[]</param>
+        /// <returns>IList<IOrderDetails></returns>
+		Task<IList<IOrderDetails>> LoadByOrderIdAsync(int orderId, params Expression<Func<IOrderDetails, object>>[] includes);
 
         /// <summary>
         /// Load OrderDetails entities from the database using the ProductId field
         /// </summary>
-        /// <param name="productId">int</param>
+        /// <param name="productId">int</param
+		/// <param name="includes">params Expression<Func<IOrderDetails, object>>[]</param>
         /// <returns>IList<IOrderDetails></returns>
-		IList<IOrderDetails> LoadByProductId(int productId);
+		IList<IOrderDetails> LoadByProductId(int productId, params Expression<Func<IOrderDetails, object>>[] includes);
+		
+        /// <summary>
+        /// Load OrderDetails entities async from the database using the ProductId field
+        /// </summary>
+        /// <param name="productId">int</param
+		/// <param name="includes">params Expression<Func<IOrderDetails, object>>[]</param>
+        /// <returns>IList<IOrderDetails></returns>
+		Task<IList<IOrderDetails>> LoadByProductIdAsync(int productId, params Expression<Func<IOrderDetails, object>>[] includes);
 
         /// <summary>
         /// Load OrderDetails entities from the database using the UnitPrice field
         /// </summary>
-        /// <param name="unitPrice">Nullable<decimal></param>
+        /// <param name="unitPrice">Nullable<decimal></param
+		/// <param name="includes">params Expression<Func<IOrderDetails, object>>[]</param>
         /// <returns>IList<IOrderDetails></returns>
-		IList<IOrderDetails> LoadByUnitPrice(Nullable<decimal> unitPrice);
+		IList<IOrderDetails> LoadByUnitPrice(Nullable<decimal> unitPrice, params Expression<Func<IOrderDetails, object>>[] includes);
+		
+        /// <summary>
+        /// Load OrderDetails entities async from the database using the UnitPrice field
+        /// </summary>
+        /// <param name="unitPrice">Nullable<decimal></param
+		/// <param name="includes">params Expression<Func<IOrderDetails, object>>[]</param>
+        /// <returns>IList<IOrderDetails></returns>
+		Task<IList<IOrderDetails>> LoadByUnitPriceAsync(Nullable<decimal> unitPrice, params Expression<Func<IOrderDetails, object>>[] includes);
 
         /// <summary>
         /// Load OrderDetails entities from the database using the Amount field
         /// </summary>
-        /// <param name="amount">Nullable<short></param>
+        /// <param name="amount">Nullable<short></param
+		/// <param name="includes">params Expression<Func<IOrderDetails, object>>[]</param>
         /// <returns>IList<IOrderDetails></returns>
-		IList<IOrderDetails> LoadByAmount(Nullable<short> amount);
+		IList<IOrderDetails> LoadByAmount(Nullable<short> amount, params Expression<Func<IOrderDetails, object>>[] includes);
+		
+        /// <summary>
+        /// Load OrderDetails entities async from the database using the Amount field
+        /// </summary>
+        /// <param name="amount">Nullable<short></param
+		/// <param name="includes">params Expression<Func<IOrderDetails, object>>[]</param>
+        /// <returns>IList<IOrderDetails></returns>
+		Task<IList<IOrderDetails>> LoadByAmountAsync(Nullable<short> amount, params Expression<Func<IOrderDetails, object>>[] includes);
 
         /// <summary>
         /// Load OrderDetails entities from the database using the Discount field
         /// </summary>
-        /// <param name="discount">Nullable<float></param>
+        /// <param name="discount">Nullable<float></param
+		/// <param name="includes">params Expression<Func<IOrderDetails, object>>[]</param>
         /// <returns>IList<IOrderDetails></returns>
-		IList<IOrderDetails> LoadByDiscount(Nullable<float> discount);
+		IList<IOrderDetails> LoadByDiscount(Nullable<float> discount, params Expression<Func<IOrderDetails, object>>[] includes);
+		
+        /// <summary>
+        /// Load OrderDetails entities async from the database using the Discount field
+        /// </summary>
+        /// <param name="discount">Nullable<float></param
+		/// <param name="includes">params Expression<Func<IOrderDetails, object>>[]</param>
+        /// <returns>IList<IOrderDetails></returns>
+		Task<IList<IOrderDetails>> LoadByDiscountAsync(Nullable<float> discount, params Expression<Func<IOrderDetails, object>>[] includes);
 
         /// <summary>
         /// Load all OrderDetails entities from the database.
         /// </summary>
+		/// <param name="includes">params Expression<Func<IOrderDetails, object>>[]</param>
         /// <returns>IList<IOrderDetails></returns>
-		IList<IOrderDetails> LoadAll();
+		IList<IOrderDetails> LoadAll(params Expression<Func<IOrderDetails, object>>[] includes);
+		
+        /// <summary>
+        /// Load all OrderDetails entities async from the database.
+        /// </summary>
+		/// <param name="includes">params Expression<Func<IOrderDetails, object>>[]</param>
+        /// <returns>IList<IOrderDetails></returns>
+		Task<IList<IOrderDetails>> LoadAllAsync(params Expression<Func<IOrderDetails, object>>[] includes);
 		
 		#endregion
 
@@ -89,11 +153,18 @@ namespace Banking.Models.Interfaces
 		#region Modifiers
 		
         /// <summary>
-        /// Save the OrderDetails entity to the database.
+        /// Add the OrderDetails entity to the database.
         /// </summary>
         /// <param name="entity">IOrderDetails</param>
         /// <returns>bool</returns>
-		bool Save(IOrderDetails entity);
+		bool Add(IOrderDetails entity);
+		
+        /// <summary>
+        /// Add the OrderDetails entity async to the database.
+        /// </summary>
+        /// <param name="entity">IOrderDetails</param>
+        /// <returns>bool</returns>
+		Task<bool> AddAsync(IOrderDetails entity);
 
         /// <summary>
         /// Update the OrderDetails entity in the database if any values have changed
@@ -103,11 +174,25 @@ namespace Banking.Models.Interfaces
 		bool Update(IOrderDetails entity);
 		
         /// <summary>
+        /// Update the OrderDetails entity async in the database if any values have changed
+        /// </summary>
+        /// <param name="entity">IOrderDetails</param>
+        /// <returns>bool</returns>
+		Task<bool> UpdateAsync(IOrderDetails entity);
+		
+        /// <summary>
         /// Delete the OrderDetails entity from the database
         /// </summary>
         /// <param name="entity">IOrderDetails</param>
         /// <returns>bool</returns>
 		bool Delete(IOrderDetails entity);
+		
+        /// <summary>
+        /// Delete the OrderDetails entity async from the database
+        /// </summary>
+        /// <param name="entity">IOrderDetails</param>
+        /// <returns>bool</returns>
+		Task<bool> DeleteAsync(IOrderDetails entity);
 
 		/// <summary>
         /// Delete the OrderDetails entity from the database
@@ -116,6 +201,25 @@ namespace Banking.Models.Interfaces
         /// <returns>bool</returns>
 		bool Delete( int orderDetailsId);
 
+		/// <summary>
+        /// Delete the OrderDetails entity async from the database
+        /// </summary>
+        /// <param name="orderDetailsId">int</param>
+        /// <returns>bool</returns>
+		Task<bool> DeleteAsync( int orderDetailsId);
+		
+		#endregion
+		
+		#region Aggregates
+		
+		TResult Max<TResult>(Expression<Func<IOrderDetails, TResult>> maxExpression);
+		
+		Task<TResult> MaxAsync<TResult>(Expression<Func<IOrderDetails, TResult>> maxExpression);
+		
+		TResult Min<TResult>(Expression<Func<IOrderDetails, TResult>> maxExpression);
+		
+		Task<TResult> MinAsync<TResult>(Expression<Func<IOrderDetails, TResult>> maxExpression);
+		
 		#endregion
 	}
 }

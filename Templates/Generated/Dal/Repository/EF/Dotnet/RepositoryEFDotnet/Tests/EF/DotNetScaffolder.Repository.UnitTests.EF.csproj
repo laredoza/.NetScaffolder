@@ -89,18 +89,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repository\Database\RepositoryDbEF6MySqlUnitTests.cs" />
-    <Compile Include="Repository\Database\RepositoryDbEF6OracleUnitTests.cs" />
-    <Compile Include="Repository\Database\RepositoryDbEF6SqlServerUnitTests.cs" />
-    <Compile Include="Repository\In-Memory\RepositoryEF6InMemoryMySqlUnitTests.cs" />
-    <Compile Include="Repository\In-Memory\RepositoryEF6InMemoryOracleUnitTests.cs" />
-    <Compile Include="Repository\In-Memory\RepositoryEF6InMemorySqlServerUnitTests.cs" />
-    <Compile Include="UnitOfWork\Database\UowEF6DbMySqlUnitTests.cs" />
-    <Compile Include="UnitOfWork\Database\UowEF6DbOracleUnitTests.cs" />
-    <Compile Include="UnitOfWork\Database\UowEF6DbSqlServerUnitTests.cs" />
-    <Compile Include="UnitOfWork\In-Memory\UowEF6InMemoryMySqlUnitTests.cs" />
-    <Compile Include="UnitOfWork\In-Memory\UowEF6InMemoryOracleUnitTests.cs" />
-    <Compile Include="UnitOfWork\In-Memory\UowEF6InMemorySqlServerUnitTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -151,6 +139,12 @@
       <Project>{63198dd0-0bd2-4321-8768-ff14303610aa}</Project>
       <Name>DotNetScaffolder.Repository.UnitTests.Base</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Repository\Database\" />
+    <Folder Include="Repository\In-Memory\" />
+    <Folder Include="UnitOfWork\Database\" />
+    <Folder Include="UnitOfWork\In-Memory\" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

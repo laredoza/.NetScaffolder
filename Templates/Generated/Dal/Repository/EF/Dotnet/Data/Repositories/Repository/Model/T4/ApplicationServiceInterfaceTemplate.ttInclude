@@ -22,6 +22,8 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
 using <#=             DtoInterfaceDataType.FullNamespace#>;
 <#+            foreach(var nameSpace in DataType.AdditionalNamespacesInterfaces){ #>
 using <#=                nameSpace #>;
@@ -38,34 +40,62 @@ namespace <#= CurrentApplicationData.TransformFullnamespaceInterface(DataType.Ba
         #region Load
 <#+            foreach(var model in CurrentApplicationData.Models){ #>
 <#+ 
-string ModelName = DataType.NamingConvention == null ? model.TableName : DataType.NamingConvention.ApplyNamingConvention(model.TableName);
+string modelName = DataType.NamingConvention == null ? model.TableName : DataType.NamingConvention.ApplyNamingConvention(model.TableName);
 if(model.PrimaryKeyCount > 1){ #>
-
         /// <summary>
-        /// Load <#= ModelName #> entities from the database using the composite primary keys
+        /// Load <#= modelName #> entities from the database using the composite primary keys
         /// </summary
 <#+ foreach(var col in model.Columns.Where(o => o.IsPrimaryKey)) {#>
         /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
 <#+ } #>
-        /// <returns>I<#= ModelName #></returns>
-		I<#= ModelName #> Load(<#= DataType.TransformAsParameter(model.Columns.Where(o => o.IsPrimaryKey)) #>);
+        /// <returns>I<#= modelName #></returns>
+		I<#= modelName #> Load(<#= DataType.TransformAsParameter(model.Columns.Where(o => o.IsPrimaryKey)) #>, params Expression<Func<I<#= modelName #>, object>>[] includes);
+
+        /// <summary>
+        /// Load <#= modelName #> async entities from the database using the composite primary keys
+        /// </summary
+<#+ foreach(var col in model.Columns.Where(o => o.IsPrimaryKey)) {#>
+        /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
+<#+ } #>
+        /// <returns><#= modelName #></returns>
+		Task<I<#= modelName #>> Load(<#= DataType.TransformAsParameter(model.Columns.Where(o => o.IsPrimaryKey)) #>Async, params Expression<Func<I<#= modelName #>, object>>[] includes);
+
 <#+ } #>
 
 <#+ if(model.PrimaryKeyCount == 1){ var col = model.Columns.First(o => o.IsPrimaryKey);#>
 
         /// <summary>
-        /// Load <#= ModelName #> entities from the database using the primary key
+        /// Load <#= modelName #> entities from the database using the primary key
         /// </summary
         /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
-        /// <returns>I<#= ModelName #></returns>
-		I<#= ModelName #> LoadBy<#= ModelName #><#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= DataType.TransformAsParameter(col) #>);
+        /// <param name="includes">params Expression<Func<I<#= modelName #>, object>>[]</param>
+        /// <returns>I<#= modelName #></returns>
+		I<#= modelName #> LoadBy<#= modelName #><#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= DataType.TransformAsParameter(col) #>, params Expression<Func<I<#= modelName #>, object>>[] includes);
+
+        /// <summary>
+        /// Load <#= modelName #> Async entities from the database using the primary key
+        /// </summary
+        /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
+        /// <param name="includes">params Expression<Func<I<#= modelName #>, object>>[]</param>
+        /// <returns>I<#= modelName #></returns>
+		Task<I<#= modelName #>> LoadBy<#= modelName #><#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>Async(<#= DataType.TransformAsParameter(col) #>, params Expression<Func<I<#= modelName #>, object>>[] includes);
+
 <#+ } #>
 
         /// <summary>
-        /// Load all <#= ModelName #> entities from the database.
+        /// Load all <#= modelName #> entities from the database.
         /// </summary>
-        /// <returns><#= DataType.CollectionOption.ClassNameInterface #><I<#= ModelName #>></returns>
-		<#= DataType.CollectionOption.ClassNameInterface #><I<#= ModelName #>> <#= ModelName #>LoadAll();
+        /// <param name="includes">params Expression<Func<I<#= modelName #>, object>>[]</param>
+        /// <returns><#= DataType.CollectionOption.ClassNameInterface #><I<#= modelName #>></returns>
+		<#= DataType.CollectionOption.ClassNameInterface #><I<#= modelName #>> <#= modelName #>LoadAll(params Expression<Func<I<#= modelName #>, object>>[] includes);
+
+        /// <summary>
+        /// Load all <#= modelName #> Async entities from the database.
+        /// </summary>
+        /// <param name="includes">params Expression<Func<I<#= modelName #>, object>>[]</param>
+        /// <returns><#= DataType.CollectionOption.ClassNameInterface #><I<#= modelName #>></returns>
+		Task<<#= DataType.CollectionOption.ClassNameInterface #><I<#= modelName #>>> <#= modelName #>LoadAllAsync(params Expression<Func<I<#= modelName #>, object>>[] includes);
+
 <#+            } #>
 
         #endregion
@@ -73,16 +103,27 @@ if(model.PrimaryKeyCount > 1){ #>
         #region Search
 <#+            foreach(var model in CurrentApplicationData.Models){ #>
 <#+ 
-string ModelName = DataType.NamingConvention == null ? model.TableName : DataType.NamingConvention.ApplyNamingConvention(model.TableName); #>
+string modelName = DataType.NamingConvention == null ? model.TableName : DataType.NamingConvention.ApplyNamingConvention(model.TableName); #>
 <#+ foreach(var col in model.Columns.Where(o => !o.IsPrimaryKey && o.DomainDataType == DomainDataType.String)){ #>
 
         /// <summary>
-        /// Search for <#= ModelName #> entities in the database by <#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>
+        /// Search for <#= modelName #> entities in the database by <#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>
         /// </summary>
         /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
 		/// <param name="caseSensitive">bool</param>
-        /// <returns><#= DataType.CollectionOption.ClassNameInterface #><I<#= ModelName #>></returns>
-		<#= DataType.CollectionOption.ClassNameInterface #><I<#= ModelName #>> <#= ModelName #>SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= DataType.TransformAsParameter(col) #>, bool caseSensitive = false);
+        /// <param name="includes">params Expression<Func<I<#= modelName #>, object>>[]</param>
+        /// <returns><#= DataType.CollectionOption.ClassNameInterface #><I<#= modelName #>></returns>
+		<#= DataType.CollectionOption.ClassNameInterface #><I<#= modelName #>> <#= modelName #>SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= DataType.TransformAsParameter(col) #>,bool caseSensitive, params Expression<Func<I<#= modelName #>, object>>[] includes);
+
+        /// <summary>
+        /// Search for <#= modelName #>  Async entities in the database by <#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>
+        /// </summary>
+        /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
+		/// <param name="caseSensitive">bool</param>
+        /// <param name="includes">params Expression<Func<I<#= modelName #>, object>>[]</param>
+        /// <returns><#= DataType.CollectionOption.ClassNameInterface #><I<#= modelName #>></returns>
+		Task<<#= DataType.CollectionOption.ClassNameInterface #><I<#= modelName #>>> <#= modelName #>SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>Async(<#= DataType.TransformAsParameter(col) #>,bool caseSensitive, params Expression<Func<I<#= modelName #>, object>>[] includes);
+
 <#+ }  #>
 <#+            } #>
 		#endregion
@@ -90,36 +131,76 @@ string ModelName = DataType.NamingConvention == null ? model.TableName : DataTyp
 		#region Modifiers
 <#+            foreach(var model in CurrentApplicationData.Models){ #>
 <#+ 
-string ModelName = DataType.NamingConvention == null ? model.TableName : DataType.NamingConvention.ApplyNamingConvention(model.TableName); #>		
+string modelName = DataType.NamingConvention == null ? model.TableName : DataType.NamingConvention.ApplyNamingConvention(model.TableName); #>		
         /// <summary>
-        /// Save the <#= ModelName #> entity to the database.
+        /// Save the <#= modelName #> entity to the database.
         /// </summary>
-        /// <param name="entity">I<#= ModelName #></param>
+        /// <param name="entity">I<#= modelName #></param>
         /// <returns>bool</returns>
-		bool <#= ModelName #>Save(I<#= ModelName #> entity);
+		bool <#= modelName #>Add(I<#= modelName #> entity);
 
         /// <summary>
-        /// Update the <#= ModelName #> entity in the database if any values have changed
+        /// Update the <#= modelName #> entity in the database if any values have changed
         /// </summary>
-        /// <param name="entity">I<#= ModelName #></param>
+        /// <param name="entity">I<#= modelName #></param>
         /// <returns>bool</returns>
-		bool <#= ModelName #>Update(I<#= ModelName #> entity);
+		bool <#= modelName #>Update(I<#= modelName #> entity);
 		
         /// <summary>
-        /// Delete the <#= ModelName #> entity from the database
+        /// Delete the <#= modelName #> entity from the database
         /// </summary>
-        /// <param name="entity">I<#= ModelName #></param>
+        /// <param name="entity">I<#= modelName #></param>
         /// <returns>bool</returns>
-		bool <#= ModelName #>Delete(I<#= ModelName #> entity);
+		bool <#= modelName #>Delete(I<#= modelName #> entity);
 
 		/// <summary>
-        /// Delete the <#= ModelName #> entity from the database
+        /// Delete the <#= modelName #> entity from the database
         /// </summary>
 <#+ foreach(var col in model.Columns.Where(o => o.IsPrimaryKey)) {#>
         /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
 <#+ } #>
         /// <returns>bool</returns>
-		bool <#= ModelName #>Delete(<#= DataType.TransformAsParameter(model.Columns.Where(o => o.IsPrimaryKey)) #>);
+		bool <#= modelName #>Delete(<#= DataType.TransformAsParameter(model.Columns.Where(o => o.IsPrimaryKey)) #>);
+<#+            } #>
+
+		#endregion
+
+        #region Aggregates
+
+<#+            foreach(var model in CurrentApplicationData.Models){ #>
+<#+ 
+string modelName = DataType.NamingConvention == null ? model.TableName : DataType.NamingConvention.ApplyNamingConvention(model.TableName); #>
+        /// <summary>
+        /// Returns the max value 
+        /// </summary>
+        /// <typeparam name="TResult">TResult</typeparam>
+        /// <param name="maxExpression">Expression<Func<I<#= modelName #>, TResult>> maxExpression</param>
+        /// <returns></returns>
+        TResult <#= modelName #>Max<TResult>(Expression<Func<I<#= modelName #>, TResult>> maxExpression);
+		
+        /// <summary>
+        /// Returns the max value async
+        /// </summary>
+        /// <typeparam name="TResult">TResult</typeparam>
+        /// <param name="maxExpression">Expression<Func<I<#= modelName #>, TResult>> maxExpression</param>
+        /// <returns></returns>
+		Task<TResult> <#= modelName #>MaxAsync<TResult>(Expression<Func<I<#= modelName #>, TResult>> maxExpression);
+		
+        /// <summary>
+        /// Returns the min value 
+        /// </summary>
+        /// <typeparam name="TResult">TResult</typeparam>
+        /// <param name="maxExpression">Expression<Func<I<#= modelName #>, TResult>> maxExpression</param>
+        /// <returns></returns>
+		TResult <#= modelName #>Min<TResult>(Expression<Func<I<#= modelName#>, TResult>> maxExpression);
+		
+        /// <summary>
+        /// Returns the min value 
+        /// </summary>
+        /// <typeparam name="TResult">TResult</typeparam>
+        /// <param name="maxExpression">Expression<Func<I<#= modelName #>, TResult>> maxExpression</param>
+        /// <returns></returns>
+		Task<TResult> <#= modelName #>MinAsync<TResult>(Expression<Func<I<#= modelName #>, TResult>> maxExpression);
 <#+            } #>
 
 		#endregion

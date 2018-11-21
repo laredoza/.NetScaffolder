@@ -20,6 +20,8 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
 using Banking.Models.Interfaces;
 using RepositoryEFDotnet.Core.Base;
 
@@ -36,35 +38,79 @@ namespace Banking.Models.Interfaces
         /// Load BankAccount entities from the database using the composite primary keys
         /// </summary
         /// <param name="bankAccountId">int</param>
+		/// <param name="includes">params Expression<Func<IBankAccount, object>>[]</param>
         /// <returns>IBankAccount</returns>
-		IBankAccount LoadByBankAccountId(int bankAccountId);
+		IBankAccount LoadByBankAccountId(int bankAccountId, params Expression<Func<IBankAccount, object>>[] includes);
+		
+        /// <summary>
+        /// Load BankAccount entities async from the database using the composite primary keys
+        /// </summary
+        /// <param name="bankAccountId">int</param>
+		/// <param name="includes">params Expression<Func<IBankAccount, object>>[]</param>
+        /// <returns>IBankAccount</returns>
+		Task<IBankAccount> LoadByBankAccountIdAsync(int bankAccountId, params Expression<Func<IBankAccount, object>>[] includes);
 
         /// <summary>
         /// Load BankAccount entities from the database using the Balance field
         /// </summary>
-        /// <param name="balance">decimal</param>
+        /// <param name="balance">decimal</param
+		/// <param name="includes">params Expression<Func<IBankAccount, object>>[]</param>
         /// <returns>IList<IBankAccount></returns>
-		IList<IBankAccount> LoadByBalance(decimal balance);
+		IList<IBankAccount> LoadByBalance(decimal balance, params Expression<Func<IBankAccount, object>>[] includes);
+		
+        /// <summary>
+        /// Load BankAccount entities async from the database using the Balance field
+        /// </summary>
+        /// <param name="balance">decimal</param
+		/// <param name="includes">params Expression<Func<IBankAccount, object>>[]</param>
+        /// <returns>IList<IBankAccount></returns>
+		Task<IList<IBankAccount>> LoadByBalanceAsync(decimal balance, params Expression<Func<IBankAccount, object>>[] includes);
 
         /// <summary>
         /// Load BankAccount entities from the database using the CustomerId field
         /// </summary>
-        /// <param name="customerId">Nullable<int></param>
+        /// <param name="customerId">Nullable<int></param
+		/// <param name="includes">params Expression<Func<IBankAccount, object>>[]</param>
         /// <returns>IList<IBankAccount></returns>
-		IList<IBankAccount> LoadByCustomerId(Nullable<int> customerId);
+		IList<IBankAccount> LoadByCustomerId(Nullable<int> customerId, params Expression<Func<IBankAccount, object>>[] includes);
+		
+        /// <summary>
+        /// Load BankAccount entities async from the database using the CustomerId field
+        /// </summary>
+        /// <param name="customerId">Nullable<int></param
+		/// <param name="includes">params Expression<Func<IBankAccount, object>>[]</param>
+        /// <returns>IList<IBankAccount></returns>
+		Task<IList<IBankAccount>> LoadByCustomerIdAsync(Nullable<int> customerId, params Expression<Func<IBankAccount, object>>[] includes);
 
         /// <summary>
         /// Load BankAccount entities from the database using the Locked field
         /// </summary>
-        /// <param name="locked">bool</param>
+        /// <param name="locked">bool</param
+		/// <param name="includes">params Expression<Func<IBankAccount, object>>[]</param>
         /// <returns>IList<IBankAccount></returns>
-		IList<IBankAccount> LoadByLocked(bool locked);
+		IList<IBankAccount> LoadByLocked(bool locked, params Expression<Func<IBankAccount, object>>[] includes);
+		
+        /// <summary>
+        /// Load BankAccount entities async from the database using the Locked field
+        /// </summary>
+        /// <param name="locked">bool</param
+		/// <param name="includes">params Expression<Func<IBankAccount, object>>[]</param>
+        /// <returns>IList<IBankAccount></returns>
+		Task<IList<IBankAccount>> LoadByLockedAsync(bool locked, params Expression<Func<IBankAccount, object>>[] includes);
 
         /// <summary>
         /// Load all BankAccount entities from the database.
         /// </summary>
+		/// <param name="includes">params Expression<Func<IBankAccount, object>>[]</param>
         /// <returns>IList<IBankAccount></returns>
-		IList<IBankAccount> LoadAll();
+		IList<IBankAccount> LoadAll(params Expression<Func<IBankAccount, object>>[] includes);
+		
+        /// <summary>
+        /// Load all BankAccount entities async from the database.
+        /// </summary>
+		/// <param name="includes">params Expression<Func<IBankAccount, object>>[]</param>
+        /// <returns>IList<IBankAccount></returns>
+		Task<IList<IBankAccount>> LoadAllAsync(params Expression<Func<IBankAccount, object>>[] includes);
 		
 		#endregion
 
@@ -74,20 +120,37 @@ namespace Banking.Models.Interfaces
         /// Search for BankAccount entities in the database by BankAccountNumber
         /// </summary>
         /// <param name="bankAccountNumber">string</param>
-		/// <param name="caseSensitive">bool</param>
+		/// <param name="caseSensitive">bool</param
+		/// <param name="includes">params Expression<Func<IBankAccount, object>>[]</param>
         /// <returns>IList<IBankAccount></returns>
-		IList<IBankAccount> SearchByBankAccountNumber(string bankAccountNumber, bool caseSensitive = false);
+		IList<IBankAccount> SearchByBankAccountNumber(string bankAccountNumber, bool caseSensitive = false, params Expression<Func<IBankAccount, object>>[] includes);
+		
+        /// <summary>
+        /// Search for BankAccount entities async in the database by BankAccountNumber
+        /// </summary>
+        /// <param name="bankAccountNumber">string</param>
+		/// <param name="caseSensitive">bool</param
+		/// <param name="includes">params Expression<Func<IBankAccount, object>>[]</param>
+        /// <returns>IList<IBankAccount></returns>
+		Task<IList<IBankAccount>> SearchByBankAccountNumberAsync(string bankAccountNumber, bool caseSensitive = false, params Expression<Func<IBankAccount, object>>[] includes);
 
 		#endregion
 		
 		#region Modifiers
 		
         /// <summary>
-        /// Save the BankAccount entity to the database.
+        /// Add the BankAccount entity to the database.
         /// </summary>
         /// <param name="entity">IBankAccount</param>
         /// <returns>bool</returns>
-		bool Save(IBankAccount entity);
+		bool Add(IBankAccount entity);
+		
+        /// <summary>
+        /// Add the BankAccount entity async to the database.
+        /// </summary>
+        /// <param name="entity">IBankAccount</param>
+        /// <returns>bool</returns>
+		Task<bool> AddAsync(IBankAccount entity);
 
         /// <summary>
         /// Update the BankAccount entity in the database if any values have changed
@@ -97,11 +160,25 @@ namespace Banking.Models.Interfaces
 		bool Update(IBankAccount entity);
 		
         /// <summary>
+        /// Update the BankAccount entity async in the database if any values have changed
+        /// </summary>
+        /// <param name="entity">IBankAccount</param>
+        /// <returns>bool</returns>
+		Task<bool> UpdateAsync(IBankAccount entity);
+		
+        /// <summary>
         /// Delete the BankAccount entity from the database
         /// </summary>
         /// <param name="entity">IBankAccount</param>
         /// <returns>bool</returns>
 		bool Delete(IBankAccount entity);
+		
+        /// <summary>
+        /// Delete the BankAccount entity async from the database
+        /// </summary>
+        /// <param name="entity">IBankAccount</param>
+        /// <returns>bool</returns>
+		Task<bool> DeleteAsync(IBankAccount entity);
 
 		/// <summary>
         /// Delete the BankAccount entity from the database
@@ -110,6 +187,25 @@ namespace Banking.Models.Interfaces
         /// <returns>bool</returns>
 		bool Delete( int bankAccountId);
 
+		/// <summary>
+        /// Delete the BankAccount entity async from the database
+        /// </summary>
+        /// <param name="bankAccountId">int</param>
+        /// <returns>bool</returns>
+		Task<bool> DeleteAsync( int bankAccountId);
+		
+		#endregion
+		
+		#region Aggregates
+		
+		TResult Max<TResult>(Expression<Func<IBankAccount, TResult>> maxExpression);
+		
+		Task<TResult> MaxAsync<TResult>(Expression<Func<IBankAccount, TResult>> maxExpression);
+		
+		TResult Min<TResult>(Expression<Func<IBankAccount, TResult>> maxExpression);
+		
+		Task<TResult> MinAsync<TResult>(Expression<Func<IBankAccount, TResult>> maxExpression);
+		
 		#endregion
 	}
 }

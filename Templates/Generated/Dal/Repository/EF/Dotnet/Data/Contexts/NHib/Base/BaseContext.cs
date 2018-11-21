@@ -4,6 +4,8 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
+using RepositoryEFDotnet.Contexts.NHib.Base;
+
 namespace RepositoryEFDotnet.Contexts.NHib
 {
     using System;
@@ -31,24 +33,89 @@ namespace RepositoryEFDotnet.Contexts.NHib
     /// <summary>
     /// The sql server n hibernate context.
     /// </summary>
-    public abstract class BaseContext : IUnitOfWork
+    public abstract class BaseContext : INHibUnitOfWork
     {
         #region Fields
 
         /// <summary>
-        /// The current session.
+        /// The close factory.
         /// </summary>
-        private ISession currentSession = null;
+        private bool closeFactory = true;
+
+        /// <summary>
+        ///     The current session.
+        /// </summary>
+        private ISession currentSession;
+
+        /// <summary>
+        /// The session factory.
+        /// </summary>
+        private ISessionFactory sessionFactory;
 
         #endregion
 
         #region Constructors and Destructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="BaseContext"/> class.
+        ///     Initializes a new instance of the <see cref="BaseContext" /> class.
         /// </summary>
         protected BaseContext()
         {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BaseContext"/> class.
+        /// </summary>
+        /// <param name="config">
+        /// The config.
+        /// </param>
+        protected BaseContext(FluentConfiguration config)
+        {
+            this.closeFactory = true;
+
+            this.Configuration = config.Mappings(this.SetupConventions).Mappings(this.ConfigureMappings)
+                .BuildConfiguration();
+
+            this.SetConfig();
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BaseContext"/> class.
+        /// </summary>
+        /// <param name="config">
+        /// The config.
+        /// </param>
+        protected BaseContext(Configuration config)
+        {
+            this.closeFactory = true;
+            this.Configuration = config;
+            this.SetConfig();
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BaseContext"/> class.
+        /// </summary>
+        /// <param name="factory">
+        /// The factory.
+        /// </param>
+        protected BaseContext(ISessionFactory factory)
+        {
+            this.closeFactory = false;
+            this.sessionFactory = factory;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BaseContext"/> class.
+        /// </summary>
+        /// <param name="config">
+        /// The config.
+        /// </param>
+        protected BaseContext(IPersistenceConfigurer config)
+        {
+            this.Configuration = Fluently.Configure().Database(config).Mappings(this.SetupConventions)
+                .Mappings(this.ConfigureMappings).BuildConfiguration();
+
+            this.SetConfig();
         }
 
         #endregion
@@ -56,7 +123,7 @@ namespace RepositoryEFDotnet.Contexts.NHib
         #region Public Properties
 
         /// <summary>
-        /// Gets the configuration.
+        ///     Gets the configuration.
         /// </summary>
         public Configuration Configuration { get; private set; }
 
@@ -65,14 +132,26 @@ namespace RepositoryEFDotnet.Contexts.NHib
         #region Other Properties
 
         /// <summary>
-        /// The current session.
+        ///     The current session.
         /// </summary>
-        protected ISession CurrentSession
+        private ISession CurrentSession
         {
             get
             {
                 this.CreateSession();
                 return this.currentSession;
+            }
+        }
+
+        /// <summary>
+        /// Gets the session factory.
+        /// </summary>
+        private ISessionFactory SessionFactory
+        {
+            get
+            {
+                this.CreateSessionFactory();
+                return this.sessionFactory;
             }
         }
 
@@ -143,8 +222,8 @@ namespace RepositoryEFDotnet.Contexts.NHib
         /// <summary>
         /// The add range async.
         /// </summary>
-        /// <param name="item">
-        /// The item.
+        /// <param name="items">
+        /// The items.
         /// </param>
         /// <typeparam name="TEntity">
         /// </typeparam>
@@ -153,10 +232,10 @@ namespace RepositoryEFDotnet.Contexts.NHib
         /// </returns>
         /// <exception cref="NotImplementedException">
         /// </exception>
-        public virtual Task<bool> AddRangeAsync<TEntity>(IEnumerable<TEntity> item)
+        public virtual async Task<bool> AddRangeAsync<TEntity>(IEnumerable<TEntity> items)
             where TEntity : class
         {
-            throw new NotImplementedException();
+            return await Task.Run(() => this.AddRange(items));
         }
 
         /// <summary>
@@ -168,9 +247,6 @@ namespace RepositoryEFDotnet.Contexts.NHib
         /// <param name="includes">
         /// The includes.
         /// </param>
-        /// <param name="hint">
-        /// The hint.
-        /// </param>
         /// <typeparam name="TEntity">
         /// </typeparam>
         /// <returns>
@@ -178,11 +254,10 @@ namespace RepositoryEFDotnet.Contexts.NHib
         /// </returns>
         public virtual IEnumerable<TEntity> AllMatching<TEntity>(
             Expression<Func<TEntity, bool>> filter,
-            IEnumerable<string> includes = null,
-            string hint = "")
+            params Expression<Func<TEntity, object>>[] includes)
             where TEntity : class
         {
-            return this.GetQueryable(includes, filter).ToList();
+            return this.GetQueryable(filter, 0, 0, null, false, includes).ToList();
         }
 
         /// <summary>
@@ -194,9 +269,6 @@ namespace RepositoryEFDotnet.Contexts.NHib
         /// <param name="includes">
         /// The includes.
         /// </param>
-        /// <param name="hint">
-        /// The hint.
-        /// </param>
         /// <typeparam name="TEntity">
         /// </typeparam>
         /// <returns>
@@ -204,11 +276,10 @@ namespace RepositoryEFDotnet.Contexts.NHib
         /// </returns>
         public virtual async Task<IEnumerable<TEntity>> AllMatchingAsync<TEntity>(
             Expression<Func<TEntity, bool>> filter,
-            IEnumerable<string> includes = null,
-            string hint = "")
+            params Expression<Func<TEntity, object>>[] includes)
             where TEntity : class
         {
-            return await this.GetQueryable(includes, filter).ToListAsync();
+            return await this.GetQueryable(filter, 0, 0, null, false, includes).ToListAsync();
         }
 
         /// <summary>
@@ -232,9 +303,6 @@ namespace RepositoryEFDotnet.Contexts.NHib
         /// <param name="includes">
         /// The includes.
         /// </param>
-        /// <param name="hint">
-        /// The hint.
-        /// </param>
         /// <typeparam name="TEntity">
         /// </typeparam>
         /// <returns>
@@ -248,11 +316,48 @@ namespace RepositoryEFDotnet.Contexts.NHib
             int pageSize,
             IEnumerable<string> orderBy,
             bool orderByAsc = false,
-            IEnumerable<string> includes = null,
-            string hint = "")
+            params Expression<Func<TEntity, object>>[] includes)
             where TEntity : class
         {
-            throw new NotImplementedException();
+            return this.GetQueryable(filter, startPage, pageSize, orderBy, orderByAsc, includes).ToList();
+        }
+
+        /// <summary>
+        /// The all matching paged async.
+        /// </summary>
+        /// <param name="filter">
+        /// The filter.
+        /// </param>
+        /// <param name="startPage">
+        /// The start page.
+        /// </param>
+        /// <param name="pageSize">
+        /// The page size.
+        /// </param>
+        /// <param name="orderBy">
+        /// The order by.
+        /// </param>
+        /// <param name="orderByAsc">
+        /// The order by asc.
+        /// </param>
+        /// <param name="includes">
+        /// The includes.
+        /// </param>
+        /// <typeparam name="TEntity">
+        /// </typeparam>
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>
+        public virtual async Task<IEnumerable<TEntity>> AllMatchingPagedAsync<TEntity>(
+            Expression<Func<TEntity, bool>> filter,
+            int startPage,
+            int pageSize,
+            IEnumerable<string> orderBy,
+            bool orderByAsc = false,
+            params Expression<Func<TEntity, object>>[] includes)
+            where TEntity : class
+        {
+            return await this.GetQueryable(filter, startPage, pageSize, orderBy, orderByAsc, includes).ToListAsync();
         }
 
         /// <summary>
@@ -271,10 +376,27 @@ namespace RepositoryEFDotnet.Contexts.NHib
         /// </returns>
         public virtual bool Any<TEntity>(
             Expression<Func<TEntity, bool>> filter = null,
-            IEnumerable<string> includes = null)
+            params Expression<Func<TEntity, object>>[] includes)
             where TEntity : class
         {
-            return this.GetQueryable(includes, filter).Any();
+            return this.GetQueryable(filter, 0, 0, null, false, includes).Any();
+        }
+
+        /// <summary>
+        /// The any.
+        /// </summary>
+        /// <param name="includes">
+        /// The includes.
+        /// </param>
+        /// <typeparam name="TEntity">
+        /// </typeparam>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        public virtual bool Any<TEntity>(params Expression<Func<TEntity, object>>[] includes)
+            where TEntity : class
+        {
+            return this.GetQueryable(null, 0, 0, null, false, includes).Any();
         }
 
         /// <summary>
@@ -293,10 +415,27 @@ namespace RepositoryEFDotnet.Contexts.NHib
         /// </returns>
         public virtual async Task<bool> AnyAsync<TEntity>(
             Expression<Func<TEntity, bool>> filter = null,
-            IEnumerable<string> includes = null)
+            params Expression<Func<TEntity, object>>[] includes)
             where TEntity : class
         {
-            return await this.GetQueryable(includes, filter).AnyAsync();
+            return await this.GetQueryable(filter, 0, 0, null, false, includes).AnyAsync();
+        }
+
+        /// <summary>
+        /// The any async.
+        /// </summary>
+        /// <param name="includes">
+        /// The includes.
+        /// </param>
+        /// <typeparam name="TEntity">
+        /// </typeparam>
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>
+        public virtual async Task<bool> AnyAsync<TEntity>(params Expression<Func<TEntity, object>>[] includes)
+            where TEntity : class
+        {
+            return await this.GetQueryable(null, 0, 0, null, false, includes).AnyAsync();
         }
 
         /// <summary>
@@ -315,53 +454,61 @@ namespace RepositoryEFDotnet.Contexts.NHib
         public virtual void ApplyCurrentValues<TEntity>(TEntity original, TEntity current)
             where TEntity : class
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException("NHibernate.BaseContext.ApplyCurrentValues()");
         }
 
         /// <summary>
-        /// The commit.
+        ///     The commit.
         /// </summary>
         /// <returns>
-        /// The <see cref="int"/>.
+        ///     The <see cref="int" />.
         /// </returns>
         public virtual int Commit()
         {
-            if (this.CurrentSession?.Transaction != null && this.CurrentSession.Transaction.IsActive)
+            if (this.currentSession?.Transaction != null && this.currentSession.Transaction.IsActive)
             {
-                this.CurrentSession?.Flush();
                 this.CurrentSession?.Transaction.Commit();
                 this.CloseTransaction();
             }
+            else
+            {
+                this.CurrentSession.Flush();
+            }
 
-            // this.CloseSession();
             return 1;
         }
 
         /// <summary>
-        /// The commit async.
+        ///     The commit async.
         /// </summary>
         /// <returns>
-        /// The <see cref="Task"/>.
+        ///     The <see cref="Task" />.
         /// </returns>
         public virtual async Task<int> CommitAsync()
         {
             if (this.CurrentSession?.Transaction != null && this.CurrentSession.Transaction.IsActive)
             {
-                await this.CurrentSession?.FlushAsync();
                 await this.CurrentSession?.Transaction.CommitAsync();
                 this.CloseTransaction();
             }
-
-            // this.CloseSession();
+            else
+            {
+                await this.CurrentSession?.FlushAsync();
+            }
 
             return 1;
         }
 
         /// <summary>
-        /// The create database.
+        ///     The create database.
         /// </summary>
         public void CreateSchema()
         {
+            if (this.Configuration == null)
+            {
+                return;
+            }
+
             var export = new SchemaExport(this.Configuration);
 
 #if DEBUG
@@ -384,7 +531,7 @@ namespace RepositoryEFDotnet.Contexts.NHib
         }
 
         /// <summary>
-        /// The dispose.
+        ///     The dispose.
         /// </summary>
         public virtual void Dispose()
         {
@@ -400,13 +547,20 @@ namespace RepositoryEFDotnet.Contexts.NHib
                 this.CloseTransaction();
                 this.CloseSession();
             }
+
+            this.CloseSessionFactory();
         }
 
         /// <summary>
-        /// The drop database.
+        ///     The drop database.
         /// </summary>
         public void DropSchema()
         {
+            if (this.Configuration == null)
+            {
+                return;
+            }
+
             var export = new SchemaExport(this.Configuration);
             export.Execute(true, true, true, this.CurrentSession?.Connection, null);
         }
@@ -423,11 +577,9 @@ namespace RepositoryEFDotnet.Contexts.NHib
         /// <returns>
         /// The <see cref="int"/>.
         /// </returns>
-        /// <exception cref="NotImplementedException">
-        /// </exception>
-        public virtual int ExecuteCommand(string sqlCommand, params object[] parameters)
+        public virtual int ExecuteCommand(string sqlCommand, IEnumerable<IDataParameter> parameters = null)
         {
-            throw new NotImplementedException();
+            return this.CreateQuery(sqlCommand, parameters).UniqueResult<int>();
         }
 
         /// <summary>
@@ -442,11 +594,38 @@ namespace RepositoryEFDotnet.Contexts.NHib
         /// <returns>
         /// The <see cref="Task"/>.
         /// </returns>
-        /// <exception cref="NotImplementedException">
-        /// </exception>
-        public virtual Task<int> ExecuteCommandAsync(string sqlCommand, params object[] parameters)
+        public virtual async Task<int> ExecuteCommandAsync(
+            string sqlCommand,
+            IEnumerable<IDataParameter> parameters = null)
         {
-            throw new NotImplementedException();
+            return await this.CreateQuery(sqlCommand, parameters).UniqueResultAsync<int>();
+        }
+
+        /// <summary>
+        /// The create query.
+        /// </summary>
+        /// <param name="sqlCommand">
+        /// The sql command.
+        /// </param>
+        /// <param name="parameters">
+        /// The parameters.
+        /// </param>
+        /// <returns>
+        /// The <see cref="ISQLQuery"/>.
+        /// </returns>
+        private ISQLQuery CreateQuery(string sqlCommand, IEnumerable<IDataParameter> parameters = null)
+        {
+            var query = this.CurrentSession.CreateSQLQuery(sqlCommand);
+
+            if (parameters != null)
+            {
+                foreach (var param in parameters)
+                {
+                    query.SetParameter(param.ParameterName, param.Value);
+                }
+            }
+
+            return query;
         }
 
         /// <summary>
@@ -463,11 +642,38 @@ namespace RepositoryEFDotnet.Contexts.NHib
         /// <returns>
         /// The <see cref="IQueryable"/>.
         /// </returns>
-        /// <exception cref="NotImplementedException">
-        /// </exception>
-        public virtual IQueryable<TEntity> ExecuteQuery<TEntity>(string sqlQuery, params object[] parameters)
+        public virtual IQueryable<TEntity> ExecuteQuery<TEntity>(
+            string sqlQuery,
+            IEnumerable<IDataParameter> parameters = null)
+            where TEntity : class
         {
-            throw new NotImplementedException();
+            var query = this.CreateQuery(sqlQuery, parameters);
+            query.AddEntity(typeof(TEntity));
+            return query.Enumerable<TEntity>().AsQueryable();
+        }
+
+        /// <summary>
+        /// The execute query async.
+        /// </summary>
+        /// <param name="sqlQuery">
+        /// The sql query.
+        /// </param>
+        /// <param name="parameters">
+        /// The parameters.
+        /// </param>
+        /// <typeparam name="TEntity">
+        /// </typeparam>
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>
+        public virtual async Task<IQueryable<TEntity>> ExecuteQueryAsync<TEntity>(
+            string sqlQuery,
+            IEnumerable<IDataParameter> parameters = null)
+            where TEntity : class
+        {
+            var query = this.CreateQuery(sqlQuery, parameters).AddEntity(typeof(TEntity));
+            var result = await query.EnumerableAsync<TEntity>();
+            return result.AsQueryable();
         }
 
         /// <summary>
@@ -486,10 +692,27 @@ namespace RepositoryEFDotnet.Contexts.NHib
         /// </returns>
         public virtual TEntity FirstOrDefault<TEntity>(
             Expression<Func<TEntity, bool>> filter = null,
-            IEnumerable<string> includes = null)
+            params Expression<Func<TEntity, object>>[] includes)
             where TEntity : class
         {
-            return this.GetQueryable(includes, filter).FirstOrDefault();
+            return this.GetQueryable(filter, 0, 0, null, false, includes).FirstOrDefault();
+        }
+
+        /// <summary>
+        /// The first or default.
+        /// </summary>
+        /// <param name="includes">
+        /// The includes.
+        /// </param>
+        /// <typeparam name="TEntity">
+        /// </typeparam>
+        /// <returns>
+        /// The <see cref="TEntity"/>.
+        /// </returns>
+        public virtual TEntity FirstOrDefault<TEntity>(params Expression<Func<TEntity, object>>[] includes)
+            where TEntity : class
+        {
+            return this.GetQueryable(null, 0, 0, null, false, includes).FirstOrDefault();
         }
 
         /// <summary>
@@ -507,11 +730,29 @@ namespace RepositoryEFDotnet.Contexts.NHib
         /// The <see cref="Task"/>.
         /// </returns>
         public virtual async Task<TEntity> FirstOrDefaultAsync<TEntity>(
-            Expression<Func<TEntity, bool>> filter = null,
-            IEnumerable<string> includes = null)
+            Expression<Func<TEntity, bool>> filter,
+            params Expression<Func<TEntity, object>>[] includes)
             where TEntity : class
         {
-            return await this.GetQueryable(includes, filter).FirstOrDefaultAsync();
+            return await this.GetQueryable(filter, 0, 0, null, false, includes).FirstOrDefaultAsync();
+        }
+
+        /// <summary>
+        /// The first or default async.
+        /// </summary>
+        /// <param name="includes">
+        /// The includes.
+        /// </param>
+        /// <typeparam name="TEntity">
+        /// </typeparam>
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>
+        public virtual async Task<TEntity> FirstOrDefaultAsync<TEntity>(
+            params Expression<Func<TEntity, object>>[] includes)
+            where TEntity : class
+        {
+            return await this.FirstOrDefaultAsync(null, includes);
         }
 
         /// <summary>
@@ -528,10 +769,12 @@ namespace RepositoryEFDotnet.Contexts.NHib
         /// <returns>
         /// The <see cref="TEntity"/>.
         /// </returns>
-        public virtual TEntity Get<TEntity>(Expression<Func<TEntity, bool>> filter, IEnumerable<string> includes = null)
+        public virtual TEntity Get<TEntity>(
+            Expression<Func<TEntity, bool>> filter,
+            params Expression<Func<TEntity, object>>[] includes)
             where TEntity : class
         {
-            return this.GetQueryable(includes, filter).FirstOrDefault();
+            return this.GetQueryable(filter, 0, 0, null, false, includes).FirstOrDefault();
         }
 
         /// <summary>
@@ -545,10 +788,10 @@ namespace RepositoryEFDotnet.Contexts.NHib
         /// <returns>
         /// The <see cref="IEnumerable"/>.
         /// </returns>
-        public virtual IEnumerable<TEntity> GetAll<TEntity>(IEnumerable<string> includes = null)
+        public virtual IEnumerable<TEntity> GetAll<TEntity>(params Expression<Func<TEntity, object>>[] includes)
             where TEntity : class
         {
-            return this.GetQueryable<TEntity>(includes).ToList();
+            return this.GetQueryable(null, 0, 0, null, false, includes).ToList();
         }
 
         /// <summary>
@@ -562,10 +805,11 @@ namespace RepositoryEFDotnet.Contexts.NHib
         /// <returns>
         /// The <see cref="Task"/>.
         /// </returns>
-        public virtual async Task<IEnumerable<TEntity>> GetAllAsync<TEntity>(IEnumerable<string> includes = null)
+        public virtual async Task<IEnumerable<TEntity>> GetAllAsync<TEntity>(
+            params Expression<Func<TEntity, object>>[] includes)
             where TEntity : class
         {
-            return await this.GetQueryable<TEntity>(includes).ToListAsync();
+            return await this.GetQueryable(null, 0, 0, null, false, includes).ToListAsync();
         }
 
         /// <summary>
@@ -598,10 +842,45 @@ namespace RepositoryEFDotnet.Contexts.NHib
             int pageSize,
             IEnumerable<string> orderBy,
             bool orderByAscending = true,
-            IEnumerable<string> includes = null)
+            params Expression<Func<TEntity, object>>[] includes)
             where TEntity : class
         {
-            return this.GetQueryable<TEntity>(includes, null, startPage, pageSize, orderBy, orderByAscending);
+            return this.GetQueryable(null, startPage, pageSize, orderBy, orderByAscending, includes).ToList();
+        }
+
+        /// <summary>
+        /// The get all paged async.
+        /// </summary>
+        /// <param name="startPage">
+        /// The start page.
+        /// </param>
+        /// <param name="pageSize">
+        /// The page size.
+        /// </param>
+        /// <param name="orderBy">
+        /// The order by.
+        /// </param>
+        /// <param name="orderByAscending">
+        /// The order by ascending.
+        /// </param>
+        /// <param name="includes">
+        /// The includes.
+        /// </param>
+        /// <typeparam name="TEntity">
+        /// </typeparam>
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>
+        public virtual async Task<IEnumerable<TEntity>> GetAllPagedAsync<TEntity>(
+            int startPage,
+            int pageSize,
+            IEnumerable<string> orderBy,
+            bool orderByAscending = true,
+            params Expression<Func<TEntity, object>>[] includes)
+            where TEntity : class
+        {
+            return await this.GetQueryable(null, startPage, pageSize, orderBy, orderByAscending, includes)
+                       .ToListAsync();
         }
 
         /// <summary>
@@ -620,18 +899,15 @@ namespace RepositoryEFDotnet.Contexts.NHib
         /// </returns>
         public virtual async Task<TEntity> GetAsync<TEntity>(
             Expression<Func<TEntity, bool>> filter,
-            IEnumerable<string> includes = null)
+            params Expression<Func<TEntity, object>>[] includes)
             where TEntity : class
         {
-            return await this.GetQueryable(includes, filter).FirstOrDefaultAsync();
+            return await this.GetQueryable(filter, 0, 0, null, false, includes).FirstOrDefaultAsync();
         }
 
         /// <summary>
         /// The get queryable.
         /// </summary>
-        /// <param name="includes">
-        /// The includes.
-        /// </param>
         /// <param name="filter">
         /// The filter.
         /// </param>
@@ -647,41 +923,94 @@ namespace RepositoryEFDotnet.Contexts.NHib
         /// <param name="orderAscendent">
         /// The order ascendent.
         /// </param>
+        /// <param name="includes">
+        /// The includes.
+        /// </param>
         /// <typeparam name="TEntity">
         /// </typeparam>
         /// <returns>
         /// The <see cref="IQueryable"/>.
         /// </returns>
         public virtual IQueryable<TEntity> GetQueryable<TEntity>(
-            IEnumerable<string> includes = null,
             Expression<Func<TEntity, bool>> filter = null,
             int pageGo = 0,
             int pageSize = 0,
             IEnumerable<string> orderBy = null,
-            bool orderAscendent = false)
+            bool orderAscendent = false,
+            params Expression<Func<TEntity, object>>[] includes)
             where TEntity : class
         {
-            var items = this.CurrentSession.Query<TEntity>();
+            var query = this.CurrentSession.Query<TEntity>();
 
-            // if (includes != null && includes.Any())
-            // foreach (var i in includes.Where(o => o != null))
-            // items = items.Include(i);
-            if (filter != null) items = items.Where(filter);
+            if (includes != null && includes.Any())
+            {
+                foreach (var includeExpr in includes)
+                {
+                    query = query.Fetch(includeExpr);
+                }
+            }
+
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
 
             if (pageSize > 0)
             {
-                if (orderBy != null && orderBy.Any())
+                if (orderBy != null)
                 {
-                    foreach (var i in orderBy.Where(o => !string.IsNullOrEmpty(o)))
-                        items = QueryableUtils.CallOrderBy(items, i, orderAscendent);
+                    var orderBylist = orderBy.ToList();
 
-                    items = items.Skip(pageSize * (pageGo - 1));
+                    foreach (var i in orderBylist.Where(o => !string.IsNullOrEmpty(o)))
+                    {
+                        query = QueryableUtils.CallOrderBy(query, i, orderAscendent);
+                    }
+
+                    query = query.Skip(pageSize * (pageGo - 1));
                 }
 
-                items = items.Take(pageSize);
+                query = query.Take(pageSize);
             }
 
-            return items;
+            return query.WithOptions(o => o.SetCacheable(true));
+        }
+
+        /// <summary>
+        /// The min.
+        /// </summary>
+        /// <param name="filter">
+        /// The filter.
+        /// </param>
+        /// <typeparam name="TEntity">
+        /// </typeparam>
+        /// <typeparam name="TResult">
+        /// </typeparam>
+        /// <returns>
+        /// The <see cref="TResult"/>.
+        /// </returns>
+        public virtual TResult Min<TEntity, TResult>(Expression<Func<TEntity, TResult>> filter)
+            where TEntity : class
+        {
+            return this.GetQueryable<TEntity>().Min(filter);
+        }
+
+        /// <summary>
+        /// The min async.
+        /// </summary>
+        /// <param name="filter">
+        /// The filter.
+        /// </param>
+        /// <typeparam name="TEntity">
+        /// </typeparam>
+        /// <typeparam name="TResult">
+        /// </typeparam>
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>
+        public virtual async Task<TResult> MinAsync<TEntity, TResult>(Expression<Func<TEntity, TResult>> filter)
+            where TEntity : class
+        {
+            return await this.GetQueryable<TEntity>().MinAsync(filter);
         }
 
         /// <summary>
@@ -700,7 +1029,7 @@ namespace RepositoryEFDotnet.Contexts.NHib
         public virtual TResult Max<TEntity, TResult>(Expression<Func<TEntity, TResult>> filter)
             where TEntity : class
         {
-            return this.GetQueryable<TEntity>(null, null).Max(filter);
+            return this.GetQueryable<TEntity>().Max(filter);
         }
 
         /// <summary>
@@ -718,10 +1047,10 @@ namespace RepositoryEFDotnet.Contexts.NHib
         /// </returns>
         /// <exception cref="NotImplementedException">
         /// </exception>
-        public virtual Task<TResult> MaxAsync<TEntity, TResult>(Expression<Func<TEntity, TResult>> filter)
+        public virtual async Task<TResult> MaxAsync<TEntity, TResult>(Expression<Func<TEntity, TResult>> filter)
             where TEntity : class
         {
-            throw new NotImplementedException();
+            return await this.GetQueryable<TEntity>().MaxAsync(filter);
         }
 
         /// <summary>
@@ -821,8 +1150,8 @@ namespace RepositoryEFDotnet.Contexts.NHib
         /// <summary>
         /// The remove range async.
         /// </summary>
-        /// <param name="item">
-        /// The item.
+        /// <param name="items">
+        /// The items.
         /// </param>
         /// <typeparam name="TEntity">
         /// </typeparam>
@@ -831,14 +1160,14 @@ namespace RepositoryEFDotnet.Contexts.NHib
         /// </returns>
         /// <exception cref="NotImplementedException">
         /// </exception>
-        public virtual Task<bool> RemoveRangeAsync<TEntity>(IEnumerable<TEntity> item)
+        public virtual async Task<bool> RemoveRangeAsync<TEntity>(IEnumerable<TEntity> items)
             where TEntity : class
         {
-            throw new NotImplementedException();
+            return await Task.Run(() => this.RemoveRange(items));
         }
 
         /// <summary>
-        /// The rollback.
+        ///     The rollback.
         /// </summary>
         public virtual void Rollback()
         {
@@ -849,13 +1178,14 @@ namespace RepositoryEFDotnet.Contexts.NHib
 
             this.CloseTransaction();
             this.CloseSession();
+            this.CloseSessionFactory();
         }
 
         /// <summary>
-        /// The rollback async.
+        ///     The rollback async.
         /// </summary>
         /// <returns>
-        /// The <see cref="Task"/>.
+        ///     The <see cref="Task" />.
         /// </returns>
         public virtual async Task RollbackAsync()
         {
@@ -866,13 +1196,14 @@ namespace RepositoryEFDotnet.Contexts.NHib
 
             this.CloseTransaction();
             this.CloseSession();
+            this.CloseSessionFactory();
         }
 
         /// <summary>
-        /// The save.
+        ///     The save.
         /// </summary>
         /// <returns>
-        /// The <see cref="bool"/>.
+        ///     The <see cref="bool" />.
         /// </returns>
         public bool Save()
         {
@@ -880,10 +1211,10 @@ namespace RepositoryEFDotnet.Contexts.NHib
         }
 
         /// <summary>
-        /// The save async.
+        ///     The save async.
         /// </summary>
         /// <returns>
-        /// The <see cref="Task"/>.
+        ///     The <see cref="Task" />.
         /// </returns>
         public async Task<bool> SaveAsync()
         {
@@ -891,23 +1222,23 @@ namespace RepositoryEFDotnet.Contexts.NHib
         }
 
         /// <summary>
-        /// The start transaction.
+        ///     The start transaction.
         /// </summary>
         public virtual void StartTransaction()
         {
-            if (this.CurrentSession.Transaction != null && this.CurrentSession.Transaction.IsActive)
+            if (this.CurrentSession?.Transaction != null && this.CurrentSession.Transaction.IsActive)
             {
                 return;
             }
 
-            this.CurrentSession.BeginTransaction(IsolationLevel.ReadCommitted);
+            this.CurrentSession?.Transaction?.Begin(IsolationLevel.ReadCommitted);
         }
 
         /// <summary>
-        /// The start transaction async.
+        ///     The start transaction async.
         /// </summary>
         /// <returns>
-        /// The <see cref="Task"/>.
+        ///     The <see cref="Task" />.
         /// </returns>
         public virtual async Task StartTransactionAsync()
         {
@@ -917,6 +1248,44 @@ namespace RepositoryEFDotnet.Contexts.NHib
             }
 
             await Task.Run(() => this.CurrentSession.BeginTransaction(IsolationLevel.ReadCommitted));
+        }
+
+        public void NoTracking<TEntity>(TEntity item) where TEntity : class
+        {
+            throw new NotImplementedException();
+        }
+
+        public virtual ICriteria CreateCriteria<TEntity>()
+            where TEntity : class
+        {
+            return this.CurrentSession.CreateCriteria(typeof(TEntity));
+        }
+
+        public virtual ICriteria CreateCriteria(string entityName)
+        {
+            return this.CurrentSession.CreateCriteria(entityName);
+        }
+
+        public virtual IQueryOver<TEntity, TEntity> QueryOver<TEntity>()
+            where TEntity : class
+        {
+            return this.CurrentSession.QueryOver<TEntity>();
+        }
+
+        public virtual IQueryOver<TEntity> QueryOver<TEntity>(string entityName, Expression<Func<TEntity>> expr)
+            where TEntity : class
+        {
+            return this.CurrentSession.QueryOver(entityName, expr);
+        }
+
+        public virtual TEntity Get<TEntity, IDType>(IDType id)
+        {
+            return this.CurrentSession.Get<TEntity>(id);
+        }
+
+        public TEntity Get<TEntity>(object id)
+        {
+            return this.CurrentSession.Get<TEntity>(id);
         }
 
         #endregion
@@ -932,30 +1301,20 @@ namespace RepositoryEFDotnet.Contexts.NHib
         protected abstract void ConfigureMappings(MappingConfiguration config);
 
         /// <summary>
-        /// The create session.
+        ///     The set config.
         /// </summary>
         /// <param name="config">
-        /// The config.
+        ///     The config.
         /// </param>
-        protected void SetConfig(IPersistenceConfigurer config)
+        protected void SetConfig()
         {
-            this.Configuration = Fluently.Configure().Database(config).Mappings(this.SetupConventions)
-                .Mappings(this.ConfigureMappings).BuildConfiguration();
+            if (this.Configuration == null)
+            {
+                throw new Exception("Configuration cannot be null");
+            }
 
-            SchemaMetadataUpdater.QuoteTableAndColumns(
-                this.Configuration,
-                Dialect.GetDialect(this.Configuration.Properties));
-        }
+            this.Configuration.SetInterceptor(new AuditInterceptor());
 
-        /// <summary>
-        /// The set config.
-        /// </summary>
-        /// <param name="config">
-        /// The config.
-        /// </param>
-        protected void SetConfig(Configuration config)
-        {
-            this.Configuration = config ?? throw new Exception("Configuration cannot be null");
             SchemaMetadataUpdater.QuoteTableAndColumns(
                 this.Configuration,
                 Dialect.GetDialect(this.Configuration.Properties));
@@ -972,35 +1331,40 @@ namespace RepositoryEFDotnet.Contexts.NHib
         protected virtual void SetupConventions(MappingConfiguration config)
         {
             config.FluentMappings.Conventions.Add(
-                ConventionBuilder.Class.Always(z => { z.BatchSize(512); }),
+                ConventionBuilder.Class.Always(
+                    z =>
+                    {
+                        z.BatchSize(512);
+                        z.Cache.ReadWrite();
+                    }),
                 ConventionBuilder.HasMany.Always(
                     z =>
+                    {
+                        try
                         {
-                            try
-                            {
-                                IColumnInspector othercol = z.OtherSide?.Columns.FirstOrDefault();
+                            // IColumnInspector othercol = z.OtherSide?.Columns.FirstOrDefault();
 
-                                // if (othercol != null)
-                                // {
-                                // z.Key.Column(othercol.Name);
-                                // }
-                                z.Inverse();
-                                z.LazyLoad();
-                                z.Cascade.AllDeleteOrphan();
-                                z.BatchSize(512);
-                            }
-                            catch (Exception ex)
-                            {
-                                throw new Exception("Error mapping " + z, ex);
-                            }
-                        }),
+                            // if (othercol != null)
+                            // {
+                            // z.Key.Column(othercol.Name);
+                            // }
+                            z.Inverse();
+                            z.LazyLoad();
+                            z.Cascade.AllDeleteOrphan();
+                            z.BatchSize(512);
+                        }
+                        catch (Exception ex)
+                        {
+                            throw new Exception("Error mapping " + z, ex);
+                        }
+                    }),
                 ConventionBuilder.Property.When(
                     z => z.Expect(p => p.Property.PropertyType.IsEnum),
-                    z => z.CustomType(z.Property.PropertyType)));
+                    z => z.CustomType(z.Property.PropertyType))).AddFromAssemblyOf<IAuditable>();
         }
 
         /// <summary>
-        /// The close session.
+        ///     The close session.
         /// </summary>
         private void CloseSession()
         {
@@ -1014,16 +1378,45 @@ namespace RepositoryEFDotnet.Contexts.NHib
         }
 
         /// <summary>
-        /// The close transaction.
+        /// The close session factory.
+        /// </summary>
+        private void CloseSessionFactory()
+        {
+            if (!this.closeFactory)
+            {
+                return;
+            }
+
+            if (this.sessionFactory != null)
+            {
+                if (!this.sessionFactory.IsClosed)
+                {
+                    this.sessionFactory.Close();
+                }
+
+                this.sessionFactory.Dispose();
+            }
+
+            this.sessionFactory = null;
+            this.closeFactory = true;
+        }
+
+        /// <summary>
+        ///     The close transaction.
         /// </summary>
         private void CloseTransaction()
         {
             this.currentSession?.Transaction?.Dispose();
+
+            if (this.currentSession != null && this.currentSession.IsConnected)
+            {
+                this.currentSession?.Disconnect();
+            }
         }
 
 #if DEBUG
 
-        /// <summary>
+        // <summary>
         /// The create log dir.
         /// </summary>
         private void CreateLogDir()
@@ -1037,28 +1430,40 @@ namespace RepositoryEFDotnet.Contexts.NHib
 #endif
 
         /// <summary>
-        /// The create session.
+        ///     The create session.
         /// </summary>
         /// <exception cref="Exception">
         /// </exception>
         private void CreateSession()
         {
-            if (this.Configuration == null)
-            {
-                throw new Exception("Configuration cannot be null");
-            }
+            this.CreateSessionFactory();
 
             if (this.currentSession == null || !this.currentSession.IsOpen)
             {
-                using (var factory = this.Configuration.BuildSessionFactory())
-                {
-                    this.currentSession = factory.OpenSession();
-                }
+                this.currentSession = this.SessionFactory?.OpenSession();
             }
 
-            if (this.currentSession != null && !this.currentSession.IsOpen)
+            if (this.currentSession != null && !this.currentSession.IsConnected)
             {
                 this.currentSession.Reconnect();
+            }
+        }
+
+        /// <summary>
+        /// The create session factory.
+        /// </summary>
+        /// <exception cref="Exception">
+        /// </exception>
+        private void CreateSessionFactory()
+        {
+            if (this.sessionFactory == null || this.sessionFactory.IsClosed)
+            {
+                if (this.Configuration == null)
+                {
+                    throw new Exception("Configuration cannot be null");
+                }
+
+                this.sessionFactory = this.Configuration.BuildSessionFactory();
             }
         }
 

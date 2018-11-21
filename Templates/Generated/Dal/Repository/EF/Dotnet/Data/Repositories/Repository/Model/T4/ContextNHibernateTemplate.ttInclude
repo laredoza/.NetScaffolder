@@ -31,7 +31,7 @@ using <#= nameSpace #>;
 using <#= nameSpace #>;
 <#+ } #>
 using <#= MappingNamespace #>.<#= Driver.ParentFolder #>.<#= Driver.Prefix #>;
-using RepositoryEFDotnet.Contexts.<#= Driver.ParentFolder #>;
+using Quirc.DataAccess.Context.NHib.Base;
 
 namespace <#= ContextData.TransformFullnamespace(DataType.BaseNamespace) #>.<#= Driver.ParentFolder #>
 {
@@ -40,16 +40,29 @@ namespace <#= ContextData.TransformFullnamespace(DataType.BaseNamespace) #>.<#= 
 		#region CTOR
 		
 		// Use other target e.g. in memory sqlite
-	    public <#= string.Concat(Driver.Prefix, ContextData.ContextName)  #>(Configuration config)
+	    public <#= string.Concat(Driver.Prefix, ContextData.ContextName)  #>(Configuration config) : base(config)
 	    {
-			SetConfig(config);
         }
 		
 		// Use db as target
-	    public <#= string.Concat(Driver.Prefix, ContextData.ContextName)  #>(<#= Driver.ConfigurationClass #> config)
+	    public <#= string.Concat(Driver.Prefix, ContextData.ContextName)  #>(<#= Driver.ConfigurationClass #> config) : base(config)
 	    {
             config.IsolationLevel(IsolationLevel.ReadCommitted);
-            SetConfig(config);
+	    }
+		
+		// Use external factory
+	    public <#= string.Concat(Driver.Prefix, ContextData.ContextName)  #>(ISessionFactory factory) : base(factory)
+	    {
+	    }
+		
+		// Use persistence configurer
+	    public <#= string.Concat(Driver.Prefix, ContextData.ContextName)  #>(IPersistenceConfigurer config) : base(config)
+	    {
+	    }
+		
+		// Use Fluent Configuration
+	    public <#= string.Concat(Driver.Prefix, ContextData.ContextName)  #>(FluentConfiguration config) : base(config)
+	    {
 	    }
 		
 		#endregion
@@ -57,7 +70,7 @@ namespace <#= ContextData.TransformFullnamespace(DataType.BaseNamespace) #>.<#= 
 	    protected override void ConfigureMappings(MappingConfiguration config)
 	    {
 <#+ foreach(var model in Models) { #>
-			config.FluentMappings.Add(typeof(<#= DataType.TransformModelName(model.TableName) #><#= MappingPostFix #>));
+			config.FluentMappings.Add(typeof(<#= string.Concat(ContextData.ContextName, DataType.TransformModelName(model.TableName)) #><#= MappingPostFix #>));
 <#+ } #>
         }
 	}

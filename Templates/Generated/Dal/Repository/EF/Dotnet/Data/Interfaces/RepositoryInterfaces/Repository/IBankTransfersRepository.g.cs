@@ -20,6 +20,8 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
 using Banking.Models.Interfaces;
 using RepositoryEFDotnet.Core.Base;
 
@@ -36,42 +38,95 @@ namespace Banking.Models.Interfaces
         /// Load BankTransfers entities from the database using the composite primary keys
         /// </summary
         /// <param name="bankTransferId">int</param>
+		/// <param name="includes">params Expression<Func<IBankTransfers, object>>[]</param>
         /// <returns>IBankTransfers</returns>
-		IBankTransfers LoadByBankTransferId(int bankTransferId);
+		IBankTransfers LoadByBankTransferId(int bankTransferId, params Expression<Func<IBankTransfers, object>>[] includes);
+		
+        /// <summary>
+        /// Load BankTransfers entities async from the database using the composite primary keys
+        /// </summary
+        /// <param name="bankTransferId">int</param>
+		/// <param name="includes">params Expression<Func<IBankTransfers, object>>[]</param>
+        /// <returns>IBankTransfers</returns>
+		Task<IBankTransfers> LoadByBankTransferIdAsync(int bankTransferId, params Expression<Func<IBankTransfers, object>>[] includes);
 
         /// <summary>
         /// Load BankTransfers entities from the database using the FromBankAccountId field
         /// </summary>
-        /// <param name="fromBankAccountId">int</param>
+        /// <param name="fromBankAccountId">int</param
+		/// <param name="includes">params Expression<Func<IBankTransfers, object>>[]</param>
         /// <returns>IList<IBankTransfers></returns>
-		IList<IBankTransfers> LoadByFromBankAccountId(int fromBankAccountId);
+		IList<IBankTransfers> LoadByFromBankAccountId(int fromBankAccountId, params Expression<Func<IBankTransfers, object>>[] includes);
+		
+        /// <summary>
+        /// Load BankTransfers entities async from the database using the FromBankAccountId field
+        /// </summary>
+        /// <param name="fromBankAccountId">int</param
+		/// <param name="includes">params Expression<Func<IBankTransfers, object>>[]</param>
+        /// <returns>IList<IBankTransfers></returns>
+		Task<IList<IBankTransfers>> LoadByFromBankAccountIdAsync(int fromBankAccountId, params Expression<Func<IBankTransfers, object>>[] includes);
 
         /// <summary>
         /// Load BankTransfers entities from the database using the ToBankAccountId field
         /// </summary>
-        /// <param name="toBankAccountId">int</param>
+        /// <param name="toBankAccountId">int</param
+		/// <param name="includes">params Expression<Func<IBankTransfers, object>>[]</param>
         /// <returns>IList<IBankTransfers></returns>
-		IList<IBankTransfers> LoadByToBankAccountId(int toBankAccountId);
+		IList<IBankTransfers> LoadByToBankAccountId(int toBankAccountId, params Expression<Func<IBankTransfers, object>>[] includes);
+		
+        /// <summary>
+        /// Load BankTransfers entities async from the database using the ToBankAccountId field
+        /// </summary>
+        /// <param name="toBankAccountId">int</param
+		/// <param name="includes">params Expression<Func<IBankTransfers, object>>[]</param>
+        /// <returns>IList<IBankTransfers></returns>
+		Task<IList<IBankTransfers>> LoadByToBankAccountIdAsync(int toBankAccountId, params Expression<Func<IBankTransfers, object>>[] includes);
 
         /// <summary>
         /// Load BankTransfers entities from the database using the Amount field
         /// </summary>
-        /// <param name="amount">decimal</param>
+        /// <param name="amount">decimal</param
+		/// <param name="includes">params Expression<Func<IBankTransfers, object>>[]</param>
         /// <returns>IList<IBankTransfers></returns>
-		IList<IBankTransfers> LoadByAmount(decimal amount);
+		IList<IBankTransfers> LoadByAmount(decimal amount, params Expression<Func<IBankTransfers, object>>[] includes);
+		
+        /// <summary>
+        /// Load BankTransfers entities async from the database using the Amount field
+        /// </summary>
+        /// <param name="amount">decimal</param
+		/// <param name="includes">params Expression<Func<IBankTransfers, object>>[]</param>
+        /// <returns>IList<IBankTransfers></returns>
+		Task<IList<IBankTransfers>> LoadByAmountAsync(decimal amount, params Expression<Func<IBankTransfers, object>>[] includes);
 
         /// <summary>
         /// Load BankTransfers entities from the database using the TransferDate field
         /// </summary>
-        /// <param name="transferDate">DateTime</param>
+        /// <param name="transferDate">DateTime</param
+		/// <param name="includes">params Expression<Func<IBankTransfers, object>>[]</param>
         /// <returns>IList<IBankTransfers></returns>
-		IList<IBankTransfers> LoadByTransferDate(DateTime transferDate);
+		IList<IBankTransfers> LoadByTransferDate(DateTime transferDate, params Expression<Func<IBankTransfers, object>>[] includes);
+		
+        /// <summary>
+        /// Load BankTransfers entities async from the database using the TransferDate field
+        /// </summary>
+        /// <param name="transferDate">DateTime</param
+		/// <param name="includes">params Expression<Func<IBankTransfers, object>>[]</param>
+        /// <returns>IList<IBankTransfers></returns>
+		Task<IList<IBankTransfers>> LoadByTransferDateAsync(DateTime transferDate, params Expression<Func<IBankTransfers, object>>[] includes);
 
         /// <summary>
         /// Load all BankTransfers entities from the database.
         /// </summary>
+		/// <param name="includes">params Expression<Func<IBankTransfers, object>>[]</param>
         /// <returns>IList<IBankTransfers></returns>
-		IList<IBankTransfers> LoadAll();
+		IList<IBankTransfers> LoadAll(params Expression<Func<IBankTransfers, object>>[] includes);
+		
+        /// <summary>
+        /// Load all BankTransfers entities async from the database.
+        /// </summary>
+		/// <param name="includes">params Expression<Func<IBankTransfers, object>>[]</param>
+        /// <returns>IList<IBankTransfers></returns>
+		Task<IList<IBankTransfers>> LoadAllAsync(params Expression<Func<IBankTransfers, object>>[] includes);
 		
 		#endregion
 
@@ -82,11 +137,18 @@ namespace Banking.Models.Interfaces
 		#region Modifiers
 		
         /// <summary>
-        /// Save the BankTransfers entity to the database.
+        /// Add the BankTransfers entity to the database.
         /// </summary>
         /// <param name="entity">IBankTransfers</param>
         /// <returns>bool</returns>
-		bool Save(IBankTransfers entity);
+		bool Add(IBankTransfers entity);
+		
+        /// <summary>
+        /// Add the BankTransfers entity async to the database.
+        /// </summary>
+        /// <param name="entity">IBankTransfers</param>
+        /// <returns>bool</returns>
+		Task<bool> AddAsync(IBankTransfers entity);
 
         /// <summary>
         /// Update the BankTransfers entity in the database if any values have changed
@@ -96,11 +158,25 @@ namespace Banking.Models.Interfaces
 		bool Update(IBankTransfers entity);
 		
         /// <summary>
+        /// Update the BankTransfers entity async in the database if any values have changed
+        /// </summary>
+        /// <param name="entity">IBankTransfers</param>
+        /// <returns>bool</returns>
+		Task<bool> UpdateAsync(IBankTransfers entity);
+		
+        /// <summary>
         /// Delete the BankTransfers entity from the database
         /// </summary>
         /// <param name="entity">IBankTransfers</param>
         /// <returns>bool</returns>
 		bool Delete(IBankTransfers entity);
+		
+        /// <summary>
+        /// Delete the BankTransfers entity async from the database
+        /// </summary>
+        /// <param name="entity">IBankTransfers</param>
+        /// <returns>bool</returns>
+		Task<bool> DeleteAsync(IBankTransfers entity);
 
 		/// <summary>
         /// Delete the BankTransfers entity from the database
@@ -109,6 +185,25 @@ namespace Banking.Models.Interfaces
         /// <returns>bool</returns>
 		bool Delete( int bankTransferId);
 
+		/// <summary>
+        /// Delete the BankTransfers entity async from the database
+        /// </summary>
+        /// <param name="bankTransferId">int</param>
+        /// <returns>bool</returns>
+		Task<bool> DeleteAsync( int bankTransferId);
+		
+		#endregion
+		
+		#region Aggregates
+		
+		TResult Max<TResult>(Expression<Func<IBankTransfers, TResult>> maxExpression);
+		
+		Task<TResult> MaxAsync<TResult>(Expression<Func<IBankTransfers, TResult>> maxExpression);
+		
+		TResult Min<TResult>(Expression<Func<IBankTransfers, TResult>> maxExpression);
+		
+		Task<TResult> MinAsync<TResult>(Expression<Func<IBankTransfers, TResult>> maxExpression);
+		
 		#endregion
 	}
 }

@@ -25,7 +25,7 @@ using FluentNHibernate.Cfg.Db;
 using FluentNHibernate.Cfg;
 using RepositoryEFDotnet.Core.Base;
 using Banking.Models.Context.Mappings.NHib.Oracle;
-using RepositoryEFDotnet.Contexts.NHib;
+using Quirc.DataAccess.Context.NHib.Base;
 
 namespace Banking.Models.Context.NHib
 {
@@ -34,31 +34,44 @@ namespace Banking.Models.Context.NHib
 		#region CTOR
 		
 		// Use other target e.g. in memory sqlite
-	    public OracleFullContext(Configuration config)
+	    public OracleFullContext(Configuration config) : base(config)
 	    {
-			SetConfig(config);
         }
 		
 		// Use db as target
-	    public OracleFullContext(OracleDataClientConfiguration config)
+	    public OracleFullContext(OracleDataClientConfiguration config) : base(config)
 	    {
             config.IsolationLevel(IsolationLevel.ReadCommitted);
-            SetConfig(config);
+	    }
+		
+		// Use external factory
+	    public OracleFullContext(ISessionFactory factory) : base(factory)
+	    {
+	    }
+		
+		// Use persistence configurer
+	    public OracleFullContext(IPersistenceConfigurer config) : base(config)
+	    {
+	    }
+		
+		// Use Fluent Configuration
+	    public OracleFullContext(FluentConfiguration config) : base(config)
+	    {
 	    }
 		
 		#endregion
 		
 	    protected override void ConfigureMappings(MappingConfiguration config)
 	    {
-			config.FluentMappings.Add(typeof(BankAccountMap));
-			config.FluentMappings.Add(typeof(BankTransfersMap));
-			config.FluentMappings.Add(typeof(BookMap));
-			config.FluentMappings.Add(typeof(CountryMap));
-			config.FluentMappings.Add(typeof(CustomerMap));
-			config.FluentMappings.Add(typeof(OrderMap));
-			config.FluentMappings.Add(typeof(OrderDetailsMap));
-			config.FluentMappings.Add(typeof(ProductMap));
-			config.FluentMappings.Add(typeof(SoftwareMap));
+			config.FluentMappings.Add(typeof(FullContextBankAccountMap));
+			config.FluentMappings.Add(typeof(FullContextBankTransfersMap));
+			config.FluentMappings.Add(typeof(FullContextBookMap));
+			config.FluentMappings.Add(typeof(FullContextCountryMap));
+			config.FluentMappings.Add(typeof(FullContextCustomerMap));
+			config.FluentMappings.Add(typeof(FullContextOrderMap));
+			config.FluentMappings.Add(typeof(FullContextOrderDetailsMap));
+			config.FluentMappings.Add(typeof(FullContextProductMap));
+			config.FluentMappings.Add(typeof(FullContextSoftwareMap));
         }
 	}
 }

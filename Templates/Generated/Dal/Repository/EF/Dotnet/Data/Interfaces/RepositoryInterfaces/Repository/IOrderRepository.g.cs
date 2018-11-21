@@ -20,6 +20,8 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
 using Banking.Models.Interfaces;
 using RepositoryEFDotnet.Core.Base;
 
@@ -36,35 +38,79 @@ namespace Banking.Models.Interfaces
         /// Load Order entities from the database using the composite primary keys
         /// </summary
         /// <param name="orderId">int</param>
+		/// <param name="includes">params Expression<Func<IOrder, object>>[]</param>
         /// <returns>IOrder</returns>
-		IOrder LoadByOrderId(int orderId);
+		IOrder LoadByOrderId(int orderId, params Expression<Func<IOrder, object>>[] includes);
+		
+        /// <summary>
+        /// Load Order entities async from the database using the composite primary keys
+        /// </summary
+        /// <param name="orderId">int</param>
+		/// <param name="includes">params Expression<Func<IOrder, object>>[]</param>
+        /// <returns>IOrder</returns>
+		Task<IOrder> LoadByOrderIdAsync(int orderId, params Expression<Func<IOrder, object>>[] includes);
 
         /// <summary>
         /// Load Order entities from the database using the CustomerId field
         /// </summary>
-        /// <param name="customerId">Nullable<int></param>
+        /// <param name="customerId">Nullable<int></param
+		/// <param name="includes">params Expression<Func<IOrder, object>>[]</param>
         /// <returns>IList<IOrder></returns>
-		IList<IOrder> LoadByCustomerId(Nullable<int> customerId);
+		IList<IOrder> LoadByCustomerId(Nullable<int> customerId, params Expression<Func<IOrder, object>>[] includes);
+		
+        /// <summary>
+        /// Load Order entities async from the database using the CustomerId field
+        /// </summary>
+        /// <param name="customerId">Nullable<int></param
+		/// <param name="includes">params Expression<Func<IOrder, object>>[]</param>
+        /// <returns>IList<IOrder></returns>
+		Task<IList<IOrder>> LoadByCustomerIdAsync(Nullable<int> customerId, params Expression<Func<IOrder, object>>[] includes);
 
         /// <summary>
         /// Load Order entities from the database using the OrderDate field
         /// </summary>
-        /// <param name="orderDate">Nullable<DateTime></param>
+        /// <param name="orderDate">Nullable<DateTime></param
+		/// <param name="includes">params Expression<Func<IOrder, object>>[]</param>
         /// <returns>IList<IOrder></returns>
-		IList<IOrder> LoadByOrderDate(Nullable<DateTime> orderDate);
+		IList<IOrder> LoadByOrderDate(Nullable<DateTime> orderDate, params Expression<Func<IOrder, object>>[] includes);
+		
+        /// <summary>
+        /// Load Order entities async from the database using the OrderDate field
+        /// </summary>
+        /// <param name="orderDate">Nullable<DateTime></param
+		/// <param name="includes">params Expression<Func<IOrder, object>>[]</param>
+        /// <returns>IList<IOrder></returns>
+		Task<IList<IOrder>> LoadByOrderDateAsync(Nullable<DateTime> orderDate, params Expression<Func<IOrder, object>>[] includes);
 
         /// <summary>
         /// Load Order entities from the database using the DeliveryDate field
         /// </summary>
-        /// <param name="deliveryDate">Nullable<DateTime></param>
+        /// <param name="deliveryDate">Nullable<DateTime></param
+		/// <param name="includes">params Expression<Func<IOrder, object>>[]</param>
         /// <returns>IList<IOrder></returns>
-		IList<IOrder> LoadByDeliveryDate(Nullable<DateTime> deliveryDate);
+		IList<IOrder> LoadByDeliveryDate(Nullable<DateTime> deliveryDate, params Expression<Func<IOrder, object>>[] includes);
+		
+        /// <summary>
+        /// Load Order entities async from the database using the DeliveryDate field
+        /// </summary>
+        /// <param name="deliveryDate">Nullable<DateTime></param
+		/// <param name="includes">params Expression<Func<IOrder, object>>[]</param>
+        /// <returns>IList<IOrder></returns>
+		Task<IList<IOrder>> LoadByDeliveryDateAsync(Nullable<DateTime> deliveryDate, params Expression<Func<IOrder, object>>[] includes);
 
         /// <summary>
         /// Load all Order entities from the database.
         /// </summary>
+		/// <param name="includes">params Expression<Func<IOrder, object>>[]</param>
         /// <returns>IList<IOrder></returns>
-		IList<IOrder> LoadAll();
+		IList<IOrder> LoadAll(params Expression<Func<IOrder, object>>[] includes);
+		
+        /// <summary>
+        /// Load all Order entities async from the database.
+        /// </summary>
+		/// <param name="includes">params Expression<Func<IOrder, object>>[]</param>
+        /// <returns>IList<IOrder></returns>
+		Task<IList<IOrder>> LoadAllAsync(params Expression<Func<IOrder, object>>[] includes);
 		
 		#endregion
 
@@ -74,44 +120,91 @@ namespace Banking.Models.Interfaces
         /// Search for Order entities in the database by ShippingName
         /// </summary>
         /// <param name="shippingName">string</param>
-		/// <param name="caseSensitive">bool</param>
+		/// <param name="caseSensitive">bool</param
+		/// <param name="includes">params Expression<Func<IOrder, object>>[]</param>
         /// <returns>IList<IOrder></returns>
-		IList<IOrder> SearchByShippingName(string shippingName, bool caseSensitive = false);
+		IList<IOrder> SearchByShippingName(string shippingName, bool caseSensitive = false, params Expression<Func<IOrder, object>>[] includes);
+		
+        /// <summary>
+        /// Search for Order entities async in the database by ShippingName
+        /// </summary>
+        /// <param name="shippingName">string</param>
+		/// <param name="caseSensitive">bool</param
+		/// <param name="includes">params Expression<Func<IOrder, object>>[]</param>
+        /// <returns>IList<IOrder></returns>
+		Task<IList<IOrder>> SearchByShippingNameAsync(string shippingName, bool caseSensitive = false, params Expression<Func<IOrder, object>>[] includes);
 
         /// <summary>
         /// Search for Order entities in the database by ShippingAddress
         /// </summary>
         /// <param name="shippingAddress">string</param>
-		/// <param name="caseSensitive">bool</param>
+		/// <param name="caseSensitive">bool</param
+		/// <param name="includes">params Expression<Func<IOrder, object>>[]</param>
         /// <returns>IList<IOrder></returns>
-		IList<IOrder> SearchByShippingAddress(string shippingAddress, bool caseSensitive = false);
+		IList<IOrder> SearchByShippingAddress(string shippingAddress, bool caseSensitive = false, params Expression<Func<IOrder, object>>[] includes);
+		
+        /// <summary>
+        /// Search for Order entities async in the database by ShippingAddress
+        /// </summary>
+        /// <param name="shippingAddress">string</param>
+		/// <param name="caseSensitive">bool</param
+		/// <param name="includes">params Expression<Func<IOrder, object>>[]</param>
+        /// <returns>IList<IOrder></returns>
+		Task<IList<IOrder>> SearchByShippingAddressAsync(string shippingAddress, bool caseSensitive = false, params Expression<Func<IOrder, object>>[] includes);
 
         /// <summary>
         /// Search for Order entities in the database by ShippingCity
         /// </summary>
         /// <param name="shippingCity">string</param>
-		/// <param name="caseSensitive">bool</param>
+		/// <param name="caseSensitive">bool</param
+		/// <param name="includes">params Expression<Func<IOrder, object>>[]</param>
         /// <returns>IList<IOrder></returns>
-		IList<IOrder> SearchByShippingCity(string shippingCity, bool caseSensitive = false);
+		IList<IOrder> SearchByShippingCity(string shippingCity, bool caseSensitive = false, params Expression<Func<IOrder, object>>[] includes);
+		
+        /// <summary>
+        /// Search for Order entities async in the database by ShippingCity
+        /// </summary>
+        /// <param name="shippingCity">string</param>
+		/// <param name="caseSensitive">bool</param
+		/// <param name="includes">params Expression<Func<IOrder, object>>[]</param>
+        /// <returns>IList<IOrder></returns>
+		Task<IList<IOrder>> SearchByShippingCityAsync(string shippingCity, bool caseSensitive = false, params Expression<Func<IOrder, object>>[] includes);
 
         /// <summary>
         /// Search for Order entities in the database by ShippingZip
         /// </summary>
         /// <param name="shippingZip">string</param>
-		/// <param name="caseSensitive">bool</param>
+		/// <param name="caseSensitive">bool</param
+		/// <param name="includes">params Expression<Func<IOrder, object>>[]</param>
         /// <returns>IList<IOrder></returns>
-		IList<IOrder> SearchByShippingZip(string shippingZip, bool caseSensitive = false);
+		IList<IOrder> SearchByShippingZip(string shippingZip, bool caseSensitive = false, params Expression<Func<IOrder, object>>[] includes);
+		
+        /// <summary>
+        /// Search for Order entities async in the database by ShippingZip
+        /// </summary>
+        /// <param name="shippingZip">string</param>
+		/// <param name="caseSensitive">bool</param
+		/// <param name="includes">params Expression<Func<IOrder, object>>[]</param>
+        /// <returns>IList<IOrder></returns>
+		Task<IList<IOrder>> SearchByShippingZipAsync(string shippingZip, bool caseSensitive = false, params Expression<Func<IOrder, object>>[] includes);
 
 		#endregion
 		
 		#region Modifiers
 		
         /// <summary>
-        /// Save the Order entity to the database.
+        /// Add the Order entity to the database.
         /// </summary>
         /// <param name="entity">IOrder</param>
         /// <returns>bool</returns>
-		bool Save(IOrder entity);
+		bool Add(IOrder entity);
+		
+        /// <summary>
+        /// Add the Order entity async to the database.
+        /// </summary>
+        /// <param name="entity">IOrder</param>
+        /// <returns>bool</returns>
+		Task<bool> AddAsync(IOrder entity);
 
         /// <summary>
         /// Update the Order entity in the database if any values have changed
@@ -121,11 +214,25 @@ namespace Banking.Models.Interfaces
 		bool Update(IOrder entity);
 		
         /// <summary>
+        /// Update the Order entity async in the database if any values have changed
+        /// </summary>
+        /// <param name="entity">IOrder</param>
+        /// <returns>bool</returns>
+		Task<bool> UpdateAsync(IOrder entity);
+		
+        /// <summary>
         /// Delete the Order entity from the database
         /// </summary>
         /// <param name="entity">IOrder</param>
         /// <returns>bool</returns>
 		bool Delete(IOrder entity);
+		
+        /// <summary>
+        /// Delete the Order entity async from the database
+        /// </summary>
+        /// <param name="entity">IOrder</param>
+        /// <returns>bool</returns>
+		Task<bool> DeleteAsync(IOrder entity);
 
 		/// <summary>
         /// Delete the Order entity from the database
@@ -134,6 +241,25 @@ namespace Banking.Models.Interfaces
         /// <returns>bool</returns>
 		bool Delete( int orderId);
 
+		/// <summary>
+        /// Delete the Order entity async from the database
+        /// </summary>
+        /// <param name="orderId">int</param>
+        /// <returns>bool</returns>
+		Task<bool> DeleteAsync( int orderId);
+		
+		#endregion
+		
+		#region Aggregates
+		
+		TResult Max<TResult>(Expression<Func<IOrder, TResult>> maxExpression);
+		
+		Task<TResult> MaxAsync<TResult>(Expression<Func<IOrder, TResult>> maxExpression);
+		
+		TResult Min<TResult>(Expression<Func<IOrder, TResult>> maxExpression);
+		
+		Task<TResult> MinAsync<TResult>(Expression<Func<IOrder, TResult>> maxExpression);
+		
 		#endregion
 	}
 }
