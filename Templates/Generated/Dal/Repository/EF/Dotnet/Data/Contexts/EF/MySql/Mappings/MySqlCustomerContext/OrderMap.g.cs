@@ -64,7 +64,7 @@ namespace Banking.Models.Customers.Mappings.EF.MySql
 			#endregion
 			
 			#region Indexes
-			Property(t => t.CustomerId).HasIndex(i => new {i.CustomerId}).HasName("IX_CustomerId").IsUnique(false);
+			Property(t => t.CustomerId).HasColumnAnnotation("IX_CustomerId", new IndexAnnotation(new [] { new IndexAttribute("IX_CustomerId"){ IsClustered = false, IsUnique = false, Order = 0}}));
 			#endregion
 
 			#region Relationships

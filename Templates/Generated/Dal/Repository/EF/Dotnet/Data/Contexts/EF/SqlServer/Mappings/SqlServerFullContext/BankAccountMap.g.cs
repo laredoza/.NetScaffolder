@@ -58,12 +58,15 @@ namespace Banking.Models.Context.Mappings.EF.SqlServer
 			#endregion
 			
 			#region Indexes
-			Property(t => t.CustomerId).HasIndex(i => new {i.CustomerId}).HasName("IX_CustomerId").IsUnique(false);
+			Property(t => t.Balance).HasColumnAnnotation("NonClusteredIndex-20180611-172244", new IndexAnnotation(new [] { new IndexAttribute("NonClusteredIndex-20180611-172244"){ IsClustered = false, IsUnique = false, Order = 0}, new IndexAttribute("NonClusteredIndex-20180611-172244"){ IsClustered = false, IsUnique = false, Order = 1}}));
+			Property(t => t.CustomerId).HasColumnAnnotation("IX_CustomerId", new IndexAnnotation(new [] { new IndexAttribute("IX_CustomerId"){ IsClustered = false, IsUnique = false, Order = 0}}));
+			Property(t => t.Locked).HasColumnAnnotation("NonClusteredIndex-20180611-172244", new IndexAnnotation(new [] { new IndexAttribute("NonClusteredIndex-20180611-172244"){ IsClustered = false, IsUnique = false, Order = 0}, new IndexAttribute("NonClusteredIndex-20180611-172244"){ IsClustered = false, IsUnique = false, Order = 1}}));
 			#endregion
 
 			#region Relationships
 			
 			HasOptional<Customer>(s => s.Customer).WithMany(s => s.BankAccount).HasForeignKey(s => s.CustomerId).WillCascadeOnDelete(false);
+			HasMany<BankTransfers>(s => s.BankTransfers1).WithRequired(s => s.BankAccount1).HasForeignKey(s => s.FromBankAccountId).WillCascadeOnDelete(false);
 			HasMany<BankTransfers>(s => s.BankTransfers).WithRequired(s => s.BankAccount).HasForeignKey(s => s.ToBankAccountId).WillCascadeOnDelete(false);
 			
 			#endregion			

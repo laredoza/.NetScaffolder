@@ -73,7 +73,7 @@ namespace Banking.Models.Customers.Mappings.EF.SqlServer
 			#endregion
 			
 			#region Indexes
-			Property(t => t.CountryId).HasIndex(i => new {i.CountryId}).HasName("IX_CountryId").IsUnique(false);
+			Property(t => t.CountryId).HasColumnAnnotation("IX_CountryId", new IndexAnnotation(new [] { new IndexAttribute("IX_CountryId"){ IsClustered = false, IsUnique = false, Order = 0}}));
 			#endregion
 
 			#region Relationships

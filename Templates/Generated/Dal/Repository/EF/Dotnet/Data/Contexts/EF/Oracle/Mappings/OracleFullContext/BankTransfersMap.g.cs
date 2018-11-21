@@ -59,11 +59,13 @@ namespace Banking.Models.Context.Mappings.EF.Oracle
 			#endregion
 			
 			#region Indexes
-			Property(t => t.ToBankAccountId).HasIndex(i => new {i.ToBankAccountId}).HasName("IX_ToBankAccountId").IsUnique(false);
+			Property(t => t.FromBankAccountId).HasColumnAnnotation("IX_FromBankAccountId", new IndexAnnotation(new [] { new IndexAttribute("IX_FromBankAccountId"){ IsClustered = false, IsUnique = false, Order = 0}}));
+			Property(t => t.ToBankAccountId).HasColumnAnnotation("IX_ToBankAccountId", new IndexAnnotation(new [] { new IndexAttribute("IX_ToBankAccountId"){ IsClustered = false, IsUnique = false, Order = 0}}));
 			#endregion
 
 			#region Relationships
 			
+			HasRequired<BankAccount>(s => s.BankAccount1).WithMany(s => s.BankTransfers1).HasForeignKey(s => s.FromBankAccountId).WillCascadeOnDelete(false);
 			HasRequired<BankAccount>(s => s.BankAccount).WithMany(s => s.BankTransfers).HasForeignKey(s => s.ToBankAccountId).WillCascadeOnDelete(false);
 			
 			#endregion			

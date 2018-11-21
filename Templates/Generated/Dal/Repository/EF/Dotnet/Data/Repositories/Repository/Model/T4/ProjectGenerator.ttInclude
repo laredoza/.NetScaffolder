@@ -62,6 +62,7 @@
 					{					
 						if(contextData != null)
 						{
+                            //Debugger.Break();
 							var mappingGen = new MappingGenerator();
 							var mappingDataType = dataTypes.FirstOrDefault(o => o is MappingDataType) as MappingDataType;
 					

@@ -27,7 +27,7 @@
         {					
 			foreach(IDriver driver in MappingDataType.Drivers )
 			{
-				Debugger.Break();
+				//Debugger.Break();
 				
 				projectPath = string.Format(ProjectOutputPath, driver.ParentFolder, driver.Prefix);
 				var contextModels = Models.Where(o => ContextData.Models.Exists(x => x.SchemaName == o.SchemaName && x.TableName == o.TableName));

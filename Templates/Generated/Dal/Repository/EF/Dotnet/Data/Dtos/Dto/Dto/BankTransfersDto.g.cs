@@ -44,6 +44,10 @@ namespace Banking.Models.Dto
 
 			if(deep)
 			{
+                if(item.BankAccount1 != null)
+                {
+				    this.BankAccount1 = new BankAccountDto(item.BankAccount1, deep);
+                }
                 if(item.BankAccount != null)
                 {
 				    this.BankAccount = new BankAccountDto(item.BankAccount, deep);
@@ -70,6 +74,7 @@ namespace Banking.Models.Dto
 		
 		#region Parent Relationships
 		
+		public IBankAccount BankAccount1 { get; set; }
 		public IBankAccount BankAccount { get; set; }
 		
 		#endregion

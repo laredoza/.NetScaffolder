@@ -44,6 +44,10 @@ namespace Banking.Models.Entity
 
 			if(deep)
 			{
+				if(item.BankAccount1 != null)
+                {
+                    this.BankAccount1 = new BankAccount(item.BankAccount1, deep);
+                }
 				if(item.BankAccount != null)
                 {
                     this.BankAccount = new BankAccount(item.BankAccount, deep);
@@ -64,6 +68,29 @@ namespace Banking.Models.Entity
 		#endregion
 
 		#region Parent Relationships
+
+        public virtual BankAccount BankAccount1 { get; set; }
+		IBankAccount IBankTransfers.BankAccount1 
+		{ 
+			get
+			{
+				return this.BankAccount1;
+			}
+			set
+			{
+				if(value != this.BankAccount1)
+				{
+					if(value != null)
+					{
+						this.BankAccount1 = (BankAccount)value;
+					}
+					else
+					{
+						this.BankAccount1 = null;
+					}
+				}
+			}
+		}
 
         public virtual BankAccount BankAccount { get; set; }
 		IBankAccount IBankTransfers.BankAccount 

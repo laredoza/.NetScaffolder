@@ -60,8 +60,8 @@ namespace Banking.Models.Context.Mappings.EF.Oracle
 			#endregion
 			
 			#region Indexes
-			Property(t => t.OrderId).HasIndex(i => new {i.OrderId}).HasName("IX_OrderId").IsUnique(false);
-			Property(t => t.ProductId).HasIndex(i => new {i.ProductId}).HasName("IX_ProductId").IsUnique(false);
+			Property(t => t.OrderId).HasColumnAnnotation("IX_OrderId", new IndexAnnotation(new [] { new IndexAttribute("IX_OrderId"){ IsClustered = false, IsUnique = false, Order = 0}}));
+			Property(t => t.ProductId).HasColumnAnnotation("IX_ProductId", new IndexAnnotation(new [] { new IndexAttribute("IX_ProductId"){ IsClustered = false, IsUnique = false, Order = 0}}));
 			#endregion
 
 			#region Relationships

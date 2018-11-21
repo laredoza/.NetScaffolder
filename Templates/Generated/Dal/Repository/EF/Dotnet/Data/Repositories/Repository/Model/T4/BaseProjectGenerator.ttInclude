@@ -60,7 +60,7 @@
 	
         protected override void RunCore()
         {
-            Debugger.Break();
+            //Debugger.Break();
             ScaffoldConfig.Load(PackagePath);
             FilePersistenceOptions options = new FilePersistenceOptions { Path = ModelFilePath };
             var applicationService =

@@ -52,11 +52,13 @@ namespace Banking.Models.Accounts.Mappings.EFCore.MySql
 			#endregion
 
 			#region Indexes
+			builder.HasIndex(i => new {i.FromBankAccountId}).HasName("IX_FromBankAccountId").IsUnique(false);
 			builder.HasIndex(i => new {i.ToBankAccountId}).HasName("IX_ToBankAccountId").IsUnique(false);
 			#endregion
 			
 			#region Relationships
 			
+			builder.HasOne<BankAccount>(s => s.BankAccount1).WithMany(s => s.BankTransfers1).HasForeignKey(s => s.FromBankAccountId).OnDelete(DeleteBehavior.Restrict);
 			builder.HasOne<BankAccount>(s => s.BankAccount).WithMany(s => s.BankTransfers).HasForeignKey(s => s.ToBankAccountId).OnDelete(DeleteBehavior.Restrict);
 			
 			#endregion	

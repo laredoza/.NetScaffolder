@@ -45,6 +45,7 @@ namespace Banking.Models.Context.Mappings.NHib.SqlServer
 			#region Properties
 			
 			Map(t => t.FromBankAccountId).Column("FromBankAccountId")
+			.Index("IX_FromBankAccountId")
 			.Not.Nullable();
 			Map(t => t.ToBankAccountId).Column("ToBankAccountId")
 			.Index("IX_ToBankAccountId")
@@ -59,6 +60,7 @@ namespace Banking.Models.Context.Mappings.NHib.SqlServer
 			
 			#region Relationships
 			
+			References(o => o.BankAccount1).Column("BankAccountId").Unique().Not.Insert().Not.Update();
 			References(o => o.BankAccount).Column("BankAccountId").Unique().Not.Insert().Not.Update();
 			
 			#endregion			

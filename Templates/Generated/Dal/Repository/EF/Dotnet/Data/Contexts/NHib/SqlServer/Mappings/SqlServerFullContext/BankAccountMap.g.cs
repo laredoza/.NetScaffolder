@@ -48,12 +48,14 @@ namespace Banking.Models.Context.Mappings.NHib.SqlServer
 			.Length(10)
 			.Not.Nullable();
 			Map(t => t.Balance).Column("Balance")
+			.Index("NonClusteredIndex-20180611-172244")
 			.Precision(19).Scale(4)
 			.Not.Nullable();
 			Map(t => t.CustomerId).Column("CustomerId")
 			.Index("IX_CustomerId")
 			.Nullable();
 			Map(t => t.Locked).Column("Locked")
+			.Index("NonClusteredIndex-20180611-172244")
 			.Not.Nullable();
 			
 			#endregion
@@ -61,6 +63,7 @@ namespace Banking.Models.Context.Mappings.NHib.SqlServer
 			#region Relationships
 			
 			References(o => o.Customer).Column("CustomerId").Unique().Not.Insert().Not.Update();
+			HasMany(s => s.BankTransfers1).KeyColumn("FromBankAccountId");
 			HasMany(s => s.BankTransfers).KeyColumn("ToBankAccountId");
 			
 			#endregion			
