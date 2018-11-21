@@ -25,7 +25,11 @@ public class MappingNHibernateTemplate : BaseTemplate
 //	GENERATED CODE. DOT NOT MODIFY MANUALLY AS CHANGES CAN BE LOST!!!
 //	USE A PARTIAL CLASS INSTEAD
 // *******************************************************************
+<#+ foreach(var nameSpace in Driver.NameSpaces){ #>
+using <#= nameSpace #>;
+<#+ } #>
 using <#= EntityNamespace #>;
+using System.Data.Common;
 using FluentNHibernate.Mapping;
 
 namespace <#= Namespace #>.<#= Driver.ParentFolder #>.<#= Driver.Prefix #>

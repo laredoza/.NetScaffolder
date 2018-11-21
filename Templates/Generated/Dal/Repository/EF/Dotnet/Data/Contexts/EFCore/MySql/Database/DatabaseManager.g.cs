@@ -17,7 +17,7 @@
 //	GENERATED CODE. DOT NOT MODIFY MANUALLY AS CHANGES CAN BE LOST!!!
 //	USE A PARTIAL CLASS INSTEAD
 // *******************************************************************
-using RepositoryEFDotnet.Contexts.EFCore.Base;
+using RepositoryEFDotnet.Contexts.EFCore.Base.Context;
 using RepositoryEFDotnet.Core.Base;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;

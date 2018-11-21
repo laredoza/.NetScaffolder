@@ -25,13 +25,12 @@ public class ContextNHibernateTemplate : BaseTemplate
 
 using System.Data;
 <#+ foreach(var nameSpace in Driver.NameSpaces){ #>
-using <#= nameSpace #>;
+using <#= nameSpace.Replace("{DriverType}", "NHib") #>;
 <#+ } #>
 <#+ foreach(var nameSpace in DataType.AdditionalNamespaces){ #>
-using <#= nameSpace #>;
+using <#= nameSpace.Replace("{DriverType}", "NHib") #>;
 <#+ } #>
 using <#= MappingNamespace #>.<#= Driver.ParentFolder #>.<#= Driver.Prefix #>;
-using Quirc.DataAccess.Context.NHib.Base;
 
 namespace <#= ContextData.TransformFullnamespace(DataType.BaseNamespace) #>.<#= Driver.ParentFolder #>
 {

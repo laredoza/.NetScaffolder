@@ -23,11 +23,11 @@ using NHibernate;
 using NHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using FluentNHibernate.Cfg;
+using RepositoryEFDotnet.Contexts.NHib.Base.Context;
 using RepositoryEFDotnet.Core.Base;
-using Banking.Models.Customers.Mappings.NHib.MySql;
-using Quirc.DataAccess.Context.NHib.Base;
+using RepositoryEFDotnet.Data.Customers.Mappings.NHib.MySql;
 
-namespace Banking.Models.Customers.NHib
+namespace RepositoryEFDotnet.Data.Customers.NHib
 {
 	public partial class MySqlCustomerContext : BaseContext
 	{	

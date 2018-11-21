@@ -23,12 +23,11 @@ using NHibernate;
 using NHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using FluentNHibernate.Cfg;
+using RepositoryEFDotnet.Contexts.NHib.Base.Context;
 using RepositoryEFDotnet.Core.Base;
-using Banking.Models.Context.Mappings.NHib.SqlServer;
-using RepositoryEFDotnet.Contexts.NHib.Base;
-using Banking.Models.Accounts.Mappings.NHib.SqlServer;
+using RepositoryEFDotnet.Data.Context.Mappings.NHib.SqlServer;
 
-namespace Banking.Models.Context.NHib
+namespace RepositoryEFDotnet.Data.Context.NHib
 {
 	public partial class SqlServerFullContext : BaseContext
 	{	

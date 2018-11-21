@@ -23,7 +23,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System.Configuration;
-using RepositoryEFDotnet.Contexts.EFCore.Base;
+using RepositoryEFDotnet.Contexts.EFCore.Base.Context;
 using RepositoryEFDotnet.Core.Base;
 using RepositoryEFDotnet.Data.Context.Mappings.EFCore.SqlServer;
 using RepositoryEFDotnet.Data.Entity;

@@ -13,17 +13,14 @@
 // IN THE SOFTWARE.
 
 
-// *******************************************************************
-//	GENERATED CODE. DOT NOT MODIFY MANUALLY AS CHANGES CAN BE LOST!!!
-//	USE A PARTIAL CLASS INSTEAD
-// *******************************************************************
-
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System.Configuration;
 using RepositoryEFDotnet.Contexts.EFCore.Base;
+using RepositoryEFDotnet.Core.Base;
+using RepositoryEFDotnet.Contexts.EFCore.Base.Context;
 using RepositoryEFDotnet.Core.Base;
 using RepositoryEFDotnet.Data.Accounts.Mappings.EFCore.SqlServer;
 using RepositoryEFDotnet.Data.Entity;

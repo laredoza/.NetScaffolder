@@ -25,10 +25,10 @@ public class ContextCoreTemplate : BaseTemplate
 
 using System.ComponentModel.DataAnnotations.Schema;
 <#+ foreach(var nameSpace in Driver.NameSpaces){ #>
-using <#= nameSpace #>;
+using <#= nameSpace.Replace("{DriverType}", "EFCore") #>;
 <#+ } #>
 <#+ foreach(var nameSpace in DataType.AdditionalNamespaces){ #>
-using <#= nameSpace #>;
+using <#= nameSpace.Replace("{DriverType}", "EFCore") #>;
 <#+ } #>
 using <#= MappingNamespace #>.<#= Driver.ParentFolder #>.<#= Driver.Prefix #>;
 using <#= EntityNamespace #>;

@@ -19,6 +19,8 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System.Configuration;
 using RepositoryEFDotnet.Contexts.EFCore.Base;
 using RepositoryEFDotnet.Core.Base;
+using RepositoryEFDotnet.Contexts.EFCore.Base.Context;
+using RepositoryEFDotnet.Core.Base;
 using RepositoryEFDotnet.Data.Accounts.Mappings.EFCore.MySql;
 using RepositoryEFDotnet.Data.Entity;
 using System;

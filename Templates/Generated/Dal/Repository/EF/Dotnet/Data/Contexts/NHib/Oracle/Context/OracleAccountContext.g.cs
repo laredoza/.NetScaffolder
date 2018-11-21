@@ -23,11 +23,11 @@ using NHibernate;
 using NHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using FluentNHibernate.Cfg;
+using RepositoryEFDotnet.Contexts.NHib.Base.Context;
 using RepositoryEFDotnet.Core.Base;
-using Banking.Models.Accounts.Mappings.NHib.Oracle;
-using Quirc.DataAccess.Context.NHib.Base;
+using RepositoryEFDotnet.Data.Accounts.Mappings.NHib.Oracle;
 
-namespace Banking.Models.Accounts.NHib
+namespace RepositoryEFDotnet.Data.Accounts.NHib
 {
 	public partial class OracleAccountContext : BaseContext
 	{	

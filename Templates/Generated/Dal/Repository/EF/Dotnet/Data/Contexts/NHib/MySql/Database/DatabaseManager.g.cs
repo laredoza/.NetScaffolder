@@ -17,16 +17,17 @@
 //	GENERATED CODE. DOT NOT MODIFY MANUALLY AS CHANGES CAN BE LOST!!!
 //	USE A PARTIAL CLASS INSTEAD
 // *******************************************************************
+//using RepositoryEFDotnet.Contexts.EFCore.Base.Context;
 using RepositoryEFDotnet.Core.Base;
 using NHibernate;
 using NHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using FluentNHibernate.Cfg;
-using Banking.Models.Context.NHib;
+using RepositoryEFDotnet.Data.Context.NHib;
 using System;
 using System.Collections.Generic;
 
-namespace Banking.Models.Context.MySql.NHib.Database
+namespace RepositoryEFDotnet.Data.Context.MySql.NHib.Database
 {
 	public class DatabaseManager : IDatabaseManager
 	{	
