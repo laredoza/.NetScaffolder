@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<StructureMapDataType xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <AdditionalNamespaces>
+    <string>RepositoryEFDotnet.Core.Base</string>
+  </AdditionalNamespaces>
+  <Namespace>Register</Namespace>
+  <OutputFolder>Register</OutputFolder>
+  <OutputPath />
+</StructureMapDataType>
