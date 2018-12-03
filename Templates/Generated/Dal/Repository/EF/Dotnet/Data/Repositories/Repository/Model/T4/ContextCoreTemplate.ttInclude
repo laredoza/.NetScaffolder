@@ -33,6 +33,9 @@ using <#= nameSpace.Replace("{DriverType}", "EFCore") #>;
 using <#= MappingNamespace #>.<#= Driver.ParentFolder #>.<#= Driver.Prefix #>;
 using <#= EntityNamespace #>;
 using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
 
 namespace <#= ContextData.TransformFullnamespace(DataType.BaseNamespace) #>.<#= Driver.ParentFolder #>
 {
@@ -123,6 +126,74 @@ namespace <#= ContextData.TransformFullnamespace(DataType.BaseNamespace) #>.<#= 
         }
 		
 		#endregion
+
+        #region Bulk
+        
+        /// <summary>
+        /// Bulk delete
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="items"></param>
+        public override void BulkDelete<TEntity>(IEnumerable<TEntity> items)
+        {
+            <#= Driver.GenerateBulkDelete() #>
+        }
+
+        /// <summary>
+        /// Bulk delete async
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public async override Task BulkDeleteAsync<TEntity>(IEnumerable<TEntity> items)
+        {
+            <#= Driver.GenerateBulkDeleteAsync() #>
+        }
+
+        /// <summary>
+        /// Bulk insert
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="items"></param>
+        public override void BulkInsert<TEntity>(IEnumerable<TEntity> items)
+        {
+            <#= Driver.GenerateBulkInsert() #>
+        }
+
+        /// <summary>
+        /// Bulk insert async
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public async override Task BulkInsertAsync<TEntity>(IEnumerable<TEntity> items)
+        {
+            <#= Driver.GenerateBulkInsertAsync() #>
+        }
+
+        /// <summary>
+        /// Bulk update
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="items"></param>
+        public override void BulkUpdate<TEntity>(IEnumerable<TEntity> items)
+        {
+            <#= Driver.GenerateBulkUpdate() #>
+        }
+
+        /// <summary>
+        /// Bulk update async
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public override async Task BulkUpdateAsync<TEntity>(IEnumerable<TEntity> items)
+        {
+            <#= Driver.GenerateBulkUpdateAsync() #>
+        }
+
+        #endregion
+
 	}
 }
 <#+

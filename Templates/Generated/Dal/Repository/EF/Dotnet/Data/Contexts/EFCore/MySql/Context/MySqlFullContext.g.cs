@@ -27,6 +27,9 @@ using RepositoryEFDotnet.Core.Base;
 using RepositoryEFDotnet.Data.Context.Mappings.EFCore.MySql;
 using RepositoryEFDotnet.Data.Entity;
 using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
 
 namespace RepositoryEFDotnet.Data.Context.EFCore
 {
@@ -110,5 +113,73 @@ namespace RepositoryEFDotnet.Data.Context.EFCore
         }
 		
 		#endregion
+
+        #region Bulk
+        
+        /// <summary>
+        /// Bulk delete
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="items"></param>
+        public override void BulkDelete<TEntity>(IEnumerable<TEntity> items)
+        {
+            base.BulkDelete(items);
+        }
+
+        /// <summary>
+        /// Bulk delete async
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public async override Task BulkDeleteAsync<TEntity>(IEnumerable<TEntity> items)
+        {
+            await base.BulkDeleteAsync(items);
+        }
+
+        /// <summary>
+        /// Bulk insert
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="items"></param>
+        public override void BulkInsert<TEntity>(IEnumerable<TEntity> items)
+        {
+            base.BulkInsert(items);
+        }
+
+        /// <summary>
+        /// Bulk insert async
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public async override Task BulkInsertAsync<TEntity>(IEnumerable<TEntity> items)
+        {
+            await base.BulkInsertAsync(items);
+        }
+
+        /// <summary>
+        /// Bulk update
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="items"></param>
+        public override void BulkUpdate<TEntity>(IEnumerable<TEntity> items)
+        {
+            base.BulkUpdate(items);
+        }
+
+        /// <summary>
+        /// Bulk update async
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public override async Task BulkUpdateAsync<TEntity>(IEnumerable<TEntity> items)
+        {
+            await base.BulkUpdateAsync(items);
+        }
+
+        #endregion
+
 	}
 }

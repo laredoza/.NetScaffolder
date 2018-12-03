@@ -1,18 +1,15 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="IDriverType.cs" company="DotnetScaffolder">
-//   MIT
-// </copyright>
-// --------------------------------------------------------------------------------------------------------------------
+﻿#region Usings
+
+using System;
+using System.Collections.Generic;
+using DotNetScaffolder.Core.Common.Validation;
+using DotNetScaffolder.Mapping.MetaData.Model;
+
+#endregion
 
 namespace DotNetScaffolder.Components.Common.Contract
 {
     #region Usings
-
-    using System;
-    using System.Collections.Generic;
-
-    using DotNetScaffolder.Core.Common.Validation;
-    using DotNetScaffolder.Mapping.MetaData.Model;
 
     #region Usings
 
@@ -28,19 +25,14 @@ namespace DotNetScaffolder.Components.Common.Contract
         #region Public Properties
 
         /// <summary>
-        ///     Gets the id.
-        /// </summary>
-        Guid Id { get; }
-
-        /// <summary>
-        ///     Gets the name.
-        /// </summary>
-        string Name { get; }
-
-        /// <summary>
         ///     Gets or sets a value indicating whether create db.
         /// </summary>
         bool CreateDb { get; set; }
+
+        /// <summary>
+        ///     Gets the id.
+        /// </summary>
+        Guid Id { get; }
 
         /// <summary>
         ///     Gets or sets a value indicating whether include column order.
@@ -58,6 +50,11 @@ namespace DotNetScaffolder.Components.Common.Contract
         bool LoggingEnabled { get; set; }
 
         /// <summary>
+        ///     Gets the name.
+        /// </summary>
+        string Name { get; }
+
+        /// <summary>
         ///     Gets or sets a value indicating whether proxy creation enabled.
         /// </summary>
         bool ProxyCreationEnabled { get; set; }
@@ -71,23 +68,27 @@ namespace DotNetScaffolder.Components.Common.Contract
         #region Public Methods And Operators
 
         /// <summary>
-        /// The load config.
+        ///     The load config.
         /// </summary>
         /// <param name="parameters">
-        /// The parameters.
+        ///     The parameters.
         /// </param>
         void LoadConfig(object parameters);
 
         /// <summary>
-        /// The save config.
+        ///     The save config.
         /// </summary>
         /// <param name="parameters">
-        /// The parameters.
+        ///     The parameters.
         /// </param>
         /// <returns>
-        /// The <see cref="bool"/>.
+        ///     The <see cref="bool" />.
         /// </returns>
         bool SaveConfig(object parameters);
+
+        string TransformColumnPrecision(Column col, IDriver driver = null);
+
+        string TransformDbGeneratedKey(Table table);
 
         string TransformRelationship(
             string table,
@@ -95,10 +96,6 @@ namespace DotNetScaffolder.Components.Common.Contract
             IEnumerable<Table> models,
             IEnumerable<Relationship> relationships = null,
             INamingConvention nc = null);
-
-        string TransformDbGeneratedKey(Table table);
-
-        string TransformColumnPrecision(Column col, IDriver driver = null);
 
         #endregion
     }

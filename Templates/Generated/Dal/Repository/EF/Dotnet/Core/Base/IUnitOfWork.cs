@@ -291,7 +291,7 @@ namespace RepositoryEFDotnet.Core.Base
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
-        void BulkDelete<TEntity>(IEnumerable<TEntity> items);
+        void BulkDelete<TEntity>(IEnumerable<TEntity> items) where TEntity : class;
 
         /// <summary>
         ///     Bulk delete entities async
@@ -299,14 +299,14 @@ namespace RepositoryEFDotnet.Core.Base
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
         /// <returns></returns>
-        Task BulkDeleteAsync<TEntity>(IEnumerable<TEntity> items);
+        Task BulkDeleteAsync<TEntity>(IEnumerable<TEntity> items) where TEntity : class;
 
         /// <summary>
         ///     Bulk insert entities
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
-        void BulkInsert<TEntity>(IEnumerable<TEntity> items);
+        void BulkInsert<TEntity>(IEnumerable<TEntity> items) where TEntity : class;
         
         /// <summary>
         /// Bulk insert entities async
@@ -314,14 +314,14 @@ namespace RepositoryEFDotnet.Core.Base
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
         /// <returns></returns>
-        Task BulkInsertAsync<TEntity>(IEnumerable<TEntity> items);
+        Task BulkInsertAsync<TEntity>(IEnumerable<TEntity> items) where TEntity : class;
 
         /// <summary>
         /// Bulk update entities 
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
-        void BulkUpdate<TEntity>(IEnumerable<TEntity> items);
+        void BulkUpdate<TEntity>(IEnumerable<TEntity> items) where TEntity : class;
 
         /// <summary>
         /// Bulk update entities async
@@ -329,7 +329,7 @@ namespace RepositoryEFDotnet.Core.Base
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
         /// <returns></returns>
-        Task BulkUpdateAsync<TEntity>(IEnumerable<TEntity> items);
+        Task BulkUpdateAsync<TEntity>(IEnumerable<TEntity> items) where TEntity : class;
 
         /// <summary>
         ///     The commit.

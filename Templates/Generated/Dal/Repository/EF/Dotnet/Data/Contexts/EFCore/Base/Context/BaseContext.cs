@@ -334,35 +334,108 @@ namespace RepositoryEFDotnet.Contexts.EFCore.Base.Context
             Entry(original).CurrentValues.SetValues(current);
         }
 
-        public void BulkDelete<TEntity>(IEnumerable<TEntity> items)
+        public virtual void BulkDelete<TEntity>(IEnumerable<TEntity> items) where TEntity : class
         {
-            BulkDelete(items);
+            // Todo: Should be replaced with actual bulk deletes
+            this.RemoveRange<TEntity>(items);
         }
 
-        public async Task BulkDeleteAsync<TEntity>(IEnumerable<TEntity> items)
+        public virtual async Task BulkDeleteAsync<TEntity>(IEnumerable<TEntity> items) where TEntity : class
         {
-            await BulkDeleteAsync(items);
+            // Todo: Should be replaced with actual bulk deletes async
+            await this.RemoveRangeAsync(items);
         }
 
-        public void BulkInsert<TEntity>(IEnumerable<TEntity> items)
+        public virtual void BulkInsert<TEntity>(IEnumerable<TEntity> items) where TEntity : class
         {
-            BulkInsert(items);
+            // Todo: Should be replaced with actual bulk add
+            this.AddRange(items);
         }
 
-        public async Task BulkInsertAsync<TEntity>(IEnumerable<TEntity> items)
+        public virtual async Task BulkInsertAsync<TEntity>(IEnumerable<TEntity> items) where TEntity : class
         {
-            await BulkInsertAsync(items);
+            // Todo: Should be replaced with actual bulk add async 
+            await this.AddRangeAsync(items);
         }
 
-        public void BulkUpdate<TEntity>(IEnumerable<TEntity> items)
+        public virtual void BulkUpdate<TEntity>(IEnumerable<TEntity> items) where TEntity : class
         {
-            BulkUpdate(items);
+            // Todo: Should be replaced with actual bulk update range 
+            this.UpdateRange(items);
         }
 
-        public async Task BulkUpdateAsync<TEntity>(IEnumerable<TEntity> items)
+        public virtual async Task BulkUpdateAsync<TEntity>(IEnumerable<TEntity> items) where TEntity : class
         {
-            await BulkUpdateAsync(items);
+            // Todo: Should be replaced with actual bulk update async 
+            foreach (var item in items)
+            {
+                this.Update(item);
+            }
         }
+
+
+        ///// <summary>
+        ///// Bulk delete
+        ///// </summary>
+        ///// <typeparam name="TEntity"></typeparam>
+        ///// <param name="items"></param>
+        //public void BulkDelete<TEntity>(IEnumerable<TEntity> items)
+        //{
+        //    this.BulkDelete(items);
+        //}
+
+        ///// <summary>
+        ///// Bulk delete async
+        ///// </summary>
+        ///// <typeparam name="TEntity"></typeparam>
+        ///// <param name="items"></param>
+        ///// <returns></returns>
+        //public async Task BulkDeleteAsync<TEntity>(IEnumerable<TEntity> items)
+        //{
+        //    await this.BulkDeleteAsync(items);
+        //}
+
+        ///// <summary>
+        ///// Bulk insert
+        ///// </summary>
+        ///// <typeparam name="TEntity"></typeparam>
+        ///// <param name="items"></param>
+        //public void BulkInsert<TEntity>(IEnumerable<TEntity> items)
+        //{
+        //    this.BulkInsert(items);
+        //}
+
+        ///// <summary>
+        ///// Bulk insert async
+        ///// </summary>
+        ///// <typeparam name="TEntity"></typeparam>
+        ///// <param name="items"></param>
+        ///// <returns></returns>
+        //public async Task BulkInsertAsync<TEntity>(IEnumerable<TEntity> items)
+        //{
+        //    await this.BulkInsertAsync(items);
+        //}
+
+        ///// <summary>
+        ///// Bulk update
+        ///// </summary>
+        ///// <typeparam name="TEntity"></typeparam>
+        ///// <param name="items"></param>
+        //public void BulkUpdate<TEntity>(IEnumerable<TEntity> items)
+        //{
+        //    this.BulkUpdate(items);
+        //}
+
+        ///// <summary>
+        ///// Bulk update async
+        ///// </summary>
+        ///// <typeparam name="TEntity"></typeparam>
+        ///// <param name="items"></param>
+        ///// <returns></returns>
+        //public async Task BulkUpdateAsync<TEntity>(IEnumerable<TEntity> items)
+        //{
+        //    await this.BulkUpdateAsync(items);
+        //}
 
         /// <summary>
         ///     The commit.

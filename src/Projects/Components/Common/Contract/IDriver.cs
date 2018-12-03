@@ -64,5 +64,35 @@ namespace DotNetScaffolder.Components.Common.Contract
         int CheckPrecision(Column col);
 
         #endregion
+
+        /// <summary>
+        ///     Generate bulk delete
+        /// </summary>
+        string GenerateBulkDelete();
+
+        /// <summary>
+        ///     Generate bulk delete async
+        /// </summary>
+        string GenerateBulkDeleteAsync();
+
+        /// <summary>
+        ///     Generate bulk insert async
+        /// </summary>
+        string GenerateBulkInsert();
+
+        /// <summary>
+        ///     Generate bulk insert async
+        /// </summary>
+        string GenerateBulkInsertAsync();
+
+        /// <summary>
+        ///     Generate bulk update async
+        /// </summary>
+        string GenerateBulkUpdate();
+
+        /// <summary>
+        ///     Generate bulk delete async
+        /// </summary>
+        string GenerateBulkUpdateAsync();
     }
 }
