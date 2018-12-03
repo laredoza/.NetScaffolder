@@ -65,10 +65,10 @@ namespace <#= DataType.FullNamespace #>
 <#+ } #>
 		/// <param name="includes">params Expression<Func<I<#= DataType.RepoName #>, object>>[]</param>
         /// <returns>I<#= DataType.ModelName #></returns>
-		public virtual I<#= DataType.ModelName #> Load(<#= DataType.TransformAsParameter(DataType.MetaData.Columns.Where(o => o.IsPrimaryKey)) #>, params Expression<Func<I<#= DataType.ModelName #>, object>>[] includes)
+		public virtual I<#= DataType.ModelName #> Load(<#= DataType.TransformAsParameter(DataType.MetaData.Columns.Where(o => o.IsPrimaryKey)) #>, bool cache, params Expression<Func<I<#= DataType.ModelName #>, object>>[] includes)
 		{
 			var expr = this.Convert(includes);
-			return this.UnitOfWork.FirstOrDefault<<#= DataType.ModelName #>>(o => <#= DataType.TransformAsQuery(DataType.MetaData.Columns.Where(o => o.IsPrimaryKey)) #>, expr);
+			return this.UnitOfWork.FirstOrDefault<<#= DataType.ModelName #>>(o => <#= DataType.TransformAsQuery(DataType.MetaData.Columns.Where(o => o.IsPrimaryKey)) #>, cache, expr);
 		}
 		
         /// <summary>
@@ -79,10 +79,10 @@ namespace <#= DataType.FullNamespace #>
 <#+ } #>
 		/// <param name="includes">params Expression<Func<I<#= DataType.RepoName #>, object>>[]</param>
         /// <returns>I<#= DataType.ModelName #></returns>
-		public virtual async Task<I<#= DataType.ModelName #>> LoadAsync(<#= DataType.TransformAsParameter(DataType.MetaData.Columns.Where(o => o.IsPrimaryKey)) #>, params Expression<Func<I<#= DataType.ModelName #>, object>>[] includes)
+		public virtual async Task<I<#= DataType.ModelName #>> LoadAsync(<#= DataType.TransformAsParameter(DataType.MetaData.Columns.Where(o => o.IsPrimaryKey)) #>, params Expression<Func<I<#= DataType.ModelName #>, bool cache, object>>[] includes)
 		{
 			var expr = this.Convert(includes);
-			return await this.UnitOfWork.FirstOrDefaultAsync<<#= DataType.ModelName #>>(o => <#= DataType.TransformAsQuery(DataType.MetaData.Columns.Where(o => o.IsPrimaryKey)) #>, expr);
+			return await this.UnitOfWork.FirstOrDefaultAsync<<#= DataType.ModelName #>>(o => <#= DataType.TransformAsQuery(DataType.MetaData.Columns.Where(o => o.IsPrimaryKey)) #>, cache, expr);
 		}
 <#+ } #>
 
@@ -94,10 +94,10 @@ namespace <#= DataType.FullNamespace #>
         /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
 		/// <param name="includes">params Expression<Func<I<#= DataType.RepoName #>, object>>[]</param>
         /// <returns>I<#= DataType.ModelName #></returns>
-		public virtual I<#= DataType.ModelName #> LoadBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= DataType.TransformAsParameter(col) #>, params Expression<Func<I<#= DataType.ModelName #>, object>>[] includes)
+		public virtual I<#= DataType.ModelName #> LoadBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= DataType.TransformAsParameter(col) #>, bool cache, params Expression<Func<I<#= DataType.ModelName #>, object>>[] includes)
 		{
 			var expr = this.Convert(includes);
-			return this.UnitOfWork.FirstOrDefault<<#= DataType.ModelName #>>(o => <#= DataType.TransformAsQuery(col) #>, expr);
+			return this.UnitOfWork.FirstOrDefault<<#= DataType.ModelName #>>(o => <#= DataType.TransformAsQuery(col) #>, cache, expr);
 		}
 		
         /// <summary>
@@ -106,10 +106,10 @@ namespace <#= DataType.FullNamespace #>
         /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
 		/// <param name="includes">params Expression<Func<I<#= DataType.RepoName #>, object>>[]</param>
         /// <returns>I<#= DataType.ModelName #></returns>
-		public virtual async Task<I<#= DataType.ModelName #>> LoadBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>Async(<#= DataType.TransformAsParameter(col) #>, params Expression<Func<I<#= DataType.ModelName #>, object>>[] includes)
+		public virtual async Task<I<#= DataType.ModelName #>> LoadBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>Async(<#= DataType.TransformAsParameter(col) #>, bool cache, params Expression<Func<I<#= DataType.ModelName #>, object>>[] includes)
 		{
 			var expr = this.Convert(includes);
-			return await this.UnitOfWork.FirstOrDefaultAsync<<#= DataType.ModelName #>>(o => <#= DataType.TransformAsQuery(col) #>, expr);
+			return await this.UnitOfWork.FirstOrDefaultAsync<<#= DataType.ModelName #>>(cache, o => <#= DataType.TransformAsQuery(col) #>, expr);
 		}
 <#+ } #>
 
@@ -121,10 +121,10 @@ namespace <#= DataType.FullNamespace #>
         /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
 		/// <param name="includes">params Expression<Func<I<#= DataType.RepoName #>, object>>[]</param>
         /// <returns><#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>></returns>
-		public virtual <#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>> LoadBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= DataType.TransformAsParameter(col) #>, params Expression<Func<I<#= DataType.ModelName #>, object>>[] includes)
+		public virtual <#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>> LoadBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= DataType.TransformAsParameter(col) #>, bool cache, params Expression<Func<I<#= DataType.ModelName #>, object>>[] includes)
 		{
 			var expr = this.Convert(includes);
-			return this.UnitOfWork.AllMatching<<#= DataType.ModelName #>>(o => <#= DataType.TransformAsQuery(col) #>, expr).ToList<I<#= DataType.ModelName #>>();
+			return this.UnitOfWork.AllMatching<<#= DataType.ModelName #>>(o => <#= DataType.TransformAsQuery(col) #>, cache, expr).ToList<I<#= DataType.ModelName #>>();
 		}
 		
         /// <summary>
@@ -133,10 +133,10 @@ namespace <#= DataType.FullNamespace #>
         /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
 		/// <param name="includes">params Expression<Func<I<#= DataType.RepoName #>, object>>[]</param>
         /// <returns><#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>></returns>
-		public virtual async Task<<#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>>> LoadBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>Async(<#= DataType.TransformAsParameter(col) #>, params Expression<Func<I<#= DataType.ModelName #>, object>>[] includes)
+		public virtual async Task<<#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>>> LoadBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>Async(<#= DataType.TransformAsParameter(col) #>, bool cache, params Expression<Func<I<#= DataType.ModelName #>, object>>[] includes)
 		{
 			var expr = this.Convert(includes);
-			var result = await this.UnitOfWork.AllMatchingAsync<<#= DataType.ModelName #>>(o => <#= DataType.TransformAsQuery(col) #>, expr);
+			var result = await this.UnitOfWork.AllMatchingAsync<<#= DataType.ModelName #>>(o => <#= DataType.TransformAsQuery(col) #>,cache, expr);
 			return result.ToList<I<#= DataType.ModelName #>>();
 		}
 <#+ }  #>
@@ -146,10 +146,10 @@ namespace <#= DataType.FullNamespace #>
         /// </summary>
 		/// <param name="includes">params Expression<Func<I<#= DataType.RepoName #>, object>>[]</param>
         /// <returns><#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>></returns>
-		public virtual <#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>> LoadAll(params Expression<Func<I<#= DataType.ModelName #>, object>>[] includes)
+		public virtual <#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>> LoadAll(bool cache, params Expression<Func<I<#= DataType.ModelName #>, object>>[] includes)
 		{
 			var expr = this.Convert(includes);
-			return this.UnitOfWork.GetAll<<#= DataType.ModelName #>>(expr).ToList<I<#= DataType.ModelName #>>();
+			return this.UnitOfWork.GetAll<<#= DataType.ModelName #>>(cache, expr).ToList<I<#= DataType.ModelName #>>();
 		}
 		
         /// <summary>
@@ -157,10 +157,10 @@ namespace <#= DataType.FullNamespace #>
         /// </summary>
 		/// <param name="includes">params Expression<Func<I<#= DataType.RepoName #>, object>>[]</param>
         /// <returns><#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>></returns>
-		public virtual async Task<<#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>>> LoadAllAsync(params Expression<Func<I<#= DataType.ModelName #>, object>>[] includes)
+		public virtual async Task<<#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>>> LoadAllAsync(bool cache, params Expression<Func<I<#= DataType.ModelName #>,  object>>[] includes)
 		{
 			var expr = this.Convert(includes);
-			var result = await this.UnitOfWork.GetAllAsync<<#= DataType.ModelName #>>(expr);
+			var result = await this.UnitOfWork.GetAllAsync<<#= DataType.ModelName #>>(cache, expr);
 			return result.ToList<I<#= DataType.ModelName #>>();
 		}
 		
@@ -176,16 +176,16 @@ namespace <#= DataType.FullNamespace #>
 		/// <param name="caseSensitive">bool</param>
 		/// <param name="includes">params Expression<Func<I<#= DataType.RepoName #>, object>>[]</param>
         /// <returns><#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>></returns>
-		public virtual <#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>> SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= DataType.TransformAsParameter(col) #>, bool caseSensitive = false, params Expression<Func<I<#= DataType.ModelName #>, object>>[] includes)
+		public virtual <#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>> SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= DataType.TransformAsParameter(col) #>, bool cache, bool caseSensitive = false, params Expression<Func<I<#= DataType.ModelName #>, object>>[] includes)
 		{		
 			var expr = this.Convert(includes);
 			if(caseSensitive) 
 			{
-				return this.UnitOfWork.AllMatching<<#= DataType.ModelName #>>(o => <#= DataType.TransformAsQuery(col, "", true) #>, expr).ToList<I<#= DataType.ModelName #>>();
+				return this.UnitOfWork.AllMatching<<#= DataType.ModelName #>>(o => <#= DataType.TransformAsQuery(col, "", true) #>, cache, expr).ToList<I<#= DataType.ModelName #>>();
 			}
 			else
 			{
-				return this.UnitOfWork.AllMatching<<#= DataType.ModelName #>>(o => <#= DataType.TransformAsQuery(col) #>, expr).ToList<I<#= DataType.ModelName #>>();
+				return this.UnitOfWork.AllMatching<<#= DataType.ModelName #>>(o => <#= DataType.TransformAsQuery(col) #>, cache, expr).ToList<I<#= DataType.ModelName #>>();
 			}
 		}
 		
@@ -196,17 +196,17 @@ namespace <#= DataType.FullNamespace #>
 		/// <param name="caseSensitive">bool</param>
 		/// <param name="includes">params Expression<Func<I<#= DataType.RepoName #>, object>>[]</param>
         /// <returns><#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>></returns>
-		public virtual async Task<<#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>>> SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>Async(<#= DataType.TransformAsParameter(col) #>, bool caseSensitive = false, params Expression<Func<I<#= DataType.ModelName #>, object>>[] includes)
+		public virtual async Task<<#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>>> SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>Async(<#= DataType.TransformAsParameter(col) #>, bool cache, bool caseSensitive = false, params Expression<Func<I<#= DataType.ModelName #>, object>>[] includes)
 		{		
 			var expr = this.Convert(includes);
 			if(caseSensitive) 
 			{
-				var result = await this.UnitOfWork.AllMatchingAsync<<#= DataType.ModelName #>>(o => <#= DataType.TransformAsQuery(col, "", true) #>, expr);
+				var result = await this.UnitOfWork.AllMatchingAsync<<#= DataType.ModelName #>>(o => <#= DataType.TransformAsQuery(col, "", true) #>, cache, expr);
 				return result.ToList<I<#= DataType.ModelName #>>();
 			}
 			else
 			{
-				var result = await this.UnitOfWork.AllMatchingAsync<<#= DataType.ModelName #>>(o => <#= DataType.TransformAsQuery(col) #>, expr);
+				var result = await this.UnitOfWork.AllMatchingAsync<<#= DataType.ModelName #>>(o => <#= DataType.TransformAsQuery(col) #>, cache, expr);
 				return result.ToList<I<#= DataType.ModelName #>>();
 			}
 		}
@@ -261,26 +261,7 @@ namespace <#= DataType.FullNamespace #>
         /// <returns>bool</returns>
 		public virtual bool Update(I<#= DataType.ModelName #> entity)
 		{
-			bool doUpdate = false;
-			var entityToUpdate = this.UnitOfWork.FirstOrDefault<<#= DataType.ModelName #>>(o => <#= DataType.TransformAsQuery(DataType.MetaData.Columns.Where(o => o.IsPrimaryKey), "entity") #>);
-			
-			if (entityToUpdate == null)
-			{
-				throw new Exception("The <#= DataType.ModelName #> entity does not exist");
-			}
-			
-			// Optimisation: Flag if any field has changed
-<#+ foreach(var col in DataType.MetaData.Columns.Where(o => !o.IsPrimaryKey)){ #>
-			if (entityToUpdate.<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #> != entity.<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>) { entityToUpdate.<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #> = entity.<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>;doUpdate = true; }
-<#+ }  #>
-
-			// Optimisation: Only execute update if a field has changed
-			if (doUpdate)
-			{
-				return this.UnitOfWork.Modify(entityToUpdate);
-			}
-			
-			return false;
+			return this.UnitOfWork.Modify(entity);
 		}
 		
         /// <summary>
@@ -290,26 +271,7 @@ namespace <#= DataType.FullNamespace #>
         /// <returns>bool</returns>
 		public virtual async Task<bool> UpdateAsync(I<#= DataType.ModelName #> entity)
 		{
-			bool doUpdate = false;
-			var entityToUpdate = await this.UnitOfWork.FirstOrDefaultAsync<<#= DataType.ModelName #>>(o => <#= DataType.TransformAsQuery(DataType.MetaData.Columns.Where(o => o.IsPrimaryKey), "entity") #>);
-			
-			if (entityToUpdate == null)
-			{
-				throw new Exception("The <#= DataType.ModelName #> entity does not exist");
-			}
-			
-			// Optimisation: Flag if any field has changed
-<#+ foreach(var col in DataType.MetaData.Columns.Where(o => !o.IsPrimaryKey)){ #>
-			if (entityToUpdate.<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #> != entity.<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>) { entityToUpdate.<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #> = entity.<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>;doUpdate = true; }
-<#+ }  #>
-
-			// Optimisation: Only execute update if a field has changed
-			if (doUpdate)
-			{
-				return await this.UnitOfWork.ModifyAsync(entityToUpdate);
-			}
-			
-			return false;
+			return await this.UnitOfWork.ModifyAsync(entity);
 		}
 		
         /// <summary>
@@ -319,14 +281,7 @@ namespace <#= DataType.FullNamespace #>
         /// <returns>bool</returns>
 		public virtual bool Delete(I<#= DataType.ModelName #> entity)
 		{		
-			var entityToDelete = this.UnitOfWork.FirstOrDefault<<#= DataType.ModelName #>>(o => <#= DataType.TransformAsQuery(DataType.MetaData.Columns.Where(o => o.IsPrimaryKey), "entity")#>);
-			
-			if(entityToDelete == null)
-			{
-				throw new Exception("The <#= DataType.ModelName #> entity does not exist");
-			}
-			
-			return this.UnitOfWork.Remove(entityToDelete);
+			return this.UnitOfWork.Remove(entity);
 		}
 		
         /// <summary>
@@ -336,14 +291,7 @@ namespace <#= DataType.FullNamespace #>
         /// <returns>bool</returns>
 		public virtual async Task<bool> DeleteAsync(I<#= DataType.ModelName #> entity)
 		{		
-			var entityToDelete = await this.UnitOfWork.FirstOrDefaultAsync<<#= DataType.ModelName #>>(o => <#= DataType.TransformAsQuery(DataType.MetaData.Columns.Where(o => o.IsPrimaryKey), "entity")#>);
-			
-			if(entityToDelete == null)
-			{
-				throw new Exception("The <#= DataType.ModelName #> entity does not exist");
-			}
-			
-			return await this.UnitOfWork.RemoveAsync(entityToDelete);
+			return await this.UnitOfWork.RemoveAsync(entity);
 		}
 
 		/// <summary>
@@ -353,9 +301,9 @@ namespace <#= DataType.FullNamespace #>
         /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
 <#+ } #>
         /// <returns>bool</returns>
-		public virtual bool Delete(<#= DataType.TransformAsParameter(DataType.MetaData.Columns.Where(o => o.IsPrimaryKey)) #>)
+		public virtual bool Delete(<#= DataType.TransformAsParameter(DataType.MetaData.Columns.Where(o => o.IsPrimaryKey)) #>, bool cache)
 		{
-			var entityToDelete = this.UnitOfWork.FirstOrDefault<<#= DataType.ModelName #>>(o => <#= DataType.TransformAsQuery(DataType.MetaData.Columns.Where(o => o.IsPrimaryKey))#>);
+			var entityToDelete = this.UnitOfWork.FirstOrDefault<<#= DataType.ModelName #>>(o => <#= DataType.TransformAsQuery(DataType.MetaData.Columns.Where(o => o.IsPrimaryKey))#>, cache);
 			
 			if(entityToDelete == null)
 			{
@@ -372,9 +320,9 @@ namespace <#= DataType.FullNamespace #>
         /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
 <#+ } #>
         /// <returns>bool</returns>
-		public virtual async Task<bool> DeleteAsync(<#= DataType.TransformAsParameter(DataType.MetaData.Columns.Where(o => o.IsPrimaryKey)) #>)
+		public virtual async Task<bool> DeleteAsync(<#= DataType.TransformAsParameter(DataType.MetaData.Columns.Where(o => o.IsPrimaryKey)) #>, bool cache)
 		{
-			var entityToDelete = await this.UnitOfWork.FirstOrDefaultAsync<<#= DataType.ModelName #>>(o => <#= DataType.TransformAsQuery(DataType.MetaData.Columns.Where(o => o.IsPrimaryKey))#>);
+			var entityToDelete = await this.UnitOfWork.FirstOrDefaultAsync<<#= DataType.ModelName #>>(cache, o => <#= DataType.TransformAsQuery(DataType.MetaData.Columns.Where(o => o.IsPrimaryKey))#> );
 			
 			if(entityToDelete == null)
 			{
@@ -388,28 +336,95 @@ namespace <#= DataType.FullNamespace #>
 		
 		#region Aggregates
 		
-		public virtual TResult Max<TResult>(Expression<Func<I<#= DataType.ModelName #>, TResult>> maxExpression)
+		public virtual TResult Max<TResult>(Expression<Func<I<#= DataType.ModelName #>, TResult>> maxExpression, bool cache)
 		{
-			return this.UnitOfWork.Max(Expression.Lambda<Func<<#= DataType.ModelName #>, TResult>>(maxExpression.Body, maxExpression.Parameters));
+			return this.UnitOfWork.Max(cache, Expression.Lambda<Func<<#= DataType.ModelName #>, TResult>>(maxExpression.Body, maxExpression.Parameters));
 		}
 		
-		public virtual async Task<TResult> MaxAsync<TResult>(Expression<Func<I<#= DataType.ModelName #>, TResult>> maxExpression)
+		public virtual async Task<TResult> MaxAsync<TResult>(Expression<Func<I<#= DataType.ModelName #>, TResult>> maxExpression, bool cache)
 		{
-			return await this.UnitOfWork.MaxAsync(Expression.Lambda<Func<<#= DataType.ModelName #>, TResult>>(maxExpression.Body, maxExpression.Parameters));
+			return await this.UnitOfWork.MaxAsync(cache, Expression.Lambda<Func<<#= DataType.ModelName #>, TResult>>(maxExpression.Body, maxExpression.Parameters));
 		}
 		
-		public virtual TResult Min<TResult>(Expression<Func<I<#= DataType.ModelName #>, TResult>> minExpression)
+		public virtual TResult Min<TResult>(Expression<Func<I<#= DataType.ModelName #>, TResult>> minExpression, bool cache)
 		{
-			return this.UnitOfWork.Min(Expression.Lambda<Func<<#= DataType.ModelName #>, TResult>>(minExpression.Body, minExpression.Parameters));
+			return this.UnitOfWork.Min(cache, Expression.Lambda<Func<<#= DataType.ModelName #>, TResult>>(minExpression.Body, minExpression.Parameters));
 		}
 		
-		public virtual async Task<TResult> MinAsync<TResult>(Expression<Func<I<#= DataType.ModelName #>, TResult>> minExpression)
+		public virtual async Task<TResult> MinAsync<TResult>(Expression<Func<I<#= DataType.ModelName #>, TResult>> minExpression, bool cache)
 		{
-			return await this.UnitOfWork.MinAsync(Expression.Lambda<Func<<#= DataType.ModelName #>, TResult>>(minExpression.Body, minExpression.Parameters));
+			return await this.UnitOfWork.MinAsync(cache, Expression.Lambda<Func<<#= DataType.ModelName #>, TResult>>(minExpression.Body, minExpression.Parameters));
 		}
 		
 		#endregion
 		
+		#region Bulk
+
+        /// <summary>
+        ///     Bulk delete entities
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="items"></param>
+        public void BulkDelete(IEnumerable<I<#= DataType.ModelName #>> items)
+		{
+			this.UnitOfWork.BulkDelete<I<#= DataType.ModelName #>>(items);
+		}
+
+        /// <summary>
+        ///     Bulk delete entities async
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public async Task BulkDeleteAsync(IEnumerable<I<#= DataType.ModelName #>> items)
+		{
+			await this.UnitOfWork.BulkDeleteAsync<I<#= DataType.ModelName #>>(items);
+		}
+
+        /// <summary>
+        ///     Bulk insert entities
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="items"></param>
+        public void BulkInsert(IEnumerable<I<#= DataType.ModelName #>> items)
+		{
+			this.UnitOfWork.BulkInsert<I<#= DataType.ModelName #>>(items);
+		}
+        
+        /// <summary>
+        /// Bulk insert entities async
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public async Task BulkInsertAsync(IEnumerable<I<#= DataType.ModelName #>> items)
+		{
+			await this.UnitOfWork.BulkInsertAsync<I<#= DataType.ModelName #>>(items);
+		}
+
+        /// <summary>
+        /// Bulk update entities 
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="items"></param>
+        public void BulkUpdate(IEnumerable<I<#= DataType.ModelName #>> items)
+		{
+			this.UnitOfWork.BulkUpdate<I<#= DataType.ModelName #>>(items);
+		}
+
+        /// <summary>
+        /// Bulk update entities async
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public async Task BulkUpdateAsync(IEnumerable<I<#= DataType.ModelName #>> items)
+		{
+			await this.UnitOfWork.BulkUpdateAsync<I<#= DataType.ModelName #>>(items);
+		}
+
+        #endregion
+
 		#region Helpers
 		
 	    protected virtual Expression<Func<<#= DataType.ModelName #>, object>>[] Convert(params Expression<Func<I<#= DataType.ModelName #>, object>>[] includes)

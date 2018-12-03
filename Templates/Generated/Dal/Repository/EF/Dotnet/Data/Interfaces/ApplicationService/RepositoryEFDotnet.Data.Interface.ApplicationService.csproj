@@ -9,8 +9,4 @@
     <ProjectReference Include="..\RepositoryInterfaces\RepositoryEFDotnet.Data.Interface.RepositoryInterfaces.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="ApplicationService\" />
-  </ItemGroup>
-
 </Project>

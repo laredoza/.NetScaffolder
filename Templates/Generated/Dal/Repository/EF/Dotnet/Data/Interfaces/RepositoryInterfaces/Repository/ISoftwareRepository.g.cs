@@ -38,31 +38,35 @@ namespace RepositoryEFDotnet.Data.Interfaces
         /// Load Software entities from the database using the composite primary keys
         /// </summary
         /// <param name="productId">int</param>
+        /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<ISoftware, object>>[]</param>
         /// <returns>ISoftware</returns>
-		ISoftware LoadByProductId(int productId, params Expression<Func<ISoftware, object>>[] includes);
+		ISoftware LoadByProductId(int productId, bool cache, params Expression<Func<ISoftware, object>>[] includes);
 		
         /// <summary>
         /// Load Software entities async from the database using the composite primary keys
         /// </summary
         /// <param name="productId">int</param>
+        /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<ISoftware, object>>[]</param>
         /// <returns>ISoftware</returns>
-		Task<ISoftware> LoadByProductIdAsync(int productId, params Expression<Func<ISoftware, object>>[] includes);
+		Task<ISoftware> LoadByProductIdAsync(int productId, bool cache, params Expression<Func<ISoftware, object>>[] includes);
 
         /// <summary>
         /// Load all Software entities from the database.
         /// </summary>
+        /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<ISoftware, object>>[]</param>
         /// <returns>IList<ISoftware></returns>
-		IList<ISoftware> LoadAll(params Expression<Func<ISoftware, object>>[] includes);
+		IList<ISoftware> LoadAll( bool cache, params Expression<Func<ISoftware, object>>[] includes);
 		
         /// <summary>
         /// Load all Software entities async from the database.
         /// </summary>
+        /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<ISoftware, object>>[]</param>
         /// <returns>IList<ISoftware></returns>
-		Task<IList<ISoftware>> LoadAllAsync(params Expression<Func<ISoftware, object>>[] includes);
+		Task<IList<ISoftware>> LoadAllAsync(bool cache, params Expression<Func<ISoftware, object>>[] includes);
 		
 		#endregion
 
@@ -72,19 +76,21 @@ namespace RepositoryEFDotnet.Data.Interfaces
         /// Search for Software entities in the database by LicenseCode
         /// </summary>
         /// <param name="licenseCode">string</param>
+        /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="caseSensitive">bool</param
 		/// <param name="includes">params Expression<Func<ISoftware, object>>[]</param>
         /// <returns>IList<ISoftware></returns>
-		IList<ISoftware> SearchByLicenseCode(string licenseCode, bool caseSensitive = false, params Expression<Func<ISoftware, object>>[] includes);
+		IList<ISoftware> SearchByLicenseCode(string licenseCode, bool cache, bool caseSensitive = false, params Expression<Func<ISoftware, object>>[] includes);
 		
         /// <summary>
         /// Search for Software entities async in the database by LicenseCode
         /// </summary>
         /// <param name="licenseCode">string</param>
+        /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="caseSensitive">bool</param
 		/// <param name="includes">params Expression<Func<ISoftware, object>>[]</param>
         /// <returns>IList<ISoftware></returns>
-		Task<IList<ISoftware>> SearchByLicenseCodeAsync(string licenseCode, bool caseSensitive = false, params Expression<Func<ISoftware, object>>[] includes);
+		Task<IList<ISoftware>> SearchByLicenseCodeAsync(string licenseCode, bool cache, bool caseSensitive = false, params Expression<Func<ISoftware, object>>[] includes);
 
 		#endregion
 		
@@ -137,27 +143,76 @@ namespace RepositoryEFDotnet.Data.Interfaces
         /// </summary>
         /// <param name="productId">int</param>
         /// <returns>bool</returns>
-		bool Delete( int productId);
+		bool Delete( int productId, bool cache);
 
 		/// <summary>
         /// Delete the Software entity async from the database
         /// </summary>
-        /// <param name="productId">int</param>
+        /// <param name="productId">int, bool cache</param>
         /// <returns>bool</returns>
-		Task<bool> DeleteAsync( int productId);
+		Task<bool> DeleteAsync( int productId, bool cache);
 		
 		#endregion
 		
 		#region Aggregates
 		
-		TResult Max<TResult>(Expression<Func<ISoftware, TResult>> maxExpression);
+		TResult Max<TResult>(Expression<Func<ISoftware, TResult>> maxExpression, bool cache);
 		
-		Task<TResult> MaxAsync<TResult>(Expression<Func<ISoftware, TResult>> maxExpression);
+		Task<TResult> MaxAsync<TResult>(Expression<Func<ISoftware, TResult>> maxExpression, bool cache);
 		
-		TResult Min<TResult>(Expression<Func<ISoftware, TResult>> maxExpression);
+		TResult Min<TResult>(Expression<Func<ISoftware, TResult>> maxExpression, bool cache);
 		
-		Task<TResult> MinAsync<TResult>(Expression<Func<ISoftware, TResult>> maxExpression);
+		Task<TResult> MinAsync<TResult>(Expression<Func<ISoftware, TResult>> maxExpression, bool cache);
 		
 		#endregion
+
+        #region Bulk
+
+        /// <summary>
+        ///     Bulk delete entities
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="items"></param>
+        void BulkDelete(IEnumerable<ISoftware> items);
+
+        /// <summary>
+        ///     Bulk delete entities async
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        Task BulkDeleteAsync(IEnumerable<ISoftware> items);
+
+        /// <summary>
+        ///     Bulk insert entities
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="items"></param>
+        void BulkInsert(IEnumerable<ISoftware> items);
+        
+        /// <summary>
+        /// Bulk insert entities async
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        Task BulkInsertAsync(IEnumerable<ISoftware> items);
+
+        /// <summary>
+        /// Bulk update entities 
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="items"></param>
+        void BulkUpdate(IEnumerable<ISoftware> items);
+
+        /// <summary>
+        /// Bulk update entities async
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        Task BulkUpdateAsync(IEnumerable<ISoftware> items);
+
+        #endregion
 	}
 }

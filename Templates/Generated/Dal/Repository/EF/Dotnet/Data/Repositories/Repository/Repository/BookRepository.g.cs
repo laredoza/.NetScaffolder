@@ -59,10 +59,10 @@ namespace RepositoryEFDotnet.Data.Repository
         /// <param name="productId">int</param>
 		/// <param name="includes">params Expression<Func<IBook, object>>[]</param>
         /// <returns>IBook</returns>
-		public virtual IBook LoadByProductId(int productId, params Expression<Func<IBook, object>>[] includes)
+		public virtual IBook LoadByProductId(int productId, bool cache, params Expression<Func<IBook, object>>[] includes)
 		{
 			var expr = this.Convert(includes);
-			return this.UnitOfWork.FirstOrDefault<Book>(o => o.ProductId == productId, expr);
+			return this.UnitOfWork.FirstOrDefault<Book>(o => o.ProductId == productId, cache, expr);
 		}
 		
         /// <summary>
@@ -71,10 +71,10 @@ namespace RepositoryEFDotnet.Data.Repository
         /// <param name="productId">int</param>
 		/// <param name="includes">params Expression<Func<IBook, object>>[]</param>
         /// <returns>IBook</returns>
-		public virtual async Task<IBook> LoadByProductIdAsync(int productId, params Expression<Func<IBook, object>>[] includes)
+		public virtual async Task<IBook> LoadByProductIdAsync(int productId, bool cache, params Expression<Func<IBook, object>>[] includes)
 		{
 			var expr = this.Convert(includes);
-			return await this.UnitOfWork.FirstOrDefaultAsync<Book>(o => o.ProductId == productId, expr);
+			return await this.UnitOfWork.FirstOrDefaultAsync<Book>(cache, o => o.ProductId == productId, expr);
 		}
 
         /// <summary>
@@ -82,10 +82,10 @@ namespace RepositoryEFDotnet.Data.Repository
         /// </summary>
 		/// <param name="includes">params Expression<Func<IBook, object>>[]</param>
         /// <returns>IList<IBook></returns>
-		public virtual IList<IBook> LoadAll(params Expression<Func<IBook, object>>[] includes)
+		public virtual IList<IBook> LoadAll(bool cache, params Expression<Func<IBook, object>>[] includes)
 		{
 			var expr = this.Convert(includes);
-			return this.UnitOfWork.GetAll<Book>(expr).ToList<IBook>();
+			return this.UnitOfWork.GetAll<Book>(cache, expr).ToList<IBook>();
 		}
 		
         /// <summary>
@@ -93,10 +93,10 @@ namespace RepositoryEFDotnet.Data.Repository
         /// </summary>
 		/// <param name="includes">params Expression<Func<IBook, object>>[]</param>
         /// <returns>IList<IBook></returns>
-		public virtual async Task<IList<IBook>> LoadAllAsync(params Expression<Func<IBook, object>>[] includes)
+		public virtual async Task<IList<IBook>> LoadAllAsync(bool cache, params Expression<Func<IBook,  object>>[] includes)
 		{
 			var expr = this.Convert(includes);
-			var result = await this.UnitOfWork.GetAllAsync<Book>(expr);
+			var result = await this.UnitOfWork.GetAllAsync<Book>(cache, expr);
 			return result.ToList<IBook>();
 		}
 		
@@ -111,16 +111,16 @@ namespace RepositoryEFDotnet.Data.Repository
 		/// <param name="caseSensitive">bool</param>
 		/// <param name="includes">params Expression<Func<IBook, object>>[]</param>
         /// <returns>IList<IBook></returns>
-		public virtual IList<IBook> SearchByPublisher(string publisher, bool caseSensitive = false, params Expression<Func<IBook, object>>[] includes)
+		public virtual IList<IBook> SearchByPublisher(string publisher, bool cache, bool caseSensitive = false, params Expression<Func<IBook, object>>[] includes)
 		{		
 			var expr = this.Convert(includes);
 			if(caseSensitive) 
 			{
-				return this.UnitOfWork.AllMatching<Book>(o => o.Publisher.Contains(publisher), expr).ToList<IBook>();
+				return this.UnitOfWork.AllMatching<Book>(o => o.Publisher.Contains(publisher), cache, expr).ToList<IBook>();
 			}
 			else
 			{
-				return this.UnitOfWork.AllMatching<Book>(o => o.Publisher.ToLower().Contains(publisher.ToLower()), expr).ToList<IBook>();
+				return this.UnitOfWork.AllMatching<Book>(o => o.Publisher.ToLower().Contains(publisher.ToLower()), cache, expr).ToList<IBook>();
 			}
 		}
 		
@@ -131,17 +131,17 @@ namespace RepositoryEFDotnet.Data.Repository
 		/// <param name="caseSensitive">bool</param>
 		/// <param name="includes">params Expression<Func<IBook, object>>[]</param>
         /// <returns>IList<IBook></returns>
-		public virtual async Task<IList<IBook>> SearchByPublisherAsync(string publisher, bool caseSensitive = false, params Expression<Func<IBook, object>>[] includes)
+		public virtual async Task<IList<IBook>> SearchByPublisherAsync(string publisher, bool cache, bool caseSensitive = false, params Expression<Func<IBook, object>>[] includes)
 		{		
 			var expr = this.Convert(includes);
 			if(caseSensitive) 
 			{
-				var result = await this.UnitOfWork.AllMatchingAsync<Book>(o => o.Publisher.Contains(publisher), expr);
+				var result = await this.UnitOfWork.AllMatchingAsync<Book>(o => o.Publisher.Contains(publisher), cache, expr);
 				return result.ToList<IBook>();
 			}
 			else
 			{
-				var result = await this.UnitOfWork.AllMatchingAsync<Book>(o => o.Publisher.ToLower().Contains(publisher.ToLower()), expr);
+				var result = await this.UnitOfWork.AllMatchingAsync<Book>(o => o.Publisher.ToLower().Contains(publisher.ToLower()), cache, expr);
 				return result.ToList<IBook>();
 			}
 		}
@@ -193,24 +193,7 @@ namespace RepositoryEFDotnet.Data.Repository
         /// <returns>bool</returns>
 		public virtual bool Update(IBook entity)
 		{
-			bool doUpdate = false;
-			var entityToUpdate = this.UnitOfWork.FirstOrDefault<Book>(o =>  o.ProductId == entity.ProductId );
-			
-			if (entityToUpdate == null)
-			{
-				throw new Exception("The Book entity does not exist");
-			}
-			
-			// Optimisation: Flag if any field has changed
-			if (entityToUpdate.Publisher != entity.Publisher) { entityToUpdate.Publisher = entity.Publisher;doUpdate = true; }
-
-			// Optimisation: Only execute update if a field has changed
-			if (doUpdate)
-			{
-				return this.UnitOfWork.Modify(entityToUpdate);
-			}
-			
-			return false;
+			return this.UnitOfWork.Modify(entity);
 		}
 		
         /// <summary>
@@ -220,24 +203,7 @@ namespace RepositoryEFDotnet.Data.Repository
         /// <returns>bool</returns>
 		public virtual async Task<bool> UpdateAsync(IBook entity)
 		{
-			bool doUpdate = false;
-			var entityToUpdate = await this.UnitOfWork.FirstOrDefaultAsync<Book>(o =>  o.ProductId == entity.ProductId );
-			
-			if (entityToUpdate == null)
-			{
-				throw new Exception("The Book entity does not exist");
-			}
-			
-			// Optimisation: Flag if any field has changed
-			if (entityToUpdate.Publisher != entity.Publisher) { entityToUpdate.Publisher = entity.Publisher;doUpdate = true; }
-
-			// Optimisation: Only execute update if a field has changed
-			if (doUpdate)
-			{
-				return await this.UnitOfWork.ModifyAsync(entityToUpdate);
-			}
-			
-			return false;
+			return await this.UnitOfWork.ModifyAsync(entity);
 		}
 		
         /// <summary>
@@ -247,14 +213,7 @@ namespace RepositoryEFDotnet.Data.Repository
         /// <returns>bool</returns>
 		public virtual bool Delete(IBook entity)
 		{		
-			var entityToDelete = this.UnitOfWork.FirstOrDefault<Book>(o =>  o.ProductId == entity.ProductId );
-			
-			if(entityToDelete == null)
-			{
-				throw new Exception("The Book entity does not exist");
-			}
-			
-			return this.UnitOfWork.Remove(entityToDelete);
+			return this.UnitOfWork.Remove(entity);
 		}
 		
         /// <summary>
@@ -264,14 +223,7 @@ namespace RepositoryEFDotnet.Data.Repository
         /// <returns>bool</returns>
 		public virtual async Task<bool> DeleteAsync(IBook entity)
 		{		
-			var entityToDelete = await this.UnitOfWork.FirstOrDefaultAsync<Book>(o =>  o.ProductId == entity.ProductId );
-			
-			if(entityToDelete == null)
-			{
-				throw new Exception("The Book entity does not exist");
-			}
-			
-			return await this.UnitOfWork.RemoveAsync(entityToDelete);
+			return await this.UnitOfWork.RemoveAsync(entity);
 		}
 
 		/// <summary>
@@ -279,9 +231,9 @@ namespace RepositoryEFDotnet.Data.Repository
         /// </summary>
         /// <param name="productId">int</param>
         /// <returns>bool</returns>
-		public virtual bool Delete( int productId)
+		public virtual bool Delete( int productId, bool cache)
 		{
-			var entityToDelete = this.UnitOfWork.FirstOrDefault<Book>(o =>  o.ProductId == productId );
+			var entityToDelete = this.UnitOfWork.FirstOrDefault<Book>(o =>  o.ProductId == productId , cache);
 			
 			if(entityToDelete == null)
 			{
@@ -296,9 +248,9 @@ namespace RepositoryEFDotnet.Data.Repository
         /// </summary>
         /// <param name="productId">int</param>
         /// <returns>bool</returns>
-		public virtual async Task<bool> DeleteAsync( int productId)
+		public virtual async Task<bool> DeleteAsync( int productId, bool cache)
 		{
-			var entityToDelete = await this.UnitOfWork.FirstOrDefaultAsync<Book>(o =>  o.ProductId == productId );
+			var entityToDelete = await this.UnitOfWork.FirstOrDefaultAsync<Book>(cache, o =>  o.ProductId == productId  );
 			
 			if(entityToDelete == null)
 			{
@@ -312,28 +264,95 @@ namespace RepositoryEFDotnet.Data.Repository
 		
 		#region Aggregates
 		
-		public virtual TResult Max<TResult>(Expression<Func<IBook, TResult>> maxExpression)
+		public virtual TResult Max<TResult>(Expression<Func<IBook, TResult>> maxExpression, bool cache)
 		{
-			return this.UnitOfWork.Max(Expression.Lambda<Func<Book, TResult>>(maxExpression.Body, maxExpression.Parameters));
+			return this.UnitOfWork.Max(cache, Expression.Lambda<Func<Book, TResult>>(maxExpression.Body, maxExpression.Parameters));
 		}
 		
-		public virtual async Task<TResult> MaxAsync<TResult>(Expression<Func<IBook, TResult>> maxExpression)
+		public virtual async Task<TResult> MaxAsync<TResult>(Expression<Func<IBook, TResult>> maxExpression, bool cache)
 		{
-			return await this.UnitOfWork.MaxAsync(Expression.Lambda<Func<Book, TResult>>(maxExpression.Body, maxExpression.Parameters));
+			return await this.UnitOfWork.MaxAsync(cache, Expression.Lambda<Func<Book, TResult>>(maxExpression.Body, maxExpression.Parameters));
 		}
 		
-		public virtual TResult Min<TResult>(Expression<Func<IBook, TResult>> minExpression)
+		public virtual TResult Min<TResult>(Expression<Func<IBook, TResult>> minExpression, bool cache)
 		{
-			return this.UnitOfWork.Min(Expression.Lambda<Func<Book, TResult>>(minExpression.Body, minExpression.Parameters));
+			return this.UnitOfWork.Min(cache, Expression.Lambda<Func<Book, TResult>>(minExpression.Body, minExpression.Parameters));
 		}
 		
-		public virtual async Task<TResult> MinAsync<TResult>(Expression<Func<IBook, TResult>> minExpression)
+		public virtual async Task<TResult> MinAsync<TResult>(Expression<Func<IBook, TResult>> minExpression, bool cache)
 		{
-			return await this.UnitOfWork.MinAsync(Expression.Lambda<Func<Book, TResult>>(minExpression.Body, minExpression.Parameters));
+			return await this.UnitOfWork.MinAsync(cache, Expression.Lambda<Func<Book, TResult>>(minExpression.Body, minExpression.Parameters));
 		}
 		
 		#endregion
 		
+		#region Bulk
+
+        /// <summary>
+        ///     Bulk delete entities
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="items"></param>
+        public void BulkDelete(IEnumerable<IBook> items)
+		{
+			this.UnitOfWork.BulkDelete<IBook>(items);
+		}
+
+        /// <summary>
+        ///     Bulk delete entities async
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public async Task BulkDeleteAsync(IEnumerable<IBook> items)
+		{
+			await this.UnitOfWork.BulkDeleteAsync<IBook>(items);
+		}
+
+        /// <summary>
+        ///     Bulk insert entities
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="items"></param>
+        public void BulkInsert(IEnumerable<IBook> items)
+		{
+			this.UnitOfWork.BulkInsert<IBook>(items);
+		}
+        
+        /// <summary>
+        /// Bulk insert entities async
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public async Task BulkInsertAsync(IEnumerable<IBook> items)
+		{
+			await this.UnitOfWork.BulkInsertAsync<IBook>(items);
+		}
+
+        /// <summary>
+        /// Bulk update entities 
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="items"></param>
+        public void BulkUpdate(IEnumerable<IBook> items)
+		{
+			this.UnitOfWork.BulkUpdate<IBook>(items);
+		}
+
+        /// <summary>
+        /// Bulk update entities async
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public async Task BulkUpdateAsync(IEnumerable<IBook> items)
+		{
+			await this.UnitOfWork.BulkUpdateAsync<IBook>(items);
+		}
+
+        #endregion
+
 		#region Helpers
 		
 	    protected virtual Expression<Func<Book, object>>[] Convert(params Expression<Func<IBook, object>>[] includes)

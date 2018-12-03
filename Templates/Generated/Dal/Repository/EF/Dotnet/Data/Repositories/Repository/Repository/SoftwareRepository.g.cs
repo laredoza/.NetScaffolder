@@ -59,10 +59,10 @@ namespace RepositoryEFDotnet.Data.Repository
         /// <param name="productId">int</param>
 		/// <param name="includes">params Expression<Func<ISoftware, object>>[]</param>
         /// <returns>ISoftware</returns>
-		public virtual ISoftware LoadByProductId(int productId, params Expression<Func<ISoftware, object>>[] includes)
+		public virtual ISoftware LoadByProductId(int productId, bool cache, params Expression<Func<ISoftware, object>>[] includes)
 		{
 			var expr = this.Convert(includes);
-			return this.UnitOfWork.FirstOrDefault<Software>(o => o.ProductId == productId, expr);
+			return this.UnitOfWork.FirstOrDefault<Software>(o => o.ProductId == productId, cache, expr);
 		}
 		
         /// <summary>
@@ -71,10 +71,10 @@ namespace RepositoryEFDotnet.Data.Repository
         /// <param name="productId">int</param>
 		/// <param name="includes">params Expression<Func<ISoftware, object>>[]</param>
         /// <returns>ISoftware</returns>
-		public virtual async Task<ISoftware> LoadByProductIdAsync(int productId, params Expression<Func<ISoftware, object>>[] includes)
+		public virtual async Task<ISoftware> LoadByProductIdAsync(int productId, bool cache, params Expression<Func<ISoftware, object>>[] includes)
 		{
 			var expr = this.Convert(includes);
-			return await this.UnitOfWork.FirstOrDefaultAsync<Software>(o => o.ProductId == productId, expr);
+			return await this.UnitOfWork.FirstOrDefaultAsync<Software>(cache, o => o.ProductId == productId, expr);
 		}
 
         /// <summary>
@@ -82,10 +82,10 @@ namespace RepositoryEFDotnet.Data.Repository
         /// </summary>
 		/// <param name="includes">params Expression<Func<ISoftware, object>>[]</param>
         /// <returns>IList<ISoftware></returns>
-		public virtual IList<ISoftware> LoadAll(params Expression<Func<ISoftware, object>>[] includes)
+		public virtual IList<ISoftware> LoadAll(bool cache, params Expression<Func<ISoftware, object>>[] includes)
 		{
 			var expr = this.Convert(includes);
-			return this.UnitOfWork.GetAll<Software>(expr).ToList<ISoftware>();
+			return this.UnitOfWork.GetAll<Software>(cache, expr).ToList<ISoftware>();
 		}
 		
         /// <summary>
@@ -93,10 +93,10 @@ namespace RepositoryEFDotnet.Data.Repository
         /// </summary>
 		/// <param name="includes">params Expression<Func<ISoftware, object>>[]</param>
         /// <returns>IList<ISoftware></returns>
-		public virtual async Task<IList<ISoftware>> LoadAllAsync(params Expression<Func<ISoftware, object>>[] includes)
+		public virtual async Task<IList<ISoftware>> LoadAllAsync(bool cache, params Expression<Func<ISoftware,  object>>[] includes)
 		{
 			var expr = this.Convert(includes);
-			var result = await this.UnitOfWork.GetAllAsync<Software>(expr);
+			var result = await this.UnitOfWork.GetAllAsync<Software>(cache, expr);
 			return result.ToList<ISoftware>();
 		}
 		
@@ -111,16 +111,16 @@ namespace RepositoryEFDotnet.Data.Repository
 		/// <param name="caseSensitive">bool</param>
 		/// <param name="includes">params Expression<Func<ISoftware, object>>[]</param>
         /// <returns>IList<ISoftware></returns>
-		public virtual IList<ISoftware> SearchByLicenseCode(string licenseCode, bool caseSensitive = false, params Expression<Func<ISoftware, object>>[] includes)
+		public virtual IList<ISoftware> SearchByLicenseCode(string licenseCode, bool cache, bool caseSensitive = false, params Expression<Func<ISoftware, object>>[] includes)
 		{		
 			var expr = this.Convert(includes);
 			if(caseSensitive) 
 			{
-				return this.UnitOfWork.AllMatching<Software>(o => o.LicenseCode.Contains(licenseCode), expr).ToList<ISoftware>();
+				return this.UnitOfWork.AllMatching<Software>(o => o.LicenseCode.Contains(licenseCode), cache, expr).ToList<ISoftware>();
 			}
 			else
 			{
-				return this.UnitOfWork.AllMatching<Software>(o => o.LicenseCode.ToLower().Contains(licenseCode.ToLower()), expr).ToList<ISoftware>();
+				return this.UnitOfWork.AllMatching<Software>(o => o.LicenseCode.ToLower().Contains(licenseCode.ToLower()), cache, expr).ToList<ISoftware>();
 			}
 		}
 		
@@ -131,17 +131,17 @@ namespace RepositoryEFDotnet.Data.Repository
 		/// <param name="caseSensitive">bool</param>
 		/// <param name="includes">params Expression<Func<ISoftware, object>>[]</param>
         /// <returns>IList<ISoftware></returns>
-		public virtual async Task<IList<ISoftware>> SearchByLicenseCodeAsync(string licenseCode, bool caseSensitive = false, params Expression<Func<ISoftware, object>>[] includes)
+		public virtual async Task<IList<ISoftware>> SearchByLicenseCodeAsync(string licenseCode, bool cache, bool caseSensitive = false, params Expression<Func<ISoftware, object>>[] includes)
 		{		
 			var expr = this.Convert(includes);
 			if(caseSensitive) 
 			{
-				var result = await this.UnitOfWork.AllMatchingAsync<Software>(o => o.LicenseCode.Contains(licenseCode), expr);
+				var result = await this.UnitOfWork.AllMatchingAsync<Software>(o => o.LicenseCode.Contains(licenseCode), cache, expr);
 				return result.ToList<ISoftware>();
 			}
 			else
 			{
-				var result = await this.UnitOfWork.AllMatchingAsync<Software>(o => o.LicenseCode.ToLower().Contains(licenseCode.ToLower()), expr);
+				var result = await this.UnitOfWork.AllMatchingAsync<Software>(o => o.LicenseCode.ToLower().Contains(licenseCode.ToLower()), cache, expr);
 				return result.ToList<ISoftware>();
 			}
 		}
@@ -193,24 +193,7 @@ namespace RepositoryEFDotnet.Data.Repository
         /// <returns>bool</returns>
 		public virtual bool Update(ISoftware entity)
 		{
-			bool doUpdate = false;
-			var entityToUpdate = this.UnitOfWork.FirstOrDefault<Software>(o =>  o.ProductId == entity.ProductId );
-			
-			if (entityToUpdate == null)
-			{
-				throw new Exception("The Software entity does not exist");
-			}
-			
-			// Optimisation: Flag if any field has changed
-			if (entityToUpdate.LicenseCode != entity.LicenseCode) { entityToUpdate.LicenseCode = entity.LicenseCode;doUpdate = true; }
-
-			// Optimisation: Only execute update if a field has changed
-			if (doUpdate)
-			{
-				return this.UnitOfWork.Modify(entityToUpdate);
-			}
-			
-			return false;
+			return this.UnitOfWork.Modify(entity);
 		}
 		
         /// <summary>
@@ -220,24 +203,7 @@ namespace RepositoryEFDotnet.Data.Repository
         /// <returns>bool</returns>
 		public virtual async Task<bool> UpdateAsync(ISoftware entity)
 		{
-			bool doUpdate = false;
-			var entityToUpdate = await this.UnitOfWork.FirstOrDefaultAsync<Software>(o =>  o.ProductId == entity.ProductId );
-			
-			if (entityToUpdate == null)
-			{
-				throw new Exception("The Software entity does not exist");
-			}
-			
-			// Optimisation: Flag if any field has changed
-			if (entityToUpdate.LicenseCode != entity.LicenseCode) { entityToUpdate.LicenseCode = entity.LicenseCode;doUpdate = true; }
-
-			// Optimisation: Only execute update if a field has changed
-			if (doUpdate)
-			{
-				return await this.UnitOfWork.ModifyAsync(entityToUpdate);
-			}
-			
-			return false;
+			return await this.UnitOfWork.ModifyAsync(entity);
 		}
 		
         /// <summary>
@@ -247,14 +213,7 @@ namespace RepositoryEFDotnet.Data.Repository
         /// <returns>bool</returns>
 		public virtual bool Delete(ISoftware entity)
 		{		
-			var entityToDelete = this.UnitOfWork.FirstOrDefault<Software>(o =>  o.ProductId == entity.ProductId );
-			
-			if(entityToDelete == null)
-			{
-				throw new Exception("The Software entity does not exist");
-			}
-			
-			return this.UnitOfWork.Remove(entityToDelete);
+			return this.UnitOfWork.Remove(entity);
 		}
 		
         /// <summary>
@@ -264,14 +223,7 @@ namespace RepositoryEFDotnet.Data.Repository
         /// <returns>bool</returns>
 		public virtual async Task<bool> DeleteAsync(ISoftware entity)
 		{		
-			var entityToDelete = await this.UnitOfWork.FirstOrDefaultAsync<Software>(o =>  o.ProductId == entity.ProductId );
-			
-			if(entityToDelete == null)
-			{
-				throw new Exception("The Software entity does not exist");
-			}
-			
-			return await this.UnitOfWork.RemoveAsync(entityToDelete);
+			return await this.UnitOfWork.RemoveAsync(entity);
 		}
 
 		/// <summary>
@@ -279,9 +231,9 @@ namespace RepositoryEFDotnet.Data.Repository
         /// </summary>
         /// <param name="productId">int</param>
         /// <returns>bool</returns>
-		public virtual bool Delete( int productId)
+		public virtual bool Delete( int productId, bool cache)
 		{
-			var entityToDelete = this.UnitOfWork.FirstOrDefault<Software>(o =>  o.ProductId == productId );
+			var entityToDelete = this.UnitOfWork.FirstOrDefault<Software>(o =>  o.ProductId == productId , cache);
 			
 			if(entityToDelete == null)
 			{
@@ -296,9 +248,9 @@ namespace RepositoryEFDotnet.Data.Repository
         /// </summary>
         /// <param name="productId">int</param>
         /// <returns>bool</returns>
-		public virtual async Task<bool> DeleteAsync( int productId)
+		public virtual async Task<bool> DeleteAsync( int productId, bool cache)
 		{
-			var entityToDelete = await this.UnitOfWork.FirstOrDefaultAsync<Software>(o =>  o.ProductId == productId );
+			var entityToDelete = await this.UnitOfWork.FirstOrDefaultAsync<Software>(cache, o =>  o.ProductId == productId  );
 			
 			if(entityToDelete == null)
 			{
@@ -312,28 +264,95 @@ namespace RepositoryEFDotnet.Data.Repository
 		
 		#region Aggregates
 		
-		public virtual TResult Max<TResult>(Expression<Func<ISoftware, TResult>> maxExpression)
+		public virtual TResult Max<TResult>(Expression<Func<ISoftware, TResult>> maxExpression, bool cache)
 		{
-			return this.UnitOfWork.Max(Expression.Lambda<Func<Software, TResult>>(maxExpression.Body, maxExpression.Parameters));
+			return this.UnitOfWork.Max(cache, Expression.Lambda<Func<Software, TResult>>(maxExpression.Body, maxExpression.Parameters));
 		}
 		
-		public virtual async Task<TResult> MaxAsync<TResult>(Expression<Func<ISoftware, TResult>> maxExpression)
+		public virtual async Task<TResult> MaxAsync<TResult>(Expression<Func<ISoftware, TResult>> maxExpression, bool cache)
 		{
-			return await this.UnitOfWork.MaxAsync(Expression.Lambda<Func<Software, TResult>>(maxExpression.Body, maxExpression.Parameters));
+			return await this.UnitOfWork.MaxAsync(cache, Expression.Lambda<Func<Software, TResult>>(maxExpression.Body, maxExpression.Parameters));
 		}
 		
-		public virtual TResult Min<TResult>(Expression<Func<ISoftware, TResult>> minExpression)
+		public virtual TResult Min<TResult>(Expression<Func<ISoftware, TResult>> minExpression, bool cache)
 		{
-			return this.UnitOfWork.Min(Expression.Lambda<Func<Software, TResult>>(minExpression.Body, minExpression.Parameters));
+			return this.UnitOfWork.Min(cache, Expression.Lambda<Func<Software, TResult>>(minExpression.Body, minExpression.Parameters));
 		}
 		
-		public virtual async Task<TResult> MinAsync<TResult>(Expression<Func<ISoftware, TResult>> minExpression)
+		public virtual async Task<TResult> MinAsync<TResult>(Expression<Func<ISoftware, TResult>> minExpression, bool cache)
 		{
-			return await this.UnitOfWork.MinAsync(Expression.Lambda<Func<Software, TResult>>(minExpression.Body, minExpression.Parameters));
+			return await this.UnitOfWork.MinAsync(cache, Expression.Lambda<Func<Software, TResult>>(minExpression.Body, minExpression.Parameters));
 		}
 		
 		#endregion
 		
+		#region Bulk
+
+        /// <summary>
+        ///     Bulk delete entities
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="items"></param>
+        public void BulkDelete(IEnumerable<ISoftware> items)
+		{
+			this.UnitOfWork.BulkDelete<ISoftware>(items);
+		}
+
+        /// <summary>
+        ///     Bulk delete entities async
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public async Task BulkDeleteAsync(IEnumerable<ISoftware> items)
+		{
+			await this.UnitOfWork.BulkDeleteAsync<ISoftware>(items);
+		}
+
+        /// <summary>
+        ///     Bulk insert entities
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="items"></param>
+        public void BulkInsert(IEnumerable<ISoftware> items)
+		{
+			this.UnitOfWork.BulkInsert<ISoftware>(items);
+		}
+        
+        /// <summary>
+        /// Bulk insert entities async
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public async Task BulkInsertAsync(IEnumerable<ISoftware> items)
+		{
+			await this.UnitOfWork.BulkInsertAsync<ISoftware>(items);
+		}
+
+        /// <summary>
+        /// Bulk update entities 
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="items"></param>
+        public void BulkUpdate(IEnumerable<ISoftware> items)
+		{
+			this.UnitOfWork.BulkUpdate<ISoftware>(items);
+		}
+
+        /// <summary>
+        /// Bulk update entities async
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public async Task BulkUpdateAsync(IEnumerable<ISoftware> items)
+		{
+			await this.UnitOfWork.BulkUpdateAsync<ISoftware>(items);
+		}
+
+        #endregion
+
 		#region Helpers
 		
 	    protected virtual Expression<Func<Software, object>>[] Convert(params Expression<Func<ISoftware, object>>[] includes)

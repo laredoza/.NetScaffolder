@@ -38,31 +38,35 @@ namespace RepositoryEFDotnet.Data.Interfaces
         /// Load Country entities from the database using the composite primary keys
         /// </summary
         /// <param name="countryId">int</param>
+        /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<ICountry, object>>[]</param>
         /// <returns>ICountry</returns>
-		ICountry LoadByCountryId(int countryId, params Expression<Func<ICountry, object>>[] includes);
+		ICountry LoadByCountryId(int countryId, bool cache, params Expression<Func<ICountry, object>>[] includes);
 		
         /// <summary>
         /// Load Country entities async from the database using the composite primary keys
         /// </summary
         /// <param name="countryId">int</param>
+        /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<ICountry, object>>[]</param>
         /// <returns>ICountry</returns>
-		Task<ICountry> LoadByCountryIdAsync(int countryId, params Expression<Func<ICountry, object>>[] includes);
+		Task<ICountry> LoadByCountryIdAsync(int countryId, bool cache, params Expression<Func<ICountry, object>>[] includes);
 
         /// <summary>
         /// Load all Country entities from the database.
         /// </summary>
+        /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<ICountry, object>>[]</param>
         /// <returns>IList<ICountry></returns>
-		IList<ICountry> LoadAll(params Expression<Func<ICountry, object>>[] includes);
+		IList<ICountry> LoadAll( bool cache, params Expression<Func<ICountry, object>>[] includes);
 		
         /// <summary>
         /// Load all Country entities async from the database.
         /// </summary>
+        /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<ICountry, object>>[]</param>
         /// <returns>IList<ICountry></returns>
-		Task<IList<ICountry>> LoadAllAsync(params Expression<Func<ICountry, object>>[] includes);
+		Task<IList<ICountry>> LoadAllAsync(bool cache, params Expression<Func<ICountry, object>>[] includes);
 		
 		#endregion
 
@@ -72,19 +76,21 @@ namespace RepositoryEFDotnet.Data.Interfaces
         /// Search for Country entities in the database by CountryName
         /// </summary>
         /// <param name="countryName">string</param>
+        /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="caseSensitive">bool</param
 		/// <param name="includes">params Expression<Func<ICountry, object>>[]</param>
         /// <returns>IList<ICountry></returns>
-		IList<ICountry> SearchByCountryName(string countryName, bool caseSensitive = false, params Expression<Func<ICountry, object>>[] includes);
+		IList<ICountry> SearchByCountryName(string countryName, bool cache, bool caseSensitive = false, params Expression<Func<ICountry, object>>[] includes);
 		
         /// <summary>
         /// Search for Country entities async in the database by CountryName
         /// </summary>
         /// <param name="countryName">string</param>
+        /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="caseSensitive">bool</param
 		/// <param name="includes">params Expression<Func<ICountry, object>>[]</param>
         /// <returns>IList<ICountry></returns>
-		Task<IList<ICountry>> SearchByCountryNameAsync(string countryName, bool caseSensitive = false, params Expression<Func<ICountry, object>>[] includes);
+		Task<IList<ICountry>> SearchByCountryNameAsync(string countryName, bool cache, bool caseSensitive = false, params Expression<Func<ICountry, object>>[] includes);
 
 		#endregion
 		
@@ -137,27 +143,76 @@ namespace RepositoryEFDotnet.Data.Interfaces
         /// </summary>
         /// <param name="countryId">int</param>
         /// <returns>bool</returns>
-		bool Delete( int countryId);
+		bool Delete( int countryId, bool cache);
 
 		/// <summary>
         /// Delete the Country entity async from the database
         /// </summary>
-        /// <param name="countryId">int</param>
+        /// <param name="countryId">int, bool cache</param>
         /// <returns>bool</returns>
-		Task<bool> DeleteAsync( int countryId);
+		Task<bool> DeleteAsync( int countryId, bool cache);
 		
 		#endregion
 		
 		#region Aggregates
 		
-		TResult Max<TResult>(Expression<Func<ICountry, TResult>> maxExpression);
+		TResult Max<TResult>(Expression<Func<ICountry, TResult>> maxExpression, bool cache);
 		
-		Task<TResult> MaxAsync<TResult>(Expression<Func<ICountry, TResult>> maxExpression);
+		Task<TResult> MaxAsync<TResult>(Expression<Func<ICountry, TResult>> maxExpression, bool cache);
 		
-		TResult Min<TResult>(Expression<Func<ICountry, TResult>> maxExpression);
+		TResult Min<TResult>(Expression<Func<ICountry, TResult>> maxExpression, bool cache);
 		
-		Task<TResult> MinAsync<TResult>(Expression<Func<ICountry, TResult>> maxExpression);
+		Task<TResult> MinAsync<TResult>(Expression<Func<ICountry, TResult>> maxExpression, bool cache);
 		
 		#endregion
+
+        #region Bulk
+
+        /// <summary>
+        ///     Bulk delete entities
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="items"></param>
+        void BulkDelete(IEnumerable<ICountry> items);
+
+        /// <summary>
+        ///     Bulk delete entities async
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        Task BulkDeleteAsync(IEnumerable<ICountry> items);
+
+        /// <summary>
+        ///     Bulk insert entities
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="items"></param>
+        void BulkInsert(IEnumerable<ICountry> items);
+        
+        /// <summary>
+        /// Bulk insert entities async
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        Task BulkInsertAsync(IEnumerable<ICountry> items);
+
+        /// <summary>
+        /// Bulk update entities 
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="items"></param>
+        void BulkUpdate(IEnumerable<ICountry> items);
+
+        /// <summary>
+        /// Bulk update entities async
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        Task BulkUpdateAsync(IEnumerable<ICountry> items);
+
+        #endregion
 	}
 }

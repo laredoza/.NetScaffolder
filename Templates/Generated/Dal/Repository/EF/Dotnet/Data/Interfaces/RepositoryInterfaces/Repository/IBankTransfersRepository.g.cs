@@ -38,95 +38,107 @@ namespace RepositoryEFDotnet.Data.Interfaces
         /// Load BankTransfers entities from the database using the composite primary keys
         /// </summary
         /// <param name="bankTransferId">int</param>
+        /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<IBankTransfers, object>>[]</param>
         /// <returns>IBankTransfers</returns>
-		IBankTransfers LoadByBankTransferId(int bankTransferId, params Expression<Func<IBankTransfers, object>>[] includes);
+		IBankTransfers LoadByBankTransferId(int bankTransferId, bool cache, params Expression<Func<IBankTransfers, object>>[] includes);
 		
         /// <summary>
         /// Load BankTransfers entities async from the database using the composite primary keys
         /// </summary
         /// <param name="bankTransferId">int</param>
+        /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<IBankTransfers, object>>[]</param>
         /// <returns>IBankTransfers</returns>
-		Task<IBankTransfers> LoadByBankTransferIdAsync(int bankTransferId, params Expression<Func<IBankTransfers, object>>[] includes);
+		Task<IBankTransfers> LoadByBankTransferIdAsync(int bankTransferId, bool cache, params Expression<Func<IBankTransfers, object>>[] includes);
 
         /// <summary>
         /// Load BankTransfers entities from the database using the FromBankAccountId field
         /// </summary>
         /// <param name="fromBankAccountId">int</param
+        /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<IBankTransfers, object>>[]</param>
         /// <returns>IList<IBankTransfers></returns>
-		IList<IBankTransfers> LoadByFromBankAccountId(int fromBankAccountId, params Expression<Func<IBankTransfers, object>>[] includes);
+		IList<IBankTransfers> LoadByFromBankAccountId(int fromBankAccountId, bool cache,  params Expression<Func<IBankTransfers, object>>[] includes);
 		
         /// <summary>
         /// Load BankTransfers entities async from the database using the FromBankAccountId field
         /// </summary>
         /// <param name="fromBankAccountId">int</param
+        /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<IBankTransfers, object>>[]</param>
         /// <returns>IList<IBankTransfers></returns>
-		Task<IList<IBankTransfers>> LoadByFromBankAccountIdAsync(int fromBankAccountId, params Expression<Func<IBankTransfers, object>>[] includes);
+		Task<IList<IBankTransfers>> LoadByFromBankAccountIdAsync(int fromBankAccountId, bool cache, params Expression<Func<IBankTransfers, object>>[] includes);
 
         /// <summary>
         /// Load BankTransfers entities from the database using the ToBankAccountId field
         /// </summary>
         /// <param name="toBankAccountId">int</param
+        /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<IBankTransfers, object>>[]</param>
         /// <returns>IList<IBankTransfers></returns>
-		IList<IBankTransfers> LoadByToBankAccountId(int toBankAccountId, params Expression<Func<IBankTransfers, object>>[] includes);
+		IList<IBankTransfers> LoadByToBankAccountId(int toBankAccountId, bool cache,  params Expression<Func<IBankTransfers, object>>[] includes);
 		
         /// <summary>
         /// Load BankTransfers entities async from the database using the ToBankAccountId field
         /// </summary>
         /// <param name="toBankAccountId">int</param
+        /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<IBankTransfers, object>>[]</param>
         /// <returns>IList<IBankTransfers></returns>
-		Task<IList<IBankTransfers>> LoadByToBankAccountIdAsync(int toBankAccountId, params Expression<Func<IBankTransfers, object>>[] includes);
+		Task<IList<IBankTransfers>> LoadByToBankAccountIdAsync(int toBankAccountId, bool cache, params Expression<Func<IBankTransfers, object>>[] includes);
 
         /// <summary>
         /// Load BankTransfers entities from the database using the Amount field
         /// </summary>
         /// <param name="amount">decimal</param
+        /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<IBankTransfers, object>>[]</param>
         /// <returns>IList<IBankTransfers></returns>
-		IList<IBankTransfers> LoadByAmount(decimal amount, params Expression<Func<IBankTransfers, object>>[] includes);
+		IList<IBankTransfers> LoadByAmount(decimal amount, bool cache,  params Expression<Func<IBankTransfers, object>>[] includes);
 		
         /// <summary>
         /// Load BankTransfers entities async from the database using the Amount field
         /// </summary>
         /// <param name="amount">decimal</param
+        /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<IBankTransfers, object>>[]</param>
         /// <returns>IList<IBankTransfers></returns>
-		Task<IList<IBankTransfers>> LoadByAmountAsync(decimal amount, params Expression<Func<IBankTransfers, object>>[] includes);
+		Task<IList<IBankTransfers>> LoadByAmountAsync(decimal amount, bool cache, params Expression<Func<IBankTransfers, object>>[] includes);
 
         /// <summary>
         /// Load BankTransfers entities from the database using the TransferDate field
         /// </summary>
         /// <param name="transferDate">DateTime</param
+        /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<IBankTransfers, object>>[]</param>
         /// <returns>IList<IBankTransfers></returns>
-		IList<IBankTransfers> LoadByTransferDate(DateTime transferDate, params Expression<Func<IBankTransfers, object>>[] includes);
+		IList<IBankTransfers> LoadByTransferDate(DateTime transferDate, bool cache,  params Expression<Func<IBankTransfers, object>>[] includes);
 		
         /// <summary>
         /// Load BankTransfers entities async from the database using the TransferDate field
         /// </summary>
         /// <param name="transferDate">DateTime</param
+        /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<IBankTransfers, object>>[]</param>
         /// <returns>IList<IBankTransfers></returns>
-		Task<IList<IBankTransfers>> LoadByTransferDateAsync(DateTime transferDate, params Expression<Func<IBankTransfers, object>>[] includes);
+		Task<IList<IBankTransfers>> LoadByTransferDateAsync(DateTime transferDate, bool cache, params Expression<Func<IBankTransfers, object>>[] includes);
 
         /// <summary>
         /// Load all BankTransfers entities from the database.
         /// </summary>
+        /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<IBankTransfers, object>>[]</param>
         /// <returns>IList<IBankTransfers></returns>
-		IList<IBankTransfers> LoadAll(params Expression<Func<IBankTransfers, object>>[] includes);
+		IList<IBankTransfers> LoadAll( bool cache, params Expression<Func<IBankTransfers, object>>[] includes);
 		
         /// <summary>
         /// Load all BankTransfers entities async from the database.
         /// </summary>
+        /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<IBankTransfers, object>>[]</param>
         /// <returns>IList<IBankTransfers></returns>
-		Task<IList<IBankTransfers>> LoadAllAsync(params Expression<Func<IBankTransfers, object>>[] includes);
+		Task<IList<IBankTransfers>> LoadAllAsync(bool cache, params Expression<Func<IBankTransfers, object>>[] includes);
 		
 		#endregion
 
@@ -183,27 +195,76 @@ namespace RepositoryEFDotnet.Data.Interfaces
         /// </summary>
         /// <param name="bankTransferId">int</param>
         /// <returns>bool</returns>
-		bool Delete( int bankTransferId);
+		bool Delete( int bankTransferId, bool cache);
 
 		/// <summary>
         /// Delete the BankTransfers entity async from the database
         /// </summary>
-        /// <param name="bankTransferId">int</param>
+        /// <param name="bankTransferId">int, bool cache</param>
         /// <returns>bool</returns>
-		Task<bool> DeleteAsync( int bankTransferId);
+		Task<bool> DeleteAsync( int bankTransferId, bool cache);
 		
 		#endregion
 		
 		#region Aggregates
 		
-		TResult Max<TResult>(Expression<Func<IBankTransfers, TResult>> maxExpression);
+		TResult Max<TResult>(Expression<Func<IBankTransfers, TResult>> maxExpression, bool cache);
 		
-		Task<TResult> MaxAsync<TResult>(Expression<Func<IBankTransfers, TResult>> maxExpression);
+		Task<TResult> MaxAsync<TResult>(Expression<Func<IBankTransfers, TResult>> maxExpression, bool cache);
 		
-		TResult Min<TResult>(Expression<Func<IBankTransfers, TResult>> maxExpression);
+		TResult Min<TResult>(Expression<Func<IBankTransfers, TResult>> maxExpression, bool cache);
 		
-		Task<TResult> MinAsync<TResult>(Expression<Func<IBankTransfers, TResult>> maxExpression);
+		Task<TResult> MinAsync<TResult>(Expression<Func<IBankTransfers, TResult>> maxExpression, bool cache);
 		
 		#endregion
+
+        #region Bulk
+
+        /// <summary>
+        ///     Bulk delete entities
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="items"></param>
+        void BulkDelete(IEnumerable<IBankTransfers> items);
+
+        /// <summary>
+        ///     Bulk delete entities async
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        Task BulkDeleteAsync(IEnumerable<IBankTransfers> items);
+
+        /// <summary>
+        ///     Bulk insert entities
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="items"></param>
+        void BulkInsert(IEnumerable<IBankTransfers> items);
+        
+        /// <summary>
+        /// Bulk insert entities async
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        Task BulkInsertAsync(IEnumerable<IBankTransfers> items);
+
+        /// <summary>
+        /// Bulk update entities 
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="items"></param>
+        void BulkUpdate(IEnumerable<IBankTransfers> items);
+
+        /// <summary>
+        /// Bulk update entities async
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        Task BulkUpdateAsync(IEnumerable<IBankTransfers> items);
+
+        #endregion
 	}
 }

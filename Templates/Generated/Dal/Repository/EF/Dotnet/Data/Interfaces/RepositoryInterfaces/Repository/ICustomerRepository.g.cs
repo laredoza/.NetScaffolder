@@ -38,63 +38,71 @@ namespace RepositoryEFDotnet.Data.Interfaces
         /// Load Customer entities from the database using the composite primary keys
         /// </summary
         /// <param name="customerId">int</param>
+        /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
         /// <returns>ICustomer</returns>
-		ICustomer LoadByCustomerId(int customerId, params Expression<Func<ICustomer, object>>[] includes);
+		ICustomer LoadByCustomerId(int customerId, bool cache, params Expression<Func<ICustomer, object>>[] includes);
 		
         /// <summary>
         /// Load Customer entities async from the database using the composite primary keys
         /// </summary
         /// <param name="customerId">int</param>
+        /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
         /// <returns>ICustomer</returns>
-		Task<ICustomer> LoadByCustomerIdAsync(int customerId, params Expression<Func<ICustomer, object>>[] includes);
+		Task<ICustomer> LoadByCustomerIdAsync(int customerId, bool cache, params Expression<Func<ICustomer, object>>[] includes);
 
         /// <summary>
         /// Load Customer entities from the database using the CountryId field
         /// </summary>
         /// <param name="countryId">Nullable<int></param
+        /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
         /// <returns>IList<ICustomer></returns>
-		IList<ICustomer> LoadByCountryId(Nullable<int> countryId, params Expression<Func<ICustomer, object>>[] includes);
+		IList<ICustomer> LoadByCountryId(Nullable<int> countryId, bool cache,  params Expression<Func<ICustomer, object>>[] includes);
 		
         /// <summary>
         /// Load Customer entities async from the database using the CountryId field
         /// </summary>
         /// <param name="countryId">Nullable<int></param
+        /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
         /// <returns>IList<ICustomer></returns>
-		Task<IList<ICustomer>> LoadByCountryIdAsync(Nullable<int> countryId, params Expression<Func<ICustomer, object>>[] includes);
+		Task<IList<ICustomer>> LoadByCountryIdAsync(Nullable<int> countryId, bool cache, params Expression<Func<ICustomer, object>>[] includes);
 
         /// <summary>
         /// Load Customer entities from the database using the IsEnabled field
         /// </summary>
         /// <param name="isEnabled">bool</param
+        /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
         /// <returns>IList<ICustomer></returns>
-		IList<ICustomer> LoadByIsEnabled(bool isEnabled, params Expression<Func<ICustomer, object>>[] includes);
+		IList<ICustomer> LoadByIsEnabled(bool isEnabled, bool cache,  params Expression<Func<ICustomer, object>>[] includes);
 		
         /// <summary>
         /// Load Customer entities async from the database using the IsEnabled field
         /// </summary>
         /// <param name="isEnabled">bool</param
+        /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
         /// <returns>IList<ICustomer></returns>
-		Task<IList<ICustomer>> LoadByIsEnabledAsync(bool isEnabled, params Expression<Func<ICustomer, object>>[] includes);
+		Task<IList<ICustomer>> LoadByIsEnabledAsync(bool isEnabled, bool cache, params Expression<Func<ICustomer, object>>[] includes);
 
         /// <summary>
         /// Load all Customer entities from the database.
         /// </summary>
+        /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
         /// <returns>IList<ICustomer></returns>
-		IList<ICustomer> LoadAll(params Expression<Func<ICustomer, object>>[] includes);
+		IList<ICustomer> LoadAll( bool cache, params Expression<Func<ICustomer, object>>[] includes);
 		
         /// <summary>
         /// Load all Customer entities async from the database.
         /// </summary>
+        /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
         /// <returns>IList<ICustomer></returns>
-		Task<IList<ICustomer>> LoadAllAsync(params Expression<Func<ICustomer, object>>[] includes);
+		Task<IList<ICustomer>> LoadAllAsync(bool cache, params Expression<Func<ICustomer, object>>[] includes);
 		
 		#endregion
 
@@ -104,181 +112,201 @@ namespace RepositoryEFDotnet.Data.Interfaces
         /// Search for Customer entities in the database by CustomerCode
         /// </summary>
         /// <param name="customerCode">string</param>
+        /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="caseSensitive">bool</param
 		/// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
         /// <returns>IList<ICustomer></returns>
-		IList<ICustomer> SearchByCustomerCode(string customerCode, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes);
+		IList<ICustomer> SearchByCustomerCode(string customerCode, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes);
 		
         /// <summary>
         /// Search for Customer entities async in the database by CustomerCode
         /// </summary>
         /// <param name="customerCode">string</param>
+        /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="caseSensitive">bool</param
 		/// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
         /// <returns>IList<ICustomer></returns>
-		Task<IList<ICustomer>> SearchByCustomerCodeAsync(string customerCode, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes);
+		Task<IList<ICustomer>> SearchByCustomerCodeAsync(string customerCode, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes);
 
         /// <summary>
         /// Search for Customer entities in the database by CompanyName
         /// </summary>
         /// <param name="companyName">string</param>
+        /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="caseSensitive">bool</param
 		/// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
         /// <returns>IList<ICustomer></returns>
-		IList<ICustomer> SearchByCompanyName(string companyName, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes);
+		IList<ICustomer> SearchByCompanyName(string companyName, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes);
 		
         /// <summary>
         /// Search for Customer entities async in the database by CompanyName
         /// </summary>
         /// <param name="companyName">string</param>
+        /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="caseSensitive">bool</param
 		/// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
         /// <returns>IList<ICustomer></returns>
-		Task<IList<ICustomer>> SearchByCompanyNameAsync(string companyName, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes);
+		Task<IList<ICustomer>> SearchByCompanyNameAsync(string companyName, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes);
 
         /// <summary>
         /// Search for Customer entities in the database by ContactName
         /// </summary>
         /// <param name="contactName">string</param>
+        /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="caseSensitive">bool</param
 		/// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
         /// <returns>IList<ICustomer></returns>
-		IList<ICustomer> SearchByContactName(string contactName, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes);
+		IList<ICustomer> SearchByContactName(string contactName, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes);
 		
         /// <summary>
         /// Search for Customer entities async in the database by ContactName
         /// </summary>
         /// <param name="contactName">string</param>
+        /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="caseSensitive">bool</param
 		/// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
         /// <returns>IList<ICustomer></returns>
-		Task<IList<ICustomer>> SearchByContactNameAsync(string contactName, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes);
+		Task<IList<ICustomer>> SearchByContactNameAsync(string contactName, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes);
 
         /// <summary>
         /// Search for Customer entities in the database by ContactTitle
         /// </summary>
         /// <param name="contactTitle">string</param>
+        /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="caseSensitive">bool</param
 		/// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
         /// <returns>IList<ICustomer></returns>
-		IList<ICustomer> SearchByContactTitle(string contactTitle, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes);
+		IList<ICustomer> SearchByContactTitle(string contactTitle, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes);
 		
         /// <summary>
         /// Search for Customer entities async in the database by ContactTitle
         /// </summary>
         /// <param name="contactTitle">string</param>
+        /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="caseSensitive">bool</param
 		/// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
         /// <returns>IList<ICustomer></returns>
-		Task<IList<ICustomer>> SearchByContactTitleAsync(string contactTitle, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes);
+		Task<IList<ICustomer>> SearchByContactTitleAsync(string contactTitle, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes);
 
         /// <summary>
         /// Search for Customer entities in the database by Address
         /// </summary>
         /// <param name="address">string</param>
+        /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="caseSensitive">bool</param
 		/// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
         /// <returns>IList<ICustomer></returns>
-		IList<ICustomer> SearchByAddress(string address, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes);
+		IList<ICustomer> SearchByAddress(string address, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes);
 		
         /// <summary>
         /// Search for Customer entities async in the database by Address
         /// </summary>
         /// <param name="address">string</param>
+        /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="caseSensitive">bool</param
 		/// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
         /// <returns>IList<ICustomer></returns>
-		Task<IList<ICustomer>> SearchByAddressAsync(string address, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes);
+		Task<IList<ICustomer>> SearchByAddressAsync(string address, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes);
 
         /// <summary>
         /// Search for Customer entities in the database by City
         /// </summary>
         /// <param name="city">string</param>
+        /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="caseSensitive">bool</param
 		/// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
         /// <returns>IList<ICustomer></returns>
-		IList<ICustomer> SearchByCity(string city, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes);
+		IList<ICustomer> SearchByCity(string city, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes);
 		
         /// <summary>
         /// Search for Customer entities async in the database by City
         /// </summary>
         /// <param name="city">string</param>
+        /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="caseSensitive">bool</param
 		/// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
         /// <returns>IList<ICustomer></returns>
-		Task<IList<ICustomer>> SearchByCityAsync(string city, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes);
+		Task<IList<ICustomer>> SearchByCityAsync(string city, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes);
 
         /// <summary>
         /// Search for Customer entities in the database by PostalCode
         /// </summary>
         /// <param name="postalCode">string</param>
+        /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="caseSensitive">bool</param
 		/// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
         /// <returns>IList<ICustomer></returns>
-		IList<ICustomer> SearchByPostalCode(string postalCode, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes);
+		IList<ICustomer> SearchByPostalCode(string postalCode, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes);
 		
         /// <summary>
         /// Search for Customer entities async in the database by PostalCode
         /// </summary>
         /// <param name="postalCode">string</param>
+        /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="caseSensitive">bool</param
 		/// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
         /// <returns>IList<ICustomer></returns>
-		Task<IList<ICustomer>> SearchByPostalCodeAsync(string postalCode, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes);
+		Task<IList<ICustomer>> SearchByPostalCodeAsync(string postalCode, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes);
 
         /// <summary>
         /// Search for Customer entities in the database by Telephone
         /// </summary>
         /// <param name="telephone">string</param>
+        /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="caseSensitive">bool</param
 		/// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
         /// <returns>IList<ICustomer></returns>
-		IList<ICustomer> SearchByTelephone(string telephone, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes);
+		IList<ICustomer> SearchByTelephone(string telephone, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes);
 		
         /// <summary>
         /// Search for Customer entities async in the database by Telephone
         /// </summary>
         /// <param name="telephone">string</param>
+        /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="caseSensitive">bool</param
 		/// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
         /// <returns>IList<ICustomer></returns>
-		Task<IList<ICustomer>> SearchByTelephoneAsync(string telephone, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes);
+		Task<IList<ICustomer>> SearchByTelephoneAsync(string telephone, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes);
 
         /// <summary>
         /// Search for Customer entities in the database by Fax
         /// </summary>
         /// <param name="fax">string</param>
+        /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="caseSensitive">bool</param
 		/// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
         /// <returns>IList<ICustomer></returns>
-		IList<ICustomer> SearchByFax(string fax, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes);
+		IList<ICustomer> SearchByFax(string fax, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes);
 		
         /// <summary>
         /// Search for Customer entities async in the database by Fax
         /// </summary>
         /// <param name="fax">string</param>
+        /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="caseSensitive">bool</param
 		/// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
         /// <returns>IList<ICustomer></returns>
-		Task<IList<ICustomer>> SearchByFaxAsync(string fax, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes);
+		Task<IList<ICustomer>> SearchByFaxAsync(string fax, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes);
 
         /// <summary>
         /// Search for Customer entities in the database by Photo
         /// </summary>
         /// <param name="photo">string</param>
+        /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="caseSensitive">bool</param
 		/// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
         /// <returns>IList<ICustomer></returns>
-		IList<ICustomer> SearchByPhoto(string photo, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes);
+		IList<ICustomer> SearchByPhoto(string photo, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes);
 		
         /// <summary>
         /// Search for Customer entities async in the database by Photo
         /// </summary>
         /// <param name="photo">string</param>
+        /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="caseSensitive">bool</param
 		/// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
         /// <returns>IList<ICustomer></returns>
-		Task<IList<ICustomer>> SearchByPhotoAsync(string photo, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes);
+		Task<IList<ICustomer>> SearchByPhotoAsync(string photo, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes);
 
 		#endregion
 		
@@ -331,27 +359,76 @@ namespace RepositoryEFDotnet.Data.Interfaces
         /// </summary>
         /// <param name="customerId">int</param>
         /// <returns>bool</returns>
-		bool Delete( int customerId);
+		bool Delete( int customerId, bool cache);
 
 		/// <summary>
         /// Delete the Customer entity async from the database
         /// </summary>
-        /// <param name="customerId">int</param>
+        /// <param name="customerId">int, bool cache</param>
         /// <returns>bool</returns>
-		Task<bool> DeleteAsync( int customerId);
+		Task<bool> DeleteAsync( int customerId, bool cache);
 		
 		#endregion
 		
 		#region Aggregates
 		
-		TResult Max<TResult>(Expression<Func<ICustomer, TResult>> maxExpression);
+		TResult Max<TResult>(Expression<Func<ICustomer, TResult>> maxExpression, bool cache);
 		
-		Task<TResult> MaxAsync<TResult>(Expression<Func<ICustomer, TResult>> maxExpression);
+		Task<TResult> MaxAsync<TResult>(Expression<Func<ICustomer, TResult>> maxExpression, bool cache);
 		
-		TResult Min<TResult>(Expression<Func<ICustomer, TResult>> maxExpression);
+		TResult Min<TResult>(Expression<Func<ICustomer, TResult>> maxExpression, bool cache);
 		
-		Task<TResult> MinAsync<TResult>(Expression<Func<ICustomer, TResult>> maxExpression);
+		Task<TResult> MinAsync<TResult>(Expression<Func<ICustomer, TResult>> maxExpression, bool cache);
 		
 		#endregion
+
+        #region Bulk
+
+        /// <summary>
+        ///     Bulk delete entities
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="items"></param>
+        void BulkDelete(IEnumerable<ICustomer> items);
+
+        /// <summary>
+        ///     Bulk delete entities async
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        Task BulkDeleteAsync(IEnumerable<ICustomer> items);
+
+        /// <summary>
+        ///     Bulk insert entities
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="items"></param>
+        void BulkInsert(IEnumerable<ICustomer> items);
+        
+        /// <summary>
+        /// Bulk insert entities async
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        Task BulkInsertAsync(IEnumerable<ICustomer> items);
+
+        /// <summary>
+        /// Bulk update entities 
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="items"></param>
+        void BulkUpdate(IEnumerable<ICustomer> items);
+
+        /// <summary>
+        /// Bulk update entities async
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        Task BulkUpdateAsync(IEnumerable<ICustomer> items);
+
+        #endregion
 	}
 }

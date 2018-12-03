@@ -33,23 +33,41 @@ namespace RepositoryEFDotnet.Data.ApplicationService
 	public partial class NewApplicationService  : INewApplicationService
 	{
 
-
+        /// <summary>
+        /// Gets or sets the BankAccount Repository 
+        /// </summary>
         protected IBankAccountRepository BankAccountRepository { get; set; }
-
+        /// <summary>
+        /// Gets or sets the BankTransfers Repository 
+        /// </summary>
         protected IBankTransfersRepository BankTransfersRepository { get; set; }
-
+        /// <summary>
+        /// Gets or sets the Book Repository 
+        /// </summary>
         protected IBookRepository BookRepository { get; set; }
-
+        /// <summary>
+        /// Gets or sets the Country Repository 
+        /// </summary>
         protected ICountryRepository CountryRepository { get; set; }
-
+        /// <summary>
+        /// Gets or sets the Customer Repository 
+        /// </summary>
         protected ICustomerRepository CustomerRepository { get; set; }
-
+        /// <summary>
+        /// Gets or sets the Order Repository 
+        /// </summary>
         protected IOrderRepository OrderRepository { get; set; }
-
+        /// <summary>
+        /// Gets or sets the OrderDetails Repository 
+        /// </summary>
         protected IOrderDetailsRepository OrderDetailsRepository { get; set; }
-
+        /// <summary>
+        /// Gets or sets the Product Repository 
+        /// </summary>
         protected IProductRepository ProductRepository { get; set; }
-
+        /// <summary>
+        /// Gets or sets the Software Repository 
+        /// </summary>
         protected ISoftwareRepository SoftwareRepository { get; set; }
 
         public NewApplicationService (
@@ -83,9 +101,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
         /// <param name="bankAccountId">int</param>
         /// <returns>IBankAccount</returns>
         /// <param name="includes">params Expression<Func<IBankAccount, object>>[]</param>
-		public IBankAccount LoadByBankAccountBankAccountId(int bankAccountId, params Expression<Func<IBankAccount, object>>[] includes)
+		public IBankAccount LoadByBankAccountBankAccountId(int bankAccountId, bool cache, params Expression<Func<IBankAccount, object>>[] includes)
         {
-            return this.BankAccountRepository.LoadByBankAccountId(bankAccountId, includes);
+            return this.BankAccountRepository.LoadByBankAccountId(bankAccountId, cache, includes);
         }
 
         /// <summary>
@@ -94,9 +112,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
         /// <param name="bankAccountId">int</param>
         /// <returns>IBankAccount</returns>
         /// <param name="includes">params Expression<Func<IBankAccount, object>>[]</param>
-		public async Task<IBankAccount> LoadByBankAccountBankAccountIdAsync(int bankAccountId, params Expression<Func<IBankAccount, object>>[] includes)
+		public async Task<IBankAccount> LoadByBankAccountBankAccountIdAsync(int bankAccountId, bool cache, params Expression<Func<IBankAccount, object>>[] includes)
         {
-            return await this.BankAccountRepository.LoadByBankAccountIdAsync(bankAccountId, includes);
+            return await this.BankAccountRepository.LoadByBankAccountIdAsync(bankAccountId, cache, includes);
         }
 
         /// <summary>
@@ -104,9 +122,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
         /// </summary>
         /// <param name="includes">params Expression<Func<IBankAccount, object>>[]</param>
         /// <returns>IList<IBankAccount></returns>
-		public IList<IBankAccount> BankAccountLoadAll(params Expression<Func<IBankAccount, object>>[] includes)
+		public IList<IBankAccount> BankAccountLoadAll(bool cache, params Expression<Func<IBankAccount, object>>[] includes)
         {
-            return this.BankAccountRepository.LoadAll(includes);
+            return this.BankAccountRepository.LoadAll(cache, includes);
         }
 
         /// <summary>
@@ -114,9 +132,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
         /// </summary>
         /// <param name="includes">params Expression<Func<IBankAccount, object>>[]</param>
         /// <returns>IList<IBankAccount></returns>
-		public Task<IList<IBankAccount>> BankAccountLoadAllAsync(params Expression<Func<IBankAccount, object>>[] includes)
+		public Task<IList<IBankAccount>> BankAccountLoadAllAsync(bool cache, params Expression<Func<IBankAccount, object>>[] includes)
         {
-            return this.BankAccountRepository.LoadAllAsync(includes);
+            return this.BankAccountRepository.LoadAllAsync(cache, includes);
         }
 
 
@@ -126,9 +144,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
         /// <param name="bankTransferId">int</param>
         /// <returns>IBankTransfers</returns>
         /// <param name="includes">params Expression<Func<IBankTransfers, object>>[]</param>
-		public IBankTransfers LoadByBankTransfersBankTransferId(int bankTransferId, params Expression<Func<IBankTransfers, object>>[] includes)
+		public IBankTransfers LoadByBankTransfersBankTransferId(int bankTransferId, bool cache, params Expression<Func<IBankTransfers, object>>[] includes)
         {
-            return this.BankTransfersRepository.LoadByBankTransferId(bankTransferId, includes);
+            return this.BankTransfersRepository.LoadByBankTransferId(bankTransferId, cache, includes);
         }
 
         /// <summary>
@@ -137,9 +155,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
         /// <param name="bankTransferId">int</param>
         /// <returns>IBankTransfers</returns>
         /// <param name="includes">params Expression<Func<IBankTransfers, object>>[]</param>
-		public async Task<IBankTransfers> LoadByBankTransfersBankTransferIdAsync(int bankTransferId, params Expression<Func<IBankTransfers, object>>[] includes)
+		public async Task<IBankTransfers> LoadByBankTransfersBankTransferIdAsync(int bankTransferId, bool cache, params Expression<Func<IBankTransfers, object>>[] includes)
         {
-            return await this.BankTransfersRepository.LoadByBankTransferIdAsync(bankTransferId, includes);
+            return await this.BankTransfersRepository.LoadByBankTransferIdAsync(bankTransferId, cache, includes);
         }
 
         /// <summary>
@@ -147,9 +165,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
         /// </summary>
         /// <param name="includes">params Expression<Func<IBankTransfers, object>>[]</param>
         /// <returns>IList<IBankTransfers></returns>
-		public IList<IBankTransfers> BankTransfersLoadAll(params Expression<Func<IBankTransfers, object>>[] includes)
+		public IList<IBankTransfers> BankTransfersLoadAll(bool cache, params Expression<Func<IBankTransfers, object>>[] includes)
         {
-            return this.BankTransfersRepository.LoadAll(includes);
+            return this.BankTransfersRepository.LoadAll(cache, includes);
         }
 
         /// <summary>
@@ -157,9 +175,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
         /// </summary>
         /// <param name="includes">params Expression<Func<IBankTransfers, object>>[]</param>
         /// <returns>IList<IBankTransfers></returns>
-		public Task<IList<IBankTransfers>> BankTransfersLoadAllAsync(params Expression<Func<IBankTransfers, object>>[] includes)
+		public Task<IList<IBankTransfers>> BankTransfersLoadAllAsync(bool cache, params Expression<Func<IBankTransfers, object>>[] includes)
         {
-            return this.BankTransfersRepository.LoadAllAsync(includes);
+            return this.BankTransfersRepository.LoadAllAsync(cache, includes);
         }
 
 
@@ -169,9 +187,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
         /// <param name="productId">int</param>
         /// <returns>IBook</returns>
         /// <param name="includes">params Expression<Func<IBook, object>>[]</param>
-		public IBook LoadByBookProductId(int productId, params Expression<Func<IBook, object>>[] includes)
+		public IBook LoadByBookProductId(int productId, bool cache, params Expression<Func<IBook, object>>[] includes)
         {
-            return this.BookRepository.LoadByProductId(productId, includes);
+            return this.BookRepository.LoadByProductId(productId, cache, includes);
         }
 
         /// <summary>
@@ -180,9 +198,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
         /// <param name="productId">int</param>
         /// <returns>IBook</returns>
         /// <param name="includes">params Expression<Func<IBook, object>>[]</param>
-		public async Task<IBook> LoadByBookProductIdAsync(int productId, params Expression<Func<IBook, object>>[] includes)
+		public async Task<IBook> LoadByBookProductIdAsync(int productId, bool cache, params Expression<Func<IBook, object>>[] includes)
         {
-            return await this.BookRepository.LoadByProductIdAsync(productId, includes);
+            return await this.BookRepository.LoadByProductIdAsync(productId, cache, includes);
         }
 
         /// <summary>
@@ -190,9 +208,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
         /// </summary>
         /// <param name="includes">params Expression<Func<IBook, object>>[]</param>
         /// <returns>IList<IBook></returns>
-		public IList<IBook> BookLoadAll(params Expression<Func<IBook, object>>[] includes)
+		public IList<IBook> BookLoadAll(bool cache, params Expression<Func<IBook, object>>[] includes)
         {
-            return this.BookRepository.LoadAll(includes);
+            return this.BookRepository.LoadAll(cache, includes);
         }
 
         /// <summary>
@@ -200,9 +218,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
         /// </summary>
         /// <param name="includes">params Expression<Func<IBook, object>>[]</param>
         /// <returns>IList<IBook></returns>
-		public Task<IList<IBook>> BookLoadAllAsync(params Expression<Func<IBook, object>>[] includes)
+		public Task<IList<IBook>> BookLoadAllAsync(bool cache, params Expression<Func<IBook, object>>[] includes)
         {
-            return this.BookRepository.LoadAllAsync(includes);
+            return this.BookRepository.LoadAllAsync(cache, includes);
         }
 
 
@@ -212,9 +230,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
         /// <param name="countryId">int</param>
         /// <returns>ICountry</returns>
         /// <param name="includes">params Expression<Func<ICountry, object>>[]</param>
-		public ICountry LoadByCountryCountryId(int countryId, params Expression<Func<ICountry, object>>[] includes)
+		public ICountry LoadByCountryCountryId(int countryId, bool cache, params Expression<Func<ICountry, object>>[] includes)
         {
-            return this.CountryRepository.LoadByCountryId(countryId, includes);
+            return this.CountryRepository.LoadByCountryId(countryId, cache, includes);
         }
 
         /// <summary>
@@ -223,9 +241,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
         /// <param name="countryId">int</param>
         /// <returns>ICountry</returns>
         /// <param name="includes">params Expression<Func<ICountry, object>>[]</param>
-		public async Task<ICountry> LoadByCountryCountryIdAsync(int countryId, params Expression<Func<ICountry, object>>[] includes)
+		public async Task<ICountry> LoadByCountryCountryIdAsync(int countryId, bool cache, params Expression<Func<ICountry, object>>[] includes)
         {
-            return await this.CountryRepository.LoadByCountryIdAsync(countryId, includes);
+            return await this.CountryRepository.LoadByCountryIdAsync(countryId, cache, includes);
         }
 
         /// <summary>
@@ -233,9 +251,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
         /// </summary>
         /// <param name="includes">params Expression<Func<ICountry, object>>[]</param>
         /// <returns>IList<ICountry></returns>
-		public IList<ICountry> CountryLoadAll(params Expression<Func<ICountry, object>>[] includes)
+		public IList<ICountry> CountryLoadAll(bool cache, params Expression<Func<ICountry, object>>[] includes)
         {
-            return this.CountryRepository.LoadAll(includes);
+            return this.CountryRepository.LoadAll(cache, includes);
         }
 
         /// <summary>
@@ -243,9 +261,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
         /// </summary>
         /// <param name="includes">params Expression<Func<ICountry, object>>[]</param>
         /// <returns>IList<ICountry></returns>
-		public Task<IList<ICountry>> CountryLoadAllAsync(params Expression<Func<ICountry, object>>[] includes)
+		public Task<IList<ICountry>> CountryLoadAllAsync(bool cache, params Expression<Func<ICountry, object>>[] includes)
         {
-            return this.CountryRepository.LoadAllAsync(includes);
+            return this.CountryRepository.LoadAllAsync(cache, includes);
         }
 
 
@@ -255,9 +273,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
         /// <param name="customerId">int</param>
         /// <returns>ICustomer</returns>
         /// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-		public ICustomer LoadByCustomerCustomerId(int customerId, params Expression<Func<ICustomer, object>>[] includes)
+		public ICustomer LoadByCustomerCustomerId(int customerId, bool cache, params Expression<Func<ICustomer, object>>[] includes)
         {
-            return this.CustomerRepository.LoadByCustomerId(customerId, includes);
+            return this.CustomerRepository.LoadByCustomerId(customerId, cache, includes);
         }
 
         /// <summary>
@@ -266,9 +284,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
         /// <param name="customerId">int</param>
         /// <returns>ICustomer</returns>
         /// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-		public async Task<ICustomer> LoadByCustomerCustomerIdAsync(int customerId, params Expression<Func<ICustomer, object>>[] includes)
+		public async Task<ICustomer> LoadByCustomerCustomerIdAsync(int customerId, bool cache, params Expression<Func<ICustomer, object>>[] includes)
         {
-            return await this.CustomerRepository.LoadByCustomerIdAsync(customerId, includes);
+            return await this.CustomerRepository.LoadByCustomerIdAsync(customerId, cache, includes);
         }
 
         /// <summary>
@@ -276,9 +294,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
         /// </summary>
         /// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
         /// <returns>IList<ICustomer></returns>
-		public IList<ICustomer> CustomerLoadAll(params Expression<Func<ICustomer, object>>[] includes)
+		public IList<ICustomer> CustomerLoadAll(bool cache, params Expression<Func<ICustomer, object>>[] includes)
         {
-            return this.CustomerRepository.LoadAll(includes);
+            return this.CustomerRepository.LoadAll(cache, includes);
         }
 
         /// <summary>
@@ -286,9 +304,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
         /// </summary>
         /// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
         /// <returns>IList<ICustomer></returns>
-		public Task<IList<ICustomer>> CustomerLoadAllAsync(params Expression<Func<ICustomer, object>>[] includes)
+		public Task<IList<ICustomer>> CustomerLoadAllAsync(bool cache, params Expression<Func<ICustomer, object>>[] includes)
         {
-            return this.CustomerRepository.LoadAllAsync(includes);
+            return this.CustomerRepository.LoadAllAsync(cache, includes);
         }
 
 
@@ -298,9 +316,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
         /// <param name="orderId">int</param>
         /// <returns>IOrder</returns>
         /// <param name="includes">params Expression<Func<IOrder, object>>[]</param>
-		public IOrder LoadByOrderOrderId(int orderId, params Expression<Func<IOrder, object>>[] includes)
+		public IOrder LoadByOrderOrderId(int orderId, bool cache, params Expression<Func<IOrder, object>>[] includes)
         {
-            return this.OrderRepository.LoadByOrderId(orderId, includes);
+            return this.OrderRepository.LoadByOrderId(orderId, cache, includes);
         }
 
         /// <summary>
@@ -309,9 +327,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
         /// <param name="orderId">int</param>
         /// <returns>IOrder</returns>
         /// <param name="includes">params Expression<Func<IOrder, object>>[]</param>
-		public async Task<IOrder> LoadByOrderOrderIdAsync(int orderId, params Expression<Func<IOrder, object>>[] includes)
+		public async Task<IOrder> LoadByOrderOrderIdAsync(int orderId, bool cache, params Expression<Func<IOrder, object>>[] includes)
         {
-            return await this.OrderRepository.LoadByOrderIdAsync(orderId, includes);
+            return await this.OrderRepository.LoadByOrderIdAsync(orderId, cache, includes);
         }
 
         /// <summary>
@@ -319,9 +337,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
         /// </summary>
         /// <param name="includes">params Expression<Func<IOrder, object>>[]</param>
         /// <returns>IList<IOrder></returns>
-		public IList<IOrder> OrderLoadAll(params Expression<Func<IOrder, object>>[] includes)
+		public IList<IOrder> OrderLoadAll(bool cache, params Expression<Func<IOrder, object>>[] includes)
         {
-            return this.OrderRepository.LoadAll(includes);
+            return this.OrderRepository.LoadAll(cache, includes);
         }
 
         /// <summary>
@@ -329,9 +347,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
         /// </summary>
         /// <param name="includes">params Expression<Func<IOrder, object>>[]</param>
         /// <returns>IList<IOrder></returns>
-		public Task<IList<IOrder>> OrderLoadAllAsync(params Expression<Func<IOrder, object>>[] includes)
+		public Task<IList<IOrder>> OrderLoadAllAsync(bool cache, params Expression<Func<IOrder, object>>[] includes)
         {
-            return this.OrderRepository.LoadAllAsync(includes);
+            return this.OrderRepository.LoadAllAsync(cache, includes);
         }
 
 
@@ -341,9 +359,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
         /// <param name="orderDetailsId">int</param>
         /// <returns>IOrderDetails</returns>
         /// <param name="includes">params Expression<Func<IOrderDetails, object>>[]</param>
-		public IOrderDetails LoadByOrderDetailsOrderDetailsId(int orderDetailsId, params Expression<Func<IOrderDetails, object>>[] includes)
+		public IOrderDetails LoadByOrderDetailsOrderDetailsId(int orderDetailsId, bool cache, params Expression<Func<IOrderDetails, object>>[] includes)
         {
-            return this.OrderDetailsRepository.LoadByOrderDetailsId(orderDetailsId, includes);
+            return this.OrderDetailsRepository.LoadByOrderDetailsId(orderDetailsId, cache, includes);
         }
 
         /// <summary>
@@ -352,9 +370,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
         /// <param name="orderDetailsId">int</param>
         /// <returns>IOrderDetails</returns>
         /// <param name="includes">params Expression<Func<IOrderDetails, object>>[]</param>
-		public async Task<IOrderDetails> LoadByOrderDetailsOrderDetailsIdAsync(int orderDetailsId, params Expression<Func<IOrderDetails, object>>[] includes)
+		public async Task<IOrderDetails> LoadByOrderDetailsOrderDetailsIdAsync(int orderDetailsId, bool cache, params Expression<Func<IOrderDetails, object>>[] includes)
         {
-            return await this.OrderDetailsRepository.LoadByOrderDetailsIdAsync(orderDetailsId, includes);
+            return await this.OrderDetailsRepository.LoadByOrderDetailsIdAsync(orderDetailsId, cache, includes);
         }
 
         /// <summary>
@@ -362,9 +380,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
         /// </summary>
         /// <param name="includes">params Expression<Func<IOrderDetails, object>>[]</param>
         /// <returns>IList<IOrderDetails></returns>
-		public IList<IOrderDetails> OrderDetailsLoadAll(params Expression<Func<IOrderDetails, object>>[] includes)
+		public IList<IOrderDetails> OrderDetailsLoadAll(bool cache, params Expression<Func<IOrderDetails, object>>[] includes)
         {
-            return this.OrderDetailsRepository.LoadAll(includes);
+            return this.OrderDetailsRepository.LoadAll(cache, includes);
         }
 
         /// <summary>
@@ -372,9 +390,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
         /// </summary>
         /// <param name="includes">params Expression<Func<IOrderDetails, object>>[]</param>
         /// <returns>IList<IOrderDetails></returns>
-		public Task<IList<IOrderDetails>> OrderDetailsLoadAllAsync(params Expression<Func<IOrderDetails, object>>[] includes)
+		public Task<IList<IOrderDetails>> OrderDetailsLoadAllAsync(bool cache, params Expression<Func<IOrderDetails, object>>[] includes)
         {
-            return this.OrderDetailsRepository.LoadAllAsync(includes);
+            return this.OrderDetailsRepository.LoadAllAsync(cache, includes);
         }
 
 
@@ -384,9 +402,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
         /// <param name="productId">int</param>
         /// <returns>IProduct</returns>
         /// <param name="includes">params Expression<Func<IProduct, object>>[]</param>
-		public IProduct LoadByProductProductId(int productId, params Expression<Func<IProduct, object>>[] includes)
+		public IProduct LoadByProductProductId(int productId, bool cache, params Expression<Func<IProduct, object>>[] includes)
         {
-            return this.ProductRepository.LoadByProductId(productId, includes);
+            return this.ProductRepository.LoadByProductId(productId, cache, includes);
         }
 
         /// <summary>
@@ -395,9 +413,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
         /// <param name="productId">int</param>
         /// <returns>IProduct</returns>
         /// <param name="includes">params Expression<Func<IProduct, object>>[]</param>
-		public async Task<IProduct> LoadByProductProductIdAsync(int productId, params Expression<Func<IProduct, object>>[] includes)
+		public async Task<IProduct> LoadByProductProductIdAsync(int productId, bool cache, params Expression<Func<IProduct, object>>[] includes)
         {
-            return await this.ProductRepository.LoadByProductIdAsync(productId, includes);
+            return await this.ProductRepository.LoadByProductIdAsync(productId, cache, includes);
         }
 
         /// <summary>
@@ -405,9 +423,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
         /// </summary>
         /// <param name="includes">params Expression<Func<IProduct, object>>[]</param>
         /// <returns>IList<IProduct></returns>
-		public IList<IProduct> ProductLoadAll(params Expression<Func<IProduct, object>>[] includes)
+		public IList<IProduct> ProductLoadAll(bool cache, params Expression<Func<IProduct, object>>[] includes)
         {
-            return this.ProductRepository.LoadAll(includes);
+            return this.ProductRepository.LoadAll(cache, includes);
         }
 
         /// <summary>
@@ -415,9 +433,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
         /// </summary>
         /// <param name="includes">params Expression<Func<IProduct, object>>[]</param>
         /// <returns>IList<IProduct></returns>
-		public Task<IList<IProduct>> ProductLoadAllAsync(params Expression<Func<IProduct, object>>[] includes)
+		public Task<IList<IProduct>> ProductLoadAllAsync(bool cache, params Expression<Func<IProduct, object>>[] includes)
         {
-            return this.ProductRepository.LoadAllAsync(includes);
+            return this.ProductRepository.LoadAllAsync(cache, includes);
         }
 
 
@@ -427,9 +445,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
         /// <param name="productId">int</param>
         /// <returns>ISoftware</returns>
         /// <param name="includes">params Expression<Func<ISoftware, object>>[]</param>
-		public ISoftware LoadBySoftwareProductId(int productId, params Expression<Func<ISoftware, object>>[] includes)
+		public ISoftware LoadBySoftwareProductId(int productId, bool cache, params Expression<Func<ISoftware, object>>[] includes)
         {
-            return this.SoftwareRepository.LoadByProductId(productId, includes);
+            return this.SoftwareRepository.LoadByProductId(productId, cache, includes);
         }
 
         /// <summary>
@@ -438,9 +456,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
         /// <param name="productId">int</param>
         /// <returns>ISoftware</returns>
         /// <param name="includes">params Expression<Func<ISoftware, object>>[]</param>
-		public async Task<ISoftware> LoadBySoftwareProductIdAsync(int productId, params Expression<Func<ISoftware, object>>[] includes)
+		public async Task<ISoftware> LoadBySoftwareProductIdAsync(int productId, bool cache, params Expression<Func<ISoftware, object>>[] includes)
         {
-            return await this.SoftwareRepository.LoadByProductIdAsync(productId, includes);
+            return await this.SoftwareRepository.LoadByProductIdAsync(productId, cache, includes);
         }
 
         /// <summary>
@@ -448,9 +466,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
         /// </summary>
         /// <param name="includes">params Expression<Func<ISoftware, object>>[]</param>
         /// <returns>IList<ISoftware></returns>
-		public IList<ISoftware> SoftwareLoadAll(params Expression<Func<ISoftware, object>>[] includes)
+		public IList<ISoftware> SoftwareLoadAll(bool cache, params Expression<Func<ISoftware, object>>[] includes)
         {
-            return this.SoftwareRepository.LoadAll(includes);
+            return this.SoftwareRepository.LoadAll(cache, includes);
         }
 
         /// <summary>
@@ -458,9 +476,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
         /// </summary>
         /// <param name="includes">params Expression<Func<ISoftware, object>>[]</param>
         /// <returns>IList<ISoftware></returns>
-		public Task<IList<ISoftware>> SoftwareLoadAllAsync(params Expression<Func<ISoftware, object>>[] includes)
+		public Task<IList<ISoftware>> SoftwareLoadAllAsync(bool cache, params Expression<Func<ISoftware, object>>[] includes)
         {
-            return this.SoftwareRepository.LoadAllAsync(includes);
+            return this.SoftwareRepository.LoadAllAsync(cache, includes);
         }
 
 
@@ -475,9 +493,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
 		/// <param name="caseSensitive">bool</param>
         /// <param name="includes">params Expression<Func<IBankAccount, object>>[]</param>
         /// <returns>IList<IBankAccount></returns>
-		public IList<IBankAccount> BankAccountSearchByBankAccountNumber(string bankAccountNumber, bool caseSensitive, params Expression<Func<IBankAccount, object>>[] includes)
+		public IList<IBankAccount> BankAccountSearchByBankAccountNumber(string bankAccountNumber, bool caseSensitive, bool cache, params Expression<Func<IBankAccount, object>>[] includes)
         {
-            return this.BankAccountRepository.SearchByBankAccountNumber(bankAccountNumber,caseSensitive, includes);
+            return this.BankAccountRepository.SearchByBankAccountNumber(bankAccountNumber,caseSensitive, cache, includes);
         }
 
         /// <summary>
@@ -487,9 +505,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
 		/// <param name="caseSensitive">bool</param>
         /// <param name="includes">params Expression<Func<IBankAccount, object>>[]</param>
         /// <returns>IList<IBankAccount></returns>
-		public async Task<IList<IBankAccount>> BankAccountSearchByBankAccountNumberAsync(string bankAccountNumber, bool caseSensitive, params Expression<Func<IBankAccount, object>>[] includes)
+		public async Task<IList<IBankAccount>> BankAccountSearchByBankAccountNumberAsync(string bankAccountNumber, bool caseSensitive, bool cache, params Expression<Func<IBankAccount, object>>[] includes)
         {
-            return await this.BankAccountRepository.SearchByBankAccountNumberAsync(bankAccountNumber,caseSensitive, includes);
+            return await this.BankAccountRepository.SearchByBankAccountNumberAsync(bankAccountNumber,caseSensitive, cache, includes);
         }
 
 
@@ -500,9 +518,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
 		/// <param name="caseSensitive">bool</param>
         /// <param name="includes">params Expression<Func<IBook, object>>[]</param>
         /// <returns>IList<IBook></returns>
-		public IList<IBook> BookSearchByPublisher(string publisher, bool caseSensitive, params Expression<Func<IBook, object>>[] includes)
+		public IList<IBook> BookSearchByPublisher(string publisher, bool caseSensitive, bool cache, params Expression<Func<IBook, object>>[] includes)
         {
-            return this.BookRepository.SearchByPublisher(publisher,caseSensitive, includes);
+            return this.BookRepository.SearchByPublisher(publisher,caseSensitive, cache, includes);
         }
 
         /// <summary>
@@ -512,9 +530,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
 		/// <param name="caseSensitive">bool</param>
         /// <param name="includes">params Expression<Func<IBook, object>>[]</param>
         /// <returns>IList<IBook></returns>
-		public async Task<IList<IBook>> BookSearchByPublisherAsync(string publisher, bool caseSensitive, params Expression<Func<IBook, object>>[] includes)
+		public async Task<IList<IBook>> BookSearchByPublisherAsync(string publisher, bool caseSensitive, bool cache, params Expression<Func<IBook, object>>[] includes)
         {
-            return await this.BookRepository.SearchByPublisherAsync(publisher,caseSensitive, includes);
+            return await this.BookRepository.SearchByPublisherAsync(publisher,caseSensitive, cache, includes);
         }
 
 
@@ -525,9 +543,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
 		/// <param name="caseSensitive">bool</param>
         /// <param name="includes">params Expression<Func<ICountry, object>>[]</param>
         /// <returns>IList<ICountry></returns>
-		public IList<ICountry> CountrySearchByCountryName(string countryName, bool caseSensitive, params Expression<Func<ICountry, object>>[] includes)
+		public IList<ICountry> CountrySearchByCountryName(string countryName, bool caseSensitive, bool cache, params Expression<Func<ICountry, object>>[] includes)
         {
-            return this.CountryRepository.SearchByCountryName(countryName,caseSensitive, includes);
+            return this.CountryRepository.SearchByCountryName(countryName,caseSensitive, cache, includes);
         }
 
         /// <summary>
@@ -537,9 +555,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
 		/// <param name="caseSensitive">bool</param>
         /// <param name="includes">params Expression<Func<ICountry, object>>[]</param>
         /// <returns>IList<ICountry></returns>
-		public async Task<IList<ICountry>> CountrySearchByCountryNameAsync(string countryName, bool caseSensitive, params Expression<Func<ICountry, object>>[] includes)
+		public async Task<IList<ICountry>> CountrySearchByCountryNameAsync(string countryName, bool caseSensitive, bool cache, params Expression<Func<ICountry, object>>[] includes)
         {
-            return await this.CountryRepository.SearchByCountryNameAsync(countryName,caseSensitive, includes);
+            return await this.CountryRepository.SearchByCountryNameAsync(countryName,caseSensitive, cache, includes);
         }
 
 
@@ -550,9 +568,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
 		/// <param name="caseSensitive">bool</param>
         /// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
         /// <returns>IList<ICustomer></returns>
-		public IList<ICustomer> CustomerSearchByCustomerCode(string customerCode, bool caseSensitive, params Expression<Func<ICustomer, object>>[] includes)
+		public IList<ICustomer> CustomerSearchByCustomerCode(string customerCode, bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes)
         {
-            return this.CustomerRepository.SearchByCustomerCode(customerCode,caseSensitive, includes);
+            return this.CustomerRepository.SearchByCustomerCode(customerCode,caseSensitive, cache, includes);
         }
 
         /// <summary>
@@ -562,9 +580,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
 		/// <param name="caseSensitive">bool</param>
         /// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
         /// <returns>IList<ICustomer></returns>
-		public async Task<IList<ICustomer>> CustomerSearchByCustomerCodeAsync(string customerCode, bool caseSensitive, params Expression<Func<ICustomer, object>>[] includes)
+		public async Task<IList<ICustomer>> CustomerSearchByCustomerCodeAsync(string customerCode, bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes)
         {
-            return await this.CustomerRepository.SearchByCustomerCodeAsync(customerCode,caseSensitive, includes);
+            return await this.CustomerRepository.SearchByCustomerCodeAsync(customerCode,caseSensitive, cache, includes);
         }
 
 
@@ -575,9 +593,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
 		/// <param name="caseSensitive">bool</param>
         /// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
         /// <returns>IList<ICustomer></returns>
-		public IList<ICustomer> CustomerSearchByCompanyName(string companyName, bool caseSensitive, params Expression<Func<ICustomer, object>>[] includes)
+		public IList<ICustomer> CustomerSearchByCompanyName(string companyName, bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes)
         {
-            return this.CustomerRepository.SearchByCompanyName(companyName,caseSensitive, includes);
+            return this.CustomerRepository.SearchByCompanyName(companyName,caseSensitive, cache, includes);
         }
 
         /// <summary>
@@ -587,9 +605,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
 		/// <param name="caseSensitive">bool</param>
         /// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
         /// <returns>IList<ICustomer></returns>
-		public async Task<IList<ICustomer>> CustomerSearchByCompanyNameAsync(string companyName, bool caseSensitive, params Expression<Func<ICustomer, object>>[] includes)
+		public async Task<IList<ICustomer>> CustomerSearchByCompanyNameAsync(string companyName, bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes)
         {
-            return await this.CustomerRepository.SearchByCompanyNameAsync(companyName,caseSensitive, includes);
+            return await this.CustomerRepository.SearchByCompanyNameAsync(companyName,caseSensitive, cache, includes);
         }
 
 
@@ -600,9 +618,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
 		/// <param name="caseSensitive">bool</param>
         /// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
         /// <returns>IList<ICustomer></returns>
-		public IList<ICustomer> CustomerSearchByContactName(string contactName, bool caseSensitive, params Expression<Func<ICustomer, object>>[] includes)
+		public IList<ICustomer> CustomerSearchByContactName(string contactName, bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes)
         {
-            return this.CustomerRepository.SearchByContactName(contactName,caseSensitive, includes);
+            return this.CustomerRepository.SearchByContactName(contactName,caseSensitive, cache, includes);
         }
 
         /// <summary>
@@ -612,9 +630,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
 		/// <param name="caseSensitive">bool</param>
         /// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
         /// <returns>IList<ICustomer></returns>
-		public async Task<IList<ICustomer>> CustomerSearchByContactNameAsync(string contactName, bool caseSensitive, params Expression<Func<ICustomer, object>>[] includes)
+		public async Task<IList<ICustomer>> CustomerSearchByContactNameAsync(string contactName, bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes)
         {
-            return await this.CustomerRepository.SearchByContactNameAsync(contactName,caseSensitive, includes);
+            return await this.CustomerRepository.SearchByContactNameAsync(contactName,caseSensitive, cache, includes);
         }
 
 
@@ -625,9 +643,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
 		/// <param name="caseSensitive">bool</param>
         /// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
         /// <returns>IList<ICustomer></returns>
-		public IList<ICustomer> CustomerSearchByContactTitle(string contactTitle, bool caseSensitive, params Expression<Func<ICustomer, object>>[] includes)
+		public IList<ICustomer> CustomerSearchByContactTitle(string contactTitle, bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes)
         {
-            return this.CustomerRepository.SearchByContactTitle(contactTitle,caseSensitive, includes);
+            return this.CustomerRepository.SearchByContactTitle(contactTitle,caseSensitive, cache, includes);
         }
 
         /// <summary>
@@ -637,9 +655,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
 		/// <param name="caseSensitive">bool</param>
         /// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
         /// <returns>IList<ICustomer></returns>
-		public async Task<IList<ICustomer>> CustomerSearchByContactTitleAsync(string contactTitle, bool caseSensitive, params Expression<Func<ICustomer, object>>[] includes)
+		public async Task<IList<ICustomer>> CustomerSearchByContactTitleAsync(string contactTitle, bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes)
         {
-            return await this.CustomerRepository.SearchByContactTitleAsync(contactTitle,caseSensitive, includes);
+            return await this.CustomerRepository.SearchByContactTitleAsync(contactTitle,caseSensitive, cache, includes);
         }
 
 
@@ -650,9 +668,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
 		/// <param name="caseSensitive">bool</param>
         /// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
         /// <returns>IList<ICustomer></returns>
-		public IList<ICustomer> CustomerSearchByAddress(string address, bool caseSensitive, params Expression<Func<ICustomer, object>>[] includes)
+		public IList<ICustomer> CustomerSearchByAddress(string address, bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes)
         {
-            return this.CustomerRepository.SearchByAddress(address,caseSensitive, includes);
+            return this.CustomerRepository.SearchByAddress(address,caseSensitive, cache, includes);
         }
 
         /// <summary>
@@ -662,9 +680,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
 		/// <param name="caseSensitive">bool</param>
         /// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
         /// <returns>IList<ICustomer></returns>
-		public async Task<IList<ICustomer>> CustomerSearchByAddressAsync(string address, bool caseSensitive, params Expression<Func<ICustomer, object>>[] includes)
+		public async Task<IList<ICustomer>> CustomerSearchByAddressAsync(string address, bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes)
         {
-            return await this.CustomerRepository.SearchByAddressAsync(address,caseSensitive, includes);
+            return await this.CustomerRepository.SearchByAddressAsync(address,caseSensitive, cache, includes);
         }
 
 
@@ -675,9 +693,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
 		/// <param name="caseSensitive">bool</param>
         /// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
         /// <returns>IList<ICustomer></returns>
-		public IList<ICustomer> CustomerSearchByCity(string city, bool caseSensitive, params Expression<Func<ICustomer, object>>[] includes)
+		public IList<ICustomer> CustomerSearchByCity(string city, bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes)
         {
-            return this.CustomerRepository.SearchByCity(city,caseSensitive, includes);
+            return this.CustomerRepository.SearchByCity(city,caseSensitive, cache, includes);
         }
 
         /// <summary>
@@ -687,9 +705,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
 		/// <param name="caseSensitive">bool</param>
         /// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
         /// <returns>IList<ICustomer></returns>
-		public async Task<IList<ICustomer>> CustomerSearchByCityAsync(string city, bool caseSensitive, params Expression<Func<ICustomer, object>>[] includes)
+		public async Task<IList<ICustomer>> CustomerSearchByCityAsync(string city, bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes)
         {
-            return await this.CustomerRepository.SearchByCityAsync(city,caseSensitive, includes);
+            return await this.CustomerRepository.SearchByCityAsync(city,caseSensitive, cache, includes);
         }
 
 
@@ -700,9 +718,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
 		/// <param name="caseSensitive">bool</param>
         /// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
         /// <returns>IList<ICustomer></returns>
-		public IList<ICustomer> CustomerSearchByPostalCode(string postalCode, bool caseSensitive, params Expression<Func<ICustomer, object>>[] includes)
+		public IList<ICustomer> CustomerSearchByPostalCode(string postalCode, bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes)
         {
-            return this.CustomerRepository.SearchByPostalCode(postalCode,caseSensitive, includes);
+            return this.CustomerRepository.SearchByPostalCode(postalCode,caseSensitive, cache, includes);
         }
 
         /// <summary>
@@ -712,9 +730,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
 		/// <param name="caseSensitive">bool</param>
         /// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
         /// <returns>IList<ICustomer></returns>
-		public async Task<IList<ICustomer>> CustomerSearchByPostalCodeAsync(string postalCode, bool caseSensitive, params Expression<Func<ICustomer, object>>[] includes)
+		public async Task<IList<ICustomer>> CustomerSearchByPostalCodeAsync(string postalCode, bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes)
         {
-            return await this.CustomerRepository.SearchByPostalCodeAsync(postalCode,caseSensitive, includes);
+            return await this.CustomerRepository.SearchByPostalCodeAsync(postalCode,caseSensitive, cache, includes);
         }
 
 
@@ -725,9 +743,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
 		/// <param name="caseSensitive">bool</param>
         /// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
         /// <returns>IList<ICustomer></returns>
-		public IList<ICustomer> CustomerSearchByTelephone(string telephone, bool caseSensitive, params Expression<Func<ICustomer, object>>[] includes)
+		public IList<ICustomer> CustomerSearchByTelephone(string telephone, bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes)
         {
-            return this.CustomerRepository.SearchByTelephone(telephone,caseSensitive, includes);
+            return this.CustomerRepository.SearchByTelephone(telephone,caseSensitive, cache, includes);
         }
 
         /// <summary>
@@ -737,9 +755,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
 		/// <param name="caseSensitive">bool</param>
         /// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
         /// <returns>IList<ICustomer></returns>
-		public async Task<IList<ICustomer>> CustomerSearchByTelephoneAsync(string telephone, bool caseSensitive, params Expression<Func<ICustomer, object>>[] includes)
+		public async Task<IList<ICustomer>> CustomerSearchByTelephoneAsync(string telephone, bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes)
         {
-            return await this.CustomerRepository.SearchByTelephoneAsync(telephone,caseSensitive, includes);
+            return await this.CustomerRepository.SearchByTelephoneAsync(telephone,caseSensitive, cache, includes);
         }
 
 
@@ -750,9 +768,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
 		/// <param name="caseSensitive">bool</param>
         /// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
         /// <returns>IList<ICustomer></returns>
-		public IList<ICustomer> CustomerSearchByFax(string fax, bool caseSensitive, params Expression<Func<ICustomer, object>>[] includes)
+		public IList<ICustomer> CustomerSearchByFax(string fax, bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes)
         {
-            return this.CustomerRepository.SearchByFax(fax,caseSensitive, includes);
+            return this.CustomerRepository.SearchByFax(fax,caseSensitive, cache, includes);
         }
 
         /// <summary>
@@ -762,9 +780,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
 		/// <param name="caseSensitive">bool</param>
         /// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
         /// <returns>IList<ICustomer></returns>
-		public async Task<IList<ICustomer>> CustomerSearchByFaxAsync(string fax, bool caseSensitive, params Expression<Func<ICustomer, object>>[] includes)
+		public async Task<IList<ICustomer>> CustomerSearchByFaxAsync(string fax, bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes)
         {
-            return await this.CustomerRepository.SearchByFaxAsync(fax,caseSensitive, includes);
+            return await this.CustomerRepository.SearchByFaxAsync(fax,caseSensitive, cache, includes);
         }
 
 
@@ -775,9 +793,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
 		/// <param name="caseSensitive">bool</param>
         /// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
         /// <returns>IList<ICustomer></returns>
-		public IList<ICustomer> CustomerSearchByPhoto(string photo, bool caseSensitive, params Expression<Func<ICustomer, object>>[] includes)
+		public IList<ICustomer> CustomerSearchByPhoto(string photo, bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes)
         {
-            return this.CustomerRepository.SearchByPhoto(photo,caseSensitive, includes);
+            return this.CustomerRepository.SearchByPhoto(photo,caseSensitive, cache, includes);
         }
 
         /// <summary>
@@ -787,9 +805,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
 		/// <param name="caseSensitive">bool</param>
         /// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
         /// <returns>IList<ICustomer></returns>
-		public async Task<IList<ICustomer>> CustomerSearchByPhotoAsync(string photo, bool caseSensitive, params Expression<Func<ICustomer, object>>[] includes)
+		public async Task<IList<ICustomer>> CustomerSearchByPhotoAsync(string photo, bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes)
         {
-            return await this.CustomerRepository.SearchByPhotoAsync(photo,caseSensitive, includes);
+            return await this.CustomerRepository.SearchByPhotoAsync(photo,caseSensitive, cache, includes);
         }
 
 
@@ -800,9 +818,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
 		/// <param name="caseSensitive">bool</param>
         /// <param name="includes">params Expression<Func<IOrder, object>>[]</param>
         /// <returns>IList<IOrder></returns>
-		public IList<IOrder> OrderSearchByShippingName(string shippingName, bool caseSensitive, params Expression<Func<IOrder, object>>[] includes)
+		public IList<IOrder> OrderSearchByShippingName(string shippingName, bool caseSensitive, bool cache, params Expression<Func<IOrder, object>>[] includes)
         {
-            return this.OrderRepository.SearchByShippingName(shippingName,caseSensitive, includes);
+            return this.OrderRepository.SearchByShippingName(shippingName,caseSensitive, cache, includes);
         }
 
         /// <summary>
@@ -812,9 +830,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
 		/// <param name="caseSensitive">bool</param>
         /// <param name="includes">params Expression<Func<IOrder, object>>[]</param>
         /// <returns>IList<IOrder></returns>
-		public async Task<IList<IOrder>> OrderSearchByShippingNameAsync(string shippingName, bool caseSensitive, params Expression<Func<IOrder, object>>[] includes)
+		public async Task<IList<IOrder>> OrderSearchByShippingNameAsync(string shippingName, bool caseSensitive, bool cache, params Expression<Func<IOrder, object>>[] includes)
         {
-            return await this.OrderRepository.SearchByShippingNameAsync(shippingName,caseSensitive, includes);
+            return await this.OrderRepository.SearchByShippingNameAsync(shippingName,caseSensitive, cache, includes);
         }
 
 
@@ -825,9 +843,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
 		/// <param name="caseSensitive">bool</param>
         /// <param name="includes">params Expression<Func<IOrder, object>>[]</param>
         /// <returns>IList<IOrder></returns>
-		public IList<IOrder> OrderSearchByShippingAddress(string shippingAddress, bool caseSensitive, params Expression<Func<IOrder, object>>[] includes)
+		public IList<IOrder> OrderSearchByShippingAddress(string shippingAddress, bool caseSensitive, bool cache, params Expression<Func<IOrder, object>>[] includes)
         {
-            return this.OrderRepository.SearchByShippingAddress(shippingAddress,caseSensitive, includes);
+            return this.OrderRepository.SearchByShippingAddress(shippingAddress,caseSensitive, cache, includes);
         }
 
         /// <summary>
@@ -837,9 +855,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
 		/// <param name="caseSensitive">bool</param>
         /// <param name="includes">params Expression<Func<IOrder, object>>[]</param>
         /// <returns>IList<IOrder></returns>
-		public async Task<IList<IOrder>> OrderSearchByShippingAddressAsync(string shippingAddress, bool caseSensitive, params Expression<Func<IOrder, object>>[] includes)
+		public async Task<IList<IOrder>> OrderSearchByShippingAddressAsync(string shippingAddress, bool caseSensitive, bool cache, params Expression<Func<IOrder, object>>[] includes)
         {
-            return await this.OrderRepository.SearchByShippingAddressAsync(shippingAddress,caseSensitive, includes);
+            return await this.OrderRepository.SearchByShippingAddressAsync(shippingAddress,caseSensitive, cache, includes);
         }
 
 
@@ -850,9 +868,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
 		/// <param name="caseSensitive">bool</param>
         /// <param name="includes">params Expression<Func<IOrder, object>>[]</param>
         /// <returns>IList<IOrder></returns>
-		public IList<IOrder> OrderSearchByShippingCity(string shippingCity, bool caseSensitive, params Expression<Func<IOrder, object>>[] includes)
+		public IList<IOrder> OrderSearchByShippingCity(string shippingCity, bool caseSensitive, bool cache, params Expression<Func<IOrder, object>>[] includes)
         {
-            return this.OrderRepository.SearchByShippingCity(shippingCity,caseSensitive, includes);
+            return this.OrderRepository.SearchByShippingCity(shippingCity,caseSensitive, cache, includes);
         }
 
         /// <summary>
@@ -862,9 +880,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
 		/// <param name="caseSensitive">bool</param>
         /// <param name="includes">params Expression<Func<IOrder, object>>[]</param>
         /// <returns>IList<IOrder></returns>
-		public async Task<IList<IOrder>> OrderSearchByShippingCityAsync(string shippingCity, bool caseSensitive, params Expression<Func<IOrder, object>>[] includes)
+		public async Task<IList<IOrder>> OrderSearchByShippingCityAsync(string shippingCity, bool caseSensitive, bool cache, params Expression<Func<IOrder, object>>[] includes)
         {
-            return await this.OrderRepository.SearchByShippingCityAsync(shippingCity,caseSensitive, includes);
+            return await this.OrderRepository.SearchByShippingCityAsync(shippingCity,caseSensitive, cache, includes);
         }
 
 
@@ -875,9 +893,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
 		/// <param name="caseSensitive">bool</param>
         /// <param name="includes">params Expression<Func<IOrder, object>>[]</param>
         /// <returns>IList<IOrder></returns>
-		public IList<IOrder> OrderSearchByShippingZip(string shippingZip, bool caseSensitive, params Expression<Func<IOrder, object>>[] includes)
+		public IList<IOrder> OrderSearchByShippingZip(string shippingZip, bool caseSensitive, bool cache, params Expression<Func<IOrder, object>>[] includes)
         {
-            return this.OrderRepository.SearchByShippingZip(shippingZip,caseSensitive, includes);
+            return this.OrderRepository.SearchByShippingZip(shippingZip,caseSensitive, cache, includes);
         }
 
         /// <summary>
@@ -887,9 +905,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
 		/// <param name="caseSensitive">bool</param>
         /// <param name="includes">params Expression<Func<IOrder, object>>[]</param>
         /// <returns>IList<IOrder></returns>
-		public async Task<IList<IOrder>> OrderSearchByShippingZipAsync(string shippingZip, bool caseSensitive, params Expression<Func<IOrder, object>>[] includes)
+		public async Task<IList<IOrder>> OrderSearchByShippingZipAsync(string shippingZip, bool caseSensitive, bool cache, params Expression<Func<IOrder, object>>[] includes)
         {
-            return await this.OrderRepository.SearchByShippingZipAsync(shippingZip,caseSensitive, includes);
+            return await this.OrderRepository.SearchByShippingZipAsync(shippingZip,caseSensitive, cache, includes);
         }
 
 
@@ -900,9 +918,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
 		/// <param name="caseSensitive">bool</param>
         /// <param name="includes">params Expression<Func<IProduct, object>>[]</param>
         /// <returns>IList<IProduct></returns>
-		public IList<IProduct> ProductSearchByProductDescription(string productDescription, bool caseSensitive, params Expression<Func<IProduct, object>>[] includes)
+		public IList<IProduct> ProductSearchByProductDescription(string productDescription, bool caseSensitive, bool cache, params Expression<Func<IProduct, object>>[] includes)
         {
-            return this.ProductRepository.SearchByProductDescription(productDescription,caseSensitive, includes);
+            return this.ProductRepository.SearchByProductDescription(productDescription,caseSensitive, cache, includes);
         }
 
         /// <summary>
@@ -912,9 +930,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
 		/// <param name="caseSensitive">bool</param>
         /// <param name="includes">params Expression<Func<IProduct, object>>[]</param>
         /// <returns>IList<IProduct></returns>
-		public async Task<IList<IProduct>> ProductSearchByProductDescriptionAsync(string productDescription, bool caseSensitive, params Expression<Func<IProduct, object>>[] includes)
+		public async Task<IList<IProduct>> ProductSearchByProductDescriptionAsync(string productDescription, bool caseSensitive, bool cache, params Expression<Func<IProduct, object>>[] includes)
         {
-            return await this.ProductRepository.SearchByProductDescriptionAsync(productDescription,caseSensitive, includes);
+            return await this.ProductRepository.SearchByProductDescriptionAsync(productDescription,caseSensitive, cache, includes);
         }
 
 
@@ -925,9 +943,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
 		/// <param name="caseSensitive">bool</param>
         /// <param name="includes">params Expression<Func<IProduct, object>>[]</param>
         /// <returns>IList<IProduct></returns>
-		public IList<IProduct> ProductSearchByUnitAmount(string unitAmount, bool caseSensitive, params Expression<Func<IProduct, object>>[] includes)
+		public IList<IProduct> ProductSearchByUnitAmount(string unitAmount, bool caseSensitive, bool cache, params Expression<Func<IProduct, object>>[] includes)
         {
-            return this.ProductRepository.SearchByUnitAmount(unitAmount,caseSensitive, includes);
+            return this.ProductRepository.SearchByUnitAmount(unitAmount,caseSensitive, cache, includes);
         }
 
         /// <summary>
@@ -937,9 +955,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
 		/// <param name="caseSensitive">bool</param>
         /// <param name="includes">params Expression<Func<IProduct, object>>[]</param>
         /// <returns>IList<IProduct></returns>
-		public async Task<IList<IProduct>> ProductSearchByUnitAmountAsync(string unitAmount, bool caseSensitive, params Expression<Func<IProduct, object>>[] includes)
+		public async Task<IList<IProduct>> ProductSearchByUnitAmountAsync(string unitAmount, bool caseSensitive, bool cache, params Expression<Func<IProduct, object>>[] includes)
         {
-            return await this.ProductRepository.SearchByUnitAmountAsync(unitAmount,caseSensitive, includes);
+            return await this.ProductRepository.SearchByUnitAmountAsync(unitAmount,caseSensitive, cache, includes);
         }
 
 
@@ -950,9 +968,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
 		/// <param name="caseSensitive">bool</param>
         /// <param name="includes">params Expression<Func<IProduct, object>>[]</param>
         /// <returns>IList<IProduct></returns>
-		public IList<IProduct> ProductSearchByPublisher(string publisher, bool caseSensitive, params Expression<Func<IProduct, object>>[] includes)
+		public IList<IProduct> ProductSearchByPublisher(string publisher, bool caseSensitive, bool cache, params Expression<Func<IProduct, object>>[] includes)
         {
-            return this.ProductRepository.SearchByPublisher(publisher,caseSensitive, includes);
+            return this.ProductRepository.SearchByPublisher(publisher,caseSensitive, cache, includes);
         }
 
         /// <summary>
@@ -962,9 +980,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
 		/// <param name="caseSensitive">bool</param>
         /// <param name="includes">params Expression<Func<IProduct, object>>[]</param>
         /// <returns>IList<IProduct></returns>
-		public async Task<IList<IProduct>> ProductSearchByPublisherAsync(string publisher, bool caseSensitive, params Expression<Func<IProduct, object>>[] includes)
+		public async Task<IList<IProduct>> ProductSearchByPublisherAsync(string publisher, bool caseSensitive, bool cache, params Expression<Func<IProduct, object>>[] includes)
         {
-            return await this.ProductRepository.SearchByPublisherAsync(publisher,caseSensitive, includes);
+            return await this.ProductRepository.SearchByPublisherAsync(publisher,caseSensitive, cache, includes);
         }
 
 
@@ -975,9 +993,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
 		/// <param name="caseSensitive">bool</param>
         /// <param name="includes">params Expression<Func<ISoftware, object>>[]</param>
         /// <returns>IList<ISoftware></returns>
-		public IList<ISoftware> SoftwareSearchByLicenseCode(string licenseCode, bool caseSensitive, params Expression<Func<ISoftware, object>>[] includes)
+		public IList<ISoftware> SoftwareSearchByLicenseCode(string licenseCode, bool caseSensitive, bool cache, params Expression<Func<ISoftware, object>>[] includes)
         {
-            return this.SoftwareRepository.SearchByLicenseCode(licenseCode,caseSensitive, includes);
+            return this.SoftwareRepository.SearchByLicenseCode(licenseCode,caseSensitive, cache, includes);
         }
 
         /// <summary>
@@ -987,9 +1005,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
 		/// <param name="caseSensitive">bool</param>
         /// <param name="includes">params Expression<Func<ISoftware, object>>[]</param>
         /// <returns>IList<ISoftware></returns>
-		public async Task<IList<ISoftware>> SoftwareSearchByLicenseCodeAsync(string licenseCode, bool caseSensitive, params Expression<Func<ISoftware, object>>[] includes)
+		public async Task<IList<ISoftware>> SoftwareSearchByLicenseCodeAsync(string licenseCode, bool caseSensitive, bool cache, params Expression<Func<ISoftware, object>>[] includes)
         {
-            return await this.SoftwareRepository.SearchByLicenseCodeAsync(licenseCode,caseSensitive, includes);
+            return await this.SoftwareRepository.SearchByLicenseCodeAsync(licenseCode,caseSensitive, cache, includes);
         }
 
 		#endregion
@@ -1031,9 +1049,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
         /// </summary>
         /// <param name="bankAccountId">int</param>
         /// <returns>bool</returns>
-		public bool BankAccountDelete( int bankAccountId)
+		public bool BankAccountDelete( int bankAccountId, bool cache)
         {
-            return this.BankAccountRepository.Delete( bankAccountId);
+            return this.BankAccountRepository.Delete( bankAccountId, cache);
         }
 
 		
@@ -1072,9 +1090,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
         /// </summary>
         /// <param name="bankTransferId">int</param>
         /// <returns>bool</returns>
-		public bool BankTransfersDelete( int bankTransferId)
+		public bool BankTransfersDelete( int bankTransferId, bool cache)
         {
-            return this.BankTransfersRepository.Delete( bankTransferId);
+            return this.BankTransfersRepository.Delete( bankTransferId, cache);
         }
 
 		
@@ -1113,9 +1131,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
         /// </summary>
         /// <param name="productId">int</param>
         /// <returns>bool</returns>
-		public bool BookDelete( int productId)
+		public bool BookDelete( int productId, bool cache)
         {
-            return this.BookRepository.Delete( productId);
+            return this.BookRepository.Delete( productId, cache);
         }
 
 		
@@ -1154,9 +1172,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
         /// </summary>
         /// <param name="countryId">int</param>
         /// <returns>bool</returns>
-		public bool CountryDelete( int countryId)
+		public bool CountryDelete( int countryId, bool cache)
         {
-            return this.CountryRepository.Delete( countryId);
+            return this.CountryRepository.Delete( countryId, cache);
         }
 
 		
@@ -1195,9 +1213,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
         /// </summary>
         /// <param name="customerId">int</param>
         /// <returns>bool</returns>
-		public bool CustomerDelete( int customerId)
+		public bool CustomerDelete( int customerId, bool cache)
         {
-            return this.CustomerRepository.Delete( customerId);
+            return this.CustomerRepository.Delete( customerId, cache);
         }
 
 		
@@ -1236,9 +1254,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
         /// </summary>
         /// <param name="orderId">int</param>
         /// <returns>bool</returns>
-		public bool OrderDelete( int orderId)
+		public bool OrderDelete( int orderId, bool cache)
         {
-            return this.OrderRepository.Delete( orderId);
+            return this.OrderRepository.Delete( orderId, cache);
         }
 
 		
@@ -1277,9 +1295,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
         /// </summary>
         /// <param name="orderDetailsId">int</param>
         /// <returns>bool</returns>
-		public bool OrderDetailsDelete( int orderDetailsId)
+		public bool OrderDetailsDelete( int orderDetailsId, bool cache)
         {
-            return this.OrderDetailsRepository.Delete( orderDetailsId);
+            return this.OrderDetailsRepository.Delete( orderDetailsId, cache);
         }
 
 		
@@ -1318,9 +1336,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
         /// </summary>
         /// <param name="productId">int</param>
         /// <returns>bool</returns>
-		public bool ProductDelete( int productId)
+		public bool ProductDelete( int productId, bool cache)
         {
-            return this.ProductRepository.Delete( productId);
+            return this.ProductRepository.Delete( productId, cache);
         }
 
 		
@@ -1359,9 +1377,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
         /// </summary>
         /// <param name="productId">int</param>
         /// <returns>bool</returns>
-		public bool SoftwareDelete( int productId)
+		public bool SoftwareDelete( int productId, bool cache)
         {
-            return this.SoftwareRepository.Delete( productId);
+            return this.SoftwareRepository.Delete( productId, cache);
         }
 
 
@@ -1374,9 +1392,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
         /// <typeparam name="TResult">TResult</typeparam>
         /// <param name="maxExpression">Expression<Func<IBankAccount, TResult>> maxExpression</param>
         /// <returns></returns>
-        public TResult BankAccountMax<TResult>(Expression<Func<IBankAccount, TResult>> maxExpression)
+        public TResult BankAccountMax<TResult>(Expression<Func<IBankAccount, TResult>> maxExpression, bool cache)
         {
-		    return this.BankAccountRepository.Max(maxExpression);
+		    return this.BankAccountRepository.Max(maxExpression, cache);
         }
 
         /// <summary>
@@ -1385,9 +1403,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
         /// <typeparam name="TResult">TResult</typeparam>
         /// <param name="maxExpression">Expression<Func<IBankAccount, TResult>> maxExpression</param>
         /// <returns></returns>
-		public async Task<TResult> BankAccountMaxAsync<TResult>(Expression<Func<IBankAccount, TResult>> maxExpression)
+		public async Task<TResult> BankAccountMaxAsync<TResult>(Expression<Func<IBankAccount, TResult>> maxExpression, bool cache)
         {
-		    return await this.BankAccountRepository.MaxAsync(maxExpression);
+		    return await this.BankAccountRepository.MaxAsync(maxExpression, cache);
         }
 		
         /// <summary>
@@ -1396,9 +1414,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
         /// <typeparam name="TResult">TResult</typeparam>
         /// <param name="maxExpression">Expression<Func<IBankAccount, TResult>> maxExpression</param>
         /// <returns></returns>
-		public TResult BankAccountMin<TResult>(Expression<Func<IBankAccount, TResult>> maxExpression)
+		public TResult BankAccountMin<TResult>(Expression<Func<IBankAccount, TResult>> maxExpression, bool cache)
         {
-		    return this.BankAccountRepository.Min(maxExpression);
+		    return this.BankAccountRepository.Min(maxExpression, cache);
         }
 		
         /// <summary>
@@ -1407,9 +1425,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
         /// <typeparam name="TResult">TResult</typeparam>
         /// <param name="maxExpression">Expression<Func<IBankAccount, TResult>> maxExpression</param>
         /// <returns></returns>
-		public async Task<TResult> BankAccountMinAsync<TResult>(Expression<Func<IBankAccount, TResult>> maxExpression)
+		public async Task<TResult> BankAccountMinAsync<TResult>(Expression<Func<IBankAccount, TResult>> maxExpression, bool cache)
         {
-		    return await this.BankAccountRepository.MinAsync(maxExpression);
+		    return await this.BankAccountRepository.MinAsync(maxExpression, cache);
         }
 
         /// <summary>
@@ -1418,9 +1436,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
         /// <typeparam name="TResult">TResult</typeparam>
         /// <param name="maxExpression">Expression<Func<IBankTransfers, TResult>> maxExpression</param>
         /// <returns></returns>
-        public TResult BankTransfersMax<TResult>(Expression<Func<IBankTransfers, TResult>> maxExpression)
+        public TResult BankTransfersMax<TResult>(Expression<Func<IBankTransfers, TResult>> maxExpression, bool cache)
         {
-		    return this.BankTransfersRepository.Max(maxExpression);
+		    return this.BankTransfersRepository.Max(maxExpression, cache);
         }
 
         /// <summary>
@@ -1429,9 +1447,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
         /// <typeparam name="TResult">TResult</typeparam>
         /// <param name="maxExpression">Expression<Func<IBankTransfers, TResult>> maxExpression</param>
         /// <returns></returns>
-		public async Task<TResult> BankTransfersMaxAsync<TResult>(Expression<Func<IBankTransfers, TResult>> maxExpression)
+		public async Task<TResult> BankTransfersMaxAsync<TResult>(Expression<Func<IBankTransfers, TResult>> maxExpression, bool cache)
         {
-		    return await this.BankTransfersRepository.MaxAsync(maxExpression);
+		    return await this.BankTransfersRepository.MaxAsync(maxExpression, cache);
         }
 		
         /// <summary>
@@ -1440,9 +1458,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
         /// <typeparam name="TResult">TResult</typeparam>
         /// <param name="maxExpression">Expression<Func<IBankTransfers, TResult>> maxExpression</param>
         /// <returns></returns>
-		public TResult BankTransfersMin<TResult>(Expression<Func<IBankTransfers, TResult>> maxExpression)
+		public TResult BankTransfersMin<TResult>(Expression<Func<IBankTransfers, TResult>> maxExpression, bool cache)
         {
-		    return this.BankTransfersRepository.Min(maxExpression);
+		    return this.BankTransfersRepository.Min(maxExpression, cache);
         }
 		
         /// <summary>
@@ -1451,9 +1469,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
         /// <typeparam name="TResult">TResult</typeparam>
         /// <param name="maxExpression">Expression<Func<IBankTransfers, TResult>> maxExpression</param>
         /// <returns></returns>
-		public async Task<TResult> BankTransfersMinAsync<TResult>(Expression<Func<IBankTransfers, TResult>> maxExpression)
+		public async Task<TResult> BankTransfersMinAsync<TResult>(Expression<Func<IBankTransfers, TResult>> maxExpression, bool cache)
         {
-		    return await this.BankTransfersRepository.MinAsync(maxExpression);
+		    return await this.BankTransfersRepository.MinAsync(maxExpression, cache);
         }
 
         /// <summary>
@@ -1462,9 +1480,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
         /// <typeparam name="TResult">TResult</typeparam>
         /// <param name="maxExpression">Expression<Func<IBook, TResult>> maxExpression</param>
         /// <returns></returns>
-        public TResult BookMax<TResult>(Expression<Func<IBook, TResult>> maxExpression)
+        public TResult BookMax<TResult>(Expression<Func<IBook, TResult>> maxExpression, bool cache)
         {
-		    return this.BookRepository.Max(maxExpression);
+		    return this.BookRepository.Max(maxExpression, cache);
         }
 
         /// <summary>
@@ -1473,9 +1491,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
         /// <typeparam name="TResult">TResult</typeparam>
         /// <param name="maxExpression">Expression<Func<IBook, TResult>> maxExpression</param>
         /// <returns></returns>
-		public async Task<TResult> BookMaxAsync<TResult>(Expression<Func<IBook, TResult>> maxExpression)
+		public async Task<TResult> BookMaxAsync<TResult>(Expression<Func<IBook, TResult>> maxExpression, bool cache)
         {
-		    return await this.BookRepository.MaxAsync(maxExpression);
+		    return await this.BookRepository.MaxAsync(maxExpression, cache);
         }
 		
         /// <summary>
@@ -1484,9 +1502,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
         /// <typeparam name="TResult">TResult</typeparam>
         /// <param name="maxExpression">Expression<Func<IBook, TResult>> maxExpression</param>
         /// <returns></returns>
-		public TResult BookMin<TResult>(Expression<Func<IBook, TResult>> maxExpression)
+		public TResult BookMin<TResult>(Expression<Func<IBook, TResult>> maxExpression, bool cache)
         {
-		    return this.BookRepository.Min(maxExpression);
+		    return this.BookRepository.Min(maxExpression, cache);
         }
 		
         /// <summary>
@@ -1495,9 +1513,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
         /// <typeparam name="TResult">TResult</typeparam>
         /// <param name="maxExpression">Expression<Func<IBook, TResult>> maxExpression</param>
         /// <returns></returns>
-		public async Task<TResult> BookMinAsync<TResult>(Expression<Func<IBook, TResult>> maxExpression)
+		public async Task<TResult> BookMinAsync<TResult>(Expression<Func<IBook, TResult>> maxExpression, bool cache)
         {
-		    return await this.BookRepository.MinAsync(maxExpression);
+		    return await this.BookRepository.MinAsync(maxExpression, cache);
         }
 
         /// <summary>
@@ -1506,9 +1524,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
         /// <typeparam name="TResult">TResult</typeparam>
         /// <param name="maxExpression">Expression<Func<ICountry, TResult>> maxExpression</param>
         /// <returns></returns>
-        public TResult CountryMax<TResult>(Expression<Func<ICountry, TResult>> maxExpression)
+        public TResult CountryMax<TResult>(Expression<Func<ICountry, TResult>> maxExpression, bool cache)
         {
-		    return this.CountryRepository.Max(maxExpression);
+		    return this.CountryRepository.Max(maxExpression, cache);
         }
 
         /// <summary>
@@ -1517,9 +1535,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
         /// <typeparam name="TResult">TResult</typeparam>
         /// <param name="maxExpression">Expression<Func<ICountry, TResult>> maxExpression</param>
         /// <returns></returns>
-		public async Task<TResult> CountryMaxAsync<TResult>(Expression<Func<ICountry, TResult>> maxExpression)
+		public async Task<TResult> CountryMaxAsync<TResult>(Expression<Func<ICountry, TResult>> maxExpression, bool cache)
         {
-		    return await this.CountryRepository.MaxAsync(maxExpression);
+		    return await this.CountryRepository.MaxAsync(maxExpression, cache);
         }
 		
         /// <summary>
@@ -1528,9 +1546,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
         /// <typeparam name="TResult">TResult</typeparam>
         /// <param name="maxExpression">Expression<Func<ICountry, TResult>> maxExpression</param>
         /// <returns></returns>
-		public TResult CountryMin<TResult>(Expression<Func<ICountry, TResult>> maxExpression)
+		public TResult CountryMin<TResult>(Expression<Func<ICountry, TResult>> maxExpression, bool cache)
         {
-		    return this.CountryRepository.Min(maxExpression);
+		    return this.CountryRepository.Min(maxExpression, cache);
         }
 		
         /// <summary>
@@ -1539,9 +1557,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
         /// <typeparam name="TResult">TResult</typeparam>
         /// <param name="maxExpression">Expression<Func<ICountry, TResult>> maxExpression</param>
         /// <returns></returns>
-		public async Task<TResult> CountryMinAsync<TResult>(Expression<Func<ICountry, TResult>> maxExpression)
+		public async Task<TResult> CountryMinAsync<TResult>(Expression<Func<ICountry, TResult>> maxExpression, bool cache)
         {
-		    return await this.CountryRepository.MinAsync(maxExpression);
+		    return await this.CountryRepository.MinAsync(maxExpression, cache);
         }
 
         /// <summary>
@@ -1550,9 +1568,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
         /// <typeparam name="TResult">TResult</typeparam>
         /// <param name="maxExpression">Expression<Func<ICustomer, TResult>> maxExpression</param>
         /// <returns></returns>
-        public TResult CustomerMax<TResult>(Expression<Func<ICustomer, TResult>> maxExpression)
+        public TResult CustomerMax<TResult>(Expression<Func<ICustomer, TResult>> maxExpression, bool cache)
         {
-		    return this.CustomerRepository.Max(maxExpression);
+		    return this.CustomerRepository.Max(maxExpression, cache);
         }
 
         /// <summary>
@@ -1561,9 +1579,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
         /// <typeparam name="TResult">TResult</typeparam>
         /// <param name="maxExpression">Expression<Func<ICustomer, TResult>> maxExpression</param>
         /// <returns></returns>
-		public async Task<TResult> CustomerMaxAsync<TResult>(Expression<Func<ICustomer, TResult>> maxExpression)
+		public async Task<TResult> CustomerMaxAsync<TResult>(Expression<Func<ICustomer, TResult>> maxExpression, bool cache)
         {
-		    return await this.CustomerRepository.MaxAsync(maxExpression);
+		    return await this.CustomerRepository.MaxAsync(maxExpression, cache);
         }
 		
         /// <summary>
@@ -1572,9 +1590,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
         /// <typeparam name="TResult">TResult</typeparam>
         /// <param name="maxExpression">Expression<Func<ICustomer, TResult>> maxExpression</param>
         /// <returns></returns>
-		public TResult CustomerMin<TResult>(Expression<Func<ICustomer, TResult>> maxExpression)
+		public TResult CustomerMin<TResult>(Expression<Func<ICustomer, TResult>> maxExpression, bool cache)
         {
-		    return this.CustomerRepository.Min(maxExpression);
+		    return this.CustomerRepository.Min(maxExpression, cache);
         }
 		
         /// <summary>
@@ -1583,9 +1601,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
         /// <typeparam name="TResult">TResult</typeparam>
         /// <param name="maxExpression">Expression<Func<ICustomer, TResult>> maxExpression</param>
         /// <returns></returns>
-		public async Task<TResult> CustomerMinAsync<TResult>(Expression<Func<ICustomer, TResult>> maxExpression)
+		public async Task<TResult> CustomerMinAsync<TResult>(Expression<Func<ICustomer, TResult>> maxExpression, bool cache)
         {
-		    return await this.CustomerRepository.MinAsync(maxExpression);
+		    return await this.CustomerRepository.MinAsync(maxExpression, cache);
         }
 
         /// <summary>
@@ -1594,9 +1612,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
         /// <typeparam name="TResult">TResult</typeparam>
         /// <param name="maxExpression">Expression<Func<IOrder, TResult>> maxExpression</param>
         /// <returns></returns>
-        public TResult OrderMax<TResult>(Expression<Func<IOrder, TResult>> maxExpression)
+        public TResult OrderMax<TResult>(Expression<Func<IOrder, TResult>> maxExpression, bool cache)
         {
-		    return this.OrderRepository.Max(maxExpression);
+		    return this.OrderRepository.Max(maxExpression, cache);
         }
 
         /// <summary>
@@ -1605,9 +1623,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
         /// <typeparam name="TResult">TResult</typeparam>
         /// <param name="maxExpression">Expression<Func<IOrder, TResult>> maxExpression</param>
         /// <returns></returns>
-		public async Task<TResult> OrderMaxAsync<TResult>(Expression<Func<IOrder, TResult>> maxExpression)
+		public async Task<TResult> OrderMaxAsync<TResult>(Expression<Func<IOrder, TResult>> maxExpression, bool cache)
         {
-		    return await this.OrderRepository.MaxAsync(maxExpression);
+		    return await this.OrderRepository.MaxAsync(maxExpression, cache);
         }
 		
         /// <summary>
@@ -1616,9 +1634,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
         /// <typeparam name="TResult">TResult</typeparam>
         /// <param name="maxExpression">Expression<Func<IOrder, TResult>> maxExpression</param>
         /// <returns></returns>
-		public TResult OrderMin<TResult>(Expression<Func<IOrder, TResult>> maxExpression)
+		public TResult OrderMin<TResult>(Expression<Func<IOrder, TResult>> maxExpression, bool cache)
         {
-		    return this.OrderRepository.Min(maxExpression);
+		    return this.OrderRepository.Min(maxExpression, cache);
         }
 		
         /// <summary>
@@ -1627,9 +1645,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
         /// <typeparam name="TResult">TResult</typeparam>
         /// <param name="maxExpression">Expression<Func<IOrder, TResult>> maxExpression</param>
         /// <returns></returns>
-		public async Task<TResult> OrderMinAsync<TResult>(Expression<Func<IOrder, TResult>> maxExpression)
+		public async Task<TResult> OrderMinAsync<TResult>(Expression<Func<IOrder, TResult>> maxExpression, bool cache)
         {
-		    return await this.OrderRepository.MinAsync(maxExpression);
+		    return await this.OrderRepository.MinAsync(maxExpression, cache);
         }
 
         /// <summary>
@@ -1638,9 +1656,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
         /// <typeparam name="TResult">TResult</typeparam>
         /// <param name="maxExpression">Expression<Func<IOrderDetails, TResult>> maxExpression</param>
         /// <returns></returns>
-        public TResult OrderDetailsMax<TResult>(Expression<Func<IOrderDetails, TResult>> maxExpression)
+        public TResult OrderDetailsMax<TResult>(Expression<Func<IOrderDetails, TResult>> maxExpression, bool cache)
         {
-		    return this.OrderDetailsRepository.Max(maxExpression);
+		    return this.OrderDetailsRepository.Max(maxExpression, cache);
         }
 
         /// <summary>
@@ -1649,9 +1667,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
         /// <typeparam name="TResult">TResult</typeparam>
         /// <param name="maxExpression">Expression<Func<IOrderDetails, TResult>> maxExpression</param>
         /// <returns></returns>
-		public async Task<TResult> OrderDetailsMaxAsync<TResult>(Expression<Func<IOrderDetails, TResult>> maxExpression)
+		public async Task<TResult> OrderDetailsMaxAsync<TResult>(Expression<Func<IOrderDetails, TResult>> maxExpression, bool cache)
         {
-		    return await this.OrderDetailsRepository.MaxAsync(maxExpression);
+		    return await this.OrderDetailsRepository.MaxAsync(maxExpression, cache);
         }
 		
         /// <summary>
@@ -1660,9 +1678,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
         /// <typeparam name="TResult">TResult</typeparam>
         /// <param name="maxExpression">Expression<Func<IOrderDetails, TResult>> maxExpression</param>
         /// <returns></returns>
-		public TResult OrderDetailsMin<TResult>(Expression<Func<IOrderDetails, TResult>> maxExpression)
+		public TResult OrderDetailsMin<TResult>(Expression<Func<IOrderDetails, TResult>> maxExpression, bool cache)
         {
-		    return this.OrderDetailsRepository.Min(maxExpression);
+		    return this.OrderDetailsRepository.Min(maxExpression, cache);
         }
 		
         /// <summary>
@@ -1671,9 +1689,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
         /// <typeparam name="TResult">TResult</typeparam>
         /// <param name="maxExpression">Expression<Func<IOrderDetails, TResult>> maxExpression</param>
         /// <returns></returns>
-		public async Task<TResult> OrderDetailsMinAsync<TResult>(Expression<Func<IOrderDetails, TResult>> maxExpression)
+		public async Task<TResult> OrderDetailsMinAsync<TResult>(Expression<Func<IOrderDetails, TResult>> maxExpression, bool cache)
         {
-		    return await this.OrderDetailsRepository.MinAsync(maxExpression);
+		    return await this.OrderDetailsRepository.MinAsync(maxExpression, cache);
         }
 
         /// <summary>
@@ -1682,9 +1700,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
         /// <typeparam name="TResult">TResult</typeparam>
         /// <param name="maxExpression">Expression<Func<IProduct, TResult>> maxExpression</param>
         /// <returns></returns>
-        public TResult ProductMax<TResult>(Expression<Func<IProduct, TResult>> maxExpression)
+        public TResult ProductMax<TResult>(Expression<Func<IProduct, TResult>> maxExpression, bool cache)
         {
-		    return this.ProductRepository.Max(maxExpression);
+		    return this.ProductRepository.Max(maxExpression, cache);
         }
 
         /// <summary>
@@ -1693,9 +1711,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
         /// <typeparam name="TResult">TResult</typeparam>
         /// <param name="maxExpression">Expression<Func<IProduct, TResult>> maxExpression</param>
         /// <returns></returns>
-		public async Task<TResult> ProductMaxAsync<TResult>(Expression<Func<IProduct, TResult>> maxExpression)
+		public async Task<TResult> ProductMaxAsync<TResult>(Expression<Func<IProduct, TResult>> maxExpression, bool cache)
         {
-		    return await this.ProductRepository.MaxAsync(maxExpression);
+		    return await this.ProductRepository.MaxAsync(maxExpression, cache);
         }
 		
         /// <summary>
@@ -1704,9 +1722,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
         /// <typeparam name="TResult">TResult</typeparam>
         /// <param name="maxExpression">Expression<Func<IProduct, TResult>> maxExpression</param>
         /// <returns></returns>
-		public TResult ProductMin<TResult>(Expression<Func<IProduct, TResult>> maxExpression)
+		public TResult ProductMin<TResult>(Expression<Func<IProduct, TResult>> maxExpression, bool cache)
         {
-		    return this.ProductRepository.Min(maxExpression);
+		    return this.ProductRepository.Min(maxExpression, cache);
         }
 		
         /// <summary>
@@ -1715,9 +1733,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
         /// <typeparam name="TResult">TResult</typeparam>
         /// <param name="maxExpression">Expression<Func<IProduct, TResult>> maxExpression</param>
         /// <returns></returns>
-		public async Task<TResult> ProductMinAsync<TResult>(Expression<Func<IProduct, TResult>> maxExpression)
+		public async Task<TResult> ProductMinAsync<TResult>(Expression<Func<IProduct, TResult>> maxExpression, bool cache)
         {
-		    return await this.ProductRepository.MinAsync(maxExpression);
+		    return await this.ProductRepository.MinAsync(maxExpression, cache);
         }
 
         /// <summary>
@@ -1726,9 +1744,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
         /// <typeparam name="TResult">TResult</typeparam>
         /// <param name="maxExpression">Expression<Func<ISoftware, TResult>> maxExpression</param>
         /// <returns></returns>
-        public TResult SoftwareMax<TResult>(Expression<Func<ISoftware, TResult>> maxExpression)
+        public TResult SoftwareMax<TResult>(Expression<Func<ISoftware, TResult>> maxExpression, bool cache)
         {
-		    return this.SoftwareRepository.Max(maxExpression);
+		    return this.SoftwareRepository.Max(maxExpression, cache);
         }
 
         /// <summary>
@@ -1737,9 +1755,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
         /// <typeparam name="TResult">TResult</typeparam>
         /// <param name="maxExpression">Expression<Func<ISoftware, TResult>> maxExpression</param>
         /// <returns></returns>
-		public async Task<TResult> SoftwareMaxAsync<TResult>(Expression<Func<ISoftware, TResult>> maxExpression)
+		public async Task<TResult> SoftwareMaxAsync<TResult>(Expression<Func<ISoftware, TResult>> maxExpression, bool cache)
         {
-		    return await this.SoftwareRepository.MaxAsync(maxExpression);
+		    return await this.SoftwareRepository.MaxAsync(maxExpression, cache);
         }
 		
         /// <summary>
@@ -1748,9 +1766,9 @@ namespace RepositoryEFDotnet.Data.ApplicationService
         /// <typeparam name="TResult">TResult</typeparam>
         /// <param name="maxExpression">Expression<Func<ISoftware, TResult>> maxExpression</param>
         /// <returns></returns>
-		public TResult SoftwareMin<TResult>(Expression<Func<ISoftware, TResult>> maxExpression)
+		public TResult SoftwareMin<TResult>(Expression<Func<ISoftware, TResult>> maxExpression, bool cache)
         {
-		    return this.SoftwareRepository.Min(maxExpression);
+		    return this.SoftwareRepository.Min(maxExpression, cache);
         }
 		
         /// <summary>
@@ -1759,12 +1777,537 @@ namespace RepositoryEFDotnet.Data.ApplicationService
         /// <typeparam name="TResult">TResult</typeparam>
         /// <param name="maxExpression">Expression<Func<ISoftware, TResult>> maxExpression</param>
         /// <returns></returns>
-		public async Task<TResult> SoftwareMinAsync<TResult>(Expression<Func<ISoftware, TResult>> maxExpression)
+		public async Task<TResult> SoftwareMinAsync<TResult>(Expression<Func<ISoftware, TResult>> maxExpression, bool cache)
         {
-		    return await this.SoftwareRepository.MinAsync(maxExpression);
+		    return await this.SoftwareRepository.MinAsync(maxExpression, cache);
         }
 
 		#endregion
+
+		#region Bulk
+
+        /// <summary>
+        ///     Bulk delete entities
+        /// </summary>
+        /// <param name="items"></param>
+        public void BankAccountBulkDelete(IEnumerable<IBankAccount> items)
+		{
+			this.BankAccountRepository.BulkDelete(items);
+		}
+
+        /// <summary>
+        ///     Bulk delete entities async
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public async Task BankAccountBulkDeleteAsync(IEnumerable<IBankAccount> items)
+		{
+			await this.BankAccountRepository.BulkDeleteAsync(items);
+		}
+
+        /// <summary>
+        ///     Bulk insert entities
+        /// </summary>
+        /// <param name="items"></param>
+        public void  BankAccountBulkInsert(IEnumerable<IBankAccount> items)
+		{
+			this.BankAccountRepository.BulkInsert(items);
+		}
+        
+        /// <summary>
+        /// Bulk insert entities async
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public async Task  BankAccountBulkInsertAsync(IEnumerable<IBankAccount> items)
+		{
+			await this.BankAccountRepository.BulkInsertAsync(items);
+		}
+
+        /// <summary>
+        /// Bulk update entities 
+        /// </summary>
+        /// <param name="items"></param>
+        public void  BankAccountBulkUpdate(IEnumerable<IBankAccount> items)
+		{
+			this.BankAccountRepository.BulkUpdate(items);
+		}
+
+        /// <summary>
+        /// Bulk update entities async
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public async Task  BankAccountBulkUpdateAsync(IEnumerable<IBankAccount> items)
+		{
+			await this.BankAccountRepository.BulkUpdateAsync(items);
+		}
+
+        
+        /// <summary>
+        ///     Bulk delete entities
+        /// </summary>
+        /// <param name="items"></param>
+        public void BankTransfersBulkDelete(IEnumerable<IBankTransfers> items)
+		{
+			this.BankTransfersRepository.BulkDelete(items);
+		}
+
+        /// <summary>
+        ///     Bulk delete entities async
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public async Task BankTransfersBulkDeleteAsync(IEnumerable<IBankTransfers> items)
+		{
+			await this.BankTransfersRepository.BulkDeleteAsync(items);
+		}
+
+        /// <summary>
+        ///     Bulk insert entities
+        /// </summary>
+        /// <param name="items"></param>
+        public void  BankTransfersBulkInsert(IEnumerable<IBankTransfers> items)
+		{
+			this.BankTransfersRepository.BulkInsert(items);
+		}
+        
+        /// <summary>
+        /// Bulk insert entities async
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public async Task  BankTransfersBulkInsertAsync(IEnumerable<IBankTransfers> items)
+		{
+			await this.BankTransfersRepository.BulkInsertAsync(items);
+		}
+
+        /// <summary>
+        /// Bulk update entities 
+        /// </summary>
+        /// <param name="items"></param>
+        public void  BankTransfersBulkUpdate(IEnumerable<IBankTransfers> items)
+		{
+			this.BankTransfersRepository.BulkUpdate(items);
+		}
+
+        /// <summary>
+        /// Bulk update entities async
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public async Task  BankTransfersBulkUpdateAsync(IEnumerable<IBankTransfers> items)
+		{
+			await this.BankTransfersRepository.BulkUpdateAsync(items);
+		}
+
+        
+        /// <summary>
+        ///     Bulk delete entities
+        /// </summary>
+        /// <param name="items"></param>
+        public void BookBulkDelete(IEnumerable<IBook> items)
+		{
+			this.BookRepository.BulkDelete(items);
+		}
+
+        /// <summary>
+        ///     Bulk delete entities async
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public async Task BookBulkDeleteAsync(IEnumerable<IBook> items)
+		{
+			await this.BookRepository.BulkDeleteAsync(items);
+		}
+
+        /// <summary>
+        ///     Bulk insert entities
+        /// </summary>
+        /// <param name="items"></param>
+        public void  BookBulkInsert(IEnumerable<IBook> items)
+		{
+			this.BookRepository.BulkInsert(items);
+		}
+        
+        /// <summary>
+        /// Bulk insert entities async
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public async Task  BookBulkInsertAsync(IEnumerable<IBook> items)
+		{
+			await this.BookRepository.BulkInsertAsync(items);
+		}
+
+        /// <summary>
+        /// Bulk update entities 
+        /// </summary>
+        /// <param name="items"></param>
+        public void  BookBulkUpdate(IEnumerable<IBook> items)
+		{
+			this.BookRepository.BulkUpdate(items);
+		}
+
+        /// <summary>
+        /// Bulk update entities async
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public async Task  BookBulkUpdateAsync(IEnumerable<IBook> items)
+		{
+			await this.BookRepository.BulkUpdateAsync(items);
+		}
+
+        
+        /// <summary>
+        ///     Bulk delete entities
+        /// </summary>
+        /// <param name="items"></param>
+        public void CountryBulkDelete(IEnumerable<ICountry> items)
+		{
+			this.CountryRepository.BulkDelete(items);
+		}
+
+        /// <summary>
+        ///     Bulk delete entities async
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public async Task CountryBulkDeleteAsync(IEnumerable<ICountry> items)
+		{
+			await this.CountryRepository.BulkDeleteAsync(items);
+		}
+
+        /// <summary>
+        ///     Bulk insert entities
+        /// </summary>
+        /// <param name="items"></param>
+        public void  CountryBulkInsert(IEnumerable<ICountry> items)
+		{
+			this.CountryRepository.BulkInsert(items);
+		}
+        
+        /// <summary>
+        /// Bulk insert entities async
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public async Task  CountryBulkInsertAsync(IEnumerable<ICountry> items)
+		{
+			await this.CountryRepository.BulkInsertAsync(items);
+		}
+
+        /// <summary>
+        /// Bulk update entities 
+        /// </summary>
+        /// <param name="items"></param>
+        public void  CountryBulkUpdate(IEnumerable<ICountry> items)
+		{
+			this.CountryRepository.BulkUpdate(items);
+		}
+
+        /// <summary>
+        /// Bulk update entities async
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public async Task  CountryBulkUpdateAsync(IEnumerable<ICountry> items)
+		{
+			await this.CountryRepository.BulkUpdateAsync(items);
+		}
+
+        
+        /// <summary>
+        ///     Bulk delete entities
+        /// </summary>
+        /// <param name="items"></param>
+        public void CustomerBulkDelete(IEnumerable<ICustomer> items)
+		{
+			this.CustomerRepository.BulkDelete(items);
+		}
+
+        /// <summary>
+        ///     Bulk delete entities async
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public async Task CustomerBulkDeleteAsync(IEnumerable<ICustomer> items)
+		{
+			await this.CustomerRepository.BulkDeleteAsync(items);
+		}
+
+        /// <summary>
+        ///     Bulk insert entities
+        /// </summary>
+        /// <param name="items"></param>
+        public void  CustomerBulkInsert(IEnumerable<ICustomer> items)
+		{
+			this.CustomerRepository.BulkInsert(items);
+		}
+        
+        /// <summary>
+        /// Bulk insert entities async
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public async Task  CustomerBulkInsertAsync(IEnumerable<ICustomer> items)
+		{
+			await this.CustomerRepository.BulkInsertAsync(items);
+		}
+
+        /// <summary>
+        /// Bulk update entities 
+        /// </summary>
+        /// <param name="items"></param>
+        public void  CustomerBulkUpdate(IEnumerable<ICustomer> items)
+		{
+			this.CustomerRepository.BulkUpdate(items);
+		}
+
+        /// <summary>
+        /// Bulk update entities async
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public async Task  CustomerBulkUpdateAsync(IEnumerable<ICustomer> items)
+		{
+			await this.CustomerRepository.BulkUpdateAsync(items);
+		}
+
+        
+        /// <summary>
+        ///     Bulk delete entities
+        /// </summary>
+        /// <param name="items"></param>
+        public void OrderBulkDelete(IEnumerable<IOrder> items)
+		{
+			this.OrderRepository.BulkDelete(items);
+		}
+
+        /// <summary>
+        ///     Bulk delete entities async
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public async Task OrderBulkDeleteAsync(IEnumerable<IOrder> items)
+		{
+			await this.OrderRepository.BulkDeleteAsync(items);
+		}
+
+        /// <summary>
+        ///     Bulk insert entities
+        /// </summary>
+        /// <param name="items"></param>
+        public void  OrderBulkInsert(IEnumerable<IOrder> items)
+		{
+			this.OrderRepository.BulkInsert(items);
+		}
+        
+        /// <summary>
+        /// Bulk insert entities async
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public async Task  OrderBulkInsertAsync(IEnumerable<IOrder> items)
+		{
+			await this.OrderRepository.BulkInsertAsync(items);
+		}
+
+        /// <summary>
+        /// Bulk update entities 
+        /// </summary>
+        /// <param name="items"></param>
+        public void  OrderBulkUpdate(IEnumerable<IOrder> items)
+		{
+			this.OrderRepository.BulkUpdate(items);
+		}
+
+        /// <summary>
+        /// Bulk update entities async
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public async Task  OrderBulkUpdateAsync(IEnumerable<IOrder> items)
+		{
+			await this.OrderRepository.BulkUpdateAsync(items);
+		}
+
+        
+        /// <summary>
+        ///     Bulk delete entities
+        /// </summary>
+        /// <param name="items"></param>
+        public void OrderDetailsBulkDelete(IEnumerable<IOrderDetails> items)
+		{
+			this.OrderDetailsRepository.BulkDelete(items);
+		}
+
+        /// <summary>
+        ///     Bulk delete entities async
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public async Task OrderDetailsBulkDeleteAsync(IEnumerable<IOrderDetails> items)
+		{
+			await this.OrderDetailsRepository.BulkDeleteAsync(items);
+		}
+
+        /// <summary>
+        ///     Bulk insert entities
+        /// </summary>
+        /// <param name="items"></param>
+        public void  OrderDetailsBulkInsert(IEnumerable<IOrderDetails> items)
+		{
+			this.OrderDetailsRepository.BulkInsert(items);
+		}
+        
+        /// <summary>
+        /// Bulk insert entities async
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public async Task  OrderDetailsBulkInsertAsync(IEnumerable<IOrderDetails> items)
+		{
+			await this.OrderDetailsRepository.BulkInsertAsync(items);
+		}
+
+        /// <summary>
+        /// Bulk update entities 
+        /// </summary>
+        /// <param name="items"></param>
+        public void  OrderDetailsBulkUpdate(IEnumerable<IOrderDetails> items)
+		{
+			this.OrderDetailsRepository.BulkUpdate(items);
+		}
+
+        /// <summary>
+        /// Bulk update entities async
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public async Task  OrderDetailsBulkUpdateAsync(IEnumerable<IOrderDetails> items)
+		{
+			await this.OrderDetailsRepository.BulkUpdateAsync(items);
+		}
+
+        
+        /// <summary>
+        ///     Bulk delete entities
+        /// </summary>
+        /// <param name="items"></param>
+        public void ProductBulkDelete(IEnumerable<IProduct> items)
+		{
+			this.ProductRepository.BulkDelete(items);
+		}
+
+        /// <summary>
+        ///     Bulk delete entities async
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public async Task ProductBulkDeleteAsync(IEnumerable<IProduct> items)
+		{
+			await this.ProductRepository.BulkDeleteAsync(items);
+		}
+
+        /// <summary>
+        ///     Bulk insert entities
+        /// </summary>
+        /// <param name="items"></param>
+        public void  ProductBulkInsert(IEnumerable<IProduct> items)
+		{
+			this.ProductRepository.BulkInsert(items);
+		}
+        
+        /// <summary>
+        /// Bulk insert entities async
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public async Task  ProductBulkInsertAsync(IEnumerable<IProduct> items)
+		{
+			await this.ProductRepository.BulkInsertAsync(items);
+		}
+
+        /// <summary>
+        /// Bulk update entities 
+        /// </summary>
+        /// <param name="items"></param>
+        public void  ProductBulkUpdate(IEnumerable<IProduct> items)
+		{
+			this.ProductRepository.BulkUpdate(items);
+		}
+
+        /// <summary>
+        /// Bulk update entities async
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public async Task  ProductBulkUpdateAsync(IEnumerable<IProduct> items)
+		{
+			await this.ProductRepository.BulkUpdateAsync(items);
+		}
+
+        
+        /// <summary>
+        ///     Bulk delete entities
+        /// </summary>
+        /// <param name="items"></param>
+        public void SoftwareBulkDelete(IEnumerable<ISoftware> items)
+		{
+			this.SoftwareRepository.BulkDelete(items);
+		}
+
+        /// <summary>
+        ///     Bulk delete entities async
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public async Task SoftwareBulkDeleteAsync(IEnumerable<ISoftware> items)
+		{
+			await this.SoftwareRepository.BulkDeleteAsync(items);
+		}
+
+        /// <summary>
+        ///     Bulk insert entities
+        /// </summary>
+        /// <param name="items"></param>
+        public void  SoftwareBulkInsert(IEnumerable<ISoftware> items)
+		{
+			this.SoftwareRepository.BulkInsert(items);
+		}
+        
+        /// <summary>
+        /// Bulk insert entities async
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public async Task  SoftwareBulkInsertAsync(IEnumerable<ISoftware> items)
+		{
+			await this.SoftwareRepository.BulkInsertAsync(items);
+		}
+
+        /// <summary>
+        /// Bulk update entities 
+        /// </summary>
+        /// <param name="items"></param>
+        public void  SoftwareBulkUpdate(IEnumerable<ISoftware> items)
+		{
+			this.SoftwareRepository.BulkUpdate(items);
+		}
+
+        /// <summary>
+        /// Bulk update entities async
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public async Task  SoftwareBulkUpdateAsync(IEnumerable<ISoftware> items)
+		{
+			await this.SoftwareRepository.BulkUpdateAsync(items);
+		}
+
+        #endregion
 
     }
 }

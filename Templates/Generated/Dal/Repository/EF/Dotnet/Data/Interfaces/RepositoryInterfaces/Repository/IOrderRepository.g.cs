@@ -38,79 +38,89 @@ namespace RepositoryEFDotnet.Data.Interfaces
         /// Load Order entities from the database using the composite primary keys
         /// </summary
         /// <param name="orderId">int</param>
+        /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<IOrder, object>>[]</param>
         /// <returns>IOrder</returns>
-		IOrder LoadByOrderId(int orderId, params Expression<Func<IOrder, object>>[] includes);
+		IOrder LoadByOrderId(int orderId, bool cache, params Expression<Func<IOrder, object>>[] includes);
 		
         /// <summary>
         /// Load Order entities async from the database using the composite primary keys
         /// </summary
         /// <param name="orderId">int</param>
+        /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<IOrder, object>>[]</param>
         /// <returns>IOrder</returns>
-		Task<IOrder> LoadByOrderIdAsync(int orderId, params Expression<Func<IOrder, object>>[] includes);
+		Task<IOrder> LoadByOrderIdAsync(int orderId, bool cache, params Expression<Func<IOrder, object>>[] includes);
 
         /// <summary>
         /// Load Order entities from the database using the CustomerId field
         /// </summary>
         /// <param name="customerId">Nullable<int></param
+        /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<IOrder, object>>[]</param>
         /// <returns>IList<IOrder></returns>
-		IList<IOrder> LoadByCustomerId(Nullable<int> customerId, params Expression<Func<IOrder, object>>[] includes);
+		IList<IOrder> LoadByCustomerId(Nullable<int> customerId, bool cache,  params Expression<Func<IOrder, object>>[] includes);
 		
         /// <summary>
         /// Load Order entities async from the database using the CustomerId field
         /// </summary>
         /// <param name="customerId">Nullable<int></param
+        /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<IOrder, object>>[]</param>
         /// <returns>IList<IOrder></returns>
-		Task<IList<IOrder>> LoadByCustomerIdAsync(Nullable<int> customerId, params Expression<Func<IOrder, object>>[] includes);
+		Task<IList<IOrder>> LoadByCustomerIdAsync(Nullable<int> customerId, bool cache, params Expression<Func<IOrder, object>>[] includes);
 
         /// <summary>
         /// Load Order entities from the database using the OrderDate field
         /// </summary>
         /// <param name="orderDate">Nullable<DateTime></param
+        /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<IOrder, object>>[]</param>
         /// <returns>IList<IOrder></returns>
-		IList<IOrder> LoadByOrderDate(Nullable<DateTime> orderDate, params Expression<Func<IOrder, object>>[] includes);
+		IList<IOrder> LoadByOrderDate(Nullable<DateTime> orderDate, bool cache,  params Expression<Func<IOrder, object>>[] includes);
 		
         /// <summary>
         /// Load Order entities async from the database using the OrderDate field
         /// </summary>
         /// <param name="orderDate">Nullable<DateTime></param
+        /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<IOrder, object>>[]</param>
         /// <returns>IList<IOrder></returns>
-		Task<IList<IOrder>> LoadByOrderDateAsync(Nullable<DateTime> orderDate, params Expression<Func<IOrder, object>>[] includes);
+		Task<IList<IOrder>> LoadByOrderDateAsync(Nullable<DateTime> orderDate, bool cache, params Expression<Func<IOrder, object>>[] includes);
 
         /// <summary>
         /// Load Order entities from the database using the DeliveryDate field
         /// </summary>
         /// <param name="deliveryDate">Nullable<DateTime></param
+        /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<IOrder, object>>[]</param>
         /// <returns>IList<IOrder></returns>
-		IList<IOrder> LoadByDeliveryDate(Nullable<DateTime> deliveryDate, params Expression<Func<IOrder, object>>[] includes);
+		IList<IOrder> LoadByDeliveryDate(Nullable<DateTime> deliveryDate, bool cache,  params Expression<Func<IOrder, object>>[] includes);
 		
         /// <summary>
         /// Load Order entities async from the database using the DeliveryDate field
         /// </summary>
         /// <param name="deliveryDate">Nullable<DateTime></param
+        /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<IOrder, object>>[]</param>
         /// <returns>IList<IOrder></returns>
-		Task<IList<IOrder>> LoadByDeliveryDateAsync(Nullable<DateTime> deliveryDate, params Expression<Func<IOrder, object>>[] includes);
+		Task<IList<IOrder>> LoadByDeliveryDateAsync(Nullable<DateTime> deliveryDate, bool cache, params Expression<Func<IOrder, object>>[] includes);
 
         /// <summary>
         /// Load all Order entities from the database.
         /// </summary>
+        /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<IOrder, object>>[]</param>
         /// <returns>IList<IOrder></returns>
-		IList<IOrder> LoadAll(params Expression<Func<IOrder, object>>[] includes);
+		IList<IOrder> LoadAll( bool cache, params Expression<Func<IOrder, object>>[] includes);
 		
         /// <summary>
         /// Load all Order entities async from the database.
         /// </summary>
+        /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<IOrder, object>>[]</param>
         /// <returns>IList<IOrder></returns>
-		Task<IList<IOrder>> LoadAllAsync(params Expression<Func<IOrder, object>>[] includes);
+		Task<IList<IOrder>> LoadAllAsync(bool cache, params Expression<Func<IOrder, object>>[] includes);
 		
 		#endregion
 
@@ -120,73 +130,81 @@ namespace RepositoryEFDotnet.Data.Interfaces
         /// Search for Order entities in the database by ShippingName
         /// </summary>
         /// <param name="shippingName">string</param>
+        /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="caseSensitive">bool</param
 		/// <param name="includes">params Expression<Func<IOrder, object>>[]</param>
         /// <returns>IList<IOrder></returns>
-		IList<IOrder> SearchByShippingName(string shippingName, bool caseSensitive = false, params Expression<Func<IOrder, object>>[] includes);
+		IList<IOrder> SearchByShippingName(string shippingName, bool cache, bool caseSensitive = false, params Expression<Func<IOrder, object>>[] includes);
 		
         /// <summary>
         /// Search for Order entities async in the database by ShippingName
         /// </summary>
         /// <param name="shippingName">string</param>
+        /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="caseSensitive">bool</param
 		/// <param name="includes">params Expression<Func<IOrder, object>>[]</param>
         /// <returns>IList<IOrder></returns>
-		Task<IList<IOrder>> SearchByShippingNameAsync(string shippingName, bool caseSensitive = false, params Expression<Func<IOrder, object>>[] includes);
+		Task<IList<IOrder>> SearchByShippingNameAsync(string shippingName, bool cache, bool caseSensitive = false, params Expression<Func<IOrder, object>>[] includes);
 
         /// <summary>
         /// Search for Order entities in the database by ShippingAddress
         /// </summary>
         /// <param name="shippingAddress">string</param>
+        /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="caseSensitive">bool</param
 		/// <param name="includes">params Expression<Func<IOrder, object>>[]</param>
         /// <returns>IList<IOrder></returns>
-		IList<IOrder> SearchByShippingAddress(string shippingAddress, bool caseSensitive = false, params Expression<Func<IOrder, object>>[] includes);
+		IList<IOrder> SearchByShippingAddress(string shippingAddress, bool cache, bool caseSensitive = false, params Expression<Func<IOrder, object>>[] includes);
 		
         /// <summary>
         /// Search for Order entities async in the database by ShippingAddress
         /// </summary>
         /// <param name="shippingAddress">string</param>
+        /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="caseSensitive">bool</param
 		/// <param name="includes">params Expression<Func<IOrder, object>>[]</param>
         /// <returns>IList<IOrder></returns>
-		Task<IList<IOrder>> SearchByShippingAddressAsync(string shippingAddress, bool caseSensitive = false, params Expression<Func<IOrder, object>>[] includes);
+		Task<IList<IOrder>> SearchByShippingAddressAsync(string shippingAddress, bool cache, bool caseSensitive = false, params Expression<Func<IOrder, object>>[] includes);
 
         /// <summary>
         /// Search for Order entities in the database by ShippingCity
         /// </summary>
         /// <param name="shippingCity">string</param>
+        /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="caseSensitive">bool</param
 		/// <param name="includes">params Expression<Func<IOrder, object>>[]</param>
         /// <returns>IList<IOrder></returns>
-		IList<IOrder> SearchByShippingCity(string shippingCity, bool caseSensitive = false, params Expression<Func<IOrder, object>>[] includes);
+		IList<IOrder> SearchByShippingCity(string shippingCity, bool cache, bool caseSensitive = false, params Expression<Func<IOrder, object>>[] includes);
 		
         /// <summary>
         /// Search for Order entities async in the database by ShippingCity
         /// </summary>
         /// <param name="shippingCity">string</param>
+        /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="caseSensitive">bool</param
 		/// <param name="includes">params Expression<Func<IOrder, object>>[]</param>
         /// <returns>IList<IOrder></returns>
-		Task<IList<IOrder>> SearchByShippingCityAsync(string shippingCity, bool caseSensitive = false, params Expression<Func<IOrder, object>>[] includes);
+		Task<IList<IOrder>> SearchByShippingCityAsync(string shippingCity, bool cache, bool caseSensitive = false, params Expression<Func<IOrder, object>>[] includes);
 
         /// <summary>
         /// Search for Order entities in the database by ShippingZip
         /// </summary>
         /// <param name="shippingZip">string</param>
+        /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="caseSensitive">bool</param
 		/// <param name="includes">params Expression<Func<IOrder, object>>[]</param>
         /// <returns>IList<IOrder></returns>
-		IList<IOrder> SearchByShippingZip(string shippingZip, bool caseSensitive = false, params Expression<Func<IOrder, object>>[] includes);
+		IList<IOrder> SearchByShippingZip(string shippingZip, bool cache, bool caseSensitive = false, params Expression<Func<IOrder, object>>[] includes);
 		
         /// <summary>
         /// Search for Order entities async in the database by ShippingZip
         /// </summary>
         /// <param name="shippingZip">string</param>
+        /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="caseSensitive">bool</param
 		/// <param name="includes">params Expression<Func<IOrder, object>>[]</param>
         /// <returns>IList<IOrder></returns>
-		Task<IList<IOrder>> SearchByShippingZipAsync(string shippingZip, bool caseSensitive = false, params Expression<Func<IOrder, object>>[] includes);
+		Task<IList<IOrder>> SearchByShippingZipAsync(string shippingZip, bool cache, bool caseSensitive = false, params Expression<Func<IOrder, object>>[] includes);
 
 		#endregion
 		
@@ -239,27 +257,76 @@ namespace RepositoryEFDotnet.Data.Interfaces
         /// </summary>
         /// <param name="orderId">int</param>
         /// <returns>bool</returns>
-		bool Delete( int orderId);
+		bool Delete( int orderId, bool cache);
 
 		/// <summary>
         /// Delete the Order entity async from the database
         /// </summary>
-        /// <param name="orderId">int</param>
+        /// <param name="orderId">int, bool cache</param>
         /// <returns>bool</returns>
-		Task<bool> DeleteAsync( int orderId);
+		Task<bool> DeleteAsync( int orderId, bool cache);
 		
 		#endregion
 		
 		#region Aggregates
 		
-		TResult Max<TResult>(Expression<Func<IOrder, TResult>> maxExpression);
+		TResult Max<TResult>(Expression<Func<IOrder, TResult>> maxExpression, bool cache);
 		
-		Task<TResult> MaxAsync<TResult>(Expression<Func<IOrder, TResult>> maxExpression);
+		Task<TResult> MaxAsync<TResult>(Expression<Func<IOrder, TResult>> maxExpression, bool cache);
 		
-		TResult Min<TResult>(Expression<Func<IOrder, TResult>> maxExpression);
+		TResult Min<TResult>(Expression<Func<IOrder, TResult>> maxExpression, bool cache);
 		
-		Task<TResult> MinAsync<TResult>(Expression<Func<IOrder, TResult>> maxExpression);
+		Task<TResult> MinAsync<TResult>(Expression<Func<IOrder, TResult>> maxExpression, bool cache);
 		
 		#endregion
+
+        #region Bulk
+
+        /// <summary>
+        ///     Bulk delete entities
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="items"></param>
+        void BulkDelete(IEnumerable<IOrder> items);
+
+        /// <summary>
+        ///     Bulk delete entities async
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        Task BulkDeleteAsync(IEnumerable<IOrder> items);
+
+        /// <summary>
+        ///     Bulk insert entities
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="items"></param>
+        void BulkInsert(IEnumerable<IOrder> items);
+        
+        /// <summary>
+        /// Bulk insert entities async
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        Task BulkInsertAsync(IEnumerable<IOrder> items);
+
+        /// <summary>
+        /// Bulk update entities 
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="items"></param>
+        void BulkUpdate(IEnumerable<IOrder> items);
+
+        /// <summary>
+        /// Bulk update entities async
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        Task BulkUpdateAsync(IEnumerable<IOrder> items);
+
+        #endregion
 	}
 }

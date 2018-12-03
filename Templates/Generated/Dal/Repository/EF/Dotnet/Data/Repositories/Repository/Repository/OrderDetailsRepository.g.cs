@@ -59,10 +59,10 @@ namespace RepositoryEFDotnet.Data.Repository
         /// <param name="orderDetailsId">int</param>
 		/// <param name="includes">params Expression<Func<IOrderDetails, object>>[]</param>
         /// <returns>IOrderDetails</returns>
-		public virtual IOrderDetails LoadByOrderDetailsId(int orderDetailsId, params Expression<Func<IOrderDetails, object>>[] includes)
+		public virtual IOrderDetails LoadByOrderDetailsId(int orderDetailsId, bool cache, params Expression<Func<IOrderDetails, object>>[] includes)
 		{
 			var expr = this.Convert(includes);
-			return this.UnitOfWork.FirstOrDefault<OrderDetails>(o => o.OrderDetailsId == orderDetailsId, expr);
+			return this.UnitOfWork.FirstOrDefault<OrderDetails>(o => o.OrderDetailsId == orderDetailsId, cache, expr);
 		}
 		
         /// <summary>
@@ -71,10 +71,10 @@ namespace RepositoryEFDotnet.Data.Repository
         /// <param name="orderDetailsId">int</param>
 		/// <param name="includes">params Expression<Func<IOrderDetails, object>>[]</param>
         /// <returns>IOrderDetails</returns>
-		public virtual async Task<IOrderDetails> LoadByOrderDetailsIdAsync(int orderDetailsId, params Expression<Func<IOrderDetails, object>>[] includes)
+		public virtual async Task<IOrderDetails> LoadByOrderDetailsIdAsync(int orderDetailsId, bool cache, params Expression<Func<IOrderDetails, object>>[] includes)
 		{
 			var expr = this.Convert(includes);
-			return await this.UnitOfWork.FirstOrDefaultAsync<OrderDetails>(o => o.OrderDetailsId == orderDetailsId, expr);
+			return await this.UnitOfWork.FirstOrDefaultAsync<OrderDetails>(cache, o => o.OrderDetailsId == orderDetailsId, expr);
 		}
 
         /// <summary>
@@ -83,10 +83,10 @@ namespace RepositoryEFDotnet.Data.Repository
         /// <param name="orderId">int</param>
 		/// <param name="includes">params Expression<Func<IOrderDetails, object>>[]</param>
         /// <returns>IList<IOrderDetails></returns>
-		public virtual IList<IOrderDetails> LoadByOrderId(int orderId, params Expression<Func<IOrderDetails, object>>[] includes)
+		public virtual IList<IOrderDetails> LoadByOrderId(int orderId, bool cache, params Expression<Func<IOrderDetails, object>>[] includes)
 		{
 			var expr = this.Convert(includes);
-			return this.UnitOfWork.AllMatching<OrderDetails>(o => o.OrderId == orderId, expr).ToList<IOrderDetails>();
+			return this.UnitOfWork.AllMatching<OrderDetails>(o => o.OrderId == orderId, cache, expr).ToList<IOrderDetails>();
 		}
 		
         /// <summary>
@@ -95,10 +95,10 @@ namespace RepositoryEFDotnet.Data.Repository
         /// <param name="orderId">int</param>
 		/// <param name="includes">params Expression<Func<IOrderDetails, object>>[]</param>
         /// <returns>IList<IOrderDetails></returns>
-		public virtual async Task<IList<IOrderDetails>> LoadByOrderIdAsync(int orderId, params Expression<Func<IOrderDetails, object>>[] includes)
+		public virtual async Task<IList<IOrderDetails>> LoadByOrderIdAsync(int orderId, bool cache, params Expression<Func<IOrderDetails, object>>[] includes)
 		{
 			var expr = this.Convert(includes);
-			var result = await this.UnitOfWork.AllMatchingAsync<OrderDetails>(o => o.OrderId == orderId, expr);
+			var result = await this.UnitOfWork.AllMatchingAsync<OrderDetails>(o => o.OrderId == orderId,cache, expr);
 			return result.ToList<IOrderDetails>();
 		}
 
@@ -108,10 +108,10 @@ namespace RepositoryEFDotnet.Data.Repository
         /// <param name="productId">int</param>
 		/// <param name="includes">params Expression<Func<IOrderDetails, object>>[]</param>
         /// <returns>IList<IOrderDetails></returns>
-		public virtual IList<IOrderDetails> LoadByProductId(int productId, params Expression<Func<IOrderDetails, object>>[] includes)
+		public virtual IList<IOrderDetails> LoadByProductId(int productId, bool cache, params Expression<Func<IOrderDetails, object>>[] includes)
 		{
 			var expr = this.Convert(includes);
-			return this.UnitOfWork.AllMatching<OrderDetails>(o => o.ProductId == productId, expr).ToList<IOrderDetails>();
+			return this.UnitOfWork.AllMatching<OrderDetails>(o => o.ProductId == productId, cache, expr).ToList<IOrderDetails>();
 		}
 		
         /// <summary>
@@ -120,10 +120,10 @@ namespace RepositoryEFDotnet.Data.Repository
         /// <param name="productId">int</param>
 		/// <param name="includes">params Expression<Func<IOrderDetails, object>>[]</param>
         /// <returns>IList<IOrderDetails></returns>
-		public virtual async Task<IList<IOrderDetails>> LoadByProductIdAsync(int productId, params Expression<Func<IOrderDetails, object>>[] includes)
+		public virtual async Task<IList<IOrderDetails>> LoadByProductIdAsync(int productId, bool cache, params Expression<Func<IOrderDetails, object>>[] includes)
 		{
 			var expr = this.Convert(includes);
-			var result = await this.UnitOfWork.AllMatchingAsync<OrderDetails>(o => o.ProductId == productId, expr);
+			var result = await this.UnitOfWork.AllMatchingAsync<OrderDetails>(o => o.ProductId == productId,cache, expr);
 			return result.ToList<IOrderDetails>();
 		}
 
@@ -133,10 +133,10 @@ namespace RepositoryEFDotnet.Data.Repository
         /// <param name="unitPrice">Nullable<decimal></param>
 		/// <param name="includes">params Expression<Func<IOrderDetails, object>>[]</param>
         /// <returns>IList<IOrderDetails></returns>
-		public virtual IList<IOrderDetails> LoadByUnitPrice(Nullable<decimal> unitPrice, params Expression<Func<IOrderDetails, object>>[] includes)
+		public virtual IList<IOrderDetails> LoadByUnitPrice(Nullable<decimal> unitPrice, bool cache, params Expression<Func<IOrderDetails, object>>[] includes)
 		{
 			var expr = this.Convert(includes);
-			return this.UnitOfWork.AllMatching<OrderDetails>(o => o.UnitPrice == unitPrice, expr).ToList<IOrderDetails>();
+			return this.UnitOfWork.AllMatching<OrderDetails>(o => o.UnitPrice == unitPrice, cache, expr).ToList<IOrderDetails>();
 		}
 		
         /// <summary>
@@ -145,10 +145,10 @@ namespace RepositoryEFDotnet.Data.Repository
         /// <param name="unitPrice">Nullable<decimal></param>
 		/// <param name="includes">params Expression<Func<IOrderDetails, object>>[]</param>
         /// <returns>IList<IOrderDetails></returns>
-		public virtual async Task<IList<IOrderDetails>> LoadByUnitPriceAsync(Nullable<decimal> unitPrice, params Expression<Func<IOrderDetails, object>>[] includes)
+		public virtual async Task<IList<IOrderDetails>> LoadByUnitPriceAsync(Nullable<decimal> unitPrice, bool cache, params Expression<Func<IOrderDetails, object>>[] includes)
 		{
 			var expr = this.Convert(includes);
-			var result = await this.UnitOfWork.AllMatchingAsync<OrderDetails>(o => o.UnitPrice == unitPrice, expr);
+			var result = await this.UnitOfWork.AllMatchingAsync<OrderDetails>(o => o.UnitPrice == unitPrice,cache, expr);
 			return result.ToList<IOrderDetails>();
 		}
 
@@ -158,10 +158,10 @@ namespace RepositoryEFDotnet.Data.Repository
         /// <param name="amount">Nullable<short></param>
 		/// <param name="includes">params Expression<Func<IOrderDetails, object>>[]</param>
         /// <returns>IList<IOrderDetails></returns>
-		public virtual IList<IOrderDetails> LoadByAmount(Nullable<short> amount, params Expression<Func<IOrderDetails, object>>[] includes)
+		public virtual IList<IOrderDetails> LoadByAmount(Nullable<short> amount, bool cache, params Expression<Func<IOrderDetails, object>>[] includes)
 		{
 			var expr = this.Convert(includes);
-			return this.UnitOfWork.AllMatching<OrderDetails>(o => o.Amount == amount, expr).ToList<IOrderDetails>();
+			return this.UnitOfWork.AllMatching<OrderDetails>(o => o.Amount == amount, cache, expr).ToList<IOrderDetails>();
 		}
 		
         /// <summary>
@@ -170,10 +170,10 @@ namespace RepositoryEFDotnet.Data.Repository
         /// <param name="amount">Nullable<short></param>
 		/// <param name="includes">params Expression<Func<IOrderDetails, object>>[]</param>
         /// <returns>IList<IOrderDetails></returns>
-		public virtual async Task<IList<IOrderDetails>> LoadByAmountAsync(Nullable<short> amount, params Expression<Func<IOrderDetails, object>>[] includes)
+		public virtual async Task<IList<IOrderDetails>> LoadByAmountAsync(Nullable<short> amount, bool cache, params Expression<Func<IOrderDetails, object>>[] includes)
 		{
 			var expr = this.Convert(includes);
-			var result = await this.UnitOfWork.AllMatchingAsync<OrderDetails>(o => o.Amount == amount, expr);
+			var result = await this.UnitOfWork.AllMatchingAsync<OrderDetails>(o => o.Amount == amount,cache, expr);
 			return result.ToList<IOrderDetails>();
 		}
 
@@ -183,10 +183,10 @@ namespace RepositoryEFDotnet.Data.Repository
         /// <param name="discount">Nullable<float></param>
 		/// <param name="includes">params Expression<Func<IOrderDetails, object>>[]</param>
         /// <returns>IList<IOrderDetails></returns>
-		public virtual IList<IOrderDetails> LoadByDiscount(Nullable<float> discount, params Expression<Func<IOrderDetails, object>>[] includes)
+		public virtual IList<IOrderDetails> LoadByDiscount(Nullable<float> discount, bool cache, params Expression<Func<IOrderDetails, object>>[] includes)
 		{
 			var expr = this.Convert(includes);
-			return this.UnitOfWork.AllMatching<OrderDetails>(o => o.Discount == discount, expr).ToList<IOrderDetails>();
+			return this.UnitOfWork.AllMatching<OrderDetails>(o => o.Discount == discount, cache, expr).ToList<IOrderDetails>();
 		}
 		
         /// <summary>
@@ -195,10 +195,10 @@ namespace RepositoryEFDotnet.Data.Repository
         /// <param name="discount">Nullable<float></param>
 		/// <param name="includes">params Expression<Func<IOrderDetails, object>>[]</param>
         /// <returns>IList<IOrderDetails></returns>
-		public virtual async Task<IList<IOrderDetails>> LoadByDiscountAsync(Nullable<float> discount, params Expression<Func<IOrderDetails, object>>[] includes)
+		public virtual async Task<IList<IOrderDetails>> LoadByDiscountAsync(Nullable<float> discount, bool cache, params Expression<Func<IOrderDetails, object>>[] includes)
 		{
 			var expr = this.Convert(includes);
-			var result = await this.UnitOfWork.AllMatchingAsync<OrderDetails>(o => o.Discount == discount, expr);
+			var result = await this.UnitOfWork.AllMatchingAsync<OrderDetails>(o => o.Discount == discount,cache, expr);
 			return result.ToList<IOrderDetails>();
 		}
 
@@ -207,10 +207,10 @@ namespace RepositoryEFDotnet.Data.Repository
         /// </summary>
 		/// <param name="includes">params Expression<Func<IOrderDetails, object>>[]</param>
         /// <returns>IList<IOrderDetails></returns>
-		public virtual IList<IOrderDetails> LoadAll(params Expression<Func<IOrderDetails, object>>[] includes)
+		public virtual IList<IOrderDetails> LoadAll(bool cache, params Expression<Func<IOrderDetails, object>>[] includes)
 		{
 			var expr = this.Convert(includes);
-			return this.UnitOfWork.GetAll<OrderDetails>(expr).ToList<IOrderDetails>();
+			return this.UnitOfWork.GetAll<OrderDetails>(cache, expr).ToList<IOrderDetails>();
 		}
 		
         /// <summary>
@@ -218,10 +218,10 @@ namespace RepositoryEFDotnet.Data.Repository
         /// </summary>
 		/// <param name="includes">params Expression<Func<IOrderDetails, object>>[]</param>
         /// <returns>IList<IOrderDetails></returns>
-		public virtual async Task<IList<IOrderDetails>> LoadAllAsync(params Expression<Func<IOrderDetails, object>>[] includes)
+		public virtual async Task<IList<IOrderDetails>> LoadAllAsync(bool cache, params Expression<Func<IOrderDetails,  object>>[] includes)
 		{
 			var expr = this.Convert(includes);
-			var result = await this.UnitOfWork.GetAllAsync<OrderDetails>(expr);
+			var result = await this.UnitOfWork.GetAllAsync<OrderDetails>(cache, expr);
 			return result.ToList<IOrderDetails>();
 		}
 		
@@ -284,28 +284,7 @@ namespace RepositoryEFDotnet.Data.Repository
         /// <returns>bool</returns>
 		public virtual bool Update(IOrderDetails entity)
 		{
-			bool doUpdate = false;
-			var entityToUpdate = this.UnitOfWork.FirstOrDefault<OrderDetails>(o =>  o.OrderDetailsId == entity.OrderDetailsId );
-			
-			if (entityToUpdate == null)
-			{
-				throw new Exception("The OrderDetails entity does not exist");
-			}
-			
-			// Optimisation: Flag if any field has changed
-			if (entityToUpdate.OrderId != entity.OrderId) { entityToUpdate.OrderId = entity.OrderId;doUpdate = true; }
-			if (entityToUpdate.ProductId != entity.ProductId) { entityToUpdate.ProductId = entity.ProductId;doUpdate = true; }
-			if (entityToUpdate.UnitPrice != entity.UnitPrice) { entityToUpdate.UnitPrice = entity.UnitPrice;doUpdate = true; }
-			if (entityToUpdate.Amount != entity.Amount) { entityToUpdate.Amount = entity.Amount;doUpdate = true; }
-			if (entityToUpdate.Discount != entity.Discount) { entityToUpdate.Discount = entity.Discount;doUpdate = true; }
-
-			// Optimisation: Only execute update if a field has changed
-			if (doUpdate)
-			{
-				return this.UnitOfWork.Modify(entityToUpdate);
-			}
-			
-			return false;
+			return this.UnitOfWork.Modify(entity);
 		}
 		
         /// <summary>
@@ -315,28 +294,7 @@ namespace RepositoryEFDotnet.Data.Repository
         /// <returns>bool</returns>
 		public virtual async Task<bool> UpdateAsync(IOrderDetails entity)
 		{
-			bool doUpdate = false;
-			var entityToUpdate = await this.UnitOfWork.FirstOrDefaultAsync<OrderDetails>(o =>  o.OrderDetailsId == entity.OrderDetailsId );
-			
-			if (entityToUpdate == null)
-			{
-				throw new Exception("The OrderDetails entity does not exist");
-			}
-			
-			// Optimisation: Flag if any field has changed
-			if (entityToUpdate.OrderId != entity.OrderId) { entityToUpdate.OrderId = entity.OrderId;doUpdate = true; }
-			if (entityToUpdate.ProductId != entity.ProductId) { entityToUpdate.ProductId = entity.ProductId;doUpdate = true; }
-			if (entityToUpdate.UnitPrice != entity.UnitPrice) { entityToUpdate.UnitPrice = entity.UnitPrice;doUpdate = true; }
-			if (entityToUpdate.Amount != entity.Amount) { entityToUpdate.Amount = entity.Amount;doUpdate = true; }
-			if (entityToUpdate.Discount != entity.Discount) { entityToUpdate.Discount = entity.Discount;doUpdate = true; }
-
-			// Optimisation: Only execute update if a field has changed
-			if (doUpdate)
-			{
-				return await this.UnitOfWork.ModifyAsync(entityToUpdate);
-			}
-			
-			return false;
+			return await this.UnitOfWork.ModifyAsync(entity);
 		}
 		
         /// <summary>
@@ -346,14 +304,7 @@ namespace RepositoryEFDotnet.Data.Repository
         /// <returns>bool</returns>
 		public virtual bool Delete(IOrderDetails entity)
 		{		
-			var entityToDelete = this.UnitOfWork.FirstOrDefault<OrderDetails>(o =>  o.OrderDetailsId == entity.OrderDetailsId );
-			
-			if(entityToDelete == null)
-			{
-				throw new Exception("The OrderDetails entity does not exist");
-			}
-			
-			return this.UnitOfWork.Remove(entityToDelete);
+			return this.UnitOfWork.Remove(entity);
 		}
 		
         /// <summary>
@@ -363,14 +314,7 @@ namespace RepositoryEFDotnet.Data.Repository
         /// <returns>bool</returns>
 		public virtual async Task<bool> DeleteAsync(IOrderDetails entity)
 		{		
-			var entityToDelete = await this.UnitOfWork.FirstOrDefaultAsync<OrderDetails>(o =>  o.OrderDetailsId == entity.OrderDetailsId );
-			
-			if(entityToDelete == null)
-			{
-				throw new Exception("The OrderDetails entity does not exist");
-			}
-			
-			return await this.UnitOfWork.RemoveAsync(entityToDelete);
+			return await this.UnitOfWork.RemoveAsync(entity);
 		}
 
 		/// <summary>
@@ -378,9 +322,9 @@ namespace RepositoryEFDotnet.Data.Repository
         /// </summary>
         /// <param name="orderDetailsId">int</param>
         /// <returns>bool</returns>
-		public virtual bool Delete( int orderDetailsId)
+		public virtual bool Delete( int orderDetailsId, bool cache)
 		{
-			var entityToDelete = this.UnitOfWork.FirstOrDefault<OrderDetails>(o =>  o.OrderDetailsId == orderDetailsId );
+			var entityToDelete = this.UnitOfWork.FirstOrDefault<OrderDetails>(o =>  o.OrderDetailsId == orderDetailsId , cache);
 			
 			if(entityToDelete == null)
 			{
@@ -395,9 +339,9 @@ namespace RepositoryEFDotnet.Data.Repository
         /// </summary>
         /// <param name="orderDetailsId">int</param>
         /// <returns>bool</returns>
-		public virtual async Task<bool> DeleteAsync( int orderDetailsId)
+		public virtual async Task<bool> DeleteAsync( int orderDetailsId, bool cache)
 		{
-			var entityToDelete = await this.UnitOfWork.FirstOrDefaultAsync<OrderDetails>(o =>  o.OrderDetailsId == orderDetailsId );
+			var entityToDelete = await this.UnitOfWork.FirstOrDefaultAsync<OrderDetails>(cache, o =>  o.OrderDetailsId == orderDetailsId  );
 			
 			if(entityToDelete == null)
 			{
@@ -411,28 +355,95 @@ namespace RepositoryEFDotnet.Data.Repository
 		
 		#region Aggregates
 		
-		public virtual TResult Max<TResult>(Expression<Func<IOrderDetails, TResult>> maxExpression)
+		public virtual TResult Max<TResult>(Expression<Func<IOrderDetails, TResult>> maxExpression, bool cache)
 		{
-			return this.UnitOfWork.Max(Expression.Lambda<Func<OrderDetails, TResult>>(maxExpression.Body, maxExpression.Parameters));
+			return this.UnitOfWork.Max(cache, Expression.Lambda<Func<OrderDetails, TResult>>(maxExpression.Body, maxExpression.Parameters));
 		}
 		
-		public virtual async Task<TResult> MaxAsync<TResult>(Expression<Func<IOrderDetails, TResult>> maxExpression)
+		public virtual async Task<TResult> MaxAsync<TResult>(Expression<Func<IOrderDetails, TResult>> maxExpression, bool cache)
 		{
-			return await this.UnitOfWork.MaxAsync(Expression.Lambda<Func<OrderDetails, TResult>>(maxExpression.Body, maxExpression.Parameters));
+			return await this.UnitOfWork.MaxAsync(cache, Expression.Lambda<Func<OrderDetails, TResult>>(maxExpression.Body, maxExpression.Parameters));
 		}
 		
-		public virtual TResult Min<TResult>(Expression<Func<IOrderDetails, TResult>> minExpression)
+		public virtual TResult Min<TResult>(Expression<Func<IOrderDetails, TResult>> minExpression, bool cache)
 		{
-			return this.UnitOfWork.Min(Expression.Lambda<Func<OrderDetails, TResult>>(minExpression.Body, minExpression.Parameters));
+			return this.UnitOfWork.Min(cache, Expression.Lambda<Func<OrderDetails, TResult>>(minExpression.Body, minExpression.Parameters));
 		}
 		
-		public virtual async Task<TResult> MinAsync<TResult>(Expression<Func<IOrderDetails, TResult>> minExpression)
+		public virtual async Task<TResult> MinAsync<TResult>(Expression<Func<IOrderDetails, TResult>> minExpression, bool cache)
 		{
-			return await this.UnitOfWork.MinAsync(Expression.Lambda<Func<OrderDetails, TResult>>(minExpression.Body, minExpression.Parameters));
+			return await this.UnitOfWork.MinAsync(cache, Expression.Lambda<Func<OrderDetails, TResult>>(minExpression.Body, minExpression.Parameters));
 		}
 		
 		#endregion
 		
+		#region Bulk
+
+        /// <summary>
+        ///     Bulk delete entities
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="items"></param>
+        public void BulkDelete(IEnumerable<IOrderDetails> items)
+		{
+			this.UnitOfWork.BulkDelete<IOrderDetails>(items);
+		}
+
+        /// <summary>
+        ///     Bulk delete entities async
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public async Task BulkDeleteAsync(IEnumerable<IOrderDetails> items)
+		{
+			await this.UnitOfWork.BulkDeleteAsync<IOrderDetails>(items);
+		}
+
+        /// <summary>
+        ///     Bulk insert entities
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="items"></param>
+        public void BulkInsert(IEnumerable<IOrderDetails> items)
+		{
+			this.UnitOfWork.BulkInsert<IOrderDetails>(items);
+		}
+        
+        /// <summary>
+        /// Bulk insert entities async
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public async Task BulkInsertAsync(IEnumerable<IOrderDetails> items)
+		{
+			await this.UnitOfWork.BulkInsertAsync<IOrderDetails>(items);
+		}
+
+        /// <summary>
+        /// Bulk update entities 
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="items"></param>
+        public void BulkUpdate(IEnumerable<IOrderDetails> items)
+		{
+			this.UnitOfWork.BulkUpdate<IOrderDetails>(items);
+		}
+
+        /// <summary>
+        /// Bulk update entities async
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public async Task BulkUpdateAsync(IEnumerable<IOrderDetails> items)
+		{
+			await this.UnitOfWork.BulkUpdateAsync<IOrderDetails>(items);
+		}
+
+        #endregion
+
 		#region Helpers
 		
 	    protected virtual Expression<Func<OrderDetails, object>>[] Convert(params Expression<Func<IOrderDetails, object>>[] includes)

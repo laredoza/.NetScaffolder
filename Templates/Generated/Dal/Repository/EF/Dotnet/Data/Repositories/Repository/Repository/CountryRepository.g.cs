@@ -59,10 +59,10 @@ namespace RepositoryEFDotnet.Data.Repository
         /// <param name="countryId">int</param>
 		/// <param name="includes">params Expression<Func<ICountry, object>>[]</param>
         /// <returns>ICountry</returns>
-		public virtual ICountry LoadByCountryId(int countryId, params Expression<Func<ICountry, object>>[] includes)
+		public virtual ICountry LoadByCountryId(int countryId, bool cache, params Expression<Func<ICountry, object>>[] includes)
 		{
 			var expr = this.Convert(includes);
-			return this.UnitOfWork.FirstOrDefault<Country>(o => o.CountryId == countryId, expr);
+			return this.UnitOfWork.FirstOrDefault<Country>(o => o.CountryId == countryId, cache, expr);
 		}
 		
         /// <summary>
@@ -71,10 +71,10 @@ namespace RepositoryEFDotnet.Data.Repository
         /// <param name="countryId">int</param>
 		/// <param name="includes">params Expression<Func<ICountry, object>>[]</param>
         /// <returns>ICountry</returns>
-		public virtual async Task<ICountry> LoadByCountryIdAsync(int countryId, params Expression<Func<ICountry, object>>[] includes)
+		public virtual async Task<ICountry> LoadByCountryIdAsync(int countryId, bool cache, params Expression<Func<ICountry, object>>[] includes)
 		{
 			var expr = this.Convert(includes);
-			return await this.UnitOfWork.FirstOrDefaultAsync<Country>(o => o.CountryId == countryId, expr);
+			return await this.UnitOfWork.FirstOrDefaultAsync<Country>(cache, o => o.CountryId == countryId, expr);
 		}
 
         /// <summary>
@@ -82,10 +82,10 @@ namespace RepositoryEFDotnet.Data.Repository
         /// </summary>
 		/// <param name="includes">params Expression<Func<ICountry, object>>[]</param>
         /// <returns>IList<ICountry></returns>
-		public virtual IList<ICountry> LoadAll(params Expression<Func<ICountry, object>>[] includes)
+		public virtual IList<ICountry> LoadAll(bool cache, params Expression<Func<ICountry, object>>[] includes)
 		{
 			var expr = this.Convert(includes);
-			return this.UnitOfWork.GetAll<Country>(expr).ToList<ICountry>();
+			return this.UnitOfWork.GetAll<Country>(cache, expr).ToList<ICountry>();
 		}
 		
         /// <summary>
@@ -93,10 +93,10 @@ namespace RepositoryEFDotnet.Data.Repository
         /// </summary>
 		/// <param name="includes">params Expression<Func<ICountry, object>>[]</param>
         /// <returns>IList<ICountry></returns>
-		public virtual async Task<IList<ICountry>> LoadAllAsync(params Expression<Func<ICountry, object>>[] includes)
+		public virtual async Task<IList<ICountry>> LoadAllAsync(bool cache, params Expression<Func<ICountry,  object>>[] includes)
 		{
 			var expr = this.Convert(includes);
-			var result = await this.UnitOfWork.GetAllAsync<Country>(expr);
+			var result = await this.UnitOfWork.GetAllAsync<Country>(cache, expr);
 			return result.ToList<ICountry>();
 		}
 		
@@ -111,16 +111,16 @@ namespace RepositoryEFDotnet.Data.Repository
 		/// <param name="caseSensitive">bool</param>
 		/// <param name="includes">params Expression<Func<ICountry, object>>[]</param>
         /// <returns>IList<ICountry></returns>
-		public virtual IList<ICountry> SearchByCountryName(string countryName, bool caseSensitive = false, params Expression<Func<ICountry, object>>[] includes)
+		public virtual IList<ICountry> SearchByCountryName(string countryName, bool cache, bool caseSensitive = false, params Expression<Func<ICountry, object>>[] includes)
 		{		
 			var expr = this.Convert(includes);
 			if(caseSensitive) 
 			{
-				return this.UnitOfWork.AllMatching<Country>(o => o.CountryName.Contains(countryName), expr).ToList<ICountry>();
+				return this.UnitOfWork.AllMatching<Country>(o => o.CountryName.Contains(countryName), cache, expr).ToList<ICountry>();
 			}
 			else
 			{
-				return this.UnitOfWork.AllMatching<Country>(o => o.CountryName.ToLower().Contains(countryName.ToLower()), expr).ToList<ICountry>();
+				return this.UnitOfWork.AllMatching<Country>(o => o.CountryName.ToLower().Contains(countryName.ToLower()), cache, expr).ToList<ICountry>();
 			}
 		}
 		
@@ -131,17 +131,17 @@ namespace RepositoryEFDotnet.Data.Repository
 		/// <param name="caseSensitive">bool</param>
 		/// <param name="includes">params Expression<Func<ICountry, object>>[]</param>
         /// <returns>IList<ICountry></returns>
-		public virtual async Task<IList<ICountry>> SearchByCountryNameAsync(string countryName, bool caseSensitive = false, params Expression<Func<ICountry, object>>[] includes)
+		public virtual async Task<IList<ICountry>> SearchByCountryNameAsync(string countryName, bool cache, bool caseSensitive = false, params Expression<Func<ICountry, object>>[] includes)
 		{		
 			var expr = this.Convert(includes);
 			if(caseSensitive) 
 			{
-				var result = await this.UnitOfWork.AllMatchingAsync<Country>(o => o.CountryName.Contains(countryName), expr);
+				var result = await this.UnitOfWork.AllMatchingAsync<Country>(o => o.CountryName.Contains(countryName), cache, expr);
 				return result.ToList<ICountry>();
 			}
 			else
 			{
-				var result = await this.UnitOfWork.AllMatchingAsync<Country>(o => o.CountryName.ToLower().Contains(countryName.ToLower()), expr);
+				var result = await this.UnitOfWork.AllMatchingAsync<Country>(o => o.CountryName.ToLower().Contains(countryName.ToLower()), cache, expr);
 				return result.ToList<ICountry>();
 			}
 		}
@@ -193,24 +193,7 @@ namespace RepositoryEFDotnet.Data.Repository
         /// <returns>bool</returns>
 		public virtual bool Update(ICountry entity)
 		{
-			bool doUpdate = false;
-			var entityToUpdate = this.UnitOfWork.FirstOrDefault<Country>(o =>  o.CountryId == entity.CountryId );
-			
-			if (entityToUpdate == null)
-			{
-				throw new Exception("The Country entity does not exist");
-			}
-			
-			// Optimisation: Flag if any field has changed
-			if (entityToUpdate.CountryName != entity.CountryName) { entityToUpdate.CountryName = entity.CountryName;doUpdate = true; }
-
-			// Optimisation: Only execute update if a field has changed
-			if (doUpdate)
-			{
-				return this.UnitOfWork.Modify(entityToUpdate);
-			}
-			
-			return false;
+			return this.UnitOfWork.Modify(entity);
 		}
 		
         /// <summary>
@@ -220,24 +203,7 @@ namespace RepositoryEFDotnet.Data.Repository
         /// <returns>bool</returns>
 		public virtual async Task<bool> UpdateAsync(ICountry entity)
 		{
-			bool doUpdate = false;
-			var entityToUpdate = await this.UnitOfWork.FirstOrDefaultAsync<Country>(o =>  o.CountryId == entity.CountryId );
-			
-			if (entityToUpdate == null)
-			{
-				throw new Exception("The Country entity does not exist");
-			}
-			
-			// Optimisation: Flag if any field has changed
-			if (entityToUpdate.CountryName != entity.CountryName) { entityToUpdate.CountryName = entity.CountryName;doUpdate = true; }
-
-			// Optimisation: Only execute update if a field has changed
-			if (doUpdate)
-			{
-				return await this.UnitOfWork.ModifyAsync(entityToUpdate);
-			}
-			
-			return false;
+			return await this.UnitOfWork.ModifyAsync(entity);
 		}
 		
         /// <summary>
@@ -247,14 +213,7 @@ namespace RepositoryEFDotnet.Data.Repository
         /// <returns>bool</returns>
 		public virtual bool Delete(ICountry entity)
 		{		
-			var entityToDelete = this.UnitOfWork.FirstOrDefault<Country>(o =>  o.CountryId == entity.CountryId );
-			
-			if(entityToDelete == null)
-			{
-				throw new Exception("The Country entity does not exist");
-			}
-			
-			return this.UnitOfWork.Remove(entityToDelete);
+			return this.UnitOfWork.Remove(entity);
 		}
 		
         /// <summary>
@@ -264,14 +223,7 @@ namespace RepositoryEFDotnet.Data.Repository
         /// <returns>bool</returns>
 		public virtual async Task<bool> DeleteAsync(ICountry entity)
 		{		
-			var entityToDelete = await this.UnitOfWork.FirstOrDefaultAsync<Country>(o =>  o.CountryId == entity.CountryId );
-			
-			if(entityToDelete == null)
-			{
-				throw new Exception("The Country entity does not exist");
-			}
-			
-			return await this.UnitOfWork.RemoveAsync(entityToDelete);
+			return await this.UnitOfWork.RemoveAsync(entity);
 		}
 
 		/// <summary>
@@ -279,9 +231,9 @@ namespace RepositoryEFDotnet.Data.Repository
         /// </summary>
         /// <param name="countryId">int</param>
         /// <returns>bool</returns>
-		public virtual bool Delete( int countryId)
+		public virtual bool Delete( int countryId, bool cache)
 		{
-			var entityToDelete = this.UnitOfWork.FirstOrDefault<Country>(o =>  o.CountryId == countryId );
+			var entityToDelete = this.UnitOfWork.FirstOrDefault<Country>(o =>  o.CountryId == countryId , cache);
 			
 			if(entityToDelete == null)
 			{
@@ -296,9 +248,9 @@ namespace RepositoryEFDotnet.Data.Repository
         /// </summary>
         /// <param name="countryId">int</param>
         /// <returns>bool</returns>
-		public virtual async Task<bool> DeleteAsync( int countryId)
+		public virtual async Task<bool> DeleteAsync( int countryId, bool cache)
 		{
-			var entityToDelete = await this.UnitOfWork.FirstOrDefaultAsync<Country>(o =>  o.CountryId == countryId );
+			var entityToDelete = await this.UnitOfWork.FirstOrDefaultAsync<Country>(cache, o =>  o.CountryId == countryId  );
 			
 			if(entityToDelete == null)
 			{
@@ -312,28 +264,95 @@ namespace RepositoryEFDotnet.Data.Repository
 		
 		#region Aggregates
 		
-		public virtual TResult Max<TResult>(Expression<Func<ICountry, TResult>> maxExpression)
+		public virtual TResult Max<TResult>(Expression<Func<ICountry, TResult>> maxExpression, bool cache)
 		{
-			return this.UnitOfWork.Max(Expression.Lambda<Func<Country, TResult>>(maxExpression.Body, maxExpression.Parameters));
+			return this.UnitOfWork.Max(cache, Expression.Lambda<Func<Country, TResult>>(maxExpression.Body, maxExpression.Parameters));
 		}
 		
-		public virtual async Task<TResult> MaxAsync<TResult>(Expression<Func<ICountry, TResult>> maxExpression)
+		public virtual async Task<TResult> MaxAsync<TResult>(Expression<Func<ICountry, TResult>> maxExpression, bool cache)
 		{
-			return await this.UnitOfWork.MaxAsync(Expression.Lambda<Func<Country, TResult>>(maxExpression.Body, maxExpression.Parameters));
+			return await this.UnitOfWork.MaxAsync(cache, Expression.Lambda<Func<Country, TResult>>(maxExpression.Body, maxExpression.Parameters));
 		}
 		
-		public virtual TResult Min<TResult>(Expression<Func<ICountry, TResult>> minExpression)
+		public virtual TResult Min<TResult>(Expression<Func<ICountry, TResult>> minExpression, bool cache)
 		{
-			return this.UnitOfWork.Min(Expression.Lambda<Func<Country, TResult>>(minExpression.Body, minExpression.Parameters));
+			return this.UnitOfWork.Min(cache, Expression.Lambda<Func<Country, TResult>>(minExpression.Body, minExpression.Parameters));
 		}
 		
-		public virtual async Task<TResult> MinAsync<TResult>(Expression<Func<ICountry, TResult>> minExpression)
+		public virtual async Task<TResult> MinAsync<TResult>(Expression<Func<ICountry, TResult>> minExpression, bool cache)
 		{
-			return await this.UnitOfWork.MinAsync(Expression.Lambda<Func<Country, TResult>>(minExpression.Body, minExpression.Parameters));
+			return await this.UnitOfWork.MinAsync(cache, Expression.Lambda<Func<Country, TResult>>(minExpression.Body, minExpression.Parameters));
 		}
 		
 		#endregion
 		
+		#region Bulk
+
+        /// <summary>
+        ///     Bulk delete entities
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="items"></param>
+        public void BulkDelete(IEnumerable<ICountry> items)
+		{
+			this.UnitOfWork.BulkDelete<ICountry>(items);
+		}
+
+        /// <summary>
+        ///     Bulk delete entities async
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public async Task BulkDeleteAsync(IEnumerable<ICountry> items)
+		{
+			await this.UnitOfWork.BulkDeleteAsync<ICountry>(items);
+		}
+
+        /// <summary>
+        ///     Bulk insert entities
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="items"></param>
+        public void BulkInsert(IEnumerable<ICountry> items)
+		{
+			this.UnitOfWork.BulkInsert<ICountry>(items);
+		}
+        
+        /// <summary>
+        /// Bulk insert entities async
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public async Task BulkInsertAsync(IEnumerable<ICountry> items)
+		{
+			await this.UnitOfWork.BulkInsertAsync<ICountry>(items);
+		}
+
+        /// <summary>
+        /// Bulk update entities 
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="items"></param>
+        public void BulkUpdate(IEnumerable<ICountry> items)
+		{
+			this.UnitOfWork.BulkUpdate<ICountry>(items);
+		}
+
+        /// <summary>
+        /// Bulk update entities async
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public async Task BulkUpdateAsync(IEnumerable<ICountry> items)
+		{
+			await this.UnitOfWork.BulkUpdateAsync<ICountry>(items);
+		}
+
+        #endregion
+
 		#region Helpers
 		
 	    protected virtual Expression<Func<Country, object>>[] Convert(params Expression<Func<ICountry, object>>[] includes)

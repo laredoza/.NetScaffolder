@@ -19,7 +19,7 @@ public class DatabaseManagerTemplate : BaseTemplate
 //	USE A PARTIAL CLASS INSTEAD
 // *******************************************************************
 <#+ foreach(var nameSpace in DataType.AdditionalNamespaces){ #>
-using <#= nameSpace.Replace("{DriverType}", "EFCore") #>;
+using <#= nameSpace.Replace("{DriverType}", Driver.ParentFolder ) #>;
 <#+ } #>
 <#+ foreach(var nameSpace in Driver.NameSpaces){ #>
 using <#= nameSpace #>;

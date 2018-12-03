@@ -45,20 +45,22 @@ if(model.PrimaryKeyCount > 1){ #>
         /// <summary>
         /// Load <#= modelName #> entities from the database using the composite primary keys
         /// </summary
+        /// <param name="cache">Enable second level caching</param>
 <#+ foreach(var col in model.Columns.Where(o => o.IsPrimaryKey)) {#>
         /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
 <#+ } #>
         /// <returns>I<#= modelName #></returns>
-		I<#= modelName #> Load(<#= DataType.TransformAsParameter(model.Columns.Where(o => o.IsPrimaryKey)) #>, params Expression<Func<I<#= modelName #>, object>>[] includes);
+		I<#= modelName #> Load(<#= DataType.TransformAsParameter(model.Columns.Where(o => o.IsPrimaryKey)) #>, bool cache, params Expression<Func<I<#= modelName #>, object>>[] includes);
 
         /// <summary>
         /// Load <#= modelName #> async entities from the database using the composite primary keys
         /// </summary
+        /// <param name="cache">Enable second level caching</param>
 <#+ foreach(var col in model.Columns.Where(o => o.IsPrimaryKey)) {#>
         /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
 <#+ } #>
         /// <returns><#= modelName #></returns>
-		Task<I<#= modelName #>> Load(<#= DataType.TransformAsParameter(model.Columns.Where(o => o.IsPrimaryKey)) #>Async, params Expression<Func<I<#= modelName #>, object>>[] includes);
+		Task<I<#= modelName #>> Load(<#= DataType.TransformAsParameter(model.Columns.Where(o => o.IsPrimaryKey)) #>Async, bool cache, params Expression<Func<I<#= modelName #>, object>>[] includes);
 
 <#+ } #>
 
@@ -68,33 +70,38 @@ if(model.PrimaryKeyCount > 1){ #>
         /// Load <#= modelName #> entities from the database using the primary key
         /// </summary
         /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
+        /// <param name="cache">Enable second level caching</param>
         /// <param name="includes">params Expression<Func<I<#= modelName #>, object>>[]</param>
         /// <returns>I<#= modelName #></returns>
-		I<#= modelName #> LoadBy<#= modelName #><#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= DataType.TransformAsParameter(col) #>, params Expression<Func<I<#= modelName #>, object>>[] includes);
+		I<#= modelName #> LoadBy<#= modelName #><#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= DataType.TransformAsParameter(col) #>, bool cache, params Expression<Func<I<#= modelName #>, object>>[] includes);
 
         /// <summary>
         /// Load <#= modelName #> Async entities from the database using the primary key
         /// </summary
         /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
+        /// <param name="cache">Enable second level caching</param>
         /// <param name="includes">params Expression<Func<I<#= modelName #>, object>>[]</param>
         /// <returns>I<#= modelName #></returns>
-		Task<I<#= modelName #>> LoadBy<#= modelName #><#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>Async(<#= DataType.TransformAsParameter(col) #>, params Expression<Func<I<#= modelName #>, object>>[] includes);
+		Task<I<#= modelName #>> LoadBy<#= modelName #><#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>Async(<#= DataType.TransformAsParameter(col) #>, bool cache, params Expression<Func<I<#= modelName #>, object>>[] includes);
 
 <#+ } #>
 
         /// <summary>
         /// Load all <#= modelName #> entities from the database.
         /// </summary>
+        /// <param name="cache">Enable second level caching</param>
         /// <param name="includes">params Expression<Func<I<#= modelName #>, object>>[]</param>
         /// <returns><#= DataType.CollectionOption.ClassNameInterface #><I<#= modelName #>></returns>
-		<#= DataType.CollectionOption.ClassNameInterface #><I<#= modelName #>> <#= modelName #>LoadAll(params Expression<Func<I<#= modelName #>, object>>[] includes);
+		<#= DataType.CollectionOption.ClassNameInterface #><I<#= modelName #>> <#= modelName #>LoadAll(bool cache, params Expression<Func<I<#= modelName #>, object>>[] includes);
+
 
         /// <summary>
         /// Load all <#= modelName #> Async entities from the database.
         /// </summary>
+        /// <param name="cache">Enable second level caching</param>
         /// <param name="includes">params Expression<Func<I<#= modelName #>, object>>[]</param>
         /// <returns><#= DataType.CollectionOption.ClassNameInterface #><I<#= modelName #>></returns>
-		Task<<#= DataType.CollectionOption.ClassNameInterface #><I<#= modelName #>>> <#= modelName #>LoadAllAsync(params Expression<Func<I<#= modelName #>, object>>[] includes);
+		Task<<#= DataType.CollectionOption.ClassNameInterface #><I<#= modelName #>>> <#= modelName #>LoadAllAsync(bool cache, params Expression<Func<I<#= modelName #>, object>>[] includes);
 
 <#+            } #>
 
@@ -111,18 +118,20 @@ string modelName = DataType.NamingConvention == null ? model.TableName : DataTyp
         /// </summary>
         /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
 		/// <param name="caseSensitive">bool</param>
+        /// <param name="cache">Enable second level caching</param>
         /// <param name="includes">params Expression<Func<I<#= modelName #>, object>>[]</param>
         /// <returns><#= DataType.CollectionOption.ClassNameInterface #><I<#= modelName #>></returns>
-		<#= DataType.CollectionOption.ClassNameInterface #><I<#= modelName #>> <#= modelName #>SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= DataType.TransformAsParameter(col) #>,bool caseSensitive, params Expression<Func<I<#= modelName #>, object>>[] includes);
+		<#= DataType.CollectionOption.ClassNameInterface #><I<#= modelName #>> <#= modelName #>SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= DataType.TransformAsParameter(col) #>,bool caseSensitive, bool cache, params Expression<Func<I<#= modelName #>, object>>[] includes);
 
         /// <summary>
         /// Search for <#= modelName #>  Async entities in the database by <#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>
         /// </summary>
         /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
 		/// <param name="caseSensitive">bool</param>
+        /// <param name="cache">Enable second level caching</param>
         /// <param name="includes">params Expression<Func<I<#= modelName #>, object>>[]</param>
         /// <returns><#= DataType.CollectionOption.ClassNameInterface #><I<#= modelName #>></returns>
-		Task<<#= DataType.CollectionOption.ClassNameInterface #><I<#= modelName #>>> <#= modelName #>SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>Async(<#= DataType.TransformAsParameter(col) #>,bool caseSensitive, params Expression<Func<I<#= modelName #>, object>>[] includes);
+		Task<<#= DataType.CollectionOption.ClassNameInterface #><I<#= modelName #>>> <#= modelName #>SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>Async(<#= DataType.TransformAsParameter(col) #>,bool caseSensitive, bool cache, params Expression<Func<I<#= modelName #>, object>>[] includes);
 
 <#+ }  #>
 <#+            } #>
@@ -160,7 +169,7 @@ string modelName = DataType.NamingConvention == null ? model.TableName : DataTyp
         /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
 <#+ } #>
         /// <returns>bool</returns>
-		bool <#= modelName #>Delete(<#= DataType.TransformAsParameter(model.Columns.Where(o => o.IsPrimaryKey)) #>);
+		bool <#= modelName #>Delete(<#= DataType.TransformAsParameter(model.Columns.Where(o => o.IsPrimaryKey)) #>, bool cache);
 <#+            } #>
 
 		#endregion
@@ -175,36 +184,85 @@ string modelName = DataType.NamingConvention == null ? model.TableName : DataTyp
         /// </summary>
         /// <typeparam name="TResult">TResult</typeparam>
         /// <param name="maxExpression">Expression<Func<I<#= modelName #>, TResult>> maxExpression</param>
+        /// <param name="cache">Enable second level caching</param>
         /// <returns></returns>
-        TResult <#= modelName #>Max<TResult>(Expression<Func<I<#= modelName #>, TResult>> maxExpression);
+        TResult <#= modelName #>Max<TResult>(Expression<Func<I<#= modelName #>, TResult>> maxExpression, bool cache);
 		
         /// <summary>
         /// Returns the max value async
         /// </summary>
         /// <typeparam name="TResult">TResult</typeparam>
         /// <param name="maxExpression">Expression<Func<I<#= modelName #>, TResult>> maxExpression</param>
+        /// <param name="cache">Enable second level caching</param>
         /// <returns></returns>
-		Task<TResult> <#= modelName #>MaxAsync<TResult>(Expression<Func<I<#= modelName #>, TResult>> maxExpression);
+		Task<TResult> <#= modelName #>MaxAsync<TResult>(Expression<Func<I<#= modelName #>, TResult>> maxExpression, bool cache);
 		
         /// <summary>
         /// Returns the min value 
         /// </summary>
         /// <typeparam name="TResult">TResult</typeparam>
         /// <param name="maxExpression">Expression<Func<I<#= modelName #>, TResult>> maxExpression</param>
+        /// <param name="cache">Enable second level caching</param>
         /// <returns></returns>
-		TResult <#= modelName #>Min<TResult>(Expression<Func<I<#= modelName#>, TResult>> maxExpression);
+		TResult <#= modelName #>Min<TResult>(Expression<Func<I<#= modelName#>, TResult>> maxExpression, bool cache);
 		
         /// <summary>
         /// Returns the min value 
         /// </summary>
         /// <typeparam name="TResult">TResult</typeparam>
         /// <param name="maxExpression">Expression<Func<I<#= modelName #>, TResult>> maxExpression</param>
+        /// <param name="cache">Enable second level caching</param>
         /// <returns></returns>
-		Task<TResult> <#= modelName #>MinAsync<TResult>(Expression<Func<I<#= modelName #>, TResult>> maxExpression);
+		Task<TResult> <#= modelName #>MinAsync<TResult>(Expression<Func<I<#= modelName #>, TResult>> maxExpression, bool cache);
 <#+            } #>
 
 		#endregion
 
+        #region Bulk
+<#+            foreach(var model in CurrentApplicationData.Models){ #>
+<#+ 
+string modelName = DataType.NamingConvention == null ? model.TableName : DataType.NamingConvention.ApplyNamingConvention(model.TableName); #>	
+        /// <summary>
+        ///     Bulk delete entities
+        /// </summary>
+        /// <param name="items"></param>
+        void  <#= modelName #>BulkDelete(IEnumerable<I<#= modelName #>> items);
+
+        /// <summary>
+        ///     Bulk delete entities async
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        Task  <#= modelName #>BulkDeleteAsync(IEnumerable<I<#= modelName #>> items);
+
+        /// <summary>
+        ///     Bulk insert entities
+        /// </summary>
+        /// <param name="items"></param>
+        void  <#= modelName #>BulkInsert(IEnumerable<I<#= modelName #>> items);
+        
+        /// <summary>
+        /// Bulk insert entities async
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        Task  <#= modelName #>BulkInsertAsync(IEnumerable<I<#= modelName #>> items);
+
+        /// <summary>
+        /// Bulk update entities 
+        /// </summary>
+        /// <param name="items"></param>
+        void  <#= modelName #>BulkUpdate(IEnumerable<I<#= modelName #>> items);
+
+        /// <summary>
+        /// Bulk update entities async
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        Task  <#= modelName #>BulkUpdateAsync(IEnumerable<I<#= modelName #>> items);
+<#+            } #>
+
+        #endregion
     }
 }
 
