@@ -1,16 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using DotNetScaffolder.Components.Common.Contract;
 
-namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EFCore.Cache
+namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.NHibernate.Cache
 {
     [Export(typeof(IIDriverTypeCache))]
     [ExportMetadata("NameMetaData", "EFCore memory")]
-    [ExportMetadata("ValueMetaData", "2BC1B0C4-1E41-9146-82CF-599181CE4412")]
+    [ExportMetadata("ValueMetaData", "2BC1B0C4-1E41-9146-82CF-599181CE4411")]
     public class MemoryClass : IIDriverTypeCache
     {
         public Guid Driver { get; set; } 
@@ -24,7 +22,9 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EFCore.Cache
 
             //if (!parameter.EnableCache)
             //{
-                sb.AppendLine($"return new {parameter.Driver.Prefix}{parameter.ContextName} (this.configuration[\"{parameter.ConnectionName}\"]);");
+                sb.AppendLine(
+                    $"var config = <#= {parameter.Driver.ConfigurationClass}.{parameter.Driver.ConfigurationOption}.ConnectionString(this.configuration[\"{parameter.ConnectionName}\"]);");
+                sb.AppendLine($"return new <#= {parameter.Driver.Prefix}<#= ContextData.ContextName #>(config);");
             //}
             //else
             //{

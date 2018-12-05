@@ -4,6 +4,8 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
+using DotNetScaffolder.Core.Configuration;
+
 namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EFCore
 {
     #region Usings
@@ -115,6 +117,15 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EFCore
         [XmlIgnore]
         public List<Validation> ValidationResult { get; set; }
 
+        [XmlIgnore]
+        public IIDriverTypeCache CurrentCache
+        {
+            get
+            {
+                return ScaffoldConfig.DriverTypeCache.FirstOrDefault(c =>
+                    c.Metadata["ValueMetaData"].ToString().ToLower() == Cache.ToString().ToLower())?.Value;
+            }
+        }
         #endregion
 
         #region Public Methods And Operators
@@ -348,6 +359,39 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EFCore
                     rel.ReferencedMultiplicity == RelationshipMultiplicity.Many
                         ? $".WithOne(s => s.{parentTableName}).HasForeignKey(s => s.{rel.ReferencedColumnName}).OnDelete(DeleteBehavior.Restrict);"
                         : $".WithOne(s => s.{parentTableName}).OnDelete(DeleteBehavior.Restrict);");
+            }
+
+            return sb.ToString();
+        }
+
+        public string GenerateBeginUnitOfWork(CacheParameters parameter)
+        {
+            if (this.EnableCache)
+            {
+                return this.CurrentCache.GenerateBeginUnitOfWork(parameter);
+            }
+            else
+            {
+                return $"return new {parameter.Driver.Prefix}{parameter.ContextName} (this.configuration[\"{parameter.ConnectionName}\"]);";
+            }
+
+        }
+
+        public List<string> CacheNamespaces { get; set; }
+        public string GenerateBeginUnitOfWork(IDriver driver, string contextName, string connectionName)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            if (!this.EnableCache)
+            {
+                sb.AppendLine(
+                    $"var config = <#= {driver.ConfigurationClass}.{driver.ConfigurationOption}.ConnectionString(this.configuration[\"{connectionName}\"]);");
+                sb.AppendLine($"return new <#= {driver.Prefix}<#= ContextData.ContextName #>(config);");
+
+            }
+            else
+            {
+                
             }
 
             return sb.ToString();

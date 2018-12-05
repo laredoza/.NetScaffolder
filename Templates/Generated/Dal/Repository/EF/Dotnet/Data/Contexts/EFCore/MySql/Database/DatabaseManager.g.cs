@@ -53,8 +53,8 @@ namespace RepositoryEFDotnet.Data.Context.MySql.EFCore.Database
             {
                 throw new Exception("Invalid configuration specified in database manager");
             }
-
-			return new MySqlFullContext(this.configuration["QUIRCMySql"]);
+            return new MySqlFullContext (this.configuration["QUIRCMySql"]);
+            // End
         }
 	}
 }

@@ -54,8 +54,8 @@ namespace RepositoryEFDotnet.Data.Context.SqlServer.EFCore.Database
             {
                 throw new Exception("Invalid configuration specified in database manager");
             }
-
-			return new SqlServerFullContext(this.configuration["QUIRCSqlServer"]);
+            return new SqlServerFullContext (this.configuration["QUIRCSqlServer"]);
+            // End
         }
 	}
 }

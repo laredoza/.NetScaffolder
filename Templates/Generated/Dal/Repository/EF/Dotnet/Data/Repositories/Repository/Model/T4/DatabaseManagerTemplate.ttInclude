@@ -1,4 +1,8 @@
-﻿<#+
+﻿<#@ import namespace="DotNetScaffolder.Components.Drivers.DefaultDrivers.NHibernate.Cache" #>
+<#@ import namespace="DotNetScaffolder.Components.Drivers.DefaultDrivers.EFCore.Cache" #>
+<#@ import namespace="DotNetScaffolder.Components.Drivers.DefaultDrivers" #>
+
+<#+
 public class DatabaseManagerTemplate : BaseTemplate 
 {
 	public ContextDataType DataType { get; set; }
@@ -55,13 +59,9 @@ namespace <#= ContextData.TransformFullnamespace(DataType.BaseNamespace) #>.<#= 
             {
                 throw new Exception("Invalid configuration specified in database manager");
             }
-
-<#+ if(Driver.DriverType is NhibernateDriverType) {#>
-			var config = <#= Driver.ConfigurationClass #>.<#= Driver.ConfigurationOption #>.ConnectionString(this.configuration["QUIRC<#= Driver.Prefix #>"]);
-			return new <#= Driver.Prefix #><#= ContextData.ContextName #>(config);
-<#+ } else {#>
-			return new <#= Driver.Prefix #><#= ContextData.ContextName #>(this.configuration["QUIRC<#= Driver.Prefix #>"]);
-<#+ } #>
+<#+            var cacheParameters = new CacheParameters { ConnectionName = $"QUIRC{Driver.Prefix}", ContextName = ContextData.ContextName, Driver = Driver}; #>
+            <#= Driver.DriverType.GenerateBeginUnitOfWork(cacheParameters) #>
+            // End
         }
 	}
 }

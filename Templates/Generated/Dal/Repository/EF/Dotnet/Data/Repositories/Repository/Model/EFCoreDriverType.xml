@@ -7,6 +7,6 @@
   <ProxyCreationEnabled>true</ProxyCreationEnabled>
   <UseAlias>true</UseAlias>
   <UseSeperateConfigClasses>false</UseSeperateConfigClasses>
-  <EnableCache>true</EnableCache>
+  <EnableCache>false</EnableCache>
   <Cache>2bc1b0c4-1e41-9146-82cf-599181ce4411</Cache>
 </EFCoreDriverType>

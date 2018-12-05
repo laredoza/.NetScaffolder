@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using DotNetScaffolder.Components.Drivers.DefaultDrivers;
 using DotNetScaffolder.Core.Common.Validation;
 using DotNetScaffolder.Mapping.MetaData.Model;
 
@@ -24,10 +25,14 @@ namespace DotNetScaffolder.Components.Common.Contract
     {
         #region Public Properties
 
+        Guid Cache { get; set; }
+
         /// <summary>
         ///     Gets or sets a value indicating whether create db.
         /// </summary>
         bool CreateDb { get; set; }
+
+        bool EnableCache { get; set; }
 
         /// <summary>
         ///     Gets the id.
@@ -63,10 +68,7 @@ namespace DotNetScaffolder.Components.Common.Contract
 
         bool UseSeperateConfigClasses { get; set; }
 
-        bool EnableCache { get; set; }
-
-        Guid Cache { get; set; }
-
+        IIDriverTypeCache CurrentCache { get;}
         #endregion
 
         #region Public Methods And Operators
@@ -100,6 +102,8 @@ namespace DotNetScaffolder.Components.Common.Contract
             IEnumerable<Table> models,
             IEnumerable<Relationship> relationships = null,
             INamingConvention nc = null);
+
+        string GenerateBeginUnitOfWork(CacheParameters parameter);
 
         #endregion
     }

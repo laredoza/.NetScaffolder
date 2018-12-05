@@ -4,6 +4,8 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
+using DotNetScaffolder.Core.Configuration;
+
 namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.NHibernate
 {
     #region Usings
@@ -332,6 +334,21 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.NHibernate
             return sb.ToString();
         }
 
+        public string GenerateBeginUnitOfWork(CacheParameters parameter)
+        {
+            if (this.EnableCache)
+            {
+                return this.CurrentCache.GenerateBeginUnitOfWork(parameter);
+            }
+            else
+            {
+                StringBuilder sb = new StringBuilder();
+                sb.AppendLine($"var config = {parameter.Driver.ConfigurationClass}.{parameter.Driver.ConfigurationOption}.ConnectionString(this.configuration[\"{parameter.ConnectionName}\"]");
+                sb.AppendLine($"return new <#= Driver.Prefix #><#= ContextData.ContextName #>(config);");
+                return $"return new {parameter.Driver.Prefix}{parameter.ContextName} (this.configuration[\"{parameter.ConnectionName}\"]);";
+            }
+        }
+
         /// <summary>
         /// The validate.
         /// </summary>
@@ -343,6 +360,16 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.NHibernate
         public List<Validation> Validate()
         {
             return this.ValidationResult;
+        }
+
+        [XmlIgnore]
+        public IIDriverTypeCache CurrentCache
+        {
+            get
+            {
+                return ScaffoldConfig.DriverTypeCache.FirstOrDefault(c =>
+                    c.Metadata["ValueMetaData"].ToString().ToLower() == Cache.ToString().ToLower())?.Value;
+            }
         }
 
         #endregion

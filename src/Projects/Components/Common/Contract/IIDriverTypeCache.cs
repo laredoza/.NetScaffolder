@@ -1,6 +1,7 @@
 ﻿#region Usings
 
 using System;
+using System.Collections.Generic;
 using DotNetScaffolder.Components.Drivers.DefaultDrivers;
 
 #endregion
@@ -18,15 +19,17 @@ namespace DotNetScaffolder.Components.Common.Contract
         /// </summary>
         string Name { get; set; }
 
+        List<string> CacheNamespaces { get; set; }
+
         #endregion
 
         #region Public Methods And Operators
 
         /// <summary>
-        ///     Generate Instantiation text
+        ///     Generate begin unit of work
         /// </summary>
         /// <returns></returns>
-        string GenerateInstantiationText(CacheParameters parameter);
+        string GenerateBeginUnitOfWork(CacheParameters parameter);
 
         #endregion
     }
