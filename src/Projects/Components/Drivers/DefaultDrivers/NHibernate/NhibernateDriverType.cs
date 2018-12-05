@@ -106,6 +106,9 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.NHibernate
         /// </summary>
         public bool UseSeperateConfigClasses { get; set; }
 
+        public bool EnableCache { get; set; }
+        public Guid Cache { get; set; }
+
         /// <summary>
         ///     Gets or sets the validation result.
         /// </summary>
@@ -167,6 +170,8 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.NHibernate
                     this.LoggingEnabled = loadedDriverType.LoggingEnabled;
                     this.ProxyCreationEnabled = loadedDriverType.ProxyCreationEnabled;
                     this.UseAlias = loadedDriverType.UseAlias;
+                    this.Cache = loadedDriverType.Cache;
+                    this.EnableCache = loadedDriverType.EnableCache;
                 }
             }
         }

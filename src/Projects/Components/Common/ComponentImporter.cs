@@ -98,6 +98,12 @@ namespace DotNetScaffolder.Components.Common
         [ImportMany]
         public Lazy<ISourceType, IDictionary<string, object>>[] SourceTypes { get; set; }
 
+        /// <summary>
+        /// Gets or sets the driver cache types
+        /// </summary>
+        [ImportMany]
+        public Lazy<IIDriverTypeCache, IDictionary<string, object>>[] DriverTypeCache { get; set; }
+
         #endregion
 
         #region Public Methods And Operators

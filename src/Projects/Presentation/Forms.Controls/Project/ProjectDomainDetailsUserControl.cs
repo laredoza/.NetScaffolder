@@ -571,6 +571,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project
         {
             Logger.Trace("Started Manage Source Clicked");
             manageDataSourceForm.DataSource = SelectedDomain;
+
             manageDataSourceForm.Visible = false;
             manageDataSourceForm.ShowDialog();
             Logger.Trace("Completed Manage Source Clicked");
@@ -819,7 +820,9 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project
 
         public ProjectDomainUserControl ProjectDomainUserControl { get; set; }
 
-
-
+        private void ListViewDrivers_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+        {
+            //btnDriver.Enabled = e.IsSelected;
+        }
     }
 }

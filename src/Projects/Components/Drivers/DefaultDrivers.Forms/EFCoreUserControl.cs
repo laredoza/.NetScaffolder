@@ -4,6 +4,10 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System.Linq;
+using DotNetScaffolder.Core.Common;
+using DotNetScaffolder.Core.Configuration;
+
 namespace DefaultDrivers.Forms
 {
     #region Usings
@@ -32,6 +36,8 @@ namespace DefaultDrivers.Forms
     [ExportMetadata("DriverType", "2BC1B0C4-1E41-9146-82CF-599181CE4411")]
     public partial class EFCoreUserControl : UserControl, IDriverTypeUI
     {
+        private bool loading;
+
         #region Constructors and Destructors
 
         /// <summary>
@@ -74,6 +80,11 @@ namespace DefaultDrivers.Forms
         /// </param>
         public void LoadConfig(object parameters)
         {
+            this.loading = true;
+            comboBoxCaching.DisplayMember = "Text";
+            comboBoxCaching.ValueMember = "Value";
+            comboBoxCaching.DataSource = this.ReturnDriverTypes();
+
             this.DriverType.LoadConfig(parameters);
             this.CreateDb.Checked = this.DriverType.CreateDb;
             this.LazyLoading.Checked = this.DriverType.LazyLoadingEnabled;
@@ -81,6 +92,39 @@ namespace DefaultDrivers.Forms
             this.ProxyCreation.Checked = this.DriverType.ProxyCreationEnabled;
             this.chkColumnOrder.Checked = this.DriverType.IncludeColumnOrder;
             this.chkUseAlias.Checked = this.DriverType.UseAlias;
+
+            this.checkCaching.Checked = this.DriverType.EnableCache;
+            comboBoxCaching.SelectedValue = this.DriverType.Cache;
+            this.groupBoxCaching.Enabled = this.checkCaching.Checked;
+            this.loading = false;
+        }
+
+        /// <summary>
+        ///     Return naming conventions.
+        /// </summary>
+        /// <returns>
+        ///     The <see cref="object[]" />.
+        /// </returns>
+        public object[] ReturnDriverTypes()
+        {
+            var items = new List<ComboboxItem>
+            {
+                new ComboboxItem {Text = "None", Value = Guid.Empty}
+            };
+            foreach (var driverType in ScaffoldConfig.DriverTypeCache)
+            {
+                if (driverType.Metadata["ValueMetaData"].ToString().ToLower() == this.DriverType.Id.ToString().ToLower())
+                {
+                    items.Add(
+                        new ComboboxItem
+                        {
+                            Text = (string)driverType.Metadata["NameMetaData"],
+                            Value = new Guid(driverType.Metadata["ValueMetaData"].ToString())
+                        });
+                }
+            }
+
+            return items.ToArray();
         }
 
         /// <summary>
@@ -98,6 +142,7 @@ namespace DefaultDrivers.Forms
             this.DriverType.IncludeColumnOrder = this.chkColumnOrder.Checked;
             this.DriverType.UseAlias = this.chkUseAlias.Checked;
 
+            DriverType.EnableCache = this.checkCaching.Checked;
             this.DriverType.SaveConfig(parameters);
         }
 
@@ -119,5 +164,23 @@ namespace DefaultDrivers.Forms
         }
 
         #endregion
+
+        private void checkCaching_CheckedChanged(object sender, EventArgs e)
+        {
+            this.groupBoxCaching.Enabled = this.checkCaching.Checked;
+        }
+
+        private void comboBoxCaching_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!loading)
+            {
+                this.DriverType.Cache = new Guid(comboBoxCaching.SelectedValue.ToString());
+            }
+        }
+
+        private void groupBoxCaching_Enter(object sender, EventArgs e)
+        {
+
+        }
     }
 }

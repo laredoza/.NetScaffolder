@@ -57,6 +57,7 @@
     <Compile Include="EF6\EFMySqlDriver.cs" />
     <Compile Include="EF6\EFOracleDriver.cs" />
     <Compile Include="EF6\EFSqlServerDriver.cs" />
+    <Compile Include="EFCore\Cache\MemoryClass.cs" />
     <Compile Include="EFCore\EFCoreSqlServerDriver.cs" />
     <Compile Include="EFCore\EFCoreDriverType.cs" />
     <Compile Include="EFCore\EFCoreMySqlDriver.cs" />

@@ -107,6 +107,9 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6
         /// </summary>
         public bool UseSeperateConfigClasses { get; set; }
 
+        public bool EnableCache { get; set; }
+        public Guid Cache { get; set; }
+
         /// <summary>
         /// Gets or sets the validation result.
         /// </summary>
@@ -175,6 +178,8 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6
                     this.ProxyCreationEnabled = loadedDriverType.ProxyCreationEnabled;
                     this.UseSeperateConfigClasses = loadedDriverType.UseSeperateConfigClasses;
                     this.UseAlias = loadedDriverType.UseAlias;
+                    this.Cache = loadedDriverType.Cache;
+                    this.EnableCache = loadedDriverType.EnableCache;
                 }
             }
         }

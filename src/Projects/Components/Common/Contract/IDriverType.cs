@@ -63,6 +63,10 @@ namespace DotNetScaffolder.Components.Common.Contract
 
         bool UseSeperateConfigClasses { get; set; }
 
+        bool EnableCache { get; set; }
+
+        Guid Cache { get; set; }
+
         #endregion
 
         #region Public Methods And Operators

@@ -47,6 +47,7 @@
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.BtnDrivers = new System.Windows.Forms.Button();
             this.BtnUpdate = new System.Windows.Forms.Button();
+            this.btnDriver = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // ComboBoxPackages
@@ -162,7 +163,7 @@
             // 
             // BtnModel
             // 
-            this.BtnModel.Location = new System.Drawing.Point(354, 314);
+            this.BtnModel.Location = new System.Drawing.Point(275, 314);
             this.BtnModel.Margin = new System.Windows.Forms.Padding(2);
             this.BtnModel.Name = "BtnModel";
             this.BtnModel.Size = new System.Drawing.Size(75, 24);
@@ -189,12 +190,14 @@
             this.DriverType,
             this.columnHeader2});
             this.ListViewDrivers.Location = new System.Drawing.Point(112, 144);
+            this.ListViewDrivers.MultiSelect = false;
             this.ListViewDrivers.Name = "ListViewDrivers";
             this.ListViewDrivers.Size = new System.Drawing.Size(414, 164);
             this.ListViewDrivers.TabIndex = 53;
             this.ListViewDrivers.UseCompatibleStateImageBehavior = false;
             this.ListViewDrivers.View = System.Windows.Forms.View.Details;
             this.ListViewDrivers.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.ListViewDrivers_ItemChecked);
+            this.ListViewDrivers.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.ListViewDrivers_ItemSelectionChanged);
             // 
             // DriverType
             // 
@@ -208,11 +211,11 @@
             // 
             // BtnDrivers
             // 
-            this.BtnDrivers.Location = new System.Drawing.Point(434, 314);
+            this.BtnDrivers.Location = new System.Drawing.Point(355, 314);
             this.BtnDrivers.Name = "BtnDrivers";
             this.BtnDrivers.Size = new System.Drawing.Size(75, 23);
             this.BtnDrivers.TabIndex = 54;
-            this.BtnDrivers.Text = "Drivers";
+            this.BtnDrivers.Text = "Driver Types";
             this.BtnDrivers.UseVisualStyleBackColor = true;
             this.BtnDrivers.Click += new System.EventHandler(this.BtnDrivers_Click);
             // 
@@ -226,10 +229,21 @@
             this.BtnUpdate.UseVisualStyleBackColor = true;
             this.BtnUpdate.Click += new System.EventHandler(this.BtnUpdate_Click);
             // 
+            // btnDriver
+            // 
+            this.btnDriver.Enabled = false;
+            this.btnDriver.Location = new System.Drawing.Point(436, 314);
+            this.btnDriver.Name = "btnDriver";
+            this.btnDriver.Size = new System.Drawing.Size(75, 23);
+            this.btnDriver.TabIndex = 57;
+            this.btnDriver.Text = "Driver";
+            this.btnDriver.UseVisualStyleBackColor = true;
+            // 
             // ProjectDomainDetailsUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btnDriver);
             this.Controls.Add(this.BtnUpdate);
             this.Controls.Add(this.BtnDrivers);
             this.Controls.Add(this.ListViewDrivers);
@@ -274,5 +288,6 @@
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.Button BtnDrivers;
         private System.Windows.Forms.Button BtnUpdate;
+        private System.Windows.Forms.Button btnDriver;
     }
 }

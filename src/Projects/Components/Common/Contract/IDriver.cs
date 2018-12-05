@@ -4,6 +4,8 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System;
+
 namespace DotNetScaffolder.Components.Common.Contract
 {
     #region Usings
@@ -57,13 +59,13 @@ namespace DotNetScaffolder.Components.Common.Contract
 
         string ConfigurationOption { get; set; }
 
+        #endregion
+
         string AsAlias(string name);
 
         string TransformIndex(Index index, INamingConvention nc = null);
 
         int CheckPrecision(Column col);
-
-        #endregion
 
         /// <summary>
         ///     Generate bulk delete
