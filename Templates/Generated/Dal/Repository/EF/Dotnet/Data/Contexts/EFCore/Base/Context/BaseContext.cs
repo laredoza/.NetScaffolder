@@ -823,10 +823,15 @@ namespace RepositoryEFDotnet.Contexts.EFCore.Base.Context
                 items = items.Take(pageSize);
             }
 
+            if (this.cacheProvider != null && cache)
+            {
+                return items.Cacheable();
+            }
+            else
+            {
+                return items;
+            }
             //return this.cacheProvider != null ? items.Cacheable() : items;
-
-
-            return items;
         }
 
         /// <summary>

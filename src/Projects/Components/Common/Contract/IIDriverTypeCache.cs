@@ -12,8 +12,6 @@ namespace DotNetScaffolder.Components.Common.Contract
     {
         #region Public Properties
 
-        Guid Driver { get; set; }
-
         /// <summary>
         ///     Name of cache
         /// </summary>

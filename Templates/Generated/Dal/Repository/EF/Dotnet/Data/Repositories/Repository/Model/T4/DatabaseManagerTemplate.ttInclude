@@ -31,6 +31,9 @@ using <#= nameSpace #>;
 using <#= ContextData.TransformFullnamespace(DataType.BaseNamespace) #>.<#= Driver.ParentFolder #>;
 using System;
 using System.Collections.Generic;
+using StructureMap;
+using StructureMap.Pipeline;
+using RepositoryEFDotnet.Contexts.EFCore.Base;
 
 namespace <#= ContextData.TransformFullnamespace(DataType.BaseNamespace) #>.<#= Driver.Prefix #>.<#= Driver.ParentFolder #>.Database
 {
@@ -38,6 +41,17 @@ namespace <#= ContextData.TransformFullnamespace(DataType.BaseNamespace) #>.<#= 
 	{	
 		private IDictionary<string, string> configuration;
 		
+<#+ if(Driver.DriverType is NhibernateDriverType && Driver.DriverType.EnableCache) {#>
+			// Please setup NHibernate
+<#+ } else if(Driver.DriverType is EFCoreDriverType && Driver.DriverType.EnableCache) {#>
+		protected static IServiceProvider Provider;
+<#+ } #>
+<#+ else if(Driver.DriverType is EFDriverType && Driver.DriverType.EnableCache) {#>
+			// Please setup EF
+<#+ } #>
+
+        
+
 		#region CTOR
 		
 		public DatabaseManager(IDictionary<string, string> configuration)
@@ -48,21 +62,35 @@ namespace <#= ContextData.TransformFullnamespace(DataType.BaseNamespace) #>.<#= 
 		#endregion
 		
         /// <summary>
-        /// The begin unit of work.
-        /// </summary>
-        /// <returns>
-        /// The <see cref="IUnitOfWork"/>.
-        /// </returns>
-        public virtual IUnitOfWork BeginUnitOfWork()
-        {
-            if (this.configuration == null || !this.configuration.ContainsKey("QUIRC<#= Driver.Prefix #>"))
-            {
-                throw new Exception("Invalid configuration specified in database manager");
-            }
-<#+            var cacheParameters = new CacheParameters { ConnectionName = $"QUIRC{Driver.Prefix}", ContextName = ContextData.ContextName, Driver = Driver}; #>
+	    /// The register unit of work.
+	    /// </summary>
+	    /// <param name="configuration">
+	    /// The configuration.
+	    /// </param>
+	    /// <param name="container">
+	    /// The container.
+	    /// </param>
+	    /// <param name="serviceProvider">
+	    /// The service provider.
+	    /// </param>
+	    /// <exception cref="Exception">
+	    /// </exception>
+	    public void RegisterUnitOfWork(
+	        IDataConfiguration configuration,
+	        IContainer container,
+	        IServiceProvider serviceProvider = null)
+	    {
+	        if (configuration == null || configuration.ConnectionStrings == null
+	                                  || !configuration.ConnectionStrings.ContainsKey("QUIRCSqlServer"))
+	        {
+	            throw new Exception("Invalid configuration specified in database manager");
+	        }
+
+<#+var cacheParameters = new CacheParameters { ConnectionName = $"QUIRC{Driver.Prefix}", ContextName = ContextData.ContextName, Driver = Driver}; #>
             <#= Driver.DriverType.GenerateBeginUnitOfWork(cacheParameters) #>
             // End
-        }
+	    }
+        
 	}
 }
 <#+

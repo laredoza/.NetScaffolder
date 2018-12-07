@@ -57,11 +57,12 @@
     <Compile Include="EF6\EFMySqlDriver.cs" />
     <Compile Include="EF6\EFOracleDriver.cs" />
     <Compile Include="EF6\EFSqlServerDriver.cs" />
-    <Compile Include="EFCore\Cache\MemoryClass.cs" />
+    <Compile Include="EFCore\Cache\RedisCache.cs" />
+    <Compile Include="EFCore\Cache\MemoryCache.cs" />
     <Compile Include="EFCore\EFCoreSqlServerDriver.cs" />
     <Compile Include="EFCore\EFCoreDriverType.cs" />
     <Compile Include="EFCore\EFCoreMySqlDriver.cs" />
-    <Compile Include="NHibernate\Cache\MemoryClass.cs" />
+    <Compile Include="NHibernate\Cache\MemoryCache.cs" />
     <Compile Include="NHibernate\NhibernateDriverType.cs" />
     <Compile Include="NHibernate\NHibernateOracleDriver.cs" />
     <Compile Include="NHibernate\NHibernateMySqlDriver.cs" />

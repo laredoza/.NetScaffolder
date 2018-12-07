@@ -7,6 +7,9 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System;
+using StructureMap;
+
 namespace RepositoryEFDotnet.Core.Base
 {
     /// <summary>
@@ -16,13 +19,7 @@ namespace RepositoryEFDotnet.Core.Base
     {
         #region Public Methods And Operators
 
-        /// <summary>
-        /// The begin unit of work.
-        /// </summary>
-        /// <returns>
-        /// The <see cref="IUnitOfWork"/>.
-        /// </returns>
-        IUnitOfWork BeginUnitOfWork();
+        void RegisterUnitOfWork(IDataConfiguration configuration, IContainer container, IServiceProvider serviceProvider = null);
 
         #endregion
     }

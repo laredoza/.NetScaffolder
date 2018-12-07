@@ -25,6 +25,9 @@ using System.Configuration;
 using RepositoryEFDotnet.Data.Context.EFCore;
 using System;
 using System.Collections.Generic;
+using StructureMap;
+using StructureMap.Pipeline;
+using RepositoryEFDotnet.Contexts.EFCore.Base;
 
 namespace RepositoryEFDotnet.Data.Context.MySql.EFCore.Database
 {
@@ -32,6 +35,10 @@ namespace RepositoryEFDotnet.Data.Context.MySql.EFCore.Database
 	{	
 		private IDictionary<string, string> configuration;
 		
+		protected static IServiceProvider Provider;
+
+        
+
 		#region CTOR
 		
 		public DatabaseManager(IDictionary<string, string> configuration)
@@ -42,19 +49,43 @@ namespace RepositoryEFDotnet.Data.Context.MySql.EFCore.Database
 		#endregion
 		
         /// <summary>
-        /// The begin unit of work.
-        /// </summary>
-        /// <returns>
-        /// The <see cref="IUnitOfWork"/>.
-        /// </returns>
-        public virtual IUnitOfWork BeginUnitOfWork()
-        {
-            if (this.configuration == null || !this.configuration.ContainsKey("QUIRCMySql"))
-            {
-                throw new Exception("Invalid configuration specified in database manager");
-            }
-            return new MySqlFullContext (this.configuration["QUIRCMySql"]);
+	    /// The register unit of work.
+	    /// </summary>
+	    /// <param name="configuration">
+	    /// The configuration.
+	    /// </param>
+	    /// <param name="container">
+	    /// The container.
+	    /// </param>
+	    /// <param name="serviceProvider">
+	    /// The service provider.
+	    /// </param>
+	    /// <exception cref="Exception">
+	    /// </exception>
+	    public void RegisterUnitOfWork(
+	        IDataConfiguration configuration,
+	        IContainer container,
+	        IServiceProvider serviceProvider = null)
+	    {
+	        if (configuration == null || configuration.ConnectionStrings == null
+	                                  || !configuration.ConnectionStrings.ContainsKey("QUIRCSqlServer"))
+	        {
+	            throw new Exception("Invalid configuration specified in database manager");
+	        }
+
+            Provider = ConfigureServices.GetInMemoryCacheServiceProvider();
+             EFSecondLevelCache.Core.EFServiceProvider.ApplicationServices = Provider;
+
+             container.Configure(
+                 config =>
+                 {
+                    config.For<IUnitOfWork>().LifecycleIs(Lifecycles.Transient).Use<MySqlFullContext>()
+                         .Ctor<string>("connectionString").Is(configuration.ConnectionStrings["QUIRCMySql"])
+                         .Ctor<IServiceProvider>("provider").Is(Provider);
+                 });
+
             // End
-        }
+	    }
+        
 	}
 }

@@ -116,7 +116,7 @@ namespace DefaultDrivers.Forms
             };
             foreach (var driverType in ScaffoldConfig.DriverTypeCache)
             {
-                if (driverType.Metadata["ValueMetaData"].ToString().ToLower() == DriverType.Id.ToString().ToLower())
+                if (driverType.Metadata["DriverType"].ToString().ToLower() == DriverType.Id.ToString().ToLower())
                 {
                     items.Add(
                         new ComboboxItem

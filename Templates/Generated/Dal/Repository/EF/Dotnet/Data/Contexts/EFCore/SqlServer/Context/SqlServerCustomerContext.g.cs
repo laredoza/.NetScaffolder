@@ -54,7 +54,7 @@ namespace RepositoryEFDotnet.Data.Customers.EFCore
 	    {
 	        if (!string.IsNullOrEmpty(ConnectionString) && !optionsBuilder.IsConfigured)
 	        {
-				optionsBuilder.UseLazyLoadingProxies().UseSqlServer(ConnectionString);
+				optionsBuilder.UseSqlServer(ConnectionString);
 	        }
 	    }
 		
@@ -101,8 +101,8 @@ namespace RepositoryEFDotnet.Data.Customers.EFCore
         
 		protected override void SetupContext()
         {
-            //Configuration.LazyLoadingEnabled = true;
-            //Configuration.ProxyCreationEnabled = true;
+            //Configuration.LazyLoadingEnabled = false;
+            //Configuration.ProxyCreationEnabled = false;
             //Configuration.AutoDetectChangesEnabled = false;
 			
 			//Database.SetInitializer(new CreateDatabaseIfNotExists<SqlServerCustomerContext>());
