@@ -83,7 +83,7 @@ namespace RepositoryEFDotnet.Data.Context.MySql.NHib.Database
                              z.Cache.ReadWrite();
                      })
                  )).Cache(
-                     o => o.ProviderClass<NHibernate.Caches.CoreMemoryCache.CoreMemoryCacheProvider>().UseQueryCache().UseSecondLevelCache()
+                     o => o.ProviderClass<NHibernate.Caches.CoreDistributedCache.CoreDistributedCacheProvider>().UseQueryCache().UseSecondLevelCache()
              ).BuildConfiguration();
              Factory = Configuration.BuildSessionFactory();
 

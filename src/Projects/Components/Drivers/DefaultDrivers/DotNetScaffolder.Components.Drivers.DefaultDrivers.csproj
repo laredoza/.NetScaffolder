@@ -62,6 +62,7 @@
     <Compile Include="EFCore\EFCoreSqlServerDriver.cs" />
     <Compile Include="EFCore\EFCoreDriverType.cs" />
     <Compile Include="EFCore\EFCoreMySqlDriver.cs" />
+    <Compile Include="NHibernate\Cache\RedisCache.cs" />
     <Compile Include="NHibernate\Cache\MemoryCache.cs" />
     <Compile Include="NHibernate\INHibernateConfig.cs" />
     <Compile Include="NHibernate\NhibernateDriverType.cs" />

@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="NHibernate.Caches.CoreDistributedCache.Redis" Version="5.4.0" />
     <PackageReference Include="NHibernate.Caches.CoreMemoryCache" Version="5.4.0" />
   </ItemGroup>
 

@@ -10,10 +10,10 @@ using DotNetScaffolder.Components.Common.Contract;
 namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.NHibernate.Cache
 {
     [Export(typeof(IIDriverTypeCache))]
-    [ExportMetadata("NameMetaData", "NHibernate Memory")]
-    [ExportMetadata("ValueMetaData", "BB7460EE-5C1D-4E64-8515-C0DFD3752CB6")]
+    [ExportMetadata("NameMetaData", "NHibernate Redis")]
+    [ExportMetadata("ValueMetaData", "BB7460EE-5C1D-4E64-8515-C0DFD3752CB7")]
     [ExportMetadata("DriverType", "BB7460EE-5C1D-4E64-8515-C0DFD3752CB6")]
-    public class MemoryCache : IIDriverTypeCache
+    public class RedisCache : IIDriverTypeCache
     {
         #region Constructors and Destructors
 
@@ -47,7 +47,7 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.NHibernate.Cache
             sb.AppendLine("                     })");
             sb.AppendLine("                 )).Cache(");
             sb.AppendLine(
-                "                     o => o.ProviderClass<NHibernate.Caches.CoreMemoryCache.CoreMemoryCacheProvider>().UseQueryCache().UseSecondLevelCache()");
+                "                     o => o.ProviderClass<NHibernate.Caches.CoreDistributedCache.CoreDistributedCacheProvider>().UseQueryCache().UseSecondLevelCache()");
             sb.AppendLine("             ).BuildConfiguration();");
 
 
