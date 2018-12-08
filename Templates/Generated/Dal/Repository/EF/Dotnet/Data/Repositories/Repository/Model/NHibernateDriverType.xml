@@ -7,6 +7,6 @@
   <ProxyCreationEnabled>true</ProxyCreationEnabled>
   <UseAlias>true</UseAlias>
   <UseSeperateConfigClasses>false</UseSeperateConfigClasses>
-  <EnableCache>true</EnableCache>
-  <Cache>bb7460ee-5c1d-4e64-8515-c0dfd3752cb7</Cache>
+  <EnableCache>false</EnableCache>
+  <Cache>00000000-0000-0000-0000-000000000000</Cache>
 </NhibernateDriverType>
