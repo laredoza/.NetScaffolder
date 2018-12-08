@@ -43,7 +43,8 @@ namespace <#= ContextData.TransformFullnamespace(DataType.BaseNamespace) #>.<#= 
 		
 <#+ if(Driver.DriverType.EnableCache) {#>
     <#+ if(Driver.DriverType is NhibernateDriverType) {#>
-    // Todo: Add Caching
+    private static NHibernate.Cfg.Configuration Configuration;
+	    private static ISessionFactory Factory;  
     <#+ } else if(Driver.DriverType is EFCoreDriverType) {#>
     protected static IServiceProvider Provider;
     <#+                } else if(Driver.DriverType is EFDriverType) {#>
