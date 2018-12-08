@@ -26,6 +26,9 @@ using FluentNHibernate.Cfg;
 using RepositoryEFDotnet.Data.Context.NHib;
 using System;
 using System.Collections.Generic;
+using StructureMap;
+using StructureMap.Pipeline;
+using RepositoryEFDotnet.Contexts.NHib.Base;
 
 namespace RepositoryEFDotnet.Data.Context.Oracle.NHib.Database
 {
@@ -33,6 +36,10 @@ namespace RepositoryEFDotnet.Data.Context.Oracle.NHib.Database
 	{	
 		private IDictionary<string, string> configuration;
 		
+     	private static FluentConfiguration Configuration;
+	    private static ISessionFactory Factory;   
+                
+
 		#region CTOR
 		
 		public DatabaseManager(IDictionary<string, string> configuration)
@@ -43,20 +50,44 @@ namespace RepositoryEFDotnet.Data.Context.Oracle.NHib.Database
 		#endregion
 		
         /// <summary>
-        /// The begin unit of work.
-        /// </summary>
-        /// <returns>
-        /// The <see cref="IUnitOfWork"/>.
-        /// </returns>
-        public virtual IUnitOfWork BeginUnitOfWork()
-        {
-            if (this.configuration == null || !this.configuration.ContainsKey("QUIRCOracle"))
-            {
-                throw new Exception("Invalid configuration specified in database manager");
-            }
+	    /// The register unit of work.
+	    /// </summary>
+	    /// <param name="configuration">
+	    /// The configuration.
+	    /// </param>
+	    /// <param name="container">
+	    /// The container.
+	    /// </param>
+	    /// <param name="serviceProvider">
+	    /// The service provider.
+	    /// </param>
+	    /// <exception cref="Exception">
+	    /// </exception>
+	    public void RegisterUnitOfWork(
+	        IDataConfiguration configuration,
+	        IContainer container,
+	        IServiceProvider serviceProvider = null)
+	    {
+	        if (configuration == null || configuration.ConnectionStrings == null
+	                                  || !configuration.ConnectionStrings.ContainsKey("QUIRCSqlServer"))
+	        {
+	            throw new Exception("Invalid configuration specified in database manager");
+	        }
 
-			var config = OracleDataClientConfiguration.Oracle10.ConnectionString(this.configuration["QUIRCOracle"]);
-			return new OracleFullContext(config);
-        }
+            var nHibConfig = OracleClientConfiguration.Oracle10.ConnectionString(configuration.ConnectionStrings["QUIRCOracle"]);
+             Configuration = Fluently.Configure().Database(nHibConfig)
+               .Mappings(o => o.FluentMappings.AddFromAssembly(System.Reflection.Assembly.GetExecutingAssembly()));
+             Factory = Configuration.BuildSessionFactory();
+
+             container.Configure(
+             config =>
+             {
+                config.For<IUnitOfWork>().LifecycleIs(Lifecycles.Transient).Use<OracleFullContext>()
+                 .Ctor<ISessionFactory>("factory").Is(Factory);
+             });
+
+            // End
+	    }
+        
 	}
 }
