@@ -33,7 +33,7 @@ using System;
 using System.Collections.Generic;
 using StructureMap;
 using StructureMap.Pipeline;
-using RepositoryEFDotnet.Contexts.EFCore.Base;
+using RepositoryEFDotnet.Contexts.<#= Driver.ParentFolder #>.Base;
 
 namespace <#= ContextData.TransformFullnamespace(DataType.BaseNamespace) #>.<#= Driver.Prefix #>.<#= Driver.ParentFolder #>.Database
 {
@@ -41,16 +41,24 @@ namespace <#= ContextData.TransformFullnamespace(DataType.BaseNamespace) #>.<#= 
 	{	
 		private IDictionary<string, string> configuration;
 		
-<#+ if(Driver.DriverType is NhibernateDriverType && Driver.DriverType.EnableCache) {#>
-			// Please setup NHibernate
-<#+ } else if(Driver.DriverType is EFCoreDriverType && Driver.DriverType.EnableCache) {#>
-		protected static IServiceProvider Provider;
-<#+ } #>
-<#+ else if(Driver.DriverType is EFDriverType && Driver.DriverType.EnableCache) {#>
-			// Please setup EF
-<#+ } #>
+<#+ if(Driver.DriverType.EnableCache) {#>
+    <#+ if(Driver.DriverType is NhibernateDriverType) {#>
+    // Todo: Add Caching
+    <#+ } else if(Driver.DriverType is EFCoreDriverType) {#>
+    protected static IServiceProvider Provider;
+    <#+                } else if(Driver.DriverType is EFDriverType) {#>
+			// Please setup EF  
+    <#+ } #>
+<#+ } else {#>
+    <#+ if(Driver.DriverType is NhibernateDriverType) {#>
+ 	private static FluentConfiguration Configuration;
+	    private static ISessionFactory Factory;   
+    <#+  } else if(Driver.DriverType is EFCoreDriverType) {#>
 
-        
+    <#+  } else if(Driver.DriverType is EFDriverType) {#>
+     // Please setup EF
+    <#+ } #>            
+<#+ } #>
 
 		#region CTOR
 		

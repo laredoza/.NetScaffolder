@@ -8,7 +8,7 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.NHibernate.Cache
 {
     [Export(typeof(IIDriverTypeCache))]
     [ExportMetadata("NameMetaData", "NHibernate Memory")]
-    [ExportMetadata("ValueMetaData", "BB7460EE-5C1D-4E64-8515-C0DFD3752CB6)")]
+    [ExportMetadata("ValueMetaData", "BB7460EE-5C1D-4E64-8515-C0DFD3752CB6")]
     [ExportMetadata("DriverType", "BB7460EE-5C1D-4E64-8515-C0DFD3752CB6")]
     public class MemoryCache : IIDriverTypeCache
     {

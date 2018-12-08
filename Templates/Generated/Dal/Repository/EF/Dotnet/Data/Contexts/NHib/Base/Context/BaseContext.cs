@@ -29,7 +29,7 @@ namespace RepositoryEFDotnet.Contexts.NHib.Base.Context
         #region Fields
 
         /// <summary>
-        /// The close factory.
+        ///     The close factory.
         /// </summary>
         private bool closeFactory = true;
 
@@ -39,7 +39,7 @@ namespace RepositoryEFDotnet.Contexts.NHib.Base.Context
         private ISession currentSession;
 
         /// <summary>
-        /// The session factory.
+        ///     The session factory.
         /// </summary>
         private ISessionFactory sessionFactory;
 
@@ -55,58 +55,58 @@ namespace RepositoryEFDotnet.Contexts.NHib.Base.Context
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="BaseContext"/> class.
+        ///     Initializes a new instance of the <see cref="BaseContext" /> class.
         /// </summary>
         /// <param name="config">
-        /// The config.
+        ///     The config.
         /// </param>
         protected BaseContext(FluentConfiguration config)
         {
-            this.closeFactory = true;
+            closeFactory = true;
 
-            this.Configuration = config.Mappings(this.SetupConventions).Mappings(this.ConfigureMappings)
+            Configuration = config.Mappings(SetupConventions).Mappings(ConfigureMappings)
                 .BuildConfiguration();
 
-            this.SetConfig();
+            SetConfig();
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="BaseContext"/> class.
+        ///     Initializes a new instance of the <see cref="BaseContext" /> class.
         /// </summary>
         /// <param name="config">
-        /// The config.
+        ///     The config.
         /// </param>
         protected BaseContext(Configuration config)
         {
-            this.closeFactory = true;
-            this.Configuration = config;
-            this.SetConfig();
+            closeFactory = true;
+            Configuration = config;
+            SetConfig();
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="BaseContext"/> class.
+        ///     Initializes a new instance of the <see cref="BaseContext" /> class.
         /// </summary>
         /// <param name="factory">
-        /// The factory.
+        ///     The factory.
         /// </param>
         protected BaseContext(ISessionFactory factory)
         {
-            this.closeFactory = false;
-            this.sessionFactory = factory;
+            closeFactory = false;
+            sessionFactory = factory;
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="BaseContext"/> class.
+        ///     Initializes a new instance of the <see cref="BaseContext" /> class.
         /// </summary>
         /// <param name="config">
-        /// The config.
+        ///     The config.
         /// </param>
         protected BaseContext(IPersistenceConfigurer config)
         {
-            this.Configuration = Fluently.Configure().Database(config).Mappings(this.SetupConventions)
-                .Mappings(this.ConfigureMappings).BuildConfiguration();
+            Configuration = Fluently.Configure().Database(config).Mappings(SetupConventions)
+                .Mappings(ConfigureMappings).BuildConfiguration();
 
-            this.SetConfig();
+            SetConfig();
         }
 
         #endregion
@@ -116,7 +116,7 @@ namespace RepositoryEFDotnet.Contexts.NHib.Base.Context
         /// <summary>
         ///     Gets the configuration.
         /// </summary>
-        public Configuration Configuration { get; private set; }
+        public Configuration Configuration { get; }
 
         #endregion
 
@@ -129,20 +129,20 @@ namespace RepositoryEFDotnet.Contexts.NHib.Base.Context
         {
             get
             {
-                this.CreateSession();
-                return this.currentSession;
+                CreateSession();
+                return currentSession;
             }
         }
 
         /// <summary>
-        /// Gets the session factory.
+        ///     Gets the session factory.
         /// </summary>
         private ISessionFactory SessionFactory
         {
             get
             {
-                this.CreateSessionFactory();
-                return this.sessionFactory;
+                CreateSessionFactory();
+                return sessionFactory;
             }
         }
 
@@ -151,153 +151,155 @@ namespace RepositoryEFDotnet.Contexts.NHib.Base.Context
         #region Public Methods And Operators
 
         /// <summary>
-        /// The add.
+        ///     The add.
         /// </summary>
         /// <param name="item">
-        /// The item.
+        ///     The item.
         /// </param>
         /// <typeparam name="TEntity">
         /// </typeparam>
         /// <returns>
-        /// The <see cref="bool"/>.
+        ///     The <see cref="bool" />.
         /// </returns>
         public virtual bool Add<TEntity>(TEntity item)
             where TEntity : class
         {
-            this.CurrentSession.Persist(item);
+            CurrentSession.Persist(item);
             return true;
         }
 
         /// <summary>
-        /// The add async.
+        ///     The add async.
         /// </summary>
         /// <param name="item">
-        /// The item.
+        ///     The item.
         /// </param>
         /// <typeparam name="TEntity">
         /// </typeparam>
         /// <returns>
-        /// The <see cref="Task"/>.
+        ///     The <see cref="Task" />.
         /// </returns>
         /// <exception cref="NotImplementedException">
         /// </exception>
         public async Task<bool> AddAsync<TEntity>(TEntity item)
             where TEntity : class
         {
-            await this.CurrentSession.PersistAsync(item);
+            await CurrentSession.PersistAsync(item);
             return true;
         }
 
         /// <summary>
-        /// The add range.
+        ///     The add range.
         /// </summary>
         /// <param name="items">
-        /// The items.
+        ///     The items.
         /// </param>
         /// <typeparam name="TEntity">
         /// </typeparam>
         /// <returns>
-        /// The <see cref="bool"/>.
+        ///     The <see cref="bool" />.
         /// </returns>
         public virtual bool AddRange<TEntity>(IEnumerable<TEntity> items)
             where TEntity : class
         {
-            foreach (var ent in items)
-            {
-                this.Add(ent);
-            }
+            foreach (var ent in items) Add(ent);
 
             return true;
         }
 
         /// <summary>
-        /// The add range async.
+        ///     The add range async.
         /// </summary>
         /// <param name="items">
-        /// The items.
+        ///     The items.
         /// </param>
         /// <typeparam name="TEntity">
         /// </typeparam>
         /// <returns>
-        /// The <see cref="Task"/>.
+        ///     The <see cref="Task" />.
         /// </returns>
         /// <exception cref="NotImplementedException">
         /// </exception>
         public virtual async Task<bool> AddRangeAsync<TEntity>(IEnumerable<TEntity> items)
             where TEntity : class
         {
-            return await Task.Run(() => this.AddRange(items));
+            return await Task.Run(() => AddRange(items));
         }
 
         /// <summary>
-        /// The all matching.
+        ///     The all matching.
         /// </summary>
         /// <param name="filter">
-        /// The filter.
+        ///     The filter.
         /// </param>
+        /// <param name="cache"></param>
         /// <param name="includes">
-        /// The includes.
+        ///     The includes.
         /// </param>
         /// <typeparam name="TEntity">
         /// </typeparam>
         /// <returns>
-        /// The <see cref="IEnumerable"/>.
+        ///     The <see cref="IEnumerable" />.
         /// </returns>
         public virtual IEnumerable<TEntity> AllMatching<TEntity>(
             Expression<Func<TEntity, bool>> filter,
+            bool cache,
             params Expression<Func<TEntity, object>>[] includes)
             where TEntity : class
         {
-            return this.GetQueryable(filter, 0, 0, null, false, includes).ToList();
+            return GetQueryable(cache, filter, 0, 0, null, false, includes).ToList();
         }
 
         /// <summary>
-        /// The all matching async.
+        ///     The all matching async.
         /// </summary>
         /// <param name="filter">
-        /// The filter.
+        ///     The filter.
         /// </param>
+        /// <param name="cache"></param>
         /// <param name="includes">
-        /// The includes.
+        ///     The includes.
         /// </param>
         /// <typeparam name="TEntity">
         /// </typeparam>
         /// <returns>
-        /// The <see cref="Task"/>.
+        ///     The <see cref="Task" />.
         /// </returns>
         public virtual async Task<IEnumerable<TEntity>> AllMatchingAsync<TEntity>(
             Expression<Func<TEntity, bool>> filter,
+            bool cache,
             params Expression<Func<TEntity, object>>[] includes)
             where TEntity : class
         {
-            return await this.GetQueryable(filter, 0, 0, null, false, includes).ToListAsync();
+            return await GetQueryable(cache, filter, 0, 0, null, false, includes).ToListAsync();
         }
 
         /// <summary>
-        /// The all matching paged.
+        ///     The all matching paged.
         /// </summary>
         /// <param name="filter">
-        /// The filter.
+        ///     The filter.
         /// </param>
         /// <param name="startPage">
-        /// The start page.
+        ///     The start page.
         /// </param>
         /// <param name="pageSize">
-        /// The page size.
+        ///     The page size.
         /// </param>
         /// <param name="orderBy">
-        /// The order by.
+        ///     The order by.
         /// </param>
+        /// <param name="cache"></param>
         /// <param name="orderByAsc">
-        /// The order by asc.
+        ///     The order by asc.
         /// </param>
         /// <param name="includes">
-        /// The includes.
+        ///     The includes.
         /// </param>
         /// <typeparam name="TEntity">
         /// </typeparam>
         /// <returns>
-        /// The <see cref="IEnumerable"/>.
+        ///     The <see cref="IEnumerable" />.
         /// </returns>
         /// <exception cref="NotImplementedException">
         /// </exception>
@@ -306,137 +308,150 @@ namespace RepositoryEFDotnet.Contexts.NHib.Base.Context
             int startPage,
             int pageSize,
             IEnumerable<string> orderBy,
+            bool cache,
             bool orderByAsc = false,
             params Expression<Func<TEntity, object>>[] includes)
             where TEntity : class
         {
-            return this.GetQueryable(filter, startPage, pageSize, orderBy, orderByAsc, includes).ToList();
+            return GetQueryable(cache, filter, startPage, pageSize, orderBy, orderByAsc, includes).ToList();
         }
 
         /// <summary>
-        /// The all matching paged async.
+        ///     The all matching paged async.
         /// </summary>
         /// <param name="filter">
-        /// The filter.
+        ///     The filter.
         /// </param>
         /// <param name="startPage">
-        /// The start page.
+        ///     The start page.
         /// </param>
         /// <param name="pageSize">
-        /// The page size.
+        ///     The page size.
         /// </param>
         /// <param name="orderBy">
-        /// The order by.
+        ///     The order by.
         /// </param>
+        /// <param name="cache"></param>
         /// <param name="orderByAsc">
-        /// The order by asc.
+        ///     The order by asc.
         /// </param>
         /// <param name="includes">
-        /// The includes.
+        ///     The includes.
         /// </param>
         /// <typeparam name="TEntity">
         /// </typeparam>
         /// <returns>
-        /// The <see cref="Task"/>.
+        ///     The <see cref="Task" />.
         /// </returns>
         public virtual async Task<IEnumerable<TEntity>> AllMatchingPagedAsync<TEntity>(
             Expression<Func<TEntity, bool>> filter,
             int startPage,
             int pageSize,
             IEnumerable<string> orderBy,
+            bool cache,
             bool orderByAsc = false,
             params Expression<Func<TEntity, object>>[] includes)
             where TEntity : class
         {
-            return await this.GetQueryable(filter, startPage, pageSize, orderBy, orderByAsc, includes).ToListAsync();
+            return await GetQueryable(cache, filter, startPage, pageSize, orderBy, orderByAsc, includes).ToListAsync();
         }
 
         /// <summary>
-        /// The any.
+        ///     The any.
         /// </summary>
         /// <param name="filter">
-        /// The filter.
+        ///     The filter.
         /// </param>
+        /// <param name="cache"></param>
         /// <param name="includes">
-        /// The includes.
+        ///     The includes.
         /// </param>
         /// <typeparam name="TEntity">
         /// </typeparam>
         /// <returns>
-        /// The <see cref="bool"/>.
+        ///     The <see cref="bool" />.
         /// </returns>
         public virtual bool Any<TEntity>(
-            Expression<Func<TEntity, bool>> filter = null,
+            Expression<Func<TEntity, bool>> filter,
+            bool cache,
             params Expression<Func<TEntity, object>>[] includes)
             where TEntity : class
         {
-            return this.GetQueryable(filter, 0, 0, null, false, includes).Any();
+            return GetQueryable(cache, filter, 0, 0, null, false, includes).Any();
         }
 
         /// <summary>
-        /// The any.
+        ///     The any.
         /// </summary>
+        /// <param name="cache"></param>
         /// <param name="includes">
-        /// The includes.
+        ///     The includes.
         /// </param>
         /// <typeparam name="TEntity">
         /// </typeparam>
         /// <returns>
-        /// The <see cref="bool"/>.
+        ///     The <see cref="bool" />.
         /// </returns>
-        public virtual bool Any<TEntity>(params Expression<Func<TEntity, object>>[] includes)
+        public virtual bool Any<TEntity>(
+            bool cache,
+            params Expression<Func<TEntity, object>>[] includes)
             where TEntity : class
         {
-            return this.GetQueryable(null, 0, 0, null, false, includes).Any();
+            return GetQueryable(cache, null, 0, 0, null, false, includes).Any();
         }
 
         /// <summary>
-        /// The any async.
+        ///     The any async.
         /// </summary>
         /// <param name="filter">
-        /// The filter.
+        ///     The filter.
         /// </param>
+        /// <param name="cache"></param>
         /// <param name="includes">
-        /// The includes.
+        ///     The includes.
         /// </param>
         /// <typeparam name="TEntity">
         /// </typeparam>
         /// <returns>
-        /// The <see cref="Task"/>.
+        ///     The <see cref="Task" />.
         /// </returns>
         public virtual async Task<bool> AnyAsync<TEntity>(
-            Expression<Func<TEntity, bool>> filter = null,
+            Expression<Func<TEntity, bool>> filter,
+            bool cache,
             params Expression<Func<TEntity, object>>[] includes)
             where TEntity : class
         {
-            return await this.GetQueryable(filter, 0, 0, null, false, includes).AnyAsync();
+            return await GetQueryable(cache, filter, 0, 0, null, false, includes).AnyAsync();
         }
 
         /// <summary>
-        /// The any async.
+        ///     The any async.
         /// </summary>
+        /// <param name="cache"></param>
         /// <param name="includes">
-        /// The includes.
+        ///     The includes.
         /// </param>
         /// <typeparam name="TEntity">
         /// </typeparam>
         /// <returns>
-        /// The <see cref="Task"/>.
+        ///     The <see cref="Task" />.
         /// </returns>
-        public virtual async Task<bool> AnyAsync<TEntity>(params Expression<Func<TEntity, object>>[] includes)
+        public virtual async Task<bool> AnyAsync<TEntity>(
+            bool cache,
+            params Expression<Func<TEntity, object>>[] includes)
             where TEntity : class
         {
-            return await this.GetQueryable(null, 0, 0, null, false, includes).AnyAsync();
+            return await GetQueryable(cache, null, 0, 0, null, false, includes).AnyAsync();
         }
 
         /// <summary>
-        /// The apply current values.
+        ///     The apply current values.
         /// </summary>
         /// <param name="original">
-        /// The original.
+        ///     The original.
         /// </param>
         /// <param name="current">
-        /// The current.
+        ///     The current.
         /// </param>
         /// <typeparam name="TEntity">
         /// </typeparam>
@@ -448,6 +463,36 @@ namespace RepositoryEFDotnet.Contexts.NHib.Base.Context
             throw new NotImplementedException("NHibernate.BaseContext.ApplyCurrentValues()");
         }
 
+        public void BulkDelete<TEntity>(IEnumerable<TEntity> items) where TEntity : class
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task BulkDeleteAsync<TEntity>(IEnumerable<TEntity> items) where TEntity : class
+        {
+            throw new NotImplementedException();
+        }
+
+        public void BulkInsert<TEntity>(IEnumerable<TEntity> items) where TEntity : class
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task BulkInsertAsync<TEntity>(IEnumerable<TEntity> items) where TEntity : class
+        {
+            throw new NotImplementedException();
+        }
+
+        public void BulkUpdate<TEntity>(IEnumerable<TEntity> items) where TEntity : class
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task BulkUpdateAsync<TEntity>(IEnumerable<TEntity> items) where TEntity : class
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         ///     The commit.
         /// </summary>
@@ -456,14 +501,14 @@ namespace RepositoryEFDotnet.Contexts.NHib.Base.Context
         /// </returns>
         public virtual int Commit()
         {
-            if (this.currentSession?.Transaction != null && this.currentSession.Transaction.IsActive)
+            if (currentSession?.Transaction != null && currentSession.Transaction.IsActive)
             {
-                this.CurrentSession?.Transaction.Commit();
-                this.CloseTransaction();
+                CurrentSession?.Transaction.Commit();
+                CloseTransaction();
             }
             else
             {
-                this.CurrentSession.Flush();
+                CurrentSession.Flush();
             }
 
             return 1;
@@ -477,17 +522,28 @@ namespace RepositoryEFDotnet.Contexts.NHib.Base.Context
         /// </returns>
         public virtual async Task<int> CommitAsync()
         {
-            if (this.CurrentSession?.Transaction != null && this.CurrentSession.Transaction.IsActive)
+            if (CurrentSession?.Transaction != null && CurrentSession.Transaction.IsActive)
             {
-                await this.CurrentSession?.Transaction.CommitAsync();
-                this.CloseTransaction();
+                await CurrentSession?.Transaction.CommitAsync();
+                CloseTransaction();
             }
             else
             {
-                await this.CurrentSession?.FlushAsync();
+                await CurrentSession?.FlushAsync();
             }
 
             return 1;
+        }
+
+        public virtual ICriteria CreateCriteria<TEntity>()
+            where TEntity : class
+        {
+            return CurrentSession.CreateCriteria(typeof(TEntity));
+        }
+
+        public virtual ICriteria CreateCriteria(string entityName)
+        {
+            return CurrentSession.CreateCriteria(entityName);
         }
 
         /// <summary>
@@ -495,15 +551,12 @@ namespace RepositoryEFDotnet.Contexts.NHib.Base.Context
         /// </summary>
         public void CreateSchema()
         {
-            if (this.Configuration == null)
-            {
-                return;
-            }
+            if (Configuration == null) return;
 
-            var export = new SchemaExport(this.Configuration);
+            var export = new SchemaExport(Configuration);
 
 #if DEBUG
-            this.CreateLogDir();
+            CreateLogDir();
 
             using (var file = new FileStream(
                 @"C:\TestOutput\NHibernate\CreateSchema.sql",
@@ -512,7 +565,7 @@ namespace RepositoryEFDotnet.Contexts.NHib.Base.Context
             {
                 using (var sw = new StreamWriter(file))
                 {
-                    export.Execute(true, true, false, this.CurrentSession?.Connection, sw);
+                    export.Execute(true, true, false, CurrentSession?.Connection, sw);
                 }
             }
 
@@ -526,20 +579,17 @@ namespace RepositoryEFDotnet.Contexts.NHib.Base.Context
         /// </summary>
         public virtual void Dispose()
         {
-            if (this.CurrentSession != null)
+            if (CurrentSession != null)
             {
-                if (this.CurrentSession.Transaction != null && this.CurrentSession.Transaction.IsActive)
-                {
-                    // wasn't committed, so must rollback
-                    this.CurrentSession.Transaction.Rollback();
-                }
+                if (CurrentSession.Transaction != null && CurrentSession.Transaction.IsActive)
+                    CurrentSession.Transaction.Rollback();
 
                 // CurrentSessionContext.Unbind(_sessionFactory);
-                this.CloseTransaction();
-                this.CloseSession();
+                CloseTransaction();
+                CloseSession();
             }
 
-            this.CloseSessionFactory();
+            CloseSessionFactory();
         }
 
         /// <summary>
@@ -547,284 +597,282 @@ namespace RepositoryEFDotnet.Contexts.NHib.Base.Context
         /// </summary>
         public void DropSchema()
         {
-            if (this.Configuration == null)
-            {
-                return;
-            }
+            if (Configuration == null) return;
 
-            var export = new SchemaExport(this.Configuration);
-            export.Execute(true, true, true, this.CurrentSession?.Connection, null);
+            var export = new SchemaExport(Configuration);
+            export.Execute(true, true, true, CurrentSession?.Connection, null);
         }
 
         /// <summary>
-        /// The execute command.
+        ///     The execute command.
         /// </summary>
         /// <param name="sqlCommand">
-        /// The sql command.
+        ///     The sql command.
         /// </param>
         /// <param name="parameters">
-        /// The parameters.
+        ///     The parameters.
         /// </param>
         /// <returns>
-        /// The <see cref="int"/>.
+        ///     The <see cref="int" />.
         /// </returns>
         public virtual int ExecuteCommand(string sqlCommand, IEnumerable<IDataParameter> parameters = null)
         {
-            return this.CreateQuery(sqlCommand, parameters).UniqueResult<int>();
+            return CreateQuery(sqlCommand, parameters).UniqueResult<int>();
         }
 
         /// <summary>
-        /// The execute command async.
+        ///     The execute command async.
         /// </summary>
         /// <param name="sqlCommand">
-        /// The sql command.
+        ///     The sql command.
         /// </param>
         /// <param name="parameters">
-        /// The parameters.
+        ///     The parameters.
         /// </param>
         /// <returns>
-        /// The <see cref="Task"/>.
+        ///     The <see cref="Task" />.
         /// </returns>
         public virtual async Task<int> ExecuteCommandAsync(
             string sqlCommand,
             IEnumerable<IDataParameter> parameters = null)
         {
-            return await this.CreateQuery(sqlCommand, parameters).UniqueResultAsync<int>();
+            return await CreateQuery(sqlCommand, parameters).UniqueResultAsync<int>();
         }
 
         /// <summary>
-        /// The create query.
-        /// </summary>
-        /// <param name="sqlCommand">
-        /// The sql command.
-        /// </param>
-        /// <param name="parameters">
-        /// The parameters.
-        /// </param>
-        /// <returns>
-        /// The <see cref="ISQLQuery"/>.
-        /// </returns>
-        private ISQLQuery CreateQuery(string sqlCommand, IEnumerable<IDataParameter> parameters = null)
-        {
-            var query = this.CurrentSession.CreateSQLQuery(sqlCommand);
-
-            if (parameters != null)
-            {
-                foreach (var param in parameters)
-                {
-                    query.SetParameter(param.ParameterName, param.Value);
-                }
-            }
-
-            return query;
-        }
-
-        /// <summary>
-        /// The execute query.
+        ///     The execute query.
         /// </summary>
         /// <param name="sqlQuery">
-        /// The sql query.
+        ///     The sql query.
         /// </param>
         /// <param name="parameters">
-        /// The parameters.
+        ///     The parameters.
         /// </param>
         /// <typeparam name="TEntity">
         /// </typeparam>
         /// <returns>
-        /// The <see cref="IQueryable"/>.
+        ///     The <see cref="IQueryable" />.
         /// </returns>
         public virtual IQueryable<TEntity> ExecuteQuery<TEntity>(
             string sqlQuery,
             IEnumerable<IDataParameter> parameters = null)
             where TEntity : class
         {
-            var query = this.CreateQuery(sqlQuery, parameters);
+            var query = CreateQuery(sqlQuery, parameters);
             query.AddEntity(typeof(TEntity));
             return query.Enumerable<TEntity>().AsQueryable();
         }
 
         /// <summary>
-        /// The execute query async.
+        ///     The execute query async.
         /// </summary>
         /// <param name="sqlQuery">
-        /// The sql query.
+        ///     The sql query.
         /// </param>
         /// <param name="parameters">
-        /// The parameters.
+        ///     The parameters.
         /// </param>
         /// <typeparam name="TEntity">
         /// </typeparam>
         /// <returns>
-        /// The <see cref="Task"/>.
+        ///     The <see cref="Task" />.
         /// </returns>
         public virtual async Task<IQueryable<TEntity>> ExecuteQueryAsync<TEntity>(
             string sqlQuery,
             IEnumerable<IDataParameter> parameters = null)
             where TEntity : class
         {
-            var query = this.CreateQuery(sqlQuery, parameters).AddEntity(typeof(TEntity));
+            var query = CreateQuery(sqlQuery, parameters).AddEntity(typeof(TEntity));
             var result = await query.EnumerableAsync<TEntity>();
             return result.AsQueryable();
         }
 
         /// <summary>
-        /// The first or default.
+        ///     The first or default.
         /// </summary>
         /// <param name="filter">
-        /// The filter.
+        ///     The filter.
         /// </param>
+        /// <param name="cache"></param>
         /// <param name="includes">
-        /// The includes.
+        ///     The includes.
         /// </param>
         /// <typeparam name="TEntity">
         /// </typeparam>
         /// <returns>
-        /// The <see cref="TEntity"/>.
+        ///     The <see cref="TEntity" />.
         /// </returns>
         public virtual TEntity FirstOrDefault<TEntity>(
-            Expression<Func<TEntity, bool>> filter = null,
+            Expression<Func<TEntity, bool>> filter,
+            bool cache,
             params Expression<Func<TEntity, object>>[] includes)
             where TEntity : class
         {
-            return this.GetQueryable(filter, 0, 0, null, false, includes).FirstOrDefault();
+            return GetQueryable(cache, filter, 0, 0, null, false, includes).FirstOrDefault();
         }
 
         /// <summary>
-        /// The first or default.
+        ///     The first or default.
         /// </summary>
+        /// <param name="cache"></param>
         /// <param name="includes">
-        /// The includes.
+        ///     The includes.
         /// </param>
         /// <typeparam name="TEntity">
         /// </typeparam>
         /// <returns>
-        /// The <see cref="TEntity"/>.
+        ///     The <see cref="TEntity" />.
         /// </returns>
-        public virtual TEntity FirstOrDefault<TEntity>(params Expression<Func<TEntity, object>>[] includes)
+        public virtual TEntity FirstOrDefault<TEntity>(
+            bool cache,
+            params Expression<Func<TEntity, object>>[] includes)
             where TEntity : class
         {
-            return this.GetQueryable(null, 0, 0, null, false, includes).FirstOrDefault();
+            return GetQueryable(cache, null, 0, 0, null, false, includes).FirstOrDefault();
         }
 
         /// <summary>
-        /// The first or default async.
+        ///     The first or default async.
         /// </summary>
+        /// <param name="cache"></param>
         /// <param name="filter">
-        /// The filter.
+        ///     The filter.
         /// </param>
         /// <param name="includes">
-        /// The includes.
+        ///     The includes.
         /// </param>
         /// <typeparam name="TEntity">
         /// </typeparam>
         /// <returns>
-        /// The <see cref="Task"/>.
+        ///     The <see cref="Task" />.
         /// </returns>
         public virtual async Task<TEntity> FirstOrDefaultAsync<TEntity>(
+            bool cache,
             Expression<Func<TEntity, bool>> filter,
             params Expression<Func<TEntity, object>>[] includes)
             where TEntity : class
         {
-            return await this.GetQueryable(filter, 0, 0, null, false, includes).FirstOrDefaultAsync();
+            return await GetQueryable(cache, filter, 0, 0, null, false, includes).FirstOrDefaultAsync();
         }
 
         /// <summary>
-        /// The first or default async.
+        ///     The first or default async.
         /// </summary>
+        /// <param name="cache"></param>
         /// <param name="includes">
-        /// The includes.
+        ///     The includes.
         /// </param>
         /// <typeparam name="TEntity">
         /// </typeparam>
         /// <returns>
-        /// The <see cref="Task"/>.
+        ///     The <see cref="Task" />.
         /// </returns>
         public virtual async Task<TEntity> FirstOrDefaultAsync<TEntity>(
+            bool cache,
             params Expression<Func<TEntity, object>>[] includes)
             where TEntity : class
         {
-            return await this.FirstOrDefaultAsync(null, includes);
+            return await FirstOrDefaultAsync(cache, null, includes);
         }
 
         /// <summary>
-        /// The get.
+        ///     The get.
         /// </summary>
+        /// <param name="cache"></param>
         /// <param name="filter">
-        /// The filter.
+        ///     The filter.
         /// </param>
         /// <param name="includes">
-        /// The includes.
+        ///     The includes.
         /// </param>
         /// <typeparam name="TEntity">
         /// </typeparam>
         /// <returns>
-        /// The <see cref="TEntity"/>.
+        ///     The <see cref="TEntity" />.
         /// </returns>
         public virtual TEntity Get<TEntity>(
+            bool cache,
             Expression<Func<TEntity, bool>> filter,
             params Expression<Func<TEntity, object>>[] includes)
             where TEntity : class
         {
-            return this.GetQueryable(filter, 0, 0, null, false, includes).FirstOrDefault();
+            return GetQueryable(cache, filter, 0, 0, null, false, includes).FirstOrDefault();
         }
 
-        /// <summary>
-        /// The get all.
-        /// </summary>
-        /// <param name="includes">
-        /// The includes.
-        /// </param>
-        /// <typeparam name="TEntity">
-        /// </typeparam>
-        /// <returns>
-        /// The <see cref="IEnumerable"/>.
-        /// </returns>
-        public virtual IEnumerable<TEntity> GetAll<TEntity>(params Expression<Func<TEntity, object>>[] includes)
-            where TEntity : class
+        public virtual TEntity Get<TEntity, IDType>(IDType id)
         {
-            return this.GetQueryable(null, 0, 0, null, false, includes).ToList();
+            //Todo: Caching
+            return CurrentSession.Get<TEntity>(id);
+        }
+
+        public TEntity Get<TEntity>(object id)
+        {
+            return CurrentSession.Get<TEntity>(id);
         }
 
         /// <summary>
-        /// The get all async.
+        ///     The get all.
         /// </summary>
+        /// <param name="cache"></param>
         /// <param name="includes">
-        /// The includes.
+        ///     The includes.
         /// </param>
         /// <typeparam name="TEntity">
         /// </typeparam>
         /// <returns>
-        /// The <see cref="Task"/>.
+        ///     The <see cref="IEnumerable" />.
         /// </returns>
-        public virtual async Task<IEnumerable<TEntity>> GetAllAsync<TEntity>(
+        public virtual IEnumerable<TEntity> GetAll<TEntity>(
+            bool cache,
             params Expression<Func<TEntity, object>>[] includes)
             where TEntity : class
         {
-            return await this.GetQueryable(null, 0, 0, null, false, includes).ToListAsync();
+            return GetQueryable(cache, null, 0, 0, null, false, includes).ToList();
         }
 
         /// <summary>
-        /// The get all paged.
+        ///     The get all async.
         /// </summary>
-        /// <param name="startPage">
-        /// The start page.
-        /// </param>
-        /// <param name="pageSize">
-        /// The page size.
-        /// </param>
-        /// <param name="orderBy">
-        /// The order by.
-        /// </param>
-        /// <param name="orderByAscending">
-        /// The order by ascending.
-        /// </param>
+        /// <param name="cache"></param>
         /// <param name="includes">
-        /// The includes.
+        ///     The includes.
         /// </param>
         /// <typeparam name="TEntity">
         /// </typeparam>
         /// <returns>
-        /// The <see cref="IEnumerable"/>.
+        ///     The <see cref="Task" />.
+        /// </returns>
+        public virtual async Task<IEnumerable<TEntity>> GetAllAsync<TEntity>(
+            bool cache,
+            params Expression<Func<TEntity, object>>[] includes)
+            where TEntity : class
+        {
+            return await GetQueryable(cache, null, 0, 0, null, false, includes).ToListAsync();
+        }
+
+        /// <summary>
+        ///     The get all paged.
+        /// </summary>
+        /// <param name="startPage">
+        ///     The start page.
+        /// </param>
+        /// <param name="pageSize">
+        ///     The page size.
+        /// </param>
+        /// <param name="orderBy">
+        ///     The order by.
+        /// </param>
+        /// <param name="cache"></param>
+        /// <param name="orderByAscending">
+        ///     The order by ascending.
+        /// </param>
+        /// <param name="includes">
+        ///     The includes.
+        /// </param>
+        /// <typeparam name="TEntity">
+        /// </typeparam>
+        /// <returns>
+        ///     The <see cref="IEnumerable" />.
         /// </returns>
         /// <exception cref="NotImplementedException">
         /// </exception>
@@ -832,97 +880,104 @@ namespace RepositoryEFDotnet.Contexts.NHib.Base.Context
             int startPage,
             int pageSize,
             IEnumerable<string> orderBy,
+            bool cache,
             bool orderByAscending = true,
             params Expression<Func<TEntity, object>>[] includes)
             where TEntity : class
         {
-            return this.GetQueryable(null, startPage, pageSize, orderBy, orderByAscending, includes).ToList();
+            return GetQueryable(cache, null, startPage, pageSize, orderBy, orderByAscending, includes).ToList();
         }
 
         /// <summary>
-        /// The get all paged async.
+        ///     The get all paged async.
         /// </summary>
         /// <param name="startPage">
-        /// The start page.
+        ///     The start page.
         /// </param>
         /// <param name="pageSize">
-        /// The page size.
+        ///     The page size.
         /// </param>
         /// <param name="orderBy">
-        /// The order by.
+        ///     The order by.
         /// </param>
+        /// <param name="cache"></param>
         /// <param name="orderByAscending">
-        /// The order by ascending.
+        ///     The order by ascending.
         /// </param>
         /// <param name="includes">
-        /// The includes.
+        ///     The includes.
         /// </param>
         /// <typeparam name="TEntity">
         /// </typeparam>
         /// <returns>
-        /// The <see cref="Task"/>.
+        ///     The <see cref="Task" />.
         /// </returns>
         public virtual async Task<IEnumerable<TEntity>> GetAllPagedAsync<TEntity>(
             int startPage,
             int pageSize,
             IEnumerable<string> orderBy,
+            bool cache,
             bool orderByAscending = true,
             params Expression<Func<TEntity, object>>[] includes)
             where TEntity : class
         {
-            return await this.GetQueryable(null, startPage, pageSize, orderBy, orderByAscending, includes)
-                       .ToListAsync();
+            return await GetQueryable(cache, null, startPage, pageSize, orderBy, orderByAscending, includes)
+                .ToListAsync();
         }
 
         /// <summary>
-        /// The get async.
+        ///     The get async.
         /// </summary>
+        /// <param name="cache"></param>
         /// <param name="filter">
-        /// The filter.
+        ///     The filter.
         /// </param>
         /// <param name="includes">
-        /// The includes.
+        ///     The includes.
         /// </param>
         /// <typeparam name="TEntity">
         /// </typeparam>
         /// <returns>
-        /// The <see cref="Task"/>.
+        ///     The <see cref="Task" />.
         /// </returns>
         public virtual async Task<TEntity> GetAsync<TEntity>(
+            bool cache,
             Expression<Func<TEntity, bool>> filter,
             params Expression<Func<TEntity, object>>[] includes)
             where TEntity : class
         {
-            return await this.GetQueryable(filter, 0, 0, null, false, includes).FirstOrDefaultAsync();
+            return await GetQueryable(cache, filter, 0, 0, null, false, includes).FirstOrDefaultAsync();
         }
 
         /// <summary>
-        /// The get queryable.
+        ///     The get queryable.
         /// </summary>
+        /// <param name="cache"></param>
         /// <param name="filter">
-        /// The filter.
+        ///     The filter.
         /// </param>
         /// <param name="pageGo">
-        /// The page go.
+        ///     The page go.
         /// </param>
         /// <param name="pageSize">
-        /// The page size.
+        ///     The page size.
         /// </param>
         /// <param name="orderBy">
-        /// The order by.
+        ///     The order by.
         /// </param>
         /// <param name="orderAscendent">
-        /// The order ascendent.
+        ///     The order ascendent.
         /// </param>
         /// <param name="includes">
-        /// The includes.
+        ///     The includes.
         /// </param>
         /// <typeparam name="TEntity">
         /// </typeparam>
         /// <returns>
-        /// The <see cref="IQueryable"/>.
+        ///     The <see cref="IQueryable" />.
         /// </returns>
         public virtual IQueryable<TEntity> GetQueryable<TEntity>(
+            bool cache,
             Expression<Func<TEntity, bool>> filter = null,
             int pageGo = 0,
             int pageSize = 0,
@@ -931,20 +986,13 @@ namespace RepositoryEFDotnet.Contexts.NHib.Base.Context
             params Expression<Func<TEntity, object>>[] includes)
             where TEntity : class
         {
-            var query = this.CurrentSession.Query<TEntity>();
+            var query = CurrentSession.Query<TEntity>();
 
             if (includes != null && includes.Any())
-            {
                 foreach (var includeExpr in includes)
-                {
                     query = query.Fetch(includeExpr);
-                }
-            }
 
-            if (filter != null)
-            {
-                query = query.Where(filter);
-            }
+            if (filter != null) query = query.Where(filter);
 
             if (pageSize > 0)
             {
@@ -953,9 +1001,7 @@ namespace RepositoryEFDotnet.Contexts.NHib.Base.Context
                     var orderBylist = orderBy.ToList();
 
                     foreach (var i in orderBylist.Where(o => !string.IsNullOrEmpty(o)))
-                    {
                         query = QueryableUtils.CallOrderBy(query, i, orderAscendent);
-                    }
 
                     query = query.Skip(pageSize * (pageGo - 1));
                 }
@@ -963,198 +1009,232 @@ namespace RepositoryEFDotnet.Contexts.NHib.Base.Context
                 query = query.Take(pageSize);
             }
 
-            return query.WithOptions(o => o.SetCacheable(true));
+            if (cache)
+            {
+                return query.WithOptions(o => o.SetCacheable(true));
+            }
+            else
+            {
+                return query;
+            }
+            
         }
 
         /// <summary>
-        /// The min.
+        ///     The max.
         /// </summary>
+        /// <param name="cache"></param>
         /// <param name="filter">
-        /// The filter.
+        ///     The filter.
         /// </param>
         /// <typeparam name="TEntity">
         /// </typeparam>
         /// <typeparam name="TResult">
         /// </typeparam>
         /// <returns>
-        /// The <see cref="TResult"/>.
+        ///     The <see cref="TResult" />.
         /// </returns>
-        public virtual TResult Min<TEntity, TResult>(Expression<Func<TEntity, TResult>> filter)
+        public virtual TResult Max<TEntity, TResult>(
+            bool cache,
+            Expression<Func<TEntity, TResult>> filter)
             where TEntity : class
         {
-            return this.GetQueryable<TEntity>().Min(filter);
+            return GetQueryable<TEntity>(cache).Max(filter);
         }
 
         /// <summary>
-        /// The min async.
+        ///     The max async.
         /// </summary>
+        /// <param name="cache"></param>
         /// <param name="filter">
-        /// The filter.
+        ///     The filter.
         /// </param>
         /// <typeparam name="TEntity">
         /// </typeparam>
         /// <typeparam name="TResult">
         /// </typeparam>
         /// <returns>
-        /// The <see cref="Task"/>.
-        /// </returns>
-        public virtual async Task<TResult> MinAsync<TEntity, TResult>(Expression<Func<TEntity, TResult>> filter)
-            where TEntity : class
-        {
-            return await this.GetQueryable<TEntity>().MinAsync(filter);
-        }
-
-        /// <summary>
-        /// The max.
-        /// </summary>
-        /// <param name="filter">
-        /// The filter.
-        /// </param>
-        /// <typeparam name="TEntity">
-        /// </typeparam>
-        /// <typeparam name="TResult">
-        /// </typeparam>
-        /// <returns>
-        /// The <see cref="TResult"/>.
-        /// </returns>
-        public virtual TResult Max<TEntity, TResult>(Expression<Func<TEntity, TResult>> filter)
-            where TEntity : class
-        {
-            return this.GetQueryable<TEntity>().Max(filter);
-        }
-
-        /// <summary>
-        /// The max async.
-        /// </summary>
-        /// <param name="filter">
-        /// The filter.
-        /// </param>
-        /// <typeparam name="TEntity">
-        /// </typeparam>
-        /// <typeparam name="TResult">
-        /// </typeparam>
-        /// <returns>
-        /// The <see cref="Task"/>.
+        ///     The <see cref="Task" />.
         /// </returns>
         /// <exception cref="NotImplementedException">
         /// </exception>
-        public virtual async Task<TResult> MaxAsync<TEntity, TResult>(Expression<Func<TEntity, TResult>> filter)
+        public virtual async Task<TResult> MaxAsync<TEntity, TResult>(
+            bool cache,
+            Expression<Func<TEntity, TResult>> filter)
             where TEntity : class
         {
-            return await this.GetQueryable<TEntity>().MaxAsync(filter);
+            return await GetQueryable<TEntity>(cache).MaxAsync(filter);
         }
 
         /// <summary>
-        /// The modify.
+        ///     The min.
+        /// </summary>
+        /// <param name="cache"></param>
+        /// <param name="filter">
+        ///     The filter.
+        /// </param>
+        /// <typeparam name="TEntity">
+        /// </typeparam>
+        /// <typeparam name="TResult">
+        /// </typeparam>
+        /// <returns>
+        ///     The <see cref="TResult" />.
+        /// </returns>
+        public virtual TResult Min<TEntity, TResult>(
+            bool cache,
+            Expression<Func<TEntity, TResult>> filter)
+            where TEntity : class
+        {
+            return GetQueryable<TEntity>(cache).Min(filter);
+        }
+
+        /// <summary>
+        ///     The min async.
+        /// </summary>
+        /// <param name="cache"></param>
+        /// <param name="filter">
+        ///     The filter.
+        /// </param>
+        /// <typeparam name="TEntity">
+        /// </typeparam>
+        /// <typeparam name="TResult">
+        /// </typeparam>
+        /// <returns>
+        ///     The <see cref="Task" />.
+        /// </returns>
+        public virtual async Task<TResult> MinAsync<TEntity, TResult>(
+            bool cache,
+            Expression<Func<TEntity, TResult>> filter)
+            where TEntity : class
+        {
+            return await GetQueryable<TEntity>(cache).MinAsync(filter);
+        }
+
+        /// <summary>
+        ///     The modify.
         /// </summary>
         /// <param name="item">
-        /// The item.
+        ///     The item.
         /// </param>
         /// <typeparam name="TEntity">
         /// </typeparam>
         /// <returns>
-        /// The <see cref="bool"/>.
+        ///     The <see cref="bool" />.
         /// </returns>
         public virtual bool Modify<TEntity>(TEntity item)
             where TEntity : class
         {
-            this.CurrentSession.Update(item);
+            CurrentSession.Update(item);
             return true;
         }
 
         /// <summary>
-        /// The modify async.
+        ///     The modify async.
         /// </summary>
         /// <param name="item">
-        /// The item.
+        ///     The item.
         /// </param>
         /// <typeparam name="TEntity">
         /// </typeparam>
         /// <returns>
-        /// The <see cref="Task"/>.
+        ///     The <see cref="Task" />.
         /// </returns>
         public virtual async Task<bool> ModifyAsync<TEntity>(TEntity item)
             where TEntity : class
         {
-            await this.CurrentSession.UpdateAsync(item);
+            await CurrentSession.UpdateAsync(item);
             return true;
         }
 
+        public void NoTracking<TEntity>(TEntity item) where TEntity : class
+        {
+            throw new NotImplementedException();
+        }
+
+        public virtual IQueryOver<TEntity, TEntity> QueryOver<TEntity>()
+            where TEntity : class
+        {
+            return CurrentSession.QueryOver<TEntity>();
+        }
+
+        public virtual IQueryOver<TEntity> QueryOver<TEntity>(string entityName, Expression<Func<TEntity>> expr)
+            where TEntity : class
+        {
+            return CurrentSession.QueryOver(entityName, expr);
+        }
+
         /// <summary>
-        /// The remove.
+        ///     The remove.
         /// </summary>
         /// <param name="item">
-        /// The item.
+        ///     The item.
         /// </param>
         /// <typeparam name="TEntity">
         /// </typeparam>
         /// <returns>
-        /// The <see cref="bool"/>.
+        ///     The <see cref="bool" />.
         /// </returns>
         public virtual bool Remove<TEntity>(TEntity item)
             where TEntity : class
         {
-            this.CurrentSession.Delete(item);
+            CurrentSession.Delete(item);
             return true;
         }
 
         /// <summary>
-        /// The remove async.
+        ///     The remove async.
         /// </summary>
         /// <param name="item">
-        /// The item.
+        ///     The item.
         /// </param>
         /// <typeparam name="TEntity">
         /// </typeparam>
         /// <returns>
-        /// The <see cref="Task"/>.
+        ///     The <see cref="Task" />.
         /// </returns>
         public virtual async Task<bool> RemoveAsync<TEntity>(TEntity item)
             where TEntity : class
         {
-            await this.CurrentSession.DeleteAsync(item);
+            await CurrentSession.DeleteAsync(item);
             return true;
         }
 
         /// <summary>
-        /// The remove range.
+        ///     The remove range.
         /// </summary>
         /// <param name="items">
-        /// The items.
+        ///     The items.
         /// </param>
         /// <typeparam name="TEntity">
         /// </typeparam>
         /// <returns>
-        /// The <see cref="bool"/>.
+        ///     The <see cref="bool" />.
         /// </returns>
         public virtual bool RemoveRange<TEntity>(IEnumerable<TEntity> items)
             where TEntity : class
         {
-            foreach (var item in items)
-            {
-                this.Remove(item);
-            }
+            foreach (var item in items) Remove(item);
 
             return true;
         }
 
         /// <summary>
-        /// The remove range async.
+        ///     The remove range async.
         /// </summary>
         /// <param name="items">
-        /// The items.
+        ///     The items.
         /// </param>
         /// <typeparam name="TEntity">
         /// </typeparam>
         /// <returns>
-        /// The <see cref="Task"/>.
+        ///     The <see cref="Task" />.
         /// </returns>
         /// <exception cref="NotImplementedException">
         /// </exception>
         public virtual async Task<bool> RemoveRangeAsync<TEntity>(IEnumerable<TEntity> items)
             where TEntity : class
         {
-            return await Task.Run(() => this.RemoveRange(items));
+            return await Task.Run(() => RemoveRange(items));
         }
 
         /// <summary>
@@ -1162,14 +1242,12 @@ namespace RepositoryEFDotnet.Contexts.NHib.Base.Context
         /// </summary>
         public virtual void Rollback()
         {
-            if (this.CurrentSession?.Transaction != null && this.CurrentSession.Transaction.IsActive)
-            {
-                this.CurrentSession?.Transaction.Rollback();
-            }
+            if (CurrentSession?.Transaction != null && CurrentSession.Transaction.IsActive)
+                CurrentSession?.Transaction.Rollback();
 
-            this.CloseTransaction();
-            this.CloseSession();
-            this.CloseSessionFactory();
+            CloseTransaction();
+            CloseSession();
+            CloseSessionFactory();
         }
 
         /// <summary>
@@ -1180,14 +1258,12 @@ namespace RepositoryEFDotnet.Contexts.NHib.Base.Context
         /// </returns>
         public virtual async Task RollbackAsync()
         {
-            if (this.CurrentSession?.Transaction != null && this.CurrentSession.Transaction.IsActive)
-            {
-                await this.CurrentSession?.Transaction.RollbackAsync();
-            }
+            if (CurrentSession?.Transaction != null && CurrentSession.Transaction.IsActive)
+                await CurrentSession?.Transaction.RollbackAsync();
 
-            this.CloseTransaction();
-            this.CloseSession();
-            this.CloseSessionFactory();
+            CloseTransaction();
+            CloseSession();
+            CloseSessionFactory();
         }
 
         /// <summary>
@@ -1217,12 +1293,9 @@ namespace RepositoryEFDotnet.Contexts.NHib.Base.Context
         /// </summary>
         public virtual void StartTransaction()
         {
-            if (this.CurrentSession?.Transaction != null && this.CurrentSession.Transaction.IsActive)
-            {
-                return;
-            }
+            if (CurrentSession?.Transaction != null && CurrentSession.Transaction.IsActive) return;
 
-            this.CurrentSession?.Transaction?.Begin(IsolationLevel.ReadCommitted);
+            CurrentSession?.Transaction?.Begin(IsolationLevel.ReadCommitted);
         }
 
         /// <summary>
@@ -1233,50 +1306,9 @@ namespace RepositoryEFDotnet.Contexts.NHib.Base.Context
         /// </returns>
         public virtual async Task StartTransactionAsync()
         {
-            if (this.CurrentSession.Transaction != null && this.CurrentSession.Transaction.IsActive)
-            {
-                return;
-            }
+            if (CurrentSession.Transaction != null && CurrentSession.Transaction.IsActive) return;
 
-            await Task.Run(() => this.CurrentSession.BeginTransaction(IsolationLevel.ReadCommitted));
-        }
-
-        public void NoTracking<TEntity>(TEntity item) where TEntity : class
-        {
-            throw new NotImplementedException();
-        }
-
-        public virtual ICriteria CreateCriteria<TEntity>()
-            where TEntity : class
-        {
-            return this.CurrentSession.CreateCriteria(typeof(TEntity));
-        }
-
-        public virtual ICriteria CreateCriteria(string entityName)
-        {
-            return this.CurrentSession.CreateCriteria(entityName);
-        }
-
-        public virtual IQueryOver<TEntity, TEntity> QueryOver<TEntity>()
-            where TEntity : class
-        {
-            return this.CurrentSession.QueryOver<TEntity>();
-        }
-
-        public virtual IQueryOver<TEntity> QueryOver<TEntity>(string entityName, Expression<Func<TEntity>> expr)
-            where TEntity : class
-        {
-            return this.CurrentSession.QueryOver(entityName, expr);
-        }
-
-        public virtual TEntity Get<TEntity, IDType>(IDType id)
-        {
-            return this.CurrentSession.Get<TEntity>(id);
-        }
-
-        public TEntity Get<TEntity>(object id)
-        {
-            return this.CurrentSession.Get<TEntity>(id);
+            await Task.Run(() => CurrentSession.BeginTransaction(IsolationLevel.ReadCommitted));
         }
 
         #endregion
@@ -1284,10 +1316,10 @@ namespace RepositoryEFDotnet.Contexts.NHib.Base.Context
         #region Other Methods
 
         /// <summary>
-        /// The configure mappings.
+        ///     The configure mappings.
         /// </summary>
         /// <param name="config">
-        /// The config.
+        ///     The config.
         /// </param>
         protected abstract void ConfigureMappings(MappingConfiguration config);
 
@@ -1299,23 +1331,20 @@ namespace RepositoryEFDotnet.Contexts.NHib.Base.Context
         /// </param>
         protected void SetConfig()
         {
-            if (this.Configuration == null)
-            {
-                throw new Exception("Configuration cannot be null");
-            }
+            if (Configuration == null) throw new Exception("Configuration cannot be null");
 
-            this.Configuration.SetInterceptor(new AuditInterceptor());
+            Configuration.SetInterceptor(new AuditInterceptor());
 
             SchemaMetadataUpdater.QuoteTableAndColumns(
-                this.Configuration,
-                Dialect.GetDialect(this.Configuration.Properties));
+                Configuration,
+                Dialect.GetDialect(Configuration.Properties));
         }
 
         /// <summary>
-        /// The setup conventions.
+        ///     The setup conventions.
         /// </summary>
         /// <param name="config">
-        /// The config.
+        ///     The config.
         /// </param>
         /// <exception cref="Exception">
         /// </exception>
@@ -1359,37 +1388,28 @@ namespace RepositoryEFDotnet.Contexts.NHib.Base.Context
         /// </summary>
         private void CloseSession()
         {
-            if (this.currentSession != null && this.currentSession.IsOpen)
-            {
-                this.currentSession.Close();
-            }
+            if (currentSession != null && currentSession.IsOpen) currentSession.Close();
 
-            this.currentSession?.Dispose();
-            this.currentSession = null;
+            currentSession?.Dispose();
+            currentSession = null;
         }
 
         /// <summary>
-        /// The close session factory.
+        ///     The close session factory.
         /// </summary>
         private void CloseSessionFactory()
         {
-            if (!this.closeFactory)
+            if (!closeFactory) return;
+
+            if (sessionFactory != null)
             {
-                return;
+                if (!sessionFactory.IsClosed) sessionFactory.Close();
+
+                sessionFactory.Dispose();
             }
 
-            if (this.sessionFactory != null)
-            {
-                if (!this.sessionFactory.IsClosed)
-                {
-                    this.sessionFactory.Close();
-                }
-
-                this.sessionFactory.Dispose();
-            }
-
-            this.sessionFactory = null;
-            this.closeFactory = true;
+            sessionFactory = null;
+            closeFactory = true;
         }
 
         /// <summary>
@@ -1397,12 +1417,9 @@ namespace RepositoryEFDotnet.Contexts.NHib.Base.Context
         /// </summary>
         private void CloseTransaction()
         {
-            this.currentSession?.Transaction?.Dispose();
+            currentSession?.Transaction?.Dispose();
 
-            if (this.currentSession != null && this.currentSession.IsConnected)
-            {
-                this.currentSession?.Disconnect();
-            }
+            if (currentSession != null && currentSession.IsConnected) currentSession?.Disconnect();
         }
 
 #if DEBUG
@@ -1413,12 +1430,33 @@ namespace RepositoryEFDotnet.Contexts.NHib.Base.Context
         private void CreateLogDir()
         {
             if (!Directory.Exists(@"C:\TestOutput\NHibernate\"))
-            {
                 Directory.CreateDirectory(@"C:\TestOutput\NHibernate\");
-            }
         }
 
 #endif
+
+        /// <summary>
+        ///     The create query.
+        /// </summary>
+        /// <param name="sqlCommand">
+        ///     The sql command.
+        /// </param>
+        /// <param name="parameters">
+        ///     The parameters.
+        /// </param>
+        /// <returns>
+        ///     The <see cref="ISQLQuery" />.
+        /// </returns>
+        private ISQLQuery CreateQuery(string sqlCommand, IEnumerable<IDataParameter> parameters = null)
+        {
+            var query = CurrentSession.CreateSQLQuery(sqlCommand);
+
+            if (parameters != null)
+                foreach (var param in parameters)
+                    query.SetParameter(param.ParameterName, param.Value);
+
+            return query;
+        }
 
         /// <summary>
         ///     The create session.
@@ -1427,34 +1465,25 @@ namespace RepositoryEFDotnet.Contexts.NHib.Base.Context
         /// </exception>
         private void CreateSession()
         {
-            this.CreateSessionFactory();
+            CreateSessionFactory();
 
-            if (this.currentSession == null || !this.currentSession.IsOpen)
-            {
-                this.currentSession = this.SessionFactory?.OpenSession();
-            }
+            if (currentSession == null || !currentSession.IsOpen) currentSession = SessionFactory?.OpenSession();
 
-            if (this.currentSession != null && !this.currentSession.IsConnected)
-            {
-                this.currentSession.Reconnect();
-            }
+            if (currentSession != null && !currentSession.IsConnected) currentSession.Reconnect();
         }
 
         /// <summary>
-        /// The create session factory.
+        ///     The create session factory.
         /// </summary>
         /// <exception cref="Exception">
         /// </exception>
         private void CreateSessionFactory()
         {
-            if (this.sessionFactory == null || this.sessionFactory.IsClosed)
+            if (sessionFactory == null || sessionFactory.IsClosed)
             {
-                if (this.Configuration == null)
-                {
-                    throw new Exception("Configuration cannot be null");
-                }
+                if (Configuration == null) throw new Exception("Configuration cannot be null");
 
-                this.sessionFactory = this.Configuration.BuildSessionFactory();
+                sessionFactory = Configuration.BuildSessionFactory();
             }
         }
 

@@ -8,6 +8,8 @@ namespace RepositoryEFDotnet.Contexts.EFCore.Base
 {
     public class ConfigureServices
     {
+        #region Public Methods And Operators
+
         public static IServiceProvider GetInMemoryCacheServiceProvider()
         {
             var services = new ServiceCollection();
@@ -27,6 +29,10 @@ namespace RepositoryEFDotnet.Contexts.EFCore.Base
 
             return services.BuildServiceProvider();
         }
+
+        #endregion
+
+        #region Other Methods
 
         private static void AddInMemoryCacheServiceProvider(IServiceCollection services)
         {
@@ -52,14 +58,14 @@ namespace RepositoryEFDotnet.Contexts.EFCore.Base
 
             const string redisConfigurationKey = "redis";
             services.AddSingleton(typeof(ICacheManagerConfiguration),
-                new CacheManager.Core.ConfigurationBuilder()
+                new ConfigurationBuilder()
                     .WithJsonSerializer(jss, jss)
                     .WithUpdateMode(CacheUpdateMode.Up)
                     .WithRedisConfiguration(redisConfigurationKey, config =>
-                        {
-                            config.WithAllowAdmin()
-                                .WithEndpoint("localhost", 6379);
-                        })
+                    {
+                        config.WithAllowAdmin()
+                            .WithEndpoint("localhost", 6379);
+                    })
                     .WithMaxRetries(100)
                     .WithRetryTimeout(50)
                     .WithRedisCacheHandle(redisConfigurationKey)
@@ -67,5 +73,7 @@ namespace RepositoryEFDotnet.Contexts.EFCore.Base
                     .Build());
             services.AddSingleton(typeof(ICacheManager<>), typeof(BaseCacheManager<>));
         }
+
+        #endregion
     }
 }

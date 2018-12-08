@@ -24,7 +24,6 @@ namespace RepositoryEFDotnet.Contexts.EFCore.Base.Context
     /// <summary>
     ///     The base context.
     /// </summary>
-    /// <typeparam name="TContext">
     ///     The Context Type
     /// </typeparam>
     public abstract class BaseContext : DbContext, IUnitOfWork
@@ -110,14 +109,11 @@ namespace RepositoryEFDotnet.Contexts.EFCore.Base.Context
                     return GetPath(((LambdaExpression) exp).Body);
                 case ExpressionType.Call:
 
-                    string result = string.Empty;
+                    var result = string.Empty;
 
                     var a = exp as MethodCallExpression;
 
-                    foreach (var argument in a.Arguments)
-                    {
-                        result += $".{GetPath(argument)}";
-                    }
+                    foreach (var argument in a.Arguments) result += $".{GetPath(argument)}";
 
                     return result.Trim('.');
                 default:
@@ -335,18 +331,18 @@ namespace RepositoryEFDotnet.Contexts.EFCore.Base.Context
         }
 
         /// <summary>
-        /// Bulk delete
+        ///     Bulk delete
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
         public virtual void BulkDelete<TEntity>(IEnumerable<TEntity> items) where TEntity : class
         {
             // Todo: Should be replaced with actual bulk deletes
-            this.RemoveRange<TEntity>(items);
+            RemoveRange(items);
         }
 
         /// <summary>
-        /// Bulk delete async
+        ///     Bulk delete async
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
@@ -354,22 +350,22 @@ namespace RepositoryEFDotnet.Contexts.EFCore.Base.Context
         public virtual async Task BulkDeleteAsync<TEntity>(IEnumerable<TEntity> items) where TEntity : class
         {
             // Todo: Should be replaced with actual bulk deletes async
-            await this.RemoveRangeAsync(items);
+            await RemoveRangeAsync(items);
         }
 
         /// <summary>
-        /// Bulk insert
+        ///     Bulk insert
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
         public virtual void BulkInsert<TEntity>(IEnumerable<TEntity> items) where TEntity : class
         {
             // Todo: Should be replaced with actual bulk add
-            this.AddRange(items);
+            AddRange(items);
         }
 
         /// <summary>
-        /// Bulk insert async
+        ///     Bulk insert async
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
@@ -377,22 +373,22 @@ namespace RepositoryEFDotnet.Contexts.EFCore.Base.Context
         public virtual async Task BulkInsertAsync<TEntity>(IEnumerable<TEntity> items) where TEntity : class
         {
             // Todo: Should be replaced with actual bulk add async 
-            await this.AddRangeAsync(items);
+            await AddRangeAsync(items);
         }
 
         /// <summary>
-        /// Bulk update
+        ///     Bulk update
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
         public virtual void BulkUpdate<TEntity>(IEnumerable<TEntity> items) where TEntity : class
         {
             // Todo: Should be replaced with actual bulk update range 
-            this.UpdateRange(items);
+            UpdateRange(items);
         }
 
         /// <summary>
-        /// Bulk update async
+        ///     Bulk update async
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
@@ -400,10 +396,7 @@ namespace RepositoryEFDotnet.Contexts.EFCore.Base.Context
         public virtual async Task BulkUpdateAsync<TEntity>(IEnumerable<TEntity> items) where TEntity : class
         {
             // Todo: Should be replaced with actual bulk update async 
-            foreach (var item in items)
-            {
-                this.Update(item);
-            }
+            foreach (var item in items) Update(item);
         }
 
         /// <summary>
@@ -466,10 +459,7 @@ namespace RepositoryEFDotnet.Contexts.EFCore.Base.Context
         /// </returns>
         public int ExecuteCommand(string sqlCommand, IEnumerable<IDataParameter> parameters = null)
         {
-            if (parameters != null)
-            {
-                return Database.ExecuteSqlCommand(sqlCommand, parameters);
-            }
+            if (parameters != null) return Database.ExecuteSqlCommand(sqlCommand, parameters);
 
             return Database.ExecuteSqlCommand(sqlCommand);
         }
@@ -488,10 +478,7 @@ namespace RepositoryEFDotnet.Contexts.EFCore.Base.Context
         /// </returns>
         public async Task<int> ExecuteCommandAsync(string sqlCommand, IEnumerable<IDataParameter> parameters = null)
         {
-            if (parameters != null)
-            {
-                return await Database.ExecuteSqlCommandAsync(sqlCommand, parameters);
-            }
+            if (parameters != null) return await Database.ExecuteSqlCommandAsync(sqlCommand, parameters);
 
             return await Database.ExecuteSqlCommandAsync(sqlCommand);
         }
@@ -581,7 +568,8 @@ namespace RepositoryEFDotnet.Contexts.EFCore.Base.Context
             return await GetQueryable(cache, filter, 0, 0, null, false, includes).FirstOrDefaultAsync();
         }
 
-        public async Task<TEntity> FirstOrDefaultAsync<TEntity>(bool cache,
+        public async Task<TEntity> FirstOrDefaultAsync<TEntity>(
+            bool cache,
             params Expression<Func<TEntity, object>>[] includes)
             where TEntity : class
         {
@@ -778,8 +766,8 @@ namespace RepositoryEFDotnet.Contexts.EFCore.Base.Context
 
             if (includes != null && includes.Any())
             {
-                string include = string.Empty;
-                bool first = true;
+                var include = string.Empty;
+                var first = true;
 
                 foreach (var includeExpression in includes)
                 {
@@ -801,10 +789,7 @@ namespace RepositoryEFDotnet.Contexts.EFCore.Base.Context
                 items = Set<TEntity>();
             }
 
-            if (filter != null)
-            {
-                items = items.Where(filter);
-            }
+            if (filter != null) items = items.Where(filter);
 
             if (pageSize > 0)
             {
@@ -813,9 +798,7 @@ namespace RepositoryEFDotnet.Contexts.EFCore.Base.Context
                 if (orderByList.Any())
                 {
                     foreach (var i in orderByList.Where(o => !string.IsNullOrEmpty(o)))
-                    {
                         items = QueryableUtils.CallOrderBy(items, i, orderAscendent);
-                    }
 
                     items = items.Skip(pageSize * (pageGo - 1));
                 }
@@ -823,14 +806,9 @@ namespace RepositoryEFDotnet.Contexts.EFCore.Base.Context
                 items = items.Take(pageSize);
             }
 
-            if (this.cacheProvider != null && cache)
-            {
+            if (cacheProvider != null && cache)
                 return items.Cacheable();
-            }
-            else
-            {
-                return items;
-            }
+            return items;
             //return this.cacheProvider != null ? items.Cacheable() : items;
         }
 
@@ -1057,18 +1035,12 @@ namespace RepositoryEFDotnet.Contexts.EFCore.Base.Context
         /// </summary>
         public virtual void StartTransaction()
         {
-            if (Database.CurrentTransaction == null)
-            {
-                Database.BeginTransaction();
-            }
+            if (Database.CurrentTransaction == null) Database.BeginTransaction();
         }
 
         public virtual async Task StartTransactionAsync()
         {
-            if (Database.CurrentTransaction == null)
-            {
-                await Database.BeginTransactionAsync();
-            }
+            if (Database.CurrentTransaction == null) await Database.BeginTransactionAsync();
         }
 
         #endregion
@@ -1113,10 +1085,7 @@ namespace RepositoryEFDotnet.Contexts.EFCore.Base.Context
         {
             try
             {
-                if (serviceProvider != null)
-                {
-                    cacheProvider = serviceProvider.GetService<IEFCacheServiceProvider>();
-                }
+                if (serviceProvider != null) cacheProvider = serviceProvider.GetService<IEFCacheServiceProvider>();
             }
             catch (Exception ex)
             {
@@ -1144,17 +1113,10 @@ namespace RepositoryEFDotnet.Contexts.EFCore.Base.Context
             var entry = Entry(item);
 
             if (state == EntityState.Deleted || state == EntityState.Modified)
-            {
                 if (entry.State == EntityState.Detached)
-                {
                     GetDbSet<TEntity>().Attach(item);
-                }
-            }
 
-            if (entry.State != state)
-            {
-                entry.State = state;
-            }
+            if (entry.State != state) entry.State = state;
         }
 
         /// <summary>

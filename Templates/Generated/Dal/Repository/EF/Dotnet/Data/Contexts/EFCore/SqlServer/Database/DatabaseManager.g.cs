@@ -36,9 +36,8 @@ namespace RepositoryEFDotnet.Data.Context.SqlServer.EFCore.Database
 	{	
 		private IDictionary<string, string> configuration;
 		
-		protected static IServiceProvider Provider;
-
-        
+    
+                
 
 		#region CTOR
 		
@@ -74,15 +73,11 @@ namespace RepositoryEFDotnet.Data.Context.SqlServer.EFCore.Database
 	            throw new Exception("Invalid configuration specified in database manager");
 	        }
 
-            Provider = ConfigureServices.GetInMemoryCacheServiceProvider();
-             EFSecondLevelCache.Core.EFServiceProvider.ApplicationServices = Provider;
-
-             container.Configure(
+            container.Configure(
                  config =>
                  {
                     config.For<IUnitOfWork>().LifecycleIs(Lifecycles.Transient).Use<SqlServerFullContext>()
-                         .Ctor<string>("connectionString").Is(configuration.ConnectionStrings["QUIRCSqlServer"])
-                         .Ctor<IServiceProvider>("provider").Is(Provider);
+                         .Ctor<string>("connectionString").Is(configuration.ConnectionStrings["QUIRCSqlServer"]);
                  });
 
             // End

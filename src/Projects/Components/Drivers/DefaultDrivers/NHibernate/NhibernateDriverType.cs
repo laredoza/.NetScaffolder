@@ -343,9 +343,24 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.NHibernate
             else
             {
                 StringBuilder sb = new StringBuilder();
-                sb.AppendLine($"var config = {parameter.Driver.ConfigurationClass}.{parameter.Driver.ConfigurationOption}.ConnectionString(this.configuration[\"{parameter.ConnectionName}\"]");
-                sb.AppendLine($"return new <#= Driver.Prefix #><#= ContextData.ContextName #>(config);");
-                return $"return new {parameter.Driver.Prefix}{parameter.ContextName} (this.configuration[\"{parameter.ConnectionName}\"]);";
+
+                INHibernateConfig config = parameter.Driver as INHibernateConfig;
+
+                sb.AppendLine(
+                    $"var nHibConfig = {config.ConfigName}.ConnectionString(configuration.ConnectionStrings[\"{parameter.ConnectionName}\"]);");
+                sb.AppendLine("             Configuration = Fluently.Configure().Database(nHibConfig)");
+                sb.AppendLine(
+                    "               .Mappings(o => o.FluentMappings.AddFromAssembly(System.Reflection.Assembly.GetExecutingAssembly()));");
+                sb.AppendLine("             Factory = Configuration.BuildSessionFactory();");
+                sb.AppendLine();
+                sb.AppendLine("             container.Configure(");
+                sb.AppendLine("             config =>");
+                sb.AppendLine("             {");
+                sb.AppendLine($"                config.For<IUnitOfWork>().LifecycleIs(Lifecycles.Transient).Use<{parameter.Driver.Prefix}{parameter.ContextName}>()");
+                sb.AppendLine("                 .Ctor<ISessionFactory>(\"factory\").Is(Factory);");
+                sb.AppendLine("             });");
+
+                return sb.ToString();
             }
         }
 

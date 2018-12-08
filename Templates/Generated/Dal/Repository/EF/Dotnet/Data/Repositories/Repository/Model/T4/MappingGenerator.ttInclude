@@ -29,7 +29,8 @@
 			{				
 				projectPath = string.Format(ProjectOutputPath, driver.ParentFolder, driver.Prefix);
 				var contextModels = Models.Where(o => ContextData.Models.Exists(x => x.SchemaName == o.SchemaName && x.TableName == o.TableName));
-				
+				//Debugger.Break();
+
 				if(driver.DriverType is EFDriverType)
 				{
 					GenerateEFMappings(driver, contextModels);
