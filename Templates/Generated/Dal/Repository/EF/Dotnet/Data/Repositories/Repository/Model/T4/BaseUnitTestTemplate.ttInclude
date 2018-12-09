@@ -2,7 +2,9 @@
 public class BaseUnitTestTemplate : BaseTemplate 
 {
     public List<Table> Models { get; set; }
-	
+	public string DtoNamespace { get; set;}
+    public string DtoInterfaceNamespace { get; set;}
+
 	public override string TransformText()
 	{
 		// Debugger.Break();
@@ -17,8 +19,8 @@ public class BaseUnitTestTemplate : BaseTemplate
 //	USE A PARTIAL CLASS INSTEAD
 // *******************************************************************
 
-using Banking.Models.Dto;
-using Banking.Models.Interfaces;
+using <#= DtoNamespace #>;
+using <#= DtoInterfaceNamespace #>;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;

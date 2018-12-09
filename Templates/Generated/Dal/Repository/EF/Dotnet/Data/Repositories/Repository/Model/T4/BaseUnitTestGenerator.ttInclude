@@ -8,10 +8,16 @@
 		
         private string OutputPath = @"..\..\..\RepositoryEFDotnet\Tests\Base\DotNetScaffolder.Repository.UnitTests.Base.csproj";
         private string OutputFolder = "Base";
-
-        protected override void RunCore()
+        public UnitTestDataType DataType  { get; set;}
+        public string DtoNamespace { get; set;}
+        public string DtoInterfaceNamespace { get; set;}
+        
+      protected override void RunCore()
         {
 			var unitTestTemplate = new BaseUnitTestTemplate();
+            unitTestTemplate.DtoNamespace = this.DtoNamespace;
+            unitTestTemplate.DtoInterfaceNamespace = this.DtoInterfaceNamespace;
+
 			var uowTemplate = new BaseUowUnitTestTemplate();
 			var repoTemplate = new BaseRepositoryUnitTestTemplate();
 			
@@ -21,7 +27,7 @@
 
             if(!string.IsNullOrEmpty(OutputPath))
             {
-                unitTestTemplate.Output.Project = OutputPath;
+                unitTestTemplate.Output.Project = DataType.BaseTestOutputFolder;
 				uowTemplate.Output.Project = OutputPath;
 				repoTemplate.Output.Project = OutputPath;
             }

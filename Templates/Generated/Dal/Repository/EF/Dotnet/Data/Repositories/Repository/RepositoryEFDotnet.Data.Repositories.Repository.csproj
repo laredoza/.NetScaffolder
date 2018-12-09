@@ -28,7 +28,6 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>RunGenerator.cs</LastGenOutput>
       <LastOutputs>
-..\..\..\RepositoryEFDotnet\Tests\Base\Base\BaseUnitTest.g.cs
 ..\..\ApplicationServices\ApplicationService\ApplicationService\NewApplicationService.g.cs
 ..\..\Contexts\EF\MySql\Context\MySqlAccountContext.g.cs
 ..\..\Contexts\EF\MySql\Context\MySqlCustomerContext.g.cs
@@ -265,6 +264,7 @@
 ..\..\Interfaces\RepositoryInterfaces\Repository\IOrderRepository.g.cs
 ..\..\Interfaces\RepositoryInterfaces\Repository\IProductRepository.g.cs
 ..\..\Interfaces\RepositoryInterfaces\Repository\ISoftwareRepository.g.cs
+..\..\Tests\Base\Base\BaseUnitTest.g.cs
 .\Repository\BankAccountRepository.g.cs
 .\Repository\BankTransfersRepository.g.cs
 .\Repository\BookRepository.g.cs

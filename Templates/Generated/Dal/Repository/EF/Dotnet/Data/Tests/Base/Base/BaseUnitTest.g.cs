@@ -18,8 +18,8 @@
 //	USE A PARTIAL CLASS INSTEAD
 // *******************************************************************
 
-using Banking.Models.Dto;
-using Banking.Models.Interfaces;
+using RepositoryEFDotnet.Data.Dto;
+using RepositoryEFDotnet.Data.Interfaces;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;

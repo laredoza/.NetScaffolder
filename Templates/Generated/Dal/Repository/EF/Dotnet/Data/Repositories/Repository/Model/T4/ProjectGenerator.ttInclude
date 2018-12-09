@@ -136,12 +136,20 @@
                     iDtoGen.DtoInterfaceType = dataTypes.FirstOrDefault(o => o is DtoInterfaceDataType) as DtoInterfaceDataType;
                     iDtoGen.Run();
                 }
+
+                if(dataType is UnitTestDataType)
+                {
+                    var dtoDataType = dataTypes.FirstOrDefault(o => o is DtoDataType) as DtoDataType;
+                    var dtoInterfaceDataType = dataTypes.FirstOrDefault(o => o is DtoInterfaceDataType) as DtoInterfaceDataType;
+
+                    var unitTestGen = new BaseUnitTestGenerator();
+                    unitTestGen.DataType = dataType as UnitTestDataType; 
+			        unitTestGen.Models = domain.Tables;
+                    unitTestGen.DtoNamespace = dtoDataType.FullNamespace;
+                    unitTestGen.DtoInterfaceNamespace = dtoInterfaceDataType.FullNamespace;
+			        unitTestGen.Run();
+                }
             }
-			
-			// Unit Test generation
-			var unitTestGen = new BaseUnitTestGenerator();
-			unitTestGen.Models = domain.Tables;
-			unitTestGen.Run();
         }
 }
     #>
