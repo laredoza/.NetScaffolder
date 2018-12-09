@@ -23,13 +23,14 @@ using System.Data.Entity.ModelConfiguration;
 using System.Data.Entity.Infrastructure.Annotations;
 using MySql.Data.EntityFramework;
 using System.ComponentModel.DataAnnotations.Schema;
-using Banking.Models.Entity;
+using RepositoryEFDotnet.Data.Entity;
+using RepositoryEFDotnet.Contexts.EF.Base.Context;
 using RepositoryEFDotnet.Core.Base;
-using Banking.Models.Accounts.Mappings.EF.MySql;
+using RepositoryEFDotnet.Data.Accounts.Mappings.EF.MySql;
+using RepositoryEFDotnet.Data.Entity;
 using System.Data.Common;
-using Quirc.DataAccess.Context.EF.Base;
 
-namespace Banking.Models.Accounts.EF
+namespace RepositoryEFDotnet.Data.Accounts.EF
 {
     [DbConfigurationType(typeof(MySqlEFConfiguration))]
 	public partial class MySqlAccountContext : BaseContext

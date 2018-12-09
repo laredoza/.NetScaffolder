@@ -24,7 +24,7 @@ namespace RepositoryEFDotnet.Contexts.EFCore.Base.Context
     /// <summary>
     ///     The base context.
     /// </summary>
-    ///     The Context Type
+    /// The Context Type
     /// </typeparam>
     public abstract class BaseContext : DbContext, IUnitOfWork
     {

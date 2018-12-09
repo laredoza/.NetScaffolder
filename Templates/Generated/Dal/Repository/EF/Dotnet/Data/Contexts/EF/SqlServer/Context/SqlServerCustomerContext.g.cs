@@ -22,13 +22,14 @@ using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration;
 using System.Data.Entity.Infrastructure.Annotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Banking.Models.Entity;
+using RepositoryEFDotnet.Data.Entity;
+using RepositoryEFDotnet.Contexts.EF.Base.Context;
 using RepositoryEFDotnet.Core.Base;
-using Banking.Models.Customers.Mappings.EF.SqlServer;
+using RepositoryEFDotnet.Data.Customers.Mappings.EF.SqlServer;
+using RepositoryEFDotnet.Data.Entity;
 using System.Data.Common;
-using Quirc.DataAccess.Context.EF.Base;
 
-namespace Banking.Models.Customers.EF
+namespace RepositoryEFDotnet.Data.Customers.EF
 {
 	public partial class SqlServerCustomerContext : BaseContext
 	{	

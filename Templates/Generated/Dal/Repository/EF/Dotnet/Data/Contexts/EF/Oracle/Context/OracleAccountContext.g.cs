@@ -24,13 +24,14 @@ using System.Data.Entity.Infrastructure.Annotations;
 using Oracle.ManagedDataAccess.Client;
 using Oracle.Config;
 using System.ComponentModel.DataAnnotations.Schema;
-using Banking.Models.Entity;
+using RepositoryEFDotnet.Data.Entity;
+using RepositoryEFDotnet.Contexts.EF.Base.Context;
 using RepositoryEFDotnet.Core.Base;
-using Banking.Models.Accounts.Mappings.EF.Oracle;
+using RepositoryEFDotnet.Data.Accounts.Mappings.EF.Oracle;
+using RepositoryEFDotnet.Data.Entity;
 using System.Data.Common;
-using Quirc.DataAccess.Context.EF.Base;
 
-namespace Banking.Models.Accounts.EF
+namespace RepositoryEFDotnet.Data.Accounts.EF
 {
     [DbConfigurationType(typeof(OracleDbConfiguration))]
 	public partial class OracleAccountContext : BaseContext

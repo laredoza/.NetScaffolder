@@ -139,7 +139,7 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6
         /// </returns>
         public static string TransformIndex(Index index, INamingConvention nc = null)
         {
-            var idxs = new StringBuilder("HasColumnAnnotation(\"" + index.Name + "\", new IndexAnnotation(new [] { ");
+            var idxs = new StringBuilder(".HasColumnAnnotation(\"" + index.Name + "\", new IndexAnnotation(new [] { ");
             bool isClustered = index.IndexType == IndexType.Clustered;
 
             if (index.Columns != null && index.Columns.Any())
@@ -393,13 +393,22 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6
 
         public string GenerateBeginUnitOfWork(CacheParameters parameter)
         {
-            if (this.EnableCache)
+            if (this.EnableCache && this.CurrentCache != null)
             {
                 return this.CurrentCache.GenerateBeginUnitOfWork(parameter);
             }
             else
             {
-                return $"return new {parameter.Driver.Prefix}{parameter.ContextName} (this.configuration[\"{parameter.ConnectionName}\"]);";
+                StringBuilder sb = new StringBuilder();
+
+                sb.AppendLine("container.Configure(");
+                sb.AppendLine("                 config =>");
+                sb.AppendLine("                 {");
+                sb.AppendLine($"                    config.For<IUnitOfWork>().LifecycleIs(Lifecycles.Transient).Use<{parameter.Driver.Prefix}{parameter.ContextName}>()");
+                sb.AppendLine($"                         .Ctor<string>(\"connectionString\").Is(configuration.ConnectionStrings[\"{parameter.ConnectionName}\"]);");
+                sb.AppendLine("                 });");
+
+                return sb.ToString();
             }
         }
 

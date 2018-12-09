@@ -36,9 +36,10 @@ namespace RepositoryEFDotnet.Data.Context.SqlServer.NHib.Database
 	{	
 		private IDictionary<string, string> configuration;
 		
-        private static NHibernate.Cfg.Configuration Configuration;
-	    private static ISessionFactory Factory;  
-    
+     	private static FluentConfiguration Configuration;
+	    private static ISessionFactory Factory;   
+                
+
 		#region CTOR
 		
 		public DatabaseManager(IDictionary<string, string> configuration)
@@ -75,16 +76,7 @@ namespace RepositoryEFDotnet.Data.Context.SqlServer.NHib.Database
 
             var nHibConfig = MsSqlConfiguration.MsSql2012.ConnectionString(configuration.ConnectionStrings["QUIRCSqlServer"]);
              Configuration = Fluently.Configure().Database(nHibConfig)
-               .Mappings(o => o.FluentMappings.AddFromAssembly(System.Reflection.Assembly.GetExecutingAssembly()).Conventions.Add(
-                 FluentNHibernate.Conventions.Helpers.ConventionBuilder.Class.Always(
-                     z =>
-                         {
-                             z.BatchSize(512);
-                             z.Cache.ReadWrite();
-                     })
-                 )).Cache(
-                     o => o.ProviderClass<NHibernate.Caches.CoreDistributedCache.CoreDistributedCacheProvider>().UseQueryCache().UseSecondLevelCache()
-             ).BuildConfiguration();
+               .Mappings(o => o.FluentMappings.AddFromAssembly(System.Reflection.Assembly.GetExecutingAssembly()));
              Factory = Configuration.BuildSessionFactory();
 
              container.Configure(

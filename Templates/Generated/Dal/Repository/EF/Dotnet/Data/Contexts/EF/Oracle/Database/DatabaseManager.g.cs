@@ -17,22 +17,29 @@
 //	GENERATED CODE. DOT NOT MODIFY MANUALLY AS CHANGES CAN BE LOST!!!
 //	USE A PARTIAL CLASS INSTEAD
 // *******************************************************************
+using RepositoryEFDotnet.Contexts.EF.Base.Context;
 using RepositoryEFDotnet.Core.Base;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration;
 using System.Data.Entity.Infrastructure.Annotations;
 using Oracle.ManagedDataAccess.Client;
 using Oracle.Config;
-using Banking.Models.Context.EF;
+using RepositoryEFDotnet.Data.Context.EF;
 using System;
 using System.Collections.Generic;
+using StructureMap;
+using StructureMap.Pipeline;
+using RepositoryEFDotnet.Contexts.EF.Base;
 
-namespace Banking.Models.Context.Oracle.EF.Database
+namespace RepositoryEFDotnet.Data.Context.Oracle.EF.Database
 {
 	public class DatabaseManager : IDatabaseManager
 	{	
 		private IDictionary<string, string> configuration;
 		
+         // Please setup EF
+                
+
 		#region CTOR
 		
 		public DatabaseManager(IDictionary<string, string> configuration)
@@ -43,19 +50,39 @@ namespace Banking.Models.Context.Oracle.EF.Database
 		#endregion
 		
         /// <summary>
-        /// The begin unit of work.
-        /// </summary>
-        /// <returns>
-        /// The <see cref="IUnitOfWork"/>.
-        /// </returns>
-        public virtual IUnitOfWork BeginUnitOfWork()
-        {
-            if (this.configuration == null || !this.configuration.ContainsKey("QUIRCOracle"))
-            {
-                throw new Exception("Invalid configuration specified in database manager");
-            }
+	    /// The register unit of work.
+	    /// </summary>
+	    /// <param name="configuration">
+	    /// The configuration.
+	    /// </param>
+	    /// <param name="container">
+	    /// The container.
+	    /// </param>
+	    /// <param name="serviceProvider">
+	    /// The service provider.
+	    /// </param>
+	    /// <exception cref="Exception">
+	    /// </exception>
+	    public void RegisterUnitOfWork(
+	        IDataConfiguration configuration,
+	        IContainer container,
+	        IServiceProvider serviceProvider = null)
+	    {
+	        if (configuration == null || configuration.ConnectionStrings == null
+	                                  || !configuration.ConnectionStrings.ContainsKey("QUIRCSqlServer"))
+	        {
+	            throw new Exception("Invalid configuration specified in database manager");
+	        }
 
-			return new OracleFullContext(this.configuration["QUIRCOracle"]);
-        }
+            container.Configure(
+                 config =>
+                 {
+                    config.For<IUnitOfWork>().LifecycleIs(Lifecycles.Transient).Use<OracleFullContext>()
+                         .Ctor<string>("connectionString").Is(configuration.ConnectionStrings["QUIRCOracle"]);
+                 });
+
+            // End
+	    }
+        
 	}
 }

@@ -5,6 +5,9 @@
     <DomainDefinition>
       <CollectionOptionId>0bc1b0c4-1e41-9146-82cf-599181ce4411</CollectionOptionId>
       <DriverIdList>
+        <guid>2bc1b0c4-1e41-9146-82cf-599181ce4412</guid>
+        <guid>2bc1b0c4-1e41-9146-82cf-599181ce4411</guid>
+        <guid>2bc1b0c4-1e41-9146-82cf-599181ce4410</guid>
         <guid>8a1103c5-7557-4449-825f-299cf9749ad2</guid>
         <guid>2bc1b0c4-1e41-9146-82cf-599181ce4417</guid>
         <guid>27d66d81-8f2d-481a-8547-c1e5b5444569</guid>
