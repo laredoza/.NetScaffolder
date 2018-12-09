@@ -67,6 +67,8 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.Applicati
 
         #region Public Properties
 
+        public bool IsDefault { get; set; }
+
         /// <summary>
         ///     Gets or sets the data source.
         /// </summary>
@@ -166,16 +168,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.Applicati
                         o => o.Id.ToString() == parameterDictionary["name"]);
             }
 
-            if (SelectedApplicationService == null)
-            {
-                btnNew.Text = "Add";
-                btnNew.Tag = "Add";
-            }
-            else
-            {
-                btnNew.Text = "Delete";
-                btnNew.Tag = "Delete";
-            }
+            
 
             TreeviewContextModels.Visible = SelectedApplicationService != null;
             gbAdditionalNamespaces.Visible = SelectedApplicationService == null;
@@ -184,6 +177,21 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.Applicati
             if (SelectedApplicationService == null)
             {
                 SetupDefault();
+            }
+            else
+            {
+                this.IsDefault = false;
+            }
+
+            if (this.IsDefault)
+            {
+                btnNew.Text = "Add";
+                btnNew.Tag = "Add";
+            }
+            else
+            {
+                btnNew.Text = "Delete";
+                btnNew.Tag = "Delete";
             }
 
             UpdateUI();
@@ -238,10 +246,33 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.Applicati
         /// </param>
         public void SaveConfig(object parameters)
         {
-            if (DataType == null || SelectedApplicationService == null) return;
+            if (DataType != null)
+            {
+                ApplicationServiceDataType applicationServiceDataType = null;
 
+                if (!this.IsDefault && SelectedApplicationService != null)
+                {
+                    applicationServiceDataType = UpdateDataTypeSpecific();
+
+                    SelectedApplicationService =
+                        applicationServiceDataType.ApplicationServiceData.FirstOrDefault(o =>
+                            o.Id == SelectedApplicationService.Id);
+
+                    UpdateApplicationService();
+                }
+                else
+                {
+                    applicationServiceDataType = UpdateDataTypeSpecific();
+                }
+
+                IDictionary<string, string> parameterDictionary = parameters as IDictionary<string, string>;
+                DataType.Save(parameterDictionary);
+            }
+        }
+
+        private ApplicationServiceDataType UpdateDataTypeSpecific()
+        {
             DataType.AdditionalNamespaces.Clear();
-            
 
             foreach (var ns in txtNamespaces.Lines)
             {
@@ -258,19 +289,14 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.Applicati
             foreach (var ns in txtNamespacesInterfaces.Lines)
             {
                 var item = ns.Trim();
-                if (!string.IsNullOrEmpty(item) && !applicationServiceDataType.AdditionalNamespacesInterfaces.Contains(item))
+                if (!string.IsNullOrEmpty(item) &&
+                    !applicationServiceDataType.AdditionalNamespacesInterfaces.Contains(item))
                 {
                     applicationServiceDataType.AdditionalNamespacesInterfaces.Add(item);
                 }
             }
 
-            SelectedApplicationService =
-                applicationServiceDataType.ApplicationServiceData.FirstOrDefault(o => o.Id == SelectedApplicationService.Id);
-
-            UpdateApplicationService();
-
-            IDictionary<string, string> parameterDictionary = parameters as IDictionary<string, string>;
-            DataType.Save(parameterDictionary);
+            return applicationServiceDataType;
         }
 
         /// <summary>
@@ -350,6 +376,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.Applicati
         /// </summary>
         private void SetupDefault()
         {
+            this.IsDefault = true;
             SelectedApplicationService = new ApplicationServiceData { Id = Guid.NewGuid()};
         }
 

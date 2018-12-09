@@ -67,6 +67,8 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.ContextDa
 
         #region Public Properties
 
+        public bool IsDefault { get; set; }
+
         /// <summary>
         ///     Gets or sets the data source.
         /// </summary>
@@ -166,7 +168,19 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.ContextDa
                         o => o.Id.ToString() == parameterDictionary["name"]);
             }
 
+            TreeviewContextModels.Visible = SelectedContext != null;
+            gbAdditionalNamespaces.Visible = SelectedContext == null;
+
             if (SelectedContext == null)
+            {
+                SetupDefault();
+            }
+            else
+            {
+                this.IsDefault = false;
+            }
+
+            if (this.IsDefault)
             {
                 btnNew.Text = "Add";
                 btnNew.Tag = "Add";
@@ -175,14 +189,6 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.ContextDa
             {
                 btnNew.Text = "Delete";
                 btnNew.Tag = "Delete";
-            }
-
-            TreeviewContextModels.Visible = SelectedContext != null;
-            gbAdditionalNamespaces.Visible = SelectedContext == null;
-
-            if (SelectedContext == null)
-            {
-                SetupDefault();
             }
 
             UpdateUI();
@@ -237,8 +243,29 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.ContextDa
         /// </param>
         public void SaveConfig(object parameters)
         {
-            if (DataType == null || SelectedContext == null) return;
+            if (DataType != null)
+            {
+                if (!this.IsDefault && SelectedContext != null)
+                {
+                    this.UpdateDataType();
 
+                    SelectedContext =
+                        (DataType as ContextDataType).Contexts.FirstOrDefault(o => o.Id == SelectedContext.Id);
+
+                    UpdateContext();
+                }
+                else
+                {
+                    this.UpdateDataType();
+                }
+
+                IDictionary<string, string> parameterDictionary = parameters as IDictionary<string, string>;
+                DataType.Save(parameterDictionary);
+            }
+        }
+
+        private void UpdateDataType()
+        {
             DataType.AdditionalNamespaces.Clear();
 
             foreach (var ns in txtNamespaces.Lines)
@@ -249,14 +276,6 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.ContextDa
                     DataType.AdditionalNamespaces.Add(item);
                 }
             }
-
-            SelectedContext =
-                (DataType as ContextDataType).Contexts.FirstOrDefault(o => o.Id == SelectedContext.Id);
-
-            UpdateContext();
-
-            IDictionary<string, string> parameterDictionary = parameters as IDictionary<string, string>;
-            DataType.Save(parameterDictionary);
         }
 
         /// <summary>
@@ -361,6 +380,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.ContextDa
         /// </summary>
         private void SetupDefault()
         {
+            this.IsDefault = true;
             SelectedContext = new ContextData {Id = Guid.NewGuid()};
         }
 

@@ -2,9 +2,9 @@
 <NhibernateDriverType xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <CreateDb>true</CreateDb>
   <IncludeColumnOrder>true</IncludeColumnOrder>
-  <LazyLoadingEnabled>true</LazyLoadingEnabled>
+  <LazyLoadingEnabled>false</LazyLoadingEnabled>
   <LoggingEnabled>true</LoggingEnabled>
-  <ProxyCreationEnabled>true</ProxyCreationEnabled>
+  <ProxyCreationEnabled>false</ProxyCreationEnabled>
   <UseAlias>true</UseAlias>
   <UseSeperateConfigClasses>false</UseSeperateConfigClasses>
   <EnableCache>false</EnableCache>

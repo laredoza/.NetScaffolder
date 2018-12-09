@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <EFDriverType xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Cache>00000000-0000-0000-0000-000000000000</Cache>
   <CreateDb>true</CreateDb>
+  <EnableCache>false</EnableCache>
   <IncludeColumnOrder>true</IncludeColumnOrder>
   <LazyLoadingEnabled>false</LazyLoadingEnabled>
   <LoggingEnabled>true</LoggingEnabled>
   <ProxyCreationEnabled>false</ProxyCreationEnabled>
   <UseAlias>true</UseAlias>
   <UseSeperateConfigClasses>false</UseSeperateConfigClasses>
-  <EnableCache>false</EnableCache>
-  <Cache>00000000-0000-0000-0000-000000000000</Cache>
 </EFDriverType>
