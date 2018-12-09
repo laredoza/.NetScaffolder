@@ -77,7 +77,7 @@ namespace RepositoryEFDotnet.Data.Context.Postgres.EF.Database
                  config =>
                  {
                     config.For<IUnitOfWork>().LifecycleIs(Lifecycles.Transient).Use<PostgresFullContext>()
-                         .Ctor<string>("connectionString").Is(configuration.ConnectionStrings["QUIRCPostgres"]);
+                         .Ctor<string>("connectionString").Is(configuration.ConnectionStrings["RepoTestPostgres"]);
                  });
 
             // End

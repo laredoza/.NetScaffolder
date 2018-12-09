@@ -74,7 +74,7 @@ namespace RepositoryEFDotnet.Data.Context.Oracle.NHib.Database
 	            throw new Exception("Invalid configuration specified in database manager");
 	        }
 
-            var nHibConfig = OracleClientConfiguration.Oracle10.ConnectionString(configuration.ConnectionStrings["QUIRCOracle"]);
+            var nHibConfig = OracleClientConfiguration.Oracle10.ConnectionString(configuration.ConnectionStrings["RepoTestOracle"]);
              Configuration = Fluently.Configure().Database(nHibConfig)
                .Mappings(o => o.FluentMappings.AddFromAssembly(System.Reflection.Assembly.GetExecutingAssembly()));
              Factory = Configuration.BuildSessionFactory();

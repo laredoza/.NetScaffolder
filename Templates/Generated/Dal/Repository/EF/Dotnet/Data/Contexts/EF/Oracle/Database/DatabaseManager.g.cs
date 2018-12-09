@@ -78,7 +78,7 @@ namespace RepositoryEFDotnet.Data.Context.Oracle.EF.Database
                  config =>
                  {
                     config.For<IUnitOfWork>().LifecycleIs(Lifecycles.Transient).Use<OracleFullContext>()
-                         .Ctor<string>("connectionString").Is(configuration.ConnectionStrings["QUIRCOracle"]);
+                         .Ctor<string>("connectionString").Is(configuration.ConnectionStrings["RepoTestOracle"]);
                  });
 
             // End

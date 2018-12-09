@@ -77,7 +77,7 @@ namespace RepositoryEFDotnet.Data.Context.MySql.EF.Database
                  config =>
                  {
                     config.For<IUnitOfWork>().LifecycleIs(Lifecycles.Transient).Use<MySqlFullContext>()
-                         .Ctor<string>("connectionString").Is(configuration.ConnectionStrings["QUIRCMySql"]);
+                         .Ctor<string>("connectionString").Is(configuration.ConnectionStrings["RepoTestMySql"]);
                  });
 
             // End

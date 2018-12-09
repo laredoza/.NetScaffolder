@@ -95,7 +95,7 @@ namespace <#= ContextData.TransformFullnamespace(DataType.BaseNamespace) #>.<#= 
 	            throw new Exception("Invalid configuration specified in database manager");
 	        }
 
-<#+var cacheParameters = new CacheParameters { ConnectionName = $"QUIRC{Driver.Prefix}", ContextName = ContextData.ContextName, Driver = Driver}; #>
+<#+            var cacheParameters = new CacheParameters { ConnectionName = $"{ContextData.CustomConnectionName}{Driver.Prefix}", ContextName = ContextData.ContextName, Driver = Driver}; #>
             <#= Driver.DriverType.GenerateBeginUnitOfWork(cacheParameters) #>
             // End
 	    }

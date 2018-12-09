@@ -74,7 +74,7 @@ namespace RepositoryEFDotnet.Data.Context.SqlServer.NHib.Database
 	            throw new Exception("Invalid configuration specified in database manager");
 	        }
 
-            var nHibConfig = MsSqlConfiguration.MsSql2012.ConnectionString(configuration.ConnectionStrings["QUIRCSqlServer"]);
+            var nHibConfig = MsSqlConfiguration.MsSql2012.ConnectionString(configuration.ConnectionStrings["RepoTestSqlServer"]);
              Configuration = Fluently.Configure().Database(nHibConfig)
                .Mappings(o => o.FluentMappings.AddFromAssembly(System.Reflection.Assembly.GetExecutingAssembly()));
              Factory = Configuration.BuildSessionFactory();

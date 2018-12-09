@@ -76,7 +76,7 @@ namespace RepositoryEFDotnet.Data.Context.SqlServer.EF.Database
                  config =>
                  {
                     config.For<IUnitOfWork>().LifecycleIs(Lifecycles.Transient).Use<SqlServerFullContext>()
-                         .Ctor<string>("connectionString").Is(configuration.ConnectionStrings["QUIRCSqlServer"]);
+                         .Ctor<string>("connectionString").Is(configuration.ConnectionStrings["RepoTestSqlServer"]);
                  });
 
             // End

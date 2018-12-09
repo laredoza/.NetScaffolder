@@ -74,7 +74,7 @@ namespace RepositoryEFDotnet.Data.Context.MySql.NHib.Database
 	            throw new Exception("Invalid configuration specified in database manager");
 	        }
 
-            var nHibConfig = MySQLConfiguration.Standard.ConnectionString(configuration.ConnectionStrings["QUIRCMySql"]);
+            var nHibConfig = MySQLConfiguration.Standard.ConnectionString(configuration.ConnectionStrings["RepoTestMySql"]);
              Configuration = Fluently.Configure().Database(nHibConfig)
                .Mappings(o => o.FluentMappings.AddFromAssembly(System.Reflection.Assembly.GetExecutingAssembly()));
              Factory = Configuration.BuildSessionFactory();
