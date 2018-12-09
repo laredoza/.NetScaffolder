@@ -77,7 +77,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RepositoryEFDotnet.Contexts
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RepositoryEFDotnet.Contexts.NHib.SqlServer", "Data\Contexts\NHib\SqlServer\RepositoryEFDotnet.Contexts.NHib.SqlServer.csproj", "{440E3142-F770-4CD8-9CAC-BE5B053A78F2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepositoryEFDotnet.Data.Interface.ApplicationService", "Data\Interfaces\ApplicationService\RepositoryEFDotnet.Data.Interface.ApplicationService.csproj", "{6AF84D11-0292-4149-9E09-E752D85CAFBA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RepositoryEFDotnet.Data.Interface.ApplicationService", "Data\Interfaces\ApplicationService\RepositoryEFDotnet.Data.Interface.ApplicationService.csproj", "{6AF84D11-0292-4149-9E09-E752D85CAFBA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepositoryEFDotnet.Contexts.EF.Postgres", "Data\Contexts\EF\Postgres\RepositoryEFDotnet.Contexts.EF.Postgres.csproj", "{487D750D-5973-4618-BDA6-3175D344F9FF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -181,6 +183,10 @@ Global
 		{6AF84D11-0292-4149-9E09-E752D85CAFBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6AF84D11-0292-4149-9E09-E752D85CAFBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6AF84D11-0292-4149-9E09-E752D85CAFBA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{487D750D-5973-4618-BDA6-3175D344F9FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{487D750D-5973-4618-BDA6-3175D344F9FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{487D750D-5973-4618-BDA6-3175D344F9FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{487D750D-5973-4618-BDA6-3175D344F9FF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -219,6 +225,7 @@ Global
 		{1A17E595-C9F1-4A7B-B273-19089A5D27ED} = {59453B38-9D13-4A2B-B66D-F5686055C1FF}
 		{440E3142-F770-4CD8-9CAC-BE5B053A78F2} = {59453B38-9D13-4A2B-B66D-F5686055C1FF}
 		{6AF84D11-0292-4149-9E09-E752D85CAFBA} = {15CDD5A5-0B4B-45FF-B771-E6213F43A443}
+		{487D750D-5973-4618-BDA6-3175D344F9FF} = {CA2EECAE-3E0F-4E4A-9D33-B5BFD3B0C76F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BAAA9DC0-A104-423F-8507-710C11070DF0}
