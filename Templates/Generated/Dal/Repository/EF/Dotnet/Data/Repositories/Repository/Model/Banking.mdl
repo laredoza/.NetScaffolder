@@ -162,6 +162,21 @@
             <TemplatePath>ContextRegistrationGenerator.ttInclude</TemplatePath>
             <Version>1</Version>
           </Template>
+          <Template>
+            <Children />
+            <Enabled>true</Enabled>
+            <HierarchyType>Item</HierarchyType>
+            <Id>3025eb67-4faa-481f-a5bb-4646d6bbf11e</Id>
+            <Name>Default Unit Tests</Name>
+            <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
+            <Selected>false</Selected>
+            <DataType>ab2445e3-5f8d-4bec-addc-0d1430e15ca1</DataType>
+            <DefaultSettings />
+            <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
+            <LanguageOutputId>1bc1b0c4-1e41-9146-82cf-599181ce4410</LanguageOutputId>
+            <TemplatePath>BaseUnitTestGenerator.ttInclude</TemplatePath>
+            <Version>1</Version>
+          </Template>
         </Templates>
         <Version>1</Version>
       </Package>

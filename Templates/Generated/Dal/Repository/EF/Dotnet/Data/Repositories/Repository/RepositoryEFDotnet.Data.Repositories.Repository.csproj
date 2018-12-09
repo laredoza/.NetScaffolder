@@ -28,6 +28,7 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>RunGenerator.cs</LastGenOutput>
       <LastOutputs>
+..\..\..\RepositoryEFDotnet\Tests\Base\Base\BaseUnitTest.g.cs
 ..\..\ApplicationServices\ApplicationService\ApplicationService\NewApplicationService.g.cs
 ..\..\Contexts\EF\MySql\Context\MySqlAccountContext.g.cs
 ..\..\Contexts\EF\MySql\Context\MySqlCustomerContext.g.cs

@@ -139,9 +139,9 @@
             }
 			
 			// Unit Test generation
-			//var unitTestGen = new BaseUnitTestGenerator();
-			//unitTestGen.Models = domain.Tables;
-			//unitTestGen.Run();
+			var unitTestGen = new BaseUnitTestGenerator();
+			unitTestGen.Models = domain.Tables;
+			unitTestGen.Run();
         }
 }
     #>

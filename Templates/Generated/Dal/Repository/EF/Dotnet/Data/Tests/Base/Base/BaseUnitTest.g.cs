@@ -38,6 +38,7 @@ namespace RepositoryEFDotnet.UnitTest.Base
 
 		#region Fields
 
+        // Hello
 
         protected virtual void Check_BankAccount(IBankAccount dto, IBankAccount savedEntity)
         { 
@@ -51,6 +52,7 @@ namespace RepositoryEFDotnet.UnitTest.Base
             Assert.AreEqual(dto.CustomerId, savedEntity.CustomerId, $"Customer.CustomerId incorrect.");
             Assert.AreEqual(dto.Locked, savedEntity.Locked, $"Customer.Locked incorrect.");
         }		
+        // Hello
 
         protected virtual void Check_BankTransfers(IBankTransfers dto, IBankTransfers savedEntity)
         { 
@@ -64,6 +66,7 @@ namespace RepositoryEFDotnet.UnitTest.Base
             Assert.AreEqual(dto.Amount, savedEntity.Amount, $"Customer.Amount incorrect.");
             Assert.AreEqual(dto.TransferDate, savedEntity.TransferDate, $"Customer.TransferDate incorrect.");
         }		
+        // Hello
 
         protected virtual void Check_Book(IBook dto, IBook savedEntity)
         { 
@@ -74,6 +77,7 @@ namespace RepositoryEFDotnet.UnitTest.Base
             Assert.AreEqual(dto.ProductId, savedEntity.ProductId, $"Customer.ProductId incorrect.");
             Assert.AreEqual(dto.Publisher, savedEntity.Publisher, $"Customer.Publisher incorrect.");
         }		
+        // Hello
 
         protected virtual void Check_Country(ICountry dto, ICountry savedEntity)
         { 
@@ -84,6 +88,7 @@ namespace RepositoryEFDotnet.UnitTest.Base
             Assert.AreEqual(dto.CountryId, savedEntity.CountryId, $"Customer.CountryId incorrect.");
             Assert.AreEqual(dto.CountryName, savedEntity.CountryName, $"Customer.CountryName incorrect.");
         }		
+        // Hello
 
         protected virtual void Check_Customer(ICustomer dto, ICustomer savedEntity)
         { 
@@ -105,6 +110,7 @@ namespace RepositoryEFDotnet.UnitTest.Base
             Assert.AreEqual(dto.Photo, savedEntity.Photo, $"Customer.Photo incorrect.");
             Assert.AreEqual(dto.IsEnabled, savedEntity.IsEnabled, $"Customer.IsEnabled incorrect.");
         }		
+        // Hello
 
         protected virtual void Check_Order(IOrder dto, IOrder savedEntity)
         { 
@@ -121,6 +127,7 @@ namespace RepositoryEFDotnet.UnitTest.Base
             Assert.AreEqual(dto.ShippingCity, savedEntity.ShippingCity, $"Customer.ShippingCity incorrect.");
             Assert.AreEqual(dto.ShippingZip, savedEntity.ShippingZip, $"Customer.ShippingZip incorrect.");
         }		
+        // Hello
 
         protected virtual void Check_OrderDetails(IOrderDetails dto, IOrderDetails savedEntity)
         { 
@@ -135,6 +142,7 @@ namespace RepositoryEFDotnet.UnitTest.Base
             Assert.AreEqual(dto.Amount, savedEntity.Amount, $"Customer.Amount incorrect.");
             Assert.AreEqual(dto.Discount, savedEntity.Discount, $"Customer.Discount incorrect.");
         }		
+        // Hello
 
         protected virtual void Check_Product(IProduct dto, IProduct savedEntity)
         { 
@@ -149,6 +157,7 @@ namespace RepositoryEFDotnet.UnitTest.Base
             Assert.AreEqual(dto.Publisher, savedEntity.Publisher, $"Customer.Publisher incorrect.");
             Assert.AreEqual(dto.AmountInStock, savedEntity.AmountInStock, $"Customer.AmountInStock incorrect.");
         }		
+        // Hello
 
         protected virtual void Check_Software(ISoftware dto, ISoftware savedEntity)
         { 

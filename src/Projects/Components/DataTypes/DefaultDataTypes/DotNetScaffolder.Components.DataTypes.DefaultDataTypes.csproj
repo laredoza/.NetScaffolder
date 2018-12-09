@@ -60,6 +60,7 @@
     <Compile Include="RepoInterfaceDataTypes\RepoInterfaceDataType.cs" />
     <Compile Include="RepositoryDataTypes\RepositoryDataType.cs" />
     <Compile Include="DtoDataTypes\DtoDataType.cs" />
+    <Compile Include="UnitTests\UnitTestDataType.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Core\Common\DotNetScaffolder.Core.Common.csproj">

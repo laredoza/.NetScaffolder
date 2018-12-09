@@ -27,8 +27,8 @@
             }
 
             unitTestTemplate.RenderToFile(string.Format(@"{0}\{1}.g.cs", OutputFolder, "BaseUnitTest"));
-			uowTemplate.RenderToFile(string.Format(@"{0}\{1}.g.cs", OutputFolder, "BaseUnitOfWorkUnitTest"));
-			repoTemplate.RenderToFile(string.Format(@"{0}\{1}.g.cs", OutputFolder, "BaseRepositoryUnitTest"));
+			//uowTemplate.RenderToFile(string.Format(@"{0}\{1}.g.cs", OutputFolder, "BaseUnitOfWorkUnitTest"));
+			//repoTemplate.RenderToFile(string.Format(@"{0}\{1}.g.cs", OutputFolder, "BaseRepositoryUnitTest"));
         }
     }
 #>

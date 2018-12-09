@@ -104,6 +104,12 @@
     <Compile Include="RepositoryDataTypes\RepositoryUserControl.Designer.cs">
       <DependentUpon>RepositoryUserControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="UnitTests\UnitTestsUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UnitTests\UnitTestsUserControl.Designer.cs">
+      <DependentUpon>UnitTestsUserControl.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="ApplicationServiceDataTypes\ApplicationServiceUserControl.resx">
@@ -135,6 +141,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="RepositoryDataTypes\RepositoryUserControl.resx">
       <DependentUpon>RepositoryUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UnitTests\UnitTestsUserControl.resx">
+      <DependentUpon>UnitTestsUserControl.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
