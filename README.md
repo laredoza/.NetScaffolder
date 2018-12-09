@@ -50,10 +50,10 @@ T4 templates (DataTypes) are used to generate a layer. Packages group several of
 - ~~[0.32 Create base repository for MySql](https://github.com/laredoza/.NetScaffolder/milestone/9)~~
 - ~~[0.4 Create .NET Core base repository for EF Core](https://github.com/laredoza/.NetScaffolder/milestone/4)~~
 - ~~[0.5 Create base repository for nHibernate](https://github.com/laredoza/.NetScaffolder/milestone/5)~~
+- ~~[0.6 Create Application Service](https://github.com/laredoza/.NetScaffolder/milestone/6)~~
 
 ### Todo
 - [Data Stabilization](https://github.com/laredoza/.NetScaffolder/milestone/12)
-- [0.6 Create Application Service](https://github.com/laredoza/.NetScaffolder/milestone/6)
 - [0.8 Create MVC Presentation Layer & ModelViews](https://github.com/laredoza/.NetScaffolder/milestone/8)
 - [0.81 Create Angular Presentation Layer & ModelViews](https://github.com/laredoza/.NetScaffolder/milestone/10)
 - [0.82 Create Xamarin Presentation Layer & ModelView](https://github.com/laredoza/.NetScaffolder/milestone/11)
