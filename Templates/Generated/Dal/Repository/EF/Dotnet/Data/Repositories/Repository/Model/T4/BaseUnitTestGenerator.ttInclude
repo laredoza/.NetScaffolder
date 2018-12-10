@@ -11,7 +11,8 @@
         public UnitTestDataType DataType  { get; set;}
         public string DtoNamespace { get; set;}
         public string DtoInterfaceNamespace { get; set;}
-        
+        public string EntityNamespace { get; set;}
+
       protected override void RunCore()
         {
 			var unitTestTemplate = new BaseUnitTestTemplate();
@@ -19,6 +20,8 @@
             unitTestTemplate.DtoInterfaceNamespace = this.DtoInterfaceNamespace;
 
 			var uowTemplate = new BaseUowUnitTestTemplate();
+            uowTemplate.EntityNamespace = this.EntityNamespace;
+
 			var repoTemplate = new BaseRepositoryUnitTestTemplate();
 			
             unitTestTemplate.Models = this.Models;
@@ -28,7 +31,7 @@
             if(!string.IsNullOrEmpty(OutputPath))
             {
                 unitTestTemplate.Output.Project = DataType.BaseTestOutputFolder;
-				uowTemplate.Output.Project = OutputPath;
+				uowTemplate.Output.Project = DataType.BaseTestOutputFolder;
 				repoTemplate.Output.Project = OutputPath;
             }
 

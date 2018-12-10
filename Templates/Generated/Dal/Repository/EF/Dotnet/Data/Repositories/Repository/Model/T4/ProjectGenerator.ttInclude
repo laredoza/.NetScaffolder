@@ -141,12 +141,14 @@
                 {
                     var dtoDataType = dataTypes.FirstOrDefault(o => o is DtoDataType) as DtoDataType;
                     var dtoInterfaceDataType = dataTypes.FirstOrDefault(o => o is DtoInterfaceDataType) as DtoInterfaceDataType;
+                    var entityDataType = dataTypes.FirstOrDefault(o => o is EntityDataType) as EntityDataType;
 
                     var unitTestGen = new BaseUnitTestGenerator();
                     unitTestGen.DataType = dataType as UnitTestDataType; 
 			        unitTestGen.Models = domain.Tables;
                     unitTestGen.DtoNamespace = dtoDataType.FullNamespace;
                     unitTestGen.DtoInterfaceNamespace = dtoInterfaceDataType.FullNamespace;
+                    unitTestGen.EntityNamespace = entityDataType.FullNamespace;
 			        unitTestGen.Run();
                 }
             }
