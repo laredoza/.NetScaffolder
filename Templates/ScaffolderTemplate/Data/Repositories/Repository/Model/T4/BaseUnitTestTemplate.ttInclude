@@ -2,12 +2,14 @@
 public class BaseUnitTestTemplate : BaseTemplate 
 {
     public List<Table> Models { get; set; }
-	public CopyrightHeader Header { get; set; }
+	public string DtoNamespace { get; set;}
+    public string DtoInterfaceNamespace { get; set;}
 
 	public override string TransformText()
 	{
 		// Debugger.Break();
-		Header = GetHeader("BaseUnitTest.g.cs");
+		Header = new CopyrightHeader();
+		Header.Filename = "BaseUnitTest.g.cs";
 #>
 
 <#= Header.TransformText() #>
@@ -17,8 +19,8 @@ public class BaseUnitTestTemplate : BaseTemplate
 //	USE A PARTIAL CLASS INSTEAD
 // *******************************************************************
 
-using Banking.Models.Dto;
-using Banking.Models.Interfaces;
+using <#= DtoNamespace #>;
+using <#= DtoInterfaceNamespace #>;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
@@ -38,6 +40,7 @@ namespace RepositoryEFDotnet.UnitTest.Base
 		#region Fields
 
 <#+ foreach(var mdl in Models){ #>
+        // Hello
 
         protected virtual void Check_<#= mdl.TableName #>(I<#= mdl.TableName #> dto, I<#= mdl.TableName #> savedEntity)
         { 
@@ -48,19 +51,6 @@ namespace RepositoryEFDotnet.UnitTest.Base
 <#+ foreach(var col in mdl.Columns){ #>
             Assert.AreEqual(dto.<#= col.ColumnName #>, savedEntity.<#= col.ColumnName #>, $"Customer.<#= col.ColumnName #> incorrect.");
 <#+ } #>
-        }		
-<#+ } #>
-
-		#endregion
-
-
-		#region Base Populate Implemented
-
-<#+ foreach(var mdl in Models){ #>
-
-        protected virtual void Populate<#= mdl.TableName #>(I<#= mdl.TableName #> item, bool isUpdate = false, int seed = 1)
-        { 
-            throw new NotImplementedException("when implementing move the method to your own partial class.");
         }		
 <#+ } #>
 

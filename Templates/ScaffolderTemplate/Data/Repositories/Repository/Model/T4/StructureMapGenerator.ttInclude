@@ -7,17 +7,9 @@
 		public ContextData ContextData {get;set;}
 
 		private string projectPath = string.Empty;
-
-		protected override void setHeader(ProjectDefinition projectDefinition)
-		{
-			CompanyText = projectDefinition.Company;
-			LicenseText = projectDefinition.License;
-			HeaderText = projectDefinition.HeaderText;
-		}
 		
         protected override void RunCore()
         {
-		
 			foreach(IDriver driver in Drivers )
 			{
 				Debugger.Break();
@@ -28,12 +20,9 @@
 				{
 					template.Output.Project =  projectPath;
 				}
-								
+
 				template.ContextData = ContextData;
 				template.DataType = DataType;
-				template.CompanyText = CompanyText;
-			template.LicenseText = LicenseText;
-			template.HeaderText = HeaderText;
 				template.RenderToFile(string.Format(@"{0}\{2}.g.cs", DataType.OutputFolder, "ContextRegistration"));
 			}
         }

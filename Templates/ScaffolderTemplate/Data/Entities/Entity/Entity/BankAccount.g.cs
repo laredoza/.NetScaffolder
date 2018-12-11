@@ -1,22 +1,16 @@
 ﻿
-// <copyright file="BankAccount.g.cs" company="Dot Net Scaffolder">
-//  Copyright (c) 2018 MIT License
+// <copyright file="BankAccount.g.cs" company="MIT">
+//  Copyright (c) 2018 MIT
 // </copyright>  
 
- // Permission is hereby granted, free of charge, to any person obtaining a copy of 
-// this software and associated documentation files (the "Software"), to deal in th
-// e Software without restriction, including without limitation the rights to use, 
-// copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the 
-// Software, and to permit persons to whom the Software is furnished to do so, subj
-// ect to the following conditions: The above copyright notice and this permission 
-// notice shall be included in all copies or substantial portions of the Software. 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
-// ED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR 
-// A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYR
-// IGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN 
-// ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WIT
-// H THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
+// to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+// and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER 
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS 
+// IN THE SOFTWARE.
 
 
 // *******************************************************************
@@ -26,9 +20,9 @@
 
 using System;
 using System.Collections.Generic;
-using Banking.Models.Interfaces;
+using RepositoryEFDotnet.Data.Interfaces;
 
-namespace Banking.Models.Entity
+namespace RepositoryEFDotnet.Data.Entity
 {
 	public partial class BankAccount : IBankAccount 
 	{
@@ -36,8 +30,8 @@ namespace Banking.Models.Entity
 		
 		public BankAccount()
 		{
-			this.BankTransfers = new List <BankTransfers>();
 			this.BankTransfers1 = new List <BankTransfers>();
+			this.BankTransfers = new List <BankTransfers>();
 		}
 		
 		public BankAccount(IBankAccount item, bool deep = false)
@@ -49,23 +43,23 @@ namespace Banking.Models.Entity
 			this.Balance = item.Balance;
 			this.CustomerId = item.CustomerId;
 			this.Locked = item.Locked;
-			this.BankTransfers = new List <BankTransfers>();
 			this.BankTransfers1 = new List <BankTransfers>();
+			this.BankTransfers = new List <BankTransfers>();
 
 			if(deep)
 			{
-				if(item.BankTransfers != null)
-				{
-					foreach(var childItem in item.BankTransfers)
-					{
-						this.BankTransfers.Add(new BankTransfers(childItem, deep));
-					}
-				}
 				if(item.BankTransfers1 != null)
 				{
 					foreach(var childItem in item.BankTransfers1)
 					{
 						this.BankTransfers1.Add(new BankTransfers(childItem, deep));
+					}
+				}
+				if(item.BankTransfers != null)
+				{
+					foreach(var childItem in item.BankTransfers)
+					{
+						this.BankTransfers.Add(new BankTransfers(childItem, deep));
 					}
 				}
 				if(item.Customer != null)
@@ -89,30 +83,6 @@ namespace Banking.Models.Entity
 
 		#region Child Relationships
         
-        public virtual IList<BankTransfers> BankTransfers { get; set; }
-	
-        IList<IBankTransfers> IBankAccount.BankTransfers 
-		{ 
-			get
-			{
-				return this.BankTransfers == null ? null : (IList<IBankTransfers>)this.BankTransfers;
-			}
-			set
-			{
-				if(value != this.BankTransfers)
-				{
-					if(value != null)
-					{
-						this.BankTransfers = (IList<BankTransfers>)value;
-					}
-					else
-					{
-						this.BankTransfers = null;
-					}
-				}
-			}			
-		}
-        
         public virtual IList<BankTransfers> BankTransfers1 { get; set; }
 	
         IList<IBankTransfers> IBankAccount.BankTransfers1 
@@ -132,6 +102,30 @@ namespace Banking.Models.Entity
 					else
 					{
 						this.BankTransfers1 = null;
+					}
+				}
+			}			
+		}
+        
+        public virtual IList<BankTransfers> BankTransfers { get; set; }
+	
+        IList<IBankTransfers> IBankAccount.BankTransfers 
+		{ 
+			get
+			{
+				return this.BankTransfers == null ? null : (IList<IBankTransfers>)this.BankTransfers;
+			}
+			set
+			{
+				if(value != this.BankTransfers)
+				{
+					if(value != null)
+					{
+						this.BankTransfers = (IList<BankTransfers>)value;
+					}
+					else
+					{
+						this.BankTransfers = null;
 					}
 				}
 			}			

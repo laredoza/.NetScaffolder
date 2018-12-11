@@ -8,12 +8,12 @@ public class ContextNHibernateTemplate : BaseTemplate
 	public string MappingPostFix { get; set; }
     public IDriver Driver { get; set; }
 	public List<Table> Models { get; set; }
-	public CopyrightHeader Header { get; set; }
 
 	public override string TransformText()
 	{
 		//Debugger.Break();
-		Header = GetHeader(ContextData.ContextName);
+		Header = new CopyrightHeader();
+		Header.Filename = ContextData.ContextName;
 #>
 
 <#= Header.TransformText() #>
@@ -25,13 +25,12 @@ public class ContextNHibernateTemplate : BaseTemplate
 
 using System.Data;
 <#+ foreach(var nameSpace in Driver.NameSpaces){ #>
-using <#= nameSpace #>;
+using <#= nameSpace.Replace("{DriverType}", "NHib") #>;
 <#+ } #>
 <#+ foreach(var nameSpace in DataType.AdditionalNamespaces){ #>
-using <#= nameSpace #>;
+using <#= nameSpace.Replace("{DriverType}", "NHib") #>;
 <#+ } #>
 using <#= MappingNamespace #>.<#= Driver.ParentFolder #>.<#= Driver.Prefix #>;
-using RepositoryEFDotnet.Contexts.<#= Driver.ParentFolder #>;
 
 namespace <#= ContextData.TransformFullnamespace(DataType.BaseNamespace) #>.<#= Driver.ParentFolder #>
 {
@@ -40,16 +39,29 @@ namespace <#= ContextData.TransformFullnamespace(DataType.BaseNamespace) #>.<#= 
 		#region CTOR
 		
 		// Use other target e.g. in memory sqlite
-	    public <#= string.Concat(Driver.Prefix, ContextData.ContextName)  #>(Configuration config)
+	    public <#= string.Concat(Driver.Prefix, ContextData.ContextName)  #>(Configuration config) : base(config)
 	    {
-			SetConfig(config);
         }
 		
 		// Use db as target
-	    public <#= string.Concat(Driver.Prefix, ContextData.ContextName)  #>(<#= Driver.ConfigurationClass #> config)
+	    public <#= string.Concat(Driver.Prefix, ContextData.ContextName)  #>(<#= Driver.ConfigurationClass #> config) : base(config)
 	    {
             config.IsolationLevel(IsolationLevel.ReadCommitted);
-            SetConfig(config);
+	    }
+		
+		// Use external factory
+	    public <#= string.Concat(Driver.Prefix, ContextData.ContextName)  #>(ISessionFactory factory) : base(factory)
+	    {
+	    }
+		
+		// Use persistence configurer
+	    public <#= string.Concat(Driver.Prefix, ContextData.ContextName)  #>(IPersistenceConfigurer config) : base(config)
+	    {
+	    }
+		
+		// Use Fluent Configuration
+	    public <#= string.Concat(Driver.Prefix, ContextData.ContextName)  #>(FluentConfiguration config) : base(config)
+	    {
 	    }
 		
 		#endregion
@@ -57,7 +69,7 @@ namespace <#= ContextData.TransformFullnamespace(DataType.BaseNamespace) #>.<#= 
 	    protected override void ConfigureMappings(MappingConfiguration config)
 	    {
 <#+ foreach(var model in Models) { #>
-			config.FluentMappings.Add(typeof(<#= DataType.TransformModelName(model.TableName) #><#= MappingPostFix #>));
+			config.FluentMappings.Add(typeof(<#= string.Concat(ContextData.ContextName, DataType.TransformModelName(model.TableName)) #><#= MappingPostFix #>));
 <#+ } #>
         }
 	}

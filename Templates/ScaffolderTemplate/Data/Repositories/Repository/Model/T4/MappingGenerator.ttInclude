@@ -22,16 +22,15 @@
 		private List<string> processedModels = new List<string>();
 		
 		private string projectPath = string.Empty;
-
+		
         protected override void RunCore()
-        {		
+        {					
 			foreach(IDriver driver in MappingDataType.Drivers )
-			{
-				//Debugger.Break();
-				
+			{				
 				projectPath = string.Format(ProjectOutputPath, driver.ParentFolder, driver.Prefix);
 				var contextModels = Models.Where(o => ContextData.Models.Exists(x => x.SchemaName == o.SchemaName && x.TableName == o.TableName));
-				
+				//Debugger.Break();
+
 				if(driver.DriverType is EFDriverType)
 				{
 					GenerateEFMappings(driver, contextModels);
@@ -52,11 +51,10 @@
 			foreach(var model in contextModels)
 			{				
 				MappingDataType.MetaData = model;
-				string mappingFileName = string.Format(@"{0}\{1}\{2}{3}.g.cs", MappingDataType.OutputFolder, string.Concat(driver.Prefix, ContextData.ContextName), MappingDataType.ModelName, MappingDataType.PostFix);
+				string mappingFileName = string.Format(@"{0}\{1}\{2}{3}.g.cs", MappingDataType.OutputFolder, string.Concat(driver.Prefix, ContextData.ContextName), string.Concat(ContextData.ContextName, MappingDataType.ModelName), MappingDataType.PostFix);
 				
 				// Generate configurations
 				var configTemplate = new MappingNHibernateTemplate();
-				
 				configTemplate.EntityNamespace = EntityNamespace;
 				configTemplate.Driver = driver;
 				configTemplate.PostFix = MappingDataType.PostFix;
@@ -65,20 +63,12 @@
 				configTemplate.Model = model;
 				configTemplate.Models = Models;
 				configTemplate.ContextData = ContextData;
-
-
-				
 			
 				if(!string.IsNullOrEmpty(projectPath))
 				{
 					configTemplate.Output.Project =  projectPath;
 				}
 				
-				configTemplate.CompanyText = CompanyText;
-			configTemplate.LicenseText = LicenseText;
-			configTemplate.HeaderText = HeaderText;
-
-			
 				configTemplate.RenderToFile(mappingFileName);
 			}
 		}
@@ -88,7 +78,7 @@
 			foreach(var model in contextModels)
 			{				
 				MappingDataType.MetaData = model;
-				string mappingFileName = string.Format(@"{0}\{1}\{2}{3}.g.cs", MappingDataType.OutputFolder, string.Concat(driver.Prefix, ContextData.ContextName), MappingDataType.ModelName, MappingDataType.PostFix);
+				string mappingFileName = string.Format(@"{0}\{1}\{2}{3}.g.cs", MappingDataType.OutputFolder, string.Concat(driver.Prefix, ContextData.ContextName), string.Concat(ContextData.ContextName, MappingDataType.ModelName), MappingDataType.PostFix);
 				
 				// Generate configurations
 				var configTemplate = new MappingTemplate();
@@ -100,16 +90,12 @@
 				configTemplate.Model = model;
 				configTemplate.Models = Models;
 				configTemplate.ContextData = ContextData;
-
-				
 			
 				if(!string.IsNullOrEmpty(projectPath))
 				{
 					configTemplate.Output.Project =  projectPath;
 				}
-				configTemplate.CompanyText = CompanyText;
-			configTemplate.LicenseText = LicenseText;
-			configTemplate.HeaderText = HeaderText;
+				
 				configTemplate.RenderToFile(mappingFileName);
 			}
 		}
@@ -119,7 +105,7 @@
 			foreach(var model in contextModels)
 			{				
 				MappingDataType.MetaData = model;
-				string mappingFileName = string.Format(@"{0}\{1}\{2}{3}.g.cs", MappingDataType.OutputFolder, string.Concat(driver.Prefix, ContextData.ContextName), MappingDataType.ModelName, MappingDataType.PostFix);
+				string mappingFileName = string.Format(@"{0}\{1}\{2}{3}.g.cs", MappingDataType.OutputFolder, string.Concat(driver.Prefix, ContextData.ContextName), string.Concat(ContextData.ContextName, MappingDataType.ModelName), MappingDataType.PostFix);
 				
 				// Generate configurations
 				var configTemplate = new MappingCoreTemplate();
@@ -131,16 +117,12 @@
 				configTemplate.Model = model;
 				configTemplate.Models = Models;
 				configTemplate.ContextData = ContextData;
-
-				
 			
 				if(!string.IsNullOrEmpty(projectPath))
 				{
 					configTemplate.Output.Project =  projectPath;
 				}
-				configTemplate.CompanyText = CompanyText;
-			configTemplate.LicenseText = LicenseText;
-			configTemplate.HeaderText = HeaderText;
+				
 				configTemplate.RenderToFile(mappingFileName);
 			}
 		}

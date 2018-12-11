@@ -1,22 +1,16 @@
 ﻿
-// <copyright file="FullContext.g.cs" company="Dot Net Scaffolder">
-//  Copyright (c) 2018 MIT License
+// <copyright file="FullContext.g.cs" company="MIT">
+//  Copyright (c) 2018 MIT
 // </copyright>  
 
- // Permission is hereby granted, free of charge, to any person obtaining a copy of 
-// this software and associated documentation files (the "Software"), to deal in th
-// e Software without restriction, including without limitation the rights to use, 
-// copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the 
-// Software, and to permit persons to whom the Software is furnished to do so, subj
-// ect to the following conditions: The above copyright notice and this permission 
-// notice shall be included in all copies or substantial portions of the Software. 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
-// ED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR 
-// A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYR
-// IGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN 
-// ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WIT
-// H THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
+// to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+// and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER 
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS 
+// IN THE SOFTWARE.
 
 
 // *******************************************************************
@@ -29,24 +23,28 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System.Configuration;
+using RepositoryEFDotnet.Contexts.EFCore.Base.Context;
 using RepositoryEFDotnet.Core.Base;
-using Banking.Models.Context.Mappings.EFCore.SqlServer;
-using Banking.Models.Entity;
-using RepositoryEFDotnet.Contexts.EFCore;
+using RepositoryEFDotnet.Data.Context.Mappings.EFCore.SqlServer;
+using RepositoryEFDotnet.Data.Entity;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
-namespace Banking.Models.Context.EFCore
+
+namespace RepositoryEFDotnet.Data.Context.EFCore
 {
 	public partial class SqlServerFullContext : BaseContext
 	{	
 		#region CTOR
 
-	    public SqlServerFullContext(string connectionString)
-	        : base(connectionString)
+	    public SqlServerFullContext(string connectionString, IServiceProvider provider = null)
+	        : base(connectionString, provider)
 	    {
 	    }
 
-	    public SqlServerFullContext(DbContextOptions<SqlServerFullContext> options) 
-			: base(options) 
+	    public SqlServerFullContext(DbContextOptions<SqlServerFullContext> options, IServiceProvider provider = null) 
+			: base(options, provider) 
 		{
 		}
 		
@@ -66,18 +64,15 @@ namespace Banking.Models.Context.EFCore
 			
 			#region Mappings
 			
-			modelBuilder.ApplyConfiguration(new BankAccountMap());
-			modelBuilder.ApplyConfiguration(new BookMap());
-			modelBuilder.ApplyConfiguration(new CountryMap());
-			modelBuilder.ApplyConfiguration(new CustomerMap());
-			modelBuilder.ApplyConfiguration(new OrderMap());
-			modelBuilder.ApplyConfiguration(new ProductMap());
-			modelBuilder.ApplyConfiguration(new SoftwareMap());
-			modelBuilder.ApplyConfiguration(new softwareproviderMap());
-			modelBuilder.ApplyConfiguration(new burgerTableMap());
-			modelBuilder.ApplyConfiguration(new BankTransfersMap());
-			modelBuilder.ApplyConfiguration(new OrderDetailsMap());
-			modelBuilder.ApplyConfiguration(new SelfRefTAbleMap());
+			modelBuilder.ApplyConfiguration(new FullContextBankAccountMap());
+			modelBuilder.ApplyConfiguration(new FullContextBankTransfersMap());
+			modelBuilder.ApplyConfiguration(new FullContextBookMap());
+			modelBuilder.ApplyConfiguration(new FullContextCountryMap());
+			modelBuilder.ApplyConfiguration(new FullContextCustomerMap());
+			modelBuilder.ApplyConfiguration(new FullContextOrderMap());
+			modelBuilder.ApplyConfiguration(new FullContextOrderDetailsMap());
+			modelBuilder.ApplyConfiguration(new FullContextProductMap());
+			modelBuilder.ApplyConfiguration(new FullContextSoftwareMap());
 
 			#endregion
 			
@@ -87,22 +82,21 @@ namespace Banking.Models.Context.EFCore
 			
 
 			#endregion
+			
+			this.Seed(modelBuilder);
         }
 		
 		#region Db Sets
 		
 		public virtual DbSet<BankAccount> BankAccount { get; set; }
+		public virtual DbSet<BankTransfers> BankTransfers { get; set; }
 		public virtual DbSet<Book> Book { get; set; }
 		public virtual DbSet<Country> Country { get; set; }
 		public virtual DbSet<Customer> Customer { get; set; }
 		public virtual DbSet<Order> Order { get; set; }
+		public virtual DbSet<OrderDetails> OrderDetails { get; set; }
 		public virtual DbSet<Product> Product { get; set; }
 		public virtual DbSet<Software> Software { get; set; }
-		public virtual DbSet<softwareprovider> softwareprovider { get; set; }
-		public virtual DbSet<burgerTable> burgerTable { get; set; }
-		public virtual DbSet<BankTransfers> BankTransfers { get; set; }
-		public virtual DbSet<OrderDetails> OrderDetails { get; set; }
-		public virtual DbSet<SelfRefTAble> SelfRefTAble { get; set; }
 
 		#endregion
 		
@@ -110,8 +104,8 @@ namespace Banking.Models.Context.EFCore
         
 		protected override void SetupContext()
         {
-            //Configuration.LazyLoadingEnabled = true;
-            //Configuration.ProxyCreationEnabled = true;
+            //Configuration.LazyLoadingEnabled = false;
+            //Configuration.ProxyCreationEnabled = false;
             //Configuration.AutoDetectChangesEnabled = false;
 			
 			//Database.SetInitializer(new CreateDatabaseIfNotExists<SqlServerFullContext>());
@@ -120,5 +114,73 @@ namespace Banking.Models.Context.EFCore
         }
 		
 		#endregion
+
+        #region Bulk
+        
+        /// <summary>
+        /// Bulk delete
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="items"></param>
+        public override void BulkDelete<TEntity>(IEnumerable<TEntity> items)
+        {
+            this.BulkDelete(items);
+        }
+
+        /// <summary>
+        /// Bulk delete async
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public async override Task BulkDeleteAsync<TEntity>(IEnumerable<TEntity> items)
+        {
+            await this.BulkDeleteAsync(items);
+        }
+
+        /// <summary>
+        /// Bulk insert
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="items"></param>
+        public override void BulkInsert<TEntity>(IEnumerable<TEntity> items)
+        {
+            this.BulkInsert(items);
+        }
+
+        /// <summary>
+        /// Bulk insert async
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public async override Task BulkInsertAsync<TEntity>(IEnumerable<TEntity> items)
+        {
+            await this.BulkInsertAsync(items);
+        }
+
+        /// <summary>
+        /// Bulk update
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="items"></param>
+        public override void BulkUpdate<TEntity>(IEnumerable<TEntity> items)
+        {
+            this.BulkUpdate(items);
+        }
+
+        /// <summary>
+        /// Bulk update async
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public override async Task BulkUpdateAsync<TEntity>(IEnumerable<TEntity> items)
+        {
+            await this.BulkUpdateAsync(items);
+        }
+
+        #endregion
+
 	}
 }

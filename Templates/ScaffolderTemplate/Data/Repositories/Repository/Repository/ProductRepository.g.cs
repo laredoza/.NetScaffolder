@@ -1,22 +1,16 @@
 ﻿
-// <copyright file="Product.g.cs" company="Dot Net Scaffolder">
-//  Copyright (c) 2018 MIT License
+// <copyright file="Product.g.cs" company="MIT">
+//  Copyright (c) 2018 MIT
 // </copyright>  
 
- // Permission is hereby granted, free of charge, to any person obtaining a copy of 
-// this software and associated documentation files (the "Software"), to deal in th
-// e Software without restriction, including without limitation the rights to use, 
-// copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the 
-// Software, and to permit persons to whom the Software is furnished to do so, subj
-// ect to the following conditions: The above copyright notice and this permission 
-// notice shall be included in all copies or substantial portions of the Software. 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
-// ED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR 
-// A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYR
-// IGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN 
-// ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WIT
-// H THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
+// to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+// and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER 
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS 
+// IN THE SOFTWARE.
 
 
 // *******************************************************************
@@ -27,16 +21,18 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Banking.Models.Interfaces;
-using Banking.Models.Entity;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
+using RepositoryEFDotnet.Data.Interfaces;
+using RepositoryEFDotnet.Data.Entity;
 using RepositoryEFDotnet.Core.Base;
 
-namespace Banking.Models.Repository
+namespace RepositoryEFDotnet.Data.Repository
 {
 	/// <summary>
 	/// The ProductRepository class responsible for database functions in the Product table
 	/// </summary>
-	public partial class ProductRepository : UowRepository<Product> , IProductRepository
+	public partial class ProductRepository : UowRepository<IProduct> , IProductRepository
 	{		
 		#region CTOR
 		
@@ -48,6 +44,11 @@ namespace Banking.Models.Repository
 		{
 		}
 		
+		/// <summary>
+        /// The constructor for ProductRepository
+        /// </summary>
+		public ProductRepository() {}
+		
 		#endregion
 		
 		#region Load
@@ -56,39 +57,97 @@ namespace Banking.Models.Repository
         /// Load Product entities from the database using the composite primary keys
         /// </summary
         /// <param name="productId">int</param>
+		/// <param name="includes">params Expression<Func<IProduct, object>>[]</param>
         /// <returns>IProduct</returns>
-		public virtual IProduct LoadByProductId(int productId)
+		public virtual IProduct LoadByProductId(int productId, bool cache, params Expression<Func<IProduct, object>>[] includes)
 		{
-			return this.UnitOfWork.FirstOrDefault<Product>(o => o.ProductId == productId);
+			var expr = this.Convert(includes);
+			return this.UnitOfWork.FirstOrDefault<Product>(o => o.ProductId == productId, cache, expr);
+		}
+		
+        /// <summary>
+        /// Load Product entities async from the database using the composite primary keys
+        /// </summary
+        /// <param name="productId">int</param>
+		/// <param name="includes">params Expression<Func<IProduct, object>>[]</param>
+        /// <returns>IProduct</returns>
+		public virtual async Task<IProduct> LoadByProductIdAsync(int productId, bool cache, params Expression<Func<IProduct, object>>[] includes)
+		{
+			var expr = this.Convert(includes);
+			return await this.UnitOfWork.FirstOrDefaultAsync<Product>(cache, o => o.ProductId == productId, expr);
 		}
 
         /// <summary>
         /// Load Product entities from the database using the UnitPrice field
         /// </summary>
         /// <param name="unitPrice">Nullable<decimal></param>
+		/// <param name="includes">params Expression<Func<IProduct, object>>[]</param>
         /// <returns>IList<IProduct></returns>
-		public virtual IList<IProduct> LoadByUnitPrice(Nullable<decimal> unitPrice)
+		public virtual IList<IProduct> LoadByUnitPrice(Nullable<decimal> unitPrice, bool cache, params Expression<Func<IProduct, object>>[] includes)
 		{
-			return this.UnitOfWork.AllMatching<Product>(o => o.UnitPrice == unitPrice).ToList<IProduct>();
+			var expr = this.Convert(includes);
+			return this.UnitOfWork.AllMatching<Product>(o => o.UnitPrice == unitPrice, cache, expr).ToList<IProduct>();
+		}
+		
+        /// <summary>
+        /// Load Product entities async from the database using the UnitPrice field
+        /// </summary>
+        /// <param name="unitPrice">Nullable<decimal></param>
+		/// <param name="includes">params Expression<Func<IProduct, object>>[]</param>
+        /// <returns>IList<IProduct></returns>
+		public virtual async Task<IList<IProduct>> LoadByUnitPriceAsync(Nullable<decimal> unitPrice, bool cache, params Expression<Func<IProduct, object>>[] includes)
+		{
+			var expr = this.Convert(includes);
+			var result = await this.UnitOfWork.AllMatchingAsync<Product>(o => o.UnitPrice == unitPrice,cache, expr);
+			return result.ToList<IProduct>();
 		}
 
         /// <summary>
         /// Load Product entities from the database using the AmountInStock field
         /// </summary>
         /// <param name="amountInStock">Nullable<short></param>
+		/// <param name="includes">params Expression<Func<IProduct, object>>[]</param>
         /// <returns>IList<IProduct></returns>
-		public virtual IList<IProduct> LoadByAmountInStock(Nullable<short> amountInStock)
+		public virtual IList<IProduct> LoadByAmountInStock(Nullable<short> amountInStock, bool cache, params Expression<Func<IProduct, object>>[] includes)
 		{
-			return this.UnitOfWork.AllMatching<Product>(o => o.AmountInStock == amountInStock).ToList<IProduct>();
+			var expr = this.Convert(includes);
+			return this.UnitOfWork.AllMatching<Product>(o => o.AmountInStock == amountInStock, cache, expr).ToList<IProduct>();
+		}
+		
+        /// <summary>
+        /// Load Product entities async from the database using the AmountInStock field
+        /// </summary>
+        /// <param name="amountInStock">Nullable<short></param>
+		/// <param name="includes">params Expression<Func<IProduct, object>>[]</param>
+        /// <returns>IList<IProduct></returns>
+		public virtual async Task<IList<IProduct>> LoadByAmountInStockAsync(Nullable<short> amountInStock, bool cache, params Expression<Func<IProduct, object>>[] includes)
+		{
+			var expr = this.Convert(includes);
+			var result = await this.UnitOfWork.AllMatchingAsync<Product>(o => o.AmountInStock == amountInStock,cache, expr);
+			return result.ToList<IProduct>();
 		}
 
         /// <summary>
         /// Load all Product entities from the database.
         /// </summary>
+		/// <param name="includes">params Expression<Func<IProduct, object>>[]</param>
         /// <returns>IList<IProduct></returns>
-		public virtual IList<IProduct> LoadAll()
+		public virtual IList<IProduct> LoadAll(bool cache, params Expression<Func<IProduct, object>>[] includes)
 		{
-			return this.UnitOfWork.GetAll<Product>().ToList<IProduct>();
+			var expr = this.Convert(includes);
+			return this.UnitOfWork.GetAll<Product>(cache, expr).ToList<IProduct>();
+		}
+		
+        /// <summary>
+        /// Load all Product entities async from the database.
+        /// </summary>
+		/// <param name="includes">params Expression<Func<IProduct, object>>[]</param>
+        /// <returns>IList<IProduct></returns>
+		public virtual async Task<IList<IProduct>> LoadAllAsync(bool cache, params Expression<Func<IProduct,  object>>[] includes)
+		{
+			var expr = this.Convert(includes);
+			var result = await this.UnitOfWork.GetAllAsync<Product>(cache, expr);
+			return result.ToList<IProduct>();
 		}
 		
 		#endregion
@@ -100,16 +159,40 @@ namespace Banking.Models.Repository
         /// </summary>
         /// <param name="productDescription">string</param>
 		/// <param name="caseSensitive">bool</param>
+		/// <param name="includes">params Expression<Func<IProduct, object>>[]</param>
         /// <returns>IList<IProduct></returns>
-		public virtual IList<IProduct> SearchByProductDescription(string productDescription, bool caseSensitive = false)
+		public virtual IList<IProduct> SearchByProductDescription(string productDescription, bool cache, bool caseSensitive = false, params Expression<Func<IProduct, object>>[] includes)
 		{		
+			var expr = this.Convert(includes);
 			if(caseSensitive) 
 			{
-				return this.UnitOfWork.AllMatching<Product>(o => o.ProductDescription.Contains(productDescription)).ToList<IProduct>();
+				return this.UnitOfWork.AllMatching<Product>(o => o.ProductDescription.Contains(productDescription), cache, expr).ToList<IProduct>();
 			}
 			else
 			{
-				return this.UnitOfWork.AllMatching<Product>(o => o.ProductDescription.ToLower().Contains(productDescription.ToLower())).ToList<IProduct>();
+				return this.UnitOfWork.AllMatching<Product>(o => o.ProductDescription.ToLower().Contains(productDescription.ToLower()), cache, expr).ToList<IProduct>();
+			}
+		}
+		
+        /// <summary>
+        /// Search for Product entities async in the database by ProductDescription
+        /// </summary>
+        /// <param name="productDescription">string</param>
+		/// <param name="caseSensitive">bool</param>
+		/// <param name="includes">params Expression<Func<IProduct, object>>[]</param>
+        /// <returns>IList<IProduct></returns>
+		public virtual async Task<IList<IProduct>> SearchByProductDescriptionAsync(string productDescription, bool cache, bool caseSensitive = false, params Expression<Func<IProduct, object>>[] includes)
+		{		
+			var expr = this.Convert(includes);
+			if(caseSensitive) 
+			{
+				var result = await this.UnitOfWork.AllMatchingAsync<Product>(o => o.ProductDescription.Contains(productDescription), cache, expr);
+				return result.ToList<IProduct>();
+			}
+			else
+			{
+				var result = await this.UnitOfWork.AllMatchingAsync<Product>(o => o.ProductDescription.ToLower().Contains(productDescription.ToLower()), cache, expr);
+				return result.ToList<IProduct>();
 			}
 		}
 
@@ -118,16 +201,40 @@ namespace Banking.Models.Repository
         /// </summary>
         /// <param name="unitAmount">string</param>
 		/// <param name="caseSensitive">bool</param>
+		/// <param name="includes">params Expression<Func<IProduct, object>>[]</param>
         /// <returns>IList<IProduct></returns>
-		public virtual IList<IProduct> SearchByUnitAmount(string unitAmount, bool caseSensitive = false)
+		public virtual IList<IProduct> SearchByUnitAmount(string unitAmount, bool cache, bool caseSensitive = false, params Expression<Func<IProduct, object>>[] includes)
 		{		
+			var expr = this.Convert(includes);
 			if(caseSensitive) 
 			{
-				return this.UnitOfWork.AllMatching<Product>(o => o.UnitAmount.Contains(unitAmount)).ToList<IProduct>();
+				return this.UnitOfWork.AllMatching<Product>(o => o.UnitAmount.Contains(unitAmount), cache, expr).ToList<IProduct>();
 			}
 			else
 			{
-				return this.UnitOfWork.AllMatching<Product>(o => o.UnitAmount.ToLower().Contains(unitAmount.ToLower())).ToList<IProduct>();
+				return this.UnitOfWork.AllMatching<Product>(o => o.UnitAmount.ToLower().Contains(unitAmount.ToLower()), cache, expr).ToList<IProduct>();
+			}
+		}
+		
+        /// <summary>
+        /// Search for Product entities async in the database by UnitAmount
+        /// </summary>
+        /// <param name="unitAmount">string</param>
+		/// <param name="caseSensitive">bool</param>
+		/// <param name="includes">params Expression<Func<IProduct, object>>[]</param>
+        /// <returns>IList<IProduct></returns>
+		public virtual async Task<IList<IProduct>> SearchByUnitAmountAsync(string unitAmount, bool cache, bool caseSensitive = false, params Expression<Func<IProduct, object>>[] includes)
+		{		
+			var expr = this.Convert(includes);
+			if(caseSensitive) 
+			{
+				var result = await this.UnitOfWork.AllMatchingAsync<Product>(o => o.UnitAmount.Contains(unitAmount), cache, expr);
+				return result.ToList<IProduct>();
+			}
+			else
+			{
+				var result = await this.UnitOfWork.AllMatchingAsync<Product>(o => o.UnitAmount.ToLower().Contains(unitAmount.ToLower()), cache, expr);
+				return result.ToList<IProduct>();
 			}
 		}
 
@@ -136,16 +243,40 @@ namespace Banking.Models.Repository
         /// </summary>
         /// <param name="publisher">string</param>
 		/// <param name="caseSensitive">bool</param>
+		/// <param name="includes">params Expression<Func<IProduct, object>>[]</param>
         /// <returns>IList<IProduct></returns>
-		public virtual IList<IProduct> SearchByPublisher(string publisher, bool caseSensitive = false)
+		public virtual IList<IProduct> SearchByPublisher(string publisher, bool cache, bool caseSensitive = false, params Expression<Func<IProduct, object>>[] includes)
 		{		
+			var expr = this.Convert(includes);
 			if(caseSensitive) 
 			{
-				return this.UnitOfWork.AllMatching<Product>(o => o.Publisher.Contains(publisher)).ToList<IProduct>();
+				return this.UnitOfWork.AllMatching<Product>(o => o.Publisher.Contains(publisher), cache, expr).ToList<IProduct>();
 			}
 			else
 			{
-				return this.UnitOfWork.AllMatching<Product>(o => o.Publisher.ToLower().Contains(publisher.ToLower())).ToList<IProduct>();
+				return this.UnitOfWork.AllMatching<Product>(o => o.Publisher.ToLower().Contains(publisher.ToLower()), cache, expr).ToList<IProduct>();
+			}
+		}
+		
+        /// <summary>
+        /// Search for Product entities async in the database by Publisher
+        /// </summary>
+        /// <param name="publisher">string</param>
+		/// <param name="caseSensitive">bool</param>
+		/// <param name="includes">params Expression<Func<IProduct, object>>[]</param>
+        /// <returns>IList<IProduct></returns>
+		public virtual async Task<IList<IProduct>> SearchByPublisherAsync(string publisher, bool cache, bool caseSensitive = false, params Expression<Func<IProduct, object>>[] includes)
+		{		
+			var expr = this.Convert(includes);
+			if(caseSensitive) 
+			{
+				var result = await this.UnitOfWork.AllMatchingAsync<Product>(o => o.Publisher.Contains(publisher), cache, expr);
+				return result.ToList<IProduct>();
+			}
+			else
+			{
+				var result = await this.UnitOfWork.AllMatchingAsync<Product>(o => o.Publisher.ToLower().Contains(publisher.ToLower()), cache, expr);
+				return result.ToList<IProduct>();
 			}
 		}
 
@@ -154,15 +285,37 @@ namespace Banking.Models.Repository
 		#region Modifiers
 		
         /// <summary>
-        /// Save the Product entity to the database.
+        /// Add the Product entity to the database.
         /// </summary>
         /// <param name="entity">IProduct</param>
         /// <returns>bool</returns>
-		public virtual bool Save(IProduct entity)
+		public virtual bool Add(IProduct entity)
 		{
 			var entityToSave = new Product(entity, false);
 			this.UnitOfWork.Add(entityToSave);
 			bool result = this.UnitOfWork.Save();
+			
+			// Populate passed in entity with newly saved values
+			entity.ProductId = entityToSave.ProductId;
+			entity.ProductDescription = entityToSave.ProductDescription;
+			entity.UnitPrice = entityToSave.UnitPrice;
+			entity.UnitAmount = entityToSave.UnitAmount;
+			entity.Publisher = entityToSave.Publisher;
+			entity.AmountInStock = entityToSave.AmountInStock;
+			
+			return result;
+		}
+		
+        /// <summary>
+        /// Add the Product entity async to the database.
+        /// </summary>
+        /// <param name="entity">IProduct</param>
+        /// <returns>bool</returns>
+		public virtual async Task<bool> AddAsync(IProduct entity)
+		{
+			var entityToSave = new Product(entity, false);
+			await this.UnitOfWork.AddAsync(entityToSave);
+			bool result = await this.UnitOfWork.SaveAsync();
 			
 			// Populate passed in entity with newly saved values
 			entity.ProductId = entityToSave.ProductId;
@@ -182,28 +335,17 @@ namespace Banking.Models.Repository
         /// <returns>bool</returns>
 		public virtual bool Update(IProduct entity)
 		{
-			bool doUpdate = false;
-			var entityToUpdate = this.UnitOfWork.FirstOrDefault<Product>(o =>  o.ProductId == entity.ProductId );
-			
-			if (entityToUpdate == null)
-			{
-				throw new Exception("The Product entity does not exist");
-			}
-			
-			// Optimisation: Flag if any field has changed
-			if (entityToUpdate.ProductDescription != entity.ProductDescription) { entityToUpdate.ProductDescription = entity.ProductDescription;doUpdate = true; }
-			if (entityToUpdate.UnitPrice != entity.UnitPrice) { entityToUpdate.UnitPrice = entity.UnitPrice;doUpdate = true; }
-			if (entityToUpdate.UnitAmount != entity.UnitAmount) { entityToUpdate.UnitAmount = entity.UnitAmount;doUpdate = true; }
-			if (entityToUpdate.Publisher != entity.Publisher) { entityToUpdate.Publisher = entity.Publisher;doUpdate = true; }
-			if (entityToUpdate.AmountInStock != entity.AmountInStock) { entityToUpdate.AmountInStock = entity.AmountInStock;doUpdate = true; }
-
-			// Optimisation: Only execute update if a field has changed
-			if (doUpdate)
-			{
-				return this.UnitOfWork.Modify(entityToUpdate);
-			}
-			
-			return false;
+			return this.UnitOfWork.Modify(entity);
+		}
+		
+        /// <summary>
+        /// Update the Product entity async in the database if any values have changed
+        /// </summary>
+        /// <param name="entity">IProduct</param>
+        /// <returns>bool</returns>
+		public virtual async Task<bool> UpdateAsync(IProduct entity)
+		{
+			return await this.UnitOfWork.ModifyAsync(entity);
 		}
 		
         /// <summary>
@@ -213,14 +355,17 @@ namespace Banking.Models.Repository
         /// <returns>bool</returns>
 		public virtual bool Delete(IProduct entity)
 		{		
-			var entityToDelete = this.UnitOfWork.FirstOrDefault<Product>(o =>  o.ProductId == entity.ProductId );
-			
-			if(entityToDelete == null)
-			{
-				throw new Exception("The Product entity does not exist");
-			}
-			
-			return this.UnitOfWork.Remove(entityToDelete);
+			return this.UnitOfWork.Remove(entity);
+		}
+		
+        /// <summary>
+        /// Delete the Product entity async from the database
+        /// </summary>
+        /// <param name="entity">IProduct</param>
+        /// <returns>bool</returns>
+		public virtual async Task<bool> DeleteAsync(IProduct entity)
+		{		
+			return await this.UnitOfWork.RemoveAsync(entity);
 		}
 
 		/// <summary>
@@ -228,9 +373,9 @@ namespace Banking.Models.Repository
         /// </summary>
         /// <param name="productId">int</param>
         /// <returns>bool</returns>
-		public virtual bool Delete( int productId)
+		public virtual bool Delete( int productId, bool cache)
 		{
-			var entityToDelete = this.UnitOfWork.FirstOrDefault<Product>(o =>  o.ProductId == productId );
+			var entityToDelete = this.UnitOfWork.FirstOrDefault<Product>(o =>  o.ProductId == productId , cache);
 			
 			if(entityToDelete == null)
 			{
@@ -239,6 +384,129 @@ namespace Banking.Models.Repository
 			
 			return this.UnitOfWork.Remove(entityToDelete);
 		}
+		
+		/// <summary>
+        /// Delete the Product entity async from the database
+        /// </summary>
+        /// <param name="productId">int</param>
+        /// <returns>bool</returns>
+		public virtual async Task<bool> DeleteAsync( int productId, bool cache)
+		{
+			var entityToDelete = await this.UnitOfWork.FirstOrDefaultAsync<Product>(cache, o =>  o.ProductId == productId  );
+			
+			if(entityToDelete == null)
+			{
+				throw new Exception("The Product entity does not exist");
+			}
+			
+			return await this.UnitOfWork.RemoveAsync(entityToDelete);
+		}
+		
+		#endregion
+		
+		#region Aggregates
+		
+		public virtual TResult Max<TResult>(Expression<Func<IProduct, TResult>> maxExpression, bool cache)
+		{
+			return this.UnitOfWork.Max(cache, Expression.Lambda<Func<Product, TResult>>(maxExpression.Body, maxExpression.Parameters));
+		}
+		
+		public virtual async Task<TResult> MaxAsync<TResult>(Expression<Func<IProduct, TResult>> maxExpression, bool cache)
+		{
+			return await this.UnitOfWork.MaxAsync(cache, Expression.Lambda<Func<Product, TResult>>(maxExpression.Body, maxExpression.Parameters));
+		}
+		
+		public virtual TResult Min<TResult>(Expression<Func<IProduct, TResult>> minExpression, bool cache)
+		{
+			return this.UnitOfWork.Min(cache, Expression.Lambda<Func<Product, TResult>>(minExpression.Body, minExpression.Parameters));
+		}
+		
+		public virtual async Task<TResult> MinAsync<TResult>(Expression<Func<IProduct, TResult>> minExpression, bool cache)
+		{
+			return await this.UnitOfWork.MinAsync(cache, Expression.Lambda<Func<Product, TResult>>(minExpression.Body, minExpression.Parameters));
+		}
+		
+		#endregion
+		
+		#region Bulk
+
+        /// <summary>
+        ///     Bulk delete entities
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="items"></param>
+        public void BulkDelete(IEnumerable<IProduct> items)
+		{
+			this.UnitOfWork.BulkDelete<IProduct>(items);
+		}
+
+        /// <summary>
+        ///     Bulk delete entities async
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public async Task BulkDeleteAsync(IEnumerable<IProduct> items)
+		{
+			await this.UnitOfWork.BulkDeleteAsync<IProduct>(items);
+		}
+
+        /// <summary>
+        ///     Bulk insert entities
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="items"></param>
+        public void BulkInsert(IEnumerable<IProduct> items)
+		{
+			this.UnitOfWork.BulkInsert<IProduct>(items);
+		}
+        
+        /// <summary>
+        /// Bulk insert entities async
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public async Task BulkInsertAsync(IEnumerable<IProduct> items)
+		{
+			await this.UnitOfWork.BulkInsertAsync<IProduct>(items);
+		}
+
+        /// <summary>
+        /// Bulk update entities 
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="items"></param>
+        public void BulkUpdate(IEnumerable<IProduct> items)
+		{
+			this.UnitOfWork.BulkUpdate<IProduct>(items);
+		}
+
+        /// <summary>
+        /// Bulk update entities async
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public async Task BulkUpdateAsync(IEnumerable<IProduct> items)
+		{
+			await this.UnitOfWork.BulkUpdateAsync<IProduct>(items);
+		}
+
+        #endregion
+
+		#region Helpers
+		
+	    protected virtual Expression<Func<Product, object>>[] Convert(params Expression<Func<IProduct, object>>[] includes)
+	    {
+	        var expr = new List<Expression<Func<Product, object>>>();
+	        foreach (var exprItem in includes)
+	        {
+	            expr.Add(Expression.Lambda<Func<Product, object>>(exprItem.Body, exprItem.Parameters));
+	        }
+
+	        return expr.ToArray();
+	    }
 		
 		#endregion
 	}

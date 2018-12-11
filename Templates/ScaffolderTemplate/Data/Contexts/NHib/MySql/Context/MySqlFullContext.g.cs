@@ -1,22 +1,16 @@
 ﻿
-// <copyright file="FullContext.g.cs" company="Dot Net Scaffolder">
-//  Copyright (c) 2018 MIT License
+// <copyright file="FullContext.g.cs" company="MIT">
+//  Copyright (c) 2018 MIT
 // </copyright>  
 
- // Permission is hereby granted, free of charge, to any person obtaining a copy of 
-// this software and associated documentation files (the "Software"), to deal in th
-// e Software without restriction, including without limitation the rights to use, 
-// copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the 
-// Software, and to permit persons to whom the Software is furnished to do so, subj
-// ect to the following conditions: The above copyright notice and this permission 
-// notice shall be included in all copies or substantial portions of the Software. 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
-// ED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR 
-// A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYR
-// IGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN 
-// ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WIT
-// H THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
+// to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+// and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER 
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS 
+// IN THE SOFTWARE.
 
 
 // *******************************************************************
@@ -29,45 +23,55 @@ using NHibernate;
 using NHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using FluentNHibernate.Cfg;
+using RepositoryEFDotnet.Contexts.NHib.Base.Context;
 using RepositoryEFDotnet.Core.Base;
-using Banking.Models.Context.Mappings.NHib.MySql;
-using RepositoryEFDotnet.Contexts.NHib;
+using RepositoryEFDotnet.Data.Context.Mappings.NHib.MySql;
 
-namespace Banking.Models.Context.NHib
+namespace RepositoryEFDotnet.Data.Context.NHib
 {
 	public partial class MySqlFullContext : BaseContext
 	{	
 		#region CTOR
 		
 		// Use other target e.g. in memory sqlite
-	    public MySqlFullContext(Configuration config)
+	    public MySqlFullContext(Configuration config) : base(config)
 	    {
-			SetConfig(config);
         }
 		
 		// Use db as target
-	    public MySqlFullContext(MySQLConfiguration config)
+	    public MySqlFullContext(MySQLConfiguration config) : base(config)
 	    {
             config.IsolationLevel(IsolationLevel.ReadCommitted);
-            SetConfig(config);
+	    }
+		
+		// Use external factory
+	    public MySqlFullContext(ISessionFactory factory) : base(factory)
+	    {
+	    }
+		
+		// Use persistence configurer
+	    public MySqlFullContext(IPersistenceConfigurer config) : base(config)
+	    {
+	    }
+		
+		// Use Fluent Configuration
+	    public MySqlFullContext(FluentConfiguration config) : base(config)
+	    {
 	    }
 		
 		#endregion
 		
 	    protected override void ConfigureMappings(MappingConfiguration config)
 	    {
-			config.FluentMappings.Add(typeof(BankAccountMap));
-			config.FluentMappings.Add(typeof(BookMap));
-			config.FluentMappings.Add(typeof(CountryMap));
-			config.FluentMappings.Add(typeof(CustomerMap));
-			config.FluentMappings.Add(typeof(OrderMap));
-			config.FluentMappings.Add(typeof(ProductMap));
-			config.FluentMappings.Add(typeof(SoftwareMap));
-			config.FluentMappings.Add(typeof(softwareproviderMap));
-			config.FluentMappings.Add(typeof(burgerTableMap));
-			config.FluentMappings.Add(typeof(BankTransfersMap));
-			config.FluentMappings.Add(typeof(OrderDetailsMap));
-			config.FluentMappings.Add(typeof(SelfRefTAbleMap));
+			config.FluentMappings.Add(typeof(FullContextBankAccountMap));
+			config.FluentMappings.Add(typeof(FullContextBankTransfersMap));
+			config.FluentMappings.Add(typeof(FullContextBookMap));
+			config.FluentMappings.Add(typeof(FullContextCountryMap));
+			config.FluentMappings.Add(typeof(FullContextCustomerMap));
+			config.FluentMappings.Add(typeof(FullContextOrderMap));
+			config.FluentMappings.Add(typeof(FullContextOrderDetailsMap));
+			config.FluentMappings.Add(typeof(FullContextProductMap));
+			config.FluentMappings.Add(typeof(FullContextSoftwareMap));
         }
 	}
 }

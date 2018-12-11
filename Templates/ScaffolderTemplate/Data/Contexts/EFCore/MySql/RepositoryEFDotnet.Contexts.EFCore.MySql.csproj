@@ -13,6 +13,7 @@
     <ProjectReference Include="..\..\..\..\Core\RepositoryEFDotnet.Core.csproj" />
     <ProjectReference Include="..\..\..\Entities\Entity\RepositoryEFDotnet.Data.Entities.Entity.csproj" />
     <ProjectReference Include="..\Base\RepositoryEFDotnet.Contexts.EFCore.Base.csproj" />
+    <ProjectReference Include="..\SqlServer\RepositoryEFDotnet.Contexts.EFCore.SqlServer.csproj" />
   </ItemGroup>
 
 </Project>

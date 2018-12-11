@@ -1,0 +1,280 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0</TargetFrameworks>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="Model\Package\**" />
+    <EmbeddedResource Remove="Model\Package\**" />
+    <None Remove="Model\Package\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Core\RepositoryEFDotnet.Core.csproj" />
+    <ProjectReference Include="..\..\Entities\Entity\RepositoryEFDotnet.Data.Entities.Entity.csproj" />
+    <ProjectReference Include="..\..\Interfaces\Interface\RepositoryEFDotnet.Data.Interface.ModelInterfaces.csproj" />
+    <ProjectReference Include="..\..\Interfaces\RepositoryInterfaces\RepositoryEFDotnet.Data.Interface.RepositoryInterfaces.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="RunGenerator.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>RunGenerator.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="RunGenerator.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>RunGenerator.cs</LastGenOutput>
+      <LastOutputs>
+..\..\ApplicationServices\ApplicationService\ApplicationService\NewApplicationService.g.cs
+..\..\Contexts\EF\MySql\Context\MySqlAccountContext.g.cs
+..\..\Contexts\EF\MySql\Context\MySqlCustomerContext.g.cs
+..\..\Contexts\EF\MySql\Context\MySqlFullContext.g.cs
+..\..\Contexts\EF\MySql\Database\DatabaseManager.g.cs
+..\..\Contexts\EF\MySql\Mappings\MySqlAccountContext\AccountContextBankAccountMap.g.cs
+..\..\Contexts\EF\MySql\Mappings\MySqlAccountContext\AccountContextBankTransfersMap.g.cs
+..\..\Contexts\EF\MySql\Mappings\MySqlCustomerContext\CustomerContextBookMap.g.cs
+..\..\Contexts\EF\MySql\Mappings\MySqlCustomerContext\CustomerContextCountryMap.g.cs
+..\..\Contexts\EF\MySql\Mappings\MySqlCustomerContext\CustomerContextCustomerMap.g.cs
+..\..\Contexts\EF\MySql\Mappings\MySqlCustomerContext\CustomerContextOrderDetailsMap.g.cs
+..\..\Contexts\EF\MySql\Mappings\MySqlCustomerContext\CustomerContextOrderMap.g.cs
+..\..\Contexts\EF\MySql\Mappings\MySqlCustomerContext\CustomerContextProductMap.g.cs
+..\..\Contexts\EF\MySql\Mappings\MySqlCustomerContext\CustomerContextSoftwareMap.g.cs
+..\..\Contexts\EF\MySql\Mappings\MySqlFullContext\FullContextBankAccountMap.g.cs
+..\..\Contexts\EF\MySql\Mappings\MySqlFullContext\FullContextBankTransfersMap.g.cs
+..\..\Contexts\EF\MySql\Mappings\MySqlFullContext\FullContextBookMap.g.cs
+..\..\Contexts\EF\MySql\Mappings\MySqlFullContext\FullContextCountryMap.g.cs
+..\..\Contexts\EF\MySql\Mappings\MySqlFullContext\FullContextCustomerMap.g.cs
+..\..\Contexts\EF\MySql\Mappings\MySqlFullContext\FullContextOrderDetailsMap.g.cs
+..\..\Contexts\EF\MySql\Mappings\MySqlFullContext\FullContextOrderMap.g.cs
+..\..\Contexts\EF\MySql\Mappings\MySqlFullContext\FullContextProductMap.g.cs
+..\..\Contexts\EF\MySql\Mappings\MySqlFullContext\FullContextSoftwareMap.g.cs
+..\..\Contexts\EF\Oracle\Context\OracleAccountContext.g.cs
+..\..\Contexts\EF\Oracle\Context\OracleCustomerContext.g.cs
+..\..\Contexts\EF\Oracle\Context\OracleFullContext.g.cs
+..\..\Contexts\EF\Oracle\Database\DatabaseManager.g.cs
+..\..\Contexts\EF\Oracle\Mappings\OracleAccountContext\AccountContextBankAccountMap.g.cs
+..\..\Contexts\EF\Oracle\Mappings\OracleAccountContext\AccountContextBankTransfersMap.g.cs
+..\..\Contexts\EF\Oracle\Mappings\OracleCustomerContext\CustomerContextBookMap.g.cs
+..\..\Contexts\EF\Oracle\Mappings\OracleCustomerContext\CustomerContextCountryMap.g.cs
+..\..\Contexts\EF\Oracle\Mappings\OracleCustomerContext\CustomerContextCustomerMap.g.cs
+..\..\Contexts\EF\Oracle\Mappings\OracleCustomerContext\CustomerContextOrderDetailsMap.g.cs
+..\..\Contexts\EF\Oracle\Mappings\OracleCustomerContext\CustomerContextOrderMap.g.cs
+..\..\Contexts\EF\Oracle\Mappings\OracleCustomerContext\CustomerContextProductMap.g.cs
+..\..\Contexts\EF\Oracle\Mappings\OracleCustomerContext\CustomerContextSoftwareMap.g.cs
+..\..\Contexts\EF\Oracle\Mappings\OracleFullContext\FullContextBankAccountMap.g.cs
+..\..\Contexts\EF\Oracle\Mappings\OracleFullContext\FullContextBankTransfersMap.g.cs
+..\..\Contexts\EF\Oracle\Mappings\OracleFullContext\FullContextBookMap.g.cs
+..\..\Contexts\EF\Oracle\Mappings\OracleFullContext\FullContextCountryMap.g.cs
+..\..\Contexts\EF\Oracle\Mappings\OracleFullContext\FullContextCustomerMap.g.cs
+..\..\Contexts\EF\Oracle\Mappings\OracleFullContext\FullContextOrderDetailsMap.g.cs
+..\..\Contexts\EF\Oracle\Mappings\OracleFullContext\FullContextOrderMap.g.cs
+..\..\Contexts\EF\Oracle\Mappings\OracleFullContext\FullContextProductMap.g.cs
+..\..\Contexts\EF\Oracle\Mappings\OracleFullContext\FullContextSoftwareMap.g.cs
+..\..\Contexts\EF\Postgres\Context\PostgresAccountContext.g.cs
+..\..\Contexts\EF\Postgres\Context\PostgresCustomerContext.g.cs
+..\..\Contexts\EF\Postgres\Context\PostgresFullContext.g.cs
+..\..\Contexts\EF\Postgres\Database\DatabaseManager.g.cs
+..\..\Contexts\EF\Postgres\Mappings\PostgresAccountContext\AccountContextBankAccountMap.g.cs
+..\..\Contexts\EF\Postgres\Mappings\PostgresAccountContext\AccountContextBankTransfersMap.g.cs
+..\..\Contexts\EF\Postgres\Mappings\PostgresCustomerContext\CustomerContextBookMap.g.cs
+..\..\Contexts\EF\Postgres\Mappings\PostgresCustomerContext\CustomerContextCountryMap.g.cs
+..\..\Contexts\EF\Postgres\Mappings\PostgresCustomerContext\CustomerContextCustomerMap.g.cs
+..\..\Contexts\EF\Postgres\Mappings\PostgresCustomerContext\CustomerContextOrderDetailsMap.g.cs
+..\..\Contexts\EF\Postgres\Mappings\PostgresCustomerContext\CustomerContextOrderMap.g.cs
+..\..\Contexts\EF\Postgres\Mappings\PostgresCustomerContext\CustomerContextProductMap.g.cs
+..\..\Contexts\EF\Postgres\Mappings\PostgresCustomerContext\CustomerContextSoftwareMap.g.cs
+..\..\Contexts\EF\Postgres\Mappings\PostgresFullContext\FullContextBankAccountMap.g.cs
+..\..\Contexts\EF\Postgres\Mappings\PostgresFullContext\FullContextBankTransfersMap.g.cs
+..\..\Contexts\EF\Postgres\Mappings\PostgresFullContext\FullContextBookMap.g.cs
+..\..\Contexts\EF\Postgres\Mappings\PostgresFullContext\FullContextCountryMap.g.cs
+..\..\Contexts\EF\Postgres\Mappings\PostgresFullContext\FullContextCustomerMap.g.cs
+..\..\Contexts\EF\Postgres\Mappings\PostgresFullContext\FullContextOrderDetailsMap.g.cs
+..\..\Contexts\EF\Postgres\Mappings\PostgresFullContext\FullContextOrderMap.g.cs
+..\..\Contexts\EF\Postgres\Mappings\PostgresFullContext\FullContextProductMap.g.cs
+..\..\Contexts\EF\Postgres\Mappings\PostgresFullContext\FullContextSoftwareMap.g.cs
+..\..\Contexts\EF\SqlServer\Context\SqlServerAccountContext.g.cs
+..\..\Contexts\EF\SqlServer\Context\SqlServerCustomerContext.g.cs
+..\..\Contexts\EF\SqlServer\Context\SqlServerFullContext.g.cs
+..\..\Contexts\EF\SqlServer\Database\DatabaseManager.g.cs
+..\..\Contexts\EF\SqlServer\Mappings\SqlServerAccountContext\AccountContextBankAccountMap.g.cs
+..\..\Contexts\EF\SqlServer\Mappings\SqlServerAccountContext\AccountContextBankTransfersMap.g.cs
+..\..\Contexts\EF\SqlServer\Mappings\SqlServerCustomerContext\CustomerContextBookMap.g.cs
+..\..\Contexts\EF\SqlServer\Mappings\SqlServerCustomerContext\CustomerContextCountryMap.g.cs
+..\..\Contexts\EF\SqlServer\Mappings\SqlServerCustomerContext\CustomerContextCustomerMap.g.cs
+..\..\Contexts\EF\SqlServer\Mappings\SqlServerCustomerContext\CustomerContextOrderDetailsMap.g.cs
+..\..\Contexts\EF\SqlServer\Mappings\SqlServerCustomerContext\CustomerContextOrderMap.g.cs
+..\..\Contexts\EF\SqlServer\Mappings\SqlServerCustomerContext\CustomerContextProductMap.g.cs
+..\..\Contexts\EF\SqlServer\Mappings\SqlServerCustomerContext\CustomerContextSoftwareMap.g.cs
+..\..\Contexts\EF\SqlServer\Mappings\SqlServerFullContext\FullContextBankAccountMap.g.cs
+..\..\Contexts\EF\SqlServer\Mappings\SqlServerFullContext\FullContextBankTransfersMap.g.cs
+..\..\Contexts\EF\SqlServer\Mappings\SqlServerFullContext\FullContextBookMap.g.cs
+..\..\Contexts\EF\SqlServer\Mappings\SqlServerFullContext\FullContextCountryMap.g.cs
+..\..\Contexts\EF\SqlServer\Mappings\SqlServerFullContext\FullContextCustomerMap.g.cs
+..\..\Contexts\EF\SqlServer\Mappings\SqlServerFullContext\FullContextOrderDetailsMap.g.cs
+..\..\Contexts\EF\SqlServer\Mappings\SqlServerFullContext\FullContextOrderMap.g.cs
+..\..\Contexts\EF\SqlServer\Mappings\SqlServerFullContext\FullContextProductMap.g.cs
+..\..\Contexts\EF\SqlServer\Mappings\SqlServerFullContext\FullContextSoftwareMap.g.cs
+..\..\Contexts\EFCore\MySql\Context\MySqlAccountContext.g.cs
+..\..\Contexts\EFCore\MySql\Context\MySqlCustomerContext.g.cs
+..\..\Contexts\EFCore\MySql\Context\MySqlFullContext.g.cs
+..\..\Contexts\EFCore\MySql\Database\DatabaseManager.g.cs
+..\..\Contexts\EFCore\MySql\Mappings\MySqlAccountContext\AccountContextBankAccountMap.g.cs
+..\..\Contexts\EFCore\MySql\Mappings\MySqlAccountContext\AccountContextBankTransfersMap.g.cs
+..\..\Contexts\EFCore\MySql\Mappings\MySqlCustomerContext\CustomerContextBookMap.g.cs
+..\..\Contexts\EFCore\MySql\Mappings\MySqlCustomerContext\CustomerContextCountryMap.g.cs
+..\..\Contexts\EFCore\MySql\Mappings\MySqlCustomerContext\CustomerContextCustomerMap.g.cs
+..\..\Contexts\EFCore\MySql\Mappings\MySqlCustomerContext\CustomerContextOrderDetailsMap.g.cs
+..\..\Contexts\EFCore\MySql\Mappings\MySqlCustomerContext\CustomerContextOrderMap.g.cs
+..\..\Contexts\EFCore\MySql\Mappings\MySqlCustomerContext\CustomerContextProductMap.g.cs
+..\..\Contexts\EFCore\MySql\Mappings\MySqlCustomerContext\CustomerContextSoftwareMap.g.cs
+..\..\Contexts\EFCore\MySql\Mappings\MySqlFullContext\FullContextBankAccountMap.g.cs
+..\..\Contexts\EFCore\MySql\Mappings\MySqlFullContext\FullContextBankTransfersMap.g.cs
+..\..\Contexts\EFCore\MySql\Mappings\MySqlFullContext\FullContextBookMap.g.cs
+..\..\Contexts\EFCore\MySql\Mappings\MySqlFullContext\FullContextCountryMap.g.cs
+..\..\Contexts\EFCore\MySql\Mappings\MySqlFullContext\FullContextCustomerMap.g.cs
+..\..\Contexts\EFCore\MySql\Mappings\MySqlFullContext\FullContextOrderDetailsMap.g.cs
+..\..\Contexts\EFCore\MySql\Mappings\MySqlFullContext\FullContextOrderMap.g.cs
+..\..\Contexts\EFCore\MySql\Mappings\MySqlFullContext\FullContextProductMap.g.cs
+..\..\Contexts\EFCore\MySql\Mappings\MySqlFullContext\FullContextSoftwareMap.g.cs
+..\..\Contexts\EFCore\SqlServer\Context\SqlServerAccountContext.g.cs
+..\..\Contexts\EFCore\SqlServer\Context\SqlServerCustomerContext.g.cs
+..\..\Contexts\EFCore\SqlServer\Context\SqlServerFullContext.g.cs
+..\..\Contexts\EFCore\SqlServer\Database\DatabaseManager.g.cs
+..\..\Contexts\EFCore\SqlServer\Mappings\SqlServerAccountContext\AccountContextBankAccountMap.g.cs
+..\..\Contexts\EFCore\SqlServer\Mappings\SqlServerAccountContext\AccountContextBankTransfersMap.g.cs
+..\..\Contexts\EFCore\SqlServer\Mappings\SqlServerCustomerContext\CustomerContextBookMap.g.cs
+..\..\Contexts\EFCore\SqlServer\Mappings\SqlServerCustomerContext\CustomerContextCountryMap.g.cs
+..\..\Contexts\EFCore\SqlServer\Mappings\SqlServerCustomerContext\CustomerContextCustomerMap.g.cs
+..\..\Contexts\EFCore\SqlServer\Mappings\SqlServerCustomerContext\CustomerContextOrderDetailsMap.g.cs
+..\..\Contexts\EFCore\SqlServer\Mappings\SqlServerCustomerContext\CustomerContextOrderMap.g.cs
+..\..\Contexts\EFCore\SqlServer\Mappings\SqlServerCustomerContext\CustomerContextProductMap.g.cs
+..\..\Contexts\EFCore\SqlServer\Mappings\SqlServerCustomerContext\CustomerContextSoftwareMap.g.cs
+..\..\Contexts\EFCore\SqlServer\Mappings\SqlServerFullContext\FullContextBankAccountMap.g.cs
+..\..\Contexts\EFCore\SqlServer\Mappings\SqlServerFullContext\FullContextBankTransfersMap.g.cs
+..\..\Contexts\EFCore\SqlServer\Mappings\SqlServerFullContext\FullContextBookMap.g.cs
+..\..\Contexts\EFCore\SqlServer\Mappings\SqlServerFullContext\FullContextCountryMap.g.cs
+..\..\Contexts\EFCore\SqlServer\Mappings\SqlServerFullContext\FullContextCustomerMap.g.cs
+..\..\Contexts\EFCore\SqlServer\Mappings\SqlServerFullContext\FullContextOrderDetailsMap.g.cs
+..\..\Contexts\EFCore\SqlServer\Mappings\SqlServerFullContext\FullContextOrderMap.g.cs
+..\..\Contexts\EFCore\SqlServer\Mappings\SqlServerFullContext\FullContextProductMap.g.cs
+..\..\Contexts\EFCore\SqlServer\Mappings\SqlServerFullContext\FullContextSoftwareMap.g.cs
+..\..\Contexts\NHib\MySql\Context\MySqlAccountContext.g.cs
+..\..\Contexts\NHib\MySql\Context\MySqlCustomerContext.g.cs
+..\..\Contexts\NHib\MySql\Context\MySqlFullContext.g.cs
+..\..\Contexts\NHib\MySql\Database\DatabaseManager.g.cs
+..\..\Contexts\NHib\MySql\Mappings\MySqlAccountContext\AccountContextBankAccountMap.g.cs
+..\..\Contexts\NHib\MySql\Mappings\MySqlAccountContext\AccountContextBankTransfersMap.g.cs
+..\..\Contexts\NHib\MySql\Mappings\MySqlCustomerContext\CustomerContextBookMap.g.cs
+..\..\Contexts\NHib\MySql\Mappings\MySqlCustomerContext\CustomerContextCountryMap.g.cs
+..\..\Contexts\NHib\MySql\Mappings\MySqlCustomerContext\CustomerContextCustomerMap.g.cs
+..\..\Contexts\NHib\MySql\Mappings\MySqlCustomerContext\CustomerContextOrderDetailsMap.g.cs
+..\..\Contexts\NHib\MySql\Mappings\MySqlCustomerContext\CustomerContextOrderMap.g.cs
+..\..\Contexts\NHib\MySql\Mappings\MySqlCustomerContext\CustomerContextProductMap.g.cs
+..\..\Contexts\NHib\MySql\Mappings\MySqlCustomerContext\CustomerContextSoftwareMap.g.cs
+..\..\Contexts\NHib\MySql\Mappings\MySqlFullContext\FullContextBankAccountMap.g.cs
+..\..\Contexts\NHib\MySql\Mappings\MySqlFullContext\FullContextBankTransfersMap.g.cs
+..\..\Contexts\NHib\MySql\Mappings\MySqlFullContext\FullContextBookMap.g.cs
+..\..\Contexts\NHib\MySql\Mappings\MySqlFullContext\FullContextCountryMap.g.cs
+..\..\Contexts\NHib\MySql\Mappings\MySqlFullContext\FullContextCustomerMap.g.cs
+..\..\Contexts\NHib\MySql\Mappings\MySqlFullContext\FullContextOrderDetailsMap.g.cs
+..\..\Contexts\NHib\MySql\Mappings\MySqlFullContext\FullContextOrderMap.g.cs
+..\..\Contexts\NHib\MySql\Mappings\MySqlFullContext\FullContextProductMap.g.cs
+..\..\Contexts\NHib\MySql\Mappings\MySqlFullContext\FullContextSoftwareMap.g.cs
+..\..\Contexts\NHib\Oracle\Context\OracleAccountContext.g.cs
+..\..\Contexts\NHib\Oracle\Context\OracleCustomerContext.g.cs
+..\..\Contexts\NHib\Oracle\Context\OracleFullContext.g.cs
+..\..\Contexts\NHib\Oracle\Database\DatabaseManager.g.cs
+..\..\Contexts\NHib\Oracle\Mappings\OracleAccountContext\AccountContextBankAccountMap.g.cs
+..\..\Contexts\NHib\Oracle\Mappings\OracleAccountContext\AccountContextBankTransfersMap.g.cs
+..\..\Contexts\NHib\Oracle\Mappings\OracleCustomerContext\CustomerContextBookMap.g.cs
+..\..\Contexts\NHib\Oracle\Mappings\OracleCustomerContext\CustomerContextCountryMap.g.cs
+..\..\Contexts\NHib\Oracle\Mappings\OracleCustomerContext\CustomerContextCustomerMap.g.cs
+..\..\Contexts\NHib\Oracle\Mappings\OracleCustomerContext\CustomerContextOrderDetailsMap.g.cs
+..\..\Contexts\NHib\Oracle\Mappings\OracleCustomerContext\CustomerContextOrderMap.g.cs
+..\..\Contexts\NHib\Oracle\Mappings\OracleCustomerContext\CustomerContextProductMap.g.cs
+..\..\Contexts\NHib\Oracle\Mappings\OracleCustomerContext\CustomerContextSoftwareMap.g.cs
+..\..\Contexts\NHib\Oracle\Mappings\OracleFullContext\FullContextBankAccountMap.g.cs
+..\..\Contexts\NHib\Oracle\Mappings\OracleFullContext\FullContextBankTransfersMap.g.cs
+..\..\Contexts\NHib\Oracle\Mappings\OracleFullContext\FullContextBookMap.g.cs
+..\..\Contexts\NHib\Oracle\Mappings\OracleFullContext\FullContextCountryMap.g.cs
+..\..\Contexts\NHib\Oracle\Mappings\OracleFullContext\FullContextCustomerMap.g.cs
+..\..\Contexts\NHib\Oracle\Mappings\OracleFullContext\FullContextOrderDetailsMap.g.cs
+..\..\Contexts\NHib\Oracle\Mappings\OracleFullContext\FullContextOrderMap.g.cs
+..\..\Contexts\NHib\Oracle\Mappings\OracleFullContext\FullContextProductMap.g.cs
+..\..\Contexts\NHib\Oracle\Mappings\OracleFullContext\FullContextSoftwareMap.g.cs
+..\..\Contexts\NHib\SqlServer\Context\SqlServerAccountContext.g.cs
+..\..\Contexts\NHib\SqlServer\Context\SqlServerCustomerContext.g.cs
+..\..\Contexts\NHib\SqlServer\Context\SqlServerFullContext.g.cs
+..\..\Contexts\NHib\SqlServer\Database\DatabaseManager.g.cs
+..\..\Contexts\NHib\SqlServer\Mappings\SqlServerAccountContext\AccountContextBankAccountMap.g.cs
+..\..\Contexts\NHib\SqlServer\Mappings\SqlServerAccountContext\AccountContextBankTransfersMap.g.cs
+..\..\Contexts\NHib\SqlServer\Mappings\SqlServerCustomerContext\CustomerContextBookMap.g.cs
+..\..\Contexts\NHib\SqlServer\Mappings\SqlServerCustomerContext\CustomerContextCountryMap.g.cs
+..\..\Contexts\NHib\SqlServer\Mappings\SqlServerCustomerContext\CustomerContextCustomerMap.g.cs
+..\..\Contexts\NHib\SqlServer\Mappings\SqlServerCustomerContext\CustomerContextOrderDetailsMap.g.cs
+..\..\Contexts\NHib\SqlServer\Mappings\SqlServerCustomerContext\CustomerContextOrderMap.g.cs
+..\..\Contexts\NHib\SqlServer\Mappings\SqlServerCustomerContext\CustomerContextProductMap.g.cs
+..\..\Contexts\NHib\SqlServer\Mappings\SqlServerCustomerContext\CustomerContextSoftwareMap.g.cs
+..\..\Contexts\NHib\SqlServer\Mappings\SqlServerFullContext\FullContextBankAccountMap.g.cs
+..\..\Contexts\NHib\SqlServer\Mappings\SqlServerFullContext\FullContextBankTransfersMap.g.cs
+..\..\Contexts\NHib\SqlServer\Mappings\SqlServerFullContext\FullContextBookMap.g.cs
+..\..\Contexts\NHib\SqlServer\Mappings\SqlServerFullContext\FullContextCountryMap.g.cs
+..\..\Contexts\NHib\SqlServer\Mappings\SqlServerFullContext\FullContextCustomerMap.g.cs
+..\..\Contexts\NHib\SqlServer\Mappings\SqlServerFullContext\FullContextOrderDetailsMap.g.cs
+..\..\Contexts\NHib\SqlServer\Mappings\SqlServerFullContext\FullContextOrderMap.g.cs
+..\..\Contexts\NHib\SqlServer\Mappings\SqlServerFullContext\FullContextProductMap.g.cs
+..\..\Contexts\NHib\SqlServer\Mappings\SqlServerFullContext\FullContextSoftwareMap.g.cs
+..\..\Dtos\Dto\Dto\BankAccountDto.g.cs
+..\..\Dtos\Dto\Dto\BankTransfersDto.g.cs
+..\..\Dtos\Dto\Dto\BookDto.g.cs
+..\..\Dtos\Dto\Dto\CountryDto.g.cs
+..\..\Dtos\Dto\Dto\CustomerDto.g.cs
+..\..\Dtos\Dto\Dto\OrderDetailsDto.g.cs
+..\..\Dtos\Dto\Dto\OrderDto.g.cs
+..\..\Dtos\Dto\Dto\ProductDto.g.cs
+..\..\Dtos\Dto\Dto\SoftwareDto.g.cs
+..\..\Entities\Entity\Entity\BankAccount.g.cs
+..\..\Entities\Entity\Entity\BankTransfers.g.cs
+..\..\Entities\Entity\Entity\Book.g.cs
+..\..\Entities\Entity\Entity\Country.g.cs
+..\..\Entities\Entity\Entity\Customer.g.cs
+..\..\Entities\Entity\Entity\Order.g.cs
+..\..\Entities\Entity\Entity\OrderDetails.g.cs
+..\..\Entities\Entity\Entity\Product.g.cs
+..\..\Entities\Entity\Entity\Software.g.cs
+..\..\Interfaces\ApplicationService\ApplicationService\INewApplicationService.g.cs
+..\..\Interfaces\Interface\Dto\IBankAccount.g.cs
+..\..\Interfaces\Interface\Dto\IBankTransfers.g.cs
+..\..\Interfaces\Interface\Dto\IBook.g.cs
+..\..\Interfaces\Interface\Dto\ICountry.g.cs
+..\..\Interfaces\Interface\Dto\ICustomer.g.cs
+..\..\Interfaces\Interface\Dto\IOrder.g.cs
+..\..\Interfaces\Interface\Dto\IOrderDetails.g.cs
+..\..\Interfaces\Interface\Dto\IProduct.g.cs
+..\..\Interfaces\Interface\Dto\ISoftware.g.cs
+..\..\Interfaces\RepositoryInterfaces\Repository\IBankAccountRepository.g.cs
+..\..\Interfaces\RepositoryInterfaces\Repository\IBankTransfersRepository.g.cs
+..\..\Interfaces\RepositoryInterfaces\Repository\IBookRepository.g.cs
+..\..\Interfaces\RepositoryInterfaces\Repository\ICountryRepository.g.cs
+..\..\Interfaces\RepositoryInterfaces\Repository\ICustomerRepository.g.cs
+..\..\Interfaces\RepositoryInterfaces\Repository\IOrderDetailsRepository.g.cs
+..\..\Interfaces\RepositoryInterfaces\Repository\IOrderRepository.g.cs
+..\..\Interfaces\RepositoryInterfaces\Repository\IProductRepository.g.cs
+..\..\Interfaces\RepositoryInterfaces\Repository\ISoftwareRepository.g.cs
+.\Register\RepositoryRegistration.g.cs
+.\Repository\BankAccountRepository.g.cs
+.\Repository\BankTransfersRepository.g.cs
+.\Repository\BookRepository.g.cs
+.\Repository\CountryRepository.g.cs
+.\Repository\CustomerRepository.g.cs
+.\Repository\OrderDetailsRepository.g.cs
+.\Repository\OrderRepository.g.cs
+.\Repository\ProductRepository.g.cs
+.\Repository\SoftwareRepository.g.cs
+</LastOutputs>
+    </None>
+  </ItemGroup>
+</Project>

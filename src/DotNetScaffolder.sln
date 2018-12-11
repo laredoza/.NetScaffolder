@@ -83,8 +83,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetScaffolder.Components
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetScaffolder.Components.Drivers.DefaultDrivers.Forms", "Projects\Components\Drivers\DefaultDrivers.Forms\DotNetScaffolder.Components.Drivers.DefaultDrivers.Forms.csproj", "{1BBFA5C5-C2B3-4FD9-818C-59259372EB01}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CachingTypes", "CachingTypes", "{DF93BCD3-1517-43CE-85DC-C02AFAC9623F}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -204,7 +202,6 @@ Global
 		{A4E7BEC8-D3C8-4AC2-90B6-2B54009F7A2B} = {27FE13BD-77E2-4E09-8722-79A72EE332A3}
 		{4D3153E7-FB28-4B1A-887B-F82C506CC7E9} = {B5808469-2046-4498-A605-80815955F007}
 		{1BBFA5C5-C2B3-4FD9-818C-59259372EB01} = {25CD886E-9282-4874-94A5-25DD198531C5}
-		{DF93BCD3-1517-43CE-85DC-C02AFAC9623F} = {97FA326E-B630-4FFC-A5E3-5F79B0773BF6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8C063C9C-8EFE-42DA-AE58-93472DC6F4C8}

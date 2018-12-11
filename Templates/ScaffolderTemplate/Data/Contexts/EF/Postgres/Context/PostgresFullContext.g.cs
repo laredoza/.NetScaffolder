@@ -1,22 +1,16 @@
 ﻿
-// <copyright file="FullContext.g.cs" company="Dot Net Scaffolder">
-//  Copyright (c) 2018 MIT License
+// <copyright file="FullContext.g.cs" company="MIT">
+//  Copyright (c) 2018 MIT
 // </copyright>  
 
- // Permission is hereby granted, free of charge, to any person obtaining a copy of 
-// this software and associated documentation files (the "Software"), to deal in th
-// e Software without restriction, including without limitation the rights to use, 
-// copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the 
-// Software, and to permit persons to whom the Software is furnished to do so, subj
-// ect to the following conditions: The above copyright notice and this permission 
-// notice shall be included in all copies or substantial portions of the Software. 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
-// ED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR 
-// A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYR
-// IGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN 
-// ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WIT
-// H THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
+// to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+// and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER 
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS 
+// IN THE SOFTWARE.
 
 
 // *******************************************************************
@@ -29,13 +23,14 @@ using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration;
 using System.Data.Entity.Infrastructure.Annotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Banking.Models.Entity;
+using RepositoryEFDotnet.Data.Entity;
+using RepositoryEFDotnet.Contexts.EF.Base.Context;
 using RepositoryEFDotnet.Core.Base;
-using Banking.Models.Context.Mappings.EF.Postgres;
+using RepositoryEFDotnet.Data.Context.Mappings.EF.Postgres;
+using RepositoryEFDotnet.Data.Entity;
 using System.Data.Common;
-using RepositoryEFDotnet.Contexts.EF;
 
-namespace Banking.Models.Context.EF
+namespace RepositoryEFDotnet.Data.Context.EF
 {
 	public partial class PostgresFullContext : BaseContext
 	{	
@@ -64,18 +59,15 @@ namespace Banking.Models.Context.EF
 			
 			#region Mappings
 			
-			modelBuilder.Configurations.Add(new BankAccountMap());
-			modelBuilder.Configurations.Add(new BookMap());
-			modelBuilder.Configurations.Add(new CountryMap());
-			modelBuilder.Configurations.Add(new CustomerMap());
-			modelBuilder.Configurations.Add(new OrderMap());
-			modelBuilder.Configurations.Add(new ProductMap());
-			modelBuilder.Configurations.Add(new SoftwareMap());
-			modelBuilder.Configurations.Add(new softwareproviderMap());
-			modelBuilder.Configurations.Add(new burgerTableMap());
-			modelBuilder.Configurations.Add(new BankTransfersMap());
-			modelBuilder.Configurations.Add(new OrderDetailsMap());
-			modelBuilder.Configurations.Add(new SelfRefTAbleMap());
+			modelBuilder.Configurations.Add(new FullContextBankAccountMap());
+			modelBuilder.Configurations.Add(new FullContextBankTransfersMap());
+			modelBuilder.Configurations.Add(new FullContextBookMap());
+			modelBuilder.Configurations.Add(new FullContextCountryMap());
+			modelBuilder.Configurations.Add(new FullContextCustomerMap());
+			modelBuilder.Configurations.Add(new FullContextOrderMap());
+			modelBuilder.Configurations.Add(new FullContextOrderDetailsMap());
+			modelBuilder.Configurations.Add(new FullContextProductMap());
+			modelBuilder.Configurations.Add(new FullContextSoftwareMap());
 
 			#endregion
 			
@@ -90,17 +82,14 @@ namespace Banking.Models.Context.EF
 		#region Db Sets
 		
 		public virtual DbSet<BankAccount> BankAccount { get; set; }
+		public virtual DbSet<BankTransfers> BankTransfers { get; set; }
 		public virtual DbSet<Book> Book { get; set; }
 		public virtual DbSet<Country> Country { get; set; }
 		public virtual DbSet<Customer> Customer { get; set; }
 		public virtual DbSet<Order> Order { get; set; }
+		public virtual DbSet<OrderDetails> OrderDetails { get; set; }
 		public virtual DbSet<Product> Product { get; set; }
 		public virtual DbSet<Software> Software { get; set; }
-		public virtual DbSet<softwareprovider> softwareprovider { get; set; }
-		public virtual DbSet<burgerTable> burgerTable { get; set; }
-		public virtual DbSet<BankTransfers> BankTransfers { get; set; }
-		public virtual DbSet<OrderDetails> OrderDetails { get; set; }
-		public virtual DbSet<SelfRefTAble> SelfRefTAble { get; set; }
 
 		#endregion
 		

@@ -3,12 +3,12 @@ public class DtoTemplate : BaseTemplate
 {
 	public DtoDataType DataType { get; set; }
 	public string DtoInterfaceNamespace { get; set; }
-	public CopyrightHeader Header { get; set; }
 	
 	public override string TransformText()
 	{
-		//Debugger.Break(); 
-		Header = GetHeader(DataType.DtoNameFull);
+		Debugger.Break();
+		Header = new CopyrightHeader();
+		Header.Filename = DataType.DtoNameFull;
 #>
 
 <#= Header.TransformText() #>
@@ -33,7 +33,7 @@ namespace <#= DataType.FullNamespace #>
 		
 		public <#= DataType.DtoNameFull #>()
 		{
-<#+ foreach(var child in DataType.MetaData.DistinctChildRelationships.Where(o => o.ReferencedMultiplicity == RelationshipMultiplicity.Many && ( o.RelatedTable==null?true:o.RelatedTable.EnabledForCodeGeneration))){ #>
+<#+ foreach(var child in DataType.MetaData.DistinctChildRelationships.Where(o => o.ReferencedMultiplicity == RelationshipMultiplicity.Many)){ #>
 			this.<#= RelationshipNameFormatting.FormatName(child.ReferencedTableName, child.RelationshipAlias, DataType.NamingConvention) #> = new <#= DataType.CollectionOption.ClassName #> <I<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #>>();
 <#+ } #>
 		}
@@ -46,13 +46,13 @@ namespace <#= DataType.FullNamespace #>
 			this.<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #> = item.<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>;
 <#+ } #>
 
-<#+ foreach(var child in DataType.MetaData.DistinctChildRelationships.Where(o => o.ReferencedMultiplicity == RelationshipMultiplicity.Many && ( o.RelatedTable==null?true:o.RelatedTable.EnabledForCodeGeneration))){ #>
+<#+ foreach(var child in DataType.MetaData.DistinctChildRelationships.Where(o => o.ReferencedMultiplicity == RelationshipMultiplicity.Many)){ #>
 			this.<#= RelationshipNameFormatting.FormatName(child.ReferencedTableName, child.RelationshipAlias, DataType.NamingConvention) #> = new <#= DataType.CollectionOption.ClassName #> <I<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #>>();
 <#+ } #>
 
 			if(deep)
 			{
-<#+ foreach(var child in DataType.MetaData.DistinctChildRelationships.Where(o => o.ReferencedMultiplicity == RelationshipMultiplicity.Many && ( o.RelatedTable==null?true:o.RelatedTable.EnabledForCodeGeneration))){ #>
+<#+ foreach(var child in DataType.MetaData.DistinctChildRelationships.Where(o => o.ReferencedMultiplicity == RelationshipMultiplicity.Many)){ #>
 				if(item.<#= RelationshipNameFormatting.FormatName(child.ReferencedTableName, child.RelationshipAlias, DataType.NamingConvention) #> != null)
 				{
 					foreach(var childItem in item.<#= RelationshipNameFormatting.FormatName(child.ReferencedTableName, child.RelationshipAlias, DataType.NamingConvention) #>)
@@ -61,10 +61,10 @@ namespace <#= DataType.FullNamespace #>
 					}
 				}
 <#+ } #>
-<#+ foreach(var child in DataType.MetaData.DistinctChildRelationships.Where(o => o.ReferencedMultiplicity != RelationshipMultiplicity.Many && ( o.RelatedTable==null?true:o.RelatedTable.EnabledForCodeGeneration))){ #>
+<#+ foreach(var child in DataType.MetaData.DistinctChildRelationships.Where(o => o.ReferencedMultiplicity != RelationshipMultiplicity.Many)){ #>
 				this.<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #> = new <#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #><#= DataType.PostFix #>(item.<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #>, deep);
 <#+ } #>
-<#+ foreach(var parent in DataType.MetaData.DistinctParentRelationships.Where( a=>a.RelatedTable==null?true:a.RelatedTable.EnabledForCodeGeneration).ToList()){ #>
+<#+ foreach(var parent in DataType.MetaData.DistinctParentRelationships){ #>
                 if(item.<#= RelationshipNameFormatting.FormatName(parent.ReferencedTableName, parent.RelationshipAlias, DataType.NamingConvention) #> != null)
                 {
 				    this.<#= RelationshipNameFormatting.FormatName(parent.ReferencedTableName, parent.RelationshipAlias, DataType.NamingConvention) #> = new <#= DataType.NamingConvention.ApplyNamingConvention(parent.ReferencedTableName) #><#= DataType.PostFix #>(item.<#= RelationshipNameFormatting.FormatName(parent.ReferencedTableName, parent.RelationshipAlias, DataType.NamingConvention) #>, deep);
@@ -86,10 +86,10 @@ namespace <#= DataType.FullNamespace #>
 		
 		#region Child Relationships
 		
-<#+ foreach(var child in DataType.MetaData.DistinctChildRelationships.Where(o => o.ReferencedMultiplicity == RelationshipMultiplicity.Many && ( o.RelatedTable==null?true:o.RelatedTable.EnabledForCodeGeneration))){ #>
+<#+ foreach(var child in DataType.MetaData.DistinctChildRelationships.Where(o => o.ReferencedMultiplicity == RelationshipMultiplicity.Many)){ #>
 		public <#= DataType.CollectionOption.ClassNameInterface #><<#= DataType.TransformDtoType(child.ReferencedTableName) #>> <#= RelationshipNameFormatting.FormatName(child.ReferencedTableName, child.RelationshipAlias, DataType.NamingConvention) #> { get; set; }
 <#+ } #>
-<#+ foreach(var child in DataType.MetaData.DistinctChildRelationships.Where(o => o.ReferencedMultiplicity != RelationshipMultiplicity.Many && ( o.RelatedTable==null?true:o.RelatedTable.EnabledForCodeGeneration))){ #>
+<#+ foreach(var child in DataType.MetaData.DistinctChildRelationships.Where(o => o.ReferencedMultiplicity != RelationshipMultiplicity.Many)){ #>
 		public <#= DataType.TransformDtoType(child.ReferencedTableName) #> <#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #> { get; set; }
 <#+ } #>
 
@@ -97,7 +97,7 @@ namespace <#= DataType.FullNamespace #>
 		
 		#region Parent Relationships
 		
-<#+ foreach(var parent in DataType.MetaData.DistinctParentRelationships.Where( a=>a.RelatedTable==null?true:a.RelatedTable.EnabledForCodeGeneration).ToList()){ #>
+<#+ foreach(var parent in DataType.MetaData.DistinctParentRelationships){ #>
 		public <#= DataType.TransformDtoType(parent.ReferencedTableName) #> <#= RelationshipNameFormatting.FormatName(parent.ReferencedTableName, parent.RelationshipAlias, DataType.NamingConvention) #> { get; set; }
 <#+ } #>
 		

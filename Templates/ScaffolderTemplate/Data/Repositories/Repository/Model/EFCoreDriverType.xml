@@ -2,8 +2,11 @@
 <EFCoreDriverType xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <CreateDb>true</CreateDb>
   <IncludeColumnOrder>true</IncludeColumnOrder>
-  <LazyLoadingEnabled>true</LazyLoadingEnabled>
+  <LazyLoadingEnabled>false</LazyLoadingEnabled>
   <LoggingEnabled>true</LoggingEnabled>
-  <ProxyCreationEnabled>true</ProxyCreationEnabled>
+  <ProxyCreationEnabled>false</ProxyCreationEnabled>
+  <UseAlias>true</UseAlias>
   <UseSeperateConfigClasses>false</UseSeperateConfigClasses>
+  <EnableCache>false</EnableCache>
+  <Cache>2bc1b0c4-1e41-9146-82cf-599181ce4412</Cache>
 </EFCoreDriverType>

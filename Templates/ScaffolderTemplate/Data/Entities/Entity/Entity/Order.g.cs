@@ -1,22 +1,16 @@
 ﻿
-// <copyright file="Order.g.cs" company="Dot Net Scaffolder">
-//  Copyright (c) 2018 MIT License
+// <copyright file="Order.g.cs" company="MIT">
+//  Copyright (c) 2018 MIT
 // </copyright>  
 
- // Permission is hereby granted, free of charge, to any person obtaining a copy of 
-// this software and associated documentation files (the "Software"), to deal in th
-// e Software without restriction, including without limitation the rights to use, 
-// copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the 
-// Software, and to permit persons to whom the Software is furnished to do so, subj
-// ect to the following conditions: The above copyright notice and this permission 
-// notice shall be included in all copies or substantial portions of the Software. 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
-// ED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR 
-// A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYR
-// IGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN 
-// ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WIT
-// H THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
+// to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+// and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER 
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS 
+// IN THE SOFTWARE.
 
 
 // *******************************************************************
@@ -26,9 +20,9 @@
 
 using System;
 using System.Collections.Generic;
-using Banking.Models.Interfaces;
+using RepositoryEFDotnet.Data.Interfaces;
 
-namespace Banking.Models.Entity
+namespace RepositoryEFDotnet.Data.Entity
 {
 	public partial class Order : IOrder 
 	{
@@ -37,7 +31,6 @@ namespace Banking.Models.Entity
 		public Order()
 		{
 			this.OrderDetails = new List <OrderDetails>();
-			this.softwareprovider = new List <softwareprovider>();
 		}
 		
 		public Order(IOrder item, bool deep = false)
@@ -53,7 +46,6 @@ namespace Banking.Models.Entity
 			this.ShippingCity = item.ShippingCity;
 			this.ShippingZip = item.ShippingZip;
 			this.OrderDetails = new List <OrderDetails>();
-			this.softwareprovider = new List <softwareprovider>();
 
 			if(deep)
 			{
@@ -62,13 +54,6 @@ namespace Banking.Models.Entity
 					foreach(var childItem in item.OrderDetails)
 					{
 						this.OrderDetails.Add(new OrderDetails(childItem, deep));
-					}
-				}
-				if(item.softwareprovider != null)
-				{
-					foreach(var childItem in item.softwareprovider)
-					{
-						this.softwareprovider.Add(new softwareprovider(childItem, deep));
 					}
 				}
 				if(item.Customer != null)
@@ -114,30 +99,6 @@ namespace Banking.Models.Entity
 					else
 					{
 						this.OrderDetails = null;
-					}
-				}
-			}			
-		}
-        
-        public virtual IList<softwareprovider> softwareprovider { get; set; }
-	
-        IList<Isoftwareprovider> IOrder.softwareprovider 
-		{ 
-			get
-			{
-				return this.softwareprovider == null ? null : (IList<Isoftwareprovider>)this.softwareprovider;
-			}
-			set
-			{
-				if(value != this.softwareprovider)
-				{
-					if(value != null)
-					{
-						this.softwareprovider = (IList<softwareprovider>)value;
-					}
-					else
-					{
-						this.softwareprovider = null;
 					}
 				}
 			}			

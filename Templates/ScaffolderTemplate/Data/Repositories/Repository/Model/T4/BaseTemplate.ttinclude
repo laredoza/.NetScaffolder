@@ -10,20 +10,7 @@
 <#+
 public abstract class BaseTemplate : Template 
 {
-	public string CompanyText { get; set; }
-	public string LicenseText { get; set; }
-	public string HeaderText { get; set; } 
-
+	public CopyrightHeader Header = new CopyrightHeader();
 	public abstract override string TransformText();
-
-	public CopyrightHeader GetHeader(string filename){
-		var header = new CopyrightHeader();
-		header.Company = CompanyText;
-		header.License = LicenseText;
-		header.Header = HeaderText;
-		header.Filename = filename;
-		return header;
-	}
-
 }
 #>

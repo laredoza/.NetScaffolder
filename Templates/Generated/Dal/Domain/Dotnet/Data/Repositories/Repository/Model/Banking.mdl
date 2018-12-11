@@ -1,0 +1,626 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ProjectDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <BaseNameSpace>RepositoryEFDotnet.Data</BaseNameSpace>
+  <Domains>
+    <DomainDefinition>
+      <CollectionOptionId>0bc1b0c4-1e41-9146-82cf-599181ce4411</CollectionOptionId>
+      <DriverIdList>
+        <guid>2bc1b0c4-1e41-9146-82cf-599181ce4412</guid>
+        <guid>2bc1b0c4-1e41-9146-82cf-599181ce4411</guid>
+        <guid>2ed41f2a-84c9-7a41-8524-07557f37a5c1</guid>
+        <guid>2bc1b0c4-1e41-9146-82cf-599181ce4410</guid>
+        <guid>8a1103c5-7557-4449-825f-299cf9749ad2</guid>
+        <guid>2bc1b0c4-1e41-9146-82cf-599181ce4417</guid>
+        <guid>27d66d81-8f2d-481a-8547-c1e5b5444569</guid>
+        <guid>04be92c9-f4ce-4b33-95a2-af4cd5ccfb71</guid>
+        <guid>2bc1b0c4-1e41-9146-82cf-599181ce4413</guid>
+      </DriverIdList>
+      <Id>88e23444-4d85-4fd7-a1a7-e6d68e896281</Id>
+      <Name>Domain1</Name>
+      <NamingConventionId>1bc1b0c4-1e41-9146-82cf-599181ce4412</NamingConventionId>
+      <Package>
+        <Children />
+        <Enabled>true</Enabled>
+        <HierarchyType>Item</HierarchyType>
+        <Id>b459fac5-61a2-43b2-b826-a09c0879559e</Id>
+        <Name>Default Domain Driven ( C# )</Name>
+        <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
+        <Selected>false</Selected>
+        <Templates>
+          <Template>
+            <Children />
+            <Enabled>true</Enabled>
+            <HierarchyType>Item</HierarchyType>
+            <Id>99d48be6-6570-465d-bc29-0793ea47233f</Id>
+            <Name>Default Context ( C# )</Name>
+            <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
+            <Selected>false</Selected>
+            <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4430</DataType>
+            <DefaultSettings />
+            <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
+            <LanguageOutputId>1bc1b0c4-1e41-9146-82cf-599181ce4410</LanguageOutputId>
+            <TemplatePath>ContextGenerator.ttInclude</TemplatePath>
+            <Version>1</Version>
+          </Template>
+          <Template>
+            <Children />
+            <Enabled>true</Enabled>
+            <HierarchyType>Item</HierarchyType>
+            <Id>07bc3131-eb4d-490b-8b5f-a68a657ef688</Id>
+            <Name>Default Mapping ( C# )</Name>
+            <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
+            <Selected>false</Selected>
+            <DataType>361ac82c-8f2a-4d7c-b455-ae5effba9d4a</DataType>
+            <DefaultSettings />
+            <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
+            <LanguageOutputId>1bc1b0c4-1e41-9146-82cf-599181ce4410</LanguageOutputId>
+            <TemplatePath>MappingGenerator.ttInclude</TemplatePath>
+            <Version>1</Version>
+          </Template>
+          <Template>
+            <Children />
+            <Enabled>true</Enabled>
+            <HierarchyType>Item</HierarchyType>
+            <Id>1bc1b0c4-1e41-9146-82cf-599181ce4440</Id>
+            <Name>Default Entity ( C# )</Name>
+            <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
+            <Selected>false</Selected>
+            <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4440</DataType>
+            <DefaultSettings />
+            <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
+            <LanguageOutputId>1bc1b0c4-1e41-9146-82cf-599181ce4410</LanguageOutputId>
+            <TemplatePath>EntityGenerator.ttInclude</TemplatePath>
+            <Version>1</Version>
+          </Template>
+          <Template>
+            <Children />
+            <Enabled>true</Enabled>
+            <HierarchyType>Item</HierarchyType>
+            <Id>bad391c6-e8a8-45f5-b3ec-f5d57d6a6b90</Id>
+            <Name>Default Repository Interface ( C# )</Name>
+            <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
+            <Selected>false</Selected>
+            <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4451</DataType>
+            <DefaultSettings />
+            <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
+            <LanguageOutputId>1bc1b0c4-1e41-9146-82cf-599181ce4410</LanguageOutputId>
+            <TemplatePath>RepoInterfaceGenerator.ttInclude</TemplatePath>
+            <Version>1</Version>
+          </Template>
+          <Template>
+            <Children />
+            <Enabled>true</Enabled>
+            <HierarchyType>Item</HierarchyType>
+            <Id>3ab0816d-5ad5-4990-a655-a14a743e416c</Id>
+            <Name>Default Repository ( C# )</Name>
+            <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
+            <Selected>false</Selected>
+            <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4450</DataType>
+            <DefaultSettings />
+            <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
+            <LanguageOutputId>1bc1b0c4-1e41-9146-82cf-599181ce4410</LanguageOutputId>
+            <TemplatePath>RepositoryGenerator.ttInclude</TemplatePath>
+            <Version>1</Version>
+          </Template>
+          <Template>
+            <Children />
+            <Enabled>true</Enabled>
+            <HierarchyType>Item</HierarchyType>
+            <Id>f41c4006-d9d1-499b-80be-bbbbc4cb0001</Id>
+            <Name>Default Application Service ( C# )</Name>
+            <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
+            <Selected>false</Selected>
+            <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4420</DataType>
+            <DefaultSettings />
+            <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
+            <LanguageOutputId>1bc1b0c4-1e41-9146-82cf-599181ce4410</LanguageOutputId>
+            <TemplatePath>ApplicationService.T4</TemplatePath>
+            <Version>1</Version>
+          </Template>
+          <Template>
+            <Children />
+            <Enabled>true</Enabled>
+            <HierarchyType>Item</HierarchyType>
+            <Id>a3e5f98c-ac76-40fd-9896-1a3d19dabefe</Id>
+            <Name>Default Dto Interface ( C# )</Name>
+            <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
+            <Selected>false</Selected>
+            <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4441</DataType>
+            <DefaultSettings />
+            <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
+            <LanguageOutputId>1bc1b0c4-1e41-9146-82cf-599181ce4410</LanguageOutputId>
+            <TemplatePath>DtoInterfaceGenerator.ttInclude</TemplatePath>
+            <Version>1</Version>
+          </Template>
+          <Template>
+            <Children />
+            <Enabled>true</Enabled>
+            <HierarchyType>Item</HierarchyType>
+            <Id>a832889d-7f9a-42fa-ad6b-38d184828dba</Id>
+            <Name>Default Dto ( C# )</Name>
+            <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
+            <Selected>false</Selected>
+            <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4490</DataType>
+            <DefaultSettings />
+            <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
+            <LanguageOutputId>1bc1b0c4-1e41-9146-82cf-599181ce4410</LanguageOutputId>
+            <TemplatePath>DtoGenerator.ttInclude</TemplatePath>
+            <Version>1</Version>
+          </Template>
+          <Template>
+            <Children />
+            <Enabled>true</Enabled>
+            <HierarchyType>Item</HierarchyType>
+            <Id>e3027c90-4a8f-4d56-93b8-95df90e9cc44</Id>
+            <Name>Default Structure Map</Name>
+            <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
+            <Selected>false</Selected>
+            <DataType>cb2445e3-5f8d-4bec-addc-0d1430e15caa</DataType>
+            <DefaultSettings />
+            <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
+            <LanguageOutputId>1bc1b0c4-1e41-9146-82cf-599181ce4410</LanguageOutputId>
+            <TemplatePath>ContextRegistrationGenerator.ttInclude</TemplatePath>
+            <Version>1</Version>
+          </Template>
+          <Template>
+            <Children />
+            <Enabled>true</Enabled>
+            <HierarchyType>Item</HierarchyType>
+            <Id>3025eb67-4faa-481f-a5bb-4646d6bbf11e</Id>
+            <Name>Default Unit Tests</Name>
+            <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
+            <Selected>false</Selected>
+            <DataType>ab2445e3-5f8d-4bec-addc-0d1430e15ca1</DataType>
+            <DefaultSettings />
+            <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
+            <LanguageOutputId>1bc1b0c4-1e41-9146-82cf-599181ce4410</LanguageOutputId>
+            <TemplatePath>BaseUnitTestGenerator.ttInclude</TemplatePath>
+            <Version>1</Version>
+          </Template>
+        </Templates>
+        <Version>1</Version>
+      </Package>
+      <SourceTypeId>4bc1b0c4-1e41-9146-82cf-599181ce4410</SourceTypeId>
+      <Tables>
+        <Table Description="" SchemaName="dbo" TableName="BankAccount" EnabledForCodeGeneration="true">
+          <Columns>
+            <Column ColumnName="BankAccountId" ColumnOrder="1" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="true" IdentitySeed="1" IdentityIncrement="1">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="BankAccountNumber" ColumnOrder="2" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="10" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="Balance" ColumnOrder="3" DataType="Decimal" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="0" Precision="19" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="4" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="CustomerId" ColumnOrder="4" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="Locked" ColumnOrder="5" DataType="Boolean" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="0" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+          </Columns>
+          <DatabaseGeneratedKeyType>Identity</DatabaseGeneratedKeyType>
+          <RelationShips>
+            <RelationShip ColumnName="CustomerId" RelationShip="ForeignKey" ReferencedColumnName="CustomerId" Render="true" SchemaName="dbo" ReferencedTableName="Customer" Multiplicity="Many" ReferencedMultiplicity="ZeroToOne" UserRelationship="false">
+              <RelationshipName>FK_dbo.BankAccount_dbo.Customer_CustomerId</RelationshipName>
+            </RelationShip>
+            <RelationShip ColumnName="BankAccountId" RelationShip="ForeignKeyChild" ReferencedColumnName="FromBankAccountId" RelationshipAlias="BankTransfers1" Render="true" SchemaName="dbo" ReferencedTableName="BankTransfers" Multiplicity="One" ReferencedMultiplicity="Many" UserRelationship="false">
+              <RelationshipName>FK_dbo.BankTransfers_dbo.BankAccount_FromBankAccountId</RelationshipName>
+            </RelationShip>
+            <RelationShip ColumnName="BankAccountId" RelationShip="ForeignKeyChild" ReferencedColumnName="ToBankAccountId" Render="true" SchemaName="dbo" ReferencedTableName="BankTransfers" Multiplicity="One" ReferencedMultiplicity="Many" UserRelationship="false">
+              <RelationshipName>FK_dbo.BankTransfers_dbo.BankAccount_ToBankAccountId</RelationshipName>
+            </RelationShip>
+          </RelationShips>
+          <Indexes>
+            <Index>
+              <IndexType>NonClustered</IndexType>
+              <IsUnique>false</IsUnique>
+              <Name>IX_CustomerId</Name>
+              <Columns>
+                <string>CustomerId</string>
+              </Columns>
+            </Index>
+            <Index>
+              <IndexType>NonClustered</IndexType>
+              <IsUnique>false</IsUnique>
+              <Name>NonClusteredIndex-20180611-172244</Name>
+              <Columns>
+                <string>Balance</string>
+                <string>Locked</string>
+              </Columns>
+            </Index>
+            <Index>
+              <IndexType>PrimaryKey</IndexType>
+              <IsUnique>true</IsUnique>
+              <Name>PK_dbo.BankAccount</Name>
+              <Columns>
+                <string>BankAccountId</string>
+              </Columns>
+            </Index>
+          </Indexes>
+        </Table>
+        <Table Description="" SchemaName="dbo" TableName="BankTransfers" EnabledForCodeGeneration="true">
+          <Columns>
+            <Column ColumnName="BankTransferId" ColumnOrder="1" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="true" IdentitySeed="1" IdentityIncrement="1">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="FromBankAccountId" ColumnOrder="2" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="ToBankAccountId" ColumnOrder="3" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="Amount" ColumnOrder="4" DataType="Decimal" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="0" Precision="18" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="2" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="TransferDate" ColumnOrder="5" DataType="DateTime" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="0" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+          </Columns>
+          <DatabaseGeneratedKeyType>Identity</DatabaseGeneratedKeyType>
+          <RelationShips>
+            <RelationShip ColumnName="FromBankAccountId" RelationShip="ForeignKey" ReferencedColumnName="BankAccountId" RelationshipAlias="BankAccount1" Render="true" SchemaName="dbo" ReferencedTableName="BankAccount" Multiplicity="Many" ReferencedMultiplicity="One" UserRelationship="false">
+              <RelationshipName>FK_dbo.BankTransfers_dbo.BankAccount_FromBankAccountId</RelationshipName>
+            </RelationShip>
+            <RelationShip ColumnName="ToBankAccountId" RelationShip="ForeignKey" ReferencedColumnName="BankAccountId" Render="true" SchemaName="dbo" ReferencedTableName="BankAccount" Multiplicity="Many" ReferencedMultiplicity="One" UserRelationship="false">
+              <RelationshipName>FK_dbo.BankTransfers_dbo.BankAccount_ToBankAccountId</RelationshipName>
+            </RelationShip>
+          </RelationShips>
+          <Indexes>
+            <Index>
+              <IndexType>NonClustered</IndexType>
+              <IsUnique>false</IsUnique>
+              <Name>IX_FromBankAccountId</Name>
+              <Columns>
+                <string>FromBankAccountId</string>
+              </Columns>
+            </Index>
+            <Index>
+              <IndexType>NonClustered</IndexType>
+              <IsUnique>false</IsUnique>
+              <Name>IX_ToBankAccountId</Name>
+              <Columns>
+                <string>ToBankAccountId</string>
+              </Columns>
+            </Index>
+            <Index>
+              <IndexType>PrimaryKey</IndexType>
+              <IsUnique>true</IsUnique>
+              <Name>PK_dbo.BankTransfers</Name>
+              <Columns>
+                <string>BankTransferId</string>
+              </Columns>
+            </Index>
+          </Indexes>
+        </Table>
+        <Table Description="" SchemaName="dbo" TableName="Book" EnabledForCodeGeneration="true">
+          <Columns>
+            <Column ColumnName="ProductId" ColumnOrder="1" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="Publisher" ColumnOrder="2" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="200" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+          </Columns>
+          <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
+          <RelationShips>
+            <RelationShip ColumnName="ProductId" RelationShip="ForeignKey" ReferencedColumnName="ProductId" Render="true" SchemaName="dbo" ReferencedTableName="Product" Multiplicity="ZeroToOne" ReferencedMultiplicity="One" UserRelationship="false">
+              <RelationshipName>FK_dbo.Book_dbo.Product_ProductId</RelationshipName>
+            </RelationShip>
+          </RelationShips>
+          <Indexes>
+            <Index>
+              <IndexType>NonClustered</IndexType>
+              <IsUnique>false</IsUnique>
+              <Name>IX_ProductId</Name>
+              <Columns>
+                <string>ProductId</string>
+              </Columns>
+            </Index>
+            <Index>
+              <IndexType>PrimaryKey</IndexType>
+              <IsUnique>true</IsUnique>
+              <Name>PK_dbo.Book</Name>
+              <Columns>
+                <string>ProductId</string>
+              </Columns>
+            </Index>
+          </Indexes>
+        </Table>
+        <Table Description="" SchemaName="dbo" TableName="Country" EnabledForCodeGeneration="true">
+          <Columns>
+            <Column ColumnName="CountryId" ColumnOrder="1" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="true" IdentitySeed="1" IdentityIncrement="1">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="CountryName" ColumnOrder="2" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="100" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+          </Columns>
+          <DatabaseGeneratedKeyType>Identity</DatabaseGeneratedKeyType>
+          <RelationShips>
+            <RelationShip ColumnName="CountryId" RelationShip="ForeignKeyChild" ReferencedColumnName="CountryId" Render="true" SchemaName="dbo" ReferencedTableName="Customer" Multiplicity="ZeroToOne" ReferencedMultiplicity="Many" UserRelationship="false">
+              <RelationshipName>FK_dbo.Customer_dbo.Country_CountryId</RelationshipName>
+            </RelationShip>
+          </RelationShips>
+          <Indexes>
+            <Index>
+              <IndexType>PrimaryKey</IndexType>
+              <IsUnique>true</IsUnique>
+              <Name>PK_dbo.Country</Name>
+              <Columns>
+                <string>CountryId</string>
+              </Columns>
+            </Index>
+          </Indexes>
+        </Table>
+        <Table Description="" SchemaName="dbo" TableName="Customer" EnabledForCodeGeneration="true">
+          <Columns>
+            <Column ColumnName="CustomerId" ColumnOrder="1" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="true" IdentitySeed="1" IdentityIncrement="1">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="CustomerCode" ColumnOrder="2" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="5" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="CompanyName" ColumnOrder="3" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="50" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="ContactName" ColumnOrder="4" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="50" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="ContactTitle" ColumnOrder="5" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="50" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="Address" ColumnOrder="6" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="50" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="City" ColumnOrder="7" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="20" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="PostalCode" ColumnOrder="8" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="10" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="Telephone" ColumnOrder="9" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="50" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="Fax" ColumnOrder="10" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="50" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="CountryId" ColumnOrder="11" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="Photo" ColumnOrder="12" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="-1" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="IsEnabled" ColumnOrder="13" DataType="Boolean" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="0" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+          </Columns>
+          <DatabaseGeneratedKeyType>Identity</DatabaseGeneratedKeyType>
+          <RelationShips>
+            <RelationShip ColumnName="CountryId" RelationShip="ForeignKey" ReferencedColumnName="CountryId" Render="true" SchemaName="dbo" ReferencedTableName="Country" Multiplicity="Many" ReferencedMultiplicity="ZeroToOne" UserRelationship="false">
+              <RelationshipName>FK_dbo.Customer_dbo.Country_CountryId</RelationshipName>
+            </RelationShip>
+            <RelationShip ColumnName="CustomerId" RelationShip="ForeignKeyChild" ReferencedColumnName="CustomerId" Render="true" SchemaName="dbo" ReferencedTableName="BankAccount" Multiplicity="ZeroToOne" ReferencedMultiplicity="Many" UserRelationship="false">
+              <RelationshipName>FK_dbo.BankAccount_dbo.Customer_CustomerId</RelationshipName>
+            </RelationShip>
+            <RelationShip ColumnName="CustomerId" RelationShip="ForeignKeyChild" ReferencedColumnName="CustomerId" Render="true" SchemaName="dbo" ReferencedTableName="Order" Multiplicity="ZeroToOne" ReferencedMultiplicity="Many" UserRelationship="false">
+              <RelationshipName>FK_dbo.Order_dbo.Customer_CustomerId</RelationshipName>
+            </RelationShip>
+          </RelationShips>
+          <Indexes>
+            <Index>
+              <IndexType>NonClustered</IndexType>
+              <IsUnique>false</IsUnique>
+              <Name>IX_CountryId</Name>
+              <Columns>
+                <string>CountryId</string>
+              </Columns>
+            </Index>
+            <Index>
+              <IndexType>PrimaryKey</IndexType>
+              <IsUnique>true</IsUnique>
+              <Name>PK_dbo.Customer</Name>
+              <Columns>
+                <string>CustomerId</string>
+              </Columns>
+            </Index>
+          </Indexes>
+        </Table>
+        <Table Description="" SchemaName="dbo" TableName="Order" EnabledForCodeGeneration="true">
+          <Columns>
+            <Column ColumnName="OrderId" ColumnOrder="1" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="true" IdentitySeed="1" IdentityIncrement="1">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="CustomerId" ColumnOrder="2" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="OrderDate" ColumnOrder="3" DataType="DateTime" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="0" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="DeliveryDate" ColumnOrder="4" DataType="DateTime" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="0" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="ShippingName" ColumnOrder="5" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="50" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="ShippingAddress" ColumnOrder="6" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="50" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="ShippingCity" ColumnOrder="7" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="50" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="ShippingZip" ColumnOrder="8" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="50" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+          </Columns>
+          <DatabaseGeneratedKeyType>Identity</DatabaseGeneratedKeyType>
+          <RelationShips>
+            <RelationShip ColumnName="CustomerId" RelationShip="ForeignKey" ReferencedColumnName="CustomerId" Render="true" SchemaName="dbo" ReferencedTableName="Customer" Multiplicity="Many" ReferencedMultiplicity="ZeroToOne" UserRelationship="false">
+              <RelationshipName>FK_dbo.Order_dbo.Customer_CustomerId</RelationshipName>
+            </RelationShip>
+            <RelationShip ColumnName="OrderId" RelationShip="ForeignKeyChild" ReferencedColumnName="OrderId" Render="true" SchemaName="dbo" ReferencedTableName="OrderDetails" Multiplicity="One" ReferencedMultiplicity="Many" UserRelationship="false">
+              <RelationshipName>FK_dbo.OrderDetails_dbo.Order_OrderId</RelationshipName>
+            </RelationShip>
+          </RelationShips>
+          <Indexes>
+            <Index>
+              <IndexType>NonClustered</IndexType>
+              <IsUnique>false</IsUnique>
+              <Name>IX_CustomerId</Name>
+              <Columns>
+                <string>CustomerId</string>
+              </Columns>
+            </Index>
+            <Index>
+              <IndexType>PrimaryKey</IndexType>
+              <IsUnique>true</IsUnique>
+              <Name>PK_dbo.Order</Name>
+              <Columns>
+                <string>OrderId</string>
+              </Columns>
+            </Index>
+          </Indexes>
+        </Table>
+        <Table Description="" SchemaName="dbo" TableName="OrderDetails" EnabledForCodeGeneration="true">
+          <Columns>
+            <Column ColumnName="OrderDetailsId" ColumnOrder="1" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="true" IdentitySeed="1" IdentityIncrement="1">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="OrderId" ColumnOrder="2" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="ProductId" ColumnOrder="3" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="UnitPrice" ColumnOrder="4" DataType="Decimal" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="0" Precision="19" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="4" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="Amount" ColumnOrder="5" DataType="Int16" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="0" Precision="5" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="Discount" ColumnOrder="6" DataType="Single" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="0" Precision="24" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+          </Columns>
+          <DatabaseGeneratedKeyType>Identity</DatabaseGeneratedKeyType>
+          <RelationShips>
+            <RelationShip ColumnName="OrderId" RelationShip="ForeignKey" ReferencedColumnName="OrderId" Render="true" SchemaName="dbo" ReferencedTableName="Order" Multiplicity="Many" ReferencedMultiplicity="One" UserRelationship="false">
+              <RelationshipName>FK_dbo.OrderDetails_dbo.Order_OrderId</RelationshipName>
+            </RelationShip>
+            <RelationShip ColumnName="ProductId" RelationShip="ForeignKey" ReferencedColumnName="ProductId" Render="true" SchemaName="dbo" ReferencedTableName="Product" Multiplicity="Many" ReferencedMultiplicity="One" UserRelationship="false">
+              <RelationshipName>FK_dbo.OrderDetails_dbo.Product_ProductId</RelationshipName>
+            </RelationShip>
+          </RelationShips>
+          <Indexes>
+            <Index>
+              <IndexType>NonClustered</IndexType>
+              <IsUnique>false</IsUnique>
+              <Name>IX_OrderId</Name>
+              <Columns>
+                <string>OrderId</string>
+              </Columns>
+            </Index>
+            <Index>
+              <IndexType>NonClustered</IndexType>
+              <IsUnique>false</IsUnique>
+              <Name>IX_ProductId</Name>
+              <Columns>
+                <string>ProductId</string>
+              </Columns>
+            </Index>
+            <Index>
+              <IndexType>PrimaryKey</IndexType>
+              <IsUnique>true</IsUnique>
+              <Name>PK_dbo.OrderDetails</Name>
+              <Columns>
+                <string>OrderDetailsId</string>
+              </Columns>
+            </Index>
+          </Indexes>
+        </Table>
+        <Table Description="" SchemaName="dbo" TableName="Product" EnabledForCodeGeneration="true">
+          <Columns>
+            <Column ColumnName="ProductId" ColumnOrder="1" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="true" IdentitySeed="1" IdentityIncrement="1">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="ProductDescription" ColumnOrder="2" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="100" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="UnitPrice" ColumnOrder="3" DataType="Decimal" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="0" Precision="19" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="4" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="UnitAmount" ColumnOrder="4" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="50" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="Publisher" ColumnOrder="5" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="200" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="AmountInStock" ColumnOrder="6" DataType="Int16" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="0" Precision="5" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+          </Columns>
+          <DatabaseGeneratedKeyType>Identity</DatabaseGeneratedKeyType>
+          <RelationShips>
+            <RelationShip ColumnName="ProductId" RelationShip="ForeignKeyChild" ReferencedColumnName="ProductId" Render="true" SchemaName="dbo" ReferencedTableName="Book" Multiplicity="One" ReferencedMultiplicity="ZeroToOne" UserRelationship="false">
+              <RelationshipName>FK_dbo.Book_dbo.Product_ProductId</RelationshipName>
+            </RelationShip>
+            <RelationShip ColumnName="ProductId" RelationShip="ForeignKeyChild" ReferencedColumnName="ProductId" Render="true" SchemaName="dbo" ReferencedTableName="OrderDetails" Multiplicity="One" ReferencedMultiplicity="Many" UserRelationship="false">
+              <RelationshipName>FK_dbo.OrderDetails_dbo.Product_ProductId</RelationshipName>
+            </RelationShip>
+            <RelationShip ColumnName="ProductId" RelationShip="ForeignKeyChild" ReferencedColumnName="ProductId" Render="true" SchemaName="dbo" ReferencedTableName="Software" Multiplicity="One" ReferencedMultiplicity="ZeroToOne" UserRelationship="false">
+              <RelationshipName>FK_dbo.Software_dbo.Product_ProductId</RelationshipName>
+            </RelationShip>
+          </RelationShips>
+          <Indexes>
+            <Index>
+              <IndexType>PrimaryKey</IndexType>
+              <IsUnique>true</IsUnique>
+              <Name>PK_dbo.Product</Name>
+              <Columns>
+                <string>ProductId</string>
+              </Columns>
+            </Index>
+          </Indexes>
+        </Table>
+        <Table Description="" SchemaName="dbo" TableName="Software" EnabledForCodeGeneration="true">
+          <Columns>
+            <Column ColumnName="ProductId" ColumnOrder="1" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="LicenseCode" ColumnOrder="2" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="200" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+          </Columns>
+          <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
+          <RelationShips>
+            <RelationShip ColumnName="ProductId" RelationShip="ForeignKey" ReferencedColumnName="ProductId" Render="true" SchemaName="dbo" ReferencedTableName="Product" Multiplicity="ZeroToOne" ReferencedMultiplicity="One" UserRelationship="false">
+              <RelationshipName>FK_dbo.Software_dbo.Product_ProductId</RelationshipName>
+            </RelationShip>
+          </RelationShips>
+          <Indexes>
+            <Index>
+              <IndexType>NonClustered</IndexType>
+              <IsUnique>false</IsUnique>
+              <Name>IX_ProductId</Name>
+              <Columns>
+                <string>ProductId</string>
+              </Columns>
+            </Index>
+            <Index>
+              <IndexType>PrimaryKey</IndexType>
+              <IsUnique>true</IsUnique>
+              <Name>PK_dbo.Software</Name>
+              <Columns>
+                <string>ProductId</string>
+              </Columns>
+            </Index>
+          </Indexes>
+        </Table>
+      </Tables>
+    </DomainDefinition>
+  </Domains>
+  <ModelPath>C:\Dev\Git\Gitthub\.NetScaffolder\Templates\Generated\Dal\Domain\Dotnet\Data\Repositories\Repository\Model\Banking.mdl</ModelPath>
+  <OutputFolder>Models</OutputFolder>
+  <Version>1</Version>
+</ProjectDefinition>

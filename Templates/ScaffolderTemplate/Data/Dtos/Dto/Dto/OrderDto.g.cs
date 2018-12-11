@@ -1,22 +1,16 @@
 ﻿
-// <copyright file="OrderDto.g.cs" company="Dot Net Scaffolder">
-//  Copyright (c) 2018 MIT License
+// <copyright file="OrderDto.g.cs" company="MIT">
+//  Copyright (c) 2018 MIT
 // </copyright>  
 
- // Permission is hereby granted, free of charge, to any person obtaining a copy of 
-// this software and associated documentation files (the "Software"), to deal in th
-// e Software without restriction, including without limitation the rights to use, 
-// copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the 
-// Software, and to permit persons to whom the Software is furnished to do so, subj
-// ect to the following conditions: The above copyright notice and this permission 
-// notice shall be included in all copies or substantial portions of the Software. 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
-// ED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR 
-// A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYR
-// IGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN 
-// ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WIT
-// H THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
+// to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+// and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER 
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS 
+// IN THE SOFTWARE.
 
 
 // *******************************************************************
@@ -26,9 +20,9 @@
 
 using System;
 using System.Collections.Generic;
-using Banking.Models.Interfaces;
+using RepositoryEFDotnet.Data.Interfaces;
 
-namespace Banking.Models.Dto
+namespace RepositoryEFDotnet.Data.Dto
 {
 	public partial class OrderDto : IOrder 
 	{
@@ -37,7 +31,6 @@ namespace Banking.Models.Dto
 		public OrderDto()
 		{
 			this.OrderDetails = new List <IOrderDetails>();
-			this.softwareprovider = new List <Isoftwareprovider>();
 		}
 		
 		public OrderDto(IOrder item, bool deep = false)
@@ -53,7 +46,6 @@ namespace Banking.Models.Dto
 			this.ShippingCity = item.ShippingCity;
 			this.ShippingZip = item.ShippingZip;
 			this.OrderDetails = new List <IOrderDetails>();
-			this.softwareprovider = new List <Isoftwareprovider>();
 
 			if(deep)
 			{
@@ -62,13 +54,6 @@ namespace Banking.Models.Dto
 					foreach(var childItem in item.OrderDetails)
 					{
 						this.OrderDetails.Add(new OrderDetailsDto(childItem, deep));
-					}
-				}
-				if(item.softwareprovider != null)
-				{
-					foreach(var childItem in item.softwareprovider)
-					{
-						this.softwareprovider.Add(new softwareproviderDto(childItem, deep));
 					}
 				}
                 if(item.Customer != null)
@@ -96,7 +81,6 @@ namespace Banking.Models.Dto
 		#region Child Relationships
 		
 		public IList<IOrderDetails> OrderDetails { get; set; }
-		public IList<Isoftwareprovider> softwareprovider { get; set; }
 
 		#endregion
 		
