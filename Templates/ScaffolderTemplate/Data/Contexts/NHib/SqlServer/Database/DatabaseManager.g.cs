@@ -30,21 +30,18 @@ using StructureMap;
 using StructureMap.Pipeline;
 using RepositoryEFDotnet.Contexts.NHib.Base;
 
-namespace RepositoryEFDotnet.Data.Context.SqlServer.NHib.Database
+namespace RepositoryEFDotnet.Data.Context.NHib.SqlServer.Database
 {
 	public class DatabaseManager : IDatabaseManager
 	{	
-		private IDictionary<string, string> configuration;
-		
      	private static FluentConfiguration Configuration;
 	    private static ISessionFactory Factory;   
                 
 
 		#region CTOR
 		
-		public DatabaseManager(IDictionary<string, string> configuration)
+		public DatabaseManager()
 		{
-			this.configuration = configuration;
 		}
 		
 		#endregion

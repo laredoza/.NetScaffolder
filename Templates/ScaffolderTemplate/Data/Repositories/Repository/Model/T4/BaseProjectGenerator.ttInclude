@@ -38,6 +38,7 @@
 <#@ import namespace="DotNetScaffolder.Components.DataTypes.DefaultDataTypes.RepositoryDataTypes" #>
 <#@ import namespace="DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ApplicationServiceDataTypes" #>
 <#@ import namespace="DotNetScaffolder.Components.DataTypes.DefaultDataTypes.UnitTests" #>
+<#@ import namespace="DotNetScaffolder.Components.DataTypes.DefaultDataTypes.StructureMapDataTypes" #>
 
 <#@ import namespace="DotNetScaffolder.Components.Drivers.DefaultDrivers.EFCore" #>
 <#@ import namespace="DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6" #>

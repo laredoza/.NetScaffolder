@@ -620,7 +620,7 @@
       </Tables>
     </DomainDefinition>
   </Domains>
-  <ModelPath>C:\Dev\Git\Gitthub\.NetScaffolder\Templates\Generated\Dal\Repository\EF\Dotnet\Data\Repositories\Repository\Model\Banking.mdl</ModelPath>
+  <ModelPath>C:\Dev\Git\Gitthub\.NetScaffolder\Templates\Generated\Dal\Domain\Dotnet\Data\Repositories\Repository\Model\Banking.mdl</ModelPath>
   <OutputFolder>Models</OutputFolder>
   <Version>1</Version>
 </ProjectDefinition>

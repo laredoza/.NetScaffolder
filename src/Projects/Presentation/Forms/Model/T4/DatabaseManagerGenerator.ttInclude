@@ -7,7 +7,7 @@
 		public ContextData ContextData {get;set;}
 
 		private string projectPath = string.Empty;
-
+		
         protected override void RunCore()
         {
 			var template = new DatabaseManagerTemplate();
@@ -26,9 +26,6 @@
                 template.DataType = DataType;
 				template.ContextData = ContextData;
                 template.Driver = driver;
-				template.CompanyText = CompanyText;
-			template.LicenseText = LicenseText;
-			template.HeaderText = HeaderText;
 				template.RenderToFile(string.Format(@"{0}\{1}.g.cs", "Database", "DatabaseManager"));
 			}
         }

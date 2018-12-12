@@ -29,20 +29,17 @@ using StructureMap;
 using StructureMap.Pipeline;
 using RepositoryEFDotnet.Contexts.EFCore.Base;
 
-namespace RepositoryEFDotnet.Data.Context.MySql.EFCore.Database
+namespace RepositoryEFDotnet.Data.Context.EFCore.MySql.Database
 {
 	public class DatabaseManager : IDatabaseManager
 	{	
-		private IDictionary<string, string> configuration;
-		
     
                 
 
 		#region CTOR
 		
-		public DatabaseManager(IDictionary<string, string> configuration)
+		public DatabaseManager()
 		{
-			this.configuration = configuration;
 		}
 		
 		#endregion

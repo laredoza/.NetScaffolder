@@ -79,10 +79,10 @@ namespace <#= DataType.FullNamespace #>
 <#+ } #>
 		/// <param name="includes">params Expression<Func<I<#= DataType.RepoName #>, object>>[]</param>
         /// <returns>I<#= DataType.ModelName #></returns>
-		public virtual async Task<I<#= DataType.ModelName #>> LoadAsync(<#= DataType.TransformAsParameter(DataType.MetaData.Columns.Where(o => o.IsPrimaryKey)) #>, params Expression<Func<I<#= DataType.ModelName #>, bool cache, object>>[] includes)
+		public virtual async Task<I<#= DataType.ModelName #>> LoadAsync(<#= DataType.TransformAsParameter(DataType.MetaData.Columns.Where(o => o.IsPrimaryKey)) #>, bool cache, params Expression<Func<I<#= DataType.ModelName #>, object>>[] includes)
 		{
 			var expr = this.Convert(includes);
-			return await this.UnitOfWork.FirstOrDefaultAsync<<#= DataType.ModelName #>>(o => <#= DataType.TransformAsQuery(DataType.MetaData.Columns.Where(o => o.IsPrimaryKey)) #>, cache, expr);
+			return await this.UnitOfWork.FirstOrDefaultAsync<<#= DataType.ModelName #>>(cache, o => <#= DataType.TransformAsQuery(DataType.MetaData.Columns.Where(o => o.IsPrimaryKey)) #>, expr);
 		}
 <#+ } #>
 

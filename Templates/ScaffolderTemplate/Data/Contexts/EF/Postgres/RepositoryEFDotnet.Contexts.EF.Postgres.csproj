@@ -154,6 +154,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ContextRegisster\ContextRegistration.g.cs" />
     <Compile Include="Context\PostgresAccountContext.g.cs" />
     <Compile Include="Context\PostgresCustomerContext.g.cs" />
     <Compile Include="Context\PostgresFullContext.g.cs" />

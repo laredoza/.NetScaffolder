@@ -9,14 +9,14 @@ public class MappingTemplate : BaseTemplate
 	public List<Table> Models { get; set; }
 	public INamingConvention NamingConvention { get; set; }
 	public string PostFix { get; set; }
-	public CopyrightHeader Header { get; set; }
 
 	public override string TransformText()
 	{		
         string ModelName = NamingConvention == null ? Model.TableName : NamingConvention.ApplyNamingConvention(Model.TableName);
 
 		//Debugger.Break();
-		Header = GetHeader( ModelName + PostFix);
+		Header = new CopyrightHeader();
+		Header.Filename = ModelName + PostFix;
 #>
 
 <#= Header.TransformText() #>
@@ -35,9 +35,9 @@ using System.Data.Common;
 
 namespace <#= Namespace #>.<#= Driver.ParentFolder #>.<#= Driver.Prefix #>
 {
-	public partial class <#= ModelName #><#= PostFix #> : EntityTypeConfiguration<<#= ModelName #>>
+	public partial class <#= ContextData.ContextName #><#= ModelName #><#= PostFix #> : EntityTypeConfiguration<<#= ModelName #>>
 	{	
-		public <#= ModelName #><#= PostFix #> ()
+		public <#= ContextData.ContextName #><#= ModelName #><#= PostFix #> ()
 		{
 			CreateMapping();
 		}
@@ -65,7 +65,7 @@ namespace <#= Namespace #>.<#= Driver.ParentFolder #>.<#= Driver.Prefix #>
 			Property(t => t.<#= pk.ColumnName #>)<#=Driver.DriverType.TransformDbGeneratedKey(Model) #>;
 <#+ } #>
 <#+ if(Model.PrimaryKeyCount > 1){ #>
-			HasKey(t => new {<#= NameFormatting.TransformCompositeKeys(Model.Columns.Where(o => o.IsPrimaryKey), "t") #>});
+			HasKey(t => new {<#= NameFormatting.TransformCompositeKeys(Model.Columns.Where(o => o.IsPrimaryKey), "t", NamingConvention) #>});
 <#+ foreach(var col in Model.Columns.Where(o => o.IsPrimaryKey)){ #>
 			Property(t => t.<#= col.ColumnName #>)<#=Driver.DriverType.TransformDbGeneratedKey(Model) #>;
 <#+ } #>
@@ -95,15 +95,15 @@ namespace <#= Namespace #>.<#= Driver.ParentFolder #>.<#= Driver.Prefix #>
 			#region Indexes
 <#+ foreach(var col in Model.Columns){ #>
 <#+ foreach(var idx in Model.Indexes.Where(o => o.IndexType != IndexType.PrimaryKey && o.Columns.Contains(col.ColumnName))){ #>
-			<#=Driver.TransformIndex(idx) #>;
+			Property(t => t.<#= col.ColumnName #>)<#=Driver.TransformIndex(idx) #>;
 <#+ } #>
 <#+ } #>
 			#endregion
 
 			#region Relationships
 			
-<#+ foreach(var rel in Model.Relationships.Where(o => ContextData.HasModel(o) && ( o.RelatedTable==null?true:o.RelatedTable.EnabledForCodeGeneration))){ #>
-			<#= Driver.DriverType.TransformRelationship(Model.TableName, rel, Models, Model.Relationships.Where(o => ContextData.HasModel(o) && ( o.RelatedTable==null?true:o.RelatedTable.EnabledForCodeGeneration)), NamingConvention) #>
+<#+ foreach(var rel in Model.Relationships.Where(o => ContextData.HasModel(o))){ #>
+			<#= Driver.DriverType.TransformRelationship(Model.TableName, rel, Models, Model.Relationships.Where(o => ContextData.HasModel(o)), NamingConvention) #>
 <#+ } #>
 			
 			#endregion			

@@ -36,6 +36,10 @@
 <#@ import namespace="DotNetScaffolder.Components.DataTypes.DefaultDataTypes.MappingDataTypes" #>
 <#@ import namespace="DotNetScaffolder.Components.DataTypes.DefaultDataTypes.RepoInterfaceDataTypes" #>
 <#@ import namespace="DotNetScaffolder.Components.DataTypes.DefaultDataTypes.RepositoryDataTypes" #>
+<#@ import namespace="DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ApplicationServiceDataTypes" #>
+<#@ import namespace="DotNetScaffolder.Components.DataTypes.DefaultDataTypes.UnitTests" #>
+<#@ import namespace="DotNetScaffolder.Components.DataTypes.DefaultDataTypes.StructureMapDataTypes" #>
+
 <#@ import namespace="DotNetScaffolder.Components.Drivers.DefaultDrivers.EFCore" #>
 <#@ import namespace="DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6" #>
 <#@ import namespace="DotNetScaffolder.Components.Drivers.DefaultDrivers.NHibernate" #>
@@ -58,13 +62,12 @@
 	
         protected override void RunCore()
         {
-
             //Debugger.Break();
             ScaffoldConfig.Load(PackagePath);
             FilePersistenceOptions options = new FilePersistenceOptions { Path = ModelFilePath };
             var applicationService =
                 new ProjectDefinitionApplicationServiceFile { FilePersistenceOptions = options };
-            applicationService.Load();
+            applicationService.Load(this.PackagePath);
 		
             ProjectDefinition = applicationService.ProjectDefinition;
 		
@@ -103,11 +106,11 @@
                     }
                 }
 			
-                ExecuteGenerators(dataTypes, domain,ProjectDefinition);
+                ExecuteGenerators(dataTypes, domain);
             }
         }
 	
-        protected virtual void ExecuteGenerators(List<IDataType> dataTypes, DomainDefinition domain, ProjectDefinition projectDefinition)
+        protected virtual void ExecuteGenerators(List<IDataType> dataTypes, DomainDefinition domain)
         {
 		
         }

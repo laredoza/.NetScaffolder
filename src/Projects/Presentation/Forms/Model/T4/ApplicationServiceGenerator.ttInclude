@@ -1,0 +1,51 @@
+﻿<#+
+    public class ApplicationServiceGenerator : BaseGenerator
+    {
+        public ApplicationServiceDataType DataType{get;set;}
+        public DtoInterfaceDataType DtoInterfaceDataType{get;set;}
+
+        
+        //public INamingConvention NamingConvention { get; set; }
+//		public ContextDataType DataType {get;set;}
+//	    public ContextData ContextData {get;set;}
+//      public EntityDataType EntityDataType {get;set;}
+//		public List<Table> Models { get; set; }
+//		public string MappingPostFix { get; set;}
+//		public string MappingNamespace {get; set;}
+//
+//		private string projectPath = string.Empty;
+        
+        private ApplicationServiceInterfaceTemplate templateInterface = new ApplicationServiceInterfaceTemplate();
+        private ApplicationServiceTemplate template = new ApplicationServiceTemplate();
+
+		protected override void RunCore()
+        {
+            
+			foreach(ApplicationServiceData applicationServiceData in DataType.ApplicationServiceData )
+			{
+				//Debugger.Break();
+                templateInterface.DataType = DataType;
+                templateInterface.CurrentApplicationData = applicationServiceData;
+                templateInterface.DtoInterfaceDataType = this.DtoInterfaceDataType;
+
+                if(!string.IsNullOrEmpty(applicationServiceData.OutputPathInterface))
+                {
+                    templateInterface.Output.Project = applicationServiceData.OutputPathInterface;
+                }
+
+                templateInterface.RenderToFile(string.Format(@"{0}\I{1}ApplicationService.g.cs", applicationServiceData.OutputFolderInterface, applicationServiceData.ApplicationServiceName));	
+
+                template.DataType = DataType;
+                template.CurrentApplicationData = applicationServiceData;
+                template.DtoInterfaceDataType = this.DtoInterfaceDataType;
+
+                if(!string.IsNullOrEmpty(applicationServiceData.OutputPath))
+                {
+                    template.Output.Project = applicationServiceData.OutputPath;
+                }
+
+                template.RenderToFile(string.Format(@"{0}\{1}ApplicationService.g.cs", applicationServiceData.OutputFolder, applicationServiceData.ApplicationServiceName));	
+			}
+        }
+    }
+#>

@@ -20,6 +20,9 @@ public class DtoTemplate : BaseTemplate
 
 using System;
 using System.Collections.Generic;
+<#+ foreach(var nameSpace in DataType.AdditionalNamespaces){ #>
+using <#= nameSpace #>;
+<#+ }#>
 <#+ if(DataType.UseInterface){ #>
 using <#= DtoInterfaceNamespace #>;
 <#+ }#>

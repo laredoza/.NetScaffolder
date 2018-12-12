@@ -9,14 +9,14 @@ public class MappingNHibernateTemplate : BaseTemplate
 	public List<Table> Models { get; set; }
 	public INamingConvention NamingConvention { get; set; }
 	public string PostFix { get; set; }
-	public CopyrightHeader Header { get; set; }
 
 	public override string TransformText()
 	{		
         string ModelName = NamingConvention == null ? Model.TableName : NamingConvention.ApplyNamingConvention(Model.TableName);
 
 		//Debugger.Break();
-		Header = GetHeader(ModelName + PostFix);
+		Header = new CopyrightHeader();
+		Header.Filename = ModelName + PostFix;
 #>
 
 <#= Header.TransformText() #>
@@ -25,14 +25,18 @@ public class MappingNHibernateTemplate : BaseTemplate
 //	GENERATED CODE. DOT NOT MODIFY MANUALLY AS CHANGES CAN BE LOST!!!
 //	USE A PARTIAL CLASS INSTEAD
 // *******************************************************************
+<#+ foreach(var nameSpace in Driver.NameSpaces){ #>
+using <#= nameSpace #>;
+<#+ } #>
 using <#= EntityNamespace #>;
+using System.Data.Common;
 using FluentNHibernate.Mapping;
 
 namespace <#= Namespace #>.<#= Driver.ParentFolder #>.<#= Driver.Prefix #>
 {
-	public partial class <#= ModelName #><#= PostFix #> : ClassMap<<#= ModelName #>>
+	public partial class <#= ContextData.ContextName #><#= ModelName #><#= PostFix #> : ClassMap<<#= ModelName #>>
 	{	
-		public <#= ModelName #><#= PostFix #> ()
+		public <#= ContextData.ContextName #><#= ModelName #><#= PostFix #> ()
 		{
 			CreateMapping();
 		}
@@ -105,8 +109,8 @@ namespace <#= Namespace #>.<#= Driver.ParentFolder #>.<#= Driver.Prefix #>
 			
 			#region Relationships
 			
-<#+ foreach(var rel in Model.Relationships.Where(o => ContextData.HasModel(o) && ( o.RelatedTable==null?true:o.RelatedTable.EnabledForCodeGeneration))){ #>
-			<#= Driver.DriverType.TransformRelationship(Model.TableName, rel, Models, Model.Relationships.Where(o => ContextData.HasModel(o) && ( o.RelatedTable==null?true:o.RelatedTable.EnabledForCodeGeneration)), NamingConvention) #>
+<#+ foreach(var rel in Model.Relationships.Where(o => ContextData.HasModel(o))){ #>
+			<#= Driver.DriverType.TransformRelationship(Model.TableName, rel, Models, Model.Relationships.Where(o => ContextData.HasModel(o)), NamingConvention) #>
 <#+ } #>
 			
 			#endregion			

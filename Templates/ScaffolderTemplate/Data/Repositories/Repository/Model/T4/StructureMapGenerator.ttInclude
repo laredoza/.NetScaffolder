@@ -12,9 +12,11 @@
         {
 			foreach(IDriver driver in Drivers )
 			{
-				Debugger.Break();
+				// Debugger.Break();
 				
 				projectPath = string.Format(ContextData.OutputPath, driver.ParentFolder, driver.Prefix);
+
+                var template = new StructureMapTemplate();
 				
 				if(!string.IsNullOrEmpty(projectPath))
 				{

@@ -31,20 +31,17 @@ using StructureMap;
 using StructureMap.Pipeline;
 using RepositoryEFDotnet.Contexts.EF.Base;
 
-namespace RepositoryEFDotnet.Data.Context.Oracle.EF.Database
+namespace RepositoryEFDotnet.Data.Context.EF.Oracle.Database
 {
 	public class DatabaseManager : IDatabaseManager
 	{	
-		private IDictionary<string, string> configuration;
-		
          // Please setup EF
                 
 
 		#region CTOR
 		
-		public DatabaseManager(IDictionary<string, string> configuration)
+		public DatabaseManager()
 		{
-			this.configuration = configuration;
 		}
 		
 		#endregion

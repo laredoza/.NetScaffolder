@@ -158,6 +158,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ContextRegisster\ContextRegistration.g.cs" />
     <Compile Include="Context\MySqlAccountContext.g.cs" />
     <Compile Include="Context\MySqlCustomerContext.g.cs" />
     <Compile Include="Context\MySqlFullContext.g.cs" />

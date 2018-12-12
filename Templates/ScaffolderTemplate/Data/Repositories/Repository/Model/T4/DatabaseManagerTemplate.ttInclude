@@ -35,12 +35,10 @@ using StructureMap;
 using StructureMap.Pipeline;
 using RepositoryEFDotnet.Contexts.<#= Driver.ParentFolder #>.Base;
 
-namespace <#= ContextData.TransformFullnamespace(DataType.BaseNamespace) #>.<#= Driver.Prefix #>.<#= Driver.ParentFolder #>.Database
+namespace <#= ContextData.TransformFullnamespace(DataType.BaseNamespace) #>.<#= Driver.ParentFolder #>.<#= Driver.Prefix #>.Database
 {
 	public class DatabaseManager : IDatabaseManager
 	{	
-		private IDictionary<string, string> configuration;
-		
 <#+ if(Driver.DriverType.EnableCache) {#>
     <#+ if(Driver.DriverType is NhibernateDriverType) {#>
     private static NHibernate.Cfg.Configuration Configuration;
@@ -63,9 +61,8 @@ namespace <#= ContextData.TransformFullnamespace(DataType.BaseNamespace) #>.<#= 
 
 		#region CTOR
 		
-		public DatabaseManager(IDictionary<string, string> configuration)
+		public DatabaseManager()
 		{
-			this.configuration = configuration;
 		}
 		
 		#endregion
