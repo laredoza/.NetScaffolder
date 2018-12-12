@@ -141,6 +141,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ContextRegisster\ContextRegistration.g.cs" />
     <Compile Include="Context\SqlServerAccountContext.g.cs" />
     <Compile Include="Context\SqlServerCustomerContext.g.cs" />
     <Compile Include="Context\SqlServerFullContext.g.cs" />

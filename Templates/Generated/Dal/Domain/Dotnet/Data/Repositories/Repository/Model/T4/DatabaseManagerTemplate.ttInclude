@@ -35,7 +35,7 @@ using StructureMap;
 using StructureMap.Pipeline;
 using RepositoryEFDotnet.Contexts.<#= Driver.ParentFolder #>.Base;
 
-namespace <#= ContextData.TransformFullnamespace(DataType.BaseNamespace) #>.<#= Driver.Prefix #>.<#= Driver.ParentFolder #>.Database
+namespace <#= ContextData.TransformFullnamespace(DataType.BaseNamespace) #>.<#= Driver.ParentFolder #>.<#= Driver.Prefix #>.Database
 {
 	public class DatabaseManager : IDatabaseManager
 	{	

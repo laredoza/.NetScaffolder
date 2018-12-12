@@ -29,7 +29,7 @@ using StructureMap;
 using StructureMap.Pipeline;
 using RepositoryEFDotnet.Contexts.EF.Base;
 
-namespace RepositoryEFDotnet.Data.Context.SqlServer.EF.Database
+namespace RepositoryEFDotnet.Data.Context.EF.SqlServer.Database
 {
 	public class DatabaseManager : IDatabaseManager
 	{	

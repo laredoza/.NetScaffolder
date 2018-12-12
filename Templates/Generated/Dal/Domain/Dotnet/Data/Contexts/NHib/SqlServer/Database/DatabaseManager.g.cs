@@ -30,13 +30,14 @@ using StructureMap;
 using StructureMap.Pipeline;
 using RepositoryEFDotnet.Contexts.NHib.Base;
 
-namespace RepositoryEFDotnet.Data.Context.SqlServer.NHib.Database
+namespace RepositoryEFDotnet.Data.Context.NHib.SqlServer.Database
 {
 	public class DatabaseManager : IDatabaseManager
 	{	
-        private static NHibernate.Cfg.Configuration Configuration;
-	    private static ISessionFactory Factory;  
-    
+     	private static FluentConfiguration Configuration;
+	    private static ISessionFactory Factory;   
+                
+
 		#region CTOR
 		
 		public DatabaseManager()
@@ -72,16 +73,7 @@ namespace RepositoryEFDotnet.Data.Context.SqlServer.NHib.Database
 
             var nHibConfig = MsSqlConfiguration.MsSql2012.ConnectionString(configuration.ConnectionStrings["RepoTestSqlServer"]);
              Configuration = Fluently.Configure().Database(nHibConfig)
-               .Mappings(o => o.FluentMappings.AddFromAssembly(System.Reflection.Assembly.GetExecutingAssembly()).Conventions.Add(
-                 FluentNHibernate.Conventions.Helpers.ConventionBuilder.Class.Always(
-                     z =>
-                         {
-                             z.BatchSize(512);
-                             z.Cache.ReadWrite();
-                     })
-                 )).Cache(
-                     o => o.ProviderClass<NHibernate.Caches.CoreMemoryCache.CoreMemoryCacheProvider>().UseQueryCache().UseSecondLevelCache()
-             ).BuildConfiguration();
+               .Mappings(o => o.FluentMappings.AddFromAssembly(System.Reflection.Assembly.GetExecutingAssembly()));
              Factory = Configuration.BuildSessionFactory();
 
              container.Configure(

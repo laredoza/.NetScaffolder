@@ -2,27 +2,33 @@
 <#+
     public class ContextRegistrationGenerator : BaseGenerator
     {
-		public StructureMapDataType DataType { get; set; }
+		public ContextDataType DataType { get; set; }
         public List<IDriver> Drivers {get;set;}
 		public ContextData ContextData {get;set;}
+        public string InterfaceDatabasePath {get; set;}
+        public List<string> NameSpaces { get; set;}
 	
+        public ContextRegistrationGenerator()
+        {
+            this.NameSpaces = new List<string>();
+        }
+
         protected override void RunCore()
         {
-			var template = new ContextRegistrationTemplate();
-			
+            var template = new ContextRegistrationTemplate();
 			foreach(IDriver driver in Drivers )
 			{
-				Debugger.Break();
-				
-				if(!string.IsNullOrEmpty(DataType.OutputPath))
+				if(!string.IsNullOrEmpty(ContextData.OutputPath))
 				{
-					template.Output.Project =  string.Format(DataType.OutputPath, driver.ParentFolder, driver.Prefix);;
+                    template.Output.Project = string.Format(ContextData.OutputPath, driver.ParentFolder, driver.Prefix);
 				}
 
 				template.DataType = DataType;
 				template.ContextData = ContextData;
                 template.Driver = driver;
-				template.RenderToFile(string.Format(@"{0}\{1}.g.cs", DataType.OutputFolder, "ContextRegistration"));
+                template.InterfaceDatabasePath = InterfaceDatabasePath;
+                template.NameSpaces = NameSpaces;
+                template.RenderToFile(string.Format(@"{0}Regisster\{1}.g.cs", ContextData.OutputFolder,"ContextRegistration"));
 			}
         }
     }

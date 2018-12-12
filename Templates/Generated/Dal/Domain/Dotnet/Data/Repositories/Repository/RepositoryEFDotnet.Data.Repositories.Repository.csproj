@@ -32,6 +32,7 @@
 ..\..\Contexts\EF\MySql\Context\MySqlAccountContext.g.cs
 ..\..\Contexts\EF\MySql\Context\MySqlCustomerContext.g.cs
 ..\..\Contexts\EF\MySql\Context\MySqlFullContext.g.cs
+..\..\Contexts\EF\MySql\ContextRegisster\ContextRegistration.g.cs
 ..\..\Contexts\EF\MySql\Database\DatabaseManager.g.cs
 ..\..\Contexts\EF\MySql\Mappings\MySqlAccountContext\AccountContextBankAccountMap.g.cs
 ..\..\Contexts\EF\MySql\Mappings\MySqlAccountContext\AccountContextBankTransfersMap.g.cs
@@ -54,6 +55,7 @@
 ..\..\Contexts\EF\Oracle\Context\OracleAccountContext.g.cs
 ..\..\Contexts\EF\Oracle\Context\OracleCustomerContext.g.cs
 ..\..\Contexts\EF\Oracle\Context\OracleFullContext.g.cs
+..\..\Contexts\EF\Oracle\ContextRegisster\ContextRegistration.g.cs
 ..\..\Contexts\EF\Oracle\Database\DatabaseManager.g.cs
 ..\..\Contexts\EF\Oracle\Mappings\OracleAccountContext\AccountContextBankAccountMap.g.cs
 ..\..\Contexts\EF\Oracle\Mappings\OracleAccountContext\AccountContextBankTransfersMap.g.cs
@@ -76,6 +78,7 @@
 ..\..\Contexts\EF\Postgres\Context\PostgresAccountContext.g.cs
 ..\..\Contexts\EF\Postgres\Context\PostgresCustomerContext.g.cs
 ..\..\Contexts\EF\Postgres\Context\PostgresFullContext.g.cs
+..\..\Contexts\EF\Postgres\ContextRegisster\ContextRegistration.g.cs
 ..\..\Contexts\EF\Postgres\Database\DatabaseManager.g.cs
 ..\..\Contexts\EF\Postgres\Mappings\PostgresAccountContext\AccountContextBankAccountMap.g.cs
 ..\..\Contexts\EF\Postgres\Mappings\PostgresAccountContext\AccountContextBankTransfersMap.g.cs
@@ -98,6 +101,7 @@
 ..\..\Contexts\EF\SqlServer\Context\SqlServerAccountContext.g.cs
 ..\..\Contexts\EF\SqlServer\Context\SqlServerCustomerContext.g.cs
 ..\..\Contexts\EF\SqlServer\Context\SqlServerFullContext.g.cs
+..\..\Contexts\EF\SqlServer\ContextRegisster\ContextRegistration.g.cs
 ..\..\Contexts\EF\SqlServer\Database\DatabaseManager.g.cs
 ..\..\Contexts\EF\SqlServer\Mappings\SqlServerAccountContext\AccountContextBankAccountMap.g.cs
 ..\..\Contexts\EF\SqlServer\Mappings\SqlServerAccountContext\AccountContextBankTransfersMap.g.cs
@@ -120,6 +124,7 @@
 ..\..\Contexts\EFCore\MySql\Context\MySqlAccountContext.g.cs
 ..\..\Contexts\EFCore\MySql\Context\MySqlCustomerContext.g.cs
 ..\..\Contexts\EFCore\MySql\Context\MySqlFullContext.g.cs
+..\..\Contexts\EFCore\MySql\ContextRegisster\ContextRegistration.g.cs
 ..\..\Contexts\EFCore\MySql\Database\DatabaseManager.g.cs
 ..\..\Contexts\EFCore\MySql\Mappings\MySqlAccountContext\AccountContextBankAccountMap.g.cs
 ..\..\Contexts\EFCore\MySql\Mappings\MySqlAccountContext\AccountContextBankTransfersMap.g.cs
@@ -142,6 +147,7 @@
 ..\..\Contexts\EFCore\SqlServer\Context\SqlServerAccountContext.g.cs
 ..\..\Contexts\EFCore\SqlServer\Context\SqlServerCustomerContext.g.cs
 ..\..\Contexts\EFCore\SqlServer\Context\SqlServerFullContext.g.cs
+..\..\Contexts\EFCore\SqlServer\ContextRegisster\ContextRegistration.g.cs
 ..\..\Contexts\EFCore\SqlServer\Database\DatabaseManager.g.cs
 ..\..\Contexts\EFCore\SqlServer\Mappings\SqlServerAccountContext\AccountContextBankAccountMap.g.cs
 ..\..\Contexts\EFCore\SqlServer\Mappings\SqlServerAccountContext\AccountContextBankTransfersMap.g.cs
@@ -164,6 +170,7 @@
 ..\..\Contexts\NHib\MySql\Context\MySqlAccountContext.g.cs
 ..\..\Contexts\NHib\MySql\Context\MySqlCustomerContext.g.cs
 ..\..\Contexts\NHib\MySql\Context\MySqlFullContext.g.cs
+..\..\Contexts\NHib\MySql\ContextRegisster\ContextRegistration.g.cs
 ..\..\Contexts\NHib\MySql\Database\DatabaseManager.g.cs
 ..\..\Contexts\NHib\MySql\Mappings\MySqlAccountContext\AccountContextBankAccountMap.g.cs
 ..\..\Contexts\NHib\MySql\Mappings\MySqlAccountContext\AccountContextBankTransfersMap.g.cs
@@ -186,6 +193,7 @@
 ..\..\Contexts\NHib\Oracle\Context\OracleAccountContext.g.cs
 ..\..\Contexts\NHib\Oracle\Context\OracleCustomerContext.g.cs
 ..\..\Contexts\NHib\Oracle\Context\OracleFullContext.g.cs
+..\..\Contexts\NHib\Oracle\ContextRegisster\ContextRegistration.g.cs
 ..\..\Contexts\NHib\Oracle\Database\DatabaseManager.g.cs
 ..\..\Contexts\NHib\Oracle\Mappings\OracleAccountContext\AccountContextBankAccountMap.g.cs
 ..\..\Contexts\NHib\Oracle\Mappings\OracleAccountContext\AccountContextBankTransfersMap.g.cs
@@ -208,6 +216,7 @@
 ..\..\Contexts\NHib\SqlServer\Context\SqlServerAccountContext.g.cs
 ..\..\Contexts\NHib\SqlServer\Context\SqlServerCustomerContext.g.cs
 ..\..\Contexts\NHib\SqlServer\Context\SqlServerFullContext.g.cs
+..\..\Contexts\NHib\SqlServer\ContextRegisster\ContextRegistration.g.cs
 ..\..\Contexts\NHib\SqlServer\Database\DatabaseManager.g.cs
 ..\..\Contexts\NHib\SqlServer\Mappings\SqlServerAccountContext\AccountContextBankAccountMap.g.cs
 ..\..\Contexts\NHib\SqlServer\Mappings\SqlServerAccountContext\AccountContextBankTransfersMap.g.cs

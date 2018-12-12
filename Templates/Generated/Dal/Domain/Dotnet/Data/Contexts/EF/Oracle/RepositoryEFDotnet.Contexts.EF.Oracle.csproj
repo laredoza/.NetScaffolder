@@ -149,6 +149,7 @@
   <ItemGroup>
     <Compile Include="Config\OracleDbConfiguration.cs" />
     <Compile Include="Config\OracleHistory.cs" />
+    <Compile Include="ContextRegisster\ContextRegistration.g.cs" />
     <Compile Include="Context\OracleAccountContext.g.cs" />
     <Compile Include="Context\OracleCustomerContext.g.cs" />
     <Compile Include="Context\OracleFullContext.g.cs" />

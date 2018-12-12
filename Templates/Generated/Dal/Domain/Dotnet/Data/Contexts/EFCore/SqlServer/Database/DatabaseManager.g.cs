@@ -30,12 +30,13 @@ using StructureMap;
 using StructureMap.Pipeline;
 using RepositoryEFDotnet.Contexts.EFCore.Base;
 
-namespace RepositoryEFDotnet.Data.Context.SqlServer.EFCore.Database
+namespace RepositoryEFDotnet.Data.Context.EFCore.SqlServer.Database
 {
 	public class DatabaseManager : IDatabaseManager
 	{	
-        protected static IServiceProvider Provider;
     
+                
+
 		#region CTOR
 		
 		public DatabaseManager()
@@ -69,15 +70,11 @@ namespace RepositoryEFDotnet.Data.Context.SqlServer.EFCore.Database
 	            throw new Exception("Invalid configuration specified in database manager");
 	        }
 
-            Provider = ConfigureServices.GetRedisCacheServiceProvider();
-             EFSecondLevelCache.Core.EFServiceProvider.ApplicationServices = Provider;
-
-             container.Configure(
+            container.Configure(
                  config =>
                  {
                     config.For<IUnitOfWork>().LifecycleIs(Lifecycles.Transient).Use<SqlServerFullContext>()
-                         .Ctor<string>("connectionString").Is(configuration.ConnectionStrings["RepoTestSqlServer"])
-                         .Ctor<IServiceProvider>("provider").Is(Provider);
+                         .Ctor<string>("connectionString").Is(configuration.ConnectionStrings["RepoTestSqlServer"]);
                  });
 
             // End

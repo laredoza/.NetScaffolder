@@ -12,6 +12,7 @@
 <#@ include file="ApplicationServiceInterfaceTemplate.ttInclude" #>
 <#@ include file="ApplicationServiceTemplate.ttInclude" #>
 <#@ include file="RepositoryRegistrationGenerator.ttInclude" #>
+<#@ include file="ContextRegistrationGenerator.ttInclude" #>
 
 <#+
     public class ProjectGenerator : BaseProjectGenerator
@@ -40,45 +41,44 @@
                     entityGen.Run();
                 }
 
-				if (dataType is ApplicationServiceDataType)
-				{
+                if (dataType is ApplicationServiceDataType)
+                {
                     //Debugger.Break();
-					ApplicationServiceDataType applicationDataType = dataType as ApplicationServiceDataType;
-					var entityDataType = dataTypes.FirstOrDefault(o => o is EntityDataType) as EntityDataType;
+                    ApplicationServiceDataType applicationDataType = dataType as ApplicationServiceDataType;
+                    var entityDataType = dataTypes.FirstOrDefault(o => o is EntityDataType) as EntityDataType;
 
                     var applicationServiceGenerator = new ApplicationServiceGenerator {
-                                    DataType = applicationDataType,
-                                    DtoInterfaceDataType = dataTypes.FirstOrDefault(o => o is DtoInterfaceDataType) as DtoInterfaceDataType 
-                                };
+                            DataType = applicationDataType,
+                            DtoInterfaceDataType = dataTypes.FirstOrDefault(o => o is DtoInterfaceDataType) as DtoInterfaceDataType 
+                            };
 
                     applicationServiceGenerator.Run();
-				}
+                }
 
                 if(dataType is ContextDataType)
                 {				
-					var contextDataType = dataType as ContextDataType;
-					var entityDataType = dataTypes.FirstOrDefault(o => o is EntityDataType) as EntityDataType;
+                    var contextDataType = dataType as ContextDataType;
+                    var entityDataType = dataTypes.FirstOrDefault(o => o is EntityDataType) as EntityDataType;
 					
-					foreach(var contextData in contextDataType.Contexts)
-					{					
-						if(contextData != null)
-						{
-                            //Debugger.Break();
-							var mappingGen = new MappingGenerator();
-							var mappingDataType = dataTypes.FirstOrDefault(o => o is MappingDataType) as MappingDataType;
+                    foreach(var contextData in contextDataType.Contexts)
+                    {					
+                        if(contextData != null)
+                        {
+                            var mappingGen = new MappingGenerator();
+                            var mappingDataType = dataTypes.FirstOrDefault(o => o is MappingDataType) as MappingDataType;
 					
-							if(mappingDataType != null)
-							{
-								mappingGen.Models = domain.Tables;
-								mappingGen.ProjectOutputPath = contextData.OutputPath;
-								mappingGen.EntityNamespace = entityDataType.FullNamespace;
-								mappingGen.ContextData = contextData;
-								mappingGen.MappingDataType = mappingDataType;
-								mappingGen.NamingConvention = dataType.NamingConvention;
-								mappingGen.Run();
-							}
+                            if(mappingDataType != null)
+                            {
+                                mappingGen.Models = domain.Tables;
+                                mappingGen.ProjectOutputPath = contextData.OutputPath;
+                                mappingGen.EntityNamespace = entityDataType.FullNamespace;
+                                mappingGen.ContextData = contextData;
+                                mappingGen.MappingDataType = mappingDataType;
+                                mappingGen.NamingConvention = dataType.NamingConvention;
+                                mappingGen.Run();
+                            }
 							
-							var contxtGen = new ContextGenerator();
+                            var contxtGen = new ContextGenerator();
 							
 							contxtGen.Models = domain.Tables;
 							contxtGen.DataType = contextDataType;
@@ -87,27 +87,38 @@
 							contxtGen.MappingNamespace = mappingGen.FullNamespace;
 							contxtGen.MappingPostFix = mappingDataType.PostFix;
 							contxtGen.Run();
-						}
-					}
-					
-					if(contextDataType.Contexts.Any())
-					{
-						var dbManGen = new DatabaseManagerGenerator();
-						dbManGen.ContextData = contextDataType.Contexts.Any(o => o.IsDefault) ? contextDataType.Contexts.First(o => o.IsDefault) : contextDataType.Contexts.FirstOrDefault();
-						dbManGen.Drivers = contextDataType.Drivers;
-                        dbManGen.DataType = contextDataType;
-						dbManGen.Run();
-					}
+                        }
+                    }
                 }
 				
                 if(dataType is StructureMapDataType)
                 {
-                     var repositoryRegistration = new RepositoryRegistrationGenerator();
-                     repositoryRegistration.Models = domain.Tables;
-                     repositoryRegistration.DataType = dataTypes.FirstOrDefault(o => o is RepositoryDataType) as RepositoryDataType;
-                     repositoryRegistration.RepoInterfaceDataType = dataTypes.FirstOrDefault(o => o is RepoInterfaceDataType) as RepoInterfaceDataType;
-                     repositoryRegistration.Run();
-                 }
+                    var repositoryRegistration = new RepositoryRegistrationGenerator();
+                    repositoryRegistration.Models = domain.Tables;
+                    repositoryRegistration.DataType = dataTypes.FirstOrDefault(o => o is RepositoryDataType) as RepositoryDataType;
+                    repositoryRegistration.RepoInterfaceDataType = dataTypes.FirstOrDefault(o => o is RepoInterfaceDataType) as RepoInterfaceDataType;
+                    repositoryRegistration.Run();
+
+                    var contextDataType =  dataTypes.FirstOrDefault(o => o is ContextDataType) as ContextDataType;;
+                    
+                    if(contextDataType.Contexts.Any())
+                    {
+                        var dbManGen = new DatabaseManagerGenerator();
+                        dbManGen.ContextData = contextDataType.Contexts.Any(o => o.IsDefault) ? contextDataType.Contexts.First(o => o.IsDefault) : contextDataType.Contexts.FirstOrDefault();
+                        dbManGen.Drivers = contextDataType.Drivers;
+                        dbManGen.DataType = contextDataType;
+                        dbManGen.Run();
+
+                        var regisGen = new ContextRegistrationGenerator();
+						regisGen.ContextData = dbManGen.ContextData;
+						regisGen.Drivers = dbManGen.Drivers;
+						regisGen.DataType = dataTypes.FirstOrDefault(o => o is ContextDataType) as ContextDataType;
+                        regisGen.InterfaceDatabasePath = (dataTypes.FirstOrDefault(o => o is DtoInterfaceDataType) as DtoInterfaceDataType).FullNamespace; 
+                        regisGen.NameSpaces = (dataType as StructureMapDataType).AdditionalNamespaces; 
+						
+                        regisGen.Run();                 
+                    }
+                }
 			
                 if(dataType is RepoInterfaceDataType)
                 {					
@@ -139,19 +150,19 @@
 
                 //if(dataType is UnitTestDataType)
                 //{
-                    //var dtoDataType = dataTypes.FirstOrDefault(o => o is DtoDataType) as DtoDataType;
-                    //var dtoInterfaceDataType = dataTypes.FirstOrDefault(o => o is DtoInterfaceDataType) as DtoInterfaceDataType;
-                    //var entityDataType = dataTypes.FirstOrDefault(o => o is EntityDataType) as EntityDataType;
-//
-                    //var unitTestGen = new BaseUnitTestGenerator();
-                    //unitTestGen.DataType = dataType as UnitTestDataType; 
-			        //unitTestGen.Models = domain.Tables;
-                    //unitTestGen.DtoNamespace = dtoDataType.FullNamespace;
-                    //unitTestGen.DtoInterfaceNamespace = dtoInterfaceDataType.FullNamespace;
-                    //unitTestGen.EntityNamespace = entityDataType.FullNamespace;
-			        //unitTestGen.Run();
+                //var dtoDataType = dataTypes.FirstOrDefault(o => o is DtoDataType) as DtoDataType;
+                //var dtoInterfaceDataType = dataTypes.FirstOrDefault(o => o is DtoInterfaceDataType) as DtoInterfaceDataType;
+                //var entityDataType = dataTypes.FirstOrDefault(o => o is EntityDataType) as EntityDataType;
+                //
+                //var unitTestGen = new BaseUnitTestGenerator();
+                //unitTestGen.DataType = dataType as UnitTestDataType; 
+			    //            estGen.Models = domain.Tables;
+                //unitTestGen.DtoNamespace = dtoDataType.FullNamespace;
+                //unitTestGen.DtoInterfaceNamespace = dtoInterfaceDataType.FullNamespace;
+                //unitTestGen.EntityNamespace = entityDataType.FullNamespace;
+                //unitTestGen.Run();
                 //}
             }
         }
-}
+    }
     #>
