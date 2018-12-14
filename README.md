@@ -35,7 +35,7 @@ T4 templates (DataTypes) are used to generate a layer. Packages group several of
 
 - Entity Famework 6.0 ( MySql, Sql Server, Oracle, PostgreSQL )
 - Entity Framework Core 2.1 ( MySql - Pomelo Driver, Sql Server )
-- Adding support for NHibernate ( Mysql, Sql Server, Oracle )
+- NHibernate ( Mysql, Sql Server, Oracle )
 
 ### Planned Project Types:
 
