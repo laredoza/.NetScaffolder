@@ -1,0 +1,42 @@
+<?xml version="1.0" ?>
+<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="scaffolderproject Use Case diagram" version="4">
+  <OBJECT>
+    <ID name="scaffolderproject Use Case diagram" mc="Standard.UseCaseDiagram" uid="a1f2bc01-46a3-45f6-8b81-840cada8a7fd"/>
+    <PID name="scaffolderproject" mc="Standard.Package" uid="80b7f633-f266-4c60-a051-6ce4f57cf318"/>
+    <ATTRIBUTES>
+      <ATT name="UiDataVersion">24</ATT>
+      <ATT name="UiData"><![CDATA[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]]></ATT>
+      <ATT name="Name"><![CDATA[scaffolderproject Use Case diagram]]></ATT>
+      <ATT name="status">1970354901745664</ATT>
+    </ATTRIBUTES>
+    <DEPENDENCIES>
+      <LINK relation="Represented">
+        <ID name="Actor" mc="Standard.Actor" uid="8dbd9935-2274-4d3d-842f-8222c15eebed"/>
+        <ID name="scaffolderproject" mc="Standard.Package" uid="80b7f633-f266-4c60-a051-6ce4f57cf318"/>
+        <ID name="Use Case" mc="Standard.UseCase" uid="9914ce23-4852-4a01-9ae1-c15d975a1825"/>
+        <REFOBJ>
+          <ID name="" mc="Standard.AssociationEnd" uid="a3f756ac-93a7-4794-91e6-86655bc16753"/>
+        </REFOBJ>
+        <REFOBJ>
+          <ID name="" mc="Standard.AssociationEnd" uid="cc2a702b-372c-4381-bf55-5de534b9c965"/>
+        </REFOBJ>
+      </LINK>
+      <COMP relation="Descriptor">
+        <OBJECT>
+          <ID name="" mc="Infrastructure.Note" uid="f20369db-d2b0-48c9-bd6f-ce21cfaf7adc"/>
+          <ATTRIBUTES>
+            <ATT name="Content"></ATT>
+            <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
+            <ATT name="Name"></ATT>
+            <ATT name="status">1970354901745664</ATT>
+          </ATTRIBUTES>
+          <DEPENDENCIES>
+            <LINK relation="Model">
+              <FOREIGNID name="description" mc="Infrastructure.NoteType" uid="00000000-0000-3e81-0000-000000000000"/>
+            </LINK>
+          </DEPENDENCIES>
+        </OBJECT>
+      </COMP>
+    </DEPENDENCIES>
+  </OBJECT>
+</EXT>

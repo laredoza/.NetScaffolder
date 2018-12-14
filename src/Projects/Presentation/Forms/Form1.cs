@@ -162,7 +162,7 @@ namespace DotNetScaffolder.Presentation.Forms
                             "Completed",
                             MessageBoxButtons.OK);
 
-                    ProjectUserControl1.ModelPath = @"..\..\..\..\..\..\Templates\"+ result + @"\Data\Repositories\Repository\Model\Banking.mdl";
+                    ProjectUserControl1.ModelPath = $@"{extractPath}\ScaffolderTemplate\Data\Repositories\Repository\Model\Banking.mdl";
                     LoadData();
                 }
                 else

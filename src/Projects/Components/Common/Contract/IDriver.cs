@@ -1,18 +1,13 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="IDriver.cs" company="DotnetScaffolder">
-//   MIT
-// </copyright>
-// --------------------------------------------------------------------------------------------------------------------
+﻿#region Usings
 
-using System;
+using System.Collections.Generic;
+using DotNetScaffolder.Mapping.MetaData.Model;
+
+#endregion
 
 namespace DotNetScaffolder.Components.Common.Contract
 {
     #region Usings
-
-    using System.Collections.Generic;
-
-    using DotNetScaffolder.Mapping.MetaData.Model;
 
     #endregion
 
@@ -23,17 +18,24 @@ namespace DotNetScaffolder.Components.Common.Contract
     {
         #region Public Properties
 
+        string ConfigurationClass { get; }
+
+        string ConfigurationOption { get; set; }
+
         /// <summary>
         ///     Gets the context attribute.
         /// </summary>
         string ContextAttribute { get; }
 
         /// <summary>
+        ///     Gets the driver type.
+        /// </summary>
+        IDriverType DriverType { get; }
+
+        /// <summary>
         ///     Gets a value indicating whether force schema to uppercase.
         /// </summary>
         bool ForceSchemaToUppercase { get; }
-
-        bool UseSchema { get; }
 
         /// <summary>
         ///     Gets the name spaces used to generate templates.
@@ -50,20 +52,13 @@ namespace DotNetScaffolder.Components.Common.Contract
         /// </summary>
         string Prefix { get; }
 
-        /// <summary>
-        /// Gets the driver type.
-        /// </summary>
-        IDriverType DriverType { get; }
-
-        string ConfigurationClass { get; }
-
-        string ConfigurationOption { get; set; }
+        bool UseSchema { get; }
 
         #endregion
 
-        string AsAlias(string name);
+        #region Public Methods And Operators
 
-        string TransformIndex(Index index, INamingConvention nc = null);
+        string AsAlias(string name);
 
         int CheckPrecision(Column col);
 
@@ -96,5 +91,9 @@ namespace DotNetScaffolder.Components.Common.Contract
         ///     Generate bulk delete async
         /// </summary>
         string GenerateBulkUpdateAsync();
+
+        string TransformIndex(Index index, INamingConvention nc = null);
+
+        #endregion
     }
 }
