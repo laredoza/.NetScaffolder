@@ -43,7 +43,9 @@ T4 templates (DataTypes) are used to generate a layer. Packages group several of
 - Angular 
 - Xamarin
 
-[Manual](https://github.com/laredoza/.NetScaffolder/master/vNext/Documentation/Manual.pdf)
+### Documentation
+
+[.NetScaffolder Manual](https://github.com/laredoza/.NetScaffolder/master/vNext/Documentation/Manual.pdf)
 
 ### Completed
 - ~~[0.2 Basic UI Management](https://github.com/laredoza/.NetScaffolder/milestone/2)~~
