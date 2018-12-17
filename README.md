@@ -45,7 +45,7 @@ T4 templates (DataTypes) are used to generate a layer. Packages group several of
 
 ### Documentation
 
-[.NetScaffolder Manual](https://github.com/laredoza/.NetScaffolder/blob/vNext/Documentation/Manual.pdf)
+[.NetScaffolder Manual](https://github.com/laredoza/.NetScaffolder/blob/master/Documentation/Manual.pdf)
 
 ### Completed
 - ~~[0.2 Basic UI Management](https://github.com/laredoza/.NetScaffolder/milestone/2)~~
