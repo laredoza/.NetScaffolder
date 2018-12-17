@@ -4,6 +4,8 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
+using DotNetScaffolder.Core.Configuration;
+
 namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.NHibernate
 {
     #region Usings
@@ -106,6 +108,9 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.NHibernate
         /// </summary>
         public bool UseSeperateConfigClasses { get; set; }
 
+        public bool EnableCache { get; set; }
+        public Guid Cache { get; set; }
+
         /// <summary>
         ///     Gets or sets the validation result.
         /// </summary>
@@ -167,6 +172,8 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.NHibernate
                     this.LoggingEnabled = loadedDriverType.LoggingEnabled;
                     this.ProxyCreationEnabled = loadedDriverType.ProxyCreationEnabled;
                     this.UseAlias = loadedDriverType.UseAlias;
+                    this.Cache = loadedDriverType.Cache;
+                    this.EnableCache = loadedDriverType.EnableCache;
                 }
             }
         }
@@ -327,6 +334,36 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.NHibernate
             return sb.ToString();
         }
 
+        public string GenerateBeginUnitOfWork(CacheParameters parameter)
+        {
+            if (this.EnableCache)
+            {
+                return this.CurrentCache.GenerateBeginUnitOfWork(parameter);
+            }
+            else
+            {
+                StringBuilder sb = new StringBuilder();
+
+                INHibernateConfig config = parameter.Driver as INHibernateConfig;
+
+                sb.AppendLine(
+                    $"var nHibConfig = {config.ConfigName}.ConnectionString(configuration.ConnectionStrings[\"{parameter.ConnectionName}\"]);");
+                sb.AppendLine("             Configuration = Fluently.Configure().Database(nHibConfig)");
+                sb.AppendLine(
+                    "               .Mappings(o => o.FluentMappings.AddFromAssembly(System.Reflection.Assembly.GetExecutingAssembly()));");
+                sb.AppendLine("             Factory = Configuration.BuildSessionFactory();");
+                sb.AppendLine();
+                sb.AppendLine("             container.Configure(");
+                sb.AppendLine("             config =>");
+                sb.AppendLine("             {");
+                sb.AppendLine($"                config.For<IUnitOfWork>().LifecycleIs(Lifecycles.Transient).Use<{parameter.Driver.Prefix}{parameter.ContextName}>()");
+                sb.AppendLine("                 .Ctor<ISessionFactory>(\"factory\").Is(Factory);");
+                sb.AppendLine("             });");
+
+                return sb.ToString();
+            }
+        }
+
         /// <summary>
         /// The validate.
         /// </summary>
@@ -338,6 +375,16 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.NHibernate
         public List<Validation> Validate()
         {
             return this.ValidationResult;
+        }
+
+        [XmlIgnore]
+        public IIDriverTypeCache CurrentCache
+        {
+            get
+            {
+                return ScaffoldConfig.DriverTypeCache.FirstOrDefault(c =>
+                    c.Metadata["ValueMetaData"].ToString().ToLower() == Cache.ToString().ToLower())?.Value;
+            }
         }
 
         #endregion

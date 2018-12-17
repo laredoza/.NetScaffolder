@@ -12,9 +12,7 @@
         protected override void RunCore()
         {
             // Debugger.Break();
-			template.CompanyText = CompanyText;
-			template.LicenseText = LicenseText;
-			template.HeaderText = HeaderText;
+
             foreach(var model in this.Models)
             {
                 DataType.MetaData = model;
@@ -26,7 +24,7 @@
                 {
                     template.Output.Project = DataType.OutputPath;
                 }
-				
+
                 template.RenderToFile(string.Format(@"{0}\{1}Repository.g.cs", DataType.OutputFolder, DataType.RepoName));	
             }
         }

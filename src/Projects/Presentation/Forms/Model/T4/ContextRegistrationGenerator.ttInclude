@@ -1,0 +1,35 @@
+﻿<#@ include file="ContextRegistrationTemplate.ttinclude" #>
+<#+
+    public class ContextRegistrationGenerator : BaseGenerator
+    {
+		public ContextDataType DataType { get; set; }
+        public List<IDriver> Drivers {get;set;}
+		public ContextData ContextData {get;set;}
+        public string InterfaceDatabasePath {get; set;}
+        public List<string> NameSpaces { get; set;}
+	
+        public ContextRegistrationGenerator()
+        {
+            this.NameSpaces = new List<string>();
+        }
+
+        protected override void RunCore()
+        {
+            var template = new ContextRegistrationTemplate();
+			foreach(IDriver driver in Drivers )
+			{
+				if(!string.IsNullOrEmpty(ContextData.OutputPath))
+				{
+                    template.Output.Project = string.Format(ContextData.OutputPath, driver.ParentFolder, driver.Prefix);
+				}
+
+				template.DataType = DataType;
+				template.ContextData = ContextData;
+                template.Driver = driver;
+                template.InterfaceDatabasePath = InterfaceDatabasePath;
+                template.NameSpaces = NameSpaces;
+                template.RenderToFile(string.Format(@"{0}Regisster\{1}.g.cs", ContextData.OutputFolder,"ContextRegistration"));
+			}
+        }
+    }
+#>

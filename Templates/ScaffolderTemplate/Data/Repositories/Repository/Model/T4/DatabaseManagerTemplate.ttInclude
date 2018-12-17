@@ -1,15 +1,19 @@
-﻿<#+
+﻿<#@ import namespace="DotNetScaffolder.Components.Drivers.DefaultDrivers.NHibernate.Cache" #>
+<#@ import namespace="DotNetScaffolder.Components.Drivers.DefaultDrivers.EFCore.Cache" #>
+<#@ import namespace="DotNetScaffolder.Components.Drivers.DefaultDrivers" #>
+
+<#+
 public class DatabaseManagerTemplate : BaseTemplate 
 {
 	public ContextDataType DataType { get; set; }
 	public ContextData ContextData { get; set; }
 	public IDriver Driver { get; set; }
-	public CopyrightHeader Header { get; set; }
 
 	public override string TransformText()
 	{
 		//Debugger.Break();
-		Header = GetHeader(ContextData.ContextName);
+		Header = new CopyrightHeader();
+		Header.Filename = ContextData.ContextName;
 #>
 
 <#= Header.TransformText() #>
@@ -19,7 +23,7 @@ public class DatabaseManagerTemplate : BaseTemplate
 //	USE A PARTIAL CLASS INSTEAD
 // *******************************************************************
 <#+ foreach(var nameSpace in DataType.AdditionalNamespaces){ #>
-using <#= nameSpace #>;
+using <#= nameSpace.Replace("{DriverType}", Driver.ParentFolder ) #>;
 <#+ } #>
 <#+ foreach(var nameSpace in Driver.NameSpaces){ #>
 using <#= nameSpace #>;
@@ -27,42 +31,72 @@ using <#= nameSpace #>;
 using <#= ContextData.TransformFullnamespace(DataType.BaseNamespace) #>.<#= Driver.ParentFolder #>;
 using System;
 using System.Collections.Generic;
+using StructureMap;
+using StructureMap.Pipeline;
+using RepositoryEFDotnet.Contexts.<#= Driver.ParentFolder #>.Base;
 
-namespace <#= ContextData.TransformFullnamespace(DataType.BaseNamespace) #>.<#= Driver.Prefix #>.<#= Driver.ParentFolder #>.Database
+namespace <#= ContextData.TransformFullnamespace(DataType.BaseNamespace) #>.<#= Driver.ParentFolder #>.<#= Driver.Prefix #>.Database
 {
 	public class DatabaseManager : IDatabaseManager
 	{	
-		private IDictionary<string, string> configuration;
-		
+<#+ if(Driver.DriverType.EnableCache) {#>
+    <#+ if(Driver.DriverType is NhibernateDriverType) {#>
+    private static NHibernate.Cfg.Configuration Configuration;
+	    private static ISessionFactory Factory;  
+    <#+ } else if(Driver.DriverType is EFCoreDriverType) {#>
+    protected static IServiceProvider Provider;
+    <#+                } else if(Driver.DriverType is EFDriverType) {#>
+			// Please setup EF  
+    <#+ } #>
+<#+ } else {#>
+    <#+ if(Driver.DriverType is NhibernateDriverType) {#>
+ 	private static FluentConfiguration Configuration;
+	    private static ISessionFactory Factory;   
+    <#+  } else if(Driver.DriverType is EFCoreDriverType) {#>
+
+    <#+  } else if(Driver.DriverType is EFDriverType) {#>
+     // Please setup EF
+    <#+ } #>            
+<#+ } #>
+
 		#region CTOR
 		
-		public DatabaseManager(IDictionary<string, string> configuration)
+		public DatabaseManager()
 		{
-			this.configuration = configuration;
 		}
 		
 		#endregion
 		
         /// <summary>
-        /// The begin unit of work.
-        /// </summary>
-        /// <returns>
-        /// The <see cref="IUnitOfWork"/>.
-        /// </returns>
-        public virtual IUnitOfWork BeginUnitOfWork()
-        {
-            if (this.configuration == null || !this.configuration.ContainsKey("QUIRC<#= Driver.Prefix #>"))
-            {
-                throw new Exception("Invalid configuration specified in database manager");
-            }
+	    /// The register unit of work.
+	    /// </summary>
+	    /// <param name="configuration">
+	    /// The configuration.
+	    /// </param>
+	    /// <param name="container">
+	    /// The container.
+	    /// </param>
+	    /// <param name="serviceProvider">
+	    /// The service provider.
+	    /// </param>
+	    /// <exception cref="Exception">
+	    /// </exception>
+	    public void RegisterUnitOfWork(
+	        IDataConfiguration configuration,
+	        IContainer container,
+	        IServiceProvider serviceProvider = null)
+	    {
+	        if (configuration == null || configuration.ConnectionStrings == null
+	                                  || !configuration.ConnectionStrings.ContainsKey("QUIRCSqlServer"))
+	        {
+	            throw new Exception("Invalid configuration specified in database manager");
+	        }
 
-<#+ if(Driver.DriverType is NhibernateDriverType) {#>
-			var config = <#= Driver.ConfigurationClass #>.<#= Driver.ConfigurationOption #>.ConnectionString(this.configuration["QUIRC<#= Driver.Prefix #>"]);
-			return new <#= Driver.Prefix #><#= ContextData.ContextName #>(config);
-<#+ } else {#>
-			return new <#= Driver.Prefix #><#= ContextData.ContextName #>(this.configuration["QUIRC<#= Driver.Prefix #>"]);
-<#+ } #>
-        }
+<#+            var cacheParameters = new CacheParameters { ConnectionName = $"{ContextData.CustomConnectionName}{Driver.Prefix}", ContextName = ContextData.ContextName, Driver = Driver}; #>
+            <#= Driver.DriverType.GenerateBeginUnitOfWork(cacheParameters) #>
+            // End
+	    }
+        
 	}
 }
 <#+

@@ -8,12 +8,12 @@ public class ContextTemplate : BaseTemplate
 	public string MappingPostFix { get; set; }
     public IDriver Driver { get; set; }
 	public List<Table> Models { get; set; }
-	public CopyrightHeader Header { get; set; }
 
 	public override string TransformText()
 	{
 		//Debugger.Break();
-		Header = GetHeader(ContextData.ContextName);
+		Header = new CopyrightHeader();
+		Header.Filename = ContextData.ContextName;
 #>
 
 <#= Header.TransformText() #>
@@ -24,16 +24,16 @@ public class ContextTemplate : BaseTemplate
 // *******************************************************************
 
 <#+ foreach(var nameSpace in Driver.NameSpaces){ #>
-using <#= nameSpace #>;
+using <#= nameSpace.Replace("{DriverType}", Driver.ParentFolder) #>;
 <#+ } #>
 using System.ComponentModel.DataAnnotations.Schema;
 using <#= EntityNamespace #>;
 <#+ foreach(var nameSpace in DataType.AdditionalNamespaces){ #>
-using <#= nameSpace #>;
+using <#= nameSpace.Replace("{DriverType}", Driver.ParentFolder) #>;
 <#+ } #>
 using <#= MappingNamespace #>.<#= Driver.ParentFolder #>.<#= Driver.Prefix #>;
+using <#= EntityNamespace #>;
 using System.Data.Common;
-using RepositoryEFDotnet.Contexts.<#= Driver.ParentFolder #>;
 
 namespace <#= ContextData.TransformFullnamespace(DataType.BaseNamespace) #>.<#= Driver.ParentFolder #>
 {
@@ -73,7 +73,7 @@ namespace <#= ContextData.TransformFullnamespace(DataType.BaseNamespace) #>.<#= 
 			#region Mappings
 			
 <#+ foreach(var table in this.Models){ #>
-			modelBuilder.Configurations.Add(new <#= table.TableName #><#= MappingPostFix #>());
+			modelBuilder.Configurations.Add(new <#= string.Concat(ContextData.ContextName, table.TableName, MappingPostFix) #>());
 <#+ } #>
 
 			#endregion

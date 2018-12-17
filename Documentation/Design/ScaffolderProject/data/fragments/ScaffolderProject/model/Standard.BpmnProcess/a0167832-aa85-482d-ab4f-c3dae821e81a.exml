@@ -1,0 +1,163 @@
+<?xml version="1.0" ?>
+<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="Process" version="4">
+  <OBJECT>
+    <ID name="Process" mc="Standard.BpmnProcess" uid="a0167832-aa85-482d-ab4f-c3dae821e81a"/>
+    <PID name="scaffolderproject" mc="Standard.Package" uid="80b7f633-f266-4c60-a051-6ce4f57cf318"/>
+    <ATTRIBUTES>
+      <ATT name="ProcessType">NoneProcess</ATT>
+      <ATT name="IsClosed">false</ATT>
+      <ATT name="IsExecutable">OUndefined</ATT>
+      <ATT name="IsReentrant">false</ATT>
+      <ATT name="Name"><![CDATA[Process]]></ATT>
+      <ATT name="status">1970354901745664</ATT>
+    </ATTRIBUTES>
+    <DEPENDENCIES>
+      <COMP relation="FlowElement">
+        <OBJECT>
+          <ID name="Start" mc="Standard.BpmnStartEvent" uid="bd91afce-530e-4e5d-9831-cc702cb9d5f5"/>
+          <ATTRIBUTES>
+            <ATT name="IsInterrupting">true</ATT>
+            <ATT name="ParallelMultiple">false</ATT>
+            <ATT name="TriggeredByEvent">false</ATT>
+            <ATT name="Name"><![CDATA[Start]]></ATT>
+            <ATT name="status">1970354901745664</ATT>
+          </ATTRIBUTES>
+          <DEPENDENCIES></DEPENDENCIES>
+        </OBJECT>
+        <OBJECT>
+          <ID name="End" mc="Standard.BpmnEndEvent" uid="867d9941-7a48-42ab-8456-abceb76f0f6e"/>
+          <ATTRIBUTES>
+            <ATT name="TriggeredByEvent">false</ATT>
+            <ATT name="Name"><![CDATA[End]]></ATT>
+            <ATT name="status">1970354901745664</ATT>
+          </ATTRIBUTES>
+          <DEPENDENCIES></DEPENDENCIES>
+        </OBJECT>
+        <OBJECT>
+          <ID name="Task" mc="Standard.BpmnTask" uid="fdf8a2fc-752b-441b-970b-a082fe3ef7bd"/>
+          <ATTRIBUTES>
+            <ATT name="IsGlobal">false</ATT>
+            <ATT name="IsForCompensation">false</ATT>
+            <ATT name="StartQuantity">1</ATT>
+            <ATT name="CompletionQuantity">1</ATT>
+            <ATT name="TriggeredByEvent">false</ATT>
+            <ATT name="Name"><![CDATA[Task]]></ATT>
+            <ATT name="status">1970354901745664</ATT>
+          </ATTRIBUTES>
+          <DEPENDENCIES></DEPENDENCIES>
+        </OBJECT>
+        <OBJECT>
+          <ID name="" mc="Standard.BpmnSequenceFlow" uid="9840571f-e3a1-4506-910d-fe9fb836d135"/>
+          <ATTRIBUTES>
+            <ATT name="IsImmediate">false</ATT>
+            <ATT name="ConditionExpression"></ATT>
+            <ATT name="TriggeredByEvent">false</ATT>
+            <ATT name="Name"></ATT>
+            <ATT name="status">1970354901745664</ATT>
+          </ATTRIBUTES>
+          <DEPENDENCIES>
+            <LINK relation="SourceRef">
+              <REFOBJ>
+                <ID name="Start" mc="Standard.BpmnStartEvent" uid="bd91afce-530e-4e5d-9831-cc702cb9d5f5"/>
+              </REFOBJ>
+            </LINK>
+            <LINK relation="TargetRef">
+              <REFOBJ>
+                <ID name="Task" mc="Standard.BpmnTask" uid="fdf8a2fc-752b-441b-970b-a082fe3ef7bd"/>
+              </REFOBJ>
+            </LINK>
+          </DEPENDENCIES>
+        </OBJECT>
+        <OBJECT>
+          <ID name="Call Activity" mc="Standard.BpmnCallActivity" uid="857c2dcc-d7a5-4a94-8167-817607d9233f"/>
+          <ATTRIBUTES>
+            <ATT name="IsForCompensation">false</ATT>
+            <ATT name="StartQuantity">1</ATT>
+            <ATT name="CompletionQuantity">1</ATT>
+            <ATT name="TriggeredByEvent">false</ATT>
+            <ATT name="Name"><![CDATA[Call Activity]]></ATT>
+            <ATT name="status">1970354901745664</ATT>
+          </ATTRIBUTES>
+          <DEPENDENCIES>
+            <COMP relation="DependsOnDependency">
+              <OBJECT>
+                <ID name="" mc="Infrastructure.MethodologicalLink" uid="d667045e-edc6-4454-b175-9333136d2797"/>
+                <ATTRIBUTES>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="DependsOn">
+                    <REFOBJ>
+                      <ID name="GenerateBulkDelete" mc="Standard.Operation" uid="a11a7dc3-180e-4775-8988-b0f29fb90301"/>
+                    </REFOBJ>
+                  </LINK>
+                  <LINK relation="Extension">
+                    <FOREIGNID name="Called" mc="Infrastructure.Stereotype" uid="c3862c6c-5983-4d1a-b0e2-58dd2685eda0"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+            </COMP>
+          </DEPENDENCIES>
+        </OBJECT>
+        <OBJECT>
+          <ID name="Exclusive Gateway" mc="Standard.BpmnExclusiveGateway" uid="3a82cb50-d710-4501-bba6-d4db73325698"/>
+          <ATTRIBUTES>
+            <ATT name="GatewayDirection">UnspecifiedDirection</ATT>
+            <ATT name="TriggeredByEvent">false</ATT>
+            <ATT name="Name"><![CDATA[Exclusive Gateway]]></ATT>
+            <ATT name="status">1970354901745664</ATT>
+          </ATTRIBUTES>
+          <DEPENDENCIES></DEPENDENCIES>
+        </OBJECT>
+        <OBJECT>
+          <ID name="f" mc="Standard.BpmnSequenceFlow" uid="a3e16fcd-0938-479d-928d-3bcbdf057ccb"/>
+          <ATTRIBUTES>
+            <ATT name="IsImmediate">false</ATT>
+            <ATT name="ConditionExpression"></ATT>
+            <ATT name="TriggeredByEvent">false</ATT>
+            <ATT name="Name"><![CDATA[f]]></ATT>
+            <ATT name="status">1970354901745664</ATT>
+          </ATTRIBUTES>
+          <DEPENDENCIES>
+            <LINK relation="SourceRef">
+              <REFOBJ>
+                <ID name="Task" mc="Standard.BpmnTask" uid="fdf8a2fc-752b-441b-970b-a082fe3ef7bd"/>
+              </REFOBJ>
+            </LINK>
+            <LINK relation="TargetRef">
+              <REFOBJ>
+                <ID name="Exclusive Gateway" mc="Standard.BpmnExclusiveGateway" uid="3a82cb50-d710-4501-bba6-d4db73325698"/>
+              </REFOBJ>
+            </LINK>
+          </DEPENDENCIES>
+        </OBJECT>
+        <OBJECT>
+          <ID name="f1" mc="Standard.BpmnSequenceFlow" uid="13ac5eb0-b7c3-4377-86f6-4d3267f46866"/>
+          <ATTRIBUTES>
+            <ATT name="IsImmediate">false</ATT>
+            <ATT name="ConditionExpression"></ATT>
+            <ATT name="TriggeredByEvent">false</ATT>
+            <ATT name="Name"><![CDATA[f1]]></ATT>
+            <ATT name="status">1970354901745664</ATT>
+          </ATTRIBUTES>
+          <DEPENDENCIES>
+            <LINK relation="SourceRef">
+              <REFOBJ>
+                <ID name="Task" mc="Standard.BpmnTask" uid="fdf8a2fc-752b-441b-970b-a082fe3ef7bd"/>
+              </REFOBJ>
+            </LINK>
+            <LINK relation="TargetRef">
+              <REFOBJ>
+                <ID name="Call Activity" mc="Standard.BpmnCallActivity" uid="857c2dcc-d7a5-4a94-8167-817607d9233f"/>
+              </REFOBJ>
+            </LINK>
+          </DEPENDENCIES>
+        </OBJECT>
+      </COMP>
+      <COMP relation="Product">
+        <COMPID name="Process" mc="Standard.BpmnProcessDesignDiagram" uid="c4ca9ed1-09c8-4175-8d1c-d5fb73e57f0f"/>
+      </COMP>
+    </DEPENDENCIES>
+  </OBJECT>
+</EXT>

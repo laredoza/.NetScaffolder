@@ -9,14 +9,14 @@ public class MappingCoreTemplate : BaseTemplate
 	public List<Table> Models { get; set; }
 	public INamingConvention NamingConvention { get; set; }
 	public string PostFix { get; set; }
-	public CopyrightHeader Header { get; set; }
 
 	public override string TransformText()
 	{		
         string ModelName = NamingConvention == null ? Model.TableName : NamingConvention.ApplyNamingConvention(Model.TableName);
 
 		//Debugger.Break();
-		Header = GetHeader(ModelName + PostFix);
+		Header = new CopyrightHeader();
+		Header.Filename = ModelName + PostFix;
 #>
 
 <#= Header.TransformText() #>
@@ -35,7 +35,7 @@ using System.Data.Common;
 
 namespace <#= Namespace #>.<#= Driver.ParentFolder #>.<#= Driver.Prefix #>
 {
-	public partial class <#= ModelName #><#= PostFix #> : IEntityTypeConfiguration<<#= ModelName #>>
+	public partial class <#= ContextData.ContextName #><#= ModelName #><#= PostFix #> : IEntityTypeConfiguration<<#= ModelName #>>
 	{	
 	    public virtual void Configure(EntityTypeBuilder<<#= ModelName #>> builder)
 	    {
@@ -60,7 +60,7 @@ if (Driver.ForceSchemaToUppercase)
 			builder.Property(t => t.<#= NamingConvention.ApplyNamingConvention(pk.ColumnName) #>).HasColumnName("<#= pk.ColumnName #>")<#=Driver.DriverType.TransformDbGeneratedKey(Model) #>;
 <#+ } #>
 <#+ if(Model.PrimaryKeyCount > 1){ #>
-			builder.HasKey(t => new {<#= NameFormatting.TransformCompositeKeys(Model.Columns.Where(o => o.IsPrimaryKey), "t") #>});
+			builder.HasKey(t => new {<#= NameFormatting.TransformCompositeKeys(Model.Columns.Where(o => o.IsPrimaryKey), "t", NamingConvention) #>});
 <#+ foreach(var col in Model.Columns.Where(o => o.IsPrimaryKey)){ #>
 			builder.Property(t => t.<#= NamingConvention.ApplyNamingConvention(col.ColumnName) #>).HasColumnName("<#= col.ColumnName #>")<#=Driver.DriverType.TransformDbGeneratedKey(Model) #>;
 <#+ } #>
@@ -97,12 +97,13 @@ if (Driver.ForceSchemaToUppercase)
 			
 			#region Relationships
 			
-<#+ foreach(var rel in Model.Relationships.Where(o => ContextData.HasModel(o) && ( o.RelatedTable==null?true:o.RelatedTable.EnabledForCodeGeneration))){ #>
-			<#= Driver.DriverType.TransformRelationship(Model.TableName, rel, Models, Model.Relationships.Where(o => ContextData.HasModel(o) && ( o.RelatedTable==null?true:o.RelatedTable.EnabledForCodeGeneration)), NamingConvention) #>
+<#+ foreach(var rel in Model.Relationships.Where(o => ContextData.HasModel(o))){ #>
+			<#= Driver.DriverType.TransformRelationship(Model.TableName, rel, Models, Model.Relationships.Where(o => ContextData.HasModel(o)), NamingConvention) #>
 <#+ } #>
 			
 			#endregion	
 <#+ if(Driver.DriverType.IncludeColumnOrder){ #>
+
 			#region Column Order
 			
 			// Column ordering available in EF Core 2.1 - https://data.uservoice.com/forums/72025-entity-framework-core-feature-suggestions/suggestions/18936844-ef-core-migrations-column-ordering

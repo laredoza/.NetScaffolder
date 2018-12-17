@@ -4,6 +4,8 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
+using DotNetScaffolder.Core.Configuration;
+
 namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EFCore
 {
     #region Usings
@@ -106,12 +108,24 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EFCore
         /// </summary>
         public bool UseSeperateConfigClasses { get; set; }
 
+        public bool EnableCache { get; set; }
+        public Guid Cache { get; set; }
+
         /// <summary>
         ///     Gets or sets the validation result.
         /// </summary>
         [XmlIgnore]
         public List<Validation> ValidationResult { get; set; }
 
+        [XmlIgnore]
+        public IIDriverTypeCache CurrentCache
+        {
+            get
+            {
+                return ScaffoldConfig.DriverTypeCache.FirstOrDefault(c =>
+                    c.Metadata["ValueMetaData"].ToString().ToLower() == Cache.ToString().ToLower())?.Value;
+            }
+        }
         #endregion
 
         #region Public Methods And Operators
@@ -177,6 +191,8 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EFCore
                     this.ProxyCreationEnabled = loadedDriverType.ProxyCreationEnabled;
                     this.UseSeperateConfigClasses = loadedDriverType.UseSeperateConfigClasses;
                     this.UseAlias = loadedDriverType.UseAlias;
+                    this.Cache = loadedDriverType.Cache;
+                    this.EnableCache = loadedDriverType.EnableCache;
                 }
             }
         }
@@ -346,6 +362,28 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EFCore
             }
 
             return sb.ToString();
+        }
+
+        public string GenerateBeginUnitOfWork(CacheParameters parameter)
+        {
+            if (this.EnableCache && this.CurrentCache != null)
+            {
+                return this.CurrentCache.GenerateBeginUnitOfWork(parameter);
+            }
+            else
+            {
+                StringBuilder sb = new StringBuilder();
+
+                sb.AppendLine("container.Configure(");
+                sb.AppendLine("                 config =>");
+                sb.AppendLine("                 {");
+                sb.AppendLine($"                    config.For<IUnitOfWork>().LifecycleIs(Lifecycles.Transient).Use<{parameter.Driver.Prefix}{parameter.ContextName}>()");
+                sb.AppendLine($"                         .Ctor<string>(\"connectionString\").Is(configuration.ConnectionStrings[\"{parameter.ConnectionName}\"]);");
+                sb.AppendLine("                 });");
+
+                return sb.ToString();
+            }
+
         }
 
         /// <summary>

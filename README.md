@@ -35,13 +35,17 @@ T4 templates (DataTypes) are used to generate a layer. Packages group several of
 
 - Entity Famework 6.0 ( MySql, Sql Server, Oracle, PostgreSQL )
 - Entity Framework Core 2.1 ( MySql - Pomelo Driver, Sql Server )
-- Adding support for NHibernate ( Mysql, Sql Server, Oracle )
+- NHibernate ( Mysql, Sql Server, Oracle )
 
 ### Planned Project Types:
 
 - MVC
 - Angular 
 - Xamarin
+
+### Documentation
+
+[.NetScaffolder Manual](https://github.com/laredoza/.NetScaffolder/blob/master/Documentation/Manual.pdf)
 
 ### Completed
 - ~~[0.2 Basic UI Management](https://github.com/laredoza/.NetScaffolder/milestone/2)~~
@@ -50,9 +54,9 @@ T4 templates (DataTypes) are used to generate a layer. Packages group several of
 - ~~[0.32 Create base repository for MySql](https://github.com/laredoza/.NetScaffolder/milestone/9)~~
 - ~~[0.4 Create .NET Core base repository for EF Core](https://github.com/laredoza/.NetScaffolder/milestone/4)~~
 - ~~[0.5 Create base repository for nHibernate](https://github.com/laredoza/.NetScaffolder/milestone/5)~~
+- ~~[0.6 Create Application Service](https://github.com/laredoza/.NetScaffolder/milestone/6)~~
 
 ### Todo
-- [0.6 Create Application Service](https://github.com/laredoza/.NetScaffolder/milestone/6)
 - [Data Stabilization](https://github.com/laredoza/.NetScaffolder/milestone/12)
 - [0.8 Create MVC Presentation Layer & ModelViews](https://github.com/laredoza/.NetScaffolder/milestone/8)
 - [0.81 Create Angular Presentation Layer & ModelViews](https://github.com/laredoza/.NetScaffolder/milestone/10)

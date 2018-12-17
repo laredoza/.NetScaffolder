@@ -45,6 +45,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationServiceDataTypes\ApplicationServiceDataType.cs" />
+    <Compile Include="ApplicationServiceDataTypes\ApplicationServiceData.cs" />
+    <Compile Include="ApplicationServiceDataTypes\ApplicationServiceDataError.cs" />
+    <Compile Include="ApplicationServiceDataTypes\BaseApplicationService.cs" />
     <Compile Include="Base\BaseDataType.cs" />
     <Compile Include="ContextDataTypes\ContextData.cs" />
     <Compile Include="ContextDataTypes\ContextDataError.cs" />
@@ -57,6 +60,7 @@
     <Compile Include="RepoInterfaceDataTypes\RepoInterfaceDataType.cs" />
     <Compile Include="RepositoryDataTypes\RepositoryDataType.cs" />
     <Compile Include="DtoDataTypes\DtoDataType.cs" />
+    <Compile Include="UnitTests\UnitTestDataType.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Core\Common\DotNetScaffolder.Core.Common.csproj">

@@ -4,12 +4,12 @@ public class StructureMapTemplate : BaseTemplate
 	public StructureMapDataType DataType { get; set; }
 	public ContextData ContextData { get; set; }
 	public string Name { get; set; }
-	public CopyrightHeader Header { get; set; }
 
 	public override string TransformText()
 	{
-		//Debugger.Break();		
-		Header = GetHeader(Name);
+		//Debugger.Break();
+		Header = new CopyrightHeader();
+		Header.Filename = Name;
 #>
 
 <#= Header.TransformText() #>

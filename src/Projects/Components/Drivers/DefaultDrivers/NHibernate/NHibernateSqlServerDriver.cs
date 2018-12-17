@@ -22,7 +22,7 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.NHibernate
     [ExportMetadata("TypeIdMetaData", "2BC1B0C4-1E41-9146-82CF-599181CE4401")]
     [ExportMetadata("NameMetaData", "NHibernate - Sql Server (Default)")]
     [ExportMetadata("ValueMetaData", "2BC1B0C4-1E41-9146-82CF-599181CE4413")]
-    public class NHibernateSqlServerDriver : IDriver
+    public class NHibernateSqlServerDriver : IDriver, INHibernateConfig
     {
         #region Public Properties
 
@@ -77,6 +77,7 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.NHibernate
         IDriverType IDriver.DriverType =>
             this.DriverType ?? (this.DriverType = new NhibernateDriverType("NHibernateDriverType.xml"));
 
+        public string ConfigName => "MsSqlConfiguration.MsSql2012";
         #region Public Methods And Operators
 
         /// <summary>
@@ -110,6 +111,36 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.NHibernate
         public int CheckPrecision(Column col)
         {
             return col.Precision;
+        }
+
+        public string GenerateBulkDelete()
+        {
+            return "base.BulkDelete(items);";
+        }
+
+        public string GenerateBulkDeleteAsync()
+        {
+            return "await base.BulkDeleteAsync(items);";
+        }
+
+        public string GenerateBulkInsert()
+        {
+            return "base.BulkInsert(items);";
+        }
+
+        public string GenerateBulkInsertAsync()
+        {
+            return "await base.BulkInsertAsync(items);";
+        }
+
+        public string GenerateBulkUpdate()
+        {
+            return "base.BulkUpdate(items);";
+        }
+
+        public string GenerateBulkUpdateAsync()
+        {
+            return "await base.BulkUpdateAsync(items);";
         }
 
         #endregion

@@ -1,0 +1,51 @@
+﻿<#+
+public class ContextRegistrationTemplate : BaseTemplate 
+{
+	public ContextDataType DataType { get; set; }
+	public ContextData ContextData { get; set; }
+	public IDriver Driver { get; set; }
+    public string InterfaceDatabasePath {get; set;}
+    public List<string> NameSpaces{ get; set;}
+
+	public override string TransformText()
+	{
+		//Debugger.Break();
+		Header = new CopyrightHeader();
+		Header.Filename = "ContextRegistration";
+#>
+
+<#= Header.TransformText() #>
+
+// *******************************************************************
+//	GENERATED CODE. DOT NOT MODIFY MANUALLY AS CHANGES CAN BE LOST!!!
+//	USE A PARTIAL CLASS INSTEAD
+// *******************************************************************
+
+using System;
+using System.Collections.Generic;
+using StructureMap.Pipeline;
+<#+ foreach(var nameSpace in NameSpaces){ #>
+using <#= nameSpace #>;
+<#+ } #>
+using <#= ContextData.TransformFullnamespace(DataType.BaseNamespace) #>.<#= Driver.ParentFolder #>.<#= Driver.Prefix #>.Database;
+//using <#= InterfaceDatabasePath #>;
+ 
+namespace <#= DataType.BaseNamespace #>.<#= ContextData.Namespace #>.<#= Driver.ParentFolder #>.ContextRegistration
+{
+	public class ContextRegistration : StructureMap.Registry
+	{			
+		#region CTOR
+		
+        public ContextRegistration()
+        {
+            this.For<IDatabaseManager>().LifecycleIs(Lifecycles.Container).Use<DatabaseManager>();
+        }
+		
+		#endregion
+	}
+}
+<#+
+		return this.GenerationEnvironment.ToString();
+	}
+}
+#>

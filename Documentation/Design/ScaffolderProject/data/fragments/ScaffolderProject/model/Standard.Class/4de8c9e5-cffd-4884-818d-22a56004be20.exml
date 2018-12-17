@@ -1,0 +1,34 @@
+<?xml version="1.0" ?>
+<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="ListAndListCollectionOption" version="4">
+  <OBJECT>
+    <ID name="ListAndListCollectionOption" mc="Standard.Class" uid="4de8c9e5-cffd-4884-818d-22a56004be20"/>
+    <PID name="scaffolderproject" mc="Standard.Package" uid="80b7f633-f266-4c60-a051-6ce4f57cf318"/>
+    <ATTRIBUTES>
+      <ATT name="IsActive">false</ATT>
+      <ATT name="IsMain">false</ATT>
+      <ATT name="IsElementary">false</ATT>
+      <ATT name="IsAbstract">false</ATT>
+      <ATT name="IsLeaf">false</ATT>
+      <ATT name="IsRoot">false</ATT>
+      <ATT name="Visibility">Public</ATT>
+      <ATT name="Name"><![CDATA[ListAndListCollectionOption]]></ATT>
+      <ATT name="status">1970354901745664</ATT>
+    </ATTRIBUTES>
+    <DEPENDENCIES>
+      <COMP relation="Realized">
+        <OBJECT>
+          <ID name="InterfaceRealization" mc="Standard.InterfaceRealization" uid="7c4d3989-6f97-4198-ba49-ae35344ab3a3"/>
+          <ATTRIBUTES>
+            <ATT name="Name"><![CDATA[InterfaceRealization]]></ATT>
+            <ATT name="status">1970354901745664</ATT>
+          </ATTRIBUTES>
+          <DEPENDENCIES>
+            <LINK relation="Implemented">
+              <ID name="ICollectionOption" mc="Standard.Interface" uid="c5a065d9-dc27-4f80-9288-e3d0b5093178"/>
+            </LINK>
+          </DEPENDENCIES>
+        </OBJECT>
+      </COMP>
+    </DEPENDENCIES>
+  </OBJECT>
+</EXT>

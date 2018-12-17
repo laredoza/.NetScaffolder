@@ -1,8 +1,19 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="EFDriverTypeUserControl.cs" company="DotnetScaffolder">
-//   MIT
-// </copyright>
-// --------------------------------------------------------------------------------------------------------------------
+﻿#region Usings
+
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.Composition;
+using System.Windows.Forms;
+using DotNetScaffolder.Components.Common.Contract;
+using DotNetScaffolder.Components.Common.Contract.UI;
+using DotNetScaffolder.Components.DataTypes.DefaultDataTypes;
+using DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6;
+using DotNetScaffolder.Core.Common;
+using DotNetScaffolder.Core.Common.Validation;
+using DotNetScaffolder.Core.Configuration;
+using DotNetScaffolder.Mapping.MetaData.Domain;
+
+#endregion
 
 namespace DefaultDrivers.Forms
 {
@@ -10,25 +21,12 @@ namespace DefaultDrivers.Forms
 
     #region Usings
 
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.Composition;
-    using System.Windows.Forms;
-
-    using DotNetScaffolder.Components.Common.Contract;
-    using DotNetScaffolder.Components.Common.Contract.UI;
-    using DotNetScaffolder.Components.DataTypes.DefaultDataTypes;
-    using DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6;
-    using DotNetScaffolder.Components.Drivers.DefaultDrivers.EFCore;
-    using DotNetScaffolder.Core.Common.Validation;
-    using DotNetScaffolder.Mapping.MetaData.Domain;
-
     #endregion
 
     #endregion
 
     /// <summary>
-    /// The ef driver type user control.
+    ///     The ef driver type user control.
     /// </summary>
     [Export(typeof(IDriverTypeUI))]
     [ExportMetadata("NameMetaData", "EFDriverUI")]
@@ -37,6 +35,12 @@ namespace DefaultDrivers.Forms
     [ExportMetadata("DriverType", "2BC1B0C4-1E41-9146-82CF-599181CE4410")]
     public partial class EFDriverTypeUserControl : UserControl, IDriverTypeUI
     {
+        #region Fields
+
+        private bool loading;
+
+        #endregion
+
         #region Constructors and Destructors
 
         /// <summary>
@@ -44,8 +48,8 @@ namespace DefaultDrivers.Forms
         /// </summary>
         public EFDriverTypeUserControl()
         {
-            this.InitializeComponent();
-            this.DriverType = new EFDriverType("EFDriverType.xml");
+            InitializeComponent();
+            DriverType = new EFDriverType("EFDriverType.xml");
         }
 
         #endregion
@@ -69,38 +73,77 @@ namespace DefaultDrivers.Forms
         #region Public Methods And Operators
 
         /// <summary>
-        /// The load config.
+        ///     The load config.
         /// </summary>
         /// <param name="parameters">
-        /// The parameters.
+        ///     The parameters.
         /// </param>
         public void LoadConfig(object parameters)
         {
-            this.DriverType.LoadConfig(parameters);
-            this.CreateDb.Checked = this.DriverType.CreateDb;
-            this.LazyLoading.Checked = this.DriverType.LazyLoadingEnabled;
-            this.LoggingEnabled.Checked = this.DriverType.LoggingEnabled;
-            this.ProxyCreation.Checked = this.DriverType.ProxyCreationEnabled;
-            this.chkColumnOrder.Checked = this.DriverType.IncludeColumnOrder;
-            this.chkUseAlias.Checked = this.DriverType.UseAlias;
+            loading = true;
+            comboBoxCaching.DisplayMember = "Text";
+            comboBoxCaching.ValueMember = "Value";
+            comboBoxCaching.DataSource = ReturnDriverTypes();
+
+            DriverType.LoadConfig(parameters);
+            CreateDb.Checked = DriverType.CreateDb;
+            LazyLoading.Checked = DriverType.LazyLoadingEnabled;
+            LoggingEnabled.Checked = DriverType.LoggingEnabled;
+            ProxyCreation.Checked = DriverType.ProxyCreationEnabled;
+            chkColumnOrder.Checked = DriverType.IncludeColumnOrder;
+            chkUseAlias.Checked = DriverType.UseAlias;
+
+            comboBoxCaching.SelectedValue = DriverType.Cache;
+            checkCaching.Checked = DriverType.EnableCache;
+            groupBoxCaching.Enabled = checkCaching.Checked;
+            loading = false;
         }
 
         /// <summary>
-        /// The save config.
+        ///     Return naming conventions.
+        /// </summary>
+        /// <returns>
+        ///     The <see cref="object[]" />.
+        /// </returns>
+        public object[] ReturnDriverTypes()
+        {
+            var items = new List<ComboboxItem>
+            {
+                new ComboboxItem {Text = "None", Value = Guid.Empty}
+            };
+            foreach (var driverType in ScaffoldConfig.DriverTypeCache)
+            {
+                if (driverType.Metadata["DriverType"].ToString().ToLower() == DriverType.Id.ToString().ToLower())
+                {
+                    items.Add(
+                        new ComboboxItem
+                        {
+                            Text = (string) driverType.Metadata["NameMetaData"],
+                            Value = new Guid(driverType.Metadata["ValueMetaData"].ToString())
+                        });
+                }
+            }
+
+            return items.ToArray();
+        }
+
+        /// <summary>
+        ///     The save config.
         /// </summary>
         /// <param name="parameters">
-        /// The parameters.
+        ///     The parameters.
         /// </param>
         public void SaveConfig(object parameters)
         {
-            this.DriverType.CreateDb = this.CreateDb.Checked;
-            this.DriverType.LazyLoadingEnabled = this.LazyLoading.Checked;
-            this.DriverType.LoggingEnabled = this.LoggingEnabled.Checked;
-            this.DriverType.ProxyCreationEnabled = this.ProxyCreation.Checked;
-            this.DriverType.IncludeColumnOrder = this.chkColumnOrder.Checked;
-            this.DriverType.UseAlias = this.chkUseAlias.Checked;
+            DriverType.CreateDb = CreateDb.Checked;
+            DriverType.LazyLoadingEnabled = LazyLoading.Checked;
+            DriverType.LoggingEnabled = LoggingEnabled.Checked;
+            DriverType.ProxyCreationEnabled = ProxyCreation.Checked;
+            DriverType.IncludeColumnOrder = chkColumnOrder.Checked;
+            DriverType.UseAlias = chkUseAlias.Checked;
 
-            this.DriverType.SaveConfig(parameters);
+            DriverType.EnableCache = checkCaching.Checked;
+            DriverType.SaveConfig(parameters);
         }
 
         /// <summary>
@@ -111,8 +154,25 @@ namespace DefaultDrivers.Forms
         /// </returns>
         public List<Validation> Validate()
         {
-            this.ValidationResult = this.DriverType.Validate();
-            return this.ValidationResult;
+            ValidationResult = DriverType.Validate();
+            return ValidationResult;
+        }
+
+        #endregion
+
+        #region Other Methods
+
+        private void checkCaching_CheckedChanged(object sender, EventArgs e)
+        {
+            groupBoxCaching.Enabled = checkCaching.Checked;
+        }
+
+        private void comboBoxCaching_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!loading)
+            {
+                DriverType.Cache = new Guid(comboBoxCaching.SelectedValue.ToString());
+            }
         }
 
         #endregion

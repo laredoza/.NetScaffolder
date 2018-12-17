@@ -1,0 +1,31 @@
+<?xml version="1.0" ?>
+<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="scaffolderproject Class diagram" version="4">
+  <OBJECT>
+    <ID name="scaffolderproject Class diagram" mc="Standard.ClassDiagram" uid="9e51d735-6d9e-4f2d-a1f4-715c12e415f7"/>
+    <PID name="scaffolderproject" mc="Standard.Package" uid="80b7f633-f266-4c60-a051-6ce4f57cf318"/>
+    <ATTRIBUTES>
+      <ATT name="UiDataVersion">38</ATT>
+      <ATT name="UiData"><![CDATA[eJztU9tO4zAQ/RUr73VJL1RIoQgSVCECRS0g7ROaxpOuwbEr24Xm73EuBdpVo6yElpd9sj2eM3Nm5kxwtskEeUVtuJKnnk+PPHI2DqaLZ0ws4cyZPGLzFZ56Si9pphgKrijjsNSQUWTcKk2NBctfKArMUFpTvZOt0ySbl++oenskg2elnz6SHnnj4E6rFWqbEwmZyyUgV2sbgQX39whijTUJuRbC646D7hbwB3Ruc4HeTgm9phJM4W9oojTSCtuCXwgmAYZsm+xyY2eYtsxy60LUSIIbGy2uHMfyWlxuKiTp081eod2qpKbiNQqwyByXvb7dFCbyWliKFoFkoBkNBRhTj4Wc4NBno/6wc8xOsDNIe6wDfjrojPxh4vdw4A/TUXPrXTR7LdWbjGGBYo/B3Goul97YNS5NlWCoV1qVIypZkLpTQbcENRapBF7JUGUrZbh1IzqQqUWo8DcXTGMRIeamaG19HETEXL6Y9u4Xy0jDm6MTQ456V5b9xs3a7hKr8IaKIoJbpp2A/2aX/g71syLk7IAcogmNz39dzp4uzsPryWz6cBt9j0Ja7OXXmX2q54sWBv+18CNauJ/efbcIDn69AyxblbU=]]></ATT>
+      <ATT name="Name"><![CDATA[scaffolderproject Class diagram]]></ATT>
+      <ATT name="status">1970354901745664</ATT>
+    </ATTRIBUTES>
+    <DEPENDENCIES>
+      <COMP relation="Descriptor">
+        <OBJECT>
+          <ID name="" mc="Infrastructure.Note" uid="bf016fb2-71e3-4075-9a6b-5771865dd808"/>
+          <ATTRIBUTES>
+            <ATT name="Content"></ATT>
+            <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
+            <ATT name="Name"></ATT>
+            <ATT name="status">1970354901745664</ATT>
+          </ATTRIBUTES>
+          <DEPENDENCIES>
+            <LINK relation="Model">
+              <FOREIGNID name="description" mc="Infrastructure.NoteType" uid="00000000-0000-3e81-0000-000000000000"/>
+            </LINK>
+          </DEPENDENCIES>
+        </OBJECT>
+      </COMP>
+    </DEPENDENCIES>
+  </OBJECT>
+</EXT>

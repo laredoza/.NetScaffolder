@@ -4,6 +4,8 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System;
+
 namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EFCore
 {
     using System.Collections.Generic;
@@ -111,6 +113,36 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EFCore
         public int CheckPrecision(Column col)
         {
             return col.Precision;
+        }
+
+        public string GenerateBulkDelete()
+        {
+            return "base.BulkDelete(items);";
+        }
+
+        public string GenerateBulkDeleteAsync()
+        {
+            return "await base.BulkDeleteAsync(items);";
+        }
+
+        public string GenerateBulkInsert()
+        {
+            return "base.BulkInsert(items);";
+        }
+
+        public string GenerateBulkInsertAsync()
+        {
+            return "await base.BulkInsertAsync(items);";
+        }
+
+        public string GenerateBulkUpdate()
+        {
+            return "base.BulkUpdate(items);";
+        }
+
+        public string GenerateBulkUpdateAsync()
+        {
+            return "await base.BulkUpdateAsync(items);";
         }
 
         #endregion

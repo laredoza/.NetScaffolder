@@ -10,7 +10,7 @@
 
         protected override void RunCore()
         {
-           // Debugger.Break();
+            Debugger.Break();
 
             foreach(var model in this.Models)
             {
@@ -22,9 +22,7 @@
                 {
                     template.Output.Project = DataType.OutputPath;
                 }
-				template.CompanyText = CompanyText;
-			template.LicenseText = LicenseText;
-			template.HeaderText = HeaderText;
+
                 template.RenderToFile(string.Format(@"{0}\{1}.g.cs", DataType.OutputFolder, DataType.DtoNameFull));	
             }
         }

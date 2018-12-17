@@ -34,6 +34,10 @@
             this.CreateDb = new System.Windows.Forms.CheckBox();
             this.LazyLoading = new System.Windows.Forms.CheckBox();
             this.chkUseAlias = new System.Windows.Forms.CheckBox();
+            this.groupBoxCaching = new System.Windows.Forms.GroupBox();
+            this.comboBoxCaching = new System.Windows.Forms.ComboBox();
+            this.checkCaching = new System.Windows.Forms.CheckBox();
+            this.groupBoxCaching.SuspendLayout();
             this.SuspendLayout();
             // 
             // chkColumnOrder
@@ -96,10 +100,42 @@
             this.chkUseAlias.Text = "Use Alias";
             this.chkUseAlias.UseVisualStyleBackColor = true;
             // 
+            // groupBoxCaching
+            // 
+            this.groupBoxCaching.Controls.Add(this.comboBoxCaching);
+            this.groupBoxCaching.Location = new System.Drawing.Point(12, 144);
+            this.groupBoxCaching.Name = "groupBoxCaching";
+            this.groupBoxCaching.Size = new System.Drawing.Size(200, 67);
+            this.groupBoxCaching.TabIndex = 77;
+            this.groupBoxCaching.TabStop = false;
+            this.groupBoxCaching.Text = "Caching Options";
+            // 
+            // comboBoxCaching
+            // 
+            this.comboBoxCaching.FormattingEnabled = true;
+            this.comboBoxCaching.Location = new System.Drawing.Point(7, 30);
+            this.comboBoxCaching.Name = "comboBoxCaching";
+            this.comboBoxCaching.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxCaching.TabIndex = 0;
+            this.comboBoxCaching.SelectedIndexChanged += new System.EventHandler(this.comboBoxCaching_SelectedIndexChanged);
+            // 
+            // checkCaching
+            // 
+            this.checkCaching.AutoSize = true;
+            this.checkCaching.Location = new System.Drawing.Point(12, 121);
+            this.checkCaching.Name = "checkCaching";
+            this.checkCaching.Size = new System.Drawing.Size(100, 17);
+            this.checkCaching.TabIndex = 78;
+            this.checkCaching.Text = "Enable caching";
+            this.checkCaching.UseVisualStyleBackColor = true;
+            this.checkCaching.CheckedChanged += new System.EventHandler(this.checkCaching_CheckedChanged);
+            // 
             // NHibernateUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.checkCaching);
+            this.Controls.Add(this.groupBoxCaching);
             this.Controls.Add(this.chkUseAlias);
             this.Controls.Add(this.chkColumnOrder);
             this.Controls.Add(this.ProxyCreation);
@@ -107,7 +143,8 @@
             this.Controls.Add(this.CreateDb);
             this.Controls.Add(this.LazyLoading);
             this.Name = "NHibernateUserControl";
-            this.Size = new System.Drawing.Size(237, 135);
+            this.Size = new System.Drawing.Size(308, 228);
+            this.groupBoxCaching.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -121,5 +158,8 @@
         private System.Windows.Forms.CheckBox CreateDb;
         private System.Windows.Forms.CheckBox LazyLoading;
         private System.Windows.Forms.CheckBox chkUseAlias;
+        private System.Windows.Forms.GroupBox groupBoxCaching;
+        private System.Windows.Forms.ComboBox comboBoxCaching;
+        private System.Windows.Forms.CheckBox checkCaching;
     }
 }

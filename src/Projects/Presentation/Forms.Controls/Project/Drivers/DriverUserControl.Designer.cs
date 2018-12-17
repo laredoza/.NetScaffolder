@@ -33,10 +33,11 @@
             // 
             // TabControl
             // 
-            this.TabControl.Location = new System.Drawing.Point(3, 3);
+            this.TabControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.TabControl.Location = new System.Drawing.Point(0, 0);
             this.TabControl.Name = "TabControl";
             this.TabControl.SelectedIndex = 0;
-            this.TabControl.Size = new System.Drawing.Size(350, 163);
+            this.TabControl.Size = new System.Drawing.Size(357, 254);
             this.TabControl.TabIndex = 2;
             // 
             // DriverUserControl
@@ -45,7 +46,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.TabControl);
             this.Name = "DriverUserControl";
-            this.Size = new System.Drawing.Size(357, 171);
+            this.Size = new System.Drawing.Size(357, 254);
             this.ResumeLayout(false);
 
         }

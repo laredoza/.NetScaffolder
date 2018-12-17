@@ -4,6 +4,8 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
+using DotNetScaffolder.Core.Configuration;
+
 namespace DotNetScaffolder.Test.Project.ApplicationService
 {
     #region Usings

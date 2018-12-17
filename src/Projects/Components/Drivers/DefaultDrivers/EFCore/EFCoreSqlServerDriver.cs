@@ -122,6 +122,36 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EFCore
             return col.Precision;
         }
 
+        public string GenerateBulkDelete()
+        {
+            return "this.BulkDelete(items);";
+        }
+
+        public string GenerateBulkDeleteAsync()
+        {
+            return "await this.BulkDeleteAsync(items);";
+        }
+
+        public string GenerateBulkInsert()
+        {
+            return "this.BulkInsert(items);";
+        }
+
+        public string GenerateBulkInsertAsync()
+        {
+            return "await this.BulkInsertAsync(items);";
+        }
+
+        public string GenerateBulkUpdate()
+        {
+            return "this.BulkUpdate(items);";
+        }
+
+        public string GenerateBulkUpdateAsync()
+        {
+            return "await this.BulkUpdateAsync(items);";
+        }
+
         #endregion
     }
 }

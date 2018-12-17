@@ -1,16 +1,13 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="IDriver.cs" company="DotnetScaffolder">
-//   MIT
-// </copyright>
-// --------------------------------------------------------------------------------------------------------------------
+﻿#region Usings
+
+using System.Collections.Generic;
+using DotNetScaffolder.Mapping.MetaData.Model;
+
+#endregion
 
 namespace DotNetScaffolder.Components.Common.Contract
 {
     #region Usings
-
-    using System.Collections.Generic;
-
-    using DotNetScaffolder.Mapping.MetaData.Model;
 
     #endregion
 
@@ -21,17 +18,24 @@ namespace DotNetScaffolder.Components.Common.Contract
     {
         #region Public Properties
 
+        string ConfigurationClass { get; }
+
+        string ConfigurationOption { get; set; }
+
         /// <summary>
         ///     Gets the context attribute.
         /// </summary>
         string ContextAttribute { get; }
 
         /// <summary>
+        ///     Gets the driver type.
+        /// </summary>
+        IDriverType DriverType { get; }
+
+        /// <summary>
         ///     Gets a value indicating whether force schema to uppercase.
         /// </summary>
         bool ForceSchemaToUppercase { get; }
-
-        bool UseSchema { get; }
 
         /// <summary>
         ///     Gets the name spaces used to generate templates.
@@ -48,20 +52,47 @@ namespace DotNetScaffolder.Components.Common.Contract
         /// </summary>
         string Prefix { get; }
 
-        /// <summary>
-        /// Gets the driver type.
-        /// </summary>
-        IDriverType DriverType { get; }
+        bool UseSchema { get; }
 
-        string ConfigurationClass { get; }
+        #endregion
 
-        string ConfigurationOption { get; set; }
+        #region Public Methods And Operators
 
         string AsAlias(string name);
 
-        string TransformIndex(Index index, INamingConvention nc = null);
-
         int CheckPrecision(Column col);
+
+        /// <summary>
+        ///     Generate bulk delete
+        /// </summary>
+        string GenerateBulkDelete();
+
+        /// <summary>
+        ///     Generate bulk delete async
+        /// </summary>
+        string GenerateBulkDeleteAsync();
+
+        /// <summary>
+        ///     Generate bulk insert async
+        /// </summary>
+        string GenerateBulkInsert();
+
+        /// <summary>
+        ///     Generate bulk insert async
+        /// </summary>
+        string GenerateBulkInsertAsync();
+
+        /// <summary>
+        ///     Generate bulk update async
+        /// </summary>
+        string GenerateBulkUpdate();
+
+        /// <summary>
+        ///     Generate bulk delete async
+        /// </summary>
+        string GenerateBulkUpdateAsync();
+
+        string TransformIndex(Index index, INamingConvention nc = null);
 
         #endregion
     }

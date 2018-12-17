@@ -77,7 +77,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project.Drivers
 
         private void ButtonClose_Click(object sender, EventArgs e)
         {
-            Close();
+            Hide();
         }
 
         #endregion

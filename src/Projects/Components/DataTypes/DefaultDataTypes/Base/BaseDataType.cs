@@ -176,6 +176,32 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Base
             return $"{CSharpOutputMapper.MapToOutput(col)} {this.TransformParameterName(col.ColumnName)}";
         }
 
+        public string TransformAsParameterName(IEnumerable<Column> columns)
+        {
+            string pk = string.Empty;
+
+            foreach (var col in columns)
+            {
+                pk = $"{pk} {this.TransformAsParameterName(col)}, ";
+            }
+
+            return pk.TrimEnd(' ').TrimEnd(',');
+        }
+
+        /// <summary>
+        /// The transform as parameter.
+        /// </summary>
+        /// <param name="col">
+        /// The col.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        public string TransformAsParameterName(Column col)
+        {
+            return $"{this.TransformParameterName(col.ColumnName)}";
+        }
+
         /// <summary>
         /// The transform as query.
         /// </summary>

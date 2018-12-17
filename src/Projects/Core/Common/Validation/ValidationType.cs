@@ -128,6 +128,14 @@ namespace DotNetScaffolder.Core.Common.Validation
 
         ContextDuplicateIsDefaultConfig = 23
         ,
-        ContextIsDefaultNotSet = 24
+        ContextIsDefaultNotSet = 24,
+
+        ApplicationServiceMissingModels = 25,
+
+        ApplicationServiceNameEmpty = 26,
+
+        ApplicationServiceDefaultNotSet = 27,
+
+        ApplicationServiceDuplicateIsDefaultConfig = 28
     }
 }

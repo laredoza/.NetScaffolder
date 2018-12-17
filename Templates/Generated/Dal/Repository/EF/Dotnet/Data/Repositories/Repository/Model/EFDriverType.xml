@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<EFDriverType xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <CreateDb>true</CreateDb>
-  <IncludeColumnOrder>true</IncludeColumnOrder>
-  <LazyLoadingEnabled>false</LazyLoadingEnabled>
-  <LoggingEnabled>true</LoggingEnabled>
-  <ProxyCreationEnabled>false</ProxyCreationEnabled>
-  <UseSeperateConfigClasses>false</UseSeperateConfigClasses>
-</EFDriverType>

@@ -57,9 +57,14 @@
     <Compile Include="EF6\EFMySqlDriver.cs" />
     <Compile Include="EF6\EFOracleDriver.cs" />
     <Compile Include="EF6\EFSqlServerDriver.cs" />
+    <Compile Include="EFCore\Cache\RedisCache.cs" />
+    <Compile Include="EFCore\Cache\MemoryCache.cs" />
     <Compile Include="EFCore\EFCoreSqlServerDriver.cs" />
     <Compile Include="EFCore\EFCoreDriverType.cs" />
     <Compile Include="EFCore\EFCoreMySqlDriver.cs" />
+    <Compile Include="NHibernate\Cache\RedisCache.cs" />
+    <Compile Include="NHibernate\Cache\MemoryCache.cs" />
+    <Compile Include="NHibernate\INHibernateConfig.cs" />
     <Compile Include="NHibernate\NhibernateDriverType.cs" />
     <Compile Include="NHibernate\NHibernateOracleDriver.cs" />
     <Compile Include="NHibernate\NHibernateMySqlDriver.cs" />
@@ -68,11 +73,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="Settings.StyleCop" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Core\Common\DotNetScaffolder.Core.Common.csproj">
       <Project>{CDACE52C-F991-40B5-80ED-4947A100EC52}</Project>
       <Name>DotNetScaffolder.Core.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Core\Configuration\DotNetScaffolder.Core.Configuration.csproj">
+      <Project>{ECF3D386-0124-450F-A763-92175FF00547}</Project>
+      <Name>DotNetScaffolder.Core.Configuration</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\Mapping\MetaData\DotNetScaffolder.Mapping.MetaData.csproj">
       <Project>{3F206474-14C2-4586-B57A-4EDC76795161}</Project>

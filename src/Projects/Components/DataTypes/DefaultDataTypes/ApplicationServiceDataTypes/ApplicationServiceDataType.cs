@@ -4,6 +4,8 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System.Xml.Serialization;
+
 namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ApplicationServiceDataTypes
 {
     #region Usings
@@ -12,13 +14,13 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ApplicationServ
     using System.Collections.Generic;
     using System.ComponentModel.Composition;
     using System.IO;
-
+    using System.Linq;
     using DotNetScaffolder.Components.Common.Contract;
     using DotNetScaffolder.Components.Common.MetaData;
     using DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Base;
     using DotNetScaffolder.Core.Common.Serializer;
     using DotNetScaffolder.Core.Common.Validation;
-
+    using DotNetScaffolder.Mapping.MetaData.Model;
     using FormControls.TreeView;
 
     #endregion
@@ -39,7 +41,13 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ApplicationServ
         public ApplicationServiceDataType()
             : base("Application.xml")
         {
+            this.ApplicationServiceData = new List<ApplicationServiceData>();
+            this.MissingTables = new List<ApplicationServiceDataError>();
             this.LanguageOutputDetails.Add(new LanguageOutputDetails{ LanguageOutput = new Guid("1BC1B0C4-1E41-9146-82CF-599181CE4410"), OutputGenerator = new Guid("1BC1B0C4-1E41-9146-82CF-599181CE4410")});
+            this.LanguageOutputDetails[0].Templates.Add("ApplicationServiceGenerator.ttInclude");
+            this.LanguageOutputDetails[0].Templates.Add("ApplicationServiceInterfaceTemplate.ttInclude");
+            this.LanguageOutputDetails[0].Templates.Add("ApplicationServiceTemplate.ttInclude");
+            this.AdditionalNamespacesInterfaces = new List<string>();
         }
 
         #endregion
@@ -47,20 +55,13 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ApplicationServ
         #region Public Properties
 
         /// <summary>
-        ///     Gets or sets a value indicating whether enabled.
+        ///     Gets the ApplicationServiceData.
         /// </summary>
-        public bool Enabled { get; set; } = false;
+        public List<ApplicationServiceData> ApplicationServiceData { get; private set; }
 
-        /// <summary>
-        ///     Gets or sets the namespace.
-        /// </summary>
-        public string Namespace { get; set; } = "ApplicationService";
+        public List<ApplicationServiceDataError> MissingTables { get; set; }
 
-        /// <summary>
-        ///     Gets or sets the output folder.
-        /// </summary>
-        public string OutputFolder { get; set; } = "Application Service";
-
+        public List<string> AdditionalNamespacesInterfaces { get; set; }
         #endregion
 
         #region Public Methods And Operators
@@ -73,30 +74,48 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ApplicationServ
         /// </param>
         public override void Load(IDictionary<string, string> parameters)
         {
+            if (parameters == null) return;
+
+            if (!parameters.ContainsKey("basePath"))
+            {
+                return;
+            }
+
             var filePath = Path.Combine(parameters["basePath"], this.FileName);
 
             if (File.Exists(filePath))
             {
-                var appService = ObjectXMLSerializer<ApplicationServiceDataType>.Load(filePath);
-                if (appService != null)
-                {
-                }
+                var dt = ObjectXMLSerializer<ApplicationServiceDataType>.Load(filePath);
+                this.ApplicationServiceData = dt.ApplicationServiceData;
+
+                this.AdditionalNamespaces.Clear();
+                this.AdditionalNamespaces.AddRange(dt.AdditionalNamespaces);
+
+                this.AdditionalNamespacesInterfaces.Clear();
+                this.AdditionalNamespacesInterfaces.AddRange(dt.AdditionalNamespacesInterfaces);
             }
         }
 
         /// <summary>
-        ///     The return navigation.
+        /// The return navigation.
         /// </summary>
         /// <returns>
-        ///     The <see cref="IHierarchy" />.
+        /// The <see cref="Hierarchy"/>.
         /// </returns>
         public override Hierarchy ReturnNavigation()
         {
-            return new Hierarchy
+            var parent = new Hierarchy { Id = new Guid("1BC1B0C4-1E41-9146-82CF-599181CE4420"), Name = "Application Service" };
+
+            if (this.ApplicationServiceData.Any())
             {
-                Id = new Guid("1BC1B0C4-1E41-9146-82CF-599181CE4420"),
-                Name = "Application Service"
-            };
+                foreach (var applicationService in this.ApplicationServiceData.Where(o => o != null))
+                {
+                    parent.Children.Add(
+                        new Hierarchy { ParentId = parent.Id, Id = applicationService.Id, Name = applicationService.ApplicationServiceName });
+                }
+            }
+
+            return parent;
         }
 
         /// <summary>
@@ -110,9 +129,35 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ApplicationServ
         /// </returns>
         public override bool Save(IDictionary<string, string> parameters)
         {
+            if (parameters == null) return false;
+
+            if (!parameters.ContainsKey("basePath"))
+            {
+                return false;
+            }
+
             var filePath = Path.Combine(parameters["basePath"], this.FileName);
             ObjectXMLSerializer<ApplicationServiceDataType>.Save(this, filePath);
             return true;
+        }
+
+        /// <summary>
+        /// The transform model name.
+        /// </summary>
+        /// <param name="name">
+        /// The name.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        public string TransformModelName(string name)
+        {
+            if (this.NamingConvention == null)
+            {
+                return name;
+            }
+
+            return this.NamingConvention.ApplyNamingConvention(name);
         }
 
         /// <summary>
@@ -124,6 +169,25 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ApplicationServ
         public override List<Validation> Validate()
         {
             this.ValidationResult = new List<Validation>();
+            this.MissingTables.Clear();
+
+            foreach (var applicationServiceData in this.ApplicationServiceData)
+            {
+                foreach (Table model in applicationServiceData.Models)
+                {
+                    if (!this.DomainDefinition.Tables.Exists(t => t.TableName == model.TableName))
+                    {
+                        this.ValidationResult.Add(new Validation(ValidationType.ApplicationServiceMissingModels, $"The {applicationServiceData.ApplicationServiceName} Application Service is missing {model.TableName} Model"));
+                        this.MissingTables.Add(new ApplicationServiceDataError { TableName = model.TableName, ApplicationServiceData = applicationServiceData });
+                    }
+                }
+
+                if (string.IsNullOrEmpty(applicationServiceData.ApplicationServiceName))
+                {
+                    this.ValidationResult.Add(new Validation(ValidationType.ApplicationServiceNameEmpty, $"Application Services must have a name"));
+                }
+
+            }
 
             if (this.LanguageOutputDetails.Count == 0)
             {
@@ -134,5 +198,6 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ApplicationServ
         }
 
         #endregion
+
     }
 }

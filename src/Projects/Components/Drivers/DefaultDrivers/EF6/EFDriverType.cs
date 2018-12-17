@@ -1,28 +1,25 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="EFDriverType.cs" company="DotnetScaffolder">
-//   MIT
-// </copyright>
-// --------------------------------------------------------------------------------------------------------------------
+﻿#region Usings
+
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.Composition;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Xml.Serialization;
+using DotNetScaffolder.Components.Common;
+using DotNetScaffolder.Components.Common.Contract;
+using DotNetScaffolder.Core.Common.Serializer;
+using DotNetScaffolder.Core.Common.Validation;
+using DotNetScaffolder.Core.Configuration;
+using DotNetScaffolder.Mapping.MetaData.Enum;
+using DotNetScaffolder.Mapping.MetaData.Model;
+
+#endregion
 
 namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6
 {
     #region Usings
-
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.Composition;
-    using System.IO;
-    using System.Linq;
-    using System.Text;
-    using System.Xml.Serialization;
-
-    using DotNetScaffolder.Components.Common;
-    using DotNetScaffolder.Components.Common.Contract;
-    using DotNetScaffolder.Components.Drivers.DefaultDrivers.EFCore;
-    using DotNetScaffolder.Core.Common.Serializer;
-    using DotNetScaffolder.Core.Common.Validation;
-    using DotNetScaffolder.Mapping.MetaData.Enum;
-    using DotNetScaffolder.Mapping.MetaData.Model;
 
     #endregion
 
@@ -44,18 +41,18 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6
         #region Constructors and Destructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="EFDriverType"/> class.
+        ///     Initializes a new instance of the <see cref="EFDriverType" /> class.
         /// </summary>
         /// <param name="fileName">
-        /// The file name.
+        ///     The file name.
         /// </param>
         public EFDriverType(string fileName)
         {
-            this.FileName = fileName;
+            FileName = fileName;
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="EFDriverType"/> class.
+        ///     Initializes a new instance of the <see cref="EFDriverType" /> class.
         /// </summary>
         public EFDriverType()
         {
@@ -65,10 +62,24 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6
 
         #region Public Properties
 
+        public Guid Cache { get; set; }
+
         /// <summary>
         ///     Gets or sets a value indicating whether create db.
         /// </summary>
         public bool CreateDb { get; set; }
+
+        [XmlIgnore]
+        public IIDriverTypeCache CurrentCache
+        {
+            get
+            {
+                return ScaffoldConfig.DriverTypeCache.FirstOrDefault(c =>
+                    c.Metadata["ValueMetaData"].ToString().ToLower() == Cache.ToString().ToLower())?.Value;
+            }
+        }
+
+        public bool EnableCache { get; set; }
 
         /// <summary>
         ///     The id.
@@ -103,12 +114,12 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6
         public bool UseAlias { get; set; } = true;
 
         /// <summary>
-        /// Gets or sets a value indicating whether use seperate config classes.
+        ///     Gets or sets a value indicating whether use seperate config classes.
         /// </summary>
         public bool UseSeperateConfigClasses { get; set; }
 
         /// <summary>
-        /// Gets or sets the validation result.
+        ///     Gets or sets the validation result.
         /// </summary>
         [XmlIgnore]
         public List<Validation> ValidationResult { get; set; }
@@ -118,24 +129,42 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6
         #region Public Methods And Operators
 
         /// <summary>
-        /// The transform index.
+        ///     The transform index.
         /// </summary>
         /// <param name="index">
-        /// The index.
+        ///     The index.
         /// </param>
         /// <returns>
-        /// The <see cref="string"/>.
+        ///     The <see cref="string" />.
         /// </returns>
         public static string TransformIndex(Index index, INamingConvention nc = null)
         {
-            return EFCoreDriverType.TransformIndex(index, nc);
+            var idxs = new StringBuilder(".HasColumnAnnotation(\"" + index.Name + "\", new IndexAnnotation(new [] { ");
+            bool isClustered = index.IndexType == IndexType.Clustered;
+
+            if (index.Columns != null && index.Columns.Any())
+            {
+                for (int i = 0; i < index.Columns.Count; i++)
+                {
+                    if (i > 0)
+                    {
+                        idxs.Append(", ");
+                    }
+
+                    idxs.Append(
+                        "new IndexAttribute(\"" + index.Name + "\"){ IsClustered = " + isClustered.ToString().ToLower()
+                        + ", IsUnique = " + index.IsUnique.ToString().ToLower() + ", Order = " + i + "}");
+                }
+            }
+
+            return idxs.Append("}))").ToString();
         }
 
         /// <summary>
-        /// The load config.
+        ///     The load config.
         /// </summary>
         /// <param name="parameters">
-        /// The parameters.
+        ///     The parameters.
         /// </param>
         /// <exception cref="NotImplementedException">
         /// </exception>
@@ -143,51 +172,53 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6
         {
             IDictionary<string, string> parameterList = parameters as IDictionary<string, string>;
 
-            var filePath = Path.Combine(parameterList["basePath"], this.FileName);
+            var filePath = Path.Combine(parameterList["basePath"], FileName);
 
             if (File.Exists(filePath))
             {
                 var loadedDriverType = ObjectXMLSerializer<EFDriverType>.Load(filePath);
                 if (loadedDriverType != null)
                 {
-                    this.CreateDb = loadedDriverType.CreateDb;
-                    this.IncludeColumnOrder = loadedDriverType.IncludeColumnOrder;
-                    this.LazyLoadingEnabled = loadedDriverType.LazyLoadingEnabled;
-                    this.LoggingEnabled = loadedDriverType.LoggingEnabled;
-                    this.ProxyCreationEnabled = loadedDriverType.ProxyCreationEnabled;
-                    this.UseSeperateConfigClasses = loadedDriverType.UseSeperateConfigClasses;
-                    this.UseAlias = loadedDriverType.UseAlias;
+                    CreateDb = loadedDriverType.CreateDb;
+                    IncludeColumnOrder = loadedDriverType.IncludeColumnOrder;
+                    LazyLoadingEnabled = loadedDriverType.LazyLoadingEnabled;
+                    LoggingEnabled = loadedDriverType.LoggingEnabled;
+                    ProxyCreationEnabled = loadedDriverType.ProxyCreationEnabled;
+                    UseSeperateConfigClasses = loadedDriverType.UseSeperateConfigClasses;
+                    UseAlias = loadedDriverType.UseAlias;
+                    Cache = loadedDriverType.Cache;
+                    EnableCache = loadedDriverType.EnableCache;
                 }
             }
         }
 
         /// <summary>
-        /// The save config.
+        ///     The save config.
         /// </summary>
         /// <param name="parameters">
-        /// The parameters.
+        ///     The parameters.
         /// </param>
         /// <exception cref="NotImplementedException">
         /// </exception>
         /// <returns>
-        /// The <see cref="bool"/>.
+        ///     The <see cref="bool" />.
         /// </returns>
         public bool SaveConfig(object parameters)
         {
             IDictionary<string, string> parameterList = parameters as IDictionary<string, string>;
-            var filePath = Path.Combine(parameterList["basePath"], this.FileName);
+            var filePath = Path.Combine(parameterList["basePath"], FileName);
             ObjectXMLSerializer<EFDriverType>.Save(this, filePath);
             return true;
         }
 
         /// <summary>
-        /// The transform column precision.
+        ///     The transform column precision.
         /// </summary>
         /// <param name="col">
-        /// The col.
+        ///     The col.
         /// </param>
         /// <returns>
-        /// The <see cref="string"/>.
+        ///     The <see cref="string" />.
         /// </returns>
         public string TransformColumnPrecision(Column col, IDriver driver = null)
         {
@@ -207,13 +238,13 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6
         }
 
         /// <summary>
-        /// The transform db generated key.
+        ///     The transform db generated key.
         /// </summary>
         /// <param name="table">
-        /// The table.
+        ///     The table.
         /// </param>
         /// <returns>
-        /// The <see cref="string"/>.
+        ///     The <see cref="string" />.
         /// </returns>
         public string TransformDbGeneratedKey(Table table)
         {
@@ -221,16 +252,16 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6
         }
 
         /// <summary>
-        /// The transform model name.
+        ///     The transform model name.
         /// </summary>
         /// <param name="name">
-        /// The name.
+        ///     The name.
         /// </param>
         /// <param name="nc">
-        /// The nc.
+        ///     The nc.
         /// </param>
         /// <returns>
-        /// The <see cref="string"/>.
+        ///     The <see cref="string" />.
         /// </returns>
         public string TransformModelName(string name, INamingConvention nc = null)
         {
@@ -243,25 +274,25 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6
         }
 
         /// <summary>
-        /// The transform relationship.
+        ///     The transform relationship.
         /// </summary>
         /// <param name="table">
-        /// The table.
+        ///     The table.
         /// </param>
         /// <param name="rel">
-        /// The rel.
+        ///     The rel.
         /// </param>
         /// <param name="models">
-        /// The models.
+        ///     The models.
         /// </param>
         /// <param name="relationships">
-        /// The relationships.
+        ///     The relationships.
         /// </param>
         /// <param name="nc">
-        /// The nc.
+        ///     The nc.
         /// </param>
         /// <returns>
-        /// The <see cref="string"/>.
+        ///     The <see cref="string" />.
         /// </returns>
         public string TransformRelationship(
             string table,
@@ -279,17 +310,17 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6
 
             if (rel.ReferencedMultiplicity == RelationshipMultiplicity.Many)
             {
-                sb.Append($"HasMany<{this.TransformModelName(rel.ReferencedTableName, nc)}>(s => s.{refTableName})");
+                sb.Append($"HasMany<{TransformModelName(rel.ReferencedTableName, nc)}>(s => s.{refTableName})");
             }
             else if (rel.ReferencedMultiplicity == RelationshipMultiplicity.One)
             {
                 sb.Append(
-                    $"HasRequired<{this.TransformModelName(rel.ReferencedTableName, nc)}>(s => s.{refTableName})");
+                    $"HasRequired<{TransformModelName(rel.ReferencedTableName, nc)}>(s => s.{refTableName})");
             }
             else
             {
                 sb.Append(
-                    $"HasOptional<{this.TransformModelName(rel.ReferencedTableName, nc)}>(s => s.{refTableName})");
+                    $"HasOptional<{TransformModelName(rel.ReferencedTableName, nc)}>(s => s.{refTableName})");
             }
 
             bool referencedRelExists = true;
@@ -299,9 +330,10 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6
             if (relationships != null && relationships.Any())
             {
                 var parentRels = (from tbl in models
-                                  select tbl.Relationships.FirstOrDefault(
-                                      o => o.ReferencedTableName == table && o.Table.TableName == rel.ReferencedTableName && o.SchemaName == rel.SchemaName && o.ColumnName == rel.ReferencedColumnName
-                                           && o.ReferencedColumnName == rel.ColumnName)).Where(x => x != null);
+                    select tbl.Relationships.FirstOrDefault(
+                        o => o.ReferencedTableName == table && o.Table.TableName == rel.ReferencedTableName &&
+                             o.SchemaName == rel.SchemaName && o.ColumnName == rel.ReferencedColumnName
+                             && o.ReferencedColumnName == rel.ColumnName)).Where(x => x != null);
 
                 var parentRel = parentRels.FirstOrDefault();
                 referencedRelExists = parentRel != null;
@@ -319,7 +351,8 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6
             {
                 if (referencedRelExists)
                 {
-                    sb.Append($".WithMany(s => s.{parentTableName}).HasForeignKey(s => s.{this.ApplyNamingConvention(nc, rel.ColumnName)}).WillCascadeOnDelete(false);");
+                    sb.Append(
+                        $".WithMany(s => s.{parentTableName}).HasForeignKey(s => s.{ApplyNamingConvention(nc, rel.ColumnName)}).WillCascadeOnDelete(false);");
                 }
                 else
                 {
@@ -344,34 +377,59 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6
             {
                 sb.Append(
                     rel.ReferencedMultiplicity == RelationshipMultiplicity.Many
-                        ? $".WithRequired(s => s.{parentTableName}).HasForeignKey(s => s.{this.ApplyNamingConvention(nc, rel.ReferencedColumnName)}).WillCascadeOnDelete(false);"
+                        ? $".WithRequired(s => s.{parentTableName}).HasForeignKey(s => s.{ApplyNamingConvention(nc, rel.ReferencedColumnName)}).WillCascadeOnDelete(false);"
                         : $".WithRequired(s => s.{parentTableName}).WillCascadeOnDelete(false);");
             }
             else
             {
                 sb.Append(
                     rel.ReferencedMultiplicity == RelationshipMultiplicity.Many
-                        ? $".WithOptional(s => s.{parentTableName}).HasForeignKey(s => s.{this.ApplyNamingConvention(nc, rel.ReferencedColumnName)}).WillCascadeOnDelete(false);"
+                        ? $".WithOptional(s => s.{parentTableName}).HasForeignKey(s => s.{ApplyNamingConvention(nc, rel.ReferencedColumnName)}).WillCascadeOnDelete(false);"
                         : $".WithOptional(s => s.{parentTableName}).WillCascadeOnDelete(false);");
             }
 
             return sb.ToString();
         }
 
-        private string ApplyNamingConvention(INamingConvention nc, string name)
+        public string GenerateBeginUnitOfWork(CacheParameters parameter)
         {
-            return nc != null ? nc.ApplyNamingConvention(name) : name;
+            if (this.EnableCache && this.CurrentCache != null)
+            {
+                return this.CurrentCache.GenerateBeginUnitOfWork(parameter);
+            }
+            else
+            {
+                StringBuilder sb = new StringBuilder();
+
+                sb.AppendLine("container.Configure(");
+                sb.AppendLine("                 config =>");
+                sb.AppendLine("                 {");
+                sb.AppendLine($"                    config.For<IUnitOfWork>().LifecycleIs(Lifecycles.Transient).Use<{parameter.Driver.Prefix}{parameter.ContextName}>()");
+                sb.AppendLine($"                         .Ctor<string>(\"connectionString\").Is(configuration.ConnectionStrings[\"{parameter.ConnectionName}\"]);");
+                sb.AppendLine("                 });");
+
+                return sb.ToString();
+            }
         }
 
         /// <summary>
-        /// The validate.
+        ///     The validate.
         /// </summary>
         /// <returns>
-        /// The <see cref="List"/>.
+        ///     The <see cref="List" />.
         /// </returns>
         public List<Validation> Validate()
         {
-            return this.ValidationResult;
+            return ValidationResult;
+        }
+
+        #endregion
+
+        #region Other Methods
+
+        private string ApplyNamingConvention(INamingConvention nc, string name)
+        {
+            return nc != null ? nc.ApplyNamingConvention(name) : name;
         }
 
         #endregion
