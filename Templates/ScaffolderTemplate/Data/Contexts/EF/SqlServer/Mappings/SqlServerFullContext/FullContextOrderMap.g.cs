@@ -41,7 +41,7 @@ namespace RepositoryEFDotnet.Data.Context.Mappings.EF.SqlServer
 			#region Primary Keys
 			
 			HasKey(t => t.OrderId);
-			Property(t => t.OrderId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+			Property(t => t.OrderId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
 
 			#endregion
 
@@ -63,6 +63,7 @@ namespace RepositoryEFDotnet.Data.Context.Mappings.EF.SqlServer
 			#endregion
 			
 			#region Indexes
+			Property(t => t.OrderId).HasColumnAnnotation("UQ__Order__C3905BCE3C614174", new IndexAnnotation(new [] { new IndexAttribute("UQ__Order__C3905BCE3C614174"){ IsClustered = false, IsUnique = true, Order = 0}}));
 			Property(t => t.CustomerId).HasColumnAnnotation("IX_CustomerId", new IndexAnnotation(new [] { new IndexAttribute("IX_CustomerId"){ IsClustered = false, IsUnique = false, Order = 0}}));
 			#endregion
 

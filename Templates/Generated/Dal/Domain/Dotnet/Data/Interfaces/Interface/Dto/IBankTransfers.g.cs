@@ -32,6 +32,7 @@ namespace RepositoryEFDotnet.Data.Interfaces
 		int ToBankAccountId { get; set; }
 		decimal Amount { get; set; }
 		DateTime TransferDate { get; set; }
+		Nullable<int> BankAccountId { get; set; }
 
 		#endregion
 		
@@ -42,8 +43,8 @@ namespace RepositoryEFDotnet.Data.Interfaces
 		
 		#region Parent Relationships
 		
-		IBankAccount BankAccount1 { get; set; }
 		IBankAccount BankAccount { get; set; }
+		IBankAccount BankAccount1 { get; set; }
 		
 		#endregion
 	}

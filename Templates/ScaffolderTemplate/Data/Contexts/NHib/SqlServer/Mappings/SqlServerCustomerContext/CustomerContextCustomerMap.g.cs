@@ -41,9 +41,9 @@ namespace RepositoryEFDotnet.Data.Customers.Mappings.NHib.SqlServer
 			
 			#region Primary Keys
 			
-			Id(t => t.CustomerId).GeneratedBy.Increment().Unique()
+			Id(t => t.CustomerId).GeneratedBy.Assigned()
+			.UniqueKey("UQ__Customer__A4AE64D98B60CE6B")
 			.Not.Nullable();
-			Map(t => t.CustomerId).Column("CustomerId").ReadOnly().Generated.Insert();
 
 			#endregion
 
@@ -80,6 +80,7 @@ namespace RepositoryEFDotnet.Data.Customers.Mappings.NHib.SqlServer
 			.Index("IX_CountryId")
 			.Nullable();
 			Map(t => t.Photo).Column("Photo")
+			.Length(255)
 			.Nullable();
 			Map(t => t.IsEnabled).Column("IsEnabled")
 			.Not.Nullable();

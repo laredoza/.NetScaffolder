@@ -40,9 +40,9 @@ namespace RepositoryEFDotnet.Data.Accounts.Mappings.NHib.MySql
 			
 			#region Primary Keys
 			
-			Id(t => t.BankAccountId).GeneratedBy.Increment().Unique()
+			Id(t => t.BankAccountId).GeneratedBy.Assigned()
+			.UniqueKey("UQ__BankAcco__4FC8E4A0C45281C8")
 			.Not.Nullable();
-			Map(t => t.BankAccountId).Column("BankAccountId").ReadOnly().Generated.Insert();
 
 			#endregion
 
@@ -52,22 +52,20 @@ namespace RepositoryEFDotnet.Data.Accounts.Mappings.NHib.MySql
 			.Length(10)
 			.Not.Nullable();
 			Map(t => t.Balance).Column("Balance")
-			.Index("NonClusteredIndex-20180611-172244")
 			.Precision(19).Scale(4)
 			.Not.Nullable();
 			Map(t => t.CustomerId).Column("CustomerId")
 			.Index("IX_CustomerId")
 			.Nullable();
 			Map(t => t.Locked).Column("Locked")
-			.Index("NonClusteredIndex-20180611-172244")
 			.Not.Nullable();
 			
 			#endregion
 			
 			#region Relationships
 			
-			HasMany(s => s.BankTransfers1).KeyColumn("FromBankAccountId");
 			HasMany(s => s.BankTransfers).KeyColumn("ToBankAccountId");
+			HasMany(s => s.BankTransfers1).KeyColumn("BankAccountId");
 			
 			#endregion			
 

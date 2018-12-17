@@ -42,7 +42,7 @@ namespace RepositoryEFDotnet.Data.Context.Mappings.EF.Postgres
 			#region Primary Keys
 			
 			HasKey(t => t.CustomerId);
-			Property(t => t.CustomerId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+			Property(t => t.CustomerId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
 
 			#endregion
 
@@ -68,12 +68,14 @@ namespace RepositoryEFDotnet.Data.Context.Mappings.EF.Postgres
 			Property(t => t.Fax).HasMaxLength(50);
 			Property(t => t.Fax).IsOptional();
 			Property(t => t.CountryId).IsOptional();
+			Property(t => t.Photo).HasMaxLength(255);
 			Property(t => t.Photo).IsOptional();
 			Property(t => t.IsEnabled).IsRequired();
 			
 			#endregion
 			
 			#region Indexes
+			Property(t => t.CustomerId).HasColumnAnnotation("UQ__Customer__A4AE64D98B60CE6B", new IndexAnnotation(new [] { new IndexAttribute("UQ__Customer__A4AE64D98B60CE6B"){ IsClustered = false, IsUnique = true, Order = 0}}));
 			Property(t => t.CountryId).HasColumnAnnotation("IX_CountryId", new IndexAnnotation(new [] { new IndexAttribute("IX_CountryId"){ IsClustered = false, IsUnique = false, Order = 0}}));
 			#endregion
 

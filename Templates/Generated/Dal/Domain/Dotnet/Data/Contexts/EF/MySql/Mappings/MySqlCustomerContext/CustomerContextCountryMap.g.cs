@@ -42,7 +42,7 @@ namespace RepositoryEFDotnet.Data.Customers.Mappings.EF.MySql
 			#region Primary Keys
 			
 			HasKey(t => t.CountryId);
-			Property(t => t.CountryId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+			Property(t => t.CountryId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
 
 			#endregion
 
@@ -55,6 +55,7 @@ namespace RepositoryEFDotnet.Data.Customers.Mappings.EF.MySql
 			#endregion
 			
 			#region Indexes
+			Property(t => t.CountryId).HasColumnAnnotation("UQ__Country__10D1609E8CC26505", new IndexAnnotation(new [] { new IndexAttribute("UQ__Country__10D1609E8CC26505"){ IsClustered = false, IsUnique = true, Order = 0}}));
 			#endregion
 
 			#region Relationships

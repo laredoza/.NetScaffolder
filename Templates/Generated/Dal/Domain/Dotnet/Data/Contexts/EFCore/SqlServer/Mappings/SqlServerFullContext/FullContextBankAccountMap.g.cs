@@ -37,7 +37,7 @@ namespace RepositoryEFDotnet.Data.Context.Mappings.EFCore.SqlServer
 			#region Primary keys
 			
 			builder.HasKey(t => t.BankAccountId);
-			builder.Property(t => t.BankAccountId).HasColumnName("BankAccountId").ValueGeneratedOnAdd();
+			builder.Property(t => t.BankAccountId).HasColumnName("BankAccountId").ValueGeneratedNever();
 
 			#endregion
 
@@ -54,16 +54,15 @@ namespace RepositoryEFDotnet.Data.Context.Mappings.EFCore.SqlServer
 			#endregion
 
 			#region Indexes
-			builder.HasIndex(i => new {i.Balance, i.Locked}).HasName("NonClusteredIndex-20180611-172244").IsUnique(false);
+			builder.HasIndex(i => new {i.BankAccountId}).HasName("UQ__BankAcco__4FC8E4A0C45281C8").IsUnique(true);
 			builder.HasIndex(i => new {i.CustomerId}).HasName("IX_CustomerId").IsUnique(false);
-			builder.HasIndex(i => new {i.Balance, i.Locked}).HasName("NonClusteredIndex-20180611-172244").IsUnique(false);
 			#endregion
 			
 			#region Relationships
 			
 			builder.HasOne<Customer>(s => s.Customer).WithMany(s => s.BankAccount).HasForeignKey(s => s.CustomerId).OnDelete(DeleteBehavior.Restrict);
-			builder.HasMany<BankTransfers>(s => s.BankTransfers1).WithOne(s => s.BankAccount1).HasForeignKey(s => s.FromBankAccountId).OnDelete(DeleteBehavior.Restrict);
 			builder.HasMany<BankTransfers>(s => s.BankTransfers).WithOne(s => s.BankAccount).HasForeignKey(s => s.ToBankAccountId).OnDelete(DeleteBehavior.Restrict);
+			builder.HasMany<BankTransfers>(s => s.BankTransfers1).WithOne(s => s.BankAccount1).HasForeignKey(s => s.BankAccountId).OnDelete(DeleteBehavior.Restrict);
 			
 			#endregion	
 

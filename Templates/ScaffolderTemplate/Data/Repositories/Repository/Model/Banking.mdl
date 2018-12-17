@@ -184,7 +184,7 @@
       <Tables>
         <Table Description="" SchemaName="dbo" TableName="BankAccount" EnabledForCodeGeneration="true">
           <Columns>
-            <Column ColumnName="BankAccountId" ColumnOrder="1" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="true" IdentitySeed="1" IdentityIncrement="1">
+            <Column ColumnName="BankAccountId" ColumnOrder="1" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
               <RemapDataType xsi:nil="true" />
             </Column>
             <Column ColumnName="BankAccountNumber" ColumnOrder="2" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="10" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
@@ -200,16 +200,16 @@
               <RemapDataType xsi:nil="true" />
             </Column>
           </Columns>
-          <DatabaseGeneratedKeyType>Identity</DatabaseGeneratedKeyType>
+          <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
           <RelationShips>
             <RelationShip ColumnName="CustomerId" RelationShip="ForeignKey" ReferencedColumnName="CustomerId" Render="true" SchemaName="dbo" ReferencedTableName="Customer" Multiplicity="Many" ReferencedMultiplicity="ZeroToOne" UserRelationship="false">
-              <RelationshipName>FK_dbo.BankAccount_dbo.Customer_CustomerId</RelationshipName>
-            </RelationShip>
-            <RelationShip ColumnName="BankAccountId" RelationShip="ForeignKeyChild" ReferencedColumnName="FromBankAccountId" RelationshipAlias="BankTransfers1" Render="true" SchemaName="dbo" ReferencedTableName="BankTransfers" Multiplicity="One" ReferencedMultiplicity="Many" UserRelationship="false">
-              <RelationshipName>FK_dbo.BankTransfers_dbo.BankAccount_FromBankAccountId</RelationshipName>
+              <RelationshipName>FK2D9B8F03BA724162</RelationshipName>
             </RelationShip>
             <RelationShip ColumnName="BankAccountId" RelationShip="ForeignKeyChild" ReferencedColumnName="ToBankAccountId" Render="true" SchemaName="dbo" ReferencedTableName="BankTransfers" Multiplicity="One" ReferencedMultiplicity="Many" UserRelationship="false">
-              <RelationshipName>FK_dbo.BankTransfers_dbo.BankAccount_ToBankAccountId</RelationshipName>
+              <RelationshipName>FKE4EEFC1145FD5999</RelationshipName>
+            </RelationShip>
+            <RelationShip ColumnName="BankAccountId" RelationShip="ForeignKeyChild" ReferencedColumnName="BankAccountId" RelationshipAlias="BankTransfers1" Render="true" SchemaName="dbo" ReferencedTableName="BankTransfers" Multiplicity="ZeroToOne" ReferencedMultiplicity="Many" UserRelationship="false">
+              <RelationshipName>FKE4EEFC1182F6322F</RelationshipName>
             </RelationShip>
           </RelationShips>
           <Indexes>
@@ -222,18 +222,17 @@
               </Columns>
             </Index>
             <Index>
-              <IndexType>NonClustered</IndexType>
-              <IsUnique>false</IsUnique>
-              <Name>NonClusteredIndex-20180611-172244</Name>
+              <IndexType>PrimaryKey</IndexType>
+              <IsUnique>true</IsUnique>
+              <Name>PK__BankAcco__4FC8E4A1393E67B4</Name>
               <Columns>
-                <string>Balance</string>
-                <string>Locked</string>
+                <string>BankAccountId</string>
               </Columns>
             </Index>
             <Index>
-              <IndexType>PrimaryKey</IndexType>
+              <IndexType>NonClustered</IndexType>
               <IsUnique>true</IsUnique>
-              <Name>PK_dbo.BankAccount</Name>
+              <Name>UQ__BankAcco__4FC8E4A0C45281C8</Name>
               <Columns>
                 <string>BankAccountId</string>
               </Columns>
@@ -242,7 +241,7 @@
         </Table>
         <Table Description="" SchemaName="dbo" TableName="BankTransfers" EnabledForCodeGeneration="true">
           <Columns>
-            <Column ColumnName="BankTransferId" ColumnOrder="1" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="true" IdentitySeed="1" IdentityIncrement="1">
+            <Column ColumnName="BankTransferId" ColumnOrder="1" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
               <RemapDataType xsi:nil="true" />
             </Column>
             <Column ColumnName="FromBankAccountId" ColumnOrder="2" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
@@ -257,25 +256,20 @@
             <Column ColumnName="TransferDate" ColumnOrder="5" DataType="DateTime" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="0" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
               <RemapDataType xsi:nil="true" />
             </Column>
+            <Column ColumnName="BankAccountId" ColumnOrder="6" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
           </Columns>
-          <DatabaseGeneratedKeyType>Identity</DatabaseGeneratedKeyType>
+          <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
           <RelationShips>
-            <RelationShip ColumnName="FromBankAccountId" RelationShip="ForeignKey" ReferencedColumnName="BankAccountId" RelationshipAlias="BankAccount1" Render="true" SchemaName="dbo" ReferencedTableName="BankAccount" Multiplicity="Many" ReferencedMultiplicity="One" UserRelationship="false">
-              <RelationshipName>FK_dbo.BankTransfers_dbo.BankAccount_FromBankAccountId</RelationshipName>
-            </RelationShip>
             <RelationShip ColumnName="ToBankAccountId" RelationShip="ForeignKey" ReferencedColumnName="BankAccountId" Render="true" SchemaName="dbo" ReferencedTableName="BankAccount" Multiplicity="Many" ReferencedMultiplicity="One" UserRelationship="false">
-              <RelationshipName>FK_dbo.BankTransfers_dbo.BankAccount_ToBankAccountId</RelationshipName>
+              <RelationshipName>FKE4EEFC1145FD5999</RelationshipName>
+            </RelationShip>
+            <RelationShip ColumnName="BankAccountId" RelationShip="ForeignKey" ReferencedColumnName="BankAccountId" RelationshipAlias="BankAccount1" Render="true" SchemaName="dbo" ReferencedTableName="BankAccount" Multiplicity="Many" ReferencedMultiplicity="ZeroToOne" UserRelationship="false">
+              <RelationshipName>FKE4EEFC1182F6322F</RelationshipName>
             </RelationShip>
           </RelationShips>
           <Indexes>
-            <Index>
-              <IndexType>NonClustered</IndexType>
-              <IsUnique>false</IsUnique>
-              <Name>IX_FromBankAccountId</Name>
-              <Columns>
-                <string>FromBankAccountId</string>
-              </Columns>
-            </Index>
             <Index>
               <IndexType>NonClustered</IndexType>
               <IsUnique>false</IsUnique>
@@ -287,9 +281,25 @@
             <Index>
               <IndexType>PrimaryKey</IndexType>
               <IsUnique>true</IsUnique>
-              <Name>PK_dbo.BankTransfers</Name>
+              <Name>PK__BankTran__2E82727BCEA96D52</Name>
               <Columns>
                 <string>BankTransferId</string>
+              </Columns>
+            </Index>
+            <Index>
+              <IndexType>NonClustered</IndexType>
+              <IsUnique>true</IsUnique>
+              <Name>UQ__BankTran__2E82727AB11DB584</Name>
+              <Columns>
+                <string>BankTransferId</string>
+              </Columns>
+            </Index>
+            <Index>
+              <IndexType>NonClustered</IndexType>
+              <IsUnique>true</IsUnique>
+              <Name>UQ__BankTran__4FC8E4A0CE69E10D</Name>
+              <Columns>
+                <string>BankAccountId</string>
               </Columns>
             </Index>
           </Indexes>
@@ -304,11 +314,7 @@
             </Column>
           </Columns>
           <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
-          <RelationShips>
-            <RelationShip ColumnName="ProductId" RelationShip="ForeignKey" ReferencedColumnName="ProductId" Render="true" SchemaName="dbo" ReferencedTableName="Product" Multiplicity="ZeroToOne" ReferencedMultiplicity="One" UserRelationship="false">
-              <RelationshipName>FK_dbo.Book_dbo.Product_ProductId</RelationshipName>
-            </RelationShip>
-          </RelationShips>
+          <RelationShips />
           <Indexes>
             <Index>
               <IndexType>NonClustered</IndexType>
@@ -321,7 +327,7 @@
             <Index>
               <IndexType>PrimaryKey</IndexType>
               <IsUnique>true</IsUnique>
-              <Name>PK_dbo.Book</Name>
+              <Name>PK__Book__B40CC6CD94AA1652</Name>
               <Columns>
                 <string>ProductId</string>
               </Columns>
@@ -330,24 +336,32 @@
         </Table>
         <Table Description="" SchemaName="dbo" TableName="Country" EnabledForCodeGeneration="true">
           <Columns>
-            <Column ColumnName="CountryId" ColumnOrder="1" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="true" IdentitySeed="1" IdentityIncrement="1">
+            <Column ColumnName="CountryId" ColumnOrder="1" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
               <RemapDataType xsi:nil="true" />
             </Column>
             <Column ColumnName="CountryName" ColumnOrder="2" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="100" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
               <RemapDataType xsi:nil="true" />
             </Column>
           </Columns>
-          <DatabaseGeneratedKeyType>Identity</DatabaseGeneratedKeyType>
+          <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
           <RelationShips>
             <RelationShip ColumnName="CountryId" RelationShip="ForeignKeyChild" ReferencedColumnName="CountryId" Render="true" SchemaName="dbo" ReferencedTableName="Customer" Multiplicity="ZeroToOne" ReferencedMultiplicity="Many" UserRelationship="false">
-              <RelationshipName>FK_dbo.Customer_dbo.Country_CountryId</RelationshipName>
+              <RelationshipName>FKFE9A39C0B3D9410C</RelationshipName>
             </RelationShip>
           </RelationShips>
           <Indexes>
             <Index>
               <IndexType>PrimaryKey</IndexType>
               <IsUnique>true</IsUnique>
-              <Name>PK_dbo.Country</Name>
+              <Name>PK__Country__10D1609FB3585177</Name>
+              <Columns>
+                <string>CountryId</string>
+              </Columns>
+            </Index>
+            <Index>
+              <IndexType>NonClustered</IndexType>
+              <IsUnique>true</IsUnique>
+              <Name>UQ__Country__10D1609E8CC26505</Name>
               <Columns>
                 <string>CountryId</string>
               </Columns>
@@ -356,7 +370,7 @@
         </Table>
         <Table Description="" SchemaName="dbo" TableName="Customer" EnabledForCodeGeneration="true">
           <Columns>
-            <Column ColumnName="CustomerId" ColumnOrder="1" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="true" IdentitySeed="1" IdentityIncrement="1">
+            <Column ColumnName="CustomerId" ColumnOrder="1" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
               <RemapDataType xsi:nil="true" />
             </Column>
             <Column ColumnName="CustomerCode" ColumnOrder="2" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="5" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
@@ -389,23 +403,23 @@
             <Column ColumnName="CountryId" ColumnOrder="11" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
               <RemapDataType xsi:nil="true" />
             </Column>
-            <Column ColumnName="Photo" ColumnOrder="12" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="-1" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+            <Column ColumnName="Photo" ColumnOrder="12" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="255" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
               <RemapDataType xsi:nil="true" />
             </Column>
             <Column ColumnName="IsEnabled" ColumnOrder="13" DataType="Boolean" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="0" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
               <RemapDataType xsi:nil="true" />
             </Column>
           </Columns>
-          <DatabaseGeneratedKeyType>Identity</DatabaseGeneratedKeyType>
+          <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
           <RelationShips>
             <RelationShip ColumnName="CountryId" RelationShip="ForeignKey" ReferencedColumnName="CountryId" Render="true" SchemaName="dbo" ReferencedTableName="Country" Multiplicity="Many" ReferencedMultiplicity="ZeroToOne" UserRelationship="false">
-              <RelationshipName>FK_dbo.Customer_dbo.Country_CountryId</RelationshipName>
+              <RelationshipName>FKFE9A39C0B3D9410C</RelationshipName>
             </RelationShip>
             <RelationShip ColumnName="CustomerId" RelationShip="ForeignKeyChild" ReferencedColumnName="CustomerId" Render="true" SchemaName="dbo" ReferencedTableName="BankAccount" Multiplicity="ZeroToOne" ReferencedMultiplicity="Many" UserRelationship="false">
-              <RelationshipName>FK_dbo.BankAccount_dbo.Customer_CustomerId</RelationshipName>
+              <RelationshipName>FK2D9B8F03BA724162</RelationshipName>
             </RelationShip>
             <RelationShip ColumnName="CustomerId" RelationShip="ForeignKeyChild" ReferencedColumnName="CustomerId" Render="true" SchemaName="dbo" ReferencedTableName="Order" Multiplicity="ZeroToOne" ReferencedMultiplicity="Many" UserRelationship="false">
-              <RelationshipName>FK_dbo.Order_dbo.Customer_CustomerId</RelationshipName>
+              <RelationshipName>FK3117099BBA724162</RelationshipName>
             </RelationShip>
           </RelationShips>
           <Indexes>
@@ -420,7 +434,15 @@
             <Index>
               <IndexType>PrimaryKey</IndexType>
               <IsUnique>true</IsUnique>
-              <Name>PK_dbo.Customer</Name>
+              <Name>PK__Customer__A4AE64D85F0A74E2</Name>
+              <Columns>
+                <string>CustomerId</string>
+              </Columns>
+            </Index>
+            <Index>
+              <IndexType>NonClustered</IndexType>
+              <IsUnique>true</IsUnique>
+              <Name>UQ__Customer__A4AE64D98B60CE6B</Name>
               <Columns>
                 <string>CustomerId</string>
               </Columns>
@@ -429,7 +451,7 @@
         </Table>
         <Table Description="" SchemaName="dbo" TableName="Order" EnabledForCodeGeneration="true">
           <Columns>
-            <Column ColumnName="OrderId" ColumnOrder="1" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="true" IdentitySeed="1" IdentityIncrement="1">
+            <Column ColumnName="OrderId" ColumnOrder="1" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
               <RemapDataType xsi:nil="true" />
             </Column>
             <Column ColumnName="CustomerId" ColumnOrder="2" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
@@ -454,13 +476,13 @@
               <RemapDataType xsi:nil="true" />
             </Column>
           </Columns>
-          <DatabaseGeneratedKeyType>Identity</DatabaseGeneratedKeyType>
+          <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
           <RelationShips>
             <RelationShip ColumnName="CustomerId" RelationShip="ForeignKey" ReferencedColumnName="CustomerId" Render="true" SchemaName="dbo" ReferencedTableName="Customer" Multiplicity="Many" ReferencedMultiplicity="ZeroToOne" UserRelationship="false">
-              <RelationshipName>FK_dbo.Order_dbo.Customer_CustomerId</RelationshipName>
+              <RelationshipName>FK3117099BBA724162</RelationshipName>
             </RelationShip>
             <RelationShip ColumnName="OrderId" RelationShip="ForeignKeyChild" ReferencedColumnName="OrderId" Render="true" SchemaName="dbo" ReferencedTableName="OrderDetails" Multiplicity="One" ReferencedMultiplicity="Many" UserRelationship="false">
-              <RelationshipName>FK_dbo.OrderDetails_dbo.Order_OrderId</RelationshipName>
+              <RelationshipName>FK1C793D347C34AE1</RelationshipName>
             </RelationShip>
           </RelationShips>
           <Indexes>
@@ -475,7 +497,15 @@
             <Index>
               <IndexType>PrimaryKey</IndexType>
               <IsUnique>true</IsUnique>
-              <Name>PK_dbo.Order</Name>
+              <Name>PK__Order__C3905BCFD19CCCF5</Name>
+              <Columns>
+                <string>OrderId</string>
+              </Columns>
+            </Index>
+            <Index>
+              <IndexType>NonClustered</IndexType>
+              <IsUnique>true</IsUnique>
+              <Name>UQ__Order__C3905BCE3C614174</Name>
               <Columns>
                 <string>OrderId</string>
               </Columns>
@@ -484,7 +514,7 @@
         </Table>
         <Table Description="" SchemaName="dbo" TableName="OrderDetails" EnabledForCodeGeneration="true">
           <Columns>
-            <Column ColumnName="OrderDetailsId" ColumnOrder="1" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="true" IdentitySeed="1" IdentityIncrement="1">
+            <Column ColumnName="OrderDetailsId" ColumnOrder="1" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
               <RemapDataType xsi:nil="true" />
             </Column>
             <Column ColumnName="OrderId" ColumnOrder="2" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
@@ -503,13 +533,13 @@
               <RemapDataType xsi:nil="true" />
             </Column>
           </Columns>
-          <DatabaseGeneratedKeyType>Identity</DatabaseGeneratedKeyType>
+          <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
           <RelationShips>
             <RelationShip ColumnName="OrderId" RelationShip="ForeignKey" ReferencedColumnName="OrderId" Render="true" SchemaName="dbo" ReferencedTableName="Order" Multiplicity="Many" ReferencedMultiplicity="One" UserRelationship="false">
-              <RelationshipName>FK_dbo.OrderDetails_dbo.Order_OrderId</RelationshipName>
+              <RelationshipName>FK1C793D347C34AE1</RelationshipName>
             </RelationShip>
             <RelationShip ColumnName="ProductId" RelationShip="ForeignKey" ReferencedColumnName="ProductId" Render="true" SchemaName="dbo" ReferencedTableName="Product" Multiplicity="Many" ReferencedMultiplicity="One" UserRelationship="false">
-              <RelationshipName>FK_dbo.OrderDetails_dbo.Product_ProductId</RelationshipName>
+              <RelationshipName>FK1C793D34F72CF47B</RelationshipName>
             </RelationShip>
           </RelationShips>
           <Indexes>
@@ -532,7 +562,15 @@
             <Index>
               <IndexType>PrimaryKey</IndexType>
               <IsUnique>true</IsUnique>
-              <Name>PK_dbo.OrderDetails</Name>
+              <Name>PK__OrderDet__9DD74DBD12185384</Name>
+              <Columns>
+                <string>OrderDetailsId</string>
+              </Columns>
+            </Index>
+            <Index>
+              <IndexType>NonClustered</IndexType>
+              <IsUnique>true</IsUnique>
+              <Name>UQ__OrderDet__9DD74DBC8AA17DA0</Name>
               <Columns>
                 <string>OrderDetailsId</string>
               </Columns>
@@ -541,7 +579,7 @@
         </Table>
         <Table Description="" SchemaName="dbo" TableName="Product" EnabledForCodeGeneration="true">
           <Columns>
-            <Column ColumnName="ProductId" ColumnOrder="1" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="true" IdentitySeed="1" IdentityIncrement="1">
+            <Column ColumnName="ProductId" ColumnOrder="1" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
               <RemapDataType xsi:nil="true" />
             </Column>
             <Column ColumnName="ProductDescription" ColumnOrder="2" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="100" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
@@ -560,23 +598,25 @@
               <RemapDataType xsi:nil="true" />
             </Column>
           </Columns>
-          <DatabaseGeneratedKeyType>Identity</DatabaseGeneratedKeyType>
+          <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
           <RelationShips>
-            <RelationShip ColumnName="ProductId" RelationShip="ForeignKeyChild" ReferencedColumnName="ProductId" Render="true" SchemaName="dbo" ReferencedTableName="Book" Multiplicity="One" ReferencedMultiplicity="ZeroToOne" UserRelationship="false">
-              <RelationshipName>FK_dbo.Book_dbo.Product_ProductId</RelationshipName>
-            </RelationShip>
             <RelationShip ColumnName="ProductId" RelationShip="ForeignKeyChild" ReferencedColumnName="ProductId" Render="true" SchemaName="dbo" ReferencedTableName="OrderDetails" Multiplicity="One" ReferencedMultiplicity="Many" UserRelationship="false">
-              <RelationshipName>FK_dbo.OrderDetails_dbo.Product_ProductId</RelationshipName>
-            </RelationShip>
-            <RelationShip ColumnName="ProductId" RelationShip="ForeignKeyChild" ReferencedColumnName="ProductId" Render="true" SchemaName="dbo" ReferencedTableName="Software" Multiplicity="One" ReferencedMultiplicity="ZeroToOne" UserRelationship="false">
-              <RelationshipName>FK_dbo.Software_dbo.Product_ProductId</RelationshipName>
+              <RelationshipName>FK1C793D34F72CF47B</RelationshipName>
             </RelationShip>
           </RelationShips>
           <Indexes>
             <Index>
               <IndexType>PrimaryKey</IndexType>
               <IsUnique>true</IsUnique>
-              <Name>PK_dbo.Product</Name>
+              <Name>PK__Product__B40CC6CD86CEF79C</Name>
+              <Columns>
+                <string>ProductId</string>
+              </Columns>
+            </Index>
+            <Index>
+              <IndexType>NonClustered</IndexType>
+              <IsUnique>true</IsUnique>
+              <Name>UQ__Product__B40CC6CC5F2A0195</Name>
               <Columns>
                 <string>ProductId</string>
               </Columns>
@@ -593,11 +633,7 @@
             </Column>
           </Columns>
           <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
-          <RelationShips>
-            <RelationShip ColumnName="ProductId" RelationShip="ForeignKey" ReferencedColumnName="ProductId" Render="true" SchemaName="dbo" ReferencedTableName="Product" Multiplicity="ZeroToOne" ReferencedMultiplicity="One" UserRelationship="false">
-              <RelationshipName>FK_dbo.Software_dbo.Product_ProductId</RelationshipName>
-            </RelationShip>
-          </RelationShips>
+          <RelationShips />
           <Indexes>
             <Index>
               <IndexType>NonClustered</IndexType>
@@ -610,7 +646,7 @@
             <Index>
               <IndexType>PrimaryKey</IndexType>
               <IsUnique>true</IsUnique>
-              <Name>PK_dbo.Software</Name>
+              <Name>PK__Software__B40CC6CD3CE35352</Name>
               <Columns>
                 <string>ProductId</string>
               </Columns>

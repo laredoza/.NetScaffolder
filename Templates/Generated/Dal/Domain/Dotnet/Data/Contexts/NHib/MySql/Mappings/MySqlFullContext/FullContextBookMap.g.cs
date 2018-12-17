@@ -56,7 +56,6 @@ namespace RepositoryEFDotnet.Data.Context.Mappings.NHib.MySql
 			
 			#region Relationships
 			
-			HasOne(s => s.Product);
 			
 			#endregion			
 

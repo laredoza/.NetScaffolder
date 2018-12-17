@@ -37,7 +37,7 @@ namespace RepositoryEFDotnet.Data.Accounts.Mappings.EFCore.SqlServer
 			#region Primary keys
 			
 			builder.HasKey(t => t.BankTransferId);
-			builder.Property(t => t.BankTransferId).HasColumnName("BankTransferId").ValueGeneratedOnAdd();
+			builder.Property(t => t.BankTransferId).HasColumnName("BankTransferId").ValueGeneratedNever();
 
 			#endregion
 
@@ -49,18 +49,20 @@ namespace RepositoryEFDotnet.Data.Accounts.Mappings.EFCore.SqlServer
 			builder.Property(t => t.Amount).HasColumnName("Amount").IsRequired();
 			builder.Property(t => t.Amount).HasColumnType("decimal(18, 2)");
 			builder.Property(t => t.TransferDate).HasColumnName("TransferDate").IsRequired();
+			builder.Property(t => t.BankAccountId).HasColumnName("BankAccountId").IsRequired(false);
 			
 			#endregion
 
 			#region Indexes
-			builder.HasIndex(i => new {i.FromBankAccountId}).HasName("IX_FromBankAccountId").IsUnique(false);
+			builder.HasIndex(i => new {i.BankTransferId}).HasName("UQ__BankTran__2E82727AB11DB584").IsUnique(true);
 			builder.HasIndex(i => new {i.ToBankAccountId}).HasName("IX_ToBankAccountId").IsUnique(false);
+			builder.HasIndex(i => new {i.BankAccountId}).HasName("UQ__BankTran__4FC8E4A0CE69E10D").IsUnique(true);
 			#endregion
 			
 			#region Relationships
 			
-			builder.HasOne<BankAccount>(s => s.BankAccount1).WithMany(s => s.BankTransfers1).HasForeignKey(s => s.FromBankAccountId).OnDelete(DeleteBehavior.Restrict);
 			builder.HasOne<BankAccount>(s => s.BankAccount).WithMany(s => s.BankTransfers).HasForeignKey(s => s.ToBankAccountId).OnDelete(DeleteBehavior.Restrict);
+			builder.HasOne<BankAccount>(s => s.BankAccount1).WithMany(s => s.BankTransfers1).HasForeignKey(s => s.BankAccountId).OnDelete(DeleteBehavior.Restrict);
 			
 			#endregion	
 
@@ -73,6 +75,7 @@ namespace RepositoryEFDotnet.Data.Accounts.Mappings.EFCore.SqlServer
 			//TODO: builder.Property(t => t.ToBankAccountId).HasColumnOrder(3);
 			//TODO: builder.Property(t => t.Amount).HasColumnOrder(4);
 			//TODO: builder.Property(t => t.TransferDate).HasColumnOrder(5);
+			//TODO: builder.Property(t => t.BankAccountId).HasColumnOrder(6);
 
 			#endregion	
 	    }

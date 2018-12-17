@@ -36,7 +36,7 @@ namespace RepositoryEFDotnet.Data.Customers.Mappings.EFCore.MySql
 			#region Primary keys
 			
 			builder.HasKey(t => t.CustomerId);
-			builder.Property(t => t.CustomerId).HasColumnName("CustomerId").ValueGeneratedOnAdd();
+			builder.Property(t => t.CustomerId).HasColumnName("CustomerId").ValueGeneratedNever();
 
 			#endregion
 
@@ -62,12 +62,14 @@ namespace RepositoryEFDotnet.Data.Customers.Mappings.EFCore.MySql
 			builder.Property(t => t.Fax).HasMaxLength(50);
 			builder.Property(t => t.Fax).HasColumnName("Fax").IsRequired(false);
 			builder.Property(t => t.CountryId).HasColumnName("CountryId").IsRequired(false);
+			builder.Property(t => t.Photo).HasMaxLength(255);
 			builder.Property(t => t.Photo).HasColumnName("Photo").IsRequired(false);
 			builder.Property(t => t.IsEnabled).HasColumnName("IsEnabled").IsRequired();
 			
 			#endregion
 
 			#region Indexes
+			builder.HasIndex(i => new {i.CustomerId}).HasName("UQ__Customer__A4AE64D98B60CE6B").IsUnique(true);
 			builder.HasIndex(i => new {i.CountryId}).HasName("IX_CountryId").IsUnique(false);
 			#endregion
 			

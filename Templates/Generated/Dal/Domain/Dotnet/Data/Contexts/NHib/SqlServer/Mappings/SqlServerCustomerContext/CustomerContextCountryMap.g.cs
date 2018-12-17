@@ -41,9 +41,9 @@ namespace RepositoryEFDotnet.Data.Customers.Mappings.NHib.SqlServer
 			
 			#region Primary Keys
 			
-			Id(t => t.CountryId).GeneratedBy.Increment().Unique()
+			Id(t => t.CountryId).GeneratedBy.Assigned()
+			.UniqueKey("UQ__Country__10D1609E8CC26505")
 			.Not.Nullable();
-			Map(t => t.CountryId).Column("CountryId").ReadOnly().Generated.Insert();
 
 			#endregion
 

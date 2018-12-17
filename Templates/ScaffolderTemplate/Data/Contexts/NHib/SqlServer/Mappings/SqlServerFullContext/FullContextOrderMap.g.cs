@@ -41,9 +41,9 @@ namespace RepositoryEFDotnet.Data.Context.Mappings.NHib.SqlServer
 			
 			#region Primary Keys
 			
-			Id(t => t.OrderId).GeneratedBy.Increment().Unique()
+			Id(t => t.OrderId).GeneratedBy.Assigned()
+			.UniqueKey("UQ__Order__C3905BCE3C614174")
 			.Not.Nullable();
-			Map(t => t.OrderId).Column("OrderId").ReadOnly().Generated.Insert();
 
 			#endregion
 

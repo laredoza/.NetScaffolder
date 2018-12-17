@@ -36,7 +36,7 @@ namespace RepositoryEFDotnet.Data.Context.Mappings.EFCore.MySql
 			#region Primary keys
 			
 			builder.HasKey(t => t.OrderId);
-			builder.Property(t => t.OrderId).HasColumnName("OrderId").ValueGeneratedOnAdd();
+			builder.Property(t => t.OrderId).HasColumnName("OrderId").ValueGeneratedNever();
 
 			#endregion
 
@@ -58,6 +58,7 @@ namespace RepositoryEFDotnet.Data.Context.Mappings.EFCore.MySql
 			#endregion
 
 			#region Indexes
+			builder.HasIndex(i => new {i.OrderId}).HasName("UQ__Order__C3905BCE3C614174").IsUnique(true);
 			builder.HasIndex(i => new {i.CustomerId}).HasName("IX_CustomerId").IsUnique(false);
 			#endregion
 			

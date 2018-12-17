@@ -55,7 +55,6 @@ namespace RepositoryEFDotnet.Data.Customers.Mappings.EFCore.SqlServer
 			
 			#region Relationships
 			
-			builder.HasOne<Product>(s => s.Product).WithOne(s => s.Book).OnDelete(DeleteBehavior.Restrict);
 			
 			#endregion	
 

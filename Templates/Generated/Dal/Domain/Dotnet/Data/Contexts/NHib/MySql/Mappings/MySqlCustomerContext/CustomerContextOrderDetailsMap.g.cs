@@ -40,9 +40,9 @@ namespace RepositoryEFDotnet.Data.Customers.Mappings.NHib.MySql
 			
 			#region Primary Keys
 			
-			Id(t => t.OrderDetailsId).GeneratedBy.Increment().Unique()
+			Id(t => t.OrderDetailsId).GeneratedBy.Assigned()
+			.UniqueKey("UQ__OrderDet__9DD74DBC8AA17DA0")
 			.Not.Nullable();
-			Map(t => t.OrderDetailsId).Column("OrderDetailsId").ReadOnly().Generated.Insert();
 
 			#endregion
 

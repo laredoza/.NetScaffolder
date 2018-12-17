@@ -54,8 +54,6 @@ namespace RepositoryEFDotnet.Data.Entity
 						this.OrderDetails.Add(new OrderDetails(childItem, deep));
 					}
 				}
-				this.Book = new Book(item.Book, deep);
-				this.Software = new Software(item.Software, deep);
 			}
 		}
 		
@@ -96,52 +94,6 @@ namespace RepositoryEFDotnet.Data.Entity
 					}
 				}
 			}			
-		}
-        
-        public virtual Book Book { get; set; }
-		IBook IProduct.Book 
-		{ 
-			get
-			{
-				return this.Book;
-			}
-			set
-			{
-				if(value != this.Book)
-				{
-					if(value != null)
-					{
-						this.Book = (Book)value;
-					}
-					else
-					{
-						this.Book = null;
-					}
-				}
-			}
-		}
-        
-        public virtual Software Software { get; set; }
-		ISoftware IProduct.Software 
-		{ 
-			get
-			{
-				return this.Software;
-			}
-			set
-			{
-				if(value != this.Software)
-				{
-					if(value != null)
-					{
-						this.Software = (Software)value;
-					}
-					else
-					{
-						this.Software = null;
-					}
-				}
-			}
 		}
 
 		#endregion

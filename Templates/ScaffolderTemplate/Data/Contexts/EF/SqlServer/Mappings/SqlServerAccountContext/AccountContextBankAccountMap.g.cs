@@ -41,7 +41,7 @@ namespace RepositoryEFDotnet.Data.Accounts.Mappings.EF.SqlServer
 			#region Primary Keys
 			
 			HasKey(t => t.BankAccountId);
-			Property(t => t.BankAccountId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+			Property(t => t.BankAccountId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
 
 			#endregion
 
@@ -58,15 +58,14 @@ namespace RepositoryEFDotnet.Data.Accounts.Mappings.EF.SqlServer
 			#endregion
 			
 			#region Indexes
-			Property(t => t.Balance).HasColumnAnnotation("NonClusteredIndex-20180611-172244", new IndexAnnotation(new [] { new IndexAttribute("NonClusteredIndex-20180611-172244"){ IsClustered = false, IsUnique = false, Order = 0}, new IndexAttribute("NonClusteredIndex-20180611-172244"){ IsClustered = false, IsUnique = false, Order = 1}}));
+			Property(t => t.BankAccountId).HasColumnAnnotation("UQ__BankAcco__4FC8E4A0C45281C8", new IndexAnnotation(new [] { new IndexAttribute("UQ__BankAcco__4FC8E4A0C45281C8"){ IsClustered = false, IsUnique = true, Order = 0}}));
 			Property(t => t.CustomerId).HasColumnAnnotation("IX_CustomerId", new IndexAnnotation(new [] { new IndexAttribute("IX_CustomerId"){ IsClustered = false, IsUnique = false, Order = 0}}));
-			Property(t => t.Locked).HasColumnAnnotation("NonClusteredIndex-20180611-172244", new IndexAnnotation(new [] { new IndexAttribute("NonClusteredIndex-20180611-172244"){ IsClustered = false, IsUnique = false, Order = 0}, new IndexAttribute("NonClusteredIndex-20180611-172244"){ IsClustered = false, IsUnique = false, Order = 1}}));
 			#endregion
 
 			#region Relationships
 			
-			HasMany<BankTransfers>(s => s.BankTransfers1).WithRequired(s => s.BankAccount1).HasForeignKey(s => s.FromBankAccountId).WillCascadeOnDelete(false);
 			HasMany<BankTransfers>(s => s.BankTransfers).WithRequired(s => s.BankAccount).HasForeignKey(s => s.ToBankAccountId).WillCascadeOnDelete(false);
+			HasMany<BankTransfers>(s => s.BankTransfers1).WithOptional(s => s.BankAccount1).HasForeignKey(s => s.BankAccountId).WillCascadeOnDelete(false);
 			
 			#endregion			
 

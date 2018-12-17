@@ -125,6 +125,24 @@ namespace RepositoryEFDotnet.Data.Interfaces
 		Task<IList<IBankTransfers>> LoadByTransferDateAsync(DateTime transferDate, bool cache, params Expression<Func<IBankTransfers, object>>[] includes);
 
         /// <summary>
+        /// Load BankTransfers entities from the database using the BankAccountId field
+        /// </summary>
+        /// <param name="bankAccountId">Nullable<int></param
+        /// <param name="cache">Use 2nd level caching if enabled</param>
+		/// <param name="includes">params Expression<Func<IBankTransfers, object>>[]</param>
+        /// <returns>IList<IBankTransfers></returns>
+		IList<IBankTransfers> LoadByBankAccountId(Nullable<int> bankAccountId, bool cache,  params Expression<Func<IBankTransfers, object>>[] includes);
+		
+        /// <summary>
+        /// Load BankTransfers entities async from the database using the BankAccountId field
+        /// </summary>
+        /// <param name="bankAccountId">Nullable<int></param
+        /// <param name="cache">Use 2nd level caching if enabled</param>
+		/// <param name="includes">params Expression<Func<IBankTransfers, object>>[]</param>
+        /// <returns>IList<IBankTransfers></returns>
+		Task<IList<IBankTransfers>> LoadByBankAccountIdAsync(Nullable<int> bankAccountId, bool cache, params Expression<Func<IBankTransfers, object>>[] includes);
+
+        /// <summary>
         /// Load all BankTransfers entities from the database.
         /// </summary>
         /// <param name="cache">Use 2nd level caching if enabled</param>

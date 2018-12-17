@@ -42,7 +42,7 @@ namespace RepositoryEFDotnet.Data.Context.Mappings.EF.Postgres
 			#region Primary Keys
 			
 			HasKey(t => t.OrderDetailsId);
-			Property(t => t.OrderDetailsId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+			Property(t => t.OrderDetailsId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
 
 			#endregion
 
@@ -59,6 +59,7 @@ namespace RepositoryEFDotnet.Data.Context.Mappings.EF.Postgres
 			#endregion
 			
 			#region Indexes
+			Property(t => t.OrderDetailsId).HasColumnAnnotation("UQ__OrderDet__9DD74DBC8AA17DA0", new IndexAnnotation(new [] { new IndexAttribute("UQ__OrderDet__9DD74DBC8AA17DA0"){ IsClustered = false, IsUnique = true, Order = 0}}));
 			Property(t => t.OrderId).HasColumnAnnotation("IX_OrderId", new IndexAnnotation(new [] { new IndexAttribute("IX_OrderId"){ IsClustered = false, IsUnique = false, Order = 0}}));
 			Property(t => t.ProductId).HasColumnAnnotation("IX_ProductId", new IndexAnnotation(new [] { new IndexAttribute("IX_ProductId"){ IsClustered = false, IsUnique = false, Order = 0}}));
 			#endregion

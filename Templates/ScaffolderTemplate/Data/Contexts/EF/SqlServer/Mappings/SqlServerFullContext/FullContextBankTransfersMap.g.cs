@@ -41,7 +41,7 @@ namespace RepositoryEFDotnet.Data.Context.Mappings.EF.SqlServer
 			#region Primary Keys
 			
 			HasKey(t => t.BankTransferId);
-			Property(t => t.BankTransferId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+			Property(t => t.BankTransferId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
 
 			#endregion
 
@@ -53,18 +53,20 @@ namespace RepositoryEFDotnet.Data.Context.Mappings.EF.SqlServer
 			Property(t => t.Amount).IsRequired();
 			Property(t => t.Amount).HasPrecision(18, 2);
 			Property(t => t.TransferDate).IsRequired();
+			Property(t => t.BankAccountId).IsOptional();
 			
 			#endregion
 			
 			#region Indexes
-			Property(t => t.FromBankAccountId).HasColumnAnnotation("IX_FromBankAccountId", new IndexAnnotation(new [] { new IndexAttribute("IX_FromBankAccountId"){ IsClustered = false, IsUnique = false, Order = 0}}));
+			Property(t => t.BankTransferId).HasColumnAnnotation("UQ__BankTran__2E82727AB11DB584", new IndexAnnotation(new [] { new IndexAttribute("UQ__BankTran__2E82727AB11DB584"){ IsClustered = false, IsUnique = true, Order = 0}}));
 			Property(t => t.ToBankAccountId).HasColumnAnnotation("IX_ToBankAccountId", new IndexAnnotation(new [] { new IndexAttribute("IX_ToBankAccountId"){ IsClustered = false, IsUnique = false, Order = 0}}));
+			Property(t => t.BankAccountId).HasColumnAnnotation("UQ__BankTran__4FC8E4A0CE69E10D", new IndexAnnotation(new [] { new IndexAttribute("UQ__BankTran__4FC8E4A0CE69E10D"){ IsClustered = false, IsUnique = true, Order = 0}}));
 			#endregion
 
 			#region Relationships
 			
-			HasRequired<BankAccount>(s => s.BankAccount1).WithMany(s => s.BankTransfers1).HasForeignKey(s => s.FromBankAccountId).WillCascadeOnDelete(false);
 			HasRequired<BankAccount>(s => s.BankAccount).WithMany(s => s.BankTransfers).HasForeignKey(s => s.ToBankAccountId).WillCascadeOnDelete(false);
+			HasOptional<BankAccount>(s => s.BankAccount1).WithMany(s => s.BankTransfers1).HasForeignKey(s => s.BankAccountId).WillCascadeOnDelete(false);
 			
 			#endregion			
 
@@ -75,6 +77,7 @@ namespace RepositoryEFDotnet.Data.Context.Mappings.EF.SqlServer
 			Property(t => t.ToBankAccountId).HasColumnOrder(3);
 			Property(t => t.Amount).HasColumnOrder(4);
 			Property(t => t.TransferDate).HasColumnOrder(5);
+			Property(t => t.BankAccountId).HasColumnOrder(6);
 
 			#endregion
 	

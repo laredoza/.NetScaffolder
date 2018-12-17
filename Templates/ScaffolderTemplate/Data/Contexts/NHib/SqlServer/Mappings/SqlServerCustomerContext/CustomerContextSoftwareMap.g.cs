@@ -57,7 +57,6 @@ namespace RepositoryEFDotnet.Data.Customers.Mappings.NHib.SqlServer
 			
 			#region Relationships
 			
-			HasOne(s => s.Product);
 			
 			#endregion			
 

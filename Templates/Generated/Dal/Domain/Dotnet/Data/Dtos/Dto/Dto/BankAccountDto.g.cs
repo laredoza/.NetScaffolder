@@ -30,8 +30,8 @@ namespace RepositoryEFDotnet.Data.Dto
 		
 		public BankAccountDto()
 		{
-			this.BankTransfers1 = new List <IBankTransfers>();
 			this.BankTransfers = new List <IBankTransfers>();
+			this.BankTransfers1 = new List <IBankTransfers>();
 		}
 		
 		public BankAccountDto(IBankAccount item, bool deep = false)
@@ -43,23 +43,23 @@ namespace RepositoryEFDotnet.Data.Dto
 			this.Balance = item.Balance;
 			this.CustomerId = item.CustomerId;
 			this.Locked = item.Locked;
-			this.BankTransfers1 = new List <IBankTransfers>();
 			this.BankTransfers = new List <IBankTransfers>();
+			this.BankTransfers1 = new List <IBankTransfers>();
 
 			if(deep)
 			{
-				if(item.BankTransfers1 != null)
-				{
-					foreach(var childItem in item.BankTransfers1)
-					{
-						this.BankTransfers1.Add(new BankTransfersDto(childItem, deep));
-					}
-				}
 				if(item.BankTransfers != null)
 				{
 					foreach(var childItem in item.BankTransfers)
 					{
 						this.BankTransfers.Add(new BankTransfersDto(childItem, deep));
+					}
+				}
+				if(item.BankTransfers1 != null)
+				{
+					foreach(var childItem in item.BankTransfers1)
+					{
+						this.BankTransfers1.Add(new BankTransfersDto(childItem, deep));
 					}
 				}
                 if(item.Customer != null)
@@ -83,8 +83,8 @@ namespace RepositoryEFDotnet.Data.Dto
 		
 		#region Child Relationships
 		
-		public IList<IBankTransfers> BankTransfers1 { get; set; }
 		public IList<IBankTransfers> BankTransfers { get; set; }
+		public IList<IBankTransfers> BankTransfers1 { get; set; }
 
 		#endregion
 		

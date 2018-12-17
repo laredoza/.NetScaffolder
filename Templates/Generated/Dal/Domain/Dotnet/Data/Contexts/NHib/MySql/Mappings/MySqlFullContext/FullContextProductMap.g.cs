@@ -40,9 +40,9 @@ namespace RepositoryEFDotnet.Data.Context.Mappings.NHib.MySql
 			
 			#region Primary Keys
 			
-			Id(t => t.ProductId).GeneratedBy.Increment().Unique()
+			Id(t => t.ProductId).GeneratedBy.Assigned()
+			.UniqueKey("UQ__Product__B40CC6CC5F2A0195")
 			.Not.Nullable();
-			Map(t => t.ProductId).Column("ProductId").ReadOnly().Generated.Insert();
 
 			#endregion
 
@@ -67,9 +67,7 @@ namespace RepositoryEFDotnet.Data.Context.Mappings.NHib.MySql
 			
 			#region Relationships
 			
-			HasOne(s => s.Book).PropertyRef(o => o.Product);
 			HasMany(s => s.OrderDetails).KeyColumn("ProductId");
-			HasOne(s => s.Software).PropertyRef(o => o.Product);
 			
 			#endregion			
 

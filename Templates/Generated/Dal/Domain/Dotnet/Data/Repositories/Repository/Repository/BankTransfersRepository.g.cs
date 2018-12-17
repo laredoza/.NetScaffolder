@@ -178,6 +178,31 @@ namespace RepositoryEFDotnet.Data.Repository
 		}
 
         /// <summary>
+        /// Load BankTransfers entities from the database using the BankAccountId field
+        /// </summary>
+        /// <param name="bankAccountId">Nullable<int></param>
+		/// <param name="includes">params Expression<Func<IBankTransfers, object>>[]</param>
+        /// <returns>IList<IBankTransfers></returns>
+		public virtual IList<IBankTransfers> LoadByBankAccountId(Nullable<int> bankAccountId, bool cache, params Expression<Func<IBankTransfers, object>>[] includes)
+		{
+			var expr = this.Convert(includes);
+			return this.UnitOfWork.AllMatching<BankTransfers>(o => o.BankAccountId == bankAccountId, cache, expr).ToList<IBankTransfers>();
+		}
+		
+        /// <summary>
+        /// Load BankTransfers entities async from the database using the BankAccountId field
+        /// </summary>
+        /// <param name="bankAccountId">Nullable<int></param>
+		/// <param name="includes">params Expression<Func<IBankTransfers, object>>[]</param>
+        /// <returns>IList<IBankTransfers></returns>
+		public virtual async Task<IList<IBankTransfers>> LoadByBankAccountIdAsync(Nullable<int> bankAccountId, bool cache, params Expression<Func<IBankTransfers, object>>[] includes)
+		{
+			var expr = this.Convert(includes);
+			var result = await this.UnitOfWork.AllMatchingAsync<BankTransfers>(o => o.BankAccountId == bankAccountId,cache, expr);
+			return result.ToList<IBankTransfers>();
+		}
+
+        /// <summary>
         /// Load all BankTransfers entities from the database.
         /// </summary>
 		/// <param name="includes">params Expression<Func<IBankTransfers, object>>[]</param>
@@ -225,6 +250,7 @@ namespace RepositoryEFDotnet.Data.Repository
 			entity.ToBankAccountId = entityToSave.ToBankAccountId;
 			entity.Amount = entityToSave.Amount;
 			entity.TransferDate = entityToSave.TransferDate;
+			entity.BankAccountId = entityToSave.BankAccountId;
 			
 			return result;
 		}
@@ -246,6 +272,7 @@ namespace RepositoryEFDotnet.Data.Repository
 			entity.ToBankAccountId = entityToSave.ToBankAccountId;
 			entity.Amount = entityToSave.Amount;
 			entity.TransferDate = entityToSave.TransferDate;
+			entity.BankAccountId = entityToSave.BankAccountId;
 			
 			return result;
 		}

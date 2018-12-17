@@ -37,7 +37,7 @@ namespace RepositoryEFDotnet.Data.Context.Mappings.EFCore.SqlServer
 			#region Primary keys
 			
 			builder.HasKey(t => t.ProductId);
-			builder.Property(t => t.ProductId).HasColumnName("ProductId").ValueGeneratedOnAdd();
+			builder.Property(t => t.ProductId).HasColumnName("ProductId").ValueGeneratedNever();
 
 			#endregion
 
@@ -57,13 +57,12 @@ namespace RepositoryEFDotnet.Data.Context.Mappings.EFCore.SqlServer
 			#endregion
 
 			#region Indexes
+			builder.HasIndex(i => new {i.ProductId}).HasName("UQ__Product__B40CC6CC5F2A0195").IsUnique(true);
 			#endregion
 			
 			#region Relationships
 			
-			builder.HasOne<Book>(s => s.Book).WithOne(s => s.Product).HasForeignKey<Book>(s => s.ProductId).OnDelete(DeleteBehavior.Restrict);
 			builder.HasMany<OrderDetails>(s => s.OrderDetails).WithOne(s => s.Product).HasForeignKey(s => s.ProductId).OnDelete(DeleteBehavior.Restrict);
-			builder.HasOne<Software>(s => s.Software).WithOne(s => s.Product).HasForeignKey<Software>(s => s.ProductId).OnDelete(DeleteBehavior.Restrict);
 			
 			#endregion	
 

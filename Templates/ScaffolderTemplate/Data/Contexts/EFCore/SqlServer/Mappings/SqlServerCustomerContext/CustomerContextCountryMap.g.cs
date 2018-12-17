@@ -37,7 +37,7 @@ namespace RepositoryEFDotnet.Data.Customers.Mappings.EFCore.SqlServer
 			#region Primary keys
 			
 			builder.HasKey(t => t.CountryId);
-			builder.Property(t => t.CountryId).HasColumnName("CountryId").ValueGeneratedOnAdd();
+			builder.Property(t => t.CountryId).HasColumnName("CountryId").ValueGeneratedNever();
 
 			#endregion
 
@@ -50,6 +50,7 @@ namespace RepositoryEFDotnet.Data.Customers.Mappings.EFCore.SqlServer
 			#endregion
 
 			#region Indexes
+			builder.HasIndex(i => new {i.CountryId}).HasName("UQ__Country__10D1609E8CC26505").IsUnique(true);
 			#endregion
 			
 			#region Relationships

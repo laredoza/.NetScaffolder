@@ -41,7 +41,7 @@ namespace RepositoryEFDotnet.Data.Context.Mappings.EF.SqlServer
 			#region Primary Keys
 			
 			HasKey(t => t.ProductId);
-			Property(t => t.ProductId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+			Property(t => t.ProductId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
 
 			#endregion
 
@@ -61,13 +61,12 @@ namespace RepositoryEFDotnet.Data.Context.Mappings.EF.SqlServer
 			#endregion
 			
 			#region Indexes
+			Property(t => t.ProductId).HasColumnAnnotation("UQ__Product__B40CC6CC5F2A0195", new IndexAnnotation(new [] { new IndexAttribute("UQ__Product__B40CC6CC5F2A0195"){ IsClustered = false, IsUnique = true, Order = 0}}));
 			#endregion
 
 			#region Relationships
 			
-			HasOptional<Book>(s => s.Book).WithRequired(s => s.Product).WillCascadeOnDelete(false);
 			HasMany<OrderDetails>(s => s.OrderDetails).WithRequired(s => s.Product).HasForeignKey(s => s.ProductId).WillCascadeOnDelete(false);
-			HasOptional<Software>(s => s.Software).WithRequired(s => s.Product).WillCascadeOnDelete(false);
 			
 			#endregion			
 

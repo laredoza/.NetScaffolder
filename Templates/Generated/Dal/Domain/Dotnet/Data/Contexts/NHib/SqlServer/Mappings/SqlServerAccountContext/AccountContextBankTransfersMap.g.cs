@@ -41,16 +41,15 @@ namespace RepositoryEFDotnet.Data.Accounts.Mappings.NHib.SqlServer
 			
 			#region Primary Keys
 			
-			Id(t => t.BankTransferId).GeneratedBy.Increment().Unique()
+			Id(t => t.BankTransferId).GeneratedBy.Assigned()
+			.UniqueKey("UQ__BankTran__2E82727AB11DB584")
 			.Not.Nullable();
-			Map(t => t.BankTransferId).Column("BankTransferId").ReadOnly().Generated.Insert();
 
 			#endregion
 
 			#region Properties
 			
 			Map(t => t.FromBankAccountId).Column("FromBankAccountId")
-			.Index("IX_FromBankAccountId")
 			.Not.Nullable();
 			Map(t => t.ToBankAccountId).Column("ToBankAccountId")
 			.Index("IX_ToBankAccountId")
@@ -60,13 +59,16 @@ namespace RepositoryEFDotnet.Data.Accounts.Mappings.NHib.SqlServer
 			.Not.Nullable();
 			Map(t => t.TransferDate).Column("TransferDate")
 			.Not.Nullable();
+			Map(t => t.BankAccountId).Column("BankAccountId")
+			.UniqueKey("UQ__BankTran__4FC8E4A0CE69E10D")
+			.Nullable();
 			
 			#endregion
 			
 			#region Relationships
 			
-			References(o => o.BankAccount1).Column("BankAccountId").Unique().Not.Insert().Not.Update();
 			References(o => o.BankAccount).Column("BankAccountId").Unique().Not.Insert().Not.Update();
+			References(o => o.BankAccount1).Column("BankAccountId").Unique().Not.Insert().Not.Update();
 			
 			#endregion			
 
