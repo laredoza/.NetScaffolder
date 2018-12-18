@@ -58,7 +58,7 @@ T4 templates (DataTypes) are used to generate a layer. Packages group several of
 
 ### Todo
 - [Data Stabilization](https://github.com/laredoza/.NetScaffolder/milestone/12)
-- [Services](https://github.com/laredoza/.NetScaffolder/milestone/13)
+- [0.7 Services](https://github.com/laredoza/.NetScaffolder/milestone/13)
 - [0.8 Create MVC Presentation Layer & ModelViews](https://github.com/laredoza/.NetScaffolder/milestone/8)
 - [0.81 Create Angular Presentation Layer & ModelViews](https://github.com/laredoza/.NetScaffolder/milestone/10)
 - [0.82 Create Xamarin Presentation Layer & ModelView](https://github.com/laredoza/.NetScaffolder/milestone/11)
