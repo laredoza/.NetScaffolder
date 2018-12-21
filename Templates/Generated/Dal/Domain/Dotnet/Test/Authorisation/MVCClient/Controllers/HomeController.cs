@@ -13,6 +13,7 @@ namespace MVCClient.Controllers
         [Authorize]
         public IActionResult Index()
         {
+            var a = this.User.IsInRole("Admin");
             return View();
         }
 

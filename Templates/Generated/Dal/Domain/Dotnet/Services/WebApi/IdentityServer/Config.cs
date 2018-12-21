@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using IdentityModel;
 
 namespace RepositoryEFDotnet.IdentityServer
 {
@@ -23,11 +24,23 @@ namespace RepositoryEFDotnet.IdentityServer
 
         public static IEnumerable<IdentityResource> GetIdentityResources()
         {
+            IdentityResource rolesResource = new IdentityResource
+            {
+                Name = "roles",
+                DisplayName = "Roles",
+                Description = "Allow the service access to your user roles.",
+                UserClaims = new[] { JwtClaimTypes.Role, ClaimTypes.Role },
+                ShowInDiscoveryDocument = true,
+                Required = true,
+                Emphasize = true
+            };
+
             return new List<IdentityResource>
-    {
-        new IdentityResources.OpenId(),
-        new IdentityResources.Profile(),
-    };
+            {
+                new IdentityResources.OpenId(),
+                new IdentityResources.Profile(),
+                rolesResource
+            };
         }
 
         public static IEnumerable<Client> GetClients()
@@ -51,8 +64,11 @@ namespace RepositoryEFDotnet.IdentityServer
             {
                 IdentityServerConstants.StandardScopes.OpenId,
                 IdentityServerConstants.StandardScopes.Profile,
-                IdentityServerConstants.StandardScopes.Email
-            }
+                IdentityServerConstants.StandardScopes.Email,
+                "roles"
+            },
+            AlwaysSendClientClaims = true
+            // https://github.com/IdentityServer/IdentityServer4/issues/1786
         },
                 new Client
                 {
@@ -99,8 +115,9 @@ namespace RepositoryEFDotnet.IdentityServer
             {
                 new Claim("name", "Alice"),
                 new Claim("website", "https://alice.com"),
-                new Claim("email", "alice@alice.com")
-            }
+                new Claim("email", "alice@alice.com"),
+                new Claim(JwtClaimTypes.Role, "User")
+        }
         },
         new TestUser
         {
@@ -112,7 +129,8 @@ namespace RepositoryEFDotnet.IdentityServer
             {
                 new Claim("name", "Bob"),
                 new Claim("website", "https://bob.com"),
-                new Claim("email", "bob@bob.com")
+                new Claim("email", "bob@bob.com"),
+                new Claim(JwtClaimTypes.Role, "Admin")
             }
         }
     };
