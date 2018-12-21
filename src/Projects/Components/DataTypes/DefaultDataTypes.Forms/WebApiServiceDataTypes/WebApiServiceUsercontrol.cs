@@ -296,27 +296,27 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.WebApiSer
 
             if (btn.Tag.ToString() == "Add")
             {
-                UpdateWebApi();
-                (DataType as WebApiServiceDataType).WebApiDataList.Add(this.SelectedWebApi);
+                this.UpdateWebApi();
+                (this.DataType as WebApiServiceDataType).WebApiDataList.Add(this.SelectedWebApi);
             }
             else if (btn.Tag.ToString() == "Delete")
             {
-                var context =
-                    (DataType as ApplicationServiceDataType).ApplicationServiceData.FirstOrDefault(o => o.Id == this.SelectedWebApi.Id);
+                var webApiServiceData =
+                    (DataType as WebApiServiceDataType).WebApiDataList.FirstOrDefault(o => o.Id == this.SelectedWebApi.Id);
 
-                if (context != null)
+                if (webApiServiceData != null)
                 {
-                    (DataType as ApplicationServiceDataType).ApplicationServiceData.Remove(context);
+                    (DataType as WebApiServiceDataType).WebApiDataList.Remove(webApiServiceData);
                 }
 
                 this.SelectedWebApi = null;
             }
 
             var parameters = new Dictionary<string, string> { { "basePath", SavePath } };
-            DataType.Save(parameters);
-            OnNavigationChanged?.Invoke(this, DataType);
-            SetupDefault();
-            UpdateUI();
+            this.DataType.Save(parameters);
+            this.OnNavigationChanged?.Invoke(this, DataType);
+            this.SetupDefault();
+            this.UpdateUI();
         }
 
         private void chkIsDefault_CheckedChanged(object sender, EventArgs e)

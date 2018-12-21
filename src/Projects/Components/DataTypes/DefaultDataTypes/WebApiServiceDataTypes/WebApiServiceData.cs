@@ -27,7 +27,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.WebApiServiceDa
         /// <summary>
         ///     The exluded relationships.
         /// </summary>
-        private readonly List<Relationship> exludedRelationships;
+        //private readonly List<Relationship> exludedRelationships;
 
         #endregion
 
@@ -38,7 +38,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.WebApiServiceDa
         /// </summary>
         public WebApiServiceData()
         {
-            this.exludedRelationships = new List<Relationship>();
+            //this.exludedRelationships = new List<Relationship>();
             this.Models = new List<Table>();
             this.OutputFolder = "Controllers";
             this.WebApiName = "NewWebApi";
@@ -47,13 +47,15 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.WebApiServiceDa
             this.InheritFrom = "BaseController";
             this.Id = Guid.NewGuid();
             this.OutputPath = string.Empty;
-            this.IsDefault = false;
         }
 
         #endregion
 
         #region Public Properties
 
+        /// <summary>
+        /// Gets or sets the web api name.
+        /// </summary>
         public string WebApiName { get; set; }
 
         /// <summary>
@@ -61,27 +63,27 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.WebApiServiceDa
         /// </summary>
         public string CustomConnectionName { get; set; }
 
-        public List<Relationship> ExcludedRelationships(List<Table> models)
-        {
-            if (!this.exludedRelationships.Any())
-            {
-                foreach (var model in models)
-                {
-                    foreach (var rel in model.Relationships.Where(o => o.Render))
-                    {
-                        if (!this.exludedRelationships.Any(
-                                o => o.SchemaName == rel.SchemaName && o.ReferencedTableName == rel.ReferencedTableName)
-                            && !this.Models.Any(
-                                o => o.SchemaName == rel.SchemaName && o.TableName == rel.ReferencedTableName))
-                        {
-                            this.exludedRelationships.Add(rel);
-                        }
-                    }
-                }
-            }
+        //public List<Relationship> ExcludedRelationships(List<Table> models)
+        //{
+        //    if (!this.exludedRelationships.Any())
+        //    {
+        //        foreach (var model in models)
+        //        {
+        //            foreach (var rel in model.Relationships.Where(o => o.Render))
+        //            {
+        //                if (!this.exludedRelationships.Any(
+        //                        o => o.SchemaName == rel.SchemaName && o.ReferencedTableName == rel.ReferencedTableName)
+        //                    && !this.Models.Any(
+        //                        o => o.SchemaName == rel.SchemaName && o.TableName == rel.ReferencedTableName))
+        //                {
+        //                    this.exludedRelationships.Add(rel);
+        //                }
+        //            }
+        //        }
+        //    }
 
-            return this.exludedRelationships;
-        }
+        //    return this.exludedRelationships;
+        //}
 
         /// <summary>
         ///     Gets or sets the id.
@@ -112,8 +114,6 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.WebApiServiceDa
         ///     Gets or sets the output path.
         /// </summary>
         public string OutputPath { get; set; }
-
-        public bool IsDefault { get; set; }
 
         /// <summary>
         ///     Gets the transform inherit from.

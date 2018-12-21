@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WebApiServiceDataType xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <AdditionalNamespaces />
+  <WebApiDataList>
+    <WebApiServiceData>
+      <WebApiName>NewWebApi</WebApiName>
+      <CustomConnectionName />
+      <Id>f392a592-2415-4f61-8a05-86d582952ac0</Id>
+      <InheritFrom>BaseController</InheritFrom>
+      <Models />
+      <Namespace>Controllers</Namespace>
+      <OutputFolder>Controllers</OutputFolder>
+      <OutputPath />
+      <IsDefault>false</IsDefault>
+    </WebApiServiceData>
+  </WebApiDataList>
+  <MissingWebApiList />
+</WebApiServiceDataType>
