@@ -7,7 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using DotNetScaffolder.Components.Common.Contract;
-using DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataTypes;
+using DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ApplicationServiceDataTypes;
+using DotNetScaffolder.Components.DataTypes.DefaultDataTypes.WebApiServiceDataTypes;
 using DotNetScaffolder.Core.Common.Validation;
 using DotNetScaffolder.Mapping.ApplicationServices.Forms.Tables;
 using DotNetScaffolder.Mapping.ApplicationServices.Tables;
@@ -103,9 +104,9 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.WebApiSer
         public string SavePath { get; set; }
 
         /// <summary>
-        ///     Gets or sets the selected context.
+        /// Gets or sets the selected web api.
         /// </summary>
-        public ContextData SelectedContext { get; set; }
+        public WebApiServiceData SelectedWebApi { get; set; }
 
         /// <summary>
         ///     Gets or sets the validation result.
@@ -138,7 +139,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.WebApiSer
             ITableHierarchyService applicationService)
         {
             treeView.Nodes.Clear();
-            treeView.Nodes.Add(new TreeNode {Text = parentName});
+            treeView.Nodes.Add(new TreeNode { Text = parentName });
             treeView.Nodes[0].Nodes.AddRange(applicationService.ConvertHierarchyToNodes(hierarchy).ToArray());
             treeView.Nodes[0].Expand();
         }
@@ -163,15 +164,15 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.WebApiSer
 
             if (parameterDictionary.ContainsKey("name"))
             {
-                SelectedContext =
-                    (DataType as ContextDataType).Contexts.FirstOrDefault(
+                this.SelectedWebApi =
+                    (DataType as WebApiServiceDataType).WebApiDataList.FirstOrDefault(
                         o => o.Id.ToString() == parameterDictionary["name"]);
             }
 
-            TreeviewContextModels.Visible = SelectedContext != null;
-            gbAdditionalNamespaces.Visible = SelectedContext == null;
+            TreeviewContextModels.Visible = this.SelectedWebApi != null;
+            gbAdditionalNamespaces.Visible = this.SelectedWebApi == null;
 
-            if (SelectedContext == null)
+            if (this.SelectedWebApi == null)
             {
                 SetupDefault();
             }
@@ -197,20 +198,20 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.WebApiSer
             {
                 StringBuilder sb = new StringBuilder();
 
-                var contextDataType = DataType as ContextDataType;
+                var contextDataType = DataType as ApplicationServiceDataType;
                 bool removed = false;
 
                 foreach (var error in contextDataType.MissingTables)
                 {
                     DialogResult result =
                         MessageBox.Show(
-                            $"Delete missing table {error.TableName} from the context {error.ContextData.ContextName}",
+                            $"Delete missing Application Service {error.TableName} from the WebApi {error.ApplicationServiceData.ApplicationServiceName}",
                             "Missing Table", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
 
                     if (result == DialogResult.Yes)
                     {
-                        var model = error.ContextData.Models.FirstOrDefault(m => m.TableName == error.TableName);
-                        error.ContextData.Models.Remove(model);
+                        var model = error.ApplicationServiceData.Models.FirstOrDefault(m => m.TableName == error.TableName);
+                        error.ApplicationServiceData.Models.Remove(model);
                         removed = true;
                     }
                 }
@@ -245,14 +246,14 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.WebApiSer
         {
             if (DataType != null)
             {
-                if (!IsDefault && SelectedContext != null)
+                if (!IsDefault && this.SelectedWebApi != null)
                 {
                     UpdateDataType();
 
-                    SelectedContext =
-                        (DataType as ContextDataType).Contexts.FirstOrDefault(o => o.Id == SelectedContext.Id);
+                    this.SelectedWebApi =
+                        (DataType as WebApiServiceDataType).WebApiDataList.FirstOrDefault(o => o.Id == this.SelectedWebApi.Id);
 
-                    UpdateContext();
+                    UpdateWebApi();
                 }
                 else
                 {
@@ -291,27 +292,27 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.WebApiSer
         /// </param>
         private void btnNew_Click(object sender, EventArgs e)
         {
-            var btn = (Button) sender;
+            var btn = (Button)sender;
 
             if (btn.Tag.ToString() == "Add")
             {
-                UpdateContext();
-                (DataType as ContextDataType).Contexts.Add(SelectedContext);
+                UpdateWebApi();
+                (DataType as WebApiServiceDataType).WebApiDataList.Add(this.SelectedWebApi);
             }
             else if (btn.Tag.ToString() == "Delete")
             {
                 var context =
-                    (DataType as ContextDataType).Contexts.FirstOrDefault(o => o.Id == SelectedContext.Id);
+                    (DataType as ApplicationServiceDataType).ApplicationServiceData.FirstOrDefault(o => o.Id == this.SelectedWebApi.Id);
 
                 if (context != null)
                 {
-                    (DataType as ContextDataType).Contexts.Remove(context);
+                    (DataType as ApplicationServiceDataType).ApplicationServiceData.Remove(context);
                 }
 
-                SelectedContext = null;
+                this.SelectedWebApi = null;
             }
 
-            var parameters = new Dictionary<string, string> {{"basePath", SavePath}};
+            var parameters = new Dictionary<string, string> { { "basePath", SavePath } };
             DataType.Save(parameters);
             OnNavigationChanged?.Invoke(this, DataType);
             SetupDefault();
@@ -320,27 +321,27 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.WebApiSer
 
         private void chkIsDefault_CheckedChanged(object sender, EventArgs e)
         {
-            if (SelectedContext == null)
+            if (this.SelectedWebApi == null)
             {
                 return;
             }
 
-            var dt = DataType as ContextDataType;
+            var dt = DataType as ApplicationServiceDataType;
 
-            if (dt?.Contexts == null)
+            if (dt?.ApplicationServiceData == null)
             {
                 return;
             }
 
-            if (chkIsDefault.Checked)
-            {
-                foreach (var ctx in dt.Contexts)
-                {
-                    ctx.IsDefault = false;
-                }
-            }
+            //if (chkIsDefault.Checked)
+            //{
+            //    foreach (var ctx in dt.ApplicationServiceData)
+            //    {
+            //        ctx.IsDefault = false;
+            //    }
+            //}
 
-            SelectedContext.IsDefault = chkIsDefault.Checked;
+            //SelectedWebApi.IsDefault = chkIsDefault.Checked;
         }
 
         /// <summary>
@@ -367,7 +368,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.WebApiSer
         private void SetupDefault()
         {
             IsDefault = true;
-            SelectedContext = new ContextData {Id = Guid.NewGuid()};
+            this.SelectedWebApi = new WebApiServiceData { Id = Guid.NewGuid() };
         }
 
         /// <summary>
@@ -390,20 +391,20 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.WebApiSer
         /// <summary>
         ///     The update context.
         /// </summary>
-        private void UpdateContext()
+        private void UpdateWebApi()
         {
-            if (SelectedContext == null) return;
+            if (this.SelectedWebApi == null) return;
 
-            SelectedContext.OutputFolder = OutputFolder.Text;
-            SelectedContext.Namespace = Namespace.Text;
-            SelectedContext.ContextName = ContextName.Text;
-            SelectedContext.InheritFrom = InheritFromInterface.Text;
-            SelectedContext.CustomConnectionName = txtCustomConnectionName.Text;
-            SelectedContext.OutputPath = OutputPath.Text;
-            SelectedContext.IsDefault =
-                chkIsDefault.Checked || !(DataType as ContextDataType).Contexts.Any(o => o.IsDefault);
+            this.SelectedWebApi.OutputFolder = OutputFolder.Text;
+            this.SelectedWebApi.Namespace = Namespace.Text;
+            this.SelectedWebApi.WebApiName = WebApiName.Text;
+            this.SelectedWebApi.InheritFrom = InheritFromInterface.Text;
+            //SelectedWebApi.CustomConnectionName = txtCustomConnectionName.Text;
+            this.SelectedWebApi.OutputPath = OutputPath.Text;
+            //SelectedWebApi.IsDefault =
+            //    chkIsDefault.Checked || !(DataType as ApplicationServiceDataType).ApplicationServiceData.Any(o => o.IsDefault);
 
-            SelectedContext.Models.Clear();
+            this.SelectedWebApi.Models.Clear();
 
             if (TreeviewContextModels.Nodes.Count > 0)
             {
@@ -414,7 +415,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.WebApiSer
                 {
                     foreach (var table in tables)
                     {
-                        SelectedContext.Models.Add(new Table
+                        this.SelectedWebApi.Models.Add(new Table
                         {
                             TableName = table.TableName,
                             SchemaName = table.SchemaName,
@@ -436,7 +437,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.WebApiSer
                 ITableHierarchyService applicationService = new TempateHierarchyService();
                 List<Hierarchy> hierarchy = applicationService.ReturnSelectedHierarchyFromList(
                     DataSource.Tables,
-                    SelectedContext?.Models ?? null,
+                    this.SelectedWebApi?.Models ?? null,
                     false,
                     false);
 
@@ -463,15 +464,15 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.WebApiSer
         /// </summary>
         private void UpdateUI()
         {
-            if (SelectedContext == null) return;
+            if (this.SelectedWebApi == null) return;
 
-            OutputFolder.Text = SelectedContext.OutputFolder;
-            Namespace.Text = SelectedContext.Namespace;
-            ContextName.Text = SelectedContext.ContextName;
-            InheritFromInterface.Text = SelectedContext.InheritFrom;
-            txtCustomConnectionName.Text = SelectedContext.CustomConnectionName;
-            OutputPath.Text = SelectedContext.OutputPath;
-            chkIsDefault.Checked = SelectedContext.IsDefault;
+            OutputFolder.Text = this.SelectedWebApi.OutputFolder;
+            Namespace.Text = this.SelectedWebApi.Namespace;
+            WebApiName.Text = SelectedWebApi.WebApiName;
+            InheritFromInterface.Text = this.SelectedWebApi.InheritFrom;
+            //txtCustomConnectionName.Text = SelectedWebApi.CustomConnectionName;
+            OutputPath.Text = this.SelectedWebApi.OutputPath;
+            //chkIsDefault.Checked = SelectedWebApi.IsDefault;
             txtNamespaces.Lines = DataType.AdditionalNamespaces.ToArray();
             UpdateDataSource();
         }

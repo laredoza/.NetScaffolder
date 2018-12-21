@@ -42,12 +42,12 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.WebApiServiceDa
         public WebApiServiceDataType()
             : base("WebApi.xml")
         {
-            this.ApplicationServiceDatas = new List<ApplicationServiceData>();
-            this.MissingApplicationServices = new List<ApplicationServiceDataError>();
+            this.WebApiDataList = new List<WebApiServiceData>();
+            this.MissingWebApiList = new List<WebApiServiceDataError>();
             this.LanguageOutputDetails.Add(new LanguageOutputDetails { LanguageOutput = new Guid("1BC1B0C4-1E41-9146-82CF-599181CE4410"), OutputGenerator = new Guid("1BC1B0C4-1E41-9146-82CF-599181CE4410") });
             this.LanguageOutputDetails[0].Templates.Add("ContextGenerator.ttInclude");
             this.LanguageOutputDetails[0].Templates.Add("ContextCoreTemplate.ttInclude");
-            //this.AdditionalNamespaces.Add("RepositoryEFDotnet.ApplicationServiceDatas.EFCore.Base");
+            //this.AdditionalNamespaces.Add("RepositoryEFDotnet.WebApiDataList.EFCore.Base");
             //this.AdditionalNamespaces.Add("RepositoryEFDotnet.Core.Base");
             //this.LanguageOutputDetails.Add(new LanguageOutputDetails { LanguageOutput = new Guid("1BC1B0C4-1E41-9146-82CF-599181CE4411"), OutputGenerator = new Guid("1BC1B0C4-1E41-9146-82CF-599181CE4410") });
             //this.LanguageOutputDetails[1].Templates.Add("File3.tt");
@@ -60,11 +60,14 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.WebApiServiceDa
         #region Public Properties
 
         /// <summary>
-        ///     Gets the Application Services.
+        /// Gets the web api data list.
         /// </summary>
-        public List<ApplicationServiceData> ApplicationServiceDatas { get; private set; }
+        public List<WebApiServiceData> WebApiDataList { get; private set; }
 
-        public List<ApplicationServiceDataError> MissingApplicationServices { get; set; }
+        /// <summary>
+        /// Gets or sets the missing web api list.
+        /// </summary>
+        public List<WebApiServiceDataError> MissingWebApiList { get; set; }
 
         #endregion
 
@@ -89,8 +92,8 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.WebApiServiceDa
 
             if (File.Exists(filePath))
             {
-                var dt = ObjectXMLSerializer<ApplicationServiceDataType>.Load(filePath);
-                this.ApplicationServiceDatas = dt.ApplicationServiceData;
+                var dt = ObjectXMLSerializer<WebApiServiceDataType>.Load(filePath);
+                this.WebApiDataList = dt.WebApiDataList;
 
                 this.AdditionalNamespaces.Clear();
                 this.AdditionalNamespaces.AddRange(dt.AdditionalNamespaces);
@@ -107,12 +110,12 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.WebApiServiceDa
         {
             var parent = new Hierarchy { Id = new Guid("1BC1B0C4-1E41-9146-82CF-599181CE4431"), Name = "WebApi" };
 
-            if (this.ApplicationServiceDatas.Any())
+            if (this.WebApiDataList.Any())
             {
-                foreach (var context in this.ApplicationServiceDatas.Where(o => o != null))
+                foreach (var webApi in this.WebApiDataList.Where(o => o != null))
                 {
                     parent.Children.Add(
-                        new Hierarchy { ParentId = parent.Id, Id = context.Id, Name = context.ApplicationServiceName });
+                        new Hierarchy { ParentId = parent.Id, Id = webApi.Id, Name = webApi.WebApiName });
                 }
             }
 
@@ -170,22 +173,22 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.WebApiServiceDa
         public override List<Validation> Validate()
         {
             this.ValidationResult = new List<Validation>();
-            this.MissingApplicationServices.Clear();
+            this.MissingWebApiList.Clear();
 
-            //foreach (var applicationServiceData in this.ApplicationServiceDatas)
+            //foreach (var applicationServiceData in this.WebApiDataList)
             //{
             //    foreach (Table model in applicationServiceData.Models)
             //    {
             //        if (!this.DomainDefinition.Tables.Exists(t => t.TableName == model.TableName))
             //        {
-            //            this.ValidationResult.Add(new Validation(ValidationType.ContextMissingModels, $"The {applicationServiceData.ContextName} Context is missing {model.TableName} Model"));
-            //            this.MissingApplicationServices.Add(new ApplicationServiceDataError { TableName = model.TableName, ApplicationServiceData = applicationServiceData });
+            //            this.ValidationResult.Add(new Validation(ValidationType.ContextMissingModels, $"The {applicationServiceData.WebApiName} Context is missing {model.TableName} Model"));
+            //            this.MissingWebApiList.Add(new ApplicationServiceDataError { TableName = model.TableName, ApplicationServiceData = applicationServiceData });
             //        }
             //    }
 
-            //    if (string.IsNullOrEmpty(applicationServiceData.ContextName))
+            //    if (string.IsNullOrEmpty(applicationServiceData.WebApiName))
             //    {
-            //        this.ValidationResult.Add(new Validation(ValidationType.ContextNameEmpty, $"ApplicationServiceDatas must have a name"));
+            //        this.ValidationResult.Add(new Validation(ValidationType.ContextNameEmpty, $"WebApiDataList must have a name"));
             //    }
 
             //}
@@ -195,13 +198,13 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.WebApiServiceDa
             //    this.ValidationResult.Add(new Validation(ValidationType.DataTypeLanguageMissing, "A Datatype must have at least one LanguageOption"));
             //}
 
-            //if (this.ApplicationServiceDatas.Any() && !this.ApplicationServiceDatas.Any(o => o.IsDefault))
+            //if (this.WebApiDataList.Any() && !this.WebApiDataList.Any(o => o.IsDefault))
             //{
             //    this.ValidationResult.Add(new Validation(ValidationType.ContextIsDefaultNotSet, "Please set the default context"));
             //}
 
             //todo: Add back
-            //if (this.ApplicationServiceDatas.Count(o => o.IsDefault) > 1)
+            //if (this.WebApiDataList.Count(o => o.IsDefault) > 1)
             //{
             //    this.ValidationResult.Add(new Validation(ValidationType.ContextDuplicateIsDefaultConfig, "There is already a context set as default"));
             //}

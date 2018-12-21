@@ -40,11 +40,11 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.WebApiServiceDa
         {
             this.exludedRelationships = new List<Relationship>();
             this.Models = new List<Table>();
-            this.OutputFolder = "Context";
-            this.ContextName = "NewContext";
+            this.OutputFolder = "Controllers";
+            this.WebApiName = "NewWebApi";
             this.CustomConnectionName = string.Empty;
-            this.Namespace = "Context";
-            this.InheritFrom = string.Empty;
+            this.Namespace = "Controllers";
+            this.InheritFrom = "BaseController";
             this.Id = Guid.NewGuid();
             this.OutputPath = string.Empty;
             this.IsDefault = false;
@@ -54,10 +54,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.WebApiServiceDa
 
         #region Public Properties
 
-        /// <summary>
-        ///     Gets or sets the context name.
-        /// </summary>
-        public string ContextName { get; set; }
+        public string WebApiName { get; set; }
 
         /// <summary>
         ///     Gets or sets the custom connection name.
@@ -94,7 +91,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.WebApiServiceDa
         /// <summary>
         ///     Gets or sets the inherit from.
         /// </summary>
-        public string InheritFrom { get; set; } = "BaseContext";
+        public string InheritFrom { get; set; } = "BaseWebApi";
 
         /// <summary>
         ///     Gets the models.

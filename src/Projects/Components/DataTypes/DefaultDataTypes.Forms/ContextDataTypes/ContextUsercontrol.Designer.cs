@@ -73,7 +73,7 @@
             this.Namespace.TabIndex = 51;
             this.Namespace.Text = "Context";
             // 
-            // ContextName
+            // WebApiName
             // 
             this.ContextName.Location = new System.Drawing.Point(151, 19);
             this.ContextName.Name = "ContextName";
