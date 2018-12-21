@@ -120,6 +120,21 @@
                       <Children />
                       <Enabled>true</Enabled>
                       <HierarchyType>Item</HierarchyType>
+                      <Id>f41c4006-d9d1-499b-80be-bbbbc4cb0001</Id>
+                      <Name>Default Application Service ( C# )</Name>
+                      <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
+                      <Selected>false</Selected>
+                      <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4420</DataType>
+                      <DefaultSettings />
+                      <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
+                      <LanguageOutputId>1bc1b0c4-1e41-9146-82cf-599181ce4410</LanguageOutputId>
+                      <TemplatePath>ApplicationService.T4</TemplatePath>
+                      <Version>1</Version>
+                    </Template>
+                    <Template>
+                      <Children />
+                      <Enabled>true</Enabled>
+                      <HierarchyType>Item</HierarchyType>
                       <Id>99d48be6-6570-465d-bc29-0793ea47233f</Id>
                       <Name>Default Context ( C# )</Name>
                       <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
@@ -135,75 +150,15 @@
                       <Children />
                       <Enabled>true</Enabled>
                       <HierarchyType>Item</HierarchyType>
-                      <Id>07bc3131-eb4d-490b-8b5f-a68a657ef688</Id>
-                      <Name>Default Mapping ( C# )</Name>
+                      <Id>a832889d-7f9a-42fa-ad6b-38d184828dba</Id>
+                      <Name>Default Dto ( C# )</Name>
                       <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
                       <Selected>false</Selected>
-                      <DataType>361ac82c-8f2a-4d7c-b455-ae5effba9d4a</DataType>
+                      <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4490</DataType>
                       <DefaultSettings />
                       <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
                       <LanguageOutputId>1bc1b0c4-1e41-9146-82cf-599181ce4410</LanguageOutputId>
-                      <TemplatePath>MappingGenerator.ttInclude</TemplatePath>
-                      <Version>1</Version>
-                    </Template>
-                    <Template>
-                      <Children />
-                      <Enabled>true</Enabled>
-                      <HierarchyType>Item</HierarchyType>
-                      <Id>1bc1b0c4-1e41-9146-82cf-599181ce4440</Id>
-                      <Name>Default Entity ( C# )</Name>
-                      <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
-                      <Selected>false</Selected>
-                      <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4440</DataType>
-                      <DefaultSettings />
-                      <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
-                      <LanguageOutputId>1bc1b0c4-1e41-9146-82cf-599181ce4410</LanguageOutputId>
-                      <TemplatePath>EntityGenerator.ttInclude</TemplatePath>
-                      <Version>1</Version>
-                    </Template>
-                    <Template>
-                      <Children />
-                      <Enabled>true</Enabled>
-                      <HierarchyType>Item</HierarchyType>
-                      <Id>bad391c6-e8a8-45f5-b3ec-f5d57d6a6b90</Id>
-                      <Name>Default Repository Interface ( C# )</Name>
-                      <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
-                      <Selected>false</Selected>
-                      <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4451</DataType>
-                      <DefaultSettings />
-                      <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
-                      <LanguageOutputId>1bc1b0c4-1e41-9146-82cf-599181ce4410</LanguageOutputId>
-                      <TemplatePath>RepoInterfaceGenerator.ttInclude</TemplatePath>
-                      <Version>1</Version>
-                    </Template>
-                    <Template>
-                      <Children />
-                      <Enabled>true</Enabled>
-                      <HierarchyType>Item</HierarchyType>
-                      <Id>3ab0816d-5ad5-4990-a655-a14a743e416c</Id>
-                      <Name>Default Repository ( C# )</Name>
-                      <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
-                      <Selected>false</Selected>
-                      <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4450</DataType>
-                      <DefaultSettings />
-                      <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
-                      <LanguageOutputId>1bc1b0c4-1e41-9146-82cf-599181ce4410</LanguageOutputId>
-                      <TemplatePath>RepositoryGenerator.ttInclude</TemplatePath>
-                      <Version>1</Version>
-                    </Template>
-                    <Template>
-                      <Children />
-                      <Enabled>true</Enabled>
-                      <HierarchyType>Item</HierarchyType>
-                      <Id>f41c4006-d9d1-499b-80be-bbbbc4cb0001</Id>
-                      <Name>Default Application Service ( C# )</Name>
-                      <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
-                      <Selected>false</Selected>
-                      <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4420</DataType>
-                      <DefaultSettings />
-                      <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
-                      <LanguageOutputId>1bc1b0c4-1e41-9146-82cf-599181ce4410</LanguageOutputId>
-                      <TemplatePath>ApplicationService.T4</TemplatePath>
+                      <TemplatePath>DtoGenerator.ttInclude</TemplatePath>
                       <Version>1</Version>
                     </Template>
                     <Template>
@@ -225,15 +180,60 @@
                       <Children />
                       <Enabled>true</Enabled>
                       <HierarchyType>Item</HierarchyType>
-                      <Id>a832889d-7f9a-42fa-ad6b-38d184828dba</Id>
-                      <Name>Default Dto ( C# )</Name>
+                      <Id>1bc1b0c4-1e41-9146-82cf-599181ce4440</Id>
+                      <Name>Default Entity ( C# )</Name>
                       <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
                       <Selected>false</Selected>
-                      <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4490</DataType>
+                      <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4440</DataType>
                       <DefaultSettings />
                       <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
                       <LanguageOutputId>1bc1b0c4-1e41-9146-82cf-599181ce4410</LanguageOutputId>
-                      <TemplatePath>DtoGenerator.ttInclude</TemplatePath>
+                      <TemplatePath>EntityGenerator.ttInclude</TemplatePath>
+                      <Version>1</Version>
+                    </Template>
+                    <Template>
+                      <Children />
+                      <Enabled>true</Enabled>
+                      <HierarchyType>Item</HierarchyType>
+                      <Id>07bc3131-eb4d-490b-8b5f-a68a657ef688</Id>
+                      <Name>Default Mapping ( C# )</Name>
+                      <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
+                      <Selected>false</Selected>
+                      <DataType>361ac82c-8f2a-4d7c-b455-ae5effba9d4a</DataType>
+                      <DefaultSettings />
+                      <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
+                      <LanguageOutputId>1bc1b0c4-1e41-9146-82cf-599181ce4410</LanguageOutputId>
+                      <TemplatePath>MappingGenerator.ttInclude</TemplatePath>
+                      <Version>1</Version>
+                    </Template>
+                    <Template>
+                      <Children />
+                      <Enabled>true</Enabled>
+                      <HierarchyType>Item</HierarchyType>
+                      <Id>3ab0816d-5ad5-4990-a655-a14a743e416c</Id>
+                      <Name>Default Repository ( C# )</Name>
+                      <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
+                      <Selected>false</Selected>
+                      <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4450</DataType>
+                      <DefaultSettings />
+                      <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
+                      <LanguageOutputId>1bc1b0c4-1e41-9146-82cf-599181ce4410</LanguageOutputId>
+                      <TemplatePath>RepositoryGenerator.ttInclude</TemplatePath>
+                      <Version>1</Version>
+                    </Template>
+                    <Template>
+                      <Children />
+                      <Enabled>true</Enabled>
+                      <HierarchyType>Item</HierarchyType>
+                      <Id>bad391c6-e8a8-45f5-b3ec-f5d57d6a6b90</Id>
+                      <Name>Default Repository Interface ( C# )</Name>
+                      <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
+                      <Selected>false</Selected>
+                      <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4451</DataType>
+                      <DefaultSettings />
+                      <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
+                      <LanguageOutputId>1bc1b0c4-1e41-9146-82cf-599181ce4410</LanguageOutputId>
+                      <TemplatePath>RepoInterfaceGenerator.ttInclude</TemplatePath>
                       <Version>1</Version>
                     </Template>
                     <Template>
@@ -264,6 +264,21 @@
                       <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
                       <LanguageOutputId>1bc1b0c4-1e41-9146-82cf-599181ce4410</LanguageOutputId>
                       <TemplatePath>BaseUnitTestGenerator.ttInclude</TemplatePath>
+                      <Version>1</Version>
+                    </Template>
+                    <Template>
+                      <Children />
+                      <Enabled>true</Enabled>
+                      <HierarchyType>Item</HierarchyType>
+                      <Id>c034d2c5-d632-4fa6-b7a8-8af5f8c3b7ed</Id>
+                      <Name>Default WebApi</Name>
+                      <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
+                      <Selected>false</Selected>
+                      <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4431</DataType>
+                      <DefaultSettings />
+                      <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
+                      <LanguageOutputId>1bc1b0c4-1e41-9146-82cf-599181ce4410</LanguageOutputId>
+                      <TemplatePath>ContextGenerator.ttInclude</TemplatePath>
                       <Version>1</Version>
                     </Template>
                   </Templates>
@@ -640,6 +655,36 @@
           <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
           <Selected>false</Selected>
           <DataType>ab2445e3-5f8d-4bec-addc-0d1430e15ca1</DataType>
+          <DefaultSettings />
+          <GeneratorTypeId>00000000-0000-0000-0000-000000000000</GeneratorTypeId>
+          <LanguageOutputId>00000000-0000-0000-0000-000000000000</LanguageOutputId>
+          <Version>1</Version>
+        </Hierarchy>
+        <Hierarchy xsi:type="Template">
+          <Children>
+            <Hierarchy xsi:type="Template">
+              <Children />
+              <Enabled>true</Enabled>
+              <HierarchyType>Item</HierarchyType>
+              <Id>c034d2c5-d632-4fa6-b7a8-8af5f8c3b7ed</Id>
+              <Name>Default WebApi</Name>
+              <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
+              <Selected>false</Selected>
+              <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4431</DataType>
+              <DefaultSettings />
+              <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
+              <LanguageOutputId>1bc1b0c4-1e41-9146-82cf-599181ce4410</LanguageOutputId>
+              <TemplatePath>ContextGenerator.ttInclude</TemplatePath>
+              <Version>1</Version>
+            </Hierarchy>
+          </Children>
+          <Enabled>true</Enabled>
+          <HierarchyType>Group</HierarchyType>
+          <Id>1bc1b0c4-1e41-9146-82cf-599181ce4431</Id>
+          <Name>WebApi</Name>
+          <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
+          <Selected>false</Selected>
+          <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4431</DataType>
           <DefaultSettings />
           <GeneratorTypeId>00000000-0000-0000-0000-000000000000</GeneratorTypeId>
           <LanguageOutputId>00000000-0000-0000-0000-000000000000</LanguageOutputId>

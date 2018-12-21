@@ -114,6 +114,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Packages
                 if (dataSource != value)
                 {
                     dataSource = value;
+                    this.DataSource.Templates = this.DataSource.Templates.OrderBy(o => o.Name).ToList();
                     UpdateDataSource();
                 }
             }

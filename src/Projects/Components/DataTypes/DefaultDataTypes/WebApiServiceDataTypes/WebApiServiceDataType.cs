@@ -4,7 +4,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataTypes
+namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.WebApiServiceDataTypes
 {
     #region Usings
 
@@ -16,6 +16,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
 
     using DotNetScaffolder.Components.Common.Contract;
     using DotNetScaffolder.Components.Common.MetaData;
+    using DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ApplicationServiceDataTypes;
     using DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Base;
     using DotNetScaffolder.Core.Common.Serializer;
     using DotNetScaffolder.Core.Common.Validation;
@@ -26,23 +27,23 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
     #endregion
 
     /// <summary>
-    ///     The context data type.
+    ///     The WebApi data type.
     /// </summary>
     [Export(typeof(IDataType))]
-    [ExportMetadata("NameMetaData", "Context")]
-    [ExportMetadata("ValueMetaData", "1BC1B0C4-1E41-9146-82CF-599181CE4430")]
-    public class ContextDataType : BaseDataType
+    [ExportMetadata("NameMetaData", "WebApi")]
+    [ExportMetadata("ValueMetaData", "1BC1B0C4-1E41-9146-82CF-599181CE4431")]
+    public class WebApiServiceDataType : BaseDataType
     {
         #region Constructors and Destructors
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ContextDataType" /> class.
+        ///     Initializes a new instance of the <see cref="WebApiServiceDataType" /> class.
         /// </summary>
-        public ContextDataType()
-            : base("Context.xml")
+        public WebApiServiceDataType()
+            : base("WebApi.xml")
         {
-            this.Contexts = new List<ContextData>();
-            this.MissingTables = new List<ContextDataError>();
+            this.ApplicationServiceDatas = new List<ApplicationServiceData>();
+            this.MissingApplicationServices = new List<ApplicationServiceDataError>();
             this.LanguageOutputDetails.Add(new LanguageOutputDetails { LanguageOutput = new Guid("1BC1B0C4-1E41-9146-82CF-599181CE4410"), OutputGenerator = new Guid("1BC1B0C4-1E41-9146-82CF-599181CE4410") });
             this.LanguageOutputDetails[0].Templates.Add("ContextGenerator.ttInclude");
             this.LanguageOutputDetails[0].Templates.Add("ContextCoreTemplate.ttInclude");
@@ -59,11 +60,11 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
         #region Public Properties
 
         /// <summary>
-        ///     Gets the contexts.
+        ///     Gets the Application Services.
         /// </summary>
-        public List<ContextData> Contexts { get; private set; }
+        public List<ApplicationServiceData> ApplicationServiceDatas { get; private set; }
 
-        public List<ContextDataError> MissingTables { get; set; }
+        public List<ApplicationServiceDataError> MissingApplicationServices { get; set; }
 
         #endregion
 
@@ -88,8 +89,8 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
 
             if (File.Exists(filePath))
             {
-                var dt = ObjectXMLSerializer<ContextDataType>.Load(filePath);
-                this.Contexts = dt.Contexts;
+                var dt = ObjectXMLSerializer<ApplicationServiceDataType>.Load(filePath);
+                this.ApplicationServiceDatas = dt.ApplicationServiceData;
 
                 this.AdditionalNamespaces.Clear();
                 this.AdditionalNamespaces.AddRange(dt.AdditionalNamespaces);
@@ -104,14 +105,14 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
         /// </returns>
         public override Hierarchy ReturnNavigation()
         {
-            var parent = new Hierarchy { Id = new Guid("1BC1B0C4-1E41-9146-82CF-599181CE4430"), Name = "Context" };
+            var parent = new Hierarchy { Id = new Guid("1BC1B0C4-1E41-9146-82CF-599181CE4431"), Name = "WebApi" };
 
-            if (this.Contexts.Any())
+            if (this.ApplicationServiceDatas.Any())
             {
-                foreach (var context in this.Contexts.Where(o => o != null))
+                foreach (var context in this.ApplicationServiceDatas.Where(o => o != null))
                 {
                     parent.Children.Add(
-                        new Hierarchy { ParentId = parent.Id, Id = context.Id, Name = context.ContextName });
+                        new Hierarchy { ParentId = parent.Id, Id = context.Id, Name = context.ApplicationServiceName });
                 }
             }
 
@@ -137,7 +138,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
             }
 
             var filePath = Path.Combine(parameters["basePath"], this.FileName);
-            ObjectXMLSerializer<ContextDataType>.Save(this, filePath);
+            ObjectXMLSerializer<WebApiServiceDataType>.Save(this, filePath);
             return true;
         }
 
@@ -169,40 +170,41 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
         public override List<Validation> Validate()
         {
             this.ValidationResult = new List<Validation>();
-            this.MissingTables.Clear();
+            this.MissingApplicationServices.Clear();
 
-            foreach (var contextData in this.Contexts)
-            {
-                foreach (Table model in contextData.Models)
-                {
-                    if (!this.DomainDefinition.Tables.Exists(t => t.TableName == model.TableName))
-                    {
-                        this.ValidationResult.Add(new Validation(ValidationType.ContextMissingModels, $"The {contextData.ContextName} Context is missing {model.TableName} Model"));
-                        this.MissingTables.Add(new ContextDataError { TableName = model.TableName, ContextData = contextData });
-                    }
-                }
+            //foreach (var applicationServiceData in this.ApplicationServiceDatas)
+            //{
+            //    foreach (Table model in applicationServiceData.Models)
+            //    {
+            //        if (!this.DomainDefinition.Tables.Exists(t => t.TableName == model.TableName))
+            //        {
+            //            this.ValidationResult.Add(new Validation(ValidationType.ContextMissingModels, $"The {applicationServiceData.ContextName} Context is missing {model.TableName} Model"));
+            //            this.MissingApplicationServices.Add(new ApplicationServiceDataError { TableName = model.TableName, ApplicationServiceData = applicationServiceData });
+            //        }
+            //    }
 
-                if (string.IsNullOrEmpty(contextData.ContextName))
-                {
-                    this.ValidationResult.Add(new Validation(ValidationType.ContextNameEmpty, $"ApplicationServiceDatas must have a name"));
-                }
+            //    if (string.IsNullOrEmpty(applicationServiceData.ContextName))
+            //    {
+            //        this.ValidationResult.Add(new Validation(ValidationType.ContextNameEmpty, $"ApplicationServiceDatas must have a name"));
+            //    }
 
-            }
+            //}
 
-            if (this.LanguageOutputDetails.Count == 0)
-            {
-                this.ValidationResult.Add(new Validation(ValidationType.DataTypeLanguageMissing, "A Datatype must have at least one LanguageOption"));
-            }
+            //if (this.LanguageOutputDetails.Count == 0)
+            //{
+            //    this.ValidationResult.Add(new Validation(ValidationType.DataTypeLanguageMissing, "A Datatype must have at least one LanguageOption"));
+            //}
 
-            if (this.Contexts.Any() && !this.Contexts.Any(o => o.IsDefault))
-            {
-                this.ValidationResult.Add(new Validation(ValidationType.ContextIsDefaultNotSet, "Please set the default context"));
-            }
+            //if (this.ApplicationServiceDatas.Any() && !this.ApplicationServiceDatas.Any(o => o.IsDefault))
+            //{
+            //    this.ValidationResult.Add(new Validation(ValidationType.ContextIsDefaultNotSet, "Please set the default context"));
+            //}
 
-            if (this.Contexts.Count(o => o.IsDefault) > 1)
-            {
-                this.ValidationResult.Add(new Validation(ValidationType.ContextDuplicateIsDefaultConfig, "There is already a context set as default"));
-            }
+            //todo: Add back
+            //if (this.ApplicationServiceDatas.Count(o => o.IsDefault) > 1)
+            //{
+            //    this.ValidationResult.Add(new Validation(ValidationType.ContextDuplicateIsDefaultConfig, "There is already a context set as default"));
+            //}
 
             return this.ValidationResult;
         }

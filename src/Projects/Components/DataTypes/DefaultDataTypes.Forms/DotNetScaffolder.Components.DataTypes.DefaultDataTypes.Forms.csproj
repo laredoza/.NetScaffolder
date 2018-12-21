@@ -49,6 +49,12 @@
     <Compile Include="ApplicationServiceDataTypes\ApplicationServiceUserControl.Designer.cs">
       <DependentUpon>ApplicationServiceUserControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="WebApiServiceDataTypes\WebApiServiceUsercontrol.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WebApiServiceDataTypes\WebApiServiceUsercontrol.Designer.cs">
+      <DependentUpon>WebApiServiceUsercontrol.cs</DependentUpon>
+    </Compile>
     <Compile Include="ContextDataTypes\ContextUsercontrol.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -114,6 +120,9 @@
   <ItemGroup>
     <EmbeddedResource Include="ApplicationServiceDataTypes\ApplicationServiceUserControl.resx">
       <DependentUpon>ApplicationServiceUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WebApiServiceDataTypes\WebApiServiceUsercontrol.resx">
+      <DependentUpon>WebApiServiceUsercontrol.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ContextDataTypes\ContextUserControl.resx">
       <DependentUpon>ContextUsercontrol.cs</DependentUpon>

@@ -77,19 +77,21 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetScaffolder.Repository
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebApi", "WebApi", "{7C44558F-8292-4450-8DFC-8A6FFD8199BB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepositoryEFDotnet.IdentityServer", "Services\WebApi\IdentityServer\RepositoryEFDotnet.IdentityServer.csproj", "{9ADB4673-333A-4400-8806-B4093E10444C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RepositoryEFDotnet.IdentityServer", "Services\WebApi\IdentityServer\RepositoryEFDotnet.IdentityServer.csproj", "{9ADB4673-333A-4400-8806-B4093E10444C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5. Tests", "5. Tests", "{E159F450-4D74-4605-B58F-C3471DF32DFE}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Authorisation", "Authorisation", "{43B583FA-1732-4B38-B6B6-F41B38989F77}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api", "Test\Authorisation\Api\Api.csproj", "{89A39C2E-10E5-4F5B-B375-40B323BAAD14}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api", "Test\Authorisation\Api\Api.csproj", "{89A39C2E-10E5-4F5B-B375-40B323BAAD14}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client", "Test\Authorisation\Client\Client.csproj", "{9D196E9D-C2CA-41FF-A741-4CB07C859DD4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Client", "Test\Authorisation\Client\Client.csproj", "{9D196E9D-C2CA-41FF-A741-4CB07C859DD4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Identity", "Identity", "{FB6B7BDD-A1A9-495E-B320-B9E7DB44F629}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVCClient", "Test\Authorisation\MVCClient\MVCClient.csproj", "{3ACEE351-D423-460E-BF17-9C68D57CC393}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MVCClient", "Test\Authorisation\MVCClient\MVCClient.csproj", "{3ACEE351-D423-460E-BF17-9C68D57CC393}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepositoryEFDotnet.Services.WebApi.Security", "Services\WebApi\Security\RepositoryEFDotnet.Services.WebApi.Security.csproj", "{C2144D8E-7EB6-4B0B-BBE0-BEAE632FFDBA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -201,6 +203,10 @@ Global
 		{3ACEE351-D423-460E-BF17-9C68D57CC393}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3ACEE351-D423-460E-BF17-9C68D57CC393}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3ACEE351-D423-460E-BF17-9C68D57CC393}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2144D8E-7EB6-4B0B-BBE0-BEAE632FFDBA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2144D8E-7EB6-4B0B-BBE0-BEAE632FFDBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2144D8E-7EB6-4B0B-BBE0-BEAE632FFDBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2144D8E-7EB6-4B0B-BBE0-BEAE632FFDBA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -245,6 +251,7 @@ Global
 		{9D196E9D-C2CA-41FF-A741-4CB07C859DD4} = {43B583FA-1732-4B38-B6B6-F41B38989F77}
 		{FB6B7BDD-A1A9-495E-B320-B9E7DB44F629} = {4F0545EB-413E-4D0C-894C-1DEEB0B22132}
 		{3ACEE351-D423-460E-BF17-9C68D57CC393} = {43B583FA-1732-4B38-B6B6-F41B38989F77}
+		{C2144D8E-7EB6-4B0B-BBE0-BEAE632FFDBA} = {7C44558F-8292-4450-8DFC-8A6FFD8199BB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BAAA9DC0-A104-423F-8507-710C11070DF0}
