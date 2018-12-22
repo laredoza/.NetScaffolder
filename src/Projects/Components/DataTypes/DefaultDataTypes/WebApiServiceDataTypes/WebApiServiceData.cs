@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ContextData.cs" company="DotnetScaffolder">
+// <copyright file="WebApiServiceData.cs" company="DotnetScaffolder">
 //   MIT
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
@@ -10,11 +10,9 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.WebApiServiceDa
 
     using System;
     using System.Collections.Generic;
-    using System.Linq;
     using System.Xml.Serialization;
 
     using DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ApplicationServiceDataTypes;
-    using DotNetScaffolder.Mapping.MetaData.Model;
 
     #endregion
 
@@ -23,15 +21,6 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.WebApiServiceDa
     /// </summary>
     public class WebApiServiceData
     {
-        #region Fields
-
-        /// <summary>
-        ///     The exluded relationships.
-        /// </summary>
-        //private readonly List<Relationship> exludedRelationships;
-
-        #endregion
-
         #region Constructors and Destructors
 
         /// <summary>
@@ -39,7 +28,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.WebApiServiceDa
         /// </summary>
         public WebApiServiceData()
         {
-            //this.exludedRelationships = new List<Relationship>();
+            // this.exludedRelationships = new List<Relationship>();
             this.Models = new List<ApplicationServiceData>();
             this.OutputFolder = "Controllers";
             this.WebApiName = "NewWebApi";
@@ -55,36 +44,9 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.WebApiServiceDa
         #region Public Properties
 
         /// <summary>
-        /// Gets or sets the web api name.
-        /// </summary>
-        public string WebApiName { get; set; }
-
-        /// <summary>
         ///     Gets or sets the custom connection name.
         /// </summary>
         public string CustomConnectionName { get; set; }
-
-        //public List<Relationship> ExcludedRelationships(List<Table> models)
-        //{
-        //    if (!this.exludedRelationships.Any())
-        //    {
-        //        foreach (var model in models)
-        //        {
-        //            foreach (var rel in model.Relationships.Where(o => o.Render))
-        //            {
-        //                if (!this.exludedRelationships.Any(
-        //                        o => o.SchemaName == rel.SchemaName && o.ReferencedTableName == rel.ReferencedTableName)
-        //                    && !this.Models.Any(
-        //                        o => o.SchemaName == rel.SchemaName && o.ApplicationServiceName == rel.ReferencedTableName))
-        //                {
-        //                    this.exludedRelationships.Add(rel);
-        //                }
-        //            }
-        //        }
-        //    }
-
-        //    return this.exludedRelationships;
-        //}
 
         /// <summary>
         ///     Gets or sets the id.
@@ -133,28 +95,14 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.WebApiServiceDa
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the web api name.
+        /// </summary>
+        public string WebApiName { get; set; }
+
         #endregion
 
         #region Public Methods And Operators
-
-        /// <summary>
-        /// The has model.
-        /// </summary>
-        /// <param name="rel">
-        /// The rel.
-        /// </param>
-        /// <returns>
-        /// The <see cref="bool"/>.
-        /// </returns>
-        //public bool HasModel(Relationship rel)
-        //{
-        //    if (this.Models == null || !this.Models.Any())
-        //    {
-        //        return false;
-        //    }
-
-        //    return this.Models.Any(o => o.SchemaName == rel.SchemaName && o.ApplicationServiceName == rel.ReferencedTableName);
-        //}
 
         /// <summary>
         /// The transform fullnamespace.

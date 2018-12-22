@@ -21,7 +21,6 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.WebApiServiceDa
     using DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Base;
     using DotNetScaffolder.Core.Common.Serializer;
     using DotNetScaffolder.Core.Common.Validation;
-    using DotNetScaffolder.Mapping.MetaData.Model;
 
     using FormControls.TreeView;
 
@@ -47,10 +46,10 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.WebApiServiceDa
             this.MissingApplicationList = new List<ApplicationServiceDataError>();
             this.LanguageOutputDetails.Add(
                 new LanguageOutputDetails
-                {
-                    LanguageOutput = new Guid("1BC1B0C4-1E41-9146-82CF-599181CE4410"),
-                    OutputGenerator = new Guid("1BC1B0C4-1E41-9146-82CF-599181CE4410")
-                });
+                    {
+                        LanguageOutput = new Guid("1BC1B0C4-1E41-9146-82CF-599181CE4410"),
+                        OutputGenerator = new Guid("1BC1B0C4-1E41-9146-82CF-599181CE4410")
+                    });
             this.LanguageOutputDetails[0].Templates.Add("ContextGenerator.ttInclude");
             this.LanguageOutputDetails[0].Templates.Add("ContextCoreTemplate.ttInclude");
 
@@ -66,20 +65,20 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.WebApiServiceDa
         #region Public Properties
 
         /// <summary>
-        /// Gets or sets the missing web api list.
+        ///     Gets or sets the application service data type.
+        /// </summary>
+        [XmlIgnore]
+        public ApplicationServiceDataType ApplicationServiceDataType { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the missing web api list.
         /// </summary>
         public List<ApplicationServiceDataError> MissingApplicationList { get; set; }
 
         /// <summary>
-        /// Gets the web api data list.
+        ///     Gets the web api data list.
         /// </summary>
         public List<WebApiServiceData> WebApiDataList { get; private set; }
-
-        /// <summary>
-        /// Gets or sets the application service data type.
-        /// </summary>
-        [XmlIgnore]
-        public ApplicationServiceDataType ApplicationServiceDataType { get; set; }
 
         #endregion
 
@@ -193,20 +192,32 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.WebApiServiceDa
                 {
                     if (!this.ApplicationServiceDataType.ApplicationServiceData.Exists(t => t.Id == serviceData.Id))
                     {
-                        this.ValidationResult.Add(new Validation(ValidationType.ApplicationServicesMissing, $"The {webApiServiceData.WebApiName} WebApi is missing {serviceData.ApplicationServiceName} Application Service"));
-                        this.MissingApplicationList.Add(new ApplicationServiceDataError { ApplicationServiceName = serviceData.ApplicationServiceName, ApplicationServiceData = serviceData});
+                        this.ValidationResult.Add(
+                            new Validation(
+                                ValidationType.ApplicationServicesMissing,
+                                $"The {webApiServiceData.WebApiName} WebApi is missing {serviceData.ApplicationServiceName} Application Service"));
+                        this.MissingApplicationList.Add(
+                            new ApplicationServiceDataError
+                                {
+                                    ApplicationServiceName = serviceData.ApplicationServiceName,
+                                    ApplicationServiceData = serviceData
+                                });
                     }
 
                     if (string.IsNullOrEmpty(webApiServiceData.WebApiName))
                     {
-                        this.ValidationResult.Add(new Validation(ValidationType.ContextNameEmpty, $"WebApiDataList must have a name"));
+                        this.ValidationResult.Add(
+                            new Validation(ValidationType.ContextNameEmpty, "WebApiDataList must have a name"));
                     }
                 }
             }
 
             if (this.LanguageOutputDetails.Count == 0)
             {
-                this.ValidationResult.Add(new Validation(ValidationType.DataTypeLanguageMissing, "A Datatype must have at least one LanguageOption"));
+                this.ValidationResult.Add(
+                    new Validation(
+                        ValidationType.DataTypeLanguageMissing,
+                        "A Datatype must have at least one LanguageOption"));
             }
 
             return this.ValidationResult;

@@ -218,10 +218,10 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.WebApiSer
             {
                 StringBuilder sb = new StringBuilder();
 
-                var contextDataType = this.DataType as ApplicationServiceDataType;
+                var contextDataType = this.DataType as WebApiServiceDataType;
                 bool removed = false;
 
-                foreach (var error in contextDataType.MissingTables)
+                foreach (var error in contextDataType.MissingApplicationList)
                 {
                     DialogResult result = MessageBox.Show(
                         $"Delete missing Application Service {error.ApplicationServiceName} from the WebApi {error.ApplicationServiceData.ApplicationServiceName}",
