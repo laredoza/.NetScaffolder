@@ -4,7 +4,6 @@
   <MissingApplicationList />
   <WebApiDataList>
     <WebApiServiceData>
-      <WebApiName>Product</WebApiName>
       <CustomConnectionName />
       <Id>d7cd5951-aefc-4ecd-9d7c-3462d1c8fdc9</Id>
       <InheritFrom>BaseController</InheritFrom>
@@ -51,7 +50,8 @@
       </Models>
       <Namespace>Controllers</Namespace>
       <OutputFolder>Controllers</OutputFolder>
-      <OutputPath />
+      <OutputPath>..\..\..\Services\WebApi\Default\RepositoryEFDotnet.Services.Default.csproj</OutputPath>
+      <WebApiName>Product</WebApiName>
     </WebApiServiceData>
   </WebApiDataList>
 </WebApiServiceDataType>

@@ -1,0 +1,27 @@
+﻿<#+
+    public class WebApiGenerator : BaseGenerator
+    {
+        public WebApiServiceDataType DataType{get;set;}
+        public ApplicationServiceDataType ApplicationServiceDataType{get;set;}
+        private WebApiTemplate template = new WebApiTemplate();
+
+		protected override void RunCore()
+        {
+            
+			foreach(WebApiServiceData webApiServiceData in DataType.WebApiDataList )
+			{
+				//Debugger.Break();
+                template.DataType = DataType;
+                template.CurrentWebApiServiceData = webApiServiceData;
+                template.ApplicationServiceDataType = this.ApplicationServiceDataType;
+
+                if(!string.IsNullOrEmpty(webApiServiceData.OutputPath))
+                {
+                    template.Output.Project = webApiServiceData.OutputPath;
+                }
+
+                template.RenderToFile(string.Format(@"{0}\{1}Controller.g.cs", webApiServiceData.OutputFolder, webApiServiceData.WebApiName));	
+			}
+        }
+    }
+#>

@@ -1,0 +1,33 @@
+﻿<#+
+    public class WebApiTemplate : BaseTemplate 
+    {
+        public WebApiServiceDataType DataType { get; set; }
+        public string DtoInterfaceNamespace { get; set; }
+        public WebApiServiceData CurrentWebApiServiceData{ get; set; }
+        public ApplicationServiceDataType ApplicationServiceDataType{get;set;}
+
+        public override string TransformText()
+        {
+            // Debugger.Break();
+            Header = new CopyrightHeader();
+            //Header.Filename = DataType.RepoName;
+#>
+
+<#=            Header.TransformText() #>
+
+// *******************************************************************
+//	GENERATED CODE. DOT NOT MODIFY MANUALLY AS CHANGES CAN BE LOST!!!
+//	USE A PARTIAL CLASS INSTEAD
+// *******************************************************************
+
+using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
+
+
+<#+
+            return this.GenerationEnvironment.ToString();
+	}
+            }
+#>

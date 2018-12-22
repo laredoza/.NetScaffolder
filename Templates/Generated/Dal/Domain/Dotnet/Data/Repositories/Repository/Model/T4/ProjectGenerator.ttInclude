@@ -13,6 +13,8 @@
 <#@ include file="ApplicationServiceTemplate.ttInclude" #>
 <#@ include file="RepositoryRegistrationGenerator.ttInclude" #>
 <#@ include file="ContextRegistrationGenerator.ttInclude" #>
+<#@ include file="WebApiGenerator.ttInclude" #>
+<#@ include file="WebApiTemplate.ttInclude" #>
 
 <#+
     public class ProjectGenerator : BaseProjectGenerator
@@ -54,6 +56,21 @@
 
                     applicationServiceGenerator.Run();
                 }
+
+                if (dataType is WebApiServiceDataType)
+                {
+                    //Debugger.Break();
+                    WebApiServiceDataType webApiServiceDataType = dataType as WebApiServiceDataType;
+                    var entityDataType = dataTypes.FirstOrDefault(o => o is EntityDataType) as EntityDataType;
+
+                    var applicationServiceGenerator = new WebApiGenerator {
+                            DataType = webApiServiceDataType,
+                            ApplicationServiceDataType = dataTypes.FirstOrDefault(o => o is ApplicationServiceDataType) as ApplicationServiceDataType 
+                            };
+
+                    applicationServiceGenerator.Run();
+                }
+
 
                 if(dataType is ContextDataType)
                 {				
