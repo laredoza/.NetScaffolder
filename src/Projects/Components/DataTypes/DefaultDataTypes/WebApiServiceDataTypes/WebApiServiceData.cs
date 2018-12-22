@@ -13,6 +13,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.WebApiServiceDa
     using System.Linq;
     using System.Xml.Serialization;
 
+    using DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ApplicationServiceDataTypes;
     using DotNetScaffolder.Mapping.MetaData.Model;
 
     #endregion
@@ -39,7 +40,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.WebApiServiceDa
         public WebApiServiceData()
         {
             //this.exludedRelationships = new List<Relationship>();
-            this.Models = new List<Table>();
+            this.Models = new List<ApplicationServiceData>();
             this.OutputFolder = "Controllers";
             this.WebApiName = "NewWebApi";
             this.CustomConnectionName = string.Empty;
@@ -98,7 +99,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.WebApiServiceDa
         /// <summary>
         ///     Gets the models.
         /// </summary>
-        public List<Table> Models { get; }
+        public List<ApplicationServiceData> Models { get; }
 
         /// <summary>
         ///     Gets or sets the namespace.
@@ -145,15 +146,15 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.WebApiServiceDa
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        public bool HasModel(Relationship rel)
-        {
-            if (this.Models == null || !this.Models.Any())
-            {
-                return false;
-            }
+        //public bool HasModel(Relationship rel)
+        //{
+        //    if (this.Models == null || !this.Models.Any())
+        //    {
+        //        return false;
+        //    }
 
-            return this.Models.Any(o => o.SchemaName == rel.SchemaName && o.TableName == rel.ReferencedTableName);
-        }
+        //    return this.Models.Any(o => o.SchemaName == rel.SchemaName && o.TableName == rel.ReferencedTableName);
+        //}
 
         /// <summary>
         /// The transform fullnamespace.

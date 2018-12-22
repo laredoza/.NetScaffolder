@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ContextDataType.cs" company="DotnetScaffolder">
+// <copyright file="WebApiServiceDataType.cs" company="DotnetScaffolder">
 //   MIT
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
@@ -16,11 +16,9 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.WebApiServiceDa
 
     using DotNetScaffolder.Components.Common.Contract;
     using DotNetScaffolder.Components.Common.MetaData;
-    using DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ApplicationServiceDataTypes;
     using DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Base;
     using DotNetScaffolder.Core.Common.Serializer;
     using DotNetScaffolder.Core.Common.Validation;
-    using DotNetScaffolder.Mapping.MetaData.Model;
 
     using FormControls.TreeView;
 
@@ -44,15 +42,20 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.WebApiServiceDa
         {
             this.WebApiDataList = new List<WebApiServiceData>();
             this.MissingWebApiList = new List<WebApiServiceDataError>();
-            this.LanguageOutputDetails.Add(new LanguageOutputDetails { LanguageOutput = new Guid("1BC1B0C4-1E41-9146-82CF-599181CE4410"), OutputGenerator = new Guid("1BC1B0C4-1E41-9146-82CF-599181CE4410") });
+            this.LanguageOutputDetails.Add(
+                new LanguageOutputDetails
+                    {
+                        LanguageOutput = new Guid("1BC1B0C4-1E41-9146-82CF-599181CE4410"),
+                        OutputGenerator = new Guid("1BC1B0C4-1E41-9146-82CF-599181CE4410")
+                    });
             this.LanguageOutputDetails[0].Templates.Add("ContextGenerator.ttInclude");
             this.LanguageOutputDetails[0].Templates.Add("ContextCoreTemplate.ttInclude");
-            //this.AdditionalNamespaces.Add("RepositoryEFDotnet.WebApiDataList.EFCore.Base");
-            //this.AdditionalNamespaces.Add("RepositoryEFDotnet.Core.Base");
-            //this.LanguageOutputDetails.Add(new LanguageOutputDetails { LanguageOutput = new Guid("1BC1B0C4-1E41-9146-82CF-599181CE4411"), OutputGenerator = new Guid("1BC1B0C4-1E41-9146-82CF-599181CE4410") });
-            //this.LanguageOutputDetails[1].Templates.Add("File3.tt");
-            //this.LanguageOutputDetails[1].Templates.Add("File4.tt");
 
+            // this.AdditionalNamespaces.Add("RepositoryEFDotnet.WebApiDataList.EFCore.Base");
+            // this.AdditionalNamespaces.Add("RepositoryEFDotnet.Core.Base");
+            // this.LanguageOutputDetails.Add(new LanguageOutputDetails { LanguageOutput = new Guid("1BC1B0C4-1E41-9146-82CF-599181CE4411"), OutputGenerator = new Guid("1BC1B0C4-1E41-9146-82CF-599181CE4410") });
+            // this.LanguageOutputDetails[1].Templates.Add("File3.tt");
+            // this.LanguageOutputDetails[1].Templates.Add("File4.tt");
         }
 
         #endregion
@@ -60,14 +63,14 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.WebApiServiceDa
         #region Public Properties
 
         /// <summary>
-        /// Gets the web api data list.
-        /// </summary>
-        public List<WebApiServiceData> WebApiDataList { get; private set; }
-
-        /// <summary>
         /// Gets or sets the missing web api list.
         /// </summary>
         public List<WebApiServiceDataError> MissingWebApiList { get; set; }
+
+        /// <summary>
+        ///     Gets the web api data list.
+        /// </summary>
+        public List<WebApiServiceData> WebApiDataList { get; private set; }
 
         #endregion
 
@@ -101,10 +104,10 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.WebApiServiceDa
         }
 
         /// <summary>
-        /// The return navigation.
+        ///     The return navigation.
         /// </summary>
         /// <returns>
-        /// The <see cref="Hierarchy"/>.
+        ///     The <see cref="Hierarchy" />.
         /// </returns>
         public override Hierarchy ReturnNavigation()
         {
@@ -175,40 +178,39 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.WebApiServiceDa
             this.ValidationResult = new List<Validation>();
             this.MissingWebApiList.Clear();
 
-            //foreach (var applicationServiceData in this.WebApiDataList)
-            //{
-            //    foreach (Table model in applicationServiceData.Models)
-            //    {
-            //        if (!this.DomainDefinition.Tables.Exists(t => t.TableName == model.TableName))
-            //        {
-            //            this.ValidationResult.Add(new Validation(ValidationType.ContextMissingModels, $"The {applicationServiceData.WebApiName} Context is missing {model.TableName} Model"));
-            //            this.MissingWebApiList.Add(new ApplicationServiceDataError { TableName = model.TableName, ApplicationServiceData = applicationServiceData });
-            //        }
-            //    }
+            // foreach (var applicationServiceData in this.WebApiDataList)
+            // {
+            // foreach (Table model in applicationServiceData.Models)
+            // {
+            // if (!this.DomainDefinition.Tables.Exists(t => t.TableName == model.TableName))
+            // {
+            // this.ValidationResult.Add(new Validation(ValidationType.ContextMissingModels, $"The {applicationServiceData.WebApiName} Context is missing {model.TableName} Model"));
+            // this.MissingWebApiList.Add(new ApplicationServiceDataError { TableName = model.TableName, ApplicationServiceData = applicationServiceData });
+            // }
+            // }
 
-            //    if (string.IsNullOrEmpty(applicationServiceData.WebApiName))
-            //    {
-            //        this.ValidationResult.Add(new Validation(ValidationType.ContextNameEmpty, $"WebApiDataList must have a name"));
-            //    }
+            // if (string.IsNullOrEmpty(applicationServiceData.WebApiName))
+            // {
+            // this.ValidationResult.Add(new Validation(ValidationType.ContextNameEmpty, $"WebApiDataList must have a name"));
+            // }
 
-            //}
+            // }
 
-            //if (this.LanguageOutputDetails.Count == 0)
-            //{
-            //    this.ValidationResult.Add(new Validation(ValidationType.DataTypeLanguageMissing, "A Datatype must have at least one LanguageOption"));
-            //}
+            // if (this.LanguageOutputDetails.Count == 0)
+            // {
+            // this.ValidationResult.Add(new Validation(ValidationType.DataTypeLanguageMissing, "A Datatype must have at least one LanguageOption"));
+            // }
 
-            //if (this.WebApiDataList.Any() && !this.WebApiDataList.Any(o => o.IsDefault))
-            //{
-            //    this.ValidationResult.Add(new Validation(ValidationType.ContextIsDefaultNotSet, "Please set the default context"));
-            //}
+            // if (this.WebApiDataList.Any() && !this.WebApiDataList.Any(o => o.IsDefault))
+            // {
+            // this.ValidationResult.Add(new Validation(ValidationType.ContextIsDefaultNotSet, "Please set the default context"));
+            // }
 
-            //todo: Add back
-            //if (this.WebApiDataList.Count(o => o.IsDefault) > 1)
-            //{
-            //    this.ValidationResult.Add(new Validation(ValidationType.ContextDuplicateIsDefaultConfig, "There is already a context set as default"));
-            //}
-
+            // todo: Add back
+            // if (this.WebApiDataList.Count(o => o.IsDefault) > 1)
+            // {
+            // this.ValidationResult.Add(new Validation(ValidationType.ContextDuplicateIsDefaultConfig, "There is already a context set as default"));
+            // }
             return this.ValidationResult;
         }
 
