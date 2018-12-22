@@ -136,6 +136,8 @@ namespace DotNetScaffolder.Core.Common.Validation
 
         ApplicationServiceDefaultNotSet = 27,
 
-        ApplicationServiceDuplicateIsDefaultConfig = 28
+        ApplicationServiceDuplicateIsDefaultConfig = 28,
+
+        ApplicationServicesMissing = 29,
     }
 }

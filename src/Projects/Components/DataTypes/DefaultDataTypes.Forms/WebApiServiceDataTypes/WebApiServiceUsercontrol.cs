@@ -175,6 +175,8 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.WebApiSer
             this.applicationServiceData = new ApplicationServiceDataType();
             this.applicationServiceData.Load(parameterDictionary);
 
+            (this.DataType as WebApiServiceDataType).ApplicationServiceDataType = this.applicationServiceData;
+
             if (parameterDictionary.ContainsKey("basePath"))
             {
                 this.SavePath = parameterDictionary["basePath"];
@@ -222,7 +224,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.WebApiSer
                 foreach (var error in contextDataType.MissingTables)
                 {
                     DialogResult result = MessageBox.Show(
-                        $"Delete missing Application Service {error.TableName} from the WebApi {error.ApplicationServiceData.ApplicationServiceName}",
+                        $"Delete missing Application Service {error.ApplicationServiceName} from the WebApi {error.ApplicationServiceData.ApplicationServiceName}",
                         "Missing Table",
                         MessageBoxButtons.YesNo,
                         MessageBoxIcon.Error);
@@ -230,7 +232,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.WebApiSer
                     if (result == DialogResult.Yes)
                     {
                         var model = error.ApplicationServiceData.Models.FirstOrDefault(
-                            m => m.TableName == error.TableName);
+                            m => m.TableName == error.ApplicationServiceName);
                         error.ApplicationServiceData.Models.Remove(model);
                         removed = true;
                     }

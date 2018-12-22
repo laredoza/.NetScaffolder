@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ContextDataError.cs" company="DotnetScaffolder">
+// <copyright file="ApplicationServiceDataError.cs" company="DotnetScaffolder">
 //   MIT
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
@@ -14,14 +14,14 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ApplicationServ
         #region Public Properties
 
         /// <summary>
-        ///     Gets or sets the context data.
+        /// Gets or sets the application service data.
         /// </summary>
         public ApplicationServiceData ApplicationServiceData { get; set; }
 
         /// <summary>
-        ///     Gets or sets the table name.
+        /// Gets or sets the application service name.
         /// </summary>
-        public string TableName { get; set; }
+        public string ApplicationServiceName { get; set; }
 
         #endregion
     }

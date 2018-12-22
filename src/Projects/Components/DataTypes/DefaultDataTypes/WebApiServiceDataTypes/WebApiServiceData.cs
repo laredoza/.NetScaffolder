@@ -75,7 +75,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.WebApiServiceDa
         //                if (!this.exludedRelationships.Any(
         //                        o => o.SchemaName == rel.SchemaName && o.ReferencedTableName == rel.ReferencedTableName)
         //                    && !this.Models.Any(
-        //                        o => o.SchemaName == rel.SchemaName && o.TableName == rel.ReferencedTableName))
+        //                        o => o.SchemaName == rel.SchemaName && o.ApplicationServiceName == rel.ReferencedTableName))
         //                {
         //                    this.exludedRelationships.Add(rel);
         //                }
@@ -153,7 +153,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.WebApiServiceDa
         //        return false;
         //    }
 
-        //    return this.Models.Any(o => o.SchemaName == rel.SchemaName && o.TableName == rel.ReferencedTableName);
+        //    return this.Models.Any(o => o.SchemaName == rel.SchemaName && o.ApplicationServiceName == rel.ReferencedTableName);
         //}
 
         /// <summary>

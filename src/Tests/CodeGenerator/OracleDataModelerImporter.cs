@@ -31,15 +31,15 @@ namespace DotNetScaffolder.Test
             // MetadataTableCollection data = dataSource.LoadSource(filePAth);
             // Assert.AreEqual(44, data.Tables.Count, "Nine tables were expected");
             // Assert.IsNotNull(
-            // data.Tables.First(t => t.TableName == "Application"), 
+            // data.Tables.First(t => t.ApplicationServiceName == "Application"), 
             // "The Application table does not exist");
             // Assert.AreEqual(
             // 4, 
-            // data.Tables.First(t => t.TableName == "Application").Columns.Count, 
+            // data.Tables.First(t => t.ApplicationServiceName == "Application").Columns.Count, 
             // "Application should have 5 columns");
             // Assert.AreEqual(
             // 0, 
-            // data.Tables.First(t => t.TableName == "Application").Relationships.Count, 
+            // data.Tables.First(t => t.ApplicationServiceName == "Application").Relationships.Count, 
             // "Application should have 0 Relationships");
         }
 

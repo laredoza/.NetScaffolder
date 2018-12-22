@@ -207,12 +207,12 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.Applicati
                 {
                     DialogResult result =
                         MessageBox.Show(
-                            $"Delete missing table {error.TableName} from the Application Service {error.ApplicationServiceData.ApplicationServiceName}",
+                            $"Delete missing table {error.ApplicationServiceName} from the Application Service {error.ApplicationServiceData.ApplicationServiceName}",
                             "Missing Table", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
 
                     if (result == DialogResult.Yes)
                     {
-                        var model = error.ApplicationServiceData.Models.FirstOrDefault(m => m.TableName == error.TableName);
+                        var model = error.ApplicationServiceData.Models.FirstOrDefault(m => m.TableName == error.ApplicationServiceName);
                         error.ApplicationServiceData.Models.Remove(model);
                         removed = true;
                     }

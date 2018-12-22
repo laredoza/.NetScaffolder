@@ -13,12 +13,15 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.WebApiServiceDa
     using System.ComponentModel.Composition;
     using System.IO;
     using System.Linq;
+    using System.Xml.Serialization;
 
     using DotNetScaffolder.Components.Common.Contract;
     using DotNetScaffolder.Components.Common.MetaData;
+    using DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ApplicationServiceDataTypes;
     using DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Base;
     using DotNetScaffolder.Core.Common.Serializer;
     using DotNetScaffolder.Core.Common.Validation;
+    using DotNetScaffolder.Mapping.MetaData.Model;
 
     using FormControls.TreeView;
 
@@ -41,13 +44,13 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.WebApiServiceDa
             : base("WebApi.xml")
         {
             this.WebApiDataList = new List<WebApiServiceData>();
-            this.MissingWebApiList = new List<WebApiServiceDataError>();
+            this.MissingApplicationList = new List<ApplicationServiceDataError>();
             this.LanguageOutputDetails.Add(
                 new LanguageOutputDetails
-                    {
-                        LanguageOutput = new Guid("1BC1B0C4-1E41-9146-82CF-599181CE4410"),
-                        OutputGenerator = new Guid("1BC1B0C4-1E41-9146-82CF-599181CE4410")
-                    });
+                {
+                    LanguageOutput = new Guid("1BC1B0C4-1E41-9146-82CF-599181CE4410"),
+                    OutputGenerator = new Guid("1BC1B0C4-1E41-9146-82CF-599181CE4410")
+                });
             this.LanguageOutputDetails[0].Templates.Add("ContextGenerator.ttInclude");
             this.LanguageOutputDetails[0].Templates.Add("ContextCoreTemplate.ttInclude");
 
@@ -65,12 +68,18 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.WebApiServiceDa
         /// <summary>
         /// Gets or sets the missing web api list.
         /// </summary>
-        public List<WebApiServiceDataError> MissingWebApiList { get; set; }
+        public List<ApplicationServiceDataError> MissingApplicationList { get; set; }
 
         /// <summary>
-        ///     Gets the web api data list.
+        /// Gets the web api data list.
         /// </summary>
         public List<WebApiServiceData> WebApiDataList { get; private set; }
+
+        /// <summary>
+        /// Gets or sets the application service data type.
+        /// </summary>
+        [XmlIgnore]
+        public ApplicationServiceDataType ApplicationServiceDataType { get; set; }
 
         #endregion
 
@@ -176,41 +185,30 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.WebApiServiceDa
         public override List<Validation> Validate()
         {
             this.ValidationResult = new List<Validation>();
-            this.MissingWebApiList.Clear();
+            this.MissingApplicationList.Clear();
 
-            // foreach (var applicationServiceData in this.WebApiDataList)
-            // {
-            // foreach (Table model in applicationServiceData.Models)
-            // {
-            // if (!this.DomainDefinition.Tables.Exists(t => t.TableName == model.TableName))
-            // {
-            // this.ValidationResult.Add(new Validation(ValidationType.ContextMissingModels, $"The {applicationServiceData.WebApiName} Context is missing {model.TableName} Model"));
-            // this.MissingWebApiList.Add(new ApplicationServiceDataError { TableName = model.TableName, ApplicationServiceData = applicationServiceData });
-            // }
-            // }
+            foreach (var webApiServiceData in this.WebApiDataList)
+            {
+                foreach (ApplicationServiceData serviceData in webApiServiceData.Models)
+                {
+                    if (!this.ApplicationServiceDataType.ApplicationServiceData.Exists(t => t.Id == serviceData.Id))
+                    {
+                        this.ValidationResult.Add(new Validation(ValidationType.ApplicationServicesMissing, $"The {webApiServiceData.WebApiName} WebApi is missing {serviceData.ApplicationServiceName} Application Service"));
+                        this.MissingApplicationList.Add(new ApplicationServiceDataError { ApplicationServiceName = serviceData.ApplicationServiceName, ApplicationServiceData = serviceData});
+                    }
 
-            // if (string.IsNullOrEmpty(applicationServiceData.WebApiName))
-            // {
-            // this.ValidationResult.Add(new Validation(ValidationType.ContextNameEmpty, $"WebApiDataList must have a name"));
-            // }
+                    if (string.IsNullOrEmpty(webApiServiceData.WebApiName))
+                    {
+                        this.ValidationResult.Add(new Validation(ValidationType.ContextNameEmpty, $"WebApiDataList must have a name"));
+                    }
+                }
+            }
 
-            // }
+            if (this.LanguageOutputDetails.Count == 0)
+            {
+                this.ValidationResult.Add(new Validation(ValidationType.DataTypeLanguageMissing, "A Datatype must have at least one LanguageOption"));
+            }
 
-            // if (this.LanguageOutputDetails.Count == 0)
-            // {
-            // this.ValidationResult.Add(new Validation(ValidationType.DataTypeLanguageMissing, "A Datatype must have at least one LanguageOption"));
-            // }
-
-            // if (this.WebApiDataList.Any() && !this.WebApiDataList.Any(o => o.IsDefault))
-            // {
-            // this.ValidationResult.Add(new Validation(ValidationType.ContextIsDefaultNotSet, "Please set the default context"));
-            // }
-
-            // todo: Add back
-            // if (this.WebApiDataList.Count(o => o.IsDefault) > 1)
-            // {
-            // this.ValidationResult.Add(new Validation(ValidationType.ContextDuplicateIsDefaultConfig, "There is already a context set as default"));
-            // }
             return this.ValidationResult;
         }
 

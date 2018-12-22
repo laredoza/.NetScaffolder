@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <WebApiServiceDataType xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <AdditionalNamespaces />
+  <MissingApplicationList />
   <WebApiDataList>
     <WebApiServiceData>
       <WebApiName>NewWebApi</WebApiName>
@@ -241,5 +242,4 @@
       <OutputPath />
     </WebApiServiceData>
   </WebApiDataList>
-  <MissingWebApiList />
 </WebApiServiceDataType>

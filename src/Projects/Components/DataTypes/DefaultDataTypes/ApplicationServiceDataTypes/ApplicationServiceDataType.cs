@@ -178,7 +178,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ApplicationServ
                     if (!this.DomainDefinition.Tables.Exists(t => t.TableName == model.TableName))
                     {
                         this.ValidationResult.Add(new Validation(ValidationType.ApplicationServiceMissingModels, $"The {applicationServiceData.ApplicationServiceName} Application Service is missing {model.TableName} Model"));
-                        this.MissingTables.Add(new ApplicationServiceDataError { TableName = model.TableName, ApplicationServiceData = applicationServiceData });
+                        this.MissingTables.Add(new ApplicationServiceDataError { ApplicationServiceName = model.TableName, ApplicationServiceData = applicationServiceData });
                     }
                 }
 
