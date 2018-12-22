@@ -28,7 +28,6 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.WebApiServiceDa
         /// </summary>
         public WebApiServiceData()
         {
-            // this.exludedRelationships = new List<Relationship>();
             this.Models = new List<ApplicationServiceData>();
             this.OutputFolder = "Controllers";
             this.WebApiName = "NewWebApi";
