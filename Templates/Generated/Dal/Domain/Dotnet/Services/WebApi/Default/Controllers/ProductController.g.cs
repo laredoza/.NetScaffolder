@@ -18,8 +18,12 @@
 //	USE A PARTIAL CLASS INSTEAD
 // *******************************************************************
 
+using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
+
 using RepositoryEFDotnet.Data.ApplicationService;
 using RepositoryEFDotnet.Data.Interfaces;
 
@@ -45,7 +49,52 @@ namespace RepositoryEFDotnet.Data.Controllers
             this.ProductApplicationService = productApplicationService;
         }
 
+        #region Load
 
+        /// <summary>
+        /// Load Product entities from the database using the primary key
+        /// </summary
+        /// <param name="productId">int</param>
+        /// <returns>IProduct</returns>
+        /// <param name="includes">params Expression<Func<IProduct, object>>[]</param>
+		public IProduct LoadByProductProductId(int productId, bool cache, params Expression<Func<IProduct, object>>[] includes)
+        {
+            return this.ProductRepository.LoadByProductId(productId, cache, includes);
+        }
+
+        /// <summary>
+        /// Load Product Async entities from the database using the primary key
+        /// </summary
+        /// <param name="productId">int</param>
+        /// <returns>IProduct</returns>
+        /// <param name="includes">params Expression<Func<IProduct, object>>[]</param>
+		public async Task<IProduct> LoadByProductProductIdAsync(int productId, bool cache, params Expression<Func<IProduct, object>>[] includes)
+        {
+            return await this.ProductRepository.LoadByProductIdAsync(productId, cache, includes);
+        }
+
+        /// <summary>
+        /// Load all Product entities from the database.
+        /// </summary>
+        /// <param name="includes">params Expression<Func<IProduct, object>>[]</param>
+        /// <returns>IList<IProduct></returns>
+		public IList<IProduct> ProductLoadAll(bool cache, params Expression<Func<IProduct, object>>[] includes)
+        {
+            return this.ProductRepository.LoadAll(cache, includes);
+        }
+
+        /// <summary>
+        /// Load all Product Async entities from the database.
+        /// </summary>
+        /// <param name="includes">params Expression<Func<IProduct, object>>[]</param>
+        /// <returns>IList<IProduct></returns>
+		public Task<IList<IProduct>> ProductLoadAllAsync(bool cache, params Expression<Func<IProduct, object>>[] includes)
+        {
+            return this.ProductRepository.LoadAllAsync(cache, includes);
+        }
+
+
+        #endregion
     }
 }
 
