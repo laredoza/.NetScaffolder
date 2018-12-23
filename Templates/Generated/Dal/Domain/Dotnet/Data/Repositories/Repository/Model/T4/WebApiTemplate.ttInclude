@@ -23,6 +23,9 @@
 
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
+<#+            foreach(var applicationServiceData in CurrentWebApiServiceData.Models){ #>
+using <#= applicationServiceData.TransformFullnamespaceInterface(ApplicationServiceDataType.BaseNamespace) #>;
+<#+                } #>
 using <#=             DtoInterfaceDataType.FullNamespace#>;
 <#+            foreach(var nameSpace in DataType.AdditionalNamespaces){ #>
 using <#=                nameSpace #>;
@@ -38,6 +41,34 @@ namespace <#= CurrentWebApiServiceData.TransformFullnamespace(DataType.BaseNames
 	public partial class <#= CurrentWebApiServiceData.WebApiName #>Controller <#= CurrentWebApiServiceData.TransformInheritFrom #>
 	{
 
+<#+            foreach(var applicationServiceData in CurrentWebApiServiceData.Models){ 
+string name = DataType.NamingConvention == null ? applicationServiceData.ApplicationServiceName : DataType.NamingConvention.ApplyNamingConvention(applicationServiceData.ApplicationServiceName); #>
+        /// <summary>
+        /// Gets or sets the <#= name #> ApplicationService 
+        /// </summary>
+        protected I<#= name #>ApplicationService <#= name #>ApplicationService { get; set; }
+<#+ } #>
+
+        public <#= CurrentWebApiServiceData.WebApiName  #>Controller (
+<#+            for(int n = 0; n < CurrentWebApiServiceData.Models.Count; n++)
+                   { 
+                var applicationServiceData = CurrentWebApiServiceData.Models[n];
+                    string name = DataType.NamingConvention == null ? applicationServiceData.ApplicationServiceName : DataType.NamingConvention.ApplyNamingConvention(applicationServiceData.ApplicationServiceName); #>
+                    <#+ if (n < CurrentWebApiServiceData.Models.Count - 1) {#>
+                      I<#= name #>ApplicationService <#= Char.ToLowerInvariant(name[0]) + name.Substring(1) #>ApplicationService,
+                    <#+                }  else { #>
+  I<#= name #>ApplicationService <#= Char.ToLowerInvariant(name[0]) + name.Substring(1) #>ApplicationService
+                    <#+                } #>
+<#+                } #>
+                 )
+        {
+<#+            foreach(var applicationServiceData in CurrentWebApiServiceData.Models){ #>
+<#+ 
+string name = DataType.NamingConvention == null ? applicationServiceData.ApplicationServiceName : DataType.NamingConvention.ApplyNamingConvention(applicationServiceData.ApplicationServiceName);
+#>
+            this.<#= name #>ApplicationService = <#= Char.ToLowerInvariant(name[0]) + name.Substring(1) #>ApplicationService;
+<#+ } #>
+        }
 
 
     }

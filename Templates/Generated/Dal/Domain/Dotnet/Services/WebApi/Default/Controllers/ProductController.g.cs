@@ -20,6 +20,7 @@
 
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
+using RepositoryEFDotnet.Data.ApplicationService;
 using RepositoryEFDotnet.Data.Interfaces;
 
 namespace RepositoryEFDotnet.Data.Controllers
@@ -32,6 +33,17 @@ namespace RepositoryEFDotnet.Data.Controllers
 	public partial class ProductController : BaseController
 	{
 
+        /// <summary>
+        /// Gets or sets the Product ApplicationService 
+        /// </summary>
+        protected IProductApplicationService ProductApplicationService { get; set; }
+
+        public ProductController (
+                      IProductApplicationService productApplicationService
+                                     )
+        {
+            this.ProductApplicationService = productApplicationService;
+        }
 
 
     }

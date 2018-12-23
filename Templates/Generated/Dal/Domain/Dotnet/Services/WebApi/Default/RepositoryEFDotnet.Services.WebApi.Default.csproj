@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Data\Interfaces\ApplicationService\RepositoryEFDotnet.Data.Interface.ApplicationService.csproj" />
     <ProjectReference Include="..\..\..\Data\Interfaces\Interface\RepositoryEFDotnet.Data.Interface.ModelInterfaces.csproj" />
   </ItemGroup>
 
