@@ -50,7 +50,7 @@
       </Models>
       <Namespace>Controllers</Namespace>
       <OutputFolder>Controllers</OutputFolder>
-      <OutputPath>..\..\..\Services\WebApi\Default\RepositoryEFDotnet.Services.Default.csproj</OutputPath>
+      <OutputPath>..\..\..\Services\WebApi\Default\RepositoryEFDotnet.Services.WebApi.Default.csproj</OutputPath>
       <WebApiName>Product</WebApiName>
     </WebApiServiceData>
   </WebApiDataList>

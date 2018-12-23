@@ -91,7 +91,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Identity", "Identity", "{FB
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MVCClient", "Test\Authorisation\MVCClient\MVCClient.csproj", "{3ACEE351-D423-460E-BF17-9C68D57CC393}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepositoryEFDotnet.Services.Default", "Services\WebApi\Default\RepositoryEFDotnet.Services.Default.csproj", "{049BE09B-DD33-4769-96CB-290CF135C5C9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RepositoryEFDotnet.Services.WebApi.Default", "Services\WebApi\Default\RepositoryEFDotnet.Services.WebApi.Default.csproj", "{049BE09B-DD33-4769-96CB-290CF135C5C9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

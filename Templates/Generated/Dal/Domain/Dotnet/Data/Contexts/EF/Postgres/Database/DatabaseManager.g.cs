@@ -17,8 +17,8 @@
 //	GENERATED CODE. DOT NOT MODIFY MANUALLY AS CHANGES CAN BE LOST!!!
 //	USE A PARTIAL CLASS INSTEAD
 // *******************************************************************
-using RepositoryEFDotnet.Contexts.EF.Base.Context;
 using RepositoryEFDotnet.Core.Base;
+using RepositoryEFDotnet.Contexts.EF.Base.Context;
 using Npgsql;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration;

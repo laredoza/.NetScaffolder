@@ -65,7 +65,8 @@
 
                     var applicationServiceGenerator = new WebApiGenerator {
                             DataType = webApiServiceDataType,
-                            ApplicationServiceDataType = dataTypes.FirstOrDefault(o => o is ApplicationServiceDataType) as ApplicationServiceDataType 
+                            ApplicationServiceDataType = dataTypes.FirstOrDefault(o => o is ApplicationServiceDataType) as ApplicationServiceDataType,
+                            DtoInterfaceDataType = dataTypes.FirstOrDefault(o => o is DtoInterfaceDataType) as DtoInterfaceDataType
                             };
 
                     applicationServiceGenerator.Run();

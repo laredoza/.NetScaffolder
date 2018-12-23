@@ -5,6 +5,7 @@
         public string DtoInterfaceNamespace { get; set; }
         public WebApiServiceData CurrentWebApiServiceData{ get; set; }
         public ApplicationServiceDataType ApplicationServiceDataType{get;set;}
+        public DtoInterfaceDataType DtoInterfaceDataType {get;set;}
 
         public override string TransformText()
         {
@@ -20,11 +21,27 @@
 //	USE A PARTIAL CLASS INSTEAD
 // *******************************************************************
 
-using System;
 using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using <#=             DtoInterfaceDataType.FullNamespace#>;
+<#+            foreach(var nameSpace in DataType.AdditionalNamespaces){ #>
+using <#=                nameSpace #>;
+<#+            } #>
 
+namespace <#= CurrentWebApiServiceData.TransformFullnamespace(DataType.BaseNamespace) #>
+{
+    /// <summary>
+	/// The <#= CurrentWebApiServiceData.WebApiName #> Controller
+	/// </summary>
+    [Route("api/[controller]")]
+    [ApiController]
+	public partial class <#= CurrentWebApiServiceData.WebApiName #>Controller <#= CurrentWebApiServiceData.TransformInheritFrom #>
+	{
+
+
+
+    }
+}
 
 <#+
             return this.GenerationEnvironment.ToString();

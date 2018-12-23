@@ -4,6 +4,7 @@
         public WebApiServiceDataType DataType{get;set;}
         public ApplicationServiceDataType ApplicationServiceDataType{get;set;}
         private WebApiTemplate template = new WebApiTemplate();
+        public DtoInterfaceDataType DtoInterfaceDataType {get;set;}
 
 		protected override void RunCore()
         {
@@ -14,6 +15,7 @@
                 template.DataType = DataType;
                 template.CurrentWebApiServiceData = webApiServiceData;
                 template.ApplicationServiceDataType = this.ApplicationServiceDataType;
+                template.DtoInterfaceDataType = this.DtoInterfaceDataType;
 
                 if(!string.IsNullOrEmpty(webApiServiceData.OutputPath))
                 {

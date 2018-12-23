@@ -17,8 +17,8 @@
 //	GENERATED CODE. DOT NOT MODIFY MANUALLY AS CHANGES CAN BE LOST!!!
 //	USE A PARTIAL CLASS INSTEAD
 // *******************************************************************
-using RepositoryEFDotnet.Contexts.NHib.Base.Context;
 using RepositoryEFDotnet.Core.Base;
+using RepositoryEFDotnet.Contexts.NHib.Base.Context;
 using NHibernate;
 using NHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;

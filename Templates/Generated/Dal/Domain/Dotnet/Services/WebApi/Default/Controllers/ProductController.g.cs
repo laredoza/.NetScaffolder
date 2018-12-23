@@ -18,9 +18,22 @@
 //	USE A PARTIAL CLASS INSTEAD
 // *******************************************************************
 
-using System;
 using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using RepositoryEFDotnet.Data.Interfaces;
 
+namespace RepositoryEFDotnet.Data.Controllers
+{
+    /// <summary>
+	/// The Product Controller
+	/// </summary>
+    [Route("api/[controller]")]
+    [ApiController]
+	public partial class ProductController : BaseController
+	{
+
+
+
+    }
+}
 
