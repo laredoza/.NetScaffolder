@@ -16,4 +16,8 @@
     <ProjectReference Include="..\SqlServer\RepositoryEFDotnet.Contexts.EFCore.SqlServer.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Context\" />
+  </ItemGroup>
+
 </Project>

@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ContextDataType xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <AdditionalNamespaces />
+  <AdditionalNamespaces>
+    <string>RepositoryEFDotnet.Contexts.{DriverType}.Base.Context</string>
+    <string>RepositoryEFDotnet.Core.Base</string>
+  </AdditionalNamespaces>
   <Contexts>
     <ContextData>
       <ContextName>FullContext</ContextName>

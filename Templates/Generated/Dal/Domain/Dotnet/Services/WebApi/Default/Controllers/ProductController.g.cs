@@ -1,5 +1,5 @@
 ﻿
-// <copyright file="AccountContext.g.cs" company="MIT">
+// <copyright file=".g.cs" company="MIT">
 //  Copyright (c) 2018 MIT
 // </copyright>  
 
@@ -13,31 +13,14 @@
 // IN THE SOFTWARE.
 
 
-using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System.Configuration;
-using RepositoryEFDotnet.Data.Accounts.Mappings.EFCore.MySql;
-using RepositoryEFDotnet.Data.Entity;
+// *******************************************************************
+//	GENERATED CODE. DOT NOT MODIFY MANUALLY AS CHANGES CAN BE LOST!!!
+//	USE A PARTIAL CLASS INSTEAD
+// *******************************************************************
+
 using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
 
-namespace RepositoryEFDotnet.Data.Accounts.EFCore
-{
-	public partial class MySqlAccountContext 
-	{	
-        #region Public Methods And Operators
 
-        /// <summary>
-        /// The seed.
-        /// </summary>
-        /// <param name="modelBuilder">
-        /// The model builder.
-        /// </param>
-        public void Seed(ModelBuilder modelBuilder)
-        {
-
-        }
-
-        #endregion		
-	}
-}
