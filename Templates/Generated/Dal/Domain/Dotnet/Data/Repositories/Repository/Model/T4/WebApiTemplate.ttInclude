@@ -164,6 +164,44 @@ if(model.PrimaryKeyCount > 1){ #>
 <#+ } #>
 
         #endregion
+
+        #region Search
+        <#+  foreach(var applicationServiceData in CurrentWebApiServiceData.Models){ #>
+<#+            foreach(var model in applicationServiceData.Models){ #>
+<#+ 
+string modelName = DataType.NamingConvention == null ? model.TableName : DataType.NamingConvention.ApplyNamingConvention(model.TableName);
+#>
+<#+                foreach(var col in model.Columns.Where(o => !o.IsPrimaryKey && o.DomainDataType == DomainDataType.String)){  #>
+
+        /// <summary>
+        /// Search for <#= modelName #> entities in the database by <#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>
+        /// </summary>
+        /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
+		/// <param name="caseSensitive">bool</param>
+        /// <returns><#= DataType.CollectionOption.ClassNameInterface #><I<#= modelName #>></returns>
+        [HttpGet]
+		public <#= DataType.CollectionOption.ClassNameInterface #><I<#= modelName #>> <#= modelName #>SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= DataType.TransformAsParameter(col) #>, bool caseSensitive, bool cache)
+        {
+            return this.<#= modelName #>ApplicationService.<#= modelName #>SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= DataType.TransformAsParameterName(col)  #>,caseSensitive, cache, this.<#= modelName #>SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>Includes);
+        }
+
+        /// <summary>
+        /// Search for <#= modelName #> Async entities in the database by <#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>
+        /// </summary>
+        /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
+		/// <param name="caseSensitive">bool</param>
+        /// <returns><#= DataType.CollectionOption.ClassNameInterface #><I<#= modelName #>></returns>
+		[HttpGet]
+        public async Task<<#= DataType.CollectionOption.ClassNameInterface #><I<#= modelName #>>> <#= modelName #>SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>Async(<#= DataType.TransformAsParameter(col) #>, bool caseSensitive, bool cache)
+        {
+            return await this.<#= modelName #>ApplicationService.<#= modelName #>SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>Async(<#= DataType.TransformAsParameterName(col)  #>,caseSensitive, cache, this.<#= modelName #>SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>IncludesAsync);
+        }
+
+<#+ }  #>
+<#+            } #>
+<#+ } #>
+		#endregion
+
     }
 }
 

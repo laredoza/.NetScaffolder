@@ -99,6 +99,85 @@ namespace RepositoryEFDotnet.Data.Controllers
 
 
         #endregion
+
+        #region Search
+        
+        /// <summary>
+        /// Search for Product entities in the database by ProductDescription
+        /// </summary>
+        /// <param name="productDescription">string</param>
+		/// <param name="caseSensitive">bool</param>
+        /// <returns>IList<IProduct></returns>
+        [HttpGet]
+		public IList<IProduct> ProductSearchByProductDescription(string productDescription, bool caseSensitive, bool cache)
+        {
+            return this.ProductApplicationService.ProductSearchByProductDescription(productDescription,caseSensitive, cache, this.ProductSearchByProductDescriptionIncludes);
+        }
+
+        /// <summary>
+        /// Search for Product Async entities in the database by ProductDescription
+        /// </summary>
+        /// <param name="productDescription">string</param>
+		/// <param name="caseSensitive">bool</param>
+        /// <returns>IList<IProduct></returns>
+		[HttpGet]
+        public async Task<IList<IProduct>> ProductSearchByProductDescriptionAsync(string productDescription, bool caseSensitive, bool cache)
+        {
+            return await this.ProductApplicationService.ProductSearchByProductDescriptionAsync(productDescription,caseSensitive, cache, this.ProductSearchByProductDescriptionIncludesAsync);
+        }
+
+
+        /// <summary>
+        /// Search for Product entities in the database by UnitAmount
+        /// </summary>
+        /// <param name="unitAmount">string</param>
+		/// <param name="caseSensitive">bool</param>
+        /// <returns>IList<IProduct></returns>
+        [HttpGet]
+		public IList<IProduct> ProductSearchByUnitAmount(string unitAmount, bool caseSensitive, bool cache)
+        {
+            return this.ProductApplicationService.ProductSearchByUnitAmount(unitAmount,caseSensitive, cache, this.ProductSearchByUnitAmountIncludes);
+        }
+
+        /// <summary>
+        /// Search for Product Async entities in the database by UnitAmount
+        /// </summary>
+        /// <param name="unitAmount">string</param>
+		/// <param name="caseSensitive">bool</param>
+        /// <returns>IList<IProduct></returns>
+		[HttpGet]
+        public async Task<IList<IProduct>> ProductSearchByUnitAmountAsync(string unitAmount, bool caseSensitive, bool cache)
+        {
+            return await this.ProductApplicationService.ProductSearchByUnitAmountAsync(unitAmount,caseSensitive, cache, this.ProductSearchByUnitAmountIncludesAsync);
+        }
+
+
+        /// <summary>
+        /// Search for Product entities in the database by Publisher
+        /// </summary>
+        /// <param name="publisher">string</param>
+		/// <param name="caseSensitive">bool</param>
+        /// <returns>IList<IProduct></returns>
+        [HttpGet]
+		public IList<IProduct> ProductSearchByPublisher(string publisher, bool caseSensitive, bool cache)
+        {
+            return this.ProductApplicationService.ProductSearchByPublisher(publisher,caseSensitive, cache, this.ProductSearchByPublisherIncludes);
+        }
+
+        /// <summary>
+        /// Search for Product Async entities in the database by Publisher
+        /// </summary>
+        /// <param name="publisher">string</param>
+		/// <param name="caseSensitive">bool</param>
+        /// <returns>IList<IProduct></returns>
+		[HttpGet]
+        public async Task<IList<IProduct>> ProductSearchByPublisherAsync(string publisher, bool caseSensitive, bool cache)
+        {
+            return await this.ProductApplicationService.ProductSearchByPublisherAsync(publisher,caseSensitive, cache, this.ProductSearchByPublisherIncludesAsync);
+        }
+
+		#endregion
+
     }
 }
 

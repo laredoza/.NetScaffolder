@@ -43,7 +43,7 @@ namespace <#= CurrentWebApiServiceData.TransformFullnamespace(DataType.BaseNames
 	public partial class <#= CurrentWebApiServiceData.WebApiName #>Controller 
 	{
 
-        #region configure Load
+        #region Configure Load
 <#+  foreach(var applicationServiceData in CurrentWebApiServiceData.Models){ #>
 <#+            foreach(var model in applicationServiceData.Models){ #>
 <#+ 
@@ -126,6 +126,42 @@ if(model.PrimaryKeyCount > 1){ #>
 <#+ } #>
 
         #endregion
+
+        #region Configure Search
+        <#+  foreach(var applicationServiceData in CurrentWebApiServiceData.Models){ #>
+<#+            foreach(var model in applicationServiceData.Models){ #>
+<#+ 
+string modelName = DataType.NamingConvention == null ? model.TableName : DataType.NamingConvention.ApplyNamingConvention(model.TableName);
+#>
+<#+                foreach(var col in model.Columns.Where(o => !o.IsPrimaryKey && o.DomainDataType == DomainDataType.String)){  #>
+
+        /// <summary>
+        /// Gets <#= modelName #>SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>Includes
+        /// </summary
+        public Expression<Func<I<#= modelName #>, object>>[] <#= modelName #>SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>Includes
+
+        {
+            get
+            {
+                return new Expression<Func<I<#= modelName #>, object>>[]{};
+            }
+        }
+
+        /// <summary>
+        /// Gets <#= modelName #>SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>IncludesAsync
+        /// </summary
+        public Expression<Func<I<#= modelName #>, object>>[] <#= modelName #>SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>IncludesAsync
+        {
+            get
+            {
+                return new Expression<Func<I<#= modelName #>, object>>[]{};
+            }
+        }
+
+<#+ }  #>
+<#+            } #>
+<#+ } #>
+		#endregion
     }
 }
 
