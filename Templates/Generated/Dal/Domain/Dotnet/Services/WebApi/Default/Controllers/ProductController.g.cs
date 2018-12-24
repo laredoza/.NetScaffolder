@@ -56,10 +56,10 @@ namespace RepositoryEFDotnet.Data.Controllers
         /// </summary
         /// <param name="productId">int</param>
         /// <returns>IProduct</returns>
-        /// <param name="includes">params Expression<Func<IProduct, object>>[]</param>
-		public IProduct LoadByProductProductId(int productId, bool cache, params Expression<Func<IProduct, object>>[] includes)
+        [HttpGet]
+		public IProduct LoadByProductProductId(int productId, bool cache)
         {
-            return this.ProductRepository.LoadByProductId(productId, cache, includes);
+            return this.ProductApplicationService.LoadByProductProductId(productId, cache, this.LoadByProductProductIdIncludes);
         }
 
         /// <summary>
@@ -68,29 +68,30 @@ namespace RepositoryEFDotnet.Data.Controllers
         /// <param name="productId">int</param>
         /// <returns>IProduct</returns>
         /// <param name="includes">params Expression<Func<IProduct, object>>[]</param>
-		public async Task<IProduct> LoadByProductProductIdAsync(int productId, bool cache, params Expression<Func<IProduct, object>>[] includes)
+        [HttpGet]
+		public async Task<IProduct> LoadByProductProductIdAsync(int productId, bool cache)
         {
-            return await this.ProductRepository.LoadByProductIdAsync(productId, cache, includes);
+            return await this.ProductApplicationService.LoadByProductProductIdAsync(productId, cache, this.LoadByProductProductIdAsyncIncludes);
         }
 
         /// <summary>
         /// Load all Product entities from the database.
         /// </summary>
-        /// <param name="includes">params Expression<Func<IProduct, object>>[]</param>
         /// <returns>IList<IProduct></returns>
-		public IList<IProduct> ProductLoadAll(bool cache, params Expression<Func<IProduct, object>>[] includes)
+        [HttpGet]
+		public IList<IProduct> ProductLoadAll(bool cache)
         {
-            return this.ProductRepository.LoadAll(cache, includes);
+            return this.ProductApplicationService.ProductLoadAll(cache, this.ProductLoadAllIncludes);
         }
 
         /// <summary>
         /// Load all Product Async entities from the database.
         /// </summary>
-        /// <param name="includes">params Expression<Func<IProduct, object>>[]</param>
         /// <returns>IList<IProduct></returns>
-		public Task<IList<IProduct>> ProductLoadAllAsync(bool cache, params Expression<Func<IProduct, object>>[] includes)
+        [HttpGet]
+		public async Task<IList<IProduct>> ProductLoadAllAsync(bool cache)
         {
-            return this.ProductRepository.LoadAllAsync(cache, includes);
+            return await this.ProductApplicationService.ProductLoadAllAsync(cache, this.ProductLoadAllAsyncIncludes);
         }
 
 

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
 namespace RepositoryEFDotnet.Services.WebApi.Default.Controllers
@@ -12,6 +13,17 @@ namespace RepositoryEFDotnet.Services.WebApi.Default.Controllers
         public ActionResult<IEnumerable<string>> Get()
         {
             return new string[] { "value1", "value2" };
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<string>>> GetAsync()
+        {
+            if (1 != 1)
+            {
+                return NotFound();
+            }
+
+            return Ok(new string[] { "value1", "value2" });
         }
 
         // GET api/values/5

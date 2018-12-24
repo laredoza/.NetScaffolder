@@ -87,11 +87,11 @@ if(model.PrimaryKeyCount > 1){ #>
 <#+ foreach(var col in model.Columns.Where(o => o.IsPrimaryKey)) {#>
         /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
 <#+ } #>
-        /// <param name="includes">params Expression<Func<I<#= modelName #>, object>>[]</param>
         /// <returns>I<#= modelName #></returns>
-		I<#= modelName #> Load(<#= DataType.TransformAsParameter(model.Columns.Where(o => o.IsPrimaryKey)) #>, bool cache, params Expression<Func<I<#= modelName #>, object>>[] includes)
+        [HttpGet]
+		I<#= modelName #> Load<#= modelName #>(<#= DataType.TransformAsParameter(model.Columns.Where(o => o.IsPrimaryKey)) #>, bool cache)
         {
-            return this.<#= modelName #>Repository.Load(<#= DataType.TransformAsParameterName(model.Columns.Where(o => o.IsPrimaryKey)) #>, cache, includes)
+            return this.<#= modelName #>ApplicationService.Load<#= modelName #>(<#= DataType.TransformAsParameterName(model.Columns.Where(o => o.IsPrimaryKey)) #>, cache, this.Load<#= modelName #>Includes)
         }
 
         /// <summary>
@@ -100,11 +100,11 @@ if(model.PrimaryKeyCount > 1){ #>
 <#+ foreach(var col in model.Columns.Where(o => o.IsPrimaryKey)) {#>
         /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
 <#+ } #>
-        /// <param name="includes">params Expression<Func<I<#= modelName #>, object>>[]</param>
         /// <returns>I<#= modelName #></returns>
-		Task<I<#= modelName #>> await LoadAsync(<#= DataType.TransformAsParameter(model.Columns.Where(o => o.IsPrimaryKey)) #>, bool cache, params Expression<Func<I<#= modelName #>, object>>[] includes)
+        [HttpGet]
+		Task<I<#= modelName #>> await <#= modelName #>LoadAsync(<#= DataType.TransformAsParameter(model.Columns.Where(o => o.IsPrimaryKey)) #>, bool cache)
         {
-            return async this.<#= modelName #>Repository.LoadAsync(<#= DataType.TransformAsParameterName(model.Columns.Where(o => o.IsPrimaryKey)) #>, cache, includes)
+            return async this.<#= modelName #>ApplicationService.Load<#= modelName #>Async(<#= DataType.TransformAsParameterName(model.Columns.Where(o => o.IsPrimaryKey)) #>, cache, this.LoadAsync<#= modelName #>Includes)
         }
 
 <#+ } #>
@@ -116,10 +116,10 @@ if(model.PrimaryKeyCount > 1){ #>
         /// </summary
         /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
         /// <returns>I<#= modelName #></returns>
-        /// <param name="includes">params Expression<Func<I<#= modelName #>, object>>[]</param>
-		public I<#= modelName #> LoadBy<#= modelName #><#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= DataType.TransformAsParameter(col) #>, bool cache, params Expression<Func<I<#= modelName #>, object>>[] includes)
+        [HttpGet]
+		public I<#= modelName #> LoadBy<#= modelName #><#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= DataType.TransformAsParameter(col) #>, bool cache)
         {
-            return this.<#= modelName #>Repository.LoadBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= DataType.TransformAsParameterName(col) #>, cache, includes);
+            return this.<#= modelName #>ApplicationService.LoadBy<#= modelName #><#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= DataType.TransformAsParameterName(col) #>, cache, this.LoadBy<#= modelName #><#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>Includes);
         }
 
         /// <summary>
@@ -128,30 +128,31 @@ if(model.PrimaryKeyCount > 1){ #>
         /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
         /// <returns>I<#= modelName #></returns>
         /// <param name="includes">params Expression<Func<I<#= modelName #>, object>>[]</param>
-		public async Task<I<#= modelName #>> LoadBy<#= modelName #><#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>Async(<#= DataType.TransformAsParameter(col) #>, bool cache, params Expression<Func<I<#= modelName #>, object>>[] includes)
+        [HttpGet]
+		public async Task<I<#= modelName #>> LoadBy<#= modelName #><#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>Async(<#= DataType.TransformAsParameter(col) #>, bool cache)
         {
-            return await this.<#= modelName #>Repository.LoadBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>Async(<#= DataType.TransformAsParameterName(col) #>, cache, includes);
+            return await this.<#= modelName #>ApplicationService.LoadBy<#= modelName #><#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>Async(<#= DataType.TransformAsParameterName(col) #>, cache, this.LoadBy<#= modelName #><#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>AsyncIncludes);
         }
 <#+ } #>
 
         /// <summary>
         /// Load all <#= modelName #> entities from the database.
         /// </summary>
-        /// <param name="includes">params Expression<Func<I<#= modelName #>, object>>[]</param>
         /// <returns><#= DataType.CollectionOption.ClassNameInterface #><I<#= modelName #>></returns>
-		public <#= DataType.CollectionOption.ClassNameInterface #><I<#= modelName #>> <#= modelName #>LoadAll(bool cache, params Expression<Func<I<#= modelName #>, object>>[] includes)
+        [HttpGet]
+		public <#= DataType.CollectionOption.ClassNameInterface #><I<#= modelName #>> <#= modelName #>LoadAll(bool cache)
         {
-            return this.<#= modelName #>Repository.LoadAll(cache, includes);
+            return this.<#= modelName #>ApplicationService.<#= modelName #>LoadAll(cache, this.<#= modelName #>LoadAllIncludes);
         }
 
         /// <summary>
         /// Load all <#= modelName #> Async entities from the database.
         /// </summary>
-        /// <param name="includes">params Expression<Func<I<#= modelName #>, object>>[]</param>
         /// <returns><#= DataType.CollectionOption.ClassNameInterface #><I<#= modelName #>></returns>
-		public Task<<#= DataType.CollectionOption.ClassNameInterface #><I<#= modelName #>>> <#= modelName #>LoadAllAsync(bool cache, params Expression<Func<I<#= modelName #>, object>>[] includes)
+        [HttpGet]
+		public async Task<<#= DataType.CollectionOption.ClassNameInterface #><I<#= modelName #>>> <#= modelName #>LoadAllAsync(bool cache)
         {
-            return this.<#= modelName #>Repository.LoadAllAsync(cache, includes);
+            return await this.<#= modelName #>ApplicationService.<#= modelName #>LoadAllAsync(cache, this.<#= modelName #>LoadAllAsyncIncludes);
         }
 
 <#+            } #>

@@ -4,6 +4,8 @@
         public WebApiServiceDataType DataType{get;set;}
         public ApplicationServiceDataType ApplicationServiceDataType{get;set;}
         private WebApiTemplate template = new WebApiTemplate();
+        private WebApiTemplateCustom webApiTemplateCustom = new WebApiTemplateCustom();
+
         public DtoInterfaceDataType DtoInterfaceDataType {get;set;}
 
 		protected override void RunCore()
@@ -23,6 +25,18 @@
                 }
 
                 template.RenderToFile(string.Format(@"{0}\{1}Controller.g.cs", webApiServiceData.OutputFolder, webApiServiceData.WebApiName));	
+
+                webApiTemplateCustom.DataType = DataType;
+                webApiTemplateCustom.CurrentWebApiServiceData = webApiServiceData;
+                webApiTemplateCustom.ApplicationServiceDataType = this.ApplicationServiceDataType;
+                webApiTemplateCustom.DtoInterfaceDataType = this.DtoInterfaceDataType;
+
+                if(!string.IsNullOrEmpty(webApiServiceData.OutputPath))
+                {
+                    webApiTemplateCustom.Output.Project = webApiServiceData.OutputPath;
+                }
+
+                webApiTemplateCustom.RenderToFile(string.Format(@"{0}\{1}Controller.cs", webApiServiceData.OutputFolder, webApiServiceData.WebApiName));	
 			}
         }
     }

@@ -15,6 +15,7 @@
 <#@ include file="ContextRegistrationGenerator.ttInclude" #>
 <#@ include file="WebApiGenerator.ttInclude" #>
 <#@ include file="WebApiTemplate.ttInclude" #>
+<#@ include file="WebApiTemplateCustom.ttInclude" #>
 
 <#+
     public class ProjectGenerator : BaseProjectGenerator
