@@ -55,6 +55,7 @@ namespace RepositoryEFDotnet.Data.Controllers
         /// Load Product entities from the database using the primary key
         /// </summary
         /// <param name="productId">int</param>
+        /// <param name="cache">Enables or disables caching</param>
         /// <returns>IProduct</returns>
         [HttpGet]
 		public IProduct LoadByProductProductId(int productId, bool cache)
@@ -66,8 +67,8 @@ namespace RepositoryEFDotnet.Data.Controllers
         /// Load Product Async entities from the database using the primary key
         /// </summary
         /// <param name="productId">int</param>
+        /// <param name="cache">Enables or disables caching</param>
         /// <returns>IProduct</returns>
-        /// <param name="includes">params Expression<Func<IProduct, object>>[]</param>
         [HttpGet]
 		public async Task<IProduct> LoadByProductProductIdAsync(int productId, bool cache)
         {
@@ -77,6 +78,7 @@ namespace RepositoryEFDotnet.Data.Controllers
         /// <summary>
         /// Load all Product entities from the database.
         /// </summary>
+        /// <param name="cache">Enables or disables caching</param>
         /// <returns>IList<IProduct></returns>
         [HttpGet]
 		public IList<IProduct> ProductLoadAll(bool cache)
@@ -87,6 +89,7 @@ namespace RepositoryEFDotnet.Data.Controllers
         /// <summary>
         /// Load all Product Async entities from the database.
         /// </summary>
+        /// <param name="cache">Enables or disables caching</param>
         /// <returns>IList<IProduct></returns>
         [HttpGet]
 		public async Task<IList<IProduct>> ProductLoadAllAsync(bool cache)

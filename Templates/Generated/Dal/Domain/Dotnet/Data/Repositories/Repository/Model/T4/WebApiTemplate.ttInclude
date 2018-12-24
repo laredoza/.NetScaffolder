@@ -87,6 +87,7 @@ if(model.PrimaryKeyCount > 1){ #>
 <#+ foreach(var col in model.Columns.Where(o => o.IsPrimaryKey)) {#>
         /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
 <#+ } #>
+        /// <param name="cache">Enables or disables caching</param>
         /// <returns>I<#= modelName #></returns>
         [HttpGet]
 		I<#= modelName #> Load<#= modelName #>(<#= DataType.TransformAsParameter(model.Columns.Where(o => o.IsPrimaryKey)) #>, bool cache)
@@ -100,6 +101,7 @@ if(model.PrimaryKeyCount > 1){ #>
 <#+ foreach(var col in model.Columns.Where(o => o.IsPrimaryKey)) {#>
         /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
 <#+ } #>
+        /// <param name="cache">Enables or disables caching</param>
         /// <returns>I<#= modelName #></returns>
         [HttpGet]
 		Task<I<#= modelName #>> await <#= modelName #>LoadAsync(<#= DataType.TransformAsParameter(model.Columns.Where(o => o.IsPrimaryKey)) #>, bool cache)
@@ -115,6 +117,7 @@ if(model.PrimaryKeyCount > 1){ #>
         /// Load <#= modelName #> entities from the database using the primary key
         /// </summary
         /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
+        /// <param name="cache">Enables or disables caching</param>
         /// <returns>I<#= modelName #></returns>
         [HttpGet]
 		public I<#= modelName #> LoadBy<#= modelName #><#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= DataType.TransformAsParameter(col) #>, bool cache)
@@ -126,8 +129,8 @@ if(model.PrimaryKeyCount > 1){ #>
         /// Load <#= modelName #> Async entities from the database using the primary key
         /// </summary
         /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
+        /// <param name="cache">Enables or disables caching</param>
         /// <returns>I<#= modelName #></returns>
-        /// <param name="includes">params Expression<Func<I<#= modelName #>, object>>[]</param>
         [HttpGet]
 		public async Task<I<#= modelName #>> LoadBy<#= modelName #><#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>Async(<#= DataType.TransformAsParameter(col) #>, bool cache)
         {
@@ -138,6 +141,7 @@ if(model.PrimaryKeyCount > 1){ #>
         /// <summary>
         /// Load all <#= modelName #> entities from the database.
         /// </summary>
+        /// <param name="cache">Enables or disables caching</param>
         /// <returns><#= DataType.CollectionOption.ClassNameInterface #><I<#= modelName #>></returns>
         [HttpGet]
 		public <#= DataType.CollectionOption.ClassNameInterface #><I<#= modelName #>> <#= modelName #>LoadAll(bool cache)
@@ -148,6 +152,7 @@ if(model.PrimaryKeyCount > 1){ #>
         /// <summary>
         /// Load all <#= modelName #> Async entities from the database.
         /// </summary>
+        /// <param name="cache">Enables or disables caching</param>
         /// <returns><#= DataType.CollectionOption.ClassNameInterface #><I<#= modelName #>></returns>
         [HttpGet]
 		public async Task<<#= DataType.CollectionOption.ClassNameInterface #><I<#= modelName #>>> <#= modelName #>LoadAllAsync(bool cache)
