@@ -178,6 +178,50 @@ namespace RepositoryEFDotnet.Data.Controllers
 
 		#endregion
 
+		#region Modifiers
+		
+        /// <summary>
+        /// Add the Product entity to the database.
+        /// </summary>
+        /// <param name="entity">IProduct</param>
+        /// <returns>bool</returns>
+		public bool ProductAdd(IProduct entity)
+        {
+            return this.ProductApplicationService.ProductUpdate(entity);
+        }
+
+        /// <summary>
+        /// Update the Product entity in the database if any values have changed
+        /// </summary>
+        /// <param name="entity">IProduct</param>
+        /// <returns>bool</returns>
+		public bool ProductUpdate(IProduct entity)
+        {
+            return this.ProductApplicationService.ProductUpdate(entity);
+        }
+		
+        /// <summary>
+        /// Delete the Product entity from the database
+        /// </summary>
+        /// <param name="entity">IProduct</param>
+        /// <returns>bool</returns>
+		public bool ProductDelete(IProduct entity)
+        {
+            return this.ProductApplicationService.ProductDelete(entity);
+        }
+
+		/// <summary>
+        /// Delete the Product entity from the database
+        /// </summary>
+        /// <param name="productId">int</param>
+        /// <returns>bool</returns>
+		public bool ProductDelete( int productId, bool cache)
+        {
+            return this.ProductApplicationService.ProductDelete( productId, cache);
+        }
+
+		#endregion
+
     }
 }
 

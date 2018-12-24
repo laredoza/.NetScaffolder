@@ -202,6 +202,58 @@ string modelName = DataType.NamingConvention == null ? model.TableName : DataTyp
 <#+ } #>
 		#endregion
 
+		#region Modifiers
+<#+  foreach(var applicationServiceData in CurrentWebApiServiceData.Models){ #>
+
+<#+            foreach(var model in applicationServiceData.Models){ #>
+<#+ 
+string modelName = DataType.NamingConvention == null ? model.TableName : DataType.NamingConvention.ApplyNamingConvention(model.TableName); #>		
+        /// <summary>
+        /// Add the <#= modelName #> entity to the database.
+        /// </summary>
+        /// <param name="entity">I<#= modelName #></param>
+        /// <returns>bool</returns>
+		public bool <#= modelName #>Add(I<#= modelName #> entity)
+        {
+            return this.<#= modelName #>ApplicationService.<#= modelName #>Update(entity);
+        }
+
+        /// <summary>
+        /// Update the <#= modelName #> entity in the database if any values have changed
+        /// </summary>
+        /// <param name="entity">I<#= modelName #></param>
+        /// <returns>bool</returns>
+		public bool <#= modelName #>Update(I<#= modelName #> entity)
+        {
+            return this.<#= modelName #>ApplicationService.<#= modelName #>Update(entity);
+        }
+		
+        /// <summary>
+        /// Delete the <#= modelName #> entity from the database
+        /// </summary>
+        /// <param name="entity">I<#= modelName #></param>
+        /// <returns>bool</returns>
+		public bool <#= modelName #>Delete(I<#= modelName #> entity)
+        {
+            return this.<#= modelName #>ApplicationService.<#= modelName #>Delete(entity);
+        }
+
+		/// <summary>
+        /// Delete the <#= modelName #> entity from the database
+        /// </summary>
+<#+ foreach(var col in model.Columns.Where(o => o.IsPrimaryKey)) {#>
+        /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
+<#+ } #>
+        /// <returns>bool</returns>
+		public bool <#= modelName #>Delete(<#= DataType.TransformAsParameter(model.Columns.Where(o => o.IsPrimaryKey)) #>, bool cache)
+        {
+            return this.<#= modelName #>ApplicationService.<#= modelName #>Delete(<#= DataType.TransformAsParameterName(model.Columns.Where(o => o.IsPrimaryKey)) #>, cache);
+        }
+
+<#+            } #>
+<#+ } #>
+		#endregion
+
     }
 }
 
