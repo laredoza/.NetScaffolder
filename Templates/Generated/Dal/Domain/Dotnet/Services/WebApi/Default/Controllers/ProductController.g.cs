@@ -222,6 +222,66 @@ namespace RepositoryEFDotnet.Data.Controllers
 
 		#endregion
 
+		#region Bulk
+
+        /// <summary>
+        ///     Bulk delete entities
+        /// </summary>
+        /// <param name="items"></param>
+        public void ProductBulkDelete(IEnumerable<IProduct> items)
+		{
+			this.ProductApplicationService.ProductBulkDelete(items);
+		}
+
+        /// <summary>
+        ///     Bulk delete entities async
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public async Task ProductBulkDeleteAsync(IEnumerable<IProduct> items)
+		{
+			await this.ProductApplicationService.ProductBulkDeleteAsync(items);
+		}
+
+        /// <summary>
+        ///     Bulk insert entities
+        /// </summary>
+        /// <param name="items"></param>
+        public void  ProductBulkInsert(IEnumerable<IProduct> items)
+		{
+			this.ProductApplicationService.ProductBulkInsert(items);
+		}
+        
+        /// <summary>
+        /// Bulk insert entities async
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public async Task  ProductBulkInsertAsync(IEnumerable<IProduct> items)
+		{
+			await this.ProductApplicationService.ProductBulkInsertAsync(items);
+		}
+
+        /// <summary>
+        /// Bulk update entities 
+        /// </summary>
+        /// <param name="items"></param>
+        public void ProductBulkUpdate(IEnumerable<IProduct> items)
+		{
+			this.ProductApplicationService.ProductBulkUpdate(items);
+		}
+
+        /// <summary>
+        /// Bulk update entities async
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public async Task ProductBulkUpdateAsync(IEnumerable<IProduct> items)
+		{
+			await this.ProductApplicationService.ProductBulkUpdateAsync(items);
+		}
+
+        #endregion        
     }
 }
 

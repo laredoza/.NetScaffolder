@@ -254,6 +254,72 @@ string modelName = DataType.NamingConvention == null ? model.TableName : DataTyp
 <#+ } #>
 		#endregion
 
+		#region Bulk
+<#+  foreach(var applicationServiceData in CurrentWebApiServiceData.Models){ #>
+<#+            foreach(var model in applicationServiceData.Models){ #>
+<#+ 
+string modelName = DataType.NamingConvention == null ? model.TableName : DataType.NamingConvention.ApplyNamingConvention(model.TableName); #>
+
+        /// <summary>
+        ///     Bulk delete entities
+        /// </summary>
+        /// <param name="items"></param>
+        public void <#= modelName #>BulkDelete(IEnumerable<I<#= modelName #>> items)
+		{
+			this.<#= modelName #>ApplicationService.<#= modelName #>BulkDelete(items);
+		}
+
+        /// <summary>
+        ///     Bulk delete entities async
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public async Task <#= modelName #>BulkDeleteAsync(IEnumerable<I<#= modelName #>> items)
+		{
+			await this.<#= modelName #>ApplicationService.<#= modelName #>BulkDeleteAsync(items);
+		}
+
+        /// <summary>
+        ///     Bulk insert entities
+        /// </summary>
+        /// <param name="items"></param>
+        public void  <#= modelName #>BulkInsert(IEnumerable<I<#= modelName #>> items)
+		{
+			this.<#= modelName #>ApplicationService.<#= modelName #>BulkInsert(items);
+		}
+        
+        /// <summary>
+        /// Bulk insert entities async
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public async Task  <#= modelName #>BulkInsertAsync(IEnumerable<I<#= modelName #>> items)
+		{
+			await this.<#= modelName #>ApplicationService.<#= modelName #>BulkInsertAsync(items);
+		}
+
+        /// <summary>
+        /// Bulk update entities 
+        /// </summary>
+        /// <param name="items"></param>
+        public void <#= modelName #>BulkUpdate(IEnumerable<I<#= modelName #>> items)
+		{
+			this.<#= modelName #>ApplicationService.<#= modelName #>BulkUpdate(items);
+		}
+
+        /// <summary>
+        /// Bulk update entities async
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public async Task <#= modelName #>BulkUpdateAsync(IEnumerable<I<#= modelName #>> items)
+		{
+			await this.<#= modelName #>ApplicationService.<#= modelName #>BulkUpdateAsync(items);
+		}
+
+        <#+} #>
+<#+} #>
+#endregion        
     }
 }
 
