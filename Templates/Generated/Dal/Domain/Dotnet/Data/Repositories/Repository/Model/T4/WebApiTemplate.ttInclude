@@ -40,7 +40,7 @@ namespace <#= CurrentWebApiServiceData.TransformFullnamespace(DataType.BaseNames
     /// <summary>
 	/// The <#= CurrentWebApiServiceData.WebApiName #> Controller
 	/// </summary>
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
 	public partial class <#= CurrentWebApiServiceData.WebApiName #>Controller <#= CurrentWebApiServiceData.TransformInheritFrom #>
 	{
@@ -90,7 +90,7 @@ if(model.PrimaryKeyCount > 1){ #>
 <#+ } #>
         /// <param name="cache">Enables or disables caching</param>
         /// <returns>I<#= modelName #></returns>
-        [HttpGet]
+        [HttpGet("{<#= DataType.TransformAsParameterName(model.Columns.Where(o => o.IsPrimaryKey)) #>}/{cache}")]
 		I<#= modelName #> Load<#= modelName #>(<#= DataType.TransformAsParameter(model.Columns.Where(o => o.IsPrimaryKey)) #>, bool cache)
         {
             if( this.Load<#= modelName #>Includes == null)
@@ -109,7 +109,7 @@ if(model.PrimaryKeyCount > 1){ #>
 <#+ } #>
         /// <param name="cache">Enables or disables caching</param>
         /// <returns>I<#= modelName #></returns>
-        [HttpGet]
+        [HttpGet("{<#= DataType.TransformAsParameterName(model.Columns.Where(o => o.IsPrimaryKey)) #>}/{cache}")]
 		Task<I<#= modelName #>> await <#= modelName #>LoadAsync(<#= DataType.TransformAsParameter(model.Columns.Where(o => o.IsPrimaryKey)) #>, bool cache)
         {
             if( this.LoadAsync<#= modelName #>Includes == null)
@@ -130,7 +130,7 @@ if(model.PrimaryKeyCount > 1){ #>
         /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
         /// <param name="cache">Enables or disables caching</param>
         /// <returns>I<#= modelName #></returns>
-        [HttpGet]
+        [HttpGet("{<#= DataType.TransformAsParameterName(col) #>}/{cache}")]
 		public I<#= modelName #> LoadBy<#= modelName #><#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= DataType.TransformAsParameter(col) #>, bool cache)
         {
             if( this.LoadBy<#= modelName #><#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>Includes == null)
@@ -147,7 +147,7 @@ if(model.PrimaryKeyCount > 1){ #>
         /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
         /// <param name="cache">Enables or disables caching</param>
         /// <returns>I<#= modelName #></returns>
-        [HttpGet]
+        [HttpGet("{<#= DataType.TransformAsParameterName(col) #>}/{cache}")]
 		public async Task<I<#= modelName #>> LoadBy<#= modelName #><#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>Async(<#= DataType.TransformAsParameter(col) #>, bool cache)
         {
             if( this.LoadBy<#= modelName #><#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>AsyncIncludes == null)
@@ -164,7 +164,7 @@ if(model.PrimaryKeyCount > 1){ #>
         /// </summary>
         /// <param name="cache">Enables or disables caching</param>
         /// <returns><#= DataType.CollectionOption.ClassNameInterface #><I<#= modelName #>></returns>
-        [HttpGet]
+        [HttpGet("{cache}")]
 		public <#= DataType.CollectionOption.ClassNameInterface #><I<#= modelName #>> <#= modelName #>LoadAll(bool cache)
         {
             if( this.<#= modelName #>LoadAllIncludes == null)
@@ -180,7 +180,7 @@ if(model.PrimaryKeyCount > 1){ #>
         /// </summary>
         /// <param name="cache">Enables or disables caching</param>
         /// <returns><#= DataType.CollectionOption.ClassNameInterface #><I<#= modelName #>></returns>
-        [HttpGet]
+        [HttpGet("{cache}")]
 		public async Task<<#= DataType.CollectionOption.ClassNameInterface #><I<#= modelName #>>> <#= modelName #>LoadAllAsync(bool cache)
         {
             if( this.<#= modelName #>LoadAllAsyncIncludes == null)

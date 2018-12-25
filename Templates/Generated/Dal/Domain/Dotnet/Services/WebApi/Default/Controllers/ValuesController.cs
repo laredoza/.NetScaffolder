@@ -1,17 +1,21 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using RepositoryEFDotnet.Services.WebApi.Default.Security;
 
 namespace RepositoryEFDotnet.Services.WebApi.Default.Controllers
 {
-    [Route("api/[controller]")]
+    [Produces("application/json")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class ValuesController : ControllerBase
     {
         // GET api/values
+        [ClaimRequirement(MyClaimTypes.Permission, "CanReadResource")]
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
         {
+            
             return new string[] { "value1", "value2" };
         }
 

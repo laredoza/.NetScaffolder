@@ -32,7 +32,7 @@ namespace RepositoryEFDotnet.Data.Controllers
     /// <summary>
 	/// The Product Controller
 	/// </summary>
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
 	public partial class ProductController : BaseController
 	{
@@ -58,7 +58,7 @@ namespace RepositoryEFDotnet.Data.Controllers
         /// <param name="productId">int</param>
         /// <param name="cache">Enables or disables caching</param>
         /// <returns>IProduct</returns>
-        [HttpGet]
+        [HttpGet("{productId}/{cache}")]
 		public IProduct LoadByProductProductId(int productId, bool cache)
         {
             if( this.LoadByProductProductIdIncludes == null)
@@ -75,7 +75,7 @@ namespace RepositoryEFDotnet.Data.Controllers
         /// <param name="productId">int</param>
         /// <param name="cache">Enables or disables caching</param>
         /// <returns>IProduct</returns>
-        [HttpGet]
+        [HttpGet("{productId}/{cache}")]
 		public async Task<IProduct> LoadByProductProductIdAsync(int productId, bool cache)
         {
             if( this.LoadByProductProductIdAsyncIncludes == null)
@@ -91,7 +91,7 @@ namespace RepositoryEFDotnet.Data.Controllers
         /// </summary>
         /// <param name="cache">Enables or disables caching</param>
         /// <returns>IList<IProduct></returns>
-        [HttpGet]
+        [HttpGet("{cache}")]
 		public IList<IProduct> ProductLoadAll(bool cache)
         {
             if( this.ProductLoadAllIncludes == null)
@@ -107,7 +107,7 @@ namespace RepositoryEFDotnet.Data.Controllers
         /// </summary>
         /// <param name="cache">Enables or disables caching</param>
         /// <returns>IList<IProduct></returns>
-        [HttpGet]
+        [HttpGet("{cache}")]
 		public async Task<IList<IProduct>> ProductLoadAllAsync(bool cache)
         {
             if( this.ProductLoadAllAsyncIncludes == null)
