@@ -4,6 +4,8 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System.Text;
+
 namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.WebApiServiceDataTypes
 {
     #region Usings
@@ -115,6 +117,24 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.WebApiServiceDa
         public string TransformFullnamespace(string baseNs)
         {
             return $"{baseNs}.{this.Namespace}";
+        }
+
+        public string GenerateInclude(string prefix, string modelName, string columnName)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            sb.AppendLine("/// <summary>");
+            sb.AppendLine($"/// Gets {prefix}<#= {modelName} #><#= DataType.NamingConvention.ApplyNamingConvention({columnName}) #>Includes");
+            sb.AppendLine("/// </summary");
+            sb.AppendLine($"public Expression<Func<I<#= {modelName} #>, object>>[] LoadBy<#= {modelName} #><#= DataType.NamingConvention.ApplyNamingConvention({columnName}) #>Includes");
+            sb.AppendLine("{");
+            sb.AppendLine("     get");
+            sb.AppendLine("         {");
+            sb.AppendLine($"             return new Expression<Func<I<#= {modelName} #>, object>>[]" + "{};|");
+            sb.AppendLine("         }");
+            sb.AppendLine("}");
+
+            return sb.ToString();
         }
 
         #endregion

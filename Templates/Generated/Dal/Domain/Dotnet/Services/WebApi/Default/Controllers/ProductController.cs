@@ -35,53 +35,38 @@ namespace RepositoryEFDotnet.Data.Controllers
 	public partial class ProductController 
 	{
 
+        /// <summary>
+        /// Configure Includes
+        /// </summary>
+	    public void ConfigureIncludes()
+	    {
+	        //this.LoadByProductProductIdAsyncIncludes = new Expression<Func<IProduct, object>>[]
+	        //{
+	        //    a => a.OrderDetails
+	        //};
+	    }
+
         #region Configure Load
 
         /// <summary>
         /// Gets LoadByProductProductIdIncludes
         /// </summary
-        public Expression<Func<IProduct, object>>[] LoadByProductProductIdIncludes
-        {
-            get
-            {
-                return new Expression<Func<IProduct, object>>[]{};
-            }
-        }
+        public Expression<Func<IProduct, object>>[] LoadByProductProductIdIncludes { get; set; }
 
         /// <summary>
         /// Gets LoadByProductProductIdAsyncIncludes
         /// </summary
-        public Expression<Func<IProduct, object>>[] LoadByProductProductIdAsyncIncludes
-        {
-            get
-            {
-                return new Expression<Func<IProduct, object>>[]{};
-            }
-        }
+        public Expression<Func<IProduct, object>>[] LoadByProductProductIdAsyncIncludes { get; set; }
 
         /// <summary>
         /// Gets ProductLoadAllIncludes
         /// </summary
-        public Expression<Func<IProduct, object>>[] ProductLoadAllIncludes
-        {
-            get
-            {
-                return new Expression<Func<IProduct, object>>[]{};
-            }
-        }
-
+        public Expression<Func<IProduct, object>>[] ProductLoadAllIncludes { get; set; }
 
         /// <summary>
         /// Gets ProductLoadAllAsyncIncludes
         /// </summary
-        public Expression<Func<IProduct, object>>[] ProductLoadAllAsyncIncludes
-        {
-            get
-            {
-                return new Expression<Func<IProduct, object>>[]{};
-            }
-        }
-
+        public Expression<Func<IProduct, object>>[] ProductLoadAllAsyncIncludes { get; set; }
 
         #endregion
 
@@ -90,73 +75,34 @@ namespace RepositoryEFDotnet.Data.Controllers
         /// <summary>
         /// Gets ProductSearchByProductDescriptionIncludes
         /// </summary
-        public Expression<Func<IProduct, object>>[] ProductSearchByProductDescriptionIncludes
-
-        {
-            get
-            {
-                return new Expression<Func<IProduct, object>>[]{};
-            }
-        }
+        public Expression<Func<IProduct, object>>[] ProductSearchByProductDescriptionIncludes { get; set; }
 
         /// <summary>
         /// Gets ProductSearchByProductDescriptionIncludesAsync
         /// </summary
-        public Expression<Func<IProduct, object>>[] ProductSearchByProductDescriptionIncludesAsync
-        {
-            get
-            {
-                return new Expression<Func<IProduct, object>>[]{};
-            }
-        }
+        public Expression<Func<IProduct, object>>[] ProductSearchByProductDescriptionIncludesAsync { get; set; }
 
 
         /// <summary>
         /// Gets ProductSearchByUnitAmountIncludes
         /// </summary
-        public Expression<Func<IProduct, object>>[] ProductSearchByUnitAmountIncludes
-
-        {
-            get
-            {
-                return new Expression<Func<IProduct, object>>[]{};
-            }
-        }
+        public Expression<Func<IProduct, object>>[] ProductSearchByUnitAmountIncludes { get; set; }
 
         /// <summary>
         /// Gets ProductSearchByUnitAmountIncludesAsync
         /// </summary
-        public Expression<Func<IProduct, object>>[] ProductSearchByUnitAmountIncludesAsync
-        {
-            get
-            {
-                return new Expression<Func<IProduct, object>>[]{};
-            }
-        }
+        public Expression<Func<IProduct, object>>[] ProductSearchByUnitAmountIncludesAsync { get; set; }
 
 
         /// <summary>
         /// Gets ProductSearchByPublisherIncludes
         /// </summary
-        public Expression<Func<IProduct, object>>[] ProductSearchByPublisherIncludes
-
-        {
-            get
-            {
-                return new Expression<Func<IProduct, object>>[]{};
-            }
-        }
+        public Expression<Func<IProduct, object>>[] ProductSearchByPublisherIncludes { get; set; }
 
         /// <summary>
         /// Gets ProductSearchByPublisherIncludesAsync
         /// </summary
-        public Expression<Func<IProduct, object>>[] ProductSearchByPublisherIncludesAsync
-        {
-            get
-            {
-                return new Expression<Func<IProduct, object>>[]{};
-            }
-        }
+        public Expression<Func<IProduct, object>>[] ProductSearchByPublisherIncludesAsync { get; set; }
 
 		#endregion
     }

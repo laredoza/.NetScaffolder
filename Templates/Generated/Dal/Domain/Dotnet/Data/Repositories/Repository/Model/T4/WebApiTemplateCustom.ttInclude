@@ -43,6 +43,17 @@ namespace <#= CurrentWebApiServiceData.TransformFullnamespace(DataType.BaseNames
 	public partial class <#= CurrentWebApiServiceData.WebApiName #>Controller 
 	{
 
+        /// <summary>
+        /// Configure Includes
+        /// </summary>
+	    public void ConfigureIncludes()
+	    {
+	        //this.LoadByProductProductIdAsyncIncludes = new Expression<Func<IProduct, object>>[]
+	        //{
+	        //    a => a.OrderDetails
+	        //};
+	    }
+
         #region Configure Load
 <#+  foreach(var applicationServiceData in CurrentWebApiServiceData.Models){ #>
 <#+            foreach(var model in applicationServiceData.Models){ #>
@@ -79,49 +90,23 @@ if(model.PrimaryKeyCount > 1){ #>
         /// <summary>
         /// Gets LoadBy<#= modelName #><#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>Includes
         /// </summary
-        public Expression<Func<I<#= modelName #>, object>>[] LoadBy<#= modelName #><#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>Includes
-        {
-            get
-            {
-                return new Expression<Func<I<#= modelName #>, object>>[]{};
-            }
-        }
+        public Expression<Func<I<#= modelName #>, object>>[] LoadBy<#= modelName #><#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>Includes { get; set; }
 
         /// <summary>
         /// Gets LoadBy<#= modelName #><#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>AsyncIncludes
         /// </summary
-        public Expression<Func<I<#= modelName #>, object>>[] LoadBy<#= modelName #><#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>AsyncIncludes
-        {
-            get
-            {
-                return new Expression<Func<I<#= modelName #>, object>>[]{};
-            }
-        }
+        public Expression<Func<I<#= modelName #>, object>>[] LoadBy<#= modelName #><#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>AsyncIncludes { get; set; }
 <#+ } #>
 
         /// <summary>
         /// Gets <#= modelName #>LoadAllIncludes
         /// </summary
-        public Expression<Func<I<#= modelName #>, object>>[] <#= modelName #>LoadAllIncludes
-        {
-            get
-            {
-                return new Expression<Func<I<#= modelName #>, object>>[]{};
-            }
-        }
-
+        public Expression<Func<I<#= modelName #>, object>>[] <#= modelName #>LoadAllIncludes { get; set; }
 
         /// <summary>
         /// Gets <#= modelName #>LoadAllAsyncIncludes
         /// </summary
-        public Expression<Func<I<#= modelName #>, object>>[] <#= modelName #>LoadAllAsyncIncludes
-        {
-            get
-            {
-                return new Expression<Func<I<#= modelName #>, object>>[]{};
-            }
-        }
-
+        public Expression<Func<I<#= modelName #>, object>>[] <#= modelName #>LoadAllAsyncIncludes { get; set; }
 <#+            } #>
 <#+ } #>
 
@@ -138,25 +123,12 @@ string modelName = DataType.NamingConvention == null ? model.TableName : DataTyp
         /// <summary>
         /// Gets <#= modelName #>SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>Includes
         /// </summary
-        public Expression<Func<I<#= modelName #>, object>>[] <#= modelName #>SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>Includes
-
-        {
-            get
-            {
-                return new Expression<Func<I<#= modelName #>, object>>[]{};
-            }
-        }
+        public Expression<Func<I<#= modelName #>, object>>[] <#= modelName #>SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>Includes { get; set; }
 
         /// <summary>
         /// Gets <#= modelName #>SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>IncludesAsync
         /// </summary
-        public Expression<Func<I<#= modelName #>, object>>[] <#= modelName #>SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>IncludesAsync
-        {
-            get
-            {
-                return new Expression<Func<I<#= modelName #>, object>>[]{};
-            }
-        }
+        public Expression<Func<I<#= modelName #>, object>>[] <#= modelName #>SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>IncludesAsync { get; set; }
 
 <#+ }  #>
 <#+            } #>

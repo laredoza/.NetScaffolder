@@ -46,6 +46,7 @@ namespace RepositoryEFDotnet.Data.Controllers
                       IProductApplicationService productApplicationService
                                      )
         {
+            this.ConfigureIncludes();
             this.ProductApplicationService = productApplicationService;
         }
 
@@ -60,6 +61,11 @@ namespace RepositoryEFDotnet.Data.Controllers
         [HttpGet]
 		public IProduct LoadByProductProductId(int productId, bool cache)
         {
+            if( this.LoadByProductProductIdIncludes == null)
+            {
+                this.LoadByProductProductIdIncludes = new Expression<Func<IProduct, object>>[]{};
+            }
+
             return this.ProductApplicationService.LoadByProductProductId(productId, cache, this.LoadByProductProductIdIncludes);
         }
 
@@ -72,6 +78,11 @@ namespace RepositoryEFDotnet.Data.Controllers
         [HttpGet]
 		public async Task<IProduct> LoadByProductProductIdAsync(int productId, bool cache)
         {
+            if( this.LoadByProductProductIdAsyncIncludes == null)
+            {
+                this.LoadByProductProductIdAsyncIncludes = new Expression<Func<IProduct, object>>[]{};
+            }
+
             return await this.ProductApplicationService.LoadByProductProductIdAsync(productId, cache, this.LoadByProductProductIdAsyncIncludes);
         }
 
@@ -83,6 +94,11 @@ namespace RepositoryEFDotnet.Data.Controllers
         [HttpGet]
 		public IList<IProduct> ProductLoadAll(bool cache)
         {
+            if( this.ProductLoadAllIncludes == null)
+            {
+                this.ProductLoadAllIncludes = new Expression<Func<IProduct, object>>[]{};
+            }
+
             return this.ProductApplicationService.ProductLoadAll(cache, this.ProductLoadAllIncludes);
         }
 
@@ -94,6 +110,11 @@ namespace RepositoryEFDotnet.Data.Controllers
         [HttpGet]
 		public async Task<IList<IProduct>> ProductLoadAllAsync(bool cache)
         {
+            if( this.ProductLoadAllAsyncIncludes == null)
+            {
+                this.ProductLoadAllAsyncIncludes = new Expression<Func<IProduct, object>>[]{};
+            }
+
             return await this.ProductApplicationService.ProductLoadAllAsync(cache, this.ProductLoadAllAsyncIncludes);
         }
 
@@ -111,6 +132,11 @@ namespace RepositoryEFDotnet.Data.Controllers
         [HttpGet]
 		public IList<IProduct> ProductSearchByProductDescription(string productDescription, bool caseSensitive, bool cache)
         {
+            if( this.ProductSearchByProductDescriptionIncludes == null)
+            {
+                this.ProductSearchByProductDescriptionIncludes = new Expression<Func<IProduct, object>>[]{};
+            }
+
             return this.ProductApplicationService.ProductSearchByProductDescription(productDescription,caseSensitive, cache, this.ProductSearchByProductDescriptionIncludes);
         }
 
@@ -123,6 +149,11 @@ namespace RepositoryEFDotnet.Data.Controllers
 		[HttpGet]
         public async Task<IList<IProduct>> ProductSearchByProductDescriptionAsync(string productDescription, bool caseSensitive, bool cache)
         {
+            if( this.ProductSearchByProductDescriptionIncludesAsync == null)
+            {
+                this.ProductSearchByProductDescriptionIncludesAsync = new Expression<Func<IProduct, object>>[]{};
+            }
+
             return await this.ProductApplicationService.ProductSearchByProductDescriptionAsync(productDescription,caseSensitive, cache, this.ProductSearchByProductDescriptionIncludesAsync);
         }
 
@@ -136,6 +167,11 @@ namespace RepositoryEFDotnet.Data.Controllers
         [HttpGet]
 		public IList<IProduct> ProductSearchByUnitAmount(string unitAmount, bool caseSensitive, bool cache)
         {
+            if( this.ProductSearchByUnitAmountIncludes == null)
+            {
+                this.ProductSearchByUnitAmountIncludes = new Expression<Func<IProduct, object>>[]{};
+            }
+
             return this.ProductApplicationService.ProductSearchByUnitAmount(unitAmount,caseSensitive, cache, this.ProductSearchByUnitAmountIncludes);
         }
 
@@ -148,6 +184,11 @@ namespace RepositoryEFDotnet.Data.Controllers
 		[HttpGet]
         public async Task<IList<IProduct>> ProductSearchByUnitAmountAsync(string unitAmount, bool caseSensitive, bool cache)
         {
+            if( this.ProductSearchByUnitAmountIncludesAsync == null)
+            {
+                this.ProductSearchByUnitAmountIncludesAsync = new Expression<Func<IProduct, object>>[]{};
+            }
+
             return await this.ProductApplicationService.ProductSearchByUnitAmountAsync(unitAmount,caseSensitive, cache, this.ProductSearchByUnitAmountIncludesAsync);
         }
 
@@ -161,6 +202,11 @@ namespace RepositoryEFDotnet.Data.Controllers
         [HttpGet]
 		public IList<IProduct> ProductSearchByPublisher(string publisher, bool caseSensitive, bool cache)
         {
+            if( this.ProductSearchByPublisherIncludes == null)
+            {
+                this.ProductSearchByPublisherIncludes = new Expression<Func<IProduct, object>>[]{};
+            }
+
             return this.ProductApplicationService.ProductSearchByPublisher(publisher,caseSensitive, cache, this.ProductSearchByPublisherIncludes);
         }
 
@@ -173,6 +219,11 @@ namespace RepositoryEFDotnet.Data.Controllers
 		[HttpGet]
         public async Task<IList<IProduct>> ProductSearchByPublisherAsync(string publisher, bool caseSensitive, bool cache)
         {
+            if( this.ProductSearchByPublisherIncludesAsync == null)
+            {
+                this.ProductSearchByPublisherIncludesAsync = new Expression<Func<IProduct, object>>[]{};
+            }
+
             return await this.ProductApplicationService.ProductSearchByPublisherAsync(publisher,caseSensitive, cache, this.ProductSearchByPublisherIncludesAsync);
         }
 

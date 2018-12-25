@@ -66,6 +66,7 @@ string name = DataType.NamingConvention == null ? applicationServiceData.Applica
 <#+                } #>
                  )
         {
+            this.ConfigureIncludes();
 <#+            foreach(var applicationServiceData in CurrentWebApiServiceData.Models){ #>
 <#+ 
 string name = DataType.NamingConvention == null ? applicationServiceData.ApplicationServiceName : DataType.NamingConvention.ApplyNamingConvention(applicationServiceData.ApplicationServiceName);
@@ -92,6 +93,11 @@ if(model.PrimaryKeyCount > 1){ #>
         [HttpGet]
 		I<#= modelName #> Load<#= modelName #>(<#= DataType.TransformAsParameter(model.Columns.Where(o => o.IsPrimaryKey)) #>, bool cache)
         {
+            if( this.Load<#= modelName #>Includes == null)
+            {
+                this.Load<#= modelName #>Includes = new Expression<Func<I<#= modelName #>, object>>[]{};
+            }
+
             return this.<#= modelName #>ApplicationService.Load<#= modelName #>(<#= DataType.TransformAsParameterName(model.Columns.Where(o => o.IsPrimaryKey)) #>, cache, this.Load<#= modelName #>Includes)
         }
 
@@ -106,6 +112,11 @@ if(model.PrimaryKeyCount > 1){ #>
         [HttpGet]
 		Task<I<#= modelName #>> await <#= modelName #>LoadAsync(<#= DataType.TransformAsParameter(model.Columns.Where(o => o.IsPrimaryKey)) #>, bool cache)
         {
+            if( this.LoadAsync<#= modelName #>Includes == null)
+            {
+                this.LoadAsync<#= modelName #>Includes = new Expression<Func<I<#= modelName #>, object>>[]{};
+            }
+
             return async this.<#= modelName #>ApplicationService.Load<#= modelName #>Async(<#= DataType.TransformAsParameterName(model.Columns.Where(o => o.IsPrimaryKey)) #>, cache, this.LoadAsync<#= modelName #>Includes)
         }
 
@@ -122,6 +133,11 @@ if(model.PrimaryKeyCount > 1){ #>
         [HttpGet]
 		public I<#= modelName #> LoadBy<#= modelName #><#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= DataType.TransformAsParameter(col) #>, bool cache)
         {
+            if( this.LoadBy<#= modelName #><#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>Includes == null)
+            {
+                this.LoadBy<#= modelName #><#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>Includes = new Expression<Func<I<#= modelName #>, object>>[]{};
+            }
+
             return this.<#= modelName #>ApplicationService.LoadBy<#= modelName #><#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= DataType.TransformAsParameterName(col) #>, cache, this.LoadBy<#= modelName #><#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>Includes);
         }
 
@@ -134,6 +150,11 @@ if(model.PrimaryKeyCount > 1){ #>
         [HttpGet]
 		public async Task<I<#= modelName #>> LoadBy<#= modelName #><#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>Async(<#= DataType.TransformAsParameter(col) #>, bool cache)
         {
+            if( this.LoadBy<#= modelName #><#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>AsyncIncludes == null)
+            {
+                this.LoadBy<#= modelName #><#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>AsyncIncludes = new Expression<Func<I<#= modelName #>, object>>[]{};
+            }
+
             return await this.<#= modelName #>ApplicationService.LoadBy<#= modelName #><#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>Async(<#= DataType.TransformAsParameterName(col) #>, cache, this.LoadBy<#= modelName #><#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>AsyncIncludes);
         }
 <#+ } #>
@@ -146,6 +167,11 @@ if(model.PrimaryKeyCount > 1){ #>
         [HttpGet]
 		public <#= DataType.CollectionOption.ClassNameInterface #><I<#= modelName #>> <#= modelName #>LoadAll(bool cache)
         {
+            if( this.<#= modelName #>LoadAllIncludes == null)
+            {
+                this.<#= modelName #>LoadAllIncludes = new Expression<Func<I<#= modelName #>, object>>[]{};
+            }
+
             return this.<#= modelName #>ApplicationService.<#= modelName #>LoadAll(cache, this.<#= modelName #>LoadAllIncludes);
         }
 
@@ -157,6 +183,11 @@ if(model.PrimaryKeyCount > 1){ #>
         [HttpGet]
 		public async Task<<#= DataType.CollectionOption.ClassNameInterface #><I<#= modelName #>>> <#= modelName #>LoadAllAsync(bool cache)
         {
+            if( this.<#= modelName #>LoadAllAsyncIncludes == null)
+            {
+                this.<#= modelName #>LoadAllAsyncIncludes = new Expression<Func<I<#= modelName #>, object>>[]{};
+            }
+
             return await this.<#= modelName #>ApplicationService.<#= modelName #>LoadAllAsync(cache, this.<#= modelName #>LoadAllAsyncIncludes);
         }
 
@@ -182,6 +213,11 @@ string modelName = DataType.NamingConvention == null ? model.TableName : DataTyp
         [HttpGet]
 		public <#= DataType.CollectionOption.ClassNameInterface #><I<#= modelName #>> <#= modelName #>SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= DataType.TransformAsParameter(col) #>, bool caseSensitive, bool cache)
         {
+            if( this.<#= modelName #>SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>Includes == null)
+            {
+                this.<#= modelName #>SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>Includes = new Expression<Func<I<#= modelName #>, object>>[]{};
+            }
+
             return this.<#= modelName #>ApplicationService.<#= modelName #>SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= DataType.TransformAsParameterName(col)  #>,caseSensitive, cache, this.<#= modelName #>SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>Includes);
         }
 
@@ -194,6 +230,11 @@ string modelName = DataType.NamingConvention == null ? model.TableName : DataTyp
 		[HttpGet]
         public async Task<<#= DataType.CollectionOption.ClassNameInterface #><I<#= modelName #>>> <#= modelName #>SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>Async(<#= DataType.TransformAsParameter(col) #>, bool caseSensitive, bool cache)
         {
+            if( this.<#= modelName #>SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>IncludesAsync == null)
+            {
+                this.<#= modelName #>SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>IncludesAsync = new Expression<Func<I<#= modelName #>, object>>[]{};
+            }
+
             return await this.<#= modelName #>ApplicationService.<#= modelName #>SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>Async(<#= DataType.TransformAsParameterName(col)  #>,caseSensitive, cache, this.<#= modelName #>SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>IncludesAsync);
         }
 
