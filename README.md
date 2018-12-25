@@ -37,6 +37,10 @@ T4 templates (DataTypes) are used to generate a layer. Packages group several of
 - Entity Framework Core 2.1 ( MySql - Pomelo Driver, Sql Server )
 - NHibernate ( Mysql, Sql Server, Oracle )
 
+### Generated Project Types:
+
+- WebApi
+
 ### Planned Project Types:
 
 - MVC
