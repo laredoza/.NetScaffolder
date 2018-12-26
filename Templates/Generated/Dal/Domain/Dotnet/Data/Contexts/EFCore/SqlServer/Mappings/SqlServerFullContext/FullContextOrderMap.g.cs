@@ -32,7 +32,7 @@ namespace RepositoryEFDotnet.Data.Context.Mappings.EFCore.SqlServer
 	{	
 	    public virtual void Configure(EntityTypeBuilder<Order> builder)
 	    {
-			builder.ToTable("[Order]", "[dbo]");
+			builder.ToTable("Order", "dbo");
 			
 			#region Primary keys
 			

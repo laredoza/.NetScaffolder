@@ -32,7 +32,7 @@ namespace RepositoryEFDotnet.Data.Accounts.Mappings.EFCore.SqlServer
 	{	
 	    public virtual void Configure(EntityTypeBuilder<BankAccount> builder)
 	    {
-			builder.ToTable("[BankAccount]", "[dbo]");
+			builder.ToTable("BankAccount", "dbo");
 			
 			#region Primary keys
 			
