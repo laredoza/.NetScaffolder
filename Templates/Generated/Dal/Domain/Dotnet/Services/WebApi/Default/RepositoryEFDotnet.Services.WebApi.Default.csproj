@@ -9,12 +9,15 @@
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.0" />
+    <PackageReference Include="StructureMap.Microsoft.DependencyInjection" Version="1.4.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Data\ApplicationServices\ApplicationService\RepositoryEFDotnet.Data.ApplicationServices.ApplicationService.csproj" />
     <ProjectReference Include="..\..\..\Data\Contexts\EFCore\SqlServer\RepositoryEFDotnet.Contexts.EFCore.SqlServer.csproj" />
     <ProjectReference Include="..\..\..\Data\Interfaces\ApplicationService\RepositoryEFDotnet.Data.Interface.ApplicationService.csproj" />
     <ProjectReference Include="..\..\..\Data\Interfaces\Interface\RepositoryEFDotnet.Data.Interface.ModelInterfaces.csproj" />
+    <ProjectReference Include="..\..\..\Data\Repositories\Repository\RepositoryEFDotnet.Data.Repositories.Repository.csproj" />
     <ProjectReference Include="..\..\..\Infrastructure\Web\Core\RepositoryEFDotnet.Infrastructure.Web.Core.csproj" />
   </ItemGroup>
 

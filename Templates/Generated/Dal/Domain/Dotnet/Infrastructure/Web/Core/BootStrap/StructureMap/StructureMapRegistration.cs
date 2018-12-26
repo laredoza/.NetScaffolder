@@ -46,7 +46,8 @@ namespace RepositoryEFDotnet.Infrastructure.Web.Core.BootStrap.StructureMap
                             scanner.AssembliesAndExecutablesFromPath(scanFolder);
                             //scanner.AssembliesAndExecutablesFromPath("../../Modules");
                             scanner.AssembliesAndExecutablesFromApplicationBaseDirectory(assembly =>
-                                assembly.FullName.Contains(searchAssemblies));
+                            assembly.FullName.Contains(searchAssemblies));
+                            //scanner.AssembliesAndExecutablesFromApplicationBaseDirectory();
                             scanner.LookForRegistries();
                         });
                 });

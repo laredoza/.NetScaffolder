@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using RepositoryEFDotnet.Infrastructure.Web.Core.Extensions;
@@ -52,7 +53,7 @@ namespace RepositoryEFDotnet.Services.WebApi.Default
         // This method gets called by the runtime. Use this method to add services to the container.
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2); ;
             //.AddRazorPagesOptions(options =>
             //{
             //    options.Conventions..AuthorizePage("/Contact");
@@ -61,8 +62,7 @@ namespace RepositoryEFDotnet.Services.WebApi.Default
             //    options.Conventions.AllowAnonymousToFolder("/Private/PublicPages");
             //})
             //.SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-            //return services.Build(Configuration, hostingEnvironment, "./Modules", "RepositoryEFDotnet");
-            return services.Build(Configuration, hostingEnvironment, ".", "RepositoryEFDotnet");
+            return services.Build(Configuration, hostingEnvironment, "./", "RepositoryEFDotnet");
         }
 
         #endregion
