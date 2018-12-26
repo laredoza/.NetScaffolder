@@ -1,4 +1,4 @@
-﻿namespace RepositoryEFDotnet.Services.WebApi.Default.Security
+﻿namespace RepositoryEFDotnet.Infrastructure.Web.Core.Security
 {
     public static class MyClaimTypes
     {

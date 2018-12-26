@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
+﻿using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc;
 
-namespace RepositoryEFDotnet.Services.WebApi.Default.Security
+namespace RepositoryEFDotnet.Infrastructure.Web.Core.Security
 {
     public class ClaimRequirementAttribute : TypeFilterAttribute
     {

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using RepositoryEFDotnet.Services.WebApi.Default.Security;
+using RepositoryEFDotnet.Infrastructure.Web.Core.Security;
 
 namespace RepositoryEFDotnet.Services.WebApi.Default.Controllers
 {
