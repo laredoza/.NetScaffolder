@@ -65,7 +65,7 @@ namespace RepositoryEFDotnet.Data.Context.EF.Postgres.Database
 	        IServiceProvider serviceProvider = null)
 	    {
 	        if (configuration == null || configuration.ConnectionStrings == null
-	                                  || !configuration.ConnectionStrings.ContainsKey("QUIRCSqlServer"))
+	                                  || !configuration.ConnectionStrings.ContainsKey("RepoTestPostgres"))
 	        {
 	            throw new Exception("Invalid configuration specified in database manager");
 	        }

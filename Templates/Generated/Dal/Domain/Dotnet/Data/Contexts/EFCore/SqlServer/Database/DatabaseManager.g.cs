@@ -64,11 +64,11 @@ namespace RepositoryEFDotnet.Data.Context.EFCore.SqlServer.Database
 	        IContainer container,
 	        IServiceProvider serviceProvider = null)
 	    {
-	        //if (configuration == null || configuration.ConnectionStrings == null
-	        //                          || !configuration.ConnectionStrings.ContainsKey("QUIRCSqlServer"))
-	        //{
-	        //    throw new Exception("Invalid configuration specified in database manager");
-	        //}
+	        if (configuration == null || configuration.ConnectionStrings == null
+	                                  || !configuration.ConnectionStrings.ContainsKey("RepoTestSqlServer"))
+	        {
+	            throw new Exception("Invalid configuration specified in database manager");
+	        }
 
             container.Configure(
                  config =>

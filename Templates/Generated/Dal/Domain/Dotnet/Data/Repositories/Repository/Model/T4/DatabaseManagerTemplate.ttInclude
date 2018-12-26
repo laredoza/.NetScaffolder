@@ -87,7 +87,7 @@ namespace <#= ContextData.TransformFullnamespace(DataType.BaseNamespace) #>.<#= 
 	        IServiceProvider serviceProvider = null)
 	    {
 	        if (configuration == null || configuration.ConnectionStrings == null
-	                                  || !configuration.ConnectionStrings.ContainsKey("QUIRCSqlServer"))
+	                                  || !configuration.ConnectionStrings.ContainsKey("<#= $"{ContextData.CustomConnectionName}{Driver.Prefix}" #>"))
 	        {
 	            throw new Exception("Invalid configuration specified in database manager");
 	        }

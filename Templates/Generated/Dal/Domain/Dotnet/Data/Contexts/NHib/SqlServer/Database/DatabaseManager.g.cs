@@ -66,7 +66,7 @@ namespace RepositoryEFDotnet.Data.Context.NHib.SqlServer.Database
 	        IServiceProvider serviceProvider = null)
 	    {
 	        if (configuration == null || configuration.ConnectionStrings == null
-	                                  || !configuration.ConnectionStrings.ContainsKey("QUIRCSqlServer"))
+	                                  || !configuration.ConnectionStrings.ContainsKey("RepoTestSqlServer"))
 	        {
 	            throw new Exception("Invalid configuration specified in database manager");
 	        }
