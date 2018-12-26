@@ -1,30 +1,56 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
+using RepositoryEFDotnet.Infrastructure.Web.Core.Extensions;
 
-namespace Default
+namespace RepositoryEFDotnet.Services.WebApi.Default
 {
     public class Startup
     {
+        #region Fields
+
+        /// <summary>
+        ///     The hosting environment.
+        /// </summary>
+        private IHostingEnvironment hostingEnvironment;
+
+        #endregion
+
+        #region Constructors and Destructors
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
 
+        #endregion
+
+        #region Public Properties
+
         public IConfiguration Configuration { get; }
 
+        #endregion
+
+        #region Public Methods And Operators
+
+        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        public void Configure(IApplicationBuilder app, IHostingEnvironment hostingEnvironment)
+        {
+            this.hostingEnvironment = hostingEnvironment;
+
+            if (hostingEnvironment.IsDevelopment())
+                app.UseDeveloperExceptionPage();
+            else
+                app.UseHsts();
+
+            app.UseHttpsRedirection();
+            app.UseMvc(routes => { routes.MapRoute("DefaultApi", "api/{controller}/{id?}"); });
+        }
+
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
+        public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
             //.AddRazorPagesOptions(options =>
@@ -35,26 +61,10 @@ namespace Default
             //    options.Conventions.AllowAnonymousToFolder("/Private/PublicPages");
             //})
             //.SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            //return services.Build(Configuration, hostingEnvironment, "./Modules", "RepositoryEFDotnet");
+            return services.Build(Configuration, hostingEnvironment, ".", "RepositoryEFDotnet");
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
-        {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-            else
-            {
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
-            }
-
-            app.UseHttpsRedirection();
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute("DefaultApi", "api/{controller}/{id?}");
-            });
-        }
+        #endregion
     }
 }

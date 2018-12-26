@@ -22,24 +22,17 @@ using RepositoryEFDotnet.Data.Interfaces;
 using System;
 using System.Collections.Generic;
 using StructureMap.Pipeline;
+using RepositoryEFDotnet.Data.ApplicationService;
 
 namespace RepositoryEFDotnet.Data.Repository.Register
 {
-	public class RepositoryRegistration : StructureMap.Registry
+	public class ApplicationServiceRegistration : StructureMap.Registry
 	{			
 		#region CTOR
 		
-        public RepositoryRegistration()
+        public ApplicationServiceRegistration()
         {
-			this.For<IBankAccountRepository>().LifecycleIs(Lifecycles.Unique).UseIfNone<BankAccountRepository>();
-			this.For<IBankTransfersRepository>().LifecycleIs(Lifecycles.Unique).UseIfNone<BankTransfersRepository>();
-			this.For<IBookRepository>().LifecycleIs(Lifecycles.Unique).UseIfNone<BookRepository>();
-			this.For<ICountryRepository>().LifecycleIs(Lifecycles.Unique).UseIfNone<CountryRepository>();
-			this.For<ICustomerRepository>().LifecycleIs(Lifecycles.Unique).UseIfNone<CustomerRepository>();
-			this.For<IOrderRepository>().LifecycleIs(Lifecycles.Unique).UseIfNone<OrderRepository>();
-			this.For<IOrderDetailsRepository>().LifecycleIs(Lifecycles.Unique).UseIfNone<OrderDetailsRepository>();
-			this.For<IProductRepository>().LifecycleIs(Lifecycles.Unique).UseIfNone<ProductRepository>();
-			this.For<ISoftwareRepository>().LifecycleIs(Lifecycles.Unique).UseIfNone<SoftwareRepository>();
+			this.For<IProductApplicationService>().LifecycleIs(Lifecycles.Unique).UseIfNone<ProductApplicationService>();
         }
 		
 		#endregion
