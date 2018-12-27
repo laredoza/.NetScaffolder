@@ -16,6 +16,11 @@
 <#@ include file="WebApiGenerator.ttInclude" #>
 <#@ include file="WebApiTemplate.ttInclude" #>
 <#@ include file="WebApiTemplateCustom.ttInclude" #>
+<#@ include file="StructureMapGenerator.ttInclude" #>
+<#@ include file="StructureMapApplicationServiceRegistrationTemplate.ttInclude" #>
+
+
+
 
 <#+
     public class ProjectGenerator : BaseProjectGenerator
@@ -75,7 +80,7 @@
 
 
                 if(dataType is ContextDataType)
-                {				
+                {			
                     var contextDataType = dataType as ContextDataType;
                     var entityDataType = dataTypes.FirstOrDefault(o => o is EntityDataType) as EntityDataType;
 					
@@ -99,26 +104,34 @@
 							
                             var contxtGen = new ContextGenerator();
 							
-							contxtGen.Models = domain.Tables;
-							contxtGen.DataType = contextDataType;
-							contxtGen.ContextData = contextData;
-							contxtGen.EntityDataType = entityDataType;
-							contxtGen.MappingNamespace = mappingGen.FullNamespace;
-							contxtGen.MappingPostFix = mappingDataType.PostFix;
-							contxtGen.Run();
+                            contxtGen.Models = domain.Tables;
+                            contxtGen.DataType = contextDataType;
+                            contxtGen.ContextData = contextData;
+                            contxtGen.EntityDataType = entityDataType;
+                            contxtGen.MappingNamespace = mappingGen.FullNamespace;
+                            contxtGen.MappingPostFix = mappingDataType.PostFix;
+                            contxtGen.Run();
                         }
                     }
                 }
 				
                 if(dataType is StructureMapDataType)
                 {
+                    var contextDataType =  dataTypes.FirstOrDefault(o => o is ContextDataType) as ContextDataType;;
+
+                    StructureMapGenerator structureMapGenerator = new StructureMapGenerator();
+                    structureMapGenerator.DataType = dataType as StructureMapDataType;
+                    structureMapGenerator.Drivers = contextDataType.Drivers;
+                    //structureMapGenerator.ContextData = contextDataType;
+                    structureMapGenerator.ApplicationServiceDataType = dataTypes.FirstOrDefault(o => o is ApplicationServiceDataType) as ApplicationServiceDataType;
+                    structureMapGenerator.Run();
+
                     var repositoryRegistration = new RepositoryRegistrationGenerator();
                     repositoryRegistration.Models = domain.Tables;
                     repositoryRegistration.DataType = dataTypes.FirstOrDefault(o => o is RepositoryDataType) as RepositoryDataType;
                     repositoryRegistration.RepoInterfaceDataType = dataTypes.FirstOrDefault(o => o is RepoInterfaceDataType) as RepoInterfaceDataType;
                     repositoryRegistration.Run();
 
-                    var contextDataType =  dataTypes.FirstOrDefault(o => o is ContextDataType) as ContextDataType;;
                     
                     if(contextDataType.Contexts.Any())
                     {
@@ -129,9 +142,9 @@
                         dbManGen.Run();
 
                         var regisGen = new ContextRegistrationGenerator();
-						regisGen.ContextData = dbManGen.ContextData;
-						regisGen.Drivers = dbManGen.Drivers;
-						regisGen.DataType = dataTypes.FirstOrDefault(o => o is ContextDataType) as ContextDataType;
+                        regisGen.ContextData = dbManGen.ContextData;
+                        regisGen.Drivers = dbManGen.Drivers;
+                        regisGen.DataType = dataTypes.FirstOrDefault(o => o is ContextDataType) as ContextDataType;
                         regisGen.InterfaceDatabasePath = (dataTypes.FirstOrDefault(o => o is DtoInterfaceDataType) as DtoInterfaceDataType).FullNamespace; 
                         regisGen.NameSpaces = (dataType as StructureMapDataType).AdditionalNamespaces; 
 						
@@ -175,7 +188,7 @@
                 //
                 //var unitTestGen = new BaseUnitTestGenerator();
                 //unitTestGen.DataType = dataType as UnitTestDataType; 
-			    //            estGen.Models = domain.Tables;
+                //            estGen.Models = domain.Tables;
                 //unitTestGen.DtoNamespace = dtoDataType.FullNamespace;
                 //unitTestGen.DtoInterfaceNamespace = dtoInterfaceDataType.FullNamespace;
                 //unitTestGen.EntityNamespace = entityDataType.FullNamespace;

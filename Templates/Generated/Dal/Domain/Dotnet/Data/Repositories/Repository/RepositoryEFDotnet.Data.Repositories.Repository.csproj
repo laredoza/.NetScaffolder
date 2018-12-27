@@ -32,6 +32,7 @@
 ..\..\..\Services\WebApi\Default\Controllers\ProductController.g.cs
 ..\..\ApplicationServices\ApplicationService\ApplicationService\CustomerApplicationService.g.cs
 ..\..\ApplicationServices\ApplicationService\ApplicationService\ProductApplicationService.g.cs
+..\..\ApplicationServices\ApplicationService\Register\ApplicationServiceRegistration.g.cs
 ..\..\Contexts\EF\MySql\Context\MySqlAccountContext.g.cs
 ..\..\Contexts\EF\MySql\Context\MySqlCustomerContext.g.cs
 ..\..\Contexts\EF\MySql\Context\MySqlFullContext.g.cs

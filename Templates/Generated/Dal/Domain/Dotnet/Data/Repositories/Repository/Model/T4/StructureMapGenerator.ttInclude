@@ -1,32 +1,43 @@
-﻿<#@ include file="StructureMapTemplate.ttinclude" #>
-<#+
+﻿<#+
     public class StructureMapGenerator : BaseGenerator
     {
-		public StructureMapDataType DataType { get; set; }
+        public StructureMapDataType DataType { get; set; }
         public List<IDriver> Drivers {get;set;}
-		public ContextData ContextData {get;set;}
+        public ContextData ContextData {get;set;}
+        public ApplicationServiceDataType ApplicationServiceDataType {get;set;}
 
-		private string projectPath = string.Empty;
+        private string projectPath = string.Empty;
 		
         protected override void RunCore()
         {
-			foreach(IDriver driver in Drivers )
-			{
-				// Debugger.Break();
-				
-				projectPath = string.Format(ContextData.OutputPath, driver.ParentFolder, driver.Prefix);
+            //foreach(IDriver driver in Drivers )
+            //{
+            //// Debugger.Break();
+            //
+            //projectPath = string.Format(ContextData.OutputPath, driver.ParentFolder, driver.Prefix);
+            //
+            //var template = new StructureMapTemplate();
+            //
+            //if(!string.IsNullOrEmpty(projectPath))
+            //{
+            //template.Output.Project =  projectPath;
+            //}
+            //
+            //template.ContextData = ContextData;
+            //template.DataType = DataType;
+            //template.RenderToFile(string.Format(@"{0}\{2}.g.cs", DataType.OutputFolder, "ContextRegistration"));
+            //}
+            //
+            StructureMapApplicationServiceRegistrationTemplate applicationServiceTemplate = new StructureMapApplicationServiceRegistrationTemplate();
+            applicationServiceTemplate.DataType = ApplicationServiceDataType;
 
-                var template = new StructureMapTemplate();
-				
-				if(!string.IsNullOrEmpty(projectPath))
-				{
-					template.Output.Project =  projectPath;
-				}
+            if(!string.IsNullOrEmpty(ApplicationServiceDataType.ApplicationServiceData.First().OutputPath))
+            {
+                applicationServiceTemplate.Output.Project = ApplicationServiceDataType.ApplicationServiceData.First().OutputPath;
+            }
 
-				template.ContextData = ContextData;
-				template.DataType = DataType;
-				template.RenderToFile(string.Format(@"{0}\{2}.g.cs", DataType.OutputFolder, "ContextRegistration"));
-			}
+            applicationServiceTemplate.RenderToFile(@"Register\ApplicationServiceRegistration.g.cs");
+ 
         }
     }
 #>

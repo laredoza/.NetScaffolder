@@ -1,0 +1,46 @@
+﻿<#+
+public class StructureMapApplicationServiceRegistrationTemplate : BaseTemplate 
+{
+    public ApplicationServiceDataType DataType {get;set;}
+   
+	public override string TransformText()
+	{
+		//Debugger.Break();
+		Header = new CopyrightHeader();
+		Header.Filename = "RepositoryRegistration";
+#>
+
+<#= Header.TransformText() #>
+
+// *******************************************************************
+//	GENERATED CODE. DOT NOT MODIFY MANUALLY AS CHANGES CAN BE LOST!!!
+//	USE A PARTIAL CLASS INSTEAD
+// *******************************************************************
+<#+ foreach(var nameSpace in DataType.AdditionalNamespaces){ #>
+using <#= nameSpace #>;
+<#+ } #>
+using System;
+using System.Collections.Generic;
+using StructureMap.Pipeline;
+
+namespace <#= DataType.ApplicationServiceData.First().TransformFullnamespace(DataType.BaseNamespace) #>.Register
+{
+	public class ApplicationServiceRegistration : StructureMap.Registry
+	{			
+		#region CTOR
+		
+        public ApplicationServiceRegistration()
+        {
+<#+            foreach(var applicationServiceData in DataType.ApplicationServiceData){ #>
+			this.For<I<#= applicationServiceData.ApplicationServiceName #>ApplicationService>().LifecycleIs(Lifecycles.Unique).UseIfNone<<#= applicationServiceData.ApplicationServiceName #>ApplicationService>();
+<#+ } #>
+        }
+		
+		#endregion
+	}
+}
+<#+
+		return this.GenerationEnvironment.ToString();
+	}
+}
+#>
