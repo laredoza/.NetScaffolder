@@ -23,6 +23,14 @@
 
         protected override void RunCore()
         {
+            this.GenerateRepository();
+            this.GenerateApplicationService(); 
+            this.GenerateDatabaseManager();
+            this.GenerateDatabaseManagerRegister();
+        }
+        
+        private void GenerateApplicationService()
+        {
             StructureMapApplicationServiceRegistrationTemplate applicationServiceTemplate = new StructureMapApplicationServiceRegistrationTemplate();
             applicationServiceTemplate.DataType = ApplicationServiceDataType;
 
@@ -32,7 +40,10 @@
             }
 
             applicationServiceTemplate.RenderToFile(@"Register\ApplicationServiceRegistration.g.cs");
- 
+        }
+
+        private void GenerateRepository()
+        {
             var repositoryRegistrationTemplate = new StructureMapRepositoryRegistrationTemplate();
 			
             repositoryRegistrationTemplate.DataType = RepositoryDataType;
@@ -45,43 +56,45 @@
             }
 
             repositoryRegistrationTemplate.RenderToFile(string.Format(@"{0}\{1}.g.cs", "Register", "RepositoryRegistration"));
+        }
 
-
+        private void GenerateDatabaseManager()
+        {
             StructureDatabaseManagerTemplate structureDatabaseManagerTemplate = new StructureDatabaseManagerTemplate();
 
             foreach(IDriver driver in Drivers )
-			{
-				//Debugger.Break();
+            {
+                string projectPath = string.Format(ContextData.OutputPath, driver.ParentFolder, driver.Prefix);
 				
-				string projectPath = string.Format(ContextData.OutputPath, driver.ParentFolder, driver.Prefix);
-				
-				if(!string.IsNullOrEmpty(projectPath))
-				{
-					structureDatabaseManagerTemplate.Output.Project =  projectPath;
-				}
+                if(!string.IsNullOrEmpty(projectPath))
+                {
+                    structureDatabaseManagerTemplate.Output.Project =  projectPath;
+                }
 
                 structureDatabaseManagerTemplate.DataType = ContextDataType;
-				structureDatabaseManagerTemplate.ContextData = ContextData;
+                structureDatabaseManagerTemplate.ContextData = ContextData;
                 structureDatabaseManagerTemplate.Driver = driver;
-				structureDatabaseManagerTemplate.RenderToFile(string.Format(@"{0}\{1}.g.cs", "Database", "DatabaseManager"));
-			}
-            
-            var structureMapContextRegistrationTemplate = new StructureMapContextRegistrationTemplate();
-			foreach(IDriver driver in Drivers )
-			{
-				if(!string.IsNullOrEmpty(ContextData.OutputPath))
-				{
-                    structureMapContextRegistrationTemplate.Output.Project = string.Format(ContextData.OutputPath, driver.ParentFolder, driver.Prefix);
-				}
+                structureDatabaseManagerTemplate.RenderToFile(string.Format(@"{0}\{1}.g.cs", "Database", "DatabaseManager"));
+            }
+        }
 
-				structureMapContextRegistrationTemplate.DataType = ContextDataType;
-				structureMapContextRegistrationTemplate.ContextData = ContextData;
+        private void GenerateDatabaseManagerRegister()
+        {
+            var structureMapContextRegistrationTemplate = new StructureMapContextRegistrationTemplate();
+            foreach(IDriver driver in Drivers )
+            {
+                if(!string.IsNullOrEmpty(ContextData.OutputPath))
+                {
+                    structureMapContextRegistrationTemplate.Output.Project = string.Format(ContextData.OutputPath, driver.ParentFolder, driver.Prefix);
+                }
+
+                structureMapContextRegistrationTemplate.DataType = ContextDataType;
+                structureMapContextRegistrationTemplate.ContextData = ContextData;
                 structureMapContextRegistrationTemplate.Driver = driver;
                 structureMapContextRegistrationTemplate.InterfaceDatabasePath = InterfaceDatabasePath;
                 structureMapContextRegistrationTemplate.NameSpaces = NameSpaces;
                 structureMapContextRegistrationTemplate.RenderToFile(string.Format(@"{0}Regisster\{1}.g.cs", ContextData.OutputFolder,"ContextRegistration"));
-			}
-
+            }
         }
     }
 #>
