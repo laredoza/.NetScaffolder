@@ -10,7 +10,6 @@
 <#@ include file="ApplicationServiceGenerator.ttInclude" #>
 <#@ include file="ApplicationServiceInterfaceTemplate.ttInclude" #>
 <#@ include file="ApplicationServiceTemplate.ttInclude" #>
-<#@ include file="ContextRegistrationGenerator.ttInclude" #>
 <#@ include file="WebApiGenerator.ttInclude" #>
 <#@ include file="WebApiTemplate.ttInclude" #>
 <#@ include file="WebApiTemplateCustom.ttInclude" #>
@@ -124,30 +123,13 @@
                     structureMapGenerator.Models = domain.Tables;
                     structureMapGenerator.RepositoryDataType = dataTypes.FirstOrDefault(o => o is RepositoryDataType) as RepositoryDataType;
                     structureMapGenerator.RepoInterfaceDataType = dataTypes.FirstOrDefault(o => o is RepoInterfaceDataType) as RepoInterfaceDataType;
-
                     structureMapGenerator.ContextData = contextDataType.Contexts.Any(o => o.IsDefault) ? contextDataType.Contexts.First(o => o.IsDefault) : contextDataType.Contexts.FirstOrDefault();
                     structureMapGenerator.Drivers = contextDataType.Drivers;
                     structureMapGenerator.ContextDataType = contextDataType;
+                    structureMapGenerator.InterfaceDatabasePath = (dataTypes.FirstOrDefault(o => o is DtoInterfaceDataType) as DtoInterfaceDataType).FullNamespace; 
+                    structureMapGenerator.NameSpaces = (dataType as StructureMapDataType).AdditionalNamespaces; 
 
                     structureMapGenerator.Run();
-                    
-                    if(contextDataType.Contexts.Any())
-                    {
-                        //var dbManGen = new DatabaseManagerGenerator();
-                        //dbManGen.ContextData = contextDataType.Contexts.Any(o => o.IsDefault) ? contextDataType.Contexts.First(o => o.IsDefault) : contextDataType.Contexts.FirstOrDefault();
-                        //dbManGen.Drivers = contextDataType.Drivers;
-                        //dbManGen.DataType = contextDataType;
-                        //dbManGen.Run();
-                        //
-                        var regisGen = new ContextRegistrationGenerator();
-                        regisGen.ContextData = structureMapGenerator.ContextData;
-                        regisGen.Drivers = structureMapGenerator.Drivers;
-                        regisGen.DataType = dataTypes.FirstOrDefault(o => o is ContextDataType) as ContextDataType;
-                        regisGen.InterfaceDatabasePath = (dataTypes.FirstOrDefault(o => o is DtoInterfaceDataType) as DtoInterfaceDataType).FullNamespace; 
-                        regisGen.NameSpaces = (dataType as StructureMapDataType).AdditionalNamespaces; 
-						
-                        regisGen.Run();                 
-                    }
                 }
 			
                 if(dataType is RepoInterfaceDataType)

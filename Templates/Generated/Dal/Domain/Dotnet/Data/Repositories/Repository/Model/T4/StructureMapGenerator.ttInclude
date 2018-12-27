@@ -1,6 +1,7 @@
 ﻿<#@ include file="StructureMapApplicationServiceRegistrationTemplate.ttInclude" #>
 <#@ include file="StructureMapRepositoryRegistrationTemplate.ttInclude" #>
 <#@ include file="StructureDatabaseManagerTemplate.ttInclude" #>
+<#@ include file="StructureMapContextRegistrationTemplate.ttInclude" #>
 
 <#+
     public class StructureMapGenerator : BaseGenerator
@@ -15,6 +16,10 @@
         public ContextDataType ContextDataType { get; set; }
         public List<IDriver> Drivers {get;set;}
         public ContextData ContextData {get;set;}
+
+        public string InterfaceDatabasePath {get; set;}
+        public List<string> NameSpaces { get; set;}
+       
 
         protected override void RunCore()
         {
@@ -59,6 +64,22 @@
 				structureDatabaseManagerTemplate.ContextData = ContextData;
                 structureDatabaseManagerTemplate.Driver = driver;
 				structureDatabaseManagerTemplate.RenderToFile(string.Format(@"{0}\{1}.g.cs", "Database", "DatabaseManager"));
+			}
+            
+            var structureMapContextRegistrationTemplate = new StructureMapContextRegistrationTemplate();
+			foreach(IDriver driver in Drivers )
+			{
+				if(!string.IsNullOrEmpty(ContextData.OutputPath))
+				{
+                    structureMapContextRegistrationTemplate.Output.Project = string.Format(ContextData.OutputPath, driver.ParentFolder, driver.Prefix);
+				}
+
+				structureMapContextRegistrationTemplate.DataType = ContextDataType;
+				structureMapContextRegistrationTemplate.ContextData = ContextData;
+                structureMapContextRegistrationTemplate.Driver = driver;
+                structureMapContextRegistrationTemplate.InterfaceDatabasePath = InterfaceDatabasePath;
+                structureMapContextRegistrationTemplate.NameSpaces = NameSpaces;
+                structureMapContextRegistrationTemplate.RenderToFile(string.Format(@"{0}Regisster\{1}.g.cs", ContextData.OutputFolder,"ContextRegistration"));
 			}
 
         }

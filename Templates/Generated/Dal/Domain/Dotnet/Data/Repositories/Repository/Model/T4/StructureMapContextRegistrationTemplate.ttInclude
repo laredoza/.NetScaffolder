@@ -1,5 +1,5 @@
 ﻿<#+
-public class ContextRegistrationTemplate : BaseTemplate 
+public class StructureMapContextRegistrationTemplate : BaseTemplate 
 {
 	public ContextDataType DataType { get; set; }
 	public ContextData ContextData { get; set; }
