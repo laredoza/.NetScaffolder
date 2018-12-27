@@ -252,7 +252,7 @@ string modelName = DataType.NamingConvention == null ? model.TableName : DataTyp
         /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns><#= DataType.CollectionOption.ClassNameInterface #><I<#= modelName #>></returns>
-        [HttpGet("{<#=DataType.TransformAsParameterName(model.Columns.Where(o => o.IsPrimaryKey)).Trim()#>}{caseSensitive}/{cache}")]
+        [HttpGet("{<#=DataType.TransformAsParameterName(model.Columns.Where(o => o.IsPrimaryKey)).Trim()#>}/{caseSensitive}/{cache}")]
 		public ActionResult<<#= DataType.CollectionOption.ClassNameInterface #><I<#= modelName #>>> <#= modelName #>SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= DataType.TransformAsParameter(col) #>, bool caseSensitive, bool cache)
         {
             if( this.<#= modelName #>SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>Includes == null)
@@ -276,7 +276,7 @@ string modelName = DataType.NamingConvention == null ? model.TableName : DataTyp
         /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns><#= DataType.CollectionOption.ClassNameInterface #><I<#= modelName #>></returns>
-        [HttpGet("{<#=DataType.TransformAsParameterName(model.Columns.Where(o => o.IsPrimaryKey)).Trim()#>}{caseSensitive}/{cache}")]
+        [HttpGet("{<#=DataType.TransformAsParameterName(model.Columns.Where(o => o.IsPrimaryKey)).Trim()#>}/{caseSensitive}/{cache}")]
         public async Task<ActionResult<<#= DataType.CollectionOption.ClassNameInterface #><I<#= modelName #>>>> <#= modelName #>SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>Async(<#= DataType.TransformAsParameter(col) #>, bool caseSensitive, bool cache)
         {
             if( this.<#= modelName #>SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>IncludesAsync == null)

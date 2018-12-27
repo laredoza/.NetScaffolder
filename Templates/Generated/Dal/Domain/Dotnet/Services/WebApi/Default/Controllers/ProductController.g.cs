@@ -157,7 +157,7 @@ namespace RepositoryEFDotnet.Data.Controllers
         /// <param name="productDescription">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<IProduct></returns>
-        [HttpGet("{productId}{caseSensitive}/{cache}")]
+        [HttpGet("{productId}/{caseSensitive}/{cache}")]
 		public ActionResult<IList<IProduct>> ProductSearchByProductDescription(string productDescription, bool caseSensitive, bool cache)
         {
             if( this.ProductSearchByProductDescriptionIncludes == null)
@@ -181,7 +181,7 @@ namespace RepositoryEFDotnet.Data.Controllers
         /// <param name="productDescription">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<IProduct></returns>
-        [HttpGet("{productId}{caseSensitive}/{cache}")]
+        [HttpGet("{productId}/{caseSensitive}/{cache}")]
         public async Task<ActionResult<IList<IProduct>>> ProductSearchByProductDescriptionAsync(string productDescription, bool caseSensitive, bool cache)
         {
             if( this.ProductSearchByProductDescriptionIncludesAsync == null)
@@ -206,7 +206,7 @@ namespace RepositoryEFDotnet.Data.Controllers
         /// <param name="unitAmount">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<IProduct></returns>
-        [HttpGet("{productId}{caseSensitive}/{cache}")]
+        [HttpGet("{productId}/{caseSensitive}/{cache}")]
 		public ActionResult<IList<IProduct>> ProductSearchByUnitAmount(string unitAmount, bool caseSensitive, bool cache)
         {
             if( this.ProductSearchByUnitAmountIncludes == null)
@@ -230,7 +230,7 @@ namespace RepositoryEFDotnet.Data.Controllers
         /// <param name="unitAmount">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<IProduct></returns>
-        [HttpGet("{productId}{caseSensitive}/{cache}")]
+        [HttpGet("{productId}/{caseSensitive}/{cache}")]
         public async Task<ActionResult<IList<IProduct>>> ProductSearchByUnitAmountAsync(string unitAmount, bool caseSensitive, bool cache)
         {
             if( this.ProductSearchByUnitAmountIncludesAsync == null)
@@ -255,7 +255,7 @@ namespace RepositoryEFDotnet.Data.Controllers
         /// <param name="publisher">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<IProduct></returns>
-        [HttpGet("{productId}{caseSensitive}/{cache}")]
+        [HttpGet("{productId}/{caseSensitive}/{cache}")]
 		public ActionResult<IList<IProduct>> ProductSearchByPublisher(string publisher, bool caseSensitive, bool cache)
         {
             if( this.ProductSearchByPublisherIncludes == null)
@@ -279,7 +279,7 @@ namespace RepositoryEFDotnet.Data.Controllers
         /// <param name="publisher">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<IProduct></returns>
-        [HttpGet("{productId}{caseSensitive}/{cache}")]
+        [HttpGet("{productId}/{caseSensitive}/{cache}")]
         public async Task<ActionResult<IList<IProduct>>> ProductSearchByPublisherAsync(string publisher, bool caseSensitive, bool cache)
         {
             if( this.ProductSearchByPublisherIncludesAsync == null)
