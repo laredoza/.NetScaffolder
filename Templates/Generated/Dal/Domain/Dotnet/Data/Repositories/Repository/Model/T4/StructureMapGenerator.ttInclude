@@ -1,4 +1,7 @@
-﻿<#+
+﻿<#@ include file="StructureMapApplicationServiceRegistrationTemplate.ttInclude" #>
+<#@ include file="StructureMapRepositoryRegistrationTemplate.ttInclude" #>
+
+<#+
     public class StructureMapGenerator : BaseGenerator
     {
         public StructureMapDataType DataType { get; set; }
@@ -6,8 +9,10 @@
         public ContextData ContextData {get;set;}
         public ApplicationServiceDataType ApplicationServiceDataType {get;set;}
 
-        private string projectPath = string.Empty;
-		
+        public List<Table> Models { get; set; }
+        public RepositoryDataType RepositoryDataType { get; set; }
+        public RepoInterfaceDataType RepoInterfaceDataType { get; set; }
+
         protected override void RunCore()
         {
             //foreach(IDriver driver in Drivers )
@@ -38,6 +43,18 @@
 
             applicationServiceTemplate.RenderToFile(@"Register\ApplicationServiceRegistration.g.cs");
  
+            var repositoryRegistrationTemplate = new StructureMapRepositoryRegistrationTemplate();
+			
+            repositoryRegistrationTemplate.DataType = RepositoryDataType;
+            repositoryRegistrationTemplate.Models = Models;
+            repositoryRegistrationTemplate.RepoInterfaceDataType = RepoInterfaceDataType;
+
+            if(!string.IsNullOrEmpty(RepositoryDataType.OutputPath))
+            {
+                repositoryRegistrationTemplate.Output.Project = RepositoryDataType.OutputPath;
+            }
+
+            repositoryRegistrationTemplate.RenderToFile(string.Format(@"{0}\{1}.g.cs", "Register", "RepositoryRegistration"));
         }
     }
 #>

@@ -1,5 +1,5 @@
 ﻿<#+
-public class RepositoryRegistrationTemplate : BaseTemplate 
+public class StructureMapRepositoryRegistrationTemplate : BaseTemplate 
 {
 	public List<Table> Models { get; set; }
 	public RepositoryDataType DataType { get; set; }

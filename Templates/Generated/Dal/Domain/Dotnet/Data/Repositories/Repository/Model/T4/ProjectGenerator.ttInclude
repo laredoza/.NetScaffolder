@@ -11,13 +11,12 @@
 <#@ include file="ApplicationServiceGenerator.ttInclude" #>
 <#@ include file="ApplicationServiceInterfaceTemplate.ttInclude" #>
 <#@ include file="ApplicationServiceTemplate.ttInclude" #>
-<#@ include file="RepositoryRegistrationGenerator.ttInclude" #>
 <#@ include file="ContextRegistrationGenerator.ttInclude" #>
 <#@ include file="WebApiGenerator.ttInclude" #>
 <#@ include file="WebApiTemplate.ttInclude" #>
 <#@ include file="WebApiTemplateCustom.ttInclude" #>
 <#@ include file="StructureMapGenerator.ttInclude" #>
-<#@ include file="StructureMapApplicationServiceRegistrationTemplate.ttInclude" #>
+
 
 
 
@@ -122,16 +121,12 @@
                     StructureMapGenerator structureMapGenerator = new StructureMapGenerator();
                     structureMapGenerator.DataType = dataType as StructureMapDataType;
                     structureMapGenerator.Drivers = contextDataType.Drivers;
-                    //structureMapGenerator.ContextData = contextDataType;
                     structureMapGenerator.ApplicationServiceDataType = dataTypes.FirstOrDefault(o => o is ApplicationServiceDataType) as ApplicationServiceDataType;
+                    structureMapGenerator.Models = domain.Tables;
+                    structureMapGenerator.RepositoryDataType = dataTypes.FirstOrDefault(o => o is RepositoryDataType) as RepositoryDataType;
+                    structureMapGenerator.RepoInterfaceDataType = dataTypes.FirstOrDefault(o => o is RepoInterfaceDataType) as RepoInterfaceDataType;
+
                     structureMapGenerator.Run();
-
-                    var repositoryRegistration = new RepositoryRegistrationGenerator();
-                    repositoryRegistration.Models = domain.Tables;
-                    repositoryRegistration.DataType = dataTypes.FirstOrDefault(o => o is RepositoryDataType) as RepositoryDataType;
-                    repositoryRegistration.RepoInterfaceDataType = dataTypes.FirstOrDefault(o => o is RepoInterfaceDataType) as RepoInterfaceDataType;
-                    repositoryRegistration.Run();
-
                     
                     if(contextDataType.Contexts.Any())
                     {
