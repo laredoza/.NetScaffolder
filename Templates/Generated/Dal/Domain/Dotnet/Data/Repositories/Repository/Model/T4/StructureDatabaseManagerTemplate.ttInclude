@@ -3,7 +3,7 @@
 <#@ import namespace="DotNetScaffolder.Components.Drivers.DefaultDrivers" #>
 
 <#+
-public class DatabaseManagerTemplate : BaseTemplate 
+public class StructureDatabaseManagerTemplate : BaseTemplate 
 {
 	public ContextDataType DataType { get; set; }
 	public ContextData ContextData { get; set; }
