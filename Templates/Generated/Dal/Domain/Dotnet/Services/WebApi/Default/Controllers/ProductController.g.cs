@@ -59,14 +59,21 @@ namespace RepositoryEFDotnet.Data.Controllers
         /// <param name="cache">Enables or disables caching</param>
         /// <returns>IProduct</returns>
         [HttpGet("{productId}/{cache}")]
-		public IProduct LoadByProductProductId(int productId, bool cache)
+		public ActionResult<IProduct> LoadByProductProductId(int productId, bool cache)
         {
             if( this.LoadByProductProductIdIncludes == null)
             {
                 this.LoadByProductProductIdIncludes = new Expression<Func<IProduct, object>>[]{};
             }
 
-            return this.ProductApplicationService.LoadByProductProductId(productId, cache, this.LoadByProductProductIdIncludes);
+            var result = this.ProductApplicationService.LoadByProductProductId(productId, cache, this.LoadByProductProductIdIncludes);
+
+            if (result == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(result);
         }
 
         /// <summary>
@@ -76,14 +83,21 @@ namespace RepositoryEFDotnet.Data.Controllers
         /// <param name="cache">Enables or disables caching</param>
         /// <returns>IProduct</returns>
         [HttpGet("{productId}/{cache}")]
-		public async Task<IProduct> LoadByProductProductIdAsync(int productId, bool cache)
+		public async Task<ActionResult<IProduct>> LoadByProductProductIdAsync(int productId, bool cache)
         {
             if( this.LoadByProductProductIdAsyncIncludes == null)
             {
                 this.LoadByProductProductIdAsyncIncludes = new Expression<Func<IProduct, object>>[]{};
             }
 
-            return await this.ProductApplicationService.LoadByProductProductIdAsync(productId, cache, this.LoadByProductProductIdAsyncIncludes);
+           var result = await this.ProductApplicationService.LoadByProductProductIdAsync(productId, cache, this.LoadByProductProductIdAsyncIncludes);
+            
+            if (result == null)
+            {
+                return NotFound(result);
+            }
+
+            return Ok(result);
         }
 
         /// <summary>
@@ -92,14 +106,21 @@ namespace RepositoryEFDotnet.Data.Controllers
         /// <param name="cache">Enables or disables caching</param>
         /// <returns>IList<IProduct></returns>
         [HttpGet("{cache}")]
-		public IList<IProduct> ProductLoadAll(bool cache)
+		public ActionResult<IList<IProduct>> ProductLoadAll(bool cache)
         {
             if( this.ProductLoadAllIncludes == null)
             {
                 this.ProductLoadAllIncludes = new Expression<Func<IProduct, object>>[]{};
             }
 
-            return this.ProductApplicationService.ProductLoadAll(cache, this.ProductLoadAllIncludes);
+            var result = this.ProductApplicationService.ProductLoadAll(cache, this.ProductLoadAllIncludes);
+            
+            if (result == null)
+            {
+                return NotFound(result);
+            }
+
+            return Ok(result);
         }
 
         /// <summary>
@@ -108,14 +129,21 @@ namespace RepositoryEFDotnet.Data.Controllers
         /// <param name="cache">Enables or disables caching</param>
         /// <returns>IList<IProduct></returns>
         [HttpGet("{cache}")]
-		public async Task<IList<IProduct>> ProductLoadAllAsync(bool cache)
+		public async Task<ActionResult<IList<IProduct>>> ProductLoadAllAsync(bool cache)
         {
             if( this.ProductLoadAllAsyncIncludes == null)
             {
                 this.ProductLoadAllAsyncIncludes = new Expression<Func<IProduct, object>>[]{};
             }
 
-            return await this.ProductApplicationService.ProductLoadAllAsync(cache, this.ProductLoadAllAsyncIncludes);
+            var result = await this.ProductApplicationService.ProductLoadAllAsync(cache, this.ProductLoadAllAsyncIncludes);
+            
+            if (result == null)
+            {
+                return NotFound(result);
+            }
+
+            return Ok(result);
         }
 
 
@@ -129,15 +157,22 @@ namespace RepositoryEFDotnet.Data.Controllers
         /// <param name="productDescription">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<IProduct></returns>
-        [HttpGet]
-		public IList<IProduct> ProductSearchByProductDescription(string productDescription, bool caseSensitive, bool cache)
+        [HttpGet("{productId}{caseSensitive}/{cache}")]
+		public ActionResult<IList<IProduct>> ProductSearchByProductDescription(string productDescription, bool caseSensitive, bool cache)
         {
             if( this.ProductSearchByProductDescriptionIncludes == null)
             {
                 this.ProductSearchByProductDescriptionIncludes = new Expression<Func<IProduct, object>>[]{};
             }
 
-            return this.ProductApplicationService.ProductSearchByProductDescription(productDescription,caseSensitive, cache, this.ProductSearchByProductDescriptionIncludes);
+            var result = this.ProductApplicationService.ProductSearchByProductDescription(productDescription,caseSensitive, cache, this.ProductSearchByProductDescriptionIncludes);
+            
+            if (result == null)
+            {
+                return NotFound(result);
+            }
+
+            return Ok(result);
         }
 
         /// <summary>
@@ -146,15 +181,22 @@ namespace RepositoryEFDotnet.Data.Controllers
         /// <param name="productDescription">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<IProduct></returns>
-		[HttpGet]
-        public async Task<IList<IProduct>> ProductSearchByProductDescriptionAsync(string productDescription, bool caseSensitive, bool cache)
+        [HttpGet("{productId}{caseSensitive}/{cache}")]
+        public async Task<ActionResult<IList<IProduct>>> ProductSearchByProductDescriptionAsync(string productDescription, bool caseSensitive, bool cache)
         {
             if( this.ProductSearchByProductDescriptionIncludesAsync == null)
             {
                 this.ProductSearchByProductDescriptionIncludesAsync = new Expression<Func<IProduct, object>>[]{};
             }
 
-            return await this.ProductApplicationService.ProductSearchByProductDescriptionAsync(productDescription,caseSensitive, cache, this.ProductSearchByProductDescriptionIncludesAsync);
+            var result = await this.ProductApplicationService.ProductSearchByProductDescriptionAsync(productDescription,caseSensitive, cache, this.ProductSearchByProductDescriptionIncludesAsync);
+            
+            if (result == null)
+            {
+                return NotFound(result);
+            }
+
+            return Ok(result);
         }
 
 
@@ -164,15 +206,22 @@ namespace RepositoryEFDotnet.Data.Controllers
         /// <param name="unitAmount">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<IProduct></returns>
-        [HttpGet]
-		public IList<IProduct> ProductSearchByUnitAmount(string unitAmount, bool caseSensitive, bool cache)
+        [HttpGet("{productId}{caseSensitive}/{cache}")]
+		public ActionResult<IList<IProduct>> ProductSearchByUnitAmount(string unitAmount, bool caseSensitive, bool cache)
         {
             if( this.ProductSearchByUnitAmountIncludes == null)
             {
                 this.ProductSearchByUnitAmountIncludes = new Expression<Func<IProduct, object>>[]{};
             }
 
-            return this.ProductApplicationService.ProductSearchByUnitAmount(unitAmount,caseSensitive, cache, this.ProductSearchByUnitAmountIncludes);
+            var result = this.ProductApplicationService.ProductSearchByUnitAmount(unitAmount,caseSensitive, cache, this.ProductSearchByUnitAmountIncludes);
+            
+            if (result == null)
+            {
+                return NotFound(result);
+            }
+
+            return Ok(result);
         }
 
         /// <summary>
@@ -181,15 +230,22 @@ namespace RepositoryEFDotnet.Data.Controllers
         /// <param name="unitAmount">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<IProduct></returns>
-		[HttpGet]
-        public async Task<IList<IProduct>> ProductSearchByUnitAmountAsync(string unitAmount, bool caseSensitive, bool cache)
+        [HttpGet("{productId}{caseSensitive}/{cache}")]
+        public async Task<ActionResult<IList<IProduct>>> ProductSearchByUnitAmountAsync(string unitAmount, bool caseSensitive, bool cache)
         {
             if( this.ProductSearchByUnitAmountIncludesAsync == null)
             {
                 this.ProductSearchByUnitAmountIncludesAsync = new Expression<Func<IProduct, object>>[]{};
             }
 
-            return await this.ProductApplicationService.ProductSearchByUnitAmountAsync(unitAmount,caseSensitive, cache, this.ProductSearchByUnitAmountIncludesAsync);
+            var result = await this.ProductApplicationService.ProductSearchByUnitAmountAsync(unitAmount,caseSensitive, cache, this.ProductSearchByUnitAmountIncludesAsync);
+            
+            if (result == null)
+            {
+                return NotFound(result);
+            }
+
+            return Ok(result);
         }
 
 
@@ -199,15 +255,22 @@ namespace RepositoryEFDotnet.Data.Controllers
         /// <param name="publisher">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<IProduct></returns>
-        [HttpGet]
-		public IList<IProduct> ProductSearchByPublisher(string publisher, bool caseSensitive, bool cache)
+        [HttpGet("{productId}{caseSensitive}/{cache}")]
+		public ActionResult<IList<IProduct>> ProductSearchByPublisher(string publisher, bool caseSensitive, bool cache)
         {
             if( this.ProductSearchByPublisherIncludes == null)
             {
                 this.ProductSearchByPublisherIncludes = new Expression<Func<IProduct, object>>[]{};
             }
 
-            return this.ProductApplicationService.ProductSearchByPublisher(publisher,caseSensitive, cache, this.ProductSearchByPublisherIncludes);
+            var result = this.ProductApplicationService.ProductSearchByPublisher(publisher,caseSensitive, cache, this.ProductSearchByPublisherIncludes);
+            
+            if (result == null)
+            {
+                return NotFound(result);
+            }
+
+            return Ok(result);
         }
 
         /// <summary>
@@ -216,15 +279,22 @@ namespace RepositoryEFDotnet.Data.Controllers
         /// <param name="publisher">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<IProduct></returns>
-		[HttpGet]
-        public async Task<IList<IProduct>> ProductSearchByPublisherAsync(string publisher, bool caseSensitive, bool cache)
+        [HttpGet("{productId}{caseSensitive}/{cache}")]
+        public async Task<ActionResult<IList<IProduct>>> ProductSearchByPublisherAsync(string publisher, bool caseSensitive, bool cache)
         {
             if( this.ProductSearchByPublisherIncludesAsync == null)
             {
                 this.ProductSearchByPublisherIncludesAsync = new Expression<Func<IProduct, object>>[]{};
             }
 
-            return await this.ProductApplicationService.ProductSearchByPublisherAsync(publisher,caseSensitive, cache, this.ProductSearchByPublisherIncludesAsync);
+            var result = await this.ProductApplicationService.ProductSearchByPublisherAsync(publisher,caseSensitive, cache, this.ProductSearchByPublisherIncludesAsync);
+            
+            if (result == null)
+            {
+                return NotFound(result);
+            }
+
+            return Ok(result);
         }
 
 		#endregion
@@ -236,7 +306,8 @@ namespace RepositoryEFDotnet.Data.Controllers
         /// </summary>
         /// <param name="entity">IProduct</param>
         /// <returns>bool</returns>
-		public bool ProductAdd(IProduct entity)
+        [HttpPost]
+		public bool ProductAdd([FromBody] IProduct entity)
         {
             return this.ProductApplicationService.ProductUpdate(entity);
         }
@@ -246,7 +317,8 @@ namespace RepositoryEFDotnet.Data.Controllers
         /// </summary>
         /// <param name="entity">IProduct</param>
         /// <returns>bool</returns>
-		public bool ProductUpdate(IProduct entity)
+        [HttpPost]
+		public bool ProductUpdate([FromBody] IProduct entity)
         {
             return this.ProductApplicationService.ProductUpdate(entity);
         }
@@ -256,7 +328,8 @@ namespace RepositoryEFDotnet.Data.Controllers
         /// </summary>
         /// <param name="entity">IProduct</param>
         /// <returns>bool</returns>
-		public bool ProductDelete(IProduct entity)
+        [HttpPost]
+		public bool ProductDelete([FromBody] IProduct entity)
         {
             return this.ProductApplicationService.ProductDelete(entity);
         }
@@ -266,6 +339,7 @@ namespace RepositoryEFDotnet.Data.Controllers
         /// </summary>
         /// <param name="productId">int</param>
         /// <returns>bool</returns>
+        [HttpDelete("{productId}/{cache}")]
 		public bool ProductDelete( int productId, bool cache)
         {
             return this.ProductApplicationService.ProductDelete( productId, cache);
@@ -279,7 +353,8 @@ namespace RepositoryEFDotnet.Data.Controllers
         ///     Bulk delete entities
         /// </summary>
         /// <param name="items"></param>
-        public void ProductBulkDelete(IEnumerable<IProduct> items)
+        [HttpPost]
+        public void ProductBulkDelete([FromBody] IEnumerable<IProduct> items)
 		{
 			this.ProductApplicationService.ProductBulkDelete(items);
 		}
@@ -289,7 +364,8 @@ namespace RepositoryEFDotnet.Data.Controllers
         /// </summary>
         /// <param name="items"></param>
         /// <returns></returns>
-        public async Task ProductBulkDeleteAsync(IEnumerable<IProduct> items)
+        [HttpPost]
+        public async Task ProductBulkDeleteAsync([FromBody] IEnumerable<IProduct> items)
 		{
 			await this.ProductApplicationService.ProductBulkDeleteAsync(items);
 		}
@@ -297,8 +373,9 @@ namespace RepositoryEFDotnet.Data.Controllers
         /// <summary>
         ///     Bulk insert entities
         /// </summary>
-        /// <param name="items"></param>
-        public void  ProductBulkInsert(IEnumerable<IProduct> items)
+        /// <paramid name="items"></param>
+        [HttpPost]
+        public void  ProductBulkInsert([FromBody] IEnumerable<IProduct> items)
 		{
 			this.ProductApplicationService.ProductBulkInsert(items);
 		}
@@ -308,7 +385,8 @@ namespace RepositoryEFDotnet.Data.Controllers
         /// </summary>
         /// <param name="items"></param>
         /// <returns></returns>
-        public async Task  ProductBulkInsertAsync(IEnumerable<IProduct> items)
+        [HttpPost]
+        public async Task  ProductBulkInsertAsync([FromBody] IEnumerable<IProduct> items)
 		{
 			await this.ProductApplicationService.ProductBulkInsertAsync(items);
 		}
@@ -317,7 +395,8 @@ namespace RepositoryEFDotnet.Data.Controllers
         /// Bulk update entities 
         /// </summary>
         /// <param name="items"></param>
-        public void ProductBulkUpdate(IEnumerable<IProduct> items)
+        [HttpPost]
+        public void ProductBulkUpdate([FromBody] IEnumerable<IProduct> items)
 		{
 			this.ProductApplicationService.ProductBulkUpdate(items);
 		}
@@ -327,7 +406,8 @@ namespace RepositoryEFDotnet.Data.Controllers
         /// </summary>
         /// <param name="items"></param>
         /// <returns></returns>
-        public async Task ProductBulkUpdateAsync(IEnumerable<IProduct> items)
+        [HttpPost]
+        public async Task ProductBulkUpdateAsync([FromBody] IEnumerable<IProduct> items)
 		{
 			await this.ProductApplicationService.ProductBulkUpdateAsync(items);
 		}

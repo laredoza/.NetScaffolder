@@ -34,7 +34,12 @@ namespace RepositoryEFDotnet.Services.WebApi.Default.Controllers
         [HttpGet("{id}")]
         public ActionResult<string> Get(int id)
         {
-            return "value";
+            if (id == -1)
+            {
+                return NotFound();
+            }
+
+            return Ok("value");
         }
 
         // POST api/values
