@@ -35,7 +35,7 @@
                 {
                     webApiTemplateCustom.Output.Project = webApiServiceData.OutputPath;
                 }
-
+                webApiTemplateCustom.Output.PreserveExistingFile = true;
                 webApiTemplateCustom.RenderToFile(string.Format(@"{0}\{1}Controller.cs", webApiServiceData.OutputFolder, webApiServiceData.WebApiName));	
 			}
         }
