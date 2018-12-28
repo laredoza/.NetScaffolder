@@ -80,6 +80,8 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.Repositor
             }
         }
 
+        public bool Loaded { get; set; }
+
         /// <summary>
         /// Gets or sets the validation result.
         /// </summary>
@@ -97,6 +99,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.Repositor
         /// </param>
         public void LoadConfig(object parameters)
         {
+            this.Loaded = true;
             IDictionary<string, string> parameterList = parameters as IDictionary<string, string>;
             if (this.DataType == null) return;
 

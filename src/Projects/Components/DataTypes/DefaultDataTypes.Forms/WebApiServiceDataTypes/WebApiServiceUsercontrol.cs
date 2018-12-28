@@ -114,6 +114,8 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.WebApiSer
             }
         }
 
+        public bool Loaded { get; set; }
+
         /// <summary>
         /// Gets or sets a value indicating whether is default.
         /// </summary>
@@ -168,6 +170,8 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.WebApiSer
         public void LoadConfig(object parameters)
         {
             if (this.DataType == null) return;
+
+            this.Loaded = true;
 
             IDictionary<string, string> parameterDictionary = parameters as IDictionary<string, string>;
             this.DataType?.Load(parameterDictionary);

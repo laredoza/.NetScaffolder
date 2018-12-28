@@ -86,6 +86,8 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataType
 
             var filePath = Path.Combine(parameters["basePath"], this.FileName);
 
+            this.Loaded = true;
+
             if (File.Exists(filePath))
             {
                 var dt = ObjectXMLSerializer<ContextDataType>.Load(filePath);

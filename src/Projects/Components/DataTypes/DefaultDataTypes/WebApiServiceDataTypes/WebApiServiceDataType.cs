@@ -102,6 +102,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.WebApiServiceDa
             }
 
             var filePath = Path.Combine(parameters["basePath"], this.FileName);
+            this.Loaded = true;
 
             if (File.Exists(filePath))
             {

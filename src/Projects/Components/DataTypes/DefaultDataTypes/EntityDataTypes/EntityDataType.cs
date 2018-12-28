@@ -160,6 +160,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.EntityDataTypes
             }
 
             var filePath = Path.Combine(parameters["basePath"], this.FileName);
+            this.Loaded = true;
 
             if (File.Exists(filePath))
             {

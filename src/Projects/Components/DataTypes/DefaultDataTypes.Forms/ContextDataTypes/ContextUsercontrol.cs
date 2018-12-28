@@ -97,6 +97,8 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.ContextDa
             }
         }
 
+        public bool Loaded { get; set; }
+
         /// <summary>
         ///     Gets or sets the save path.
         /// </summary>
@@ -152,6 +154,8 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.ContextDa
         public void LoadConfig(object parameters)
         {
             if (DataType == null) return;
+
+            this.Loaded = true;
 
             IDictionary<string, string> parameterDictionary = parameters as IDictionary<string, string>;
             DataType?.Load(parameterDictionary);

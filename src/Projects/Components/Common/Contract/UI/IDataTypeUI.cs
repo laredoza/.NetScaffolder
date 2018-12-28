@@ -39,6 +39,8 @@ namespace DotNetScaffolder.Components.Common.Contract
         /// </summary>
         IDataType DataType { get; set; }
 
+        bool Loaded { get; set; }
+
         #endregion
 
         #region Public Methods And Operators

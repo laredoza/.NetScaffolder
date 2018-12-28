@@ -118,7 +118,13 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project.DataType
 
                     if (validationResult.Count == 0)
                     {
-                        (node.Tag as IDataTypeUI)?.SaveConfig(parameters);
+                        IDataTypeUI dataTypeUI = (node.Tag as IDataTypeUI);
+
+                        if (dataTypeUI != null && dataTypeUI.Loaded)
+                        {
+                            // Making an assumption that if control hasn't been opened it will not have changed.
+                            dataTypeUI.SaveConfig(parameters);
+                        }
                     }
                     else
                     {

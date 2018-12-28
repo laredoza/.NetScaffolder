@@ -79,6 +79,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.StructureMapDat
         public override void Load(IDictionary<string, string> parameters)
         {
             var filePath = Path.Combine(parameters["basePath"], this.FileName);
+            this.Loaded = true;
 
             if (File.Exists(filePath))
             {

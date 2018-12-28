@@ -81,6 +81,8 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.UnitTests
             }
         }
 
+        public bool Loaded { get; set; }
+
         /// <summary>
         ///     Gets or sets the validation result.
         /// </summary>
@@ -98,6 +100,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.UnitTests
         /// </param>
         public void LoadConfig(object parameters)
         {
+            this.Loaded = true;
             IDictionary<string, string> parameterList = parameters as IDictionary<string, string>;
             if (this.DataType == null) return;
 

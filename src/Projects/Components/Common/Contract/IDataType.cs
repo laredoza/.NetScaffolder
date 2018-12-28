@@ -64,6 +64,7 @@ namespace DotNetScaffolder.Components.Common.Contract
         /// </summary>
         List<LanguageOutputDetails> LanguageOutputDetails { get; set; }
 
+        bool Loaded { get; set; }
 
         #endregion
 

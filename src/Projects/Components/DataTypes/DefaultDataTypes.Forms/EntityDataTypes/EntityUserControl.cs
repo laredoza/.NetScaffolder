@@ -85,6 +85,8 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.EntityDat
             }
         }
 
+        public bool Loaded { get; set; }
+
         #endregion
 
         #region Public Methods And Operators
@@ -97,6 +99,8 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.EntityDat
         /// </param>
         public void LoadConfig(object parameters)
         {
+            this.Loaded = true;
+
             IDictionary<string, string> parameterList = parameters as IDictionary<string, string>;
             if (this.DataType == null) return;
 

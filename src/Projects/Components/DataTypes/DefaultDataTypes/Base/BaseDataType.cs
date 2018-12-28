@@ -102,7 +102,10 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Base
         /// Gets or sets the language output details.
         /// </summary>
         [XmlIgnore]
-        public List<LanguageOutputDetails> LanguageOutputDetails { get; set; } 
+        public List<LanguageOutputDetails> LanguageOutputDetails { get; set; }
+
+        [XmlIgnore]
+        public bool Loaded { get; set; }
 
         /// <summary>
         ///     Gets or sets the validation result.

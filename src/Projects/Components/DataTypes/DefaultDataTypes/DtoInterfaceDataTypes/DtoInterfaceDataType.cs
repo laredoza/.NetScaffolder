@@ -140,6 +140,8 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.DtoInterfaceDat
 
             var filePath = Path.Combine(parameters["basePath"], this.FileName);
 
+            this.Loaded = true;
+
             if (File.Exists(filePath))
             {
                 var entity = ObjectXMLSerializer<DtoInterfaceDataType>.Load(filePath);
