@@ -86,7 +86,7 @@ namespace RepositoryEFDotnet.Data.Entity
 		{ 
 			get
 			{
-				return this.OrderDetails == null ? null : (IList<IOrderDetails>)this.OrderDetails;
+				return this.OrderDetails == null ? null : this.OrderDetails as IList<IOrderDetails>;
 			}
 			set
 			{

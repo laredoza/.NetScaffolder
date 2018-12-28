@@ -70,7 +70,7 @@ namespace RepositoryEFDotnet.Data.Entity
 		{ 
 			get
 			{
-				return this.Customer == null ? null : (IList<ICustomer>)this.Customer;
+				return this.Customer == null ? null : this.Customer as IList<ICustomer>;
 			}
 			set
 			{

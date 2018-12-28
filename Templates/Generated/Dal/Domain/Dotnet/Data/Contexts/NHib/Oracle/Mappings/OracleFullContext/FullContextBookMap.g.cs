@@ -56,7 +56,7 @@ namespace RepositoryEFDotnet.Data.Context.Mappings.NHib.Oracle
 			
 			#region Relationships
 			
-			HasOne(s => s.Product).PropertyRef(o => o.Book);
+			HasOne(s => s.Product);
 			
 			#endregion			
 

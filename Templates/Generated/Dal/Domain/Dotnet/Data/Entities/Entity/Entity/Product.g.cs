@@ -52,11 +52,8 @@ namespace RepositoryEFDotnet.Data.Entity
 						this.OrderDetails.Add(new OrderDetails(childItem, deep));
 					}
 				}
+				this.Book = new Book(item.Book, deep);
 				this.Software = new Software(item.Software, deep);
-				if(item.Book != null)
-                {
-                    this.Book = new Book(item.Book, deep);
-                }
 			}
 		}
 		
@@ -79,7 +76,7 @@ namespace RepositoryEFDotnet.Data.Entity
 		{ 
 			get
 			{
-				return this.OrderDetails == null ? null : (IList<IOrderDetails>)this.OrderDetails;
+				return this.OrderDetails == null ? null : this.OrderDetails as IList<IOrderDetails>;
 			}
 			set
 			{
@@ -95,6 +92,29 @@ namespace RepositoryEFDotnet.Data.Entity
 					}
 				}
 			}			
+		}
+        
+        public virtual Book Book { get; set; }
+		IBook IProduct.Book 
+		{ 
+			get
+			{
+				return this.Book;
+			}
+			set
+			{
+				if(value != this.Book)
+				{
+					if(value != null)
+					{
+						this.Book = (Book)value;
+					}
+					else
+					{
+						this.Book = null;
+					}
+				}
+			}
 		}
         
         public virtual Software Software { get; set; }
@@ -120,33 +140,6 @@ namespace RepositoryEFDotnet.Data.Entity
 			}
 		}
 
-		#endregion
-
-		#region Parent Relationships
-
-        public virtual Book Book { get; set; }
-		IBook IProduct.Book 
-		{ 
-			get
-			{
-				return this.Book;
-			}
-			set
-			{
-				if(value != this.Book)
-				{
-					if(value != null)
-					{
-						this.Book = (Book)value;
-					}
-					else
-					{
-						this.Book = null;
-					}
-				}
-			}
-		}
-		
 		#endregion
 	}
 }

@@ -61,7 +61,7 @@ namespace RepositoryEFDotnet.Data.Context.Mappings.EF.Oracle
 
 			#region Relationships
 			
-			HasRequired<Product>(s => s.Product).WithRequiredPrincipal(s => s.Book).WillCascadeOnDelete(false);
+			HasRequired<Product>(s => s.Product).WithOptional(s => s.Book).WillCascadeOnDelete(false);
 			
 			#endregion			
 

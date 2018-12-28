@@ -97,7 +97,7 @@ namespace <#= DataType.FullNamespace #>
 		{ 
 			get
 			{
-				return this.<#= RelationshipNameFormatting.FormatName(child.ReferencedTableName, child.RelationshipAlias, DataType.NamingConvention) #> == null ? null : (<#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #>>)this.<#= RelationshipNameFormatting.FormatName(child.ReferencedTableName, child.RelationshipAlias, DataType.NamingConvention) #>;
+				return this.<#= RelationshipNameFormatting.FormatName(child.ReferencedTableName, child.RelationshipAlias, DataType.NamingConvention) #> == null ? null : this.<#= RelationshipNameFormatting.FormatName(child.ReferencedTableName, child.RelationshipAlias, DataType.NamingConvention) #> as <#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #>>;
 			}
 			set
 			{

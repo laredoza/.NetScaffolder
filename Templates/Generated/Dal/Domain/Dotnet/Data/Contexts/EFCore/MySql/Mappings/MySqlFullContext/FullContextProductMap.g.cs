@@ -57,7 +57,7 @@ namespace RepositoryEFDotnet.Data.Context.Mappings.EFCore.MySql
 			
 			#region Relationships
 			
-			builder.HasOne<Book>(s => s.Book).WithOne(s => s.Product).OnDelete(DeleteBehavior.Restrict);
+			builder.HasOne<Book>(s => s.Book).WithOne(s => s.Product).HasForeignKey<Book>(s => s.ProductId).OnDelete(DeleteBehavior.Restrict);
 			builder.HasMany<OrderDetails>(s => s.OrderDetails).WithOne(s => s.Product).HasForeignKey(s => s.ProductId).OnDelete(DeleteBehavior.Restrict);
 			builder.HasOne<Software>(s => s.Software).WithOne(s => s.Product).HasForeignKey<Software>(s => s.ProductId).OnDelete(DeleteBehavior.Restrict);
 			

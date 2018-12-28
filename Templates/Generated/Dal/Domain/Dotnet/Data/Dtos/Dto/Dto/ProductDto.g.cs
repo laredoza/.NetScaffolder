@@ -52,11 +52,8 @@ namespace RepositoryEFDotnet.Data.Dto
 						this.OrderDetails.Add(new OrderDetailsDto(childItem, deep));
 					}
 				}
+				this.Book = new BookDto(item.Book, deep);
 				this.Software = new SoftwareDto(item.Software, deep);
-                if(item.Book != null)
-                {
-				    this.Book = new BookDto(item.Book, deep);
-                }
 			}
 		}
 		
@@ -74,13 +71,13 @@ namespace RepositoryEFDotnet.Data.Dto
 		#region Child Relationships
 		
 		public IList<IOrderDetails> OrderDetails { get; set; }
+		public IBook Book { get; set; }
 		public ISoftware Software { get; set; }
 
 		#endregion
 		
 		#region Parent Relationships
 		
-		public IBook Book { get; set; }
 		
 		#endregion
 	}

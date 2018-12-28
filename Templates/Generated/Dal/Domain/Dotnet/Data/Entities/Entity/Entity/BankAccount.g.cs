@@ -80,7 +80,7 @@ namespace RepositoryEFDotnet.Data.Entity
 		{ 
 			get
 			{
-				return this.BankTransfers == null ? null : (IList<IBankTransfers>)this.BankTransfers;
+				return this.BankTransfers == null ? null : this.BankTransfers as IList<IBankTransfers>;
 			}
 			set
 			{

@@ -105,7 +105,7 @@ namespace RepositoryEFDotnet.Data.Entity
 		{ 
 			get
 			{
-				return this.BankAccount == null ? null : (IList<IBankAccount>)this.BankAccount;
+				return this.BankAccount == null ? null : this.BankAccount as IList<IBankAccount>;
 			}
 			set
 			{
@@ -129,7 +129,7 @@ namespace RepositoryEFDotnet.Data.Entity
 		{ 
 			get
 			{
-				return this.Order == null ? null : (IList<IOrder>)this.Order;
+				return this.Order == null ? null : this.Order as IList<IOrder>;
 			}
 			set
 			{

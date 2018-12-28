@@ -313,8 +313,8 @@
           </Columns>
           <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
           <RelationShips>
-            <RelationShip ColumnName="ProductId" RelationShip="ForeignKeyChild" ReferencedColumnName="ProductId" Render="true" SchemaName="dbo" ReferencedTableName="Product" Multiplicity="One" ReferencedMultiplicity="One" UserRelationship="false">
-              <RelationshipName>FK_Product_Book</RelationshipName>
+            <RelationShip ColumnName="ProductId" RelationShip="ForeignKey" ReferencedColumnName="ProductId" Render="true" SchemaName="dbo" ReferencedTableName="Product" Multiplicity="ZeroToOne" ReferencedMultiplicity="One" UserRelationship="false">
+              <RelationshipName>FK_Book_Product</RelationshipName>
             </RelationShip>
           </RelationShips>
           <Indexes>
@@ -596,8 +596,8 @@
           </Columns>
           <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
           <RelationShips>
-            <RelationShip ColumnName="ProductId" RelationShip="ForeignKey" ReferencedColumnName="ProductId" Render="true" SchemaName="dbo" ReferencedTableName="Book" Multiplicity="ZeroToOne" ReferencedMultiplicity="One" UserRelationship="false">
-              <RelationshipName>FK_Product_Book</RelationshipName>
+            <RelationShip ColumnName="ProductId" RelationShip="ForeignKeyChild" ReferencedColumnName="ProductId" Render="true" SchemaName="dbo" ReferencedTableName="Book" Multiplicity="One" ReferencedMultiplicity="ZeroToOne" UserRelationship="false">
+              <RelationshipName>FK_Book_Product</RelationshipName>
             </RelationShip>
             <RelationShip ColumnName="ProductId" RelationShip="ForeignKeyChild" ReferencedColumnName="ProductId" Render="true" SchemaName="dbo" ReferencedTableName="OrderDetails" Multiplicity="One" ReferencedMultiplicity="Many" UserRelationship="false">
               <RelationshipName>FK1C793D34F72CF47B</RelationshipName>

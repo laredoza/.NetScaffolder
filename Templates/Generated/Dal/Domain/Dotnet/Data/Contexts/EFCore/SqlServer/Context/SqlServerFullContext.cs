@@ -44,6 +44,7 @@ namespace RepositoryEFDotnet.Data.Context.EFCore
             AddProducts(modelBuilder);
             AddCustomers(modelBuilder);
             AddBanking(modelBuilder);
+            AddOrders(modelBuilder);
         }
 
 	    private static void AddCountries(ModelBuilder modelBuilder)
@@ -65,38 +66,38 @@ namespace RepositoryEFDotnet.Data.Context.EFCore
 
 	    private static void AddProducts(ModelBuilder modelBuilder)
 	    {
-	        modelBuilder.Entity<Product>().HasData(
-	            new Product 
-	            {
-	                ProductId = 1,
-	                ProductDescription = "A Book",
-                    UnitPrice = 100,
-                    AmountInStock = 100
-	            });
-
 	        modelBuilder.Entity<Book>().HasData(
-	            new Book 
+	            new Book
 	            {
 	                ProductId = 1,
 	                Publisher = "Best Book Publisher Ever",
 	            });
 
-	        modelBuilder.Entity<Product>().HasData(
-	            new Product 
-	            {
-	                ProductId = 2,
-	                ProductDescription = "Software",
-                    UnitPrice = 200,
+            modelBuilder.Entity<Product>().HasData(
+                new Product
+                {
+                    ProductId = 1,
+                    ProductDescription = "A Book",
+                    UnitPrice = 100,
                     AmountInStock = 100
-	            });
+                });
 
 	        modelBuilder.Entity<Software>().HasData(
-	            new Software 
+	            new Software
 	            {
 	                ProductId = 2,
 	                LicenseCode = "#1234567890"
 	            });
-	    }
+
+            modelBuilder.Entity<Product>().HasData(
+                new Product
+                {
+                    ProductId = 2,
+                    ProductDescription = "Software",
+                    UnitPrice = 200,
+                    AmountInStock = 100
+                });
+        }
 
 	    private static void AddCustomers(ModelBuilder modelBuilder)
 	    {
