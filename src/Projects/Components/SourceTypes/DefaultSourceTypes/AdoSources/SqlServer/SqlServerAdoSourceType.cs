@@ -95,7 +95,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
                              {
                                  ProviderName = "System.Data.SqlClient",
                                  ConnectionString =
-                                     @"Data Source=.\SQLEXPRESS;Integrated Security=true;Initial Catalog=Banking"
+                                     @"Data Source=.\SQLEXPRESS;Integrated Security=true;Initial Catalog=BankingDesign"
                              };
             }
 
