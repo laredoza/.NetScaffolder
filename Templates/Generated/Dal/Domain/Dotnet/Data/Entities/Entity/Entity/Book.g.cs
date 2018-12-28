@@ -41,6 +41,7 @@ namespace RepositoryEFDotnet.Data.Entity
 
 			if(deep)
 			{
+				this.Product = new Product(item.Product, deep);
 			}
 		}
 		
@@ -50,6 +51,33 @@ namespace RepositoryEFDotnet.Data.Entity
 		
 		public virtual int ProductId { get; set; }
 		public virtual string Publisher { get; set; }
+
+		#endregion
+
+		#region Child Relationships
+        
+        public virtual Product Product { get; set; }
+		IProduct IBook.Product 
+		{ 
+			get
+			{
+				return this.Product;
+			}
+			set
+			{
+				if(value != this.Product)
+				{
+					if(value != null)
+					{
+						this.Product = (Product)value;
+					}
+					else
+					{
+						this.Product = null;
+					}
+				}
+			}
+		}
 
 		#endregion
 	}

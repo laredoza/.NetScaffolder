@@ -67,7 +67,9 @@ namespace RepositoryEFDotnet.Data.Context.Mappings.EF.MySql
 
 			#region Relationships
 			
+			HasRequired<Book>(s => s.Book).WithOptional(s => s.Product).WillCascadeOnDelete(false);
 			HasMany<OrderDetails>(s => s.OrderDetails).WithRequired(s => s.Product).HasForeignKey(s => s.ProductId).WillCascadeOnDelete(false);
+			HasOptional<Software>(s => s.Software).WithRequired(s => s.Product).WillCascadeOnDelete(false);
 			
 			#endregion			
 

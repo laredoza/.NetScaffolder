@@ -59,6 +59,7 @@ namespace RepositoryEFDotnet.Data.Context.Mappings.EF.SqlServer
 
 			#region Relationships
 			
+			HasRequired<Product>(s => s.Product).WithRequiredPrincipal(s => s.Book).WillCascadeOnDelete(false);
 			
 			#endregion			
 

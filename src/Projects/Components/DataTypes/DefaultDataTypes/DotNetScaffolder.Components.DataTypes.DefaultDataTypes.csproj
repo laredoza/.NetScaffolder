@@ -70,6 +70,10 @@
       <Project>{cdace52c-f991-40b5-80ed-4947a100ec52}</Project>
       <Name>DotNetScaffolder.Core.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\Core\Configuration\DotNetScaffolder.Core.Configuration.csproj">
+      <Project>{ECF3D386-0124-450F-A763-92175FF00547}</Project>
+      <Name>DotNetScaffolder.Core.Configuration</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Core\Forms\FormControls\DotNetScaffolder.Core.Forms.FormControls.csproj">
       <Project>{6A2E8779-4539-46D1-B3A0-1C3B205A95AB}</Project>
       <Name>DotNetScaffolder.Core.Forms.FormControls</Name>

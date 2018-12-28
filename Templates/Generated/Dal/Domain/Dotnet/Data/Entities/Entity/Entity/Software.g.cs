@@ -41,6 +41,10 @@ namespace RepositoryEFDotnet.Data.Entity
 
 			if(deep)
 			{
+				if(item.Product != null)
+                {
+                    this.Product = new Product(item.Product, deep);
+                }
 			}
 		}
 		
@@ -51,6 +55,33 @@ namespace RepositoryEFDotnet.Data.Entity
 		public virtual int ProductId { get; set; }
 		public virtual string LicenseCode { get; set; }
 
+		#endregion
+
+		#region Parent Relationships
+
+        public virtual Product Product { get; set; }
+		IProduct ISoftware.Product 
+		{ 
+			get
+			{
+				return this.Product;
+			}
+			set
+			{
+				if(value != this.Product)
+				{
+					if(value != null)
+					{
+						this.Product = (Product)value;
+					}
+					else
+					{
+						this.Product = null;
+					}
+				}
+			}
+		}
+		
 		#endregion
 	}
 }

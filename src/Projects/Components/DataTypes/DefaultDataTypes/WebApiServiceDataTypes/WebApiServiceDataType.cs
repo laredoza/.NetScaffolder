@@ -4,6 +4,8 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
+using DotNetScaffolder.Core.Configuration;
+
 namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.WebApiServiceDataTypes
 {
     #region Usings
@@ -185,6 +187,12 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.WebApiServiceDa
         {
             this.ValidationResult = new List<Validation>();
             this.MissingApplicationList.Clear();
+
+            if (this.ApplicationServiceDataType == null)
+            {
+                this.ApplicationServiceDataType =
+                    ScaffoldConfig.ReturnDataType(new Guid("1BC1B0C4-1E41-9146-82CF-599181CE4420")) as ApplicationServiceDataType;
+            }
 
             foreach (var webApiServiceData in this.WebApiDataList)
             {

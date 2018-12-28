@@ -39,6 +39,7 @@ namespace RepositoryEFDotnet.Data.Interfaces
 		
 		#region Parent Relationships
 		
+		IProduct Product { get; set; }
 		
 		#endregion
 	}

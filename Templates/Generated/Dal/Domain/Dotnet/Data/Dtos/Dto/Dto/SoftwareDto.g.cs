@@ -41,6 +41,10 @@ namespace RepositoryEFDotnet.Data.Dto
 
 			if(deep)
 			{
+                if(item.Product != null)
+                {
+				    this.Product = new ProductDto(item.Product, deep);
+                }
 			}
 		}
 		
@@ -60,6 +64,7 @@ namespace RepositoryEFDotnet.Data.Dto
 		
 		#region Parent Relationships
 		
+		public IProduct Product { get; set; }
 		
 		#endregion
 	}

@@ -39,11 +39,13 @@ namespace RepositoryEFDotnet.Data.Interfaces
 		#region Child Relationships
 		
 		IList<IOrderDetails> OrderDetails { get; set; }
+		ISoftware Software { get; set; }
 
 		#endregion
 		
 		#region Parent Relationships
 		
+		IBook Book { get; set; }
 		
 		#endregion
 	}

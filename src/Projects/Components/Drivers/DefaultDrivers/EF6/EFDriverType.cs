@@ -375,10 +375,23 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6
             }
             else if (rel.Multiplicity == RelationshipMultiplicity.One)
             {
-                sb.Append(
-                    rel.ReferencedMultiplicity == RelationshipMultiplicity.Many
-                        ? $".WithRequired(s => s.{parentTableName}).HasForeignKey(s => s.{ApplyNamingConvention(nc, rel.ReferencedColumnName)}).WillCascadeOnDelete(false);"
-                        : $".WithRequired(s => s.{parentTableName}).WillCascadeOnDelete(false);");
+                string multiplicityText = string.Empty;
+
+                switch (rel.ReferencedMultiplicity)
+                {
+                    case RelationshipMultiplicity.ZeroToOne:
+                        multiplicityText = $".WithRequired(s => s.{parentTableName}).WillCascadeOnDelete(false);";
+                        break;
+                    case RelationshipMultiplicity.One:
+                        multiplicityText = $".WithRequiredPrincipal(s => s.{parentTableName}).WillCascadeOnDelete(false);";
+                        break;
+                    case RelationshipMultiplicity.Many:
+                        multiplicityText =
+                            $".WithRequired(s => s.{parentTableName}).HasForeignKey(s => s.{ApplyNamingConvention(nc, rel.ReferencedColumnName)}).WillCascadeOnDelete(false);";
+                        break;
+                }
+
+                sb.Append(multiplicityText);
             }
             else
             {

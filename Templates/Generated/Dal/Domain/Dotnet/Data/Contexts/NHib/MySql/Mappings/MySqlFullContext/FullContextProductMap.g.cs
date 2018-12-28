@@ -67,7 +67,9 @@ namespace RepositoryEFDotnet.Data.Context.Mappings.NHib.MySql
 			
 			#region Relationships
 			
+			HasOne(s => s.Book);
 			HasMany(s => s.OrderDetails).KeyColumn("ProductId");
+			HasOne(s => s.Software).PropertyRef(o => o.Product);
 			
 			#endregion			
 

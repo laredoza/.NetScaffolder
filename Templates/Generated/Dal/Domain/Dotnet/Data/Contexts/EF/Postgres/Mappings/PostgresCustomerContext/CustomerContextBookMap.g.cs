@@ -60,6 +60,7 @@ namespace RepositoryEFDotnet.Data.Customers.Mappings.EF.Postgres
 
 			#region Relationships
 			
+			HasRequired<Product>(s => s.Product).WithRequiredPrincipal(s => s.Book).WillCascadeOnDelete(false);
 			
 			#endregion			
 
