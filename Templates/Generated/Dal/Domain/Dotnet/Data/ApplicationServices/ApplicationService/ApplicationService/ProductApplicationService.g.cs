@@ -937,56 +937,6 @@ namespace RepositoryEFDotnet.Data.ApplicationService
 
 
         /// <summary>
-        /// Search for Product entities in the database by UnitAmount
-        /// </summary>
-        /// <param name="unitAmount">string</param>
-		/// <param name="caseSensitive">bool</param>
-        /// <param name="includes">params Expression<Func<IProduct, object>>[]</param>
-        /// <returns>IList<IProduct></returns>
-		public IList<IProduct> ProductSearchByUnitAmount(string unitAmount, bool caseSensitive, bool cache, params Expression<Func<IProduct, object>>[] includes)
-        {
-            return this.ProductRepository.SearchByUnitAmount(unitAmount,caseSensitive, cache, includes);
-        }
-
-        /// <summary>
-        /// Search for Product Async entities in the database by UnitAmount
-        /// </summary>
-        /// <param name="unitAmount">string</param>
-		/// <param name="caseSensitive">bool</param>
-        /// <param name="includes">params Expression<Func<IProduct, object>>[]</param>
-        /// <returns>IList<IProduct></returns>
-		public async Task<IList<IProduct>> ProductSearchByUnitAmountAsync(string unitAmount, bool caseSensitive, bool cache, params Expression<Func<IProduct, object>>[] includes)
-        {
-            return await this.ProductRepository.SearchByUnitAmountAsync(unitAmount,caseSensitive, cache, includes);
-        }
-
-
-        /// <summary>
-        /// Search for Product entities in the database by Publisher
-        /// </summary>
-        /// <param name="publisher">string</param>
-		/// <param name="caseSensitive">bool</param>
-        /// <param name="includes">params Expression<Func<IProduct, object>>[]</param>
-        /// <returns>IList<IProduct></returns>
-		public IList<IProduct> ProductSearchByPublisher(string publisher, bool caseSensitive, bool cache, params Expression<Func<IProduct, object>>[] includes)
-        {
-            return this.ProductRepository.SearchByPublisher(publisher,caseSensitive, cache, includes);
-        }
-
-        /// <summary>
-        /// Search for Product Async entities in the database by Publisher
-        /// </summary>
-        /// <param name="publisher">string</param>
-		/// <param name="caseSensitive">bool</param>
-        /// <param name="includes">params Expression<Func<IProduct, object>>[]</param>
-        /// <returns>IList<IProduct></returns>
-		public async Task<IList<IProduct>> ProductSearchByPublisherAsync(string publisher, bool caseSensitive, bool cache, params Expression<Func<IProduct, object>>[] includes)
-        {
-            return await this.ProductRepository.SearchByPublisherAsync(publisher,caseSensitive, cache, includes);
-        }
-
-
-        /// <summary>
         /// Search for Software entities in the database by LicenseCode
         /// </summary>
         /// <param name="licenseCode">string</param>

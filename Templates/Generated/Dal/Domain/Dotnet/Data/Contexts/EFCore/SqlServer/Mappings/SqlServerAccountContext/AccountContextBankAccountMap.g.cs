@@ -61,7 +61,6 @@ namespace RepositoryEFDotnet.Data.Accounts.Mappings.EFCore.SqlServer
 			#region Relationships
 			
 			builder.HasMany<BankTransfers>(s => s.BankTransfers).WithOne(s => s.BankAccount).HasForeignKey(s => s.ToBankAccountId).OnDelete(DeleteBehavior.Restrict);
-			builder.HasMany<BankTransfers>(s => s.BankTransfers1).WithOne(s => s.BankAccount1).HasForeignKey(s => s.BankAccountId).OnDelete(DeleteBehavior.Restrict);
 			
 			#endregion	
 

@@ -58,16 +58,12 @@ namespace RepositoryEFDotnet.Data.Context.Mappings.NHib.Oracle
 			.Not.Nullable();
 			Map(t => t.TransferDate).Column("TransferDate")
 			.Not.Nullable();
-			Map(t => t.BankAccountId).Column("BankAccountId")
-			.UniqueKey("UQ__BankTran__4FC8E4A0CE69E10D")
-			.Nullable();
 			
 			#endregion
 			
 			#region Relationships
 			
 			References(o => o.BankAccount).Column("BankAccountId").Unique().Not.Insert().Not.Update();
-			References(o => o.BankAccount1).Column("BankAccountId").Unique().Not.Insert().Not.Update();
 			
 			#endregion			
 

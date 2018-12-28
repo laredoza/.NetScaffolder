@@ -30,8 +30,6 @@ namespace RepositoryEFDotnet.Data.Interfaces
 		int ProductId { get; set; }
 		string ProductDescription { get; set; }
 		Nullable<decimal> UnitPrice { get; set; }
-		string UnitAmount { get; set; }
-		string Publisher { get; set; }
 		Nullable<short> AmountInStock { get; set; }
 
 		#endregion

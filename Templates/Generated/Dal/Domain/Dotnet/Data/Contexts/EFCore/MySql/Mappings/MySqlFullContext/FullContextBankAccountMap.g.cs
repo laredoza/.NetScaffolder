@@ -61,7 +61,6 @@ namespace RepositoryEFDotnet.Data.Context.Mappings.EFCore.MySql
 			
 			builder.HasOne<Customer>(s => s.Customer).WithMany(s => s.BankAccount).HasForeignKey(s => s.CustomerId).OnDelete(DeleteBehavior.Restrict);
 			builder.HasMany<BankTransfers>(s => s.BankTransfers).WithOne(s => s.BankAccount).HasForeignKey(s => s.ToBankAccountId).OnDelete(DeleteBehavior.Restrict);
-			builder.HasMany<BankTransfers>(s => s.BankTransfers1).WithOne(s => s.BankAccount1).HasForeignKey(s => s.BankAccountId).OnDelete(DeleteBehavior.Restrict);
 			
 			#endregion	
 

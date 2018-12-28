@@ -98,6 +98,7 @@
                     if(template.Enabled)
                     {
                         var dt = ScaffoldConfig.ReturnDataType(template.DataType);
+                        dt.DomainDefinition = domain;
                         dt.Load(parameters);
                         dt.NamingConvention = nc;
                         dt.CollectionOption = co;

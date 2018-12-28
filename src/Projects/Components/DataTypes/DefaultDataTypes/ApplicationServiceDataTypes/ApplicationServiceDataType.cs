@@ -95,6 +95,18 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ApplicationServ
 
                 this.AdditionalNamespacesInterfaces.Clear();
                 this.AdditionalNamespacesInterfaces.AddRange(dt.AdditionalNamespacesInterfaces);
+
+
+                // Ensure tables are up to date
+                foreach (ApplicationServiceData applicationServiceData in this.ApplicationServiceData)
+                {
+                    for (int i = 0; i < applicationServiceData.Models.Count; i++)
+                    {
+                        var model = applicationServiceData.Models[i];
+                        applicationServiceData.Models[i] = DomainDefinition.Tables.FirstOrDefault(t =>
+                            t.SchemaName == model.SchemaName && t.TableName == model.TableName);
+                    }
+                }
             }
         }
 

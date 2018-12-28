@@ -47,10 +47,6 @@ namespace RepositoryEFDotnet.Data.Customers.Mappings.EFCore.MySql
 			builder.Property(t => t.ProductDescription).HasColumnName("ProductDescription").IsRequired(false);
 			builder.Property(t => t.UnitPrice).HasColumnName("UnitPrice").IsRequired(false);
 			builder.Property(t => t.UnitPrice).HasColumnType("decimal(19, 4)");
-			builder.Property(t => t.UnitAmount).HasMaxLength(50);
-			builder.Property(t => t.UnitAmount).HasColumnName("UnitAmount").IsRequired(false);
-			builder.Property(t => t.Publisher).HasMaxLength(200);
-			builder.Property(t => t.Publisher).HasColumnName("Publisher").IsRequired(false);
 			builder.Property(t => t.AmountInStock).HasColumnName("AmountInStock").IsRequired(false);
 			
 			#endregion
@@ -74,9 +70,7 @@ namespace RepositoryEFDotnet.Data.Customers.Mappings.EFCore.MySql
 			//TODO: builder.Property(t => t.ProductId).HasColumnOrder(1);
 			//TODO: builder.Property(t => t.ProductDescription).HasColumnOrder(2);
 			//TODO: builder.Property(t => t.UnitPrice).HasColumnOrder(3);
-			//TODO: builder.Property(t => t.UnitAmount).HasColumnOrder(4);
-			//TODO: builder.Property(t => t.Publisher).HasColumnOrder(5);
-			//TODO: builder.Property(t => t.AmountInStock).HasColumnOrder(6);
+			//TODO: builder.Property(t => t.AmountInStock).HasColumnOrder(4);
 
 			#endregion	
 	    }

@@ -27,8 +27,40 @@
             </Column>
           </Columns>
           <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
-          <RelationShips />
-          <Indexes />
+          <RelationShips>
+            <RelationShip ColumnName="CustomerId" RelationShip="ForeignKey" ReferencedColumnName="CustomerId" Render="true" SchemaName="dbo" ReferencedTableName="Customer" Multiplicity="Many" ReferencedMultiplicity="ZeroToOne" UserRelationship="false">
+              <RelationshipName>FK2D9B8F03BA724162</RelationshipName>
+            </RelationShip>
+            <RelationShip ColumnName="BankAccountId" RelationShip="ForeignKeyChild" ReferencedColumnName="ToBankAccountId" Render="true" SchemaName="dbo" ReferencedTableName="BankTransfers" Multiplicity="One" ReferencedMultiplicity="Many" UserRelationship="false">
+              <RelationshipName>FKE4EEFC1145FD5999</RelationshipName>
+            </RelationShip>
+          </RelationShips>
+          <Indexes>
+            <Index>
+              <IndexType>NonClustered</IndexType>
+              <IsUnique>false</IsUnique>
+              <Name>IX_CustomerId</Name>
+              <Columns>
+                <string>CustomerId</string>
+              </Columns>
+            </Index>
+            <Index>
+              <IndexType>PrimaryKey</IndexType>
+              <IsUnique>true</IsUnique>
+              <Name>PK__BankAcco__4FC8E4A1393E67B4</Name>
+              <Columns>
+                <string>BankAccountId</string>
+              </Columns>
+            </Index>
+            <Index>
+              <IndexType>NonClustered</IndexType>
+              <IsUnique>true</IsUnique>
+              <Name>UQ__BankAcco__4FC8E4A0C45281C8</Name>
+              <Columns>
+                <string>BankAccountId</string>
+              </Columns>
+            </Index>
+          </Indexes>
         </Table>
         <Table Description="" SchemaName="dbo" TableName="BankTransfers" EnabledForCodeGeneration="true">
           <Columns>
@@ -47,13 +79,39 @@
             <Column ColumnName="TransferDate" ColumnOrder="5" DataType="DateTime" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="0" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
               <RemapDataType xsi:nil="true" />
             </Column>
-            <Column ColumnName="BankAccountId" ColumnOrder="6" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
-              <RemapDataType xsi:nil="true" />
-            </Column>
           </Columns>
           <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
-          <RelationShips />
-          <Indexes />
+          <RelationShips>
+            <RelationShip ColumnName="ToBankAccountId" RelationShip="ForeignKey" ReferencedColumnName="BankAccountId" Render="true" SchemaName="dbo" ReferencedTableName="BankAccount" Multiplicity="Many" ReferencedMultiplicity="One" UserRelationship="false">
+              <RelationshipName>FKE4EEFC1145FD5999</RelationshipName>
+            </RelationShip>
+          </RelationShips>
+          <Indexes>
+            <Index>
+              <IndexType>NonClustered</IndexType>
+              <IsUnique>false</IsUnique>
+              <Name>IX_ToBankAccountId</Name>
+              <Columns>
+                <string>ToBankAccountId</string>
+              </Columns>
+            </Index>
+            <Index>
+              <IndexType>PrimaryKey</IndexType>
+              <IsUnique>true</IsUnique>
+              <Name>PK__BankTran__2E82727BCEA96D52</Name>
+              <Columns>
+                <string>BankTransferId</string>
+              </Columns>
+            </Index>
+            <Index>
+              <IndexType>NonClustered</IndexType>
+              <IsUnique>true</IsUnique>
+              <Name>UQ__BankTran__2E82727AB11DB584</Name>
+              <Columns>
+                <string>BankTransferId</string>
+              </Columns>
+            </Index>
+          </Indexes>
         </Table>
         <Table Description="" SchemaName="dbo" TableName="Book" EnabledForCodeGeneration="true">
           <Columns>
@@ -65,8 +123,29 @@
             </Column>
           </Columns>
           <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
-          <RelationShips />
-          <Indexes />
+          <RelationShips>
+            <RelationShip ColumnName="ProductId" RelationShip="ForeignKeyChild" ReferencedColumnName="ProductId" Render="true" SchemaName="dbo" ReferencedTableName="Product" Multiplicity="One" ReferencedMultiplicity="One" UserRelationship="false">
+              <RelationshipName>FK_Product_Book</RelationshipName>
+            </RelationShip>
+          </RelationShips>
+          <Indexes>
+            <Index>
+              <IndexType>NonClustered</IndexType>
+              <IsUnique>false</IsUnique>
+              <Name>IX_ProductId</Name>
+              <Columns>
+                <string>ProductId</string>
+              </Columns>
+            </Index>
+            <Index>
+              <IndexType>PrimaryKey</IndexType>
+              <IsUnique>true</IsUnique>
+              <Name>PK__Book__B40CC6CD94AA1652</Name>
+              <Columns>
+                <string>ProductId</string>
+              </Columns>
+            </Index>
+          </Indexes>
         </Table>
         <Table Description="" SchemaName="dbo" TableName="Country" EnabledForCodeGeneration="true">
           <Columns>
@@ -78,8 +157,29 @@
             </Column>
           </Columns>
           <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
-          <RelationShips />
-          <Indexes />
+          <RelationShips>
+            <RelationShip ColumnName="CountryId" RelationShip="ForeignKeyChild" ReferencedColumnName="CountryId" Render="true" SchemaName="dbo" ReferencedTableName="Customer" Multiplicity="ZeroToOne" ReferencedMultiplicity="Many" UserRelationship="false">
+              <RelationshipName>FKFE9A39C0B3D9410C</RelationshipName>
+            </RelationShip>
+          </RelationShips>
+          <Indexes>
+            <Index>
+              <IndexType>PrimaryKey</IndexType>
+              <IsUnique>true</IsUnique>
+              <Name>PK__Country__10D1609FB3585177</Name>
+              <Columns>
+                <string>CountryId</string>
+              </Columns>
+            </Index>
+            <Index>
+              <IndexType>NonClustered</IndexType>
+              <IsUnique>true</IsUnique>
+              <Name>UQ__Country__10D1609E8CC26505</Name>
+              <Columns>
+                <string>CountryId</string>
+              </Columns>
+            </Index>
+          </Indexes>
         </Table>
         <Table Description="" SchemaName="dbo" TableName="Customer" EnabledForCodeGeneration="true">
           <Columns>
@@ -124,8 +224,43 @@
             </Column>
           </Columns>
           <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
-          <RelationShips />
-          <Indexes />
+          <RelationShips>
+            <RelationShip ColumnName="CountryId" RelationShip="ForeignKey" ReferencedColumnName="CountryId" Render="true" SchemaName="dbo" ReferencedTableName="Country" Multiplicity="Many" ReferencedMultiplicity="ZeroToOne" UserRelationship="false">
+              <RelationshipName>FKFE9A39C0B3D9410C</RelationshipName>
+            </RelationShip>
+            <RelationShip ColumnName="CustomerId" RelationShip="ForeignKeyChild" ReferencedColumnName="CustomerId" Render="true" SchemaName="dbo" ReferencedTableName="BankAccount" Multiplicity="ZeroToOne" ReferencedMultiplicity="Many" UserRelationship="false">
+              <RelationshipName>FK2D9B8F03BA724162</RelationshipName>
+            </RelationShip>
+            <RelationShip ColumnName="CustomerId" RelationShip="ForeignKeyChild" ReferencedColumnName="CustomerId" Render="true" SchemaName="dbo" ReferencedTableName="Order" Multiplicity="ZeroToOne" ReferencedMultiplicity="Many" UserRelationship="false">
+              <RelationshipName>FK3117099BBA724162</RelationshipName>
+            </RelationShip>
+          </RelationShips>
+          <Indexes>
+            <Index>
+              <IndexType>NonClustered</IndexType>
+              <IsUnique>false</IsUnique>
+              <Name>IX_CountryId</Name>
+              <Columns>
+                <string>CountryId</string>
+              </Columns>
+            </Index>
+            <Index>
+              <IndexType>PrimaryKey</IndexType>
+              <IsUnique>true</IsUnique>
+              <Name>PK__Customer__A4AE64D85F0A74E2</Name>
+              <Columns>
+                <string>CustomerId</string>
+              </Columns>
+            </Index>
+            <Index>
+              <IndexType>NonClustered</IndexType>
+              <IsUnique>true</IsUnique>
+              <Name>UQ__Customer__A4AE64D98B60CE6B</Name>
+              <Columns>
+                <string>CustomerId</string>
+              </Columns>
+            </Index>
+          </Indexes>
         </Table>
         <Table Description="" SchemaName="dbo" TableName="Order" EnabledForCodeGeneration="true">
           <Columns>
@@ -155,8 +290,40 @@
             </Column>
           </Columns>
           <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
-          <RelationShips />
-          <Indexes />
+          <RelationShips>
+            <RelationShip ColumnName="CustomerId" RelationShip="ForeignKey" ReferencedColumnName="CustomerId" Render="true" SchemaName="dbo" ReferencedTableName="Customer" Multiplicity="Many" ReferencedMultiplicity="ZeroToOne" UserRelationship="false">
+              <RelationshipName>FK3117099BBA724162</RelationshipName>
+            </RelationShip>
+            <RelationShip ColumnName="OrderId" RelationShip="ForeignKeyChild" ReferencedColumnName="OrderId" Render="true" SchemaName="dbo" ReferencedTableName="OrderDetails" Multiplicity="One" ReferencedMultiplicity="Many" UserRelationship="false">
+              <RelationshipName>FK1C793D347C34AE1</RelationshipName>
+            </RelationShip>
+          </RelationShips>
+          <Indexes>
+            <Index>
+              <IndexType>NonClustered</IndexType>
+              <IsUnique>false</IsUnique>
+              <Name>IX_CustomerId</Name>
+              <Columns>
+                <string>CustomerId</string>
+              </Columns>
+            </Index>
+            <Index>
+              <IndexType>PrimaryKey</IndexType>
+              <IsUnique>true</IsUnique>
+              <Name>PK__Order__C3905BCFD19CCCF5</Name>
+              <Columns>
+                <string>OrderId</string>
+              </Columns>
+            </Index>
+            <Index>
+              <IndexType>NonClustered</IndexType>
+              <IsUnique>true</IsUnique>
+              <Name>UQ__Order__C3905BCE3C614174</Name>
+              <Columns>
+                <string>OrderId</string>
+              </Columns>
+            </Index>
+          </Indexes>
         </Table>
         <Table Description="" SchemaName="dbo" TableName="OrderDetails" EnabledForCodeGeneration="true">
           <Columns>
@@ -180,8 +347,48 @@
             </Column>
           </Columns>
           <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
-          <RelationShips />
-          <Indexes />
+          <RelationShips>
+            <RelationShip ColumnName="OrderId" RelationShip="ForeignKey" ReferencedColumnName="OrderId" Render="true" SchemaName="dbo" ReferencedTableName="Order" Multiplicity="Many" ReferencedMultiplicity="One" UserRelationship="false">
+              <RelationshipName>FK1C793D347C34AE1</RelationshipName>
+            </RelationShip>
+            <RelationShip ColumnName="ProductId" RelationShip="ForeignKey" ReferencedColumnName="ProductId" Render="true" SchemaName="dbo" ReferencedTableName="Product" Multiplicity="Many" ReferencedMultiplicity="One" UserRelationship="false">
+              <RelationshipName>FK1C793D34F72CF47B</RelationshipName>
+            </RelationShip>
+          </RelationShips>
+          <Indexes>
+            <Index>
+              <IndexType>NonClustered</IndexType>
+              <IsUnique>false</IsUnique>
+              <Name>IX_OrderId</Name>
+              <Columns>
+                <string>OrderId</string>
+              </Columns>
+            </Index>
+            <Index>
+              <IndexType>NonClustered</IndexType>
+              <IsUnique>false</IsUnique>
+              <Name>IX_ProductId</Name>
+              <Columns>
+                <string>ProductId</string>
+              </Columns>
+            </Index>
+            <Index>
+              <IndexType>PrimaryKey</IndexType>
+              <IsUnique>true</IsUnique>
+              <Name>PK__OrderDet__9DD74DBD12185384</Name>
+              <Columns>
+                <string>OrderDetailsId</string>
+              </Columns>
+            </Index>
+            <Index>
+              <IndexType>NonClustered</IndexType>
+              <IsUnique>true</IsUnique>
+              <Name>UQ__OrderDet__9DD74DBC8AA17DA0</Name>
+              <Columns>
+                <string>OrderDetailsId</string>
+              </Columns>
+            </Index>
+          </Indexes>
         </Table>
         <Table Description="" SchemaName="dbo" TableName="Product" EnabledForCodeGeneration="true">
           <Columns>
@@ -194,19 +401,40 @@
             <Column ColumnName="UnitPrice" ColumnOrder="3" DataType="Decimal" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="0" Precision="19" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="4" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
               <RemapDataType xsi:nil="true" />
             </Column>
-            <Column ColumnName="UnitAmount" ColumnOrder="4" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="50" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
-              <RemapDataType xsi:nil="true" />
-            </Column>
-            <Column ColumnName="Publisher" ColumnOrder="5" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="200" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
-              <RemapDataType xsi:nil="true" />
-            </Column>
-            <Column ColumnName="AmountInStock" ColumnOrder="6" DataType="Int16" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="0" Precision="5" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+            <Column ColumnName="AmountInStock" ColumnOrder="4" DataType="Int16" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="0" Precision="5" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
               <RemapDataType xsi:nil="true" />
             </Column>
           </Columns>
           <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
-          <RelationShips />
-          <Indexes />
+          <RelationShips>
+            <RelationShip ColumnName="ProductId" RelationShip="ForeignKey" ReferencedColumnName="ProductId" Render="true" SchemaName="dbo" ReferencedTableName="Book" Multiplicity="ZeroToOne" ReferencedMultiplicity="One" UserRelationship="false">
+              <RelationshipName>FK_Product_Book</RelationshipName>
+            </RelationShip>
+            <RelationShip ColumnName="ProductId" RelationShip="ForeignKeyChild" ReferencedColumnName="ProductId" Render="true" SchemaName="dbo" ReferencedTableName="OrderDetails" Multiplicity="One" ReferencedMultiplicity="Many" UserRelationship="false">
+              <RelationshipName>FK1C793D34F72CF47B</RelationshipName>
+            </RelationShip>
+            <RelationShip ColumnName="ProductId" RelationShip="ForeignKeyChild" ReferencedColumnName="ProductId" Render="true" SchemaName="dbo" ReferencedTableName="Software" Multiplicity="One" ReferencedMultiplicity="ZeroToOne" UserRelationship="false">
+              <RelationshipName>FK_Software_Product</RelationshipName>
+            </RelationShip>
+          </RelationShips>
+          <Indexes>
+            <Index>
+              <IndexType>PrimaryKey</IndexType>
+              <IsUnique>true</IsUnique>
+              <Name>PK__Product__B40CC6CD86CEF79C</Name>
+              <Columns>
+                <string>ProductId</string>
+              </Columns>
+            </Index>
+            <Index>
+              <IndexType>NonClustered</IndexType>
+              <IsUnique>true</IsUnique>
+              <Name>UQ__Product__B40CC6CC5F2A0195</Name>
+              <Columns>
+                <string>ProductId</string>
+              </Columns>
+            </Index>
+          </Indexes>
         </Table>
         <Table Description="" SchemaName="dbo" TableName="Software" EnabledForCodeGeneration="true">
           <Columns>
@@ -218,8 +446,29 @@
             </Column>
           </Columns>
           <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
-          <RelationShips />
-          <Indexes />
+          <RelationShips>
+            <RelationShip ColumnName="ProductId" RelationShip="ForeignKey" ReferencedColumnName="ProductId" Render="true" SchemaName="dbo" ReferencedTableName="Product" Multiplicity="ZeroToOne" ReferencedMultiplicity="One" UserRelationship="false">
+              <RelationshipName>FK_Software_Product</RelationshipName>
+            </RelationShip>
+          </RelationShips>
+          <Indexes>
+            <Index>
+              <IndexType>NonClustered</IndexType>
+              <IsUnique>false</IsUnique>
+              <Name>IX_ProductId</Name>
+              <Columns>
+                <string>ProductId</string>
+              </Columns>
+            </Index>
+            <Index>
+              <IndexType>PrimaryKey</IndexType>
+              <IsUnique>true</IsUnique>
+              <Name>PK__Software__B40CC6CD3CE35352</Name>
+              <Columns>
+                <string>ProductId</string>
+              </Columns>
+            </Index>
+          </Indexes>
         </Table>
       </Models>
       <Namespace>ApplicationService</Namespace>
@@ -278,8 +527,43 @@
             </Column>
           </Columns>
           <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
-          <RelationShips />
-          <Indexes />
+          <RelationShips>
+            <RelationShip ColumnName="CountryId" RelationShip="ForeignKey" ReferencedColumnName="CountryId" Render="true" SchemaName="dbo" ReferencedTableName="Country" Multiplicity="Many" ReferencedMultiplicity="ZeroToOne" UserRelationship="false">
+              <RelationshipName>FKFE9A39C0B3D9410C</RelationshipName>
+            </RelationShip>
+            <RelationShip ColumnName="CustomerId" RelationShip="ForeignKeyChild" ReferencedColumnName="CustomerId" Render="true" SchemaName="dbo" ReferencedTableName="BankAccount" Multiplicity="ZeroToOne" ReferencedMultiplicity="Many" UserRelationship="false">
+              <RelationshipName>FK2D9B8F03BA724162</RelationshipName>
+            </RelationShip>
+            <RelationShip ColumnName="CustomerId" RelationShip="ForeignKeyChild" ReferencedColumnName="CustomerId" Render="true" SchemaName="dbo" ReferencedTableName="Order" Multiplicity="ZeroToOne" ReferencedMultiplicity="Many" UserRelationship="false">
+              <RelationshipName>FK3117099BBA724162</RelationshipName>
+            </RelationShip>
+          </RelationShips>
+          <Indexes>
+            <Index>
+              <IndexType>NonClustered</IndexType>
+              <IsUnique>false</IsUnique>
+              <Name>IX_CountryId</Name>
+              <Columns>
+                <string>CountryId</string>
+              </Columns>
+            </Index>
+            <Index>
+              <IndexType>PrimaryKey</IndexType>
+              <IsUnique>true</IsUnique>
+              <Name>PK__Customer__A4AE64D85F0A74E2</Name>
+              <Columns>
+                <string>CustomerId</string>
+              </Columns>
+            </Index>
+            <Index>
+              <IndexType>NonClustered</IndexType>
+              <IsUnique>true</IsUnique>
+              <Name>UQ__Customer__A4AE64D98B60CE6B</Name>
+              <Columns>
+                <string>CustomerId</string>
+              </Columns>
+            </Index>
+          </Indexes>
         </Table>
       </Models>
       <Namespace>ApplicationService</Namespace>

@@ -223,9 +223,6 @@
             <RelationShip ColumnName="BankAccountId" RelationShip="ForeignKeyChild" ReferencedColumnName="ToBankAccountId" Render="true" SchemaName="dbo" ReferencedTableName="BankTransfers" Multiplicity="One" ReferencedMultiplicity="Many" UserRelationship="false">
               <RelationshipName>FKE4EEFC1145FD5999</RelationshipName>
             </RelationShip>
-            <RelationShip ColumnName="BankAccountId" RelationShip="ForeignKeyChild" ReferencedColumnName="BankAccountId" RelationshipAlias="BankTransfers1" Render="true" SchemaName="dbo" ReferencedTableName="BankTransfers" Multiplicity="ZeroToOne" ReferencedMultiplicity="Many" UserRelationship="false">
-              <RelationshipName>FKE4EEFC1182F6322F</RelationshipName>
-            </RelationShip>
           </RelationShips>
           <Indexes>
             <Index>
@@ -271,17 +268,11 @@
             <Column ColumnName="TransferDate" ColumnOrder="5" DataType="DateTime" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="0" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
               <RemapDataType xsi:nil="true" />
             </Column>
-            <Column ColumnName="BankAccountId" ColumnOrder="6" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
-              <RemapDataType xsi:nil="true" />
-            </Column>
           </Columns>
           <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
           <RelationShips>
             <RelationShip ColumnName="ToBankAccountId" RelationShip="ForeignKey" ReferencedColumnName="BankAccountId" Render="true" SchemaName="dbo" ReferencedTableName="BankAccount" Multiplicity="Many" ReferencedMultiplicity="One" UserRelationship="false">
               <RelationshipName>FKE4EEFC1145FD5999</RelationshipName>
-            </RelationShip>
-            <RelationShip ColumnName="BankAccountId" RelationShip="ForeignKey" ReferencedColumnName="BankAccountId" RelationshipAlias="BankAccount1" Render="true" SchemaName="dbo" ReferencedTableName="BankAccount" Multiplicity="Many" ReferencedMultiplicity="ZeroToOne" UserRelationship="false">
-              <RelationshipName>FKE4EEFC1182F6322F</RelationshipName>
             </RelationShip>
           </RelationShips>
           <Indexes>
@@ -307,14 +298,6 @@
               <Name>UQ__BankTran__2E82727AB11DB584</Name>
               <Columns>
                 <string>BankTransferId</string>
-              </Columns>
-            </Index>
-            <Index>
-              <IndexType>NonClustered</IndexType>
-              <IsUnique>true</IsUnique>
-              <Name>UQ__BankTran__4FC8E4A0CE69E10D</Name>
-              <Columns>
-                <string>BankAccountId</string>
               </Columns>
             </Index>
           </Indexes>
@@ -607,13 +590,7 @@
             <Column ColumnName="UnitPrice" ColumnOrder="3" DataType="Decimal" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="0" Precision="19" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="4" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
               <RemapDataType xsi:nil="true" />
             </Column>
-            <Column ColumnName="UnitAmount" ColumnOrder="4" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="50" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
-              <RemapDataType xsi:nil="true" />
-            </Column>
-            <Column ColumnName="Publisher" ColumnOrder="5" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="200" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
-              <RemapDataType xsi:nil="true" />
-            </Column>
-            <Column ColumnName="AmountInStock" ColumnOrder="6" DataType="Int16" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="0" Precision="5" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+            <Column ColumnName="AmountInStock" ColumnOrder="4" DataType="Int16" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="0" Precision="5" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
               <RemapDataType xsi:nil="true" />
             </Column>
           </Columns>

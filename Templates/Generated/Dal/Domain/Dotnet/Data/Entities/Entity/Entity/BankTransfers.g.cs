@@ -41,17 +41,12 @@ namespace RepositoryEFDotnet.Data.Entity
 			this.ToBankAccountId = item.ToBankAccountId;
 			this.Amount = item.Amount;
 			this.TransferDate = item.TransferDate;
-			this.BankAccountId = item.BankAccountId;
 
 			if(deep)
 			{
 				if(item.BankAccount != null)
                 {
                     this.BankAccount = new BankAccount(item.BankAccount, deep);
-                }
-				if(item.BankAccount1 != null)
-                {
-                    this.BankAccount1 = new BankAccount(item.BankAccount1, deep);
                 }
 			}
 		}
@@ -65,7 +60,6 @@ namespace RepositoryEFDotnet.Data.Entity
 		public virtual int ToBankAccountId { get; set; }
 		public virtual decimal Amount { get; set; }
 		public virtual DateTime TransferDate { get; set; }
-		public virtual Nullable<int> BankAccountId { get; set; }
 
 		#endregion
 
@@ -89,29 +83,6 @@ namespace RepositoryEFDotnet.Data.Entity
 					else
 					{
 						this.BankAccount = null;
-					}
-				}
-			}
-		}
-
-        public virtual BankAccount BankAccount1 { get; set; }
-		IBankAccount IBankTransfers.BankAccount1 
-		{ 
-			get
-			{
-				return this.BankAccount1;
-			}
-			set
-			{
-				if(value != this.BankAccount1)
-				{
-					if(value != null)
-					{
-						this.BankAccount1 = (BankAccount)value;
-					}
-					else
-					{
-						this.BankAccount1 = null;
 					}
 				}
 			}

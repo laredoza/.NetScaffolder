@@ -178,6 +178,7 @@ namespace DotNetScaffolder.Presentation.Forms.Controls.Project.DataType
 
                     var template = hierarchy;
                     var dataType = ScaffoldConfig.ReturnDataType(template.DataType);
+                    dataType.DomainDefinition = this.DataSource;
                     dataType.Load(parameters);
                     var navigation = dataType.ReturnNavigation();
 

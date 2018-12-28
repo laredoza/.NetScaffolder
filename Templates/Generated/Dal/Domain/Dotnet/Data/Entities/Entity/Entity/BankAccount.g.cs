@@ -31,7 +31,6 @@ namespace RepositoryEFDotnet.Data.Entity
 		public BankAccount()
 		{
 			this.BankTransfers = new List <BankTransfers>();
-			this.BankTransfers1 = new List <BankTransfers>();
 		}
 		
 		public BankAccount(IBankAccount item, bool deep = false)
@@ -44,7 +43,6 @@ namespace RepositoryEFDotnet.Data.Entity
 			this.CustomerId = item.CustomerId;
 			this.Locked = item.Locked;
 			this.BankTransfers = new List <BankTransfers>();
-			this.BankTransfers1 = new List <BankTransfers>();
 
 			if(deep)
 			{
@@ -53,13 +51,6 @@ namespace RepositoryEFDotnet.Data.Entity
 					foreach(var childItem in item.BankTransfers)
 					{
 						this.BankTransfers.Add(new BankTransfers(childItem, deep));
-					}
-				}
-				if(item.BankTransfers1 != null)
-				{
-					foreach(var childItem in item.BankTransfers1)
-					{
-						this.BankTransfers1.Add(new BankTransfers(childItem, deep));
 					}
 				}
 				if(item.Customer != null)
@@ -102,30 +93,6 @@ namespace RepositoryEFDotnet.Data.Entity
 					else
 					{
 						this.BankTransfers = null;
-					}
-				}
-			}			
-		}
-        
-        public virtual IList<BankTransfers> BankTransfers1 { get; set; }
-	
-        IList<IBankTransfers> IBankAccount.BankTransfers1 
-		{ 
-			get
-			{
-				return this.BankTransfers1 == null ? null : (IList<IBankTransfers>)this.BankTransfers1;
-			}
-			set
-			{
-				if(value != this.BankTransfers1)
-				{
-					if(value != null)
-					{
-						this.BankTransfers1 = (IList<BankTransfers>)value;
-					}
-					else
-					{
-						this.BankTransfers1 = null;
 					}
 				}
 			}			

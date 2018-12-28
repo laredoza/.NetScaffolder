@@ -66,7 +66,6 @@ namespace RepositoryEFDotnet.Data.Context.Mappings.EF.SqlServer
 			
 			HasOptional<Customer>(s => s.Customer).WithMany(s => s.BankAccount).HasForeignKey(s => s.CustomerId).WillCascadeOnDelete(false);
 			HasMany<BankTransfers>(s => s.BankTransfers).WithRequired(s => s.BankAccount).HasForeignKey(s => s.ToBankAccountId).WillCascadeOnDelete(false);
-			HasMany<BankTransfers>(s => s.BankTransfers1).WithOptional(s => s.BankAccount1).HasForeignKey(s => s.BankAccountId).WillCascadeOnDelete(false);
 			
 			#endregion			
 

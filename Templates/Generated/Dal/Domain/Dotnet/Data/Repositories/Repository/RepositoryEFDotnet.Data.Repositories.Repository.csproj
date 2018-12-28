@@ -291,7 +291,4 @@
 </LastOutputs>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Register\" />
-  </ItemGroup>
 </Project>

@@ -66,7 +66,6 @@ namespace RepositoryEFDotnet.Data.Context.Mappings.NHib.MySql
 			
 			References(o => o.Customer).Column("CustomerId").Unique().Not.Insert().Not.Update();
 			HasMany(s => s.BankTransfers).KeyColumn("ToBankAccountId");
-			HasMany(s => s.BankTransfers1).KeyColumn("BankAccountId");
 			
 			#endregion			
 

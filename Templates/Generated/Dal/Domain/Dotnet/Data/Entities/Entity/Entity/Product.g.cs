@@ -40,8 +40,6 @@ namespace RepositoryEFDotnet.Data.Entity
 			this.ProductId = item.ProductId;
 			this.ProductDescription = item.ProductDescription;
 			this.UnitPrice = item.UnitPrice;
-			this.UnitAmount = item.UnitAmount;
-			this.Publisher = item.Publisher;
 			this.AmountInStock = item.AmountInStock;
 			this.OrderDetails = new List <OrderDetails>();
 
@@ -69,8 +67,6 @@ namespace RepositoryEFDotnet.Data.Entity
 		public virtual int ProductId { get; set; }
 		public virtual string ProductDescription { get; set; }
 		public virtual Nullable<decimal> UnitPrice { get; set; }
-		public virtual string UnitAmount { get; set; }
-		public virtual string Publisher { get; set; }
 		public virtual Nullable<short> AmountInStock { get; set; }
 
 		#endregion

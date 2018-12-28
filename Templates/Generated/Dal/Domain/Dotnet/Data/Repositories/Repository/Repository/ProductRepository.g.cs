@@ -196,90 +196,6 @@ namespace RepositoryEFDotnet.Data.Repository
 			}
 		}
 
-        /// <summary>
-        /// Search for Product entities in the database by UnitAmount
-        /// </summary>
-        /// <param name="unitAmount">string</param>
-		/// <param name="caseSensitive">bool</param>
-		/// <param name="includes">params Expression<Func<IProduct, object>>[]</param>
-        /// <returns>IList<IProduct></returns>
-		public virtual IList<IProduct> SearchByUnitAmount(string unitAmount, bool cache, bool caseSensitive = false, params Expression<Func<IProduct, object>>[] includes)
-		{		
-			var expr = this.Convert(includes);
-			if(caseSensitive) 
-			{
-				return this.UnitOfWork.AllMatching<Product>(o => o.UnitAmount.Contains(unitAmount), cache, expr).ToList<IProduct>();
-			}
-			else
-			{
-				return this.UnitOfWork.AllMatching<Product>(o => o.UnitAmount.ToLower().Contains(unitAmount.ToLower()), cache, expr).ToList<IProduct>();
-			}
-		}
-		
-        /// <summary>
-        /// Search for Product entities async in the database by UnitAmount
-        /// </summary>
-        /// <param name="unitAmount">string</param>
-		/// <param name="caseSensitive">bool</param>
-		/// <param name="includes">params Expression<Func<IProduct, object>>[]</param>
-        /// <returns>IList<IProduct></returns>
-		public virtual async Task<IList<IProduct>> SearchByUnitAmountAsync(string unitAmount, bool cache, bool caseSensitive = false, params Expression<Func<IProduct, object>>[] includes)
-		{		
-			var expr = this.Convert(includes);
-			if(caseSensitive) 
-			{
-				var result = await this.UnitOfWork.AllMatchingAsync<Product>(o => o.UnitAmount.Contains(unitAmount), cache, expr);
-				return result.ToList<IProduct>();
-			}
-			else
-			{
-				var result = await this.UnitOfWork.AllMatchingAsync<Product>(o => o.UnitAmount.ToLower().Contains(unitAmount.ToLower()), cache, expr);
-				return result.ToList<IProduct>();
-			}
-		}
-
-        /// <summary>
-        /// Search for Product entities in the database by Publisher
-        /// </summary>
-        /// <param name="publisher">string</param>
-		/// <param name="caseSensitive">bool</param>
-		/// <param name="includes">params Expression<Func<IProduct, object>>[]</param>
-        /// <returns>IList<IProduct></returns>
-		public virtual IList<IProduct> SearchByPublisher(string publisher, bool cache, bool caseSensitive = false, params Expression<Func<IProduct, object>>[] includes)
-		{		
-			var expr = this.Convert(includes);
-			if(caseSensitive) 
-			{
-				return this.UnitOfWork.AllMatching<Product>(o => o.Publisher.Contains(publisher), cache, expr).ToList<IProduct>();
-			}
-			else
-			{
-				return this.UnitOfWork.AllMatching<Product>(o => o.Publisher.ToLower().Contains(publisher.ToLower()), cache, expr).ToList<IProduct>();
-			}
-		}
-		
-        /// <summary>
-        /// Search for Product entities async in the database by Publisher
-        /// </summary>
-        /// <param name="publisher">string</param>
-		/// <param name="caseSensitive">bool</param>
-		/// <param name="includes">params Expression<Func<IProduct, object>>[]</param>
-        /// <returns>IList<IProduct></returns>
-		public virtual async Task<IList<IProduct>> SearchByPublisherAsync(string publisher, bool cache, bool caseSensitive = false, params Expression<Func<IProduct, object>>[] includes)
-		{		
-			var expr = this.Convert(includes);
-			if(caseSensitive) 
-			{
-				var result = await this.UnitOfWork.AllMatchingAsync<Product>(o => o.Publisher.Contains(publisher), cache, expr);
-				return result.ToList<IProduct>();
-			}
-			else
-			{
-				var result = await this.UnitOfWork.AllMatchingAsync<Product>(o => o.Publisher.ToLower().Contains(publisher.ToLower()), cache, expr);
-				return result.ToList<IProduct>();
-			}
-		}
-
 		#endregion
 		
 		#region Modifiers
@@ -299,8 +215,6 @@ namespace RepositoryEFDotnet.Data.Repository
 			entity.ProductId = entityToSave.ProductId;
 			entity.ProductDescription = entityToSave.ProductDescription;
 			entity.UnitPrice = entityToSave.UnitPrice;
-			entity.UnitAmount = entityToSave.UnitAmount;
-			entity.Publisher = entityToSave.Publisher;
 			entity.AmountInStock = entityToSave.AmountInStock;
 			
 			return result;
@@ -321,8 +235,6 @@ namespace RepositoryEFDotnet.Data.Repository
 			entity.ProductId = entityToSave.ProductId;
 			entity.ProductDescription = entityToSave.ProductDescription;
 			entity.UnitPrice = entityToSave.UnitPrice;
-			entity.UnitAmount = entityToSave.UnitAmount;
-			entity.Publisher = entityToSave.Publisher;
 			entity.AmountInStock = entityToSave.AmountInStock;
 			
 			return result;

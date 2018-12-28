@@ -194,8 +194,8 @@ namespace DotNetScaffolder.Mapping.ApplicationServices
                         new Dictionary<string, string> { { "basePath", this.ProjectDefinition.OutputPath } };
 
                     IDataType dataType = ScaffoldConfig.ReturnDataType(template.DataType);
-                    dataType.Load(parameters);
                     dataType.DomainDefinition = this.ProjectDefinition.Domains[0];
+                    dataType.Load(parameters);
                     validations = dataType.Validate();
 
                     foreach (Validation validation in validations)

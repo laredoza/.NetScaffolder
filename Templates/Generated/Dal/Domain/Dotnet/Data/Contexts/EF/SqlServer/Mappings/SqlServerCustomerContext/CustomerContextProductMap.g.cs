@@ -52,10 +52,6 @@ namespace RepositoryEFDotnet.Data.Customers.Mappings.EF.SqlServer
 			Property(t => t.ProductDescription).IsOptional();
 			Property(t => t.UnitPrice).IsOptional();
 			Property(t => t.UnitPrice).HasPrecision(19, 4);
-			Property(t => t.UnitAmount).HasMaxLength(50);
-			Property(t => t.UnitAmount).IsOptional();
-			Property(t => t.Publisher).HasMaxLength(200);
-			Property(t => t.Publisher).IsOptional();
 			Property(t => t.AmountInStock).IsOptional();
 			
 			#endregion
@@ -77,9 +73,7 @@ namespace RepositoryEFDotnet.Data.Customers.Mappings.EF.SqlServer
 			Property(t => t.ProductId).HasColumnOrder(1);
 			Property(t => t.ProductDescription).HasColumnOrder(2);
 			Property(t => t.UnitPrice).HasColumnOrder(3);
-			Property(t => t.UnitAmount).HasColumnOrder(4);
-			Property(t => t.Publisher).HasColumnOrder(5);
-			Property(t => t.AmountInStock).HasColumnOrder(6);
+			Property(t => t.AmountInStock).HasColumnOrder(4);
 
 			#endregion
 	

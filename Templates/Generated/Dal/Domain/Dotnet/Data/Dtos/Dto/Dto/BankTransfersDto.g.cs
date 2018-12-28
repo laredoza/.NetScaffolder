@@ -41,17 +41,12 @@ namespace RepositoryEFDotnet.Data.Dto
 			this.ToBankAccountId = item.ToBankAccountId;
 			this.Amount = item.Amount;
 			this.TransferDate = item.TransferDate;
-			this.BankAccountId = item.BankAccountId;
 
 			if(deep)
 			{
                 if(item.BankAccount != null)
                 {
 				    this.BankAccount = new BankAccountDto(item.BankAccount, deep);
-                }
-                if(item.BankAccount1 != null)
-                {
-				    this.BankAccount1 = new BankAccountDto(item.BankAccount1, deep);
                 }
 			}
 		}
@@ -65,7 +60,6 @@ namespace RepositoryEFDotnet.Data.Dto
 		public int ToBankAccountId { get; set; }
 		public decimal Amount { get; set; }
 		public DateTime TransferDate { get; set; }
-		public Nullable<int> BankAccountId { get; set; }
 
 		#endregion
 		
@@ -77,7 +71,6 @@ namespace RepositoryEFDotnet.Data.Dto
 		#region Parent Relationships
 		
 		public IBankAccount BankAccount { get; set; }
-		public IBankAccount BankAccount1 { get; set; }
 		
 		#endregion
 	}

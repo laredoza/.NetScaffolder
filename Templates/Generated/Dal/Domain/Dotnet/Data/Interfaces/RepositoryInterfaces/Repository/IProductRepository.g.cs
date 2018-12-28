@@ -128,46 +128,6 @@ namespace RepositoryEFDotnet.Data.Interfaces
         /// <returns>IList<IProduct></returns>
 		Task<IList<IProduct>> SearchByProductDescriptionAsync(string productDescription, bool cache, bool caseSensitive = false, params Expression<Func<IProduct, object>>[] includes);
 
-        /// <summary>
-        /// Search for Product entities in the database by UnitAmount
-        /// </summary>
-        /// <param name="unitAmount">string</param>
-        /// <param name="cache">Use 2nd level caching if enabled</param>
-		/// <param name="caseSensitive">bool</param
-		/// <param name="includes">params Expression<Func<IProduct, object>>[]</param>
-        /// <returns>IList<IProduct></returns>
-		IList<IProduct> SearchByUnitAmount(string unitAmount, bool cache, bool caseSensitive = false, params Expression<Func<IProduct, object>>[] includes);
-		
-        /// <summary>
-        /// Search for Product entities async in the database by UnitAmount
-        /// </summary>
-        /// <param name="unitAmount">string</param>
-        /// <param name="cache">Use 2nd level caching if enabled</param>
-		/// <param name="caseSensitive">bool</param
-		/// <param name="includes">params Expression<Func<IProduct, object>>[]</param>
-        /// <returns>IList<IProduct></returns>
-		Task<IList<IProduct>> SearchByUnitAmountAsync(string unitAmount, bool cache, bool caseSensitive = false, params Expression<Func<IProduct, object>>[] includes);
-
-        /// <summary>
-        /// Search for Product entities in the database by Publisher
-        /// </summary>
-        /// <param name="publisher">string</param>
-        /// <param name="cache">Use 2nd level caching if enabled</param>
-		/// <param name="caseSensitive">bool</param
-		/// <param name="includes">params Expression<Func<IProduct, object>>[]</param>
-        /// <returns>IList<IProduct></returns>
-		IList<IProduct> SearchByPublisher(string publisher, bool cache, bool caseSensitive = false, params Expression<Func<IProduct, object>>[] includes);
-		
-        /// <summary>
-        /// Search for Product entities async in the database by Publisher
-        /// </summary>
-        /// <param name="publisher">string</param>
-        /// <param name="cache">Use 2nd level caching if enabled</param>
-		/// <param name="caseSensitive">bool</param
-		/// <param name="includes">params Expression<Func<IProduct, object>>[]</param>
-        /// <returns>IList<IProduct></returns>
-		Task<IList<IProduct>> SearchByPublisherAsync(string publisher, bool cache, bool caseSensitive = false, params Expression<Func<IProduct, object>>[] includes);
-
 		#endregion
 		
 		#region Modifiers

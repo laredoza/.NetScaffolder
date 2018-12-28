@@ -177,6 +177,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.WebApiSer
             this.DataType?.Load(parameterDictionary);
 
             this.applicationServiceData = new ApplicationServiceDataType();
+            this.applicationServiceData.DomainDefinition = this.DataSource;
             this.applicationServiceData.Load(parameterDictionary);
 
             (this.DataType as WebApiServiceDataType).ApplicationServiceDataType = this.applicationServiceData;

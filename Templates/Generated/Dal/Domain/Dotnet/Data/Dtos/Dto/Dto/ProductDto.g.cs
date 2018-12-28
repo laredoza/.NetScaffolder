@@ -40,8 +40,6 @@ namespace RepositoryEFDotnet.Data.Dto
 			this.ProductId = item.ProductId;
 			this.ProductDescription = item.ProductDescription;
 			this.UnitPrice = item.UnitPrice;
-			this.UnitAmount = item.UnitAmount;
-			this.Publisher = item.Publisher;
 			this.AmountInStock = item.AmountInStock;
 			this.OrderDetails = new List <IOrderDetails>();
 
@@ -69,8 +67,6 @@ namespace RepositoryEFDotnet.Data.Dto
 		public int ProductId { get; set; }
 		public string ProductDescription { get; set; }
 		public Nullable<decimal> UnitPrice { get; set; }
-		public string UnitAmount { get; set; }
-		public string Publisher { get; set; }
 		public Nullable<short> AmountInStock { get; set; }
 
 		#endregion

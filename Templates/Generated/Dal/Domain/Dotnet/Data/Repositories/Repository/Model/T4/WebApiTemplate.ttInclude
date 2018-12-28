@@ -77,6 +77,7 @@ string name = DataType.NamingConvention == null ? applicationServiceData.Applica
 
         #region Load
 <#+  foreach(var applicationServiceData in CurrentWebApiServiceData.Models){ #>
+<#+ string applicationServiceName = DataType.NamingConvention == null ? applicationServiceData.ApplicationServiceName : DataType.NamingConvention.ApplyNamingConvention(applicationServiceData.ApplicationServiceName); #>
 <#+            foreach(var model in applicationServiceData.Models){ #>
 <#+ 
 string modelName = DataType.NamingConvention == null ? model.TableName : DataType.NamingConvention.ApplyNamingConvention(model.TableName);
@@ -98,7 +99,7 @@ if(model.PrimaryKeyCount > 1){ #>
                 this.Load<#= modelName #>Includes = new Expression<Func<I<#= modelName #>, object>>[]{};
             }
 
-            var result = this.<#= modelName #>ApplicationService.Load<#= modelName #>(<#= DataType.TransformAsParameterName(model.Columns.Where(o => o.IsPrimaryKey)) #>, cache, this.Load<#= modelName #>Includes)
+            var result = this.<#= applicationServiceName #>ApplicationService.Load<#= modelName #>(<#= DataType.TransformAsParameterName(model.Columns.Where(o => o.IsPrimaryKey)) #>, cache, this.Load<#= modelName #>Includes)
 
             if (result == null)
             {
@@ -124,7 +125,7 @@ if(model.PrimaryKeyCount > 1){ #>
                 this.LoadAsync<#= modelName #>Includes = new Expression<Func<I<#= modelName #>, object>>[]{};
             }
 
-            var result = async this.<#= modelName #>ApplicationService.Load<#= modelName #>Async(<#= DataType.TransformAsParameterName(model.Columns.Where(o => o.IsPrimaryKey)) #>, cache, this.LoadAsync<#= modelName #>Includes)
+            var result = async this.<#= applicationServiceName #>ApplicationService.Load<#= modelName #>Async(<#= DataType.TransformAsParameterName(model.Columns.Where(o => o.IsPrimaryKey)) #>, cache, this.LoadAsync<#= modelName #>Includes)
 
             if (result == null)
             {
@@ -152,7 +153,7 @@ if(model.PrimaryKeyCount > 1){ #>
                 this.LoadBy<#= modelName #><#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>Includes = new Expression<Func<I<#= modelName #>, object>>[]{};
             }
 
-            var result = this.<#= modelName #>ApplicationService.LoadBy<#= modelName #><#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= DataType.TransformAsParameterName(col) #>, cache, this.LoadBy<#= modelName #><#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>Includes);
+            var result = this.<#= applicationServiceName #>ApplicationService.LoadBy<#= modelName #><#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= DataType.TransformAsParameterName(col) #>, cache, this.LoadBy<#= modelName #><#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>Includes);
 
             if (result == null)
             {
@@ -176,7 +177,7 @@ if(model.PrimaryKeyCount > 1){ #>
                 this.LoadBy<#= modelName #><#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>AsyncIncludes = new Expression<Func<I<#= modelName #>, object>>[]{};
             }
 
-           var result = await this.<#= modelName #>ApplicationService.LoadBy<#= modelName #><#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>Async(<#= DataType.TransformAsParameterName(col) #>, cache, this.LoadBy<#= modelName #><#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>AsyncIncludes);
+           var result = await this.<#= applicationServiceName #>ApplicationService.LoadBy<#= modelName #><#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>Async(<#= DataType.TransformAsParameterName(col) #>, cache, this.LoadBy<#= modelName #><#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>AsyncIncludes);
             
             if (result == null)
             {
@@ -200,7 +201,7 @@ if(model.PrimaryKeyCount > 1){ #>
                 this.<#= modelName #>LoadAllIncludes = new Expression<Func<I<#= modelName #>, object>>[]{};
             }
 
-            var result = this.<#= modelName #>ApplicationService.<#= modelName #>LoadAll(cache, this.<#= modelName #>LoadAllIncludes);
+            var result = this.<#= applicationServiceName #>ApplicationService.<#= modelName #>LoadAll(cache, this.<#= modelName #>LoadAllIncludes);
             
             if (result == null)
             {
@@ -223,7 +224,7 @@ if(model.PrimaryKeyCount > 1){ #>
                 this.<#= modelName #>LoadAllAsyncIncludes = new Expression<Func<I<#= modelName #>, object>>[]{};
             }
 
-            var result = await this.<#= modelName #>ApplicationService.<#= modelName #>LoadAllAsync(cache, this.<#= modelName #>LoadAllAsyncIncludes);
+            var result = await this.<#= applicationServiceName #>ApplicationService.<#= modelName #>LoadAllAsync(cache, this.<#= modelName #>LoadAllAsyncIncludes);
             
             if (result == null)
             {
@@ -240,6 +241,7 @@ if(model.PrimaryKeyCount > 1){ #>
 
         #region Search
         <#+  foreach(var applicationServiceData in CurrentWebApiServiceData.Models){ #>
+        <#+ string applicationServiceName = DataType.NamingConvention == null ? applicationServiceData.ApplicationServiceName : DataType.NamingConvention.ApplyNamingConvention(applicationServiceData.ApplicationServiceName); #>
 <#+            foreach(var model in applicationServiceData.Models){ #>
 <#+ 
 string modelName = DataType.NamingConvention == null ? model.TableName : DataType.NamingConvention.ApplyNamingConvention(model.TableName);
@@ -260,7 +262,7 @@ string modelName = DataType.NamingConvention == null ? model.TableName : DataTyp
                 this.<#= modelName #>SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>Includes = new Expression<Func<I<#= modelName #>, object>>[]{};
             }
 
-            var result = this.<#= modelName #>ApplicationService.<#= modelName #>SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= DataType.TransformAsParameterName(col)  #>,caseSensitive, cache, this.<#= modelName #>SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>Includes);
+            var result = this.<#= applicationServiceName #>ApplicationService.<#= modelName #>SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= DataType.TransformAsParameterName(col)  #>,caseSensitive, cache, this.<#= modelName #>SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>Includes);
             
             if (result == null)
             {
@@ -284,7 +286,7 @@ string modelName = DataType.NamingConvention == null ? model.TableName : DataTyp
                 this.<#= modelName #>SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>IncludesAsync = new Expression<Func<I<#= modelName #>, object>>[]{};
             }
 
-            var result = await this.<#= modelName #>ApplicationService.<#= modelName #>SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>Async(<#= DataType.TransformAsParameterName(col)  #>,caseSensitive, cache, this.<#= modelName #>SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>IncludesAsync);
+            var result = await this.<#= applicationServiceName #>ApplicationService.<#= modelName #>SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>Async(<#= DataType.TransformAsParameterName(col)  #>,caseSensitive, cache, this.<#= modelName #>SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>IncludesAsync);
             
             if (result == null)
             {
@@ -301,7 +303,7 @@ string modelName = DataType.NamingConvention == null ? model.TableName : DataTyp
 
 		#region Modifiers
 <#+  foreach(var applicationServiceData in CurrentWebApiServiceData.Models){ #>
-
+<#+ string applicationServiceName = DataType.NamingConvention == null ? applicationServiceData.ApplicationServiceName : DataType.NamingConvention.ApplyNamingConvention(applicationServiceData.ApplicationServiceName); #>
 <#+            foreach(var model in applicationServiceData.Models){ #>
 <#+ 
 string modelName = DataType.NamingConvention == null ? model.TableName : DataType.NamingConvention.ApplyNamingConvention(model.TableName); #>		
@@ -313,7 +315,7 @@ string modelName = DataType.NamingConvention == null ? model.TableName : DataTyp
         [HttpPost]
 		public bool <#= modelName #>Add([FromBody] I<#= modelName #> entity)
         {
-            return this.<#= modelName #>ApplicationService.<#= modelName #>Update(entity);
+            return this.<#= applicationServiceName #>ApplicationService.<#= modelName #>Update(entity);
         }
 
         /// <summary>
@@ -324,7 +326,7 @@ string modelName = DataType.NamingConvention == null ? model.TableName : DataTyp
         [HttpPost]
 		public bool <#= modelName #>Update([FromBody] I<#= modelName #> entity)
         {
-            return this.<#= modelName #>ApplicationService.<#= modelName #>Update(entity);
+            return this.<#= applicationServiceName #>ApplicationService.<#= modelName #>Update(entity);
         }
 		
         /// <summary>
@@ -335,7 +337,7 @@ string modelName = DataType.NamingConvention == null ? model.TableName : DataTyp
         [HttpPost]
 		public bool <#= modelName #>Delete([FromBody] I<#= modelName #> entity)
         {
-            return this.<#= modelName #>ApplicationService.<#= modelName #>Delete(entity);
+            return this.<#= applicationServiceName #>ApplicationService.<#= modelName #>Delete(entity);
         }
 
 		/// <summary>
@@ -348,7 +350,7 @@ string modelName = DataType.NamingConvention == null ? model.TableName : DataTyp
         [HttpDelete("{<#=DataType.TransformAsParameterName(model.Columns.Where(o => o.IsPrimaryKey)).Trim()#>}/{cache}")]
 		public bool <#= modelName #>Delete(<#= DataType.TransformAsParameter(model.Columns.Where(o => o.IsPrimaryKey)) #>, bool cache)
         {
-            return this.<#= modelName #>ApplicationService.<#= modelName #>Delete(<#= DataType.TransformAsParameterName(model.Columns.Where(o => o.IsPrimaryKey)) #>, cache);
+            return this.<#= applicationServiceName #>ApplicationService.<#= modelName #>Delete(<#= DataType.TransformAsParameterName(model.Columns.Where(o => o.IsPrimaryKey)) #>, cache);
         }
 
 <#+            } #>
@@ -357,6 +359,7 @@ string modelName = DataType.NamingConvention == null ? model.TableName : DataTyp
 
 		#region Bulk
 <#+  foreach(var applicationServiceData in CurrentWebApiServiceData.Models){ #>
+<#+ string applicationServiceName = DataType.NamingConvention == null ? applicationServiceData.ApplicationServiceName : DataType.NamingConvention.ApplyNamingConvention(applicationServiceData.ApplicationServiceName); #>
 <#+            foreach(var model in applicationServiceData.Models){ #>
 <#+ 
 string modelName = DataType.NamingConvention == null ? model.TableName : DataType.NamingConvention.ApplyNamingConvention(model.TableName); #>
@@ -368,7 +371,7 @@ string modelName = DataType.NamingConvention == null ? model.TableName : DataTyp
         [HttpPost]
         public void <#= modelName #>BulkDelete([FromBody] IEnumerable<I<#= modelName #>> items)
 		{
-			this.<#= modelName #>ApplicationService.<#= modelName #>BulkDelete(items);
+			this.<#= applicationServiceName #>ApplicationService.<#= modelName #>BulkDelete(items);
 		}
 
         /// <summary>
@@ -379,7 +382,7 @@ string modelName = DataType.NamingConvention == null ? model.TableName : DataTyp
         [HttpPost]
         public async Task <#= modelName #>BulkDeleteAsync([FromBody] IEnumerable<I<#= modelName #>> items)
 		{
-			await this.<#= modelName #>ApplicationService.<#= modelName #>BulkDeleteAsync(items);
+			await this.<#= applicationServiceName #>ApplicationService.<#= modelName #>BulkDeleteAsync(items);
 		}
 
         /// <summary>
@@ -389,7 +392,7 @@ string modelName = DataType.NamingConvention == null ? model.TableName : DataTyp
         [HttpPost]
         public void  <#= modelName #>BulkInsert([FromBody] IEnumerable<I<#= modelName #>> items)
 		{
-			this.<#= modelName #>ApplicationService.<#= modelName #>BulkInsert(items);
+			this.<#= applicationServiceName #>ApplicationService.<#= modelName #>BulkInsert(items);
 		}
         
         /// <summary>
@@ -400,7 +403,7 @@ string modelName = DataType.NamingConvention == null ? model.TableName : DataTyp
         [HttpPost]
         public async Task  <#= modelName #>BulkInsertAsync([FromBody] IEnumerable<I<#= modelName #>> items)
 		{
-			await this.<#= modelName #>ApplicationService.<#= modelName #>BulkInsertAsync(items);
+			await this.<#= applicationServiceName #>ApplicationService.<#= modelName #>BulkInsertAsync(items);
 		}
 
         /// <summary>
@@ -410,7 +413,7 @@ string modelName = DataType.NamingConvention == null ? model.TableName : DataTyp
         [HttpPost]
         public void <#= modelName #>BulkUpdate([FromBody] IEnumerable<I<#= modelName #>> items)
 		{
-			this.<#= modelName #>ApplicationService.<#= modelName #>BulkUpdate(items);
+			this.<#= applicationServiceName #>ApplicationService.<#= modelName #>BulkUpdate(items);
 		}
 
         /// <summary>
@@ -421,7 +424,7 @@ string modelName = DataType.NamingConvention == null ? model.TableName : DataTyp
         [HttpPost]
         public async Task <#= modelName #>BulkUpdateAsync([FromBody] IEnumerable<I<#= modelName #>> items)
 		{
-			await this.<#= modelName #>ApplicationService.<#= modelName #>BulkUpdateAsync(items);
+			await this.<#= applicationServiceName #>ApplicationService.<#= modelName #>BulkUpdateAsync(items);
 		}
 
         <#+} #>

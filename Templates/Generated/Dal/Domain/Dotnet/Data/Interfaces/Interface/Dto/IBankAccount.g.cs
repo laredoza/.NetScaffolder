@@ -38,7 +38,6 @@ namespace RepositoryEFDotnet.Data.Interfaces
 		#region Child Relationships
 		
 		IList<IBankTransfers> BankTransfers { get; set; }
-		IList<IBankTransfers> BankTransfers1 { get; set; }
 
 		#endregion
 		

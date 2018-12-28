@@ -55,12 +55,6 @@ namespace RepositoryEFDotnet.Data.Context.Mappings.NHib.SqlServer
 			Map(t => t.UnitPrice).Column("UnitPrice")
 			.Precision(19).Scale(4)
 			.Nullable();
-			Map(t => t.UnitAmount).Column("UnitAmount")
-			.Length(50)
-			.Nullable();
-			Map(t => t.Publisher).Column("Publisher")
-			.Length(200)
-			.Nullable();
 			Map(t => t.AmountInStock).Column("AmountInStock")
 			.Nullable();
 			

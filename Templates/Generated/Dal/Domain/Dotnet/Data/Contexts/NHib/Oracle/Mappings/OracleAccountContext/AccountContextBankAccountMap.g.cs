@@ -65,7 +65,6 @@ namespace RepositoryEFDotnet.Data.Accounts.Mappings.NHib.Oracle
 			#region Relationships
 			
 			HasMany(s => s.BankTransfers).KeyColumn("ToBankAccountId");
-			HasMany(s => s.BankTransfers1).KeyColumn("BankAccountId");
 			
 			#endregion			
 

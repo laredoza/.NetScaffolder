@@ -48,10 +48,10 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.WebApiServiceDa
             this.MissingApplicationList = new List<ApplicationServiceDataError>();
             this.LanguageOutputDetails.Add(
                 new LanguageOutputDetails
-                    {
-                        LanguageOutput = new Guid("1BC1B0C4-1E41-9146-82CF-599181CE4410"),
-                        OutputGenerator = new Guid("1BC1B0C4-1E41-9146-82CF-599181CE4410")
-                    });
+                {
+                    LanguageOutput = new Guid("1BC1B0C4-1E41-9146-82CF-599181CE4410"),
+                    OutputGenerator = new Guid("1BC1B0C4-1E41-9146-82CF-599181CE4410")
+                });
             this.LanguageOutputDetails[0].Templates.Add("ContextGenerator.ttInclude");
             this.LanguageOutputDetails[0].Templates.Add("ContextCoreTemplate.ttInclude");
 
@@ -111,6 +111,21 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.WebApiServiceDa
 
                 this.AdditionalNamespaces.Clear();
                 this.AdditionalNamespaces.AddRange(dt.AdditionalNamespaces);
+
+                // Ensure tables are up to date
+
+                foreach (var webApiServiceData in this.WebApiDataList)
+                {
+                    foreach (ApplicationServiceData applicationServiceData in webApiServiceData.Models)
+                    {
+                        for (int i = 0; i < applicationServiceData.Models.Count; i++)
+                        {
+                            var model = applicationServiceData.Models[i];
+                            applicationServiceData.Models[i] = DomainDefinition.Tables.FirstOrDefault(t =>
+                                t.SchemaName == model.SchemaName && t.TableName == model.TableName);
+                        }
+                    }
+                }
             }
         }
 
@@ -207,10 +222,10 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.WebApiServiceDa
                                 $"The {webApiServiceData.WebApiName} WebApi is missing {serviceData.ApplicationServiceName} Application Service"));
                         this.MissingApplicationList.Add(
                             new ApplicationServiceDataError
-                                {
-                                    ApplicationServiceName = serviceData.ApplicationServiceName,
-                                    ApplicationServiceData = serviceData
-                                });
+                            {
+                                ApplicationServiceName = serviceData.ApplicationServiceName,
+                                ApplicationServiceData = serviceData
+                            });
                     }
 
                     if (string.IsNullOrEmpty(webApiServiceData.WebApiName))

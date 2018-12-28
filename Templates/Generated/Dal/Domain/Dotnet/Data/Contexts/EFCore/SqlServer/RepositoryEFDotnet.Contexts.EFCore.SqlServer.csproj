@@ -19,9 +19,4 @@
     <ProjectReference Include="..\Base\RepositoryEFDotnet.Contexts.EFCore.Base.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="ContextRegisster\" />
-    <Folder Include="Database\" />
-  </ItemGroup>
-
 </Project>
