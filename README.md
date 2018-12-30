@@ -76,3 +76,4 @@ T4 templates (DataTypes) are used to generate a layer. Packages group several of
 
 ### Known Issues
 - Please retrieve source code by using a git clone instead of downloading the project's zip as this causes T4 security issues. We will look for work arounds at a later stage.
+- EF Migrations won't work until EF 6.3 is released as migrations don't support the new project format yet.
