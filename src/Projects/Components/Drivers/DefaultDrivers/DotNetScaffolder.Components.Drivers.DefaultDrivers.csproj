@@ -59,6 +59,7 @@
     <Compile Include="EF6\EFSqlServerDriver.cs" />
     <Compile Include="EFCore\Cache\RedisCache.cs" />
     <Compile Include="EFCore\Cache\MemoryCache.cs" />
+    <Compile Include="EFCore\EFCorePostgresDriver.cs" />
     <Compile Include="EFCore\EFCoreSqlServerDriver.cs" />
     <Compile Include="EFCore\EFCoreDriverType.cs" />
     <Compile Include="EFCore\EFCoreMySqlDriver.cs" />

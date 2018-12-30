@@ -142,19 +142,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ContextRegisster\ContextRegistration.g.cs" />
-    <Compile Include="Context\SqlServerAccountContext.g.cs" />
-    <Compile Include="Context\SqlServerCustomerContext.g.cs" />
     <Compile Include="Context\SqlServerFullContext.g.cs" />
     <Compile Include="Database\DatabaseManager.g.cs" />
-    <Compile Include="Mappings\SqlServerAccountContext\AccountContextBankAccountMap.g.cs" />
-    <Compile Include="Mappings\SqlServerAccountContext\AccountContextBankTransfersMap.g.cs" />
-    <Compile Include="Mappings\SqlServerCustomerContext\CustomerContextBookMap.g.cs" />
-    <Compile Include="Mappings\SqlServerCustomerContext\CustomerContextCountryMap.g.cs" />
-    <Compile Include="Mappings\SqlServerCustomerContext\CustomerContextCustomerMap.g.cs" />
-    <Compile Include="Mappings\SqlServerCustomerContext\CustomerContextOrderDetailsMap.g.cs" />
-    <Compile Include="Mappings\SqlServerCustomerContext\CustomerContextOrderMap.g.cs" />
-    <Compile Include="Mappings\SqlServerCustomerContext\CustomerContextProductMap.g.cs" />
-    <Compile Include="Mappings\SqlServerCustomerContext\CustomerContextSoftwareMap.g.cs" />
     <Compile Include="Mappings\SqlServerFullContext\FullContextBankAccountMap.g.cs" />
     <Compile Include="Mappings\SqlServerFullContext\FullContextBankTransfersMap.g.cs" />
     <Compile Include="Mappings\SqlServerFullContext\FullContextBookMap.g.cs" />

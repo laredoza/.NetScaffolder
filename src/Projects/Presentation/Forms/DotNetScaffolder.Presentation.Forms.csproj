@@ -235,9 +235,7 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Model\Packages\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>echo f | xcopy /i /y "$(ProjectDir)bin\$(ConfigurationName)\Common.Logging.Core.dll" "$(SolutionDir)\Projects\Presentation\Forms\Model\Package\Common.Logging.Core.dll"

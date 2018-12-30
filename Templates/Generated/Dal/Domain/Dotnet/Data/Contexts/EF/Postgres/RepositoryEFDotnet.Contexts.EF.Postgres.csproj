@@ -155,19 +155,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ContextRegisster\ContextRegistration.g.cs" />
-    <Compile Include="Context\PostgresAccountContext.g.cs" />
-    <Compile Include="Context\PostgresCustomerContext.g.cs" />
     <Compile Include="Context\PostgresFullContext.g.cs" />
     <Compile Include="Database\DatabaseManager.g.cs" />
-    <Compile Include="Mappings\PostgresAccountContext\AccountContextBankAccountMap.g.cs" />
-    <Compile Include="Mappings\PostgresAccountContext\AccountContextBankTransfersMap.g.cs" />
-    <Compile Include="Mappings\PostgresCustomerContext\CustomerContextBookMap.g.cs" />
-    <Compile Include="Mappings\PostgresCustomerContext\CustomerContextCountryMap.g.cs" />
-    <Compile Include="Mappings\PostgresCustomerContext\CustomerContextCustomerMap.g.cs" />
-    <Compile Include="Mappings\PostgresCustomerContext\CustomerContextOrderDetailsMap.g.cs" />
-    <Compile Include="Mappings\PostgresCustomerContext\CustomerContextOrderMap.g.cs" />
-    <Compile Include="Mappings\PostgresCustomerContext\CustomerContextProductMap.g.cs" />
-    <Compile Include="Mappings\PostgresCustomerContext\CustomerContextSoftwareMap.g.cs" />
     <Compile Include="Mappings\PostgresFullContext\FullContextBankAccountMap.g.cs" />
     <Compile Include="Mappings\PostgresFullContext\FullContextBankTransfersMap.g.cs" />
     <Compile Include="Mappings\PostgresFullContext\FullContextBookMap.g.cs" />

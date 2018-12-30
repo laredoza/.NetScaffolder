@@ -103,7 +103,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.8 Migrations", "1.8 Migra
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EFCore", "EFCore", "{91598A6C-6C81-483B-AFD3-A324048DD429}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepositoryEFDotnet.Data.Migrations.SqlServer", "Data\Migrations\EFCore\SqlServer\RepositoryEFDotnet.Data.Migrations.SqlServer.csproj", "{2F56E607-9161-4F2C-891A-67E7EC1D7609}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RepositoryEFDotnet.Data.Migrations.EFCore.SqlServer", "Data\Migrations\EFCore\SqlServer\RepositoryEFDotnet.Data.Migrations.EFCore.SqlServer.csproj", "{2F56E607-9161-4F2C-891A-67E7EC1D7609}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EF", "EF", "{1DB84051-AD98-438A-BB4B-32AA3482065C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepositoryEFDotnet.Data.Migrations.EF.SqlServer", "Data\Migrations\EF\SqlServer\RepositoryEFDotnet.Data.Migrations.EF.SqlServer.csproj", "{B7A9A28A-504E-408E-89DC-76E20BD892DB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepositoryEFDotnet.Contexts.EFCore.Postgres", "Data\Contexts\EFCore\Postgres\RepositoryEFDotnet.Contexts.EFCore.Postgres.csproj", "{75DD96E9-EB1D-43B5-A822-63B8B3368E78}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -227,6 +233,14 @@ Global
 		{2F56E607-9161-4F2C-891A-67E7EC1D7609}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2F56E607-9161-4F2C-891A-67E7EC1D7609}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2F56E607-9161-4F2C-891A-67E7EC1D7609}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7A9A28A-504E-408E-89DC-76E20BD892DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7A9A28A-504E-408E-89DC-76E20BD892DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7A9A28A-504E-408E-89DC-76E20BD892DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7A9A28A-504E-408E-89DC-76E20BD892DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75DD96E9-EB1D-43B5-A822-63B8B3368E78}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75DD96E9-EB1D-43B5-A822-63B8B3368E78}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75DD96E9-EB1D-43B5-A822-63B8B3368E78}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75DD96E9-EB1D-43B5-A822-63B8B3368E78}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -277,6 +291,9 @@ Global
 		{7F42151D-478B-4A19-805E-5E838815AD89} = {DFB6CD02-EE0C-4BA2-9F3A-EE769AF952B9}
 		{91598A6C-6C81-483B-AFD3-A324048DD429} = {7F42151D-478B-4A19-805E-5E838815AD89}
 		{2F56E607-9161-4F2C-891A-67E7EC1D7609} = {91598A6C-6C81-483B-AFD3-A324048DD429}
+		{1DB84051-AD98-438A-BB4B-32AA3482065C} = {7F42151D-478B-4A19-805E-5E838815AD89}
+		{B7A9A28A-504E-408E-89DC-76E20BD892DB} = {1DB84051-AD98-438A-BB4B-32AA3482065C}
+		{75DD96E9-EB1D-43B5-A822-63B8B3368E78} = {E6A8C34C-9ECE-46AE-AC36-01F3CAF293C3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BAAA9DC0-A104-423F-8507-710C11070DF0}
