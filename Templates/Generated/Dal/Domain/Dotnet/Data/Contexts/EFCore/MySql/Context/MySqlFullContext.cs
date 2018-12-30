@@ -20,6 +20,7 @@ using System.Configuration;
 using RepositoryEFDotnet.Data.Context.Mappings.EFCore.MySql;
 using RepositoryEFDotnet.Data.Entity;
 using System;
+using RepositoryEFDotnet.Contexts.EFCore.Seed;
 
 namespace RepositoryEFDotnet.Data.Context.EFCore
 {
@@ -35,7 +36,11 @@ namespace RepositoryEFDotnet.Data.Context.EFCore
         /// </param>
         public void Seed(ModelBuilder modelBuilder)
         {
-
+            MigrationHelper.AddCountries(modelBuilder);
+            MigrationHelper.AddProducts(modelBuilder);
+            MigrationHelper.AddCustomers(modelBuilder);
+            MigrationHelper.AddBanking(modelBuilder);
+            MigrationHelper.AddOrders(modelBuilder);
         }
 
         #endregion		
