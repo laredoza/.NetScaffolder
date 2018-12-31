@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Base\DotNetScaffolder.Domain.Data.Contexts.EFCore.Base.csproj" />
+    <ProjectReference Include="..\Base\EFCore.Base.csproj" />
     <ProjectReference Include="..\Seed\DotNetScaffolder.Domain.Data.Contexts.EFCore.Seed.csproj" />
   </ItemGroup>
 

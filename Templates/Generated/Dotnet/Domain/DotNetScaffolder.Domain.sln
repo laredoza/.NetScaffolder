@@ -13,11 +13,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.2 Repositories", "1.2 Rep
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.3 Interfaces", "1.3 Interfaces", "{15CDD5A5-0B4B-45FF-B771-E6213F43A443}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepositoryEFDotnet.Contexts.EF.MySql", "Data\Contexts\EF\MySql\RepositoryEFDotnet.Contexts.EF.MySql.csproj", "{A7A2F791-518F-4A2F-B098-358CD4067B71}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetScaffolder.Domain.Data.Contexts.EF.MySql", "Data\Contexts\EF\MySql\DotNetScaffolder.Domain.Data.Contexts.EF.MySql.csproj", "{A7A2F791-518F-4A2F-B098-358CD4067B71}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepositoryEFDotnet.Contexts.EF.Oracle", "Data\Contexts\EF\Oracle\RepositoryEFDotnet.Contexts.EF.Oracle.csproj", "{7F55C86E-D2E1-49A7-9EF4-1AABFB94A4FE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetScaffolder.Domain.Data.Contexts.EF.Oracle", "Data\Contexts\EF\Oracle\DotNetScaffolder.Domain.Data.Contexts.EF.Oracle.csproj", "{7F55C86E-D2E1-49A7-9EF4-1AABFB94A4FE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepositoryEFDotnet.Contexts.EF.SqlServer", "Data\Contexts\EF\SqlServer\RepositoryEFDotnet.Contexts.EF.SqlServer.csproj", "{23E0EDFF-BDFB-45E4-AC7B-31DDFA93AE1D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetScaffolder.Domain.Data.Contexts.EF.SqlServer", "Data\Contexts\EF\SqlServer\DotNetScaffolder.Domain.Data.Contexts.EF.SqlServer.csproj", "{23E0EDFF-BDFB-45E4-AC7B-31DDFA93AE1D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RepositoryEFDotnet.Data.Repositories.Repository", "Data\Repositories\Repository\RepositoryEFDotnet.Data.Repositories.Repository.csproj", "{DAB86AE4-F8E1-4D5E-BAF2-855D24D7A437}"
 EndProject
@@ -37,7 +37,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.Services", "2.Services", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3.Presentation", "3.Presentation", "{4F0545EB-413E-4D0C-894C-1DEEB0B22132}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepositoryEFDotnet.Contexts.EF.Base", "Data\Contexts\EF\Base\RepositoryEFDotnet.Contexts.EF.Base.csproj", "{A8511725-544E-49BD-8451-4C8638ADC5BA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetScaffolder.Domain.Data.Contexts.EF.Base", "Data\Contexts\EF\Base\DotNetScaffolder.Domain.Data.Contexts.EF.Base.csproj", "{A8511725-544E-49BD-8451-4C8638ADC5BA}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4. Core", "4. Core", "{0358EBCF-3298-4E75-AEF3-E0491F34541A}"
 EndProject
@@ -51,7 +51,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.7 Tests", "1.7 Tests", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EFCore", "EFCore", "{E6A8C34C-9ECE-46AE-AC36-01F3CAF293C3}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetScaffolder.Domain.Data.Contexts.EFCore.Base", "Data\Contexts\EFCore\Base\DotNetScaffolder.Domain.Data.Contexts.EFCore.Base.csproj", "{B801261B-ECE7-4B9E-86C8-0B5F631B0065}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EFCore.Base", "Data\Contexts\EFCore\Base\EFCore.Base.csproj", "{B801261B-ECE7-4B9E-86C8-0B5F631B0065}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetScaffolder.Domain.Data.Contexts.EFCore.SqlServer", "Data\Contexts\EFCore\SqlServer\DotNetScaffolder.Domain.Data.Contexts.EFCore.SqlServer.csproj", "{098A8E5B-F469-4E24-B513-DDC0656B2E42}"
 EndProject
@@ -71,7 +71,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RepositoryEFDotnet.Contexts
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RepositoryEFDotnet.Data.Interface.ApplicationService", "Data\Interfaces\ApplicationService\RepositoryEFDotnet.Data.Interface.ApplicationService.csproj", "{6AF84D11-0292-4149-9E09-E752D85CAFBA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepositoryEFDotnet.Contexts.EF.Postgres", "Data\Contexts\EF\Postgres\RepositoryEFDotnet.Contexts.EF.Postgres.csproj", "{487D750D-5973-4618-BDA6-3175D344F9FF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetScaffolder.Domain.Data.Contexts.EF.Postgres", "Data\Contexts\EF\Postgres\DotNetScaffolder.Domain.Data.Contexts.EF.Postgres.csproj", "{487D750D-5973-4618-BDA6-3175D344F9FF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetScaffolder.Repository.UnitTests.Base", "Data\Tests\Base\DotNetScaffolder.Repository.UnitTests.Base.csproj", "{63198DD0-0BD2-4321-8768-FF14303610AA}"
 EndProject

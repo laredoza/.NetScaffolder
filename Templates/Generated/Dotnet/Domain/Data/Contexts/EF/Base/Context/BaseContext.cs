@@ -7,10 +7,10 @@ using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using RepositoryEFDotnet.Core.Base;
-using RepositoryEFDotnet.Core.Utils;
+using DotNetScaffolder.Domain.Core.Interfaces;
+using DotNetScaffolder.Domain.Core.Utils;
 
-namespace RepositoryEFDotnet.Contexts.EF.Base.Context
+namespace DotNetScaffolder.Domain.Data.Contexts.EF.Base.Context
 {
     #region Using
 

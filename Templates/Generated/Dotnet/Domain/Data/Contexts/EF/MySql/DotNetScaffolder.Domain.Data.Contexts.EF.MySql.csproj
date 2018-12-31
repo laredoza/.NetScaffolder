@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{23E0EDFF-BDFB-45E4-AC7B-31DDFA93AE1D}</ProjectGuid>
+    <ProjectGuid>{A7A2F791-518F-4A2F-B098-358CD4067B71}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SqlServer</RootNamespace>
-    <AssemblyName>SqlServer</AssemblyName>
+    <RootNamespace>DotNetScaffolder.Domain.Data.Contexts.EF.MySql</RootNamespace>
+    <AssemblyName>DotNetScaffolder.Domain.Data.Contexts.EF.MySql</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -36,6 +36,9 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\..\..\..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Google.Protobuf, Version=3.6.1.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Google.Protobuf.3.6.1\lib\net45\Google.Protobuf.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=1.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\..\..\..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.1.1.1\lib\netstandard1.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
     </Reference>
@@ -43,6 +46,12 @@
       <HintPath>..\..\..\..\packages\Microsoft.Win32.Primitives.4.3.0\lib\net46\Microsoft.Win32.Primitives.dll</HintPath>
       <Private>True</Private>
       <Private>True</Private>
+    </Reference>
+    <Reference Include="MySql.Data, Version=8.0.13.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\MySql.Data.8.0.13\lib\net452\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data.EntityFramework, Version=8.0.13.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\MySql.Data.EntityFramework.8.0.13\lib\net452\MySql.Data.EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="StructureMap, Version=4.5.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\..\packages\StructureMap.4.5.0\lib\net45\StructureMap.dll</HintPath>
@@ -56,8 +65,11 @@
       <Private>True</Private>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.ComponentModel" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Console, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\..\..\..\packages\System.Console.4.3.0\lib\net46\System.Console.dll</HintPath>
       <Private>True</Private>
@@ -67,6 +79,8 @@
     <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\..\..\..\packages\System.Diagnostics.DiagnosticSource.4.3.0\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
     </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Drawing.Design" />
     <Reference Include="System.Globalization.Calendars, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\..\..\..\packages\System.Globalization.Calendars.4.3.0\lib\net46\System.Globalization.Calendars.dll</HintPath>
       <Private>True</Private>
@@ -93,6 +107,7 @@
       <Private>True</Private>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Management" />
     <Reference Include="System.Net.Http, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\..\..\..\packages\System.Net.Http.4.3.0\lib\net46\System.Net.Http.dll</HintPath>
       <Private>True</Private>
@@ -109,6 +124,7 @@
       <Private>True</Private>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Security" />
     <Reference Include="System.Security.Cryptography.Algorithms, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\..\..\..\packages\System.Security.Cryptography.Algorithms.4.3.0\lib\net461\System.Security.Cryptography.Algorithms.dll</HintPath>
       <Private>True</Private>
@@ -129,6 +145,7 @@
       <Private>True</Private>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -141,6 +158,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Context\MySqlFullContext.g.cs" />
+    <Compile Include="Mappings\MySqlFullContext\FullContextBankAccountMap.g.cs" />
+    <Compile Include="Mappings\MySqlFullContext\FullContextBankTransfersMap.g.cs" />
+    <Compile Include="Mappings\MySqlFullContext\FullContextBookMap.g.cs" />
+    <Compile Include="Mappings\MySqlFullContext\FullContextCountryMap.g.cs" />
+    <Compile Include="Mappings\MySqlFullContext\FullContextCustomerMap.g.cs" />
+    <Compile Include="Mappings\MySqlFullContext\FullContextOrderDetailsMap.g.cs" />
+    <Compile Include="Mappings\MySqlFullContext\FullContextOrderMap.g.cs" />
+    <Compile Include="Mappings\MySqlFullContext\FullContextProductMap.g.cs" />
+    <Compile Include="Mappings\MySqlFullContext\FullContextSoftwareMap.g.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -148,17 +175,17 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\Core\RepositoryEFDotnet.Core.csproj">
+    <ProjectReference Include="..\..\..\..\Core\DotNetScaffolder.Domain.Core.csproj">
       <Project>{0333e000-6aaf-4e18-8747-2299a8231ab1}</Project>
-      <Name>RepositoryEFDotnet.Core</Name>
+      <Name>DotNetScaffolder.Domain.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Entities\Entity\RepositoryEFDotnet.Data.Entities.Entity.csproj">
+    <ProjectReference Include="..\..\..\Entities\Entity\DotNetScaffolder.Domain.Data.Entities.DefaultEntity.csproj">
       <Project>{017da2af-1ffd-4e68-9646-b0e5c73ea037}</Project>
-      <Name>RepositoryEFDotnet.Data.Entities.Entity</Name>
+      <Name>DotNetScaffolder.Domain.Data.Entities.DefaultEntity</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Base\RepositoryEFDotnet.Contexts.EF.Base.csproj">
-      <Project>{A8511725-544E-49BD-8451-4C8638ADC5BA}</Project>
-      <Name>RepositoryEFDotnet.Contexts.EF.Base</Name>
+    <ProjectReference Include="..\Base\DotNetScaffolder.Domain.Data.Contexts.EF.Base.csproj">
+      <Project>{a8511725-544e-49bd-8451-4c8638adc5ba}</Project>
+      <Name>DotNetScaffolder.Domain.Data.Contexts.EF.Base</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

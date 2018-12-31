@@ -4,14 +4,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{487D750D-5973-4618-BDA6-3175D344F9FF}</ProjectGuid>
+    <ProjectGuid>{23E0EDFF-BDFB-45E4-AC7B-31DDFA93AE1D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Postgres</RootNamespace>
-    <AssemblyName>Postgres</AssemblyName>
+    <RootNamespace>DotNetScaffolder.Domain.Data.Contexts.EF.SqlServer</RootNamespace>
+    <AssemblyName>DotNetScaffolder.Domain.Data.Contexts.EF.SqlServer</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -45,15 +44,6 @@
       <Private>True</Private>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Mono.Security, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\packages\Npgsql.2.2.7\lib\net45\Mono.Security.dll</HintPath>
-    </Reference>
-    <Reference Include="Npgsql, Version=2.2.7.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\packages\Npgsql.2.2.7\lib\net45\Npgsql.dll</HintPath>
-    </Reference>
-    <Reference Include="Npgsql.EntityFramework, Version=2.2.7.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\packages\Npgsql.EntityFramework.2.2.7\lib\net45\Npgsql.EntityFramework.dll</HintPath>
-    </Reference>
     <Reference Include="StructureMap, Version=4.5.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\..\packages\StructureMap.4.5.0\lib\net45\StructureMap.dll</HintPath>
     </Reference>
@@ -74,9 +64,6 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Core" />
-    <Reference Include="System.Data.Entity.Repository, Version=2.0.0.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\packages\System.Data.Entity.Repository.2.0.0.1\lib\net45\System.Data.Entity.Repository.dll</HintPath>
-    </Reference>
     <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\..\..\..\packages\System.Diagnostics.DiagnosticSource.4.3.0\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
     </Reference>
@@ -154,6 +141,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Context\SqlServerFullContext.g.cs" />
+    <Compile Include="Mappings\SqlServerFullContext\FullContextBankAccountMap.g.cs" />
+    <Compile Include="Mappings\SqlServerFullContext\FullContextBankTransfersMap.g.cs" />
+    <Compile Include="Mappings\SqlServerFullContext\FullContextBookMap.g.cs" />
+    <Compile Include="Mappings\SqlServerFullContext\FullContextCountryMap.g.cs" />
+    <Compile Include="Mappings\SqlServerFullContext\FullContextCustomerMap.g.cs" />
+    <Compile Include="Mappings\SqlServerFullContext\FullContextOrderDetailsMap.g.cs" />
+    <Compile Include="Mappings\SqlServerFullContext\FullContextOrderMap.g.cs" />
+    <Compile Include="Mappings\SqlServerFullContext\FullContextProductMap.g.cs" />
+    <Compile Include="Mappings\SqlServerFullContext\FullContextSoftwareMap.g.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -161,18 +158,19 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\Core\RepositoryEFDotnet.Core.csproj">
+    <ProjectReference Include="..\..\..\..\Core\DotNetScaffolder.Domain.Core.csproj">
       <Project>{0333e000-6aaf-4e18-8747-2299a8231ab1}</Project>
-      <Name>RepositoryEFDotnet.Core</Name>
+      <Name>DotNetScaffolder.Domain.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Entities\Entity\RepositoryEFDotnet.Data.Entities.Entity.csproj">
+    <ProjectReference Include="..\..\..\Entities\Entity\DotNetScaffolder.Domain.Data.Entities.DefaultEntity.csproj">
       <Project>{017da2af-1ffd-4e68-9646-b0e5c73ea037}</Project>
-      <Name>RepositoryEFDotnet.Data.Entities.Entity</Name>
+      <Name>DotNetScaffolder.Domain.Data.Entities.DefaultEntity</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Base\RepositoryEFDotnet.Contexts.EF.Base.csproj">
-      <Project>{a8511725-544e-49bd-8451-4c8638adc5ba}</Project>
-      <Name>RepositoryEFDotnet.Contexts.EF.Base</Name>
+    <ProjectReference Include="..\Base\DotNetScaffolder.Domain.Data.Contexts.EF.Base.csproj">
+      <Project>{A8511725-544E-49BD-8451-4C8638ADC5BA}</Project>
+      <Name>DotNetScaffolder.Domain.Data.Contexts.EF.Base</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

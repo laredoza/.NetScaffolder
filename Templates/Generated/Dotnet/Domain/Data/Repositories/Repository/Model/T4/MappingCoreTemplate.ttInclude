@@ -10,7 +10,6 @@ public class MappingCoreTemplate : BaseTemplate
 	public INamingConvention NamingConvention { get; set; }
 	public string PostFix { get; set; }
     public ContextDataType DataType { get; set; }
-
     private string contextNamespace;
 
 	public override string TransformText()
