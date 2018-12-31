@@ -21,7 +21,7 @@ using System;
 using System.Collections.Generic;
 using StructureMap.Pipeline;
 
-namespace RepositoryEFDotnet.Data.ApplicationService.Register
+namespace DotNetScaffolder.Domain.ApplicationService.Register
 {
 	public class ApplicationServiceRegistration : StructureMap.Registry
 	{			

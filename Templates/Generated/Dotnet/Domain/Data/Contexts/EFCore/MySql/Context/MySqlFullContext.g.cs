@@ -24,14 +24,14 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System.Configuration;
 using RepositoryEFDotnet.Core.Base;
 using RepositoryEFDotnet.Contexts.EFCore.Base.Context;
-using RepositoryEFDotnet.Data.Context.Mappings.EFCore.MySql;
-using RepositoryEFDotnet.Data.Entity;
+using DotNetScaffolder.Domain.Context.Mappings.EFCore.MySql;
+using DotNetScaffolder.Domain.Entity;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 
-namespace RepositoryEFDotnet.Data.Context.EFCore
+namespace DotNetScaffolder.Domain.Context.EFCore
 {
 	public partial class MySqlFullContext : BaseContext
 	{	

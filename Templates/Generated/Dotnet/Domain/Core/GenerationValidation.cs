@@ -7,7 +7,7 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace RepositoryEFDotnet.Core
+namespace DotNetScaffolder.Domain.Core
 {
     /// <summary>
     /// The generation validation.

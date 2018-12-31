@@ -22,10 +22,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System.Configuration;
 using System.ComponentModel.DataAnnotations.Schema;
-using RepositoryEFDotnet.Data.Entity;
+using DotNetScaffolder.Domain.Entity;
 using System.Data.Common;
 
-namespace RepositoryEFDotnet.Data.Context.Mappings.EFCore.Postgres
+namespace DotNetScaffolder.Domain.Context.Mappings.EFCore.Postgres
 {
 	public partial class FullContextBankTransfersMap : IEntityTypeConfiguration<BankTransfers>
 	{	

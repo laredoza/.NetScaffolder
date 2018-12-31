@@ -23,9 +23,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using RepositoryEFDotnet.Data.Interfaces;
+using DotNetScaffolder.Domain.Interfaces;
 
-namespace RepositoryEFDotnet.Data.ApplicationService
+namespace DotNetScaffolder.Domain.ApplicationService
 {
     /// <summary>
 	/// The ProductApplication Service 

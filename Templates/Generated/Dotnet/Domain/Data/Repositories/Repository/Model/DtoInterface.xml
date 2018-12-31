@@ -2,7 +2,7 @@
 <DtoInterfaceDataType xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <AdditionalNamespaces />
   <InheritFrom />
-  <Namespace>Interfaces</Namespace>
+  <Namespace>Data.Interfaces.ModelInterfaces.Dto</Namespace>
   <OutputFolder>Dto</OutputFolder>
-  <OutputPath>..\..\Interfaces\Interface\RepositoryEFDotnet.Data.Interface.ModelInterfaces.csproj</OutputPath>
+  <OutputPath>..\..\Interfaces\Interface\DotNetScaffolder.Domain.Data.Interface.ModelInterfaces.csproj</OutputPath>
 </DtoInterfaceDataType>

@@ -154,18 +154,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ContextRegisster\ContextRegistration.g.cs" />
-    <Compile Include="Context\PostgresFullContext.g.cs" />
-    <Compile Include="Database\DatabaseManager.g.cs" />
-    <Compile Include="Mappings\PostgresFullContext\FullContextBankAccountMap.g.cs" />
-    <Compile Include="Mappings\PostgresFullContext\FullContextBankTransfersMap.g.cs" />
-    <Compile Include="Mappings\PostgresFullContext\FullContextBookMap.g.cs" />
-    <Compile Include="Mappings\PostgresFullContext\FullContextCountryMap.g.cs" />
-    <Compile Include="Mappings\PostgresFullContext\FullContextCustomerMap.g.cs" />
-    <Compile Include="Mappings\PostgresFullContext\FullContextOrderDetailsMap.g.cs" />
-    <Compile Include="Mappings\PostgresFullContext\FullContextOrderMap.g.cs" />
-    <Compile Include="Mappings\PostgresFullContext\FullContextProductMap.g.cs" />
-    <Compile Include="Mappings\PostgresFullContext\FullContextSoftwareMap.g.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

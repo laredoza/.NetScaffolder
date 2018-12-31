@@ -4,7 +4,7 @@
     <string>RepositoryEFDotnet.Core.Base</string>
   </AdditionalNamespaces>
   <Enabled>false</Enabled>
-  <Namespace>Repository</Namespace>
+  <Namespace>Data.Repository</Namespace>
   <OutputFolder>Repository</OutputFolder>
   <OutputPath>..\..\Repositories\Repository\RepositoryEFDotnet.Data.Repositories.Repository.csproj</OutputPath>
 </RepositoryDataType>

@@ -21,7 +21,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace RepositoryEFDotnet.Data.Interfaces
+namespace DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.Dto
 {
 	public partial interface IOrderDetails  
 	{

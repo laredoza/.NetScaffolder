@@ -22,10 +22,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System.Configuration;
 using System.ComponentModel.DataAnnotations.Schema;
-using RepositoryEFDotnet.Data.Entity;
+using DotNetScaffolder.Domain.Entity;
 using System.Data.Common;
 
-namespace RepositoryEFDotnet.Data.Context.Mappings.EFCore.MySql
+namespace DotNetScaffolder.Domain.Context.Mappings.EFCore.MySql
 {
 	public partial class FullContextCustomerMap : IEntityTypeConfiguration<Customer>
 	{	

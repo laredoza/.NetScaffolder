@@ -66,7 +66,7 @@
           <Indexes />
         </Table>
       </Models>
-      <Namespace>Context</Namespace>
+      <Namespace>Data.Context</Namespace>
       <OutputFolder>Context</OutputFolder>
       <OutputPath>..\..\Contexts\{0}\{1}\RepositoryEFDotnet.Contexts.{0}.{1}.csproj</OutputPath>
       <IsDefault>true</IsDefault>

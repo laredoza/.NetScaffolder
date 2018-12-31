@@ -3,6 +3,6 @@
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Interfaces\Interface\RepositoryEFDotnet.Data.Interface.ModelInterfaces.csproj" />
+    <ProjectReference Include="..\..\Interfaces\Interface\DotNetScaffolder.Domain.Data.Interface.ModelInterfaces.csproj" />
   </ItemGroup>
 </Project>

@@ -3,7 +3,7 @@
   <AdditionalNamespaces>
     <string>RepositoryEFDotnet.Core.Base</string>
   </AdditionalNamespaces>
-  <Namespace>Interfaces</Namespace>
+  <Namespace>Data.Interfaces</Namespace>
   <OutputFolder>Repository</OutputFolder>
   <OutputPath>..\..\Interfaces\RepositoryInterfaces\RepositoryEFDotnet.Data.Interface.RepositoryInterfaces.csproj</OutputPath>
 </RepoInterfaceDataType>

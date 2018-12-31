@@ -20,9 +20,9 @@
 
 using System;
 using System.Collections.Generic;
-using RepositoryEFDotnet.Data.Interfaces;
+using DotNetScaffolder.Domain.Interfaces;
 
-namespace RepositoryEFDotnet.Data.Dto
+namespace DotNetScaffolder.Domain.Dto
 {
 	public partial class OrderDetailsDto : IOrderDetails 
 	{

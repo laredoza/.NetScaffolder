@@ -3,7 +3,7 @@
   <AdditionalNamespaces />
   <AddInjectConstructor>true</AddInjectConstructor>
   <InheritFrom />
-  <Namespace>Entity</Namespace>
+  <Namespace>Data.Entity</Namespace>
   <OutputFolder>Entity</OutputFolder>
   <OutputPath>..\..\Entities\Entity\RepositoryEFDotnet.Data.Entities.Entity.csproj</OutputPath>
   <UseGenerics>false</UseGenerics>

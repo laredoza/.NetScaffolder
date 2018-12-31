@@ -149,18 +149,6 @@
   <ItemGroup>
     <Compile Include="Config\OracleDbConfiguration.cs" />
     <Compile Include="Config\OracleHistory.cs" />
-    <Compile Include="ContextRegisster\ContextRegistration.g.cs" />
-    <Compile Include="Context\OracleFullContext.g.cs" />
-    <Compile Include="Database\DatabaseManager.g.cs" />
-    <Compile Include="Mappings\OracleFullContext\FullContextBankAccountMap.g.cs" />
-    <Compile Include="Mappings\OracleFullContext\FullContextBankTransfersMap.g.cs" />
-    <Compile Include="Mappings\OracleFullContext\FullContextBookMap.g.cs" />
-    <Compile Include="Mappings\OracleFullContext\FullContextCountryMap.g.cs" />
-    <Compile Include="Mappings\OracleFullContext\FullContextCustomerMap.g.cs" />
-    <Compile Include="Mappings\OracleFullContext\FullContextOrderDetailsMap.g.cs" />
-    <Compile Include="Mappings\OracleFullContext\FullContextOrderMap.g.cs" />
-    <Compile Include="Mappings\OracleFullContext\FullContextProductMap.g.cs" />
-    <Compile Include="Mappings\OracleFullContext\FullContextSoftwareMap.g.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

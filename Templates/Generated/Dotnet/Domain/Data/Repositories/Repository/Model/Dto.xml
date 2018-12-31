@@ -4,7 +4,7 @@
   <AddInjectConstructor>true</AddInjectConstructor>
   <UseGenerics>false</UseGenerics>
   <InheritFrom />
-  <Namespace>Dto</Namespace>
+  <Namespace>Data.Dto</Namespace>
   <OutputFolder>Dto</OutputFolder>
   <OutputPath>..\..\Dtos\Dto\RepositoryEFDotnet.Data.Dtos.Dto.csproj</OutputPath>
   <PostFix>Dto</PostFix>

@@ -158,18 +158,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ContextRegisster\ContextRegistration.g.cs" />
-    <Compile Include="Context\MySqlFullContext.g.cs" />
-    <Compile Include="Database\DatabaseManager.g.cs" />
-    <Compile Include="Mappings\MySqlFullContext\FullContextBankAccountMap.g.cs" />
-    <Compile Include="Mappings\MySqlFullContext\FullContextBankTransfersMap.g.cs" />
-    <Compile Include="Mappings\MySqlFullContext\FullContextBookMap.g.cs" />
-    <Compile Include="Mappings\MySqlFullContext\FullContextCountryMap.g.cs" />
-    <Compile Include="Mappings\MySqlFullContext\FullContextCustomerMap.g.cs" />
-    <Compile Include="Mappings\MySqlFullContext\FullContextOrderDetailsMap.g.cs" />
-    <Compile Include="Mappings\MySqlFullContext\FullContextOrderMap.g.cs" />
-    <Compile Include="Mappings\MySqlFullContext\FullContextProductMap.g.cs" />
-    <Compile Include="Mappings\MySqlFullContext\FullContextSoftwareMap.g.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

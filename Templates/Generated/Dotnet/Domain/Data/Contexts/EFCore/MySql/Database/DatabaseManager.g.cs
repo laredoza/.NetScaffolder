@@ -22,14 +22,14 @@ using RepositoryEFDotnet.Contexts.EFCore.Base.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System.Configuration;
-using RepositoryEFDotnet.Data.Context.EFCore;
+using DotNetScaffolder.Domain.Context.EFCore;
 using System;
 using System.Collections.Generic;
 using StructureMap;
 using StructureMap.Pipeline;
 using RepositoryEFDotnet.Contexts.EFCore.Base;
 
-namespace RepositoryEFDotnet.Data.Context.EFCore.MySql.Database
+namespace DotNetScaffolder.Domain.Context.EFCore.MySql.Database
 {
 	public class DatabaseManager : IDatabaseManager
 	{	

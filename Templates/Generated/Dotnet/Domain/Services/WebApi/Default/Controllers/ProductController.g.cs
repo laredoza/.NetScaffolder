@@ -24,10 +24,10 @@ using Microsoft.AspNetCore.Mvc;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-using RepositoryEFDotnet.Data.ApplicationService;
-using RepositoryEFDotnet.Data.Interfaces;
+using DotNetScaffolder.Domain.ApplicationService;
+using DotNetScaffolder.Domain.Interfaces;
 
-namespace RepositoryEFDotnet.Data.Controllers
+namespace DotNetScaffolder.Domain.Controllers
 {
     /// <summary>
 	/// The Product Controller

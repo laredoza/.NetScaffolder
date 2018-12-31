@@ -22,10 +22,10 @@ using System;
 using System.Collections.Generic;
 using StructureMap.Pipeline;
 using RepositoryEFDotnet.Core.Base;
-using RepositoryEFDotnet.Data.Context.EFCore.MySql.Database;
-//using RepositoryEFDotnet.Data.Interfaces;
+using DotNetScaffolder.Domain.Context.EFCore.MySql.Database;
+//using DotNetScaffolder.Domain.Interfaces;
  
-namespace RepositoryEFDotnet.Data.Context.EFCore.ContextRegistration
+namespace DotNetScaffolder.Domain.Context.EFCore.ContextRegistration
 {
 	public class ContextRegistration : StructureMap.Registry
 	{			

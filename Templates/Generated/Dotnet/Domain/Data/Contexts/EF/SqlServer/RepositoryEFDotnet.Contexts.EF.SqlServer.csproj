@@ -141,18 +141,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ContextRegisster\ContextRegistration.g.cs" />
-    <Compile Include="Context\SqlServerFullContext.g.cs" />
-    <Compile Include="Database\DatabaseManager.g.cs" />
-    <Compile Include="Mappings\SqlServerFullContext\FullContextBankAccountMap.g.cs" />
-    <Compile Include="Mappings\SqlServerFullContext\FullContextBankTransfersMap.g.cs" />
-    <Compile Include="Mappings\SqlServerFullContext\FullContextBookMap.g.cs" />
-    <Compile Include="Mappings\SqlServerFullContext\FullContextCountryMap.g.cs" />
-    <Compile Include="Mappings\SqlServerFullContext\FullContextCustomerMap.g.cs" />
-    <Compile Include="Mappings\SqlServerFullContext\FullContextOrderDetailsMap.g.cs" />
-    <Compile Include="Mappings\SqlServerFullContext\FullContextOrderMap.g.cs" />
-    <Compile Include="Mappings\SqlServerFullContext\FullContextProductMap.g.cs" />
-    <Compile Include="Mappings\SqlServerFullContext\FullContextSoftwareMap.g.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
