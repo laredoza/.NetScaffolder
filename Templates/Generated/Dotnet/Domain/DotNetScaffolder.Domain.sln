@@ -51,13 +51,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.7 Tests", "1.7 Tests", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EFCore", "EFCore", "{E6A8C34C-9ECE-46AE-AC36-01F3CAF293C3}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RepositoryEFDotnet.Contexts.EFCore.Base", "Data\Contexts\EFCore\Base\RepositoryEFDotnet.Contexts.EFCore.Base.csproj", "{B801261B-ECE7-4B9E-86C8-0B5F631B0065}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetScaffolder.Domain.Data.Contexts.EFCore.Base", "Data\Contexts\EFCore\Base\DotNetScaffolder.Domain.Data.Contexts.EFCore.Base.csproj", "{B801261B-ECE7-4B9E-86C8-0B5F631B0065}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RepositoryEFDotnet.Contexts.EFCore.SqlServer", "Data\Contexts\EFCore\SqlServer\RepositoryEFDotnet.Contexts.EFCore.SqlServer.csproj", "{098A8E5B-F469-4E24-B513-DDC0656B2E42}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetScaffolder.Domain.Data.Contexts.EFCore.SqlServer", "Data\Contexts\EFCore\SqlServer\DotNetScaffolder.Domain.Data.Contexts.EFCore.SqlServer.csproj", "{098A8E5B-F469-4E24-B513-DDC0656B2E42}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RepositoryEFDotnet.Contexts.EFCore.MySql", "Data\Contexts\EFCore\MySql\RepositoryEFDotnet.Contexts.EFCore.MySql.csproj", "{F5647C02-1232-42D4-935C-ADB9442FE96B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetScaffolder.Domain.Data.Contexts.EFCore.MySql", "Data\Contexts\EFCore\MySql\DotNetScaffolder.Domain.Data.Contexts.EFCore.MySql.csproj", "{F5647C02-1232-42D4-935C-ADB9442FE96B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RepositoryEFDotnet.Contexts.EFCore.Oracle", "Data\Contexts\EFCore\Oracle\RepositoryEFDotnet.Contexts.EFCore.Oracle.csproj", "{ACCFC891-3499-4FC2-BCC9-67A77E1CE132}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetScaffolder.Domain.Data.Contexts.EFCore.Oracle", "Data\Contexts\EFCore\Oracle\DotNetScaffolder.Domain.Data.Contexts.EFCore.Oracle.csproj", "{ACCFC891-3499-4FC2-BCC9-67A77E1CE132}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NHibernate", "NHibernate", "{59453B38-9D13-4A2B-B66D-F5686055C1FF}"
 EndProject
@@ -109,9 +109,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EF", "EF", "{1DB84051-AD98-
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepositoryEFDotnet.Data.Migrations.EF.SqlServer", "Data\Migrations\EF\SqlServer\RepositoryEFDotnet.Data.Migrations.EF.SqlServer.csproj", "{B7A9A28A-504E-408E-89DC-76E20BD892DB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RepositoryEFDotnet.Contexts.EFCore.Postgres", "Data\Contexts\EFCore\Postgres\RepositoryEFDotnet.Contexts.EFCore.Postgres.csproj", "{75DD96E9-EB1D-43B5-A822-63B8B3368E78}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetScaffolder.Domain.Data.Contexts.EFCore.Postgres", "Data\Contexts\EFCore\Postgres\DotNetScaffolder.Domain.Data.Contexts.EFCore.Postgres.csproj", "{75DD96E9-EB1D-43B5-A822-63B8B3368E78}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RepositoryEFDotnet.Contexts.EFCore.Seed", "Data\Contexts\EFCore\Seed\RepositoryEFDotnet.Contexts.EFCore.Seed.csproj", "{41736B2A-4185-4130-8FA0-B90958D035D1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetScaffolder.Domain.Data.Contexts.EFCore.Seed", "Data\Contexts\EFCore\Seed\DotNetScaffolder.Domain.Data.Contexts.EFCore.Seed.csproj", "{41736B2A-4185-4130-8FA0-B90958D035D1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

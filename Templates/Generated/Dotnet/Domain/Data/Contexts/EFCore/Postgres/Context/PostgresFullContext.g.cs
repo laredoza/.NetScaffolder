@@ -22,16 +22,16 @@ using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System.Configuration;
-using RepositoryEFDotnet.Core.Base;
-using RepositoryEFDotnet.Contexts.EFCore.Base.Context;
-using DotNetScaffolder.Domain.Context.Mappings.EFCore.Postgres;
-using DotNetScaffolder.Domain.Entity;
+using DotNetScaffolder.Domain.Core;
+using DotNetScaffolder.Domain.Data.Contexts.EFCore.Base.Context;
+using DotNetScaffolder.Domain.Data.Contexts.EFCore.Postgres.Mappings.PostgresFullContext;
+using DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 
-namespace DotNetScaffolder.Domain.Context.EFCore
+namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.Postgres.Context
 {
 	public partial class PostgresFullContext : BaseContext
 	{	

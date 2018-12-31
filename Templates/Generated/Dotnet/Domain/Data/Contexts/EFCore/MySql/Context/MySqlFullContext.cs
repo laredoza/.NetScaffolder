@@ -13,16 +13,9 @@
 // IN THE SOFTWARE.
 
 
-using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System.Configuration;
-using RepositoryEFDotnet.Data.Context.Mappings.EFCore.MySql;
-using RepositoryEFDotnet.Data.Entity;
-using System;
-using RepositoryEFDotnet.Contexts.EFCore.Seed;
 
-namespace RepositoryEFDotnet.Data.Context.EFCore
+namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.MySql.Context
 {
 	public partial class MySqlFullContext 
 	{	
@@ -36,11 +29,11 @@ namespace RepositoryEFDotnet.Data.Context.EFCore
         /// </param>
         public void Seed(ModelBuilder modelBuilder)
         {
-            MigrationHelper.AddCountries(modelBuilder);
-            MigrationHelper.AddProducts(modelBuilder);
-            MigrationHelper.AddCustomers(modelBuilder);
-            MigrationHelper.AddBanking(modelBuilder);
-            MigrationHelper.AddOrders(modelBuilder);
+            //MigrationHelper.AddCountries(modelBuilder);
+            //MigrationHelper.AddProducts(modelBuilder);
+            //MigrationHelper.AddCustomers(modelBuilder);
+            //MigrationHelper.AddBanking(modelBuilder);
+            //MigrationHelper.AddOrders(modelBuilder);
         }
 
         #endregion		

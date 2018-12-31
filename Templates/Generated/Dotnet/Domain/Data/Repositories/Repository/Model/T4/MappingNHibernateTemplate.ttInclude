@@ -9,6 +9,7 @@ public class MappingNHibernateTemplate : BaseTemplate
 	public List<Table> Models { get; set; }
 	public INamingConvention NamingConvention { get; set; }
 	public string PostFix { get; set; }
+    public ContextDataType DataType { get; set; }
 
 	public override string TransformText()
 	{		

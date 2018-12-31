@@ -4,7 +4,7 @@ using EFSecondLevelCache.Core;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 
-namespace RepositoryEFDotnet.Contexts.EFCore.Base
+namespace DotNetScaffolder.Domain.Contexts.EFCore.Base
 {
     public class ConfigureServices
     {

@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\Core\RepositoryEFDotnet.Core.csproj" />
+    <ProjectReference Include="..\..\..\..\Core\DotNetScaffolder.Domain.Core.csproj" />
   </ItemGroup>
 
 </Project>

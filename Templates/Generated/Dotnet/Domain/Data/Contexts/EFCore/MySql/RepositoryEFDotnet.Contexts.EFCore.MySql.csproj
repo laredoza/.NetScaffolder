@@ -1,23 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
-
-  <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="2.1.2" />
-    <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.5.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\..\Core\RepositoryEFDotnet.Core.csproj" />
-    <ProjectReference Include="..\..\..\Entities\Entity\RepositoryEFDotnet.Data.Entities.Entity.csproj" />
-    <ProjectReference Include="..\Base\RepositoryEFDotnet.Contexts.EFCore.Base.csproj" />
-    <ProjectReference Include="..\SqlServer\RepositoryEFDotnet.Contexts.EFCore.SqlServer.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Context\" />
-  </ItemGroup>
-
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup />
 </Project>

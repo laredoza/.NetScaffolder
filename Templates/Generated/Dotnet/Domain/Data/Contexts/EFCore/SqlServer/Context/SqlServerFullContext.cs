@@ -13,21 +13,10 @@
 // IN THE SOFTWARE.
 
 
-using System.ComponentModel.DataAnnotations.Schema;
+using DotNetScaffolder.Domain.Data.Contexts.EFCore.Seed;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System.Configuration;
-using RepositoryEFDotnet.Contexts.EFCore.Base;
-using RepositoryEFDotnet.Core.Base;
-using RepositoryEFDotnet.Contexts.EFCore.Base.Context;
-using RepositoryEFDotnet.Core.Base;
-using RepositoryEFDotnet.Data.Context.Mappings.EFCore.SqlServer;
-using RepositoryEFDotnet.Data.Entity;
-using System;
-using RepositoryEFDotnet.Contexts.EFCore.Seed;
 
-namespace RepositoryEFDotnet.Data.Context.EFCore
+namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.SqlServer.Context
 {
 	public partial class SqlServerFullContext 
 	{	

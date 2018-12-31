@@ -13,18 +13,9 @@
 // IN THE SOFTWARE.
 
 
-using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System.Configuration;
-using RepositoryEFDotnet.Core.Base;
-using RepositoryEFDotnet.Contexts.EFCore.Base.Context;
-using RepositoryEFDotnet.Data.Context.Mappings.EFCore.Postgres;
-using RepositoryEFDotnet.Data.Entity;
-using System;
-using RepositoryEFDotnet.Contexts.EFCore.Seed;
 
-namespace RepositoryEFDotnet.Data.Context.EFCore
+namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.Postgres.Context
 {
 	public partial class PostgresFullContext 
 	{	
@@ -38,11 +29,11 @@ namespace RepositoryEFDotnet.Data.Context.EFCore
         /// </param>
         public void Seed(ModelBuilder modelBuilder)
         {
-            MigrationHelper.AddCountries(modelBuilder);
-            MigrationHelper.AddProducts(modelBuilder);
-            MigrationHelper.AddCustomers(modelBuilder);
-            MigrationHelper.AddBanking(modelBuilder);
-            MigrationHelper.AddOrders(modelBuilder);
+            //MigrationHelper.AddCountries(modelBuilder);
+            //MigrationHelper.AddProducts(modelBuilder);
+            //MigrationHelper.AddCustomers(modelBuilder);
+            //MigrationHelper.AddBanking(modelBuilder);
+            //MigrationHelper.AddOrders(modelBuilder);
         }
 
         #endregion		

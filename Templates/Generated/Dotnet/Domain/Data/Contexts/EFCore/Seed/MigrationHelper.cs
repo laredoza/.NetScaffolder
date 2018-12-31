@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity;
 using Microsoft.EntityFrameworkCore;
-using RepositoryEFDotnet.Data.Entity;
 
-namespace RepositoryEFDotnet.Contexts.EFCore.Seed
+namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.Seed
 {
     public static class MigrationHelper
     {

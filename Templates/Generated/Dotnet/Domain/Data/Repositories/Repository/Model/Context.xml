@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ContextDataType xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <AdditionalNamespaces>
-    <string>RepositoryEFDotnet.Core.Base</string>
-    <string>RepositoryEFDotnet.Contexts.{DriverType}.Base.Context</string>
+    <string>DotNetScaffolder.Domain.Core</string>
+    <string>DotNetScaffolder.Domain.Data.Contexts.{DriverType}.Base.Context</string>
   </AdditionalNamespaces>
   <Contexts>
     <ContextData>
@@ -66,9 +66,9 @@
           <Indexes />
         </Table>
       </Models>
-      <Namespace>Data.Context</Namespace>
+      <Namespace>Data.Contexts.{DriverType}.{DriverPrefix}</Namespace>
       <OutputFolder>Context</OutputFolder>
-      <OutputPath>..\..\Contexts\{0}\{1}\RepositoryEFDotnet.Contexts.{0}.{1}.csproj</OutputPath>
+      <OutputPath>..\..\Contexts\{0}\{1}\DotNetScaffolder.Domain.Data.Contexts.{0}.{1}.csproj</OutputPath>
       <IsDefault>true</IsDefault>
     </ContextData>
   </Contexts>
