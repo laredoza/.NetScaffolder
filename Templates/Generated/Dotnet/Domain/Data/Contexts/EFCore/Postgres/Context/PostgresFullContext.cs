@@ -13,6 +13,7 @@
 // IN THE SOFTWARE.
 
 
+using DotNetScaffolder.Domain.Data.Contexts.EFCore.Seed;
 using Microsoft.EntityFrameworkCore;
 
 namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.Postgres.Context
@@ -29,11 +30,11 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.Postgres.Context
         /// </param>
         public void Seed(ModelBuilder modelBuilder)
         {
-            //MigrationHelper.AddCountries(modelBuilder);
-            //MigrationHelper.AddProducts(modelBuilder);
-            //MigrationHelper.AddCustomers(modelBuilder);
-            //MigrationHelper.AddBanking(modelBuilder);
-            //MigrationHelper.AddOrders(modelBuilder);
+            MigrationHelper.AddCountries(modelBuilder);
+            MigrationHelper.AddProducts(modelBuilder);
+            MigrationHelper.AddCustomers(modelBuilder);
+            MigrationHelper.AddBanking(modelBuilder);
+            MigrationHelper.AddOrders(modelBuilder);
         }
 
         #endregion		

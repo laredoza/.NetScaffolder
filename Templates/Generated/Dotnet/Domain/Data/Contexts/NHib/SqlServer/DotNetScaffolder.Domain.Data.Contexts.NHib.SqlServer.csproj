@@ -10,8 +10,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Entities\Entity\RepositoryEFDotnet.Data.Entities.Entity.csproj" />
-    <ProjectReference Include="..\Base\RepositoryEFDotnet.Contexts.NHib.Base.csproj" />
+    <ProjectReference Include="..\Base\DotNetScaffolder.Domain.Data.Contexts.NHib.Base.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="DotNetScaffolder.Domain.Data.Entities.DefaultEntity">
+      <HintPath>..\..\EFCore\Seed\bin\Debug\netstandard2.0\DotNetScaffolder.Domain.Data.Entities.DefaultEntity.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

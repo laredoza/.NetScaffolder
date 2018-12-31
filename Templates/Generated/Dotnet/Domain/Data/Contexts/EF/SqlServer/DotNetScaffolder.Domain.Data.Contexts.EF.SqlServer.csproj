@@ -163,7 +163,7 @@
       <Name>DotNetScaffolder.Domain.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\Entities\Entity\DotNetScaffolder.Domain.Data.Entities.DefaultEntity.csproj">
-      <Project>{017da2af-1ffd-4e68-9646-b0e5c73ea037}</Project>
+      <Project>{83F99B9D-6D44-47CE-9AEC-6BF50D211CC5}</Project>
       <Name>DotNetScaffolder.Domain.Data.Entities.DefaultEntity</Name>
     </ProjectReference>
     <ProjectReference Include="..\Base\DotNetScaffolder.Domain.Data.Contexts.EF.Base.csproj">

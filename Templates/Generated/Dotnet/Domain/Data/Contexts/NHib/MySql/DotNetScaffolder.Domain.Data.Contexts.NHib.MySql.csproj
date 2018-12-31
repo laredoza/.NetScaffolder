@@ -10,9 +10,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\Core\RepositoryEFDotnet.Core.csproj" />
-    <ProjectReference Include="..\..\..\Entities\Entity\RepositoryEFDotnet.Data.Entities.Entity.csproj" />
-    <ProjectReference Include="..\Base\RepositoryEFDotnet.Contexts.NHib.Base.csproj" />
+    <ProjectReference Include="..\..\..\Entities\Entity\DotNetScaffolder.Domain.Data.Entities.DefaultEntity.csproj" />
+    <ProjectReference Include="..\Base\DotNetScaffolder.Domain.Data.Contexts.NHib.Base.csproj" />
   </ItemGroup>
 
 </Project>

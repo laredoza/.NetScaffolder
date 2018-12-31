@@ -9,7 +9,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Core\DotNetScaffolder.Domain.Core.csproj" />
-    <ProjectReference Include="..\..\Entities\Entity\DotNetScaffolder.Domain.Data.Entities.DefaultEntity.csproj" />
     <ProjectReference Include="..\..\Interfaces\Interface\DotNetScaffolder.Domain.Data.Interface.ModelInterfaces.csproj" />
     <ProjectReference Include="..\..\Interfaces\RepositoryInterfaces\RepositoryEFDotnet.Data.Interface.RepositoryInterfaces.csproj" />
   </ItemGroup>
@@ -98,6 +97,36 @@
 ..\..\Contexts\EFCore\SqlServer\Mappings\SqlServerFullContext\FullContextOrderMap.g.cs
 ..\..\Contexts\EFCore\SqlServer\Mappings\SqlServerFullContext\FullContextProductMap.g.cs
 ..\..\Contexts\EFCore\SqlServer\Mappings\SqlServerFullContext\FullContextSoftwareMap.g.cs
+..\..\Contexts\NHib\MySql\Context\MySqlFullContext.g.cs
+..\..\Contexts\NHib\MySql\Mappings\MySqlFullContext\FullContextBankAccountMap.g.cs
+..\..\Contexts\NHib\MySql\Mappings\MySqlFullContext\FullContextBankTransfersMap.g.cs
+..\..\Contexts\NHib\MySql\Mappings\MySqlFullContext\FullContextBookMap.g.cs
+..\..\Contexts\NHib\MySql\Mappings\MySqlFullContext\FullContextCountryMap.g.cs
+..\..\Contexts\NHib\MySql\Mappings\MySqlFullContext\FullContextCustomerMap.g.cs
+..\..\Contexts\NHib\MySql\Mappings\MySqlFullContext\FullContextOrderDetailsMap.g.cs
+..\..\Contexts\NHib\MySql\Mappings\MySqlFullContext\FullContextOrderMap.g.cs
+..\..\Contexts\NHib\MySql\Mappings\MySqlFullContext\FullContextProductMap.g.cs
+..\..\Contexts\NHib\MySql\Mappings\MySqlFullContext\FullContextSoftwareMap.g.cs
+..\..\Contexts\NHib\Oracle\Context\OracleFullContext.g.cs
+..\..\Contexts\NHib\Oracle\Mappings\OracleFullContext\FullContextBankAccountMap.g.cs
+..\..\Contexts\NHib\Oracle\Mappings\OracleFullContext\FullContextBankTransfersMap.g.cs
+..\..\Contexts\NHib\Oracle\Mappings\OracleFullContext\FullContextBookMap.g.cs
+..\..\Contexts\NHib\Oracle\Mappings\OracleFullContext\FullContextCountryMap.g.cs
+..\..\Contexts\NHib\Oracle\Mappings\OracleFullContext\FullContextCustomerMap.g.cs
+..\..\Contexts\NHib\Oracle\Mappings\OracleFullContext\FullContextOrderDetailsMap.g.cs
+..\..\Contexts\NHib\Oracle\Mappings\OracleFullContext\FullContextOrderMap.g.cs
+..\..\Contexts\NHib\Oracle\Mappings\OracleFullContext\FullContextProductMap.g.cs
+..\..\Contexts\NHib\Oracle\Mappings\OracleFullContext\FullContextSoftwareMap.g.cs
+..\..\Contexts\NHib\SqlServer\Context\SqlServerFullContext.g.cs
+..\..\Contexts\NHib\SqlServer\Mappings\SqlServerFullContext\FullContextBankAccountMap.g.cs
+..\..\Contexts\NHib\SqlServer\Mappings\SqlServerFullContext\FullContextBankTransfersMap.g.cs
+..\..\Contexts\NHib\SqlServer\Mappings\SqlServerFullContext\FullContextBookMap.g.cs
+..\..\Contexts\NHib\SqlServer\Mappings\SqlServerFullContext\FullContextCountryMap.g.cs
+..\..\Contexts\NHib\SqlServer\Mappings\SqlServerFullContext\FullContextCustomerMap.g.cs
+..\..\Contexts\NHib\SqlServer\Mappings\SqlServerFullContext\FullContextOrderDetailsMap.g.cs
+..\..\Contexts\NHib\SqlServer\Mappings\SqlServerFullContext\FullContextOrderMap.g.cs
+..\..\Contexts\NHib\SqlServer\Mappings\SqlServerFullContext\FullContextProductMap.g.cs
+..\..\Contexts\NHib\SqlServer\Mappings\SqlServerFullContext\FullContextSoftwareMap.g.cs
 ..\..\Dtos\Dto\Dto\BankAccountDto.g.cs
 ..\..\Dtos\Dto\Dto\BankTransfersDto.g.cs
 ..\..\Dtos\Dto\Dto\BookDto.g.cs

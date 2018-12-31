@@ -8,7 +8,8 @@ public class ContextCoreTemplateCustom : BaseTemplate
 	public string MappingPostFix { get; set; }
     public IDriver Driver {get; set; }
 	public List<Table> Models { get; set; }
-    
+    private string contextNamespace;
+
     public override string TransformText()
 	{
 		//Debugger.Break();
@@ -18,6 +19,8 @@ public class ContextCoreTemplateCustom : BaseTemplate
 
 <#= Header.TransformText() #>
 
+<#+contextNamespace = ContextData.TransformFullnamespace(DataType.BaseNamespace).Replace("{DriverType}", "EFCore").Replace("{DriverPrefix}", Driver.Prefix);#>
+
 using System.ComponentModel.DataAnnotations.Schema;
 <#+ foreach(var nameSpace in Driver.NameSpaces){ #>
 using <#= nameSpace.Replace("{DriverType}", "EFCore") #>;
@@ -25,11 +28,10 @@ using <#= nameSpace.Replace("{DriverType}", "EFCore") #>;
 <#+ foreach(var nameSpace in DataType.AdditionalNamespaces){ #>
 using <#= nameSpace.Replace("{DriverType}", "EFCore") #>;
 <#+ } #>
-using <#= MappingNamespace #>.<#= Driver.ParentFolder #>.<#= Driver.Prefix #>;
 using <#= EntityNamespace #>;
 using System;
 
-namespace <#= ContextData.TransformFullnamespace(DataType.BaseNamespace) #>.<#= Driver.ParentFolder #>
+namespace <#= contextNamespace #>.Context
 {
 <#+ if(!string.IsNullOrEmpty(Driver.ContextAttribute)){ #>
     <#=Driver.ContextAttribute #>

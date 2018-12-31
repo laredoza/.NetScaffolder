@@ -4,6 +4,5 @@
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Core\DotNetScaffolder.Domain.Core.csproj" />
-    <ProjectReference Include="..\..\Entities\Entity\DotNetScaffolder.Domain.Data.Entities.DefaultEntity.csproj" />
   </ItemGroup>
 </Project>

@@ -11,6 +11,8 @@ using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using DotNetScaffolder.Domain.Core.Interfaces;
+using DotNetScaffolder.Domain.Core.Utils;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using FluentNHibernate.Conventions.Helpers;
@@ -19,10 +21,9 @@ using NHibernate.Cfg;
 using NHibernate.Dialect;
 using NHibernate.Linq;
 using NHibernate.Tool.hbm2ddl;
-using RepositoryEFDotnet.Core.Base;
-using RepositoryEFDotnet.Core.Utils;
+using RepositoryEFDotnet.Contexts.NHib.Base;
 
-namespace RepositoryEFDotnet.Contexts.NHib.Base.Context
+namespace DotNetScaffolder.Domain.Data.Contexts.NHib.Base.Context
 {
     public abstract class BaseContext : INHibUnitOfWork
     {

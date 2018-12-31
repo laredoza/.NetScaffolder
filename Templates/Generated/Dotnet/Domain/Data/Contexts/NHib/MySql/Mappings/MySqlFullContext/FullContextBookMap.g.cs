@@ -1,5 +1,5 @@
 ﻿
-// <copyright file="FullContext.g.cs" company="MIT">
+// <copyright file="BookMap.g.cs" company="MIT">
 //  Copyright (c) 2018 MIT
 // </copyright>  
 
@@ -13,39 +13,60 @@
 // IN THE SOFTWARE.
 
 
-
-using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System.Configuration;
-using DotNetScaffolder.Domain.Core;
-using DotNetScaffolder.Domain.Data.Contexts.EFCore.Base.Context;
+// *******************************************************************
+//	GENERATED CODE. DOT NOT MODIFY MANUALLY AS CHANGES CAN BE LOST!!!
+//	USE A PARTIAL CLASS INSTEAD
+// *******************************************************************
+using NHibernate;
+using NHibernate.Cfg;
+using FluentNHibernate.Cfg.Db;
+using FluentNHibernate.Cfg;
 using DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity;
-using System;
-using DotNetScaffolder.Domain.Data.Contexts.EFCore.Seed;
+using System.Data.Common;
+using FluentNHibernate.Mapping;
 
-namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.SqlServer.Context
+
+namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.MySql.Mappings.MySqlFullContext
 {
-	public partial class SqlServerFullContext 
+	public partial class FullContextBookMap : ClassMap<Book>
 	{	
-        #region Public Methods And Operators
+		public FullContextBookMap ()
+		{
+			CreateMapping();
+		}
+		
+		protected virtual void CreateMapping()
+		{
+			Table("Book");
+			
+			#region Primary Keys
+			
+			Id(t => t.ProductId).GeneratedBy.Assigned()
+			.Index("IX_ProductId")
+			.Not.Nullable();
 
-        /// <summary>
-        /// The seed.
-        /// </summary>
-        /// <param name="modelBuilder">
-        /// The model builder.
-        /// </param>
-        public void Seed(ModelBuilder modelBuilder)
-        {
-            MigrationHelper.AddCountries(modelBuilder);
-            MigrationHelper.AddProducts(modelBuilder);
-            MigrationHelper.AddCustomers(modelBuilder);
-            MigrationHelper.AddBanking(modelBuilder);
-            MigrationHelper.AddOrders(modelBuilder);
-        }
+			#endregion
 
-        #endregion		
+			#region Properties
+			
+			Map(t => t.Publisher).Column("Publisher")
+			.Length(200)
+			.Not.Nullable();
+			
+			#endregion
+			
+			#region Relationships
+			
+			HasOne(s => s.Product);
+			
+			#endregion			
+
+			#region Column Order
+			
+			// Not available in NHibernate at the moment
+
+			#endregion
+	
+		}
 	}
 }

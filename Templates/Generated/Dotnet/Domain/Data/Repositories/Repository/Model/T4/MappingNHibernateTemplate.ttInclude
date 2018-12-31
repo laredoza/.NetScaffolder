@@ -10,6 +10,7 @@ public class MappingNHibernateTemplate : BaseTemplate
 	public INamingConvention NamingConvention { get; set; }
 	public string PostFix { get; set; }
     public ContextDataType DataType { get; set; }
+    private string contextNamespace;
 
 	public override string TransformText()
 	{		
@@ -33,7 +34,9 @@ using <#= EntityNamespace #>;
 using System.Data.Common;
 using FluentNHibernate.Mapping;
 
-namespace <#= Namespace #>.<#= Driver.ParentFolder #>.<#= Driver.Prefix #>
+<#+contextNamespace = ContextData.TransformFullnamespace(DataType.BaseNamespace).Replace("{DriverType}", "EFCore").Replace("{DriverPrefix}", Driver.Prefix);#>
+
+namespace <#= contextNamespace #>.Mappings.<#= string.Concat(Driver.Prefix, ContextData.ContextName) #>
 {
 	public partial class <#= ContextData.ContextName #><#= ModelName #><#= PostFix #> : ClassMap<<#= ModelName #>>
 	{	
