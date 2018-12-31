@@ -36,16 +36,25 @@
                     iDtoGen.Run();
                 }
 			
-                //if(dataType is EntityDataType)
-                //{
-                    //// Debugger.Break();
-                    //var entityGen = new EntityGenerator();
-                    //entityGen.Models = domain.Tables;
-                    //entityGen.DataType = dataType as EntityDataType;
-                    //entityGen.DtoInterfaceType = dataTypes.FirstOrDefault(o => o is DtoInterfaceDataType) as DtoInterfaceDataType;
-                    //entityGen.Run();
-                //}
-//
+                if(dataType is EntityDataType)
+                {
+                    // Debugger.Break();
+                    var entityGen = new EntityGenerator();
+                    entityGen.Models = domain.Tables;
+                    entityGen.DataType = dataType as EntityDataType;
+                    entityGen.DtoInterfaceType = dataTypes.FirstOrDefault(o => o is DtoInterfaceDataType) as DtoInterfaceDataType;
+                    entityGen.Run();
+                }
+
+                if(dataType is DtoDataType)
+                {
+                    var iDtoGen = new DtoGenerator();
+                    iDtoGen.Models = domain.Tables;
+                    iDtoGen.DataType = dataType as DtoDataType;
+                    iDtoGen.DtoInterfaceType = dataTypes.FirstOrDefault(o => o is DtoInterfaceDataType) as DtoInterfaceDataType;
+                    iDtoGen.Run();
+                }
+
                 //if (dataType is ApplicationServiceDataType)
                 //{
                     ////Debugger.Break();
@@ -151,14 +160,6 @@
                     //iRepoGen.Run();
                 //}
 			//
-                //if(dataType is DtoDataType)
-                //{
-                    //var iDtoGen = new DtoGenerator();
-                    //iDtoGen.Models = domain.Tables;
-                    //iDtoGen.DataType = dataType as DtoDataType;
-                    //iDtoGen.DtoInterfaceType = dataTypes.FirstOrDefault(o => o is DtoInterfaceDataType) as DtoInterfaceDataType;
-                    //iDtoGen.Run();
-                //}
 
                 //if(dataType is UnitTestDataType)
                 //{

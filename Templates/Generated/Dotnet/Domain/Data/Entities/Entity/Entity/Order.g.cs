@@ -1,5 +1,5 @@
 ﻿
-// <copyright file="OrderDto.g.cs" company="MIT">
+// <copyright file="Order.g.cs" company="MIT">
 //  Copyright (c) 2018 MIT
 // </copyright>  
 
@@ -22,18 +22,18 @@ using System;
 using System.Collections.Generic;
 using DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.Dto;
 
-namespace DotNetScaffolder.Domain.Data.DefaultDto.Dto
+namespace DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity
 {
-	public partial class OrderDto : IOrder 
+	public partial class Order : IOrder 
 	{
 		#region CTOR
 		
-		public OrderDto()
+		public Order()
 		{
-			this.OrderDetails = new List <IOrderDetails>();
+			this.OrderDetails = new List <OrderDetails>();
 		}
 		
-		public OrderDto(IOrder item, bool deep = false)
+		public Order(IOrder item, bool deep = false)
 		{
 			if(item == null) return;
 			
@@ -45,7 +45,7 @@ namespace DotNetScaffolder.Domain.Data.DefaultDto.Dto
 			this.ShippingAddress = item.ShippingAddress;
 			this.ShippingCity = item.ShippingCity;
 			this.ShippingZip = item.ShippingZip;
-			this.OrderDetails = new List <IOrderDetails>();
+			this.OrderDetails = new List <OrderDetails>();
 
 			if(deep)
 			{
@@ -53,12 +53,12 @@ namespace DotNetScaffolder.Domain.Data.DefaultDto.Dto
 				{
 					foreach(var childItem in item.OrderDetails)
 					{
-						this.OrderDetails.Add(new OrderDetailsDto(childItem, deep));
+						this.OrderDetails.Add(new OrderDetails(childItem, deep));
 					}
 				}
-                if(item.Customer != null)
+				if(item.Customer != null)
                 {
-				    this.Customer = new CustomerDto(item.Customer, deep);
+                    this.Customer = new Customer(item.Customer, deep);
                 }
 			}
 		}
@@ -67,26 +67,69 @@ namespace DotNetScaffolder.Domain.Data.DefaultDto.Dto
 		
 		#region Fields
 		
-		public int OrderId { get; set; }
-		public Nullable<int> CustomerId { get; set; }
-		public Nullable<DateTime> OrderDate { get; set; }
-		public Nullable<DateTime> DeliveryDate { get; set; }
-		public string ShippingName { get; set; }
-		public string ShippingAddress { get; set; }
-		public string ShippingCity { get; set; }
-		public string ShippingZip { get; set; }
+		public virtual int OrderId { get; set; }
+		public virtual Nullable<int> CustomerId { get; set; }
+		public virtual Nullable<DateTime> OrderDate { get; set; }
+		public virtual Nullable<DateTime> DeliveryDate { get; set; }
+		public virtual string ShippingName { get; set; }
+		public virtual string ShippingAddress { get; set; }
+		public virtual string ShippingCity { get; set; }
+		public virtual string ShippingZip { get; set; }
 
 		#endregion
-		
+
 		#region Child Relationships
-		
-		public IList<IOrderDetails> OrderDetails { get; set; }
+        
+        public virtual IList<OrderDetails> OrderDetails { get; set; }
+	
+        IList<IOrderDetails> IOrder.OrderDetails 
+		{ 
+			get
+			{
+				return this.OrderDetails == null ? null : this.OrderDetails as IList<IOrderDetails>;
+			}
+			set
+			{
+				if(value != this.OrderDetails)
+				{
+					if(value != null)
+					{
+						this.OrderDetails = (IList<OrderDetails>)value;
+					}
+					else
+					{
+						this.OrderDetails = null;
+					}
+				}
+			}			
+		}
 
 		#endregion
-		
+
 		#region Parent Relationships
-		
-		public ICustomer Customer { get; set; }
+
+        public virtual Customer Customer { get; set; }
+		ICustomer IOrder.Customer 
+		{ 
+			get
+			{
+				return this.Customer;
+			}
+			set
+			{
+				if(value != this.Customer)
+				{
+					if(value != null)
+					{
+						this.Customer = (Customer)value;
+					}
+					else
+					{
+						this.Customer = null;
+					}
+				}
+			}
+		}
 		
 		#endregion
 	}

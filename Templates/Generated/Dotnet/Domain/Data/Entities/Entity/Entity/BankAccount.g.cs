@@ -1,5 +1,5 @@
 ﻿
-// <copyright file="BankAccountDto.g.cs" company="MIT">
+// <copyright file="BankAccount.g.cs" company="MIT">
 //  Copyright (c) 2018 MIT
 // </copyright>  
 
@@ -22,18 +22,18 @@ using System;
 using System.Collections.Generic;
 using DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.Dto;
 
-namespace DotNetScaffolder.Domain.Data.DefaultDto.Dto
+namespace DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity
 {
-	public partial class BankAccountDto : IBankAccount 
+	public partial class BankAccount : IBankAccount 
 	{
 		#region CTOR
 		
-		public BankAccountDto()
+		public BankAccount()
 		{
-			this.BankTransfers = new List <IBankTransfers>();
+			this.BankTransfers = new List <BankTransfers>();
 		}
 		
-		public BankAccountDto(IBankAccount item, bool deep = false)
+		public BankAccount(IBankAccount item, bool deep = false)
 		{
 			if(item == null) return;
 			
@@ -42,7 +42,7 @@ namespace DotNetScaffolder.Domain.Data.DefaultDto.Dto
 			this.Balance = item.Balance;
 			this.CustomerId = item.CustomerId;
 			this.Locked = item.Locked;
-			this.BankTransfers = new List <IBankTransfers>();
+			this.BankTransfers = new List <BankTransfers>();
 
 			if(deep)
 			{
@@ -50,12 +50,12 @@ namespace DotNetScaffolder.Domain.Data.DefaultDto.Dto
 				{
 					foreach(var childItem in item.BankTransfers)
 					{
-						this.BankTransfers.Add(new BankTransfersDto(childItem, deep));
+						this.BankTransfers.Add(new BankTransfers(childItem, deep));
 					}
 				}
-                if(item.Customer != null)
+				if(item.Customer != null)
                 {
-				    this.Customer = new CustomerDto(item.Customer, deep);
+                    this.Customer = new Customer(item.Customer, deep);
                 }
 			}
 		}
@@ -64,23 +64,66 @@ namespace DotNetScaffolder.Domain.Data.DefaultDto.Dto
 		
 		#region Fields
 		
-		public int BankAccountId { get; set; }
-		public string BankAccountNumber { get; set; }
-		public decimal Balance { get; set; }
-		public Nullable<int> CustomerId { get; set; }
-		public bool Locked { get; set; }
+		public virtual int BankAccountId { get; set; }
+		public virtual string BankAccountNumber { get; set; }
+		public virtual decimal Balance { get; set; }
+		public virtual Nullable<int> CustomerId { get; set; }
+		public virtual bool Locked { get; set; }
 
 		#endregion
-		
+
 		#region Child Relationships
-		
-		public IList<IBankTransfers> BankTransfers { get; set; }
+        
+        public virtual IList<BankTransfers> BankTransfers { get; set; }
+	
+        IList<IBankTransfers> IBankAccount.BankTransfers 
+		{ 
+			get
+			{
+				return this.BankTransfers == null ? null : this.BankTransfers as IList<IBankTransfers>;
+			}
+			set
+			{
+				if(value != this.BankTransfers)
+				{
+					if(value != null)
+					{
+						this.BankTransfers = (IList<BankTransfers>)value;
+					}
+					else
+					{
+						this.BankTransfers = null;
+					}
+				}
+			}			
+		}
 
 		#endregion
-		
+
 		#region Parent Relationships
-		
-		public ICustomer Customer { get; set; }
+
+        public virtual Customer Customer { get; set; }
+		ICustomer IBankAccount.Customer 
+		{ 
+			get
+			{
+				return this.Customer;
+			}
+			set
+			{
+				if(value != this.Customer)
+				{
+					if(value != null)
+					{
+						this.Customer = (Customer)value;
+					}
+					else
+					{
+						this.Customer = null;
+					}
+				}
+			}
+		}
 		
 		#endregion
 	}

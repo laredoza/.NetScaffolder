@@ -3,9 +3,9 @@
   <AdditionalNamespaces />
   <AddInjectConstructor>true</AddInjectConstructor>
   <InheritFrom />
-  <Namespace>Data.Entity</Namespace>
+  <Namespace>Data.Entities.DefaultEntity.Entity</Namespace>
   <OutputFolder>Entity</OutputFolder>
-  <OutputPath>..\..\Entities\Entity\RepositoryEFDotnet.Data.Entities.Entity.csproj</OutputPath>
+  <OutputPath>..\..\Entities\Entity\DotNetScaffolder.Domain.Data.Entities.DefaultEntity.csproj</OutputPath>
   <UseGenerics>false</UseGenerics>
   <UseInterface>true</UseInterface>
 </EntityDataType>

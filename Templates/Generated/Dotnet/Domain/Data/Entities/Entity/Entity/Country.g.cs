@@ -1,5 +1,5 @@
 ﻿
-// <copyright file="OrderDetailsDto.g.cs" company="MIT">
+// <copyright file="Country.g.cs" company="MIT">
 //  Copyright (c) 2018 MIT
 // </copyright>  
 
@@ -22,37 +22,34 @@ using System;
 using System.Collections.Generic;
 using DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.Dto;
 
-namespace DotNetScaffolder.Domain.Data.DefaultDto.Dto
+namespace DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity
 {
-	public partial class OrderDetailsDto : IOrderDetails 
+	public partial class Country : ICountry 
 	{
 		#region CTOR
 		
-		public OrderDetailsDto()
+		public Country()
 		{
+			this.Customer = new List <Customer>();
 		}
 		
-		public OrderDetailsDto(IOrderDetails item, bool deep = false)
+		public Country(ICountry item, bool deep = false)
 		{
 			if(item == null) return;
 			
-			this.OrderDetailsId = item.OrderDetailsId;
-			this.OrderId = item.OrderId;
-			this.ProductId = item.ProductId;
-			this.UnitPrice = item.UnitPrice;
-			this.Amount = item.Amount;
-			this.Discount = item.Discount;
+			this.CountryId = item.CountryId;
+			this.CountryName = item.CountryName;
+			this.Customer = new List <Customer>();
 
 			if(deep)
 			{
-                if(item.Order != null)
-                {
-				    this.Order = new OrderDto(item.Order, deep);
-                }
-                if(item.Product != null)
-                {
-				    this.Product = new ProductDto(item.Product, deep);
-                }
+				if(item.Customer != null)
+				{
+					foreach(var childItem in item.Customer)
+					{
+						this.Customer.Add(new Customer(childItem, deep));
+					}
+				}
 			}
 		}
 		
@@ -60,25 +57,37 @@ namespace DotNetScaffolder.Domain.Data.DefaultDto.Dto
 		
 		#region Fields
 		
-		public int OrderDetailsId { get; set; }
-		public int OrderId { get; set; }
-		public int ProductId { get; set; }
-		public Nullable<decimal> UnitPrice { get; set; }
-		public Nullable<short> Amount { get; set; }
-		public Nullable<float> Discount { get; set; }
+		public virtual int CountryId { get; set; }
+		public virtual string CountryName { get; set; }
 
 		#endregion
-		
+
 		#region Child Relationships
-		
+        
+        public virtual IList<Customer> Customer { get; set; }
+	
+        IList<ICustomer> ICountry.Customer 
+		{ 
+			get
+			{
+				return this.Customer == null ? null : this.Customer as IList<ICustomer>;
+			}
+			set
+			{
+				if(value != this.Customer)
+				{
+					if(value != null)
+					{
+						this.Customer = (IList<Customer>)value;
+					}
+					else
+					{
+						this.Customer = null;
+					}
+				}
+			}			
+		}
 
-		#endregion
-		
-		#region Parent Relationships
-		
-		public IOrder Order { get; set; }
-		public IProduct Product { get; set; }
-		
 		#endregion
 	}
 }

@@ -1,5 +1,5 @@
 ﻿
-// <copyright file="CustomerDto.g.cs" company="MIT">
+// <copyright file="Customer.g.cs" company="MIT">
 //  Copyright (c) 2018 MIT
 // </copyright>  
 
@@ -22,19 +22,19 @@ using System;
 using System.Collections.Generic;
 using DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.Dto;
 
-namespace DotNetScaffolder.Domain.Data.DefaultDto.Dto
+namespace DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity
 {
-	public partial class CustomerDto : ICustomer 
+	public partial class Customer : ICustomer 
 	{
 		#region CTOR
 		
-		public CustomerDto()
+		public Customer()
 		{
-			this.BankAccount = new List <IBankAccount>();
-			this.Order = new List <IOrder>();
+			this.BankAccount = new List <BankAccount>();
+			this.Order = new List <Order>();
 		}
 		
-		public CustomerDto(ICustomer item, bool deep = false)
+		public Customer(ICustomer item, bool deep = false)
 		{
 			if(item == null) return;
 			
@@ -51,8 +51,8 @@ namespace DotNetScaffolder.Domain.Data.DefaultDto.Dto
 			this.CountryId = item.CountryId;
 			this.Photo = item.Photo;
 			this.IsEnabled = item.IsEnabled;
-			this.BankAccount = new List <IBankAccount>();
-			this.Order = new List <IOrder>();
+			this.BankAccount = new List <BankAccount>();
+			this.Order = new List <Order>();
 
 			if(deep)
 			{
@@ -60,19 +60,19 @@ namespace DotNetScaffolder.Domain.Data.DefaultDto.Dto
 				{
 					foreach(var childItem in item.BankAccount)
 					{
-						this.BankAccount.Add(new BankAccountDto(childItem, deep));
+						this.BankAccount.Add(new BankAccount(childItem, deep));
 					}
 				}
 				if(item.Order != null)
 				{
 					foreach(var childItem in item.Order)
 					{
-						this.Order.Add(new OrderDto(childItem, deep));
+						this.Order.Add(new Order(childItem, deep));
 					}
 				}
-                if(item.Country != null)
+				if(item.Country != null)
                 {
-				    this.Country = new CountryDto(item.Country, deep);
+                    this.Country = new Country(item.Country, deep);
                 }
 			}
 		}
@@ -81,32 +81,98 @@ namespace DotNetScaffolder.Domain.Data.DefaultDto.Dto
 		
 		#region Fields
 		
-		public int CustomerId { get; set; }
-		public string CustomerCode { get; set; }
-		public string CompanyName { get; set; }
-		public string ContactName { get; set; }
-		public string ContactTitle { get; set; }
-		public string Address { get; set; }
-		public string City { get; set; }
-		public string PostalCode { get; set; }
-		public string Telephone { get; set; }
-		public string Fax { get; set; }
-		public Nullable<int> CountryId { get; set; }
-		public string Photo { get; set; }
-		public bool IsEnabled { get; set; }
+		public virtual int CustomerId { get; set; }
+		public virtual string CustomerCode { get; set; }
+		public virtual string CompanyName { get; set; }
+		public virtual string ContactName { get; set; }
+		public virtual string ContactTitle { get; set; }
+		public virtual string Address { get; set; }
+		public virtual string City { get; set; }
+		public virtual string PostalCode { get; set; }
+		public virtual string Telephone { get; set; }
+		public virtual string Fax { get; set; }
+		public virtual Nullable<int> CountryId { get; set; }
+		public virtual string Photo { get; set; }
+		public virtual bool IsEnabled { get; set; }
 
 		#endregion
-		
+
 		#region Child Relationships
-		
-		public IList<IBankAccount> BankAccount { get; set; }
-		public IList<IOrder> Order { get; set; }
+        
+        public virtual IList<BankAccount> BankAccount { get; set; }
+	
+        IList<IBankAccount> ICustomer.BankAccount 
+		{ 
+			get
+			{
+				return this.BankAccount == null ? null : this.BankAccount as IList<IBankAccount>;
+			}
+			set
+			{
+				if(value != this.BankAccount)
+				{
+					if(value != null)
+					{
+						this.BankAccount = (IList<BankAccount>)value;
+					}
+					else
+					{
+						this.BankAccount = null;
+					}
+				}
+			}			
+		}
+        
+        public virtual IList<Order> Order { get; set; }
+	
+        IList<IOrder> ICustomer.Order 
+		{ 
+			get
+			{
+				return this.Order == null ? null : this.Order as IList<IOrder>;
+			}
+			set
+			{
+				if(value != this.Order)
+				{
+					if(value != null)
+					{
+						this.Order = (IList<Order>)value;
+					}
+					else
+					{
+						this.Order = null;
+					}
+				}
+			}			
+		}
 
 		#endregion
-		
+
 		#region Parent Relationships
-		
-		public ICountry Country { get; set; }
+
+        public virtual Country Country { get; set; }
+		ICountry ICustomer.Country 
+		{ 
+			get
+			{
+				return this.Country;
+			}
+			set
+			{
+				if(value != this.Country)
+				{
+					if(value != null)
+					{
+						this.Country = (Country)value;
+					}
+					else
+					{
+						this.Country = null;
+					}
+				}
+			}
+		}
 		
 		#endregion
 	}

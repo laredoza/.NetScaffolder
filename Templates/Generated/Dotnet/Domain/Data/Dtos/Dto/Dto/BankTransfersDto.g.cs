@@ -20,9 +20,9 @@
 
 using System;
 using System.Collections.Generic;
-using DotNetScaffolder.Domain.Interfaces;
+using DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.Dto;
 
-namespace DotNetScaffolder.Domain.Dto
+namespace DotNetScaffolder.Domain.Data.DefaultDto.Dto
 {
 	public partial class BankTransfersDto : IBankTransfers 
 	{

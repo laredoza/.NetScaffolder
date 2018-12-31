@@ -23,7 +23,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RepositoryEFDotnet.Data.Rep
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.4 Entities", "1.4 Entities", "{7DD8CB06-B007-4F1F-9489-2269D01798DB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RepositoryEFDotnet.Data.Entities.Entity", "Data\Entities\Entity\RepositoryEFDotnet.Data.Entities.Entity.csproj", "{017DA2AF-1FFD-4E68-9646-B0E5C73EA037}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetScaffolder.Domain.Data.Entities.DefaultEntity", "Data\Entities\Entity\DotNetScaffolder.Domain.Data.Entities.DefaultEntity.csproj", "{017DA2AF-1FFD-4E68-9646-B0E5C73EA037}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.5 ApplicationServices", "1.5 ApplicationServices", "{1F6F3C59-9268-4123-8EEE-EB16777445AA}"
 EndProject
@@ -31,7 +31,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RepositoryEFDotnet.Data.App
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.6 Dtos", "1.6 Dtos", "{0FBF991C-AD67-45A6-A890-9040E08D6D57}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RepositoryEFDotnet.Data.Dtos.Dto", "Data\Dtos\Dto\RepositoryEFDotnet.Data.Dtos.Dto.csproj", "{61D46A6E-4E3A-4D37-9169-AED9B277D33B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetScaffolder.Domain.Data.Dtos.DefaultDto", "Data\Dtos\Dto\DotNetScaffolder.Domain.Data.Dtos.DefaultDto.csproj", "{61D46A6E-4E3A-4D37-9169-AED9B277D33B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.Services", "2.Services", "{07269A7A-ABF8-47F3-9717-5F5BA73590F2}"
 EndProject

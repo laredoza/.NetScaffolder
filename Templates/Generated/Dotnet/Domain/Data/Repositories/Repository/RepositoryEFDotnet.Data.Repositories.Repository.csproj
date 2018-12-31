@@ -9,7 +9,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Core\DotNetScaffolder.Domain.Core.csproj" />
-    <ProjectReference Include="..\..\Entities\Entity\RepositoryEFDotnet.Data.Entities.Entity.csproj" />
+    <ProjectReference Include="..\..\Entities\Entity\DotNetScaffolder.Domain.Data.Entities.DefaultEntity.csproj" />
     <ProjectReference Include="..\..\Interfaces\Interface\DotNetScaffolder.Domain.Data.Interface.ModelInterfaces.csproj" />
     <ProjectReference Include="..\..\Interfaces\RepositoryInterfaces\RepositoryEFDotnet.Data.Interface.RepositoryInterfaces.csproj" />
   </ItemGroup>
@@ -28,6 +28,24 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>RunGenerator.cs</LastGenOutput>
       <LastOutputs>
+..\..\Dtos\Dto\Dto\BankAccountDto.g.cs
+..\..\Dtos\Dto\Dto\BankTransfersDto.g.cs
+..\..\Dtos\Dto\Dto\BookDto.g.cs
+..\..\Dtos\Dto\Dto\CountryDto.g.cs
+..\..\Dtos\Dto\Dto\CustomerDto.g.cs
+..\..\Dtos\Dto\Dto\OrderDetailsDto.g.cs
+..\..\Dtos\Dto\Dto\OrderDto.g.cs
+..\..\Dtos\Dto\Dto\ProductDto.g.cs
+..\..\Dtos\Dto\Dto\SoftwareDto.g.cs
+..\..\Entities\Entity\Entity\BankAccount.g.cs
+..\..\Entities\Entity\Entity\BankTransfers.g.cs
+..\..\Entities\Entity\Entity\Book.g.cs
+..\..\Entities\Entity\Entity\Country.g.cs
+..\..\Entities\Entity\Entity\Customer.g.cs
+..\..\Entities\Entity\Entity\Order.g.cs
+..\..\Entities\Entity\Entity\OrderDetails.g.cs
+..\..\Entities\Entity\Entity\Product.g.cs
+..\..\Entities\Entity\Entity\Software.g.cs
 ..\..\Interfaces\Interface\Dto\IBankAccount.g.cs
 ..\..\Interfaces\Interface\Dto\IBankTransfers.g.cs
 ..\..\Interfaces\Interface\Dto\IBook.g.cs

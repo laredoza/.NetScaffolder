@@ -1,5 +1,5 @@
 ﻿
-// <copyright file="OrderDetailsDto.g.cs" company="MIT">
+// <copyright file="Software.g.cs" company="MIT">
 //  Copyright (c) 2018 MIT
 // </copyright>  
 
@@ -22,36 +22,28 @@ using System;
 using System.Collections.Generic;
 using DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.Dto;
 
-namespace DotNetScaffolder.Domain.Data.DefaultDto.Dto
+namespace DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity
 {
-	public partial class OrderDetailsDto : IOrderDetails 
+	public partial class Software : ISoftware 
 	{
 		#region CTOR
 		
-		public OrderDetailsDto()
+		public Software()
 		{
 		}
 		
-		public OrderDetailsDto(IOrderDetails item, bool deep = false)
+		public Software(ISoftware item, bool deep = false)
 		{
 			if(item == null) return;
 			
-			this.OrderDetailsId = item.OrderDetailsId;
-			this.OrderId = item.OrderId;
 			this.ProductId = item.ProductId;
-			this.UnitPrice = item.UnitPrice;
-			this.Amount = item.Amount;
-			this.Discount = item.Discount;
+			this.LicenseCode = item.LicenseCode;
 
 			if(deep)
 			{
-                if(item.Order != null)
+				if(item.Product != null)
                 {
-				    this.Order = new OrderDto(item.Order, deep);
-                }
-                if(item.Product != null)
-                {
-				    this.Product = new ProductDto(item.Product, deep);
+                    this.Product = new Product(item.Product, deep);
                 }
 			}
 		}
@@ -60,24 +52,35 @@ namespace DotNetScaffolder.Domain.Data.DefaultDto.Dto
 		
 		#region Fields
 		
-		public int OrderDetailsId { get; set; }
-		public int OrderId { get; set; }
-		public int ProductId { get; set; }
-		public Nullable<decimal> UnitPrice { get; set; }
-		public Nullable<short> Amount { get; set; }
-		public Nullable<float> Discount { get; set; }
+		public virtual int ProductId { get; set; }
+		public virtual string LicenseCode { get; set; }
 
 		#endregion
-		
-		#region Child Relationships
-		
 
-		#endregion
-		
 		#region Parent Relationships
-		
-		public IOrder Order { get; set; }
-		public IProduct Product { get; set; }
+
+        public virtual Product Product { get; set; }
+		IProduct ISoftware.Product 
+		{ 
+			get
+			{
+				return this.Product;
+			}
+			set
+			{
+				if(value != this.Product)
+				{
+					if(value != null)
+					{
+						this.Product = (Product)value;
+					}
+					else
+					{
+						this.Product = null;
+					}
+				}
+			}
+		}
 		
 		#endregion
 	}

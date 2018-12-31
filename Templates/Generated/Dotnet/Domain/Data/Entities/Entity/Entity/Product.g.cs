@@ -1,5 +1,5 @@
 ﻿
-// <copyright file="ProductDto.g.cs" company="MIT">
+// <copyright file="Product.g.cs" company="MIT">
 //  Copyright (c) 2018 MIT
 // </copyright>  
 
@@ -22,18 +22,18 @@ using System;
 using System.Collections.Generic;
 using DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.Dto;
 
-namespace DotNetScaffolder.Domain.Data.DefaultDto.Dto
+namespace DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity
 {
-	public partial class ProductDto : IProduct 
+	public partial class Product : IProduct 
 	{
 		#region CTOR
 		
-		public ProductDto()
+		public Product()
 		{
-			this.OrderDetails = new List <IOrderDetails>();
+			this.OrderDetails = new List <OrderDetails>();
 		}
 		
-		public ProductDto(IProduct item, bool deep = false)
+		public Product(IProduct item, bool deep = false)
 		{
 			if(item == null) return;
 			
@@ -41,7 +41,7 @@ namespace DotNetScaffolder.Domain.Data.DefaultDto.Dto
 			this.ProductDescription = item.ProductDescription;
 			this.UnitPrice = item.UnitPrice;
 			this.AmountInStock = item.AmountInStock;
-			this.OrderDetails = new List <IOrderDetails>();
+			this.OrderDetails = new List <OrderDetails>();
 
 			if(deep)
 			{
@@ -49,11 +49,11 @@ namespace DotNetScaffolder.Domain.Data.DefaultDto.Dto
 				{
 					foreach(var childItem in item.OrderDetails)
 					{
-						this.OrderDetails.Add(new OrderDetailsDto(childItem, deep));
+						this.OrderDetails.Add(new OrderDetails(childItem, deep));
 					}
 				}
-				this.Book = new BookDto(item.Book, deep);
-				this.Software = new SoftwareDto(item.Software, deep);
+				this.Book = new Book(item.Book, deep);
+				this.Software = new Software(item.Software, deep);
 			}
 		}
 		
@@ -61,24 +61,85 @@ namespace DotNetScaffolder.Domain.Data.DefaultDto.Dto
 		
 		#region Fields
 		
-		public int ProductId { get; set; }
-		public string ProductDescription { get; set; }
-		public Nullable<decimal> UnitPrice { get; set; }
-		public Nullable<short> AmountInStock { get; set; }
+		public virtual int ProductId { get; set; }
+		public virtual string ProductDescription { get; set; }
+		public virtual Nullable<decimal> UnitPrice { get; set; }
+		public virtual Nullable<short> AmountInStock { get; set; }
 
 		#endregion
-		
+
 		#region Child Relationships
-		
-		public IList<IOrderDetails> OrderDetails { get; set; }
-		public IBook Book { get; set; }
-		public ISoftware Software { get; set; }
+        
+        public virtual IList<OrderDetails> OrderDetails { get; set; }
+	
+        IList<IOrderDetails> IProduct.OrderDetails 
+		{ 
+			get
+			{
+				return this.OrderDetails == null ? null : this.OrderDetails as IList<IOrderDetails>;
+			}
+			set
+			{
+				if(value != this.OrderDetails)
+				{
+					if(value != null)
+					{
+						this.OrderDetails = (IList<OrderDetails>)value;
+					}
+					else
+					{
+						this.OrderDetails = null;
+					}
+				}
+			}			
+		}
+        
+        public virtual Book Book { get; set; }
+		IBook IProduct.Book 
+		{ 
+			get
+			{
+				return this.Book;
+			}
+			set
+			{
+				if(value != this.Book)
+				{
+					if(value != null)
+					{
+						this.Book = (Book)value;
+					}
+					else
+					{
+						this.Book = null;
+					}
+				}
+			}
+		}
+        
+        public virtual Software Software { get; set; }
+		ISoftware IProduct.Software 
+		{ 
+			get
+			{
+				return this.Software;
+			}
+			set
+			{
+				if(value != this.Software)
+				{
+					if(value != null)
+					{
+						this.Software = (Software)value;
+					}
+					else
+					{
+						this.Software = null;
+					}
+				}
+			}
+		}
 
-		#endregion
-		
-		#region Parent Relationships
-		
-		
 		#endregion
 	}
 }

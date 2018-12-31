@@ -1,5 +1,5 @@
 ﻿
-// <copyright file="OrderDetailsDto.g.cs" company="MIT">
+// <copyright file="OrderDetails.g.cs" company="MIT">
 //  Copyright (c) 2018 MIT
 // </copyright>  
 
@@ -22,17 +22,17 @@ using System;
 using System.Collections.Generic;
 using DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.Dto;
 
-namespace DotNetScaffolder.Domain.Data.DefaultDto.Dto
+namespace DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity
 {
-	public partial class OrderDetailsDto : IOrderDetails 
+	public partial class OrderDetails : IOrderDetails 
 	{
 		#region CTOR
 		
-		public OrderDetailsDto()
+		public OrderDetails()
 		{
 		}
 		
-		public OrderDetailsDto(IOrderDetails item, bool deep = false)
+		public OrderDetails(IOrderDetails item, bool deep = false)
 		{
 			if(item == null) return;
 			
@@ -45,13 +45,13 @@ namespace DotNetScaffolder.Domain.Data.DefaultDto.Dto
 
 			if(deep)
 			{
-                if(item.Order != null)
+				if(item.Order != null)
                 {
-				    this.Order = new OrderDto(item.Order, deep);
+                    this.Order = new Order(item.Order, deep);
                 }
-                if(item.Product != null)
+				if(item.Product != null)
                 {
-				    this.Product = new ProductDto(item.Product, deep);
+                    this.Product = new Product(item.Product, deep);
                 }
 			}
 		}
@@ -60,24 +60,62 @@ namespace DotNetScaffolder.Domain.Data.DefaultDto.Dto
 		
 		#region Fields
 		
-		public int OrderDetailsId { get; set; }
-		public int OrderId { get; set; }
-		public int ProductId { get; set; }
-		public Nullable<decimal> UnitPrice { get; set; }
-		public Nullable<short> Amount { get; set; }
-		public Nullable<float> Discount { get; set; }
+		public virtual int OrderDetailsId { get; set; }
+		public virtual int OrderId { get; set; }
+		public virtual int ProductId { get; set; }
+		public virtual Nullable<decimal> UnitPrice { get; set; }
+		public virtual Nullable<short> Amount { get; set; }
+		public virtual Nullable<float> Discount { get; set; }
 
 		#endregion
-		
-		#region Child Relationships
-		
 
-		#endregion
-		
 		#region Parent Relationships
-		
-		public IOrder Order { get; set; }
-		public IProduct Product { get; set; }
+
+        public virtual Order Order { get; set; }
+		IOrder IOrderDetails.Order 
+		{ 
+			get
+			{
+				return this.Order;
+			}
+			set
+			{
+				if(value != this.Order)
+				{
+					if(value != null)
+					{
+						this.Order = (Order)value;
+					}
+					else
+					{
+						this.Order = null;
+					}
+				}
+			}
+		}
+
+        public virtual Product Product { get; set; }
+		IProduct IOrderDetails.Product 
+		{ 
+			get
+			{
+				return this.Product;
+			}
+			set
+			{
+				if(value != this.Product)
+				{
+					if(value != null)
+					{
+						this.Product = (Product)value;
+					}
+					else
+					{
+						this.Product = null;
+					}
+				}
+			}
+		}
 		
 		#endregion
 	}

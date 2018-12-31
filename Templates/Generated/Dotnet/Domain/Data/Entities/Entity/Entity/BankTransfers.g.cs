@@ -1,5 +1,5 @@
 ﻿
-// <copyright file="OrderDetailsDto.g.cs" company="MIT">
+// <copyright file="BankTransfers.g.cs" company="MIT">
 //  Copyright (c) 2018 MIT
 // </copyright>  
 
@@ -22,36 +22,31 @@ using System;
 using System.Collections.Generic;
 using DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.Dto;
 
-namespace DotNetScaffolder.Domain.Data.DefaultDto.Dto
+namespace DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity
 {
-	public partial class OrderDetailsDto : IOrderDetails 
+	public partial class BankTransfers : IBankTransfers 
 	{
 		#region CTOR
 		
-		public OrderDetailsDto()
+		public BankTransfers()
 		{
 		}
 		
-		public OrderDetailsDto(IOrderDetails item, bool deep = false)
+		public BankTransfers(IBankTransfers item, bool deep = false)
 		{
 			if(item == null) return;
 			
-			this.OrderDetailsId = item.OrderDetailsId;
-			this.OrderId = item.OrderId;
-			this.ProductId = item.ProductId;
-			this.UnitPrice = item.UnitPrice;
+			this.BankTransferId = item.BankTransferId;
+			this.FromBankAccountId = item.FromBankAccountId;
+			this.ToBankAccountId = item.ToBankAccountId;
 			this.Amount = item.Amount;
-			this.Discount = item.Discount;
+			this.TransferDate = item.TransferDate;
 
 			if(deep)
 			{
-                if(item.Order != null)
+				if(item.BankAccount != null)
                 {
-				    this.Order = new OrderDto(item.Order, deep);
-                }
-                if(item.Product != null)
-                {
-				    this.Product = new ProductDto(item.Product, deep);
+                    this.BankAccount = new BankAccount(item.BankAccount, deep);
                 }
 			}
 		}
@@ -60,24 +55,38 @@ namespace DotNetScaffolder.Domain.Data.DefaultDto.Dto
 		
 		#region Fields
 		
-		public int OrderDetailsId { get; set; }
-		public int OrderId { get; set; }
-		public int ProductId { get; set; }
-		public Nullable<decimal> UnitPrice { get; set; }
-		public Nullable<short> Amount { get; set; }
-		public Nullable<float> Discount { get; set; }
+		public virtual int BankTransferId { get; set; }
+		public virtual int FromBankAccountId { get; set; }
+		public virtual int ToBankAccountId { get; set; }
+		public virtual decimal Amount { get; set; }
+		public virtual DateTime TransferDate { get; set; }
 
 		#endregion
-		
-		#region Child Relationships
-		
 
-		#endregion
-		
 		#region Parent Relationships
-		
-		public IOrder Order { get; set; }
-		public IProduct Product { get; set; }
+
+        public virtual BankAccount BankAccount { get; set; }
+		IBankAccount IBankTransfers.BankAccount 
+		{ 
+			get
+			{
+				return this.BankAccount;
+			}
+			set
+			{
+				if(value != this.BankAccount)
+				{
+					if(value != null)
+					{
+						this.BankAccount = (BankAccount)value;
+					}
+					else
+					{
+						this.BankAccount = null;
+					}
+				}
+			}
+		}
 		
 		#endregion
 	}
