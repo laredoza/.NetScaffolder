@@ -4,6 +4,8 @@
         public ApplicationServiceDataType DataType{get;set;}
         public DtoInterfaceDataType DtoInterfaceDataType{get;set;}
 
+        public string RepositoryInterfaceNamespace { get; set; }
+        public string ApplicationInterfaceNamespace { get; set; }
         
         //public INamingConvention NamingConvention { get; set; }
 //		public ContextDataType DataType {get;set;}
@@ -23,7 +25,6 @@
             
 			foreach(ApplicationServiceData applicationServiceData in DataType.ApplicationServiceData )
 			{
-				//Debugger.Break();
                 templateInterface.DataType = DataType;
                 templateInterface.CurrentApplicationData = applicationServiceData;
                 templateInterface.DtoInterfaceDataType = this.DtoInterfaceDataType;
@@ -38,6 +39,8 @@
                 template.DataType = DataType;
                 template.CurrentApplicationData = applicationServiceData;
                 template.DtoInterfaceDataType = this.DtoInterfaceDataType;
+                template.ApplicationInterfaceNamespace = applicationServiceData.TransformFullnamespaceInterface(DataType.BaseNamespace);
+                template.RepositoryInterfaceNamespace = RepositoryInterfaceNamespace;
 
                 if(!string.IsNullOrEmpty(applicationServiceData.OutputPath))
                 {

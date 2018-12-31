@@ -28,6 +28,8 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>RunGenerator.cs</LastGenOutput>
       <LastOutputs>
+..\..\ApplicationServices\ApplicationService\ApplicationService\CustomerApplicationService.g.cs
+..\..\ApplicationServices\ApplicationService\ApplicationService\ProductApplicationService.g.cs
 ..\..\Contexts\EF\MySql\Context\MySqlFullContext.g.cs
 ..\..\Contexts\EF\MySql\Mappings\MySqlFullContext\FullContextBankAccountMap.g.cs
 ..\..\Contexts\EF\MySql\Mappings\MySqlFullContext\FullContextBankTransfersMap.g.cs
@@ -146,6 +148,8 @@
 ..\..\Entities\Entity\Entity\OrderDetails.g.cs
 ..\..\Entities\Entity\Entity\Product.g.cs
 ..\..\Entities\Entity\Entity\Software.g.cs
+..\..\Interfaces\ApplicationService\ApplicationService\ICustomerApplicationService.g.cs
+..\..\Interfaces\ApplicationService\ApplicationService\IProductApplicationService.g.cs
 ..\..\Interfaces\Interface\Dto\IBankAccount.g.cs
 ..\..\Interfaces\Interface\Dto\IBankTransfers.g.cs
 ..\..\Interfaces\Interface\Dto\IBook.g.cs

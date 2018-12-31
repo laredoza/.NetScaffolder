@@ -113,19 +113,20 @@
                     iRepoGen.Run();
                 }
 
-                //if (dataType is ApplicationServiceDataType)
-                //{
-                    ////Debugger.Break();
-                    //ApplicationServiceDataType applicationDataType = dataType as ApplicationServiceDataType;
-                    //var entityDataType = dataTypes.FirstOrDefault(o => o is EntityDataType) as EntityDataType;
-//
-                    //var applicationServiceGenerator = new ApplicationServiceGenerator {
-                            //DataType = applicationDataType,
-                            //DtoInterfaceDataType = dataTypes.FirstOrDefault(o => o is DtoInterfaceDataType) as DtoInterfaceDataType 
-                            //};
-//
-                    //applicationServiceGenerator.Run();
-                //}
+                if (dataType is ApplicationServiceDataType)
+                {
+                    //Debugger.Break();
+                    ApplicationServiceDataType applicationDataType = dataType as ApplicationServiceDataType;
+                    var entityDataType = dataTypes.FirstOrDefault(o => o is EntityDataType) as EntityDataType;
+
+                    var applicationServiceGenerator = new ApplicationServiceGenerator {
+                            DataType = applicationDataType,
+                            DtoInterfaceDataType = dataTypes.FirstOrDefault(o => o is DtoInterfaceDataType) as DtoInterfaceDataType,
+                            RepositoryInterfaceNamespace = (dataTypes.FirstOrDefault(o => o is RepoInterfaceDataType) as RepoInterfaceDataType).FullNamespace, 
+                   };
+
+                    applicationServiceGenerator.Run();
+                }
 //
                 //if (dataType is WebApiServiceDataType)
                 //{
