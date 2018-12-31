@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{B7A9A28A-504E-408E-89DC-76E20BD892DB}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>SqlServer</RootNamespace>
-    <AssemblyName>SqlServer</AssemblyName>
+    <RootNamespace>DotNetScaffolder.Domain.Migrations.EF.SqlServer</RootNamespace>
+    <AssemblyName>DotNetScaffolder.Domain.Migrations.EF.SqlServer</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

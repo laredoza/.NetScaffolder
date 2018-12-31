@@ -1,9 +1,9 @@
 ﻿using System.IO;
+using DotNetScaffolder.Domain.Data.Contexts.EFCore.SqlServer.Context;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
-using RepositoryEFDotnet.Data.Context.EFCore;
 
-namespace RepositoryEFDotnet.Data.Migrations.SqlServer.ContextDesigners
+namespace DotNetScaffolder.Domain.Migrations.EFCore.SqlServer.ContextDesigners
 {
     /// <summary>
     /// The full context factory.

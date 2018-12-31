@@ -3,6 +3,7 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.2</TargetFramework>
+    <AssemblyName>DotNetScaffolder.Domain.Migrations.EFCore.SqlServer</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
@@ -26,8 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Contexts\EFCore\Base\RepositoryEFDotnet.Contexts.EFCore.Base.csproj" />
-    <ProjectReference Include="..\..\..\Contexts\EFCore\SqlServer\RepositoryEFDotnet.Contexts.EFCore.SqlServer.csproj" />
+    <ProjectReference Include="..\..\..\Contexts\EFCore\SqlServer\DotNetScaffolder.Domain.Data.Contexts.EFCore.SqlServer.csproj" />
   </ItemGroup>
 
 </Project>

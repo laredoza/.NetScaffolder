@@ -99,11 +99,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.8 Migrations", "1.8 Migra
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EFCore", "EFCore", "{91598A6C-6C81-483B-AFD3-A324048DD429}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RepositoryEFDotnet.Data.Migrations.EFCore.SqlServer", "Data\Migrations\EFCore\SqlServer\RepositoryEFDotnet.Data.Migrations.EFCore.SqlServer.csproj", "{2F56E607-9161-4F2C-891A-67E7EC1D7609}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetScaffolder.Domain.Migrations.EFCore.SqlServer", "Data\Migrations\EFCore\SqlServer\DotNetScaffolder.Domain.Migrations.EFCore.SqlServer.csproj", "{2F56E607-9161-4F2C-891A-67E7EC1D7609}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EF", "EF", "{1DB84051-AD98-438A-BB4B-32AA3482065C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepositoryEFDotnet.Data.Migrations.EF.SqlServer", "Data\Migrations\EF\SqlServer\RepositoryEFDotnet.Data.Migrations.EF.SqlServer.csproj", "{B7A9A28A-504E-408E-89DC-76E20BD892DB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetScaffolder.Domain.Migrations.EF.SqlServer", "Data\Migrations\EF\SqlServer\DotNetScaffolder.Domain.Migrations.EF.SqlServer.csproj", "{B7A9A28A-504E-408E-89DC-76E20BD892DB}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetScaffolder.Domain.Data.Contexts.EFCore.Postgres", "Data\Contexts\EFCore\Postgres\DotNetScaffolder.Domain.Data.Contexts.EFCore.Postgres.csproj", "{75DD96E9-EB1D-43B5-A822-63B8B3368E78}"
 EndProject
