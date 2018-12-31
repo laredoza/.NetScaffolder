@@ -4,5 +4,5 @@
   <InheritFrom />
   <Namespace>Data.Interfaces.ModelInterfaces.Dto</Namespace>
   <OutputFolder>Dto</OutputFolder>
-  <OutputPath>..\..\Interfaces\Interface\DotNetScaffolder.Domain.Data.Interface.ModelInterfaces.csproj</OutputPath>
+  <OutputPath>..\..\Interfaces\Interface\DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.csproj</OutputPath>
 </DtoInterfaceDataType>

@@ -4,5 +4,6 @@
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Core\DotNetScaffolder.Domain.Core.csproj" />
+    <ProjectReference Include="..\Interface\DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.csproj" />
   </ItemGroup>
 </Project>

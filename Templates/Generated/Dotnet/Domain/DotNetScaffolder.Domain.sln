@@ -19,7 +19,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetScaffolder.Domain.Dat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetScaffolder.Domain.Data.Contexts.EF.SqlServer", "Data\Contexts\EF\SqlServer\DotNetScaffolder.Domain.Data.Contexts.EF.SqlServer.csproj", "{23E0EDFF-BDFB-45E4-AC7B-31DDFA93AE1D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RepositoryEFDotnet.Data.Repositories.Repository", "Data\Repositories\Repository\RepositoryEFDotnet.Data.Repositories.Repository.csproj", "{DAB86AE4-F8E1-4D5E-BAF2-855D24D7A437}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetScaffolder.Domain.Data.Repositories.Repository", "Data\Repositories\Repository\DotNetScaffolder.Domain.Data.Repositories.Repository.csproj", "{DAB86AE4-F8E1-4D5E-BAF2-855D24D7A437}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.4 Entities", "1.4 Entities", "{7DD8CB06-B007-4F1F-9489-2269D01798DB}"
 EndProject
@@ -41,9 +41,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4. Core", "4. Core", "{0358
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetScaffolder.Domain.Core", "Core\DotNetScaffolder.Domain.Core.csproj", "{0333E000-6AAF-4E18-8747-2299A8231AB1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetScaffolder.Domain.Data.Interface.ModelInterfaces", "Data\Interfaces\Interface\DotNetScaffolder.Domain.Data.Interface.ModelInterfaces.csproj", "{F49F5825-6F92-4B8D-AE30-59D43235974B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces", "Data\Interfaces\Interface\DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.csproj", "{F49F5825-6F92-4B8D-AE30-59D43235974B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RepositoryEFDotnet.Data.Interface.RepositoryInterfaces", "Data\Interfaces\RepositoryInterfaces\RepositoryEFDotnet.Data.Interface.RepositoryInterfaces.csproj", "{69BF017D-9632-4BCA-859B-5D24A2C4B79A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces", "Data\Interfaces\RepositoryInterfaces\DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces.csproj", "{69BF017D-9632-4BCA-859B-5D24A2C4B79A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.7 Tests", "1.7 Tests", "{23BCBB7F-56B2-4415-98BC-74F00E829053}"
 EndProject

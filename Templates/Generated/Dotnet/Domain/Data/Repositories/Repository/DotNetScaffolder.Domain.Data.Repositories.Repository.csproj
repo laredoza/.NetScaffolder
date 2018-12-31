@@ -9,8 +9,9 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Core\DotNetScaffolder.Domain.Core.csproj" />
-    <ProjectReference Include="..\..\Interfaces\Interface\DotNetScaffolder.Domain.Data.Interface.ModelInterfaces.csproj" />
-    <ProjectReference Include="..\..\Interfaces\RepositoryInterfaces\RepositoryEFDotnet.Data.Interface.RepositoryInterfaces.csproj" />
+    <ProjectReference Include="..\..\Entities\Entity\DotNetScaffolder.Domain.Data.Entities.DefaultEntity.csproj" />
+    <ProjectReference Include="..\..\Interfaces\Interface\DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.csproj" />
+    <ProjectReference Include="..\..\Interfaces\RepositoryInterfaces\DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
@@ -154,6 +155,24 @@
 ..\..\Interfaces\Interface\Dto\IOrderDetails.g.cs
 ..\..\Interfaces\Interface\Dto\IProduct.g.cs
 ..\..\Interfaces\Interface\Dto\ISoftware.g.cs
+..\..\Interfaces\RepositoryInterfaces\Repository\IBankAccountRepository.g.cs
+..\..\Interfaces\RepositoryInterfaces\Repository\IBankTransfersRepository.g.cs
+..\..\Interfaces\RepositoryInterfaces\Repository\IBookRepository.g.cs
+..\..\Interfaces\RepositoryInterfaces\Repository\ICountryRepository.g.cs
+..\..\Interfaces\RepositoryInterfaces\Repository\ICustomerRepository.g.cs
+..\..\Interfaces\RepositoryInterfaces\Repository\IOrderDetailsRepository.g.cs
+..\..\Interfaces\RepositoryInterfaces\Repository\IOrderRepository.g.cs
+..\..\Interfaces\RepositoryInterfaces\Repository\IProductRepository.g.cs
+..\..\Interfaces\RepositoryInterfaces\Repository\ISoftwareRepository.g.cs
+.\Repository\BankAccountRepository.g.cs
+.\Repository\BankTransfersRepository.g.cs
+.\Repository\BookRepository.g.cs
+.\Repository\CountryRepository.g.cs
+.\Repository\CustomerRepository.g.cs
+.\Repository\OrderDetailsRepository.g.cs
+.\Repository\OrderRepository.g.cs
+.\Repository\ProductRepository.g.cs
+.\Repository\SoftwareRepository.g.cs
 </LastOutputs>
     </None>
   </ItemGroup>

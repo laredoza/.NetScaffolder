@@ -7,7 +7,9 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace DotNetScaffolder.Domain.Core.Interfaces
+using DotNetScaffolder.Domain.Core.Interfaces;
+
+namespace DotNetScaffolder.Domain.Core
 {
     #region Using
 
