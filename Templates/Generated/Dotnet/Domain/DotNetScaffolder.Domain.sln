@@ -111,6 +111,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetScaffolder.Domain.Dat
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetScaffolder.Domain.Data.Contexts.EFCore.SqlServer", "Data\Contexts\EFCore\SqlServer\DotNetScaffolder.Domain.Data.Contexts.EFCore.SqlServer.csproj", "{A5098BC6-1487-4460-A94F-2BFACEF2E522}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetScaffolder.Domain.Migrations.EFCore.MySql", "Data\Migrations\EFCore\MySql\DotNetScaffolder.Domain.Migrations.EFCore.MySql.csproj", "{352AB333-6F1E-4843-869B-DF38D84E92BA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -245,6 +247,10 @@ Global
 		{A5098BC6-1487-4460-A94F-2BFACEF2E522}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A5098BC6-1487-4460-A94F-2BFACEF2E522}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A5098BC6-1487-4460-A94F-2BFACEF2E522}.Release|Any CPU.Build.0 = Release|Any CPU
+		{352AB333-6F1E-4843-869B-DF38D84E92BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{352AB333-6F1E-4843-869B-DF38D84E92BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{352AB333-6F1E-4843-869B-DF38D84E92BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{352AB333-6F1E-4843-869B-DF38D84E92BA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -298,6 +304,7 @@ Global
 		{41736B2A-4185-4130-8FA0-B90958D035D1} = {E6A8C34C-9ECE-46AE-AC36-01F3CAF293C3}
 		{83F99B9D-6D44-47CE-9AEC-6BF50D211CC5} = {7DD8CB06-B007-4F1F-9489-2269D01798DB}
 		{A5098BC6-1487-4460-A94F-2BFACEF2E522} = {E6A8C34C-9ECE-46AE-AC36-01F3CAF293C3}
+		{352AB333-6F1E-4843-869B-DF38D84E92BA} = {91598A6C-6C81-483B-AFD3-A324048DD429}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BAAA9DC0-A104-423F-8507-710C11070DF0}

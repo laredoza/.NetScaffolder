@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DotNetScaffolder.Domain.Migrations.EFCore.SqlServer
+namespace DotNetScaffolder.Domain.Migrations.EFCore.MySql
 {
     class Program
     {
