@@ -93,7 +93,7 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EFCore
         /// </returns>
         public string AsAlias(string name)
         {
-            return !this.DriverType.UseAlias ? name : $"`{name}`";
+            return !this.DriverType.UseAlias ? name : $"{name}";
         }
 
         /// <summary>

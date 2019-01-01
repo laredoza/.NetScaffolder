@@ -31,7 +31,7 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.MySql.Mappings.MySqlFullC
 	{	
 	    public virtual void Configure(EntityTypeBuilder<Software> builder)
 	    {
-			builder.ToTable("`Software`");
+			builder.ToTable("Software");
 			
 			#region Primary keys
 			

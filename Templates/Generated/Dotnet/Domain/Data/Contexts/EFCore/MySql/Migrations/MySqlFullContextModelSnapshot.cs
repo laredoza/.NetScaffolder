@@ -46,7 +46,7 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.MySql.Migrations
                     b.HasIndex("CustomerId")
                         .HasName("IX_CustomerId");
 
-                    b.ToTable("`BankAccount`");
+                    b.ToTable("BankAccount");
 
                     b.HasData(
                         new
@@ -94,7 +94,7 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.MySql.Migrations
                     b.HasIndex("ToBankAccountId")
                         .HasName("IX_ToBankAccountId");
 
-                    b.ToTable("`BankTransfers`");
+                    b.ToTable("BankTransfers");
 
                     b.HasData(
                         new
@@ -103,7 +103,7 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.MySql.Migrations
                             Amount = 100m,
                             FromBankAccountId = 1,
                             ToBankAccountId = 2,
-                            TransferDate = new DateTime(2019, 1, 1, 18, 27, 39, 847, DateTimeKind.Local).AddTicks(794)
+                            TransferDate = new DateTime(2019, 1, 1, 18, 53, 10, 882, DateTimeKind.Local).AddTicks(6725)
                         });
                 });
 
@@ -122,7 +122,7 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.MySql.Migrations
                     b.HasIndex("ProductId")
                         .HasName("IX_ProductId");
 
-                    b.ToTable("`Book`");
+                    b.ToTable("Book");
 
                     b.HasData(
                         new
@@ -147,7 +147,7 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.MySql.Migrations
                         .IsUnique()
                         .HasName("UQ__Country__10D1609E8CC26505");
 
-                    b.ToTable("`Country`");
+                    b.ToTable("Country");
 
                     b.HasData(
                         new
@@ -224,7 +224,7 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.MySql.Migrations
                         .IsUnique()
                         .HasName("UQ__Customer__A4AE64D98B60CE6B");
 
-                    b.ToTable("`Customer`");
+                    b.ToTable("Customer");
 
                     b.HasData(
                         new
@@ -300,15 +300,15 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.MySql.Migrations
                         .IsUnique()
                         .HasName("UQ__Order__C3905BCE3C614174");
 
-                    b.ToTable("`Order`");
+                    b.ToTable("Order");
 
                     b.HasData(
                         new
                         {
                             OrderId = 1,
                             CustomerId = 2,
-                            DeliveryDate = new DateTime(2019, 1, 1, 18, 27, 39, 849, DateTimeKind.Local).AddTicks(4670),
-                            OrderDate = new DateTime(2019, 1, 1, 18, 27, 39, 849, DateTimeKind.Local).AddTicks(3652),
+                            DeliveryDate = new DateTime(2019, 1, 1, 18, 53, 10, 885, DateTimeKind.Local).AddTicks(869),
+                            OrderDate = new DateTime(2019, 1, 1, 18, 53, 10, 884, DateTimeKind.Local).AddTicks(9920),
                             ShippingAddress = "2nd road",
                             ShippingCity = "London",
                             ShippingName = "Mary",
@@ -349,7 +349,7 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.MySql.Migrations
                     b.HasIndex("ProductId")
                         .HasName("IX_ProductId");
 
-                    b.ToTable("`OrderDetails`");
+                    b.ToTable("OrderDetails");
 
                     b.HasData(
                         new
@@ -385,7 +385,7 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.MySql.Migrations
                         .IsUnique()
                         .HasName("UQ__Product__B40CC6CC5F2A0195");
 
-                    b.ToTable("`Product`");
+                    b.ToTable("Product");
 
                     b.HasData(
                         new
@@ -419,7 +419,7 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.MySql.Migrations
                     b.HasIndex("ProductId")
                         .HasName("IX_ProductId");
 
-                    b.ToTable("`Software`");
+                    b.ToTable("Software");
 
                     b.HasData(
                         new

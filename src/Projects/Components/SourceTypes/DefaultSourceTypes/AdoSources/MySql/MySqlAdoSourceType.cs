@@ -156,6 +156,8 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
                 case "LONGBLOB":
                 case "BLOB":
                     return DomainDataType.VarBinary;
+                case "BIT":
+                    return DomainDataType.Boolean;
                 case "":
                     return DomainDataType.Unsupported;
                 default:
