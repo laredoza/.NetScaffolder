@@ -60,7 +60,6 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-            ;
             //.AddRazorPagesOptions(options =>
             //{
             //    options.Conventions..AuthorizePage("/Contact");
