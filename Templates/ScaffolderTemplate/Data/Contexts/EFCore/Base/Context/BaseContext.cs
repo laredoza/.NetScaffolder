@@ -6,16 +6,16 @@ using System.Data;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using DotNetScaffolder.Domain.Core.Interfaces;
+using DotNetScaffolder.Domain.Core.Utils;
 using EFSecondLevelCache.Core;
 using EFSecondLevelCache.Core.Contracts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using RepositoryEFDotnet.Core.Base;
-using RepositoryEFDotnet.Core.Utils;
 
 #endregion
 
-namespace RepositoryEFDotnet.Contexts.EFCore.Base.Context
+namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.Base.Context
 {
     #region Using
 

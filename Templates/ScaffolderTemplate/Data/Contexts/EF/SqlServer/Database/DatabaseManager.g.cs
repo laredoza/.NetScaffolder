@@ -1,6 +1,6 @@
 ﻿
 // <copyright file="FullContext.g.cs" company="MIT">
-//  Copyright (c) 2018 MIT
+//  Copyright (c) 2019 MIT
 // </copyright>  
 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
@@ -17,19 +17,19 @@
 //	GENERATED CODE. DOT NOT MODIFY MANUALLY AS CHANGES CAN BE LOST!!!
 //	USE A PARTIAL CLASS INSTEAD
 // *******************************************************************
-using RepositoryEFDotnet.Contexts.EF.Base.Context;
-using RepositoryEFDotnet.Core.Base;
+using DotNetScaffolder.Domain.Core;
+using DotNetScaffolder.Domain.Data.Contexts.EF.Base.Context;
+using DotNetScaffolder.Domain.Core.Interfaces;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration;
 using System.Data.Entity.Infrastructure.Annotations;
-using RepositoryEFDotnet.Data.Context.EF;
+using DotNetScaffolder.Domain.Data.Contexts.EFCore.SqlServer.Context;
 using System;
 using System.Collections.Generic;
 using StructureMap;
 using StructureMap.Pipeline;
-using RepositoryEFDotnet.Contexts.EF.Base;
 
-namespace RepositoryEFDotnet.Data.Context.EF.SqlServer.Database
+namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.SqlServer.Database
 {
 	public class DatabaseManager : IDatabaseManager
 	{	
@@ -64,7 +64,7 @@ namespace RepositoryEFDotnet.Data.Context.EF.SqlServer.Database
 	        IServiceProvider serviceProvider = null)
 	    {
 	        if (configuration == null || configuration.ConnectionStrings == null
-	                                  || !configuration.ConnectionStrings.ContainsKey("QUIRCSqlServer"))
+	                                  || !configuration.ConnectionStrings.ContainsKey("RepoTestSqlServer"))
 	        {
 	            throw new Exception("Invalid configuration specified in database manager");
 	        }

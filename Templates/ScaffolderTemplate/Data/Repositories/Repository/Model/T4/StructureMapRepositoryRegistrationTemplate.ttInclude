@@ -1,0 +1,49 @@
+﻿<#+
+public class StructureMapRepositoryRegistrationTemplate : BaseTemplate 
+{
+	public List<Table> Models { get; set; }
+	public RepositoryDataType DataType { get; set; }
+	public RepoInterfaceDataType RepoInterfaceDataType { get; set; }
+
+	public override string TransformText()
+	{
+		//Debugger.Break();
+		Header = new CopyrightHeader();
+		Header.Filename = "RepositoryRegistration";
+#>
+
+<#= Header.TransformText() #>
+
+// *******************************************************************
+//	GENERATED CODE. DOT NOT MODIFY MANUALLY AS CHANGES CAN BE LOST!!!
+//	USE A PARTIAL CLASS INSTEAD
+// *******************************************************************
+<#+ foreach(var nameSpace in DataType.AdditionalNamespaces){ #>
+using <#= nameSpace #>;
+<#+ } #>
+using <#= RepoInterfaceDataType.FullNamespace #>;
+using System;
+using System.Collections.Generic;
+using StructureMap.Pipeline;
+
+namespace <#= DataType.FullNamespace #>.Register
+{
+	public class RepositoryRegistration : StructureMap.Registry
+	{			
+		#region CTOR
+		
+        public RepositoryRegistration()
+        {
+<#+ foreach(var model in Models) { DataType.MetaData = model; #>
+			this.For<I<#= DataType.RepoName #>Repository>().LifecycleIs(Lifecycles.Unique).UseIfNone<<#= DataType.RepoName #>Repository>();
+<#+ } #>
+        }
+		
+		#endregion
+	}
+}
+<#+
+		return this.GenerationEnvironment.ToString();
+	}
+}
+#>

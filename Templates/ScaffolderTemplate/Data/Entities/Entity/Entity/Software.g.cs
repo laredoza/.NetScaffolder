@@ -1,6 +1,6 @@
 ﻿
 // <copyright file="Software.g.cs" company="MIT">
-//  Copyright (c) 2018 MIT
+//  Copyright (c) 2019 MIT
 // </copyright>  
 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
@@ -20,9 +20,9 @@
 
 using System;
 using System.Collections.Generic;
-using RepositoryEFDotnet.Data.Interfaces;
+using DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.Dto;
 
-namespace RepositoryEFDotnet.Data.Entity
+namespace DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity
 {
 	public partial class Software : ISoftware 
 	{
@@ -41,6 +41,10 @@ namespace RepositoryEFDotnet.Data.Entity
 
 			if(deep)
 			{
+				if(item.Product != null)
+                {
+                    this.Product = new Product(item.Product, deep);
+                }
 			}
 		}
 		
@@ -51,6 +55,33 @@ namespace RepositoryEFDotnet.Data.Entity
 		public virtual int ProductId { get; set; }
 		public virtual string LicenseCode { get; set; }
 
+		#endregion
+
+		#region Parent Relationships
+
+        public virtual Product Product { get; set; }
+		IProduct ISoftware.Product 
+		{ 
+			get
+			{
+				return this.Product;
+			}
+			set
+			{
+				if(value != this.Product)
+				{
+					if(value != null)
+					{
+						this.Product = (Product)value;
+					}
+					else
+					{
+						this.Product = null;
+					}
+				}
+			}
+		}
+		
 		#endregion
 	}
 }

@@ -1,6 +1,6 @@
 ﻿
 // <copyright file="BankTransfersMap.g.cs" company="MIT">
-//  Copyright (c) 2018 MIT
+//  Copyright (c) 2019 MIT
 // </copyright>  
 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
@@ -21,11 +21,12 @@ using NHibernate;
 using NHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using FluentNHibernate.Cfg;
-using RepositoryEFDotnet.Data.Entity;
+using DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity;
 using System.Data.Common;
 using FluentNHibernate.Mapping;
 
-namespace RepositoryEFDotnet.Data.Context.Mappings.NHib.Oracle
+
+namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.Oracle.Mappings.OracleFullContext
 {
 	public partial class FullContextBankTransfersMap : ClassMap<BankTransfers>
 	{	
@@ -58,16 +59,12 @@ namespace RepositoryEFDotnet.Data.Context.Mappings.NHib.Oracle
 			.Not.Nullable();
 			Map(t => t.TransferDate).Column("TransferDate")
 			.Not.Nullable();
-			Map(t => t.BankAccountId).Column("BankAccountId")
-			.UniqueKey("UQ__BankTran__4FC8E4A0CE69E10D")
-			.Nullable();
 			
 			#endregion
 			
 			#region Relationships
 			
 			References(o => o.BankAccount).Column("BankAccountId").Unique().Not.Insert().Not.Update();
-			References(o => o.BankAccount1).Column("BankAccountId").Unique().Not.Insert().Not.Update();
 			
 			#endregion			
 

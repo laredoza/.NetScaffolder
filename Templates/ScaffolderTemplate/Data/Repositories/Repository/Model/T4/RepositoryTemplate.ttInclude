@@ -4,7 +4,8 @@ public class RepositoryTemplate : BaseTemplate
 	public RepositoryDataType DataType { get; set; }
 	public string DtoInterfaceNamespace { get; set; }
 	public string EntityNamespace { get; set; }
-	
+	public string RepositoryInterfaceNamespace { get; set; }
+
 	public override string TransformText()
 	{
 		// Debugger.Break();
@@ -26,6 +27,8 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using <#= DtoInterfaceNamespace #>;
 using <#= EntityNamespace #>;
+using <#= RepositoryInterfaceNamespace #>;
+
 <#+ foreach(var nameSpace in DataType.AdditionalNamespaces){ #>
 using <#= nameSpace #>;
 <#+ } #>

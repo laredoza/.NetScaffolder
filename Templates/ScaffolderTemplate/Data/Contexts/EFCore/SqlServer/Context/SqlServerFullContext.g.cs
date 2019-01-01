@@ -1,6 +1,6 @@
 ﻿
 // <copyright file="FullContext.g.cs" company="MIT">
-//  Copyright (c) 2018 MIT
+//  Copyright (c) 2019 MIT
 // </copyright>  
 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
@@ -23,16 +23,17 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System.Configuration;
-using RepositoryEFDotnet.Contexts.EFCore.Base.Context;
-using RepositoryEFDotnet.Core.Base;
-using RepositoryEFDotnet.Data.Context.Mappings.EFCore.SqlServer;
-using RepositoryEFDotnet.Data.Entity;
+using DotNetScaffolder.Domain.Core;
+using DotNetScaffolder.Domain.Data.Contexts.EFCore.Base.Context;
+using DotNetScaffolder.Domain.Core.Interfaces;
+using DotNetScaffolder.Domain.Data.Contexts.EFCore.SqlServer.Mappings.SqlServerFullContext;
+using DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 
-namespace RepositoryEFDotnet.Data.Context.EFCore
+namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.SqlServer.Context
 {
 	public partial class SqlServerFullContext : BaseContext
 	{	

@@ -1,6 +1,6 @@
 ﻿
 // <copyright file="FullContext.g.cs" company="MIT">
-//  Copyright (c) 2018 MIT
+//  Copyright (c) 2019 MIT
 // </copyright>  
 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
@@ -17,19 +17,19 @@
 //	GENERATED CODE. DOT NOT MODIFY MANUALLY AS CHANGES CAN BE LOST!!!
 //	USE A PARTIAL CLASS INSTEAD
 // *******************************************************************
-using RepositoryEFDotnet.Contexts.EFCore.Base.Context;
-using RepositoryEFDotnet.Core.Base;
+using DotNetScaffolder.Domain.Core;
+using DotNetScaffolder.Domain.Data.Contexts.EFCore.Base.Context;
+using DotNetScaffolder.Domain.Core.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System.Configuration;
-using RepositoryEFDotnet.Data.Context.EFCore;
+using DotNetScaffolder.Domain.Data.Contexts.EFCore.MySql.Context;
 using System;
 using System.Collections.Generic;
 using StructureMap;
 using StructureMap.Pipeline;
-using RepositoryEFDotnet.Contexts.EFCore.Base;
 
-namespace RepositoryEFDotnet.Data.Context.EFCore.MySql.Database
+namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.MySql.Database
 {
 	public class DatabaseManager : IDatabaseManager
 	{	
@@ -64,7 +64,7 @@ namespace RepositoryEFDotnet.Data.Context.EFCore.MySql.Database
 	        IServiceProvider serviceProvider = null)
 	    {
 	        if (configuration == null || configuration.ConnectionStrings == null
-	                                  || !configuration.ConnectionStrings.ContainsKey("QUIRCSqlServer"))
+	                                  || !configuration.ConnectionStrings.ContainsKey("RepoTestMySql"))
 	        {
 	            throw new Exception("Invalid configuration specified in database manager");
 	        }

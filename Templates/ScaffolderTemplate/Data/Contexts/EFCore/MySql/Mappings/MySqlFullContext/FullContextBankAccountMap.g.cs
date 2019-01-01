@@ -1,6 +1,6 @@
 ﻿
 // <copyright file="BankAccountMap.g.cs" company="MIT">
-//  Copyright (c) 2018 MIT
+//  Copyright (c) 2019 MIT
 // </copyright>  
 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
@@ -22,10 +22,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System.Configuration;
 using System.ComponentModel.DataAnnotations.Schema;
-using RepositoryEFDotnet.Data.Entity;
+using DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity;
 using System.Data.Common;
 
-namespace RepositoryEFDotnet.Data.Context.Mappings.EFCore.MySql
+namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.MySql.Mappings.MySqlFullContext
 {
 	public partial class FullContextBankAccountMap : IEntityTypeConfiguration<BankAccount>
 	{	
@@ -61,7 +61,6 @@ namespace RepositoryEFDotnet.Data.Context.Mappings.EFCore.MySql
 			
 			builder.HasOne<Customer>(s => s.Customer).WithMany(s => s.BankAccount).HasForeignKey(s => s.CustomerId).OnDelete(DeleteBehavior.Restrict);
 			builder.HasMany<BankTransfers>(s => s.BankTransfers).WithOne(s => s.BankAccount).HasForeignKey(s => s.ToBankAccountId).OnDelete(DeleteBehavior.Restrict);
-			builder.HasMany<BankTransfers>(s => s.BankTransfers1).WithOne(s => s.BankAccount1).HasForeignKey(s => s.BankAccountId).OnDelete(DeleteBehavior.Restrict);
 			
 			#endregion	
 

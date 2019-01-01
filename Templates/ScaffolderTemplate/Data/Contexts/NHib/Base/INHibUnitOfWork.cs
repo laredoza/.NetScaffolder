@@ -2,8 +2,8 @@
 
 using System;
 using System.Linq.Expressions;
+using DotNetScaffolder.Domain.Core.Interfaces;
 using NHibernate;
-using RepositoryEFDotnet.Core.Base;
 
 #endregion
 

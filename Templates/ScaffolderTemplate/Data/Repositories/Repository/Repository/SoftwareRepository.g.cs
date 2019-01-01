@@ -1,6 +1,6 @@
 ﻿
 // <copyright file="Software.g.cs" company="MIT">
-//  Copyright (c) 2018 MIT
+//  Copyright (c) 2019 MIT
 // </copyright>  
 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
@@ -23,11 +23,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using RepositoryEFDotnet.Data.Interfaces;
-using RepositoryEFDotnet.Data.Entity;
-using RepositoryEFDotnet.Core.Base;
+using DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.Dto;
+using DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity;
+using DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces;
 
-namespace RepositoryEFDotnet.Data.Repository
+using DotNetScaffolder.Domain.Core;
+using DotNetScaffolder.Domain.Core.Interfaces;
+
+namespace DotNetScaffolder.Domain.Data.Repositories.Repository
 {
 	/// <summary>
 	/// The SoftwareRepository class responsible for database functions in the Software table

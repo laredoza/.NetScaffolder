@@ -1,6 +1,6 @@
 ﻿
 // <copyright file="FullContext.g.cs" company="MIT">
-//  Copyright (c) 2018 MIT
+//  Copyright (c) 2019 MIT
 // </copyright>  
 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
@@ -23,14 +23,15 @@ using System.Data.Entity.ModelConfiguration;
 using System.Data.Entity.Infrastructure.Annotations;
 using MySql.Data.EntityFramework;
 using System.ComponentModel.DataAnnotations.Schema;
-using RepositoryEFDotnet.Data.Entity;
-using RepositoryEFDotnet.Contexts.EF.Base.Context;
-using RepositoryEFDotnet.Core.Base;
-using RepositoryEFDotnet.Data.Context.Mappings.EF.MySql;
-using RepositoryEFDotnet.Data.Entity;
+using DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity;
+using DotNetScaffolder.Domain.Core;
+using DotNetScaffolder.Domain.Data.Contexts.EF.Base.Context;
+using DotNetScaffolder.Domain.Core.Interfaces;
+using DotNetScaffolder.Domain.Data.Contexts.EFCore.MySql.Mappings.MySqlFullContext;
+using DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity;
 using System.Data.Common;
 
-namespace RepositoryEFDotnet.Data.Context.EF
+namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.MySql.Context
 {
     [DbConfigurationType(typeof(MySqlEFConfiguration))]
 	public partial class MySqlFullContext : BaseContext
@@ -102,7 +103,7 @@ namespace RepositoryEFDotnet.Data.Context.EF
             Configuration.ProxyCreationEnabled = false;
             Configuration.AutoDetectChangesEnabled = false;
 			
-			Database.SetInitializer(new CreateDatabaseIfNotExists<MySqlFullContext>());
+			System.Data.Entity.Database.SetInitializer(new CreateDatabaseIfNotExists<MySqlFullContext>());
 			Database.Log = this.Log;
         }
 		

@@ -1,6 +1,6 @@
 ﻿
 // <copyright file="Product.g.cs" company="MIT">
-//  Copyright (c) 2018 MIT
+//  Copyright (c) 2019 MIT
 // </copyright>  
 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
@@ -23,11 +23,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using RepositoryEFDotnet.Data.Interfaces;
-using RepositoryEFDotnet.Data.Entity;
-using RepositoryEFDotnet.Core.Base;
+using DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.Dto;
+using DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity;
+using DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces;
 
-namespace RepositoryEFDotnet.Data.Repository
+using DotNetScaffolder.Domain.Core;
+using DotNetScaffolder.Domain.Core.Interfaces;
+
+namespace DotNetScaffolder.Domain.Data.Repositories.Repository
 {
 	/// <summary>
 	/// The ProductRepository class responsible for database functions in the Product table
@@ -196,90 +199,6 @@ namespace RepositoryEFDotnet.Data.Repository
 			}
 		}
 
-        /// <summary>
-        /// Search for Product entities in the database by UnitAmount
-        /// </summary>
-        /// <param name="unitAmount">string</param>
-		/// <param name="caseSensitive">bool</param>
-		/// <param name="includes">params Expression<Func<IProduct, object>>[]</param>
-        /// <returns>IList<IProduct></returns>
-		public virtual IList<IProduct> SearchByUnitAmount(string unitAmount, bool cache, bool caseSensitive = false, params Expression<Func<IProduct, object>>[] includes)
-		{		
-			var expr = this.Convert(includes);
-			if(caseSensitive) 
-			{
-				return this.UnitOfWork.AllMatching<Product>(o => o.UnitAmount.Contains(unitAmount), cache, expr).ToList<IProduct>();
-			}
-			else
-			{
-				return this.UnitOfWork.AllMatching<Product>(o => o.UnitAmount.ToLower().Contains(unitAmount.ToLower()), cache, expr).ToList<IProduct>();
-			}
-		}
-		
-        /// <summary>
-        /// Search for Product entities async in the database by UnitAmount
-        /// </summary>
-        /// <param name="unitAmount">string</param>
-		/// <param name="caseSensitive">bool</param>
-		/// <param name="includes">params Expression<Func<IProduct, object>>[]</param>
-        /// <returns>IList<IProduct></returns>
-		public virtual async Task<IList<IProduct>> SearchByUnitAmountAsync(string unitAmount, bool cache, bool caseSensitive = false, params Expression<Func<IProduct, object>>[] includes)
-		{		
-			var expr = this.Convert(includes);
-			if(caseSensitive) 
-			{
-				var result = await this.UnitOfWork.AllMatchingAsync<Product>(o => o.UnitAmount.Contains(unitAmount), cache, expr);
-				return result.ToList<IProduct>();
-			}
-			else
-			{
-				var result = await this.UnitOfWork.AllMatchingAsync<Product>(o => o.UnitAmount.ToLower().Contains(unitAmount.ToLower()), cache, expr);
-				return result.ToList<IProduct>();
-			}
-		}
-
-        /// <summary>
-        /// Search for Product entities in the database by Publisher
-        /// </summary>
-        /// <param name="publisher">string</param>
-		/// <param name="caseSensitive">bool</param>
-		/// <param name="includes">params Expression<Func<IProduct, object>>[]</param>
-        /// <returns>IList<IProduct></returns>
-		public virtual IList<IProduct> SearchByPublisher(string publisher, bool cache, bool caseSensitive = false, params Expression<Func<IProduct, object>>[] includes)
-		{		
-			var expr = this.Convert(includes);
-			if(caseSensitive) 
-			{
-				return this.UnitOfWork.AllMatching<Product>(o => o.Publisher.Contains(publisher), cache, expr).ToList<IProduct>();
-			}
-			else
-			{
-				return this.UnitOfWork.AllMatching<Product>(o => o.Publisher.ToLower().Contains(publisher.ToLower()), cache, expr).ToList<IProduct>();
-			}
-		}
-		
-        /// <summary>
-        /// Search for Product entities async in the database by Publisher
-        /// </summary>
-        /// <param name="publisher">string</param>
-		/// <param name="caseSensitive">bool</param>
-		/// <param name="includes">params Expression<Func<IProduct, object>>[]</param>
-        /// <returns>IList<IProduct></returns>
-		public virtual async Task<IList<IProduct>> SearchByPublisherAsync(string publisher, bool cache, bool caseSensitive = false, params Expression<Func<IProduct, object>>[] includes)
-		{		
-			var expr = this.Convert(includes);
-			if(caseSensitive) 
-			{
-				var result = await this.UnitOfWork.AllMatchingAsync<Product>(o => o.Publisher.Contains(publisher), cache, expr);
-				return result.ToList<IProduct>();
-			}
-			else
-			{
-				var result = await this.UnitOfWork.AllMatchingAsync<Product>(o => o.Publisher.ToLower().Contains(publisher.ToLower()), cache, expr);
-				return result.ToList<IProduct>();
-			}
-		}
-
 		#endregion
 		
 		#region Modifiers
@@ -299,8 +218,6 @@ namespace RepositoryEFDotnet.Data.Repository
 			entity.ProductId = entityToSave.ProductId;
 			entity.ProductDescription = entityToSave.ProductDescription;
 			entity.UnitPrice = entityToSave.UnitPrice;
-			entity.UnitAmount = entityToSave.UnitAmount;
-			entity.Publisher = entityToSave.Publisher;
 			entity.AmountInStock = entityToSave.AmountInStock;
 			
 			return result;
@@ -321,8 +238,6 @@ namespace RepositoryEFDotnet.Data.Repository
 			entity.ProductId = entityToSave.ProductId;
 			entity.ProductDescription = entityToSave.ProductDescription;
 			entity.UnitPrice = entityToSave.UnitPrice;
-			entity.UnitAmount = entityToSave.UnitAmount;
-			entity.Publisher = entityToSave.Publisher;
 			entity.AmountInStock = entityToSave.AmountInStock;
 			
 			return result;

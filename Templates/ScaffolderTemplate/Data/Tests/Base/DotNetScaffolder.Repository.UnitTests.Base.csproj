@@ -51,29 +51,29 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Core\RepositoryEFDotnet.Core.csproj">
+    <ProjectReference Include="..\..\..\Core\DotNetScaffolder.Domain.Core.csproj">
       <Project>{0333e000-6aaf-4e18-8747-2299a8231ab1}</Project>
-      <Name>RepositoryEFDotnet.Core</Name>
+      <Name>DotNetScaffolder.Domain.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Data\Dtos\Dto\RepositoryEFDotnet.Data.Dtos.Dto.csproj">
+    <ProjectReference Include="..\..\Dtos\Dto\DotNetScaffolder.Domain.Data.Dtos.DefaultDto.csproj">
       <Project>{61d46a6e-4e3a-4d37-9169-aed9b277d33b}</Project>
-      <Name>RepositoryEFDotnet.Data.Dtos.Dto</Name>
+      <Name>DotNetScaffolder.Domain.Data.Dtos.DefaultDto</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\Data\Entities\Entity\RepositoryEFDotnet.Data.Entities.Entity.csproj">
       <Project>{017da2af-1ffd-4e68-9646-b0e5c73ea037}</Project>
       <Name>RepositoryEFDotnet.Data.Entities.Entity</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Data\Interfaces\Interface\RepositoryEFDotnet.Data.Interface.ModelInterfaces.csproj">
+    <ProjectReference Include="..\..\Interfaces\Interface\DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.csproj">
       <Project>{f49f5825-6f92-4b8d-ae30-59d43235974b}</Project>
-      <Name>RepositoryEFDotnet.Data.Interface.ModelInterfaces</Name>
+      <Name>DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Data\Interfaces\RepositoryInterfaces\RepositoryEFDotnet.Data.Interface.RepositoryInterfaces.csproj">
+    <ProjectReference Include="..\..\Interfaces\RepositoryInterfaces\DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces.csproj">
       <Project>{69bf017d-9632-4bca-859b-5d24a2c4b79a}</Project>
-      <Name>RepositoryEFDotnet.Data.Interface.RepositoryInterfaces</Name>
+      <Name>DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Data\Repositories\Repository\RepositoryEFDotnet.Data.Repositories.Repository.csproj">
+    <ProjectReference Include="..\..\Repositories\Repository\DotNetScaffolder.Domain.Data.Repositories.Repository.csproj">
       <Project>{dab86ae4-f8e1-4d5e-baf2-855d24d7a437}</Project>
-      <Name>RepositoryEFDotnet.Data.Repositories.Repository</Name>
+      <Name>DotNetScaffolder.Domain.Data.Repositories.Repository</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

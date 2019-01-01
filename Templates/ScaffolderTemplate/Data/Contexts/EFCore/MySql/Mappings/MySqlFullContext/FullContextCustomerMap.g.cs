@@ -1,6 +1,6 @@
 ﻿
 // <copyright file="CustomerMap.g.cs" company="MIT">
-//  Copyright (c) 2018 MIT
+//  Copyright (c) 2019 MIT
 // </copyright>  
 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
@@ -22,10 +22,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System.Configuration;
 using System.ComponentModel.DataAnnotations.Schema;
-using RepositoryEFDotnet.Data.Entity;
+using DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity;
 using System.Data.Common;
 
-namespace RepositoryEFDotnet.Data.Context.Mappings.EFCore.MySql
+namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.MySql.Mappings.MySqlFullContext
 {
 	public partial class FullContextCustomerMap : IEntityTypeConfiguration<Customer>
 	{	

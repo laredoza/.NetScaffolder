@@ -1,0 +1,144 @@
+﻿<#+
+    public class WebApiTemplateCustom : BaseTemplate 
+    {
+        public WebApiServiceDataType DataType { get; set; }
+        public string DtoInterfaceNamespace { get; set; }
+        public WebApiServiceData CurrentWebApiServiceData{ get; set; }
+        public ApplicationServiceDataType ApplicationServiceDataType{get;set;}
+        public DtoInterfaceDataType DtoInterfaceDataType {get;set;}
+
+        public override string TransformText()
+        {
+            // Debugger.Break();
+            Header = new CopyrightHeader();
+            //Header.Filename = DataType.RepoName;
+#>
+
+<#=            Header.TransformText() #>
+
+// *******************************************************************
+//	GENERATED CODE. DOT NOT MODIFY MANUALLY AS CHANGES CAN BE LOST!!!
+//	USE A PARTIAL CLASS INSTEAD
+// *******************************************************************
+
+using System;
+using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
+
+<#+            foreach(var applicationServiceData in CurrentWebApiServiceData.Models){ #>
+using <#= applicationServiceData.TransformFullnamespaceInterface(ApplicationServiceDataType.BaseNamespace) #>;
+<#+                } #>
+using <#=             DtoInterfaceDataType.FullNamespace#>;
+<#+            foreach(var nameSpace in DataType.AdditionalNamespaces){ #>
+using <#=                nameSpace #>;
+<#+            } #>
+
+namespace <#= CurrentWebApiServiceData.TransformFullnamespace(DataType.BaseNamespace) #>
+{
+    /// <summary>
+	/// The <#= CurrentWebApiServiceData.WebApiName #> Controller
+	/// </summary>
+	public partial class <#= CurrentWebApiServiceData.WebApiName #>Controller 
+	{
+
+        /// <summary>
+        /// Configure Includes
+        /// </summary>
+	    public void ConfigureIncludes()
+	    {
+	        //this.LoadByProductProductIdAsyncIncludes = new Expression<Func<IProduct, object>>[]
+	        //{
+	        //    a => a.OrderDetails
+	        //};
+	    }
+
+        #region Configure Load
+<#+  foreach(var applicationServiceData in CurrentWebApiServiceData.Models){ #>
+<#+            foreach(var model in applicationServiceData.Models){ #>
+<#+ 
+string modelName = DataType.NamingConvention == null ? model.TableName : DataType.NamingConvention.ApplyNamingConvention(model.TableName);
+if(model.PrimaryKeyCount > 1){ #>
+
+        /// <summary>
+        /// Gets Load<#= modelName #>Includes
+        /// </summary
+        public Expression<Func<I<#= modelName #>, object>>[] Load<#= modelName #>Includes
+        {
+            get
+            {
+                return new Expression<Func<I<#= modelName #>, object>>[]{};
+            }
+        }
+
+        /// <summary>
+        /// Gets LoadAsync<#= modelName #>Includes
+        /// </summary
+        public Expression<Func<I<#= modelName #>, object>>[] LoadAsync<#= modelName #>Includes
+        {
+            get
+            {
+                return new Expression<Func<I<#= modelName #>, object>>[]{};
+            }
+        }
+
+<#+ } #>
+
+<#+ if(model.PrimaryKeyCount == 1){ var col = model.Columns.First(o => o.IsPrimaryKey);#>
+
+        /// <summary>
+        /// Gets LoadBy<#= modelName #><#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>Includes
+        /// </summary
+        public Expression<Func<I<#= modelName #>, object>>[] LoadBy<#= modelName #><#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>Includes { get; set; }
+
+        /// <summary>
+        /// Gets LoadBy<#= modelName #><#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>AsyncIncludes
+        /// </summary
+        public Expression<Func<I<#= modelName #>, object>>[] LoadBy<#= modelName #><#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>AsyncIncludes { get; set; }
+<#+ } #>
+
+        /// <summary>
+        /// Gets <#= modelName #>LoadAllIncludes
+        /// </summary
+        public Expression<Func<I<#= modelName #>, object>>[] <#= modelName #>LoadAllIncludes { get; set; }
+
+        /// <summary>
+        /// Gets <#= modelName #>LoadAllAsyncIncludes
+        /// </summary
+        public Expression<Func<I<#= modelName #>, object>>[] <#= modelName #>LoadAllAsyncIncludes { get; set; }
+<#+            } #>
+<#+ } #>
+
+        #endregion
+
+        #region Configure Search
+        <#+  foreach(var applicationServiceData in CurrentWebApiServiceData.Models){ #>
+<#+            foreach(var model in applicationServiceData.Models){ #>
+<#+ 
+string modelName = DataType.NamingConvention == null ? model.TableName : DataType.NamingConvention.ApplyNamingConvention(model.TableName);
+#>
+<#+                foreach(var col in model.Columns.Where(o => !o.IsPrimaryKey && o.DomainDataType == DomainDataType.String)){  #>
+
+        /// <summary>
+        /// Gets <#= modelName #>SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>Includes
+        /// </summary
+        public Expression<Func<I<#= modelName #>, object>>[] <#= modelName #>SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>Includes { get; set; }
+
+        /// <summary>
+        /// Gets <#= modelName #>SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>IncludesAsync
+        /// </summary
+        public Expression<Func<I<#= modelName #>, object>>[] <#= modelName #>SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>IncludesAsync { get; set; }
+
+<#+ }  #>
+<#+            } #>
+<#+ } #>
+		#endregion
+    }
+}
+
+<#+
+            return this.GenerationEnvironment.ToString();
+	}
+            }
+#>

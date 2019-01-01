@@ -1,6 +1,6 @@
 ﻿
 // <copyright file="ProductDto.g.cs" company="MIT">
-//  Copyright (c) 2018 MIT
+//  Copyright (c) 2019 MIT
 // </copyright>  
 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
@@ -20,9 +20,9 @@
 
 using System;
 using System.Collections.Generic;
-using RepositoryEFDotnet.Data.Interfaces;
+using DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.Dto;
 
-namespace RepositoryEFDotnet.Data.Dto
+namespace DotNetScaffolder.Domain.Data.DefaultDto.Dto
 {
 	public partial class ProductDto : IProduct 
 	{
@@ -40,8 +40,6 @@ namespace RepositoryEFDotnet.Data.Dto
 			this.ProductId = item.ProductId;
 			this.ProductDescription = item.ProductDescription;
 			this.UnitPrice = item.UnitPrice;
-			this.UnitAmount = item.UnitAmount;
-			this.Publisher = item.Publisher;
 			this.AmountInStock = item.AmountInStock;
 			this.OrderDetails = new List <IOrderDetails>();
 
@@ -54,6 +52,8 @@ namespace RepositoryEFDotnet.Data.Dto
 						this.OrderDetails.Add(new OrderDetailsDto(childItem, deep));
 					}
 				}
+				this.Book = new BookDto(item.Book, deep);
+				this.Software = new SoftwareDto(item.Software, deep);
 			}
 		}
 		
@@ -64,8 +64,6 @@ namespace RepositoryEFDotnet.Data.Dto
 		public int ProductId { get; set; }
 		public string ProductDescription { get; set; }
 		public Nullable<decimal> UnitPrice { get; set; }
-		public string UnitAmount { get; set; }
-		public string Publisher { get; set; }
 		public Nullable<short> AmountInStock { get; set; }
 
 		#endregion
@@ -73,6 +71,8 @@ namespace RepositoryEFDotnet.Data.Dto
 		#region Child Relationships
 		
 		public IList<IOrderDetails> OrderDetails { get; set; }
+		public IBook Book { get; set; }
+		public ISoftware Software { get; set; }
 
 		#endregion
 		

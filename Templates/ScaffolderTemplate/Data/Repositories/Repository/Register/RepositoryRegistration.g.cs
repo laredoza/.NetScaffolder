@@ -1,6 +1,6 @@
 ﻿
 // <copyright file="RepositoryRegistration.g.cs" company="MIT">
-//  Copyright (c) 2018 MIT
+//  Copyright (c) 2019 MIT
 // </copyright>  
 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
@@ -17,13 +17,14 @@
 //	GENERATED CODE. DOT NOT MODIFY MANUALLY AS CHANGES CAN BE LOST!!!
 //	USE A PARTIAL CLASS INSTEAD
 // *******************************************************************
-using RepositoryEFDotnet.Core.Base;
-using RepositoryEFDotnet.Data.Interfaces;
+using DotNetScaffolder.Domain.Core;
+using DotNetScaffolder.Domain.Core.Interfaces;
+using DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces;
 using System;
 using System.Collections.Generic;
 using StructureMap.Pipeline;
 
-namespace RepositoryEFDotnet.Data.Repository.Register
+namespace DotNetScaffolder.Domain.Data.Repositories.Repository.Register
 {
 	public class RepositoryRegistration : StructureMap.Registry
 	{			

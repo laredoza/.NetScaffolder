@@ -1,6 +1,6 @@
 ﻿
 // <copyright file="Software.g.cs" company="MIT">
-//  Copyright (c) 2018 MIT
+//  Copyright (c) 2019 MIT
 // </copyright>  
 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
@@ -21,7 +21,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace RepositoryEFDotnet.Data.Interfaces
+namespace DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.Dto
 {
 	public partial interface ISoftware  
 	{
@@ -39,6 +39,7 @@ namespace RepositoryEFDotnet.Data.Interfaces
 		
 		#region Parent Relationships
 		
+		IProduct Product { get; set; }
 		
 		#endregion
 	}

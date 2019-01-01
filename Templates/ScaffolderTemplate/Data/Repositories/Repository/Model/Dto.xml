@@ -4,9 +4,9 @@
   <AddInjectConstructor>true</AddInjectConstructor>
   <UseGenerics>false</UseGenerics>
   <InheritFrom />
-  <Namespace>Dto</Namespace>
+  <Namespace>Data.DefaultDto.Dto</Namespace>
   <OutputFolder>Dto</OutputFolder>
-  <OutputPath>..\..\Dtos\Dto\RepositoryEFDotnet.Data.Dtos.Dto.csproj</OutputPath>
+  <OutputPath>..\..\Dtos\Dto\DotNetScaffolder.Domain.Data.Dtos.DefaultDto.csproj</OutputPath>
   <PostFix>Dto</PostFix>
   <UseInterface>true</UseInterface>
 </DtoDataType>

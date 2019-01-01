@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NHibernate.Caches.CoreDistributedCache.Redis" Version="5.4.0" />
+    <PackageReference Include="NHibernate.Caches.CoreMemoryCache" Version="5.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Base\DotNetScaffolder.Domain.Data.Contexts.NHib.Base.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="DotNetScaffolder.Domain.Data.Entities.DefaultEntity">
+      <HintPath>..\..\EFCore\Seed\bin\Debug\netstandard2.0\DotNetScaffolder.Domain.Data.Entities.DefaultEntity.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

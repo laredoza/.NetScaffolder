@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Interface\DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.csproj" />
+    <ProjectReference Include="..\RepositoryInterfaces\DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces.csproj" />
+  </ItemGroup>
+
+</Project>

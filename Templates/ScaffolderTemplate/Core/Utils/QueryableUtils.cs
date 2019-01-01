@@ -7,13 +7,13 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace RepositoryEFDotnet.Core.Utils
-{
-    using System;
-    using System.Linq;
-    using System.Linq.Expressions;
-    using System.Reflection;
+using System;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Reflection;
 
+namespace DotNetScaffolder.Domain.Core.Utils
+{
     /// <summary>
     ///     The queryable utils.
     /// </summary>

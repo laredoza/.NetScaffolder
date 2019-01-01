@@ -1,6 +1,6 @@
 ﻿
 // <copyright file="Customer.g.cs" company="MIT">
-//  Copyright (c) 2018 MIT
+//  Copyright (c) 2019 MIT
 // </copyright>  
 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
@@ -20,9 +20,9 @@
 
 using System;
 using System.Collections.Generic;
-using RepositoryEFDotnet.Data.Interfaces;
+using DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.Dto;
 
-namespace RepositoryEFDotnet.Data.Entity
+namespace DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity
 {
 	public partial class Customer : ICustomer 
 	{
@@ -105,7 +105,7 @@ namespace RepositoryEFDotnet.Data.Entity
 		{ 
 			get
 			{
-				return this.BankAccount == null ? null : (IList<IBankAccount>)this.BankAccount;
+				return this.BankAccount == null ? null : this.BankAccount as IList<IBankAccount>;
 			}
 			set
 			{
@@ -129,7 +129,7 @@ namespace RepositoryEFDotnet.Data.Entity
 		{ 
 			get
 			{
-				return this.Order == null ? null : (IList<IOrder>)this.Order;
+				return this.Order == null ? null : this.Order as IList<IOrder>;
 			}
 			set
 			{

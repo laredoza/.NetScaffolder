@@ -1,6 +1,6 @@
 ﻿
 // <copyright file="BookMap.g.cs" company="MIT">
-//  Copyright (c) 2018 MIT
+//  Copyright (c) 2019 MIT
 // </copyright>  
 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
@@ -23,10 +23,10 @@ using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration;
 using System.Data.Entity.Infrastructure.Annotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using RepositoryEFDotnet.Data.Entity;
+using DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity;
 using System.Data.Common;
 
-namespace RepositoryEFDotnet.Data.Context.Mappings.EF.Postgres
+namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.Postgres.Mappings.PostgresFullContext
 {
 	public partial class FullContextBookMap : EntityTypeConfiguration<Book>
 	{	
@@ -60,6 +60,7 @@ namespace RepositoryEFDotnet.Data.Context.Mappings.EF.Postgres
 
 			#region Relationships
 			
+			HasRequired<Product>(s => s.Product).WithOptional(s => s.Book).WillCascadeOnDelete(false);
 			
 			#endregion			
 

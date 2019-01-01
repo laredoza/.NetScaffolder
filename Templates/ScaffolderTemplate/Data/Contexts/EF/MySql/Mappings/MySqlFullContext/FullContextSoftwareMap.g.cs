@@ -1,6 +1,6 @@
 ﻿
 // <copyright file="SoftwareMap.g.cs" company="MIT">
-//  Copyright (c) 2018 MIT
+//  Copyright (c) 2019 MIT
 // </copyright>  
 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
@@ -23,10 +23,10 @@ using System.Data.Entity.ModelConfiguration;
 using System.Data.Entity.Infrastructure.Annotations;
 using MySql.Data.EntityFramework;
 using System.ComponentModel.DataAnnotations.Schema;
-using RepositoryEFDotnet.Data.Entity;
+using DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity;
 using System.Data.Common;
 
-namespace RepositoryEFDotnet.Data.Context.Mappings.EF.MySql
+namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.MySql.Mappings.MySqlFullContext
 {
 	public partial class FullContextSoftwareMap : EntityTypeConfiguration<Software>
 	{	
@@ -60,6 +60,7 @@ namespace RepositoryEFDotnet.Data.Context.Mappings.EF.MySql
 
 			#region Relationships
 			
+			HasRequired<Product>(s => s.Product).WithOptional(s => s.Software).WillCascadeOnDelete(false);
 			
 			#endregion			
 

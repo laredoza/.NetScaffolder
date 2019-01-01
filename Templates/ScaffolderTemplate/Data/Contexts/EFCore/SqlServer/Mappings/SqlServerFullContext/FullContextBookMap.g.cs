@@ -1,6 +1,6 @@
 ﻿
 // <copyright file="BookMap.g.cs" company="MIT">
-//  Copyright (c) 2018 MIT
+//  Copyright (c) 2019 MIT
 // </copyright>  
 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
@@ -23,16 +23,16 @@ using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System.Configuration;
 using System.ComponentModel.DataAnnotations.Schema;
-using RepositoryEFDotnet.Data.Entity;
+using DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity;
 using System.Data.Common;
 
-namespace RepositoryEFDotnet.Data.Context.Mappings.EFCore.SqlServer
+namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.SqlServer.Mappings.SqlServerFullContext
 {
 	public partial class FullContextBookMap : IEntityTypeConfiguration<Book>
 	{	
 	    public virtual void Configure(EntityTypeBuilder<Book> builder)
 	    {
-			builder.ToTable("[Book]", "[dbo]");
+			builder.ToTable("Book", "dbo");
 			
 			#region Primary keys
 			
@@ -55,6 +55,7 @@ namespace RepositoryEFDotnet.Data.Context.Mappings.EFCore.SqlServer
 			
 			#region Relationships
 			
+			builder.HasOne<Product>(s => s.Product).WithOne(s => s.Book).OnDelete(DeleteBehavior.Restrict);
 			
 			#endregion	
 

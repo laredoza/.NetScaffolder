@@ -1,6 +1,6 @@
 ﻿
 // <copyright file="FullContext.g.cs" company="MIT">
-//  Copyright (c) 2018 MIT
+//  Copyright (c) 2019 MIT
 // </copyright>  
 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
@@ -18,16 +18,18 @@
 //	USE A PARTIAL CLASS INSTEAD
 // *******************************************************************
 
+
 using System.Data;
 using NHibernate;
 using NHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using FluentNHibernate.Cfg;
-using RepositoryEFDotnet.Contexts.NHib.Base.Context;
-using RepositoryEFDotnet.Core.Base;
-using RepositoryEFDotnet.Data.Context.Mappings.NHib.Oracle;
+using DotNetScaffolder.Domain.Core;
+using DotNetScaffolder.Domain.Data.Contexts.NHib.Base.Context;
+using DotNetScaffolder.Domain.Core.Interfaces;
+using DotNetScaffolder.Domain.Data.Contexts.EFCore.Oracle.Mappings.OracleFullContext;
 
-namespace RepositoryEFDotnet.Data.Context.NHib
+namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.Oracle.Context
 {
 	public partial class OracleFullContext : BaseContext
 	{	

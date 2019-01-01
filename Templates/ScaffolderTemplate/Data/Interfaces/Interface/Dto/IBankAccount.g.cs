@@ -1,6 +1,6 @@
 ﻿
 // <copyright file="BankAccount.g.cs" company="MIT">
-//  Copyright (c) 2018 MIT
+//  Copyright (c) 2019 MIT
 // </copyright>  
 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
@@ -21,7 +21,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace RepositoryEFDotnet.Data.Interfaces
+namespace DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.Dto
 {
 	public partial interface IBankAccount  
 	{
@@ -38,7 +38,6 @@ namespace RepositoryEFDotnet.Data.Interfaces
 		#region Child Relationships
 		
 		IList<IBankTransfers> BankTransfers { get; set; }
-		IList<IBankTransfers> BankTransfers1 { get; set; }
 
 		#endregion
 		

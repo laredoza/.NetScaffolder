@@ -1,6 +1,6 @@
 ﻿
 // <copyright file="ProductMap.g.cs" company="MIT">
-//  Copyright (c) 2018 MIT
+//  Copyright (c) 2019 MIT
 // </copyright>  
 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
@@ -22,10 +22,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System.Configuration;
 using System.ComponentModel.DataAnnotations.Schema;
-using RepositoryEFDotnet.Data.Entity;
+using DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity;
 using System.Data.Common;
 
-namespace RepositoryEFDotnet.Data.Context.Mappings.EFCore.MySql
+namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.MySql.Mappings.MySqlFullContext
 {
 	public partial class FullContextProductMap : IEntityTypeConfiguration<Product>
 	{	
@@ -47,10 +47,6 @@ namespace RepositoryEFDotnet.Data.Context.Mappings.EFCore.MySql
 			builder.Property(t => t.ProductDescription).HasColumnName("ProductDescription").IsRequired(false);
 			builder.Property(t => t.UnitPrice).HasColumnName("UnitPrice").IsRequired(false);
 			builder.Property(t => t.UnitPrice).HasColumnType("decimal(19, 4)");
-			builder.Property(t => t.UnitAmount).HasMaxLength(50);
-			builder.Property(t => t.UnitAmount).HasColumnName("UnitAmount").IsRequired(false);
-			builder.Property(t => t.Publisher).HasMaxLength(200);
-			builder.Property(t => t.Publisher).HasColumnName("Publisher").IsRequired(false);
 			builder.Property(t => t.AmountInStock).HasColumnName("AmountInStock").IsRequired(false);
 			
 			#endregion
@@ -61,7 +57,9 @@ namespace RepositoryEFDotnet.Data.Context.Mappings.EFCore.MySql
 			
 			#region Relationships
 			
+			builder.HasOne<Book>(s => s.Book).WithOne(s => s.Product).HasForeignKey<Book>(s => s.ProductId).OnDelete(DeleteBehavior.Restrict);
 			builder.HasMany<OrderDetails>(s => s.OrderDetails).WithOne(s => s.Product).HasForeignKey(s => s.ProductId).OnDelete(DeleteBehavior.Restrict);
+			builder.HasOne<Software>(s => s.Software).WithOne(s => s.Product).HasForeignKey<Software>(s => s.ProductId).OnDelete(DeleteBehavior.Restrict);
 			
 			#endregion	
 
@@ -72,9 +70,7 @@ namespace RepositoryEFDotnet.Data.Context.Mappings.EFCore.MySql
 			//TODO: builder.Property(t => t.ProductId).HasColumnOrder(1);
 			//TODO: builder.Property(t => t.ProductDescription).HasColumnOrder(2);
 			//TODO: builder.Property(t => t.UnitPrice).HasColumnOrder(3);
-			//TODO: builder.Property(t => t.UnitAmount).HasColumnOrder(4);
-			//TODO: builder.Property(t => t.Publisher).HasColumnOrder(5);
-			//TODO: builder.Property(t => t.AmountInStock).HasColumnOrder(6);
+			//TODO: builder.Property(t => t.AmountInStock).HasColumnOrder(4);
 
 			#endregion	
 	    }

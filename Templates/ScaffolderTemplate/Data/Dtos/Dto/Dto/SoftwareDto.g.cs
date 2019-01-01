@@ -1,6 +1,6 @@
 ﻿
 // <copyright file="SoftwareDto.g.cs" company="MIT">
-//  Copyright (c) 2018 MIT
+//  Copyright (c) 2019 MIT
 // </copyright>  
 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
@@ -20,9 +20,9 @@
 
 using System;
 using System.Collections.Generic;
-using RepositoryEFDotnet.Data.Interfaces;
+using DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.Dto;
 
-namespace RepositoryEFDotnet.Data.Dto
+namespace DotNetScaffolder.Domain.Data.DefaultDto.Dto
 {
 	public partial class SoftwareDto : ISoftware 
 	{
@@ -41,6 +41,10 @@ namespace RepositoryEFDotnet.Data.Dto
 
 			if(deep)
 			{
+                if(item.Product != null)
+                {
+				    this.Product = new ProductDto(item.Product, deep);
+                }
 			}
 		}
 		
@@ -60,6 +64,7 @@ namespace RepositoryEFDotnet.Data.Dto
 		
 		#region Parent Relationships
 		
+		public IProduct Product { get; set; }
 		
 		#endregion
 	}

@@ -1,6 +1,6 @@
 ﻿
 // <copyright file="BankTransfersMap.g.cs" company="MIT">
-//  Copyright (c) 2018 MIT
+//  Copyright (c) 2019 MIT
 // </copyright>  
 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
@@ -24,10 +24,10 @@ using System.Data.Entity.Infrastructure.Annotations;
 using Oracle.ManagedDataAccess.Client;
 using Oracle.Config;
 using System.ComponentModel.DataAnnotations.Schema;
-using RepositoryEFDotnet.Data.Entity;
+using DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity;
 using System.Data.Common;
 
-namespace RepositoryEFDotnet.Data.Context.Mappings.EF.Oracle
+namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.Oracle.Mappings.OracleFullContext
 {
 	public partial class FullContextBankTransfersMap : EntityTypeConfiguration<BankTransfers>
 	{	
@@ -55,20 +55,17 @@ namespace RepositoryEFDotnet.Data.Context.Mappings.EF.Oracle
 			Property(t => t.Amount).IsRequired();
 			Property(t => t.Amount).HasPrecision(18, 2);
 			Property(t => t.TransferDate).IsRequired();
-			Property(t => t.BankAccountId).IsOptional();
 			
 			#endregion
 			
 			#region Indexes
 			Property(t => t.BankTransferId).HasColumnAnnotation("UQ__BankTran__2E82727AB11DB584", new IndexAnnotation(new [] { new IndexAttribute("UQ__BankTran__2E82727AB11DB584"){ IsClustered = false, IsUnique = true, Order = 0}}));
 			Property(t => t.ToBankAccountId).HasColumnAnnotation("IX_ToBankAccountId", new IndexAnnotation(new [] { new IndexAttribute("IX_ToBankAccountId"){ IsClustered = false, IsUnique = false, Order = 0}}));
-			Property(t => t.BankAccountId).HasColumnAnnotation("UQ__BankTran__4FC8E4A0CE69E10D", new IndexAnnotation(new [] { new IndexAttribute("UQ__BankTran__4FC8E4A0CE69E10D"){ IsClustered = false, IsUnique = true, Order = 0}}));
 			#endregion
 
 			#region Relationships
 			
 			HasRequired<BankAccount>(s => s.BankAccount).WithMany(s => s.BankTransfers).HasForeignKey(s => s.ToBankAccountId).WillCascadeOnDelete(false);
-			HasOptional<BankAccount>(s => s.BankAccount1).WithMany(s => s.BankTransfers1).HasForeignKey(s => s.BankAccountId).WillCascadeOnDelete(false);
 			
 			#endregion			
 
@@ -79,7 +76,6 @@ namespace RepositoryEFDotnet.Data.Context.Mappings.EF.Oracle
 			Property(t => t.ToBankAccountId).HasColumnOrder(3);
 			Property(t => t.Amount).HasColumnOrder(4);
 			Property(t => t.TransferDate).HasColumnOrder(5);
-			Property(t => t.BankAccountId).HasColumnOrder(6);
 
 			#endregion
 	

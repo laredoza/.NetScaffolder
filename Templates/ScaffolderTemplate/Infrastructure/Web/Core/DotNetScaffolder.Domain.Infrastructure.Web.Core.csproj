@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" Version="2.2.0" />
+    <PackageReference Include="StructureMap" Version="4.7.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Core\DotNetScaffolder.Domain.Core.csproj" />
+    <ProjectReference Include="..\..\..\Data\Contexts\EFCore\SqlServer\DotNetScaffolder.Domain.Data.Contexts.EFCore.SqlServer.csproj" />
+  </ItemGroup>
+
+</Project>

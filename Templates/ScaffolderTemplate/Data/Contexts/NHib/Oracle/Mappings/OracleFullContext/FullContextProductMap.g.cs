@@ -1,6 +1,6 @@
 ﻿
 // <copyright file="ProductMap.g.cs" company="MIT">
-//  Copyright (c) 2018 MIT
+//  Copyright (c) 2019 MIT
 // </copyright>  
 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
@@ -21,11 +21,12 @@ using NHibernate;
 using NHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using FluentNHibernate.Cfg;
-using RepositoryEFDotnet.Data.Entity;
+using DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity;
 using System.Data.Common;
 using FluentNHibernate.Mapping;
 
-namespace RepositoryEFDotnet.Data.Context.Mappings.NHib.Oracle
+
+namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.Oracle.Mappings.OracleFullContext
 {
 	public partial class FullContextProductMap : ClassMap<Product>
 	{	
@@ -54,12 +55,6 @@ namespace RepositoryEFDotnet.Data.Context.Mappings.NHib.Oracle
 			Map(t => t.UnitPrice).Column("UnitPrice")
 			.Precision(19).Scale(4)
 			.Nullable();
-			Map(t => t.UnitAmount).Column("UnitAmount")
-			.Length(50)
-			.Nullable();
-			Map(t => t.Publisher).Column("Publisher")
-			.Length(200)
-			.Nullable();
 			Map(t => t.AmountInStock).Column("AmountInStock")
 			.Nullable();
 			
@@ -67,7 +62,9 @@ namespace RepositoryEFDotnet.Data.Context.Mappings.NHib.Oracle
 			
 			#region Relationships
 			
+			HasOne(s => s.Book).PropertyRef(o => o.Product);
 			HasMany(s => s.OrderDetails).KeyColumn("ProductId");
+			HasOne(s => s.Software).PropertyRef(o => o.Product);
 			
 			#endregion			
 

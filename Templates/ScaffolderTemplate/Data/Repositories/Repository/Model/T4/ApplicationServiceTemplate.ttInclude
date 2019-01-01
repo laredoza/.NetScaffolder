@@ -5,7 +5,9 @@ public class ApplicationServiceTemplate : BaseTemplate
         public string DtoInterfaceNamespace { get; set; }
         public ApplicationServiceData CurrentApplicationData{ get; set; }
         public DtoInterfaceDataType DtoInterfaceDataType{get;set;}
-	
+	    public string RepositoryInterfaceNamespace { get; set; }
+        public string ApplicationInterfaceNamespace { get; set; }
+
 	public override string TransformText()
 	{
 		// Debugger.Break();
@@ -25,6 +27,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using <#= RepositoryInterfaceNamespace #>;
+using <#= ApplicationInterfaceNamespace #>;
 using <#=             DtoInterfaceDataType.FullNamespace#>;
 <#+            foreach(var nameSpace in DataType.AdditionalNamespaces){ #>
 using <#=                nameSpace #>;

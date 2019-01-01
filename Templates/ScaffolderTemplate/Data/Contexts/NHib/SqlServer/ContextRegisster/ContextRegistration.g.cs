@@ -1,6 +1,6 @@
 ﻿
 // <copyright file="ContextRegistration.g.cs" company="MIT">
-//  Copyright (c) 2018 MIT
+//  Copyright (c) 2019 MIT
 // </copyright>  
 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
@@ -21,11 +21,11 @@
 using System;
 using System.Collections.Generic;
 using StructureMap.Pipeline;
-using RepositoryEFDotnet.Core.Base;
-using RepositoryEFDotnet.Data.Context.NHib.SqlServer.Database;
-//using RepositoryEFDotnet.Data.Interfaces;
+using DotNetScaffolder.Domain.Core.Interfaces;
+using DotNetScaffolder.Domain.Data.Contexts.EFCore.SqlServer.Database;
+//using DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.Dto;
  
-namespace RepositoryEFDotnet.Data.Context.NHib.ContextRegistration
+namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.SqlServer.ContextRegistration
 {
 	public class ContextRegistration : StructureMap.Registry
 	{			

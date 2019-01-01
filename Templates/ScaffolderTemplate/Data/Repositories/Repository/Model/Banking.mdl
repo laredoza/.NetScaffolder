@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ProjectDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <BaseNameSpace>RepositoryEFDotnet.Data</BaseNameSpace>
+  <BaseNameSpace>DotNetScaffolder.Domain</BaseNameSpace>
   <Domains>
     <DomainDefinition>
       <CollectionOptionId>0bc1b0c4-1e41-9146-82cf-599181ce4411</CollectionOptionId>
@@ -10,6 +10,7 @@
         <guid>2ed41f2a-84c9-7a41-8524-07557f37a5c1</guid>
         <guid>2bc1b0c4-1e41-9146-82cf-599181ce4410</guid>
         <guid>8a1103c5-7557-4449-825f-299cf9749ad2</guid>
+        <guid>8a1103c5-8557-4449-825f-299cf9749ad2</guid>
         <guid>2bc1b0c4-1e41-9146-82cf-599181ce4417</guid>
         <guid>27d66d81-8f2d-481a-8547-c1e5b5444569</guid>
         <guid>04be92c9-f4ce-4b33-95a2-af4cd5ccfb71</guid>
@@ -31,6 +32,21 @@
             <Children />
             <Enabled>true</Enabled>
             <HierarchyType>Item</HierarchyType>
+            <Id>f41c4006-d9d1-499b-80be-bbbbc4cb0001</Id>
+            <Name>Default Application Service ( C# )</Name>
+            <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
+            <Selected>false</Selected>
+            <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4420</DataType>
+            <DefaultSettings />
+            <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
+            <LanguageOutputId>1bc1b0c4-1e41-9146-82cf-599181ce4410</LanguageOutputId>
+            <TemplatePath>ApplicationService.T4</TemplatePath>
+            <Version>1</Version>
+          </Template>
+          <Template>
+            <Children />
+            <Enabled>true</Enabled>
+            <HierarchyType>Item</HierarchyType>
             <Id>99d48be6-6570-465d-bc29-0793ea47233f</Id>
             <Name>Default Context ( C# )</Name>
             <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
@@ -46,75 +62,15 @@
             <Children />
             <Enabled>true</Enabled>
             <HierarchyType>Item</HierarchyType>
-            <Id>07bc3131-eb4d-490b-8b5f-a68a657ef688</Id>
-            <Name>Default Mapping ( C# )</Name>
+            <Id>a832889d-7f9a-42fa-ad6b-38d184828dba</Id>
+            <Name>Default Dto ( C# )</Name>
             <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
             <Selected>false</Selected>
-            <DataType>361ac82c-8f2a-4d7c-b455-ae5effba9d4a</DataType>
+            <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4490</DataType>
             <DefaultSettings />
             <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
             <LanguageOutputId>1bc1b0c4-1e41-9146-82cf-599181ce4410</LanguageOutputId>
-            <TemplatePath>MappingGenerator.ttInclude</TemplatePath>
-            <Version>1</Version>
-          </Template>
-          <Template>
-            <Children />
-            <Enabled>true</Enabled>
-            <HierarchyType>Item</HierarchyType>
-            <Id>1bc1b0c4-1e41-9146-82cf-599181ce4440</Id>
-            <Name>Default Entity ( C# )</Name>
-            <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
-            <Selected>false</Selected>
-            <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4440</DataType>
-            <DefaultSettings />
-            <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
-            <LanguageOutputId>1bc1b0c4-1e41-9146-82cf-599181ce4410</LanguageOutputId>
-            <TemplatePath>EntityGenerator.ttInclude</TemplatePath>
-            <Version>1</Version>
-          </Template>
-          <Template>
-            <Children />
-            <Enabled>true</Enabled>
-            <HierarchyType>Item</HierarchyType>
-            <Id>bad391c6-e8a8-45f5-b3ec-f5d57d6a6b90</Id>
-            <Name>Default Repository Interface ( C# )</Name>
-            <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
-            <Selected>false</Selected>
-            <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4451</DataType>
-            <DefaultSettings />
-            <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
-            <LanguageOutputId>1bc1b0c4-1e41-9146-82cf-599181ce4410</LanguageOutputId>
-            <TemplatePath>RepoInterfaceGenerator.ttInclude</TemplatePath>
-            <Version>1</Version>
-          </Template>
-          <Template>
-            <Children />
-            <Enabled>true</Enabled>
-            <HierarchyType>Item</HierarchyType>
-            <Id>3ab0816d-5ad5-4990-a655-a14a743e416c</Id>
-            <Name>Default Repository ( C# )</Name>
-            <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
-            <Selected>false</Selected>
-            <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4450</DataType>
-            <DefaultSettings />
-            <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
-            <LanguageOutputId>1bc1b0c4-1e41-9146-82cf-599181ce4410</LanguageOutputId>
-            <TemplatePath>RepositoryGenerator.ttInclude</TemplatePath>
-            <Version>1</Version>
-          </Template>
-          <Template>
-            <Children />
-            <Enabled>true</Enabled>
-            <HierarchyType>Item</HierarchyType>
-            <Id>f41c4006-d9d1-499b-80be-bbbbc4cb0001</Id>
-            <Name>Default Application Service ( C# )</Name>
-            <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
-            <Selected>false</Selected>
-            <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4420</DataType>
-            <DefaultSettings />
-            <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
-            <LanguageOutputId>1bc1b0c4-1e41-9146-82cf-599181ce4410</LanguageOutputId>
-            <TemplatePath>ApplicationService.T4</TemplatePath>
+            <TemplatePath>DtoGenerator.ttInclude</TemplatePath>
             <Version>1</Version>
           </Template>
           <Template>
@@ -136,15 +92,60 @@
             <Children />
             <Enabled>true</Enabled>
             <HierarchyType>Item</HierarchyType>
-            <Id>a832889d-7f9a-42fa-ad6b-38d184828dba</Id>
-            <Name>Default Dto ( C# )</Name>
+            <Id>1bc1b0c4-1e41-9146-82cf-599181ce4440</Id>
+            <Name>Default Entity ( C# )</Name>
             <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
             <Selected>false</Selected>
-            <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4490</DataType>
+            <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4440</DataType>
             <DefaultSettings />
             <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
             <LanguageOutputId>1bc1b0c4-1e41-9146-82cf-599181ce4410</LanguageOutputId>
-            <TemplatePath>DtoGenerator.ttInclude</TemplatePath>
+            <TemplatePath>EntityGenerator.ttInclude</TemplatePath>
+            <Version>1</Version>
+          </Template>
+          <Template>
+            <Children />
+            <Enabled>true</Enabled>
+            <HierarchyType>Item</HierarchyType>
+            <Id>07bc3131-eb4d-490b-8b5f-a68a657ef688</Id>
+            <Name>Default Mapping ( C# )</Name>
+            <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
+            <Selected>false</Selected>
+            <DataType>361ac82c-8f2a-4d7c-b455-ae5effba9d4a</DataType>
+            <DefaultSettings />
+            <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
+            <LanguageOutputId>1bc1b0c4-1e41-9146-82cf-599181ce4410</LanguageOutputId>
+            <TemplatePath>MappingGenerator.ttInclude</TemplatePath>
+            <Version>1</Version>
+          </Template>
+          <Template>
+            <Children />
+            <Enabled>true</Enabled>
+            <HierarchyType>Item</HierarchyType>
+            <Id>3ab0816d-5ad5-4990-a655-a14a743e416c</Id>
+            <Name>Default Repository ( C# )</Name>
+            <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
+            <Selected>false</Selected>
+            <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4450</DataType>
+            <DefaultSettings />
+            <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
+            <LanguageOutputId>1bc1b0c4-1e41-9146-82cf-599181ce4410</LanguageOutputId>
+            <TemplatePath>RepositoryGenerator.ttInclude</TemplatePath>
+            <Version>1</Version>
+          </Template>
+          <Template>
+            <Children />
+            <Enabled>true</Enabled>
+            <HierarchyType>Item</HierarchyType>
+            <Id>bad391c6-e8a8-45f5-b3ec-f5d57d6a6b90</Id>
+            <Name>Default Repository Interface ( C# )</Name>
+            <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
+            <Selected>false</Selected>
+            <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4451</DataType>
+            <DefaultSettings />
+            <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
+            <LanguageOutputId>1bc1b0c4-1e41-9146-82cf-599181ce4410</LanguageOutputId>
+            <TemplatePath>RepoInterfaceGenerator.ttInclude</TemplatePath>
             <Version>1</Version>
           </Template>
           <Template>
@@ -177,6 +178,21 @@
             <TemplatePath>BaseUnitTestGenerator.ttInclude</TemplatePath>
             <Version>1</Version>
           </Template>
+          <Template>
+            <Children />
+            <Enabled>true</Enabled>
+            <HierarchyType>Item</HierarchyType>
+            <Id>c034d2c5-d632-4fa6-b7a8-8af5f8c3b7ed</Id>
+            <Name>Default WebApi</Name>
+            <ParentId>00000000-0000-0000-0000-000000000000</ParentId>
+            <Selected>false</Selected>
+            <DataType>1bc1b0c4-1e41-9146-82cf-599181ce4431</DataType>
+            <DefaultSettings />
+            <GeneratorTypeId>1bc1b0c4-1e41-9146-82cf-599181ce4410</GeneratorTypeId>
+            <LanguageOutputId>1bc1b0c4-1e41-9146-82cf-599181ce4410</LanguageOutputId>
+            <TemplatePath>ContextGenerator.ttInclude</TemplatePath>
+            <Version>1</Version>
+          </Template>
         </Templates>
         <Version>1</Version>
       </Package>
@@ -207,9 +223,6 @@
             </RelationShip>
             <RelationShip ColumnName="BankAccountId" RelationShip="ForeignKeyChild" ReferencedColumnName="ToBankAccountId" Render="true" SchemaName="dbo" ReferencedTableName="BankTransfers" Multiplicity="One" ReferencedMultiplicity="Many" UserRelationship="false">
               <RelationshipName>FKE4EEFC1145FD5999</RelationshipName>
-            </RelationShip>
-            <RelationShip ColumnName="BankAccountId" RelationShip="ForeignKeyChild" ReferencedColumnName="BankAccountId" RelationshipAlias="BankTransfers1" Render="true" SchemaName="dbo" ReferencedTableName="BankTransfers" Multiplicity="ZeroToOne" ReferencedMultiplicity="Many" UserRelationship="false">
-              <RelationshipName>FKE4EEFC1182F6322F</RelationshipName>
             </RelationShip>
           </RelationShips>
           <Indexes>
@@ -256,17 +269,11 @@
             <Column ColumnName="TransferDate" ColumnOrder="5" DataType="DateTime" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="0" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
               <RemapDataType xsi:nil="true" />
             </Column>
-            <Column ColumnName="BankAccountId" ColumnOrder="6" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
-              <RemapDataType xsi:nil="true" />
-            </Column>
           </Columns>
           <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
           <RelationShips>
             <RelationShip ColumnName="ToBankAccountId" RelationShip="ForeignKey" ReferencedColumnName="BankAccountId" Render="true" SchemaName="dbo" ReferencedTableName="BankAccount" Multiplicity="Many" ReferencedMultiplicity="One" UserRelationship="false">
               <RelationshipName>FKE4EEFC1145FD5999</RelationshipName>
-            </RelationShip>
-            <RelationShip ColumnName="BankAccountId" RelationShip="ForeignKey" ReferencedColumnName="BankAccountId" RelationshipAlias="BankAccount1" Render="true" SchemaName="dbo" ReferencedTableName="BankAccount" Multiplicity="Many" ReferencedMultiplicity="ZeroToOne" UserRelationship="false">
-              <RelationshipName>FKE4EEFC1182F6322F</RelationshipName>
             </RelationShip>
           </RelationShips>
           <Indexes>
@@ -294,14 +301,6 @@
                 <string>BankTransferId</string>
               </Columns>
             </Index>
-            <Index>
-              <IndexType>NonClustered</IndexType>
-              <IsUnique>true</IsUnique>
-              <Name>UQ__BankTran__4FC8E4A0CE69E10D</Name>
-              <Columns>
-                <string>BankAccountId</string>
-              </Columns>
-            </Index>
           </Indexes>
         </Table>
         <Table Description="" SchemaName="dbo" TableName="Book" EnabledForCodeGeneration="true">
@@ -314,7 +313,11 @@
             </Column>
           </Columns>
           <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
-          <RelationShips />
+          <RelationShips>
+            <RelationShip ColumnName="ProductId" RelationShip="ForeignKey" ReferencedColumnName="ProductId" Render="true" SchemaName="dbo" ReferencedTableName="Product" Multiplicity="ZeroToOne" ReferencedMultiplicity="One" UserRelationship="false">
+              <RelationshipName>FK_Book_Product</RelationshipName>
+            </RelationShip>
+          </RelationShips>
           <Indexes>
             <Index>
               <IndexType>NonClustered</IndexType>
@@ -588,20 +591,20 @@
             <Column ColumnName="UnitPrice" ColumnOrder="3" DataType="Decimal" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="0" Precision="19" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="4" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
               <RemapDataType xsi:nil="true" />
             </Column>
-            <Column ColumnName="UnitAmount" ColumnOrder="4" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="50" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
-              <RemapDataType xsi:nil="true" />
-            </Column>
-            <Column ColumnName="Publisher" ColumnOrder="5" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="200" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
-              <RemapDataType xsi:nil="true" />
-            </Column>
-            <Column ColumnName="AmountInStock" ColumnOrder="6" DataType="Int16" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="0" Precision="5" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+            <Column ColumnName="AmountInStock" ColumnOrder="4" DataType="Int16" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="0" Precision="5" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
               <RemapDataType xsi:nil="true" />
             </Column>
           </Columns>
           <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
           <RelationShips>
+            <RelationShip ColumnName="ProductId" RelationShip="ForeignKeyChild" ReferencedColumnName="ProductId" Render="true" SchemaName="dbo" ReferencedTableName="Book" Multiplicity="One" ReferencedMultiplicity="ZeroToOne" UserRelationship="false">
+              <RelationshipName>FK_Book_Product</RelationshipName>
+            </RelationShip>
             <RelationShip ColumnName="ProductId" RelationShip="ForeignKeyChild" ReferencedColumnName="ProductId" Render="true" SchemaName="dbo" ReferencedTableName="OrderDetails" Multiplicity="One" ReferencedMultiplicity="Many" UserRelationship="false">
               <RelationshipName>FK1C793D34F72CF47B</RelationshipName>
+            </RelationShip>
+            <RelationShip ColumnName="ProductId" RelationShip="ForeignKeyChild" ReferencedColumnName="ProductId" Render="true" SchemaName="dbo" ReferencedTableName="Software" Multiplicity="One" ReferencedMultiplicity="ZeroToOne" UserRelationship="false">
+              <RelationshipName>FK_Software_Product</RelationshipName>
             </RelationShip>
           </RelationShips>
           <Indexes>
@@ -633,7 +636,11 @@
             </Column>
           </Columns>
           <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
-          <RelationShips />
+          <RelationShips>
+            <RelationShip ColumnName="ProductId" RelationShip="ForeignKey" ReferencedColumnName="ProductId" Render="true" SchemaName="dbo" ReferencedTableName="Product" Multiplicity="ZeroToOne" ReferencedMultiplicity="One" UserRelationship="false">
+              <RelationshipName>FK_Software_Product</RelationshipName>
+            </RelationShip>
+          </RelationShips>
           <Indexes>
             <Index>
               <IndexType>NonClustered</IndexType>
@@ -656,7 +663,7 @@
       </Tables>
     </DomainDefinition>
   </Domains>
-  <ModelPath>C:\Dev\Git\Gitthub\.NetScaffolder\Templates\Generated\Dal\Domain\Dotnet\Data\Repositories\Repository\Model\Banking.mdl</ModelPath>
+  <ModelPath>C:\Dev\Git\Gitthub\.NetScaffolder\Templates\Generated\Dotnet\Domain\Data\Repositories\Repository\Model\Banking.mdl</ModelPath>
   <OutputFolder>Models</OutputFolder>
   <Version>1</Version>
 </ProjectDefinition>

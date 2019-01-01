@@ -1,0 +1,43 @@
+﻿<#+
+    public class WebApiGenerator : BaseGenerator
+    {
+        public WebApiServiceDataType DataType{get;set;}
+        public ApplicationServiceDataType ApplicationServiceDataType{get;set;}
+        private WebApiTemplate template = new WebApiTemplate();
+        private WebApiTemplateCustom webApiTemplateCustom = new WebApiTemplateCustom();
+
+        public DtoInterfaceDataType DtoInterfaceDataType {get;set;}
+
+		protected override void RunCore()
+        {
+            
+			foreach(WebApiServiceData webApiServiceData in DataType.WebApiDataList )
+			{
+				//Debugger.Break();
+                template.DataType = DataType;
+                template.CurrentWebApiServiceData = webApiServiceData;
+                template.ApplicationServiceDataType = this.ApplicationServiceDataType;
+                template.DtoInterfaceDataType = this.DtoInterfaceDataType;
+
+                if(!string.IsNullOrEmpty(webApiServiceData.OutputPath))
+                {
+                    template.Output.Project = webApiServiceData.OutputPath;
+                }
+
+                template.RenderToFile(string.Format(@"{0}\{1}Controller.g.cs", webApiServiceData.OutputFolder, webApiServiceData.WebApiName));	
+
+                webApiTemplateCustom.DataType = DataType;
+                webApiTemplateCustom.CurrentWebApiServiceData = webApiServiceData;
+                webApiTemplateCustom.ApplicationServiceDataType = this.ApplicationServiceDataType;
+                webApiTemplateCustom.DtoInterfaceDataType = this.DtoInterfaceDataType;
+
+                if(!string.IsNullOrEmpty(webApiServiceData.OutputPath))
+                {
+                    webApiTemplateCustom.Output.Project = webApiServiceData.OutputPath;
+                }
+                webApiTemplateCustom.Output.PreserveExistingFile = true;
+                webApiTemplateCustom.RenderToFile(string.Format(@"{0}\{1}Controller.cs", webApiServiceData.OutputFolder, webApiServiceData.WebApiName));	
+			}
+        }
+    }
+#>

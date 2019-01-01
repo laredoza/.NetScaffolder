@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using DotNetScaffolder.Domain.Core.Interfaces;
 using NHibernate;
 using NHibernate.Type;
-using RepositoryEFDotnet.Core.Base;
 
-namespace RepositoryEFDotnet.Contexts.NHib.Base
+namespace DotNetScaffolder.Domain.Data.Contexts.NHib.Base
 {
     /// <summary>
     /// The audit interceptor.

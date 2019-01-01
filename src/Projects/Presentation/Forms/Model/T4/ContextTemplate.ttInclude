@@ -8,6 +8,7 @@ public class ContextTemplate : BaseTemplate
 	public string MappingPostFix { get; set; }
     public IDriver Driver { get; set; }
 	public List<Table> Models { get; set; }
+    private string contextNamespace;
 
 	public override string TransformText()
 	{
@@ -23,6 +24,7 @@ public class ContextTemplate : BaseTemplate
 //	USE A PARTIAL CLASS INSTEAD
 // *******************************************************************
 
+<#+contextNamespace = ContextData.TransformFullnamespace(DataType.BaseNamespace).Replace("{DriverType}", "EFCore").Replace("{DriverPrefix}", Driver.Prefix);#>
 <#+ foreach(var nameSpace in Driver.NameSpaces){ #>
 using <#= nameSpace.Replace("{DriverType}", Driver.ParentFolder) #>;
 <#+ } #>
@@ -31,11 +33,11 @@ using <#= EntityNamespace #>;
 <#+ foreach(var nameSpace in DataType.AdditionalNamespaces){ #>
 using <#= nameSpace.Replace("{DriverType}", Driver.ParentFolder) #>;
 <#+ } #>
-using <#= MappingNamespace #>.<#= Driver.ParentFolder #>.<#= Driver.Prefix #>;
+using <#= contextNamespace #>.Mappings.<#= string.Concat(Driver.Prefix, ContextData.ContextName) #>;
 using <#= EntityNamespace #>;
 using System.Data.Common;
 
-namespace <#= ContextData.TransformFullnamespace(DataType.BaseNamespace) #>.<#= Driver.ParentFolder #>
+namespace <#= contextNamespace #>.Context
 {
 <#+ if(!string.IsNullOrEmpty(Driver.ContextAttribute)){ #>
     <#=Driver.ContextAttribute #>
@@ -106,7 +108,7 @@ namespace <#= ContextData.TransformFullnamespace(DataType.BaseNamespace) #>.<#= 
             Configuration.AutoDetectChangesEnabled = false;
 			
 <#+ if(Driver.DriverType.CreateDb){ #>
-			Database.SetInitializer(new CreateDatabaseIfNotExists<<#= string.Concat(Driver.Prefix, ContextData.ContextName)  #>>());
+			System.Data.Entity.Database.SetInitializer(new CreateDatabaseIfNotExists<<#= string.Concat(Driver.Prefix, ContextData.ContextName)  #>>());
 <#+ } #>
 <#+ if(Driver.DriverType.LoggingEnabled){ #>
 			Database.Log = this.Log;

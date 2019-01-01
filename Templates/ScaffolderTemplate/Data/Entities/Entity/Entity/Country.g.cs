@@ -1,6 +1,6 @@
 ﻿
 // <copyright file="Country.g.cs" company="MIT">
-//  Copyright (c) 2018 MIT
+//  Copyright (c) 2019 MIT
 // </copyright>  
 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
@@ -20,9 +20,9 @@
 
 using System;
 using System.Collections.Generic;
-using RepositoryEFDotnet.Data.Interfaces;
+using DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.Dto;
 
-namespace RepositoryEFDotnet.Data.Entity
+namespace DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity
 {
 	public partial class Country : ICountry 
 	{
@@ -70,7 +70,7 @@ namespace RepositoryEFDotnet.Data.Entity
 		{ 
 			get
 			{
-				return this.Customer == null ? null : (IList<ICustomer>)this.Customer;
+				return this.Customer == null ? null : this.Customer as IList<ICustomer>;
 			}
 			set
 			{

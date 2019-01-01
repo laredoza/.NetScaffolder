@@ -1,6 +1,6 @@
 ﻿
 // <copyright file="OrderMap.g.cs" company="MIT">
-//  Copyright (c) 2018 MIT
+//  Copyright (c) 2019 MIT
 // </copyright>  
 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
@@ -23,16 +23,16 @@ using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System.Configuration;
 using System.ComponentModel.DataAnnotations.Schema;
-using RepositoryEFDotnet.Data.Entity;
+using DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity;
 using System.Data.Common;
 
-namespace RepositoryEFDotnet.Data.Context.Mappings.EFCore.SqlServer
+namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.SqlServer.Mappings.SqlServerFullContext
 {
 	public partial class FullContextOrderMap : IEntityTypeConfiguration<Order>
 	{	
 	    public virtual void Configure(EntityTypeBuilder<Order> builder)
 	    {
-			builder.ToTable("[Order]", "[dbo]");
+			builder.ToTable("Order", "dbo");
 			
 			#region Primary keys
 			

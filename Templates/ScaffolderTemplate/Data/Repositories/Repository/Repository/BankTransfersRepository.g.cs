@@ -1,6 +1,6 @@
 ﻿
 // <copyright file="BankTransfers.g.cs" company="MIT">
-//  Copyright (c) 2018 MIT
+//  Copyright (c) 2019 MIT
 // </copyright>  
 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
@@ -23,11 +23,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using RepositoryEFDotnet.Data.Interfaces;
-using RepositoryEFDotnet.Data.Entity;
-using RepositoryEFDotnet.Core.Base;
+using DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.Dto;
+using DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity;
+using DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces;
 
-namespace RepositoryEFDotnet.Data.Repository
+using DotNetScaffolder.Domain.Core;
+using DotNetScaffolder.Domain.Core.Interfaces;
+
+namespace DotNetScaffolder.Domain.Data.Repositories.Repository
 {
 	/// <summary>
 	/// The BankTransfersRepository class responsible for database functions in the BankTransfers table
@@ -178,31 +181,6 @@ namespace RepositoryEFDotnet.Data.Repository
 		}
 
         /// <summary>
-        /// Load BankTransfers entities from the database using the BankAccountId field
-        /// </summary>
-        /// <param name="bankAccountId">Nullable<int></param>
-		/// <param name="includes">params Expression<Func<IBankTransfers, object>>[]</param>
-        /// <returns>IList<IBankTransfers></returns>
-		public virtual IList<IBankTransfers> LoadByBankAccountId(Nullable<int> bankAccountId, bool cache, params Expression<Func<IBankTransfers, object>>[] includes)
-		{
-			var expr = this.Convert(includes);
-			return this.UnitOfWork.AllMatching<BankTransfers>(o => o.BankAccountId == bankAccountId, cache, expr).ToList<IBankTransfers>();
-		}
-		
-        /// <summary>
-        /// Load BankTransfers entities async from the database using the BankAccountId field
-        /// </summary>
-        /// <param name="bankAccountId">Nullable<int></param>
-		/// <param name="includes">params Expression<Func<IBankTransfers, object>>[]</param>
-        /// <returns>IList<IBankTransfers></returns>
-		public virtual async Task<IList<IBankTransfers>> LoadByBankAccountIdAsync(Nullable<int> bankAccountId, bool cache, params Expression<Func<IBankTransfers, object>>[] includes)
-		{
-			var expr = this.Convert(includes);
-			var result = await this.UnitOfWork.AllMatchingAsync<BankTransfers>(o => o.BankAccountId == bankAccountId,cache, expr);
-			return result.ToList<IBankTransfers>();
-		}
-
-        /// <summary>
         /// Load all BankTransfers entities from the database.
         /// </summary>
 		/// <param name="includes">params Expression<Func<IBankTransfers, object>>[]</param>
@@ -250,7 +228,6 @@ namespace RepositoryEFDotnet.Data.Repository
 			entity.ToBankAccountId = entityToSave.ToBankAccountId;
 			entity.Amount = entityToSave.Amount;
 			entity.TransferDate = entityToSave.TransferDate;
-			entity.BankAccountId = entityToSave.BankAccountId;
 			
 			return result;
 		}
@@ -272,7 +249,6 @@ namespace RepositoryEFDotnet.Data.Repository
 			entity.ToBankAccountId = entityToSave.ToBankAccountId;
 			entity.Amount = entityToSave.Amount;
 			entity.TransferDate = entityToSave.TransferDate;
-			entity.BankAccountId = entityToSave.BankAccountId;
 			
 			return result;
 		}

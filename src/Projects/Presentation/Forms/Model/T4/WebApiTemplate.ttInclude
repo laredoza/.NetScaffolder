@@ -1,0 +1,440 @@
+﻿<#+
+    public class WebApiTemplate : BaseTemplate 
+    {
+        public WebApiServiceDataType DataType { get; set; }
+        public string DtoInterfaceNamespace { get; set; }
+        public WebApiServiceData CurrentWebApiServiceData{ get; set; }
+        public ApplicationServiceDataType ApplicationServiceDataType{get;set;}
+        public DtoInterfaceDataType DtoInterfaceDataType {get;set;}
+
+        public override string TransformText()
+        {
+            // Debugger.Break();
+            Header = new CopyrightHeader();
+            //Header.Filename = DataType.RepoName;
+#>
+
+<#=            Header.TransformText() #>
+
+// *******************************************************************
+//	GENERATED CODE. DOT NOT MODIFY MANUALLY AS CHANGES CAN BE LOST!!!
+//	USE A PARTIAL CLASS INSTEAD
+// *******************************************************************
+
+using System;
+using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
+
+<#+            foreach(var applicationServiceData in CurrentWebApiServiceData.Models){ #>
+using <#= applicationServiceData.TransformFullnamespaceInterface(ApplicationServiceDataType.BaseNamespace) #>;
+<#+                } #>
+using <#=             DtoInterfaceDataType.FullNamespace#>;
+<#+            foreach(var nameSpace in DataType.AdditionalNamespaces){ #>
+using <#=                nameSpace #>;
+<#+            } #>
+
+namespace <#= CurrentWebApiServiceData.TransformFullnamespace(DataType.BaseNamespace) #>
+{
+    /// <summary>
+	/// The <#= CurrentWebApiServiceData.WebApiName #> Controller
+	/// </summary>
+    [Route("api/[controller]/[action]")]
+    [ApiController]
+	public partial class <#= CurrentWebApiServiceData.WebApiName #>Controller <#= CurrentWebApiServiceData.TransformInheritFrom #>
+	{
+
+<#+            foreach(var applicationServiceData in CurrentWebApiServiceData.Models){ 
+string name = DataType.NamingConvention == null ? applicationServiceData.ApplicationServiceName : DataType.NamingConvention.ApplyNamingConvention(applicationServiceData.ApplicationServiceName); #>
+        /// <summary>
+        /// Gets or sets the <#= name #> ApplicationService 
+        /// </summary>
+        protected I<#= name #>ApplicationService <#= name #>ApplicationService { get; set; }
+<#+ } #>
+
+        public <#= CurrentWebApiServiceData.WebApiName  #>Controller (
+<#+            for(int n = 0; n < CurrentWebApiServiceData.Models.Count; n++)
+                   { 
+                var applicationServiceData = CurrentWebApiServiceData.Models[n];
+                    string name = DataType.NamingConvention == null ? applicationServiceData.ApplicationServiceName : DataType.NamingConvention.ApplyNamingConvention(applicationServiceData.ApplicationServiceName); #>
+                    <#+ if (n < CurrentWebApiServiceData.Models.Count - 1) {#>
+                      I<#= name #>ApplicationService <#= Char.ToLowerInvariant(name[0]) + name.Substring(1) #>ApplicationService,
+                    <#+                }  else { #>
+  I<#= name #>ApplicationService <#= Char.ToLowerInvariant(name[0]) + name.Substring(1) #>ApplicationService
+                    <#+                } #>
+<#+                } #>
+                 )
+        {
+            this.ConfigureIncludes();
+<#+            foreach(var applicationServiceData in CurrentWebApiServiceData.Models){ #>
+<#+ 
+string name = DataType.NamingConvention == null ? applicationServiceData.ApplicationServiceName : DataType.NamingConvention.ApplyNamingConvention(applicationServiceData.ApplicationServiceName);
+#>
+            this.<#= name #>ApplicationService = <#= Char.ToLowerInvariant(name[0]) + name.Substring(1) #>ApplicationService;
+<#+ } #>
+        }
+
+        #region Load
+<#+  foreach(var applicationServiceData in CurrentWebApiServiceData.Models){ #>
+<#+ string applicationServiceName = DataType.NamingConvention == null ? applicationServiceData.ApplicationServiceName : DataType.NamingConvention.ApplyNamingConvention(applicationServiceData.ApplicationServiceName); #>
+<#+            foreach(var model in applicationServiceData.Models){ #>
+<#+ 
+string modelName = DataType.NamingConvention == null ? model.TableName : DataType.NamingConvention.ApplyNamingConvention(model.TableName);
+if(model.PrimaryKeyCount > 1){ #>
+
+        /// <summary>
+        /// Load <#= modelName #> entities from the database using the composite primary keys
+        /// </summary
+<#+ foreach(var col in model.Columns.Where(o => o.IsPrimaryKey)) {#>
+        /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
+<#+ } #>
+        /// <param name="cache">Enables or disables caching</param>
+        /// <returns>I<#= modelName #></returns>
+        [HttpGet("{<#= DataType.TransformAsParameterName(model.Columns.Where(o => o.IsPrimaryKey)) #>}/{cache}")]
+		ActionResult<I<#= modelName #>> Load<#= modelName #>(<#= DataType.TransformAsParameter(model.Columns.Where(o => o.IsPrimaryKey)) #>, bool cache)
+        {
+            if( this.Load<#= modelName #>Includes == null)
+            {
+                this.Load<#= modelName #>Includes = new Expression<Func<I<#= modelName #>, object>>[]{};
+            }
+
+            var result = this.<#= applicationServiceName #>ApplicationService.Load<#= modelName #>(<#= DataType.TransformAsParameterName(model.Columns.Where(o => o.IsPrimaryKey)) #>, cache, this.Load<#= modelName #>Includes)
+
+            if (result == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(result);
+        }
+
+        /// <summary>
+        /// Load <#= modelName #> Async entities from the database using the composite primary keys
+        /// </summary
+<#+ foreach(var col in model.Columns.Where(o => o.IsPrimaryKey)) {#>
+        /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
+<#+ } #>
+        /// <param name="cache">Enables or disables caching</param>
+        /// <returns>I<#= modelName #></returns>
+        [HttpGet("{<#= DataType.TransformAsParameterName(model.Columns.Where(o => o.IsPrimaryKey)) #>}/{cache}")]
+		Task<ActionResult<I<#= modelName #>>> await <#= modelName #>LoadAsync(<#= DataType.TransformAsParameter(model.Columns.Where(o => o.IsPrimaryKey)) #>, bool cache)
+        {
+            if( this.LoadAsync<#= modelName #>Includes == null)
+            {
+                this.LoadAsync<#= modelName #>Includes = new Expression<Func<I<#= modelName #>, object>>[]{};
+            }
+
+            var result = async this.<#= applicationServiceName #>ApplicationService.Load<#= modelName #>Async(<#= DataType.TransformAsParameterName(model.Columns.Where(o => o.IsPrimaryKey)) #>, cache, this.LoadAsync<#= modelName #>Includes)
+
+            if (result == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(result);
+        }
+
+<#+ } #>
+
+<#+ if(model.PrimaryKeyCount == 1){ var col = model.Columns.First(o => o.IsPrimaryKey);#>
+
+        /// <summary>
+        /// Load <#= modelName #> entities from the database using the primary key
+        /// </summary
+        /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
+        /// <param name="cache">Enables or disables caching</param>
+        /// <returns>I<#= modelName #></returns>
+        [HttpGet("{<#= DataType.TransformAsParameterName(col) #>}/{cache}")]
+		public ActionResult<I<#= modelName #>> LoadBy<#= modelName #><#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= DataType.TransformAsParameter(col) #>, bool cache)
+        {
+            if( this.LoadBy<#= modelName #><#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>Includes == null)
+            {
+                this.LoadBy<#= modelName #><#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>Includes = new Expression<Func<I<#= modelName #>, object>>[]{};
+            }
+
+            var result = this.<#= applicationServiceName #>ApplicationService.LoadBy<#= modelName #><#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= DataType.TransformAsParameterName(col) #>, cache, this.LoadBy<#= modelName #><#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>Includes);
+
+            if (result == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(result);
+        }
+
+        /// <summary>
+        /// Load <#= modelName #> Async entities from the database using the primary key
+        /// </summary
+        /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
+        /// <param name="cache">Enables or disables caching</param>
+        /// <returns>I<#= modelName #></returns>
+        [HttpGet("{<#= DataType.TransformAsParameterName(col) #>}/{cache}")]
+		public async Task<ActionResult<I<#= modelName #>>> LoadBy<#= modelName #><#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>Async(<#= DataType.TransformAsParameter(col) #>, bool cache)
+        {
+            if( this.LoadBy<#= modelName #><#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>AsyncIncludes == null)
+            {
+                this.LoadBy<#= modelName #><#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>AsyncIncludes = new Expression<Func<I<#= modelName #>, object>>[]{};
+            }
+
+           var result = await this.<#= applicationServiceName #>ApplicationService.LoadBy<#= modelName #><#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>Async(<#= DataType.TransformAsParameterName(col) #>, cache, this.LoadBy<#= modelName #><#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>AsyncIncludes);
+            
+            if (result == null)
+            {
+                return NotFound(result);
+            }
+
+            return Ok(result);
+        }
+<#+ } #>
+
+        /// <summary>
+        /// Load all <#= modelName #> entities from the database.
+        /// </summary>
+        /// <param name="cache">Enables or disables caching</param>
+        /// <returns><#= DataType.CollectionOption.ClassNameInterface #><I<#= modelName #>></returns>
+        [HttpGet("{cache}")]
+		public ActionResult<<#= DataType.CollectionOption.ClassNameInterface #><I<#= modelName #>>> <#= modelName #>LoadAll(bool cache)
+        {
+            if( this.<#= modelName #>LoadAllIncludes == null)
+            {
+                this.<#= modelName #>LoadAllIncludes = new Expression<Func<I<#= modelName #>, object>>[]{};
+            }
+
+            var result = this.<#= applicationServiceName #>ApplicationService.<#= modelName #>LoadAll(cache, this.<#= modelName #>LoadAllIncludes);
+            
+            if (result == null)
+            {
+                return NotFound(result);
+            }
+
+            return Ok(result);
+        }
+
+        /// <summary>
+        /// Load all <#= modelName #> Async entities from the database.
+        /// </summary>
+        /// <param name="cache">Enables or disables caching</param>
+        /// <returns><#= DataType.CollectionOption.ClassNameInterface #><I<#= modelName #>></returns>
+        [HttpGet("{cache}")]
+		public async Task<ActionResult<<#= DataType.CollectionOption.ClassNameInterface #><I<#= modelName #>>>> <#= modelName #>LoadAllAsync(bool cache)
+        {
+            if( this.<#= modelName #>LoadAllAsyncIncludes == null)
+            {
+                this.<#= modelName #>LoadAllAsyncIncludes = new Expression<Func<I<#= modelName #>, object>>[]{};
+            }
+
+            var result = await this.<#= applicationServiceName #>ApplicationService.<#= modelName #>LoadAllAsync(cache, this.<#= modelName #>LoadAllAsyncIncludes);
+            
+            if (result == null)
+            {
+                return NotFound(result);
+            }
+
+            return Ok(result);
+        }
+
+<#+            } #>
+<#+ } #>
+
+        #endregion
+
+        #region Search
+        <#+  foreach(var applicationServiceData in CurrentWebApiServiceData.Models){ #>
+        <#+ string applicationServiceName = DataType.NamingConvention == null ? applicationServiceData.ApplicationServiceName : DataType.NamingConvention.ApplyNamingConvention(applicationServiceData.ApplicationServiceName); #>
+<#+            foreach(var model in applicationServiceData.Models){ #>
+<#+ 
+string modelName = DataType.NamingConvention == null ? model.TableName : DataType.NamingConvention.ApplyNamingConvention(model.TableName);
+#>
+<#+                foreach(var col in model.Columns.Where(o => !o.IsPrimaryKey && o.DomainDataType == DomainDataType.String)){  #>
+
+        /// <summary>
+        /// Search for <#= modelName #> entities in the database by <#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>
+        /// </summary>
+        /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
+		/// <param name="caseSensitive">bool</param>
+        /// <returns><#= DataType.CollectionOption.ClassNameInterface #><I<#= modelName #>></returns>
+        [HttpGet("{<#=DataType.TransformAsParameterName(model.Columns.Where(o => o.IsPrimaryKey)).Trim()#>}/{caseSensitive}/{cache}")]
+		public ActionResult<<#= DataType.CollectionOption.ClassNameInterface #><I<#= modelName #>>> <#= modelName #>SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= DataType.TransformAsParameter(col) #>, bool caseSensitive, bool cache)
+        {
+            if( this.<#= modelName #>SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>Includes == null)
+            {
+                this.<#= modelName #>SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>Includes = new Expression<Func<I<#= modelName #>, object>>[]{};
+            }
+
+            var result = this.<#= applicationServiceName #>ApplicationService.<#= modelName #>SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= DataType.TransformAsParameterName(col)  #>,caseSensitive, cache, this.<#= modelName #>SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>Includes);
+            
+            if (result == null)
+            {
+                return NotFound(result);
+            }
+
+            return Ok(result);
+        }
+
+        /// <summary>
+        /// Search for <#= modelName #> Async entities in the database by <#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>
+        /// </summary>
+        /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
+		/// <param name="caseSensitive">bool</param>
+        /// <returns><#= DataType.CollectionOption.ClassNameInterface #><I<#= modelName #>></returns>
+        [HttpGet("{<#=DataType.TransformAsParameterName(model.Columns.Where(o => o.IsPrimaryKey)).Trim()#>}/{caseSensitive}/{cache}")]
+        public async Task<ActionResult<<#= DataType.CollectionOption.ClassNameInterface #><I<#= modelName #>>>> <#= modelName #>SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>Async(<#= DataType.TransformAsParameter(col) #>, bool caseSensitive, bool cache)
+        {
+            if( this.<#= modelName #>SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>IncludesAsync == null)
+            {
+                this.<#= modelName #>SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>IncludesAsync = new Expression<Func<I<#= modelName #>, object>>[]{};
+            }
+
+            var result = await this.<#= applicationServiceName #>ApplicationService.<#= modelName #>SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>Async(<#= DataType.TransformAsParameterName(col)  #>,caseSensitive, cache, this.<#= modelName #>SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>IncludesAsync);
+            
+            if (result == null)
+            {
+                return NotFound(result);
+            }
+
+            return Ok(result);
+        }
+
+<#+ }  #>
+<#+            } #>
+<#+ } #>
+		#endregion
+
+		#region Modifiers
+<#+  foreach(var applicationServiceData in CurrentWebApiServiceData.Models){ #>
+<#+ string applicationServiceName = DataType.NamingConvention == null ? applicationServiceData.ApplicationServiceName : DataType.NamingConvention.ApplyNamingConvention(applicationServiceData.ApplicationServiceName); #>
+<#+            foreach(var model in applicationServiceData.Models){ #>
+<#+ 
+string modelName = DataType.NamingConvention == null ? model.TableName : DataType.NamingConvention.ApplyNamingConvention(model.TableName); #>		
+        /// <summary>
+        /// Add the <#= modelName #> entity to the database.
+        /// </summary>
+        /// <param name="entity">I<#= modelName #></param>
+        /// <returns>bool</returns>
+        [HttpPost]
+		public bool <#= modelName #>Add([FromBody] I<#= modelName #> entity)
+        {
+            return this.<#= applicationServiceName #>ApplicationService.<#= modelName #>Update(entity);
+        }
+
+        /// <summary>
+        /// Update the <#= modelName #> entity in the database if any values have changed
+        /// </summary>
+        /// <param name="entity">I<#= modelName #></param>
+        /// <returns>bool</returns>
+        [HttpPost]
+		public bool <#= modelName #>Update([FromBody] I<#= modelName #> entity)
+        {
+            return this.<#= applicationServiceName #>ApplicationService.<#= modelName #>Update(entity);
+        }
+		
+        /// <summary>
+        /// Delete the <#= modelName #> entity from the database
+        /// </summary>
+        /// <param name="entity">I<#= modelName #></param>
+        /// <returns>bool</returns>
+        [HttpPost]
+		public bool <#= modelName #>Delete([FromBody] I<#= modelName #> entity)
+        {
+            return this.<#= applicationServiceName #>ApplicationService.<#= modelName #>Delete(entity);
+        }
+
+		/// <summary>
+        /// Delete the <#= modelName #> entity from the database
+        /// </summary>
+<#+ foreach(var col in model.Columns.Where(o => o.IsPrimaryKey)) {#>
+        /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
+<#+ } #>
+        /// <returns>bool</returns>
+        [HttpDelete("{<#=DataType.TransformAsParameterName(model.Columns.Where(o => o.IsPrimaryKey)).Trim()#>}/{cache}")]
+		public bool <#= modelName #>Delete(<#= DataType.TransformAsParameter(model.Columns.Where(o => o.IsPrimaryKey)) #>, bool cache)
+        {
+            return this.<#= applicationServiceName #>ApplicationService.<#= modelName #>Delete(<#= DataType.TransformAsParameterName(model.Columns.Where(o => o.IsPrimaryKey)) #>, cache);
+        }
+
+<#+            } #>
+<#+ } #>
+		#endregion
+
+		#region Bulk
+<#+  foreach(var applicationServiceData in CurrentWebApiServiceData.Models){ #>
+<#+ string applicationServiceName = DataType.NamingConvention == null ? applicationServiceData.ApplicationServiceName : DataType.NamingConvention.ApplyNamingConvention(applicationServiceData.ApplicationServiceName); #>
+<#+            foreach(var model in applicationServiceData.Models){ #>
+<#+ 
+string modelName = DataType.NamingConvention == null ? model.TableName : DataType.NamingConvention.ApplyNamingConvention(model.TableName); #>
+
+        /// <summary>
+        ///     Bulk delete entities
+        /// </summary>
+        /// <param name="items"></param>
+        [HttpPost]
+        public void <#= modelName #>BulkDelete([FromBody] IEnumerable<I<#= modelName #>> items)
+		{
+			this.<#= applicationServiceName #>ApplicationService.<#= modelName #>BulkDelete(items);
+		}
+
+        /// <summary>
+        ///     Bulk delete entities async
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task <#= modelName #>BulkDeleteAsync([FromBody] IEnumerable<I<#= modelName #>> items)
+		{
+			await this.<#= applicationServiceName #>ApplicationService.<#= modelName #>BulkDeleteAsync(items);
+		}
+
+        /// <summary>
+        ///     Bulk insert entities
+        /// </summary>
+        /// <paramid name="items"></param>
+        [HttpPost]
+        public void  <#= modelName #>BulkInsert([FromBody] IEnumerable<I<#= modelName #>> items)
+		{
+			this.<#= applicationServiceName #>ApplicationService.<#= modelName #>BulkInsert(items);
+		}
+        
+        /// <summary>
+        /// Bulk insert entities async
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task  <#= modelName #>BulkInsertAsync([FromBody] IEnumerable<I<#= modelName #>> items)
+		{
+			await this.<#= applicationServiceName #>ApplicationService.<#= modelName #>BulkInsertAsync(items);
+		}
+
+        /// <summary>
+        /// Bulk update entities 
+        /// </summary>
+        /// <param name="items"></param>
+        [HttpPost]
+        public void <#= modelName #>BulkUpdate([FromBody] IEnumerable<I<#= modelName #>> items)
+		{
+			this.<#= applicationServiceName #>ApplicationService.<#= modelName #>BulkUpdate(items);
+		}
+
+        /// <summary>
+        /// Bulk update entities async
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task <#= modelName #>BulkUpdateAsync([FromBody] IEnumerable<I<#= modelName #>> items)
+		{
+			await this.<#= applicationServiceName #>ApplicationService.<#= modelName #>BulkUpdateAsync(items);
+		}
+
+        <#+} #>
+<#+} #>
+#endregion        
+    }
+}
+
+<#+
+            return this.GenerationEnvironment.ToString();
+	}
+            }
+#>

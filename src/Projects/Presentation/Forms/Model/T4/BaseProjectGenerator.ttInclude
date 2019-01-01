@@ -39,6 +39,7 @@
 <#@ import namespace="DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ApplicationServiceDataTypes" #>
 <#@ import namespace="DotNetScaffolder.Components.DataTypes.DefaultDataTypes.UnitTests" #>
 <#@ import namespace="DotNetScaffolder.Components.DataTypes.DefaultDataTypes.StructureMapDataTypes" #>
+<#@ import namespace="DotNetScaffolder.Components.DataTypes.DefaultDataTypes.WebApiServiceDataTypes" #>
 
 <#@ import namespace="DotNetScaffolder.Components.Drivers.DefaultDrivers.EFCore" #>
 <#@ import namespace="DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6" #>
@@ -97,6 +98,7 @@
                     if(template.Enabled)
                     {
                         var dt = ScaffoldConfig.ReturnDataType(template.DataType);
+                        dt.DomainDefinition = domain;
                         dt.Load(parameters);
                         dt.NamingConvention = nc;
                         dt.CollectionOption = co;

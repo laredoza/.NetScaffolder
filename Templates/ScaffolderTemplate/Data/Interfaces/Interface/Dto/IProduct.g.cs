@@ -1,6 +1,6 @@
 ﻿
 // <copyright file="Product.g.cs" company="MIT">
-//  Copyright (c) 2018 MIT
+//  Copyright (c) 2019 MIT
 // </copyright>  
 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
@@ -21,7 +21,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace RepositoryEFDotnet.Data.Interfaces
+namespace DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.Dto
 {
 	public partial interface IProduct  
 	{
@@ -30,8 +30,6 @@ namespace RepositoryEFDotnet.Data.Interfaces
 		int ProductId { get; set; }
 		string ProductDescription { get; set; }
 		Nullable<decimal> UnitPrice { get; set; }
-		string UnitAmount { get; set; }
-		string Publisher { get; set; }
 		Nullable<short> AmountInStock { get; set; }
 
 		#endregion
@@ -39,6 +37,8 @@ namespace RepositoryEFDotnet.Data.Interfaces
 		#region Child Relationships
 		
 		IList<IOrderDetails> OrderDetails { get; set; }
+		IBook Book { get; set; }
+		ISoftware Software { get; set; }
 
 		#endregion
 		

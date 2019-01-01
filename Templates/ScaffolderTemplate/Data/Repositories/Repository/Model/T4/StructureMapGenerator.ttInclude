@@ -1,32 +1,100 @@
-﻿<#@ include file="StructureMapTemplate.ttinclude" #>
+﻿<#@ include file="StructureMapApplicationServiceRegistrationTemplate.ttInclude" #>
+<#@ include file="StructureMapRepositoryRegistrationTemplate.ttInclude" #>
+<#@ include file="StructureDatabaseManagerTemplate.ttInclude" #>
+<#@ include file="StructureMapContextRegistrationTemplate.ttInclude" #>
+
 <#+
     public class StructureMapGenerator : BaseGenerator
     {
-		public StructureMapDataType DataType { get; set; }
-        public List<IDriver> Drivers {get;set;}
-		public ContextData ContextData {get;set;}
+        public StructureMapDataType DataType { get; set; }
+        public ApplicationServiceDataType ApplicationServiceDataType {get;set;}
 
-		private string projectPath = string.Empty;
-		
+        public List<Table> Models { get; set; }
+        public RepositoryDataType RepositoryDataType { get; set; }
+        public RepoInterfaceDataType RepoInterfaceDataType { get; set; }
+
+        public ContextDataType ContextDataType { get; set; }
+        public List<IDriver> Drivers {get;set;}
+        public ContextData ContextData {get;set;}
+
+        public string InterfaceDatabasePath {get; set;}
+        public List<string> NameSpaces { get; set;}
+       
+
         protected override void RunCore()
         {
-			foreach(IDriver driver in Drivers )
-			{
-				// Debugger.Break();
-				
-				projectPath = string.Format(ContextData.OutputPath, driver.ParentFolder, driver.Prefix);
+            this.GenerateRepository();
+            this.GenerateApplicationService(); 
+            this.GenerateDatabaseManager();
+            this.GenerateDatabaseManagerRegister();
+        }
+        
+        private void GenerateApplicationService()
+        {
+            StructureMapApplicationServiceRegistrationTemplate applicationServiceTemplate = new StructureMapApplicationServiceRegistrationTemplate();
+            applicationServiceTemplate.DataType = ApplicationServiceDataType;
 
-                var template = new StructureMapTemplate();
-				
-				if(!string.IsNullOrEmpty(projectPath))
-				{
-					template.Output.Project =  projectPath;
-				}
+            if(!string.IsNullOrEmpty(ApplicationServiceDataType.ApplicationServiceData.First().OutputPath))
+            {
+                applicationServiceTemplate.Output.Project = ApplicationServiceDataType.ApplicationServiceData.First().OutputPath;
+            }
 
-				template.ContextData = ContextData;
-				template.DataType = DataType;
-				template.RenderToFile(string.Format(@"{0}\{2}.g.cs", DataType.OutputFolder, "ContextRegistration"));
-			}
+            applicationServiceTemplate.RenderToFile(@"Register\ApplicationServiceRegistration.g.cs");
+        }
+
+        private void GenerateRepository()
+        {
+            var repositoryRegistrationTemplate = new StructureMapRepositoryRegistrationTemplate();
+			
+            repositoryRegistrationTemplate.DataType = RepositoryDataType;
+            repositoryRegistrationTemplate.Models = Models;
+            repositoryRegistrationTemplate.RepoInterfaceDataType = RepoInterfaceDataType;
+
+            if(!string.IsNullOrEmpty(RepositoryDataType.OutputPath))
+            {
+                repositoryRegistrationTemplate.Output.Project = RepositoryDataType.OutputPath;
+            }
+
+            repositoryRegistrationTemplate.RenderToFile(string.Format(@"{0}\{1}.g.cs", "Register", "RepositoryRegistration"));
+        }
+
+        private void GenerateDatabaseManager()
+        {
+            StructureDatabaseManagerTemplate structureDatabaseManagerTemplate = new StructureDatabaseManagerTemplate();
+
+            foreach(IDriver driver in Drivers )
+            {
+                string projectPath = string.Format(ContextData.OutputPath, driver.ParentFolder, driver.Prefix);
+				
+                if(!string.IsNullOrEmpty(projectPath))
+                {
+                    structureDatabaseManagerTemplate.Output.Project =  projectPath;
+                }
+
+                structureDatabaseManagerTemplate.DataType = ContextDataType;
+                structureDatabaseManagerTemplate.ContextData = ContextData;
+                structureDatabaseManagerTemplate.Driver = driver;
+                structureDatabaseManagerTemplate.RenderToFile(string.Format(@"{0}\{1}.g.cs", "Database", "DatabaseManager"));
+            }
+        }
+
+        private void GenerateDatabaseManagerRegister()
+        {
+            var structureMapContextRegistrationTemplate = new StructureMapContextRegistrationTemplate();
+            foreach(IDriver driver in Drivers )
+            {
+                if(!string.IsNullOrEmpty(ContextData.OutputPath))
+                {
+                    structureMapContextRegistrationTemplate.Output.Project = string.Format(ContextData.OutputPath, driver.ParentFolder, driver.Prefix);
+                }
+
+                structureMapContextRegistrationTemplate.DataType = ContextDataType;
+                structureMapContextRegistrationTemplate.ContextData = ContextData;
+                structureMapContextRegistrationTemplate.Driver = driver;
+                structureMapContextRegistrationTemplate.InterfaceDatabasePath = InterfaceDatabasePath;
+                structureMapContextRegistrationTemplate.NameSpaces = NameSpaces;
+                structureMapContextRegistrationTemplate.RenderToFile(string.Format(@"{0}Regisster\{1}.g.cs", ContextData.OutputFolder,"ContextRegistration"));
+            }
         }
     }
 #>

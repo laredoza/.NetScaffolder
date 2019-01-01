@@ -13,20 +13,19 @@
 // IN THE SOFTWARE.
 
 
+
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System.Configuration;
-using RepositoryEFDotnet.Contexts.EFCore.Base;
-using RepositoryEFDotnet.Core.Base;
-using RepositoryEFDotnet.Contexts.EFCore.Base.Context;
-using RepositoryEFDotnet.Core.Base;
-using RepositoryEFDotnet.Data.Context.Mappings.EFCore.SqlServer;
-using RepositoryEFDotnet.Data.Entity;
+using DotNetScaffolder.Domain.Core;
+using DotNetScaffolder.Domain.Data.Contexts.EFCore.Base.Context;
+using DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity;
 using System;
+using DotNetScaffolder.Domain.Data.Contexts.EFCore.Seed;
 
-namespace RepositoryEFDotnet.Data.Context.EFCore
+namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.SqlServer.Context
 {
 	public partial class SqlServerFullContext 
 	{	
@@ -40,7 +39,11 @@ namespace RepositoryEFDotnet.Data.Context.EFCore
         /// </param>
         public void Seed(ModelBuilder modelBuilder)
         {
-
+            MigrationHelper.AddCountries(modelBuilder);
+            MigrationHelper.AddProducts(modelBuilder);
+            MigrationHelper.AddCustomers(modelBuilder);
+            MigrationHelper.AddBanking(modelBuilder);
+            MigrationHelper.AddOrders(modelBuilder);
         }
 
         #endregion		

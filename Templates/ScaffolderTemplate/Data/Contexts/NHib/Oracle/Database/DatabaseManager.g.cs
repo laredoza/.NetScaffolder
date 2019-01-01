@@ -1,6 +1,6 @@
 ﻿
 // <copyright file="FullContext.g.cs" company="MIT">
-//  Copyright (c) 2018 MIT
+//  Copyright (c) 2019 MIT
 // </copyright>  
 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
@@ -17,20 +17,20 @@
 //	GENERATED CODE. DOT NOT MODIFY MANUALLY AS CHANGES CAN BE LOST!!!
 //	USE A PARTIAL CLASS INSTEAD
 // *******************************************************************
-using RepositoryEFDotnet.Contexts.NHib.Base.Context;
-using RepositoryEFDotnet.Core.Base;
+using DotNetScaffolder.Domain.Core;
+using DotNetScaffolder.Domain.Data.Contexts.NHib.Base.Context;
+using DotNetScaffolder.Domain.Core.Interfaces;
 using NHibernate;
 using NHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using FluentNHibernate.Cfg;
-using RepositoryEFDotnet.Data.Context.NHib;
+using DotNetScaffolder.Domain.Data.Contexts.EFCore.Oracle.Context;
 using System;
 using System.Collections.Generic;
 using StructureMap;
 using StructureMap.Pipeline;
-using RepositoryEFDotnet.Contexts.NHib.Base;
 
-namespace RepositoryEFDotnet.Data.Context.NHib.Oracle.Database
+namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.Oracle.Database
 {
 	public class DatabaseManager : IDatabaseManager
 	{	
@@ -66,7 +66,7 @@ namespace RepositoryEFDotnet.Data.Context.NHib.Oracle.Database
 	        IServiceProvider serviceProvider = null)
 	    {
 	        if (configuration == null || configuration.ConnectionStrings == null
-	                                  || !configuration.ConnectionStrings.ContainsKey("QUIRCSqlServer"))
+	                                  || !configuration.ConnectionStrings.ContainsKey("RepoTestOracle"))
 	        {
 	            throw new Exception("Invalid configuration specified in database manager");
 	        }

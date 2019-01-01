@@ -1,6 +1,6 @@
 ﻿
 // <copyright file="BankTransfers.g.cs" company="MIT">
-//  Copyright (c) 2018 MIT
+//  Copyright (c) 2019 MIT
 // </copyright>  
 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
@@ -22,10 +22,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using RepositoryEFDotnet.Data.Interfaces;
-using RepositoryEFDotnet.Core.Base;
+using DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.Dto;
+using DotNetScaffolder.Domain.Core.Interfaces;
 
-namespace RepositoryEFDotnet.Data.Interfaces
+namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
 {
 	/// <summary>
 	/// The BankTransfersRepository interface that defines database functions for the BankTransfers table
@@ -123,24 +123,6 @@ namespace RepositoryEFDotnet.Data.Interfaces
 		/// <param name="includes">params Expression<Func<IBankTransfers, object>>[]</param>
         /// <returns>IList<IBankTransfers></returns>
 		Task<IList<IBankTransfers>> LoadByTransferDateAsync(DateTime transferDate, bool cache, params Expression<Func<IBankTransfers, object>>[] includes);
-
-        /// <summary>
-        /// Load BankTransfers entities from the database using the BankAccountId field
-        /// </summary>
-        /// <param name="bankAccountId">Nullable<int></param
-        /// <param name="cache">Use 2nd level caching if enabled</param>
-		/// <param name="includes">params Expression<Func<IBankTransfers, object>>[]</param>
-        /// <returns>IList<IBankTransfers></returns>
-		IList<IBankTransfers> LoadByBankAccountId(Nullable<int> bankAccountId, bool cache,  params Expression<Func<IBankTransfers, object>>[] includes);
-		
-        /// <summary>
-        /// Load BankTransfers entities async from the database using the BankAccountId field
-        /// </summary>
-        /// <param name="bankAccountId">Nullable<int></param
-        /// <param name="cache">Use 2nd level caching if enabled</param>
-		/// <param name="includes">params Expression<Func<IBankTransfers, object>>[]</param>
-        /// <returns>IList<IBankTransfers></returns>
-		Task<IList<IBankTransfers>> LoadByBankAccountIdAsync(Nullable<int> bankAccountId, bool cache, params Expression<Func<IBankTransfers, object>>[] includes);
 
         /// <summary>
         /// Load all BankTransfers entities from the database.

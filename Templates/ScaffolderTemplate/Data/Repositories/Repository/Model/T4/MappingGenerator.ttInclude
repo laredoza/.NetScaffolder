@@ -10,7 +10,8 @@
 		public ContextData ContextData { get; set; }
 		public MappingDataType MappingDataType {get;set;}
 		public INamingConvention NamingConvention { get; set; }
-		
+		public ContextDataType DataType { get; set; }
+
 		public string FullNamespace
 		{
 			get
@@ -63,7 +64,8 @@
 				configTemplate.Model = model;
 				configTemplate.Models = Models;
 				configTemplate.ContextData = ContextData;
-			
+                configTemplate.DataType = DataType;
+ 	
 				if(!string.IsNullOrEmpty(projectPath))
 				{
 					configTemplate.Output.Project =  projectPath;
@@ -90,7 +92,8 @@
 				configTemplate.Model = model;
 				configTemplate.Models = Models;
 				configTemplate.ContextData = ContextData;
-			
+		        configTemplate.DataType = DataType;
+	
 				if(!string.IsNullOrEmpty(projectPath))
 				{
 					configTemplate.Output.Project =  projectPath;
@@ -117,7 +120,8 @@
 				configTemplate.Model = model;
 				configTemplate.Models = Models;
 				configTemplate.ContextData = ContextData;
-			
+			    configTemplate.DataType = DataType;
+
 				if(!string.IsNullOrEmpty(projectPath))
 				{
 					configTemplate.Output.Project =  projectPath;

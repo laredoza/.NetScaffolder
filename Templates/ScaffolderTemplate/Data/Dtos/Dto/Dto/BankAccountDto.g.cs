@@ -1,6 +1,6 @@
 ﻿
 // <copyright file="BankAccountDto.g.cs" company="MIT">
-//  Copyright (c) 2018 MIT
+//  Copyright (c) 2019 MIT
 // </copyright>  
 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
@@ -20,9 +20,9 @@
 
 using System;
 using System.Collections.Generic;
-using RepositoryEFDotnet.Data.Interfaces;
+using DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.Dto;
 
-namespace RepositoryEFDotnet.Data.Dto
+namespace DotNetScaffolder.Domain.Data.DefaultDto.Dto
 {
 	public partial class BankAccountDto : IBankAccount 
 	{
@@ -31,7 +31,6 @@ namespace RepositoryEFDotnet.Data.Dto
 		public BankAccountDto()
 		{
 			this.BankTransfers = new List <IBankTransfers>();
-			this.BankTransfers1 = new List <IBankTransfers>();
 		}
 		
 		public BankAccountDto(IBankAccount item, bool deep = false)
@@ -44,7 +43,6 @@ namespace RepositoryEFDotnet.Data.Dto
 			this.CustomerId = item.CustomerId;
 			this.Locked = item.Locked;
 			this.BankTransfers = new List <IBankTransfers>();
-			this.BankTransfers1 = new List <IBankTransfers>();
 
 			if(deep)
 			{
@@ -53,13 +51,6 @@ namespace RepositoryEFDotnet.Data.Dto
 					foreach(var childItem in item.BankTransfers)
 					{
 						this.BankTransfers.Add(new BankTransfersDto(childItem, deep));
-					}
-				}
-				if(item.BankTransfers1 != null)
-				{
-					foreach(var childItem in item.BankTransfers1)
-					{
-						this.BankTransfers1.Add(new BankTransfersDto(childItem, deep));
 					}
 				}
                 if(item.Customer != null)
@@ -84,7 +75,6 @@ namespace RepositoryEFDotnet.Data.Dto
 		#region Child Relationships
 		
 		public IList<IBankTransfers> BankTransfers { get; set; }
-		public IList<IBankTransfers> BankTransfers1 { get; set; }
 
 		#endregion
 		

@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Entities\Entity\DotNetScaffolder.Domain.Data.Entities.DefaultEntity.csproj" />
+    <ProjectReference Include="..\Base\DotNetScaffolder.Domain.Data.Contexts.EFCore.Base.csproj" />
+    <ProjectReference Include="..\Seed\DotNetScaffolder.Domain.Data.Contexts.EFCore.Seed.csproj" />
+  </ItemGroup>
+</Project>

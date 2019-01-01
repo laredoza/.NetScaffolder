@@ -1,6 +1,6 @@
 ﻿
 // <copyright file="BookMap.g.cs" company="MIT">
-//  Copyright (c) 2018 MIT
+//  Copyright (c) 2019 MIT
 // </copyright>  
 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
@@ -24,10 +24,10 @@ using System.Data.Entity.Infrastructure.Annotations;
 using Oracle.ManagedDataAccess.Client;
 using Oracle.Config;
 using System.ComponentModel.DataAnnotations.Schema;
-using RepositoryEFDotnet.Data.Entity;
+using DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity;
 using System.Data.Common;
 
-namespace RepositoryEFDotnet.Data.Context.Mappings.EF.Oracle
+namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.Oracle.Mappings.OracleFullContext
 {
 	public partial class FullContextBookMap : EntityTypeConfiguration<Book>
 	{	
@@ -61,6 +61,7 @@ namespace RepositoryEFDotnet.Data.Context.Mappings.EF.Oracle
 
 			#region Relationships
 			
+			HasRequired<Product>(s => s.Product).WithOptional(s => s.Book).WillCascadeOnDelete(false);
 			
 			#endregion			
 

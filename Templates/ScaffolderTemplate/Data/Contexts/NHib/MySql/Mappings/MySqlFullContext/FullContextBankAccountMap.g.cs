@@ -1,6 +1,6 @@
 ﻿
 // <copyright file="BankAccountMap.g.cs" company="MIT">
-//  Copyright (c) 2018 MIT
+//  Copyright (c) 2019 MIT
 // </copyright>  
 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
@@ -21,11 +21,12 @@ using NHibernate;
 using NHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using FluentNHibernate.Cfg;
-using RepositoryEFDotnet.Data.Entity;
+using DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity;
 using System.Data.Common;
 using FluentNHibernate.Mapping;
 
-namespace RepositoryEFDotnet.Data.Context.Mappings.NHib.MySql
+
+namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.MySql.Mappings.MySqlFullContext
 {
 	public partial class FullContextBankAccountMap : ClassMap<BankAccount>
 	{	
@@ -66,7 +67,6 @@ namespace RepositoryEFDotnet.Data.Context.Mappings.NHib.MySql
 			
 			References(o => o.Customer).Column("CustomerId").Unique().Not.Insert().Not.Update();
 			HasMany(s => s.BankTransfers).KeyColumn("ToBankAccountId");
-			HasMany(s => s.BankTransfers1).KeyColumn("BankAccountId");
 			
 			#endregion			
 

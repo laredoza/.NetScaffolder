@@ -1,6 +1,6 @@
 ﻿
 // <copyright file="Product.g.cs" company="MIT">
-//  Copyright (c) 2018 MIT
+//  Copyright (c) 2019 MIT
 // </copyright>  
 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
@@ -20,9 +20,9 @@
 
 using System;
 using System.Collections.Generic;
-using RepositoryEFDotnet.Data.Interfaces;
+using DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.Dto;
 
-namespace RepositoryEFDotnet.Data.Entity
+namespace DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity
 {
 	public partial class Product : IProduct 
 	{
@@ -40,8 +40,6 @@ namespace RepositoryEFDotnet.Data.Entity
 			this.ProductId = item.ProductId;
 			this.ProductDescription = item.ProductDescription;
 			this.UnitPrice = item.UnitPrice;
-			this.UnitAmount = item.UnitAmount;
-			this.Publisher = item.Publisher;
 			this.AmountInStock = item.AmountInStock;
 			this.OrderDetails = new List <OrderDetails>();
 
@@ -54,6 +52,8 @@ namespace RepositoryEFDotnet.Data.Entity
 						this.OrderDetails.Add(new OrderDetails(childItem, deep));
 					}
 				}
+				this.Book = new Book(item.Book, deep);
+				this.Software = new Software(item.Software, deep);
 			}
 		}
 		
@@ -64,8 +64,6 @@ namespace RepositoryEFDotnet.Data.Entity
 		public virtual int ProductId { get; set; }
 		public virtual string ProductDescription { get; set; }
 		public virtual Nullable<decimal> UnitPrice { get; set; }
-		public virtual string UnitAmount { get; set; }
-		public virtual string Publisher { get; set; }
 		public virtual Nullable<short> AmountInStock { get; set; }
 
 		#endregion
@@ -78,7 +76,7 @@ namespace RepositoryEFDotnet.Data.Entity
 		{ 
 			get
 			{
-				return this.OrderDetails == null ? null : (IList<IOrderDetails>)this.OrderDetails;
+				return this.OrderDetails == null ? null : this.OrderDetails as IList<IOrderDetails>;
 			}
 			set
 			{
@@ -94,6 +92,52 @@ namespace RepositoryEFDotnet.Data.Entity
 					}
 				}
 			}			
+		}
+        
+        public virtual Book Book { get; set; }
+		IBook IProduct.Book 
+		{ 
+			get
+			{
+				return this.Book;
+			}
+			set
+			{
+				if(value != this.Book)
+				{
+					if(value != null)
+					{
+						this.Book = (Book)value;
+					}
+					else
+					{
+						this.Book = null;
+					}
+				}
+			}
+		}
+        
+        public virtual Software Software { get; set; }
+		ISoftware IProduct.Software 
+		{ 
+			get
+			{
+				return this.Software;
+			}
+			set
+			{
+				if(value != this.Software)
+				{
+					if(value != null)
+					{
+						this.Software = (Software)value;
+					}
+					else
+					{
+						this.Software = null;
+					}
+				}
+			}
 		}
 
 		#endregion

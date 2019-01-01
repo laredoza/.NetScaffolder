@@ -1,6 +1,6 @@
 ﻿
 // <copyright file="ProductMap.g.cs" company="MIT">
-//  Copyright (c) 2018 MIT
+//  Copyright (c) 2019 MIT
 // </copyright>  
 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
@@ -24,10 +24,10 @@ using System.Data.Entity.Infrastructure.Annotations;
 using Oracle.ManagedDataAccess.Client;
 using Oracle.Config;
 using System.ComponentModel.DataAnnotations.Schema;
-using RepositoryEFDotnet.Data.Entity;
+using DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity;
 using System.Data.Common;
 
-namespace RepositoryEFDotnet.Data.Context.Mappings.EF.Oracle
+namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.Oracle.Mappings.OracleFullContext
 {
 	public partial class FullContextProductMap : EntityTypeConfiguration<Product>
 	{	
@@ -54,10 +54,6 @@ namespace RepositoryEFDotnet.Data.Context.Mappings.EF.Oracle
 			Property(t => t.ProductDescription).IsOptional();
 			Property(t => t.UnitPrice).IsOptional();
 			Property(t => t.UnitPrice).HasPrecision(19, 4);
-			Property(t => t.UnitAmount).HasMaxLength(50);
-			Property(t => t.UnitAmount).IsOptional();
-			Property(t => t.Publisher).HasMaxLength(200);
-			Property(t => t.Publisher).IsOptional();
 			Property(t => t.AmountInStock).IsOptional();
 			
 			#endregion
@@ -68,7 +64,9 @@ namespace RepositoryEFDotnet.Data.Context.Mappings.EF.Oracle
 
 			#region Relationships
 			
+			HasOptional<Book>(s => s.Book).WithRequired(s => s.Product).WillCascadeOnDelete(false);
 			HasMany<OrderDetails>(s => s.OrderDetails).WithRequired(s => s.Product).HasForeignKey(s => s.ProductId).WillCascadeOnDelete(false);
+			HasOptional<Software>(s => s.Software).WithRequired(s => s.Product).WillCascadeOnDelete(false);
 			
 			#endregion			
 
@@ -77,9 +75,7 @@ namespace RepositoryEFDotnet.Data.Context.Mappings.EF.Oracle
 			Property(t => t.ProductId).HasColumnOrder(1);
 			Property(t => t.ProductDescription).HasColumnOrder(2);
 			Property(t => t.UnitPrice).HasColumnOrder(3);
-			Property(t => t.UnitAmount).HasColumnOrder(4);
-			Property(t => t.Publisher).HasColumnOrder(5);
-			Property(t => t.AmountInStock).HasColumnOrder(6);
+			Property(t => t.AmountInStock).HasColumnOrder(4);
 
 			#endregion
 	

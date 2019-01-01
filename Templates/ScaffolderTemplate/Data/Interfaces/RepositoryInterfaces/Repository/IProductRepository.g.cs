@@ -1,6 +1,6 @@
 ﻿
 // <copyright file="Product.g.cs" company="MIT">
-//  Copyright (c) 2018 MIT
+//  Copyright (c) 2019 MIT
 // </copyright>  
 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
@@ -22,10 +22,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using RepositoryEFDotnet.Data.Interfaces;
-using RepositoryEFDotnet.Core.Base;
+using DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.Dto;
+using DotNetScaffolder.Domain.Core.Interfaces;
 
-namespace RepositoryEFDotnet.Data.Interfaces
+namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
 {
 	/// <summary>
 	/// The ProductRepository interface that defines database functions for the Product table
@@ -127,46 +127,6 @@ namespace RepositoryEFDotnet.Data.Interfaces
 		/// <param name="includes">params Expression<Func<IProduct, object>>[]</param>
         /// <returns>IList<IProduct></returns>
 		Task<IList<IProduct>> SearchByProductDescriptionAsync(string productDescription, bool cache, bool caseSensitive = false, params Expression<Func<IProduct, object>>[] includes);
-
-        /// <summary>
-        /// Search for Product entities in the database by UnitAmount
-        /// </summary>
-        /// <param name="unitAmount">string</param>
-        /// <param name="cache">Use 2nd level caching if enabled</param>
-		/// <param name="caseSensitive">bool</param
-		/// <param name="includes">params Expression<Func<IProduct, object>>[]</param>
-        /// <returns>IList<IProduct></returns>
-		IList<IProduct> SearchByUnitAmount(string unitAmount, bool cache, bool caseSensitive = false, params Expression<Func<IProduct, object>>[] includes);
-		
-        /// <summary>
-        /// Search for Product entities async in the database by UnitAmount
-        /// </summary>
-        /// <param name="unitAmount">string</param>
-        /// <param name="cache">Use 2nd level caching if enabled</param>
-		/// <param name="caseSensitive">bool</param
-		/// <param name="includes">params Expression<Func<IProduct, object>>[]</param>
-        /// <returns>IList<IProduct></returns>
-		Task<IList<IProduct>> SearchByUnitAmountAsync(string unitAmount, bool cache, bool caseSensitive = false, params Expression<Func<IProduct, object>>[] includes);
-
-        /// <summary>
-        /// Search for Product entities in the database by Publisher
-        /// </summary>
-        /// <param name="publisher">string</param>
-        /// <param name="cache">Use 2nd level caching if enabled</param>
-		/// <param name="caseSensitive">bool</param
-		/// <param name="includes">params Expression<Func<IProduct, object>>[]</param>
-        /// <returns>IList<IProduct></returns>
-		IList<IProduct> SearchByPublisher(string publisher, bool cache, bool caseSensitive = false, params Expression<Func<IProduct, object>>[] includes);
-		
-        /// <summary>
-        /// Search for Product entities async in the database by Publisher
-        /// </summary>
-        /// <param name="publisher">string</param>
-        /// <param name="cache">Use 2nd level caching if enabled</param>
-		/// <param name="caseSensitive">bool</param
-		/// <param name="includes">params Expression<Func<IProduct, object>>[]</param>
-        /// <returns>IList<IProduct></returns>
-		Task<IList<IProduct>> SearchByPublisherAsync(string publisher, bool cache, bool caseSensitive = false, params Expression<Func<IProduct, object>>[] includes);
 
 		#endregion
 		
