@@ -6,10 +6,16 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace RepositoryEFDotnet.Services.WebApi.Default
+namespace DotNetScaffolder.Domain.Services.WebApi.Default
 {
     public class Startup
     {
+        #region Constants
+
+        private const string SearchAssemblies = "DotNetScaffolder";
+
+        #endregion
+
         #region Fields
 
         /// <summary>
@@ -53,7 +59,8 @@ namespace RepositoryEFDotnet.Services.WebApi.Default
         // This method gets called by the runtime. Use this method to add services to the container.
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2); ;
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            ;
             //.AddRazorPagesOptions(options =>
             //{
             //    options.Conventions..AuthorizePage("/Contact");
@@ -62,7 +69,7 @@ namespace RepositoryEFDotnet.Services.WebApi.Default
             //    options.Conventions.AllowAnonymousToFolder("/Private/PublicPages");
             //})
             //.SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-            return services.Build(Configuration, hostingEnvironment, "./", "RepositoryEFDotnet");
+            return services.Build(Configuration, hostingEnvironment, "./", SearchAssemblies);
         }
 
         #endregion
