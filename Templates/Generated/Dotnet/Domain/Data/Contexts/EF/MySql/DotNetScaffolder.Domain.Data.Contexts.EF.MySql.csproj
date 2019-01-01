@@ -158,7 +158,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ContextRegisster\ContextRegistration.g.cs" />
     <Compile Include="Context\MySqlFullContext.g.cs" />
+    <Compile Include="Database\DatabaseManager.g.cs" />
     <Compile Include="Mappings\MySqlFullContext\FullContextBankAccountMap.g.cs" />
     <Compile Include="Mappings\MySqlFullContext\FullContextBankTransfersMap.g.cs" />
     <Compile Include="Mappings\MySqlFullContext\FullContextBookMap.g.cs" />

@@ -3,6 +3,7 @@
   <AdditionalNamespaces>
     <string>DotNetScaffolder.Domain.Core</string>
     <string>DotNetScaffolder.Domain.Data.Contexts.{DriverType}.Base.Context</string>
+    <string>DotNetScaffolder.Domain.Core.Interfaces</string>
   </AdditionalNamespaces>
   <Contexts>
     <ContextData>

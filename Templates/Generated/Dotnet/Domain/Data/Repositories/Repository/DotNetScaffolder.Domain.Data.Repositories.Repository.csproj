@@ -31,7 +31,10 @@
 ..\..\..\Services\WebApi\Default\Controllers\ProductController.g.cs
 ..\..\ApplicationServices\ApplicationService\ApplicationService\CustomerApplicationService.g.cs
 ..\..\ApplicationServices\ApplicationService\ApplicationService\ProductApplicationService.g.cs
+..\..\ApplicationServices\ApplicationService\Register\ApplicationServiceRegistration.g.cs
 ..\..\Contexts\EF\MySql\Context\MySqlFullContext.g.cs
+..\..\Contexts\EF\MySql\ContextRegisster\ContextRegistration.g.cs
+..\..\Contexts\EF\MySql\Database\DatabaseManager.g.cs
 ..\..\Contexts\EF\MySql\Mappings\MySqlFullContext\FullContextBankAccountMap.g.cs
 ..\..\Contexts\EF\MySql\Mappings\MySqlFullContext\FullContextBankTransfersMap.g.cs
 ..\..\Contexts\EF\MySql\Mappings\MySqlFullContext\FullContextBookMap.g.cs
@@ -42,6 +45,8 @@
 ..\..\Contexts\EF\MySql\Mappings\MySqlFullContext\FullContextProductMap.g.cs
 ..\..\Contexts\EF\MySql\Mappings\MySqlFullContext\FullContextSoftwareMap.g.cs
 ..\..\Contexts\EF\Oracle\Context\OracleFullContext.g.cs
+..\..\Contexts\EF\Oracle\ContextRegisster\ContextRegistration.g.cs
+..\..\Contexts\EF\Oracle\Database\DatabaseManager.g.cs
 ..\..\Contexts\EF\Oracle\Mappings\OracleFullContext\FullContextBankAccountMap.g.cs
 ..\..\Contexts\EF\Oracle\Mappings\OracleFullContext\FullContextBankTransfersMap.g.cs
 ..\..\Contexts\EF\Oracle\Mappings\OracleFullContext\FullContextBookMap.g.cs
@@ -52,6 +57,8 @@
 ..\..\Contexts\EF\Oracle\Mappings\OracleFullContext\FullContextProductMap.g.cs
 ..\..\Contexts\EF\Oracle\Mappings\OracleFullContext\FullContextSoftwareMap.g.cs
 ..\..\Contexts\EF\Postgres\Context\PostgresFullContext.g.cs
+..\..\Contexts\EF\Postgres\ContextRegisster\ContextRegistration.g.cs
+..\..\Contexts\EF\Postgres\Database\DatabaseManager.g.cs
 ..\..\Contexts\EF\Postgres\Mappings\PostgresFullContext\FullContextBankAccountMap.g.cs
 ..\..\Contexts\EF\Postgres\Mappings\PostgresFullContext\FullContextBankTransfersMap.g.cs
 ..\..\Contexts\EF\Postgres\Mappings\PostgresFullContext\FullContextBookMap.g.cs
@@ -62,6 +69,8 @@
 ..\..\Contexts\EF\Postgres\Mappings\PostgresFullContext\FullContextProductMap.g.cs
 ..\..\Contexts\EF\Postgres\Mappings\PostgresFullContext\FullContextSoftwareMap.g.cs
 ..\..\Contexts\EF\SqlServer\Context\SqlServerFullContext.g.cs
+..\..\Contexts\EF\SqlServer\ContextRegisster\ContextRegistration.g.cs
+..\..\Contexts\EF\SqlServer\Database\DatabaseManager.g.cs
 ..\..\Contexts\EF\SqlServer\Mappings\SqlServerFullContext\FullContextBankAccountMap.g.cs
 ..\..\Contexts\EF\SqlServer\Mappings\SqlServerFullContext\FullContextBankTransfersMap.g.cs
 ..\..\Contexts\EF\SqlServer\Mappings\SqlServerFullContext\FullContextBookMap.g.cs
@@ -72,6 +81,8 @@
 ..\..\Contexts\EF\SqlServer\Mappings\SqlServerFullContext\FullContextProductMap.g.cs
 ..\..\Contexts\EF\SqlServer\Mappings\SqlServerFullContext\FullContextSoftwareMap.g.cs
 ..\..\Contexts\EFCore\MySql\Context\MySqlFullContext.g.cs
+..\..\Contexts\EFCore\MySql\ContextRegisster\ContextRegistration.g.cs
+..\..\Contexts\EFCore\MySql\Database\DatabaseManager.g.cs
 ..\..\Contexts\EFCore\MySql\Mappings\MySqlFullContext\FullContextBankAccountMap.g.cs
 ..\..\Contexts\EFCore\MySql\Mappings\MySqlFullContext\FullContextBankTransfersMap.g.cs
 ..\..\Contexts\EFCore\MySql\Mappings\MySqlFullContext\FullContextBookMap.g.cs
@@ -82,6 +93,8 @@
 ..\..\Contexts\EFCore\MySql\Mappings\MySqlFullContext\FullContextProductMap.g.cs
 ..\..\Contexts\EFCore\MySql\Mappings\MySqlFullContext\FullContextSoftwareMap.g.cs
 ..\..\Contexts\EFCore\Postgres\Context\PostgresFullContext.g.cs
+..\..\Contexts\EFCore\Postgres\ContextRegisster\ContextRegistration.g.cs
+..\..\Contexts\EFCore\Postgres\Database\DatabaseManager.g.cs
 ..\..\Contexts\EFCore\Postgres\Mappings\PostgresFullContext\FullContextBankAccountMap.g.cs
 ..\..\Contexts\EFCore\Postgres\Mappings\PostgresFullContext\FullContextBankTransfersMap.g.cs
 ..\..\Contexts\EFCore\Postgres\Mappings\PostgresFullContext\FullContextBookMap.g.cs
@@ -92,6 +105,8 @@
 ..\..\Contexts\EFCore\Postgres\Mappings\PostgresFullContext\FullContextProductMap.g.cs
 ..\..\Contexts\EFCore\Postgres\Mappings\PostgresFullContext\FullContextSoftwareMap.g.cs
 ..\..\Contexts\EFCore\SqlServer\Context\SqlServerFullContext.g.cs
+..\..\Contexts\EFCore\SqlServer\ContextRegisster\ContextRegistration.g.cs
+..\..\Contexts\EFCore\SqlServer\Database\DatabaseManager.g.cs
 ..\..\Contexts\EFCore\SqlServer\Mappings\SqlServerFullContext\FullContextBankAccountMap.g.cs
 ..\..\Contexts\EFCore\SqlServer\Mappings\SqlServerFullContext\FullContextBankTransfersMap.g.cs
 ..\..\Contexts\EFCore\SqlServer\Mappings\SqlServerFullContext\FullContextBookMap.g.cs
@@ -102,6 +117,8 @@
 ..\..\Contexts\EFCore\SqlServer\Mappings\SqlServerFullContext\FullContextProductMap.g.cs
 ..\..\Contexts\EFCore\SqlServer\Mappings\SqlServerFullContext\FullContextSoftwareMap.g.cs
 ..\..\Contexts\NHib\MySql\Context\MySqlFullContext.g.cs
+..\..\Contexts\NHib\MySql\ContextRegisster\ContextRegistration.g.cs
+..\..\Contexts\NHib\MySql\Database\DatabaseManager.g.cs
 ..\..\Contexts\NHib\MySql\Mappings\MySqlFullContext\FullContextBankAccountMap.g.cs
 ..\..\Contexts\NHib\MySql\Mappings\MySqlFullContext\FullContextBankTransfersMap.g.cs
 ..\..\Contexts\NHib\MySql\Mappings\MySqlFullContext\FullContextBookMap.g.cs
@@ -112,6 +129,8 @@
 ..\..\Contexts\NHib\MySql\Mappings\MySqlFullContext\FullContextProductMap.g.cs
 ..\..\Contexts\NHib\MySql\Mappings\MySqlFullContext\FullContextSoftwareMap.g.cs
 ..\..\Contexts\NHib\Oracle\Context\OracleFullContext.g.cs
+..\..\Contexts\NHib\Oracle\ContextRegisster\ContextRegistration.g.cs
+..\..\Contexts\NHib\Oracle\Database\DatabaseManager.g.cs
 ..\..\Contexts\NHib\Oracle\Mappings\OracleFullContext\FullContextBankAccountMap.g.cs
 ..\..\Contexts\NHib\Oracle\Mappings\OracleFullContext\FullContextBankTransfersMap.g.cs
 ..\..\Contexts\NHib\Oracle\Mappings\OracleFullContext\FullContextBookMap.g.cs
@@ -122,6 +141,8 @@
 ..\..\Contexts\NHib\Oracle\Mappings\OracleFullContext\FullContextProductMap.g.cs
 ..\..\Contexts\NHib\Oracle\Mappings\OracleFullContext\FullContextSoftwareMap.g.cs
 ..\..\Contexts\NHib\SqlServer\Context\SqlServerFullContext.g.cs
+..\..\Contexts\NHib\SqlServer\ContextRegisster\ContextRegistration.g.cs
+..\..\Contexts\NHib\SqlServer\Database\DatabaseManager.g.cs
 ..\..\Contexts\NHib\SqlServer\Mappings\SqlServerFullContext\FullContextBankAccountMap.g.cs
 ..\..\Contexts\NHib\SqlServer\Mappings\SqlServerFullContext\FullContextBankTransfersMap.g.cs
 ..\..\Contexts\NHib\SqlServer\Mappings\SqlServerFullContext\FullContextBookMap.g.cs
@@ -169,6 +190,7 @@
 ..\..\Interfaces\RepositoryInterfaces\Repository\IOrderRepository.g.cs
 ..\..\Interfaces\RepositoryInterfaces\Repository\IProductRepository.g.cs
 ..\..\Interfaces\RepositoryInterfaces\Repository\ISoftwareRepository.g.cs
+.\Register\RepositoryRegistration.g.cs
 .\Repository\BankAccountRepository.g.cs
 .\Repository\BankTransfersRepository.g.cs
 .\Repository\BookRepository.g.cs

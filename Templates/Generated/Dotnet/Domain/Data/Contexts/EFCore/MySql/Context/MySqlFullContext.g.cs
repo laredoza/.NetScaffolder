@@ -24,6 +24,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System.Configuration;
 using DotNetScaffolder.Domain.Core;
 using DotNetScaffolder.Domain.Data.Contexts.EFCore.Base.Context;
+using DotNetScaffolder.Domain.Core.Interfaces;
 using DotNetScaffolder.Domain.Data.Contexts.EFCore.MySql.Mappings.MySqlFullContext;
 using DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity;
 using System;

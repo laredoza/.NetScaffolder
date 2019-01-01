@@ -6,6 +6,7 @@ public class StructureMapContextRegistrationTemplate : BaseTemplate
 	public IDriver Driver { get; set; }
     public string InterfaceDatabasePath {get; set;}
     public List<string> NameSpaces{ get; set;}
+    private string contextNamespace;
 
 	public override string TransformText()
 	{
@@ -20,6 +21,7 @@ public class StructureMapContextRegistrationTemplate : BaseTemplate
 //	GENERATED CODE. DOT NOT MODIFY MANUALLY AS CHANGES CAN BE LOST!!!
 //	USE A PARTIAL CLASS INSTEAD
 // *******************************************************************
+<#+contextNamespace = ContextData.TransformFullnamespace(DataType.BaseNamespace).Replace("{DriverType}", "EFCore").Replace("{DriverPrefix}", Driver.Prefix);#>
 
 using System;
 using System.Collections.Generic;
@@ -27,10 +29,10 @@ using StructureMap.Pipeline;
 <#+ foreach(var nameSpace in NameSpaces){ #>
 using <#= nameSpace #>;
 <#+ } #>
-using <#= ContextData.TransformFullnamespace(DataType.BaseNamespace) #>.<#= Driver.ParentFolder #>.<#= Driver.Prefix #>.Database;
+using <#= contextNamespace #>.Database;
 //using <#= InterfaceDatabasePath #>;
  
-namespace <#= DataType.BaseNamespace #>.<#= ContextData.Namespace #>.<#= Driver.ParentFolder #>.ContextRegistration
+namespace <#= contextNamespace #>.ContextRegistration
 {
 	public class ContextRegistration : StructureMap.Registry
 	{			

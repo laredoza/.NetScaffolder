@@ -25,6 +25,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity;
 using DotNetScaffolder.Domain.Core;
 using DotNetScaffolder.Domain.Data.Contexts.EF.Base.Context;
+using DotNetScaffolder.Domain.Core.Interfaces;
 using DotNetScaffolder.Domain.Data.Contexts.EFCore.SqlServer.Mappings.SqlServerFullContext;
 using DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity;
 using System.Data.Common;
@@ -100,7 +101,7 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.SqlServer.Context
             Configuration.ProxyCreationEnabled = false;
             Configuration.AutoDetectChangesEnabled = false;
 			
-			Database.SetInitializer(new CreateDatabaseIfNotExists<SqlServerFullContext>());
+			System.Data.Entity.Database.SetInitializer(new CreateDatabaseIfNotExists<SqlServerFullContext>());
 			Database.Log = this.Log;
         }
 		

@@ -108,7 +108,7 @@ namespace <#= contextNamespace #>.Context
             Configuration.AutoDetectChangesEnabled = false;
 			
 <#+ if(Driver.DriverType.CreateDb){ #>
-			Database.SetInitializer(new CreateDatabaseIfNotExists<<#= string.Concat(Driver.Prefix, ContextData.ContextName)  #>>());
+			System.Data.Entity.Database.SetInitializer(new CreateDatabaseIfNotExists<<#= string.Concat(Driver.Prefix, ContextData.ContextName)  #>>());
 <#+ } #>
 <#+ if(Driver.DriverType.LoggingEnabled){ #>
 			Database.Log = this.Log;

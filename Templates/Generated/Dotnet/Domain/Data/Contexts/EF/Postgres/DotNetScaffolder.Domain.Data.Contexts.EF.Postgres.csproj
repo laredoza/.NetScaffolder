@@ -154,7 +154,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ContextRegisster\ContextRegistration.g.cs" />
     <Compile Include="Context\PostgresFullContext.g.cs" />
+    <Compile Include="Database\DatabaseManager.g.cs" />
     <Compile Include="Mappings\PostgresFullContext\FullContextBankAccountMap.g.cs" />
     <Compile Include="Mappings\PostgresFullContext\FullContextBankTransfersMap.g.cs" />
     <Compile Include="Mappings\PostgresFullContext\FullContextBookMap.g.cs" />
