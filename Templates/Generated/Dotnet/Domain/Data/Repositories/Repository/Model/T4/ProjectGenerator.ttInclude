@@ -127,21 +127,20 @@
 
                     applicationServiceGenerator.Run();
                 }
-//
-                //if (dataType is WebApiServiceDataType)
-                //{
-                    ////Debugger.Break();
-                    //WebApiServiceDataType webApiServiceDataType = dataType as WebApiServiceDataType;
-                    //var entityDataType = dataTypes.FirstOrDefault(o => o is EntityDataType) as EntityDataType;
-//
-                    //var applicationServiceGenerator = new WebApiGenerator {
-                            //DataType = webApiServiceDataType,
-                            //ApplicationServiceDataType = dataTypes.FirstOrDefault(o => o is ApplicationServiceDataType) as ApplicationServiceDataType,
-                            //DtoInterfaceDataType = dataTypes.FirstOrDefault(o => o is DtoInterfaceDataType) as DtoInterfaceDataType
-                            //};
-//
-                    //applicationServiceGenerator.Run();
-                //}
+
+                if (dataType is WebApiServiceDataType)
+                {
+                    WebApiServiceDataType webApiServiceDataType = dataType as WebApiServiceDataType;
+                    var entityDataType = dataTypes.FirstOrDefault(o => o is EntityDataType) as EntityDataType;
+
+                    var applicationServiceGenerator = new WebApiGenerator {
+                            DataType = webApiServiceDataType,
+                            ApplicationServiceDataType = dataTypes.FirstOrDefault(o => o is ApplicationServiceDataType) as ApplicationServiceDataType,
+                            DtoInterfaceDataType = dataTypes.FirstOrDefault(o => o is DtoInterfaceDataType) as DtoInterfaceDataType
+                            };
+
+                    applicationServiceGenerator.Run();
+                }
 //
 //
                 

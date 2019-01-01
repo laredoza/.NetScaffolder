@@ -28,6 +28,7 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>RunGenerator.cs</LastGenOutput>
       <LastOutputs>
+..\..\..\Services\WebApi\Default\Controllers\ProductController.g.cs
 ..\..\ApplicationServices\ApplicationService\ApplicationService\CustomerApplicationService.g.cs
 ..\..\ApplicationServices\ApplicationService\ApplicationService\ProductApplicationService.g.cs
 ..\..\Contexts\EF\MySql\Context\MySqlFullContext.g.cs

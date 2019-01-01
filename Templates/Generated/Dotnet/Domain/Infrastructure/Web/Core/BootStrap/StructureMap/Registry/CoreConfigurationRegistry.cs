@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using DotNetScaffolder.Domain.Core;
+using DotNetScaffolder.Domain.Core.Interfaces;
 using Microsoft.Extensions.Configuration;
-using RepositoryEFDotnet.Core.Base;
 using StructureMap.Pipeline;
 
-namespace RepositoryEFDotnet.Infrastructure.Web.Core.BootStrap.StructureMap.Registry
+namespace DotNetScaffolder.Domain.Infrastructure.Web.Core.BootStrap.StructureMap.Registry
 {
     /// <summary>
     /// The core configuration registry.

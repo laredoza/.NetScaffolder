@@ -1,6 +1,6 @@
 ﻿
 // <copyright file=".g.cs" company="MIT">
-//  Copyright (c) 2018 MIT
+//  Copyright (c) 2019 MIT
 // </copyright>  
 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
@@ -24,10 +24,10 @@ using Microsoft.AspNetCore.Mvc;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-using DotNetScaffolder.Domain.ApplicationService;
-using DotNetScaffolder.Domain.Interfaces;
+using DotNetScaffolder.Domain.Data.ApplicationService;
+using DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.Dto;
 
-namespace DotNetScaffolder.Domain.Controllers
+namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
 {
     /// <summary>
 	/// The Product Controller

@@ -1,4 +1,4 @@
-﻿namespace RepositoryEFDotnet.Infrastructure.Web.Core.Security
+﻿namespace DotNetScaffolder.Domain.Infrastructure.Web.Core.Security
 {
     public static class MyClaimTypes
     {

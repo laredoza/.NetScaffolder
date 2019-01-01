@@ -19,15 +19,10 @@
 // *******************************************************************
 
 using System;
-using System.Collections.Generic;
-using Microsoft.AspNetCore.Mvc;
 using System.Linq.Expressions;
-using System.Threading.Tasks;
+using DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.Dto;
 
-using RepositoryEFDotnet.Data.ApplicationService;
-using RepositoryEFDotnet.Data.Interfaces;
-
-namespace RepositoryEFDotnet.Data.Controllers
+namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
 {
     /// <summary>
 	/// The Product Controller

@@ -1,10 +1,10 @@
 ﻿using System;
+using DotNetScaffolder.Domain.Infrastructure.Web.Core.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using RepositoryEFDotnet.Infrastructure.Web.Core.Extensions;
 
 namespace RepositoryEFDotnet.Services.WebApi.Default
 {

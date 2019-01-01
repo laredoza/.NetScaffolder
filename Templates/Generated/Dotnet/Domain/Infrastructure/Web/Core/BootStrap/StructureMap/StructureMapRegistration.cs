@@ -1,13 +1,9 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using DotNetScaffolder.Domain.Infrastructure.Web.Core.BootStrap.StructureMap.Registry;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using RepositoryEFDotnet.Infrastructure.Web.Core.BootStrap.StructureMap.Registry;
 using StructureMap;
 
-namespace RepositoryEFDotnet.Infrastructure.Web.Core.BootStrap.StructureMap
+namespace DotNetScaffolder.Domain.Infrastructure.Web.Core.BootStrap.StructureMap
 {
     /// <summary>
     ///     The structure map registration.

@@ -1,14 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using DotNetScaffolder.Domain.Core.Interfaces;
+using DotNetScaffolder.Domain.Infrastructure.Web.Core.BootStrap.StructureMap;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using RepositoryEFDotnet.Core.Base;
-using RepositoryEFDotnet.Infrastructure.Web.Core.BootStrap.StructureMap;
 using StructureMap;
 
-namespace RepositoryEFDotnet.Infrastructure.Web.Core.Extensions
+namespace DotNetScaffolder.Domain.Infrastructure.Web.Core.Extensions
 {
     public static class ServiceCollectionExtensions
     {

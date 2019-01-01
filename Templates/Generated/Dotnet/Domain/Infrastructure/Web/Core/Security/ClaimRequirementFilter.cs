@@ -2,7 +2,7 @@
 using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace RepositoryEFDotnet.Infrastructure.Web.Core.Security
+namespace DotNetScaffolder.Domain.Infrastructure.Web.Core.Security
 {
     public class ClaimRequirementFilter : IAuthorizationFilter
     {
