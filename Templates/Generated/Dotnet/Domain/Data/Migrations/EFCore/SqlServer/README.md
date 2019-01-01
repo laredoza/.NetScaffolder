@@ -4,6 +4,6 @@
 Open Package Manager
 cd  Data\Migrations\EFCore\SqlServer
 - Save Migration (if required)
-dotnet ef migrations add --startup-project RepositoryEFDotnet.Data.Migrations.SqlServer.csproj --project ..\..\..\Contexts\EFCore\SqlServer\RepositoryEFDotnet.Contexts.EFCore.SqlServer.csproj --context RepositoryEFDotnet.Data.Context.EFCore.SqlServerFullContext 'Initial'
+dotnet ef migrations add --startup-project DotNetScaffolder.Domain.Migrations.EFCore.SqlServer.csproj --project ..\..\..\Contexts\EFCore\SqlServer\DotNetScaffolder.Domain.Data.Contexts.EFCore.SqlServer.csproj --context DotNetScaffolder.Domain.Data.Contexts.EFCore.SqlServer.Context.SqlServerFullContext 'Initial'
 - Update Database
 dotnet ef database update
