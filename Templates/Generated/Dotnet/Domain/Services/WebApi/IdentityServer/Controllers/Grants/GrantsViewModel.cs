@@ -5,7 +5,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace IdentityServer4.Quickstart.UI
+namespace DotNetScaffolder.Domain.Services.WebApi.IdentityServer.Controllers.Grants
 {
     public class GrantsViewModel
     {

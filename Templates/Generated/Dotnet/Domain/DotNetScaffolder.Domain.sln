@@ -49,7 +49,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.7 Tests", "1.7 Tests", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EFCore", "EFCore", "{E6A8C34C-9ECE-46AE-AC36-01F3CAF293C3}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EFCore.Base", "Data\Contexts\EFCore\Base\EFCore.Base.csproj", "{B801261B-ECE7-4B9E-86C8-0B5F631B0065}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetScaffolder.Domain.Data.Contexts.EFCore.Base", "Data\Contexts\EFCore\Base\DotNetScaffolder.Domain.Data.Contexts.EFCore.Base.csproj", "{B801261B-ECE7-4B9E-86C8-0B5F631B0065}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetScaffolder.Domain.Data.Contexts.EFCore.MySql", "Data\Contexts\EFCore\MySql\DotNetScaffolder.Domain.Data.Contexts.EFCore.MySql.csproj", "{F5647C02-1232-42D4-935C-ADB9442FE96B}"
 EndProject
@@ -73,7 +73,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetScaffolder.Repository
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebApi", "WebApi", "{7C44558F-8292-4450-8DFC-8A6FFD8199BB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RepositoryEFDotnet.IdentityServer", "Services\WebApi\IdentityServer\RepositoryEFDotnet.IdentityServer.csproj", "{9ADB4673-333A-4400-8806-B4093E10444C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetScaffolder.Domain.Services.WebApi.IdentityServer", "Services\WebApi\IdentityServer\DotNetScaffolder.Domain.Services.WebApi.IdentityServer.csproj", "{9ADB4673-333A-4400-8806-B4093E10444C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5. Tests", "5. Tests", "{E159F450-4D74-4605-B58F-C3471DF32DFE}"
 EndProject
@@ -109,7 +109,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetScaffolder.Domain.Dat
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetScaffolder.Domain.Data.Contexts.EFCore.Seed", "Data\Contexts\EFCore\Seed\DotNetScaffolder.Domain.Data.Contexts.EFCore.Seed.csproj", "{41736B2A-4185-4130-8FA0-B90958D035D1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetScaffolder.Domain.Data.Entities.DefaultEntity", "Data\Entities\Entity\DotNetScaffolder.Domain.Data.Entities.DefaultEntity.csproj", "{83F99B9D-6D44-47CE-9AEC-6BF50D211CC5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetScaffolder.Domain.Data.Entities.DefaultEntity", "Data\Entities\Entity\DotNetScaffolder.Domain.Data.Entities.DefaultEntity.csproj", "{83F99B9D-6D44-47CE-9AEC-6BF50D211CC5}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetScaffolder.Domain.Data.Contexts.EFCore.SqlServer", "Data\Contexts\EFCore\SqlServer\DotNetScaffolder.Domain.Data.Contexts.EFCore.SqlServer.csproj", "{A5098BC6-1487-4460-A94F-2BFACEF2E522}"
 EndProject

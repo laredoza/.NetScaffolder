@@ -12,6 +12,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Linq;
 using System.Threading.Tasks;
+using DotNetScaffolder.Domain.Services.WebApi.IdentityServer.Controllers;
+using DotNetScaffolder.Domain.Services.WebApi.IdentityServer.Controllers.Account;
+using DotNetScaffolder.Domain.Services.WebApi.IdentityServer.Controllers.Consent;
 
 namespace IdentityServer4.Quickstart.UI
 {

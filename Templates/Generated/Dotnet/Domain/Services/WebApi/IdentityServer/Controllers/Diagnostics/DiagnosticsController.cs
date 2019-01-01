@@ -4,11 +4,12 @@
 
 using System.Linq;
 using System.Threading.Tasks;
+using IdentityServer4.Quickstart.UI;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace IdentityServer4.Quickstart.UI
+namespace DotNetScaffolder.Domain.Services.WebApi.IdentityServer.Controllers.Diagnostics
 {
     [SecurityHeaders]
     [Authorize]

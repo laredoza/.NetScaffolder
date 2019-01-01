@@ -15,7 +15,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Host.Quickstart.Account
+namespace DotNetScaffolder.Domain.Services.WebApi.IdentityServer.Controllers.Account
 {
     [SecurityHeaders]
     [AllowAnonymous]

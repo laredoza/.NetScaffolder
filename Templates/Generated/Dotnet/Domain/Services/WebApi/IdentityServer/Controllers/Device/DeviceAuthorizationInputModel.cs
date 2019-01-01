@@ -2,7 +2,9 @@
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
 
-namespace IdentityServer4.Quickstart.UI.Device
+using DotNetScaffolder.Domain.Services.WebApi.IdentityServer.Controllers.Consent;
+
+namespace DotNetScaffolder.Domain.Services.WebApi.IdentityServer.Controllers.Device
 {
     public class DeviceAuthorizationInputModel : ConsentInputModel
     {

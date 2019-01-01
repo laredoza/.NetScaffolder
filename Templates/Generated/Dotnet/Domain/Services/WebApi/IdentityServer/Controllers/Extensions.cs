@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using IdentityServer4.Stores;
 
-namespace IdentityServer4.Quickstart.UI
+namespace DotNetScaffolder.Domain.Services.WebApi.IdentityServer.Controllers
 {
     public static class Extensions
     {

@@ -5,16 +5,18 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using DotNetScaffolder.Domain.Services.WebApi.IdentityServer.Controllers.Consent;
 using IdentityServer4.Events;
 using IdentityServer4.Extensions;
 using IdentityServer4.Models;
+using IdentityServer4.Quickstart.UI;
 using IdentityServer4.Services;
 using IdentityServer4.Stores;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace IdentityServer4.Quickstart.UI.Device
+namespace DotNetScaffolder.Domain.Services.WebApi.IdentityServer.Controllers.Device
 {
     [Authorize]
     [SecurityHeaders]
