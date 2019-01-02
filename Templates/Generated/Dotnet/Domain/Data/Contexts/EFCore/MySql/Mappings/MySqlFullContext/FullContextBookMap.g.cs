@@ -49,7 +49,7 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.MySql.Mappings.MySqlFullC
 			#endregion
 
 			#region Indexes
-			builder.HasIndex(i => new {i.ProductId}).HasName("IX_ProductId").IsUnique(false);
+			builder.HasIndex(i => new {i.ProductId}).HasName("IX_ProductId1").IsUnique(false);
 			#endregion
 			
 			#region Relationships

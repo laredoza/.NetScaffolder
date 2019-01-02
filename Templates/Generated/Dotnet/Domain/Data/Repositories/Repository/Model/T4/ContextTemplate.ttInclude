@@ -49,11 +49,13 @@ namespace <#= contextNamespace #>.Context
 		public <#= string.Concat(Driver.Prefix, ContextData.ContextName)  #>(DbConnection dbCon, bool contextOwnsConnection = true) 
 			: base(dbCon, contextOwnsConnection) 
 		{
+            <#= Driver.InitContext() #>
 		}
 		
 		public <#= string.Concat(Driver.Prefix, ContextData.ContextName)  #>(string connectionOrName) 
 			: base($"name={connectionOrName}") 
 		{
+            <#+Driver.InitContext(); #>
 		}
 		
 		public <#= string.Concat(Driver.Prefix, ContextData.ContextName)  #>()

@@ -54,7 +54,7 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.MySql.Mappings.MySqlFullC
 
 			#region Indexes
 			builder.HasIndex(i => new {i.BankAccountId}).HasName("UQ__BankAcco__4FC8E4A0C45281C8").IsUnique(true);
-			builder.HasIndex(i => new {i.CustomerId}).HasName("IX_CustomerId").IsUnique(false);
+			builder.HasIndex(i => new {i.CustomerId}).HasName("IX_CustomerId1").IsUnique(false);
 			#endregion
 			
 			#region Relationships

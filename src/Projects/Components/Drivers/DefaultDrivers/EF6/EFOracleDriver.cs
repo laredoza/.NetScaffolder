@@ -4,6 +4,8 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System;
+
 namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6
 {
     #region Usings
@@ -111,6 +113,11 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6
         public string TransformIndex(Index index, INamingConvention nc = null)
         {
             return EFDriverType.TransformIndex(index, nc);
+        }
+
+        public string InitContext()
+        {
+            return String.Empty;
         }
 
         public int CheckPrecision(Column col)

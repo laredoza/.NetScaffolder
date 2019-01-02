@@ -31,7 +31,7 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.Postgres.Mappings.Postgre
 	{	
 	    public virtual void Configure(EntityTypeBuilder<Book> builder)
 	    {
-			builder.ToTable("`Book`");
+			builder.ToTable("Book");
 			
 			#region Primary keys
 			
@@ -49,7 +49,7 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.Postgres.Mappings.Postgre
 			#endregion
 
 			#region Indexes
-			builder.HasIndex(i => new {i.ProductId}).HasName("IX_ProductId").IsUnique(false);
+			builder.HasIndex(i => new {i.ProductId}).HasName("IX_ProductId1").IsUnique(false);
 			#endregion
 			
 			#region Relationships

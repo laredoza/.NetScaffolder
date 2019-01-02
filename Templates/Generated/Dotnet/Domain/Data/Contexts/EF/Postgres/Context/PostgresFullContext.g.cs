@@ -40,12 +40,13 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.Postgres.Context
 		public PostgresFullContext(DbConnection dbCon, bool contextOwnsConnection = true) 
 			: base(dbCon, contextOwnsConnection) 
 		{
+            
 		}
 		
 		public PostgresFullContext(string connectionOrName) 
 			: base($"name={connectionOrName}") 
 		{
-		}
+            		}
 		
 		public PostgresFullContext()
 			: base("name=RepoTest") 

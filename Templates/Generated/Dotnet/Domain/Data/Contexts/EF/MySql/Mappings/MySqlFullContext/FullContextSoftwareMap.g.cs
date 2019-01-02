@@ -55,7 +55,7 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.MySql.Mappings.MySqlFullC
 			#endregion
 			
 			#region Indexes
-			Property(t => t.ProductId).HasColumnAnnotation("IX_ProductId", new IndexAnnotation(new [] { new IndexAttribute("IX_ProductId"){ IsClustered = false, IsUnique = false, Order = 0}}));
+			Property(t => t.ProductId).HasColumnAnnotation("IX_ProductId3", new IndexAnnotation(new [] { new IndexAttribute("IX_ProductId3"){ IsClustered = false, IsUnique = false, Order = 0}}));
 			#endregion
 
 			#region Relationships

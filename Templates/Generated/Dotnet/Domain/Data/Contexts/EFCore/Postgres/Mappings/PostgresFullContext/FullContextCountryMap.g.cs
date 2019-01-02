@@ -31,7 +31,7 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.Postgres.Mappings.Postgre
 	{	
 	    public virtual void Configure(EntityTypeBuilder<Country> builder)
 	    {
-			builder.ToTable("`Country`");
+			builder.ToTable("Country");
 			
 			#region Primary keys
 			

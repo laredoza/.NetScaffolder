@@ -42,7 +42,7 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.Oracle.Mappings.OracleFul
 			#region Primary Keys
 			
 			Id(t => t.ProductId).GeneratedBy.Assigned()
-			.Index("IX_ProductId")
+			.Index("IX_ProductId1")
 			.Not.Nullable();
 
 			#endregion

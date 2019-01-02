@@ -94,6 +94,8 @@ namespace DotNetScaffolder.Components.Common.Contract
 
         string TransformIndex(Index index, INamingConvention nc = null);
 
+        string InitContext();
+
         #endregion
     }
 }

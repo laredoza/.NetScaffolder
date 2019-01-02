@@ -41,12 +41,13 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.MySql.Context
 		public MySqlFullContext(DbConnection dbCon, bool contextOwnsConnection = true) 
 			: base(dbCon, contextOwnsConnection) 
 		{
+            
 		}
 		
 		public MySqlFullContext(string connectionOrName) 
 			: base($"name={connectionOrName}") 
 		{
-		}
+            		}
 		
 		public MySqlFullContext()
 			: base("name=RepoTest") 

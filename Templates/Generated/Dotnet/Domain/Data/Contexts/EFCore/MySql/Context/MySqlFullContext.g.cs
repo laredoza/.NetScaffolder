@@ -54,7 +54,7 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.MySql.Context
 	    {
 	        if (!string.IsNullOrEmpty(ConnectionString) && !optionsBuilder.IsConfigured)
 	        {
-				optionsBuilder.UseMySql(ConnectionString);
+                optionsBuilder.UseMySql(this.ConnectionString);
 	        }
 	    }
 		

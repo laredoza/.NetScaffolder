@@ -143,6 +143,11 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.NHibernate
             return NhibernateDriverType.TransformIndex(index, nc);
         }
 
+        public string InitContext()
+        {
+            return string.Empty;
+        }
+
         #endregion
     }
 }

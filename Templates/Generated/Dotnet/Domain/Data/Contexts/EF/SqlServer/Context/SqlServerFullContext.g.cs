@@ -39,12 +39,13 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.SqlServer.Context
 		public SqlServerFullContext(DbConnection dbCon, bool contextOwnsConnection = true) 
 			: base(dbCon, contextOwnsConnection) 
 		{
+            
 		}
 		
 		public SqlServerFullContext(string connectionOrName) 
 			: base($"name={connectionOrName}") 
 		{
-		}
+            		}
 		
 		public SqlServerFullContext()
 			: base("name=RepoTest") 

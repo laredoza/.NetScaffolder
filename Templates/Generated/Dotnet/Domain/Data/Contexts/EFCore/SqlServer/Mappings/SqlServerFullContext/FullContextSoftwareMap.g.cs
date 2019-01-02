@@ -50,7 +50,7 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.SqlServer.Mappings.SqlSer
 			#endregion
 
 			#region Indexes
-			builder.HasIndex(i => new {i.ProductId}).HasName("IX_ProductId").IsUnique(false);
+			builder.HasIndex(i => new {i.ProductId}).HasName("IX_ProductId3").IsUnique(false);
 			#endregion
 			
 			#region Relationships

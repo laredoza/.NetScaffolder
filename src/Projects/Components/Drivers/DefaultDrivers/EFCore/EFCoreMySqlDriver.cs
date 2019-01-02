@@ -110,6 +110,11 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EFCore
             return EFCoreDriverType.TransformIndex(index, nc);
         }
 
+        public string InitContext()
+        {
+            return "optionsBuilder.UseMySql(this.ConnectionString);";
+        }
+
         public int CheckPrecision(Column col)
         {
             return col.Precision;

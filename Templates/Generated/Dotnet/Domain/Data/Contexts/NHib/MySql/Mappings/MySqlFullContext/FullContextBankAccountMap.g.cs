@@ -56,7 +56,7 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.MySql.Mappings.MySqlFullC
 			.Precision(19).Scale(4)
 			.Not.Nullable();
 			Map(t => t.CustomerId).Column("CustomerId")
-			.Index("IX_CustomerId")
+			.Index("IX_CustomerId1")
 			.Nullable();
 			Map(t => t.Locked).Column("Locked")
 			.Not.Nullable();

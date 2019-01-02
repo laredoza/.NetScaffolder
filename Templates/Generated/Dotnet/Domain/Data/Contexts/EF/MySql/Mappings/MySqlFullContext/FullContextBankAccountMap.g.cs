@@ -60,7 +60,7 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.MySql.Mappings.MySqlFullC
 			
 			#region Indexes
 			Property(t => t.BankAccountId).HasColumnAnnotation("UQ__BankAcco__4FC8E4A0C45281C8", new IndexAnnotation(new [] { new IndexAttribute("UQ__BankAcco__4FC8E4A0C45281C8"){ IsClustered = false, IsUnique = true, Order = 0}}));
-			Property(t => t.CustomerId).HasColumnAnnotation("IX_CustomerId", new IndexAnnotation(new [] { new IndexAttribute("IX_CustomerId"){ IsClustered = false, IsUnique = false, Order = 0}}));
+			Property(t => t.CustomerId).HasColumnAnnotation("IX_CustomerId1", new IndexAnnotation(new [] { new IndexAttribute("IX_CustomerId1"){ IsClustered = false, IsUnique = false, Order = 0}}));
 			#endregion
 
 			#region Relationships

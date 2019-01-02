@@ -4,6 +4,8 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System;
+
 namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.NHibernate
 {
     using System.Collections.Generic;
@@ -106,6 +108,11 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.NHibernate
         public string TransformIndex(Index index, INamingConvention nc = null)
         {
             return NhibernateDriverType.TransformIndex(index, nc);
+        }
+
+        public string InitContext()
+        {
+            return String.Empty;
         }
 
         public int CheckPrecision(Column col)

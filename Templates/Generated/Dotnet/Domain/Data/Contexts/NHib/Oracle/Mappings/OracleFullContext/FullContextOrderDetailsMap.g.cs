@@ -50,10 +50,10 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.Oracle.Mappings.OracleFul
 			#region Properties
 			
 			Map(t => t.OrderId).Column("OrderId")
-			.Index("IX_OrderId")
+			.Index("IX_OrderId1")
 			.Not.Nullable();
 			Map(t => t.ProductId).Column("ProductId")
-			.Index("IX_ProductId")
+			.Index("IX_ProductId2")
 			.Not.Nullable();
 			Map(t => t.UnitPrice).Column("UnitPrice")
 			.Precision(19).Scale(4)

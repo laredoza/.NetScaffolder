@@ -112,6 +112,11 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6
             return EFDriverType.TransformIndex(index, nc);
         }
 
+        public string InitContext()
+        {
+            return string.Empty;
+        }
+
         public int CheckPrecision(Column col)
         {
             return col.Precision;

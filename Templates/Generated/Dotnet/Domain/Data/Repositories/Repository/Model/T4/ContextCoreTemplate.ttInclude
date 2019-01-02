@@ -64,16 +64,7 @@ namespace <#= contextNamespace #>.Context
 	    {
 	        if (!string.IsNullOrEmpty(ConnectionString) && !optionsBuilder.IsConfigured)
 	        {
-<#+ if(Driver is EFCoreSqlServerDriver) { #>
-<#+ if(Driver.DriverType.LazyLoadingEnabled) { #>
-				optionsBuilder.UseLazyLoadingProxies().UseSqlServer(ConnectionString);
-<#+ } else { #>
-				optionsBuilder.UseSqlServer(ConnectionString);
-<#+ } #>
-<#+ }#>
-<#+ if(Driver is EFCoreMySqlDriver) { #>
-				optionsBuilder.UseMySql(ConnectionString);
-<#+ }#>
+                <#= Driver.InitContext() #>
 	        }
 	    }
 		

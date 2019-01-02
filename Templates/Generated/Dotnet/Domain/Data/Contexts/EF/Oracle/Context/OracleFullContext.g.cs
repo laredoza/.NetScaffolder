@@ -42,12 +42,13 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.Oracle.Context
 		public OracleFullContext(DbConnection dbCon, bool contextOwnsConnection = true) 
 			: base(dbCon, contextOwnsConnection) 
 		{
+            
 		}
 		
 		public OracleFullContext(string connectionOrName) 
 			: base($"name={connectionOrName}") 
 		{
-		}
+            		}
 		
 		public OracleFullContext()
 			: base("name=RepoTest") 

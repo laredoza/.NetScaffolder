@@ -93,7 +93,7 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EFCore
         /// </returns>
         public string AsAlias(string name)
         {
-            return !this.DriverType.UseAlias ? name : $"`{name}`";
+            return !this.DriverType.UseAlias ? name : $"{name}";
         }
 
         /// <summary>
@@ -108,6 +108,11 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EFCore
         public string TransformIndex(Index index, INamingConvention nc = null)
         {
             return EFCoreDriverType.TransformIndex(index, nc);
+        }
+
+        public string InitContext()
+        {
+            return "optionsBuilder.UseNpgsql(this.ConnectionString);";
         }
 
         public int CheckPrecision(Column col)

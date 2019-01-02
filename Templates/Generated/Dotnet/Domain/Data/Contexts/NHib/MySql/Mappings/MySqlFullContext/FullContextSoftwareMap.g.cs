@@ -42,7 +42,7 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.MySql.Mappings.MySqlFullC
 			#region Primary Keys
 			
 			Id(t => t.ProductId).GeneratedBy.Assigned()
-			.Index("IX_ProductId")
+			.Index("IX_ProductId3")
 			.Not.Nullable();
 
 			#endregion

@@ -119,6 +119,18 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EFCore
             return idxs;
         }
 
+        public string InitContext()
+        {
+            if (this.DriverType.LazyLoadingEnabled)
+            {
+                return "optionsBuilder.UseLazyLoadingProxies().UseSqlServer(ConnectionString);";
+            }
+            else
+            {
+                return "optionsBuilder.UseSqlServer(ConnectionString);";
+            }
+        }
+
         public int CheckPrecision(Column col)
         {
             return col.Precision;

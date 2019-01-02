@@ -4,6 +4,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using DotNetScaffolder.Components.Common.Contract;
@@ -141,6 +142,11 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.NHibernate
         public string TransformIndex(Index index, INamingConvention nc = null)
         {
             return NhibernateDriverType.TransformIndex(index, nc);
+        }
+
+        public string InitContext()
+        {
+            return String.Empty;
         }
 
         #endregion

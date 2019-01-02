@@ -55,7 +55,7 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.SqlServer.Context
 	    {
 	        if (!string.IsNullOrEmpty(ConnectionString) && !optionsBuilder.IsConfigured)
 	        {
-				optionsBuilder.UseSqlServer(ConnectionString);
+                optionsBuilder.UseSqlServer(ConnectionString);
 	        }
 	    }
 		

@@ -54,10 +54,9 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.Postgres.Context
 	    {
 	        if (!string.IsNullOrEmpty(ConnectionString) && !optionsBuilder.IsConfigured)
 	        {
+                optionsBuilder.UseNpgsql(this.ConnectionString);
 	        }
-
-            optionsBuilder.UseNpgsql(@"Host=localhost;Database=entitycore;Username=postgres;Password=password");
-        }
+	    }
 		
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

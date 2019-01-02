@@ -56,7 +56,7 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.Oracle.Mappings.OracleFul
 			#endregion
 			
 			#region Indexes
-			Property(t => t.ProductId).HasColumnAnnotation("IX_ProductId", new IndexAnnotation(new [] { new IndexAttribute("IX_ProductId"){ IsClustered = false, IsUnique = false, Order = 0}}));
+			Property(t => t.ProductId).HasColumnAnnotation("IX_ProductId1", new IndexAnnotation(new [] { new IndexAttribute("IX_ProductId1"){ IsClustered = false, IsUnique = false, Order = 0}}));
 			#endregion
 
 			#region Relationships
