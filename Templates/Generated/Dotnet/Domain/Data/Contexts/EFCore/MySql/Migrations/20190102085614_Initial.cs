@@ -242,12 +242,12 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.MySql.Migrations
             migrationBuilder.InsertData(
                 table: "Order",
                 columns: new[] { "OrderId", "CustomerId", "DeliveryDate", "OrderDate", "ShippingAddress", "ShippingCity", "ShippingName", "ShippingZip" },
-                values: new object[] { 1, 2, new DateTime(2019, 1, 1, 18, 53, 10, 885, DateTimeKind.Local).AddTicks(869), new DateTime(2019, 1, 1, 18, 53, 10, 884, DateTimeKind.Local).AddTicks(9920), "2nd road", "London", "Mary", "123" });
+                values: new object[] { 1, 2, new DateTime(2019, 1, 2, 10, 56, 13, 882, DateTimeKind.Local).AddTicks(8920), new DateTime(2019, 1, 2, 10, 56, 13, 882, DateTimeKind.Local).AddTicks(8005), "2nd road", "London", "Mary", "123" });
 
             migrationBuilder.InsertData(
                 table: "BankTransfers",
                 columns: new[] { "BankTransferId", "Amount", "FromBankAccountId", "ToBankAccountId", "TransferDate" },
-                values: new object[] { 1, 100m, 1, 2, new DateTime(2019, 1, 1, 18, 53, 10, 882, DateTimeKind.Local).AddTicks(6725) });
+                values: new object[] { 1, 100m, 1, 2, new DateTime(2019, 1, 2, 10, 56, 13, 880, DateTimeKind.Local).AddTicks(5067) });
 
             migrationBuilder.InsertData(
                 table: "OrderDetails",
@@ -261,7 +261,7 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.MySql.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_CustomerId",
+                name: "IX_CustomerId1",
                 table: "BankAccount",
                 column: "CustomerId");
 
@@ -277,7 +277,7 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.MySql.Migrations
                 column: "ToBankAccountId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProductId",
+                name: "IX_ProductId1",
                 table: "Book",
                 column: "ProductId");
 
@@ -316,12 +316,12 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.MySql.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_OrderId",
+                name: "IX_OrderId1",
                 table: "OrderDetails",
                 column: "OrderId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProductId",
+                name: "IX_ProductId2",
                 table: "OrderDetails",
                 column: "ProductId");
 
@@ -332,7 +332,7 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.MySql.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProductId",
+                name: "IX_ProductId3",
                 table: "Software",
                 column: "ProductId");
         }

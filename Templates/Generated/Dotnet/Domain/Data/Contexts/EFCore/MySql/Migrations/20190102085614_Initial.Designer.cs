@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.MySql.Migrations
 {
     [DbContext(typeof(MySqlFullContext))]
-    [Migration("20190101165311_Initial")]
+    [Migration("20190102085614_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -46,7 +46,7 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.MySql.Migrations
                         .HasName("UQ__BankAcco__4FC8E4A0C45281C8");
 
                     b.HasIndex("CustomerId")
-                        .HasName("IX_CustomerId");
+                        .HasName("IX_CustomerId1");
 
                     b.ToTable("BankAccount");
 
@@ -105,7 +105,7 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.MySql.Migrations
                             Amount = 100m,
                             FromBankAccountId = 1,
                             ToBankAccountId = 2,
-                            TransferDate = new DateTime(2019, 1, 1, 18, 53, 10, 882, DateTimeKind.Local).AddTicks(6725)
+                            TransferDate = new DateTime(2019, 1, 2, 10, 56, 13, 880, DateTimeKind.Local).AddTicks(5067)
                         });
                 });
 
@@ -122,7 +122,7 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.MySql.Migrations
                     b.HasKey("ProductId");
 
                     b.HasIndex("ProductId")
-                        .HasName("IX_ProductId");
+                        .HasName("IX_ProductId1");
 
                     b.ToTable("Book");
 
@@ -309,8 +309,8 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.MySql.Migrations
                         {
                             OrderId = 1,
                             CustomerId = 2,
-                            DeliveryDate = new DateTime(2019, 1, 1, 18, 53, 10, 885, DateTimeKind.Local).AddTicks(869),
-                            OrderDate = new DateTime(2019, 1, 1, 18, 53, 10, 884, DateTimeKind.Local).AddTicks(9920),
+                            DeliveryDate = new DateTime(2019, 1, 2, 10, 56, 13, 882, DateTimeKind.Local).AddTicks(8920),
+                            OrderDate = new DateTime(2019, 1, 2, 10, 56, 13, 882, DateTimeKind.Local).AddTicks(8005),
                             ShippingAddress = "2nd road",
                             ShippingCity = "London",
                             ShippingName = "Mary",
@@ -346,10 +346,10 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.MySql.Migrations
                         .HasName("UQ__OrderDet__9DD74DBC8AA17DA0");
 
                     b.HasIndex("OrderId")
-                        .HasName("IX_OrderId");
+                        .HasName("IX_OrderId1");
 
                     b.HasIndex("ProductId")
-                        .HasName("IX_ProductId");
+                        .HasName("IX_ProductId2");
 
                     b.ToTable("OrderDetails");
 
@@ -419,7 +419,7 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.MySql.Migrations
                     b.HasKey("ProductId");
 
                     b.HasIndex("ProductId")
-                        .HasName("IX_ProductId");
+                        .HasName("IX_ProductId3");
 
                     b.ToTable("Software");
 
