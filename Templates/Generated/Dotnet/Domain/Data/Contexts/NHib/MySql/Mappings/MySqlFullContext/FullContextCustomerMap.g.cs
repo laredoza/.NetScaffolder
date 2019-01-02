@@ -26,7 +26,7 @@ using System.Data.Common;
 using FluentNHibernate.Mapping;
 
 
-namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.MySql.Mappings.MySqlFullContext
+namespace DotNetScaffolder.Domain.Data.Contexts.NHib.MySql.Mappings.MySqlFullContext
 {
 	public partial class FullContextCustomerMap : ClassMap<Customer>
 	{	

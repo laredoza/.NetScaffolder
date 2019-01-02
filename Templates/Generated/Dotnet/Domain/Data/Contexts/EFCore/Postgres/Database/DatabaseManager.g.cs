@@ -64,7 +64,7 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.Postgres.Database
 	        IServiceProvider serviceProvider = null)
 	    {
 	        if (configuration == null || configuration.ConnectionStrings == null
-	                                  || !configuration.ConnectionStrings.ContainsKey("RepoTestPostgres"))
+	                                  || !configuration.ConnectionStrings.ContainsKey("RepoTestEFCorePostgres"))
 	        {
 	            throw new Exception("Invalid configuration specified in database manager");
 	        }
@@ -73,7 +73,7 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.Postgres.Database
                  config =>
                  {
                     config.For<IUnitOfWork>().LifecycleIs(Lifecycles.Transient).Use<PostgresFullContext>()
-                         .Ctor<string>("connectionString").Is(configuration.ConnectionStrings["RepoTestPostgres"]);
+                         .Ctor<string>("connectionString").Is(configuration.ConnectionStrings["RepoTestEFCorePostgres"]);
                  });
 
             // End

@@ -23,13 +23,13 @@ using DotNetScaffolder.Domain.Core.Interfaces;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration;
 using System.Data.Entity.Infrastructure.Annotations;
-using DotNetScaffolder.Domain.Data.Contexts.EFCore.SqlServer.Context;
+using DotNetScaffolder.Domain.Data.Contexts.EF.SqlServer.Context;
 using System;
 using System.Collections.Generic;
 using StructureMap;
 using StructureMap.Pipeline;
 
-namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.SqlServer.Database
+namespace DotNetScaffolder.Domain.Data.Contexts.EF.SqlServer.Database
 {
 	public class DatabaseManager : IDatabaseManager
 	{	
@@ -64,7 +64,7 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.SqlServer.Database
 	        IServiceProvider serviceProvider = null)
 	    {
 	        if (configuration == null || configuration.ConnectionStrings == null
-	                                  || !configuration.ConnectionStrings.ContainsKey("RepoTestSqlServer"))
+	                                  || !configuration.ConnectionStrings.ContainsKey("RepoTestEFSqlServer"))
 	        {
 	            throw new Exception("Invalid configuration specified in database manager");
 	        }
@@ -73,7 +73,7 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.SqlServer.Database
                  config =>
                  {
                     config.For<IUnitOfWork>().LifecycleIs(Lifecycles.Transient).Use<SqlServerFullContext>()
-                         .Ctor<string>("connectionString").Is(configuration.ConnectionStrings["RepoTestSqlServer"]);
+                         .Ctor<string>("connectionString").Is(configuration.ConnectionStrings["RepoTestEFSqlServer"]);
                  });
 
             // End

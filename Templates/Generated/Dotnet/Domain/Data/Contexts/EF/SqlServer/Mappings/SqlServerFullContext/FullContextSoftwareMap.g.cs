@@ -25,7 +25,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity;
 using System.Data.Common;
 
-namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.SqlServer.Mappings.SqlServerFullContext
+namespace DotNetScaffolder.Domain.Data.Contexts.EF.SqlServer.Mappings.SqlServerFullContext
 {
 	public partial class FullContextSoftwareMap : EntityTypeConfiguration<Software>
 	{	

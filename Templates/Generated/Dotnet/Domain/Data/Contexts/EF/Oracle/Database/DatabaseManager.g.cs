@@ -25,13 +25,13 @@ using System.Data.Entity.ModelConfiguration;
 using System.Data.Entity.Infrastructure.Annotations;
 using Oracle.ManagedDataAccess.Client;
 using Oracle.Config;
-using DotNetScaffolder.Domain.Data.Contexts.EFCore.Oracle.Context;
+using DotNetScaffolder.Domain.Data.Contexts.EF.Oracle.Context;
 using System;
 using System.Collections.Generic;
 using StructureMap;
 using StructureMap.Pipeline;
 
-namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.Oracle.Database
+namespace DotNetScaffolder.Domain.Data.Contexts.EF.Oracle.Database
 {
 	public class DatabaseManager : IDatabaseManager
 	{	
@@ -66,7 +66,7 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.Oracle.Database
 	        IServiceProvider serviceProvider = null)
 	    {
 	        if (configuration == null || configuration.ConnectionStrings == null
-	                                  || !configuration.ConnectionStrings.ContainsKey("RepoTestOracle"))
+	                                  || !configuration.ConnectionStrings.ContainsKey("RepoTestEFOracle"))
 	        {
 	            throw new Exception("Invalid configuration specified in database manager");
 	        }
@@ -75,7 +75,7 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.Oracle.Database
                  config =>
                  {
                     config.For<IUnitOfWork>().LifecycleIs(Lifecycles.Transient).Use<OracleFullContext>()
-                         .Ctor<string>("connectionString").Is(configuration.ConnectionStrings["RepoTestOracle"]);
+                         .Ctor<string>("connectionString").Is(configuration.ConnectionStrings["RepoTestEFOracle"]);
                  });
 
             // End

@@ -24,13 +24,13 @@ using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration;
 using System.Data.Entity.Infrastructure.Annotations;
 using MySql.Data.EntityFramework;
-using DotNetScaffolder.Domain.Data.Contexts.EFCore.MySql.Context;
+using DotNetScaffolder.Domain.Data.Contexts.EF.MySql.Context;
 using System;
 using System.Collections.Generic;
 using StructureMap;
 using StructureMap.Pipeline;
 
-namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.MySql.Database
+namespace DotNetScaffolder.Domain.Data.Contexts.EF.MySql.Database
 {
 	public class DatabaseManager : IDatabaseManager
 	{	
@@ -65,7 +65,7 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.MySql.Database
 	        IServiceProvider serviceProvider = null)
 	    {
 	        if (configuration == null || configuration.ConnectionStrings == null
-	                                  || !configuration.ConnectionStrings.ContainsKey("RepoTestMySql"))
+	                                  || !configuration.ConnectionStrings.ContainsKey("RepoTestEFMySql"))
 	        {
 	            throw new Exception("Invalid configuration specified in database manager");
 	        }
@@ -74,7 +74,7 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.MySql.Database
                  config =>
                  {
                     config.For<IUnitOfWork>().LifecycleIs(Lifecycles.Transient).Use<MySqlFullContext>()
-                         .Ctor<string>("connectionString").Is(configuration.ConnectionStrings["RepoTestMySql"]);
+                         .Ctor<string>("connectionString").Is(configuration.ConnectionStrings["RepoTestEFMySql"]);
                  });
 
             // End

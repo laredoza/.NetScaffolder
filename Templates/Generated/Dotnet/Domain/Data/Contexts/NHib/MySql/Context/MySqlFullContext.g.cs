@@ -27,9 +27,9 @@ using FluentNHibernate.Cfg;
 using DotNetScaffolder.Domain.Core;
 using DotNetScaffolder.Domain.Data.Contexts.NHib.Base.Context;
 using DotNetScaffolder.Domain.Core.Interfaces;
-using DotNetScaffolder.Domain.Data.Contexts.EFCore.MySql.Mappings.MySqlFullContext;
+using DotNetScaffolder.Domain.Data.Contexts.NHib.MySql.Mappings.MySqlFullContext;
 
-namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.MySql.Context
+namespace DotNetScaffolder.Domain.Data.Contexts.NHib.MySql.Context
 {
 	public partial class MySqlFullContext : BaseContext
 	{	

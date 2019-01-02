@@ -27,9 +27,9 @@ using FluentNHibernate.Cfg;
 using DotNetScaffolder.Domain.Core;
 using DotNetScaffolder.Domain.Data.Contexts.NHib.Base.Context;
 using DotNetScaffolder.Domain.Core.Interfaces;
-using DotNetScaffolder.Domain.Data.Contexts.EFCore.SqlServer.Mappings.SqlServerFullContext;
+using DotNetScaffolder.Domain.Data.Contexts.NHib.SqlServer.Mappings.SqlServerFullContext;
 
-namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.SqlServer.Context
+namespace DotNetScaffolder.Domain.Data.Contexts.NHib.SqlServer.Context
 {
 	public partial class SqlServerFullContext : BaseContext
 	{	

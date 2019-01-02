@@ -26,7 +26,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity;
 using System.Data.Common;
 
-namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.MySql.Mappings.MySqlFullContext
+namespace DotNetScaffolder.Domain.Data.Contexts.EF.MySql.Mappings.MySqlFullContext
 {
 	public partial class FullContextSoftwareMap : EntityTypeConfiguration<Software>
 	{	

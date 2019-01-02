@@ -26,7 +26,7 @@ using System.Data.Common;
 using FluentNHibernate.Mapping;
 
 
-namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.SqlServer.Mappings.SqlServerFullContext
+namespace DotNetScaffolder.Domain.Data.Contexts.NHib.SqlServer.Mappings.SqlServerFullContext
 {
 	public partial class FullContextBankTransfersMap : ClassMap<BankTransfers>
 	{	

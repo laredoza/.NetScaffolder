@@ -27,7 +27,7 @@ namespace DotNetScaffolder.Domain.Migrations.EFCore.Postgres.ContextDesigners
                 .AddJsonFile("appsettings.json")
                 .Build();
 
-            var connectionString = configuration.GetConnectionString("RepoTestProgres");
+            var connectionString = configuration.GetConnectionString("RepoTestEFCorePostgres");
             return new PostgresFullContext(connectionString);
         }
 

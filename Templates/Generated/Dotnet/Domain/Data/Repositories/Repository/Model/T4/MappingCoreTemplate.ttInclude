@@ -28,7 +28,7 @@ public class MappingCoreTemplate : BaseTemplate
 //	USE A PARTIAL CLASS INSTEAD
 // *******************************************************************
 
-<#+contextNamespace = ContextData.TransformFullnamespace(DataType.BaseNamespace).Replace("{DriverType}", "EFCore").Replace("{DriverPrefix}", Driver.Prefix);#>
+<#+contextNamespace = ContextData.TransformFullnamespace(DataType.BaseNamespace).Replace("{DriverType}", Driver.ParentFolder).Replace("{DriverPrefix}", Driver.Prefix);#>
 
 <#+ foreach(var nameSpace in Driver.NameSpaces){ #>
 using <#= nameSpace #>;

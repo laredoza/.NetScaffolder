@@ -27,11 +27,11 @@ using DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity;
 using DotNetScaffolder.Domain.Core;
 using DotNetScaffolder.Domain.Data.Contexts.EF.Base.Context;
 using DotNetScaffolder.Domain.Core.Interfaces;
-using DotNetScaffolder.Domain.Data.Contexts.EFCore.Postgres.Mappings.PostgresFullContext;
+using DotNetScaffolder.Domain.Data.Contexts.EF.Postgres.Mappings.PostgresFullContext;
 using DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity;
 using System.Data.Common;
 
-namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.Postgres.Context
+namespace DotNetScaffolder.Domain.Data.Contexts.EF.Postgres.Context
 {
 	public partial class PostgresFullContext : BaseContext
 	{	

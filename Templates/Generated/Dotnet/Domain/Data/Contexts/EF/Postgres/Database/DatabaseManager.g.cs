@@ -24,13 +24,13 @@ using Npgsql;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration;
 using System.Data.Entity.Infrastructure.Annotations;
-using DotNetScaffolder.Domain.Data.Contexts.EFCore.Postgres.Context;
+using DotNetScaffolder.Domain.Data.Contexts.EF.Postgres.Context;
 using System;
 using System.Collections.Generic;
 using StructureMap;
 using StructureMap.Pipeline;
 
-namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.Postgres.Database
+namespace DotNetScaffolder.Domain.Data.Contexts.EF.Postgres.Database
 {
 	public class DatabaseManager : IDatabaseManager
 	{	
@@ -65,7 +65,7 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.Postgres.Database
 	        IServiceProvider serviceProvider = null)
 	    {
 	        if (configuration == null || configuration.ConnectionStrings == null
-	                                  || !configuration.ConnectionStrings.ContainsKey("RepoTestPostgres"))
+	                                  || !configuration.ConnectionStrings.ContainsKey("RepoTestEFPostgres"))
 	        {
 	            throw new Exception("Invalid configuration specified in database manager");
 	        }
@@ -74,7 +74,7 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.Postgres.Database
                  config =>
                  {
                     config.For<IUnitOfWork>().LifecycleIs(Lifecycles.Transient).Use<PostgresFullContext>()
-                         .Ctor<string>("connectionString").Is(configuration.ConnectionStrings["RepoTestPostgres"]);
+                         .Ctor<string>("connectionString").Is(configuration.ConnectionStrings["RepoTestEFPostgres"]);
                  });
 
             // End

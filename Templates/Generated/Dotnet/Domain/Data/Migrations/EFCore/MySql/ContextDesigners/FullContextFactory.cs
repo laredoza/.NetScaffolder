@@ -28,7 +28,7 @@ namespace DotNetScaffolder.Domain.Migrations.EFCore.MySql.ContextDesigners
                 .AddJsonFile("appsettings.json")
                 .Build();
 
-            var connectionString = configuration.GetConnectionString("RepoTestMySql");
+            var connectionString = configuration.GetConnectionString("RepoTestEFCoreMySql");
             return new MySqlFullContext(connectionString);
         }
 

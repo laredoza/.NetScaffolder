@@ -22,10 +22,10 @@ using System;
 using System.Collections.Generic;
 using StructureMap.Pipeline;
 using DotNetScaffolder.Domain.Core.Interfaces;
-using DotNetScaffolder.Domain.Data.Contexts.EFCore.Oracle.Database;
+using DotNetScaffolder.Domain.Data.Contexts.EF.Oracle.Database;
 //using DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.Dto;
  
-namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.Oracle.ContextRegistration
+namespace DotNetScaffolder.Domain.Data.Contexts.EF.Oracle.ContextRegistration
 {
 	public class ContextRegistration : StructureMap.Registry
 	{			

@@ -27,9 +27,9 @@ using FluentNHibernate.Cfg;
 using DotNetScaffolder.Domain.Core;
 using DotNetScaffolder.Domain.Data.Contexts.NHib.Base.Context;
 using DotNetScaffolder.Domain.Core.Interfaces;
-using DotNetScaffolder.Domain.Data.Contexts.EFCore.Oracle.Mappings.OracleFullContext;
+using DotNetScaffolder.Domain.Data.Contexts.NHib.Oracle.Mappings.OracleFullContext;
 
-namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.Oracle.Context
+namespace DotNetScaffolder.Domain.Data.Contexts.NHib.Oracle.Context
 {
 	public partial class OracleFullContext : BaseContext
 	{	

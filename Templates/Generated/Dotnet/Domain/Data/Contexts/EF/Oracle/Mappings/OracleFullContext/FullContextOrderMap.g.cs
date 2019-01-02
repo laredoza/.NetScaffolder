@@ -27,7 +27,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity;
 using System.Data.Common;
 
-namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.Oracle.Mappings.OracleFullContext
+namespace DotNetScaffolder.Domain.Data.Contexts.EF.Oracle.Mappings.OracleFullContext
 {
 	public partial class FullContextOrderMap : EntityTypeConfiguration<Order>
 	{	

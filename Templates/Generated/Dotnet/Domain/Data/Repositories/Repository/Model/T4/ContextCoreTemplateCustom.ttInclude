@@ -19,7 +19,7 @@ public class ContextCoreTemplateCustom : BaseTemplate
 
 <#= Header.TransformText() #>
 
-<#+contextNamespace = ContextData.TransformFullnamespace(DataType.BaseNamespace).Replace("{DriverType}", "EFCore").Replace("{DriverPrefix}", Driver.Prefix);#>
+<#+contextNamespace = ContextData.TransformFullnamespace(DataType.BaseNamespace).Replace("{DriverType}", Driver.ParentFolder).Replace("{DriverPrefix}", Driver.Prefix);#>
 
 using System.ComponentModel.DataAnnotations.Schema;
 <#+ foreach(var nameSpace in Driver.NameSpaces){ #>

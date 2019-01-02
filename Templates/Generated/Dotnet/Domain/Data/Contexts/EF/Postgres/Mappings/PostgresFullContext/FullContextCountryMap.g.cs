@@ -26,7 +26,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity;
 using System.Data.Common;
 
-namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.Postgres.Mappings.PostgresFullContext
+namespace DotNetScaffolder.Domain.Data.Contexts.EF.Postgres.Mappings.PostgresFullContext
 {
 	public partial class FullContextCountryMap : EntityTypeConfiguration<Country>
 	{	
