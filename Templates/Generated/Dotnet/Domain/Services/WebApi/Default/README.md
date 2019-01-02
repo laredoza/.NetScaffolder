@@ -15,6 +15,7 @@ https://localhost:44325/api/product/LoadByProductProductId/1/true
 
 The following configuration in ProductController.cs can be used to return Book and Software data for api/product/LoadByProductProductId:
 
+```
 public void ConfigureIncludes()
 {
 	this.LoadByProductProductIdIncludes = new Expression<Func<IProduct, object>>[]
@@ -23,3 +24,4 @@ public void ConfigureIncludes()
             a => a.Software
         };
 }
+```
