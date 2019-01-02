@@ -26,7 +26,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity;
 using System.Data.Common;
 
-namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.Postgres.Mappings.PostgresFullContext
+namespace DotNetScaffolder.Domain.Data.Contexts.EF.Postgres.Mappings.PostgresFullContext
 {
 	public partial class FullContextBankAccountMap : EntityTypeConfiguration<BankAccount>
 	{	
@@ -60,7 +60,7 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.Postgres.Mappings.Postgre
 			
 			#region Indexes
 			Property(t => t.BankAccountId).HasColumnAnnotation("UQ__BankAcco__4FC8E4A0C45281C8", new IndexAnnotation(new [] { new IndexAttribute("UQ__BankAcco__4FC8E4A0C45281C8"){ IsClustered = false, IsUnique = true, Order = 0}}));
-			Property(t => t.CustomerId).HasColumnAnnotation("IX_CustomerId", new IndexAnnotation(new [] { new IndexAttribute("IX_CustomerId"){ IsClustered = false, IsUnique = false, Order = 0}}));
+			Property(t => t.CustomerId).HasColumnAnnotation("IX_CustomerId1", new IndexAnnotation(new [] { new IndexAttribute("IX_CustomerId1"){ IsClustered = false, IsUnique = false, Order = 0}}));
 			#endregion
 
 			#region Relationships

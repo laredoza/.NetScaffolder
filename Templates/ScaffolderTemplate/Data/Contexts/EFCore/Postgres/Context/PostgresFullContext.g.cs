@@ -54,6 +54,7 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.Postgres.Context
 	    {
 	        if (!string.IsNullOrEmpty(ConnectionString) && !optionsBuilder.IsConfigured)
 	        {
+                optionsBuilder.UseNpgsql(this.ConnectionString);
 	        }
 	    }
 		

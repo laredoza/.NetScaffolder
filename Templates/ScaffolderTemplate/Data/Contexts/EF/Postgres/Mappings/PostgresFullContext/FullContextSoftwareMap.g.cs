@@ -26,7 +26,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity;
 using System.Data.Common;
 
-namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.Postgres.Mappings.PostgresFullContext
+namespace DotNetScaffolder.Domain.Data.Contexts.EF.Postgres.Mappings.PostgresFullContext
 {
 	public partial class FullContextSoftwareMap : EntityTypeConfiguration<Software>
 	{	
@@ -55,7 +55,7 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.Postgres.Mappings.Postgre
 			#endregion
 			
 			#region Indexes
-			Property(t => t.ProductId).HasColumnAnnotation("IX_ProductId", new IndexAnnotation(new [] { new IndexAttribute("IX_ProductId"){ IsClustered = false, IsUnique = false, Order = 0}}));
+			Property(t => t.ProductId).HasColumnAnnotation("IX_ProductId3", new IndexAnnotation(new [] { new IndexAttribute("IX_ProductId3"){ IsClustered = false, IsUnique = false, Order = 0}}));
 			#endregion
 
 			#region Relationships

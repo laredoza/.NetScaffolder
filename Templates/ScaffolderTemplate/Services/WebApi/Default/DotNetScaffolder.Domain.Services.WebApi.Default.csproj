@@ -15,9 +15,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Data\Contexts\EF\SqlServer\DotNetScaffolder.Domain.Data.Contexts.EF.SqlServer.csproj" />
+    <ProjectReference Include="..\..\..\Data\ApplicationServices\ApplicationService\DotNetScaffolder.Domain.Data.ApplicationServices.ApplicationService.csproj" />
+    <ProjectReference Include="..\..\..\Data\Contexts\EFCore\SqlServer\DotNetScaffolder.Domain.Data.Contexts.EFCore.SqlServer.csproj" />
     <ProjectReference Include="..\..\..\Data\Interfaces\ApplicationService\DotNetScaffolder.Domain.Data.Interfaces.ApplicationServiceInterfaces.csproj" />
     <ProjectReference Include="..\..\..\Data\Interfaces\Interface\DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.csproj" />
+    <ProjectReference Include="..\..\..\Data\Repositories\Repository\DotNetScaffolder.Domain.Data.Repositories.Repository.csproj" />
     <ProjectReference Include="..\..\..\Infrastructure\Web\Core\DotNetScaffolder.Domain.Infrastructure.Web.Core.csproj" />
   </ItemGroup>
 

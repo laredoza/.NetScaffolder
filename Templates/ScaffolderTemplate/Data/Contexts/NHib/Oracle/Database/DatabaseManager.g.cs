@@ -24,13 +24,13 @@ using NHibernate;
 using NHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using FluentNHibernate.Cfg;
-using DotNetScaffolder.Domain.Data.Contexts.EFCore.Oracle.Context;
+using DotNetScaffolder.Domain.Data.Contexts.NHib.Oracle.Context;
 using System;
 using System.Collections.Generic;
 using StructureMap;
 using StructureMap.Pipeline;
 
-namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.Oracle.Database
+namespace DotNetScaffolder.Domain.Data.Contexts.NHib.Oracle.Database
 {
 	public class DatabaseManager : IDatabaseManager
 	{	
@@ -66,12 +66,12 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.Oracle.Database
 	        IServiceProvider serviceProvider = null)
 	    {
 	        if (configuration == null || configuration.ConnectionStrings == null
-	                                  || !configuration.ConnectionStrings.ContainsKey("RepoTestOracle"))
+	                                  || !configuration.ConnectionStrings.ContainsKey("RepoTestNHibOracle"))
 	        {
 	            throw new Exception("Invalid configuration specified in database manager");
 	        }
 
-            var nHibConfig = OracleClientConfiguration.Oracle10.ConnectionString(configuration.ConnectionStrings["RepoTestOracle"]);
+            var nHibConfig = OracleClientConfiguration.Oracle10.ConnectionString(configuration.ConnectionStrings["RepoTestNHibOracle"]);
              Configuration = Fluently.Configure().Database(nHibConfig)
                .Mappings(o => o.FluentMappings.AddFromAssembly(System.Reflection.Assembly.GetExecutingAssembly()));
              Factory = Configuration.BuildSessionFactory();

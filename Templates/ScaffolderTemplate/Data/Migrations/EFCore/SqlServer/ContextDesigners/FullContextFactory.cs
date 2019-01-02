@@ -28,7 +28,7 @@ namespace DotNetScaffolder.Domain.Migrations.EFCore.SqlServer.ContextDesigners
                 .AddJsonFile("appsettings.json")
                 .Build();
 
-            var connectionString = configuration.GetConnectionString("RepoTestSqlServer");
+            var connectionString = configuration.GetConnectionString("RepoTestEFCoreSqlServer");
             return new SqlServerFullContext(connectionString);
         }
 

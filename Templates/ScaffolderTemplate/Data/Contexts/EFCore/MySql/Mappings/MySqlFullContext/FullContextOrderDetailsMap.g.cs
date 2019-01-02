@@ -31,7 +31,7 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.MySql.Mappings.MySqlFullC
 	{	
 	    public virtual void Configure(EntityTypeBuilder<OrderDetails> builder)
 	    {
-			builder.ToTable("`OrderDetails`");
+			builder.ToTable("OrderDetails");
 			
 			#region Primary keys
 			
@@ -54,8 +54,8 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.MySql.Mappings.MySqlFullC
 
 			#region Indexes
 			builder.HasIndex(i => new {i.OrderDetailsId}).HasName("UQ__OrderDet__9DD74DBC8AA17DA0").IsUnique(true);
-			builder.HasIndex(i => new {i.OrderId}).HasName("IX_OrderId").IsUnique(false);
-			builder.HasIndex(i => new {i.ProductId}).HasName("IX_ProductId").IsUnique(false);
+			builder.HasIndex(i => new {i.OrderId}).HasName("IX_OrderId1").IsUnique(false);
+			builder.HasIndex(i => new {i.ProductId}).HasName("IX_ProductId2").IsUnique(false);
 			#endregion
 			
 			#region Relationships

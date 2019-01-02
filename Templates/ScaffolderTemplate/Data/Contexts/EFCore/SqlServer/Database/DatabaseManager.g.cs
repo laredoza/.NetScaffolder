@@ -65,7 +65,7 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.SqlServer.Database
 	        IServiceProvider serviceProvider = null)
 	    {
 	        if (configuration == null || configuration.ConnectionStrings == null
-	                                  || !configuration.ConnectionStrings.ContainsKey("RepoTestSqlServer"))
+	                                  || !configuration.ConnectionStrings.ContainsKey("RepoTestEFCoreSqlServer"))
 	        {
 	            throw new Exception("Invalid configuration specified in database manager");
 	        }
@@ -74,7 +74,7 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.SqlServer.Database
                  config =>
                  {
                     config.For<IUnitOfWork>().LifecycleIs(Lifecycles.Transient).Use<SqlServerFullContext>()
-                         .Ctor<string>("connectionString").Is(configuration.ConnectionStrings["RepoTestSqlServer"]);
+                         .Ctor<string>("connectionString").Is(configuration.ConnectionStrings["RepoTestEFCoreSqlServer"]);
                  });
 
             // End

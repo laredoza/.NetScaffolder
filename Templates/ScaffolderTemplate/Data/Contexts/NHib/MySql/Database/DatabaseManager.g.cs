@@ -24,13 +24,13 @@ using NHibernate;
 using NHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using FluentNHibernate.Cfg;
-using DotNetScaffolder.Domain.Data.Contexts.EFCore.MySql.Context;
+using DotNetScaffolder.Domain.Data.Contexts.NHib.MySql.Context;
 using System;
 using System.Collections.Generic;
 using StructureMap;
 using StructureMap.Pipeline;
 
-namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.MySql.Database
+namespace DotNetScaffolder.Domain.Data.Contexts.NHib.MySql.Database
 {
 	public class DatabaseManager : IDatabaseManager
 	{	
@@ -66,12 +66,12 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.MySql.Database
 	        IServiceProvider serviceProvider = null)
 	    {
 	        if (configuration == null || configuration.ConnectionStrings == null
-	                                  || !configuration.ConnectionStrings.ContainsKey("RepoTestMySql"))
+	                                  || !configuration.ConnectionStrings.ContainsKey("RepoTestNHibMySql"))
 	        {
 	            throw new Exception("Invalid configuration specified in database manager");
 	        }
 
-            var nHibConfig = MySQLConfiguration.Standard.ConnectionString(configuration.ConnectionStrings["RepoTestMySql"]);
+            var nHibConfig = MySQLConfiguration.Standard.ConnectionString(configuration.ConnectionStrings["RepoTestNHibMySql"]);
              Configuration = Fluently.Configure().Database(nHibConfig)
                .Mappings(o => o.FluentMappings.AddFromAssembly(System.Reflection.Assembly.GetExecutingAssembly()));
              Factory = Configuration.BuildSessionFactory();

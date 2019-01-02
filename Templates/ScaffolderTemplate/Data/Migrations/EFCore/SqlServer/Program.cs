@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SqlServer
+namespace DotNetScaffolder.Domain.Migrations.EFCore.SqlServer
 {
     class Program
     {

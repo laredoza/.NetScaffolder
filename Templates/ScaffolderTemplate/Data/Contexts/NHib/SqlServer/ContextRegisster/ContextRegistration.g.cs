@@ -22,10 +22,10 @@ using System;
 using System.Collections.Generic;
 using StructureMap.Pipeline;
 using DotNetScaffolder.Domain.Core.Interfaces;
-using DotNetScaffolder.Domain.Data.Contexts.EFCore.SqlServer.Database;
+using DotNetScaffolder.Domain.Data.Contexts.NHib.SqlServer.Database;
 //using DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.Dto;
  
-namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.SqlServer.ContextRegistration
+namespace DotNetScaffolder.Domain.Data.Contexts.NHib.SqlServer.ContextRegistration
 {
 	public class ContextRegistration : StructureMap.Registry
 	{			

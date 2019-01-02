@@ -23,7 +23,7 @@ public class StructureDatabaseManagerTemplate : BaseTemplate
 //	GENERATED CODE. DOT NOT MODIFY MANUALLY AS CHANGES CAN BE LOST!!!
 //	USE A PARTIAL CLASS INSTEAD
 // *******************************************************************
-<#+contextNamespace = ContextData.TransformFullnamespace(DataType.BaseNamespace).Replace("{DriverType}", "EFCore").Replace("{DriverPrefix}", Driver.Prefix);#>
+<#+contextNamespace = ContextData.TransformFullnamespace(DataType.BaseNamespace).Replace("{DriverType}", Driver.ParentFolder).Replace("{DriverPrefix}", Driver.Prefix);#>
 
 <#+ foreach(var nameSpace in DataType.AdditionalNamespaces){ #>
 using <#= nameSpace.Replace("{DriverType}", Driver.ParentFolder ) #>;
@@ -89,12 +89,12 @@ namespace <#= contextNamespace #>.Database
 	        IServiceProvider serviceProvider = null)
 	    {
 	        if (configuration == null || configuration.ConnectionStrings == null
-	                                  || !configuration.ConnectionStrings.ContainsKey("<#= $"{ContextData.CustomConnectionName}{Driver.Prefix}" #>"))
+	                                  || !configuration.ConnectionStrings.ContainsKey("<#=            $"{ContextData.CustomConnectionName}{Driver.ParentFolder}{Driver.Prefix}" #>"))
 	        {
 	            throw new Exception("Invalid configuration specified in database manager");
 	        }
 
-<#+            var cacheParameters = new CacheParameters { ConnectionName = $"{ContextData.CustomConnectionName}{Driver.Prefix}", ContextName = ContextData.ContextName, Driver = Driver}; #>
+<#+            var cacheParameters = new CacheParameters { ConnectionName = $"{ContextData.CustomConnectionName}{Driver.ParentFolder}{Driver.Prefix}", ContextName = ContextData.ContextName, Driver = Driver}; #>
             <#= Driver.DriverType.GenerateBeginUnitOfWork(cacheParameters) #>
             // End
 	    }

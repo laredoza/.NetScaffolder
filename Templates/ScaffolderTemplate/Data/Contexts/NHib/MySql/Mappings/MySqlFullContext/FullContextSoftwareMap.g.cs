@@ -26,7 +26,7 @@ using System.Data.Common;
 using FluentNHibernate.Mapping;
 
 
-namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.MySql.Mappings.MySqlFullContext
+namespace DotNetScaffolder.Domain.Data.Contexts.NHib.MySql.Mappings.MySqlFullContext
 {
 	public partial class FullContextSoftwareMap : ClassMap<Software>
 	{	
@@ -42,7 +42,7 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.MySql.Mappings.MySqlFullC
 			#region Primary Keys
 			
 			Id(t => t.ProductId).GeneratedBy.Assigned()
-			.Index("IX_ProductId")
+			.Index("IX_ProductId3")
 			.Not.Nullable();
 
 			#endregion

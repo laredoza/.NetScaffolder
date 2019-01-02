@@ -37,7 +37,8 @@ namespace DotNetScaffolder.Domain.Core.Interfaces
         /// <param name="configuration">
         /// The configuration.
         /// </param>
-        void Load(IConfiguration configuration);
+        /// <param name="connectionstrings"></param>
+        void Load(IConfiguration configuration, List<string> connectionstrings);
 
         #endregion
     }

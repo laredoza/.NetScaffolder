@@ -1,4 +1,5 @@
-﻿using DotNetScaffolder.Domain.Core;
+﻿using System.Collections.Generic;
+using DotNetScaffolder.Domain.Core;
 using DotNetScaffolder.Domain.Core.Interfaces;
 using Microsoft.Extensions.Configuration;
 using StructureMap.Pipeline;
@@ -22,7 +23,14 @@ namespace DotNetScaffolder.Domain.Infrastructure.Web.Core.BootStrap.StructureMap
         {
             this.Configuration = configuration;
             IDataConfiguration dataConfiguration = new DataConfiguration();
-            dataConfiguration.Load(configuration);
+            List<string> connectionStrings = new List<string>
+            {
+                    "RepoTestEFCoreSqlServer",
+                    "RepoTestEFCorePostgres",
+                    "RepoTestEFCoreMySql"
+            };
+
+            dataConfiguration.Load(configuration, connectionStrings);
             this.For<IDataConfiguration>().LifecycleIs(Lifecycles.Singleton).Use(() => dataConfiguration);
 
 

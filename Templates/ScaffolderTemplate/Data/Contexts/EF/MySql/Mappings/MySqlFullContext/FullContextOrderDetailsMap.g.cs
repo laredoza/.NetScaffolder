@@ -26,7 +26,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity;
 using System.Data.Common;
 
-namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.MySql.Mappings.MySqlFullContext
+namespace DotNetScaffolder.Domain.Data.Contexts.EF.MySql.Mappings.MySqlFullContext
 {
 	public partial class FullContextOrderDetailsMap : EntityTypeConfiguration<OrderDetails>
 	{	
@@ -60,8 +60,8 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.MySql.Mappings.MySqlFullC
 			
 			#region Indexes
 			Property(t => t.OrderDetailsId).HasColumnAnnotation("UQ__OrderDet__9DD74DBC8AA17DA0", new IndexAnnotation(new [] { new IndexAttribute("UQ__OrderDet__9DD74DBC8AA17DA0"){ IsClustered = false, IsUnique = true, Order = 0}}));
-			Property(t => t.OrderId).HasColumnAnnotation("IX_OrderId", new IndexAnnotation(new [] { new IndexAttribute("IX_OrderId"){ IsClustered = false, IsUnique = false, Order = 0}}));
-			Property(t => t.ProductId).HasColumnAnnotation("IX_ProductId", new IndexAnnotation(new [] { new IndexAttribute("IX_ProductId"){ IsClustered = false, IsUnique = false, Order = 0}}));
+			Property(t => t.OrderId).HasColumnAnnotation("IX_OrderId1", new IndexAnnotation(new [] { new IndexAttribute("IX_OrderId1"){ IsClustered = false, IsUnique = false, Order = 0}}));
+			Property(t => t.ProductId).HasColumnAnnotation("IX_ProductId2", new IndexAnnotation(new [] { new IndexAttribute("IX_ProductId2"){ IsClustered = false, IsUnique = false, Order = 0}}));
 			#endregion
 
 			#region Relationships

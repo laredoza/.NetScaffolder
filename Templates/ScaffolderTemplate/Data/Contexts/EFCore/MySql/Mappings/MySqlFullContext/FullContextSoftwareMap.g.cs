@@ -31,7 +31,7 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.MySql.Mappings.MySqlFullC
 	{	
 	    public virtual void Configure(EntityTypeBuilder<Software> builder)
 	    {
-			builder.ToTable("`Software`");
+			builder.ToTable("Software");
 			
 			#region Primary keys
 			
@@ -49,7 +49,7 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.MySql.Mappings.MySqlFullC
 			#endregion
 
 			#region Indexes
-			builder.HasIndex(i => new {i.ProductId}).HasName("IX_ProductId").IsUnique(false);
+			builder.HasIndex(i => new {i.ProductId}).HasName("IX_ProductId3").IsUnique(false);
 			#endregion
 			
 			#region Relationships

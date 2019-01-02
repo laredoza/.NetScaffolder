@@ -25,7 +25,7 @@ public class ContextNHibernateTemplate : BaseTemplate
 //	USE A PARTIAL CLASS INSTEAD
 // *******************************************************************
 
-<#+contextNamespace = ContextData.TransformFullnamespace(DataType.BaseNamespace).Replace("{DriverType}", "EFCore").Replace("{DriverPrefix}", Driver.Prefix);#>
+<#+contextNamespace = ContextData.TransformFullnamespace(DataType.BaseNamespace).Replace("{DriverType}", Driver.ParentFolder).Replace("{DriverPrefix}", Driver.Prefix);#>
 
 using System.Data;
 <#+ foreach(var nameSpace in Driver.NameSpaces){ #>

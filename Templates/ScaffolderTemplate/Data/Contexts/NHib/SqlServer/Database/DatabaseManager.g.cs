@@ -24,13 +24,13 @@ using NHibernate;
 using NHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using FluentNHibernate.Cfg;
-using DotNetScaffolder.Domain.Data.Contexts.EFCore.SqlServer.Context;
+using DotNetScaffolder.Domain.Data.Contexts.NHib.SqlServer.Context;
 using System;
 using System.Collections.Generic;
 using StructureMap;
 using StructureMap.Pipeline;
 
-namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.SqlServer.Database
+namespace DotNetScaffolder.Domain.Data.Contexts.NHib.SqlServer.Database
 {
 	public class DatabaseManager : IDatabaseManager
 	{	
@@ -66,12 +66,12 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.SqlServer.Database
 	        IServiceProvider serviceProvider = null)
 	    {
 	        if (configuration == null || configuration.ConnectionStrings == null
-	                                  || !configuration.ConnectionStrings.ContainsKey("RepoTestSqlServer"))
+	                                  || !configuration.ConnectionStrings.ContainsKey("RepoTestNHibSqlServer"))
 	        {
 	            throw new Exception("Invalid configuration specified in database manager");
 	        }
 
-            var nHibConfig = MsSqlConfiguration.MsSql2012.ConnectionString(configuration.ConnectionStrings["RepoTestSqlServer"]);
+            var nHibConfig = MsSqlConfiguration.MsSql2012.ConnectionString(configuration.ConnectionStrings["RepoTestNHibSqlServer"]);
              Configuration = Fluently.Configure().Database(nHibConfig)
                .Mappings(o => o.FluentMappings.AddFromAssembly(System.Reflection.Assembly.GetExecutingAssembly()));
              Factory = Configuration.BuildSessionFactory();

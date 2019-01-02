@@ -26,7 +26,7 @@ using System.Data.Common;
 using FluentNHibernate.Mapping;
 
 
-namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.Oracle.Mappings.OracleFullContext
+namespace DotNetScaffolder.Domain.Data.Contexts.NHib.Oracle.Mappings.OracleFullContext
 {
 	public partial class FullContextBankAccountMap : ClassMap<BankAccount>
 	{	
@@ -56,7 +56,7 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.Oracle.Mappings.OracleFul
 			.Precision(19).Scale(4)
 			.Not.Nullable();
 			Map(t => t.CustomerId).Column("CustomerId")
-			.Index("IX_CustomerId")
+			.Index("IX_CustomerId1")
 			.Nullable();
 			Map(t => t.Locked).Column("Locked")
 			.Not.Nullable();

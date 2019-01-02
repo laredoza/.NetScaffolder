@@ -35,11 +35,12 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// </summary>
 	    public void ConfigureIncludes()
 	    {
-	        //this.LoadByProductProductIdAsyncIncludes = new Expression<Func<IProduct, object>>[]
-	        //{
-	        //    a => a.OrderDetails
-	        //};
-	    }
+            this.LoadByProductProductIdIncludes = new Expression<Func<IProduct, object>>[]
+            {
+                a => a.Book,
+                a => a.Software
+            };
+        }
 
         #region Configure Load
 

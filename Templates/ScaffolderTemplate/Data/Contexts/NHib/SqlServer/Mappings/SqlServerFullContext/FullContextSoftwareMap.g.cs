@@ -26,7 +26,7 @@ using System.Data.Common;
 using FluentNHibernate.Mapping;
 
 
-namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.SqlServer.Mappings.SqlServerFullContext
+namespace DotNetScaffolder.Domain.Data.Contexts.NHib.SqlServer.Mappings.SqlServerFullContext
 {
 	public partial class FullContextSoftwareMap : ClassMap<Software>
 	{	
@@ -43,7 +43,7 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.SqlServer.Mappings.SqlSer
 			#region Primary Keys
 			
 			Id(t => t.ProductId).GeneratedBy.Assigned()
-			.Index("IX_ProductId")
+			.Index("IX_ProductId3")
 			.Not.Nullable();
 
 			#endregion

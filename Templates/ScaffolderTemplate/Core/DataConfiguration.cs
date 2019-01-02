@@ -28,7 +28,8 @@ namespace DotNetScaffolder.Domain.Core
         /// <param name="configuration">
         /// The configuration.
         /// </param>
-        public void Load(IConfiguration configuration)
+        /// <param name="connectionstrings"></param>
+        public void Load(IConfiguration configuration, List<string> connectionstrings)
         {
             this.Settings = new Dictionary<string, string>
             {
@@ -41,7 +42,12 @@ namespace DotNetScaffolder.Domain.Core
                 { "RedisLoadBalancedServers", configuration.GetSection("Redis:LoadBalancedServers").Value },
             };
 
-            this.ConnectionStrings = new Dictionary<string, string> { { "RepoTestSqlServer", configuration.GetConnectionString("RepoTestSqlServer") } };
+            this.ConnectionStrings = new Dictionary<string, string>();
+
+            foreach (string connectionstring in connectionstrings)
+            {
+                this.ConnectionStrings.Add(new KeyValuePair<string, string>(connectionstring, configuration.GetConnectionString(connectionstring)));
+            }
         }
 
         #endregion

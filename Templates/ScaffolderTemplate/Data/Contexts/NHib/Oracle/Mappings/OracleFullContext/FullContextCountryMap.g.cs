@@ -26,7 +26,7 @@ using System.Data.Common;
 using FluentNHibernate.Mapping;
 
 
-namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.Oracle.Mappings.OracleFullContext
+namespace DotNetScaffolder.Domain.Data.Contexts.NHib.Oracle.Mappings.OracleFullContext
 {
 	public partial class FullContextCountryMap : ClassMap<Country>
 	{	

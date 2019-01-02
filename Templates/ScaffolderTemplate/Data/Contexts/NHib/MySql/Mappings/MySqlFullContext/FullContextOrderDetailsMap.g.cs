@@ -26,7 +26,7 @@ using System.Data.Common;
 using FluentNHibernate.Mapping;
 
 
-namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.MySql.Mappings.MySqlFullContext
+namespace DotNetScaffolder.Domain.Data.Contexts.NHib.MySql.Mappings.MySqlFullContext
 {
 	public partial class FullContextOrderDetailsMap : ClassMap<OrderDetails>
 	{	
@@ -50,10 +50,10 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.MySql.Mappings.MySqlFullC
 			#region Properties
 			
 			Map(t => t.OrderId).Column("OrderId")
-			.Index("IX_OrderId")
+			.Index("IX_OrderId1")
 			.Not.Nullable();
 			Map(t => t.ProductId).Column("ProductId")
-			.Index("IX_ProductId")
+			.Index("IX_ProductId2")
 			.Not.Nullable();
 			Map(t => t.UnitPrice).Column("UnitPrice")
 			.Precision(19).Scale(4)

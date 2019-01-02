@@ -26,11 +26,11 @@ using DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity;
 using DotNetScaffolder.Domain.Core;
 using DotNetScaffolder.Domain.Data.Contexts.EF.Base.Context;
 using DotNetScaffolder.Domain.Core.Interfaces;
-using DotNetScaffolder.Domain.Data.Contexts.EFCore.SqlServer.Mappings.SqlServerFullContext;
+using DotNetScaffolder.Domain.Data.Contexts.EF.SqlServer.Mappings.SqlServerFullContext;
 using DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity;
 using System.Data.Common;
 
-namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.SqlServer.Context
+namespace DotNetScaffolder.Domain.Data.Contexts.EF.SqlServer.Context
 {
 	public partial class SqlServerFullContext : BaseContext
 	{	
@@ -39,12 +39,13 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.SqlServer.Context
 		public SqlServerFullContext(DbConnection dbCon, bool contextOwnsConnection = true) 
 			: base(dbCon, contextOwnsConnection) 
 		{
+            
 		}
 		
 		public SqlServerFullContext(string connectionOrName) 
 			: base($"name={connectionOrName}") 
 		{
-		}
+            		}
 		
 		public SqlServerFullContext()
 			: base("name=RepoTest") 

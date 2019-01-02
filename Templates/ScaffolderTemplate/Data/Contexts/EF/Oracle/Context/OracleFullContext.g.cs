@@ -28,11 +28,11 @@ using DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity;
 using DotNetScaffolder.Domain.Core;
 using DotNetScaffolder.Domain.Data.Contexts.EF.Base.Context;
 using DotNetScaffolder.Domain.Core.Interfaces;
-using DotNetScaffolder.Domain.Data.Contexts.EFCore.Oracle.Mappings.OracleFullContext;
+using DotNetScaffolder.Domain.Data.Contexts.EF.Oracle.Mappings.OracleFullContext;
 using DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity;
 using System.Data.Common;
 
-namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.Oracle.Context
+namespace DotNetScaffolder.Domain.Data.Contexts.EF.Oracle.Context
 {
     [DbConfigurationType(typeof(OracleDbConfiguration))]
 	public partial class OracleFullContext : BaseContext
@@ -42,12 +42,13 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.Oracle.Context
 		public OracleFullContext(DbConnection dbCon, bool contextOwnsConnection = true) 
 			: base(dbCon, contextOwnsConnection) 
 		{
+            
 		}
 		
 		public OracleFullContext(string connectionOrName) 
 			: base($"name={connectionOrName}") 
 		{
-		}
+            		}
 		
 		public OracleFullContext()
 			: base("name=RepoTest") 

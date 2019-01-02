@@ -27,11 +27,11 @@ using DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity;
 using DotNetScaffolder.Domain.Core;
 using DotNetScaffolder.Domain.Data.Contexts.EF.Base.Context;
 using DotNetScaffolder.Domain.Core.Interfaces;
-using DotNetScaffolder.Domain.Data.Contexts.EFCore.MySql.Mappings.MySqlFullContext;
+using DotNetScaffolder.Domain.Data.Contexts.EF.MySql.Mappings.MySqlFullContext;
 using DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity;
 using System.Data.Common;
 
-namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.MySql.Context
+namespace DotNetScaffolder.Domain.Data.Contexts.EF.MySql.Context
 {
     [DbConfigurationType(typeof(MySqlEFConfiguration))]
 	public partial class MySqlFullContext : BaseContext
@@ -41,12 +41,13 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.MySql.Context
 		public MySqlFullContext(DbConnection dbCon, bool contextOwnsConnection = true) 
 			: base(dbCon, contextOwnsConnection) 
 		{
+            
 		}
 		
 		public MySqlFullContext(string connectionOrName) 
 			: base($"name={connectionOrName}") 
 		{
-		}
+            		}
 		
 		public MySqlFullContext()
 			: base("name=RepoTest") 
