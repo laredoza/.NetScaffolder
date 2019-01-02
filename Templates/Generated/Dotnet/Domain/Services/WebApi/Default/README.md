@@ -21,7 +21,7 @@ public void ConfigureIncludes()
 	this.LoadByProductProductIdIncludes = new Expression<Func<IProduct, object>>[]
 		{
 			a => a.Book,
-				a => a.Software
+			a => a.Software
         };
 }
 ```
