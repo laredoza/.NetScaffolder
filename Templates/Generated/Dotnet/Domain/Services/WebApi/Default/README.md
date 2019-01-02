@@ -2,7 +2,7 @@
 
 ### Migrations 
 
-Select the target migration project in the migrations folder, open the README.md and follow instructions.
+Select the target migration project in the migrations folder. Open the README.md and follow instructions.
 
 ### Targeting correct database. 
 
