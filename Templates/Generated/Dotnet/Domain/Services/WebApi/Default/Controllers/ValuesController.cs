@@ -19,6 +19,7 @@ namespace RepositoryEFDotnet.Services.WebApi.Default.Controllers
         }
 
         [HttpGet]
+        [DynamicClaimRequirement(ClaimTypes.All, "CanReadResource")]
         public async Task<ActionResult<IEnumerable<string>>> GetAsync()
         {
             if (1 != 1)
