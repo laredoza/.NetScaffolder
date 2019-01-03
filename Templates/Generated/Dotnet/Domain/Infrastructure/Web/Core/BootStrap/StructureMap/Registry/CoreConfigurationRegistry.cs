@@ -28,7 +28,8 @@ namespace DotNetScaffolder.Domain.Infrastructure.Web.Core.BootStrap.StructureMap
                     "RepoTestEFCoreSqlServer",
                     "RepoTestEFCorePostgres",
                     "RepoTestEFCoreMySql",
-                    "RepoTestNHibMySql"
+                    "RepoTestNHibMySql",
+                    "RepoTestNHibSqlServer"
             };
 
             dataConfiguration.Load(configuration, connectionStrings);
