@@ -2,9 +2,12 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyVersion>1.0.3.0</AssemblyVersion>
+    <FileVersion>1.0.3.0</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MySql.Data" Version="8.0.13" />
     <PackageReference Include="NHibernate.Caches.CoreDistributedCache.Redis" Version="5.4.0" />
     <PackageReference Include="NHibernate.Caches.CoreMemoryCache" Version="5.4.0" />
   </ItemGroup>

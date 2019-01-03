@@ -5,6 +5,8 @@
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
     <AssemblyName>DotNetScaffolder.Domain.Services.WebApi.Default</AssemblyName>
     <RootNamespace>DotNetScaffolder.Domain.Services.WebApi.Default</RootNamespace>
+    <AssemblyVersion>1.0.4.0</AssemblyVersion>
+    <FileVersion>1.0.4.0</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -17,6 +19,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\Data\ApplicationServices\ApplicationService\DotNetScaffolder.Domain.Data.ApplicationServices.ApplicationService.csproj" />
     <ProjectReference Include="..\..\..\Data\Contexts\EFCore\SqlServer\DotNetScaffolder.Domain.Data.Contexts.EFCore.SqlServer.csproj" />
+    <ProjectReference Include="..\..\..\Data\Contexts\NHib\MySql\DotNetScaffolder.Domain.Data.Contexts.NHib.MySql.csproj" />
     <ProjectReference Include="..\..\..\Data\Interfaces\ApplicationService\DotNetScaffolder.Domain.Data.Interfaces.ApplicationServiceInterfaces.csproj" />
     <ProjectReference Include="..\..\..\Data\Interfaces\Interface\DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.csproj" />
     <ProjectReference Include="..\..\..\Data\Repositories\Repository\DotNetScaffolder.Domain.Data.Repositories.Repository.csproj" />
