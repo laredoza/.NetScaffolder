@@ -11,11 +11,10 @@ namespace RepositoryEFDotnet.Services.WebApi.Default.Controllers
     public class ValuesController : ControllerBase
     {
         // GET api/values
-        [ClaimRequirement(MyClaimTypes.Permission, "CanReadResource")]
+        [DynamicClaimRequirement(ClaimTypes.All, "CanReadResource")]
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
         {
-            
             return new string[] { "value1", "value2" };
         }
 

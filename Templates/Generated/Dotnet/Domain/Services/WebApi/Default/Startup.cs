@@ -1,5 +1,7 @@
 ﻿using System;
 using DotNetScaffolder.Domain.Infrastructure.Web.Core.Extensions;
+using DotNetScaffolder.Domain.Infrastructure.Web.Core.Security;
+using DotNetScaffolder.Domain.Services.WebApi.Default.Security;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -60,6 +62,8 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            services.AddTransient<ISecurityFilter, SecurityFilter>();
             //.AddRazorPagesOptions(options =>
             //{
             //    options.Conventions..AuthorizePage("/Contact");

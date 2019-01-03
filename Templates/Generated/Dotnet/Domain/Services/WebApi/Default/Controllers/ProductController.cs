@@ -21,13 +21,15 @@
 using System;
 using System.Linq.Expressions;
 using DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.Dto;
+using DotNetScaffolder.Domain.Infrastructure.Web.Core.Security;
 
 namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
 {
     /// <summary>
 	/// The Product Controller
 	/// </summary>
-	public partial class ProductController 
+    [DynamicClaimRequirement(ClaimTypes.All, "CanReadProductResource")]
+    public partial class ProductController 
 	{
 
         /// <summary>
