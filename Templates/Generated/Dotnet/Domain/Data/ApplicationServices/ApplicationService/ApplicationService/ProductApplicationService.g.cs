@@ -1038,6 +1038,16 @@ namespace DotNetScaffolder.Domain.ApplicationService
             return this.BankAccountRepository.Delete( bankAccountId, cache);
         }
 
+        /// <summary>
+        /// Delete the BankAccount entity async from the database
+        /// </summary>
+        /// <param name="bankAccountId">int</param>
+        /// <returns>bool</returns>
+		public async Task<bool> BankAccountDeleteAsync( int bankAccountId, bool cache)
+        {
+            return await this.BankAccountRepository.DeleteAsync( bankAccountId, cache);
+        }
+
 		
         /// <summary>
         /// Add the BankTransfers entity to the database.
@@ -1107,6 +1117,16 @@ namespace DotNetScaffolder.Domain.ApplicationService
 		public bool BankTransfersDelete( int bankTransferId, bool cache)
         {
             return this.BankTransfersRepository.Delete( bankTransferId, cache);
+        }
+
+        /// <summary>
+        /// Delete the BankTransfers entity async from the database
+        /// </summary>
+        /// <param name="bankTransferId">int</param>
+        /// <returns>bool</returns>
+		public async Task<bool> BankTransfersDeleteAsync( int bankTransferId, bool cache)
+        {
+            return await this.BankTransfersRepository.DeleteAsync( bankTransferId, cache);
         }
 
 		
@@ -1180,6 +1200,16 @@ namespace DotNetScaffolder.Domain.ApplicationService
             return this.BookRepository.Delete( productId, cache);
         }
 
+        /// <summary>
+        /// Delete the Book entity async from the database
+        /// </summary>
+        /// <param name="productId">int</param>
+        /// <returns>bool</returns>
+		public async Task<bool> BookDeleteAsync( int productId, bool cache)
+        {
+            return await this.BookRepository.DeleteAsync( productId, cache);
+        }
+
 		
         /// <summary>
         /// Add the Country entity to the database.
@@ -1249,6 +1279,16 @@ namespace DotNetScaffolder.Domain.ApplicationService
 		public bool CountryDelete( int countryId, bool cache)
         {
             return this.CountryRepository.Delete( countryId, cache);
+        }
+
+        /// <summary>
+        /// Delete the Country entity async from the database
+        /// </summary>
+        /// <param name="countryId">int</param>
+        /// <returns>bool</returns>
+		public async Task<bool> CountryDeleteAsync( int countryId, bool cache)
+        {
+            return await this.CountryRepository.DeleteAsync( countryId, cache);
         }
 
 		
@@ -1322,6 +1362,16 @@ namespace DotNetScaffolder.Domain.ApplicationService
             return this.CustomerRepository.Delete( customerId, cache);
         }
 
+        /// <summary>
+        /// Delete the Customer entity async from the database
+        /// </summary>
+        /// <param name="customerId">int</param>
+        /// <returns>bool</returns>
+		public async Task<bool> CustomerDeleteAsync( int customerId, bool cache)
+        {
+            return await this.CustomerRepository.DeleteAsync( customerId, cache);
+        }
+
 		
         /// <summary>
         /// Add the Order entity to the database.
@@ -1391,6 +1441,16 @@ namespace DotNetScaffolder.Domain.ApplicationService
 		public bool OrderDelete( int orderId, bool cache)
         {
             return this.OrderRepository.Delete( orderId, cache);
+        }
+
+        /// <summary>
+        /// Delete the Order entity async from the database
+        /// </summary>
+        /// <param name="orderId">int</param>
+        /// <returns>bool</returns>
+		public async Task<bool> OrderDeleteAsync( int orderId, bool cache)
+        {
+            return await this.OrderRepository.DeleteAsync( orderId, cache);
         }
 
 		
@@ -1464,6 +1524,16 @@ namespace DotNetScaffolder.Domain.ApplicationService
             return this.OrderDetailsRepository.Delete( orderDetailsId, cache);
         }
 
+        /// <summary>
+        /// Delete the OrderDetails entity async from the database
+        /// </summary>
+        /// <param name="orderDetailsId">int</param>
+        /// <returns>bool</returns>
+		public async Task<bool> OrderDetailsDeleteAsync( int orderDetailsId, bool cache)
+        {
+            return await this.OrderDetailsRepository.DeleteAsync( orderDetailsId, cache);
+        }
+
 		
         /// <summary>
         /// Add the Product entity to the database.
@@ -1535,6 +1605,16 @@ namespace DotNetScaffolder.Domain.ApplicationService
             return this.ProductRepository.Delete( productId, cache);
         }
 
+        /// <summary>
+        /// Delete the Product entity async from the database
+        /// </summary>
+        /// <param name="productId">int</param>
+        /// <returns>bool</returns>
+		public async Task<bool> ProductDeleteAsync( int productId, bool cache)
+        {
+            return await this.ProductRepository.DeleteAsync( productId, cache);
+        }
+
 		
         /// <summary>
         /// Add the Software entity to the database.
@@ -1604,6 +1684,16 @@ namespace DotNetScaffolder.Domain.ApplicationService
 		public bool SoftwareDelete( int productId, bool cache)
         {
             return this.SoftwareRepository.Delete( productId, cache);
+        }
+
+        /// <summary>
+        /// Delete the Software entity async from the database
+        /// </summary>
+        /// <param name="productId">int</param>
+        /// <returns>bool</returns>
+		public async Task<bool> SoftwareDeleteAsync( int productId, bool cache)
+        {
+            return await this.SoftwareRepository.DeleteAsync( productId, cache);
         }
 
 

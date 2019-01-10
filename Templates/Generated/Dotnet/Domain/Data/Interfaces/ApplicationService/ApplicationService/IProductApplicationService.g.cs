@@ -822,6 +822,14 @@ namespace DotNetScaffolder.Domain.Data.ApplicationService
         /// <param name="bankAccountId">int</param>
         /// <returns>bool</returns>
 		bool BankAccountDelete( int bankAccountId, bool cache);
+
+        /// <summary>
+        /// Delete the BankAccount entity async from the database
+        /// </summary>
+        /// <param name="bankAccountId">int</param>
+        /// <returns>bool</returns>
+		Task<bool> BankAccountDeleteAsync( int bankAccountId, bool cache);
+
 		
         /// <summary>
         /// Save the BankTransfers entity to the database.
@@ -871,6 +879,14 @@ namespace DotNetScaffolder.Domain.Data.ApplicationService
         /// <param name="bankTransferId">int</param>
         /// <returns>bool</returns>
 		bool BankTransfersDelete( int bankTransferId, bool cache);
+
+        /// <summary>
+        /// Delete the BankTransfers entity async from the database
+        /// </summary>
+        /// <param name="bankTransferId">int</param>
+        /// <returns>bool</returns>
+		Task<bool> BankTransfersDeleteAsync( int bankTransferId, bool cache);
+
 		
         /// <summary>
         /// Save the Book entity to the database.
@@ -920,6 +936,14 @@ namespace DotNetScaffolder.Domain.Data.ApplicationService
         /// <param name="productId">int</param>
         /// <returns>bool</returns>
 		bool BookDelete( int productId, bool cache);
+
+        /// <summary>
+        /// Delete the Book entity async from the database
+        /// </summary>
+        /// <param name="productId">int</param>
+        /// <returns>bool</returns>
+		Task<bool> BookDeleteAsync( int productId, bool cache);
+
 		
         /// <summary>
         /// Save the Country entity to the database.
@@ -969,6 +993,14 @@ namespace DotNetScaffolder.Domain.Data.ApplicationService
         /// <param name="countryId">int</param>
         /// <returns>bool</returns>
 		bool CountryDelete( int countryId, bool cache);
+
+        /// <summary>
+        /// Delete the Country entity async from the database
+        /// </summary>
+        /// <param name="countryId">int</param>
+        /// <returns>bool</returns>
+		Task<bool> CountryDeleteAsync( int countryId, bool cache);
+
 		
         /// <summary>
         /// Save the Customer entity to the database.
@@ -1018,6 +1050,14 @@ namespace DotNetScaffolder.Domain.Data.ApplicationService
         /// <param name="customerId">int</param>
         /// <returns>bool</returns>
 		bool CustomerDelete( int customerId, bool cache);
+
+        /// <summary>
+        /// Delete the Customer entity async from the database
+        /// </summary>
+        /// <param name="customerId">int</param>
+        /// <returns>bool</returns>
+		Task<bool> CustomerDeleteAsync( int customerId, bool cache);
+
 		
         /// <summary>
         /// Save the Order entity to the database.
@@ -1067,6 +1107,14 @@ namespace DotNetScaffolder.Domain.Data.ApplicationService
         /// <param name="orderId">int</param>
         /// <returns>bool</returns>
 		bool OrderDelete( int orderId, bool cache);
+
+        /// <summary>
+        /// Delete the Order entity async from the database
+        /// </summary>
+        /// <param name="orderId">int</param>
+        /// <returns>bool</returns>
+		Task<bool> OrderDeleteAsync( int orderId, bool cache);
+
 		
         /// <summary>
         /// Save the OrderDetails entity to the database.
@@ -1116,6 +1164,14 @@ namespace DotNetScaffolder.Domain.Data.ApplicationService
         /// <param name="orderDetailsId">int</param>
         /// <returns>bool</returns>
 		bool OrderDetailsDelete( int orderDetailsId, bool cache);
+
+        /// <summary>
+        /// Delete the OrderDetails entity async from the database
+        /// </summary>
+        /// <param name="orderDetailsId">int</param>
+        /// <returns>bool</returns>
+		Task<bool> OrderDetailsDeleteAsync( int orderDetailsId, bool cache);
+
 		
         /// <summary>
         /// Save the Product entity to the database.
@@ -1165,6 +1221,14 @@ namespace DotNetScaffolder.Domain.Data.ApplicationService
         /// <param name="productId">int</param>
         /// <returns>bool</returns>
 		bool ProductDelete( int productId, bool cache);
+
+        /// <summary>
+        /// Delete the Product entity async from the database
+        /// </summary>
+        /// <param name="productId">int</param>
+        /// <returns>bool</returns>
+		Task<bool> ProductDeleteAsync( int productId, bool cache);
+
 		
         /// <summary>
         /// Save the Software entity to the database.
@@ -1214,6 +1278,14 @@ namespace DotNetScaffolder.Domain.Data.ApplicationService
         /// <param name="productId">int</param>
         /// <returns>bool</returns>
 		bool SoftwareDelete( int productId, bool cache);
+
+        /// <summary>
+        /// Delete the Software entity async from the database
+        /// </summary>
+        /// <param name="productId">int</param>
+        /// <returns>bool</returns>
+		Task<bool> SoftwareDeleteAsync( int productId, bool cache);
+
 
 		#endregion
 

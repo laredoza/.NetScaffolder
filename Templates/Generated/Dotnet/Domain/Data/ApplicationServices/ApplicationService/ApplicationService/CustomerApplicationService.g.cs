@@ -421,6 +421,16 @@ namespace DotNetScaffolder.Domain.ApplicationService
             return this.CustomerRepository.Delete( customerId, cache);
         }
 
+        /// <summary>
+        /// Delete the Customer entity async from the database
+        /// </summary>
+        /// <param name="customerId">int</param>
+        /// <returns>bool</returns>
+		public async Task<bool> CustomerDeleteAsync( int customerId, bool cache)
+        {
+            return await this.CustomerRepository.DeleteAsync( customerId, cache);
+        }
+
 
 		#endregion
 

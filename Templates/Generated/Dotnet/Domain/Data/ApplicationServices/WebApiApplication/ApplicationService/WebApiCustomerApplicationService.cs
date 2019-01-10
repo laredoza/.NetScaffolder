@@ -195,6 +195,11 @@ namespace DotNetScaffolder.Domain.Data.ApplicationServices.WebApiApplicationServ
             throw new NotImplementedException();
         }
 
+        public Task<bool> CustomerDeleteAsync(int customerId, bool cache)
+        {
+            throw new NotImplementedException();
+        }
+
         public TResult CustomerMax<TResult>(Expression<Func<ICustomer, TResult>> maxExpression, bool cache)
         {
             throw new NotImplementedException();

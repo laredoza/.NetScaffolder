@@ -338,6 +338,14 @@ namespace DotNetScaffolder.Domain.Data.ApplicationService
         /// <returns>bool</returns>
 		bool CustomerDelete( int customerId, bool cache);
 
+        /// <summary>
+        /// Delete the Customer entity async from the database
+        /// </summary>
+        /// <param name="customerId">int</param>
+        /// <returns>bool</returns>
+		Task<bool> CustomerDeleteAsync( int customerId, bool cache);
+
+
 		#endregion
 
         #region Aggregates

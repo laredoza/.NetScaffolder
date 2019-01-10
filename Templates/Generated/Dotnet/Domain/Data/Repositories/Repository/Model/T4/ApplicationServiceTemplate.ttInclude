@@ -268,6 +268,18 @@ string modelName = DataType.NamingConvention == null ? model.TableName : DataTyp
             return this.<#= modelName #>Repository.Delete(<#= DataType.TransformAsParameterName(model.Columns.Where(o => o.IsPrimaryKey)) #>, cache);
         }
 
+        /// <summary>
+        /// Delete the <#= modelName #> entity async from the database
+        /// </summary>
+<#+ foreach(var col in model.Columns.Where(o => o.IsPrimaryKey)) {#>
+        /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
+<#+ } #>
+        /// <returns>bool</returns>
+		public async Task<bool> <#= modelName #>DeleteAsync(<#= DataType.TransformAsParameter(model.Columns.Where(o => o.IsPrimaryKey)) #>, bool cache)
+        {
+            return await this.<#= modelName #>Repository.DeleteAsync(<#= DataType.TransformAsParameterName(model.Columns.Where(o => o.IsPrimaryKey)) #>, cache);
+        }
+
 <#+            } #>
 
 		#endregion

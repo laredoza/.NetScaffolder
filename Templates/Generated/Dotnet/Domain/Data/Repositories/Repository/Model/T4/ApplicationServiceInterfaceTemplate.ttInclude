@@ -193,6 +193,16 @@ string modelName = DataType.NamingConvention == null ? model.TableName : DataTyp
 <#+ } #>
         /// <returns>bool</returns>
 		bool <#= modelName #>Delete(<#= DataType.TransformAsParameter(model.Columns.Where(o => o.IsPrimaryKey)) #>, bool cache);
+
+        /// <summary>
+        /// Delete the <#= modelName #> entity async from the database
+        /// </summary>
+<#+ foreach(var col in model.Columns.Where(o => o.IsPrimaryKey)) {#>
+        /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
+<#+ } #>
+        /// <returns>bool</returns>
+		Task<bool> <#= modelName #>DeleteAsync(<#= DataType.TransformAsParameter(model.Columns.Where(o => o.IsPrimaryKey)) #>, bool cache);
+
 <#+            } #>
 
 		#endregion
