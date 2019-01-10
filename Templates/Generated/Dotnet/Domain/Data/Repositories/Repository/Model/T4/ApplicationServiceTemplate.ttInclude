@@ -203,7 +203,17 @@ string modelName = DataType.NamingConvention == null ? model.TableName : DataTyp
         /// <returns>bool</returns>
 		public bool <#= modelName #>Add(<#= modelName #>Dto entity)
         {
-            return this.<#= modelName #>Repository.Update(new <#= modelName #>(entity, true));
+            return this.<#= modelName #>Repository.Add(new <#= modelName #>(entity, true));
+        }
+
+        /// <summary>
+        /// Add the <#= modelName #> entity async to the database.
+        /// </summary>
+        /// <param name="entity">I<#= modelName #></param>
+        /// <returns>bool</returns>
+		public async Task<bool> <#= modelName #>AddAsync(<#= modelName #>Dto entity)
+        {
+            return await this.<#= modelName #>Repository.AddAsync(new <#= modelName #>(entity, true));
         }
 
         /// <summary>
@@ -217,6 +227,16 @@ string modelName = DataType.NamingConvention == null ? model.TableName : DataTyp
         }
 		
         /// <summary>
+        /// Update the <#= modelName #> entity async in the database if any values have changed
+        /// </summary>
+        /// <param name="entity">I<#= modelName #></param>
+        /// <returns>bool</returns>
+		public async Task<bool> <#= modelName #>UpdateAsync(<#= modelName #>Dto entity)
+        {
+            return await this.<#= modelName #>Repository.UpdateAsync(new <#= modelName #>(entity, true));
+        }
+
+        /// <summary>
         /// Delete the <#= modelName #> entity from the database
         /// </summary>
         /// <param name="entity">I<#= modelName #></param>
@@ -224,6 +244,16 @@ string modelName = DataType.NamingConvention == null ? model.TableName : DataTyp
 		public bool <#= modelName #>Delete(<#= modelName #>Dto entity)
         {
             return this.<#= modelName #>Repository.Delete(new <#= modelName #>(entity, true));
+        }
+
+        /// <summary>
+        /// Delete the <#= modelName #> entity async from the database
+        /// </summary>
+        /// <param name="entity">I<#= modelName #></param>
+        /// <returns>bool</returns>
+		public async Task<bool> <#= modelName #>DeleteAsync(<#= modelName #>Dto entity)
+        {
+            return await this.<#= modelName #>Repository.DeleteAsync(new <#= modelName #>(entity, true));
         }
 
 		/// <summary>

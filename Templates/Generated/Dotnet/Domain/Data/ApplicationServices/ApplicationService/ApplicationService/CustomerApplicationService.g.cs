@@ -358,7 +358,17 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public bool CustomerAdd(CustomerDto entity)
         {
-            return this.CustomerRepository.Update(new Customer(entity, true));
+            return this.CustomerRepository.Add(new Customer(entity, true));
+        }
+
+        /// <summary>
+        /// Add the Customer entity async to the database.
+        /// </summary>
+        /// <param name="entity">ICustomer</param>
+        /// <returns>bool</returns>
+		public async Task<bool> CustomerAddAsync(CustomerDto entity)
+        {
+            return await this.CustomerRepository.AddAsync(new Customer(entity, true));
         }
 
         /// <summary>
@@ -372,6 +382,16 @@ namespace DotNetScaffolder.Domain.ApplicationService
         }
 		
         /// <summary>
+        /// Update the Customer entity async in the database if any values have changed
+        /// </summary>
+        /// <param name="entity">ICustomer</param>
+        /// <returns>bool</returns>
+		public async Task<bool> CustomerUpdateAsync(CustomerDto entity)
+        {
+            return await this.CustomerRepository.UpdateAsync(new Customer(entity, true));
+        }
+
+        /// <summary>
         /// Delete the Customer entity from the database
         /// </summary>
         /// <param name="entity">ICustomer</param>
@@ -379,6 +399,16 @@ namespace DotNetScaffolder.Domain.ApplicationService
 		public bool CustomerDelete(CustomerDto entity)
         {
             return this.CustomerRepository.Delete(new Customer(entity, true));
+        }
+
+        /// <summary>
+        /// Delete the Customer entity async from the database
+        /// </summary>
+        /// <param name="entity">ICustomer</param>
+        /// <returns>bool</returns>
+		public async Task<bool> CustomerDeleteAsync(CustomerDto entity)
+        {
+            return await this.CustomerRepository.DeleteAsync(new Customer(entity, true));
         }
 
 		/// <summary>

@@ -297,11 +297,25 @@ namespace DotNetScaffolder.Domain.Data.ApplicationService
 		bool CustomerAdd(CustomerDto entity);
 
         /// <summary>
+        /// Save async the Customer entity to the database.
+        /// </summary>
+        /// <param name="entity">CustomerDto</param>
+        /// <returns>bool</returns>
+		Task<bool> CustomerAddAsync(CustomerDto entity);
+
+        /// <summary>
         /// Update the Customer entity in the database if any values have changed
         /// </summary>
         /// <param name="entity">CustomerDto</param>
         /// <returns>bool</returns>
 		bool CustomerUpdate(CustomerDto entity);
+
+        //// <summary>
+        /// Update async the Customer entity in the database if any values have changed
+        /// </summary>
+        /// <param name="entity">CustomerDto</param>
+        /// <returns>bool</returns>
+		Task<bool> CustomerUpdateAsync(CustomerDto entity);
 		
         /// <summary>
         /// Delete the Customer entity from the database
@@ -309,6 +323,13 @@ namespace DotNetScaffolder.Domain.Data.ApplicationService
         /// <param name="entity">CustomerDto</param>
         /// <returns>bool</returns>
 		bool CustomerDelete(CustomerDto entity);
+
+        /// <summary>
+        /// Delete async the Customer entity from the database
+        /// </summary>
+        /// <param name="entity">CustomerDto</param>
+        /// <returns>bool</returns>
+		Task<bool> CustomerDeleteAsync(CustomerDto entity);
 
 		/// <summary>
         /// Delete the Customer entity from the database

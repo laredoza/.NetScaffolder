@@ -151,11 +151,25 @@ string modelName = DataType.NamingConvention == null ? model.TableName : DataTyp
 		bool <#= modelName #>Add(<#= modelName #>Dto entity);
 
         /// <summary>
+        /// Save async the <#= modelName #> entity to the database.
+        /// </summary>
+        /// <param name="entity"><#= modelName #>Dto</param>
+        /// <returns>bool</returns>
+		Task<bool> <#= modelName #>AddAsync(<#= modelName #>Dto entity);
+
+        /// <summary>
         /// Update the <#= modelName #> entity in the database if any values have changed
         /// </summary>
         /// <param name="entity"><#= modelName #>Dto</param>
         /// <returns>bool</returns>
 		bool <#= modelName #>Update(<#= modelName #>Dto entity);
+
+        //// <summary>
+        /// Update async the <#= modelName #> entity in the database if any values have changed
+        /// </summary>
+        /// <param name="entity"><#= modelName #>Dto</param>
+        /// <returns>bool</returns>
+		Task<bool> <#= modelName #>UpdateAsync(<#= modelName #>Dto entity);
 		
         /// <summary>
         /// Delete the <#= modelName #> entity from the database
@@ -163,6 +177,13 @@ string modelName = DataType.NamingConvention == null ? model.TableName : DataTyp
         /// <param name="entity"><#= modelName #>Dto</param>
         /// <returns>bool</returns>
 		bool <#= modelName #>Delete(<#= modelName #>Dto entity);
+
+        /// <summary>
+        /// Delete async the <#= modelName #> entity from the database
+        /// </summary>
+        /// <param name="entity"><#= modelName #>Dto</param>
+        /// <returns>bool</returns>
+		Task<bool> <#= modelName #>DeleteAsync(<#= modelName #>Dto entity);
 
 		/// <summary>
         /// Delete the <#= modelName #> entity from the database

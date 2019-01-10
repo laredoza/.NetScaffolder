@@ -165,12 +165,27 @@ namespace DotNetScaffolder.Domain.Data.ApplicationServices.WebApiApplicationServ
             throw new NotImplementedException();
         }
 
+        public Task<bool> CustomerAddAsync(CustomerDto entity)
+        {
+            throw new NotImplementedException();
+        }
+
         public bool CustomerUpdate(CustomerDto entity)
         {
             throw new NotImplementedException();
         }
 
+        public Task<bool> CustomerUpdateAsync(CustomerDto entity)
+        {
+            throw new NotImplementedException();
+        }
+
         public bool CustomerDelete(CustomerDto entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> CustomerDeleteAsync(CustomerDto entity)
         {
             throw new NotImplementedException();
         }

@@ -74,7 +74,7 @@ namespace RepositoryEFDotnet.Services.WebApi.Default.Controllers
         }
 
         [HttpPost("{product}")]
-        [Route("~/api/UpdateTodo")]
+        //[Route("~/api/UpdateTodo")]
         public async Task<ActionResult<string>> PostTestAsync([FromBody] ProductDto product)
         {
             return Ok("Result");
