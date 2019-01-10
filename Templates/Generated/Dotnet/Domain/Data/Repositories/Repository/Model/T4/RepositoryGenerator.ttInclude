@@ -7,7 +7,7 @@
         public EntityDataType EntityDataType { get; set; }
         public List<Table> Models { get; set; }
         public string RepositoryInterfaceNamespace { get; set; }
-        
+
         private RepositoryTemplate template = new RepositoryTemplate();
 
         protected override void RunCore()
@@ -21,6 +21,7 @@
                 template.DtoInterfaceNamespace = DtoInterfaceType.FullNamespace;
                 template.EntityNamespace = EntityDataType.FullNamespace;
                 template.RepositoryInterfaceNamespace = RepositoryInterfaceNamespace;
+                template.EntityDataType = EntityDataType;
 
                 if(!string.IsNullOrEmpty(DataType.OutputPath))
                 {

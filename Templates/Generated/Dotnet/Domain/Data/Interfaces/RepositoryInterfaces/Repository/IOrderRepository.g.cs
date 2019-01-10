@@ -23,6 +23,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.Dto;
+using DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity;
 using DotNetScaffolder.Domain.Core.Interfaces;
 
 namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
@@ -30,7 +31,7 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
 	/// <summary>
 	/// The OrderRepository interface that defines database functions for the Order table
 	/// </summary>
-	public partial interface IOrderRepository : IRepository<IOrder>
+	public partial interface IOrderRepository : IRepository<Order>
 	{
 		#region Load
 
@@ -40,8 +41,8 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <param name="orderId">int</param>
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<IOrder, object>>[]</param>
-        /// <returns>IOrder</returns>
-		IOrder LoadByOrderId(int orderId, bool cache, params Expression<Func<IOrder, object>>[] includes);
+        /// <returns>Order</returns>
+		Order LoadByOrderId(int orderId, bool cache, params Expression<Func<IOrder, object>>[] includes);
 		
         /// <summary>
         /// Load Order entities async from the database using the composite primary keys
@@ -49,8 +50,8 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <param name="orderId">int</param>
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<IOrder, object>>[]</param>
-        /// <returns>IOrder</returns>
-		Task<IOrder> LoadByOrderIdAsync(int orderId, bool cache, params Expression<Func<IOrder, object>>[] includes);
+        /// <returns>Order</returns>
+		Task<Order> LoadByOrderIdAsync(int orderId, bool cache, params Expression<Func<IOrder, object>>[] includes);
 
         /// <summary>
         /// Load Order entities from the database using the CustomerId field
@@ -58,8 +59,8 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <param name="customerId">Nullable<int></param
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<IOrder, object>>[]</param>
-        /// <returns>IList<IOrder></returns>
-		IList<IOrder> LoadByCustomerId(Nullable<int> customerId, bool cache,  params Expression<Func<IOrder, object>>[] includes);
+        /// <returns>IList<Order></returns>
+		IList<Order> LoadByCustomerId(Nullable<int> customerId, bool cache,  params Expression<Func<IOrder, object>>[] includes);
 		
         /// <summary>
         /// Load Order entities async from the database using the CustomerId field
@@ -67,8 +68,8 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <param name="customerId">Nullable<int></param
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<IOrder, object>>[]</param>
-        /// <returns>IList<IOrder></returns>
-		Task<IList<IOrder>> LoadByCustomerIdAsync(Nullable<int> customerId, bool cache, params Expression<Func<IOrder, object>>[] includes);
+        /// <returns>IList<Order></returns>
+		Task<IList<Order>> LoadByCustomerIdAsync(Nullable<int> customerId, bool cache, params Expression<Func<IOrder, object>>[] includes);
 
         /// <summary>
         /// Load Order entities from the database using the OrderDate field
@@ -76,8 +77,8 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <param name="orderDate">Nullable<DateTime></param
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<IOrder, object>>[]</param>
-        /// <returns>IList<IOrder></returns>
-		IList<IOrder> LoadByOrderDate(Nullable<DateTime> orderDate, bool cache,  params Expression<Func<IOrder, object>>[] includes);
+        /// <returns>IList<Order></returns>
+		IList<Order> LoadByOrderDate(Nullable<DateTime> orderDate, bool cache,  params Expression<Func<IOrder, object>>[] includes);
 		
         /// <summary>
         /// Load Order entities async from the database using the OrderDate field
@@ -85,8 +86,8 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <param name="orderDate">Nullable<DateTime></param
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<IOrder, object>>[]</param>
-        /// <returns>IList<IOrder></returns>
-		Task<IList<IOrder>> LoadByOrderDateAsync(Nullable<DateTime> orderDate, bool cache, params Expression<Func<IOrder, object>>[] includes);
+        /// <returns>IList<Order></returns>
+		Task<IList<Order>> LoadByOrderDateAsync(Nullable<DateTime> orderDate, bool cache, params Expression<Func<IOrder, object>>[] includes);
 
         /// <summary>
         /// Load Order entities from the database using the DeliveryDate field
@@ -94,8 +95,8 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <param name="deliveryDate">Nullable<DateTime></param
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<IOrder, object>>[]</param>
-        /// <returns>IList<IOrder></returns>
-		IList<IOrder> LoadByDeliveryDate(Nullable<DateTime> deliveryDate, bool cache,  params Expression<Func<IOrder, object>>[] includes);
+        /// <returns>IList<Order></returns>
+		IList<Order> LoadByDeliveryDate(Nullable<DateTime> deliveryDate, bool cache,  params Expression<Func<IOrder, object>>[] includes);
 		
         /// <summary>
         /// Load Order entities async from the database using the DeliveryDate field
@@ -103,24 +104,24 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <param name="deliveryDate">Nullable<DateTime></param
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<IOrder, object>>[]</param>
-        /// <returns>IList<IOrder></returns>
-		Task<IList<IOrder>> LoadByDeliveryDateAsync(Nullable<DateTime> deliveryDate, bool cache, params Expression<Func<IOrder, object>>[] includes);
+        /// <returns>IList<Order></returns>
+		Task<IList<Order>> LoadByDeliveryDateAsync(Nullable<DateTime> deliveryDate, bool cache, params Expression<Func<IOrder, object>>[] includes);
 
         /// <summary>
         /// Load all Order entities from the database.
         /// </summary>
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<IOrder, object>>[]</param>
-        /// <returns>IList<IOrder></returns>
-		IList<IOrder> LoadAll( bool cache, params Expression<Func<IOrder, object>>[] includes);
+        /// <returns>IList<Order></returns>
+		IList<Order> LoadAll( bool cache, params Expression<Func<IOrder, object>>[] includes);
 		
         /// <summary>
         /// Load all Order entities async from the database.
         /// </summary>
         /// <param name="cache">Use 2nd level caching if enabled</param>
-		/// <param name="includes">params Expression<Func<IOrder, object>>[]</param>
-        /// <returns>IList<IOrder></returns>
-		Task<IList<IOrder>> LoadAllAsync(bool cache, params Expression<Func<IOrder, object>>[] includes);
+		/// <param name="includes">params Expression<Func<Order, object>>[]</param>
+        /// <returns>IList<Order></returns>
+		Task<IList<Order>> LoadAllAsync(bool cache, params Expression<Func<IOrder, object>>[] includes);
 		
 		#endregion
 
@@ -133,8 +134,8 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="caseSensitive">bool</param
 		/// <param name="includes">params Expression<Func<IOrder, object>>[]</param>
-        /// <returns>IList<IOrder></returns>
-		IList<IOrder> SearchByShippingName(string shippingName, bool cache, bool caseSensitive = false, params Expression<Func<IOrder, object>>[] includes);
+        /// <returns>IList<Order></returns>
+		IList<Order> SearchByShippingName(string shippingName, bool cache, bool caseSensitive = false, params Expression<Func<IOrder, object>>[] includes);
 		
         /// <summary>
         /// Search for Order entities async in the database by ShippingName
@@ -143,8 +144,8 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="caseSensitive">bool</param
 		/// <param name="includes">params Expression<Func<IOrder, object>>[]</param>
-        /// <returns>IList<IOrder></returns>
-		Task<IList<IOrder>> SearchByShippingNameAsync(string shippingName, bool cache, bool caseSensitive = false, params Expression<Func<IOrder, object>>[] includes);
+        /// <returns>IList<Order></returns>
+		Task<IList<Order>> SearchByShippingNameAsync(string shippingName, bool cache, bool caseSensitive = false, params Expression<Func<IOrder, object>>[] includes);
 
         /// <summary>
         /// Search for Order entities in the database by ShippingAddress
@@ -153,8 +154,8 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="caseSensitive">bool</param
 		/// <param name="includes">params Expression<Func<IOrder, object>>[]</param>
-        /// <returns>IList<IOrder></returns>
-		IList<IOrder> SearchByShippingAddress(string shippingAddress, bool cache, bool caseSensitive = false, params Expression<Func<IOrder, object>>[] includes);
+        /// <returns>IList<Order></returns>
+		IList<Order> SearchByShippingAddress(string shippingAddress, bool cache, bool caseSensitive = false, params Expression<Func<IOrder, object>>[] includes);
 		
         /// <summary>
         /// Search for Order entities async in the database by ShippingAddress
@@ -163,8 +164,8 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="caseSensitive">bool</param
 		/// <param name="includes">params Expression<Func<IOrder, object>>[]</param>
-        /// <returns>IList<IOrder></returns>
-		Task<IList<IOrder>> SearchByShippingAddressAsync(string shippingAddress, bool cache, bool caseSensitive = false, params Expression<Func<IOrder, object>>[] includes);
+        /// <returns>IList<Order></returns>
+		Task<IList<Order>> SearchByShippingAddressAsync(string shippingAddress, bool cache, bool caseSensitive = false, params Expression<Func<IOrder, object>>[] includes);
 
         /// <summary>
         /// Search for Order entities in the database by ShippingCity
@@ -173,8 +174,8 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="caseSensitive">bool</param
 		/// <param name="includes">params Expression<Func<IOrder, object>>[]</param>
-        /// <returns>IList<IOrder></returns>
-		IList<IOrder> SearchByShippingCity(string shippingCity, bool cache, bool caseSensitive = false, params Expression<Func<IOrder, object>>[] includes);
+        /// <returns>IList<Order></returns>
+		IList<Order> SearchByShippingCity(string shippingCity, bool cache, bool caseSensitive = false, params Expression<Func<IOrder, object>>[] includes);
 		
         /// <summary>
         /// Search for Order entities async in the database by ShippingCity
@@ -183,8 +184,8 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="caseSensitive">bool</param
 		/// <param name="includes">params Expression<Func<IOrder, object>>[]</param>
-        /// <returns>IList<IOrder></returns>
-		Task<IList<IOrder>> SearchByShippingCityAsync(string shippingCity, bool cache, bool caseSensitive = false, params Expression<Func<IOrder, object>>[] includes);
+        /// <returns>IList<Order></returns>
+		Task<IList<Order>> SearchByShippingCityAsync(string shippingCity, bool cache, bool caseSensitive = false, params Expression<Func<IOrder, object>>[] includes);
 
         /// <summary>
         /// Search for Order entities in the database by ShippingZip
@@ -193,8 +194,8 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="caseSensitive">bool</param
 		/// <param name="includes">params Expression<Func<IOrder, object>>[]</param>
-        /// <returns>IList<IOrder></returns>
-		IList<IOrder> SearchByShippingZip(string shippingZip, bool cache, bool caseSensitive = false, params Expression<Func<IOrder, object>>[] includes);
+        /// <returns>IList<Order></returns>
+		IList<Order> SearchByShippingZip(string shippingZip, bool cache, bool caseSensitive = false, params Expression<Func<IOrder, object>>[] includes);
 		
         /// <summary>
         /// Search for Order entities async in the database by ShippingZip
@@ -203,8 +204,8 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="caseSensitive">bool</param
 		/// <param name="includes">params Expression<Func<IOrder, object>>[]</param>
-        /// <returns>IList<IOrder></returns>
-		Task<IList<IOrder>> SearchByShippingZipAsync(string shippingZip, bool cache, bool caseSensitive = false, params Expression<Func<IOrder, object>>[] includes);
+        /// <returns>IList<Order></returns>
+		Task<IList<Order>> SearchByShippingZipAsync(string shippingZip, bool cache, bool caseSensitive = false, params Expression<Func<IOrder, object>>[] includes);
 
 		#endregion
 		
@@ -215,42 +216,42 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// </summary>
         /// <param name="entity">IOrder</param>
         /// <returns>bool</returns>
-		bool Add(IOrder entity);
+		bool Add(Order entity);
 		
         /// <summary>
         /// Add the Order entity async to the database.
         /// </summary>
         /// <param name="entity">IOrder</param>
         /// <returns>bool</returns>
-		Task<bool> AddAsync(IOrder entity);
+		Task<bool> AddAsync(Order entity);
 
         /// <summary>
         /// Update the Order entity in the database if any values have changed
         /// </summary>
-        /// <param name="entity">IOrder</param>
+        /// <param name="entity">Order</param>
         /// <returns>bool</returns>
-		bool Update(IOrder entity);
+		bool Update(Order entity);
 		
         /// <summary>
         /// Update the Order entity async in the database if any values have changed
         /// </summary>
-        /// <param name="entity">IOrder</param>
+        /// <param name="entity">Order</param>
         /// <returns>bool</returns>
-		Task<bool> UpdateAsync(IOrder entity);
+		Task<bool> UpdateAsync(Order entity);
 		
         /// <summary>
         /// Delete the Order entity from the database
         /// </summary>
-        /// <param name="entity">IOrder</param>
+        /// <param name="entity">Order</param>
         /// <returns>bool</returns>
-		bool Delete(IOrder entity);
+		bool Delete(Order entity);
 		
         /// <summary>
         /// Delete the Order entity async from the database
         /// </summary>
-        /// <param name="entity">IOrder</param>
+        /// <param name="entity">Order</param>
         /// <returns>bool</returns>
-		Task<bool> DeleteAsync(IOrder entity);
+		Task<bool> DeleteAsync(Order entity);
 
 		/// <summary>
         /// Delete the Order entity from the database
@@ -287,7 +288,7 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
-        void BulkDelete(IEnumerable<IOrder> items);
+        void BulkDelete(IEnumerable<Order> items);
 
         /// <summary>
         ///     Bulk delete entities async
@@ -295,14 +296,14 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
         /// <returns></returns>
-        Task BulkDeleteAsync(IEnumerable<IOrder> items);
+        Task BulkDeleteAsync(IEnumerable<Order> items);
 
         /// <summary>
         ///     Bulk insert entities
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
-        void BulkInsert(IEnumerable<IOrder> items);
+        void BulkInsert(IEnumerable<Order> items);
         
         /// <summary>
         /// Bulk insert entities async
@@ -310,14 +311,14 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
         /// <returns></returns>
-        Task BulkInsertAsync(IEnumerable<IOrder> items);
+        Task BulkInsertAsync(IEnumerable<Order> items);
 
         /// <summary>
         /// Bulk update entities 
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
-        void BulkUpdate(IEnumerable<IOrder> items);
+        void BulkUpdate(IEnumerable<Order> items);
 
         /// <summary>
         /// Bulk update entities async
@@ -325,7 +326,7 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
         /// <returns></returns>
-        Task BulkUpdateAsync(IEnumerable<IOrder> items);
+        Task BulkUpdateAsync(IEnumerable<Order> items);
 
         #endregion
 	}

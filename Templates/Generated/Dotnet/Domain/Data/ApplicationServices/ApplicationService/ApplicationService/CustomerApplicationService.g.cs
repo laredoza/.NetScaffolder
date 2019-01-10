@@ -26,6 +26,8 @@ using System.Threading.Tasks;
 using DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces;
 using DotNetScaffolder.Domain.Data.ApplicationService;
 using DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.Dto;
+using DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity;
+using DotNetScaffolder.Domain.Data.Dtos.DefaultDto.Dto;
 
 namespace DotNetScaffolder.Domain.ApplicationService
 {
@@ -53,42 +55,42 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// Load Customer entities from the database using the primary key
         /// </summary
         /// <param name="customerId">int</param>
-        /// <returns>ICustomer</returns>
+        /// <returns>CustomerDto</returns>
         /// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-		public ICustomer LoadByCustomerCustomerId(int customerId, bool cache, params Expression<Func<ICustomer, object>>[] includes)
+		public CustomerDto LoadByCustomerCustomerId(int customerId, bool cache, params Expression<Func<ICustomer, object>>[] includes)
         {
-            return this.CustomerRepository.LoadByCustomerId(customerId, cache, includes);
+            return new CustomerDto(this.CustomerRepository.LoadByCustomerId(customerId, cache, includes), true);
         }
 
         /// <summary>
         /// Load Customer Async entities from the database using the primary key
         /// </summary
         /// <param name="customerId">int</param>
-        /// <returns>ICustomer</returns>
+        /// <returns>CustomerDto</returns>
         /// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-		public async Task<ICustomer> LoadByCustomerCustomerIdAsync(int customerId, bool cache, params Expression<Func<ICustomer, object>>[] includes)
+		public async Task<CustomerDto> LoadByCustomerCustomerIdAsync(int customerId, bool cache, params Expression<Func<ICustomer, object>>[] includes)
         {
-            return await this.CustomerRepository.LoadByCustomerIdAsync(customerId, cache, includes);
+            return new CustomerDto(await this.CustomerRepository.LoadByCustomerIdAsync(customerId, cache, includes), true);
         }
 
         /// <summary>
         /// Load all Customer entities from the database.
         /// </summary>
         /// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-        /// <returns>IList<ICustomer></returns>
-		public IList<ICustomer> CustomerLoadAll(bool cache, params Expression<Func<ICustomer, object>>[] includes)
+        /// <returns>IList<CustomerDto></returns>
+		public IList<CustomerDto> CustomerLoadAll(bool cache, params Expression<Func<ICustomer, object>>[] includes)
         {
-            return this.CustomerRepository.LoadAll(cache, includes);
+            return this.ConvertCustomerEntityToDto(this.CustomerRepository.LoadAll(cache, includes));
         }
 
         /// <summary>
         /// Load all Customer Async entities from the database.
         /// </summary>
         /// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-        /// <returns>IList<ICustomer></returns>
-		public Task<IList<ICustomer>> CustomerLoadAllAsync(bool cache, params Expression<Func<ICustomer, object>>[] includes)
+        /// <returns>IList<CustomerDto></returns>
+		public async Task<IList<CustomerDto>> CustomerLoadAllAsync(bool cache, params Expression<Func<ICustomer, object>>[] includes)
         {
-            return this.CustomerRepository.LoadAllAsync(cache, includes);
+            return this.ConvertCustomerEntityToDto( await this.CustomerRepository.LoadAllAsync(cache, includes));
         }
 
 
@@ -102,10 +104,10 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <param name="customerCode">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-        /// <returns>IList<ICustomer></returns>
-		public IList<ICustomer> CustomerSearchByCustomerCode(string customerCode, bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes)
+        /// <returns>IList<CustomerDto></returns>
+		public IList<CustomerDto> CustomerSearchByCustomerCode(string customerCode, bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes)
         {
-            return this.CustomerRepository.SearchByCustomerCode(customerCode,caseSensitive, cache, includes);
+            return this.ConvertCustomerEntityToDto(this.CustomerRepository.SearchByCustomerCode(customerCode,caseSensitive, cache, includes));
         }
 
         /// <summary>
@@ -114,10 +116,10 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <param name="customerCode">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-        /// <returns>IList<ICustomer></returns>
-		public async Task<IList<ICustomer>> CustomerSearchByCustomerCodeAsync(string customerCode, bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes)
+        /// <returns>IList<CustomerDto></returns>
+		public async Task<IList<CustomerDto>> CustomerSearchByCustomerCodeAsync(string customerCode, bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes)
         {
-            return await this.CustomerRepository.SearchByCustomerCodeAsync(customerCode,caseSensitive, cache, includes);
+            return this.ConvertCustomerEntityToDto(await this.CustomerRepository.SearchByCustomerCodeAsync(customerCode,caseSensitive, cache, includes));
         }
 
 
@@ -127,10 +129,10 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <param name="companyName">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-        /// <returns>IList<ICustomer></returns>
-		public IList<ICustomer> CustomerSearchByCompanyName(string companyName, bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes)
+        /// <returns>IList<CustomerDto></returns>
+		public IList<CustomerDto> CustomerSearchByCompanyName(string companyName, bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes)
         {
-            return this.CustomerRepository.SearchByCompanyName(companyName,caseSensitive, cache, includes);
+            return this.ConvertCustomerEntityToDto(this.CustomerRepository.SearchByCompanyName(companyName,caseSensitive, cache, includes));
         }
 
         /// <summary>
@@ -139,10 +141,10 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <param name="companyName">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-        /// <returns>IList<ICustomer></returns>
-		public async Task<IList<ICustomer>> CustomerSearchByCompanyNameAsync(string companyName, bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes)
+        /// <returns>IList<CustomerDto></returns>
+		public async Task<IList<CustomerDto>> CustomerSearchByCompanyNameAsync(string companyName, bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes)
         {
-            return await this.CustomerRepository.SearchByCompanyNameAsync(companyName,caseSensitive, cache, includes);
+            return this.ConvertCustomerEntityToDto(await this.CustomerRepository.SearchByCompanyNameAsync(companyName,caseSensitive, cache, includes));
         }
 
 
@@ -152,10 +154,10 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <param name="contactName">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-        /// <returns>IList<ICustomer></returns>
-		public IList<ICustomer> CustomerSearchByContactName(string contactName, bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes)
+        /// <returns>IList<CustomerDto></returns>
+		public IList<CustomerDto> CustomerSearchByContactName(string contactName, bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes)
         {
-            return this.CustomerRepository.SearchByContactName(contactName,caseSensitive, cache, includes);
+            return this.ConvertCustomerEntityToDto(this.CustomerRepository.SearchByContactName(contactName,caseSensitive, cache, includes));
         }
 
         /// <summary>
@@ -164,10 +166,10 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <param name="contactName">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-        /// <returns>IList<ICustomer></returns>
-		public async Task<IList<ICustomer>> CustomerSearchByContactNameAsync(string contactName, bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes)
+        /// <returns>IList<CustomerDto></returns>
+		public async Task<IList<CustomerDto>> CustomerSearchByContactNameAsync(string contactName, bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes)
         {
-            return await this.CustomerRepository.SearchByContactNameAsync(contactName,caseSensitive, cache, includes);
+            return this.ConvertCustomerEntityToDto(await this.CustomerRepository.SearchByContactNameAsync(contactName,caseSensitive, cache, includes));
         }
 
 
@@ -177,10 +179,10 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <param name="contactTitle">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-        /// <returns>IList<ICustomer></returns>
-		public IList<ICustomer> CustomerSearchByContactTitle(string contactTitle, bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes)
+        /// <returns>IList<CustomerDto></returns>
+		public IList<CustomerDto> CustomerSearchByContactTitle(string contactTitle, bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes)
         {
-            return this.CustomerRepository.SearchByContactTitle(contactTitle,caseSensitive, cache, includes);
+            return this.ConvertCustomerEntityToDto(this.CustomerRepository.SearchByContactTitle(contactTitle,caseSensitive, cache, includes));
         }
 
         /// <summary>
@@ -189,10 +191,10 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <param name="contactTitle">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-        /// <returns>IList<ICustomer></returns>
-		public async Task<IList<ICustomer>> CustomerSearchByContactTitleAsync(string contactTitle, bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes)
+        /// <returns>IList<CustomerDto></returns>
+		public async Task<IList<CustomerDto>> CustomerSearchByContactTitleAsync(string contactTitle, bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes)
         {
-            return await this.CustomerRepository.SearchByContactTitleAsync(contactTitle,caseSensitive, cache, includes);
+            return this.ConvertCustomerEntityToDto(await this.CustomerRepository.SearchByContactTitleAsync(contactTitle,caseSensitive, cache, includes));
         }
 
 
@@ -202,10 +204,10 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <param name="address">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-        /// <returns>IList<ICustomer></returns>
-		public IList<ICustomer> CustomerSearchByAddress(string address, bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes)
+        /// <returns>IList<CustomerDto></returns>
+		public IList<CustomerDto> CustomerSearchByAddress(string address, bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes)
         {
-            return this.CustomerRepository.SearchByAddress(address,caseSensitive, cache, includes);
+            return this.ConvertCustomerEntityToDto(this.CustomerRepository.SearchByAddress(address,caseSensitive, cache, includes));
         }
 
         /// <summary>
@@ -214,10 +216,10 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <param name="address">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-        /// <returns>IList<ICustomer></returns>
-		public async Task<IList<ICustomer>> CustomerSearchByAddressAsync(string address, bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes)
+        /// <returns>IList<CustomerDto></returns>
+		public async Task<IList<CustomerDto>> CustomerSearchByAddressAsync(string address, bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes)
         {
-            return await this.CustomerRepository.SearchByAddressAsync(address,caseSensitive, cache, includes);
+            return this.ConvertCustomerEntityToDto(await this.CustomerRepository.SearchByAddressAsync(address,caseSensitive, cache, includes));
         }
 
 
@@ -227,10 +229,10 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <param name="city">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-        /// <returns>IList<ICustomer></returns>
-		public IList<ICustomer> CustomerSearchByCity(string city, bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes)
+        /// <returns>IList<CustomerDto></returns>
+		public IList<CustomerDto> CustomerSearchByCity(string city, bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes)
         {
-            return this.CustomerRepository.SearchByCity(city,caseSensitive, cache, includes);
+            return this.ConvertCustomerEntityToDto(this.CustomerRepository.SearchByCity(city,caseSensitive, cache, includes));
         }
 
         /// <summary>
@@ -239,10 +241,10 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <param name="city">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-        /// <returns>IList<ICustomer></returns>
-		public async Task<IList<ICustomer>> CustomerSearchByCityAsync(string city, bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes)
+        /// <returns>IList<CustomerDto></returns>
+		public async Task<IList<CustomerDto>> CustomerSearchByCityAsync(string city, bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes)
         {
-            return await this.CustomerRepository.SearchByCityAsync(city,caseSensitive, cache, includes);
+            return this.ConvertCustomerEntityToDto(await this.CustomerRepository.SearchByCityAsync(city,caseSensitive, cache, includes));
         }
 
 
@@ -252,10 +254,10 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <param name="postalCode">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-        /// <returns>IList<ICustomer></returns>
-		public IList<ICustomer> CustomerSearchByPostalCode(string postalCode, bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes)
+        /// <returns>IList<CustomerDto></returns>
+		public IList<CustomerDto> CustomerSearchByPostalCode(string postalCode, bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes)
         {
-            return this.CustomerRepository.SearchByPostalCode(postalCode,caseSensitive, cache, includes);
+            return this.ConvertCustomerEntityToDto(this.CustomerRepository.SearchByPostalCode(postalCode,caseSensitive, cache, includes));
         }
 
         /// <summary>
@@ -264,10 +266,10 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <param name="postalCode">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-        /// <returns>IList<ICustomer></returns>
-		public async Task<IList<ICustomer>> CustomerSearchByPostalCodeAsync(string postalCode, bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes)
+        /// <returns>IList<CustomerDto></returns>
+		public async Task<IList<CustomerDto>> CustomerSearchByPostalCodeAsync(string postalCode, bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes)
         {
-            return await this.CustomerRepository.SearchByPostalCodeAsync(postalCode,caseSensitive, cache, includes);
+            return this.ConvertCustomerEntityToDto(await this.CustomerRepository.SearchByPostalCodeAsync(postalCode,caseSensitive, cache, includes));
         }
 
 
@@ -277,10 +279,10 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <param name="telephone">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-        /// <returns>IList<ICustomer></returns>
-		public IList<ICustomer> CustomerSearchByTelephone(string telephone, bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes)
+        /// <returns>IList<CustomerDto></returns>
+		public IList<CustomerDto> CustomerSearchByTelephone(string telephone, bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes)
         {
-            return this.CustomerRepository.SearchByTelephone(telephone,caseSensitive, cache, includes);
+            return this.ConvertCustomerEntityToDto(this.CustomerRepository.SearchByTelephone(telephone,caseSensitive, cache, includes));
         }
 
         /// <summary>
@@ -289,10 +291,10 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <param name="telephone">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-        /// <returns>IList<ICustomer></returns>
-		public async Task<IList<ICustomer>> CustomerSearchByTelephoneAsync(string telephone, bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes)
+        /// <returns>IList<CustomerDto></returns>
+		public async Task<IList<CustomerDto>> CustomerSearchByTelephoneAsync(string telephone, bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes)
         {
-            return await this.CustomerRepository.SearchByTelephoneAsync(telephone,caseSensitive, cache, includes);
+            return this.ConvertCustomerEntityToDto(await this.CustomerRepository.SearchByTelephoneAsync(telephone,caseSensitive, cache, includes));
         }
 
 
@@ -302,10 +304,10 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <param name="fax">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-        /// <returns>IList<ICustomer></returns>
-		public IList<ICustomer> CustomerSearchByFax(string fax, bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes)
+        /// <returns>IList<CustomerDto></returns>
+		public IList<CustomerDto> CustomerSearchByFax(string fax, bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes)
         {
-            return this.CustomerRepository.SearchByFax(fax,caseSensitive, cache, includes);
+            return this.ConvertCustomerEntityToDto(this.CustomerRepository.SearchByFax(fax,caseSensitive, cache, includes));
         }
 
         /// <summary>
@@ -314,10 +316,10 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <param name="fax">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-        /// <returns>IList<ICustomer></returns>
-		public async Task<IList<ICustomer>> CustomerSearchByFaxAsync(string fax, bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes)
+        /// <returns>IList<CustomerDto></returns>
+		public async Task<IList<CustomerDto>> CustomerSearchByFaxAsync(string fax, bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes)
         {
-            return await this.CustomerRepository.SearchByFaxAsync(fax,caseSensitive, cache, includes);
+            return this.ConvertCustomerEntityToDto(await this.CustomerRepository.SearchByFaxAsync(fax,caseSensitive, cache, includes));
         }
 
 
@@ -327,10 +329,10 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <param name="photo">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-        /// <returns>IList<ICustomer></returns>
-		public IList<ICustomer> CustomerSearchByPhoto(string photo, bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes)
+        /// <returns>IList<CustomerDto></returns>
+		public IList<CustomerDto> CustomerSearchByPhoto(string photo, bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes)
         {
-            return this.CustomerRepository.SearchByPhoto(photo,caseSensitive, cache, includes);
+            return this.ConvertCustomerEntityToDto(this.CustomerRepository.SearchByPhoto(photo,caseSensitive, cache, includes));
         }
 
         /// <summary>
@@ -339,10 +341,10 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <param name="photo">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-        /// <returns>IList<ICustomer></returns>
-		public async Task<IList<ICustomer>> CustomerSearchByPhotoAsync(string photo, bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes)
+        /// <returns>IList<CustomerDto></returns>
+		public async Task<IList<CustomerDto>> CustomerSearchByPhotoAsync(string photo, bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes)
         {
-            return await this.CustomerRepository.SearchByPhotoAsync(photo,caseSensitive, cache, includes);
+            return this.ConvertCustomerEntityToDto(await this.CustomerRepository.SearchByPhotoAsync(photo,caseSensitive, cache, includes));
         }
 
 		#endregion
@@ -354,9 +356,9 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// </summary>
         /// <param name="entity">ICustomer</param>
         /// <returns>bool</returns>
-		public bool CustomerAdd(ICustomer entity)
+		public bool CustomerAdd(CustomerDto entity)
         {
-            return this.CustomerRepository.Update(entity);
+            return this.CustomerRepository.Update(new Customer(entity, true));
         }
 
         /// <summary>
@@ -364,9 +366,9 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// </summary>
         /// <param name="entity">ICustomer</param>
         /// <returns>bool</returns>
-		public bool CustomerUpdate(ICustomer entity)
+		public bool CustomerUpdate(CustomerDto entity)
         {
-            return this.CustomerRepository.Update(entity);
+            return this.CustomerRepository.Update(new Customer(entity, true));
         }
 		
         /// <summary>
@@ -374,9 +376,9 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// </summary>
         /// <param name="entity">ICustomer</param>
         /// <returns>bool</returns>
-		public bool CustomerDelete(ICustomer entity)
+		public bool CustomerDelete(CustomerDto entity)
         {
-            return this.CustomerRepository.Delete(entity);
+            return this.CustomerRepository.Delete(new Customer(entity, true));
         }
 
 		/// <summary>
@@ -430,7 +432,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// Returns the min value 
         /// </summary>
         /// <typeparam name="TResult">TResult</typeparam>
-        /// <param name="maxExpression">Expression<Func<ICustomer, TResult>> maxExpression</param>
+        /// <param name="maxExpression">Expression<Func<ICustomer, TResult>> maxExpression</pIaram>
         /// <returns></returns>
 		public async Task<TResult> CustomerMinAsync<TResult>(Expression<Func<ICustomer, TResult>> maxExpression, bool cache)
         {
@@ -442,12 +444,46 @@ namespace DotNetScaffolder.Domain.ApplicationService
 		#region Bulk
 
         /// <summary>
+        /// Converts a CustomerDto list to Customer list
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+	    private List<Customer> ConvertCustomerDtoToEntity(IEnumerable<CustomerDto> items)
+	    {
+            List<Customer> results = new List<Customer>();
+
+	        foreach (var item in items)
+	        {
+	            results.Add(new Customer(item, true));
+	        }
+
+	        return results;
+	    }
+
+        /// <summary>
+        /// Converts a Customer list to CustomerDto list
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+	    private List<CustomerDto> ConvertCustomerEntityToDto(IEnumerable<Customer> items)
+	    {
+            List<CustomerDto> results = new List<CustomerDto>();
+
+	        foreach (var item in items)
+	        {
+	            results.Add(new CustomerDto(item, true));
+	        }
+
+	        return results;
+	    }
+
+        /// <summary>
         ///     Bulk delete entities
         /// </summary>
         /// <param name="items"></param>
-        public void CustomerBulkDelete(IEnumerable<ICustomer> items)
+        public void CustomerBulkDelete(IEnumerable<CustomerDto> items)
 		{
-			this.CustomerRepository.BulkDelete(items);
+			this.CustomerRepository.BulkDelete(this.ConvertCustomerDtoToEntity(items));
 		}
 
         /// <summary>
@@ -455,18 +491,18 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// </summary>
         /// <param name="items"></param>
         /// <returns></returns>
-        public async Task CustomerBulkDeleteAsync(IEnumerable<ICustomer> items)
+        public async Task CustomerBulkDeleteAsync(IEnumerable<CustomerDto> items)
 		{
-			await this.CustomerRepository.BulkDeleteAsync(items);
+			await this.CustomerRepository.BulkDeleteAsync(this.ConvertCustomerDtoToEntity(items));
 		}
 
         /// <summary>
         ///     Bulk insert entities
         /// </summary>
         /// <param name="items"></param>
-        public void  CustomerBulkInsert(IEnumerable<ICustomer> items)
+        public void  CustomerBulkInsert(IEnumerable<CustomerDto> items)
 		{
-			this.CustomerRepository.BulkInsert(items);
+			this.CustomerRepository.BulkInsert(this.ConvertCustomerDtoToEntity(items));
 		}
         
         /// <summary>
@@ -474,18 +510,18 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// </summary>
         /// <param name="items"></param>
         /// <returns></returns>
-        public async Task  CustomerBulkInsertAsync(IEnumerable<ICustomer> items)
+        public async Task  CustomerBulkInsertAsync(IEnumerable<CustomerDto> items)
 		{
-			await this.CustomerRepository.BulkInsertAsync(items);
+			await this.CustomerRepository.BulkInsertAsync(this.ConvertCustomerDtoToEntity(items));
 		}
 
         /// <summary>
         /// Bulk update entities 
         /// </summary>
         /// <param name="items"></param>
-        public void  CustomerBulkUpdate(IEnumerable<ICustomer> items)
+        public void  CustomerBulkUpdate(IEnumerable<CustomerDto> items)
 		{
-			this.CustomerRepository.BulkUpdate(items);
+			this.CustomerRepository.BulkUpdate(this.ConvertCustomerDtoToEntity(items));
 		}
 
         /// <summary>
@@ -493,9 +529,9 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// </summary>
         /// <param name="items"></param>
         /// <returns></returns>
-        public async Task  CustomerBulkUpdateAsync(IEnumerable<ICustomer> items)
+        public async Task  CustomerBulkUpdateAsync(IEnumerable<CustomerDto> items)
 		{
-			await this.CustomerRepository.BulkUpdateAsync(items);
+			await this.CustomerRepository.BulkUpdateAsync(this.ConvertCustomerDtoToEntity(items));
 		}
 
         #endregion

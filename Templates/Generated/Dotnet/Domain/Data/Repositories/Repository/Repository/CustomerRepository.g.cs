@@ -26,6 +26,7 @@ using System.Threading.Tasks;
 using DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.Dto;
 using DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity;
 using DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces;
+using DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity;
 
 using DotNetScaffolder.Domain.Core;
 using DotNetScaffolder.Domain.Core.Interfaces;
@@ -35,7 +36,7 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
 	/// <summary>
 	/// The CustomerRepository class responsible for database functions in the Customer table
 	/// </summary>
-	public partial class CustomerRepository : UowRepository<ICustomer> , ICustomerRepository
+	public partial class CustomerRepository : UowRepository<Customer> , ICustomerRepository
 	{		
 		#region CTOR
 		
@@ -61,8 +62,8 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// </summary
         /// <param name="customerId">int</param>
 		/// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-        /// <returns>ICustomer</returns>
-		public virtual ICustomer LoadByCustomerId(int customerId, bool cache, params Expression<Func<ICustomer, object>>[] includes)
+        /// <returns>Customer</returns>
+		public virtual Customer LoadByCustomerId(int customerId, bool cache, params Expression<Func<ICustomer, object>>[] includes)
 		{
 			var expr = this.Convert(includes);
 			return this.UnitOfWork.FirstOrDefault<Customer>(o => o.CustomerId == customerId, cache, expr);
@@ -73,8 +74,8 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// </summary
         /// <param name="customerId">int</param>
 		/// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-        /// <returns>ICustomer</returns>
-		public virtual async Task<ICustomer> LoadByCustomerIdAsync(int customerId, bool cache, params Expression<Func<ICustomer, object>>[] includes)
+        /// <returns>Customer</returns>
+		public virtual async Task<Customer> LoadByCustomerIdAsync(int customerId, bool cache, params Expression<Func<ICustomer, object>>[] includes)
 		{
 			var expr = this.Convert(includes);
 			return await this.UnitOfWork.FirstOrDefaultAsync<Customer>(cache, o => o.CustomerId == customerId, expr);
@@ -84,73 +85,73 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// Load Customer entities from the database using the CountryId field
         /// </summary>
         /// <param name="countryId">Nullable<int></param>
-		/// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
+		/// <param name="includes">params Expression<Func<Customer, object>>[]</param>
         /// <returns>IList<ICustomer></returns>
-		public virtual IList<ICustomer> LoadByCountryId(Nullable<int> countryId, bool cache, params Expression<Func<ICustomer, object>>[] includes)
+		public virtual IList<Customer> LoadByCountryId(Nullable<int> countryId, bool cache, params Expression<Func<ICustomer, object>>[] includes)
 		{
 			var expr = this.Convert(includes);
-			return this.UnitOfWork.AllMatching<Customer>(o => o.CountryId == countryId, cache, expr).ToList<ICustomer>();
+			return this.UnitOfWork.AllMatching<Customer>(o => o.CountryId == countryId, cache, expr).ToList<Customer>();
 		}
 		
         /// <summary>
         /// Load Customer entities async from the database using the CountryId field
         /// </summary>
         /// <param name="countryId">Nullable<int></param>
-		/// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
+		/// <param name="includes">params Expression<Func<Customer, object>>[]</param>
         /// <returns>IList<ICustomer></returns>
-		public virtual async Task<IList<ICustomer>> LoadByCountryIdAsync(Nullable<int> countryId, bool cache, params Expression<Func<ICustomer, object>>[] includes)
+		public virtual async Task<IList<Customer>> LoadByCountryIdAsync(Nullable<int> countryId, bool cache, params Expression<Func<ICustomer, object>>[] includes)
 		{
 			var expr = this.Convert(includes);
 			var result = await this.UnitOfWork.AllMatchingAsync<Customer>(o => o.CountryId == countryId,cache, expr);
-			return result.ToList<ICustomer>();
+			return result.ToList<Customer>();
 		}
 
         /// <summary>
         /// Load Customer entities from the database using the IsEnabled field
         /// </summary>
         /// <param name="isEnabled">bool</param>
-		/// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
+		/// <param name="includes">params Expression<Func<Customer, object>>[]</param>
         /// <returns>IList<ICustomer></returns>
-		public virtual IList<ICustomer> LoadByIsEnabled(bool isEnabled, bool cache, params Expression<Func<ICustomer, object>>[] includes)
+		public virtual IList<Customer> LoadByIsEnabled(bool isEnabled, bool cache, params Expression<Func<ICustomer, object>>[] includes)
 		{
 			var expr = this.Convert(includes);
-			return this.UnitOfWork.AllMatching<Customer>(o => o.IsEnabled == isEnabled, cache, expr).ToList<ICustomer>();
+			return this.UnitOfWork.AllMatching<Customer>(o => o.IsEnabled == isEnabled, cache, expr).ToList<Customer>();
 		}
 		
         /// <summary>
         /// Load Customer entities async from the database using the IsEnabled field
         /// </summary>
         /// <param name="isEnabled">bool</param>
-		/// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
+		/// <param name="includes">params Expression<Func<Customer, object>>[]</param>
         /// <returns>IList<ICustomer></returns>
-		public virtual async Task<IList<ICustomer>> LoadByIsEnabledAsync(bool isEnabled, bool cache, params Expression<Func<ICustomer, object>>[] includes)
+		public virtual async Task<IList<Customer>> LoadByIsEnabledAsync(bool isEnabled, bool cache, params Expression<Func<ICustomer, object>>[] includes)
 		{
 			var expr = this.Convert(includes);
 			var result = await this.UnitOfWork.AllMatchingAsync<Customer>(o => o.IsEnabled == isEnabled,cache, expr);
-			return result.ToList<ICustomer>();
+			return result.ToList<Customer>();
 		}
 
         /// <summary>
         /// Load all Customer entities from the database.
         /// </summary>
 		/// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-        /// <returns>IList<ICustomer></returns>
-		public virtual IList<ICustomer> LoadAll(bool cache, params Expression<Func<ICustomer, object>>[] includes)
+        /// <returns>IList<Customer></returns>
+		public virtual IList<Customer> LoadAll(bool cache, params Expression<Func<ICustomer, object>>[] includes)
 		{
 			var expr = this.Convert(includes);
-			return this.UnitOfWork.GetAll<Customer>(cache, expr).ToList<ICustomer>();
+			return this.UnitOfWork.GetAll<Customer>(cache, expr).ToList<Customer>();
 		}
 		
         /// <summary>
         /// Load all Customer entities async from the database.
         /// </summary>
 		/// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-        /// <returns>IList<ICustomer></returns>
-		public virtual async Task<IList<ICustomer>> LoadAllAsync(bool cache, params Expression<Func<ICustomer,  object>>[] includes)
+        /// <returns>IList<Customer></returns>
+		public virtual async Task<IList<Customer>> LoadAllAsync(bool cache, params Expression<Func<ICustomer,  object>>[] includes)
 		{
 			var expr = this.Convert(includes);
 			var result = await this.UnitOfWork.GetAllAsync<Customer>(cache, expr);
-			return result.ToList<ICustomer>();
+			return result.ToList<Customer>();
 		}
 		
 		#endregion
@@ -163,17 +164,17 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <param name="customerCode">string</param>
 		/// <param name="caseSensitive">bool</param>
 		/// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-        /// <returns>IList<ICustomer></returns>
-		public virtual IList<ICustomer> SearchByCustomerCode(string customerCode, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes)
+        /// <returns>IList<Customer></returns>
+		public virtual IList<Customer> SearchByCustomerCode(string customerCode, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes)
 		{		
 			var expr = this.Convert(includes);
 			if(caseSensitive) 
 			{
-				return this.UnitOfWork.AllMatching<Customer>(o => o.CustomerCode.Contains(customerCode), cache, expr).ToList<ICustomer>();
+				return this.UnitOfWork.AllMatching<Customer>(o => o.CustomerCode.Contains(customerCode), cache, expr).ToList<Customer>();
 			}
 			else
 			{
-				return this.UnitOfWork.AllMatching<Customer>(o => o.CustomerCode.ToLower().Contains(customerCode.ToLower()), cache, expr).ToList<ICustomer>();
+				return this.UnitOfWork.AllMatching<Customer>(o => o.CustomerCode.ToLower().Contains(customerCode.ToLower()), cache, expr).ToList<Customer>();
 			}
 		}
 		
@@ -183,19 +184,19 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <param name="customerCode">string</param>
 		/// <param name="caseSensitive">bool</param>
 		/// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-        /// <returns>IList<ICustomer></returns>
-		public virtual async Task<IList<ICustomer>> SearchByCustomerCodeAsync(string customerCode, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes)
+        /// <returns>IList<Customer></returns>
+		public virtual async Task<IList<Customer>> SearchByCustomerCodeAsync(string customerCode, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes)
 		{		
 			var expr = this.Convert(includes);
 			if(caseSensitive) 
 			{
 				var result = await this.UnitOfWork.AllMatchingAsync<Customer>(o => o.CustomerCode.Contains(customerCode), cache, expr);
-				return result.ToList<ICustomer>();
+				return result.ToList<Customer>();
 			}
 			else
 			{
 				var result = await this.UnitOfWork.AllMatchingAsync<Customer>(o => o.CustomerCode.ToLower().Contains(customerCode.ToLower()), cache, expr);
-				return result.ToList<ICustomer>();
+				return result.ToList<Customer>();
 			}
 		}
 
@@ -205,17 +206,17 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <param name="companyName">string</param>
 		/// <param name="caseSensitive">bool</param>
 		/// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-        /// <returns>IList<ICustomer></returns>
-		public virtual IList<ICustomer> SearchByCompanyName(string companyName, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes)
+        /// <returns>IList<Customer></returns>
+		public virtual IList<Customer> SearchByCompanyName(string companyName, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes)
 		{		
 			var expr = this.Convert(includes);
 			if(caseSensitive) 
 			{
-				return this.UnitOfWork.AllMatching<Customer>(o => o.CompanyName.Contains(companyName), cache, expr).ToList<ICustomer>();
+				return this.UnitOfWork.AllMatching<Customer>(o => o.CompanyName.Contains(companyName), cache, expr).ToList<Customer>();
 			}
 			else
 			{
-				return this.UnitOfWork.AllMatching<Customer>(o => o.CompanyName.ToLower().Contains(companyName.ToLower()), cache, expr).ToList<ICustomer>();
+				return this.UnitOfWork.AllMatching<Customer>(o => o.CompanyName.ToLower().Contains(companyName.ToLower()), cache, expr).ToList<Customer>();
 			}
 		}
 		
@@ -225,19 +226,19 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <param name="companyName">string</param>
 		/// <param name="caseSensitive">bool</param>
 		/// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-        /// <returns>IList<ICustomer></returns>
-		public virtual async Task<IList<ICustomer>> SearchByCompanyNameAsync(string companyName, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes)
+        /// <returns>IList<Customer></returns>
+		public virtual async Task<IList<Customer>> SearchByCompanyNameAsync(string companyName, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes)
 		{		
 			var expr = this.Convert(includes);
 			if(caseSensitive) 
 			{
 				var result = await this.UnitOfWork.AllMatchingAsync<Customer>(o => o.CompanyName.Contains(companyName), cache, expr);
-				return result.ToList<ICustomer>();
+				return result.ToList<Customer>();
 			}
 			else
 			{
 				var result = await this.UnitOfWork.AllMatchingAsync<Customer>(o => o.CompanyName.ToLower().Contains(companyName.ToLower()), cache, expr);
-				return result.ToList<ICustomer>();
+				return result.ToList<Customer>();
 			}
 		}
 
@@ -247,17 +248,17 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <param name="contactName">string</param>
 		/// <param name="caseSensitive">bool</param>
 		/// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-        /// <returns>IList<ICustomer></returns>
-		public virtual IList<ICustomer> SearchByContactName(string contactName, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes)
+        /// <returns>IList<Customer></returns>
+		public virtual IList<Customer> SearchByContactName(string contactName, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes)
 		{		
 			var expr = this.Convert(includes);
 			if(caseSensitive) 
 			{
-				return this.UnitOfWork.AllMatching<Customer>(o => o.ContactName.Contains(contactName), cache, expr).ToList<ICustomer>();
+				return this.UnitOfWork.AllMatching<Customer>(o => o.ContactName.Contains(contactName), cache, expr).ToList<Customer>();
 			}
 			else
 			{
-				return this.UnitOfWork.AllMatching<Customer>(o => o.ContactName.ToLower().Contains(contactName.ToLower()), cache, expr).ToList<ICustomer>();
+				return this.UnitOfWork.AllMatching<Customer>(o => o.ContactName.ToLower().Contains(contactName.ToLower()), cache, expr).ToList<Customer>();
 			}
 		}
 		
@@ -267,19 +268,19 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <param name="contactName">string</param>
 		/// <param name="caseSensitive">bool</param>
 		/// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-        /// <returns>IList<ICustomer></returns>
-		public virtual async Task<IList<ICustomer>> SearchByContactNameAsync(string contactName, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes)
+        /// <returns>IList<Customer></returns>
+		public virtual async Task<IList<Customer>> SearchByContactNameAsync(string contactName, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes)
 		{		
 			var expr = this.Convert(includes);
 			if(caseSensitive) 
 			{
 				var result = await this.UnitOfWork.AllMatchingAsync<Customer>(o => o.ContactName.Contains(contactName), cache, expr);
-				return result.ToList<ICustomer>();
+				return result.ToList<Customer>();
 			}
 			else
 			{
 				var result = await this.UnitOfWork.AllMatchingAsync<Customer>(o => o.ContactName.ToLower().Contains(contactName.ToLower()), cache, expr);
-				return result.ToList<ICustomer>();
+				return result.ToList<Customer>();
 			}
 		}
 
@@ -289,17 +290,17 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <param name="contactTitle">string</param>
 		/// <param name="caseSensitive">bool</param>
 		/// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-        /// <returns>IList<ICustomer></returns>
-		public virtual IList<ICustomer> SearchByContactTitle(string contactTitle, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes)
+        /// <returns>IList<Customer></returns>
+		public virtual IList<Customer> SearchByContactTitle(string contactTitle, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes)
 		{		
 			var expr = this.Convert(includes);
 			if(caseSensitive) 
 			{
-				return this.UnitOfWork.AllMatching<Customer>(o => o.ContactTitle.Contains(contactTitle), cache, expr).ToList<ICustomer>();
+				return this.UnitOfWork.AllMatching<Customer>(o => o.ContactTitle.Contains(contactTitle), cache, expr).ToList<Customer>();
 			}
 			else
 			{
-				return this.UnitOfWork.AllMatching<Customer>(o => o.ContactTitle.ToLower().Contains(contactTitle.ToLower()), cache, expr).ToList<ICustomer>();
+				return this.UnitOfWork.AllMatching<Customer>(o => o.ContactTitle.ToLower().Contains(contactTitle.ToLower()), cache, expr).ToList<Customer>();
 			}
 		}
 		
@@ -309,19 +310,19 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <param name="contactTitle">string</param>
 		/// <param name="caseSensitive">bool</param>
 		/// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-        /// <returns>IList<ICustomer></returns>
-		public virtual async Task<IList<ICustomer>> SearchByContactTitleAsync(string contactTitle, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes)
+        /// <returns>IList<Customer></returns>
+		public virtual async Task<IList<Customer>> SearchByContactTitleAsync(string contactTitle, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes)
 		{		
 			var expr = this.Convert(includes);
 			if(caseSensitive) 
 			{
 				var result = await this.UnitOfWork.AllMatchingAsync<Customer>(o => o.ContactTitle.Contains(contactTitle), cache, expr);
-				return result.ToList<ICustomer>();
+				return result.ToList<Customer>();
 			}
 			else
 			{
 				var result = await this.UnitOfWork.AllMatchingAsync<Customer>(o => o.ContactTitle.ToLower().Contains(contactTitle.ToLower()), cache, expr);
-				return result.ToList<ICustomer>();
+				return result.ToList<Customer>();
 			}
 		}
 
@@ -331,17 +332,17 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <param name="address">string</param>
 		/// <param name="caseSensitive">bool</param>
 		/// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-        /// <returns>IList<ICustomer></returns>
-		public virtual IList<ICustomer> SearchByAddress(string address, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes)
+        /// <returns>IList<Customer></returns>
+		public virtual IList<Customer> SearchByAddress(string address, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes)
 		{		
 			var expr = this.Convert(includes);
 			if(caseSensitive) 
 			{
-				return this.UnitOfWork.AllMatching<Customer>(o => o.Address.Contains(address), cache, expr).ToList<ICustomer>();
+				return this.UnitOfWork.AllMatching<Customer>(o => o.Address.Contains(address), cache, expr).ToList<Customer>();
 			}
 			else
 			{
-				return this.UnitOfWork.AllMatching<Customer>(o => o.Address.ToLower().Contains(address.ToLower()), cache, expr).ToList<ICustomer>();
+				return this.UnitOfWork.AllMatching<Customer>(o => o.Address.ToLower().Contains(address.ToLower()), cache, expr).ToList<Customer>();
 			}
 		}
 		
@@ -351,19 +352,19 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <param name="address">string</param>
 		/// <param name="caseSensitive">bool</param>
 		/// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-        /// <returns>IList<ICustomer></returns>
-		public virtual async Task<IList<ICustomer>> SearchByAddressAsync(string address, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes)
+        /// <returns>IList<Customer></returns>
+		public virtual async Task<IList<Customer>> SearchByAddressAsync(string address, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes)
 		{		
 			var expr = this.Convert(includes);
 			if(caseSensitive) 
 			{
 				var result = await this.UnitOfWork.AllMatchingAsync<Customer>(o => o.Address.Contains(address), cache, expr);
-				return result.ToList<ICustomer>();
+				return result.ToList<Customer>();
 			}
 			else
 			{
 				var result = await this.UnitOfWork.AllMatchingAsync<Customer>(o => o.Address.ToLower().Contains(address.ToLower()), cache, expr);
-				return result.ToList<ICustomer>();
+				return result.ToList<Customer>();
 			}
 		}
 
@@ -373,17 +374,17 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <param name="city">string</param>
 		/// <param name="caseSensitive">bool</param>
 		/// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-        /// <returns>IList<ICustomer></returns>
-		public virtual IList<ICustomer> SearchByCity(string city, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes)
+        /// <returns>IList<Customer></returns>
+		public virtual IList<Customer> SearchByCity(string city, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes)
 		{		
 			var expr = this.Convert(includes);
 			if(caseSensitive) 
 			{
-				return this.UnitOfWork.AllMatching<Customer>(o => o.City.Contains(city), cache, expr).ToList<ICustomer>();
+				return this.UnitOfWork.AllMatching<Customer>(o => o.City.Contains(city), cache, expr).ToList<Customer>();
 			}
 			else
 			{
-				return this.UnitOfWork.AllMatching<Customer>(o => o.City.ToLower().Contains(city.ToLower()), cache, expr).ToList<ICustomer>();
+				return this.UnitOfWork.AllMatching<Customer>(o => o.City.ToLower().Contains(city.ToLower()), cache, expr).ToList<Customer>();
 			}
 		}
 		
@@ -393,19 +394,19 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <param name="city">string</param>
 		/// <param name="caseSensitive">bool</param>
 		/// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-        /// <returns>IList<ICustomer></returns>
-		public virtual async Task<IList<ICustomer>> SearchByCityAsync(string city, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes)
+        /// <returns>IList<Customer></returns>
+		public virtual async Task<IList<Customer>> SearchByCityAsync(string city, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes)
 		{		
 			var expr = this.Convert(includes);
 			if(caseSensitive) 
 			{
 				var result = await this.UnitOfWork.AllMatchingAsync<Customer>(o => o.City.Contains(city), cache, expr);
-				return result.ToList<ICustomer>();
+				return result.ToList<Customer>();
 			}
 			else
 			{
 				var result = await this.UnitOfWork.AllMatchingAsync<Customer>(o => o.City.ToLower().Contains(city.ToLower()), cache, expr);
-				return result.ToList<ICustomer>();
+				return result.ToList<Customer>();
 			}
 		}
 
@@ -415,17 +416,17 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <param name="postalCode">string</param>
 		/// <param name="caseSensitive">bool</param>
 		/// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-        /// <returns>IList<ICustomer></returns>
-		public virtual IList<ICustomer> SearchByPostalCode(string postalCode, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes)
+        /// <returns>IList<Customer></returns>
+		public virtual IList<Customer> SearchByPostalCode(string postalCode, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes)
 		{		
 			var expr = this.Convert(includes);
 			if(caseSensitive) 
 			{
-				return this.UnitOfWork.AllMatching<Customer>(o => o.PostalCode.Contains(postalCode), cache, expr).ToList<ICustomer>();
+				return this.UnitOfWork.AllMatching<Customer>(o => o.PostalCode.Contains(postalCode), cache, expr).ToList<Customer>();
 			}
 			else
 			{
-				return this.UnitOfWork.AllMatching<Customer>(o => o.PostalCode.ToLower().Contains(postalCode.ToLower()), cache, expr).ToList<ICustomer>();
+				return this.UnitOfWork.AllMatching<Customer>(o => o.PostalCode.ToLower().Contains(postalCode.ToLower()), cache, expr).ToList<Customer>();
 			}
 		}
 		
@@ -435,19 +436,19 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <param name="postalCode">string</param>
 		/// <param name="caseSensitive">bool</param>
 		/// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-        /// <returns>IList<ICustomer></returns>
-		public virtual async Task<IList<ICustomer>> SearchByPostalCodeAsync(string postalCode, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes)
+        /// <returns>IList<Customer></returns>
+		public virtual async Task<IList<Customer>> SearchByPostalCodeAsync(string postalCode, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes)
 		{		
 			var expr = this.Convert(includes);
 			if(caseSensitive) 
 			{
 				var result = await this.UnitOfWork.AllMatchingAsync<Customer>(o => o.PostalCode.Contains(postalCode), cache, expr);
-				return result.ToList<ICustomer>();
+				return result.ToList<Customer>();
 			}
 			else
 			{
 				var result = await this.UnitOfWork.AllMatchingAsync<Customer>(o => o.PostalCode.ToLower().Contains(postalCode.ToLower()), cache, expr);
-				return result.ToList<ICustomer>();
+				return result.ToList<Customer>();
 			}
 		}
 
@@ -457,17 +458,17 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <param name="telephone">string</param>
 		/// <param name="caseSensitive">bool</param>
 		/// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-        /// <returns>IList<ICustomer></returns>
-		public virtual IList<ICustomer> SearchByTelephone(string telephone, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes)
+        /// <returns>IList<Customer></returns>
+		public virtual IList<Customer> SearchByTelephone(string telephone, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes)
 		{		
 			var expr = this.Convert(includes);
 			if(caseSensitive) 
 			{
-				return this.UnitOfWork.AllMatching<Customer>(o => o.Telephone.Contains(telephone), cache, expr).ToList<ICustomer>();
+				return this.UnitOfWork.AllMatching<Customer>(o => o.Telephone.Contains(telephone), cache, expr).ToList<Customer>();
 			}
 			else
 			{
-				return this.UnitOfWork.AllMatching<Customer>(o => o.Telephone.ToLower().Contains(telephone.ToLower()), cache, expr).ToList<ICustomer>();
+				return this.UnitOfWork.AllMatching<Customer>(o => o.Telephone.ToLower().Contains(telephone.ToLower()), cache, expr).ToList<Customer>();
 			}
 		}
 		
@@ -477,19 +478,19 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <param name="telephone">string</param>
 		/// <param name="caseSensitive">bool</param>
 		/// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-        /// <returns>IList<ICustomer></returns>
-		public virtual async Task<IList<ICustomer>> SearchByTelephoneAsync(string telephone, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes)
+        /// <returns>IList<Customer></returns>
+		public virtual async Task<IList<Customer>> SearchByTelephoneAsync(string telephone, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes)
 		{		
 			var expr = this.Convert(includes);
 			if(caseSensitive) 
 			{
 				var result = await this.UnitOfWork.AllMatchingAsync<Customer>(o => o.Telephone.Contains(telephone), cache, expr);
-				return result.ToList<ICustomer>();
+				return result.ToList<Customer>();
 			}
 			else
 			{
 				var result = await this.UnitOfWork.AllMatchingAsync<Customer>(o => o.Telephone.ToLower().Contains(telephone.ToLower()), cache, expr);
-				return result.ToList<ICustomer>();
+				return result.ToList<Customer>();
 			}
 		}
 
@@ -499,17 +500,17 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <param name="fax">string</param>
 		/// <param name="caseSensitive">bool</param>
 		/// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-        /// <returns>IList<ICustomer></returns>
-		public virtual IList<ICustomer> SearchByFax(string fax, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes)
+        /// <returns>IList<Customer></returns>
+		public virtual IList<Customer> SearchByFax(string fax, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes)
 		{		
 			var expr = this.Convert(includes);
 			if(caseSensitive) 
 			{
-				return this.UnitOfWork.AllMatching<Customer>(o => o.Fax.Contains(fax), cache, expr).ToList<ICustomer>();
+				return this.UnitOfWork.AllMatching<Customer>(o => o.Fax.Contains(fax), cache, expr).ToList<Customer>();
 			}
 			else
 			{
-				return this.UnitOfWork.AllMatching<Customer>(o => o.Fax.ToLower().Contains(fax.ToLower()), cache, expr).ToList<ICustomer>();
+				return this.UnitOfWork.AllMatching<Customer>(o => o.Fax.ToLower().Contains(fax.ToLower()), cache, expr).ToList<Customer>();
 			}
 		}
 		
@@ -519,19 +520,19 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <param name="fax">string</param>
 		/// <param name="caseSensitive">bool</param>
 		/// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-        /// <returns>IList<ICustomer></returns>
-		public virtual async Task<IList<ICustomer>> SearchByFaxAsync(string fax, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes)
+        /// <returns>IList<Customer></returns>
+		public virtual async Task<IList<Customer>> SearchByFaxAsync(string fax, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes)
 		{		
 			var expr = this.Convert(includes);
 			if(caseSensitive) 
 			{
 				var result = await this.UnitOfWork.AllMatchingAsync<Customer>(o => o.Fax.Contains(fax), cache, expr);
-				return result.ToList<ICustomer>();
+				return result.ToList<Customer>();
 			}
 			else
 			{
 				var result = await this.UnitOfWork.AllMatchingAsync<Customer>(o => o.Fax.ToLower().Contains(fax.ToLower()), cache, expr);
-				return result.ToList<ICustomer>();
+				return result.ToList<Customer>();
 			}
 		}
 
@@ -541,17 +542,17 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <param name="photo">string</param>
 		/// <param name="caseSensitive">bool</param>
 		/// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-        /// <returns>IList<ICustomer></returns>
-		public virtual IList<ICustomer> SearchByPhoto(string photo, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes)
+        /// <returns>IList<Customer></returns>
+		public virtual IList<Customer> SearchByPhoto(string photo, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes)
 		{		
 			var expr = this.Convert(includes);
 			if(caseSensitive) 
 			{
-				return this.UnitOfWork.AllMatching<Customer>(o => o.Photo.Contains(photo), cache, expr).ToList<ICustomer>();
+				return this.UnitOfWork.AllMatching<Customer>(o => o.Photo.Contains(photo), cache, expr).ToList<Customer>();
 			}
 			else
 			{
-				return this.UnitOfWork.AllMatching<Customer>(o => o.Photo.ToLower().Contains(photo.ToLower()), cache, expr).ToList<ICustomer>();
+				return this.UnitOfWork.AllMatching<Customer>(o => o.Photo.ToLower().Contains(photo.ToLower()), cache, expr).ToList<Customer>();
 			}
 		}
 		
@@ -561,19 +562,19 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <param name="photo">string</param>
 		/// <param name="caseSensitive">bool</param>
 		/// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-        /// <returns>IList<ICustomer></returns>
-		public virtual async Task<IList<ICustomer>> SearchByPhotoAsync(string photo, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes)
+        /// <returns>IList<Customer></returns>
+		public virtual async Task<IList<Customer>> SearchByPhotoAsync(string photo, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes)
 		{		
 			var expr = this.Convert(includes);
 			if(caseSensitive) 
 			{
 				var result = await this.UnitOfWork.AllMatchingAsync<Customer>(o => o.Photo.Contains(photo), cache, expr);
-				return result.ToList<ICustomer>();
+				return result.ToList<Customer>();
 			}
 			else
 			{
 				var result = await this.UnitOfWork.AllMatchingAsync<Customer>(o => o.Photo.ToLower().Contains(photo.ToLower()), cache, expr);
-				return result.ToList<ICustomer>();
+				return result.ToList<Customer>();
 			}
 		}
 
@@ -584,67 +585,31 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <summary>
         /// Add the Customer entity to the database.
         /// </summary>
-        /// <param name="entity">ICustomer</param>
+        /// <param name="entity">Customer</param>
         /// <returns>bool</returns>
-		public virtual bool Add(ICustomer entity)
+		public virtual bool Add(Customer entity)
 		{
-			var entityToSave = new Customer(entity, false);
-			this.UnitOfWork.Add(entityToSave);
-			bool result = this.UnitOfWork.Save();
-			
-			// Populate passed in entity with newly saved values
-			entity.CustomerId = entityToSave.CustomerId;
-			entity.CustomerCode = entityToSave.CustomerCode;
-			entity.CompanyName = entityToSave.CompanyName;
-			entity.ContactName = entityToSave.ContactName;
-			entity.ContactTitle = entityToSave.ContactTitle;
-			entity.Address = entityToSave.Address;
-			entity.City = entityToSave.City;
-			entity.PostalCode = entityToSave.PostalCode;
-			entity.Telephone = entityToSave.Telephone;
-			entity.Fax = entityToSave.Fax;
-			entity.CountryId = entityToSave.CountryId;
-			entity.Photo = entityToSave.Photo;
-			entity.IsEnabled = entityToSave.IsEnabled;
-			
-			return result;
+			this.UnitOfWork.Add(entity);
+			return this.UnitOfWork.Save();
 		}
 		
         /// <summary>
         /// Add the Customer entity async to the database.
         /// </summary>
-        /// <param name="entity">ICustomer</param>
+        /// <param name="entity">Customer</param>
         /// <returns>bool</returns>
-		public virtual async Task<bool> AddAsync(ICustomer entity)
+		public virtual async Task<bool> AddAsync(Customer entity)
 		{
-			var entityToSave = new Customer(entity, false);
-			await this.UnitOfWork.AddAsync(entityToSave);
-			bool result = await this.UnitOfWork.SaveAsync();
-			
-			// Populate passed in entity with newly saved values
-			entity.CustomerId = entityToSave.CustomerId;
-			entity.CustomerCode = entityToSave.CustomerCode;
-			entity.CompanyName = entityToSave.CompanyName;
-			entity.ContactName = entityToSave.ContactName;
-			entity.ContactTitle = entityToSave.ContactTitle;
-			entity.Address = entityToSave.Address;
-			entity.City = entityToSave.City;
-			entity.PostalCode = entityToSave.PostalCode;
-			entity.Telephone = entityToSave.Telephone;
-			entity.Fax = entityToSave.Fax;
-			entity.CountryId = entityToSave.CountryId;
-			entity.Photo = entityToSave.Photo;
-			entity.IsEnabled = entityToSave.IsEnabled;
-			
-			return result;
+			await this.UnitOfWork.AddAsync(entity);
+			return await this.UnitOfWork.SaveAsync();
 		}
 
         /// <summary>
         /// Update the Customer entity in the database if any values have changed
         /// </summary>
-        /// <param name="entity">ICustomer</param>
+        /// <param name="entity">Customer</param>
         /// <returns>bool</returns>
-		public virtual bool Update(ICustomer entity)
+		public virtual bool Update(Customer entity)
 		{
 			return this.UnitOfWork.Modify(entity);
 		}
@@ -652,9 +617,9 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <summary>
         /// Update the Customer entity async in the database if any values have changed
         /// </summary>
-        /// <param name="entity">ICustomer</param>
+        /// <param name="entity">Customer</param>
         /// <returns>bool</returns>
-		public virtual async Task<bool> UpdateAsync(ICustomer entity)
+		public virtual async Task<bool> UpdateAsync(Customer entity)
 		{
 			return await this.UnitOfWork.ModifyAsync(entity);
 		}
@@ -662,9 +627,9 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <summary>
         /// Delete the Customer entity from the database
         /// </summary>
-        /// <param name="entity">ICustomer</param>
+        /// <param name="entity">Customer</param>
         /// <returns>bool</returns>
-		public virtual bool Delete(ICustomer entity)
+		public virtual bool Delete(Customer entity)
 		{		
 			return this.UnitOfWork.Remove(entity);
 		}
@@ -672,9 +637,9 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <summary>
         /// Delete the Customer entity async from the database
         /// </summary>
-        /// <param name="entity">ICustomer</param>
+        /// <param name="entity">Customer</param>
         /// <returns>bool</returns>
-		public virtual async Task<bool> DeleteAsync(ICustomer entity)
+		public virtual async Task<bool> DeleteAsync(Customer entity)
 		{		
 			return await this.UnitOfWork.RemoveAsync(entity);
 		}
@@ -724,7 +689,7 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
 		
 		public virtual async Task<TResult> MaxAsync<TResult>(Expression<Func<ICustomer, TResult>> maxExpression, bool cache)
 		{
-			return await this.UnitOfWork.MaxAsync(cache, Expression.Lambda<Func<Customer, TResult>>(maxExpression.Body, maxExpression.Parameters));
+			return await this.UnitOfWork.MaxAsync(cache, Expression.Lambda<Func<ICustomer, TResult>>(maxExpression.Body, maxExpression.Parameters));
 		}
 		
 		public virtual TResult Min<TResult>(Expression<Func<ICustomer, TResult>> minExpression, bool cache)
@@ -746,7 +711,7 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
-        public void BulkDelete(IEnumerable<ICustomer> items)
+        public void BulkDelete(IEnumerable<Customer> items)
 		{
 			this.UnitOfWork.BulkDelete<ICustomer>(items);
 		}
@@ -757,9 +722,9 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
         /// <returns></returns>
-        public async Task BulkDeleteAsync(IEnumerable<ICustomer> items)
+        public async Task BulkDeleteAsync(IEnumerable<Customer> items)
 		{
-			await this.UnitOfWork.BulkDeleteAsync<ICustomer>(items);
+			await this.UnitOfWork.BulkDeleteAsync<Customer>(items);
 		}
 
         /// <summary>
@@ -767,9 +732,9 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
-        public void BulkInsert(IEnumerable<ICustomer> items)
+        public void BulkInsert(IEnumerable<Customer> items)
 		{
-			this.UnitOfWork.BulkInsert<ICustomer>(items);
+			this.UnitOfWork.BulkInsert<Customer>(items);
 		}
         
         /// <summary>
@@ -778,9 +743,9 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
         /// <returns></returns>
-        public async Task BulkInsertAsync(IEnumerable<ICustomer> items)
+        public async Task BulkInsertAsync(IEnumerable<Customer> items)
 		{
-			await this.UnitOfWork.BulkInsertAsync<ICustomer>(items);
+			await this.UnitOfWork.BulkInsertAsync<Customer>(items);
 		}
 
         /// <summary>
@@ -788,9 +753,9 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
-        public void BulkUpdate(IEnumerable<ICustomer> items)
+        public void BulkUpdate(IEnumerable<Customer> items)
 		{
-			this.UnitOfWork.BulkUpdate<ICustomer>(items);
+			this.UnitOfWork.BulkUpdate<Customer>(items);
 		}
 
         /// <summary>
@@ -799,9 +764,9 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
         /// <returns></returns>
-        public async Task BulkUpdateAsync(IEnumerable<ICustomer> items)
+        public async Task BulkUpdateAsync(IEnumerable<Customer> items)
 		{
-			await this.UnitOfWork.BulkUpdateAsync<ICustomer>(items);
+			await this.UnitOfWork.BulkUpdateAsync<Customer>(items);
 		}
 
         #endregion

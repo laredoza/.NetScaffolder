@@ -39,7 +39,7 @@
             <Index>
               <IndexType>NonClustered</IndexType>
               <IsUnique>false</IsUnique>
-              <Name>IX_CustomerId</Name>
+              <Name>IX_CustomerId1</Name>
               <Columns>
                 <string>CustomerId</string>
               </Columns>
@@ -132,7 +132,7 @@
             <Index>
               <IndexType>NonClustered</IndexType>
               <IsUnique>false</IsUnique>
-              <Name>IX_ProductId</Name>
+              <Name>IX_ProductId1</Name>
               <Columns>
                 <string>ProductId</string>
               </Columns>
@@ -359,7 +359,7 @@
             <Index>
               <IndexType>NonClustered</IndexType>
               <IsUnique>false</IsUnique>
-              <Name>IX_OrderId</Name>
+              <Name>IX_OrderId1</Name>
               <Columns>
                 <string>OrderId</string>
               </Columns>
@@ -367,7 +367,7 @@
             <Index>
               <IndexType>NonClustered</IndexType>
               <IsUnique>false</IsUnique>
-              <Name>IX_ProductId</Name>
+              <Name>IX_ProductId2</Name>
               <Columns>
                 <string>ProductId</string>
               </Columns>
@@ -455,7 +455,7 @@
             <Index>
               <IndexType>NonClustered</IndexType>
               <IsUnique>false</IsUnique>
-              <Name>IX_ProductId</Name>
+              <Name>IX_ProductId3</Name>
               <Columns>
                 <string>ProductId</string>
               </Columns>

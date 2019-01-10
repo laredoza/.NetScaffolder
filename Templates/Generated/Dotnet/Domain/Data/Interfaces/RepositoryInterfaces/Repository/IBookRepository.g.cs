@@ -23,6 +23,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.Dto;
+using DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity;
 using DotNetScaffolder.Domain.Core.Interfaces;
 
 namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
@@ -30,7 +31,7 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
 	/// <summary>
 	/// The BookRepository interface that defines database functions for the Book table
 	/// </summary>
-	public partial interface IBookRepository : IRepository<IBook>
+	public partial interface IBookRepository : IRepository<Book>
 	{
 		#region Load
 
@@ -40,8 +41,8 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <param name="productId">int</param>
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<IBook, object>>[]</param>
-        /// <returns>IBook</returns>
-		IBook LoadByProductId(int productId, bool cache, params Expression<Func<IBook, object>>[] includes);
+        /// <returns>Book</returns>
+		Book LoadByProductId(int productId, bool cache, params Expression<Func<IBook, object>>[] includes);
 		
         /// <summary>
         /// Load Book entities async from the database using the composite primary keys
@@ -49,24 +50,24 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <param name="productId">int</param>
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<IBook, object>>[]</param>
-        /// <returns>IBook</returns>
-		Task<IBook> LoadByProductIdAsync(int productId, bool cache, params Expression<Func<IBook, object>>[] includes);
+        /// <returns>Book</returns>
+		Task<Book> LoadByProductIdAsync(int productId, bool cache, params Expression<Func<IBook, object>>[] includes);
 
         /// <summary>
         /// Load all Book entities from the database.
         /// </summary>
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<IBook, object>>[]</param>
-        /// <returns>IList<IBook></returns>
-		IList<IBook> LoadAll( bool cache, params Expression<Func<IBook, object>>[] includes);
+        /// <returns>IList<Book></returns>
+		IList<Book> LoadAll( bool cache, params Expression<Func<IBook, object>>[] includes);
 		
         /// <summary>
         /// Load all Book entities async from the database.
         /// </summary>
         /// <param name="cache">Use 2nd level caching if enabled</param>
-		/// <param name="includes">params Expression<Func<IBook, object>>[]</param>
-        /// <returns>IList<IBook></returns>
-		Task<IList<IBook>> LoadAllAsync(bool cache, params Expression<Func<IBook, object>>[] includes);
+		/// <param name="includes">params Expression<Func<Book, object>>[]</param>
+        /// <returns>IList<Book></returns>
+		Task<IList<Book>> LoadAllAsync(bool cache, params Expression<Func<IBook, object>>[] includes);
 		
 		#endregion
 
@@ -79,8 +80,8 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="caseSensitive">bool</param
 		/// <param name="includes">params Expression<Func<IBook, object>>[]</param>
-        /// <returns>IList<IBook></returns>
-		IList<IBook> SearchByPublisher(string publisher, bool cache, bool caseSensitive = false, params Expression<Func<IBook, object>>[] includes);
+        /// <returns>IList<Book></returns>
+		IList<Book> SearchByPublisher(string publisher, bool cache, bool caseSensitive = false, params Expression<Func<IBook, object>>[] includes);
 		
         /// <summary>
         /// Search for Book entities async in the database by Publisher
@@ -89,8 +90,8 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="caseSensitive">bool</param
 		/// <param name="includes">params Expression<Func<IBook, object>>[]</param>
-        /// <returns>IList<IBook></returns>
-		Task<IList<IBook>> SearchByPublisherAsync(string publisher, bool cache, bool caseSensitive = false, params Expression<Func<IBook, object>>[] includes);
+        /// <returns>IList<Book></returns>
+		Task<IList<Book>> SearchByPublisherAsync(string publisher, bool cache, bool caseSensitive = false, params Expression<Func<IBook, object>>[] includes);
 
 		#endregion
 		
@@ -101,42 +102,42 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// </summary>
         /// <param name="entity">IBook</param>
         /// <returns>bool</returns>
-		bool Add(IBook entity);
+		bool Add(Book entity);
 		
         /// <summary>
         /// Add the Book entity async to the database.
         /// </summary>
         /// <param name="entity">IBook</param>
         /// <returns>bool</returns>
-		Task<bool> AddAsync(IBook entity);
+		Task<bool> AddAsync(Book entity);
 
         /// <summary>
         /// Update the Book entity in the database if any values have changed
         /// </summary>
-        /// <param name="entity">IBook</param>
+        /// <param name="entity">Book</param>
         /// <returns>bool</returns>
-		bool Update(IBook entity);
+		bool Update(Book entity);
 		
         /// <summary>
         /// Update the Book entity async in the database if any values have changed
         /// </summary>
-        /// <param name="entity">IBook</param>
+        /// <param name="entity">Book</param>
         /// <returns>bool</returns>
-		Task<bool> UpdateAsync(IBook entity);
+		Task<bool> UpdateAsync(Book entity);
 		
         /// <summary>
         /// Delete the Book entity from the database
         /// </summary>
-        /// <param name="entity">IBook</param>
+        /// <param name="entity">Book</param>
         /// <returns>bool</returns>
-		bool Delete(IBook entity);
+		bool Delete(Book entity);
 		
         /// <summary>
         /// Delete the Book entity async from the database
         /// </summary>
-        /// <param name="entity">IBook</param>
+        /// <param name="entity">Book</param>
         /// <returns>bool</returns>
-		Task<bool> DeleteAsync(IBook entity);
+		Task<bool> DeleteAsync(Book entity);
 
 		/// <summary>
         /// Delete the Book entity from the database
@@ -173,7 +174,7 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
-        void BulkDelete(IEnumerable<IBook> items);
+        void BulkDelete(IEnumerable<Book> items);
 
         /// <summary>
         ///     Bulk delete entities async
@@ -181,14 +182,14 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
         /// <returns></returns>
-        Task BulkDeleteAsync(IEnumerable<IBook> items);
+        Task BulkDeleteAsync(IEnumerable<Book> items);
 
         /// <summary>
         ///     Bulk insert entities
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
-        void BulkInsert(IEnumerable<IBook> items);
+        void BulkInsert(IEnumerable<Book> items);
         
         /// <summary>
         /// Bulk insert entities async
@@ -196,14 +197,14 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
         /// <returns></returns>
-        Task BulkInsertAsync(IEnumerable<IBook> items);
+        Task BulkInsertAsync(IEnumerable<Book> items);
 
         /// <summary>
         /// Bulk update entities 
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
-        void BulkUpdate(IEnumerable<IBook> items);
+        void BulkUpdate(IEnumerable<Book> items);
 
         /// <summary>
         /// Bulk update entities async
@@ -211,7 +212,7 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
         /// <returns></returns>
-        Task BulkUpdateAsync(IEnumerable<IBook> items);
+        Task BulkUpdateAsync(IEnumerable<Book> items);
 
         #endregion
 	}

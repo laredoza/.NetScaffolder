@@ -1,5 +1,5 @@
 ﻿
-// <copyright file="OrderDetailsDto.g.cs" company="MIT">
+// <copyright file="RepositoryRegistration.g.cs" company="MIT">
 //  Copyright (c) 2019 MIT
 // </copyright>  
 
@@ -17,67 +17,24 @@
 //	GENERATED CODE. DOT NOT MODIFY MANUALLY AS CHANGES CAN BE LOST!!!
 //	USE A PARTIAL CLASS INSTEAD
 // *******************************************************************
-
+using DotNetScaffolder.Domain.Data.ApplicationService;
 using System;
 using System.Collections.Generic;
-using DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.Dto;
+using StructureMap.Pipeline;
+using DotNetScaffolder.Domain.Data.ApplicationService;
+using DotNetScaffolder.Domain.Data.ApplicationServices.WebApiApplicationService.ApplicationService;
 
-namespace DotNetScaffolder.Domain.Data.Dtos.DefaultDto.Dto
+namespace DotNetScaffolder.Domain.Data.ApplicationServices.WebApiApplicationService.Register
 {
-	public partial class OrderDetailsDto : IOrderDetails 
-	{
+	public class ApplicationServiceRegistration : StructureMap.Registry
+	{			
 		#region CTOR
 		
-		public OrderDetailsDto()
-		{
-		}
-		
-		public OrderDetailsDto(IOrderDetails item, bool deep = false)
-		{
-			if(item == null) return;
-			
-			this.OrderDetailsId = item.OrderDetailsId;
-			this.OrderId = item.OrderId;
-			this.ProductId = item.ProductId;
-			this.UnitPrice = item.UnitPrice;
-			this.Amount = item.Amount;
-			this.Discount = item.Discount;
-
-			if(deep)
-			{
-                if(item.Order != null)
-                {
-				    this.Order = new OrderDto(item.Order, deep);
-                }
-                if(item.Product != null)
-                {
-				    this.Product = new ProductDto(item.Product, deep);
-                }
-			}
-		}
-		
-		#endregion
-		
-		#region Fields
-		
-		public int OrderDetailsId { get; set; }
-		public int OrderId { get; set; }
-		public int ProductId { get; set; }
-		public Nullable<decimal> UnitPrice { get; set; }
-		public Nullable<short> Amount { get; set; }
-		public Nullable<float> Discount { get; set; }
-
-		#endregion
-		
-		#region Child Relationships
-		
-
-		#endregion
-		
-		#region Parent Relationships
-		
-		public IOrder Order { get; set; }
-		public IProduct Product { get; set; }
+        public ApplicationServiceRegistration()
+        {
+			//this.For<IProductApplicationService>().LifecycleIs(Lifecycles.Unique).UseIfNone<ProductApplicationService>();
+			this.For<ICustomerApplicationService>().LifecycleIs(Lifecycles.Unique).UseIfNone<WebApiCustomerApplicationService>();
+        }
 		
 		#endregion
 	}

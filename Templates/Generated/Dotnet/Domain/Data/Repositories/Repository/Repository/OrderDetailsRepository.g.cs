@@ -26,6 +26,7 @@ using System.Threading.Tasks;
 using DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.Dto;
 using DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity;
 using DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces;
+using DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity;
 
 using DotNetScaffolder.Domain.Core;
 using DotNetScaffolder.Domain.Core.Interfaces;
@@ -35,7 +36,7 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
 	/// <summary>
 	/// The OrderDetailsRepository class responsible for database functions in the OrderDetails table
 	/// </summary>
-	public partial class OrderDetailsRepository : UowRepository<IOrderDetails> , IOrderDetailsRepository
+	public partial class OrderDetailsRepository : UowRepository<OrderDetails> , IOrderDetailsRepository
 	{		
 		#region CTOR
 		
@@ -61,8 +62,8 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// </summary
         /// <param name="orderDetailsId">int</param>
 		/// <param name="includes">params Expression<Func<IOrderDetails, object>>[]</param>
-        /// <returns>IOrderDetails</returns>
-		public virtual IOrderDetails LoadByOrderDetailsId(int orderDetailsId, bool cache, params Expression<Func<IOrderDetails, object>>[] includes)
+        /// <returns>OrderDetails</returns>
+		public virtual OrderDetails LoadByOrderDetailsId(int orderDetailsId, bool cache, params Expression<Func<IOrderDetails, object>>[] includes)
 		{
 			var expr = this.Convert(includes);
 			return this.UnitOfWork.FirstOrDefault<OrderDetails>(o => o.OrderDetailsId == orderDetailsId, cache, expr);
@@ -73,8 +74,8 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// </summary
         /// <param name="orderDetailsId">int</param>
 		/// <param name="includes">params Expression<Func<IOrderDetails, object>>[]</param>
-        /// <returns>IOrderDetails</returns>
-		public virtual async Task<IOrderDetails> LoadByOrderDetailsIdAsync(int orderDetailsId, bool cache, params Expression<Func<IOrderDetails, object>>[] includes)
+        /// <returns>OrderDetails</returns>
+		public virtual async Task<OrderDetails> LoadByOrderDetailsIdAsync(int orderDetailsId, bool cache, params Expression<Func<IOrderDetails, object>>[] includes)
 		{
 			var expr = this.Convert(includes);
 			return await this.UnitOfWork.FirstOrDefaultAsync<OrderDetails>(cache, o => o.OrderDetailsId == orderDetailsId, expr);
@@ -84,148 +85,148 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// Load OrderDetails entities from the database using the OrderId field
         /// </summary>
         /// <param name="orderId">int</param>
-		/// <param name="includes">params Expression<Func<IOrderDetails, object>>[]</param>
+		/// <param name="includes">params Expression<Func<OrderDetails, object>>[]</param>
         /// <returns>IList<IOrderDetails></returns>
-		public virtual IList<IOrderDetails> LoadByOrderId(int orderId, bool cache, params Expression<Func<IOrderDetails, object>>[] includes)
+		public virtual IList<OrderDetails> LoadByOrderId(int orderId, bool cache, params Expression<Func<IOrderDetails, object>>[] includes)
 		{
 			var expr = this.Convert(includes);
-			return this.UnitOfWork.AllMatching<OrderDetails>(o => o.OrderId == orderId, cache, expr).ToList<IOrderDetails>();
+			return this.UnitOfWork.AllMatching<OrderDetails>(o => o.OrderId == orderId, cache, expr).ToList<OrderDetails>();
 		}
 		
         /// <summary>
         /// Load OrderDetails entities async from the database using the OrderId field
         /// </summary>
         /// <param name="orderId">int</param>
-		/// <param name="includes">params Expression<Func<IOrderDetails, object>>[]</param>
+		/// <param name="includes">params Expression<Func<OrderDetails, object>>[]</param>
         /// <returns>IList<IOrderDetails></returns>
-		public virtual async Task<IList<IOrderDetails>> LoadByOrderIdAsync(int orderId, bool cache, params Expression<Func<IOrderDetails, object>>[] includes)
+		public virtual async Task<IList<OrderDetails>> LoadByOrderIdAsync(int orderId, bool cache, params Expression<Func<IOrderDetails, object>>[] includes)
 		{
 			var expr = this.Convert(includes);
 			var result = await this.UnitOfWork.AllMatchingAsync<OrderDetails>(o => o.OrderId == orderId,cache, expr);
-			return result.ToList<IOrderDetails>();
+			return result.ToList<OrderDetails>();
 		}
 
         /// <summary>
         /// Load OrderDetails entities from the database using the ProductId field
         /// </summary>
         /// <param name="productId">int</param>
-		/// <param name="includes">params Expression<Func<IOrderDetails, object>>[]</param>
+		/// <param name="includes">params Expression<Func<OrderDetails, object>>[]</param>
         /// <returns>IList<IOrderDetails></returns>
-		public virtual IList<IOrderDetails> LoadByProductId(int productId, bool cache, params Expression<Func<IOrderDetails, object>>[] includes)
+		public virtual IList<OrderDetails> LoadByProductId(int productId, bool cache, params Expression<Func<IOrderDetails, object>>[] includes)
 		{
 			var expr = this.Convert(includes);
-			return this.UnitOfWork.AllMatching<OrderDetails>(o => o.ProductId == productId, cache, expr).ToList<IOrderDetails>();
+			return this.UnitOfWork.AllMatching<OrderDetails>(o => o.ProductId == productId, cache, expr).ToList<OrderDetails>();
 		}
 		
         /// <summary>
         /// Load OrderDetails entities async from the database using the ProductId field
         /// </summary>
         /// <param name="productId">int</param>
-		/// <param name="includes">params Expression<Func<IOrderDetails, object>>[]</param>
+		/// <param name="includes">params Expression<Func<OrderDetails, object>>[]</param>
         /// <returns>IList<IOrderDetails></returns>
-		public virtual async Task<IList<IOrderDetails>> LoadByProductIdAsync(int productId, bool cache, params Expression<Func<IOrderDetails, object>>[] includes)
+		public virtual async Task<IList<OrderDetails>> LoadByProductIdAsync(int productId, bool cache, params Expression<Func<IOrderDetails, object>>[] includes)
 		{
 			var expr = this.Convert(includes);
 			var result = await this.UnitOfWork.AllMatchingAsync<OrderDetails>(o => o.ProductId == productId,cache, expr);
-			return result.ToList<IOrderDetails>();
+			return result.ToList<OrderDetails>();
 		}
 
         /// <summary>
         /// Load OrderDetails entities from the database using the UnitPrice field
         /// </summary>
         /// <param name="unitPrice">Nullable<decimal></param>
-		/// <param name="includes">params Expression<Func<IOrderDetails, object>>[]</param>
+		/// <param name="includes">params Expression<Func<OrderDetails, object>>[]</param>
         /// <returns>IList<IOrderDetails></returns>
-		public virtual IList<IOrderDetails> LoadByUnitPrice(Nullable<decimal> unitPrice, bool cache, params Expression<Func<IOrderDetails, object>>[] includes)
+		public virtual IList<OrderDetails> LoadByUnitPrice(Nullable<decimal> unitPrice, bool cache, params Expression<Func<IOrderDetails, object>>[] includes)
 		{
 			var expr = this.Convert(includes);
-			return this.UnitOfWork.AllMatching<OrderDetails>(o => o.UnitPrice == unitPrice, cache, expr).ToList<IOrderDetails>();
+			return this.UnitOfWork.AllMatching<OrderDetails>(o => o.UnitPrice == unitPrice, cache, expr).ToList<OrderDetails>();
 		}
 		
         /// <summary>
         /// Load OrderDetails entities async from the database using the UnitPrice field
         /// </summary>
         /// <param name="unitPrice">Nullable<decimal></param>
-		/// <param name="includes">params Expression<Func<IOrderDetails, object>>[]</param>
+		/// <param name="includes">params Expression<Func<OrderDetails, object>>[]</param>
         /// <returns>IList<IOrderDetails></returns>
-		public virtual async Task<IList<IOrderDetails>> LoadByUnitPriceAsync(Nullable<decimal> unitPrice, bool cache, params Expression<Func<IOrderDetails, object>>[] includes)
+		public virtual async Task<IList<OrderDetails>> LoadByUnitPriceAsync(Nullable<decimal> unitPrice, bool cache, params Expression<Func<IOrderDetails, object>>[] includes)
 		{
 			var expr = this.Convert(includes);
 			var result = await this.UnitOfWork.AllMatchingAsync<OrderDetails>(o => o.UnitPrice == unitPrice,cache, expr);
-			return result.ToList<IOrderDetails>();
+			return result.ToList<OrderDetails>();
 		}
 
         /// <summary>
         /// Load OrderDetails entities from the database using the Amount field
         /// </summary>
         /// <param name="amount">Nullable<short></param>
-		/// <param name="includes">params Expression<Func<IOrderDetails, object>>[]</param>
+		/// <param name="includes">params Expression<Func<OrderDetails, object>>[]</param>
         /// <returns>IList<IOrderDetails></returns>
-		public virtual IList<IOrderDetails> LoadByAmount(Nullable<short> amount, bool cache, params Expression<Func<IOrderDetails, object>>[] includes)
+		public virtual IList<OrderDetails> LoadByAmount(Nullable<short> amount, bool cache, params Expression<Func<IOrderDetails, object>>[] includes)
 		{
 			var expr = this.Convert(includes);
-			return this.UnitOfWork.AllMatching<OrderDetails>(o => o.Amount == amount, cache, expr).ToList<IOrderDetails>();
+			return this.UnitOfWork.AllMatching<OrderDetails>(o => o.Amount == amount, cache, expr).ToList<OrderDetails>();
 		}
 		
         /// <summary>
         /// Load OrderDetails entities async from the database using the Amount field
         /// </summary>
         /// <param name="amount">Nullable<short></param>
-		/// <param name="includes">params Expression<Func<IOrderDetails, object>>[]</param>
+		/// <param name="includes">params Expression<Func<OrderDetails, object>>[]</param>
         /// <returns>IList<IOrderDetails></returns>
-		public virtual async Task<IList<IOrderDetails>> LoadByAmountAsync(Nullable<short> amount, bool cache, params Expression<Func<IOrderDetails, object>>[] includes)
+		public virtual async Task<IList<OrderDetails>> LoadByAmountAsync(Nullable<short> amount, bool cache, params Expression<Func<IOrderDetails, object>>[] includes)
 		{
 			var expr = this.Convert(includes);
 			var result = await this.UnitOfWork.AllMatchingAsync<OrderDetails>(o => o.Amount == amount,cache, expr);
-			return result.ToList<IOrderDetails>();
+			return result.ToList<OrderDetails>();
 		}
 
         /// <summary>
         /// Load OrderDetails entities from the database using the Discount field
         /// </summary>
         /// <param name="discount">Nullable<float></param>
-		/// <param name="includes">params Expression<Func<IOrderDetails, object>>[]</param>
+		/// <param name="includes">params Expression<Func<OrderDetails, object>>[]</param>
         /// <returns>IList<IOrderDetails></returns>
-		public virtual IList<IOrderDetails> LoadByDiscount(Nullable<float> discount, bool cache, params Expression<Func<IOrderDetails, object>>[] includes)
+		public virtual IList<OrderDetails> LoadByDiscount(Nullable<float> discount, bool cache, params Expression<Func<IOrderDetails, object>>[] includes)
 		{
 			var expr = this.Convert(includes);
-			return this.UnitOfWork.AllMatching<OrderDetails>(o => o.Discount == discount, cache, expr).ToList<IOrderDetails>();
+			return this.UnitOfWork.AllMatching<OrderDetails>(o => o.Discount == discount, cache, expr).ToList<OrderDetails>();
 		}
 		
         /// <summary>
         /// Load OrderDetails entities async from the database using the Discount field
         /// </summary>
         /// <param name="discount">Nullable<float></param>
-		/// <param name="includes">params Expression<Func<IOrderDetails, object>>[]</param>
+		/// <param name="includes">params Expression<Func<OrderDetails, object>>[]</param>
         /// <returns>IList<IOrderDetails></returns>
-		public virtual async Task<IList<IOrderDetails>> LoadByDiscountAsync(Nullable<float> discount, bool cache, params Expression<Func<IOrderDetails, object>>[] includes)
+		public virtual async Task<IList<OrderDetails>> LoadByDiscountAsync(Nullable<float> discount, bool cache, params Expression<Func<IOrderDetails, object>>[] includes)
 		{
 			var expr = this.Convert(includes);
 			var result = await this.UnitOfWork.AllMatchingAsync<OrderDetails>(o => o.Discount == discount,cache, expr);
-			return result.ToList<IOrderDetails>();
+			return result.ToList<OrderDetails>();
 		}
 
         /// <summary>
         /// Load all OrderDetails entities from the database.
         /// </summary>
 		/// <param name="includes">params Expression<Func<IOrderDetails, object>>[]</param>
-        /// <returns>IList<IOrderDetails></returns>
-		public virtual IList<IOrderDetails> LoadAll(bool cache, params Expression<Func<IOrderDetails, object>>[] includes)
+        /// <returns>IList<OrderDetails></returns>
+		public virtual IList<OrderDetails> LoadAll(bool cache, params Expression<Func<IOrderDetails, object>>[] includes)
 		{
 			var expr = this.Convert(includes);
-			return this.UnitOfWork.GetAll<OrderDetails>(cache, expr).ToList<IOrderDetails>();
+			return this.UnitOfWork.GetAll<OrderDetails>(cache, expr).ToList<OrderDetails>();
 		}
 		
         /// <summary>
         /// Load all OrderDetails entities async from the database.
         /// </summary>
 		/// <param name="includes">params Expression<Func<IOrderDetails, object>>[]</param>
-        /// <returns>IList<IOrderDetails></returns>
-		public virtual async Task<IList<IOrderDetails>> LoadAllAsync(bool cache, params Expression<Func<IOrderDetails,  object>>[] includes)
+        /// <returns>IList<OrderDetails></returns>
+		public virtual async Task<IList<OrderDetails>> LoadAllAsync(bool cache, params Expression<Func<IOrderDetails,  object>>[] includes)
 		{
 			var expr = this.Convert(includes);
 			var result = await this.UnitOfWork.GetAllAsync<OrderDetails>(cache, expr);
-			return result.ToList<IOrderDetails>();
+			return result.ToList<OrderDetails>();
 		}
 		
 		#endregion
@@ -239,53 +240,31 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <summary>
         /// Add the OrderDetails entity to the database.
         /// </summary>
-        /// <param name="entity">IOrderDetails</param>
+        /// <param name="entity">OrderDetails</param>
         /// <returns>bool</returns>
-		public virtual bool Add(IOrderDetails entity)
+		public virtual bool Add(OrderDetails entity)
 		{
-			var entityToSave = new OrderDetails(entity, false);
-			this.UnitOfWork.Add(entityToSave);
-			bool result = this.UnitOfWork.Save();
-			
-			// Populate passed in entity with newly saved values
-			entity.OrderDetailsId = entityToSave.OrderDetailsId;
-			entity.OrderId = entityToSave.OrderId;
-			entity.ProductId = entityToSave.ProductId;
-			entity.UnitPrice = entityToSave.UnitPrice;
-			entity.Amount = entityToSave.Amount;
-			entity.Discount = entityToSave.Discount;
-			
-			return result;
+			this.UnitOfWork.Add(entity);
+			return this.UnitOfWork.Save();
 		}
 		
         /// <summary>
         /// Add the OrderDetails entity async to the database.
         /// </summary>
-        /// <param name="entity">IOrderDetails</param>
+        /// <param name="entity">OrderDetails</param>
         /// <returns>bool</returns>
-		public virtual async Task<bool> AddAsync(IOrderDetails entity)
+		public virtual async Task<bool> AddAsync(OrderDetails entity)
 		{
-			var entityToSave = new OrderDetails(entity, false);
-			await this.UnitOfWork.AddAsync(entityToSave);
-			bool result = await this.UnitOfWork.SaveAsync();
-			
-			// Populate passed in entity with newly saved values
-			entity.OrderDetailsId = entityToSave.OrderDetailsId;
-			entity.OrderId = entityToSave.OrderId;
-			entity.ProductId = entityToSave.ProductId;
-			entity.UnitPrice = entityToSave.UnitPrice;
-			entity.Amount = entityToSave.Amount;
-			entity.Discount = entityToSave.Discount;
-			
-			return result;
+			await this.UnitOfWork.AddAsync(entity);
+			return await this.UnitOfWork.SaveAsync();
 		}
 
         /// <summary>
         /// Update the OrderDetails entity in the database if any values have changed
         /// </summary>
-        /// <param name="entity">IOrderDetails</param>
+        /// <param name="entity">OrderDetails</param>
         /// <returns>bool</returns>
-		public virtual bool Update(IOrderDetails entity)
+		public virtual bool Update(OrderDetails entity)
 		{
 			return this.UnitOfWork.Modify(entity);
 		}
@@ -293,9 +272,9 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <summary>
         /// Update the OrderDetails entity async in the database if any values have changed
         /// </summary>
-        /// <param name="entity">IOrderDetails</param>
+        /// <param name="entity">OrderDetails</param>
         /// <returns>bool</returns>
-		public virtual async Task<bool> UpdateAsync(IOrderDetails entity)
+		public virtual async Task<bool> UpdateAsync(OrderDetails entity)
 		{
 			return await this.UnitOfWork.ModifyAsync(entity);
 		}
@@ -303,9 +282,9 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <summary>
         /// Delete the OrderDetails entity from the database
         /// </summary>
-        /// <param name="entity">IOrderDetails</param>
+        /// <param name="entity">OrderDetails</param>
         /// <returns>bool</returns>
-		public virtual bool Delete(IOrderDetails entity)
+		public virtual bool Delete(OrderDetails entity)
 		{		
 			return this.UnitOfWork.Remove(entity);
 		}
@@ -313,9 +292,9 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <summary>
         /// Delete the OrderDetails entity async from the database
         /// </summary>
-        /// <param name="entity">IOrderDetails</param>
+        /// <param name="entity">OrderDetails</param>
         /// <returns>bool</returns>
-		public virtual async Task<bool> DeleteAsync(IOrderDetails entity)
+		public virtual async Task<bool> DeleteAsync(OrderDetails entity)
 		{		
 			return await this.UnitOfWork.RemoveAsync(entity);
 		}
@@ -365,7 +344,7 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
 		
 		public virtual async Task<TResult> MaxAsync<TResult>(Expression<Func<IOrderDetails, TResult>> maxExpression, bool cache)
 		{
-			return await this.UnitOfWork.MaxAsync(cache, Expression.Lambda<Func<OrderDetails, TResult>>(maxExpression.Body, maxExpression.Parameters));
+			return await this.UnitOfWork.MaxAsync(cache, Expression.Lambda<Func<IOrderDetails, TResult>>(maxExpression.Body, maxExpression.Parameters));
 		}
 		
 		public virtual TResult Min<TResult>(Expression<Func<IOrderDetails, TResult>> minExpression, bool cache)
@@ -387,7 +366,7 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
-        public void BulkDelete(IEnumerable<IOrderDetails> items)
+        public void BulkDelete(IEnumerable<OrderDetails> items)
 		{
 			this.UnitOfWork.BulkDelete<IOrderDetails>(items);
 		}
@@ -398,9 +377,9 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
         /// <returns></returns>
-        public async Task BulkDeleteAsync(IEnumerable<IOrderDetails> items)
+        public async Task BulkDeleteAsync(IEnumerable<OrderDetails> items)
 		{
-			await this.UnitOfWork.BulkDeleteAsync<IOrderDetails>(items);
+			await this.UnitOfWork.BulkDeleteAsync<OrderDetails>(items);
 		}
 
         /// <summary>
@@ -408,9 +387,9 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
-        public void BulkInsert(IEnumerable<IOrderDetails> items)
+        public void BulkInsert(IEnumerable<OrderDetails> items)
 		{
-			this.UnitOfWork.BulkInsert<IOrderDetails>(items);
+			this.UnitOfWork.BulkInsert<OrderDetails>(items);
 		}
         
         /// <summary>
@@ -419,9 +398,9 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
         /// <returns></returns>
-        public async Task BulkInsertAsync(IEnumerable<IOrderDetails> items)
+        public async Task BulkInsertAsync(IEnumerable<OrderDetails> items)
 		{
-			await this.UnitOfWork.BulkInsertAsync<IOrderDetails>(items);
+			await this.UnitOfWork.BulkInsertAsync<OrderDetails>(items);
 		}
 
         /// <summary>
@@ -429,9 +408,9 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
-        public void BulkUpdate(IEnumerable<IOrderDetails> items)
+        public void BulkUpdate(IEnumerable<OrderDetails> items)
 		{
-			this.UnitOfWork.BulkUpdate<IOrderDetails>(items);
+			this.UnitOfWork.BulkUpdate<OrderDetails>(items);
 		}
 
         /// <summary>
@@ -440,9 +419,9 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
         /// <returns></returns>
-        public async Task BulkUpdateAsync(IEnumerable<IOrderDetails> items)
+        public async Task BulkUpdateAsync(IEnumerable<OrderDetails> items)
 		{
-			await this.UnitOfWork.BulkUpdateAsync<IOrderDetails>(items);
+			await this.UnitOfWork.BulkUpdateAsync<OrderDetails>(items);
 		}
 
         #endregion

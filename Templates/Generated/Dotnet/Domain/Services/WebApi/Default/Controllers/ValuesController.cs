@@ -1,13 +1,26 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Security.Policy;
 using System.Threading.Tasks;
+using DotNetScaffolder.Domain.Data.Dtos.DefaultDto.Dto;
+using DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.Dto;
 using DotNetScaffolder.Domain.Infrastructure.Web.Core.Security;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace RepositoryEFDotnet.Services.WebApi.Default.Controllers
 {
-    [Produces("application/json")]
+    public class Test
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+    }
+
+    //[Produces("application/json")]
     [Route("api/[controller]/[action]")]
     [ApiController]
+    //[Authorize]
     public class ValuesController : ControllerBase
     {
         // GET api/values
@@ -58,6 +71,19 @@ namespace RepositoryEFDotnet.Services.WebApi.Default.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+        }
+
+        [HttpPost("{product}")]
+        [Route("~/api/UpdateTodo")]
+        public async Task<ActionResult<string>> PostTestAsync([FromBody] ProductDto product)
+        {
+            return Ok("Result");
+        }
+
+        [HttpPost]
+        public string PostJsonString([FromBody] string text)
+        {
+            return text;
         }
     }
 }

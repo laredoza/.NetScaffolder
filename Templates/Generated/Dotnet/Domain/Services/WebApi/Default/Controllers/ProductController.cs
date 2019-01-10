@@ -28,7 +28,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
     /// <summary>
 	/// The Product Controller
 	/// </summary>
-    [DynamicClaimRequirement(ClaimTypes.All, "CanReadProductResource")]
+    //[DynamicClaimRequirement(ClaimTypes.All, "CanReadProductResource")]
     public partial class ProductController 
 	{
 

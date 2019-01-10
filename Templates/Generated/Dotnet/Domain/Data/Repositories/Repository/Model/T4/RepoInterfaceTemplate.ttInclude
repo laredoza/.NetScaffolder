@@ -3,7 +3,8 @@ public class RepoInterfaceTemplate : BaseTemplate
 {
 	public RepoInterfaceDataType DataType { get; set; }
 	public string DtoInterfaceNamespace { get; set; }
-	
+	public EntityDataType EntityDataType { get; set; }
+
 	public override string TransformText()
 	{
 		// Debugger.Break();
@@ -23,6 +24,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using <#= DtoInterfaceNamespace #>;
+using <#= EntityDataType.FullNamespace #>;
 <#+ foreach(var nameSpace in DataType.AdditionalNamespaces){ #>
 using <#= nameSpace #>;
 <#+ } #>
@@ -32,7 +34,7 @@ namespace <#= DataType.FullNamespace #>
 	/// <summary>
 	/// The <#= DataType.RepoName #>Repository interface that defines database functions for the <#= DataType.ModelName #> table
 	/// </summary>
-	public partial interface I<#= DataType.RepoName #>Repository : IRepository<I<#= DataType.RepoName #>>
+	public partial interface I<#= DataType.RepoName #>Repository : IRepository<<#= DataType.RepoName #>>
 	{
 		#region Load
 <#+ if(DataType.MetaData.PrimaryKeyCount > 1){ #>
@@ -45,7 +47,7 @@ namespace <#= DataType.FullNamespace #>
 <#+ } #>
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<I<#= DataType.RepoName #>, object>>[]</param>
-        /// <returns>I<#= DataType.ModelName #></returns>
+        /// <returns><#= DataType.ModelName #></returns>
 		I<#= DataType.ModelName #> Load(<#= DataType.TransformAsParameter(DataType.MetaData.Columns.Where(o => o.IsPrimaryKey)) #>, bool cache, params Expression<Func<I<#= DataType.RepoName #>, object>>[] includes);
 		
         /// <summary>
@@ -56,8 +58,8 @@ namespace <#= DataType.FullNamespace #>
 <#+ } #>
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<I<#= DataType.RepoName #>, object>>[]</param>
-        /// <returns>I<#= DataType.ModelName #></returns>
-		Task<I<#= DataType.ModelName #>> LoadAsync(<#= DataType.TransformAsParameter(DataType.MetaData.Columns.Where(o => o.IsPrimaryKey)) #>, bool cache, params Expression<Func<I<#= DataType.RepoName #>, object>>[] includes);
+        /// <returns><#= DataType.ModelName #></returns>
+		Task<<#= DataType.ModelName #>> LoadAsync(<#= DataType.TransformAsParameter(DataType.MetaData.Columns.Where(o => o.IsPrimaryKey)) #>, bool cache, params Expression<Func<I<#= DataType.RepoName #>, object>>[] includes);
 <#+ } #>
 
 <#+ if(DataType.MetaData.PrimaryKeyCount == 1){ var col = DataType.MetaData.Columns.First(o => o.IsPrimaryKey);#>
@@ -68,8 +70,8 @@ namespace <#= DataType.FullNamespace #>
         /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<I<#= DataType.RepoName #>, object>>[]</param>
-        /// <returns>I<#= DataType.ModelName #></returns>
-		I<#= DataType.ModelName #> LoadBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= DataType.TransformAsParameter(col) #>, bool cache, params Expression<Func<I<#= DataType.RepoName #>, object>>[] includes);
+        /// <returns><#= DataType.ModelName #></returns>
+		<#= DataType.ModelName #> LoadBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= DataType.TransformAsParameter(col) #>, bool cache, params Expression<Func<I<#= DataType.RepoName #>, object>>[] includes);
 		
         /// <summary>
         /// Load <#= DataType.ModelName #> entities async from the database using the composite primary keys
@@ -77,8 +79,8 @@ namespace <#= DataType.FullNamespace #>
         /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<I<#= DataType.RepoName #>, object>>[]</param>
-        /// <returns>I<#= DataType.ModelName #></returns>
-		Task<I<#= DataType.ModelName #>> LoadBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>Async(<#= DataType.TransformAsParameter(col) #>, bool cache, params Expression<Func<I<#= DataType.RepoName #>, object>>[] includes);
+        /// <returns><#= DataType.ModelName #></returns>
+		Task<<#= DataType.ModelName #>> LoadBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>Async(<#= DataType.TransformAsParameter(col) #>, bool cache, params Expression<Func<I<#= DataType.RepoName #>, object>>[] includes);
 <#+ } #>
 
 <#+ foreach(var col in DataType.MetaData.Columns.Where(o => !o.IsPrimaryKey && o.DomainDataType != DomainDataType.String)){ #>
@@ -89,8 +91,8 @@ namespace <#= DataType.FullNamespace #>
         /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<I<#= DataType.RepoName #>, object>>[]</param>
-        /// <returns><#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>></returns>
-		<#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>> LoadBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= DataType.TransformAsParameter(col) #>, bool cache,  params Expression<Func<I<#= DataType.RepoName #>, object>>[] includes);
+        /// <returns><#= DataType.CollectionOption.ClassNameInterface #><<#= DataType.ModelName #>></returns>
+		<#= DataType.CollectionOption.ClassNameInterface #><<#= DataType.ModelName #>> LoadBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= DataType.TransformAsParameter(col) #>, bool cache,  params Expression<Func<I<#= DataType.RepoName #>, object>>[] includes);
 		
         /// <summary>
         /// Load <#= DataType.ModelName #> entities async from the database using the <#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #> field
@@ -98,8 +100,8 @@ namespace <#= DataType.FullNamespace #>
         /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<I<#= DataType.RepoName #>, object>>[]</param>
-        /// <returns><#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>></returns>
-		Task<<#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>>> LoadBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>Async(<#= DataType.TransformAsParameter(col) #>, bool cache, params Expression<Func<I<#= DataType.RepoName #>, object>>[] includes);
+        /// <returns><#= DataType.CollectionOption.ClassNameInterface #><<#= DataType.ModelName #>></returns>
+		Task<<#= DataType.CollectionOption.ClassNameInterface #><<#= DataType.ModelName #>>> LoadBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>Async(<#= DataType.TransformAsParameter(col) #>, bool cache, params Expression<Func<I<#= DataType.RepoName #>, object>>[] includes);
 <#+ }  #>
 
         /// <summary>
@@ -107,16 +109,16 @@ namespace <#= DataType.FullNamespace #>
         /// </summary>
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<I<#= DataType.RepoName #>, object>>[]</param>
-        /// <returns><#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>></returns>
-		<#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>> LoadAll( bool cache, params Expression<Func<I<#= DataType.RepoName #>, object>>[] includes);
+        /// <returns><#= DataType.CollectionOption.ClassNameInterface #><<#= DataType.ModelName #>></returns>
+		<#= DataType.CollectionOption.ClassNameInterface #><<#= DataType.ModelName #>> LoadAll( bool cache, params Expression<Func<I<#= DataType.RepoName #>, object>>[] includes);
 		
         /// <summary>
         /// Load all <#= DataType.ModelName #> entities async from the database.
         /// </summary>
         /// <param name="cache">Use 2nd level caching if enabled</param>
-		/// <param name="includes">params Expression<Func<I<#= DataType.RepoName #>, object>>[]</param>
-        /// <returns><#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>></returns>
-		Task<<#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>>> LoadAllAsync(bool cache, params Expression<Func<I<#= DataType.RepoName #>, object>>[] includes);
+		/// <param name="includes">params Expression<Func<<#= DataType.RepoName #>, object>>[]</param>
+        /// <returns><#= DataType.CollectionOption.ClassNameInterface #><<#= DataType.ModelName #>></returns>
+		Task<<#= DataType.CollectionOption.ClassNameInterface #><<#= DataType.ModelName #>>> LoadAllAsync(bool cache, params Expression<Func<I<#= DataType.RepoName #>, object>>[] includes);
 		
 		#endregion
 
@@ -130,8 +132,8 @@ namespace <#= DataType.FullNamespace #>
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="caseSensitive">bool</param
 		/// <param name="includes">params Expression<Func<I<#= DataType.RepoName #>, object>>[]</param>
-        /// <returns><#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>></returns>
-		<#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>> SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= DataType.TransformAsParameter(col) #>, bool cache, bool caseSensitive = false, params Expression<Func<I<#= DataType.RepoName #>, object>>[] includes);
+        /// <returns><#= DataType.CollectionOption.ClassNameInterface #><<#= DataType.ModelName #>></returns>
+		<#= DataType.CollectionOption.ClassNameInterface #><<#= DataType.ModelName #>> SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= DataType.TransformAsParameter(col) #>, bool cache, bool caseSensitive = false, params Expression<Func<I<#= DataType.RepoName #>, object>>[] includes);
 		
         /// <summary>
         /// Search for <#= DataType.ModelName #> entities async in the database by <#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>
@@ -140,8 +142,8 @@ namespace <#= DataType.FullNamespace #>
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="caseSensitive">bool</param
 		/// <param name="includes">params Expression<Func<I<#= DataType.RepoName #>, object>>[]</param>
-        /// <returns><#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>></returns>
-		Task<<#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>>> SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>Async(<#= DataType.TransformAsParameter(col) #>, bool cache, bool caseSensitive = false, params Expression<Func<I<#= DataType.RepoName #>, object>>[] includes);
+        /// <returns><#= DataType.CollectionOption.ClassNameInterface #><<#= DataType.ModelName #>></returns>
+		Task<<#= DataType.CollectionOption.ClassNameInterface #><<#= DataType.ModelName #>>> SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>Async(<#= DataType.TransformAsParameter(col) #>, bool cache, bool caseSensitive = false, params Expression<Func<I<#= DataType.RepoName #>, object>>[] includes);
 <#+ }  #>
 
 		#endregion
@@ -153,42 +155,42 @@ namespace <#= DataType.FullNamespace #>
         /// </summary>
         /// <param name="entity">I<#= DataType.ModelName #></param>
         /// <returns>bool</returns>
-		bool Add(I<#= DataType.ModelName #> entity);
+		bool Add(<#= DataType.ModelName #> entity);
 		
         /// <summary>
         /// Add the <#= DataType.ModelName #> entity async to the database.
         /// </summary>
         /// <param name="entity">I<#= DataType.ModelName #></param>
         /// <returns>bool</returns>
-		Task<bool> AddAsync(I<#= DataType.ModelName #> entity);
+		Task<bool> AddAsync(<#= DataType.ModelName #> entity);
 
         /// <summary>
         /// Update the <#= DataType.ModelName #> entity in the database if any values have changed
         /// </summary>
-        /// <param name="entity">I<#= DataType.ModelName #></param>
+        /// <param name="entity"><#= DataType.ModelName #></param>
         /// <returns>bool</returns>
-		bool Update(I<#= DataType.ModelName #> entity);
+		bool Update(<#= DataType.ModelName #> entity);
 		
         /// <summary>
         /// Update the <#= DataType.ModelName #> entity async in the database if any values have changed
         /// </summary>
-        /// <param name="entity">I<#= DataType.ModelName #></param>
+        /// <param name="entity"><#= DataType.ModelName #></param>
         /// <returns>bool</returns>
-		Task<bool> UpdateAsync(I<#= DataType.ModelName #> entity);
+		Task<bool> UpdateAsync(<#= DataType.ModelName #> entity);
 		
         /// <summary>
         /// Delete the <#= DataType.ModelName #> entity from the database
         /// </summary>
-        /// <param name="entity">I<#= DataType.ModelName #></param>
+        /// <param name="entity"><#= DataType.ModelName #></param>
         /// <returns>bool</returns>
-		bool Delete(I<#= DataType.ModelName #> entity);
+		bool Delete(<#= DataType.ModelName #> entity);
 		
         /// <summary>
         /// Delete the <#= DataType.ModelName #> entity async from the database
         /// </summary>
-        /// <param name="entity">I<#= DataType.ModelName #></param>
+        /// <param name="entity"><#= DataType.ModelName #></param>
         /// <returns>bool</returns>
-		Task<bool> DeleteAsync(I<#= DataType.ModelName #> entity);
+		Task<bool> DeleteAsync(<#= DataType.ModelName #> entity);
 
 		/// <summary>
         /// Delete the <#= DataType.ModelName #> entity from the database
@@ -229,7 +231,7 @@ namespace <#= DataType.FullNamespace #>
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
-        void BulkDelete(IEnumerable<I<#= DataType.ModelName #>> items);
+        void BulkDelete(IEnumerable<<#= DataType.ModelName #>> items);
 
         /// <summary>
         ///     Bulk delete entities async
@@ -237,14 +239,14 @@ namespace <#= DataType.FullNamespace #>
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
         /// <returns></returns>
-        Task BulkDeleteAsync(IEnumerable<I<#= DataType.ModelName #>> items);
+        Task BulkDeleteAsync(IEnumerable<<#= DataType.ModelName #>> items);
 
         /// <summary>
         ///     Bulk insert entities
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
-        void BulkInsert(IEnumerable<I<#= DataType.ModelName #>> items);
+        void BulkInsert(IEnumerable<<#= DataType.ModelName #>> items);
         
         /// <summary>
         /// Bulk insert entities async
@@ -252,14 +254,14 @@ namespace <#= DataType.FullNamespace #>
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
         /// <returns></returns>
-        Task BulkInsertAsync(IEnumerable<I<#= DataType.ModelName #>> items);
+        Task BulkInsertAsync(IEnumerable<<#= DataType.ModelName #>> items);
 
         /// <summary>
         /// Bulk update entities 
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
-        void BulkUpdate(IEnumerable<I<#= DataType.ModelName #>> items);
+        void BulkUpdate(IEnumerable<<#= DataType.ModelName #>> items);
 
         /// <summary>
         /// Bulk update entities async
@@ -267,7 +269,7 @@ namespace <#= DataType.FullNamespace #>
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
         /// <returns></returns>
-        Task BulkUpdateAsync(IEnumerable<I<#= DataType.ModelName #>> items);
+        Task BulkUpdateAsync(IEnumerable<<#= DataType.ModelName #>> items);
 
         #endregion
 	}

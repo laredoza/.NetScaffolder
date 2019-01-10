@@ -22,6 +22,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using DotNetScaffolder.Domain.Data.Dtos.DefaultDto.Dto;
 using DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.Dto;
 
 namespace DotNetScaffolder.Domain.Data.ApplicationService
@@ -40,8 +41,8 @@ namespace DotNetScaffolder.Domain.Data.ApplicationService
         /// <param name="bankAccountId">int</param>
         /// <param name="cache">Enable second level caching</param>
         /// <param name="includes">params Expression<Func<IBankAccount, object>>[]</param>
-        /// <returns>IBankAccount</returns>
-		IBankAccount LoadByBankAccountBankAccountId(int bankAccountId, bool cache, params Expression<Func<IBankAccount, object>>[] includes);
+        /// <returns>BankAccountDto</returns>
+		BankAccountDto LoadByBankAccountBankAccountId(int bankAccountId, bool cache, params Expression<Func<IBankAccount, object>>[] includes);
 
         /// <summary>
         /// Load BankAccount Async entities from the database using the primary key
@@ -49,8 +50,8 @@ namespace DotNetScaffolder.Domain.Data.ApplicationService
         /// <param name="bankAccountId">int</param>
         /// <param name="cache">Enable second level caching</param>
         /// <param name="includes">params Expression<Func<IBankAccount, object>>[]</param>
-        /// <returns>IBankAccount</returns>
-		Task<IBankAccount> LoadByBankAccountBankAccountIdAsync(int bankAccountId, bool cache, params Expression<Func<IBankAccount, object>>[] includes);
+        /// <returns>BankAccountDto</returns>
+		Task<BankAccountDto> LoadByBankAccountBankAccountIdAsync(int bankAccountId, bool cache, params Expression<Func<IBankAccount, object>>[] includes);
 
 
         /// <summary>
@@ -58,8 +59,8 @@ namespace DotNetScaffolder.Domain.Data.ApplicationService
         /// </summary>
         /// <param name="cache">Enable second level caching</param>
         /// <param name="includes">params Expression<Func<IBankAccount, object>>[]</param>
-        /// <returns>IList<IBankAccount></returns>
-		IList<IBankAccount> BankAccountLoadAll(bool cache, params Expression<Func<IBankAccount, object>>[] includes);
+        /// <returns>IList<BankAccountDto></returns>
+		IList<BankAccountDto> BankAccountLoadAll(bool cache, params Expression<Func<IBankAccount, object>>[] includes);
 
 
         /// <summary>
@@ -67,8 +68,8 @@ namespace DotNetScaffolder.Domain.Data.ApplicationService
         /// </summary>
         /// <param name="cache">Enable second level caching</param>
         /// <param name="includes">params Expression<Func<IBankAccount, object>>[]</param>
-        /// <returns>IList<IBankAccount></returns>
-		Task<IList<IBankAccount>> BankAccountLoadAllAsync(bool cache, params Expression<Func<IBankAccount, object>>[] includes);
+        /// <returns>IList<BankAccountDto></returns>
+		Task<IList<BankAccountDto>> BankAccountLoadAllAsync(bool cache, params Expression<Func<IBankAccount, object>>[] includes);
 
 
         /// <summary>
@@ -77,8 +78,8 @@ namespace DotNetScaffolder.Domain.Data.ApplicationService
         /// <param name="bankTransferId">int</param>
         /// <param name="cache">Enable second level caching</param>
         /// <param name="includes">params Expression<Func<IBankTransfers, object>>[]</param>
-        /// <returns>IBankTransfers</returns>
-		IBankTransfers LoadByBankTransfersBankTransferId(int bankTransferId, bool cache, params Expression<Func<IBankTransfers, object>>[] includes);
+        /// <returns>BankTransfersDto</returns>
+		BankTransfersDto LoadByBankTransfersBankTransferId(int bankTransferId, bool cache, params Expression<Func<IBankTransfers, object>>[] includes);
 
         /// <summary>
         /// Load BankTransfers Async entities from the database using the primary key
@@ -86,8 +87,8 @@ namespace DotNetScaffolder.Domain.Data.ApplicationService
         /// <param name="bankTransferId">int</param>
         /// <param name="cache">Enable second level caching</param>
         /// <param name="includes">params Expression<Func<IBankTransfers, object>>[]</param>
-        /// <returns>IBankTransfers</returns>
-		Task<IBankTransfers> LoadByBankTransfersBankTransferIdAsync(int bankTransferId, bool cache, params Expression<Func<IBankTransfers, object>>[] includes);
+        /// <returns>BankTransfersDto</returns>
+		Task<BankTransfersDto> LoadByBankTransfersBankTransferIdAsync(int bankTransferId, bool cache, params Expression<Func<IBankTransfers, object>>[] includes);
 
 
         /// <summary>
@@ -95,8 +96,8 @@ namespace DotNetScaffolder.Domain.Data.ApplicationService
         /// </summary>
         /// <param name="cache">Enable second level caching</param>
         /// <param name="includes">params Expression<Func<IBankTransfers, object>>[]</param>
-        /// <returns>IList<IBankTransfers></returns>
-		IList<IBankTransfers> BankTransfersLoadAll(bool cache, params Expression<Func<IBankTransfers, object>>[] includes);
+        /// <returns>IList<BankTransfersDto></returns>
+		IList<BankTransfersDto> BankTransfersLoadAll(bool cache, params Expression<Func<IBankTransfers, object>>[] includes);
 
 
         /// <summary>
@@ -104,8 +105,8 @@ namespace DotNetScaffolder.Domain.Data.ApplicationService
         /// </summary>
         /// <param name="cache">Enable second level caching</param>
         /// <param name="includes">params Expression<Func<IBankTransfers, object>>[]</param>
-        /// <returns>IList<IBankTransfers></returns>
-		Task<IList<IBankTransfers>> BankTransfersLoadAllAsync(bool cache, params Expression<Func<IBankTransfers, object>>[] includes);
+        /// <returns>IList<BankTransfersDto></returns>
+		Task<IList<BankTransfersDto>> BankTransfersLoadAllAsync(bool cache, params Expression<Func<IBankTransfers, object>>[] includes);
 
 
         /// <summary>
@@ -114,8 +115,8 @@ namespace DotNetScaffolder.Domain.Data.ApplicationService
         /// <param name="productId">int</param>
         /// <param name="cache">Enable second level caching</param>
         /// <param name="includes">params Expression<Func<IBook, object>>[]</param>
-        /// <returns>IBook</returns>
-		IBook LoadByBookProductId(int productId, bool cache, params Expression<Func<IBook, object>>[] includes);
+        /// <returns>BookDto</returns>
+		BookDto LoadByBookProductId(int productId, bool cache, params Expression<Func<IBook, object>>[] includes);
 
         /// <summary>
         /// Load Book Async entities from the database using the primary key
@@ -123,8 +124,8 @@ namespace DotNetScaffolder.Domain.Data.ApplicationService
         /// <param name="productId">int</param>
         /// <param name="cache">Enable second level caching</param>
         /// <param name="includes">params Expression<Func<IBook, object>>[]</param>
-        /// <returns>IBook</returns>
-		Task<IBook> LoadByBookProductIdAsync(int productId, bool cache, params Expression<Func<IBook, object>>[] includes);
+        /// <returns>BookDto</returns>
+		Task<BookDto> LoadByBookProductIdAsync(int productId, bool cache, params Expression<Func<IBook, object>>[] includes);
 
 
         /// <summary>
@@ -132,8 +133,8 @@ namespace DotNetScaffolder.Domain.Data.ApplicationService
         /// </summary>
         /// <param name="cache">Enable second level caching</param>
         /// <param name="includes">params Expression<Func<IBook, object>>[]</param>
-        /// <returns>IList<IBook></returns>
-		IList<IBook> BookLoadAll(bool cache, params Expression<Func<IBook, object>>[] includes);
+        /// <returns>IList<BookDto></returns>
+		IList<BookDto> BookLoadAll(bool cache, params Expression<Func<IBook, object>>[] includes);
 
 
         /// <summary>
@@ -141,8 +142,8 @@ namespace DotNetScaffolder.Domain.Data.ApplicationService
         /// </summary>
         /// <param name="cache">Enable second level caching</param>
         /// <param name="includes">params Expression<Func<IBook, object>>[]</param>
-        /// <returns>IList<IBook></returns>
-		Task<IList<IBook>> BookLoadAllAsync(bool cache, params Expression<Func<IBook, object>>[] includes);
+        /// <returns>IList<BookDto></returns>
+		Task<IList<BookDto>> BookLoadAllAsync(bool cache, params Expression<Func<IBook, object>>[] includes);
 
 
         /// <summary>
@@ -151,8 +152,8 @@ namespace DotNetScaffolder.Domain.Data.ApplicationService
         /// <param name="countryId">int</param>
         /// <param name="cache">Enable second level caching</param>
         /// <param name="includes">params Expression<Func<ICountry, object>>[]</param>
-        /// <returns>ICountry</returns>
-		ICountry LoadByCountryCountryId(int countryId, bool cache, params Expression<Func<ICountry, object>>[] includes);
+        /// <returns>CountryDto</returns>
+		CountryDto LoadByCountryCountryId(int countryId, bool cache, params Expression<Func<ICountry, object>>[] includes);
 
         /// <summary>
         /// Load Country Async entities from the database using the primary key
@@ -160,8 +161,8 @@ namespace DotNetScaffolder.Domain.Data.ApplicationService
         /// <param name="countryId">int</param>
         /// <param name="cache">Enable second level caching</param>
         /// <param name="includes">params Expression<Func<ICountry, object>>[]</param>
-        /// <returns>ICountry</returns>
-		Task<ICountry> LoadByCountryCountryIdAsync(int countryId, bool cache, params Expression<Func<ICountry, object>>[] includes);
+        /// <returns>CountryDto</returns>
+		Task<CountryDto> LoadByCountryCountryIdAsync(int countryId, bool cache, params Expression<Func<ICountry, object>>[] includes);
 
 
         /// <summary>
@@ -169,8 +170,8 @@ namespace DotNetScaffolder.Domain.Data.ApplicationService
         /// </summary>
         /// <param name="cache">Enable second level caching</param>
         /// <param name="includes">params Expression<Func<ICountry, object>>[]</param>
-        /// <returns>IList<ICountry></returns>
-		IList<ICountry> CountryLoadAll(bool cache, params Expression<Func<ICountry, object>>[] includes);
+        /// <returns>IList<CountryDto></returns>
+		IList<CountryDto> CountryLoadAll(bool cache, params Expression<Func<ICountry, object>>[] includes);
 
 
         /// <summary>
@@ -178,8 +179,8 @@ namespace DotNetScaffolder.Domain.Data.ApplicationService
         /// </summary>
         /// <param name="cache">Enable second level caching</param>
         /// <param name="includes">params Expression<Func<ICountry, object>>[]</param>
-        /// <returns>IList<ICountry></returns>
-		Task<IList<ICountry>> CountryLoadAllAsync(bool cache, params Expression<Func<ICountry, object>>[] includes);
+        /// <returns>IList<CountryDto></returns>
+		Task<IList<CountryDto>> CountryLoadAllAsync(bool cache, params Expression<Func<ICountry, object>>[] includes);
 
 
         /// <summary>
@@ -188,8 +189,8 @@ namespace DotNetScaffolder.Domain.Data.ApplicationService
         /// <param name="customerId">int</param>
         /// <param name="cache">Enable second level caching</param>
         /// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-        /// <returns>ICustomer</returns>
-		ICustomer LoadByCustomerCustomerId(int customerId, bool cache, params Expression<Func<ICustomer, object>>[] includes);
+        /// <returns>CustomerDto</returns>
+		CustomerDto LoadByCustomerCustomerId(int customerId, bool cache, params Expression<Func<ICustomer, object>>[] includes);
 
         /// <summary>
         /// Load Customer Async entities from the database using the primary key
@@ -197,8 +198,8 @@ namespace DotNetScaffolder.Domain.Data.ApplicationService
         /// <param name="customerId">int</param>
         /// <param name="cache">Enable second level caching</param>
         /// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-        /// <returns>ICustomer</returns>
-		Task<ICustomer> LoadByCustomerCustomerIdAsync(int customerId, bool cache, params Expression<Func<ICustomer, object>>[] includes);
+        /// <returns>CustomerDto</returns>
+		Task<CustomerDto> LoadByCustomerCustomerIdAsync(int customerId, bool cache, params Expression<Func<ICustomer, object>>[] includes);
 
 
         /// <summary>
@@ -206,8 +207,8 @@ namespace DotNetScaffolder.Domain.Data.ApplicationService
         /// </summary>
         /// <param name="cache">Enable second level caching</param>
         /// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-        /// <returns>IList<ICustomer></returns>
-		IList<ICustomer> CustomerLoadAll(bool cache, params Expression<Func<ICustomer, object>>[] includes);
+        /// <returns>IList<CustomerDto></returns>
+		IList<CustomerDto> CustomerLoadAll(bool cache, params Expression<Func<ICustomer, object>>[] includes);
 
 
         /// <summary>
@@ -215,8 +216,8 @@ namespace DotNetScaffolder.Domain.Data.ApplicationService
         /// </summary>
         /// <param name="cache">Enable second level caching</param>
         /// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-        /// <returns>IList<ICustomer></returns>
-		Task<IList<ICustomer>> CustomerLoadAllAsync(bool cache, params Expression<Func<ICustomer, object>>[] includes);
+        /// <returns>IList<CustomerDto></returns>
+		Task<IList<CustomerDto>> CustomerLoadAllAsync(bool cache, params Expression<Func<ICustomer, object>>[] includes);
 
 
         /// <summary>
@@ -225,8 +226,8 @@ namespace DotNetScaffolder.Domain.Data.ApplicationService
         /// <param name="orderId">int</param>
         /// <param name="cache">Enable second level caching</param>
         /// <param name="includes">params Expression<Func<IOrder, object>>[]</param>
-        /// <returns>IOrder</returns>
-		IOrder LoadByOrderOrderId(int orderId, bool cache, params Expression<Func<IOrder, object>>[] includes);
+        /// <returns>OrderDto</returns>
+		OrderDto LoadByOrderOrderId(int orderId, bool cache, params Expression<Func<IOrder, object>>[] includes);
 
         /// <summary>
         /// Load Order Async entities from the database using the primary key
@@ -234,8 +235,8 @@ namespace DotNetScaffolder.Domain.Data.ApplicationService
         /// <param name="orderId">int</param>
         /// <param name="cache">Enable second level caching</param>
         /// <param name="includes">params Expression<Func<IOrder, object>>[]</param>
-        /// <returns>IOrder</returns>
-		Task<IOrder> LoadByOrderOrderIdAsync(int orderId, bool cache, params Expression<Func<IOrder, object>>[] includes);
+        /// <returns>OrderDto</returns>
+		Task<OrderDto> LoadByOrderOrderIdAsync(int orderId, bool cache, params Expression<Func<IOrder, object>>[] includes);
 
 
         /// <summary>
@@ -243,8 +244,8 @@ namespace DotNetScaffolder.Domain.Data.ApplicationService
         /// </summary>
         /// <param name="cache">Enable second level caching</param>
         /// <param name="includes">params Expression<Func<IOrder, object>>[]</param>
-        /// <returns>IList<IOrder></returns>
-		IList<IOrder> OrderLoadAll(bool cache, params Expression<Func<IOrder, object>>[] includes);
+        /// <returns>IList<OrderDto></returns>
+		IList<OrderDto> OrderLoadAll(bool cache, params Expression<Func<IOrder, object>>[] includes);
 
 
         /// <summary>
@@ -252,8 +253,8 @@ namespace DotNetScaffolder.Domain.Data.ApplicationService
         /// </summary>
         /// <param name="cache">Enable second level caching</param>
         /// <param name="includes">params Expression<Func<IOrder, object>>[]</param>
-        /// <returns>IList<IOrder></returns>
-		Task<IList<IOrder>> OrderLoadAllAsync(bool cache, params Expression<Func<IOrder, object>>[] includes);
+        /// <returns>IList<OrderDto></returns>
+		Task<IList<OrderDto>> OrderLoadAllAsync(bool cache, params Expression<Func<IOrder, object>>[] includes);
 
 
         /// <summary>
@@ -262,8 +263,8 @@ namespace DotNetScaffolder.Domain.Data.ApplicationService
         /// <param name="orderDetailsId">int</param>
         /// <param name="cache">Enable second level caching</param>
         /// <param name="includes">params Expression<Func<IOrderDetails, object>>[]</param>
-        /// <returns>IOrderDetails</returns>
-		IOrderDetails LoadByOrderDetailsOrderDetailsId(int orderDetailsId, bool cache, params Expression<Func<IOrderDetails, object>>[] includes);
+        /// <returns>OrderDetailsDto</returns>
+		OrderDetailsDto LoadByOrderDetailsOrderDetailsId(int orderDetailsId, bool cache, params Expression<Func<IOrderDetails, object>>[] includes);
 
         /// <summary>
         /// Load OrderDetails Async entities from the database using the primary key
@@ -271,8 +272,8 @@ namespace DotNetScaffolder.Domain.Data.ApplicationService
         /// <param name="orderDetailsId">int</param>
         /// <param name="cache">Enable second level caching</param>
         /// <param name="includes">params Expression<Func<IOrderDetails, object>>[]</param>
-        /// <returns>IOrderDetails</returns>
-		Task<IOrderDetails> LoadByOrderDetailsOrderDetailsIdAsync(int orderDetailsId, bool cache, params Expression<Func<IOrderDetails, object>>[] includes);
+        /// <returns>OrderDetailsDto</returns>
+		Task<OrderDetailsDto> LoadByOrderDetailsOrderDetailsIdAsync(int orderDetailsId, bool cache, params Expression<Func<IOrderDetails, object>>[] includes);
 
 
         /// <summary>
@@ -280,8 +281,8 @@ namespace DotNetScaffolder.Domain.Data.ApplicationService
         /// </summary>
         /// <param name="cache">Enable second level caching</param>
         /// <param name="includes">params Expression<Func<IOrderDetails, object>>[]</param>
-        /// <returns>IList<IOrderDetails></returns>
-		IList<IOrderDetails> OrderDetailsLoadAll(bool cache, params Expression<Func<IOrderDetails, object>>[] includes);
+        /// <returns>IList<OrderDetailsDto></returns>
+		IList<OrderDetailsDto> OrderDetailsLoadAll(bool cache, params Expression<Func<IOrderDetails, object>>[] includes);
 
 
         /// <summary>
@@ -289,8 +290,8 @@ namespace DotNetScaffolder.Domain.Data.ApplicationService
         /// </summary>
         /// <param name="cache">Enable second level caching</param>
         /// <param name="includes">params Expression<Func<IOrderDetails, object>>[]</param>
-        /// <returns>IList<IOrderDetails></returns>
-		Task<IList<IOrderDetails>> OrderDetailsLoadAllAsync(bool cache, params Expression<Func<IOrderDetails, object>>[] includes);
+        /// <returns>IList<OrderDetailsDto></returns>
+		Task<IList<OrderDetailsDto>> OrderDetailsLoadAllAsync(bool cache, params Expression<Func<IOrderDetails, object>>[] includes);
 
 
         /// <summary>
@@ -299,8 +300,8 @@ namespace DotNetScaffolder.Domain.Data.ApplicationService
         /// <param name="productId">int</param>
         /// <param name="cache">Enable second level caching</param>
         /// <param name="includes">params Expression<Func<IProduct, object>>[]</param>
-        /// <returns>IProduct</returns>
-		IProduct LoadByProductProductId(int productId, bool cache, params Expression<Func<IProduct, object>>[] includes);
+        /// <returns>ProductDto</returns>
+		ProductDto LoadByProductProductId(int productId, bool cache, params Expression<Func<IProduct, object>>[] includes);
 
         /// <summary>
         /// Load Product Async entities from the database using the primary key
@@ -308,8 +309,8 @@ namespace DotNetScaffolder.Domain.Data.ApplicationService
         /// <param name="productId">int</param>
         /// <param name="cache">Enable second level caching</param>
         /// <param name="includes">params Expression<Func<IProduct, object>>[]</param>
-        /// <returns>IProduct</returns>
-		Task<IProduct> LoadByProductProductIdAsync(int productId, bool cache, params Expression<Func<IProduct, object>>[] includes);
+        /// <returns>ProductDto</returns>
+		Task<ProductDto> LoadByProductProductIdAsync(int productId, bool cache, params Expression<Func<IProduct, object>>[] includes);
 
 
         /// <summary>
@@ -317,8 +318,8 @@ namespace DotNetScaffolder.Domain.Data.ApplicationService
         /// </summary>
         /// <param name="cache">Enable second level caching</param>
         /// <param name="includes">params Expression<Func<IProduct, object>>[]</param>
-        /// <returns>IList<IProduct></returns>
-		IList<IProduct> ProductLoadAll(bool cache, params Expression<Func<IProduct, object>>[] includes);
+        /// <returns>IList<ProductDto></returns>
+		IList<ProductDto> ProductLoadAll(bool cache, params Expression<Func<IProduct, object>>[] includes);
 
 
         /// <summary>
@@ -326,8 +327,8 @@ namespace DotNetScaffolder.Domain.Data.ApplicationService
         /// </summary>
         /// <param name="cache">Enable second level caching</param>
         /// <param name="includes">params Expression<Func<IProduct, object>>[]</param>
-        /// <returns>IList<IProduct></returns>
-		Task<IList<IProduct>> ProductLoadAllAsync(bool cache, params Expression<Func<IProduct, object>>[] includes);
+        /// <returns>IList<ProductDto></returns>
+		Task<IList<ProductDto>> ProductLoadAllAsync(bool cache, params Expression<Func<IProduct, object>>[] includes);
 
 
         /// <summary>
@@ -336,8 +337,8 @@ namespace DotNetScaffolder.Domain.Data.ApplicationService
         /// <param name="productId">int</param>
         /// <param name="cache">Enable second level caching</param>
         /// <param name="includes">params Expression<Func<ISoftware, object>>[]</param>
-        /// <returns>ISoftware</returns>
-		ISoftware LoadBySoftwareProductId(int productId, bool cache, params Expression<Func<ISoftware, object>>[] includes);
+        /// <returns>SoftwareDto</returns>
+		SoftwareDto LoadBySoftwareProductId(int productId, bool cache, params Expression<Func<ISoftware, object>>[] includes);
 
         /// <summary>
         /// Load Software Async entities from the database using the primary key
@@ -345,8 +346,8 @@ namespace DotNetScaffolder.Domain.Data.ApplicationService
         /// <param name="productId">int</param>
         /// <param name="cache">Enable second level caching</param>
         /// <param name="includes">params Expression<Func<ISoftware, object>>[]</param>
-        /// <returns>ISoftware</returns>
-		Task<ISoftware> LoadBySoftwareProductIdAsync(int productId, bool cache, params Expression<Func<ISoftware, object>>[] includes);
+        /// <returns>SoftwareDto</returns>
+		Task<SoftwareDto> LoadBySoftwareProductIdAsync(int productId, bool cache, params Expression<Func<ISoftware, object>>[] includes);
 
 
         /// <summary>
@@ -354,8 +355,8 @@ namespace DotNetScaffolder.Domain.Data.ApplicationService
         /// </summary>
         /// <param name="cache">Enable second level caching</param>
         /// <param name="includes">params Expression<Func<ISoftware, object>>[]</param>
-        /// <returns>IList<ISoftware></returns>
-		IList<ISoftware> SoftwareLoadAll(bool cache, params Expression<Func<ISoftware, object>>[] includes);
+        /// <returns>IList<SoftwareDto></returns>
+		IList<SoftwareDto> SoftwareLoadAll(bool cache, params Expression<Func<ISoftware, object>>[] includes);
 
 
         /// <summary>
@@ -363,8 +364,8 @@ namespace DotNetScaffolder.Domain.Data.ApplicationService
         /// </summary>
         /// <param name="cache">Enable second level caching</param>
         /// <param name="includes">params Expression<Func<ISoftware, object>>[]</param>
-        /// <returns>IList<ISoftware></returns>
-		Task<IList<ISoftware>> SoftwareLoadAllAsync(bool cache, params Expression<Func<ISoftware, object>>[] includes);
+        /// <returns>IList<SoftwareDto></returns>
+		Task<IList<SoftwareDto>> SoftwareLoadAllAsync(bool cache, params Expression<Func<ISoftware, object>>[] includes);
 
 
         #endregion
@@ -378,8 +379,8 @@ namespace DotNetScaffolder.Domain.Data.ApplicationService
 		/// <param name="caseSensitive">bool</param>
         /// <param name="cache">Enable second level caching</param>
         /// <param name="includes">params Expression<Func<IBankAccount, object>>[]</param>
-        /// <returns>IList<IBankAccount></returns>
-		IList<IBankAccount> BankAccountSearchByBankAccountNumber(string bankAccountNumber,bool caseSensitive, bool cache, params Expression<Func<IBankAccount, object>>[] includes);
+        /// <returns>IList<BankAccountDto></returns>
+		IList<BankAccountDto> BankAccountSearchByBankAccountNumber(string bankAccountNumber,bool caseSensitive, bool cache, params Expression<Func<IBankAccount, object>>[] includes);
 
         /// <summary>
         /// Search for BankAccount  Async entities in the database by BankAccountNumber
@@ -388,8 +389,8 @@ namespace DotNetScaffolder.Domain.Data.ApplicationService
 		/// <param name="caseSensitive">bool</param>
         /// <param name="cache">Enable second level caching</param>
         /// <param name="includes">params Expression<Func<IBankAccount, object>>[]</param>
-        /// <returns>IList<IBankAccount></returns>
-		Task<IList<IBankAccount>> BankAccountSearchByBankAccountNumberAsync(string bankAccountNumber,bool caseSensitive, bool cache, params Expression<Func<IBankAccount, object>>[] includes);
+        /// <returns>IList<BankAccountDto></returns>
+		Task<IList<BankAccountDto>> BankAccountSearchByBankAccountNumberAsync(string bankAccountNumber,bool caseSensitive, bool cache, params Expression<Func<IBankAccount, object>>[] includes);
 
 
         /// <summary>
@@ -399,8 +400,8 @@ namespace DotNetScaffolder.Domain.Data.ApplicationService
 		/// <param name="caseSensitive">bool</param>
         /// <param name="cache">Enable second level caching</param>
         /// <param name="includes">params Expression<Func<IBook, object>>[]</param>
-        /// <returns>IList<IBook></returns>
-		IList<IBook> BookSearchByPublisher(string publisher,bool caseSensitive, bool cache, params Expression<Func<IBook, object>>[] includes);
+        /// <returns>IList<BookDto></returns>
+		IList<BookDto> BookSearchByPublisher(string publisher,bool caseSensitive, bool cache, params Expression<Func<IBook, object>>[] includes);
 
         /// <summary>
         /// Search for Book  Async entities in the database by Publisher
@@ -409,8 +410,8 @@ namespace DotNetScaffolder.Domain.Data.ApplicationService
 		/// <param name="caseSensitive">bool</param>
         /// <param name="cache">Enable second level caching</param>
         /// <param name="includes">params Expression<Func<IBook, object>>[]</param>
-        /// <returns>IList<IBook></returns>
-		Task<IList<IBook>> BookSearchByPublisherAsync(string publisher,bool caseSensitive, bool cache, params Expression<Func<IBook, object>>[] includes);
+        /// <returns>IList<BookDto></returns>
+		Task<IList<BookDto>> BookSearchByPublisherAsync(string publisher,bool caseSensitive, bool cache, params Expression<Func<IBook, object>>[] includes);
 
 
         /// <summary>
@@ -420,8 +421,8 @@ namespace DotNetScaffolder.Domain.Data.ApplicationService
 		/// <param name="caseSensitive">bool</param>
         /// <param name="cache">Enable second level caching</param>
         /// <param name="includes">params Expression<Func<ICountry, object>>[]</param>
-        /// <returns>IList<ICountry></returns>
-		IList<ICountry> CountrySearchByCountryName(string countryName,bool caseSensitive, bool cache, params Expression<Func<ICountry, object>>[] includes);
+        /// <returns>IList<CountryDto></returns>
+		IList<CountryDto> CountrySearchByCountryName(string countryName,bool caseSensitive, bool cache, params Expression<Func<ICountry, object>>[] includes);
 
         /// <summary>
         /// Search for Country  Async entities in the database by CountryName
@@ -430,8 +431,8 @@ namespace DotNetScaffolder.Domain.Data.ApplicationService
 		/// <param name="caseSensitive">bool</param>
         /// <param name="cache">Enable second level caching</param>
         /// <param name="includes">params Expression<Func<ICountry, object>>[]</param>
-        /// <returns>IList<ICountry></returns>
-		Task<IList<ICountry>> CountrySearchByCountryNameAsync(string countryName,bool caseSensitive, bool cache, params Expression<Func<ICountry, object>>[] includes);
+        /// <returns>IList<CountryDto></returns>
+		Task<IList<CountryDto>> CountrySearchByCountryNameAsync(string countryName,bool caseSensitive, bool cache, params Expression<Func<ICountry, object>>[] includes);
 
 
         /// <summary>
@@ -441,8 +442,8 @@ namespace DotNetScaffolder.Domain.Data.ApplicationService
 		/// <param name="caseSensitive">bool</param>
         /// <param name="cache">Enable second level caching</param>
         /// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-        /// <returns>IList<ICustomer></returns>
-		IList<ICustomer> CustomerSearchByCustomerCode(string customerCode,bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes);
+        /// <returns>IList<CustomerDto></returns>
+		IList<CustomerDto> CustomerSearchByCustomerCode(string customerCode,bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes);
 
         /// <summary>
         /// Search for Customer  Async entities in the database by CustomerCode
@@ -451,8 +452,8 @@ namespace DotNetScaffolder.Domain.Data.ApplicationService
 		/// <param name="caseSensitive">bool</param>
         /// <param name="cache">Enable second level caching</param>
         /// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-        /// <returns>IList<ICustomer></returns>
-		Task<IList<ICustomer>> CustomerSearchByCustomerCodeAsync(string customerCode,bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes);
+        /// <returns>IList<CustomerDto></returns>
+		Task<IList<CustomerDto>> CustomerSearchByCustomerCodeAsync(string customerCode,bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes);
 
 
         /// <summary>
@@ -462,8 +463,8 @@ namespace DotNetScaffolder.Domain.Data.ApplicationService
 		/// <param name="caseSensitive">bool</param>
         /// <param name="cache">Enable second level caching</param>
         /// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-        /// <returns>IList<ICustomer></returns>
-		IList<ICustomer> CustomerSearchByCompanyName(string companyName,bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes);
+        /// <returns>IList<CustomerDto></returns>
+		IList<CustomerDto> CustomerSearchByCompanyName(string companyName,bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes);
 
         /// <summary>
         /// Search for Customer  Async entities in the database by CompanyName
@@ -472,8 +473,8 @@ namespace DotNetScaffolder.Domain.Data.ApplicationService
 		/// <param name="caseSensitive">bool</param>
         /// <param name="cache">Enable second level caching</param>
         /// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-        /// <returns>IList<ICustomer></returns>
-		Task<IList<ICustomer>> CustomerSearchByCompanyNameAsync(string companyName,bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes);
+        /// <returns>IList<CustomerDto></returns>
+		Task<IList<CustomerDto>> CustomerSearchByCompanyNameAsync(string companyName,bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes);
 
 
         /// <summary>
@@ -483,8 +484,8 @@ namespace DotNetScaffolder.Domain.Data.ApplicationService
 		/// <param name="caseSensitive">bool</param>
         /// <param name="cache">Enable second level caching</param>
         /// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-        /// <returns>IList<ICustomer></returns>
-		IList<ICustomer> CustomerSearchByContactName(string contactName,bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes);
+        /// <returns>IList<CustomerDto></returns>
+		IList<CustomerDto> CustomerSearchByContactName(string contactName,bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes);
 
         /// <summary>
         /// Search for Customer  Async entities in the database by ContactName
@@ -493,8 +494,8 @@ namespace DotNetScaffolder.Domain.Data.ApplicationService
 		/// <param name="caseSensitive">bool</param>
         /// <param name="cache">Enable second level caching</param>
         /// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-        /// <returns>IList<ICustomer></returns>
-		Task<IList<ICustomer>> CustomerSearchByContactNameAsync(string contactName,bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes);
+        /// <returns>IList<CustomerDto></returns>
+		Task<IList<CustomerDto>> CustomerSearchByContactNameAsync(string contactName,bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes);
 
 
         /// <summary>
@@ -504,8 +505,8 @@ namespace DotNetScaffolder.Domain.Data.ApplicationService
 		/// <param name="caseSensitive">bool</param>
         /// <param name="cache">Enable second level caching</param>
         /// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-        /// <returns>IList<ICustomer></returns>
-		IList<ICustomer> CustomerSearchByContactTitle(string contactTitle,bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes);
+        /// <returns>IList<CustomerDto></returns>
+		IList<CustomerDto> CustomerSearchByContactTitle(string contactTitle,bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes);
 
         /// <summary>
         /// Search for Customer  Async entities in the database by ContactTitle
@@ -514,8 +515,8 @@ namespace DotNetScaffolder.Domain.Data.ApplicationService
 		/// <param name="caseSensitive">bool</param>
         /// <param name="cache">Enable second level caching</param>
         /// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-        /// <returns>IList<ICustomer></returns>
-		Task<IList<ICustomer>> CustomerSearchByContactTitleAsync(string contactTitle,bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes);
+        /// <returns>IList<CustomerDto></returns>
+		Task<IList<CustomerDto>> CustomerSearchByContactTitleAsync(string contactTitle,bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes);
 
 
         /// <summary>
@@ -525,8 +526,8 @@ namespace DotNetScaffolder.Domain.Data.ApplicationService
 		/// <param name="caseSensitive">bool</param>
         /// <param name="cache">Enable second level caching</param>
         /// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-        /// <returns>IList<ICustomer></returns>
-		IList<ICustomer> CustomerSearchByAddress(string address,bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes);
+        /// <returns>IList<CustomerDto></returns>
+		IList<CustomerDto> CustomerSearchByAddress(string address,bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes);
 
         /// <summary>
         /// Search for Customer  Async entities in the database by Address
@@ -535,8 +536,8 @@ namespace DotNetScaffolder.Domain.Data.ApplicationService
 		/// <param name="caseSensitive">bool</param>
         /// <param name="cache">Enable second level caching</param>
         /// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-        /// <returns>IList<ICustomer></returns>
-		Task<IList<ICustomer>> CustomerSearchByAddressAsync(string address,bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes);
+        /// <returns>IList<CustomerDto></returns>
+		Task<IList<CustomerDto>> CustomerSearchByAddressAsync(string address,bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes);
 
 
         /// <summary>
@@ -546,8 +547,8 @@ namespace DotNetScaffolder.Domain.Data.ApplicationService
 		/// <param name="caseSensitive">bool</param>
         /// <param name="cache">Enable second level caching</param>
         /// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-        /// <returns>IList<ICustomer></returns>
-		IList<ICustomer> CustomerSearchByCity(string city,bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes);
+        /// <returns>IList<CustomerDto></returns>
+		IList<CustomerDto> CustomerSearchByCity(string city,bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes);
 
         /// <summary>
         /// Search for Customer  Async entities in the database by City
@@ -556,8 +557,8 @@ namespace DotNetScaffolder.Domain.Data.ApplicationService
 		/// <param name="caseSensitive">bool</param>
         /// <param name="cache">Enable second level caching</param>
         /// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-        /// <returns>IList<ICustomer></returns>
-		Task<IList<ICustomer>> CustomerSearchByCityAsync(string city,bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes);
+        /// <returns>IList<CustomerDto></returns>
+		Task<IList<CustomerDto>> CustomerSearchByCityAsync(string city,bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes);
 
 
         /// <summary>
@@ -567,8 +568,8 @@ namespace DotNetScaffolder.Domain.Data.ApplicationService
 		/// <param name="caseSensitive">bool</param>
         /// <param name="cache">Enable second level caching</param>
         /// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-        /// <returns>IList<ICustomer></returns>
-		IList<ICustomer> CustomerSearchByPostalCode(string postalCode,bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes);
+        /// <returns>IList<CustomerDto></returns>
+		IList<CustomerDto> CustomerSearchByPostalCode(string postalCode,bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes);
 
         /// <summary>
         /// Search for Customer  Async entities in the database by PostalCode
@@ -577,8 +578,8 @@ namespace DotNetScaffolder.Domain.Data.ApplicationService
 		/// <param name="caseSensitive">bool</param>
         /// <param name="cache">Enable second level caching</param>
         /// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-        /// <returns>IList<ICustomer></returns>
-		Task<IList<ICustomer>> CustomerSearchByPostalCodeAsync(string postalCode,bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes);
+        /// <returns>IList<CustomerDto></returns>
+		Task<IList<CustomerDto>> CustomerSearchByPostalCodeAsync(string postalCode,bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes);
 
 
         /// <summary>
@@ -588,8 +589,8 @@ namespace DotNetScaffolder.Domain.Data.ApplicationService
 		/// <param name="caseSensitive">bool</param>
         /// <param name="cache">Enable second level caching</param>
         /// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-        /// <returns>IList<ICustomer></returns>
-		IList<ICustomer> CustomerSearchByTelephone(string telephone,bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes);
+        /// <returns>IList<CustomerDto></returns>
+		IList<CustomerDto> CustomerSearchByTelephone(string telephone,bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes);
 
         /// <summary>
         /// Search for Customer  Async entities in the database by Telephone
@@ -598,8 +599,8 @@ namespace DotNetScaffolder.Domain.Data.ApplicationService
 		/// <param name="caseSensitive">bool</param>
         /// <param name="cache">Enable second level caching</param>
         /// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-        /// <returns>IList<ICustomer></returns>
-		Task<IList<ICustomer>> CustomerSearchByTelephoneAsync(string telephone,bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes);
+        /// <returns>IList<CustomerDto></returns>
+		Task<IList<CustomerDto>> CustomerSearchByTelephoneAsync(string telephone,bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes);
 
 
         /// <summary>
@@ -609,8 +610,8 @@ namespace DotNetScaffolder.Domain.Data.ApplicationService
 		/// <param name="caseSensitive">bool</param>
         /// <param name="cache">Enable second level caching</param>
         /// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-        /// <returns>IList<ICustomer></returns>
-		IList<ICustomer> CustomerSearchByFax(string fax,bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes);
+        /// <returns>IList<CustomerDto></returns>
+		IList<CustomerDto> CustomerSearchByFax(string fax,bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes);
 
         /// <summary>
         /// Search for Customer  Async entities in the database by Fax
@@ -619,8 +620,8 @@ namespace DotNetScaffolder.Domain.Data.ApplicationService
 		/// <param name="caseSensitive">bool</param>
         /// <param name="cache">Enable second level caching</param>
         /// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-        /// <returns>IList<ICustomer></returns>
-		Task<IList<ICustomer>> CustomerSearchByFaxAsync(string fax,bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes);
+        /// <returns>IList<CustomerDto></returns>
+		Task<IList<CustomerDto>> CustomerSearchByFaxAsync(string fax,bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes);
 
 
         /// <summary>
@@ -630,8 +631,8 @@ namespace DotNetScaffolder.Domain.Data.ApplicationService
 		/// <param name="caseSensitive">bool</param>
         /// <param name="cache">Enable second level caching</param>
         /// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-        /// <returns>IList<ICustomer></returns>
-		IList<ICustomer> CustomerSearchByPhoto(string photo,bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes);
+        /// <returns>IList<CustomerDto></returns>
+		IList<CustomerDto> CustomerSearchByPhoto(string photo,bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes);
 
         /// <summary>
         /// Search for Customer  Async entities in the database by Photo
@@ -640,8 +641,8 @@ namespace DotNetScaffolder.Domain.Data.ApplicationService
 		/// <param name="caseSensitive">bool</param>
         /// <param name="cache">Enable second level caching</param>
         /// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-        /// <returns>IList<ICustomer></returns>
-		Task<IList<ICustomer>> CustomerSearchByPhotoAsync(string photo,bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes);
+        /// <returns>IList<CustomerDto></returns>
+		Task<IList<CustomerDto>> CustomerSearchByPhotoAsync(string photo,bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes);
 
 
         /// <summary>
@@ -651,8 +652,8 @@ namespace DotNetScaffolder.Domain.Data.ApplicationService
 		/// <param name="caseSensitive">bool</param>
         /// <param name="cache">Enable second level caching</param>
         /// <param name="includes">params Expression<Func<IOrder, object>>[]</param>
-        /// <returns>IList<IOrder></returns>
-		IList<IOrder> OrderSearchByShippingName(string shippingName,bool caseSensitive, bool cache, params Expression<Func<IOrder, object>>[] includes);
+        /// <returns>IList<OrderDto></returns>
+		IList<OrderDto> OrderSearchByShippingName(string shippingName,bool caseSensitive, bool cache, params Expression<Func<IOrder, object>>[] includes);
 
         /// <summary>
         /// Search for Order  Async entities in the database by ShippingName
@@ -661,8 +662,8 @@ namespace DotNetScaffolder.Domain.Data.ApplicationService
 		/// <param name="caseSensitive">bool</param>
         /// <param name="cache">Enable second level caching</param>
         /// <param name="includes">params Expression<Func<IOrder, object>>[]</param>
-        /// <returns>IList<IOrder></returns>
-		Task<IList<IOrder>> OrderSearchByShippingNameAsync(string shippingName,bool caseSensitive, bool cache, params Expression<Func<IOrder, object>>[] includes);
+        /// <returns>IList<OrderDto></returns>
+		Task<IList<OrderDto>> OrderSearchByShippingNameAsync(string shippingName,bool caseSensitive, bool cache, params Expression<Func<IOrder, object>>[] includes);
 
 
         /// <summary>
@@ -672,8 +673,8 @@ namespace DotNetScaffolder.Domain.Data.ApplicationService
 		/// <param name="caseSensitive">bool</param>
         /// <param name="cache">Enable second level caching</param>
         /// <param name="includes">params Expression<Func<IOrder, object>>[]</param>
-        /// <returns>IList<IOrder></returns>
-		IList<IOrder> OrderSearchByShippingAddress(string shippingAddress,bool caseSensitive, bool cache, params Expression<Func<IOrder, object>>[] includes);
+        /// <returns>IList<OrderDto></returns>
+		IList<OrderDto> OrderSearchByShippingAddress(string shippingAddress,bool caseSensitive, bool cache, params Expression<Func<IOrder, object>>[] includes);
 
         /// <summary>
         /// Search for Order  Async entities in the database by ShippingAddress
@@ -682,8 +683,8 @@ namespace DotNetScaffolder.Domain.Data.ApplicationService
 		/// <param name="caseSensitive">bool</param>
         /// <param name="cache">Enable second level caching</param>
         /// <param name="includes">params Expression<Func<IOrder, object>>[]</param>
-        /// <returns>IList<IOrder></returns>
-		Task<IList<IOrder>> OrderSearchByShippingAddressAsync(string shippingAddress,bool caseSensitive, bool cache, params Expression<Func<IOrder, object>>[] includes);
+        /// <returns>IList<OrderDto></returns>
+		Task<IList<OrderDto>> OrderSearchByShippingAddressAsync(string shippingAddress,bool caseSensitive, bool cache, params Expression<Func<IOrder, object>>[] includes);
 
 
         /// <summary>
@@ -693,8 +694,8 @@ namespace DotNetScaffolder.Domain.Data.ApplicationService
 		/// <param name="caseSensitive">bool</param>
         /// <param name="cache">Enable second level caching</param>
         /// <param name="includes">params Expression<Func<IOrder, object>>[]</param>
-        /// <returns>IList<IOrder></returns>
-		IList<IOrder> OrderSearchByShippingCity(string shippingCity,bool caseSensitive, bool cache, params Expression<Func<IOrder, object>>[] includes);
+        /// <returns>IList<OrderDto></returns>
+		IList<OrderDto> OrderSearchByShippingCity(string shippingCity,bool caseSensitive, bool cache, params Expression<Func<IOrder, object>>[] includes);
 
         /// <summary>
         /// Search for Order  Async entities in the database by ShippingCity
@@ -703,8 +704,8 @@ namespace DotNetScaffolder.Domain.Data.ApplicationService
 		/// <param name="caseSensitive">bool</param>
         /// <param name="cache">Enable second level caching</param>
         /// <param name="includes">params Expression<Func<IOrder, object>>[]</param>
-        /// <returns>IList<IOrder></returns>
-		Task<IList<IOrder>> OrderSearchByShippingCityAsync(string shippingCity,bool caseSensitive, bool cache, params Expression<Func<IOrder, object>>[] includes);
+        /// <returns>IList<OrderDto></returns>
+		Task<IList<OrderDto>> OrderSearchByShippingCityAsync(string shippingCity,bool caseSensitive, bool cache, params Expression<Func<IOrder, object>>[] includes);
 
 
         /// <summary>
@@ -714,8 +715,8 @@ namespace DotNetScaffolder.Domain.Data.ApplicationService
 		/// <param name="caseSensitive">bool</param>
         /// <param name="cache">Enable second level caching</param>
         /// <param name="includes">params Expression<Func<IOrder, object>>[]</param>
-        /// <returns>IList<IOrder></returns>
-		IList<IOrder> OrderSearchByShippingZip(string shippingZip,bool caseSensitive, bool cache, params Expression<Func<IOrder, object>>[] includes);
+        /// <returns>IList<OrderDto></returns>
+		IList<OrderDto> OrderSearchByShippingZip(string shippingZip,bool caseSensitive, bool cache, params Expression<Func<IOrder, object>>[] includes);
 
         /// <summary>
         /// Search for Order  Async entities in the database by ShippingZip
@@ -724,8 +725,8 @@ namespace DotNetScaffolder.Domain.Data.ApplicationService
 		/// <param name="caseSensitive">bool</param>
         /// <param name="cache">Enable second level caching</param>
         /// <param name="includes">params Expression<Func<IOrder, object>>[]</param>
-        /// <returns>IList<IOrder></returns>
-		Task<IList<IOrder>> OrderSearchByShippingZipAsync(string shippingZip,bool caseSensitive, bool cache, params Expression<Func<IOrder, object>>[] includes);
+        /// <returns>IList<OrderDto></returns>
+		Task<IList<OrderDto>> OrderSearchByShippingZipAsync(string shippingZip,bool caseSensitive, bool cache, params Expression<Func<IOrder, object>>[] includes);
 
 
         /// <summary>
@@ -735,8 +736,8 @@ namespace DotNetScaffolder.Domain.Data.ApplicationService
 		/// <param name="caseSensitive">bool</param>
         /// <param name="cache">Enable second level caching</param>
         /// <param name="includes">params Expression<Func<IProduct, object>>[]</param>
-        /// <returns>IList<IProduct></returns>
-		IList<IProduct> ProductSearchByProductDescription(string productDescription,bool caseSensitive, bool cache, params Expression<Func<IProduct, object>>[] includes);
+        /// <returns>IList<ProductDto></returns>
+		IList<ProductDto> ProductSearchByProductDescription(string productDescription,bool caseSensitive, bool cache, params Expression<Func<IProduct, object>>[] includes);
 
         /// <summary>
         /// Search for Product  Async entities in the database by ProductDescription
@@ -745,8 +746,8 @@ namespace DotNetScaffolder.Domain.Data.ApplicationService
 		/// <param name="caseSensitive">bool</param>
         /// <param name="cache">Enable second level caching</param>
         /// <param name="includes">params Expression<Func<IProduct, object>>[]</param>
-        /// <returns>IList<IProduct></returns>
-		Task<IList<IProduct>> ProductSearchByProductDescriptionAsync(string productDescription,bool caseSensitive, bool cache, params Expression<Func<IProduct, object>>[] includes);
+        /// <returns>IList<ProductDto></returns>
+		Task<IList<ProductDto>> ProductSearchByProductDescriptionAsync(string productDescription,bool caseSensitive, bool cache, params Expression<Func<IProduct, object>>[] includes);
 
 
         /// <summary>
@@ -756,8 +757,8 @@ namespace DotNetScaffolder.Domain.Data.ApplicationService
 		/// <param name="caseSensitive">bool</param>
         /// <param name="cache">Enable second level caching</param>
         /// <param name="includes">params Expression<Func<ISoftware, object>>[]</param>
-        /// <returns>IList<ISoftware></returns>
-		IList<ISoftware> SoftwareSearchByLicenseCode(string licenseCode,bool caseSensitive, bool cache, params Expression<Func<ISoftware, object>>[] includes);
+        /// <returns>IList<SoftwareDto></returns>
+		IList<SoftwareDto> SoftwareSearchByLicenseCode(string licenseCode,bool caseSensitive, bool cache, params Expression<Func<ISoftware, object>>[] includes);
 
         /// <summary>
         /// Search for Software  Async entities in the database by LicenseCode
@@ -766,8 +767,8 @@ namespace DotNetScaffolder.Domain.Data.ApplicationService
 		/// <param name="caseSensitive">bool</param>
         /// <param name="cache">Enable second level caching</param>
         /// <param name="includes">params Expression<Func<ISoftware, object>>[]</param>
-        /// <returns>IList<ISoftware></returns>
-		Task<IList<ISoftware>> SoftwareSearchByLicenseCodeAsync(string licenseCode,bool caseSensitive, bool cache, params Expression<Func<ISoftware, object>>[] includes);
+        /// <returns>IList<SoftwareDto></returns>
+		Task<IList<SoftwareDto>> SoftwareSearchByLicenseCodeAsync(string licenseCode,bool caseSensitive, bool cache, params Expression<Func<ISoftware, object>>[] includes);
 
 		#endregion
 
@@ -776,23 +777,23 @@ namespace DotNetScaffolder.Domain.Data.ApplicationService
         /// <summary>
         /// Save the BankAccount entity to the database.
         /// </summary>
-        /// <param name="entity">IBankAccount</param>
+        /// <param name="entity">BankAccountDto</param>
         /// <returns>bool</returns>
-		bool BankAccountAdd(IBankAccount entity);
+		bool BankAccountAdd(BankAccountDto entity);
 
         /// <summary>
         /// Update the BankAccount entity in the database if any values have changed
         /// </summary>
-        /// <param name="entity">IBankAccount</param>
+        /// <param name="entity">BankAccountDto</param>
         /// <returns>bool</returns>
-		bool BankAccountUpdate(IBankAccount entity);
+		bool BankAccountUpdate(BankAccountDto entity);
 		
         /// <summary>
         /// Delete the BankAccount entity from the database
         /// </summary>
-        /// <param name="entity">IBankAccount</param>
+        /// <param name="entity">BankAccountDto</param>
         /// <returns>bool</returns>
-		bool BankAccountDelete(IBankAccount entity);
+		bool BankAccountDelete(BankAccountDto entity);
 
 		/// <summary>
         /// Delete the BankAccount entity from the database
@@ -804,23 +805,23 @@ namespace DotNetScaffolder.Domain.Data.ApplicationService
         /// <summary>
         /// Save the BankTransfers entity to the database.
         /// </summary>
-        /// <param name="entity">IBankTransfers</param>
+        /// <param name="entity">BankTransfersDto</param>
         /// <returns>bool</returns>
-		bool BankTransfersAdd(IBankTransfers entity);
+		bool BankTransfersAdd(BankTransfersDto entity);
 
         /// <summary>
         /// Update the BankTransfers entity in the database if any values have changed
         /// </summary>
-        /// <param name="entity">IBankTransfers</param>
+        /// <param name="entity">BankTransfersDto</param>
         /// <returns>bool</returns>
-		bool BankTransfersUpdate(IBankTransfers entity);
+		bool BankTransfersUpdate(BankTransfersDto entity);
 		
         /// <summary>
         /// Delete the BankTransfers entity from the database
         /// </summary>
-        /// <param name="entity">IBankTransfers</param>
+        /// <param name="entity">BankTransfersDto</param>
         /// <returns>bool</returns>
-		bool BankTransfersDelete(IBankTransfers entity);
+		bool BankTransfersDelete(BankTransfersDto entity);
 
 		/// <summary>
         /// Delete the BankTransfers entity from the database
@@ -832,23 +833,23 @@ namespace DotNetScaffolder.Domain.Data.ApplicationService
         /// <summary>
         /// Save the Book entity to the database.
         /// </summary>
-        /// <param name="entity">IBook</param>
+        /// <param name="entity">BookDto</param>
         /// <returns>bool</returns>
-		bool BookAdd(IBook entity);
+		bool BookAdd(BookDto entity);
 
         /// <summary>
         /// Update the Book entity in the database if any values have changed
         /// </summary>
-        /// <param name="entity">IBook</param>
+        /// <param name="entity">BookDto</param>
         /// <returns>bool</returns>
-		bool BookUpdate(IBook entity);
+		bool BookUpdate(BookDto entity);
 		
         /// <summary>
         /// Delete the Book entity from the database
         /// </summary>
-        /// <param name="entity">IBook</param>
+        /// <param name="entity">BookDto</param>
         /// <returns>bool</returns>
-		bool BookDelete(IBook entity);
+		bool BookDelete(BookDto entity);
 
 		/// <summary>
         /// Delete the Book entity from the database
@@ -860,23 +861,23 @@ namespace DotNetScaffolder.Domain.Data.ApplicationService
         /// <summary>
         /// Save the Country entity to the database.
         /// </summary>
-        /// <param name="entity">ICountry</param>
+        /// <param name="entity">CountryDto</param>
         /// <returns>bool</returns>
-		bool CountryAdd(ICountry entity);
+		bool CountryAdd(CountryDto entity);
 
         /// <summary>
         /// Update the Country entity in the database if any values have changed
         /// </summary>
-        /// <param name="entity">ICountry</param>
+        /// <param name="entity">CountryDto</param>
         /// <returns>bool</returns>
-		bool CountryUpdate(ICountry entity);
+		bool CountryUpdate(CountryDto entity);
 		
         /// <summary>
         /// Delete the Country entity from the database
         /// </summary>
-        /// <param name="entity">ICountry</param>
+        /// <param name="entity">CountryDto</param>
         /// <returns>bool</returns>
-		bool CountryDelete(ICountry entity);
+		bool CountryDelete(CountryDto entity);
 
 		/// <summary>
         /// Delete the Country entity from the database
@@ -888,23 +889,23 @@ namespace DotNetScaffolder.Domain.Data.ApplicationService
         /// <summary>
         /// Save the Customer entity to the database.
         /// </summary>
-        /// <param name="entity">ICustomer</param>
+        /// <param name="entity">CustomerDto</param>
         /// <returns>bool</returns>
-		bool CustomerAdd(ICustomer entity);
+		bool CustomerAdd(CustomerDto entity);
 
         /// <summary>
         /// Update the Customer entity in the database if any values have changed
         /// </summary>
-        /// <param name="entity">ICustomer</param>
+        /// <param name="entity">CustomerDto</param>
         /// <returns>bool</returns>
-		bool CustomerUpdate(ICustomer entity);
+		bool CustomerUpdate(CustomerDto entity);
 		
         /// <summary>
         /// Delete the Customer entity from the database
         /// </summary>
-        /// <param name="entity">ICustomer</param>
+        /// <param name="entity">CustomerDto</param>
         /// <returns>bool</returns>
-		bool CustomerDelete(ICustomer entity);
+		bool CustomerDelete(CustomerDto entity);
 
 		/// <summary>
         /// Delete the Customer entity from the database
@@ -916,23 +917,23 @@ namespace DotNetScaffolder.Domain.Data.ApplicationService
         /// <summary>
         /// Save the Order entity to the database.
         /// </summary>
-        /// <param name="entity">IOrder</param>
+        /// <param name="entity">OrderDto</param>
         /// <returns>bool</returns>
-		bool OrderAdd(IOrder entity);
+		bool OrderAdd(OrderDto entity);
 
         /// <summary>
         /// Update the Order entity in the database if any values have changed
         /// </summary>
-        /// <param name="entity">IOrder</param>
+        /// <param name="entity">OrderDto</param>
         /// <returns>bool</returns>
-		bool OrderUpdate(IOrder entity);
+		bool OrderUpdate(OrderDto entity);
 		
         /// <summary>
         /// Delete the Order entity from the database
         /// </summary>
-        /// <param name="entity">IOrder</param>
+        /// <param name="entity">OrderDto</param>
         /// <returns>bool</returns>
-		bool OrderDelete(IOrder entity);
+		bool OrderDelete(OrderDto entity);
 
 		/// <summary>
         /// Delete the Order entity from the database
@@ -944,23 +945,23 @@ namespace DotNetScaffolder.Domain.Data.ApplicationService
         /// <summary>
         /// Save the OrderDetails entity to the database.
         /// </summary>
-        /// <param name="entity">IOrderDetails</param>
+        /// <param name="entity">OrderDetailsDto</param>
         /// <returns>bool</returns>
-		bool OrderDetailsAdd(IOrderDetails entity);
+		bool OrderDetailsAdd(OrderDetailsDto entity);
 
         /// <summary>
         /// Update the OrderDetails entity in the database if any values have changed
         /// </summary>
-        /// <param name="entity">IOrderDetails</param>
+        /// <param name="entity">OrderDetailsDto</param>
         /// <returns>bool</returns>
-		bool OrderDetailsUpdate(IOrderDetails entity);
+		bool OrderDetailsUpdate(OrderDetailsDto entity);
 		
         /// <summary>
         /// Delete the OrderDetails entity from the database
         /// </summary>
-        /// <param name="entity">IOrderDetails</param>
+        /// <param name="entity">OrderDetailsDto</param>
         /// <returns>bool</returns>
-		bool OrderDetailsDelete(IOrderDetails entity);
+		bool OrderDetailsDelete(OrderDetailsDto entity);
 
 		/// <summary>
         /// Delete the OrderDetails entity from the database
@@ -972,23 +973,23 @@ namespace DotNetScaffolder.Domain.Data.ApplicationService
         /// <summary>
         /// Save the Product entity to the database.
         /// </summary>
-        /// <param name="entity">IProduct</param>
+        /// <param name="entity">ProductDto</param>
         /// <returns>bool</returns>
-		bool ProductAdd(IProduct entity);
+		bool ProductAdd(ProductDto entity);
 
         /// <summary>
         /// Update the Product entity in the database if any values have changed
         /// </summary>
-        /// <param name="entity">IProduct</param>
+        /// <param name="entity">ProductDto</param>
         /// <returns>bool</returns>
-		bool ProductUpdate(IProduct entity);
+		bool ProductUpdate(ProductDto entity);
 		
         /// <summary>
         /// Delete the Product entity from the database
         /// </summary>
-        /// <param name="entity">IProduct</param>
+        /// <param name="entity">ProductDto</param>
         /// <returns>bool</returns>
-		bool ProductDelete(IProduct entity);
+		bool ProductDelete(ProductDto entity);
 
 		/// <summary>
         /// Delete the Product entity from the database
@@ -1000,23 +1001,23 @@ namespace DotNetScaffolder.Domain.Data.ApplicationService
         /// <summary>
         /// Save the Software entity to the database.
         /// </summary>
-        /// <param name="entity">ISoftware</param>
+        /// <param name="entity">SoftwareDto</param>
         /// <returns>bool</returns>
-		bool SoftwareAdd(ISoftware entity);
+		bool SoftwareAdd(SoftwareDto entity);
 
         /// <summary>
         /// Update the Software entity in the database if any values have changed
         /// </summary>
-        /// <param name="entity">ISoftware</param>
+        /// <param name="entity">SoftwareDto</param>
         /// <returns>bool</returns>
-		bool SoftwareUpdate(ISoftware entity);
+		bool SoftwareUpdate(SoftwareDto entity);
 		
         /// <summary>
         /// Delete the Software entity from the database
         /// </summary>
-        /// <param name="entity">ISoftware</param>
+        /// <param name="entity">SoftwareDto</param>
         /// <returns>bool</returns>
-		bool SoftwareDelete(ISoftware entity);
+		bool SoftwareDelete(SoftwareDto entity);
 
 		/// <summary>
         /// Delete the Software entity from the database
@@ -1353,352 +1354,352 @@ namespace DotNetScaffolder.Domain.Data.ApplicationService
         ///     Bulk delete entities
         /// </summary>
         /// <param name="items"></param>
-        void  BankAccountBulkDelete(IEnumerable<IBankAccount> items);
+        void  BankAccountBulkDelete(IEnumerable<BankAccountDto> items);
 
         /// <summary>
         ///     Bulk delete entities async
         /// </summary>
         /// <param name="items"></param>
         /// <returns></returns>
-        Task  BankAccountBulkDeleteAsync(IEnumerable<IBankAccount> items);
+        Task  BankAccountBulkDeleteAsync(IEnumerable<BankAccountDto> items);
 
         /// <summary>
         ///     Bulk insert entities
         /// </summary>
         /// <param name="items"></param>
-        void  BankAccountBulkInsert(IEnumerable<IBankAccount> items);
+        void  BankAccountBulkInsert(IEnumerable<BankAccountDto> items);
         
         /// <summary>
         /// Bulk insert entities async
         /// </summary>
         /// <param name="items"></param>
         /// <returns></returns>
-        Task  BankAccountBulkInsertAsync(IEnumerable<IBankAccount> items);
+        Task  BankAccountBulkInsertAsync(IEnumerable<BankAccountDto> items);
 
         /// <summary>
         /// Bulk update entities 
         /// </summary>
         /// <param name="items"></param>
-        void  BankAccountBulkUpdate(IEnumerable<IBankAccount> items);
+        void  BankAccountBulkUpdate(IEnumerable<BankAccountDto> items);
 
         /// <summary>
         /// Bulk update entities async
         /// </summary>
         /// <param name="items"></param>
         /// <returns></returns>
-        Task  BankAccountBulkUpdateAsync(IEnumerable<IBankAccount> items);
+        Task  BankAccountBulkUpdateAsync(IEnumerable<BankAccountDto> items);
 	
         /// <summary>
         ///     Bulk delete entities
         /// </summary>
         /// <param name="items"></param>
-        void  BankTransfersBulkDelete(IEnumerable<IBankTransfers> items);
+        void  BankTransfersBulkDelete(IEnumerable<BankTransfersDto> items);
 
         /// <summary>
         ///     Bulk delete entities async
         /// </summary>
         /// <param name="items"></param>
         /// <returns></returns>
-        Task  BankTransfersBulkDeleteAsync(IEnumerable<IBankTransfers> items);
+        Task  BankTransfersBulkDeleteAsync(IEnumerable<BankTransfersDto> items);
 
         /// <summary>
         ///     Bulk insert entities
         /// </summary>
         /// <param name="items"></param>
-        void  BankTransfersBulkInsert(IEnumerable<IBankTransfers> items);
+        void  BankTransfersBulkInsert(IEnumerable<BankTransfersDto> items);
         
         /// <summary>
         /// Bulk insert entities async
         /// </summary>
         /// <param name="items"></param>
         /// <returns></returns>
-        Task  BankTransfersBulkInsertAsync(IEnumerable<IBankTransfers> items);
+        Task  BankTransfersBulkInsertAsync(IEnumerable<BankTransfersDto> items);
 
         /// <summary>
         /// Bulk update entities 
         /// </summary>
         /// <param name="items"></param>
-        void  BankTransfersBulkUpdate(IEnumerable<IBankTransfers> items);
+        void  BankTransfersBulkUpdate(IEnumerable<BankTransfersDto> items);
 
         /// <summary>
         /// Bulk update entities async
         /// </summary>
         /// <param name="items"></param>
         /// <returns></returns>
-        Task  BankTransfersBulkUpdateAsync(IEnumerable<IBankTransfers> items);
+        Task  BankTransfersBulkUpdateAsync(IEnumerable<BankTransfersDto> items);
 	
         /// <summary>
         ///     Bulk delete entities
         /// </summary>
         /// <param name="items"></param>
-        void  BookBulkDelete(IEnumerable<IBook> items);
+        void  BookBulkDelete(IEnumerable<BookDto> items);
 
         /// <summary>
         ///     Bulk delete entities async
         /// </summary>
         /// <param name="items"></param>
         /// <returns></returns>
-        Task  BookBulkDeleteAsync(IEnumerable<IBook> items);
+        Task  BookBulkDeleteAsync(IEnumerable<BookDto> items);
 
         /// <summary>
         ///     Bulk insert entities
         /// </summary>
         /// <param name="items"></param>
-        void  BookBulkInsert(IEnumerable<IBook> items);
+        void  BookBulkInsert(IEnumerable<BookDto> items);
         
         /// <summary>
         /// Bulk insert entities async
         /// </summary>
         /// <param name="items"></param>
         /// <returns></returns>
-        Task  BookBulkInsertAsync(IEnumerable<IBook> items);
+        Task  BookBulkInsertAsync(IEnumerable<BookDto> items);
 
         /// <summary>
         /// Bulk update entities 
         /// </summary>
         /// <param name="items"></param>
-        void  BookBulkUpdate(IEnumerable<IBook> items);
+        void  BookBulkUpdate(IEnumerable<BookDto> items);
 
         /// <summary>
         /// Bulk update entities async
         /// </summary>
         /// <param name="items"></param>
         /// <returns></returns>
-        Task  BookBulkUpdateAsync(IEnumerable<IBook> items);
+        Task  BookBulkUpdateAsync(IEnumerable<BookDto> items);
 	
         /// <summary>
         ///     Bulk delete entities
         /// </summary>
         /// <param name="items"></param>
-        void  CountryBulkDelete(IEnumerable<ICountry> items);
+        void  CountryBulkDelete(IEnumerable<CountryDto> items);
 
         /// <summary>
         ///     Bulk delete entities async
         /// </summary>
         /// <param name="items"></param>
         /// <returns></returns>
-        Task  CountryBulkDeleteAsync(IEnumerable<ICountry> items);
+        Task  CountryBulkDeleteAsync(IEnumerable<CountryDto> items);
 
         /// <summary>
         ///     Bulk insert entities
         /// </summary>
         /// <param name="items"></param>
-        void  CountryBulkInsert(IEnumerable<ICountry> items);
+        void  CountryBulkInsert(IEnumerable<CountryDto> items);
         
         /// <summary>
         /// Bulk insert entities async
         /// </summary>
         /// <param name="items"></param>
         /// <returns></returns>
-        Task  CountryBulkInsertAsync(IEnumerable<ICountry> items);
+        Task  CountryBulkInsertAsync(IEnumerable<CountryDto> items);
 
         /// <summary>
         /// Bulk update entities 
         /// </summary>
         /// <param name="items"></param>
-        void  CountryBulkUpdate(IEnumerable<ICountry> items);
+        void  CountryBulkUpdate(IEnumerable<CountryDto> items);
 
         /// <summary>
         /// Bulk update entities async
         /// </summary>
         /// <param name="items"></param>
         /// <returns></returns>
-        Task  CountryBulkUpdateAsync(IEnumerable<ICountry> items);
+        Task  CountryBulkUpdateAsync(IEnumerable<CountryDto> items);
 	
         /// <summary>
         ///     Bulk delete entities
         /// </summary>
         /// <param name="items"></param>
-        void  CustomerBulkDelete(IEnumerable<ICustomer> items);
+        void  CustomerBulkDelete(IEnumerable<CustomerDto> items);
 
         /// <summary>
         ///     Bulk delete entities async
         /// </summary>
         /// <param name="items"></param>
         /// <returns></returns>
-        Task  CustomerBulkDeleteAsync(IEnumerable<ICustomer> items);
+        Task  CustomerBulkDeleteAsync(IEnumerable<CustomerDto> items);
 
         /// <summary>
         ///     Bulk insert entities
         /// </summary>
         /// <param name="items"></param>
-        void  CustomerBulkInsert(IEnumerable<ICustomer> items);
+        void  CustomerBulkInsert(IEnumerable<CustomerDto> items);
         
         /// <summary>
         /// Bulk insert entities async
         /// </summary>
         /// <param name="items"></param>
         /// <returns></returns>
-        Task  CustomerBulkInsertAsync(IEnumerable<ICustomer> items);
+        Task  CustomerBulkInsertAsync(IEnumerable<CustomerDto> items);
 
         /// <summary>
         /// Bulk update entities 
         /// </summary>
         /// <param name="items"></param>
-        void  CustomerBulkUpdate(IEnumerable<ICustomer> items);
+        void  CustomerBulkUpdate(IEnumerable<CustomerDto> items);
 
         /// <summary>
         /// Bulk update entities async
         /// </summary>
         /// <param name="items"></param>
         /// <returns></returns>
-        Task  CustomerBulkUpdateAsync(IEnumerable<ICustomer> items);
+        Task  CustomerBulkUpdateAsync(IEnumerable<CustomerDto> items);
 	
         /// <summary>
         ///     Bulk delete entities
         /// </summary>
         /// <param name="items"></param>
-        void  OrderBulkDelete(IEnumerable<IOrder> items);
+        void  OrderBulkDelete(IEnumerable<OrderDto> items);
 
         /// <summary>
         ///     Bulk delete entities async
         /// </summary>
         /// <param name="items"></param>
         /// <returns></returns>
-        Task  OrderBulkDeleteAsync(IEnumerable<IOrder> items);
+        Task  OrderBulkDeleteAsync(IEnumerable<OrderDto> items);
 
         /// <summary>
         ///     Bulk insert entities
         /// </summary>
         /// <param name="items"></param>
-        void  OrderBulkInsert(IEnumerable<IOrder> items);
+        void  OrderBulkInsert(IEnumerable<OrderDto> items);
         
         /// <summary>
         /// Bulk insert entities async
         /// </summary>
         /// <param name="items"></param>
         /// <returns></returns>
-        Task  OrderBulkInsertAsync(IEnumerable<IOrder> items);
+        Task  OrderBulkInsertAsync(IEnumerable<OrderDto> items);
 
         /// <summary>
         /// Bulk update entities 
         /// </summary>
         /// <param name="items"></param>
-        void  OrderBulkUpdate(IEnumerable<IOrder> items);
+        void  OrderBulkUpdate(IEnumerable<OrderDto> items);
 
         /// <summary>
         /// Bulk update entities async
         /// </summary>
         /// <param name="items"></param>
         /// <returns></returns>
-        Task  OrderBulkUpdateAsync(IEnumerable<IOrder> items);
+        Task  OrderBulkUpdateAsync(IEnumerable<OrderDto> items);
 	
         /// <summary>
         ///     Bulk delete entities
         /// </summary>
         /// <param name="items"></param>
-        void  OrderDetailsBulkDelete(IEnumerable<IOrderDetails> items);
+        void  OrderDetailsBulkDelete(IEnumerable<OrderDetailsDto> items);
 
         /// <summary>
         ///     Bulk delete entities async
         /// </summary>
         /// <param name="items"></param>
         /// <returns></returns>
-        Task  OrderDetailsBulkDeleteAsync(IEnumerable<IOrderDetails> items);
+        Task  OrderDetailsBulkDeleteAsync(IEnumerable<OrderDetailsDto> items);
 
         /// <summary>
         ///     Bulk insert entities
         /// </summary>
         /// <param name="items"></param>
-        void  OrderDetailsBulkInsert(IEnumerable<IOrderDetails> items);
+        void  OrderDetailsBulkInsert(IEnumerable<OrderDetailsDto> items);
         
         /// <summary>
         /// Bulk insert entities async
         /// </summary>
         /// <param name="items"></param>
         /// <returns></returns>
-        Task  OrderDetailsBulkInsertAsync(IEnumerable<IOrderDetails> items);
+        Task  OrderDetailsBulkInsertAsync(IEnumerable<OrderDetailsDto> items);
 
         /// <summary>
         /// Bulk update entities 
         /// </summary>
         /// <param name="items"></param>
-        void  OrderDetailsBulkUpdate(IEnumerable<IOrderDetails> items);
+        void  OrderDetailsBulkUpdate(IEnumerable<OrderDetailsDto> items);
 
         /// <summary>
         /// Bulk update entities async
         /// </summary>
         /// <param name="items"></param>
         /// <returns></returns>
-        Task  OrderDetailsBulkUpdateAsync(IEnumerable<IOrderDetails> items);
+        Task  OrderDetailsBulkUpdateAsync(IEnumerable<OrderDetailsDto> items);
 	
         /// <summary>
         ///     Bulk delete entities
         /// </summary>
         /// <param name="items"></param>
-        void  ProductBulkDelete(IEnumerable<IProduct> items);
+        void  ProductBulkDelete(IEnumerable<ProductDto> items);
 
         /// <summary>
         ///     Bulk delete entities async
         /// </summary>
         /// <param name="items"></param>
         /// <returns></returns>
-        Task  ProductBulkDeleteAsync(IEnumerable<IProduct> items);
+        Task  ProductBulkDeleteAsync(IEnumerable<ProductDto> items);
 
         /// <summary>
         ///     Bulk insert entities
         /// </summary>
         /// <param name="items"></param>
-        void  ProductBulkInsert(IEnumerable<IProduct> items);
+        void  ProductBulkInsert(IEnumerable<ProductDto> items);
         
         /// <summary>
         /// Bulk insert entities async
         /// </summary>
         /// <param name="items"></param>
         /// <returns></returns>
-        Task  ProductBulkInsertAsync(IEnumerable<IProduct> items);
+        Task  ProductBulkInsertAsync(IEnumerable<ProductDto> items);
 
         /// <summary>
         /// Bulk update entities 
         /// </summary>
         /// <param name="items"></param>
-        void  ProductBulkUpdate(IEnumerable<IProduct> items);
+        void  ProductBulkUpdate(IEnumerable<ProductDto> items);
 
         /// <summary>
         /// Bulk update entities async
         /// </summary>
         /// <param name="items"></param>
         /// <returns></returns>
-        Task  ProductBulkUpdateAsync(IEnumerable<IProduct> items);
+        Task  ProductBulkUpdateAsync(IEnumerable<ProductDto> items);
 	
         /// <summary>
         ///     Bulk delete entities
         /// </summary>
         /// <param name="items"></param>
-        void  SoftwareBulkDelete(IEnumerable<ISoftware> items);
+        void  SoftwareBulkDelete(IEnumerable<SoftwareDto> items);
 
         /// <summary>
         ///     Bulk delete entities async
         /// </summary>
         /// <param name="items"></param>
         /// <returns></returns>
-        Task  SoftwareBulkDeleteAsync(IEnumerable<ISoftware> items);
+        Task  SoftwareBulkDeleteAsync(IEnumerable<SoftwareDto> items);
 
         /// <summary>
         ///     Bulk insert entities
         /// </summary>
         /// <param name="items"></param>
-        void  SoftwareBulkInsert(IEnumerable<ISoftware> items);
+        void  SoftwareBulkInsert(IEnumerable<SoftwareDto> items);
         
         /// <summary>
         /// Bulk insert entities async
         /// </summary>
         /// <param name="items"></param>
         /// <returns></returns>
-        Task  SoftwareBulkInsertAsync(IEnumerable<ISoftware> items);
+        Task  SoftwareBulkInsertAsync(IEnumerable<SoftwareDto> items);
 
         /// <summary>
         /// Bulk update entities 
         /// </summary>
         /// <param name="items"></param>
-        void  SoftwareBulkUpdate(IEnumerable<ISoftware> items);
+        void  SoftwareBulkUpdate(IEnumerable<SoftwareDto> items);
 
         /// <summary>
         /// Bulk update entities async
         /// </summary>
         /// <param name="items"></param>
         /// <returns></returns>
-        Task  SoftwareBulkUpdateAsync(IEnumerable<ISoftware> items);
+        Task  SoftwareBulkUpdateAsync(IEnumerable<SoftwareDto> items);
 
         #endregion
     }

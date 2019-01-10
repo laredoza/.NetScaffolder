@@ -23,6 +23,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.Dto;
+using DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity;
 using DotNetScaffolder.Domain.Core.Interfaces;
 
 namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
@@ -30,7 +31,7 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
 	/// <summary>
 	/// The CustomerRepository interface that defines database functions for the Customer table
 	/// </summary>
-	public partial interface ICustomerRepository : IRepository<ICustomer>
+	public partial interface ICustomerRepository : IRepository<Customer>
 	{
 		#region Load
 
@@ -40,8 +41,8 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <param name="customerId">int</param>
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-        /// <returns>ICustomer</returns>
-		ICustomer LoadByCustomerId(int customerId, bool cache, params Expression<Func<ICustomer, object>>[] includes);
+        /// <returns>Customer</returns>
+		Customer LoadByCustomerId(int customerId, bool cache, params Expression<Func<ICustomer, object>>[] includes);
 		
         /// <summary>
         /// Load Customer entities async from the database using the composite primary keys
@@ -49,8 +50,8 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <param name="customerId">int</param>
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-        /// <returns>ICustomer</returns>
-		Task<ICustomer> LoadByCustomerIdAsync(int customerId, bool cache, params Expression<Func<ICustomer, object>>[] includes);
+        /// <returns>Customer</returns>
+		Task<Customer> LoadByCustomerIdAsync(int customerId, bool cache, params Expression<Func<ICustomer, object>>[] includes);
 
         /// <summary>
         /// Load Customer entities from the database using the CountryId field
@@ -58,8 +59,8 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <param name="countryId">Nullable<int></param
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-        /// <returns>IList<ICustomer></returns>
-		IList<ICustomer> LoadByCountryId(Nullable<int> countryId, bool cache,  params Expression<Func<ICustomer, object>>[] includes);
+        /// <returns>IList<Customer></returns>
+		IList<Customer> LoadByCountryId(Nullable<int> countryId, bool cache,  params Expression<Func<ICustomer, object>>[] includes);
 		
         /// <summary>
         /// Load Customer entities async from the database using the CountryId field
@@ -67,8 +68,8 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <param name="countryId">Nullable<int></param
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-        /// <returns>IList<ICustomer></returns>
-		Task<IList<ICustomer>> LoadByCountryIdAsync(Nullable<int> countryId, bool cache, params Expression<Func<ICustomer, object>>[] includes);
+        /// <returns>IList<Customer></returns>
+		Task<IList<Customer>> LoadByCountryIdAsync(Nullable<int> countryId, bool cache, params Expression<Func<ICustomer, object>>[] includes);
 
         /// <summary>
         /// Load Customer entities from the database using the IsEnabled field
@@ -76,8 +77,8 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <param name="isEnabled">bool</param
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-        /// <returns>IList<ICustomer></returns>
-		IList<ICustomer> LoadByIsEnabled(bool isEnabled, bool cache,  params Expression<Func<ICustomer, object>>[] includes);
+        /// <returns>IList<Customer></returns>
+		IList<Customer> LoadByIsEnabled(bool isEnabled, bool cache,  params Expression<Func<ICustomer, object>>[] includes);
 		
         /// <summary>
         /// Load Customer entities async from the database using the IsEnabled field
@@ -85,24 +86,24 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <param name="isEnabled">bool</param
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-        /// <returns>IList<ICustomer></returns>
-		Task<IList<ICustomer>> LoadByIsEnabledAsync(bool isEnabled, bool cache, params Expression<Func<ICustomer, object>>[] includes);
+        /// <returns>IList<Customer></returns>
+		Task<IList<Customer>> LoadByIsEnabledAsync(bool isEnabled, bool cache, params Expression<Func<ICustomer, object>>[] includes);
 
         /// <summary>
         /// Load all Customer entities from the database.
         /// </summary>
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-        /// <returns>IList<ICustomer></returns>
-		IList<ICustomer> LoadAll( bool cache, params Expression<Func<ICustomer, object>>[] includes);
+        /// <returns>IList<Customer></returns>
+		IList<Customer> LoadAll( bool cache, params Expression<Func<ICustomer, object>>[] includes);
 		
         /// <summary>
         /// Load all Customer entities async from the database.
         /// </summary>
         /// <param name="cache">Use 2nd level caching if enabled</param>
-		/// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-        /// <returns>IList<ICustomer></returns>
-		Task<IList<ICustomer>> LoadAllAsync(bool cache, params Expression<Func<ICustomer, object>>[] includes);
+		/// <param name="includes">params Expression<Func<Customer, object>>[]</param>
+        /// <returns>IList<Customer></returns>
+		Task<IList<Customer>> LoadAllAsync(bool cache, params Expression<Func<ICustomer, object>>[] includes);
 		
 		#endregion
 
@@ -115,8 +116,8 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="caseSensitive">bool</param
 		/// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-        /// <returns>IList<ICustomer></returns>
-		IList<ICustomer> SearchByCustomerCode(string customerCode, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes);
+        /// <returns>IList<Customer></returns>
+		IList<Customer> SearchByCustomerCode(string customerCode, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes);
 		
         /// <summary>
         /// Search for Customer entities async in the database by CustomerCode
@@ -125,8 +126,8 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="caseSensitive">bool</param
 		/// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-        /// <returns>IList<ICustomer></returns>
-		Task<IList<ICustomer>> SearchByCustomerCodeAsync(string customerCode, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes);
+        /// <returns>IList<Customer></returns>
+		Task<IList<Customer>> SearchByCustomerCodeAsync(string customerCode, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes);
 
         /// <summary>
         /// Search for Customer entities in the database by CompanyName
@@ -135,8 +136,8 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="caseSensitive">bool</param
 		/// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-        /// <returns>IList<ICustomer></returns>
-		IList<ICustomer> SearchByCompanyName(string companyName, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes);
+        /// <returns>IList<Customer></returns>
+		IList<Customer> SearchByCompanyName(string companyName, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes);
 		
         /// <summary>
         /// Search for Customer entities async in the database by CompanyName
@@ -145,8 +146,8 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="caseSensitive">bool</param
 		/// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-        /// <returns>IList<ICustomer></returns>
-		Task<IList<ICustomer>> SearchByCompanyNameAsync(string companyName, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes);
+        /// <returns>IList<Customer></returns>
+		Task<IList<Customer>> SearchByCompanyNameAsync(string companyName, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes);
 
         /// <summary>
         /// Search for Customer entities in the database by ContactName
@@ -155,8 +156,8 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="caseSensitive">bool</param
 		/// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-        /// <returns>IList<ICustomer></returns>
-		IList<ICustomer> SearchByContactName(string contactName, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes);
+        /// <returns>IList<Customer></returns>
+		IList<Customer> SearchByContactName(string contactName, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes);
 		
         /// <summary>
         /// Search for Customer entities async in the database by ContactName
@@ -165,8 +166,8 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="caseSensitive">bool</param
 		/// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-        /// <returns>IList<ICustomer></returns>
-		Task<IList<ICustomer>> SearchByContactNameAsync(string contactName, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes);
+        /// <returns>IList<Customer></returns>
+		Task<IList<Customer>> SearchByContactNameAsync(string contactName, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes);
 
         /// <summary>
         /// Search for Customer entities in the database by ContactTitle
@@ -175,8 +176,8 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="caseSensitive">bool</param
 		/// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-        /// <returns>IList<ICustomer></returns>
-		IList<ICustomer> SearchByContactTitle(string contactTitle, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes);
+        /// <returns>IList<Customer></returns>
+		IList<Customer> SearchByContactTitle(string contactTitle, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes);
 		
         /// <summary>
         /// Search for Customer entities async in the database by ContactTitle
@@ -185,8 +186,8 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="caseSensitive">bool</param
 		/// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-        /// <returns>IList<ICustomer></returns>
-		Task<IList<ICustomer>> SearchByContactTitleAsync(string contactTitle, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes);
+        /// <returns>IList<Customer></returns>
+		Task<IList<Customer>> SearchByContactTitleAsync(string contactTitle, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes);
 
         /// <summary>
         /// Search for Customer entities in the database by Address
@@ -195,8 +196,8 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="caseSensitive">bool</param
 		/// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-        /// <returns>IList<ICustomer></returns>
-		IList<ICustomer> SearchByAddress(string address, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes);
+        /// <returns>IList<Customer></returns>
+		IList<Customer> SearchByAddress(string address, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes);
 		
         /// <summary>
         /// Search for Customer entities async in the database by Address
@@ -205,8 +206,8 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="caseSensitive">bool</param
 		/// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-        /// <returns>IList<ICustomer></returns>
-		Task<IList<ICustomer>> SearchByAddressAsync(string address, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes);
+        /// <returns>IList<Customer></returns>
+		Task<IList<Customer>> SearchByAddressAsync(string address, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes);
 
         /// <summary>
         /// Search for Customer entities in the database by City
@@ -215,8 +216,8 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="caseSensitive">bool</param
 		/// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-        /// <returns>IList<ICustomer></returns>
-		IList<ICustomer> SearchByCity(string city, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes);
+        /// <returns>IList<Customer></returns>
+		IList<Customer> SearchByCity(string city, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes);
 		
         /// <summary>
         /// Search for Customer entities async in the database by City
@@ -225,8 +226,8 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="caseSensitive">bool</param
 		/// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-        /// <returns>IList<ICustomer></returns>
-		Task<IList<ICustomer>> SearchByCityAsync(string city, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes);
+        /// <returns>IList<Customer></returns>
+		Task<IList<Customer>> SearchByCityAsync(string city, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes);
 
         /// <summary>
         /// Search for Customer entities in the database by PostalCode
@@ -235,8 +236,8 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="caseSensitive">bool</param
 		/// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-        /// <returns>IList<ICustomer></returns>
-		IList<ICustomer> SearchByPostalCode(string postalCode, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes);
+        /// <returns>IList<Customer></returns>
+		IList<Customer> SearchByPostalCode(string postalCode, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes);
 		
         /// <summary>
         /// Search for Customer entities async in the database by PostalCode
@@ -245,8 +246,8 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="caseSensitive">bool</param
 		/// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-        /// <returns>IList<ICustomer></returns>
-		Task<IList<ICustomer>> SearchByPostalCodeAsync(string postalCode, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes);
+        /// <returns>IList<Customer></returns>
+		Task<IList<Customer>> SearchByPostalCodeAsync(string postalCode, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes);
 
         /// <summary>
         /// Search for Customer entities in the database by Telephone
@@ -255,8 +256,8 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="caseSensitive">bool</param
 		/// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-        /// <returns>IList<ICustomer></returns>
-		IList<ICustomer> SearchByTelephone(string telephone, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes);
+        /// <returns>IList<Customer></returns>
+		IList<Customer> SearchByTelephone(string telephone, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes);
 		
         /// <summary>
         /// Search for Customer entities async in the database by Telephone
@@ -265,8 +266,8 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="caseSensitive">bool</param
 		/// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-        /// <returns>IList<ICustomer></returns>
-		Task<IList<ICustomer>> SearchByTelephoneAsync(string telephone, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes);
+        /// <returns>IList<Customer></returns>
+		Task<IList<Customer>> SearchByTelephoneAsync(string telephone, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes);
 
         /// <summary>
         /// Search for Customer entities in the database by Fax
@@ -275,8 +276,8 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="caseSensitive">bool</param
 		/// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-        /// <returns>IList<ICustomer></returns>
-		IList<ICustomer> SearchByFax(string fax, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes);
+        /// <returns>IList<Customer></returns>
+		IList<Customer> SearchByFax(string fax, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes);
 		
         /// <summary>
         /// Search for Customer entities async in the database by Fax
@@ -285,8 +286,8 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="caseSensitive">bool</param
 		/// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-        /// <returns>IList<ICustomer></returns>
-		Task<IList<ICustomer>> SearchByFaxAsync(string fax, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes);
+        /// <returns>IList<Customer></returns>
+		Task<IList<Customer>> SearchByFaxAsync(string fax, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes);
 
         /// <summary>
         /// Search for Customer entities in the database by Photo
@@ -295,8 +296,8 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="caseSensitive">bool</param
 		/// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-        /// <returns>IList<ICustomer></returns>
-		IList<ICustomer> SearchByPhoto(string photo, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes);
+        /// <returns>IList<Customer></returns>
+		IList<Customer> SearchByPhoto(string photo, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes);
 		
         /// <summary>
         /// Search for Customer entities async in the database by Photo
@@ -305,8 +306,8 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="caseSensitive">bool</param
 		/// <param name="includes">params Expression<Func<ICustomer, object>>[]</param>
-        /// <returns>IList<ICustomer></returns>
-		Task<IList<ICustomer>> SearchByPhotoAsync(string photo, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes);
+        /// <returns>IList<Customer></returns>
+		Task<IList<Customer>> SearchByPhotoAsync(string photo, bool cache, bool caseSensitive = false, params Expression<Func<ICustomer, object>>[] includes);
 
 		#endregion
 		
@@ -317,42 +318,42 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// </summary>
         /// <param name="entity">ICustomer</param>
         /// <returns>bool</returns>
-		bool Add(ICustomer entity);
+		bool Add(Customer entity);
 		
         /// <summary>
         /// Add the Customer entity async to the database.
         /// </summary>
         /// <param name="entity">ICustomer</param>
         /// <returns>bool</returns>
-		Task<bool> AddAsync(ICustomer entity);
+		Task<bool> AddAsync(Customer entity);
 
         /// <summary>
         /// Update the Customer entity in the database if any values have changed
         /// </summary>
-        /// <param name="entity">ICustomer</param>
+        /// <param name="entity">Customer</param>
         /// <returns>bool</returns>
-		bool Update(ICustomer entity);
+		bool Update(Customer entity);
 		
         /// <summary>
         /// Update the Customer entity async in the database if any values have changed
         /// </summary>
-        /// <param name="entity">ICustomer</param>
+        /// <param name="entity">Customer</param>
         /// <returns>bool</returns>
-		Task<bool> UpdateAsync(ICustomer entity);
+		Task<bool> UpdateAsync(Customer entity);
 		
         /// <summary>
         /// Delete the Customer entity from the database
         /// </summary>
-        /// <param name="entity">ICustomer</param>
+        /// <param name="entity">Customer</param>
         /// <returns>bool</returns>
-		bool Delete(ICustomer entity);
+		bool Delete(Customer entity);
 		
         /// <summary>
         /// Delete the Customer entity async from the database
         /// </summary>
-        /// <param name="entity">ICustomer</param>
+        /// <param name="entity">Customer</param>
         /// <returns>bool</returns>
-		Task<bool> DeleteAsync(ICustomer entity);
+		Task<bool> DeleteAsync(Customer entity);
 
 		/// <summary>
         /// Delete the Customer entity from the database
@@ -389,7 +390,7 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
-        void BulkDelete(IEnumerable<ICustomer> items);
+        void BulkDelete(IEnumerable<Customer> items);
 
         /// <summary>
         ///     Bulk delete entities async
@@ -397,14 +398,14 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
         /// <returns></returns>
-        Task BulkDeleteAsync(IEnumerable<ICustomer> items);
+        Task BulkDeleteAsync(IEnumerable<Customer> items);
 
         /// <summary>
         ///     Bulk insert entities
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
-        void BulkInsert(IEnumerable<ICustomer> items);
+        void BulkInsert(IEnumerable<Customer> items);
         
         /// <summary>
         /// Bulk insert entities async
@@ -412,14 +413,14 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
         /// <returns></returns>
-        Task BulkInsertAsync(IEnumerable<ICustomer> items);
+        Task BulkInsertAsync(IEnumerable<Customer> items);
 
         /// <summary>
         /// Bulk update entities 
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
-        void BulkUpdate(IEnumerable<ICustomer> items);
+        void BulkUpdate(IEnumerable<Customer> items);
 
         /// <summary>
         /// Bulk update entities async
@@ -427,7 +428,7 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
         /// <returns></returns>
-        Task BulkUpdateAsync(IEnumerable<ICustomer> items);
+        Task BulkUpdateAsync(IEnumerable<Customer> items);
 
         #endregion
 	}

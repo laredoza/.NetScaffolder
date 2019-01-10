@@ -6,7 +6,9 @@
 
         public string RepositoryInterfaceNamespace { get; set; }
         public string ApplicationInterfaceNamespace { get; set; }
-        
+        public DtoDataType DtoDataType { get; set; }
+        public EntityDataType EntityDataType {get; set; }
+
         //public INamingConvention NamingConvention { get; set; }
 //		public ContextDataType DataType {get;set;}
 //	    public ContextData ContextData {get;set;}
@@ -28,6 +30,7 @@
                 templateInterface.DataType = DataType;
                 templateInterface.CurrentApplicationData = applicationServiceData;
                 templateInterface.DtoInterfaceDataType = this.DtoInterfaceDataType;
+                templateInterface.DtoDataType = this.DtoDataType;
 
                 if(!string.IsNullOrEmpty(applicationServiceData.OutputPathInterface))
                 {
@@ -41,6 +44,8 @@
                 template.DtoInterfaceDataType = this.DtoInterfaceDataType;
                 template.ApplicationInterfaceNamespace = applicationServiceData.TransformFullnamespaceInterface(DataType.BaseNamespace);
                 template.RepositoryInterfaceNamespace = RepositoryInterfaceNamespace;
+                template.DtoDataType = this.DtoDataType;
+                template.EntityDataType = this.EntityDataType;
 
                 if(!string.IsNullOrEmpty(applicationServiceData.OutputPath))
                 {

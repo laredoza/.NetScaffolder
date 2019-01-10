@@ -23,6 +23,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.Dto;
+using DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity;
 using DotNetScaffolder.Domain.Core.Interfaces;
 
 namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
@@ -30,7 +31,7 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
 	/// <summary>
 	/// The OrderDetailsRepository interface that defines database functions for the OrderDetails table
 	/// </summary>
-	public partial interface IOrderDetailsRepository : IRepository<IOrderDetails>
+	public partial interface IOrderDetailsRepository : IRepository<OrderDetails>
 	{
 		#region Load
 
@@ -40,8 +41,8 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <param name="orderDetailsId">int</param>
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<IOrderDetails, object>>[]</param>
-        /// <returns>IOrderDetails</returns>
-		IOrderDetails LoadByOrderDetailsId(int orderDetailsId, bool cache, params Expression<Func<IOrderDetails, object>>[] includes);
+        /// <returns>OrderDetails</returns>
+		OrderDetails LoadByOrderDetailsId(int orderDetailsId, bool cache, params Expression<Func<IOrderDetails, object>>[] includes);
 		
         /// <summary>
         /// Load OrderDetails entities async from the database using the composite primary keys
@@ -49,8 +50,8 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <param name="orderDetailsId">int</param>
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<IOrderDetails, object>>[]</param>
-        /// <returns>IOrderDetails</returns>
-		Task<IOrderDetails> LoadByOrderDetailsIdAsync(int orderDetailsId, bool cache, params Expression<Func<IOrderDetails, object>>[] includes);
+        /// <returns>OrderDetails</returns>
+		Task<OrderDetails> LoadByOrderDetailsIdAsync(int orderDetailsId, bool cache, params Expression<Func<IOrderDetails, object>>[] includes);
 
         /// <summary>
         /// Load OrderDetails entities from the database using the OrderId field
@@ -58,8 +59,8 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <param name="orderId">int</param
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<IOrderDetails, object>>[]</param>
-        /// <returns>IList<IOrderDetails></returns>
-		IList<IOrderDetails> LoadByOrderId(int orderId, bool cache,  params Expression<Func<IOrderDetails, object>>[] includes);
+        /// <returns>IList<OrderDetails></returns>
+		IList<OrderDetails> LoadByOrderId(int orderId, bool cache,  params Expression<Func<IOrderDetails, object>>[] includes);
 		
         /// <summary>
         /// Load OrderDetails entities async from the database using the OrderId field
@@ -67,8 +68,8 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <param name="orderId">int</param
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<IOrderDetails, object>>[]</param>
-        /// <returns>IList<IOrderDetails></returns>
-		Task<IList<IOrderDetails>> LoadByOrderIdAsync(int orderId, bool cache, params Expression<Func<IOrderDetails, object>>[] includes);
+        /// <returns>IList<OrderDetails></returns>
+		Task<IList<OrderDetails>> LoadByOrderIdAsync(int orderId, bool cache, params Expression<Func<IOrderDetails, object>>[] includes);
 
         /// <summary>
         /// Load OrderDetails entities from the database using the ProductId field
@@ -76,8 +77,8 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <param name="productId">int</param
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<IOrderDetails, object>>[]</param>
-        /// <returns>IList<IOrderDetails></returns>
-		IList<IOrderDetails> LoadByProductId(int productId, bool cache,  params Expression<Func<IOrderDetails, object>>[] includes);
+        /// <returns>IList<OrderDetails></returns>
+		IList<OrderDetails> LoadByProductId(int productId, bool cache,  params Expression<Func<IOrderDetails, object>>[] includes);
 		
         /// <summary>
         /// Load OrderDetails entities async from the database using the ProductId field
@@ -85,8 +86,8 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <param name="productId">int</param
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<IOrderDetails, object>>[]</param>
-        /// <returns>IList<IOrderDetails></returns>
-		Task<IList<IOrderDetails>> LoadByProductIdAsync(int productId, bool cache, params Expression<Func<IOrderDetails, object>>[] includes);
+        /// <returns>IList<OrderDetails></returns>
+		Task<IList<OrderDetails>> LoadByProductIdAsync(int productId, bool cache, params Expression<Func<IOrderDetails, object>>[] includes);
 
         /// <summary>
         /// Load OrderDetails entities from the database using the UnitPrice field
@@ -94,8 +95,8 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <param name="unitPrice">Nullable<decimal></param
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<IOrderDetails, object>>[]</param>
-        /// <returns>IList<IOrderDetails></returns>
-		IList<IOrderDetails> LoadByUnitPrice(Nullable<decimal> unitPrice, bool cache,  params Expression<Func<IOrderDetails, object>>[] includes);
+        /// <returns>IList<OrderDetails></returns>
+		IList<OrderDetails> LoadByUnitPrice(Nullable<decimal> unitPrice, bool cache,  params Expression<Func<IOrderDetails, object>>[] includes);
 		
         /// <summary>
         /// Load OrderDetails entities async from the database using the UnitPrice field
@@ -103,8 +104,8 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <param name="unitPrice">Nullable<decimal></param
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<IOrderDetails, object>>[]</param>
-        /// <returns>IList<IOrderDetails></returns>
-		Task<IList<IOrderDetails>> LoadByUnitPriceAsync(Nullable<decimal> unitPrice, bool cache, params Expression<Func<IOrderDetails, object>>[] includes);
+        /// <returns>IList<OrderDetails></returns>
+		Task<IList<OrderDetails>> LoadByUnitPriceAsync(Nullable<decimal> unitPrice, bool cache, params Expression<Func<IOrderDetails, object>>[] includes);
 
         /// <summary>
         /// Load OrderDetails entities from the database using the Amount field
@@ -112,8 +113,8 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <param name="amount">Nullable<short></param
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<IOrderDetails, object>>[]</param>
-        /// <returns>IList<IOrderDetails></returns>
-		IList<IOrderDetails> LoadByAmount(Nullable<short> amount, bool cache,  params Expression<Func<IOrderDetails, object>>[] includes);
+        /// <returns>IList<OrderDetails></returns>
+		IList<OrderDetails> LoadByAmount(Nullable<short> amount, bool cache,  params Expression<Func<IOrderDetails, object>>[] includes);
 		
         /// <summary>
         /// Load OrderDetails entities async from the database using the Amount field
@@ -121,8 +122,8 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <param name="amount">Nullable<short></param
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<IOrderDetails, object>>[]</param>
-        /// <returns>IList<IOrderDetails></returns>
-		Task<IList<IOrderDetails>> LoadByAmountAsync(Nullable<short> amount, bool cache, params Expression<Func<IOrderDetails, object>>[] includes);
+        /// <returns>IList<OrderDetails></returns>
+		Task<IList<OrderDetails>> LoadByAmountAsync(Nullable<short> amount, bool cache, params Expression<Func<IOrderDetails, object>>[] includes);
 
         /// <summary>
         /// Load OrderDetails entities from the database using the Discount field
@@ -130,8 +131,8 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <param name="discount">Nullable<float></param
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<IOrderDetails, object>>[]</param>
-        /// <returns>IList<IOrderDetails></returns>
-		IList<IOrderDetails> LoadByDiscount(Nullable<float> discount, bool cache,  params Expression<Func<IOrderDetails, object>>[] includes);
+        /// <returns>IList<OrderDetails></returns>
+		IList<OrderDetails> LoadByDiscount(Nullable<float> discount, bool cache,  params Expression<Func<IOrderDetails, object>>[] includes);
 		
         /// <summary>
         /// Load OrderDetails entities async from the database using the Discount field
@@ -139,24 +140,24 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <param name="discount">Nullable<float></param
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<IOrderDetails, object>>[]</param>
-        /// <returns>IList<IOrderDetails></returns>
-		Task<IList<IOrderDetails>> LoadByDiscountAsync(Nullable<float> discount, bool cache, params Expression<Func<IOrderDetails, object>>[] includes);
+        /// <returns>IList<OrderDetails></returns>
+		Task<IList<OrderDetails>> LoadByDiscountAsync(Nullable<float> discount, bool cache, params Expression<Func<IOrderDetails, object>>[] includes);
 
         /// <summary>
         /// Load all OrderDetails entities from the database.
         /// </summary>
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<IOrderDetails, object>>[]</param>
-        /// <returns>IList<IOrderDetails></returns>
-		IList<IOrderDetails> LoadAll( bool cache, params Expression<Func<IOrderDetails, object>>[] includes);
+        /// <returns>IList<OrderDetails></returns>
+		IList<OrderDetails> LoadAll( bool cache, params Expression<Func<IOrderDetails, object>>[] includes);
 		
         /// <summary>
         /// Load all OrderDetails entities async from the database.
         /// </summary>
         /// <param name="cache">Use 2nd level caching if enabled</param>
-		/// <param name="includes">params Expression<Func<IOrderDetails, object>>[]</param>
-        /// <returns>IList<IOrderDetails></returns>
-		Task<IList<IOrderDetails>> LoadAllAsync(bool cache, params Expression<Func<IOrderDetails, object>>[] includes);
+		/// <param name="includes">params Expression<Func<OrderDetails, object>>[]</param>
+        /// <returns>IList<OrderDetails></returns>
+		Task<IList<OrderDetails>> LoadAllAsync(bool cache, params Expression<Func<IOrderDetails, object>>[] includes);
 		
 		#endregion
 
@@ -171,42 +172,42 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// </summary>
         /// <param name="entity">IOrderDetails</param>
         /// <returns>bool</returns>
-		bool Add(IOrderDetails entity);
+		bool Add(OrderDetails entity);
 		
         /// <summary>
         /// Add the OrderDetails entity async to the database.
         /// </summary>
         /// <param name="entity">IOrderDetails</param>
         /// <returns>bool</returns>
-		Task<bool> AddAsync(IOrderDetails entity);
+		Task<bool> AddAsync(OrderDetails entity);
 
         /// <summary>
         /// Update the OrderDetails entity in the database if any values have changed
         /// </summary>
-        /// <param name="entity">IOrderDetails</param>
+        /// <param name="entity">OrderDetails</param>
         /// <returns>bool</returns>
-		bool Update(IOrderDetails entity);
+		bool Update(OrderDetails entity);
 		
         /// <summary>
         /// Update the OrderDetails entity async in the database if any values have changed
         /// </summary>
-        /// <param name="entity">IOrderDetails</param>
+        /// <param name="entity">OrderDetails</param>
         /// <returns>bool</returns>
-		Task<bool> UpdateAsync(IOrderDetails entity);
+		Task<bool> UpdateAsync(OrderDetails entity);
 		
         /// <summary>
         /// Delete the OrderDetails entity from the database
         /// </summary>
-        /// <param name="entity">IOrderDetails</param>
+        /// <param name="entity">OrderDetails</param>
         /// <returns>bool</returns>
-		bool Delete(IOrderDetails entity);
+		bool Delete(OrderDetails entity);
 		
         /// <summary>
         /// Delete the OrderDetails entity async from the database
         /// </summary>
-        /// <param name="entity">IOrderDetails</param>
+        /// <param name="entity">OrderDetails</param>
         /// <returns>bool</returns>
-		Task<bool> DeleteAsync(IOrderDetails entity);
+		Task<bool> DeleteAsync(OrderDetails entity);
 
 		/// <summary>
         /// Delete the OrderDetails entity from the database
@@ -243,7 +244,7 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
-        void BulkDelete(IEnumerable<IOrderDetails> items);
+        void BulkDelete(IEnumerable<OrderDetails> items);
 
         /// <summary>
         ///     Bulk delete entities async
@@ -251,14 +252,14 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
         /// <returns></returns>
-        Task BulkDeleteAsync(IEnumerable<IOrderDetails> items);
+        Task BulkDeleteAsync(IEnumerable<OrderDetails> items);
 
         /// <summary>
         ///     Bulk insert entities
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
-        void BulkInsert(IEnumerable<IOrderDetails> items);
+        void BulkInsert(IEnumerable<OrderDetails> items);
         
         /// <summary>
         /// Bulk insert entities async
@@ -266,14 +267,14 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
         /// <returns></returns>
-        Task BulkInsertAsync(IEnumerable<IOrderDetails> items);
+        Task BulkInsertAsync(IEnumerable<OrderDetails> items);
 
         /// <summary>
         /// Bulk update entities 
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
-        void BulkUpdate(IEnumerable<IOrderDetails> items);
+        void BulkUpdate(IEnumerable<OrderDetails> items);
 
         /// <summary>
         /// Bulk update entities async
@@ -281,7 +282,7 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
         /// <returns></returns>
-        Task BulkUpdateAsync(IEnumerable<IOrderDetails> items);
+        Task BulkUpdateAsync(IEnumerable<OrderDetails> items);
 
         #endregion
 	}

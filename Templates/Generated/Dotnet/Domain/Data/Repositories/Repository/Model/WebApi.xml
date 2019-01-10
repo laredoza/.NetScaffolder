@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <WebApiServiceDataType xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <AdditionalNamespaces />
+  <AdditionalNamespaces>
+    <string>DotNetScaffolder.Domain.Data.Dtos.DefaultDto.Dto</string>
+  </AdditionalNamespaces>
   <MissingApplicationList />
   <WebApiDataList>
     <WebApiServiceData>
@@ -45,7 +47,7 @@
                 <Index>
                   <IndexType>NonClustered</IndexType>
                   <IsUnique>false</IsUnique>
-                  <Name>IX_CustomerId</Name>
+                  <Name>IX_CustomerId1</Name>
                   <Columns>
                     <string>CustomerId</string>
                   </Columns>
@@ -138,7 +140,7 @@
                 <Index>
                   <IndexType>NonClustered</IndexType>
                   <IsUnique>false</IsUnique>
-                  <Name>IX_ProductId</Name>
+                  <Name>IX_ProductId1</Name>
                   <Columns>
                     <string>ProductId</string>
                   </Columns>
@@ -365,7 +367,7 @@
                 <Index>
                   <IndexType>NonClustered</IndexType>
                   <IsUnique>false</IsUnique>
-                  <Name>IX_OrderId</Name>
+                  <Name>IX_OrderId1</Name>
                   <Columns>
                     <string>OrderId</string>
                   </Columns>
@@ -373,7 +375,7 @@
                 <Index>
                   <IndexType>NonClustered</IndexType>
                   <IsUnique>false</IsUnique>
-                  <Name>IX_ProductId</Name>
+                  <Name>IX_ProductId2</Name>
                   <Columns>
                     <string>ProductId</string>
                   </Columns>
@@ -461,7 +463,7 @@
                 <Index>
                   <IndexType>NonClustered</IndexType>
                   <IsUnique>false</IsUnique>
-                  <Name>IX_ProductId</Name>
+                  <Name>IX_ProductId3</Name>
                   <Columns>
                     <string>ProductId</string>
                   </Columns>

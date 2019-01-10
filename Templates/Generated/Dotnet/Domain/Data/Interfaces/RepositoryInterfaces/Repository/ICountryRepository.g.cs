@@ -23,6 +23,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.Dto;
+using DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity;
 using DotNetScaffolder.Domain.Core.Interfaces;
 
 namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
@@ -30,7 +31,7 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
 	/// <summary>
 	/// The CountryRepository interface that defines database functions for the Country table
 	/// </summary>
-	public partial interface ICountryRepository : IRepository<ICountry>
+	public partial interface ICountryRepository : IRepository<Country>
 	{
 		#region Load
 
@@ -40,8 +41,8 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <param name="countryId">int</param>
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<ICountry, object>>[]</param>
-        /// <returns>ICountry</returns>
-		ICountry LoadByCountryId(int countryId, bool cache, params Expression<Func<ICountry, object>>[] includes);
+        /// <returns>Country</returns>
+		Country LoadByCountryId(int countryId, bool cache, params Expression<Func<ICountry, object>>[] includes);
 		
         /// <summary>
         /// Load Country entities async from the database using the composite primary keys
@@ -49,24 +50,24 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <param name="countryId">int</param>
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<ICountry, object>>[]</param>
-        /// <returns>ICountry</returns>
-		Task<ICountry> LoadByCountryIdAsync(int countryId, bool cache, params Expression<Func<ICountry, object>>[] includes);
+        /// <returns>Country</returns>
+		Task<Country> LoadByCountryIdAsync(int countryId, bool cache, params Expression<Func<ICountry, object>>[] includes);
 
         /// <summary>
         /// Load all Country entities from the database.
         /// </summary>
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<ICountry, object>>[]</param>
-        /// <returns>IList<ICountry></returns>
-		IList<ICountry> LoadAll( bool cache, params Expression<Func<ICountry, object>>[] includes);
+        /// <returns>IList<Country></returns>
+		IList<Country> LoadAll( bool cache, params Expression<Func<ICountry, object>>[] includes);
 		
         /// <summary>
         /// Load all Country entities async from the database.
         /// </summary>
         /// <param name="cache">Use 2nd level caching if enabled</param>
-		/// <param name="includes">params Expression<Func<ICountry, object>>[]</param>
-        /// <returns>IList<ICountry></returns>
-		Task<IList<ICountry>> LoadAllAsync(bool cache, params Expression<Func<ICountry, object>>[] includes);
+		/// <param name="includes">params Expression<Func<Country, object>>[]</param>
+        /// <returns>IList<Country></returns>
+		Task<IList<Country>> LoadAllAsync(bool cache, params Expression<Func<ICountry, object>>[] includes);
 		
 		#endregion
 
@@ -79,8 +80,8 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="caseSensitive">bool</param
 		/// <param name="includes">params Expression<Func<ICountry, object>>[]</param>
-        /// <returns>IList<ICountry></returns>
-		IList<ICountry> SearchByCountryName(string countryName, bool cache, bool caseSensitive = false, params Expression<Func<ICountry, object>>[] includes);
+        /// <returns>IList<Country></returns>
+		IList<Country> SearchByCountryName(string countryName, bool cache, bool caseSensitive = false, params Expression<Func<ICountry, object>>[] includes);
 		
         /// <summary>
         /// Search for Country entities async in the database by CountryName
@@ -89,8 +90,8 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="caseSensitive">bool</param
 		/// <param name="includes">params Expression<Func<ICountry, object>>[]</param>
-        /// <returns>IList<ICountry></returns>
-		Task<IList<ICountry>> SearchByCountryNameAsync(string countryName, bool cache, bool caseSensitive = false, params Expression<Func<ICountry, object>>[] includes);
+        /// <returns>IList<Country></returns>
+		Task<IList<Country>> SearchByCountryNameAsync(string countryName, bool cache, bool caseSensitive = false, params Expression<Func<ICountry, object>>[] includes);
 
 		#endregion
 		
@@ -101,42 +102,42 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// </summary>
         /// <param name="entity">ICountry</param>
         /// <returns>bool</returns>
-		bool Add(ICountry entity);
+		bool Add(Country entity);
 		
         /// <summary>
         /// Add the Country entity async to the database.
         /// </summary>
         /// <param name="entity">ICountry</param>
         /// <returns>bool</returns>
-		Task<bool> AddAsync(ICountry entity);
+		Task<bool> AddAsync(Country entity);
 
         /// <summary>
         /// Update the Country entity in the database if any values have changed
         /// </summary>
-        /// <param name="entity">ICountry</param>
+        /// <param name="entity">Country</param>
         /// <returns>bool</returns>
-		bool Update(ICountry entity);
+		bool Update(Country entity);
 		
         /// <summary>
         /// Update the Country entity async in the database if any values have changed
         /// </summary>
-        /// <param name="entity">ICountry</param>
+        /// <param name="entity">Country</param>
         /// <returns>bool</returns>
-		Task<bool> UpdateAsync(ICountry entity);
+		Task<bool> UpdateAsync(Country entity);
 		
         /// <summary>
         /// Delete the Country entity from the database
         /// </summary>
-        /// <param name="entity">ICountry</param>
+        /// <param name="entity">Country</param>
         /// <returns>bool</returns>
-		bool Delete(ICountry entity);
+		bool Delete(Country entity);
 		
         /// <summary>
         /// Delete the Country entity async from the database
         /// </summary>
-        /// <param name="entity">ICountry</param>
+        /// <param name="entity">Country</param>
         /// <returns>bool</returns>
-		Task<bool> DeleteAsync(ICountry entity);
+		Task<bool> DeleteAsync(Country entity);
 
 		/// <summary>
         /// Delete the Country entity from the database
@@ -173,7 +174,7 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
-        void BulkDelete(IEnumerable<ICountry> items);
+        void BulkDelete(IEnumerable<Country> items);
 
         /// <summary>
         ///     Bulk delete entities async
@@ -181,14 +182,14 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
         /// <returns></returns>
-        Task BulkDeleteAsync(IEnumerable<ICountry> items);
+        Task BulkDeleteAsync(IEnumerable<Country> items);
 
         /// <summary>
         ///     Bulk insert entities
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
-        void BulkInsert(IEnumerable<ICountry> items);
+        void BulkInsert(IEnumerable<Country> items);
         
         /// <summary>
         /// Bulk insert entities async
@@ -196,14 +197,14 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
         /// <returns></returns>
-        Task BulkInsertAsync(IEnumerable<ICountry> items);
+        Task BulkInsertAsync(IEnumerable<Country> items);
 
         /// <summary>
         /// Bulk update entities 
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
-        void BulkUpdate(IEnumerable<ICountry> items);
+        void BulkUpdate(IEnumerable<Country> items);
 
         /// <summary>
         /// Bulk update entities async
@@ -211,7 +212,7 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
         /// <returns></returns>
-        Task BulkUpdateAsync(IEnumerable<ICountry> items);
+        Task BulkUpdateAsync(IEnumerable<Country> items);
 
         #endregion
 	}

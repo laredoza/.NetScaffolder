@@ -7,17 +7,18 @@
         private WebApiTemplateCustom webApiTemplateCustom = new WebApiTemplateCustom();
 
         public DtoInterfaceDataType DtoInterfaceDataType {get;set;}
+        public DtoDataType DtoDataType { get; set; }
 
 		protected override void RunCore()
         {
             
 			foreach(WebApiServiceData webApiServiceData in DataType.WebApiDataList )
 			{
-				//Debugger.Break();
                 template.DataType = DataType;
                 template.CurrentWebApiServiceData = webApiServiceData;
                 template.ApplicationServiceDataType = this.ApplicationServiceDataType;
                 template.DtoInterfaceDataType = this.DtoInterfaceDataType;
+                template.DtoDataType = DtoDataType;
 
                 if(!string.IsNullOrEmpty(webApiServiceData.OutputPath))
                 {

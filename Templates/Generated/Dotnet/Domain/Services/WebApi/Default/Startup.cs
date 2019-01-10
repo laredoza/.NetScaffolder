@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IdentityModel.Tokens.Jwt;
 using DotNetScaffolder.Domain.Infrastructure.Web.Core.Extensions;
 using DotNetScaffolder.Domain.Infrastructure.Web.Core.Security;
 using DotNetScaffolder.Domain.Services.WebApi.Default.Security;
@@ -7,6 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Builder;
 
 namespace DotNetScaffolder.Domain.Services.WebApi.Default
 {
@@ -55,13 +57,30 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default
                 app.UseHsts();
 
             app.UseHttpsRedirection();
+            //app.UseAuthentication();
+
             app.UseMvc(routes => { routes.MapRoute("DefaultApi", "api/{controller}/{id?}"); });
+
+
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            //services.AddMvcCore().AddJsonFormatters();
+            services.AddMvc();
+            //    .AddAuthorization()
+            //    .AddJsonFormatters();
+
+            //services.AddAuthentication("Bearer")
+            //    .AddIdentityServerAuthentication(options =>
+            //    {
+            //        options.Authority = "http://localhost:5000";
+            //        options.RequireHttpsMetadata = false;
+
+            //        options.ApiName = "api1";
+            //        options.ApiSecret = "secret";
+            //    });
 
             services.AddTransient<ISecurityFilter, SecurityFilter>();
             //.AddRazorPagesOptions(options =>

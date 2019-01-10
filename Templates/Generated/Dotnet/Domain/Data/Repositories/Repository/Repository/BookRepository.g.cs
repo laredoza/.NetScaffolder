@@ -26,6 +26,7 @@ using System.Threading.Tasks;
 using DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.Dto;
 using DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity;
 using DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces;
+using DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity;
 
 using DotNetScaffolder.Domain.Core;
 using DotNetScaffolder.Domain.Core.Interfaces;
@@ -35,7 +36,7 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
 	/// <summary>
 	/// The BookRepository class responsible for database functions in the Book table
 	/// </summary>
-	public partial class BookRepository : UowRepository<IBook> , IBookRepository
+	public partial class BookRepository : UowRepository<Book> , IBookRepository
 	{		
 		#region CTOR
 		
@@ -61,8 +62,8 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// </summary
         /// <param name="productId">int</param>
 		/// <param name="includes">params Expression<Func<IBook, object>>[]</param>
-        /// <returns>IBook</returns>
-		public virtual IBook LoadByProductId(int productId, bool cache, params Expression<Func<IBook, object>>[] includes)
+        /// <returns>Book</returns>
+		public virtual Book LoadByProductId(int productId, bool cache, params Expression<Func<IBook, object>>[] includes)
 		{
 			var expr = this.Convert(includes);
 			return this.UnitOfWork.FirstOrDefault<Book>(o => o.ProductId == productId, cache, expr);
@@ -73,8 +74,8 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// </summary
         /// <param name="productId">int</param>
 		/// <param name="includes">params Expression<Func<IBook, object>>[]</param>
-        /// <returns>IBook</returns>
-		public virtual async Task<IBook> LoadByProductIdAsync(int productId, bool cache, params Expression<Func<IBook, object>>[] includes)
+        /// <returns>Book</returns>
+		public virtual async Task<Book> LoadByProductIdAsync(int productId, bool cache, params Expression<Func<IBook, object>>[] includes)
 		{
 			var expr = this.Convert(includes);
 			return await this.UnitOfWork.FirstOrDefaultAsync<Book>(cache, o => o.ProductId == productId, expr);
@@ -84,23 +85,23 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// Load all Book entities from the database.
         /// </summary>
 		/// <param name="includes">params Expression<Func<IBook, object>>[]</param>
-        /// <returns>IList<IBook></returns>
-		public virtual IList<IBook> LoadAll(bool cache, params Expression<Func<IBook, object>>[] includes)
+        /// <returns>IList<Book></returns>
+		public virtual IList<Book> LoadAll(bool cache, params Expression<Func<IBook, object>>[] includes)
 		{
 			var expr = this.Convert(includes);
-			return this.UnitOfWork.GetAll<Book>(cache, expr).ToList<IBook>();
+			return this.UnitOfWork.GetAll<Book>(cache, expr).ToList<Book>();
 		}
 		
         /// <summary>
         /// Load all Book entities async from the database.
         /// </summary>
 		/// <param name="includes">params Expression<Func<IBook, object>>[]</param>
-        /// <returns>IList<IBook></returns>
-		public virtual async Task<IList<IBook>> LoadAllAsync(bool cache, params Expression<Func<IBook,  object>>[] includes)
+        /// <returns>IList<Book></returns>
+		public virtual async Task<IList<Book>> LoadAllAsync(bool cache, params Expression<Func<IBook,  object>>[] includes)
 		{
 			var expr = this.Convert(includes);
 			var result = await this.UnitOfWork.GetAllAsync<Book>(cache, expr);
-			return result.ToList<IBook>();
+			return result.ToList<Book>();
 		}
 		
 		#endregion
@@ -113,17 +114,17 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <param name="publisher">string</param>
 		/// <param name="caseSensitive">bool</param>
 		/// <param name="includes">params Expression<Func<IBook, object>>[]</param>
-        /// <returns>IList<IBook></returns>
-		public virtual IList<IBook> SearchByPublisher(string publisher, bool cache, bool caseSensitive = false, params Expression<Func<IBook, object>>[] includes)
+        /// <returns>IList<Book></returns>
+		public virtual IList<Book> SearchByPublisher(string publisher, bool cache, bool caseSensitive = false, params Expression<Func<IBook, object>>[] includes)
 		{		
 			var expr = this.Convert(includes);
 			if(caseSensitive) 
 			{
-				return this.UnitOfWork.AllMatching<Book>(o => o.Publisher.Contains(publisher), cache, expr).ToList<IBook>();
+				return this.UnitOfWork.AllMatching<Book>(o => o.Publisher.Contains(publisher), cache, expr).ToList<Book>();
 			}
 			else
 			{
-				return this.UnitOfWork.AllMatching<Book>(o => o.Publisher.ToLower().Contains(publisher.ToLower()), cache, expr).ToList<IBook>();
+				return this.UnitOfWork.AllMatching<Book>(o => o.Publisher.ToLower().Contains(publisher.ToLower()), cache, expr).ToList<Book>();
 			}
 		}
 		
@@ -133,19 +134,19 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <param name="publisher">string</param>
 		/// <param name="caseSensitive">bool</param>
 		/// <param name="includes">params Expression<Func<IBook, object>>[]</param>
-        /// <returns>IList<IBook></returns>
-		public virtual async Task<IList<IBook>> SearchByPublisherAsync(string publisher, bool cache, bool caseSensitive = false, params Expression<Func<IBook, object>>[] includes)
+        /// <returns>IList<Book></returns>
+		public virtual async Task<IList<Book>> SearchByPublisherAsync(string publisher, bool cache, bool caseSensitive = false, params Expression<Func<IBook, object>>[] includes)
 		{		
 			var expr = this.Convert(includes);
 			if(caseSensitive) 
 			{
 				var result = await this.UnitOfWork.AllMatchingAsync<Book>(o => o.Publisher.Contains(publisher), cache, expr);
-				return result.ToList<IBook>();
+				return result.ToList<Book>();
 			}
 			else
 			{
 				var result = await this.UnitOfWork.AllMatchingAsync<Book>(o => o.Publisher.ToLower().Contains(publisher.ToLower()), cache, expr);
-				return result.ToList<IBook>();
+				return result.ToList<Book>();
 			}
 		}
 
@@ -156,45 +157,31 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <summary>
         /// Add the Book entity to the database.
         /// </summary>
-        /// <param name="entity">IBook</param>
+        /// <param name="entity">Book</param>
         /// <returns>bool</returns>
-		public virtual bool Add(IBook entity)
+		public virtual bool Add(Book entity)
 		{
-			var entityToSave = new Book(entity, false);
-			this.UnitOfWork.Add(entityToSave);
-			bool result = this.UnitOfWork.Save();
-			
-			// Populate passed in entity with newly saved values
-			entity.ProductId = entityToSave.ProductId;
-			entity.Publisher = entityToSave.Publisher;
-			
-			return result;
+			this.UnitOfWork.Add(entity);
+			return this.UnitOfWork.Save();
 		}
 		
         /// <summary>
         /// Add the Book entity async to the database.
         /// </summary>
-        /// <param name="entity">IBook</param>
+        /// <param name="entity">Book</param>
         /// <returns>bool</returns>
-		public virtual async Task<bool> AddAsync(IBook entity)
+		public virtual async Task<bool> AddAsync(Book entity)
 		{
-			var entityToSave = new Book(entity, false);
-			await this.UnitOfWork.AddAsync(entityToSave);
-			bool result = await this.UnitOfWork.SaveAsync();
-			
-			// Populate passed in entity with newly saved values
-			entity.ProductId = entityToSave.ProductId;
-			entity.Publisher = entityToSave.Publisher;
-			
-			return result;
+			await this.UnitOfWork.AddAsync(entity);
+			return await this.UnitOfWork.SaveAsync();
 		}
 
         /// <summary>
         /// Update the Book entity in the database if any values have changed
         /// </summary>
-        /// <param name="entity">IBook</param>
+        /// <param name="entity">Book</param>
         /// <returns>bool</returns>
-		public virtual bool Update(IBook entity)
+		public virtual bool Update(Book entity)
 		{
 			return this.UnitOfWork.Modify(entity);
 		}
@@ -202,9 +189,9 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <summary>
         /// Update the Book entity async in the database if any values have changed
         /// </summary>
-        /// <param name="entity">IBook</param>
+        /// <param name="entity">Book</param>
         /// <returns>bool</returns>
-		public virtual async Task<bool> UpdateAsync(IBook entity)
+		public virtual async Task<bool> UpdateAsync(Book entity)
 		{
 			return await this.UnitOfWork.ModifyAsync(entity);
 		}
@@ -212,9 +199,9 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <summary>
         /// Delete the Book entity from the database
         /// </summary>
-        /// <param name="entity">IBook</param>
+        /// <param name="entity">Book</param>
         /// <returns>bool</returns>
-		public virtual bool Delete(IBook entity)
+		public virtual bool Delete(Book entity)
 		{		
 			return this.UnitOfWork.Remove(entity);
 		}
@@ -222,9 +209,9 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <summary>
         /// Delete the Book entity async from the database
         /// </summary>
-        /// <param name="entity">IBook</param>
+        /// <param name="entity">Book</param>
         /// <returns>bool</returns>
-		public virtual async Task<bool> DeleteAsync(IBook entity)
+		public virtual async Task<bool> DeleteAsync(Book entity)
 		{		
 			return await this.UnitOfWork.RemoveAsync(entity);
 		}
@@ -274,7 +261,7 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
 		
 		public virtual async Task<TResult> MaxAsync<TResult>(Expression<Func<IBook, TResult>> maxExpression, bool cache)
 		{
-			return await this.UnitOfWork.MaxAsync(cache, Expression.Lambda<Func<Book, TResult>>(maxExpression.Body, maxExpression.Parameters));
+			return await this.UnitOfWork.MaxAsync(cache, Expression.Lambda<Func<IBook, TResult>>(maxExpression.Body, maxExpression.Parameters));
 		}
 		
 		public virtual TResult Min<TResult>(Expression<Func<IBook, TResult>> minExpression, bool cache)
@@ -296,7 +283,7 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
-        public void BulkDelete(IEnumerable<IBook> items)
+        public void BulkDelete(IEnumerable<Book> items)
 		{
 			this.UnitOfWork.BulkDelete<IBook>(items);
 		}
@@ -307,9 +294,9 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
         /// <returns></returns>
-        public async Task BulkDeleteAsync(IEnumerable<IBook> items)
+        public async Task BulkDeleteAsync(IEnumerable<Book> items)
 		{
-			await this.UnitOfWork.BulkDeleteAsync<IBook>(items);
+			await this.UnitOfWork.BulkDeleteAsync<Book>(items);
 		}
 
         /// <summary>
@@ -317,9 +304,9 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
-        public void BulkInsert(IEnumerable<IBook> items)
+        public void BulkInsert(IEnumerable<Book> items)
 		{
-			this.UnitOfWork.BulkInsert<IBook>(items);
+			this.UnitOfWork.BulkInsert<Book>(items);
 		}
         
         /// <summary>
@@ -328,9 +315,9 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
         /// <returns></returns>
-        public async Task BulkInsertAsync(IEnumerable<IBook> items)
+        public async Task BulkInsertAsync(IEnumerable<Book> items)
 		{
-			await this.UnitOfWork.BulkInsertAsync<IBook>(items);
+			await this.UnitOfWork.BulkInsertAsync<Book>(items);
 		}
 
         /// <summary>
@@ -338,9 +325,9 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
-        public void BulkUpdate(IEnumerable<IBook> items)
+        public void BulkUpdate(IEnumerable<Book> items)
 		{
-			this.UnitOfWork.BulkUpdate<IBook>(items);
+			this.UnitOfWork.BulkUpdate<Book>(items);
 		}
 
         /// <summary>
@@ -349,9 +336,9 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
         /// <returns></returns>
-        public async Task BulkUpdateAsync(IEnumerable<IBook> items)
+        public async Task BulkUpdateAsync(IEnumerable<Book> items)
 		{
-			await this.UnitOfWork.BulkUpdateAsync<IBook>(items);
+			await this.UnitOfWork.BulkUpdateAsync<Book>(items);
 		}
 
         #endregion

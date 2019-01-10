@@ -23,6 +23,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.Dto;
+using DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity;
 using DotNetScaffolder.Domain.Core.Interfaces;
 
 namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
@@ -30,7 +31,7 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
 	/// <summary>
 	/// The BankAccountRepository interface that defines database functions for the BankAccount table
 	/// </summary>
-	public partial interface IBankAccountRepository : IRepository<IBankAccount>
+	public partial interface IBankAccountRepository : IRepository<BankAccount>
 	{
 		#region Load
 
@@ -40,8 +41,8 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <param name="bankAccountId">int</param>
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<IBankAccount, object>>[]</param>
-        /// <returns>IBankAccount</returns>
-		IBankAccount LoadByBankAccountId(int bankAccountId, bool cache, params Expression<Func<IBankAccount, object>>[] includes);
+        /// <returns>BankAccount</returns>
+		BankAccount LoadByBankAccountId(int bankAccountId, bool cache, params Expression<Func<IBankAccount, object>>[] includes);
 		
         /// <summary>
         /// Load BankAccount entities async from the database using the composite primary keys
@@ -49,8 +50,8 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <param name="bankAccountId">int</param>
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<IBankAccount, object>>[]</param>
-        /// <returns>IBankAccount</returns>
-		Task<IBankAccount> LoadByBankAccountIdAsync(int bankAccountId, bool cache, params Expression<Func<IBankAccount, object>>[] includes);
+        /// <returns>BankAccount</returns>
+		Task<BankAccount> LoadByBankAccountIdAsync(int bankAccountId, bool cache, params Expression<Func<IBankAccount, object>>[] includes);
 
         /// <summary>
         /// Load BankAccount entities from the database using the Balance field
@@ -58,8 +59,8 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <param name="balance">decimal</param
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<IBankAccount, object>>[]</param>
-        /// <returns>IList<IBankAccount></returns>
-		IList<IBankAccount> LoadByBalance(decimal balance, bool cache,  params Expression<Func<IBankAccount, object>>[] includes);
+        /// <returns>IList<BankAccount></returns>
+		IList<BankAccount> LoadByBalance(decimal balance, bool cache,  params Expression<Func<IBankAccount, object>>[] includes);
 		
         /// <summary>
         /// Load BankAccount entities async from the database using the Balance field
@@ -67,8 +68,8 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <param name="balance">decimal</param
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<IBankAccount, object>>[]</param>
-        /// <returns>IList<IBankAccount></returns>
-		Task<IList<IBankAccount>> LoadByBalanceAsync(decimal balance, bool cache, params Expression<Func<IBankAccount, object>>[] includes);
+        /// <returns>IList<BankAccount></returns>
+		Task<IList<BankAccount>> LoadByBalanceAsync(decimal balance, bool cache, params Expression<Func<IBankAccount, object>>[] includes);
 
         /// <summary>
         /// Load BankAccount entities from the database using the CustomerId field
@@ -76,8 +77,8 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <param name="customerId">Nullable<int></param
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<IBankAccount, object>>[]</param>
-        /// <returns>IList<IBankAccount></returns>
-		IList<IBankAccount> LoadByCustomerId(Nullable<int> customerId, bool cache,  params Expression<Func<IBankAccount, object>>[] includes);
+        /// <returns>IList<BankAccount></returns>
+		IList<BankAccount> LoadByCustomerId(Nullable<int> customerId, bool cache,  params Expression<Func<IBankAccount, object>>[] includes);
 		
         /// <summary>
         /// Load BankAccount entities async from the database using the CustomerId field
@@ -85,8 +86,8 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <param name="customerId">Nullable<int></param
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<IBankAccount, object>>[]</param>
-        /// <returns>IList<IBankAccount></returns>
-		Task<IList<IBankAccount>> LoadByCustomerIdAsync(Nullable<int> customerId, bool cache, params Expression<Func<IBankAccount, object>>[] includes);
+        /// <returns>IList<BankAccount></returns>
+		Task<IList<BankAccount>> LoadByCustomerIdAsync(Nullable<int> customerId, bool cache, params Expression<Func<IBankAccount, object>>[] includes);
 
         /// <summary>
         /// Load BankAccount entities from the database using the Locked field
@@ -94,8 +95,8 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <param name="locked">bool</param
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<IBankAccount, object>>[]</param>
-        /// <returns>IList<IBankAccount></returns>
-		IList<IBankAccount> LoadByLocked(bool locked, bool cache,  params Expression<Func<IBankAccount, object>>[] includes);
+        /// <returns>IList<BankAccount></returns>
+		IList<BankAccount> LoadByLocked(bool locked, bool cache,  params Expression<Func<IBankAccount, object>>[] includes);
 		
         /// <summary>
         /// Load BankAccount entities async from the database using the Locked field
@@ -103,24 +104,24 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <param name="locked">bool</param
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<IBankAccount, object>>[]</param>
-        /// <returns>IList<IBankAccount></returns>
-		Task<IList<IBankAccount>> LoadByLockedAsync(bool locked, bool cache, params Expression<Func<IBankAccount, object>>[] includes);
+        /// <returns>IList<BankAccount></returns>
+		Task<IList<BankAccount>> LoadByLockedAsync(bool locked, bool cache, params Expression<Func<IBankAccount, object>>[] includes);
 
         /// <summary>
         /// Load all BankAccount entities from the database.
         /// </summary>
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<IBankAccount, object>>[]</param>
-        /// <returns>IList<IBankAccount></returns>
-		IList<IBankAccount> LoadAll( bool cache, params Expression<Func<IBankAccount, object>>[] includes);
+        /// <returns>IList<BankAccount></returns>
+		IList<BankAccount> LoadAll( bool cache, params Expression<Func<IBankAccount, object>>[] includes);
 		
         /// <summary>
         /// Load all BankAccount entities async from the database.
         /// </summary>
         /// <param name="cache">Use 2nd level caching if enabled</param>
-		/// <param name="includes">params Expression<Func<IBankAccount, object>>[]</param>
-        /// <returns>IList<IBankAccount></returns>
-		Task<IList<IBankAccount>> LoadAllAsync(bool cache, params Expression<Func<IBankAccount, object>>[] includes);
+		/// <param name="includes">params Expression<Func<BankAccount, object>>[]</param>
+        /// <returns>IList<BankAccount></returns>
+		Task<IList<BankAccount>> LoadAllAsync(bool cache, params Expression<Func<IBankAccount, object>>[] includes);
 		
 		#endregion
 
@@ -133,8 +134,8 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="caseSensitive">bool</param
 		/// <param name="includes">params Expression<Func<IBankAccount, object>>[]</param>
-        /// <returns>IList<IBankAccount></returns>
-		IList<IBankAccount> SearchByBankAccountNumber(string bankAccountNumber, bool cache, bool caseSensitive = false, params Expression<Func<IBankAccount, object>>[] includes);
+        /// <returns>IList<BankAccount></returns>
+		IList<BankAccount> SearchByBankAccountNumber(string bankAccountNumber, bool cache, bool caseSensitive = false, params Expression<Func<IBankAccount, object>>[] includes);
 		
         /// <summary>
         /// Search for BankAccount entities async in the database by BankAccountNumber
@@ -143,8 +144,8 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="caseSensitive">bool</param
 		/// <param name="includes">params Expression<Func<IBankAccount, object>>[]</param>
-        /// <returns>IList<IBankAccount></returns>
-		Task<IList<IBankAccount>> SearchByBankAccountNumberAsync(string bankAccountNumber, bool cache, bool caseSensitive = false, params Expression<Func<IBankAccount, object>>[] includes);
+        /// <returns>IList<BankAccount></returns>
+		Task<IList<BankAccount>> SearchByBankAccountNumberAsync(string bankAccountNumber, bool cache, bool caseSensitive = false, params Expression<Func<IBankAccount, object>>[] includes);
 
 		#endregion
 		
@@ -155,42 +156,42 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// </summary>
         /// <param name="entity">IBankAccount</param>
         /// <returns>bool</returns>
-		bool Add(IBankAccount entity);
+		bool Add(BankAccount entity);
 		
         /// <summary>
         /// Add the BankAccount entity async to the database.
         /// </summary>
         /// <param name="entity">IBankAccount</param>
         /// <returns>bool</returns>
-		Task<bool> AddAsync(IBankAccount entity);
+		Task<bool> AddAsync(BankAccount entity);
 
         /// <summary>
         /// Update the BankAccount entity in the database if any values have changed
         /// </summary>
-        /// <param name="entity">IBankAccount</param>
+        /// <param name="entity">BankAccount</param>
         /// <returns>bool</returns>
-		bool Update(IBankAccount entity);
+		bool Update(BankAccount entity);
 		
         /// <summary>
         /// Update the BankAccount entity async in the database if any values have changed
         /// </summary>
-        /// <param name="entity">IBankAccount</param>
+        /// <param name="entity">BankAccount</param>
         /// <returns>bool</returns>
-		Task<bool> UpdateAsync(IBankAccount entity);
+		Task<bool> UpdateAsync(BankAccount entity);
 		
         /// <summary>
         /// Delete the BankAccount entity from the database
         /// </summary>
-        /// <param name="entity">IBankAccount</param>
+        /// <param name="entity">BankAccount</param>
         /// <returns>bool</returns>
-		bool Delete(IBankAccount entity);
+		bool Delete(BankAccount entity);
 		
         /// <summary>
         /// Delete the BankAccount entity async from the database
         /// </summary>
-        /// <param name="entity">IBankAccount</param>
+        /// <param name="entity">BankAccount</param>
         /// <returns>bool</returns>
-		Task<bool> DeleteAsync(IBankAccount entity);
+		Task<bool> DeleteAsync(BankAccount entity);
 
 		/// <summary>
         /// Delete the BankAccount entity from the database
@@ -227,7 +228,7 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
-        void BulkDelete(IEnumerable<IBankAccount> items);
+        void BulkDelete(IEnumerable<BankAccount> items);
 
         /// <summary>
         ///     Bulk delete entities async
@@ -235,14 +236,14 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
         /// <returns></returns>
-        Task BulkDeleteAsync(IEnumerable<IBankAccount> items);
+        Task BulkDeleteAsync(IEnumerable<BankAccount> items);
 
         /// <summary>
         ///     Bulk insert entities
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
-        void BulkInsert(IEnumerable<IBankAccount> items);
+        void BulkInsert(IEnumerable<BankAccount> items);
         
         /// <summary>
         /// Bulk insert entities async
@@ -250,14 +251,14 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
         /// <returns></returns>
-        Task BulkInsertAsync(IEnumerable<IBankAccount> items);
+        Task BulkInsertAsync(IEnumerable<BankAccount> items);
 
         /// <summary>
         /// Bulk update entities 
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
-        void BulkUpdate(IEnumerable<IBankAccount> items);
+        void BulkUpdate(IEnumerable<BankAccount> items);
 
         /// <summary>
         /// Bulk update entities async
@@ -265,7 +266,7 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
         /// <returns></returns>
-        Task BulkUpdateAsync(IEnumerable<IBankAccount> items);
+        Task BulkUpdateAsync(IEnumerable<BankAccount> items);
 
         #endregion
 	}

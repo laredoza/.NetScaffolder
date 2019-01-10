@@ -9,7 +9,7 @@ Select the target migration project in the migrations folder. Open the README.md
 Databases are targeted by selecting the correct context. To keep things simple I've referenced DotNetScaffolder.Domain.Data.Contexts.EFCore.SqlServer.dll. In a production enviroment you would rather copy the correct dll into your bin folder on deployment. Structuremap will handle context injection.
 
 ## Testing generated WebApi
-https://localhost:44325/api/product/LoadByProductProductId/1/true
+http://localhost:5002/api/product/LoadByProductProductId/1/true
 
 ## Configuring Includes
 

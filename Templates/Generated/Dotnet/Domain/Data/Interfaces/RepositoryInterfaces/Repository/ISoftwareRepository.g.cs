@@ -23,6 +23,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.Dto;
+using DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity;
 using DotNetScaffolder.Domain.Core.Interfaces;
 
 namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
@@ -30,7 +31,7 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
 	/// <summary>
 	/// The SoftwareRepository interface that defines database functions for the Software table
 	/// </summary>
-	public partial interface ISoftwareRepository : IRepository<ISoftware>
+	public partial interface ISoftwareRepository : IRepository<Software>
 	{
 		#region Load
 
@@ -40,8 +41,8 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <param name="productId">int</param>
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<ISoftware, object>>[]</param>
-        /// <returns>ISoftware</returns>
-		ISoftware LoadByProductId(int productId, bool cache, params Expression<Func<ISoftware, object>>[] includes);
+        /// <returns>Software</returns>
+		Software LoadByProductId(int productId, bool cache, params Expression<Func<ISoftware, object>>[] includes);
 		
         /// <summary>
         /// Load Software entities async from the database using the composite primary keys
@@ -49,24 +50,24 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <param name="productId">int</param>
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<ISoftware, object>>[]</param>
-        /// <returns>ISoftware</returns>
-		Task<ISoftware> LoadByProductIdAsync(int productId, bool cache, params Expression<Func<ISoftware, object>>[] includes);
+        /// <returns>Software</returns>
+		Task<Software> LoadByProductIdAsync(int productId, bool cache, params Expression<Func<ISoftware, object>>[] includes);
 
         /// <summary>
         /// Load all Software entities from the database.
         /// </summary>
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<ISoftware, object>>[]</param>
-        /// <returns>IList<ISoftware></returns>
-		IList<ISoftware> LoadAll( bool cache, params Expression<Func<ISoftware, object>>[] includes);
+        /// <returns>IList<Software></returns>
+		IList<Software> LoadAll( bool cache, params Expression<Func<ISoftware, object>>[] includes);
 		
         /// <summary>
         /// Load all Software entities async from the database.
         /// </summary>
         /// <param name="cache">Use 2nd level caching if enabled</param>
-		/// <param name="includes">params Expression<Func<ISoftware, object>>[]</param>
-        /// <returns>IList<ISoftware></returns>
-		Task<IList<ISoftware>> LoadAllAsync(bool cache, params Expression<Func<ISoftware, object>>[] includes);
+		/// <param name="includes">params Expression<Func<Software, object>>[]</param>
+        /// <returns>IList<Software></returns>
+		Task<IList<Software>> LoadAllAsync(bool cache, params Expression<Func<ISoftware, object>>[] includes);
 		
 		#endregion
 
@@ -79,8 +80,8 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="caseSensitive">bool</param
 		/// <param name="includes">params Expression<Func<ISoftware, object>>[]</param>
-        /// <returns>IList<ISoftware></returns>
-		IList<ISoftware> SearchByLicenseCode(string licenseCode, bool cache, bool caseSensitive = false, params Expression<Func<ISoftware, object>>[] includes);
+        /// <returns>IList<Software></returns>
+		IList<Software> SearchByLicenseCode(string licenseCode, bool cache, bool caseSensitive = false, params Expression<Func<ISoftware, object>>[] includes);
 		
         /// <summary>
         /// Search for Software entities async in the database by LicenseCode
@@ -89,8 +90,8 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="caseSensitive">bool</param
 		/// <param name="includes">params Expression<Func<ISoftware, object>>[]</param>
-        /// <returns>IList<ISoftware></returns>
-		Task<IList<ISoftware>> SearchByLicenseCodeAsync(string licenseCode, bool cache, bool caseSensitive = false, params Expression<Func<ISoftware, object>>[] includes);
+        /// <returns>IList<Software></returns>
+		Task<IList<Software>> SearchByLicenseCodeAsync(string licenseCode, bool cache, bool caseSensitive = false, params Expression<Func<ISoftware, object>>[] includes);
 
 		#endregion
 		
@@ -101,42 +102,42 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// </summary>
         /// <param name="entity">ISoftware</param>
         /// <returns>bool</returns>
-		bool Add(ISoftware entity);
+		bool Add(Software entity);
 		
         /// <summary>
         /// Add the Software entity async to the database.
         /// </summary>
         /// <param name="entity">ISoftware</param>
         /// <returns>bool</returns>
-		Task<bool> AddAsync(ISoftware entity);
+		Task<bool> AddAsync(Software entity);
 
         /// <summary>
         /// Update the Software entity in the database if any values have changed
         /// </summary>
-        /// <param name="entity">ISoftware</param>
+        /// <param name="entity">Software</param>
         /// <returns>bool</returns>
-		bool Update(ISoftware entity);
+		bool Update(Software entity);
 		
         /// <summary>
         /// Update the Software entity async in the database if any values have changed
         /// </summary>
-        /// <param name="entity">ISoftware</param>
+        /// <param name="entity">Software</param>
         /// <returns>bool</returns>
-		Task<bool> UpdateAsync(ISoftware entity);
+		Task<bool> UpdateAsync(Software entity);
 		
         /// <summary>
         /// Delete the Software entity from the database
         /// </summary>
-        /// <param name="entity">ISoftware</param>
+        /// <param name="entity">Software</param>
         /// <returns>bool</returns>
-		bool Delete(ISoftware entity);
+		bool Delete(Software entity);
 		
         /// <summary>
         /// Delete the Software entity async from the database
         /// </summary>
-        /// <param name="entity">ISoftware</param>
+        /// <param name="entity">Software</param>
         /// <returns>bool</returns>
-		Task<bool> DeleteAsync(ISoftware entity);
+		Task<bool> DeleteAsync(Software entity);
 
 		/// <summary>
         /// Delete the Software entity from the database
@@ -173,7 +174,7 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
-        void BulkDelete(IEnumerable<ISoftware> items);
+        void BulkDelete(IEnumerable<Software> items);
 
         /// <summary>
         ///     Bulk delete entities async
@@ -181,14 +182,14 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
         /// <returns></returns>
-        Task BulkDeleteAsync(IEnumerable<ISoftware> items);
+        Task BulkDeleteAsync(IEnumerable<Software> items);
 
         /// <summary>
         ///     Bulk insert entities
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
-        void BulkInsert(IEnumerable<ISoftware> items);
+        void BulkInsert(IEnumerable<Software> items);
         
         /// <summary>
         /// Bulk insert entities async
@@ -196,14 +197,14 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
         /// <returns></returns>
-        Task BulkInsertAsync(IEnumerable<ISoftware> items);
+        Task BulkInsertAsync(IEnumerable<Software> items);
 
         /// <summary>
         /// Bulk update entities 
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
-        void BulkUpdate(IEnumerable<ISoftware> items);
+        void BulkUpdate(IEnumerable<Software> items);
 
         /// <summary>
         /// Bulk update entities async
@@ -211,7 +212,7 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
         /// <returns></returns>
-        Task BulkUpdateAsync(IEnumerable<ISoftware> items);
+        Task BulkUpdateAsync(IEnumerable<Software> items);
 
         #endregion
 	}

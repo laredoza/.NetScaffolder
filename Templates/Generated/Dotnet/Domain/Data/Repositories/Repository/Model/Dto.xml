@@ -4,7 +4,7 @@
   <AddInjectConstructor>true</AddInjectConstructor>
   <UseGenerics>false</UseGenerics>
   <InheritFrom />
-  <Namespace>Data.DefaultDto.Dto</Namespace>
+  <Namespace>Data.Dtos.DefaultDto.Dto</Namespace>
   <OutputFolder>Dto</OutputFolder>
   <OutputPath>..\..\Dtos\Dto\DotNetScaffolder.Domain.Data.Dtos.DefaultDto.csproj</OutputPath>
   <PostFix>Dto</PostFix>

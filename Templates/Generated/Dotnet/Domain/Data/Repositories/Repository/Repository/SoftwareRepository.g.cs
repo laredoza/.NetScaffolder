@@ -26,6 +26,7 @@ using System.Threading.Tasks;
 using DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.Dto;
 using DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity;
 using DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces;
+using DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity;
 
 using DotNetScaffolder.Domain.Core;
 using DotNetScaffolder.Domain.Core.Interfaces;
@@ -35,7 +36,7 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
 	/// <summary>
 	/// The SoftwareRepository class responsible for database functions in the Software table
 	/// </summary>
-	public partial class SoftwareRepository : UowRepository<ISoftware> , ISoftwareRepository
+	public partial class SoftwareRepository : UowRepository<Software> , ISoftwareRepository
 	{		
 		#region CTOR
 		
@@ -61,8 +62,8 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// </summary
         /// <param name="productId">int</param>
 		/// <param name="includes">params Expression<Func<ISoftware, object>>[]</param>
-        /// <returns>ISoftware</returns>
-		public virtual ISoftware LoadByProductId(int productId, bool cache, params Expression<Func<ISoftware, object>>[] includes)
+        /// <returns>Software</returns>
+		public virtual Software LoadByProductId(int productId, bool cache, params Expression<Func<ISoftware, object>>[] includes)
 		{
 			var expr = this.Convert(includes);
 			return this.UnitOfWork.FirstOrDefault<Software>(o => o.ProductId == productId, cache, expr);
@@ -73,8 +74,8 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// </summary
         /// <param name="productId">int</param>
 		/// <param name="includes">params Expression<Func<ISoftware, object>>[]</param>
-        /// <returns>ISoftware</returns>
-		public virtual async Task<ISoftware> LoadByProductIdAsync(int productId, bool cache, params Expression<Func<ISoftware, object>>[] includes)
+        /// <returns>Software</returns>
+		public virtual async Task<Software> LoadByProductIdAsync(int productId, bool cache, params Expression<Func<ISoftware, object>>[] includes)
 		{
 			var expr = this.Convert(includes);
 			return await this.UnitOfWork.FirstOrDefaultAsync<Software>(cache, o => o.ProductId == productId, expr);
@@ -84,23 +85,23 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// Load all Software entities from the database.
         /// </summary>
 		/// <param name="includes">params Expression<Func<ISoftware, object>>[]</param>
-        /// <returns>IList<ISoftware></returns>
-		public virtual IList<ISoftware> LoadAll(bool cache, params Expression<Func<ISoftware, object>>[] includes)
+        /// <returns>IList<Software></returns>
+		public virtual IList<Software> LoadAll(bool cache, params Expression<Func<ISoftware, object>>[] includes)
 		{
 			var expr = this.Convert(includes);
-			return this.UnitOfWork.GetAll<Software>(cache, expr).ToList<ISoftware>();
+			return this.UnitOfWork.GetAll<Software>(cache, expr).ToList<Software>();
 		}
 		
         /// <summary>
         /// Load all Software entities async from the database.
         /// </summary>
 		/// <param name="includes">params Expression<Func<ISoftware, object>>[]</param>
-        /// <returns>IList<ISoftware></returns>
-		public virtual async Task<IList<ISoftware>> LoadAllAsync(bool cache, params Expression<Func<ISoftware,  object>>[] includes)
+        /// <returns>IList<Software></returns>
+		public virtual async Task<IList<Software>> LoadAllAsync(bool cache, params Expression<Func<ISoftware,  object>>[] includes)
 		{
 			var expr = this.Convert(includes);
 			var result = await this.UnitOfWork.GetAllAsync<Software>(cache, expr);
-			return result.ToList<ISoftware>();
+			return result.ToList<Software>();
 		}
 		
 		#endregion
@@ -113,17 +114,17 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <param name="licenseCode">string</param>
 		/// <param name="caseSensitive">bool</param>
 		/// <param name="includes">params Expression<Func<ISoftware, object>>[]</param>
-        /// <returns>IList<ISoftware></returns>
-		public virtual IList<ISoftware> SearchByLicenseCode(string licenseCode, bool cache, bool caseSensitive = false, params Expression<Func<ISoftware, object>>[] includes)
+        /// <returns>IList<Software></returns>
+		public virtual IList<Software> SearchByLicenseCode(string licenseCode, bool cache, bool caseSensitive = false, params Expression<Func<ISoftware, object>>[] includes)
 		{		
 			var expr = this.Convert(includes);
 			if(caseSensitive) 
 			{
-				return this.UnitOfWork.AllMatching<Software>(o => o.LicenseCode.Contains(licenseCode), cache, expr).ToList<ISoftware>();
+				return this.UnitOfWork.AllMatching<Software>(o => o.LicenseCode.Contains(licenseCode), cache, expr).ToList<Software>();
 			}
 			else
 			{
-				return this.UnitOfWork.AllMatching<Software>(o => o.LicenseCode.ToLower().Contains(licenseCode.ToLower()), cache, expr).ToList<ISoftware>();
+				return this.UnitOfWork.AllMatching<Software>(o => o.LicenseCode.ToLower().Contains(licenseCode.ToLower()), cache, expr).ToList<Software>();
 			}
 		}
 		
@@ -133,19 +134,19 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <param name="licenseCode">string</param>
 		/// <param name="caseSensitive">bool</param>
 		/// <param name="includes">params Expression<Func<ISoftware, object>>[]</param>
-        /// <returns>IList<ISoftware></returns>
-		public virtual async Task<IList<ISoftware>> SearchByLicenseCodeAsync(string licenseCode, bool cache, bool caseSensitive = false, params Expression<Func<ISoftware, object>>[] includes)
+        /// <returns>IList<Software></returns>
+		public virtual async Task<IList<Software>> SearchByLicenseCodeAsync(string licenseCode, bool cache, bool caseSensitive = false, params Expression<Func<ISoftware, object>>[] includes)
 		{		
 			var expr = this.Convert(includes);
 			if(caseSensitive) 
 			{
 				var result = await this.UnitOfWork.AllMatchingAsync<Software>(o => o.LicenseCode.Contains(licenseCode), cache, expr);
-				return result.ToList<ISoftware>();
+				return result.ToList<Software>();
 			}
 			else
 			{
 				var result = await this.UnitOfWork.AllMatchingAsync<Software>(o => o.LicenseCode.ToLower().Contains(licenseCode.ToLower()), cache, expr);
-				return result.ToList<ISoftware>();
+				return result.ToList<Software>();
 			}
 		}
 
@@ -156,45 +157,31 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <summary>
         /// Add the Software entity to the database.
         /// </summary>
-        /// <param name="entity">ISoftware</param>
+        /// <param name="entity">Software</param>
         /// <returns>bool</returns>
-		public virtual bool Add(ISoftware entity)
+		public virtual bool Add(Software entity)
 		{
-			var entityToSave = new Software(entity, false);
-			this.UnitOfWork.Add(entityToSave);
-			bool result = this.UnitOfWork.Save();
-			
-			// Populate passed in entity with newly saved values
-			entity.ProductId = entityToSave.ProductId;
-			entity.LicenseCode = entityToSave.LicenseCode;
-			
-			return result;
+			this.UnitOfWork.Add(entity);
+			return this.UnitOfWork.Save();
 		}
 		
         /// <summary>
         /// Add the Software entity async to the database.
         /// </summary>
-        /// <param name="entity">ISoftware</param>
+        /// <param name="entity">Software</param>
         /// <returns>bool</returns>
-		public virtual async Task<bool> AddAsync(ISoftware entity)
+		public virtual async Task<bool> AddAsync(Software entity)
 		{
-			var entityToSave = new Software(entity, false);
-			await this.UnitOfWork.AddAsync(entityToSave);
-			bool result = await this.UnitOfWork.SaveAsync();
-			
-			// Populate passed in entity with newly saved values
-			entity.ProductId = entityToSave.ProductId;
-			entity.LicenseCode = entityToSave.LicenseCode;
-			
-			return result;
+			await this.UnitOfWork.AddAsync(entity);
+			return await this.UnitOfWork.SaveAsync();
 		}
 
         /// <summary>
         /// Update the Software entity in the database if any values have changed
         /// </summary>
-        /// <param name="entity">ISoftware</param>
+        /// <param name="entity">Software</param>
         /// <returns>bool</returns>
-		public virtual bool Update(ISoftware entity)
+		public virtual bool Update(Software entity)
 		{
 			return this.UnitOfWork.Modify(entity);
 		}
@@ -202,9 +189,9 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <summary>
         /// Update the Software entity async in the database if any values have changed
         /// </summary>
-        /// <param name="entity">ISoftware</param>
+        /// <param name="entity">Software</param>
         /// <returns>bool</returns>
-		public virtual async Task<bool> UpdateAsync(ISoftware entity)
+		public virtual async Task<bool> UpdateAsync(Software entity)
 		{
 			return await this.UnitOfWork.ModifyAsync(entity);
 		}
@@ -212,9 +199,9 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <summary>
         /// Delete the Software entity from the database
         /// </summary>
-        /// <param name="entity">ISoftware</param>
+        /// <param name="entity">Software</param>
         /// <returns>bool</returns>
-		public virtual bool Delete(ISoftware entity)
+		public virtual bool Delete(Software entity)
 		{		
 			return this.UnitOfWork.Remove(entity);
 		}
@@ -222,9 +209,9 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <summary>
         /// Delete the Software entity async from the database
         /// </summary>
-        /// <param name="entity">ISoftware</param>
+        /// <param name="entity">Software</param>
         /// <returns>bool</returns>
-		public virtual async Task<bool> DeleteAsync(ISoftware entity)
+		public virtual async Task<bool> DeleteAsync(Software entity)
 		{		
 			return await this.UnitOfWork.RemoveAsync(entity);
 		}
@@ -274,7 +261,7 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
 		
 		public virtual async Task<TResult> MaxAsync<TResult>(Expression<Func<ISoftware, TResult>> maxExpression, bool cache)
 		{
-			return await this.UnitOfWork.MaxAsync(cache, Expression.Lambda<Func<Software, TResult>>(maxExpression.Body, maxExpression.Parameters));
+			return await this.UnitOfWork.MaxAsync(cache, Expression.Lambda<Func<ISoftware, TResult>>(maxExpression.Body, maxExpression.Parameters));
 		}
 		
 		public virtual TResult Min<TResult>(Expression<Func<ISoftware, TResult>> minExpression, bool cache)
@@ -296,7 +283,7 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
-        public void BulkDelete(IEnumerable<ISoftware> items)
+        public void BulkDelete(IEnumerable<Software> items)
 		{
 			this.UnitOfWork.BulkDelete<ISoftware>(items);
 		}
@@ -307,9 +294,9 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
         /// <returns></returns>
-        public async Task BulkDeleteAsync(IEnumerable<ISoftware> items)
+        public async Task BulkDeleteAsync(IEnumerable<Software> items)
 		{
-			await this.UnitOfWork.BulkDeleteAsync<ISoftware>(items);
+			await this.UnitOfWork.BulkDeleteAsync<Software>(items);
 		}
 
         /// <summary>
@@ -317,9 +304,9 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
-        public void BulkInsert(IEnumerable<ISoftware> items)
+        public void BulkInsert(IEnumerable<Software> items)
 		{
-			this.UnitOfWork.BulkInsert<ISoftware>(items);
+			this.UnitOfWork.BulkInsert<Software>(items);
 		}
         
         /// <summary>
@@ -328,9 +315,9 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
         /// <returns></returns>
-        public async Task BulkInsertAsync(IEnumerable<ISoftware> items)
+        public async Task BulkInsertAsync(IEnumerable<Software> items)
 		{
-			await this.UnitOfWork.BulkInsertAsync<ISoftware>(items);
+			await this.UnitOfWork.BulkInsertAsync<Software>(items);
 		}
 
         /// <summary>
@@ -338,9 +325,9 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
-        public void BulkUpdate(IEnumerable<ISoftware> items)
+        public void BulkUpdate(IEnumerable<Software> items)
 		{
-			this.UnitOfWork.BulkUpdate<ISoftware>(items);
+			this.UnitOfWork.BulkUpdate<Software>(items);
 		}
 
         /// <summary>
@@ -349,9 +336,9 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
         /// <returns></returns>
-        public async Task BulkUpdateAsync(IEnumerable<ISoftware> items)
+        public async Task BulkUpdateAsync(IEnumerable<Software> items)
 		{
-			await this.UnitOfWork.BulkUpdateAsync<ISoftware>(items);
+			await this.UnitOfWork.BulkUpdateAsync<Software>(items);
 		}
 
         #endregion

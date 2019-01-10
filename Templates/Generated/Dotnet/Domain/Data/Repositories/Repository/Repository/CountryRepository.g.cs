@@ -26,6 +26,7 @@ using System.Threading.Tasks;
 using DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.Dto;
 using DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity;
 using DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces;
+using DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity;
 
 using DotNetScaffolder.Domain.Core;
 using DotNetScaffolder.Domain.Core.Interfaces;
@@ -35,7 +36,7 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
 	/// <summary>
 	/// The CountryRepository class responsible for database functions in the Country table
 	/// </summary>
-	public partial class CountryRepository : UowRepository<ICountry> , ICountryRepository
+	public partial class CountryRepository : UowRepository<Country> , ICountryRepository
 	{		
 		#region CTOR
 		
@@ -61,8 +62,8 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// </summary
         /// <param name="countryId">int</param>
 		/// <param name="includes">params Expression<Func<ICountry, object>>[]</param>
-        /// <returns>ICountry</returns>
-		public virtual ICountry LoadByCountryId(int countryId, bool cache, params Expression<Func<ICountry, object>>[] includes)
+        /// <returns>Country</returns>
+		public virtual Country LoadByCountryId(int countryId, bool cache, params Expression<Func<ICountry, object>>[] includes)
 		{
 			var expr = this.Convert(includes);
 			return this.UnitOfWork.FirstOrDefault<Country>(o => o.CountryId == countryId, cache, expr);
@@ -73,8 +74,8 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// </summary
         /// <param name="countryId">int</param>
 		/// <param name="includes">params Expression<Func<ICountry, object>>[]</param>
-        /// <returns>ICountry</returns>
-		public virtual async Task<ICountry> LoadByCountryIdAsync(int countryId, bool cache, params Expression<Func<ICountry, object>>[] includes)
+        /// <returns>Country</returns>
+		public virtual async Task<Country> LoadByCountryIdAsync(int countryId, bool cache, params Expression<Func<ICountry, object>>[] includes)
 		{
 			var expr = this.Convert(includes);
 			return await this.UnitOfWork.FirstOrDefaultAsync<Country>(cache, o => o.CountryId == countryId, expr);
@@ -84,23 +85,23 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// Load all Country entities from the database.
         /// </summary>
 		/// <param name="includes">params Expression<Func<ICountry, object>>[]</param>
-        /// <returns>IList<ICountry></returns>
-		public virtual IList<ICountry> LoadAll(bool cache, params Expression<Func<ICountry, object>>[] includes)
+        /// <returns>IList<Country></returns>
+		public virtual IList<Country> LoadAll(bool cache, params Expression<Func<ICountry, object>>[] includes)
 		{
 			var expr = this.Convert(includes);
-			return this.UnitOfWork.GetAll<Country>(cache, expr).ToList<ICountry>();
+			return this.UnitOfWork.GetAll<Country>(cache, expr).ToList<Country>();
 		}
 		
         /// <summary>
         /// Load all Country entities async from the database.
         /// </summary>
 		/// <param name="includes">params Expression<Func<ICountry, object>>[]</param>
-        /// <returns>IList<ICountry></returns>
-		public virtual async Task<IList<ICountry>> LoadAllAsync(bool cache, params Expression<Func<ICountry,  object>>[] includes)
+        /// <returns>IList<Country></returns>
+		public virtual async Task<IList<Country>> LoadAllAsync(bool cache, params Expression<Func<ICountry,  object>>[] includes)
 		{
 			var expr = this.Convert(includes);
 			var result = await this.UnitOfWork.GetAllAsync<Country>(cache, expr);
-			return result.ToList<ICountry>();
+			return result.ToList<Country>();
 		}
 		
 		#endregion
@@ -113,17 +114,17 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <param name="countryName">string</param>
 		/// <param name="caseSensitive">bool</param>
 		/// <param name="includes">params Expression<Func<ICountry, object>>[]</param>
-        /// <returns>IList<ICountry></returns>
-		public virtual IList<ICountry> SearchByCountryName(string countryName, bool cache, bool caseSensitive = false, params Expression<Func<ICountry, object>>[] includes)
+        /// <returns>IList<Country></returns>
+		public virtual IList<Country> SearchByCountryName(string countryName, bool cache, bool caseSensitive = false, params Expression<Func<ICountry, object>>[] includes)
 		{		
 			var expr = this.Convert(includes);
 			if(caseSensitive) 
 			{
-				return this.UnitOfWork.AllMatching<Country>(o => o.CountryName.Contains(countryName), cache, expr).ToList<ICountry>();
+				return this.UnitOfWork.AllMatching<Country>(o => o.CountryName.Contains(countryName), cache, expr).ToList<Country>();
 			}
 			else
 			{
-				return this.UnitOfWork.AllMatching<Country>(o => o.CountryName.ToLower().Contains(countryName.ToLower()), cache, expr).ToList<ICountry>();
+				return this.UnitOfWork.AllMatching<Country>(o => o.CountryName.ToLower().Contains(countryName.ToLower()), cache, expr).ToList<Country>();
 			}
 		}
 		
@@ -133,19 +134,19 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <param name="countryName">string</param>
 		/// <param name="caseSensitive">bool</param>
 		/// <param name="includes">params Expression<Func<ICountry, object>>[]</param>
-        /// <returns>IList<ICountry></returns>
-		public virtual async Task<IList<ICountry>> SearchByCountryNameAsync(string countryName, bool cache, bool caseSensitive = false, params Expression<Func<ICountry, object>>[] includes)
+        /// <returns>IList<Country></returns>
+		public virtual async Task<IList<Country>> SearchByCountryNameAsync(string countryName, bool cache, bool caseSensitive = false, params Expression<Func<ICountry, object>>[] includes)
 		{		
 			var expr = this.Convert(includes);
 			if(caseSensitive) 
 			{
 				var result = await this.UnitOfWork.AllMatchingAsync<Country>(o => o.CountryName.Contains(countryName), cache, expr);
-				return result.ToList<ICountry>();
+				return result.ToList<Country>();
 			}
 			else
 			{
 				var result = await this.UnitOfWork.AllMatchingAsync<Country>(o => o.CountryName.ToLower().Contains(countryName.ToLower()), cache, expr);
-				return result.ToList<ICountry>();
+				return result.ToList<Country>();
 			}
 		}
 
@@ -156,45 +157,31 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <summary>
         /// Add the Country entity to the database.
         /// </summary>
-        /// <param name="entity">ICountry</param>
+        /// <param name="entity">Country</param>
         /// <returns>bool</returns>
-		public virtual bool Add(ICountry entity)
+		public virtual bool Add(Country entity)
 		{
-			var entityToSave = new Country(entity, false);
-			this.UnitOfWork.Add(entityToSave);
-			bool result = this.UnitOfWork.Save();
-			
-			// Populate passed in entity with newly saved values
-			entity.CountryId = entityToSave.CountryId;
-			entity.CountryName = entityToSave.CountryName;
-			
-			return result;
+			this.UnitOfWork.Add(entity);
+			return this.UnitOfWork.Save();
 		}
 		
         /// <summary>
         /// Add the Country entity async to the database.
         /// </summary>
-        /// <param name="entity">ICountry</param>
+        /// <param name="entity">Country</param>
         /// <returns>bool</returns>
-		public virtual async Task<bool> AddAsync(ICountry entity)
+		public virtual async Task<bool> AddAsync(Country entity)
 		{
-			var entityToSave = new Country(entity, false);
-			await this.UnitOfWork.AddAsync(entityToSave);
-			bool result = await this.UnitOfWork.SaveAsync();
-			
-			// Populate passed in entity with newly saved values
-			entity.CountryId = entityToSave.CountryId;
-			entity.CountryName = entityToSave.CountryName;
-			
-			return result;
+			await this.UnitOfWork.AddAsync(entity);
+			return await this.UnitOfWork.SaveAsync();
 		}
 
         /// <summary>
         /// Update the Country entity in the database if any values have changed
         /// </summary>
-        /// <param name="entity">ICountry</param>
+        /// <param name="entity">Country</param>
         /// <returns>bool</returns>
-		public virtual bool Update(ICountry entity)
+		public virtual bool Update(Country entity)
 		{
 			return this.UnitOfWork.Modify(entity);
 		}
@@ -202,9 +189,9 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <summary>
         /// Update the Country entity async in the database if any values have changed
         /// </summary>
-        /// <param name="entity">ICountry</param>
+        /// <param name="entity">Country</param>
         /// <returns>bool</returns>
-		public virtual async Task<bool> UpdateAsync(ICountry entity)
+		public virtual async Task<bool> UpdateAsync(Country entity)
 		{
 			return await this.UnitOfWork.ModifyAsync(entity);
 		}
@@ -212,9 +199,9 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <summary>
         /// Delete the Country entity from the database
         /// </summary>
-        /// <param name="entity">ICountry</param>
+        /// <param name="entity">Country</param>
         /// <returns>bool</returns>
-		public virtual bool Delete(ICountry entity)
+		public virtual bool Delete(Country entity)
 		{		
 			return this.UnitOfWork.Remove(entity);
 		}
@@ -222,9 +209,9 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <summary>
         /// Delete the Country entity async from the database
         /// </summary>
-        /// <param name="entity">ICountry</param>
+        /// <param name="entity">Country</param>
         /// <returns>bool</returns>
-		public virtual async Task<bool> DeleteAsync(ICountry entity)
+		public virtual async Task<bool> DeleteAsync(Country entity)
 		{		
 			return await this.UnitOfWork.RemoveAsync(entity);
 		}
@@ -274,7 +261,7 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
 		
 		public virtual async Task<TResult> MaxAsync<TResult>(Expression<Func<ICountry, TResult>> maxExpression, bool cache)
 		{
-			return await this.UnitOfWork.MaxAsync(cache, Expression.Lambda<Func<Country, TResult>>(maxExpression.Body, maxExpression.Parameters));
+			return await this.UnitOfWork.MaxAsync(cache, Expression.Lambda<Func<ICountry, TResult>>(maxExpression.Body, maxExpression.Parameters));
 		}
 		
 		public virtual TResult Min<TResult>(Expression<Func<ICountry, TResult>> minExpression, bool cache)
@@ -296,7 +283,7 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
-        public void BulkDelete(IEnumerable<ICountry> items)
+        public void BulkDelete(IEnumerable<Country> items)
 		{
 			this.UnitOfWork.BulkDelete<ICountry>(items);
 		}
@@ -307,9 +294,9 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
         /// <returns></returns>
-        public async Task BulkDeleteAsync(IEnumerable<ICountry> items)
+        public async Task BulkDeleteAsync(IEnumerable<Country> items)
 		{
-			await this.UnitOfWork.BulkDeleteAsync<ICountry>(items);
+			await this.UnitOfWork.BulkDeleteAsync<Country>(items);
 		}
 
         /// <summary>
@@ -317,9 +304,9 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
-        public void BulkInsert(IEnumerable<ICountry> items)
+        public void BulkInsert(IEnumerable<Country> items)
 		{
-			this.UnitOfWork.BulkInsert<ICountry>(items);
+			this.UnitOfWork.BulkInsert<Country>(items);
 		}
         
         /// <summary>
@@ -328,9 +315,9 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
         /// <returns></returns>
-        public async Task BulkInsertAsync(IEnumerable<ICountry> items)
+        public async Task BulkInsertAsync(IEnumerable<Country> items)
 		{
-			await this.UnitOfWork.BulkInsertAsync<ICountry>(items);
+			await this.UnitOfWork.BulkInsertAsync<Country>(items);
 		}
 
         /// <summary>
@@ -338,9 +325,9 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
-        public void BulkUpdate(IEnumerable<ICountry> items)
+        public void BulkUpdate(IEnumerable<Country> items)
 		{
-			this.UnitOfWork.BulkUpdate<ICountry>(items);
+			this.UnitOfWork.BulkUpdate<Country>(items);
 		}
 
         /// <summary>
@@ -349,9 +336,9 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
         /// <returns></returns>
-        public async Task BulkUpdateAsync(IEnumerable<ICountry> items)
+        public async Task BulkUpdateAsync(IEnumerable<Country> items)
 		{
-			await this.UnitOfWork.BulkUpdateAsync<ICountry>(items);
+			await this.UnitOfWork.BulkUpdateAsync<Country>(items);
 		}
 
         #endregion

@@ -24,6 +24,7 @@ namespace Api
                     options.RequireHttpsMetadata = false;
 
                     options.ApiName = "api1";
+                    options.ApiSecret = "secret";
                 });
         }
 

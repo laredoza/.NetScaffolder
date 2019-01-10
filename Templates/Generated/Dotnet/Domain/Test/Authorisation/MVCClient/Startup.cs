@@ -35,6 +35,17 @@ namespace MVCClient
 
                     options.ClientId = "mvc";
                     options.SaveTokens = true;
+                    options.ClientSecret = "secret";
+
+                    options.ResponseType = "code id_token";
+                    //options.Scope.Add("openid");
+                    //options.Scope.Add("profile");
+                    //options.Scope.Add("email");
+                    options.Scope.Add("roles");
+                    options.Scope.Add("api1");
+                    
+                    //options.Scope = { "", ""}
+                    //options.ClientSecret = "secret"
                 });
         }
 

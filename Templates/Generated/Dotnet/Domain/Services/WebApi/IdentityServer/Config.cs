@@ -9,11 +9,13 @@ namespace DotNetScaffolder.Domain.Services.WebApi.IdentityServer
 {
     public class Config
     {
+        private const string readApi = "api1"; // .NetStandard.DefaultApi.read-only
+
         public static IEnumerable<ApiResource> GetApiResources()
         {
             return new List<ApiResource>
             {
-                new ApiResource("api1", "My API"),
+                new ApiResource(readApi, "Default API"),
                 //new IdentityResources.OpenId(),
                 //new IdentityResources.Profile(),
             };
@@ -49,7 +51,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.IdentityServer
         {
             ClientId = "mvc",
             ClientName = "MVC Client",
-            AllowedGrantTypes = GrantTypes.Implicit,
+            AllowedGrantTypes = GrantTypes.Hybrid,
 
             // where to redirect to after login
             RedirectUris = { "http://localhost:5002/signin-oidc" },
@@ -57,12 +59,14 @@ namespace DotNetScaffolder.Domain.Services.WebApi.IdentityServer
             // where to redirect to after logout
             PostLogoutRedirectUris = { "http://localhost:5002/signout-callback-oidc" },
 
+            ClientSecrets = { new Secret("secret".Sha256())},
             AllowedScopes = new List<string>
             {
                 IdentityServerConstants.StandardScopes.OpenId,
                 IdentityServerConstants.StandardScopes.Profile,
                 IdentityServerConstants.StandardScopes.Email,
-                "roles"
+                "roles",
+                readApi
             },
             AlwaysSendClientClaims = true
             // https://github.com/IdentityServer/IdentityServer4/issues/1786
@@ -81,7 +85,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.IdentityServer
                     },
 
                     // scopes that client has access to
-                    AllowedScopes = { "api1" }
+                    AllowedScopes = { readApi }
             },
                 // resource owner password grant client
         new Client
@@ -93,7 +97,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.IdentityServer
             {
                 new Secret("secret".Sha256())
             },
-            AllowedScopes = { "api1" }
+            AllowedScopes = { readApi }
         }
         };
         }

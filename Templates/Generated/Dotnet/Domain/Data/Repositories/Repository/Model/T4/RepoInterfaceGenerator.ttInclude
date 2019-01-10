@@ -5,6 +5,8 @@
         public RepoInterfaceDataType DataType { get; set; }
         public DtoInterfaceDataType DtoInterfaceType { get; set; }
         public List<Table> Models { get; set; }
+        public EntityDataType EntityDataType { get; set; }
+
 
         private RepoInterfaceTemplate template = new RepoInterfaceTemplate();
 
@@ -17,6 +19,7 @@
                 DataType.MetaData = model;
                 template.DataType = this.DataType;
                 template.DtoInterfaceNamespace = DtoInterfaceType.FullNamespace;
+                template.EntityDataType = EntityDataType;
 
                 if(!string.IsNullOrEmpty(DataType.OutputPath))
                 {

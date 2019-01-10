@@ -15,10 +15,6 @@
 <#@ include file="WebApiTemplateCustom.ttInclude" #>
 <#@ include file="StructureMapGenerator.ttInclude" #>
 
-
-
-
-
 <#+
     public class ProjectGenerator : BaseProjectGenerator
     {
@@ -99,6 +95,7 @@
                     iRepoGen.Models = domain.Tables;
                     iRepoGen.DataType = dataType as RepoInterfaceDataType;
                     iRepoGen.DtoInterfaceType = dataTypes.FirstOrDefault(o => o is DtoInterfaceDataType) as DtoInterfaceDataType;
+                    iRepoGen.EntityDataType = dataTypes.FirstOrDefault(o => o is EntityDataType) as EntityDataType; 
                     iRepoGen.Run();
                 }
 
@@ -110,6 +107,7 @@
                     iRepoGen.DtoInterfaceType = dataTypes.FirstOrDefault(o => o is DtoInterfaceDataType) as DtoInterfaceDataType;
                     iRepoGen.EntityDataType = dataTypes.FirstOrDefault(o => o is EntityDataType) as EntityDataType;
                     iRepoGen.RepositoryInterfaceNamespace = (dataTypes.FirstOrDefault(o => o is RepoInterfaceDataType) as RepoInterfaceDataType).FullNamespace; 
+                    iRepoGen.EntityDataType = dataTypes.FirstOrDefault(o => o is EntityDataType) as EntityDataType; 
                     iRepoGen.Run();
                 }
 
@@ -123,6 +121,8 @@
                             DataType = applicationDataType,
                             DtoInterfaceDataType = dataTypes.FirstOrDefault(o => o is DtoInterfaceDataType) as DtoInterfaceDataType,
                             RepositoryInterfaceNamespace = (dataTypes.FirstOrDefault(o => o is RepoInterfaceDataType) as RepoInterfaceDataType).FullNamespace, 
+                            DtoDataType = dataTypes.FirstOrDefault(o => o is DtoDataType) as DtoDataType,
+                            EntityDataType = dataTypes.FirstOrDefault(o => o is EntityDataType) as EntityDataType 
                    };
 
                     applicationServiceGenerator.Run();
@@ -136,7 +136,8 @@
                     var applicationServiceGenerator = new WebApiGenerator {
                             DataType = webApiServiceDataType,
                             ApplicationServiceDataType = dataTypes.FirstOrDefault(o => o is ApplicationServiceDataType) as ApplicationServiceDataType,
-                            DtoInterfaceDataType = dataTypes.FirstOrDefault(o => o is DtoInterfaceDataType) as DtoInterfaceDataType
+                            DtoInterfaceDataType = dataTypes.FirstOrDefault(o => o is DtoInterfaceDataType) as DtoInterfaceDataType,
+                            DtoDataType = dataTypes.FirstOrDefault(o => o is DtoDataType) as DtoDataType 
                             };
 
                     applicationServiceGenerator.Run();

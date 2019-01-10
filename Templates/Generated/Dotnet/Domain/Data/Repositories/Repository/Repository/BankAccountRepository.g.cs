@@ -26,6 +26,7 @@ using System.Threading.Tasks;
 using DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.Dto;
 using DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity;
 using DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces;
+using DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity;
 
 using DotNetScaffolder.Domain.Core;
 using DotNetScaffolder.Domain.Core.Interfaces;
@@ -35,7 +36,7 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
 	/// <summary>
 	/// The BankAccountRepository class responsible for database functions in the BankAccount table
 	/// </summary>
-	public partial class BankAccountRepository : UowRepository<IBankAccount> , IBankAccountRepository
+	public partial class BankAccountRepository : UowRepository<BankAccount> , IBankAccountRepository
 	{		
 		#region CTOR
 		
@@ -61,8 +62,8 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// </summary
         /// <param name="bankAccountId">int</param>
 		/// <param name="includes">params Expression<Func<IBankAccount, object>>[]</param>
-        /// <returns>IBankAccount</returns>
-		public virtual IBankAccount LoadByBankAccountId(int bankAccountId, bool cache, params Expression<Func<IBankAccount, object>>[] includes)
+        /// <returns>BankAccount</returns>
+		public virtual BankAccount LoadByBankAccountId(int bankAccountId, bool cache, params Expression<Func<IBankAccount, object>>[] includes)
 		{
 			var expr = this.Convert(includes);
 			return this.UnitOfWork.FirstOrDefault<BankAccount>(o => o.BankAccountId == bankAccountId, cache, expr);
@@ -73,8 +74,8 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// </summary
         /// <param name="bankAccountId">int</param>
 		/// <param name="includes">params Expression<Func<IBankAccount, object>>[]</param>
-        /// <returns>IBankAccount</returns>
-		public virtual async Task<IBankAccount> LoadByBankAccountIdAsync(int bankAccountId, bool cache, params Expression<Func<IBankAccount, object>>[] includes)
+        /// <returns>BankAccount</returns>
+		public virtual async Task<BankAccount> LoadByBankAccountIdAsync(int bankAccountId, bool cache, params Expression<Func<IBankAccount, object>>[] includes)
 		{
 			var expr = this.Convert(includes);
 			return await this.UnitOfWork.FirstOrDefaultAsync<BankAccount>(cache, o => o.BankAccountId == bankAccountId, expr);
@@ -84,98 +85,98 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// Load BankAccount entities from the database using the Balance field
         /// </summary>
         /// <param name="balance">decimal</param>
-		/// <param name="includes">params Expression<Func<IBankAccount, object>>[]</param>
+		/// <param name="includes">params Expression<Func<BankAccount, object>>[]</param>
         /// <returns>IList<IBankAccount></returns>
-		public virtual IList<IBankAccount> LoadByBalance(decimal balance, bool cache, params Expression<Func<IBankAccount, object>>[] includes)
+		public virtual IList<BankAccount> LoadByBalance(decimal balance, bool cache, params Expression<Func<IBankAccount, object>>[] includes)
 		{
 			var expr = this.Convert(includes);
-			return this.UnitOfWork.AllMatching<BankAccount>(o => o.Balance == balance, cache, expr).ToList<IBankAccount>();
+			return this.UnitOfWork.AllMatching<BankAccount>(o => o.Balance == balance, cache, expr).ToList<BankAccount>();
 		}
 		
         /// <summary>
         /// Load BankAccount entities async from the database using the Balance field
         /// </summary>
         /// <param name="balance">decimal</param>
-		/// <param name="includes">params Expression<Func<IBankAccount, object>>[]</param>
+		/// <param name="includes">params Expression<Func<BankAccount, object>>[]</param>
         /// <returns>IList<IBankAccount></returns>
-		public virtual async Task<IList<IBankAccount>> LoadByBalanceAsync(decimal balance, bool cache, params Expression<Func<IBankAccount, object>>[] includes)
+		public virtual async Task<IList<BankAccount>> LoadByBalanceAsync(decimal balance, bool cache, params Expression<Func<IBankAccount, object>>[] includes)
 		{
 			var expr = this.Convert(includes);
 			var result = await this.UnitOfWork.AllMatchingAsync<BankAccount>(o => o.Balance == balance,cache, expr);
-			return result.ToList<IBankAccount>();
+			return result.ToList<BankAccount>();
 		}
 
         /// <summary>
         /// Load BankAccount entities from the database using the CustomerId field
         /// </summary>
         /// <param name="customerId">Nullable<int></param>
-		/// <param name="includes">params Expression<Func<IBankAccount, object>>[]</param>
+		/// <param name="includes">params Expression<Func<BankAccount, object>>[]</param>
         /// <returns>IList<IBankAccount></returns>
-		public virtual IList<IBankAccount> LoadByCustomerId(Nullable<int> customerId, bool cache, params Expression<Func<IBankAccount, object>>[] includes)
+		public virtual IList<BankAccount> LoadByCustomerId(Nullable<int> customerId, bool cache, params Expression<Func<IBankAccount, object>>[] includes)
 		{
 			var expr = this.Convert(includes);
-			return this.UnitOfWork.AllMatching<BankAccount>(o => o.CustomerId == customerId, cache, expr).ToList<IBankAccount>();
+			return this.UnitOfWork.AllMatching<BankAccount>(o => o.CustomerId == customerId, cache, expr).ToList<BankAccount>();
 		}
 		
         /// <summary>
         /// Load BankAccount entities async from the database using the CustomerId field
         /// </summary>
         /// <param name="customerId">Nullable<int></param>
-		/// <param name="includes">params Expression<Func<IBankAccount, object>>[]</param>
+		/// <param name="includes">params Expression<Func<BankAccount, object>>[]</param>
         /// <returns>IList<IBankAccount></returns>
-		public virtual async Task<IList<IBankAccount>> LoadByCustomerIdAsync(Nullable<int> customerId, bool cache, params Expression<Func<IBankAccount, object>>[] includes)
+		public virtual async Task<IList<BankAccount>> LoadByCustomerIdAsync(Nullable<int> customerId, bool cache, params Expression<Func<IBankAccount, object>>[] includes)
 		{
 			var expr = this.Convert(includes);
 			var result = await this.UnitOfWork.AllMatchingAsync<BankAccount>(o => o.CustomerId == customerId,cache, expr);
-			return result.ToList<IBankAccount>();
+			return result.ToList<BankAccount>();
 		}
 
         /// <summary>
         /// Load BankAccount entities from the database using the Locked field
         /// </summary>
         /// <param name="locked">bool</param>
-		/// <param name="includes">params Expression<Func<IBankAccount, object>>[]</param>
+		/// <param name="includes">params Expression<Func<BankAccount, object>>[]</param>
         /// <returns>IList<IBankAccount></returns>
-		public virtual IList<IBankAccount> LoadByLocked(bool locked, bool cache, params Expression<Func<IBankAccount, object>>[] includes)
+		public virtual IList<BankAccount> LoadByLocked(bool locked, bool cache, params Expression<Func<IBankAccount, object>>[] includes)
 		{
 			var expr = this.Convert(includes);
-			return this.UnitOfWork.AllMatching<BankAccount>(o => o.Locked == locked, cache, expr).ToList<IBankAccount>();
+			return this.UnitOfWork.AllMatching<BankAccount>(o => o.Locked == locked, cache, expr).ToList<BankAccount>();
 		}
 		
         /// <summary>
         /// Load BankAccount entities async from the database using the Locked field
         /// </summary>
         /// <param name="locked">bool</param>
-		/// <param name="includes">params Expression<Func<IBankAccount, object>>[]</param>
+		/// <param name="includes">params Expression<Func<BankAccount, object>>[]</param>
         /// <returns>IList<IBankAccount></returns>
-		public virtual async Task<IList<IBankAccount>> LoadByLockedAsync(bool locked, bool cache, params Expression<Func<IBankAccount, object>>[] includes)
+		public virtual async Task<IList<BankAccount>> LoadByLockedAsync(bool locked, bool cache, params Expression<Func<IBankAccount, object>>[] includes)
 		{
 			var expr = this.Convert(includes);
 			var result = await this.UnitOfWork.AllMatchingAsync<BankAccount>(o => o.Locked == locked,cache, expr);
-			return result.ToList<IBankAccount>();
+			return result.ToList<BankAccount>();
 		}
 
         /// <summary>
         /// Load all BankAccount entities from the database.
         /// </summary>
 		/// <param name="includes">params Expression<Func<IBankAccount, object>>[]</param>
-        /// <returns>IList<IBankAccount></returns>
-		public virtual IList<IBankAccount> LoadAll(bool cache, params Expression<Func<IBankAccount, object>>[] includes)
+        /// <returns>IList<BankAccount></returns>
+		public virtual IList<BankAccount> LoadAll(bool cache, params Expression<Func<IBankAccount, object>>[] includes)
 		{
 			var expr = this.Convert(includes);
-			return this.UnitOfWork.GetAll<BankAccount>(cache, expr).ToList<IBankAccount>();
+			return this.UnitOfWork.GetAll<BankAccount>(cache, expr).ToList<BankAccount>();
 		}
 		
         /// <summary>
         /// Load all BankAccount entities async from the database.
         /// </summary>
 		/// <param name="includes">params Expression<Func<IBankAccount, object>>[]</param>
-        /// <returns>IList<IBankAccount></returns>
-		public virtual async Task<IList<IBankAccount>> LoadAllAsync(bool cache, params Expression<Func<IBankAccount,  object>>[] includes)
+        /// <returns>IList<BankAccount></returns>
+		public virtual async Task<IList<BankAccount>> LoadAllAsync(bool cache, params Expression<Func<IBankAccount,  object>>[] includes)
 		{
 			var expr = this.Convert(includes);
 			var result = await this.UnitOfWork.GetAllAsync<BankAccount>(cache, expr);
-			return result.ToList<IBankAccount>();
+			return result.ToList<BankAccount>();
 		}
 		
 		#endregion
@@ -188,17 +189,17 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <param name="bankAccountNumber">string</param>
 		/// <param name="caseSensitive">bool</param>
 		/// <param name="includes">params Expression<Func<IBankAccount, object>>[]</param>
-        /// <returns>IList<IBankAccount></returns>
-		public virtual IList<IBankAccount> SearchByBankAccountNumber(string bankAccountNumber, bool cache, bool caseSensitive = false, params Expression<Func<IBankAccount, object>>[] includes)
+        /// <returns>IList<BankAccount></returns>
+		public virtual IList<BankAccount> SearchByBankAccountNumber(string bankAccountNumber, bool cache, bool caseSensitive = false, params Expression<Func<IBankAccount, object>>[] includes)
 		{		
 			var expr = this.Convert(includes);
 			if(caseSensitive) 
 			{
-				return this.UnitOfWork.AllMatching<BankAccount>(o => o.BankAccountNumber.Contains(bankAccountNumber), cache, expr).ToList<IBankAccount>();
+				return this.UnitOfWork.AllMatching<BankAccount>(o => o.BankAccountNumber.Contains(bankAccountNumber), cache, expr).ToList<BankAccount>();
 			}
 			else
 			{
-				return this.UnitOfWork.AllMatching<BankAccount>(o => o.BankAccountNumber.ToLower().Contains(bankAccountNumber.ToLower()), cache, expr).ToList<IBankAccount>();
+				return this.UnitOfWork.AllMatching<BankAccount>(o => o.BankAccountNumber.ToLower().Contains(bankAccountNumber.ToLower()), cache, expr).ToList<BankAccount>();
 			}
 		}
 		
@@ -208,19 +209,19 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <param name="bankAccountNumber">string</param>
 		/// <param name="caseSensitive">bool</param>
 		/// <param name="includes">params Expression<Func<IBankAccount, object>>[]</param>
-        /// <returns>IList<IBankAccount></returns>
-		public virtual async Task<IList<IBankAccount>> SearchByBankAccountNumberAsync(string bankAccountNumber, bool cache, bool caseSensitive = false, params Expression<Func<IBankAccount, object>>[] includes)
+        /// <returns>IList<BankAccount></returns>
+		public virtual async Task<IList<BankAccount>> SearchByBankAccountNumberAsync(string bankAccountNumber, bool cache, bool caseSensitive = false, params Expression<Func<IBankAccount, object>>[] includes)
 		{		
 			var expr = this.Convert(includes);
 			if(caseSensitive) 
 			{
 				var result = await this.UnitOfWork.AllMatchingAsync<BankAccount>(o => o.BankAccountNumber.Contains(bankAccountNumber), cache, expr);
-				return result.ToList<IBankAccount>();
+				return result.ToList<BankAccount>();
 			}
 			else
 			{
 				var result = await this.UnitOfWork.AllMatchingAsync<BankAccount>(o => o.BankAccountNumber.ToLower().Contains(bankAccountNumber.ToLower()), cache, expr);
-				return result.ToList<IBankAccount>();
+				return result.ToList<BankAccount>();
 			}
 		}
 
@@ -231,51 +232,31 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <summary>
         /// Add the BankAccount entity to the database.
         /// </summary>
-        /// <param name="entity">IBankAccount</param>
+        /// <param name="entity">BankAccount</param>
         /// <returns>bool</returns>
-		public virtual bool Add(IBankAccount entity)
+		public virtual bool Add(BankAccount entity)
 		{
-			var entityToSave = new BankAccount(entity, false);
-			this.UnitOfWork.Add(entityToSave);
-			bool result = this.UnitOfWork.Save();
-			
-			// Populate passed in entity with newly saved values
-			entity.BankAccountId = entityToSave.BankAccountId;
-			entity.BankAccountNumber = entityToSave.BankAccountNumber;
-			entity.Balance = entityToSave.Balance;
-			entity.CustomerId = entityToSave.CustomerId;
-			entity.Locked = entityToSave.Locked;
-			
-			return result;
+			this.UnitOfWork.Add(entity);
+			return this.UnitOfWork.Save();
 		}
 		
         /// <summary>
         /// Add the BankAccount entity async to the database.
         /// </summary>
-        /// <param name="entity">IBankAccount</param>
+        /// <param name="entity">BankAccount</param>
         /// <returns>bool</returns>
-		public virtual async Task<bool> AddAsync(IBankAccount entity)
+		public virtual async Task<bool> AddAsync(BankAccount entity)
 		{
-			var entityToSave = new BankAccount(entity, false);
-			await this.UnitOfWork.AddAsync(entityToSave);
-			bool result = await this.UnitOfWork.SaveAsync();
-			
-			// Populate passed in entity with newly saved values
-			entity.BankAccountId = entityToSave.BankAccountId;
-			entity.BankAccountNumber = entityToSave.BankAccountNumber;
-			entity.Balance = entityToSave.Balance;
-			entity.CustomerId = entityToSave.CustomerId;
-			entity.Locked = entityToSave.Locked;
-			
-			return result;
+			await this.UnitOfWork.AddAsync(entity);
+			return await this.UnitOfWork.SaveAsync();
 		}
 
         /// <summary>
         /// Update the BankAccount entity in the database if any values have changed
         /// </summary>
-        /// <param name="entity">IBankAccount</param>
+        /// <param name="entity">BankAccount</param>
         /// <returns>bool</returns>
-		public virtual bool Update(IBankAccount entity)
+		public virtual bool Update(BankAccount entity)
 		{
 			return this.UnitOfWork.Modify(entity);
 		}
@@ -283,9 +264,9 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <summary>
         /// Update the BankAccount entity async in the database if any values have changed
         /// </summary>
-        /// <param name="entity">IBankAccount</param>
+        /// <param name="entity">BankAccount</param>
         /// <returns>bool</returns>
-		public virtual async Task<bool> UpdateAsync(IBankAccount entity)
+		public virtual async Task<bool> UpdateAsync(BankAccount entity)
 		{
 			return await this.UnitOfWork.ModifyAsync(entity);
 		}
@@ -293,9 +274,9 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <summary>
         /// Delete the BankAccount entity from the database
         /// </summary>
-        /// <param name="entity">IBankAccount</param>
+        /// <param name="entity">BankAccount</param>
         /// <returns>bool</returns>
-		public virtual bool Delete(IBankAccount entity)
+		public virtual bool Delete(BankAccount entity)
 		{		
 			return this.UnitOfWork.Remove(entity);
 		}
@@ -303,9 +284,9 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <summary>
         /// Delete the BankAccount entity async from the database
         /// </summary>
-        /// <param name="entity">IBankAccount</param>
+        /// <param name="entity">BankAccount</param>
         /// <returns>bool</returns>
-		public virtual async Task<bool> DeleteAsync(IBankAccount entity)
+		public virtual async Task<bool> DeleteAsync(BankAccount entity)
 		{		
 			return await this.UnitOfWork.RemoveAsync(entity);
 		}
@@ -355,7 +336,7 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
 		
 		public virtual async Task<TResult> MaxAsync<TResult>(Expression<Func<IBankAccount, TResult>> maxExpression, bool cache)
 		{
-			return await this.UnitOfWork.MaxAsync(cache, Expression.Lambda<Func<BankAccount, TResult>>(maxExpression.Body, maxExpression.Parameters));
+			return await this.UnitOfWork.MaxAsync(cache, Expression.Lambda<Func<IBankAccount, TResult>>(maxExpression.Body, maxExpression.Parameters));
 		}
 		
 		public virtual TResult Min<TResult>(Expression<Func<IBankAccount, TResult>> minExpression, bool cache)
@@ -377,7 +358,7 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
-        public void BulkDelete(IEnumerable<IBankAccount> items)
+        public void BulkDelete(IEnumerable<BankAccount> items)
 		{
 			this.UnitOfWork.BulkDelete<IBankAccount>(items);
 		}
@@ -388,9 +369,9 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
         /// <returns></returns>
-        public async Task BulkDeleteAsync(IEnumerable<IBankAccount> items)
+        public async Task BulkDeleteAsync(IEnumerable<BankAccount> items)
 		{
-			await this.UnitOfWork.BulkDeleteAsync<IBankAccount>(items);
+			await this.UnitOfWork.BulkDeleteAsync<BankAccount>(items);
 		}
 
         /// <summary>
@@ -398,9 +379,9 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
-        public void BulkInsert(IEnumerable<IBankAccount> items)
+        public void BulkInsert(IEnumerable<BankAccount> items)
 		{
-			this.UnitOfWork.BulkInsert<IBankAccount>(items);
+			this.UnitOfWork.BulkInsert<BankAccount>(items);
 		}
         
         /// <summary>
@@ -409,9 +390,9 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
         /// <returns></returns>
-        public async Task BulkInsertAsync(IEnumerable<IBankAccount> items)
+        public async Task BulkInsertAsync(IEnumerable<BankAccount> items)
 		{
-			await this.UnitOfWork.BulkInsertAsync<IBankAccount>(items);
+			await this.UnitOfWork.BulkInsertAsync<BankAccount>(items);
 		}
 
         /// <summary>
@@ -419,9 +400,9 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
-        public void BulkUpdate(IEnumerable<IBankAccount> items)
+        public void BulkUpdate(IEnumerable<BankAccount> items)
 		{
-			this.UnitOfWork.BulkUpdate<IBankAccount>(items);
+			this.UnitOfWork.BulkUpdate<BankAccount>(items);
 		}
 
         /// <summary>
@@ -430,9 +411,9 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
         /// <returns></returns>
-        public async Task BulkUpdateAsync(IEnumerable<IBankAccount> items)
+        public async Task BulkUpdateAsync(IEnumerable<BankAccount> items)
 		{
-			await this.UnitOfWork.BulkUpdateAsync<IBankAccount>(items);
+			await this.UnitOfWork.BulkUpdateAsync<BankAccount>(items);
 		}
 
         #endregion

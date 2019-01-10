@@ -22,7 +22,7 @@ using System;
 using System.Collections.Generic;
 using DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.Dto;
 
-namespace DotNetScaffolder.Domain.Data.DefaultDto.Dto
+namespace DotNetScaffolder.Domain.Data.Dtos.DefaultDto.Dto
 {
 	public partial class CustomerDto : ICustomer 
 	{

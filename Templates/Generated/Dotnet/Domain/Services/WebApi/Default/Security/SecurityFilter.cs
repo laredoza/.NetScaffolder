@@ -20,7 +20,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Security
 
         public override bool CheckGenericPermission(AuthorizationFilterContext context, Claim claim)
         {
-            var currentUser = context.HttpContext.User.Identity.Name;
+            var currentUser = context.HttpContext.User;
 
             string controller = context.RouteData.Values["controller"].ToString();
             string action = context.RouteData.Values["action"].ToString();
@@ -33,7 +33,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Security
             {
                 return true;
             }
-            else if (controller == "Product")
+            else if (currentUser.Identity.IsAuthenticated && currentUser.HasClaim(c => c.Value == "Admin" ) && controller == "Product")
             {
                 return true;
             }

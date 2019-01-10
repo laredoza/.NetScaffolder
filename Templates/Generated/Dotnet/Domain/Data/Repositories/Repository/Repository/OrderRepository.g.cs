@@ -26,6 +26,7 @@ using System.Threading.Tasks;
 using DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.Dto;
 using DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity;
 using DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces;
+using DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity;
 
 using DotNetScaffolder.Domain.Core;
 using DotNetScaffolder.Domain.Core.Interfaces;
@@ -35,7 +36,7 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
 	/// <summary>
 	/// The OrderRepository class responsible for database functions in the Order table
 	/// </summary>
-	public partial class OrderRepository : UowRepository<IOrder> , IOrderRepository
+	public partial class OrderRepository : UowRepository<Order> , IOrderRepository
 	{		
 		#region CTOR
 		
@@ -61,8 +62,8 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// </summary
         /// <param name="orderId">int</param>
 		/// <param name="includes">params Expression<Func<IOrder, object>>[]</param>
-        /// <returns>IOrder</returns>
-		public virtual IOrder LoadByOrderId(int orderId, bool cache, params Expression<Func<IOrder, object>>[] includes)
+        /// <returns>Order</returns>
+		public virtual Order LoadByOrderId(int orderId, bool cache, params Expression<Func<IOrder, object>>[] includes)
 		{
 			var expr = this.Convert(includes);
 			return this.UnitOfWork.FirstOrDefault<Order>(o => o.OrderId == orderId, cache, expr);
@@ -73,8 +74,8 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// </summary
         /// <param name="orderId">int</param>
 		/// <param name="includes">params Expression<Func<IOrder, object>>[]</param>
-        /// <returns>IOrder</returns>
-		public virtual async Task<IOrder> LoadByOrderIdAsync(int orderId, bool cache, params Expression<Func<IOrder, object>>[] includes)
+        /// <returns>Order</returns>
+		public virtual async Task<Order> LoadByOrderIdAsync(int orderId, bool cache, params Expression<Func<IOrder, object>>[] includes)
 		{
 			var expr = this.Convert(includes);
 			return await this.UnitOfWork.FirstOrDefaultAsync<Order>(cache, o => o.OrderId == orderId, expr);
@@ -84,98 +85,98 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// Load Order entities from the database using the CustomerId field
         /// </summary>
         /// <param name="customerId">Nullable<int></param>
-		/// <param name="includes">params Expression<Func<IOrder, object>>[]</param>
+		/// <param name="includes">params Expression<Func<Order, object>>[]</param>
         /// <returns>IList<IOrder></returns>
-		public virtual IList<IOrder> LoadByCustomerId(Nullable<int> customerId, bool cache, params Expression<Func<IOrder, object>>[] includes)
+		public virtual IList<Order> LoadByCustomerId(Nullable<int> customerId, bool cache, params Expression<Func<IOrder, object>>[] includes)
 		{
 			var expr = this.Convert(includes);
-			return this.UnitOfWork.AllMatching<Order>(o => o.CustomerId == customerId, cache, expr).ToList<IOrder>();
+			return this.UnitOfWork.AllMatching<Order>(o => o.CustomerId == customerId, cache, expr).ToList<Order>();
 		}
 		
         /// <summary>
         /// Load Order entities async from the database using the CustomerId field
         /// </summary>
         /// <param name="customerId">Nullable<int></param>
-		/// <param name="includes">params Expression<Func<IOrder, object>>[]</param>
+		/// <param name="includes">params Expression<Func<Order, object>>[]</param>
         /// <returns>IList<IOrder></returns>
-		public virtual async Task<IList<IOrder>> LoadByCustomerIdAsync(Nullable<int> customerId, bool cache, params Expression<Func<IOrder, object>>[] includes)
+		public virtual async Task<IList<Order>> LoadByCustomerIdAsync(Nullable<int> customerId, bool cache, params Expression<Func<IOrder, object>>[] includes)
 		{
 			var expr = this.Convert(includes);
 			var result = await this.UnitOfWork.AllMatchingAsync<Order>(o => o.CustomerId == customerId,cache, expr);
-			return result.ToList<IOrder>();
+			return result.ToList<Order>();
 		}
 
         /// <summary>
         /// Load Order entities from the database using the OrderDate field
         /// </summary>
         /// <param name="orderDate">Nullable<DateTime></param>
-		/// <param name="includes">params Expression<Func<IOrder, object>>[]</param>
+		/// <param name="includes">params Expression<Func<Order, object>>[]</param>
         /// <returns>IList<IOrder></returns>
-		public virtual IList<IOrder> LoadByOrderDate(Nullable<DateTime> orderDate, bool cache, params Expression<Func<IOrder, object>>[] includes)
+		public virtual IList<Order> LoadByOrderDate(Nullable<DateTime> orderDate, bool cache, params Expression<Func<IOrder, object>>[] includes)
 		{
 			var expr = this.Convert(includes);
-			return this.UnitOfWork.AllMatching<Order>(o => o.OrderDate == orderDate, cache, expr).ToList<IOrder>();
+			return this.UnitOfWork.AllMatching<Order>(o => o.OrderDate == orderDate, cache, expr).ToList<Order>();
 		}
 		
         /// <summary>
         /// Load Order entities async from the database using the OrderDate field
         /// </summary>
         /// <param name="orderDate">Nullable<DateTime></param>
-		/// <param name="includes">params Expression<Func<IOrder, object>>[]</param>
+		/// <param name="includes">params Expression<Func<Order, object>>[]</param>
         /// <returns>IList<IOrder></returns>
-		public virtual async Task<IList<IOrder>> LoadByOrderDateAsync(Nullable<DateTime> orderDate, bool cache, params Expression<Func<IOrder, object>>[] includes)
+		public virtual async Task<IList<Order>> LoadByOrderDateAsync(Nullable<DateTime> orderDate, bool cache, params Expression<Func<IOrder, object>>[] includes)
 		{
 			var expr = this.Convert(includes);
 			var result = await this.UnitOfWork.AllMatchingAsync<Order>(o => o.OrderDate == orderDate,cache, expr);
-			return result.ToList<IOrder>();
+			return result.ToList<Order>();
 		}
 
         /// <summary>
         /// Load Order entities from the database using the DeliveryDate field
         /// </summary>
         /// <param name="deliveryDate">Nullable<DateTime></param>
-		/// <param name="includes">params Expression<Func<IOrder, object>>[]</param>
+		/// <param name="includes">params Expression<Func<Order, object>>[]</param>
         /// <returns>IList<IOrder></returns>
-		public virtual IList<IOrder> LoadByDeliveryDate(Nullable<DateTime> deliveryDate, bool cache, params Expression<Func<IOrder, object>>[] includes)
+		public virtual IList<Order> LoadByDeliveryDate(Nullable<DateTime> deliveryDate, bool cache, params Expression<Func<IOrder, object>>[] includes)
 		{
 			var expr = this.Convert(includes);
-			return this.UnitOfWork.AllMatching<Order>(o => o.DeliveryDate == deliveryDate, cache, expr).ToList<IOrder>();
+			return this.UnitOfWork.AllMatching<Order>(o => o.DeliveryDate == deliveryDate, cache, expr).ToList<Order>();
 		}
 		
         /// <summary>
         /// Load Order entities async from the database using the DeliveryDate field
         /// </summary>
         /// <param name="deliveryDate">Nullable<DateTime></param>
-		/// <param name="includes">params Expression<Func<IOrder, object>>[]</param>
+		/// <param name="includes">params Expression<Func<Order, object>>[]</param>
         /// <returns>IList<IOrder></returns>
-		public virtual async Task<IList<IOrder>> LoadByDeliveryDateAsync(Nullable<DateTime> deliveryDate, bool cache, params Expression<Func<IOrder, object>>[] includes)
+		public virtual async Task<IList<Order>> LoadByDeliveryDateAsync(Nullable<DateTime> deliveryDate, bool cache, params Expression<Func<IOrder, object>>[] includes)
 		{
 			var expr = this.Convert(includes);
 			var result = await this.UnitOfWork.AllMatchingAsync<Order>(o => o.DeliveryDate == deliveryDate,cache, expr);
-			return result.ToList<IOrder>();
+			return result.ToList<Order>();
 		}
 
         /// <summary>
         /// Load all Order entities from the database.
         /// </summary>
 		/// <param name="includes">params Expression<Func<IOrder, object>>[]</param>
-        /// <returns>IList<IOrder></returns>
-		public virtual IList<IOrder> LoadAll(bool cache, params Expression<Func<IOrder, object>>[] includes)
+        /// <returns>IList<Order></returns>
+		public virtual IList<Order> LoadAll(bool cache, params Expression<Func<IOrder, object>>[] includes)
 		{
 			var expr = this.Convert(includes);
-			return this.UnitOfWork.GetAll<Order>(cache, expr).ToList<IOrder>();
+			return this.UnitOfWork.GetAll<Order>(cache, expr).ToList<Order>();
 		}
 		
         /// <summary>
         /// Load all Order entities async from the database.
         /// </summary>
 		/// <param name="includes">params Expression<Func<IOrder, object>>[]</param>
-        /// <returns>IList<IOrder></returns>
-		public virtual async Task<IList<IOrder>> LoadAllAsync(bool cache, params Expression<Func<IOrder,  object>>[] includes)
+        /// <returns>IList<Order></returns>
+		public virtual async Task<IList<Order>> LoadAllAsync(bool cache, params Expression<Func<IOrder,  object>>[] includes)
 		{
 			var expr = this.Convert(includes);
 			var result = await this.UnitOfWork.GetAllAsync<Order>(cache, expr);
-			return result.ToList<IOrder>();
+			return result.ToList<Order>();
 		}
 		
 		#endregion
@@ -188,17 +189,17 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <param name="shippingName">string</param>
 		/// <param name="caseSensitive">bool</param>
 		/// <param name="includes">params Expression<Func<IOrder, object>>[]</param>
-        /// <returns>IList<IOrder></returns>
-		public virtual IList<IOrder> SearchByShippingName(string shippingName, bool cache, bool caseSensitive = false, params Expression<Func<IOrder, object>>[] includes)
+        /// <returns>IList<Order></returns>
+		public virtual IList<Order> SearchByShippingName(string shippingName, bool cache, bool caseSensitive = false, params Expression<Func<IOrder, object>>[] includes)
 		{		
 			var expr = this.Convert(includes);
 			if(caseSensitive) 
 			{
-				return this.UnitOfWork.AllMatching<Order>(o => o.ShippingName.Contains(shippingName), cache, expr).ToList<IOrder>();
+				return this.UnitOfWork.AllMatching<Order>(o => o.ShippingName.Contains(shippingName), cache, expr).ToList<Order>();
 			}
 			else
 			{
-				return this.UnitOfWork.AllMatching<Order>(o => o.ShippingName.ToLower().Contains(shippingName.ToLower()), cache, expr).ToList<IOrder>();
+				return this.UnitOfWork.AllMatching<Order>(o => o.ShippingName.ToLower().Contains(shippingName.ToLower()), cache, expr).ToList<Order>();
 			}
 		}
 		
@@ -208,19 +209,19 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <param name="shippingName">string</param>
 		/// <param name="caseSensitive">bool</param>
 		/// <param name="includes">params Expression<Func<IOrder, object>>[]</param>
-        /// <returns>IList<IOrder></returns>
-		public virtual async Task<IList<IOrder>> SearchByShippingNameAsync(string shippingName, bool cache, bool caseSensitive = false, params Expression<Func<IOrder, object>>[] includes)
+        /// <returns>IList<Order></returns>
+		public virtual async Task<IList<Order>> SearchByShippingNameAsync(string shippingName, bool cache, bool caseSensitive = false, params Expression<Func<IOrder, object>>[] includes)
 		{		
 			var expr = this.Convert(includes);
 			if(caseSensitive) 
 			{
 				var result = await this.UnitOfWork.AllMatchingAsync<Order>(o => o.ShippingName.Contains(shippingName), cache, expr);
-				return result.ToList<IOrder>();
+				return result.ToList<Order>();
 			}
 			else
 			{
 				var result = await this.UnitOfWork.AllMatchingAsync<Order>(o => o.ShippingName.ToLower().Contains(shippingName.ToLower()), cache, expr);
-				return result.ToList<IOrder>();
+				return result.ToList<Order>();
 			}
 		}
 
@@ -230,17 +231,17 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <param name="shippingAddress">string</param>
 		/// <param name="caseSensitive">bool</param>
 		/// <param name="includes">params Expression<Func<IOrder, object>>[]</param>
-        /// <returns>IList<IOrder></returns>
-		public virtual IList<IOrder> SearchByShippingAddress(string shippingAddress, bool cache, bool caseSensitive = false, params Expression<Func<IOrder, object>>[] includes)
+        /// <returns>IList<Order></returns>
+		public virtual IList<Order> SearchByShippingAddress(string shippingAddress, bool cache, bool caseSensitive = false, params Expression<Func<IOrder, object>>[] includes)
 		{		
 			var expr = this.Convert(includes);
 			if(caseSensitive) 
 			{
-				return this.UnitOfWork.AllMatching<Order>(o => o.ShippingAddress.Contains(shippingAddress), cache, expr).ToList<IOrder>();
+				return this.UnitOfWork.AllMatching<Order>(o => o.ShippingAddress.Contains(shippingAddress), cache, expr).ToList<Order>();
 			}
 			else
 			{
-				return this.UnitOfWork.AllMatching<Order>(o => o.ShippingAddress.ToLower().Contains(shippingAddress.ToLower()), cache, expr).ToList<IOrder>();
+				return this.UnitOfWork.AllMatching<Order>(o => o.ShippingAddress.ToLower().Contains(shippingAddress.ToLower()), cache, expr).ToList<Order>();
 			}
 		}
 		
@@ -250,19 +251,19 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <param name="shippingAddress">string</param>
 		/// <param name="caseSensitive">bool</param>
 		/// <param name="includes">params Expression<Func<IOrder, object>>[]</param>
-        /// <returns>IList<IOrder></returns>
-		public virtual async Task<IList<IOrder>> SearchByShippingAddressAsync(string shippingAddress, bool cache, bool caseSensitive = false, params Expression<Func<IOrder, object>>[] includes)
+        /// <returns>IList<Order></returns>
+		public virtual async Task<IList<Order>> SearchByShippingAddressAsync(string shippingAddress, bool cache, bool caseSensitive = false, params Expression<Func<IOrder, object>>[] includes)
 		{		
 			var expr = this.Convert(includes);
 			if(caseSensitive) 
 			{
 				var result = await this.UnitOfWork.AllMatchingAsync<Order>(o => o.ShippingAddress.Contains(shippingAddress), cache, expr);
-				return result.ToList<IOrder>();
+				return result.ToList<Order>();
 			}
 			else
 			{
 				var result = await this.UnitOfWork.AllMatchingAsync<Order>(o => o.ShippingAddress.ToLower().Contains(shippingAddress.ToLower()), cache, expr);
-				return result.ToList<IOrder>();
+				return result.ToList<Order>();
 			}
 		}
 
@@ -272,17 +273,17 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <param name="shippingCity">string</param>
 		/// <param name="caseSensitive">bool</param>
 		/// <param name="includes">params Expression<Func<IOrder, object>>[]</param>
-        /// <returns>IList<IOrder></returns>
-		public virtual IList<IOrder> SearchByShippingCity(string shippingCity, bool cache, bool caseSensitive = false, params Expression<Func<IOrder, object>>[] includes)
+        /// <returns>IList<Order></returns>
+		public virtual IList<Order> SearchByShippingCity(string shippingCity, bool cache, bool caseSensitive = false, params Expression<Func<IOrder, object>>[] includes)
 		{		
 			var expr = this.Convert(includes);
 			if(caseSensitive) 
 			{
-				return this.UnitOfWork.AllMatching<Order>(o => o.ShippingCity.Contains(shippingCity), cache, expr).ToList<IOrder>();
+				return this.UnitOfWork.AllMatching<Order>(o => o.ShippingCity.Contains(shippingCity), cache, expr).ToList<Order>();
 			}
 			else
 			{
-				return this.UnitOfWork.AllMatching<Order>(o => o.ShippingCity.ToLower().Contains(shippingCity.ToLower()), cache, expr).ToList<IOrder>();
+				return this.UnitOfWork.AllMatching<Order>(o => o.ShippingCity.ToLower().Contains(shippingCity.ToLower()), cache, expr).ToList<Order>();
 			}
 		}
 		
@@ -292,19 +293,19 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <param name="shippingCity">string</param>
 		/// <param name="caseSensitive">bool</param>
 		/// <param name="includes">params Expression<Func<IOrder, object>>[]</param>
-        /// <returns>IList<IOrder></returns>
-		public virtual async Task<IList<IOrder>> SearchByShippingCityAsync(string shippingCity, bool cache, bool caseSensitive = false, params Expression<Func<IOrder, object>>[] includes)
+        /// <returns>IList<Order></returns>
+		public virtual async Task<IList<Order>> SearchByShippingCityAsync(string shippingCity, bool cache, bool caseSensitive = false, params Expression<Func<IOrder, object>>[] includes)
 		{		
 			var expr = this.Convert(includes);
 			if(caseSensitive) 
 			{
 				var result = await this.UnitOfWork.AllMatchingAsync<Order>(o => o.ShippingCity.Contains(shippingCity), cache, expr);
-				return result.ToList<IOrder>();
+				return result.ToList<Order>();
 			}
 			else
 			{
 				var result = await this.UnitOfWork.AllMatchingAsync<Order>(o => o.ShippingCity.ToLower().Contains(shippingCity.ToLower()), cache, expr);
-				return result.ToList<IOrder>();
+				return result.ToList<Order>();
 			}
 		}
 
@@ -314,17 +315,17 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <param name="shippingZip">string</param>
 		/// <param name="caseSensitive">bool</param>
 		/// <param name="includes">params Expression<Func<IOrder, object>>[]</param>
-        /// <returns>IList<IOrder></returns>
-		public virtual IList<IOrder> SearchByShippingZip(string shippingZip, bool cache, bool caseSensitive = false, params Expression<Func<IOrder, object>>[] includes)
+        /// <returns>IList<Order></returns>
+		public virtual IList<Order> SearchByShippingZip(string shippingZip, bool cache, bool caseSensitive = false, params Expression<Func<IOrder, object>>[] includes)
 		{		
 			var expr = this.Convert(includes);
 			if(caseSensitive) 
 			{
-				return this.UnitOfWork.AllMatching<Order>(o => o.ShippingZip.Contains(shippingZip), cache, expr).ToList<IOrder>();
+				return this.UnitOfWork.AllMatching<Order>(o => o.ShippingZip.Contains(shippingZip), cache, expr).ToList<Order>();
 			}
 			else
 			{
-				return this.UnitOfWork.AllMatching<Order>(o => o.ShippingZip.ToLower().Contains(shippingZip.ToLower()), cache, expr).ToList<IOrder>();
+				return this.UnitOfWork.AllMatching<Order>(o => o.ShippingZip.ToLower().Contains(shippingZip.ToLower()), cache, expr).ToList<Order>();
 			}
 		}
 		
@@ -334,19 +335,19 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <param name="shippingZip">string</param>
 		/// <param name="caseSensitive">bool</param>
 		/// <param name="includes">params Expression<Func<IOrder, object>>[]</param>
-        /// <returns>IList<IOrder></returns>
-		public virtual async Task<IList<IOrder>> SearchByShippingZipAsync(string shippingZip, bool cache, bool caseSensitive = false, params Expression<Func<IOrder, object>>[] includes)
+        /// <returns>IList<Order></returns>
+		public virtual async Task<IList<Order>> SearchByShippingZipAsync(string shippingZip, bool cache, bool caseSensitive = false, params Expression<Func<IOrder, object>>[] includes)
 		{		
 			var expr = this.Convert(includes);
 			if(caseSensitive) 
 			{
 				var result = await this.UnitOfWork.AllMatchingAsync<Order>(o => o.ShippingZip.Contains(shippingZip), cache, expr);
-				return result.ToList<IOrder>();
+				return result.ToList<Order>();
 			}
 			else
 			{
 				var result = await this.UnitOfWork.AllMatchingAsync<Order>(o => o.ShippingZip.ToLower().Contains(shippingZip.ToLower()), cache, expr);
-				return result.ToList<IOrder>();
+				return result.ToList<Order>();
 			}
 		}
 
@@ -357,57 +358,31 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <summary>
         /// Add the Order entity to the database.
         /// </summary>
-        /// <param name="entity">IOrder</param>
+        /// <param name="entity">Order</param>
         /// <returns>bool</returns>
-		public virtual bool Add(IOrder entity)
+		public virtual bool Add(Order entity)
 		{
-			var entityToSave = new Order(entity, false);
-			this.UnitOfWork.Add(entityToSave);
-			bool result = this.UnitOfWork.Save();
-			
-			// Populate passed in entity with newly saved values
-			entity.OrderId = entityToSave.OrderId;
-			entity.CustomerId = entityToSave.CustomerId;
-			entity.OrderDate = entityToSave.OrderDate;
-			entity.DeliveryDate = entityToSave.DeliveryDate;
-			entity.ShippingName = entityToSave.ShippingName;
-			entity.ShippingAddress = entityToSave.ShippingAddress;
-			entity.ShippingCity = entityToSave.ShippingCity;
-			entity.ShippingZip = entityToSave.ShippingZip;
-			
-			return result;
+			this.UnitOfWork.Add(entity);
+			return this.UnitOfWork.Save();
 		}
 		
         /// <summary>
         /// Add the Order entity async to the database.
         /// </summary>
-        /// <param name="entity">IOrder</param>
+        /// <param name="entity">Order</param>
         /// <returns>bool</returns>
-		public virtual async Task<bool> AddAsync(IOrder entity)
+		public virtual async Task<bool> AddAsync(Order entity)
 		{
-			var entityToSave = new Order(entity, false);
-			await this.UnitOfWork.AddAsync(entityToSave);
-			bool result = await this.UnitOfWork.SaveAsync();
-			
-			// Populate passed in entity with newly saved values
-			entity.OrderId = entityToSave.OrderId;
-			entity.CustomerId = entityToSave.CustomerId;
-			entity.OrderDate = entityToSave.OrderDate;
-			entity.DeliveryDate = entityToSave.DeliveryDate;
-			entity.ShippingName = entityToSave.ShippingName;
-			entity.ShippingAddress = entityToSave.ShippingAddress;
-			entity.ShippingCity = entityToSave.ShippingCity;
-			entity.ShippingZip = entityToSave.ShippingZip;
-			
-			return result;
+			await this.UnitOfWork.AddAsync(entity);
+			return await this.UnitOfWork.SaveAsync();
 		}
 
         /// <summary>
         /// Update the Order entity in the database if any values have changed
         /// </summary>
-        /// <param name="entity">IOrder</param>
+        /// <param name="entity">Order</param>
         /// <returns>bool</returns>
-		public virtual bool Update(IOrder entity)
+		public virtual bool Update(Order entity)
 		{
 			return this.UnitOfWork.Modify(entity);
 		}
@@ -415,9 +390,9 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <summary>
         /// Update the Order entity async in the database if any values have changed
         /// </summary>
-        /// <param name="entity">IOrder</param>
+        /// <param name="entity">Order</param>
         /// <returns>bool</returns>
-		public virtual async Task<bool> UpdateAsync(IOrder entity)
+		public virtual async Task<bool> UpdateAsync(Order entity)
 		{
 			return await this.UnitOfWork.ModifyAsync(entity);
 		}
@@ -425,9 +400,9 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <summary>
         /// Delete the Order entity from the database
         /// </summary>
-        /// <param name="entity">IOrder</param>
+        /// <param name="entity">Order</param>
         /// <returns>bool</returns>
-		public virtual bool Delete(IOrder entity)
+		public virtual bool Delete(Order entity)
 		{		
 			return this.UnitOfWork.Remove(entity);
 		}
@@ -435,9 +410,9 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <summary>
         /// Delete the Order entity async from the database
         /// </summary>
-        /// <param name="entity">IOrder</param>
+        /// <param name="entity">Order</param>
         /// <returns>bool</returns>
-		public virtual async Task<bool> DeleteAsync(IOrder entity)
+		public virtual async Task<bool> DeleteAsync(Order entity)
 		{		
 			return await this.UnitOfWork.RemoveAsync(entity);
 		}
@@ -487,7 +462,7 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
 		
 		public virtual async Task<TResult> MaxAsync<TResult>(Expression<Func<IOrder, TResult>> maxExpression, bool cache)
 		{
-			return await this.UnitOfWork.MaxAsync(cache, Expression.Lambda<Func<Order, TResult>>(maxExpression.Body, maxExpression.Parameters));
+			return await this.UnitOfWork.MaxAsync(cache, Expression.Lambda<Func<IOrder, TResult>>(maxExpression.Body, maxExpression.Parameters));
 		}
 		
 		public virtual TResult Min<TResult>(Expression<Func<IOrder, TResult>> minExpression, bool cache)
@@ -509,7 +484,7 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
-        public void BulkDelete(IEnumerable<IOrder> items)
+        public void BulkDelete(IEnumerable<Order> items)
 		{
 			this.UnitOfWork.BulkDelete<IOrder>(items);
 		}
@@ -520,9 +495,9 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
         /// <returns></returns>
-        public async Task BulkDeleteAsync(IEnumerable<IOrder> items)
+        public async Task BulkDeleteAsync(IEnumerable<Order> items)
 		{
-			await this.UnitOfWork.BulkDeleteAsync<IOrder>(items);
+			await this.UnitOfWork.BulkDeleteAsync<Order>(items);
 		}
 
         /// <summary>
@@ -530,9 +505,9 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
-        public void BulkInsert(IEnumerable<IOrder> items)
+        public void BulkInsert(IEnumerable<Order> items)
 		{
-			this.UnitOfWork.BulkInsert<IOrder>(items);
+			this.UnitOfWork.BulkInsert<Order>(items);
 		}
         
         /// <summary>
@@ -541,9 +516,9 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
         /// <returns></returns>
-        public async Task BulkInsertAsync(IEnumerable<IOrder> items)
+        public async Task BulkInsertAsync(IEnumerable<Order> items)
 		{
-			await this.UnitOfWork.BulkInsertAsync<IOrder>(items);
+			await this.UnitOfWork.BulkInsertAsync<Order>(items);
 		}
 
         /// <summary>
@@ -551,9 +526,9 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
-        public void BulkUpdate(IEnumerable<IOrder> items)
+        public void BulkUpdate(IEnumerable<Order> items)
 		{
-			this.UnitOfWork.BulkUpdate<IOrder>(items);
+			this.UnitOfWork.BulkUpdate<Order>(items);
 		}
 
         /// <summary>
@@ -562,9 +537,9 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="items"></param>
         /// <returns></returns>
-        public async Task BulkUpdateAsync(IEnumerable<IOrder> items)
+        public async Task BulkUpdateAsync(IEnumerable<Order> items)
 		{
-			await this.UnitOfWork.BulkUpdateAsync<IOrder>(items);
+			await this.UnitOfWork.BulkUpdateAsync<Order>(items);
 		}
 
         #endregion
