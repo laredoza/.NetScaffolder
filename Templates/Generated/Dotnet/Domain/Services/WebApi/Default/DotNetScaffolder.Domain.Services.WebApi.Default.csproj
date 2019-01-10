@@ -5,8 +5,12 @@
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
     <AssemblyName>DotNetScaffolder.Domain.Services.WebApi.Default</AssemblyName>
     <RootNamespace>DotNetScaffolder.Domain.Services.WebApi.Default</RootNamespace>
-    <AssemblyVersion>1.0.142.0</AssemblyVersion>
-    <FileVersion>1.0.142.0</FileVersion>
+    <AssemblyVersion>1.0.148.0</AssemblyVersion>
+    <FileVersion>1.0.148.0</FileVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>bin\Generated\Dotnet\Domain\Services\WebApi\Default\DotNetScaffolder.Domain.Services.WebApi.Default.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -16,6 +20,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.0" />
     <PackageReference Include="StructureMap.Microsoft.DependencyInjection" Version="1.4.0" />
+    <PackageReference Include="Swagger" Version="1.0.0" />
   </ItemGroup>
 
   <ItemGroup>

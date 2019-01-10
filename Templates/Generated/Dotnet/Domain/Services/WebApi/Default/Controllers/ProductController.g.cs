@@ -1854,7 +1854,18 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         [HttpPost("{entity}")]
 		public bool BankAccountAdd([FromBody] BankAccountDto entity)
         {
-            return this.ProductApplicationService.BankAccountUpdate(entity);
+            return this.ProductApplicationService.BankAccountAdd(entity);
+        }
+
+        /// <summary>
+        /// Add the BankAccount entity async to the database.
+        /// </summary>
+        /// <param name="entity">BankAccountDto</param>
+        /// <returns>bool</returns>
+        [HttpPost("{entity}")]
+		public async Task<bool> BankAccountAddAsync([FromBody] BankAccountDto entity)
+        {
+            return await this.ProductApplicationService.BankAccountAddAsync(entity);
         }
 
         /// <summary>
@@ -1869,6 +1880,17 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         }
 		
         /// <summary>
+        /// Update the BankAccount entity async in the database if any values have changed
+        /// </summary>
+        /// <param name="entity">BankAccountDto</param>
+        /// <returns>bool</returns>
+        [HttpPost("{entity}")]
+		public async Task<bool> BankAccountUpdateAsync([FromBody] BankAccountDto entity)
+        {
+            return await this.ProductApplicationService.BankAccountUpdateAsync(entity);
+        }
+
+        /// <summary>
         /// Delete the BankAccount entity from the database
         /// </summary>
         /// <param name="entity">BankAccountDto</param>
@@ -1877,6 +1899,17 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
 		public bool BankAccountDelete([FromBody] BankAccountDto entity)
         {
             return this.ProductApplicationService.BankAccountDelete(entity);
+        }
+
+        /// <summary>
+        /// Delete the BankAccount entity async from the database
+        /// </summary>
+        /// <param name="entity">BankAccountDto</param>
+        /// <returns>bool</returns>
+        [HttpPost("{entity}")]
+		public async Task<bool> BankAccountDeleteAsync([FromBody] BankAccountDto entity)
+        {
+            return await this.ProductApplicationService.BankAccountDeleteAsync(entity);
         }
 
 		/// <summary>
@@ -1890,6 +1923,17 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
             return this.ProductApplicationService.BankAccountDelete( bankAccountId, cache);
         }
 
+        /// <summary>
+        /// Delete the BankAccount entity async from the database
+        /// </summary>
+        /// <param name="bankAccountId">int</param>
+        /// <returns>bool</returns>
+        [HttpDelete("{bankAccountId}/{cache}")]
+		public async Task<bool> BankAccountDeleteAsync( int bankAccountId, bool cache)
+        {
+            return await this.ProductApplicationService.BankAccountDeleteAsync( bankAccountId, cache);
+        }
+
 		
         /// <summary>
         /// Add the BankTransfers entity to the database.
@@ -1899,7 +1943,18 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         [HttpPost("{entity}")]
 		public bool BankTransfersAdd([FromBody] BankTransfersDto entity)
         {
-            return this.ProductApplicationService.BankTransfersUpdate(entity);
+            return this.ProductApplicationService.BankTransfersAdd(entity);
+        }
+
+        /// <summary>
+        /// Add the BankTransfers entity async to the database.
+        /// </summary>
+        /// <param name="entity">BankTransfersDto</param>
+        /// <returns>bool</returns>
+        [HttpPost("{entity}")]
+		public async Task<bool> BankTransfersAddAsync([FromBody] BankTransfersDto entity)
+        {
+            return await this.ProductApplicationService.BankTransfersAddAsync(entity);
         }
 
         /// <summary>
@@ -1914,6 +1969,17 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         }
 		
         /// <summary>
+        /// Update the BankTransfers entity async in the database if any values have changed
+        /// </summary>
+        /// <param name="entity">BankTransfersDto</param>
+        /// <returns>bool</returns>
+        [HttpPost("{entity}")]
+		public async Task<bool> BankTransfersUpdateAsync([FromBody] BankTransfersDto entity)
+        {
+            return await this.ProductApplicationService.BankTransfersUpdateAsync(entity);
+        }
+
+        /// <summary>
         /// Delete the BankTransfers entity from the database
         /// </summary>
         /// <param name="entity">BankTransfersDto</param>
@@ -1922,6 +1988,17 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
 		public bool BankTransfersDelete([FromBody] BankTransfersDto entity)
         {
             return this.ProductApplicationService.BankTransfersDelete(entity);
+        }
+
+        /// <summary>
+        /// Delete the BankTransfers entity async from the database
+        /// </summary>
+        /// <param name="entity">BankTransfersDto</param>
+        /// <returns>bool</returns>
+        [HttpPost("{entity}")]
+		public async Task<bool> BankTransfersDeleteAsync([FromBody] BankTransfersDto entity)
+        {
+            return await this.ProductApplicationService.BankTransfersDeleteAsync(entity);
         }
 
 		/// <summary>
@@ -1935,6 +2012,17 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
             return this.ProductApplicationService.BankTransfersDelete( bankTransferId, cache);
         }
 
+        /// <summary>
+        /// Delete the BankTransfers entity async from the database
+        /// </summary>
+        /// <param name="bankTransferId">int</param>
+        /// <returns>bool</returns>
+        [HttpDelete("{bankTransferId}/{cache}")]
+		public async Task<bool> BankTransfersDeleteAsync( int bankTransferId, bool cache)
+        {
+            return await this.ProductApplicationService.BankTransfersDeleteAsync( bankTransferId, cache);
+        }
+
 		
         /// <summary>
         /// Add the Book entity to the database.
@@ -1944,7 +2032,18 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         [HttpPost("{entity}")]
 		public bool BookAdd([FromBody] BookDto entity)
         {
-            return this.ProductApplicationService.BookUpdate(entity);
+            return this.ProductApplicationService.BookAdd(entity);
+        }
+
+        /// <summary>
+        /// Add the Book entity async to the database.
+        /// </summary>
+        /// <param name="entity">BookDto</param>
+        /// <returns>bool</returns>
+        [HttpPost("{entity}")]
+		public async Task<bool> BookAddAsync([FromBody] BookDto entity)
+        {
+            return await this.ProductApplicationService.BookAddAsync(entity);
         }
 
         /// <summary>
@@ -1959,6 +2058,17 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         }
 		
         /// <summary>
+        /// Update the Book entity async in the database if any values have changed
+        /// </summary>
+        /// <param name="entity">BookDto</param>
+        /// <returns>bool</returns>
+        [HttpPost("{entity}")]
+		public async Task<bool> BookUpdateAsync([FromBody] BookDto entity)
+        {
+            return await this.ProductApplicationService.BookUpdateAsync(entity);
+        }
+
+        /// <summary>
         /// Delete the Book entity from the database
         /// </summary>
         /// <param name="entity">BookDto</param>
@@ -1967,6 +2077,17 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
 		public bool BookDelete([FromBody] BookDto entity)
         {
             return this.ProductApplicationService.BookDelete(entity);
+        }
+
+        /// <summary>
+        /// Delete the Book entity async from the database
+        /// </summary>
+        /// <param name="entity">BookDto</param>
+        /// <returns>bool</returns>
+        [HttpPost("{entity}")]
+		public async Task<bool> BookDeleteAsync([FromBody] BookDto entity)
+        {
+            return await this.ProductApplicationService.BookDeleteAsync(entity);
         }
 
 		/// <summary>
@@ -1980,6 +2101,17 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
             return this.ProductApplicationService.BookDelete( productId, cache);
         }
 
+        /// <summary>
+        /// Delete the Book entity async from the database
+        /// </summary>
+        /// <param name="productId">int</param>
+        /// <returns>bool</returns>
+        [HttpDelete("{productId}/{cache}")]
+		public async Task<bool> BookDeleteAsync( int productId, bool cache)
+        {
+            return await this.ProductApplicationService.BookDeleteAsync( productId, cache);
+        }
+
 		
         /// <summary>
         /// Add the Country entity to the database.
@@ -1989,7 +2121,18 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         [HttpPost("{entity}")]
 		public bool CountryAdd([FromBody] CountryDto entity)
         {
-            return this.ProductApplicationService.CountryUpdate(entity);
+            return this.ProductApplicationService.CountryAdd(entity);
+        }
+
+        /// <summary>
+        /// Add the Country entity async to the database.
+        /// </summary>
+        /// <param name="entity">CountryDto</param>
+        /// <returns>bool</returns>
+        [HttpPost("{entity}")]
+		public async Task<bool> CountryAddAsync([FromBody] CountryDto entity)
+        {
+            return await this.ProductApplicationService.CountryAddAsync(entity);
         }
 
         /// <summary>
@@ -2004,6 +2147,17 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         }
 		
         /// <summary>
+        /// Update the Country entity async in the database if any values have changed
+        /// </summary>
+        /// <param name="entity">CountryDto</param>
+        /// <returns>bool</returns>
+        [HttpPost("{entity}")]
+		public async Task<bool> CountryUpdateAsync([FromBody] CountryDto entity)
+        {
+            return await this.ProductApplicationService.CountryUpdateAsync(entity);
+        }
+
+        /// <summary>
         /// Delete the Country entity from the database
         /// </summary>
         /// <param name="entity">CountryDto</param>
@@ -2012,6 +2166,17 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
 		public bool CountryDelete([FromBody] CountryDto entity)
         {
             return this.ProductApplicationService.CountryDelete(entity);
+        }
+
+        /// <summary>
+        /// Delete the Country entity async from the database
+        /// </summary>
+        /// <param name="entity">CountryDto</param>
+        /// <returns>bool</returns>
+        [HttpPost("{entity}")]
+		public async Task<bool> CountryDeleteAsync([FromBody] CountryDto entity)
+        {
+            return await this.ProductApplicationService.CountryDeleteAsync(entity);
         }
 
 		/// <summary>
@@ -2025,6 +2190,17 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
             return this.ProductApplicationService.CountryDelete( countryId, cache);
         }
 
+        /// <summary>
+        /// Delete the Country entity async from the database
+        /// </summary>
+        /// <param name="countryId">int</param>
+        /// <returns>bool</returns>
+        [HttpDelete("{countryId}/{cache}")]
+		public async Task<bool> CountryDeleteAsync( int countryId, bool cache)
+        {
+            return await this.ProductApplicationService.CountryDeleteAsync( countryId, cache);
+        }
+
 		
         /// <summary>
         /// Add the Customer entity to the database.
@@ -2034,7 +2210,18 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         [HttpPost("{entity}")]
 		public bool CustomerAdd([FromBody] CustomerDto entity)
         {
-            return this.ProductApplicationService.CustomerUpdate(entity);
+            return this.ProductApplicationService.CustomerAdd(entity);
+        }
+
+        /// <summary>
+        /// Add the Customer entity async to the database.
+        /// </summary>
+        /// <param name="entity">CustomerDto</param>
+        /// <returns>bool</returns>
+        [HttpPost("{entity}")]
+		public async Task<bool> CustomerAddAsync([FromBody] CustomerDto entity)
+        {
+            return await this.ProductApplicationService.CustomerAddAsync(entity);
         }
 
         /// <summary>
@@ -2049,6 +2236,17 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         }
 		
         /// <summary>
+        /// Update the Customer entity async in the database if any values have changed
+        /// </summary>
+        /// <param name="entity">CustomerDto</param>
+        /// <returns>bool</returns>
+        [HttpPost("{entity}")]
+		public async Task<bool> CustomerUpdateAsync([FromBody] CustomerDto entity)
+        {
+            return await this.ProductApplicationService.CustomerUpdateAsync(entity);
+        }
+
+        /// <summary>
         /// Delete the Customer entity from the database
         /// </summary>
         /// <param name="entity">CustomerDto</param>
@@ -2057,6 +2255,17 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
 		public bool CustomerDelete([FromBody] CustomerDto entity)
         {
             return this.ProductApplicationService.CustomerDelete(entity);
+        }
+
+        /// <summary>
+        /// Delete the Customer entity async from the database
+        /// </summary>
+        /// <param name="entity">CustomerDto</param>
+        /// <returns>bool</returns>
+        [HttpPost("{entity}")]
+		public async Task<bool> CustomerDeleteAsync([FromBody] CustomerDto entity)
+        {
+            return await this.ProductApplicationService.CustomerDeleteAsync(entity);
         }
 
 		/// <summary>
@@ -2070,6 +2279,17 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
             return this.ProductApplicationService.CustomerDelete( customerId, cache);
         }
 
+        /// <summary>
+        /// Delete the Customer entity async from the database
+        /// </summary>
+        /// <param name="customerId">int</param>
+        /// <returns>bool</returns>
+        [HttpDelete("{customerId}/{cache}")]
+		public async Task<bool> CustomerDeleteAsync( int customerId, bool cache)
+        {
+            return await this.ProductApplicationService.CustomerDeleteAsync( customerId, cache);
+        }
+
 		
         /// <summary>
         /// Add the Order entity to the database.
@@ -2079,7 +2299,18 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         [HttpPost("{entity}")]
 		public bool OrderAdd([FromBody] OrderDto entity)
         {
-            return this.ProductApplicationService.OrderUpdate(entity);
+            return this.ProductApplicationService.OrderAdd(entity);
+        }
+
+        /// <summary>
+        /// Add the Order entity async to the database.
+        /// </summary>
+        /// <param name="entity">OrderDto</param>
+        /// <returns>bool</returns>
+        [HttpPost("{entity}")]
+		public async Task<bool> OrderAddAsync([FromBody] OrderDto entity)
+        {
+            return await this.ProductApplicationService.OrderAddAsync(entity);
         }
 
         /// <summary>
@@ -2094,6 +2325,17 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         }
 		
         /// <summary>
+        /// Update the Order entity async in the database if any values have changed
+        /// </summary>
+        /// <param name="entity">OrderDto</param>
+        /// <returns>bool</returns>
+        [HttpPost("{entity}")]
+		public async Task<bool> OrderUpdateAsync([FromBody] OrderDto entity)
+        {
+            return await this.ProductApplicationService.OrderUpdateAsync(entity);
+        }
+
+        /// <summary>
         /// Delete the Order entity from the database
         /// </summary>
         /// <param name="entity">OrderDto</param>
@@ -2102,6 +2344,17 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
 		public bool OrderDelete([FromBody] OrderDto entity)
         {
             return this.ProductApplicationService.OrderDelete(entity);
+        }
+
+        /// <summary>
+        /// Delete the Order entity async from the database
+        /// </summary>
+        /// <param name="entity">OrderDto</param>
+        /// <returns>bool</returns>
+        [HttpPost("{entity}")]
+		public async Task<bool> OrderDeleteAsync([FromBody] OrderDto entity)
+        {
+            return await this.ProductApplicationService.OrderDeleteAsync(entity);
         }
 
 		/// <summary>
@@ -2115,6 +2368,17 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
             return this.ProductApplicationService.OrderDelete( orderId, cache);
         }
 
+        /// <summary>
+        /// Delete the Order entity async from the database
+        /// </summary>
+        /// <param name="orderId">int</param>
+        /// <returns>bool</returns>
+        [HttpDelete("{orderId}/{cache}")]
+		public async Task<bool> OrderDeleteAsync( int orderId, bool cache)
+        {
+            return await this.ProductApplicationService.OrderDeleteAsync( orderId, cache);
+        }
+
 		
         /// <summary>
         /// Add the OrderDetails entity to the database.
@@ -2124,7 +2388,18 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         [HttpPost("{entity}")]
 		public bool OrderDetailsAdd([FromBody] OrderDetailsDto entity)
         {
-            return this.ProductApplicationService.OrderDetailsUpdate(entity);
+            return this.ProductApplicationService.OrderDetailsAdd(entity);
+        }
+
+        /// <summary>
+        /// Add the OrderDetails entity async to the database.
+        /// </summary>
+        /// <param name="entity">OrderDetailsDto</param>
+        /// <returns>bool</returns>
+        [HttpPost("{entity}")]
+		public async Task<bool> OrderDetailsAddAsync([FromBody] OrderDetailsDto entity)
+        {
+            return await this.ProductApplicationService.OrderDetailsAddAsync(entity);
         }
 
         /// <summary>
@@ -2139,6 +2414,17 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         }
 		
         /// <summary>
+        /// Update the OrderDetails entity async in the database if any values have changed
+        /// </summary>
+        /// <param name="entity">OrderDetailsDto</param>
+        /// <returns>bool</returns>
+        [HttpPost("{entity}")]
+		public async Task<bool> OrderDetailsUpdateAsync([FromBody] OrderDetailsDto entity)
+        {
+            return await this.ProductApplicationService.OrderDetailsUpdateAsync(entity);
+        }
+
+        /// <summary>
         /// Delete the OrderDetails entity from the database
         /// </summary>
         /// <param name="entity">OrderDetailsDto</param>
@@ -2147,6 +2433,17 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
 		public bool OrderDetailsDelete([FromBody] OrderDetailsDto entity)
         {
             return this.ProductApplicationService.OrderDetailsDelete(entity);
+        }
+
+        /// <summary>
+        /// Delete the OrderDetails entity async from the database
+        /// </summary>
+        /// <param name="entity">OrderDetailsDto</param>
+        /// <returns>bool</returns>
+        [HttpPost("{entity}")]
+		public async Task<bool> OrderDetailsDeleteAsync([FromBody] OrderDetailsDto entity)
+        {
+            return await this.ProductApplicationService.OrderDetailsDeleteAsync(entity);
         }
 
 		/// <summary>
@@ -2160,6 +2457,17 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
             return this.ProductApplicationService.OrderDetailsDelete( orderDetailsId, cache);
         }
 
+        /// <summary>
+        /// Delete the OrderDetails entity async from the database
+        /// </summary>
+        /// <param name="orderDetailsId">int</param>
+        /// <returns>bool</returns>
+        [HttpDelete("{orderDetailsId}/{cache}")]
+		public async Task<bool> OrderDetailsDeleteAsync( int orderDetailsId, bool cache)
+        {
+            return await this.ProductApplicationService.OrderDetailsDeleteAsync( orderDetailsId, cache);
+        }
+
 		
         /// <summary>
         /// Add the Product entity to the database.
@@ -2169,7 +2477,18 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         [HttpPost("{entity}")]
 		public bool ProductAdd([FromBody] ProductDto entity)
         {
-            return this.ProductApplicationService.ProductUpdate(entity);
+            return this.ProductApplicationService.ProductAdd(entity);
+        }
+
+        /// <summary>
+        /// Add the Product entity async to the database.
+        /// </summary>
+        /// <param name="entity">ProductDto</param>
+        /// <returns>bool</returns>
+        [HttpPost("{entity}")]
+		public async Task<bool> ProductAddAsync([FromBody] ProductDto entity)
+        {
+            return await this.ProductApplicationService.ProductAddAsync(entity);
         }
 
         /// <summary>
@@ -2184,6 +2503,17 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         }
 		
         /// <summary>
+        /// Update the Product entity async in the database if any values have changed
+        /// </summary>
+        /// <param name="entity">ProductDto</param>
+        /// <returns>bool</returns>
+        [HttpPost("{entity}")]
+		public async Task<bool> ProductUpdateAsync([FromBody] ProductDto entity)
+        {
+            return await this.ProductApplicationService.ProductUpdateAsync(entity);
+        }
+
+        /// <summary>
         /// Delete the Product entity from the database
         /// </summary>
         /// <param name="entity">ProductDto</param>
@@ -2192,6 +2522,17 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
 		public bool ProductDelete([FromBody] ProductDto entity)
         {
             return this.ProductApplicationService.ProductDelete(entity);
+        }
+
+        /// <summary>
+        /// Delete the Product entity async from the database
+        /// </summary>
+        /// <param name="entity">ProductDto</param>
+        /// <returns>bool</returns>
+        [HttpPost("{entity}")]
+		public async Task<bool> ProductDeleteAsync([FromBody] ProductDto entity)
+        {
+            return await this.ProductApplicationService.ProductDeleteAsync(entity);
         }
 
 		/// <summary>
@@ -2205,6 +2546,17 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
             return this.ProductApplicationService.ProductDelete( productId, cache);
         }
 
+        /// <summary>
+        /// Delete the Product entity async from the database
+        /// </summary>
+        /// <param name="productId">int</param>
+        /// <returns>bool</returns>
+        [HttpDelete("{productId}/{cache}")]
+		public async Task<bool> ProductDeleteAsync( int productId, bool cache)
+        {
+            return await this.ProductApplicationService.ProductDeleteAsync( productId, cache);
+        }
+
 		
         /// <summary>
         /// Add the Software entity to the database.
@@ -2214,7 +2566,18 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         [HttpPost("{entity}")]
 		public bool SoftwareAdd([FromBody] SoftwareDto entity)
         {
-            return this.ProductApplicationService.SoftwareUpdate(entity);
+            return this.ProductApplicationService.SoftwareAdd(entity);
+        }
+
+        /// <summary>
+        /// Add the Software entity async to the database.
+        /// </summary>
+        /// <param name="entity">SoftwareDto</param>
+        /// <returns>bool</returns>
+        [HttpPost("{entity}")]
+		public async Task<bool> SoftwareAddAsync([FromBody] SoftwareDto entity)
+        {
+            return await this.ProductApplicationService.SoftwareAddAsync(entity);
         }
 
         /// <summary>
@@ -2229,6 +2592,17 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         }
 		
         /// <summary>
+        /// Update the Software entity async in the database if any values have changed
+        /// </summary>
+        /// <param name="entity">SoftwareDto</param>
+        /// <returns>bool</returns>
+        [HttpPost("{entity}")]
+		public async Task<bool> SoftwareUpdateAsync([FromBody] SoftwareDto entity)
+        {
+            return await this.ProductApplicationService.SoftwareUpdateAsync(entity);
+        }
+
+        /// <summary>
         /// Delete the Software entity from the database
         /// </summary>
         /// <param name="entity">SoftwareDto</param>
@@ -2237,6 +2611,17 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
 		public bool SoftwareDelete([FromBody] SoftwareDto entity)
         {
             return this.ProductApplicationService.SoftwareDelete(entity);
+        }
+
+        /// <summary>
+        /// Delete the Software entity async from the database
+        /// </summary>
+        /// <param name="entity">SoftwareDto</param>
+        /// <returns>bool</returns>
+        [HttpPost("{entity}")]
+		public async Task<bool> SoftwareDeleteAsync([FromBody] SoftwareDto entity)
+        {
+            return await this.ProductApplicationService.SoftwareDeleteAsync(entity);
         }
 
 		/// <summary>
@@ -2248,6 +2633,17 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
 		public bool SoftwareDelete( int productId, bool cache)
         {
             return this.ProductApplicationService.SoftwareDelete( productId, cache);
+        }
+
+        /// <summary>
+        /// Delete the Software entity async from the database
+        /// </summary>
+        /// <param name="productId">int</param>
+        /// <returns>bool</returns>
+        [HttpDelete("{productId}/{cache}")]
+		public async Task<bool> SoftwareDeleteAsync( int productId, bool cache)
+        {
+            return await this.ProductApplicationService.SoftwareDeleteAsync( productId, cache);
         }
 
 		#endregion

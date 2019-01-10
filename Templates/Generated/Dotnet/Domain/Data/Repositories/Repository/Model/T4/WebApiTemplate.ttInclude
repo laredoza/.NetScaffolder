@@ -316,7 +316,18 @@ string modelName = DataType.NamingConvention == null ? model.TableName : DataTyp
         [HttpPost("{entity}")]
 		public bool <#= modelName #>Add([FromBody] <#= modelName #>Dto entity)
         {
-            return this.<#= applicationServiceName #>ApplicationService.<#= modelName #>Update(entity);
+            return this.<#= applicationServiceName #>ApplicationService.<#= modelName #>Add(entity);
+        }
+
+        /// <summary>
+        /// Add the <#= modelName #> entity async to the database.
+        /// </summary>
+        /// <param name="entity"><#= modelName #>Dto</param>
+        /// <returns>bool</returns>
+        [HttpPost("{entity}")]
+		public async Task<bool> <#= modelName #>AddAsync([FromBody] <#= modelName #>Dto entity)
+        {
+            return await this.<#= applicationServiceName #>ApplicationService.<#= modelName #>AddAsync(entity);
         }
 
         /// <summary>
@@ -331,6 +342,17 @@ string modelName = DataType.NamingConvention == null ? model.TableName : DataTyp
         }
 		
         /// <summary>
+        /// Update the <#= modelName #> entity async in the database if any values have changed
+        /// </summary>
+        /// <param name="entity"><#= modelName #>Dto</param>
+        /// <returns>bool</returns>
+        [HttpPost("{entity}")]
+		public async Task<bool> <#= modelName #>UpdateAsync([FromBody] <#= modelName #>Dto entity)
+        {
+            return await this.<#= applicationServiceName #>ApplicationService.<#= modelName #>UpdateAsync(entity);
+        }
+
+        /// <summary>
         /// Delete the <#= modelName #> entity from the database
         /// </summary>
         /// <param name="entity"><#= modelName #>Dto</param>
@@ -339,6 +361,17 @@ string modelName = DataType.NamingConvention == null ? model.TableName : DataTyp
 		public bool <#= modelName #>Delete([FromBody] <#= modelName #>Dto entity)
         {
             return this.<#= applicationServiceName #>ApplicationService.<#= modelName #>Delete(entity);
+        }
+
+        /// <summary>
+        /// Delete the <#= modelName #> entity async from the database
+        /// </summary>
+        /// <param name="entity"><#= modelName #>Dto</param>
+        /// <returns>bool</returns>
+        [HttpPost("{entity}")]
+		public async Task<bool> <#= modelName #>DeleteAsync([FromBody] <#= modelName #>Dto entity)
+        {
+            return await this.<#= applicationServiceName #>ApplicationService.<#= modelName #>DeleteAsync(entity);
         }
 
 		/// <summary>
@@ -352,6 +385,19 @@ string modelName = DataType.NamingConvention == null ? model.TableName : DataTyp
 		public bool <#= modelName #>Delete(<#= DataType.TransformAsParameter(model.Columns.Where(o => o.IsPrimaryKey)) #>, bool cache)
         {
             return this.<#= applicationServiceName #>ApplicationService.<#= modelName #>Delete(<#= DataType.TransformAsParameterName(model.Columns.Where(o => o.IsPrimaryKey)) #>, cache);
+        }
+
+        /// <summary>
+        /// Delete the <#= modelName #> entity async from the database
+        /// </summary>
+<#+ foreach(var col in model.Columns.Where(o => o.IsPrimaryKey)) {#>
+        /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
+<#+ } #>
+        /// <returns>bool</returns>
+        [HttpDelete("{<#=DataType.TransformAsParameterName(model.Columns.Where(o => o.IsPrimaryKey)).Trim()#>}/{cache}")]
+		public async Task<bool> <#= modelName #>DeleteAsync(<#= DataType.TransformAsParameter(model.Columns.Where(o => o.IsPrimaryKey)) #>, bool cache)
+        {
+            return await this.<#= applicationServiceName #>ApplicationService.<#= modelName #>DeleteAsync(<#= DataType.TransformAsParameterName(model.Columns.Where(o => o.IsPrimaryKey)) #>, cache);
         }
 
 <#+            } #>
