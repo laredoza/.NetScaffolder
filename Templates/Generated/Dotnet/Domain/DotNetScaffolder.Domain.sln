@@ -115,7 +115,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetScaffolder.Domain.Mig
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetScaffolder.Domain.Migrations.EFCore.Postgres", "Data\Migrations\EFCore\Postgres\DotNetScaffolder.Domain.Migrations.EFCore.Postgres.csproj", "{F151C5C9-E224-49AF-B283-562321C9AA9E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetScaffolder.Domain.Data.ApplicationServices.WebApiApplicationService", "Data\ApplicationServices\WebApiApplication\DotNetScaffolder.Domain.Data.ApplicationServices.WebApiApplicationService.csproj", "{26A1E11C-F52E-4821-B401-D8FBEF1847DF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetScaffolder.Domain.Data.ApplicationServices.WebApiApplicationService", "Data\ApplicationServices\WebApiApplication\DotNetScaffolder.Domain.Data.ApplicationServices.WebApiApplicationService.csproj", "{26A1E11C-F52E-4821-B401-D8FBEF1847DF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.1 Tests", "2.1 Tests", "{4836BD75-4352-4FCB-8CF5-B4396220F801}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.1.1 WebApi", "2.1.1 WebApi", "{5D1510D0-A67A-4A3E-B544-9B82AB5FF08F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetScaffolder.Domain.Services.Tests.WebApi.Integration", "Services\WebApi\Tests\Integration\DotNetScaffolder.Domain.Services.Tests.WebApi.Integration.csproj", "{BBC29513-6E0E-4B5B-8BA3-88EFB49531BC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -263,6 +269,10 @@ Global
 		{26A1E11C-F52E-4821-B401-D8FBEF1847DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{26A1E11C-F52E-4821-B401-D8FBEF1847DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{26A1E11C-F52E-4821-B401-D8FBEF1847DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BBC29513-6E0E-4B5B-8BA3-88EFB49531BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBC29513-6E0E-4B5B-8BA3-88EFB49531BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BBC29513-6E0E-4B5B-8BA3-88EFB49531BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BBC29513-6E0E-4B5B-8BA3-88EFB49531BC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -319,6 +329,9 @@ Global
 		{352AB333-6F1E-4843-869B-DF38D84E92BA} = {91598A6C-6C81-483B-AFD3-A324048DD429}
 		{F151C5C9-E224-49AF-B283-562321C9AA9E} = {91598A6C-6C81-483B-AFD3-A324048DD429}
 		{26A1E11C-F52E-4821-B401-D8FBEF1847DF} = {1F6F3C59-9268-4123-8EEE-EB16777445AA}
+		{4836BD75-4352-4FCB-8CF5-B4396220F801} = {07269A7A-ABF8-47F3-9717-5F5BA73590F2}
+		{5D1510D0-A67A-4A3E-B544-9B82AB5FF08F} = {4836BD75-4352-4FCB-8CF5-B4396220F801}
+		{BBC29513-6E0E-4B5B-8BA3-88EFB49531BC} = {5D1510D0-A67A-4A3E-B544-9B82AB5FF08F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BAAA9DC0-A104-423F-8507-710C11070DF0}

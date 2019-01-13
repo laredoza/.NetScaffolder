@@ -4,6 +4,7 @@ using System.Linq.Expressions;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using DotNetScaffolder.Domain.Core.Interfaces;
 using DotNetScaffolder.Domain.Data.ApplicationService;
 using DotNetScaffolder.Domain.Data.Dtos.DefaultDto.Dto;
 using DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.Dto;
@@ -13,6 +14,13 @@ namespace DotNetScaffolder.Domain.Data.ApplicationServices.WebApiApplicationServ
 {
     public class WebApiCustomerApplicationService : ICustomerApplicationService
     {
+        public IWebApiSettings apiSettings { get; set; }
+
+        public WebApiCustomerApplicationService(IWebApiSettings apiSettings)
+        {
+            this.apiSettings = apiSettings;
+        }
+
         public string accessToken { get; set; }
 
         public CustomerDto LoadByCustomerCustomerId(int customerId, bool cache, params Expression<Func<ICustomer, object>>[] includes)
@@ -34,7 +42,8 @@ namespace DotNetScaffolder.Domain.Data.ApplicationServices.WebApiApplicationServ
         {
             IList<CustomerDto> result = new List<CustomerDto>();
 
-            var apiUrl = "http://localhost:5001/identity";
+            //var apiUrl = "http://localhost:5001/identity";
+            var apiUrl = $"{this.apiSettings.BasePath}/identity";
 
             var client = new HttpClient();
             //var at = await this.HttpContext.GetTokenAsync("access_token");

@@ -1852,7 +1852,8 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="entity">BankAccountDto</param>
         /// <returns>bool</returns>
         [HttpPost("{entity}")]
-		public bool BankAccountAdd([FromBody] BankAccountDto entity)
+        [Route("~/api/Product/BankAccountAdd")]
+		public bool ProductAdd([FromBody] BankAccountDto entity)
         {
             return this.ProductApplicationService.BankAccountAdd(entity);
         }
@@ -1863,6 +1864,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="entity">BankAccountDto</param>
         /// <returns>bool</returns>
         [HttpPost("{entity}")]
+        [Route("~/api/Product/BankAccountAddAsync")]
 		public async Task<bool> BankAccountAddAsync([FromBody] BankAccountDto entity)
         {
             return await this.ProductApplicationService.BankAccountAddAsync(entity);
@@ -1874,6 +1876,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="entity">BankAccountDto</param>
         /// <returns>bool</returns>
         [HttpPost("{entity}")]
+        [Route("~/api/Product/BankAccountUpdate")]
 		public bool BankAccountUpdate([FromBody] BankAccountDto entity)
         {
             return this.ProductApplicationService.BankAccountUpdate(entity);
@@ -1885,6 +1888,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="entity">BankAccountDto</param>
         /// <returns>bool</returns>
         [HttpPost("{entity}")]
+        [Route("~/api/Product/BankAccountUpdateAsync")]
 		public async Task<bool> BankAccountUpdateAsync([FromBody] BankAccountDto entity)
         {
             return await this.ProductApplicationService.BankAccountUpdateAsync(entity);
@@ -1896,6 +1900,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="entity">BankAccountDto</param>
         /// <returns>bool</returns>
         [HttpPost("{entity}")]
+        [Route("~/api/Product/BankAccountDelete")]
 		public bool BankAccountDelete([FromBody] BankAccountDto entity)
         {
             return this.ProductApplicationService.BankAccountDelete(entity);
@@ -1907,6 +1912,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="entity">BankAccountDto</param>
         /// <returns>bool</returns>
         [HttpPost("{entity}")]
+        [Route("~/api/Product/BankAccountDeleteAsync")]
 		public async Task<bool> BankAccountDeleteAsync([FromBody] BankAccountDto entity)
         {
             return await this.ProductApplicationService.BankAccountDeleteAsync(entity);
@@ -1918,6 +1924,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="bankAccountId">int</param>
         /// <returns>bool</returns>
         [HttpDelete("{bankAccountId}/{cache}")]
+        [Route("~/api/Product/BankAccountDelete")]
 		public bool BankAccountDelete( int bankAccountId, bool cache)
         {
             return this.ProductApplicationService.BankAccountDelete( bankAccountId, cache);
@@ -1929,6 +1936,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="bankAccountId">int</param>
         /// <returns>bool</returns>
         [HttpDelete("{bankAccountId}/{cache}")]
+        [Route("~/api/Product/BankAccountDeleteAsync")]
 		public async Task<bool> BankAccountDeleteAsync( int bankAccountId, bool cache)
         {
             return await this.ProductApplicationService.BankAccountDeleteAsync( bankAccountId, cache);
@@ -1941,7 +1949,8 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="entity">BankTransfersDto</param>
         /// <returns>bool</returns>
         [HttpPost("{entity}")]
-		public bool BankTransfersAdd([FromBody] BankTransfersDto entity)
+        [Route("~/api/Product/BankTransfersAdd")]
+		public bool ProductAdd([FromBody] BankTransfersDto entity)
         {
             return this.ProductApplicationService.BankTransfersAdd(entity);
         }
@@ -1952,6 +1961,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="entity">BankTransfersDto</param>
         /// <returns>bool</returns>
         [HttpPost("{entity}")]
+        [Route("~/api/Product/BankTransfersAddAsync")]
 		public async Task<bool> BankTransfersAddAsync([FromBody] BankTransfersDto entity)
         {
             return await this.ProductApplicationService.BankTransfersAddAsync(entity);
@@ -1963,6 +1973,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="entity">BankTransfersDto</param>
         /// <returns>bool</returns>
         [HttpPost("{entity}")]
+        [Route("~/api/Product/BankTransfersUpdate")]
 		public bool BankTransfersUpdate([FromBody] BankTransfersDto entity)
         {
             return this.ProductApplicationService.BankTransfersUpdate(entity);
@@ -1974,6 +1985,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="entity">BankTransfersDto</param>
         /// <returns>bool</returns>
         [HttpPost("{entity}")]
+        [Route("~/api/Product/BankTransfersUpdateAsync")]
 		public async Task<bool> BankTransfersUpdateAsync([FromBody] BankTransfersDto entity)
         {
             return await this.ProductApplicationService.BankTransfersUpdateAsync(entity);
@@ -1985,6 +1997,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="entity">BankTransfersDto</param>
         /// <returns>bool</returns>
         [HttpPost("{entity}")]
+        [Route("~/api/Product/BankTransfersDelete")]
 		public bool BankTransfersDelete([FromBody] BankTransfersDto entity)
         {
             return this.ProductApplicationService.BankTransfersDelete(entity);
@@ -1996,6 +2009,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="entity">BankTransfersDto</param>
         /// <returns>bool</returns>
         [HttpPost("{entity}")]
+        [Route("~/api/Product/BankTransfersDeleteAsync")]
 		public async Task<bool> BankTransfersDeleteAsync([FromBody] BankTransfersDto entity)
         {
             return await this.ProductApplicationService.BankTransfersDeleteAsync(entity);
@@ -2007,6 +2021,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="bankTransferId">int</param>
         /// <returns>bool</returns>
         [HttpDelete("{bankTransferId}/{cache}")]
+        [Route("~/api/Product/BankTransfersDelete")]
 		public bool BankTransfersDelete( int bankTransferId, bool cache)
         {
             return this.ProductApplicationService.BankTransfersDelete( bankTransferId, cache);
@@ -2018,6 +2033,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="bankTransferId">int</param>
         /// <returns>bool</returns>
         [HttpDelete("{bankTransferId}/{cache}")]
+        [Route("~/api/Product/BankTransfersDeleteAsync")]
 		public async Task<bool> BankTransfersDeleteAsync( int bankTransferId, bool cache)
         {
             return await this.ProductApplicationService.BankTransfersDeleteAsync( bankTransferId, cache);
@@ -2030,7 +2046,8 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="entity">BookDto</param>
         /// <returns>bool</returns>
         [HttpPost("{entity}")]
-		public bool BookAdd([FromBody] BookDto entity)
+        [Route("~/api/Product/BookAdd")]
+		public bool ProductAdd([FromBody] BookDto entity)
         {
             return this.ProductApplicationService.BookAdd(entity);
         }
@@ -2041,6 +2058,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="entity">BookDto</param>
         /// <returns>bool</returns>
         [HttpPost("{entity}")]
+        [Route("~/api/Product/BookAddAsync")]
 		public async Task<bool> BookAddAsync([FromBody] BookDto entity)
         {
             return await this.ProductApplicationService.BookAddAsync(entity);
@@ -2052,6 +2070,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="entity">BookDto</param>
         /// <returns>bool</returns>
         [HttpPost("{entity}")]
+        [Route("~/api/Product/BookUpdate")]
 		public bool BookUpdate([FromBody] BookDto entity)
         {
             return this.ProductApplicationService.BookUpdate(entity);
@@ -2063,6 +2082,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="entity">BookDto</param>
         /// <returns>bool</returns>
         [HttpPost("{entity}")]
+        [Route("~/api/Product/BookUpdateAsync")]
 		public async Task<bool> BookUpdateAsync([FromBody] BookDto entity)
         {
             return await this.ProductApplicationService.BookUpdateAsync(entity);
@@ -2074,6 +2094,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="entity">BookDto</param>
         /// <returns>bool</returns>
         [HttpPost("{entity}")]
+        [Route("~/api/Product/BookDelete")]
 		public bool BookDelete([FromBody] BookDto entity)
         {
             return this.ProductApplicationService.BookDelete(entity);
@@ -2085,6 +2106,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="entity">BookDto</param>
         /// <returns>bool</returns>
         [HttpPost("{entity}")]
+        [Route("~/api/Product/BookDeleteAsync")]
 		public async Task<bool> BookDeleteAsync([FromBody] BookDto entity)
         {
             return await this.ProductApplicationService.BookDeleteAsync(entity);
@@ -2096,6 +2118,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="productId">int</param>
         /// <returns>bool</returns>
         [HttpDelete("{productId}/{cache}")]
+        [Route("~/api/Product/BookDelete")]
 		public bool BookDelete( int productId, bool cache)
         {
             return this.ProductApplicationService.BookDelete( productId, cache);
@@ -2107,6 +2130,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="productId">int</param>
         /// <returns>bool</returns>
         [HttpDelete("{productId}/{cache}")]
+        [Route("~/api/Product/BookDeleteAsync")]
 		public async Task<bool> BookDeleteAsync( int productId, bool cache)
         {
             return await this.ProductApplicationService.BookDeleteAsync( productId, cache);
@@ -2119,7 +2143,8 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="entity">CountryDto</param>
         /// <returns>bool</returns>
         [HttpPost("{entity}")]
-		public bool CountryAdd([FromBody] CountryDto entity)
+        [Route("~/api/Product/CountryAdd")]
+		public bool ProductAdd([FromBody] CountryDto entity)
         {
             return this.ProductApplicationService.CountryAdd(entity);
         }
@@ -2130,6 +2155,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="entity">CountryDto</param>
         /// <returns>bool</returns>
         [HttpPost("{entity}")]
+        [Route("~/api/Product/CountryAddAsync")]
 		public async Task<bool> CountryAddAsync([FromBody] CountryDto entity)
         {
             return await this.ProductApplicationService.CountryAddAsync(entity);
@@ -2141,6 +2167,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="entity">CountryDto</param>
         /// <returns>bool</returns>
         [HttpPost("{entity}")]
+        [Route("~/api/Product/CountryUpdate")]
 		public bool CountryUpdate([FromBody] CountryDto entity)
         {
             return this.ProductApplicationService.CountryUpdate(entity);
@@ -2152,6 +2179,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="entity">CountryDto</param>
         /// <returns>bool</returns>
         [HttpPost("{entity}")]
+        [Route("~/api/Product/CountryUpdateAsync")]
 		public async Task<bool> CountryUpdateAsync([FromBody] CountryDto entity)
         {
             return await this.ProductApplicationService.CountryUpdateAsync(entity);
@@ -2163,6 +2191,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="entity">CountryDto</param>
         /// <returns>bool</returns>
         [HttpPost("{entity}")]
+        [Route("~/api/Product/CountryDelete")]
 		public bool CountryDelete([FromBody] CountryDto entity)
         {
             return this.ProductApplicationService.CountryDelete(entity);
@@ -2174,6 +2203,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="entity">CountryDto</param>
         /// <returns>bool</returns>
         [HttpPost("{entity}")]
+        [Route("~/api/Product/CountryDeleteAsync")]
 		public async Task<bool> CountryDeleteAsync([FromBody] CountryDto entity)
         {
             return await this.ProductApplicationService.CountryDeleteAsync(entity);
@@ -2185,6 +2215,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="countryId">int</param>
         /// <returns>bool</returns>
         [HttpDelete("{countryId}/{cache}")]
+        [Route("~/api/Product/CountryDelete")]
 		public bool CountryDelete( int countryId, bool cache)
         {
             return this.ProductApplicationService.CountryDelete( countryId, cache);
@@ -2196,6 +2227,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="countryId">int</param>
         /// <returns>bool</returns>
         [HttpDelete("{countryId}/{cache}")]
+        [Route("~/api/Product/CountryDeleteAsync")]
 		public async Task<bool> CountryDeleteAsync( int countryId, bool cache)
         {
             return await this.ProductApplicationService.CountryDeleteAsync( countryId, cache);
@@ -2208,7 +2240,8 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="entity">CustomerDto</param>
         /// <returns>bool</returns>
         [HttpPost("{entity}")]
-		public bool CustomerAdd([FromBody] CustomerDto entity)
+        [Route("~/api/Product/CustomerAdd")]
+		public bool ProductAdd([FromBody] CustomerDto entity)
         {
             return this.ProductApplicationService.CustomerAdd(entity);
         }
@@ -2219,6 +2252,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="entity">CustomerDto</param>
         /// <returns>bool</returns>
         [HttpPost("{entity}")]
+        [Route("~/api/Product/CustomerAddAsync")]
 		public async Task<bool> CustomerAddAsync([FromBody] CustomerDto entity)
         {
             return await this.ProductApplicationService.CustomerAddAsync(entity);
@@ -2230,6 +2264,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="entity">CustomerDto</param>
         /// <returns>bool</returns>
         [HttpPost("{entity}")]
+        [Route("~/api/Product/CustomerUpdate")]
 		public bool CustomerUpdate([FromBody] CustomerDto entity)
         {
             return this.ProductApplicationService.CustomerUpdate(entity);
@@ -2241,6 +2276,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="entity">CustomerDto</param>
         /// <returns>bool</returns>
         [HttpPost("{entity}")]
+        [Route("~/api/Product/CustomerUpdateAsync")]
 		public async Task<bool> CustomerUpdateAsync([FromBody] CustomerDto entity)
         {
             return await this.ProductApplicationService.CustomerUpdateAsync(entity);
@@ -2252,6 +2288,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="entity">CustomerDto</param>
         /// <returns>bool</returns>
         [HttpPost("{entity}")]
+        [Route("~/api/Product/CustomerDelete")]
 		public bool CustomerDelete([FromBody] CustomerDto entity)
         {
             return this.ProductApplicationService.CustomerDelete(entity);
@@ -2263,6 +2300,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="entity">CustomerDto</param>
         /// <returns>bool</returns>
         [HttpPost("{entity}")]
+        [Route("~/api/Product/CustomerDeleteAsync")]
 		public async Task<bool> CustomerDeleteAsync([FromBody] CustomerDto entity)
         {
             return await this.ProductApplicationService.CustomerDeleteAsync(entity);
@@ -2274,6 +2312,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="customerId">int</param>
         /// <returns>bool</returns>
         [HttpDelete("{customerId}/{cache}")]
+        [Route("~/api/Product/CustomerDelete")]
 		public bool CustomerDelete( int customerId, bool cache)
         {
             return this.ProductApplicationService.CustomerDelete( customerId, cache);
@@ -2285,6 +2324,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="customerId">int</param>
         /// <returns>bool</returns>
         [HttpDelete("{customerId}/{cache}")]
+        [Route("~/api/Product/CustomerDeleteAsync")]
 		public async Task<bool> CustomerDeleteAsync( int customerId, bool cache)
         {
             return await this.ProductApplicationService.CustomerDeleteAsync( customerId, cache);
@@ -2297,7 +2337,8 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="entity">OrderDto</param>
         /// <returns>bool</returns>
         [HttpPost("{entity}")]
-		public bool OrderAdd([FromBody] OrderDto entity)
+        [Route("~/api/Product/OrderAdd")]
+		public bool ProductAdd([FromBody] OrderDto entity)
         {
             return this.ProductApplicationService.OrderAdd(entity);
         }
@@ -2308,6 +2349,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="entity">OrderDto</param>
         /// <returns>bool</returns>
         [HttpPost("{entity}")]
+        [Route("~/api/Product/OrderAddAsync")]
 		public async Task<bool> OrderAddAsync([FromBody] OrderDto entity)
         {
             return await this.ProductApplicationService.OrderAddAsync(entity);
@@ -2319,6 +2361,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="entity">OrderDto</param>
         /// <returns>bool</returns>
         [HttpPost("{entity}")]
+        [Route("~/api/Product/OrderUpdate")]
 		public bool OrderUpdate([FromBody] OrderDto entity)
         {
             return this.ProductApplicationService.OrderUpdate(entity);
@@ -2330,6 +2373,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="entity">OrderDto</param>
         /// <returns>bool</returns>
         [HttpPost("{entity}")]
+        [Route("~/api/Product/OrderUpdateAsync")]
 		public async Task<bool> OrderUpdateAsync([FromBody] OrderDto entity)
         {
             return await this.ProductApplicationService.OrderUpdateAsync(entity);
@@ -2341,6 +2385,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="entity">OrderDto</param>
         /// <returns>bool</returns>
         [HttpPost("{entity}")]
+        [Route("~/api/Product/OrderDelete")]
 		public bool OrderDelete([FromBody] OrderDto entity)
         {
             return this.ProductApplicationService.OrderDelete(entity);
@@ -2352,6 +2397,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="entity">OrderDto</param>
         /// <returns>bool</returns>
         [HttpPost("{entity}")]
+        [Route("~/api/Product/OrderDeleteAsync")]
 		public async Task<bool> OrderDeleteAsync([FromBody] OrderDto entity)
         {
             return await this.ProductApplicationService.OrderDeleteAsync(entity);
@@ -2363,6 +2409,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="orderId">int</param>
         /// <returns>bool</returns>
         [HttpDelete("{orderId}/{cache}")]
+        [Route("~/api/Product/OrderDelete")]
 		public bool OrderDelete( int orderId, bool cache)
         {
             return this.ProductApplicationService.OrderDelete( orderId, cache);
@@ -2374,6 +2421,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="orderId">int</param>
         /// <returns>bool</returns>
         [HttpDelete("{orderId}/{cache}")]
+        [Route("~/api/Product/OrderDeleteAsync")]
 		public async Task<bool> OrderDeleteAsync( int orderId, bool cache)
         {
             return await this.ProductApplicationService.OrderDeleteAsync( orderId, cache);
@@ -2386,7 +2434,8 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="entity">OrderDetailsDto</param>
         /// <returns>bool</returns>
         [HttpPost("{entity}")]
-		public bool OrderDetailsAdd([FromBody] OrderDetailsDto entity)
+        [Route("~/api/Product/OrderDetailsAdd")]
+		public bool ProductAdd([FromBody] OrderDetailsDto entity)
         {
             return this.ProductApplicationService.OrderDetailsAdd(entity);
         }
@@ -2397,6 +2446,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="entity">OrderDetailsDto</param>
         /// <returns>bool</returns>
         [HttpPost("{entity}")]
+        [Route("~/api/Product/OrderDetailsAddAsync")]
 		public async Task<bool> OrderDetailsAddAsync([FromBody] OrderDetailsDto entity)
         {
             return await this.ProductApplicationService.OrderDetailsAddAsync(entity);
@@ -2408,6 +2458,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="entity">OrderDetailsDto</param>
         /// <returns>bool</returns>
         [HttpPost("{entity}")]
+        [Route("~/api/Product/OrderDetailsUpdate")]
 		public bool OrderDetailsUpdate([FromBody] OrderDetailsDto entity)
         {
             return this.ProductApplicationService.OrderDetailsUpdate(entity);
@@ -2419,6 +2470,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="entity">OrderDetailsDto</param>
         /// <returns>bool</returns>
         [HttpPost("{entity}")]
+        [Route("~/api/Product/OrderDetailsUpdateAsync")]
 		public async Task<bool> OrderDetailsUpdateAsync([FromBody] OrderDetailsDto entity)
         {
             return await this.ProductApplicationService.OrderDetailsUpdateAsync(entity);
@@ -2430,6 +2482,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="entity">OrderDetailsDto</param>
         /// <returns>bool</returns>
         [HttpPost("{entity}")]
+        [Route("~/api/Product/OrderDetailsDelete")]
 		public bool OrderDetailsDelete([FromBody] OrderDetailsDto entity)
         {
             return this.ProductApplicationService.OrderDetailsDelete(entity);
@@ -2441,6 +2494,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="entity">OrderDetailsDto</param>
         /// <returns>bool</returns>
         [HttpPost("{entity}")]
+        [Route("~/api/Product/OrderDetailsDeleteAsync")]
 		public async Task<bool> OrderDetailsDeleteAsync([FromBody] OrderDetailsDto entity)
         {
             return await this.ProductApplicationService.OrderDetailsDeleteAsync(entity);
@@ -2452,6 +2506,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="orderDetailsId">int</param>
         /// <returns>bool</returns>
         [HttpDelete("{orderDetailsId}/{cache}")]
+        [Route("~/api/Product/OrderDetailsDelete")]
 		public bool OrderDetailsDelete( int orderDetailsId, bool cache)
         {
             return this.ProductApplicationService.OrderDetailsDelete( orderDetailsId, cache);
@@ -2463,6 +2518,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="orderDetailsId">int</param>
         /// <returns>bool</returns>
         [HttpDelete("{orderDetailsId}/{cache}")]
+        [Route("~/api/Product/OrderDetailsDeleteAsync")]
 		public async Task<bool> OrderDetailsDeleteAsync( int orderDetailsId, bool cache)
         {
             return await this.ProductApplicationService.OrderDetailsDeleteAsync( orderDetailsId, cache);
@@ -2475,6 +2531,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="entity">ProductDto</param>
         /// <returns>bool</returns>
         [HttpPost("{entity}")]
+        [Route("~/api/Product/ProductAdd")]
 		public bool ProductAdd([FromBody] ProductDto entity)
         {
             return this.ProductApplicationService.ProductAdd(entity);
@@ -2486,6 +2543,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="entity">ProductDto</param>
         /// <returns>bool</returns>
         [HttpPost("{entity}")]
+        [Route("~/api/Product/ProductAddAsync")]
 		public async Task<bool> ProductAddAsync([FromBody] ProductDto entity)
         {
             return await this.ProductApplicationService.ProductAddAsync(entity);
@@ -2497,6 +2555,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="entity">ProductDto</param>
         /// <returns>bool</returns>
         [HttpPost("{entity}")]
+        [Route("~/api/Product/ProductUpdate")]
 		public bool ProductUpdate([FromBody] ProductDto entity)
         {
             return this.ProductApplicationService.ProductUpdate(entity);
@@ -2508,6 +2567,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="entity">ProductDto</param>
         /// <returns>bool</returns>
         [HttpPost("{entity}")]
+        [Route("~/api/Product/ProductUpdateAsync")]
 		public async Task<bool> ProductUpdateAsync([FromBody] ProductDto entity)
         {
             return await this.ProductApplicationService.ProductUpdateAsync(entity);
@@ -2519,6 +2579,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="entity">ProductDto</param>
         /// <returns>bool</returns>
         [HttpPost("{entity}")]
+        [Route("~/api/Product/ProductDelete")]
 		public bool ProductDelete([FromBody] ProductDto entity)
         {
             return this.ProductApplicationService.ProductDelete(entity);
@@ -2530,6 +2591,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="entity">ProductDto</param>
         /// <returns>bool</returns>
         [HttpPost("{entity}")]
+        [Route("~/api/Product/ProductDeleteAsync")]
 		public async Task<bool> ProductDeleteAsync([FromBody] ProductDto entity)
         {
             return await this.ProductApplicationService.ProductDeleteAsync(entity);
@@ -2541,6 +2603,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="productId">int</param>
         /// <returns>bool</returns>
         [HttpDelete("{productId}/{cache}")]
+        [Route("~/api/Product/ProductDelete")]
 		public bool ProductDelete( int productId, bool cache)
         {
             return this.ProductApplicationService.ProductDelete( productId, cache);
@@ -2552,6 +2615,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="productId">int</param>
         /// <returns>bool</returns>
         [HttpDelete("{productId}/{cache}")]
+        [Route("~/api/Product/ProductDeleteAsync")]
 		public async Task<bool> ProductDeleteAsync( int productId, bool cache)
         {
             return await this.ProductApplicationService.ProductDeleteAsync( productId, cache);
@@ -2564,7 +2628,8 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="entity">SoftwareDto</param>
         /// <returns>bool</returns>
         [HttpPost("{entity}")]
-		public bool SoftwareAdd([FromBody] SoftwareDto entity)
+        [Route("~/api/Product/SoftwareAdd")]
+		public bool ProductAdd([FromBody] SoftwareDto entity)
         {
             return this.ProductApplicationService.SoftwareAdd(entity);
         }
@@ -2575,6 +2640,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="entity">SoftwareDto</param>
         /// <returns>bool</returns>
         [HttpPost("{entity}")]
+        [Route("~/api/Product/SoftwareAddAsync")]
 		public async Task<bool> SoftwareAddAsync([FromBody] SoftwareDto entity)
         {
             return await this.ProductApplicationService.SoftwareAddAsync(entity);
@@ -2586,6 +2652,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="entity">SoftwareDto</param>
         /// <returns>bool</returns>
         [HttpPost("{entity}")]
+        [Route("~/api/Product/SoftwareUpdate")]
 		public bool SoftwareUpdate([FromBody] SoftwareDto entity)
         {
             return this.ProductApplicationService.SoftwareUpdate(entity);
@@ -2597,6 +2664,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="entity">SoftwareDto</param>
         /// <returns>bool</returns>
         [HttpPost("{entity}")]
+        [Route("~/api/Product/SoftwareUpdateAsync")]
 		public async Task<bool> SoftwareUpdateAsync([FromBody] SoftwareDto entity)
         {
             return await this.ProductApplicationService.SoftwareUpdateAsync(entity);
@@ -2608,6 +2676,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="entity">SoftwareDto</param>
         /// <returns>bool</returns>
         [HttpPost("{entity}")]
+        [Route("~/api/Product/SoftwareDelete")]
 		public bool SoftwareDelete([FromBody] SoftwareDto entity)
         {
             return this.ProductApplicationService.SoftwareDelete(entity);
@@ -2619,6 +2688,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="entity">SoftwareDto</param>
         /// <returns>bool</returns>
         [HttpPost("{entity}")]
+        [Route("~/api/Product/SoftwareDeleteAsync")]
 		public async Task<bool> SoftwareDeleteAsync([FromBody] SoftwareDto entity)
         {
             return await this.ProductApplicationService.SoftwareDeleteAsync(entity);
@@ -2630,6 +2700,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="productId">int</param>
         /// <returns>bool</returns>
         [HttpDelete("{productId}/{cache}")]
+        [Route("~/api/Product/SoftwareDelete")]
 		public bool SoftwareDelete( int productId, bool cache)
         {
             return this.ProductApplicationService.SoftwareDelete( productId, cache);
@@ -2641,6 +2712,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="productId">int</param>
         /// <returns>bool</returns>
         [HttpDelete("{productId}/{cache}")]
+        [Route("~/api/Product/SoftwareDeleteAsync")]
 		public async Task<bool> SoftwareDeleteAsync( int productId, bool cache)
         {
             return await this.ProductApplicationService.SoftwareDeleteAsync( productId, cache);
@@ -2655,6 +2727,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// </summary>
         /// <param name="items"></param>
         [HttpPost("{items}")]
+        [Route("~/api/Product/BankAccountBulkDelete")]
         public void BankAccountBulkDelete([FromBody] IEnumerable<BankAccountDto> items)
 		{
 			this.ProductApplicationService.BankAccountBulkDelete(items);
@@ -2666,6 +2739,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="items"></param>
         /// <returns></returns>
         [HttpPost("{items}")]
+        [Route("~/api/Product/BankAccountBulkDeleteAsync")]
         public async Task BankAccountBulkDeleteAsync([FromBody] IEnumerable<BankAccountDto> items)
 		{
 			await this.ProductApplicationService.BankAccountBulkDeleteAsync(items);
@@ -2677,6 +2751,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <paramid name="items"></param>
         [HttpPost]
         [HttpPost("{items}")]
+        [Route("~/api/Product/BankAccountBulkInsert")]
         public void  BankAccountBulkInsert([FromBody] IEnumerable<BankAccountDto> items)
 		{
 			this.ProductApplicationService.BankAccountBulkInsert(items);
@@ -2688,6 +2763,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="items"></param>
         /// <returns></returns>
         [HttpPost("{items}")]
+        [Route("~/api/Product/BankAccountBulkInsertAsync")]
         public async Task  BankAccountBulkInsertAsync([FromBody] IEnumerable<BankAccountDto> items)
 		{
 			await this.ProductApplicationService.BankAccountBulkInsertAsync(items);
@@ -2698,6 +2774,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// </summary>
         /// <param name="items"></param>
         [HttpPost("{items}")]
+        [Route("~/api/Product/BankAccountBulkUpdate")]
         public void BankAccountBulkUpdate([FromBody] IEnumerable<BankAccountDto> items)
 		{
 			this.ProductApplicationService.BankAccountBulkUpdate(items);
@@ -2709,6 +2786,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="items"></param>
         /// <returns></returns>
         [HttpPost("{items}")]
+        [Route("~/api/Product/BankAccountBulkupdateAsync")]
         public async Task BankAccountBulkUpdateAsync([FromBody] IEnumerable<BankAccountDto> items)
 		{
 			await this.ProductApplicationService.BankAccountBulkUpdateAsync(items);
@@ -2720,6 +2798,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// </summary>
         /// <param name="items"></param>
         [HttpPost("{items}")]
+        [Route("~/api/Product/BankTransfersBulkDelete")]
         public void BankTransfersBulkDelete([FromBody] IEnumerable<BankTransfersDto> items)
 		{
 			this.ProductApplicationService.BankTransfersBulkDelete(items);
@@ -2731,6 +2810,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="items"></param>
         /// <returns></returns>
         [HttpPost("{items}")]
+        [Route("~/api/Product/BankTransfersBulkDeleteAsync")]
         public async Task BankTransfersBulkDeleteAsync([FromBody] IEnumerable<BankTransfersDto> items)
 		{
 			await this.ProductApplicationService.BankTransfersBulkDeleteAsync(items);
@@ -2742,6 +2822,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <paramid name="items"></param>
         [HttpPost]
         [HttpPost("{items}")]
+        [Route("~/api/Product/BankTransfersBulkInsert")]
         public void  BankTransfersBulkInsert([FromBody] IEnumerable<BankTransfersDto> items)
 		{
 			this.ProductApplicationService.BankTransfersBulkInsert(items);
@@ -2753,6 +2834,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="items"></param>
         /// <returns></returns>
         [HttpPost("{items}")]
+        [Route("~/api/Product/BankTransfersBulkInsertAsync")]
         public async Task  BankTransfersBulkInsertAsync([FromBody] IEnumerable<BankTransfersDto> items)
 		{
 			await this.ProductApplicationService.BankTransfersBulkInsertAsync(items);
@@ -2763,6 +2845,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// </summary>
         /// <param name="items"></param>
         [HttpPost("{items}")]
+        [Route("~/api/Product/BankTransfersBulkUpdate")]
         public void BankTransfersBulkUpdate([FromBody] IEnumerable<BankTransfersDto> items)
 		{
 			this.ProductApplicationService.BankTransfersBulkUpdate(items);
@@ -2774,6 +2857,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="items"></param>
         /// <returns></returns>
         [HttpPost("{items}")]
+        [Route("~/api/Product/BankTransfersBulkupdateAsync")]
         public async Task BankTransfersBulkUpdateAsync([FromBody] IEnumerable<BankTransfersDto> items)
 		{
 			await this.ProductApplicationService.BankTransfersBulkUpdateAsync(items);
@@ -2785,6 +2869,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// </summary>
         /// <param name="items"></param>
         [HttpPost("{items}")]
+        [Route("~/api/Product/BookBulkDelete")]
         public void BookBulkDelete([FromBody] IEnumerable<BookDto> items)
 		{
 			this.ProductApplicationService.BookBulkDelete(items);
@@ -2796,6 +2881,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="items"></param>
         /// <returns></returns>
         [HttpPost("{items}")]
+        [Route("~/api/Product/BookBulkDeleteAsync")]
         public async Task BookBulkDeleteAsync([FromBody] IEnumerable<BookDto> items)
 		{
 			await this.ProductApplicationService.BookBulkDeleteAsync(items);
@@ -2807,6 +2893,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <paramid name="items"></param>
         [HttpPost]
         [HttpPost("{items}")]
+        [Route("~/api/Product/BookBulkInsert")]
         public void  BookBulkInsert([FromBody] IEnumerable<BookDto> items)
 		{
 			this.ProductApplicationService.BookBulkInsert(items);
@@ -2818,6 +2905,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="items"></param>
         /// <returns></returns>
         [HttpPost("{items}")]
+        [Route("~/api/Product/BookBulkInsertAsync")]
         public async Task  BookBulkInsertAsync([FromBody] IEnumerable<BookDto> items)
 		{
 			await this.ProductApplicationService.BookBulkInsertAsync(items);
@@ -2828,6 +2916,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// </summary>
         /// <param name="items"></param>
         [HttpPost("{items}")]
+        [Route("~/api/Product/BookBulkUpdate")]
         public void BookBulkUpdate([FromBody] IEnumerable<BookDto> items)
 		{
 			this.ProductApplicationService.BookBulkUpdate(items);
@@ -2839,6 +2928,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="items"></param>
         /// <returns></returns>
         [HttpPost("{items}")]
+        [Route("~/api/Product/BookBulkupdateAsync")]
         public async Task BookBulkUpdateAsync([FromBody] IEnumerable<BookDto> items)
 		{
 			await this.ProductApplicationService.BookBulkUpdateAsync(items);
@@ -2850,6 +2940,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// </summary>
         /// <param name="items"></param>
         [HttpPost("{items}")]
+        [Route("~/api/Product/CountryBulkDelete")]
         public void CountryBulkDelete([FromBody] IEnumerable<CountryDto> items)
 		{
 			this.ProductApplicationService.CountryBulkDelete(items);
@@ -2861,6 +2952,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="items"></param>
         /// <returns></returns>
         [HttpPost("{items}")]
+        [Route("~/api/Product/CountryBulkDeleteAsync")]
         public async Task CountryBulkDeleteAsync([FromBody] IEnumerable<CountryDto> items)
 		{
 			await this.ProductApplicationService.CountryBulkDeleteAsync(items);
@@ -2872,6 +2964,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <paramid name="items"></param>
         [HttpPost]
         [HttpPost("{items}")]
+        [Route("~/api/Product/CountryBulkInsert")]
         public void  CountryBulkInsert([FromBody] IEnumerable<CountryDto> items)
 		{
 			this.ProductApplicationService.CountryBulkInsert(items);
@@ -2883,6 +2976,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="items"></param>
         /// <returns></returns>
         [HttpPost("{items}")]
+        [Route("~/api/Product/CountryBulkInsertAsync")]
         public async Task  CountryBulkInsertAsync([FromBody] IEnumerable<CountryDto> items)
 		{
 			await this.ProductApplicationService.CountryBulkInsertAsync(items);
@@ -2893,6 +2987,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// </summary>
         /// <param name="items"></param>
         [HttpPost("{items}")]
+        [Route("~/api/Product/CountryBulkUpdate")]
         public void CountryBulkUpdate([FromBody] IEnumerable<CountryDto> items)
 		{
 			this.ProductApplicationService.CountryBulkUpdate(items);
@@ -2904,6 +2999,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="items"></param>
         /// <returns></returns>
         [HttpPost("{items}")]
+        [Route("~/api/Product/CountryBulkupdateAsync")]
         public async Task CountryBulkUpdateAsync([FromBody] IEnumerable<CountryDto> items)
 		{
 			await this.ProductApplicationService.CountryBulkUpdateAsync(items);
@@ -2915,6 +3011,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// </summary>
         /// <param name="items"></param>
         [HttpPost("{items}")]
+        [Route("~/api/Product/CustomerBulkDelete")]
         public void CustomerBulkDelete([FromBody] IEnumerable<CustomerDto> items)
 		{
 			this.ProductApplicationService.CustomerBulkDelete(items);
@@ -2926,6 +3023,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="items"></param>
         /// <returns></returns>
         [HttpPost("{items}")]
+        [Route("~/api/Product/CustomerBulkDeleteAsync")]
         public async Task CustomerBulkDeleteAsync([FromBody] IEnumerable<CustomerDto> items)
 		{
 			await this.ProductApplicationService.CustomerBulkDeleteAsync(items);
@@ -2937,6 +3035,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <paramid name="items"></param>
         [HttpPost]
         [HttpPost("{items}")]
+        [Route("~/api/Product/CustomerBulkInsert")]
         public void  CustomerBulkInsert([FromBody] IEnumerable<CustomerDto> items)
 		{
 			this.ProductApplicationService.CustomerBulkInsert(items);
@@ -2948,6 +3047,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="items"></param>
         /// <returns></returns>
         [HttpPost("{items}")]
+        [Route("~/api/Product/CustomerBulkInsertAsync")]
         public async Task  CustomerBulkInsertAsync([FromBody] IEnumerable<CustomerDto> items)
 		{
 			await this.ProductApplicationService.CustomerBulkInsertAsync(items);
@@ -2958,6 +3058,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// </summary>
         /// <param name="items"></param>
         [HttpPost("{items}")]
+        [Route("~/api/Product/CustomerBulkUpdate")]
         public void CustomerBulkUpdate([FromBody] IEnumerable<CustomerDto> items)
 		{
 			this.ProductApplicationService.CustomerBulkUpdate(items);
@@ -2969,6 +3070,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="items"></param>
         /// <returns></returns>
         [HttpPost("{items}")]
+        [Route("~/api/Product/CustomerBulkupdateAsync")]
         public async Task CustomerBulkUpdateAsync([FromBody] IEnumerable<CustomerDto> items)
 		{
 			await this.ProductApplicationService.CustomerBulkUpdateAsync(items);
@@ -2980,6 +3082,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// </summary>
         /// <param name="items"></param>
         [HttpPost("{items}")]
+        [Route("~/api/Product/OrderBulkDelete")]
         public void OrderBulkDelete([FromBody] IEnumerable<OrderDto> items)
 		{
 			this.ProductApplicationService.OrderBulkDelete(items);
@@ -2991,6 +3094,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="items"></param>
         /// <returns></returns>
         [HttpPost("{items}")]
+        [Route("~/api/Product/OrderBulkDeleteAsync")]
         public async Task OrderBulkDeleteAsync([FromBody] IEnumerable<OrderDto> items)
 		{
 			await this.ProductApplicationService.OrderBulkDeleteAsync(items);
@@ -3002,6 +3106,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <paramid name="items"></param>
         [HttpPost]
         [HttpPost("{items}")]
+        [Route("~/api/Product/OrderBulkInsert")]
         public void  OrderBulkInsert([FromBody] IEnumerable<OrderDto> items)
 		{
 			this.ProductApplicationService.OrderBulkInsert(items);
@@ -3013,6 +3118,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="items"></param>
         /// <returns></returns>
         [HttpPost("{items}")]
+        [Route("~/api/Product/OrderBulkInsertAsync")]
         public async Task  OrderBulkInsertAsync([FromBody] IEnumerable<OrderDto> items)
 		{
 			await this.ProductApplicationService.OrderBulkInsertAsync(items);
@@ -3023,6 +3129,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// </summary>
         /// <param name="items"></param>
         [HttpPost("{items}")]
+        [Route("~/api/Product/OrderBulkUpdate")]
         public void OrderBulkUpdate([FromBody] IEnumerable<OrderDto> items)
 		{
 			this.ProductApplicationService.OrderBulkUpdate(items);
@@ -3034,6 +3141,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="items"></param>
         /// <returns></returns>
         [HttpPost("{items}")]
+        [Route("~/api/Product/OrderBulkupdateAsync")]
         public async Task OrderBulkUpdateAsync([FromBody] IEnumerable<OrderDto> items)
 		{
 			await this.ProductApplicationService.OrderBulkUpdateAsync(items);
@@ -3045,6 +3153,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// </summary>
         /// <param name="items"></param>
         [HttpPost("{items}")]
+        [Route("~/api/Product/OrderDetailsBulkDelete")]
         public void OrderDetailsBulkDelete([FromBody] IEnumerable<OrderDetailsDto> items)
 		{
 			this.ProductApplicationService.OrderDetailsBulkDelete(items);
@@ -3056,6 +3165,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="items"></param>
         /// <returns></returns>
         [HttpPost("{items}")]
+        [Route("~/api/Product/OrderDetailsBulkDeleteAsync")]
         public async Task OrderDetailsBulkDeleteAsync([FromBody] IEnumerable<OrderDetailsDto> items)
 		{
 			await this.ProductApplicationService.OrderDetailsBulkDeleteAsync(items);
@@ -3067,6 +3177,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <paramid name="items"></param>
         [HttpPost]
         [HttpPost("{items}")]
+        [Route("~/api/Product/OrderDetailsBulkInsert")]
         public void  OrderDetailsBulkInsert([FromBody] IEnumerable<OrderDetailsDto> items)
 		{
 			this.ProductApplicationService.OrderDetailsBulkInsert(items);
@@ -3078,6 +3189,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="items"></param>
         /// <returns></returns>
         [HttpPost("{items}")]
+        [Route("~/api/Product/OrderDetailsBulkInsertAsync")]
         public async Task  OrderDetailsBulkInsertAsync([FromBody] IEnumerable<OrderDetailsDto> items)
 		{
 			await this.ProductApplicationService.OrderDetailsBulkInsertAsync(items);
@@ -3088,6 +3200,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// </summary>
         /// <param name="items"></param>
         [HttpPost("{items}")]
+        [Route("~/api/Product/OrderDetailsBulkUpdate")]
         public void OrderDetailsBulkUpdate([FromBody] IEnumerable<OrderDetailsDto> items)
 		{
 			this.ProductApplicationService.OrderDetailsBulkUpdate(items);
@@ -3099,6 +3212,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="items"></param>
         /// <returns></returns>
         [HttpPost("{items}")]
+        [Route("~/api/Product/OrderDetailsBulkupdateAsync")]
         public async Task OrderDetailsBulkUpdateAsync([FromBody] IEnumerable<OrderDetailsDto> items)
 		{
 			await this.ProductApplicationService.OrderDetailsBulkUpdateAsync(items);
@@ -3110,6 +3224,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// </summary>
         /// <param name="items"></param>
         [HttpPost("{items}")]
+        [Route("~/api/Product/ProductBulkDelete")]
         public void ProductBulkDelete([FromBody] IEnumerable<ProductDto> items)
 		{
 			this.ProductApplicationService.ProductBulkDelete(items);
@@ -3121,6 +3236,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="items"></param>
         /// <returns></returns>
         [HttpPost("{items}")]
+        [Route("~/api/Product/ProductBulkDeleteAsync")]
         public async Task ProductBulkDeleteAsync([FromBody] IEnumerable<ProductDto> items)
 		{
 			await this.ProductApplicationService.ProductBulkDeleteAsync(items);
@@ -3132,6 +3248,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <paramid name="items"></param>
         [HttpPost]
         [HttpPost("{items}")]
+        [Route("~/api/Product/ProductBulkInsert")]
         public void  ProductBulkInsert([FromBody] IEnumerable<ProductDto> items)
 		{
 			this.ProductApplicationService.ProductBulkInsert(items);
@@ -3143,6 +3260,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="items"></param>
         /// <returns></returns>
         [HttpPost("{items}")]
+        [Route("~/api/Product/ProductBulkInsertAsync")]
         public async Task  ProductBulkInsertAsync([FromBody] IEnumerable<ProductDto> items)
 		{
 			await this.ProductApplicationService.ProductBulkInsertAsync(items);
@@ -3153,6 +3271,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// </summary>
         /// <param name="items"></param>
         [HttpPost("{items}")]
+        [Route("~/api/Product/ProductBulkUpdate")]
         public void ProductBulkUpdate([FromBody] IEnumerable<ProductDto> items)
 		{
 			this.ProductApplicationService.ProductBulkUpdate(items);
@@ -3164,6 +3283,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="items"></param>
         /// <returns></returns>
         [HttpPost("{items}")]
+        [Route("~/api/Product/ProductBulkupdateAsync")]
         public async Task ProductBulkUpdateAsync([FromBody] IEnumerable<ProductDto> items)
 		{
 			await this.ProductApplicationService.ProductBulkUpdateAsync(items);
@@ -3175,6 +3295,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// </summary>
         /// <param name="items"></param>
         [HttpPost("{items}")]
+        [Route("~/api/Product/SoftwareBulkDelete")]
         public void SoftwareBulkDelete([FromBody] IEnumerable<SoftwareDto> items)
 		{
 			this.ProductApplicationService.SoftwareBulkDelete(items);
@@ -3186,6 +3307,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="items"></param>
         /// <returns></returns>
         [HttpPost("{items}")]
+        [Route("~/api/Product/SoftwareBulkDeleteAsync")]
         public async Task SoftwareBulkDeleteAsync([FromBody] IEnumerable<SoftwareDto> items)
 		{
 			await this.ProductApplicationService.SoftwareBulkDeleteAsync(items);
@@ -3197,6 +3319,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <paramid name="items"></param>
         [HttpPost]
         [HttpPost("{items}")]
+        [Route("~/api/Product/SoftwareBulkInsert")]
         public void  SoftwareBulkInsert([FromBody] IEnumerable<SoftwareDto> items)
 		{
 			this.ProductApplicationService.SoftwareBulkInsert(items);
@@ -3208,6 +3331,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="items"></param>
         /// <returns></returns>
         [HttpPost("{items}")]
+        [Route("~/api/Product/SoftwareBulkInsertAsync")]
         public async Task  SoftwareBulkInsertAsync([FromBody] IEnumerable<SoftwareDto> items)
 		{
 			await this.ProductApplicationService.SoftwareBulkInsertAsync(items);
@@ -3218,6 +3342,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// </summary>
         /// <param name="items"></param>
         [HttpPost("{items}")]
+        [Route("~/api/Product/SoftwareBulkUpdate")]
         public void SoftwareBulkUpdate([FromBody] IEnumerable<SoftwareDto> items)
 		{
 			this.ProductApplicationService.SoftwareBulkUpdate(items);
@@ -3229,6 +3354,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="items"></param>
         /// <returns></returns>
         [HttpPost("{items}")]
+        [Route("~/api/Product/SoftwareBulkupdateAsync")]
         public async Task SoftwareBulkUpdateAsync([FromBody] IEnumerable<SoftwareDto> items)
 		{
 			await this.ProductApplicationService.SoftwareBulkUpdateAsync(items);

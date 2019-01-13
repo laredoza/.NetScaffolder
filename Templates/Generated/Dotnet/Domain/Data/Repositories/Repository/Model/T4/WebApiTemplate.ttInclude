@@ -314,7 +314,8 @@ string modelName = DataType.NamingConvention == null ? model.TableName : DataTyp
         /// <param name="entity"><#= modelName #>Dto</param>
         /// <returns>bool</returns>
         [HttpPost("{entity}")]
-		public bool <#= modelName #>Add([FromBody] <#= modelName #>Dto entity)
+        [Route("~/api/<#= CurrentWebApiServiceData.WebApiName #>/<#= modelName #>Add")]
+		public bool <#= CurrentWebApiServiceData.WebApiName #>Add([FromBody] <#= modelName #>Dto entity)
         {
             return this.<#= applicationServiceName #>ApplicationService.<#= modelName #>Add(entity);
         }
@@ -325,6 +326,7 @@ string modelName = DataType.NamingConvention == null ? model.TableName : DataTyp
         /// <param name="entity"><#= modelName #>Dto</param>
         /// <returns>bool</returns>
         [HttpPost("{entity}")]
+        [Route("~/api/<#= CurrentWebApiServiceData.WebApiName #>/<#= modelName #>AddAsync")]
 		public async Task<bool> <#= modelName #>AddAsync([FromBody] <#= modelName #>Dto entity)
         {
             return await this.<#= applicationServiceName #>ApplicationService.<#= modelName #>AddAsync(entity);
@@ -336,6 +338,7 @@ string modelName = DataType.NamingConvention == null ? model.TableName : DataTyp
         /// <param name="entity"><#= modelName #>Dto</param>
         /// <returns>bool</returns>
         [HttpPost("{entity}")]
+        [Route("~/api/<#= CurrentWebApiServiceData.WebApiName #>/<#= modelName #>Update")]
 		public bool <#= modelName #>Update([FromBody] <#= modelName #>Dto entity)
         {
             return this.<#= applicationServiceName #>ApplicationService.<#= modelName #>Update(entity);
@@ -347,6 +350,7 @@ string modelName = DataType.NamingConvention == null ? model.TableName : DataTyp
         /// <param name="entity"><#= modelName #>Dto</param>
         /// <returns>bool</returns>
         [HttpPost("{entity}")]
+        [Route("~/api/<#= CurrentWebApiServiceData.WebApiName #>/<#= modelName #>UpdateAsync")]
 		public async Task<bool> <#= modelName #>UpdateAsync([FromBody] <#= modelName #>Dto entity)
         {
             return await this.<#= applicationServiceName #>ApplicationService.<#= modelName #>UpdateAsync(entity);
@@ -358,6 +362,7 @@ string modelName = DataType.NamingConvention == null ? model.TableName : DataTyp
         /// <param name="entity"><#= modelName #>Dto</param>
         /// <returns>bool</returns>
         [HttpPost("{entity}")]
+        [Route("~/api/<#= CurrentWebApiServiceData.WebApiName #>/<#= modelName #>Delete")]
 		public bool <#= modelName #>Delete([FromBody] <#= modelName #>Dto entity)
         {
             return this.<#= applicationServiceName #>ApplicationService.<#= modelName #>Delete(entity);
@@ -369,6 +374,7 @@ string modelName = DataType.NamingConvention == null ? model.TableName : DataTyp
         /// <param name="entity"><#= modelName #>Dto</param>
         /// <returns>bool</returns>
         [HttpPost("{entity}")]
+        [Route("~/api/<#= CurrentWebApiServiceData.WebApiName #>/<#= modelName #>DeleteAsync")]
 		public async Task<bool> <#= modelName #>DeleteAsync([FromBody] <#= modelName #>Dto entity)
         {
             return await this.<#= applicationServiceName #>ApplicationService.<#= modelName #>DeleteAsync(entity);
@@ -382,6 +388,7 @@ string modelName = DataType.NamingConvention == null ? model.TableName : DataTyp
 <#+ } #>
         /// <returns>bool</returns>
         [HttpDelete("{<#=DataType.TransformAsParameterName(model.Columns.Where(o => o.IsPrimaryKey)).Trim()#>}/{cache}")]
+        [Route("~/api/<#= CurrentWebApiServiceData.WebApiName #>/<#= modelName #>Delete")]
 		public bool <#= modelName #>Delete(<#= DataType.TransformAsParameter(model.Columns.Where(o => o.IsPrimaryKey)) #>, bool cache)
         {
             return this.<#= applicationServiceName #>ApplicationService.<#= modelName #>Delete(<#= DataType.TransformAsParameterName(model.Columns.Where(o => o.IsPrimaryKey)) #>, cache);
@@ -395,6 +402,7 @@ string modelName = DataType.NamingConvention == null ? model.TableName : DataTyp
 <#+ } #>
         /// <returns>bool</returns>
         [HttpDelete("{<#=DataType.TransformAsParameterName(model.Columns.Where(o => o.IsPrimaryKey)).Trim()#>}/{cache}")]
+        [Route("~/api/<#= CurrentWebApiServiceData.WebApiName #>/<#= modelName #>DeleteAsync")]
 		public async Task<bool> <#= modelName #>DeleteAsync(<#= DataType.TransformAsParameter(model.Columns.Where(o => o.IsPrimaryKey)) #>, bool cache)
         {
             return await this.<#= applicationServiceName #>ApplicationService.<#= modelName #>DeleteAsync(<#= DataType.TransformAsParameterName(model.Columns.Where(o => o.IsPrimaryKey)) #>, cache);
@@ -416,6 +424,7 @@ string modelName = DataType.NamingConvention == null ? model.TableName : DataTyp
         /// </summary>
         /// <param name="items"></param>
         [HttpPost("{items}")]
+        [Route("~/api/<#= CurrentWebApiServiceData.WebApiName #>/<#= modelName #>BulkDelete")]
         public void <#= modelName #>BulkDelete([FromBody] IEnumerable<<#= modelName #>Dto> items)
 		{
 			this.<#= applicationServiceName #>ApplicationService.<#= modelName #>BulkDelete(items);
@@ -427,6 +436,7 @@ string modelName = DataType.NamingConvention == null ? model.TableName : DataTyp
         /// <param name="items"></param>
         /// <returns></returns>
         [HttpPost("{items}")]
+        [Route("~/api/<#= CurrentWebApiServiceData.WebApiName #>/<#= modelName #>BulkDeleteAsync")]
         public async Task <#= modelName #>BulkDeleteAsync([FromBody] IEnumerable<<#= modelName #>Dto> items)
 		{
 			await this.<#= applicationServiceName #>ApplicationService.<#= modelName #>BulkDeleteAsync(items);
@@ -438,6 +448,7 @@ string modelName = DataType.NamingConvention == null ? model.TableName : DataTyp
         /// <paramid name="items"></param>
         [HttpPost]
         [HttpPost("{items}")]
+        [Route("~/api/<#= CurrentWebApiServiceData.WebApiName #>/<#= modelName #>BulkInsert")]
         public void  <#= modelName #>BulkInsert([FromBody] IEnumerable<<#= modelName #>Dto> items)
 		{
 			this.<#= applicationServiceName #>ApplicationService.<#= modelName #>BulkInsert(items);
@@ -449,6 +460,7 @@ string modelName = DataType.NamingConvention == null ? model.TableName : DataTyp
         /// <param name="items"></param>
         /// <returns></returns>
         [HttpPost("{items}")]
+        [Route("~/api/<#= CurrentWebApiServiceData.WebApiName #>/<#= modelName #>BulkInsertAsync")]
         public async Task  <#= modelName #>BulkInsertAsync([FromBody] IEnumerable<<#= modelName #>Dto> items)
 		{
 			await this.<#= applicationServiceName #>ApplicationService.<#= modelName #>BulkInsertAsync(items);
@@ -459,6 +471,7 @@ string modelName = DataType.NamingConvention == null ? model.TableName : DataTyp
         /// </summary>
         /// <param name="items"></param>
         [HttpPost("{items}")]
+        [Route("~/api/<#= CurrentWebApiServiceData.WebApiName #>/<#= modelName #>BulkUpdate")]
         public void <#= modelName #>BulkUpdate([FromBody] IEnumerable<<#= modelName #>Dto> items)
 		{
 			this.<#= applicationServiceName #>ApplicationService.<#= modelName #>BulkUpdate(items);
@@ -470,6 +483,7 @@ string modelName = DataType.NamingConvention == null ? model.TableName : DataTyp
         /// <param name="items"></param>
         /// <returns></returns>
         [HttpPost("{items}")]
+        [Route("~/api/<#= CurrentWebApiServiceData.WebApiName #>/<#= modelName #>BulkupdateAsync")]
         public async Task <#= modelName #>BulkUpdateAsync([FromBody] IEnumerable<<#= modelName #>Dto> items)
 		{
 			await this.<#= applicationServiceName #>ApplicationService.<#= modelName #>BulkUpdateAsync(items);
