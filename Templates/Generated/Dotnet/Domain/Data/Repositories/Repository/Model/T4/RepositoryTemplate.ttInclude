@@ -228,8 +228,16 @@ namespace <#= DataType.FullNamespace #>
         /// <returns>bool</returns>
 		public virtual bool Add(<#= DataType.ModelName #> entity)
 		{
-			this.UnitOfWork.Add(entity);
-			return this.UnitOfWork.Save();
+			var entityToSave = new <#= DataType.ModelName #>(entity, false);
+			this.UnitOfWork.Add(entityToSave);
+			bool result = this.UnitOfWork.Save();
+			
+			// Populate passed in entity with newly saved values
+<#+ foreach(var col in DataType.MetaData.Columns){ #>
+			entity.<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #> = entityToSave.<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>;
+<#+ }  #>
+			
+			return result;
 		}
 		
         /// <summary>
@@ -239,8 +247,16 @@ namespace <#= DataType.FullNamespace #>
         /// <returns>bool</returns>
 		public virtual async Task<bool> AddAsync(<#= DataType.ModelName #> entity)
 		{
-			await this.UnitOfWork.AddAsync(entity);
-			return await this.UnitOfWork.SaveAsync();
+            var entityToSave = new <#= DataType.ModelName #>(entity, false);
+			await this.UnitOfWork.AddAsync(entityToSave);
+			bool result = await this.UnitOfWork.SaveAsync();
+			
+			// Populate passed in entity with newly saved values
+<#+ foreach(var col in DataType.MetaData.Columns){ #>
+			entity.<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #> = entityToSave.<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>;
+<#+ }  #>
+			
+			return result;
 		}
 
         /// <summary>
@@ -250,7 +266,26 @@ namespace <#= DataType.FullNamespace #>
         /// <returns>bool</returns>
 		public virtual bool Update(<#= DataType.ModelName #> entity)
 		{
-			return this.UnitOfWork.Modify(entity);
+			bool doUpdate = false;
+			var entityToUpdate = this.UnitOfWork.FirstOrDefault<<#= DataType.ModelName #>>(o => <#= DataType.TransformAsQuery(DataType.MetaData.Columns.Where(o => o.IsPrimaryKey), "entity") #>, true);
+			
+			if (entityToUpdate == null)
+			{
+				throw new Exception("The <#= DataType.ModelName #> entity does not exist");
+			}
+			
+			// Optimisation: Flag if any field has changed
+<#+ foreach(var col in DataType.MetaData.Columns.Where(o => !o.IsPrimaryKey)){ #>
+			if (entityToUpdate.<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #> != entity.<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>) { entityToUpdate.<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #> = entity.<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>;doUpdate = true; }
+<#+ }  #>
+
+			// Optimisation: Only execute update if a field has changed
+			if (doUpdate)
+			{
+				return this.UnitOfWork.Modify(entityToUpdate);
+			}
+			
+			return false;
 		}
 		
         /// <summary>
@@ -260,7 +295,26 @@ namespace <#= DataType.FullNamespace #>
         /// <returns>bool</returns>
 		public virtual async Task<bool> UpdateAsync(<#= DataType.ModelName #> entity)
 		{
-			return await this.UnitOfWork.ModifyAsync(entity);
+			bool doUpdate = false;
+			var entityToUpdate = await this.UnitOfWork.FirstOrDefaultAsync<<#= DataType.ModelName #>>(true, o => <#= DataType.TransformAsQuery(DataType.MetaData.Columns.Where(o => o.IsPrimaryKey), "entity") #>);
+			
+			if (entityToUpdate == null)
+			{
+				throw new Exception("The <#= DataType.ModelName #> entity does not exist");
+			}
+			
+			// Optimisation: Flag if any field has changed
+<#+ foreach(var col in DataType.MetaData.Columns.Where(o => !o.IsPrimaryKey)){ #>
+			if (entityToUpdate.<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #> != entity.<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>) { entityToUpdate.<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #> = entity.<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>;doUpdate = true; }
+<#+ }  #>
+
+			// Optimisation: Only execute update if a field has changed
+			if (doUpdate)
+			{
+				return await this.UnitOfWork.ModifyAsync(entityToUpdate);
+			}
+			
+			return false;
 		}
 		
         /// <summary>
@@ -270,7 +324,14 @@ namespace <#= DataType.FullNamespace #>
         /// <returns>bool</returns>
 		public virtual bool Delete(<#= DataType.ModelName #> entity)
 		{		
-			return this.UnitOfWork.Remove(entity);
+			var entityToDelete = this.UnitOfWork.FirstOrDefault<<#= DataType.ModelName #>>(o => <#= DataType.TransformAsQuery(DataType.MetaData.Columns.Where(o => o.IsPrimaryKey), "entity")#>, true);
+			
+			if(entityToDelete == null)
+			{
+				throw new Exception("The <#= DataType.ModelName #> entity does not exist");
+			}
+			
+			return this.UnitOfWork.Remove(entityToDelete);
 		}
 		
         /// <summary>
@@ -280,7 +341,14 @@ namespace <#= DataType.FullNamespace #>
         /// <returns>bool</returns>
 		public virtual async Task<bool> DeleteAsync(<#= DataType.ModelName #> entity)
 		{		
-			return await this.UnitOfWork.RemoveAsync(entity);
+			var entityToDelete = await this.UnitOfWork.FirstOrDefaultAsync<<#= DataType.ModelName #>>(true, o => <#= DataType.TransformAsQuery(DataType.MetaData.Columns.Where(o => o.IsPrimaryKey), "entity")#>);
+			
+			if(entityToDelete == null)
+			{
+				throw new Exception("The <#= DataType.ModelName #> entity does not exist");
+			}
+			
+			return await this.UnitOfWork.RemoveAsync(entityToDelete);
 		}
 
 		/// <summary>

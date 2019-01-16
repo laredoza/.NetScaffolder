@@ -20,6 +20,7 @@
 
 using System;
 using System.Linq.Expressions;
+using DotNetScaffolder.Domain.Core.Interfaces;
 using DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.Dto;
 using DotNetScaffolder.Domain.Infrastructure.Web.Core.Security;
 
@@ -31,6 +32,17 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
     //[DynamicClaimRequirement(ClaimTypes.All, "CanReadProductResource")]
     public partial class ProductController 
 	{
+
+	    /// <summary>
+	    ///     Gets the unit ofwork.
+	    /// </summary>
+	    public IUnitOfWork UnitOfwork
+	    {
+	        get
+	        {
+	            return (IUnitOfWork)this.HttpContext?.Items["WebUnitOfWork"];
+	        }
+	    }
 
         /// <summary>
         /// Configure Includes

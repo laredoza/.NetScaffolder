@@ -2,6 +2,7 @@
 using System.IdentityModel.Tokens.Jwt;
 using DotNetScaffolder.Domain.Infrastructure.Web.Core.Extensions;
 using DotNetScaffolder.Domain.Infrastructure.Web.Core.Security;
+using DotNetScaffolder.Domain.Services.WebApi.Default.Middleware;
 using DotNetScaffolder.Domain.Services.WebApi.Default.Security;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -50,6 +51,8 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default
         public void Configure(IApplicationBuilder app, IHostingEnvironment hostingEnvironment)
         {
             this.hostingEnvironment = hostingEnvironment;
+
+            app.UseMiddleware<DataMiddleware>();
 
             if (hostingEnvironment.IsDevelopment())
                 app.UseDeveloperExceptionPage();

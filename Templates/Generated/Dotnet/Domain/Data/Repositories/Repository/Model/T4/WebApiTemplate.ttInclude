@@ -93,6 +93,7 @@ if(model.PrimaryKeyCount > 1){ #>
         /// <param name="cache">Enables or disables caching</param>
         /// <returns><#= modelName #>Dto</returns>
         [HttpGet("{<#= DataType.TransformAsParameterName(model.Columns.Where(o => o.IsPrimaryKey)) #>}/{cache}")]
+        [Route("~/api/<#= CurrentWebApiServiceData.WebApiName #>/Load<#= modelName #>")]
 		ActionResult<<#= modelName #>Dto> Load<#= modelName #>(<#= DataType.TransformAsParameter(model.Columns.Where(o => o.IsPrimaryKey)) #>, bool cache)
         {
             if( this.Load<#= modelName #>Includes == null)
@@ -119,6 +120,7 @@ if(model.PrimaryKeyCount > 1){ #>
         /// <param name="cache">Enables or disables caching</param>
         /// <returns><#= modelName #>Dto</returns>
         [HttpGet("{<#= DataType.TransformAsParameterName(model.Columns.Where(o => o.IsPrimaryKey)) #>}/{cache}")]
+        [Route("~/api/<#= CurrentWebApiServiceData.WebApiName #>/<#= modelName #>LoadAsync")]
 		Task<ActionResult<<#= modelName #>>Dto> await <#= modelName #>LoadAsync(<#= DataType.TransformAsParameter(model.Columns.Where(o => o.IsPrimaryKey)) #>, bool cache)
         {
             if( this.LoadAsync<#= modelName #>Includes == null)
@@ -147,6 +149,7 @@ if(model.PrimaryKeyCount > 1){ #>
         /// <param name="cache">Enables or disables caching</param>
         /// <returns><#= modelName #>Dto</returns>
         [HttpGet("{<#= DataType.TransformAsParameterName(col) #>}/{cache}")]
+        [Route("~/api/<#= CurrentWebApiServiceData.WebApiName #>/LoadBy<#= modelName #><#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>")]
 		public ActionResult<<#= modelName #>Dto> LoadBy<#= modelName #><#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= DataType.TransformAsParameter(col) #>, bool cache)
         {
             if( this.LoadBy<#= modelName #><#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>Includes == null)
@@ -171,6 +174,7 @@ if(model.PrimaryKeyCount > 1){ #>
         /// <param name="cache">Enables or disables caching</param>
         /// <returns><#= modelName #>Dto</returns>
         [HttpGet("{<#= DataType.TransformAsParameterName(col) #>}/{cache}")]
+        [Route("~/api/<#= CurrentWebApiServiceData.WebApiName #>/LoadBy<#= modelName #><#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>Async")]
 		public async Task<ActionResult<<#= modelName #>Dto>> LoadBy<#= modelName #><#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>Async(<#= DataType.TransformAsParameter(col) #>, bool cache)
         {
             if( this.LoadBy<#= modelName #><#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>AsyncIncludes == null)
@@ -195,6 +199,7 @@ if(model.PrimaryKeyCount > 1){ #>
         /// <param name="cache">Enables or disables caching</param>
         /// <returns><#= DataType.CollectionOption.ClassNameInterface #><<#= modelName #>Dto></returns>
         [HttpGet("{cache}")]
+        [Route("~/api/<#= CurrentWebApiServiceData.WebApiName #>/<#= modelName #>LoadAll")]
 		public ActionResult<<#= DataType.CollectionOption.ClassNameInterface #><<#= modelName #>Dto>> <#= modelName #>LoadAll(bool cache)
         {
             if( this.<#= modelName #>LoadAllIncludes == null)
@@ -218,6 +223,7 @@ if(model.PrimaryKeyCount > 1){ #>
         /// <param name="cache">Enables or disables caching</param>
         /// <returns><#= DataType.CollectionOption.ClassNameInterface #><<#= modelName #>Dto></returns>
         [HttpGet("{cache}")]
+        [Route("~/api/<#= CurrentWebApiServiceData.WebApiName #>/<#= modelName #>LoadAllAsync")]
 		public async Task<ActionResult<<#= DataType.CollectionOption.ClassNameInterface #><<#= modelName #>Dto>>> <#= modelName #>LoadAllAsync(bool cache)
         {
             if( this.<#= modelName #>LoadAllAsyncIncludes == null)
@@ -255,7 +261,8 @@ string modelName = DataType.NamingConvention == null ? model.TableName : DataTyp
         /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns><#= DataType.CollectionOption.ClassNameInterface #><<#= modelName #>Dto></returns>
-        [HttpGet("{<#=DataType.TransformAsParameterName(model.Columns.Where(o => o.IsPrimaryKey)).Trim()#>}/{caseSensitive}/{cache}")]
+        [HttpGet("{<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>}/{caseSensitive}/{cache}")]
+        [Route("~/api/<#= CurrentWebApiServiceData.WebApiName #>/<#= modelName #>SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>")]
 		public ActionResult<<#= DataType.CollectionOption.ClassNameInterface #><<#= modelName #>Dto>> <#= modelName #>SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= DataType.TransformAsParameter(col) #>, bool caseSensitive, bool cache)
         {
             if( this.<#= modelName #>SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>Includes == null)
@@ -279,7 +286,8 @@ string modelName = DataType.NamingConvention == null ? model.TableName : DataTyp
         /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns><#= DataType.CollectionOption.ClassNameInterface #><<#= modelName #>Dto></returns>
-        [HttpGet("{<#=DataType.TransformAsParameterName(model.Columns.Where(o => o.IsPrimaryKey)).Trim()#>}/{caseSensitive}/{cache}")]
+        [HttpGet("{<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>}/{caseSensitive}/{cache}")]
+        [Route("~/api/<#= CurrentWebApiServiceData.WebApiName #>/<#= modelName #>SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>Async")]
         public async Task<ActionResult<<#= DataType.CollectionOption.ClassNameInterface #><<#= modelName #>Dto>>> <#= modelName #>SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>Async(<#= DataType.TransformAsParameter(col) #>, bool caseSensitive, bool cache)
         {
             if( this.<#= modelName #>SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>IncludesAsync == null)
@@ -337,7 +345,7 @@ string modelName = DataType.NamingConvention == null ? model.TableName : DataTyp
         /// </summary>
         /// <param name="entity"><#= modelName #>Dto</param>
         /// <returns>bool</returns>
-        [HttpPost("{entity}")]
+        [HttpPut("{entity}")]
         [Route("~/api/<#= CurrentWebApiServiceData.WebApiName #>/<#= modelName #>Update")]
 		public bool <#= modelName #>Update([FromBody] <#= modelName #>Dto entity)
         {
@@ -349,7 +357,7 @@ string modelName = DataType.NamingConvention == null ? model.TableName : DataTyp
         /// </summary>
         /// <param name="entity"><#= modelName #>Dto</param>
         /// <returns>bool</returns>
-        [HttpPost("{entity}")]
+        [HttpPut("{entity}")]
         [Route("~/api/<#= CurrentWebApiServiceData.WebApiName #>/<#= modelName #>UpdateAsync")]
 		public async Task<bool> <#= modelName #>UpdateAsync([FromBody] <#= modelName #>Dto entity)
         {
@@ -361,7 +369,7 @@ string modelName = DataType.NamingConvention == null ? model.TableName : DataTyp
         /// </summary>
         /// <param name="entity"><#= modelName #>Dto</param>
         /// <returns>bool</returns>
-        [HttpPost("{entity}")]
+        [HttpDelete("{entity}")]
         [Route("~/api/<#= CurrentWebApiServiceData.WebApiName #>/<#= modelName #>Delete")]
 		public bool <#= modelName #>Delete([FromBody] <#= modelName #>Dto entity)
         {
@@ -373,7 +381,7 @@ string modelName = DataType.NamingConvention == null ? model.TableName : DataTyp
         /// </summary>
         /// <param name="entity"><#= modelName #>Dto</param>
         /// <returns>bool</returns>
-        [HttpPost("{entity}")]
+        [HttpDelete("{entity}")]
         [Route("~/api/<#= CurrentWebApiServiceData.WebApiName #>/<#= modelName #>DeleteAsync")]
 		public async Task<bool> <#= modelName #>DeleteAsync([FromBody] <#= modelName #>Dto entity)
         {
@@ -388,7 +396,7 @@ string modelName = DataType.NamingConvention == null ? model.TableName : DataTyp
 <#+ } #>
         /// <returns>bool</returns>
         [HttpDelete("{<#=DataType.TransformAsParameterName(model.Columns.Where(o => o.IsPrimaryKey)).Trim()#>}/{cache}")]
-        [Route("~/api/<#= CurrentWebApiServiceData.WebApiName #>/<#= modelName #>Delete")]
+        [Route("~/api/<#= CurrentWebApiServiceData.WebApiName #>/<#= modelName #>DeleteBy<#= DataType.TransformAsParameter(model.Columns.Where(o => o.IsPrimaryKey)) #>")]
 		public bool <#= modelName #>Delete(<#= DataType.TransformAsParameter(model.Columns.Where(o => o.IsPrimaryKey)) #>, bool cache)
         {
             return this.<#= applicationServiceName #>ApplicationService.<#= modelName #>Delete(<#= DataType.TransformAsParameterName(model.Columns.Where(o => o.IsPrimaryKey)) #>, cache);
@@ -402,7 +410,7 @@ string modelName = DataType.NamingConvention == null ? model.TableName : DataTyp
 <#+ } #>
         /// <returns>bool</returns>
         [HttpDelete("{<#=DataType.TransformAsParameterName(model.Columns.Where(o => o.IsPrimaryKey)).Trim()#>}/{cache}")]
-        [Route("~/api/<#= CurrentWebApiServiceData.WebApiName #>/<#= modelName #>DeleteAsync")]
+        [Route("~/api/<#= CurrentWebApiServiceData.WebApiName #>/<#= modelName #>DeleteBy<#= DataType.TransformAsParameter(model.Columns.Where(o => o.IsPrimaryKey)) #>Async")]
 		public async Task<bool> <#= modelName #>DeleteAsync(<#= DataType.TransformAsParameter(model.Columns.Where(o => o.IsPrimaryKey)) #>, bool cache)
         {
             return await this.<#= applicationServiceName #>ApplicationService.<#= modelName #>DeleteAsync(<#= DataType.TransformAsParameterName(model.Columns.Where(o => o.IsPrimaryKey)) #>, cache);

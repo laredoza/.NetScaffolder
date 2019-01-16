@@ -60,6 +60,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="cache">Enables or disables caching</param>
         /// <returns>BankAccountDto</returns>
         [HttpGet("{bankAccountId}/{cache}")]
+        [Route("~/api/Product/LoadByBankAccountBankAccountId")]
 		public ActionResult<BankAccountDto> LoadByBankAccountBankAccountId(int bankAccountId, bool cache)
         {
             if( this.LoadByBankAccountBankAccountIdIncludes == null)
@@ -84,6 +85,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="cache">Enables or disables caching</param>
         /// <returns>BankAccountDto</returns>
         [HttpGet("{bankAccountId}/{cache}")]
+        [Route("~/api/Product/LoadByBankAccountBankAccountIdAsync")]
 		public async Task<ActionResult<BankAccountDto>> LoadByBankAccountBankAccountIdAsync(int bankAccountId, bool cache)
         {
             if( this.LoadByBankAccountBankAccountIdAsyncIncludes == null)
@@ -107,6 +109,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="cache">Enables or disables caching</param>
         /// <returns>IList<BankAccountDto></returns>
         [HttpGet("{cache}")]
+        [Route("~/api/Product/BankAccountLoadAll")]
 		public ActionResult<IList<BankAccountDto>> BankAccountLoadAll(bool cache)
         {
             if( this.BankAccountLoadAllIncludes == null)
@@ -130,6 +133,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="cache">Enables or disables caching</param>
         /// <returns>IList<BankAccountDto></returns>
         [HttpGet("{cache}")]
+        [Route("~/api/Product/BankAccountLoadAllAsync")]
 		public async Task<ActionResult<IList<BankAccountDto>>> BankAccountLoadAllAsync(bool cache)
         {
             if( this.BankAccountLoadAllAsyncIncludes == null)
@@ -155,6 +159,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="cache">Enables or disables caching</param>
         /// <returns>BankTransfersDto</returns>
         [HttpGet("{bankTransferId}/{cache}")]
+        [Route("~/api/Product/LoadByBankTransfersBankTransferId")]
 		public ActionResult<BankTransfersDto> LoadByBankTransfersBankTransferId(int bankTransferId, bool cache)
         {
             if( this.LoadByBankTransfersBankTransferIdIncludes == null)
@@ -179,6 +184,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="cache">Enables or disables caching</param>
         /// <returns>BankTransfersDto</returns>
         [HttpGet("{bankTransferId}/{cache}")]
+        [Route("~/api/Product/LoadByBankTransfersBankTransferIdAsync")]
 		public async Task<ActionResult<BankTransfersDto>> LoadByBankTransfersBankTransferIdAsync(int bankTransferId, bool cache)
         {
             if( this.LoadByBankTransfersBankTransferIdAsyncIncludes == null)
@@ -202,6 +208,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="cache">Enables or disables caching</param>
         /// <returns>IList<BankTransfersDto></returns>
         [HttpGet("{cache}")]
+        [Route("~/api/Product/BankTransfersLoadAll")]
 		public ActionResult<IList<BankTransfersDto>> BankTransfersLoadAll(bool cache)
         {
             if( this.BankTransfersLoadAllIncludes == null)
@@ -225,6 +232,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="cache">Enables or disables caching</param>
         /// <returns>IList<BankTransfersDto></returns>
         [HttpGet("{cache}")]
+        [Route("~/api/Product/BankTransfersLoadAllAsync")]
 		public async Task<ActionResult<IList<BankTransfersDto>>> BankTransfersLoadAllAsync(bool cache)
         {
             if( this.BankTransfersLoadAllAsyncIncludes == null)
@@ -250,6 +258,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="cache">Enables or disables caching</param>
         /// <returns>BookDto</returns>
         [HttpGet("{productId}/{cache}")]
+        [Route("~/api/Product/LoadByBookProductId")]
 		public ActionResult<BookDto> LoadByBookProductId(int productId, bool cache)
         {
             if( this.LoadByBookProductIdIncludes == null)
@@ -274,6 +283,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="cache">Enables or disables caching</param>
         /// <returns>BookDto</returns>
         [HttpGet("{productId}/{cache}")]
+        [Route("~/api/Product/LoadByBookProductIdAsync")]
 		public async Task<ActionResult<BookDto>> LoadByBookProductIdAsync(int productId, bool cache)
         {
             if( this.LoadByBookProductIdAsyncIncludes == null)
@@ -297,6 +307,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="cache">Enables or disables caching</param>
         /// <returns>IList<BookDto></returns>
         [HttpGet("{cache}")]
+        [Route("~/api/Product/BookLoadAll")]
 		public ActionResult<IList<BookDto>> BookLoadAll(bool cache)
         {
             if( this.BookLoadAllIncludes == null)
@@ -320,6 +331,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="cache">Enables or disables caching</param>
         /// <returns>IList<BookDto></returns>
         [HttpGet("{cache}")]
+        [Route("~/api/Product/BookLoadAllAsync")]
 		public async Task<ActionResult<IList<BookDto>>> BookLoadAllAsync(bool cache)
         {
             if( this.BookLoadAllAsyncIncludes == null)
@@ -345,6 +357,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="cache">Enables or disables caching</param>
         /// <returns>CountryDto</returns>
         [HttpGet("{countryId}/{cache}")]
+        [Route("~/api/Product/LoadByCountryCountryId")]
 		public ActionResult<CountryDto> LoadByCountryCountryId(int countryId, bool cache)
         {
             if( this.LoadByCountryCountryIdIncludes == null)
@@ -369,6 +382,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="cache">Enables or disables caching</param>
         /// <returns>CountryDto</returns>
         [HttpGet("{countryId}/{cache}")]
+        [Route("~/api/Product/LoadByCountryCountryIdAsync")]
 		public async Task<ActionResult<CountryDto>> LoadByCountryCountryIdAsync(int countryId, bool cache)
         {
             if( this.LoadByCountryCountryIdAsyncIncludes == null)
@@ -392,6 +406,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="cache">Enables or disables caching</param>
         /// <returns>IList<CountryDto></returns>
         [HttpGet("{cache}")]
+        [Route("~/api/Product/CountryLoadAll")]
 		public ActionResult<IList<CountryDto>> CountryLoadAll(bool cache)
         {
             if( this.CountryLoadAllIncludes == null)
@@ -415,6 +430,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="cache">Enables or disables caching</param>
         /// <returns>IList<CountryDto></returns>
         [HttpGet("{cache}")]
+        [Route("~/api/Product/CountryLoadAllAsync")]
 		public async Task<ActionResult<IList<CountryDto>>> CountryLoadAllAsync(bool cache)
         {
             if( this.CountryLoadAllAsyncIncludes == null)
@@ -440,6 +456,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="cache">Enables or disables caching</param>
         /// <returns>CustomerDto</returns>
         [HttpGet("{customerId}/{cache}")]
+        [Route("~/api/Product/LoadByCustomerCustomerId")]
 		public ActionResult<CustomerDto> LoadByCustomerCustomerId(int customerId, bool cache)
         {
             if( this.LoadByCustomerCustomerIdIncludes == null)
@@ -464,6 +481,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="cache">Enables or disables caching</param>
         /// <returns>CustomerDto</returns>
         [HttpGet("{customerId}/{cache}")]
+        [Route("~/api/Product/LoadByCustomerCustomerIdAsync")]
 		public async Task<ActionResult<CustomerDto>> LoadByCustomerCustomerIdAsync(int customerId, bool cache)
         {
             if( this.LoadByCustomerCustomerIdAsyncIncludes == null)
@@ -487,6 +505,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="cache">Enables or disables caching</param>
         /// <returns>IList<CustomerDto></returns>
         [HttpGet("{cache}")]
+        [Route("~/api/Product/CustomerLoadAll")]
 		public ActionResult<IList<CustomerDto>> CustomerLoadAll(bool cache)
         {
             if( this.CustomerLoadAllIncludes == null)
@@ -510,6 +529,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="cache">Enables or disables caching</param>
         /// <returns>IList<CustomerDto></returns>
         [HttpGet("{cache}")]
+        [Route("~/api/Product/CustomerLoadAllAsync")]
 		public async Task<ActionResult<IList<CustomerDto>>> CustomerLoadAllAsync(bool cache)
         {
             if( this.CustomerLoadAllAsyncIncludes == null)
@@ -535,6 +555,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="cache">Enables or disables caching</param>
         /// <returns>OrderDto</returns>
         [HttpGet("{orderId}/{cache}")]
+        [Route("~/api/Product/LoadByOrderOrderId")]
 		public ActionResult<OrderDto> LoadByOrderOrderId(int orderId, bool cache)
         {
             if( this.LoadByOrderOrderIdIncludes == null)
@@ -559,6 +580,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="cache">Enables or disables caching</param>
         /// <returns>OrderDto</returns>
         [HttpGet("{orderId}/{cache}")]
+        [Route("~/api/Product/LoadByOrderOrderIdAsync")]
 		public async Task<ActionResult<OrderDto>> LoadByOrderOrderIdAsync(int orderId, bool cache)
         {
             if( this.LoadByOrderOrderIdAsyncIncludes == null)
@@ -582,6 +604,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="cache">Enables or disables caching</param>
         /// <returns>IList<OrderDto></returns>
         [HttpGet("{cache}")]
+        [Route("~/api/Product/OrderLoadAll")]
 		public ActionResult<IList<OrderDto>> OrderLoadAll(bool cache)
         {
             if( this.OrderLoadAllIncludes == null)
@@ -605,6 +628,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="cache">Enables or disables caching</param>
         /// <returns>IList<OrderDto></returns>
         [HttpGet("{cache}")]
+        [Route("~/api/Product/OrderLoadAllAsync")]
 		public async Task<ActionResult<IList<OrderDto>>> OrderLoadAllAsync(bool cache)
         {
             if( this.OrderLoadAllAsyncIncludes == null)
@@ -630,6 +654,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="cache">Enables or disables caching</param>
         /// <returns>OrderDetailsDto</returns>
         [HttpGet("{orderDetailsId}/{cache}")]
+        [Route("~/api/Product/LoadByOrderDetailsOrderDetailsId")]
 		public ActionResult<OrderDetailsDto> LoadByOrderDetailsOrderDetailsId(int orderDetailsId, bool cache)
         {
             if( this.LoadByOrderDetailsOrderDetailsIdIncludes == null)
@@ -654,6 +679,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="cache">Enables or disables caching</param>
         /// <returns>OrderDetailsDto</returns>
         [HttpGet("{orderDetailsId}/{cache}")]
+        [Route("~/api/Product/LoadByOrderDetailsOrderDetailsIdAsync")]
 		public async Task<ActionResult<OrderDetailsDto>> LoadByOrderDetailsOrderDetailsIdAsync(int orderDetailsId, bool cache)
         {
             if( this.LoadByOrderDetailsOrderDetailsIdAsyncIncludes == null)
@@ -677,6 +703,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="cache">Enables or disables caching</param>
         /// <returns>IList<OrderDetailsDto></returns>
         [HttpGet("{cache}")]
+        [Route("~/api/Product/OrderDetailsLoadAll")]
 		public ActionResult<IList<OrderDetailsDto>> OrderDetailsLoadAll(bool cache)
         {
             if( this.OrderDetailsLoadAllIncludes == null)
@@ -700,6 +727,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="cache">Enables or disables caching</param>
         /// <returns>IList<OrderDetailsDto></returns>
         [HttpGet("{cache}")]
+        [Route("~/api/Product/OrderDetailsLoadAllAsync")]
 		public async Task<ActionResult<IList<OrderDetailsDto>>> OrderDetailsLoadAllAsync(bool cache)
         {
             if( this.OrderDetailsLoadAllAsyncIncludes == null)
@@ -725,6 +753,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="cache">Enables or disables caching</param>
         /// <returns>ProductDto</returns>
         [HttpGet("{productId}/{cache}")]
+        [Route("~/api/Product/LoadByProductProductId")]
 		public ActionResult<ProductDto> LoadByProductProductId(int productId, bool cache)
         {
             if( this.LoadByProductProductIdIncludes == null)
@@ -749,6 +778,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="cache">Enables or disables caching</param>
         /// <returns>ProductDto</returns>
         [HttpGet("{productId}/{cache}")]
+        [Route("~/api/Product/LoadByProductProductIdAsync")]
 		public async Task<ActionResult<ProductDto>> LoadByProductProductIdAsync(int productId, bool cache)
         {
             if( this.LoadByProductProductIdAsyncIncludes == null)
@@ -772,6 +802,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="cache">Enables or disables caching</param>
         /// <returns>IList<ProductDto></returns>
         [HttpGet("{cache}")]
+        [Route("~/api/Product/ProductLoadAll")]
 		public ActionResult<IList<ProductDto>> ProductLoadAll(bool cache)
         {
             if( this.ProductLoadAllIncludes == null)
@@ -795,6 +826,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="cache">Enables or disables caching</param>
         /// <returns>IList<ProductDto></returns>
         [HttpGet("{cache}")]
+        [Route("~/api/Product/ProductLoadAllAsync")]
 		public async Task<ActionResult<IList<ProductDto>>> ProductLoadAllAsync(bool cache)
         {
             if( this.ProductLoadAllAsyncIncludes == null)
@@ -820,6 +852,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="cache">Enables or disables caching</param>
         /// <returns>SoftwareDto</returns>
         [HttpGet("{productId}/{cache}")]
+        [Route("~/api/Product/LoadBySoftwareProductId")]
 		public ActionResult<SoftwareDto> LoadBySoftwareProductId(int productId, bool cache)
         {
             if( this.LoadBySoftwareProductIdIncludes == null)
@@ -844,6 +877,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="cache">Enables or disables caching</param>
         /// <returns>SoftwareDto</returns>
         [HttpGet("{productId}/{cache}")]
+        [Route("~/api/Product/LoadBySoftwareProductIdAsync")]
 		public async Task<ActionResult<SoftwareDto>> LoadBySoftwareProductIdAsync(int productId, bool cache)
         {
             if( this.LoadBySoftwareProductIdAsyncIncludes == null)
@@ -867,6 +901,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="cache">Enables or disables caching</param>
         /// <returns>IList<SoftwareDto></returns>
         [HttpGet("{cache}")]
+        [Route("~/api/Product/SoftwareLoadAll")]
 		public ActionResult<IList<SoftwareDto>> SoftwareLoadAll(bool cache)
         {
             if( this.SoftwareLoadAllIncludes == null)
@@ -890,6 +925,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="cache">Enables or disables caching</param>
         /// <returns>IList<SoftwareDto></returns>
         [HttpGet("{cache}")]
+        [Route("~/api/Product/SoftwareLoadAllAsync")]
 		public async Task<ActionResult<IList<SoftwareDto>>> SoftwareLoadAllAsync(bool cache)
         {
             if( this.SoftwareLoadAllAsyncIncludes == null)
@@ -918,7 +954,8 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="bankAccountNumber">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<BankAccountDto></returns>
-        [HttpGet("{bankAccountId}/{caseSensitive}/{cache}")]
+        [HttpGet("{BankAccountNumber}/{caseSensitive}/{cache}")]
+        [Route("~/api/Product/BankAccountSearchByBankAccountNumber")]
 		public ActionResult<IList<BankAccountDto>> BankAccountSearchByBankAccountNumber(string bankAccountNumber, bool caseSensitive, bool cache)
         {
             if( this.BankAccountSearchByBankAccountNumberIncludes == null)
@@ -942,7 +979,8 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="bankAccountNumber">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<BankAccountDto></returns>
-        [HttpGet("{bankAccountId}/{caseSensitive}/{cache}")]
+        [HttpGet("{BankAccountNumber}/{caseSensitive}/{cache}")]
+        [Route("~/api/Product/BankAccountSearchByBankAccountNumberAsync")]
         public async Task<ActionResult<IList<BankAccountDto>>> BankAccountSearchByBankAccountNumberAsync(string bankAccountNumber, bool caseSensitive, bool cache)
         {
             if( this.BankAccountSearchByBankAccountNumberIncludesAsync == null)
@@ -967,7 +1005,8 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="publisher">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<BookDto></returns>
-        [HttpGet("{productId}/{caseSensitive}/{cache}")]
+        [HttpGet("{Publisher}/{caseSensitive}/{cache}")]
+        [Route("~/api/Product/BookSearchByPublisher")]
 		public ActionResult<IList<BookDto>> BookSearchByPublisher(string publisher, bool caseSensitive, bool cache)
         {
             if( this.BookSearchByPublisherIncludes == null)
@@ -991,7 +1030,8 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="publisher">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<BookDto></returns>
-        [HttpGet("{productId}/{caseSensitive}/{cache}")]
+        [HttpGet("{Publisher}/{caseSensitive}/{cache}")]
+        [Route("~/api/Product/BookSearchByPublisherAsync")]
         public async Task<ActionResult<IList<BookDto>>> BookSearchByPublisherAsync(string publisher, bool caseSensitive, bool cache)
         {
             if( this.BookSearchByPublisherIncludesAsync == null)
@@ -1016,7 +1056,8 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="countryName">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<CountryDto></returns>
-        [HttpGet("{countryId}/{caseSensitive}/{cache}")]
+        [HttpGet("{CountryName}/{caseSensitive}/{cache}")]
+        [Route("~/api/Product/CountrySearchByCountryName")]
 		public ActionResult<IList<CountryDto>> CountrySearchByCountryName(string countryName, bool caseSensitive, bool cache)
         {
             if( this.CountrySearchByCountryNameIncludes == null)
@@ -1040,7 +1081,8 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="countryName">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<CountryDto></returns>
-        [HttpGet("{countryId}/{caseSensitive}/{cache}")]
+        [HttpGet("{CountryName}/{caseSensitive}/{cache}")]
+        [Route("~/api/Product/CountrySearchByCountryNameAsync")]
         public async Task<ActionResult<IList<CountryDto>>> CountrySearchByCountryNameAsync(string countryName, bool caseSensitive, bool cache)
         {
             if( this.CountrySearchByCountryNameIncludesAsync == null)
@@ -1065,7 +1107,8 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="customerCode">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<CustomerDto></returns>
-        [HttpGet("{customerId}/{caseSensitive}/{cache}")]
+        [HttpGet("{CustomerCode}/{caseSensitive}/{cache}")]
+        [Route("~/api/Product/CustomerSearchByCustomerCode")]
 		public ActionResult<IList<CustomerDto>> CustomerSearchByCustomerCode(string customerCode, bool caseSensitive, bool cache)
         {
             if( this.CustomerSearchByCustomerCodeIncludes == null)
@@ -1089,7 +1132,8 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="customerCode">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<CustomerDto></returns>
-        [HttpGet("{customerId}/{caseSensitive}/{cache}")]
+        [HttpGet("{CustomerCode}/{caseSensitive}/{cache}")]
+        [Route("~/api/Product/CustomerSearchByCustomerCodeAsync")]
         public async Task<ActionResult<IList<CustomerDto>>> CustomerSearchByCustomerCodeAsync(string customerCode, bool caseSensitive, bool cache)
         {
             if( this.CustomerSearchByCustomerCodeIncludesAsync == null)
@@ -1114,7 +1158,8 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="companyName">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<CustomerDto></returns>
-        [HttpGet("{customerId}/{caseSensitive}/{cache}")]
+        [HttpGet("{CompanyName}/{caseSensitive}/{cache}")]
+        [Route("~/api/Product/CustomerSearchByCompanyName")]
 		public ActionResult<IList<CustomerDto>> CustomerSearchByCompanyName(string companyName, bool caseSensitive, bool cache)
         {
             if( this.CustomerSearchByCompanyNameIncludes == null)
@@ -1138,7 +1183,8 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="companyName">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<CustomerDto></returns>
-        [HttpGet("{customerId}/{caseSensitive}/{cache}")]
+        [HttpGet("{CompanyName}/{caseSensitive}/{cache}")]
+        [Route("~/api/Product/CustomerSearchByCompanyNameAsync")]
         public async Task<ActionResult<IList<CustomerDto>>> CustomerSearchByCompanyNameAsync(string companyName, bool caseSensitive, bool cache)
         {
             if( this.CustomerSearchByCompanyNameIncludesAsync == null)
@@ -1163,7 +1209,8 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="contactName">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<CustomerDto></returns>
-        [HttpGet("{customerId}/{caseSensitive}/{cache}")]
+        [HttpGet("{ContactName}/{caseSensitive}/{cache}")]
+        [Route("~/api/Product/CustomerSearchByContactName")]
 		public ActionResult<IList<CustomerDto>> CustomerSearchByContactName(string contactName, bool caseSensitive, bool cache)
         {
             if( this.CustomerSearchByContactNameIncludes == null)
@@ -1187,7 +1234,8 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="contactName">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<CustomerDto></returns>
-        [HttpGet("{customerId}/{caseSensitive}/{cache}")]
+        [HttpGet("{ContactName}/{caseSensitive}/{cache}")]
+        [Route("~/api/Product/CustomerSearchByContactNameAsync")]
         public async Task<ActionResult<IList<CustomerDto>>> CustomerSearchByContactNameAsync(string contactName, bool caseSensitive, bool cache)
         {
             if( this.CustomerSearchByContactNameIncludesAsync == null)
@@ -1212,7 +1260,8 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="contactTitle">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<CustomerDto></returns>
-        [HttpGet("{customerId}/{caseSensitive}/{cache}")]
+        [HttpGet("{ContactTitle}/{caseSensitive}/{cache}")]
+        [Route("~/api/Product/CustomerSearchByContactTitle")]
 		public ActionResult<IList<CustomerDto>> CustomerSearchByContactTitle(string contactTitle, bool caseSensitive, bool cache)
         {
             if( this.CustomerSearchByContactTitleIncludes == null)
@@ -1236,7 +1285,8 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="contactTitle">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<CustomerDto></returns>
-        [HttpGet("{customerId}/{caseSensitive}/{cache}")]
+        [HttpGet("{ContactTitle}/{caseSensitive}/{cache}")]
+        [Route("~/api/Product/CustomerSearchByContactTitleAsync")]
         public async Task<ActionResult<IList<CustomerDto>>> CustomerSearchByContactTitleAsync(string contactTitle, bool caseSensitive, bool cache)
         {
             if( this.CustomerSearchByContactTitleIncludesAsync == null)
@@ -1261,7 +1311,8 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="address">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<CustomerDto></returns>
-        [HttpGet("{customerId}/{caseSensitive}/{cache}")]
+        [HttpGet("{Address}/{caseSensitive}/{cache}")]
+        [Route("~/api/Product/CustomerSearchByAddress")]
 		public ActionResult<IList<CustomerDto>> CustomerSearchByAddress(string address, bool caseSensitive, bool cache)
         {
             if( this.CustomerSearchByAddressIncludes == null)
@@ -1285,7 +1336,8 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="address">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<CustomerDto></returns>
-        [HttpGet("{customerId}/{caseSensitive}/{cache}")]
+        [HttpGet("{Address}/{caseSensitive}/{cache}")]
+        [Route("~/api/Product/CustomerSearchByAddressAsync")]
         public async Task<ActionResult<IList<CustomerDto>>> CustomerSearchByAddressAsync(string address, bool caseSensitive, bool cache)
         {
             if( this.CustomerSearchByAddressIncludesAsync == null)
@@ -1310,7 +1362,8 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="city">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<CustomerDto></returns>
-        [HttpGet("{customerId}/{caseSensitive}/{cache}")]
+        [HttpGet("{City}/{caseSensitive}/{cache}")]
+        [Route("~/api/Product/CustomerSearchByCity")]
 		public ActionResult<IList<CustomerDto>> CustomerSearchByCity(string city, bool caseSensitive, bool cache)
         {
             if( this.CustomerSearchByCityIncludes == null)
@@ -1334,7 +1387,8 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="city">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<CustomerDto></returns>
-        [HttpGet("{customerId}/{caseSensitive}/{cache}")]
+        [HttpGet("{City}/{caseSensitive}/{cache}")]
+        [Route("~/api/Product/CustomerSearchByCityAsync")]
         public async Task<ActionResult<IList<CustomerDto>>> CustomerSearchByCityAsync(string city, bool caseSensitive, bool cache)
         {
             if( this.CustomerSearchByCityIncludesAsync == null)
@@ -1359,7 +1413,8 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="postalCode">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<CustomerDto></returns>
-        [HttpGet("{customerId}/{caseSensitive}/{cache}")]
+        [HttpGet("{PostalCode}/{caseSensitive}/{cache}")]
+        [Route("~/api/Product/CustomerSearchByPostalCode")]
 		public ActionResult<IList<CustomerDto>> CustomerSearchByPostalCode(string postalCode, bool caseSensitive, bool cache)
         {
             if( this.CustomerSearchByPostalCodeIncludes == null)
@@ -1383,7 +1438,8 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="postalCode">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<CustomerDto></returns>
-        [HttpGet("{customerId}/{caseSensitive}/{cache}")]
+        [HttpGet("{PostalCode}/{caseSensitive}/{cache}")]
+        [Route("~/api/Product/CustomerSearchByPostalCodeAsync")]
         public async Task<ActionResult<IList<CustomerDto>>> CustomerSearchByPostalCodeAsync(string postalCode, bool caseSensitive, bool cache)
         {
             if( this.CustomerSearchByPostalCodeIncludesAsync == null)
@@ -1408,7 +1464,8 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="telephone">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<CustomerDto></returns>
-        [HttpGet("{customerId}/{caseSensitive}/{cache}")]
+        [HttpGet("{Telephone}/{caseSensitive}/{cache}")]
+        [Route("~/api/Product/CustomerSearchByTelephone")]
 		public ActionResult<IList<CustomerDto>> CustomerSearchByTelephone(string telephone, bool caseSensitive, bool cache)
         {
             if( this.CustomerSearchByTelephoneIncludes == null)
@@ -1432,7 +1489,8 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="telephone">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<CustomerDto></returns>
-        [HttpGet("{customerId}/{caseSensitive}/{cache}")]
+        [HttpGet("{Telephone}/{caseSensitive}/{cache}")]
+        [Route("~/api/Product/CustomerSearchByTelephoneAsync")]
         public async Task<ActionResult<IList<CustomerDto>>> CustomerSearchByTelephoneAsync(string telephone, bool caseSensitive, bool cache)
         {
             if( this.CustomerSearchByTelephoneIncludesAsync == null)
@@ -1457,7 +1515,8 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="fax">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<CustomerDto></returns>
-        [HttpGet("{customerId}/{caseSensitive}/{cache}")]
+        [HttpGet("{Fax}/{caseSensitive}/{cache}")]
+        [Route("~/api/Product/CustomerSearchByFax")]
 		public ActionResult<IList<CustomerDto>> CustomerSearchByFax(string fax, bool caseSensitive, bool cache)
         {
             if( this.CustomerSearchByFaxIncludes == null)
@@ -1481,7 +1540,8 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="fax">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<CustomerDto></returns>
-        [HttpGet("{customerId}/{caseSensitive}/{cache}")]
+        [HttpGet("{Fax}/{caseSensitive}/{cache}")]
+        [Route("~/api/Product/CustomerSearchByFaxAsync")]
         public async Task<ActionResult<IList<CustomerDto>>> CustomerSearchByFaxAsync(string fax, bool caseSensitive, bool cache)
         {
             if( this.CustomerSearchByFaxIncludesAsync == null)
@@ -1506,7 +1566,8 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="photo">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<CustomerDto></returns>
-        [HttpGet("{customerId}/{caseSensitive}/{cache}")]
+        [HttpGet("{Photo}/{caseSensitive}/{cache}")]
+        [Route("~/api/Product/CustomerSearchByPhoto")]
 		public ActionResult<IList<CustomerDto>> CustomerSearchByPhoto(string photo, bool caseSensitive, bool cache)
         {
             if( this.CustomerSearchByPhotoIncludes == null)
@@ -1530,7 +1591,8 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="photo">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<CustomerDto></returns>
-        [HttpGet("{customerId}/{caseSensitive}/{cache}")]
+        [HttpGet("{Photo}/{caseSensitive}/{cache}")]
+        [Route("~/api/Product/CustomerSearchByPhotoAsync")]
         public async Task<ActionResult<IList<CustomerDto>>> CustomerSearchByPhotoAsync(string photo, bool caseSensitive, bool cache)
         {
             if( this.CustomerSearchByPhotoIncludesAsync == null)
@@ -1555,7 +1617,8 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="shippingName">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<OrderDto></returns>
-        [HttpGet("{orderId}/{caseSensitive}/{cache}")]
+        [HttpGet("{ShippingName}/{caseSensitive}/{cache}")]
+        [Route("~/api/Product/OrderSearchByShippingName")]
 		public ActionResult<IList<OrderDto>> OrderSearchByShippingName(string shippingName, bool caseSensitive, bool cache)
         {
             if( this.OrderSearchByShippingNameIncludes == null)
@@ -1579,7 +1642,8 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="shippingName">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<OrderDto></returns>
-        [HttpGet("{orderId}/{caseSensitive}/{cache}")]
+        [HttpGet("{ShippingName}/{caseSensitive}/{cache}")]
+        [Route("~/api/Product/OrderSearchByShippingNameAsync")]
         public async Task<ActionResult<IList<OrderDto>>> OrderSearchByShippingNameAsync(string shippingName, bool caseSensitive, bool cache)
         {
             if( this.OrderSearchByShippingNameIncludesAsync == null)
@@ -1604,7 +1668,8 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="shippingAddress">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<OrderDto></returns>
-        [HttpGet("{orderId}/{caseSensitive}/{cache}")]
+        [HttpGet("{ShippingAddress}/{caseSensitive}/{cache}")]
+        [Route("~/api/Product/OrderSearchByShippingAddress")]
 		public ActionResult<IList<OrderDto>> OrderSearchByShippingAddress(string shippingAddress, bool caseSensitive, bool cache)
         {
             if( this.OrderSearchByShippingAddressIncludes == null)
@@ -1628,7 +1693,8 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="shippingAddress">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<OrderDto></returns>
-        [HttpGet("{orderId}/{caseSensitive}/{cache}")]
+        [HttpGet("{ShippingAddress}/{caseSensitive}/{cache}")]
+        [Route("~/api/Product/OrderSearchByShippingAddressAsync")]
         public async Task<ActionResult<IList<OrderDto>>> OrderSearchByShippingAddressAsync(string shippingAddress, bool caseSensitive, bool cache)
         {
             if( this.OrderSearchByShippingAddressIncludesAsync == null)
@@ -1653,7 +1719,8 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="shippingCity">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<OrderDto></returns>
-        [HttpGet("{orderId}/{caseSensitive}/{cache}")]
+        [HttpGet("{ShippingCity}/{caseSensitive}/{cache}")]
+        [Route("~/api/Product/OrderSearchByShippingCity")]
 		public ActionResult<IList<OrderDto>> OrderSearchByShippingCity(string shippingCity, bool caseSensitive, bool cache)
         {
             if( this.OrderSearchByShippingCityIncludes == null)
@@ -1677,7 +1744,8 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="shippingCity">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<OrderDto></returns>
-        [HttpGet("{orderId}/{caseSensitive}/{cache}")]
+        [HttpGet("{ShippingCity}/{caseSensitive}/{cache}")]
+        [Route("~/api/Product/OrderSearchByShippingCityAsync")]
         public async Task<ActionResult<IList<OrderDto>>> OrderSearchByShippingCityAsync(string shippingCity, bool caseSensitive, bool cache)
         {
             if( this.OrderSearchByShippingCityIncludesAsync == null)
@@ -1702,7 +1770,8 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="shippingZip">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<OrderDto></returns>
-        [HttpGet("{orderId}/{caseSensitive}/{cache}")]
+        [HttpGet("{ShippingZip}/{caseSensitive}/{cache}")]
+        [Route("~/api/Product/OrderSearchByShippingZip")]
 		public ActionResult<IList<OrderDto>> OrderSearchByShippingZip(string shippingZip, bool caseSensitive, bool cache)
         {
             if( this.OrderSearchByShippingZipIncludes == null)
@@ -1726,7 +1795,8 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="shippingZip">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<OrderDto></returns>
-        [HttpGet("{orderId}/{caseSensitive}/{cache}")]
+        [HttpGet("{ShippingZip}/{caseSensitive}/{cache}")]
+        [Route("~/api/Product/OrderSearchByShippingZipAsync")]
         public async Task<ActionResult<IList<OrderDto>>> OrderSearchByShippingZipAsync(string shippingZip, bool caseSensitive, bool cache)
         {
             if( this.OrderSearchByShippingZipIncludesAsync == null)
@@ -1751,7 +1821,8 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="productDescription">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<ProductDto></returns>
-        [HttpGet("{productId}/{caseSensitive}/{cache}")]
+        [HttpGet("{ProductDescription}/{caseSensitive}/{cache}")]
+        [Route("~/api/Product/ProductSearchByProductDescription")]
 		public ActionResult<IList<ProductDto>> ProductSearchByProductDescription(string productDescription, bool caseSensitive, bool cache)
         {
             if( this.ProductSearchByProductDescriptionIncludes == null)
@@ -1775,7 +1846,8 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="productDescription">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<ProductDto></returns>
-        [HttpGet("{productId}/{caseSensitive}/{cache}")]
+        [HttpGet("{ProductDescription}/{caseSensitive}/{cache}")]
+        [Route("~/api/Product/ProductSearchByProductDescriptionAsync")]
         public async Task<ActionResult<IList<ProductDto>>> ProductSearchByProductDescriptionAsync(string productDescription, bool caseSensitive, bool cache)
         {
             if( this.ProductSearchByProductDescriptionIncludesAsync == null)
@@ -1800,7 +1872,8 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="licenseCode">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<SoftwareDto></returns>
-        [HttpGet("{productId}/{caseSensitive}/{cache}")]
+        [HttpGet("{LicenseCode}/{caseSensitive}/{cache}")]
+        [Route("~/api/Product/SoftwareSearchByLicenseCode")]
 		public ActionResult<IList<SoftwareDto>> SoftwareSearchByLicenseCode(string licenseCode, bool caseSensitive, bool cache)
         {
             if( this.SoftwareSearchByLicenseCodeIncludes == null)
@@ -1824,7 +1897,8 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="licenseCode">string</param>
 		/// <param name="caseSensitive">bool</param>
         /// <returns>IList<SoftwareDto></returns>
-        [HttpGet("{productId}/{caseSensitive}/{cache}")]
+        [HttpGet("{LicenseCode}/{caseSensitive}/{cache}")]
+        [Route("~/api/Product/SoftwareSearchByLicenseCodeAsync")]
         public async Task<ActionResult<IList<SoftwareDto>>> SoftwareSearchByLicenseCodeAsync(string licenseCode, bool caseSensitive, bool cache)
         {
             if( this.SoftwareSearchByLicenseCodeIncludesAsync == null)
@@ -1875,7 +1949,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// </summary>
         /// <param name="entity">BankAccountDto</param>
         /// <returns>bool</returns>
-        [HttpPost("{entity}")]
+        [HttpPut("{entity}")]
         [Route("~/api/Product/BankAccountUpdate")]
 		public bool BankAccountUpdate([FromBody] BankAccountDto entity)
         {
@@ -1887,7 +1961,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// </summary>
         /// <param name="entity">BankAccountDto</param>
         /// <returns>bool</returns>
-        [HttpPost("{entity}")]
+        [HttpPut("{entity}")]
         [Route("~/api/Product/BankAccountUpdateAsync")]
 		public async Task<bool> BankAccountUpdateAsync([FromBody] BankAccountDto entity)
         {
@@ -1899,7 +1973,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// </summary>
         /// <param name="entity">BankAccountDto</param>
         /// <returns>bool</returns>
-        [HttpPost("{entity}")]
+        [HttpDelete("{entity}")]
         [Route("~/api/Product/BankAccountDelete")]
 		public bool BankAccountDelete([FromBody] BankAccountDto entity)
         {
@@ -1911,7 +1985,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// </summary>
         /// <param name="entity">BankAccountDto</param>
         /// <returns>bool</returns>
-        [HttpPost("{entity}")]
+        [HttpDelete("{entity}")]
         [Route("~/api/Product/BankAccountDeleteAsync")]
 		public async Task<bool> BankAccountDeleteAsync([FromBody] BankAccountDto entity)
         {
@@ -1924,7 +1998,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="bankAccountId">int</param>
         /// <returns>bool</returns>
         [HttpDelete("{bankAccountId}/{cache}")]
-        [Route("~/api/Product/BankAccountDelete")]
+        [Route("~/api/Product/BankAccountDeleteBy int bankAccountId")]
 		public bool BankAccountDelete( int bankAccountId, bool cache)
         {
             return this.ProductApplicationService.BankAccountDelete( bankAccountId, cache);
@@ -1936,7 +2010,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="bankAccountId">int</param>
         /// <returns>bool</returns>
         [HttpDelete("{bankAccountId}/{cache}")]
-        [Route("~/api/Product/BankAccountDeleteAsync")]
+        [Route("~/api/Product/BankAccountDeleteBy int bankAccountIdAsync")]
 		public async Task<bool> BankAccountDeleteAsync( int bankAccountId, bool cache)
         {
             return await this.ProductApplicationService.BankAccountDeleteAsync( bankAccountId, cache);
@@ -1972,7 +2046,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// </summary>
         /// <param name="entity">BankTransfersDto</param>
         /// <returns>bool</returns>
-        [HttpPost("{entity}")]
+        [HttpPut("{entity}")]
         [Route("~/api/Product/BankTransfersUpdate")]
 		public bool BankTransfersUpdate([FromBody] BankTransfersDto entity)
         {
@@ -1984,7 +2058,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// </summary>
         /// <param name="entity">BankTransfersDto</param>
         /// <returns>bool</returns>
-        [HttpPost("{entity}")]
+        [HttpPut("{entity}")]
         [Route("~/api/Product/BankTransfersUpdateAsync")]
 		public async Task<bool> BankTransfersUpdateAsync([FromBody] BankTransfersDto entity)
         {
@@ -1996,7 +2070,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// </summary>
         /// <param name="entity">BankTransfersDto</param>
         /// <returns>bool</returns>
-        [HttpPost("{entity}")]
+        [HttpDelete("{entity}")]
         [Route("~/api/Product/BankTransfersDelete")]
 		public bool BankTransfersDelete([FromBody] BankTransfersDto entity)
         {
@@ -2008,7 +2082,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// </summary>
         /// <param name="entity">BankTransfersDto</param>
         /// <returns>bool</returns>
-        [HttpPost("{entity}")]
+        [HttpDelete("{entity}")]
         [Route("~/api/Product/BankTransfersDeleteAsync")]
 		public async Task<bool> BankTransfersDeleteAsync([FromBody] BankTransfersDto entity)
         {
@@ -2021,7 +2095,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="bankTransferId">int</param>
         /// <returns>bool</returns>
         [HttpDelete("{bankTransferId}/{cache}")]
-        [Route("~/api/Product/BankTransfersDelete")]
+        [Route("~/api/Product/BankTransfersDeleteBy int bankTransferId")]
 		public bool BankTransfersDelete( int bankTransferId, bool cache)
         {
             return this.ProductApplicationService.BankTransfersDelete( bankTransferId, cache);
@@ -2033,7 +2107,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="bankTransferId">int</param>
         /// <returns>bool</returns>
         [HttpDelete("{bankTransferId}/{cache}")]
-        [Route("~/api/Product/BankTransfersDeleteAsync")]
+        [Route("~/api/Product/BankTransfersDeleteBy int bankTransferIdAsync")]
 		public async Task<bool> BankTransfersDeleteAsync( int bankTransferId, bool cache)
         {
             return await this.ProductApplicationService.BankTransfersDeleteAsync( bankTransferId, cache);
@@ -2069,7 +2143,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// </summary>
         /// <param name="entity">BookDto</param>
         /// <returns>bool</returns>
-        [HttpPost("{entity}")]
+        [HttpPut("{entity}")]
         [Route("~/api/Product/BookUpdate")]
 		public bool BookUpdate([FromBody] BookDto entity)
         {
@@ -2081,7 +2155,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// </summary>
         /// <param name="entity">BookDto</param>
         /// <returns>bool</returns>
-        [HttpPost("{entity}")]
+        [HttpPut("{entity}")]
         [Route("~/api/Product/BookUpdateAsync")]
 		public async Task<bool> BookUpdateAsync([FromBody] BookDto entity)
         {
@@ -2093,7 +2167,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// </summary>
         /// <param name="entity">BookDto</param>
         /// <returns>bool</returns>
-        [HttpPost("{entity}")]
+        [HttpDelete("{entity}")]
         [Route("~/api/Product/BookDelete")]
 		public bool BookDelete([FromBody] BookDto entity)
         {
@@ -2105,7 +2179,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// </summary>
         /// <param name="entity">BookDto</param>
         /// <returns>bool</returns>
-        [HttpPost("{entity}")]
+        [HttpDelete("{entity}")]
         [Route("~/api/Product/BookDeleteAsync")]
 		public async Task<bool> BookDeleteAsync([FromBody] BookDto entity)
         {
@@ -2118,7 +2192,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="productId">int</param>
         /// <returns>bool</returns>
         [HttpDelete("{productId}/{cache}")]
-        [Route("~/api/Product/BookDelete")]
+        [Route("~/api/Product/BookDeleteBy int productId")]
 		public bool BookDelete( int productId, bool cache)
         {
             return this.ProductApplicationService.BookDelete( productId, cache);
@@ -2130,7 +2204,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="productId">int</param>
         /// <returns>bool</returns>
         [HttpDelete("{productId}/{cache}")]
-        [Route("~/api/Product/BookDeleteAsync")]
+        [Route("~/api/Product/BookDeleteBy int productIdAsync")]
 		public async Task<bool> BookDeleteAsync( int productId, bool cache)
         {
             return await this.ProductApplicationService.BookDeleteAsync( productId, cache);
@@ -2166,7 +2240,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// </summary>
         /// <param name="entity">CountryDto</param>
         /// <returns>bool</returns>
-        [HttpPost("{entity}")]
+        [HttpPut("{entity}")]
         [Route("~/api/Product/CountryUpdate")]
 		public bool CountryUpdate([FromBody] CountryDto entity)
         {
@@ -2178,7 +2252,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// </summary>
         /// <param name="entity">CountryDto</param>
         /// <returns>bool</returns>
-        [HttpPost("{entity}")]
+        [HttpPut("{entity}")]
         [Route("~/api/Product/CountryUpdateAsync")]
 		public async Task<bool> CountryUpdateAsync([FromBody] CountryDto entity)
         {
@@ -2190,7 +2264,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// </summary>
         /// <param name="entity">CountryDto</param>
         /// <returns>bool</returns>
-        [HttpPost("{entity}")]
+        [HttpDelete("{entity}")]
         [Route("~/api/Product/CountryDelete")]
 		public bool CountryDelete([FromBody] CountryDto entity)
         {
@@ -2202,7 +2276,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// </summary>
         /// <param name="entity">CountryDto</param>
         /// <returns>bool</returns>
-        [HttpPost("{entity}")]
+        [HttpDelete("{entity}")]
         [Route("~/api/Product/CountryDeleteAsync")]
 		public async Task<bool> CountryDeleteAsync([FromBody] CountryDto entity)
         {
@@ -2215,7 +2289,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="countryId">int</param>
         /// <returns>bool</returns>
         [HttpDelete("{countryId}/{cache}")]
-        [Route("~/api/Product/CountryDelete")]
+        [Route("~/api/Product/CountryDeleteBy int countryId")]
 		public bool CountryDelete( int countryId, bool cache)
         {
             return this.ProductApplicationService.CountryDelete( countryId, cache);
@@ -2227,7 +2301,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="countryId">int</param>
         /// <returns>bool</returns>
         [HttpDelete("{countryId}/{cache}")]
-        [Route("~/api/Product/CountryDeleteAsync")]
+        [Route("~/api/Product/CountryDeleteBy int countryIdAsync")]
 		public async Task<bool> CountryDeleteAsync( int countryId, bool cache)
         {
             return await this.ProductApplicationService.CountryDeleteAsync( countryId, cache);
@@ -2263,7 +2337,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// </summary>
         /// <param name="entity">CustomerDto</param>
         /// <returns>bool</returns>
-        [HttpPost("{entity}")]
+        [HttpPut("{entity}")]
         [Route("~/api/Product/CustomerUpdate")]
 		public bool CustomerUpdate([FromBody] CustomerDto entity)
         {
@@ -2275,7 +2349,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// </summary>
         /// <param name="entity">CustomerDto</param>
         /// <returns>bool</returns>
-        [HttpPost("{entity}")]
+        [HttpPut("{entity}")]
         [Route("~/api/Product/CustomerUpdateAsync")]
 		public async Task<bool> CustomerUpdateAsync([FromBody] CustomerDto entity)
         {
@@ -2287,7 +2361,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// </summary>
         /// <param name="entity">CustomerDto</param>
         /// <returns>bool</returns>
-        [HttpPost("{entity}")]
+        [HttpDelete("{entity}")]
         [Route("~/api/Product/CustomerDelete")]
 		public bool CustomerDelete([FromBody] CustomerDto entity)
         {
@@ -2299,7 +2373,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// </summary>
         /// <param name="entity">CustomerDto</param>
         /// <returns>bool</returns>
-        [HttpPost("{entity}")]
+        [HttpDelete("{entity}")]
         [Route("~/api/Product/CustomerDeleteAsync")]
 		public async Task<bool> CustomerDeleteAsync([FromBody] CustomerDto entity)
         {
@@ -2312,7 +2386,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="customerId">int</param>
         /// <returns>bool</returns>
         [HttpDelete("{customerId}/{cache}")]
-        [Route("~/api/Product/CustomerDelete")]
+        [Route("~/api/Product/CustomerDeleteBy int customerId")]
 		public bool CustomerDelete( int customerId, bool cache)
         {
             return this.ProductApplicationService.CustomerDelete( customerId, cache);
@@ -2324,7 +2398,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="customerId">int</param>
         /// <returns>bool</returns>
         [HttpDelete("{customerId}/{cache}")]
-        [Route("~/api/Product/CustomerDeleteAsync")]
+        [Route("~/api/Product/CustomerDeleteBy int customerIdAsync")]
 		public async Task<bool> CustomerDeleteAsync( int customerId, bool cache)
         {
             return await this.ProductApplicationService.CustomerDeleteAsync( customerId, cache);
@@ -2360,7 +2434,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// </summary>
         /// <param name="entity">OrderDto</param>
         /// <returns>bool</returns>
-        [HttpPost("{entity}")]
+        [HttpPut("{entity}")]
         [Route("~/api/Product/OrderUpdate")]
 		public bool OrderUpdate([FromBody] OrderDto entity)
         {
@@ -2372,7 +2446,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// </summary>
         /// <param name="entity">OrderDto</param>
         /// <returns>bool</returns>
-        [HttpPost("{entity}")]
+        [HttpPut("{entity}")]
         [Route("~/api/Product/OrderUpdateAsync")]
 		public async Task<bool> OrderUpdateAsync([FromBody] OrderDto entity)
         {
@@ -2384,7 +2458,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// </summary>
         /// <param name="entity">OrderDto</param>
         /// <returns>bool</returns>
-        [HttpPost("{entity}")]
+        [HttpDelete("{entity}")]
         [Route("~/api/Product/OrderDelete")]
 		public bool OrderDelete([FromBody] OrderDto entity)
         {
@@ -2396,7 +2470,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// </summary>
         /// <param name="entity">OrderDto</param>
         /// <returns>bool</returns>
-        [HttpPost("{entity}")]
+        [HttpDelete("{entity}")]
         [Route("~/api/Product/OrderDeleteAsync")]
 		public async Task<bool> OrderDeleteAsync([FromBody] OrderDto entity)
         {
@@ -2409,7 +2483,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="orderId">int</param>
         /// <returns>bool</returns>
         [HttpDelete("{orderId}/{cache}")]
-        [Route("~/api/Product/OrderDelete")]
+        [Route("~/api/Product/OrderDeleteBy int orderId")]
 		public bool OrderDelete( int orderId, bool cache)
         {
             return this.ProductApplicationService.OrderDelete( orderId, cache);
@@ -2421,7 +2495,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="orderId">int</param>
         /// <returns>bool</returns>
         [HttpDelete("{orderId}/{cache}")]
-        [Route("~/api/Product/OrderDeleteAsync")]
+        [Route("~/api/Product/OrderDeleteBy int orderIdAsync")]
 		public async Task<bool> OrderDeleteAsync( int orderId, bool cache)
         {
             return await this.ProductApplicationService.OrderDeleteAsync( orderId, cache);
@@ -2457,7 +2531,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// </summary>
         /// <param name="entity">OrderDetailsDto</param>
         /// <returns>bool</returns>
-        [HttpPost("{entity}")]
+        [HttpPut("{entity}")]
         [Route("~/api/Product/OrderDetailsUpdate")]
 		public bool OrderDetailsUpdate([FromBody] OrderDetailsDto entity)
         {
@@ -2469,7 +2543,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// </summary>
         /// <param name="entity">OrderDetailsDto</param>
         /// <returns>bool</returns>
-        [HttpPost("{entity}")]
+        [HttpPut("{entity}")]
         [Route("~/api/Product/OrderDetailsUpdateAsync")]
 		public async Task<bool> OrderDetailsUpdateAsync([FromBody] OrderDetailsDto entity)
         {
@@ -2481,7 +2555,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// </summary>
         /// <param name="entity">OrderDetailsDto</param>
         /// <returns>bool</returns>
-        [HttpPost("{entity}")]
+        [HttpDelete("{entity}")]
         [Route("~/api/Product/OrderDetailsDelete")]
 		public bool OrderDetailsDelete([FromBody] OrderDetailsDto entity)
         {
@@ -2493,7 +2567,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// </summary>
         /// <param name="entity">OrderDetailsDto</param>
         /// <returns>bool</returns>
-        [HttpPost("{entity}")]
+        [HttpDelete("{entity}")]
         [Route("~/api/Product/OrderDetailsDeleteAsync")]
 		public async Task<bool> OrderDetailsDeleteAsync([FromBody] OrderDetailsDto entity)
         {
@@ -2506,7 +2580,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="orderDetailsId">int</param>
         /// <returns>bool</returns>
         [HttpDelete("{orderDetailsId}/{cache}")]
-        [Route("~/api/Product/OrderDetailsDelete")]
+        [Route("~/api/Product/OrderDetailsDeleteBy int orderDetailsId")]
 		public bool OrderDetailsDelete( int orderDetailsId, bool cache)
         {
             return this.ProductApplicationService.OrderDetailsDelete( orderDetailsId, cache);
@@ -2518,7 +2592,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="orderDetailsId">int</param>
         /// <returns>bool</returns>
         [HttpDelete("{orderDetailsId}/{cache}")]
-        [Route("~/api/Product/OrderDetailsDeleteAsync")]
+        [Route("~/api/Product/OrderDetailsDeleteBy int orderDetailsIdAsync")]
 		public async Task<bool> OrderDetailsDeleteAsync( int orderDetailsId, bool cache)
         {
             return await this.ProductApplicationService.OrderDetailsDeleteAsync( orderDetailsId, cache);
@@ -2554,7 +2628,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// </summary>
         /// <param name="entity">ProductDto</param>
         /// <returns>bool</returns>
-        [HttpPost("{entity}")]
+        [HttpPut("{entity}")]
         [Route("~/api/Product/ProductUpdate")]
 		public bool ProductUpdate([FromBody] ProductDto entity)
         {
@@ -2566,7 +2640,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// </summary>
         /// <param name="entity">ProductDto</param>
         /// <returns>bool</returns>
-        [HttpPost("{entity}")]
+        [HttpPut("{entity}")]
         [Route("~/api/Product/ProductUpdateAsync")]
 		public async Task<bool> ProductUpdateAsync([FromBody] ProductDto entity)
         {
@@ -2578,7 +2652,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// </summary>
         /// <param name="entity">ProductDto</param>
         /// <returns>bool</returns>
-        [HttpPost("{entity}")]
+        [HttpDelete("{entity}")]
         [Route("~/api/Product/ProductDelete")]
 		public bool ProductDelete([FromBody] ProductDto entity)
         {
@@ -2590,7 +2664,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// </summary>
         /// <param name="entity">ProductDto</param>
         /// <returns>bool</returns>
-        [HttpPost("{entity}")]
+        [HttpDelete("{entity}")]
         [Route("~/api/Product/ProductDeleteAsync")]
 		public async Task<bool> ProductDeleteAsync([FromBody] ProductDto entity)
         {
@@ -2603,7 +2677,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="productId">int</param>
         /// <returns>bool</returns>
         [HttpDelete("{productId}/{cache}")]
-        [Route("~/api/Product/ProductDelete")]
+        [Route("~/api/Product/ProductDeleteBy int productId")]
 		public bool ProductDelete( int productId, bool cache)
         {
             return this.ProductApplicationService.ProductDelete( productId, cache);
@@ -2615,7 +2689,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="productId">int</param>
         /// <returns>bool</returns>
         [HttpDelete("{productId}/{cache}")]
-        [Route("~/api/Product/ProductDeleteAsync")]
+        [Route("~/api/Product/ProductDeleteBy int productIdAsync")]
 		public async Task<bool> ProductDeleteAsync( int productId, bool cache)
         {
             return await this.ProductApplicationService.ProductDeleteAsync( productId, cache);
@@ -2651,7 +2725,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// </summary>
         /// <param name="entity">SoftwareDto</param>
         /// <returns>bool</returns>
-        [HttpPost("{entity}")]
+        [HttpPut("{entity}")]
         [Route("~/api/Product/SoftwareUpdate")]
 		public bool SoftwareUpdate([FromBody] SoftwareDto entity)
         {
@@ -2663,7 +2737,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// </summary>
         /// <param name="entity">SoftwareDto</param>
         /// <returns>bool</returns>
-        [HttpPost("{entity}")]
+        [HttpPut("{entity}")]
         [Route("~/api/Product/SoftwareUpdateAsync")]
 		public async Task<bool> SoftwareUpdateAsync([FromBody] SoftwareDto entity)
         {
@@ -2675,7 +2749,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// </summary>
         /// <param name="entity">SoftwareDto</param>
         /// <returns>bool</returns>
-        [HttpPost("{entity}")]
+        [HttpDelete("{entity}")]
         [Route("~/api/Product/SoftwareDelete")]
 		public bool SoftwareDelete([FromBody] SoftwareDto entity)
         {
@@ -2687,7 +2761,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// </summary>
         /// <param name="entity">SoftwareDto</param>
         /// <returns>bool</returns>
-        [HttpPost("{entity}")]
+        [HttpDelete("{entity}")]
         [Route("~/api/Product/SoftwareDeleteAsync")]
 		public async Task<bool> SoftwareDeleteAsync([FromBody] SoftwareDto entity)
         {
@@ -2700,7 +2774,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="productId">int</param>
         /// <returns>bool</returns>
         [HttpDelete("{productId}/{cache}")]
-        [Route("~/api/Product/SoftwareDelete")]
+        [Route("~/api/Product/SoftwareDeleteBy int productId")]
 		public bool SoftwareDelete( int productId, bool cache)
         {
             return this.ProductApplicationService.SoftwareDelete( productId, cache);
@@ -2712,7 +2786,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="productId">int</param>
         /// <returns>bool</returns>
         [HttpDelete("{productId}/{cache}")]
-        [Route("~/api/Product/SoftwareDeleteAsync")]
+        [Route("~/api/Product/SoftwareDeleteBy int productIdAsync")]
 		public async Task<bool> SoftwareDeleteAsync( int productId, bool cache)
         {
             return await this.ProductApplicationService.SoftwareDeleteAsync( productId, cache);

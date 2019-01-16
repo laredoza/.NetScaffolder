@@ -211,8 +211,17 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <returns>bool</returns>
 		public virtual bool Add(Product entity)
 		{
-			this.UnitOfWork.Add(entity);
-			return this.UnitOfWork.Save();
+			var entityToSave = new Product(entity, false);
+			this.UnitOfWork.Add(entityToSave);
+			bool result = this.UnitOfWork.Save();
+			
+			// Populate passed in entity with newly saved values
+			entity.ProductId = entityToSave.ProductId;
+			entity.ProductDescription = entityToSave.ProductDescription;
+			entity.UnitPrice = entityToSave.UnitPrice;
+			entity.AmountInStock = entityToSave.AmountInStock;
+			
+			return result;
 		}
 		
         /// <summary>
@@ -222,8 +231,17 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <returns>bool</returns>
 		public virtual async Task<bool> AddAsync(Product entity)
 		{
-			await this.UnitOfWork.AddAsync(entity);
-			return await this.UnitOfWork.SaveAsync();
+            var entityToSave = new Product(entity, false);
+			await this.UnitOfWork.AddAsync(entityToSave);
+			bool result = await this.UnitOfWork.SaveAsync();
+			
+			// Populate passed in entity with newly saved values
+			entity.ProductId = entityToSave.ProductId;
+			entity.ProductDescription = entityToSave.ProductDescription;
+			entity.UnitPrice = entityToSave.UnitPrice;
+			entity.AmountInStock = entityToSave.AmountInStock;
+			
+			return result;
 		}
 
         /// <summary>
@@ -233,7 +251,26 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <returns>bool</returns>
 		public virtual bool Update(Product entity)
 		{
-			return this.UnitOfWork.Modify(entity);
+			bool doUpdate = false;
+			var entityToUpdate = this.UnitOfWork.FirstOrDefault<Product>(o =>  o.ProductId == entity.ProductId , true);
+			
+			if (entityToUpdate == null)
+			{
+				throw new Exception("The Product entity does not exist");
+			}
+			
+			// Optimisation: Flag if any field has changed
+			if (entityToUpdate.ProductDescription != entity.ProductDescription) { entityToUpdate.ProductDescription = entity.ProductDescription;doUpdate = true; }
+			if (entityToUpdate.UnitPrice != entity.UnitPrice) { entityToUpdate.UnitPrice = entity.UnitPrice;doUpdate = true; }
+			if (entityToUpdate.AmountInStock != entity.AmountInStock) { entityToUpdate.AmountInStock = entity.AmountInStock;doUpdate = true; }
+
+			// Optimisation: Only execute update if a field has changed
+			if (doUpdate)
+			{
+				return this.UnitOfWork.Modify(entityToUpdate);
+			}
+			
+			return false;
 		}
 		
         /// <summary>
@@ -243,7 +280,26 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <returns>bool</returns>
 		public virtual async Task<bool> UpdateAsync(Product entity)
 		{
-			return await this.UnitOfWork.ModifyAsync(entity);
+			bool doUpdate = false;
+			var entityToUpdate = await this.UnitOfWork.FirstOrDefaultAsync<Product>(true, o =>  o.ProductId == entity.ProductId );
+			
+			if (entityToUpdate == null)
+			{
+				throw new Exception("The Product entity does not exist");
+			}
+			
+			// Optimisation: Flag if any field has changed
+			if (entityToUpdate.ProductDescription != entity.ProductDescription) { entityToUpdate.ProductDescription = entity.ProductDescription;doUpdate = true; }
+			if (entityToUpdate.UnitPrice != entity.UnitPrice) { entityToUpdate.UnitPrice = entity.UnitPrice;doUpdate = true; }
+			if (entityToUpdate.AmountInStock != entity.AmountInStock) { entityToUpdate.AmountInStock = entity.AmountInStock;doUpdate = true; }
+
+			// Optimisation: Only execute update if a field has changed
+			if (doUpdate)
+			{
+				return await this.UnitOfWork.ModifyAsync(entityToUpdate);
+			}
+			
+			return false;
 		}
 		
         /// <summary>
@@ -253,7 +309,14 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <returns>bool</returns>
 		public virtual bool Delete(Product entity)
 		{		
-			return this.UnitOfWork.Remove(entity);
+			var entityToDelete = this.UnitOfWork.FirstOrDefault<Product>(o =>  o.ProductId == entity.ProductId , true);
+			
+			if(entityToDelete == null)
+			{
+				throw new Exception("The Product entity does not exist");
+			}
+			
+			return this.UnitOfWork.Remove(entityToDelete);
 		}
 		
         /// <summary>
@@ -263,7 +326,14 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <returns>bool</returns>
 		public virtual async Task<bool> DeleteAsync(Product entity)
 		{		
-			return await this.UnitOfWork.RemoveAsync(entity);
+			var entityToDelete = await this.UnitOfWork.FirstOrDefaultAsync<Product>(true, o =>  o.ProductId == entity.ProductId );
+			
+			if(entityToDelete == null)
+			{
+				throw new Exception("The Product entity does not exist");
+			}
+			
+			return await this.UnitOfWork.RemoveAsync(entityToDelete);
 		}
 
 		/// <summary>

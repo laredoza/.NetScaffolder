@@ -3,8 +3,8 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
-    <AssemblyVersion>1.0.68.0</AssemblyVersion>
-    <FileVersion>1.0.68.0</FileVersion>
+    <AssemblyVersion>1.0.109.0</AssemblyVersion>
+    <FileVersion>1.0.109.0</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -14,6 +14,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Core\DotNetScaffolder.Domain.Core.csproj" />
+    <ProjectReference Include="..\..\..\Data\ApplicationServices\WebApiApplication\DotNetScaffolder.Domain.Data.ApplicationServices.WebApiApplicationService.csproj" />
     <ProjectReference Include="..\..\..\Data\Dtos\Dto\DotNetScaffolder.Domain.Data.Dtos.DefaultDto.csproj" />
     <ProjectReference Include="..\..\..\Data\Entities\Entity\DotNetScaffolder.Domain.Data.Entities.DefaultEntity.csproj" />
     <ProjectReference Include="..\..\..\Data\Interfaces\Interface\DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.csproj" />

@@ -408,7 +408,7 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.Base.Context
         public int Commit()
         {
             ChangeTracker.DetectChanges();
-            var result = SaveChanges();
+            var result = SaveChanges(false);
             Database.CurrentTransaction?.Commit();
             return result;
         }
@@ -901,10 +901,10 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.Base.Context
         /// <returns>
         ///     The <see cref="Task" />.
         /// </returns>
-        public Task<bool> ModifyAsync<TEntity>(TEntity item)
+        public async Task<bool> ModifyAsync<TEntity>(TEntity item)
             where TEntity : class
         {
-            return Task.Run(() => Modify(item));
+            return await Task.Run(() => Modify(item));
         }
 
         public void NoTracking<TEntity>(TEntity item) where TEntity : class
@@ -1023,7 +1023,7 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.Base.Context
             ChangeTracker.DetectChanges();
             var changedEntityNames = cacheProvider != null ? this.GetChangedEntityNames() : new string[0];
 
-            var result = base.SaveChanges();
+            var result = base.SaveChanges(false);
 
             cacheProvider?.InvalidateCacheDependencies(changedEntityNames);
 

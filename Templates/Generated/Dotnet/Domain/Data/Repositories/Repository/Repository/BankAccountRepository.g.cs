@@ -236,8 +236,18 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <returns>bool</returns>
 		public virtual bool Add(BankAccount entity)
 		{
-			this.UnitOfWork.Add(entity);
-			return this.UnitOfWork.Save();
+			var entityToSave = new BankAccount(entity, false);
+			this.UnitOfWork.Add(entityToSave);
+			bool result = this.UnitOfWork.Save();
+			
+			// Populate passed in entity with newly saved values
+			entity.BankAccountId = entityToSave.BankAccountId;
+			entity.BankAccountNumber = entityToSave.BankAccountNumber;
+			entity.Balance = entityToSave.Balance;
+			entity.CustomerId = entityToSave.CustomerId;
+			entity.Locked = entityToSave.Locked;
+			
+			return result;
 		}
 		
         /// <summary>
@@ -247,8 +257,18 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <returns>bool</returns>
 		public virtual async Task<bool> AddAsync(BankAccount entity)
 		{
-			await this.UnitOfWork.AddAsync(entity);
-			return await this.UnitOfWork.SaveAsync();
+            var entityToSave = new BankAccount(entity, false);
+			await this.UnitOfWork.AddAsync(entityToSave);
+			bool result = await this.UnitOfWork.SaveAsync();
+			
+			// Populate passed in entity with newly saved values
+			entity.BankAccountId = entityToSave.BankAccountId;
+			entity.BankAccountNumber = entityToSave.BankAccountNumber;
+			entity.Balance = entityToSave.Balance;
+			entity.CustomerId = entityToSave.CustomerId;
+			entity.Locked = entityToSave.Locked;
+			
+			return result;
 		}
 
         /// <summary>
@@ -258,7 +278,27 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <returns>bool</returns>
 		public virtual bool Update(BankAccount entity)
 		{
-			return this.UnitOfWork.Modify(entity);
+			bool doUpdate = false;
+			var entityToUpdate = this.UnitOfWork.FirstOrDefault<BankAccount>(o =>  o.BankAccountId == entity.BankAccountId , true);
+			
+			if (entityToUpdate == null)
+			{
+				throw new Exception("The BankAccount entity does not exist");
+			}
+			
+			// Optimisation: Flag if any field has changed
+			if (entityToUpdate.BankAccountNumber != entity.BankAccountNumber) { entityToUpdate.BankAccountNumber = entity.BankAccountNumber;doUpdate = true; }
+			if (entityToUpdate.Balance != entity.Balance) { entityToUpdate.Balance = entity.Balance;doUpdate = true; }
+			if (entityToUpdate.CustomerId != entity.CustomerId) { entityToUpdate.CustomerId = entity.CustomerId;doUpdate = true; }
+			if (entityToUpdate.Locked != entity.Locked) { entityToUpdate.Locked = entity.Locked;doUpdate = true; }
+
+			// Optimisation: Only execute update if a field has changed
+			if (doUpdate)
+			{
+				return this.UnitOfWork.Modify(entityToUpdate);
+			}
+			
+			return false;
 		}
 		
         /// <summary>
@@ -268,7 +308,27 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <returns>bool</returns>
 		public virtual async Task<bool> UpdateAsync(BankAccount entity)
 		{
-			return await this.UnitOfWork.ModifyAsync(entity);
+			bool doUpdate = false;
+			var entityToUpdate = await this.UnitOfWork.FirstOrDefaultAsync<BankAccount>(true, o =>  o.BankAccountId == entity.BankAccountId );
+			
+			if (entityToUpdate == null)
+			{
+				throw new Exception("The BankAccount entity does not exist");
+			}
+			
+			// Optimisation: Flag if any field has changed
+			if (entityToUpdate.BankAccountNumber != entity.BankAccountNumber) { entityToUpdate.BankAccountNumber = entity.BankAccountNumber;doUpdate = true; }
+			if (entityToUpdate.Balance != entity.Balance) { entityToUpdate.Balance = entity.Balance;doUpdate = true; }
+			if (entityToUpdate.CustomerId != entity.CustomerId) { entityToUpdate.CustomerId = entity.CustomerId;doUpdate = true; }
+			if (entityToUpdate.Locked != entity.Locked) { entityToUpdate.Locked = entity.Locked;doUpdate = true; }
+
+			// Optimisation: Only execute update if a field has changed
+			if (doUpdate)
+			{
+				return await this.UnitOfWork.ModifyAsync(entityToUpdate);
+			}
+			
+			return false;
 		}
 		
         /// <summary>
@@ -278,7 +338,14 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <returns>bool</returns>
 		public virtual bool Delete(BankAccount entity)
 		{		
-			return this.UnitOfWork.Remove(entity);
+			var entityToDelete = this.UnitOfWork.FirstOrDefault<BankAccount>(o =>  o.BankAccountId == entity.BankAccountId , true);
+			
+			if(entityToDelete == null)
+			{
+				throw new Exception("The BankAccount entity does not exist");
+			}
+			
+			return this.UnitOfWork.Remove(entityToDelete);
 		}
 		
         /// <summary>
@@ -288,7 +355,14 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <returns>bool</returns>
 		public virtual async Task<bool> DeleteAsync(BankAccount entity)
 		{		
-			return await this.UnitOfWork.RemoveAsync(entity);
+			var entityToDelete = await this.UnitOfWork.FirstOrDefaultAsync<BankAccount>(true, o =>  o.BankAccountId == entity.BankAccountId );
+			
+			if(entityToDelete == null)
+			{
+				throw new Exception("The BankAccount entity does not exist");
+			}
+			
+			return await this.UnitOfWork.RemoveAsync(entityToDelete);
 		}
 
 		/// <summary>

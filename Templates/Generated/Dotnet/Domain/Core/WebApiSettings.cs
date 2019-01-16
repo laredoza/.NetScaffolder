@@ -8,5 +8,6 @@ namespace DotNetScaffolder.Domain.Core
     public class WebApiSettings : IWebApiSettings
     {
         public string BasePath { get; set; }
+        public string Bearer { get; set; }
     }
 }

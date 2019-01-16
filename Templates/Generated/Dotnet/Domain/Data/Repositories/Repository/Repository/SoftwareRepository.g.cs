@@ -161,8 +161,15 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <returns>bool</returns>
 		public virtual bool Add(Software entity)
 		{
-			this.UnitOfWork.Add(entity);
-			return this.UnitOfWork.Save();
+			var entityToSave = new Software(entity, false);
+			this.UnitOfWork.Add(entityToSave);
+			bool result = this.UnitOfWork.Save();
+			
+			// Populate passed in entity with newly saved values
+			entity.ProductId = entityToSave.ProductId;
+			entity.LicenseCode = entityToSave.LicenseCode;
+			
+			return result;
 		}
 		
         /// <summary>
@@ -172,8 +179,15 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <returns>bool</returns>
 		public virtual async Task<bool> AddAsync(Software entity)
 		{
-			await this.UnitOfWork.AddAsync(entity);
-			return await this.UnitOfWork.SaveAsync();
+            var entityToSave = new Software(entity, false);
+			await this.UnitOfWork.AddAsync(entityToSave);
+			bool result = await this.UnitOfWork.SaveAsync();
+			
+			// Populate passed in entity with newly saved values
+			entity.ProductId = entityToSave.ProductId;
+			entity.LicenseCode = entityToSave.LicenseCode;
+			
+			return result;
 		}
 
         /// <summary>
@@ -183,7 +197,24 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <returns>bool</returns>
 		public virtual bool Update(Software entity)
 		{
-			return this.UnitOfWork.Modify(entity);
+			bool doUpdate = false;
+			var entityToUpdate = this.UnitOfWork.FirstOrDefault<Software>(o =>  o.ProductId == entity.ProductId , true);
+			
+			if (entityToUpdate == null)
+			{
+				throw new Exception("The Software entity does not exist");
+			}
+			
+			// Optimisation: Flag if any field has changed
+			if (entityToUpdate.LicenseCode != entity.LicenseCode) { entityToUpdate.LicenseCode = entity.LicenseCode;doUpdate = true; }
+
+			// Optimisation: Only execute update if a field has changed
+			if (doUpdate)
+			{
+				return this.UnitOfWork.Modify(entityToUpdate);
+			}
+			
+			return false;
 		}
 		
         /// <summary>
@@ -193,7 +224,24 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <returns>bool</returns>
 		public virtual async Task<bool> UpdateAsync(Software entity)
 		{
-			return await this.UnitOfWork.ModifyAsync(entity);
+			bool doUpdate = false;
+			var entityToUpdate = await this.UnitOfWork.FirstOrDefaultAsync<Software>(true, o =>  o.ProductId == entity.ProductId );
+			
+			if (entityToUpdate == null)
+			{
+				throw new Exception("The Software entity does not exist");
+			}
+			
+			// Optimisation: Flag if any field has changed
+			if (entityToUpdate.LicenseCode != entity.LicenseCode) { entityToUpdate.LicenseCode = entity.LicenseCode;doUpdate = true; }
+
+			// Optimisation: Only execute update if a field has changed
+			if (doUpdate)
+			{
+				return await this.UnitOfWork.ModifyAsync(entityToUpdate);
+			}
+			
+			return false;
 		}
 		
         /// <summary>
@@ -203,7 +251,14 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <returns>bool</returns>
 		public virtual bool Delete(Software entity)
 		{		
-			return this.UnitOfWork.Remove(entity);
+			var entityToDelete = this.UnitOfWork.FirstOrDefault<Software>(o =>  o.ProductId == entity.ProductId , true);
+			
+			if(entityToDelete == null)
+			{
+				throw new Exception("The Software entity does not exist");
+			}
+			
+			return this.UnitOfWork.Remove(entityToDelete);
 		}
 		
         /// <summary>
@@ -213,7 +268,14 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <returns>bool</returns>
 		public virtual async Task<bool> DeleteAsync(Software entity)
 		{		
-			return await this.UnitOfWork.RemoveAsync(entity);
+			var entityToDelete = await this.UnitOfWork.FirstOrDefaultAsync<Software>(true, o =>  o.ProductId == entity.ProductId );
+			
+			if(entityToDelete == null)
+			{
+				throw new Exception("The Software entity does not exist");
+			}
+			
+			return await this.UnitOfWork.RemoveAsync(entityToDelete);
 		}
 
 		/// <summary>

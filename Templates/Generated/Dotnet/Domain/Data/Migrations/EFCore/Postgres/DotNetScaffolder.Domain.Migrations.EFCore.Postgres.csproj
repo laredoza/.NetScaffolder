@@ -4,8 +4,8 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <AssemblyName>DotNetScaffolder.Domain.Migrations.EFCore.Postgres</AssemblyName>
-    <AssemblyVersion>1.0.12.0</AssemblyVersion>
-    <FileVersion>1.0.12.0</FileVersion>
+    <AssemblyVersion>1.0.19.0</AssemblyVersion>
+    <FileVersion>1.0.19.0</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>

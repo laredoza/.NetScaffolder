@@ -20,6 +20,7 @@ public class DtoTemplate : BaseTemplate
 
 using System;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 <#+ foreach(var nameSpace in DataType.AdditionalNamespaces){ #>
 using <#= nameSpace #>;
 <#+ }#>
@@ -90,9 +91,11 @@ namespace <#= DataType.FullNamespace #>
 		#region Child Relationships
 		
 <#+ foreach(var child in DataType.MetaData.DistinctChildRelationships.Where(o => o.ReferencedMultiplicity == RelationshipMultiplicity.Many)){ #>
+        // [JsonConverter(typeof(ConcreteTypeConverter<<#= RelationshipNameFormatting.FormatName(child.ReferencedTableName, child.RelationshipAlias, DataType.NamingConvention) #>Dto>))]
 		public <#= DataType.CollectionOption.ClassNameInterface #><<#= DataType.TransformDtoType(child.ReferencedTableName) #>> <#= RelationshipNameFormatting.FormatName(child.ReferencedTableName, child.RelationshipAlias, DataType.NamingConvention) #> { get; set; }
 <#+ } #>
 <#+ foreach(var child in DataType.MetaData.DistinctChildRelationships.Where(o => o.ReferencedMultiplicity != RelationshipMultiplicity.Many)){ #>
+        // [JsonConverter(typeof(ConcreteTypeConverter<<#=DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #>Dto>))]
 		public <#= DataType.TransformDtoType(child.ReferencedTableName) #> <#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #> { get; set; }
 <#+ } #>
 
@@ -101,6 +104,7 @@ namespace <#= DataType.FullNamespace #>
 		#region Parent Relationships
 		
 <#+ foreach(var parent in DataType.MetaData.DistinctParentRelationships){ #>
+        [JsonConverter(typeof(ConcreteTypeConverter<<#= RelationshipNameFormatting.FormatName(parent.ReferencedTableName, parent.RelationshipAlias, DataType.NamingConvention) #>Dto>))]
 		public <#= DataType.TransformDtoType(parent.ReferencedTableName) #> <#= RelationshipNameFormatting.FormatName(parent.ReferencedTableName, parent.RelationshipAlias, DataType.NamingConvention) #> { get; set; }
 <#+ } #>
 		

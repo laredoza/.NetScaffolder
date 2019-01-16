@@ -20,6 +20,8 @@
 
 using System;
 using System.Collections.Generic;
+using Newtonsoft.Json;
+using DotNetScaffolder.Domain.Core;
 using DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.Dto;
 
 namespace DotNetScaffolder.Domain.Data.Dtos.DefaultDto.Dto
@@ -80,12 +82,14 @@ namespace DotNetScaffolder.Domain.Data.Dtos.DefaultDto.Dto
 		
 		#region Child Relationships
 		
+        // [JsonConverter(typeof(ConcreteTypeConverter<OrderDetailsDto>))]
 		public IList<IOrderDetails> OrderDetails { get; set; }
 
 		#endregion
 		
 		#region Parent Relationships
 		
+        [JsonConverter(typeof(ConcreteTypeConverter<CustomerDto>))]
 		public ICustomer Customer { get; set; }
 		
 		#endregion

@@ -20,6 +20,8 @@
 
 using System;
 using System.Collections.Generic;
+using Newtonsoft.Json;
+using DotNetScaffolder.Domain.Core;
 using DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.Dto;
 
 namespace DotNetScaffolder.Domain.Data.Dtos.DefaultDto.Dto
@@ -70,6 +72,7 @@ namespace DotNetScaffolder.Domain.Data.Dtos.DefaultDto.Dto
 		
 		#region Parent Relationships
 		
+        [JsonConverter(typeof(ConcreteTypeConverter<BankAccountDto>))]
 		public IBankAccount BankAccount { get; set; }
 		
 		#endregion

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Text;
 using System.Threading.Tasks;
 using DotNetScaffolder.Domain.Core.Interfaces;
 using DotNetScaffolder.Domain.Data.ApplicationService;
@@ -21,37 +22,83 @@ namespace DotNetScaffolder.Domain.Data.ApplicationServices.WebApiApplicationServ
             this.apiSettings = apiSettings;
         }
 
-        public string accessToken { get; set; }
-
         public CustomerDto LoadByCustomerCustomerId(int customerId, bool cache, params Expression<Func<ICustomer, object>>[] includes)
         {
-            throw new NotImplementedException();
+            CustomerDto result;
+
+            var apiUrl = $"{this.apiSettings.BasePath}/product/LoadByCustomerCustomerId/{customerId}/{cache}";
+
+            var client = new HttpClient();
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", this.apiSettings.Bearer);
+            var response = client.GetAsync(apiUrl).Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+                var json = response.Content.ReadAsStringAsync().Result;
+                result = JsonConvert.DeserializeObject<CustomerDto>(json);
+            }
+            else
+            {
+                throw new Exception($"An error happened{response.StatusCode}");
+            }
+
+            return result;
         }
 
-        public Task<CustomerDto> LoadByCustomerCustomerIdAsync(int customerId, bool cache, params Expression<Func<ICustomer, object>>[] includes)
+        public async Task<CustomerDto> LoadByCustomerCustomerIdAsync(int customerId, bool cache, params Expression<Func<ICustomer, object>>[] includes)
         {
-            throw new NotImplementedException();
+            CustomerDto result;
+
+            var apiUrl = $"{this.apiSettings.BasePath}/product/LoadByCustomerCustomerIdAsync/{customerId}/{cache}";
+
+            var client = new HttpClient();
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", this.apiSettings.Bearer);
+            var response = await client.GetAsync(apiUrl);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var json = await response.Content.ReadAsStringAsync();
+                result = JsonConvert.DeserializeObject<CustomerDto>(json);
+            }
+            else
+            {
+                throw new Exception($"An error happened{response.StatusCode}");
+            }
+
+            return result;
         }
 
         public IList<CustomerDto> CustomerLoadAll(bool cache, params Expression<Func<ICustomer, object>>[] includes)
         {
-            throw new NotImplementedException();
+            IList<CustomerDto> result;
+
+            var apiUrl = $"{this.apiSettings.BasePath}/product/CustomerLoadAll/{cache}";
+
+            var client = new HttpClient();
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", this.apiSettings.Bearer);
+            var response = client.GetAsync(apiUrl).Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+                var json = response.Content.ReadAsStringAsync().Result;
+                result = JsonConvert.DeserializeObject<IList<CustomerDto>>(json);
+            }
+            else
+            {
+                throw new Exception($"An error happened{response.StatusCode}");
+            }
+
+            return result;
         }
 
         public async Task<IList<CustomerDto>> CustomerLoadAllAsync(bool cache, params Expression<Func<ICustomer, object>>[] includes)
         {
-            IList<CustomerDto> result = new List<CustomerDto>();
+            IList<CustomerDto> result;
 
-            //var apiUrl = "http://localhost:5001/identity";
-            var apiUrl = $"{this.apiSettings.BasePath}/identity";
+            var apiUrl = $"{this.apiSettings.BasePath}/product/CustomerLoadAllAsync/{cache}";
 
             var client = new HttpClient();
-            //var at = await this.HttpContext.GetTokenAsync("access_token");
-
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
-
-            var a = JsonConvert.SerializeObject(includes);
-
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", this.apiSettings.Bearer);
             var response = await client.GetAsync(apiUrl);
 
             if (response.IsSuccessStatusCode)
@@ -61,7 +108,7 @@ namespace DotNetScaffolder.Domain.Data.ApplicationServices.WebApiApplicationServ
             }
             else
             {
-                throw new Exception("An error happened");
+                throw new Exception($"An error happened{response.StatusCode}");
             }
 
             return result;
@@ -69,13 +116,49 @@ namespace DotNetScaffolder.Domain.Data.ApplicationServices.WebApiApplicationServ
 
         public IList<CustomerDto> CustomerSearchByCustomerCode(string customerCode, bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes)
         {
-            throw new NotImplementedException();
+            IList<CustomerDto> result;
+
+            var apiUrl = $"{this.apiSettings.BasePath}/product/CustomerSearchByCustomerCode/{customerCode}/{caseSensitive}/{cache}";
+
+            var client = new HttpClient();
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", this.apiSettings.Bearer);
+            var response = client.GetAsync(apiUrl).Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+                var json = response.Content.ReadAsStringAsync().Result;
+                result = JsonConvert.DeserializeObject<IList<CustomerDto>>(json);
+            }
+            else
+            {
+                throw new Exception($"An error happened{response.StatusCode}");
+            }
+
+            return result;
         }
 
-        public Task<IList<CustomerDto>> CustomerSearchByCustomerCodeAsync(string customerCode, bool caseSensitive, bool cache,
+        public async Task<IList<CustomerDto>> CustomerSearchByCustomerCodeAsync(string customerCode, bool caseSensitive, bool cache,
             params Expression<Func<ICustomer, object>>[] includes)
         {
-            throw new NotImplementedException();
+            IList<CustomerDto> result;
+
+            var apiUrl = $"{this.apiSettings.BasePath}/product/CustomerSearchByCustomerCodeAsync/{customerCode}/{caseSensitive}/{cache}";
+
+            var client = new HttpClient();
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", this.apiSettings.Bearer);
+            var response = await client.GetAsync(apiUrl);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var json = await response.Content.ReadAsStringAsync();
+                result = JsonConvert.DeserializeObject<IList<CustomerDto>>(json);
+            }
+            else
+            {
+                throw new Exception($"An error happened{response.StatusCode}");
+            }
+
+            return result;
         }
 
         public IList<CustomerDto> CustomerSearchByCompanyName(string companyName, bool caseSensitive, bool cache, params Expression<Func<ICustomer, object>>[] includes)
@@ -171,32 +254,146 @@ namespace DotNetScaffolder.Domain.Data.ApplicationServices.WebApiApplicationServ
 
         public bool CustomerAdd(CustomerDto entity)
         {
-            throw new NotImplementedException();
+            bool result = false;
+
+            var apiUrl = $"{this.apiSettings.BasePath}/product/CustomerAdd";
+
+            var client = new HttpClient();
+            var content = new StringContent(JsonConvert.SerializeObject(entity), Encoding.UTF8, "application/json");
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", this.apiSettings.Bearer);
+            var response = client.PostAsync(apiUrl, content).Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+                var json = response.Content.ReadAsStringAsync().Result;
+                result = JsonConvert.DeserializeObject<bool>(json);
+            }
+            else
+            {
+                throw new Exception($"An error happened{response.StatusCode}");
+            }
+
+            return result;
         }
 
-        public Task<bool> CustomerAddAsync(CustomerDto entity)
+        public async Task<bool> CustomerAddAsync(CustomerDto entity)
         {
-            throw new NotImplementedException();
+            bool result = false;
+
+            var apiUrl = $"{this.apiSettings.BasePath}/product/CustomerAddAsync";
+
+            var client = new HttpClient();
+            var content = new StringContent(JsonConvert.SerializeObject(entity), Encoding.UTF8, "application/json");
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", this.apiSettings.Bearer);
+            var response = await client.PostAsync(apiUrl, content);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var json = await response.Content.ReadAsStringAsync();
+                result = JsonConvert.DeserializeObject<bool>(json);
+            }
+            else
+            {
+                throw new Exception($"An error happened{response.StatusCode}");
+            }
+
+            return result;
         }
 
         public bool CustomerUpdate(CustomerDto entity)
         {
-            throw new NotImplementedException();
+            bool result = false;
+
+            var apiUrl = $"{this.apiSettings.BasePath}/product/CustomerUpdate";
+
+            var client = new HttpClient();
+            var content = new StringContent(JsonConvert.SerializeObject(entity), Encoding.UTF8, "application/json");
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", this.apiSettings.Bearer);
+            var response = client.PutAsync(apiUrl, content).Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+                var json = response.Content.ReadAsStringAsync().Result;
+                result = JsonConvert.DeserializeObject<bool>(json);
+            }
+            else
+            {
+                throw new Exception($"An error happened{response.StatusCode}");
+            }
+
+            return result;
         }
 
-        public Task<bool> CustomerUpdateAsync(CustomerDto entity)
+        public async Task<bool> CustomerUpdateAsync(CustomerDto entity)
         {
-            throw new NotImplementedException();
+            bool result = false;
+
+            var apiUrl = $"{this.apiSettings.BasePath}/product/CustomerUpdateAsync";
+
+            var client = new HttpClient();
+            var content = new StringContent(JsonConvert.SerializeObject(entity), Encoding.UTF8, "application/json");
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", this.apiSettings.Bearer);
+            var response = await client.PutAsync(apiUrl, content);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var json = await response.Content.ReadAsStringAsync();
+                result = JsonConvert.DeserializeObject<bool>(json);
+            }
+            else
+            {
+                throw new Exception($"An error happened{response.StatusCode}");
+            }
+
+            return result;
         }
 
         public bool CustomerDelete(CustomerDto entity)
         {
-            throw new NotImplementedException();
+            bool result = false;
+
+            var apiUrl = $"{this.apiSettings.BasePath}/product/CustomerDelete/{entity.CustomerId}/true";
+
+            var client = new HttpClient();
+            var content = new StringContent(JsonConvert.SerializeObject(entity), Encoding.UTF8, "application/json");
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", this.apiSettings.Bearer);
+            var response = client.DeleteAsync(apiUrl).Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+                var json = response.Content.ReadAsStringAsync().Result;
+                result = JsonConvert.DeserializeObject<bool>(json);
+            }
+            else
+            {
+                throw new Exception($"An error happened{response.StatusCode}");
+            }
+
+            return result;
         }
 
-        public Task<bool> CustomerDeleteAsync(CustomerDto entity)
+        public async Task<bool> CustomerDeleteAsync(CustomerDto entity)
         {
-            throw new NotImplementedException();
+            bool result = false;
+
+            var apiUrl = $"{this.apiSettings.BasePath}/product/CustomerDeleteAsync/{entity.CustomerId}/true";
+
+            var client = new HttpClient();
+            var content = new StringContent(JsonConvert.SerializeObject(entity), Encoding.UTF8, "application/json");
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", this.apiSettings.Bearer);
+            var response = await client.DeleteAsync(apiUrl);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var json = await response.Content.ReadAsStringAsync();
+                result = JsonConvert.DeserializeObject<bool>(json);
+            }
+            else
+            {
+                throw new Exception($"An error happened{response.StatusCode}");
+            }
+
+            return result;
         }
 
         public bool CustomerDelete(int customerId, bool cache)
