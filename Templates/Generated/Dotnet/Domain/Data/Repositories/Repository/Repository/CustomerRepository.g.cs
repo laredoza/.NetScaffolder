@@ -590,8 +590,8 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         public virtual bool Add(Customer entity)
         {
             var entityToSave = new Customer(entity, false);
-            this.UnitOfWork.Add(entityToSave);
-            bool result = this.UnitOfWork.Save();
+            var result = this.UnitOfWork.Add(entityToSave);
+            //bool result = this.UnitOfWork.Save();
 
             // Populate passed in entity with newly saved values
             entity.CustomerId = entityToSave.CustomerId;
@@ -619,8 +619,8 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         public virtual async Task<bool> AddAsync(Customer entity)
         {
             var entityToSave = new Customer(entity, false);
-            await this.UnitOfWork.AddAsync(entityToSave);
-            bool result = await this.UnitOfWork.SaveAsync();
+            var result = await this.UnitOfWork.AddAsync(entityToSave);
+            //bool result = await this.UnitOfWork.SaveAsync();
 
             // Populate passed in entity with newly saved values
             entity.CustomerId = entityToSave.CustomerId;
@@ -710,8 +710,7 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
             // Optimisation: Only execute update if a field has changed
             if (doUpdate)
             {
-                var result = await this.UnitOfWork.ModifyAsync(entityToUpdate);
-                await this.UnitOfWork.SaveAsync();
+                return await this.UnitOfWork.ModifyAsync(entityToUpdate);
             }
 
             return false;

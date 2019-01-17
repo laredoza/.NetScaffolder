@@ -73,7 +73,7 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.SqlServer.Database
             container.Configure(
                  config =>
                  {
-                    config.For<IUnitOfWork>().LifecycleIs(Lifecycles.Singleton).Use<SqlServerFullContext>()
+                    config.For<IUnitOfWork>().LifecycleIs(Lifecycles.Transient).Use<SqlServerFullContext>()
                          .Ctor<string>("connectionString").Is(configuration.ConnectionStrings["RepoTestEFCoreSqlServer"]);
                  });
 

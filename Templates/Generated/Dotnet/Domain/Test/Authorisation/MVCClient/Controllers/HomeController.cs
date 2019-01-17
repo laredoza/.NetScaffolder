@@ -91,8 +91,8 @@ namespace MVCClient.Controllers
                 CustomerCode = "010"
             };
 
-            //applicationService.CustomerAdd(customer1);
-            //await applicationService.CustomerAddAsync(customer2);
+            applicationService.CustomerAdd(customer1);
+            await applicationService.CustomerAddAsync(customer2);
 
             customer1.Address = "Changed Address";
             customer2.Address = "Changed Address";
@@ -100,8 +100,8 @@ namespace MVCClient.Controllers
             applicationService.CustomerUpdate(customer1);
             await applicationService.CustomerUpdateAsync(customer2);
 
-            applicationService.CustomerDelete(customer1);
-            await applicationService.CustomerDeleteAsync(customer2);
+            //applicationService.CustomerDelete(customer1);
+            //await applicationService.CustomerDeleteAsync(customer2);
 
 
             //ViewData["json"] = JsonConvert.SerializeObject(resultCustomerLoadAllAsync);

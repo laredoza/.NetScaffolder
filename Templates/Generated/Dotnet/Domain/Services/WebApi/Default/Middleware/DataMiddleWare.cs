@@ -171,7 +171,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Middleware
             if (fullContext != null)
             {
                 logger.LogInformation("Commiting Context");
-                fullContext.Commit();
+                //fullContext.Commit();
 
                 // Todo: I think this is redundent as it gets called again when the DataMiddleWare is disposed. We will have to investigate this.
                 //fullContext.Dispose();

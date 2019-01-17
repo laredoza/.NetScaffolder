@@ -2,6 +2,7 @@
 using System.IdentityModel.Tokens.Jwt;
 using DotNetScaffolder.Domain.Infrastructure.Web.Core.Extensions;
 using DotNetScaffolder.Domain.Infrastructure.Web.Core.Security;
+using DotNetScaffolder.Domain.Services.WebApi.Default.Filter;
 using DotNetScaffolder.Domain.Services.WebApi.Default.Middleware;
 using DotNetScaffolder.Domain.Services.WebApi.Default.Security;
 using Microsoft.AspNetCore.Builder;
@@ -70,8 +71,20 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default
         // This method gets called by the runtime. Use this method to add services to the container.
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
-            //services.AddMvcCore().AddJsonFormatters();
-            services.AddMvc();
+            services.AddMvcCore(
+                setup =>
+                    {
+                        setup.Filters.AddService<UnitOfWorkFilter>(1);
+                    } 
+                ).AddJsonFormatters();
+            //services.AddMvc();
+
+            //services
+            //    .AddMvc(setup =>
+            //    {
+            //        setup.Filters.AddService<UnitOfWorkFilter>(1);
+            //    });
+
             //    .AddAuthorization()
             //    .AddJsonFormatters();
 

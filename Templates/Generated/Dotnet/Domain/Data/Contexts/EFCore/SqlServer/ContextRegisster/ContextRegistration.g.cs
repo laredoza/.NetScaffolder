@@ -33,7 +33,7 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.SqlServer.ContextRegistra
 		
         public ContextRegistration()
         {
-            this.For<IDatabaseManager>().LifecycleIs(Lifecycles.Singleton).Use<DatabaseManager>();
+            this.For<IDatabaseManager>().LifecycleIs(Lifecycles.Transient).Use<DatabaseManager>();
         }
 		
 		#endregion
