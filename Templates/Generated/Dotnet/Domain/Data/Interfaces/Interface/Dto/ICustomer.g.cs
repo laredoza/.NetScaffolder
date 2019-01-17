@@ -46,7 +46,6 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.Dto
 		#region Child Relationships
 		
 		IList<IBankAccount> BankAccount { get; set; }
-		IList<IOrder> Order { get; set; }
 
 		#endregion
 		

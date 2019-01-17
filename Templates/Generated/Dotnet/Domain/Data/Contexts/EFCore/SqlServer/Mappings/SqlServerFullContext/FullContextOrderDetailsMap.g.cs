@@ -61,8 +61,6 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.SqlServer.Mappings.SqlSer
 			
 			#region Relationships
 			
-			builder.HasOne<Order>(s => s.Order).WithMany(s => s.OrderDetails).HasForeignKey(s => s.OrderId).OnDelete(DeleteBehavior.Restrict);
-			builder.HasOne<Product>(s => s.Product).WithMany(s => s.OrderDetails).HasForeignKey(s => s.ProductId).OnDelete(DeleteBehavior.Restrict);
 			
 			#endregion	
 

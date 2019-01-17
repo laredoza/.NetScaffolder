@@ -1998,7 +1998,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="bankAccountId">int</param>
         /// <returns>bool</returns>
         [HttpDelete("{bankAccountId}/{cache}")]
-        [Route("~/api/Product/BankAccountDeleteBy int bankAccountId")]
+        [Route("~/api/Product/BankAccountDeleteBybankAccountId")]
 		public bool BankAccountDelete( int bankAccountId, bool cache)
         {
             return this.ProductApplicationService.BankAccountDelete( bankAccountId, cache);
@@ -2010,7 +2010,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="bankAccountId">int</param>
         /// <returns>bool</returns>
         [HttpDelete("{bankAccountId}/{cache}")]
-        [Route("~/api/Product/BankAccountDeleteBy int bankAccountIdAsync")]
+        [Route("~/api/Product/BankAccountDeleteBybankAccountIdAsync")]
 		public async Task<bool> BankAccountDeleteAsync( int bankAccountId, bool cache)
         {
             return await this.ProductApplicationService.BankAccountDeleteAsync( bankAccountId, cache);
@@ -2095,7 +2095,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="bankTransferId">int</param>
         /// <returns>bool</returns>
         [HttpDelete("{bankTransferId}/{cache}")]
-        [Route("~/api/Product/BankTransfersDeleteBy int bankTransferId")]
+        [Route("~/api/Product/BankTransfersDeleteBybankTransferId")]
 		public bool BankTransfersDelete( int bankTransferId, bool cache)
         {
             return this.ProductApplicationService.BankTransfersDelete( bankTransferId, cache);
@@ -2107,7 +2107,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="bankTransferId">int</param>
         /// <returns>bool</returns>
         [HttpDelete("{bankTransferId}/{cache}")]
-        [Route("~/api/Product/BankTransfersDeleteBy int bankTransferIdAsync")]
+        [Route("~/api/Product/BankTransfersDeleteBybankTransferIdAsync")]
 		public async Task<bool> BankTransfersDeleteAsync( int bankTransferId, bool cache)
         {
             return await this.ProductApplicationService.BankTransfersDeleteAsync( bankTransferId, cache);
@@ -2192,7 +2192,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="productId">int</param>
         /// <returns>bool</returns>
         [HttpDelete("{productId}/{cache}")]
-        [Route("~/api/Product/BookDeleteBy int productId")]
+        [Route("~/api/Product/BookDeleteByproductId")]
 		public bool BookDelete( int productId, bool cache)
         {
             return this.ProductApplicationService.BookDelete( productId, cache);
@@ -2204,7 +2204,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="productId">int</param>
         /// <returns>bool</returns>
         [HttpDelete("{productId}/{cache}")]
-        [Route("~/api/Product/BookDeleteBy int productIdAsync")]
+        [Route("~/api/Product/BookDeleteByproductIdAsync")]
 		public async Task<bool> BookDeleteAsync( int productId, bool cache)
         {
             return await this.ProductApplicationService.BookDeleteAsync( productId, cache);
@@ -2289,7 +2289,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="countryId">int</param>
         /// <returns>bool</returns>
         [HttpDelete("{countryId}/{cache}")]
-        [Route("~/api/Product/CountryDeleteBy int countryId")]
+        [Route("~/api/Product/CountryDeleteBycountryId")]
 		public bool CountryDelete( int countryId, bool cache)
         {
             return this.ProductApplicationService.CountryDelete( countryId, cache);
@@ -2301,7 +2301,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="countryId">int</param>
         /// <returns>bool</returns>
         [HttpDelete("{countryId}/{cache}")]
-        [Route("~/api/Product/CountryDeleteBy int countryIdAsync")]
+        [Route("~/api/Product/CountryDeleteBycountryIdAsync")]
 		public async Task<bool> CountryDeleteAsync( int countryId, bool cache)
         {
             return await this.ProductApplicationService.CountryDeleteAsync( countryId, cache);
@@ -2386,7 +2386,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="customerId">int</param>
         /// <returns>bool</returns>
         [HttpDelete("{customerId}/{cache}")]
-        [Route("~/api/Product/CustomerDeleteBy int customerId")]
+        [Route("~/api/Product/CustomerDeleteBycustomerId")]
 		public bool CustomerDelete( int customerId, bool cache)
         {
             return this.ProductApplicationService.CustomerDelete( customerId, cache);
@@ -2398,7 +2398,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="customerId">int</param>
         /// <returns>bool</returns>
         [HttpDelete("{customerId}/{cache}")]
-        [Route("~/api/Product/CustomerDeleteBy int customerIdAsync")]
+        [Route("~/api/Product/CustomerDeleteBycustomerIdAsync")]
 		public async Task<bool> CustomerDeleteAsync( int customerId, bool cache)
         {
             return await this.ProductApplicationService.CustomerDeleteAsync( customerId, cache);
@@ -2483,7 +2483,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="orderId">int</param>
         /// <returns>bool</returns>
         [HttpDelete("{orderId}/{cache}")]
-        [Route("~/api/Product/OrderDeleteBy int orderId")]
+        [Route("~/api/Product/OrderDeleteByorderId")]
 		public bool OrderDelete( int orderId, bool cache)
         {
             return this.ProductApplicationService.OrderDelete( orderId, cache);
@@ -2495,7 +2495,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="orderId">int</param>
         /// <returns>bool</returns>
         [HttpDelete("{orderId}/{cache}")]
-        [Route("~/api/Product/OrderDeleteBy int orderIdAsync")]
+        [Route("~/api/Product/OrderDeleteByorderIdAsync")]
 		public async Task<bool> OrderDeleteAsync( int orderId, bool cache)
         {
             return await this.ProductApplicationService.OrderDeleteAsync( orderId, cache);
@@ -2580,7 +2580,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="orderDetailsId">int</param>
         /// <returns>bool</returns>
         [HttpDelete("{orderDetailsId}/{cache}")]
-        [Route("~/api/Product/OrderDetailsDeleteBy int orderDetailsId")]
+        [Route("~/api/Product/OrderDetailsDeleteByorderDetailsId")]
 		public bool OrderDetailsDelete( int orderDetailsId, bool cache)
         {
             return this.ProductApplicationService.OrderDetailsDelete( orderDetailsId, cache);
@@ -2592,7 +2592,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="orderDetailsId">int</param>
         /// <returns>bool</returns>
         [HttpDelete("{orderDetailsId}/{cache}")]
-        [Route("~/api/Product/OrderDetailsDeleteBy int orderDetailsIdAsync")]
+        [Route("~/api/Product/OrderDetailsDeleteByorderDetailsIdAsync")]
 		public async Task<bool> OrderDetailsDeleteAsync( int orderDetailsId, bool cache)
         {
             return await this.ProductApplicationService.OrderDetailsDeleteAsync( orderDetailsId, cache);
@@ -2677,7 +2677,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="productId">int</param>
         /// <returns>bool</returns>
         [HttpDelete("{productId}/{cache}")]
-        [Route("~/api/Product/ProductDeleteBy int productId")]
+        [Route("~/api/Product/ProductDeleteByproductId")]
 		public bool ProductDelete( int productId, bool cache)
         {
             return this.ProductApplicationService.ProductDelete( productId, cache);
@@ -2689,7 +2689,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="productId">int</param>
         /// <returns>bool</returns>
         [HttpDelete("{productId}/{cache}")]
-        [Route("~/api/Product/ProductDeleteBy int productIdAsync")]
+        [Route("~/api/Product/ProductDeleteByproductIdAsync")]
 		public async Task<bool> ProductDeleteAsync( int productId, bool cache)
         {
             return await this.ProductApplicationService.ProductDeleteAsync( productId, cache);
@@ -2774,7 +2774,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="productId">int</param>
         /// <returns>bool</returns>
         [HttpDelete("{productId}/{cache}")]
-        [Route("~/api/Product/SoftwareDeleteBy int productId")]
+        [Route("~/api/Product/SoftwareDeleteByproductId")]
 		public bool SoftwareDelete( int productId, bool cache)
         {
             return this.ProductApplicationService.SoftwareDelete( productId, cache);
@@ -2786,7 +2786,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// <param name="productId">int</param>
         /// <returns>bool</returns>
         [HttpDelete("{productId}/{cache}")]
-        [Route("~/api/Product/SoftwareDeleteBy int productIdAsync")]
+        [Route("~/api/Product/SoftwareDeleteByproductIdAsync")]
 		public async Task<bool> SoftwareDeleteAsync( int productId, bool cache)
         {
             return await this.ProductApplicationService.SoftwareDeleteAsync( productId, cache);

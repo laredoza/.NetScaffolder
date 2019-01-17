@@ -1181,7 +1181,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         }
 
         /// <summary>
-        /// Delete the Book entity async from the databaseSingleton
+        /// Delete the Book entity async from the database
         /// </summary>
         /// <param name="entity">IBook</param>
         /// <returns>bool</returns>

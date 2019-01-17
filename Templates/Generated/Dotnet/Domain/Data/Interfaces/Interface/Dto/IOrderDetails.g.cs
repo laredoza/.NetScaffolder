@@ -43,8 +43,6 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.Dto
 		
 		#region Parent Relationships
 		
-		IOrder Order { get; set; }
-		IProduct Product { get; set; }
 		
 		#endregion
 	}

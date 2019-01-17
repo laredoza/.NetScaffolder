@@ -84,10 +84,10 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <summary>
         /// Load Order entities from the database using the CustomerId field
         /// </summary>
-        /// <param name="customerId">Nullable<int></param>
+        /// <param name="customerId">int</param>
 		/// <param name="includes">params Expression<Func<Order, object>>[]</param>
         /// <returns>IList<IOrder></returns>
-		public virtual IList<Order> LoadByCustomerId(Nullable<int> customerId, bool cache, params Expression<Func<IOrder, object>>[] includes)
+		public virtual IList<Order> LoadByCustomerId(int customerId, bool cache, params Expression<Func<IOrder, object>>[] includes)
 		{
 			var expr = this.Convert(includes);
 			return this.UnitOfWork.AllMatching<Order>(o => o.CustomerId == customerId, cache, expr).ToList<Order>();
@@ -96,10 +96,10 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <summary>
         /// Load Order entities async from the database using the CustomerId field
         /// </summary>
-        /// <param name="customerId">Nullable<int></param>
+        /// <param name="customerId">int</param>
 		/// <param name="includes">params Expression<Func<Order, object>>[]</param>
         /// <returns>IList<IOrder></returns>
-		public virtual async Task<IList<Order>> LoadByCustomerIdAsync(Nullable<int> customerId, bool cache, params Expression<Func<IOrder, object>>[] includes)
+		public virtual async Task<IList<Order>> LoadByCustomerIdAsync(int customerId, bool cache, params Expression<Func<IOrder, object>>[] includes)
 		{
 			var expr = this.Convert(includes);
 			var result = await this.UnitOfWork.AllMatchingAsync<Order>(o => o.CustomerId == customerId,cache, expr);

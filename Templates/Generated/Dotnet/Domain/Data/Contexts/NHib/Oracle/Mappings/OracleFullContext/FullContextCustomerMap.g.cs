@@ -91,7 +91,6 @@ namespace DotNetScaffolder.Domain.Data.Contexts.NHib.Oracle.Mappings.OracleFullC
 			
 			References(o => o.Country).Column("CountryId").Unique().Not.Insert().Not.Update();
 			HasMany(s => s.BankAccount).KeyColumn("CustomerId");
-			HasMany(s => s.Order).KeyColumn("CustomerId");
 			
 			#endregion			
 

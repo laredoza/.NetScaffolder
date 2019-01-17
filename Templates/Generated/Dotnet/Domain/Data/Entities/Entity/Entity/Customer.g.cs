@@ -31,7 +31,6 @@ namespace DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity
 		public Customer()
 		{
 			this.BankAccount = new List <BankAccount>();
-			this.Order = new List <Order>();
 		}
 		
 		public Customer(ICustomer item, bool deep = false)
@@ -52,7 +51,6 @@ namespace DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity
 			this.Photo = item.Photo;
 			this.IsEnabled = item.IsEnabled;
 			this.BankAccount = new List <BankAccount>();
-			this.Order = new List <Order>();
 
 			if(deep)
 			{
@@ -61,13 +59,6 @@ namespace DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity
 					foreach(var childItem in item.BankAccount)
 					{
 						this.BankAccount.Add(new BankAccount(childItem, deep));
-					}
-				}
-				if(item.Order != null)
-				{
-					foreach(var childItem in item.Order)
-					{
-						this.Order.Add(new Order(childItem, deep));
 					}
 				}
 				if(item.Country != null)
@@ -118,30 +109,6 @@ namespace DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity
 					else
 					{
 						this.BankAccount = null;
-					}
-				}
-			}			
-		}
-        
-        public virtual IList<Order> Order { get; set; }
-	
-        IList<IOrder> ICustomer.Order 
-		{ 
-			get
-			{
-				return this.Order == null ? null : this.Order as IList<IOrder>;
-			}
-			set
-			{
-				if(value != this.Order)
-				{
-					if(value != null)
-					{
-						this.Order = (IList<Order>)value;
-					}
-					else
-					{
-						this.Order = null;
 					}
 				}
 			}			

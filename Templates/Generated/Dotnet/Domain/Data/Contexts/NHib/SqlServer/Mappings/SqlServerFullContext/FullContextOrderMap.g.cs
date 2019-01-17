@@ -52,7 +52,7 @@ namespace DotNetScaffolder.Domain.Data.Contexts.NHib.SqlServer.Mappings.SqlServe
 			
 			Map(t => t.CustomerId).Column("CustomerId")
 			.Index("IX_CustomerId")
-			.Nullable();
+			.Not.Nullable();
 			Map(t => t.OrderDate).Column("OrderDate")
 			.Nullable();
 			Map(t => t.DeliveryDate).Column("DeliveryDate")
@@ -74,8 +74,6 @@ namespace DotNetScaffolder.Domain.Data.Contexts.NHib.SqlServer.Mappings.SqlServe
 			
 			#region Relationships
 			
-			References(o => o.Customer).Column("CustomerId").Unique().Not.Insert().Not.Update();
-			HasMany(s => s.OrderDetails).KeyColumn("OrderId");
 			
 			#endregion			
 

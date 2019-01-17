@@ -77,7 +77,6 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.Postgres.Mappings.Postgre
 			
 			builder.HasOne<Country>(s => s.Country).WithMany(s => s.Customer).HasForeignKey(s => s.CountryId).OnDelete(DeleteBehavior.Restrict);
 			builder.HasMany<BankAccount>(s => s.BankAccount).WithOne(s => s.Customer).HasForeignKey(s => s.CustomerId).OnDelete(DeleteBehavior.Restrict);
-			builder.HasMany<Order>(s => s.Order).WithOne(s => s.Customer).HasForeignKey(s => s.CustomerId).OnDelete(DeleteBehavior.Restrict);
 			
 			#endregion	
 

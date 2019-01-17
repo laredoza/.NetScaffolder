@@ -44,7 +44,7 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.SqlServer.Mappings.SqlSer
 			#region Constraints
 			
 			builder.Property(t => t.OrderId).HasColumnName("OrderId").IsRequired();
-			builder.Property(t => t.CustomerId).HasColumnName("CustomerId").IsRequired(false);
+			builder.Property(t => t.CustomerId).HasColumnName("CustomerId").IsRequired();
 			builder.Property(t => t.OrderDate).HasColumnName("OrderDate").IsRequired(false);
 			builder.Property(t => t.DeliveryDate).HasColumnName("DeliveryDate").IsRequired(false);
 			builder.Property(t => t.ShippingName).HasMaxLength(50);
@@ -65,8 +65,6 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.SqlServer.Mappings.SqlSer
 			
 			#region Relationships
 			
-			builder.HasOne<Customer>(s => s.Customer).WithMany(s => s.Order).HasForeignKey(s => s.CustomerId).OnDelete(DeleteBehavior.Restrict);
-			builder.HasMany<OrderDetails>(s => s.OrderDetails).WithOne(s => s.Order).HasForeignKey(s => s.OrderId).OnDelete(DeleteBehavior.Restrict);
 			
 			#endregion	
 

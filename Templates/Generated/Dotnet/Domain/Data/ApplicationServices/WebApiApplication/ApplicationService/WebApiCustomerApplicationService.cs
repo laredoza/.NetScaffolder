@@ -352,7 +352,7 @@ namespace DotNetScaffolder.Domain.Data.ApplicationServices.WebApiApplicationServ
         {
             bool result = false;
 
-            var apiUrl = $"{this.apiSettings.BasePath}/product/CustomerDelete/{entity.CustomerId}/true";
+            var apiUrl = $"{this.apiSettings.BasePath}/product/CustomerDeleteBycustomerId/{entity.CustomerId}/true";
 
             var client = new HttpClient();
             var content = new StringContent(JsonConvert.SerializeObject(entity), Encoding.UTF8, "application/json");

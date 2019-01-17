@@ -45,14 +45,6 @@ namespace DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity
 
 			if(deep)
 			{
-				if(item.Order != null)
-                {
-                    this.Order = new Order(item.Order, deep);
-                }
-				if(item.Product != null)
-                {
-                    this.Product = new Product(item.Product, deep);
-                }
 			}
 		}
 		
@@ -67,56 +59,6 @@ namespace DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity
 		public virtual Nullable<short> Amount { get; set; }
 		public virtual Nullable<float> Discount { get; set; }
 
-		#endregion
-
-		#region Parent Relationships
-
-        public virtual Order Order { get; set; }
-		IOrder IOrderDetails.Order 
-		{ 
-			get
-			{
-				return this.Order;
-			}
-			set
-			{
-				if(value != this.Order)
-				{
-					if(value != null)
-					{
-						this.Order = (Order)value;
-					}
-					else
-					{
-						this.Order = null;
-					}
-				}
-			}
-		}
-
-        public virtual Product Product { get; set; }
-		IProduct IOrderDetails.Product 
-		{ 
-			get
-			{
-				return this.Product;
-			}
-			set
-			{
-				if(value != this.Product)
-				{
-					if(value != null)
-					{
-						this.Product = (Product)value;
-					}
-					else
-					{
-						this.Product = null;
-					}
-				}
-			}
-		}
-		
 		#endregion
 	}
 }

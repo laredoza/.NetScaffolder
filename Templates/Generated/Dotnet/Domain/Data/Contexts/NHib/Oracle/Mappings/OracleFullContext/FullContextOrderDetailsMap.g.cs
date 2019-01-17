@@ -67,8 +67,6 @@ namespace DotNetScaffolder.Domain.Data.Contexts.NHib.Oracle.Mappings.OracleFullC
 			
 			#region Relationships
 			
-			References(o => o.Order).Column("OrderId").Unique().Not.Insert().Not.Update();
-			References(o => o.Product).Column("ProductId").Unique().Not.Insert().Not.Update();
 			
 			#endregion			
 

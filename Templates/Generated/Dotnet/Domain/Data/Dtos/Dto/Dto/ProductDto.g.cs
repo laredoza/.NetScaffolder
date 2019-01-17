@@ -32,7 +32,6 @@ namespace DotNetScaffolder.Domain.Data.Dtos.DefaultDto.Dto
 		
 		public ProductDto()
 		{
-			this.OrderDetails = new List <IOrderDetails>();
 		}
 		
 		public ProductDto(IProduct item, bool deep = false)
@@ -43,17 +42,9 @@ namespace DotNetScaffolder.Domain.Data.Dtos.DefaultDto.Dto
 			this.ProductDescription = item.ProductDescription;
 			this.UnitPrice = item.UnitPrice;
 			this.AmountInStock = item.AmountInStock;
-			this.OrderDetails = new List <IOrderDetails>();
 
 			if(deep)
 			{
-				if(item.OrderDetails != null)
-				{
-					foreach(var childItem in item.OrderDetails)
-					{
-						this.OrderDetails.Add(new OrderDetailsDto(childItem, deep));
-					}
-				}
 				this.Book = new BookDto(item.Book, deep);
 				this.Software = new SoftwareDto(item.Software, deep);
 			}
@@ -72,8 +63,6 @@ namespace DotNetScaffolder.Domain.Data.Dtos.DefaultDto.Dto
 		
 		#region Child Relationships
 		
-        // [JsonConverter(typeof(ConcreteTypeConverter<OrderDetailsDto>))]
-		public IList<IOrderDetails> OrderDetails { get; set; }
         // [JsonConverter(typeof(ConcreteTypeConverter<BookDto>))]
 		public IBook Book { get; set; }
         // [JsonConverter(typeof(ConcreteTypeConverter<SoftwareDto>))]

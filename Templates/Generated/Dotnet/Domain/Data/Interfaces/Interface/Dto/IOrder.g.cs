@@ -28,7 +28,7 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.Dto
 		#region Fields
 		
 		int OrderId { get; set; }
-		Nullable<int> CustomerId { get; set; }
+		int CustomerId { get; set; }
 		Nullable<DateTime> OrderDate { get; set; }
 		Nullable<DateTime> DeliveryDate { get; set; }
 		string ShippingName { get; set; }
@@ -40,13 +40,11 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.Dto
 		
 		#region Child Relationships
 		
-		IList<IOrderDetails> OrderDetails { get; set; }
 
 		#endregion
 		
 		#region Parent Relationships
 		
-		ICustomer Customer { get; set; }
 		
 		#endregion
 	}

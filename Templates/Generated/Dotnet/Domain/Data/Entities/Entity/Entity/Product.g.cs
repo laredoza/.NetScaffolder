@@ -30,7 +30,6 @@ namespace DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity
 		
 		public Product()
 		{
-			this.OrderDetails = new List <OrderDetails>();
 		}
 		
 		public Product(IProduct item, bool deep = false)
@@ -41,17 +40,9 @@ namespace DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity
 			this.ProductDescription = item.ProductDescription;
 			this.UnitPrice = item.UnitPrice;
 			this.AmountInStock = item.AmountInStock;
-			this.OrderDetails = new List <OrderDetails>();
 
 			if(deep)
 			{
-				if(item.OrderDetails != null)
-				{
-					foreach(var childItem in item.OrderDetails)
-					{
-						this.OrderDetails.Add(new OrderDetails(childItem, deep));
-					}
-				}
 				this.Book = new Book(item.Book, deep);
 				this.Software = new Software(item.Software, deep);
 			}
@@ -69,30 +60,6 @@ namespace DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity
 		#endregion
 
 		#region Child Relationships
-        
-        public virtual IList<OrderDetails> OrderDetails { get; set; }
-	
-        IList<IOrderDetails> IProduct.OrderDetails 
-		{ 
-			get
-			{
-				return this.OrderDetails == null ? null : this.OrderDetails as IList<IOrderDetails>;
-			}
-			set
-			{
-				if(value != this.OrderDetails)
-				{
-					if(value != null)
-					{
-						this.OrderDetails = (IList<OrderDetails>)value;
-					}
-					else
-					{
-						this.OrderDetails = null;
-					}
-				}
-			}			
-		}
         
         public virtual Book Book { get; set; }
 		IBook IProduct.Book 

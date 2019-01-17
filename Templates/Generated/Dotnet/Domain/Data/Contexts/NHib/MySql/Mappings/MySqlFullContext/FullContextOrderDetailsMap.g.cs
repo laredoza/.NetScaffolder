@@ -67,8 +67,6 @@ namespace DotNetScaffolder.Domain.Data.Contexts.NHib.MySql.Mappings.MySqlFullCon
 			
 			#region Relationships
 			
-			References(o => o.Order).Column("OrderId").Unique().Not.Insert().Not.Update();
-			References(o => o.Product).Column("ProductId").Unique().Not.Insert().Not.Update();
 			
 			#endregion			
 

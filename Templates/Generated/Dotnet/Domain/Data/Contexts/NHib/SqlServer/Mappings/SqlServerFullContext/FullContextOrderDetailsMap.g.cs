@@ -68,8 +68,6 @@ namespace DotNetScaffolder.Domain.Data.Contexts.NHib.SqlServer.Mappings.SqlServe
 			
 			#region Relationships
 			
-			References(o => o.Order).Column("OrderId").Unique().Not.Insert().Not.Update();
-			References(o => o.Product).Column("ProductId").Unique().Not.Insert().Not.Update();
 			
 			#endregion			
 

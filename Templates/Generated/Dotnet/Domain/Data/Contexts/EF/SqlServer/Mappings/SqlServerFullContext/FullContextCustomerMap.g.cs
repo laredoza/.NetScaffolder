@@ -82,7 +82,6 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EF.SqlServer.Mappings.SqlServerF
 			
 			HasOptional<Country>(s => s.Country).WithMany(s => s.Customer).HasForeignKey(s => s.CountryId).WillCascadeOnDelete(false);
 			HasMany<BankAccount>(s => s.BankAccount).WithOptional(s => s.Customer).HasForeignKey(s => s.CustomerId).WillCascadeOnDelete(false);
-			HasMany<Order>(s => s.Order).WithOptional(s => s.Customer).HasForeignKey(s => s.CustomerId).WillCascadeOnDelete(false);
 			
 			#endregion			
 

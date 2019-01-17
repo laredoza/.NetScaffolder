@@ -56,20 +56,20 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <summary>
         /// Load Order entities from the database using the CustomerId field
         /// </summary>
-        /// <param name="customerId">Nullable<int></param
+        /// <param name="customerId">int</param
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<IOrder, object>>[]</param>
         /// <returns>IList<Order></returns>
-		IList<Order> LoadByCustomerId(Nullable<int> customerId, bool cache,  params Expression<Func<IOrder, object>>[] includes);
+		IList<Order> LoadByCustomerId(int customerId, bool cache,  params Expression<Func<IOrder, object>>[] includes);
 		
         /// <summary>
         /// Load Order entities async from the database using the CustomerId field
         /// </summary>
-        /// <param name="customerId">Nullable<int></param
+        /// <param name="customerId">int</param
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<IOrder, object>>[]</param>
         /// <returns>IList<Order></returns>
-		Task<IList<Order>> LoadByCustomerIdAsync(Nullable<int> customerId, bool cache, params Expression<Func<IOrder, object>>[] includes);
+		Task<IList<Order>> LoadByCustomerIdAsync(int customerId, bool cache, params Expression<Func<IOrder, object>>[] includes);
 
         /// <summary>
         /// Load Order entities from the database using the OrderDate field

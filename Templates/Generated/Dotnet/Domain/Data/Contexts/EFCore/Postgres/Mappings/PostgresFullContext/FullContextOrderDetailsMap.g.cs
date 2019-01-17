@@ -60,8 +60,6 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.Postgres.Mappings.Postgre
 			
 			#region Relationships
 			
-			builder.HasOne<Order>(s => s.Order).WithMany(s => s.OrderDetails).HasForeignKey(s => s.OrderId).OnDelete(DeleteBehavior.Restrict);
-			builder.HasOne<Product>(s => s.Product).WithMany(s => s.OrderDetails).HasForeignKey(s => s.ProductId).OnDelete(DeleteBehavior.Restrict);
 			
 			#endregion	
 

@@ -30,7 +30,6 @@ namespace DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity
 		
 		public Order()
 		{
-			this.OrderDetails = new List <OrderDetails>();
 		}
 		
 		public Order(IOrder item, bool deep = false)
@@ -45,21 +44,9 @@ namespace DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity
 			this.ShippingAddress = item.ShippingAddress;
 			this.ShippingCity = item.ShippingCity;
 			this.ShippingZip = item.ShippingZip;
-			this.OrderDetails = new List <OrderDetails>();
 
 			if(deep)
 			{
-				if(item.OrderDetails != null)
-				{
-					foreach(var childItem in item.OrderDetails)
-					{
-						this.OrderDetails.Add(new OrderDetails(childItem, deep));
-					}
-				}
-				if(item.Customer != null)
-                {
-                    this.Customer = new Customer(item.Customer, deep);
-                }
 			}
 		}
 		
@@ -68,7 +55,7 @@ namespace DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity
 		#region Fields
 		
 		public virtual int OrderId { get; set; }
-		public virtual Nullable<int> CustomerId { get; set; }
+		public virtual int CustomerId { get; set; }
 		public virtual Nullable<DateTime> OrderDate { get; set; }
 		public virtual Nullable<DateTime> DeliveryDate { get; set; }
 		public virtual string ShippingName { get; set; }
@@ -76,61 +63,6 @@ namespace DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity
 		public virtual string ShippingCity { get; set; }
 		public virtual string ShippingZip { get; set; }
 
-		#endregion
-
-		#region Child Relationships
-        
-        public virtual IList<OrderDetails> OrderDetails { get; set; }
-	
-        IList<IOrderDetails> IOrder.OrderDetails 
-		{ 
-			get
-			{
-				return this.OrderDetails == null ? null : this.OrderDetails as IList<IOrderDetails>;
-			}
-			set
-			{
-				if(value != this.OrderDetails)
-				{
-					if(value != null)
-					{
-						this.OrderDetails = (IList<OrderDetails>)value;
-					}
-					else
-					{
-						this.OrderDetails = null;
-					}
-				}
-			}			
-		}
-
-		#endregion
-
-		#region Parent Relationships
-
-        public virtual Customer Customer { get; set; }
-		ICustomer IOrder.Customer 
-		{ 
-			get
-			{
-				return this.Customer;
-			}
-			set
-			{
-				if(value != this.Customer)
-				{
-					if(value != null)
-					{
-						this.Customer = (Customer)value;
-					}
-					else
-					{
-						this.Customer = null;
-					}
-				}
-			}
-		}
-		
 		#endregion
 	}
 }

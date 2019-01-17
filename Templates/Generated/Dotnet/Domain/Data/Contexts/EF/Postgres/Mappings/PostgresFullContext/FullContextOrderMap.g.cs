@@ -49,7 +49,7 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EF.Postgres.Mappings.PostgresFul
 			#region Constraints
 			
 			Property(t => t.OrderId).IsRequired();
-			Property(t => t.CustomerId).IsOptional();
+			Property(t => t.CustomerId).IsRequired();
 			Property(t => t.OrderDate).IsOptional();
 			Property(t => t.DeliveryDate).IsOptional();
 			Property(t => t.ShippingName).HasMaxLength(50);
@@ -70,8 +70,6 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EF.Postgres.Mappings.PostgresFul
 
 			#region Relationships
 			
-			HasOptional<Customer>(s => s.Customer).WithMany(s => s.Order).HasForeignKey(s => s.CustomerId).WillCascadeOnDelete(false);
-			HasMany<OrderDetails>(s => s.OrderDetails).WithRequired(s => s.Order).HasForeignKey(s => s.OrderId).WillCascadeOnDelete(false);
 			
 			#endregion			
 

@@ -63,7 +63,6 @@ namespace DotNetScaffolder.Domain.Data.Contexts.NHib.MySql.Mappings.MySqlFullCon
 			#region Relationships
 			
 			HasOne(s => s.Book).PropertyRef(o => o.Product);
-			HasMany(s => s.OrderDetails).KeyColumn("ProductId");
 			HasOne(s => s.Software).PropertyRef(o => o.Product);
 			
 			#endregion			

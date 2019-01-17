@@ -36,7 +36,6 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.Dto
 		
 		#region Child Relationships
 		
-		IList<IOrderDetails> OrderDetails { get; set; }
 		IBook Book { get; set; }
 		ISoftware Software { get; set; }
 

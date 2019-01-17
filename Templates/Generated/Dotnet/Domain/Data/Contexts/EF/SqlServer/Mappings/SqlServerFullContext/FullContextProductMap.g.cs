@@ -63,7 +63,6 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EF.SqlServer.Mappings.SqlServerF
 			#region Relationships
 			
 			HasOptional<Book>(s => s.Book).WithRequired(s => s.Product).WillCascadeOnDelete(false);
-			HasMany<OrderDetails>(s => s.OrderDetails).WithRequired(s => s.Product).HasForeignKey(s => s.ProductId).WillCascadeOnDelete(false);
 			HasOptional<Software>(s => s.Software).WithRequired(s => s.Product).WillCascadeOnDelete(false);
 			
 			#endregion			

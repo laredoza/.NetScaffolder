@@ -33,7 +33,6 @@ namespace DotNetScaffolder.Domain.Data.Dtos.DefaultDto.Dto
 		public CustomerDto()
 		{
 			this.BankAccount = new List <IBankAccount>();
-			this.Order = new List <IOrder>();
 		}
 		
 		public CustomerDto(ICustomer item, bool deep = false)
@@ -54,7 +53,6 @@ namespace DotNetScaffolder.Domain.Data.Dtos.DefaultDto.Dto
 			this.Photo = item.Photo;
 			this.IsEnabled = item.IsEnabled;
 			this.BankAccount = new List <IBankAccount>();
-			this.Order = new List <IOrder>();
 
 			if(deep)
 			{
@@ -63,13 +61,6 @@ namespace DotNetScaffolder.Domain.Data.Dtos.DefaultDto.Dto
 					foreach(var childItem in item.BankAccount)
 					{
 						this.BankAccount.Add(new BankAccountDto(childItem, deep));
-					}
-				}
-				if(item.Order != null)
-				{
-					foreach(var childItem in item.Order)
-					{
-						this.Order.Add(new OrderDto(childItem, deep));
 					}
 				}
                 if(item.Country != null)
@@ -103,8 +94,6 @@ namespace DotNetScaffolder.Domain.Data.Dtos.DefaultDto.Dto
 		
         // [JsonConverter(typeof(ConcreteTypeConverter<BankAccountDto>))]
 		public IList<IBankAccount> BankAccount { get; set; }
-        // [JsonConverter(typeof(ConcreteTypeConverter<OrderDto>))]
-		public IList<IOrder> Order { get; set; }
 
 		#endregion
 		

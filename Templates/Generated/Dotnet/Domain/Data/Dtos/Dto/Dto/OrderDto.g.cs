@@ -32,7 +32,6 @@ namespace DotNetScaffolder.Domain.Data.Dtos.DefaultDto.Dto
 		
 		public OrderDto()
 		{
-			this.OrderDetails = new List <IOrderDetails>();
 		}
 		
 		public OrderDto(IOrder item, bool deep = false)
@@ -47,21 +46,9 @@ namespace DotNetScaffolder.Domain.Data.Dtos.DefaultDto.Dto
 			this.ShippingAddress = item.ShippingAddress;
 			this.ShippingCity = item.ShippingCity;
 			this.ShippingZip = item.ShippingZip;
-			this.OrderDetails = new List <IOrderDetails>();
 
 			if(deep)
 			{
-				if(item.OrderDetails != null)
-				{
-					foreach(var childItem in item.OrderDetails)
-					{
-						this.OrderDetails.Add(new OrderDetailsDto(childItem, deep));
-					}
-				}
-                if(item.Customer != null)
-                {
-				    this.Customer = new CustomerDto(item.Customer, deep);
-                }
 			}
 		}
 		
@@ -70,7 +57,7 @@ namespace DotNetScaffolder.Domain.Data.Dtos.DefaultDto.Dto
 		#region Fields
 		
 		public int OrderId { get; set; }
-		public Nullable<int> CustomerId { get; set; }
+		public int CustomerId { get; set; }
 		public Nullable<DateTime> OrderDate { get; set; }
 		public Nullable<DateTime> DeliveryDate { get; set; }
 		public string ShippingName { get; set; }
@@ -82,15 +69,11 @@ namespace DotNetScaffolder.Domain.Data.Dtos.DefaultDto.Dto
 		
 		#region Child Relationships
 		
-        // [JsonConverter(typeof(ConcreteTypeConverter<OrderDetailsDto>))]
-		public IList<IOrderDetails> OrderDetails { get; set; }
 
 		#endregion
 		
 		#region Parent Relationships
 		
-        [JsonConverter(typeof(ConcreteTypeConverter<CustomerDto>))]
-		public ICustomer Customer { get; set; }
 		
 		#endregion
 	}

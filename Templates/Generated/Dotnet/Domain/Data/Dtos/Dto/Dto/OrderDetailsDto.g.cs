@@ -47,14 +47,6 @@ namespace DotNetScaffolder.Domain.Data.Dtos.DefaultDto.Dto
 
 			if(deep)
 			{
-                if(item.Order != null)
-                {
-				    this.Order = new OrderDto(item.Order, deep);
-                }
-                if(item.Product != null)
-                {
-				    this.Product = new ProductDto(item.Product, deep);
-                }
 			}
 		}
 		
@@ -78,10 +70,6 @@ namespace DotNetScaffolder.Domain.Data.Dtos.DefaultDto.Dto
 		
 		#region Parent Relationships
 		
-        [JsonConverter(typeof(ConcreteTypeConverter<OrderDto>))]
-		public IOrder Order { get; set; }
-        [JsonConverter(typeof(ConcreteTypeConverter<ProductDto>))]
-		public IProduct Product { get; set; }
 		
 		#endregion
 	}
