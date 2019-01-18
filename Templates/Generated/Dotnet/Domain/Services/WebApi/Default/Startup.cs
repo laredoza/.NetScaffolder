@@ -63,7 +63,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default
             app.UseHttpsRedirection();
             //app.UseAuthentication();
 
-            app.UseMvc(routes => { routes.MapRoute("DefaultApi", "api/{controller}/{id?}"); });
+            app.UseMvc(routes => { routes.MapRoute("DefaultApi", "api/controller/action"); });
 
 
         }
@@ -75,8 +75,12 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default
                 setup =>
                     {
                         setup.Filters.AddService<UnitOfWorkFilter>(1);
-                    } 
+                    }
                 ).AddJsonFormatters();
+
+            //services.AddMvc(
+            //    setup => { setup.Filters.AddService<UnitOfWorkFilter>(1); }
+            //);
             //services.AddMvc();
 
             //services
