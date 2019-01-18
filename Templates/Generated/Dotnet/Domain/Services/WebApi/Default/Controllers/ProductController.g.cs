@@ -2385,11 +2385,12 @@ namespace DotNetScaffolder.Domain.Services.WebApi.Default.Controllers
         /// </summary>
         /// <param name="customerId">int</param>
         /// <returns>bool</returns>
-        [HttpDelete("{customerId}/{cache}")]
-        [Route("~/api/Product/CustomerDeleteBycustomerId")]
-		public bool CustomerDelete( int customerId, bool cache)
+        // [HttpGet("{customerId}/{cache}")]
+        [HttpGet("{customerId}")]
+        [Route("~/api/Product/CustomerDeleteId")]
+		public bool CustomerDelete(int customerId)
         {
-            return this.ProductApplicationService.CustomerDelete( customerId, cache);
+            return this.ProductApplicationService.CustomerDelete(customerId, true);
         }
 
         /// <summary>
