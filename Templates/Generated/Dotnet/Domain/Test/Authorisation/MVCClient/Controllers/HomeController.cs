@@ -59,80 +59,80 @@ namespace MVCClient.Controllers
             //    ViewData["json"] = "Error: " + response.StatusCode;
             //}
 
-            WebApiCustomerApplicationService applicationService = new WebApiCustomerApplicationService(new WebApiSettings{ BasePath = "http://localhost:5001/api", Bearer = await this.HttpContext.GetTokenAsync("access_token") });
+            //WebApiCustomerApplicationService applicationService = new WebApiCustomerApplicationService(new WebApiSettings{ BasePath = "http://localhost:5001/api", Bearer = await this.HttpContext.GetTokenAsync("access_token") });
 
-            var resultCustomerLoadAllAsync = await applicationService.CustomerLoadAllAsync(true);
-            var resultCustomerLoadAll = applicationService.CustomerLoadAll(true);
-            var resultLoadByCustomerCustomerId = applicationService.LoadByCustomerCustomerId(1, true);
-            var resultLoadByCustomerCustomerIdAsync = await applicationService.LoadByCustomerCustomerIdAsync(1, true);
+            //var resultCustomerLoadAllAsync = await applicationService.CustomerLoadAllAsync(true);
+            //var resultCustomerLoadAll = applicationService.CustomerLoadAll(true);
+            //var resultLoadByCustomerCustomerId = applicationService.LoadByCustomerCustomerId(1, true);
+            //var resultLoadByCustomerCustomerIdAsync = await applicationService.LoadByCustomerCustomerIdAsync(1, true);
 
-            var resultCustomerSearchByCustomerCodeAsync = await applicationService.CustomerSearchByCustomerCodeAsync("001", false, true);
-            var resultCustomerSearchByCustomerCode = applicationService.CustomerSearchByCustomerCode("001", false, true);
+            //var resultCustomerSearchByCustomerCodeAsync = await applicationService.CustomerSearchByCustomerCodeAsync("001", false, true);
+            //var resultCustomerSearchByCustomerCode = applicationService.CustomerSearchByCustomerCode("001", false, true);
 
-            var customer1 = new CustomerDto
-            {
-                CustomerId = 9,
-                Address = "My Address",
-                City = "Pretoria",
-                CompanyName = "My Company 1",
-                ContactName = "Context 1",
-                ContactTitle = "Title",
-                CustomerCode = "009"
-            };
+            //var customer1 = new CustomerDto
+            //{
+            //    CustomerId = 9,
+            //    Address = "My Address",
+            //    City = "Pretoria",
+            //    CompanyName = "My Company 1",
+            //    ContactName = "Context 1",
+            //    ContactTitle = "Title",
+            //    CustomerCode = "009"
+            //};
 
-            var customer2 = new CustomerDto
-            {
-                CustomerId = 10,
-                Address = "My Address",
-                City = "Pretoria",
-                CompanyName = "My Company 2",
-                ContactName = "Context 1",
-                ContactTitle = "Title 2",
-                CustomerCode = "010"
-            };
+            //var customer2 = new CustomerDto
+            //{
+            //    CustomerId = 10,
+            //    Address = "My Address",
+            //    City = "Pretoria",
+            //    CompanyName = "My Company 2",
+            //    ContactName = "Context 1",
+            //    ContactTitle = "Title 2",
+            //    CustomerCode = "010"
+            //};
 
-            IEnumerable<CustomerDto> customers = new List<CustomerDto>{customer1, customer2};
+            //IEnumerable<CustomerDto> customers = new List<CustomerDto>{customer1, customer2};
 
-            applicationService.CustomerAdd(customer1);
-            await applicationService.CustomerAddAsync(customer2);
+            //applicationService.CustomerAdd(customer1);
+            //await applicationService.CustomerAddAsync(customer2);
 
-            customer1.Address = "Changed Address";
-            customer2.Address = "Changed Address";
+            //customer1.Address = "Changed Address";
+            //customer2.Address = "Changed Address";
 
-            applicationService.CustomerUpdate(customer1);
-            await applicationService.CustomerUpdateAsync(customer2);
+            //applicationService.CustomerUpdate(customer1);
+            //await applicationService.CustomerUpdateAsync(customer2);
 
-            applicationService.CustomerDelete(customer1);
-            await applicationService.CustomerDeleteAsync(customer2);
+            //applicationService.CustomerDelete(customer1);
+            //await applicationService.CustomerDeleteAsync(customer2);
 
-            //applicationService.CustomerDelete(customer1.CustomerId, true);
-            //await applicationService.CustomerDeleteAsync(customer2.CustomerId, true);
+            ////applicationService.CustomerDelete(customer1.CustomerId, true);
+            ////await applicationService.CustomerDeleteAsync(customer2.CustomerId, true);
 
-            // Bulk Testing
+            //// Bulk Testing
 
-            customer1.Address = "My Address";
-            customer2.Address = "My Address";
+            //customer1.Address = "My Address";
+            //customer2.Address = "My Address";
 
-            applicationService.CustomerBulkInsert(customers);
+            //applicationService.CustomerBulkInsert(customers);
 
-            customer1.Address = "Changed Address";
-            customer2.Address = "Changed Address";
+            //customer1.Address = "Changed Address";
+            //customer2.Address = "Changed Address";
 
-            applicationService.CustomerBulkUpdate(customers);
-            applicationService.CustomerBulkDelete(customers);
+            //applicationService.CustomerBulkUpdate(customers);
+            //applicationService.CustomerBulkDelete(customers);
 
-            // Bulk Testing Async
+            //// Bulk Testing Async
 
-            customer1.Address = "My Address";
-            customer2.Address = "My Address";
+            //customer1.Address = "My Address";
+            //customer2.Address = "My Address";
 
-            await applicationService.CustomerBulkInsertAsync(customers);
+            //await applicationService.CustomerBulkInsertAsync(customers);
 
-            customer1.Address = "Changed Address";
-            customer2.Address = "Changed Address";
+            //customer1.Address = "Changed Address";
+            //customer2.Address = "Changed Address";
 
-            await applicationService.CustomerBulkUpdateAsync(customers);
-            await applicationService.CustomerBulkDeleteAsync(customers);
+            //await applicationService.CustomerBulkUpdateAsync(customers);
+            //await applicationService.CustomerBulkDeleteAsync(customers);
 
             //ViewData["json"] = JsonConvert.SerializeObject(resultCustomerLoadAllAsync);
             ViewData["json"] = JsonConvert.SerializeObject(true);

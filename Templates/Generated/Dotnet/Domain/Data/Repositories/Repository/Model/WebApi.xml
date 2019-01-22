@@ -37,10 +37,10 @@
               <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
               <RelationShips>
                 <RelationShip ColumnName="CustomerId" RelationShip="ForeignKey" ReferencedColumnName="CustomerId" Render="true" SchemaName="dbo" ReferencedTableName="Customer" Multiplicity="Many" ReferencedMultiplicity="ZeroToOne" UserRelationship="false">
-                  <RelationshipName>FK2D9B8F03BA724162</RelationshipName>
+                  <RelationshipName>FK_BankAccount_Customer_CustomerId</RelationshipName>
                 </RelationShip>
                 <RelationShip ColumnName="BankAccountId" RelationShip="ForeignKeyChild" ReferencedColumnName="ToBankAccountId" Render="true" SchemaName="dbo" ReferencedTableName="BankTransfers" Multiplicity="One" ReferencedMultiplicity="Many" UserRelationship="false">
-                  <RelationshipName>FKE4EEFC1145FD5999</RelationshipName>
+                  <RelationshipName>FK_BankTransfers_BankAccount_ToBankAccountId</RelationshipName>
                 </RelationShip>
               </RelationShips>
               <Indexes>
@@ -55,7 +55,7 @@
                 <Index>
                   <IndexType>PrimaryKey</IndexType>
                   <IsUnique>true</IsUnique>
-                  <Name>PK__BankAcco__4FC8E4A1393E67B4</Name>
+                  <Name>PK_BankAccount</Name>
                   <Columns>
                     <string>BankAccountId</string>
                   </Columns>
@@ -91,7 +91,7 @@
               <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
               <RelationShips>
                 <RelationShip ColumnName="ToBankAccountId" RelationShip="ForeignKey" ReferencedColumnName="BankAccountId" Render="true" SchemaName="dbo" ReferencedTableName="BankAccount" Multiplicity="Many" ReferencedMultiplicity="One" UserRelationship="false">
-                  <RelationshipName>FKE4EEFC1145FD5999</RelationshipName>
+                  <RelationshipName>FK_BankTransfers_BankAccount_ToBankAccountId</RelationshipName>
                 </RelationShip>
               </RelationShips>
               <Indexes>
@@ -106,7 +106,7 @@
                 <Index>
                   <IndexType>PrimaryKey</IndexType>
                   <IsUnique>true</IsUnique>
-                  <Name>PK__BankTran__2E82727BCEA96D52</Name>
+                  <Name>PK_BankTransfers</Name>
                   <Columns>
                     <string>BankTransferId</string>
                   </Columns>
@@ -133,7 +133,7 @@
               <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
               <RelationShips>
                 <RelationShip ColumnName="ProductId" RelationShip="ForeignKey" ReferencedColumnName="ProductId" Render="true" SchemaName="dbo" ReferencedTableName="Product" Multiplicity="ZeroToOne" ReferencedMultiplicity="One" UserRelationship="false">
-                  <RelationshipName>FK_Book_Product</RelationshipName>
+                  <RelationshipName>FK_Book_Product_ProductId</RelationshipName>
                 </RelationShip>
               </RelationShips>
               <Indexes>
@@ -148,7 +148,7 @@
                 <Index>
                   <IndexType>PrimaryKey</IndexType>
                   <IsUnique>true</IsUnique>
-                  <Name>PK__Book__B40CC6CD94AA1652</Name>
+                  <Name>PK_Book</Name>
                   <Columns>
                     <string>ProductId</string>
                   </Columns>
@@ -167,14 +167,14 @@
               <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
               <RelationShips>
                 <RelationShip ColumnName="CountryId" RelationShip="ForeignKeyChild" ReferencedColumnName="CountryId" Render="true" SchemaName="dbo" ReferencedTableName="Customer" Multiplicity="ZeroToOne" ReferencedMultiplicity="Many" UserRelationship="false">
-                  <RelationshipName>FKFE9A39C0B3D9410C</RelationshipName>
+                  <RelationshipName>FK_Customer_Country_CountryId</RelationshipName>
                 </RelationShip>
               </RelationShips>
               <Indexes>
                 <Index>
                   <IndexType>PrimaryKey</IndexType>
                   <IsUnique>true</IsUnique>
-                  <Name>PK__Country__10D1609FB3585177</Name>
+                  <Name>PK_Country</Name>
                   <Columns>
                     <string>CountryId</string>
                   </Columns>
@@ -234,13 +234,10 @@
               <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
               <RelationShips>
                 <RelationShip ColumnName="CountryId" RelationShip="ForeignKey" ReferencedColumnName="CountryId" Render="true" SchemaName="dbo" ReferencedTableName="Country" Multiplicity="Many" ReferencedMultiplicity="ZeroToOne" UserRelationship="false">
-                  <RelationshipName>FKFE9A39C0B3D9410C</RelationshipName>
+                  <RelationshipName>FK_Customer_Country_CountryId</RelationshipName>
                 </RelationShip>
                 <RelationShip ColumnName="CustomerId" RelationShip="ForeignKeyChild" ReferencedColumnName="CustomerId" Render="true" SchemaName="dbo" ReferencedTableName="BankAccount" Multiplicity="ZeroToOne" ReferencedMultiplicity="Many" UserRelationship="false">
-                  <RelationshipName>FK2D9B8F03BA724162</RelationshipName>
-                </RelationShip>
-                <RelationShip ColumnName="CustomerId" RelationShip="ForeignKeyChild" ReferencedColumnName="CustomerId" Render="true" SchemaName="dbo" ReferencedTableName="Order" Multiplicity="ZeroToOne" ReferencedMultiplicity="Many" UserRelationship="false">
-                  <RelationshipName>FK3117099BBA724162</RelationshipName>
+                  <RelationshipName>FK_BankAccount_Customer_CustomerId</RelationshipName>
                 </RelationShip>
               </RelationShips>
               <Indexes>
@@ -255,7 +252,7 @@
                 <Index>
                   <IndexType>PrimaryKey</IndexType>
                   <IsUnique>true</IsUnique>
-                  <Name>PK__Customer__A4AE64D85F0A74E2</Name>
+                  <Name>PK_Customer</Name>
                   <Columns>
                     <string>CustomerId</string>
                   </Columns>
@@ -275,7 +272,7 @@
                 <Column ColumnName="OrderId" ColumnOrder="1" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
                   <RemapDataType xsi:nil="true" />
                 </Column>
-                <Column ColumnName="CustomerId" ColumnOrder="2" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+                <Column ColumnName="CustomerId" ColumnOrder="2" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
                   <RemapDataType xsi:nil="true" />
                 </Column>
                 <Column ColumnName="OrderDate" ColumnOrder="3" DataType="DateTime" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="0" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
@@ -298,14 +295,7 @@
                 </Column>
               </Columns>
               <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
-              <RelationShips>
-                <RelationShip ColumnName="CustomerId" RelationShip="ForeignKey" ReferencedColumnName="CustomerId" Render="true" SchemaName="dbo" ReferencedTableName="Customer" Multiplicity="Many" ReferencedMultiplicity="ZeroToOne" UserRelationship="false">
-                  <RelationshipName>FK3117099BBA724162</RelationshipName>
-                </RelationShip>
-                <RelationShip ColumnName="OrderId" RelationShip="ForeignKeyChild" ReferencedColumnName="OrderId" Render="true" SchemaName="dbo" ReferencedTableName="OrderDetails" Multiplicity="One" ReferencedMultiplicity="Many" UserRelationship="false">
-                  <RelationshipName>FK1C793D347C34AE1</RelationshipName>
-                </RelationShip>
-              </RelationShips>
+              <RelationShips />
               <Indexes>
                 <Index>
                   <IndexType>NonClustered</IndexType>
@@ -318,7 +308,7 @@
                 <Index>
                   <IndexType>PrimaryKey</IndexType>
                   <IsUnique>true</IsUnique>
-                  <Name>PK__Order__C3905BCFD19CCCF5</Name>
+                  <Name>PK_Order</Name>
                   <Columns>
                     <string>OrderId</string>
                   </Columns>
@@ -355,14 +345,7 @@
                 </Column>
               </Columns>
               <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
-              <RelationShips>
-                <RelationShip ColumnName="OrderId" RelationShip="ForeignKey" ReferencedColumnName="OrderId" Render="true" SchemaName="dbo" ReferencedTableName="Order" Multiplicity="Many" ReferencedMultiplicity="One" UserRelationship="false">
-                  <RelationshipName>FK1C793D347C34AE1</RelationshipName>
-                </RelationShip>
-                <RelationShip ColumnName="ProductId" RelationShip="ForeignKey" ReferencedColumnName="ProductId" Render="true" SchemaName="dbo" ReferencedTableName="Product" Multiplicity="Many" ReferencedMultiplicity="One" UserRelationship="false">
-                  <RelationshipName>FK1C793D34F72CF47B</RelationshipName>
-                </RelationShip>
-              </RelationShips>
+              <RelationShips />
               <Indexes>
                 <Index>
                   <IndexType>NonClustered</IndexType>
@@ -383,7 +366,7 @@
                 <Index>
                   <IndexType>PrimaryKey</IndexType>
                   <IsUnique>true</IsUnique>
-                  <Name>PK__OrderDet__9DD74DBD12185384</Name>
+                  <Name>PK_OrderDetails</Name>
                   <Columns>
                     <string>OrderDetailsId</string>
                   </Columns>
@@ -416,20 +399,17 @@
               <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
               <RelationShips>
                 <RelationShip ColumnName="ProductId" RelationShip="ForeignKeyChild" ReferencedColumnName="ProductId" Render="true" SchemaName="dbo" ReferencedTableName="Book" Multiplicity="One" ReferencedMultiplicity="ZeroToOne" UserRelationship="false">
-                  <RelationshipName>FK_Book_Product</RelationshipName>
-                </RelationShip>
-                <RelationShip ColumnName="ProductId" RelationShip="ForeignKeyChild" ReferencedColumnName="ProductId" Render="true" SchemaName="dbo" ReferencedTableName="OrderDetails" Multiplicity="One" ReferencedMultiplicity="Many" UserRelationship="false">
-                  <RelationshipName>FK1C793D34F72CF47B</RelationshipName>
+                  <RelationshipName>FK_Book_Product_ProductId</RelationshipName>
                 </RelationShip>
                 <RelationShip ColumnName="ProductId" RelationShip="ForeignKeyChild" ReferencedColumnName="ProductId" Render="true" SchemaName="dbo" ReferencedTableName="Software" Multiplicity="One" ReferencedMultiplicity="ZeroToOne" UserRelationship="false">
-                  <RelationshipName>FK_Software_Product</RelationshipName>
+                  <RelationshipName>FK_Software_Product_ProductId</RelationshipName>
                 </RelationShip>
               </RelationShips>
               <Indexes>
                 <Index>
                   <IndexType>PrimaryKey</IndexType>
                   <IsUnique>true</IsUnique>
-                  <Name>PK__Product__B40CC6CD86CEF79C</Name>
+                  <Name>PK_Product</Name>
                   <Columns>
                     <string>ProductId</string>
                   </Columns>
@@ -456,7 +436,7 @@
               <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
               <RelationShips>
                 <RelationShip ColumnName="ProductId" RelationShip="ForeignKey" ReferencedColumnName="ProductId" Render="true" SchemaName="dbo" ReferencedTableName="Product" Multiplicity="ZeroToOne" ReferencedMultiplicity="One" UserRelationship="false">
-                  <RelationshipName>FK_Software_Product</RelationshipName>
+                  <RelationshipName>FK_Software_Product_ProductId</RelationshipName>
                 </RelationShip>
               </RelationShips>
               <Indexes>
@@ -471,7 +451,7 @@
                 <Index>
                   <IndexType>PrimaryKey</IndexType>
                   <IsUnique>true</IsUnique>
-                  <Name>PK__Software__B40CC6CD3CE35352</Name>
+                  <Name>PK_Software</Name>
                   <Columns>
                     <string>ProductId</string>
                   </Columns>
@@ -489,6 +469,7 @@
       </Models>
       <Namespace>Services.WebApi.Default.Controllers</Namespace>
       <OutputFolder>Controllers</OutputFolder>
+      <WebApiApplicationSettingsPath>..\..\ApplicationServices\WebApiApplication\DotNetScaffolder.Domain.Data.ApplicationServices.WebApiApplicationService.csproj</WebApiApplicationSettingsPath>
       <OutputPath>..\..\..\Services\WebApi\Default\DotNetScaffolder.Domain.Services.WebApi.Default.csproj</OutputPath>
       <WebApiName>Product</WebApiName>
     </WebApiServiceData>

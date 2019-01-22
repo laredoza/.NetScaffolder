@@ -27,10 +27,6 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.WebApiSer
 
     #endregion
 
-    #region Usings
-
-    #endregion
-
     /// <summary>
     ///     The context user control.
     /// </summary>
@@ -475,6 +471,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.WebApiSer
             this.Namespace.Text = this.SelectedWebApi.Namespace;
             this.WebApiName.Text = this.SelectedWebApi.WebApiName;
             this.InheritFromInterface.Text = this.SelectedWebApi.InheritFrom;
+            this.TxtWebApiServiceApplicationPath.Text = this.SelectedWebApi.WebApiApplicationSettingsPath;
 
             // txtCustomConnectionName.Text = SelectedWebApi.CustomConnectionName;
             this.OutputPath.Text = this.SelectedWebApi.OutputPath;
@@ -495,6 +492,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.WebApiSer
             this.SelectedWebApi.Namespace = this.Namespace.Text;
             this.SelectedWebApi.WebApiName = this.WebApiName.Text;
             this.SelectedWebApi.InheritFrom = this.InheritFromInterface.Text;
+            this.SelectedWebApi.WebApiApplicationSettingsPath = this.TxtWebApiServiceApplicationPath.Text;
 
             // SelectedWebApi.CustomConnectionName = txtCustomConnectionName.Text;
             this.SelectedWebApi.OutputPath = this.OutputPath.Text;
@@ -516,5 +514,13 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.WebApiSer
         }
 
         #endregion
+
+        private void TxtWebApiServiceApplicationPath_TextChanged(object sender, EventArgs e)
+        {
+            if (this.Loaded)
+            {
+                this.SelectedWebApi.WebApiApplicationSettingsPath = this.TxtWebApiServiceApplicationPath.Text;
+            }
+        }
     }
 }

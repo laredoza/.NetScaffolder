@@ -233,6 +233,13 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.WebApiServiceDa
                         this.ValidationResult.Add(
                             new Validation(ValidationType.ContextNameEmpty, "WebApiDataList must have a name"));
                     }
+
+
+                    if (string.IsNullOrEmpty(webApiServiceData.WebApiApplicationSettingsPath))
+                    {
+                        this.ValidationResult.Add(
+                            new Validation(ValidationType.WebApiApplicationSettingsPathEmpty, "WebApiApplicationSettingsPath must have a value"));
+                    }
                 }
             }
 

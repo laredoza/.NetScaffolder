@@ -139,5 +139,7 @@ namespace DotNetScaffolder.Core.Common.Validation
         ApplicationServiceDuplicateIsDefaultConfig = 28,
 
         ApplicationServicesMissing = 29,
+
+        WebApiApplicationSettingsPathEmpty = 30
     }
 }
