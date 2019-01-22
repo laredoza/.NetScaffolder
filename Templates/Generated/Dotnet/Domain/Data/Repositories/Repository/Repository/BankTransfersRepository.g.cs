@@ -417,7 +417,21 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <param name="items"></param>
         public void BulkDelete(IEnumerable<BankTransfers> items)
 		{
-			this.UnitOfWork.BulkDelete<IBankTransfers>(items);
+            List<BankTransfers> foundItems = new List<BankTransfers>();
+
+		    foreach (var item in items)
+		    {
+                var foundEntity = this.UnitOfWork.FirstOrDefault<BankTransfers>(o => o.BankTransferId == item.BankTransferId , true);
+
+		        if (foundEntity == null)
+		        {
+		            throw new Exception("The BankTransfers> entity does not exist");
+		        }
+
+		        foundItems.Add(foundEntity);
+		    }
+
+			this.UnitOfWork.BulkDelete<IBankTransfers>(foundItems);
 		}
 
         /// <summary>
@@ -428,7 +442,21 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <returns></returns>
         public async Task BulkDeleteAsync(IEnumerable<BankTransfers> items)
 		{
-			await this.UnitOfWork.BulkDeleteAsync<BankTransfers>(items);
+            List<BankTransfers> foundItems = new List<BankTransfers>();
+
+		    foreach (var item in items)
+		    {
+                var foundEntity = await this.UnitOfWork.FirstOrDefaultAsync<BankTransfers>(true, o => o.BankTransferId == item.BankTransferId );
+
+		        if (foundEntity == null)
+		        {
+		            throw new Exception("The BankTransfers> entity does not exist");
+		        }
+
+		        foundItems.Add(foundEntity);
+		    }
+
+			await this.UnitOfWork.BulkDeleteAsync<BankTransfers>(foundItems);
 		}
 
         /// <summary>
@@ -459,7 +487,32 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <param name="items"></param>
         public void BulkUpdate(IEnumerable<BankTransfers> items)
 		{
-			this.UnitOfWork.BulkUpdate<BankTransfers>(items);
+            List<BankTransfers> foundItems = new List<BankTransfers>();
+
+		    foreach (var entity in items)
+		    {
+                bool doUpdate = false;
+			    var entityToUpdate = this.UnitOfWork.FirstOrDefault<BankTransfers>(o =>  o.BankTransferId == entity.BankTransferId , true);
+			
+			    if (entityToUpdate == null)
+			    {
+				    throw new Exception("The BankTransfers entity does not exist");
+			    }
+			
+			    // Optimisation: Flag if any field has changed
+			    if (entityToUpdate.FromBankAccountId != entity.FromBankAccountId) { entityToUpdate.FromBankAccountId = entity.FromBankAccountId;doUpdate = true; }
+			    if (entityToUpdate.ToBankAccountId != entity.ToBankAccountId) { entityToUpdate.ToBankAccountId = entity.ToBankAccountId;doUpdate = true; }
+			    if (entityToUpdate.Amount != entity.Amount) { entityToUpdate.Amount = entity.Amount;doUpdate = true; }
+			    if (entityToUpdate.TransferDate != entity.TransferDate) { entityToUpdate.TransferDate = entity.TransferDate;doUpdate = true; }
+
+			    // Optimisation: Only execute update if a field has changed
+			    if (doUpdate)
+			    {
+				    foundItems.Add(entityToUpdate);
+			    }
+		    }
+
+			this.UnitOfWork.BulkUpdate<BankTransfers>(foundItems);
 		}
 
         /// <summary>
@@ -470,7 +523,32 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <returns></returns>
         public async Task BulkUpdateAsync(IEnumerable<BankTransfers> items)
 		{
-			await this.UnitOfWork.BulkUpdateAsync<BankTransfers>(items);
+            List<BankTransfers> foundItems = new List<BankTransfers>();
+
+		    foreach (var entity in items)
+		    {
+                bool doUpdate = false;
+			    var entityToUpdate = await this.UnitOfWork.FirstOrDefaultAsync<BankTransfers>(true, o =>  o.BankTransferId == entity.BankTransferId );
+			
+			    if (entityToUpdate == null)
+			    {
+				    throw new Exception("The BankTransfers entity does not exist");
+			    }
+			
+			    // Optimisation: Flag if any field has changed
+			    if (entityToUpdate.FromBankAccountId != entity.FromBankAccountId) { entityToUpdate.FromBankAccountId = entity.FromBankAccountId;doUpdate = true; }
+			    if (entityToUpdate.ToBankAccountId != entity.ToBankAccountId) { entityToUpdate.ToBankAccountId = entity.ToBankAccountId;doUpdate = true; }
+			    if (entityToUpdate.Amount != entity.Amount) { entityToUpdate.Amount = entity.Amount;doUpdate = true; }
+			    if (entityToUpdate.TransferDate != entity.TransferDate) { entityToUpdate.TransferDate = entity.TransferDate;doUpdate = true; }
+
+			    // Optimisation: Only execute update if a field has changed
+			    if (doUpdate)
+			    {
+				    foundItems.Add(entityToUpdate);
+			    }
+		    }
+
+			await this.UnitOfWork.BulkUpdateAsync<BankTransfers>(foundItems);
 		}
 
         #endregion

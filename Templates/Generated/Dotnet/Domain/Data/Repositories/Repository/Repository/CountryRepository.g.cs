@@ -347,7 +347,21 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <param name="items"></param>
         public void BulkDelete(IEnumerable<Country> items)
 		{
-			this.UnitOfWork.BulkDelete<ICountry>(items);
+            List<Country> foundItems = new List<Country>();
+
+		    foreach (var item in items)
+		    {
+                var foundEntity = this.UnitOfWork.FirstOrDefault<Country>(o => o.CountryId == item.CountryId , true);
+
+		        if (foundEntity == null)
+		        {
+		            throw new Exception("The Country> entity does not exist");
+		        }
+
+		        foundItems.Add(foundEntity);
+		    }
+
+			this.UnitOfWork.BulkDelete<ICountry>(foundItems);
 		}
 
         /// <summary>
@@ -358,7 +372,21 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <returns></returns>
         public async Task BulkDeleteAsync(IEnumerable<Country> items)
 		{
-			await this.UnitOfWork.BulkDeleteAsync<Country>(items);
+            List<Country> foundItems = new List<Country>();
+
+		    foreach (var item in items)
+		    {
+                var foundEntity = await this.UnitOfWork.FirstOrDefaultAsync<Country>(true, o => o.CountryId == item.CountryId );
+
+		        if (foundEntity == null)
+		        {
+		            throw new Exception("The Country> entity does not exist");
+		        }
+
+		        foundItems.Add(foundEntity);
+		    }
+
+			await this.UnitOfWork.BulkDeleteAsync<Country>(foundItems);
 		}
 
         /// <summary>
@@ -389,7 +417,29 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <param name="items"></param>
         public void BulkUpdate(IEnumerable<Country> items)
 		{
-			this.UnitOfWork.BulkUpdate<Country>(items);
+            List<Country> foundItems = new List<Country>();
+
+		    foreach (var entity in items)
+		    {
+                bool doUpdate = false;
+			    var entityToUpdate = this.UnitOfWork.FirstOrDefault<Country>(o =>  o.CountryId == entity.CountryId , true);
+			
+			    if (entityToUpdate == null)
+			    {
+				    throw new Exception("The Country entity does not exist");
+			    }
+			
+			    // Optimisation: Flag if any field has changed
+			    if (entityToUpdate.CountryName != entity.CountryName) { entityToUpdate.CountryName = entity.CountryName;doUpdate = true; }
+
+			    // Optimisation: Only execute update if a field has changed
+			    if (doUpdate)
+			    {
+				    foundItems.Add(entityToUpdate);
+			    }
+		    }
+
+			this.UnitOfWork.BulkUpdate<Country>(foundItems);
 		}
 
         /// <summary>
@@ -400,7 +450,29 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <returns></returns>
         public async Task BulkUpdateAsync(IEnumerable<Country> items)
 		{
-			await this.UnitOfWork.BulkUpdateAsync<Country>(items);
+            List<Country> foundItems = new List<Country>();
+
+		    foreach (var entity in items)
+		    {
+                bool doUpdate = false;
+			    var entityToUpdate = await this.UnitOfWork.FirstOrDefaultAsync<Country>(true, o =>  o.CountryId == entity.CountryId );
+			
+			    if (entityToUpdate == null)
+			    {
+				    throw new Exception("The Country entity does not exist");
+			    }
+			
+			    // Optimisation: Flag if any field has changed
+			    if (entityToUpdate.CountryName != entity.CountryName) { entityToUpdate.CountryName = entity.CountryName;doUpdate = true; }
+
+			    // Optimisation: Only execute update if a field has changed
+			    if (doUpdate)
+			    {
+				    foundItems.Add(entityToUpdate);
+			    }
+		    }
+
+			await this.UnitOfWork.BulkUpdateAsync<Country>(foundItems);
 		}
 
         #endregion

@@ -347,7 +347,21 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <param name="items"></param>
         public void BulkDelete(IEnumerable<Book> items)
 		{
-			this.UnitOfWork.BulkDelete<IBook>(items);
+            List<Book> foundItems = new List<Book>();
+
+		    foreach (var item in items)
+		    {
+                var foundEntity = this.UnitOfWork.FirstOrDefault<Book>(o => o.ProductId == item.ProductId , true);
+
+		        if (foundEntity == null)
+		        {
+		            throw new Exception("The Book> entity does not exist");
+		        }
+
+		        foundItems.Add(foundEntity);
+		    }
+
+			this.UnitOfWork.BulkDelete<IBook>(foundItems);
 		}
 
         /// <summary>
@@ -358,7 +372,21 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <returns></returns>
         public async Task BulkDeleteAsync(IEnumerable<Book> items)
 		{
-			await this.UnitOfWork.BulkDeleteAsync<Book>(items);
+            List<Book> foundItems = new List<Book>();
+
+		    foreach (var item in items)
+		    {
+                var foundEntity = await this.UnitOfWork.FirstOrDefaultAsync<Book>(true, o => o.ProductId == item.ProductId );
+
+		        if (foundEntity == null)
+		        {
+		            throw new Exception("The Book> entity does not exist");
+		        }
+
+		        foundItems.Add(foundEntity);
+		    }
+
+			await this.UnitOfWork.BulkDeleteAsync<Book>(foundItems);
 		}
 
         /// <summary>
@@ -389,7 +417,29 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <param name="items"></param>
         public void BulkUpdate(IEnumerable<Book> items)
 		{
-			this.UnitOfWork.BulkUpdate<Book>(items);
+            List<Book> foundItems = new List<Book>();
+
+		    foreach (var entity in items)
+		    {
+                bool doUpdate = false;
+			    var entityToUpdate = this.UnitOfWork.FirstOrDefault<Book>(o =>  o.ProductId == entity.ProductId , true);
+			
+			    if (entityToUpdate == null)
+			    {
+				    throw new Exception("The Book entity does not exist");
+			    }
+			
+			    // Optimisation: Flag if any field has changed
+			    if (entityToUpdate.Publisher != entity.Publisher) { entityToUpdate.Publisher = entity.Publisher;doUpdate = true; }
+
+			    // Optimisation: Only execute update if a field has changed
+			    if (doUpdate)
+			    {
+				    foundItems.Add(entityToUpdate);
+			    }
+		    }
+
+			this.UnitOfWork.BulkUpdate<Book>(foundItems);
 		}
 
         /// <summary>
@@ -400,7 +450,29 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <returns></returns>
         public async Task BulkUpdateAsync(IEnumerable<Book> items)
 		{
-			await this.UnitOfWork.BulkUpdateAsync<Book>(items);
+            List<Book> foundItems = new List<Book>();
+
+		    foreach (var entity in items)
+		    {
+                bool doUpdate = false;
+			    var entityToUpdate = await this.UnitOfWork.FirstOrDefaultAsync<Book>(true, o =>  o.ProductId == entity.ProductId );
+			
+			    if (entityToUpdate == null)
+			    {
+				    throw new Exception("The Book entity does not exist");
+			    }
+			
+			    // Optimisation: Flag if any field has changed
+			    if (entityToUpdate.Publisher != entity.Publisher) { entityToUpdate.Publisher = entity.Publisher;doUpdate = true; }
+
+			    // Optimisation: Only execute update if a field has changed
+			    if (doUpdate)
+			    {
+				    foundItems.Add(entityToUpdate);
+			    }
+		    }
+
+			await this.UnitOfWork.BulkUpdateAsync<Book>(foundItems);
 		}
 
         #endregion

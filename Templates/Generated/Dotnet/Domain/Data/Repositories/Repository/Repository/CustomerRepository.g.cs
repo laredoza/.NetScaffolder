@@ -819,21 +819,21 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <param name="items"></param>
         public void BulkDelete(IEnumerable<Customer> items)
 		{
-		    List<Customer> foundItems = new List<Customer>();
+            List<Customer> foundItems = new List<Customer>();
 
 		    foreach (var item in items)
 		    {
-		        var foundEntity = this.UnitOfWork.FirstOrDefault<Customer>(o => o.CustomerId == item.CustomerId, true);
+                var foundEntity = this.UnitOfWork.FirstOrDefault<Customer>(o => o.CustomerId == item.CustomerId , true);
 
 		        if (foundEntity == null)
 		        {
-		            throw new Exception("The Customer entity does not exist");
+		            throw new Exception("The Customer> entity does not exist");
 		        }
 
 		        foundItems.Add(foundEntity);
 		    }
 
-            this.UnitOfWork.BulkDelete<ICustomer>(foundItems);
+			this.UnitOfWork.BulkDelete<ICustomer>(foundItems);
 		}
 
         /// <summary>
@@ -844,21 +844,21 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <returns></returns>
         public async Task BulkDeleteAsync(IEnumerable<Customer> items)
 		{
-		    List<Customer> foundItems = new List<Customer>();
+            List<Customer> foundItems = new List<Customer>();
 
 		    foreach (var item in items)
 		    {
-		        var foundEntity = await this.UnitOfWork.FirstOrDefaultAsync<Customer>(true, o => o.CustomerId == item.CustomerId);
+                var foundEntity = await this.UnitOfWork.FirstOrDefaultAsync<Customer>(true, o => o.CustomerId == item.CustomerId );
 
 		        if (foundEntity == null)
 		        {
-		            throw new Exception("The Customer entity does not exist");
+		            throw new Exception("The Customer> entity does not exist");
 		        }
 
 		        foundItems.Add(foundEntity);
 		    }
 
-            await this.UnitOfWork.BulkDeleteAsync<Customer>(foundItems);
+			await this.UnitOfWork.BulkDeleteAsync<Customer>(foundItems);
 		}
 
         /// <summary>
@@ -868,7 +868,7 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <param name="items"></param>
         public void BulkInsert(IEnumerable<Customer> items)
 		{
-		    this.UnitOfWork.BulkInsert<Customer>(items);
+			this.UnitOfWork.BulkInsert<Customer>(items);
 		}
         
         /// <summary>
@@ -889,42 +889,40 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <param name="items"></param>
         public void BulkUpdate(IEnumerable<Customer> items)
 		{
-		    List<Customer> foundItems = new List<Customer>();
+            List<Customer> foundItems = new List<Customer>();
 
 		    foreach (var entity in items)
 		    {
-		        bool doUpdate = false;
+                bool doUpdate = false;
+			    var entityToUpdate = this.UnitOfWork.FirstOrDefault<Customer>(o =>  o.CustomerId == entity.CustomerId , true);
+			
+			    if (entityToUpdate == null)
+			    {
+				    throw new Exception("The Customer entity does not exist");
+			    }
+			
+			    // Optimisation: Flag if any field has changed
+			    if (entityToUpdate.CustomerCode != entity.CustomerCode) { entityToUpdate.CustomerCode = entity.CustomerCode;doUpdate = true; }
+			    if (entityToUpdate.CompanyName != entity.CompanyName) { entityToUpdate.CompanyName = entity.CompanyName;doUpdate = true; }
+			    if (entityToUpdate.ContactName != entity.ContactName) { entityToUpdate.ContactName = entity.ContactName;doUpdate = true; }
+			    if (entityToUpdate.ContactTitle != entity.ContactTitle) { entityToUpdate.ContactTitle = entity.ContactTitle;doUpdate = true; }
+			    if (entityToUpdate.Address != entity.Address) { entityToUpdate.Address = entity.Address;doUpdate = true; }
+			    if (entityToUpdate.City != entity.City) { entityToUpdate.City = entity.City;doUpdate = true; }
+			    if (entityToUpdate.PostalCode != entity.PostalCode) { entityToUpdate.PostalCode = entity.PostalCode;doUpdate = true; }
+			    if (entityToUpdate.Telephone != entity.Telephone) { entityToUpdate.Telephone = entity.Telephone;doUpdate = true; }
+			    if (entityToUpdate.Fax != entity.Fax) { entityToUpdate.Fax = entity.Fax;doUpdate = true; }
+			    if (entityToUpdate.CountryId != entity.CountryId) { entityToUpdate.CountryId = entity.CountryId;doUpdate = true; }
+			    if (entityToUpdate.Photo != entity.Photo) { entityToUpdate.Photo = entity.Photo;doUpdate = true; }
+			    if (entityToUpdate.IsEnabled != entity.IsEnabled) { entityToUpdate.IsEnabled = entity.IsEnabled;doUpdate = true; }
 
-                var entityToUpdate = this.UnitOfWork.FirstOrDefault<Customer>(o => o.CustomerId == entity.CustomerId, true);
-
-		        if (entityToUpdate == null)
-		        {
-		            throw new Exception("The Customer entity does not exist");
-		        }
-
-		        // Optimisation: Flag if any field has changed
-		        if (entityToUpdate.CustomerCode != entity.CustomerCode) { entityToUpdate.CustomerCode = entity.CustomerCode; doUpdate = true; }
-		        if (entityToUpdate.CompanyName != entity.CompanyName) { entityToUpdate.CompanyName = entity.CompanyName; doUpdate = true; }
-		        if (entityToUpdate.ContactName != entity.ContactName) { entityToUpdate.ContactName = entity.ContactName; doUpdate = true; }
-		        if (entityToUpdate.ContactTitle != entity.ContactTitle) { entityToUpdate.ContactTitle = entity.ContactTitle; doUpdate = true; }
-		        if (entityToUpdate.Address != entity.Address) { entityToUpdate.Address = entity.Address; doUpdate = true; }
-		        if (entityToUpdate.City != entity.City) { entityToUpdate.City = entity.City; doUpdate = true; }
-		        if (entityToUpdate.PostalCode != entity.PostalCode) { entityToUpdate.PostalCode = entity.PostalCode; doUpdate = true; }
-		        if (entityToUpdate.Telephone != entity.Telephone) { entityToUpdate.Telephone = entity.Telephone; doUpdate = true; }
-		        if (entityToUpdate.Fax != entity.Fax) { entityToUpdate.Fax = entity.Fax; doUpdate = true; }
-		        if (entityToUpdate.CountryId != entity.CountryId) { entityToUpdate.CountryId = entity.CountryId; doUpdate = true; }
-		        if (entityToUpdate.Photo != entity.Photo) { entityToUpdate.Photo = entity.Photo; doUpdate = true; }
-		        if (entityToUpdate.IsEnabled != entity.IsEnabled) { entityToUpdate.IsEnabled = entity.IsEnabled; doUpdate = true; }
-
-		        // Optimisation: Only execute update if a field has changed
-		        if (doUpdate)
-		        {
-                    foundItems.Add(entityToUpdate);
-		        }
-
+			    // Optimisation: Only execute update if a field has changed
+			    if (doUpdate)
+			    {
+				    foundItems.Add(entityToUpdate);
+			    }
 		    }
 
-            this.UnitOfWork.BulkUpdate<Customer>(foundItems);
+			this.UnitOfWork.BulkUpdate<Customer>(foundItems);
 		}
 
         /// <summary>
@@ -937,41 +935,39 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
 		{
             List<Customer> foundItems = new List<Customer>();
 
-            foreach (var entity in items)
-            {
+		    foreach (var entity in items)
+		    {
                 bool doUpdate = false;
+			    var entityToUpdate = await this.UnitOfWork.FirstOrDefaultAsync<Customer>(true, o =>  o.CustomerId == entity.CustomerId );
+			
+			    if (entityToUpdate == null)
+			    {
+				    throw new Exception("The Customer entity does not exist");
+			    }
+			
+			    // Optimisation: Flag if any field has changed
+			    if (entityToUpdate.CustomerCode != entity.CustomerCode) { entityToUpdate.CustomerCode = entity.CustomerCode;doUpdate = true; }
+			    if (entityToUpdate.CompanyName != entity.CompanyName) { entityToUpdate.CompanyName = entity.CompanyName;doUpdate = true; }
+			    if (entityToUpdate.ContactName != entity.ContactName) { entityToUpdate.ContactName = entity.ContactName;doUpdate = true; }
+			    if (entityToUpdate.ContactTitle != entity.ContactTitle) { entityToUpdate.ContactTitle = entity.ContactTitle;doUpdate = true; }
+			    if (entityToUpdate.Address != entity.Address) { entityToUpdate.Address = entity.Address;doUpdate = true; }
+			    if (entityToUpdate.City != entity.City) { entityToUpdate.City = entity.City;doUpdate = true; }
+			    if (entityToUpdate.PostalCode != entity.PostalCode) { entityToUpdate.PostalCode = entity.PostalCode;doUpdate = true; }
+			    if (entityToUpdate.Telephone != entity.Telephone) { entityToUpdate.Telephone = entity.Telephone;doUpdate = true; }
+			    if (entityToUpdate.Fax != entity.Fax) { entityToUpdate.Fax = entity.Fax;doUpdate = true; }
+			    if (entityToUpdate.CountryId != entity.CountryId) { entityToUpdate.CountryId = entity.CountryId;doUpdate = true; }
+			    if (entityToUpdate.Photo != entity.Photo) { entityToUpdate.Photo = entity.Photo;doUpdate = true; }
+			    if (entityToUpdate.IsEnabled != entity.IsEnabled) { entityToUpdate.IsEnabled = entity.IsEnabled;doUpdate = true; }
 
-                var entityToUpdate = await this.UnitOfWork.FirstOrDefaultAsync<Customer>(true, o => o.CustomerId == entity.CustomerId);
+			    // Optimisation: Only execute update if a field has changed
+			    if (doUpdate)
+			    {
+				    foundItems.Add(entityToUpdate);
+			    }
+		    }
 
-                if (entityToUpdate == null)
-                {
-                    throw new Exception("The Customer entity does not exist");
-                }
-
-                // Optimisation: Flag if any field has changed
-                if (entityToUpdate.CustomerCode != entity.CustomerCode) { entityToUpdate.CustomerCode = entity.CustomerCode; doUpdate = true; }
-                if (entityToUpdate.CompanyName != entity.CompanyName) { entityToUpdate.CompanyName = entity.CompanyName; doUpdate = true; }
-                if (entityToUpdate.ContactName != entity.ContactName) { entityToUpdate.ContactName = entity.ContactName; doUpdate = true; }
-                if (entityToUpdate.ContactTitle != entity.ContactTitle) { entityToUpdate.ContactTitle = entity.ContactTitle; doUpdate = true; }
-                if (entityToUpdate.Address != entity.Address) { entityToUpdate.Address = entity.Address; doUpdate = true; }
-                if (entityToUpdate.City != entity.City) { entityToUpdate.City = entity.City; doUpdate = true; }
-                if (entityToUpdate.PostalCode != entity.PostalCode) { entityToUpdate.PostalCode = entity.PostalCode; doUpdate = true; }
-                if (entityToUpdate.Telephone != entity.Telephone) { entityToUpdate.Telephone = entity.Telephone; doUpdate = true; }
-                if (entityToUpdate.Fax != entity.Fax) { entityToUpdate.Fax = entity.Fax; doUpdate = true; }
-                if (entityToUpdate.CountryId != entity.CountryId) { entityToUpdate.CountryId = entity.CountryId; doUpdate = true; }
-                if (entityToUpdate.Photo != entity.Photo) { entityToUpdate.Photo = entity.Photo; doUpdate = true; }
-                if (entityToUpdate.IsEnabled != entity.IsEnabled) { entityToUpdate.IsEnabled = entity.IsEnabled; doUpdate = true; }
-
-                // Optimisation: Only execute update if a field has changed
-                if (doUpdate)
-                {
-                    foundItems.Add(entityToUpdate);
-                }
-
-            }
-
-            await this.UnitOfWork.BulkUpdateAsync<Customer>(foundItems);
-        }
+			await this.UnitOfWork.BulkUpdateAsync<Customer>(foundItems);
+		}
 
         #endregion
 

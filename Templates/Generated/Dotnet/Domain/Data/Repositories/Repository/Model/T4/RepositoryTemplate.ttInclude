@@ -424,7 +424,21 @@ namespace <#= DataType.FullNamespace #>
         /// <param name="items"></param>
         public void BulkDelete(IEnumerable<<#= DataType.ModelName #>> items)
 		{
-			this.UnitOfWork.BulkDelete<I<#= DataType.ModelName #>>(items);
+            List<<#= DataType.ModelName #>> foundItems = new List<<#= DataType.ModelName #>>();
+
+		    foreach (var item in items)
+		    {
+                var foundEntity = this.UnitOfWork.FirstOrDefault<<#= DataType.ModelName #>>(o =><#= DataType.TransformAsQuery(DataType.MetaData.Columns.Where(o => o.IsPrimaryKey), "item")#>, true);
+
+		        if (foundEntity == null)
+		        {
+		            throw new Exception("The <#= DataType.ModelName #>> entity does not exist");
+		        }
+
+		        foundItems.Add(foundEntity);
+		    }
+
+			this.UnitOfWork.BulkDelete<I<#= DataType.ModelName #>>(foundItems);
 		}
 
         /// <summary>
@@ -435,7 +449,21 @@ namespace <#= DataType.FullNamespace #>
         /// <returns></returns>
         public async Task BulkDeleteAsync(IEnumerable<<#= DataType.ModelName #>> items)
 		{
-			await this.UnitOfWork.BulkDeleteAsync<<#= DataType.ModelName #>>(items);
+            List<<#= DataType.ModelName #>> foundItems = new List<<#= DataType.ModelName #>>();
+
+		    foreach (var item in items)
+		    {
+                var foundEntity = await this.UnitOfWork.FirstOrDefaultAsync<<#= DataType.ModelName #>>(true, o =><#= DataType.TransformAsQuery(DataType.MetaData.Columns.Where(o => o.IsPrimaryKey), "item")#>);
+
+		        if (foundEntity == null)
+		        {
+		            throw new Exception("The <#= DataType.ModelName #>> entity does not exist");
+		        }
+
+		        foundItems.Add(foundEntity);
+		    }
+
+			await this.UnitOfWork.BulkDeleteAsync<<#= DataType.ModelName #>>(foundItems);
 		}
 
         /// <summary>
@@ -466,7 +494,31 @@ namespace <#= DataType.FullNamespace #>
         /// <param name="items"></param>
         public void BulkUpdate(IEnumerable<<#= DataType.ModelName #>> items)
 		{
-			this.UnitOfWork.BulkUpdate<<#= DataType.ModelName #>>(items);
+            List<<#= DataType.ModelName #>> foundItems = new List<<#= DataType.ModelName #>>();
+
+		    foreach (var entity in items)
+		    {
+                bool doUpdate = false;
+			    var entityToUpdate = this.UnitOfWork.FirstOrDefault<<#= DataType.ModelName #>>(o => <#= DataType.TransformAsQuery(DataType.MetaData.Columns.Where(o => o.IsPrimaryKey), "entity") #>, true);
+			
+			    if (entityToUpdate == null)
+			    {
+				    throw new Exception("The <#= DataType.ModelName #> entity does not exist");
+			    }
+			
+			    // Optimisation: Flag if any field has changed
+<#+ foreach(var col in DataType.MetaData.Columns.Where(o => !o.IsPrimaryKey)){ #>
+			    if (entityToUpdate.<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #> != entity.<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>) { entityToUpdate.<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #> = entity.<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>;doUpdate = true; }
+<#+ }  #>
+
+			    // Optimisation: Only execute update if a field has changed
+			    if (doUpdate)
+			    {
+				    foundItems.Add(entityToUpdate);
+			    }
+		    }
+
+			this.UnitOfWork.BulkUpdate<<#= DataType.ModelName #>>(foundItems);
 		}
 
         /// <summary>
@@ -477,7 +529,31 @@ namespace <#= DataType.FullNamespace #>
         /// <returns></returns>
         public async Task BulkUpdateAsync(IEnumerable<<#= DataType.ModelName #>> items)
 		{
-			await this.UnitOfWork.BulkUpdateAsync<<#= DataType.ModelName #>>(items);
+            List<<#= DataType.ModelName #>> foundItems = new List<<#= DataType.ModelName #>>();
+
+		    foreach (var entity in items)
+		    {
+                bool doUpdate = false;
+			    var entityToUpdate = await this.UnitOfWork.FirstOrDefaultAsync<<#= DataType.ModelName #>>(true, o => <#= DataType.TransformAsQuery(DataType.MetaData.Columns.Where(o => o.IsPrimaryKey), "entity") #>);
+			
+			    if (entityToUpdate == null)
+			    {
+				    throw new Exception("The <#= DataType.ModelName #> entity does not exist");
+			    }
+			
+			    // Optimisation: Flag if any field has changed
+<#+ foreach(var col in DataType.MetaData.Columns.Where(o => !o.IsPrimaryKey)){ #>
+			    if (entityToUpdate.<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #> != entity.<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>) { entityToUpdate.<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #> = entity.<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>;doUpdate = true; }
+<#+ }  #>
+
+			    // Optimisation: Only execute update if a field has changed
+			    if (doUpdate)
+			    {
+				    foundItems.Add(entityToUpdate);
+			    }
+		    }
+
+			await this.UnitOfWork.BulkUpdateAsync<<#= DataType.ModelName #>>(foundItems);
 		}
 
         #endregion
