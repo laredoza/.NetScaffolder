@@ -91,18 +91,48 @@ namespace MVCClient.Controllers
                 CustomerCode = "010"
             };
 
-            applicationService.CustomerAdd(customer1);
-            await applicationService.CustomerAddAsync(customer2);
+            IEnumerable<CustomerDto> customers = new List<CustomerDto>{customer1, customer2};
 
-            customer1.Address = "Changed Address";
-            customer2.Address = "Changed Address";
+            //applicationService.CustomerAdd(customer1);
+            //await applicationService.CustomerAddAsync(customer2);
 
-            applicationService.CustomerUpdate(customer1);
-            await applicationService.CustomerUpdateAsync(customer2);
+            //customer1.Address = "Changed Address";
+            //customer2.Address = "Changed Address";
+
+            //applicationService.CustomerUpdate(customer1);
+            //await applicationService.CustomerUpdateAsync(customer2);
 
             //applicationService.CustomerDelete(customer1);
             //await applicationService.CustomerDeleteAsync(customer2);
 
+            //applicationService.CustomerDelete(customer1.CustomerId, true);
+            //await applicationService.CustomerDeleteAsync(customer2.CustomerId, true);
+
+            // Bulk Testing
+
+            //customer1.Address = "My Address";
+            //customer2.Address = "My Address";
+
+            //applicationService.CustomerBulkInsert(customers);
+
+            //customer1.Address = "Changed Address";
+            //customer2.Address = "Changed Address";
+
+            //applicationService.CustomerBulkUpdate(customers);
+            //applicationService.CustomerBulkDelete(customers);
+
+            // Bulk Testing Async
+
+            customer1.Address = "My Address";
+            customer2.Address = "My Address";
+
+            await applicationService.CustomerBulkInsertAsync(customers);
+
+            customer1.Address = "Changed Address";
+            customer2.Address = "Changed Address";
+
+            await applicationService.CustomerBulkUpdateAsync(customers);
+            await applicationService.CustomerBulkDeleteAsync(customers);
 
             //ViewData["json"] = JsonConvert.SerializeObject(resultCustomerLoadAllAsync);
             ViewData["json"] = JsonConvert.SerializeObject(true);

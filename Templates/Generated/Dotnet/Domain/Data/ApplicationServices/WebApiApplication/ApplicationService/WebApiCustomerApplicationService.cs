@@ -376,7 +376,7 @@ namespace DotNetScaffolder.Domain.Data.ApplicationServices.WebApiApplicationServ
         {
             bool result = false;
 
-            var apiUrl = $"{this.apiSettings.BasePath}/product/CustomerDeleteAsync/{entity.CustomerId}/true";
+            var apiUrl = $"{this.apiSettings.BasePath}/product/CustomerDeleteBycustomerIdAsync/{entity.CustomerId}/true";
 
             var client = new HttpClient();
             var content = new StringContent(JsonConvert.SerializeObject(entity), Encoding.UTF8, "application/json");
@@ -398,12 +398,50 @@ namespace DotNetScaffolder.Domain.Data.ApplicationServices.WebApiApplicationServ
 
         public bool CustomerDelete(int customerId, bool cache)
         {
-            throw new NotImplementedException();
+            bool result = false;
+
+            var apiUrl = $"{this.apiSettings.BasePath}/product/CustomerDeleteBycustomerId/{customerId}/{cache}";
+
+            var client = new HttpClient();
+            var content = new StringContent(customerId.ToString(), Encoding.UTF8);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", this.apiSettings.Bearer);
+            var response = client.DeleteAsync(apiUrl).Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+                var json = response.Content.ReadAsStringAsync().Result;
+                result = JsonConvert.DeserializeObject<bool>(json);
+            }
+            else
+            {
+                throw new Exception($"An error happened{response.StatusCode}");
+            }
+
+            return result;
         }
 
-        public Task<bool> CustomerDeleteAsync(int customerId, bool cache)
+        public async Task<bool> CustomerDeleteAsync(int customerId, bool cache)
         {
-            throw new NotImplementedException();
+            bool result = false;
+
+            var apiUrl = $"{this.apiSettings.BasePath}/product/CustomerDeleteBycustomerIdAsync/{customerId}/{cache}";
+
+            var client = new HttpClient();
+            var content = new StringContent(customerId.ToString(), Encoding.UTF8);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", this.apiSettings.Bearer);
+            var response = await client.DeleteAsync(apiUrl);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var json = await response.Content.ReadAsStringAsync();
+                result = JsonConvert.DeserializeObject<bool>(json);
+            }
+            else
+            {
+                throw new Exception($"An error happened{response.StatusCode}");
+            }
+
+            return result;
         }
 
         public TResult CustomerMax<TResult>(Expression<Func<ICustomer, TResult>> maxExpression, bool cache)
@@ -428,32 +466,92 @@ namespace DotNetScaffolder.Domain.Data.ApplicationServices.WebApiApplicationServ
 
         public void CustomerBulkDelete(IEnumerable<CustomerDto> items)
         {
-            throw new NotImplementedException();
+            var apiUrl = $"{this.apiSettings.BasePath}/product/CustomerBulkDelete";
+
+            var client = new HttpClient();
+            var content = new StringContent(JsonConvert.SerializeObject(items), Encoding.UTF8, "application/json");
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", this.apiSettings.Bearer);
+            var response = client.PostAsync(apiUrl, content).Result;
+
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new Exception($"An error happened{response.StatusCode}");
+            }
         }
 
-        public Task CustomerBulkDeleteAsync(IEnumerable<CustomerDto> items)
+        public async Task CustomerBulkDeleteAsync(IEnumerable<CustomerDto> items)
         {
-            throw new NotImplementedException();
+            var apiUrl = $"{this.apiSettings.BasePath}/product/CustomerBulkDeleteAsync";
+
+            var client = new HttpClient();
+            var content = new StringContent(JsonConvert.SerializeObject(items), Encoding.UTF8, "application/json");
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", this.apiSettings.Bearer);
+            var response = await client.PostAsync(apiUrl, content);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new Exception($"An error happened{response.StatusCode}");
+            }
         }
 
         public void CustomerBulkInsert(IEnumerable<CustomerDto> items)
         {
-            throw new NotImplementedException();
+            var apiUrl = $"{this.apiSettings.BasePath}/product/CustomerBulkInsert";
+
+            var client = new HttpClient();
+            var content = new StringContent(JsonConvert.SerializeObject(items), Encoding.UTF8, "application/json");
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", this.apiSettings.Bearer);
+            var response = client.PostAsync(apiUrl, content).Result;
+
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new Exception($"An error happened{response.StatusCode}");
+            }
         }
 
-        public Task CustomerBulkInsertAsync(IEnumerable<CustomerDto> items)
+        public async Task CustomerBulkInsertAsync(IEnumerable<CustomerDto> items)
         {
-            throw new NotImplementedException();
+            var apiUrl = $"{this.apiSettings.BasePath}/product/CustomerBulkInsertAsync";
+
+            var client = new HttpClient();
+            var content = new StringContent(JsonConvert.SerializeObject(items), Encoding.UTF8, "application/json");
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", this.apiSettings.Bearer);
+            var response = await client.PostAsync(apiUrl, content);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new Exception($"An error happened{response.StatusCode}");
+            }
         }
 
         public void CustomerBulkUpdate(IEnumerable<CustomerDto> items)
         {
-            throw new NotImplementedException();
+            var apiUrl = $"{this.apiSettings.BasePath}/product/CustomerBulkUpdate";
+
+            var client = new HttpClient();
+            var content = new StringContent(JsonConvert.SerializeObject(items), Encoding.UTF8, "application/json");
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", this.apiSettings.Bearer);
+            var response = client.PostAsync(apiUrl, content).Result;
+
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new Exception($"An error happened{response.StatusCode}");
+            }
         }
 
-        public Task CustomerBulkUpdateAsync(IEnumerable<CustomerDto> items)
+        public async Task CustomerBulkUpdateAsync(IEnumerable<CustomerDto> items)
         {
-            throw new NotImplementedException();
+            var apiUrl = $"{this.apiSettings.BasePath}/product/CustomerBulkUpdateAsync";
+
+            var client = new HttpClient();
+            var content = new StringContent(JsonConvert.SerializeObject(items), Encoding.UTF8, "application/json");
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", this.apiSettings.Bearer);
+            var response = await client.PostAsync(apiUrl, content);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new Exception($"An error happened{response.StatusCode}");
+            }
         }
     }
 }
