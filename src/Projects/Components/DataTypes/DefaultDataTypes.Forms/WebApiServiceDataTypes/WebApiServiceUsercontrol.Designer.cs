@@ -42,8 +42,6 @@
             this.OutputPath = new System.Windows.Forms.TextBox();
             this.gbAdditionalNamespaces = new System.Windows.Forms.GroupBox();
             this.txtNamespaces = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.TxtWebApiServiceApplicationPath = new System.Windows.Forms.TextBox();
             this.TreeviewContextModels = new FormControls.TreeView.MultiSelectTreeView.TreeView();
             this.groupBox1.SuspendLayout();
             this.gbAdditionalNamespaces.SuspendLayout();
@@ -115,8 +113,6 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.TxtWebApiServiceApplicationPath);
-            this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.btnNew);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.OutputPath);
@@ -181,23 +177,6 @@
             this.txtNamespaces.Size = new System.Drawing.Size(239, 179);
             this.txtNamespaces.TabIndex = 0;
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(3, 162);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(161, 13);
-            this.label2.TabIndex = 59;
-            this.label2.Text = "Application Service Output Path:";
-            // 
-            // TxtWebApiServiceApplicationPath
-            // 
-            this.TxtWebApiServiceApplicationPath.Location = new System.Drawing.Point(173, 159);
-            this.TxtWebApiServiceApplicationPath.Name = "TxtWebApiServiceApplicationPath";
-            this.TxtWebApiServiceApplicationPath.Size = new System.Drawing.Size(301, 20);
-            this.TxtWebApiServiceApplicationPath.TabIndex = 60;
-            this.TxtWebApiServiceApplicationPath.TextChanged += new System.EventHandler(this.TxtWebApiServiceApplicationPath_TextChanged);
-            // 
             // TreeviewContextModels
             // 
             this.TreeviewContextModels.CheckBoxes = true;
@@ -242,7 +221,5 @@
         private FormControls.TreeView.MultiSelectTreeView.TreeView TreeviewContextModels;
         private System.Windows.Forms.GroupBox gbAdditionalNamespaces;
         private System.Windows.Forms.TextBox txtNamespaces;
-        private System.Windows.Forms.TextBox TxtWebApiServiceApplicationPath;
-        private System.Windows.Forms.Label label2;
     }
 }

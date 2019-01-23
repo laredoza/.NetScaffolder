@@ -401,14 +401,6 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.WebApiSer
             }
         }
 
-        private void TxtWebApiServiceApplicationPath_TextChanged(object sender, EventArgs e)
-        {
-            if (Loaded)
-            {
-                SelectedWebApi.WebApiApplicationSettingsPath = TxtWebApiServiceApplicationPath.Text;
-            }
-        }
-
         /// <summary>
         ///     The update data source.
         /// </summary>
@@ -468,7 +460,6 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.WebApiSer
             Namespace.Text = SelectedWebApi.Namespace;
             WebApiName.Text = SelectedWebApi.WebApiName;
             InheritFromInterface.Text = SelectedWebApi.InheritFrom;
-            TxtWebApiServiceApplicationPath.Text = SelectedWebApi.WebApiApplicationSettingsPath;
 
             // txtCustomConnectionName.Text = SelectedWebApi.CustomConnectionName;
             OutputPath.Text = SelectedWebApi.OutputPath;
@@ -489,7 +480,6 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.WebApiSer
             SelectedWebApi.Namespace = Namespace.Text;
             SelectedWebApi.WebApiName = WebApiName.Text;
             SelectedWebApi.InheritFrom = InheritFromInterface.Text;
-            SelectedWebApi.WebApiApplicationSettingsPath = TxtWebApiServiceApplicationPath.Text;
 
             // SelectedWebApi.CustomConnectionName = txtCustomConnectionName.Text;
             SelectedWebApi.OutputPath = OutputPath.Text;

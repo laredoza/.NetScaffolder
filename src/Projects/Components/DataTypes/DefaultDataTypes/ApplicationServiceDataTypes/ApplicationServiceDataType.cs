@@ -48,6 +48,7 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ApplicationServ
             this.LanguageOutputDetails[0].Templates.Add("ApplicationServiceInterfaceTemplate.ttInclude");
             this.LanguageOutputDetails[0].Templates.Add("ApplicationServiceTemplate.ttInclude");
             this.AdditionalNamespacesInterfaces = new List<string>();
+            this.AdditionalNamespacesWeb = new List<string>();
         }
 
         #endregion
@@ -62,6 +63,9 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ApplicationServ
         public List<ApplicationServiceDataError> MissingTables { get; set; }
 
         public List<string> AdditionalNamespacesInterfaces { get; set; }
+
+        public List<string> AdditionalNamespacesWeb{ get; set; }
+
         #endregion
 
         #region Public Methods And Operators

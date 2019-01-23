@@ -78,6 +78,8 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ApplicationServ
         /// </summary>
         public string InheritFromInterface { get; set; }
 
+        public string InheritFromWeb { get; set; }
+
         /// <summary>
         ///     Gets the models.
         /// </summary>
@@ -92,6 +94,8 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ApplicationServ
         ///     Gets or sets the namespace interface.
         /// </summary>
         public string NamespaceInterface { get; set; }
+
+        public string NamespaceWeb { get; set; }
 
         /// <summary>
         ///     Gets or sets the output folder.
@@ -108,10 +112,14 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ApplicationServ
         /// </summary>
         public string OutputPath { get; set; }
 
+        public string OutputFolderWeb { get; set; }
+
         /// <summary>
         ///     Gets or sets the output path interface.
         /// </summary>
         public string OutputPathInterface { get; set; }
+
+        public string OutputPathWeb { get; set; }
 
         /// <summary>
         ///     Gets the transform inherit from.

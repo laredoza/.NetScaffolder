@@ -74,8 +74,6 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.WebApiServiceDa
         /// </summary>
         public string OutputFolder { get; set; }
 
-        public string WebApiApplicationSettingsPath { get; set; }
-
         /// <summary>
         ///     Gets or sets the output path.
         /// </summary>
