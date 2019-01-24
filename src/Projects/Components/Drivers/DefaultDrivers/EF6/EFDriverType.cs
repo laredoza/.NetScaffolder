@@ -139,25 +139,23 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6
         /// </returns>
         public static string TransformIndex(Index index, INamingConvention nc = null)
         {
-            var idxs = new StringBuilder(".HasColumnAnnotation(\"" + index.Name + "\", new IndexAnnotation(new [] { ");
             bool isClustered = index.IndexType == IndexType.Clustered;
+
+            var idxs = new StringBuilder();
 
             if (index.Columns != null && index.Columns.Any())
             {
                 for (int i = 0; i < index.Columns.Count; i++)
                 {
-                    if (i > 0)
-                    {
-                        idxs.Append(", ");
-                    }
+                    string colName = nc == null ? index.Columns[i] : nc.ApplyNamingConvention(index.Columns[i]);
+                    idxs.Append("\t\t\t");
+                    idxs.Append($"Property(t => t.{colName}).HasColumnAnnotation(\"" + index.Name + "\", new IndexAnnotation(new [] { ");
 
-                    idxs.Append(
-                        "new IndexAttribute(\"" + index.Name + "\"){ IsClustered = " + isClustered.ToString().ToLower()
-                        + ", IsUnique = " + index.IsUnique.ToString().ToLower() + ", Order = " + i + "}");
+                    idxs.Append("new IndexAttribute(\"" + index.Name + "\"){ IsClustered = " + isClustered.ToString().ToLower() + 
+                                ", IsUnique = " + index.IsUnique.ToString().ToLower() + ", Order = " + i + "}").Append("}));").AppendLine(string.Empty);
                 }
             }
-
-            return idxs.Append("}))").ToString();
+            return idxs.ToString();
         }
 
         /// <summary>
