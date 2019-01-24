@@ -466,32 +466,50 @@ namespace DotNetScaffolder.Domain.Data.Contexts.NHib.Base.Context
 
         public void BulkDelete<TEntity>(IEnumerable<TEntity> items) where TEntity : class
         {
-            throw new NotImplementedException();
+            foreach (var entity in items)
+            {
+                this.Remove(entity);
+            }
         }
 
-        public Task BulkDeleteAsync<TEntity>(IEnumerable<TEntity> items) where TEntity : class
+        public async Task BulkDeleteAsync<TEntity>(IEnumerable<TEntity> items) where TEntity : class
         {
-            throw new NotImplementedException();
+            foreach (var entity in items)
+            {
+                await this.RemoveAsync(entity);
+            }
         }
 
         public void BulkInsert<TEntity>(IEnumerable<TEntity> items) where TEntity : class
         {
-            throw new NotImplementedException();
+            foreach (var entity in items)
+            {
+                 this.Add(entity);
+            }
         }
 
-        public Task BulkInsertAsync<TEntity>(IEnumerable<TEntity> items) where TEntity : class
+        public async Task BulkInsertAsync<TEntity>(IEnumerable<TEntity> items) where TEntity : class
         {
-            throw new NotImplementedException();
+            foreach (var entity in items)
+            {
+                await this.AddAsync(entity);
+            }
         }
 
         public void BulkUpdate<TEntity>(IEnumerable<TEntity> items) where TEntity : class
         {
-            throw new NotImplementedException();
+            foreach (var entity in items)
+            {
+                this.Modify(entity);
+            }
         }
 
-        public Task BulkUpdateAsync<TEntity>(IEnumerable<TEntity> items) where TEntity : class
+        public async Task BulkUpdateAsync<TEntity>(IEnumerable<TEntity> items) where TEntity : class
         {
-            throw new NotImplementedException();
+            foreach (var entity in items)
+            {
+                await this.ModifyAsync(entity);
+            }
         }
 
         /// <summary>

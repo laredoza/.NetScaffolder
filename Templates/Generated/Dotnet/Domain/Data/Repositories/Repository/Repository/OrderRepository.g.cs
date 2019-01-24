@@ -572,7 +572,21 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <param name="items"></param>
         public void BulkDelete(IEnumerable<Order> items)
 		{
-			this.UnitOfWork.BulkDelete<IOrder>(items);
+            List<Order> foundItems = new List<Order>();
+
+		    foreach (var item in items)
+		    {
+                var foundEntity = this.UnitOfWork.FirstOrDefault<Order>(o => o.OrderId == item.OrderId , true);
+
+		        if (foundEntity == null)
+		        {
+		            throw new Exception("The Order> entity does not exist");
+		        }
+
+		        foundItems.Add(foundEntity);
+		    }
+
+			this.UnitOfWork.BulkDelete<IOrder>(foundItems);
 		}
 
         /// <summary>
@@ -583,7 +597,21 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <returns></returns>
         public async Task BulkDeleteAsync(IEnumerable<Order> items)
 		{
-			await this.UnitOfWork.BulkDeleteAsync<Order>(items);
+            List<Order> foundItems = new List<Order>();
+
+		    foreach (var item in items)
+		    {
+                var foundEntity = await this.UnitOfWork.FirstOrDefaultAsync<Order>(true, o => o.OrderId == item.OrderId );
+
+		        if (foundEntity == null)
+		        {
+		            throw new Exception("The Order> entity does not exist");
+		        }
+
+		        foundItems.Add(foundEntity);
+		    }
+
+			await this.UnitOfWork.BulkDeleteAsync<Order>(foundItems);
 		}
 
         /// <summary>
@@ -614,7 +642,35 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <param name="items"></param>
         public void BulkUpdate(IEnumerable<Order> items)
 		{
-			this.UnitOfWork.BulkUpdate<Order>(items);
+            List<Order> foundItems = new List<Order>();
+
+		    foreach (var entity in items)
+		    {
+                bool doUpdate = false;
+			    var entityToUpdate = this.UnitOfWork.FirstOrDefault<Order>(o =>  o.OrderId == entity.OrderId , true);
+			
+			    if (entityToUpdate == null)
+			    {
+				    throw new Exception("The Order entity does not exist");
+			    }
+			
+			    // Optimisation: Flag if any field has changed
+			    if (entityToUpdate.CustomerId != entity.CustomerId) { entityToUpdate.CustomerId = entity.CustomerId;doUpdate = true; }
+			    if (entityToUpdate.OrderDate != entity.OrderDate) { entityToUpdate.OrderDate = entity.OrderDate;doUpdate = true; }
+			    if (entityToUpdate.DeliveryDate != entity.DeliveryDate) { entityToUpdate.DeliveryDate = entity.DeliveryDate;doUpdate = true; }
+			    if (entityToUpdate.ShippingName != entity.ShippingName) { entityToUpdate.ShippingName = entity.ShippingName;doUpdate = true; }
+			    if (entityToUpdate.ShippingAddress != entity.ShippingAddress) { entityToUpdate.ShippingAddress = entity.ShippingAddress;doUpdate = true; }
+			    if (entityToUpdate.ShippingCity != entity.ShippingCity) { entityToUpdate.ShippingCity = entity.ShippingCity;doUpdate = true; }
+			    if (entityToUpdate.ShippingZip != entity.ShippingZip) { entityToUpdate.ShippingZip = entity.ShippingZip;doUpdate = true; }
+
+			    // Optimisation: Only execute update if a field has changed
+			    if (doUpdate)
+			    {
+				    foundItems.Add(entityToUpdate);
+			    }
+		    }
+
+			this.UnitOfWork.BulkUpdate<Order>(foundItems);
 		}
 
         /// <summary>
@@ -625,7 +681,35 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <returns></returns>
         public async Task BulkUpdateAsync(IEnumerable<Order> items)
 		{
-			await this.UnitOfWork.BulkUpdateAsync<Order>(items);
+            List<Order> foundItems = new List<Order>();
+
+		    foreach (var entity in items)
+		    {
+                bool doUpdate = false;
+			    var entityToUpdate = await this.UnitOfWork.FirstOrDefaultAsync<Order>(true, o =>  o.OrderId == entity.OrderId );
+			
+			    if (entityToUpdate == null)
+			    {
+				    throw new Exception("The Order entity does not exist");
+			    }
+			
+			    // Optimisation: Flag if any field has changed
+			    if (entityToUpdate.CustomerId != entity.CustomerId) { entityToUpdate.CustomerId = entity.CustomerId;doUpdate = true; }
+			    if (entityToUpdate.OrderDate != entity.OrderDate) { entityToUpdate.OrderDate = entity.OrderDate;doUpdate = true; }
+			    if (entityToUpdate.DeliveryDate != entity.DeliveryDate) { entityToUpdate.DeliveryDate = entity.DeliveryDate;doUpdate = true; }
+			    if (entityToUpdate.ShippingName != entity.ShippingName) { entityToUpdate.ShippingName = entity.ShippingName;doUpdate = true; }
+			    if (entityToUpdate.ShippingAddress != entity.ShippingAddress) { entityToUpdate.ShippingAddress = entity.ShippingAddress;doUpdate = true; }
+			    if (entityToUpdate.ShippingCity != entity.ShippingCity) { entityToUpdate.ShippingCity = entity.ShippingCity;doUpdate = true; }
+			    if (entityToUpdate.ShippingZip != entity.ShippingZip) { entityToUpdate.ShippingZip = entity.ShippingZip;doUpdate = true; }
+
+			    // Optimisation: Only execute update if a field has changed
+			    if (doUpdate)
+			    {
+				    foundItems.Add(entityToUpdate);
+			    }
+		    }
+
+			await this.UnitOfWork.BulkUpdateAsync<Order>(foundItems);
 		}
 
         #endregion

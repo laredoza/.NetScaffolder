@@ -171,11 +171,10 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.Applicati
                         o => o.Id.ToString() == parameterDictionary["name"]);
             }
 
-            
-
             TreeviewContextModels.Visible = SelectedApplicationService != null;
             gbAdditionalNamespaces.Visible = SelectedApplicationService == null;
             gbAdditionalNamespacesInterfaces.Visible = SelectedApplicationService == null;
+            GbAdditionalNamespacesWeb.Visible = SelectedApplicationService == null;
 
             if (SelectedApplicationService == null)
             {
@@ -299,6 +298,18 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.Applicati
                 }
             }
 
+            applicationServiceDataType.AdditionalNamespacesWeb.Clear();
+
+            foreach (var ns in TxtAdditionalnamespacesWeb.Lines)
+            {
+                var item = ns.Trim();
+                if (!string.IsNullOrEmpty(item) &&
+                    !applicationServiceDataType.AdditionalNamespacesWeb.Contains(item))
+                {
+                    applicationServiceDataType.AdditionalNamespacesWeb.Add(item);
+                }
+            }
+
             return applicationServiceDataType;
         }
 
@@ -419,6 +430,12 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.Applicati
             SelectedApplicationService.InheritFromInterface = InheritFromInterface.Text;
             SelectedApplicationService.OutputPathInterface = OutputPathInterface.Text;
 
+            SelectedApplicationService.OutputFolderWeb = TxtOutputFolderWeb.Text;
+            SelectedApplicationService.NamespaceWeb = TxtNamespaceWeb.Text;
+            SelectedApplicationService.InheritFromWeb = TxtInheritFromWeb.Text;
+            SelectedApplicationService.OutputPathWeb = TxtOutputPathWeb.Text;
+
+
             if (TreeviewContextModels.Nodes.Count > 0)
             {
                 ITableHierarchyService applicationService = new TempateHierarchyService();
@@ -479,6 +496,13 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.Applicati
             OutputPathInterface.Text = SelectedApplicationService.OutputPathInterface;
             txtNamespacesInterfaces.Lines = (DataType as ApplicationServiceDataType).AdditionalNamespacesInterfaces.ToArray();
 
+            TxtOutputFolderWeb.Text = SelectedApplicationService.OutputFolderWeb;
+            TxtNamespaceWeb.Text = SelectedApplicationService.NamespaceWeb;
+            TxtInheritFromWeb.Text = SelectedApplicationService.InheritFromWeb;
+            TxtOutputPathWeb.Text = SelectedApplicationService.OutputPathWeb;
+            TxtAdditionalnamespacesWeb.Lines = (DataType as ApplicationServiceDataType).AdditionalNamespacesWeb.ToArray();
+
+            
             UpdateDataSource();
         }
 

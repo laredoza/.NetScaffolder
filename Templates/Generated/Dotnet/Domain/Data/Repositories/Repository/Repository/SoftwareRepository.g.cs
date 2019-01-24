@@ -347,7 +347,21 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <param name="items"></param>
         public void BulkDelete(IEnumerable<Software> items)
 		{
-			this.UnitOfWork.BulkDelete<ISoftware>(items);
+            List<Software> foundItems = new List<Software>();
+
+		    foreach (var item in items)
+		    {
+                var foundEntity = this.UnitOfWork.FirstOrDefault<Software>(o => o.ProductId == item.ProductId , true);
+
+		        if (foundEntity == null)
+		        {
+		            throw new Exception("The Software> entity does not exist");
+		        }
+
+		        foundItems.Add(foundEntity);
+		    }
+
+			this.UnitOfWork.BulkDelete<ISoftware>(foundItems);
 		}
 
         /// <summary>
@@ -358,7 +372,21 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <returns></returns>
         public async Task BulkDeleteAsync(IEnumerable<Software> items)
 		{
-			await this.UnitOfWork.BulkDeleteAsync<Software>(items);
+            List<Software> foundItems = new List<Software>();
+
+		    foreach (var item in items)
+		    {
+                var foundEntity = await this.UnitOfWork.FirstOrDefaultAsync<Software>(true, o => o.ProductId == item.ProductId );
+
+		        if (foundEntity == null)
+		        {
+		            throw new Exception("The Software> entity does not exist");
+		        }
+
+		        foundItems.Add(foundEntity);
+		    }
+
+			await this.UnitOfWork.BulkDeleteAsync<Software>(foundItems);
 		}
 
         /// <summary>
@@ -389,7 +417,29 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <param name="items"></param>
         public void BulkUpdate(IEnumerable<Software> items)
 		{
-			this.UnitOfWork.BulkUpdate<Software>(items);
+            List<Software> foundItems = new List<Software>();
+
+		    foreach (var entity in items)
+		    {
+                bool doUpdate = false;
+			    var entityToUpdate = this.UnitOfWork.FirstOrDefault<Software>(o =>  o.ProductId == entity.ProductId , true);
+			
+			    if (entityToUpdate == null)
+			    {
+				    throw new Exception("The Software entity does not exist");
+			    }
+			
+			    // Optimisation: Flag if any field has changed
+			    if (entityToUpdate.LicenseCode != entity.LicenseCode) { entityToUpdate.LicenseCode = entity.LicenseCode;doUpdate = true; }
+
+			    // Optimisation: Only execute update if a field has changed
+			    if (doUpdate)
+			    {
+				    foundItems.Add(entityToUpdate);
+			    }
+		    }
+
+			this.UnitOfWork.BulkUpdate<Software>(foundItems);
 		}
 
         /// <summary>
@@ -400,7 +450,29 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <returns></returns>
         public async Task BulkUpdateAsync(IEnumerable<Software> items)
 		{
-			await this.UnitOfWork.BulkUpdateAsync<Software>(items);
+            List<Software> foundItems = new List<Software>();
+
+		    foreach (var entity in items)
+		    {
+                bool doUpdate = false;
+			    var entityToUpdate = await this.UnitOfWork.FirstOrDefaultAsync<Software>(true, o =>  o.ProductId == entity.ProductId );
+			
+			    if (entityToUpdate == null)
+			    {
+				    throw new Exception("The Software entity does not exist");
+			    }
+			
+			    // Optimisation: Flag if any field has changed
+			    if (entityToUpdate.LicenseCode != entity.LicenseCode) { entityToUpdate.LicenseCode = entity.LicenseCode;doUpdate = true; }
+
+			    // Optimisation: Only execute update if a field has changed
+			    if (doUpdate)
+			    {
+				    foundItems.Add(entityToUpdate);
+			    }
+		    }
+
+			await this.UnitOfWork.BulkUpdateAsync<Software>(foundItems);
 		}
 
         #endregion

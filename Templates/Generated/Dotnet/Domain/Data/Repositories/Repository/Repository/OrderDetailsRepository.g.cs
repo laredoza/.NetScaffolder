@@ -446,7 +446,21 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <param name="items"></param>
         public void BulkDelete(IEnumerable<OrderDetails> items)
 		{
-			this.UnitOfWork.BulkDelete<IOrderDetails>(items);
+            List<OrderDetails> foundItems = new List<OrderDetails>();
+
+		    foreach (var item in items)
+		    {
+                var foundEntity = this.UnitOfWork.FirstOrDefault<OrderDetails>(o => o.OrderDetailsId == item.OrderDetailsId , true);
+
+		        if (foundEntity == null)
+		        {
+		            throw new Exception("The OrderDetails> entity does not exist");
+		        }
+
+		        foundItems.Add(foundEntity);
+		    }
+
+			this.UnitOfWork.BulkDelete<IOrderDetails>(foundItems);
 		}
 
         /// <summary>
@@ -457,7 +471,21 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <returns></returns>
         public async Task BulkDeleteAsync(IEnumerable<OrderDetails> items)
 		{
-			await this.UnitOfWork.BulkDeleteAsync<OrderDetails>(items);
+            List<OrderDetails> foundItems = new List<OrderDetails>();
+
+		    foreach (var item in items)
+		    {
+                var foundEntity = await this.UnitOfWork.FirstOrDefaultAsync<OrderDetails>(true, o => o.OrderDetailsId == item.OrderDetailsId );
+
+		        if (foundEntity == null)
+		        {
+		            throw new Exception("The OrderDetails> entity does not exist");
+		        }
+
+		        foundItems.Add(foundEntity);
+		    }
+
+			await this.UnitOfWork.BulkDeleteAsync<OrderDetails>(foundItems);
 		}
 
         /// <summary>
@@ -488,7 +516,33 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <param name="items"></param>
         public void BulkUpdate(IEnumerable<OrderDetails> items)
 		{
-			this.UnitOfWork.BulkUpdate<OrderDetails>(items);
+            List<OrderDetails> foundItems = new List<OrderDetails>();
+
+		    foreach (var entity in items)
+		    {
+                bool doUpdate = false;
+			    var entityToUpdate = this.UnitOfWork.FirstOrDefault<OrderDetails>(o =>  o.OrderDetailsId == entity.OrderDetailsId , true);
+			
+			    if (entityToUpdate == null)
+			    {
+				    throw new Exception("The OrderDetails entity does not exist");
+			    }
+			
+			    // Optimisation: Flag if any field has changed
+			    if (entityToUpdate.OrderId != entity.OrderId) { entityToUpdate.OrderId = entity.OrderId;doUpdate = true; }
+			    if (entityToUpdate.ProductId != entity.ProductId) { entityToUpdate.ProductId = entity.ProductId;doUpdate = true; }
+			    if (entityToUpdate.UnitPrice != entity.UnitPrice) { entityToUpdate.UnitPrice = entity.UnitPrice;doUpdate = true; }
+			    if (entityToUpdate.Amount != entity.Amount) { entityToUpdate.Amount = entity.Amount;doUpdate = true; }
+			    if (entityToUpdate.Discount != entity.Discount) { entityToUpdate.Discount = entity.Discount;doUpdate = true; }
+
+			    // Optimisation: Only execute update if a field has changed
+			    if (doUpdate)
+			    {
+				    foundItems.Add(entityToUpdate);
+			    }
+		    }
+
+			this.UnitOfWork.BulkUpdate<OrderDetails>(foundItems);
 		}
 
         /// <summary>
@@ -499,7 +553,33 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <returns></returns>
         public async Task BulkUpdateAsync(IEnumerable<OrderDetails> items)
 		{
-			await this.UnitOfWork.BulkUpdateAsync<OrderDetails>(items);
+            List<OrderDetails> foundItems = new List<OrderDetails>();
+
+		    foreach (var entity in items)
+		    {
+                bool doUpdate = false;
+			    var entityToUpdate = await this.UnitOfWork.FirstOrDefaultAsync<OrderDetails>(true, o =>  o.OrderDetailsId == entity.OrderDetailsId );
+			
+			    if (entityToUpdate == null)
+			    {
+				    throw new Exception("The OrderDetails entity does not exist");
+			    }
+			
+			    // Optimisation: Flag if any field has changed
+			    if (entityToUpdate.OrderId != entity.OrderId) { entityToUpdate.OrderId = entity.OrderId;doUpdate = true; }
+			    if (entityToUpdate.ProductId != entity.ProductId) { entityToUpdate.ProductId = entity.ProductId;doUpdate = true; }
+			    if (entityToUpdate.UnitPrice != entity.UnitPrice) { entityToUpdate.UnitPrice = entity.UnitPrice;doUpdate = true; }
+			    if (entityToUpdate.Amount != entity.Amount) { entityToUpdate.Amount = entity.Amount;doUpdate = true; }
+			    if (entityToUpdate.Discount != entity.Discount) { entityToUpdate.Discount = entity.Discount;doUpdate = true; }
+
+			    // Optimisation: Only execute update if a field has changed
+			    if (doUpdate)
+			    {
+				    foundItems.Add(entityToUpdate);
+			    }
+		    }
+
+			await this.UnitOfWork.BulkUpdateAsync<OrderDetails>(foundItems);
 		}
 
         #endregion

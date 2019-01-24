@@ -49,28 +49,28 @@
             // 
             // InheritFromInterface
             // 
-            this.InheritFromInterface.Location = new System.Drawing.Point(151, 102);
+            this.InheritFromInterface.Location = new System.Drawing.Point(173, 102);
             this.InheritFromInterface.Name = "InheritFromInterface";
             this.InheritFromInterface.Size = new System.Drawing.Size(171, 20);
             this.InheritFromInterface.TabIndex = 54;
             // 
             // OutputFolder
             // 
-            this.OutputFolder.Location = new System.Drawing.Point(151, 74);
+            this.OutputFolder.Location = new System.Drawing.Point(173, 74);
             this.OutputFolder.Name = "OutputFolder";
             this.OutputFolder.Size = new System.Drawing.Size(171, 20);
             this.OutputFolder.TabIndex = 52;
             // 
             // Namespace
             // 
-            this.Namespace.Location = new System.Drawing.Point(151, 45);
+            this.Namespace.Location = new System.Drawing.Point(173, 45);
             this.Namespace.Name = "Namespace";
             this.Namespace.Size = new System.Drawing.Size(171, 20);
             this.Namespace.TabIndex = 51;
             // 
             // WebApiName
             // 
-            this.WebApiName.Location = new System.Drawing.Point(151, 19);
+            this.WebApiName.Location = new System.Drawing.Point(173, 19);
             this.WebApiName.Name = "WebApiName";
             this.WebApiName.Size = new System.Drawing.Size(171, 20);
             this.WebApiName.TabIndex = 50;
@@ -78,7 +78,7 @@
             // label27
             // 
             this.label27.AutoSize = true;
-            this.label27.Location = new System.Drawing.Point(86, 104);
+            this.label27.Location = new System.Drawing.Point(101, 104);
             this.label27.Name = "label27";
             this.label27.Size = new System.Drawing.Size(65, 13);
             this.label27.TabIndex = 49;
@@ -87,7 +87,7 @@
             // label25
             // 
             this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(77, 77);
+            this.label25.Location = new System.Drawing.Point(92, 77);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(74, 13);
             this.label25.TabIndex = 45;
@@ -96,7 +96,7 @@
             // label24
             // 
             this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(82, 48);
+            this.label24.Location = new System.Drawing.Point(97, 48);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(67, 13);
             this.label24.TabIndex = 44;
@@ -105,7 +105,7 @@
             // label23
             // 
             this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(70, 22);
+            this.label23.Location = new System.Drawing.Point(85, 22);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(79, 13);
             this.label23.TabIndex = 43;
@@ -133,7 +133,7 @@
             // 
             // btnNew
             // 
-            this.btnNew.Location = new System.Drawing.Point(328, 102);
+            this.btnNew.Location = new System.Drawing.Point(350, 102);
             this.btnNew.Name = "btnNew";
             this.btnNew.Size = new System.Drawing.Size(75, 23);
             this.btnNew.TabIndex = 58;
@@ -145,7 +145,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(82, 128);
+            this.label1.Location = new System.Drawing.Point(97, 128);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(67, 13);
             this.label1.TabIndex = 58;
@@ -153,9 +153,9 @@
             // 
             // OutputPath
             // 
-            this.OutputPath.Location = new System.Drawing.Point(150, 128);
+            this.OutputPath.Location = new System.Drawing.Point(172, 128);
             this.OutputPath.Name = "OutputPath";
-            this.OutputPath.Size = new System.Drawing.Size(336, 20);
+            this.OutputPath.Size = new System.Drawing.Size(301, 20);
             this.OutputPath.TabIndex = 57;
             // 
             // gbAdditionalNamespaces

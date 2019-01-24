@@ -3,8 +3,8 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
-    <AssemblyVersion>1.0.126.0</AssemblyVersion>
-    <FileVersion>1.0.126.0</FileVersion>
+    <AssemblyVersion>1.0.144.0</AssemblyVersion>
+    <FileVersion>1.0.144.0</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
