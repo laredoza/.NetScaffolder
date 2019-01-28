@@ -354,22 +354,26 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6
                 }
                 else
                 {
-                    if (rel.ColumnRequired)
-                    {
-                        sb.Append(".WithRequiredDependent();");
-                    }
-                    else
-                    {
-                        if (rel.ReferencedColumnRequired)
-                        {
-                            sb.Append(".WithOptional();");
-                        }
-                        else
-                        {
-                            sb.Append(".WithOptionalDependent();");
-                        }
-                    }
+                    sb.Append(";");
                 }
+                //else
+                //{
+                //    if (rel.ColumnRequired)
+                //    {
+                //        sb.Append(".WithRequiredDependent();");
+                //    }
+                //    else
+                //    {
+                //        if (rel.ReferencedColumnRequired)
+                //        {
+                //            sb.Append(".WithOptional();");
+                //        }
+                //        else
+                //        {
+                //            sb.Append(".WithOptionalDependent();");
+                //        }
+                //    }
+                //}
             }
             else if (rel.Multiplicity == RelationshipMultiplicity.One)
             {

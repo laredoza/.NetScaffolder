@@ -317,8 +317,8 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
 
             return MultiplicityCalculator.Calculate(
                 relationshipType,
-                column.IsPrimaryKey,
-                referencedColumn.IsPrimaryKey,
+                column.IsPrimaryKey & table.PrimaryKey.Columns.Count < 2,
+                referencedColumn.IsPrimaryKey & referencedTable.PrimaryKey.Columns.Count < 2,
                 isForeignKey,
                 column.Nullable,
                 referencedColumn.Nullable,
