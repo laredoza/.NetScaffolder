@@ -1,8 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
-    <AssemblyVersion>1.0.108.0</AssemblyVersion>
-    <FileVersion>1.0.108.0</FileVersion>
+    <AssemblyVersion>1.0.119.0</AssemblyVersion>
+    <FileVersion>1.0.119.0</FileVersion>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="StructureMap.Microsoft.DependencyInjection" Version="1.4.0" />

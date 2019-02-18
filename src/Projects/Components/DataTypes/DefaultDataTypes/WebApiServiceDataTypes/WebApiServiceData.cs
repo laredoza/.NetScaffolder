@@ -101,6 +101,14 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.WebApiServiceDa
         /// </summary>
         public string WebApiName { get; set; }
 
+        public string ApplicationServiceNameSpace { get; set; }
+
+        public string ApplicationServiceOutputFolder { get; set; }
+
+        public string ApplicationServiceInheritFrom { get; set; }
+
+        public string ApplicationServiceOutputPath { get; set; }
+
         #endregion
 
         #region Public Methods And Operators

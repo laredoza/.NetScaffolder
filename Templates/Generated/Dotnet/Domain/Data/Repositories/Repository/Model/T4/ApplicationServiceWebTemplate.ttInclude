@@ -1,5 +1,5 @@
 ﻿<#+
-public class ApplicationServiceTemplate : BaseTemplate 
+public class ApplicationServiceWebTemplate : BaseTemplate 
 {
 	public ApplicationServiceDataType DataType { get; set; }
         public string DtoInterfaceNamespace { get; set; }
@@ -34,6 +34,8 @@ using <#= ApplicationInterfaceNamespace #>;
 using <#= DtoInterfaceDataType.FullNamespace#>;
 using <#= EntityDataType.FullNamespace#>;
 using <#= DtoDataType.FullNamespace #>;
+using DotNetScaffolder.Domain.Core.Interfaces;
+
 <#+            foreach(var nameSpace in DataType.AdditionalNamespaces){ #>
 using <#=                nameSpace #>;
 <#+            } #>
@@ -43,36 +45,13 @@ namespace <#= CurrentApplicationData.TransformFullnamespace(DataType.BaseNamespa
     /// <summary>
 	/// The <#= CurrentApplicationData.ApplicationServiceName #>Application Service 
 	/// </summary>
-	public partial class <#= CurrentApplicationData.ApplicationServiceName #>ApplicationService <#= CurrentApplicationData.TransformInheritFrom #>
+	public partial class WebApi<#= CurrentApplicationData.ApplicationServiceName #>ApplicationService <#= CurrentApplicationData.TransformInheritFrom #>
 	{
+        public IWebApiSettings apiSettings { get; set; }
 
-<#+            foreach(var model in CurrentApplicationData.Models){ 
-string modelName = DataType.NamingConvention == null ? model.TableName : DataType.NamingConvention.ApplyNamingConvention(model.TableName); #>
-        /// <summary>
-        /// Gets or sets the <#= modelName #> Repository 
-        /// </summary>
-        protected I<#= modelName #>Repository <#= modelName #>Repository { get; set; }
-<#+ } #>
-
-        public <#= CurrentApplicationData.ApplicationServiceName #>ApplicationService (
-<#+            for(int n = 0; n < CurrentApplicationData.Models.Count; n++)
-                   { 
-                var model = CurrentApplicationData.Models[n];
-                    string modelName = DataType.NamingConvention == null ? model.TableName : DataType.NamingConvention.ApplyNamingConvention(model.TableName); #>
-                    <#+ if (n < CurrentApplicationData.Models.Count - 1) {#>
-                      I<#= modelName #>Repository <#= Char.ToLowerInvariant(modelName[0]) + modelName.Substring(1) #>Repository,
-                    <#+                }  else { #>
-  I<#= modelName #>Repository <#= Char.ToLowerInvariant(modelName[0]) + modelName.Substring(1) #>Repository
-                    <#+                } #>
-<#+                } #>
-                 )
+        public WebApi<#= CurrentApplicationData.ApplicationServiceName #>ApplicationService(IWebApiSettings apiSettings)
         {
-<#+            foreach(var model in CurrentApplicationData.Models){ #>
-<#+ 
-string modelName = DataType.NamingConvention == null ? model.TableName : DataType.NamingConvention.ApplyNamingConvention(model.TableName);
-#>
-            this.<#= modelName #>Repository = <#= Char.ToLowerInvariant(modelName[0]) + modelName.Substring(1) #>Repository;
-<#+ } #>
+            this.apiSettings = apiSettings;
         }
 
         #region Load
@@ -91,6 +70,26 @@ if(model.PrimaryKeyCount > 1){ #>
         /// <returns><#= modelName #>Dto</returns>
 		<#= modelName #>Dto Load(<#= DataType.TransformAsParameter(model.Columns.Where(o => o.IsPrimaryKey)) #>, bool cache, params Expression<Func<I<#= modelName #>, object>>[] includes)
         {
+            <#= modelName #>Dto result;
+
+            var apiUrl = $"{this.apiSettings.BasePath}/<#= modelName #>/LoadByCustomerCustomerId/{customerId}/{cache}";
+
+            var client = new HttpClient();
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", this.apiSettings.Bearer);
+            var response = client.GetAsync(apiUrl).Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+                var json = response.Content.ReadAsStringAsync().Result;
+                result = JsonConvert.DeserializeObject<CustomerDto>(json);
+            }
+            else
+            {
+                throw new Exception($"An error happened{response.StatusCode}");
+            }
+
+            return result;
+
             return new <#= modelName #>Dto(this.<#= modelName #>Repository.Load(<#= DataType.TransformAsParameterName(model.Columns.Where(o => o.IsPrimaryKey)) #>, cache, includes), true);
         }
 

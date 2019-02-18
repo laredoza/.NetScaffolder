@@ -15,21 +15,21 @@ namespace DotNetScaffolder.Domain.Data.ApplicationServices.WebApiApplicationServ
 {
     public class WebApiCustomerApplicationService : ICustomerApplicationService
     {
-        public IWebApiSettings apiSettings { get; set; }
+        public IWebApiSettings ApiSettings { get; set; }
 
         public WebApiCustomerApplicationService(IWebApiSettings apiSettings)
         {
-            this.apiSettings = apiSettings;
+            this.ApiSettings = apiSettings;
         }
 
         public CustomerDto LoadByCustomerCustomerId(int customerId, bool cache, params Expression<Func<ICustomer, object>>[] includes)
         {
             CustomerDto result;
 
-            var apiUrl = $"{this.apiSettings.BasePath}/product/LoadByCustomerCustomerId/{customerId}/{cache}";
+            var apiUrl = $"{this.ApiSettings.BasePath}/product/LoadByCustomerCustomerId/{customerId}/{cache}";
 
             var client = new HttpClient();
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", this.apiSettings.Bearer);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", this.ApiSettings.Bearer);
             var response = client.GetAsync(apiUrl).Result;
 
             if (response.IsSuccessStatusCode)
@@ -49,10 +49,10 @@ namespace DotNetScaffolder.Domain.Data.ApplicationServices.WebApiApplicationServ
         {
             CustomerDto result;
 
-            var apiUrl = $"{this.apiSettings.BasePath}/product/LoadByCustomerCustomerIdAsync/{customerId}/{cache}";
+            var apiUrl = $"{this.ApiSettings.BasePath}/product/LoadByCustomerCustomerIdAsync/{customerId}/{cache}";
 
             var client = new HttpClient();
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", this.apiSettings.Bearer);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", this.ApiSettings.Bearer);
             var response = await client.GetAsync(apiUrl);
 
             if (response.IsSuccessStatusCode)
@@ -72,10 +72,10 @@ namespace DotNetScaffolder.Domain.Data.ApplicationServices.WebApiApplicationServ
         {
             IList<CustomerDto> result;
 
-            var apiUrl = $"{this.apiSettings.BasePath}/product/CustomerLoadAll/{cache}";
+            var apiUrl = $"{this.ApiSettings.BasePath}/product/CustomerLoadAll/{cache}";
 
             var client = new HttpClient();
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", this.apiSettings.Bearer);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", this.ApiSettings.Bearer);
             var response = client.GetAsync(apiUrl).Result;
 
             if (response.IsSuccessStatusCode)
@@ -95,10 +95,10 @@ namespace DotNetScaffolder.Domain.Data.ApplicationServices.WebApiApplicationServ
         {
             IList<CustomerDto> result;
 
-            var apiUrl = $"{this.apiSettings.BasePath}/product/CustomerLoadAllAsync/{cache}";
+            var apiUrl = $"{this.ApiSettings.BasePath}/product/CustomerLoadAllAsync/{cache}";
 
             var client = new HttpClient();
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", this.apiSettings.Bearer);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", this.ApiSettings.Bearer);
             var response = await client.GetAsync(apiUrl);
 
             if (response.IsSuccessStatusCode)
@@ -118,10 +118,10 @@ namespace DotNetScaffolder.Domain.Data.ApplicationServices.WebApiApplicationServ
         {
             IList<CustomerDto> result;
 
-            var apiUrl = $"{this.apiSettings.BasePath}/product/CustomerSearchByCustomerCode/{customerCode}/{caseSensitive}/{cache}";
+            var apiUrl = $"{this.ApiSettings.BasePath}/product/CustomerSearchByCustomerCode/{customerCode}/{caseSensitive}/{cache}";
 
             var client = new HttpClient();
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", this.apiSettings.Bearer);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", this.ApiSettings.Bearer);
             var response = client.GetAsync(apiUrl).Result;
 
             if (response.IsSuccessStatusCode)
@@ -142,10 +142,10 @@ namespace DotNetScaffolder.Domain.Data.ApplicationServices.WebApiApplicationServ
         {
             IList<CustomerDto> result;
 
-            var apiUrl = $"{this.apiSettings.BasePath}/product/CustomerSearchByCustomerCodeAsync/{customerCode}/{caseSensitive}/{cache}";
+            var apiUrl = $"{this.ApiSettings.BasePath}/product/CustomerSearchByCustomerCodeAsync/{customerCode}/{caseSensitive}/{cache}";
 
             var client = new HttpClient();
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", this.apiSettings.Bearer);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", this.ApiSettings.Bearer);
             var response = await client.GetAsync(apiUrl);
 
             if (response.IsSuccessStatusCode)
@@ -256,11 +256,11 @@ namespace DotNetScaffolder.Domain.Data.ApplicationServices.WebApiApplicationServ
         {
             bool result = false;
 
-            var apiUrl = $"{this.apiSettings.BasePath}/product/CustomerAdd";
+            var apiUrl = $"{this.ApiSettings.BasePath}/product/CustomerAdd";
 
             var client = new HttpClient();
             var content = new StringContent(JsonConvert.SerializeObject(entity), Encoding.UTF8, "application/json");
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", this.apiSettings.Bearer);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", this.ApiSettings.Bearer);
             var response = client.PostAsync(apiUrl, content).Result;
 
             if (response.IsSuccessStatusCode)
@@ -280,11 +280,11 @@ namespace DotNetScaffolder.Domain.Data.ApplicationServices.WebApiApplicationServ
         {
             bool result = false;
 
-            var apiUrl = $"{this.apiSettings.BasePath}/product/CustomerAddAsync";
+            var apiUrl = $"{this.ApiSettings.BasePath}/product/CustomerAddAsync";
 
             var client = new HttpClient();
             var content = new StringContent(JsonConvert.SerializeObject(entity), Encoding.UTF8, "application/json");
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", this.apiSettings.Bearer);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", this.ApiSettings.Bearer);
             var response = await client.PostAsync(apiUrl, content);
 
             if (response.IsSuccessStatusCode)
@@ -304,11 +304,11 @@ namespace DotNetScaffolder.Domain.Data.ApplicationServices.WebApiApplicationServ
         {
             bool result = false;
 
-            var apiUrl = $"{this.apiSettings.BasePath}/product/CustomerUpdate";
+            var apiUrl = $"{this.ApiSettings.BasePath}/product/CustomerUpdate";
 
             var client = new HttpClient();
             var content = new StringContent(JsonConvert.SerializeObject(entity), Encoding.UTF8, "application/json");
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", this.apiSettings.Bearer);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", this.ApiSettings.Bearer);
             var response = client.PutAsync(apiUrl, content).Result;
 
             if (response.IsSuccessStatusCode)
@@ -328,11 +328,11 @@ namespace DotNetScaffolder.Domain.Data.ApplicationServices.WebApiApplicationServ
         {
             bool result = false;
 
-            var apiUrl = $"{this.apiSettings.BasePath}/product/CustomerUpdateAsync";
+            var apiUrl = $"{this.ApiSettings.BasePath}/product/CustomerUpdateAsync";
 
             var client = new HttpClient();
             var content = new StringContent(JsonConvert.SerializeObject(entity), Encoding.UTF8, "application/json");
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", this.apiSettings.Bearer);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", this.ApiSettings.Bearer);
             var response = await client.PutAsync(apiUrl, content);
 
             if (response.IsSuccessStatusCode)
@@ -352,11 +352,11 @@ namespace DotNetScaffolder.Domain.Data.ApplicationServices.WebApiApplicationServ
         {
             bool result = false;
 
-            var apiUrl = $"{this.apiSettings.BasePath}/product/CustomerDeleteBycustomerId/{entity.CustomerId}/true";
+            var apiUrl = $"{this.ApiSettings.BasePath}/product/CustomerDeleteBycustomerId/{entity.CustomerId}/true";
 
             var client = new HttpClient();
             var content = new StringContent(JsonConvert.SerializeObject(entity), Encoding.UTF8, "application/json");
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", this.apiSettings.Bearer);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", this.ApiSettings.Bearer);
             var response = client.DeleteAsync(apiUrl).Result;
 
             if (response.IsSuccessStatusCode)
@@ -376,11 +376,11 @@ namespace DotNetScaffolder.Domain.Data.ApplicationServices.WebApiApplicationServ
         {
             bool result = false;
 
-            var apiUrl = $"{this.apiSettings.BasePath}/product/CustomerDeleteBycustomerIdAsync/{entity.CustomerId}/true";
+            var apiUrl = $"{this.ApiSettings.BasePath}/product/CustomerDeleteBycustomerIdAsync/{entity.CustomerId}/true";
 
             var client = new HttpClient();
             var content = new StringContent(JsonConvert.SerializeObject(entity), Encoding.UTF8, "application/json");
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", this.apiSettings.Bearer);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", this.ApiSettings.Bearer);
             var response = await client.DeleteAsync(apiUrl);
 
             if (response.IsSuccessStatusCode)
@@ -400,11 +400,11 @@ namespace DotNetScaffolder.Domain.Data.ApplicationServices.WebApiApplicationServ
         {
             bool result = false;
 
-            var apiUrl = $"{this.apiSettings.BasePath}/product/CustomerDeleteBycustomerId/{customerId}/{cache}";
+            var apiUrl = $"{this.ApiSettings.BasePath}/product/CustomerDeleteBycustomerId/{customerId}/{cache}";
 
             var client = new HttpClient();
             var content = new StringContent(customerId.ToString(), Encoding.UTF8);
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", this.apiSettings.Bearer);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", this.ApiSettings.Bearer);
             var response = client.DeleteAsync(apiUrl).Result;
 
             if (response.IsSuccessStatusCode)
@@ -424,11 +424,11 @@ namespace DotNetScaffolder.Domain.Data.ApplicationServices.WebApiApplicationServ
         {
             bool result = false;
 
-            var apiUrl = $"{this.apiSettings.BasePath}/product/CustomerDeleteBycustomerIdAsync/{customerId}/{cache}";
+            var apiUrl = $"{this.ApiSettings.BasePath}/product/CustomerDeleteBycustomerIdAsync/{customerId}/{cache}";
 
             var client = new HttpClient();
             var content = new StringContent(customerId.ToString(), Encoding.UTF8);
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", this.apiSettings.Bearer);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", this.ApiSettings.Bearer);
             var response = await client.DeleteAsync(apiUrl);
 
             if (response.IsSuccessStatusCode)
@@ -466,11 +466,11 @@ namespace DotNetScaffolder.Domain.Data.ApplicationServices.WebApiApplicationServ
 
         public void CustomerBulkDelete(IEnumerable<CustomerDto> items)
         {
-            var apiUrl = $"{this.apiSettings.BasePath}/product/CustomerBulkDelete";
+            var apiUrl = $"{this.ApiSettings.BasePath}/product/CustomerBulkDelete";
 
             var client = new HttpClient();
             var content = new StringContent(JsonConvert.SerializeObject(items), Encoding.UTF8, "application/json");
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", this.apiSettings.Bearer);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", this.ApiSettings.Bearer);
             var response = client.PostAsync(apiUrl, content).Result;
 
             if (!response.IsSuccessStatusCode)
@@ -481,11 +481,11 @@ namespace DotNetScaffolder.Domain.Data.ApplicationServices.WebApiApplicationServ
 
         public async Task CustomerBulkDeleteAsync(IEnumerable<CustomerDto> items)
         {
-            var apiUrl = $"{this.apiSettings.BasePath}/product/CustomerBulkDeleteAsync";
+            var apiUrl = $"{this.ApiSettings.BasePath}/product/CustomerBulkDeleteAsync";
 
             var client = new HttpClient();
             var content = new StringContent(JsonConvert.SerializeObject(items), Encoding.UTF8, "application/json");
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", this.apiSettings.Bearer);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", this.ApiSettings.Bearer);
             var response = await client.PostAsync(apiUrl, content);
 
             if (!response.IsSuccessStatusCode)
@@ -496,11 +496,11 @@ namespace DotNetScaffolder.Domain.Data.ApplicationServices.WebApiApplicationServ
 
         public void CustomerBulkInsert(IEnumerable<CustomerDto> items)
         {
-            var apiUrl = $"{this.apiSettings.BasePath}/product/CustomerBulkInsert";
+            var apiUrl = $"{this.ApiSettings.BasePath}/product/CustomerBulkInsert";
 
             var client = new HttpClient();
             var content = new StringContent(JsonConvert.SerializeObject(items), Encoding.UTF8, "application/json");
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", this.apiSettings.Bearer);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", this.ApiSettings.Bearer);
             var response = client.PostAsync(apiUrl, content).Result;
 
             if (!response.IsSuccessStatusCode)
@@ -511,11 +511,11 @@ namespace DotNetScaffolder.Domain.Data.ApplicationServices.WebApiApplicationServ
 
         public async Task CustomerBulkInsertAsync(IEnumerable<CustomerDto> items)
         {
-            var apiUrl = $"{this.apiSettings.BasePath}/product/CustomerBulkInsertAsync";
+            var apiUrl = $"{this.ApiSettings.BasePath}/product/CustomerBulkInsertAsync";
 
             var client = new HttpClient();
             var content = new StringContent(JsonConvert.SerializeObject(items), Encoding.UTF8, "application/json");
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", this.apiSettings.Bearer);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", this.ApiSettings.Bearer);
             var response = await client.PostAsync(apiUrl, content);
 
             if (!response.IsSuccessStatusCode)
@@ -526,11 +526,11 @@ namespace DotNetScaffolder.Domain.Data.ApplicationServices.WebApiApplicationServ
 
         public void CustomerBulkUpdate(IEnumerable<CustomerDto> items)
         {
-            var apiUrl = $"{this.apiSettings.BasePath}/product/CustomerBulkUpdate";
+            var apiUrl = $"{this.ApiSettings.BasePath}/product/CustomerBulkUpdate";
 
             var client = new HttpClient();
             var content = new StringContent(JsonConvert.SerializeObject(items), Encoding.UTF8, "application/json");
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", this.apiSettings.Bearer);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", this.ApiSettings.Bearer);
             var response = client.PostAsync(apiUrl, content).Result;
 
             if (!response.IsSuccessStatusCode)
@@ -541,11 +541,11 @@ namespace DotNetScaffolder.Domain.Data.ApplicationServices.WebApiApplicationServ
 
         public async Task CustomerBulkUpdateAsync(IEnumerable<CustomerDto> items)
         {
-            var apiUrl = $"{this.apiSettings.BasePath}/product/CustomerBulkUpdateAsync";
+            var apiUrl = $"{this.ApiSettings.BasePath}/product/CustomerBulkUpdateAsync";
 
             var client = new HttpClient();
             var content = new StringContent(JsonConvert.SerializeObject(items), Encoding.UTF8, "application/json");
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", this.apiSettings.Bearer);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", this.ApiSettings.Bearer);
             var response = await client.PostAsync(apiUrl, content);
 
             if (!response.IsSuccessStatusCode)

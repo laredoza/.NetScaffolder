@@ -461,6 +461,11 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.WebApiSer
             WebApiName.Text = SelectedWebApi.WebApiName;
             InheritFromInterface.Text = SelectedWebApi.InheritFrom;
 
+            TxtOutputPathApplicationService.Text = SelectedWebApi.ApplicationServiceOutputPath;
+            TxtInheritFromApplicationService.Text = SelectedWebApi.ApplicationServiceInheritFrom;
+            TxtOutputFolderApplicationService.Text = SelectedWebApi.ApplicationServiceOutputFolder;
+            TxtNamespaceApplicationService.Text = SelectedWebApi.ApplicationServiceNameSpace;
+
             // txtCustomConnectionName.Text = SelectedWebApi.CustomConnectionName;
             OutputPath.Text = SelectedWebApi.OutputPath;
 
@@ -481,6 +486,10 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Forms.WebApiSer
             SelectedWebApi.WebApiName = WebApiName.Text;
             SelectedWebApi.InheritFrom = InheritFromInterface.Text;
 
+            SelectedWebApi.ApplicationServiceOutputPath = TxtOutputPathApplicationService.Text;
+            SelectedWebApi.ApplicationServiceInheritFrom = TxtInheritFromApplicationService.Text;
+            SelectedWebApi.ApplicationServiceOutputFolder = TxtOutputFolderApplicationService.Text;
+            SelectedWebApi.ApplicationServiceNameSpace = TxtNamespaceApplicationService.Text; 
             // SelectedWebApi.CustomConnectionName = txtCustomConnectionName.Text;
             SelectedWebApi.OutputPath = OutputPath.Text;
 

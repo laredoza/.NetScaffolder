@@ -16,7 +16,62 @@
           <InheritFrom />
           <InheritFromInterface />
           <InheritFromWeb />
-          <Models />
+          <Models>
+            <Table Description="" SchemaName="dbo" TableName="BankAccount" EnabledForCodeGeneration="true">
+              <Columns>
+                <Column ColumnName="BankAccountId" ColumnOrder="1" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+                  <RemapDataType xsi:nil="true" />
+                </Column>
+                <Column ColumnName="BankAccountNumber" ColumnOrder="2" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="10" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+                  <RemapDataType xsi:nil="true" />
+                </Column>
+                <Column ColumnName="Balance" ColumnOrder="3" DataType="Decimal" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="0" Precision="19" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="4" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+                  <RemapDataType xsi:nil="true" />
+                </Column>
+                <Column ColumnName="CustomerId" ColumnOrder="4" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+                  <RemapDataType xsi:nil="true" />
+                </Column>
+                <Column ColumnName="Locked" ColumnOrder="5" DataType="Boolean" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="0" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+                  <RemapDataType xsi:nil="true" />
+                </Column>
+              </Columns>
+              <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
+              <RelationShips>
+                <RelationShip ColumnName="CustomerId" RelationShip="ForeignKey" ReferencedColumnName="CustomerId" Render="true" SchemaName="dbo" ReferencedTableName="Customer" Multiplicity="Many" ReferencedMultiplicity="ZeroToOne" UserRelationship="false">
+                  <RelationshipName>FK_BankAccount_Customer_CustomerId</RelationshipName>
+                </RelationShip>
+                <RelationShip ColumnName="BankAccountId" RelationShip="ForeignKeyChild" ReferencedColumnName="ToBankAccountId" Render="true" SchemaName="dbo" ReferencedTableName="BankTransfers" Multiplicity="One" ReferencedMultiplicity="Many" UserRelationship="false">
+                  <RelationshipName>FK_BankTransfers_BankAccount_ToBankAccountId</RelationshipName>
+                </RelationShip>
+              </RelationShips>
+              <Indexes>
+                <Index>
+                  <IndexType>NonClustered</IndexType>
+                  <IsUnique>false</IsUnique>
+                  <Name>IX_CustomerId1</Name>
+                  <Columns>
+                    <string>CustomerId</string>
+                  </Columns>
+                </Index>
+                <Index>
+                  <IndexType>PrimaryKey</IndexType>
+                  <IsUnique>true</IsUnique>
+                  <Name>PK_BankAccount</Name>
+                  <Columns>
+                    <string>BankAccountId</string>
+                  </Columns>
+                </Index>
+                <Index>
+                  <IndexType>NonClustered</IndexType>
+                  <IsUnique>true</IsUnique>
+                  <Name>UQ__BankAcco__4FC8E4A0C45281C8</Name>
+                  <Columns>
+                    <string>BankAccountId</string>
+                  </Columns>
+                </Index>
+              </Indexes>
+            </Table>
+          </Models>
           <Namespace>ApplicationService</Namespace>
           <NamespaceInterface>Data.ApplicationService</NamespaceInterface>
           <NamespaceWeb>ApplicationService</NamespaceWeb>
@@ -32,6 +87,10 @@
       <OutputFolder>Controllers</OutputFolder>
       <OutputPath>..\..\..\Services\WebApi\Default\DotNetScaffolder.Domain.Services.WebApi.Default.csproj</OutputPath>
       <WebApiName>Product</WebApiName>
+      <ApplicationServiceNameSpace>ApplicationService</ApplicationServiceNameSpace>
+      <ApplicationServiceOutputFolder>ApplicationService</ApplicationServiceOutputFolder>
+      <ApplicationServiceInheritFrom />
+      <ApplicationServiceOutputPath>..\..\ApplicationServices\WebApiApplication\DotNetScaffolder.Domain.Data.ApplicationServices.WebApiApplicationService.csproj</ApplicationServiceOutputPath>
     </WebApiServiceData>
   </WebApiDataList>
 </WebApiServiceDataType>

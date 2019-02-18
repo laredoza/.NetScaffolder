@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
-    <AssemblyVersion>1.0.129.0</AssemblyVersion>
-    <FileVersion>1.0.129.0</FileVersion>
+    <AssemblyVersion>1.0.139.0</AssemblyVersion>
+    <FileVersion>1.0.139.0</FileVersion>
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="Model\Package\**" />
@@ -34,6 +34,7 @@
 ..\..\ApplicationServices\ApplicationService\ApplicationService\CustomerApplicationService.g.cs
 ..\..\ApplicationServices\ApplicationService\ApplicationService\ProductApplicationService.g.cs
 ..\..\ApplicationServices\ApplicationService\Register\ApplicationServiceRegistration.g.cs
+..\..\ApplicationServices\WebApiApplication\ApplicationService\WebApiPProductApplicationService.g.cs
 ..\..\Contexts\EF\MySql\Context\MySqlFullContext.g.cs
 ..\..\Contexts\EF\MySql\ContextRegisster\ContextRegistration.g.cs
 ..\..\Contexts\EF\MySql\Database\DatabaseManager.g.cs

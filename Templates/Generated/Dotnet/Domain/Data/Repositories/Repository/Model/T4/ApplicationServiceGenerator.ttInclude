@@ -1,4 +1,6 @@
-﻿<#+
+﻿<#@ include file="ApplicationServiceWebTemplate.ttinclude" #>
+
+<#+
     public class ApplicationServiceGenerator : BaseGenerator
     {
         public ApplicationServiceDataType DataType{get;set;}
@@ -21,6 +23,7 @@
         
         private ApplicationServiceInterfaceTemplate templateInterface = new ApplicationServiceInterfaceTemplate();
         private ApplicationServiceTemplate template = new ApplicationServiceTemplate();
+        private ApplicationServiceWebTemplate templateWeb = new ApplicationServiceWebTemplate();
 
 		protected override void RunCore()
         {
@@ -53,6 +56,21 @@
                 }
 
                 template.RenderToFile(string.Format(@"{0}\{1}ApplicationService.g.cs", applicationServiceData.OutputFolder, applicationServiceData.ApplicationServiceName));	
+
+                //templateWeb.DataType = DataType;
+                //templateWeb.CurrentApplicationData = applicationServiceData;
+                //templateWeb.DtoInterfaceDataType = this.DtoInterfaceDataType;
+                //templateWeb.ApplicationInterfaceNamespace = applicationServiceData.TransformFullnamespaceInterface(DataType.BaseNamespace);
+                //templateWeb.RepositoryInterfaceNamespace = RepositoryInterfaceNamespace;
+                //templateWeb.DtoDataType = this.DtoDataType;
+                //templateWeb.EntityDataType = this.EntityDataType;
+//
+                //if(!string.IsNullOrEmpty(applicationServiceData.OutputPathWeb))
+                //{
+                    //templateWeb.Output.Project = applicationServiceData.OutputPathWeb;
+                //}
+
+                //templateWeb.RenderToFile(string.Format(@"{0}\WebApi{1}ApplicationService.g.cs", applicationServiceData.OutputFolderWeb, applicationServiceData.ApplicationServiceName));	
 			}
         }
     }

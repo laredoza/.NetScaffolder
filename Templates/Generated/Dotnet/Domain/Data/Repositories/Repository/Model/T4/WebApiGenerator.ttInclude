@@ -1,10 +1,15 @@
-﻿<#+
+﻿<#@ include file="WebApiTemplate.ttInclude" #>
+<#@ include file="WebApiTemplateCustom.ttInclude" #>
+<#@ include file="WebApiApplicationServiceTemplate.ttInclude" #>
+
+<#+
     public class WebApiGenerator : BaseGenerator
     {
         public WebApiServiceDataType DataType{get;set;}
         public ApplicationServiceDataType ApplicationServiceDataType{get;set;}
         private WebApiTemplate template = new WebApiTemplate();
         private WebApiTemplateCustom webApiTemplateCustom = new WebApiTemplateCustom();
+        private WebApiApplicationServiceTemplate applicationService = new WebApiApplicationServiceTemplate();
 
         public DtoInterfaceDataType DtoInterfaceDataType {get;set;}
         public DtoDataType DtoDataType { get; set; }
@@ -38,6 +43,19 @@
                 }
                 webApiTemplateCustom.Output.PreserveExistingFile = true;
                 webApiTemplateCustom.RenderToFile(string.Format(@"{0}\{1}Controller.cs", webApiServiceData.OutputFolder, webApiServiceData.WebApiName));	
+
+                applicationService.DataType = DataType;
+                applicationService.CurrentWebApiServiceData = webApiServiceData;
+                applicationService.ApplicationServiceDataType = this.ApplicationServiceDataType;
+                applicationService.DtoInterfaceDataType = this.DtoInterfaceDataType;
+                applicationService.DtoDataType = DtoDataType;
+
+                if(!string.IsNullOrEmpty(webApiServiceData.ApplicationServiceOutputPath))
+                {
+                    applicationService.Output.Project = webApiServiceData.ApplicationServiceOutputPath;
+                }
+                applicationService.Output.PreserveExistingFile = false;
+                applicationService.RenderToFile(string.Format(@"{0}\WebApiP{1}ApplicationService.g.cs", webApiServiceData.ApplicationServiceOutputFolder, webApiServiceData.WebApiName));	
 			}
         }
     }

@@ -11,8 +11,6 @@
 <#@ include file="ApplicationServiceInterfaceTemplate.ttInclude" #>
 <#@ include file="ApplicationServiceTemplate.ttInclude" #>
 <#@ include file="WebApiGenerator.ttInclude" #>
-<#@ include file="WebApiTemplate.ttInclude" #>
-<#@ include file="WebApiTemplateCustom.ttInclude" #>
 <#@ include file="StructureMapGenerator.ttInclude" #>
 
 <#+
