@@ -25,11 +25,11 @@ namespace DotNetScaffolder.Domain.Infrastructure.Web.Core.BootStrap.StructureMap
             IDataConfiguration dataConfiguration = new DataConfiguration();
             List<string> connectionStrings = new List<string>
             {
-                    "RepoTestEFCoreSqlServer",
-                    "RepoTestEFCorePostgres",
-                    "RepoTestEFCoreMySql",
-                    "RepoTestNHibMySql",
-                    "RepoTestNHibSqlServer"
+                    "IdentityServerEFCoreSqlServer",
+                    "IdentityServerEFCorePostgres",
+                    "IdentityServerEFCoreMySql",
+                    "IdentityServerNHibMySql",
+                    "IdentityServerNHibSqlServer"
             };
 
             dataConfiguration.Load(configuration, connectionStrings);

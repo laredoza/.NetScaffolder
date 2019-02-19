@@ -8,7 +8,7 @@
   <Contexts>
     <ContextData>
       <ContextName>FullContext</ContextName>
-      <CustomConnectionName>RepoTest</CustomConnectionName>
+      <CustomConnectionName>IdentityServer</CustomConnectionName>
       <Id>7d5d7239-42e3-4c2d-a0b9-abc8b00ff3cc</Id>
       <InheritFrom>BaseContext</InheritFrom>
       <Models>
@@ -49,6 +49,66 @@
           <Indexes />
         </Table>
         <Table Description="" SchemaName="dbo" TableName="AspNetUserToken" EnabledForCodeGeneration="true">
+          <Columns />
+          <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
+          <RelationShips />
+          <Indexes />
+        </Table>
+        <Table Description="" SchemaName="dbo" TableName="AllowedScope" EnabledForCodeGeneration="true">
+          <Columns />
+          <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
+          <RelationShips />
+          <Indexes />
+        </Table>
+        <Table Description="" SchemaName="dbo" TableName="ApiResource" EnabledForCodeGeneration="true">
+          <Columns />
+          <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
+          <RelationShips />
+          <Indexes />
+        </Table>
+        <Table Description="" SchemaName="dbo" TableName="Client" EnabledForCodeGeneration="true">
+          <Columns />
+          <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
+          <RelationShips />
+          <Indexes />
+        </Table>
+        <Table Description="" SchemaName="dbo" TableName="ClientGrantType" EnabledForCodeGeneration="true">
+          <Columns />
+          <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
+          <RelationShips />
+          <Indexes />
+        </Table>
+        <Table Description="" SchemaName="dbo" TableName="GrantType" EnabledForCodeGeneration="true">
+          <Columns />
+          <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
+          <RelationShips />
+          <Indexes />
+        </Table>
+        <Table Description="" SchemaName="dbo" TableName="IdentityResource" EnabledForCodeGeneration="true">
+          <Columns />
+          <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
+          <RelationShips />
+          <Indexes />
+        </Table>
+        <Table Description="" SchemaName="dbo" TableName="IdentityResourceClaimType" EnabledForCodeGeneration="true">
+          <Columns />
+          <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
+          <RelationShips />
+          <Indexes />
+        </Table>
+        <Table Description="" SchemaName="dbo" TableName="PostLogoutRedirectUri" EnabledForCodeGeneration="true">
+          <Columns />
+          <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
+          <RelationShips />
+          <Indexes />
+        </Table>
+        <Table Description="" SchemaName="dbo" TableName="RedirectUri" EnabledForCodeGeneration="true">
+          <Columns />
+          <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
+          <RelationShips />
+          <Indexes />
+        </Table>
+        <Table Description="" SchemaName="dbo" TableName="ResourceClaimType" EnabledForCodeGeneration="true">
           <Columns />
           <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
           <RelationShips />

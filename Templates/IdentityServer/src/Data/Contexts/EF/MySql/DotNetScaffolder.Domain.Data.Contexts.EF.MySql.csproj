@@ -161,6 +161,8 @@
     <Compile Include="ContextRegisster\ContextRegistration.g.cs" />
     <Compile Include="Context\MySqlFullContext.g.cs" />
     <Compile Include="Database\DatabaseManager.g.cs" />
+    <Compile Include="Mappings\MySqlFullContext\FullContextAllowedScopeMap.g.cs" />
+    <Compile Include="Mappings\MySqlFullContext\FullContextApiResourceMap.g.cs" />
     <Compile Include="Mappings\MySqlFullContext\FullContextAspNetRoleClaimMap.g.cs" />
     <Compile Include="Mappings\MySqlFullContext\FullContextAspNetRoleMap.g.cs" />
     <Compile Include="Mappings\MySqlFullContext\FullContextAspNetUserClaimMap.g.cs" />
@@ -168,6 +170,14 @@
     <Compile Include="Mappings\MySqlFullContext\FullContextAspNetUserMap.g.cs" />
     <Compile Include="Mappings\MySqlFullContext\FullContextAspNetUserRoleMap.g.cs" />
     <Compile Include="Mappings\MySqlFullContext\FullContextAspNetUserTokenMap.g.cs" />
+    <Compile Include="Mappings\MySqlFullContext\FullContextClientGrantTypeMap.g.cs" />
+    <Compile Include="Mappings\MySqlFullContext\FullContextClientMap.g.cs" />
+    <Compile Include="Mappings\MySqlFullContext\FullContextGrantTypeMap.g.cs" />
+    <Compile Include="Mappings\MySqlFullContext\FullContextIdentityResourceClaimTypeMap.g.cs" />
+    <Compile Include="Mappings\MySqlFullContext\FullContextIdentityResourceMap.g.cs" />
+    <Compile Include="Mappings\MySqlFullContext\FullContextPostLogoutRedirectUriMap.g.cs" />
+    <Compile Include="Mappings\MySqlFullContext\FullContextRedirectUriMap.g.cs" />
+    <Compile Include="Mappings\MySqlFullContext\FullContextResourceClaimTypeMap.g.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

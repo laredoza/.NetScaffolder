@@ -524,6 +524,309 @@
             </Index>
           </Indexes>
         </Table>
+        <Table Description="" SchemaName="dbo" TableName="AllowedScope" EnabledForCodeGeneration="true">
+          <Columns>
+            <Column ColumnName="Id" ColumnOrder="1" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="true" IdentitySeed="1" IdentityIncrement="1">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="ClientId" ColumnOrder="2" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="ResourceName" ColumnOrder="3" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="50" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+          </Columns>
+          <DatabaseGeneratedKeyType>Identity</DatabaseGeneratedKeyType>
+          <RelationShips>
+            <RelationShip ColumnName="ClientId" RelationShip="ForeignKey" ReferencedColumnName="Id" Render="true" SchemaName="dbo" ReferencedTableName="Client" Multiplicity="Many" ReferencedMultiplicity="One" UserRelationship="false">
+              <RelationshipName>FK_AllowedScope_Client</RelationshipName>
+            </RelationShip>
+          </RelationShips>
+          <Indexes>
+            <Index>
+              <IndexType>PrimaryKey</IndexType>
+              <IsUnique>true</IsUnique>
+              <Name>PK_AllowedScope</Name>
+              <Columns>
+                <string>Id</string>
+              </Columns>
+            </Index>
+          </Indexes>
+        </Table>
+        <Table Description="" SchemaName="dbo" TableName="ApiResource" EnabledForCodeGeneration="true">
+          <Columns>
+            <Column ColumnName="Id" ColumnOrder="1" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="true" IdentitySeed="1" IdentityIncrement="1">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="Name" ColumnOrder="2" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="50" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="DisplayName" ColumnOrder="3" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="100" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+          </Columns>
+          <DatabaseGeneratedKeyType>Identity</DatabaseGeneratedKeyType>
+          <RelationShips />
+          <Indexes>
+            <Index>
+              <IndexType>PrimaryKey</IndexType>
+              <IsUnique>true</IsUnique>
+              <Name>PK_ApiResource</Name>
+              <Columns>
+                <string>Id</string>
+              </Columns>
+            </Index>
+          </Indexes>
+        </Table>
+        <Table Description="" SchemaName="dbo" TableName="Client" EnabledForCodeGeneration="true">
+          <Columns>
+            <Column ColumnName="Id" ColumnOrder="1" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="true" IdentitySeed="1" IdentityIncrement="1">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="ClientId" ColumnOrder="2" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="50" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="ClientName" ColumnOrder="3" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="50" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="AlwaysSendClientClaims" ColumnOrder="4" DataType="Boolean" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="0" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+          </Columns>
+          <DatabaseGeneratedKeyType>Identity</DatabaseGeneratedKeyType>
+          <RelationShips>
+            <RelationShip ColumnName="Id" RelationShip="ForeignKeyChild" ReferencedColumnName="ClientId" Render="true" SchemaName="dbo" ReferencedTableName="AllowedScope" Multiplicity="One" ReferencedMultiplicity="Many" UserRelationship="false">
+              <RelationshipName>FK_AllowedScope_Client</RelationshipName>
+            </RelationShip>
+            <RelationShip ColumnName="Id" RelationShip="ForeignKeyChild" ReferencedColumnName="ClientId" Render="true" SchemaName="dbo" ReferencedTableName="ClientGrantType" Multiplicity="One" ReferencedMultiplicity="Many" UserRelationship="false">
+              <RelationshipName>FK_ClientGrantType_Client</RelationshipName>
+            </RelationShip>
+            <RelationShip ColumnName="Id" RelationShip="ForeignKeyChild" ReferencedColumnName="ClientId" Render="true" SchemaName="dbo" ReferencedTableName="PostLogoutRedirectUri" Multiplicity="One" ReferencedMultiplicity="Many" UserRelationship="false">
+              <RelationshipName>FK_PostLogoutRedirectUri_Client1</RelationshipName>
+            </RelationShip>
+            <RelationShip ColumnName="Id" RelationShip="ForeignKeyChild" ReferencedColumnName="ClientId" Render="true" SchemaName="dbo" ReferencedTableName="RedirectUri" Multiplicity="One" ReferencedMultiplicity="Many" UserRelationship="false">
+              <RelationshipName>FK_RedirectUri_Client</RelationshipName>
+            </RelationShip>
+          </RelationShips>
+          <Indexes>
+            <Index>
+              <IndexType>PrimaryKey</IndexType>
+              <IsUnique>true</IsUnique>
+              <Name>PK_Client</Name>
+              <Columns>
+                <string>Id</string>
+              </Columns>
+            </Index>
+          </Indexes>
+        </Table>
+        <Table Description="" SchemaName="dbo" TableName="ClientGrantType" EnabledForCodeGeneration="true">
+          <Columns>
+            <Column ColumnName="ClientId" ColumnOrder="1" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="GrantTypeId" ColumnOrder="2" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+          </Columns>
+          <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
+          <RelationShips>
+            <RelationShip ColumnName="ClientId" RelationShip="ForeignKey" ReferencedColumnName="Id" Render="true" SchemaName="dbo" ReferencedTableName="Client" Multiplicity="Many" ReferencedMultiplicity="One" UserRelationship="false">
+              <RelationshipName>FK_ClientGrantType_Client</RelationshipName>
+            </RelationShip>
+            <RelationShip ColumnName="GrantTypeId" RelationShip="ForeignKey" ReferencedColumnName="Id" Render="true" SchemaName="dbo" ReferencedTableName="GrantType" Multiplicity="Many" ReferencedMultiplicity="One" UserRelationship="false">
+              <RelationshipName>FK_ClientGrantType_GrantType</RelationshipName>
+            </RelationShip>
+          </RelationShips>
+          <Indexes>
+            <Index>
+              <IndexType>PrimaryKey</IndexType>
+              <IsUnique>true</IsUnique>
+              <Name>PK_ClientGrantType</Name>
+              <Columns>
+                <string>ClientId</string>
+                <string>GrantTypeId</string>
+              </Columns>
+            </Index>
+          </Indexes>
+        </Table>
+        <Table Description="" SchemaName="dbo" TableName="GrantType" EnabledForCodeGeneration="true">
+          <Columns>
+            <Column ColumnName="Id" ColumnOrder="1" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="true" IdentitySeed="1" IdentityIncrement="1">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="Name" ColumnOrder="2" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="50" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+          </Columns>
+          <DatabaseGeneratedKeyType>Identity</DatabaseGeneratedKeyType>
+          <RelationShips>
+            <RelationShip ColumnName="Id" RelationShip="ForeignKeyChild" ReferencedColumnName="GrantTypeId" Render="true" SchemaName="dbo" ReferencedTableName="ClientGrantType" Multiplicity="One" ReferencedMultiplicity="Many" UserRelationship="false">
+              <RelationshipName>FK_ClientGrantType_GrantType</RelationshipName>
+            </RelationShip>
+          </RelationShips>
+          <Indexes>
+            <Index>
+              <IndexType>PrimaryKey</IndexType>
+              <IsUnique>true</IsUnique>
+              <Name>PK_GrantType</Name>
+              <Columns>
+                <string>Id</string>
+              </Columns>
+            </Index>
+          </Indexes>
+        </Table>
+        <Table Description="" SchemaName="dbo" TableName="IdentityResource" EnabledForCodeGeneration="true">
+          <Columns>
+            <Column ColumnName="Id" ColumnOrder="1" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="true" IdentitySeed="1" IdentityIncrement="1">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="Name" ColumnOrder="2" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="50" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="DisplayName" ColumnOrder="3" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="50" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="ShowInDiscoveryDocument" ColumnOrder="4" DataType="Boolean" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="0" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="Required" ColumnOrder="5" DataType="Boolean" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="0" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="Emphasize" ColumnOrder="6" DataType="Boolean" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="0" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+          </Columns>
+          <DatabaseGeneratedKeyType>Identity</DatabaseGeneratedKeyType>
+          <RelationShips>
+            <RelationShip ColumnName="Id" RelationShip="ForeignKeyChild" ReferencedColumnName="IdentityResourceId" Render="true" SchemaName="dbo" ReferencedTableName="IdentityResourceClaimType" Multiplicity="One" ReferencedMultiplicity="Many" UserRelationship="false">
+              <RelationshipName>FK_IdentityResourceClaimType_IdentityResource</RelationshipName>
+            </RelationShip>
+          </RelationShips>
+          <Indexes>
+            <Index>
+              <IndexType>PrimaryKey</IndexType>
+              <IsUnique>true</IsUnique>
+              <Name>PK_IdentityResource</Name>
+              <Columns>
+                <string>Id</string>
+              </Columns>
+            </Index>
+          </Indexes>
+        </Table>
+        <Table Description="" SchemaName="dbo" TableName="IdentityResourceClaimType" EnabledForCodeGeneration="true">
+          <Columns>
+            <Column ColumnName="IdentityResourceId" ColumnOrder="1" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="ResourceClaimTypeId" ColumnOrder="2" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+          </Columns>
+          <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
+          <RelationShips>
+            <RelationShip ColumnName="IdentityResourceId" RelationShip="ForeignKey" ReferencedColumnName="Id" Render="true" SchemaName="dbo" ReferencedTableName="IdentityResource" Multiplicity="Many" ReferencedMultiplicity="One" UserRelationship="false">
+              <RelationshipName>FK_IdentityResourceClaimType_IdentityResource</RelationshipName>
+            </RelationShip>
+            <RelationShip ColumnName="ResourceClaimTypeId" RelationShip="ForeignKey" ReferencedColumnName="Id" Render="true" SchemaName="dbo" ReferencedTableName="ResourceClaimType" Multiplicity="Many" ReferencedMultiplicity="One" UserRelationship="false">
+              <RelationshipName>FK_IdentityResourceClaimType_ResourceClaimType</RelationshipName>
+            </RelationShip>
+          </RelationShips>
+          <Indexes>
+            <Index>
+              <IndexType>PrimaryKey</IndexType>
+              <IsUnique>true</IsUnique>
+              <Name>PK_IdentityResourceClaimType</Name>
+              <Columns>
+                <string>IdentityResourceId</string>
+                <string>ResourceClaimTypeId</string>
+              </Columns>
+            </Index>
+          </Indexes>
+        </Table>
+        <Table Description="" SchemaName="dbo" TableName="PostLogoutRedirectUri" EnabledForCodeGeneration="true">
+          <Columns>
+            <Column ColumnName="Id" ColumnOrder="1" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="ClientId" ColumnOrder="2" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="Uri" ColumnOrder="3" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="500" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+          </Columns>
+          <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
+          <RelationShips>
+            <RelationShip ColumnName="ClientId" RelationShip="ForeignKey" ReferencedColumnName="Id" Render="true" SchemaName="dbo" ReferencedTableName="Client" Multiplicity="Many" ReferencedMultiplicity="One" UserRelationship="false">
+              <RelationshipName>FK_PostLogoutRedirectUri_Client1</RelationshipName>
+            </RelationShip>
+          </RelationShips>
+          <Indexes>
+            <Index>
+              <IndexType>PrimaryKey</IndexType>
+              <IsUnique>true</IsUnique>
+              <Name>PK_PostLogoutRedirectUri</Name>
+              <Columns>
+                <string>Id</string>
+              </Columns>
+            </Index>
+          </Indexes>
+        </Table>
+        <Table Description="" SchemaName="dbo" TableName="RedirectUri" EnabledForCodeGeneration="true">
+          <Columns>
+            <Column ColumnName="Id" ColumnOrder="1" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="true" IdentitySeed="1" IdentityIncrement="1">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="ClientId" ColumnOrder="2" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="Uri" ColumnOrder="3" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="500" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+          </Columns>
+          <DatabaseGeneratedKeyType>Identity</DatabaseGeneratedKeyType>
+          <RelationShips>
+            <RelationShip ColumnName="ClientId" RelationShip="ForeignKey" ReferencedColumnName="Id" Render="true" SchemaName="dbo" ReferencedTableName="Client" Multiplicity="Many" ReferencedMultiplicity="One" UserRelationship="false">
+              <RelationshipName>FK_RedirectUri_Client</RelationshipName>
+            </RelationShip>
+          </RelationShips>
+          <Indexes>
+            <Index>
+              <IndexType>PrimaryKey</IndexType>
+              <IsUnique>true</IsUnique>
+              <Name>PK_RedirectUri</Name>
+              <Columns>
+                <string>Id</string>
+              </Columns>
+            </Index>
+          </Indexes>
+        </Table>
+        <Table Description="" SchemaName="dbo" TableName="ResourceClaimType" EnabledForCodeGeneration="true">
+          <Columns>
+            <Column ColumnName="Id" ColumnOrder="1" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="true" IdentitySeed="1" IdentityIncrement="1">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="Name" ColumnOrder="2" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="100" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+          </Columns>
+          <DatabaseGeneratedKeyType>Identity</DatabaseGeneratedKeyType>
+          <RelationShips>
+            <RelationShip ColumnName="Id" RelationShip="ForeignKeyChild" ReferencedColumnName="ResourceClaimTypeId" Render="true" SchemaName="dbo" ReferencedTableName="IdentityResourceClaimType" Multiplicity="One" ReferencedMultiplicity="Many" UserRelationship="false">
+              <RelationshipName>FK_IdentityResourceClaimType_ResourceClaimType</RelationshipName>
+            </RelationShip>
+          </RelationShips>
+          <Indexes>
+            <Index>
+              <IndexType>PrimaryKey</IndexType>
+              <IsUnique>true</IsUnique>
+              <Name>PK_ResourceClaimType</Name>
+              <Columns>
+                <string>Id</string>
+              </Columns>
+            </Index>
+          </Indexes>
+        </Table>
       </Tables>
     </DomainDefinition>
   </Domains>

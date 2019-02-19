@@ -65,7 +65,7 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EF.MySql.Database
 	        IServiceProvider serviceProvider = null)
 	    {
 	        if (configuration == null || configuration.ConnectionStrings == null
-	                                  || !configuration.ConnectionStrings.ContainsKey("RepoTestEFMySql"))
+	                                  || !configuration.ConnectionStrings.ContainsKey("IdentityServerEFMySql"))
 	        {
 	            throw new Exception("Invalid configuration specified in database manager");
 	        }
@@ -74,7 +74,7 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EF.MySql.Database
                  config =>
                  {
                     config.For<IUnitOfWork>().LifecycleIs(Lifecycles.Transient).Use<MySqlFullContext>()
-                         .Ctor<string>("connectionString").Is(configuration.ConnectionStrings["RepoTestEFMySql"]);
+                         .Ctor<string>("connectionString").Is(configuration.ConnectionStrings["IdentityServerEFMySql"]);
                  });
 
             // End

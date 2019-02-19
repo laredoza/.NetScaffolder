@@ -66,12 +66,12 @@ namespace DotNetScaffolder.Domain.Data.Contexts.NHib.Oracle.Database
 	        IServiceProvider serviceProvider = null)
 	    {
 	        if (configuration == null || configuration.ConnectionStrings == null
-	                                  || !configuration.ConnectionStrings.ContainsKey("RepoTestNHibOracle"))
+	                                  || !configuration.ConnectionStrings.ContainsKey("IdentityServerNHibOracle"))
 	        {
 	            throw new Exception("Invalid configuration specified in database manager");
 	        }
 
-            var nHibConfig = OracleClientConfiguration.Oracle10.ConnectionString(configuration.ConnectionStrings["RepoTestNHibOracle"]);
+            var nHibConfig = OracleClientConfiguration.Oracle10.ConnectionString(configuration.ConnectionStrings["IdentityServerNHibOracle"]);
              Configuration = Fluently.Configure().Database(nHibConfig)
                .Mappings(o => o.FluentMappings.AddFromAssembly(System.Reflection.Assembly.GetExecutingAssembly()));
              Factory = Configuration.BuildSessionFactory();

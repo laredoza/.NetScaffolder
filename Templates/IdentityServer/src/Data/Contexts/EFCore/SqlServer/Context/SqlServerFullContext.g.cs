@@ -72,6 +72,16 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.SqlServer.Context
 			modelBuilder.ApplyConfiguration(new FullContextAspNetUserLoginMap());
 			modelBuilder.ApplyConfiguration(new FullContextAspNetUserRoleMap());
 			modelBuilder.ApplyConfiguration(new FullContextAspNetUserTokenMap());
+			modelBuilder.ApplyConfiguration(new FullContextAllowedScopeMap());
+			modelBuilder.ApplyConfiguration(new FullContextApiResourceMap());
+			modelBuilder.ApplyConfiguration(new FullContextClientMap());
+			modelBuilder.ApplyConfiguration(new FullContextClientGrantTypeMap());
+			modelBuilder.ApplyConfiguration(new FullContextGrantTypeMap());
+			modelBuilder.ApplyConfiguration(new FullContextIdentityResourceMap());
+			modelBuilder.ApplyConfiguration(new FullContextIdentityResourceClaimTypeMap());
+			modelBuilder.ApplyConfiguration(new FullContextPostLogoutRedirectUriMap());
+			modelBuilder.ApplyConfiguration(new FullContextRedirectUriMap());
+			modelBuilder.ApplyConfiguration(new FullContextResourceClaimTypeMap());
 
 			#endregion
 			
@@ -94,6 +104,16 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.SqlServer.Context
 		public virtual DbSet<AspNetUserLogin> AspNetUserLogin { get; set; }
 		public virtual DbSet<AspNetUserRole> AspNetUserRole { get; set; }
 		public virtual DbSet<AspNetUserToken> AspNetUserToken { get; set; }
+		public virtual DbSet<AllowedScope> AllowedScope { get; set; }
+		public virtual DbSet<ApiResource> ApiResource { get; set; }
+		public virtual DbSet<Client> Client { get; set; }
+		public virtual DbSet<ClientGrantType> ClientGrantType { get; set; }
+		public virtual DbSet<GrantType> GrantType { get; set; }
+		public virtual DbSet<IdentityResource> IdentityResource { get; set; }
+		public virtual DbSet<IdentityResourceClaimType> IdentityResourceClaimType { get; set; }
+		public virtual DbSet<PostLogoutRedirectUri> PostLogoutRedirectUri { get; set; }
+		public virtual DbSet<RedirectUri> RedirectUri { get; set; }
+		public virtual DbSet<ResourceClaimType> ResourceClaimType { get; set; }
 
 		#endregion
 		

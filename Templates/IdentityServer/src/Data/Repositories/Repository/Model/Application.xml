@@ -169,6 +169,166 @@
           <RelationShips />
           <Indexes />
         </Table>
+        <Table Description="" SchemaName="dbo" TableName="AllowedScope" EnabledForCodeGeneration="true">
+          <Columns>
+            <Column ColumnName="Id" ColumnOrder="1" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="true" IdentitySeed="1" IdentityIncrement="1">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="ClientId" ColumnOrder="2" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="ResourceName" ColumnOrder="3" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="50" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+          </Columns>
+          <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
+          <RelationShips />
+          <Indexes />
+        </Table>
+        <Table Description="" SchemaName="dbo" TableName="ApiResource" EnabledForCodeGeneration="true">
+          <Columns>
+            <Column ColumnName="Id" ColumnOrder="1" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="true" IdentitySeed="1" IdentityIncrement="1">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="Name" ColumnOrder="2" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="50" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="DisplayName" ColumnOrder="3" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="100" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+          </Columns>
+          <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
+          <RelationShips />
+          <Indexes />
+        </Table>
+        <Table Description="" SchemaName="dbo" TableName="Client" EnabledForCodeGeneration="true">
+          <Columns>
+            <Column ColumnName="Id" ColumnOrder="1" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="true" IdentitySeed="1" IdentityIncrement="1">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="ClientId" ColumnOrder="2" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="50" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="ClientName" ColumnOrder="3" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="50" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="AlwaysSendClientClaims" ColumnOrder="4" DataType="Boolean" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="0" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+          </Columns>
+          <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
+          <RelationShips />
+          <Indexes />
+        </Table>
+        <Table Description="" SchemaName="dbo" TableName="ClientGrantType" EnabledForCodeGeneration="true">
+          <Columns>
+            <Column ColumnName="ClientId" ColumnOrder="1" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="GrantTypeId" ColumnOrder="2" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+          </Columns>
+          <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
+          <RelationShips />
+          <Indexes />
+        </Table>
+        <Table Description="" SchemaName="dbo" TableName="GrantType" EnabledForCodeGeneration="true">
+          <Columns>
+            <Column ColumnName="Id" ColumnOrder="1" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="true" IdentitySeed="1" IdentityIncrement="1">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="Name" ColumnOrder="2" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="50" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+          </Columns>
+          <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
+          <RelationShips />
+          <Indexes />
+        </Table>
+        <Table Description="" SchemaName="dbo" TableName="IdentityResource" EnabledForCodeGeneration="true">
+          <Columns>
+            <Column ColumnName="Id" ColumnOrder="1" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="true" IdentitySeed="1" IdentityIncrement="1">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="Name" ColumnOrder="2" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="50" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="DisplayName" ColumnOrder="3" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="50" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="ShowInDiscoveryDocument" ColumnOrder="4" DataType="Boolean" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="0" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="Required" ColumnOrder="5" DataType="Boolean" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="0" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="Emphasize" ColumnOrder="6" DataType="Boolean" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="0" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+          </Columns>
+          <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
+          <RelationShips />
+          <Indexes />
+        </Table>
+        <Table Description="" SchemaName="dbo" TableName="IdentityResourceClaimType" EnabledForCodeGeneration="true">
+          <Columns>
+            <Column ColumnName="IdentityResourceId" ColumnOrder="1" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="ResourceClaimTypeId" ColumnOrder="2" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+          </Columns>
+          <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
+          <RelationShips />
+          <Indexes />
+        </Table>
+        <Table Description="" SchemaName="dbo" TableName="PostLogoutRedirectUri" EnabledForCodeGeneration="true">
+          <Columns>
+            <Column ColumnName="Id" ColumnOrder="1" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="ClientId" ColumnOrder="2" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="Uri" ColumnOrder="3" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="500" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+          </Columns>
+          <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
+          <RelationShips />
+          <Indexes />
+        </Table>
+        <Table Description="" SchemaName="dbo" TableName="RedirectUri" EnabledForCodeGeneration="true">
+          <Columns>
+            <Column ColumnName="Id" ColumnOrder="1" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="true" IdentitySeed="1" IdentityIncrement="1">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="ClientId" ColumnOrder="2" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="Uri" ColumnOrder="3" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="500" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+          </Columns>
+          <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
+          <RelationShips />
+          <Indexes />
+        </Table>
+        <Table Description="" SchemaName="dbo" TableName="ResourceClaimType" EnabledForCodeGeneration="true">
+          <Columns>
+            <Column ColumnName="Id" ColumnOrder="1" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="true" IdentitySeed="1" IdentityIncrement="1">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="Name" ColumnOrder="2" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="100" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+          </Columns>
+          <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
+          <RelationShips />
+          <Indexes />
+        </Table>
       </Models>
       <Namespace>ApplicationService</Namespace>
       <NamespaceInterface>Data.ApplicationService</NamespaceInterface>

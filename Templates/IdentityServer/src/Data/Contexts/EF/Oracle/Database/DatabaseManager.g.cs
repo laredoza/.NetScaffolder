@@ -66,7 +66,7 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EF.Oracle.Database
 	        IServiceProvider serviceProvider = null)
 	    {
 	        if (configuration == null || configuration.ConnectionStrings == null
-	                                  || !configuration.ConnectionStrings.ContainsKey("RepoTestEFOracle"))
+	                                  || !configuration.ConnectionStrings.ContainsKey("IdentityServerEFOracle"))
 	        {
 	            throw new Exception("Invalid configuration specified in database manager");
 	        }
@@ -75,7 +75,7 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EF.Oracle.Database
                  config =>
                  {
                     config.For<IUnitOfWork>().LifecycleIs(Lifecycles.Transient).Use<OracleFullContext>()
-                         .Ctor<string>("connectionString").Is(configuration.ConnectionStrings["RepoTestEFOracle"]);
+                         .Ctor<string>("connectionString").Is(configuration.ConnectionStrings["IdentityServerEFOracle"]);
                  });
 
             // End

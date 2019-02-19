@@ -157,6 +157,8 @@
     <Compile Include="ContextRegisster\ContextRegistration.g.cs" />
     <Compile Include="Context\PostgresFullContext.g.cs" />
     <Compile Include="Database\DatabaseManager.g.cs" />
+    <Compile Include="Mappings\PostgresFullContext\FullContextAllowedScopeMap.g.cs" />
+    <Compile Include="Mappings\PostgresFullContext\FullContextApiResourceMap.g.cs" />
     <Compile Include="Mappings\PostgresFullContext\FullContextAspNetRoleClaimMap.g.cs" />
     <Compile Include="Mappings\PostgresFullContext\FullContextAspNetRoleMap.g.cs" />
     <Compile Include="Mappings\PostgresFullContext\FullContextAspNetUserClaimMap.g.cs" />
@@ -164,6 +166,14 @@
     <Compile Include="Mappings\PostgresFullContext\FullContextAspNetUserMap.g.cs" />
     <Compile Include="Mappings\PostgresFullContext\FullContextAspNetUserRoleMap.g.cs" />
     <Compile Include="Mappings\PostgresFullContext\FullContextAspNetUserTokenMap.g.cs" />
+    <Compile Include="Mappings\PostgresFullContext\FullContextClientGrantTypeMap.g.cs" />
+    <Compile Include="Mappings\PostgresFullContext\FullContextClientMap.g.cs" />
+    <Compile Include="Mappings\PostgresFullContext\FullContextGrantTypeMap.g.cs" />
+    <Compile Include="Mappings\PostgresFullContext\FullContextIdentityResourceClaimTypeMap.g.cs" />
+    <Compile Include="Mappings\PostgresFullContext\FullContextIdentityResourceMap.g.cs" />
+    <Compile Include="Mappings\PostgresFullContext\FullContextPostLogoutRedirectUriMap.g.cs" />
+    <Compile Include="Mappings\PostgresFullContext\FullContextRedirectUriMap.g.cs" />
+    <Compile Include="Mappings\PostgresFullContext\FullContextResourceClaimTypeMap.g.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -66,12 +66,12 @@ namespace DotNetScaffolder.Domain.Data.Contexts.NHib.SqlServer.Database
 	        IServiceProvider serviceProvider = null)
 	    {
 	        if (configuration == null || configuration.ConnectionStrings == null
-	                                  || !configuration.ConnectionStrings.ContainsKey("RepoTestNHibSqlServer"))
+	                                  || !configuration.ConnectionStrings.ContainsKey("IdentityServerNHibSqlServer"))
 	        {
 	            throw new Exception("Invalid configuration specified in database manager");
 	        }
 
-            var nHibConfig = MsSqlConfiguration.MsSql2012.ConnectionString(configuration.ConnectionStrings["RepoTestNHibSqlServer"]);
+            var nHibConfig = MsSqlConfiguration.MsSql2012.ConnectionString(configuration.ConnectionStrings["IdentityServerNHibSqlServer"]);
              Configuration = Fluently.Configure().Database(nHibConfig)
                .Mappings(o => o.FluentMappings.AddFromAssembly(System.Reflection.Assembly.GetExecutingAssembly()));
              Factory = Configuration.BuildSessionFactory();

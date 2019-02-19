@@ -152,6 +152,8 @@
     <Compile Include="ContextRegisster\ContextRegistration.g.cs" />
     <Compile Include="Context\OracleFullContext.g.cs" />
     <Compile Include="Database\DatabaseManager.g.cs" />
+    <Compile Include="Mappings\OracleFullContext\FullContextAllowedScopeMap.g.cs" />
+    <Compile Include="Mappings\OracleFullContext\FullContextApiResourceMap.g.cs" />
     <Compile Include="Mappings\OracleFullContext\FullContextAspNetRoleClaimMap.g.cs" />
     <Compile Include="Mappings\OracleFullContext\FullContextAspNetRoleMap.g.cs" />
     <Compile Include="Mappings\OracleFullContext\FullContextAspNetUserClaimMap.g.cs" />
@@ -159,6 +161,14 @@
     <Compile Include="Mappings\OracleFullContext\FullContextAspNetUserMap.g.cs" />
     <Compile Include="Mappings\OracleFullContext\FullContextAspNetUserRoleMap.g.cs" />
     <Compile Include="Mappings\OracleFullContext\FullContextAspNetUserTokenMap.g.cs" />
+    <Compile Include="Mappings\OracleFullContext\FullContextClientGrantTypeMap.g.cs" />
+    <Compile Include="Mappings\OracleFullContext\FullContextClientMap.g.cs" />
+    <Compile Include="Mappings\OracleFullContext\FullContextGrantTypeMap.g.cs" />
+    <Compile Include="Mappings\OracleFullContext\FullContextIdentityResourceClaimTypeMap.g.cs" />
+    <Compile Include="Mappings\OracleFullContext\FullContextIdentityResourceMap.g.cs" />
+    <Compile Include="Mappings\OracleFullContext\FullContextPostLogoutRedirectUriMap.g.cs" />
+    <Compile Include="Mappings\OracleFullContext\FullContextRedirectUriMap.g.cs" />
+    <Compile Include="Mappings\OracleFullContext\FullContextResourceClaimTypeMap.g.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

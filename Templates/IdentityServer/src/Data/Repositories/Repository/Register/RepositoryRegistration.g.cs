@@ -39,6 +39,16 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository.Register
 			this.For<IAspNetUserLoginRepository>().LifecycleIs(Lifecycles.Unique).UseIfNone<AspNetUserLoginRepository>();
 			this.For<IAspNetUserRoleRepository>().LifecycleIs(Lifecycles.Unique).UseIfNone<AspNetUserRoleRepository>();
 			this.For<IAspNetUserTokenRepository>().LifecycleIs(Lifecycles.Unique).UseIfNone<AspNetUserTokenRepository>();
+			this.For<IAllowedScopeRepository>().LifecycleIs(Lifecycles.Unique).UseIfNone<AllowedScopeRepository>();
+			this.For<IApiResourceRepository>().LifecycleIs(Lifecycles.Unique).UseIfNone<ApiResourceRepository>();
+			this.For<IClientRepository>().LifecycleIs(Lifecycles.Unique).UseIfNone<ClientRepository>();
+			this.For<IClientGrantTypeRepository>().LifecycleIs(Lifecycles.Unique).UseIfNone<ClientGrantTypeRepository>();
+			this.For<IGrantTypeRepository>().LifecycleIs(Lifecycles.Unique).UseIfNone<GrantTypeRepository>();
+			this.For<IIdentityResourceRepository>().LifecycleIs(Lifecycles.Unique).UseIfNone<IdentityResourceRepository>();
+			this.For<IIdentityResourceClaimTypeRepository>().LifecycleIs(Lifecycles.Unique).UseIfNone<IdentityResourceClaimTypeRepository>();
+			this.For<IPostLogoutRedirectUriRepository>().LifecycleIs(Lifecycles.Unique).UseIfNone<PostLogoutRedirectUriRepository>();
+			this.For<IRedirectUriRepository>().LifecycleIs(Lifecycles.Unique).UseIfNone<RedirectUriRepository>();
+			this.For<IResourceClaimTypeRepository>().LifecycleIs(Lifecycles.Unique).UseIfNone<ResourceClaimTypeRepository>();
         }
 		
 		#endregion

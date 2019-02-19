@@ -66,12 +66,12 @@ namespace DotNetScaffolder.Domain.Data.Contexts.NHib.MySql.Database
 	        IServiceProvider serviceProvider = null)
 	    {
 	        if (configuration == null || configuration.ConnectionStrings == null
-	                                  || !configuration.ConnectionStrings.ContainsKey("RepoTestNHibMySql"))
+	                                  || !configuration.ConnectionStrings.ContainsKey("IdentityServerNHibMySql"))
 	        {
 	            throw new Exception("Invalid configuration specified in database manager");
 	        }
 
-            var nHibConfig = MySQLConfiguration.Standard.ConnectionString(configuration.ConnectionStrings["RepoTestNHibMySql"]);
+            var nHibConfig = MySQLConfiguration.Standard.ConnectionString(configuration.ConnectionStrings["IdentityServerNHibMySql"]);
              Configuration = Fluently.Configure().Database(nHibConfig)
                .Mappings(o => o.FluentMappings.AddFromAssembly(System.Reflection.Assembly.GetExecutingAssembly()));
              Factory = Configuration.BuildSessionFactory();

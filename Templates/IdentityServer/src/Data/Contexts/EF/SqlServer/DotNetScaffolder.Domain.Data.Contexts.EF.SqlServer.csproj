@@ -144,6 +144,8 @@
     <Compile Include="ContextRegisster\ContextRegistration.g.cs" />
     <Compile Include="Context\SqlServerFullContext.g.cs" />
     <Compile Include="Database\DatabaseManager.g.cs" />
+    <Compile Include="Mappings\SqlServerFullContext\FullContextAllowedScopeMap.g.cs" />
+    <Compile Include="Mappings\SqlServerFullContext\FullContextApiResourceMap.g.cs" />
     <Compile Include="Mappings\SqlServerFullContext\FullContextAspNetRoleClaimMap.g.cs" />
     <Compile Include="Mappings\SqlServerFullContext\FullContextAspNetRoleMap.g.cs" />
     <Compile Include="Mappings\SqlServerFullContext\FullContextAspNetUserClaimMap.g.cs" />
@@ -151,6 +153,14 @@
     <Compile Include="Mappings\SqlServerFullContext\FullContextAspNetUserMap.g.cs" />
     <Compile Include="Mappings\SqlServerFullContext\FullContextAspNetUserRoleMap.g.cs" />
     <Compile Include="Mappings\SqlServerFullContext\FullContextAspNetUserTokenMap.g.cs" />
+    <Compile Include="Mappings\SqlServerFullContext\FullContextClientGrantTypeMap.g.cs" />
+    <Compile Include="Mappings\SqlServerFullContext\FullContextClientMap.g.cs" />
+    <Compile Include="Mappings\SqlServerFullContext\FullContextGrantTypeMap.g.cs" />
+    <Compile Include="Mappings\SqlServerFullContext\FullContextIdentityResourceClaimTypeMap.g.cs" />
+    <Compile Include="Mappings\SqlServerFullContext\FullContextIdentityResourceMap.g.cs" />
+    <Compile Include="Mappings\SqlServerFullContext\FullContextPostLogoutRedirectUriMap.g.cs" />
+    <Compile Include="Mappings\SqlServerFullContext\FullContextRedirectUriMap.g.cs" />
+    <Compile Include="Mappings\SqlServerFullContext\FullContextResourceClaimTypeMap.g.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

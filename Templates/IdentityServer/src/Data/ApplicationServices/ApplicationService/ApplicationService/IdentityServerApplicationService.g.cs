@@ -65,6 +65,46 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// Gets or sets the AspNetUserToken Repository 
         /// </summary>
         protected IAspNetUserTokenRepository AspNetUserTokenRepository { get; set; }
+        /// <summary>
+        /// Gets or sets the AllowedScope Repository 
+        /// </summary>
+        protected IAllowedScopeRepository AllowedScopeRepository { get; set; }
+        /// <summary>
+        /// Gets or sets the ApiResource Repository 
+        /// </summary>
+        protected IApiResourceRepository ApiResourceRepository { get; set; }
+        /// <summary>
+        /// Gets or sets the Client Repository 
+        /// </summary>
+        protected IClientRepository ClientRepository { get; set; }
+        /// <summary>
+        /// Gets or sets the ClientGrantType Repository 
+        /// </summary>
+        protected IClientGrantTypeRepository ClientGrantTypeRepository { get; set; }
+        /// <summary>
+        /// Gets or sets the GrantType Repository 
+        /// </summary>
+        protected IGrantTypeRepository GrantTypeRepository { get; set; }
+        /// <summary>
+        /// Gets or sets the IdentityResource Repository 
+        /// </summary>
+        protected IIdentityResourceRepository IdentityResourceRepository { get; set; }
+        /// <summary>
+        /// Gets or sets the IdentityResourceClaimType Repository 
+        /// </summary>
+        protected IIdentityResourceClaimTypeRepository IdentityResourceClaimTypeRepository { get; set; }
+        /// <summary>
+        /// Gets or sets the PostLogoutRedirectUri Repository 
+        /// </summary>
+        protected IPostLogoutRedirectUriRepository PostLogoutRedirectUriRepository { get; set; }
+        /// <summary>
+        /// Gets or sets the RedirectUri Repository 
+        /// </summary>
+        protected IRedirectUriRepository RedirectUriRepository { get; set; }
+        /// <summary>
+        /// Gets or sets the ResourceClaimType Repository 
+        /// </summary>
+        protected IResourceClaimTypeRepository ResourceClaimTypeRepository { get; set; }
 
         public IdentityServerApplicationService (
                                           IAspNetRoleRepository aspNetRoleRepository,
@@ -73,7 +113,17 @@ namespace DotNetScaffolder.Domain.ApplicationService
                                                               IAspNetUserClaimRepository aspNetUserClaimRepository,
                                                               IAspNetUserLoginRepository aspNetUserLoginRepository,
                                                               IAspNetUserRoleRepository aspNetUserRoleRepository,
-                                          IAspNetUserTokenRepository aspNetUserTokenRepository
+                                                              IAspNetUserTokenRepository aspNetUserTokenRepository,
+                                                              IAllowedScopeRepository allowedScopeRepository,
+                                                              IApiResourceRepository apiResourceRepository,
+                                                              IClientRepository clientRepository,
+                                                              IClientGrantTypeRepository clientGrantTypeRepository,
+                                                              IGrantTypeRepository grantTypeRepository,
+                                                              IIdentityResourceRepository identityResourceRepository,
+                                                              IIdentityResourceClaimTypeRepository identityResourceClaimTypeRepository,
+                                                              IPostLogoutRedirectUriRepository postLogoutRedirectUriRepository,
+                                                              IRedirectUriRepository redirectUriRepository,
+                                          IResourceClaimTypeRepository resourceClaimTypeRepository
                                      )
         {
             this.AspNetRoleRepository = aspNetRoleRepository;
@@ -83,6 +133,16 @@ namespace DotNetScaffolder.Domain.ApplicationService
             this.AspNetUserLoginRepository = aspNetUserLoginRepository;
             this.AspNetUserRoleRepository = aspNetUserRoleRepository;
             this.AspNetUserTokenRepository = aspNetUserTokenRepository;
+            this.AllowedScopeRepository = allowedScopeRepository;
+            this.ApiResourceRepository = apiResourceRepository;
+            this.ClientRepository = clientRepository;
+            this.ClientGrantTypeRepository = clientGrantTypeRepository;
+            this.GrantTypeRepository = grantTypeRepository;
+            this.IdentityResourceRepository = identityResourceRepository;
+            this.IdentityResourceClaimTypeRepository = identityResourceClaimTypeRepository;
+            this.PostLogoutRedirectUriRepository = postLogoutRedirectUriRepository;
+            this.RedirectUriRepository = redirectUriRepository;
+            this.ResourceClaimTypeRepository = resourceClaimTypeRepository;
         }
 
         #region Load
@@ -396,6 +456,442 @@ namespace DotNetScaffolder.Domain.ApplicationService
 		public async Task<IList<AspNetUserTokenDto>> AspNetUserTokenLoadAllAsync(bool cache, params Expression<Func<IAspNetUserToken, object>>[] includes)
         {
             return this.ConvertAspNetUserTokenEntityToDto( await this.AspNetUserTokenRepository.LoadAllAsync(cache, includes));
+        }
+
+
+        /// <summary>
+        /// Load AllowedScope entities from the database using the primary key
+        /// </summary
+        /// <param name="id">int</param>
+        /// <returns>AllowedScopeDto</returns>
+        /// <param name="includes">params Expression<Func<IAllowedScope, object>>[]</param>
+		public AllowedScopeDto LoadByAllowedScopeId(int id, bool cache, params Expression<Func<IAllowedScope, object>>[] includes)
+        {
+            return new AllowedScopeDto(this.AllowedScopeRepository.LoadById(id, cache, includes), true);
+        }
+
+        /// <summary>
+        /// Load AllowedScope Async entities from the database using the primary key
+        /// </summary
+        /// <param name="id">int</param>
+        /// <returns>AllowedScopeDto</returns>
+        /// <param name="includes">params Expression<Func<IAllowedScope, object>>[]</param>
+		public async Task<AllowedScopeDto> LoadByAllowedScopeIdAsync(int id, bool cache, params Expression<Func<IAllowedScope, object>>[] includes)
+        {
+            return new AllowedScopeDto(await this.AllowedScopeRepository.LoadByIdAsync(id, cache, includes), true);
+        }
+
+        /// <summary>
+        /// Load all AllowedScope entities from the database.
+        /// </summary>
+        /// <param name="includes">params Expression<Func<IAllowedScope, object>>[]</param>
+        /// <returns>IList<AllowedScopeDto></returns>
+		public IList<AllowedScopeDto> AllowedScopeLoadAll(bool cache, params Expression<Func<IAllowedScope, object>>[] includes)
+        {
+            return this.ConvertAllowedScopeEntityToDto(this.AllowedScopeRepository.LoadAll(cache, includes));
+        }
+
+        /// <summary>
+        /// Load all AllowedScope Async entities from the database.
+        /// </summary>
+        /// <param name="includes">params Expression<Func<IAllowedScope, object>>[]</param>
+        /// <returns>IList<AllowedScopeDto></returns>
+		public async Task<IList<AllowedScopeDto>> AllowedScopeLoadAllAsync(bool cache, params Expression<Func<IAllowedScope, object>>[] includes)
+        {
+            return this.ConvertAllowedScopeEntityToDto( await this.AllowedScopeRepository.LoadAllAsync(cache, includes));
+        }
+
+
+        /// <summary>
+        /// Load ApiResource entities from the database using the primary key
+        /// </summary
+        /// <param name="id">int</param>
+        /// <returns>ApiResourceDto</returns>
+        /// <param name="includes">params Expression<Func<IApiResource, object>>[]</param>
+		public ApiResourceDto LoadByApiResourceId(int id, bool cache, params Expression<Func<IApiResource, object>>[] includes)
+        {
+            return new ApiResourceDto(this.ApiResourceRepository.LoadById(id, cache, includes), true);
+        }
+
+        /// <summary>
+        /// Load ApiResource Async entities from the database using the primary key
+        /// </summary
+        /// <param name="id">int</param>
+        /// <returns>ApiResourceDto</returns>
+        /// <param name="includes">params Expression<Func<IApiResource, object>>[]</param>
+		public async Task<ApiResourceDto> LoadByApiResourceIdAsync(int id, bool cache, params Expression<Func<IApiResource, object>>[] includes)
+        {
+            return new ApiResourceDto(await this.ApiResourceRepository.LoadByIdAsync(id, cache, includes), true);
+        }
+
+        /// <summary>
+        /// Load all ApiResource entities from the database.
+        /// </summary>
+        /// <param name="includes">params Expression<Func<IApiResource, object>>[]</param>
+        /// <returns>IList<ApiResourceDto></returns>
+		public IList<ApiResourceDto> ApiResourceLoadAll(bool cache, params Expression<Func<IApiResource, object>>[] includes)
+        {
+            return this.ConvertApiResourceEntityToDto(this.ApiResourceRepository.LoadAll(cache, includes));
+        }
+
+        /// <summary>
+        /// Load all ApiResource Async entities from the database.
+        /// </summary>
+        /// <param name="includes">params Expression<Func<IApiResource, object>>[]</param>
+        /// <returns>IList<ApiResourceDto></returns>
+		public async Task<IList<ApiResourceDto>> ApiResourceLoadAllAsync(bool cache, params Expression<Func<IApiResource, object>>[] includes)
+        {
+            return this.ConvertApiResourceEntityToDto( await this.ApiResourceRepository.LoadAllAsync(cache, includes));
+        }
+
+
+        /// <summary>
+        /// Load Client entities from the database using the primary key
+        /// </summary
+        /// <param name="id">int</param>
+        /// <returns>ClientDto</returns>
+        /// <param name="includes">params Expression<Func<IClient, object>>[]</param>
+		public ClientDto LoadByClientId(int id, bool cache, params Expression<Func<IClient, object>>[] includes)
+        {
+            return new ClientDto(this.ClientRepository.LoadById(id, cache, includes), true);
+        }
+
+        /// <summary>
+        /// Load Client Async entities from the database using the primary key
+        /// </summary
+        /// <param name="id">int</param>
+        /// <returns>ClientDto</returns>
+        /// <param name="includes">params Expression<Func<IClient, object>>[]</param>
+		public async Task<ClientDto> LoadByClientIdAsync(int id, bool cache, params Expression<Func<IClient, object>>[] includes)
+        {
+            return new ClientDto(await this.ClientRepository.LoadByIdAsync(id, cache, includes), true);
+        }
+
+        /// <summary>
+        /// Load all Client entities from the database.
+        /// </summary>
+        /// <param name="includes">params Expression<Func<IClient, object>>[]</param>
+        /// <returns>IList<ClientDto></returns>
+		public IList<ClientDto> ClientLoadAll(bool cache, params Expression<Func<IClient, object>>[] includes)
+        {
+            return this.ConvertClientEntityToDto(this.ClientRepository.LoadAll(cache, includes));
+        }
+
+        /// <summary>
+        /// Load all Client Async entities from the database.
+        /// </summary>
+        /// <param name="includes">params Expression<Func<IClient, object>>[]</param>
+        /// <returns>IList<ClientDto></returns>
+		public async Task<IList<ClientDto>> ClientLoadAllAsync(bool cache, params Expression<Func<IClient, object>>[] includes)
+        {
+            return this.ConvertClientEntityToDto( await this.ClientRepository.LoadAllAsync(cache, includes));
+        }
+
+
+        /// <summary>
+        /// Load ClientGrantType entities from the database using the composite primary keys
+        /// </summary
+        /// <param name="clientId">int</param>
+        /// <param name="grantTypeId">int</param>
+        /// <param name="includes">params Expression<Func<IClientGrantType, object>>[]</param>
+        /// <returns>ClientGrantTypeDto</returns>
+		public ClientGrantTypeDto Load( int clientId,  int grantTypeId, bool cache, params Expression<Func<IClientGrantType, object>>[] includes)
+        {
+            return new ClientGrantTypeDto(this.ClientGrantTypeRepository.Load( clientId,  grantTypeId, cache, includes), true);
+        }
+
+        /// <summary>
+        /// Load ClientGrantType Async entities from the database using the composite primary keys
+        /// </summary
+        /// <param name="clientId">int</param>
+        /// <param name="grantTypeId">int</param>
+        /// <param name="includes">params Expression<Func<IClientGrantType, object>>[]</param>
+        /// <returns>ClientGrantTypeDto</returns>
+		public async Task<ClientGrantTypeDto> LoadAsync( int clientId,  int grantTypeId, bool cache, params Expression<Func<IClientGrantType, object>>[] includes)
+        {
+            return new ClientGrantTypeDto(await this.ClientGrantTypeRepository.LoadAsync( clientId,  grantTypeId, cache, includes), true);
+        }
+
+
+        /// <summary>
+        /// Load all ClientGrantType entities from the database.
+        /// </summary>
+        /// <param name="includes">params Expression<Func<IClientGrantType, object>>[]</param>
+        /// <returns>IList<ClientGrantTypeDto></returns>
+		public IList<ClientGrantTypeDto> ClientGrantTypeLoadAll(bool cache, params Expression<Func<IClientGrantType, object>>[] includes)
+        {
+            return this.ConvertClientGrantTypeEntityToDto(this.ClientGrantTypeRepository.LoadAll(cache, includes));
+        }
+
+        /// <summary>
+        /// Load all ClientGrantType Async entities from the database.
+        /// </summary>
+        /// <param name="includes">params Expression<Func<IClientGrantType, object>>[]</param>
+        /// <returns>IList<ClientGrantTypeDto></returns>
+		public async Task<IList<ClientGrantTypeDto>> ClientGrantTypeLoadAllAsync(bool cache, params Expression<Func<IClientGrantType, object>>[] includes)
+        {
+            return this.ConvertClientGrantTypeEntityToDto( await this.ClientGrantTypeRepository.LoadAllAsync(cache, includes));
+        }
+
+
+        /// <summary>
+        /// Load GrantType entities from the database using the primary key
+        /// </summary
+        /// <param name="id">int</param>
+        /// <returns>GrantTypeDto</returns>
+        /// <param name="includes">params Expression<Func<IGrantType, object>>[]</param>
+		public GrantTypeDto LoadByGrantTypeId(int id, bool cache, params Expression<Func<IGrantType, object>>[] includes)
+        {
+            return new GrantTypeDto(this.GrantTypeRepository.LoadById(id, cache, includes), true);
+        }
+
+        /// <summary>
+        /// Load GrantType Async entities from the database using the primary key
+        /// </summary
+        /// <param name="id">int</param>
+        /// <returns>GrantTypeDto</returns>
+        /// <param name="includes">params Expression<Func<IGrantType, object>>[]</param>
+		public async Task<GrantTypeDto> LoadByGrantTypeIdAsync(int id, bool cache, params Expression<Func<IGrantType, object>>[] includes)
+        {
+            return new GrantTypeDto(await this.GrantTypeRepository.LoadByIdAsync(id, cache, includes), true);
+        }
+
+        /// <summary>
+        /// Load all GrantType entities from the database.
+        /// </summary>
+        /// <param name="includes">params Expression<Func<IGrantType, object>>[]</param>
+        /// <returns>IList<GrantTypeDto></returns>
+		public IList<GrantTypeDto> GrantTypeLoadAll(bool cache, params Expression<Func<IGrantType, object>>[] includes)
+        {
+            return this.ConvertGrantTypeEntityToDto(this.GrantTypeRepository.LoadAll(cache, includes));
+        }
+
+        /// <summary>
+        /// Load all GrantType Async entities from the database.
+        /// </summary>
+        /// <param name="includes">params Expression<Func<IGrantType, object>>[]</param>
+        /// <returns>IList<GrantTypeDto></returns>
+		public async Task<IList<GrantTypeDto>> GrantTypeLoadAllAsync(bool cache, params Expression<Func<IGrantType, object>>[] includes)
+        {
+            return this.ConvertGrantTypeEntityToDto( await this.GrantTypeRepository.LoadAllAsync(cache, includes));
+        }
+
+
+        /// <summary>
+        /// Load IdentityResource entities from the database using the primary key
+        /// </summary
+        /// <param name="id">int</param>
+        /// <returns>IdentityResourceDto</returns>
+        /// <param name="includes">params Expression<Func<IIdentityResource, object>>[]</param>
+		public IdentityResourceDto LoadByIdentityResourceId(int id, bool cache, params Expression<Func<IIdentityResource, object>>[] includes)
+        {
+            return new IdentityResourceDto(this.IdentityResourceRepository.LoadById(id, cache, includes), true);
+        }
+
+        /// <summary>
+        /// Load IdentityResource Async entities from the database using the primary key
+        /// </summary
+        /// <param name="id">int</param>
+        /// <returns>IdentityResourceDto</returns>
+        /// <param name="includes">params Expression<Func<IIdentityResource, object>>[]</param>
+		public async Task<IdentityResourceDto> LoadByIdentityResourceIdAsync(int id, bool cache, params Expression<Func<IIdentityResource, object>>[] includes)
+        {
+            return new IdentityResourceDto(await this.IdentityResourceRepository.LoadByIdAsync(id, cache, includes), true);
+        }
+
+        /// <summary>
+        /// Load all IdentityResource entities from the database.
+        /// </summary>
+        /// <param name="includes">params Expression<Func<IIdentityResource, object>>[]</param>
+        /// <returns>IList<IdentityResourceDto></returns>
+		public IList<IdentityResourceDto> IdentityResourceLoadAll(bool cache, params Expression<Func<IIdentityResource, object>>[] includes)
+        {
+            return this.ConvertIdentityResourceEntityToDto(this.IdentityResourceRepository.LoadAll(cache, includes));
+        }
+
+        /// <summary>
+        /// Load all IdentityResource Async entities from the database.
+        /// </summary>
+        /// <param name="includes">params Expression<Func<IIdentityResource, object>>[]</param>
+        /// <returns>IList<IdentityResourceDto></returns>
+		public async Task<IList<IdentityResourceDto>> IdentityResourceLoadAllAsync(bool cache, params Expression<Func<IIdentityResource, object>>[] includes)
+        {
+            return this.ConvertIdentityResourceEntityToDto( await this.IdentityResourceRepository.LoadAllAsync(cache, includes));
+        }
+
+
+        /// <summary>
+        /// Load IdentityResourceClaimType entities from the database using the composite primary keys
+        /// </summary
+        /// <param name="identityResourceId">int</param>
+        /// <param name="resourceClaimTypeId">int</param>
+        /// <param name="includes">params Expression<Func<IIdentityResourceClaimType, object>>[]</param>
+        /// <returns>IdentityResourceClaimTypeDto</returns>
+		public IdentityResourceClaimTypeDto Load( int identityResourceId,  int resourceClaimTypeId, bool cache, params Expression<Func<IIdentityResourceClaimType, object>>[] includes)
+        {
+            return new IdentityResourceClaimTypeDto(this.IdentityResourceClaimTypeRepository.Load( identityResourceId,  resourceClaimTypeId, cache, includes), true);
+        }
+
+        /// <summary>
+        /// Load IdentityResourceClaimType Async entities from the database using the composite primary keys
+        /// </summary
+        /// <param name="identityResourceId">int</param>
+        /// <param name="resourceClaimTypeId">int</param>
+        /// <param name="includes">params Expression<Func<IIdentityResourceClaimType, object>>[]</param>
+        /// <returns>IdentityResourceClaimTypeDto</returns>
+		public async Task<IdentityResourceClaimTypeDto> LoadAsync( int identityResourceId,  int resourceClaimTypeId, bool cache, params Expression<Func<IIdentityResourceClaimType, object>>[] includes)
+        {
+            return new IdentityResourceClaimTypeDto(await this.IdentityResourceClaimTypeRepository.LoadAsync( identityResourceId,  resourceClaimTypeId, cache, includes), true);
+        }
+
+
+        /// <summary>
+        /// Load all IdentityResourceClaimType entities from the database.
+        /// </summary>
+        /// <param name="includes">params Expression<Func<IIdentityResourceClaimType, object>>[]</param>
+        /// <returns>IList<IdentityResourceClaimTypeDto></returns>
+		public IList<IdentityResourceClaimTypeDto> IdentityResourceClaimTypeLoadAll(bool cache, params Expression<Func<IIdentityResourceClaimType, object>>[] includes)
+        {
+            return this.ConvertIdentityResourceClaimTypeEntityToDto(this.IdentityResourceClaimTypeRepository.LoadAll(cache, includes));
+        }
+
+        /// <summary>
+        /// Load all IdentityResourceClaimType Async entities from the database.
+        /// </summary>
+        /// <param name="includes">params Expression<Func<IIdentityResourceClaimType, object>>[]</param>
+        /// <returns>IList<IdentityResourceClaimTypeDto></returns>
+		public async Task<IList<IdentityResourceClaimTypeDto>> IdentityResourceClaimTypeLoadAllAsync(bool cache, params Expression<Func<IIdentityResourceClaimType, object>>[] includes)
+        {
+            return this.ConvertIdentityResourceClaimTypeEntityToDto( await this.IdentityResourceClaimTypeRepository.LoadAllAsync(cache, includes));
+        }
+
+
+        /// <summary>
+        /// Load PostLogoutRedirectUri entities from the database using the primary key
+        /// </summary
+        /// <param name="id">int</param>
+        /// <returns>PostLogoutRedirectUriDto</returns>
+        /// <param name="includes">params Expression<Func<IPostLogoutRedirectUri, object>>[]</param>
+		public PostLogoutRedirectUriDto LoadByPostLogoutRedirectUriId(int id, bool cache, params Expression<Func<IPostLogoutRedirectUri, object>>[] includes)
+        {
+            return new PostLogoutRedirectUriDto(this.PostLogoutRedirectUriRepository.LoadById(id, cache, includes), true);
+        }
+
+        /// <summary>
+        /// Load PostLogoutRedirectUri Async entities from the database using the primary key
+        /// </summary
+        /// <param name="id">int</param>
+        /// <returns>PostLogoutRedirectUriDto</returns>
+        /// <param name="includes">params Expression<Func<IPostLogoutRedirectUri, object>>[]</param>
+		public async Task<PostLogoutRedirectUriDto> LoadByPostLogoutRedirectUriIdAsync(int id, bool cache, params Expression<Func<IPostLogoutRedirectUri, object>>[] includes)
+        {
+            return new PostLogoutRedirectUriDto(await this.PostLogoutRedirectUriRepository.LoadByIdAsync(id, cache, includes), true);
+        }
+
+        /// <summary>
+        /// Load all PostLogoutRedirectUri entities from the database.
+        /// </summary>
+        /// <param name="includes">params Expression<Func<IPostLogoutRedirectUri, object>>[]</param>
+        /// <returns>IList<PostLogoutRedirectUriDto></returns>
+		public IList<PostLogoutRedirectUriDto> PostLogoutRedirectUriLoadAll(bool cache, params Expression<Func<IPostLogoutRedirectUri, object>>[] includes)
+        {
+            return this.ConvertPostLogoutRedirectUriEntityToDto(this.PostLogoutRedirectUriRepository.LoadAll(cache, includes));
+        }
+
+        /// <summary>
+        /// Load all PostLogoutRedirectUri Async entities from the database.
+        /// </summary>
+        /// <param name="includes">params Expression<Func<IPostLogoutRedirectUri, object>>[]</param>
+        /// <returns>IList<PostLogoutRedirectUriDto></returns>
+		public async Task<IList<PostLogoutRedirectUriDto>> PostLogoutRedirectUriLoadAllAsync(bool cache, params Expression<Func<IPostLogoutRedirectUri, object>>[] includes)
+        {
+            return this.ConvertPostLogoutRedirectUriEntityToDto( await this.PostLogoutRedirectUriRepository.LoadAllAsync(cache, includes));
+        }
+
+
+        /// <summary>
+        /// Load RedirectUri entities from the database using the primary key
+        /// </summary
+        /// <param name="id">int</param>
+        /// <returns>RedirectUriDto</returns>
+        /// <param name="includes">params Expression<Func<IRedirectUri, object>>[]</param>
+		public RedirectUriDto LoadByRedirectUriId(int id, bool cache, params Expression<Func<IRedirectUri, object>>[] includes)
+        {
+            return new RedirectUriDto(this.RedirectUriRepository.LoadById(id, cache, includes), true);
+        }
+
+        /// <summary>
+        /// Load RedirectUri Async entities from the database using the primary key
+        /// </summary
+        /// <param name="id">int</param>
+        /// <returns>RedirectUriDto</returns>
+        /// <param name="includes">params Expression<Func<IRedirectUri, object>>[]</param>
+		public async Task<RedirectUriDto> LoadByRedirectUriIdAsync(int id, bool cache, params Expression<Func<IRedirectUri, object>>[] includes)
+        {
+            return new RedirectUriDto(await this.RedirectUriRepository.LoadByIdAsync(id, cache, includes), true);
+        }
+
+        /// <summary>
+        /// Load all RedirectUri entities from the database.
+        /// </summary>
+        /// <param name="includes">params Expression<Func<IRedirectUri, object>>[]</param>
+        /// <returns>IList<RedirectUriDto></returns>
+		public IList<RedirectUriDto> RedirectUriLoadAll(bool cache, params Expression<Func<IRedirectUri, object>>[] includes)
+        {
+            return this.ConvertRedirectUriEntityToDto(this.RedirectUriRepository.LoadAll(cache, includes));
+        }
+
+        /// <summary>
+        /// Load all RedirectUri Async entities from the database.
+        /// </summary>
+        /// <param name="includes">params Expression<Func<IRedirectUri, object>>[]</param>
+        /// <returns>IList<RedirectUriDto></returns>
+		public async Task<IList<RedirectUriDto>> RedirectUriLoadAllAsync(bool cache, params Expression<Func<IRedirectUri, object>>[] includes)
+        {
+            return this.ConvertRedirectUriEntityToDto( await this.RedirectUriRepository.LoadAllAsync(cache, includes));
+        }
+
+
+        /// <summary>
+        /// Load ResourceClaimType entities from the database using the primary key
+        /// </summary
+        /// <param name="id">int</param>
+        /// <returns>ResourceClaimTypeDto</returns>
+        /// <param name="includes">params Expression<Func<IResourceClaimType, object>>[]</param>
+		public ResourceClaimTypeDto LoadByResourceClaimTypeId(int id, bool cache, params Expression<Func<IResourceClaimType, object>>[] includes)
+        {
+            return new ResourceClaimTypeDto(this.ResourceClaimTypeRepository.LoadById(id, cache, includes), true);
+        }
+
+        /// <summary>
+        /// Load ResourceClaimType Async entities from the database using the primary key
+        /// </summary
+        /// <param name="id">int</param>
+        /// <returns>ResourceClaimTypeDto</returns>
+        /// <param name="includes">params Expression<Func<IResourceClaimType, object>>[]</param>
+		public async Task<ResourceClaimTypeDto> LoadByResourceClaimTypeIdAsync(int id, bool cache, params Expression<Func<IResourceClaimType, object>>[] includes)
+        {
+            return new ResourceClaimTypeDto(await this.ResourceClaimTypeRepository.LoadByIdAsync(id, cache, includes), true);
+        }
+
+        /// <summary>
+        /// Load all ResourceClaimType entities from the database.
+        /// </summary>
+        /// <param name="includes">params Expression<Func<IResourceClaimType, object>>[]</param>
+        /// <returns>IList<ResourceClaimTypeDto></returns>
+		public IList<ResourceClaimTypeDto> ResourceClaimTypeLoadAll(bool cache, params Expression<Func<IResourceClaimType, object>>[] includes)
+        {
+            return this.ConvertResourceClaimTypeEntityToDto(this.ResourceClaimTypeRepository.LoadAll(cache, includes));
+        }
+
+        /// <summary>
+        /// Load all ResourceClaimType Async entities from the database.
+        /// </summary>
+        /// <param name="includes">params Expression<Func<IResourceClaimType, object>>[]</param>
+        /// <returns>IList<ResourceClaimTypeDto></returns>
+		public async Task<IList<ResourceClaimTypeDto>> ResourceClaimTypeLoadAllAsync(bool cache, params Expression<Func<IResourceClaimType, object>>[] includes)
+        {
+            return this.ConvertResourceClaimTypeEntityToDto( await this.ResourceClaimTypeRepository.LoadAllAsync(cache, includes));
         }
 
 
@@ -900,6 +1396,281 @@ namespace DotNetScaffolder.Domain.ApplicationService
 		public async Task<IList<AspNetUserTokenDto>> AspNetUserTokenSearchByValueAsync(string value, bool caseSensitive, bool cache, params Expression<Func<IAspNetUserToken, object>>[] includes)
         {
             return this.ConvertAspNetUserTokenEntityToDto(await this.AspNetUserTokenRepository.SearchByValueAsync(value,caseSensitive, cache, includes));
+        }
+
+
+        /// <summary>
+        /// Search for AllowedScope entities in the database by ResourceName
+        /// </summary>
+        /// <param name="resourceName">string</param>
+		/// <param name="caseSensitive">bool</param>
+        /// <param name="includes">params Expression<Func<IAllowedScope, object>>[]</param>
+        /// <returns>IList<AllowedScopeDto></returns>
+		public IList<AllowedScopeDto> AllowedScopeSearchByResourceName(string resourceName, bool caseSensitive, bool cache, params Expression<Func<IAllowedScope, object>>[] includes)
+        {
+            return this.ConvertAllowedScopeEntityToDto(this.AllowedScopeRepository.SearchByResourceName(resourceName,caseSensitive, cache, includes));
+        }
+
+        /// <summary>
+        /// Search for AllowedScope Async entities in the database by ResourceName
+        /// </summary>
+        /// <param name="resourceName">string</param>
+		/// <param name="caseSensitive">bool</param>
+        /// <param name="includes">params Expression<Func<IAllowedScope, object>>[]</param>
+        /// <returns>IList<AllowedScopeDto></returns>
+		public async Task<IList<AllowedScopeDto>> AllowedScopeSearchByResourceNameAsync(string resourceName, bool caseSensitive, bool cache, params Expression<Func<IAllowedScope, object>>[] includes)
+        {
+            return this.ConvertAllowedScopeEntityToDto(await this.AllowedScopeRepository.SearchByResourceNameAsync(resourceName,caseSensitive, cache, includes));
+        }
+
+
+        /// <summary>
+        /// Search for ApiResource entities in the database by Name
+        /// </summary>
+        /// <param name="name">string</param>
+		/// <param name="caseSensitive">bool</param>
+        /// <param name="includes">params Expression<Func<IApiResource, object>>[]</param>
+        /// <returns>IList<ApiResourceDto></returns>
+		public IList<ApiResourceDto> ApiResourceSearchByName(string name, bool caseSensitive, bool cache, params Expression<Func<IApiResource, object>>[] includes)
+        {
+            return this.ConvertApiResourceEntityToDto(this.ApiResourceRepository.SearchByName(name,caseSensitive, cache, includes));
+        }
+
+        /// <summary>
+        /// Search for ApiResource Async entities in the database by Name
+        /// </summary>
+        /// <param name="name">string</param>
+		/// <param name="caseSensitive">bool</param>
+        /// <param name="includes">params Expression<Func<IApiResource, object>>[]</param>
+        /// <returns>IList<ApiResourceDto></returns>
+		public async Task<IList<ApiResourceDto>> ApiResourceSearchByNameAsync(string name, bool caseSensitive, bool cache, params Expression<Func<IApiResource, object>>[] includes)
+        {
+            return this.ConvertApiResourceEntityToDto(await this.ApiResourceRepository.SearchByNameAsync(name,caseSensitive, cache, includes));
+        }
+
+
+        /// <summary>
+        /// Search for ApiResource entities in the database by DisplayName
+        /// </summary>
+        /// <param name="displayName">string</param>
+		/// <param name="caseSensitive">bool</param>
+        /// <param name="includes">params Expression<Func<IApiResource, object>>[]</param>
+        /// <returns>IList<ApiResourceDto></returns>
+		public IList<ApiResourceDto> ApiResourceSearchByDisplayName(string displayName, bool caseSensitive, bool cache, params Expression<Func<IApiResource, object>>[] includes)
+        {
+            return this.ConvertApiResourceEntityToDto(this.ApiResourceRepository.SearchByDisplayName(displayName,caseSensitive, cache, includes));
+        }
+
+        /// <summary>
+        /// Search for ApiResource Async entities in the database by DisplayName
+        /// </summary>
+        /// <param name="displayName">string</param>
+		/// <param name="caseSensitive">bool</param>
+        /// <param name="includes">params Expression<Func<IApiResource, object>>[]</param>
+        /// <returns>IList<ApiResourceDto></returns>
+		public async Task<IList<ApiResourceDto>> ApiResourceSearchByDisplayNameAsync(string displayName, bool caseSensitive, bool cache, params Expression<Func<IApiResource, object>>[] includes)
+        {
+            return this.ConvertApiResourceEntityToDto(await this.ApiResourceRepository.SearchByDisplayNameAsync(displayName,caseSensitive, cache, includes));
+        }
+
+
+        /// <summary>
+        /// Search for Client entities in the database by ClientId
+        /// </summary>
+        /// <param name="clientId">string</param>
+		/// <param name="caseSensitive">bool</param>
+        /// <param name="includes">params Expression<Func<IClient, object>>[]</param>
+        /// <returns>IList<ClientDto></returns>
+		public IList<ClientDto> ClientSearchByClientId(string clientId, bool caseSensitive, bool cache, params Expression<Func<IClient, object>>[] includes)
+        {
+            return this.ConvertClientEntityToDto(this.ClientRepository.SearchByClientId(clientId,caseSensitive, cache, includes));
+        }
+
+        /// <summary>
+        /// Search for Client Async entities in the database by ClientId
+        /// </summary>
+        /// <param name="clientId">string</param>
+		/// <param name="caseSensitive">bool</param>
+        /// <param name="includes">params Expression<Func<IClient, object>>[]</param>
+        /// <returns>IList<ClientDto></returns>
+		public async Task<IList<ClientDto>> ClientSearchByClientIdAsync(string clientId, bool caseSensitive, bool cache, params Expression<Func<IClient, object>>[] includes)
+        {
+            return this.ConvertClientEntityToDto(await this.ClientRepository.SearchByClientIdAsync(clientId,caseSensitive, cache, includes));
+        }
+
+
+        /// <summary>
+        /// Search for Client entities in the database by ClientName
+        /// </summary>
+        /// <param name="clientName">string</param>
+		/// <param name="caseSensitive">bool</param>
+        /// <param name="includes">params Expression<Func<IClient, object>>[]</param>
+        /// <returns>IList<ClientDto></returns>
+		public IList<ClientDto> ClientSearchByClientName(string clientName, bool caseSensitive, bool cache, params Expression<Func<IClient, object>>[] includes)
+        {
+            return this.ConvertClientEntityToDto(this.ClientRepository.SearchByClientName(clientName,caseSensitive, cache, includes));
+        }
+
+        /// <summary>
+        /// Search for Client Async entities in the database by ClientName
+        /// </summary>
+        /// <param name="clientName">string</param>
+		/// <param name="caseSensitive">bool</param>
+        /// <param name="includes">params Expression<Func<IClient, object>>[]</param>
+        /// <returns>IList<ClientDto></returns>
+		public async Task<IList<ClientDto>> ClientSearchByClientNameAsync(string clientName, bool caseSensitive, bool cache, params Expression<Func<IClient, object>>[] includes)
+        {
+            return this.ConvertClientEntityToDto(await this.ClientRepository.SearchByClientNameAsync(clientName,caseSensitive, cache, includes));
+        }
+
+
+        /// <summary>
+        /// Search for GrantType entities in the database by Name
+        /// </summary>
+        /// <param name="name">string</param>
+		/// <param name="caseSensitive">bool</param>
+        /// <param name="includes">params Expression<Func<IGrantType, object>>[]</param>
+        /// <returns>IList<GrantTypeDto></returns>
+		public IList<GrantTypeDto> GrantTypeSearchByName(string name, bool caseSensitive, bool cache, params Expression<Func<IGrantType, object>>[] includes)
+        {
+            return this.ConvertGrantTypeEntityToDto(this.GrantTypeRepository.SearchByName(name,caseSensitive, cache, includes));
+        }
+
+        /// <summary>
+        /// Search for GrantType Async entities in the database by Name
+        /// </summary>
+        /// <param name="name">string</param>
+		/// <param name="caseSensitive">bool</param>
+        /// <param name="includes">params Expression<Func<IGrantType, object>>[]</param>
+        /// <returns>IList<GrantTypeDto></returns>
+		public async Task<IList<GrantTypeDto>> GrantTypeSearchByNameAsync(string name, bool caseSensitive, bool cache, params Expression<Func<IGrantType, object>>[] includes)
+        {
+            return this.ConvertGrantTypeEntityToDto(await this.GrantTypeRepository.SearchByNameAsync(name,caseSensitive, cache, includes));
+        }
+
+
+        /// <summary>
+        /// Search for IdentityResource entities in the database by Name
+        /// </summary>
+        /// <param name="name">string</param>
+		/// <param name="caseSensitive">bool</param>
+        /// <param name="includes">params Expression<Func<IIdentityResource, object>>[]</param>
+        /// <returns>IList<IdentityResourceDto></returns>
+		public IList<IdentityResourceDto> IdentityResourceSearchByName(string name, bool caseSensitive, bool cache, params Expression<Func<IIdentityResource, object>>[] includes)
+        {
+            return this.ConvertIdentityResourceEntityToDto(this.IdentityResourceRepository.SearchByName(name,caseSensitive, cache, includes));
+        }
+
+        /// <summary>
+        /// Search for IdentityResource Async entities in the database by Name
+        /// </summary>
+        /// <param name="name">string</param>
+		/// <param name="caseSensitive">bool</param>
+        /// <param name="includes">params Expression<Func<IIdentityResource, object>>[]</param>
+        /// <returns>IList<IdentityResourceDto></returns>
+		public async Task<IList<IdentityResourceDto>> IdentityResourceSearchByNameAsync(string name, bool caseSensitive, bool cache, params Expression<Func<IIdentityResource, object>>[] includes)
+        {
+            return this.ConvertIdentityResourceEntityToDto(await this.IdentityResourceRepository.SearchByNameAsync(name,caseSensitive, cache, includes));
+        }
+
+
+        /// <summary>
+        /// Search for IdentityResource entities in the database by DisplayName
+        /// </summary>
+        /// <param name="displayName">string</param>
+		/// <param name="caseSensitive">bool</param>
+        /// <param name="includes">params Expression<Func<IIdentityResource, object>>[]</param>
+        /// <returns>IList<IdentityResourceDto></returns>
+		public IList<IdentityResourceDto> IdentityResourceSearchByDisplayName(string displayName, bool caseSensitive, bool cache, params Expression<Func<IIdentityResource, object>>[] includes)
+        {
+            return this.ConvertIdentityResourceEntityToDto(this.IdentityResourceRepository.SearchByDisplayName(displayName,caseSensitive, cache, includes));
+        }
+
+        /// <summary>
+        /// Search for IdentityResource Async entities in the database by DisplayName
+        /// </summary>
+        /// <param name="displayName">string</param>
+		/// <param name="caseSensitive">bool</param>
+        /// <param name="includes">params Expression<Func<IIdentityResource, object>>[]</param>
+        /// <returns>IList<IdentityResourceDto></returns>
+		public async Task<IList<IdentityResourceDto>> IdentityResourceSearchByDisplayNameAsync(string displayName, bool caseSensitive, bool cache, params Expression<Func<IIdentityResource, object>>[] includes)
+        {
+            return this.ConvertIdentityResourceEntityToDto(await this.IdentityResourceRepository.SearchByDisplayNameAsync(displayName,caseSensitive, cache, includes));
+        }
+
+
+        /// <summary>
+        /// Search for PostLogoutRedirectUri entities in the database by Uri
+        /// </summary>
+        /// <param name="uri">string</param>
+		/// <param name="caseSensitive">bool</param>
+        /// <param name="includes">params Expression<Func<IPostLogoutRedirectUri, object>>[]</param>
+        /// <returns>IList<PostLogoutRedirectUriDto></returns>
+		public IList<PostLogoutRedirectUriDto> PostLogoutRedirectUriSearchByUri(string uri, bool caseSensitive, bool cache, params Expression<Func<IPostLogoutRedirectUri, object>>[] includes)
+        {
+            return this.ConvertPostLogoutRedirectUriEntityToDto(this.PostLogoutRedirectUriRepository.SearchByUri(uri,caseSensitive, cache, includes));
+        }
+
+        /// <summary>
+        /// Search for PostLogoutRedirectUri Async entities in the database by Uri
+        /// </summary>
+        /// <param name="uri">string</param>
+		/// <param name="caseSensitive">bool</param>
+        /// <param name="includes">params Expression<Func<IPostLogoutRedirectUri, object>>[]</param>
+        /// <returns>IList<PostLogoutRedirectUriDto></returns>
+		public async Task<IList<PostLogoutRedirectUriDto>> PostLogoutRedirectUriSearchByUriAsync(string uri, bool caseSensitive, bool cache, params Expression<Func<IPostLogoutRedirectUri, object>>[] includes)
+        {
+            return this.ConvertPostLogoutRedirectUriEntityToDto(await this.PostLogoutRedirectUriRepository.SearchByUriAsync(uri,caseSensitive, cache, includes));
+        }
+
+
+        /// <summary>
+        /// Search for RedirectUri entities in the database by Uri
+        /// </summary>
+        /// <param name="uri">string</param>
+		/// <param name="caseSensitive">bool</param>
+        /// <param name="includes">params Expression<Func<IRedirectUri, object>>[]</param>
+        /// <returns>IList<RedirectUriDto></returns>
+		public IList<RedirectUriDto> RedirectUriSearchByUri(string uri, bool caseSensitive, bool cache, params Expression<Func<IRedirectUri, object>>[] includes)
+        {
+            return this.ConvertRedirectUriEntityToDto(this.RedirectUriRepository.SearchByUri(uri,caseSensitive, cache, includes));
+        }
+
+        /// <summary>
+        /// Search for RedirectUri Async entities in the database by Uri
+        /// </summary>
+        /// <param name="uri">string</param>
+		/// <param name="caseSensitive">bool</param>
+        /// <param name="includes">params Expression<Func<IRedirectUri, object>>[]</param>
+        /// <returns>IList<RedirectUriDto></returns>
+		public async Task<IList<RedirectUriDto>> RedirectUriSearchByUriAsync(string uri, bool caseSensitive, bool cache, params Expression<Func<IRedirectUri, object>>[] includes)
+        {
+            return this.ConvertRedirectUriEntityToDto(await this.RedirectUriRepository.SearchByUriAsync(uri,caseSensitive, cache, includes));
+        }
+
+
+        /// <summary>
+        /// Search for ResourceClaimType entities in the database by Name
+        /// </summary>
+        /// <param name="name">string</param>
+		/// <param name="caseSensitive">bool</param>
+        /// <param name="includes">params Expression<Func<IResourceClaimType, object>>[]</param>
+        /// <returns>IList<ResourceClaimTypeDto></returns>
+		public IList<ResourceClaimTypeDto> ResourceClaimTypeSearchByName(string name, bool caseSensitive, bool cache, params Expression<Func<IResourceClaimType, object>>[] includes)
+        {
+            return this.ConvertResourceClaimTypeEntityToDto(this.ResourceClaimTypeRepository.SearchByName(name,caseSensitive, cache, includes));
+        }
+
+        /// <summary>
+        /// Search for ResourceClaimType Async entities in the database by Name
+        /// </summary>
+        /// <param name="name">string</param>
+		/// <param name="caseSensitive">bool</param>
+        /// <param name="includes">params Expression<Func<IResourceClaimType, object>>[]</param>
+        /// <returns>IList<ResourceClaimTypeDto></returns>
+		public async Task<IList<ResourceClaimTypeDto>> ResourceClaimTypeSearchByNameAsync(string name, bool caseSensitive, bool cache, params Expression<Func<IResourceClaimType, object>>[] includes)
+        {
+            return this.ConvertResourceClaimTypeEntityToDto(await this.ResourceClaimTypeRepository.SearchByNameAsync(name,caseSensitive, cache, includes));
         }
 
 		#endregion
@@ -1480,6 +2251,820 @@ namespace DotNetScaffolder.Domain.ApplicationService
             return await this.AspNetUserTokenRepository.DeleteAsync( userId,  loginProvider,  name, cache);
         }
 
+		
+        /// <summary>
+        /// Add the AllowedScope entity to the database.
+        /// </summary>
+        /// <param name="entity">IAllowedScope</param>
+        /// <returns>bool</returns>
+		public bool AllowedScopeAdd(AllowedScopeDto entity)
+        {
+            return this.AllowedScopeRepository.Add(new AllowedScope(entity, true));
+        }
+
+        /// <summary>
+        /// Add the AllowedScope entity async to the database.
+        /// </summary>
+        /// <param name="entity">IAllowedScope</param>
+        /// <returns>bool</returns>
+		public async Task<bool> AllowedScopeAddAsync(AllowedScopeDto entity)
+        {
+            return await this.AllowedScopeRepository.AddAsync(new AllowedScope(entity, true));
+        }
+
+        /// <summary>
+        /// Update the AllowedScope entity in the database if any values have changed
+        /// </summary>
+        /// <param name="entity">IAllowedScope</param>
+        /// <returns>bool</returns>
+		public bool AllowedScopeUpdate(AllowedScopeDto entity)
+        {
+            return this.AllowedScopeRepository.Update(new AllowedScope(entity, true));
+        }
+		
+        /// <summary>
+        /// Update the AllowedScope entity async in the database if any values have changed
+        /// </summary>
+        /// <param name="entity">IAllowedScope</param>
+        /// <returns>bool</returns>
+		public async Task<bool> AllowedScopeUpdateAsync(AllowedScopeDto entity)
+        {
+            return await this.AllowedScopeRepository.UpdateAsync(new AllowedScope(entity, true));
+        }
+
+        /// <summary>
+        /// Delete the AllowedScope entity from the database
+        /// </summary>
+        /// <param name="entity">IAllowedScope</param>
+        /// <returns>bool</returns>
+		public bool AllowedScopeDelete(AllowedScopeDto entity)
+        {
+            return this.AllowedScopeRepository.Delete(new AllowedScope(entity, true));
+        }
+
+        /// <summary>
+        /// Delete the AllowedScope entity async from the database
+        /// </summary>
+        /// <param name="entity">IAllowedScope</param>
+        /// <returns>bool</returns>
+		public async Task<bool> AllowedScopeDeleteAsync(AllowedScopeDto entity)
+        {
+            return await this.AllowedScopeRepository.DeleteAsync(new AllowedScope(entity, true));
+        }
+
+		/// <summary>
+        /// Delete the AllowedScope entity from the database
+        /// </summary>
+        /// <param name="id">int</param>
+        /// <returns>bool</returns>
+		public bool AllowedScopeDelete( int id, bool cache)
+        {
+            return this.AllowedScopeRepository.Delete( id, cache);
+        }
+
+        /// <summary>
+        /// Delete the AllowedScope entity async from the database
+        /// </summary>
+        /// <param name="id">int</param>
+        /// <returns>bool</returns>
+		public async Task<bool> AllowedScopeDeleteAsync( int id, bool cache)
+        {
+            return await this.AllowedScopeRepository.DeleteAsync( id, cache);
+        }
+
+		
+        /// <summary>
+        /// Add the ApiResource entity to the database.
+        /// </summary>
+        /// <param name="entity">IApiResource</param>
+        /// <returns>bool</returns>
+		public bool ApiResourceAdd(ApiResourceDto entity)
+        {
+            return this.ApiResourceRepository.Add(new ApiResource(entity, true));
+        }
+
+        /// <summary>
+        /// Add the ApiResource entity async to the database.
+        /// </summary>
+        /// <param name="entity">IApiResource</param>
+        /// <returns>bool</returns>
+		public async Task<bool> ApiResourceAddAsync(ApiResourceDto entity)
+        {
+            return await this.ApiResourceRepository.AddAsync(new ApiResource(entity, true));
+        }
+
+        /// <summary>
+        /// Update the ApiResource entity in the database if any values have changed
+        /// </summary>
+        /// <param name="entity">IApiResource</param>
+        /// <returns>bool</returns>
+		public bool ApiResourceUpdate(ApiResourceDto entity)
+        {
+            return this.ApiResourceRepository.Update(new ApiResource(entity, true));
+        }
+		
+        /// <summary>
+        /// Update the ApiResource entity async in the database if any values have changed
+        /// </summary>
+        /// <param name="entity">IApiResource</param>
+        /// <returns>bool</returns>
+		public async Task<bool> ApiResourceUpdateAsync(ApiResourceDto entity)
+        {
+            return await this.ApiResourceRepository.UpdateAsync(new ApiResource(entity, true));
+        }
+
+        /// <summary>
+        /// Delete the ApiResource entity from the database
+        /// </summary>
+        /// <param name="entity">IApiResource</param>
+        /// <returns>bool</returns>
+		public bool ApiResourceDelete(ApiResourceDto entity)
+        {
+            return this.ApiResourceRepository.Delete(new ApiResource(entity, true));
+        }
+
+        /// <summary>
+        /// Delete the ApiResource entity async from the database
+        /// </summary>
+        /// <param name="entity">IApiResource</param>
+        /// <returns>bool</returns>
+		public async Task<bool> ApiResourceDeleteAsync(ApiResourceDto entity)
+        {
+            return await this.ApiResourceRepository.DeleteAsync(new ApiResource(entity, true));
+        }
+
+		/// <summary>
+        /// Delete the ApiResource entity from the database
+        /// </summary>
+        /// <param name="id">int</param>
+        /// <returns>bool</returns>
+		public bool ApiResourceDelete( int id, bool cache)
+        {
+            return this.ApiResourceRepository.Delete( id, cache);
+        }
+
+        /// <summary>
+        /// Delete the ApiResource entity async from the database
+        /// </summary>
+        /// <param name="id">int</param>
+        /// <returns>bool</returns>
+		public async Task<bool> ApiResourceDeleteAsync( int id, bool cache)
+        {
+            return await this.ApiResourceRepository.DeleteAsync( id, cache);
+        }
+
+		
+        /// <summary>
+        /// Add the Client entity to the database.
+        /// </summary>
+        /// <param name="entity">IClient</param>
+        /// <returns>bool</returns>
+		public bool ClientAdd(ClientDto entity)
+        {
+            return this.ClientRepository.Add(new Client(entity, true));
+        }
+
+        /// <summary>
+        /// Add the Client entity async to the database.
+        /// </summary>
+        /// <param name="entity">IClient</param>
+        /// <returns>bool</returns>
+		public async Task<bool> ClientAddAsync(ClientDto entity)
+        {
+            return await this.ClientRepository.AddAsync(new Client(entity, true));
+        }
+
+        /// <summary>
+        /// Update the Client entity in the database if any values have changed
+        /// </summary>
+        /// <param name="entity">IClient</param>
+        /// <returns>bool</returns>
+		public bool ClientUpdate(ClientDto entity)
+        {
+            return this.ClientRepository.Update(new Client(entity, true));
+        }
+		
+        /// <summary>
+        /// Update the Client entity async in the database if any values have changed
+        /// </summary>
+        /// <param name="entity">IClient</param>
+        /// <returns>bool</returns>
+		public async Task<bool> ClientUpdateAsync(ClientDto entity)
+        {
+            return await this.ClientRepository.UpdateAsync(new Client(entity, true));
+        }
+
+        /// <summary>
+        /// Delete the Client entity from the database
+        /// </summary>
+        /// <param name="entity">IClient</param>
+        /// <returns>bool</returns>
+		public bool ClientDelete(ClientDto entity)
+        {
+            return this.ClientRepository.Delete(new Client(entity, true));
+        }
+
+        /// <summary>
+        /// Delete the Client entity async from the database
+        /// </summary>
+        /// <param name="entity">IClient</param>
+        /// <returns>bool</returns>
+		public async Task<bool> ClientDeleteAsync(ClientDto entity)
+        {
+            return await this.ClientRepository.DeleteAsync(new Client(entity, true));
+        }
+
+		/// <summary>
+        /// Delete the Client entity from the database
+        /// </summary>
+        /// <param name="id">int</param>
+        /// <returns>bool</returns>
+		public bool ClientDelete( int id, bool cache)
+        {
+            return this.ClientRepository.Delete( id, cache);
+        }
+
+        /// <summary>
+        /// Delete the Client entity async from the database
+        /// </summary>
+        /// <param name="id">int</param>
+        /// <returns>bool</returns>
+		public async Task<bool> ClientDeleteAsync( int id, bool cache)
+        {
+            return await this.ClientRepository.DeleteAsync( id, cache);
+        }
+
+		
+        /// <summary>
+        /// Add the ClientGrantType entity to the database.
+        /// </summary>
+        /// <param name="entity">IClientGrantType</param>
+        /// <returns>bool</returns>
+		public bool ClientGrantTypeAdd(ClientGrantTypeDto entity)
+        {
+            return this.ClientGrantTypeRepository.Add(new ClientGrantType(entity, true));
+        }
+
+        /// <summary>
+        /// Add the ClientGrantType entity async to the database.
+        /// </summary>
+        /// <param name="entity">IClientGrantType</param>
+        /// <returns>bool</returns>
+		public async Task<bool> ClientGrantTypeAddAsync(ClientGrantTypeDto entity)
+        {
+            return await this.ClientGrantTypeRepository.AddAsync(new ClientGrantType(entity, true));
+        }
+
+        /// <summary>
+        /// Update the ClientGrantType entity in the database if any values have changed
+        /// </summary>
+        /// <param name="entity">IClientGrantType</param>
+        /// <returns>bool</returns>
+		public bool ClientGrantTypeUpdate(ClientGrantTypeDto entity)
+        {
+            return this.ClientGrantTypeRepository.Update(new ClientGrantType(entity, true));
+        }
+		
+        /// <summary>
+        /// Update the ClientGrantType entity async in the database if any values have changed
+        /// </summary>
+        /// <param name="entity">IClientGrantType</param>
+        /// <returns>bool</returns>
+		public async Task<bool> ClientGrantTypeUpdateAsync(ClientGrantTypeDto entity)
+        {
+            return await this.ClientGrantTypeRepository.UpdateAsync(new ClientGrantType(entity, true));
+        }
+
+        /// <summary>
+        /// Delete the ClientGrantType entity from the database
+        /// </summary>
+        /// <param name="entity">IClientGrantType</param>
+        /// <returns>bool</returns>
+		public bool ClientGrantTypeDelete(ClientGrantTypeDto entity)
+        {
+            return this.ClientGrantTypeRepository.Delete(new ClientGrantType(entity, true));
+        }
+
+        /// <summary>
+        /// Delete the ClientGrantType entity async from the database
+        /// </summary>
+        /// <param name="entity">IClientGrantType</param>
+        /// <returns>bool</returns>
+		public async Task<bool> ClientGrantTypeDeleteAsync(ClientGrantTypeDto entity)
+        {
+            return await this.ClientGrantTypeRepository.DeleteAsync(new ClientGrantType(entity, true));
+        }
+
+		/// <summary>
+        /// Delete the ClientGrantType entity from the database
+        /// </summary>
+        /// <param name="clientId">int</param>
+        /// <param name="grantTypeId">int</param>
+        /// <returns>bool</returns>
+		public bool ClientGrantTypeDelete( int clientId,  int grantTypeId, bool cache)
+        {
+            return this.ClientGrantTypeRepository.Delete( clientId,  grantTypeId, cache);
+        }
+
+        /// <summary>
+        /// Delete the ClientGrantType entity async from the database
+        /// </summary>
+        /// <param name="clientId">int</param>
+        /// <param name="grantTypeId">int</param>
+        /// <returns>bool</returns>
+		public async Task<bool> ClientGrantTypeDeleteAsync( int clientId,  int grantTypeId, bool cache)
+        {
+            return await this.ClientGrantTypeRepository.DeleteAsync( clientId,  grantTypeId, cache);
+        }
+
+		
+        /// <summary>
+        /// Add the GrantType entity to the database.
+        /// </summary>
+        /// <param name="entity">IGrantType</param>
+        /// <returns>bool</returns>
+		public bool GrantTypeAdd(GrantTypeDto entity)
+        {
+            return this.GrantTypeRepository.Add(new GrantType(entity, true));
+        }
+
+        /// <summary>
+        /// Add the GrantType entity async to the database.
+        /// </summary>
+        /// <param name="entity">IGrantType</param>
+        /// <returns>bool</returns>
+		public async Task<bool> GrantTypeAddAsync(GrantTypeDto entity)
+        {
+            return await this.GrantTypeRepository.AddAsync(new GrantType(entity, true));
+        }
+
+        /// <summary>
+        /// Update the GrantType entity in the database if any values have changed
+        /// </summary>
+        /// <param name="entity">IGrantType</param>
+        /// <returns>bool</returns>
+		public bool GrantTypeUpdate(GrantTypeDto entity)
+        {
+            return this.GrantTypeRepository.Update(new GrantType(entity, true));
+        }
+		
+        /// <summary>
+        /// Update the GrantType entity async in the database if any values have changed
+        /// </summary>
+        /// <param name="entity">IGrantType</param>
+        /// <returns>bool</returns>
+		public async Task<bool> GrantTypeUpdateAsync(GrantTypeDto entity)
+        {
+            return await this.GrantTypeRepository.UpdateAsync(new GrantType(entity, true));
+        }
+
+        /// <summary>
+        /// Delete the GrantType entity from the database
+        /// </summary>
+        /// <param name="entity">IGrantType</param>
+        /// <returns>bool</returns>
+		public bool GrantTypeDelete(GrantTypeDto entity)
+        {
+            return this.GrantTypeRepository.Delete(new GrantType(entity, true));
+        }
+
+        /// <summary>
+        /// Delete the GrantType entity async from the database
+        /// </summary>
+        /// <param name="entity">IGrantType</param>
+        /// <returns>bool</returns>
+		public async Task<bool> GrantTypeDeleteAsync(GrantTypeDto entity)
+        {
+            return await this.GrantTypeRepository.DeleteAsync(new GrantType(entity, true));
+        }
+
+		/// <summary>
+        /// Delete the GrantType entity from the database
+        /// </summary>
+        /// <param name="id">int</param>
+        /// <returns>bool</returns>
+		public bool GrantTypeDelete( int id, bool cache)
+        {
+            return this.GrantTypeRepository.Delete( id, cache);
+        }
+
+        /// <summary>
+        /// Delete the GrantType entity async from the database
+        /// </summary>
+        /// <param name="id">int</param>
+        /// <returns>bool</returns>
+		public async Task<bool> GrantTypeDeleteAsync( int id, bool cache)
+        {
+            return await this.GrantTypeRepository.DeleteAsync( id, cache);
+        }
+
+		
+        /// <summary>
+        /// Add the IdentityResource entity to the database.
+        /// </summary>
+        /// <param name="entity">IIdentityResource</param>
+        /// <returns>bool</returns>
+		public bool IdentityResourceAdd(IdentityResourceDto entity)
+        {
+            return this.IdentityResourceRepository.Add(new IdentityResource(entity, true));
+        }
+
+        /// <summary>
+        /// Add the IdentityResource entity async to the database.
+        /// </summary>
+        /// <param name="entity">IIdentityResource</param>
+        /// <returns>bool</returns>
+		public async Task<bool> IdentityResourceAddAsync(IdentityResourceDto entity)
+        {
+            return await this.IdentityResourceRepository.AddAsync(new IdentityResource(entity, true));
+        }
+
+        /// <summary>
+        /// Update the IdentityResource entity in the database if any values have changed
+        /// </summary>
+        /// <param name="entity">IIdentityResource</param>
+        /// <returns>bool</returns>
+		public bool IdentityResourceUpdate(IdentityResourceDto entity)
+        {
+            return this.IdentityResourceRepository.Update(new IdentityResource(entity, true));
+        }
+		
+        /// <summary>
+        /// Update the IdentityResource entity async in the database if any values have changed
+        /// </summary>
+        /// <param name="entity">IIdentityResource</param>
+        /// <returns>bool</returns>
+		public async Task<bool> IdentityResourceUpdateAsync(IdentityResourceDto entity)
+        {
+            return await this.IdentityResourceRepository.UpdateAsync(new IdentityResource(entity, true));
+        }
+
+        /// <summary>
+        /// Delete the IdentityResource entity from the database
+        /// </summary>
+        /// <param name="entity">IIdentityResource</param>
+        /// <returns>bool</returns>
+		public bool IdentityResourceDelete(IdentityResourceDto entity)
+        {
+            return this.IdentityResourceRepository.Delete(new IdentityResource(entity, true));
+        }
+
+        /// <summary>
+        /// Delete the IdentityResource entity async from the database
+        /// </summary>
+        /// <param name="entity">IIdentityResource</param>
+        /// <returns>bool</returns>
+		public async Task<bool> IdentityResourceDeleteAsync(IdentityResourceDto entity)
+        {
+            return await this.IdentityResourceRepository.DeleteAsync(new IdentityResource(entity, true));
+        }
+
+		/// <summary>
+        /// Delete the IdentityResource entity from the database
+        /// </summary>
+        /// <param name="id">int</param>
+        /// <returns>bool</returns>
+		public bool IdentityResourceDelete( int id, bool cache)
+        {
+            return this.IdentityResourceRepository.Delete( id, cache);
+        }
+
+        /// <summary>
+        /// Delete the IdentityResource entity async from the database
+        /// </summary>
+        /// <param name="id">int</param>
+        /// <returns>bool</returns>
+		public async Task<bool> IdentityResourceDeleteAsync( int id, bool cache)
+        {
+            return await this.IdentityResourceRepository.DeleteAsync( id, cache);
+        }
+
+		
+        /// <summary>
+        /// Add the IdentityResourceClaimType entity to the database.
+        /// </summary>
+        /// <param name="entity">IIdentityResourceClaimType</param>
+        /// <returns>bool</returns>
+		public bool IdentityResourceClaimTypeAdd(IdentityResourceClaimTypeDto entity)
+        {
+            return this.IdentityResourceClaimTypeRepository.Add(new IdentityResourceClaimType(entity, true));
+        }
+
+        /// <summary>
+        /// Add the IdentityResourceClaimType entity async to the database.
+        /// </summary>
+        /// <param name="entity">IIdentityResourceClaimType</param>
+        /// <returns>bool</returns>
+		public async Task<bool> IdentityResourceClaimTypeAddAsync(IdentityResourceClaimTypeDto entity)
+        {
+            return await this.IdentityResourceClaimTypeRepository.AddAsync(new IdentityResourceClaimType(entity, true));
+        }
+
+        /// <summary>
+        /// Update the IdentityResourceClaimType entity in the database if any values have changed
+        /// </summary>
+        /// <param name="entity">IIdentityResourceClaimType</param>
+        /// <returns>bool</returns>
+		public bool IdentityResourceClaimTypeUpdate(IdentityResourceClaimTypeDto entity)
+        {
+            return this.IdentityResourceClaimTypeRepository.Update(new IdentityResourceClaimType(entity, true));
+        }
+		
+        /// <summary>
+        /// Update the IdentityResourceClaimType entity async in the database if any values have changed
+        /// </summary>
+        /// <param name="entity">IIdentityResourceClaimType</param>
+        /// <returns>bool</returns>
+		public async Task<bool> IdentityResourceClaimTypeUpdateAsync(IdentityResourceClaimTypeDto entity)
+        {
+            return await this.IdentityResourceClaimTypeRepository.UpdateAsync(new IdentityResourceClaimType(entity, true));
+        }
+
+        /// <summary>
+        /// Delete the IdentityResourceClaimType entity from the database
+        /// </summary>
+        /// <param name="entity">IIdentityResourceClaimType</param>
+        /// <returns>bool</returns>
+		public bool IdentityResourceClaimTypeDelete(IdentityResourceClaimTypeDto entity)
+        {
+            return this.IdentityResourceClaimTypeRepository.Delete(new IdentityResourceClaimType(entity, true));
+        }
+
+        /// <summary>
+        /// Delete the IdentityResourceClaimType entity async from the database
+        /// </summary>
+        /// <param name="entity">IIdentityResourceClaimType</param>
+        /// <returns>bool</returns>
+		public async Task<bool> IdentityResourceClaimTypeDeleteAsync(IdentityResourceClaimTypeDto entity)
+        {
+            return await this.IdentityResourceClaimTypeRepository.DeleteAsync(new IdentityResourceClaimType(entity, true));
+        }
+
+		/// <summary>
+        /// Delete the IdentityResourceClaimType entity from the database
+        /// </summary>
+        /// <param name="identityResourceId">int</param>
+        /// <param name="resourceClaimTypeId">int</param>
+        /// <returns>bool</returns>
+		public bool IdentityResourceClaimTypeDelete( int identityResourceId,  int resourceClaimTypeId, bool cache)
+        {
+            return this.IdentityResourceClaimTypeRepository.Delete( identityResourceId,  resourceClaimTypeId, cache);
+        }
+
+        /// <summary>
+        /// Delete the IdentityResourceClaimType entity async from the database
+        /// </summary>
+        /// <param name="identityResourceId">int</param>
+        /// <param name="resourceClaimTypeId">int</param>
+        /// <returns>bool</returns>
+		public async Task<bool> IdentityResourceClaimTypeDeleteAsync( int identityResourceId,  int resourceClaimTypeId, bool cache)
+        {
+            return await this.IdentityResourceClaimTypeRepository.DeleteAsync( identityResourceId,  resourceClaimTypeId, cache);
+        }
+
+		
+        /// <summary>
+        /// Add the PostLogoutRedirectUri entity to the database.
+        /// </summary>
+        /// <param name="entity">IPostLogoutRedirectUri</param>
+        /// <returns>bool</returns>
+		public bool PostLogoutRedirectUriAdd(PostLogoutRedirectUriDto entity)
+        {
+            return this.PostLogoutRedirectUriRepository.Add(new PostLogoutRedirectUri(entity, true));
+        }
+
+        /// <summary>
+        /// Add the PostLogoutRedirectUri entity async to the database.
+        /// </summary>
+        /// <param name="entity">IPostLogoutRedirectUri</param>
+        /// <returns>bool</returns>
+		public async Task<bool> PostLogoutRedirectUriAddAsync(PostLogoutRedirectUriDto entity)
+        {
+            return await this.PostLogoutRedirectUriRepository.AddAsync(new PostLogoutRedirectUri(entity, true));
+        }
+
+        /// <summary>
+        /// Update the PostLogoutRedirectUri entity in the database if any values have changed
+        /// </summary>
+        /// <param name="entity">IPostLogoutRedirectUri</param>
+        /// <returns>bool</returns>
+		public bool PostLogoutRedirectUriUpdate(PostLogoutRedirectUriDto entity)
+        {
+            return this.PostLogoutRedirectUriRepository.Update(new PostLogoutRedirectUri(entity, true));
+        }
+		
+        /// <summary>
+        /// Update the PostLogoutRedirectUri entity async in the database if any values have changed
+        /// </summary>
+        /// <param name="entity">IPostLogoutRedirectUri</param>
+        /// <returns>bool</returns>
+		public async Task<bool> PostLogoutRedirectUriUpdateAsync(PostLogoutRedirectUriDto entity)
+        {
+            return await this.PostLogoutRedirectUriRepository.UpdateAsync(new PostLogoutRedirectUri(entity, true));
+        }
+
+        /// <summary>
+        /// Delete the PostLogoutRedirectUri entity from the database
+        /// </summary>
+        /// <param name="entity">IPostLogoutRedirectUri</param>
+        /// <returns>bool</returns>
+		public bool PostLogoutRedirectUriDelete(PostLogoutRedirectUriDto entity)
+        {
+            return this.PostLogoutRedirectUriRepository.Delete(new PostLogoutRedirectUri(entity, true));
+        }
+
+        /// <summary>
+        /// Delete the PostLogoutRedirectUri entity async from the database
+        /// </summary>
+        /// <param name="entity">IPostLogoutRedirectUri</param>
+        /// <returns>bool</returns>
+		public async Task<bool> PostLogoutRedirectUriDeleteAsync(PostLogoutRedirectUriDto entity)
+        {
+            return await this.PostLogoutRedirectUriRepository.DeleteAsync(new PostLogoutRedirectUri(entity, true));
+        }
+
+		/// <summary>
+        /// Delete the PostLogoutRedirectUri entity from the database
+        /// </summary>
+        /// <param name="id">int</param>
+        /// <returns>bool</returns>
+		public bool PostLogoutRedirectUriDelete( int id, bool cache)
+        {
+            return this.PostLogoutRedirectUriRepository.Delete( id, cache);
+        }
+
+        /// <summary>
+        /// Delete the PostLogoutRedirectUri entity async from the database
+        /// </summary>
+        /// <param name="id">int</param>
+        /// <returns>bool</returns>
+		public async Task<bool> PostLogoutRedirectUriDeleteAsync( int id, bool cache)
+        {
+            return await this.PostLogoutRedirectUriRepository.DeleteAsync( id, cache);
+        }
+
+		
+        /// <summary>
+        /// Add the RedirectUri entity to the database.
+        /// </summary>
+        /// <param name="entity">IRedirectUri</param>
+        /// <returns>bool</returns>
+		public bool RedirectUriAdd(RedirectUriDto entity)
+        {
+            return this.RedirectUriRepository.Add(new RedirectUri(entity, true));
+        }
+
+        /// <summary>
+        /// Add the RedirectUri entity async to the database.
+        /// </summary>
+        /// <param name="entity">IRedirectUri</param>
+        /// <returns>bool</returns>
+		public async Task<bool> RedirectUriAddAsync(RedirectUriDto entity)
+        {
+            return await this.RedirectUriRepository.AddAsync(new RedirectUri(entity, true));
+        }
+
+        /// <summary>
+        /// Update the RedirectUri entity in the database if any values have changed
+        /// </summary>
+        /// <param name="entity">IRedirectUri</param>
+        /// <returns>bool</returns>
+		public bool RedirectUriUpdate(RedirectUriDto entity)
+        {
+            return this.RedirectUriRepository.Update(new RedirectUri(entity, true));
+        }
+		
+        /// <summary>
+        /// Update the RedirectUri entity async in the database if any values have changed
+        /// </summary>
+        /// <param name="entity">IRedirectUri</param>
+        /// <returns>bool</returns>
+		public async Task<bool> RedirectUriUpdateAsync(RedirectUriDto entity)
+        {
+            return await this.RedirectUriRepository.UpdateAsync(new RedirectUri(entity, true));
+        }
+
+        /// <summary>
+        /// Delete the RedirectUri entity from the database
+        /// </summary>
+        /// <param name="entity">IRedirectUri</param>
+        /// <returns>bool</returns>
+		public bool RedirectUriDelete(RedirectUriDto entity)
+        {
+            return this.RedirectUriRepository.Delete(new RedirectUri(entity, true));
+        }
+
+        /// <summary>
+        /// Delete the RedirectUri entity async from the database
+        /// </summary>
+        /// <param name="entity">IRedirectUri</param>
+        /// <returns>bool</returns>
+		public async Task<bool> RedirectUriDeleteAsync(RedirectUriDto entity)
+        {
+            return await this.RedirectUriRepository.DeleteAsync(new RedirectUri(entity, true));
+        }
+
+		/// <summary>
+        /// Delete the RedirectUri entity from the database
+        /// </summary>
+        /// <param name="id">int</param>
+        /// <returns>bool</returns>
+		public bool RedirectUriDelete( int id, bool cache)
+        {
+            return this.RedirectUriRepository.Delete( id, cache);
+        }
+
+        /// <summary>
+        /// Delete the RedirectUri entity async from the database
+        /// </summary>
+        /// <param name="id">int</param>
+        /// <returns>bool</returns>
+		public async Task<bool> RedirectUriDeleteAsync( int id, bool cache)
+        {
+            return await this.RedirectUriRepository.DeleteAsync( id, cache);
+        }
+
+		
+        /// <summary>
+        /// Add the ResourceClaimType entity to the database.
+        /// </summary>
+        /// <param name="entity">IResourceClaimType</param>
+        /// <returns>bool</returns>
+		public bool ResourceClaimTypeAdd(ResourceClaimTypeDto entity)
+        {
+            return this.ResourceClaimTypeRepository.Add(new ResourceClaimType(entity, true));
+        }
+
+        /// <summary>
+        /// Add the ResourceClaimType entity async to the database.
+        /// </summary>
+        /// <param name="entity">IResourceClaimType</param>
+        /// <returns>bool</returns>
+		public async Task<bool> ResourceClaimTypeAddAsync(ResourceClaimTypeDto entity)
+        {
+            return await this.ResourceClaimTypeRepository.AddAsync(new ResourceClaimType(entity, true));
+        }
+
+        /// <summary>
+        /// Update the ResourceClaimType entity in the database if any values have changed
+        /// </summary>
+        /// <param name="entity">IResourceClaimType</param>
+        /// <returns>bool</returns>
+		public bool ResourceClaimTypeUpdate(ResourceClaimTypeDto entity)
+        {
+            return this.ResourceClaimTypeRepository.Update(new ResourceClaimType(entity, true));
+        }
+		
+        /// <summary>
+        /// Update the ResourceClaimType entity async in the database if any values have changed
+        /// </summary>
+        /// <param name="entity">IResourceClaimType</param>
+        /// <returns>bool</returns>
+		public async Task<bool> ResourceClaimTypeUpdateAsync(ResourceClaimTypeDto entity)
+        {
+            return await this.ResourceClaimTypeRepository.UpdateAsync(new ResourceClaimType(entity, true));
+        }
+
+        /// <summary>
+        /// Delete the ResourceClaimType entity from the database
+        /// </summary>
+        /// <param name="entity">IResourceClaimType</param>
+        /// <returns>bool</returns>
+		public bool ResourceClaimTypeDelete(ResourceClaimTypeDto entity)
+        {
+            return this.ResourceClaimTypeRepository.Delete(new ResourceClaimType(entity, true));
+        }
+
+        /// <summary>
+        /// Delete the ResourceClaimType entity async from the database
+        /// </summary>
+        /// <param name="entity">IResourceClaimType</param>
+        /// <returns>bool</returns>
+		public async Task<bool> ResourceClaimTypeDeleteAsync(ResourceClaimTypeDto entity)
+        {
+            return await this.ResourceClaimTypeRepository.DeleteAsync(new ResourceClaimType(entity, true));
+        }
+
+		/// <summary>
+        /// Delete the ResourceClaimType entity from the database
+        /// </summary>
+        /// <param name="id">int</param>
+        /// <returns>bool</returns>
+		public bool ResourceClaimTypeDelete( int id, bool cache)
+        {
+            return this.ResourceClaimTypeRepository.Delete( id, cache);
+        }
+
+        /// <summary>
+        /// Delete the ResourceClaimType entity async from the database
+        /// </summary>
+        /// <param name="id">int</param>
+        /// <returns>bool</returns>
+		public async Task<bool> ResourceClaimTypeDeleteAsync( int id, bool cache)
+        {
+            return await this.ResourceClaimTypeRepository.DeleteAsync( id, cache);
+        }
+
 
 		#endregion
 
@@ -1790,6 +3375,446 @@ namespace DotNetScaffolder.Domain.ApplicationService
 		public async Task<TResult> AspNetUserTokenMinAsync<TResult>(Expression<Func<IAspNetUserToken, TResult>> maxExpression, bool cache)
         {
 		    return await this.AspNetUserTokenRepository.MinAsync(maxExpression, cache);
+        }
+
+        /// <summary>
+        /// Returns the max value 
+        /// </summary>
+        /// <typeparam name="TResult">TResult</typeparam>
+        /// <param name="maxExpression">Expression<Func<IAllowedScope, TResult>> maxExpression</param>
+        /// <returns></returns>
+        public TResult AllowedScopeMax<TResult>(Expression<Func<IAllowedScope, TResult>> maxExpression, bool cache)
+        {
+		    return this.AllowedScopeRepository.Max(maxExpression, cache);
+        }
+
+        /// <summary>
+        /// Returns the max value async
+        /// </summary>
+        /// <typeparam name="TResult">TResult</typeparam>
+        /// <param name="maxExpression">Expression<Func<IAllowedScope, TResult>> maxExpression</param>
+        /// <returns></returns>
+		public async Task<TResult> AllowedScopeMaxAsync<TResult>(Expression<Func<IAllowedScope, TResult>> maxExpression, bool cache)
+        {
+		    return await this.AllowedScopeRepository.MaxAsync(maxExpression, cache);
+        }
+		
+        /// <summary>
+        /// Returns the min value 
+        /// </summary>
+        /// <typeparam name="TResult">TResult</typeparam>
+        /// <param name="maxExpression">Expression<Func<IAllowedScope, TResult>> maxExpression</param>
+        /// <returns></returns>
+		public TResult AllowedScopeMin<TResult>(Expression<Func<IAllowedScope, TResult>> maxExpression, bool cache)
+        {
+		    return this.AllowedScopeRepository.Min(maxExpression, cache);
+        }
+		
+        /// <summary>
+        /// Returns the min value 
+        /// </summary>
+        /// <typeparam name="TResult">TResult</typeparam>
+        /// <param name="maxExpression">Expression<Func<IAllowedScope, TResult>> maxExpression</pIaram>
+        /// <returns></returns>
+		public async Task<TResult> AllowedScopeMinAsync<TResult>(Expression<Func<IAllowedScope, TResult>> maxExpression, bool cache)
+        {
+		    return await this.AllowedScopeRepository.MinAsync(maxExpression, cache);
+        }
+
+        /// <summary>
+        /// Returns the max value 
+        /// </summary>
+        /// <typeparam name="TResult">TResult</typeparam>
+        /// <param name="maxExpression">Expression<Func<IApiResource, TResult>> maxExpression</param>
+        /// <returns></returns>
+        public TResult ApiResourceMax<TResult>(Expression<Func<IApiResource, TResult>> maxExpression, bool cache)
+        {
+		    return this.ApiResourceRepository.Max(maxExpression, cache);
+        }
+
+        /// <summary>
+        /// Returns the max value async
+        /// </summary>
+        /// <typeparam name="TResult">TResult</typeparam>
+        /// <param name="maxExpression">Expression<Func<IApiResource, TResult>> maxExpression</param>
+        /// <returns></returns>
+		public async Task<TResult> ApiResourceMaxAsync<TResult>(Expression<Func<IApiResource, TResult>> maxExpression, bool cache)
+        {
+		    return await this.ApiResourceRepository.MaxAsync(maxExpression, cache);
+        }
+		
+        /// <summary>
+        /// Returns the min value 
+        /// </summary>
+        /// <typeparam name="TResult">TResult</typeparam>
+        /// <param name="maxExpression">Expression<Func<IApiResource, TResult>> maxExpression</param>
+        /// <returns></returns>
+		public TResult ApiResourceMin<TResult>(Expression<Func<IApiResource, TResult>> maxExpression, bool cache)
+        {
+		    return this.ApiResourceRepository.Min(maxExpression, cache);
+        }
+		
+        /// <summary>
+        /// Returns the min value 
+        /// </summary>
+        /// <typeparam name="TResult">TResult</typeparam>
+        /// <param name="maxExpression">Expression<Func<IApiResource, TResult>> maxExpression</pIaram>
+        /// <returns></returns>
+		public async Task<TResult> ApiResourceMinAsync<TResult>(Expression<Func<IApiResource, TResult>> maxExpression, bool cache)
+        {
+		    return await this.ApiResourceRepository.MinAsync(maxExpression, cache);
+        }
+
+        /// <summary>
+        /// Returns the max value 
+        /// </summary>
+        /// <typeparam name="TResult">TResult</typeparam>
+        /// <param name="maxExpression">Expression<Func<IClient, TResult>> maxExpression</param>
+        /// <returns></returns>
+        public TResult ClientMax<TResult>(Expression<Func<IClient, TResult>> maxExpression, bool cache)
+        {
+		    return this.ClientRepository.Max(maxExpression, cache);
+        }
+
+        /// <summary>
+        /// Returns the max value async
+        /// </summary>
+        /// <typeparam name="TResult">TResult</typeparam>
+        /// <param name="maxExpression">Expression<Func<IClient, TResult>> maxExpression</param>
+        /// <returns></returns>
+		public async Task<TResult> ClientMaxAsync<TResult>(Expression<Func<IClient, TResult>> maxExpression, bool cache)
+        {
+		    return await this.ClientRepository.MaxAsync(maxExpression, cache);
+        }
+		
+        /// <summary>
+        /// Returns the min value 
+        /// </summary>
+        /// <typeparam name="TResult">TResult</typeparam>
+        /// <param name="maxExpression">Expression<Func<IClient, TResult>> maxExpression</param>
+        /// <returns></returns>
+		public TResult ClientMin<TResult>(Expression<Func<IClient, TResult>> maxExpression, bool cache)
+        {
+		    return this.ClientRepository.Min(maxExpression, cache);
+        }
+		
+        /// <summary>
+        /// Returns the min value 
+        /// </summary>
+        /// <typeparam name="TResult">TResult</typeparam>
+        /// <param name="maxExpression">Expression<Func<IClient, TResult>> maxExpression</pIaram>
+        /// <returns></returns>
+		public async Task<TResult> ClientMinAsync<TResult>(Expression<Func<IClient, TResult>> maxExpression, bool cache)
+        {
+		    return await this.ClientRepository.MinAsync(maxExpression, cache);
+        }
+
+        /// <summary>
+        /// Returns the max value 
+        /// </summary>
+        /// <typeparam name="TResult">TResult</typeparam>
+        /// <param name="maxExpression">Expression<Func<IClientGrantType, TResult>> maxExpression</param>
+        /// <returns></returns>
+        public TResult ClientGrantTypeMax<TResult>(Expression<Func<IClientGrantType, TResult>> maxExpression, bool cache)
+        {
+		    return this.ClientGrantTypeRepository.Max(maxExpression, cache);
+        }
+
+        /// <summary>
+        /// Returns the max value async
+        /// </summary>
+        /// <typeparam name="TResult">TResult</typeparam>
+        /// <param name="maxExpression">Expression<Func<IClientGrantType, TResult>> maxExpression</param>
+        /// <returns></returns>
+		public async Task<TResult> ClientGrantTypeMaxAsync<TResult>(Expression<Func<IClientGrantType, TResult>> maxExpression, bool cache)
+        {
+		    return await this.ClientGrantTypeRepository.MaxAsync(maxExpression, cache);
+        }
+		
+        /// <summary>
+        /// Returns the min value 
+        /// </summary>
+        /// <typeparam name="TResult">TResult</typeparam>
+        /// <param name="maxExpression">Expression<Func<IClientGrantType, TResult>> maxExpression</param>
+        /// <returns></returns>
+		public TResult ClientGrantTypeMin<TResult>(Expression<Func<IClientGrantType, TResult>> maxExpression, bool cache)
+        {
+		    return this.ClientGrantTypeRepository.Min(maxExpression, cache);
+        }
+		
+        /// <summary>
+        /// Returns the min value 
+        /// </summary>
+        /// <typeparam name="TResult">TResult</typeparam>
+        /// <param name="maxExpression">Expression<Func<IClientGrantType, TResult>> maxExpression</pIaram>
+        /// <returns></returns>
+		public async Task<TResult> ClientGrantTypeMinAsync<TResult>(Expression<Func<IClientGrantType, TResult>> maxExpression, bool cache)
+        {
+		    return await this.ClientGrantTypeRepository.MinAsync(maxExpression, cache);
+        }
+
+        /// <summary>
+        /// Returns the max value 
+        /// </summary>
+        /// <typeparam name="TResult">TResult</typeparam>
+        /// <param name="maxExpression">Expression<Func<IGrantType, TResult>> maxExpression</param>
+        /// <returns></returns>
+        public TResult GrantTypeMax<TResult>(Expression<Func<IGrantType, TResult>> maxExpression, bool cache)
+        {
+		    return this.GrantTypeRepository.Max(maxExpression, cache);
+        }
+
+        /// <summary>
+        /// Returns the max value async
+        /// </summary>
+        /// <typeparam name="TResult">TResult</typeparam>
+        /// <param name="maxExpression">Expression<Func<IGrantType, TResult>> maxExpression</param>
+        /// <returns></returns>
+		public async Task<TResult> GrantTypeMaxAsync<TResult>(Expression<Func<IGrantType, TResult>> maxExpression, bool cache)
+        {
+		    return await this.GrantTypeRepository.MaxAsync(maxExpression, cache);
+        }
+		
+        /// <summary>
+        /// Returns the min value 
+        /// </summary>
+        /// <typeparam name="TResult">TResult</typeparam>
+        /// <param name="maxExpression">Expression<Func<IGrantType, TResult>> maxExpression</param>
+        /// <returns></returns>
+		public TResult GrantTypeMin<TResult>(Expression<Func<IGrantType, TResult>> maxExpression, bool cache)
+        {
+		    return this.GrantTypeRepository.Min(maxExpression, cache);
+        }
+		
+        /// <summary>
+        /// Returns the min value 
+        /// </summary>
+        /// <typeparam name="TResult">TResult</typeparam>
+        /// <param name="maxExpression">Expression<Func<IGrantType, TResult>> maxExpression</pIaram>
+        /// <returns></returns>
+		public async Task<TResult> GrantTypeMinAsync<TResult>(Expression<Func<IGrantType, TResult>> maxExpression, bool cache)
+        {
+		    return await this.GrantTypeRepository.MinAsync(maxExpression, cache);
+        }
+
+        /// <summary>
+        /// Returns the max value 
+        /// </summary>
+        /// <typeparam name="TResult">TResult</typeparam>
+        /// <param name="maxExpression">Expression<Func<IIdentityResource, TResult>> maxExpression</param>
+        /// <returns></returns>
+        public TResult IdentityResourceMax<TResult>(Expression<Func<IIdentityResource, TResult>> maxExpression, bool cache)
+        {
+		    return this.IdentityResourceRepository.Max(maxExpression, cache);
+        }
+
+        /// <summary>
+        /// Returns the max value async
+        /// </summary>
+        /// <typeparam name="TResult">TResult</typeparam>
+        /// <param name="maxExpression">Expression<Func<IIdentityResource, TResult>> maxExpression</param>
+        /// <returns></returns>
+		public async Task<TResult> IdentityResourceMaxAsync<TResult>(Expression<Func<IIdentityResource, TResult>> maxExpression, bool cache)
+        {
+		    return await this.IdentityResourceRepository.MaxAsync(maxExpression, cache);
+        }
+		
+        /// <summary>
+        /// Returns the min value 
+        /// </summary>
+        /// <typeparam name="TResult">TResult</typeparam>
+        /// <param name="maxExpression">Expression<Func<IIdentityResource, TResult>> maxExpression</param>
+        /// <returns></returns>
+		public TResult IdentityResourceMin<TResult>(Expression<Func<IIdentityResource, TResult>> maxExpression, bool cache)
+        {
+		    return this.IdentityResourceRepository.Min(maxExpression, cache);
+        }
+		
+        /// <summary>
+        /// Returns the min value 
+        /// </summary>
+        /// <typeparam name="TResult">TResult</typeparam>
+        /// <param name="maxExpression">Expression<Func<IIdentityResource, TResult>> maxExpression</pIaram>
+        /// <returns></returns>
+		public async Task<TResult> IdentityResourceMinAsync<TResult>(Expression<Func<IIdentityResource, TResult>> maxExpression, bool cache)
+        {
+		    return await this.IdentityResourceRepository.MinAsync(maxExpression, cache);
+        }
+
+        /// <summary>
+        /// Returns the max value 
+        /// </summary>
+        /// <typeparam name="TResult">TResult</typeparam>
+        /// <param name="maxExpression">Expression<Func<IIdentityResourceClaimType, TResult>> maxExpression</param>
+        /// <returns></returns>
+        public TResult IdentityResourceClaimTypeMax<TResult>(Expression<Func<IIdentityResourceClaimType, TResult>> maxExpression, bool cache)
+        {
+		    return this.IdentityResourceClaimTypeRepository.Max(maxExpression, cache);
+        }
+
+        /// <summary>
+        /// Returns the max value async
+        /// </summary>
+        /// <typeparam name="TResult">TResult</typeparam>
+        /// <param name="maxExpression">Expression<Func<IIdentityResourceClaimType, TResult>> maxExpression</param>
+        /// <returns></returns>
+		public async Task<TResult> IdentityResourceClaimTypeMaxAsync<TResult>(Expression<Func<IIdentityResourceClaimType, TResult>> maxExpression, bool cache)
+        {
+		    return await this.IdentityResourceClaimTypeRepository.MaxAsync(maxExpression, cache);
+        }
+		
+        /// <summary>
+        /// Returns the min value 
+        /// </summary>
+        /// <typeparam name="TResult">TResult</typeparam>
+        /// <param name="maxExpression">Expression<Func<IIdentityResourceClaimType, TResult>> maxExpression</param>
+        /// <returns></returns>
+		public TResult IdentityResourceClaimTypeMin<TResult>(Expression<Func<IIdentityResourceClaimType, TResult>> maxExpression, bool cache)
+        {
+		    return this.IdentityResourceClaimTypeRepository.Min(maxExpression, cache);
+        }
+		
+        /// <summary>
+        /// Returns the min value 
+        /// </summary>
+        /// <typeparam name="TResult">TResult</typeparam>
+        /// <param name="maxExpression">Expression<Func<IIdentityResourceClaimType, TResult>> maxExpression</pIaram>
+        /// <returns></returns>
+		public async Task<TResult> IdentityResourceClaimTypeMinAsync<TResult>(Expression<Func<IIdentityResourceClaimType, TResult>> maxExpression, bool cache)
+        {
+		    return await this.IdentityResourceClaimTypeRepository.MinAsync(maxExpression, cache);
+        }
+
+        /// <summary>
+        /// Returns the max value 
+        /// </summary>
+        /// <typeparam name="TResult">TResult</typeparam>
+        /// <param name="maxExpression">Expression<Func<IPostLogoutRedirectUri, TResult>> maxExpression</param>
+        /// <returns></returns>
+        public TResult PostLogoutRedirectUriMax<TResult>(Expression<Func<IPostLogoutRedirectUri, TResult>> maxExpression, bool cache)
+        {
+		    return this.PostLogoutRedirectUriRepository.Max(maxExpression, cache);
+        }
+
+        /// <summary>
+        /// Returns the max value async
+        /// </summary>
+        /// <typeparam name="TResult">TResult</typeparam>
+        /// <param name="maxExpression">Expression<Func<IPostLogoutRedirectUri, TResult>> maxExpression</param>
+        /// <returns></returns>
+		public async Task<TResult> PostLogoutRedirectUriMaxAsync<TResult>(Expression<Func<IPostLogoutRedirectUri, TResult>> maxExpression, bool cache)
+        {
+		    return await this.PostLogoutRedirectUriRepository.MaxAsync(maxExpression, cache);
+        }
+		
+        /// <summary>
+        /// Returns the min value 
+        /// </summary>
+        /// <typeparam name="TResult">TResult</typeparam>
+        /// <param name="maxExpression">Expression<Func<IPostLogoutRedirectUri, TResult>> maxExpression</param>
+        /// <returns></returns>
+		public TResult PostLogoutRedirectUriMin<TResult>(Expression<Func<IPostLogoutRedirectUri, TResult>> maxExpression, bool cache)
+        {
+		    return this.PostLogoutRedirectUriRepository.Min(maxExpression, cache);
+        }
+		
+        /// <summary>
+        /// Returns the min value 
+        /// </summary>
+        /// <typeparam name="TResult">TResult</typeparam>
+        /// <param name="maxExpression">Expression<Func<IPostLogoutRedirectUri, TResult>> maxExpression</pIaram>
+        /// <returns></returns>
+		public async Task<TResult> PostLogoutRedirectUriMinAsync<TResult>(Expression<Func<IPostLogoutRedirectUri, TResult>> maxExpression, bool cache)
+        {
+		    return await this.PostLogoutRedirectUriRepository.MinAsync(maxExpression, cache);
+        }
+
+        /// <summary>
+        /// Returns the max value 
+        /// </summary>
+        /// <typeparam name="TResult">TResult</typeparam>
+        /// <param name="maxExpression">Expression<Func<IRedirectUri, TResult>> maxExpression</param>
+        /// <returns></returns>
+        public TResult RedirectUriMax<TResult>(Expression<Func<IRedirectUri, TResult>> maxExpression, bool cache)
+        {
+		    return this.RedirectUriRepository.Max(maxExpression, cache);
+        }
+
+        /// <summary>
+        /// Returns the max value async
+        /// </summary>
+        /// <typeparam name="TResult">TResult</typeparam>
+        /// <param name="maxExpression">Expression<Func<IRedirectUri, TResult>> maxExpression</param>
+        /// <returns></returns>
+		public async Task<TResult> RedirectUriMaxAsync<TResult>(Expression<Func<IRedirectUri, TResult>> maxExpression, bool cache)
+        {
+		    return await this.RedirectUriRepository.MaxAsync(maxExpression, cache);
+        }
+		
+        /// <summary>
+        /// Returns the min value 
+        /// </summary>
+        /// <typeparam name="TResult">TResult</typeparam>
+        /// <param name="maxExpression">Expression<Func<IRedirectUri, TResult>> maxExpression</param>
+        /// <returns></returns>
+		public TResult RedirectUriMin<TResult>(Expression<Func<IRedirectUri, TResult>> maxExpression, bool cache)
+        {
+		    return this.RedirectUriRepository.Min(maxExpression, cache);
+        }
+		
+        /// <summary>
+        /// Returns the min value 
+        /// </summary>
+        /// <typeparam name="TResult">TResult</typeparam>
+        /// <param name="maxExpression">Expression<Func<IRedirectUri, TResult>> maxExpression</pIaram>
+        /// <returns></returns>
+		public async Task<TResult> RedirectUriMinAsync<TResult>(Expression<Func<IRedirectUri, TResult>> maxExpression, bool cache)
+        {
+		    return await this.RedirectUriRepository.MinAsync(maxExpression, cache);
+        }
+
+        /// <summary>
+        /// Returns the max value 
+        /// </summary>
+        /// <typeparam name="TResult">TResult</typeparam>
+        /// <param name="maxExpression">Expression<Func<IResourceClaimType, TResult>> maxExpression</param>
+        /// <returns></returns>
+        public TResult ResourceClaimTypeMax<TResult>(Expression<Func<IResourceClaimType, TResult>> maxExpression, bool cache)
+        {
+		    return this.ResourceClaimTypeRepository.Max(maxExpression, cache);
+        }
+
+        /// <summary>
+        /// Returns the max value async
+        /// </summary>
+        /// <typeparam name="TResult">TResult</typeparam>
+        /// <param name="maxExpression">Expression<Func<IResourceClaimType, TResult>> maxExpression</param>
+        /// <returns></returns>
+		public async Task<TResult> ResourceClaimTypeMaxAsync<TResult>(Expression<Func<IResourceClaimType, TResult>> maxExpression, bool cache)
+        {
+		    return await this.ResourceClaimTypeRepository.MaxAsync(maxExpression, cache);
+        }
+		
+        /// <summary>
+        /// Returns the min value 
+        /// </summary>
+        /// <typeparam name="TResult">TResult</typeparam>
+        /// <param name="maxExpression">Expression<Func<IResourceClaimType, TResult>> maxExpression</param>
+        /// <returns></returns>
+		public TResult ResourceClaimTypeMin<TResult>(Expression<Func<IResourceClaimType, TResult>> maxExpression, bool cache)
+        {
+		    return this.ResourceClaimTypeRepository.Min(maxExpression, cache);
+        }
+		
+        /// <summary>
+        /// Returns the min value 
+        /// </summary>
+        /// <typeparam name="TResult">TResult</typeparam>
+        /// <param name="maxExpression">Expression<Func<IResourceClaimType, TResult>> maxExpression</pIaram>
+        /// <returns></returns>
+		public async Task<TResult> ResourceClaimTypeMinAsync<TResult>(Expression<Func<IResourceClaimType, TResult>> maxExpression, bool cache)
+        {
+		    return await this.ResourceClaimTypeRepository.MinAsync(maxExpression, cache);
         }
 
 		#endregion
@@ -2437,6 +4462,926 @@ namespace DotNetScaffolder.Domain.ApplicationService
         public async Task  AspNetUserTokenBulkUpdateAsync(IEnumerable<AspNetUserTokenDto> items)
 		{
 			await this.AspNetUserTokenRepository.BulkUpdateAsync(this.ConvertAspNetUserTokenDtoToEntity(items));
+		}
+
+        
+        /// <summary>
+        /// Converts a AllowedScopeDto list to AllowedScope list
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+	    private List<AllowedScope> ConvertAllowedScopeDtoToEntity(IEnumerable<AllowedScopeDto> items)
+	    {
+            List<AllowedScope> results = new List<AllowedScope>();
+
+	        foreach (var item in items)
+	        {
+	            results.Add(new AllowedScope(item, true));
+	        }
+
+	        return results;
+	    }
+
+        /// <summary>
+        /// Converts a AllowedScope list to AllowedScopeDto list
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+	    private List<AllowedScopeDto> ConvertAllowedScopeEntityToDto(IEnumerable<AllowedScope> items)
+	    {
+            List<AllowedScopeDto> results = new List<AllowedScopeDto>();
+
+	        foreach (var item in items)
+	        {
+	            results.Add(new AllowedScopeDto(item, true));
+	        }
+
+	        return results;
+	    }
+
+        /// <summary>
+        ///     Bulk delete entities
+        /// </summary>
+        /// <param name="items"></param>
+        public void AllowedScopeBulkDelete(IEnumerable<AllowedScopeDto> items)
+		{
+			this.AllowedScopeRepository.BulkDelete(this.ConvertAllowedScopeDtoToEntity(items));
+		}
+
+        /// <summary>
+        ///     Bulk delete entities async
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public async Task AllowedScopeBulkDeleteAsync(IEnumerable<AllowedScopeDto> items)
+		{
+			await this.AllowedScopeRepository.BulkDeleteAsync(this.ConvertAllowedScopeDtoToEntity(items));
+		}
+
+        /// <summary>
+        ///     Bulk insert entities
+        /// </summary>
+        /// <param name="items"></param>
+        public void  AllowedScopeBulkInsert(IEnumerable<AllowedScopeDto> items)
+		{
+			this.AllowedScopeRepository.BulkInsert(this.ConvertAllowedScopeDtoToEntity(items));
+		}
+        
+        /// <summary>
+        /// Bulk insert entities async
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public async Task  AllowedScopeBulkInsertAsync(IEnumerable<AllowedScopeDto> items)
+		{
+			await this.AllowedScopeRepository.BulkInsertAsync(this.ConvertAllowedScopeDtoToEntity(items));
+		}
+
+        /// <summary>
+        /// Bulk update entities 
+        /// </summary>
+        /// <param name="items"></param>
+        public void  AllowedScopeBulkUpdate(IEnumerable<AllowedScopeDto> items)
+		{
+			this.AllowedScopeRepository.BulkUpdate(this.ConvertAllowedScopeDtoToEntity(items));
+		}
+
+        /// <summary>
+        /// Bulk update entities async
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public async Task  AllowedScopeBulkUpdateAsync(IEnumerable<AllowedScopeDto> items)
+		{
+			await this.AllowedScopeRepository.BulkUpdateAsync(this.ConvertAllowedScopeDtoToEntity(items));
+		}
+
+        
+        /// <summary>
+        /// Converts a ApiResourceDto list to ApiResource list
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+	    private List<ApiResource> ConvertApiResourceDtoToEntity(IEnumerable<ApiResourceDto> items)
+	    {
+            List<ApiResource> results = new List<ApiResource>();
+
+	        foreach (var item in items)
+	        {
+	            results.Add(new ApiResource(item, true));
+	        }
+
+	        return results;
+	    }
+
+        /// <summary>
+        /// Converts a ApiResource list to ApiResourceDto list
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+	    private List<ApiResourceDto> ConvertApiResourceEntityToDto(IEnumerable<ApiResource> items)
+	    {
+            List<ApiResourceDto> results = new List<ApiResourceDto>();
+
+	        foreach (var item in items)
+	        {
+	            results.Add(new ApiResourceDto(item, true));
+	        }
+
+	        return results;
+	    }
+
+        /// <summary>
+        ///     Bulk delete entities
+        /// </summary>
+        /// <param name="items"></param>
+        public void ApiResourceBulkDelete(IEnumerable<ApiResourceDto> items)
+		{
+			this.ApiResourceRepository.BulkDelete(this.ConvertApiResourceDtoToEntity(items));
+		}
+
+        /// <summary>
+        ///     Bulk delete entities async
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public async Task ApiResourceBulkDeleteAsync(IEnumerable<ApiResourceDto> items)
+		{
+			await this.ApiResourceRepository.BulkDeleteAsync(this.ConvertApiResourceDtoToEntity(items));
+		}
+
+        /// <summary>
+        ///     Bulk insert entities
+        /// </summary>
+        /// <param name="items"></param>
+        public void  ApiResourceBulkInsert(IEnumerable<ApiResourceDto> items)
+		{
+			this.ApiResourceRepository.BulkInsert(this.ConvertApiResourceDtoToEntity(items));
+		}
+        
+        /// <summary>
+        /// Bulk insert entities async
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public async Task  ApiResourceBulkInsertAsync(IEnumerable<ApiResourceDto> items)
+		{
+			await this.ApiResourceRepository.BulkInsertAsync(this.ConvertApiResourceDtoToEntity(items));
+		}
+
+        /// <summary>
+        /// Bulk update entities 
+        /// </summary>
+        /// <param name="items"></param>
+        public void  ApiResourceBulkUpdate(IEnumerable<ApiResourceDto> items)
+		{
+			this.ApiResourceRepository.BulkUpdate(this.ConvertApiResourceDtoToEntity(items));
+		}
+
+        /// <summary>
+        /// Bulk update entities async
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public async Task  ApiResourceBulkUpdateAsync(IEnumerable<ApiResourceDto> items)
+		{
+			await this.ApiResourceRepository.BulkUpdateAsync(this.ConvertApiResourceDtoToEntity(items));
+		}
+
+        
+        /// <summary>
+        /// Converts a ClientDto list to Client list
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+	    private List<Client> ConvertClientDtoToEntity(IEnumerable<ClientDto> items)
+	    {
+            List<Client> results = new List<Client>();
+
+	        foreach (var item in items)
+	        {
+	            results.Add(new Client(item, true));
+	        }
+
+	        return results;
+	    }
+
+        /// <summary>
+        /// Converts a Client list to ClientDto list
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+	    private List<ClientDto> ConvertClientEntityToDto(IEnumerable<Client> items)
+	    {
+            List<ClientDto> results = new List<ClientDto>();
+
+	        foreach (var item in items)
+	        {
+	            results.Add(new ClientDto(item, true));
+	        }
+
+	        return results;
+	    }
+
+        /// <summary>
+        ///     Bulk delete entities
+        /// </summary>
+        /// <param name="items"></param>
+        public void ClientBulkDelete(IEnumerable<ClientDto> items)
+		{
+			this.ClientRepository.BulkDelete(this.ConvertClientDtoToEntity(items));
+		}
+
+        /// <summary>
+        ///     Bulk delete entities async
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public async Task ClientBulkDeleteAsync(IEnumerable<ClientDto> items)
+		{
+			await this.ClientRepository.BulkDeleteAsync(this.ConvertClientDtoToEntity(items));
+		}
+
+        /// <summary>
+        ///     Bulk insert entities
+        /// </summary>
+        /// <param name="items"></param>
+        public void  ClientBulkInsert(IEnumerable<ClientDto> items)
+		{
+			this.ClientRepository.BulkInsert(this.ConvertClientDtoToEntity(items));
+		}
+        
+        /// <summary>
+        /// Bulk insert entities async
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public async Task  ClientBulkInsertAsync(IEnumerable<ClientDto> items)
+		{
+			await this.ClientRepository.BulkInsertAsync(this.ConvertClientDtoToEntity(items));
+		}
+
+        /// <summary>
+        /// Bulk update entities 
+        /// </summary>
+        /// <param name="items"></param>
+        public void  ClientBulkUpdate(IEnumerable<ClientDto> items)
+		{
+			this.ClientRepository.BulkUpdate(this.ConvertClientDtoToEntity(items));
+		}
+
+        /// <summary>
+        /// Bulk update entities async
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public async Task  ClientBulkUpdateAsync(IEnumerable<ClientDto> items)
+		{
+			await this.ClientRepository.BulkUpdateAsync(this.ConvertClientDtoToEntity(items));
+		}
+
+        
+        /// <summary>
+        /// Converts a ClientGrantTypeDto list to ClientGrantType list
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+	    private List<ClientGrantType> ConvertClientGrantTypeDtoToEntity(IEnumerable<ClientGrantTypeDto> items)
+	    {
+            List<ClientGrantType> results = new List<ClientGrantType>();
+
+	        foreach (var item in items)
+	        {
+	            results.Add(new ClientGrantType(item, true));
+	        }
+
+	        return results;
+	    }
+
+        /// <summary>
+        /// Converts a ClientGrantType list to ClientGrantTypeDto list
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+	    private List<ClientGrantTypeDto> ConvertClientGrantTypeEntityToDto(IEnumerable<ClientGrantType> items)
+	    {
+            List<ClientGrantTypeDto> results = new List<ClientGrantTypeDto>();
+
+	        foreach (var item in items)
+	        {
+	            results.Add(new ClientGrantTypeDto(item, true));
+	        }
+
+	        return results;
+	    }
+
+        /// <summary>
+        ///     Bulk delete entities
+        /// </summary>
+        /// <param name="items"></param>
+        public void ClientGrantTypeBulkDelete(IEnumerable<ClientGrantTypeDto> items)
+		{
+			this.ClientGrantTypeRepository.BulkDelete(this.ConvertClientGrantTypeDtoToEntity(items));
+		}
+
+        /// <summary>
+        ///     Bulk delete entities async
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public async Task ClientGrantTypeBulkDeleteAsync(IEnumerable<ClientGrantTypeDto> items)
+		{
+			await this.ClientGrantTypeRepository.BulkDeleteAsync(this.ConvertClientGrantTypeDtoToEntity(items));
+		}
+
+        /// <summary>
+        ///     Bulk insert entities
+        /// </summary>
+        /// <param name="items"></param>
+        public void  ClientGrantTypeBulkInsert(IEnumerable<ClientGrantTypeDto> items)
+		{
+			this.ClientGrantTypeRepository.BulkInsert(this.ConvertClientGrantTypeDtoToEntity(items));
+		}
+        
+        /// <summary>
+        /// Bulk insert entities async
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public async Task  ClientGrantTypeBulkInsertAsync(IEnumerable<ClientGrantTypeDto> items)
+		{
+			await this.ClientGrantTypeRepository.BulkInsertAsync(this.ConvertClientGrantTypeDtoToEntity(items));
+		}
+
+        /// <summary>
+        /// Bulk update entities 
+        /// </summary>
+        /// <param name="items"></param>
+        public void  ClientGrantTypeBulkUpdate(IEnumerable<ClientGrantTypeDto> items)
+		{
+			this.ClientGrantTypeRepository.BulkUpdate(this.ConvertClientGrantTypeDtoToEntity(items));
+		}
+
+        /// <summary>
+        /// Bulk update entities async
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public async Task  ClientGrantTypeBulkUpdateAsync(IEnumerable<ClientGrantTypeDto> items)
+		{
+			await this.ClientGrantTypeRepository.BulkUpdateAsync(this.ConvertClientGrantTypeDtoToEntity(items));
+		}
+
+        
+        /// <summary>
+        /// Converts a GrantTypeDto list to GrantType list
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+	    private List<GrantType> ConvertGrantTypeDtoToEntity(IEnumerable<GrantTypeDto> items)
+	    {
+            List<GrantType> results = new List<GrantType>();
+
+	        foreach (var item in items)
+	        {
+	            results.Add(new GrantType(item, true));
+	        }
+
+	        return results;
+	    }
+
+        /// <summary>
+        /// Converts a GrantType list to GrantTypeDto list
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+	    private List<GrantTypeDto> ConvertGrantTypeEntityToDto(IEnumerable<GrantType> items)
+	    {
+            List<GrantTypeDto> results = new List<GrantTypeDto>();
+
+	        foreach (var item in items)
+	        {
+	            results.Add(new GrantTypeDto(item, true));
+	        }
+
+	        return results;
+	    }
+
+        /// <summary>
+        ///     Bulk delete entities
+        /// </summary>
+        /// <param name="items"></param>
+        public void GrantTypeBulkDelete(IEnumerable<GrantTypeDto> items)
+		{
+			this.GrantTypeRepository.BulkDelete(this.ConvertGrantTypeDtoToEntity(items));
+		}
+
+        /// <summary>
+        ///     Bulk delete entities async
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public async Task GrantTypeBulkDeleteAsync(IEnumerable<GrantTypeDto> items)
+		{
+			await this.GrantTypeRepository.BulkDeleteAsync(this.ConvertGrantTypeDtoToEntity(items));
+		}
+
+        /// <summary>
+        ///     Bulk insert entities
+        /// </summary>
+        /// <param name="items"></param>
+        public void  GrantTypeBulkInsert(IEnumerable<GrantTypeDto> items)
+		{
+			this.GrantTypeRepository.BulkInsert(this.ConvertGrantTypeDtoToEntity(items));
+		}
+        
+        /// <summary>
+        /// Bulk insert entities async
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public async Task  GrantTypeBulkInsertAsync(IEnumerable<GrantTypeDto> items)
+		{
+			await this.GrantTypeRepository.BulkInsertAsync(this.ConvertGrantTypeDtoToEntity(items));
+		}
+
+        /// <summary>
+        /// Bulk update entities 
+        /// </summary>
+        /// <param name="items"></param>
+        public void  GrantTypeBulkUpdate(IEnumerable<GrantTypeDto> items)
+		{
+			this.GrantTypeRepository.BulkUpdate(this.ConvertGrantTypeDtoToEntity(items));
+		}
+
+        /// <summary>
+        /// Bulk update entities async
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public async Task  GrantTypeBulkUpdateAsync(IEnumerable<GrantTypeDto> items)
+		{
+			await this.GrantTypeRepository.BulkUpdateAsync(this.ConvertGrantTypeDtoToEntity(items));
+		}
+
+        
+        /// <summary>
+        /// Converts a IdentityResourceDto list to IdentityResource list
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+	    private List<IdentityResource> ConvertIdentityResourceDtoToEntity(IEnumerable<IdentityResourceDto> items)
+	    {
+            List<IdentityResource> results = new List<IdentityResource>();
+
+	        foreach (var item in items)
+	        {
+	            results.Add(new IdentityResource(item, true));
+	        }
+
+	        return results;
+	    }
+
+        /// <summary>
+        /// Converts a IdentityResource list to IdentityResourceDto list
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+	    private List<IdentityResourceDto> ConvertIdentityResourceEntityToDto(IEnumerable<IdentityResource> items)
+	    {
+            List<IdentityResourceDto> results = new List<IdentityResourceDto>();
+
+	        foreach (var item in items)
+	        {
+	            results.Add(new IdentityResourceDto(item, true));
+	        }
+
+	        return results;
+	    }
+
+        /// <summary>
+        ///     Bulk delete entities
+        /// </summary>
+        /// <param name="items"></param>
+        public void IdentityResourceBulkDelete(IEnumerable<IdentityResourceDto> items)
+		{
+			this.IdentityResourceRepository.BulkDelete(this.ConvertIdentityResourceDtoToEntity(items));
+		}
+
+        /// <summary>
+        ///     Bulk delete entities async
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public async Task IdentityResourceBulkDeleteAsync(IEnumerable<IdentityResourceDto> items)
+		{
+			await this.IdentityResourceRepository.BulkDeleteAsync(this.ConvertIdentityResourceDtoToEntity(items));
+		}
+
+        /// <summary>
+        ///     Bulk insert entities
+        /// </summary>
+        /// <param name="items"></param>
+        public void  IdentityResourceBulkInsert(IEnumerable<IdentityResourceDto> items)
+		{
+			this.IdentityResourceRepository.BulkInsert(this.ConvertIdentityResourceDtoToEntity(items));
+		}
+        
+        /// <summary>
+        /// Bulk insert entities async
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public async Task  IdentityResourceBulkInsertAsync(IEnumerable<IdentityResourceDto> items)
+		{
+			await this.IdentityResourceRepository.BulkInsertAsync(this.ConvertIdentityResourceDtoToEntity(items));
+		}
+
+        /// <summary>
+        /// Bulk update entities 
+        /// </summary>
+        /// <param name="items"></param>
+        public void  IdentityResourceBulkUpdate(IEnumerable<IdentityResourceDto> items)
+		{
+			this.IdentityResourceRepository.BulkUpdate(this.ConvertIdentityResourceDtoToEntity(items));
+		}
+
+        /// <summary>
+        /// Bulk update entities async
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public async Task  IdentityResourceBulkUpdateAsync(IEnumerable<IdentityResourceDto> items)
+		{
+			await this.IdentityResourceRepository.BulkUpdateAsync(this.ConvertIdentityResourceDtoToEntity(items));
+		}
+
+        
+        /// <summary>
+        /// Converts a IdentityResourceClaimTypeDto list to IdentityResourceClaimType list
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+	    private List<IdentityResourceClaimType> ConvertIdentityResourceClaimTypeDtoToEntity(IEnumerable<IdentityResourceClaimTypeDto> items)
+	    {
+            List<IdentityResourceClaimType> results = new List<IdentityResourceClaimType>();
+
+	        foreach (var item in items)
+	        {
+	            results.Add(new IdentityResourceClaimType(item, true));
+	        }
+
+	        return results;
+	    }
+
+        /// <summary>
+        /// Converts a IdentityResourceClaimType list to IdentityResourceClaimTypeDto list
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+	    private List<IdentityResourceClaimTypeDto> ConvertIdentityResourceClaimTypeEntityToDto(IEnumerable<IdentityResourceClaimType> items)
+	    {
+            List<IdentityResourceClaimTypeDto> results = new List<IdentityResourceClaimTypeDto>();
+
+	        foreach (var item in items)
+	        {
+	            results.Add(new IdentityResourceClaimTypeDto(item, true));
+	        }
+
+	        return results;
+	    }
+
+        /// <summary>
+        ///     Bulk delete entities
+        /// </summary>
+        /// <param name="items"></param>
+        public void IdentityResourceClaimTypeBulkDelete(IEnumerable<IdentityResourceClaimTypeDto> items)
+		{
+			this.IdentityResourceClaimTypeRepository.BulkDelete(this.ConvertIdentityResourceClaimTypeDtoToEntity(items));
+		}
+
+        /// <summary>
+        ///     Bulk delete entities async
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public async Task IdentityResourceClaimTypeBulkDeleteAsync(IEnumerable<IdentityResourceClaimTypeDto> items)
+		{
+			await this.IdentityResourceClaimTypeRepository.BulkDeleteAsync(this.ConvertIdentityResourceClaimTypeDtoToEntity(items));
+		}
+
+        /// <summary>
+        ///     Bulk insert entities
+        /// </summary>
+        /// <param name="items"></param>
+        public void  IdentityResourceClaimTypeBulkInsert(IEnumerable<IdentityResourceClaimTypeDto> items)
+		{
+			this.IdentityResourceClaimTypeRepository.BulkInsert(this.ConvertIdentityResourceClaimTypeDtoToEntity(items));
+		}
+        
+        /// <summary>
+        /// Bulk insert entities async
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public async Task  IdentityResourceClaimTypeBulkInsertAsync(IEnumerable<IdentityResourceClaimTypeDto> items)
+		{
+			await this.IdentityResourceClaimTypeRepository.BulkInsertAsync(this.ConvertIdentityResourceClaimTypeDtoToEntity(items));
+		}
+
+        /// <summary>
+        /// Bulk update entities 
+        /// </summary>
+        /// <param name="items"></param>
+        public void  IdentityResourceClaimTypeBulkUpdate(IEnumerable<IdentityResourceClaimTypeDto> items)
+		{
+			this.IdentityResourceClaimTypeRepository.BulkUpdate(this.ConvertIdentityResourceClaimTypeDtoToEntity(items));
+		}
+
+        /// <summary>
+        /// Bulk update entities async
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public async Task  IdentityResourceClaimTypeBulkUpdateAsync(IEnumerable<IdentityResourceClaimTypeDto> items)
+		{
+			await this.IdentityResourceClaimTypeRepository.BulkUpdateAsync(this.ConvertIdentityResourceClaimTypeDtoToEntity(items));
+		}
+
+        
+        /// <summary>
+        /// Converts a PostLogoutRedirectUriDto list to PostLogoutRedirectUri list
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+	    private List<PostLogoutRedirectUri> ConvertPostLogoutRedirectUriDtoToEntity(IEnumerable<PostLogoutRedirectUriDto> items)
+	    {
+            List<PostLogoutRedirectUri> results = new List<PostLogoutRedirectUri>();
+
+	        foreach (var item in items)
+	        {
+	            results.Add(new PostLogoutRedirectUri(item, true));
+	        }
+
+	        return results;
+	    }
+
+        /// <summary>
+        /// Converts a PostLogoutRedirectUri list to PostLogoutRedirectUriDto list
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+	    private List<PostLogoutRedirectUriDto> ConvertPostLogoutRedirectUriEntityToDto(IEnumerable<PostLogoutRedirectUri> items)
+	    {
+            List<PostLogoutRedirectUriDto> results = new List<PostLogoutRedirectUriDto>();
+
+	        foreach (var item in items)
+	        {
+	            results.Add(new PostLogoutRedirectUriDto(item, true));
+	        }
+
+	        return results;
+	    }
+
+        /// <summary>
+        ///     Bulk delete entities
+        /// </summary>
+        /// <param name="items"></param>
+        public void PostLogoutRedirectUriBulkDelete(IEnumerable<PostLogoutRedirectUriDto> items)
+		{
+			this.PostLogoutRedirectUriRepository.BulkDelete(this.ConvertPostLogoutRedirectUriDtoToEntity(items));
+		}
+
+        /// <summary>
+        ///     Bulk delete entities async
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public async Task PostLogoutRedirectUriBulkDeleteAsync(IEnumerable<PostLogoutRedirectUriDto> items)
+		{
+			await this.PostLogoutRedirectUriRepository.BulkDeleteAsync(this.ConvertPostLogoutRedirectUriDtoToEntity(items));
+		}
+
+        /// <summary>
+        ///     Bulk insert entities
+        /// </summary>
+        /// <param name="items"></param>
+        public void  PostLogoutRedirectUriBulkInsert(IEnumerable<PostLogoutRedirectUriDto> items)
+		{
+			this.PostLogoutRedirectUriRepository.BulkInsert(this.ConvertPostLogoutRedirectUriDtoToEntity(items));
+		}
+        
+        /// <summary>
+        /// Bulk insert entities async
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public async Task  PostLogoutRedirectUriBulkInsertAsync(IEnumerable<PostLogoutRedirectUriDto> items)
+		{
+			await this.PostLogoutRedirectUriRepository.BulkInsertAsync(this.ConvertPostLogoutRedirectUriDtoToEntity(items));
+		}
+
+        /// <summary>
+        /// Bulk update entities 
+        /// </summary>
+        /// <param name="items"></param>
+        public void  PostLogoutRedirectUriBulkUpdate(IEnumerable<PostLogoutRedirectUriDto> items)
+		{
+			this.PostLogoutRedirectUriRepository.BulkUpdate(this.ConvertPostLogoutRedirectUriDtoToEntity(items));
+		}
+
+        /// <summary>
+        /// Bulk update entities async
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public async Task  PostLogoutRedirectUriBulkUpdateAsync(IEnumerable<PostLogoutRedirectUriDto> items)
+		{
+			await this.PostLogoutRedirectUriRepository.BulkUpdateAsync(this.ConvertPostLogoutRedirectUriDtoToEntity(items));
+		}
+
+        
+        /// <summary>
+        /// Converts a RedirectUriDto list to RedirectUri list
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+	    private List<RedirectUri> ConvertRedirectUriDtoToEntity(IEnumerable<RedirectUriDto> items)
+	    {
+            List<RedirectUri> results = new List<RedirectUri>();
+
+	        foreach (var item in items)
+	        {
+	            results.Add(new RedirectUri(item, true));
+	        }
+
+	        return results;
+	    }
+
+        /// <summary>
+        /// Converts a RedirectUri list to RedirectUriDto list
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+	    private List<RedirectUriDto> ConvertRedirectUriEntityToDto(IEnumerable<RedirectUri> items)
+	    {
+            List<RedirectUriDto> results = new List<RedirectUriDto>();
+
+	        foreach (var item in items)
+	        {
+	            results.Add(new RedirectUriDto(item, true));
+	        }
+
+	        return results;
+	    }
+
+        /// <summary>
+        ///     Bulk delete entities
+        /// </summary>
+        /// <param name="items"></param>
+        public void RedirectUriBulkDelete(IEnumerable<RedirectUriDto> items)
+		{
+			this.RedirectUriRepository.BulkDelete(this.ConvertRedirectUriDtoToEntity(items));
+		}
+
+        /// <summary>
+        ///     Bulk delete entities async
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public async Task RedirectUriBulkDeleteAsync(IEnumerable<RedirectUriDto> items)
+		{
+			await this.RedirectUriRepository.BulkDeleteAsync(this.ConvertRedirectUriDtoToEntity(items));
+		}
+
+        /// <summary>
+        ///     Bulk insert entities
+        /// </summary>
+        /// <param name="items"></param>
+        public void  RedirectUriBulkInsert(IEnumerable<RedirectUriDto> items)
+		{
+			this.RedirectUriRepository.BulkInsert(this.ConvertRedirectUriDtoToEntity(items));
+		}
+        
+        /// <summary>
+        /// Bulk insert entities async
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public async Task  RedirectUriBulkInsertAsync(IEnumerable<RedirectUriDto> items)
+		{
+			await this.RedirectUriRepository.BulkInsertAsync(this.ConvertRedirectUriDtoToEntity(items));
+		}
+
+        /// <summary>
+        /// Bulk update entities 
+        /// </summary>
+        /// <param name="items"></param>
+        public void  RedirectUriBulkUpdate(IEnumerable<RedirectUriDto> items)
+		{
+			this.RedirectUriRepository.BulkUpdate(this.ConvertRedirectUriDtoToEntity(items));
+		}
+
+        /// <summary>
+        /// Bulk update entities async
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public async Task  RedirectUriBulkUpdateAsync(IEnumerable<RedirectUriDto> items)
+		{
+			await this.RedirectUriRepository.BulkUpdateAsync(this.ConvertRedirectUriDtoToEntity(items));
+		}
+
+        
+        /// <summary>
+        /// Converts a ResourceClaimTypeDto list to ResourceClaimType list
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+	    private List<ResourceClaimType> ConvertResourceClaimTypeDtoToEntity(IEnumerable<ResourceClaimTypeDto> items)
+	    {
+            List<ResourceClaimType> results = new List<ResourceClaimType>();
+
+	        foreach (var item in items)
+	        {
+	            results.Add(new ResourceClaimType(item, true));
+	        }
+
+	        return results;
+	    }
+
+        /// <summary>
+        /// Converts a ResourceClaimType list to ResourceClaimTypeDto list
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+	    private List<ResourceClaimTypeDto> ConvertResourceClaimTypeEntityToDto(IEnumerable<ResourceClaimType> items)
+	    {
+            List<ResourceClaimTypeDto> results = new List<ResourceClaimTypeDto>();
+
+	        foreach (var item in items)
+	        {
+	            results.Add(new ResourceClaimTypeDto(item, true));
+	        }
+
+	        return results;
+	    }
+
+        /// <summary>
+        ///     Bulk delete entities
+        /// </summary>
+        /// <param name="items"></param>
+        public void ResourceClaimTypeBulkDelete(IEnumerable<ResourceClaimTypeDto> items)
+		{
+			this.ResourceClaimTypeRepository.BulkDelete(this.ConvertResourceClaimTypeDtoToEntity(items));
+		}
+
+        /// <summary>
+        ///     Bulk delete entities async
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public async Task ResourceClaimTypeBulkDeleteAsync(IEnumerable<ResourceClaimTypeDto> items)
+		{
+			await this.ResourceClaimTypeRepository.BulkDeleteAsync(this.ConvertResourceClaimTypeDtoToEntity(items));
+		}
+
+        /// <summary>
+        ///     Bulk insert entities
+        /// </summary>
+        /// <param name="items"></param>
+        public void  ResourceClaimTypeBulkInsert(IEnumerable<ResourceClaimTypeDto> items)
+		{
+			this.ResourceClaimTypeRepository.BulkInsert(this.ConvertResourceClaimTypeDtoToEntity(items));
+		}
+        
+        /// <summary>
+        /// Bulk insert entities async
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public async Task  ResourceClaimTypeBulkInsertAsync(IEnumerable<ResourceClaimTypeDto> items)
+		{
+			await this.ResourceClaimTypeRepository.BulkInsertAsync(this.ConvertResourceClaimTypeDtoToEntity(items));
+		}
+
+        /// <summary>
+        /// Bulk update entities 
+        /// </summary>
+        /// <param name="items"></param>
+        public void  ResourceClaimTypeBulkUpdate(IEnumerable<ResourceClaimTypeDto> items)
+		{
+			this.ResourceClaimTypeRepository.BulkUpdate(this.ConvertResourceClaimTypeDtoToEntity(items));
+		}
+
+        /// <summary>
+        /// Bulk update entities async
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public async Task  ResourceClaimTypeBulkUpdateAsync(IEnumerable<ResourceClaimTypeDto> items)
+		{
+			await this.ResourceClaimTypeRepository.BulkUpdateAsync(this.ConvertResourceClaimTypeDtoToEntity(items));
 		}
 
         #endregion

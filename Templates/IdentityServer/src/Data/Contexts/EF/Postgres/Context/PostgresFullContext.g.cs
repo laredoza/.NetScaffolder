@@ -49,7 +49,7 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EF.Postgres.Context
             		}
 		
 		public PostgresFullContext()
-			: base("name=RepoTest") 
+			: base("name=IdentityServer") 
 		{
 		}
 		
@@ -68,6 +68,16 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EF.Postgres.Context
 			modelBuilder.Configurations.Add(new FullContextAspNetUserLoginMap());
 			modelBuilder.Configurations.Add(new FullContextAspNetUserRoleMap());
 			modelBuilder.Configurations.Add(new FullContextAspNetUserTokenMap());
+			modelBuilder.Configurations.Add(new FullContextAllowedScopeMap());
+			modelBuilder.Configurations.Add(new FullContextApiResourceMap());
+			modelBuilder.Configurations.Add(new FullContextClientMap());
+			modelBuilder.Configurations.Add(new FullContextClientGrantTypeMap());
+			modelBuilder.Configurations.Add(new FullContextGrantTypeMap());
+			modelBuilder.Configurations.Add(new FullContextIdentityResourceMap());
+			modelBuilder.Configurations.Add(new FullContextIdentityResourceClaimTypeMap());
+			modelBuilder.Configurations.Add(new FullContextPostLogoutRedirectUriMap());
+			modelBuilder.Configurations.Add(new FullContextRedirectUriMap());
+			modelBuilder.Configurations.Add(new FullContextResourceClaimTypeMap());
 
 			#endregion
 			
@@ -88,6 +98,16 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EF.Postgres.Context
 		public virtual DbSet<AspNetUserLogin> AspNetUserLogin { get; set; }
 		public virtual DbSet<AspNetUserRole> AspNetUserRole { get; set; }
 		public virtual DbSet<AspNetUserToken> AspNetUserToken { get; set; }
+		public virtual DbSet<AllowedScope> AllowedScope { get; set; }
+		public virtual DbSet<ApiResource> ApiResource { get; set; }
+		public virtual DbSet<Client> Client { get; set; }
+		public virtual DbSet<ClientGrantType> ClientGrantType { get; set; }
+		public virtual DbSet<GrantType> GrantType { get; set; }
+		public virtual DbSet<IdentityResource> IdentityResource { get; set; }
+		public virtual DbSet<IdentityResourceClaimType> IdentityResourceClaimType { get; set; }
+		public virtual DbSet<PostLogoutRedirectUri> PostLogoutRedirectUri { get; set; }
+		public virtual DbSet<RedirectUri> RedirectUri { get; set; }
+		public virtual DbSet<ResourceClaimType> ResourceClaimType { get; set; }
 
 		#endregion
 		

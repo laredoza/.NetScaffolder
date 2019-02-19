@@ -1,10 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
     <AssemblyName>DotNetScaffolder.Domain.Services.WebApi.IdentityServer</AssemblyName>
-    <AssemblyVersion>1.0.46.0</AssemblyVersion>
-    <FileVersion>1.0.46.0</FileVersion>
+    <AssemblyVersion>1.0.57.0</AssemblyVersion>
+    <FileVersion>1.0.57.0</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -14,7 +14,13 @@
   <ItemGroup>
     <PackageReference Include="IdentityServer4" Version="2.3.2" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
-    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+    <PackageReference Include="StructureMap.Microsoft.DependencyInjection" Version="2.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Data\Contexts\EFCore\SqlServer\DotNetScaffolder.Domain.Data.Contexts.EFCore.SqlServer.csproj" />
+    <ProjectReference Include="..\..\..\Infrastructure\Web\Core\DotNetScaffolder.Domain.Infrastructure.Web.Core.csproj" />
   </ItemGroup>
 
 </Project>

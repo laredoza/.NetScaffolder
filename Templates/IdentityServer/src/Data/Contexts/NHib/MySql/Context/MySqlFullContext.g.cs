@@ -72,6 +72,16 @@ namespace DotNetScaffolder.Domain.Data.Contexts.NHib.MySql.Context
 			config.FluentMappings.Add(typeof(FullContextAspNetUserLoginMap));
 			config.FluentMappings.Add(typeof(FullContextAspNetUserRoleMap));
 			config.FluentMappings.Add(typeof(FullContextAspNetUserTokenMap));
+			config.FluentMappings.Add(typeof(FullContextAllowedScopeMap));
+			config.FluentMappings.Add(typeof(FullContextApiResourceMap));
+			config.FluentMappings.Add(typeof(FullContextClientMap));
+			config.FluentMappings.Add(typeof(FullContextClientGrantTypeMap));
+			config.FluentMappings.Add(typeof(FullContextGrantTypeMap));
+			config.FluentMappings.Add(typeof(FullContextIdentityResourceMap));
+			config.FluentMappings.Add(typeof(FullContextIdentityResourceClaimTypeMap));
+			config.FluentMappings.Add(typeof(FullContextPostLogoutRedirectUriMap));
+			config.FluentMappings.Add(typeof(FullContextRedirectUriMap));
+			config.FluentMappings.Add(typeof(FullContextResourceClaimTypeMap));
         }
 	}
 }
