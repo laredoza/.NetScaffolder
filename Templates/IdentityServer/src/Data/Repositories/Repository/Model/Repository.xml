@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RepositoryDataType xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <AdditionalNamespaces>
+    <string>DotNetScaffolder.Domain.Core</string>
+    <string>DotNetScaffolder.Domain.Core.Interfaces</string>
+  </AdditionalNamespaces>
+  <Enabled>false</Enabled>
+  <Namespace>Data.Repositories.Repository</Namespace>
+  <OutputFolder>Repository</OutputFolder>
+  <OutputPath>..\..\Repositories\Repository\DotNetScaffolder.Domain.Data.Repositories.Repository.csproj</OutputPath>
+</RepositoryDataType>

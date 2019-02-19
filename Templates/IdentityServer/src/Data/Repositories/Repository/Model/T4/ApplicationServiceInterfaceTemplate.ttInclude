@@ -1,0 +1,306 @@
+﻿<#+
+    public class ApplicationServiceInterfaceTemplate : BaseTemplate 
+    {
+        public ApplicationServiceDataType DataType { get; set; }
+        public string DtoInterfaceNamespace { get; set; }
+        public ApplicationServiceData CurrentApplicationData{ get; set; }
+        public DtoInterfaceDataType DtoInterfaceDataType{get;set;}
+        public DtoDataType DtoDataType { get; set; }
+        
+        public override string TransformText()
+        {
+            // Debugger.Break();
+            Header = new CopyrightHeader();
+            //Header.Filename = DataType.RepoName;
+#>
+
+<#=            Header.TransformText() #>
+
+// *******************************************************************
+//	GENERATED CODE. DOT NOT MODIFY MANUALLY AS CHANGES CAN BE LOST!!!
+//	USE A PARTIAL CLASS INSTEAD
+// *******************************************************************
+
+using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
+using <#= DtoDataType.FullNamespace #>;
+using <#=             DtoInterfaceDataType.FullNamespace#>;
+<#+            foreach(var nameSpace in DataType.AdditionalNamespacesInterfaces){ #>
+using <#=                nameSpace #>;
+<#+            } #>
+
+namespace <#= CurrentApplicationData.TransformFullnamespaceInterface(DataType.BaseNamespace) #>
+{
+    /// <summary>
+	/// The <#= CurrentApplicationData.ApplicationServiceName #>Application Service interface that defines database functions for the <#= CurrentApplicationData.ApplicationServiceName #> application service
+	/// </summary>
+	public partial interface I<#= CurrentApplicationData.ApplicationServiceName #>ApplicationService <#= CurrentApplicationData.TransformInheritFromInterface #>
+	{
+
+        #region Load
+<#+            foreach(var model in CurrentApplicationData.Models){ #>
+<#+ 
+string modelName = DataType.NamingConvention == null ? model.TableName : DataType.NamingConvention.ApplyNamingConvention(model.TableName);
+if(model.PrimaryKeyCount > 1){ #>
+        /// <summary>
+        /// Load <#= modelName #> entities from the database using the composite primary keys
+        /// </summary
+        /// <param name="cache">Enable second level caching</param>
+<#+ foreach(var col in model.Columns.Where(o => o.IsPrimaryKey)) {#>
+        /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
+<#+ } #>
+        /// <returns>I<#= modelName #></returns>
+		<#= modelName #>Dto Load(<#= DataType.TransformAsParameter(model.Columns.Where(o => o.IsPrimaryKey)) #>, bool cache, params Expression<Func<I<#= modelName #>, object>>[] includes);
+
+        /// <summary>
+        /// Load <#= modelName #> async entities from the database using the composite primary keys
+        /// </summary
+        /// <param name="cache">Enable second level caching</param>
+<#+ foreach(var col in model.Columns.Where(o => o.IsPrimaryKey)) {#>
+        /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
+<#+ } #>
+        /// <returns><#= modelName #>Dto</returns>
+		Task<<#= modelName #>Dto> LoadAsync(<#= DataType.TransformAsParameter(model.Columns.Where(o => o.IsPrimaryKey)) #>, bool cache, params Expression<Func<I<#= modelName #>, object>>[] includes);
+
+<#+ } #>
+
+<#+ if(model.PrimaryKeyCount == 1){ var col = model.Columns.First(o => o.IsPrimaryKey);#>
+
+        /// <summary>
+        /// Load <#= modelName #> entities from the database using the primary key
+        /// </summary
+        /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
+        /// <param name="cache">Enable second level caching</param>
+        /// <param name="includes">params Expression<Func<I<#= modelName #>, object>>[]</param>
+        /// <returns><#= modelName #>Dto</returns>
+		<#= modelName #>Dto LoadBy<#= modelName #><#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= DataType.TransformAsParameter(col) #>, bool cache, params Expression<Func<I<#= modelName #>, object>>[] includes);
+
+        /// <summary>
+        /// Load <#= modelName #> Async entities from the database using the primary key
+        /// </summary
+        /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
+        /// <param name="cache">Enable second level caching</param>
+        /// <param name="includes">params Expression<Func<I<#= modelName #>, object>>[]</param>
+        /// <returns><#= modelName #>Dto</returns>
+		Task<<#= modelName #>Dto> LoadBy<#= modelName #><#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>Async(<#= DataType.TransformAsParameter(col) #>, bool cache, params Expression<Func<I<#= modelName #>, object>>[] includes);
+
+<#+ } #>
+
+        /// <summary>
+        /// Load all <#= modelName #> entities from the database.
+        /// </summary>
+        /// <param name="cache">Enable second level caching</param>
+        /// <param name="includes">params Expression<Func<I<#= modelName #>, object>>[]</param>
+        /// <returns><#= DataType.CollectionOption.ClassNameInterface #><<#= modelName #>Dto></returns>
+		<#= DataType.CollectionOption.ClassNameInterface #><<#= modelName #>Dto> <#= modelName #>LoadAll(bool cache, params Expression<Func<I<#= modelName #>, object>>[] includes);
+
+
+        /// <summary>
+        /// Load all <#= modelName #> Async entities from the database.
+        /// </summary>
+        /// <param name="cache">Enable second level caching</param>
+        /// <param name="includes">params Expression<Func<I<#= modelName #>, object>>[]</param>
+        /// <returns><#= DataType.CollectionOption.ClassNameInterface #><<#= modelName #>Dto></returns>
+		Task<<#= DataType.CollectionOption.ClassNameInterface #><<#= modelName #>Dto>> <#= modelName #>LoadAllAsync(bool cache, params Expression<Func<I<#= modelName #>, object>>[] includes);
+
+<#+            } #>
+
+        #endregion
+
+        #region Search
+<#+            foreach(var model in CurrentApplicationData.Models){ #>
+<#+ 
+string modelName = DataType.NamingConvention == null ? model.TableName : DataType.NamingConvention.ApplyNamingConvention(model.TableName); #>
+<#+ foreach(var col in model.Columns.Where(o => !o.IsPrimaryKey && o.DomainDataType == DomainDataType.String)){ #>
+
+        /// <summary>
+        /// Search for <#= modelName #> entities in the database by <#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>
+        /// </summary>
+        /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
+		/// <param name="caseSensitive">bool</param>
+        /// <param name="cache">Enable second level caching</param>
+        /// <param name="includes">params Expression<Func<I<#= modelName #>, object>>[]</param>
+        /// <returns><#= DataType.CollectionOption.ClassNameInterface #><<#= modelName #>Dto></returns>
+		<#= DataType.CollectionOption.ClassNameInterface #><<#= modelName #>Dto> <#= modelName #>SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= DataType.TransformAsParameter(col) #>,bool caseSensitive, bool cache, params Expression<Func<I<#= modelName #>, object>>[] includes);
+
+        /// <summary>
+        /// Search for <#= modelName #>  Async entities in the database by <#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>
+        /// </summary>
+        /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
+		/// <param name="caseSensitive">bool</param>
+        /// <param name="cache">Enable second level caching</param>
+        /// <param name="includes">params Expression<Func<I<#= modelName #>, object>>[]</param>
+        /// <returns><#= DataType.CollectionOption.ClassNameInterface #><<#= modelName #>Dto></returns>
+		Task<<#= DataType.CollectionOption.ClassNameInterface #><<#= modelName #>Dto>> <#= modelName #>SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>Async(<#= DataType.TransformAsParameter(col) #>,bool caseSensitive, bool cache, params Expression<Func<I<#= modelName #>, object>>[] includes);
+
+<#+ }  #>
+<#+            } #>
+		#endregion
+
+		#region Modifiers
+<#+            foreach(var model in CurrentApplicationData.Models){ #>
+<#+ 
+string modelName = DataType.NamingConvention == null ? model.TableName : DataType.NamingConvention.ApplyNamingConvention(model.TableName); #>		
+        /// <summary>
+        /// Save the <#= modelName #> entity to the database.
+        /// </summary>
+        /// <param name="entity"><#= modelName #>Dto</param>
+        /// <returns>bool</returns>
+		bool <#= modelName #>Add(<#= modelName #>Dto entity);
+
+        /// <summary>
+        /// Save async the <#= modelName #> entity to the database.
+        /// </summary>
+        /// <param name="entity"><#= modelName #>Dto</param>
+        /// <returns>bool</returns>
+		Task<bool> <#= modelName #>AddAsync(<#= modelName #>Dto entity);
+
+        /// <summary>
+        /// Update the <#= modelName #> entity in the database if any values have changed
+        /// </summary>
+        /// <param name="entity"><#= modelName #>Dto</param>
+        /// <returns>bool</returns>
+		bool <#= modelName #>Update(<#= modelName #>Dto entity);
+
+        //// <summary>
+        /// Update async the <#= modelName #> entity in the database if any values have changed
+        /// </summary>
+        /// <param name="entity"><#= modelName #>Dto</param>
+        /// <returns>bool</returns>
+		Task<bool> <#= modelName #>UpdateAsync(<#= modelName #>Dto entity);
+		
+        /// <summary>
+        /// Delete the <#= modelName #> entity from the database
+        /// </summary>
+        /// <param name="entity"><#= modelName #>Dto</param>
+        /// <returns>bool</returns>
+		bool <#= modelName #>Delete(<#= modelName #>Dto entity);
+
+        /// <summary>
+        /// Delete async the <#= modelName #> entity from the database
+        /// </summary>
+        /// <param name="entity"><#= modelName #>Dto</param>
+        /// <returns>bool</returns>
+		Task<bool> <#= modelName #>DeleteAsync(<#= modelName #>Dto entity);
+
+		/// <summary>
+        /// Delete the <#= modelName #> entity from the database
+        /// </summary>
+<#+ foreach(var col in model.Columns.Where(o => o.IsPrimaryKey)) {#>
+        /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
+<#+ } #>
+        /// <returns>bool</returns>
+		bool <#= modelName #>Delete(<#= DataType.TransformAsParameter(model.Columns.Where(o => o.IsPrimaryKey)) #>, bool cache);
+
+        /// <summary>
+        /// Delete the <#= modelName #> entity async from the database
+        /// </summary>
+<#+ foreach(var col in model.Columns.Where(o => o.IsPrimaryKey)) {#>
+        /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
+<#+ } #>
+        /// <returns>bool</returns>
+		Task<bool> <#= modelName #>DeleteAsync(<#= DataType.TransformAsParameter(model.Columns.Where(o => o.IsPrimaryKey)) #>, bool cache);
+
+<#+            } #>
+
+		#endregion
+
+        #region Aggregates
+
+<#+            foreach(var model in CurrentApplicationData.Models){ #>
+<#+ 
+string modelName = DataType.NamingConvention == null ? model.TableName : DataType.NamingConvention.ApplyNamingConvention(model.TableName); #>
+        /// <summary>
+        /// Returns the max value 
+        /// </summary>
+        /// <typeparam name="TResult">TResult</typeparam>
+        /// <param name="maxExpression">Expression<Func<I<#= modelName #>, TResult>> maxExpression</param>
+        /// <param name="cache">Enable second level caching</param>
+        /// <returns></returns>
+        TResult <#= modelName #>Max<TResult>(Expression<Func<I<#= modelName #>, TResult>> maxExpression, bool cache);
+		
+        /// <summary>
+        /// Returns the max value async
+        /// </summary>
+        /// <typeparam name="TResult">TResult</typeparam>
+        /// <param name="maxExpression">Expression<Func<I<#= modelName #>, TResult>> maxExpression</param>
+        /// <param name="cache">Enable second level caching</param>
+        /// <returns></returns>
+		Task<TResult> <#= modelName #>MaxAsync<TResult>(Expression<Func<I<#= modelName #>, TResult>> maxExpression, bool cache);
+		
+        /// <summary>
+        /// Returns the min value 
+        /// </summary>
+        /// <typeparam name="TResult">TResult</typeparam>
+        /// <param name="maxExpression">Expression<Func<I<#= modelName #>, TResult>> maxExpression</param>
+        /// <param name="cache">Enable second level caching</param>
+        /// <returns></returns>
+		TResult <#= modelName #>Min<TResult>(Expression<Func<I<#= modelName#>, TResult>> maxExpression, bool cache);
+		
+        /// <summary>
+        /// Returns the min value 
+        /// </summary>
+        /// <typeparam name="TResult">TResult</typeparam>
+        /// <param name="maxExpression">Expression<Func<I<#= modelName #>, TResult>> maxExpression</param>
+        /// <param name="cache">Enable second level caching</param>
+        /// <returns></returns>
+		Task<TResult> <#= modelName #>MinAsync<TResult>(Expression<Func<I<#= modelName #>, TResult>> maxExpression, bool cache);
+<#+            } #>
+
+		#endregion
+
+        #region Bulk
+<#+            foreach(var model in CurrentApplicationData.Models){ #>
+<#+ 
+string modelName = DataType.NamingConvention == null ? model.TableName : DataType.NamingConvention.ApplyNamingConvention(model.TableName); #>	
+        /// <summary>
+        ///     Bulk delete entities
+        /// </summary>
+        /// <param name="items"></param>
+        void  <#= modelName #>BulkDelete(IEnumerable<<#= modelName #>Dto> items);
+
+        /// <summary>
+        ///     Bulk delete entities async
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        Task  <#= modelName #>BulkDeleteAsync(IEnumerable<<#= modelName #>Dto> items);
+
+        /// <summary>
+        ///     Bulk insert entities
+        /// </summary>
+        /// <param name="items"></param>
+        void  <#= modelName #>BulkInsert(IEnumerable<<#= modelName #>Dto> items);
+        
+        /// <summary>
+        /// Bulk insert entities async
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        Task  <#= modelName #>BulkInsertAsync(IEnumerable<<#= modelName #>Dto> items);
+
+        /// <summary>
+        /// Bulk update entities 
+        /// </summary>
+        /// <param name="items"></param>
+        void  <#= modelName #>BulkUpdate(IEnumerable<<#= modelName #>Dto> items);
+
+        /// <summary>
+        /// Bulk update entities async
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        Task  <#= modelName #>BulkUpdateAsync(IEnumerable<<#= modelName #>Dto> items);
+<#+            } #>
+
+        #endregion
+    }
+}
+
+<#+
+            return this.GenerationEnvironment.ToString();
+	}
+            }
+#>

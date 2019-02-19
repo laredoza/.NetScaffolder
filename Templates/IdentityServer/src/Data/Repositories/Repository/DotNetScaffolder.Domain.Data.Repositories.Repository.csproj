@@ -1,0 +1,175 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0</TargetFrameworks>
+    <AssemblyVersion>1.0.154.0</AssemblyVersion>
+    <FileVersion>1.0.154.0</FileVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="Model\Package\**" />
+    <EmbeddedResource Remove="Model\Package\**" />
+    <None Remove="Model\Package\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Core\DotNetScaffolder.Domain.Core.csproj" />
+    <ProjectReference Include="..\..\Entities\Entity\DotNetScaffolder.Domain.Data.Entities.DefaultEntity.csproj" />
+    <ProjectReference Include="..\..\Interfaces\Interface\DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.csproj" />
+    <ProjectReference Include="..\..\Interfaces\RepositoryInterfaces\DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="RunGenerator.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>RunGenerator.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="RunGenerator.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>RunGenerator.cs</LastGenOutput>
+      <LastOutputs>
+..\..\ApplicationServices\ApplicationService\ApplicationService\IdentityServerApplicationService.g.cs
+..\..\ApplicationServices\ApplicationService\Register\ApplicationServiceRegistration.g.cs
+..\..\Contexts\EF\MySql\Context\MySqlFullContext.g.cs
+..\..\Contexts\EF\MySql\ContextRegisster\ContextRegistration.g.cs
+..\..\Contexts\EF\MySql\Database\DatabaseManager.g.cs
+..\..\Contexts\EF\MySql\Mappings\MySqlFullContext\FullContextAspNetRoleClaimMap.g.cs
+..\..\Contexts\EF\MySql\Mappings\MySqlFullContext\FullContextAspNetRoleMap.g.cs
+..\..\Contexts\EF\MySql\Mappings\MySqlFullContext\FullContextAspNetUserClaimMap.g.cs
+..\..\Contexts\EF\MySql\Mappings\MySqlFullContext\FullContextAspNetUserLoginMap.g.cs
+..\..\Contexts\EF\MySql\Mappings\MySqlFullContext\FullContextAspNetUserMap.g.cs
+..\..\Contexts\EF\MySql\Mappings\MySqlFullContext\FullContextAspNetUserRoleMap.g.cs
+..\..\Contexts\EF\MySql\Mappings\MySqlFullContext\FullContextAspNetUserTokenMap.g.cs
+..\..\Contexts\EF\Oracle\Context\OracleFullContext.g.cs
+..\..\Contexts\EF\Oracle\ContextRegisster\ContextRegistration.g.cs
+..\..\Contexts\EF\Oracle\Database\DatabaseManager.g.cs
+..\..\Contexts\EF\Oracle\Mappings\OracleFullContext\FullContextAspNetRoleClaimMap.g.cs
+..\..\Contexts\EF\Oracle\Mappings\OracleFullContext\FullContextAspNetRoleMap.g.cs
+..\..\Contexts\EF\Oracle\Mappings\OracleFullContext\FullContextAspNetUserClaimMap.g.cs
+..\..\Contexts\EF\Oracle\Mappings\OracleFullContext\FullContextAspNetUserLoginMap.g.cs
+..\..\Contexts\EF\Oracle\Mappings\OracleFullContext\FullContextAspNetUserMap.g.cs
+..\..\Contexts\EF\Oracle\Mappings\OracleFullContext\FullContextAspNetUserRoleMap.g.cs
+..\..\Contexts\EF\Oracle\Mappings\OracleFullContext\FullContextAspNetUserTokenMap.g.cs
+..\..\Contexts\EF\Postgres\Context\PostgresFullContext.g.cs
+..\..\Contexts\EF\Postgres\ContextRegisster\ContextRegistration.g.cs
+..\..\Contexts\EF\Postgres\Database\DatabaseManager.g.cs
+..\..\Contexts\EF\Postgres\Mappings\PostgresFullContext\FullContextAspNetRoleClaimMap.g.cs
+..\..\Contexts\EF\Postgres\Mappings\PostgresFullContext\FullContextAspNetRoleMap.g.cs
+..\..\Contexts\EF\Postgres\Mappings\PostgresFullContext\FullContextAspNetUserClaimMap.g.cs
+..\..\Contexts\EF\Postgres\Mappings\PostgresFullContext\FullContextAspNetUserLoginMap.g.cs
+..\..\Contexts\EF\Postgres\Mappings\PostgresFullContext\FullContextAspNetUserMap.g.cs
+..\..\Contexts\EF\Postgres\Mappings\PostgresFullContext\FullContextAspNetUserRoleMap.g.cs
+..\..\Contexts\EF\Postgres\Mappings\PostgresFullContext\FullContextAspNetUserTokenMap.g.cs
+..\..\Contexts\EF\SqlServer\Context\SqlServerFullContext.g.cs
+..\..\Contexts\EF\SqlServer\ContextRegisster\ContextRegistration.g.cs
+..\..\Contexts\EF\SqlServer\Database\DatabaseManager.g.cs
+..\..\Contexts\EF\SqlServer\Mappings\SqlServerFullContext\FullContextAspNetRoleClaimMap.g.cs
+..\..\Contexts\EF\SqlServer\Mappings\SqlServerFullContext\FullContextAspNetRoleMap.g.cs
+..\..\Contexts\EF\SqlServer\Mappings\SqlServerFullContext\FullContextAspNetUserClaimMap.g.cs
+..\..\Contexts\EF\SqlServer\Mappings\SqlServerFullContext\FullContextAspNetUserLoginMap.g.cs
+..\..\Contexts\EF\SqlServer\Mappings\SqlServerFullContext\FullContextAspNetUserMap.g.cs
+..\..\Contexts\EF\SqlServer\Mappings\SqlServerFullContext\FullContextAspNetUserRoleMap.g.cs
+..\..\Contexts\EF\SqlServer\Mappings\SqlServerFullContext\FullContextAspNetUserTokenMap.g.cs
+..\..\Contexts\EFCore\MySql\Context\MySqlFullContext.g.cs
+..\..\Contexts\EFCore\MySql\ContextRegisster\ContextRegistration.g.cs
+..\..\Contexts\EFCore\MySql\Database\DatabaseManager.g.cs
+..\..\Contexts\EFCore\MySql\Mappings\MySqlFullContext\FullContextAspNetRoleClaimMap.g.cs
+..\..\Contexts\EFCore\MySql\Mappings\MySqlFullContext\FullContextAspNetRoleMap.g.cs
+..\..\Contexts\EFCore\MySql\Mappings\MySqlFullContext\FullContextAspNetUserClaimMap.g.cs
+..\..\Contexts\EFCore\MySql\Mappings\MySqlFullContext\FullContextAspNetUserLoginMap.g.cs
+..\..\Contexts\EFCore\MySql\Mappings\MySqlFullContext\FullContextAspNetUserMap.g.cs
+..\..\Contexts\EFCore\MySql\Mappings\MySqlFullContext\FullContextAspNetUserRoleMap.g.cs
+..\..\Contexts\EFCore\MySql\Mappings\MySqlFullContext\FullContextAspNetUserTokenMap.g.cs
+..\..\Contexts\EFCore\Postgres\Context\PostgresFullContext.g.cs
+..\..\Contexts\EFCore\Postgres\ContextRegisster\ContextRegistration.g.cs
+..\..\Contexts\EFCore\Postgres\Database\DatabaseManager.g.cs
+..\..\Contexts\EFCore\Postgres\Mappings\PostgresFullContext\FullContextAspNetRoleClaimMap.g.cs
+..\..\Contexts\EFCore\Postgres\Mappings\PostgresFullContext\FullContextAspNetRoleMap.g.cs
+..\..\Contexts\EFCore\Postgres\Mappings\PostgresFullContext\FullContextAspNetUserClaimMap.g.cs
+..\..\Contexts\EFCore\Postgres\Mappings\PostgresFullContext\FullContextAspNetUserLoginMap.g.cs
+..\..\Contexts\EFCore\Postgres\Mappings\PostgresFullContext\FullContextAspNetUserMap.g.cs
+..\..\Contexts\EFCore\Postgres\Mappings\PostgresFullContext\FullContextAspNetUserRoleMap.g.cs
+..\..\Contexts\EFCore\Postgres\Mappings\PostgresFullContext\FullContextAspNetUserTokenMap.g.cs
+..\..\Contexts\EFCore\SqlServer\Context\SqlServerFullContext.g.cs
+..\..\Contexts\EFCore\SqlServer\ContextRegisster\ContextRegistration.g.cs
+..\..\Contexts\EFCore\SqlServer\Database\DatabaseManager.g.cs
+..\..\Contexts\EFCore\SqlServer\Mappings\SqlServerFullContext\FullContextAspNetRoleClaimMap.g.cs
+..\..\Contexts\EFCore\SqlServer\Mappings\SqlServerFullContext\FullContextAspNetRoleMap.g.cs
+..\..\Contexts\EFCore\SqlServer\Mappings\SqlServerFullContext\FullContextAspNetUserClaimMap.g.cs
+..\..\Contexts\EFCore\SqlServer\Mappings\SqlServerFullContext\FullContextAspNetUserLoginMap.g.cs
+..\..\Contexts\EFCore\SqlServer\Mappings\SqlServerFullContext\FullContextAspNetUserMap.g.cs
+..\..\Contexts\EFCore\SqlServer\Mappings\SqlServerFullContext\FullContextAspNetUserRoleMap.g.cs
+..\..\Contexts\EFCore\SqlServer\Mappings\SqlServerFullContext\FullContextAspNetUserTokenMap.g.cs
+..\..\Contexts\NHib\MySql\Context\MySqlFullContext.g.cs
+..\..\Contexts\NHib\MySql\ContextRegisster\ContextRegistration.g.cs
+..\..\Contexts\NHib\MySql\Database\DatabaseManager.g.cs
+..\..\Contexts\NHib\MySql\Mappings\MySqlFullContext\FullContextAspNetRoleClaimMap.g.cs
+..\..\Contexts\NHib\MySql\Mappings\MySqlFullContext\FullContextAspNetRoleMap.g.cs
+..\..\Contexts\NHib\MySql\Mappings\MySqlFullContext\FullContextAspNetUserClaimMap.g.cs
+..\..\Contexts\NHib\MySql\Mappings\MySqlFullContext\FullContextAspNetUserLoginMap.g.cs
+..\..\Contexts\NHib\MySql\Mappings\MySqlFullContext\FullContextAspNetUserMap.g.cs
+..\..\Contexts\NHib\MySql\Mappings\MySqlFullContext\FullContextAspNetUserRoleMap.g.cs
+..\..\Contexts\NHib\MySql\Mappings\MySqlFullContext\FullContextAspNetUserTokenMap.g.cs
+..\..\Contexts\NHib\Oracle\Context\OracleFullContext.g.cs
+..\..\Contexts\NHib\Oracle\ContextRegisster\ContextRegistration.g.cs
+..\..\Contexts\NHib\Oracle\Database\DatabaseManager.g.cs
+..\..\Contexts\NHib\Oracle\Mappings\OracleFullContext\FullContextAspNetRoleClaimMap.g.cs
+..\..\Contexts\NHib\Oracle\Mappings\OracleFullContext\FullContextAspNetRoleMap.g.cs
+..\..\Contexts\NHib\Oracle\Mappings\OracleFullContext\FullContextAspNetUserClaimMap.g.cs
+..\..\Contexts\NHib\Oracle\Mappings\OracleFullContext\FullContextAspNetUserLoginMap.g.cs
+..\..\Contexts\NHib\Oracle\Mappings\OracleFullContext\FullContextAspNetUserMap.g.cs
+..\..\Contexts\NHib\Oracle\Mappings\OracleFullContext\FullContextAspNetUserRoleMap.g.cs
+..\..\Contexts\NHib\Oracle\Mappings\OracleFullContext\FullContextAspNetUserTokenMap.g.cs
+..\..\Contexts\NHib\SqlServer\Context\SqlServerFullContext.g.cs
+..\..\Contexts\NHib\SqlServer\ContextRegisster\ContextRegistration.g.cs
+..\..\Contexts\NHib\SqlServer\Database\DatabaseManager.g.cs
+..\..\Contexts\NHib\SqlServer\Mappings\SqlServerFullContext\FullContextAspNetRoleClaimMap.g.cs
+..\..\Contexts\NHib\SqlServer\Mappings\SqlServerFullContext\FullContextAspNetRoleMap.g.cs
+..\..\Contexts\NHib\SqlServer\Mappings\SqlServerFullContext\FullContextAspNetUserClaimMap.g.cs
+..\..\Contexts\NHib\SqlServer\Mappings\SqlServerFullContext\FullContextAspNetUserLoginMap.g.cs
+..\..\Contexts\NHib\SqlServer\Mappings\SqlServerFullContext\FullContextAspNetUserMap.g.cs
+..\..\Contexts\NHib\SqlServer\Mappings\SqlServerFullContext\FullContextAspNetUserRoleMap.g.cs
+..\..\Contexts\NHib\SqlServer\Mappings\SqlServerFullContext\FullContextAspNetUserTokenMap.g.cs
+..\..\Dtos\Dto\Dto\AspNetRoleClaimDto.g.cs
+..\..\Dtos\Dto\Dto\AspNetRoleDto.g.cs
+..\..\Dtos\Dto\Dto\AspNetUserClaimDto.g.cs
+..\..\Dtos\Dto\Dto\AspNetUserDto.g.cs
+..\..\Dtos\Dto\Dto\AspNetUserLoginDto.g.cs
+..\..\Dtos\Dto\Dto\AspNetUserRoleDto.g.cs
+..\..\Dtos\Dto\Dto\AspNetUserTokenDto.g.cs
+..\..\Entities\Entity\Entity\AspNetRole.g.cs
+..\..\Entities\Entity\Entity\AspNetRoleClaim.g.cs
+..\..\Entities\Entity\Entity\AspNetUser.g.cs
+..\..\Entities\Entity\Entity\AspNetUserClaim.g.cs
+..\..\Entities\Entity\Entity\AspNetUserLogin.g.cs
+..\..\Entities\Entity\Entity\AspNetUserRole.g.cs
+..\..\Entities\Entity\Entity\AspNetUserToken.g.cs
+..\..\Interfaces\ApplicationService\ApplicationService\IIdentityServerApplicationService.g.cs
+..\..\Interfaces\Interface\Dto\IAspNetRole.g.cs
+..\..\Interfaces\Interface\Dto\IAspNetRoleClaim.g.cs
+..\..\Interfaces\Interface\Dto\IAspNetUser.g.cs
+..\..\Interfaces\Interface\Dto\IAspNetUserClaim.g.cs
+..\..\Interfaces\Interface\Dto\IAspNetUserLogin.g.cs
+..\..\Interfaces\Interface\Dto\IAspNetUserRole.g.cs
+..\..\Interfaces\Interface\Dto\IAspNetUserToken.g.cs
+..\..\Interfaces\RepositoryInterfaces\Repository\IAspNetRoleClaimRepository.g.cs
+..\..\Interfaces\RepositoryInterfaces\Repository\IAspNetRoleRepository.g.cs
+..\..\Interfaces\RepositoryInterfaces\Repository\IAspNetUserClaimRepository.g.cs
+..\..\Interfaces\RepositoryInterfaces\Repository\IAspNetUserLoginRepository.g.cs
+..\..\Interfaces\RepositoryInterfaces\Repository\IAspNetUserRepository.g.cs
+..\..\Interfaces\RepositoryInterfaces\Repository\IAspNetUserRoleRepository.g.cs
+..\..\Interfaces\RepositoryInterfaces\Repository\IAspNetUserTokenRepository.g.cs
+.\Register\RepositoryRegistration.g.cs
+.\Repository\AspNetRoleClaimRepository.g.cs
+.\Repository\AspNetRoleRepository.g.cs
+.\Repository\AspNetUserClaimRepository.g.cs
+.\Repository\AspNetUserLoginRepository.g.cs
+.\Repository\AspNetUserRepository.g.cs
+.\Repository\AspNetUserRoleRepository.g.cs
+.\Repository\AspNetUserTokenRepository.g.cs
+</LastOutputs>
+    </None>
+  </ItemGroup>
+</Project>

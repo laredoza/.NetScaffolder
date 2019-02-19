@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyVersion>1.0.44.0</AssemblyVersion>
+    <FileVersion>1.0.44.0</FileVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Interfaces\Interface\DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.csproj" />
+  </ItemGroup>
+
+</Project>

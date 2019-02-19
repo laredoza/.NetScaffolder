@@ -1,0 +1,43 @@
+﻿<#@ include file="BaseUnitTestTemplate.ttinclude" #>
+<#@ include file="BaseUowUnitTestTemplate.ttinclude" #>
+<#@ include file="BaseRepositoryUnitTestTemplate.ttinclude" #>
+<#+
+    public class BaseUnitTestGenerator : BaseGenerator
+    {
+        public List<Table> Models { get; set; }
+		
+        private string OutputPath = @"..\..\..\RepositoryEFDotnet\Tests\Base\DotNetScaffolder.Repository.UnitTests.Base.csproj";
+        private string OutputFolder = "Base";
+        public UnitTestDataType DataType  { get; set;}
+        public string DtoNamespace { get; set;}
+        public string DtoInterfaceNamespace { get; set;}
+        public string EntityNamespace { get; set;}
+
+      protected override void RunCore()
+        {
+			var unitTestTemplate = new BaseUnitTestTemplate();
+            unitTestTemplate.DtoNamespace = this.DtoNamespace;
+            unitTestTemplate.DtoInterfaceNamespace = this.DtoInterfaceNamespace;
+
+			var uowTemplate = new BaseUowUnitTestTemplate();
+            uowTemplate.EntityNamespace = this.EntityNamespace;
+
+			var repoTemplate = new BaseRepositoryUnitTestTemplate();
+			
+            unitTestTemplate.Models = this.Models;
+			uowTemplate.Models = this.Models;
+			repoTemplate.Models = this.Models;
+
+            if(!string.IsNullOrEmpty(OutputPath))
+            {
+                unitTestTemplate.Output.Project = DataType.BaseTestOutputFolder;
+				uowTemplate.Output.Project = DataType.BaseTestOutputFolder;
+				repoTemplate.Output.Project = OutputPath;
+            }
+
+            unitTestTemplate.RenderToFile(string.Format(@"{0}\{1}.g.cs", OutputFolder, "BaseUnitTest"));
+			//uowTemplate.RenderToFile(string.Format(@"{0}\{1}.g.cs", OutputFolder, "BaseUnitOfWorkUnitTest"));
+			//repoTemplate.RenderToFile(string.Format(@"{0}\{1}.g.cs", OutputFolder, "BaseRepositoryUnitTest"));
+        }
+    }
+#>

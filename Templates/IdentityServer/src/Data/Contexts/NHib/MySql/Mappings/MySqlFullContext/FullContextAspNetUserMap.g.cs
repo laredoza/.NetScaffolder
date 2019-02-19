@@ -1,0 +1,106 @@
+﻿
+// <copyright file="AspNetUserMap.g.cs" company="MIT">
+//  Copyright (c) 2019 MIT
+// </copyright>  
+
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
+// to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+// and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER 
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS 
+// IN THE SOFTWARE.
+
+
+// *******************************************************************
+//	GENERATED CODE. DOT NOT MODIFY MANUALLY AS CHANGES CAN BE LOST!!!
+//	USE A PARTIAL CLASS INSTEAD
+// *******************************************************************
+using NHibernate;
+using NHibernate.Cfg;
+using FluentNHibernate.Cfg.Db;
+using FluentNHibernate.Cfg;
+using DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity;
+using System.Data.Common;
+using FluentNHibernate.Mapping;
+
+
+namespace DotNetScaffolder.Domain.Data.Contexts.NHib.MySql.Mappings.MySqlFullContext
+{
+	public partial class FullContextAspNetUserMap : ClassMap<AspNetUser>
+	{	
+		public FullContextAspNetUserMap ()
+		{
+			CreateMapping();
+		}
+		
+		protected virtual void CreateMapping()
+		{
+			Table("AspNetUser");
+			
+			#region Primary Keys
+			
+			Id(t => t.Id).GeneratedBy.Assigned()
+			.Length(450)
+			.Not.Nullable();
+
+			#endregion
+
+			#region Properties
+			
+			Map(t => t.UserName).Column("UserName")
+			.Length(256)
+			.Nullable();
+			Map(t => t.NormalizedUserName).Column("NormalizedUserName")
+			.UniqueKey("UserNameIndex")
+			.Length(256)
+			.Nullable();
+			Map(t => t.Email).Column("Email")
+			.Length(256)
+			.Nullable();
+			Map(t => t.NormalizedEmail).Column("NormalizedEmail")
+			.Index("EmailIndex")
+			.Length(256)
+			.Nullable();
+			Map(t => t.EmailConfirmed).Column("EmailConfirmed")
+			.Not.Nullable();
+			Map(t => t.PasswordHash).Column("PasswordHash")
+			.Nullable();
+			Map(t => t.SecurityStamp).Column("SecurityStamp")
+			.Nullable();
+			Map(t => t.ConcurrencyStamp).Column("ConcurrencyStamp")
+			.Nullable();
+			Map(t => t.PhoneNumber).Column("PhoneNumber")
+			.Nullable();
+			Map(t => t.PhoneNumberConfirmed).Column("PhoneNumberConfirmed")
+			.Not.Nullable();
+			Map(t => t.TwoFactorEnabled).Column("TwoFactorEnabled")
+			.Not.Nullable();
+			Map(t => t.LockoutEnd).Column("LockoutEnd")
+			.Nullable();
+			Map(t => t.LockoutEnabled).Column("LockoutEnabled")
+			.Not.Nullable();
+			Map(t => t.AccessFailedCount).Column("AccessFailedCount")
+			.Not.Nullable();
+			
+			#endregion
+			
+			#region Relationships
+			
+			HasMany(s => s.AspNetUserClaim).KeyColumn("UserId");
+			HasMany(s => s.AspNetUserLogin).KeyColumn("UserId");
+			HasMany(s => s.AspNetUserRole).KeyColumn("UserId");
+			HasMany(s => s.AspNetUserToken).KeyColumn("UserId");
+			
+			#endregion			
+
+			#region Column Order
+			
+			// Not available in NHibernate at the moment
+
+			#endregion
+	
+		}
+	}
+}

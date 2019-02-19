@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<EntityDataType xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <AdditionalNamespaces />
+  <AddInjectConstructor>true</AddInjectConstructor>
+  <InheritFrom />
+  <Namespace>Data.Entities.DefaultEntity.Entity</Namespace>
+  <OutputFolder>Entity</OutputFolder>
+  <OutputPath>..\..\Entities\Entity\DotNetScaffolder.Domain.Data.Entities.DefaultEntity.csproj</OutputPath>
+  <UseGenerics>false</UseGenerics>
+  <UseInterface>true</UseInterface>
+</EntityDataType>

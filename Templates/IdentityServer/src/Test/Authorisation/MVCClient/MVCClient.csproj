@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+    <AssemblyVersion>1.0.167.0</AssemblyVersion>
+    <FileVersion>1.0.167.0</FileVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Core\DotNetScaffolder.Domain.Core.csproj" />
+    <ProjectReference Include="..\..\..\Data\ApplicationServices\WebApiApplication\DotNetScaffolder.Domain.Data.ApplicationServices.WebApiApplicationService.csproj" />
+    <ProjectReference Include="..\..\..\Data\Dtos\Dto\DotNetScaffolder.Domain.Data.Dtos.DefaultDto.csproj" />
+    <ProjectReference Include="..\..\..\Data\Entities\Entity\DotNetScaffolder.Domain.Data.Entities.DefaultEntity.csproj" />
+    <ProjectReference Include="..\..\..\Data\Interfaces\Interface\DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.csproj" />
+  </ItemGroup>
+
+</Project>

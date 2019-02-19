@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContextDataType xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <AdditionalNamespaces>
+    <string>DotNetScaffolder.Domain.Core</string>
+    <string>DotNetScaffolder.Domain.Data.Contexts.{DriverType}.Base.Context</string>
+    <string>DotNetScaffolder.Domain.Core.Interfaces</string>
+  </AdditionalNamespaces>
+  <Contexts>
+    <ContextData>
+      <ContextName>FullContext</ContextName>
+      <CustomConnectionName>RepoTest</CustomConnectionName>
+      <Id>7d5d7239-42e3-4c2d-a0b9-abc8b00ff3cc</Id>
+      <InheritFrom>BaseContext</InheritFrom>
+      <Models>
+        <Table Description="" SchemaName="dbo" TableName="AspNetRole" EnabledForCodeGeneration="true">
+          <Columns />
+          <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
+          <RelationShips />
+          <Indexes />
+        </Table>
+        <Table Description="" SchemaName="dbo" TableName="AspNetRoleClaim" EnabledForCodeGeneration="true">
+          <Columns />
+          <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
+          <RelationShips />
+          <Indexes />
+        </Table>
+        <Table Description="" SchemaName="dbo" TableName="AspNetUser" EnabledForCodeGeneration="true">
+          <Columns />
+          <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
+          <RelationShips />
+          <Indexes />
+        </Table>
+        <Table Description="" SchemaName="dbo" TableName="AspNetUserClaim" EnabledForCodeGeneration="true">
+          <Columns />
+          <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
+          <RelationShips />
+          <Indexes />
+        </Table>
+        <Table Description="" SchemaName="dbo" TableName="AspNetUserLogin" EnabledForCodeGeneration="true">
+          <Columns />
+          <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
+          <RelationShips />
+          <Indexes />
+        </Table>
+        <Table Description="" SchemaName="dbo" TableName="AspNetUserRole" EnabledForCodeGeneration="true">
+          <Columns />
+          <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
+          <RelationShips />
+          <Indexes />
+        </Table>
+        <Table Description="" SchemaName="dbo" TableName="AspNetUserToken" EnabledForCodeGeneration="true">
+          <Columns />
+          <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
+          <RelationShips />
+          <Indexes />
+        </Table>
+      </Models>
+      <Namespace>Data.Contexts.{DriverType}.{DriverPrefix}</Namespace>
+      <OutputFolder>Context</OutputFolder>
+      <OutputPath>..\..\Contexts\{0}\{1}\DotNetScaffolder.Domain.Data.Contexts.{0}.{1}.csproj</OutputPath>
+      <IsDefault>true</IsDefault>
+    </ContextData>
+  </Contexts>
+  <MissingTables />
+</ContextDataType>

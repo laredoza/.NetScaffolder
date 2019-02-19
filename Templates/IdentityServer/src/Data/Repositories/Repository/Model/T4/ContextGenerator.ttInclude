@@ -1,0 +1,120 @@
+﻿<#@ include file="ContextTemplate.ttinclude" #>
+<#@ include file="ContextCoreTemplate.ttinclude" #>
+<#@ include file="ContextCoreTemplateCustom.ttInclude" #>
+<#@ include file="ContextNHibernateTemplate.ttinclude" #>
+
+<#+
+    public class ContextGenerator : BaseGenerator
+    {
+        public ContextDataType DataType {get;set;}
+		public ContextData ContextData {get;set;}
+        public EntityDataType EntityDataType {get;set;}
+		public List<Table> Models { get; set; }
+		public string MappingPostFix { get; set;}
+		public string MappingNamespace {get; set;}
+
+		private string projectPath = string.Empty;
+		
+        protected override void RunCore()
+        {
+			foreach(IDriver driver in DataType.Drivers )
+			{				
+				projectPath = string.Format(ContextData.OutputPath, driver.ParentFolder, driver.Prefix);	
+				
+				if(driver.DriverType is EFDriverType)
+				{
+					GenerateEFContext(driver);
+				}
+				else if(driver.DriverType is EFCoreDriverType)
+				{
+					GenerateEFCoreContext(driver);
+				}
+				else if(driver.DriverType is NhibernateDriverType)
+				{
+					GenerateNHibernateContext(driver);
+				}
+			}
+        }
+		
+		private void GenerateNHibernateContext(IDriver driver)
+		{	
+			var contextModels = Models.Where(o => ContextData.Models.Exists(x => x.SchemaName == o.SchemaName && x.TableName == o.TableName)).ToList();
+		
+			var template = new ContextNHibernateTemplate();
+		    template.DataType = DataType;
+            //template.EntityNamespace = EntityDataType.FullNamespace;
+			template.ContextData = ContextData;
+			template.Driver = driver;
+			template.MappingNamespace = MappingNamespace;
+			template.MappingPostFix = MappingPostFix;
+			template.Models = contextModels;
+
+			if(!string.IsNullOrEmpty(projectPath))
+			{
+				template.Output.Project =  projectPath;
+			}
+
+			template.RenderToFile(string.Format(@"{0}\{1}{2}.g.cs", ContextData.OutputFolder,driver.Prefix,ContextData.ContextName));
+		}
+		
+		private void GenerateEFContext(IDriver driver)
+		{	
+			var contextModels = Models.Where(o => ContextData.Models.Exists(x => x.SchemaName == o.SchemaName && x.TableName == o.TableName)).ToList();
+		
+			var template = new ContextTemplate();
+		    template.DataType = DataType;
+            template.EntityNamespace = EntityDataType.FullNamespace;
+			template.ContextData = ContextData;
+			template.Driver = driver;
+			template.MappingNamespace = MappingNamespace;
+			template.MappingPostFix = MappingPostFix;
+			template.Models = contextModels;
+
+			if(!string.IsNullOrEmpty(projectPath))
+			{
+				template.Output.Project =  projectPath;
+			}
+
+			template.RenderToFile(string.Format(@"{0}\{1}{2}.g.cs", ContextData.OutputFolder,driver.Prefix,ContextData.ContextName));
+		}
+		
+		private void GenerateEFCoreContext(IDriver driver)
+		{	
+			var contextModels = Models.Where(o => ContextData.Models.Exists(x => x.SchemaName == o.SchemaName && x.TableName == o.TableName)).ToList();
+			
+			var template = new ContextCoreTemplate();
+		    template.DataType = DataType;
+            template.EntityNamespace = EntityDataType.FullNamespace;
+			template.ContextData = ContextData;
+			template.Driver = driver;
+			template.MappingNamespace = MappingNamespace;
+			template.MappingPostFix = MappingPostFix;
+			template.Models = contextModels;
+
+			if(!string.IsNullOrEmpty(projectPath))
+			{
+				template.Output.Project =  projectPath;
+			}
+
+			template.RenderToFile(string.Format(@"{0}\{1}{2}.g.cs", ContextData.OutputFolder,driver.Prefix,ContextData.ContextName));
+
+            var customTemplate = new ContextCoreTemplateCustom();
+            customTemplate.DataType = DataType;
+            customTemplate.EntityNamespace = EntityDataType.FullNamespace;
+			customTemplate.ContextData = ContextData;
+			customTemplate.Driver = driver;
+			customTemplate.MappingNamespace = MappingNamespace;
+			customTemplate.MappingPostFix = MappingPostFix;
+			customTemplate.Models = contextModels;
+
+			if(!string.IsNullOrEmpty(projectPath))
+			{
+				customTemplate.Output.Project =  projectPath;
+			}
+
+            customTemplate.Output.PreserveExistingFile = true;
+			customTemplate.RenderToFile(string.Format(@"{0}\{1}{2}.cs", ContextData.OutputFolder,driver.Prefix,ContextData.ContextName));
+
+		}
+    }
+#>

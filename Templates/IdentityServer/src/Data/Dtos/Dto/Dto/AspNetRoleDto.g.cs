@@ -1,0 +1,94 @@
+﻿
+// <copyright file="AspNetRoleDto.g.cs" company="MIT">
+//  Copyright (c) 2019 MIT
+// </copyright>  
+
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
+// to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+// and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER 
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS 
+// IN THE SOFTWARE.
+
+
+// *******************************************************************
+//	GENERATED CODE. DOT NOT MODIFY MANUALLY AS CHANGES CAN BE LOST!!!
+//	USE A PARTIAL CLASS INSTEAD
+// *******************************************************************
+
+using System;
+using System.Collections.Generic;
+using Newtonsoft.Json;
+using DotNetScaffolder.Domain.Core;
+using DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.Dto;
+
+namespace DotNetScaffolder.Domain.Data.Dtos.DefaultDto.Dto
+{
+	public partial class AspNetRoleDto : IAspNetRole 
+	{
+		#region CTOR
+		
+		public AspNetRoleDto()
+		{
+			this.AspNetRoleClaim = new List <IAspNetRoleClaim>();
+			this.AspNetUserRole = new List <IAspNetUserRole>();
+		}
+		
+		public AspNetRoleDto(IAspNetRole item, bool deep = false)
+		{
+			if(item == null) return;
+			
+			this.Id = item.Id;
+			this.Name = item.Name;
+			this.NormalizedName = item.NormalizedName;
+			this.ConcurrencyStamp = item.ConcurrencyStamp;
+			this.AspNetRoleClaim = new List <IAspNetRoleClaim>();
+			this.AspNetUserRole = new List <IAspNetUserRole>();
+
+			if(deep)
+			{
+				if(item.AspNetRoleClaim != null)
+				{
+					foreach(var childItem in item.AspNetRoleClaim)
+					{
+						this.AspNetRoleClaim.Add(new AspNetRoleClaimDto(childItem, deep));
+					}
+				}
+				if(item.AspNetUserRole != null)
+				{
+					foreach(var childItem in item.AspNetUserRole)
+					{
+						this.AspNetUserRole.Add(new AspNetUserRoleDto(childItem, deep));
+					}
+				}
+			}
+		}
+		
+		#endregion
+		
+		#region Fields
+		
+		public string Id { get; set; }
+		public string Name { get; set; }
+		public string NormalizedName { get; set; }
+		public string ConcurrencyStamp { get; set; }
+
+		#endregion
+		
+		#region Child Relationships
+		
+        // [JsonConverter(typeof(ConcreteTypeConverter<AspNetRoleClaimDto>))]
+		public IList<IAspNetRoleClaim> AspNetRoleClaim { get; set; }
+        // [JsonConverter(typeof(ConcreteTypeConverter<AspNetUserRoleDto>))]
+		public IList<IAspNetUserRole> AspNetUserRole { get; set; }
+
+		#endregion
+		
+		#region Parent Relationships
+		
+		
+		#endregion
+	}
+}

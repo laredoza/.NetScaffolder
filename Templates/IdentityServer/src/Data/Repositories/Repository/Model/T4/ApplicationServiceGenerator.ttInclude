@@ -1,0 +1,77 @@
+﻿<#@ include file="ApplicationServiceWebTemplate.ttinclude" #>
+
+<#+
+    public class ApplicationServiceGenerator : BaseGenerator
+    {
+        public ApplicationServiceDataType DataType{get;set;}
+        public DtoInterfaceDataType DtoInterfaceDataType{get;set;}
+
+        public string RepositoryInterfaceNamespace { get; set; }
+        public string ApplicationInterfaceNamespace { get; set; }
+        public DtoDataType DtoDataType { get; set; }
+        public EntityDataType EntityDataType {get; set; }
+
+        //public INamingConvention NamingConvention { get; set; }
+//		public ContextDataType DataType {get;set;}
+//	    public ContextData ContextData {get;set;}
+//      public EntityDataType EntityDataType {get;set;}
+//		public List<Table> Models { get; set; }
+//		public string MappingPostFix { get; set;}
+//		public string MappingNamespace {get; set;}
+//
+//		private string projectPath = string.Empty;
+        
+        private ApplicationServiceInterfaceTemplate templateInterface = new ApplicationServiceInterfaceTemplate();
+        private ApplicationServiceTemplate template = new ApplicationServiceTemplate();
+        private ApplicationServiceWebTemplate templateWeb = new ApplicationServiceWebTemplate();
+
+		protected override void RunCore()
+        {
+            
+			foreach(ApplicationServiceData applicationServiceData in DataType.ApplicationServiceData )
+			{
+                templateInterface.DataType = DataType;
+                templateInterface.CurrentApplicationData = applicationServiceData;
+                templateInterface.DtoInterfaceDataType = this.DtoInterfaceDataType;
+                templateInterface.DtoDataType = this.DtoDataType;
+
+                if(!string.IsNullOrEmpty(applicationServiceData.OutputPathInterface))
+                {
+                    templateInterface.Output.Project = applicationServiceData.OutputPathInterface;
+                }
+
+                templateInterface.RenderToFile(string.Format(@"{0}\I{1}ApplicationService.g.cs", applicationServiceData.OutputFolderInterface, applicationServiceData.ApplicationServiceName));	
+
+                template.DataType = DataType;
+                template.CurrentApplicationData = applicationServiceData;
+                template.DtoInterfaceDataType = this.DtoInterfaceDataType;
+                template.ApplicationInterfaceNamespace = applicationServiceData.TransformFullnamespaceInterface(DataType.BaseNamespace);
+                template.RepositoryInterfaceNamespace = RepositoryInterfaceNamespace;
+                template.DtoDataType = this.DtoDataType;
+                template.EntityDataType = this.EntityDataType;
+
+                if(!string.IsNullOrEmpty(applicationServiceData.OutputPath))
+                {
+                    template.Output.Project = applicationServiceData.OutputPath;
+                }
+
+                template.RenderToFile(string.Format(@"{0}\{1}ApplicationService.g.cs", applicationServiceData.OutputFolder, applicationServiceData.ApplicationServiceName));	
+
+                //templateWeb.DataType = DataType;
+                //templateWeb.CurrentApplicationData = applicationServiceData;
+                //templateWeb.DtoInterfaceDataType = this.DtoInterfaceDataType;
+                //templateWeb.ApplicationInterfaceNamespace = applicationServiceData.TransformFullnamespaceInterface(DataType.BaseNamespace);
+                //templateWeb.RepositoryInterfaceNamespace = RepositoryInterfaceNamespace;
+                //templateWeb.DtoDataType = this.DtoDataType;
+                //templateWeb.EntityDataType = this.EntityDataType;
+//
+                //if(!string.IsNullOrEmpty(applicationServiceData.OutputPathWeb))
+                //{
+                    //templateWeb.Output.Project = applicationServiceData.OutputPathWeb;
+                //}
+
+                //templateWeb.RenderToFile(string.Format(@"{0}\WebApi{1}ApplicationService.g.cs", applicationServiceData.OutputFolderWeb, applicationServiceData.ApplicationServiceName));	
+			}
+        }
+    }
+#>

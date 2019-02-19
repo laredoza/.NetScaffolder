@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DtoInterfaceDataType xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <AdditionalNamespaces />
+  <InheritFrom />
+  <Namespace>Data.Interfaces.ModelInterfaces.Dto</Namespace>
+  <OutputFolder>Dto</OutputFolder>
+  <OutputPath>..\..\Interfaces\Interface\DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.csproj</OutputPath>
+</DtoInterfaceDataType>

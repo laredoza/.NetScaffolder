@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DtoDataType xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <AdditionalNamespaces>
+    <string>DotNetScaffolder.Domain.Core</string>
+  </AdditionalNamespaces>
+  <AddInjectConstructor>true</AddInjectConstructor>
+  <UseGenerics>false</UseGenerics>
+  <InheritFrom />
+  <Namespace>Data.Dtos.DefaultDto.Dto</Namespace>
+  <OutputFolder>Dto</OutputFolder>
+  <OutputPath>..\..\Dtos\Dto\DotNetScaffolder.Domain.Data.Dtos.DefaultDto.csproj</OutputPath>
+  <PostFix>Dto</PostFix>
+  <UseInterface>true</UseInterface>
+</DtoDataType>

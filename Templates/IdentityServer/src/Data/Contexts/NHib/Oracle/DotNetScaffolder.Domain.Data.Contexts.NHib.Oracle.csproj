@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyVersion>1.0.30.0</AssemblyVersion>
+    <FileVersion>1.0.30.0</FileVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentNHibernate" Version="2.1.2" />
+    <PackageReference Include="NHibernate.Caches.CoreDistributedCache.Redis" Version="5.4.0" />
+    <PackageReference Include="NHibernate.Caches.CoreMemoryCache" Version="5.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Entities\Entity\DotNetScaffolder.Domain.Data.Entities.DefaultEntity.csproj" />
+    <ProjectReference Include="..\Base\DotNetScaffolder.Domain.Data.Contexts.NHib.Base.csproj" />
+  </ItemGroup>
+
+</Project>

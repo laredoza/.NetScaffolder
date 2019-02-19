@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UnitTestDataType xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <AdditionalNamespaces />
+  <Namespace>Data.UnitTests</Namespace>
+  <OutputFolder>OutputFolder</OutputFolder>
+  <BaseTestOutputFolder>..\..\Tests\Base\DotNetScaffolder.Repository.UnitTests.Base.csproj</BaseTestOutputFolder>
+  <OutputPath>..\..\Tests\{0}\DotNetScaffolder.Repository.UnitTests.{0}.csproj</OutputPath>
+</UnitTestDataType>

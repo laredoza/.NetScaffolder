@@ -1,0 +1,581 @@
+﻿<#+
+public class RepositoryTemplate : BaseTemplate 
+{
+	public RepositoryDataType DataType { get; set; }
+	public string DtoInterfaceNamespace { get; set; }
+	public string EntityNamespace { get; set; }
+	public string RepositoryInterfaceNamespace { get; set; }
+    public EntityDataType EntityDataType { get; set; }
+
+	public override string TransformText()
+	{
+		// Debugger.Break();
+		Header = new CopyrightHeader();
+		Header.Filename = DataType.RepoName;
+#>
+
+<#= Header.TransformText() #>
+
+// *******************************************************************
+//	GENERATED CODE. DOT NOT MODIFY MANUALLY AS CHANGES CAN BE LOST!!!
+//	USE A PARTIAL CLASS INSTEAD
+// *******************************************************************
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
+using <#= DtoInterfaceNamespace #>;
+using <#= EntityNamespace #>;
+using <#= RepositoryInterfaceNamespace #>;
+using <#= EntityDataType.FullNamespace #>;
+
+<#+ foreach(var nameSpace in DataType.AdditionalNamespaces){ #>
+using <#= nameSpace #>;
+<#+ } #>
+
+namespace <#= DataType.FullNamespace #>
+{
+	/// <summary>
+	/// The <#= DataType.RepoName #>Repository class responsible for database functions in the <#= DataType.ModelName #> table
+	/// </summary>
+	public partial class <#= DataType.RepoName #>Repository : UowRepository<<#= DataType.RepoName #>> , I<#= DataType.RepoName #>Repository
+	{		
+		#region CTOR
+		
+		/// <summary>
+        /// The constructor for <#= DataType.RepoName #>Repository
+        /// </summary>
+        /// <param name="uow">IUnitOfWork</param>
+		public <#= DataType.RepoName #>Repository(IUnitOfWork uow) : base(uow)
+		{
+		}
+		
+		/// <summary>
+        /// The constructor for <#= DataType.RepoName #>Repository
+        /// </summary>
+		public <#= DataType.RepoName #>Repository() {}
+		
+		#endregion
+		
+		#region Load
+<#+ if(DataType.MetaData.PrimaryKeyCount > 1){ #>
+
+        /// <summary>
+        /// Load <#= DataType.ModelName #> entities from the database using the composite primary keys
+        /// </summary
+<#+ foreach(var col in DataType.MetaData.Columns.Where(o => o.IsPrimaryKey)) {#>
+        /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
+<#+ } #>
+		/// <param name="includes">params Expression<Func<I<#= DataType.RepoName #>, object>>[]</param>
+        /// <returns><#= DataType.ModelName #></returns>
+		public virtual <#= DataType.ModelName #> Load(<#= DataType.TransformAsParameter(DataType.MetaData.Columns.Where(o => o.IsPrimaryKey)) #>, bool cache, params Expression<Func<I<#= DataType.ModelName #>, object>>[] includes)
+		{
+			var expr = this.Convert(includes);
+			return this.UnitOfWork.FirstOrDefault<<#= DataType.ModelName #>>(o => <#= DataType.TransformAsQuery(DataType.MetaData.Columns.Where(o => o.IsPrimaryKey)) #>, cache, expr);
+		}
+		
+        /// <summary>
+        /// Load <#= DataType.ModelName #> entities async from the database using the composite primary keys
+        /// </summary
+<#+ foreach(var col in DataType.MetaData.Columns.Where(o => o.IsPrimaryKey)) {#>
+        /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
+<#+ } #>
+		/// <param name="includes">params Expression<Func<I<#= DataType.RepoName #>, object>>[]</param>
+        /// <returns><#= DataType.ModelName #></returns>
+		public virtual async Task<<#= DataType.ModelName #>> LoadAsync(<#= DataType.TransformAsParameter(DataType.MetaData.Columns.Where(o => o.IsPrimaryKey)) #>, bool cache, params Expression<Func<I<#= DataType.ModelName #>, object>>[] includes)
+		{
+			var expr = this.Convert(includes);
+			return await this.UnitOfWork.FirstOrDefaultAsync<<#= DataType.ModelName #>>(cache, o => <#= DataType.TransformAsQuery(DataType.MetaData.Columns.Where(o => o.IsPrimaryKey)) #>, expr);
+		}
+<#+ } #>
+
+<#+ if(DataType.MetaData.PrimaryKeyCount == 1){ var col = DataType.MetaData.Columns.First(o => o.IsPrimaryKey);#>
+
+        /// <summary>
+        /// Load <#= DataType.ModelName #> entities from the database using the composite primary keys
+        /// </summary
+        /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
+		/// <param name="includes">params Expression<Func<I<#= DataType.RepoName #>, object>>[]</param>
+        /// <returns><#= DataType.ModelName #></returns>
+		public virtual <#= DataType.ModelName #> LoadBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= DataType.TransformAsParameter(col) #>, bool cache, params Expression<Func<I<#= DataType.ModelName #>, object>>[] includes)
+		{
+			var expr = this.Convert(includes);
+			return this.UnitOfWork.FirstOrDefault<<#= DataType.ModelName #>>(o => <#= DataType.TransformAsQuery(col) #>, cache, expr);
+		}
+		
+        /// <summary>
+        /// Load <#= DataType.ModelName #> entities async from the database using the composite primary keys
+        /// </summary
+        /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
+		/// <param name="includes">params Expression<Func<I<#= DataType.RepoName #>, object>>[]</param>
+        /// <returns><#= DataType.ModelName #></returns>
+		public virtual async Task<<#= DataType.ModelName #>> LoadBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>Async(<#= DataType.TransformAsParameter(col) #>, bool cache, params Expression<Func<I<#= DataType.ModelName #>, object>>[] includes)
+		{
+			var expr = this.Convert(includes);
+			return await this.UnitOfWork.FirstOrDefaultAsync<<#= DataType.ModelName #>>(cache, o => <#= DataType.TransformAsQuery(col) #>, expr);
+		}
+<#+ } #>
+
+<#+ foreach(var col in DataType.MetaData.Columns.Where(o => !o.IsPrimaryKey && o.DomainDataType != DomainDataType.String)){ #>
+
+        /// <summary>
+        /// Load <#= DataType.ModelName #> entities from the database using the <#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #> field
+        /// </summary>
+        /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
+		/// <param name="includes">params Expression<Func<<#= DataType.RepoName #>, object>>[]</param>
+        /// <returns><#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>></returns>
+		public virtual <#= DataType.CollectionOption.ClassNameInterface #><<#= DataType.ModelName #>> LoadBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= DataType.TransformAsParameter(col) #>, bool cache, params Expression<Func<I<#= DataType.ModelName #>, object>>[] includes)
+		{
+			var expr = this.Convert(includes);
+			return this.UnitOfWork.AllMatching<<#= DataType.ModelName #>>(o => <#= DataType.TransformAsQuery(col) #>, cache, expr).ToList<<#= DataType.ModelName #>>();
+		}
+		
+        /// <summary>
+        /// Load <#= DataType.ModelName #> entities async from the database using the <#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #> field
+        /// </summary>
+        /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
+		/// <param name="includes">params Expression<Func<<#= DataType.RepoName #>, object>>[]</param>
+        /// <returns><#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>></returns>
+		public virtual async Task<<#= DataType.CollectionOption.ClassNameInterface #><<#= DataType.ModelName #>>> LoadBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>Async(<#= DataType.TransformAsParameter(col) #>, bool cache, params Expression<Func<I<#= DataType.ModelName #>, object>>[] includes)
+		{
+			var expr = this.Convert(includes);
+			var result = await this.UnitOfWork.AllMatchingAsync<<#= DataType.ModelName #>>(o => <#= DataType.TransformAsQuery(col) #>,cache, expr);
+			return result.ToList<<#= DataType.ModelName #>>();
+		}
+<#+ }  #>
+
+        /// <summary>
+        /// Load all <#= DataType.ModelName #> entities from the database.
+        /// </summary>
+		/// <param name="includes">params Expression<Func<I<#= DataType.RepoName #>, object>>[]</param>
+        /// <returns><#= DataType.CollectionOption.ClassNameInterface #><<#= DataType.ModelName #>></returns>
+		public virtual <#= DataType.CollectionOption.ClassNameInterface #><<#= DataType.ModelName #>> LoadAll(bool cache, params Expression<Func<I<#= DataType.ModelName #>, object>>[] includes)
+		{
+			var expr = this.Convert(includes);
+			return this.UnitOfWork.GetAll<<#= DataType.ModelName #>>(cache, expr).ToList<<#= DataType.ModelName #>>();
+		}
+		
+        /// <summary>
+        /// Load all <#= DataType.ModelName #> entities async from the database.
+        /// </summary>
+		/// <param name="includes">params Expression<Func<I<#= DataType.RepoName #>, object>>[]</param>
+        /// <returns><#= DataType.CollectionOption.ClassNameInterface #><<#= DataType.ModelName #>></returns>
+		public virtual async Task<<#= DataType.CollectionOption.ClassNameInterface #><<#= DataType.ModelName #>>> LoadAllAsync(bool cache, params Expression<Func<I<#= DataType.ModelName #>,  object>>[] includes)
+		{
+			var expr = this.Convert(includes);
+			var result = await this.UnitOfWork.GetAllAsync<<#= DataType.ModelName #>>(cache, expr);
+			return result.ToList<<#= DataType.ModelName #>>();
+		}
+		
+		#endregion
+
+		#region Search
+<#+ foreach(var col in DataType.MetaData.Columns.Where(o => !o.IsPrimaryKey && o.DomainDataType == DomainDataType.String)){ #>
+
+        /// <summary>
+        /// Search for <#= DataType.ModelName #> entities in the database by <#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>
+        /// </summary>
+        /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
+		/// <param name="caseSensitive">bool</param>
+		/// <param name="includes">params Expression<Func<I<#= DataType.RepoName #>, object>>[]</param>
+        /// <returns><#= DataType.CollectionOption.ClassNameInterface #><<#= DataType.ModelName #>></returns>
+		public virtual <#= DataType.CollectionOption.ClassNameInterface #><<#= DataType.ModelName #>> SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= DataType.TransformAsParameter(col) #>, bool cache, bool caseSensitive = false, params Expression<Func<I<#= DataType.ModelName #>, object>>[] includes)
+		{		
+			var expr = this.Convert(includes);
+			if(caseSensitive) 
+			{
+				return this.UnitOfWork.AllMatching<<#= DataType.ModelName #>>(o => <#= DataType.TransformAsQuery(col, "", true) #>, cache, expr).ToList<<#= DataType.ModelName #>>();
+			}
+			else
+			{
+				return this.UnitOfWork.AllMatching<<#= DataType.ModelName #>>(o => <#= DataType.TransformAsQuery(col) #>, cache, expr).ToList<<#= DataType.ModelName #>>();
+			}
+		}
+		
+        /// <summary>
+        /// Search for <#= DataType.ModelName #> entities async in the database by <#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>
+        /// </summary>
+        /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
+		/// <param name="caseSensitive">bool</param>
+		/// <param name="includes">params Expression<Func<I<#= DataType.RepoName #>, object>>[]</param>
+        /// <returns><#= DataType.CollectionOption.ClassNameInterface #><<#= DataType.ModelName #>></returns>
+		public virtual async Task<<#= DataType.CollectionOption.ClassNameInterface #><<#= DataType.ModelName #>>> SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>Async(<#= DataType.TransformAsParameter(col) #>, bool cache, bool caseSensitive = false, params Expression<Func<I<#= DataType.ModelName #>, object>>[] includes)
+		{		
+			var expr = this.Convert(includes);
+			if(caseSensitive) 
+			{
+				var result = await this.UnitOfWork.AllMatchingAsync<<#= DataType.ModelName #>>(o => <#= DataType.TransformAsQuery(col, "", true) #>, cache, expr);
+				return result.ToList<<#= DataType.ModelName #>>();
+			}
+			else
+			{
+				var result = await this.UnitOfWork.AllMatchingAsync<<#= DataType.ModelName #>>(o => <#= DataType.TransformAsQuery(col) #>, cache, expr);
+				return result.ToList<<#= DataType.ModelName #>>();
+			}
+		}
+<#+ }  #>
+
+		#endregion
+		
+		#region Modifiers
+		
+        /// <summary>
+        /// Add the <#= DataType.ModelName #> entity to the database.
+        /// </summary>
+        /// <param name="entity"><#= DataType.ModelName #></param>
+        /// <returns>bool</returns>
+		public virtual bool Add(<#= DataType.ModelName #> entity)
+		{
+			var entityToSave = new <#= DataType.ModelName #>(entity, false);
+			this.UnitOfWork.Add(entityToSave);
+			bool result = this.UnitOfWork.Save();
+			
+			// Populate passed in entity with newly saved values
+<#+ foreach(var col in DataType.MetaData.Columns){ #>
+			entity.<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #> = entityToSave.<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>;
+<#+ }  #>
+			
+			return result;
+		}
+		
+        /// <summary>
+        /// Add the <#= DataType.ModelName #> entity async to the database.
+        /// </summary>
+        /// <param name="entity"><#= DataType.ModelName #></param>
+        /// <returns>bool</returns>
+		public virtual async Task<bool> AddAsync(<#= DataType.ModelName #> entity)
+		{
+            var entityToSave = new <#= DataType.ModelName #>(entity, false);
+			await this.UnitOfWork.AddAsync(entityToSave);
+			bool result = await this.UnitOfWork.SaveAsync();
+			
+			// Populate passed in entity with newly saved values
+<#+ foreach(var col in DataType.MetaData.Columns){ #>
+			entity.<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #> = entityToSave.<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>;
+<#+ }  #>
+			
+			return result;
+		}
+
+        /// <summary>
+        /// Update the <#= DataType.ModelName #> entity in the database if any values have changed
+        /// </summary>
+        /// <param name="entity"><#= DataType.ModelName #></param>
+        /// <returns>bool</returns>
+		public virtual bool Update(<#= DataType.ModelName #> entity)
+		{
+			bool doUpdate = false;
+			var entityToUpdate = this.UnitOfWork.FirstOrDefault<<#= DataType.ModelName #>>(o => <#= DataType.TransformAsQuery(DataType.MetaData.Columns.Where(o => o.IsPrimaryKey), "entity") #>, true);
+			
+			if (entityToUpdate == null)
+			{
+				throw new Exception("The <#= DataType.ModelName #> entity does not exist");
+			}
+			
+			// Optimisation: Flag if any field has changed
+<#+ foreach(var col in DataType.MetaData.Columns.Where(o => !o.IsPrimaryKey)){ #>
+			if (entityToUpdate.<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #> != entity.<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>) { entityToUpdate.<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #> = entity.<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>;doUpdate = true; }
+<#+ }  #>
+
+			// Optimisation: Only execute update if a field has changed
+			if (doUpdate)
+			{
+				return this.UnitOfWork.Modify(entityToUpdate);
+			}
+			
+			return false;
+		}
+		
+        /// <summary>
+        /// Update the <#= DataType.ModelName #> entity async in the database if any values have changed
+        /// </summary>
+        /// <param name="entity"><#= DataType.ModelName #></param>
+        /// <returns>bool</returns>
+		public virtual async Task<bool> UpdateAsync(<#= DataType.ModelName #> entity)
+		{
+			bool doUpdate = false;
+			var entityToUpdate = await this.UnitOfWork.FirstOrDefaultAsync<<#= DataType.ModelName #>>(true, o => <#= DataType.TransformAsQuery(DataType.MetaData.Columns.Where(o => o.IsPrimaryKey), "entity") #>);
+			
+			if (entityToUpdate == null)
+			{
+				throw new Exception("The <#= DataType.ModelName #> entity does not exist");
+			}
+			
+			// Optimisation: Flag if any field has changed
+<#+ foreach(var col in DataType.MetaData.Columns.Where(o => !o.IsPrimaryKey)){ #>
+			if (entityToUpdate.<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #> != entity.<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>) { entityToUpdate.<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #> = entity.<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>;doUpdate = true; }
+<#+ }  #>
+
+			// Optimisation: Only execute update if a field has changed
+			if (doUpdate)
+			{
+				return await this.UnitOfWork.ModifyAsync(entityToUpdate);
+			}
+			
+			return false;
+		}
+		
+        /// <summary>
+        /// Delete the <#= DataType.ModelName #> entity from the database
+        /// </summary>
+        /// <param name="entity"><#= DataType.ModelName #></param>
+        /// <returns>bool</returns>
+		public virtual bool Delete(<#= DataType.ModelName #> entity)
+		{		
+			var entityToDelete = this.UnitOfWork.FirstOrDefault<<#= DataType.ModelName #>>(o => <#= DataType.TransformAsQuery(DataType.MetaData.Columns.Where(o => o.IsPrimaryKey), "entity")#>, true);
+			
+			if(entityToDelete == null)
+			{
+				throw new Exception("The <#= DataType.ModelName #> entity does not exist");
+			}
+			
+			return this.UnitOfWork.Remove(entityToDelete);
+		}
+		
+        /// <summary>
+        /// Delete the <#= DataType.ModelName #> entity async from the database
+        /// </summary>
+        /// <param name="entity"><#= DataType.ModelName #></param>
+        /// <returns>bool</returns>
+		public virtual async Task<bool> DeleteAsync(<#= DataType.ModelName #> entity)
+		{		
+			var entityToDelete = await this.UnitOfWork.FirstOrDefaultAsync<<#= DataType.ModelName #>>(true, o => <#= DataType.TransformAsQuery(DataType.MetaData.Columns.Where(o => o.IsPrimaryKey), "entity")#>);
+			
+			if(entityToDelete == null)
+			{
+				throw new Exception("The <#= DataType.ModelName #> entity does not exist");
+			}
+			
+			return await this.UnitOfWork.RemoveAsync(entityToDelete);
+		}
+
+		/// <summary>
+        /// Delete the <#= DataType.ModelName #> entity from the database
+        /// </summary>
+<#+ foreach(var col in DataType.MetaData.Columns.Where(o => o.IsPrimaryKey)) {#>
+        /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
+<#+ } #>
+        /// <returns>bool</returns>
+		public virtual bool Delete(<#= DataType.TransformAsParameter(DataType.MetaData.Columns.Where(o => o.IsPrimaryKey)) #>, bool cache)
+		{
+			var entityToDelete = this.UnitOfWork.FirstOrDefault<<#= DataType.ModelName #>>(o => <#= DataType.TransformAsQuery(DataType.MetaData.Columns.Where(o => o.IsPrimaryKey))#>, cache);
+			
+			if(entityToDelete == null)
+			{
+				throw new Exception("The <#= DataType.ModelName #> entity does not exist");
+			}
+			
+			return this.UnitOfWork.Remove(entityToDelete);
+		}
+		
+		/// <summary>
+        /// Delete the <#= DataType.ModelName #> entity async from the database
+        /// </summary>
+<#+ foreach(var col in DataType.MetaData.Columns.Where(o => o.IsPrimaryKey)) {#>
+        /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
+<#+ } #>
+        /// <returns>bool</returns>
+		public virtual async Task<bool> DeleteAsync(<#= DataType.TransformAsParameter(DataType.MetaData.Columns.Where(o => o.IsPrimaryKey)) #>, bool cache)
+		{
+			var entityToDelete = await this.UnitOfWork.FirstOrDefaultAsync<<#= DataType.ModelName #>>(cache, o => <#= DataType.TransformAsQuery(DataType.MetaData.Columns.Where(o => o.IsPrimaryKey))#> );
+			
+			if(entityToDelete == null)
+			{
+				throw new Exception("The <#= DataType.ModelName #> entity does not exist");
+			}
+			
+			return await this.UnitOfWork.RemoveAsync(entityToDelete);
+		}
+		
+		#endregion
+		
+		#region Aggregates
+		
+		public virtual TResult Max<TResult>(Expression<Func<I<#= DataType.ModelName #>, TResult>> maxExpression, bool cache)
+		{
+			return this.UnitOfWork.Max(cache, Expression.Lambda<Func<<#= DataType.ModelName #>, TResult>>(maxExpression.Body, maxExpression.Parameters));
+		}
+		
+		public virtual async Task<TResult> MaxAsync<TResult>(Expression<Func<I<#= DataType.ModelName #>, TResult>> maxExpression, bool cache)
+		{
+			return await this.UnitOfWork.MaxAsync(cache, Expression.Lambda<Func<I<#= DataType.ModelName #>, TResult>>(maxExpression.Body, maxExpression.Parameters));
+		}
+		
+		public virtual TResult Min<TResult>(Expression<Func<I<#= DataType.ModelName #>, TResult>> minExpression, bool cache)
+		{
+			return this.UnitOfWork.Min(cache, Expression.Lambda<Func<<#= DataType.ModelName #>, TResult>>(minExpression.Body, minExpression.Parameters));
+		}
+		
+		public virtual async Task<TResult> MinAsync<TResult>(Expression<Func<I<#= DataType.ModelName #>, TResult>> minExpression, bool cache)
+		{
+			return await this.UnitOfWork.MinAsync(cache, Expression.Lambda<Func<<#= DataType.ModelName #>, TResult>>(minExpression.Body, minExpression.Parameters));
+		}
+		
+		#endregion
+		
+		#region Bulk
+
+        /// <summary>
+        ///     Bulk delete entities
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="items"></param>
+        public void BulkDelete(IEnumerable<<#= DataType.ModelName #>> items)
+		{
+            List<<#= DataType.ModelName #>> foundItems = new List<<#= DataType.ModelName #>>();
+
+		    foreach (var item in items)
+		    {
+                var foundEntity = this.UnitOfWork.FirstOrDefault<<#= DataType.ModelName #>>(o =><#= DataType.TransformAsQuery(DataType.MetaData.Columns.Where(o => o.IsPrimaryKey), "item")#>, true);
+
+		        if (foundEntity == null)
+		        {
+		            throw new Exception("The <#= DataType.ModelName #>> entity does not exist");
+		        }
+
+		        foundItems.Add(foundEntity);
+		    }
+
+			this.UnitOfWork.BulkDelete<I<#= DataType.ModelName #>>(foundItems);
+		}
+
+        /// <summary>
+        ///     Bulk delete entities async
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public async Task BulkDeleteAsync(IEnumerable<<#= DataType.ModelName #>> items)
+		{
+            List<<#= DataType.ModelName #>> foundItems = new List<<#= DataType.ModelName #>>();
+
+		    foreach (var item in items)
+		    {
+                var foundEntity = await this.UnitOfWork.FirstOrDefaultAsync<<#= DataType.ModelName #>>(true, o =><#= DataType.TransformAsQuery(DataType.MetaData.Columns.Where(o => o.IsPrimaryKey), "item")#>);
+
+		        if (foundEntity == null)
+		        {
+		            throw new Exception("The <#= DataType.ModelName #>> entity does not exist");
+		        }
+
+		        foundItems.Add(foundEntity);
+		    }
+
+			await this.UnitOfWork.BulkDeleteAsync<<#= DataType.ModelName #>>(foundItems);
+		}
+
+        /// <summary>
+        ///     Bulk insert entities
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="items"></param>
+        public void BulkInsert(IEnumerable<<#= DataType.ModelName #>> items)
+		{
+			this.UnitOfWork.BulkInsert<<#= DataType.ModelName #>>(items);
+		}
+        
+        /// <summary>
+        /// Bulk insert entities async
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public async Task BulkInsertAsync(IEnumerable<<#= DataType.ModelName #>> items)
+		{
+			await this.UnitOfWork.BulkInsertAsync<<#= DataType.ModelName #>>(items);
+		}
+
+        /// <summary>
+        /// Bulk update entities 
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="items"></param>
+        public void BulkUpdate(IEnumerable<<#= DataType.ModelName #>> items)
+		{
+            List<<#= DataType.ModelName #>> foundItems = new List<<#= DataType.ModelName #>>();
+
+		    foreach (var entity in items)
+		    {
+                bool doUpdate = false;
+			    var entityToUpdate = this.UnitOfWork.FirstOrDefault<<#= DataType.ModelName #>>(o => <#= DataType.TransformAsQuery(DataType.MetaData.Columns.Where(o => o.IsPrimaryKey), "entity") #>, true);
+			
+			    if (entityToUpdate == null)
+			    {
+				    throw new Exception("The <#= DataType.ModelName #> entity does not exist");
+			    }
+			
+			    // Optimisation: Flag if any field has changed
+<#+ foreach(var col in DataType.MetaData.Columns.Where(o => !o.IsPrimaryKey)){ #>
+			    if (entityToUpdate.<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #> != entity.<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>) { entityToUpdate.<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #> = entity.<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>;doUpdate = true; }
+<#+ }  #>
+
+			    // Optimisation: Only execute update if a field has changed
+			    if (doUpdate)
+			    {
+				    foundItems.Add(entityToUpdate);
+			    }
+		    }
+
+			this.UnitOfWork.BulkUpdate<<#= DataType.ModelName #>>(foundItems);
+		}
+
+        /// <summary>
+        /// Bulk update entities async
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public async Task BulkUpdateAsync(IEnumerable<<#= DataType.ModelName #>> items)
+		{
+            List<<#= DataType.ModelName #>> foundItems = new List<<#= DataType.ModelName #>>();
+
+		    foreach (var entity in items)
+		    {
+                bool doUpdate = false;
+			    var entityToUpdate = await this.UnitOfWork.FirstOrDefaultAsync<<#= DataType.ModelName #>>(true, o => <#= DataType.TransformAsQuery(DataType.MetaData.Columns.Where(o => o.IsPrimaryKey), "entity") #>);
+			
+			    if (entityToUpdate == null)
+			    {
+				    throw new Exception("The <#= DataType.ModelName #> entity does not exist");
+			    }
+			
+			    // Optimisation: Flag if any field has changed
+<#+ foreach(var col in DataType.MetaData.Columns.Where(o => !o.IsPrimaryKey)){ #>
+			    if (entityToUpdate.<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #> != entity.<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>) { entityToUpdate.<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #> = entity.<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>;doUpdate = true; }
+<#+ }  #>
+
+			    // Optimisation: Only execute update if a field has changed
+			    if (doUpdate)
+			    {
+				    foundItems.Add(entityToUpdate);
+			    }
+		    }
+
+			await this.UnitOfWork.BulkUpdateAsync<<#= DataType.ModelName #>>(foundItems);
+		}
+
+        #endregion
+
+		#region Helpers
+		
+	    protected virtual Expression<Func<<#= DataType.ModelName #>, object>>[] Convert(params Expression<Func<I<#= DataType.ModelName #>, object>>[] includes)
+	    {
+	        var expr = new List<Expression<Func<<#= DataType.ModelName #>, object>>>();
+	        foreach (var exprItem in includes)
+	        {
+	            expr.Add(Expression.Lambda<Func<<#= DataType.ModelName #>, object>>(exprItem.Body, exprItem.Parameters));
+	        }
+
+	        return expr.ToArray();
+	    }
+		
+		#endregion
+	}
+}
+<#+
+		return this.GenerationEnvironment.ToString();
+	}
+}
+#>

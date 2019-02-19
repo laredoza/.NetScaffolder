@@ -1,0 +1,85 @@
+﻿<#+
+public class ContextNHibernateTemplate : BaseTemplate 
+{
+	public ContextDataType DataType { get; set; }
+	public ContextData ContextData { get; set; }
+	//public string EntityNamespace { get; set; }
+	public string MappingNamespace { get; set; }
+	public string MappingPostFix { get; set; }
+    public IDriver Driver { get; set; }
+	public List<Table> Models { get; set; }
+    private string contextNamespace;
+
+
+	public override string TransformText()
+	{
+		//Debugger.Break();
+		Header = new CopyrightHeader();
+		Header.Filename = ContextData.ContextName;
+#>
+
+<#= Header.TransformText() #>
+
+// *******************************************************************
+//	GENERATED CODE. DOT NOT MODIFY MANUALLY AS CHANGES CAN BE LOST!!!
+//	USE A PARTIAL CLASS INSTEAD
+// *******************************************************************
+
+<#+contextNamespace = ContextData.TransformFullnamespace(DataType.BaseNamespace).Replace("{DriverType}", Driver.ParentFolder).Replace("{DriverPrefix}", Driver.Prefix);#>
+
+using System.Data;
+<#+ foreach(var nameSpace in Driver.NameSpaces){ #>
+using <#= nameSpace.Replace("{DriverType}", "NHib") #>;
+<#+ } #>
+<#+ foreach(var nameSpace in DataType.AdditionalNamespaces){ #>
+using <#= nameSpace.Replace("{DriverType}", "NHib") #>;
+<#+ } #>
+using <#= contextNamespace #>.Mappings.<#= string.Concat(Driver.Prefix, ContextData.ContextName) #>;
+
+namespace <#= contextNamespace #>.Context
+{
+	public partial class <#= string.Concat(Driver.Prefix, ContextData.ContextName) #> <#= ContextData.TransformInheritFrom #>
+	{	
+		#region CTOR
+		
+		// Use other target e.g. in memory sqlite
+	    public <#= string.Concat(Driver.Prefix, ContextData.ContextName)  #>(Configuration config) : base(config)
+	    {
+        }
+		
+		// Use db as target
+	    public <#= string.Concat(Driver.Prefix, ContextData.ContextName)  #>(<#= Driver.ConfigurationClass #> config) : base(config)
+	    {
+            config.IsolationLevel(IsolationLevel.ReadCommitted);
+	    }
+		
+		// Use external factory
+	    public <#= string.Concat(Driver.Prefix, ContextData.ContextName)  #>(ISessionFactory factory) : base(factory)
+	    {
+	    }
+		
+		// Use persistence configurer
+	    public <#= string.Concat(Driver.Prefix, ContextData.ContextName)  #>(IPersistenceConfigurer config) : base(config)
+	    {
+	    }
+		
+		// Use Fluent Configuration
+	    public <#= string.Concat(Driver.Prefix, ContextData.ContextName)  #>(FluentConfiguration config) : base(config)
+	    {
+	    }
+		
+		#endregion
+		
+	    protected override void ConfigureMappings(MappingConfiguration config)
+	    {
+<#+ foreach(var model in Models) { #>
+			config.FluentMappings.Add(typeof(<#= string.Concat(ContextData.ContextName, DataType.TransformModelName(model.TableName)) #><#= MappingPostFix #>));
+<#+ } #>
+        }
+	}
+}
+<#+
+		return this.GenerationEnvironment.ToString();
+	}
+}
+#>

@@ -1,0 +1,40 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+    <AssemblyName>DotNetScaffolder.Domain.Services.WebApi.Default</AssemblyName>
+    <RootNamespace>DotNetScaffolder.Domain.Services.WebApi.Default</RootNamespace>
+    <AssemblyVersion>1.0.298.0</AssemblyVersion>
+    <FileVersion>1.0.298.0</FileVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>bin\Generated\Dotnet\Domain\Services\WebApi\Default\DotNetScaffolder.Domain.Services.WebApi.Default.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="IdentityServer4.AccessTokenValidation" Version="2.7.0" />
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.0" />
+    <PackageReference Include="StructureMap.Microsoft.DependencyInjection" Version="1.4.0" />
+    <PackageReference Include="Swagger" Version="1.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Data\ApplicationServices\ApplicationService\DotNetScaffolder.Domain.Data.ApplicationServices.ApplicationService.csproj" />
+    <ProjectReference Include="..\..\..\Data\Contexts\NHib\SqlServer\DotNetScaffolder.Domain.Data.Contexts.NHib.SqlServer.csproj" />
+    <ProjectReference Include="..\..\..\Data\Dtos\Dto\DotNetScaffolder.Domain.Data.Dtos.DefaultDto.csproj" />
+    <ProjectReference Include="..\..\..\Data\Interfaces\ApplicationService\DotNetScaffolder.Domain.Data.Interfaces.ApplicationServiceInterfaces.csproj" />
+    <ProjectReference Include="..\..\..\Data\Interfaces\Interface\DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.csproj" />
+    <ProjectReference Include="..\..\..\Data\Repositories\Repository\DotNetScaffolder.Domain.Data.Repositories.Repository.csproj" />
+    <ProjectReference Include="..\..\..\Infrastructure\Web\Core\DotNetScaffolder.Domain.Infrastructure.Web.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Modules\" />
+  </ItemGroup>
+
+</Project>

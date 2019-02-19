@@ -1,0 +1,120 @@
+﻿<#@ assembly name="System" #>
+<#@ assembly name="System.Configuration" #>
+<#@ assembly name="System.Globalization" #>
+<#@ assembly name="System.Xml" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="$(ProjectDir)Model\Package\Common.Logging.Core.dll" #>
+<#@ assembly name="$(ProjectDir)Model\Package\Common.Logging.dll" #>
+<#@ assembly name="$(ProjectDir)Model\Package\DotNetScaffolder.Core.Common.dll" #>
+<#@ assembly name="$(ProjectDir)Model\Package\DotNetScaffolder.Mapping.MetaData.dll" #>
+<#@ assembly name="$(ProjectDir)Model\Package\DotNetScaffolder.Components.DataTypes.DefaultDataTypes.dll" #>
+<#@ assembly name="$(ProjectDir)Model\Package\DotNetScaffolder.Components.Drivers.DefaultDrivers.dll" #>
+<#@ assembly name="$(ProjectDir)Model\Package\FormControls.dll" #>
+<#@ assembly name="$(ProjectDir)Model\Package\DotNetScaffolder.Components.Common.dll" #>
+<#@ assembly name="$(ProjectDir)Model\Package\DotNetScaffolder.Core.Configuration.dll" #>
+<#@ assembly name="$(ProjectDir)Model\Package\DotNetScaffolder.Mapping.ApplicationServices.dll" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.Configuration" #>
+<#@ import namespace="System.Globalization" #>
+<#@ import namespace="System.Xml" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Xml.Serialization" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="DotNetScaffolder.Mapping.MetaData.Project" #>
+<#@ import namespace="DotNetScaffolder.Mapping.MetaData.Domain" #>
+<#@ import namespace="DotNetScaffolder.Mapping.MetaData.Model" #>
+<#@ import namespace="DotNetScaffolder.Core.Common.Serializer" #>
+
+<#@ import namespace="DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ApplicationServiceDataTypes" #>
+<#@ import namespace="DotNetScaffolder.Components.DataTypes.DefaultDataTypes.Base" #>
+<#@ import namespace="DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataTypes" #>
+<#@ import namespace="DotNetScaffolder.Components.DataTypes.DefaultDataTypes.DtoDataTypes" #>
+<#@ import namespace="DotNetScaffolder.Components.DataTypes.DefaultDataTypes.DtoInterfaceDataTypes" #>
+<#@ import namespace="DotNetScaffolder.Components.DataTypes.DefaultDataTypes.EntityDataTypes" #>
+<#@ import namespace="DotNetScaffolder.Components.DataTypes.DefaultDataTypes.MappingDataTypes" #>
+<#@ import namespace="DotNetScaffolder.Components.DataTypes.DefaultDataTypes.RepoInterfaceDataTypes" #>
+<#@ import namespace="DotNetScaffolder.Components.DataTypes.DefaultDataTypes.RepositoryDataTypes" #>
+<#@ import namespace="DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ApplicationServiceDataTypes" #>
+<#@ import namespace="DotNetScaffolder.Components.DataTypes.DefaultDataTypes.UnitTests" #>
+<#@ import namespace="DotNetScaffolder.Components.DataTypes.DefaultDataTypes.StructureMapDataTypes" #>
+<#@ import namespace="DotNetScaffolder.Components.DataTypes.DefaultDataTypes.WebApiServiceDataTypes" #>
+
+<#@ import namespace="DotNetScaffolder.Components.Drivers.DefaultDrivers.EFCore" #>
+<#@ import namespace="DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6" #>
+<#@ import namespace="DotNetScaffolder.Components.Drivers.DefaultDrivers.NHibernate" #>
+<#@ import namespace="DotNetScaffolder.Mapping.MetaData.Enum" #>
+<#@ import namespace="DotNetScaffolder.Components.Common.Formatting" #>
+
+<#@ import namespace="DotNetScaffolder.Core.Configuration" #>
+<#@ import namespace="DotNetScaffolder.Mapping.MetaData.Project" #>
+<#@ import namespace="DotNetScaffolder.Mapping.ApplicationServices" #>
+
+<#@ include file="CopyrightHeader.ttinclude" #>
+<#@ include file="BaseGenerator.ttinclude" #>
+<#@ include file="BaseTemplate.ttinclude" #>
+<#+
+    public class BaseProjectGenerator : Generator
+    {
+        public string ModelFilePath {get;set;}
+        public string PackagePath {get;set;}
+        public ProjectDefinition ProjectDefinition { get; private set; }
+	
+        protected override void RunCore()
+        {
+            //Debugger.Break();
+            ScaffoldConfig.Load(PackagePath);
+            FilePersistenceOptions options = new FilePersistenceOptions { Path = ModelFilePath };
+            var applicationService =
+                new ProjectDefinitionApplicationServiceFile { FilePersistenceOptions = options };
+            applicationService.Load(this.PackagePath);
+		
+            ProjectDefinition = applicationService.ProjectDefinition;
+		
+            Dictionary<string, string> parameters = new Dictionary<string, string>();
+            parameters.Add("basePath", Path.GetDirectoryName(ModelFilePath));
+		    List<IDriver> drivers = new List<IDriver>();
+
+            foreach(var domain in ProjectDefinition.Domains)
+            {
+                if(domain.Package == null) continue;
+			
+                var nc = ScaffoldConfig.ReturnNamingConvention(domain.NamingConventionId);
+                var co = ScaffoldConfig.ReturnCollectionOption(domain.CollectionOptionId);
+
+                var dataTypes = new List<IDataType>();
+                drivers = new List<IDriver>();
+                foreach( Guid driverTypeTypeId in domain.DriverIdList)
+                {
+					var drvr = ScaffoldConfig.ReturnDriver(driverTypeTypeId);
+					drvr.DriverType.LoadConfig(parameters);
+                    drivers.Add(drvr);
+                }
+
+                // Setup data types for template
+                foreach(var template in domain.Package.Templates)
+                {
+                    if(template.Enabled)
+                    {
+                        var dt = ScaffoldConfig.ReturnDataType(template.DataType);
+                        dt.DomainDefinition = domain;
+                        dt.Load(parameters);
+                        dt.NamingConvention = nc;
+                        dt.CollectionOption = co;
+			            dt.BaseNamespace = ProjectDefinition.BaseNameSpace;
+                        dt.Drivers = drivers;
+                        dataTypes.Add(dt);
+                    }
+                }
+			
+                ExecuteGenerators(dataTypes, domain);
+            }
+        }
+	
+        protected virtual void ExecuteGenerators(List<IDataType> dataTypes, DomainDefinition domain)
+        {
+		
+        }
+    }
+#>
