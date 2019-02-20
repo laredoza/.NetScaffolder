@@ -51,7 +51,6 @@ namespace DotNetScaffolder.Domain.Data.Contexts.NHib.Oracle.Mappings.OracleFullC
 			
 			Map(t => t.UserId).Column("UserId")
 			.Index("IX_AspNetUserClaims_UserId")
-			.Length(450)
 			.Not.Nullable();
 			Map(t => t.ClaimType).Column("ClaimType")
 			.Nullable();

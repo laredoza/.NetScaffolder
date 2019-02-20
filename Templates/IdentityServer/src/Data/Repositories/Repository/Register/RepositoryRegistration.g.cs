@@ -32,6 +32,8 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository.Register
 		
         public RepositoryRegistration()
         {
+			this.For<IAllowedScopeRepository>().LifecycleIs(Lifecycles.Unique).UseIfNone<AllowedScopeRepository>();
+			this.For<IApiResourceRepository>().LifecycleIs(Lifecycles.Unique).UseIfNone<ApiResourceRepository>();
 			this.For<IAspNetRoleRepository>().LifecycleIs(Lifecycles.Unique).UseIfNone<AspNetRoleRepository>();
 			this.For<IAspNetRoleClaimRepository>().LifecycleIs(Lifecycles.Unique).UseIfNone<AspNetRoleClaimRepository>();
 			this.For<IAspNetUserRepository>().LifecycleIs(Lifecycles.Unique).UseIfNone<AspNetUserRepository>();
@@ -39,8 +41,6 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository.Register
 			this.For<IAspNetUserLoginRepository>().LifecycleIs(Lifecycles.Unique).UseIfNone<AspNetUserLoginRepository>();
 			this.For<IAspNetUserRoleRepository>().LifecycleIs(Lifecycles.Unique).UseIfNone<AspNetUserRoleRepository>();
 			this.For<IAspNetUserTokenRepository>().LifecycleIs(Lifecycles.Unique).UseIfNone<AspNetUserTokenRepository>();
-			this.For<IAllowedScopeRepository>().LifecycleIs(Lifecycles.Unique).UseIfNone<AllowedScopeRepository>();
-			this.For<IApiResourceRepository>().LifecycleIs(Lifecycles.Unique).UseIfNone<ApiResourceRepository>();
 			this.For<IClientRepository>().LifecycleIs(Lifecycles.Unique).UseIfNone<ClientRepository>();
 			this.For<IClientGrantTypeRepository>().LifecycleIs(Lifecycles.Unique).UseIfNone<ClientGrantTypeRepository>();
 			this.For<IGrantTypeRepository>().LifecycleIs(Lifecycles.Unique).UseIfNone<GrantTypeRepository>();

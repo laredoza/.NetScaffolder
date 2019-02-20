@@ -54,7 +54,7 @@ namespace DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity
 		
 		#region Fields
 		
-		public virtual string UserId { get; set; }
+		public virtual Guid UserId { get; set; }
 		public virtual string LoginProvider { get; set; }
 		public virtual string Name { get; set; }
 		public virtual string Value { get; set; }

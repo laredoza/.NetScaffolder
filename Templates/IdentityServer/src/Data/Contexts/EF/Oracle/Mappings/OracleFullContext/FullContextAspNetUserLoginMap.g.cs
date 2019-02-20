@@ -55,7 +55,6 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EF.Oracle.Mappings.OracleFullCon
 			Property(t => t.ProviderKey).HasMaxLength(128);
 			Property(t => t.ProviderKey).IsRequired();
 			Property(t => t.ProviderDisplayName).IsOptional();
-			Property(t => t.UserId).HasMaxLength(450);
 			Property(t => t.UserId).IsRequired();
 			
 			#endregion

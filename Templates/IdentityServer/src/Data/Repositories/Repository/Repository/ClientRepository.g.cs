@@ -107,6 +107,31 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
 		}
 
         /// <summary>
+        /// Load Client entities from the database using the Active field
+        /// </summary>
+        /// <param name="active">bool</param>
+		/// <param name="includes">params Expression<Func<Client, object>>[]</param>
+        /// <returns>IList<IClient></returns>
+		public virtual IList<Client> LoadByActive(bool active, bool cache, params Expression<Func<IClient, object>>[] includes)
+		{
+			var expr = this.Convert(includes);
+			return this.UnitOfWork.AllMatching<Client>(o => o.Active == active, cache, expr).ToList<Client>();
+		}
+		
+        /// <summary>
+        /// Load Client entities async from the database using the Active field
+        /// </summary>
+        /// <param name="active">bool</param>
+		/// <param name="includes">params Expression<Func<Client, object>>[]</param>
+        /// <returns>IList<IClient></returns>
+		public virtual async Task<IList<Client>> LoadByActiveAsync(bool active, bool cache, params Expression<Func<IClient, object>>[] includes)
+		{
+			var expr = this.Convert(includes);
+			var result = await this.UnitOfWork.AllMatchingAsync<Client>(o => o.Active == active,cache, expr);
+			return result.ToList<Client>();
+		}
+
+        /// <summary>
         /// Load all Client entities from the database.
         /// </summary>
 		/// <param name="includes">params Expression<Func<IClient, object>>[]</param>
@@ -237,6 +262,7 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
 			entity.ClientId = entityToSave.ClientId;
 			entity.ClientName = entityToSave.ClientName;
 			entity.AlwaysSendClientClaims = entityToSave.AlwaysSendClientClaims;
+			entity.Active = entityToSave.Active;
 			
 			return result;
 		}
@@ -257,6 +283,7 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
 			entity.ClientId = entityToSave.ClientId;
 			entity.ClientName = entityToSave.ClientName;
 			entity.AlwaysSendClientClaims = entityToSave.AlwaysSendClientClaims;
+			entity.Active = entityToSave.Active;
 			
 			return result;
 		}
@@ -280,6 +307,7 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
 			if (entityToUpdate.ClientId != entity.ClientId) { entityToUpdate.ClientId = entity.ClientId;doUpdate = true; }
 			if (entityToUpdate.ClientName != entity.ClientName) { entityToUpdate.ClientName = entity.ClientName;doUpdate = true; }
 			if (entityToUpdate.AlwaysSendClientClaims != entity.AlwaysSendClientClaims) { entityToUpdate.AlwaysSendClientClaims = entity.AlwaysSendClientClaims;doUpdate = true; }
+			if (entityToUpdate.Active != entity.Active) { entityToUpdate.Active = entity.Active;doUpdate = true; }
 
 			// Optimisation: Only execute update if a field has changed
 			if (doUpdate)
@@ -309,6 +337,7 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
 			if (entityToUpdate.ClientId != entity.ClientId) { entityToUpdate.ClientId = entity.ClientId;doUpdate = true; }
 			if (entityToUpdate.ClientName != entity.ClientName) { entityToUpdate.ClientName = entity.ClientName;doUpdate = true; }
 			if (entityToUpdate.AlwaysSendClientClaims != entity.AlwaysSendClientClaims) { entityToUpdate.AlwaysSendClientClaims = entity.AlwaysSendClientClaims;doUpdate = true; }
+			if (entityToUpdate.Active != entity.Active) { entityToUpdate.Active = entity.Active;doUpdate = true; }
 
 			// Optimisation: Only execute update if a field has changed
 			if (doUpdate)
@@ -508,6 +537,7 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
 			    if (entityToUpdate.ClientId != entity.ClientId) { entityToUpdate.ClientId = entity.ClientId;doUpdate = true; }
 			    if (entityToUpdate.ClientName != entity.ClientName) { entityToUpdate.ClientName = entity.ClientName;doUpdate = true; }
 			    if (entityToUpdate.AlwaysSendClientClaims != entity.AlwaysSendClientClaims) { entityToUpdate.AlwaysSendClientClaims = entity.AlwaysSendClientClaims;doUpdate = true; }
+			    if (entityToUpdate.Active != entity.Active) { entityToUpdate.Active = entity.Active;doUpdate = true; }
 
 			    // Optimisation: Only execute update if a field has changed
 			    if (doUpdate)
@@ -543,6 +573,7 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
 			    if (entityToUpdate.ClientId != entity.ClientId) { entityToUpdate.ClientId = entity.ClientId;doUpdate = true; }
 			    if (entityToUpdate.ClientName != entity.ClientName) { entityToUpdate.ClientName = entity.ClientName;doUpdate = true; }
 			    if (entityToUpdate.AlwaysSendClientClaims != entity.AlwaysSendClientClaims) { entityToUpdate.AlwaysSendClientClaims = entity.AlwaysSendClientClaims;doUpdate = true; }
+			    if (entityToUpdate.Active != entity.Active) { entityToUpdate.Active = entity.Active;doUpdate = true; }
 
 			    // Optimisation: Only execute update if a field has changed
 			    if (doUpdate)

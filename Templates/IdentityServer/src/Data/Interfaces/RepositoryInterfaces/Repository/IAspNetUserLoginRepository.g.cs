@@ -56,6 +56,24 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
 		Task<AspNetUserLogin> LoadAsync( string loginProvider,  string providerKey, bool cache, params Expression<Func<IAspNetUserLogin, object>>[] includes);
 
         /// <summary>
+        /// Load AspNetUserLogin entities from the database using the UserId field
+        /// </summary>
+        /// <param name="userId">Guid</param
+        /// <param name="cache">Use 2nd level caching if enabled</param>
+		/// <param name="includes">params Expression<Func<IAspNetUserLogin, object>>[]</param>
+        /// <returns>IList<AspNetUserLogin></returns>
+		IList<AspNetUserLogin> LoadByUserId(Guid userId, bool cache,  params Expression<Func<IAspNetUserLogin, object>>[] includes);
+		
+        /// <summary>
+        /// Load AspNetUserLogin entities async from the database using the UserId field
+        /// </summary>
+        /// <param name="userId">Guid</param
+        /// <param name="cache">Use 2nd level caching if enabled</param>
+		/// <param name="includes">params Expression<Func<IAspNetUserLogin, object>>[]</param>
+        /// <returns>IList<AspNetUserLogin></returns>
+		Task<IList<AspNetUserLogin>> LoadByUserIdAsync(Guid userId, bool cache, params Expression<Func<IAspNetUserLogin, object>>[] includes);
+
+        /// <summary>
         /// Load all AspNetUserLogin entities from the database.
         /// </summary>
         /// <param name="cache">Use 2nd level caching if enabled</param>
@@ -94,26 +112,6 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
 		/// <param name="includes">params Expression<Func<IAspNetUserLogin, object>>[]</param>
         /// <returns>IList<AspNetUserLogin></returns>
 		Task<IList<AspNetUserLogin>> SearchByProviderDisplayNameAsync(string providerDisplayName, bool cache, bool caseSensitive = false, params Expression<Func<IAspNetUserLogin, object>>[] includes);
-
-        /// <summary>
-        /// Search for AspNetUserLogin entities in the database by UserId
-        /// </summary>
-        /// <param name="userId">string</param>
-        /// <param name="cache">Use 2nd level caching if enabled</param>
-		/// <param name="caseSensitive">bool</param
-		/// <param name="includes">params Expression<Func<IAspNetUserLogin, object>>[]</param>
-        /// <returns>IList<AspNetUserLogin></returns>
-		IList<AspNetUserLogin> SearchByUserId(string userId, bool cache, bool caseSensitive = false, params Expression<Func<IAspNetUserLogin, object>>[] includes);
-		
-        /// <summary>
-        /// Search for AspNetUserLogin entities async in the database by UserId
-        /// </summary>
-        /// <param name="userId">string</param>
-        /// <param name="cache">Use 2nd level caching if enabled</param>
-		/// <param name="caseSensitive">bool</param
-		/// <param name="includes">params Expression<Func<IAspNetUserLogin, object>>[]</param>
-        /// <returns>IList<AspNetUserLogin></returns>
-		Task<IList<AspNetUserLogin>> SearchByUserIdAsync(string userId, bool cache, bool caseSensitive = false, params Expression<Func<IAspNetUserLogin, object>>[] includes);
 
 		#endregion
 		

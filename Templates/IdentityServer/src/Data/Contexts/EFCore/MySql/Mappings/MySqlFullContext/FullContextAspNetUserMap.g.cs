@@ -42,7 +42,6 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.MySql.Mappings.MySqlFullC
 
 			#region Constraints
 			
-			builder.Property(t => t.Id).HasMaxLength(450);
 			builder.Property(t => t.Id).HasColumnName("Id").IsRequired();
 			builder.Property(t => t.UserName).HasMaxLength(256);
 			builder.Property(t => t.UserName).HasColumnName("UserName").IsRequired(false);

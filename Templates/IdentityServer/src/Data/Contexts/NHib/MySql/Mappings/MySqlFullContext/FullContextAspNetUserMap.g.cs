@@ -42,7 +42,6 @@ namespace DotNetScaffolder.Domain.Data.Contexts.NHib.MySql.Mappings.MySqlFullCon
 			#region Primary Keys
 			
 			Id(t => t.Id).GeneratedBy.Assigned()
-			.Length(450)
 			.Not.Nullable();
 
 			#endregion

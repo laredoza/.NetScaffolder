@@ -38,6 +38,14 @@ namespace DotNetScaffolder.Domain.ApplicationService
 	{
 
         /// <summary>
+        /// Gets or sets the AllowedScope Repository 
+        /// </summary>
+        protected IAllowedScopeRepository AllowedScopeRepository { get; set; }
+        /// <summary>
+        /// Gets or sets the ApiResource Repository 
+        /// </summary>
+        protected IApiResourceRepository ApiResourceRepository { get; set; }
+        /// <summary>
         /// Gets or sets the AspNetRole Repository 
         /// </summary>
         protected IAspNetRoleRepository AspNetRoleRepository { get; set; }
@@ -65,14 +73,6 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// Gets or sets the AspNetUserToken Repository 
         /// </summary>
         protected IAspNetUserTokenRepository AspNetUserTokenRepository { get; set; }
-        /// <summary>
-        /// Gets or sets the AllowedScope Repository 
-        /// </summary>
-        protected IAllowedScopeRepository AllowedScopeRepository { get; set; }
-        /// <summary>
-        /// Gets or sets the ApiResource Repository 
-        /// </summary>
-        protected IApiResourceRepository ApiResourceRepository { get; set; }
         /// <summary>
         /// Gets or sets the Client Repository 
         /// </summary>
@@ -107,15 +107,15 @@ namespace DotNetScaffolder.Domain.ApplicationService
         protected IResourceClaimTypeRepository ResourceClaimTypeRepository { get; set; }
 
         public IdentityServerApplicationService (
-                                          IAspNetRoleRepository aspNetRoleRepository,
+                                          IAllowedScopeRepository allowedScopeRepository,
+                                                              IApiResourceRepository apiResourceRepository,
+                                                              IAspNetRoleRepository aspNetRoleRepository,
                                                               IAspNetRoleClaimRepository aspNetRoleClaimRepository,
                                                               IAspNetUserRepository aspNetUserRepository,
                                                               IAspNetUserClaimRepository aspNetUserClaimRepository,
                                                               IAspNetUserLoginRepository aspNetUserLoginRepository,
                                                               IAspNetUserRoleRepository aspNetUserRoleRepository,
                                                               IAspNetUserTokenRepository aspNetUserTokenRepository,
-                                                              IAllowedScopeRepository allowedScopeRepository,
-                                                              IApiResourceRepository apiResourceRepository,
                                                               IClientRepository clientRepository,
                                                               IClientGrantTypeRepository clientGrantTypeRepository,
                                                               IGrantTypeRepository grantTypeRepository,
@@ -126,6 +126,8 @@ namespace DotNetScaffolder.Domain.ApplicationService
                                           IResourceClaimTypeRepository resourceClaimTypeRepository
                                      )
         {
+            this.AllowedScopeRepository = allowedScopeRepository;
+            this.ApiResourceRepository = apiResourceRepository;
             this.AspNetRoleRepository = aspNetRoleRepository;
             this.AspNetRoleClaimRepository = aspNetRoleClaimRepository;
             this.AspNetUserRepository = aspNetUserRepository;
@@ -133,8 +135,6 @@ namespace DotNetScaffolder.Domain.ApplicationService
             this.AspNetUserLoginRepository = aspNetUserLoginRepository;
             this.AspNetUserRoleRepository = aspNetUserRoleRepository;
             this.AspNetUserTokenRepository = aspNetUserTokenRepository;
-            this.AllowedScopeRepository = allowedScopeRepository;
-            this.ApiResourceRepository = apiResourceRepository;
             this.ClientRepository = clientRepository;
             this.ClientGrantTypeRepository = clientGrantTypeRepository;
             this.GrantTypeRepository = grantTypeRepository;
@@ -148,12 +148,98 @@ namespace DotNetScaffolder.Domain.ApplicationService
         #region Load
 
         /// <summary>
+        /// Load AllowedScope entities from the database using the primary key
+        /// </summary
+        /// <param name="id">int</param>
+        /// <returns>AllowedScopeDto</returns>
+        /// <param name="includes">params Expression<Func<IAllowedScope, object>>[]</param>
+		public AllowedScopeDto LoadByAllowedScopeId(int id, bool cache, params Expression<Func<IAllowedScope, object>>[] includes)
+        {
+            return new AllowedScopeDto(this.AllowedScopeRepository.LoadById(id, cache, includes), true);
+        }
+
+        /// <summary>
+        /// Load AllowedScope Async entities from the database using the primary key
+        /// </summary
+        /// <param name="id">int</param>
+        /// <returns>AllowedScopeDto</returns>
+        /// <param name="includes">params Expression<Func<IAllowedScope, object>>[]</param>
+		public async Task<AllowedScopeDto> LoadByAllowedScopeIdAsync(int id, bool cache, params Expression<Func<IAllowedScope, object>>[] includes)
+        {
+            return new AllowedScopeDto(await this.AllowedScopeRepository.LoadByIdAsync(id, cache, includes), true);
+        }
+
+        /// <summary>
+        /// Load all AllowedScope entities from the database.
+        /// </summary>
+        /// <param name="includes">params Expression<Func<IAllowedScope, object>>[]</param>
+        /// <returns>IList<AllowedScopeDto></returns>
+		public IList<AllowedScopeDto> AllowedScopeLoadAll(bool cache, params Expression<Func<IAllowedScope, object>>[] includes)
+        {
+            return this.ConvertAllowedScopeEntityToDto(this.AllowedScopeRepository.LoadAll(cache, includes));
+        }
+
+        /// <summary>
+        /// Load all AllowedScope Async entities from the database.
+        /// </summary>
+        /// <param name="includes">params Expression<Func<IAllowedScope, object>>[]</param>
+        /// <returns>IList<AllowedScopeDto></returns>
+		public async Task<IList<AllowedScopeDto>> AllowedScopeLoadAllAsync(bool cache, params Expression<Func<IAllowedScope, object>>[] includes)
+        {
+            return this.ConvertAllowedScopeEntityToDto( await this.AllowedScopeRepository.LoadAllAsync(cache, includes));
+        }
+
+
+        /// <summary>
+        /// Load ApiResource entities from the database using the primary key
+        /// </summary
+        /// <param name="id">int</param>
+        /// <returns>ApiResourceDto</returns>
+        /// <param name="includes">params Expression<Func<IApiResource, object>>[]</param>
+		public ApiResourceDto LoadByApiResourceId(int id, bool cache, params Expression<Func<IApiResource, object>>[] includes)
+        {
+            return new ApiResourceDto(this.ApiResourceRepository.LoadById(id, cache, includes), true);
+        }
+
+        /// <summary>
+        /// Load ApiResource Async entities from the database using the primary key
+        /// </summary
+        /// <param name="id">int</param>
+        /// <returns>ApiResourceDto</returns>
+        /// <param name="includes">params Expression<Func<IApiResource, object>>[]</param>
+		public async Task<ApiResourceDto> LoadByApiResourceIdAsync(int id, bool cache, params Expression<Func<IApiResource, object>>[] includes)
+        {
+            return new ApiResourceDto(await this.ApiResourceRepository.LoadByIdAsync(id, cache, includes), true);
+        }
+
+        /// <summary>
+        /// Load all ApiResource entities from the database.
+        /// </summary>
+        /// <param name="includes">params Expression<Func<IApiResource, object>>[]</param>
+        /// <returns>IList<ApiResourceDto></returns>
+		public IList<ApiResourceDto> ApiResourceLoadAll(bool cache, params Expression<Func<IApiResource, object>>[] includes)
+        {
+            return this.ConvertApiResourceEntityToDto(this.ApiResourceRepository.LoadAll(cache, includes));
+        }
+
+        /// <summary>
+        /// Load all ApiResource Async entities from the database.
+        /// </summary>
+        /// <param name="includes">params Expression<Func<IApiResource, object>>[]</param>
+        /// <returns>IList<ApiResourceDto></returns>
+		public async Task<IList<ApiResourceDto>> ApiResourceLoadAllAsync(bool cache, params Expression<Func<IApiResource, object>>[] includes)
+        {
+            return this.ConvertApiResourceEntityToDto( await this.ApiResourceRepository.LoadAllAsync(cache, includes));
+        }
+
+
+        /// <summary>
         /// Load AspNetRole entities from the database using the primary key
         /// </summary
-        /// <param name="id">string</param>
+        /// <param name="id">Guid</param>
         /// <returns>AspNetRoleDto</returns>
         /// <param name="includes">params Expression<Func<IAspNetRole, object>>[]</param>
-		public AspNetRoleDto LoadByAspNetRoleId(string id, bool cache, params Expression<Func<IAspNetRole, object>>[] includes)
+		public AspNetRoleDto LoadByAspNetRoleId(Guid id, bool cache, params Expression<Func<IAspNetRole, object>>[] includes)
         {
             return new AspNetRoleDto(this.AspNetRoleRepository.LoadById(id, cache, includes), true);
         }
@@ -161,10 +247,10 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <summary>
         /// Load AspNetRole Async entities from the database using the primary key
         /// </summary
-        /// <param name="id">string</param>
+        /// <param name="id">Guid</param>
         /// <returns>AspNetRoleDto</returns>
         /// <param name="includes">params Expression<Func<IAspNetRole, object>>[]</param>
-		public async Task<AspNetRoleDto> LoadByAspNetRoleIdAsync(string id, bool cache, params Expression<Func<IAspNetRole, object>>[] includes)
+		public async Task<AspNetRoleDto> LoadByAspNetRoleIdAsync(Guid id, bool cache, params Expression<Func<IAspNetRole, object>>[] includes)
         {
             return new AspNetRoleDto(await this.AspNetRoleRepository.LoadByIdAsync(id, cache, includes), true);
         }
@@ -236,10 +322,10 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <summary>
         /// Load AspNetUser entities from the database using the primary key
         /// </summary
-        /// <param name="id">string</param>
+        /// <param name="id">Guid</param>
         /// <returns>AspNetUserDto</returns>
         /// <param name="includes">params Expression<Func<IAspNetUser, object>>[]</param>
-		public AspNetUserDto LoadByAspNetUserId(string id, bool cache, params Expression<Func<IAspNetUser, object>>[] includes)
+		public AspNetUserDto LoadByAspNetUserId(Guid id, bool cache, params Expression<Func<IAspNetUser, object>>[] includes)
         {
             return new AspNetUserDto(this.AspNetUserRepository.LoadById(id, cache, includes), true);
         }
@@ -247,10 +333,10 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <summary>
         /// Load AspNetUser Async entities from the database using the primary key
         /// </summary
-        /// <param name="id">string</param>
+        /// <param name="id">Guid</param>
         /// <returns>AspNetUserDto</returns>
         /// <param name="includes">params Expression<Func<IAspNetUser, object>>[]</param>
-		public async Task<AspNetUserDto> LoadByAspNetUserIdAsync(string id, bool cache, params Expression<Func<IAspNetUser, object>>[] includes)
+		public async Task<AspNetUserDto> LoadByAspNetUserIdAsync(Guid id, bool cache, params Expression<Func<IAspNetUser, object>>[] includes)
         {
             return new AspNetUserDto(await this.AspNetUserRepository.LoadByIdAsync(id, cache, includes), true);
         }
@@ -368,11 +454,11 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <summary>
         /// Load AspNetUserRole entities from the database using the composite primary keys
         /// </summary
-        /// <param name="userId">string</param>
-        /// <param name="roleId">string</param>
+        /// <param name="userId">Guid</param>
+        /// <param name="roleId">Guid</param>
         /// <param name="includes">params Expression<Func<IAspNetUserRole, object>>[]</param>
         /// <returns>AspNetUserRoleDto</returns>
-		public AspNetUserRoleDto Load( string userId,  string roleId, bool cache, params Expression<Func<IAspNetUserRole, object>>[] includes)
+		public AspNetUserRoleDto Load( Guid userId,  Guid roleId, bool cache, params Expression<Func<IAspNetUserRole, object>>[] includes)
         {
             return new AspNetUserRoleDto(this.AspNetUserRoleRepository.Load( userId,  roleId, cache, includes), true);
         }
@@ -380,11 +466,11 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <summary>
         /// Load AspNetUserRole Async entities from the database using the composite primary keys
         /// </summary
-        /// <param name="userId">string</param>
-        /// <param name="roleId">string</param>
+        /// <param name="userId">Guid</param>
+        /// <param name="roleId">Guid</param>
         /// <param name="includes">params Expression<Func<IAspNetUserRole, object>>[]</param>
         /// <returns>AspNetUserRoleDto</returns>
-		public async Task<AspNetUserRoleDto> LoadAsync( string userId,  string roleId, bool cache, params Expression<Func<IAspNetUserRole, object>>[] includes)
+		public async Task<AspNetUserRoleDto> LoadAsync( Guid userId,  Guid roleId, bool cache, params Expression<Func<IAspNetUserRole, object>>[] includes)
         {
             return new AspNetUserRoleDto(await this.AspNetUserRoleRepository.LoadAsync( userId,  roleId, cache, includes), true);
         }
@@ -414,12 +500,12 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <summary>
         /// Load AspNetUserToken entities from the database using the composite primary keys
         /// </summary
-        /// <param name="userId">string</param>
+        /// <param name="userId">Guid</param>
         /// <param name="loginProvider">string</param>
         /// <param name="name">string</param>
         /// <param name="includes">params Expression<Func<IAspNetUserToken, object>>[]</param>
         /// <returns>AspNetUserTokenDto</returns>
-		public AspNetUserTokenDto Load( string userId,  string loginProvider,  string name, bool cache, params Expression<Func<IAspNetUserToken, object>>[] includes)
+		public AspNetUserTokenDto Load( Guid userId,  string loginProvider,  string name, bool cache, params Expression<Func<IAspNetUserToken, object>>[] includes)
         {
             return new AspNetUserTokenDto(this.AspNetUserTokenRepository.Load( userId,  loginProvider,  name, cache, includes), true);
         }
@@ -427,12 +513,12 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <summary>
         /// Load AspNetUserToken Async entities from the database using the composite primary keys
         /// </summary
-        /// <param name="userId">string</param>
+        /// <param name="userId">Guid</param>
         /// <param name="loginProvider">string</param>
         /// <param name="name">string</param>
         /// <param name="includes">params Expression<Func<IAspNetUserToken, object>>[]</param>
         /// <returns>AspNetUserTokenDto</returns>
-		public async Task<AspNetUserTokenDto> LoadAsync( string userId,  string loginProvider,  string name, bool cache, params Expression<Func<IAspNetUserToken, object>>[] includes)
+		public async Task<AspNetUserTokenDto> LoadAsync( Guid userId,  string loginProvider,  string name, bool cache, params Expression<Func<IAspNetUserToken, object>>[] includes)
         {
             return new AspNetUserTokenDto(await this.AspNetUserTokenRepository.LoadAsync( userId,  loginProvider,  name, cache, includes), true);
         }
@@ -456,92 +542,6 @@ namespace DotNetScaffolder.Domain.ApplicationService
 		public async Task<IList<AspNetUserTokenDto>> AspNetUserTokenLoadAllAsync(bool cache, params Expression<Func<IAspNetUserToken, object>>[] includes)
         {
             return this.ConvertAspNetUserTokenEntityToDto( await this.AspNetUserTokenRepository.LoadAllAsync(cache, includes));
-        }
-
-
-        /// <summary>
-        /// Load AllowedScope entities from the database using the primary key
-        /// </summary
-        /// <param name="id">int</param>
-        /// <returns>AllowedScopeDto</returns>
-        /// <param name="includes">params Expression<Func<IAllowedScope, object>>[]</param>
-		public AllowedScopeDto LoadByAllowedScopeId(int id, bool cache, params Expression<Func<IAllowedScope, object>>[] includes)
-        {
-            return new AllowedScopeDto(this.AllowedScopeRepository.LoadById(id, cache, includes), true);
-        }
-
-        /// <summary>
-        /// Load AllowedScope Async entities from the database using the primary key
-        /// </summary
-        /// <param name="id">int</param>
-        /// <returns>AllowedScopeDto</returns>
-        /// <param name="includes">params Expression<Func<IAllowedScope, object>>[]</param>
-		public async Task<AllowedScopeDto> LoadByAllowedScopeIdAsync(int id, bool cache, params Expression<Func<IAllowedScope, object>>[] includes)
-        {
-            return new AllowedScopeDto(await this.AllowedScopeRepository.LoadByIdAsync(id, cache, includes), true);
-        }
-
-        /// <summary>
-        /// Load all AllowedScope entities from the database.
-        /// </summary>
-        /// <param name="includes">params Expression<Func<IAllowedScope, object>>[]</param>
-        /// <returns>IList<AllowedScopeDto></returns>
-		public IList<AllowedScopeDto> AllowedScopeLoadAll(bool cache, params Expression<Func<IAllowedScope, object>>[] includes)
-        {
-            return this.ConvertAllowedScopeEntityToDto(this.AllowedScopeRepository.LoadAll(cache, includes));
-        }
-
-        /// <summary>
-        /// Load all AllowedScope Async entities from the database.
-        /// </summary>
-        /// <param name="includes">params Expression<Func<IAllowedScope, object>>[]</param>
-        /// <returns>IList<AllowedScopeDto></returns>
-		public async Task<IList<AllowedScopeDto>> AllowedScopeLoadAllAsync(bool cache, params Expression<Func<IAllowedScope, object>>[] includes)
-        {
-            return this.ConvertAllowedScopeEntityToDto( await this.AllowedScopeRepository.LoadAllAsync(cache, includes));
-        }
-
-
-        /// <summary>
-        /// Load ApiResource entities from the database using the primary key
-        /// </summary
-        /// <param name="id">int</param>
-        /// <returns>ApiResourceDto</returns>
-        /// <param name="includes">params Expression<Func<IApiResource, object>>[]</param>
-		public ApiResourceDto LoadByApiResourceId(int id, bool cache, params Expression<Func<IApiResource, object>>[] includes)
-        {
-            return new ApiResourceDto(this.ApiResourceRepository.LoadById(id, cache, includes), true);
-        }
-
-        /// <summary>
-        /// Load ApiResource Async entities from the database using the primary key
-        /// </summary
-        /// <param name="id">int</param>
-        /// <returns>ApiResourceDto</returns>
-        /// <param name="includes">params Expression<Func<IApiResource, object>>[]</param>
-		public async Task<ApiResourceDto> LoadByApiResourceIdAsync(int id, bool cache, params Expression<Func<IApiResource, object>>[] includes)
-        {
-            return new ApiResourceDto(await this.ApiResourceRepository.LoadByIdAsync(id, cache, includes), true);
-        }
-
-        /// <summary>
-        /// Load all ApiResource entities from the database.
-        /// </summary>
-        /// <param name="includes">params Expression<Func<IApiResource, object>>[]</param>
-        /// <returns>IList<ApiResourceDto></returns>
-		public IList<ApiResourceDto> ApiResourceLoadAll(bool cache, params Expression<Func<IApiResource, object>>[] includes)
-        {
-            return this.ConvertApiResourceEntityToDto(this.ApiResourceRepository.LoadAll(cache, includes));
-        }
-
-        /// <summary>
-        /// Load all ApiResource Async entities from the database.
-        /// </summary>
-        /// <param name="includes">params Expression<Func<IApiResource, object>>[]</param>
-        /// <returns>IList<ApiResourceDto></returns>
-		public async Task<IList<ApiResourceDto>> ApiResourceLoadAllAsync(bool cache, params Expression<Func<IApiResource, object>>[] includes)
-        {
-            return this.ConvertApiResourceEntityToDto( await this.ApiResourceRepository.LoadAllAsync(cache, includes));
         }
 
 
@@ -900,6 +900,81 @@ namespace DotNetScaffolder.Domain.ApplicationService
         #region Search
 
         /// <summary>
+        /// Search for AllowedScope entities in the database by ResourceName
+        /// </summary>
+        /// <param name="resourceName">string</param>
+		/// <param name="caseSensitive">bool</param>
+        /// <param name="includes">params Expression<Func<IAllowedScope, object>>[]</param>
+        /// <returns>IList<AllowedScopeDto></returns>
+		public IList<AllowedScopeDto> AllowedScopeSearchByResourceName(string resourceName, bool caseSensitive, bool cache, params Expression<Func<IAllowedScope, object>>[] includes)
+        {
+            return this.ConvertAllowedScopeEntityToDto(this.AllowedScopeRepository.SearchByResourceName(resourceName,caseSensitive, cache, includes));
+        }
+
+        /// <summary>
+        /// Search for AllowedScope Async entities in the database by ResourceName
+        /// </summary>
+        /// <param name="resourceName">string</param>
+		/// <param name="caseSensitive">bool</param>
+        /// <param name="includes">params Expression<Func<IAllowedScope, object>>[]</param>
+        /// <returns>IList<AllowedScopeDto></returns>
+		public async Task<IList<AllowedScopeDto>> AllowedScopeSearchByResourceNameAsync(string resourceName, bool caseSensitive, bool cache, params Expression<Func<IAllowedScope, object>>[] includes)
+        {
+            return this.ConvertAllowedScopeEntityToDto(await this.AllowedScopeRepository.SearchByResourceNameAsync(resourceName,caseSensitive, cache, includes));
+        }
+
+
+        /// <summary>
+        /// Search for ApiResource entities in the database by Name
+        /// </summary>
+        /// <param name="name">string</param>
+		/// <param name="caseSensitive">bool</param>
+        /// <param name="includes">params Expression<Func<IApiResource, object>>[]</param>
+        /// <returns>IList<ApiResourceDto></returns>
+		public IList<ApiResourceDto> ApiResourceSearchByName(string name, bool caseSensitive, bool cache, params Expression<Func<IApiResource, object>>[] includes)
+        {
+            return this.ConvertApiResourceEntityToDto(this.ApiResourceRepository.SearchByName(name,caseSensitive, cache, includes));
+        }
+
+        /// <summary>
+        /// Search for ApiResource Async entities in the database by Name
+        /// </summary>
+        /// <param name="name">string</param>
+		/// <param name="caseSensitive">bool</param>
+        /// <param name="includes">params Expression<Func<IApiResource, object>>[]</param>
+        /// <returns>IList<ApiResourceDto></returns>
+		public async Task<IList<ApiResourceDto>> ApiResourceSearchByNameAsync(string name, bool caseSensitive, bool cache, params Expression<Func<IApiResource, object>>[] includes)
+        {
+            return this.ConvertApiResourceEntityToDto(await this.ApiResourceRepository.SearchByNameAsync(name,caseSensitive, cache, includes));
+        }
+
+
+        /// <summary>
+        /// Search for ApiResource entities in the database by DisplayName
+        /// </summary>
+        /// <param name="displayName">string</param>
+		/// <param name="caseSensitive">bool</param>
+        /// <param name="includes">params Expression<Func<IApiResource, object>>[]</param>
+        /// <returns>IList<ApiResourceDto></returns>
+		public IList<ApiResourceDto> ApiResourceSearchByDisplayName(string displayName, bool caseSensitive, bool cache, params Expression<Func<IApiResource, object>>[] includes)
+        {
+            return this.ConvertApiResourceEntityToDto(this.ApiResourceRepository.SearchByDisplayName(displayName,caseSensitive, cache, includes));
+        }
+
+        /// <summary>
+        /// Search for ApiResource Async entities in the database by DisplayName
+        /// </summary>
+        /// <param name="displayName">string</param>
+		/// <param name="caseSensitive">bool</param>
+        /// <param name="includes">params Expression<Func<IApiResource, object>>[]</param>
+        /// <returns>IList<ApiResourceDto></returns>
+		public async Task<IList<ApiResourceDto>> ApiResourceSearchByDisplayNameAsync(string displayName, bool caseSensitive, bool cache, params Expression<Func<IApiResource, object>>[] includes)
+        {
+            return this.ConvertApiResourceEntityToDto(await this.ApiResourceRepository.SearchByDisplayNameAsync(displayName,caseSensitive, cache, includes));
+        }
+
+
+        /// <summary>
         /// Search for AspNetRole entities in the database by Name
         /// </summary>
         /// <param name="name">string</param>
@@ -971,31 +1046,6 @@ namespace DotNetScaffolder.Domain.ApplicationService
 		public async Task<IList<AspNetRoleDto>> AspNetRoleSearchByConcurrencyStampAsync(string concurrencyStamp, bool caseSensitive, bool cache, params Expression<Func<IAspNetRole, object>>[] includes)
         {
             return this.ConvertAspNetRoleEntityToDto(await this.AspNetRoleRepository.SearchByConcurrencyStampAsync(concurrencyStamp,caseSensitive, cache, includes));
-        }
-
-
-        /// <summary>
-        /// Search for AspNetRoleClaim entities in the database by RoleId
-        /// </summary>
-        /// <param name="roleId">string</param>
-		/// <param name="caseSensitive">bool</param>
-        /// <param name="includes">params Expression<Func<IAspNetRoleClaim, object>>[]</param>
-        /// <returns>IList<AspNetRoleClaimDto></returns>
-		public IList<AspNetRoleClaimDto> AspNetRoleClaimSearchByRoleId(string roleId, bool caseSensitive, bool cache, params Expression<Func<IAspNetRoleClaim, object>>[] includes)
-        {
-            return this.ConvertAspNetRoleClaimEntityToDto(this.AspNetRoleClaimRepository.SearchByRoleId(roleId,caseSensitive, cache, includes));
-        }
-
-        /// <summary>
-        /// Search for AspNetRoleClaim Async entities in the database by RoleId
-        /// </summary>
-        /// <param name="roleId">string</param>
-		/// <param name="caseSensitive">bool</param>
-        /// <param name="includes">params Expression<Func<IAspNetRoleClaim, object>>[]</param>
-        /// <returns>IList<AspNetRoleClaimDto></returns>
-		public async Task<IList<AspNetRoleClaimDto>> AspNetRoleClaimSearchByRoleIdAsync(string roleId, bool caseSensitive, bool cache, params Expression<Func<IAspNetRoleClaim, object>>[] includes)
-        {
-            return this.ConvertAspNetRoleClaimEntityToDto(await this.AspNetRoleClaimRepository.SearchByRoleIdAsync(roleId,caseSensitive, cache, includes));
         }
 
 
@@ -1250,31 +1300,6 @@ namespace DotNetScaffolder.Domain.ApplicationService
 
 
         /// <summary>
-        /// Search for AspNetUserClaim entities in the database by UserId
-        /// </summary>
-        /// <param name="userId">string</param>
-		/// <param name="caseSensitive">bool</param>
-        /// <param name="includes">params Expression<Func<IAspNetUserClaim, object>>[]</param>
-        /// <returns>IList<AspNetUserClaimDto></returns>
-		public IList<AspNetUserClaimDto> AspNetUserClaimSearchByUserId(string userId, bool caseSensitive, bool cache, params Expression<Func<IAspNetUserClaim, object>>[] includes)
-        {
-            return this.ConvertAspNetUserClaimEntityToDto(this.AspNetUserClaimRepository.SearchByUserId(userId,caseSensitive, cache, includes));
-        }
-
-        /// <summary>
-        /// Search for AspNetUserClaim Async entities in the database by UserId
-        /// </summary>
-        /// <param name="userId">string</param>
-		/// <param name="caseSensitive">bool</param>
-        /// <param name="includes">params Expression<Func<IAspNetUserClaim, object>>[]</param>
-        /// <returns>IList<AspNetUserClaimDto></returns>
-		public async Task<IList<AspNetUserClaimDto>> AspNetUserClaimSearchByUserIdAsync(string userId, bool caseSensitive, bool cache, params Expression<Func<IAspNetUserClaim, object>>[] includes)
-        {
-            return this.ConvertAspNetUserClaimEntityToDto(await this.AspNetUserClaimRepository.SearchByUserIdAsync(userId,caseSensitive, cache, includes));
-        }
-
-
-        /// <summary>
         /// Search for AspNetUserClaim entities in the database by ClaimType
         /// </summary>
         /// <param name="claimType">string</param>
@@ -1350,31 +1375,6 @@ namespace DotNetScaffolder.Domain.ApplicationService
 
 
         /// <summary>
-        /// Search for AspNetUserLogin entities in the database by UserId
-        /// </summary>
-        /// <param name="userId">string</param>
-		/// <param name="caseSensitive">bool</param>
-        /// <param name="includes">params Expression<Func<IAspNetUserLogin, object>>[]</param>
-        /// <returns>IList<AspNetUserLoginDto></returns>
-		public IList<AspNetUserLoginDto> AspNetUserLoginSearchByUserId(string userId, bool caseSensitive, bool cache, params Expression<Func<IAspNetUserLogin, object>>[] includes)
-        {
-            return this.ConvertAspNetUserLoginEntityToDto(this.AspNetUserLoginRepository.SearchByUserId(userId,caseSensitive, cache, includes));
-        }
-
-        /// <summary>
-        /// Search for AspNetUserLogin Async entities in the database by UserId
-        /// </summary>
-        /// <param name="userId">string</param>
-		/// <param name="caseSensitive">bool</param>
-        /// <param name="includes">params Expression<Func<IAspNetUserLogin, object>>[]</param>
-        /// <returns>IList<AspNetUserLoginDto></returns>
-		public async Task<IList<AspNetUserLoginDto>> AspNetUserLoginSearchByUserIdAsync(string userId, bool caseSensitive, bool cache, params Expression<Func<IAspNetUserLogin, object>>[] includes)
-        {
-            return this.ConvertAspNetUserLoginEntityToDto(await this.AspNetUserLoginRepository.SearchByUserIdAsync(userId,caseSensitive, cache, includes));
-        }
-
-
-        /// <summary>
         /// Search for AspNetUserToken entities in the database by Value
         /// </summary>
         /// <param name="value">string</param>
@@ -1396,81 +1396,6 @@ namespace DotNetScaffolder.Domain.ApplicationService
 		public async Task<IList<AspNetUserTokenDto>> AspNetUserTokenSearchByValueAsync(string value, bool caseSensitive, bool cache, params Expression<Func<IAspNetUserToken, object>>[] includes)
         {
             return this.ConvertAspNetUserTokenEntityToDto(await this.AspNetUserTokenRepository.SearchByValueAsync(value,caseSensitive, cache, includes));
-        }
-
-
-        /// <summary>
-        /// Search for AllowedScope entities in the database by ResourceName
-        /// </summary>
-        /// <param name="resourceName">string</param>
-		/// <param name="caseSensitive">bool</param>
-        /// <param name="includes">params Expression<Func<IAllowedScope, object>>[]</param>
-        /// <returns>IList<AllowedScopeDto></returns>
-		public IList<AllowedScopeDto> AllowedScopeSearchByResourceName(string resourceName, bool caseSensitive, bool cache, params Expression<Func<IAllowedScope, object>>[] includes)
-        {
-            return this.ConvertAllowedScopeEntityToDto(this.AllowedScopeRepository.SearchByResourceName(resourceName,caseSensitive, cache, includes));
-        }
-
-        /// <summary>
-        /// Search for AllowedScope Async entities in the database by ResourceName
-        /// </summary>
-        /// <param name="resourceName">string</param>
-		/// <param name="caseSensitive">bool</param>
-        /// <param name="includes">params Expression<Func<IAllowedScope, object>>[]</param>
-        /// <returns>IList<AllowedScopeDto></returns>
-		public async Task<IList<AllowedScopeDto>> AllowedScopeSearchByResourceNameAsync(string resourceName, bool caseSensitive, bool cache, params Expression<Func<IAllowedScope, object>>[] includes)
-        {
-            return this.ConvertAllowedScopeEntityToDto(await this.AllowedScopeRepository.SearchByResourceNameAsync(resourceName,caseSensitive, cache, includes));
-        }
-
-
-        /// <summary>
-        /// Search for ApiResource entities in the database by Name
-        /// </summary>
-        /// <param name="name">string</param>
-		/// <param name="caseSensitive">bool</param>
-        /// <param name="includes">params Expression<Func<IApiResource, object>>[]</param>
-        /// <returns>IList<ApiResourceDto></returns>
-		public IList<ApiResourceDto> ApiResourceSearchByName(string name, bool caseSensitive, bool cache, params Expression<Func<IApiResource, object>>[] includes)
-        {
-            return this.ConvertApiResourceEntityToDto(this.ApiResourceRepository.SearchByName(name,caseSensitive, cache, includes));
-        }
-
-        /// <summary>
-        /// Search for ApiResource Async entities in the database by Name
-        /// </summary>
-        /// <param name="name">string</param>
-		/// <param name="caseSensitive">bool</param>
-        /// <param name="includes">params Expression<Func<IApiResource, object>>[]</param>
-        /// <returns>IList<ApiResourceDto></returns>
-		public async Task<IList<ApiResourceDto>> ApiResourceSearchByNameAsync(string name, bool caseSensitive, bool cache, params Expression<Func<IApiResource, object>>[] includes)
-        {
-            return this.ConvertApiResourceEntityToDto(await this.ApiResourceRepository.SearchByNameAsync(name,caseSensitive, cache, includes));
-        }
-
-
-        /// <summary>
-        /// Search for ApiResource entities in the database by DisplayName
-        /// </summary>
-        /// <param name="displayName">string</param>
-		/// <param name="caseSensitive">bool</param>
-        /// <param name="includes">params Expression<Func<IApiResource, object>>[]</param>
-        /// <returns>IList<ApiResourceDto></returns>
-		public IList<ApiResourceDto> ApiResourceSearchByDisplayName(string displayName, bool caseSensitive, bool cache, params Expression<Func<IApiResource, object>>[] includes)
-        {
-            return this.ConvertApiResourceEntityToDto(this.ApiResourceRepository.SearchByDisplayName(displayName,caseSensitive, cache, includes));
-        }
-
-        /// <summary>
-        /// Search for ApiResource Async entities in the database by DisplayName
-        /// </summary>
-        /// <param name="displayName">string</param>
-		/// <param name="caseSensitive">bool</param>
-        /// <param name="includes">params Expression<Func<IApiResource, object>>[]</param>
-        /// <returns>IList<ApiResourceDto></returns>
-		public async Task<IList<ApiResourceDto>> ApiResourceSearchByDisplayNameAsync(string displayName, bool caseSensitive, bool cache, params Expression<Func<IApiResource, object>>[] includes)
-        {
-            return this.ConvertApiResourceEntityToDto(await this.ApiResourceRepository.SearchByDisplayNameAsync(displayName,caseSensitive, cache, includes));
         }
 
 
@@ -1678,6 +1603,168 @@ namespace DotNetScaffolder.Domain.ApplicationService
 		#region Modifiers
 		
         /// <summary>
+        /// Add the AllowedScope entity to the database.
+        /// </summary>
+        /// <param name="entity">IAllowedScope</param>
+        /// <returns>bool</returns>
+		public bool AllowedScopeAdd(AllowedScopeDto entity)
+        {
+            return this.AllowedScopeRepository.Add(new AllowedScope(entity, true));
+        }
+
+        /// <summary>
+        /// Add the AllowedScope entity async to the database.
+        /// </summary>
+        /// <param name="entity">IAllowedScope</param>
+        /// <returns>bool</returns>
+		public async Task<bool> AllowedScopeAddAsync(AllowedScopeDto entity)
+        {
+            return await this.AllowedScopeRepository.AddAsync(new AllowedScope(entity, true));
+        }
+
+        /// <summary>
+        /// Update the AllowedScope entity in the database if any values have changed
+        /// </summary>
+        /// <param name="entity">IAllowedScope</param>
+        /// <returns>bool</returns>
+		public bool AllowedScopeUpdate(AllowedScopeDto entity)
+        {
+            return this.AllowedScopeRepository.Update(new AllowedScope(entity, true));
+        }
+		
+        /// <summary>
+        /// Update the AllowedScope entity async in the database if any values have changed
+        /// </summary>
+        /// <param name="entity">IAllowedScope</param>
+        /// <returns>bool</returns>
+		public async Task<bool> AllowedScopeUpdateAsync(AllowedScopeDto entity)
+        {
+            return await this.AllowedScopeRepository.UpdateAsync(new AllowedScope(entity, true));
+        }
+
+        /// <summary>
+        /// Delete the AllowedScope entity from the database
+        /// </summary>
+        /// <param name="entity">IAllowedScope</param>
+        /// <returns>bool</returns>
+		public bool AllowedScopeDelete(AllowedScopeDto entity)
+        {
+            return this.AllowedScopeRepository.Delete(new AllowedScope(entity, true));
+        }
+
+        /// <summary>
+        /// Delete the AllowedScope entity async from the database
+        /// </summary>
+        /// <param name="entity">IAllowedScope</param>
+        /// <returns>bool</returns>
+		public async Task<bool> AllowedScopeDeleteAsync(AllowedScopeDto entity)
+        {
+            return await this.AllowedScopeRepository.DeleteAsync(new AllowedScope(entity, true));
+        }
+
+		/// <summary>
+        /// Delete the AllowedScope entity from the database
+        /// </summary>
+        /// <param name="id">int</param>
+        /// <returns>bool</returns>
+		public bool AllowedScopeDelete( int id, bool cache)
+        {
+            return this.AllowedScopeRepository.Delete( id, cache);
+        }
+
+        /// <summary>
+        /// Delete the AllowedScope entity async from the database
+        /// </summary>
+        /// <param name="id">int</param>
+        /// <returns>bool</returns>
+		public async Task<bool> AllowedScopeDeleteAsync( int id, bool cache)
+        {
+            return await this.AllowedScopeRepository.DeleteAsync( id, cache);
+        }
+
+		
+        /// <summary>
+        /// Add the ApiResource entity to the database.
+        /// </summary>
+        /// <param name="entity">IApiResource</param>
+        /// <returns>bool</returns>
+		public bool ApiResourceAdd(ApiResourceDto entity)
+        {
+            return this.ApiResourceRepository.Add(new ApiResource(entity, true));
+        }
+
+        /// <summary>
+        /// Add the ApiResource entity async to the database.
+        /// </summary>
+        /// <param name="entity">IApiResource</param>
+        /// <returns>bool</returns>
+		public async Task<bool> ApiResourceAddAsync(ApiResourceDto entity)
+        {
+            return await this.ApiResourceRepository.AddAsync(new ApiResource(entity, true));
+        }
+
+        /// <summary>
+        /// Update the ApiResource entity in the database if any values have changed
+        /// </summary>
+        /// <param name="entity">IApiResource</param>
+        /// <returns>bool</returns>
+		public bool ApiResourceUpdate(ApiResourceDto entity)
+        {
+            return this.ApiResourceRepository.Update(new ApiResource(entity, true));
+        }
+		
+        /// <summary>
+        /// Update the ApiResource entity async in the database if any values have changed
+        /// </summary>
+        /// <param name="entity">IApiResource</param>
+        /// <returns>bool</returns>
+		public async Task<bool> ApiResourceUpdateAsync(ApiResourceDto entity)
+        {
+            return await this.ApiResourceRepository.UpdateAsync(new ApiResource(entity, true));
+        }
+
+        /// <summary>
+        /// Delete the ApiResource entity from the database
+        /// </summary>
+        /// <param name="entity">IApiResource</param>
+        /// <returns>bool</returns>
+		public bool ApiResourceDelete(ApiResourceDto entity)
+        {
+            return this.ApiResourceRepository.Delete(new ApiResource(entity, true));
+        }
+
+        /// <summary>
+        /// Delete the ApiResource entity async from the database
+        /// </summary>
+        /// <param name="entity">IApiResource</param>
+        /// <returns>bool</returns>
+		public async Task<bool> ApiResourceDeleteAsync(ApiResourceDto entity)
+        {
+            return await this.ApiResourceRepository.DeleteAsync(new ApiResource(entity, true));
+        }
+
+		/// <summary>
+        /// Delete the ApiResource entity from the database
+        /// </summary>
+        /// <param name="id">int</param>
+        /// <returns>bool</returns>
+		public bool ApiResourceDelete( int id, bool cache)
+        {
+            return this.ApiResourceRepository.Delete( id, cache);
+        }
+
+        /// <summary>
+        /// Delete the ApiResource entity async from the database
+        /// </summary>
+        /// <param name="id">int</param>
+        /// <returns>bool</returns>
+		public async Task<bool> ApiResourceDeleteAsync( int id, bool cache)
+        {
+            return await this.ApiResourceRepository.DeleteAsync( id, cache);
+        }
+
+		
+        /// <summary>
         /// Add the AspNetRole entity to the database.
         /// </summary>
         /// <param name="entity">IAspNetRole</param>
@@ -1740,9 +1827,9 @@ namespace DotNetScaffolder.Domain.ApplicationService
 		/// <summary>
         /// Delete the AspNetRole entity from the database
         /// </summary>
-        /// <param name="id">string</param>
+        /// <param name="id">Guid</param>
         /// <returns>bool</returns>
-		public bool AspNetRoleDelete( string id, bool cache)
+		public bool AspNetRoleDelete( Guid id, bool cache)
         {
             return this.AspNetRoleRepository.Delete( id, cache);
         }
@@ -1750,9 +1837,9 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <summary>
         /// Delete the AspNetRole entity async from the database
         /// </summary>
-        /// <param name="id">string</param>
+        /// <param name="id">Guid</param>
         /// <returns>bool</returns>
-		public async Task<bool> AspNetRoleDeleteAsync( string id, bool cache)
+		public async Task<bool> AspNetRoleDeleteAsync( Guid id, bool cache)
         {
             return await this.AspNetRoleRepository.DeleteAsync( id, cache);
         }
@@ -1902,9 +1989,9 @@ namespace DotNetScaffolder.Domain.ApplicationService
 		/// <summary>
         /// Delete the AspNetUser entity from the database
         /// </summary>
-        /// <param name="id">string</param>
+        /// <param name="id">Guid</param>
         /// <returns>bool</returns>
-		public bool AspNetUserDelete( string id, bool cache)
+		public bool AspNetUserDelete( Guid id, bool cache)
         {
             return this.AspNetUserRepository.Delete( id, cache);
         }
@@ -1912,9 +1999,9 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <summary>
         /// Delete the AspNetUser entity async from the database
         /// </summary>
-        /// <param name="id">string</param>
+        /// <param name="id">Guid</param>
         /// <returns>bool</returns>
-		public async Task<bool> AspNetUserDeleteAsync( string id, bool cache)
+		public async Task<bool> AspNetUserDeleteAsync( Guid id, bool cache)
         {
             return await this.AspNetUserRepository.DeleteAsync( id, cache);
         }
@@ -2147,10 +2234,10 @@ namespace DotNetScaffolder.Domain.ApplicationService
 		/// <summary>
         /// Delete the AspNetUserRole entity from the database
         /// </summary>
-        /// <param name="userId">string</param>
-        /// <param name="roleId">string</param>
+        /// <param name="userId">Guid</param>
+        /// <param name="roleId">Guid</param>
         /// <returns>bool</returns>
-		public bool AspNetUserRoleDelete( string userId,  string roleId, bool cache)
+		public bool AspNetUserRoleDelete( Guid userId,  Guid roleId, bool cache)
         {
             return this.AspNetUserRoleRepository.Delete( userId,  roleId, cache);
         }
@@ -2158,10 +2245,10 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <summary>
         /// Delete the AspNetUserRole entity async from the database
         /// </summary>
-        /// <param name="userId">string</param>
-        /// <param name="roleId">string</param>
+        /// <param name="userId">Guid</param>
+        /// <param name="roleId">Guid</param>
         /// <returns>bool</returns>
-		public async Task<bool> AspNetUserRoleDeleteAsync( string userId,  string roleId, bool cache)
+		public async Task<bool> AspNetUserRoleDeleteAsync( Guid userId,  Guid roleId, bool cache)
         {
             return await this.AspNetUserRoleRepository.DeleteAsync( userId,  roleId, cache);
         }
@@ -2230,11 +2317,11 @@ namespace DotNetScaffolder.Domain.ApplicationService
 		/// <summary>
         /// Delete the AspNetUserToken entity from the database
         /// </summary>
-        /// <param name="userId">string</param>
+        /// <param name="userId">Guid</param>
         /// <param name="loginProvider">string</param>
         /// <param name="name">string</param>
         /// <returns>bool</returns>
-		public bool AspNetUserTokenDelete( string userId,  string loginProvider,  string name, bool cache)
+		public bool AspNetUserTokenDelete( Guid userId,  string loginProvider,  string name, bool cache)
         {
             return this.AspNetUserTokenRepository.Delete( userId,  loginProvider,  name, cache);
         }
@@ -2242,175 +2329,13 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <summary>
         /// Delete the AspNetUserToken entity async from the database
         /// </summary>
-        /// <param name="userId">string</param>
+        /// <param name="userId">Guid</param>
         /// <param name="loginProvider">string</param>
         /// <param name="name">string</param>
         /// <returns>bool</returns>
-		public async Task<bool> AspNetUserTokenDeleteAsync( string userId,  string loginProvider,  string name, bool cache)
+		public async Task<bool> AspNetUserTokenDeleteAsync( Guid userId,  string loginProvider,  string name, bool cache)
         {
             return await this.AspNetUserTokenRepository.DeleteAsync( userId,  loginProvider,  name, cache);
-        }
-
-		
-        /// <summary>
-        /// Add the AllowedScope entity to the database.
-        /// </summary>
-        /// <param name="entity">IAllowedScope</param>
-        /// <returns>bool</returns>
-		public bool AllowedScopeAdd(AllowedScopeDto entity)
-        {
-            return this.AllowedScopeRepository.Add(new AllowedScope(entity, true));
-        }
-
-        /// <summary>
-        /// Add the AllowedScope entity async to the database.
-        /// </summary>
-        /// <param name="entity">IAllowedScope</param>
-        /// <returns>bool</returns>
-		public async Task<bool> AllowedScopeAddAsync(AllowedScopeDto entity)
-        {
-            return await this.AllowedScopeRepository.AddAsync(new AllowedScope(entity, true));
-        }
-
-        /// <summary>
-        /// Update the AllowedScope entity in the database if any values have changed
-        /// </summary>
-        /// <param name="entity">IAllowedScope</param>
-        /// <returns>bool</returns>
-		public bool AllowedScopeUpdate(AllowedScopeDto entity)
-        {
-            return this.AllowedScopeRepository.Update(new AllowedScope(entity, true));
-        }
-		
-        /// <summary>
-        /// Update the AllowedScope entity async in the database if any values have changed
-        /// </summary>
-        /// <param name="entity">IAllowedScope</param>
-        /// <returns>bool</returns>
-		public async Task<bool> AllowedScopeUpdateAsync(AllowedScopeDto entity)
-        {
-            return await this.AllowedScopeRepository.UpdateAsync(new AllowedScope(entity, true));
-        }
-
-        /// <summary>
-        /// Delete the AllowedScope entity from the database
-        /// </summary>
-        /// <param name="entity">IAllowedScope</param>
-        /// <returns>bool</returns>
-		public bool AllowedScopeDelete(AllowedScopeDto entity)
-        {
-            return this.AllowedScopeRepository.Delete(new AllowedScope(entity, true));
-        }
-
-        /// <summary>
-        /// Delete the AllowedScope entity async from the database
-        /// </summary>
-        /// <param name="entity">IAllowedScope</param>
-        /// <returns>bool</returns>
-		public async Task<bool> AllowedScopeDeleteAsync(AllowedScopeDto entity)
-        {
-            return await this.AllowedScopeRepository.DeleteAsync(new AllowedScope(entity, true));
-        }
-
-		/// <summary>
-        /// Delete the AllowedScope entity from the database
-        /// </summary>
-        /// <param name="id">int</param>
-        /// <returns>bool</returns>
-		public bool AllowedScopeDelete( int id, bool cache)
-        {
-            return this.AllowedScopeRepository.Delete( id, cache);
-        }
-
-        /// <summary>
-        /// Delete the AllowedScope entity async from the database
-        /// </summary>
-        /// <param name="id">int</param>
-        /// <returns>bool</returns>
-		public async Task<bool> AllowedScopeDeleteAsync( int id, bool cache)
-        {
-            return await this.AllowedScopeRepository.DeleteAsync( id, cache);
-        }
-
-		
-        /// <summary>
-        /// Add the ApiResource entity to the database.
-        /// </summary>
-        /// <param name="entity">IApiResource</param>
-        /// <returns>bool</returns>
-		public bool ApiResourceAdd(ApiResourceDto entity)
-        {
-            return this.ApiResourceRepository.Add(new ApiResource(entity, true));
-        }
-
-        /// <summary>
-        /// Add the ApiResource entity async to the database.
-        /// </summary>
-        /// <param name="entity">IApiResource</param>
-        /// <returns>bool</returns>
-		public async Task<bool> ApiResourceAddAsync(ApiResourceDto entity)
-        {
-            return await this.ApiResourceRepository.AddAsync(new ApiResource(entity, true));
-        }
-
-        /// <summary>
-        /// Update the ApiResource entity in the database if any values have changed
-        /// </summary>
-        /// <param name="entity">IApiResource</param>
-        /// <returns>bool</returns>
-		public bool ApiResourceUpdate(ApiResourceDto entity)
-        {
-            return this.ApiResourceRepository.Update(new ApiResource(entity, true));
-        }
-		
-        /// <summary>
-        /// Update the ApiResource entity async in the database if any values have changed
-        /// </summary>
-        /// <param name="entity">IApiResource</param>
-        /// <returns>bool</returns>
-		public async Task<bool> ApiResourceUpdateAsync(ApiResourceDto entity)
-        {
-            return await this.ApiResourceRepository.UpdateAsync(new ApiResource(entity, true));
-        }
-
-        /// <summary>
-        /// Delete the ApiResource entity from the database
-        /// </summary>
-        /// <param name="entity">IApiResource</param>
-        /// <returns>bool</returns>
-		public bool ApiResourceDelete(ApiResourceDto entity)
-        {
-            return this.ApiResourceRepository.Delete(new ApiResource(entity, true));
-        }
-
-        /// <summary>
-        /// Delete the ApiResource entity async from the database
-        /// </summary>
-        /// <param name="entity">IApiResource</param>
-        /// <returns>bool</returns>
-		public async Task<bool> ApiResourceDeleteAsync(ApiResourceDto entity)
-        {
-            return await this.ApiResourceRepository.DeleteAsync(new ApiResource(entity, true));
-        }
-
-		/// <summary>
-        /// Delete the ApiResource entity from the database
-        /// </summary>
-        /// <param name="id">int</param>
-        /// <returns>bool</returns>
-		public bool ApiResourceDelete( int id, bool cache)
-        {
-            return this.ApiResourceRepository.Delete( id, cache);
-        }
-
-        /// <summary>
-        /// Delete the ApiResource entity async from the database
-        /// </summary>
-        /// <param name="id">int</param>
-        /// <returns>bool</returns>
-		public async Task<bool> ApiResourceDeleteAsync( int id, bool cache)
-        {
-            return await this.ApiResourceRepository.DeleteAsync( id, cache);
         }
 
 		
@@ -3073,6 +2998,94 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// Returns the max value 
         /// </summary>
         /// <typeparam name="TResult">TResult</typeparam>
+        /// <param name="maxExpression">Expression<Func<IAllowedScope, TResult>> maxExpression</param>
+        /// <returns></returns>
+        public TResult AllowedScopeMax<TResult>(Expression<Func<IAllowedScope, TResult>> maxExpression, bool cache)
+        {
+		    return this.AllowedScopeRepository.Max(maxExpression, cache);
+        }
+
+        /// <summary>
+        /// Returns the max value async
+        /// </summary>
+        /// <typeparam name="TResult">TResult</typeparam>
+        /// <param name="maxExpression">Expression<Func<IAllowedScope, TResult>> maxExpression</param>
+        /// <returns></returns>
+		public async Task<TResult> AllowedScopeMaxAsync<TResult>(Expression<Func<IAllowedScope, TResult>> maxExpression, bool cache)
+        {
+		    return await this.AllowedScopeRepository.MaxAsync(maxExpression, cache);
+        }
+		
+        /// <summary>
+        /// Returns the min value 
+        /// </summary>
+        /// <typeparam name="TResult">TResult</typeparam>
+        /// <param name="maxExpression">Expression<Func<IAllowedScope, TResult>> maxExpression</param>
+        /// <returns></returns>
+		public TResult AllowedScopeMin<TResult>(Expression<Func<IAllowedScope, TResult>> maxExpression, bool cache)
+        {
+		    return this.AllowedScopeRepository.Min(maxExpression, cache);
+        }
+		
+        /// <summary>
+        /// Returns the min value 
+        /// </summary>
+        /// <typeparam name="TResult">TResult</typeparam>
+        /// <param name="maxExpression">Expression<Func<IAllowedScope, TResult>> maxExpression</pIaram>
+        /// <returns></returns>
+		public async Task<TResult> AllowedScopeMinAsync<TResult>(Expression<Func<IAllowedScope, TResult>> maxExpression, bool cache)
+        {
+		    return await this.AllowedScopeRepository.MinAsync(maxExpression, cache);
+        }
+
+        /// <summary>
+        /// Returns the max value 
+        /// </summary>
+        /// <typeparam name="TResult">TResult</typeparam>
+        /// <param name="maxExpression">Expression<Func<IApiResource, TResult>> maxExpression</param>
+        /// <returns></returns>
+        public TResult ApiResourceMax<TResult>(Expression<Func<IApiResource, TResult>> maxExpression, bool cache)
+        {
+		    return this.ApiResourceRepository.Max(maxExpression, cache);
+        }
+
+        /// <summary>
+        /// Returns the max value async
+        /// </summary>
+        /// <typeparam name="TResult">TResult</typeparam>
+        /// <param name="maxExpression">Expression<Func<IApiResource, TResult>> maxExpression</param>
+        /// <returns></returns>
+		public async Task<TResult> ApiResourceMaxAsync<TResult>(Expression<Func<IApiResource, TResult>> maxExpression, bool cache)
+        {
+		    return await this.ApiResourceRepository.MaxAsync(maxExpression, cache);
+        }
+		
+        /// <summary>
+        /// Returns the min value 
+        /// </summary>
+        /// <typeparam name="TResult">TResult</typeparam>
+        /// <param name="maxExpression">Expression<Func<IApiResource, TResult>> maxExpression</param>
+        /// <returns></returns>
+		public TResult ApiResourceMin<TResult>(Expression<Func<IApiResource, TResult>> maxExpression, bool cache)
+        {
+		    return this.ApiResourceRepository.Min(maxExpression, cache);
+        }
+		
+        /// <summary>
+        /// Returns the min value 
+        /// </summary>
+        /// <typeparam name="TResult">TResult</typeparam>
+        /// <param name="maxExpression">Expression<Func<IApiResource, TResult>> maxExpression</pIaram>
+        /// <returns></returns>
+		public async Task<TResult> ApiResourceMinAsync<TResult>(Expression<Func<IApiResource, TResult>> maxExpression, bool cache)
+        {
+		    return await this.ApiResourceRepository.MinAsync(maxExpression, cache);
+        }
+
+        /// <summary>
+        /// Returns the max value 
+        /// </summary>
+        /// <typeparam name="TResult">TResult</typeparam>
         /// <param name="maxExpression">Expression<Func<IAspNetRole, TResult>> maxExpression</param>
         /// <returns></returns>
         public TResult AspNetRoleMax<TResult>(Expression<Func<IAspNetRole, TResult>> maxExpression, bool cache)
@@ -3375,94 +3388,6 @@ namespace DotNetScaffolder.Domain.ApplicationService
 		public async Task<TResult> AspNetUserTokenMinAsync<TResult>(Expression<Func<IAspNetUserToken, TResult>> maxExpression, bool cache)
         {
 		    return await this.AspNetUserTokenRepository.MinAsync(maxExpression, cache);
-        }
-
-        /// <summary>
-        /// Returns the max value 
-        /// </summary>
-        /// <typeparam name="TResult">TResult</typeparam>
-        /// <param name="maxExpression">Expression<Func<IAllowedScope, TResult>> maxExpression</param>
-        /// <returns></returns>
-        public TResult AllowedScopeMax<TResult>(Expression<Func<IAllowedScope, TResult>> maxExpression, bool cache)
-        {
-		    return this.AllowedScopeRepository.Max(maxExpression, cache);
-        }
-
-        /// <summary>
-        /// Returns the max value async
-        /// </summary>
-        /// <typeparam name="TResult">TResult</typeparam>
-        /// <param name="maxExpression">Expression<Func<IAllowedScope, TResult>> maxExpression</param>
-        /// <returns></returns>
-		public async Task<TResult> AllowedScopeMaxAsync<TResult>(Expression<Func<IAllowedScope, TResult>> maxExpression, bool cache)
-        {
-		    return await this.AllowedScopeRepository.MaxAsync(maxExpression, cache);
-        }
-		
-        /// <summary>
-        /// Returns the min value 
-        /// </summary>
-        /// <typeparam name="TResult">TResult</typeparam>
-        /// <param name="maxExpression">Expression<Func<IAllowedScope, TResult>> maxExpression</param>
-        /// <returns></returns>
-		public TResult AllowedScopeMin<TResult>(Expression<Func<IAllowedScope, TResult>> maxExpression, bool cache)
-        {
-		    return this.AllowedScopeRepository.Min(maxExpression, cache);
-        }
-		
-        /// <summary>
-        /// Returns the min value 
-        /// </summary>
-        /// <typeparam name="TResult">TResult</typeparam>
-        /// <param name="maxExpression">Expression<Func<IAllowedScope, TResult>> maxExpression</pIaram>
-        /// <returns></returns>
-		public async Task<TResult> AllowedScopeMinAsync<TResult>(Expression<Func<IAllowedScope, TResult>> maxExpression, bool cache)
-        {
-		    return await this.AllowedScopeRepository.MinAsync(maxExpression, cache);
-        }
-
-        /// <summary>
-        /// Returns the max value 
-        /// </summary>
-        /// <typeparam name="TResult">TResult</typeparam>
-        /// <param name="maxExpression">Expression<Func<IApiResource, TResult>> maxExpression</param>
-        /// <returns></returns>
-        public TResult ApiResourceMax<TResult>(Expression<Func<IApiResource, TResult>> maxExpression, bool cache)
-        {
-		    return this.ApiResourceRepository.Max(maxExpression, cache);
-        }
-
-        /// <summary>
-        /// Returns the max value async
-        /// </summary>
-        /// <typeparam name="TResult">TResult</typeparam>
-        /// <param name="maxExpression">Expression<Func<IApiResource, TResult>> maxExpression</param>
-        /// <returns></returns>
-		public async Task<TResult> ApiResourceMaxAsync<TResult>(Expression<Func<IApiResource, TResult>> maxExpression, bool cache)
-        {
-		    return await this.ApiResourceRepository.MaxAsync(maxExpression, cache);
-        }
-		
-        /// <summary>
-        /// Returns the min value 
-        /// </summary>
-        /// <typeparam name="TResult">TResult</typeparam>
-        /// <param name="maxExpression">Expression<Func<IApiResource, TResult>> maxExpression</param>
-        /// <returns></returns>
-		public TResult ApiResourceMin<TResult>(Expression<Func<IApiResource, TResult>> maxExpression, bool cache)
-        {
-		    return this.ApiResourceRepository.Min(maxExpression, cache);
-        }
-		
-        /// <summary>
-        /// Returns the min value 
-        /// </summary>
-        /// <typeparam name="TResult">TResult</typeparam>
-        /// <param name="maxExpression">Expression<Func<IApiResource, TResult>> maxExpression</pIaram>
-        /// <returns></returns>
-		public async Task<TResult> ApiResourceMinAsync<TResult>(Expression<Func<IApiResource, TResult>> maxExpression, bool cache)
-        {
-		    return await this.ApiResourceRepository.MinAsync(maxExpression, cache);
         }
 
         /// <summary>
@@ -3821,6 +3746,190 @@ namespace DotNetScaffolder.Domain.ApplicationService
 
 		#region Bulk
 
+        /// <summary>
+        /// Converts a AllowedScopeDto list to AllowedScope list
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+	    private List<AllowedScope> ConvertAllowedScopeDtoToEntity(IEnumerable<AllowedScopeDto> items)
+	    {
+            List<AllowedScope> results = new List<AllowedScope>();
+
+	        foreach (var item in items)
+	        {
+	            results.Add(new AllowedScope(item, true));
+	        }
+
+	        return results;
+	    }
+
+        /// <summary>
+        /// Converts a AllowedScope list to AllowedScopeDto list
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+	    private List<AllowedScopeDto> ConvertAllowedScopeEntityToDto(IEnumerable<AllowedScope> items)
+	    {
+            List<AllowedScopeDto> results = new List<AllowedScopeDto>();
+
+	        foreach (var item in items)
+	        {
+	            results.Add(new AllowedScopeDto(item, true));
+	        }
+
+	        return results;
+	    }
+
+        /// <summary>
+        ///     Bulk delete entities
+        /// </summary>
+        /// <param name="items"></param>
+        public void AllowedScopeBulkDelete(IEnumerable<AllowedScopeDto> items)
+		{
+			this.AllowedScopeRepository.BulkDelete(this.ConvertAllowedScopeDtoToEntity(items));
+		}
+
+        /// <summary>
+        ///     Bulk delete entities async
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public async Task AllowedScopeBulkDeleteAsync(IEnumerable<AllowedScopeDto> items)
+		{
+			await this.AllowedScopeRepository.BulkDeleteAsync(this.ConvertAllowedScopeDtoToEntity(items));
+		}
+
+        /// <summary>
+        ///     Bulk insert entities
+        /// </summary>
+        /// <param name="items"></param>
+        public void  AllowedScopeBulkInsert(IEnumerable<AllowedScopeDto> items)
+		{
+			this.AllowedScopeRepository.BulkInsert(this.ConvertAllowedScopeDtoToEntity(items));
+		}
+        
+        /// <summary>
+        /// Bulk insert entities async
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public async Task  AllowedScopeBulkInsertAsync(IEnumerable<AllowedScopeDto> items)
+		{
+			await this.AllowedScopeRepository.BulkInsertAsync(this.ConvertAllowedScopeDtoToEntity(items));
+		}
+
+        /// <summary>
+        /// Bulk update entities 
+        /// </summary>
+        /// <param name="items"></param>
+        public void  AllowedScopeBulkUpdate(IEnumerable<AllowedScopeDto> items)
+		{
+			this.AllowedScopeRepository.BulkUpdate(this.ConvertAllowedScopeDtoToEntity(items));
+		}
+
+        /// <summary>
+        /// Bulk update entities async
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public async Task  AllowedScopeBulkUpdateAsync(IEnumerable<AllowedScopeDto> items)
+		{
+			await this.AllowedScopeRepository.BulkUpdateAsync(this.ConvertAllowedScopeDtoToEntity(items));
+		}
+
+        
+        /// <summary>
+        /// Converts a ApiResourceDto list to ApiResource list
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+	    private List<ApiResource> ConvertApiResourceDtoToEntity(IEnumerable<ApiResourceDto> items)
+	    {
+            List<ApiResource> results = new List<ApiResource>();
+
+	        foreach (var item in items)
+	        {
+	            results.Add(new ApiResource(item, true));
+	        }
+
+	        return results;
+	    }
+
+        /// <summary>
+        /// Converts a ApiResource list to ApiResourceDto list
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+	    private List<ApiResourceDto> ConvertApiResourceEntityToDto(IEnumerable<ApiResource> items)
+	    {
+            List<ApiResourceDto> results = new List<ApiResourceDto>();
+
+	        foreach (var item in items)
+	        {
+	            results.Add(new ApiResourceDto(item, true));
+	        }
+
+	        return results;
+	    }
+
+        /// <summary>
+        ///     Bulk delete entities
+        /// </summary>
+        /// <param name="items"></param>
+        public void ApiResourceBulkDelete(IEnumerable<ApiResourceDto> items)
+		{
+			this.ApiResourceRepository.BulkDelete(this.ConvertApiResourceDtoToEntity(items));
+		}
+
+        /// <summary>
+        ///     Bulk delete entities async
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public async Task ApiResourceBulkDeleteAsync(IEnumerable<ApiResourceDto> items)
+		{
+			await this.ApiResourceRepository.BulkDeleteAsync(this.ConvertApiResourceDtoToEntity(items));
+		}
+
+        /// <summary>
+        ///     Bulk insert entities
+        /// </summary>
+        /// <param name="items"></param>
+        public void  ApiResourceBulkInsert(IEnumerable<ApiResourceDto> items)
+		{
+			this.ApiResourceRepository.BulkInsert(this.ConvertApiResourceDtoToEntity(items));
+		}
+        
+        /// <summary>
+        /// Bulk insert entities async
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public async Task  ApiResourceBulkInsertAsync(IEnumerable<ApiResourceDto> items)
+		{
+			await this.ApiResourceRepository.BulkInsertAsync(this.ConvertApiResourceDtoToEntity(items));
+		}
+
+        /// <summary>
+        /// Bulk update entities 
+        /// </summary>
+        /// <param name="items"></param>
+        public void  ApiResourceBulkUpdate(IEnumerable<ApiResourceDto> items)
+		{
+			this.ApiResourceRepository.BulkUpdate(this.ConvertApiResourceDtoToEntity(items));
+		}
+
+        /// <summary>
+        /// Bulk update entities async
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public async Task  ApiResourceBulkUpdateAsync(IEnumerable<ApiResourceDto> items)
+		{
+			await this.ApiResourceRepository.BulkUpdateAsync(this.ConvertApiResourceDtoToEntity(items));
+		}
+
+        
         /// <summary>
         /// Converts a AspNetRoleDto list to AspNetRole list
         /// </summary>
@@ -4462,190 +4571,6 @@ namespace DotNetScaffolder.Domain.ApplicationService
         public async Task  AspNetUserTokenBulkUpdateAsync(IEnumerable<AspNetUserTokenDto> items)
 		{
 			await this.AspNetUserTokenRepository.BulkUpdateAsync(this.ConvertAspNetUserTokenDtoToEntity(items));
-		}
-
-        
-        /// <summary>
-        /// Converts a AllowedScopeDto list to AllowedScope list
-        /// </summary>
-        /// <param name="items"></param>
-        /// <returns></returns>
-	    private List<AllowedScope> ConvertAllowedScopeDtoToEntity(IEnumerable<AllowedScopeDto> items)
-	    {
-            List<AllowedScope> results = new List<AllowedScope>();
-
-	        foreach (var item in items)
-	        {
-	            results.Add(new AllowedScope(item, true));
-	        }
-
-	        return results;
-	    }
-
-        /// <summary>
-        /// Converts a AllowedScope list to AllowedScopeDto list
-        /// </summary>
-        /// <param name="items"></param>
-        /// <returns></returns>
-	    private List<AllowedScopeDto> ConvertAllowedScopeEntityToDto(IEnumerable<AllowedScope> items)
-	    {
-            List<AllowedScopeDto> results = new List<AllowedScopeDto>();
-
-	        foreach (var item in items)
-	        {
-	            results.Add(new AllowedScopeDto(item, true));
-	        }
-
-	        return results;
-	    }
-
-        /// <summary>
-        ///     Bulk delete entities
-        /// </summary>
-        /// <param name="items"></param>
-        public void AllowedScopeBulkDelete(IEnumerable<AllowedScopeDto> items)
-		{
-			this.AllowedScopeRepository.BulkDelete(this.ConvertAllowedScopeDtoToEntity(items));
-		}
-
-        /// <summary>
-        ///     Bulk delete entities async
-        /// </summary>
-        /// <param name="items"></param>
-        /// <returns></returns>
-        public async Task AllowedScopeBulkDeleteAsync(IEnumerable<AllowedScopeDto> items)
-		{
-			await this.AllowedScopeRepository.BulkDeleteAsync(this.ConvertAllowedScopeDtoToEntity(items));
-		}
-
-        /// <summary>
-        ///     Bulk insert entities
-        /// </summary>
-        /// <param name="items"></param>
-        public void  AllowedScopeBulkInsert(IEnumerable<AllowedScopeDto> items)
-		{
-			this.AllowedScopeRepository.BulkInsert(this.ConvertAllowedScopeDtoToEntity(items));
-		}
-        
-        /// <summary>
-        /// Bulk insert entities async
-        /// </summary>
-        /// <param name="items"></param>
-        /// <returns></returns>
-        public async Task  AllowedScopeBulkInsertAsync(IEnumerable<AllowedScopeDto> items)
-		{
-			await this.AllowedScopeRepository.BulkInsertAsync(this.ConvertAllowedScopeDtoToEntity(items));
-		}
-
-        /// <summary>
-        /// Bulk update entities 
-        /// </summary>
-        /// <param name="items"></param>
-        public void  AllowedScopeBulkUpdate(IEnumerable<AllowedScopeDto> items)
-		{
-			this.AllowedScopeRepository.BulkUpdate(this.ConvertAllowedScopeDtoToEntity(items));
-		}
-
-        /// <summary>
-        /// Bulk update entities async
-        /// </summary>
-        /// <param name="items"></param>
-        /// <returns></returns>
-        public async Task  AllowedScopeBulkUpdateAsync(IEnumerable<AllowedScopeDto> items)
-		{
-			await this.AllowedScopeRepository.BulkUpdateAsync(this.ConvertAllowedScopeDtoToEntity(items));
-		}
-
-        
-        /// <summary>
-        /// Converts a ApiResourceDto list to ApiResource list
-        /// </summary>
-        /// <param name="items"></param>
-        /// <returns></returns>
-	    private List<ApiResource> ConvertApiResourceDtoToEntity(IEnumerable<ApiResourceDto> items)
-	    {
-            List<ApiResource> results = new List<ApiResource>();
-
-	        foreach (var item in items)
-	        {
-	            results.Add(new ApiResource(item, true));
-	        }
-
-	        return results;
-	    }
-
-        /// <summary>
-        /// Converts a ApiResource list to ApiResourceDto list
-        /// </summary>
-        /// <param name="items"></param>
-        /// <returns></returns>
-	    private List<ApiResourceDto> ConvertApiResourceEntityToDto(IEnumerable<ApiResource> items)
-	    {
-            List<ApiResourceDto> results = new List<ApiResourceDto>();
-
-	        foreach (var item in items)
-	        {
-	            results.Add(new ApiResourceDto(item, true));
-	        }
-
-	        return results;
-	    }
-
-        /// <summary>
-        ///     Bulk delete entities
-        /// </summary>
-        /// <param name="items"></param>
-        public void ApiResourceBulkDelete(IEnumerable<ApiResourceDto> items)
-		{
-			this.ApiResourceRepository.BulkDelete(this.ConvertApiResourceDtoToEntity(items));
-		}
-
-        /// <summary>
-        ///     Bulk delete entities async
-        /// </summary>
-        /// <param name="items"></param>
-        /// <returns></returns>
-        public async Task ApiResourceBulkDeleteAsync(IEnumerable<ApiResourceDto> items)
-		{
-			await this.ApiResourceRepository.BulkDeleteAsync(this.ConvertApiResourceDtoToEntity(items));
-		}
-
-        /// <summary>
-        ///     Bulk insert entities
-        /// </summary>
-        /// <param name="items"></param>
-        public void  ApiResourceBulkInsert(IEnumerable<ApiResourceDto> items)
-		{
-			this.ApiResourceRepository.BulkInsert(this.ConvertApiResourceDtoToEntity(items));
-		}
-        
-        /// <summary>
-        /// Bulk insert entities async
-        /// </summary>
-        /// <param name="items"></param>
-        /// <returns></returns>
-        public async Task  ApiResourceBulkInsertAsync(IEnumerable<ApiResourceDto> items)
-		{
-			await this.ApiResourceRepository.BulkInsertAsync(this.ConvertApiResourceDtoToEntity(items));
-		}
-
-        /// <summary>
-        /// Bulk update entities 
-        /// </summary>
-        /// <param name="items"></param>
-        public void  ApiResourceBulkUpdate(IEnumerable<ApiResourceDto> items)
-		{
-			this.ApiResourceRepository.BulkUpdate(this.ConvertApiResourceDtoToEntity(items));
-		}
-
-        /// <summary>
-        /// Bulk update entities async
-        /// </summary>
-        /// <param name="items"></param>
-        /// <returns></returns>
-        public async Task  ApiResourceBulkUpdateAsync(IEnumerable<ApiResourceDto> items)
-		{
-			await this.ApiResourceRepository.BulkUpdateAsync(this.ConvertApiResourceDtoToEntity(items));
 		}
 
         

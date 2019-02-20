@@ -43,7 +43,6 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.SqlServer.Mappings.SqlSer
 
 			#region Constraints
 			
-			builder.Property(t => t.Id).HasMaxLength(450);
 			builder.Property(t => t.Id).HasColumnName("Id").IsRequired();
 			builder.Property(t => t.Name).HasMaxLength(256);
 			builder.Property(t => t.Name).HasColumnName("Name").IsRequired(false);

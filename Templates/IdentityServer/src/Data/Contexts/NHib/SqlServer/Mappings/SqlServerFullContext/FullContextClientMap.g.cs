@@ -51,12 +51,14 @@ namespace DotNetScaffolder.Domain.Data.Contexts.NHib.SqlServer.Mappings.SqlServe
 			#region Properties
 			
 			Map(t => t.ClientId).Column("ClientId")
-			.Length(50)
+			.Length(100)
 			.Not.Nullable();
 			Map(t => t.ClientName).Column("ClientName")
 			.Length(50)
 			.Not.Nullable();
 			Map(t => t.AlwaysSendClientClaims).Column("AlwaysSendClientClaims")
+			.Not.Nullable();
+			Map(t => t.Active).Column("Active")
 			.Not.Nullable();
 			
 			#endregion

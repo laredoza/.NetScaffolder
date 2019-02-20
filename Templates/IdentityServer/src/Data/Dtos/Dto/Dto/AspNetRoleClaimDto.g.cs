@@ -57,7 +57,7 @@ namespace DotNetScaffolder.Domain.Data.Dtos.DefaultDto.Dto
 		#region Fields
 		
 		public int Id { get; set; }
-		public string RoleId { get; set; }
+		public Guid RoleId { get; set; }
 		public string ClaimType { get; set; }
 		public string ClaimValue { get; set; }
 

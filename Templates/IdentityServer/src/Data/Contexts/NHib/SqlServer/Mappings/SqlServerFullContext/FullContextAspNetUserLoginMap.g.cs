@@ -52,7 +52,6 @@ namespace DotNetScaffolder.Domain.Data.Contexts.NHib.SqlServer.Mappings.SqlServe
 			.Nullable();
 			Map(t => t.UserId).Column("UserId")
 			.Index("IX_AspNetUserLogins_UserId")
-			.Length(450)
 			.Not.Nullable();
 			
 			#endregion

@@ -60,29 +60,29 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <summary>
         /// Load AspNetUserToken entities from the database using the composite primary keys
         /// </summary
-        /// <param name="userId">string</param>
+        /// <param name="userId">Guid</param>
         /// <param name="loginProvider">string</param>
         /// <param name="name">string</param>
 		/// <param name="includes">params Expression<Func<IAspNetUserToken, object>>[]</param>
         /// <returns>AspNetUserToken</returns>
-		public virtual AspNetUserToken Load( string userId,  string loginProvider,  string name, bool cache, params Expression<Func<IAspNetUserToken, object>>[] includes)
+		public virtual AspNetUserToken Load( Guid userId,  string loginProvider,  string name, bool cache, params Expression<Func<IAspNetUserToken, object>>[] includes)
 		{
 			var expr = this.Convert(includes);
-			return this.UnitOfWork.FirstOrDefault<AspNetUserToken>(o =>  o.UserId.ToLower().Contains(userId.ToLower()) &&  o.LoginProvider.ToLower().Contains(loginProvider.ToLower()) &&  o.Name.ToLower().Contains(name.ToLower()) , cache, expr);
+			return this.UnitOfWork.FirstOrDefault<AspNetUserToken>(o =>  o.UserId == userId &&  o.LoginProvider.ToLower().Contains(loginProvider.ToLower()) &&  o.Name.ToLower().Contains(name.ToLower()) , cache, expr);
 		}
 		
         /// <summary>
         /// Load AspNetUserToken entities async from the database using the composite primary keys
         /// </summary
-        /// <param name="userId">string</param>
+        /// <param name="userId">Guid</param>
         /// <param name="loginProvider">string</param>
         /// <param name="name">string</param>
 		/// <param name="includes">params Expression<Func<IAspNetUserToken, object>>[]</param>
         /// <returns>AspNetUserToken</returns>
-		public virtual async Task<AspNetUserToken> LoadAsync( string userId,  string loginProvider,  string name, bool cache, params Expression<Func<IAspNetUserToken, object>>[] includes)
+		public virtual async Task<AspNetUserToken> LoadAsync( Guid userId,  string loginProvider,  string name, bool cache, params Expression<Func<IAspNetUserToken, object>>[] includes)
 		{
 			var expr = this.Convert(includes);
-			return await this.UnitOfWork.FirstOrDefaultAsync<AspNetUserToken>(cache, o =>  o.UserId.ToLower().Contains(userId.ToLower()) &&  o.LoginProvider.ToLower().Contains(loginProvider.ToLower()) &&  o.Name.ToLower().Contains(name.ToLower()) , expr);
+			return await this.UnitOfWork.FirstOrDefaultAsync<AspNetUserToken>(cache, o =>  o.UserId == userId &&  o.LoginProvider.ToLower().Contains(loginProvider.ToLower()) &&  o.Name.ToLower().Contains(name.ToLower()) , expr);
 		}
 
         /// <summary>
@@ -206,7 +206,7 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
 		public virtual bool Update(AspNetUserToken entity)
 		{
 			bool doUpdate = false;
-			var entityToUpdate = this.UnitOfWork.FirstOrDefault<AspNetUserToken>(o =>  o.UserId.ToLower().Contains(entity.UserId.ToLower()) &&  o.LoginProvider.ToLower().Contains(entity.LoginProvider.ToLower()) &&  o.Name.ToLower().Contains(entity.Name.ToLower()) , true);
+			var entityToUpdate = this.UnitOfWork.FirstOrDefault<AspNetUserToken>(o =>  o.UserId == entity.UserId &&  o.LoginProvider.ToLower().Contains(entity.LoginProvider.ToLower()) &&  o.Name.ToLower().Contains(entity.Name.ToLower()) , true);
 			
 			if (entityToUpdate == null)
 			{
@@ -233,7 +233,7 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
 		public virtual async Task<bool> UpdateAsync(AspNetUserToken entity)
 		{
 			bool doUpdate = false;
-			var entityToUpdate = await this.UnitOfWork.FirstOrDefaultAsync<AspNetUserToken>(true, o =>  o.UserId.ToLower().Contains(entity.UserId.ToLower()) &&  o.LoginProvider.ToLower().Contains(entity.LoginProvider.ToLower()) &&  o.Name.ToLower().Contains(entity.Name.ToLower()) );
+			var entityToUpdate = await this.UnitOfWork.FirstOrDefaultAsync<AspNetUserToken>(true, o =>  o.UserId == entity.UserId &&  o.LoginProvider.ToLower().Contains(entity.LoginProvider.ToLower()) &&  o.Name.ToLower().Contains(entity.Name.ToLower()) );
 			
 			if (entityToUpdate == null)
 			{
@@ -259,7 +259,7 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <returns>bool</returns>
 		public virtual bool Delete(AspNetUserToken entity)
 		{		
-			var entityToDelete = this.UnitOfWork.FirstOrDefault<AspNetUserToken>(o =>  o.UserId.ToLower().Contains(entity.UserId.ToLower()) &&  o.LoginProvider.ToLower().Contains(entity.LoginProvider.ToLower()) &&  o.Name.ToLower().Contains(entity.Name.ToLower()) , true);
+			var entityToDelete = this.UnitOfWork.FirstOrDefault<AspNetUserToken>(o =>  o.UserId == entity.UserId &&  o.LoginProvider.ToLower().Contains(entity.LoginProvider.ToLower()) &&  o.Name.ToLower().Contains(entity.Name.ToLower()) , true);
 			
 			if(entityToDelete == null)
 			{
@@ -276,7 +276,7 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <returns>bool</returns>
 		public virtual async Task<bool> DeleteAsync(AspNetUserToken entity)
 		{		
-			var entityToDelete = await this.UnitOfWork.FirstOrDefaultAsync<AspNetUserToken>(true, o =>  o.UserId.ToLower().Contains(entity.UserId.ToLower()) &&  o.LoginProvider.ToLower().Contains(entity.LoginProvider.ToLower()) &&  o.Name.ToLower().Contains(entity.Name.ToLower()) );
+			var entityToDelete = await this.UnitOfWork.FirstOrDefaultAsync<AspNetUserToken>(true, o =>  o.UserId == entity.UserId &&  o.LoginProvider.ToLower().Contains(entity.LoginProvider.ToLower()) &&  o.Name.ToLower().Contains(entity.Name.ToLower()) );
 			
 			if(entityToDelete == null)
 			{
@@ -289,13 +289,13 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
 		/// <summary>
         /// Delete the AspNetUserToken entity from the database
         /// </summary>
-        /// <param name="userId">string</param>
+        /// <param name="userId">Guid</param>
         /// <param name="loginProvider">string</param>
         /// <param name="name">string</param>
         /// <returns>bool</returns>
-		public virtual bool Delete( string userId,  string loginProvider,  string name, bool cache)
+		public virtual bool Delete( Guid userId,  string loginProvider,  string name, bool cache)
 		{
-			var entityToDelete = this.UnitOfWork.FirstOrDefault<AspNetUserToken>(o =>  o.UserId.ToLower().Contains(userId.ToLower()) &&  o.LoginProvider.ToLower().Contains(loginProvider.ToLower()) &&  o.Name.ToLower().Contains(name.ToLower()) , cache);
+			var entityToDelete = this.UnitOfWork.FirstOrDefault<AspNetUserToken>(o =>  o.UserId == userId &&  o.LoginProvider.ToLower().Contains(loginProvider.ToLower()) &&  o.Name.ToLower().Contains(name.ToLower()) , cache);
 			
 			if(entityToDelete == null)
 			{
@@ -308,13 +308,13 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
 		/// <summary>
         /// Delete the AspNetUserToken entity async from the database
         /// </summary>
-        /// <param name="userId">string</param>
+        /// <param name="userId">Guid</param>
         /// <param name="loginProvider">string</param>
         /// <param name="name">string</param>
         /// <returns>bool</returns>
-		public virtual async Task<bool> DeleteAsync( string userId,  string loginProvider,  string name, bool cache)
+		public virtual async Task<bool> DeleteAsync( Guid userId,  string loginProvider,  string name, bool cache)
 		{
-			var entityToDelete = await this.UnitOfWork.FirstOrDefaultAsync<AspNetUserToken>(cache, o =>  o.UserId.ToLower().Contains(userId.ToLower()) &&  o.LoginProvider.ToLower().Contains(loginProvider.ToLower()) &&  o.Name.ToLower().Contains(name.ToLower())  );
+			var entityToDelete = await this.UnitOfWork.FirstOrDefaultAsync<AspNetUserToken>(cache, o =>  o.UserId == userId &&  o.LoginProvider.ToLower().Contains(loginProvider.ToLower()) &&  o.Name.ToLower().Contains(name.ToLower())  );
 			
 			if(entityToDelete == null)
 			{
@@ -363,7 +363,7 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
 
 		    foreach (var item in items)
 		    {
-                var foundEntity = this.UnitOfWork.FirstOrDefault<AspNetUserToken>(o => o.UserId.ToLower().Contains(item.UserId.ToLower()) &&  o.LoginProvider.ToLower().Contains(item.LoginProvider.ToLower()) &&  o.Name.ToLower().Contains(item.Name.ToLower()) , true);
+                var foundEntity = this.UnitOfWork.FirstOrDefault<AspNetUserToken>(o => o.UserId == item.UserId &&  o.LoginProvider.ToLower().Contains(item.LoginProvider.ToLower()) &&  o.Name.ToLower().Contains(item.Name.ToLower()) , true);
 
 		        if (foundEntity == null)
 		        {
@@ -388,7 +388,7 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
 
 		    foreach (var item in items)
 		    {
-                var foundEntity = await this.UnitOfWork.FirstOrDefaultAsync<AspNetUserToken>(true, o => o.UserId.ToLower().Contains(item.UserId.ToLower()) &&  o.LoginProvider.ToLower().Contains(item.LoginProvider.ToLower()) &&  o.Name.ToLower().Contains(item.Name.ToLower()) );
+                var foundEntity = await this.UnitOfWork.FirstOrDefaultAsync<AspNetUserToken>(true, o => o.UserId == item.UserId &&  o.LoginProvider.ToLower().Contains(item.LoginProvider.ToLower()) &&  o.Name.ToLower().Contains(item.Name.ToLower()) );
 
 		        if (foundEntity == null)
 		        {
@@ -434,7 +434,7 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
 		    foreach (var entity in items)
 		    {
                 bool doUpdate = false;
-			    var entityToUpdate = this.UnitOfWork.FirstOrDefault<AspNetUserToken>(o =>  o.UserId.ToLower().Contains(entity.UserId.ToLower()) &&  o.LoginProvider.ToLower().Contains(entity.LoginProvider.ToLower()) &&  o.Name.ToLower().Contains(entity.Name.ToLower()) , true);
+			    var entityToUpdate = this.UnitOfWork.FirstOrDefault<AspNetUserToken>(o =>  o.UserId == entity.UserId &&  o.LoginProvider.ToLower().Contains(entity.LoginProvider.ToLower()) &&  o.Name.ToLower().Contains(entity.Name.ToLower()) , true);
 			
 			    if (entityToUpdate == null)
 			    {
@@ -467,7 +467,7 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
 		    foreach (var entity in items)
 		    {
                 bool doUpdate = false;
-			    var entityToUpdate = await this.UnitOfWork.FirstOrDefaultAsync<AspNetUserToken>(true, o =>  o.UserId.ToLower().Contains(entity.UserId.ToLower()) &&  o.LoginProvider.ToLower().Contains(entity.LoginProvider.ToLower()) &&  o.Name.ToLower().Contains(entity.Name.ToLower()) );
+			    var entityToUpdate = await this.UnitOfWork.FirstOrDefaultAsync<AspNetUserToken>(true, o =>  o.UserId == entity.UserId &&  o.LoginProvider.ToLower().Contains(entity.LoginProvider.ToLower()) &&  o.Name.ToLower().Contains(entity.Name.ToLower()) );
 			
 			    if (entityToUpdate == null)
 			    {

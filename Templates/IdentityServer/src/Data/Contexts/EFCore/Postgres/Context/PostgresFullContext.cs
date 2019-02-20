@@ -30,8 +30,8 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.Postgres.Context
         /// </param>
         public void Seed(ModelBuilder modelBuilder)
         {
-            MigrationHelper.AddCountries(modelBuilder);
-            MigrationHelper.AddProducts(modelBuilder);
+            MigrationHelper.AddUsers(modelBuilder);
+            MigrationHelper.AddClients(modelBuilder);
             MigrationHelper.AddCustomers(modelBuilder);
             MigrationHelper.AddBanking(modelBuilder);
             MigrationHelper.AddOrders(modelBuilder);

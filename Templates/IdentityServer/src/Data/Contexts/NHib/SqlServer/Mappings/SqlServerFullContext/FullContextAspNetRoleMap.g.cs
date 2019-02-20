@@ -43,7 +43,6 @@ namespace DotNetScaffolder.Domain.Data.Contexts.NHib.SqlServer.Mappings.SqlServe
 			#region Primary Keys
 			
 			Id(t => t.Id).GeneratedBy.Assigned()
-			.Length(450)
 			.Not.Nullable();
 
 			#endregion

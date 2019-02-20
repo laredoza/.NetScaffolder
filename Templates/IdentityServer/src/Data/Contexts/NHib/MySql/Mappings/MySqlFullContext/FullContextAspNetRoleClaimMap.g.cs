@@ -51,7 +51,6 @@ namespace DotNetScaffolder.Domain.Data.Contexts.NHib.MySql.Mappings.MySqlFullCon
 			
 			Map(t => t.RoleId).Column("RoleId")
 			.Index("IX_AspNetRoleClaims_RoleId")
-			.Length(450)
 			.Not.Nullable();
 			Map(t => t.ClaimType).Column("ClaimType")
 			.Nullable();

@@ -65,6 +65,8 @@ namespace DotNetScaffolder.Domain.Data.Contexts.NHib.Oracle.Context
 		
 	    protected override void ConfigureMappings(MappingConfiguration config)
 	    {
+			config.FluentMappings.Add(typeof(FullContextAllowedScopeMap));
+			config.FluentMappings.Add(typeof(FullContextApiResourceMap));
 			config.FluentMappings.Add(typeof(FullContextAspNetRoleMap));
 			config.FluentMappings.Add(typeof(FullContextAspNetRoleClaimMap));
 			config.FluentMappings.Add(typeof(FullContextAspNetUserMap));
@@ -72,8 +74,6 @@ namespace DotNetScaffolder.Domain.Data.Contexts.NHib.Oracle.Context
 			config.FluentMappings.Add(typeof(FullContextAspNetUserLoginMap));
 			config.FluentMappings.Add(typeof(FullContextAspNetUserRoleMap));
 			config.FluentMappings.Add(typeof(FullContextAspNetUserTokenMap));
-			config.FluentMappings.Add(typeof(FullContextAllowedScopeMap));
-			config.FluentMappings.Add(typeof(FullContextApiResourceMap));
 			config.FluentMappings.Add(typeof(FullContextClientMap));
 			config.FluentMappings.Add(typeof(FullContextClientGrantTypeMap));
 			config.FluentMappings.Add(typeof(FullContextGrantTypeMap));

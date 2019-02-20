@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <AssemblyVersion>1.0.86.0</AssemblyVersion>
-    <FileVersion>1.0.86.0</FileVersion>
+    <AssemblyVersion>1.0.117.0</AssemblyVersion>
+    <FileVersion>1.0.117.0</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -15,6 +15,10 @@
     <ProjectReference Include="..\..\..\Entities\Entity\DotNetScaffolder.Domain.Data.Entities.DefaultEntity.csproj" />
     <ProjectReference Include="..\Base\DotNetScaffolder.Domain.Data.Contexts.EFCore.Base.csproj" />
     <ProjectReference Include="..\Seed\DotNetScaffolder.Domain.Data.Contexts.EFCore.Seed.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Migrations\" />
   </ItemGroup>
 
 </Project>

@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <AssemblyName>DotNetScaffolder.IdentityServer.Services.WebApi.IdentityServer</AssemblyName>
+    <AssemblyVersion>1.0.105.0</AssemblyVersion>
+    <FileVersion>1.0.105.0</FileVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="IdentityServer4" Version="2.3.2" />
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+    <PackageReference Include="StructureMap.Microsoft.DependencyInjection" Version="2.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Data\ApplicationServices\ApplicationService\DotNetScaffolder.Domain.Data.ApplicationServices.ApplicationService.csproj" />
+    <ProjectReference Include="..\..\..\Data\Contexts\EFCore\SqlServer\DotNetScaffolder.Domain.Data.Contexts.EFCore.SqlServer.csproj" />
+    <ProjectReference Include="..\..\..\Data\Dtos\Dto\DotNetScaffolder.Domain.Data.Dtos.DefaultDto.csproj" />
+    <ProjectReference Include="..\..\..\Data\Entities\Entity\DotNetScaffolder.Domain.Data.Entities.DefaultEntity.csproj" />
+    <ProjectReference Include="..\..\..\Data\Interfaces\ApplicationService\DotNetScaffolder.Domain.Data.Interfaces.ApplicationServiceInterfaces.csproj" />
+    <ProjectReference Include="..\..\..\Data\Interfaces\Interface\DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.csproj" />
+    <ProjectReference Include="..\..\..\Data\Interfaces\RepositoryInterfaces\DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces.csproj" />
+    <ProjectReference Include="..\..\..\Data\Repositories\Repository\DotNetScaffolder.Domain.Data.Repositories.Repository.csproj" />
+    <ProjectReference Include="..\..\..\Infrastructure\Web\Core\DotNetScaffolder.Domain.Infrastructure.Web.Core.csproj" />
+  </ItemGroup>
+
+</Project>

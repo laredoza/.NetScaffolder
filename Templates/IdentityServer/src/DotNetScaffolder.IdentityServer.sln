@@ -73,7 +73,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetScaffolder.Repository
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebApi", "WebApi", "{7C44558F-8292-4450-8DFC-8A6FFD8199BB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetScaffolder.Domain.Services.WebApi.IdentityServer", "Services\WebApi\IdentityServer\DotNetScaffolder.Domain.Services.WebApi.IdentityServer.csproj", "{9ADB4673-333A-4400-8806-B4093E10444C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetScaffolder.IdentityServer.Services.WebApi.IdentityServer", "Services\WebApi\IdentityServer\DotNetScaffolder.IdentityServer.Services.WebApi.IdentityServer.csproj", "{9ADB4673-333A-4400-8806-B4093E10444C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5. Tests", "5. Tests", "{E159F450-4D74-4605-B58F-C3471DF32DFE}"
 EndProject

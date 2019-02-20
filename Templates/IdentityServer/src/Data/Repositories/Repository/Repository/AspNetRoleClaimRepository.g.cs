@@ -82,6 +82,31 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
 		}
 
         /// <summary>
+        /// Load AspNetRoleClaim entities from the database using the RoleId field
+        /// </summary>
+        /// <param name="roleId">Guid</param>
+		/// <param name="includes">params Expression<Func<AspNetRoleClaim, object>>[]</param>
+        /// <returns>IList<IAspNetRoleClaim></returns>
+		public virtual IList<AspNetRoleClaim> LoadByRoleId(Guid roleId, bool cache, params Expression<Func<IAspNetRoleClaim, object>>[] includes)
+		{
+			var expr = this.Convert(includes);
+			return this.UnitOfWork.AllMatching<AspNetRoleClaim>(o => o.RoleId == roleId, cache, expr).ToList<AspNetRoleClaim>();
+		}
+		
+        /// <summary>
+        /// Load AspNetRoleClaim entities async from the database using the RoleId field
+        /// </summary>
+        /// <param name="roleId">Guid</param>
+		/// <param name="includes">params Expression<Func<AspNetRoleClaim, object>>[]</param>
+        /// <returns>IList<IAspNetRoleClaim></returns>
+		public virtual async Task<IList<AspNetRoleClaim>> LoadByRoleIdAsync(Guid roleId, bool cache, params Expression<Func<IAspNetRoleClaim, object>>[] includes)
+		{
+			var expr = this.Convert(includes);
+			var result = await this.UnitOfWork.AllMatchingAsync<AspNetRoleClaim>(o => o.RoleId == roleId,cache, expr);
+			return result.ToList<AspNetRoleClaim>();
+		}
+
+        /// <summary>
         /// Load all AspNetRoleClaim entities from the database.
         /// </summary>
 		/// <param name="includes">params Expression<Func<IAspNetRoleClaim, object>>[]</param>
@@ -107,48 +132,6 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
 		#endregion
 
 		#region Search
-
-        /// <summary>
-        /// Search for AspNetRoleClaim entities in the database by RoleId
-        /// </summary>
-        /// <param name="roleId">string</param>
-		/// <param name="caseSensitive">bool</param>
-		/// <param name="includes">params Expression<Func<IAspNetRoleClaim, object>>[]</param>
-        /// <returns>IList<AspNetRoleClaim></returns>
-		public virtual IList<AspNetRoleClaim> SearchByRoleId(string roleId, bool cache, bool caseSensitive = false, params Expression<Func<IAspNetRoleClaim, object>>[] includes)
-		{		
-			var expr = this.Convert(includes);
-			if(caseSensitive) 
-			{
-				return this.UnitOfWork.AllMatching<AspNetRoleClaim>(o => o.RoleId.Contains(roleId), cache, expr).ToList<AspNetRoleClaim>();
-			}
-			else
-			{
-				return this.UnitOfWork.AllMatching<AspNetRoleClaim>(o => o.RoleId.ToLower().Contains(roleId.ToLower()), cache, expr).ToList<AspNetRoleClaim>();
-			}
-		}
-		
-        /// <summary>
-        /// Search for AspNetRoleClaim entities async in the database by RoleId
-        /// </summary>
-        /// <param name="roleId">string</param>
-		/// <param name="caseSensitive">bool</param>
-		/// <param name="includes">params Expression<Func<IAspNetRoleClaim, object>>[]</param>
-        /// <returns>IList<AspNetRoleClaim></returns>
-		public virtual async Task<IList<AspNetRoleClaim>> SearchByRoleIdAsync(string roleId, bool cache, bool caseSensitive = false, params Expression<Func<IAspNetRoleClaim, object>>[] includes)
-		{		
-			var expr = this.Convert(includes);
-			if(caseSensitive) 
-			{
-				var result = await this.UnitOfWork.AllMatchingAsync<AspNetRoleClaim>(o => o.RoleId.Contains(roleId), cache, expr);
-				return result.ToList<AspNetRoleClaim>();
-			}
-			else
-			{
-				var result = await this.UnitOfWork.AllMatchingAsync<AspNetRoleClaim>(o => o.RoleId.ToLower().Contains(roleId.ToLower()), cache, expr);
-				return result.ToList<AspNetRoleClaim>();
-			}
-		}
 
         /// <summary>
         /// Search for AspNetRoleClaim entities in the database by ClaimType

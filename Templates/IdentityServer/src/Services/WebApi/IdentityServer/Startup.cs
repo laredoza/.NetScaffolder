@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using DotNetScaffolder.Domain.Infrastructure.Web.Core.Extensions;
+using DotNetScaffolder.Domain.Infrastructure.Web.Core.Filters;
+using DotNetScaffolder.IdentityServer.Services.WebApi.IdentityServer.Identity4;
 
 namespace DotNetScaffolder.Domain.Services.WebApi.IdentityServer
 {
@@ -40,7 +42,9 @@ namespace DotNetScaffolder.Domain.Services.WebApi.IdentityServer
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
+            services.AddMvc(
+                setup => { setup.Filters.AddService<UnitOfWorkFilter>(1); }
+            );
 
             services.AddTransient<IProfileService, MyProfileService>();
 
@@ -48,9 +52,31 @@ namespace DotNetScaffolder.Domain.Services.WebApi.IdentityServer
             .AddDeveloperSigningCredential()
             .AddInMemoryIdentityResources(Config.GetIdentityResources())
             .AddInMemoryApiResources(Config.GetApiResources())
-            .AddInMemoryClients(Config.GetClients())
+            //.AddInMemoryClients(Config.GetClients())
+            .AddClientStore<ClientStore>()
             .AddTestUsers(Config.GetUsers())
             .AddProfileService<MyProfileService>();
+
+            ////identity server 4 cert
+            //var cert = new X509Certificate2(Path.Combine(_environment.ContentRootPath, "idsrv4test.pfx"), "your_cert_password");
+
+            ////DI DBContext inject connection string
+            //services.AddScoped(_ => new YourDbContext(Configuration.GetConnectionString("DefaultConnection")));
+
+            ////my user repository
+            //services.AddScoped<IUserRepository, UserRepository>();
+
+            ////add identity server 4
+            //services.AddIdentityServer()
+            //    .AddSigningCredential(cert)
+            //    .AddInMemoryIdentityResources(Config.GetIdentityResources()) //check below
+            //    .AddInMemoryApiResources(Config.GetApiResources())
+            //    .AddInMemoryClients(Config.GetClients())
+            //    .AddProfileService<ProfileService>();p
+
+            ////Inject the classes we just created
+            //services.AddTransient<IResourceOwnerPasswordValidator, ResourceOwnerPasswordValidator>();
+            //services.AddTransient<IProfileService, ProfileService>();
 
             return services.Build(Configuration, hostingEnvironment, "./", SearchAssemblies);
         }
@@ -64,7 +90,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.IdentityServer
             {
                 app.UseDeveloperExceptionPage();
             }
-
+    
             app.UseIdentityServer();
 
             app.UseStaticFiles();

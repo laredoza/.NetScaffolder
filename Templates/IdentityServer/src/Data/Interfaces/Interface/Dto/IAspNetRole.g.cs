@@ -27,7 +27,7 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.Dto
 	{
 		#region Fields
 		
-		string Id { get; set; }
+		Guid Id { get; set; }
 		string Name { get; set; }
 		string NormalizedName { get; set; }
 		string ConcurrencyStamp { get; set; }

@@ -44,6 +44,7 @@ namespace DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity
 			this.ClientId = item.ClientId;
 			this.ClientName = item.ClientName;
 			this.AlwaysSendClientClaims = item.AlwaysSendClientClaims;
+			this.Active = item.Active;
 			this.AllowedScope = new List <AllowedScope>();
 			this.ClientGrantType = new List <ClientGrantType>();
 			this.PostLogoutRedirectUri = new List <PostLogoutRedirectUri>();
@@ -90,6 +91,7 @@ namespace DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity
 		public virtual string ClientId { get; set; }
 		public virtual string ClientName { get; set; }
 		public virtual bool AlwaysSendClientClaims { get; set; }
+		public virtual bool Active { get; set; }
 
 		#endregion
 

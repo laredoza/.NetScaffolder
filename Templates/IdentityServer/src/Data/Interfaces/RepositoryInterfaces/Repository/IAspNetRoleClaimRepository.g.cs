@@ -54,6 +54,24 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
 		Task<AspNetRoleClaim> LoadByIdAsync(int id, bool cache, params Expression<Func<IAspNetRoleClaim, object>>[] includes);
 
         /// <summary>
+        /// Load AspNetRoleClaim entities from the database using the RoleId field
+        /// </summary>
+        /// <param name="roleId">Guid</param
+        /// <param name="cache">Use 2nd level caching if enabled</param>
+		/// <param name="includes">params Expression<Func<IAspNetRoleClaim, object>>[]</param>
+        /// <returns>IList<AspNetRoleClaim></returns>
+		IList<AspNetRoleClaim> LoadByRoleId(Guid roleId, bool cache,  params Expression<Func<IAspNetRoleClaim, object>>[] includes);
+		
+        /// <summary>
+        /// Load AspNetRoleClaim entities async from the database using the RoleId field
+        /// </summary>
+        /// <param name="roleId">Guid</param
+        /// <param name="cache">Use 2nd level caching if enabled</param>
+		/// <param name="includes">params Expression<Func<IAspNetRoleClaim, object>>[]</param>
+        /// <returns>IList<AspNetRoleClaim></returns>
+		Task<IList<AspNetRoleClaim>> LoadByRoleIdAsync(Guid roleId, bool cache, params Expression<Func<IAspNetRoleClaim, object>>[] includes);
+
+        /// <summary>
         /// Load all AspNetRoleClaim entities from the database.
         /// </summary>
         /// <param name="cache">Use 2nd level caching if enabled</param>
@@ -72,26 +90,6 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
 		#endregion
 
 		#region Search
-
-        /// <summary>
-        /// Search for AspNetRoleClaim entities in the database by RoleId
-        /// </summary>
-        /// <param name="roleId">string</param>
-        /// <param name="cache">Use 2nd level caching if enabled</param>
-		/// <param name="caseSensitive">bool</param
-		/// <param name="includes">params Expression<Func<IAspNetRoleClaim, object>>[]</param>
-        /// <returns>IList<AspNetRoleClaim></returns>
-		IList<AspNetRoleClaim> SearchByRoleId(string roleId, bool cache, bool caseSensitive = false, params Expression<Func<IAspNetRoleClaim, object>>[] includes);
-		
-        /// <summary>
-        /// Search for AspNetRoleClaim entities async in the database by RoleId
-        /// </summary>
-        /// <param name="roleId">string</param>
-        /// <param name="cache">Use 2nd level caching if enabled</param>
-		/// <param name="caseSensitive">bool</param
-		/// <param name="includes">params Expression<Func<IAspNetRoleClaim, object>>[]</param>
-        /// <returns>IList<AspNetRoleClaim></returns>
-		Task<IList<AspNetRoleClaim>> SearchByRoleIdAsync(string roleId, bool cache, bool caseSensitive = false, params Expression<Func<IAspNetRoleClaim, object>>[] includes);
 
         /// <summary>
         /// Search for AspNetRoleClaim entities in the database by ClaimType

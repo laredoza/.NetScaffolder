@@ -30,7 +30,7 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.Dto
 		string LoginProvider { get; set; }
 		string ProviderKey { get; set; }
 		string ProviderDisplayName { get; set; }
-		string UserId { get; set; }
+		Guid UserId { get; set; }
 
 		#endregion
 		

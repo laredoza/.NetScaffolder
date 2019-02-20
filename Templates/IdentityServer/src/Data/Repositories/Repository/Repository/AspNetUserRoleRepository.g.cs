@@ -60,27 +60,27 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <summary>
         /// Load AspNetUserRole entities from the database using the composite primary keys
         /// </summary
-        /// <param name="userId">string</param>
-        /// <param name="roleId">string</param>
+        /// <param name="userId">Guid</param>
+        /// <param name="roleId">Guid</param>
 		/// <param name="includes">params Expression<Func<IAspNetUserRole, object>>[]</param>
         /// <returns>AspNetUserRole</returns>
-		public virtual AspNetUserRole Load( string userId,  string roleId, bool cache, params Expression<Func<IAspNetUserRole, object>>[] includes)
+		public virtual AspNetUserRole Load( Guid userId,  Guid roleId, bool cache, params Expression<Func<IAspNetUserRole, object>>[] includes)
 		{
 			var expr = this.Convert(includes);
-			return this.UnitOfWork.FirstOrDefault<AspNetUserRole>(o =>  o.UserId.ToLower().Contains(userId.ToLower()) &&  o.RoleId.ToLower().Contains(roleId.ToLower()) , cache, expr);
+			return this.UnitOfWork.FirstOrDefault<AspNetUserRole>(o =>  o.UserId == userId &&  o.RoleId == roleId , cache, expr);
 		}
 		
         /// <summary>
         /// Load AspNetUserRole entities async from the database using the composite primary keys
         /// </summary
-        /// <param name="userId">string</param>
-        /// <param name="roleId">string</param>
+        /// <param name="userId">Guid</param>
+        /// <param name="roleId">Guid</param>
 		/// <param name="includes">params Expression<Func<IAspNetUserRole, object>>[]</param>
         /// <returns>AspNetUserRole</returns>
-		public virtual async Task<AspNetUserRole> LoadAsync( string userId,  string roleId, bool cache, params Expression<Func<IAspNetUserRole, object>>[] includes)
+		public virtual async Task<AspNetUserRole> LoadAsync( Guid userId,  Guid roleId, bool cache, params Expression<Func<IAspNetUserRole, object>>[] includes)
 		{
 			var expr = this.Convert(includes);
-			return await this.UnitOfWork.FirstOrDefaultAsync<AspNetUserRole>(cache, o =>  o.UserId.ToLower().Contains(userId.ToLower()) &&  o.RoleId.ToLower().Contains(roleId.ToLower()) , expr);
+			return await this.UnitOfWork.FirstOrDefaultAsync<AspNetUserRole>(cache, o =>  o.UserId == userId &&  o.RoleId == roleId , expr);
 		}
 
         /// <summary>
@@ -158,7 +158,7 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
 		public virtual bool Update(AspNetUserRole entity)
 		{
 			bool doUpdate = false;
-			var entityToUpdate = this.UnitOfWork.FirstOrDefault<AspNetUserRole>(o =>  o.UserId.ToLower().Contains(entity.UserId.ToLower()) &&  o.RoleId.ToLower().Contains(entity.RoleId.ToLower()) , true);
+			var entityToUpdate = this.UnitOfWork.FirstOrDefault<AspNetUserRole>(o =>  o.UserId == entity.UserId &&  o.RoleId == entity.RoleId , true);
 			
 			if (entityToUpdate == null)
 			{
@@ -184,7 +184,7 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
 		public virtual async Task<bool> UpdateAsync(AspNetUserRole entity)
 		{
 			bool doUpdate = false;
-			var entityToUpdate = await this.UnitOfWork.FirstOrDefaultAsync<AspNetUserRole>(true, o =>  o.UserId.ToLower().Contains(entity.UserId.ToLower()) &&  o.RoleId.ToLower().Contains(entity.RoleId.ToLower()) );
+			var entityToUpdate = await this.UnitOfWork.FirstOrDefaultAsync<AspNetUserRole>(true, o =>  o.UserId == entity.UserId &&  o.RoleId == entity.RoleId );
 			
 			if (entityToUpdate == null)
 			{
@@ -209,7 +209,7 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <returns>bool</returns>
 		public virtual bool Delete(AspNetUserRole entity)
 		{		
-			var entityToDelete = this.UnitOfWork.FirstOrDefault<AspNetUserRole>(o =>  o.UserId.ToLower().Contains(entity.UserId.ToLower()) &&  o.RoleId.ToLower().Contains(entity.RoleId.ToLower()) , true);
+			var entityToDelete = this.UnitOfWork.FirstOrDefault<AspNetUserRole>(o =>  o.UserId == entity.UserId &&  o.RoleId == entity.RoleId , true);
 			
 			if(entityToDelete == null)
 			{
@@ -226,7 +226,7 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <returns>bool</returns>
 		public virtual async Task<bool> DeleteAsync(AspNetUserRole entity)
 		{		
-			var entityToDelete = await this.UnitOfWork.FirstOrDefaultAsync<AspNetUserRole>(true, o =>  o.UserId.ToLower().Contains(entity.UserId.ToLower()) &&  o.RoleId.ToLower().Contains(entity.RoleId.ToLower()) );
+			var entityToDelete = await this.UnitOfWork.FirstOrDefaultAsync<AspNetUserRole>(true, o =>  o.UserId == entity.UserId &&  o.RoleId == entity.RoleId );
 			
 			if(entityToDelete == null)
 			{
@@ -239,12 +239,12 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
 		/// <summary>
         /// Delete the AspNetUserRole entity from the database
         /// </summary>
-        /// <param name="userId">string</param>
-        /// <param name="roleId">string</param>
+        /// <param name="userId">Guid</param>
+        /// <param name="roleId">Guid</param>
         /// <returns>bool</returns>
-		public virtual bool Delete( string userId,  string roleId, bool cache)
+		public virtual bool Delete( Guid userId,  Guid roleId, bool cache)
 		{
-			var entityToDelete = this.UnitOfWork.FirstOrDefault<AspNetUserRole>(o =>  o.UserId.ToLower().Contains(userId.ToLower()) &&  o.RoleId.ToLower().Contains(roleId.ToLower()) , cache);
+			var entityToDelete = this.UnitOfWork.FirstOrDefault<AspNetUserRole>(o =>  o.UserId == userId &&  o.RoleId == roleId , cache);
 			
 			if(entityToDelete == null)
 			{
@@ -257,12 +257,12 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
 		/// <summary>
         /// Delete the AspNetUserRole entity async from the database
         /// </summary>
-        /// <param name="userId">string</param>
-        /// <param name="roleId">string</param>
+        /// <param name="userId">Guid</param>
+        /// <param name="roleId">Guid</param>
         /// <returns>bool</returns>
-		public virtual async Task<bool> DeleteAsync( string userId,  string roleId, bool cache)
+		public virtual async Task<bool> DeleteAsync( Guid userId,  Guid roleId, bool cache)
 		{
-			var entityToDelete = await this.UnitOfWork.FirstOrDefaultAsync<AspNetUserRole>(cache, o =>  o.UserId.ToLower().Contains(userId.ToLower()) &&  o.RoleId.ToLower().Contains(roleId.ToLower())  );
+			var entityToDelete = await this.UnitOfWork.FirstOrDefaultAsync<AspNetUserRole>(cache, o =>  o.UserId == userId &&  o.RoleId == roleId  );
 			
 			if(entityToDelete == null)
 			{
@@ -311,7 +311,7 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
 
 		    foreach (var item in items)
 		    {
-                var foundEntity = this.UnitOfWork.FirstOrDefault<AspNetUserRole>(o => o.UserId.ToLower().Contains(item.UserId.ToLower()) &&  o.RoleId.ToLower().Contains(item.RoleId.ToLower()) , true);
+                var foundEntity = this.UnitOfWork.FirstOrDefault<AspNetUserRole>(o => o.UserId == item.UserId &&  o.RoleId == item.RoleId , true);
 
 		        if (foundEntity == null)
 		        {
@@ -336,7 +336,7 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
 
 		    foreach (var item in items)
 		    {
-                var foundEntity = await this.UnitOfWork.FirstOrDefaultAsync<AspNetUserRole>(true, o => o.UserId.ToLower().Contains(item.UserId.ToLower()) &&  o.RoleId.ToLower().Contains(item.RoleId.ToLower()) );
+                var foundEntity = await this.UnitOfWork.FirstOrDefaultAsync<AspNetUserRole>(true, o => o.UserId == item.UserId &&  o.RoleId == item.RoleId );
 
 		        if (foundEntity == null)
 		        {
@@ -382,7 +382,7 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
 		    foreach (var entity in items)
 		    {
                 bool doUpdate = false;
-			    var entityToUpdate = this.UnitOfWork.FirstOrDefault<AspNetUserRole>(o =>  o.UserId.ToLower().Contains(entity.UserId.ToLower()) &&  o.RoleId.ToLower().Contains(entity.RoleId.ToLower()) , true);
+			    var entityToUpdate = this.UnitOfWork.FirstOrDefault<AspNetUserRole>(o =>  o.UserId == entity.UserId &&  o.RoleId == entity.RoleId , true);
 			
 			    if (entityToUpdate == null)
 			    {
@@ -414,7 +414,7 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
 		    foreach (var entity in items)
 		    {
                 bool doUpdate = false;
-			    var entityToUpdate = await this.UnitOfWork.FirstOrDefaultAsync<AspNetUserRole>(true, o =>  o.UserId.ToLower().Contains(entity.UserId.ToLower()) &&  o.RoleId.ToLower().Contains(entity.RoleId.ToLower()) );
+			    var entityToUpdate = await this.UnitOfWork.FirstOrDefaultAsync<AspNetUserRole>(true, o =>  o.UserId == entity.UserId &&  o.RoleId == entity.RoleId );
 			
 			    if (entityToUpdate == null)
 			    {

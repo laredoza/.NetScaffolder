@@ -43,7 +43,6 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.MySql.Mappings.MySqlFullC
 			#region Constraints
 			
 			builder.Property(t => t.Id).HasColumnName("Id").IsRequired();
-			builder.Property(t => t.RoleId).HasMaxLength(450);
 			builder.Property(t => t.RoleId).HasColumnName("RoleId").IsRequired();
 			builder.Property(t => t.ClaimType).HasColumnName("ClaimType").IsRequired(false);
 			builder.Property(t => t.ClaimValue).HasColumnName("ClaimValue").IsRequired(false);

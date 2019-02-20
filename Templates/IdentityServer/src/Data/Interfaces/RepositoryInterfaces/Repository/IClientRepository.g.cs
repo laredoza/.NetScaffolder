@@ -72,6 +72,24 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
 		Task<IList<Client>> LoadByAlwaysSendClientClaimsAsync(bool alwaysSendClientClaims, bool cache, params Expression<Func<IClient, object>>[] includes);
 
         /// <summary>
+        /// Load Client entities from the database using the Active field
+        /// </summary>
+        /// <param name="active">bool</param
+        /// <param name="cache">Use 2nd level caching if enabled</param>
+		/// <param name="includes">params Expression<Func<IClient, object>>[]</param>
+        /// <returns>IList<Client></returns>
+		IList<Client> LoadByActive(bool active, bool cache,  params Expression<Func<IClient, object>>[] includes);
+		
+        /// <summary>
+        /// Load Client entities async from the database using the Active field
+        /// </summary>
+        /// <param name="active">bool</param
+        /// <param name="cache">Use 2nd level caching if enabled</param>
+		/// <param name="includes">params Expression<Func<IClient, object>>[]</param>
+        /// <returns>IList<Client></returns>
+		Task<IList<Client>> LoadByActiveAsync(bool active, bool cache, params Expression<Func<IClient, object>>[] includes);
+
+        /// <summary>
         /// Load all Client entities from the database.
         /// </summary>
         /// <param name="cache">Use 2nd level caching if enabled</param>

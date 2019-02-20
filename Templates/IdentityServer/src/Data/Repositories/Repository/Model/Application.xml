@@ -9,9 +9,41 @@
       <InheritFromInterface />
       <InheritFromWeb />
       <Models>
+        <Table Description="" SchemaName="dbo" TableName="AllowedScope" EnabledForCodeGeneration="true">
+          <Columns>
+            <Column ColumnName="Id" ColumnOrder="1" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="true" IdentitySeed="1" IdentityIncrement="1">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="ClientId" ColumnOrder="2" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="ResourceName" ColumnOrder="3" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="50" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+          </Columns>
+          <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
+          <RelationShips />
+          <Indexes />
+        </Table>
+        <Table Description="" SchemaName="dbo" TableName="ApiResource" EnabledForCodeGeneration="true">
+          <Columns>
+            <Column ColumnName="Id" ColumnOrder="1" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="true" IdentitySeed="1" IdentityIncrement="1">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="Name" ColumnOrder="2" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="50" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="DisplayName" ColumnOrder="3" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="100" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+          </Columns>
+          <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
+          <RelationShips />
+          <Indexes />
+        </Table>
         <Table Description="" SchemaName="dbo" TableName="AspNetRole" EnabledForCodeGeneration="true">
           <Columns>
-            <Column ColumnName="Id" ColumnOrder="1" DataType="String" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="true" Length="450" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+            <Column ColumnName="Id" ColumnOrder="1" DataType="Guid" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="true" Length="0" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
               <RemapDataType xsi:nil="true" />
             </Column>
             <Column ColumnName="Name" ColumnOrder="2" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="256" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
@@ -33,7 +65,7 @@
             <Column ColumnName="Id" ColumnOrder="1" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="true" IdentitySeed="1" IdentityIncrement="1">
               <RemapDataType xsi:nil="true" />
             </Column>
-            <Column ColumnName="RoleId" ColumnOrder="2" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="450" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+            <Column ColumnName="RoleId" ColumnOrder="2" DataType="Guid" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="0" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
               <RemapDataType xsi:nil="true" />
             </Column>
             <Column ColumnName="ClaimType" ColumnOrder="3" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="-1" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
@@ -49,7 +81,7 @@
         </Table>
         <Table Description="" SchemaName="dbo" TableName="AspNetUser" EnabledForCodeGeneration="true">
           <Columns>
-            <Column ColumnName="Id" ColumnOrder="1" DataType="String" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="true" Length="450" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+            <Column ColumnName="Id" ColumnOrder="1" DataType="Guid" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="true" Length="0" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
               <RemapDataType xsi:nil="true" />
             </Column>
             <Column ColumnName="UserName" ColumnOrder="2" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="256" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
@@ -104,7 +136,7 @@
             <Column ColumnName="Id" ColumnOrder="1" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="true" IdentitySeed="1" IdentityIncrement="1">
               <RemapDataType xsi:nil="true" />
             </Column>
-            <Column ColumnName="UserId" ColumnOrder="2" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="450" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+            <Column ColumnName="UserId" ColumnOrder="2" DataType="Guid" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="0" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
               <RemapDataType xsi:nil="true" />
             </Column>
             <Column ColumnName="ClaimType" ColumnOrder="3" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="-1" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
@@ -129,7 +161,7 @@
             <Column ColumnName="ProviderDisplayName" ColumnOrder="3" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="-1" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
               <RemapDataType xsi:nil="true" />
             </Column>
-            <Column ColumnName="UserId" ColumnOrder="4" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="450" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+            <Column ColumnName="UserId" ColumnOrder="4" DataType="Guid" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="0" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
               <RemapDataType xsi:nil="true" />
             </Column>
           </Columns>
@@ -139,10 +171,10 @@
         </Table>
         <Table Description="" SchemaName="dbo" TableName="AspNetUserRole" EnabledForCodeGeneration="true">
           <Columns>
-            <Column ColumnName="UserId" ColumnOrder="1" DataType="String" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="true" Length="450" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+            <Column ColumnName="UserId" ColumnOrder="1" DataType="Guid" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="true" Length="0" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
               <RemapDataType xsi:nil="true" />
             </Column>
-            <Column ColumnName="RoleId" ColumnOrder="2" DataType="String" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="true" Length="450" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+            <Column ColumnName="RoleId" ColumnOrder="2" DataType="Guid" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="true" Length="0" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
               <RemapDataType xsi:nil="true" />
             </Column>
           </Columns>
@@ -152,7 +184,7 @@
         </Table>
         <Table Description="" SchemaName="dbo" TableName="AspNetUserToken" EnabledForCodeGeneration="true">
           <Columns>
-            <Column ColumnName="UserId" ColumnOrder="1" DataType="String" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="true" Length="450" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+            <Column ColumnName="UserId" ColumnOrder="1" DataType="Guid" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="true" Length="0" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
               <RemapDataType xsi:nil="true" />
             </Column>
             <Column ColumnName="LoginProvider" ColumnOrder="2" DataType="String" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="true" Length="128" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
@@ -162,38 +194,6 @@
               <RemapDataType xsi:nil="true" />
             </Column>
             <Column ColumnName="Value" ColumnOrder="4" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="-1" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
-              <RemapDataType xsi:nil="true" />
-            </Column>
-          </Columns>
-          <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
-          <RelationShips />
-          <Indexes />
-        </Table>
-        <Table Description="" SchemaName="dbo" TableName="AllowedScope" EnabledForCodeGeneration="true">
-          <Columns>
-            <Column ColumnName="Id" ColumnOrder="1" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="true" IdentitySeed="1" IdentityIncrement="1">
-              <RemapDataType xsi:nil="true" />
-            </Column>
-            <Column ColumnName="ClientId" ColumnOrder="2" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
-              <RemapDataType xsi:nil="true" />
-            </Column>
-            <Column ColumnName="ResourceName" ColumnOrder="3" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="50" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
-              <RemapDataType xsi:nil="true" />
-            </Column>
-          </Columns>
-          <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
-          <RelationShips />
-          <Indexes />
-        </Table>
-        <Table Description="" SchemaName="dbo" TableName="ApiResource" EnabledForCodeGeneration="true">
-          <Columns>
-            <Column ColumnName="Id" ColumnOrder="1" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="true" IdentitySeed="1" IdentityIncrement="1">
-              <RemapDataType xsi:nil="true" />
-            </Column>
-            <Column ColumnName="Name" ColumnOrder="2" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="50" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
-              <RemapDataType xsi:nil="true" />
-            </Column>
-            <Column ColumnName="DisplayName" ColumnOrder="3" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="false" Length="100" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
               <RemapDataType xsi:nil="true" />
             </Column>
           </Columns>

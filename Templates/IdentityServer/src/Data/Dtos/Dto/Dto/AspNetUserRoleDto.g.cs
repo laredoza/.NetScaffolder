@@ -58,8 +58,8 @@ namespace DotNetScaffolder.Domain.Data.Dtos.DefaultDto.Dto
 		
 		#region Fields
 		
-		public string UserId { get; set; }
-		public string RoleId { get; set; }
+		public Guid UserId { get; set; }
+		public Guid RoleId { get; set; }
 
 		#endregion
 		

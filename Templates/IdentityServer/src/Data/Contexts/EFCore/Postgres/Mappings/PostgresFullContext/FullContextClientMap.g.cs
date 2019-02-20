@@ -43,11 +43,12 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.Postgres.Mappings.Postgre
 			#region Constraints
 			
 			builder.Property(t => t.Id).HasColumnName("Id").IsRequired();
-			builder.Property(t => t.ClientId).HasMaxLength(50);
+			builder.Property(t => t.ClientId).HasMaxLength(100);
 			builder.Property(t => t.ClientId).HasColumnName("ClientId").IsRequired();
 			builder.Property(t => t.ClientName).HasMaxLength(50);
 			builder.Property(t => t.ClientName).HasColumnName("ClientName").IsRequired();
 			builder.Property(t => t.AlwaysSendClientClaims).HasColumnName("AlwaysSendClientClaims").IsRequired();
+			builder.Property(t => t.Active).HasColumnName("Active").IsRequired();
 			
 			#endregion
 
@@ -71,6 +72,7 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.Postgres.Mappings.Postgre
 			//TODO: builder.Property(t => t.ClientId).HasColumnOrder(2);
 			//TODO: builder.Property(t => t.ClientName).HasColumnOrder(3);
 			//TODO: builder.Property(t => t.AlwaysSendClientClaims).HasColumnOrder(4);
+			//TODO: builder.Property(t => t.Active).HasColumnOrder(5);
 
 			#endregion	
 	    }

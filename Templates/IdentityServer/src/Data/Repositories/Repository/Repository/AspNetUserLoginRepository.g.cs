@@ -84,6 +84,31 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
 		}
 
         /// <summary>
+        /// Load AspNetUserLogin entities from the database using the UserId field
+        /// </summary>
+        /// <param name="userId">Guid</param>
+		/// <param name="includes">params Expression<Func<AspNetUserLogin, object>>[]</param>
+        /// <returns>IList<IAspNetUserLogin></returns>
+		public virtual IList<AspNetUserLogin> LoadByUserId(Guid userId, bool cache, params Expression<Func<IAspNetUserLogin, object>>[] includes)
+		{
+			var expr = this.Convert(includes);
+			return this.UnitOfWork.AllMatching<AspNetUserLogin>(o => o.UserId == userId, cache, expr).ToList<AspNetUserLogin>();
+		}
+		
+        /// <summary>
+        /// Load AspNetUserLogin entities async from the database using the UserId field
+        /// </summary>
+        /// <param name="userId">Guid</param>
+		/// <param name="includes">params Expression<Func<AspNetUserLogin, object>>[]</param>
+        /// <returns>IList<IAspNetUserLogin></returns>
+		public virtual async Task<IList<AspNetUserLogin>> LoadByUserIdAsync(Guid userId, bool cache, params Expression<Func<IAspNetUserLogin, object>>[] includes)
+		{
+			var expr = this.Convert(includes);
+			var result = await this.UnitOfWork.AllMatchingAsync<AspNetUserLogin>(o => o.UserId == userId,cache, expr);
+			return result.ToList<AspNetUserLogin>();
+		}
+
+        /// <summary>
         /// Load all AspNetUserLogin entities from the database.
         /// </summary>
 		/// <param name="includes">params Expression<Func<IAspNetUserLogin, object>>[]</param>
@@ -148,48 +173,6 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
 			else
 			{
 				var result = await this.UnitOfWork.AllMatchingAsync<AspNetUserLogin>(o => o.ProviderDisplayName.ToLower().Contains(providerDisplayName.ToLower()), cache, expr);
-				return result.ToList<AspNetUserLogin>();
-			}
-		}
-
-        /// <summary>
-        /// Search for AspNetUserLogin entities in the database by UserId
-        /// </summary>
-        /// <param name="userId">string</param>
-		/// <param name="caseSensitive">bool</param>
-		/// <param name="includes">params Expression<Func<IAspNetUserLogin, object>>[]</param>
-        /// <returns>IList<AspNetUserLogin></returns>
-		public virtual IList<AspNetUserLogin> SearchByUserId(string userId, bool cache, bool caseSensitive = false, params Expression<Func<IAspNetUserLogin, object>>[] includes)
-		{		
-			var expr = this.Convert(includes);
-			if(caseSensitive) 
-			{
-				return this.UnitOfWork.AllMatching<AspNetUserLogin>(o => o.UserId.Contains(userId), cache, expr).ToList<AspNetUserLogin>();
-			}
-			else
-			{
-				return this.UnitOfWork.AllMatching<AspNetUserLogin>(o => o.UserId.ToLower().Contains(userId.ToLower()), cache, expr).ToList<AspNetUserLogin>();
-			}
-		}
-		
-        /// <summary>
-        /// Search for AspNetUserLogin entities async in the database by UserId
-        /// </summary>
-        /// <param name="userId">string</param>
-		/// <param name="caseSensitive">bool</param>
-		/// <param name="includes">params Expression<Func<IAspNetUserLogin, object>>[]</param>
-        /// <returns>IList<AspNetUserLogin></returns>
-		public virtual async Task<IList<AspNetUserLogin>> SearchByUserIdAsync(string userId, bool cache, bool caseSensitive = false, params Expression<Func<IAspNetUserLogin, object>>[] includes)
-		{		
-			var expr = this.Convert(includes);
-			if(caseSensitive) 
-			{
-				var result = await this.UnitOfWork.AllMatchingAsync<AspNetUserLogin>(o => o.UserId.Contains(userId), cache, expr);
-				return result.ToList<AspNetUserLogin>();
-			}
-			else
-			{
-				var result = await this.UnitOfWork.AllMatchingAsync<AspNetUserLogin>(o => o.UserId.ToLower().Contains(userId.ToLower()), cache, expr);
 				return result.ToList<AspNetUserLogin>();
 			}
 		}

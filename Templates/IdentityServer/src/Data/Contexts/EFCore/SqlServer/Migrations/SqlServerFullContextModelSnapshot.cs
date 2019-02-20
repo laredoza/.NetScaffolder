@@ -19,476 +19,689 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.SqlServer.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity.BankAccount", b =>
+            modelBuilder.Entity("DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity.AllowedScope", b =>
                 {
-                    b.Property<int>("BankAccountId")
-                        .HasColumnName("BankAccountId");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("Id")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<decimal>("Balance")
-                        .HasColumnName("Balance")
-                        .HasColumnType("decimal(19, 4)");
+                    b.Property<int>("ClientId")
+                        .HasColumnName("ClientId");
 
-                    b.Property<string>("BankAccountNumber")
+                    b.Property<string>("ResourceName")
                         .IsRequired()
-                        .HasColumnName("BankAccountNumber")
-                        .HasMaxLength(10);
+                        .HasColumnName("ResourceName")
+                        .HasMaxLength(50);
 
-                    b.Property<int?>("CustomerId")
-                        .HasColumnName("CustomerId");
+                    b.HasKey("Id");
 
-                    b.Property<bool>("Locked")
-                        .HasColumnName("Locked");
+                    b.HasIndex("ClientId");
 
-                    b.HasKey("BankAccountId");
-
-                    b.HasIndex("BankAccountId")
-                        .IsUnique()
-                        .HasName("UQ__BankAcco__4FC8E4A0C45281C8");
-
-                    b.HasIndex("CustomerId")
-                        .HasName("IX_CustomerId1");
-
-                    b.ToTable("BankAccount","dbo");
+                    b.ToTable("AllowedScope","dbo");
 
                     b.HasData(
                         new
                         {
-                            BankAccountId = 1,
-                            Balance = 10000m,
-                            BankAccountNumber = "001",
-                            CustomerId = 1,
-                            Locked = false
+                            Id = 1,
+                            ClientId = 1,
+                            ResourceName = "openid"
                         },
                         new
                         {
-                            BankAccountId = 2,
-                            Balance = 20000m,
-                            BankAccountNumber = "002",
-                            CustomerId = 2,
-                            Locked = false
-                        });
-                });
-
-            modelBuilder.Entity("DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity.BankTransfers", b =>
-                {
-                    b.Property<int>("BankTransferId")
-                        .HasColumnName("BankTransferId");
-
-                    b.Property<decimal>("Amount")
-                        .HasColumnName("Amount")
-                        .HasColumnType("decimal(18, 2)");
-
-                    b.Property<int>("FromBankAccountId")
-                        .HasColumnName("FromBankAccountId");
-
-                    b.Property<int>("ToBankAccountId")
-                        .HasColumnName("ToBankAccountId");
-
-                    b.Property<DateTime>("TransferDate")
-                        .HasColumnName("TransferDate");
-
-                    b.HasKey("BankTransferId");
-
-                    b.HasIndex("BankTransferId")
-                        .IsUnique()
-                        .HasName("UQ__BankTran__2E82727AB11DB584");
-
-                    b.HasIndex("ToBankAccountId")
-                        .HasName("IX_ToBankAccountId");
-
-                    b.ToTable("BankTransfers","dbo");
-
-                    b.HasData(
+                            Id = 2,
+                            ClientId = 1,
+                            ResourceName = "profile"
+                        },
                         new
                         {
-                            BankTransferId = 1,
-                            Amount = 100m,
-                            FromBankAccountId = 1,
-                            ToBankAccountId = 2,
-                            TransferDate = new DateTime(2019, 1, 2, 10, 39, 34, 484, DateTimeKind.Local).AddTicks(6841)
-                        });
-                });
-
-            modelBuilder.Entity("DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity.Book", b =>
-                {
-                    b.Property<int>("ProductId")
-                        .HasColumnName("ProductId");
-
-                    b.Property<string>("Publisher")
-                        .IsRequired()
-                        .HasColumnName("Publisher")
-                        .HasMaxLength(200);
-
-                    b.HasKey("ProductId");
-
-                    b.HasIndex("ProductId")
-                        .HasName("IX_ProductId1");
-
-                    b.ToTable("Book","dbo");
-
-                    b.HasData(
+                            Id = 3,
+                            ClientId = 1,
+                            ResourceName = "email"
+                        },
                         new
                         {
-                            ProductId = 1,
-                            Publisher = "Best Book Publisher Ever"
+                            Id = 4,
+                            ClientId = 1,
+                            ResourceName = "roles"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            ClientId = 1,
+                            ResourceName = "api1"
                         });
                 });
 
-            modelBuilder.Entity("DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity.Country", b =>
+            modelBuilder.Entity("DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity.ApiResource", b =>
                 {
-                    b.Property<int>("CountryId")
-                        .HasColumnName("CountryId");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("Id")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("CountryName")
-                        .HasColumnName("CountryName")
+                    b.Property<string>("DisplayName")
+                        .HasColumnName("DisplayName")
                         .HasMaxLength(100);
 
-                    b.HasKey("CountryId");
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnName("Name")
+                        .HasMaxLength(50);
 
-                    b.HasIndex("CountryId")
+                    b.HasKey("Id");
+
+                    b.ToTable("ApiResource","dbo");
+                });
+
+            modelBuilder.Entity("DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity.AspNetRole", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnName("Id");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .HasColumnName("ConcurrencyStamp");
+
+                    b.Property<string>("Name")
+                        .HasColumnName("Name")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("NormalizedName")
+                        .HasColumnName("NormalizedName")
+                        .HasMaxLength(256);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedName")
                         .IsUnique()
-                        .HasName("UQ__Country__10D1609E8CC26505");
+                        .HasName("RoleNameIndex")
+                        .HasFilter("[NormalizedName] IS NOT NULL");
 
-                    b.ToTable("Country","dbo");
+                    b.ToTable("AspNetRole","dbo");
+                });
+
+            modelBuilder.Entity("DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity.AspNetRoleClaim", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("Id")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnName("ClaimType");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnName("ClaimValue");
+
+                    b.Property<Guid>("RoleId")
+                        .HasColumnName("RoleId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoleId")
+                        .HasName("IX_AspNetRoleClaims_RoleId");
+
+                    b.ToTable("AspNetRoleClaim","dbo");
+                });
+
+            modelBuilder.Entity("DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity.AspNetUser", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnName("Id");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnName("AccessFailedCount");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .HasColumnName("ConcurrencyStamp");
+
+                    b.Property<string>("Email")
+                        .HasColumnName("Email")
+                        .HasMaxLength(256);
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnName("EmailConfirmed");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnName("LockoutEnabled");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnName("LockoutEnd");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasColumnName("NormalizedEmail")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasColumnName("NormalizedUserName")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnName("PasswordHash");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnName("PhoneNumber");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnName("PhoneNumberConfirmed");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnName("SecurityStamp");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnName("TwoFactorEnabled");
+
+                    b.Property<string>("UserName")
+                        .HasColumnName("UserName")
+                        .HasMaxLength(256);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.ToTable("AspNetUser","dbo");
 
                     b.HasData(
                         new
                         {
-                            CountryId = 1,
-                            CountryName = "US"
+                            Id = new Guid("953bb2c4-a127-4971-96bb-5e50c381a0b9"),
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "2/20/2019 2:40:22 PM",
+                            Email = "alice@alice.com",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "alice@alice.com",
+                            NormalizedUserName = "alice",
+                            PasswordHash = "password",
+                            PhoneNumber = "123#",
+                            PhoneNumberConfirmed = true,
+                            SecurityStamp = "2/20/2019 2:40:22 PM",
+                            TwoFactorEnabled = false,
+                            UserName = "Alice"
+                        });
+                });
+
+            modelBuilder.Entity("DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity.AspNetUserClaim", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("Id")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnName("ClaimType");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnName("ClaimValue");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnName("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId")
+                        .HasName("IX_AspNetUserClaims_UserId");
+
+                    b.ToTable("AspNetUserClaim","dbo");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ClaimType = "name",
+                            ClaimValue = "Alice",
+                            UserId = new Guid("953bb2c4-a127-4971-96bb-5e50c381a0b9")
                         },
                         new
                         {
-                            CountryId = 2,
-                            CountryName = "UK"
-                        });
-                });
-
-            modelBuilder.Entity("DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity.Customer", b =>
-                {
-                    b.Property<int>("CustomerId")
-                        .HasColumnName("CustomerId");
-
-                    b.Property<string>("Address")
-                        .HasColumnName("Address")
-                        .HasMaxLength(50);
-
-                    b.Property<string>("City")
-                        .HasColumnName("City")
-                        .HasMaxLength(20);
-
-                    b.Property<string>("CompanyName")
-                        .IsRequired()
-                        .HasColumnName("CompanyName")
-                        .HasMaxLength(50);
-
-                    b.Property<string>("ContactName")
-                        .HasColumnName("ContactName")
-                        .HasMaxLength(50);
-
-                    b.Property<string>("ContactTitle")
-                        .HasColumnName("ContactTitle")
-                        .HasMaxLength(50);
-
-                    b.Property<int?>("CountryId")
-                        .HasColumnName("CountryId");
-
-                    b.Property<string>("CustomerCode")
-                        .IsRequired()
-                        .HasColumnName("CustomerCode")
-                        .HasMaxLength(5);
-
-                    b.Property<string>("Fax")
-                        .HasColumnName("Fax")
-                        .HasMaxLength(50);
-
-                    b.Property<bool>("IsEnabled")
-                        .HasColumnName("IsEnabled");
-
-                    b.Property<string>("Photo")
-                        .HasColumnName("Photo")
-                        .HasMaxLength(255);
-
-                    b.Property<string>("PostalCode")
-                        .HasColumnName("PostalCode")
-                        .HasMaxLength(10);
-
-                    b.Property<string>("Telephone")
-                        .HasColumnName("Telephone")
-                        .HasMaxLength(50);
-
-                    b.HasKey("CustomerId");
-
-                    b.HasIndex("CountryId")
-                        .HasName("IX_CountryId");
-
-                    b.HasIndex("CustomerId")
-                        .IsUnique()
-                        .HasName("UQ__Customer__A4AE64D98B60CE6B");
-
-                    b.ToTable("Customer","dbo");
-
-                    b.HasData(
-                        new
-                        {
-                            CustomerId = 1,
-                            Address = "1st Road",
-                            City = "New York",
-                            CompanyName = "New York Books",
-                            ContactName = "Bob",
-                            ContactTitle = "Mr",
-                            CountryId = 1,
-                            CustomerCode = "001",
-                            Fax = "123456789",
-                            IsEnabled = true,
-                            Photo = "",
-                            PostalCode = "001",
-                            Telephone = "123456789"
+                            Id = 2,
+                            ClaimType = "website",
+                            ClaimValue = "https://alice.com",
+                            UserId = new Guid("953bb2c4-a127-4971-96bb-5e50c381a0b9")
                         },
                         new
                         {
-                            CustomerId = 2,
-                            Address = "2nd Road",
-                            City = "London",
-                            CompanyName = "London Software",
-                            ContactName = "Mary",
-                            ContactTitle = "Miss",
-                            CountryId = 2,
-                            CustomerCode = "002",
-                            Fax = "0123456789",
-                            IsEnabled = true,
-                            Photo = "",
-                            PostalCode = "002",
-                            Telephone = "0123456789"
+                            Id = 3,
+                            ClaimType = "email",
+                            ClaimValue = "alice@alice.com",
+                            UserId = new Guid("953bb2c4-a127-4971-96bb-5e50c381a0b9")
+                        },
+                        new
+                        {
+                            Id = 4,
+                            ClaimType = "role",
+                            ClaimValue = "User",
+                            UserId = new Guid("953bb2c4-a127-4971-96bb-5e50c381a0b9")
                         });
                 });
 
-            modelBuilder.Entity("DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity.Order", b =>
+            modelBuilder.Entity("DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity.AspNetUserLogin", b =>
                 {
-                    b.Property<int>("OrderId")
-                        .HasColumnName("OrderId");
+                    b.Property<string>("LoginProvider")
+                        .HasColumnName("LoginProvider")
+                        .HasMaxLength(128);
 
-                    b.Property<int?>("CustomerId")
-                        .HasColumnName("CustomerId");
+                    b.Property<string>("ProviderKey")
+                        .HasColumnName("ProviderKey")
+                        .HasMaxLength(128);
 
-                    b.Property<DateTime?>("DeliveryDate")
-                        .HasColumnName("DeliveryDate");
+                    b.Property<string>("ProviderDisplayName")
+                        .HasColumnName("ProviderDisplayName");
 
-                    b.Property<DateTime?>("OrderDate")
-                        .HasColumnName("OrderDate");
+                    b.Property<Guid>("UserId")
+                        .HasColumnName("UserId");
 
-                    b.Property<string>("ShippingAddress")
-                        .HasColumnName("ShippingAddress")
-                        .HasMaxLength(50);
+                    b.HasKey("LoginProvider", "ProviderKey");
 
-                    b.Property<string>("ShippingCity")
-                        .HasColumnName("ShippingCity")
-                        .HasMaxLength(50);
+                    b.HasIndex("UserId")
+                        .HasName("IX_AspNetUserLogins_UserId");
 
-                    b.Property<string>("ShippingName")
-                        .HasColumnName("ShippingName")
-                        .HasMaxLength(50);
-
-                    b.Property<string>("ShippingZip")
-                        .HasColumnName("ShippingZip")
-                        .HasMaxLength(50);
-
-                    b.HasKey("OrderId");
-
-                    b.HasIndex("CustomerId")
-                        .HasName("IX_CustomerId");
-
-                    b.HasIndex("OrderId")
-                        .IsUnique()
-                        .HasName("UQ__Order__C3905BCE3C614174");
-
-                    b.ToTable("Order","dbo");
+                    b.ToTable("AspNetUserLogin","dbo");
 
                     b.HasData(
                         new
                         {
-                            OrderId = 1,
-                            CustomerId = 2,
-                            DeliveryDate = new DateTime(2019, 1, 2, 10, 39, 34, 487, DateTimeKind.Local).AddTicks(1392),
-                            OrderDate = new DateTime(2019, 1, 2, 10, 39, 34, 487, DateTimeKind.Local).AddTicks(425),
-                            ShippingAddress = "2nd road",
-                            ShippingCity = "London",
-                            ShippingName = "Mary",
-                            ShippingZip = "123"
+                            LoginProvider = "IdentityServer4",
+                            ProviderKey = "IdentityServer4",
+                            ProviderDisplayName = "IdentityServer4",
+                            UserId = new Guid("953bb2c4-a127-4971-96bb-5e50c381a0b9")
                         });
                 });
 
-            modelBuilder.Entity("DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity.OrderDetails", b =>
+            modelBuilder.Entity("DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity.AspNetUserRole", b =>
                 {
-                    b.Property<int>("OrderDetailsId")
-                        .HasColumnName("OrderDetailsId");
+                    b.Property<Guid>("UserId")
+                        .HasColumnName("UserId");
 
-                    b.Property<short?>("Amount")
-                        .HasColumnName("Amount");
+                    b.Property<Guid>("RoleId")
+                        .HasColumnName("RoleId");
 
-                    b.Property<float?>("Discount")
-                        .HasColumnName("Discount");
+                    b.HasKey("UserId", "RoleId");
 
-                    b.Property<int>("OrderId")
-                        .HasColumnName("OrderId");
+                    b.HasIndex("RoleId")
+                        .HasName("IX_AspNetUserRoles_RoleId");
 
-                    b.Property<int>("ProductId")
-                        .HasColumnName("ProductId");
+                    b.ToTable("AspNetUserRole","dbo");
+                });
 
-                    b.Property<decimal?>("UnitPrice")
-                        .HasColumnName("UnitPrice")
-                        .HasColumnType("decimal(19, 4)");
+            modelBuilder.Entity("DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity.AspNetUserToken", b =>
+                {
+                    b.Property<Guid>("UserId")
+                        .HasColumnName("UserId");
 
-                    b.HasKey("OrderDetailsId");
+                    b.Property<string>("LoginProvider")
+                        .HasColumnName("LoginProvider")
+                        .HasMaxLength(128);
 
-                    b.HasIndex("OrderDetailsId")
-                        .IsUnique()
-                        .HasName("UQ__OrderDet__9DD74DBC8AA17DA0");
+                    b.Property<string>("Name")
+                        .HasColumnName("Name")
+                        .HasMaxLength(128);
 
-                    b.HasIndex("OrderId")
-                        .HasName("IX_OrderId1");
+                    b.Property<string>("Value")
+                        .HasColumnName("Value");
 
-                    b.HasIndex("ProductId")
-                        .HasName("IX_ProductId2");
+                    b.HasKey("UserId", "LoginProvider", "Name");
 
-                    b.ToTable("OrderDetails","dbo");
+                    b.ToTable("AspNetUserToken","dbo");
 
                     b.HasData(
                         new
                         {
-                            OrderDetailsId = 1,
-                            Amount = (short)100,
-                            Discount = 0f,
-                            OrderId = 1,
-                            ProductId = 1,
-                            UnitPrice = 100m
+                            UserId = new Guid("953bb2c4-a127-4971-96bb-5e50c381a0b9"),
+                            LoginProvider = "IdentityServer4",
+                            Name = "Alice",
+                            Value = "Alice"
                         });
                 });
 
-            modelBuilder.Entity("DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity.Product", b =>
+            modelBuilder.Entity("DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity.Client", b =>
                 {
-                    b.Property<int>("ProductId")
-                        .HasColumnName("ProductId");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("Id")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<short?>("AmountInStock")
-                        .HasColumnName("AmountInStock");
+                    b.Property<bool>("Active")
+                        .HasColumnName("Active");
 
-                    b.Property<string>("ProductDescription")
-                        .HasColumnName("ProductDescription")
+                    b.Property<bool>("AlwaysSendClientClaims")
+                        .HasColumnName("AlwaysSendClientClaims");
+
+                    b.Property<string>("ClientId")
+                        .IsRequired()
+                        .HasColumnName("ClientId")
                         .HasMaxLength(100);
 
-                    b.Property<decimal?>("UnitPrice")
-                        .HasColumnName("UnitPrice")
-                        .HasColumnType("decimal(19, 4)");
+                    b.Property<string>("ClientName")
+                        .IsRequired()
+                        .HasColumnName("ClientName")
+                        .HasMaxLength(50);
 
-                    b.HasKey("ProductId");
+                    b.HasKey("Id");
 
-                    b.HasIndex("ProductId")
-                        .IsUnique()
-                        .HasName("UQ__Product__B40CC6CC5F2A0195");
-
-                    b.ToTable("Product","dbo");
+                    b.ToTable("Client","dbo");
 
                     b.HasData(
                         new
                         {
-                            ProductId = 1,
-                            AmountInStock = (short)100,
-                            ProductDescription = "A Book",
-                            UnitPrice = 100m
+                            Id = 1,
+                            Active = true,
+                            AlwaysSendClientClaims = true,
+                            ClientId = "mvc",
+                            ClientName = "MVC client"
+                        });
+                });
+
+            modelBuilder.Entity("DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity.ClientGrantType", b =>
+                {
+                    b.Property<int>("ClientId")
+                        .HasColumnName("ClientId");
+
+                    b.Property<int>("GrantTypeId")
+                        .HasColumnName("GrantTypeId");
+
+                    b.HasKey("ClientId", "GrantTypeId");
+
+                    b.HasIndex("GrantTypeId");
+
+                    b.ToTable("ClientGrantType","dbo");
+
+                    b.HasData(
+                        new
+                        {
+                            ClientId = 1,
+                            GrantTypeId = 5
+                        });
+                });
+
+            modelBuilder.Entity("DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity.GrantType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("Id")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnName("Name")
+                        .HasMaxLength(50);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("GrantType","dbo");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "ClientCredentials"
                         },
                         new
                         {
-                            ProductId = 2,
-                            AmountInStock = (short)100,
-                            ProductDescription = "Software",
-                            UnitPrice = 200m
+                            Id = 2,
+                            Name = "Code"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "CodeAndClientCredentials"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "DeviceFlow"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "Hybrid"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Name = "HybridAndClientCredentials"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Name = "Implicit"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Name = "ImplicitAndClientCredentials"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Name = "ResourceOwnerPassword"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Name = "ResourceOwnerPasswordAndClientCredentials"
                         });
                 });
 
-            modelBuilder.Entity("DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity.Software", b =>
+            modelBuilder.Entity("DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity.IdentityResource", b =>
                 {
-                    b.Property<int>("ProductId")
-                        .HasColumnName("ProductId");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("Id")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("LicenseCode")
+                    b.Property<string>("DisplayName")
                         .IsRequired()
-                        .HasColumnName("LicenseCode")
-                        .HasMaxLength(200);
+                        .HasColumnName("DisplayName")
+                        .HasMaxLength(50);
 
-                    b.HasKey("ProductId");
+                    b.Property<bool>("Emphasize")
+                        .HasColumnName("Emphasize");
 
-                    b.HasIndex("ProductId")
-                        .HasName("IX_ProductId3");
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnName("Name")
+                        .HasMaxLength(50);
 
-                    b.ToTable("Software","dbo");
+                    b.Property<bool>("Required")
+                        .HasColumnName("Required");
+
+                    b.Property<bool>("ShowInDiscoveryDocument")
+                        .HasColumnName("ShowInDiscoveryDocument");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("IdentityResource","dbo");
+                });
+
+            modelBuilder.Entity("DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity.IdentityResourceClaimType", b =>
+                {
+                    b.Property<int>("IdentityResourceId")
+                        .HasColumnName("IdentityResourceId");
+
+                    b.Property<int>("ResourceClaimTypeId")
+                        .HasColumnName("ResourceClaimTypeId");
+
+                    b.HasKey("IdentityResourceId", "ResourceClaimTypeId");
+
+                    b.HasIndex("ResourceClaimTypeId");
+
+                    b.ToTable("IdentityResourceClaimType","dbo");
+                });
+
+            modelBuilder.Entity("DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity.PostLogoutRedirectUri", b =>
+                {
+                    b.Property<int>("Id")
+                        .HasColumnName("Id");
+
+                    b.Property<int>("ClientId")
+                        .HasColumnName("ClientId");
+
+                    b.Property<string>("Uri")
+                        .IsRequired()
+                        .HasColumnName("Uri")
+                        .HasMaxLength(500);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClientId");
+
+                    b.ToTable("PostLogoutRedirectUri","dbo");
 
                     b.HasData(
                         new
                         {
-                            ProductId = 2,
-                            LicenseCode = "#1234567890"
+                            Id = 1,
+                            ClientId = 1,
+                            Uri = "http://localhost:5002/signout-callback-oidc"
                         });
                 });
 
-            modelBuilder.Entity("DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity.BankAccount", b =>
+            modelBuilder.Entity("DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity.RedirectUri", b =>
                 {
-                    b.HasOne("DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity.Customer", "Customer")
-                        .WithMany("BankAccount")
-                        .HasForeignKey("CustomerId")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("Id")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ClientId")
+                        .HasColumnName("ClientId");
+
+                    b.Property<string>("Uri")
+                        .IsRequired()
+                        .HasColumnName("Uri")
+                        .HasMaxLength(500);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClientId");
+
+                    b.ToTable("RedirectUri","dbo");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ClientId = 1,
+                            Uri = "http://localhost:5002/signin-oidc"
+                        });
+                });
+
+            modelBuilder.Entity("DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity.ResourceClaimType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("Id")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnName("Name")
+                        .HasMaxLength(100);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ResourceClaimType","dbo");
+                });
+
+            modelBuilder.Entity("DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity.AllowedScope", b =>
+                {
+                    b.HasOne("DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity.Client", "Client")
+                        .WithMany("AllowedScope")
+                        .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 
-            modelBuilder.Entity("DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity.BankTransfers", b =>
+            modelBuilder.Entity("DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity.AspNetRoleClaim", b =>
                 {
-                    b.HasOne("DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity.BankAccount", "BankAccount")
-                        .WithMany("BankTransfers")
-                        .HasForeignKey("ToBankAccountId")
+                    b.HasOne("DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity.AspNetRole", "AspNetRole")
+                        .WithMany("AspNetRoleClaim")
+                        .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 
-            modelBuilder.Entity("DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity.Book", b =>
+            modelBuilder.Entity("DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity.AspNetUserClaim", b =>
                 {
-                    b.HasOne("DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity.Product", "Product")
-                        .WithOne("Book")
-                        .HasForeignKey("DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity.Book", "ProductId")
+                    b.HasOne("DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity.AspNetUser", "AspNetUser")
+                        .WithMany("AspNetUserClaim")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 
-            modelBuilder.Entity("DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity.Customer", b =>
+            modelBuilder.Entity("DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity.AspNetUserLogin", b =>
                 {
-                    b.HasOne("DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity.Country", "Country")
-                        .WithMany("Customer")
-                        .HasForeignKey("CountryId")
+                    b.HasOne("DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity.AspNetUser", "AspNetUser")
+                        .WithMany("AspNetUserLogin")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 
-            modelBuilder.Entity("DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity.Order", b =>
+            modelBuilder.Entity("DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity.AspNetUserRole", b =>
                 {
-                    b.HasOne("DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity.Customer", "Customer")
-                        .WithMany("Order")
-                        .HasForeignKey("CustomerId")
+                    b.HasOne("DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity.AspNetRole", "AspNetRole")
+                        .WithMany("AspNetUserRole")
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity.AspNetUser", "AspNetUser")
+                        .WithMany("AspNetUserRole")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 
-            modelBuilder.Entity("DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity.OrderDetails", b =>
+            modelBuilder.Entity("DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity.AspNetUserToken", b =>
                 {
-                    b.HasOne("DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity.Order", "Order")
-                        .WithMany("OrderDetails")
-                        .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity.Product", "Product")
-                        .WithMany("OrderDetails")
-                        .HasForeignKey("ProductId")
+                    b.HasOne("DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity.AspNetUser", "AspNetUser")
+                        .WithMany("AspNetUserToken")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 
-            modelBuilder.Entity("DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity.Software", b =>
+            modelBuilder.Entity("DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity.ClientGrantType", b =>
                 {
-                    b.HasOne("DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity.Product", "Product")
-                        .WithOne("Software")
-                        .HasForeignKey("DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity.Software", "ProductId")
+                    b.HasOne("DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity.Client", "Client")
+                        .WithMany("ClientGrantType")
+                        .HasForeignKey("ClientId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity.GrantType", "GrantType")
+                        .WithMany("ClientGrantType")
+                        .HasForeignKey("GrantTypeId")
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
+
+            modelBuilder.Entity("DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity.IdentityResourceClaimType", b =>
+                {
+                    b.HasOne("DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity.IdentityResource", "IdentityResource")
+                        .WithMany("IdentityResourceClaimType")
+                        .HasForeignKey("IdentityResourceId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity.ResourceClaimType", "ResourceClaimType")
+                        .WithMany("IdentityResourceClaimType")
+                        .HasForeignKey("ResourceClaimTypeId")
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
+
+            modelBuilder.Entity("DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity.PostLogoutRedirectUri", b =>
+                {
+                    b.HasOne("DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity.Client", "Client")
+                        .WithMany("PostLogoutRedirectUri")
+                        .HasForeignKey("ClientId")
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
+
+            modelBuilder.Entity("DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity.RedirectUri", b =>
+                {
+                    b.HasOne("DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity.Client", "Client")
+                        .WithMany("RedirectUri")
+                        .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 #pragma warning restore 612, 618

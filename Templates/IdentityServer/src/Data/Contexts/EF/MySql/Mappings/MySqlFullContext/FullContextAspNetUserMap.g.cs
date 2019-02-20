@@ -48,7 +48,6 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EF.MySql.Mappings.MySqlFullConte
 
 			#region Constraints
 			
-			Property(t => t.Id).HasMaxLength(450);
 			Property(t => t.Id).IsRequired();
 			Property(t => t.UserName).HasMaxLength(256);
 			Property(t => t.UserName).IsOptional();

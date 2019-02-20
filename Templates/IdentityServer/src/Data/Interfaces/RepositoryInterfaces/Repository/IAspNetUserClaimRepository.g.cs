@@ -54,6 +54,24 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
 		Task<AspNetUserClaim> LoadByIdAsync(int id, bool cache, params Expression<Func<IAspNetUserClaim, object>>[] includes);
 
         /// <summary>
+        /// Load AspNetUserClaim entities from the database using the UserId field
+        /// </summary>
+        /// <param name="userId">Guid</param
+        /// <param name="cache">Use 2nd level caching if enabled</param>
+		/// <param name="includes">params Expression<Func<IAspNetUserClaim, object>>[]</param>
+        /// <returns>IList<AspNetUserClaim></returns>
+		IList<AspNetUserClaim> LoadByUserId(Guid userId, bool cache,  params Expression<Func<IAspNetUserClaim, object>>[] includes);
+		
+        /// <summary>
+        /// Load AspNetUserClaim entities async from the database using the UserId field
+        /// </summary>
+        /// <param name="userId">Guid</param
+        /// <param name="cache">Use 2nd level caching if enabled</param>
+		/// <param name="includes">params Expression<Func<IAspNetUserClaim, object>>[]</param>
+        /// <returns>IList<AspNetUserClaim></returns>
+		Task<IList<AspNetUserClaim>> LoadByUserIdAsync(Guid userId, bool cache, params Expression<Func<IAspNetUserClaim, object>>[] includes);
+
+        /// <summary>
         /// Load all AspNetUserClaim entities from the database.
         /// </summary>
         /// <param name="cache">Use 2nd level caching if enabled</param>
@@ -72,26 +90,6 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
 		#endregion
 
 		#region Search
-
-        /// <summary>
-        /// Search for AspNetUserClaim entities in the database by UserId
-        /// </summary>
-        /// <param name="userId">string</param>
-        /// <param name="cache">Use 2nd level caching if enabled</param>
-		/// <param name="caseSensitive">bool</param
-		/// <param name="includes">params Expression<Func<IAspNetUserClaim, object>>[]</param>
-        /// <returns>IList<AspNetUserClaim></returns>
-		IList<AspNetUserClaim> SearchByUserId(string userId, bool cache, bool caseSensitive = false, params Expression<Func<IAspNetUserClaim, object>>[] includes);
-		
-        /// <summary>
-        /// Search for AspNetUserClaim entities async in the database by UserId
-        /// </summary>
-        /// <param name="userId">string</param>
-        /// <param name="cache">Use 2nd level caching if enabled</param>
-		/// <param name="caseSensitive">bool</param
-		/// <param name="includes">params Expression<Func<IAspNetUserClaim, object>>[]</param>
-        /// <returns>IList<AspNetUserClaim></returns>
-		Task<IList<AspNetUserClaim>> SearchByUserIdAsync(string userId, bool cache, bool caseSensitive = false, params Expression<Func<IAspNetUserClaim, object>>[] includes);
 
         /// <summary>
         /// Search for AspNetUserClaim entities in the database by ClaimType

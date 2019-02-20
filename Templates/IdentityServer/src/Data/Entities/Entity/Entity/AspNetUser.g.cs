@@ -97,7 +97,7 @@ namespace DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity
 		
 		#region Fields
 		
-		public virtual string Id { get; set; }
+		public virtual Guid Id { get; set; }
 		public virtual string UserName { get; set; }
 		public virtual string NormalizedUserName { get; set; }
 		public virtual string Email { get; set; }

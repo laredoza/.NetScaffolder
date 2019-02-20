@@ -68,7 +68,7 @@ namespace DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity
 		
 		#region Fields
 		
-		public virtual string Id { get; set; }
+		public virtual Guid Id { get; set; }
 		public virtual string Name { get; set; }
 		public virtual string NormalizedName { get; set; }
 		public virtual string ConcurrencyStamp { get; set; }

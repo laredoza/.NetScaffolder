@@ -46,6 +46,7 @@ namespace DotNetScaffolder.Domain.Data.Dtos.DefaultDto.Dto
 			this.ClientId = item.ClientId;
 			this.ClientName = item.ClientName;
 			this.AlwaysSendClientClaims = item.AlwaysSendClientClaims;
+			this.Active = item.Active;
 			this.AllowedScope = new List <IAllowedScope>();
 			this.ClientGrantType = new List <IClientGrantType>();
 			this.PostLogoutRedirectUri = new List <IPostLogoutRedirectUri>();
@@ -92,6 +93,7 @@ namespace DotNetScaffolder.Domain.Data.Dtos.DefaultDto.Dto
 		public string ClientId { get; set; }
 		public string ClientName { get; set; }
 		public bool AlwaysSendClientClaims { get; set; }
+		public bool Active { get; set; }
 
 		#endregion
 		

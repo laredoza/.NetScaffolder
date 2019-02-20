@@ -51,7 +51,6 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EF.Oracle.Mappings.OracleFullCon
 
 			#region Constraints
 			
-			Property(t => t.UserId).HasMaxLength(450);
 			Property(t => t.UserId).IsRequired();
 			Property(t => t.LoginProvider).HasMaxLength(128);
 			Property(t => t.LoginProvider).IsRequired();

@@ -44,7 +44,6 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.SqlServer.Mappings.SqlSer
 			#region Constraints
 			
 			builder.Property(t => t.Id).HasColumnName("Id").IsRequired();
-			builder.Property(t => t.UserId).HasMaxLength(450);
 			builder.Property(t => t.UserId).HasColumnName("UserId").IsRequired();
 			builder.Property(t => t.ClaimType).HasColumnName("ClaimType").IsRequired(false);
 			builder.Property(t => t.ClaimValue).HasColumnName("ClaimValue").IsRequired(false);

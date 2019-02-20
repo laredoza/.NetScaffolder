@@ -31,6 +31,7 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.Dto
 		string ClientId { get; set; }
 		string ClientName { get; set; }
 		bool AlwaysSendClientClaims { get; set; }
+		bool Active { get; set; }
 
 		#endregion
 		

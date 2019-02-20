@@ -42,7 +42,6 @@ namespace DotNetScaffolder.Domain.Data.Contexts.NHib.Oracle.Mappings.OracleFullC
 			#region Primary Keys
 			
 			Id(t => t.Id).GeneratedBy.Assigned()
-			.Length(450)
 			.Not.Nullable();
 
 			#endregion

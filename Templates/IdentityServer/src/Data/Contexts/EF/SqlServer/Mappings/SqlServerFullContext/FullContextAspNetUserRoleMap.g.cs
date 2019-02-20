@@ -48,9 +48,7 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EF.SqlServer.Mappings.SqlServerF
 
 			#region Constraints
 			
-			Property(t => t.UserId).HasMaxLength(450);
 			Property(t => t.UserId).IsRequired();
-			Property(t => t.RoleId).HasMaxLength(450);
 			Property(t => t.RoleId).IsRequired();
 			
 			#endregion

@@ -38,24 +38,24 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <summary>
         /// Load AspNetUserToken entities from the database using the composite primary keys
         /// </summary
-        /// <param name="userId">string</param>
+        /// <param name="userId">Guid</param>
         /// <param name="loginProvider">string</param>
         /// <param name="name">string</param>
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<IAspNetUserToken, object>>[]</param>
         /// <returns>AspNetUserToken</returns>
-		AspNetUserToken Load( string userId,  string loginProvider,  string name, bool cache, params Expression<Func<IAspNetUserToken, object>>[] includes);
+		AspNetUserToken Load( Guid userId,  string loginProvider,  string name, bool cache, params Expression<Func<IAspNetUserToken, object>>[] includes);
 		
         /// <summary>
         /// Load AspNetUserToken entities async from the database using the composite primary keys
         /// </summary
-        /// <param name="userId">string</param>
+        /// <param name="userId">Guid</param>
         /// <param name="loginProvider">string</param>
         /// <param name="name">string</param>
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<IAspNetUserToken, object>>[]</param>
         /// <returns>AspNetUserToken</returns>
-		Task<AspNetUserToken> LoadAsync( string userId,  string loginProvider,  string name, bool cache, params Expression<Func<IAspNetUserToken, object>>[] includes);
+		Task<AspNetUserToken> LoadAsync( Guid userId,  string loginProvider,  string name, bool cache, params Expression<Func<IAspNetUserToken, object>>[] includes);
 
         /// <summary>
         /// Load all AspNetUserToken entities from the database.
@@ -146,20 +146,20 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
 		/// <summary>
         /// Delete the AspNetUserToken entity from the database
         /// </summary>
-        /// <param name="userId">string</param>
+        /// <param name="userId">Guid</param>
         /// <param name="loginProvider">string</param>
         /// <param name="name">string</param>
         /// <returns>bool</returns>
-		bool Delete( string userId,  string loginProvider,  string name, bool cache);
+		bool Delete( Guid userId,  string loginProvider,  string name, bool cache);
 
 		/// <summary>
         /// Delete the AspNetUserToken entity async from the database
         /// </summary>
-        /// <param name="userId">string, bool cache</param>
+        /// <param name="userId">Guid, bool cache</param>
         /// <param name="loginProvider">string, bool cache</param>
         /// <param name="name">string, bool cache</param>
         /// <returns>bool</returns>
-		Task<bool> DeleteAsync( string userId,  string loginProvider,  string name, bool cache);
+		Task<bool> DeleteAsync( Guid userId,  string loginProvider,  string name, bool cache);
 		
 		#endregion
 		

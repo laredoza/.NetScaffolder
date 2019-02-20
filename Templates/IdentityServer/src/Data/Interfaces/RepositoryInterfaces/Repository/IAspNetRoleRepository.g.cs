@@ -38,20 +38,20 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <summary>
         /// Load AspNetRole entities from the database using the composite primary keys
         /// </summary
-        /// <param name="id">string</param>
+        /// <param name="id">Guid</param>
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<IAspNetRole, object>>[]</param>
         /// <returns>AspNetRole</returns>
-		AspNetRole LoadById(string id, bool cache, params Expression<Func<IAspNetRole, object>>[] includes);
+		AspNetRole LoadById(Guid id, bool cache, params Expression<Func<IAspNetRole, object>>[] includes);
 		
         /// <summary>
         /// Load AspNetRole entities async from the database using the composite primary keys
         /// </summary
-        /// <param name="id">string</param>
+        /// <param name="id">Guid</param>
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<IAspNetRole, object>>[]</param>
         /// <returns>AspNetRole</returns>
-		Task<AspNetRole> LoadByIdAsync(string id, bool cache, params Expression<Func<IAspNetRole, object>>[] includes);
+		Task<AspNetRole> LoadByIdAsync(Guid id, bool cache, params Expression<Func<IAspNetRole, object>>[] includes);
 
         /// <summary>
         /// Load all AspNetRole entities from the database.
@@ -182,16 +182,16 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
 		/// <summary>
         /// Delete the AspNetRole entity from the database
         /// </summary>
-        /// <param name="id">string</param>
+        /// <param name="id">Guid</param>
         /// <returns>bool</returns>
-		bool Delete( string id, bool cache);
+		bool Delete( Guid id, bool cache);
 
 		/// <summary>
         /// Delete the AspNetRole entity async from the database
         /// </summary>
-        /// <param name="id">string, bool cache</param>
+        /// <param name="id">Guid, bool cache</param>
         /// <returns>bool</returns>
-		Task<bool> DeleteAsync( string id, bool cache);
+		Task<bool> DeleteAsync( Guid id, bool cache);
 		
 		#endregion
 		

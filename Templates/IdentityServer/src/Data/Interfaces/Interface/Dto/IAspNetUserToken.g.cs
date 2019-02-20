@@ -27,7 +27,7 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.Dto
 	{
 		#region Fields
 		
-		string UserId { get; set; }
+		Guid UserId { get; set; }
 		string LoginProvider { get; set; }
 		string Name { get; set; }
 		string Value { get; set; }

@@ -82,6 +82,31 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
 		}
 
         /// <summary>
+        /// Load AspNetUserClaim entities from the database using the UserId field
+        /// </summary>
+        /// <param name="userId">Guid</param>
+		/// <param name="includes">params Expression<Func<AspNetUserClaim, object>>[]</param>
+        /// <returns>IList<IAspNetUserClaim></returns>
+		public virtual IList<AspNetUserClaim> LoadByUserId(Guid userId, bool cache, params Expression<Func<IAspNetUserClaim, object>>[] includes)
+		{
+			var expr = this.Convert(includes);
+			return this.UnitOfWork.AllMatching<AspNetUserClaim>(o => o.UserId == userId, cache, expr).ToList<AspNetUserClaim>();
+		}
+		
+        /// <summary>
+        /// Load AspNetUserClaim entities async from the database using the UserId field
+        /// </summary>
+        /// <param name="userId">Guid</param>
+		/// <param name="includes">params Expression<Func<AspNetUserClaim, object>>[]</param>
+        /// <returns>IList<IAspNetUserClaim></returns>
+		public virtual async Task<IList<AspNetUserClaim>> LoadByUserIdAsync(Guid userId, bool cache, params Expression<Func<IAspNetUserClaim, object>>[] includes)
+		{
+			var expr = this.Convert(includes);
+			var result = await this.UnitOfWork.AllMatchingAsync<AspNetUserClaim>(o => o.UserId == userId,cache, expr);
+			return result.ToList<AspNetUserClaim>();
+		}
+
+        /// <summary>
         /// Load all AspNetUserClaim entities from the database.
         /// </summary>
 		/// <param name="includes">params Expression<Func<IAspNetUserClaim, object>>[]</param>
@@ -107,48 +132,6 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
 		#endregion
 
 		#region Search
-
-        /// <summary>
-        /// Search for AspNetUserClaim entities in the database by UserId
-        /// </summary>
-        /// <param name="userId">string</param>
-		/// <param name="caseSensitive">bool</param>
-		/// <param name="includes">params Expression<Func<IAspNetUserClaim, object>>[]</param>
-        /// <returns>IList<AspNetUserClaim></returns>
-		public virtual IList<AspNetUserClaim> SearchByUserId(string userId, bool cache, bool caseSensitive = false, params Expression<Func<IAspNetUserClaim, object>>[] includes)
-		{		
-			var expr = this.Convert(includes);
-			if(caseSensitive) 
-			{
-				return this.UnitOfWork.AllMatching<AspNetUserClaim>(o => o.UserId.Contains(userId), cache, expr).ToList<AspNetUserClaim>();
-			}
-			else
-			{
-				return this.UnitOfWork.AllMatching<AspNetUserClaim>(o => o.UserId.ToLower().Contains(userId.ToLower()), cache, expr).ToList<AspNetUserClaim>();
-			}
-		}
-		
-        /// <summary>
-        /// Search for AspNetUserClaim entities async in the database by UserId
-        /// </summary>
-        /// <param name="userId">string</param>
-		/// <param name="caseSensitive">bool</param>
-		/// <param name="includes">params Expression<Func<IAspNetUserClaim, object>>[]</param>
-        /// <returns>IList<AspNetUserClaim></returns>
-		public virtual async Task<IList<AspNetUserClaim>> SearchByUserIdAsync(string userId, bool cache, bool caseSensitive = false, params Expression<Func<IAspNetUserClaim, object>>[] includes)
-		{		
-			var expr = this.Convert(includes);
-			if(caseSensitive) 
-			{
-				var result = await this.UnitOfWork.AllMatchingAsync<AspNetUserClaim>(o => o.UserId.Contains(userId), cache, expr);
-				return result.ToList<AspNetUserClaim>();
-			}
-			else
-			{
-				var result = await this.UnitOfWork.AllMatchingAsync<AspNetUserClaim>(o => o.UserId.ToLower().Contains(userId.ToLower()), cache, expr);
-				return result.ToList<AspNetUserClaim>();
-			}
-		}
 
         /// <summary>
         /// Search for AspNetUserClaim entities in the database by ClaimType

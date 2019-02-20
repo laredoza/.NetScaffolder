@@ -49,7 +49,6 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EF.Postgres.Mappings.PostgresFul
 			#region Constraints
 			
 			Property(t => t.Id).IsRequired();
-			Property(t => t.RoleId).HasMaxLength(450);
 			Property(t => t.RoleId).IsRequired();
 			Property(t => t.ClaimType).IsOptional();
 			Property(t => t.ClaimValue).IsOptional();

@@ -12,6 +12,18 @@
       <Id>7d5d7239-42e3-4c2d-a0b9-abc8b00ff3cc</Id>
       <InheritFrom>BaseContext</InheritFrom>
       <Models>
+        <Table Description="" SchemaName="dbo" TableName="AllowedScope" EnabledForCodeGeneration="true">
+          <Columns />
+          <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
+          <RelationShips />
+          <Indexes />
+        </Table>
+        <Table Description="" SchemaName="dbo" TableName="ApiResource" EnabledForCodeGeneration="true">
+          <Columns />
+          <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
+          <RelationShips />
+          <Indexes />
+        </Table>
         <Table Description="" SchemaName="dbo" TableName="AspNetRole" EnabledForCodeGeneration="true">
           <Columns />
           <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
@@ -49,18 +61,6 @@
           <Indexes />
         </Table>
         <Table Description="" SchemaName="dbo" TableName="AspNetUserToken" EnabledForCodeGeneration="true">
-          <Columns />
-          <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
-          <RelationShips />
-          <Indexes />
-        </Table>
-        <Table Description="" SchemaName="dbo" TableName="AllowedScope" EnabledForCodeGeneration="true">
-          <Columns />
-          <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
-          <RelationShips />
-          <Indexes />
-        </Table>
-        <Table Description="" SchemaName="dbo" TableName="ApiResource" EnabledForCodeGeneration="true">
           <Columns />
           <DatabaseGeneratedKeyType>None</DatabaseGeneratedKeyType>
           <RelationShips />

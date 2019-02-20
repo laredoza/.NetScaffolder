@@ -38,22 +38,22 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
         /// <summary>
         /// Load AspNetUserRole entities from the database using the composite primary keys
         /// </summary
-        /// <param name="userId">string</param>
-        /// <param name="roleId">string</param>
+        /// <param name="userId">Guid</param>
+        /// <param name="roleId">Guid</param>
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<IAspNetUserRole, object>>[]</param>
         /// <returns>AspNetUserRole</returns>
-		AspNetUserRole Load( string userId,  string roleId, bool cache, params Expression<Func<IAspNetUserRole, object>>[] includes);
+		AspNetUserRole Load( Guid userId,  Guid roleId, bool cache, params Expression<Func<IAspNetUserRole, object>>[] includes);
 		
         /// <summary>
         /// Load AspNetUserRole entities async from the database using the composite primary keys
         /// </summary
-        /// <param name="userId">string</param>
-        /// <param name="roleId">string</param>
+        /// <param name="userId">Guid</param>
+        /// <param name="roleId">Guid</param>
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="includes">params Expression<Func<IAspNetUserRole, object>>[]</param>
         /// <returns>AspNetUserRole</returns>
-		Task<AspNetUserRole> LoadAsync( string userId,  string roleId, bool cache, params Expression<Func<IAspNetUserRole, object>>[] includes);
+		Task<AspNetUserRole> LoadAsync( Guid userId,  Guid roleId, bool cache, params Expression<Func<IAspNetUserRole, object>>[] includes);
 
         /// <summary>
         /// Load all AspNetUserRole entities from the database.
@@ -124,18 +124,18 @@ namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
 		/// <summary>
         /// Delete the AspNetUserRole entity from the database
         /// </summary>
-        /// <param name="userId">string</param>
-        /// <param name="roleId">string</param>
+        /// <param name="userId">Guid</param>
+        /// <param name="roleId">Guid</param>
         /// <returns>bool</returns>
-		bool Delete( string userId,  string roleId, bool cache);
+		bool Delete( Guid userId,  Guid roleId, bool cache);
 
 		/// <summary>
         /// Delete the AspNetUserRole entity async from the database
         /// </summary>
-        /// <param name="userId">string, bool cache</param>
-        /// <param name="roleId">string, bool cache</param>
+        /// <param name="userId">Guid, bool cache</param>
+        /// <param name="roleId">Guid, bool cache</param>
         /// <returns>bool</returns>
-		Task<bool> DeleteAsync( string userId,  string roleId, bool cache);
+		Task<bool> DeleteAsync( Guid userId,  Guid roleId, bool cache);
 		
 		#endregion
 		

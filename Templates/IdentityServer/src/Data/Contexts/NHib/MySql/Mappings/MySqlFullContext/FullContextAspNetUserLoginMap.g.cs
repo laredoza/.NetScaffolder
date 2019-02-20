@@ -51,7 +51,6 @@ namespace DotNetScaffolder.Domain.Data.Contexts.NHib.MySql.Mappings.MySqlFullCon
 			.Nullable();
 			Map(t => t.UserId).Column("UserId")
 			.Index("IX_AspNetUserLogins_UserId")
-			.Length(450)
 			.Not.Nullable();
 			
 			#endregion

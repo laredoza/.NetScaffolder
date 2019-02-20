@@ -50,11 +50,12 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EF.Oracle.Mappings.OracleFullCon
 			#region Constraints
 			
 			Property(t => t.Id).IsRequired();
-			Property(t => t.ClientId).HasMaxLength(50);
+			Property(t => t.ClientId).HasMaxLength(100);
 			Property(t => t.ClientId).IsRequired();
 			Property(t => t.ClientName).HasMaxLength(50);
 			Property(t => t.ClientName).IsRequired();
 			Property(t => t.AlwaysSendClientClaims).IsRequired();
+			Property(t => t.Active).IsRequired();
 			
 			#endregion
 			
@@ -76,6 +77,7 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EF.Oracle.Mappings.OracleFullCon
 			Property(t => t.ClientId).HasColumnOrder(2);
 			Property(t => t.ClientName).HasColumnOrder(3);
 			Property(t => t.AlwaysSendClientClaims).HasColumnOrder(4);
+			Property(t => t.Active).HasColumnOrder(5);
 
 			#endregion
 	

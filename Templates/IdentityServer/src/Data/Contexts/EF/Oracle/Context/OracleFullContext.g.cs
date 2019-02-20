@@ -63,6 +63,8 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EF.Oracle.Context
 			
 			#region Mappings
 			
+			modelBuilder.Configurations.Add(new FullContextAllowedScopeMap());
+			modelBuilder.Configurations.Add(new FullContextApiResourceMap());
 			modelBuilder.Configurations.Add(new FullContextAspNetRoleMap());
 			modelBuilder.Configurations.Add(new FullContextAspNetRoleClaimMap());
 			modelBuilder.Configurations.Add(new FullContextAspNetUserMap());
@@ -70,8 +72,6 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EF.Oracle.Context
 			modelBuilder.Configurations.Add(new FullContextAspNetUserLoginMap());
 			modelBuilder.Configurations.Add(new FullContextAspNetUserRoleMap());
 			modelBuilder.Configurations.Add(new FullContextAspNetUserTokenMap());
-			modelBuilder.Configurations.Add(new FullContextAllowedScopeMap());
-			modelBuilder.Configurations.Add(new FullContextApiResourceMap());
 			modelBuilder.Configurations.Add(new FullContextClientMap());
 			modelBuilder.Configurations.Add(new FullContextClientGrantTypeMap());
 			modelBuilder.Configurations.Add(new FullContextGrantTypeMap());
@@ -93,6 +93,8 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EF.Oracle.Context
 		
 		#region Db Sets
 		
+		public virtual DbSet<AllowedScope> AllowedScope { get; set; }
+		public virtual DbSet<ApiResource> ApiResource { get; set; }
 		public virtual DbSet<AspNetRole> AspNetRole { get; set; }
 		public virtual DbSet<AspNetRoleClaim> AspNetRoleClaim { get; set; }
 		public virtual DbSet<AspNetUser> AspNetUser { get; set; }
@@ -100,8 +102,6 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EF.Oracle.Context
 		public virtual DbSet<AspNetUserLogin> AspNetUserLogin { get; set; }
 		public virtual DbSet<AspNetUserRole> AspNetUserRole { get; set; }
 		public virtual DbSet<AspNetUserToken> AspNetUserToken { get; set; }
-		public virtual DbSet<AllowedScope> AllowedScope { get; set; }
-		public virtual DbSet<ApiResource> ApiResource { get; set; }
 		public virtual DbSet<Client> Client { get; set; }
 		public virtual DbSet<ClientGrantType> ClientGrantType { get; set; }
 		public virtual DbSet<GrantType> GrantType { get; set; }
