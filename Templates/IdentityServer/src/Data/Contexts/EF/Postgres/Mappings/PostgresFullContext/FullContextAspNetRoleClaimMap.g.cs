@@ -56,7 +56,8 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EF.Postgres.Mappings.PostgresFul
 			#endregion
 			
 			#region Indexes
-			Property(t => t.RoleId).HasColumnAnnotation("IX_AspNetRoleClaims_RoleId", new IndexAnnotation(new [] { new IndexAttribute("IX_AspNetRoleClaims_RoleId"){ IsClustered = false, IsUnique = false, Order = 0}}));
+						Property(t => t.RoleId).HasColumnAnnotation("IX_AspNetRoleClaims_RoleId", new IndexAnnotation(new [] { new IndexAttribute("IX_AspNetRoleClaims_RoleId"){ IsClustered = false, IsUnique = false, Order = 0}}));
+;
 			#endregion
 
 			#region Relationships

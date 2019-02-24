@@ -26,7 +26,7 @@ using DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.Dto;
 
 namespace DotNetScaffolder.Domain.Data.Dtos.DefaultDto.Dto
 {
-	public partial class IdentityResourceClaimTypeDto : IIdentityResourceClaimType 
+	public partial class IdentityResourceClaimTypeDto
 	{
 		#region CTOR
 		
@@ -71,9 +71,9 @@ namespace DotNetScaffolder.Domain.Data.Dtos.DefaultDto.Dto
 		#region Parent Relationships
 		
         [JsonConverter(typeof(ConcreteTypeConverter<IdentityResourceDto>))]
-		public IIdentityResource IdentityResource { get; set; }
+		public IdentityResourceDto IdentityResource { get; set; }
         [JsonConverter(typeof(ConcreteTypeConverter<ResourceClaimTypeDto>))]
-		public IResourceClaimType ResourceClaimType { get; set; }
+		public ResourceClaimTypeDto ResourceClaimType { get; set; }
 		
 		#endregion
 	}

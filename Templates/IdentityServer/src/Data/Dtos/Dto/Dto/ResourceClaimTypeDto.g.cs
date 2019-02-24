@@ -26,13 +26,13 @@ using DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.Dto;
 
 namespace DotNetScaffolder.Domain.Data.Dtos.DefaultDto.Dto
 {
-	public partial class ResourceClaimTypeDto : IResourceClaimType 
+	public partial class ResourceClaimTypeDto
 	{
 		#region CTOR
 		
 		public ResourceClaimTypeDto()
 		{
-			this.IdentityResourceClaimType = new List <IIdentityResourceClaimType>();
+			this.IdentityResourceClaimType = new List <IdentityResourceClaimTypeDto>();
 		}
 		
 		public ResourceClaimTypeDto(IResourceClaimType item, bool deep = false)
@@ -41,7 +41,7 @@ namespace DotNetScaffolder.Domain.Data.Dtos.DefaultDto.Dto
 			
 			this.Id = item.Id;
 			this.Name = item.Name;
-			this.IdentityResourceClaimType = new List <IIdentityResourceClaimType>();
+			this.IdentityResourceClaimType = new List <IdentityResourceClaimTypeDto>();
 
 			if(deep)
 			{
@@ -67,7 +67,7 @@ namespace DotNetScaffolder.Domain.Data.Dtos.DefaultDto.Dto
 		#region Child Relationships
 		
         // [JsonConverter(typeof(ConcreteTypeConverter<IdentityResourceClaimTypeDto>))]
-		public IList<IIdentityResourceClaimType> IdentityResourceClaimType { get; set; }
+		public IList<IdentityResourceClaimTypeDto> IdentityResourceClaimType { get; set; }
 
 		#endregion
 		

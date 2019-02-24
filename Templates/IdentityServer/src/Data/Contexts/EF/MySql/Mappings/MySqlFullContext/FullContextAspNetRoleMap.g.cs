@@ -58,7 +58,8 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EF.MySql.Mappings.MySqlFullConte
 			#endregion
 			
 			#region Indexes
-			Property(t => t.NormalizedName).HasColumnAnnotation("RoleNameIndex", new IndexAnnotation(new [] { new IndexAttribute("RoleNameIndex"){ IsClustered = false, IsUnique = true, Order = 0}}));
+						Property(t => t.NormalizedName).HasColumnAnnotation("RoleNameIndex", new IndexAnnotation(new [] { new IndexAttribute("RoleNameIndex"){ IsClustered = false, IsUnique = true, Order = 0}}));
+;
 			#endregion
 
 			#region Relationships

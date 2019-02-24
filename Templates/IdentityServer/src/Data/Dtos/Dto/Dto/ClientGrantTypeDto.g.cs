@@ -26,7 +26,7 @@ using DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.Dto;
 
 namespace DotNetScaffolder.Domain.Data.Dtos.DefaultDto.Dto
 {
-	public partial class ClientGrantTypeDto : IClientGrantType 
+	public partial class ClientGrantTypeDto
 	{
 		#region CTOR
 		
@@ -71,9 +71,9 @@ namespace DotNetScaffolder.Domain.Data.Dtos.DefaultDto.Dto
 		#region Parent Relationships
 		
         [JsonConverter(typeof(ConcreteTypeConverter<ClientDto>))]
-		public IClient Client { get; set; }
+		public ClientDto Client { get; set; }
         [JsonConverter(typeof(ConcreteTypeConverter<GrantTypeDto>))]
-		public IGrantType GrantType { get; set; }
+		public GrantTypeDto GrantType { get; set; }
 		
 		#endregion
 	}

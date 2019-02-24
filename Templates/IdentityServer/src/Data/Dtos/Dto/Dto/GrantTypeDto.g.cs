@@ -26,13 +26,13 @@ using DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.Dto;
 
 namespace DotNetScaffolder.Domain.Data.Dtos.DefaultDto.Dto
 {
-	public partial class GrantTypeDto : IGrantType 
+	public partial class GrantTypeDto
 	{
 		#region CTOR
 		
 		public GrantTypeDto()
 		{
-			this.ClientGrantType = new List <IClientGrantType>();
+			this.ClientGrantType = new List <ClientGrantTypeDto>();
 		}
 		
 		public GrantTypeDto(IGrantType item, bool deep = false)
@@ -41,7 +41,7 @@ namespace DotNetScaffolder.Domain.Data.Dtos.DefaultDto.Dto
 			
 			this.Id = item.Id;
 			this.Name = item.Name;
-			this.ClientGrantType = new List <IClientGrantType>();
+			this.ClientGrantType = new List <ClientGrantTypeDto>();
 
 			if(deep)
 			{
@@ -67,7 +67,7 @@ namespace DotNetScaffolder.Domain.Data.Dtos.DefaultDto.Dto
 		#region Child Relationships
 		
         // [JsonConverter(typeof(ConcreteTypeConverter<ClientGrantTypeDto>))]
-		public IList<IClientGrantType> ClientGrantType { get; set; }
+		public IList<ClientGrantTypeDto> ClientGrantType { get; set; }
 
 		#endregion
 		

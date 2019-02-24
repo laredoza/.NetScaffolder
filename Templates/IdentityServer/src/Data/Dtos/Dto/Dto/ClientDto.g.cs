@@ -26,16 +26,16 @@ using DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.Dto;
 
 namespace DotNetScaffolder.Domain.Data.Dtos.DefaultDto.Dto
 {
-	public partial class ClientDto : IClient 
+	public partial class ClientDto
 	{
 		#region CTOR
 		
 		public ClientDto()
 		{
-			this.AllowedScope = new List <IAllowedScope>();
-			this.ClientGrantType = new List <IClientGrantType>();
-			this.PostLogoutRedirectUri = new List <IPostLogoutRedirectUri>();
-			this.RedirectUri = new List <IRedirectUri>();
+			this.AllowedScope = new List <AllowedScopeDto>();
+			this.ClientGrantType = new List <ClientGrantTypeDto>();
+			this.PostLogoutRedirectUri = new List <PostLogoutRedirectUriDto>();
+			this.RedirectUri = new List <RedirectUriDto>();
 		}
 		
 		public ClientDto(IClient item, bool deep = false)
@@ -47,10 +47,10 @@ namespace DotNetScaffolder.Domain.Data.Dtos.DefaultDto.Dto
 			this.ClientName = item.ClientName;
 			this.AlwaysSendClientClaims = item.AlwaysSendClientClaims;
 			this.Active = item.Active;
-			this.AllowedScope = new List <IAllowedScope>();
-			this.ClientGrantType = new List <IClientGrantType>();
-			this.PostLogoutRedirectUri = new List <IPostLogoutRedirectUri>();
-			this.RedirectUri = new List <IRedirectUri>();
+			this.AllowedScope = new List <AllowedScopeDto>();
+			this.ClientGrantType = new List <ClientGrantTypeDto>();
+			this.PostLogoutRedirectUri = new List <PostLogoutRedirectUriDto>();
+			this.RedirectUri = new List <RedirectUriDto>();
 
 			if(deep)
 			{
@@ -100,13 +100,13 @@ namespace DotNetScaffolder.Domain.Data.Dtos.DefaultDto.Dto
 		#region Child Relationships
 		
         // [JsonConverter(typeof(ConcreteTypeConverter<AllowedScopeDto>))]
-		public IList<IAllowedScope> AllowedScope { get; set; }
+		public IList<AllowedScopeDto> AllowedScope { get; set; }
         // [JsonConverter(typeof(ConcreteTypeConverter<ClientGrantTypeDto>))]
-		public IList<IClientGrantType> ClientGrantType { get; set; }
+		public IList<ClientGrantTypeDto> ClientGrantType { get; set; }
         // [JsonConverter(typeof(ConcreteTypeConverter<PostLogoutRedirectUriDto>))]
-		public IList<IPostLogoutRedirectUri> PostLogoutRedirectUri { get; set; }
+		public IList<PostLogoutRedirectUriDto> PostLogoutRedirectUri { get; set; }
         // [JsonConverter(typeof(ConcreteTypeConverter<RedirectUriDto>))]
-		public IList<IRedirectUri> RedirectUri { get; set; }
+		public IList<RedirectUriDto> RedirectUri { get; set; }
 
 		#endregion
 		

@@ -24,7 +24,7 @@ using DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.Dto;
 
 namespace DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity
 {
-	public partial class ApiResource : IApiResource 
+	public partial class ApiResource 
 	{
 		#region CTOR
 		

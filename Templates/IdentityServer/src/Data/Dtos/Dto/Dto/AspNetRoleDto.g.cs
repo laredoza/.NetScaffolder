@@ -26,14 +26,14 @@ using DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.Dto;
 
 namespace DotNetScaffolder.Domain.Data.Dtos.DefaultDto.Dto
 {
-	public partial class AspNetRoleDto : IAspNetRole 
+	public partial class AspNetRoleDto
 	{
 		#region CTOR
 		
 		public AspNetRoleDto()
 		{
-			this.AspNetRoleClaim = new List <IAspNetRoleClaim>();
-			this.AspNetUserRole = new List <IAspNetUserRole>();
+			this.AspNetRoleClaim = new List <AspNetRoleClaimDto>();
+			this.AspNetUserRole = new List <AspNetUserRoleDto>();
 		}
 		
 		public AspNetRoleDto(IAspNetRole item, bool deep = false)
@@ -44,8 +44,8 @@ namespace DotNetScaffolder.Domain.Data.Dtos.DefaultDto.Dto
 			this.Name = item.Name;
 			this.NormalizedName = item.NormalizedName;
 			this.ConcurrencyStamp = item.ConcurrencyStamp;
-			this.AspNetRoleClaim = new List <IAspNetRoleClaim>();
-			this.AspNetUserRole = new List <IAspNetUserRole>();
+			this.AspNetRoleClaim = new List <AspNetRoleClaimDto>();
+			this.AspNetUserRole = new List <AspNetUserRoleDto>();
 
 			if(deep)
 			{
@@ -80,9 +80,9 @@ namespace DotNetScaffolder.Domain.Data.Dtos.DefaultDto.Dto
 		#region Child Relationships
 		
         // [JsonConverter(typeof(ConcreteTypeConverter<AspNetRoleClaimDto>))]
-		public IList<IAspNetRoleClaim> AspNetRoleClaim { get; set; }
+		public IList<AspNetRoleClaimDto> AspNetRoleClaim { get; set; }
         // [JsonConverter(typeof(ConcreteTypeConverter<AspNetUserRoleDto>))]
-		public IList<IAspNetUserRole> AspNetUserRole { get; set; }
+		public IList<AspNetUserRoleDto> AspNetUserRole { get; set; }
 
 		#endregion
 		

@@ -24,7 +24,7 @@ using DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.Dto;
 
 namespace DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity
 {
-	public partial class PostLogoutRedirectUri : IPostLogoutRedirectUri 
+	public partial class PostLogoutRedirectUri 
 	{
 		#region CTOR
 		
@@ -62,27 +62,6 @@ namespace DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity
 		#region Parent Relationships
 
         public virtual Client Client { get; set; }
-		IClient IPostLogoutRedirectUri.Client 
-		{ 
-			get
-			{
-				return this.Client;
-			}
-			set
-			{
-				if(value != this.Client)
-				{
-					if(value != null)
-					{
-						this.Client = (Client)value;
-					}
-					else
-					{
-						this.Client = null;
-					}
-				}
-			}
-		}
 		
 		#endregion
 	}

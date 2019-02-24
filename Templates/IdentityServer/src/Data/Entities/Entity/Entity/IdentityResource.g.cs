@@ -24,7 +24,7 @@ using DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.Dto;
 
 namespace DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity
 {
-	public partial class IdentityResource : IIdentityResource 
+	public partial class IdentityResource 
 	{
 		#region CTOR
 		
@@ -73,28 +73,7 @@ namespace DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity
 		#region Child Relationships
         
         public virtual IList<IdentityResourceClaimType> IdentityResourceClaimType { get; set; }
-	
-        IList<IIdentityResourceClaimType> IIdentityResource.IdentityResourceClaimType 
-		{ 
-			get
-			{
-				return this.IdentityResourceClaimType == null ? null : this.IdentityResourceClaimType as IList<IIdentityResourceClaimType>;
-			}
-			set
-			{
-				if(value != this.IdentityResourceClaimType)
-				{
-					if(value != null)
-					{
-						this.IdentityResourceClaimType = (IList<IdentityResourceClaimType>)value;
-					}
-					else
-					{
-						this.IdentityResourceClaimType = null;
-					}
-				}
-			}			
-		}
+
 
 		#endregion
 	}

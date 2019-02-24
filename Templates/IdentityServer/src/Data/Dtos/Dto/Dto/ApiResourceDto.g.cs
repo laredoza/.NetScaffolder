@@ -26,7 +26,7 @@ using DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.Dto;
 
 namespace DotNetScaffolder.Domain.Data.Dtos.DefaultDto.Dto
 {
-	public partial class ApiResourceDto : IApiResource 
+	public partial class ApiResourceDto
 	{
 		#region CTOR
 		

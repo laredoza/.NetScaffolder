@@ -1,4 +1,5 @@
 ﻿<#@ include file="ApplicationServiceWebTemplate.ttinclude" #>
+<#@ include file="ApplicationServiceCloningHelperTemplate.ttinclude" #>
 
 <#+
     public class ApplicationServiceGenerator : BaseGenerator
@@ -9,27 +10,29 @@
         public string RepositoryInterfaceNamespace { get; set; }
         public string ApplicationInterfaceNamespace { get; set; }
         public DtoDataType DtoDataType { get; set; }
-        public EntityDataType EntityDataType {get; set; }
+        public EntityDataType EntityDataType {get; set; } 
+        public List<Table> Models { get; set; }
 
         //public INamingConvention NamingConvention { get; set; }
-//		public ContextDataType DataType {get;set;}
-//	    public ContextData ContextData {get;set;}
-//      public EntityDataType EntityDataType {get;set;}
-//		public List<Table> Models { get; set; }
-//		public string MappingPostFix { get; set;}
-//		public string MappingNamespace {get; set;}
-//
-//		private string projectPath = string.Empty;
+        //		public ContextDataType DataType {get;set;}
+        //	    public ContextData ContextData {get;set;}
+        //      public EntityDataType EntityDataType {get;set;}
+        //		public List<Table> Models { get; set; }
+        //		public string MappingPostFix { get; set;}
+        //		public string MappingNamespace {get; set;}
+        //
+        //		private string projectPath = string.Empty;
         
         private ApplicationServiceInterfaceTemplate templateInterface = new ApplicationServiceInterfaceTemplate();
         private ApplicationServiceTemplate template = new ApplicationServiceTemplate();
         private ApplicationServiceWebTemplate templateWeb = new ApplicationServiceWebTemplate();
+        private ApplicationServiceCloningHelperTemplate templateCloningHelper = new ApplicationServiceCloningHelperTemplate();
 
-		protected override void RunCore()
+        protected override void RunCore()
         {
             
-			foreach(ApplicationServiceData applicationServiceData in DataType.ApplicationServiceData )
-			{
+            foreach(ApplicationServiceData applicationServiceData in DataType.ApplicationServiceData )
+            {
                 templateInterface.DataType = DataType;
                 templateInterface.CurrentApplicationData = applicationServiceData;
                 templateInterface.DtoInterfaceDataType = this.DtoInterfaceDataType;
@@ -64,14 +67,33 @@
                 //templateWeb.RepositoryInterfaceNamespace = RepositoryInterfaceNamespace;
                 //templateWeb.DtoDataType = this.DtoDataType;
                 //templateWeb.EntityDataType = this.EntityDataType;
-//
+                //
                 //if(!string.IsNullOrEmpty(applicationServiceData.OutputPathWeb))
                 //{
-                    //templateWeb.Output.Project = applicationServiceData.OutputPathWeb;
+                //templateWeb.Output.Project = applicationServiceData.OutputPathWeb;
                 //}
 
                 //templateWeb.RenderToFile(string.Format(@"{0}\WebApi{1}ApplicationService.g.cs", applicationServiceData.OutputFolderWeb, applicationServiceData.ApplicationServiceName));	
-			}
+            }
+            
+            ApplicationServiceData firstApplicationServiceData = DataType.ApplicationServiceData.First();
+
+            if (firstApplicationServiceData != null)
+            {
+                templateCloningHelper.Models = Models;
+                templateCloningHelper.DtoDataType = this.DtoDataType;
+                templateCloningHelper.EntityDataType = EntityDataType;
+
+                //templateCloningHelper.DtoInterfaceNamespace = DtoInterfaceType.FullNamespace;
+
+                if(!string.IsNullOrEmpty(firstApplicationServiceData.OutputPath))
+                {
+                    templateCloningHelper.Output.Project = firstApplicationServiceData.OutputPath;
+                }
+
+                templateCloningHelper.RenderToFile(string.Format(@"{0}\CloningHelper.g.cs", firstApplicationServiceData.OutputFolder));
+            }
+             
         }
     }
 #>

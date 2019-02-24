@@ -120,7 +120,8 @@
                             DtoInterfaceDataType = dataTypes.FirstOrDefault(o => o is DtoInterfaceDataType) as DtoInterfaceDataType,
                             RepositoryInterfaceNamespace = (dataTypes.FirstOrDefault(o => o is RepoInterfaceDataType) as RepoInterfaceDataType).FullNamespace, 
                             DtoDataType = dataTypes.FirstOrDefault(o => o is DtoDataType) as DtoDataType,
-                            EntityDataType = dataTypes.FirstOrDefault(o => o is EntityDataType) as EntityDataType 
+                            EntityDataType = dataTypes.FirstOrDefault(o => o is EntityDataType) as EntityDataType,
+                            Models = domain.Tables
                    };
 
                     applicationServiceGenerator.Run();

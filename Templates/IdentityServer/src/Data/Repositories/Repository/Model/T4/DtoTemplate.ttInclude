@@ -30,7 +30,7 @@ using <#= DtoInterfaceNamespace #>;
 
 namespace <#= DataType.FullNamespace #>
 {
-	public partial class <#= DataType.DtoNameFull #> <#= DataType.TransformInheritFrom #> 
+	public partial class <#= DataType.DtoNameFull #>
 	{
 <#+ if(DataType.UseInterface && DataType.AddInjectConstructor){ #>
 		#region CTOR
@@ -38,7 +38,7 @@ namespace <#= DataType.FullNamespace #>
 		public <#= DataType.DtoNameFull #>()
 		{
 <#+ foreach(var child in DataType.MetaData.DistinctChildRelationships.Where(o => o.ReferencedMultiplicity == RelationshipMultiplicity.Many)){ #>
-			this.<#= RelationshipNameFormatting.FormatName(child.ReferencedTableName, child.RelationshipAlias, DataType.NamingConvention) #> = new <#= DataType.CollectionOption.ClassName #> <I<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #>>();
+			this.<#= RelationshipNameFormatting.FormatName(child.ReferencedTableName, child.RelationshipAlias, DataType.NamingConvention) #> = new <#= DataType.CollectionOption.ClassName #> <<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #>Dto>();
 <#+ } #>
 		}
 		
@@ -51,7 +51,7 @@ namespace <#= DataType.FullNamespace #>
 <#+ } #>
 
 <#+ foreach(var child in DataType.MetaData.DistinctChildRelationships.Where(o => o.ReferencedMultiplicity == RelationshipMultiplicity.Many)){ #>
-			this.<#= RelationshipNameFormatting.FormatName(child.ReferencedTableName, child.RelationshipAlias, DataType.NamingConvention) #> = new <#= DataType.CollectionOption.ClassName #> <I<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #>>();
+			this.<#= RelationshipNameFormatting.FormatName(child.ReferencedTableName, child.RelationshipAlias, DataType.NamingConvention) #> = new <#= DataType.CollectionOption.ClassName #> <<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #>Dto>();
 <#+ } #>
 
 			if(deep)

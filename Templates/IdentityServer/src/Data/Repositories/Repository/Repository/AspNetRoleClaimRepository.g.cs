@@ -228,16 +228,15 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <returns>bool</returns>
 		public virtual bool Add(AspNetRoleClaim entity)
 		{
-			var entityToSave = new AspNetRoleClaim(entity, false);
-			this.UnitOfWork.Add(entityToSave);
+			this.UnitOfWork.Add(entity);
 			bool result = this.UnitOfWork.Save();
 			
 			// Populate passed in entity with newly saved values
-			entity.Id = entityToSave.Id;
-			entity.RoleId = entityToSave.RoleId;
-			entity.ClaimType = entityToSave.ClaimType;
-			entity.ClaimValue = entityToSave.ClaimValue;
-			
+//			//entity.Id = entityToSave.Id;
+//			//entity.RoleId = entityToSave.RoleId;
+//			//entity.ClaimType = entityToSave.ClaimType;
+//			//entity.ClaimValue = entityToSave.ClaimValue;
+//			
 			return result;
 		}
 		
@@ -248,16 +247,15 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <returns>bool</returns>
 		public virtual async Task<bool> AddAsync(AspNetRoleClaim entity)
 		{
-            var entityToSave = new AspNetRoleClaim(entity, false);
-			await this.UnitOfWork.AddAsync(entityToSave);
+			await this.UnitOfWork.AddAsync(entity);
 			bool result = await this.UnitOfWork.SaveAsync();
 			
 			// Populate passed in entity with newly saved values
-			entity.Id = entityToSave.Id;
-			entity.RoleId = entityToSave.RoleId;
-			entity.ClaimType = entityToSave.ClaimType;
-			entity.ClaimValue = entityToSave.ClaimValue;
-			
+//			//entity.Id = entityToSave.Id;
+//			//entity.RoleId = entityToSave.RoleId;
+//			//entity.ClaimType = entityToSave.ClaimType;
+//			//entity.ClaimValue = entityToSave.ClaimValue;
+//			
 			return result;
 		}
 
@@ -436,7 +434,7 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
 		        foundItems.Add(foundEntity);
 		    }
 
-			this.UnitOfWork.BulkDelete<IAspNetRoleClaim>(foundItems);
+			this.UnitOfWork.BulkDelete<AspNetRoleClaim>(foundItems);
 		}
 
         /// <summary>

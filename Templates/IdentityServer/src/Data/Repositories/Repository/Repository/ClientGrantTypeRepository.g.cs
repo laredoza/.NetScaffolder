@@ -121,14 +121,13 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <returns>bool</returns>
 		public virtual bool Add(ClientGrantType entity)
 		{
-			var entityToSave = new ClientGrantType(entity, false);
-			this.UnitOfWork.Add(entityToSave);
+			this.UnitOfWork.Add(entity);
 			bool result = this.UnitOfWork.Save();
 			
 			// Populate passed in entity with newly saved values
-			entity.ClientId = entityToSave.ClientId;
-			entity.GrantTypeId = entityToSave.GrantTypeId;
-			
+//			//entity.ClientId = entityToSave.ClientId;
+//			//entity.GrantTypeId = entityToSave.GrantTypeId;
+//			
 			return result;
 		}
 		
@@ -139,14 +138,13 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <returns>bool</returns>
 		public virtual async Task<bool> AddAsync(ClientGrantType entity)
 		{
-            var entityToSave = new ClientGrantType(entity, false);
-			await this.UnitOfWork.AddAsync(entityToSave);
+			await this.UnitOfWork.AddAsync(entity);
 			bool result = await this.UnitOfWork.SaveAsync();
 			
 			// Populate passed in entity with newly saved values
-			entity.ClientId = entityToSave.ClientId;
-			entity.GrantTypeId = entityToSave.GrantTypeId;
-			
+//			//entity.ClientId = entityToSave.ClientId;
+//			//entity.GrantTypeId = entityToSave.GrantTypeId;
+//			
 			return result;
 		}
 
@@ -321,7 +319,7 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
 		        foundItems.Add(foundEntity);
 		    }
 
-			this.UnitOfWork.BulkDelete<IClientGrantType>(foundItems);
+			this.UnitOfWork.BulkDelete<ClientGrantType>(foundItems);
 		}
 
         /// <summary>

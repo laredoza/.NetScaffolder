@@ -26,16 +26,16 @@ using DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.Dto;
 
 namespace DotNetScaffolder.Domain.Data.Dtos.DefaultDto.Dto
 {
-	public partial class AspNetUserDto : IAspNetUser 
+	public partial class AspNetUserDto
 	{
 		#region CTOR
 		
 		public AspNetUserDto()
 		{
-			this.AspNetUserClaim = new List <IAspNetUserClaim>();
-			this.AspNetUserLogin = new List <IAspNetUserLogin>();
-			this.AspNetUserRole = new List <IAspNetUserRole>();
-			this.AspNetUserToken = new List <IAspNetUserToken>();
+			this.AspNetUserClaim = new List <AspNetUserClaimDto>();
+			this.AspNetUserLogin = new List <AspNetUserLoginDto>();
+			this.AspNetUserRole = new List <AspNetUserRoleDto>();
+			this.AspNetUserToken = new List <AspNetUserTokenDto>();
 		}
 		
 		public AspNetUserDto(IAspNetUser item, bool deep = false)
@@ -57,10 +57,10 @@ namespace DotNetScaffolder.Domain.Data.Dtos.DefaultDto.Dto
 			this.LockoutEnd = item.LockoutEnd;
 			this.LockoutEnabled = item.LockoutEnabled;
 			this.AccessFailedCount = item.AccessFailedCount;
-			this.AspNetUserClaim = new List <IAspNetUserClaim>();
-			this.AspNetUserLogin = new List <IAspNetUserLogin>();
-			this.AspNetUserRole = new List <IAspNetUserRole>();
-			this.AspNetUserToken = new List <IAspNetUserToken>();
+			this.AspNetUserClaim = new List <AspNetUserClaimDto>();
+			this.AspNetUserLogin = new List <AspNetUserLoginDto>();
+			this.AspNetUserRole = new List <AspNetUserRoleDto>();
+			this.AspNetUserToken = new List <AspNetUserTokenDto>();
 
 			if(deep)
 			{
@@ -120,13 +120,13 @@ namespace DotNetScaffolder.Domain.Data.Dtos.DefaultDto.Dto
 		#region Child Relationships
 		
         // [JsonConverter(typeof(ConcreteTypeConverter<AspNetUserClaimDto>))]
-		public IList<IAspNetUserClaim> AspNetUserClaim { get; set; }
+		public IList<AspNetUserClaimDto> AspNetUserClaim { get; set; }
         // [JsonConverter(typeof(ConcreteTypeConverter<AspNetUserLoginDto>))]
-		public IList<IAspNetUserLogin> AspNetUserLogin { get; set; }
+		public IList<AspNetUserLoginDto> AspNetUserLogin { get; set; }
         // [JsonConverter(typeof(ConcreteTypeConverter<AspNetUserRoleDto>))]
-		public IList<IAspNetUserRole> AspNetUserRole { get; set; }
+		public IList<AspNetUserRoleDto> AspNetUserRole { get; set; }
         // [JsonConverter(typeof(ConcreteTypeConverter<AspNetUserTokenDto>))]
-		public IList<IAspNetUserToken> AspNetUserToken { get; set; }
+		public IList<AspNetUserTokenDto> AspNetUserToken { get; set; }
 
 		#endregion
 		

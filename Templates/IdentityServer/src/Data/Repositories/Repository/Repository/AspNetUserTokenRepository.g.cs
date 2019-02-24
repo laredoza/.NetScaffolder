@@ -165,16 +165,15 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <returns>bool</returns>
 		public virtual bool Add(AspNetUserToken entity)
 		{
-			var entityToSave = new AspNetUserToken(entity, false);
-			this.UnitOfWork.Add(entityToSave);
+			this.UnitOfWork.Add(entity);
 			bool result = this.UnitOfWork.Save();
 			
 			// Populate passed in entity with newly saved values
-			entity.UserId = entityToSave.UserId;
-			entity.LoginProvider = entityToSave.LoginProvider;
-			entity.Name = entityToSave.Name;
-			entity.Value = entityToSave.Value;
-			
+//			//entity.UserId = entityToSave.UserId;
+//			//entity.LoginProvider = entityToSave.LoginProvider;
+//			//entity.Name = entityToSave.Name;
+//			//entity.Value = entityToSave.Value;
+//			
 			return result;
 		}
 		
@@ -185,16 +184,15 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <returns>bool</returns>
 		public virtual async Task<bool> AddAsync(AspNetUserToken entity)
 		{
-            var entityToSave = new AspNetUserToken(entity, false);
-			await this.UnitOfWork.AddAsync(entityToSave);
+			await this.UnitOfWork.AddAsync(entity);
 			bool result = await this.UnitOfWork.SaveAsync();
 			
 			// Populate passed in entity with newly saved values
-			entity.UserId = entityToSave.UserId;
-			entity.LoginProvider = entityToSave.LoginProvider;
-			entity.Name = entityToSave.Name;
-			entity.Value = entityToSave.Value;
-			
+//			//entity.UserId = entityToSave.UserId;
+//			//entity.LoginProvider = entityToSave.LoginProvider;
+//			//entity.Name = entityToSave.Name;
+//			//entity.Value = entityToSave.Value;
+//			
 			return result;
 		}
 
@@ -373,7 +371,7 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
 		        foundItems.Add(foundEntity);
 		    }
 
-			this.UnitOfWork.BulkDelete<IAspNetUserToken>(foundItems);
+			this.UnitOfWork.BulkDelete<AspNetUserToken>(foundItems);
 		}
 
         /// <summary>

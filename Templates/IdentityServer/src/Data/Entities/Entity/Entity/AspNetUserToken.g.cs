@@ -24,7 +24,7 @@ using DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.Dto;
 
 namespace DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity
 {
-	public partial class AspNetUserToken : IAspNetUserToken 
+	public partial class AspNetUserToken 
 	{
 		#region CTOR
 		
@@ -64,27 +64,6 @@ namespace DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity
 		#region Parent Relationships
 
         public virtual AspNetUser AspNetUser { get; set; }
-		IAspNetUser IAspNetUserToken.AspNetUser 
-		{ 
-			get
-			{
-				return this.AspNetUser;
-			}
-			set
-			{
-				if(value != this.AspNetUser)
-				{
-					if(value != null)
-					{
-						this.AspNetUser = (AspNetUser)value;
-					}
-					else
-					{
-						this.AspNetUser = null;
-					}
-				}
-			}
-		}
 		
 		#endregion
 

@@ -26,7 +26,7 @@ using DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.Dto;
 
 namespace DotNetScaffolder.Domain.Data.Dtos.DefaultDto.Dto
 {
-	public partial class AspNetUserLoginDto : IAspNetUserLogin 
+	public partial class AspNetUserLoginDto
 	{
 		#region CTOR
 		
@@ -71,7 +71,7 @@ namespace DotNetScaffolder.Domain.Data.Dtos.DefaultDto.Dto
 		#region Parent Relationships
 		
         [JsonConverter(typeof(ConcreteTypeConverter<AspNetUserDto>))]
-		public IAspNetUser AspNetUser { get; set; }
+		public AspNetUserDto AspNetUser { get; set; }
 		
 		#endregion
 	}

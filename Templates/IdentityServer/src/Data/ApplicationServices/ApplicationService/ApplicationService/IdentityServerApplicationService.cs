@@ -31,7 +31,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
 	{
         public async Task<ClientDto> ReturnActiveTaskAsync(string clientId)
 	    {
-            return new ClientDto(await this.ClientRepository.ReturnActiveTaskAsync(clientId) as IClient, true);
+            return CloningHelper.ConvertClientToClientDto(await this.ClientRepository.ReturnActiveTaskAsync(clientId), true);
 	    }
     }
 }

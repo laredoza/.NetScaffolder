@@ -24,7 +24,7 @@ using DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.Dto;
 
 namespace DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity
 {
-	public partial class AspNetRole : IAspNetRole 
+	public partial class AspNetRole 
 	{
 		#region CTOR
 		
@@ -78,52 +78,10 @@ namespace DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity
 		#region Child Relationships
         
         public virtual IList<AspNetRoleClaim> AspNetRoleClaim { get; set; }
-	
-        IList<IAspNetRoleClaim> IAspNetRole.AspNetRoleClaim 
-		{ 
-			get
-			{
-				return this.AspNetRoleClaim == null ? null : this.AspNetRoleClaim as IList<IAspNetRoleClaim>;
-			}
-			set
-			{
-				if(value != this.AspNetRoleClaim)
-				{
-					if(value != null)
-					{
-						this.AspNetRoleClaim = (IList<AspNetRoleClaim>)value;
-					}
-					else
-					{
-						this.AspNetRoleClaim = null;
-					}
-				}
-			}			
-		}
+
         
         public virtual IList<AspNetUserRole> AspNetUserRole { get; set; }
-	
-        IList<IAspNetUserRole> IAspNetRole.AspNetUserRole 
-		{ 
-			get
-			{
-				return this.AspNetUserRole == null ? null : this.AspNetUserRole as IList<IAspNetUserRole>;
-			}
-			set
-			{
-				if(value != this.AspNetUserRole)
-				{
-					if(value != null)
-					{
-						this.AspNetUserRole = (IList<AspNetUserRole>)value;
-					}
-					else
-					{
-						this.AspNetUserRole = null;
-					}
-				}
-			}			
-		}
+
 
 		#endregion
 	}

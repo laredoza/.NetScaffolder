@@ -29,7 +29,7 @@ using <#= DtoInterfaceNamespace #>;
 
 namespace <#= DataType.FullNamespace #>
 {
-	public partial class <#= DataType.EntityName #> <#= DataType.TransformInheritFrom #> 
+	public partial class <#= DataType.EntityName #> 
 	{
 <#+ if(DataType.UseInterface && DataType.AddInjectConstructor){ #>
 		#region CTOR
@@ -92,57 +92,12 @@ namespace <#= DataType.FullNamespace #>
 <#+ foreach(var child in DataType.MetaData.DistinctChildRelationships.Where(o => o.ReferencedMultiplicity == RelationshipMultiplicity.Many)){ #>
         
         public virtual <#= DataType.CollectionOption.ClassNameInterface #><<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #>> <#= RelationshipNameFormatting.FormatName(child.ReferencedTableName, child.RelationshipAlias, DataType.NamingConvention) #> { get; set; }
-<#+ if(DataType.UseInterface) {#>	
-        <#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #>> I<#= DataType.EntityName #>.<#= RelationshipNameFormatting.FormatName(child.ReferencedTableName, child.RelationshipAlias, DataType.NamingConvention) #> 
-		{ 
-			get
-			{
-				return this.<#= RelationshipNameFormatting.FormatName(child.ReferencedTableName, child.RelationshipAlias, DataType.NamingConvention) #> == null ? null : this.<#= RelationshipNameFormatting.FormatName(child.ReferencedTableName, child.RelationshipAlias, DataType.NamingConvention) #> as <#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #>>;
-			}
-			set
-			{
-				if(value != this.<#= RelationshipNameFormatting.FormatName(child.ReferencedTableName, child.RelationshipAlias, DataType.NamingConvention) #>)
-				{
-					if(value != null)
-					{
-						this.<#= RelationshipNameFormatting.FormatName(child.ReferencedTableName, child.RelationshipAlias, DataType.NamingConvention) #> = (<#= DataType.CollectionOption.ClassNameInterface #><<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #>>)value;
-					}
-					else
-					{
-						this.<#= RelationshipNameFormatting.FormatName(child.ReferencedTableName, child.RelationshipAlias, DataType.NamingConvention) #> = null;
-					}
-				}
-			}			
-		}
-<#+ } #>
+
 <#+ } #>
 
 <#+ foreach(var child in DataType.MetaData.DistinctChildRelationships.Where(o => o.ReferencedMultiplicity != RelationshipMultiplicity.Many)){ #>
         
         public virtual <#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #> <#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #> { get; set; }
-<#+ if(DataType.UseInterface) {#>
-		I<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #> I<#= DataType.EntityName #>.<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #> 
-		{ 
-			get
-			{
-				return this.<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #>;
-			}
-			set
-			{
-				if(value != this.<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #>)
-				{
-					if(value != null)
-					{
-						this.<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #> = (<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #>)value;
-					}
-					else
-					{
-						this.<#= DataType.NamingConvention.ApplyNamingConvention(child.ReferencedTableName) #> = null;
-					}
-				}
-			}
-		}
-<#+ } #>
 <#+ } #>
 
 		#endregion
@@ -153,29 +108,6 @@ namespace <#= DataType.FullNamespace #>
 <#+ foreach(var parent in DataType.MetaData.DistinctParentRelationships){ #>
 
         public virtual <#= DataType.NamingConvention.ApplyNamingConvention(parent.ReferencedTableName) #> <#= RelationshipNameFormatting.FormatName(parent.ReferencedTableName, parent.RelationshipAlias, DataType.NamingConvention) #> { get; set; }
-<#+ if(DataType.UseInterface) {#>
-		I<#= DataType.NamingConvention.ApplyNamingConvention(parent.ReferencedTableName) #> I<#= DataType.EntityName #>.<#= RelationshipNameFormatting.FormatName(parent.ReferencedTableName, parent.RelationshipAlias, DataType.NamingConvention) #> 
-		{ 
-			get
-			{
-				return this.<#= RelationshipNameFormatting.FormatName(parent.ReferencedTableName, parent.RelationshipAlias, DataType.NamingConvention) #>;
-			}
-			set
-			{
-				if(value != this.<#= RelationshipNameFormatting.FormatName(parent.ReferencedTableName, parent.RelationshipAlias, DataType.NamingConvention) #>)
-				{
-					if(value != null)
-					{
-						this.<#= RelationshipNameFormatting.FormatName(parent.ReferencedTableName, parent.RelationshipAlias, DataType.NamingConvention) #> = (<#= DataType.NamingConvention.ApplyNamingConvention(parent.ReferencedTableName) #>)value;
-					}
-					else
-					{
-						this.<#= RelationshipNameFormatting.FormatName(parent.ReferencedTableName, parent.RelationshipAlias, DataType.NamingConvention) #> = null;
-					}
-				}
-			}
-		}
-<#+ } #>
 <#+ } #>
 		
 		#endregion

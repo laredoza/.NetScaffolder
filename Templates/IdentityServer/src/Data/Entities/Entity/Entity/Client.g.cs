@@ -24,7 +24,7 @@ using DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.Dto;
 
 namespace DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity
 {
-	public partial class Client : IClient 
+	public partial class Client 
 	{
 		#region CTOR
 		
@@ -98,100 +98,16 @@ namespace DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity
 		#region Child Relationships
         
         public virtual IList<AllowedScope> AllowedScope { get; set; }
-	
-        IList<IAllowedScope> IClient.AllowedScope 
-		{ 
-			get
-			{
-				return this.AllowedScope == null ? null : this.AllowedScope as IList<IAllowedScope>;
-			}
-			set
-			{
-				if(value != this.AllowedScope)
-				{
-					if(value != null)
-					{
-						this.AllowedScope = (IList<AllowedScope>)value;
-					}
-					else
-					{
-						this.AllowedScope = null;
-					}
-				}
-			}			
-		}
+
         
         public virtual IList<ClientGrantType> ClientGrantType { get; set; }
-	
-        IList<IClientGrantType> IClient.ClientGrantType 
-		{ 
-			get
-			{
-				return this.ClientGrantType == null ? null : this.ClientGrantType as IList<IClientGrantType>;
-			}
-			set
-			{
-				if(value != this.ClientGrantType)
-				{
-					if(value != null)
-					{
-						this.ClientGrantType = (IList<ClientGrantType>)value;
-					}
-					else
-					{
-						this.ClientGrantType = null;
-					}
-				}
-			}			
-		}
+
         
         public virtual IList<PostLogoutRedirectUri> PostLogoutRedirectUri { get; set; }
-	
-        IList<IPostLogoutRedirectUri> IClient.PostLogoutRedirectUri 
-		{ 
-			get
-			{
-				return this.PostLogoutRedirectUri == null ? null : this.PostLogoutRedirectUri as IList<IPostLogoutRedirectUri>;
-			}
-			set
-			{
-				if(value != this.PostLogoutRedirectUri)
-				{
-					if(value != null)
-					{
-						this.PostLogoutRedirectUri = (IList<PostLogoutRedirectUri>)value;
-					}
-					else
-					{
-						this.PostLogoutRedirectUri = null;
-					}
-				}
-			}			
-		}
+
         
         public virtual IList<RedirectUri> RedirectUri { get; set; }
-	
-        IList<IRedirectUri> IClient.RedirectUri 
-		{ 
-			get
-			{
-				return this.RedirectUri == null ? null : this.RedirectUri as IList<IRedirectUri>;
-			}
-			set
-			{
-				if(value != this.RedirectUri)
-				{
-					if(value != null)
-					{
-						this.RedirectUri = (IList<RedirectUri>)value;
-					}
-					else
-					{
-						this.RedirectUri = null;
-					}
-				}
-			}			
-		}
+
 
 		#endregion
 	}

@@ -228,14 +228,13 @@ namespace <#= DataType.FullNamespace #>
         /// <returns>bool</returns>
 		public virtual bool Add(<#= DataType.ModelName #> entity)
 		{
-			var entityToSave = new <#= DataType.ModelName #>(entity, false);
-			this.UnitOfWork.Add(entityToSave);
+			this.UnitOfWork.Add(entity);
 			bool result = this.UnitOfWork.Save();
 			
 			// Populate passed in entity with newly saved values
-<#+ foreach(var col in DataType.MetaData.Columns){ #>
-			entity.<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #> = entityToSave.<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>;
-<#+ }  #>
+//<#+ foreach(var col in DataType.MetaData.Columns){ #>
+			//entity.<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #> = entityToSave.<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>;
+//<#+ }  #>
 			
 			return result;
 		}
@@ -247,14 +246,13 @@ namespace <#= DataType.FullNamespace #>
         /// <returns>bool</returns>
 		public virtual async Task<bool> AddAsync(<#= DataType.ModelName #> entity)
 		{
-            var entityToSave = new <#= DataType.ModelName #>(entity, false);
-			await this.UnitOfWork.AddAsync(entityToSave);
+			await this.UnitOfWork.AddAsync(entity);
 			bool result = await this.UnitOfWork.SaveAsync();
 			
 			// Populate passed in entity with newly saved values
-<#+ foreach(var col in DataType.MetaData.Columns){ #>
-			entity.<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #> = entityToSave.<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>;
-<#+ }  #>
+//<#+ foreach(var col in DataType.MetaData.Columns){ #>
+			//entity.<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #> = entityToSave.<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>;
+//<#+ }  #>
 			
 			return result;
 		}
@@ -438,7 +436,7 @@ namespace <#= DataType.FullNamespace #>
 		        foundItems.Add(foundEntity);
 		    }
 
-			this.UnitOfWork.BulkDelete<I<#= DataType.ModelName #>>(foundItems);
+			this.UnitOfWork.BulkDelete<<#= DataType.ModelName #>>(foundItems);
 		}
 
         /// <summary>

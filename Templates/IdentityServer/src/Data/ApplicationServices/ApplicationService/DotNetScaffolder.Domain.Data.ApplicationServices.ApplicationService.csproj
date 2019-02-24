@@ -1,10 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
-    <AssemblyVersion>1.0.156.0</AssemblyVersion>
-    <FileVersion>1.0.156.0</FileVersion>
+    <AssemblyVersion>1.0.183.0</AssemblyVersion>
+    <FileVersion>1.0.183.0</FileVersion>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="8.0.0" />
     <PackageReference Include="StructureMap.Microsoft.DependencyInjection" Version="1.4.0" />
   </ItemGroup>
   <ItemGroup>

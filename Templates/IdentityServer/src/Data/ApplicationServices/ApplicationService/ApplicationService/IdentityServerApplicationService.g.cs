@@ -155,7 +155,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <param name="includes">params Expression<Func<IAllowedScope, object>>[]</param>
 		public AllowedScopeDto LoadByAllowedScopeId(int id, bool cache, params Expression<Func<IAllowedScope, object>>[] includes)
         {
-            return new AllowedScopeDto(this.AllowedScopeRepository.LoadById(id, cache, includes), true);
+            return CloningHelper.ConvertAllowedScopeToAllowedScopeDto(this.AllowedScopeRepository.LoadById(id, cache, includes), true);
         }
 
         /// <summary>
@@ -166,7 +166,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <param name="includes">params Expression<Func<IAllowedScope, object>>[]</param>
 		public async Task<AllowedScopeDto> LoadByAllowedScopeIdAsync(int id, bool cache, params Expression<Func<IAllowedScope, object>>[] includes)
         {
-            return new AllowedScopeDto(await this.AllowedScopeRepository.LoadByIdAsync(id, cache, includes), true);
+            return CloningHelper.ConvertAllowedScopeToAllowedScopeDto(await this.AllowedScopeRepository.LoadByIdAsync(id, cache, includes), true);
         }
 
         /// <summary>
@@ -176,7 +176,15 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>IList<AllowedScopeDto></returns>
 		public IList<AllowedScopeDto> AllowedScopeLoadAll(bool cache, params Expression<Func<IAllowedScope, object>>[] includes)
         {
-            return this.ConvertAllowedScopeEntityToDto(this.AllowedScopeRepository.LoadAll(cache, includes));
+            var foundResults = this.AllowedScopeRepository.LoadAll(cache, includes);
+            var results = new List<AllowedScopeDto>();
+            
+            foreach (var foundResult in foundResults)
+            {
+                results.Add(CloningHelper.ConvertAllowedScopeToAllowedScopeDto(foundResult, true));
+            }
+
+            return results;
         }
 
         /// <summary>
@@ -186,7 +194,15 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>IList<AllowedScopeDto></returns>
 		public async Task<IList<AllowedScopeDto>> AllowedScopeLoadAllAsync(bool cache, params Expression<Func<IAllowedScope, object>>[] includes)
         {
-            return this.ConvertAllowedScopeEntityToDto( await this.AllowedScopeRepository.LoadAllAsync(cache, includes));
+            var foundResults = await this.AllowedScopeRepository.LoadAllAsync(cache, includes);
+            var results = new List<AllowedScopeDto>();
+            
+            foreach (var foundResult in foundResults)
+            {
+                results.Add(CloningHelper.ConvertAllowedScopeToAllowedScopeDto(foundResult, true));
+            }
+
+            return results;
         }
 
 
@@ -198,7 +214,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <param name="includes">params Expression<Func<IApiResource, object>>[]</param>
 		public ApiResourceDto LoadByApiResourceId(int id, bool cache, params Expression<Func<IApiResource, object>>[] includes)
         {
-            return new ApiResourceDto(this.ApiResourceRepository.LoadById(id, cache, includes), true);
+            return CloningHelper.ConvertApiResourceToApiResourceDto(this.ApiResourceRepository.LoadById(id, cache, includes), true);
         }
 
         /// <summary>
@@ -209,7 +225,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <param name="includes">params Expression<Func<IApiResource, object>>[]</param>
 		public async Task<ApiResourceDto> LoadByApiResourceIdAsync(int id, bool cache, params Expression<Func<IApiResource, object>>[] includes)
         {
-            return new ApiResourceDto(await this.ApiResourceRepository.LoadByIdAsync(id, cache, includes), true);
+            return CloningHelper.ConvertApiResourceToApiResourceDto(await this.ApiResourceRepository.LoadByIdAsync(id, cache, includes), true);
         }
 
         /// <summary>
@@ -219,7 +235,15 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>IList<ApiResourceDto></returns>
 		public IList<ApiResourceDto> ApiResourceLoadAll(bool cache, params Expression<Func<IApiResource, object>>[] includes)
         {
-            return this.ConvertApiResourceEntityToDto(this.ApiResourceRepository.LoadAll(cache, includes));
+            var foundResults = this.ApiResourceRepository.LoadAll(cache, includes);
+            var results = new List<ApiResourceDto>();
+            
+            foreach (var foundResult in foundResults)
+            {
+                results.Add(CloningHelper.ConvertApiResourceToApiResourceDto(foundResult, true));
+            }
+
+            return results;
         }
 
         /// <summary>
@@ -229,7 +253,15 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>IList<ApiResourceDto></returns>
 		public async Task<IList<ApiResourceDto>> ApiResourceLoadAllAsync(bool cache, params Expression<Func<IApiResource, object>>[] includes)
         {
-            return this.ConvertApiResourceEntityToDto( await this.ApiResourceRepository.LoadAllAsync(cache, includes));
+            var foundResults = await this.ApiResourceRepository.LoadAllAsync(cache, includes);
+            var results = new List<ApiResourceDto>();
+            
+            foreach (var foundResult in foundResults)
+            {
+                results.Add(CloningHelper.ConvertApiResourceToApiResourceDto(foundResult, true));
+            }
+
+            return results;
         }
 
 
@@ -241,7 +273,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <param name="includes">params Expression<Func<IAspNetRole, object>>[]</param>
 		public AspNetRoleDto LoadByAspNetRoleId(Guid id, bool cache, params Expression<Func<IAspNetRole, object>>[] includes)
         {
-            return new AspNetRoleDto(this.AspNetRoleRepository.LoadById(id, cache, includes), true);
+            return CloningHelper.ConvertAspNetRoleToAspNetRoleDto(this.AspNetRoleRepository.LoadById(id, cache, includes), true);
         }
 
         /// <summary>
@@ -252,7 +284,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <param name="includes">params Expression<Func<IAspNetRole, object>>[]</param>
 		public async Task<AspNetRoleDto> LoadByAspNetRoleIdAsync(Guid id, bool cache, params Expression<Func<IAspNetRole, object>>[] includes)
         {
-            return new AspNetRoleDto(await this.AspNetRoleRepository.LoadByIdAsync(id, cache, includes), true);
+            return CloningHelper.ConvertAspNetRoleToAspNetRoleDto(await this.AspNetRoleRepository.LoadByIdAsync(id, cache, includes), true);
         }
 
         /// <summary>
@@ -262,7 +294,15 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>IList<AspNetRoleDto></returns>
 		public IList<AspNetRoleDto> AspNetRoleLoadAll(bool cache, params Expression<Func<IAspNetRole, object>>[] includes)
         {
-            return this.ConvertAspNetRoleEntityToDto(this.AspNetRoleRepository.LoadAll(cache, includes));
+            var foundResults = this.AspNetRoleRepository.LoadAll(cache, includes);
+            var results = new List<AspNetRoleDto>();
+            
+            foreach (var foundResult in foundResults)
+            {
+                results.Add(CloningHelper.ConvertAspNetRoleToAspNetRoleDto(foundResult, true));
+            }
+
+            return results;
         }
 
         /// <summary>
@@ -272,7 +312,15 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>IList<AspNetRoleDto></returns>
 		public async Task<IList<AspNetRoleDto>> AspNetRoleLoadAllAsync(bool cache, params Expression<Func<IAspNetRole, object>>[] includes)
         {
-            return this.ConvertAspNetRoleEntityToDto( await this.AspNetRoleRepository.LoadAllAsync(cache, includes));
+            var foundResults = await this.AspNetRoleRepository.LoadAllAsync(cache, includes);
+            var results = new List<AspNetRoleDto>();
+            
+            foreach (var foundResult in foundResults)
+            {
+                results.Add(CloningHelper.ConvertAspNetRoleToAspNetRoleDto(foundResult, true));
+            }
+
+            return results;
         }
 
 
@@ -284,7 +332,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <param name="includes">params Expression<Func<IAspNetRoleClaim, object>>[]</param>
 		public AspNetRoleClaimDto LoadByAspNetRoleClaimId(int id, bool cache, params Expression<Func<IAspNetRoleClaim, object>>[] includes)
         {
-            return new AspNetRoleClaimDto(this.AspNetRoleClaimRepository.LoadById(id, cache, includes), true);
+            return CloningHelper.ConvertAspNetRoleClaimToAspNetRoleClaimDto(this.AspNetRoleClaimRepository.LoadById(id, cache, includes), true);
         }
 
         /// <summary>
@@ -295,7 +343,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <param name="includes">params Expression<Func<IAspNetRoleClaim, object>>[]</param>
 		public async Task<AspNetRoleClaimDto> LoadByAspNetRoleClaimIdAsync(int id, bool cache, params Expression<Func<IAspNetRoleClaim, object>>[] includes)
         {
-            return new AspNetRoleClaimDto(await this.AspNetRoleClaimRepository.LoadByIdAsync(id, cache, includes), true);
+            return CloningHelper.ConvertAspNetRoleClaimToAspNetRoleClaimDto(await this.AspNetRoleClaimRepository.LoadByIdAsync(id, cache, includes), true);
         }
 
         /// <summary>
@@ -305,7 +353,15 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>IList<AspNetRoleClaimDto></returns>
 		public IList<AspNetRoleClaimDto> AspNetRoleClaimLoadAll(bool cache, params Expression<Func<IAspNetRoleClaim, object>>[] includes)
         {
-            return this.ConvertAspNetRoleClaimEntityToDto(this.AspNetRoleClaimRepository.LoadAll(cache, includes));
+            var foundResults = this.AspNetRoleClaimRepository.LoadAll(cache, includes);
+            var results = new List<AspNetRoleClaimDto>();
+            
+            foreach (var foundResult in foundResults)
+            {
+                results.Add(CloningHelper.ConvertAspNetRoleClaimToAspNetRoleClaimDto(foundResult, true));
+            }
+
+            return results;
         }
 
         /// <summary>
@@ -315,7 +371,15 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>IList<AspNetRoleClaimDto></returns>
 		public async Task<IList<AspNetRoleClaimDto>> AspNetRoleClaimLoadAllAsync(bool cache, params Expression<Func<IAspNetRoleClaim, object>>[] includes)
         {
-            return this.ConvertAspNetRoleClaimEntityToDto( await this.AspNetRoleClaimRepository.LoadAllAsync(cache, includes));
+            var foundResults = await this.AspNetRoleClaimRepository.LoadAllAsync(cache, includes);
+            var results = new List<AspNetRoleClaimDto>();
+            
+            foreach (var foundResult in foundResults)
+            {
+                results.Add(CloningHelper.ConvertAspNetRoleClaimToAspNetRoleClaimDto(foundResult, true));
+            }
+
+            return results;
         }
 
 
@@ -327,7 +391,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <param name="includes">params Expression<Func<IAspNetUser, object>>[]</param>
 		public AspNetUserDto LoadByAspNetUserId(Guid id, bool cache, params Expression<Func<IAspNetUser, object>>[] includes)
         {
-            return new AspNetUserDto(this.AspNetUserRepository.LoadById(id, cache, includes), true);
+            return CloningHelper.ConvertAspNetUserToAspNetUserDto(this.AspNetUserRepository.LoadById(id, cache, includes), true);
         }
 
         /// <summary>
@@ -338,7 +402,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <param name="includes">params Expression<Func<IAspNetUser, object>>[]</param>
 		public async Task<AspNetUserDto> LoadByAspNetUserIdAsync(Guid id, bool cache, params Expression<Func<IAspNetUser, object>>[] includes)
         {
-            return new AspNetUserDto(await this.AspNetUserRepository.LoadByIdAsync(id, cache, includes), true);
+            return CloningHelper.ConvertAspNetUserToAspNetUserDto(await this.AspNetUserRepository.LoadByIdAsync(id, cache, includes), true);
         }
 
         /// <summary>
@@ -348,7 +412,15 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>IList<AspNetUserDto></returns>
 		public IList<AspNetUserDto> AspNetUserLoadAll(bool cache, params Expression<Func<IAspNetUser, object>>[] includes)
         {
-            return this.ConvertAspNetUserEntityToDto(this.AspNetUserRepository.LoadAll(cache, includes));
+            var foundResults = this.AspNetUserRepository.LoadAll(cache, includes);
+            var results = new List<AspNetUserDto>();
+            
+            foreach (var foundResult in foundResults)
+            {
+                results.Add(CloningHelper.ConvertAspNetUserToAspNetUserDto(foundResult, true));
+            }
+
+            return results;
         }
 
         /// <summary>
@@ -358,7 +430,15 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>IList<AspNetUserDto></returns>
 		public async Task<IList<AspNetUserDto>> AspNetUserLoadAllAsync(bool cache, params Expression<Func<IAspNetUser, object>>[] includes)
         {
-            return this.ConvertAspNetUserEntityToDto( await this.AspNetUserRepository.LoadAllAsync(cache, includes));
+            var foundResults = await this.AspNetUserRepository.LoadAllAsync(cache, includes);
+            var results = new List<AspNetUserDto>();
+            
+            foreach (var foundResult in foundResults)
+            {
+                results.Add(CloningHelper.ConvertAspNetUserToAspNetUserDto(foundResult, true));
+            }
+
+            return results;
         }
 
 
@@ -370,7 +450,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <param name="includes">params Expression<Func<IAspNetUserClaim, object>>[]</param>
 		public AspNetUserClaimDto LoadByAspNetUserClaimId(int id, bool cache, params Expression<Func<IAspNetUserClaim, object>>[] includes)
         {
-            return new AspNetUserClaimDto(this.AspNetUserClaimRepository.LoadById(id, cache, includes), true);
+            return CloningHelper.ConvertAspNetUserClaimToAspNetUserClaimDto(this.AspNetUserClaimRepository.LoadById(id, cache, includes), true);
         }
 
         /// <summary>
@@ -381,7 +461,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <param name="includes">params Expression<Func<IAspNetUserClaim, object>>[]</param>
 		public async Task<AspNetUserClaimDto> LoadByAspNetUserClaimIdAsync(int id, bool cache, params Expression<Func<IAspNetUserClaim, object>>[] includes)
         {
-            return new AspNetUserClaimDto(await this.AspNetUserClaimRepository.LoadByIdAsync(id, cache, includes), true);
+            return CloningHelper.ConvertAspNetUserClaimToAspNetUserClaimDto(await this.AspNetUserClaimRepository.LoadByIdAsync(id, cache, includes), true);
         }
 
         /// <summary>
@@ -391,7 +471,15 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>IList<AspNetUserClaimDto></returns>
 		public IList<AspNetUserClaimDto> AspNetUserClaimLoadAll(bool cache, params Expression<Func<IAspNetUserClaim, object>>[] includes)
         {
-            return this.ConvertAspNetUserClaimEntityToDto(this.AspNetUserClaimRepository.LoadAll(cache, includes));
+            var foundResults = this.AspNetUserClaimRepository.LoadAll(cache, includes);
+            var results = new List<AspNetUserClaimDto>();
+            
+            foreach (var foundResult in foundResults)
+            {
+                results.Add(CloningHelper.ConvertAspNetUserClaimToAspNetUserClaimDto(foundResult, true));
+            }
+
+            return results;
         }
 
         /// <summary>
@@ -401,7 +489,15 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>IList<AspNetUserClaimDto></returns>
 		public async Task<IList<AspNetUserClaimDto>> AspNetUserClaimLoadAllAsync(bool cache, params Expression<Func<IAspNetUserClaim, object>>[] includes)
         {
-            return this.ConvertAspNetUserClaimEntityToDto( await this.AspNetUserClaimRepository.LoadAllAsync(cache, includes));
+            var foundResults = await this.AspNetUserClaimRepository.LoadAllAsync(cache, includes);
+            var results = new List<AspNetUserClaimDto>();
+            
+            foreach (var foundResult in foundResults)
+            {
+                results.Add(CloningHelper.ConvertAspNetUserClaimToAspNetUserClaimDto(foundResult, true));
+            }
+
+            return results;
         }
 
 
@@ -414,7 +510,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>AspNetUserLoginDto</returns>
 		public AspNetUserLoginDto Load( string loginProvider,  string providerKey, bool cache, params Expression<Func<IAspNetUserLogin, object>>[] includes)
         {
-            return new AspNetUserLoginDto(this.AspNetUserLoginRepository.Load( loginProvider,  providerKey, cache, includes), true);
+            return CloningHelper.ConvertAspNetUserLoginToAspNetUserLoginDto(this.AspNetUserLoginRepository.Load( loginProvider,  providerKey, cache, includes), true);
         }
 
         /// <summary>
@@ -426,7 +522,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>AspNetUserLoginDto</returns>
 		public async Task<AspNetUserLoginDto> LoadAsync( string loginProvider,  string providerKey, bool cache, params Expression<Func<IAspNetUserLogin, object>>[] includes)
         {
-            return new AspNetUserLoginDto(await this.AspNetUserLoginRepository.LoadAsync( loginProvider,  providerKey, cache, includes), true);
+            return CloningHelper.ConvertAspNetUserLoginToAspNetUserLoginDto(await this.AspNetUserLoginRepository.LoadAsync( loginProvider,  providerKey, cache, includes), true);
         }
 
 
@@ -437,7 +533,15 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>IList<AspNetUserLoginDto></returns>
 		public IList<AspNetUserLoginDto> AspNetUserLoginLoadAll(bool cache, params Expression<Func<IAspNetUserLogin, object>>[] includes)
         {
-            return this.ConvertAspNetUserLoginEntityToDto(this.AspNetUserLoginRepository.LoadAll(cache, includes));
+            var foundResults = this.AspNetUserLoginRepository.LoadAll(cache, includes);
+            var results = new List<AspNetUserLoginDto>();
+            
+            foreach (var foundResult in foundResults)
+            {
+                results.Add(CloningHelper.ConvertAspNetUserLoginToAspNetUserLoginDto(foundResult, true));
+            }
+
+            return results;
         }
 
         /// <summary>
@@ -447,7 +551,15 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>IList<AspNetUserLoginDto></returns>
 		public async Task<IList<AspNetUserLoginDto>> AspNetUserLoginLoadAllAsync(bool cache, params Expression<Func<IAspNetUserLogin, object>>[] includes)
         {
-            return this.ConvertAspNetUserLoginEntityToDto( await this.AspNetUserLoginRepository.LoadAllAsync(cache, includes));
+            var foundResults = await this.AspNetUserLoginRepository.LoadAllAsync(cache, includes);
+            var results = new List<AspNetUserLoginDto>();
+            
+            foreach (var foundResult in foundResults)
+            {
+                results.Add(CloningHelper.ConvertAspNetUserLoginToAspNetUserLoginDto(foundResult, true));
+            }
+
+            return results;
         }
 
 
@@ -460,7 +572,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>AspNetUserRoleDto</returns>
 		public AspNetUserRoleDto Load( Guid userId,  Guid roleId, bool cache, params Expression<Func<IAspNetUserRole, object>>[] includes)
         {
-            return new AspNetUserRoleDto(this.AspNetUserRoleRepository.Load( userId,  roleId, cache, includes), true);
+            return CloningHelper.ConvertAspNetUserRoleToAspNetUserRoleDto(this.AspNetUserRoleRepository.Load( userId,  roleId, cache, includes), true);
         }
 
         /// <summary>
@@ -472,7 +584,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>AspNetUserRoleDto</returns>
 		public async Task<AspNetUserRoleDto> LoadAsync( Guid userId,  Guid roleId, bool cache, params Expression<Func<IAspNetUserRole, object>>[] includes)
         {
-            return new AspNetUserRoleDto(await this.AspNetUserRoleRepository.LoadAsync( userId,  roleId, cache, includes), true);
+            return CloningHelper.ConvertAspNetUserRoleToAspNetUserRoleDto(await this.AspNetUserRoleRepository.LoadAsync( userId,  roleId, cache, includes), true);
         }
 
 
@@ -483,7 +595,15 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>IList<AspNetUserRoleDto></returns>
 		public IList<AspNetUserRoleDto> AspNetUserRoleLoadAll(bool cache, params Expression<Func<IAspNetUserRole, object>>[] includes)
         {
-            return this.ConvertAspNetUserRoleEntityToDto(this.AspNetUserRoleRepository.LoadAll(cache, includes));
+            var foundResults = this.AspNetUserRoleRepository.LoadAll(cache, includes);
+            var results = new List<AspNetUserRoleDto>();
+            
+            foreach (var foundResult in foundResults)
+            {
+                results.Add(CloningHelper.ConvertAspNetUserRoleToAspNetUserRoleDto(foundResult, true));
+            }
+
+            return results;
         }
 
         /// <summary>
@@ -493,7 +613,15 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>IList<AspNetUserRoleDto></returns>
 		public async Task<IList<AspNetUserRoleDto>> AspNetUserRoleLoadAllAsync(bool cache, params Expression<Func<IAspNetUserRole, object>>[] includes)
         {
-            return this.ConvertAspNetUserRoleEntityToDto( await this.AspNetUserRoleRepository.LoadAllAsync(cache, includes));
+            var foundResults = await this.AspNetUserRoleRepository.LoadAllAsync(cache, includes);
+            var results = new List<AspNetUserRoleDto>();
+            
+            foreach (var foundResult in foundResults)
+            {
+                results.Add(CloningHelper.ConvertAspNetUserRoleToAspNetUserRoleDto(foundResult, true));
+            }
+
+            return results;
         }
 
 
@@ -507,7 +635,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>AspNetUserTokenDto</returns>
 		public AspNetUserTokenDto Load( Guid userId,  string loginProvider,  string name, bool cache, params Expression<Func<IAspNetUserToken, object>>[] includes)
         {
-            return new AspNetUserTokenDto(this.AspNetUserTokenRepository.Load( userId,  loginProvider,  name, cache, includes), true);
+            return CloningHelper.ConvertAspNetUserTokenToAspNetUserTokenDto(this.AspNetUserTokenRepository.Load( userId,  loginProvider,  name, cache, includes), true);
         }
 
         /// <summary>
@@ -520,7 +648,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>AspNetUserTokenDto</returns>
 		public async Task<AspNetUserTokenDto> LoadAsync( Guid userId,  string loginProvider,  string name, bool cache, params Expression<Func<IAspNetUserToken, object>>[] includes)
         {
-            return new AspNetUserTokenDto(await this.AspNetUserTokenRepository.LoadAsync( userId,  loginProvider,  name, cache, includes), true);
+            return CloningHelper.ConvertAspNetUserTokenToAspNetUserTokenDto(await this.AspNetUserTokenRepository.LoadAsync( userId,  loginProvider,  name, cache, includes), true);
         }
 
 
@@ -531,7 +659,15 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>IList<AspNetUserTokenDto></returns>
 		public IList<AspNetUserTokenDto> AspNetUserTokenLoadAll(bool cache, params Expression<Func<IAspNetUserToken, object>>[] includes)
         {
-            return this.ConvertAspNetUserTokenEntityToDto(this.AspNetUserTokenRepository.LoadAll(cache, includes));
+            var foundResults = this.AspNetUserTokenRepository.LoadAll(cache, includes);
+            var results = new List<AspNetUserTokenDto>();
+            
+            foreach (var foundResult in foundResults)
+            {
+                results.Add(CloningHelper.ConvertAspNetUserTokenToAspNetUserTokenDto(foundResult, true));
+            }
+
+            return results;
         }
 
         /// <summary>
@@ -541,7 +677,15 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>IList<AspNetUserTokenDto></returns>
 		public async Task<IList<AspNetUserTokenDto>> AspNetUserTokenLoadAllAsync(bool cache, params Expression<Func<IAspNetUserToken, object>>[] includes)
         {
-            return this.ConvertAspNetUserTokenEntityToDto( await this.AspNetUserTokenRepository.LoadAllAsync(cache, includes));
+            var foundResults = await this.AspNetUserTokenRepository.LoadAllAsync(cache, includes);
+            var results = new List<AspNetUserTokenDto>();
+            
+            foreach (var foundResult in foundResults)
+            {
+                results.Add(CloningHelper.ConvertAspNetUserTokenToAspNetUserTokenDto(foundResult, true));
+            }
+
+            return results;
         }
 
 
@@ -553,7 +697,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <param name="includes">params Expression<Func<IClient, object>>[]</param>
 		public ClientDto LoadByClientId(int id, bool cache, params Expression<Func<IClient, object>>[] includes)
         {
-            return new ClientDto(this.ClientRepository.LoadById(id, cache, includes), true);
+            return CloningHelper.ConvertClientToClientDto(this.ClientRepository.LoadById(id, cache, includes), true);
         }
 
         /// <summary>
@@ -564,7 +708,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <param name="includes">params Expression<Func<IClient, object>>[]</param>
 		public async Task<ClientDto> LoadByClientIdAsync(int id, bool cache, params Expression<Func<IClient, object>>[] includes)
         {
-            return new ClientDto(await this.ClientRepository.LoadByIdAsync(id, cache, includes), true);
+            return CloningHelper.ConvertClientToClientDto(await this.ClientRepository.LoadByIdAsync(id, cache, includes), true);
         }
 
         /// <summary>
@@ -574,7 +718,15 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>IList<ClientDto></returns>
 		public IList<ClientDto> ClientLoadAll(bool cache, params Expression<Func<IClient, object>>[] includes)
         {
-            return this.ConvertClientEntityToDto(this.ClientRepository.LoadAll(cache, includes));
+            var foundResults = this.ClientRepository.LoadAll(cache, includes);
+            var results = new List<ClientDto>();
+            
+            foreach (var foundResult in foundResults)
+            {
+                results.Add(CloningHelper.ConvertClientToClientDto(foundResult, true));
+            }
+
+            return results;
         }
 
         /// <summary>
@@ -584,7 +736,15 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>IList<ClientDto></returns>
 		public async Task<IList<ClientDto>> ClientLoadAllAsync(bool cache, params Expression<Func<IClient, object>>[] includes)
         {
-            return this.ConvertClientEntityToDto( await this.ClientRepository.LoadAllAsync(cache, includes));
+            var foundResults = await this.ClientRepository.LoadAllAsync(cache, includes);
+            var results = new List<ClientDto>();
+            
+            foreach (var foundResult in foundResults)
+            {
+                results.Add(CloningHelper.ConvertClientToClientDto(foundResult, true));
+            }
+
+            return results;
         }
 
 
@@ -597,7 +757,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>ClientGrantTypeDto</returns>
 		public ClientGrantTypeDto Load( int clientId,  int grantTypeId, bool cache, params Expression<Func<IClientGrantType, object>>[] includes)
         {
-            return new ClientGrantTypeDto(this.ClientGrantTypeRepository.Load( clientId,  grantTypeId, cache, includes), true);
+            return CloningHelper.ConvertClientGrantTypeToClientGrantTypeDto(this.ClientGrantTypeRepository.Load( clientId,  grantTypeId, cache, includes), true);
         }
 
         /// <summary>
@@ -609,7 +769,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>ClientGrantTypeDto</returns>
 		public async Task<ClientGrantTypeDto> LoadAsync( int clientId,  int grantTypeId, bool cache, params Expression<Func<IClientGrantType, object>>[] includes)
         {
-            return new ClientGrantTypeDto(await this.ClientGrantTypeRepository.LoadAsync( clientId,  grantTypeId, cache, includes), true);
+            return CloningHelper.ConvertClientGrantTypeToClientGrantTypeDto(await this.ClientGrantTypeRepository.LoadAsync( clientId,  grantTypeId, cache, includes), true);
         }
 
 
@@ -620,7 +780,15 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>IList<ClientGrantTypeDto></returns>
 		public IList<ClientGrantTypeDto> ClientGrantTypeLoadAll(bool cache, params Expression<Func<IClientGrantType, object>>[] includes)
         {
-            return this.ConvertClientGrantTypeEntityToDto(this.ClientGrantTypeRepository.LoadAll(cache, includes));
+            var foundResults = this.ClientGrantTypeRepository.LoadAll(cache, includes);
+            var results = new List<ClientGrantTypeDto>();
+            
+            foreach (var foundResult in foundResults)
+            {
+                results.Add(CloningHelper.ConvertClientGrantTypeToClientGrantTypeDto(foundResult, true));
+            }
+
+            return results;
         }
 
         /// <summary>
@@ -630,7 +798,15 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>IList<ClientGrantTypeDto></returns>
 		public async Task<IList<ClientGrantTypeDto>> ClientGrantTypeLoadAllAsync(bool cache, params Expression<Func<IClientGrantType, object>>[] includes)
         {
-            return this.ConvertClientGrantTypeEntityToDto( await this.ClientGrantTypeRepository.LoadAllAsync(cache, includes));
+            var foundResults = await this.ClientGrantTypeRepository.LoadAllAsync(cache, includes);
+            var results = new List<ClientGrantTypeDto>();
+            
+            foreach (var foundResult in foundResults)
+            {
+                results.Add(CloningHelper.ConvertClientGrantTypeToClientGrantTypeDto(foundResult, true));
+            }
+
+            return results;
         }
 
 
@@ -642,7 +818,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <param name="includes">params Expression<Func<IGrantType, object>>[]</param>
 		public GrantTypeDto LoadByGrantTypeId(int id, bool cache, params Expression<Func<IGrantType, object>>[] includes)
         {
-            return new GrantTypeDto(this.GrantTypeRepository.LoadById(id, cache, includes), true);
+            return CloningHelper.ConvertGrantTypeToGrantTypeDto(this.GrantTypeRepository.LoadById(id, cache, includes), true);
         }
 
         /// <summary>
@@ -653,7 +829,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <param name="includes">params Expression<Func<IGrantType, object>>[]</param>
 		public async Task<GrantTypeDto> LoadByGrantTypeIdAsync(int id, bool cache, params Expression<Func<IGrantType, object>>[] includes)
         {
-            return new GrantTypeDto(await this.GrantTypeRepository.LoadByIdAsync(id, cache, includes), true);
+            return CloningHelper.ConvertGrantTypeToGrantTypeDto(await this.GrantTypeRepository.LoadByIdAsync(id, cache, includes), true);
         }
 
         /// <summary>
@@ -663,7 +839,15 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>IList<GrantTypeDto></returns>
 		public IList<GrantTypeDto> GrantTypeLoadAll(bool cache, params Expression<Func<IGrantType, object>>[] includes)
         {
-            return this.ConvertGrantTypeEntityToDto(this.GrantTypeRepository.LoadAll(cache, includes));
+            var foundResults = this.GrantTypeRepository.LoadAll(cache, includes);
+            var results = new List<GrantTypeDto>();
+            
+            foreach (var foundResult in foundResults)
+            {
+                results.Add(CloningHelper.ConvertGrantTypeToGrantTypeDto(foundResult, true));
+            }
+
+            return results;
         }
 
         /// <summary>
@@ -673,7 +857,15 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>IList<GrantTypeDto></returns>
 		public async Task<IList<GrantTypeDto>> GrantTypeLoadAllAsync(bool cache, params Expression<Func<IGrantType, object>>[] includes)
         {
-            return this.ConvertGrantTypeEntityToDto( await this.GrantTypeRepository.LoadAllAsync(cache, includes));
+            var foundResults = await this.GrantTypeRepository.LoadAllAsync(cache, includes);
+            var results = new List<GrantTypeDto>();
+            
+            foreach (var foundResult in foundResults)
+            {
+                results.Add(CloningHelper.ConvertGrantTypeToGrantTypeDto(foundResult, true));
+            }
+
+            return results;
         }
 
 
@@ -685,7 +877,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <param name="includes">params Expression<Func<IIdentityResource, object>>[]</param>
 		public IdentityResourceDto LoadByIdentityResourceId(int id, bool cache, params Expression<Func<IIdentityResource, object>>[] includes)
         {
-            return new IdentityResourceDto(this.IdentityResourceRepository.LoadById(id, cache, includes), true);
+            return CloningHelper.ConvertIdentityResourceToIdentityResourceDto(this.IdentityResourceRepository.LoadById(id, cache, includes), true);
         }
 
         /// <summary>
@@ -696,7 +888,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <param name="includes">params Expression<Func<IIdentityResource, object>>[]</param>
 		public async Task<IdentityResourceDto> LoadByIdentityResourceIdAsync(int id, bool cache, params Expression<Func<IIdentityResource, object>>[] includes)
         {
-            return new IdentityResourceDto(await this.IdentityResourceRepository.LoadByIdAsync(id, cache, includes), true);
+            return CloningHelper.ConvertIdentityResourceToIdentityResourceDto(await this.IdentityResourceRepository.LoadByIdAsync(id, cache, includes), true);
         }
 
         /// <summary>
@@ -706,7 +898,15 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>IList<IdentityResourceDto></returns>
 		public IList<IdentityResourceDto> IdentityResourceLoadAll(bool cache, params Expression<Func<IIdentityResource, object>>[] includes)
         {
-            return this.ConvertIdentityResourceEntityToDto(this.IdentityResourceRepository.LoadAll(cache, includes));
+            var foundResults = this.IdentityResourceRepository.LoadAll(cache, includes);
+            var results = new List<IdentityResourceDto>();
+            
+            foreach (var foundResult in foundResults)
+            {
+                results.Add(CloningHelper.ConvertIdentityResourceToIdentityResourceDto(foundResult, true));
+            }
+
+            return results;
         }
 
         /// <summary>
@@ -716,7 +916,15 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>IList<IdentityResourceDto></returns>
 		public async Task<IList<IdentityResourceDto>> IdentityResourceLoadAllAsync(bool cache, params Expression<Func<IIdentityResource, object>>[] includes)
         {
-            return this.ConvertIdentityResourceEntityToDto( await this.IdentityResourceRepository.LoadAllAsync(cache, includes));
+            var foundResults = await this.IdentityResourceRepository.LoadAllAsync(cache, includes);
+            var results = new List<IdentityResourceDto>();
+            
+            foreach (var foundResult in foundResults)
+            {
+                results.Add(CloningHelper.ConvertIdentityResourceToIdentityResourceDto(foundResult, true));
+            }
+
+            return results;
         }
 
 
@@ -729,7 +937,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>IdentityResourceClaimTypeDto</returns>
 		public IdentityResourceClaimTypeDto Load( int identityResourceId,  int resourceClaimTypeId, bool cache, params Expression<Func<IIdentityResourceClaimType, object>>[] includes)
         {
-            return new IdentityResourceClaimTypeDto(this.IdentityResourceClaimTypeRepository.Load( identityResourceId,  resourceClaimTypeId, cache, includes), true);
+            return CloningHelper.ConvertIdentityResourceClaimTypeToIdentityResourceClaimTypeDto(this.IdentityResourceClaimTypeRepository.Load( identityResourceId,  resourceClaimTypeId, cache, includes), true);
         }
 
         /// <summary>
@@ -741,7 +949,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>IdentityResourceClaimTypeDto</returns>
 		public async Task<IdentityResourceClaimTypeDto> LoadAsync( int identityResourceId,  int resourceClaimTypeId, bool cache, params Expression<Func<IIdentityResourceClaimType, object>>[] includes)
         {
-            return new IdentityResourceClaimTypeDto(await this.IdentityResourceClaimTypeRepository.LoadAsync( identityResourceId,  resourceClaimTypeId, cache, includes), true);
+            return CloningHelper.ConvertIdentityResourceClaimTypeToIdentityResourceClaimTypeDto(await this.IdentityResourceClaimTypeRepository.LoadAsync( identityResourceId,  resourceClaimTypeId, cache, includes), true);
         }
 
 
@@ -752,7 +960,15 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>IList<IdentityResourceClaimTypeDto></returns>
 		public IList<IdentityResourceClaimTypeDto> IdentityResourceClaimTypeLoadAll(bool cache, params Expression<Func<IIdentityResourceClaimType, object>>[] includes)
         {
-            return this.ConvertIdentityResourceClaimTypeEntityToDto(this.IdentityResourceClaimTypeRepository.LoadAll(cache, includes));
+            var foundResults = this.IdentityResourceClaimTypeRepository.LoadAll(cache, includes);
+            var results = new List<IdentityResourceClaimTypeDto>();
+            
+            foreach (var foundResult in foundResults)
+            {
+                results.Add(CloningHelper.ConvertIdentityResourceClaimTypeToIdentityResourceClaimTypeDto(foundResult, true));
+            }
+
+            return results;
         }
 
         /// <summary>
@@ -762,7 +978,15 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>IList<IdentityResourceClaimTypeDto></returns>
 		public async Task<IList<IdentityResourceClaimTypeDto>> IdentityResourceClaimTypeLoadAllAsync(bool cache, params Expression<Func<IIdentityResourceClaimType, object>>[] includes)
         {
-            return this.ConvertIdentityResourceClaimTypeEntityToDto( await this.IdentityResourceClaimTypeRepository.LoadAllAsync(cache, includes));
+            var foundResults = await this.IdentityResourceClaimTypeRepository.LoadAllAsync(cache, includes);
+            var results = new List<IdentityResourceClaimTypeDto>();
+            
+            foreach (var foundResult in foundResults)
+            {
+                results.Add(CloningHelper.ConvertIdentityResourceClaimTypeToIdentityResourceClaimTypeDto(foundResult, true));
+            }
+
+            return results;
         }
 
 
@@ -774,7 +998,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <param name="includes">params Expression<Func<IPostLogoutRedirectUri, object>>[]</param>
 		public PostLogoutRedirectUriDto LoadByPostLogoutRedirectUriId(int id, bool cache, params Expression<Func<IPostLogoutRedirectUri, object>>[] includes)
         {
-            return new PostLogoutRedirectUriDto(this.PostLogoutRedirectUriRepository.LoadById(id, cache, includes), true);
+            return CloningHelper.ConvertPostLogoutRedirectUriToPostLogoutRedirectUriDto(this.PostLogoutRedirectUriRepository.LoadById(id, cache, includes), true);
         }
 
         /// <summary>
@@ -785,7 +1009,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <param name="includes">params Expression<Func<IPostLogoutRedirectUri, object>>[]</param>
 		public async Task<PostLogoutRedirectUriDto> LoadByPostLogoutRedirectUriIdAsync(int id, bool cache, params Expression<Func<IPostLogoutRedirectUri, object>>[] includes)
         {
-            return new PostLogoutRedirectUriDto(await this.PostLogoutRedirectUriRepository.LoadByIdAsync(id, cache, includes), true);
+            return CloningHelper.ConvertPostLogoutRedirectUriToPostLogoutRedirectUriDto(await this.PostLogoutRedirectUriRepository.LoadByIdAsync(id, cache, includes), true);
         }
 
         /// <summary>
@@ -795,7 +1019,15 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>IList<PostLogoutRedirectUriDto></returns>
 		public IList<PostLogoutRedirectUriDto> PostLogoutRedirectUriLoadAll(bool cache, params Expression<Func<IPostLogoutRedirectUri, object>>[] includes)
         {
-            return this.ConvertPostLogoutRedirectUriEntityToDto(this.PostLogoutRedirectUriRepository.LoadAll(cache, includes));
+            var foundResults = this.PostLogoutRedirectUriRepository.LoadAll(cache, includes);
+            var results = new List<PostLogoutRedirectUriDto>();
+            
+            foreach (var foundResult in foundResults)
+            {
+                results.Add(CloningHelper.ConvertPostLogoutRedirectUriToPostLogoutRedirectUriDto(foundResult, true));
+            }
+
+            return results;
         }
 
         /// <summary>
@@ -805,7 +1037,15 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>IList<PostLogoutRedirectUriDto></returns>
 		public async Task<IList<PostLogoutRedirectUriDto>> PostLogoutRedirectUriLoadAllAsync(bool cache, params Expression<Func<IPostLogoutRedirectUri, object>>[] includes)
         {
-            return this.ConvertPostLogoutRedirectUriEntityToDto( await this.PostLogoutRedirectUriRepository.LoadAllAsync(cache, includes));
+            var foundResults = await this.PostLogoutRedirectUriRepository.LoadAllAsync(cache, includes);
+            var results = new List<PostLogoutRedirectUriDto>();
+            
+            foreach (var foundResult in foundResults)
+            {
+                results.Add(CloningHelper.ConvertPostLogoutRedirectUriToPostLogoutRedirectUriDto(foundResult, true));
+            }
+
+            return results;
         }
 
 
@@ -817,7 +1057,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <param name="includes">params Expression<Func<IRedirectUri, object>>[]</param>
 		public RedirectUriDto LoadByRedirectUriId(int id, bool cache, params Expression<Func<IRedirectUri, object>>[] includes)
         {
-            return new RedirectUriDto(this.RedirectUriRepository.LoadById(id, cache, includes), true);
+            return CloningHelper.ConvertRedirectUriToRedirectUriDto(this.RedirectUriRepository.LoadById(id, cache, includes), true);
         }
 
         /// <summary>
@@ -828,7 +1068,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <param name="includes">params Expression<Func<IRedirectUri, object>>[]</param>
 		public async Task<RedirectUriDto> LoadByRedirectUriIdAsync(int id, bool cache, params Expression<Func<IRedirectUri, object>>[] includes)
         {
-            return new RedirectUriDto(await this.RedirectUriRepository.LoadByIdAsync(id, cache, includes), true);
+            return CloningHelper.ConvertRedirectUriToRedirectUriDto(await this.RedirectUriRepository.LoadByIdAsync(id, cache, includes), true);
         }
 
         /// <summary>
@@ -838,7 +1078,15 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>IList<RedirectUriDto></returns>
 		public IList<RedirectUriDto> RedirectUriLoadAll(bool cache, params Expression<Func<IRedirectUri, object>>[] includes)
         {
-            return this.ConvertRedirectUriEntityToDto(this.RedirectUriRepository.LoadAll(cache, includes));
+            var foundResults = this.RedirectUriRepository.LoadAll(cache, includes);
+            var results = new List<RedirectUriDto>();
+            
+            foreach (var foundResult in foundResults)
+            {
+                results.Add(CloningHelper.ConvertRedirectUriToRedirectUriDto(foundResult, true));
+            }
+
+            return results;
         }
 
         /// <summary>
@@ -848,7 +1096,15 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>IList<RedirectUriDto></returns>
 		public async Task<IList<RedirectUriDto>> RedirectUriLoadAllAsync(bool cache, params Expression<Func<IRedirectUri, object>>[] includes)
         {
-            return this.ConvertRedirectUriEntityToDto( await this.RedirectUriRepository.LoadAllAsync(cache, includes));
+            var foundResults = await this.RedirectUriRepository.LoadAllAsync(cache, includes);
+            var results = new List<RedirectUriDto>();
+            
+            foreach (var foundResult in foundResults)
+            {
+                results.Add(CloningHelper.ConvertRedirectUriToRedirectUriDto(foundResult, true));
+            }
+
+            return results;
         }
 
 
@@ -860,7 +1116,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <param name="includes">params Expression<Func<IResourceClaimType, object>>[]</param>
 		public ResourceClaimTypeDto LoadByResourceClaimTypeId(int id, bool cache, params Expression<Func<IResourceClaimType, object>>[] includes)
         {
-            return new ResourceClaimTypeDto(this.ResourceClaimTypeRepository.LoadById(id, cache, includes), true);
+            return CloningHelper.ConvertResourceClaimTypeToResourceClaimTypeDto(this.ResourceClaimTypeRepository.LoadById(id, cache, includes), true);
         }
 
         /// <summary>
@@ -871,7 +1127,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <param name="includes">params Expression<Func<IResourceClaimType, object>>[]</param>
 		public async Task<ResourceClaimTypeDto> LoadByResourceClaimTypeIdAsync(int id, bool cache, params Expression<Func<IResourceClaimType, object>>[] includes)
         {
-            return new ResourceClaimTypeDto(await this.ResourceClaimTypeRepository.LoadByIdAsync(id, cache, includes), true);
+            return CloningHelper.ConvertResourceClaimTypeToResourceClaimTypeDto(await this.ResourceClaimTypeRepository.LoadByIdAsync(id, cache, includes), true);
         }
 
         /// <summary>
@@ -881,7 +1137,15 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>IList<ResourceClaimTypeDto></returns>
 		public IList<ResourceClaimTypeDto> ResourceClaimTypeLoadAll(bool cache, params Expression<Func<IResourceClaimType, object>>[] includes)
         {
-            return this.ConvertResourceClaimTypeEntityToDto(this.ResourceClaimTypeRepository.LoadAll(cache, includes));
+            var foundResults = this.ResourceClaimTypeRepository.LoadAll(cache, includes);
+            var results = new List<ResourceClaimTypeDto>();
+            
+            foreach (var foundResult in foundResults)
+            {
+                results.Add(CloningHelper.ConvertResourceClaimTypeToResourceClaimTypeDto(foundResult, true));
+            }
+
+            return results;
         }
 
         /// <summary>
@@ -891,7 +1155,15 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>IList<ResourceClaimTypeDto></returns>
 		public async Task<IList<ResourceClaimTypeDto>> ResourceClaimTypeLoadAllAsync(bool cache, params Expression<Func<IResourceClaimType, object>>[] includes)
         {
-            return this.ConvertResourceClaimTypeEntityToDto( await this.ResourceClaimTypeRepository.LoadAllAsync(cache, includes));
+            var foundResults = await this.ResourceClaimTypeRepository.LoadAllAsync(cache, includes);
+            var results = new List<ResourceClaimTypeDto>();
+            
+            foreach (var foundResult in foundResults)
+            {
+                results.Add(CloningHelper.ConvertResourceClaimTypeToResourceClaimTypeDto(foundResult, true));
+            }
+
+            return results;
         }
 
 
@@ -1600,7 +1872,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
 
 		#endregion
 
-		#region Modifiers
+#region Modifiers
 		
         /// <summary>
         /// Add the AllowedScope entity to the database.
@@ -1609,7 +1881,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public bool AllowedScopeAdd(AllowedScopeDto entity)
         {
-            return this.AllowedScopeRepository.Add(new AllowedScope(entity, true));
+            return this.AllowedScopeRepository.Add(CloningHelper.ConvertAllowedScopeDtoToAllowedScope(entity, true));
         }
 
         /// <summary>
@@ -1619,7 +1891,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public async Task<bool> AllowedScopeAddAsync(AllowedScopeDto entity)
         {
-            return await this.AllowedScopeRepository.AddAsync(new AllowedScope(entity, true));
+            return await this.AllowedScopeRepository.AddAsync(CloningHelper.ConvertAllowedScopeDtoToAllowedScope(entity, true));
         }
 
         /// <summary>
@@ -1629,7 +1901,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public bool AllowedScopeUpdate(AllowedScopeDto entity)
         {
-            return this.AllowedScopeRepository.Update(new AllowedScope(entity, true));
+            return this.AllowedScopeRepository.Update(CloningHelper.ConvertAllowedScopeDtoToAllowedScope(entity, true));
         }
 		
         /// <summary>
@@ -1639,7 +1911,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public async Task<bool> AllowedScopeUpdateAsync(AllowedScopeDto entity)
         {
-            return await this.AllowedScopeRepository.UpdateAsync(new AllowedScope(entity, true));
+            return await this.AllowedScopeRepository.UpdateAsync(CloningHelper.ConvertAllowedScopeDtoToAllowedScope(entity, true));
         }
 
         /// <summary>
@@ -1649,7 +1921,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public bool AllowedScopeDelete(AllowedScopeDto entity)
         {
-            return this.AllowedScopeRepository.Delete(new AllowedScope(entity, true));
+            return this.AllowedScopeRepository.Delete(CloningHelper.ConvertAllowedScopeDtoToAllowedScope(entity, true));
         }
 
         /// <summary>
@@ -1659,7 +1931,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public async Task<bool> AllowedScopeDeleteAsync(AllowedScopeDto entity)
         {
-            return await this.AllowedScopeRepository.DeleteAsync(new AllowedScope(entity, true));
+            return await this.AllowedScopeRepository.DeleteAsync(CloningHelper.ConvertAllowedScopeDtoToAllowedScope(entity, true));
         }
 
 		/// <summary>
@@ -1690,7 +1962,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public bool ApiResourceAdd(ApiResourceDto entity)
         {
-            return this.ApiResourceRepository.Add(new ApiResource(entity, true));
+            return this.ApiResourceRepository.Add(CloningHelper.ConvertApiResourceDtoToApiResource(entity, true));
         }
 
         /// <summary>
@@ -1700,7 +1972,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public async Task<bool> ApiResourceAddAsync(ApiResourceDto entity)
         {
-            return await this.ApiResourceRepository.AddAsync(new ApiResource(entity, true));
+            return await this.ApiResourceRepository.AddAsync(CloningHelper.ConvertApiResourceDtoToApiResource(entity, true));
         }
 
         /// <summary>
@@ -1710,7 +1982,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public bool ApiResourceUpdate(ApiResourceDto entity)
         {
-            return this.ApiResourceRepository.Update(new ApiResource(entity, true));
+            return this.ApiResourceRepository.Update(CloningHelper.ConvertApiResourceDtoToApiResource(entity, true));
         }
 		
         /// <summary>
@@ -1720,7 +1992,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public async Task<bool> ApiResourceUpdateAsync(ApiResourceDto entity)
         {
-            return await this.ApiResourceRepository.UpdateAsync(new ApiResource(entity, true));
+            return await this.ApiResourceRepository.UpdateAsync(CloningHelper.ConvertApiResourceDtoToApiResource(entity, true));
         }
 
         /// <summary>
@@ -1730,7 +2002,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public bool ApiResourceDelete(ApiResourceDto entity)
         {
-            return this.ApiResourceRepository.Delete(new ApiResource(entity, true));
+            return this.ApiResourceRepository.Delete(CloningHelper.ConvertApiResourceDtoToApiResource(entity, true));
         }
 
         /// <summary>
@@ -1740,7 +2012,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public async Task<bool> ApiResourceDeleteAsync(ApiResourceDto entity)
         {
-            return await this.ApiResourceRepository.DeleteAsync(new ApiResource(entity, true));
+            return await this.ApiResourceRepository.DeleteAsync(CloningHelper.ConvertApiResourceDtoToApiResource(entity, true));
         }
 
 		/// <summary>
@@ -1771,7 +2043,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public bool AspNetRoleAdd(AspNetRoleDto entity)
         {
-            return this.AspNetRoleRepository.Add(new AspNetRole(entity, true));
+            return this.AspNetRoleRepository.Add(CloningHelper.ConvertAspNetRoleDtoToAspNetRole(entity, true));
         }
 
         /// <summary>
@@ -1781,7 +2053,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public async Task<bool> AspNetRoleAddAsync(AspNetRoleDto entity)
         {
-            return await this.AspNetRoleRepository.AddAsync(new AspNetRole(entity, true));
+            return await this.AspNetRoleRepository.AddAsync(CloningHelper.ConvertAspNetRoleDtoToAspNetRole(entity, true));
         }
 
         /// <summary>
@@ -1791,7 +2063,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public bool AspNetRoleUpdate(AspNetRoleDto entity)
         {
-            return this.AspNetRoleRepository.Update(new AspNetRole(entity, true));
+            return this.AspNetRoleRepository.Update(CloningHelper.ConvertAspNetRoleDtoToAspNetRole(entity, true));
         }
 		
         /// <summary>
@@ -1801,7 +2073,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public async Task<bool> AspNetRoleUpdateAsync(AspNetRoleDto entity)
         {
-            return await this.AspNetRoleRepository.UpdateAsync(new AspNetRole(entity, true));
+            return await this.AspNetRoleRepository.UpdateAsync(CloningHelper.ConvertAspNetRoleDtoToAspNetRole(entity, true));
         }
 
         /// <summary>
@@ -1811,7 +2083,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public bool AspNetRoleDelete(AspNetRoleDto entity)
         {
-            return this.AspNetRoleRepository.Delete(new AspNetRole(entity, true));
+            return this.AspNetRoleRepository.Delete(CloningHelper.ConvertAspNetRoleDtoToAspNetRole(entity, true));
         }
 
         /// <summary>
@@ -1821,7 +2093,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public async Task<bool> AspNetRoleDeleteAsync(AspNetRoleDto entity)
         {
-            return await this.AspNetRoleRepository.DeleteAsync(new AspNetRole(entity, true));
+            return await this.AspNetRoleRepository.DeleteAsync(CloningHelper.ConvertAspNetRoleDtoToAspNetRole(entity, true));
         }
 
 		/// <summary>
@@ -1852,7 +2124,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public bool AspNetRoleClaimAdd(AspNetRoleClaimDto entity)
         {
-            return this.AspNetRoleClaimRepository.Add(new AspNetRoleClaim(entity, true));
+            return this.AspNetRoleClaimRepository.Add(CloningHelper.ConvertAspNetRoleClaimDtoToAspNetRoleClaim(entity, true));
         }
 
         /// <summary>
@@ -1862,7 +2134,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public async Task<bool> AspNetRoleClaimAddAsync(AspNetRoleClaimDto entity)
         {
-            return await this.AspNetRoleClaimRepository.AddAsync(new AspNetRoleClaim(entity, true));
+            return await this.AspNetRoleClaimRepository.AddAsync(CloningHelper.ConvertAspNetRoleClaimDtoToAspNetRoleClaim(entity, true));
         }
 
         /// <summary>
@@ -1872,7 +2144,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public bool AspNetRoleClaimUpdate(AspNetRoleClaimDto entity)
         {
-            return this.AspNetRoleClaimRepository.Update(new AspNetRoleClaim(entity, true));
+            return this.AspNetRoleClaimRepository.Update(CloningHelper.ConvertAspNetRoleClaimDtoToAspNetRoleClaim(entity, true));
         }
 		
         /// <summary>
@@ -1882,7 +2154,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public async Task<bool> AspNetRoleClaimUpdateAsync(AspNetRoleClaimDto entity)
         {
-            return await this.AspNetRoleClaimRepository.UpdateAsync(new AspNetRoleClaim(entity, true));
+            return await this.AspNetRoleClaimRepository.UpdateAsync(CloningHelper.ConvertAspNetRoleClaimDtoToAspNetRoleClaim(entity, true));
         }
 
         /// <summary>
@@ -1892,7 +2164,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public bool AspNetRoleClaimDelete(AspNetRoleClaimDto entity)
         {
-            return this.AspNetRoleClaimRepository.Delete(new AspNetRoleClaim(entity, true));
+            return this.AspNetRoleClaimRepository.Delete(CloningHelper.ConvertAspNetRoleClaimDtoToAspNetRoleClaim(entity, true));
         }
 
         /// <summary>
@@ -1902,7 +2174,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public async Task<bool> AspNetRoleClaimDeleteAsync(AspNetRoleClaimDto entity)
         {
-            return await this.AspNetRoleClaimRepository.DeleteAsync(new AspNetRoleClaim(entity, true));
+            return await this.AspNetRoleClaimRepository.DeleteAsync(CloningHelper.ConvertAspNetRoleClaimDtoToAspNetRoleClaim(entity, true));
         }
 
 		/// <summary>
@@ -1933,7 +2205,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public bool AspNetUserAdd(AspNetUserDto entity)
         {
-            return this.AspNetUserRepository.Add(new AspNetUser(entity, true));
+            return this.AspNetUserRepository.Add(CloningHelper.ConvertAspNetUserDtoToAspNetUser(entity, true));
         }
 
         /// <summary>
@@ -1943,7 +2215,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public async Task<bool> AspNetUserAddAsync(AspNetUserDto entity)
         {
-            return await this.AspNetUserRepository.AddAsync(new AspNetUser(entity, true));
+            return await this.AspNetUserRepository.AddAsync(CloningHelper.ConvertAspNetUserDtoToAspNetUser(entity, true));
         }
 
         /// <summary>
@@ -1953,7 +2225,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public bool AspNetUserUpdate(AspNetUserDto entity)
         {
-            return this.AspNetUserRepository.Update(new AspNetUser(entity, true));
+            return this.AspNetUserRepository.Update(CloningHelper.ConvertAspNetUserDtoToAspNetUser(entity, true));
         }
 		
         /// <summary>
@@ -1963,7 +2235,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public async Task<bool> AspNetUserUpdateAsync(AspNetUserDto entity)
         {
-            return await this.AspNetUserRepository.UpdateAsync(new AspNetUser(entity, true));
+            return await this.AspNetUserRepository.UpdateAsync(CloningHelper.ConvertAspNetUserDtoToAspNetUser(entity, true));
         }
 
         /// <summary>
@@ -1973,7 +2245,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public bool AspNetUserDelete(AspNetUserDto entity)
         {
-            return this.AspNetUserRepository.Delete(new AspNetUser(entity, true));
+            return this.AspNetUserRepository.Delete(CloningHelper.ConvertAspNetUserDtoToAspNetUser(entity, true));
         }
 
         /// <summary>
@@ -1983,7 +2255,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public async Task<bool> AspNetUserDeleteAsync(AspNetUserDto entity)
         {
-            return await this.AspNetUserRepository.DeleteAsync(new AspNetUser(entity, true));
+            return await this.AspNetUserRepository.DeleteAsync(CloningHelper.ConvertAspNetUserDtoToAspNetUser(entity, true));
         }
 
 		/// <summary>
@@ -2014,7 +2286,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public bool AspNetUserClaimAdd(AspNetUserClaimDto entity)
         {
-            return this.AspNetUserClaimRepository.Add(new AspNetUserClaim(entity, true));
+            return this.AspNetUserClaimRepository.Add(CloningHelper.ConvertAspNetUserClaimDtoToAspNetUserClaim(entity, true));
         }
 
         /// <summary>
@@ -2024,7 +2296,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public async Task<bool> AspNetUserClaimAddAsync(AspNetUserClaimDto entity)
         {
-            return await this.AspNetUserClaimRepository.AddAsync(new AspNetUserClaim(entity, true));
+            return await this.AspNetUserClaimRepository.AddAsync(CloningHelper.ConvertAspNetUserClaimDtoToAspNetUserClaim(entity, true));
         }
 
         /// <summary>
@@ -2034,7 +2306,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public bool AspNetUserClaimUpdate(AspNetUserClaimDto entity)
         {
-            return this.AspNetUserClaimRepository.Update(new AspNetUserClaim(entity, true));
+            return this.AspNetUserClaimRepository.Update(CloningHelper.ConvertAspNetUserClaimDtoToAspNetUserClaim(entity, true));
         }
 		
         /// <summary>
@@ -2044,7 +2316,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public async Task<bool> AspNetUserClaimUpdateAsync(AspNetUserClaimDto entity)
         {
-            return await this.AspNetUserClaimRepository.UpdateAsync(new AspNetUserClaim(entity, true));
+            return await this.AspNetUserClaimRepository.UpdateAsync(CloningHelper.ConvertAspNetUserClaimDtoToAspNetUserClaim(entity, true));
         }
 
         /// <summary>
@@ -2054,7 +2326,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public bool AspNetUserClaimDelete(AspNetUserClaimDto entity)
         {
-            return this.AspNetUserClaimRepository.Delete(new AspNetUserClaim(entity, true));
+            return this.AspNetUserClaimRepository.Delete(CloningHelper.ConvertAspNetUserClaimDtoToAspNetUserClaim(entity, true));
         }
 
         /// <summary>
@@ -2064,7 +2336,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public async Task<bool> AspNetUserClaimDeleteAsync(AspNetUserClaimDto entity)
         {
-            return await this.AspNetUserClaimRepository.DeleteAsync(new AspNetUserClaim(entity, true));
+            return await this.AspNetUserClaimRepository.DeleteAsync(CloningHelper.ConvertAspNetUserClaimDtoToAspNetUserClaim(entity, true));
         }
 
 		/// <summary>
@@ -2095,7 +2367,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public bool AspNetUserLoginAdd(AspNetUserLoginDto entity)
         {
-            return this.AspNetUserLoginRepository.Add(new AspNetUserLogin(entity, true));
+            return this.AspNetUserLoginRepository.Add(CloningHelper.ConvertAspNetUserLoginDtoToAspNetUserLogin(entity, true));
         }
 
         /// <summary>
@@ -2105,7 +2377,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public async Task<bool> AspNetUserLoginAddAsync(AspNetUserLoginDto entity)
         {
-            return await this.AspNetUserLoginRepository.AddAsync(new AspNetUserLogin(entity, true));
+            return await this.AspNetUserLoginRepository.AddAsync(CloningHelper.ConvertAspNetUserLoginDtoToAspNetUserLogin(entity, true));
         }
 
         /// <summary>
@@ -2115,7 +2387,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public bool AspNetUserLoginUpdate(AspNetUserLoginDto entity)
         {
-            return this.AspNetUserLoginRepository.Update(new AspNetUserLogin(entity, true));
+            return this.AspNetUserLoginRepository.Update(CloningHelper.ConvertAspNetUserLoginDtoToAspNetUserLogin(entity, true));
         }
 		
         /// <summary>
@@ -2125,7 +2397,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public async Task<bool> AspNetUserLoginUpdateAsync(AspNetUserLoginDto entity)
         {
-            return await this.AspNetUserLoginRepository.UpdateAsync(new AspNetUserLogin(entity, true));
+            return await this.AspNetUserLoginRepository.UpdateAsync(CloningHelper.ConvertAspNetUserLoginDtoToAspNetUserLogin(entity, true));
         }
 
         /// <summary>
@@ -2135,7 +2407,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public bool AspNetUserLoginDelete(AspNetUserLoginDto entity)
         {
-            return this.AspNetUserLoginRepository.Delete(new AspNetUserLogin(entity, true));
+            return this.AspNetUserLoginRepository.Delete(CloningHelper.ConvertAspNetUserLoginDtoToAspNetUserLogin(entity, true));
         }
 
         /// <summary>
@@ -2145,7 +2417,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public async Task<bool> AspNetUserLoginDeleteAsync(AspNetUserLoginDto entity)
         {
-            return await this.AspNetUserLoginRepository.DeleteAsync(new AspNetUserLogin(entity, true));
+            return await this.AspNetUserLoginRepository.DeleteAsync(CloningHelper.ConvertAspNetUserLoginDtoToAspNetUserLogin(entity, true));
         }
 
 		/// <summary>
@@ -2178,7 +2450,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public bool AspNetUserRoleAdd(AspNetUserRoleDto entity)
         {
-            return this.AspNetUserRoleRepository.Add(new AspNetUserRole(entity, true));
+            return this.AspNetUserRoleRepository.Add(CloningHelper.ConvertAspNetUserRoleDtoToAspNetUserRole(entity, true));
         }
 
         /// <summary>
@@ -2188,7 +2460,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public async Task<bool> AspNetUserRoleAddAsync(AspNetUserRoleDto entity)
         {
-            return await this.AspNetUserRoleRepository.AddAsync(new AspNetUserRole(entity, true));
+            return await this.AspNetUserRoleRepository.AddAsync(CloningHelper.ConvertAspNetUserRoleDtoToAspNetUserRole(entity, true));
         }
 
         /// <summary>
@@ -2198,7 +2470,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public bool AspNetUserRoleUpdate(AspNetUserRoleDto entity)
         {
-            return this.AspNetUserRoleRepository.Update(new AspNetUserRole(entity, true));
+            return this.AspNetUserRoleRepository.Update(CloningHelper.ConvertAspNetUserRoleDtoToAspNetUserRole(entity, true));
         }
 		
         /// <summary>
@@ -2208,7 +2480,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public async Task<bool> AspNetUserRoleUpdateAsync(AspNetUserRoleDto entity)
         {
-            return await this.AspNetUserRoleRepository.UpdateAsync(new AspNetUserRole(entity, true));
+            return await this.AspNetUserRoleRepository.UpdateAsync(CloningHelper.ConvertAspNetUserRoleDtoToAspNetUserRole(entity, true));
         }
 
         /// <summary>
@@ -2218,7 +2490,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public bool AspNetUserRoleDelete(AspNetUserRoleDto entity)
         {
-            return this.AspNetUserRoleRepository.Delete(new AspNetUserRole(entity, true));
+            return this.AspNetUserRoleRepository.Delete(CloningHelper.ConvertAspNetUserRoleDtoToAspNetUserRole(entity, true));
         }
 
         /// <summary>
@@ -2228,7 +2500,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public async Task<bool> AspNetUserRoleDeleteAsync(AspNetUserRoleDto entity)
         {
-            return await this.AspNetUserRoleRepository.DeleteAsync(new AspNetUserRole(entity, true));
+            return await this.AspNetUserRoleRepository.DeleteAsync(CloningHelper.ConvertAspNetUserRoleDtoToAspNetUserRole(entity, true));
         }
 
 		/// <summary>
@@ -2261,7 +2533,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public bool AspNetUserTokenAdd(AspNetUserTokenDto entity)
         {
-            return this.AspNetUserTokenRepository.Add(new AspNetUserToken(entity, true));
+            return this.AspNetUserTokenRepository.Add(CloningHelper.ConvertAspNetUserTokenDtoToAspNetUserToken(entity, true));
         }
 
         /// <summary>
@@ -2271,7 +2543,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public async Task<bool> AspNetUserTokenAddAsync(AspNetUserTokenDto entity)
         {
-            return await this.AspNetUserTokenRepository.AddAsync(new AspNetUserToken(entity, true));
+            return await this.AspNetUserTokenRepository.AddAsync(CloningHelper.ConvertAspNetUserTokenDtoToAspNetUserToken(entity, true));
         }
 
         /// <summary>
@@ -2281,7 +2553,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public bool AspNetUserTokenUpdate(AspNetUserTokenDto entity)
         {
-            return this.AspNetUserTokenRepository.Update(new AspNetUserToken(entity, true));
+            return this.AspNetUserTokenRepository.Update(CloningHelper.ConvertAspNetUserTokenDtoToAspNetUserToken(entity, true));
         }
 		
         /// <summary>
@@ -2291,7 +2563,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public async Task<bool> AspNetUserTokenUpdateAsync(AspNetUserTokenDto entity)
         {
-            return await this.AspNetUserTokenRepository.UpdateAsync(new AspNetUserToken(entity, true));
+            return await this.AspNetUserTokenRepository.UpdateAsync(CloningHelper.ConvertAspNetUserTokenDtoToAspNetUserToken(entity, true));
         }
 
         /// <summary>
@@ -2301,7 +2573,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public bool AspNetUserTokenDelete(AspNetUserTokenDto entity)
         {
-            return this.AspNetUserTokenRepository.Delete(new AspNetUserToken(entity, true));
+            return this.AspNetUserTokenRepository.Delete(CloningHelper.ConvertAspNetUserTokenDtoToAspNetUserToken(entity, true));
         }
 
         /// <summary>
@@ -2311,7 +2583,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public async Task<bool> AspNetUserTokenDeleteAsync(AspNetUserTokenDto entity)
         {
-            return await this.AspNetUserTokenRepository.DeleteAsync(new AspNetUserToken(entity, true));
+            return await this.AspNetUserTokenRepository.DeleteAsync(CloningHelper.ConvertAspNetUserTokenDtoToAspNetUserToken(entity, true));
         }
 
 		/// <summary>
@@ -2346,7 +2618,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public bool ClientAdd(ClientDto entity)
         {
-            return this.ClientRepository.Add(new Client(entity, true));
+            return this.ClientRepository.Add(CloningHelper.ConvertClientDtoToClient(entity, true));
         }
 
         /// <summary>
@@ -2356,7 +2628,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public async Task<bool> ClientAddAsync(ClientDto entity)
         {
-            return await this.ClientRepository.AddAsync(new Client(entity, true));
+            return await this.ClientRepository.AddAsync(CloningHelper.ConvertClientDtoToClient(entity, true));
         }
 
         /// <summary>
@@ -2366,7 +2638,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public bool ClientUpdate(ClientDto entity)
         {
-            return this.ClientRepository.Update(new Client(entity, true));
+            return this.ClientRepository.Update(CloningHelper.ConvertClientDtoToClient(entity, true));
         }
 		
         /// <summary>
@@ -2376,7 +2648,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public async Task<bool> ClientUpdateAsync(ClientDto entity)
         {
-            return await this.ClientRepository.UpdateAsync(new Client(entity, true));
+            return await this.ClientRepository.UpdateAsync(CloningHelper.ConvertClientDtoToClient(entity, true));
         }
 
         /// <summary>
@@ -2386,7 +2658,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public bool ClientDelete(ClientDto entity)
         {
-            return this.ClientRepository.Delete(new Client(entity, true));
+            return this.ClientRepository.Delete(CloningHelper.ConvertClientDtoToClient(entity, true));
         }
 
         /// <summary>
@@ -2396,7 +2668,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public async Task<bool> ClientDeleteAsync(ClientDto entity)
         {
-            return await this.ClientRepository.DeleteAsync(new Client(entity, true));
+            return await this.ClientRepository.DeleteAsync(CloningHelper.ConvertClientDtoToClient(entity, true));
         }
 
 		/// <summary>
@@ -2427,7 +2699,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public bool ClientGrantTypeAdd(ClientGrantTypeDto entity)
         {
-            return this.ClientGrantTypeRepository.Add(new ClientGrantType(entity, true));
+            return this.ClientGrantTypeRepository.Add(CloningHelper.ConvertClientGrantTypeDtoToClientGrantType(entity, true));
         }
 
         /// <summary>
@@ -2437,7 +2709,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public async Task<bool> ClientGrantTypeAddAsync(ClientGrantTypeDto entity)
         {
-            return await this.ClientGrantTypeRepository.AddAsync(new ClientGrantType(entity, true));
+            return await this.ClientGrantTypeRepository.AddAsync(CloningHelper.ConvertClientGrantTypeDtoToClientGrantType(entity, true));
         }
 
         /// <summary>
@@ -2447,7 +2719,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public bool ClientGrantTypeUpdate(ClientGrantTypeDto entity)
         {
-            return this.ClientGrantTypeRepository.Update(new ClientGrantType(entity, true));
+            return this.ClientGrantTypeRepository.Update(CloningHelper.ConvertClientGrantTypeDtoToClientGrantType(entity, true));
         }
 		
         /// <summary>
@@ -2457,7 +2729,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public async Task<bool> ClientGrantTypeUpdateAsync(ClientGrantTypeDto entity)
         {
-            return await this.ClientGrantTypeRepository.UpdateAsync(new ClientGrantType(entity, true));
+            return await this.ClientGrantTypeRepository.UpdateAsync(CloningHelper.ConvertClientGrantTypeDtoToClientGrantType(entity, true));
         }
 
         /// <summary>
@@ -2467,7 +2739,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public bool ClientGrantTypeDelete(ClientGrantTypeDto entity)
         {
-            return this.ClientGrantTypeRepository.Delete(new ClientGrantType(entity, true));
+            return this.ClientGrantTypeRepository.Delete(CloningHelper.ConvertClientGrantTypeDtoToClientGrantType(entity, true));
         }
 
         /// <summary>
@@ -2477,7 +2749,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public async Task<bool> ClientGrantTypeDeleteAsync(ClientGrantTypeDto entity)
         {
-            return await this.ClientGrantTypeRepository.DeleteAsync(new ClientGrantType(entity, true));
+            return await this.ClientGrantTypeRepository.DeleteAsync(CloningHelper.ConvertClientGrantTypeDtoToClientGrantType(entity, true));
         }
 
 		/// <summary>
@@ -2510,7 +2782,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public bool GrantTypeAdd(GrantTypeDto entity)
         {
-            return this.GrantTypeRepository.Add(new GrantType(entity, true));
+            return this.GrantTypeRepository.Add(CloningHelper.ConvertGrantTypeDtoToGrantType(entity, true));
         }
 
         /// <summary>
@@ -2520,7 +2792,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public async Task<bool> GrantTypeAddAsync(GrantTypeDto entity)
         {
-            return await this.GrantTypeRepository.AddAsync(new GrantType(entity, true));
+            return await this.GrantTypeRepository.AddAsync(CloningHelper.ConvertGrantTypeDtoToGrantType(entity, true));
         }
 
         /// <summary>
@@ -2530,7 +2802,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public bool GrantTypeUpdate(GrantTypeDto entity)
         {
-            return this.GrantTypeRepository.Update(new GrantType(entity, true));
+            return this.GrantTypeRepository.Update(CloningHelper.ConvertGrantTypeDtoToGrantType(entity, true));
         }
 		
         /// <summary>
@@ -2540,7 +2812,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public async Task<bool> GrantTypeUpdateAsync(GrantTypeDto entity)
         {
-            return await this.GrantTypeRepository.UpdateAsync(new GrantType(entity, true));
+            return await this.GrantTypeRepository.UpdateAsync(CloningHelper.ConvertGrantTypeDtoToGrantType(entity, true));
         }
 
         /// <summary>
@@ -2550,7 +2822,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public bool GrantTypeDelete(GrantTypeDto entity)
         {
-            return this.GrantTypeRepository.Delete(new GrantType(entity, true));
+            return this.GrantTypeRepository.Delete(CloningHelper.ConvertGrantTypeDtoToGrantType(entity, true));
         }
 
         /// <summary>
@@ -2560,7 +2832,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public async Task<bool> GrantTypeDeleteAsync(GrantTypeDto entity)
         {
-            return await this.GrantTypeRepository.DeleteAsync(new GrantType(entity, true));
+            return await this.GrantTypeRepository.DeleteAsync(CloningHelper.ConvertGrantTypeDtoToGrantType(entity, true));
         }
 
 		/// <summary>
@@ -2591,7 +2863,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public bool IdentityResourceAdd(IdentityResourceDto entity)
         {
-            return this.IdentityResourceRepository.Add(new IdentityResource(entity, true));
+            return this.IdentityResourceRepository.Add(CloningHelper.ConvertIdentityResourceDtoToIdentityResource(entity, true));
         }
 
         /// <summary>
@@ -2601,7 +2873,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public async Task<bool> IdentityResourceAddAsync(IdentityResourceDto entity)
         {
-            return await this.IdentityResourceRepository.AddAsync(new IdentityResource(entity, true));
+            return await this.IdentityResourceRepository.AddAsync(CloningHelper.ConvertIdentityResourceDtoToIdentityResource(entity, true));
         }
 
         /// <summary>
@@ -2611,7 +2883,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public bool IdentityResourceUpdate(IdentityResourceDto entity)
         {
-            return this.IdentityResourceRepository.Update(new IdentityResource(entity, true));
+            return this.IdentityResourceRepository.Update(CloningHelper.ConvertIdentityResourceDtoToIdentityResource(entity, true));
         }
 		
         /// <summary>
@@ -2621,7 +2893,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public async Task<bool> IdentityResourceUpdateAsync(IdentityResourceDto entity)
         {
-            return await this.IdentityResourceRepository.UpdateAsync(new IdentityResource(entity, true));
+            return await this.IdentityResourceRepository.UpdateAsync(CloningHelper.ConvertIdentityResourceDtoToIdentityResource(entity, true));
         }
 
         /// <summary>
@@ -2631,7 +2903,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public bool IdentityResourceDelete(IdentityResourceDto entity)
         {
-            return this.IdentityResourceRepository.Delete(new IdentityResource(entity, true));
+            return this.IdentityResourceRepository.Delete(CloningHelper.ConvertIdentityResourceDtoToIdentityResource(entity, true));
         }
 
         /// <summary>
@@ -2641,7 +2913,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public async Task<bool> IdentityResourceDeleteAsync(IdentityResourceDto entity)
         {
-            return await this.IdentityResourceRepository.DeleteAsync(new IdentityResource(entity, true));
+            return await this.IdentityResourceRepository.DeleteAsync(CloningHelper.ConvertIdentityResourceDtoToIdentityResource(entity, true));
         }
 
 		/// <summary>
@@ -2672,7 +2944,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public bool IdentityResourceClaimTypeAdd(IdentityResourceClaimTypeDto entity)
         {
-            return this.IdentityResourceClaimTypeRepository.Add(new IdentityResourceClaimType(entity, true));
+            return this.IdentityResourceClaimTypeRepository.Add(CloningHelper.ConvertIdentityResourceClaimTypeDtoToIdentityResourceClaimType(entity, true));
         }
 
         /// <summary>
@@ -2682,7 +2954,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public async Task<bool> IdentityResourceClaimTypeAddAsync(IdentityResourceClaimTypeDto entity)
         {
-            return await this.IdentityResourceClaimTypeRepository.AddAsync(new IdentityResourceClaimType(entity, true));
+            return await this.IdentityResourceClaimTypeRepository.AddAsync(CloningHelper.ConvertIdentityResourceClaimTypeDtoToIdentityResourceClaimType(entity, true));
         }
 
         /// <summary>
@@ -2692,7 +2964,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public bool IdentityResourceClaimTypeUpdate(IdentityResourceClaimTypeDto entity)
         {
-            return this.IdentityResourceClaimTypeRepository.Update(new IdentityResourceClaimType(entity, true));
+            return this.IdentityResourceClaimTypeRepository.Update(CloningHelper.ConvertIdentityResourceClaimTypeDtoToIdentityResourceClaimType(entity, true));
         }
 		
         /// <summary>
@@ -2702,7 +2974,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public async Task<bool> IdentityResourceClaimTypeUpdateAsync(IdentityResourceClaimTypeDto entity)
         {
-            return await this.IdentityResourceClaimTypeRepository.UpdateAsync(new IdentityResourceClaimType(entity, true));
+            return await this.IdentityResourceClaimTypeRepository.UpdateAsync(CloningHelper.ConvertIdentityResourceClaimTypeDtoToIdentityResourceClaimType(entity, true));
         }
 
         /// <summary>
@@ -2712,7 +2984,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public bool IdentityResourceClaimTypeDelete(IdentityResourceClaimTypeDto entity)
         {
-            return this.IdentityResourceClaimTypeRepository.Delete(new IdentityResourceClaimType(entity, true));
+            return this.IdentityResourceClaimTypeRepository.Delete(CloningHelper.ConvertIdentityResourceClaimTypeDtoToIdentityResourceClaimType(entity, true));
         }
 
         /// <summary>
@@ -2722,7 +2994,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public async Task<bool> IdentityResourceClaimTypeDeleteAsync(IdentityResourceClaimTypeDto entity)
         {
-            return await this.IdentityResourceClaimTypeRepository.DeleteAsync(new IdentityResourceClaimType(entity, true));
+            return await this.IdentityResourceClaimTypeRepository.DeleteAsync(CloningHelper.ConvertIdentityResourceClaimTypeDtoToIdentityResourceClaimType(entity, true));
         }
 
 		/// <summary>
@@ -2755,7 +3027,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public bool PostLogoutRedirectUriAdd(PostLogoutRedirectUriDto entity)
         {
-            return this.PostLogoutRedirectUriRepository.Add(new PostLogoutRedirectUri(entity, true));
+            return this.PostLogoutRedirectUriRepository.Add(CloningHelper.ConvertPostLogoutRedirectUriDtoToPostLogoutRedirectUri(entity, true));
         }
 
         /// <summary>
@@ -2765,7 +3037,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public async Task<bool> PostLogoutRedirectUriAddAsync(PostLogoutRedirectUriDto entity)
         {
-            return await this.PostLogoutRedirectUriRepository.AddAsync(new PostLogoutRedirectUri(entity, true));
+            return await this.PostLogoutRedirectUriRepository.AddAsync(CloningHelper.ConvertPostLogoutRedirectUriDtoToPostLogoutRedirectUri(entity, true));
         }
 
         /// <summary>
@@ -2775,7 +3047,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public bool PostLogoutRedirectUriUpdate(PostLogoutRedirectUriDto entity)
         {
-            return this.PostLogoutRedirectUriRepository.Update(new PostLogoutRedirectUri(entity, true));
+            return this.PostLogoutRedirectUriRepository.Update(CloningHelper.ConvertPostLogoutRedirectUriDtoToPostLogoutRedirectUri(entity, true));
         }
 		
         /// <summary>
@@ -2785,7 +3057,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public async Task<bool> PostLogoutRedirectUriUpdateAsync(PostLogoutRedirectUriDto entity)
         {
-            return await this.PostLogoutRedirectUriRepository.UpdateAsync(new PostLogoutRedirectUri(entity, true));
+            return await this.PostLogoutRedirectUriRepository.UpdateAsync(CloningHelper.ConvertPostLogoutRedirectUriDtoToPostLogoutRedirectUri(entity, true));
         }
 
         /// <summary>
@@ -2795,7 +3067,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public bool PostLogoutRedirectUriDelete(PostLogoutRedirectUriDto entity)
         {
-            return this.PostLogoutRedirectUriRepository.Delete(new PostLogoutRedirectUri(entity, true));
+            return this.PostLogoutRedirectUriRepository.Delete(CloningHelper.ConvertPostLogoutRedirectUriDtoToPostLogoutRedirectUri(entity, true));
         }
 
         /// <summary>
@@ -2805,7 +3077,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public async Task<bool> PostLogoutRedirectUriDeleteAsync(PostLogoutRedirectUriDto entity)
         {
-            return await this.PostLogoutRedirectUriRepository.DeleteAsync(new PostLogoutRedirectUri(entity, true));
+            return await this.PostLogoutRedirectUriRepository.DeleteAsync(CloningHelper.ConvertPostLogoutRedirectUriDtoToPostLogoutRedirectUri(entity, true));
         }
 
 		/// <summary>
@@ -2836,7 +3108,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public bool RedirectUriAdd(RedirectUriDto entity)
         {
-            return this.RedirectUriRepository.Add(new RedirectUri(entity, true));
+            return this.RedirectUriRepository.Add(CloningHelper.ConvertRedirectUriDtoToRedirectUri(entity, true));
         }
 
         /// <summary>
@@ -2846,7 +3118,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public async Task<bool> RedirectUriAddAsync(RedirectUriDto entity)
         {
-            return await this.RedirectUriRepository.AddAsync(new RedirectUri(entity, true));
+            return await this.RedirectUriRepository.AddAsync(CloningHelper.ConvertRedirectUriDtoToRedirectUri(entity, true));
         }
 
         /// <summary>
@@ -2856,7 +3128,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public bool RedirectUriUpdate(RedirectUriDto entity)
         {
-            return this.RedirectUriRepository.Update(new RedirectUri(entity, true));
+            return this.RedirectUriRepository.Update(CloningHelper.ConvertRedirectUriDtoToRedirectUri(entity, true));
         }
 		
         /// <summary>
@@ -2866,7 +3138,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public async Task<bool> RedirectUriUpdateAsync(RedirectUriDto entity)
         {
-            return await this.RedirectUriRepository.UpdateAsync(new RedirectUri(entity, true));
+            return await this.RedirectUriRepository.UpdateAsync(CloningHelper.ConvertRedirectUriDtoToRedirectUri(entity, true));
         }
 
         /// <summary>
@@ -2876,7 +3148,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public bool RedirectUriDelete(RedirectUriDto entity)
         {
-            return this.RedirectUriRepository.Delete(new RedirectUri(entity, true));
+            return this.RedirectUriRepository.Delete(CloningHelper.ConvertRedirectUriDtoToRedirectUri(entity, true));
         }
 
         /// <summary>
@@ -2886,7 +3158,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public async Task<bool> RedirectUriDeleteAsync(RedirectUriDto entity)
         {
-            return await this.RedirectUriRepository.DeleteAsync(new RedirectUri(entity, true));
+            return await this.RedirectUriRepository.DeleteAsync(CloningHelper.ConvertRedirectUriDtoToRedirectUri(entity, true));
         }
 
 		/// <summary>
@@ -2917,7 +3189,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public bool ResourceClaimTypeAdd(ResourceClaimTypeDto entity)
         {
-            return this.ResourceClaimTypeRepository.Add(new ResourceClaimType(entity, true));
+            return this.ResourceClaimTypeRepository.Add(CloningHelper.ConvertResourceClaimTypeDtoToResourceClaimType(entity, true));
         }
 
         /// <summary>
@@ -2927,7 +3199,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public async Task<bool> ResourceClaimTypeAddAsync(ResourceClaimTypeDto entity)
         {
-            return await this.ResourceClaimTypeRepository.AddAsync(new ResourceClaimType(entity, true));
+            return await this.ResourceClaimTypeRepository.AddAsync(CloningHelper.ConvertResourceClaimTypeDtoToResourceClaimType(entity, true));
         }
 
         /// <summary>
@@ -2937,7 +3209,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public bool ResourceClaimTypeUpdate(ResourceClaimTypeDto entity)
         {
-            return this.ResourceClaimTypeRepository.Update(new ResourceClaimType(entity, true));
+            return this.ResourceClaimTypeRepository.Update(CloningHelper.ConvertResourceClaimTypeDtoToResourceClaimType(entity, true));
         }
 		
         /// <summary>
@@ -2947,7 +3219,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public async Task<bool> ResourceClaimTypeUpdateAsync(ResourceClaimTypeDto entity)
         {
-            return await this.ResourceClaimTypeRepository.UpdateAsync(new ResourceClaimType(entity, true));
+            return await this.ResourceClaimTypeRepository.UpdateAsync(CloningHelper.ConvertResourceClaimTypeDtoToResourceClaimType(entity, true));
         }
 
         /// <summary>
@@ -2957,7 +3229,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public bool ResourceClaimTypeDelete(ResourceClaimTypeDto entity)
         {
-            return this.ResourceClaimTypeRepository.Delete(new ResourceClaimType(entity, true));
+            return this.ResourceClaimTypeRepository.Delete(CloningHelper.ConvertResourceClaimTypeDtoToResourceClaimType(entity, true));
         }
 
         /// <summary>
@@ -2967,7 +3239,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
         /// <returns>bool</returns>
 		public async Task<bool> ResourceClaimTypeDeleteAsync(ResourceClaimTypeDto entity)
         {
-            return await this.ResourceClaimTypeRepository.DeleteAsync(new ResourceClaimType(entity, true));
+            return await this.ResourceClaimTypeRepository.DeleteAsync(CloningHelper.ConvertResourceClaimTypeDtoToResourceClaimType(entity, true));
         }
 
 		/// <summary>
@@ -3757,7 +4029,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
 
 	        foreach (var item in items)
 	        {
-	            results.Add(new AllowedScope(item, true));
+	            results.Add(CloningHelper.ConvertAllowedScopeDtoToAllowedScope(item, true));
 	        }
 
 	        return results;
@@ -3774,13 +4046,13 @@ namespace DotNetScaffolder.Domain.ApplicationService
 
 	        foreach (var item in items)
 	        {
-	            results.Add(new AllowedScopeDto(item, true));
+	            results.Add(CloningHelper.ConvertAllowedScopeToAllowedScopeDto(item, true));
 	        }
 
 	        return results;
 	    }
 
-        /// <summary>
+/// <summary>
         ///     Bulk delete entities
         /// </summary>
         /// <param name="items"></param>
@@ -3849,7 +4121,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
 
 	        foreach (var item in items)
 	        {
-	            results.Add(new ApiResource(item, true));
+	            results.Add(CloningHelper.ConvertApiResourceDtoToApiResource(item, true));
 	        }
 
 	        return results;
@@ -3866,13 +4138,13 @@ namespace DotNetScaffolder.Domain.ApplicationService
 
 	        foreach (var item in items)
 	        {
-	            results.Add(new ApiResourceDto(item, true));
+	            results.Add(CloningHelper.ConvertApiResourceToApiResourceDto(item, true));
 	        }
 
 	        return results;
 	    }
 
-        /// <summary>
+/// <summary>
         ///     Bulk delete entities
         /// </summary>
         /// <param name="items"></param>
@@ -3941,7 +4213,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
 
 	        foreach (var item in items)
 	        {
-	            results.Add(new AspNetRole(item, true));
+	            results.Add(CloningHelper.ConvertAspNetRoleDtoToAspNetRole(item, true));
 	        }
 
 	        return results;
@@ -3958,13 +4230,13 @@ namespace DotNetScaffolder.Domain.ApplicationService
 
 	        foreach (var item in items)
 	        {
-	            results.Add(new AspNetRoleDto(item, true));
+	            results.Add(CloningHelper.ConvertAspNetRoleToAspNetRoleDto(item, true));
 	        }
 
 	        return results;
 	    }
 
-        /// <summary>
+/// <summary>
         ///     Bulk delete entities
         /// </summary>
         /// <param name="items"></param>
@@ -4033,7 +4305,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
 
 	        foreach (var item in items)
 	        {
-	            results.Add(new AspNetRoleClaim(item, true));
+	            results.Add(CloningHelper.ConvertAspNetRoleClaimDtoToAspNetRoleClaim(item, true));
 	        }
 
 	        return results;
@@ -4050,13 +4322,13 @@ namespace DotNetScaffolder.Domain.ApplicationService
 
 	        foreach (var item in items)
 	        {
-	            results.Add(new AspNetRoleClaimDto(item, true));
+	            results.Add(CloningHelper.ConvertAspNetRoleClaimToAspNetRoleClaimDto(item, true));
 	        }
 
 	        return results;
 	    }
 
-        /// <summary>
+/// <summary>
         ///     Bulk delete entities
         /// </summary>
         /// <param name="items"></param>
@@ -4125,7 +4397,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
 
 	        foreach (var item in items)
 	        {
-	            results.Add(new AspNetUser(item, true));
+	            results.Add(CloningHelper.ConvertAspNetUserDtoToAspNetUser(item, true));
 	        }
 
 	        return results;
@@ -4142,13 +4414,13 @@ namespace DotNetScaffolder.Domain.ApplicationService
 
 	        foreach (var item in items)
 	        {
-	            results.Add(new AspNetUserDto(item, true));
+	            results.Add(CloningHelper.ConvertAspNetUserToAspNetUserDto(item, true));
 	        }
 
 	        return results;
 	    }
 
-        /// <summary>
+/// <summary>
         ///     Bulk delete entities
         /// </summary>
         /// <param name="items"></param>
@@ -4217,7 +4489,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
 
 	        foreach (var item in items)
 	        {
-	            results.Add(new AspNetUserClaim(item, true));
+	            results.Add(CloningHelper.ConvertAspNetUserClaimDtoToAspNetUserClaim(item, true));
 	        }
 
 	        return results;
@@ -4234,13 +4506,13 @@ namespace DotNetScaffolder.Domain.ApplicationService
 
 	        foreach (var item in items)
 	        {
-	            results.Add(new AspNetUserClaimDto(item, true));
+	            results.Add(CloningHelper.ConvertAspNetUserClaimToAspNetUserClaimDto(item, true));
 	        }
 
 	        return results;
 	    }
 
-        /// <summary>
+/// <summary>
         ///     Bulk delete entities
         /// </summary>
         /// <param name="items"></param>
@@ -4309,7 +4581,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
 
 	        foreach (var item in items)
 	        {
-	            results.Add(new AspNetUserLogin(item, true));
+	            results.Add(CloningHelper.ConvertAspNetUserLoginDtoToAspNetUserLogin(item, true));
 	        }
 
 	        return results;
@@ -4326,13 +4598,13 @@ namespace DotNetScaffolder.Domain.ApplicationService
 
 	        foreach (var item in items)
 	        {
-	            results.Add(new AspNetUserLoginDto(item, true));
+	            results.Add(CloningHelper.ConvertAspNetUserLoginToAspNetUserLoginDto(item, true));
 	        }
 
 	        return results;
 	    }
 
-        /// <summary>
+/// <summary>
         ///     Bulk delete entities
         /// </summary>
         /// <param name="items"></param>
@@ -4401,7 +4673,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
 
 	        foreach (var item in items)
 	        {
-	            results.Add(new AspNetUserRole(item, true));
+	            results.Add(CloningHelper.ConvertAspNetUserRoleDtoToAspNetUserRole(item, true));
 	        }
 
 	        return results;
@@ -4418,13 +4690,13 @@ namespace DotNetScaffolder.Domain.ApplicationService
 
 	        foreach (var item in items)
 	        {
-	            results.Add(new AspNetUserRoleDto(item, true));
+	            results.Add(CloningHelper.ConvertAspNetUserRoleToAspNetUserRoleDto(item, true));
 	        }
 
 	        return results;
 	    }
 
-        /// <summary>
+/// <summary>
         ///     Bulk delete entities
         /// </summary>
         /// <param name="items"></param>
@@ -4493,7 +4765,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
 
 	        foreach (var item in items)
 	        {
-	            results.Add(new AspNetUserToken(item, true));
+	            results.Add(CloningHelper.ConvertAspNetUserTokenDtoToAspNetUserToken(item, true));
 	        }
 
 	        return results;
@@ -4510,13 +4782,13 @@ namespace DotNetScaffolder.Domain.ApplicationService
 
 	        foreach (var item in items)
 	        {
-	            results.Add(new AspNetUserTokenDto(item, true));
+	            results.Add(CloningHelper.ConvertAspNetUserTokenToAspNetUserTokenDto(item, true));
 	        }
 
 	        return results;
 	    }
 
-        /// <summary>
+/// <summary>
         ///     Bulk delete entities
         /// </summary>
         /// <param name="items"></param>
@@ -4585,7 +4857,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
 
 	        foreach (var item in items)
 	        {
-	            results.Add(new Client(item, true));
+	            results.Add(CloningHelper.ConvertClientDtoToClient(item, true));
 	        }
 
 	        return results;
@@ -4602,13 +4874,13 @@ namespace DotNetScaffolder.Domain.ApplicationService
 
 	        foreach (var item in items)
 	        {
-	            results.Add(new ClientDto(item, true));
+	            results.Add(CloningHelper.ConvertClientToClientDto(item, true));
 	        }
 
 	        return results;
 	    }
 
-        /// <summary>
+/// <summary>
         ///     Bulk delete entities
         /// </summary>
         /// <param name="items"></param>
@@ -4677,7 +4949,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
 
 	        foreach (var item in items)
 	        {
-	            results.Add(new ClientGrantType(item, true));
+	            results.Add(CloningHelper.ConvertClientGrantTypeDtoToClientGrantType(item, true));
 	        }
 
 	        return results;
@@ -4694,13 +4966,13 @@ namespace DotNetScaffolder.Domain.ApplicationService
 
 	        foreach (var item in items)
 	        {
-	            results.Add(new ClientGrantTypeDto(item, true));
+	            results.Add(CloningHelper.ConvertClientGrantTypeToClientGrantTypeDto(item, true));
 	        }
 
 	        return results;
 	    }
 
-        /// <summary>
+/// <summary>
         ///     Bulk delete entities
         /// </summary>
         /// <param name="items"></param>
@@ -4769,7 +5041,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
 
 	        foreach (var item in items)
 	        {
-	            results.Add(new GrantType(item, true));
+	            results.Add(CloningHelper.ConvertGrantTypeDtoToGrantType(item, true));
 	        }
 
 	        return results;
@@ -4786,13 +5058,13 @@ namespace DotNetScaffolder.Domain.ApplicationService
 
 	        foreach (var item in items)
 	        {
-	            results.Add(new GrantTypeDto(item, true));
+	            results.Add(CloningHelper.ConvertGrantTypeToGrantTypeDto(item, true));
 	        }
 
 	        return results;
 	    }
 
-        /// <summary>
+/// <summary>
         ///     Bulk delete entities
         /// </summary>
         /// <param name="items"></param>
@@ -4861,7 +5133,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
 
 	        foreach (var item in items)
 	        {
-	            results.Add(new IdentityResource(item, true));
+	            results.Add(CloningHelper.ConvertIdentityResourceDtoToIdentityResource(item, true));
 	        }
 
 	        return results;
@@ -4878,13 +5150,13 @@ namespace DotNetScaffolder.Domain.ApplicationService
 
 	        foreach (var item in items)
 	        {
-	            results.Add(new IdentityResourceDto(item, true));
+	            results.Add(CloningHelper.ConvertIdentityResourceToIdentityResourceDto(item, true));
 	        }
 
 	        return results;
 	    }
 
-        /// <summary>
+/// <summary>
         ///     Bulk delete entities
         /// </summary>
         /// <param name="items"></param>
@@ -4953,7 +5225,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
 
 	        foreach (var item in items)
 	        {
-	            results.Add(new IdentityResourceClaimType(item, true));
+	            results.Add(CloningHelper.ConvertIdentityResourceClaimTypeDtoToIdentityResourceClaimType(item, true));
 	        }
 
 	        return results;
@@ -4970,13 +5242,13 @@ namespace DotNetScaffolder.Domain.ApplicationService
 
 	        foreach (var item in items)
 	        {
-	            results.Add(new IdentityResourceClaimTypeDto(item, true));
+	            results.Add(CloningHelper.ConvertIdentityResourceClaimTypeToIdentityResourceClaimTypeDto(item, true));
 	        }
 
 	        return results;
 	    }
 
-        /// <summary>
+/// <summary>
         ///     Bulk delete entities
         /// </summary>
         /// <param name="items"></param>
@@ -5045,7 +5317,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
 
 	        foreach (var item in items)
 	        {
-	            results.Add(new PostLogoutRedirectUri(item, true));
+	            results.Add(CloningHelper.ConvertPostLogoutRedirectUriDtoToPostLogoutRedirectUri(item, true));
 	        }
 
 	        return results;
@@ -5062,13 +5334,13 @@ namespace DotNetScaffolder.Domain.ApplicationService
 
 	        foreach (var item in items)
 	        {
-	            results.Add(new PostLogoutRedirectUriDto(item, true));
+	            results.Add(CloningHelper.ConvertPostLogoutRedirectUriToPostLogoutRedirectUriDto(item, true));
 	        }
 
 	        return results;
 	    }
 
-        /// <summary>
+/// <summary>
         ///     Bulk delete entities
         /// </summary>
         /// <param name="items"></param>
@@ -5137,7 +5409,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
 
 	        foreach (var item in items)
 	        {
-	            results.Add(new RedirectUri(item, true));
+	            results.Add(CloningHelper.ConvertRedirectUriDtoToRedirectUri(item, true));
 	        }
 
 	        return results;
@@ -5154,13 +5426,13 @@ namespace DotNetScaffolder.Domain.ApplicationService
 
 	        foreach (var item in items)
 	        {
-	            results.Add(new RedirectUriDto(item, true));
+	            results.Add(CloningHelper.ConvertRedirectUriToRedirectUriDto(item, true));
 	        }
 
 	        return results;
 	    }
 
-        /// <summary>
+/// <summary>
         ///     Bulk delete entities
         /// </summary>
         /// <param name="items"></param>
@@ -5229,7 +5501,7 @@ namespace DotNetScaffolder.Domain.ApplicationService
 
 	        foreach (var item in items)
 	        {
-	            results.Add(new ResourceClaimType(item, true));
+	            results.Add(CloningHelper.ConvertResourceClaimTypeDtoToResourceClaimType(item, true));
 	        }
 
 	        return results;
@@ -5246,13 +5518,13 @@ namespace DotNetScaffolder.Domain.ApplicationService
 
 	        foreach (var item in items)
 	        {
-	            results.Add(new ResourceClaimTypeDto(item, true));
+	            results.Add(CloningHelper.ConvertResourceClaimTypeToResourceClaimTypeDto(item, true));
 	        }
 
 	        return results;
 	    }
 
-        /// <summary>
+/// <summary>
         ///     Bulk delete entities
         /// </summary>
         /// <param name="items"></param>
@@ -5310,7 +5582,6 @@ namespace DotNetScaffolder.Domain.ApplicationService
 		}
 
         #endregion
-
     }
 }
 

@@ -26,7 +26,7 @@ using DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.Dto;
 
 namespace DotNetScaffolder.Domain.Data.Dtos.DefaultDto.Dto
 {
-	public partial class AspNetRoleClaimDto : IAspNetRoleClaim 
+	public partial class AspNetRoleClaimDto
 	{
 		#region CTOR
 		
@@ -71,7 +71,7 @@ namespace DotNetScaffolder.Domain.Data.Dtos.DefaultDto.Dto
 		#region Parent Relationships
 		
         [JsonConverter(typeof(ConcreteTypeConverter<AspNetRoleDto>))]
-		public IAspNetRole AspNetRole { get; set; }
+		public AspNetRoleDto AspNetRole { get; set; }
 		
 		#endregion
 	}

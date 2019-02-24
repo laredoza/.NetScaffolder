@@ -24,7 +24,7 @@ using DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.Dto;
 
 namespace DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity
 {
-	public partial class ClientGrantType : IClientGrantType 
+	public partial class ClientGrantType 
 	{
 		#region CTOR
 		
@@ -64,50 +64,8 @@ namespace DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity
 		#region Parent Relationships
 
         public virtual Client Client { get; set; }
-		IClient IClientGrantType.Client 
-		{ 
-			get
-			{
-				return this.Client;
-			}
-			set
-			{
-				if(value != this.Client)
-				{
-					if(value != null)
-					{
-						this.Client = (Client)value;
-					}
-					else
-					{
-						this.Client = null;
-					}
-				}
-			}
-		}
 
         public virtual GrantType GrantType { get; set; }
-		IGrantType IClientGrantType.GrantType 
-		{ 
-			get
-			{
-				return this.GrantType;
-			}
-			set
-			{
-				if(value != this.GrantType)
-				{
-					if(value != null)
-					{
-						this.GrantType = (GrantType)value;
-					}
-					else
-					{
-						this.GrantType = null;
-					}
-				}
-			}
-		}
 		
 		#endregion
 

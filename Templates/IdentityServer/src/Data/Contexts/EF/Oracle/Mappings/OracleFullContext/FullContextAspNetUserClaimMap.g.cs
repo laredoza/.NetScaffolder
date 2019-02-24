@@ -57,7 +57,8 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EF.Oracle.Mappings.OracleFullCon
 			#endregion
 			
 			#region Indexes
-			Property(t => t.UserId).HasColumnAnnotation("IX_AspNetUserClaims_UserId", new IndexAnnotation(new [] { new IndexAttribute("IX_AspNetUserClaims_UserId"){ IsClustered = false, IsUnique = false, Order = 0}}));
+						Property(t => t.UserId).HasColumnAnnotation("IX_AspNetUserClaims_UserId", new IndexAnnotation(new [] { new IndexAttribute("IX_AspNetUserClaims_UserId"){ IsClustered = false, IsUnique = false, Order = 0}}));
+;
 			#endregion
 
 			#region Relationships

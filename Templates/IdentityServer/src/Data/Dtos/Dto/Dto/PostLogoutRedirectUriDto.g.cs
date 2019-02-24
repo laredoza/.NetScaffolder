@@ -26,7 +26,7 @@ using DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.Dto;
 
 namespace DotNetScaffolder.Domain.Data.Dtos.DefaultDto.Dto
 {
-	public partial class PostLogoutRedirectUriDto : IPostLogoutRedirectUri 
+	public partial class PostLogoutRedirectUriDto
 	{
 		#region CTOR
 		
@@ -69,7 +69,7 @@ namespace DotNetScaffolder.Domain.Data.Dtos.DefaultDto.Dto
 		#region Parent Relationships
 		
         [JsonConverter(typeof(ConcreteTypeConverter<ClientDto>))]
-		public IClient Client { get; set; }
+		public ClientDto Client { get; set; }
 		
 		#endregion
 	}

@@ -24,7 +24,7 @@ using DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.Dto;
 
 namespace DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity
 {
-	public partial class AspNetUserRole : IAspNetUserRole 
+	public partial class AspNetUserRole 
 	{
 		#region CTOR
 		
@@ -64,50 +64,8 @@ namespace DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity
 		#region Parent Relationships
 
         public virtual AspNetRole AspNetRole { get; set; }
-		IAspNetRole IAspNetUserRole.AspNetRole 
-		{ 
-			get
-			{
-				return this.AspNetRole;
-			}
-			set
-			{
-				if(value != this.AspNetRole)
-				{
-					if(value != null)
-					{
-						this.AspNetRole = (AspNetRole)value;
-					}
-					else
-					{
-						this.AspNetRole = null;
-					}
-				}
-			}
-		}
 
         public virtual AspNetUser AspNetUser { get; set; }
-		IAspNetUser IAspNetUserRole.AspNetUser 
-		{ 
-			get
-			{
-				return this.AspNetUser;
-			}
-			set
-			{
-				if(value != this.AspNetUser)
-				{
-					if(value != null)
-					{
-						this.AspNetUser = (AspNetUser)value;
-					}
-					else
-					{
-						this.AspNetUser = null;
-					}
-				}
-			}
-		}
 		
 		#endregion
 

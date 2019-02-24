@@ -98,7 +98,7 @@ namespace <#= contextNamespace #>.Mappings.<#= string.Concat(Driver.Prefix, Cont
 			#region Indexes
 <#+ foreach(var col in Model.Columns){ #>
 <#+ foreach(var idx in Model.Indexes.Where(o => o.IndexType != IndexType.PrimaryKey && o.Columns.Contains(col.ColumnName))){ #>
-			Property(t => t.<#= col.ColumnName #>)<#=Driver.TransformIndex(idx) #>;
+			<#=Driver.TransformIndex(idx) #>;
 <#+ } #>
 <#+ } #>
 			#endregion

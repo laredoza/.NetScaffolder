@@ -91,7 +91,7 @@ if(model.PrimaryKeyCount > 1){ #>
         /// <returns><#= modelName #>Dto</returns>
 		public <#= modelName #>Dto Load(<#= DataType.TransformAsParameter(model.Columns.Where(o => o.IsPrimaryKey)) #>, bool cache, params Expression<Func<I<#= modelName #>, object>>[] includes)
         {
-            return new <#= modelName #>Dto(this.<#= modelName #>Repository.Load(<#= DataType.TransformAsParameterName(model.Columns.Where(o => o.IsPrimaryKey)) #>, cache, includes), true);
+            return CloningHelper.Convert<#= modelName #>To<#= modelName #>Dto(this.<#= modelName #>Repository.Load(<#= DataType.TransformAsParameterName(model.Columns.Where(o => o.IsPrimaryKey)) #>, cache, includes), true);
         }
 
         /// <summary>
@@ -104,7 +104,7 @@ if(model.PrimaryKeyCount > 1){ #>
         /// <returns><#= modelName #>Dto</returns>
 		public async Task<<#= modelName #>Dto> LoadAsync(<#= DataType.TransformAsParameter(model.Columns.Where(o => o.IsPrimaryKey)) #>, bool cache, params Expression<Func<I<#= modelName #>, object>>[] includes)
         {
-            return new <#= modelName #>Dto(await this.<#= modelName #>Repository.LoadAsync(<#= DataType.TransformAsParameterName(model.Columns.Where(o => o.IsPrimaryKey)) #>, cache, includes), true);
+            return CloningHelper.Convert<#= modelName #>To<#= modelName #>Dto(await this.<#= modelName #>Repository.LoadAsync(<#= DataType.TransformAsParameterName(model.Columns.Where(o => o.IsPrimaryKey)) #>, cache, includes), true);
         }
 
 <#+ } #>
@@ -119,7 +119,7 @@ if(model.PrimaryKeyCount > 1){ #>
         /// <param name="includes">params Expression<Func<I<#= modelName #>, object>>[]</param>
 		public <#= modelName #>Dto LoadBy<#= modelName #><#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= DataType.TransformAsParameter(col) #>, bool cache, params Expression<Func<I<#= modelName #>, object>>[] includes)
         {
-            return new <#= modelName #>Dto(this.<#= modelName #>Repository.LoadBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= DataType.TransformAsParameterName(col) #>, cache, includes), true);
+            return CloningHelper.Convert<#= modelName #>To<#= modelName #>Dto(this.<#= modelName #>Repository.LoadBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= DataType.TransformAsParameterName(col) #>, cache, includes), true);
         }
 
         /// <summary>
@@ -130,7 +130,7 @@ if(model.PrimaryKeyCount > 1){ #>
         /// <param name="includes">params Expression<Func<I<#= modelName #>, object>>[]</param>
 		public async Task<<#= modelName #>Dto> LoadBy<#= modelName #><#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>Async(<#= DataType.TransformAsParameter(col) #>, bool cache, params Expression<Func<I<#= modelName #>, object>>[] includes)
         {
-            return new <#= modelName #>Dto(await this.<#= modelName #>Repository.LoadBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>Async(<#= DataType.TransformAsParameterName(col) #>, cache, includes), true);
+            return CloningHelper.Convert<#= modelName #>To<#= modelName #>Dto(await this.<#= modelName #>Repository.LoadBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>Async(<#= DataType.TransformAsParameterName(col) #>, cache, includes), true);
         }
 <#+ } #>
 
@@ -141,7 +141,15 @@ if(model.PrimaryKeyCount > 1){ #>
         /// <returns><#= DataType.CollectionOption.ClassNameInterface #><<#= modelName #>Dto></returns>
 		public <#= DataType.CollectionOption.ClassNameInterface #><<#= modelName #>Dto> <#= modelName #>LoadAll(bool cache, params Expression<Func<I<#= modelName #>, object>>[] includes)
         {
-            return this.Convert<#= modelName #>EntityToDto(this.<#= modelName #>Repository.LoadAll(cache, includes));
+            var foundResults = this.<#= modelName #>Repository.LoadAll(cache, includes);
+            var results = new List<<#= modelName #>Dto>();
+            
+            foreach (var foundResult in foundResults)
+            {
+                results.Add(CloningHelper.Convert<#= modelName #>To<#= modelName #>Dto(foundResult, true));
+            }
+
+            return results;
         }
 
         /// <summary>
@@ -151,7 +159,15 @@ if(model.PrimaryKeyCount > 1){ #>
         /// <returns><#= DataType.CollectionOption.ClassNameInterface #><<#= modelName #>Dto></returns>
 		public async Task<<#= DataType.CollectionOption.ClassNameInterface #><<#= modelName #>Dto>> <#= modelName #>LoadAllAsync(bool cache, params Expression<Func<I<#= modelName #>, object>>[] includes)
         {
-            return this.Convert<#= modelName #>EntityToDto( await this.<#= modelName #>Repository.LoadAllAsync(cache, includes));
+            var foundResults = await this.<#= modelName #>Repository.LoadAllAsync(cache, includes);
+            var results = new List<<#= modelName #>Dto>();
+            
+            foreach (var foundResult in foundResults)
+            {
+                results.Add(CloningHelper.Convert<#= modelName #>To<#= modelName #>Dto(foundResult, true));
+            }
+
+            return results;
         }
 
 <#+            } #>
@@ -192,7 +208,7 @@ string modelName = DataType.NamingConvention == null ? model.TableName : DataTyp
 <#+            } #>
 		#endregion
 
-		#region Modifiers
+#region Modifiers
 <#+            foreach(var model in CurrentApplicationData.Models){ #>
 <#+ 
 string modelName = DataType.NamingConvention == null ? model.TableName : DataType.NamingConvention.ApplyNamingConvention(model.TableName); #>		
@@ -203,7 +219,7 @@ string modelName = DataType.NamingConvention == null ? model.TableName : DataTyp
         /// <returns>bool</returns>
 		public bool <#= modelName #>Add(<#= modelName #>Dto entity)
         {
-            return this.<#= modelName #>Repository.Add(new <#= modelName #>(entity, true));
+            return this.<#= modelName #>Repository.Add(CloningHelper.Convert<#= modelName #>DtoTo<#= modelName #>(entity, true));
         }
 
         /// <summary>
@@ -213,7 +229,7 @@ string modelName = DataType.NamingConvention == null ? model.TableName : DataTyp
         /// <returns>bool</returns>
 		public async Task<bool> <#= modelName #>AddAsync(<#= modelName #>Dto entity)
         {
-            return await this.<#= modelName #>Repository.AddAsync(new <#= modelName #>(entity, true));
+            return await this.<#= modelName #>Repository.AddAsync(CloningHelper.Convert<#= modelName #>DtoTo<#= modelName #>(entity, true));
         }
 
         /// <summary>
@@ -223,7 +239,7 @@ string modelName = DataType.NamingConvention == null ? model.TableName : DataTyp
         /// <returns>bool</returns>
 		public bool <#= modelName #>Update(<#= modelName #>Dto entity)
         {
-            return this.<#= modelName #>Repository.Update(new <#= modelName #>(entity, true));
+            return this.<#= modelName #>Repository.Update(CloningHelper.Convert<#= modelName #>DtoTo<#= modelName #>(entity, true));
         }
 		
         /// <summary>
@@ -233,7 +249,7 @@ string modelName = DataType.NamingConvention == null ? model.TableName : DataTyp
         /// <returns>bool</returns>
 		public async Task<bool> <#= modelName #>UpdateAsync(<#= modelName #>Dto entity)
         {
-            return await this.<#= modelName #>Repository.UpdateAsync(new <#= modelName #>(entity, true));
+            return await this.<#= modelName #>Repository.UpdateAsync(CloningHelper.Convert<#= modelName #>DtoTo<#= modelName #>(entity, true));
         }
 
         /// <summary>
@@ -243,7 +259,7 @@ string modelName = DataType.NamingConvention == null ? model.TableName : DataTyp
         /// <returns>bool</returns>
 		public bool <#= modelName #>Delete(<#= modelName #>Dto entity)
         {
-            return this.<#= modelName #>Repository.Delete(new <#= modelName #>(entity, true));
+            return this.<#= modelName #>Repository.Delete(CloningHelper.Convert<#= modelName #>DtoTo<#= modelName #>(entity, true));
         }
 
         /// <summary>
@@ -253,7 +269,7 @@ string modelName = DataType.NamingConvention == null ? model.TableName : DataTyp
         /// <returns>bool</returns>
 		public async Task<bool> <#= modelName #>DeleteAsync(<#= modelName #>Dto entity)
         {
-            return await this.<#= modelName #>Repository.DeleteAsync(new <#= modelName #>(entity, true));
+            return await this.<#= modelName #>Repository.DeleteAsync(CloningHelper.Convert<#= modelName #>DtoTo<#= modelName #>(entity, true));
         }
 
 		/// <summary>
@@ -351,7 +367,7 @@ string modelName = DataType.NamingConvention == null ? model.TableName : DataTyp
 
 	        foreach (var item in items)
 	        {
-	            results.Add(new <#= modelName #>(item, true));
+	            results.Add(CloningHelper.Convert<#= modelName #>DtoTo<#= modelName #>(item, true));
 	        }
 
 	        return results;
@@ -368,13 +384,13 @@ string modelName = DataType.NamingConvention == null ? model.TableName : DataTyp
 
 	        foreach (var item in items)
 	        {
-	            results.Add(new <#= modelName #>Dto(item, true));
+	            results.Add(CloningHelper.Convert<#= modelName #>To<#= modelName #>Dto(item, true));
 	        }
 
 	        return results;
 	    }
 
-        /// <summary>
+/// <summary>
         ///     Bulk delete entities
         /// </summary>
         /// <param name="items"></param>
@@ -433,7 +449,6 @@ string modelName = DataType.NamingConvention == null ? model.TableName : DataTyp
 
         <#+} #>
 #endregion
-
     }
 }
 

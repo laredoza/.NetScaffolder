@@ -1,0 +1,93 @@
+﻿<#+
+public class ApplicationServiceCloningHelperTemplate : BaseTemplate 
+{
+	public DtoDataType DtoDataType { get; set; }
+	public string DtoInterfaceNamespace { get; set; }
+    public List<Table> Models { get; set; }
+    public EntityDataType EntityDataType {get; set; }	
+
+	public override string TransformText()
+	{
+		Header = new CopyrightHeader();
+		Header.Filename = DtoDataType.DtoNameFull;
+#>
+
+<#= Header.TransformText() #>
+
+// *******************************************************************
+//	GENERATED CODE. DOT NOT MODIFY MANUALLY AS CHANGES CAN BE LOST!!!
+//	USE A PARTIAL CLASS INSTEAD
+// *******************************************************************
+
+using System;
+using System.Collections.Generic;
+using Newtonsoft.Json;
+using <#= DtoDataType.FullNamespace #>;
+using <#= EntityDataType.FullNamespace #>;
+using AutoMapper;
+
+<#+ foreach(var nameSpace in DtoDataType.AdditionalNamespaces){ #>
+using <#= nameSpace #>;
+<#+ }#>
+
+namespace <#= DtoDataType.FullNamespace #>
+{
+	public partial class CloningHelper 
+	{
+        static CloningHelper()
+	    {
+	        Configure();
+	    }
+
+        private static void Configure()
+        {
+            Mapper.Initialize(cfg =>
+            {
+<#+ foreach(var model in Models){ 
+string modelName = DtoDataType.NamingConvention == null ? model.TableName : DtoDataType.NamingConvention.ApplyNamingConvention(model.TableName); 
+DtoDataType.MetaData = model; 
+#>
+                cfg.CreateMap<<#= DtoDataType.DtoName #>, <#= DtoDataType.DtoName #>Dto>();
+<#+ } #>
+            });
+        }
+
+		#region EntityToDto 
+		
+        <#+ foreach(var model in Models){ 
+string modelName = DtoDataType.NamingConvention == null ? model.TableName : DtoDataType.NamingConvention.ApplyNamingConvention(model.TableName); 
+DtoDataType.MetaData = model; 
+#>
+public static <#= DtoDataType.DtoName #>Dto Convert<#= modelName#>To<#= DtoDataType.DtoNameFull #>(<#= DtoDataType.DtoName #> item, bool deep = false)
+		{
+			if(item == null)
+            { 
+                return null;
+            }
+
+			return Mapper.Map<<#= modelName #>,<#= modelName#>Dto>(item);
+        }
+
+        <#+ } #>
+
+		#endregion
+
+        #region DtoToEntity
+        <#+ foreach(var model in Models){ 
+string modelName = DtoDataType.NamingConvention == null ? model.TableName : DtoDataType.NamingConvention.ApplyNamingConvention(model.TableName); 
+                EntityDataType.MetaData = model;
+#>		
+        public static <#= EntityDataType.EntityName #> Convert<#= EntityDataType.EntityName #>DtoTo<#= EntityDataType.EntityName #>(<#= EntityDataType.EntityName #>Dto item, bool deep = false)
+		{
+			return Mapper.Map<<#= modelName #>Dto,<#= modelName#>>(item);
+		}
+		
+<#+ } #>
+		#endregion
+	}
+}
+<#+
+		return this.GenerationEnvironment.ToString();
+	}
+}
+#>

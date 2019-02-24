@@ -72,8 +72,10 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EF.Oracle.Mappings.OracleFullCon
 			#endregion
 			
 			#region Indexes
-			Property(t => t.NormalizedUserName).HasColumnAnnotation("UserNameIndex", new IndexAnnotation(new [] { new IndexAttribute("UserNameIndex"){ IsClustered = false, IsUnique = true, Order = 0}}));
-			Property(t => t.NormalizedEmail).HasColumnAnnotation("EmailIndex", new IndexAnnotation(new [] { new IndexAttribute("EmailIndex"){ IsClustered = false, IsUnique = false, Order = 0}}));
+						Property(t => t.NormalizedUserName).HasColumnAnnotation("UserNameIndex", new IndexAnnotation(new [] { new IndexAttribute("UserNameIndex"){ IsClustered = false, IsUnique = true, Order = 0}}));
+;
+						Property(t => t.NormalizedEmail).HasColumnAnnotation("EmailIndex", new IndexAnnotation(new [] { new IndexAttribute("EmailIndex"){ IsClustered = false, IsUnique = false, Order = 0}}));
+;
 			#endregion
 
 			#region Relationships

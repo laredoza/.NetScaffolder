@@ -121,14 +121,13 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <returns>bool</returns>
 		public virtual bool Add(IdentityResourceClaimType entity)
 		{
-			var entityToSave = new IdentityResourceClaimType(entity, false);
-			this.UnitOfWork.Add(entityToSave);
+			this.UnitOfWork.Add(entity);
 			bool result = this.UnitOfWork.Save();
 			
 			// Populate passed in entity with newly saved values
-			entity.IdentityResourceId = entityToSave.IdentityResourceId;
-			entity.ResourceClaimTypeId = entityToSave.ResourceClaimTypeId;
-			
+//			//entity.IdentityResourceId = entityToSave.IdentityResourceId;
+//			//entity.ResourceClaimTypeId = entityToSave.ResourceClaimTypeId;
+//			
 			return result;
 		}
 		
@@ -139,14 +138,13 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <returns>bool</returns>
 		public virtual async Task<bool> AddAsync(IdentityResourceClaimType entity)
 		{
-            var entityToSave = new IdentityResourceClaimType(entity, false);
-			await this.UnitOfWork.AddAsync(entityToSave);
+			await this.UnitOfWork.AddAsync(entity);
 			bool result = await this.UnitOfWork.SaveAsync();
 			
 			// Populate passed in entity with newly saved values
-			entity.IdentityResourceId = entityToSave.IdentityResourceId;
-			entity.ResourceClaimTypeId = entityToSave.ResourceClaimTypeId;
-			
+//			//entity.IdentityResourceId = entityToSave.IdentityResourceId;
+//			//entity.ResourceClaimTypeId = entityToSave.ResourceClaimTypeId;
+//			
 			return result;
 		}
 
@@ -321,7 +319,7 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
 		        foundItems.Add(foundEntity);
 		    }
 
-			this.UnitOfWork.BulkDelete<IIdentityResourceClaimType>(foundItems);
+			this.UnitOfWork.BulkDelete<IdentityResourceClaimType>(foundItems);
 		}
 
         /// <summary>

@@ -605,27 +605,26 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <returns>bool</returns>
 		public virtual bool Add(AspNetUser entity)
 		{
-			var entityToSave = new AspNetUser(entity, false);
-			this.UnitOfWork.Add(entityToSave);
+			this.UnitOfWork.Add(entity);
 			bool result = this.UnitOfWork.Save();
 			
 			// Populate passed in entity with newly saved values
-			entity.Id = entityToSave.Id;
-			entity.UserName = entityToSave.UserName;
-			entity.NormalizedUserName = entityToSave.NormalizedUserName;
-			entity.Email = entityToSave.Email;
-			entity.NormalizedEmail = entityToSave.NormalizedEmail;
-			entity.EmailConfirmed = entityToSave.EmailConfirmed;
-			entity.PasswordHash = entityToSave.PasswordHash;
-			entity.SecurityStamp = entityToSave.SecurityStamp;
-			entity.ConcurrencyStamp = entityToSave.ConcurrencyStamp;
-			entity.PhoneNumber = entityToSave.PhoneNumber;
-			entity.PhoneNumberConfirmed = entityToSave.PhoneNumberConfirmed;
-			entity.TwoFactorEnabled = entityToSave.TwoFactorEnabled;
-			entity.LockoutEnd = entityToSave.LockoutEnd;
-			entity.LockoutEnabled = entityToSave.LockoutEnabled;
-			entity.AccessFailedCount = entityToSave.AccessFailedCount;
-			
+//			//entity.Id = entityToSave.Id;
+//			//entity.UserName = entityToSave.UserName;
+//			//entity.NormalizedUserName = entityToSave.NormalizedUserName;
+//			//entity.Email = entityToSave.Email;
+//			//entity.NormalizedEmail = entityToSave.NormalizedEmail;
+//			//entity.EmailConfirmed = entityToSave.EmailConfirmed;
+//			//entity.PasswordHash = entityToSave.PasswordHash;
+//			//entity.SecurityStamp = entityToSave.SecurityStamp;
+//			//entity.ConcurrencyStamp = entityToSave.ConcurrencyStamp;
+//			//entity.PhoneNumber = entityToSave.PhoneNumber;
+//			//entity.PhoneNumberConfirmed = entityToSave.PhoneNumberConfirmed;
+//			//entity.TwoFactorEnabled = entityToSave.TwoFactorEnabled;
+//			//entity.LockoutEnd = entityToSave.LockoutEnd;
+//			//entity.LockoutEnabled = entityToSave.LockoutEnabled;
+//			//entity.AccessFailedCount = entityToSave.AccessFailedCount;
+//			
 			return result;
 		}
 		
@@ -636,27 +635,26 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
         /// <returns>bool</returns>
 		public virtual async Task<bool> AddAsync(AspNetUser entity)
 		{
-            var entityToSave = new AspNetUser(entity, false);
-			await this.UnitOfWork.AddAsync(entityToSave);
+			await this.UnitOfWork.AddAsync(entity);
 			bool result = await this.UnitOfWork.SaveAsync();
 			
 			// Populate passed in entity with newly saved values
-			entity.Id = entityToSave.Id;
-			entity.UserName = entityToSave.UserName;
-			entity.NormalizedUserName = entityToSave.NormalizedUserName;
-			entity.Email = entityToSave.Email;
-			entity.NormalizedEmail = entityToSave.NormalizedEmail;
-			entity.EmailConfirmed = entityToSave.EmailConfirmed;
-			entity.PasswordHash = entityToSave.PasswordHash;
-			entity.SecurityStamp = entityToSave.SecurityStamp;
-			entity.ConcurrencyStamp = entityToSave.ConcurrencyStamp;
-			entity.PhoneNumber = entityToSave.PhoneNumber;
-			entity.PhoneNumberConfirmed = entityToSave.PhoneNumberConfirmed;
-			entity.TwoFactorEnabled = entityToSave.TwoFactorEnabled;
-			entity.LockoutEnd = entityToSave.LockoutEnd;
-			entity.LockoutEnabled = entityToSave.LockoutEnabled;
-			entity.AccessFailedCount = entityToSave.AccessFailedCount;
-			
+//			//entity.Id = entityToSave.Id;
+//			//entity.UserName = entityToSave.UserName;
+//			//entity.NormalizedUserName = entityToSave.NormalizedUserName;
+//			//entity.Email = entityToSave.Email;
+//			//entity.NormalizedEmail = entityToSave.NormalizedEmail;
+//			//entity.EmailConfirmed = entityToSave.EmailConfirmed;
+//			//entity.PasswordHash = entityToSave.PasswordHash;
+//			//entity.SecurityStamp = entityToSave.SecurityStamp;
+//			//entity.ConcurrencyStamp = entityToSave.ConcurrencyStamp;
+//			//entity.PhoneNumber = entityToSave.PhoneNumber;
+//			//entity.PhoneNumberConfirmed = entityToSave.PhoneNumberConfirmed;
+//			//entity.TwoFactorEnabled = entityToSave.TwoFactorEnabled;
+//			//entity.LockoutEnd = entityToSave.LockoutEnd;
+//			//entity.LockoutEnabled = entityToSave.LockoutEnabled;
+//			//entity.AccessFailedCount = entityToSave.AccessFailedCount;
+//			
 			return result;
 		}
 
@@ -857,7 +855,7 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository
 		        foundItems.Add(foundEntity);
 		    }
 
-			this.UnitOfWork.BulkDelete<IAspNetUser>(foundItems);
+			this.UnitOfWork.BulkDelete<AspNetUser>(foundItems);
 		}
 
         /// <summary>

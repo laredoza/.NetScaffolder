@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using DotNetScaffolder.Domain.ApplicationService;
 using DotNetScaffolder.Domain.Data.ApplicationService;
+using DotNetScaffolder.Domain.Data.Dtos.DefaultDto.Dto;
 using DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.Dto;
 using IdentityServer4.Models;
 using IdentityServer4.Stores;
@@ -71,7 +72,8 @@ namespace DotNetScaffolder.IdentityServer.Services.WebApi.IdentityServer.Identit
                         ClientId = foundClient.ClientId,
                         ClientName = foundClient.ClientName,
                         AlwaysSendClientClaims = foundClient.AlwaysSendClientClaims,
-                        AllowedGrantTypes = this.ReturnGrantType(foundClient.ClientGrantType.FirstOrDefault().GrantType.Name)
+                        AllowedGrantTypes = this.ReturnGrantType(foundClient.ClientGrantType.FirstOrDefault().GrantType.Name),
+                        ClientSecrets = { new Secret("secret".Sha256())},
                     };
 
                     foreach (var clientGrantType in foundClient.ClientGrantType)
@@ -79,7 +81,7 @@ namespace DotNetScaffolder.IdentityServer.Services.WebApi.IdentityServer.Identit
                         client.AllowedGrantTypes.Add(clientGrantType.GrantType.Name);
                     }
 
-                    foreach (IAllowedScope allowedScope in foundClient.AllowedScope)
+                    foreach (AllowedScopeDto allowedScope in foundClient.AllowedScope)
                     {
                         client.AllowedScopes.Add(allowedScope.ResourceName);
                     }

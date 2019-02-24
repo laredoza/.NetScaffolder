@@ -236,7 +236,8 @@ namespace DotNetScaffolder.Components.DataTypes.DefaultDataTypes.DtoDataTypes
             string formattedName =
                 this.NamingConvention != null ? this.NamingConvention.ApplyNamingConvention(name) : name;
 
-            return this.UseInterface ? $"I{formattedName}" : $"{formattedName}{this.PostFix}";
+            // return this.UseInterface ? $"I{formattedName}" : $"{formattedName}{this.PostFix}";
+            return $"{formattedName}{this.PostFix}";
         }
 
         /// <summary>

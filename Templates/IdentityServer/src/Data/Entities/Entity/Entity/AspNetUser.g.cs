@@ -24,7 +24,7 @@ using DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.Dto;
 
 namespace DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity
 {
-	public partial class AspNetUser : IAspNetUser 
+	public partial class AspNetUser 
 	{
 		#region CTOR
 		
@@ -118,100 +118,16 @@ namespace DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity
 		#region Child Relationships
         
         public virtual IList<AspNetUserClaim> AspNetUserClaim { get; set; }
-	
-        IList<IAspNetUserClaim> IAspNetUser.AspNetUserClaim 
-		{ 
-			get
-			{
-				return this.AspNetUserClaim == null ? null : this.AspNetUserClaim as IList<IAspNetUserClaim>;
-			}
-			set
-			{
-				if(value != this.AspNetUserClaim)
-				{
-					if(value != null)
-					{
-						this.AspNetUserClaim = (IList<AspNetUserClaim>)value;
-					}
-					else
-					{
-						this.AspNetUserClaim = null;
-					}
-				}
-			}			
-		}
+
         
         public virtual IList<AspNetUserLogin> AspNetUserLogin { get; set; }
-	
-        IList<IAspNetUserLogin> IAspNetUser.AspNetUserLogin 
-		{ 
-			get
-			{
-				return this.AspNetUserLogin == null ? null : this.AspNetUserLogin as IList<IAspNetUserLogin>;
-			}
-			set
-			{
-				if(value != this.AspNetUserLogin)
-				{
-					if(value != null)
-					{
-						this.AspNetUserLogin = (IList<AspNetUserLogin>)value;
-					}
-					else
-					{
-						this.AspNetUserLogin = null;
-					}
-				}
-			}			
-		}
+
         
         public virtual IList<AspNetUserRole> AspNetUserRole { get; set; }
-	
-        IList<IAspNetUserRole> IAspNetUser.AspNetUserRole 
-		{ 
-			get
-			{
-				return this.AspNetUserRole == null ? null : this.AspNetUserRole as IList<IAspNetUserRole>;
-			}
-			set
-			{
-				if(value != this.AspNetUserRole)
-				{
-					if(value != null)
-					{
-						this.AspNetUserRole = (IList<AspNetUserRole>)value;
-					}
-					else
-					{
-						this.AspNetUserRole = null;
-					}
-				}
-			}			
-		}
+
         
         public virtual IList<AspNetUserToken> AspNetUserToken { get; set; }
-	
-        IList<IAspNetUserToken> IAspNetUser.AspNetUserToken 
-		{ 
-			get
-			{
-				return this.AspNetUserToken == null ? null : this.AspNetUserToken as IList<IAspNetUserToken>;
-			}
-			set
-			{
-				if(value != this.AspNetUserToken)
-				{
-					if(value != null)
-					{
-						this.AspNetUserToken = (IList<AspNetUserToken>)value;
-					}
-					else
-					{
-						this.AspNetUserToken = null;
-					}
-				}
-			}			
-		}
+
 
 		#endregion
 	}
