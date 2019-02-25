@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.SqlServer.Migrations
 {
-    public partial class V1 : Migration
+    public partial class V7 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -248,6 +248,27 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.SqlServer.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ClientSecret",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    ClientId = table.Column<int>(nullable: false),
+                    Secret = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ClientSecret", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ClientSecret_Client_ClientId",
+                        column: x => x.ClientId,
+                        principalSchema: "dbo",
+                        principalTable: "Client",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AllowedScope",
                 schema: "dbo",
                 columns: table => new
@@ -368,15 +389,30 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.SqlServer.Migrations
 
             migrationBuilder.InsertData(
                 schema: "dbo",
+                table: "AspNetRole",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[,]
+                {
+                    { new Guid("31dde1b8-8435-408f-a4fd-ecca6d193a78"), "2/25/2019 7:03:46 AM", "Admin", "admin" },
+                    { new Guid("481e6e87-5a91-40a7-9ac9-5d1a0730a0f0"), "2/25/2019 7:03:46 AM", "User", "user" }
+                });
+
+            migrationBuilder.InsertData(
+                schema: "dbo",
                 table: "AspNetUser",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { new Guid("953bb2c4-a127-4971-96bb-5e50c381a0b9"), 0, "2/20/2019 2:40:22 PM", "alice@alice.com", true, false, null, "alice@alice.com", "alice", "password", "123#", true, "2/20/2019 2:40:22 PM", false, "Alice" });
+                values: new object[] { new Guid("a5655a7e-6296-41ad-85ab-1a15e582bf13"), 0, "2/25/2019 7:03:46 AM", "alice@alice.com", true, false, null, "alice@alice.com", "alice", "AQAAAAEAACcQAAAAEO62KjeNXcKGs8/nLbN36hfCYBu2iXmTUjNLdeqgCmOujUF9x6R19UPPvgfdbSjHlg==", "123#", true, "2/25/2019 7:03:46 AM", false, "Alice" });
 
             migrationBuilder.InsertData(
                 schema: "dbo",
                 table: "Client",
                 columns: new[] { "Id", "Active", "AlwaysSendClientClaims", "ClientId", "ClientName" },
-                values: new object[] { 1, true, true, "mvc", "MVC client" });
+                values: new object[,]
+                {
+                    { 1, true, true, "mvc", "MVC Hybrid Client" },
+                    { 2, true, true, "client", "Api Client" },
+                    { 3, true, true, "ro.client", "Console Client" }
+                });
 
             migrationBuilder.InsertData(
                 schema: "dbo",
@@ -397,16 +433,28 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.SqlServer.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "ClientSecret",
+                columns: new[] { "Id", "ClientId", "Secret" },
+                values: new object[,]
+                {
+                    { 3, 3, "K7gNU3sdo+OL0wNhqoVWhr3g6s1xYv72ol/pe/Unols=" },
+                    { 2, 2, "K7gNU3sdo+OL0wNhqoVWhr3g6s1xYv72ol/pe/Unols=" },
+                    { 1, 1, "K7gNU3sdo+OL0wNhqoVWhr3g6s1xYv72ol/pe/Unols=" }
+                });
+
+            migrationBuilder.InsertData(
                 schema: "dbo",
                 table: "AllowedScope",
                 columns: new[] { "Id", "ClientId", "ResourceName" },
                 values: new object[,]
                 {
+                    { 4, 1, "roles" },
+                    { 7, 3, "api1" },
+                    { 6, 2, "api1" },
+                    { 5, 1, "api1" },
                     { 1, 1, "openid" },
                     { 2, 1, "profile" },
-                    { 3, 1, "email" },
-                    { 4, 1, "roles" },
-                    { 5, 1, "api1" }
+                    { 3, 1, "email" }
                 });
 
             migrationBuilder.InsertData(
@@ -415,29 +463,40 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.SqlServer.Migrations
                 columns: new[] { "Id", "ClaimType", "ClaimValue", "UserId" },
                 values: new object[,]
                 {
-                    { 1, "name", "Alice", new Guid("953bb2c4-a127-4971-96bb-5e50c381a0b9") },
-                    { 2, "website", "https://alice.com", new Guid("953bb2c4-a127-4971-96bb-5e50c381a0b9") },
-                    { 3, "email", "alice@alice.com", new Guid("953bb2c4-a127-4971-96bb-5e50c381a0b9") },
-                    { 4, "role", "User", new Guid("953bb2c4-a127-4971-96bb-5e50c381a0b9") }
+                    { 1, "name", "Alice", new Guid("a5655a7e-6296-41ad-85ab-1a15e582bf13") },
+                    { 4, "role", "User", new Guid("a5655a7e-6296-41ad-85ab-1a15e582bf13") },
+                    { 3, "email", "alice@alice.com", new Guid("a5655a7e-6296-41ad-85ab-1a15e582bf13") },
+                    { 2, "website", "https://alice.com", new Guid("a5655a7e-6296-41ad-85ab-1a15e582bf13") }
                 });
 
             migrationBuilder.InsertData(
                 schema: "dbo",
                 table: "AspNetUserLogin",
                 columns: new[] { "LoginProvider", "ProviderKey", "ProviderDisplayName", "UserId" },
-                values: new object[] { "IdentityServer4", "IdentityServer4", "IdentityServer4", new Guid("953bb2c4-a127-4971-96bb-5e50c381a0b9") });
+                values: new object[] { "IdentityServer4", "IdentityServer4", "IdentityServer4", new Guid("a5655a7e-6296-41ad-85ab-1a15e582bf13") });
+
+            migrationBuilder.InsertData(
+                schema: "dbo",
+                table: "AspNetUserRole",
+                columns: new[] { "UserId", "RoleId" },
+                values: new object[] { new Guid("a5655a7e-6296-41ad-85ab-1a15e582bf13"), new Guid("31dde1b8-8435-408f-a4fd-ecca6d193a78") });
 
             migrationBuilder.InsertData(
                 schema: "dbo",
                 table: "AspNetUserToken",
                 columns: new[] { "UserId", "LoginProvider", "Name", "Value" },
-                values: new object[] { new Guid("953bb2c4-a127-4971-96bb-5e50c381a0b9"), "IdentityServer4", "Alice", "Alice" });
+                values: new object[] { new Guid("a5655a7e-6296-41ad-85ab-1a15e582bf13"), "IdentityServer4", "Alice", "Alice" });
 
             migrationBuilder.InsertData(
                 schema: "dbo",
                 table: "ClientGrantType",
                 columns: new[] { "ClientId", "GrantTypeId" },
-                values: new object[] { 1, 5 });
+                values: new object[,]
+                {
+                    { 2, 1 },
+                    { 1, 5 },
+                    { 3, 9 }
+                });
 
             migrationBuilder.InsertData(
                 schema: "dbo",
@@ -450,6 +509,11 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.SqlServer.Migrations
                 table: "RedirectUri",
                 columns: new[] { "Id", "ClientId", "Uri" },
                 values: new object[] { 1, 1, "http://localhost:5002/signin-oidc" });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ClientSecret_ClientId",
+                table: "ClientSecret",
+                column: "ClientId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AllowedScope_ClientId",
@@ -530,6 +594,9 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.SqlServer.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "ClientSecret");
+
             migrationBuilder.DropTable(
                 name: "AllowedScope",
                 schema: "dbo");

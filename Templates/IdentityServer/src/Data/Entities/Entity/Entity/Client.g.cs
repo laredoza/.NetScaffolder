@@ -32,6 +32,7 @@ namespace DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity
 		{
 			this.AllowedScope = new List <AllowedScope>();
 			this.ClientGrantType = new List <ClientGrantType>();
+			this.ClientSecret = new List <ClientSecret>();
 			this.PostLogoutRedirectUri = new List <PostLogoutRedirectUri>();
 			this.RedirectUri = new List <RedirectUri>();
 		}
@@ -47,6 +48,7 @@ namespace DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity
 			this.Active = item.Active;
 			this.AllowedScope = new List <AllowedScope>();
 			this.ClientGrantType = new List <ClientGrantType>();
+			this.ClientSecret = new List <ClientSecret>();
 			this.PostLogoutRedirectUri = new List <PostLogoutRedirectUri>();
 			this.RedirectUri = new List <RedirectUri>();
 
@@ -64,6 +66,13 @@ namespace DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity
 					foreach(var childItem in item.ClientGrantType)
 					{
 						this.ClientGrantType.Add(new ClientGrantType(childItem, deep));
+					}
+				}
+				if(item.ClientSecret != null)
+				{
+					foreach(var childItem in item.ClientSecret)
+					{
+						this.ClientSecret.Add(new ClientSecret(childItem, deep));
 					}
 				}
 				if(item.PostLogoutRedirectUri != null)
@@ -101,6 +110,9 @@ namespace DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity
 
         
         public virtual IList<ClientGrantType> ClientGrantType { get; set; }
+
+        
+        public virtual IList<ClientSecret> ClientSecret { get; set; }
 
         
         public virtual IList<PostLogoutRedirectUri> PostLogoutRedirectUri { get; set; }

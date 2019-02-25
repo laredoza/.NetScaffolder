@@ -57,6 +57,7 @@ namespace DotNetScaffolder.Domain.Data.Dtos.DefaultDto.Dto
                 cfg.CreateMap<PostLogoutRedirectUri, PostLogoutRedirectUriDto>();
                 cfg.CreateMap<RedirectUri, RedirectUriDto>();
                 cfg.CreateMap<ResourceClaimType, ResourceClaimTypeDto>();
+                cfg.CreateMap<ClientSecret, ClientSecretDto>();
             });
         }
 
@@ -232,6 +233,16 @@ namespace DotNetScaffolder.Domain.Data.Dtos.DefaultDto.Dto
 			return Mapper.Map<ResourceClaimType,ResourceClaimTypeDto>(item);
         }
 
+        public static ClientSecretDto ConvertClientSecretToClientSecretDto(ClientSecret item, bool deep = false)
+		{
+			if(item == null)
+            { 
+                return null;
+            }
+
+			return Mapper.Map<ClientSecret,ClientSecretDto>(item);
+        }
+
         
 		#endregion
 
@@ -336,6 +347,12 @@ namespace DotNetScaffolder.Domain.Data.Dtos.DefaultDto.Dto
         public static ResourceClaimType ConvertResourceClaimTypeDtoToResourceClaimType(ResourceClaimTypeDto item, bool deep = false)
 		{
 			return Mapper.Map<ResourceClaimTypeDto,ResourceClaimType>(item);
+		}
+		
+		
+        public static ClientSecret ConvertClientSecretDtoToClientSecret(ClientSecretDto item, bool deep = false)
+		{
+			return Mapper.Map<ClientSecretDto,ClientSecret>(item);
 		}
 		
 		#endregion

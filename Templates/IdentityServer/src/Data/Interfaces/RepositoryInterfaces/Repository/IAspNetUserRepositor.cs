@@ -1,5 +1,5 @@
 ﻿
-// <copyright file="Client.g.cs" company="MIT">
+// <copyright file="AspNetUser.g.cs" company="MIT">
 //  Copyright (c) 2019 MIT
 // </copyright>  
 
@@ -14,35 +14,20 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.Dto;
 using DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity;
-using DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces;
-using DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity;
-
-using DotNetScaffolder.Domain.Core;
 using DotNetScaffolder.Domain.Core.Interfaces;
 
-namespace DotNetScaffolder.Domain.Data.Repositories.Repository
+namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
 {
 	/// <summary>
-	/// The ClientRepository class responsible for database functions in the Client table
+	/// The AspNetUserRepository interface that defines database functions for the AspNetUser table
 	/// </summary>
-	public partial class ClientRepository
-    {
-        public async Task<Client> ReturnActiveTaskAsync(string clientId)
-        {
-			return await this.UnitOfWork.FirstOrDefaultAsync<Client>(
-                true,
-			    o => o.ClientId == clientId && o.Active == true, 
-			    c => c.ClientGrantType.Select(g => g.GrantType),
-			    c => c.AllowedScope,
-			    c => c.PostLogoutRedirectUri,
-			    c => c.RedirectUri,
-                c => c.ClientSecret
-                );
-        }
-	}
+	public partial interface IAspNetUserRepository
+	{
+	    Task<AspNetUser> ReturnUserAsync(string username);
+        Task<AspNetUser> ReturnUserWithClaimDetailAsync(string username);
+    }
 }

@@ -1,5 +1,5 @@
 ﻿
-// <copyright file="Client.g.cs" company="MIT">
+// <copyright file="AspNetUser.cs" company="MIT">
 //  Copyright (c) 2019 MIT
 // </copyright>  
 
@@ -28,21 +28,22 @@ using DotNetScaffolder.Domain.Core.Interfaces;
 namespace DotNetScaffolder.Domain.Data.Repositories.Repository
 {
 	/// <summary>
-	/// The ClientRepository class responsible for database functions in the Client table
+	/// The AspNetUserRepository class responsible for database functions in the AspNetUser table
 	/// </summary>
-	public partial class ClientRepository
-    {
-        public async Task<Client> ReturnActiveTaskAsync(string clientId)
+	public partial class AspNetUserRepository
+	{
+	    public async Task<AspNetUser> ReturnUserAsync(string username)
+	    {
+	        return await this.UnitOfWork.FirstOrDefaultAsync<AspNetUser>(true,
+	            u => u.NormalizedUserName == username);
+	    }
+
+	    public async Task<AspNetUser> ReturnUserWithClaimDetailAsync(string username)
         {
-			return await this.UnitOfWork.FirstOrDefaultAsync<Client>(
+            return await this.UnitOfWork.FirstOrDefaultAsync<AspNetUser>(
                 true,
-			    o => o.ClientId == clientId && o.Active == true, 
-			    c => c.ClientGrantType.Select(g => g.GrantType),
-			    c => c.AllowedScope,
-			    c => c.PostLogoutRedirectUri,
-			    c => c.RedirectUri,
-                c => c.ClientSecret
-                );
+                u => u.NormalizedUserName == username,
+                c => c.AspNetUserRole.Select(a => a.AspNetRole.AspNetRoleClaim));
         }
-	}
+    }
 }

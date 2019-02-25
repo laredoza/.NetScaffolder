@@ -3,8 +3,8 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <AssemblyName>DotNetScaffolder.IdentityServer.Services.WebApi.IdentityServer</AssemblyName>
-    <AssemblyVersion>1.0.129.0</AssemblyVersion>
-    <FileVersion>1.0.129.0</FileVersion>
+    <AssemblyVersion>1.0.156.0</AssemblyVersion>
+    <FileVersion>1.0.156.0</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -28,6 +28,12 @@
     <ProjectReference Include="..\..\..\Data\Interfaces\RepositoryInterfaces\DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces.csproj" />
     <ProjectReference Include="..\..\..\Data\Repositories\Repository\DotNetScaffolder.Domain.Data.Repositories.Repository.csproj" />
     <ProjectReference Include="..\..\..\Infrastructure\Web\Core\DotNetScaffolder.Domain.Infrastructure.Web.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="IdentityServer4.AccessTokenValidation">
+      <HintPath>..\..\..\..\..\..\..\..\..\..\Users\laredot\.nuget\packages\identityserver4.accesstokenvalidation\2.7.0\lib\netstandard2.0\IdentityServer4.AccessTokenValidation.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

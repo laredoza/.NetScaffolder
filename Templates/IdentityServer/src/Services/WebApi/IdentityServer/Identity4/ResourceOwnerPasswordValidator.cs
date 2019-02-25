@@ -3,14 +3,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using DotNetScaffolder.Domain.Data.ApplicationService;
+using DotNetScaffolder.Domain.Data.Dtos.DefaultDto.Dto;
+using DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity;
 using IdentityModel;
 using IdentityServer4.Models;
 using IdentityServer4.Validation;
+using Microsoft.AspNetCore.Identity;
 
 namespace DotNetScaffolder.IdentityServer.Services.WebApi.IdentityServer.Identity4
 {
     public class ResourceOwnerPasswordValidator : IResourceOwnerPasswordValidator
     {
+        private IIdentityServerApplicationService applicationService;
+        private IPasswordHasher<AspNetUserDto> passwordHasher;
+
+        public ResourceOwnerPasswordValidator(IIdentityServerApplicationService applicationService, IPasswordHasher<AspNetUserDto> passwordHasher)
+        {
+            this.applicationService = applicationService;
+            this.passwordHasher = passwordHasher;
+        }
+
         //repository to get user from db
         //private readonly IUserRepository _userRepository;
 
@@ -22,6 +35,8 @@ namespace DotNetScaffolder.IdentityServer.Services.WebApi.IdentityServer.Identit
         //this is used to validate your user account with provided grant at /connect/token
         public async Task ValidateAsync(ResourceOwnerPasswordValidationContext context)
         {
+            var a = "";
+            //passwordHasher.HashPassword()
             //try
             //{
             //    //get your user model from db (by username - in my case its email)
@@ -50,6 +65,44 @@ namespace DotNetScaffolder.IdentityServer.Services.WebApi.IdentityServer.Identit
             //{
             //    context.Result = new GrantValidationResult(TokenRequestErrors.InvalidGrant, "Invalid username or password");
             //}
+        }
+
+        public async Task<bool> ValidateAsync(string username, string password)
+        {
+            //passwordHasher.HashPassword()
+            try
+            {
+                //get your user model from db (by username - in my case its email)
+                var user = await applicationService.ReturnUserAsync(username);
+                if (user != null)
+                {
+                    //check if password match - remember to hash password if stored as hash in db
+                    if (passwordHasher.VerifyHashedPassword(user, user.PasswordHash, password.ToLower()) == PasswordVerificationResult.Success)
+                    {
+                        //set the result
+                        return true;
+                        //context.Result = new GrantValidationResult(
+                        //    subject: user.UserId.ToString(),
+                        //    authenticationMethod: "custom",
+                        //    claims: GetUserClaims(user));
+
+                        //return;
+                    }
+
+                    // context.Result = new GrantValidationResult(TokenRequestErrors.InvalidGrant, "Incorrect password");
+                    return false;
+                }
+
+                // context.Result = new GrantValidationResult(TokenRequestErrors.InvalidGrant, "User does not exist.");
+                return false;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+                // context.Result = new GrantValidationResult(TokenRequestErrors.InvalidGrant, "Invalid username or password");
+            }
+
+            return false;
         }
 
         //build claims array from user data

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
 using System.Threading.Tasks;
 using DotNetScaffolder.Domain.ApplicationService;
 using DotNetScaffolder.Domain.Data.ApplicationService;
@@ -28,7 +29,7 @@ namespace DotNetScaffolder.IdentityServer.Services.WebApi.IdentityServer.Identit
                     break;
                 case "Code":
                     return GrantTypes.Code;
-                    break; 
+                    break;
                 case "CodeAndClientCredentials":
                     return GrantTypes.CodeAndClientCredentials;
                     break;
@@ -65,39 +66,40 @@ namespace DotNetScaffolder.IdentityServer.Services.WebApi.IdentityServer.Identit
 
             if (foundClient != null)
             {
-                if (foundClient != null)
+                Client client = new Client
                 {
-                    Client client = new Client
-                    {
-                        ClientId = foundClient.ClientId,
-                        ClientName = foundClient.ClientName,
-                        AlwaysSendClientClaims = foundClient.AlwaysSendClientClaims,
-                        AllowedGrantTypes = this.ReturnGrantType(foundClient.ClientGrantType.FirstOrDefault().GrantType.Name),
-                        ClientSecrets = { new Secret("secret".Sha256())},
-                    };
+                    ClientId = foundClient.ClientId,
+                    ClientName = foundClient.ClientName,
+                    AlwaysSendClientClaims = foundClient.AlwaysSendClientClaims,
+                    AllowedGrantTypes = this.ReturnGrantType(foundClient.ClientGrantType.FirstOrDefault().GrantType.Name),
+                };
 
-                    foreach (var clientGrantType in foundClient.ClientGrantType)
-                    {
-                        client.AllowedGrantTypes.Add(clientGrantType.GrantType.Name);
-                    }
-
-                    foreach (AllowedScopeDto allowedScope in foundClient.AllowedScope)
-                    {
-                        client.AllowedScopes.Add(allowedScope.ResourceName);
-                    }
-
-                    foreach (var postLogoutRedirectUri in foundClient.PostLogoutRedirectUri)
-                    {
-                        client.PostLogoutRedirectUris.Add(postLogoutRedirectUri.Uri);
-                    }
-
-                    foreach (var redirectUri in foundClient.RedirectUri)
-                    {
-                        client.RedirectUris.Add(redirectUri.Uri);
-                    }
-
-                    return client;
+                foreach (var clientSecretDto in foundClient.ClientSecret)
+                {
+                    client.ClientSecrets.Add(new Secret(clientSecretDto.Secret));
                 }
+
+                foreach (var clientGrantType in foundClient.ClientGrantType)
+                {
+                    client.AllowedGrantTypes.Add(clientGrantType.GrantType.Name);
+                }
+
+                foreach (AllowedScopeDto allowedScope in foundClient.AllowedScope)
+                {
+                    client.AllowedScopes.Add(allowedScope.ResourceName);
+                }
+
+                foreach (var postLogoutRedirectUri in foundClient.PostLogoutRedirectUri)
+                {
+                    client.PostLogoutRedirectUris.Add(postLogoutRedirectUri.Uri);
+                }
+
+                foreach (var redirectUri in foundClient.RedirectUri)
+                {
+                    client.RedirectUris.Add(redirectUri.Uri);
+                }
+
+                return client;
             }
 
             return null;

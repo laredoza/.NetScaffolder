@@ -44,62 +44,63 @@ namespace DotNetScaffolder.Domain.Services.WebApi.IdentityServer
 
         public static IEnumerable<Client> GetClients()
         {
-            return new List<Client>
-            {
-                 // OpenID Connect implicit flow client (MVC)
-        new Client
-        {
-            ClientId = "mvc",
-            ClientName = "MVC Client",
-            AllowedGrantTypes = GrantTypes.Hybrid,
+            //    return new List<Client>
+            //    {
+            //         // OpenID Connect implicit flow client (MVC)
+            //new Client
+            //{
+            //    ClientId = "mvc",
+            //    ClientName = "MVC Client",
+            //    AllowedGrantTypes = GrantTypes.Hybrid,
 
-            // where to redirect to after login
-            RedirectUris = { "http://localhost:5002/signin-oidc" },
+            //    // where to redirect to after login
+            //    RedirectUris = { "http://localhost:5002/signin-oidc" },
 
-            // where to redirect to after logout
-            PostLogoutRedirectUris = { "http://localhost:5002/signout-callback-oidc" },
+            //    // where to redirect to after logout
+            //    PostLogoutRedirectUris = { "http://localhost:5002/signout-callback-oidc" },
 
-            ClientSecrets = { new Secret("secret".Sha256())},
-            AllowedScopes = new List<string>
-            {
-                IdentityServerConstants.StandardScopes.OpenId,
-                IdentityServerConstants.StandardScopes.Profile,
-                IdentityServerConstants.StandardScopes.Email,
-                "roles",
-                readApi
-            },
-            AlwaysSendClientClaims = true
-            // https://github.com/IdentityServer/IdentityServer4/issues/1786
-        },
-                new Client
-                {
-                    ClientId = "client",
+            //    ClientSecrets = { new Secret("secret".Sha256())},
+            //    AllowedScopes = new List<string>
+            //    {
+            //        IdentityServerConstants.StandardScopes.OpenId,
+            //        IdentityServerConstants.StandardScopes.Profile,
+            //        IdentityServerConstants.StandardScopes.Email,
+            //        "roles",
+            //        readApi
+            //    },
+            //    AlwaysSendClientClaims = true
+            //    // https://github.com/IdentityServer/IdentityServer4/issues/1786
+            //},
+            //        new Client
+            //        {
+            //            ClientId = "client",
 
-                    // no interactive user, use the clientid/secret for authentication
-                    AllowedGrantTypes = GrantTypes.ClientCredentials,
+            //            // no interactive user, use the clientid/secret for authentication
+            //            AllowedGrantTypes = GrantTypes.ClientCredentials,
 
-                    // secret for authentication
-                    ClientSecrets =
-                    {
-                        new Secret("secret".Sha256())
-                    },
+            //            // secret for authentication
+            //            ClientSecrets =
+            //            {
+            //                new Secret("secret".Sha256())
+            //            },
 
-                    // scopes that client has access to
-                    AllowedScopes = { readApi }
-            },
-                // resource owner password grant client
-        new Client
-        {
-            ClientId = "ro.client",
-            AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
+            //            // scopes that client has access to
+            //            AllowedScopes = { readApi }
+            //    },
+            //        // resource owner password grant client
+            //new Client
+            //{
+            //    ClientId = "ro.client",
+            //    AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
 
-            ClientSecrets =
-            {
-                new Secret("secret".Sha256())
-            },
-            AllowedScopes = { readApi }
-        }
-        };
+            //    ClientSecrets =
+            //    {
+            //        new Secret("secret".Sha256())
+            //    },
+            //    AllowedScopes = { readApi }
+            //}
+            //};
+            return null;
         }
 
         public static List<TestUser> GetUsers()

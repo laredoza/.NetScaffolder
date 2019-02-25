@@ -33,6 +33,32 @@ namespace DotNetScaffolder.Domain.ApplicationService
 	    {
             return CloningHelper.ConvertClientToClientDto(await this.ClientRepository.ReturnActiveTaskAsync(clientId), true);
 	    }
-    }
+
+	    public async Task<AspNetUserDto> ReturnUserAsync(string username)
+	    {
+	        return CloningHelper.ConvertAspNetUserToAspNetUserDto(
+	            await this.AspNetUserRepository.ReturnUserAsync(username));
+	    }
+
+	    public async Task<AspNetUserDto> ReturnUserWithClaimDetailAsync(string username)
+	    {
+	        return CloningHelper.ConvertAspNetUserToAspNetUserDto(
+	            await this.AspNetUserRepository.ReturnUserWithClaimDetailAsync(username));
+        }
+
+	    public async Task<List<AspNetUserClaimDto>> ReturnAspNetUserClaims(Guid userId)
+	    {
+            var claimsFound = await AspNetUserClaimRepository.LoadByUserIdAsync(userId, true);
+	        var result = new List<AspNetUserClaimDto>();
+
+	        foreach (var aspNetUserClaim in claimsFound)
+	        {
+                result.Add(CloningHelper.ConvertAspNetUserClaimToAspNetUserClaimDto(aspNetUserClaim));
+	        }
+
+	        return result;
+	    }
+
+	}
 }
 

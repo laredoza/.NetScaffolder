@@ -1,5 +1,5 @@
 ﻿
-// <copyright file="Client.g.cs" company="MIT">
+// <copyright file="ClientSecret.g.cs" company="MIT">
 //  Copyright (c) 2019 MIT
 // </copyright>  
 
@@ -12,37 +12,57 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS 
 // IN THE SOFTWARE.
 
+
+// *******************************************************************
+//	GENERATED CODE. DOT NOT MODIFY MANUALLY AS CHANGES CAN BE LOST!!!
+//	USE A PARTIAL CLASS INSTEAD
+// *******************************************************************
+
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Threading.Tasks;
 using DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.Dto;
-using DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity;
-using DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces;
-using DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity;
 
-using DotNetScaffolder.Domain.Core;
-using DotNetScaffolder.Domain.Core.Interfaces;
-
-namespace DotNetScaffolder.Domain.Data.Repositories.Repository
+namespace DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity
 {
-	/// <summary>
-	/// The ClientRepository class responsible for database functions in the Client table
-	/// </summary>
-	public partial class ClientRepository
-    {
-        public async Task<Client> ReturnActiveTaskAsync(string clientId)
-        {
-			return await this.UnitOfWork.FirstOrDefaultAsync<Client>(
-                true,
-			    o => o.ClientId == clientId && o.Active == true, 
-			    c => c.ClientGrantType.Select(g => g.GrantType),
-			    c => c.AllowedScope,
-			    c => c.PostLogoutRedirectUri,
-			    c => c.RedirectUri,
-                c => c.ClientSecret
-                );
-        }
+	public partial class ClientSecret 
+	{
+		#region CTOR
+		
+		public ClientSecret()
+		{
+		}
+		
+		public ClientSecret(IClientSecret item, bool deep = false)
+		{
+			if(item == null) return;
+			
+			this.Id = item.Id;
+			this.ClientId = item.ClientId;
+			this.Secret = item.Secret;
+
+			if(deep)
+			{
+				if(item.Client != null)
+                {
+                    this.Client = new Client(item.Client, deep);
+                }
+			}
+		}
+		
+		#endregion
+		
+		#region Fields
+		
+		public virtual int Id { get; set; }
+		public virtual int ClientId { get; set; }
+		public virtual string Secret { get; set; }
+
+		#endregion
+
+		#region Parent Relationships
+
+        public virtual Client Client { get; set; }
+		
+		#endregion
 	}
 }

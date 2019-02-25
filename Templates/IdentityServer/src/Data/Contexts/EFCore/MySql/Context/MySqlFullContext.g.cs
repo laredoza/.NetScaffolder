@@ -88,6 +88,7 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.MySql.Context
 			
 			// Exclude entities not part of this context
 			
+			modelBuilder.Ignore<ClientSecret>();
 
 			#endregion
 			

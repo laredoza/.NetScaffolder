@@ -2,34 +2,82 @@
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using DotNetScaffolder.Domain.Data.ApplicationService;
+using DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces;
 using IdentityModel;
 using IdentityServer4.Models;
 using IdentityServer4.Services;
 
-namespace DotNetScaffolder.Domain.Services.WebApi.IdentityServer
+namespace DotNetScaffolder.IdentityServer.Services.WebApi.IdentityServer.Identity4
 {
-    public class MyProfileService : IProfileService
+    public class ProfileService : IProfileService
     {
-        public MyProfileService()
-        { }
+        private IIdentityServerApplicationService applicationService;
 
-        public Task GetProfileDataAsync(ProfileDataRequestContext context)
+        public ProfileService(
+            IIdentityServerApplicationService applicationService)
         {
-            var roleClaims = context.Subject.FindAll(JwtClaimTypes.Role);
-            List<string> list = context.RequestedClaimTypes.ToList();
-            context.IssuedClaims.AddRange(roleClaims);
-            context.IssuedClaims.AddRange(context.Subject.Claims);
-
-            context.IssuedClaims.Add(new Claim(JwtClaimTypes.Role, "Admin"));
-            context.IssuedClaims.Add(new Claim(JwtClaimTypes.Role, "Test"));
-            return Task.CompletedTask;
+            this.applicationService = applicationService;
         }
 
-        public Task IsActiveAsync(IsActiveContext context)
+        public async Task GetProfileDataAsync(ProfileDataRequestContext context)
         {
-            // await base.IsActiveAsync(context);
-            return Task.CompletedTask;
+            if (!string.IsNullOrEmpty(context.Subject.Identity.Name))
+            {
+                var user = await this.applicationService.ReturnUserWithClaimDetailAsync(context.Subject.Identity.Name.ToLower());
 
+                var roleClaims = context.Subject.FindAll(JwtClaimTypes.Role);
+                List<string> list = context.RequestedClaimTypes.ToList();
+                context.IssuedClaims.AddRange(roleClaims);
+                context.IssuedClaims.AddRange(context.Subject.Claims);
+
+                if (user != null)
+                {
+                    foreach (var userRole in user.AspNetUserRole)
+                    {
+                        context.IssuedClaims.Add(new Claim(JwtClaimTypes.Role, userRole.AspNetRole.Name));
+                    }
+
+                    var claims = await applicationService.ReturnAspNetUserClaims(user.Id);
+                    foreach (var claim in claims)
+                    {
+                        context.IssuedClaims.Add(new Claim(claim.ClaimType, claim.ClaimValue));
+                    }
+
+                }
+
+                //context.IssuedClaims.Add(new Claim(JwtClaimTypes.Role, "Admin"));
+                //context.IssuedClaims.Add(new Claim(JwtClaimTypes.Role, "Test"));
+            }
+        }
+
+        public async Task IsActiveAsync(IsActiveContext context)
+        {
+            string userName = context.Subject.Identity.Name;
+            // var userId = context.Subject.Claims.FirstOrDefault(x => x.Type == "user_id");
+
+            if (!string.IsNullOrEmpty(userName))
+            {
+                var user = await applicationService.ReturnUserAsync(userName);
+
+                if (user != null)
+                {
+                    if (!user.LockoutEnabled && user.EmailConfirmed)
+                    {
+                        context.IsActive = true;
+                    }
+                    else
+                    {
+                        context.IsActive = false;
+                    }
+                }
+            }
+            else
+            {
+                context.IsActive = false;
+            }
+
+            // await base.IsActiveAsync(context);
             //https://stackoverflow.com/questions/45900162/including-core-identity-role-claims-in-identity-server-4-id-token
             //https://github.com/IdentityServer/IdentityServer4/issues/1786
         }

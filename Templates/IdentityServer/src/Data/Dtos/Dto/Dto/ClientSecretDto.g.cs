@@ -1,5 +1,5 @@
 ﻿
-// <copyright file="Client.g.cs" company="MIT">
+// <copyright file="ClientSecretDto.g.cs" company="MIT">
 //  Copyright (c) 2019 MIT
 // </copyright>  
 
@@ -20,33 +20,56 @@
 
 using System;
 using System.Collections.Generic;
+using Newtonsoft.Json;
+using DotNetScaffolder.Domain.Core;
+using DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.Dto;
 
-namespace DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.Dto
+namespace DotNetScaffolder.Domain.Data.Dtos.DefaultDto.Dto
 {
-	public partial interface IClient  
+	public partial class ClientSecretDto
 	{
+		#region CTOR
+		
+		public ClientSecretDto()
+		{
+		}
+		
+		public ClientSecretDto(IClientSecret item, bool deep = false)
+		{
+			if(item == null) return;
+			
+			this.Id = item.Id;
+			this.ClientId = item.ClientId;
+			this.Secret = item.Secret;
+
+			if(deep)
+			{
+                if(item.Client != null)
+                {
+				    this.Client = new ClientDto(item.Client, deep);
+                }
+			}
+		}
+		
+		#endregion
+		
 		#region Fields
 		
-		int Id { get; set; }
-		string ClientId { get; set; }
-		string ClientName { get; set; }
-		bool AlwaysSendClientClaims { get; set; }
-		bool Active { get; set; }
+		public int Id { get; set; }
+		public int ClientId { get; set; }
+		public string Secret { get; set; }
 
 		#endregion
 		
 		#region Child Relationships
 		
-		IList<IAllowedScope> AllowedScope { get; set; }
-		IList<IClientGrantType> ClientGrantType { get; set; }
-		IList<IClientSecret> ClientSecret { get; set; }
-		IList<IPostLogoutRedirectUri> PostLogoutRedirectUri { get; set; }
-		IList<IRedirectUri> RedirectUri { get; set; }
 
 		#endregion
 		
 		#region Parent Relationships
 		
+        [JsonConverter(typeof(ConcreteTypeConverter<ClientDto>))]
+		public ClientDto Client { get; set; }
 		
 		#endregion
 	}

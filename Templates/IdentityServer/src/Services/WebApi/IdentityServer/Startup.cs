@@ -1,4 +1,6 @@
 ﻿using System;
+using DotNetScaffolder.Domain.Data.Dtos.DefaultDto.Dto;
+using DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity;
 using IdentityServer4.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -7,6 +9,9 @@ using Microsoft.Extensions.DependencyInjection;
 using DotNetScaffolder.Domain.Infrastructure.Web.Core.Extensions;
 using DotNetScaffolder.Domain.Infrastructure.Web.Core.Filters;
 using DotNetScaffolder.IdentityServer.Services.WebApi.IdentityServer.Identity4;
+using IdentityServer4.AccessTokenValidation;
+using IdentityServer4.Validation;
+using Microsoft.AspNetCore.Identity;
 
 namespace DotNetScaffolder.Domain.Services.WebApi.IdentityServer
 {
@@ -46,16 +51,17 @@ namespace DotNetScaffolder.Domain.Services.WebApi.IdentityServer
                 setup => { setup.Filters.AddService<UnitOfWorkFilter>(1); }
             );
 
-            services.AddTransient<IProfileService, MyProfileService>();
+
+
 
             services.AddIdentityServer()
-            .AddDeveloperSigningCredential()
-            .AddInMemoryIdentityResources(Config.GetIdentityResources())
-            .AddInMemoryApiResources(Config.GetApiResources())
-            //.AddInMemoryClients(Config.GetClients())
-            .AddClientStore<ClientStore>()
-            .AddTestUsers(Config.GetUsers())
-            .AddProfileService<MyProfileService>();
+                .AddDeveloperSigningCredential()
+                .AddInMemoryIdentityResources(Config.GetIdentityResources())
+                .AddInMemoryApiResources(Config.GetApiResources())
+                //.AddInMemoryClients(Config.GetClients())
+                .AddClientStore<ClientStore>()
+            //.AddTestUsers(Config.GetUsers())
+            .AddProfileService<ProfileService>();
 
             ////identity server 4 cert
             //var cert = new X509Certificate2(Path.Combine(_environment.ContentRootPath, "idsrv4test.pfx"), "your_cert_password");
@@ -75,8 +81,9 @@ namespace DotNetScaffolder.Domain.Services.WebApi.IdentityServer
             //    .AddProfileService<ProfileService>();p
 
             ////Inject the classes we just created
-            //services.AddTransient<IResourceOwnerPasswordValidator, ResourceOwnerPasswordValidator>();
-            //services.AddTransient<IProfileService, ProfileService>();
+            services.AddTransient<IResourceOwnerPasswordValidator, ResourceOwnerPasswordValidator>();
+            services.AddTransient<IPasswordHasher<AspNetUserDto>, PasswordHasher<AspNetUserDto>>();
+            services.AddTransient<IProfileService, ProfileService>();
 
             return services.Build(Configuration, hostingEnvironment, "./", SearchAssemblies);
         }
@@ -90,7 +97,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.IdentityServer
             {
                 app.UseDeveloperExceptionPage();
             }
-    
+
             app.UseIdentityServer();
 
             app.UseStaticFiles();

@@ -5,6 +5,7 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using DotNetScaffolder.IdentityServer.Services.WebApi.IdentityServer.Identity4;
 using IdentityModel;
 using IdentityServer4.Events;
 using IdentityServer4.Extensions;
@@ -13,6 +14,7 @@ using IdentityServer4.Quickstart.UI;
 using IdentityServer4.Services;
 using IdentityServer4.Stores;
 using IdentityServer4.Test;
+using IdentityServer4.Validation;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -34,12 +36,14 @@ namespace DotNetScaffolder.Domain.Services.WebApi.IdentityServer.Controllers.Acc
         private readonly IClientStore _clientStore;
         private readonly IAuthenticationSchemeProvider _schemeProvider;
         private readonly IEventService _events;
+        private readonly IResourceOwnerPasswordValidator userValidator;
 
         public AccountController(
             IIdentityServerInteractionService interaction,
             IClientStore clientStore,
             IAuthenticationSchemeProvider schemeProvider,
             IEventService events,
+            IResourceOwnerPasswordValidator userValidator,
             TestUserStore users = null)
         {
             // if the TestUserStore is not in DI, then we'll just use the global users collection
@@ -50,6 +54,7 @@ namespace DotNetScaffolder.Domain.Services.WebApi.IdentityServer.Controllers.Acc
             _clientStore = clientStore;
             _schemeProvider = schemeProvider;
             _events = events;
+            this.userValidator = userValidator;
         }
 
         /// <summary>
@@ -109,8 +114,8 @@ namespace DotNetScaffolder.Domain.Services.WebApi.IdentityServer.Controllers.Acc
 
             if (ModelState.IsValid)
             {
-                // validate username/password against in-memory store
-                if (_users.ValidateCredentials(model.Username, model.Password))
+                //if (_users.ValidateCredentials(model.Username, model.Password))
+                if(await (this.userValidator as ResourceOwnerPasswordValidator).ValidateAsync(model.Username, model.Password))
                 {
                     var user = _users.FindByUsername(model.Username);
                     await _events.RaiseAsync(new UserLoginSuccessEvent(user.Username, user.SubjectId, user.Username));

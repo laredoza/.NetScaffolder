@@ -34,6 +34,7 @@ namespace DotNetScaffolder.Domain.Data.Dtos.DefaultDto.Dto
 		{
 			this.AllowedScope = new List <AllowedScopeDto>();
 			this.ClientGrantType = new List <ClientGrantTypeDto>();
+			this.ClientSecret = new List <ClientSecretDto>();
 			this.PostLogoutRedirectUri = new List <PostLogoutRedirectUriDto>();
 			this.RedirectUri = new List <RedirectUriDto>();
 		}
@@ -49,6 +50,7 @@ namespace DotNetScaffolder.Domain.Data.Dtos.DefaultDto.Dto
 			this.Active = item.Active;
 			this.AllowedScope = new List <AllowedScopeDto>();
 			this.ClientGrantType = new List <ClientGrantTypeDto>();
+			this.ClientSecret = new List <ClientSecretDto>();
 			this.PostLogoutRedirectUri = new List <PostLogoutRedirectUriDto>();
 			this.RedirectUri = new List <RedirectUriDto>();
 
@@ -66,6 +68,13 @@ namespace DotNetScaffolder.Domain.Data.Dtos.DefaultDto.Dto
 					foreach(var childItem in item.ClientGrantType)
 					{
 						this.ClientGrantType.Add(new ClientGrantTypeDto(childItem, deep));
+					}
+				}
+				if(item.ClientSecret != null)
+				{
+					foreach(var childItem in item.ClientSecret)
+					{
+						this.ClientSecret.Add(new ClientSecretDto(childItem, deep));
 					}
 				}
 				if(item.PostLogoutRedirectUri != null)
@@ -103,6 +112,8 @@ namespace DotNetScaffolder.Domain.Data.Dtos.DefaultDto.Dto
 		public IList<AllowedScopeDto> AllowedScope { get; set; }
         // [JsonConverter(typeof(ConcreteTypeConverter<ClientGrantTypeDto>))]
 		public IList<ClientGrantTypeDto> ClientGrantType { get; set; }
+        // [JsonConverter(typeof(ConcreteTypeConverter<ClientSecretDto>))]
+		public IList<ClientSecretDto> ClientSecret { get; set; }
         // [JsonConverter(typeof(ConcreteTypeConverter<PostLogoutRedirectUriDto>))]
 		public IList<PostLogoutRedirectUriDto> PostLogoutRedirectUri { get; set; }
         // [JsonConverter(typeof(ConcreteTypeConverter<RedirectUriDto>))]

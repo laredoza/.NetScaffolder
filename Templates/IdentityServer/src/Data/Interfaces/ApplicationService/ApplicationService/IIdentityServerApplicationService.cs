@@ -9,5 +9,8 @@ namespace DotNetScaffolder.Domain.Data.ApplicationService
     public partial interface IIdentityServerApplicationService
     {
         Task<ClientDto> ReturnActiveTaskAsync(string clientId);
+        Task<AspNetUserDto> ReturnUserAsync(string username);
+        Task<AspNetUserDto> ReturnUserWithClaimDetailAsync(string username);
+        Task<List<AspNetUserClaimDto>> ReturnAspNetUserClaims(Guid userId);
     }
 }

@@ -70,6 +70,18 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.SqlServer.Migrations
                             Id = 5,
                             ClientId = 1,
                             ResourceName = "api1"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            ClientId = 2,
+                            ResourceName = "api1"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            ClientId = 3,
+                            ResourceName = "api1"
                         });
                 });
 
@@ -118,6 +130,22 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.SqlServer.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRole","dbo");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("31dde1b8-8435-408f-a4fd-ecca6d193a78"),
+                            ConcurrencyStamp = "2/25/2019 7:03:46 AM",
+                            Name = "Admin",
+                            NormalizedName = "admin"
+                        },
+                        new
+                        {
+                            Id = new Guid("481e6e87-5a91-40a7-9ac9-5d1a0730a0f0"),
+                            ConcurrencyStamp = "2/25/2019 7:03:46 AM",
+                            Name = "User",
+                            NormalizedName = "user"
+                        });
                 });
 
             modelBuilder.Entity("DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity.AspNetRoleClaim", b =>
@@ -210,18 +238,18 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.SqlServer.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("953bb2c4-a127-4971-96bb-5e50c381a0b9"),
+                            Id = new Guid("a5655a7e-6296-41ad-85ab-1a15e582bf13"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "2/20/2019 2:40:22 PM",
+                            ConcurrencyStamp = "2/25/2019 7:03:46 AM",
                             Email = "alice@alice.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "alice@alice.com",
                             NormalizedUserName = "alice",
-                            PasswordHash = "password",
+                            PasswordHash = "AQAAAAEAACcQAAAAEO62KjeNXcKGs8/nLbN36hfCYBu2iXmTUjNLdeqgCmOujUF9x6R19UPPvgfdbSjHlg==",
                             PhoneNumber = "123#",
                             PhoneNumberConfirmed = true,
-                            SecurityStamp = "2/20/2019 2:40:22 PM",
+                            SecurityStamp = "2/25/2019 7:03:46 AM",
                             TwoFactorEnabled = false,
                             UserName = "Alice"
                         });
@@ -256,28 +284,28 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.SqlServer.Migrations
                             Id = 1,
                             ClaimType = "name",
                             ClaimValue = "Alice",
-                            UserId = new Guid("953bb2c4-a127-4971-96bb-5e50c381a0b9")
+                            UserId = new Guid("a5655a7e-6296-41ad-85ab-1a15e582bf13")
                         },
                         new
                         {
                             Id = 2,
                             ClaimType = "website",
                             ClaimValue = "https://alice.com",
-                            UserId = new Guid("953bb2c4-a127-4971-96bb-5e50c381a0b9")
+                            UserId = new Guid("a5655a7e-6296-41ad-85ab-1a15e582bf13")
                         },
                         new
                         {
                             Id = 3,
                             ClaimType = "email",
                             ClaimValue = "alice@alice.com",
-                            UserId = new Guid("953bb2c4-a127-4971-96bb-5e50c381a0b9")
+                            UserId = new Guid("a5655a7e-6296-41ad-85ab-1a15e582bf13")
                         },
                         new
                         {
                             Id = 4,
                             ClaimType = "role",
                             ClaimValue = "User",
-                            UserId = new Guid("953bb2c4-a127-4971-96bb-5e50c381a0b9")
+                            UserId = new Guid("a5655a7e-6296-41ad-85ab-1a15e582bf13")
                         });
                 });
 
@@ -310,7 +338,7 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.SqlServer.Migrations
                             LoginProvider = "IdentityServer4",
                             ProviderKey = "IdentityServer4",
                             ProviderDisplayName = "IdentityServer4",
-                            UserId = new Guid("953bb2c4-a127-4971-96bb-5e50c381a0b9")
+                            UserId = new Guid("a5655a7e-6296-41ad-85ab-1a15e582bf13")
                         });
                 });
 
@@ -328,6 +356,13 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.SqlServer.Migrations
                         .HasName("IX_AspNetUserRoles_RoleId");
 
                     b.ToTable("AspNetUserRole","dbo");
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = new Guid("a5655a7e-6296-41ad-85ab-1a15e582bf13"),
+                            RoleId = new Guid("31dde1b8-8435-408f-a4fd-ecca6d193a78")
+                        });
                 });
 
             modelBuilder.Entity("DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity.AspNetUserToken", b =>
@@ -353,7 +388,7 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.SqlServer.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = new Guid("953bb2c4-a127-4971-96bb-5e50c381a0b9"),
+                            UserId = new Guid("a5655a7e-6296-41ad-85ab-1a15e582bf13"),
                             LoginProvider = "IdentityServer4",
                             Name = "Alice",
                             Value = "Alice"
@@ -394,7 +429,23 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.SqlServer.Migrations
                             Active = true,
                             AlwaysSendClientClaims = true,
                             ClientId = "mvc",
-                            ClientName = "MVC client"
+                            ClientName = "MVC Hybrid Client"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Active = true,
+                            AlwaysSendClientClaims = true,
+                            ClientId = "client",
+                            ClientName = "Api Client"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Active = true,
+                            AlwaysSendClientClaims = true,
+                            ClientId = "ro.client",
+                            ClientName = "Console Client"
                         });
                 });
 
@@ -417,6 +468,53 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.SqlServer.Migrations
                         {
                             ClientId = 1,
                             GrantTypeId = 5
+                        },
+                        new
+                        {
+                            ClientId = 2,
+                            GrantTypeId = 1
+                        },
+                        new
+                        {
+                            ClientId = 3,
+                            GrantTypeId = 9
+                        });
+                });
+
+            modelBuilder.Entity("DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity.ClientSecret", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ClientId");
+
+                    b.Property<string>("Secret");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClientId");
+
+                    b.ToTable("ClientSecret");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ClientId = 1,
+                            Secret = "K7gNU3sdo+OL0wNhqoVWhr3g6s1xYv72ol/pe/Unols="
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ClientId = 2,
+                            Secret = "K7gNU3sdo+OL0wNhqoVWhr3g6s1xYv72ol/pe/Unols="
+                        },
+                        new
+                        {
+                            Id = 3,
+                            ClientId = 3,
+                            Secret = "K7gNU3sdo+OL0wNhqoVWhr3g6s1xYv72ol/pe/Unols="
                         });
                 });
 
@@ -674,6 +772,14 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.SqlServer.Migrations
                         .WithMany("ClientGrantType")
                         .HasForeignKey("GrantTypeId")
                         .OnDelete(DeleteBehavior.Restrict);
+                });
+
+            modelBuilder.Entity("DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity.ClientSecret", b =>
+                {
+                    b.HasOne("DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity.Client", "Client")
+                        .WithMany("ClientSecret")
+                        .HasForeignKey("ClientId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity.IdentityResourceClaimType", b =>

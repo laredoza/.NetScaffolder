@@ -85,6 +85,7 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EF.Postgres.Context
 			
 			// Exclude entities not part of this context
 			
+			modelBuilder.Ignore<ClientSecret>();
 
 			#endregion		
         }

@@ -604,6 +604,9 @@
             <RelationShip ColumnName="Id" RelationShip="ForeignKeyChild" ReferencedColumnName="ClientId" Render="true" SchemaName="dbo" ReferencedTableName="ClientGrantType" Multiplicity="One" ReferencedMultiplicity="Many" UserRelationship="false">
               <RelationshipName>FK_ClientGrantType_Client</RelationshipName>
             </RelationShip>
+            <RelationShip ColumnName="Id" RelationShip="ForeignKeyChild" ReferencedColumnName="ClientId" Render="true" SchemaName="dbo" ReferencedTableName="ClientSecret" Multiplicity="One" ReferencedMultiplicity="Many" UserRelationship="false">
+              <RelationshipName>FK_ClientSecret_Client1</RelationshipName>
+            </RelationShip>
             <RelationShip ColumnName="Id" RelationShip="ForeignKeyChild" ReferencedColumnName="ClientId" Render="true" SchemaName="dbo" ReferencedTableName="PostLogoutRedirectUri" Multiplicity="One" ReferencedMultiplicity="Many" UserRelationship="false">
               <RelationshipName>FK_PostLogoutRedirectUri_Client1</RelationshipName>
             </RelationShip>
@@ -824,6 +827,35 @@
               <IndexType>PrimaryKey</IndexType>
               <IsUnique>true</IsUnique>
               <Name>PK_ResourceClaimType</Name>
+              <Columns>
+                <string>Id</string>
+              </Columns>
+            </Index>
+          </Indexes>
+        </Table>
+        <Table Description="" SchemaName="dbo" TableName="ClientSecret" EnabledForCodeGeneration="true">
+          <Columns>
+            <Column ColumnName="Id" ColumnOrder="1" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="true" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="true" IdentitySeed="1" IdentityIncrement="1">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="ClientId" ColumnOrder="2" DataType="Int32" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="0" Precision="10" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+            <Column ColumnName="Secret" ColumnOrder="3" DataType="String" GridColumnWidth="80" IsPrimaryKey="false" IsRequired="true" Length="100" Precision="0" RenderToEntity="true" RenderToView="true" RenderToViewOrder="0" Scale="0" IsIdentity="false" IdentitySeed="0" IdentityIncrement="0">
+              <RemapDataType xsi:nil="true" />
+            </Column>
+          </Columns>
+          <DatabaseGeneratedKeyType>Identity</DatabaseGeneratedKeyType>
+          <RelationShips>
+            <RelationShip ColumnName="ClientId" RelationShip="ForeignKey" ReferencedColumnName="Id" Render="true" SchemaName="dbo" ReferencedTableName="Client" Multiplicity="Many" ReferencedMultiplicity="One" UserRelationship="false">
+              <RelationshipName>FK_ClientSecret_Client1</RelationshipName>
+            </RelationShip>
+          </RelationShips>
+          <Indexes>
+            <Index>
+              <IndexType>PrimaryKey</IndexType>
+              <IsUnique>true</IsUnique>
+              <Name>PK_ClientSecret</Name>
               <Columns>
                 <string>Id</string>
               </Columns>

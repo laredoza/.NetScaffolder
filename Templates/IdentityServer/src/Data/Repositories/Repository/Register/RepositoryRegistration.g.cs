@@ -49,6 +49,7 @@ namespace DotNetScaffolder.Domain.Data.Repositories.Repository.Register
 			this.For<IPostLogoutRedirectUriRepository>().LifecycleIs(Lifecycles.Unique).UseIfNone<PostLogoutRedirectUriRepository>();
 			this.For<IRedirectUriRepository>().LifecycleIs(Lifecycles.Unique).UseIfNone<RedirectUriRepository>();
 			this.For<IResourceClaimTypeRepository>().LifecycleIs(Lifecycles.Unique).UseIfNone<ResourceClaimTypeRepository>();
+			this.For<IClientSecretRepository>().LifecycleIs(Lifecycles.Unique).UseIfNone<ClientSecretRepository>();
         }
 		
 		#endregion

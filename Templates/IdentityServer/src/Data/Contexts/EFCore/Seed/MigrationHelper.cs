@@ -4,6 +4,8 @@ using System.Security.Claims;
 using DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity;
 using IdentityModel;
 using Microsoft.EntityFrameworkCore;
+using IdentityServer4.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.Seed
 {
@@ -12,6 +14,30 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.Seed
         public static void AddUsers(ModelBuilder modelBuilder)
         {
             Guid userId = Guid.NewGuid();
+            IPasswordHasher<AspNetUser> passwordHasher = new PasswordHasher<AspNetUser>();
+
+            int roleId = 1;
+            Guid adminRoleId = Guid.NewGuid();
+
+            modelBuilder.Entity<AspNetRole>().HasData(
+                new AspNetRole 
+                {
+                    Id = adminRoleId, 
+                    Name = "Admin",
+                    NormalizedName = "admin",
+                    ConcurrencyStamp = DateTime.Now.ToString()
+                });
+
+            Guid userRoleId = Guid.NewGuid();
+
+            modelBuilder.Entity<AspNetRole>().HasData(
+                new AspNetRole 
+                {
+                    Id = userRoleId, 
+                    Name = "User",
+                    NormalizedName = "user",
+                    ConcurrencyStamp = DateTime.Now.ToString()
+                });
 
             modelBuilder.Entity<AspNetUserToken>().HasData(
                 new AspNetUserToken
@@ -67,32 +93,40 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.Seed
                     UserId = userId
                 });
 
-            modelBuilder.Entity<AspNetUser>().HasData(
-                new AspNetUser
-                {
-                    Id = userId,
-                    AccessFailedCount = 0,
-                    UserName = "Alice",
-                    NormalizedUserName = "alice",
-                    AspNetUserRole = new List<AspNetUserRole>(),
-                    Email = "alice@alice.com",
-                    NormalizedEmail = "alice@alice.com",
-                    EmailConfirmed = true,
-                    PasswordHash = "password",
-                    SecurityStamp = DateTime.Now.ToString(),
-                    ConcurrencyStamp = DateTime.Now.ToString(),
-                    PhoneNumber = "123#",
-                    PhoneNumberConfirmed = true,
-                    TwoFactorEnabled = false,
-                    LockoutEnabled = false,
+            var user = new AspNetUser
+            {
+                Id = userId,
+                AccessFailedCount = 0,
+                UserName = "Alice",
+                NormalizedUserName = "alice",
+                AspNetUserRole = new List<AspNetUserRole>(),
+                Email = "alice@alice.com",
+                NormalizedEmail = "alice@alice.com",
+                EmailConfirmed = true,
+                PasswordHash = "password",
+                SecurityStamp = DateTime.Now.ToString(),
+                ConcurrencyStamp = DateTime.Now.ToString(),
+                PhoneNumber = "123#",
+                PhoneNumberConfirmed = true,
+                TwoFactorEnabled = false,
+                LockoutEnabled = false,
+            };
 
+            user.PasswordHash = passwordHasher.HashPassword(user, "password");
+            modelBuilder.Entity<AspNetUser>().HasData(user);
+
+            modelBuilder.Entity<AspNetUserRole>().HasData(
+                new AspNetUserRole 
+                {
+                    UserId = userId,
+                    RoleId = adminRoleId
                 });
         }
 
-        private static void AddClient(ModelBuilder modelBuilder, int id, string name)
+        private static void AddGrant(ModelBuilder modelBuilder, int id, string name)
         {
-            modelBuilder.Entity<GrantType>().HasData(
-                new GrantType
+            modelBuilder.Entity<DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity.GrantType>().HasData(
+                new DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity.GrantType
                 {
                     Id = id,
                     Name = name
@@ -110,46 +144,58 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.Seed
                 });
         }
 
+        private static void AddClientSecret(ModelBuilder modelBuilder, int id, int clientId, string secret)
+        {
+            modelBuilder.Entity<ClientSecret>().HasData(
+                new ClientSecret 
+                {
+                    Id = id,
+                    ClientId = clientId,
+                    Secret = secret
+                });
+        }
+
         public static void AddClients(ModelBuilder modelBuilder)
         {
             int grantId = 1;
-            AddClient(modelBuilder, grantId, "ClientCredentials");
+            AddGrant(modelBuilder, grantId, "ClientCredentials");
 
             grantId++;
-            AddClient(modelBuilder, grantId, "Code");
+            AddGrant(modelBuilder, grantId, "Code");
 
             grantId++;
-            AddClient(modelBuilder, grantId, "CodeAndClientCredentials");
+            AddGrant(modelBuilder, grantId, "CodeAndClientCredentials");
 
             grantId++;
-            AddClient(modelBuilder, grantId, "DeviceFlow");
+            AddGrant(modelBuilder, grantId, "DeviceFlow");
 
             grantId++;
-            AddClient(modelBuilder, grantId, "Hybrid");
+            AddGrant(modelBuilder, grantId, "Hybrid");
 
             grantId++;
-            AddClient(modelBuilder, grantId, "HybridAndClientCredentials");
+            AddGrant(modelBuilder, grantId, "HybridAndClientCredentials");
 
             grantId++;
-            AddClient(modelBuilder, grantId, "Implicit");
+            AddGrant(modelBuilder, grantId, "Implicit");
 
             grantId++;
-            AddClient(modelBuilder, grantId, "ImplicitAndClientCredentials");
+            AddGrant(modelBuilder, grantId, "ImplicitAndClientCredentials");
 
             grantId++;
-            AddClient(modelBuilder, grantId, "ResourceOwnerPassword");
+            AddGrant(modelBuilder, grantId, "ResourceOwnerPassword");
 
             grantId++;
-            AddClient(modelBuilder, grantId, "ResourceOwnerPasswordAndClientCredentials");
+            AddGrant(modelBuilder, grantId, "ResourceOwnerPasswordAndClientCredentials");
 
+            // Add Hybrid MVC Client
             int clientId = 1;
 
-            modelBuilder.Entity<Client>().HasData(
-                new Client
+            modelBuilder.Entity<DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity.Client>().HasData(
+                new DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity.Client
                 {
                     Id = clientId,
                     ClientId = "mvc",
-                    ClientName = "MVC client",
+                    ClientName = "MVC Hybrid Client",
                     AlwaysSendClientClaims = true,
                     Active = true
                 });
@@ -176,6 +222,9 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.Seed
             allowedScopeId++;
             AddScope(modelBuilder, allowedScopeId, clientId, "api1");
 
+            int secretId = 1;
+            AddClientSecret(modelBuilder, secretId, clientId, "secret".Sha256());
+
             int rediectUriId = 1;
 
             modelBuilder.Entity<RedirectUri>().HasData(
@@ -194,40 +243,58 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.Seed
                     ClientId = clientId,
                     Uri = "http://localhost:5002/signout-callback-oidc"
                 });
+            
+            // Add Api Client
+            clientId++;
 
-            //int scopeId = 1;
-            //modelBuilder.Entity<AllowedScope>().HasData(
-            //    new AllowedScope 
-            //    {
-            //        Id = scopeId,
-            //        ClientId = clientId,
-            //        ResourceName = IdentityServerConstants.StandardScopes.OpenId,
-            //    });
+            modelBuilder.Entity<DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity.Client>().HasData(
+                new DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity.Client
+                {
+                    Id = clientId,
+                    ClientId = "client",
+                    ClientName = "Api Client",
+                    AlwaysSendClientClaims = true,
+                    Active = true
+                });
 
-            //modelBuilder.Entity<Product>().HasData(
-            //    new Product
-            //    {
-            //        ProductId = 1,
-            //        ProductDescription = "A Book",
-            //        UnitPrice = 100,
-            //        AmountInStock = 100
-            //    });
+            modelBuilder.Entity<ClientGrantType>().HasData(
+                new ClientGrantType
+                {
+                    ClientId = clientId,
+                    GrantTypeId = 1
+                });
 
-            //modelBuilder.Entity<Software>().HasData(
-            //    new Software
-            //    {
-            //        ProductId = 2,
-            //        LicenseCode = "#1234567890"
-            //    });
+            secretId++;
+            AddClientSecret(modelBuilder, secretId, clientId, "secret".Sha256());
 
-            //modelBuilder.Entity<Product>().HasData(
-            //    new Product
-            //    {
-            //        ProductId = 2,
-            //        ProductDescription = "Software",
-            //        UnitPrice = 200,
-            //        AmountInStock = 100
-            //    });
+            allowedScopeId++;
+            AddScope(modelBuilder, allowedScopeId, clientId, "api1");
+
+            // Add Console Client 
+            clientId++;
+
+            modelBuilder.Entity<DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity.Client>().HasData(
+                new DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity.Client
+                {
+                    Id = clientId,
+                    ClientId = "ro.client",
+                    ClientName = "Console Client",
+                    AlwaysSendClientClaims = true,
+                    Active = true
+                });
+
+            modelBuilder.Entity<ClientGrantType>().HasData(
+                new ClientGrantType
+                {
+                    ClientId = clientId,
+                    GrantTypeId = 9
+                });
+
+            secretId++;
+            AddClientSecret(modelBuilder, secretId, clientId, "secret".Sha256());
+
+            allowedScopeId++;
+            AddScope(modelBuilder, allowedScopeId, clientId, "api1");
         }
 
         public static void AddCustomers(ModelBuilder modelBuilder)
