@@ -3,6 +3,7 @@
     using System;
     using System.IO;
     using HandlebarsDotNet;
+
     class Program
     {
         static void Main(string[] args)
