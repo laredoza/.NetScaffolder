@@ -29,7 +29,6 @@ namespace DotNetScaffolder.Core.Configuration
 
         /// <summary>
         ///     Initializes static members of the <see cref="ScaffoldConfig" /> class.
-        ///     Initializes a new instance of the <see cref="ScaffoldConfig" /> class.
         /// </summary>
         static ScaffoldConfig()
         {
@@ -41,7 +40,7 @@ namespace DotNetScaffolder.Core.Configuration
             DataTypeUIs = new Lazy<IDataTypeUI, IDictionary<string, object>>[0];
 
 #if DEBUG
-            ModelPath = ConfigurationManager.AppSettings["ModelPath"];
+            // ModelPath = ConfigurationManager.AppSettings["ModelPath"];
             ConfigPath = @"Config\Settings.xml";
 #endif
         }

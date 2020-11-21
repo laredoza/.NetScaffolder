@@ -9,7 +9,6 @@ namespace FormControls.TreeView
     #region Usings
 
     using System;
-    using System.Windows.Forms;
 
     using DotNetScaffolder.Core.Extensions;
 

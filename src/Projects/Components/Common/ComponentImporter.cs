@@ -6,17 +6,26 @@
 
 namespace DotNetScaffolder.Components.Common
 {
-    #region Usings
-
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.Composition;
     using System.ComponentModel.Composition.Hosting;
     using System.IO;
     using System.Reflection;
-
     using DotNetScaffolder.Components.Common.Contract;
     using DotNetScaffolder.Components.Common.Contract.UI;
+    // using System.ComponentModel.Composition;
+    #region Usings
+
+    // using System;
+    // using System.Collections.Generic;
+    // using System.ComponentModel.Composition;
+    // using System.ComponentModel.Composition.Hosting;
+    // using System.IO;
+    // using System.Reflection;
+
+    // using DotNetScaffolder.Components.Common.Contract;
+    // using DotNetScaffolder.Components.Common.Contract.UI;
 
     using global::Common.Logging;
 
@@ -43,7 +52,7 @@ namespace DotNetScaffolder.Components.Common
         /// </summary>
         [ImportMany]
         public Lazy<ICollectionOption, IDictionary<string, object>>[] CollectionOptions { get; set; }
-
+        
         /// <summary>
         ///     Gets or sets the data types.
         /// </summary>

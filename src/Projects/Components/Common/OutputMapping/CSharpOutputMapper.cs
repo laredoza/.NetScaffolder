@@ -9,7 +9,6 @@ namespace DotNetScaffolder.Components.Common
     #region Usings
 
     using System;
-
     using DotNetScaffolder.Mapping.MetaData.Model;
 
     #endregion

@@ -4,4 +4,17 @@
     <RootNamespace>DotNetScaffolder.Components.Common</RootNamespace>
     <AssemblyName>DotNetScaffolder.Components.Common</AssemblyName>
   </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../../Core/Common/DotNetScaffolder.Core.Common.csproj" />
+    <!-- <ProjectReference Include="..\..\Core\Forms\FormControls\DotNetScaffolder.Core.Forms.FormControls.csproj" /> -->
+    <ProjectReference Include="../../Mapping/MetaData/DotNetScaffolder.Mapping.MetaData.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Common.Logging" Version="3.4.1" />
+    <PackageReference Include="System.ComponentModel.Composition" Version="5.0.0" />
+    <!-- <PackageReference Include="System.ComponentModel.Composition" Version="2010.2.11.1" /> -->
+  </ItemGroup>
+
 </Project>
