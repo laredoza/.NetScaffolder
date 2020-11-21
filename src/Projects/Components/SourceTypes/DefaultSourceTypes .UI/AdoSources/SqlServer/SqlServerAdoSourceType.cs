@@ -1,16 +1,18 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="MySqlAdoSourceType.cs" company="DotnetScaffolder">
+// <copyright file="SqlServerAdoSourceType.cs" company="DotnetScaffolder">
 //   MIT
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.MySql
+namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.SqlServer
 {
     #region Usings
 
     using System;
     using System.ComponentModel.Composition;
+    using System.Data.SqlClient;
     using System.IO;
+    using System.Windows.Forms;
 
     using DatabaseSchemaReader.DataSchema;
 
@@ -21,17 +23,15 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
 
     using global::Common.Logging;
 
-    using global::MySql.Data.MySqlClient;
-
     #endregion
 
     /// <summary>
     ///     The generic ado source type.
     /// </summary>
     [Export(typeof(ISourceType))]
-    [ExportMetadata("NameMetaData", "MySql ADO.NET")]
-    [ExportMetadata("ValueMetaData", "4BC1B0C4-1E41-9146-82CF-799181CE4410")]
-    public class MySqlAdoSourceType : AdoSource
+    [ExportMetadata("NameMetaData", "SqlServer ADO.NET")]
+    [ExportMetadata("ValueMetaData", "4BC1B0C4-1E41-9146-82CF-599181CE4410")]
+    public class SqlServerAdoSourceType : AdoSource
     {
         #region Static Fields
 
@@ -44,27 +44,27 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
 
         #region Public Methods And Operators
 
-        // /// <summary>
-        // /// The add config ui.
-        // /// </summary>
-        // /// <param name="parameters">
-        // /// The parameters.
-        // /// </param>
-        // /// <returns>
-        // /// The <see cref="object"/>.
-        // /// </returns>
-        // public override object AddConfigUI(object parameters)
-        // {
-        //     Logger.Trace("Started AddConfigUI()");
+        /// <summary>
+        /// The add config ui.
+        /// </summary>
+        /// <param name="parameters">
+        /// The parameters.
+        /// </param>
+        /// <returns>
+        /// The <see cref="object"/>.
+        /// </returns>
+        public override object AddConfigUI(object parameters)
+        {
+            Logger.Trace("Started AddConfigUI()");
 
-        //     Control parent = parameters as Control;
-        //     MySqlAdoUserControl newControl = new MySqlAdoUserControl { Visible = true, Dock = DockStyle.Fill };
-        //     newControl.BringToFront();
-        //     parent.Controls.Add(newControl);
+            Control parent = parameters as Control;
+            SqlServerAdoUserControl newControl = new SqlServerAdoUserControl { Visible = true, Dock = DockStyle.Fill };
+            newControl.BringToFront();
+            parent.Controls.Add(newControl);
 
-        //     Logger.Trace("Completed AddConfigUI()");
-        //     return newControl;
-        // }
+            Logger.Trace("Completed AddConfigUI()");
+            return newControl;
+        }
 
         /// <summary>
         /// The load.
@@ -93,9 +93,9 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
                 Logger.Trace("Path Doesn't Exist");
                 result = new AdoSourceOptions
                              {
-                                 ProviderName = "MySql.Data.MySqlClient",
+                                 ProviderName = "System.Data.SqlClient",
                                  ConnectionString =
-                                     @"server=localhost;userid=test;password=password;database=test;SslMode=none"
+                                     @"Data Source=.\SQLEXPRESS;Integrated Security=true;Initial Catalog=BankingDesign"
                              };
             }
 
@@ -111,6 +111,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
         /// The database type.
         /// </param>
         /// <param name="extraInfo">
+        /// h
         /// </param>
         /// <returns>
         /// The <see cref="DomainDataType"/>.
@@ -127,38 +128,55 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
 
             switch (cSharpName)
             {
-                case "VARCHAR":
-                case "LONGTEXT":
                 case "TEXT":
-                case "ENUM":
-                case "SET":
                 case "CHAR":
+                case "NTEXT":
+                case "VARCHAR":
+                case "NVARCHAR":
+                case "NCHAR":
+                case "XML":
                     return DomainDataType.String;
-                case "DATETIME":
-                case "DATE":
-                case "TIMESTAMP":
-                    return DomainDataType.DateTime;
+                case "IMAGE":
+                case "VARBINARY":
+                    return DomainDataType.VarBinary;
                 case "INT":
-                case "YEAR":
-                case "MEDIUMINT":
                     return DomainDataType.Int32;
                 case "DECIMAL":
                     return DomainDataType.Decimal;
-                case "TINYINT":
-                    return DomainDataType.SByte;
-                case "SMALLINT":
-                    return DomainDataType.Int16;
-                case "FLOAT":
-                    return DomainDataType.Single;
-                case "TIME":
-                    return DomainDataType.TimeSpan;
-                case "LONGBLOB":
-                case "BLOB":
-                    return DomainDataType.VarBinary;
                 case "BIT":
                     return DomainDataType.Boolean;
+                case "DATETIME":
+                case "DATETIME2":
+                    return DomainDataType.DateTime;
+                case "SMALLINT":
+                    return DomainDataType.Int16;
+                case "REAL":
+                    return DomainDataType.Single;
+                case "FLOAT":
+                    column.Precision = 0;
+                    return DomainDataType.Double;
+                case "TINYINT":
+                    return DomainDataType.SByte;
+                case "MONEY":
+                case "SMALLMONEY":
+                case "NUMERIC":
+                    return DomainDataType.Decimal;
+
+                // case "REAL":
+                // // Todo: Do something valid with this
+                // return DomainDataType.Single;
+                case "UNIQUEIDENTIFIER":
+                    return DomainDataType.Guid;
+                case "BIGINT":
+                    return DomainDataType.Int64;
+                case "DATE":
+                    return DomainDataType.Date;
+                case "TIME":
+                    return DomainDataType.TimeSpan;
                 case "":
                     return DomainDataType.Unsupported;
+                case "DATETIMEOFFSET":
+                        return DomainDataType.DateTimeOffSet;
                 default:
                     throw new NotImplementedException($"Invalid data type {databaseType}");
             }
@@ -177,7 +195,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
         {
             Logger.Trace($"Started ReturnFilePath({basePath}");
             Logger.Trace($"Completed ReturnFilePath({basePath}");
-            return basePath + @"\MySqlAdoSourceType.xml";
+            return basePath + @"\SqlServerAdoSourceType.xml";
         }
 
         /// <summary>
@@ -197,7 +215,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
             bool result = false;
 
             AdoSourceOptions adoOptions = parameters as AdoSourceOptions;
-            using (MySqlConnection connection = new MySqlConnection(adoOptions.ConnectionString))
+            using (SqlConnection connection = new SqlConnection(adoOptions.ConnectionString))
             {
                 // Open the connection in a try/catch block. 
                 // Create and execute the DataReader, writing the result

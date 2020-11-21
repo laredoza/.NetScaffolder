@@ -1,9 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <RootNamespace>DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes</RootNamespace>
-    <AssemblyName>DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes</AssemblyName>
-    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+    <RootNamespace>DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.UI</RootNamespace>
+    <AssemblyName>DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.UI</AssemblyName>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="../../Common/DotNetScaffolder.Components.Common.csproj" />
@@ -16,7 +15,6 @@
     <PackageReference Include="MySql.Data" Version="8.0.22" />
     <PackageReference Include="Oracle.ManagedDataAccess.Core" Version="2.19.100" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.2" />
-    <PackageReference Include="System.DirectoryServices.Protocols" Version="5.0.0" />
     <PackageReference Include="Tiraggo.Edmx" Version="1.0.8" />
   </ItemGroup>
 </Project>

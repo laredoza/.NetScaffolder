@@ -114,6 +114,12 @@ namespace DotNetScaffolder.Core.Configuration
         /// Gets or sets the driver cache types
         /// </summary>
         public static Lazy<IIDriverTypeCache, IDictionary<string, object>>[] DriverTypeCache { get; set; }
+
+        /// <summary>
+        /// Gets or sets the data type generators
+        /// </summary>
+        public static Lazy<IDataTypeGenerator, IDictionary<string, object>>[] DataTypeGenerators { get; set; }
+        
         
         #endregion
 
@@ -141,6 +147,7 @@ namespace DotNetScaffolder.Core.Configuration
             DriverTypes = importer.DriverTypes;
             DriverTypeUIs = importer.DriverTypeUI;
             DriverTypeCache = importer.DriverTypeCache;
+            DataTypeGenerators = importer.DataTypeGenerators;
         }
 
         /// <summary>

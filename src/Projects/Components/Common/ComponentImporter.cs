@@ -52,7 +52,7 @@ namespace DotNetScaffolder.Components.Common
         /// </summary>
         [ImportMany]
         public Lazy<ICollectionOption, IDictionary<string, object>>[] CollectionOptions { get; set; }
-        
+
         /// <summary>
         ///     Gets or sets the data types.
         /// </summary>
@@ -112,6 +112,10 @@ namespace DotNetScaffolder.Components.Common
         /// </summary>
         [ImportMany]
         public Lazy<IIDriverTypeCache, IDictionary<string, object>>[] DriverTypeCache { get; set; }
+        /// <summary>
+        /// Gets or sets the data type generators
+        /// </summary>
+        public Lazy<IDataTypeGenerator, IDictionary<string, object>>[] DataTypeGenerators { get; set; }
 
         #endregion
 
@@ -165,17 +169,25 @@ namespace DotNetScaffolder.Components.Common
             catalog.Catalogs.Add(new DirectoryCatalog(importfolder));
 
             // Create the CompositionContainer with the parts in the catalog
-            CompositionContainer container = new CompositionContainer(catalog);
+            try
+            {
+                CompositionContainer container = new CompositionContainer(catalog);
 
-            // Fill the imports of this object
-            container.ComposeParts(this);
+                // Fill the imports of this object
+                container.ComposeParts(this);
 
-            // foreach (var item in this.DataTypes)
-            // {
-            // IDataType test = item.Value;
-            // var a = test.ReturnNavigation();
-            // }
-            Logger.Info($"Completed DoImport() - {importfolder}");
+                // foreach (var item in this.DataTypes)
+                // {
+                // IDataType test = item.Value;
+                // var a = test.ReturnNavigation();
+                // }
+                Logger.Info($"Completed DoImport() - {importfolder}");
+
+            }
+            catch (System.Exception ex)
+            {
+                throw;
+            }
         }
 
         #endregion

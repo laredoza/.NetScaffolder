@@ -2,12 +2,17 @@
 {
     using System;
     using System.IO;
+    using DotNetScaffolder.Components.Common.Contract;
+    using DotNetScaffolder.Components.OutputGenerators.DefaultOutputGenerators;
     using HandlebarsDotNet;
 
     class Program
     {
         static void Main(string[] args)
         {
+            IOutputGenerator outputGenerator = new HandleBarsOutputGenerator(); 
+            outputGenerator.Generate("/home/laredo/Dev/GitHub/.NetScaffolder/src/Projects/Presentation/Console/bin/Debug/netcoreapp3.1", "/home/laredo/Dev/GitHub/.NetScaffolder/Templates/Generated/Dotnet/Domain/Data/Repositories/Repository/Model/Banking.mdl");
+
             Console.WriteLine("Hello World!");
 
             //             string source =

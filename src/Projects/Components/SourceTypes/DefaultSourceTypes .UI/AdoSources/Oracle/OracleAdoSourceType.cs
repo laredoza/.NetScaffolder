@@ -11,6 +11,7 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
     using System;
     using System.ComponentModel.Composition;
     using System.IO;
+    using System.Windows.Forms;
 
     using DatabaseSchemaReader.DataSchema;
 
@@ -80,27 +81,27 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources.
             return NetTypeForIntegers(column, scale, precision);
         }
 
-        // /// <summary>
-        // /// The add config ui.
-        // /// </summary>
-        // /// <param name="parameters">
-        // /// The parameters.
-        // /// </param>
-        // /// <returns>
-        // /// The <see cref="object"/>.
-        // /// </returns>
-        // public override object AddConfigUI(object parameters)
-        // {
-        //     Logger.Trace("Started AddConfigUI()");
+        /// <summary>
+        /// The add config ui.
+        /// </summary>
+        /// <param name="parameters">
+        /// The parameters.
+        /// </param>
+        /// <returns>
+        /// The <see cref="object"/>.
+        /// </returns>
+        public override object AddConfigUI(object parameters)
+        {
+            Logger.Trace("Started AddConfigUI()");
 
-        //     Control parent = parameters as Control;
-        //     OracleAdoUserControl newControl = new OracleAdoUserControl { Visible = true, Dock = DockStyle.Fill };
-        //     newControl.BringToFront();
-        //     parent.Controls.Add(newControl);
+            Control parent = parameters as Control;
+            OracleAdoUserControl newControl = new OracleAdoUserControl { Visible = true, Dock = DockStyle.Fill };
+            newControl.BringToFront();
+            parent.Controls.Add(newControl);
 
-        //     Logger.Trace("Completed AddConfigUI()");
-        //     return newControl;
-        // }
+            Logger.Trace("Completed AddConfigUI()");
+            return newControl;
+        }
 
         /// <summary>
         /// The load.

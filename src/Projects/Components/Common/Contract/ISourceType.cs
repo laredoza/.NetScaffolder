@@ -23,16 +23,16 @@ namespace DotNetScaffolder.Components.Common.Contract
     {
         #region Public Methods And Operators
 
-        /// <summary>
-        /// The add config ui.
-        /// </summary>
-        /// <param name="parameters">
-        /// The parameters.
-        /// </param>
-        /// <returns>
-        /// The <see cref="object"/>.
-        /// </returns>
-        object AddConfigUI(object parameters);
+        // /// <summary>
+        // /// The add config ui.
+        // /// </summary>
+        // /// <param name="parameters">
+        // /// The parameters.
+        // /// </param>
+        // /// <returns>
+        // /// The <see cref="object"/>.
+        // /// </returns>
+        // object AddConfigUI(object parameters);
 
         /// <summary>
         /// The fix.

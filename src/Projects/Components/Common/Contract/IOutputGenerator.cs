@@ -11,5 +11,6 @@ namespace DotNetScaffolder.Components.Common.Contract
     /// </summary>
     public interface IOutputGenerator
     {
+        void Generate(string packagePath, string modelFilePath);
     }
 }

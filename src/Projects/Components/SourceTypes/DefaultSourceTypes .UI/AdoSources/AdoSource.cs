@@ -10,7 +10,6 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
 
     using System;
     using System.Collections.Generic;
-    using System.Data.SqlClient;
     using System.Linq;
 
     using DatabaseSchemaReader;
@@ -65,16 +64,16 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
 
         #region Public Methods And Operators
 
-        // /// <summary>
-        // /// The add config ui.
-        // /// </summary>
-        // /// <param name="parameters">
-        // /// The parameters.
-        // /// </param>
-        // /// <returns>
-        // /// The <see cref="object"/>.
-        // /// </returns>
-        // public abstract object AddConfigUI(object parameters);
+        /// <summary>
+        /// The add config ui.
+        /// </summary>
+        /// <param name="parameters">
+        /// The parameters.
+        /// </param>
+        /// <returns>
+        /// The <see cref="object"/>.
+        /// </returns>
+        public abstract object AddConfigUI(object parameters);
 
         /// <summary>
         /// The fix.
@@ -160,10 +159,8 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
             }
 
             //foreach (var schemaOwner in adoOptions.Schemas)
-            //Todo: Check the providername
-            using (var connection = new SqlConnection(adoOptions.ConnectionString))
             {
-                var databaseReader = new DatabaseReader(connection);
+                var databaseReader = new DatabaseReader(adoOptions.ConnectionString, adoOptions.ProviderName);
 
                 databaseReader.Exclusions.TableFilter.FilterExclusions.Add("sysdiagrams");
                 databaseReader.Exclusions.TableFilter.FilterExclusions.Add("__migrationhistory");
@@ -173,12 +170,12 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
                 databaseReader.AllTables();
                 databaseReader.AllViews();
 
-
+                
 
                 // databaseReader.AllStoredProcedures(); //but not this one!
                 // var schemaMetaData = databaseReader.ReadAll();
                 var schemaMetaData = databaseReader.DatabaseSchema;
-
+                
                 List<DatabaseTable> tables = schemaMetaData.Tables
                     //.Where(t => t.Name != "sysdiagrams" && t.Name != "__migrationhistory" && t.Name != "__MigrationHistory")
                     .ToList();
@@ -341,23 +338,20 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
         {
             this.Schemas.Clear();
             AdoSourceOptions adoOptions = options as AdoSourceOptions;
-            using (var connection = new SqlConnection(adoOptions.ConnectionString))
+            var databaseReader = new DatabaseReader(adoOptions.ConnectionString, adoOptions.ProviderName);
+
+            this.Schemas.Clear();
+            IList<DatabaseTable> tables = databaseReader.TableList();
+
+            foreach (var table in tables)
             {
-                var databaseReader = new DatabaseReader(connection);
-
-                this.Schemas.Clear();
-                IList<DatabaseTable> tables = databaseReader.TableList();
-
-                foreach (var table in tables)
+                if (!this.Schemas.Any(s => s == table.SchemaOwner))
                 {
-                    if (!this.Schemas.Any(s => s == table.SchemaOwner))
-                    {
-                        this.Schemas.Add(table.SchemaOwner);
-                    }
+                    this.Schemas.Add(table.SchemaOwner);
                 }
-
-                this.Schemas = this.Schemas.OrderBy(s => s).ToList();
             }
+
+            this.Schemas = this.Schemas.OrderBy(s => s).ToList();
 
             return this.Schemas;
         }
@@ -417,11 +411,11 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
             foreach (DatabaseIndex index in table.Indexes)
             {
                 Index newIndex = new Index
-                {
-                    IsUnique = index.IsUnique,
-                    Name = index.Name,
-                    Table = newTable
-                };
+                                     {
+                                         IsUnique = index.IsUnique,
+                                         Name = index.Name,
+                                         Table = newTable
+                                     };
 
                 if (index.IndexType == null)
                 {
@@ -536,19 +530,19 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
                 if (colType != DomainDataType.Unsupported)
                 {
                     Column newColumn = new Column
-                    {
-                        ColumnName = column.Name,
-                        DomainDataType = colType,
-                        IsRequired = !column.Nullable || column.IsPrimaryKey,
-                        ColumnOrder = table.Columns.IndexOf(column) + 1,
-                        Precision = column.Precision.HasValue ? column.Precision.Value : 0,
-                        Scale = column.Scale.HasValue ? column.Scale.Value : 0,
-                        Length = column.Length.HasValue ? column.Length.Value : 0,
-                        IsPrimaryKey = column.IsPrimaryKey,
-                        IsIdentity = column.IdentityDefinition != null ? true : false,
-                        IdentitySeed = column.IdentityDefinition != null ? column.IdentityDefinition.IdentitySeed : 0,
-                        IdentityIncrement = column.IdentityDefinition != null ? column.IdentityDefinition.IdentityIncrement : 0
-                    };
+                                           {
+                                               ColumnName = column.Name,
+                                               DomainDataType = colType,
+                                               IsRequired = !column.Nullable || column.IsPrimaryKey,
+                                               ColumnOrder = table.Columns.IndexOf(column) + 1,
+                                               Precision = column.Precision.HasValue ? column.Precision.Value : 0,
+                                               Scale = column.Scale.HasValue ? column.Scale.Value : 0,
+                                               Length = column.Length.HasValue ? column.Length.Value : 0,
+                                               IsPrimaryKey = column.IsPrimaryKey,
+                                               IsIdentity = column.IdentityDefinition!=null? true:false,
+                                               IdentitySeed = column.IdentityDefinition != null ? column.IdentityDefinition.IdentitySeed:0,
+                                               IdentityIncrement = column.IdentityDefinition != null ? column.IdentityDefinition.IdentityIncrement:0
+                                           };
 
                     if (column.IsPrimaryKey)
                     {
@@ -592,16 +586,16 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
 
                         newTable.Relationships.Add(
                             new Relationship
-                            {
-                                ReferencedTableName = foreignKey.TableName,
-                                ColumnName = referencedForeignColumnString,
-                                ReferencedColumnName = foreignKey.Columns[0],
-                                DependencyRelationShip = RelationshipType.ForeignKeyChild,
-                                RelationshipName = foreignKey.Name,
-                                SchemaName = foreignKey.SchemaOwner,
-                                Multiplicity = multiplicityResult.Multiplicity,
-                                ReferencedMultiplicity = multiplicityResult.ReferencedMultiplicity
-                            });
+                                {
+                                    ReferencedTableName = foreignKey.TableName,
+                                    ColumnName = referencedForeignColumnString,
+                                    ReferencedColumnName = foreignKey.Columns[0],
+                                    DependencyRelationShip = RelationshipType.ForeignKeyChild,
+                                    RelationshipName = foreignKey.Name,
+                                    SchemaName = foreignKey.SchemaOwner,
+                                    Multiplicity = multiplicityResult.Multiplicity,
+                                    ReferencedMultiplicity = multiplicityResult.ReferencedMultiplicity
+                                });
                     }
                 }
             }
@@ -639,16 +633,16 @@ namespace DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.AdoSources
 
                     newTable.Relationships.Add(
                         new Relationship
-                        {
-                            ReferencedTableName = referencedTable.Name,
-                            ColumnName = foreignKey.Columns[0],
-                            ReferencedColumnName = referencedForeignColumnName,
-                            DependencyRelationShip = RelationshipType.ForeignKey,
-                            RelationshipName = foreignKey.Name,
-                            SchemaName = foreignKey.SchemaOwner,
-                            Multiplicity = multiplicityResult.Multiplicity,
-                            ReferencedMultiplicity = multiplicityResult.ReferencedMultiplicity
-                        });
+                            {
+                                ReferencedTableName = referencedTable.Name,
+                                ColumnName = foreignKey.Columns[0],
+                                ReferencedColumnName = referencedForeignColumnName,
+                                DependencyRelationShip = RelationshipType.ForeignKey,
+                                RelationshipName = foreignKey.Name,
+                                SchemaName = foreignKey.SchemaOwner,
+                                Multiplicity = multiplicityResult.Multiplicity,
+                                ReferencedMultiplicity = multiplicityResult.ReferencedMultiplicity
+                            });
                 }
             }
         }

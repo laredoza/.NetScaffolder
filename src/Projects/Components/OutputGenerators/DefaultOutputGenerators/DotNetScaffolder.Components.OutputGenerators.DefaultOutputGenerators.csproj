@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
     <RootNamespace>DotNetScaffolder.Components.OutputGenerators.DefaultOutputGenerators</RootNamespace>
     <AssemblyName>DotNetScaffolder.Components.OutputGenerators.DefaultOutputGenerators</AssemblyName>
   </PropertyGroup>
@@ -8,5 +9,14 @@
     <ProjectReference Include="../../Common/DotNetScaffolder.Components.Common.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Core\Configuration\DotNetScaffolder.Core.Configuration.csproj" />
+    <ProjectReference Include="..\..\..\Mapping\ApplicationSettings\DotNetScaffolder.Mapping.ApplicationServices.csproj" />
+    <ProjectReference Include="..\..\DataTypes\DefaultDataTypes\DotNetScaffolder.Components.DataTypes.DefaultDataTypes.csproj" />
+
+    <!-- <ProjectReference Include="..\..\SourceTypes\DefaultSourceTypes\DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.csproj" />
+    <ProjectReference Include="..\..\NamingConventions\DefaultNamingConventions\DotNetScaffolder.Components.NamingConventions.DefaultNamingConventions.csproj" />
+    <ProjectReference Include="..\..\CollectionOptions\CollectionOption\DotNetScaffolder.Components.CollectionOption.csproj" />
+    <ProjectReference Include="..\..\LanguageOutput\DefaultLanguageOutput\DotNetScaffolder.Components.LanguageOutputs.DefaultLanguageOutput.csproj" />
+    <ProjectReference Include="..\..\Drivers\DefaultDrivers\DotNetScaffolder.Components.Drivers.DefaultDrivers.csproj" /> -->
   </ItemGroup>
 </Project>
