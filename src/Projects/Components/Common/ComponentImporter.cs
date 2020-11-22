@@ -115,6 +115,7 @@ namespace DotNetScaffolder.Components.Common
         /// <summary>
         /// Gets or sets the data type generators
         /// </summary>
+        [ImportMany]
         public Lazy<IDataTypeGenerator, IDictionary<string, object>>[] DataTypeGenerators { get; set; }
 
         #endregion

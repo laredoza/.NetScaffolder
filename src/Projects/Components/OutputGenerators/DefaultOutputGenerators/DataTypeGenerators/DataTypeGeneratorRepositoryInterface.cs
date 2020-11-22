@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="DataTypeGeneratorInterface.cs" company="DotnetScaffolder">
+// <copyright file="DataTypeGeneratorRepositoryInterface.cs" company="DotnetScaffolder">
 //   MIT
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
@@ -15,15 +15,24 @@ namespace DotNetScaffolder.Components.OutputGenerators.DefaultOutputGenerators
     #endregion
 
     /// <summary>
-    /// The Interface Data Type Generator.
+    /// The Repository Interface Data Type Generator.
     /// </summary>
-    [Export(typeof(IDataTypeGenerator))]
-    [ExportMetadata("NameMetaData", "DataTypeGeneratorInterface")]
-    [ExportMetadata("ValueMetaData", "1BC1B0C4-1E41-9146-82CF-599181CE4460")]
-    public class DataTypeGeneratorInterface : IDataTypeGenerator
+    // [Export(typeof(IDataTypeGenerator))]
+    // [ExportMetadata("NameMetaData", "Handlebars Repository Interface Generator")]
+    // [ExportMetadata("ValueMetaData", "1BC1B0C4-1E41-9146-82CF-599181CE4464")]
+    public class DataTypeGeneratorRepositoryInterface : IDataTypeGenerator
     {
         public void Run(IDataType dataType, DomainDefinition domain)
         {
+            // if(dataType is RepoInterfaceDataType)
+            // {					
+            //     var iRepoGen = new RepoInterfaceGenerator();
+            //     iRepoGen.Models = domain.Tables;
+            //     iRepoGen.DataType = dataType as RepoInterfaceDataType;
+            //     iRepoGen.DtoInterfaceType = dataTypes.FirstOrDefault(o => o is DtoInterfaceDataType) as DtoInterfaceDataType;
+            //     iRepoGen.Run();
+            // }
+
             throw new System.NotImplementedException();
         }
 

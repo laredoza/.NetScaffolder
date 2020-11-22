@@ -20,7 +20,6 @@ namespace DotNetScaffolder.Components.OutputGenerators.DefaultOutputGenerators
     public abstract class BaseOutputGenerator : IOutputGenerator
     {
         public virtual void Generate(string packagePath, string modelFilePath) {
-            ScaffoldConfig.Load(packagePath);
             FilePersistenceOptions options = new FilePersistenceOptions { Path = modelFilePath };
             var applicationService =
                 new ProjectDefinitionApplicationServiceFile { FilePersistenceOptions = options };
