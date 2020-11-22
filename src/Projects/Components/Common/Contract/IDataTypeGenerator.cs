@@ -14,7 +14,7 @@ namespace DotNetScaffolder.Components.Common.Contract
     /// </summary>
     public interface IDataTypeGenerator
     {
-        void Run(IDataType dataType, DomainDefinition domain);
+        void Run(IDataType dataType, DomainDefinition domain, List<IDataType> dataTypes, string modelFilePath);
         bool UsedForDataType(IDataType dataType);
     }
 }

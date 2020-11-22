@@ -63,10 +63,10 @@ namespace DotNetScaffolder.Components.OutputGenerators.DefaultOutputGenerators
                     }
                 }
 			
-                ExecuteGenerators(dataTypes, domain);
+                ExecuteGenerators(dataTypes, domain, modelFilePath);
             }
 
         }
-        protected abstract void ExecuteGenerators(List<IDataType> dataTypes, DomainDefinition domain);
+        protected abstract void ExecuteGenerators(List<IDataType> dataTypes, DomainDefinition domain, string modelFilePath);
     }
 }

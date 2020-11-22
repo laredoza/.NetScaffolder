@@ -6,17 +6,12 @@
     <AssemblyName>DotNetScaffolder.Components.OutputGenerators.DefaultOutputGenerators</AssemblyName>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="../../Common/DotNetScaffolder.Components.Common.csproj" />
+    <PackageReference Include="Handlebars.Net" Version="1.11.5" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="../../Common/DotNetScaffolder.Components.Common.csproj" />
     <ProjectReference Include="..\..\..\Core\Configuration\DotNetScaffolder.Core.Configuration.csproj" />
     <ProjectReference Include="..\..\..\Mapping\ApplicationSettings\DotNetScaffolder.Mapping.ApplicationServices.csproj" />
     <ProjectReference Include="..\..\DataTypes\DefaultDataTypes\DotNetScaffolder.Components.DataTypes.DefaultDataTypes.csproj" />
-
-    <!-- <ProjectReference Include="..\..\SourceTypes\DefaultSourceTypes\DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.csproj" />
-    <ProjectReference Include="..\..\NamingConventions\DefaultNamingConventions\DotNetScaffolder.Components.NamingConventions.DefaultNamingConventions.csproj" />
-    <ProjectReference Include="..\..\CollectionOptions\CollectionOption\DotNetScaffolder.Components.CollectionOption.csproj" />
-    <ProjectReference Include="..\..\LanguageOutput\DefaultLanguageOutput\DotNetScaffolder.Components.LanguageOutputs.DefaultLanguageOutput.csproj" />
-    <ProjectReference Include="..\..\Drivers\DefaultDrivers\DotNetScaffolder.Components.Drivers.DefaultDrivers.csproj" /> -->
   </ItemGroup>
 </Project>

@@ -1,0 +1,29 @@
+{{add_copyright}}
+
+
+// *******************************************************************
+//	GENERATED CODE. DOT NOT MODIFY MANUALLY AS CHANGES CAN BE LOST!!!
+//	USE A PARTIAL CLASS INSTEAD
+// *******************************************************************
+
+using System;
+using System.Collections.Generic;
+{{#each DataType.AdditionalNamespaces}}
+using {{this}};
+{{/each}}
+{{#if DataType.UseInterface}}
+using {{ DtoInterfaceNamespace }};
+{{/if}}
+namespace {{ DataType.FullNamespace }}
+{
+	public partial class {{ DataType.EntityName }} {{ DataType.TransformInheritFrom }}
+	{
+ {{#if (or DataType.UseInterface DataType.AddInjectConstructor)}}
+		#region CTOR
+		
+		
+		
+		#endregion
+{{/if}}
+    }
+}

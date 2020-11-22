@@ -4,6 +4,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using DotNetScaffolder.Components.Common.Contract;
 using DotNetScaffolder.Components.DataTypes.DefaultDataTypes.DtoInterfaceDataTypes;
@@ -22,7 +23,7 @@ namespace DotNetScaffolder.Components.OutputGenerators.DefaultOutputGenerators
     // [ExportMetadata("ValueMetaData", "1BC1B0C4-1E41-9146-82CF-599181CE4468")]
     public class DataTypeGeneratorStructureMap : IDataTypeGenerator
     {
-        public void Run(IDataType dataType, DomainDefinition domain)
+        public void Run(IDataType dataType, DomainDefinition domain, List<IDataType> dataTypes, string modelFilePath)
         {
             // if(dataType is StructureMapDataType)
             // {

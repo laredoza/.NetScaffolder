@@ -24,7 +24,7 @@ namespace DotNetScaffolder.Components.OutputGenerators.DefaultOutputGenerators
     [ExportMetadata("ValueMetaData", "1BC1B0C4-1E41-9146-82CF-599181CE4410")]
     public class T4OutputGenerator : BaseOutputGenerator
     {
-        protected override void ExecuteGenerators(List<IDataType> dataTypes, DomainDefinition domain)
+        protected override void ExecuteGenerators(List<IDataType> dataTypes, DomainDefinition domain, string modelFile)
         {
             throw new NotImplementedException();
         }
