@@ -24,7 +24,14 @@ namespace DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity
 {
 	public partial class BankAccount : IBankAccount
 	{
+		#region CTOR
+		public BankAccount()
+		{
 
-
+		}
+		
+		
+		
+		#endregion
     }
 }

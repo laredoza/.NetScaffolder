@@ -18,12 +18,18 @@ namespace {{ DataType.FullNamespace }}
 {
 	public partial class {{ DataType.EntityName }} {{ DataType.TransformInheritFrom }}
 	{
- {{#if (or DataType.UseInterface DataType.AddInjectConstructor)}}
+{{#BooleanAnd DataType.UseInterface DataType.AddInjectConstructor}}
 		#region CTOR
+		public {{ DataType.EntityName }}()
+		{
+			{{#each DataType.MetaData.DistinctChildRelationships.DistinctChildRelationships.Where( o => o.ReferencedMultiplicity == RelationshipMultiplicity.Many ) }}
+			{{this.ReferencedTableName}}
+            {{/each}}
+		}
 		
 		
 		
 		#endregion
-{{/if}}
+{{/BooleanAnd}}
     }
 }

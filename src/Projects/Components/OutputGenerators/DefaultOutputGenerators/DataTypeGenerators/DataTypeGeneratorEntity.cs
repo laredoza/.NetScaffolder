@@ -14,6 +14,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.IO;
 using System;
+using DotNetScaffolder.Mapping.MetaData.Enum;
+using System.Linq;
 
 namespace DotNetScaffolder.Components.OutputGenerators.DefaultOutputGenerators
 {
@@ -31,6 +33,8 @@ namespace DotNetScaffolder.Components.OutputGenerators.DefaultOutputGenerators
         public void Run(IDataType dataType, DomainDefinition domain, List<IDataType> dataTypes, string modelFilePath)
         {
             var template = this.RegisterTemplate(this.ReturnRepositoryDirectoryPath(modelFilePath));
+            var a = RelationshipMultiplicity.Many;
+            
 
 
             // if(dataType is EntityDataType)
@@ -66,6 +70,8 @@ namespace DotNetScaffolder.Components.OutputGenerators.DefaultOutputGenerators
                     DtoInterfaceType = dtoInterfaceType,
                     DtoInterfaceNamespace = dtoInterfaceType.FullNamespace
                 };
+
+                var ab = entityDataType.MetaData.DistinctChildRelationships.Where(o => o.ReferencedMultiplicity == RelationshipMultiplicity.Many);
 
                 var fileContent = template(data);
                 var outputPath = data.DataType.OutputPath.Replace(@"\","/"); 
