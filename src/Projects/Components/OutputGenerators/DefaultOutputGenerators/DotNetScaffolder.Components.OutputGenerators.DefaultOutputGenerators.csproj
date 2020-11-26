@@ -14,5 +14,6 @@
     <ProjectReference Include="..\..\DataTypes\DefaultDataTypes\DotNetScaffolder.Components.DataTypes.DefaultDataTypes.csproj" />
     <ProjectReference Include="..\..\..\..\..\Templates\Generated\Dotnet\Domain\Data\ApplicationServices\ApplicationService\DotNetScaffolder.Domain.Data.ApplicationServices.ApplicationService.csproj" />
     <ProjectReference Include="..\..\..\Mapping\ApplicationSettings\DotNetScaffolder.Mapping.ApplicationServices.csproj" />
+    <ProjectReference Include="..\..\Drivers\DefaultDrivers\DotNetScaffolder.Components.Drivers.DefaultDrivers.csproj" />
   </ItemGroup>
 </Project>

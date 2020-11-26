@@ -22,6 +22,36 @@ namespace DotNetScaffolder.Components.OutputGenerators.DefaultOutputGenerators
     /// </summary>
     public class BaseDataTypeGenerator : IDataTypeGenerator
     {
+        #region Constructors and Destructors
+        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BaseDataTypeGenerator"/> class.
+        /// </summary>
+        public BaseDataTypeGenerator()
+        {
+        }
+        
+        #endregion
+        
+        #region Public Properties
+        
+        
+        #endregion
+        
+        #region Public Methods And Operators
+
+        public virtual void Run(IDataType dataType, DomainDefinition domain, List<IDataType> dataTypes, string modelFilePath)
+        {
+            throw new NotImplementedException();
+        }
+        public virtual bool UsedForDataType(IDataType dataType)
+        {
+            throw new NotImplementedException();
+        } 
+        
+        #endregion
+        
+        #region Other Methods
         protected void PrepareTemplateData(IDataType dataType, DomainDefinition domain)
         {
             foreach (var model in domain.Tables)
@@ -51,14 +81,6 @@ namespace DotNetScaffolder.Components.OutputGenerators.DefaultOutputGenerators
                 }
             }
         }
-        public virtual void Run(IDataType dataType, DomainDefinition domain, List<IDataType> dataTypes, string modelFilePath)
-        {
-            throw new NotImplementedException();
-        }
-        public virtual bool UsedForDataType(IDataType dataType)
-        {
-            throw new NotImplementedException();
-        }
         protected void RenderToFile(string fileContent, string outputPath)
         {
             using (StreamWriter file = new StreamWriter(outputPath))
@@ -76,5 +98,10 @@ namespace DotNetScaffolder.Components.OutputGenerators.DefaultOutputGenerators
             string source = File.ReadAllText($"{modelFilePath}/HandleBars/{templateName}");
             return Handlebars.Compile(source);
         }
+
+        #endregion
+        
+        
+        
     }
 }
