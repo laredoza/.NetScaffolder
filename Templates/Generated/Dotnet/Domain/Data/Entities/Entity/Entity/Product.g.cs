@@ -1,6 +1,5 @@
-﻿
 // <copyright file="Product.g.cs" company="MIT">
-//  Copyright (c) 2019 MIT
+//  Copyright (c) 2020 MIT
 // </copyright>  
 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
@@ -21,28 +20,25 @@
 using System;
 using System.Collections.Generic;
 using DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.Dto;
-
 namespace DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity
 {
-	public partial class Product : IProduct 
+	public partial class Product : IProduct
 	{
 		#region CTOR
-		
+
 		public Product()
 		{
-			this.OrderDetails = new List <OrderDetails>();
+			this.OrderDetails = new List<OrderDetails>(); 
 		}
 		
 		public Product(IProduct item, bool deep = false)
 		{
 			if(item == null) return;
-			
 			this.ProductId = item.ProductId;
 			this.ProductDescription = item.ProductDescription;
 			this.UnitPrice = item.UnitPrice;
 			this.AmountInStock = item.AmountInStock;
-			this.OrderDetails = new List <OrderDetails>();
-
+			this.OrderDetails = new List<OrderDetails>(); 
 			if(deep)
 			{
 				if(item.OrderDetails != null)
@@ -58,21 +54,19 @@ namespace DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity
 		}
 		
 		#endregion
-		
 		#region Fields
 		
 		public virtual int ProductId { get; set; }
 		public virtual string ProductDescription { get; set; }
-		public virtual Nullable<decimal> UnitPrice { get; set; }
-		public virtual Nullable<short> AmountInStock { get; set; }
+		public virtual decimal? UnitPrice { get; set; }
+		public virtual short? AmountInStock { get; set; }
 
 		#endregion
 
-		#region Child Relationships
-        
-        public virtual IList<OrderDetails> OrderDetails { get; set; }
-	
-        IList<IOrderDetails> IProduct.OrderDetails 
+        #region Child Relationships
+
+        public virtual IListOrderDetails OrderDetails { get; set; }
+        IListIOrderDetails IProduct.OrderDetails
 		{ 
 			get
 			{
@@ -93,7 +87,7 @@ namespace DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity
 				}
 			}			
 		}
-        
+
         public virtual Book Book { get; set; }
 		IBook IProduct.Book 
 		{ 
@@ -116,7 +110,6 @@ namespace DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity
 				}
 			}
 		}
-        
         public virtual Software Software { get; set; }
 		ISoftware IProduct.Software 
 		{ 
@@ -141,5 +134,5 @@ namespace DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity
 		}
 
 		#endregion
-	}
+    }
 }

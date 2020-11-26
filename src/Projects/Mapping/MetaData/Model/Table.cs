@@ -139,7 +139,7 @@ namespace DotNetScaffolder.Mapping.MetaData.Model
         }
 
         /// <summary>
-        ///     Gets the distinct child relationships.
+        ///     Gets the distinct child relationships with many many multiplicity.
         /// </summary>
         [XmlIgnore]
         public List<Relationship> DistinctChildRelationshipsWithManyManyMultiplicity
@@ -154,6 +154,24 @@ namespace DotNetScaffolder.Mapping.MetaData.Model
                 return null;
             }
         }
+
+        /// <summary>
+        ///     Gets the distinct child relationships without many multiplicity.
+        /// </summary>
+        [XmlIgnore]
+        public List<Relationship> DistinctChildRelationshipsWithoutManyMultiplicity
+        {
+            get
+            {
+                if (this.DistinctChildRelationships != null)
+                {
+                    return DistinctChildRelationships.Where(o => o.ReferencedMultiplicity != RelationshipMultiplicity.Many).ToList();
+                }
+
+                return null;
+            }
+        }
+
         /// <summary>
         ///     Gets the distinct child relationships.
         /// </summary>

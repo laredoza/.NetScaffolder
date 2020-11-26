@@ -1,6 +1,5 @@
-﻿
 // <copyright file="OrderDetails.g.cs" company="MIT">
-//  Copyright (c) 2019 MIT
+//  Copyright (c) 2020 MIT
 // </copyright>  
 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
@@ -21,13 +20,12 @@
 using System;
 using System.Collections.Generic;
 using DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.Dto;
-
 namespace DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity
 {
-	public partial class OrderDetails : IOrderDetails 
+	public partial class OrderDetails : IOrderDetails
 	{
 		#region CTOR
-		
+
 		public OrderDetails()
 		{
 		}
@@ -35,14 +33,12 @@ namespace DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity
 		public OrderDetails(IOrderDetails item, bool deep = false)
 		{
 			if(item == null) return;
-			
 			this.OrderDetailsId = item.OrderDetailsId;
 			this.OrderId = item.OrderId;
 			this.ProductId = item.ProductId;
 			this.UnitPrice = item.UnitPrice;
 			this.Amount = item.Amount;
 			this.Discount = item.Discount;
-
 			if(deep)
 			{
 				if(item.Order != null)
@@ -57,15 +53,14 @@ namespace DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity
 		}
 		
 		#endregion
-		
 		#region Fields
 		
 		public virtual int OrderDetailsId { get; set; }
 		public virtual int OrderId { get; set; }
 		public virtual int ProductId { get; set; }
-		public virtual Nullable<decimal> UnitPrice { get; set; }
-		public virtual Nullable<short> Amount { get; set; }
-		public virtual Nullable<float> Discount { get; set; }
+		public virtual decimal? UnitPrice { get; set; }
+		public virtual short? Amount { get; set; }
+		public virtual float? Discount { get; set; }
 
 		#endregion
 
@@ -118,5 +113,5 @@ namespace DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity
 		}
 		
 		#endregion
-	}
+    }
 }

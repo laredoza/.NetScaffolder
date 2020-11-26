@@ -1,6 +1,5 @@
-﻿
 // <copyright file="Book.g.cs" company="MIT">
-//  Copyright (c) 2019 MIT
+//  Copyright (c) 2020 MIT
 // </copyright>  
 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
@@ -21,13 +20,12 @@
 using System;
 using System.Collections.Generic;
 using DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.Dto;
-
 namespace DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity
 {
-	public partial class Book : IBook 
+	public partial class Book : IBook
 	{
 		#region CTOR
-		
+
 		public Book()
 		{
 		}
@@ -35,10 +33,8 @@ namespace DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity
 		public Book(IBook item, bool deep = false)
 		{
 			if(item == null) return;
-			
 			this.ProductId = item.ProductId;
 			this.Publisher = item.Publisher;
-
 			if(deep)
 			{
 				if(item.Product != null)
@@ -49,7 +45,6 @@ namespace DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity
 		}
 		
 		#endregion
-		
 		#region Fields
 		
 		public virtual int ProductId { get; set; }
@@ -83,5 +78,5 @@ namespace DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity
 		}
 		
 		#endregion
-	}
+    }
 }

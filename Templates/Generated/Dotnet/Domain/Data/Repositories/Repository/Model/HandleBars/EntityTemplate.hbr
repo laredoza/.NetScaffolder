@@ -31,16 +31,12 @@ namespace {{ DataType.FullNamespace }}
 		public {{ DataType.EntityName }}(I{{ DataType.EntityName }} item, bool deep = false)
 		{
 			if(item == null) return;
-
 			{{#each DataType.MetaData.Columns}}
 			this.{{ this.ColumnNameWithNamingConvention }} = item.{{ this.ColumnNameWithNamingConvention }};
 			{{/each}}
-
 			{{#each DataType.MetaData.DistinctChildRelationshipsWithManyManyMultiplicity}}
 			this.{{ this.ChildRelationshipNameWithNamingConvention }} = new {{ ../DataType.CollectionOption.ClassName }}<{{ this.ChildReferencedTableNameWithNamingConvention }}>(); 
             {{/each}}
-
-
 			if(deep)
 			{
 				{{#each DataType.MetaData.DistinctChildRelationshipsWithManyManyMultiplicity}}
@@ -52,13 +48,11 @@ namespace {{ DataType.FullNamespace }}
 					}
 				}
 				{{/each}}
-
-				{{#each DataType.MetaData.DistinctChildRelationshipsWithManyManyMultiplicity}}
+				{{#each DataType.MetaData.DistinctChildRelationshipsWithoutManyMultiplicity }}
 				this.{{ this.ChildRelationshipNameWithNamingConvention }} = new {{ this.ChildReferencedTableNameWithNamingConvention }}(item.{{ this.ChildReferencedTableNameWithNamingConvention }}, deep);
 				{{/each}}
-
 				{{#each DataType.MetaData.DistinctParentRelationships }}
-				if(item.{{ this.ParentRelationshipNameWithNamingConvention }}!= null)
+				if(item.{{ this.ParentRelationshipNameWithNamingConvention }} != null)
                 {
                     this.{{ this.ParentRelationshipNameWithNamingConvention }} = new {{ this.ParentReferencedTableNameWithNamingConvention }}(item.{{ this.ParentRelationshipNameWithNamingConvention }}, deep);
                 }
@@ -102,6 +96,33 @@ namespace {{ DataType.FullNamespace }}
 					}
 				}
 			}			
+		}
+		{{/if}}
+		{{/each}}
+
+		{{#each DataType.MetaData.DistinctChildRelationshipsWithoutManyMultiplicity }}
+        public virtual {{ this.ChildRelationshipNameWithNamingConvention }} {{ this.ChildReferencedTableNameWithNamingConvention }} { get; set; }
+		{{#if ../DataType.UseInterface }}
+		I{{ this.ChildReferencedTableNameWithNamingConvention }} I{{ ../DataType.EntityName }}.{{ this.ChildReferencedTableNameWithNamingConvention }} 
+		{ 
+			get
+			{
+				return this.{{ this.ChildReferencedTableNameWithNamingConvention }};
+			}
+			set
+			{
+				if(value != this.{{ this.ChildReferencedTableNameWithNamingConvention }})
+				{
+					if(value != null)
+					{
+						this.{{ this.ChildReferencedTableNameWithNamingConvention }} = ({{ this.ChildReferencedTableNameWithNamingConvention }})value;
+					}
+					else
+					{
+						this.{{ this.ChildReferencedTableNameWithNamingConvention }} = null;
+					}
+				}
+			}
 		}
 		{{/if}}
 		{{/each}}

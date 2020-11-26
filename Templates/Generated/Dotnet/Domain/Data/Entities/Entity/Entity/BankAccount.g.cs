@@ -1,6 +1,5 @@
-﻿
 // <copyright file="BankAccount.g.cs" company="MIT">
-//  Copyright (c) 2019 MIT
+//  Copyright (c) 2020 MIT
 // </copyright>  
 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
@@ -21,29 +20,26 @@
 using System;
 using System.Collections.Generic;
 using DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.Dto;
-
 namespace DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity
 {
-	public partial class BankAccount : IBankAccount 
+	public partial class BankAccount : IBankAccount
 	{
 		#region CTOR
-		
+
 		public BankAccount()
 		{
-			this.BankTransfers = new List <BankTransfers>();
+			this.BankTransfers = new List<BankTransfers>(); 
 		}
 		
 		public BankAccount(IBankAccount item, bool deep = false)
 		{
 			if(item == null) return;
-			
 			this.BankAccountId = item.BankAccountId;
 			this.BankAccountNumber = item.BankAccountNumber;
 			this.Balance = item.Balance;
 			this.CustomerId = item.CustomerId;
 			this.Locked = item.Locked;
-			this.BankTransfers = new List <BankTransfers>();
-
+			this.BankTransfers = new List<BankTransfers>(); 
 			if(deep)
 			{
 				if(item.BankTransfers != null)
@@ -61,22 +57,20 @@ namespace DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity
 		}
 		
 		#endregion
-		
 		#region Fields
 		
 		public virtual int BankAccountId { get; set; }
 		public virtual string BankAccountNumber { get; set; }
 		public virtual decimal Balance { get; set; }
-		public virtual Nullable<int> CustomerId { get; set; }
+		public virtual int? CustomerId { get; set; }
 		public virtual bool Locked { get; set; }
 
 		#endregion
 
-		#region Child Relationships
-        
-        public virtual IList<BankTransfers> BankTransfers { get; set; }
-	
-        IList<IBankTransfers> IBankAccount.BankTransfers 
+        #region Child Relationships
+
+        public virtual IListBankTransfers BankTransfers { get; set; }
+        IListIBankTransfers IBankAccount.BankTransfers
 		{ 
 			get
 			{
@@ -98,8 +92,8 @@ namespace DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity
 			}			
 		}
 
-		#endregion
 
+		#endregion
 		#region Parent Relationships
 
         public virtual Customer Customer { get; set; }
@@ -126,5 +120,5 @@ namespace DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity
 		}
 		
 		#endregion
-	}
+    }
 }

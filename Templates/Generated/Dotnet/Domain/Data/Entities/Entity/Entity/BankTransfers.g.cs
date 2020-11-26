@@ -1,6 +1,5 @@
-﻿
 // <copyright file="BankTransfers.g.cs" company="MIT">
-//  Copyright (c) 2019 MIT
+//  Copyright (c) 2020 MIT
 // </copyright>  
 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
@@ -21,13 +20,12 @@
 using System;
 using System.Collections.Generic;
 using DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.Dto;
-
 namespace DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity
 {
-	public partial class BankTransfers : IBankTransfers 
+	public partial class BankTransfers : IBankTransfers
 	{
 		#region CTOR
-		
+
 		public BankTransfers()
 		{
 		}
@@ -35,13 +33,11 @@ namespace DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity
 		public BankTransfers(IBankTransfers item, bool deep = false)
 		{
 			if(item == null) return;
-			
 			this.BankTransferId = item.BankTransferId;
 			this.FromBankAccountId = item.FromBankAccountId;
 			this.ToBankAccountId = item.ToBankAccountId;
 			this.Amount = item.Amount;
 			this.TransferDate = item.TransferDate;
-
 			if(deep)
 			{
 				if(item.BankAccount != null)
@@ -52,7 +48,6 @@ namespace DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity
 		}
 		
 		#endregion
-		
 		#region Fields
 		
 		public virtual int BankTransferId { get; set; }
@@ -89,5 +84,5 @@ namespace DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity
 		}
 		
 		#endregion
-	}
+    }
 }

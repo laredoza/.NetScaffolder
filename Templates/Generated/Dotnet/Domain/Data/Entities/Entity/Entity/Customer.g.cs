@@ -1,6 +1,5 @@
-﻿
 // <copyright file="Customer.g.cs" company="MIT">
-//  Copyright (c) 2019 MIT
+//  Copyright (c) 2020 MIT
 // </copyright>  
 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
@@ -21,23 +20,21 @@
 using System;
 using System.Collections.Generic;
 using DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.Dto;
-
 namespace DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity
 {
-	public partial class Customer : ICustomer 
+	public partial class Customer : ICustomer
 	{
 		#region CTOR
-		
+
 		public Customer()
 		{
-			this.BankAccount = new List <BankAccount>();
-			this.Order = new List <Order>();
+			this.BankAccount = new List<BankAccount>(); 
+			this.Order = new List<Order>(); 
 		}
 		
 		public Customer(ICustomer item, bool deep = false)
 		{
 			if(item == null) return;
-			
 			this.CustomerId = item.CustomerId;
 			this.CustomerCode = item.CustomerCode;
 			this.CompanyName = item.CompanyName;
@@ -51,9 +48,8 @@ namespace DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity
 			this.CountryId = item.CountryId;
 			this.Photo = item.Photo;
 			this.IsEnabled = item.IsEnabled;
-			this.BankAccount = new List <BankAccount>();
-			this.Order = new List <Order>();
-
+			this.BankAccount = new List<BankAccount>(); 
+			this.Order = new List<Order>(); 
 			if(deep)
 			{
 				if(item.BankAccount != null)
@@ -78,7 +74,6 @@ namespace DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity
 		}
 		
 		#endregion
-		
 		#region Fields
 		
 		public virtual int CustomerId { get; set; }
@@ -91,17 +86,16 @@ namespace DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity
 		public virtual string PostalCode { get; set; }
 		public virtual string Telephone { get; set; }
 		public virtual string Fax { get; set; }
-		public virtual Nullable<int> CountryId { get; set; }
+		public virtual int? CountryId { get; set; }
 		public virtual string Photo { get; set; }
 		public virtual bool IsEnabled { get; set; }
 
 		#endregion
 
-		#region Child Relationships
-        
-        public virtual IList<BankAccount> BankAccount { get; set; }
-	
-        IList<IBankAccount> ICustomer.BankAccount 
+        #region Child Relationships
+
+        public virtual IListBankAccount BankAccount { get; set; }
+        IListIBankAccount ICustomer.BankAccount
 		{ 
 			get
 			{
@@ -122,10 +116,8 @@ namespace DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity
 				}
 			}			
 		}
-        
-        public virtual IList<Order> Order { get; set; }
-	
-        IList<IOrder> ICustomer.Order 
+        public virtual IListOrder Order { get; set; }
+        IListIOrder ICustomer.Order
 		{ 
 			get
 			{
@@ -147,8 +139,8 @@ namespace DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity
 			}			
 		}
 
-		#endregion
 
+		#endregion
 		#region Parent Relationships
 
         public virtual Country Country { get; set; }
@@ -175,5 +167,5 @@ namespace DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity
 		}
 		
 		#endregion
-	}
+    }
 }

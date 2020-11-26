@@ -1,6 +1,5 @@
-﻿
 // <copyright file="Country.g.cs" company="MIT">
-//  Copyright (c) 2019 MIT
+//  Copyright (c) 2020 MIT
 // </copyright>  
 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
@@ -21,26 +20,23 @@
 using System;
 using System.Collections.Generic;
 using DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.Dto;
-
 namespace DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity
 {
-	public partial class Country : ICountry 
+	public partial class Country : ICountry
 	{
 		#region CTOR
-		
+
 		public Country()
 		{
-			this.Customer = new List <Customer>();
+			this.Customer = new List<Customer>(); 
 		}
 		
 		public Country(ICountry item, bool deep = false)
 		{
 			if(item == null) return;
-			
 			this.CountryId = item.CountryId;
 			this.CountryName = item.CountryName;
-			this.Customer = new List <Customer>();
-
+			this.Customer = new List<Customer>(); 
 			if(deep)
 			{
 				if(item.Customer != null)
@@ -54,7 +50,6 @@ namespace DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity
 		}
 		
 		#endregion
-		
 		#region Fields
 		
 		public virtual int CountryId { get; set; }
@@ -62,11 +57,10 @@ namespace DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity
 
 		#endregion
 
-		#region Child Relationships
-        
-        public virtual IList<Customer> Customer { get; set; }
-	
-        IList<ICustomer> ICountry.Customer 
+        #region Child Relationships
+
+        public virtual IListCustomer Customer { get; set; }
+        IListICustomer ICountry.Customer
 		{ 
 			get
 			{
@@ -88,6 +82,7 @@ namespace DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity
 			}			
 		}
 
+
 		#endregion
-	}
+    }
 }

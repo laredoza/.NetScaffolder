@@ -1,6 +1,5 @@
-﻿
 // <copyright file="Order.g.cs" company="MIT">
-//  Copyright (c) 2019 MIT
+//  Copyright (c) 2020 MIT
 // </copyright>  
 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
@@ -21,22 +20,20 @@
 using System;
 using System.Collections.Generic;
 using DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.Dto;
-
 namespace DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity
 {
-	public partial class Order : IOrder 
+	public partial class Order : IOrder
 	{
 		#region CTOR
-		
+
 		public Order()
 		{
-			this.OrderDetails = new List <OrderDetails>();
+			this.OrderDetails = new List<OrderDetails>(); 
 		}
 		
 		public Order(IOrder item, bool deep = false)
 		{
 			if(item == null) return;
-			
 			this.OrderId = item.OrderId;
 			this.CustomerId = item.CustomerId;
 			this.OrderDate = item.OrderDate;
@@ -45,8 +42,7 @@ namespace DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity
 			this.ShippingAddress = item.ShippingAddress;
 			this.ShippingCity = item.ShippingCity;
 			this.ShippingZip = item.ShippingZip;
-			this.OrderDetails = new List <OrderDetails>();
-
+			this.OrderDetails = new List<OrderDetails>(); 
 			if(deep)
 			{
 				if(item.OrderDetails != null)
@@ -64,13 +60,12 @@ namespace DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity
 		}
 		
 		#endregion
-		
 		#region Fields
 		
 		public virtual int OrderId { get; set; }
-		public virtual Nullable<int> CustomerId { get; set; }
-		public virtual Nullable<DateTime> OrderDate { get; set; }
-		public virtual Nullable<DateTime> DeliveryDate { get; set; }
+		public virtual int? CustomerId { get; set; }
+		public virtual DateTime? OrderDate { get; set; }
+		public virtual DateTime? DeliveryDate { get; set; }
 		public virtual string ShippingName { get; set; }
 		public virtual string ShippingAddress { get; set; }
 		public virtual string ShippingCity { get; set; }
@@ -78,11 +73,10 @@ namespace DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity
 
 		#endregion
 
-		#region Child Relationships
-        
-        public virtual IList<OrderDetails> OrderDetails { get; set; }
-	
-        IList<IOrderDetails> IOrder.OrderDetails 
+        #region Child Relationships
+
+        public virtual IListOrderDetails OrderDetails { get; set; }
+        IListIOrderDetails IOrder.OrderDetails
 		{ 
 			get
 			{
@@ -104,8 +98,8 @@ namespace DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity
 			}			
 		}
 
-		#endregion
 
+		#endregion
 		#region Parent Relationships
 
         public virtual Customer Customer { get; set; }
@@ -132,5 +126,5 @@ namespace DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity
 		}
 		
 		#endregion
-	}
+    }
 }
