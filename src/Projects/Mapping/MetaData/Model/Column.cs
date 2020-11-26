@@ -42,7 +42,13 @@ namespace DotNetScaffolder.Mapping.MetaData.Model
         /// </summary>
         [XmlAttribute("ColumnName")]
         public string ColumnName { get; set; }
-
+        /// <summary>
+        ///     Gets or sets the column name with convention.
+        /// </summary>
+        [XmlIgnore]
+        public string ColumnNameWithNamingConvention { get; set; }
+        [XmlIgnore]
+        public string ColumnMappedToOutput { get; set; }
         /// <summary>
         ///     Gets the column name with key indicator.
         /// </summary>
@@ -201,6 +207,12 @@ namespace DotNetScaffolder.Mapping.MetaData.Model
         /// </summary>
         [XmlAttribute("IdentityIncrement")]
         public long IdentityIncrement { get; set; }
+
+        /// <summary>
+        ///     Gets or sets if this is the first primary column key.
+        /// </summary>
+        [XmlIgnore]
+        public bool IsFirstPrimaryKeyColumn { get; set; }
 
         #endregion
 

@@ -5,8 +5,8 @@
     <AssemblyName>DotNetScaffolder.Components.CollectionOption</AssemblyName>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="../../Common/DotNetScaffolder.Components.Common.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Common\DotNetScaffolder.Components.Common.csproj" />
   </ItemGroup>
 </Project>

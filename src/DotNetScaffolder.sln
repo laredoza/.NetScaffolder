@@ -55,6 +55,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SourceTypes", "SourceTypes"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes", "Projects\Components\SourceTypes\DefaultSourceTypes\DotNetScaffolder.Components.SourceTypes.DefaultSourceTypes.csproj", "{48A6D507-FE33-46C5-A634-26546A9878D9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetScaffolder.Components.Formatting", "Projects\Components\Formatting\DotNetScaffolder.Components.Formatting.csproj", "{2188B6A9-8590-45FC-94A0-DDB199FF2B90}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -236,6 +238,18 @@ Global
 		{48A6D507-FE33-46C5-A634-26546A9878D9}.Release|x64.Build.0 = Release|Any CPU
 		{48A6D507-FE33-46C5-A634-26546A9878D9}.Release|x86.ActiveCfg = Release|Any CPU
 		{48A6D507-FE33-46C5-A634-26546A9878D9}.Release|x86.Build.0 = Release|Any CPU
+		{2188B6A9-8590-45FC-94A0-DDB199FF2B90}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2188B6A9-8590-45FC-94A0-DDB199FF2B90}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2188B6A9-8590-45FC-94A0-DDB199FF2B90}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{2188B6A9-8590-45FC-94A0-DDB199FF2B90}.Debug|x64.Build.0 = Debug|Any CPU
+		{2188B6A9-8590-45FC-94A0-DDB199FF2B90}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{2188B6A9-8590-45FC-94A0-DDB199FF2B90}.Debug|x86.Build.0 = Debug|Any CPU
+		{2188B6A9-8590-45FC-94A0-DDB199FF2B90}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2188B6A9-8590-45FC-94A0-DDB199FF2B90}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2188B6A9-8590-45FC-94A0-DDB199FF2B90}.Release|x64.ActiveCfg = Release|Any CPU
+		{2188B6A9-8590-45FC-94A0-DDB199FF2B90}.Release|x64.Build.0 = Release|Any CPU
+		{2188B6A9-8590-45FC-94A0-DDB199FF2B90}.Release|x86.ActiveCfg = Release|Any CPU
+		{2188B6A9-8590-45FC-94A0-DDB199FF2B90}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{4F541C7C-5A34-40A5-A0C5-1BC9CE759E5F} = {7A1E6F33-78A6-4C60-89C6-BDD2F984ECFE}
@@ -263,5 +277,6 @@ Global
 		{122273B7-EBEE-4932-8108-9D2EBC6C0DF1} = {46192E6E-4C5B-4473-84B1-D49C42963771}
 		{3348D3E4-290F-41B1-9015-4061CB73E34D} = {9BCFC265-05E1-4D0F-ADE7-C011A78864D7}
 		{48A6D507-FE33-46C5-A634-26546A9878D9} = {3348D3E4-290F-41B1-9015-4061CB73E34D}
+		{2188B6A9-8590-45FC-94A0-DDB199FF2B90} = {9BCFC265-05E1-4D0F-ADE7-C011A78864D7}
 	EndGlobalSection
 EndGlobal

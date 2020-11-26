@@ -34,7 +34,7 @@ namespace DotNetScaffolder.Components.Common
 
         public static string MapToOutput(Column col, bool nullable = true)
         {
-            var nullableFormat = "Nullable<{0}>";
+            var nullableFormat = "{0}?";
             
             if (!nullable) nullableFormat = "{0}";
 

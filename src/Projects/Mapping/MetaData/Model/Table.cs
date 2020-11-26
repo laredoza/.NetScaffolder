@@ -138,6 +138,80 @@ namespace DotNetScaffolder.Mapping.MetaData.Model
             }
         }
 
+        /// <summary>
+        ///     Gets the distinct child relationships.
+        /// </summary>
+        [XmlIgnore]
+        public List<Relationship> DistinctChildRelationshipsWithManyManyMultiplicity
+        {
+            get
+            {
+                if (this.DistinctChildRelationships != null)
+                {
+                    return DistinctChildRelationships.Where(o => o.ReferencedMultiplicity == RelationshipMultiplicity.Many).ToList();
+                }
+
+                return null;
+            }
+        }
+        /// <summary>
+        ///     Gets the distinct child relationships.
+        /// </summary>
+        [XmlIgnore]
+        public bool HasChildRelationshipsWithManyMultiplicity
+        {
+            get
+            {
+                bool result = false;
+                if (this.DistinctChildRelationships != null)
+                {
+                    result = DistinctChildRelationships.Where(o => o.ReferencedMultiplicity == RelationshipMultiplicity.Many).ToList().Count > 0;
+                }
+
+                return result;
+            }
+        }
+        /// <summary>
+        ///     Gets the distinct parent relationships.
+        /// </summary>
+        [XmlIgnore]
+        public bool HasDistinctParentRelationships
+        {
+            get
+            {
+                bool result = false;
+                if (this.DistinctParentRelationships != null)
+                {
+                    result = DistinctParentRelationships.Count > 0;
+                }
+
+                return result;
+            }
+        }
+        /// <summary>
+        ///     Gets the primary key columns.
+        /// </summary>
+        [XmlIgnore]
+        public List<Column> PrimaryKeyColumns
+        {
+            get
+            {
+                return this.Columns.Where(o=> o.IsPrimaryKey).ToList();
+            }
+        }
+        [XmlIgnore]
+        public bool HasPrimaryColumns
+        {
+            get
+            {
+                bool result = false;
+                if (this.PrimaryKeyColumns != null)
+                {
+                    result = PrimaryKeyColumns.Count > 0;
+                }
+                return result;
+            }
+        }
         [XmlIgnore]
         public List<Relationship> DistinctParentRelationships
         {

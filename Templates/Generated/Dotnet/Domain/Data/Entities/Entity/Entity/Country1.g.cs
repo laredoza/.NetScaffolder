@@ -1,4 +1,4 @@
-// <copyright file="BankAccount.g.cs" company="MIT">
+// <copyright file="Country.g.cs" company="MIT">
 //  Copyright (c) 2020 MIT
 // </copyright>  
 
@@ -22,92 +22,56 @@ using System.Collections.Generic;
 using DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity;
 namespace DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity
 {
-	public partial class BankAccount : IBankAccount
+	public partial class Country : ICountry
 	{
 		#region CTOR
 
-		public BankAccount()
+		public Country()
 		{
-			this.BankTransfers = new List<BankTransfers>(); 
+			this.Customer = new List<Customer>(); 
 		}
 		
-		public BankAccount(IBankAccount item, bool deep = false)
+		public Country(ICountry item, bool deep = false)
 		{
 			if(item == null) return;
 
-			this.BankAccountId = item.BankAccountId;
-			this.BankAccountNumber = item.BankAccountNumber;
-			this.Balance = item.Balance;
-			this.CustomerId = item.CustomerId;
-			this.Locked = item.Locked;
+			this.CountryId = item.CountryId;
+			this.CountryName = item.CountryName;
 
-			this.BankTransfers = new List<BankTransfers>(); 
+			this.Customer = new List<Customer>(); 
 
 
 			if(deep)
 			{
-				if(item.BankTransfers != null)
+				if(item.Customer != null)
 				{
-					foreach(var childItem in item.BankTransfers)
+					foreach(var childItem in item.Customer)
 					{
-						this.BankTransfers.Add(new BankTransfers(childItem, deep));
+						this.Customer.Add(new Customer(childItem, deep));
 					}
 				}
 
-				this.BankTransfers = new BankTransfers(item.BankTransfers, deep);
+				this.Customer = new Customer(item.Customer, deep);
 
-				if(item.Customer!= null)
-                {
-                    this.Customer = new Customer(item.Customer, deep);
-                }
 			}
 		}
 		
 		#endregion
 		#region Fields
 		
-		public virtual int BankAccountId { get; set; }
-		public virtual string BankAccountNumber { get; set; }
-		public virtual decimal Balance { get; set; }
-		public virtual int? CustomerId { get; set; }
-		public virtual bool Locked { get; set; }
+		public virtual int CountryId { get; set; }
+		public virtual string CountryName { get; set; }
 
 		#endregion
 
         #region Child Relationships
 
-        public virtual IListBankTransfers BankTransfers { get; set; }
-        IListIBankTransfers IBankAccount.BankTransfers
+        public virtual IListCustomer Customer { get; set; }
+        IListICustomer ICountry.Customer
 		{ 
 			get
 			{
-				return this.BankTransfers == null ? null : this.BankTransfers as IList<IBankTransfers>;
-			}
-			set
-			{
-				if(value != this.BankTransfers)
-				{
-					if(value != null)
-					{
-						this.BankTransfers = (IList<BankTransfers>)value;
-					}
-					else
-					{
-						this.BankTransfers = null;
-					}
-				}
-			}			
-		}
-
-		#endregion
-		#region Parent Relationships
-
-        public virtual Customer Customer { get; set; }
-		ICustomer IBankAccount.Customer 
-		{ 
-			get
-			{
-				return this.Customer;
+				return this.Customer == null ? null : this.Customer as IList<ICustomer>;
 			}
 			set
 			{
@@ -115,16 +79,16 @@ namespace DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity
 				{
 					if(value != null)
 					{
-						this.Customer = (Customer)value;
+						this.Customer = (IList<Customer>)value;
 					}
 					else
 					{
 						this.Customer = null;
 					}
 				}
-			}
+			}			
 		}
-		
+
 		#endregion
     }
 }

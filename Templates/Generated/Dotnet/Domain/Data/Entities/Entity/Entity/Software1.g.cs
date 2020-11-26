@@ -1,4 +1,4 @@
-// <copyright file="BankAccount.g.cs" company="MIT">
+// <copyright file="Software.g.cs" company="MIT">
 //  Copyright (c) 2020 MIT
 // </copyright>  
 
@@ -22,43 +22,30 @@ using System.Collections.Generic;
 using DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity;
 namespace DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity
 {
-	public partial class BankAccount : IBankAccount
+	public partial class Software : ISoftware
 	{
 		#region CTOR
 
-		public BankAccount()
+		public Software()
 		{
-			this.BankTransfers = new List<BankTransfers>(); 
 		}
 		
-		public BankAccount(IBankAccount item, bool deep = false)
+		public Software(ISoftware item, bool deep = false)
 		{
 			if(item == null) return;
 
-			this.BankAccountId = item.BankAccountId;
-			this.BankAccountNumber = item.BankAccountNumber;
-			this.Balance = item.Balance;
-			this.CustomerId = item.CustomerId;
-			this.Locked = item.Locked;
+			this.ProductId = item.ProductId;
+			this.LicenseCode = item.LicenseCode;
 
-			this.BankTransfers = new List<BankTransfers>(); 
 
 
 			if(deep)
 			{
-				if(item.BankTransfers != null)
-				{
-					foreach(var childItem in item.BankTransfers)
-					{
-						this.BankTransfers.Add(new BankTransfers(childItem, deep));
-					}
-				}
 
-				this.BankTransfers = new BankTransfers(item.BankTransfers, deep);
 
-				if(item.Customer!= null)
+				if(item.Product!= null)
                 {
-                    this.Customer = new Customer(item.Customer, deep);
+                    this.Product = new Product(item.Product, deep);
                 }
 			}
 		}
@@ -66,60 +53,31 @@ namespace DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity
 		#endregion
 		#region Fields
 		
-		public virtual int BankAccountId { get; set; }
-		public virtual string BankAccountNumber { get; set; }
-		public virtual decimal Balance { get; set; }
-		public virtual int? CustomerId { get; set; }
-		public virtual bool Locked { get; set; }
+		public virtual int ProductId { get; set; }
+		public virtual string LicenseCode { get; set; }
 
 		#endregion
 
-        #region Child Relationships
-
-        public virtual IListBankTransfers BankTransfers { get; set; }
-        IListIBankTransfers IBankAccount.BankTransfers
-		{ 
-			get
-			{
-				return this.BankTransfers == null ? null : this.BankTransfers as IList<IBankTransfers>;
-			}
-			set
-			{
-				if(value != this.BankTransfers)
-				{
-					if(value != null)
-					{
-						this.BankTransfers = (IList<BankTransfers>)value;
-					}
-					else
-					{
-						this.BankTransfers = null;
-					}
-				}
-			}			
-		}
-
-		#endregion
 		#region Parent Relationships
 
-        public virtual Customer Customer { get; set; }
-		ICustomer IBankAccount.Customer 
+        public virtual Product Product { get; set; }
+		IProduct ISoftware.Product 
 		{ 
 			get
 			{
-				return this.Customer;
+				return this.Product;
 			}
 			set
 			{
-				if(value != this.Customer)
+				if(value != this.Product)
 				{
 					if(value != null)
 					{
-						this.Customer = (Customer)value;
+						this.Product = (Product)value;
 					}
 					else
 					{
-						this.Customer = null;
+						this.Product = null;
 					}
 				}
 			}

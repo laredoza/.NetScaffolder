@@ -16,8 +16,8 @@
     <ProjectReference Include="..\..\Components\NamingConventions\DefaultNamingConventions\DotNetScaffolder.Components.NamingConventions.DefaultNamingConventions.csproj" />
     <ProjectReference Include="..\..\Components\LanguageOutput\DefaultLanguageOutput\DotNetScaffolder.Components.LanguageOutputs.DefaultLanguageOutput.csproj" />
     <ProjectReference Include="..\..\Components\Drivers\DefaultDrivers\DotNetScaffolder.Components.Drivers.DefaultDrivers.csproj" />
-    <ProjectReference Include="..\..\Components\CollectionOptions\CollectionOption\DotNetScaffolder.Components.CollectionOption.csproj" />
     <ProjectReference Include="..\..\Components\DataTypes\DefaultDataTypes\DotNetScaffolder.Components.DataTypes.DefaultDataTypes.csproj" />
+    <ProjectReference Include="..\..\Components\CollectionOptions\CollectionOption\DotNetScaffolder.Components.CollectionOption.csproj" />
   </ItemGroup>
 
 </Project>

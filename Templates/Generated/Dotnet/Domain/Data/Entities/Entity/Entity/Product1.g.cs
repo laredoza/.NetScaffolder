@@ -1,4 +1,4 @@
-// <copyright file="BankAccount.g.cs" company="MIT">
+// <copyright file="Product.g.cs" company="MIT">
 //  Copyright (c) 2020 MIT
 // </copyright>  
 
@@ -22,109 +22,77 @@ using System.Collections.Generic;
 using DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity;
 namespace DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity
 {
-	public partial class BankAccount : IBankAccount
+	public partial class Product : IProduct
 	{
 		#region CTOR
 
-		public BankAccount()
+		public Product()
 		{
-			this.BankTransfers = new List<BankTransfers>(); 
+			this.OrderDetails = new List<OrderDetails>(); 
 		}
 		
-		public BankAccount(IBankAccount item, bool deep = false)
+		public Product(IProduct item, bool deep = false)
 		{
 			if(item == null) return;
 
-			this.BankAccountId = item.BankAccountId;
-			this.BankAccountNumber = item.BankAccountNumber;
-			this.Balance = item.Balance;
-			this.CustomerId = item.CustomerId;
-			this.Locked = item.Locked;
+			this.ProductId = item.ProductId;
+			this.ProductDescription = item.ProductDescription;
+			this.UnitPrice = item.UnitPrice;
+			this.AmountInStock = item.AmountInStock;
 
-			this.BankTransfers = new List<BankTransfers>(); 
+			this.OrderDetails = new List<OrderDetails>(); 
 
 
 			if(deep)
 			{
-				if(item.BankTransfers != null)
+				if(item.OrderDetails != null)
 				{
-					foreach(var childItem in item.BankTransfers)
+					foreach(var childItem in item.OrderDetails)
 					{
-						this.BankTransfers.Add(new BankTransfers(childItem, deep));
+						this.OrderDetails.Add(new OrderDetails(childItem, deep));
 					}
 				}
 
-				this.BankTransfers = new BankTransfers(item.BankTransfers, deep);
+				this.OrderDetails = new OrderDetails(item.OrderDetails, deep);
 
-				if(item.Customer!= null)
-                {
-                    this.Customer = new Customer(item.Customer, deep);
-                }
 			}
 		}
 		
 		#endregion
 		#region Fields
 		
-		public virtual int BankAccountId { get; set; }
-		public virtual string BankAccountNumber { get; set; }
-		public virtual decimal Balance { get; set; }
-		public virtual int? CustomerId { get; set; }
-		public virtual bool Locked { get; set; }
+		public virtual int ProductId { get; set; }
+		public virtual string ProductDescription { get; set; }
+		public virtual decimal? UnitPrice { get; set; }
+		public virtual short? AmountInStock { get; set; }
 
 		#endregion
 
         #region Child Relationships
 
-        public virtual IListBankTransfers BankTransfers { get; set; }
-        IListIBankTransfers IBankAccount.BankTransfers
+        public virtual IListOrderDetails OrderDetails { get; set; }
+        IListIOrderDetails IProduct.OrderDetails
 		{ 
 			get
 			{
-				return this.BankTransfers == null ? null : this.BankTransfers as IList<IBankTransfers>;
+				return this.OrderDetails == null ? null : this.OrderDetails as IList<IOrderDetails>;
 			}
 			set
 			{
-				if(value != this.BankTransfers)
+				if(value != this.OrderDetails)
 				{
 					if(value != null)
 					{
-						this.BankTransfers = (IList<BankTransfers>)value;
+						this.OrderDetails = (IList<OrderDetails>)value;
 					}
 					else
 					{
-						this.BankTransfers = null;
+						this.OrderDetails = null;
 					}
 				}
 			}			
 		}
 
-		#endregion
-		#region Parent Relationships
-
-        public virtual Customer Customer { get; set; }
-		ICustomer IBankAccount.Customer 
-		{ 
-			get
-			{
-				return this.Customer;
-			}
-			set
-			{
-				if(value != this.Customer)
-				{
-					if(value != null)
-					{
-						this.Customer = (Customer)value;
-					}
-					else
-					{
-						this.Customer = null;
-					}
-				}
-			}
-		}
-		
 		#endregion
     }
 }

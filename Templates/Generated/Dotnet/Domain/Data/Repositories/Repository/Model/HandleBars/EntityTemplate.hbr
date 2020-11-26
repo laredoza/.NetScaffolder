@@ -11,7 +11,7 @@ using System.Collections.Generic;
 {{#each DataType.AdditionalNamespaces}}
 using {{this}};
 {{/each}}
-{{#if DataType.UseInterface}}
+{{#if DataType.UseInterface }}
 using {{ DtoInterfaceNamespace }};
 {{/if}}
 namespace {{ DataType.FullNamespace }}
@@ -20,16 +20,135 @@ namespace {{ DataType.FullNamespace }}
 	{
 {{#BooleanAnd DataType.UseInterface DataType.AddInjectConstructor}}
 		#region CTOR
+
 		public {{ DataType.EntityName }}()
 		{
-			{{#each DataType.MetaData.DistinctChildRelationships.DistinctChildRelationships.Where( o => o.ReferencedMultiplicity == RelationshipMultiplicity.Many ) }}
-			{{this.ReferencedTableName}}
+			{{#each DataType.MetaData.DistinctChildRelationshipsWithManyManyMultiplicity}}
+			this.{{ this.ChildRelationshipNameWithNamingConvention }} = new {{ ../DataType.CollectionOption.ClassName }}<{{ this.ChildReferencedTableNameWithNamingConvention }}>(); 
             {{/each}}
 		}
 		
-		
+		public {{ DataType.EntityName }}(I{{ DataType.EntityName }} item, bool deep = false)
+		{
+			if(item == null) return;
+
+			{{#each DataType.MetaData.Columns}}
+			this.{{ this.ColumnNameWithNamingConvention }} = item.{{ this.ColumnNameWithNamingConvention }};
+			{{/each}}
+
+			{{#each DataType.MetaData.DistinctChildRelationshipsWithManyManyMultiplicity}}
+			this.{{ this.ChildRelationshipNameWithNamingConvention }} = new {{ ../DataType.CollectionOption.ClassName }}<{{ this.ChildReferencedTableNameWithNamingConvention }}>(); 
+            {{/each}}
+
+
+			if(deep)
+			{
+				{{#each DataType.MetaData.DistinctChildRelationshipsWithManyManyMultiplicity}}
+				if(item.{{ this.ChildRelationshipNameWithNamingConvention }} != null)
+				{
+					foreach(var childItem in item.{{ this.ChildRelationshipNameWithNamingConvention }})
+					{
+						this.{{ this.ChildRelationshipNameWithNamingConvention }}.Add(new {{ ChildRelationshipNameWithNamingConvention }}(childItem, deep));
+					}
+				}
+				{{/each}}
+
+				{{#each DataType.MetaData.DistinctChildRelationshipsWithManyManyMultiplicity}}
+				this.{{ this.ChildRelationshipNameWithNamingConvention }} = new {{ this.ChildReferencedTableNameWithNamingConvention }}(item.{{ this.ChildReferencedTableNameWithNamingConvention }}, deep);
+				{{/each}}
+
+				{{#each DataType.MetaData.DistinctParentRelationships }}
+				if(item.{{ this.ParentRelationshipNameWithNamingConvention }}!= null)
+                {
+                    this.{{ this.ParentRelationshipNameWithNamingConvention }} = new {{ this.ParentReferencedTableNameWithNamingConvention }}(item.{{ this.ParentRelationshipNameWithNamingConvention }}, deep);
+                }
+				{{/each}}
+			}
+		}
 		
 		#endregion
 {{/BooleanAnd}}
+		#region Fields
+		
+		{{#each DataType.MetaData.Columns }}
+		public virtual {{ this.ColumnMappedToOutput }} {{ this.ColumnNameWithNamingConvention }} { get; set; }
+		{{/each}}
+
+		#endregion
+
+		{{#if DataType.MetaData.HasChildRelationshipsWithManyMultiplicity }}
+        #region Child Relationships
+
+        {{#each DataType.MetaData.DistinctChildRelationshipsWithManyManyMultiplicity}}
+        public virtual {{ ../DataType.CollectionOption.ClassNameInterface }}{{ this.ChildReferencedTableNameWithNamingConvention }} {{ this.ChildRelationshipNameWithNamingConvention }} { get; set; }
+		{{#if ../DataType.UseInterface }}
+        {{ ../DataType.CollectionOption.ClassNameInterface }}I{{ this.ChildReferencedTableNameWithNamingConvention }} I{{ ../DataType.EntityName }}.{{ this.ChildRelationshipNameWithNamingConvention }}
+		{ 
+			get
+			{
+				return this.{{ this.ChildRelationshipNameWithNamingConvention }} == null ? null : this.{{ this.ChildRelationshipNameWithNamingConvention }} as {{ ../DataType.CollectionOption.ClassNameInterface }}<I{{ this.ChildReferencedTableNameWithNamingConvention }}>;
+			}
+			set
+			{
+				if(value != this.{{ this.ChildRelationshipNameWithNamingConvention }})
+				{
+					if(value != null)
+					{
+						this.{{ this.ChildRelationshipNameWithNamingConvention }} = ({{ ../DataType.CollectionOption.ClassNameInterface }}<{{ this.ChildReferencedTableNameWithNamingConvention }}>)value;
+					}
+					else
+					{
+						this.{{ this.ChildRelationshipNameWithNamingConvention }} = null;
+					}
+				}
+			}			
+		}
+		{{/if}}
+		{{/each}}
+
+		#endregion
+		{{/if}}
+		{{#if DataType.MetaData.HasDistinctParentRelationships }}
+		#region Parent Relationships
+        {{#each DataType.MetaData.DistinctParentRelationships }}
+
+        public virtual {{ this.ParentRelationshipNameWithNamingConvention }} {{ this.ParentRelationshipNameWithNamingConvention }} { get; set; }
+		{{#if ../DataType.UseInterface }}
+		I{{ this.ParentRelationshipNameWithNamingConvention }} I{{ ../DataType.EntityName }}.{{ this.ParentRelationshipNameWithNamingConvention }} 
+		{ 
+			get
+			{
+				return this.{{ this.ParentRelationshipNameWithNamingConvention }};
+			}
+			set
+			{
+				if(value != this.{{ this.ParentRelationshipNameWithNamingConvention }})
+				{
+					if(value != null)
+					{
+						this.{{ this.ParentRelationshipNameWithNamingConvention }} = ({{ this.ParentRelationshipNameWithNamingConvention }})value;
+					}
+					else
+					{
+						this.{{ this.ParentRelationshipNameWithNamingConvention }} = null;
+					}
+				}
+			}
+		}
+		{{/if}}
+        {{/each}}
+		
+		#endregion
+        {{/if}}
+		{{!-- {{#if DataType.MetaData.HasPrimaryColumns }}  --}}
+		{{!-- public override int GetHashCode() --}}
+		{{!-- { --}}
+			{{!-- return {{#each DataType.MetaData.PrimaryKeyColumns }}; --}}
+			{{!-- {{#if this.IsFirstPrimaryKeyColumn }} --}}
+			{{!-- this.{{ this.ColumnNameWithNamingConvention }}.GetHashCode() --}}
+			{{!-- {{/if }} --}}
+			{{!-- {{/each }} --}}
+		{{!-- } --}}
+		{{!-- {{/if}} --}}
     }
 }

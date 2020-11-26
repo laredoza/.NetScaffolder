@@ -4,14 +4,15 @@
     <LangVersion>latest</LangVersion>
     <RootNamespace>DotNetScaffolder.Components.OutputGenerators.DefaultOutputGenerators</RootNamespace>
     <AssemblyName>DotNetScaffolder.Components.OutputGenerators.DefaultOutputGenerators</AssemblyName>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Handlebars.Net" Version="1.11.5" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="../../Common/DotNetScaffolder.Components.Common.csproj" />
-    <ProjectReference Include="..\..\..\Core\Configuration\DotNetScaffolder.Core.Configuration.csproj" />
-    <ProjectReference Include="..\..\..\Mapping\ApplicationSettings\DotNetScaffolder.Mapping.ApplicationServices.csproj" />
+    <ProjectReference Include="..\..\Common\DotNetScaffolder.Components.Common.csproj" />
     <ProjectReference Include="..\..\DataTypes\DefaultDataTypes\DotNetScaffolder.Components.DataTypes.DefaultDataTypes.csproj" />
+    <ProjectReference Include="..\..\..\..\..\Templates\Generated\Dotnet\Domain\Data\ApplicationServices\ApplicationService\DotNetScaffolder.Domain.Data.ApplicationServices.ApplicationService.csproj" />
+    <ProjectReference Include="..\..\..\Mapping\ApplicationSettings\DotNetScaffolder.Mapping.ApplicationServices.csproj" />
   </ItemGroup>
 </Project>

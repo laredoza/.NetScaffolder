@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <RootNamespace>DotNetScaffolder.Components.CollectionOption</RootNamespace>
-    <AssemblyName>DotNetScaffolder.Components.CollectionOption</AssemblyName>
+    <RootNamespace>DotNetScaffolder.Components.DefaultDataTypes</RootNamespace>
+    <AssemblyName>DotNetScaffolder.Components.DefaultDataTypes</AssemblyName>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="../../Common/DotNetScaffolder.Components.Common.csproj" />

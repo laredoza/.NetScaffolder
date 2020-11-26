@@ -1,4 +1,4 @@
-// <copyright file="BankAccount.g.cs" company="MIT">
+// <copyright file="Order.g.cs" company="MIT">
 //  Copyright (c) 2020 MIT
 // </copyright>  
 
@@ -22,39 +22,42 @@ using System.Collections.Generic;
 using DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity;
 namespace DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity
 {
-	public partial class BankAccount : IBankAccount
+	public partial class Order : IOrder
 	{
 		#region CTOR
 
-		public BankAccount()
+		public Order()
 		{
-			this.BankTransfers = new List<BankTransfers>(); 
+			this.OrderDetails = new List<OrderDetails>(); 
 		}
 		
-		public BankAccount(IBankAccount item, bool deep = false)
+		public Order(IOrder item, bool deep = false)
 		{
 			if(item == null) return;
 
-			this.BankAccountId = item.BankAccountId;
-			this.BankAccountNumber = item.BankAccountNumber;
-			this.Balance = item.Balance;
+			this.OrderId = item.OrderId;
 			this.CustomerId = item.CustomerId;
-			this.Locked = item.Locked;
+			this.OrderDate = item.OrderDate;
+			this.DeliveryDate = item.DeliveryDate;
+			this.ShippingName = item.ShippingName;
+			this.ShippingAddress = item.ShippingAddress;
+			this.ShippingCity = item.ShippingCity;
+			this.ShippingZip = item.ShippingZip;
 
-			this.BankTransfers = new List<BankTransfers>(); 
+			this.OrderDetails = new List<OrderDetails>(); 
 
 
 			if(deep)
 			{
-				if(item.BankTransfers != null)
+				if(item.OrderDetails != null)
 				{
-					foreach(var childItem in item.BankTransfers)
+					foreach(var childItem in item.OrderDetails)
 					{
-						this.BankTransfers.Add(new BankTransfers(childItem, deep));
+						this.OrderDetails.Add(new OrderDetails(childItem, deep));
 					}
 				}
 
-				this.BankTransfers = new BankTransfers(item.BankTransfers, deep);
+				this.OrderDetails = new OrderDetails(item.OrderDetails, deep);
 
 				if(item.Customer!= null)
                 {
@@ -66,34 +69,37 @@ namespace DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity
 		#endregion
 		#region Fields
 		
-		public virtual int BankAccountId { get; set; }
-		public virtual string BankAccountNumber { get; set; }
-		public virtual decimal Balance { get; set; }
+		public virtual int OrderId { get; set; }
 		public virtual int? CustomerId { get; set; }
-		public virtual bool Locked { get; set; }
+		public virtual DateTime? OrderDate { get; set; }
+		public virtual DateTime? DeliveryDate { get; set; }
+		public virtual string ShippingName { get; set; }
+		public virtual string ShippingAddress { get; set; }
+		public virtual string ShippingCity { get; set; }
+		public virtual string ShippingZip { get; set; }
 
 		#endregion
 
         #region Child Relationships
 
-        public virtual IListBankTransfers BankTransfers { get; set; }
-        IListIBankTransfers IBankAccount.BankTransfers
+        public virtual IListOrderDetails OrderDetails { get; set; }
+        IListIOrderDetails IOrder.OrderDetails
 		{ 
 			get
 			{
-				return this.BankTransfers == null ? null : this.BankTransfers as IList<IBankTransfers>;
+				return this.OrderDetails == null ? null : this.OrderDetails as IList<IOrderDetails>;
 			}
 			set
 			{
-				if(value != this.BankTransfers)
+				if(value != this.OrderDetails)
 				{
 					if(value != null)
 					{
-						this.BankTransfers = (IList<BankTransfers>)value;
+						this.OrderDetails = (IList<OrderDetails>)value;
 					}
 					else
 					{
-						this.BankTransfers = null;
+						this.OrderDetails = null;
 					}
 				}
 			}			
@@ -103,7 +109,7 @@ namespace DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity
 		#region Parent Relationships
 
         public virtual Customer Customer { get; set; }
-		ICustomer IBankAccount.Customer 
+		ICustomer IOrder.Customer 
 		{ 
 			get
 			{

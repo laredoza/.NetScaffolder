@@ -11,7 +11,6 @@ namespace DotNetScaffolder.Mapping.MetaData.Model
     using System;
     using System.Collections.Generic;
     using System.Xml.Serialization;
-
     using DotNetScaffolder.Mapping.MetaData.Enum;
 
     #endregion
@@ -119,6 +118,22 @@ namespace DotNetScaffolder.Mapping.MetaData.Model
         [XmlAttribute("ReferencedTableName")]
         public string ReferencedTableName { get; set; }
 
+        /// <summary>
+        ///     Gets or sets the table name.
+        /// </summary>
+        [XmlIgnore] 
+        public string ChildRelationshipNameWithNamingConvention { get; set; }
+        [XmlIgnore] 
+        public string ChildReferencedTableNameWithNamingConvention { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the table name.
+        /// </summary>
+        [XmlIgnore] 
+        public string ParentRelationshipNameWithNamingConvention { get; set; }
+        [XmlIgnore] 
+        public string ParentReferencedTableNameWithNamingConvention { get; set; }
+        
         public string ReferencedTableNamePlural
         {
             get

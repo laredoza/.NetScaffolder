@@ -15,7 +15,7 @@ using System.Linq;
 using System.IO;
 using System;
 using DotNetScaffolder.Mapping.MetaData.Enum;
-using System.Linq;
+using DotNetScaffolder.Components.Common;
 
 namespace DotNetScaffolder.Components.OutputGenerators.DefaultOutputGenerators
 {
@@ -32,9 +32,19 @@ namespace DotNetScaffolder.Components.OutputGenerators.DefaultOutputGenerators
     {
         public void Run(IDataType dataType, DomainDefinition domain, List<IDataType> dataTypes, string modelFilePath)
         {
+            try
+            {
+                // var template1 = this.RegisterTemplate(this.ReturnRepositoryDirectoryPath(modelFilePath));
+
+            }
+            catch (System.Exception ex)
+            {
+
+                throw;
+            }
+
             var template = this.RegisterTemplate(this.ReturnRepositoryDirectoryPath(modelFilePath));
-            var a = RelationshipMultiplicity.Many;
-            
+
 
 
             // if(dataType is EntityDataType)
@@ -53,12 +63,25 @@ namespace DotNetScaffolder.Components.OutputGenerators.DefaultOutputGenerators
             foreach (var model in domain.Tables)
             {
                 var entityDataType = (dataType as EntityDataType);
-                if (string.IsNullOrEmpty(entityDataType.EntityName))
+                foreach (var relationship in model.DistinctChildRelationshipsWithManyManyMultiplicity)
                 {
-                    entityDataType.MetaData = model;
+                    relationship.ChildRelationshipNameWithNamingConvention = RelationshipNameFormatting.FormatName(relationship.ReferencedTableName, relationship.RelationshipAlias, dataType.NamingConvention);
+                    relationship.ChildReferencedTableNameWithNamingConvention = entityDataType.NamingConvention.ApplyNamingConvention(relationship.ReferencedTableName);
                 }
 
-                var fileName = entityDataType.EntityName; 
+                foreach (var relationship in model.DistinctParentRelationships)
+                {
+                    relationship.ParentRelationshipNameWithNamingConvention = RelationshipNameFormatting.FormatName(relationship.ReferencedTableName, relationship.RelationshipAlias, dataType.NamingConvention);
+                    relationship.ParentReferencedTableNameWithNamingConvention = entityDataType.NamingConvention.ApplyNamingConvention(relationship.ReferencedTableName);
+                }
+                entityDataType.MetaData = model;
+
+                if (entityDataType.MetaData.PrimaryKeyColumns != null && entityDataType.MetaData.PrimaryKeyColumns.Count > 0)
+                {
+                    entityDataType.MetaData.PrimaryKeyColumns[0].IsFirstPrimaryKeyColumn = true;
+                }
+
+                var fileName = model.TableName;
                 var dtoInterfaceType = dataTypes.FirstOrDefault(o => o is EntityDataType) as EntityDataType;
 
                 var data = new
@@ -71,10 +94,15 @@ namespace DotNetScaffolder.Components.OutputGenerators.DefaultOutputGenerators
                     DtoInterfaceNamespace = dtoInterfaceType.FullNamespace
                 };
 
-                var ab = entityDataType.MetaData.DistinctChildRelationships.Where(o => o.ReferencedMultiplicity == RelationshipMultiplicity.Many);
+                foreach (var column in model.Columns)
+                {
+                    column.ColumnNameWithNamingConvention = entityDataType.NamingConvention.ApplyNamingConvention(column.ColumnName);
+                    column.ColumnMappedToOutput = CSharpOutputMapper.MapToOutput(column);
+                }
 
                 var fileContent = template(data);
-                var outputPath = data.DataType.OutputPath.Replace(@"\","/"); 
+
+                var outputPath = data.DataType.OutputPath.Replace(@"\", "/");
                 // this.RenderToFile(fileContent, string.Format(@"{0}/{1}1.g.cs", Path.GetDirectoryName(outputPath), fileName));
                 this.RenderToFile(fileContent, string.Format(@"{0}/Entities/Entity/Entity/{1}1.g.cs", this.ReturnBasePath(modelFilePath), fileName));
 
@@ -90,10 +118,8 @@ namespace DotNetScaffolder.Components.OutputGenerators.DefaultOutputGenerators
                 // template.RenderToFile(string.Format(@"{0}\{1}~.g.cs", dataType.OutputFolder, dataType.EntityName));	
             }
 
-            throw new System.NotImplementedException();
 
         }
-
         public bool UsedForDataType(IDataType dataType)
         {
             if (dataType is EntityDataType)
@@ -127,7 +153,7 @@ namespace DotNetScaffolder.Components.OutputGenerators.DefaultOutputGenerators
         private string ReturnBasePath(string modelFilePath)
         {
             var path = Directory.GetParent(Path.GetDirectoryName(this.ReturnRepositoryDirectoryPath(modelFilePath)));
-            return  path.Parent.FullName;
+            return path.Parent.FullName;
         }
     }
 }
