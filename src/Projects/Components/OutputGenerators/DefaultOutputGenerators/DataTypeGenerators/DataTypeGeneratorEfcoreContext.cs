@@ -58,25 +58,12 @@ namespace DotNetScaffolder.Components.OutputGenerators.DefaultOutputGenerators
                 {
                     if (contextData != null)
                     {
-                        // var mappingGen = new MappingGenerator();
                         var mappingDataType = dataTypes.FirstOrDefault(o => o is MappingDataType) as MappingDataType;
-
-                        // if(mappingDataType != null)
-                        // {
-                        //     mappingGen.Models = domain.Tables;
-                        //     mappingGen.ProjectOutputPath = contextData.OutputPath;
-                        //     mappingGen.EntityNamespace = entityDataType.FullNamespace;
-                        //     mappingGen.ContextData = contextData;
-                        //     mappingGen.MappingDataType = mappingDataType;
-                        //     mappingGen.NamingConvention = dataType.NamingConvention;
-                        //     mappingGen.DataType = contextDataType;
-
-                        //     mappingGen.Run();
-                        // }
-
                         foreach (IDriver driver in contextDataType.Drivers)
+                        if (driver != null)
                         {
-                            var template = this.RegisterTemplate(Path.GetDirectoryName(modelFilePath), "ContextEFCore.hbr");
+                            var contextTemplate = this.RegisterTemplate(Path.GetDirectoryName(modelFilePath), "ContextEFCore.hbr");
+                            var contextTemplateCustom = this.RegisterTemplate(Path.GetDirectoryName(modelFilePath), "ContextEFCoreCustom.hbr");
                             var projectPath = string.Format(contextData.OutputPath, driver.ParentFolder, driver.Prefix);
 
                             // if (driver.DriverType is EFDriverType)
@@ -85,8 +72,8 @@ namespace DotNetScaffolder.Components.OutputGenerators.DefaultOutputGenerators
                             // }
                             if (driver.DriverType is EFCoreDriverType)
                             {
-                                this.GenerateContext(driver, contextData, entityDataType.FullNamespace, mappingDataType, template, modelFilePath, contextDataType);
-                                // this.GenerateCustomContext(driver, contextData, entityDataType.FullNamespace, mappingDataType, template, modelFilePath, contextDataType);
+                                this.GenerateContext(driver, contextData, entityDataType.FullNamespace, mappingDataType, contextTemplate, modelFilePath, contextDataType);
+                                this.GenerateCustomContext(driver, contextData, entityDataType.FullNamespace, mappingDataType, contextTemplateCustom, modelFilePath, contextDataType);
                             }
                             // else if (driver.DriverType is NhibernateDriverType)
                             // {
@@ -114,16 +101,16 @@ namespace DotNetScaffolder.Components.OutputGenerators.DefaultOutputGenerators
         #region Other Methods
 
         private void GenerateContext(
-            IDriver driver, 
-            ContextData contextData, 
-            string entityFullNamespace, 
-            MappingDataType mappingDataType, 
-            System.Func<object, string> template, 
+            IDriver driver,
+            ContextData contextData,
+            string entityFullNamespace,
+            MappingDataType mappingDataType,
+            System.Func<object, string> template,
             string modelFilePath,
             ContextDataType dataType)
         {
             var contextModels = contextData.Models.Where(o => contextData.Models.Exists(x => x.SchemaName == o.SchemaName && x.TableName == o.TableName)).ToList();
-            string fileName = $"{driver.Prefix}{contextData.ContextName}.g.cs"; 
+            string fileName = $"{driver.Prefix}{contextData.ContextName}.g.cs";
 
             for (int i = 0; i < dataType.AdditionalNamespaces.Count; i++)
             {
@@ -135,8 +122,8 @@ namespace DotNetScaffolder.Components.OutputGenerators.DefaultOutputGenerators
 
             foreach (var model in contextModels)
             {
-                formattedModelNamesWithPostfix.Add(string.Concat(contextData.ContextName,dataType.TransformModelName(model.TableName), mappingDataType.PostFix));
-                formattedModelNames.Add( dataType.TransformModelName(model.TableName));
+                formattedModelNamesWithPostfix.Add(string.Concat(contextData.ContextName, dataType.TransformModelName(model.TableName), mappingDataType.PostFix));
+                formattedModelNames.Add(dataType.TransformModelName(model.TableName));
             }
 
             var data = new
@@ -166,20 +153,20 @@ namespace DotNetScaffolder.Components.OutputGenerators.DefaultOutputGenerators
 
             var fileContent = template(data);
             var outpuPath = $"{contextData.OutputFolder}\\{fileName}".Replace(@"\", "/");
-            this.RenderToFile(fileContent, string.Format($"{this.ReturnBasePath(modelFilePath)}/Contexts/{driver.ParentFolder}/{driver.Prefix}/{outpuPath}"));
+            this.RenderToFile(fileContent, $"{this.ReturnBasePath(modelFilePath)}/Contexts/{driver.ParentFolder}/{driver.Prefix}/{outpuPath}");
         }
 
         private void GenerateCustomContext(
-            IDriver driver, 
-            ContextData contextData, 
-            string entityFullNamespace, 
-            MappingDataType mappingDataType, 
-            System.Func<object, string> template, 
+            IDriver driver,
+            ContextData contextData,
+            string entityFullNamespace,
+            MappingDataType mappingDataType,
+            System.Func<object, string> template,
             string modelFilePath,
             ContextDataType dataType)
         {
             var contextModels = contextData.Models.Where(o => contextData.Models.Exists(x => x.SchemaName == o.SchemaName && x.TableName == o.TableName)).ToList();
-            string fileName = $"{driver.Prefix}{contextData.ContextName}1.g.cs"; 
+            string fileName = $"{driver.Prefix}{contextData.ContextName}.cs";
 
             for (int i = 0; i < dataType.AdditionalNamespaces.Count; i++)
             {
@@ -191,10 +178,11 @@ namespace DotNetScaffolder.Components.OutputGenerators.DefaultOutputGenerators
 
             foreach (var model in contextModels)
             {
-                formattedModelNamesWithPostfix.Add(string.Concat(contextData.ContextName,dataType.TransformModelName(model.TableName), mappingDataType.PostFix));
-                formattedModelNames.Add( dataType.TransformModelName(model.TableName));
+                formattedModelNamesWithPostfix.Add(string.Concat(contextData.ContextName, dataType.TransformModelName(model.TableName), mappingDataType.PostFix));
+                formattedModelNames.Add(dataType.TransformModelName(model.TableName));
             }
 
+            // I'm exposing a lot of properties here to the template even though they're not required. Might be usefull to someone
             var data = new
             {
                 FileName = fileName,
@@ -222,7 +210,12 @@ namespace DotNetScaffolder.Components.OutputGenerators.DefaultOutputGenerators
 
             var fileContent = template(data);
             var outpuPath = $"{contextData.OutputFolder}\\{fileName}".Replace(@"\", "/");
-            this.RenderToFile(fileContent, string.Format($"{this.ReturnBasePath(modelFilePath)}/Contexts/{driver.ParentFolder}/{driver.Prefix}/{outpuPath}"));
+            outpuPath = $"{this.ReturnBasePath(modelFilePath)}/Contexts/{driver.ParentFolder}/{driver.Prefix}/{outpuPath}";
+
+            if (!File.Exists(outpuPath))
+            {
+                this.RenderToFile(fileContent, outpuPath);
+            }
         }
 
         #endregion

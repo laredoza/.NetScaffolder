@@ -1,6 +1,5 @@
-﻿
-// <copyright file="FullContext.g.cs" company="MIT">
-//  Copyright (c) 2018 MIT
+// <copyright file="PostgresFullContext.cs" company="MIT">
+//  Copyright (c) 2020/11/28 00:00:00 MIT
 // </copyright>  
 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
@@ -13,14 +12,20 @@
 // IN THE SOFTWARE.
 
 
-using DotNetScaffolder.Domain.Data.Contexts.EFCore.Seed;
+using System;
+using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System.Configuration;
+using DotNetScaffolder.Domain.Core;
+using DotNetScaffolder.Domain.Data.Contexts.EFCore.Base.Context;
+using DotNetScaffolder.Domain.Core.Interfaces;
 
 namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.Postgres.Context
 {
-	public partial class PostgresFullContext 
+	public partial class PostgresFullContext : BaseContext
 	{	
-        #region Public Methods And Operators
+		#region Public Methods And Operators
 
         /// <summary>
         /// The seed.
@@ -30,13 +35,9 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.Postgres.Context
         /// </param>
         public void Seed(ModelBuilder modelBuilder)
         {
-            MigrationHelper.AddCountries(modelBuilder);
-            MigrationHelper.AddProducts(modelBuilder);
-            MigrationHelper.AddCustomers(modelBuilder);
-            MigrationHelper.AddBanking(modelBuilder);
-            MigrationHelper.AddOrders(modelBuilder);
+
         }
 
         #endregion		
-	}
+    }
 }

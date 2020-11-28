@@ -1,11 +1,7 @@
 {{add_copyright}}
 
 
-// *******************************************************************
-//	GENERATED CODE. DOT NOT MODIFY MANUALLY AS CHANGES CAN BE LOST!!!
-//	USE A PARTIAL CLASS INSTEAD
-// *******************************************************************
-
+using System;
 using System.ComponentModel.DataAnnotations.Schema;
 {{#each Driver.NameSpaces}}
 using {{this}};
@@ -13,8 +9,6 @@ using {{this}};
 {{#each DataType.AdditionalNamespaces}}
 using {{this}};
 {{/each}}
-using <#= EntityNamespace #>;
-using System;
 
 namespace {{ contextNamespace }}.Context
 {
