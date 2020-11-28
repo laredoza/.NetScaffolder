@@ -118,52 +118,71 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.EFCore
 
             return idxs;
         }
-
-        public string InitContext()
+        public string InitContext
         {
-            if (this.DriverType.LazyLoadingEnabled)
+            get
             {
-                return "optionsBuilder.UseLazyLoadingProxies().UseSqlServer(ConnectionString);";
-            }
-            else
-            {
-                return "optionsBuilder.UseSqlServer(ConnectionString);";
+                if (this.DriverType.LazyLoadingEnabled)
+                {
+                    return "optionsBuilder.UseLazyLoadingProxies().UseSqlServer(ConnectionString);";
+                }
+                else
+                {
+                    return "optionsBuilder.UseSqlServer(ConnectionString);";
+                }
             }
         }
-
         public int CheckPrecision(Column col)
         {
             return col.Precision;
         }
 
-        public string GenerateBulkDelete()
-        {
-            return "this.BulkDelete(items);";
+        public string GenerateBulkDelete 
+        { 
+            get
+            {
+                return "base.BulkDelete(items);";
+            } 
         }
 
-        public string GenerateBulkDeleteAsync()
+        public string GenerateBulkDeleteAsync
         {
-            return "await this.BulkDeleteAsync(items);";
+            get
+            {
+                return "await base.BulkDeleteAsync(items);";
+            }
         }
 
-        public string GenerateBulkInsert()
+        public string GenerateBulkInsert
         {
-            return "this.BulkInsert(items);";
+            get
+            {
+                return "base.BulkInsert(items);";
+            }
         }
 
-        public string GenerateBulkInsertAsync()
+        public string GenerateBulkInsertAsync
         {
-            return "await this.BulkInsertAsync(items);";
+            get
+            {
+                return "await base.BulkInsertAsync(items);";
+            }
         }
 
-        public string GenerateBulkUpdate()
+        public string GenerateBulkUpdate
         {
-            return "this.BulkUpdate(items);";
+            get
+            {
+                return "base.BulkUpdate(items);";
+            }
         }
 
-        public string GenerateBulkUpdateAsync()
+        public string GenerateBulkUpdateAsync
         {
-            return "await this.BulkUpdateAsync(items);";
+            get
+            {
+                return "await base.BulkUpdateAsync(items);";
+            }
         }
 
         #endregion

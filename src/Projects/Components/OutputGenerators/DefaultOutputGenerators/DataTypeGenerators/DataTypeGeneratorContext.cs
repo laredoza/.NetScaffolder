@@ -14,7 +14,6 @@ using DotNetScaffolder.Components.DataTypes.DefaultDataTypes.ContextDataTypes;
 using DotNetScaffolder.Components.DataTypes.DefaultDataTypes.DtoInterfaceDataTypes;
 using DotNetScaffolder.Components.DataTypes.DefaultDataTypes.EntityDataTypes;
 using DotNetScaffolder.Components.DataTypes.DefaultDataTypes.MappingDataTypes;
-using DotNetScaffolder.Components.Drivers.DefaultDrivers.EF6;
 using DotNetScaffolder.Components.Drivers.DefaultDrivers.EFCore;
 using DotNetScaffolder.Mapping.MetaData.Domain;
 
@@ -96,7 +95,7 @@ namespace DotNetScaffolder.Components.OutputGenerators.DefaultOutputGenerators
 
                         foreach (IDriver driver in contextDataType.Drivers)
                         {
-                            var template = this.RegisterTemplate(Path.GetDirectoryName(modelFilePath), "Context.hbr");
+                            var template = this.RegisterTemplate(Path.GetDirectoryName(modelFilePath), "ContextEFCore.hbr");
                             var projectPath = string.Format(contextData.OutputPath, driver.ParentFolder, driver.Prefix);
 
                             // if (driver.DriverType is EFDriverType)
@@ -173,41 +172,50 @@ namespace DotNetScaffolder.Components.OutputGenerators.DefaultOutputGenerators
         private void GenerateEFContext(IDriver driver, ContextData contextData, string entityFullNamespace, MappingDataType mappingDataType, System.Func<object, string> template, string modelFilePath)
         {
             var contextModels = contextData.Models.Where(o => contextData.Models.Exists(x => x.SchemaName == o.SchemaName && x.TableName == o.TableName)).ToList();
+            string fileName = $"{driver.Prefix}{contextData.ContextName}1.g.cs"; 
+
+            for (int i = 0; i < this.DataType.AdditionalNamespaces.Count; i++)
+            {
+                this.DataType.AdditionalNamespaces[i] = this.DataType.AdditionalNamespaces[i].Replace("{DriverType}", "EFCore");
+            }
+
+            var formattedModelNamesWithPostfix = new List<string>();
+            var formattedModelNames = new List<string>();
+
+            foreach (var model in contextModels)
+            {
+                formattedModelNamesWithPostfix.Add(string.Concat(contextData.ContextName,DataType.TransformModelName(model.TableName), mappingDataType.PostFix));
+                formattedModelNames.Add( DataType.TransformModelName(model.TableName));
+            }
 
             var data = new
             {
+                FileName = fileName,
+                Year = DateTime.Now.Date,
                 DataType = this.DataType,
                 EntityNamespace = entityFullNamespace,
                 ContextData = contextData,
                 Driver = driver,
                 MappingNamespace = mappingDataType.FullNamespace,
                 MappingPostFix = mappingDataType.PostFix,
-                Models = contextModels
+                Models = contextModels,
+                ContextNamespace = contextData.TransformFullnamespace(DataType.BaseNamespace).Replace("{DriverType}", driver.ParentFolder).Replace("{DriverPrefix}", driver.Prefix),
+                FullContextName = string.Concat(driver.Prefix, contextData.ContextName),
+                DriverContextAttributeIsNotEmpty = !string.IsNullOrEmpty(driver.ContextAttribute),
+                FormattedModelNamesWithPostfix = formattedModelNamesWithPostfix,
+                FormattedModelNames = formattedModelNames,
+                ExcludedRelationships = contextData.ExcludedRelationships(contextModels),
+                ReferencedTableNameTransformed = new List<string>()
             };
 
+            foreach (var relationship in data.ExcludedRelationships)
+            {
+                data.ReferencedTableNameTransformed.Add(DataType.TransformModelName(relationship.ReferencedTableName));
+            }
+
             var fileContent = template(data);
-
-            var outpuPath = string.Format(@"{0}\{1}{0}{2}1.g.cs", contextData.OutputFolder, driver.ParentFolder, driver.Prefix, contextData.ContextName).Replace(@"\", "/");
-
-            // var outputPath = contextData.OutputPath.Replace(@"\", "/");
-            this.RenderToFile(fileContent, string.Format(@"{0}/Contexts/{1}/{2}/{3}", this.ReturnBasePath(modelFilePath), driver.ParentFolder, driver.Prefix, outpuPath));
-
-
-            // var template = new ContextTemplate();
-            // template.DataType = DataType;
-            // template.EntityNamespace = EntityDataType.FullNamespace;
-            // template.ContextData = ContextData;
-            // template.Driver = driver;
-            // template.MappingNamespace = MappingNamespace;
-            // template.MappingPostFix = MappingPostFix;
-            // template.Models = contextModels;
-
-            // if(!string.IsNullOrEmpty(projectPath))
-            // {
-            // 	template.Output.Project =  projectPath;
-            // }
-
-            // template.RenderToFile(string.Format(@"{0}\{1}{2}.g.cs", ContextData.OutputFolder,driver.Prefix,ContextData.ContextName));
+            var outpuPath = $"{contextData.OutputFolder}\\{fileName}".Replace(@"\", "/");
+            this.RenderToFile(fileContent, string.Format($"{this.ReturnBasePath(modelFilePath)}/Contexts/{driver.ParentFolder}/{driver.Prefix}/{outpuPath}"));
         }
 
         #endregion

@@ -65,36 +65,36 @@ namespace DotNetScaffolder.Components.Common.Contract
         /// <summary>
         ///     Generate bulk delete
         /// </summary>
-        string GenerateBulkDelete();
+        string GenerateBulkDelete { get; }
 
         /// <summary>
         ///     Generate bulk delete async
         /// </summary>
-        string GenerateBulkDeleteAsync();
+        string GenerateBulkDeleteAsync { get; }
 
         /// <summary>
         ///     Generate bulk insert async
         /// </summary>
-        string GenerateBulkInsert();
+        string GenerateBulkInsert { get; }
 
         /// <summary>
         ///     Generate bulk insert async
         /// </summary>
-        string GenerateBulkInsertAsync();
+        string GenerateBulkInsertAsync { get; }
 
         /// <summary>
         ///     Generate bulk update async
         /// </summary>
-        string GenerateBulkUpdate();
+        string GenerateBulkUpdate { get; }
 
         /// <summary>
         ///     Generate bulk delete async
         /// </summary>
-        string GenerateBulkUpdateAsync();
+        string GenerateBulkUpdateAsync { get; }
 
         string TransformIndex(Index index, INamingConvention nc = null);
 
-        string InitContext();
+        string InitContext { get; }
 
         #endregion
     }

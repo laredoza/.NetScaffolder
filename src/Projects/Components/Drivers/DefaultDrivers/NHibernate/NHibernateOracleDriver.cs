@@ -99,34 +99,52 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.NHibernate
             return col.Precision;
         }
 
-        public string GenerateBulkDelete()
-        {
-            return "base.BulkDelete(items);";
+        public string GenerateBulkDelete 
+        { 
+            get
+            {
+                return "base.BulkDelete(items);";
+            } 
         }
 
-        public string GenerateBulkDeleteAsync()
+        public string GenerateBulkDeleteAsync
         {
-            return "await base.BulkDeleteAsync(items);";
+            get
+            {
+                return "await base.BulkDeleteAsync(items);";
+            }
         }
 
-        public string GenerateBulkInsert()
+        public string GenerateBulkInsert
         {
-            return "base.BulkInsert(items);";
+            get
+            {
+                return "base.BulkInsert(items);";
+            }
         }
 
-        public string GenerateBulkInsertAsync()
+        public string GenerateBulkInsertAsync
         {
-            return "await base.BulkInsertAsync(items);";
+            get
+            {
+                return "await base.BulkInsertAsync(items);";
+            }
         }
 
-        public string GenerateBulkUpdate()
+        public string GenerateBulkUpdate
         {
-            return "base.BulkUpdate(items);";
+            get
+            {
+                return "base.BulkUpdate(items);";
+            }
         }
 
-        public string GenerateBulkUpdateAsync()
+        public string GenerateBulkUpdateAsync
         {
-            return "await base.BulkUpdateAsync(items);";
+            get
+            {
+                return "await base.BulkUpdateAsync(items);";
+            }
         }
 
         /// <summary>
@@ -142,12 +160,13 @@ namespace DotNetScaffolder.Components.Drivers.DefaultDrivers.NHibernate
         {
             return NhibernateDriverType.TransformIndex(index, nc);
         }
-
-        public string InitContext()
+        public string InitContext
         {
-            return string.Empty;
+            get
+            {
+                return string.Empty;
+            }
         }
-
         #endregion
     }
 }

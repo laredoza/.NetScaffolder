@@ -6,11 +6,168 @@
 //	USE A PARTIAL CLASS INSTEAD
 // *******************************************************************
 
-using System;
-using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+{{#each Driver.NameSpaces}}
+using {{this}};
+{{/each}}
 {{#each DataType.AdditionalNamespaces}}
 using {{this}};
 {{/each}}
 {{#if DataType.UseInterface }}
 using {{ DtoInterfaceNamespace }};
 {{/if}}
+using {{ ContextNamespace }}.Mappings.{{ FullContextName }};
+using {{ EntityNamespace }};
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+namespace {{ contextNamespace }}.Context
+{
+    {{#if DriverContextAttributeIsNotEmpty }}
+    {{ Driver.ContextAttribute }}
+    {{/if}}
+	public partial class {{ FullContextName }} {{ ContextData.TransformInheritFrom }}
+	{	
+		#region CTOR
+
+	    public {{ FullContextName }}(string connectionString, IServiceProvider provider = null)
+	        : base(connectionString, provider)
+	    {
+	    }
+
+	    public {{ FullContextName }}(DbContextOptions<{{ FullContextName }}> options, IServiceProvider provider = null) 
+			: base(options, provider) 
+		{
+		}
+		
+		#endregion
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+	    {
+	        if (!string.IsNullOrEmpty(ConnectionString) && !optionsBuilder.IsConfigured)
+	        {
+                {{ Driver.InitContext }} 
+	        }
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+			
+			#region Mappings
+			
+            {{#each FormattedModelNamesWithPostfix }}
+			modelBuilder.ApplyConfiguration(new {{ this }}());
+            {{/each}}
+
+			#endregion
+
+            #region Excluded Relationships
+			
+			// Exclude entities not part of this context
+			
+            {{#each ReferencedTableNameTransformed }}
+			modelBuilder.Ignore<{{ this }}>();
+            {{/each}}
+
+			#endregion
+			
+			this.Seed(modelBuilder);
+        }
+
+        #region Db Sets
+		
+        {{#each FormattedModelNames }}
+			public virtual DbSet<{{ this }}> {{ this }} { get; set; }
+        {{/each}}
+
+		#endregion
+
+        #region Setup
+        
+		protected override void SetupContext()
+        {
+            //Configuration.LazyLoadingEnabled = {{ Driver.DriverType.LazyLoadingEnabled }};
+            //Configuration.ProxyCreationEnabled = {{ Driver.DriverType.ProxyCreationEnabled }};
+            //Configuration.AutoDetectChangesEnabled = false;
+			
+            {{#if Driver.DriverType.CreateDb }}
+			//Database.SetInitializer(new CreateDatabaseIfNotExists<{{ FullContextName }}>());
+			//Database.SetInitializer(new MigrateDatabaseToLatestVersion<{{ FullContextName }}, Configuration>());
+            {{/if}}
+            {{#if Driver.DriverType.LoggingEnabled }}
+			//Database.Log = this.Log;
+            {{/if}}
+        }
+		
+		#endregion
+
+        #region Bulk
+        
+        /// <summary>
+        /// Bulk delete
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="items"></param>
+        public override void BulkDelete<TEntity>(IEnumerable<TEntity> items)
+        {
+            {{ Driver.GenerateBulkDelete }} 
+        }
+
+        /// <summary>
+        /// Bulk delete async
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public async override Task BulkDeleteAsync<TEntity>(IEnumerable<TEntity> items)
+        {
+            {{ Driver.GenerateBulkDeleteAsync }}
+        }
+
+        /// <summary>
+        /// Bulk insert
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="items"></param>
+        public override void BulkInsert<TEntity>(IEnumerable<TEntity> items)
+        {
+            {{ Driver.GenerateBulkInsert }}
+        }
+
+        /// <summary>
+        /// Bulk insert async
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public async override Task BulkInsertAsync<TEntity>(IEnumerable<TEntity> items)
+        {
+            {{ Driver.GenerateBulkInsertAsync }}
+        }
+
+        /// <summary>
+        /// Bulk update
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="items"></param>
+        public override void BulkUpdate<TEntity>(IEnumerable<TEntity> items)
+        {
+            {{ Driver.GenerateBulkUpdate }}
+        }
+
+        /// <summary>
+        /// Bulk update async
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public override async Task BulkUpdateAsync<TEntity>(IEnumerable<TEntity> items)
+        {
+            {{ Driver.GenerateBulkUpdateAsync }}
+        }
+
+        #endregion
+    }
+}
