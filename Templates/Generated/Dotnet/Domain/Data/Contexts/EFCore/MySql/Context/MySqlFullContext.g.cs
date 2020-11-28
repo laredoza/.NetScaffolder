@@ -1,6 +1,5 @@
-﻿
-// <copyright file="FullContext.g.cs" company="MIT">
-//  Copyright (c) 2019 MIT
+// <copyright file="MySqlFullContext.g.cs" company="MIT">
+//  Copyright (c) 2020/11/28 00:00:00 MIT
 // </copyright>  
 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
@@ -31,7 +30,6 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-
 namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.MySql.Context
 {
 	public partial class MySqlFullContext : BaseContext
@@ -49,15 +47,15 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.MySql.Context
 		}
 		
 		#endregion
-		
-	    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 	    {
 	        if (!string.IsNullOrEmpty(ConnectionString) && !optionsBuilder.IsConfigured)
 	        {
-                optionsBuilder.UseMySql(this.ConnectionString);
+                optionsBuilder.UseMySql(this.ConnectionString); 
 	        }
-	    }
-		
+        }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -75,8 +73,8 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.MySql.Context
 			modelBuilder.ApplyConfiguration(new FullContextSoftwareMap());
 
 			#endregion
-			
-			#region Excluded Relationships
+
+            #region Excluded Relationships
 			
 			// Exclude entities not part of this context
 			
@@ -85,31 +83,31 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.MySql.Context
 			
 			this.Seed(modelBuilder);
         }
+
+        #region Db Sets
 		
-		#region Db Sets
-		
-		public virtual DbSet<BankAccount> BankAccount { get; set; }
-		public virtual DbSet<BankTransfers> BankTransfers { get; set; }
-		public virtual DbSet<Book> Book { get; set; }
-		public virtual DbSet<Country> Country { get; set; }
-		public virtual DbSet<Customer> Customer { get; set; }
-		public virtual DbSet<Order> Order { get; set; }
-		public virtual DbSet<OrderDetails> OrderDetails { get; set; }
-		public virtual DbSet<Product> Product { get; set; }
-		public virtual DbSet<Software> Software { get; set; }
+			public virtual DbSet<BankAccount> BankAccount { get; set; }
+			public virtual DbSet<BankTransfers> BankTransfers { get; set; }
+			public virtual DbSet<Book> Book { get; set; }
+			public virtual DbSet<Country> Country { get; set; }
+			public virtual DbSet<Customer> Customer { get; set; }
+			public virtual DbSet<Order> Order { get; set; }
+			public virtual DbSet<OrderDetails> OrderDetails { get; set; }
+			public virtual DbSet<Product> Product { get; set; }
+			public virtual DbSet<Software> Software { get; set; }
 
 		#endregion
-		
-		#region Setup
+
+        #region Setup
         
 		protected override void SetupContext()
         {
-            //Configuration.LazyLoadingEnabled = false;
-            //Configuration.ProxyCreationEnabled = false;
+            //Configuration.LazyLoadingEnabled = False;
+            //Configuration.ProxyCreationEnabled = False;
             //Configuration.AutoDetectChangesEnabled = false;
 			
 			//Database.SetInitializer(new CreateDatabaseIfNotExists<MySqlFullContext>());
-			// Database.SetInitializer(new MigrateDatabaseToLatestVersion<MySqlFullContext, Configuration>());
+			//Database.SetInitializer(new MigrateDatabaseToLatestVersion<MySqlFullContext, Configuration>());
 			//Database.Log = this.Log;
         }
 		
@@ -124,7 +122,7 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.MySql.Context
         /// <param name="items"></param>
         public override void BulkDelete<TEntity>(IEnumerable<TEntity> items)
         {
-            base.BulkDelete(items);
+            base.BulkDelete(items); 
         }
 
         /// <summary>
@@ -181,6 +179,5 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.MySql.Context
         }
 
         #endregion
-
-	}
+    }
 }

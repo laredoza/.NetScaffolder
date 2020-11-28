@@ -1,6 +1,5 @@
-﻿
-// <copyright file="FullContext.g.cs" company="MIT">
-//  Copyright (c) 2019 MIT
+// <copyright file="SqlServerFullContext.g.cs" company="MIT">
+//  Copyright (c) 2020/11/28 00:00:00 MIT
 // </copyright>  
 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
@@ -32,7 +31,6 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-
 namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.SqlServer.Context
 {
 	public partial class SqlServerFullContext : BaseContext
@@ -50,15 +48,15 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.SqlServer.Context
 		}
 		
 		#endregion
-		
-	    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 	    {
 	        if (!string.IsNullOrEmpty(ConnectionString) && !optionsBuilder.IsConfigured)
 	        {
-                optionsBuilder.UseSqlServer(ConnectionString);
+                optionsBuilder.UseSqlServer(ConnectionString); 
 	        }
-	    }
-		
+        }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -76,8 +74,8 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.SqlServer.Context
 			modelBuilder.ApplyConfiguration(new FullContextSoftwareMap());
 
 			#endregion
-			
-			#region Excluded Relationships
+
+            #region Excluded Relationships
 			
 			// Exclude entities not part of this context
 			
@@ -86,31 +84,31 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.SqlServer.Context
 			
 			this.Seed(modelBuilder);
         }
+
+        #region Db Sets
 		
-		#region Db Sets
-		
-		public virtual DbSet<BankAccount> BankAccount { get; set; }
-		public virtual DbSet<BankTransfers> BankTransfers { get; set; }
-		public virtual DbSet<Book> Book { get; set; }
-		public virtual DbSet<Country> Country { get; set; }
-		public virtual DbSet<Customer> Customer { get; set; }
-		public virtual DbSet<Order> Order { get; set; }
-		public virtual DbSet<OrderDetails> OrderDetails { get; set; }
-		public virtual DbSet<Product> Product { get; set; }
-		public virtual DbSet<Software> Software { get; set; }
+			public virtual DbSet<BankAccount> BankAccount { get; set; }
+			public virtual DbSet<BankTransfers> BankTransfers { get; set; }
+			public virtual DbSet<Book> Book { get; set; }
+			public virtual DbSet<Country> Country { get; set; }
+			public virtual DbSet<Customer> Customer { get; set; }
+			public virtual DbSet<Order> Order { get; set; }
+			public virtual DbSet<OrderDetails> OrderDetails { get; set; }
+			public virtual DbSet<Product> Product { get; set; }
+			public virtual DbSet<Software> Software { get; set; }
 
 		#endregion
-		
-		#region Setup
+
+        #region Setup
         
 		protected override void SetupContext()
         {
-            //Configuration.LazyLoadingEnabled = false;
-            //Configuration.ProxyCreationEnabled = false;
+            //Configuration.LazyLoadingEnabled = False;
+            //Configuration.ProxyCreationEnabled = False;
             //Configuration.AutoDetectChangesEnabled = false;
 			
 			//Database.SetInitializer(new CreateDatabaseIfNotExists<SqlServerFullContext>());
-			// Database.SetInitializer(new MigrateDatabaseToLatestVersion<SqlServerFullContext, Configuration>());
+			//Database.SetInitializer(new MigrateDatabaseToLatestVersion<SqlServerFullContext, Configuration>());
 			//Database.Log = this.Log;
         }
 		
@@ -125,7 +123,7 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.SqlServer.Context
         /// <param name="items"></param>
         public override void BulkDelete<TEntity>(IEnumerable<TEntity> items)
         {
-            this.BulkDelete(items);
+            base.BulkDelete(items); 
         }
 
         /// <summary>
@@ -136,7 +134,7 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.SqlServer.Context
         /// <returns></returns>
         public async override Task BulkDeleteAsync<TEntity>(IEnumerable<TEntity> items)
         {
-            await this.BulkDeleteAsync(items);
+            await base.BulkDeleteAsync(items);
         }
 
         /// <summary>
@@ -146,7 +144,7 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.SqlServer.Context
         /// <param name="items"></param>
         public override void BulkInsert<TEntity>(IEnumerable<TEntity> items)
         {
-            this.BulkInsert(items);
+            base.BulkInsert(items);
         }
 
         /// <summary>
@@ -157,7 +155,7 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.SqlServer.Context
         /// <returns></returns>
         public async override Task BulkInsertAsync<TEntity>(IEnumerable<TEntity> items)
         {
-            await this.BulkInsertAsync(items);
+            await base.BulkInsertAsync(items);
         }
 
         /// <summary>
@@ -167,7 +165,7 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.SqlServer.Context
         /// <param name="items"></param>
         public override void BulkUpdate<TEntity>(IEnumerable<TEntity> items)
         {
-            this.BulkUpdate(items);
+            base.BulkUpdate(items);
         }
 
         /// <summary>
@@ -178,10 +176,9 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.SqlServer.Context
         /// <returns></returns>
         public override async Task BulkUpdateAsync<TEntity>(IEnumerable<TEntity> items)
         {
-            await this.BulkUpdateAsync(items);
+            await base.BulkUpdateAsync(items);
         }
 
         #endregion
-
-	}
+    }
 }
