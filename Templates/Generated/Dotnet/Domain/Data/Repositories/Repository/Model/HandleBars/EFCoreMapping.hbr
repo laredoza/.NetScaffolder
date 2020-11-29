@@ -1,0 +1,93 @@
+{{add_copyright}}
+
+
+// *******************************************************************
+//	GENERATED CODE. DOT NOT MODIFY MANUALLY AS CHANGES CAN BE LOST!!!
+//	USE A PARTIAL CLASS INSTEAD
+// *******************************************************************
+
+{{#each Driver.NameSpaces}}
+using {{this}};
+{{/each}}
+using System.ComponentModel.DataAnnotations.Schema;
+using {{ EntityNamespace }}; 
+using System.Data.Common;
+
+namespace {{ ContextNamespace }}.Mappings.{{ FullContextName }}
+{
+    public partial class {{ ContextData.ContextName }}{{ ModelName }}{{ PostFix }} : IEntityTypeConfiguration<{{ ModelName }}>
+	{	
+	    public virtual void Configure(EntityTypeBuilder<{{ ModelName }}> builder)
+	    {
+            {{#if Driver.UseSchema}}
+			builder.ToTable("{{ AliasedTableName }}", "{{ AliasedSchemaName }}");
+            {{else}}
+			builder.ToTable("{{ AliasedTableName }}");
+            {{/if}}
+
+			#region Primary keys
+			
+            {{#unless HasCompositeKey }}
+			builder.HasKey(t => t.{{ PrimaryKeyColumnName }});
+			builder.Property(t => t.{{ PrimaryKeyColumnName }}.HasColumnName("{{ PrimaryKeyColumnKey.ColumnName }}"){{ TransformedDbGeneratedPrimaryKey }});
+            {{/unless}}
+            {{#if HasCompositeKey }}
+            builder.HasKey(t => new {{{ TransformedCompositeKey }}});
+            {{#for PrimaryKeyColumnsTransformedNames}}
+            builder.Property(t => t.{{ this.Key }}).HasColumnName("{{ this.Value }}"){{ ../TransformedDbGeneratedPrimaryKey }};
+            {{/each}}
+            {{/if}}
+
+            #region Constraints
+			
+            {{#each Columns}}
+            {{#if this.ColumnLengthIsLargerThan0}}
+			builder.Property(t => t.{{ this.ColumnNameWithTransformation}}).HasMaxLength({{ this.Length }});
+            {{/if}}
+            {{#if this.IsRequired}}
+			builder.Property(t => t.{{ this.ColumnNameWithTransformation}}).HasColumnName("{{ this.ColumnName }}").IsRequired();
+            {{else}}
+			builder.Property(t => t.{{ this.ColumnNameWithTransformation}}).HasColumnName("{{ this.ColumnName }}").IsRequired(false);
+            {{/if}}
+            {{#if this.IsDecimal}}
+			builder.Property(t => t.{{ this.ColumnNameWithTransformation}}){{{ TransformColumnPrecision }}};
+            {{/if}}
+            {{/each}}
+
+			#endregion
+
+            #region Indexes
+
+            {{#each IndexColumns}}
+            {{{ this }}}
+            {{/each}}
+
+			#endregion
+
+            #region Relationships
+
+            {{#each TransformRelationships }}
+            {{{ this }}} 
+            {{/each}}
+			
+			#endregion	
+
+            {{#if Driver.DriverType.IncludeColumnOrder }}
+
+			#region Column Order
+			
+			// Column ordering available in EF Core 2.1 - https://data.uservoice.com/forums/72025-entity-framework-core-feature-suggestions/suggestions/18936844-ef-core-migrations-column-ordering
+			// Waiting for that release before implementing
+            {{#each Model.Columns }}
+			// TODO: builder.Property(t => t.{{ this.ColumnName }}).HasColumnOrder({{ this.ColumnOrder }});
+            {{/each}}
+
+			#endregion	
+            {{/if}}
+
+
+			#endregion
+
+        }
+    }
+}
