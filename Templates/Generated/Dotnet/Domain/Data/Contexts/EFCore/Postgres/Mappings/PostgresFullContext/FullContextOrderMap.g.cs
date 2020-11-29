@@ -1,6 +1,5 @@
-﻿
-// <copyright file="OrderMap.g.cs" company="MIT">
-//  Copyright (c) 2019 MIT
+// <copyright file="FullContextOrderMap.g.cs" company="MIT">
+//  Copyright (c) 2020/11/29 00:00:00 MIT
 // </copyright>  
 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
@@ -22,25 +21,23 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System.Configuration;
 using System.ComponentModel.DataAnnotations.Schema;
-using DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity;
+using DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity; 
 using System.Data.Common;
 
 namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.Postgres.Mappings.PostgresFullContext
 {
-	public partial class FullContextOrderMap : IEntityTypeConfiguration<Order>
+    public partial class FullContextOrder : IEntityTypeConfiguration<Order>
 	{	
 	    public virtual void Configure(EntityTypeBuilder<Order> builder)
 	    {
 			builder.ToTable("Order");
-			
+
 			#region Primary keys
 			
 			builder.HasKey(t => t.OrderId);
-			builder.Property(t => t.OrderId).HasColumnName("OrderId").ValueGeneratedNever();
+			builder.Property(t => t.OrderId.HasColumnName("OrderId").ValueGeneratedNever());
 
-			#endregion
-
-			#region Constraints
+            #region Constraints
 			
 			builder.Property(t => t.OrderId).HasColumnName("OrderId").IsRequired();
 			builder.Property(t => t.CustomerId).HasColumnName("CustomerId").IsRequired(false);
@@ -54,35 +51,42 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.Postgres.Mappings.Postgre
 			builder.Property(t => t.ShippingCity).HasColumnName("ShippingCity").IsRequired(false);
 			builder.Property(t => t.ShippingZip).HasMaxLength(50);
 			builder.Property(t => t.ShippingZip).HasColumnName("ShippingZip").IsRequired(false);
-			
+
 			#endregion
 
-			#region Indexes
-			builder.HasIndex(i => new {i.OrderId}).HasName("UQ__Order__C3905BCE3C614174").IsUnique(true);
-			builder.HasIndex(i => new {i.CustomerId}).HasName("IX_CustomerId").IsUnique(false);
+            #region Indexes
+
+            HasIndex(i => new {i.OrderId}).HasName("UQ__Order__C3905BCE3C614174").IsUnique(true);
+            HasIndex(i => new {i.CustomerId}).HasName("IX_CustomerId").IsUnique(false);
+
 			#endregion
-			
-			#region Relationships
-			
-			builder.HasOne<Customer>(s => s.Customer).WithMany(s => s.Order).HasForeignKey(s => s.CustomerId).OnDelete(DeleteBehavior.Restrict);
-			builder.HasMany<OrderDetails>(s => s.OrderDetails).WithOne(s => s.Order).HasForeignKey(s => s.OrderId).OnDelete(DeleteBehavior.Restrict);
+
+            #region Relationships
+
+            builder.HasOne<Customer>(s => s.Customer).WithMany(s => s.Order).HasForeignKey(s => s.CustomerId).OnDelete(DeleteBehavior.Restrict); 
+            builder.HasMany<OrderDetails>(s => s.OrderDetails).WithOne(s => s.Order).HasForeignKey(s => s.OrderId).OnDelete(DeleteBehavior.Restrict); 
 			
 			#endregion	
+
 
 			#region Column Order
 			
 			// Column ordering available in EF Core 2.1 - https://data.uservoice.com/forums/72025-entity-framework-core-feature-suggestions/suggestions/18936844-ef-core-migrations-column-ordering
 			// Waiting for that release before implementing
-			//TODO: builder.Property(t => t.OrderId).HasColumnOrder(1);
-			//TODO: builder.Property(t => t.CustomerId).HasColumnOrder(2);
-			//TODO: builder.Property(t => t.OrderDate).HasColumnOrder(3);
-			//TODO: builder.Property(t => t.DeliveryDate).HasColumnOrder(4);
-			//TODO: builder.Property(t => t.ShippingName).HasColumnOrder(5);
-			//TODO: builder.Property(t => t.ShippingAddress).HasColumnOrder(6);
-			//TODO: builder.Property(t => t.ShippingCity).HasColumnOrder(7);
-			//TODO: builder.Property(t => t.ShippingZip).HasColumnOrder(8);
+			// TODO: builder.Property(t => t.OrderId).HasColumnOrder(1);
+			// TODO: builder.Property(t => t.CustomerId).HasColumnOrder(2);
+			// TODO: builder.Property(t => t.OrderDate).HasColumnOrder(3);
+			// TODO: builder.Property(t => t.DeliveryDate).HasColumnOrder(4);
+			// TODO: builder.Property(t => t.ShippingName).HasColumnOrder(5);
+			// TODO: builder.Property(t => t.ShippingAddress).HasColumnOrder(6);
+			// TODO: builder.Property(t => t.ShippingCity).HasColumnOrder(7);
+			// TODO: builder.Property(t => t.ShippingZip).HasColumnOrder(8);
 
 			#endregion	
-	    }
-	}
+
+
+			#endregion
+
+        }
+    }
 }

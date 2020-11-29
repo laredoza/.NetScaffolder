@@ -258,7 +258,7 @@ namespace DotNetScaffolder.Components.OutputGenerators.DefaultOutputGenerators
 
             foreach (var model in contextModels)
             {
-                string fileName = $"{string.Concat(contextData.ContextName, mappingDataType.ModelName)}{dataType.TransformModelName(model.TableName)}{mappingDataType.PostFix}.g1.cs";
+                string fileName = $"{string.Concat(contextData.ContextName, mappingDataType.ModelName)}{dataType.TransformModelName(model.TableName)}{mappingDataType.PostFix}.g.cs";
 
 
                 formattedModelNamesWithPostfix.Add(string.Concat(contextData.ContextName, dataType.TransformModelName(model.TableName), mappingDataType.PostFix));
@@ -293,12 +293,7 @@ namespace DotNetScaffolder.Components.OutputGenerators.DefaultOutputGenerators
                     ContextData = contextData,
                     Driver = driver,
                     Model = model,
-                    // MappingNamespace = mappingDataType.FullNamespace,
-                    // MappingPostFix = mappingDataType.PostFix,
-                    Models = contextModels,
-                    // DriverContextAttributeIsNotEmpty = !string.IsNullOrEmpty(driver.ContextAttribute),
-                    // FormattedModelNamesWithPostfix = formattedModelNamesWithPostfix,
-                    // FormattedModelNames = formattedModelNames
+                    Models = contextModels
                 };
 
                 foreach (var column in data.PrimaryKeyColumns)

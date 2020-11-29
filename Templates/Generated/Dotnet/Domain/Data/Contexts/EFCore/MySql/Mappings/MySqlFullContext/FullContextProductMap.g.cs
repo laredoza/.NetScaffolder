@@ -1,6 +1,5 @@
-﻿
-// <copyright file="ProductMap.g.cs" company="MIT">
-//  Copyright (c) 2019 MIT
+// <copyright file="FullContextProductMap.g.cs" company="MIT">
+//  Copyright (c) 2020/11/29 00:00:00 MIT
 // </copyright>  
 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
@@ -22,25 +21,23 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System.Configuration;
 using System.ComponentModel.DataAnnotations.Schema;
-using DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity;
+using DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity; 
 using System.Data.Common;
 
 namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.MySql.Mappings.MySqlFullContext
 {
-	public partial class FullContextProductMap : IEntityTypeConfiguration<Product>
+    public partial class FullContextProduct : IEntityTypeConfiguration<Product>
 	{	
 	    public virtual void Configure(EntityTypeBuilder<Product> builder)
 	    {
 			builder.ToTable("Product");
-			
+
 			#region Primary keys
 			
 			builder.HasKey(t => t.ProductId);
-			builder.Property(t => t.ProductId).HasColumnName("ProductId").ValueGeneratedNever();
+			builder.Property(t => t.ProductId.HasColumnName("ProductId").ValueGeneratedNever());
 
-			#endregion
-
-			#region Constraints
+            #region Constraints
 			
 			builder.Property(t => t.ProductId).HasColumnName("ProductId").IsRequired();
 			builder.Property(t => t.ProductDescription).HasMaxLength(100);
@@ -48,31 +45,38 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.MySql.Mappings.MySqlFullC
 			builder.Property(t => t.UnitPrice).HasColumnName("UnitPrice").IsRequired(false);
 			builder.Property(t => t.UnitPrice).HasColumnType("decimal(19, 4)");
 			builder.Property(t => t.AmountInStock).HasColumnName("AmountInStock").IsRequired(false);
-			
+
 			#endregion
 
-			#region Indexes
-			builder.HasIndex(i => new {i.ProductId}).HasName("UQ__Product__B40CC6CC5F2A0195").IsUnique(true);
+            #region Indexes
+
+            HasIndex(i => new {i.ProductId}).HasName("UQ__Product__B40CC6CC5F2A0195").IsUnique(true);
+
 			#endregion
-			
-			#region Relationships
-			
-			builder.HasOne<Book>(s => s.Book).WithOne(s => s.Product).HasForeignKey<Book>(s => s.ProductId).OnDelete(DeleteBehavior.Restrict);
-			builder.HasMany<OrderDetails>(s => s.OrderDetails).WithOne(s => s.Product).HasForeignKey(s => s.ProductId).OnDelete(DeleteBehavior.Restrict);
-			builder.HasOne<Software>(s => s.Software).WithOne(s => s.Product).HasForeignKey<Software>(s => s.ProductId).OnDelete(DeleteBehavior.Restrict);
+
+            #region Relationships
+
+            builder.HasOne<Book>(s => s.Book).WithOne(s => s.Product).HasForeignKey<Book>(s => s.ProductId).OnDelete(DeleteBehavior.Restrict); 
+            builder.HasMany<OrderDetails>(s => s.OrderDetails).WithOne(s => s.Product).HasForeignKey(s => s.ProductId).OnDelete(DeleteBehavior.Restrict); 
+            builder.HasOne<Software>(s => s.Software).WithOne(s => s.Product).HasForeignKey<Software>(s => s.ProductId).OnDelete(DeleteBehavior.Restrict); 
 			
 			#endregion	
+
 
 			#region Column Order
 			
 			// Column ordering available in EF Core 2.1 - https://data.uservoice.com/forums/72025-entity-framework-core-feature-suggestions/suggestions/18936844-ef-core-migrations-column-ordering
 			// Waiting for that release before implementing
-			//TODO: builder.Property(t => t.ProductId).HasColumnOrder(1);
-			//TODO: builder.Property(t => t.ProductDescription).HasColumnOrder(2);
-			//TODO: builder.Property(t => t.UnitPrice).HasColumnOrder(3);
-			//TODO: builder.Property(t => t.AmountInStock).HasColumnOrder(4);
+			// TODO: builder.Property(t => t.ProductId).HasColumnOrder(1);
+			// TODO: builder.Property(t => t.ProductDescription).HasColumnOrder(2);
+			// TODO: builder.Property(t => t.UnitPrice).HasColumnOrder(3);
+			// TODO: builder.Property(t => t.AmountInStock).HasColumnOrder(4);
 
 			#endregion	
-	    }
-	}
+
+
+			#endregion
+
+        }
+    }
 }

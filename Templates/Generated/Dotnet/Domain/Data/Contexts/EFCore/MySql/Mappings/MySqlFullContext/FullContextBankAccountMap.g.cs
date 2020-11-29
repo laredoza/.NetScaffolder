@@ -1,6 +1,5 @@
-﻿
-// <copyright file="BankAccountMap.g.cs" company="MIT">
-//  Copyright (c) 2019 MIT
+// <copyright file="FullContextBankAccountMap.g.cs" company="MIT">
+//  Copyright (c) 2020/11/29 00:00:00 MIT
 // </copyright>  
 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
@@ -22,25 +21,23 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System.Configuration;
 using System.ComponentModel.DataAnnotations.Schema;
-using DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity;
+using DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity; 
 using System.Data.Common;
 
 namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.MySql.Mappings.MySqlFullContext
 {
-	public partial class FullContextBankAccountMap : IEntityTypeConfiguration<BankAccount>
+    public partial class FullContextBankAccount : IEntityTypeConfiguration<BankAccount>
 	{	
 	    public virtual void Configure(EntityTypeBuilder<BankAccount> builder)
 	    {
 			builder.ToTable("BankAccount");
-			
+
 			#region Primary keys
 			
 			builder.HasKey(t => t.BankAccountId);
-			builder.Property(t => t.BankAccountId).HasColumnName("BankAccountId").ValueGeneratedNever();
+			builder.Property(t => t.BankAccountId.HasColumnName("BankAccountId").ValueGeneratedNever());
 
-			#endregion
-
-			#region Constraints
+            #region Constraints
 			
 			builder.Property(t => t.BankAccountId).HasColumnName("BankAccountId").IsRequired();
 			builder.Property(t => t.BankAccountNumber).HasMaxLength(10);
@@ -49,32 +46,39 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.MySql.Mappings.MySqlFullC
 			builder.Property(t => t.Balance).HasColumnType("decimal(19, 4)");
 			builder.Property(t => t.CustomerId).HasColumnName("CustomerId").IsRequired(false);
 			builder.Property(t => t.Locked).HasColumnName("Locked").IsRequired();
-			
+
 			#endregion
 
-			#region Indexes
-			builder.HasIndex(i => new {i.BankAccountId}).HasName("UQ__BankAcco__4FC8E4A0C45281C8").IsUnique(true);
-			builder.HasIndex(i => new {i.CustomerId}).HasName("IX_CustomerId1").IsUnique(false);
+            #region Indexes
+
+            HasIndex(i => new {i.BankAccountId}).HasName("UQ__BankAcco__4FC8E4A0C45281C8").IsUnique(true);
+            HasIndex(i => new {i.CustomerId}).HasName("IX_CustomerId1").IsUnique(false);
+
 			#endregion
-			
-			#region Relationships
-			
-			builder.HasOne<Customer>(s => s.Customer).WithMany(s => s.BankAccount).HasForeignKey(s => s.CustomerId).OnDelete(DeleteBehavior.Restrict);
-			builder.HasMany<BankTransfers>(s => s.BankTransfers).WithOne(s => s.BankAccount).HasForeignKey(s => s.ToBankAccountId).OnDelete(DeleteBehavior.Restrict);
+
+            #region Relationships
+
+            builder.HasOne<Customer>(s => s.Customer).WithMany(s => s.BankAccount).HasForeignKey(s => s.CustomerId).OnDelete(DeleteBehavior.Restrict); 
+            builder.HasMany<BankTransfers>(s => s.BankTransfers).WithOne(s => s.BankAccount).HasForeignKey(s => s.ToBankAccountId).OnDelete(DeleteBehavior.Restrict); 
 			
 			#endregion	
+
 
 			#region Column Order
 			
 			// Column ordering available in EF Core 2.1 - https://data.uservoice.com/forums/72025-entity-framework-core-feature-suggestions/suggestions/18936844-ef-core-migrations-column-ordering
 			// Waiting for that release before implementing
-			//TODO: builder.Property(t => t.BankAccountId).HasColumnOrder(1);
-			//TODO: builder.Property(t => t.BankAccountNumber).HasColumnOrder(2);
-			//TODO: builder.Property(t => t.Balance).HasColumnOrder(3);
-			//TODO: builder.Property(t => t.CustomerId).HasColumnOrder(4);
-			//TODO: builder.Property(t => t.Locked).HasColumnOrder(5);
+			// TODO: builder.Property(t => t.BankAccountId).HasColumnOrder(1);
+			// TODO: builder.Property(t => t.BankAccountNumber).HasColumnOrder(2);
+			// TODO: builder.Property(t => t.Balance).HasColumnOrder(3);
+			// TODO: builder.Property(t => t.CustomerId).HasColumnOrder(4);
+			// TODO: builder.Property(t => t.Locked).HasColumnOrder(5);
 
 			#endregion	
-	    }
-	}
+
+
+			#endregion
+
+        }
+    }
 }

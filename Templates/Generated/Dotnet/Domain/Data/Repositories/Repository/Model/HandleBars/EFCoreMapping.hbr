@@ -59,7 +59,7 @@ namespace {{ ContextNamespace }}.Mappings.{{ FullContextName }}
             #region Indexes
 
             {{#each IndexColumns}}
-            {{{ this }}}
+            {{{ this }}};
             {{/each}}
 
 			#endregion

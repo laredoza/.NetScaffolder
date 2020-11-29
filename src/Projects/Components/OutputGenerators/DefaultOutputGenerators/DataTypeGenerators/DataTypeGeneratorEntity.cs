@@ -14,7 +14,6 @@ using System.Linq;
 using System.IO;
 using System;
 using DotNetScaffolder.Components.Common;
-using DotNetScaffolder.Components.DataTypes.DefaultDataTypes.MappingDataTypes;
 
 namespace DotNetScaffolder.Components.OutputGenerators.DefaultOutputGenerators
 {

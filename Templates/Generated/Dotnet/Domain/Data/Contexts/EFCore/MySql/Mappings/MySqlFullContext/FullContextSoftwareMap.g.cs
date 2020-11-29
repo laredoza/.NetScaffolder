@@ -1,6 +1,5 @@
-﻿
-// <copyright file="SoftwareMap.g.cs" company="MIT">
-//  Copyright (c) 2019 MIT
+// <copyright file="FullContextSoftwareMap.g.cs" company="MIT">
+//  Copyright (c) 2020/11/29 00:00:00 MIT
 // </copyright>  
 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
@@ -22,50 +21,55 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System.Configuration;
 using System.ComponentModel.DataAnnotations.Schema;
-using DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity;
+using DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity; 
 using System.Data.Common;
 
 namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.MySql.Mappings.MySqlFullContext
 {
-	public partial class FullContextSoftwareMap : IEntityTypeConfiguration<Software>
+    public partial class FullContextSoftware : IEntityTypeConfiguration<Software>
 	{	
 	    public virtual void Configure(EntityTypeBuilder<Software> builder)
 	    {
 			builder.ToTable("Software");
-			
+
 			#region Primary keys
 			
 			builder.HasKey(t => t.ProductId);
-			builder.Property(t => t.ProductId).HasColumnName("ProductId").ValueGeneratedNever();
+			builder.Property(t => t.ProductId.HasColumnName("ProductId").ValueGeneratedNever());
 
-			#endregion
-
-			#region Constraints
+            #region Constraints
 			
 			builder.Property(t => t.ProductId).HasColumnName("ProductId").IsRequired();
 			builder.Property(t => t.LicenseCode).HasMaxLength(200);
 			builder.Property(t => t.LicenseCode).HasColumnName("LicenseCode").IsRequired();
-			
+
 			#endregion
 
-			#region Indexes
-			builder.HasIndex(i => new {i.ProductId}).HasName("IX_ProductId3").IsUnique(false);
+            #region Indexes
+
+            HasIndex(i => new {i.ProductId}).HasName("IX_ProductId3").IsUnique(false);
+
 			#endregion
-			
-			#region Relationships
-			
-			builder.HasOne<Product>(s => s.Product).WithOne(s => s.Software).OnDelete(DeleteBehavior.Restrict);
+
+            #region Relationships
+
+            builder.HasOne<Product>(s => s.Product).WithOne(s => s.Software).OnDelete(DeleteBehavior.Restrict); 
 			
 			#endregion	
+
 
 			#region Column Order
 			
 			// Column ordering available in EF Core 2.1 - https://data.uservoice.com/forums/72025-entity-framework-core-feature-suggestions/suggestions/18936844-ef-core-migrations-column-ordering
 			// Waiting for that release before implementing
-			//TODO: builder.Property(t => t.ProductId).HasColumnOrder(1);
-			//TODO: builder.Property(t => t.LicenseCode).HasColumnOrder(2);
+			// TODO: builder.Property(t => t.ProductId).HasColumnOrder(1);
+			// TODO: builder.Property(t => t.LicenseCode).HasColumnOrder(2);
 
 			#endregion	
-	    }
-	}
+
+
+			#endregion
+
+        }
+    }
 }

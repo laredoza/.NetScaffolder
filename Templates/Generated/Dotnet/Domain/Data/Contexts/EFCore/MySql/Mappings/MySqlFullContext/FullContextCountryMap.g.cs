@@ -1,6 +1,5 @@
-﻿
-// <copyright file="CountryMap.g.cs" company="MIT">
-//  Copyright (c) 2019 MIT
+// <copyright file="FullContextCountryMap.g.cs" company="MIT">
+//  Copyright (c) 2020/11/29 00:00:00 MIT
 // </copyright>  
 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
@@ -22,50 +21,55 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System.Configuration;
 using System.ComponentModel.DataAnnotations.Schema;
-using DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity;
+using DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity; 
 using System.Data.Common;
 
 namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.MySql.Mappings.MySqlFullContext
 {
-	public partial class FullContextCountryMap : IEntityTypeConfiguration<Country>
+    public partial class FullContextCountry : IEntityTypeConfiguration<Country>
 	{	
 	    public virtual void Configure(EntityTypeBuilder<Country> builder)
 	    {
 			builder.ToTable("Country");
-			
+
 			#region Primary keys
 			
 			builder.HasKey(t => t.CountryId);
-			builder.Property(t => t.CountryId).HasColumnName("CountryId").ValueGeneratedNever();
+			builder.Property(t => t.CountryId.HasColumnName("CountryId").ValueGeneratedNever());
 
-			#endregion
-
-			#region Constraints
+            #region Constraints
 			
 			builder.Property(t => t.CountryId).HasColumnName("CountryId").IsRequired();
 			builder.Property(t => t.CountryName).HasMaxLength(100);
 			builder.Property(t => t.CountryName).HasColumnName("CountryName").IsRequired(false);
-			
+
 			#endregion
 
-			#region Indexes
-			builder.HasIndex(i => new {i.CountryId}).HasName("UQ__Country__10D1609E8CC26505").IsUnique(true);
+            #region Indexes
+
+            HasIndex(i => new {i.CountryId}).HasName("UQ__Country__10D1609E8CC26505").IsUnique(true);
+
 			#endregion
-			
-			#region Relationships
-			
-			builder.HasMany<Customer>(s => s.Customer).WithOne(s => s.Country).HasForeignKey(s => s.CountryId).OnDelete(DeleteBehavior.Restrict);
+
+            #region Relationships
+
+            builder.HasMany<Customer>(s => s.Customer).WithOne(s => s.Country).HasForeignKey(s => s.CountryId).OnDelete(DeleteBehavior.Restrict); 
 			
 			#endregion	
+
 
 			#region Column Order
 			
 			// Column ordering available in EF Core 2.1 - https://data.uservoice.com/forums/72025-entity-framework-core-feature-suggestions/suggestions/18936844-ef-core-migrations-column-ordering
 			// Waiting for that release before implementing
-			//TODO: builder.Property(t => t.CountryId).HasColumnOrder(1);
-			//TODO: builder.Property(t => t.CountryName).HasColumnOrder(2);
+			// TODO: builder.Property(t => t.CountryId).HasColumnOrder(1);
+			// TODO: builder.Property(t => t.CountryName).HasColumnOrder(2);
 
 			#endregion	
-	    }
-	}
+
+
+			#endregion
+
+        }
+    }
 }

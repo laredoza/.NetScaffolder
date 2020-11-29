@@ -1,6 +1,5 @@
-﻿
-// <copyright file="OrderDetailsMap.g.cs" company="MIT">
-//  Copyright (c) 2019 MIT
+// <copyright file="FullContextOrderDetailsMap.g.cs" company="MIT">
+//  Copyright (c) 2020/11/29 00:00:00 MIT
 // </copyright>  
 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
@@ -22,25 +21,23 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System.Configuration;
 using System.ComponentModel.DataAnnotations.Schema;
-using DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity;
+using DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity; 
 using System.Data.Common;
 
 namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.MySql.Mappings.MySqlFullContext
 {
-	public partial class FullContextOrderDetailsMap : IEntityTypeConfiguration<OrderDetails>
+    public partial class FullContextOrderDetails : IEntityTypeConfiguration<OrderDetails>
 	{	
 	    public virtual void Configure(EntityTypeBuilder<OrderDetails> builder)
 	    {
 			builder.ToTable("OrderDetails");
-			
+
 			#region Primary keys
 			
 			builder.HasKey(t => t.OrderDetailsId);
-			builder.Property(t => t.OrderDetailsId).HasColumnName("OrderDetailsId").ValueGeneratedNever();
+			builder.Property(t => t.OrderDetailsId.HasColumnName("OrderDetailsId").ValueGeneratedNever());
 
-			#endregion
-
-			#region Constraints
+            #region Constraints
 			
 			builder.Property(t => t.OrderDetailsId).HasColumnName("OrderDetailsId").IsRequired();
 			builder.Property(t => t.OrderId).HasColumnName("OrderId").IsRequired();
@@ -49,34 +46,41 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.MySql.Mappings.MySqlFullC
 			builder.Property(t => t.UnitPrice).HasColumnType("decimal(19, 4)");
 			builder.Property(t => t.Amount).HasColumnName("Amount").IsRequired(false);
 			builder.Property(t => t.Discount).HasColumnName("Discount").IsRequired(false);
-			
+
 			#endregion
 
-			#region Indexes
-			builder.HasIndex(i => new {i.OrderDetailsId}).HasName("UQ__OrderDet__9DD74DBC8AA17DA0").IsUnique(true);
-			builder.HasIndex(i => new {i.OrderId}).HasName("IX_OrderId1").IsUnique(false);
-			builder.HasIndex(i => new {i.ProductId}).HasName("IX_ProductId2").IsUnique(false);
+            #region Indexes
+
+            HasIndex(i => new {i.OrderDetailsId}).HasName("UQ__OrderDet__9DD74DBC8AA17DA0").IsUnique(true);
+            HasIndex(i => new {i.OrderId}).HasName("IX_OrderId1").IsUnique(false);
+            HasIndex(i => new {i.ProductId}).HasName("IX_ProductId2").IsUnique(false);
+
 			#endregion
-			
-			#region Relationships
-			
-			builder.HasOne<Order>(s => s.Order).WithMany(s => s.OrderDetails).HasForeignKey(s => s.OrderId).OnDelete(DeleteBehavior.Restrict);
-			builder.HasOne<Product>(s => s.Product).WithMany(s => s.OrderDetails).HasForeignKey(s => s.ProductId).OnDelete(DeleteBehavior.Restrict);
+
+            #region Relationships
+
+            builder.HasOne<Order>(s => s.Order).WithMany(s => s.OrderDetails).HasForeignKey(s => s.OrderId).OnDelete(DeleteBehavior.Restrict); 
+            builder.HasOne<Product>(s => s.Product).WithMany(s => s.OrderDetails).HasForeignKey(s => s.ProductId).OnDelete(DeleteBehavior.Restrict); 
 			
 			#endregion	
+
 
 			#region Column Order
 			
 			// Column ordering available in EF Core 2.1 - https://data.uservoice.com/forums/72025-entity-framework-core-feature-suggestions/suggestions/18936844-ef-core-migrations-column-ordering
 			// Waiting for that release before implementing
-			//TODO: builder.Property(t => t.OrderDetailsId).HasColumnOrder(1);
-			//TODO: builder.Property(t => t.OrderId).HasColumnOrder(2);
-			//TODO: builder.Property(t => t.ProductId).HasColumnOrder(3);
-			//TODO: builder.Property(t => t.UnitPrice).HasColumnOrder(4);
-			//TODO: builder.Property(t => t.Amount).HasColumnOrder(5);
-			//TODO: builder.Property(t => t.Discount).HasColumnOrder(6);
+			// TODO: builder.Property(t => t.OrderDetailsId).HasColumnOrder(1);
+			// TODO: builder.Property(t => t.OrderId).HasColumnOrder(2);
+			// TODO: builder.Property(t => t.ProductId).HasColumnOrder(3);
+			// TODO: builder.Property(t => t.UnitPrice).HasColumnOrder(4);
+			// TODO: builder.Property(t => t.Amount).HasColumnOrder(5);
+			// TODO: builder.Property(t => t.Discount).HasColumnOrder(6);
 
 			#endregion	
-	    }
-	}
+
+
+			#endregion
+
+        }
+    }
 }

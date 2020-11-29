@@ -1,6 +1,5 @@
-﻿
-// <copyright file="BankTransfersMap.g.cs" company="MIT">
-//  Copyright (c) 2019 MIT
+// <copyright file="FullContextBankTransfersMap.g.cs" company="MIT">
+//  Copyright (c) 2020/11/29 00:00:00 MIT
 // </copyright>  
 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
@@ -22,25 +21,23 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System.Configuration;
 using System.ComponentModel.DataAnnotations.Schema;
-using DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity;
+using DotNetScaffolder.Domain.Data.Entities.DefaultEntity.Entity; 
 using System.Data.Common;
 
 namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.Postgres.Mappings.PostgresFullContext
 {
-	public partial class FullContextBankTransfersMap : IEntityTypeConfiguration<BankTransfers>
+    public partial class FullContextBankTransfers : IEntityTypeConfiguration<BankTransfers>
 	{	
 	    public virtual void Configure(EntityTypeBuilder<BankTransfers> builder)
 	    {
 			builder.ToTable("BankTransfers");
-			
+
 			#region Primary keys
 			
 			builder.HasKey(t => t.BankTransferId);
-			builder.Property(t => t.BankTransferId).HasColumnName("BankTransferId").ValueGeneratedNever();
+			builder.Property(t => t.BankTransferId.HasColumnName("BankTransferId").ValueGeneratedNever());
 
-			#endregion
-
-			#region Constraints
+            #region Constraints
 			
 			builder.Property(t => t.BankTransferId).HasColumnName("BankTransferId").IsRequired();
 			builder.Property(t => t.FromBankAccountId).HasColumnName("FromBankAccountId").IsRequired();
@@ -48,31 +45,38 @@ namespace DotNetScaffolder.Domain.Data.Contexts.EFCore.Postgres.Mappings.Postgre
 			builder.Property(t => t.Amount).HasColumnName("Amount").IsRequired();
 			builder.Property(t => t.Amount).HasColumnType("decimal(18, 2)");
 			builder.Property(t => t.TransferDate).HasColumnName("TransferDate").IsRequired();
-			
+
 			#endregion
 
-			#region Indexes
-			builder.HasIndex(i => new {i.BankTransferId}).HasName("UQ__BankTran__2E82727AB11DB584").IsUnique(true);
-			builder.HasIndex(i => new {i.ToBankAccountId}).HasName("IX_ToBankAccountId").IsUnique(false);
+            #region Indexes
+
+            HasIndex(i => new {i.BankTransferId}).HasName("UQ__BankTran__2E82727AB11DB584").IsUnique(true);
+            HasIndex(i => new {i.ToBankAccountId}).HasName("IX_ToBankAccountId").IsUnique(false);
+
 			#endregion
-			
-			#region Relationships
-			
-			builder.HasOne<BankAccount>(s => s.BankAccount).WithMany(s => s.BankTransfers).HasForeignKey(s => s.ToBankAccountId).OnDelete(DeleteBehavior.Restrict);
+
+            #region Relationships
+
+            builder.HasOne<BankAccount>(s => s.BankAccount).WithMany(s => s.BankTransfers).HasForeignKey(s => s.ToBankAccountId).OnDelete(DeleteBehavior.Restrict); 
 			
 			#endregion	
+
 
 			#region Column Order
 			
 			// Column ordering available in EF Core 2.1 - https://data.uservoice.com/forums/72025-entity-framework-core-feature-suggestions/suggestions/18936844-ef-core-migrations-column-ordering
 			// Waiting for that release before implementing
-			//TODO: builder.Property(t => t.BankTransferId).HasColumnOrder(1);
-			//TODO: builder.Property(t => t.FromBankAccountId).HasColumnOrder(2);
-			//TODO: builder.Property(t => t.ToBankAccountId).HasColumnOrder(3);
-			//TODO: builder.Property(t => t.Amount).HasColumnOrder(4);
-			//TODO: builder.Property(t => t.TransferDate).HasColumnOrder(5);
+			// TODO: builder.Property(t => t.BankTransferId).HasColumnOrder(1);
+			// TODO: builder.Property(t => t.FromBankAccountId).HasColumnOrder(2);
+			// TODO: builder.Property(t => t.ToBankAccountId).HasColumnOrder(3);
+			// TODO: builder.Property(t => t.Amount).HasColumnOrder(4);
+			// TODO: builder.Property(t => t.TransferDate).HasColumnOrder(5);
 
 			#endregion	
-	    }
-	}
+
+
+			#endregion
+
+        }
+    }
 }
