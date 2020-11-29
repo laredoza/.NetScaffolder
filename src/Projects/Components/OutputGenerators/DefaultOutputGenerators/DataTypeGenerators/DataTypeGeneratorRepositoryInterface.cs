@@ -27,7 +27,7 @@ namespace DotNetScaffolder.Components.OutputGenerators.DefaultOutputGenerators
     [ExportMetadata("ValueMetaData", "1BC1B0C4-1E41-9146-82CF-599181CE4464")]
     public class DataTypeGeneratorRepositoryInterface : BaseDataTypeGenerator
     {
-        public void Run(IDataType dataType, DomainDefinition domain, List<IDataType> dataTypes, string modelFilePath)
+        public override void Run(IDataType dataType, DomainDefinition domain, List<IDataType> dataTypes, string modelFilePath)
         {
             // if(dataType is RepoInterfaceDataType)
             // {					
@@ -41,7 +41,7 @@ namespace DotNetScaffolder.Components.OutputGenerators.DefaultOutputGenerators
             if (dataType is RepoInterfaceDataType)
             {
                 this.PrepareTemplateData(dataType, domain);
-                var template = this.RegisterTemplate(Path.GetDirectoryName(modelFilePath), "EntityTemplate.hbr");
+                var template = this.RegisterTemplate(Path.GetDirectoryName(modelFilePath), "RepositoryInterfaceTemplate.hbr");
                 
 
                 foreach (var model in domain.Tables)
@@ -70,18 +70,18 @@ namespace DotNetScaffolder.Components.OutputGenerators.DefaultOutputGenerators
 
                     var fileContent = template(data);
 
-                    var outputPath = data.DataType.OutputPath.Replace(@"\", "/");
+                    var outputPath = data.DataType.OutputPath;
                     
-                    this.RenderToFile(fileContent, $"{this.ReturnBasePath(modelFilePath)}/RepositoryInterfaces/{repositoryInterfaceDataType.OutputFolder}/Entity/{fileName}.g1.cs");
+                    this.RenderToFile(fileContent, $"{this.ReturnBasePath(modelFilePath)}/Interfaces/RepositoryInterfaces/{repositoryInterfaceDataType.OutputFolder}/I{fileName}Repository.g1.cs".Replace(@"\", "/"));
                 }
             }
 
             throw new System.NotImplementedException();
         }
 
-        public bool UsedForDataType(IDataType dataType)
+        public override bool UsedForDataType(IDataType dataType)
         {
-            if (dataType is DtoInterfaceDataType)
+            if (dataType is RepoInterfaceDataType)
             {
                 return true;
             }

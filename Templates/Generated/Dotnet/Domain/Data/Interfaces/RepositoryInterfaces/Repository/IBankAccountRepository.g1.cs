@@ -1,4 +1,15 @@
-{{add_copyright}}
+// <copyright file="BankAccount" company="MIT">
+//  Copyright (c) 2020 MIT
+// </copyright>  
+
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
+// to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+// and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER 
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS 
+// IN THE SOFTWARE.
 
 
 // *******************************************************************
@@ -10,17 +21,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using {{ DtoInterfaceNamespace }};
-{{#each DataType.AdditionalNamespaces}}
-using {{this}};
-{{/each}}
+using DotNetScaffolder.Domain.Data.Interfaces.ModelInterfaces.Dto;
+using DotNetScaffolder.Domain.Core.Interfaces;
 
-namespace {{ DataType.FullNamespace }}
+namespace DotNetScaffolder.Domain.Data.Interfaces.RepositoryInterfaces
 {
 	/// <summary>
-	/// The {{ DataType.RepoName }}Repository interface that defines database functions for the <#= DataType.ModelName #> table
+	/// The <#= DataType.RepoName #>Repository interface that defines database functions for the <#= DataType.ModelName #> table
 	/// </summary>
-	public partial interface I{{ DataType.RepoName }}Repository : IRepository<I{{ DataType.RepoName }}>
+	public partial interface I<#= DataType.RepoName #>Repository : IRepository<I<#= DataType.RepoName #>>
 	{
 		#region Load
 <#+ if(DataType.MetaData.PrimaryKeyCount > 1){ #>
@@ -32,9 +41,9 @@ namespace {{ DataType.FullNamespace }}
         /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
 <#+ } #>
         /// <param name="cache">Use 2nd level caching if enabled</param>
-		/// <param name="includes">params Expression<Func<I{{ DataType.RepoName }}, object>>[]</param>
+		/// <param name="includes">params Expression<Func<I<#= DataType.RepoName #>, object>>[]</param>
         /// <returns>I<#= DataType.ModelName #></returns>
-		I<#= DataType.ModelName #> Load(<#= DataType.TransformAsParameter(DataType.MetaData.Columns.Where(o => o.IsPrimaryKey)) #>, bool cache, params Expression<Func<I{{ DataType.RepoName }}, object>>[] includes);
+		I<#= DataType.ModelName #> Load(<#= DataType.TransformAsParameter(DataType.MetaData.Columns.Where(o => o.IsPrimaryKey)) #>, bool cache, params Expression<Func<I<#= DataType.RepoName #>, object>>[] includes);
 		
         /// <summary>
         /// Load <#= DataType.ModelName #> entities async from the database using the composite primary keys
@@ -43,9 +52,9 @@ namespace {{ DataType.FullNamespace }}
         /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
 <#+ } #>
         /// <param name="cache">Use 2nd level caching if enabled</param>
-		/// <param name="includes">params Expression<Func<I{{ DataType.RepoName }}, object>>[]</param>
+		/// <param name="includes">params Expression<Func<I<#= DataType.RepoName #>, object>>[]</param>
         /// <returns>I<#= DataType.ModelName #></returns>
-		Task<I<#= DataType.ModelName #>> LoadAsync(<#= DataType.TransformAsParameter(DataType.MetaData.Columns.Where(o => o.IsPrimaryKey)) #>, bool cache, params Expression<Func<I{{ DataType.RepoName }}, object>>[] includes);
+		Task<I<#= DataType.ModelName #>> LoadAsync(<#= DataType.TransformAsParameter(DataType.MetaData.Columns.Where(o => o.IsPrimaryKey)) #>, bool cache, params Expression<Func<I<#= DataType.RepoName #>, object>>[] includes);
 <#+ } #>
 
 <#+ if(DataType.MetaData.PrimaryKeyCount == 1){ var col = DataType.MetaData.Columns.First(o => o.IsPrimaryKey);#>
@@ -55,18 +64,18 @@ namespace {{ DataType.FullNamespace }}
         /// </summary
         /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
         /// <param name="cache">Use 2nd level caching if enabled</param>
-		/// <param name="includes">params Expression<Func<I{{ DataType.RepoName }}, object>>[]</param>
+		/// <param name="includes">params Expression<Func<I<#= DataType.RepoName #>, object>>[]</param>
         /// <returns>I<#= DataType.ModelName #></returns>
-		I<#= DataType.ModelName #> LoadBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= DataType.TransformAsParameter(col) #>, bool cache, params Expression<Func<I{{ DataType.RepoName }}, object>>[] includes);
+		I<#= DataType.ModelName #> LoadBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= DataType.TransformAsParameter(col) #>, bool cache, params Expression<Func<I<#= DataType.RepoName #>, object>>[] includes);
 		
         /// <summary>
         /// Load <#= DataType.ModelName #> entities async from the database using the composite primary keys
         /// </summary
         /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
         /// <param name="cache">Use 2nd level caching if enabled</param>
-		/// <param name="includes">params Expression<Func<I{{ DataType.RepoName }}, object>>[]</param>
+		/// <param name="includes">params Expression<Func<I<#= DataType.RepoName #>, object>>[]</param>
         /// <returns>I<#= DataType.ModelName #></returns>
-		Task<I<#= DataType.ModelName #>> LoadBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>Async(<#= DataType.TransformAsParameter(col) #>, bool cache, params Expression<Func<I{{ DataType.RepoName }}, object>>[] includes);
+		Task<I<#= DataType.ModelName #>> LoadBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>Async(<#= DataType.TransformAsParameter(col) #>, bool cache, params Expression<Func<I<#= DataType.RepoName #>, object>>[] includes);
 <#+ } #>
 
 <#+ foreach(var col in DataType.MetaData.Columns.Where(o => !o.IsPrimaryKey && o.DomainDataType != DomainDataType.String)){ #>
@@ -76,35 +85,35 @@ namespace {{ DataType.FullNamespace }}
         /// </summary>
         /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param
         /// <param name="cache">Use 2nd level caching if enabled</param>
-		/// <param name="includes">params Expression<Func<I{{ DataType.RepoName }}, object>>[]</param>
+		/// <param name="includes">params Expression<Func<I<#= DataType.RepoName #>, object>>[]</param>
         /// <returns><#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>></returns>
-		<#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>> LoadBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= DataType.TransformAsParameter(col) #>, bool cache,  params Expression<Func<I{{ DataType.RepoName }}, object>>[] includes);
+		<#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>> LoadBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= DataType.TransformAsParameter(col) #>, bool cache,  params Expression<Func<I<#= DataType.RepoName #>, object>>[] includes);
 		
         /// <summary>
         /// Load <#= DataType.ModelName #> entities async from the database using the <#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #> field
         /// </summary>
         /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param
         /// <param name="cache">Use 2nd level caching if enabled</param>
-		/// <param name="includes">params Expression<Func<I{{ DataType.RepoName }}, object>>[]</param>
+		/// <param name="includes">params Expression<Func<I<#= DataType.RepoName #>, object>>[]</param>
         /// <returns><#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>></returns>
-		Task<<#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>>> LoadBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>Async(<#= DataType.TransformAsParameter(col) #>, bool cache, params Expression<Func<I{{ DataType.RepoName }}, object>>[] includes);
+		Task<<#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>>> LoadBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>Async(<#= DataType.TransformAsParameter(col) #>, bool cache, params Expression<Func<I<#= DataType.RepoName #>, object>>[] includes);
 <#+ }  #>
 
         /// <summary>
         /// Load all <#= DataType.ModelName #> entities from the database.
         /// </summary>
         /// <param name="cache">Use 2nd level caching if enabled</param>
-		/// <param name="includes">params Expression<Func<I{{ DataType.RepoName }}, object>>[]</param>
+		/// <param name="includes">params Expression<Func<I<#= DataType.RepoName #>, object>>[]</param>
         /// <returns><#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>></returns>
-		<#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>> LoadAll( bool cache, params Expression<Func<I{{ DataType.RepoName }}, object>>[] includes);
+		<#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>> LoadAll( bool cache, params Expression<Func<I<#= DataType.RepoName #>, object>>[] includes);
 		
         /// <summary>
         /// Load all <#= DataType.ModelName #> entities async from the database.
         /// </summary>
         /// <param name="cache">Use 2nd level caching if enabled</param>
-		/// <param name="includes">params Expression<Func<I{{ DataType.RepoName }}, object>>[]</param>
+		/// <param name="includes">params Expression<Func<I<#= DataType.RepoName #>, object>>[]</param>
         /// <returns><#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>></returns>
-		Task<<#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>>> LoadAllAsync(bool cache, params Expression<Func<I{{ DataType.RepoName }}, object>>[] includes);
+		Task<<#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>>> LoadAllAsync(bool cache, params Expression<Func<I<#= DataType.RepoName #>, object>>[] includes);
 		
 		#endregion
 
@@ -117,9 +126,9 @@ namespace {{ DataType.FullNamespace }}
         /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="caseSensitive">bool</param
-		/// <param name="includes">params Expression<Func<I{{ DataType.RepoName }}, object>>[]</param>
+		/// <param name="includes">params Expression<Func<I<#= DataType.RepoName #>, object>>[]</param>
         /// <returns><#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>></returns>
-		<#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>> SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= DataType.TransformAsParameter(col) #>, bool cache, bool caseSensitive = false, params Expression<Func<I{{ DataType.RepoName }}, object>>[] includes);
+		<#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>> SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>(<#= DataType.TransformAsParameter(col) #>, bool cache, bool caseSensitive = false, params Expression<Func<I<#= DataType.RepoName #>, object>>[] includes);
 		
         /// <summary>
         /// Search for <#= DataType.ModelName #> entities async in the database by <#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>
@@ -127,9 +136,9 @@ namespace {{ DataType.FullNamespace }}
         /// <param name="<#= DataType.TransformParameterName(col.ColumnName) #>"><#= CSharpOutputMapper.MapToOutput(col) #></param>
         /// <param name="cache">Use 2nd level caching if enabled</param>
 		/// <param name="caseSensitive">bool</param
-		/// <param name="includes">params Expression<Func<I{{ DataType.RepoName }}, object>>[]</param>
+		/// <param name="includes">params Expression<Func<I<#= DataType.RepoName #>, object>>[]</param>
         /// <returns><#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>></returns>
-		Task<<#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>>> SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>Async(<#= DataType.TransformAsParameter(col) #>, bool cache, bool caseSensitive = false, params Expression<Func<I{{ DataType.RepoName }}, object>>[] includes);
+		Task<<#= DataType.CollectionOption.ClassNameInterface #><I<#= DataType.ModelName #>>> SearchBy<#= DataType.NamingConvention.ApplyNamingConvention(col.ColumnName) #>Async(<#= DataType.TransformAsParameter(col) #>, bool cache, bool caseSensitive = false, params Expression<Func<I<#= DataType.RepoName #>, object>>[] includes);
 <#+ }  #>
 
 		#endregion
