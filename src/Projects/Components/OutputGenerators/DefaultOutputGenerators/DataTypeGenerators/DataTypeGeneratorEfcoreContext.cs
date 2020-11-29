@@ -27,9 +27,9 @@ namespace DotNetScaffolder.Components.OutputGenerators.DefaultOutputGenerators
     /// <summary>
     /// The Efcore Context Data Type Generator.
     /// </summary>
-    [Export(typeof(IDataTypeGenerator))]
-    [ExportMetadata("NameMetaData", "Handlebars EFCore Context Generator")]
-    [ExportMetadata("ValueMetaData", "1BC1B0C4-1E41-9146-82CF-599181CE4463")]
+    // [Export(typeof(IDataTypeGenerator))]
+    // [ExportMetadata("NameMetaData", "Handlebars EFCore Context Generator")]
+    // [ExportMetadata("ValueMetaData", "1BC1B0C4-1E41-9146-82CF-599181CE4463")]
     public class DataTypeGeneratorEfcoreContext : BaseDataTypeGenerator
     {
         #region Constructors and Destructors
